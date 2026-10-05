@@ -1,0 +1,66 @@
+const appURL = new URL('./', import.meta.url);
+const cachePrefix = `hitomon-${appURL.pathname}`;
+
+// Read only this app's public asset caches. Learning records remain in localStorage.
+export async function savedAssetURLs() {
+  if (!('caches' in window)) return new Set();
+  try {
+    const names = (await caches.keys()).filter(name => name.startsWith(cachePrefix));
+    const requests = await Promise.all(names.map(async name => (await caches.open(name)).keys()));
+    return new Set(requests.flat().map(request => {
+      const url = new URL(request.url); url.search = ''; return url.href;
+    }));
+  } catch { return new Set(); }
+}
+
+export function initPWA() {
+  const installButton = document.querySelector('#install-app');
+  const installHelp = document.querySelector('#install-help');
+  const updateButton = document.querySelector('#update-app');
+  const status = document.querySelector('#pwa-status');
+  let installPrompt = null, registration = null, reloadForUpdate = false;
+  const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  function showInstallState() {
+    installButton.hidden = standalone() || !installPrompt;
+    installHelp.textContent = standalone() ? 'ホーム画面から起動しています。'
+      : installPrompt ? 'ホーム画面やアプリ一覧から起動できます。'
+      : iOS
+        ? 'Safariの共有メニューから「ホーム画面に追加」を選びます。'
+        : 'ブラウザのメニューから「アプリをインストール」または「ホーム画面に追加」を選びます。';
+  }
+  showInstallState();
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault(); installPrompt = event; showInstallState();
+  });
+  window.addEventListener('appinstalled', () => {
+    installPrompt = null; installButton.hidden = true; installHelp.textContent = 'ホーム画面に追加しました。';
+  });
+  installButton.addEventListener('click', async () => {
+    if (!installPrompt) return;
+    const prompt = installPrompt; installPrompt = null;
+    await prompt.prompt(); await prompt.userChoice; showInstallState();
+  });
+  if (!('serviceWorker' in navigator) || !isSecureContext) {
+    status.textContent = 'このブラウザではオフライン保存を利用できません。'; return;
+  }
+  updateButton.addEventListener('click', () => {
+    if (!registration?.waiting) return;
+    reloadForUpdate = true; updateButton.disabled = true;
+    registration.waiting.postMessage({type: 'ACTIVATE_UPDATE'});
+  });
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloadForUpdate) location.reload();
+  });
+  navigator.serviceWorker.register(new URL('sw.js', appURL), {scope: appURL.pathname, updateViaCache: 'none'})
+    .then(reg => {
+      registration = reg;
+      const showUpdate = () => { updateButton.hidden = !reg.waiting; };
+      showUpdate();
+      reg.addEventListener('updatefound', () => {
+        reg.installing?.addEventListener('statechange', showUpdate);
+      });
+    }).catch(() => {
+      if (!navigator.serviceWorker.controller) status.textContent = 'オフライン用の保存ができませんでした。接続後に開き直してください。';
+    });
+}

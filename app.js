@@ -1,3 +1,5 @@
+import {initPWA, savedAssetURLs} from './pwa.js';
+
 const STORAGE = 'ap-study-mock.v1';
 const $ = (s, root = document) => root.querySelector(s);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -14,6 +16,44 @@ const PAGE_SIZE=20;
 const examLabel=q=>`${q.year}年 ${q.season==='spring'?'春期':'秋期'}`;
 let base = [], state = makeState(), storageOK = true, corruptRaw = null, editId = null;
 const main = $('#main');
+let offlineQuestionIds = new Set();
+let online = navigator.onLine;
+initPWA();
+function usableOffline(q) { return online || offlineQuestionIds.has(q.id); }
+async function refreshOfflineQuestions() {
+  if (!online) {
+    const saved = await savedAssetURLs();
+    offlineQuestionIds = new Set(base.filter(q => {
+      const assets = [...(q.stem ? [] : q.sourceImages), q.image, ...q.choices.map(c => c.image)].filter(Boolean);
+      return assets.every(src => saved.has(new URL(src, document.baseURI).href));
+    }).map(q => q.id));
+  }
+  $('#offline-status').hidden = online;
+  $('#offline-status').textContent = 'オフライン · 保存済みの問題を解けます。';
+}
+async function setConnection(available) {
+  available = available && navigator.onLine;
+  if (online === available) return;
+  online = available; await refreshOfflineQuestions();
+  if (base.length) render(false);
+}
+window.addEventListener('offline', () => setConnection(false));
+window.addEventListener('online', () => setConnection(true));
+navigator.serviceWorker?.addEventListener('message', event => {
+  if (event.data?.type === 'NETWORK_STATUS' && typeof event.data.online === 'boolean') setConnection(event.data.online);
+});
+// Image failures must explain what happened rather than leave a broken-image symbol.
+document.addEventListener('error', event => {
+  const img=event.target;
+  if (!(img instanceof HTMLImageElement) || !img.closest('.source-question,.question-figure,.choice,#image-scroll')) return;
+  const container=img.closest('figure') || img.parentElement;
+  if (container.querySelector('.image-error')) return;
+  img.hidden=true;
+  const message=document.createElement('p'); message.className='page-note image-error'; message.setAttribute('role','status');
+  message.textContent=online ? '問題画像を読み込めませんでした。接続を確認して開き直してください。'
+    : 'この問題画像はまだ保存されていません。オンラインで一度開いてください。';
+  container.append(message);
+}, true);
 function question(id) { const q = questionIndex.get(id); return q ? {...q, ...(state.overrides[id] || {}), ...(state.overrides[id]?{enrichment:'personal',hintStatus:'individual'}:{})} : null; }
 function current() { return state.attempts.find(a => a.id === state.currentId); }
 function rebuildProgress() {
@@ -58,13 +98,13 @@ function reviewInfo(q) {
 }
 function reviewQuestions() { return base.map(q=>({q, info:reviewInfo(q)})).filter(x=>x.info && (x.info.needs || x.info.isDue)).sort((a,b)=>Number(b.info.isDue)-Number(a.info.isDue)||a.info.due-b.info.due); }
 function topics() { return [...new Set(base.map(q => q.topic))]; }
-function topicPool(topic) { return topic ? base.filter(q => q.topic === topic) : base; }
+function topicPool(topic) { return base.filter(q => (!topic || q.topic === topic) && usableOffline(q)); }
 function sessionCount() { return state.session.attemptIds.filter(id => complete(state.attempts.find(a => a.id === id) || {})).length; }
 function hasFreshTopicQuestion() { return topicPool(state.session.topic).some(q => !state.session.attemptIds.some(id => state.attempts.find(a => a.id === id)?.questionId === q.id)); }
-function pickQuestion() {
-  const scoped = topicPool(state.session.topic);
+function pickQuestion(session = state.session) {
+  const scoped = topicPool(session.topic);
   const done = new Set();
-  for(const id of state.session.attemptIds) {const qid=state.attempts.find(a=>a.id===id)?.questionId;if(scoped.some(q=>q.id===qid))done.add(qid);if(done.size===scoped.length)done.clear();}
+  for(const id of session.attemptIds) {const qid=state.attempts.find(a=>a.id===id)?.questionId;if(scoped.some(q=>q.id===qid))done.add(qid);if(done.size===scoped.length)done.clear();}
   const candidates = scoped.filter(q=>!done.has(q.id));
   const pool = candidates.length ? candidates : scoped;
   return pool.find(q=>reviewInfo(q)?.isDue) || pool.find(q=>!latest(q.id)) || pool.find(q=>reviewInfo(q)?.needs) || pool[0];
@@ -79,10 +119,12 @@ function render(focus = true, preserveY = null) {
 }
 function go(view) { state.view=view; save(); render(); }
 function start(id, newSession = false, options = {}) {
+  let session=newSession?{goal:options.goal || state.settings.sessionSize,attemptIds:[],topic:options.topic || null}:state.session;
+  if(id && session.topic && question(id)?.topic!==session.topic) session={goal:1,attemptIds:[],topic:null};
+  const picked = id ? question(id) : pickQuestion(session); const q=picked?question(picked.id):null;
+  if(!q || !usableOffline(q)) {notice('この問題はまだオフライン用に保存されていません。接続後に開いてください。');return;}
+  state.session=session;
   const old = current(); if(old && !complete(old)) { old.status='postponed'; old.updatedAt=now(); }
-  if(newSession) state.session={goal:options.goal || state.settings.sessionSize,attemptIds:[],topic:options.topic || null};
-  if(id && state.session.topic && !topicPool(state.session.topic).some(q=>q.id===id)) state.session={goal:1,attemptIds:[],topic:null};
-  const picked = id ? question(id) : pickQuestion(); const q=picked?question(picked.id):null; if(!q) return;
   const a={id:crypto.randomUUID(),questionId:q.id,questionVersion:q.version,contentRevision:state.overrides[q.id]?.revision || 'original',topic:state.session.topic,readingNote:state.session.topic?(state.readingNotes[state.session.topic] || ''):'',status:'in_progress',startedAt:now(),updatedAt:now(),completedAt:null,selected:null,hintCount:0,hintsBeforeAnswer:null,hintEvents:[],answerViewedBefore:false,confidence:false,scrollY:0,materialSnapshot:{enrichment:q.enrichment,hintStatus:hintKind(q),hints:q.hints,summary:q.summary,explanation:q.explanation,takeaway:q.takeaway,choiceReasons:q.choiceReasons}};
   state.attempts.push(a); state.currentId=a.id; state.session.attemptIds.push(a.id); state.view='study'; save(); render();
 }
@@ -158,7 +200,7 @@ function motivationHTML() {
 function studyHTML() {
   const a=current(); const original=question(a.questionId); const q={...original,...a.materialSnapshot,choiceReasons:a.materialSnapshot.choiceReasons || [],hintStatus:hintKind(a.materialSnapshot)}; const answered=complete(a);
   const count=sessionCount();
-  return `<div class="study-toolbar"><button class="button quiet" data-action="pause">${answered?'ホーム':'中断'}</button><p class="page-note">${state.session.topic?esc(state.session.topic)+'のみ · ':''}今回 ${count}問 · 目安 ${state.session.goal}問</p></div><article class="panel question-panel"><div class="question-meta"><span class="badge">${esc(q.topic)}</span><span>${examLabel(q)} · 問${q.number}</span></div>${a.readingNote?`<p class="reading-context small">読んだ範囲：${esc(a.readingNote)}</p>`:''}<h1 class="sr-only">${esc(q.title)}</h1>${q.stem?`<p class="question-stem">${esc(q.stem)}</p>`:sourceImagesHTML(q)}
+  return `<div class="study-toolbar"><button class="button ${answered?'quiet':'pause-button'}" data-action="pause">${!answered?'<svg class="pause-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="4" y="3" width="4" height="14" rx="1" fill="currentColor"/><rect x="12" y="3" width="4" height="14" rx="1" fill="currentColor"/></svg>':''}${answered?'ホーム':'中断'}</button><p class="page-note">${state.session.topic?esc(state.session.topic)+'のみ · ':''}今回 ${count}問 · 目安 ${state.session.goal}問</p></div><article class="panel question-panel"><div class="question-meta"><span class="badge">${esc(q.topic)}</span><span>${examLabel(q)} · 問${q.number}</span></div>${a.readingNote?`<p class="reading-context small">読んだ範囲：${esc(a.readingNote)}</p>`:''}<h1 class="sr-only">${esc(q.title)}</h1>${q.stem?`<p class="question-stem">${esc(q.stem)}</p>`:sourceImagesHTML(q)}
   ${q.image?`<figure class="question-figure"><a class="figure-link" href="${q.image}" target="_blank" rel="noopener"><img src="${q.image}" alt="${esc(q.imageAlt)}"></a><figcaption>図を押すと、大きく開けます。</figcaption></figure>`:''}
   <fieldset class="choices"><legend>${answered?'選択と正解':'答えを1つ選んでください'}</legend>${q.choices.map((c,i)=>`<label class="choice ${a.selected===i?'selected':''} ${answered&&q.answer===i?'correct-choice':''} ${answered&&a.selected===i&&q.answer!==i?'wrong-choice':''}"><input type="radio" name="answer" value="${i}" ${a.selected===i?'checked':''} ${answered?'disabled':''}><span class="choice-code">${c.label}</span><span class="choice-text">${c.image?`<img src="${c.image}" alt="${esc(c.text)}">`:''}${esc(c.text)}${answered&&q.answer===i?' <strong>（正解）</strong>':''}${answered&&a.selected===i?' <span class="small">（あなたの選択）</span>':''}</span></label>`).join('')}</fieldset>
   ${!answered?`<label class="confidence"><input id="confidence" type="checkbox" ${a.confidence?'checked':''}>自信がないので、正解でも解き直したい</label>`:''}
@@ -290,8 +332,9 @@ function saveScroll(){if(state.view==='study'&&current()){current().scrollY=wind
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 try {
-  const response=await fetch('data/questions.json?v=20261005-lessons1');if(!response.ok)throw new Error('問題データを読み込めませんでした。');base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
+  const response=await fetch('data/questions.json?v=20261006-pwa1', {cache:'no-cache'});if(!response.ok)throw new Error('問題データを読み込めませんでした。');online=navigator.onLine && response.headers.get('X-Hitomon-Offline')!=='1';base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=localStorage.getItem(STORAGE);if(raw){try{state=validateState(JSON.parse(raw));}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
+  await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
   if(navigator.modelContext?.registerTool) {
