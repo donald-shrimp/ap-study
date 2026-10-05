@@ -9,6 +9,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
+RELEASE=(ROOT/'sw.js').read_text().split("const RELEASE = '",1)[1].split("'",1)[0]
+NEXT_RELEASE=RELEASE+'-test2'
 ARTIFACTS=Path(tempfile.mkdtemp(prefix='ap-study-pwa-'))
 KEY='ap-study-mock.v1'
 bank=json.loads((ROOT/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
@@ -21,7 +23,7 @@ class Handler(SimpleHTTPRequestHandler):
    if filename=='questions.json':
     updated=json.loads(json.dumps(bank));updated[0]['summary']+='（更新確認）';body=json.dumps(updated,ensure_ascii=False).encode();kind='application/json'
    else:
-    body=(ROOT/filename).read_text().replace('20261006-pwa1','20261006-pwa-test2').encode();kind='application/javascript' if filename=='sw.js' else 'text/html'
+    body=(ROOT/filename).read_text().replace(RELEASE,NEXT_RELEASE).encode();kind='application/javascript' if filename=='sw.js' else 'text/html'
    self.send_response(200);self.send_header('Content-Type',kind+'; charset=utf-8');self.send_header('Cache-Control','no-cache');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
   else:super().do_GET()
 server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(ROOT.parent)));server.upgraded=False
@@ -83,8 +85,8 @@ with sync_playwright() as p:
   page.get_by_role('button',name='表示・データ',exact=True).click();page.locator('#update-app').wait_for(state='visible');page.locator('#update-app').click()
   page.locator('.hint-box').wait_for();page.wait_for_function('async()=>!(await navigator.serviceWorker.getRegistration()).waiting')
   assert state()['currentId']==before['currentId'] and page.get_by_role('radio').nth(2).is_checked() and page.locator('.hint-box').count()==1
-  names=page.evaluate('async()=>await caches.keys()');assert 'other-app-test' in names and any(name.endswith('shell-20261006-pwa-test2') for name in names)
-  assert not any(name.endswith('shell-20261006-pwa1') for name in names)
+  names=page.evaluate('async()=>await caches.keys()');assert 'other-app-test' in names and any(name.endswith('shell-'+NEXT_RELEASE) for name in names)
+  assert not any(name.endswith('shell-'+RELEASE) for name in names)
   ctx.set_offline(True);page.reload();page.locator('.hint-box').wait_for();page.locator('.source-question img').evaluate('(img)=>img.decode()')
   assert state()['currentId']==before['currentId'];assert '更新確認' in page.evaluate('async()=>await(await fetch("data/questions.json")).json()')[0]['summary']
   print('PASS online bank freshness / update on request / record unchanged / old shell removed / other caches and saved images retained / offline new release',flush=True)

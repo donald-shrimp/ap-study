@@ -332,7 +332,7 @@ function saveScroll(){if(state.view==='study'&&current()){current().scrollY=wind
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 try {
-  const response=await fetch('data/questions.json?v=20261006-pwa1', {cache:'no-cache'});if(!response.ok)throw new Error('問題データを読み込めませんでした。');online=navigator.onLine && response.headers.get('X-Hitomon-Offline')!=='1';base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
+  const response=await fetch('data/questions.json?v=20261006-lessons1', {cache:'no-cache'});if(!response.ok)throw new Error('問題データを読み込めませんでした。');online=navigator.onLine && response.headers.get('X-Hitomon-Offline')!=='1';base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=localStorage.getItem(STORAGE);if(raw){try{state=validateState(JSON.parse(raw));}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);

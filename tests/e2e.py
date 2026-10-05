@@ -5,6 +5,8 @@ ROOT=Path(tempfile.mkdtemp(prefix='ap-study-e2e-'))
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
+reviewed_count=sum(q['enrichment']=='reviewed' for q in bank)
+complete_exams=[file.stem for file in (Path(__file__).resolve().parents[1]/'data/lessons').glob('*.json')]
 with sync_playwright() as p:
  options={'executable_path':shutil.which('chromium'),'headless':True,'args':['--no-sandbox']}
  if URL.startswith('https://') and os.environ.get('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
@@ -29,8 +31,12 @@ with sync_playwright() as p:
  page.locator('[name=query]').fill('存在しない検索条件ABCXYZ');assert page.locator('#catalog-results .row').count()==0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('DNS');assert page.locator('#catalog-results .row').count()>0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('二乗のビット数');assert page.locator('[data-action=start][data-id=r04a-q1]').count()==1
- page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith('87問')
- print('PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / 87 reviewed',flush=True)
+ page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count}問')
+ print(f'PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / {reviewed_count} reviewed',flush=True)
+ for exam in complete_exams:
+  page.locator('[data-action=reset-filters]').click();q=by_id[f'{exam}-q1']
+  page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=enriched]').check()
+  assert page.locator('.catalog-count').inner_text().startswith('80問'),exam
  nav('topics');assert page.locator('.topic-card').count()==17
  security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True));security.locator('summary').click();security.locator('input').fill('第4章 p.120 <script>alert(1)</script>');security.locator('[data-count="3"]').click()
  scoped=[]
@@ -66,6 +72,29 @@ with sync_playwright() as p:
  page.get_by_role('button',name='次のヒントを見る',exact=True).click()
  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
  a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['status']=='revealed' and a['hintsBeforeAnswer']==3
+ # A sample from each newly completed exam is persisted and graded with reveal flags.
+ for exam in sorted(set(complete_exams)-{'r07h'}):
+  candidates=[q for q in bank if q['id'].startswith(exam+'-')]
+  samples=[next((q for q in candidates if not any(h['revealsAnswer'] for h in q['hints'])),candidates[0]),next(q for q in candidates if any(h['revealsAnswer'] for h in q['hints']))]
+  for q in samples:
+   open_q(q['id'])
+   for stage,hint in enumerate(q['hints']):
+    buttons=page.locator('[data-action=hint]');assert buttons.count()==1
+    assert ('答えを含む' in buttons.inner_text())==hint['revealsAnswer']
+    buttons.click();assert page.locator('.hint-box').count()==stage+1
+    assert hint['text'] in page.locator('#hints').inner_text()
+    if stage==0:
+     page.get_by_role('radio').nth(q['answer']).check();page.get_by_role('button',name='中断',exact=True).click()
+     page.get_by_role('button',name='再開する',exact=True).click();page.reload();page.locator('.hint-box').wait_for()
+     assert page.get_by_role('radio').nth(q['answer']).is_checked() and page.locator('.hint-box').count()==1
+   answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
+   expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'
+   assert a['status']==expected and a['hintsBeforeAnswer']==3,q['id']
+   assert a['materialSnapshot']['choiceReasons']==q['choiceReasons'] and page.locator('.reason-list li').count()==4
+   assert q['summary'] in page.locator('.result').inner_text() and '個別の解答解説は未追加' not in page.locator('.result').inner_text()
+   open_q(q['id']);a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
+   assert a['hintCount']==0 and a['selected'] is None and not a['answerViewedBefore']
+ print('PASS complete-exam 80-question filters / new lessons / all three stages / reveal warning / pause-resume / saved choice reasons / closed retry',flush=True)
  # Hints also remain available for questions whose full explanation is pending.
  open_q('r04h-q79');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['materialSnapshot']['enrichment']=='topic-guide'
@@ -106,7 +135,7 @@ with sync_playwright() as p:
  # An old attempt keeps its original hints and pending explanation after editing.
  nav('history');old=next(a for a in state()['attempts'] if a['questionId']=='r04h-q80');page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
  open_q('r04h-q80');page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith('88問');page.locator('[name=query]').fill(by_id['r04h-q80']['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count+1}問');page.locator('[name=query]').fill(by_id['r04h-q80']['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
  print('PASS scanned source / official key / pending-explanation honesty / retry / personal notes / immutable snapshot',flush=True)
  page.set_viewport_size({'width':390,'height':844});page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.get_by_role('button',name='問題を拡大').click();assert page.locator('#image-dialog').is_visible();initial=page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth');page.get_by_role('button',name='画像を拡大',exact=True).click();assert page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth')>initial
