@@ -24,7 +24,7 @@ for q in bank:
   if src:assert (root/src).exists()
 for exam in by_key:
  assert sorted(q['number'] for q in bank if (q['year'],q['season'])==exam)==list(range(1,81))
-assert sum(q['enrichment']=='reviewed' for q in bank)==9
+assert sum(q['enrichment']=='reviewed' for q in bank)==10
 assert all(q['hintStatus']=='individual' for q in bank)
 # Every added hint has an explicit authoring record; repeated IDs are rejected.
 assigned={}
@@ -50,4 +50,4 @@ for q in bank:
 assert next(q for q in bank if q['id']=='r05a-q18')['hints'][1]['revealsAnswer']
 assert bank[0]['id']=='r07h-q1' and bank[0]['answer']==3
 assert next(q for q in bank if q['id']=='r04h-q80')['answer']==3
-print('PASS 800 questions / official keys / 800 images / 800 individual three-step hints with authoring provenance / 9 individual explanations')
+print('PASS 800 questions / official keys / 800 images / 800 individual three-step hints with authoring provenance / 10 individual explanations')

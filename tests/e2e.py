@@ -29,8 +29,8 @@ with sync_playwright() as p:
  page.locator('[name=query]').fill('存在しない検索条件ABCXYZ');assert page.locator('#catalog-results .row').count()==0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('DNS');assert page.locator('#catalog-results .row').count()>0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('二乗のビット数');assert page.locator('[data-action=start][data-id=r04a-q1]').count()==1
- page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==9
- print('PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / 9 reviewed',flush=True)
+ page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==10
+ print('PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / 10 reviewed',flush=True)
  nav('topics');assert page.locator('.topic-card').count()==17
  security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True));security.locator('summary').click();security.locator('input').fill('第4章 p.120 <script>alert(1)</script>');security.locator('[data-count="3"]').click()
  scoped=[]
@@ -64,14 +64,29 @@ with sync_playwright() as p:
  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
  s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==2
  nav('review');assert page.locator('[data-action=start][data-id=r05a-q18]').count()==1
- # Older attempts retain the common guide they actually used, despite the new corpus.
- open_q('r07h-q30');legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId'])
- a['materialSnapshot'].pop('hintStatus');a['materialSnapshot']['hints'][0]['text']='以前の分野共通ガイド'
+ # Reproduce the reported question reopened with an older common guide.
+ open_q('r07h-q18');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(1).check();page.locator('#confidence').check()
+ legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId']);old_id=a['id']
+ a['materialSnapshot'].pop('hintStatus');a['materialSnapshot']['enrichment']='topic-guide';a['materialSnapshot']['hints'][0]['text']='以前の分野共通ガイド'
  # Prevent the old page's pagehide handler from overwriting this fixture.
  page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,legacy]);page.reload();page.locator('.hint-head h3').wait_for()
- assert '分野共通' in page.locator('.hint-head h3').inner_text();page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();assert '以前の分野共通ガイド' in page.locator('.hint-box').inner_text()
- open_q('r07h-q30');assert page.locator('.hint-head h3').inner_text()=='ヒント' and page.locator('.hint-box').count()==0
- print('PASS individual hints without full explanations / three-stage resume / answer-term warning and record / retry / old material isolation',flush=True)
+ assert '分野共通' in page.locator('.hint-head h3').inner_text() and '以前の分野共通ガイド' in page.locator('.hint-box').inner_text()
+ assert '以前の分野共通ガイドが保存されています' in page.locator('.hint-update').inner_text()
+ page.get_by_role('button',name='最新のヒントで続ける',exact=True).click()
+ s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);old=next(a for a in s['attempts'] if a['id']==old_id)
+ assert a['id']!=old_id and a['questionId']=='r07h-q18' and a['selected']==1 and a['confidence']
+ assert a['hintCount']==0 and a['hintEvents']==[] and a['materialSnapshot']['hintStatus']=='individual'
+ assert old['status']=='postponed' and old['hintCount']==1 and old['materialSnapshot']['hints'][0]['text']=='以前の分野共通ガイド'
+ assert page.locator('.hint-head h3').inner_text()=='ヒント' and page.locator('.hint-update').count()==0 and page.get_by_role('radio').nth(1).is_checked()
+ page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.reload();page.locator('.hint-box').wait_for();assert '入力が1増えると10ミリV' in page.locator('.hint-box').inner_text()
+ page.get_by_role('button',name='次のヒントを見る',exact=True).click();assert '16の位' in page.locator('#hints').inner_text()
+ page.get_by_role('button',name='次のヒントを見る',exact=True).click();assert '130×10' in page.locator('#hints').inner_text() and 'V単位なら' not in page.locator('#hints').inner_text()
+ answer();assert '1,300ミリV' in page.locator('.result').inner_text() and page.locator('.reason-list li').count()==4
+ # Completed attempts with an older individual hint can restart too; no answer is carried.
+ completed=state();a=next(a for a in completed['attempts'] if a['id']==completed['currentId']);a['materialSnapshot']['hints'][0]['text']='更新前の個別ヒント'
+ page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,completed]);page.reload();page.locator('.hint-head h3').wait_for()
+ page.get_by_role('button',name='最新のヒントで解き直す',exact=True).click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['selected'] is None and a['hintCount']==0 and not a['answerViewedBefore']
+ print('PASS reported DAC question / decimal place-value reasoning / old guide to latest hints / selection preserved / old history unchanged / completed retry starts closed',flush=True)
  open_q('r04h-q80');assert page.locator('.source-question img').count()==1;assert page.locator('.question-meta').inner_text().find('2022年 春期')>=0
  answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：エ' in page.locator('.result').inner_text();assert '個別の解答解説は未追加' in page.locator('.result').inner_text();assert '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
  nav('review');assert page.locator('[data-action=start][data-id=r04h-q80]').count()==1
@@ -80,7 +95,7 @@ with sync_playwright() as p:
  # An old attempt keeps its original hints and pending explanation after editing.
  nav('history');old=next(a for a in state()['attempts'] if a['questionId']=='r04h-q80');page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
  open_q('r04h-q80');page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==10;assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==11;assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
  print('PASS scanned source / official key / pending-explanation honesty / retry / personal notes / immutable snapshot',flush=True)
  page.set_viewport_size({'width':390,'height':844});page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.get_by_role('button',name='問題を拡大').click();assert page.locator('#image-dialog').is_visible();initial=page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth');page.get_by_role('button',name='画像を拡大',exact=True).click();assert page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth')>initial

@@ -28,6 +28,17 @@ function latest(id) { return latestIndex.get(id) || null; }
 function hintTotal(a) { return a.materialSnapshot.hints.length; }
 function enriched(q) { return ['reviewed','personal'].includes(q.enrichment); }
 function hintKind(q) { return q.hintStatus || (enriched(q)?'individual':'topic-guide'); }
+function materialUpdateAvailable(a) {
+  const q=question(a.questionId);
+  return hintKind(a.materialSnapshot)!==hintKind(q) || JSON.stringify(a.materialSnapshot.hints)!==JSON.stringify(q.hints);
+}
+function useLatestHints() {
+  const old=current(); if(!old || !materialUpdateAvailable(old)) return;
+  const carrySelection=!complete(old), selected=old.selected, confidence=old.confidence;
+  start(old.questionId);
+  // A new attempt keeps the previous hint history intact; unseen new hints start closed.
+  if(carrySelection) { const a=current();a.selected=selected;a.confidence=confidence;save();render(); }
+}
 function notice(message) { $('#notice').textContent = message; $('#notice').hidden = !message; }
 function save() {
   rebuildProgress();
@@ -150,7 +161,7 @@ function studyHTML() {
   ${q.image?`<figure class="question-figure"><a class="figure-link" href="${q.image}" target="_blank" rel="noopener"><img src="${q.image}" alt="${esc(q.imageAlt)}"></a><figcaption>図を押すと、大きく開けます。</figcaption></figure>`:''}
   <fieldset class="choices"><legend>${answered?'選択と正解':'答えを1つ選んでください'}</legend>${q.choices.map((c,i)=>`<label class="choice ${a.selected===i?'selected':''} ${answered&&q.answer===i?'correct-choice':''} ${answered&&a.selected===i&&q.answer!==i?'wrong-choice':''}"><input type="radio" name="answer" value="${i}" ${a.selected===i?'checked':''} ${answered?'disabled':''}><span class="choice-code">${c.label}</span><span class="choice-text">${c.image?`<img src="${c.image}" alt="${esc(c.text)}">`:''}${esc(c.text)}${answered&&q.answer===i?' <strong>（正解）</strong>':''}${answered&&a.selected===i?' <span class="small">（あなたの選択）</span>':''}</span></label>`).join('')}</fieldset>
   ${!answered?`<label class="confidence"><input id="confidence" type="checkbox" ${a.confidence?'checked':''}>自信がないので、正解でも解き直したい</label>`:''}
-  <section class="hint-section" aria-label="段階的なヒント"><div class="hint-head"><h3>${hintKind(q)==='individual'?'ヒント':'考える手順（分野共通）'}</h3><span class="hint-count">${a.hintCount} / ${q.hints.length}</span></div><div id="hints" aria-live="polite">${q.hints.slice(0,a.hintCount).map((h,i)=>`<div class="hint-box" tabindex="-1"><h4>${i+1}. ${esc(h.title)}${h.revealsAnswer?'（答えを含む）':''}</h4><p>${esc(h.text)}</p></div>`).join('')}</div>${a.hintCount<q.hints.length?`<button class="button secondary" style="margin-top:14px" data-action="hint">${a.hintCount?'次のヒントを見る':'ヒントを1つ見る'}${q.hints[a.hintCount].revealsAnswer?'（答えを含む）':''}</button>`:`<p class="page-note" style="margin-top:12px">全ヒントを表示済み。</p>`}${answered?'<p class="page-note" style="margin-top:10px">解答後のヒント閲覧は、解答前の記録に加えません。</p>':''}</section>
+  <section class="hint-section" aria-label="段階的なヒント">${materialUpdateAvailable(a)?`<div class="hint-update"><p class="page-note">${hintKind(a.materialSnapshot)==='topic-guide'?'以前の分野共通ガイドが保存されています。':'この記録には更新前のヒントが保存されています。'}</p><button class="button secondary" data-action="latest-hints">最新のヒントで${answered?'解き直す':'続ける'}</button></div>`:''}<div class="hint-head"><h3>${hintKind(q)==='individual'?'ヒント':'考える手順（分野共通）'}</h3><span class="hint-count">${a.hintCount} / ${q.hints.length}</span></div><div id="hints" aria-live="polite">${q.hints.slice(0,a.hintCount).map((h,i)=>`<div class="hint-box" tabindex="-1"><h4>${i+1}. ${esc(h.title)}${h.revealsAnswer?'（答えを含む）':''}</h4><p>${esc(h.text)}</p></div>`).join('')}</div>${a.hintCount<q.hints.length?`<button class="button secondary" style="margin-top:14px" data-action="hint">${a.hintCount?'次のヒントを見る':'ヒントを1つ見る'}${q.hints[a.hintCount].revealsAnswer?'（答えを含む）':''}</button>`:`<p class="page-note" style="margin-top:12px">全ヒントを表示済み。</p>`}${answered?'<p class="page-note" style="margin-top:10px">解答後のヒント閲覧は、解答前の記録に加えません。</p>':''}</section>
   ${answered?resultHTML(q,a):`<div class="answer-actions"><button class="button primary" data-action="submit" ${a.selected===null?'disabled':''}>回答する</button><button class="button quiet" data-action="reveal">解答を見る</button></div><button class="button quiet" style="margin-top:8px" data-action="postpone">この問題はあとで解く</button>`}
   <details class="source-details"><summary>問題の出典と教材について</summary><p>出典：${esc(q.source)}</p><p>${esc(q.adaptation)} 学習ガイド・個別ヒントと解説は独自作成です。IPAの公式解説ではありません。</p><div class="link-list"><a href="${esc(q.questionUrl)}#page=${q.page}" target="_blank" rel="noopener">公式問題PDF</a><a href="${esc(q.answerUrl)}" target="_blank" rel="noopener">公式解答PDF</a></div></details></article>`;
 }
@@ -229,6 +240,7 @@ main.addEventListener('click',e=>{
   else if(action==='reset-filters'){catalog={year:'',season:'',topic:'',query:'',enriched:false,page:1};render();}
   else if(action==='start') start(el.dataset.id);
   else if(action==='resume') resume(el.dataset.id);
+  else if(action==='latest-hints') useLatestHints();
   else if(action==='next') start();
   else if(['pause','postpone','end'].includes(action)) { if(a&&!complete(a)) {a.status='postponed';a.updatedAt=now();} state.currentId=null;go('home'); }
   else if(action==='hint'&&a) {
@@ -277,7 +289,7 @@ function saveScroll(){if(state.view==='study'&&current()){current().scrollY=wind
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 try {
-  const response=await fetch('data/questions.json');if(!response.ok)throw new Error('問題データを読み込めませんでした。');base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
+  const response=await fetch('data/questions.json?v=20261005-hints2');if(!response.ok)throw new Error('問題データを読み込めませんでした。');base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=localStorage.getItem(STORAGE);if(raw){try{state=validateState(JSON.parse(raw));}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
