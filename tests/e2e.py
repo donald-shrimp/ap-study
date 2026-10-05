@@ -28,6 +28,7 @@ with sync_playwright() as p:
  assert page.locator('.catalog-count').inner_text().startswith('80問');page.get_by_role('button',name='次の20問').click();assert '21〜40' in page.locator('.catalog-count').inner_text()
  page.locator('[name=query]').fill('存在しない検索条件ABCXYZ');assert page.locator('#catalog-results .row').count()==0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('DNS');assert page.locator('#catalog-results .row').count()>0
+ page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('二乗のビット数');assert page.locator('[data-action=start][data-id=r04a-q1]').count()==1
  page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==9
  print('PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / 9 reviewed',flush=True)
  nav('topics');assert page.locator('.topic-card').count()==17
@@ -48,12 +49,35 @@ with sync_playwright() as p:
  page.get_by_role('button',name='ヒントを1つ見る').click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and a['hintEvents'][-1]['phase']=='after'
  nav('home');page.locator('.achievements summary').click();assert '解き直して正解' in page.locator('.achievement-list').inner_text()
  print('PASS individual hints / wrong-to-correct recovery / motivation / after-answer hints',flush=True)
+ # Hints are available independently of full explanations, and survive resume.
+ open_q('r07h-q30');assert page.locator('.hint-head h3').inner_text()=='ヒント'
+ page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+ page.get_by_role('button',name='次のヒントを見る',exact=True).click()
+ page.get_by_role('button',name='次のヒントを見る',exact=True).click()
+ assert '1,500−20−20' in page.locator('#hints').inner_text()
+ snapshot=next(a for a in state()['attempts'] if a['id']==state()['currentId'])['materialSnapshot']
+ assert snapshot['hintStatus']=='individual' and snapshot['enrichment']=='topic-guide'
+ page.reload();page.locator('.hint-box').first.wait_for();assert page.locator('.hint-box').count()==3
+ answer();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='assisted' and a['hintsBeforeAnswer']==3
+ # A literal answer term is labelled before it is opened and counts as answer viewing.
+ open_q('r05a-q18');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+ page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
+ s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==2
+ nav('review');assert page.locator('[data-action=start][data-id=r05a-q18]').count()==1
+ # Older attempts retain the common guide they actually used, despite the new corpus.
+ open_q('r07h-q30');legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId'])
+ a['materialSnapshot'].pop('hintStatus');a['materialSnapshot']['hints'][0]['text']='以前の分野共通ガイド'
+ # Prevent the old page's pagehide handler from overwriting this fixture.
+ page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,legacy]);page.reload();page.locator('.hint-head h3').wait_for()
+ assert '分野共通' in page.locator('.hint-head h3').inner_text();page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();assert '以前の分野共通ガイド' in page.locator('.hint-box').inner_text()
+ open_q('r07h-q30');assert page.locator('.hint-head h3').inner_text()=='ヒント' and page.locator('.hint-box').count()==0
+ print('PASS individual hints without full explanations / three-stage resume / answer-term warning and record / retry / old material isolation',flush=True)
  open_q('r04h-q80');assert page.locator('.source-question img').count()==1;assert page.locator('.question-meta').inner_text().find('2022年 春期')>=0
  answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：エ' in page.locator('.result').inner_text();assert '個別の解答解説は未追加' in page.locator('.result').inner_text();assert '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
  nav('review');assert page.locator('[data-action=start][data-id=r04h-q80]').count()==1
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option('2022');page.locator('[name=season]').select_option('spring');page.locator('[name=query]').fill(by_id['r04h-q80']['title']);page.locator('[data-action=edit][data-id=r04h-q80]').click()
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
- # An old attempt still shows the original topic guide after personal editing.
+ # An old attempt keeps its original hints and pending explanation after editing.
  nav('history');old=next(a for a in state()['attempts'] if a['questionId']=='r04h-q80');page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
  open_q('r04h-q80');page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==10;assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
@@ -66,6 +90,7 @@ with sync_playwright() as p:
  with page.expect_download() as download:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=ROOT/'record.json';download.value.save_as(str(backup));page.on('dialog',lambda d:d.accept());page.locator('#import-state').set_input_files(str(backup));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("読み込みました")')
  original=state();bad=json.loads(backup.read_text());bad['attempts'][0]['materialSnapshot']['stem']='<img src=x onerror=alert(1)>';bad_path=ROOT/'bad.json';bad_path.write_text(json.dumps(bad));page.locator('#import-state').set_input_files(str(bad_path));assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
+ bad=json.loads(backup.read_text());bad['attempts'][0]['materialSnapshot']['hintStatus']='invalid';bad_path.write_text(json.dumps(bad));page.locator('#import-state').set_input_files(str(bad_path));assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
  page.get_by_role('button',name='設定を閉じる',exact=True).click();nav('home');page.screenshot(path=str(ROOT/'home-mobile.png'),full_page=True);nav('topics');page.evaluate('document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  assert not errors,errors
  print('PASS mobile image zoom / 200% text / valid backup import / hostile snapshot rejection / no runtime errors',flush=True)
