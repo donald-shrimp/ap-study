@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="応用情報の過去問学習アプリの定義書。要点、学習の流れ、試せるヒントの例、記録と復習のルール。">
+  <title>応用情報の学習アプリ｜読みやすい定義書 v0.3</title>
+  <style>
+    :root{--ink:#253a3c;--muted:#536b6e;--accent:#17645b;--accent-soft:#e9f3ee;--paper:#fff;--bg:#f4f5ef;--line:#dce3db;--warm:#fff6e5;--radius:18px}
+    *{box-sizing:border-box}html{scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.85 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;overflow-wrap:anywhere}a{color:var(--accent);text-underline-offset:4px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.52}button,a,input,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a85c16;outline-offset:4px}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.5;text-wrap:balance}h1{font-size:clamp(27px,4vw,42px);letter-spacing:.03em;margin-bottom:18px}h2{font-size:27px;margin-bottom:14px}h3{font-size:19px;margin-bottom:8px}p{margin-bottom:16px}ul,ol{padding-left:1.5em}li{margin:.45em 0}strong{font-weight:700}small,.small{font-size:14px}.muted{color:var(--muted)}.skip{position:absolute;left:16px;top:-80px;padding:10px 16px;background:var(--paper);z-index:10}.skip:focus{top:10px}.shell{max-width:1170px;margin:auto;padding:0 32px}.masthead{display:flex;justify-content:space-between;align-items:center;padding-top:28px;gap:16px;font-size:13px;letter-spacing:.08em}.brand{font-weight:700;color:var(--accent)}.version{border:1px solid var(--line);padding:4px 12px;border-radius:20px;color:var(--muted);white-space:nowrap}.hero{padding:40px 0 30px;max-width:780px}.eyebrow{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.12em;margin-bottom:14px}.lead{font-size:19px;max-width:650px;color:var(--muted)}.hero-note{font-size:14px;margin:0;color:var(--muted)}
+    .reader{position:sticky;top:0;z-index:5;background:#f4f5eff5;border-block:1px solid var(--line);backdrop-filter:blur(8px)}.reader-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;min-height:68px;padding-block:10px}.reader-current{font-size:14px}.reader-current strong{color:var(--accent);margin-right:10px}.controls{display:flex;gap:12px;align-items:center}.toggle{font-size:14px;display:flex;gap:8px;align-items:center;cursor:pointer}.toggle input{width:19px;height:19px;accent-color:var(--accent)}.text-control{font-size:14px}.text-control select{font-size:14px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:5px;color:var(--ink)}
+    .layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px;padding-top:32px;align-items:start}.sidebar{position:sticky;top:100px}.sidebar-title{font-size:12px;letter-spacing:.1em;color:var(--muted);margin-bottom:12px}.toc{display:grid;gap:5px}.toc a{display:flex;gap:12px;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:10px;font-size:14px}.toc a span{font-size:12px;opacity:.8;padding-top:2px}.toc a[aria-current="location"]{background:var(--accent-soft);color:var(--accent);font-weight:700}.sidebar-note{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;font-size:13px;color:var(--muted)}main{min-width:0}.chapter{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:32px;margin-bottom:26px;scroll-margin-top:92px}.chapter:focus{outline:none}.chapter-number{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.12em;margin-bottom:12px}.section-intro{color:var(--muted);max-width:39em}.takeaway{padding:18px 20px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;margin:22px 0}.takeaway p:last-child{margin:0}.takeaway-label{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--accent);margin:0 0 4px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}.card{border:1px solid var(--line);border-radius:12px;padding:18px}.card .num{font:600 26px/1.3 Georgia,serif;color:var(--accent);display:block;margin-bottom:12px}.card p{font-size:15px;color:var(--muted);margin:0}.plain-list{list-style:none;padding:0;margin:18px 0}.plain-list li{padding:14px 0;border-bottom:1px solid var(--line)}.plain-list li:last-child{border-bottom:0}.plain-list strong{display:block}.plain-list p{font-size:15px;color:var(--muted);margin:3px 0 0}.tag{display:inline-block;padding:2px 9px;background:var(--accent-soft);color:var(--accent);border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}.tag.proposal{background:var(--warm);color:#7a531c}.steps{list-style:none;padding:0;counter-reset:steps}.steps li{position:relative;padding:0 0 22px 52px;margin:0;counter-increment:steps}.steps li:before{content:counter(steps,decimal-leading-zero);position:absolute;left:0;top:2px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:700}.steps strong{display:block}.steps p{font-size:15px;color:var(--muted);margin:4px 0 0}.btn{border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:10px 16px;min-height:44px;font-size:15px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn:hover:not(:disabled){filter:brightness(.96)}.button-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.callout{background:var(--warm);border:1px solid #ebddbe;border-radius:12px;padding:16px 18px;font-size:15px;margin-top:20px}.callout p:last-child{margin:0}details{border-top:1px solid var(--line);margin-top:20px;padding-top:14px}summary{cursor:pointer;font-size:15px;color:var(--accent);font-weight:700;padding:7px 0;min-height:44px}details>div{margin-top:12px}details p,details li{font-size:15px}.table-wrap{overflow:auto;margin-top:18px}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.7}caption{text-align:left;font-size:14px;color:var(--muted);padding-bottom:12px}th{text-align:left;background:#f4f7f3;color:var(--muted);font-size:13px;font-weight:700}th,td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{min-width:115px}.note{font-size:14px;color:var(--muted);margin:16px 0 0}.resume-example{border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:18px;background:#fafbf8}.resume-example p:last-child{margin:0}.intervals{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0}.intervals span{padding:8px 14px;border:1px solid var(--line);border-radius:10px;font-size:15px}.intervals b{color:var(--muted);font-weight:400}.demo{background:#fafbf8;border:1px solid var(--line);padding:22px;border-radius:14px;margin-top:22px}.demo-heading{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}.demo-heading .tag{background:#e6ecf2;color:#3b5266}.question{font-size:16px}.choices{border:0;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choices legend{font-size:14px;margin-bottom:8px;grid-column:1/-1}.choice{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:16px;background:#fff;min-height:46px}.choice:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}.choice input{accent-color:var(--accent);width:17px;height:17px}.hint{border-left:3px solid var(--accent);padding:12px 16px;background:var(--accent-soft);margin-top:10px;border-radius:0 10px 10px 0;font-size:15px}.hint p{margin:4px 0 0}.record{font-size:14px;padding:12px 15px;border:1px dashed #a7bdb1;border-radius:10px;margin-top:18px;background:#fff}.record p{margin:0}.solution{padding:16px;background:#fff;border:1px solid var(--line);border-radius:10px;margin-top:16px;font-size:15px}.solution p:last-child{margin:0}.bottom-nav{display:flex;justify-content:space-between;gap:12px;margin:10px 0 36px}.footer{padding:28px 0 36px;margin-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.footer p{margin:0 0 8px}.footer a{margin-right:15px}.doc-controls{display:none}.js .doc-controls{display:flex}.js .demo-controls{display:flex}.demo-controls{display:none}[hidden]{display:none!important}body.large-text{font-size:19px}body.large-text .section-intro,body.large-text .question{font-size:19px}body.large-text .card p,body.large-text .steps p,body.large-text details p,body.large-text details li,body.large-text table,body.large-text .plain-list p,body.large-text .hint,body.large-text .solution{font-size:17px}
+    @media(max-width:850px){.shell{padding-inline:22px}.layout{grid-template-columns:minmax(0,1fr);gap:20px}.sidebar{position:static}.sidebar-title,.sidebar-note{display:none}.toc{display:flex;gap:6px;overflow:auto;padding-bottom:8px}.toc a{white-space:nowrap;background:#fff;border:1px solid var(--line);flex-shrink:0}.chapter{padding:26px}.hero{padding-top:30px}.reader-current{min-width:110px}.grid{gap:10px}}
+    @media(max-width:560px){body{font-size:16px}.shell{padding-inline:16px}.masthead{padding-top:20px}.hero{padding:26px 0}.lead{font-size:17px}.reader-inner{flex-wrap:wrap;gap:6px;min-height:88px}.controls{gap:16px;width:100%;justify-content:space-between}.layout{padding-top:20px}.chapter{padding:23px 19px;margin-bottom:18px}h2{font-size:23px}.grid{grid-template-columns:1fr}.card{display:grid;grid-template-columns:30px 1fr;column-gap:14px;padding:15px}.card .num{grid-row:1/3;font-size:24px;margin:0}.card h3{margin-bottom:4px}.card p{grid-column:2}.demo{padding:16px}.button-row .btn{flex:1 1 150px}.table-wrap{margin-inline:-3px}td,th{padding:11px 8px;font-size:14px}th:first-child,td:first-child{min-width:95px}.chapter{scroll-margin-top:108px}html{scroll-padding-top:108px}.version{font-size:11px}.bottom-nav .btn{font-size:14px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    @media print{body{background:#fff;font-size:11pt}.shell{max-width:none;padding:0}.masthead,.reader,.sidebar,.bottom-nav,.demo-controls,.skip{display:none!important}.hero{padding:0 0 20px}.layout{display:block;padding:0}.chapter,.chapter[hidden]{display:block!important;break-inside:auto;border-radius:0;margin-bottom:20px;padding:20px}.card,.takeaway,.hint,.resume-example{break-inside:avoid}details>*{display:block!important}summary{list-style:none}a{color:inherit}.footer{margin-top:20px}.js .doc-controls{display:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="shell">
+    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.3 · 2026.10.05</span></div>
+    <div class="hero">
+      <p class="eyebrow">過去問を使った、効率的な学習のために</p>
+      <h1>応用情報の学習アプリ<br>何を作るか、どう使うか。</h1>
+      <p class="lead">1問から始める。困ったらヒントを使う。<br>あとで、助けなしでもう一度解いてみる。</p>
+      <p class="hero-note"><a href="../index.html">5問のモックを試す →</a><br>このページは目標仕様も含みます。今回の実装範囲は<a href="requirements.md">要件定義</a>で確認できます。</p><p class="hero-note">まずは「要点」だけで大丈夫です。細かな仕様は、必要なときに開けます。</p>
+    </div>
+  </header>
+  <div class="reader doc-controls" aria-label="定義書の読み方">
+    <div class="shell reader-inner" style="width:100%">
+      <div class="reader-current"><strong id="chapter-count">01 / 07</strong><span id="chapter-name">要点</span></div>
+      <div class="controls">
+        <label class="toggle"><input type="checkbox" id="focus-mode">1章ずつ読む</label>
+        <label class="text-control" for="text-size">文字 <select id="text-size"><option value="normal">標準</option><option value="large">大きめ</option></select></label>
+      </div>
+    </div>
+  </div>
+  <div class="shell layout">
+    <aside class="sidebar" aria-label="章の案内">
+      <p class="sidebar-title">必要なところから読む</p>
+      <nav class="toc" aria-label="目次">
+        <a href="#overview" aria-current="location"><span>01</span>要点</a>
+        <a href="#flow"><span>02</span>使う流れ</a>
+        <a href="#hints"><span>03</span>ヒントの具体例</a>
+        <a href="#history"><span>04</span>残す記録</a>
+        <a href="#review"><span>05</span>解き直し</a>
+        <a href="#content"><span>06</span>過去問の準備</a>
+        <a href="#scope"><span>07</span>作る範囲と確認</a>
+      </nav>
+      <p class="sidebar-note">全部を一度に読む必要はありません。途中の章へ移動しても大丈夫です。</p>
+    </aside>
+    <main id="main">
+      <section class="chapter" id="overview" tabindex="-1" data-title="要点" aria-labelledby="overview-title">
+        <p class="chapter-number">01 / 要点</p><h2 id="overview-title">作りたいのは、こんな道具。</h2>
+        <p class="section-intro">応用情報の過去問を集め、ヒントと解説を付ける。解いた記録を使って、次に復習する問題を選びやすくします。</p>
+        <div class="takeaway"><p class="takeaway-label">ここだけ覚えればOK</p><p><strong>「正解したか」と「どこまで助けを使ったか」を残し、あとで自力で解けるようにする。</strong></p></div>
+        <div class="grid">
+          <div class="card"><span class="num">1</span><h3>始めやすい</h3><p>「まず1問」で開始。1問だけで終えてもいい。</p></div>
+          <div class="card"><span class="num">2</span><h3>詰まっても進める</h3><p>ヒントを1つずつ読む。解説から学ぶこともできる。</p></div>
+          <div class="card"><span class="num">3</span><h3>あとで確かめる</h3><p>日をあけて、ヒントを閉じて解き直す。</p></div>
+        </div>
+        <ul class="plain-list">
+          <li><strong><span class="tag">前提</span> 今年中の受験に向けた過去問学習</strong><p>中心は、過去問の収集・解説・ヒント・演習・復習です。</p></li>
+          <li><strong><span class="tag proposal">初期案</span> まずは自分用、選択式の問題から</strong><p>スマホとPCで使える画面にします。主な端末と同期の必要性は、あとで決められます。</p></li>
+        </ul>
+        <details><summary>開発中の変更方針を読む</summary><div><p>仕様・画面・データ構造は大きく変更できます。後方互換性や、旧仕様のデータを移す処理は必須にしません。</p><p>通常の利用中は履歴を残しますが、開発中の仕様変更をまたぐデータ互換性は保証しない方針です。</p></div></details>
+      </section>
+      <section class="chapter" id="flow" tabindex="-1" data-title="使う流れ" aria-labelledby="flow-title">
+        <p class="chapter-number">02 / 使う流れ</p><h2 id="flow-title">1問の学習を、小さく区切る。</h2>
+        <ol class="steps">
+          <li><strong>「まず1問」か「続きから」</strong><p>始める前の細かな設定は不要。中断中でも、別の問題を選べます。</p></li>
+          <li><strong>問題を読む</strong><p>問題文・図表・選択肢を表示。選択肢を選ぶだけでは採点しません。</p></li>
+          <li><strong>必要ならヒントを開く</strong><p>1段ずつ読みます。ヒントを開くための待ち時間はありません。</p></li>
+          <li><strong>回答して、解説を読む</strong><p>「回答する」で確定。答えだけでなく、考え方と誤答の理由を確認します。</p></li>
+          <li><strong>終えるか、次の1問へ</strong><p>自動で次へ進みません。終了時の長い振り返り入力も不要です。</p></li>
+        </ol>
+        <div class="takeaway"><p class="takeaway-label">集中が切れたら</p><p><strong>途中で終えても、選んだ答えと開いたヒントを保存します。</strong></p></div>
+        <div class="resume-example"><p class="small muted">再開するときの表示例</p><p><strong>転送時間の問題の続きです。</strong><br>ヒント2まで確認しました。答えはまだ確定していません。</p></div>
+        <details><summary>分からないときの選択肢を見る</summary><div><ul><li><strong>ヒント：</strong>次に考えることを1つ知る。</li><li><strong>解法を読む：</strong>基礎説明や解き方の例から学ぶ。</li><li><strong>解答を見る：</strong>答えと解説を読む。自力正解とは別に記録する。</li><li><strong>あとで：</strong>その問題を保留して、別の問題へ。誤答にはしない。</li></ul><p>自信の入力は任意です。タイマーは標準で非表示にし、使う場合も時間切れで強制採点しません。</p></div></details>
+      </section>
+      <section class="chapter" id="hints" tabindex="-1" data-title="ヒントの具体例" aria-labelledby="hints-title">
+        <p class="chapter-number">03 / ヒントの具体例</p><h2 id="hints-title">答えまでの道筋を、少しずつ。</h2>
+        <p class="section-intro">ヒントは「注目点 → 手順 → この問題への当てはめ」が基本。問題に合わせて段数は変えられます。</p>
+        <div class="demo">
+          <div class="demo-heading"><span class="tag">試せる説明用の例</span><span class="small muted">自作例です。IPAの過去問ではありません。</span></div>
+          <p class="question">12 Mバイトのデータを、通信速度8 Mビット/秒、実効利用率75%の回線で転送します。何秒かかるでしょうか？</p>
+          <p class="small muted">Mは10の6乗。その他のオーバーヘッドは考えません。</p>
+          <fieldset class="choices" id="demo-choices"><legend>答えを選ぶ</legend><label class="choice"><input type="radio" name="demo-answer" value="8">8秒</label><label class="choice"><input type="radio" name="demo-answer" value="12">12秒</label><label class="choice"><input type="radio" name="demo-answer" value="16">16秒</label><label class="choice"><input type="radio" name="demo-answer" value="24">24秒</label></fieldset>
+          <div class="button-row demo-controls"><button type="button" class="btn" id="show-hint" aria-controls="hint-list">ヒントを1つ見る</button><button type="button" class="btn primary" id="answer-demo">回答する</button></div>
+          <div id="hint-list" aria-label="表示したヒント">
+            <div class="hint" data-hint="1"><strong>ヒント1 · 注目点</strong><p>データ量はバイト、速度はビットです。実効利用率も条件にあります。</p></div>
+            <div class="hint" data-hint="2"><strong>ヒント2 · 手順</strong><p>データ量をビットに直し、通信速度に利用率をかけます。時間＝データ量÷実際の速度です。</p></div>
+            <div class="hint" data-hint="3"><strong>ヒント3 · 当てはめ</strong><p>12×8＝96 Mビット。8×0.75＝6 Mビット/秒。96÷6を計算しましょう。</p></div>
+          </div>
+          <div class="record"><p class="small muted">アプリに残す記録のイメージ</p><p id="demo-record" role="status" aria-live="polite">未回答 · 回答前のヒント：0段階</p></div>
+          <div class="button-row demo-controls"><button type="button" class="btn" id="show-solution" aria-controls="demo-solution">答えと解説を読む</button><button type="button" class="btn" id="reset-demo">例を最初に戻す</button></div>
+          <div class="solution" id="demo-solution"><h3>答え：16秒</h3><p>96 Mビット ÷ 6 Mビット/秒 ＝ <strong>16秒</strong>。</p><p>12秒という答えは、実効利用率75%を反映していません。次も<strong>「単位をそろえる → 実際の速度を求める → 割る」</strong>の順で考えます。</p></div>
+          <p class="note">この例の回答は保存されません。再読み込みすると最初に戻ります。</p>
+          <noscript><p class="note">JavaScriptが無効なため、例のヒントと解説をすべて表示しています。</p></noscript>
+        </div>
+        <details><summary>ヒントと解説のルールを見る</summary><div><ul><li>ヒントは減点の対象にしません。前の段も読み返せます。</li><li>正答を実質的に明かす内容は「解答閲覧」として記録します。</li><li>回答後に追加で読んだヒントは、回答前の利用と分けます。</li><li>解説は要点から表示し、他の選択肢の理由や詳細は展開できます。</li><li>段階番号だけで、違う問題のヒントの強さが同じとは扱いません。</li></ul></div></details>
+      </section>
+      <section class="chapter" id="history" tabindex="-1" data-title="残す記録" aria-labelledby="history-title">
+        <p class="chapter-number">04 / 残す記録</p><h2 id="history-title">正解でも、助けを使ったかを残す。</h2>
+        <p class="section-intro">例えば「正解・ヒント2まで利用」。これが分かると、次に何を確かめるかを選びやすくなります。</p>
+        <div class="table-wrap"><table><caption>回答ごとの結果と、その後の扱い</caption><thead><tr><th scope="col">結果</th><th scope="col">意味</th><th scope="col">次にすること</th></tr></thead><tbody>
+          <tr><th scope="row">自力正解</th><td>回答前にヒントも答えも見ずに正解</td><td>間隔をあけて確認</td></tr>
+          <tr><th scope="row">ヒント付き正解</th><td>ヒントを使って正解</td><td>後日、助けなしで再挑戦</td></tr>
+          <tr><th scope="row">不正解</th><td>確定した答えが違った</td><td>解説を読み、後日再挑戦</td></tr>
+          <tr><th scope="row">解答閲覧</th><td>回答前に答えを見た</td><td>理解の学習として残し、後日再挑戦</td></tr>
+          <tr><th scope="row">途中・あとで</th><td>まだ回答を確定していない</td><td>内容を残して再開。誤答にしない</td></tr>
+        </tbody></table></div>
+        <div class="takeaway"><p class="takeaway-label">進捗の伝え方</p><p><strong>「別の日に自力正解：2回」のように、確認できた事実を示します。</strong><br>同じ日の繰り返しや、別の問題での結果は分けて見ます。</p></div>
+        <details><summary>保存する項目を詳しく見る</summary><div><ul><li><strong>問題：</strong>出典、年度、問題番号、図表、正答、ヒント、解説、分野、関連問題。</li><li><strong>解いた記録：</strong>日時、選んだ回答、正誤、回答前のヒント段階と閲覧履歴、答えを見た時点、任意の自信。</li><li><strong>途中の状態：</strong>選択中の回答、開いたヒント、問題内の位置。</li><li><strong>復習：</strong>前回の結果、次の候補日、延期、別の日の自力正解。</li></ul><p>解き直しは新しい記録として追加し、前の履歴を上書きしません。「自力」はアプリ内での操作についての意味です。</p><p>診断名や服薬などの医療情報は収集しません。</p></div></details>
+        <details><summary>データの保存先について読む</summary><div><p><span class="tag proposal">初期案</span> アカウントなしで、使っている端末のブラウザに保存します。書き出し・読み込み・削除を用意します。</p><p>ブラウザのデータ削除や端末の紛失で記録が失われることがあります。複数端末で使う場合の同期は、必要性を見て決めます。</p><p>保存に失敗したときは画面に表示します。書き出しと読み込みは同じ仕様での利用を対象にします。</p></div></details>
+      </section>
+      <section class="chapter" id="review" tabindex="-1" data-title="解き直し" aria-labelledby="review-title">
+        <p class="chapter-number">05 / 解き直し</p><h2 id="review-title">日をあけて、もう一度。</h2>
+        <p class="section-intro">不正解、ヒント付き正解、答えを見た問題を復習候補にします。「正解したけど迷った」問題も、早めに確認できます。</p>
+        <div class="takeaway"><p class="takeaway-label">復習の始まり方</p><p><strong>前回の答えとヒントは、閉じた状態から。</strong><br>必要になったら、またヒントを使えます。</p></div>
+        <p><span class="tag proposal">間隔の初期案</span></p><div class="intervals" aria-label="自力正解できた場合、翌日から3日、7日、14日へ間隔を伸ばす案"><span>翌日</span><b aria-hidden="true">→</b><span>3日後</span><b aria-hidden="true">→</b><span>7日後</span><b aria-hidden="true">→</b><span>14日後</span></div>
+        <p class="note">次の確認で自力正解できたら、間隔を伸ばす案です。間違えたら短く戻します。日数は固定の最適値ではなく、使いながら調整します。</p>
+        <ul class="plain-list"><li><strong>今日取り組む量は、小さく</strong><p>標準は1問。3問・5問も選べます。たまった復習を全部今日のノルマにしません。</p></li><li><strong>苦戦が続いたら、基礎へ戻る</strong><p>再出題だけでなく、短い基礎説明や解法例を提案します。</p></li><li><strong>別の過去問でも確かめる</strong><p>同じ考え方を使う別問題を解き、答えの記憶だけになっていないか確認します。</p></li></ul>
+        <details><summary>出題順と回数のルールを見る</summary><div><ol><li>途中の問題があれば「続きから」を提案。別の問題も選べます。</li><li>予定日を過ぎた復習、今日の復習、新しい問題の順を基本にします。</li><li>同じ優先度なら古い候補を先にします。手動の選択・延期もできます。</li><li>同じ問題が同日に出続けることを抑えます。新しい分野へ進む入口も残します。</li></ol><p>同日の解き直しはできますが、「別の日に自力正解」の回数には含めません。少ないヒントで解けたことだけで、完全な習熟や合格を断定しません。</p></div></details>
+      </section>
+      <section class="chapter" id="content" tabindex="-1" data-title="過去問の準備" aria-labelledby="content-title">
+        <p class="chapter-number">06 / 過去問の準備</p><h2 id="content-title">問題を集めて、学べる形にする。</h2>
+        <p class="section-intro">過去問と公式解答を対応づけ、独自のヒントと解説を加えます。図表や条件を欠落させないことを大切にします。</p>
+        <ol class="steps"><li><strong>過去問と公式解答を集める</strong><p>年度・出題区分・問題番号・出典を付け、重複を見分けます。</p></li><li><strong>問題文・選択肢・図表を取り込む</strong><p>抽出が難しい図表は原資料の画像を保持。抜けや誤変換を確認します。</p></li><li><strong>ヒントと解説を追加・編集する</strong><p>次に何を考えるかが分かるヒントと、正誤の理由が分かる解説を作ります。</p></li><li><strong>内容を確認して、演習に登録する</strong><p>公式解答との一致、計算・単位・用語を確認します。</p></li></ol>
+        <div class="callout"><p><span class="tag proposal">初期案</span> まずは30〜50問ほどの小さなセットで、教材の品質と使いやすさを確かめます。問題数は変更できます。</p></div>
+        <details><summary>教材の品質を守るルールを見る</summary><div><ul><li>確認が終わっていない問題は、通常の演習セットに混ぜません。</li><li>各選択肢の正しい理由・誤りの理由を確認します。</li><li>少数の重要な考え方には、関連する別の過去問も対応づけます。</li><li>AIを下書きに使っても、内容確認を行います。</li><li>第三者の解説をそのまま移しません。外部公開する場合は教材の利用条件を確認します。</li></ul></div></details>
+      </section>
+      <section class="chapter" id="scope" tabindex="-1" data-title="作る範囲と確認" aria-labelledby="scope-title">
+        <p class="chapter-number">07 / 作る範囲と確認</p><h2 id="scope-title">最初に作るのは、この一周。</h2>
+        <div class="takeaway"><p class="takeaway-label">初期版の中心</p><p><strong>過去問を準備する → 1問解く → 記録する → 後日解き直す。</strong></p></div>
+        <p class="section-intro">まず、この流れが気持ちよく使えて、学習に役立つかを確かめます。アプリ本体はまだ実装・公開していません。</p>
+        <div class="grid"><div class="card"><span class="num">A</span><h3>着手と再開</h3><p>入口が分かるか。中断しても、迷わず戻れるか。</p></div><div class="card"><span class="num">B</span><h3>後日の自力解答</h3><p>日をあけた初回の挑戦で、助けなしに解けるか。</p></div><div class="card"><span class="num">C</span><h3>負担の小ささ</h3><p>操作・入力・復習量が、取り組みの邪魔にならないか。</p></div></div>
+        <details><summary>初期版の13機能を確認する</summary><div class="table-wrap"><table><caption>要件定義 v0.3の機能一覧</caption><thead><tr><th scope="col">ID・機能</th><th scope="col">できること</th></tr></thead><tbody><tr><th scope="row">F01 問題</th><td>問題文、選択肢、図表、出典、分野を表示。</td></tr><tr><th scope="row">F02 ヒント</th><td>段階的に開き、読み返す。段数は教材ごとに変更可能。</td></tr><tr><th scope="row">F03 解説</th><td>正誤、正答、手順、各選択肢の理由を表示。</td></tr><tr><th scope="row">F04 履歴</th><td>試行ごとに回答、正誤、ヒント、解答閲覧、日時を保存。</td></tr><tr><th scope="row">F05 再開</th><td>選択中の回答、ヒント、問題内の位置を復元。</td></tr><tr><th scope="row">F06 解き直し</th><td>復習候補から出題。手動でも選べる。</td></tr><tr><th scope="row">F07 復習予定</th><td>次の候補日を提案。延期・変更も可能。</td></tr><tr><th scope="row">F08 学習状況</th><td>自力正解、ヒント付き正解、要復習、未回答を区別。</td></tr><tr><th scope="row">F09 学習単位</th><td>1問を標準とし、3問・5問も選べる。</td></tr><tr><th scope="row">F10 データ管理</th><td>書き出し、読み込み、削除。保存先も説明。</td></tr><tr><th scope="row">F11 関連問題</th><td>同じ考え方を使う別問題で確かめる。</td></tr><tr><th scope="row">F12 基礎説明</th><td>短い説明や解法例へ戻れる。</td></tr><tr><th scope="row">F13 教材化</th><td>過去問と解答の取り込み、ヒント・解説の追加と編集。</td></tr></tbody></table></div></details>
+        <details><summary>完成を確認する14項目を見る</summary><div><ol><li>ヒント2を使って正解したら、「ヒント付き正解・段階2」と保存され、復習候補になる。</li><li>回答前に答えを見たら、後から正答しても自力正解にしない。</li><li>回答後の解説閲覧で、回答前のヒント記録は変わらない。</li><li>途中で閉じても、同じ試行の回答候補とヒントを復元できる。</li><li>再挑戦は新しい試行になり、前の履歴が残る。</li><li>同日の連続正解は、別の日の自力正解回数に含めない。回数だけで習熟を断定しない。</li><li>復習は答えを伏せ、ヒントを閉じて始まる。</li><li>1問で終了でき、タイマーなしで基本機能を使える。</li><li>保存失敗が分かり、書き出した記録を読み戻せる。</li><li>スマホ、キーボード、文字拡大で問題・ヒント・回答・再開を操作できる。</li><li>「あとで」は誤答にならず、別の問題へ進め、あとから再開できる。</li><li>ヒントに待ち時間がなく、正答を明かす支援は自力正解に含めない。</li><li>関連する別問題の結果を、同じ問題への再回答と分けられる。</li><li>過去問に解答・図表・出典が対応づき、ヒント・解説を追加・編集できる。</li></ol></div></details>
+        <details><summary>今は作らないもの・あとで決めること</summary><div><h3>初期版には含めない</h3><ul><li>制度変更への対応とシラバス比較。</li><li>記述式の自動採点、試験全体の模試、合格予測。</li><li>未確認のAI解説の自動配信。</li><li>SNS、ランキング、複雑な報酬、医療情報の収集。</li></ul><h3>使い方に合わせて決める</h3><ul><li>主にスマホかPCか。複数端末の同期が必要か。</li><li>自分だけで使うか。通知が役立つか。</li><li>ヒントの段数、復習間隔、1回の学習量。</li></ul></div></details>
+        <details><summary>学習法の根拠と、まだ確かめること</summary><div><p><strong>研究から参考にしたこと：</strong>思い出して答える練習、間隔をあけた復習、解法例と演習の組合せ、間違いの理由が分かる解説。</p><p><strong>設計指針から参考にしたこと：</strong>刺激を減らす、主要な操作を短くする、必要なときに支援を使える、現在地を示して再開しやすくする。</p><p>具体的なヒント数や復習日数は初期案です。一般の学習研究を参考にした部分もあり、このアプリのADHDの成人への効果は、実際に使って確かめる必要があります。</p><p>最初の1〜2週間は操作・着手・再開を見ます。保持と応用は数週間の利用で、後日の自力解答と別問題への適用を確認します。回答数と未実施数も分け、簡単な問題だけの正解率を全体の習熟にしません。</p><ul><li><a href="https://www.nice.org.uk/guidance/ng87/chapter/recommendations">NICE：ADHDの環境調整</a></li><li><a href="https://pubmed.ncbi.nlm.nih.gov/26173288/">学習技法の研究レビュー</a></li><li><a href="https://ies.ed.gov/ncee/wwc/PracticeGuide/1">IES：学習と指導の実践ガイド</a></li><li><a href="https://www.w3.org/TR/coga-usable/">W3C：認知・学習特性に配慮した設計指針</a></li></ul></div></details>
+      </section>
+      <div class="bottom-nav doc-controls"><button type="button" class="btn" id="previous-chapter" disabled>← 前の章</button><button type="button" class="btn primary" id="next-chapter">次：使う流れ →</button></div>
+    </main>
+  </div>
+  <footer class="shell footer"><p>人間向けHTML定義書 · 仕様 v0.3 · 2026年10月5日</p><p>このファイルだけで閲覧できます。外部フォント・画像・サービスへの接続は不要です。</p><p><a href="requirements.md">元の要件定義</a><a href="learning-design.md">設計の詳しい説明</a><a href="research-notes.md">調査メモと全出典</a></p></footer>
+  <script>
+    (() => {
+      'use strict';
+      document.documentElement.classList.add('js');
+      const chapters = [...document.querySelectorAll('.chapter')];
+      const links = [...document.querySelectorAll('.toc a')];
+      const focusMode = document.querySelector('#focus-mode');
+      const previous = document.querySelector('#previous-chapter');
+      const next = document.querySelector('#next-chapter');
+      let current = Math.max(0, chapters.findIndex(chapter => '#' + chapter.id === location.hash));
+      function renderReader() {
+        chapters.forEach((chapter, index) => { chapter.hidden = focusMode.checked && index !== current; });
+        links.forEach((link, index) => {
+          if (index === current) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        document.querySelector('#chapter-count').textContent = String(current + 1).padStart(2, '0') + ' / 07';
+        document.querySelector('#chapter-name').textContent = chapters[current].dataset.title;
+        previous.disabled = current === 0;
+        next.disabled = current === chapters.length - 1;
+        next.textContent = next.disabled ? '最後の章です' : '次：' + chapters[current + 1].dataset.title + ' →';
+      }
+      function goTo(index, moveFocus = true) {
+        current = Math.max(0, Math.min(chapters.length - 1, index));
+        renderReader();
+        try { history.replaceState(null, '', '#' + chapters[current].id); } catch (_) {}
+        if (moveFocus) chapters[current].focus({preventScroll:true});
+        chapters[current].scrollIntoView({behavior:'auto', block:'start'});
+      }
+      links.forEach((link, index) => link.addEventListener('click', event => { event.preventDefault(); goTo(index); }));
+      previous.addEventListener('click', () => goTo(current - 1));
+      next.addEventListener('click', () => goTo(current + 1));
+      focusMode.addEventListener('change', () => goTo(current));
+      document.querySelector('#text-size').addEventListener('change', event => document.body.classList.toggle('large-text', event.target.value === 'large'));
+      window.addEventListener('hashchange', () => { const index = chapters.findIndex(chapter => '#' + chapter.id === location.hash); if (index >= 0) goTo(index); });
+      let scheduled = false;
+      window.addEventListener('scroll', () => {
+        if (focusMode.checked || scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(() => {
+          let index = 0;
+          chapters.forEach((chapter, i) => { if (chapter.getBoundingClientRect().top <= 160) index = i; });
+          if (index !== current) { current = index; renderReader(); }
+          scheduled = false;
+        });
+      }, {passive:true});
+      renderReader();
+
+      const hintElements = [...document.querySelectorAll('[data-hint]')];
+      const hintButton = document.querySelector('#show-hint');
+      const answerButton = document.querySelector('#answer-demo');
+      const solutionButton = document.querySelector('#show-solution');
+      const solution = document.querySelector('#demo-solution');
+      const record = document.querySelector('#demo-record');
+      const choices = document.querySelector('#demo-choices');
+      let hintCount = 0;
+      let hintAtAnswer = 0;
+      let answered = false;
+      let answerViewed = false;
+      let outcome = '';
+      function updateRecord(message = '') {
+        const stage = answered ? hintAtAnswer : hintCount;
+        record.textContent = message || (outcome || (answerViewed ? '解答閲覧' : '未回答')) + ' · 回答前のヒント：' + stage + '段階';
+      }
+      function resetDemo() {
+        hintCount = 0; hintAtAnswer = 0; answered = false; answerViewed = false; outcome = '';
+        hintElements.forEach(hint => { hint.hidden = true; });
+        solution.hidden = true;
+        hintButton.disabled = false; hintButton.textContent = 'ヒントを1つ見る';
+        answerButton.disabled = false; choices.disabled = false;
+        solutionButton.disabled = false;
+        document.querySelectorAll('input[name="demo-answer"]').forEach(input => { input.checked = false; });
+        updateRecord();
+      }
+      hintButton.addEventListener('click', () => {
+        if (hintCount >= hintElements.length) return;
+        hintElements[hintCount].hidden = false;
+        hintCount += 1;
+        hintButton.disabled = hintCount === hintElements.length;
+        hintButton.textContent = hintButton.disabled ? 'ヒント3まで表示しました' : '次のヒントを見る';
+        updateRecord();
+      });
+      answerButton.addEventListener('click', () => {
+        const selected = document.querySelector('input[name="demo-answer"]:checked');
+        if (!selected) { updateRecord('答えを1つ選んでから「回答する」を押してください。'); return; }
+        answered = true; hintAtAnswer = hintCount;
+        outcome = answerViewed ? '解答閲覧' : selected.value !== '16' ? '不正解' : hintCount > 0 ? 'ヒント付き正解' : '自力正解';
+        solution.hidden = false; answerButton.disabled = true; choices.disabled = true; solutionButton.disabled = true;
+        updateRecord();
+      });
+      solutionButton.addEventListener('click', () => {
+        if (!answered) answerViewed = true;
+        solution.hidden = false; solutionButton.disabled = true; updateRecord();
+      });
+      document.querySelector('#reset-demo').addEventListener('click', resetDemo);
+      resetDemo();
+    })();
+  </script>
+</body>
+</html>
