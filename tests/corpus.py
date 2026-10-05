@@ -24,7 +24,7 @@ for q in bank:
   if src:assert (root/src).exists()
 for exam in by_key:
  assert sorted(q['number'] for q in bank if (q['year'],q['season'])==exam)==list(range(1,81))
-assert sum(q['enrichment']=='reviewed' for q in bank)==10
+assert sum(q['enrichment']=='reviewed' for q in bank)==87
 assert all(q['hintStatus']=='individual' for q in bank)
 # Every added hint has an explicit authoring record; repeated IDs are rejected.
 assigned={}
@@ -39,8 +39,21 @@ for file in (root/'data/hint-authoring').glob('*.txt'):
    assert id in ids and id not in assigned,(file,lineno,id)
    assigned[id]=(f'{file.name}:{lineno}',concept,content[:3],flags)
 assert len(assigned)==791
+lessons={}
+for file in (root/'data/lessons').glob('*.json'):
+ for lesson in json.loads(file.read_text()):
+  assert lesson['id'] in ids and lesson['id'] not in lessons
+  assert lesson['checkedAgainst']=='official-question-image-and-answer-key'
+  assert len(lesson['choiceReasons'])==4 and all(lesson['choiceReasons'])
+  assert len(lesson['hints'])==3 and all(len(h['text'])>=15 for h in lesson['hints'])
+  lessons[lesson['id']]=(f'lessons/{file.name}:{lesson["id"]}',lesson)
+assert set(lessons)=={f'r07h-q{n}' for n in range(1,81)}
 for q in bank:
- if q['id'] in assigned:
+ if q['id'] in lessons:
+  source,lesson=lessons[q['id']]
+  assert q['hintSource']==q['lessonSource']==source and q['enrichment']=='reviewed',q['id']
+  assert all(q[f]==lesson[f] for f in ['summary','explanation','choiceReasons','takeaway','hints']),q['id']
+ elif q['id'] in assigned:
   source,concept,texts,flags=assigned[q['id']]
   assert q['hintSource']==source and q['concept']==concept,q['id']
   assert [h['text'] for h in q['hints']]==texts,q['id']
@@ -50,4 +63,4 @@ for q in bank:
 assert next(q for q in bank if q['id']=='r05a-q18')['hints'][1]['revealsAnswer']
 assert bank[0]['id']=='r07h-q1' and bank[0]['answer']==3
 assert next(q for q in bank if q['id']=='r04h-q80')['answer']==3
-print('PASS 800 questions / official keys / 800 images / 800 individual three-step hints with authoring provenance / 10 individual explanations')
+print('PASS 800 questions / official keys / 800 images / hint and lesson provenance / 2025 spring 80 complete lessons / 87 individual explanations')

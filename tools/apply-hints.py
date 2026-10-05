@@ -1,4 +1,4 @@
-"""Apply explicitly authored three-step hints; keep the nine existing full lessons."""
+"""Apply explicit hints, then the reviewed explanation-and-hint lesson sources."""
 import json
 from pathlib import Path
 
@@ -39,9 +39,36 @@ def main():
             if q['enrichment'] != 'reviewed':
                 raise ValueError(f"Missing individual hints: {q['id']}")
             q.update(hintStatus='individual', hintSource='existing-reviewed')
+    # A complete lesson is the single source for both its explanation and hints.
+    # Apply it last so rebuilding the bank cannot restore older, separate hints.
+    lessons = set()
+    for file in sorted((ROOT / 'data/lessons').glob('*.json')):
+        for lesson in json.loads(file.read_text()):
+            id = lesson['id']
+            source = f'lessons/{file.name}:{id}'
+            if id not in by_id or id in lessons:
+                raise ValueError(f'{source}: unknown or duplicate lesson')
+            if lesson.get('checkedAgainst') != 'official-question-image-and-answer-key':
+                raise ValueError(f'{source}: source check missing')
+            fields = ['summary', 'explanation', 'takeaway']
+            if not all(isinstance(lesson.get(f), str) and lesson[f].strip() for f in fields):
+                raise ValueError(f'{source}: incomplete explanation')
+            reasons, hints = lesson.get('choiceReasons', []), lesson.get('hints', [])
+            if len(reasons) != 4 or not all(isinstance(r, str) and r.strip() for r in reasons):
+                raise ValueError(f'{source}: four choice reasons required')
+            if len(hints) != 3 or not all(
+                isinstance(h.get('text'), str) and h['text'].strip()
+                and isinstance(h.get('title'), str) and h['title'].strip()
+                and isinstance(h.get('revealsAnswer'), bool) for h in hints
+            ):
+                raise ValueError(f'{source}: invalid three-step hints')
+            lessons.add(id)
+            by_id[id].update({f: lesson[f] for f in [*fields, 'choiceReasons', 'hints']})
+            by_id[id].update(enrichment='reviewed', hintStatus='individual', hintSource=source,
+                             lessonSource=source)
     # Validate all records before writing, so a broken authoring file cannot erase the corpus.
     path.write_text(json.dumps(bank, ensure_ascii=False, indent=2) + '\n')
-    print(f'Individual hints: {len(bank)} questions; authored records: {len(assigned)}')
+    print(f'Individual hints: {len(bank)}; hint assignments: {len(assigned)}; complete lessons: {len(lessons)}')
 
 
 if __name__ == '__main__':
