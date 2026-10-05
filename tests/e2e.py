@@ -16,7 +16,7 @@ with sync_playwright() as p:
   page.locator(f'.quick-start [data-count="{n}"]').click()
   s=page.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',KEY)
   assert s['session']['goal']==n and s['session']['topic'] is None and len(s['session']['attemptIds'])==1
-  page.get_by_role('button',name='← 中断してホームへ').click()
+  page.get_by_role('button',name='中断').click()
  print('PASS 1, 3, and 5 questions start with one click',flush=True)
  page.locator('.sidebar [data-view=topics]').click();assert page.locator('.topic-card').count()==4
  security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True))
@@ -26,32 +26,32 @@ with sync_playwright() as p:
  assert '<script>alert(1)</script>' in page.locator('.reading-context').inner_text()
  page.get_by_role('radio').nth(2).check();page.get_by_role('button',name='ヒントを1つ見る').click();page.reload()
  page.locator('.reading-context').wait_for();assert page.get_by_role('radio').nth(2).is_checked();assert 'セキュリティのみ' in page.locator('.study-toolbar').inner_text()
- page.get_by_role('button',name='この答えで確認する').click();page.get_by_role('button',name='次の問題へ').click()
+ page.get_by_role('button',name='回答する').click();page.get_by_role('button',name='次の問題').click()
  assert page.get_by_role('heading',name='DNSの応答を確かめる',exact=True).count()==1
- page.get_by_role('radio').nth(0).check();page.get_by_role('button',name='この答えで確認する').click()
- assert '2問に取り組みました' in page.locator('.session-milestone').inner_text()
- page.get_by_role('button',name='同じ分野をもう一度').click()
+ page.get_by_role('radio').nth(0).check();page.get_by_role('button',name='回答する').click()
+ assert '2問の目安完了' in page.locator('.session-milestone').inner_text()
+ page.get_by_role('button',name='解き直す',exact=True).click()
  assert page.get_by_role('heading',name='DNSへの攻撃',exact=True).count()==1
- page.get_by_role('button',name='解答を見て学ぶ').click();page.get_by_role('button',name='同じ分野をもう一度').click()
+ page.get_by_role('button',name='解答を見る').click();page.get_by_role('button',name='解き直す',exact=True).click()
  assert page.get_by_role('heading',name='DNSの応答を確かめる',exact=True).count()==1
  assert page.locator('.question-meta .badge').first.inner_text()=='セキュリティ'
  s=page.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',KEY)
  assert all(a['questionId'] in ['r06h-q36','r06h-q37'] for a in s['attempts'] if a.get('topic'))
  print('PASS textbook range note, scoped question sequence, reload, and scoped repeat',flush=True)
- page.get_by_role('button',name='← 中断してホームへ').click();assert page.get_by_role('heading',name='今日の一歩、達成。').count()==1
+ page.get_by_role('button',name='中断').click();assert page.locator('.motivation-panel .badge.good').count()==1
  page.locator('.quick-start [data-count="5"]').click();s=page.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',KEY)
  assert s['session']['topic'] is None
  print('PASS all-topic practice clears scope; today reward includes assisted practice',flush=True)
  page.locator('.sidebar [data-view=materials]').click();page.locator('[data-action=start][data-id=r06h-q10]').click()
- page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='この答えで確認する').click()
+ page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='回答する').click()
  page.locator('.sidebar [data-view=materials]').click();page.locator('[data-action=start][data-id=r06h-q10]').click()
- page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='この答えで確認する').click()
- assert '今回はヒントなし' in page.locator('.result .progress-feedback').inner_text()
+ page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='回答する').click()
+ assert 'ヒントなしで正解' in page.locator('.result .progress-feedback').inner_text()
  page.locator('.sidebar [data-view=materials]').click();page.locator('[data-action=start][data-id=r06h-q1]').click()
- page.get_by_role('radio').nth(0).check();page.get_by_role('button',name='この答えで確認する').click()
+ page.get_by_role('radio').nth(0).check();page.get_by_role('button',name='回答する').click()
  page.locator('.sidebar [data-view=materials]').click();page.locator('[data-action=start][data-id=r06h-q1]').click()
- page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='この答えで確認する').click()
- assert '前回の不正解から' in page.locator('.result .progress-feedback').inner_text()
+ page.get_by_role('radio').nth(3).check();page.get_by_role('button',name='回答する').click()
+ assert '不正解 → 自力で正解' in page.locator('.result .progress-feedback').inner_text()
  page.locator('.sidebar [data-view=home]').click();page.locator('.achievements summary').click()
  assert '解き直して正解' in page.locator('.achievement-list').inner_text()
  print('PASS hint reduction, recovery feedback, and earned achievements',flush=True)
