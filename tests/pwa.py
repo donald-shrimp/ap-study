@@ -64,13 +64,25 @@ with sync_playwright() as p:
  page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.locator('#offline-status').is_visible()
  page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='再開する',exact=True).click();assert state()['currentId']==attempt
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
+ # Navigating during the debounced scroll save must preserve the study position.
+ page.evaluate('window.scrollTo(0,400)')
+ page.wait_for_function('(key)=>{const s=JSON.parse(localStorage.getItem(key));return s.attempts.find(a=>a.id===s.currentId).scrollY===window.scrollY}',arg=KEY)
+ assert state()['attempts'][-1]['scrollY']>0
+ page.evaluate('()=>{window.dispatchEvent(new Event("scroll"));document.querySelector(".sidebar [data-view=materials]").click()}')
+ before=state();page.wait_for_timeout(300);assert state()==before,'Leaving study overwrote its saved scroll position'
  # A missing image does not create an unreadable attempt or destroy the paused one.
- choose_q('r07h-q2');before=state();page.locator('[data-action=start][data-id=r07h-q2]').click();assert state()==before and '保存されていません' in page.locator('#notice').inner_text()
+ choose_q('r07h-q2');before=state();page.locator('[data-action=start][data-id=r07h-q2]').click();after=state()
+ if after!=before:
+  changed={key:[before.get(key),after.get(key)] for key in before if before.get(key)!=after.get(key)}
+  if 'attempts' in changed:
+   changed['attempts']=[{key:[old.get(key),new.get(key)] for key in old if old.get(key)!=new.get(key)} for old,new in zip(before['attempts'],after['attempts'])]
+  raise AssertionError(f'Offline guard changed record: {changed}')
+ assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
  nav('home');page.locator('.quick-start [data-count="1"]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0
  page.screenshot(path=str(ARTIFACTS/'offline-mobile.png'),full_page=True)
- print('PASS visible pause control / offline reload / images / selection and hint resume / cached-only picking / missing-image guard',flush=True)
+ print('PASS visible pause control / offline reload / images / selection and hint resume / scroll preserved on navigation / cached-only picking / missing-image guard',flush=True)
  ctx.set_offline(False);page.reload();page.get_by_role('radio').first.wait_for();page.wait_for_function('navigator.onLine');open_q('r07h-q1');page.locator('.source-question img').evaluate('(img)=>img.decode()')
  page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(2).check();before=state()
  if not os.environ.get('AP_STUDY_PWA_URL'):

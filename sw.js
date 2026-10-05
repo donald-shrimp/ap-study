@@ -1,5 +1,5 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261006-lessons1';
+const RELEASE = '20261006-lessons2';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;

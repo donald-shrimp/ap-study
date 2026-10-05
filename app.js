@@ -327,12 +327,12 @@ $('#close-editor').addEventListener('click',()=>$('#editor-dialog').close());
 $('#editor-form').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const q=question(editId);const changes={enrichment:'personal',hintStatus:'individual',hints:q.hints.map((h,i)=>({...h,text:String(f.get(`hint${i}`)).trim(),revealsAnswer:f.has(`reveal${i}`)})),revision:now()};for(const k of ['summary','explanation','takeaway'])changes[k]=String(f.get(k)).trim();if(changes.hints.some(h=>!h.text)||['summary','explanation','takeaway'].some(k=>!changes[k])){alert('空欄を埋めてから保存してください。');return;}state.overrides[editId]=changes;save();$('#editor-dialog').close();render(false);});
 $('#reset-material').addEventListener('click',()=>{if(!confirm('この問題のヒントと解説を、初期教材に戻しますか？'))return;delete state.overrides[editId];save();$('#editor-dialog').close();render(false);});
 let scrollTimer;
-window.addEventListener('scroll',()=>{if(state.view!=='study')return;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{const a=current();if(a){a.scrollY=window.scrollY;save();}},200);},{passive:true});
+window.addEventListener('scroll',()=>{if(state.view!=='study')return;clearTimeout(scrollTimer);const attemptId=state.currentId;scrollTimer=setTimeout(()=>{if(state.view!=='study'||state.currentId!==attemptId)return;const a=current();if(a){a.scrollY=window.scrollY;save();}},200);},{passive:true});
 function saveScroll(){if(state.view==='study'&&current()){current().scrollY=window.scrollY;save();}}
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 try {
-  const response=await fetch('data/questions.json?v=20261006-lessons1', {cache:'no-cache'});if(!response.ok)throw new Error('問題データを読み込めませんでした。');online=navigator.onLine && response.headers.get('X-Hitomon-Offline')!=='1';base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
+  const response=await fetch('data/questions.json?v=20261006-lessons2', {cache:'no-cache'});if(!response.ok)throw new Error('問題データを読み込めませんでした。');online=navigator.onLine && response.headers.get('X-Hitomon-Offline')!=='1';base=await response.json();questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=localStorage.getItem(STORAGE);if(raw){try{state=validateState(JSON.parse(raw));}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
