@@ -71,7 +71,7 @@ function homeHTML() {
   const paused=state.attempts.filter(a=>!complete(a)).at(-1);
   const reviews=reviewQuestions();
   return `${paused?`<section class="resume-panel"><div><h2>中断中</h2><p>${esc(question(paused.questionId).title)} · ヒント ${paused.hintCount}/3</p></div><button class="button primary" data-action="resume" data-id="${paused.id}">再開する</button></section>`:''}
-  <section class="panel quick-start-panel"><h1>問題を解く</h1><div class="quick-start" aria-label="全分野の学習を開始">${[1,3,5].map(n=>`<button class="session-button ${n===1?'recommended':''}" data-action="start-session" data-count="${n}" aria-label="全分野から${n}問を開始">${n}問</button>`).join('')}</div><button class="button secondary topic-entry" data-view="topics">分野別に解く</button></section>
+  <section class="panel quick-start-panel hero-start"><h1>今日は、どれくらいやろう？</h1><p class="start-note">押すだけで始まります。</p><div class="quick-start" aria-label="全分野の学習を開始">${[1,3,5].map(n=>`<button class="session-button ${n===1?'recommended':''}" data-action="start-session" data-count="${n}" aria-label="全分野から${n}問を開始"><span>${n}<small>問</small></span><small>${n===1?'まずひとつ':n===3?'少し進める':'まとめて'}</small></button>`).join('')}</div><button class="button secondary topic-entry" data-view="topics">分野別に解く</button></section>
   ${motivationHTML()}
   <section class="panel"><div class="heading-row"><h2>解き直し <span class="badge">${reviews.length}問</span></h2><button class="button quiet" data-view="review">一覧</button></div>${reviews.length?reviews.slice(0,2).map(({q,info})=>rowHTML(q,info,'start','解き直す')).join(''):'<p class="empty">復習候補はありません。</p>'}</section>`;
 }
