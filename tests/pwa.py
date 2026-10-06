@@ -8,7 +8,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import state as stored_state, READ_STATE
+from browser_storage import state as stored_state, READ_STATE,wait_for_async
 ROOT=Path(__file__).resolve().parents[1]
 RELEASE=(ROOT/'sw.js').read_text().split("const RELEASE = '",1)[1].split("'",1)[0]
 NEXT_RELEASE=RELEASE+'-test2'
@@ -66,7 +66,7 @@ with sync_playwright() as p:
  installability=cdp.send('Page.getInstallabilityErrors');assert not installability['installabilityErrors'],installability
  print('PASS manifest / project-specific app identity / 192 and 512px icons / maskable / subdirectory scope',flush=True)
  open_q('r07h-q1');page.locator('.source-question img').evaluate('(img)=>img.decode()')
- page.wait_for_function('async()=>!!(await caches.match(new URL("assets/questions/r07h/r07h-q1.webp",document.baseURI)))')
+ wait_for_async(page,'async()=>!!(await caches.match(new URL("assets/questions/r07h/r07h-q1.webp",document.baseURI)))')
  page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(3).check();attempt=state()['currentId']
  pause=page.get_by_role('button',name='中断',exact=True)
  appearance=pause.evaluate('(el)=>{const s=getComputedStyle(el);return {border:s.borderTopStyle,color:s.borderTopColor,bg:s.backgroundColor,h:el.offsetHeight}}')
@@ -81,7 +81,7 @@ with sync_playwright() as p:
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
  # Navigating during the debounced scroll save must preserve the study position.
  page.evaluate('window.scrollTo(0,400)')
- page.wait_for_function('async()=>{const s=await ('+READ_STATE+')();return window.scrollY>0&&s.attempts.find(a=>a.id===s.currentId).scrollY===window.scrollY;}')
+ wait_for_async(page,'async()=>{const s=await ('+READ_STATE+')();return window.scrollY>0&&s.attempts.find(a=>a.id===s.currentId).scrollY===window.scrollY;}')
  assert state()['attempts'][-1]['scrollY']>0
  page.evaluate('()=>{window.dispatchEvent(new Event("scroll"));document.querySelector(".sidebar [data-view=materials]").click()}')
  before=state();page.wait_for_timeout(300);assert state()==before,'Leaving study overwrote its saved scroll position'
@@ -106,11 +106,13 @@ with sync_playwright() as p:
   server.upgraded=True
   updated=page.evaluate('async()=>{const url=new URL("data/qualifications/ap/manifest.json",document.baseURI);const m=await(await fetch(url)).json();return await(await fetch(new URL(m.packs[0].url,url))).json();}');assert '更新確認' in updated[0]['summary']
   page.evaluate('async()=>{const r=await navigator.serviceWorker.ready;await r.update()}')
-  page.wait_for_function('async()=>!!(await navigator.serviceWorker.getRegistration()).waiting')
+  wait_for_async(page,'async()=>!!(await navigator.serviceWorker.getRegistration()).waiting')
   # No automatic reload should interrupt an in-progress answer.
   assert state()['currentId']==before['currentId'] and page.get_by_role('radio').nth(2).is_checked()
-  page.get_by_role('button',name='表示・データ',exact=True).click();page.locator('#update-app').wait_for(state='visible');page.locator('#update-app').click()
-  page.locator('.hint-box').wait_for();page.wait_for_function('async()=>!(await navigator.serviceWorker.getRegistration()).waiting')
+  page.get_by_role('button',name='表示・データ',exact=True).click();page.locator('#update-app').wait_for(state='visible')
+  with page.expect_navigation(wait_until='load'):
+   page.locator('#update-app').click()
+  page.locator('.hint-box').wait_for();wait_for_async(page,'async()=>!(await navigator.serviceWorker.getRegistration()).waiting')
   assert state()['currentId']==before['currentId'] and page.get_by_role('radio').nth(2).is_checked() and page.locator('.hint-box').count()==1
   names=page.evaluate('async()=>await caches.keys()');assert 'other-app-test' in names and any(name.endswith('shell-'+NEXT_RELEASE) for name in names)
   assert not any(name.endswith('shell-'+RELEASE) for name in names)

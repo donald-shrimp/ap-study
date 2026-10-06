@@ -9,6 +9,7 @@ import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
+from browser_storage import wait_for_async
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('builder', ROOT/'tools/build-content.py')
@@ -92,7 +93,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             fresh=browser.new_context();direct=fresh.new_page();direct.goto(url+'fixture-b/');direct.locator('.quick-start').wait_for()
             direct.locator('.quick-start [data-count="1"]').click();direct.get_by_role('radio').last.wait_for()
             direct.evaluate('navigator.serviceWorker.ready.then(()=>true)');direct.wait_for_function('!!navigator.serviceWorker.controller')
-            direct.wait_for_function('async()=>!!(await caches.match(new URL("index.html",location.href)))')
+            wait_for_async(direct,'async()=>!!(await caches.match(new URL("index.html",location.href)))')
             fresh.set_offline(True);direct.reload();direct.get_by_role('radio').last.wait_for();assert direct.get_by_role('radio').count()==5
             fresh.close()
             browser.close()
