@@ -1,12 +1,12 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261006-lessons3';
+const RELEASE = '20261006-pwa-id1';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;
 const IMAGE_CACHE = `${PREFIX}images`;
 const CORE = [
   'index.html', `app.js?v=${RELEASE}`, `styles.css?v=${RELEASE}`, 'pwa.js',
-  `data/questions.json?v=${RELEASE}`, 'manifest.webmanifest',
+  `data/questions.json?v=${RELEASE}`, `manifest.webmanifest?v=${RELEASE}`,
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png', 'assets/icons/apple-touch-icon.png'
 ];
 const CORE_PATHS = new Set(CORE.map(path => new URL(path, ROOT).pathname));

@@ -43,13 +43,18 @@ with sync_playwright() as p:
  page.goto(URL);page.locator('.quick-start').wait_for();page.evaluate('async()=>{await navigator.serviceWorker.ready}');page.wait_for_function('!!navigator.serviceWorker.controller')
  cdp=ctx.new_cdp_session(page);manifest=cdp.send('Page.getAppManifest');assert not manifest['errors'],manifest
  data=json.loads(manifest['data']);assert data['display']=='standalone' and data['name']=='ひと問'
+ # Unlike start_url, id is resolved against the origin, not the manifest URL.
+ # "./" silently identifies the entire github.io host, not this Pages project.
+ identity=cdp.send('Page.getAppId')
+ expected_id=page.evaluate('new URL("./",document.baseURI).href')
+ assert identity['appId']==expected_id,(identity,expected_id)
  assert {x['sizes'] for x in data['icons']}=={'192x192','512x512'} and 'maskable' in data['icons'][1]['purpose']
  assert page.evaluate('navigator.serviceWorker.controller.scriptURL').endswith('/ap-study/sw.js')
  assert page.evaluate('async()=>{const r=await navigator.serviceWorker.ready;return r.scope}').endswith('/ap-study/')
  for icon in data['icons']:
   dimensions=page.evaluate('async path=>{const i=new Image();i.src=new URL(path,document.baseURI);await i.decode();return `${i.naturalWidth}x${i.naturalHeight}`}',icon['src']);assert dimensions==icon['sizes']
  installability=cdp.send('Page.getInstallabilityErrors');assert not installability['installabilityErrors'],installability
- print('PASS manifest / 192 and 512px icons / maskable / subdirectory scope',flush=True)
+ print('PASS manifest / project-specific app identity / 192 and 512px icons / maskable / subdirectory scope',flush=True)
  open_q('r07h-q1');page.locator('.source-question img').evaluate('(img)=>img.decode()')
  page.wait_for_function('async()=>!!(await caches.match(new URL("assets/questions/r07h/r07h-q1.webp",document.baseURI)))')
  page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(3).check();attempt=state()['currentId']

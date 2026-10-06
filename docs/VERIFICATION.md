@@ -92,3 +92,11 @@ python tools/rebuild-images.py --pdf-dir /path/to/official-pdfs --verify
 - `tests/e2e.py` で従来の学習・編集・バックアップ・スマホ拡大表示も確認。
 
 オフライン利用は一度オンラインで開いたアプリと保存した問題が対象です。OSのホーム画面への追加操作そのものは、使用する端末で行います。
+
+## Androidインストール不具合の調査（2026-10-06）
+
+ユーザーのAndroid Chromeでは、Squooshはインストールできる一方、ひと問は「インストールできません」となる報告があります。PC版Chromiumでインストール条件・beforeinstallprompt・ボタン表示・オフライン動作が通ることと、AndroidでのWebAPK生成・導入成功は別として扱います。Android実機のインストール成功は未確認です。
+
+公開版のマニフェストをChrome DevTools Protocolで解析すると、`id: "./"` が `https://donald-shrimp.github.io/` として解決されていました。起動先・スコープは `/ap-study/` でしたが、アプリ識別子がホスト全体になっています。`id: "/ap-study/"` へ修正し、実際にChromeが解決したIDを `tests/pwa.py` で確認します。マニフェストURLとサービスワーカーのリビジョンも更新して古い定義の再利用を避けます。この設定ミスの修正がAndroid側のエラーを解消するかは、公開後の実機再試行で確認が必要です。
+
+参照：[W3C Web Application Manifest — id](https://www.w3.org/TR/appmanifest/#id-member)。

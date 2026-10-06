@@ -42,7 +42,7 @@ Android・Chrome等では「表示・データ」にインストールボタン�
 
 通信できるときは公開教材を取得して保存し、オフラインでは保存済みの教材を使います。アプリ本体の更新が準備できた場合は「表示・データ」に「更新して再読み込み」を表示し、学習中には自動再読み込みしません。学習記録はlocalStorage、公開教材の一時保存はCache Storageと分けています。端末間同期はありません。別のブラウザや保存領域が別のホーム画面アプリへ記録を移す場合は、学習記録の書き出し・読み込みを使ってください。
 
-`manifest.webmanifest` の起動先・スコープ・画像は相対パスなので、GitHub Pagesの `/ap-study/` でも動作します。アプリ本体を変更する際は `sw.js` の `RELEASE` と、`index.html` のJS/CSS、`app.js` の問題データURLのリビジョンをそろえて更新してください。アイコンは `python tools/generate-icons.py` で再生成できます（開発時のみPillowが必要）。
+`manifest.webmanifest` の起動先・スコープ・画像は相対パスなので、GitHub Pagesの `/ap-study/` でも動作します。 アプリIDは `/ap-study/` で固定します。`id` は起動先やマニフェストのディレクトリではなくオリジン基準で解決されるため、`./` を使うと同じホストの別プロジェクトと識別子が衝突します。アプリ本体を変更する際は `sw.js` の `RELEASE` と、`index.html` のJS/CSS、`app.js` の問題データURL、マニフェストURLのリビジョンをそろえて更新してください。アイコンは `python tools/generate-icons.py` で再生成できます（開発時のみPillowが必要）。
 
 ```sh
 python tests/pwa.py
