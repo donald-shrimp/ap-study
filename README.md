@@ -107,6 +107,7 @@ python tests/lesson-integration-r03h.py
 
 - [要件定義](docs/requirements.md)
 - [読みやすいHTML定義書](docs/requirements.html)
+- [複数資格・Firebase同期の計画](docs/architecture-plan.html)（未実装。[設計の詳細](docs/architecture-plan.md)）
 - [学習設計](docs/learning-design.md)
 - [調査ノート](docs/research-notes.md)
 - [教材の出典・利用条件](docs/SOURCES.md)

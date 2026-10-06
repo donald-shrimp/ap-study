@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ひと問｜複数資格と同期の計画</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#172a3b;background:#f4f6f8;font-size:16px;line-height:1.8;--line:#d4dce3;--accent:#142d4e}
+    *{box-sizing:border-box}body{margin:0}a{color:#155f6c;overflow-wrap:anywhere}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #157888;outline-offset:4px}
+    .shell{max-width:56rem;margin:auto;padding:1.5rem 1rem}header p{margin:.5rem 0}.meta{font-size:.875rem;color:#536579}h1{font-size:clamp(1.5rem,4vw,2rem);line-height:1.5;margin:.75rem 0}h2{font-size:1.3rem;line-height:1.6;margin:0 0 .75rem}h3{font-size:1.05rem;margin:1rem 0 .25rem}p{margin:.75rem 0}strong{font-weight:700}
+    .summary{background:var(--accent);color:white;border-radius:.75rem;padding:1rem 1.25rem;margin:1rem 0}.summary p{margin:.5rem 0}nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}nav a,.button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem .875rem;border:1px solid var(--line);border-radius:.5rem;background:white;color:#172a3b;text-decoration:none;white-space:normal}
+    .controls{display:none;flex-wrap:wrap;gap:.75rem 1.5rem;padding:1rem;background:white;border:1px solid var(--line);border-radius:.5rem}.js .controls{display:flex}.controls label{display:flex;gap:.5rem;align-items:center;min-height:44px}.controls input{width:1.15rem;height:1.15rem;accent-color:#155f6c}
+    section{padding:1.25rem;margin:1.25rem 0;background:white;border:1px solid var(--line);border-radius:.75rem;scroll-margin-top:1rem;min-width:0}.number{font-size:.875rem;color:#536579;margin:0 0 .25rem}ul,ol{padding-left:1.5rem}li{margin:.6rem 0}.note{border-left:3px solid #157888;padding:.25rem 0 .25rem .875rem;background:#f3faf9}.layers{display:grid;gap:.5rem;margin:1rem 0}.layer{border:1px solid var(--line);padding:.75rem;border-radius:.5rem;text-align:center}.layer small{display:block;font-size:.875rem;color:#536579}.arrow{text-align:center;color:#536579}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}.box{background:#f4f6f8;padding:.875rem;border-radius:.5rem;min-width:0}.box p{margin:.25rem 0}.box code{overflow-wrap:anywhere}
+    details{border-top:1px solid var(--line);margin-top:1rem;padding-top:.75rem}summary{cursor:pointer;min-height:44px;padding:.25rem 0;font-weight:650}code{font-family:ui-monospace,monospace;font-size:.9em}pre{max-width:100%;overflow:auto;padding:1rem;background:#f4f6f8;border-radius:.5rem;font-size:.875rem;line-height:1.7}.step{border-left:3px solid #157888;padding-left:1rem;margin:1.25rem 0}.step p{margin:.25rem 0}.criteria{font-size:.95rem;color:#43566b}.reader{display:none;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap}.js .reader{display:flex}footer{padding:1rem 0;font-size:.875rem;color:#536579}[hidden]{display:none!important}html.large{font-size:20px}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.75rem;z-index:1}
+    @media(max-width:38rem){.two{grid-template-columns:1fr}.shell{padding:1rem}.summary,section{padding:1rem}}@media print{.controls,nav,.reader,.skip{display:none!important}body{background:white}.shell{max-width:none}section,section[hidden]{display:block!important;break-inside:avoid}details>*{display:block!important}.summary{background:white;color:#172a3b;border:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ</a>
+  <div class="shell">
+    <header>
+      <p class="meta">ひと問 · 2026-10-06 · 計画／未実装</p>
+      <h1>資格を増やし、学習記録を同期する</h1>
+      <p>資格ごとにページを分け、使える部品とアカウントを共有します。</p>
+      <div class="summary"><strong>進める順番</strong><p>共通部品を整理 → 資格・教材・端末保存を分離 → Googleログインと同期 → 次の資格を公開</p></div>
+      <p class="meta">今の応用情報は800問、個別解説722問。今回作成したのは計画書です。</p>
+    </header>
+    <div class="controls" aria-label="読み方">
+      <label><input id="focus-mode" type="checkbox">1章ずつ読む</label>
+      <label><input id="large-text" type="checkbox">文字を大きくする</label>
+    </div>
+    <nav aria-label="計画の目次">
+      <a href="#structure">1 構成</a><a href="#content">2 増やし方</a><a href="#sync">3 同期</a><a href="#steps">4 実装順</a>
+    </nav>
+    <main id="main">
+      <section id="structure" tabindex="-1" data-title="構成">
+        <p class="number">1 / 構成</p><h2>ページは資格別。部品は共通。</h2>
+        <div class="layers" aria-label="アプリの構成">
+          <div class="layer">ひと問の共通入口<small>資格を選ぶ。最近使った資格へ戻る。</small></div>
+          <div class="arrow" aria-hidden="true">↓</div>
+          <div class="two"><div class="layer">応用情報のページ<small>応用情報の教材と分野</small></div><div class="layer">追加資格のページ<small>その資格の教材と分野</small></div></div>
+          <div class="arrow" aria-hidden="true">↓ 共通で使う</div>
+          <div class="layer">学習画面・ヒント・採点・復習・保存<small>ボタンや操作を資格ごとに作り直さない。</small></div>
+          <div class="arrow" aria-hidden="true">↓</div>
+          <div class="two"><div class="layer">端末へすぐ保存<small>オフラインでも使える。</small></div><div class="layer">Firebaseへ同期<small>ログインすると他の端末へ。</small></div></div>
+        </div>
+        <p>今の1・3・5問の開始、中断／ホーム、段階ヒント、回答の下の正解表示を共通部品にします。資格によって変わるのは、名前・分野・教材・出題回の表示です。</p>
+        <p class="note">応用情報しか公開していない間は、資格選択を毎回挟まず、すぐ学習を始められる入口にします。</p>
+        <details><summary>URLとPWAの扱い</summary><p>公開先は今のGitHub Pages。資格ページは <code>/ap-study/ap/</code>、追加資格は <code>/ap-study/資格ID/</code> を想定します。ページを実ファイルとして置くので、直接開いて再読み込みできます。</p><p>PWAは「ひと問」1つ。IDとスコープ <code>/ap-study/</code> を維持し、使った資格・教材・画像だけを追加保存します。</p></details>
+        <details><summary>今のコードから変える場所</summary><p><code>app.js</code>にまとまっている画面・採点・復習・保存を分けます。1つの応用情報JSONから、資格別の教材一覧と教材パックへ分けます。春秋・4択・80問という固定条件は、応用情報の設定と取込処理に寄せます。</p><p>フレームワーク導入を前提にせず、既存のJavaScriptモジュールとPythonツールを使います。</p></details>
+      </section>
+      <section id="content" tabindex="-1" data-title="増やし方">
+        <p class="number">2 / 増やし方</p><h2>資格と問題を、データで追加する。</h2>
+        <div class="two">
+          <div class="box"><strong>資格を増やす</strong><p>資格ID・名前・分野を登録し、最初の教材パックを用意します。同じ選択式なら共通画面を使えます。</p></div>
+          <div class="box"><strong>問題を増やす</strong><p>その資格へ教材パックを追加します。件数・年度・分野の一覧はデータから生成します。</p></div>
+        </div>
+        <ol>
+          <li>原本と正答を確認し、問題・図・選択肢を用意する。</li>
+          <li>解答解説、各選択肢の理由、問題固有のヒントをセットで作る。</li>
+          <li>別の確認担当が原本から解き直し、修正後の教材まで確認する。</li>
+          <li>出典・ID・正答・画像・確認記録を検証し、公開用データを生成する。</li>
+          <li>スマホ表示・中断再開・オフライン・同期を確認して公開する。</li>
+        </ol>
+        <p class="note">共通部分は「1回80問」「春と秋」「4択」に固定しません。最初は単一選択に対応し、別の問題形式は実際に必要になったときに追加します。</p>
+        <details><summary>問題や分野が混ざらない仕組み</summary><p>問題は「資格ID＋問題ID」、分野は「資格ID＋分野ID」で区別します。応用情報の既存IDは活用できます。他資格に同じ問題番号や分野名があっても、履歴とメモが混ざりません。</p><p>問題の内容を訂正しても、過去の回答を新しい正答で採点し直しません。記録時点の教材と採点情報を残します。</p></details>
+        <details><summary>教材が増えたときの読み込み</summary><p>資格ごとに軽い教材一覧を取得し、選んだ問題の教材パックを読みます。他資格の全問題や全画像を初回にまとめてダウンロードしません。</p><p>出典・問題画像・教材はGitHub Pagesに置き、Firebaseには学習記録を保存します。</p></details>
+      </section>
+      <section id="sync" tabindex="-1" data-title="同期">
+        <p class="number">3 / 同期</p><h2>ログインすると、別端末で続きから。</h2>
+        <ol>
+          <li>ログインなしでも、端末内に保存して勉強できます。</li>
+          <li>Googleログインすると、同じアカウントの記録へ接続します。</li>
+          <li>最初は回答履歴・ヒント閲覧・中断状態を同期します。</li>
+          <li>オフラインの記録は送信待ちに残し、つながったら再送します。</li>
+        </ol>
+        <p>表示は「この端末に保存済み」「同期中」「同期済み」「同期を保留」を区別します。同期が失敗しても端末内の学習を続けられます。</p>
+        <p class="note">スマホとPCで同じ問題を解いても、片方の回答を消しません。解いた記録ごとに保存します。</p>
+        <details><summary>同時利用と再開のルール</summary><p>別端末で中断状態を再開するときは、ヒントや回答候補を引き継いだ継続記録を作ります。元の記録とつなげ、未回答の元記録を完了件数へ二重に数えません。</p><p>同時に2端末で続けたら、両方の回答を残します。再送は同じIDを使い、記録を重複させません。更新が届いても、現在解いている画面を勝手に切り替えません。</p></details>
+        <details><summary>無料枠と費用</summary><p>FirebaseのSparkプランから始めます。支払い情報は不要。2026-10-06の公式情報では、Firestore Standardは保存1GiB、読取5万件／日、書込2万件／日が無料枠です。</p><p>スクロールのたびに通信せず、変更をまとめて送ります。全履歴の常時購読も避け、実際の利用量を確認します。読書メモ・自作教材・設定の同期は後の工程です。</p><p><a href="https://firebase.google.com/pricing">Firebase公式料金</a></p></details>
+        <details><summary>アカウントと保存の安全性</summary><p>記録は利用者と資格ごとに分けます。Googleアカウントを切り替えても前の人の記録を表示・送信せず、サーバー側でも本人だけが読み書きできるよう制限します。</p><p>初回ログイン時、ログイン前の記録をそのアカウントへ追加するか選べます。PC・Android Chrome・インストール済みPWAでログインの往復を確認します。</p></details>
+      </section>
+      <section id="steps" tabindex="-1" data-title="実装順">
+        <p class="number">4 / 実装順</p><h2>小さく分けて、動く状態を確かめる。</h2>
+        <div class="step"><strong>1. 共通部品を切り出す</strong><p>画面・学習処理・教材・保存を分ける。</p><p class="criteria">完了条件：今の応用情報が同じ操作で使え、800問・722解説とPWAが保たれる。</p></div>
+        <div class="step"><strong>2. 資格と教材を分ける</strong><p>資格ID、教材パック、資格ページを用意する。</p><p class="criteria">完了条件：テスト用の別資格と追加パックが共通コードの変更なしで動く。直リンク・オフラインも使える。</p></div>
+        <div class="step"><strong>3. 端末保存を整える</strong><p>利用者・資格ごとの保存と、未同期の送信待ちを作る。</p><p class="criteria">完了条件：オフラインと複数タブでも履歴を失わず、中断・再開・書き出しが使える。</p></div>
+        <div class="step"><strong>4. Googleログインと同期</strong><p>Firebaseの認証、本人だけのアクセス制御、送受信を組み込む。</p><p class="criteria">完了条件：2ブラウザで同期・再開でき、オフライン再送、同時利用、アカウント切替を確認できる。</p></div>
+        <div class="step"><strong>5. 次の資格を公開</strong><p>実際の出典と、少量の確認済み教材から始める。</p><p class="criteria">完了条件：資格一覧への登録と教材追加で使え、応用情報に影響しない。</p></div>
+        <p class="note">次に着手するのは1。構造の確認用の架空問題を本番教材として公開せず、2つ目の実資格は対象が決まったら追加します。</p>
+        <details><summary>保存形式の変更と、残すもの</summary><p>旧形式の互換レイヤーや自動移行は作りません。形式を切り替える前に現在の記録を書き出して保管し、黙って消去・上書きしません。</p><p>完成済みの教材、個別ヒント、独立検算、確認記録を維持します。未完成の78解説は完成扱いにしません。</p></details>
+      </section>
+    </main>
+    <div class="reader" aria-label="章の移動"><button class="button" id="previous" type="button">前の章</button><span id="chapter-status" role="status">1 / 4 · 構成</span><button class="button" id="next" type="button">次の章</button></div>
+    <footer><p><a href="architecture-plan.md">設計・データ・検証の詳細を読む</a> · <a href="requirements.html">現在の定義書</a> · <a href="../index.html">ひと問を開く</a></p><p>Firebase接続と構造変更は未実装。現行アプリは端末内保存です。</p></footer>
+  </div>
+  <script>
+    document.documentElement.classList.add('js');
+    const chapters=[...document.querySelectorAll('main section')],focus=document.querySelector('#focus-mode');let position=0;
+    function show(move=false){chapters.forEach((section,index)=>{section.hidden=focus.checked&&index!==position;});document.querySelector('#chapter-status').textContent=`${position+1} / ${chapters.length} · ${chapters[position].dataset.title}`;document.querySelector('#previous').disabled=position===0;document.querySelector('#next').disabled=position===chapters.length-1;if(move){chapters[position].focus({preventScroll:true});chapters[position].scrollIntoView({block:'start'});}}
+    document.querySelectorAll('nav a').forEach(link=>link.addEventListener('click',()=>{position=chapters.findIndex(section=>'#'+section.id===link.hash);show();}));
+    focus.addEventListener('change',()=>show(true));document.querySelector('#large-text').addEventListener('change',event=>document.documentElement.classList.toggle('large',event.target.checked));
+    document.querySelector('#previous').addEventListener('click',()=>{position=Math.max(0,position-1);show(true);});document.querySelector('#next').addEventListener('click',()=>{position=Math.min(chapters.length-1,position+1);show(true);});
+    const initial=chapters.findIndex(section=>'#'+section.id===location.hash);if(initial>=0)position=initial;show();
+  </script>
+</body>
+</html>
