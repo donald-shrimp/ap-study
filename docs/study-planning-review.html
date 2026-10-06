@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ひと問｜開始ボタン・診断・学習計画の設計案</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;font-size:16px;line-height:1.85;color:#20313e;background:#f5f6f8;--ink:#132b42;--muted:#536674;--line:#d8e0e6;--accent:#16635c;--soft:#edf6f3}
+    *{box-sizing:border-box}body{margin:0}a{color:#135d70;text-underline-offset:.2em;overflow-wrap:anywhere}button,input{font:inherit}button,summary{cursor:pointer}button:disabled{cursor:default;opacity:.5}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #128477;outline-offset:4px}p,ul,ol{margin:.6rem 0 1rem}li+li{margin-top:.4rem}ul,ol{padding-left:1.4rem}strong{font-weight:720}h1,h2,h3{line-height:1.5;color:var(--ink)}h1{font-size:clamp(1.6rem,5vw,2.2rem);margin:.6rem 0}h2{font-size:1.35rem;margin:.25rem 0 1rem}h3{font-size:1.06rem;margin:1.4rem 0 .5rem}
+    .shell{max-width:56rem;margin:auto;padding:1.8rem 1.25rem}.eyebrow,.meta,.small{font-size:.875rem;color:var(--muted)}.eyebrow{margin:0}.status{display:inline-block;border:1px solid var(--line);border-radius:2rem;padding:.15rem .65rem;background:white}.lead{font-size:1.05rem}.brief{background:var(--ink);color:white;padding:1.2rem 1.4rem;border-radius:1rem;margin:1.25rem 0}.brief h2{color:white;font-size:1.15rem;margin:0 0 .75rem}.brief p{margin:.35rem 0}.brief a{color:#c4efe6}
+    .controls{display:none;gap:.65rem 1.2rem;flex-wrap:wrap;margin:1.4rem 0 .6rem}.js .controls{display:flex}.controls label{display:flex;gap:.45rem;align-items:center;min-height:44px}.controls input{width:1.15rem;height:1.15rem;accent-color:var(--accent)}nav{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.2rem}nav a{border:1px solid var(--line);background:white;border-radius:.55rem;padding:.45rem .7rem;min-height:44px;font-size:.875rem;text-decoration:none}nav a[aria-current="location"]{border-color:var(--accent);background:var(--soft)}
+    section.chapter{background:white;border:1px solid var(--line);border-radius:1rem;padding:1.4rem;margin:1rem 0;scroll-margin-top:1rem}.number{font-size:.8rem;color:var(--accent);font-weight:700;margin:0;text-transform:uppercase;letter-spacing:.06em}.takeaway{border-left:4px solid var(--accent);background:var(--soft);padding:.8rem 1rem;margin:1rem 0}.takeaway p{margin:.25rem 0}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1rem 0}.box{padding:1rem;background:#f5f7f9;border-radius:.65rem;min-width:0}.box h3{margin:0 0 .4rem}.box p:last-child{margin-bottom:0}
+    details{border-top:1px solid var(--line);margin-top:1.1rem;padding-top:.45rem}summary{font-weight:650;min-height:44px;padding:.5rem .1rem}details>div{padding:.3rem 0}.table-wrap{max-width:100%;overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.925rem;margin:.7rem 0}caption{text-align:left;color:var(--muted);font-size:.875rem;padding-bottom:.5rem}th,td{text-align:left;vertical-align:top;padding:.7rem .5rem;border-bottom:1px solid var(--line);overflow-wrap:anywhere}th{background:#f5f7f9}th:first-child,td:first-child{width:29%}code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f7;border:1px solid var(--line);border-radius:.6rem;padding:1rem;font-size:.85rem;line-height:1.65;max-width:100%}pre code{font:inherit}
+    .mock{border:1px solid var(--line);border-radius:.85rem;padding:1rem;max-width:27rem;margin:1rem auto;background:#f8fafb}.mock-label{font-size:.8rem;color:var(--muted);margin:0 0 .7rem}.mock-name{font-weight:700;color:var(--ink);margin:.25rem 0 1rem}.mock-primary{background:var(--ink);color:white;text-align:center;font-size:1.05rem;font-weight:700;border-radius:.75rem;padding:1rem}.mock-secondary{border:1px solid #aabac4;border-radius:.6rem;padding:.65rem;text-align:center;margin-top:.65rem;color:var(--ink);font-weight:650}.mock-row{border-top:1px solid var(--line);padding:.75rem .1rem;margin-top:.75rem}.mock-row p{margin:0}.mock-row small{color:var(--muted)}.mock-arrow{color:var(--accent);font-size:.875rem}.flow{background:#f5f7f9;padding:.9rem;border-radius:.6rem}.stage{border-left:3px solid var(--accent);padding-left:1rem;margin:1.4rem 0}.stage h3{margin:.15rem 0 .5rem}.stage p{margin:.3rem 0}.pill{display:inline-block;background:var(--soft);color:#11564f;padding:.15rem .55rem;border-radius:.35rem;font-size:.85rem;font-weight:700}
+    .reader{display:none;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin:1rem 0}.js .reader{display:flex}.reader button{background:white;color:var(--ink);border:1px solid #aabac4;padding:.55rem .9rem;border-radius:.55rem;min-height:44px}.reader span{font-size:.875rem;color:var(--muted)}[hidden]{display:none!important}.large{font-size:20px}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.7rem;z-index:5}footer{color:var(--muted);font-size:.875rem;padding:1rem 0}footer p{margin:.4rem 0}
+    @media(max-width:38rem){.shell{padding:1rem}.pair{grid-template-columns:1fr}section.chapter,.brief{padding:1rem}.table-wrap table{font-size:.875rem}th,td{padding:.6rem .35rem}.mock{padding:.85rem}nav a{flex:1 1 auto;text-align:center}}
+    @media print{body{background:white}.shell{max-width:none;padding:0}.controls,nav,.reader,.skip{display:none!important}section.chapter,section.chapter[hidden]{display:block!important;break-inside:avoid}.brief{background:white;color:var(--ink);border:1px solid var(--line)}.brief h2{color:var(--ink)}details>*{display:block!important}pre{white-space:pre-wrap}.mock-primary{color:var(--ink);background:white;border:2px solid var(--ink)}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ</a>
+  <div class="shell">
+    <header>
+      <p class="eyebrow">ひと問 · 設計レビュー · <time datetime="2026-10-07">2026年10月7日</time></p>
+      <h1>開始ボタンを、ひとつに。</h1>
+      <p class="lead">受験日・診断・計画を追加しても、開いたらすぐ問題を解けるアプリにします。</p>
+      <p class="meta"><span class="status">実装前の提案</span> 確認対象main <code>b5d5464</code> のコード・設計資料を確認。アプリ本体は変更していません。</p>
+      <div class="brief">
+        <h2>先に読むのは、この3点</h2>
+        <p><strong>① 1／3／5問をやめ、「とりあえずはじめる」に統一。</strong><br>1問ずつ、続けるか終えるかを自分で選びます。</p>
+        <p><strong>② 計画や診断は、ホームの下側から任意で使う。</strong><br>登録・ログイン・診断を、開始の条件にしません。</p>
+        <p><strong>③ 通常学習は自由。診断だけ10問・30問の固定枠。</strong><br>計画の目標と、今回何問解くかは切り離します。</p>
+      </div>
+    </header>
+    <div class="controls" aria-label="読み方の設定">
+      <label><input id="focus-mode" type="checkbox">1章ずつ読む</label>
+      <label><input id="large-text" type="checkbox">文字を大きく</label>
+    </div>
+    <nav aria-label="目次">
+      <a href="#start">1 開始ボタン</a><a href="#home">2 ホーム</a><a href="#diagnostic">3 診断</a><a href="#plan">4 受験日・計画</a><a href="#ai">5 AI入出力</a><a href="#model">6 保存・構造</a><a href="#delivery">7 実装順</a>
+    </nav>
+    <main id="main">
+      <section class="chapter" id="start" tabindex="-1" aria-labelledby="start-title">
+        <p class="number">01 / 開始ボタン</p><h2 id="start-title">始める前に、問題数を選ばなくていい。</h2>
+        <p>1／3／5問の選択は、今の実装では学習内容をほとんど変えません。通常学習の入口は、<strong>「とりあえずはじめる」ひとつ</strong>を推奨します。</p>
+        <div class="pair"><div class="box"><h3>開始</h3><p>押すと1問目を表示。設定や確認画面を挟みません。復習日が来た問題・未着手など、現在の出題優先順位を保ちます。</p></div><div class="box"><h3>回答後</h3><p>「次の問題」と「今日はここまで」。自動で次に進めず、いつでも終えられます。回答途中は「中断」で保存します。</p></div></div>
+        <div class="takeaway"><p><strong>自由に続けることと、終えやすいことを両立。</strong></p><p>「今回4問」は表示できますが、「あと1問」「目標未達」は通常学習には出しません。回答後の終了ボタンは、次へ進むボタンと一緒に残します。</p></div>
+        <p>分野別演習も、分野を選んだら「この分野をはじめる」に統一します。分野内を一巡した後も、その分野で解き直せる現在の挙動を保ちます。</p>
+        <details><summary>実際に、1／3／5問で何が違う？</summary><div>
+          <ul><li><code>session.goal</code> と次回用の目安を保存する。</li><li>上部の「今回○問・目安○問」が変わる。</li><li>目安に到達すると「○問の目安完了」を表示する。</li></ul>
+          <p>出題順は基本的に同じです。目安を超えても「次の問題」は押せます。上部が「中断」から「ホーム」になるのは、問数ではなく<strong>回答確定の前か後か</strong>で決まります。</p>
+          <p class="small">確認箇所：<a href="../src/ui/views.js"><code>src/ui/views.js</code></a> の <code>sessionMilestoneHTML</code>・<code>studyHTML</code>、<a href="../src/app.js"><code>src/app.js</code></a> の <code>start-session</code>・<code>pickQuestion</code>。</p>
+        </div></details>
+        <details><summary>一本化するときに整理するデータ</summary><div><p>通常学習の <code>session.goal</code> と <code>settings.sessionSize</code>、目安完了表示を廃止します。まとまりとしての <code>attemptIds</code> と分野指定は、今回の取り組み数や同じ問題の連続出題を避けるために残します。</p><p>診断の固定問題数や計画の目標回数は、通常セッションとは別に保存します。既存の履歴・ヒント・学習中の問題は保持します。</p></div></details>
+      </section>
+      <section class="chapter" id="home" tabindex="-1" aria-labelledby="home-title">
+        <p class="number">02 / ホーム</p><h2 id="home-title">開始ボタンが、いつも最優先。</h2>
+        <p>診断と計画を大きなカードで並べると、始める前に読む量が増えます。現在のホームを土台に、<strong>下側にコンパクトな入口をひとつ追加</strong>します。</p>
+        <figure class="mock" aria-labelledby="mock-caption">
+          <figcaption class="mock-label" id="mock-caption">提案するホームの表示例 · 操作する画面ではありません</figcaption>
+          <p class="mock-name">ひと問</p>
+          <div class="mock-primary">とりあえずはじめる →</div>
+          <div class="mock-secondary">分野別に解く</div>
+          <div class="mock-row"><p><strong>今日 4回</strong> · 解き直し 3問</p><small>学習状況と復習候補は、今の機能を継続</small></div>
+          <div class="mock-row"><p><strong>目標・計画</strong></p><p>試験まで28日 · 基礎確認 73／120回</p><span class="mock-arrow">計画を見る →</span></div>
+        </figure>
+        <ul><li><strong>中断中：</strong>「続きから」を最上部に表示。新しい問題もすぐ始められます。</li><li><strong>未登録：</strong>下側に「受験日・計画を登録」「10問で今の状態を確認」の入口。案内は閉じられます。</li><li><strong>登録済み：</strong>同じ位置を、試験までの日数と現在のフェーズ・実績に置き換えます。</li><li><strong>診断済み：</strong>大きな案内を繰り返さず、結果・再診断は詳細画面に置きます。</li></ul>
+        <div class="takeaway"><p><strong>初回ウィザードなし。登録・診断・ログインは任意。</strong></p><p>計画の読み込みや通信の完了も、開始ボタンの待ち時間にしません。ホームに週別グラフやフェーズ一覧を展開しません。</p></div>
+        <details><summary>ホームで増やさないもの</summary><div><p>新しい上部ナビを一度に増やさず、計画の詳細画面から診断・AI入出力へ進める形にします。達成の詳細や履歴は現在の入口を使います。</p><p>「今日のおすすめ」は後の段階で、理由が分かる任意の入口として追加します。計画の都合で通常の開始ボタンの出題を勝手に変更しません。</p></div></details>
+      </section>
+      <section class="chapter" id="diagnostic" tabindex="-1" aria-labelledby="diagnostic-title">
+        <p class="number">03 / 実力診断</p><h2 id="diagnostic-title">測るのは、今回確認できた範囲。</h2>
+        <p>通常学習と診断では、「終わり」の意味が違います。診断には専用の記録を作り、問題表示・採点・ヒントは今の部品を使います。</p>
+        <div class="pair"><div class="box"><h3>通常学習</h3><p>問題数は決めず、1問ずつ続ける。いつ終えても完了です。</p></div><div class="box"><h3>診断</h3><p>開始時に10問／30問の一覧を確定。「7／30問」の途中状態でも結果を確認できます。</p></div></div>
+        <h3>出題と結果のルール</h3>
+        <ul><li>現在の17分野を10問で網羅できないため、クイック診断は「一部の分野の確認」と明示する。</li><li>30問は複数分野から抽出する。配分は資格定義に置き、通常の復習優先の出題処理と分ける。</li><li>未着手を優先する。既出が含まれたら、その件数を表示する。別年度の類似問題まで初見とは断定しない。</li><li>ヒントは使える。答えを明かすヒントは、既存どおり「解答閲覧」に分類する。</li><li>診断中の解説が後続問題に影響するため、解説は終了後にまとめて読む案を基本とする。</li><li>未回答は不正解にしない。オフラインで問題が足りない場合、出題範囲を黙って変更しない。</li></ul>
+        <div class="takeaway"><p><strong>今回確認した30問：自力18、ヒント付き6、不正解4、解答閲覧2。</strong></p><p>データベース：5問中2問自力正解。未出題の分野は「未確認」。合格可能性や、分野全体の習熟は断定しません。</p></div>
+        <details><summary>診断結果と、普段の復習をどう共存させる？</summary><div><p>診断での不正解・ヒント利用なども通常の復習候補に入れます。後で解き直しても、過去の診断結果は変えません。診断結果はその回の出題枠と試行IDから集計し、問題ごとの最新結果から再計算しません。</p><p>診断記録には、ID、対象パート、出題方針の版、確定した問題一覧・版、各枠の試行ID、途中／完了、開始・完了日時を保存します。別端末での継続が分かれたときも、同じ出題枠を二重に数えない設計が必要です。</p><p>「回答した件数」は選択して確定した件数。「確認済み」は自力・ヒント付き・不正解・解答閲覧の合計。自力正答率は確認済み件数を分母とし、件数を併記します。未回答は分母に含めません。</p></div></details>
+      </section>
+      <section class="chapter" id="plan" tabindex="-1" aria-labelledby="plan-title">
+        <p class="number">04 / 受験日・学習計画</p><h2 id="plan-title">日々のノルマではなく、期間の目安を持つ。</h2>
+        <p>計画は「フェーズ＋目標」が基本です。1日休んでも、その日の未達を翌日に積み上げる仕組みにはしません。診断を受けずに計画を登録しても構いません。</p>
+        <div class="pair"><div class="box"><h3>まず表示する</h3><p>現在のフェーズ、期間、目標回数、実績、残り回数、重点分野。</p></div><div class="box"><h3>次の段階で追加する</h3><p>明示的な週別目標、外部模試・教科書の読了など、手動で完了にするマイルストーン。</p></div></div>
+        <h3>「300問」の意味を先に決める</h3>
+        <p>初期版の目標は、<strong>解き直しを含む「取り組み300回」</strong>を推奨します。既存の完了4状態を数える場合、解答閲覧も含むと明記し、内訳を見られるようにします。「異なる問題300問」は別の指標です。</p>
+        <p>重点分野はおすすめの対象であり、実績の集計条件とは分けます。初期版では、対象パート内の取り組みを数え、重点分野以外を解いても実績になります。</p>
+        <div class="takeaway"><p><strong>計画の目標は、開始前に選ぶ問題数ではありません。</strong></p><p>「今の期間で120回」を目指していても、今日は1問だけで終了できます。計画達成のために学習セッションを強制継続させません。</p></div>
+        <details><summary>受験日・科目・複数資格</summary><div><p>試験パートのIDと表示名は資格定義の <code>examParts</code> に置きます。問題にも <code>examPartId</code> を付けます。年度・春秋の教材パックとは別概念です。</p><p>受験日は利用者がパートごとに登録。同日でも別日でも扱えます。教材を提供していないパートは、日付と手動マイルストーンを登録できても、アプリ内診断の対象にはしません。</p><p>APの制度や日付を共通コードに固定しません。残日数は計画のタイムゾーンの暦日で計算します。過去の日付の計画も履歴として読めます。</p></div></details>
+        <details><summary>週別目標と、実績の数え方</summary><div><p>「12日間で300回」だけでは「今週120回」は決まりません。初期版はフェーズ単位。次段で週別目標を明示的に登録します。日数で配分するなら「按分した目安」と表示します。</p><p>開始・終了日は両端を含み、初期版はフェーズの重複を認めません。実績は完了日時・対象パート・タイムゾーンから集計します。進捗カウンター自体は保存・同期せず、履歴から再計算します。計画の編集で履歴をリセットしません。</p><p>別パートの重複フェーズや複数の有効計画は初期版の範囲外にし、同時に数えるルールが必要になってから追加します。</p></div></details>
+      </section>
+      <section class="chapter" id="ai" tabindex="-1" aria-labelledby="ai-title">
+        <p class="number">05 / AI入出力</p><h2 id="ai-title">AIとの往復は、公開JSONで。</h2>
+        <p>AI APIへの直接接続は後回しにします。公開フォーマットとJSON Schema、例、プロンプトを用意し、ChatGPT・Claude・Geminiなどから同じ形で取り込めるようにします。</p>
+        <p class="flow"><strong>ひと問の状況をコピー → AIへ相談 → 計画JSONを貼る → 検証 → プレビュー → 登録</strong></p>
+        <ul><li>プロンプトに、その資格で有効なパートID・分野ID・対応版を含める。</li><li>JSON Schemaで型・必須項目・長さ・件数を検証する。</li><li>別途、参照ID、実在する日付、期間の逆転・重複、ID重複を検証する。</li><li>未知の版・項目は黙って捨てない。エラーは場所と直し方を表示する。</li><li>登録前に、変更する受験日・フェーズ・目標を人間向けに見せる。</li></ul>
+        <div class="takeaway"><p><strong>検証に失敗しても、現在の計画と学習記録は変更しません。</strong></p><p>計画importは、既存の学習記録バックアップの読み込みとは別の入口にします。</p></div>
+        <details><summary>提案する StudyPlan JSON を見る</summary><div><p class="small">まだ公開仕様ではなく設計例です。<code>morning</code> は説明用の仮ID、日付も仮値です。初期版の目標は取り組み回数のみ。版1を公開する前に、必須・任意項目をSchemaで確定します。</p>
+          <pre><code>{
+  "format": "hitomon-study-plan",
+  "version": 1,
+  "qualificationId": "ap",
+  "timeZone": "Asia/Tokyo",
+  "examDates": [
+    { "examPartId": "morning", "date": "2026-11-04" }
+  ],
+  "phases": [
+    {
+      "id": "foundation",
+      "name": "基礎確認",
+      "start": "2026-10-07",
+      "end": "2026-10-18",
+      "examPartIds": ["morning"],
+      "targets": { "completedAttempts": 300 },
+      "focusTopicIds": ["security", "network", "database"]
+    }
+  ]
+}</code></pre>
+          <p>公開用JSONにUID・端末ID・同期の版番号・計算済み実績は入れません。公開形式の <code>version</code> と、内部の更新競合に使う <code>revision</code> は別です。</p>
+          <p>将来、週別目標などを追加する際は、公開済みの版を無断で読み替えず、Schemaの版と対応機能を明示します。初期版ではAIに未対応項目を作らせません。</p>
+        </div></details>
+        <details><summary>AIへ渡す学習状況と、エラー表示の例</summary><div>
+          <p>学習状況は別の <code>hitomon-study-summary</code> 形式で出します。資格、集計日時・タイムゾーン、受験日と残日数、累計・直近7日／28日の取り組み回数、異なる問題数、結果の内訳、分野別の母数・自力正解数、復習候補数、現在の計画と実績を含めます。</p>
+          <p>診断結果は診断日時・確認済み件数とともに分離します。通常履歴の正答率は「解き直しを含む値」であることを明示。集計の定義を画面とExportで共有します。メール・UID・問題本文・個人メモは、相談用Exportには入れません。</p>
+          <div class="box"><p><strong>フェーズ2の終了日が開始日より前です。</strong></p><p><code>phases[1].end</code> を、開始日以降の日付に変更してください。</p></div>
+          <p>将来の調整案は、根拠となる件数・期間とともに提案します。母数の少ない48%だけでDBを苦手と決めず、ユーザーが採用した案だけ計画に反映します。</p>
+        </div></details>
+      </section>
+      <section class="chapter" id="model" tabindex="-1" aria-labelledby="model-title">
+        <p class="number">06 / 保存・内部構造</p><h2 id="model-title">受験日と計画は、利用者ごと・資格ごと。</h2>
+        <p>今の利用者×資格の保存単位を使います。ログイン前も端末内で利用でき、ログイン時の取り込みは明示的に行います。</p>
+        <div class="table-wrap"><table><caption>保存するデータと、その持ち主</caption><thead><tr><th scope="col">データ</th><th scope="col">保存・同期</th></tr></thead><tbody>
+          <tr><th scope="row">資格定義</th><td>公開教材側。試験パート・分野・診断の出題方針。</td></tr>
+          <tr><th scope="row">受験日・計画</th><td>利用者×資格。端末内に保存し、ログイン時はFirebase同期。</td></tr>
+          <tr><th scope="row">診断のまとまり</th><td>利用者×資格。専用保存。導入時に端末間再開まで設計する。</td></tr>
+          <tr><th scope="row">試行・ヒント</th><td>今の保存・同期を使い、診断IDと出題枠の関連を追加。</td></tr>
+          <tr><th scope="row">画面・スクロール</th><td>端末・タブ内。別端末の画面を勝手に切り替えない。</td></tr>
+          <tr><th scope="row">実績・残り回数</th><td>試行から計算。別の同期カウンターは持たない。</td></tr>
+        </tbody></table></div>
+        <details><summary>内部データモデルの案</summary><div>
+          <pre><code>利用者 × 資格
+├─ planning/current
+│  ├─ revision
+│  ├─ examDates
+│  └─ studyPlan
+├─ diagnosticRuns/{runId}
+│  ├─ questionRefs・出題方針の版
+│  ├─ slots（出題枠と試行ID）
+│  └─ status・startedAt・completedAt
+└─ attempts/{attemptId}
+   ├─ 既存の試行・問題／教材スナップショット
+   └─ purpose・diagnosticRunId・slotId</code></pre>
+          <p>受験日と有効な計画は、初期版では同じ更新単位にまとめます。import時の「日付だけ登録されて計画が失敗する」を避けます。古い計画の比較・複数の有効計画は後回しです。</p>
+        </div></details>
+        <details><summary>既存コードで先に整えるべきところ</summary><div>
+          <ul><li><strong>共通集計：</strong>通常演習では <code>attempt.topicId</code> が空になる場合があります。分野集計には記録時点の <code>questionSnapshot.topicId</code> を使います。</li><li><strong>問題の所属：</strong>資格定義だけでなく、教材・軽量インデックス・試行スナップショットへパートIDを通します。</li><li><strong>通常セッション：</strong>目安を廃止するため、保存検証とバックアップの形も見直します。診断を既存の最大5問の制約へ押し込みません。</li><li><strong>同期：</strong>現状は試行専用の送信待ち・カーソル・Firestore Rulesです。計画や診断を自動で同期できる状態ではありません。</li><li><strong>競合：</strong>計画は版番号で検出し、クラウドと端末の案を選べるようにします。試行用の別記録作成を流用すると、有効計画が二つになるため避けます。</li></ul>
+          <p>既存の学習記録は保持します。後方互換・大規模な移行機構は目的にせず、今回の変更に必要な保存処理だけ整えます。</p>
+          <p class="small">確認箇所：<a href="../src/domain/study.js">試行</a>、<a href="../src/storage/local.js">端末保存</a>、<a href="../src/storage/validate.js">保存検証</a>、<a href="../src/sync/firebase.js">同期</a>、<a href="../firestore.rules">Rules</a>、<a href="../content/ap/qualification.json">資格定義</a>。</p>
+        </div></details>
+        <details><summary>どのレイヤーを変える？</summary><div><ul><li><strong>資格定義・教材生成：</strong>試験パート、所属、診断配分。共通コードにAPの条件を書かない。</li><li><strong>共通ドメイン：</strong>集計、計画検証、実績計算、診断の出題・結果。画面や通信なしで計算できる形。</li><li><strong>保存・同期：</strong>新しい保存先、送信待ち、更新競合、所有者検証、Rules。</li><li><strong>共通UI：</strong>一本化した開始、下側の入口、診断・計画詳細、importプレビュー。</li><li><strong>アプリ制御：</strong>操作を各機能につなぐ。計画や集計を <code>src/app.js</code> に詰め込まない。</li></ul></div></details>
+      </section>
+      <section class="chapter" id="delivery" tabindex="-1" aria-labelledby="delivery-title">
+        <p class="number">07 / 実装順</p><h2 id="delivery-title">まず開始を単純に。その後、小さく追加。</h2>
+        <p>全部を一度に実装しません。P0も、下の順に小さく確認・公開する案です。この文書は提案で、実装開始の指示を兼ねません。</p>
+        <div class="stage"><span class="pill">P0-1 · 通常学習</span><h3>開始ボタンを一本化</h3><p>全分野・分野別の1／3／5問を廃止。今回の回数、次の問題、中断、終了、保存・再開を維持します。</p></div>
+        <div class="stage"><span class="pill">P0-2 · 土台と受験日</span><h3>共通集計とパート定義 → 任意の受験日</h3><p>集計の定義を統一し、利用者×資格の計画用保存・同期を用意。ホーム下側に日付登録と簡潔な残日数を追加します。</p></div>
+        <div class="stage"><span class="pill">P0-3 · 計画とAI</span><h3>フェーズ計画と公開JSONの往復</h3><p>Schema・仕様・サンプル、プロンプトコピー、貼付検証、プレビュー、登録、Export。最低限の手動登録・編集も用意し、AIを必須にしません。実績はフェーズ単位で表示します。</p></div>
+        <div class="stage"><span class="pill">P1 · 診断と週別目標</span><h3>10問診断 → 30問診断</h3><p>専用の診断記録、中断・端末間再開、結果、復習連携。その後、週別目標と手動マイルストーンを追加します。</p></div>
+        <div class="stage"><span class="pill">P2 · 調整と本番チェック</span><h3>80問チェック・調整案・計画履歴</h3><p>対応教材のあるパートで80問チェック。根拠付きの調整提案を、採用操作を経て反映します。AI APIやMCPの直接接続はこの計画の必須範囲にしません。</p></div>
+        <div class="takeaway"><p><strong>診断より先に計画を使える理由</strong></p><p>既にある学習履歴からAIへ相談できます。診断の新しい出題・再開・同期を完成させるまで、受験日と計画を待たせる必要はありません。</p></div>
+        <details><summary>各段階で確認すること</summary><div><ul>
+          <li>未登録・未診断・未ログインでも、開始は1操作。</li><li>計画の読込失敗やオフラインが通常学習を止めない。</li><li>回答後に終了でき、途中の選択・ヒントも再開できる。</li><li>既存800問の教材、回答表示、PWAのID・スコープ・オフライン動作を保つ。</li><li>不正な計画importで既存計画・履歴が変わらない。</li><li>別資格・別利用者のデータを混ぜない。端末間の計画競合を黙って上書きしない。</li><li>診断の問題一覧を途中で変更せず、未回答や継続記録を誤集計しない。</li><li>小さい画面・大きな文字でも開始が探しやすく、結果の母数が読める。</li><li>画面、StudyPlanの実績、AI用Summaryで同じ集計定義を使う。</li>
+        </ul></div></details>
+      </section>
+    </main>
+    <div class="reader" aria-label="章の移動"><button id="previous" type="button">前の章</button><span id="chapter-position" role="status" aria-live="polite">1 / 7</span><button id="next" type="button">次の章</button></div>
+    <footer><p><a href="requirements.html">現行のHTML定義書</a> · <a href="architecture-plan.html">複数資格・同期の既存計画</a> · <a href="learning-design.md">学習設計</a> · <a href="../">アプリへ</a></p><p>文書内の表示例は提案です。ここで読み方を変えても、学習記録やアプリの設定は変更しません。</p></footer>
+  </div>
+  <script>
+    (()=>{
+      const chapters=[...document.querySelectorAll('.chapter')],links=[...document.querySelectorAll('nav a')];
+      const focusMode=document.querySelector('#focus-mode'),largeText=document.querySelector('#large-text');
+      const previous=document.querySelector('#previous'),next=document.querySelector('#next'),position=document.querySelector('#chapter-position');
+      let active=0,printDetails=[];
+      const fromHash=()=>chapters.findIndex(c=>'#'+c.id===location.hash);
+      function render(){
+        chapters.forEach((c,i)=>c.hidden=focusMode.checked&&i!==active);
+        links.forEach((a,i)=>{if(i===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+        previous.disabled=active===0;next.disabled=active===chapters.length-1;
+        position.textContent=(active+1)+' / '+chapters.length+' · '+chapters[active].querySelector('h2').textContent;
+      }
+      function move(i){active=i;render();if(location.hash!=='#'+chapters[i].id)history.pushState(null,'','#'+chapters[i].id);chapters[i].focus({preventScroll:true});chapters[i].scrollIntoView({block:'start'});}
+      links.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();move(i);}));
+      previous.addEventListener('click',()=>move(Math.max(0,active-1)));
+      next.addEventListener('click',()=>move(Math.min(chapters.length-1,active+1)));
+      focusMode.addEventListener('change',()=>{const i=fromHash();if(i>=0)active=i;render();});
+      largeText.addEventListener('change',()=>document.documentElement.classList.toggle('large',largeText.checked));
+      window.addEventListener('hashchange',()=>{const i=fromHash();if(i>=0){active=i;render();}});
+      window.addEventListener('beforeprint',()=>{printDetails=[...document.querySelectorAll('details')].map(d=>[d,d.open]);printDetails.forEach(([d])=>d.open=true);});
+      window.addEventListener('afterprint',()=>printDetails.forEach(([d,open])=>d.open=open));
+      const i=fromHash();if(i>=0)active=i;document.documentElement.classList.add('js');render();
+    })();
+  </script>
+</body>
+</html>

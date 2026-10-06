@@ -137,6 +137,7 @@ python tests/lesson-preservation-r03a.py
 
 - [要件定義](docs/requirements.md)
 - [読みやすいHTML定義書](docs/requirements.html)
+- [開始ボタン・実力診断・受験日・学習計画の設計レビュー](docs/study-planning-review.html)（実装前の提案。通常学習の開始一本化とP0／P1／P2）
 - [複数資格・Firebase同期の計画](docs/architecture-plan.html)（共通化・資格別教材・端末保存・同期コードを実装。[設計の詳細](docs/architecture-plan.md)）
 - [学習設計](docs/learning-design.md)
 - [調査ノート](docs/research-notes.md)
