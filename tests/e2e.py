@@ -5,6 +5,7 @@ ROOT=Path(tempfile.mkdtemp(prefix='ap-study-e2e-'))
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
+reveal_fixture=next(q for q in bank if not q['hints'][0]['revealsAnswer'] and q['hints'][1]['revealsAnswer'])
 reviewed_count=sum(q['enrichment']=='reviewed' for q in bank)
 complete_exams=[file.stem for file in (Path(__file__).resolve().parents[1]/'data/lessons').glob('*.json')]
 with sync_playwright() as p:
@@ -99,11 +100,11 @@ with sync_playwright() as p:
  open_q('r04h-q79');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['materialSnapshot']['enrichment']=='topic-guide'
  page.reload();page.locator('.hint-box').wait_for();assert page.locator('.hint-box').count()==1
- # A literal answer term is labelled before it is opened and counts as answer viewing.
- open_q('r05a-q18');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+ # An answer-revealing hint is labelled before opening and counts as answer viewing.
+ open_q(reveal_fixture['id']);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
  s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==2
- nav('review');assert page.locator('[data-action=start][data-id=r05a-q18]').count()==1
+ nav('review');assert page.locator(f'[data-action=start][data-id="{reveal_fixture["id"]}"]').count()==1
  # Reproduce the reported question reopened with an older common guide.
  open_q('r07h-q18');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(1).check();page.locator('#confidence').check()
  legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId']);old_id=a['id']

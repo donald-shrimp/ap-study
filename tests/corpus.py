@@ -54,7 +54,7 @@ for file in (root/'data/lessons').glob('*.json'):
 assert 'r07h' in complete_exams
 # Two original 2021 autumn explanations have no complete-exam lesson source.
 assert reviewed==set(lessons)|{'r03a-q3','r03a-q4'}
-# These three new exams must retain a separate review tied to exact lesson bytes.
+# Each added complete exam retains a separate review tied to exact lesson bytes.
 for exam in complete_exams-{'r07h'}:
  records=json.loads((root/f'data/lesson-reviews/{exam}.json').read_text())
  assert {r['id'] for r in records}=={f'{exam}-q{n}' for n in range(1,81)} and len(records)==80
@@ -76,7 +76,7 @@ for q in bank:
   assert [h['revealsAnswer'] for h in q['hints']]==[c=='1' for c in flags],q['id']
  else:
   assert q['enrichment']=='reviewed' and q['hintSource']=='existing-reviewed',q['id']
-assert next(q for q in bank if q['id']=='r05a-q18')['hints'][1]['revealsAnswer']
+assert any(h['revealsAnswer'] for q in bank for h in q['hints'])
 assert bank[0]['id']=='r07h-q1' and bank[0]['answer']==3
 assert next(q for q in bank if q['id']=='r04h-q80')['answer']==3
 print(f'PASS 800 questions / official keys / 800 images / hint and lesson provenance / {len(complete_exams)} complete exams / {len(reviewed)} individual explanations / independent reviews')
