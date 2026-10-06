@@ -24,7 +24,7 @@ for pack in manifest['packs']:
     assert len(questions)==pack['count']
     compiled.extend(questions)
 assert len(compiled)==manifest['count']==len(index)==800
-assert sum(q['enrichment']=='reviewed' for q in compiled)==manifest['reviewed']==722
+assert sum(q['enrichment']=='reviewed' for q in compiled)==manifest['reviewed']==800
 raw=read(ROOT/'data/questions.json');by_id={q['id']:q for q in compiled}
 for source in raw:
     q=by_id[source['id']]
@@ -33,7 +33,7 @@ for source in raw:
         else:assert q[key]==value,(q['id'],key)
     assert q['choices'][q['answer']]['id']==q['correctChoiceId']
 assert not any('hints' in q or 'explanation' in q for q in index)
-print('PASS AP 800 questions / 722 explanations / source fields unchanged / pack hashes / lightweight index')
+print('PASS AP 800 questions / 800 explanations / source fields unchanged / pack hashes / lightweight index')
 
 def fixture(count=5,question_id='same-question',pack_id='first'):
     values=[4,5] if count==2 else list(range(1,count+1))

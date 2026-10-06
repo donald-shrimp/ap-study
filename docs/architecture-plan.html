@@ -24,7 +24,7 @@
       <h1>資格を増やし、学習記録を同期する</h1>
       <p>資格ごとにページを分け、使える部品とアカウントを共有します。</p>
       <div class="summary"><strong>進める順番</strong><p>共通部品を整理 → 資格・教材・端末保存を分離 → Googleログインと同期 → 次の資格を公開</p></div>
-      <p class="meta">今の応用情報は800問、個別解説722問。共通化・資格別教材・端末内保存まで実装済み。同期コードを実装。本番ルール公開と実機確認が残っています。</p>
+      <p class="meta">今の応用情報は800問、個別解説も800問。共通化・資格別教材・端末内保存まで実装済み。同期コードを実装。本番ルール公開と実機確認が残っています。</p>
     </header>
     <div class="controls" aria-label="読み方">
       <label><input id="focus-mode" type="checkbox">1章ずつ読む</label>
@@ -83,13 +83,13 @@
       </section>
       <section id="steps" tabindex="-1" data-title="実装順">
         <p class="number">4 / 実装順</p><h2>小さく分けて、動く状態を確かめる。</h2>
-        <div class="step"><strong>完了：1. 共通部品を切り出す</strong><p>画面・学習処理・教材・保存を分ける。</p><p class="criteria">完了条件：今の応用情報が同じ操作で使え、800問・722解説とPWAが保たれる。</p></div>
+        <div class="step"><strong>完了：1. 共通部品を切り出す</strong><p>画面・学習処理・教材・保存を分ける。</p><p class="criteria">完了条件：今の応用情報が同じ操作で使え、800問・既存教材とPWAが保たれる。</p></div>
         <div class="step"><strong>完了：2. 資格と教材を分ける</strong><p>資格ID、教材パック、資格ページを用意する。</p><p class="criteria">完了条件：テスト用の別資格と追加パックが共通コードの変更なしで動く。直リンク・オフラインも使える。</p></div>
         <div class="step"><strong>完了：3. 端末保存を整える</strong><p>利用者・資格ごとの保存と、未同期の送信待ちを作る。</p><p class="criteria">完了条件：オフラインと複数タブでも履歴を失わず、中断・再開・書き出しが使える。</p></div>
         <div class="step"><strong>コード実装：4. Googleログインと同期</strong><p>Firebaseの認証、本人だけのアクセス制御、送受信を組み込む。</p><p class="criteria">完了条件：2ブラウザで同期・再開でき、オフライン再送、同時利用、アカウント切替を確認できる。</p></div>
         <div class="step"><strong>5. 次の資格を公開</strong><p>実際の出典と、少量の確認済み教材から始める。</p><p class="criteria">完了条件：資格一覧への登録と教材追加で使え、応用情報に影響しない。</p></div>
         <p class="note">1〜3は実装し、学習・PWA・別資格・同時回答を検証済み。次は本番ルールの公開と実機ログイン確認です。構造の確認用の架空問題を本番教材として公開せず、2つ目の実資格は対象が決まったら追加します。</p>
-        <details><summary>保存形式の変更と、残すもの</summary><p>別バージョンの形式変換や互換レイヤーは作りません。現在と同じ形式の既存記録は、そのままコピーして元の値も残します。読めない記録を黙って消去・上書きしません。</p><p>完成済みの教材、個別ヒント、独立検算、確認記録を維持します。未完成の78解説は完成扱いにしません。</p></details>
+        <details><summary>保存形式の変更と、残すもの</summary><p>別バージョンの形式変換や互換レイヤーは作りません。現在と同じ形式の既存記録は、そのままコピーして元の値も残します。読めない記録を黙って消去・上書きしません。</p><p>完成済みの教材、個別ヒント、独立検算、確認記録を維持します。未完成の教材は完成扱いにしません。応用情報の残る78解説は原本から作成・独立確認し、現在は全800問が完成しています。</p></details>
       </section>
     </main>
     <div class="reader" aria-label="章の移動"><button class="button" id="previous" type="button">前の章</button><span id="chapter-status" role="status">1 / 4 · 構成</span><button class="button" id="next" type="button">次の章</button></div>

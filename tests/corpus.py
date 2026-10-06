@@ -52,8 +52,10 @@ for file in (root/'data/lessons').glob('*.json'):
   assert len(lesson['hints'])==3 and all(len(h['text'])>=15 for h in lesson['hints'])
   lessons[lesson['id']]=(f'lessons/{file.name}:{lesson["id"]}',lesson)
 assert 'r07h' in complete_exams
-# Two original 2021 autumn explanations have no complete-exam lesson source.
-assert reviewed==set(lessons)|{'r03a-q3','r03a-q4'}
+# All ten exams now have complete lesson sources, including the two preserved
+# original autumn lessons. A missing file cannot silently reduce completion.
+assert complete_exams=={q['id'].split('-q')[0] for q in bank}
+assert reviewed==set(lessons)==ids
 # Each added complete exam retains a separate review tied to exact lesson bytes.
 for exam in complete_exams-{'r07h'}:
  records=json.loads((root/f'data/lesson-reviews/{exam}.json').read_text())
@@ -64,6 +66,11 @@ for exam in complete_exams-{'r07h'}:
   assert record['officialAnswer']==q['choices'][q['answer']]['label'],id
   digest=hashlib.sha256(json.dumps(lesson,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
   assert record['reviewedLessonSHA256']==digest,id
+  if exam=='r03a':
+   result=record['independentResult']
+   assert result['candidate']==result['officialAnswer']==record['officialAnswer'] and result['matchesOfficial'] is True,id
+   assert result['independentReason'] and Path(result['sourceImage']).name==f'{id}.webp',id
+   assert not lesson['hints'][0]['revealsAnswer'],id
 for q in bank:
  if q['id'] in lessons:
   source,lesson=lessons[q['id']]

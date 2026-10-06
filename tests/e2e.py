@@ -7,9 +7,11 @@ URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
 reveal_fixture=next(q for q in bank if not q['hints'][0]['revealsAnswer'] and q['hints'][1]['revealsAnswer'])
-pending_fixture=next(q for q in bank if q['enrichment']=='topic-guide' and q['answer']!=0 and q['sourceImages'])
+pending_candidates=[q for q in bank if q['enrichment']=='topic-guide' and q['answer']!=0 and q['sourceImages']]
+pending_fixture=(pending_candidates or [q for q in bank if q['id'].startswith('r03a-') and q['answer']!=0 and q['sourceImages']])[0]
 pending_id=pending_fixture['id']
-pending_hint_fixture=next(q for q in bank if q['enrichment']=='topic-guide' and q['id']!=pending_id and not q['hints'][0]['revealsAnswer'])
+pending_hint_candidates=[q for q in bank if q['enrichment']=='topic-guide' and q['id']!=pending_id and not q['hints'][0]['revealsAnswer']]
+pending_hint_fixture=(pending_hint_candidates or [q for q in bank if q['id'].startswith('r03a-') and q['id']!=pending_id and not q['hints'][0]['revealsAnswer']])[0]
 reviewed_count=sum(q['enrichment']=='reviewed' for q in bank)
 complete_exams=[file.stem for file in (Path(__file__).resolve().parents[1]/'data/lessons').glob('*.json')]
 with sync_playwright() as p:
@@ -101,10 +103,23 @@ with sync_playwright() as p:
    open_q(q['id']);a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
    assert a['hintCount']==0 and a['selected'] is None and not a['answerViewedBefore']
  print('PASS complete-exam 80-question filters / new lessons / all three stages / reveal warning / pause-resume / saved choice reasons / closed retry',flush=True)
- # Hints also remain available for questions whose full explanation is pending.
+ # Two preserved autumn lesson texts now correctly warn about their second stage.
+ for id in ['r03a-q3','r03a-q4']:
+  open_q(id);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click()
+  answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
+  assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==2,id
+  assert a['materialSnapshot']['hints']==by_id[id]['hints']
+ print('PASS preserved autumn lesson texts / corrected disclosure warning / answer-view classification',flush=True)
+ open_q('r03a-q2');page.locator('[data-action=reveal]').click()
+ a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
+ assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==0 and a['selected'] is None
+ assert page.locator('.reason-list li').count()==4
+ print('PASS direct answer viewing without selection or hint use',flush=True)
+ # Hints persist both for full lessons and any future pending lesson fixture.
  open_q(pending_hint_fixture['id']);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
- a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['materialSnapshot']['enrichment']=='topic-guide'
- page.reload();page.locator('.hint-box').wait_for();assert page.locator('.hint-box').count()==1
+ a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['materialSnapshot']['enrichment']==pending_hint_fixture['enrichment']
+ state();page.reload();page.locator('.hint-box').wait_for();assert page.locator('.hint-box').count()==1
  # An answer-revealing hint is labelled before opening and counts as answer viewing.
  open_q(reveal_fixture['id']);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
@@ -135,15 +150,21 @@ with sync_playwright() as p:
  print('PASS reported DAC question / decimal place-value reasoning / old guide to latest hints / selection preserved / old history unchanged / completed retry starts closed',flush=True)
  exam_name=f"{pending_fixture['year']}年 {'春期' if pending_fixture['season']=='spring' else '秋期'}"
  open_q(pending_id);assert page.locator('.source-question img').count()==1;assert exam_name in page.locator('.question-meta').inner_text()
- answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：'+pending_fixture['choices'][pending_fixture['answer']]['label'] in page.locator('.result').inner_text();assert '個別の解答解説は未追加' in page.locator('.result').inner_text();assert '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
+ answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：'+pending_fixture['choices'][pending_fixture['answer']]['label'] in page.locator('.result').inner_text()
+ if pending_fixture['enrichment']=='topic-guide':
+  assert '個別の解答解説は未追加' in page.locator('.result').inner_text() and '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
+ else:
+  assert pending_fixture['summary'] in page.locator('.result').inner_text();assert '個別の解答解説は未追加' not in page.locator('.result').inner_text();assert page.locator('.reason-list li').count()==4
  nav('review');assert page.locator(f'[data-action=start][data-id={pending_id}]').count()==1
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);page.locator(f'[data-action=edit][data-id={pending_id}]').click()
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
- # An old attempt keeps its original hints and pending explanation after editing.
- nav('history');old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
+ # An old attempt keeps its original material after personal editing.
+ nav('history');old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click()
+ assert old['materialSnapshot']['hints']==pending_fixture['hints'];assert '教科書 p.60 を確認' not in page.locator('.result').inner_text()
+ assert ('個別の解答解説は未追加' in page.locator('.result').inner_text())==(pending_fixture['enrichment']=='topic-guide')
  open_q(pending_id);page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count+1}問');page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
- print('PASS scanned source / official key / pending-explanation honesty / retry / personal notes / immutable snapshot',flush=True)
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f"{reviewed_count+(pending_fixture['enrichment']=='topic-guide')}問");page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
+ print('PASS scanned source / official key / explanation status / retry / personal notes / immutable snapshot',flush=True)
  page.set_viewport_size({'width':390,'height':844});page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.get_by_role('button',name='問題を拡大').click();assert page.locator('#image-dialog').is_visible();initial=page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth');page.get_by_role('button',name='画像を拡大',exact=True).click();assert page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth')>initial
  assert page.locator('#image-scroll').evaluate('(e)=>e.scrollWidth>e.clientWidth');page.screenshot(path=str(ROOT/'question-zoom-mobile.png'));page.keyboard.press('Escape');assert not page.locator('#image-dialog').is_visible()
