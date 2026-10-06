@@ -1,7 +1,7 @@
 const appURL = new URL('./', import.meta.url);
 const cachePrefix = `hitomon-${appURL.pathname}`;
 
-// Read only this app's public asset caches. Learning records remain in localStorage.
+// Read only this app's public asset caches. Learning records remain in IndexedDB.
 export async function savedAssetURLs() {
   if (!('caches' in window)) return new Set();
   try {
@@ -13,7 +13,7 @@ export async function savedAssetURLs() {
   } catch { return new Set(); }
 }
 
-export function initPWA() {
+export function initPWA({beforeUpdate=async()=>true}={}) {
   const installButton = document.querySelector('#install-app');
   const installHelp = document.querySelector('#install-help');
   const updateButton = document.querySelector('#update-app');
@@ -51,9 +51,11 @@ export function initPWA() {
   if (!('serviceWorker' in navigator) || !isSecureContext) {
     status.textContent = 'このブラウザではオフライン保存を利用できません。'; return;
   }
-  updateButton.addEventListener('click', () => {
+  updateButton.addEventListener('click', async () => {
     if (!registration?.waiting) return;
-    reloadForUpdate = true; updateButton.disabled = true;
+    updateButton.disabled = true;
+    if(!await beforeUpdate()){updateButton.disabled=false;status.textContent='記録を保存できていません。先に書き出して保管してください。';return;}
+    reloadForUpdate = true;
     registration.waiting.postMessage({type: 'ACTIVATE_UPDATE'});
   });
   navigator.serviceWorker.addEventListener('controllerchange', () => {

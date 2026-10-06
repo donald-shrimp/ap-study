@@ -3,6 +3,7 @@ import functools, json, os, shutil, tempfile, threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from browser_storage import state as stored_state
 
 ROOT = Path(__file__).resolve().parents[1]
 KEY = 'ap-study-mock.v1'
@@ -27,7 +28,7 @@ with sync_playwright() as p:
     note = page.locator('[data-reading-topic]').first
     note.evaluate('(input)=>input.closest("details").open=true')
     note.fill('PRIVATE-STUDY-NOTE-12345')
-    original = page.evaluate('(key)=>JSON.parse(localStorage.getItem(key))', KEY)
+    original = stored_state(page)
     page.goto(URL + '?pwa-check=1'); page.locator('#pwa-diagnostics').wait_for()
     page.wait_for_function('(()=>{try{return JSON.parse(document.querySelector("#pwa-diagnostic-report").value).checksComplete}catch{return false}})()')
     assert page.locator('#settings-dialog').evaluate('(dialog)=>dialog.open')
@@ -36,7 +37,7 @@ with sync_playwright() as p:
     assert report['manifest']['resolved']['id'].endswith('/ap-study/')
     assert {icon['decodedSize'] for icon in report['icons']} == {'192x192', '512x512'}, report
     assert 'PRIVATE-STUDY-NOTE-12345' not in json.dumps(report)
-    assert page.evaluate('(key)=>JSON.parse(localStorage.getItem(key))', KEY) == original
+    assert stored_state(page) == original
     # Exercise the trusted copy action with a stub, so the test does not depend on OS clipboard.
     page.evaluate('Object.defineProperty(navigator,"clipboard",{value:{writeText:async text=>window.copiedReport=text},configurable:true})')
     page.locator('#copy-pwa-diagnostics').click()

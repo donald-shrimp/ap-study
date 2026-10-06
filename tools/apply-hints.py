@@ -1,6 +1,8 @@
 """Apply explicit hints, then the reviewed explanation-and-hint lesson sources."""
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 TITLES = ['注目するところ', '使う考え方', 'この問題に当てはめる']
@@ -69,6 +71,9 @@ def main():
     # Validate all records before writing, so a broken authoring file cannot erase the corpus.
     path.write_text(json.dumps(bank, ensure_ascii=False, indent=2) + '\n')
     print(f'Individual hints: {len(bank)}; hint assignments: {len(assigned)}; complete lessons: {len(lessons)}')
+    # Runtime reads qualification packs, not this authoring JSON. Keep the
+    # existing AP authoring command sufficient to update the published material.
+    subprocess.run([sys.executable, str(ROOT / 'tools/build-content.py')], check=True)
 
 
 if __name__ == '__main__':

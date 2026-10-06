@@ -1,6 +1,7 @@
 import json,os,shutil,tempfile,time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from browser_storage import state as stored_state, write_state
 ROOT=Path(tempfile.mkdtemp(prefix='ap-study-e2e-'))
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
@@ -16,12 +17,13 @@ with sync_playwright() as p:
  if URL.startswith('https://') and os.environ.get('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
  b=p.chromium.launch(**options);page=b.new_page(viewport={'width':1440,'height':1000});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(URL);page.locator('.quick-start').wait_for()
- def state():return page.evaluate('(k)=>JSON.parse(localStorage.getItem(k))',KEY)
+ def state():
+  return stored_state(page)
  def nav(view):page.locator(f'.sidebar [data-view={view}]').click()
  def open_q(id):
   nav('materials');page.locator('[data-action=reset-filters]').click();q=by_id[id]
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=query]').fill(q['title'])
-  page.locator(f'[data-action=start][data-id="{id}"]').click()
+  page.locator(f'[data-action=start][data-id="{id}"]').click();page.wait_for_function('document.querySelector("#main").getAttribute("aria-busy")!=="true"')
  def answer(index=None):
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);correct=by_id[a['questionId']]['answer']
   page.get_by_role('radio').nth(correct if index is None else index).check();page.get_by_role('button',name='回答する',exact=True).click()
@@ -48,7 +50,7 @@ with sync_playwright() as p:
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);scoped.append(a['questionId']);assert by_id[a['questionId']]['topic']=='セキュリティ'
   assert '<script>alert(1)</script>' in page.locator('.reading-context').inner_text()
   if i==0:
-   page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).check();page.reload();page.locator('.reading-context').wait_for();assert page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).is_checked();assert 'セキュリティのみ' in page.locator('.study-toolbar').inner_text()
+   page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).check();state();page.reload();page.locator('.reading-context').wait_for();assert page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).is_checked();assert 'セキュリティのみ' in page.locator('.study-toolbar').inner_text()
   answer()
   if i<2:page.get_by_role('button',name='次の問題',exact=True).click()
  assert len(set(scoped))==3 and '3問の目安完了' in page.locator('.session-milestone').inner_text()
@@ -89,7 +91,7 @@ with sync_playwright() as p:
     assert hint['text'] in page.locator('#hints').inner_text()
     if stage==0:
      page.get_by_role('radio').nth(q['answer']).check();page.get_by_role('button',name='中断',exact=True).click()
-     page.get_by_role('button',name='再開する',exact=True).click();page.reload();page.locator('.hint-box').wait_for()
+     page.get_by_role('button',name='再開する',exact=True).click();state();page.reload();page.locator('.hint-box').wait_for()
      assert page.get_by_role('radio').nth(q['answer']).is_checked() and page.locator('.hint-box').count()==1
    answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
    expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'
@@ -113,7 +115,7 @@ with sync_playwright() as p:
  legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId']);old_id=a['id']
  a['materialSnapshot'].pop('hintStatus');a['materialSnapshot']['enrichment']='topic-guide';a['materialSnapshot']['hints'][0]['text']='以前の分野共通ガイド'
  # Prevent the old page's pagehide handler from overwriting this fixture.
- page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,legacy]);page.reload();page.locator('.hint-head h3').wait_for()
+ write_state(page,legacy);page.reload();page.locator('.hint-head h3').wait_for()
  assert '分野共通' in page.locator('.hint-head h3').inner_text() and '以前の分野共通ガイド' in page.locator('.hint-box').inner_text()
  assert '以前の分野共通ガイドが保存されています' in page.locator('.hint-update').inner_text()
  page.get_by_role('button',name='最新のヒントで続ける',exact=True).click()
@@ -128,7 +130,7 @@ with sync_playwright() as p:
  answer();assert '1,300ミリV' in page.locator('.result').inner_text() and page.locator('.reason-list li').count()==4
  # Completed attempts with an older individual hint can restart too; no answer is carried.
  completed=state();a=next(a for a in completed['attempts'] if a['id']==completed['currentId']);a['materialSnapshot']['hints'][0]['text']='更新前の個別ヒント'
- page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,completed]);page.reload();page.locator('.hint-head h3').wait_for()
+ write_state(page,completed);page.reload();page.locator('.hint-head h3').wait_for()
  page.get_by_role('button',name='最新のヒントで解き直す',exact=True).click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['selected'] is None and a['hintCount']==0 and not a['answerViewedBefore']
  print('PASS reported DAC question / decimal place-value reasoning / old guide to latest hints / selection preserved / old history unchanged / completed retry starts closed',flush=True)
  exam_name=f"{pending_fixture['year']}年 {'春期' if pending_fixture['season']=='spring' else '秋期'}"

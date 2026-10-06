@@ -1,22 +1,37 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261006-r03h-lessons1';
+const RELEASE = '20261006-storage1';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;
 const IMAGE_CACHE = `${PREFIX}images`;
+const CONTENT_CACHE = `${PREFIX}content`;
 const CORE = [
   'index.html', `app.js?v=${RELEASE}`, `styles.css?v=${RELEASE}`, 'pwa.js',
-  `data/questions.json?v=${RELEASE}`, `manifest.webmanifest?v=${RELEASE}`,
+  'data/qualifications/catalog.json', `manifest.webmanifest?v=${RELEASE}`,
+  "src/app.js?v=20261006-storage1", "src/utils.js", "src/ui/views.js", "src/domain/study.js", "src/domain/review.js", "src/storage/local.js", "src/storage/validate.js", "src/content/catalog.js",
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png', 'assets/icons/apple-touch-icon.png'
 ];
-const CORE_PATHS = new Set(CORE.map(path => new URL(path, ROOT).pathname));
+const CORE_URLS = new Map(CORE.map(path => {
+  const url = new URL(path, ROOT);
+  return [url.pathname, url.href];
+}));
 const indexURL = new URL('index.html', ROOT).href;
 
 self.addEventListener('install', event => {
   // Installation is atomic: a failed download leaves the existing worker in place.
-  event.waitUntil(caches.open(SHELL_CACHE).then(cache => cache.addAll(
-    CORE.map(path => new Request(new URL(path, ROOT), {cache: 'reload'}))
-  )));
+  event.waitUntil((async()=>{
+    const cache=await caches.open(SHELL_CACHE);
+    await cache.addAll(CORE.map(path => new Request(new URL(path, ROOT), {cache:'reload'})));
+    // A first direct visit to a qualification happens before SW control. Save
+    // that entry too; the root shell cannot supply another qualification's ID.
+    const pages=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+    const entries=new Set();
+    for(const page of pages){
+      const url=new URL(page.url),relative=url.pathname.slice(ROOT.pathname.length);
+      if(url.origin===ROOT.origin&&url.pathname.startsWith(ROOT.pathname)&&/^[a-zA-Z0-9_-]+\/(?:index\.html)?$/.test(relative))entries.add(new URL(relative.endsWith('/')?relative+'index.html':relative,ROOT).href);
+    }
+    await cache.addAll([...entries].map(url=>new Request(url,{cache:'reload'})));
+  })());
 });
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
@@ -63,13 +78,17 @@ self.addEventListener('fetch', event => {
   const request = event.request, url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== ROOT.origin || !url.pathname.startsWith(ROOT.pathname)) return;
   const isHome = url.pathname === ROOT.pathname || url.pathname === new URL('index.html', ROOT).pathname;
-  if (request.mode === 'navigate' && isHome) {
-    event.respondWith(networkFirst(request, SHELL_CACHE, indexURL, event));
-  } else if (CORE_PATHS.has(url.pathname)) {
-    // Use a single current question bank regardless of its cache-busting query.
-    const key = url.pathname === new URL('data/questions.json', ROOT).pathname
-      ? new URL(`data/questions.json?v=${RELEASE}`, ROOT).href : request;
+  const route = url.pathname.slice(ROOT.pathname.length);
+  const isQualification = /^[a-zA-Z0-9_-]+\/(index\.html)?$/.test(route);
+  if (request.mode === 'navigate' && (isHome || isQualification)) {
+    const key = isHome ? indexURL : new URL(route.endsWith('/') ? route+'index.html' : route, ROOT).href;
     event.respondWith(networkFirst(request, SHELL_CACHE, key, event));
+  } else if (CORE_URLS.has(url.pathname)) {
+    // Keep one current copy per module, including imports with an older URL revision.
+    event.respondWith(networkFirst(request, SHELL_CACHE, CORE_URLS.get(url.pathname), event));
+  } else if (url.pathname.startsWith(new URL('data/qualifications/', ROOT).pathname)) {
+    url.search = '';
+    event.respondWith(networkFirst(request, CONTENT_CACHE, url.href, event));
   } else if (url.pathname.startsWith(new URL('assets/', ROOT).pathname)) {
     url.search = '';
     event.respondWith(networkFirst(request, IMAGE_CACHE, url.href, event));

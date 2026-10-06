@@ -1,0 +1,74 @@
+export const appRoot = new URL('../../', import.meta.url);
+export const contentCacheName = `hitomon-${appRoot.pathname}content`;
+
+async function readJSON(url, sha256) {
+  const key = new URL(url); key.search = '';
+  let response, cachedFallback=false;
+  try { response = await fetch(url, {cache: 'no-cache'}); }
+  catch (error) {
+    response = await globalThis.caches?.match(key.href);cachedFallback=true;
+    if (!response) throw error;
+  }
+  if (!response.ok) throw new Error('教材を読み込めませんでした。');
+  const text = await response.text();
+  if (sha256) {
+    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))].map(n=>n.toString(16).padStart(2,'0')).join('');
+    if (hash !== sha256) throw new Error('教材の確認に失敗しました。オンラインで開き直してください。');
+  }
+  const value = JSON.parse(text);
+  // The first visit may load before the SW controls the page. Save public content
+  // here too so a first question can be resumed offline without an extra reload.
+  try {
+    const cache = await globalThis.caches?.open(contentCacheName);
+    await cache?.put(key.href, new Response(text, {headers:{'Content-Type':'application/json'}}));
+  } catch { /* Cache quota does not turn a successful read into a failure. */ }
+  return {value, online: !cachedFallback && navigator.onLine && response.headers.get('X-Hitomon-Offline') !== '1'};
+}
+
+function assets(q) {
+  const resolve = path => {
+    if (!path) return path;
+    const url = new URL(path, appRoot);
+    if (!['http:', 'https:'].includes(url.protocol)) throw new Error('教材の画像URLが正しくありません。');
+    return url.href;
+  };
+  return {...q, sourceImages:q.sourceImages.map(resolve), image:resolve(q.image), choices:q.choices.map(c=>({...c,image:resolve(c.image)}))};
+}
+
+export async function loadCatalog(requestedId) {
+  const listing = await readJSON(new URL('data/qualifications/catalog.json', appRoot));
+  const qualifications = listing.value.qualifications;
+  if (!Array.isArray(qualifications) || !qualifications.length) throw new Error('資格一覧を読み込めませんでした。');
+  if (!requestedId && qualifications.length > 1) return {choose:true, qualifications};
+  const entry = qualifications.find(q=>q.id === (requestedId || qualifications[0].id));
+  if (!entry) throw new Error('この資格はまだ公開されていません。');
+  const manifestURL = new URL(entry.url, new URL('data/qualifications/', appRoot));
+  const loaded = await readJSON(manifestURL);
+  const manifest = loaded.value;
+  if (manifest.id !== entry.id) throw new Error('資格の教材が一致しません。');
+  const indexURL = new URL(manifest.index.url, manifestURL);
+  const index = await readJSON(indexURL, manifest.index.sha256);
+  const questions = index.value.map(assets), byId = new Map(questions.map(q=>[q.id,q]));
+  if (questions.length !== manifest.count || byId.size !== questions.length) throw new Error('教材一覧の件数が一致しません。');
+  const packs = new Map(manifest.packs.map(pack=>[pack.id,{...pack,url:new URL(pack.url,manifestURL).href}]));
+  const loading = new Map();
+  async function ensure(id) {
+    const question = byId.get(id);
+    if (!question) throw new Error('この問題は現在の教材一覧にありません。');
+    if (question.hints) return question;
+    const pack = packs.get(question.packId);
+    if (!pack) throw new Error('この問題の教材が見つかりません。');
+    if (!loading.has(pack.id)) {
+      const promise = readJSON(pack.url,pack.sha256).then(({value})=>{
+        if (!Array.isArray(value) || value.length !== pack.count || new Set(value.map(q=>q.id)).size !== value.length) throw new Error('教材パックの件数が一致しません。');
+        for (const q of value) if (q.qualificationId !== manifest.id || q.packId !== pack.id || byId.get(q.id)?.packId !== pack.id) throw new Error('教材パックの問題が一致しません。');
+        for (const q of value) Object.assign(byId.get(q.id),assets(q));
+      }).catch(error=>{loading.delete(pack.id);throw error;});
+      loading.set(pack.id,promise);
+    }
+    await loading.get(pack.id);
+    return question;
+  }
+  return {manifest, qualifications, questions, packs, ensure, online:loaded.online && index.online,
+    loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
+}
