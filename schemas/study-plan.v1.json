@@ -123,9 +123,86 @@
               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$",
               "maxLength": 100
             }
+          },
+          "weeklyTargets": {
+            "type": "array",
+            "maxItems": 104,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "start",
+                "end",
+                "completedAttempts"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$",
+                  "maxLength": 100
+                },
+                "start": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "end": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "completedAttempts": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100000
+                }
+              }
+            }
+          },
+          "milestones": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "name",
+                "date",
+                "examPartId",
+                "completed"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$",
+                  "maxLength": 100
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "examPartId": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$",
+                  "maxLength": 100
+                },
+                "completed": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         }
       }
     }
-  }
+  },
+  "$comment": "2026-10-07: optional phase weeklyTargets and milestones added; existing required fields and their meanings are unchanged. Date references, bounds, overlap and totals are checked by the app."
 }

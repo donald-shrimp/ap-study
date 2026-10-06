@@ -46,3 +46,16 @@ test('診断へ支援付き記録・重複問題・異なる資格を混入で�
 test('公開サンプルを現行資格定義で検証できる',()=>{
  const qualification=JSON.parse(readFileSync(new URL('../content/ap/qualification.json',import.meta.url))),example=JSON.parse(readFileSync(new URL('../schemas/study-plan.example.json',import.meta.url)));validatePlan(example,qualification);
 });
+
+const detailedPlan=()=>{const p=plan();p.phases[0].weeklyTargets=[{id:'first',start:'2026-10-07',end:'2026-10-13',completedAttempts:4},{id:'last',start:'2026-10-14',end:'2026-10-18',completedAttempts:6}];p.phases[0].milestones=[{id:'mock',name:'記述式の模試',date:'2026-10-18',examPartId:'written',completed:false}];return p;};
+test('週別目標と予定は任意。未知項目・期間・件数・ID・合計の矛盾を拒否する',()=>{
+ assert.deepEqual(validatePlan(plan(),q),plan());validatePlan(detailedPlan(),q);
+ for(const modify of [p=>p.phases[0].weeklyTargets=null,p=>p.phases[0].weeklyTargets[0].end='2026-10-14',p=>p.phases[0].weeklyTargets[1].start='2026-10-13',p=>p.phases[0].weeklyTargets[0].completedAttempts=5,p=>p.phases[0].weeklyTargets[0].start='2026-10-06',p=>p.phases[0].weeklyTargets[0].id='last',p=>p.phases[0].weeklyTargets[0].completedAttempts=1.2,p=>p.phases[0].milestones=null,p=>p.phases[0].milestones[0].date='2026-10-19',p=>p.phases[0].milestones[0].examPartId='unknown',p=>p.phases[0].milestones[0].completed='true',p=>p.phases[0].milestones[0].extra='unknown',p=>p.phases[0].milestones.push({...p.phases[0].milestones[0]})]){const p=detailedPlan();modify(p);assert.throws(()=>validatePlan(p,q));}
+});
+test('週の両端とJST境界で実績を数え、休んだ週の未達を繰り越さない',()=>{
+ const p=detailedPlan(),attempts=['2026-10-06T15:00:00Z','2026-10-13T14:59:59Z','2026-10-13T15:00:00Z','2026-10-18T14:59:59Z','2026-10-18T15:00:00Z'].map(at=>{const a=createAttempt(questions[0],{at});selectAnswer(a,1);finalizeAttempt(a,'correct',at);return a;});
+ const before=JSON.stringify(attempts),first=phaseProgress(p,attempts,q,'2026-10-13T14:59:59Z')[0],second=phaseProgress(p,attempts,q,'2026-10-13T15:00:00Z')[0];
+ assert.equal(first.actual,4);assert.deepEqual(first.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,true],[2,4,false]]);assert.deepEqual(second.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,false],[2,4,true]]);
+ p.phases[0].milestones[0].completed=true;assert.equal(phaseProgress(p,attempts,q)[0].actual,4);assert.equal(JSON.stringify(attempts),before);
+ const summary=studySummary({qualification:q,plan:p,attempts,at:'2026-10-14T00:00:00Z'});assert.equal(summary.phaseProgress[0].weeklyProgress[1].remaining,4);assert.equal(summary.currentPlan.phases[0].milestones[0].completed,true);
+});

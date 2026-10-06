@@ -4,12 +4,13 @@ import {selectDiagnostic,createDiagnostic,submitDiagnostic,finishDiagnostic,diag
 import {createPlanningViews} from '../ui/planning.js';
 
 export function createPlanningFeature({qualification,rootPath,getStore,getState,getNavigation,content,base,validateAttempt,onUpdate,onNavigate,onNotice,onChanged,getReviewCount,download}){
- let workspace,documents=[],preview=null,previewRevision=0,jsonInput='',editingPhaseId=null,status='guest',generation=0,busy=false;
+ let workspace,documents=[],preview=null,previewRevision=0,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,status='guest',generation=0,busy=false;
  const row=id=>documents.find(r=>r.id===id),plan=()=>row('planning')?.payload||blankPlan(qualification);
  const validate=(kind,payload)=>{if(kind==='planning')return validatePlan(payload,qualification);if(kind==='diagnostic')return validateDiagnostic(payload,qualification,validateAttempt);throw new Error('未対応の記録形式です。');};
  function allAttempts(){return [...getState().attempts,...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticAttempts(r.payload))];}
- const views=()=>createPlanningViews({qualification,documents,attempts:allAttempts(),currentRunId:getState().currentRunId,preview,jsonInput,editingPhaseId,workspaceStatus:status});
- async function bind(){const token=++generation,identity=await getStore().identity();await workspace?.close();if(token!==generation)return;workspace=createWorkspaceStore({...identity,rootPath,validate});try{documents=(await workspace.read()).filter(r=>{try{validate(r.kind,r.payload);return true;}catch{onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');return false;}});}catch{documents=[];onNotice('計画・診断を保存できません。通常学習は利用できます。');}if(workspace.error())onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');preview=null;jsonInput='';editingPhaseId=null;status=identity.owner.startsWith('uid:')?'pending':'guest';onUpdate();}
+ const views=()=>createPlanningViews({qualification,documents,attempts:allAttempts(),currentRunId:getState().currentRunId,preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status});
+ function phaseIn(next,id){const phase=next.phases.find(p=>p.id===id);if(!phase)throw new Error('フェーズが更新されています。計画を開き直してください。');return phase;}
+ async function bind(){const token=++generation,identity=await getStore().identity();await workspace?.close();if(token!==generation)return;workspace=createWorkspaceStore({...identity,rootPath,validate});try{documents=(await workspace.read()).filter(r=>{try{validate(r.kind,r.payload);return true;}catch{onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');return false;}});}catch{documents=[];onNotice('計画・診断を保存できません。通常学習は利用できます。');}if(workspace.error())onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');preview=null;jsonInput='';editingPhaseId=null;editingWeek=null;editingMilestone=null;status=identity.owner.startsWith('uid:')?'pending':'guest';onUpdate();}
  async function write(kind,id,payload,revision){const token=generation,target=workspace;await target.write(kind,id,payload,revision);if(token!==generation)return;documents=await target.read();onChanged();onUpdate();}
  function summary(){return studySummary({qualification,plan:row('planning')?plan():null,attempts:allAttempts(),diagnostics:documents.filter(r=>r.kind==='diagnostic'&&r.payload.status!=='in_progress').map(r=>diagnosticResult(r.payload,qualification)),reviewCount:getReviewCount()});}
  async function copy(text){try{await navigator.clipboard.writeText(text);onNotice('コピーしました。');}catch{
@@ -27,10 +28,10 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   const run=createDiagnostic(chosen,qualification,allAttempts(),content.manifest.index.sha256);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
  }
  async function action(el){
-  const action=el.dataset.action,known=['reload-planning','copy-prompt','copy-summary','export-summary','export-plan','preview-plan','register-plan','edit-phase','cancel-phase','delete-phase','start-diagnostic','resume-diagnostic','pause-diagnostic','submit-diagnostic','skip-diagnostic','end-diagnostic','diagnostic-zoom','workspace-local','workspace-remote','workspace-copy-run','export-diagnostics'];
+  const action=el.dataset.action,known=['reload-planning','copy-prompt','copy-summary','export-summary','export-plan','preview-plan','register-plan','edit-phase','cancel-phase','delete-phase','edit-week','cancel-week','delete-week','edit-milestone','cancel-milestone','delete-milestone','toggle-milestone','start-diagnostic','resume-diagnostic','pause-diagnostic','submit-diagnostic','skip-diagnostic','end-diagnostic','diagnostic-zoom','workspace-local','workspace-remote','workspace-copy-run','export-diagnostics'];
   if(!known.includes(action))return false;if(busy)return true;busy=true;
   try{
-   if(action==='reload-planning'){editingPhaseId=null;preview=null;onUpdate();}
+   if(action==='reload-planning'){editingPhaseId=null;editingWeek=null;editingMilestone=null;preview=null;onUpdate();}
    else if(action==='copy-prompt')await copy(aiPrompt(qualification,summary()));
    else if(action==='copy-summary')await copy(JSON.stringify(summary(),null,2));
    else if(action==='export-summary')download(summary(),`${qualification.id}-study-summary.json`);
@@ -40,6 +41,15 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
    else if(action==='register-plan'){if(!preview)throw new Error('先に計画を検証してください。');await write('planning','planning',preview,previewRevision);preview=null;jsonInput='';onUpdate();onNotice('受験日と計画を登録しました。');}
    else if(action==='edit-phase'){editingPhaseId=el.dataset.id;onUpdate();document.getElementById('phase-form').scrollIntoView({block:'start'});}
    else if(action==='cancel-phase'){editingPhaseId=null;onUpdate();}
+   else if(action==='edit-week'||action==='edit-milestone'){const selected={phaseId:el.dataset.phase,id:el.dataset.id};if(action==='edit-week')editingWeek=selected;else editingMilestone=selected;onUpdate();document.querySelector(`form[data-planning-form="${action==='edit-week'?'week':'milestone'}"][data-phase="${selected.phaseId}"]`).scrollIntoView({block:'center'});}
+   else if(action==='cancel-week'||action==='cancel-milestone'){if(action==='cancel-week')editingWeek=null;else editingMilestone=null;onUpdate();}
+   else if(['delete-week','delete-milestone','toggle-milestone'].includes(action)){
+    const next=structuredClone(plan()),phase=phaseIn(next,el.dataset.phase);
+    if(action==='delete-week')phase.weeklyTargets=(phase.weeklyTargets||[]).filter(w=>w.id!==el.dataset.id);
+    else if(action==='delete-milestone')phase.milestones=(phase.milestones||[]).filter(m=>m.id!==el.dataset.id);
+    else{const milestone=phase.milestones?.find(m=>m.id===el.dataset.id);if(!milestone)throw new Error('予定が更新されています。計画を開き直してください。');milestone.completed=!milestone.completed;}
+    await write('planning','planning',next,Number(el.dataset.revision));editingWeek=null;editingMilestone=null;onUpdate();onNotice(action==='toggle-milestone'?'予定の完了状態を保存しました。':'目標・予定を削除しました。');
+   }
    else if(action==='delete-phase'){const next=structuredClone(plan());next.phases=next.phases.filter(p=>p.id!==el.dataset.id);await write('planning','planning',next,Number(el.dataset.revision));editingPhaseId=null;}
    else if(action==='start-diagnostic')await startDiagnostic();
    else if(action==='resume-diagnostic'){const run=row(el.dataset.id)?.payload;if(!run)throw new Error('診断を見つけられません。');onNavigate('diagnostic',run.id);if(run.status==='in_progress'&&navigator.onLine){const token=generation;cacheImages(run.slots.map(s=>s.attempt.questionSnapshot)).then(()=>{if(token===generation)onNotice('診断の画像を保存しました。オフラインでも続けられます。');}).catch(()=>{if(token===generation)onNotice('未保存の診断画像があります。オフラインにする前に接続を確認してください。');});}}
@@ -70,12 +80,14 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   return false;
  }
  async function submit(form){
-  if(!['exam-form','phase-form'].includes(form.id))return false;
+  if(!['exam-form','phase-form'].includes(form.id)&&!['week','milestone'].includes(form.dataset.planningForm))return false;
   if(busy)return true;busy=true;
   try{const fields=new FormData(form),next=structuredClone(plan());
    if(form.id==='exam-form')next.examDates=examPartsFor(qualification).map(p=>({examPartId:p.id,date:String(fields.get('exam-'+p.id)||'')})).filter(d=>d.date);
-   else{const phase={id:form.dataset.id||'phase-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),start:String(fields.get('start')),end:String(fields.get('end')),examPartIds:fields.getAll('part').map(String),targets:{completedAttempts:Number(fields.get('target'))},focusTopicIds:fields.getAll('topic').map(String)};next.phases=[...next.phases.filter(p=>p.id!==phase.id),phase].sort((a,b)=>a.start.localeCompare(b.start));}
-   await write('planning','planning',next,Number(form.dataset.revision));editingPhaseId=null;onUpdate();onNotice(form.id==='exam-form'?'受験日を保存しました。':'フェーズを保存しました。');
+   else if(form.dataset.planningForm==='week'){const phase=phaseIn(next,form.dataset.phase),week={id:form.dataset.id||'week-'+crypto.randomUUID(),start:String(fields.get('start')),end:String(fields.get('end')),completedAttempts:Number(fields.get('target'))};phase.weeklyTargets=[...(phase.weeklyTargets||[]).filter(w=>w.id!==week.id),week].sort((a,b)=>a.start.localeCompare(b.start));}
+   else if(form.dataset.planningForm==='milestone'){const phase=phaseIn(next,form.dataset.phase),old=phase.milestones?.find(m=>m.id===form.dataset.id),milestone={id:form.dataset.id||'milestone-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),date:String(fields.get('date')),examPartId:String(fields.get('part')),completed:old?.completed||false};phase.milestones=[...(phase.milestones||[]).filter(m=>m.id!==milestone.id),milestone].sort((a,b)=>a.date.localeCompare(b.date));}
+   else{const phase={...next.phases.find(p=>p.id===form.dataset.id),id:form.dataset.id||'phase-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),start:String(fields.get('start')),end:String(fields.get('end')),examPartIds:fields.getAll('part').map(String),targets:{completedAttempts:Number(fields.get('target'))},focusTopicIds:fields.getAll('topic').map(String)};next.phases=[...next.phases.filter(p=>p.id!==phase.id),phase].sort((a,b)=>a.start.localeCompare(b.start));}
+   await write('planning','planning',next,Number(form.dataset.revision));editingPhaseId=null;editingWeek=null;editingMilestone=null;onUpdate();onNotice(form.id==='exam-form'?'受験日を保存しました。':form.dataset.planningForm==='week'?'週別目標を保存しました。':form.dataset.planningForm==='milestone'?'予定を保存しました。':'フェーズを保存しました。');
   }catch(error){onNotice(error.message);}finally{busy=false;}return true;
  }
  async function importGuest(uid,deviceId){

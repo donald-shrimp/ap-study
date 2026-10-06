@@ -217,7 +217,7 @@ main.addEventListener('change',async e=>{
   a.updatedAt=now();save();
 });
 $('#catalog-form')?.addEventListener('submit',e=>e.preventDefault());
-main.addEventListener('submit',async e=>{if(['catalog-form','exam-form','phase-form'].includes(e.target.id))e.preventDefault();await planner?.submit(e.target);});
+main.addEventListener('submit',async e=>{if(['catalog-form','exam-form','phase-form'].includes(e.target.id)||e.target.dataset.planningForm)e.preventDefault();await planner?.submit(e.target);});
 $('#close-image').addEventListener('click',()=>$('#image-dialog').close());
 $('#image-zoom-in').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.min(4000,img.clientWidth*1.25)}px`;});
 $('#image-zoom-out').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.max(600,img.clientWidth/1.25)}px`;});

@@ -29,7 +29,7 @@
 - 任意の受験日・フェーズ計画、期間内の取り組み回数と残り回数
 - AI向け学習状況／プロンプトのコピー、公開StudyPlan JSONの検証・プレビュー・登録・書き出し
 - 支援なしの30問実力診断。中断・再開、終了後の分野別結果と解説、通常学習での解き直し
-- 計画・診断は端末保存で利用可能。新しいクラウド同期には追加Rulesの配備が必要
+- 計画・診断は端末保存で利用可能。利用者が追加Rulesの公開を報告済み。本人が同期済み表示を確認済み。本番の別端末復元は別途
 - 人間向け[HTML定義書](docs/requirements.html)
 
 ## ローカルで動かす
@@ -141,7 +141,7 @@ python tests/lesson-preservation-r03a.py
 
 - [要件定義](docs/requirements.md)
 - [読みやすいHTML定義書](docs/requirements.html)
-- [開始ボタン・実力診断・受験日・学習計画の設計レビュー](docs/study-planning-review.html)（P0と30問診断を実装。残る週別目標・マイルストーン・P2も明記）
+- [開始ボタン・実力診断・受験日・学習計画の設計レビュー](docs/study-planning-review.html)（P0と30問診断を実装。週別目標・マイルストーンも実装。P2は後続）
 - [複数資格・Firebase同期の計画](docs/architecture-plan.html)（共通化・資格別教材・端末保存・同期コードを実装。[設計の詳細](docs/architecture-plan.md)）
 - [StudyPlan v1の公開形式とサンプル](docs/study-plan-format.md)
 - [学習設計](docs/learning-design.md)
@@ -199,7 +199,7 @@ python tools/rebuild-images.py --pdf-dir /path/to/official-pdfs --verify
 
 検索用TSVを読み直す場合は `python tools/reindex-search.py --ocr-dir /path/to/ocr` を使います。問題画像・正解・分野・ヒントは変更しません。
 
-Firebaseプロジェクト `hito-mon` のWeb設定を受領し、認証・同期コードとアクセスルールを実装しました。通常のGoogleログインは利用者が成功を確認済みです。今回追加した計画・診断のRulesは管理者資格情報がないため未配備です。[最後の設定と試し方](docs/firebase-setup.md)を参照してください。
+Firebaseプロジェクト `hito-mon` のWeb設定を受領し、認証・同期コードとアクセスルールを実装しました。通常のGoogleログインは利用者が成功を確認済みです。2026-10-07に利用者が計画・診断用Rulesの公開を報告しています。本人が「計画・診断も同期済み」の表示を確認済みです。本番の別端末での復元とインデックス除外は別途確認します。[最後の設定と試し方](docs/firebase-setup.md)を参照してください。
 
 SDKの生成とEmulatorの検証にはNode.js 22以上とJava 21を使用します。通常の静的配信にはnpmの実行は不要です。
 
@@ -217,13 +217,23 @@ npm run test:sync
 
 受験日・計画と診断は通常の試行とは別のIndexedDBへ、利用者×資格で保存します。同期も別の送信待ちで、版番号による更新競合を検出します。終了した診断は固定し、採点済みの回答を共通の集計・復習へ読み出します。通常学習での解き直しは元の診断を変更しません。計画のJSON取り込みで学習履歴を置き換えることもありません。
 
-AI APIは使用しません。[公開形式](docs/study-plan-format.md)に沿って、学習状況とプロンプトをコピー→AIへ相談→JSON貼付→検証→プレビュー→登録できます。未知の項目・日付・資格・パート・分野・重複期間を検証します。週別目標・マイルストーン・80問チェック・調整提案は未実装です。
+AI APIは使用しません。[公開形式](docs/study-plan-format.md)に沿って、学習状況とプロンプトをコピー→AIへ相談→JSON貼付→検証→プレビュー→登録できます。未知の項目・日付・資格・パート・分野・重複期間を検証します。週別目標・手動マイルストーンも実装しました。80問チェック・調整提案・計画履歴は後続です。
 
-**計画・診断の本番同期は追加Rulesの公開が必要です。** [設定手順](docs/firebase-setup.md#planning-rules)。権限不足でもこの端末に保存し、従来の通常学習の同期は継続します。実機での新しい端末間同期は未確認です。
+**2026-10-07：利用者が計画・診断用Rulesの公開を報告済みです。** [設定手順](docs/firebase-setup.md#planning-rules)。権限不足でもこの端末に保存し、従来の通常学習の同期は継続します。本人が「計画・診断も同期済み」の表示を確認済み。本番での別端末復元は別途確認します。
 
 ```sh
 node --test tests/study-domain.mjs tests/planning-domain.mjs
 python tests/workspace.py
 python tests/planning.py
 npx firebase emulators:exec --project demo-hitomon --only auth,firestore 'node --test tests/firebase-rules.mjs && python tests/sync.py && python tests/planning-sync.py'
+```
+
+### 週別目標と手動の予定（P1）
+
+フェーズの「週別目標・予定」から、1〜7日の目標期間と回数、模試・読書・復習などの予定を登録できます。ホーム下側は登録した今週の目標／現在／あと何回だけを追加表示します。未達を次週へ自動で足しません。予定の完了は本人が付け、問題数を増やしません。フェーズの名前や目標を編集しても、週別目標と予定を保持します。
+
+StudyPlan v1のフェーズに任意の `weeklyTargets` と `milestones` を追加しました。既存の必須項目・目標回数の意味は同じです。日付範囲・重複・週合計・完了状態を検証し、AIコピー・プレビュー・バックアップ・同期でも保持します。Firestore Rules自体は前回から変更していないため、今回の機能のために公開し直す必要はありません。
+
+```sh
+python tests/planning-targets.py
 ```

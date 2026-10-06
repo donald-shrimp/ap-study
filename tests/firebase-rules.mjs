@@ -54,7 +54,7 @@ const resourcePath=(uid,id)=>`users/${uid}/qualifications/ap/resources/${id}`;
 const resourceEnvelope=(kind,payload,revision=1)=>({version:1,kind,revision,operationId:`resource:${revision}`,deviceId:'device',payload,updatedAt:serverTimestamp()});
 test('計画は本人のみ保存でき、古い版・他資格・他人・削除を拒否する',async()=>{
  const db=env.authenticatedContext('planner').firestore(),other=env.authenticatedContext('other').firestore(),guest=env.unauthenticatedContext().firestore(),p=blankPlan(qualification),ref=doc(db,resourcePath('planner','planning'));
- await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p)));p.examDates=[{examPartId:'objective',date:'2026-11-04'}];await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p,2)));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p)));p.examDates=[{examPartId:'objective',date:'2026-11-04'}];p.phases=JSON.parse(readFileSync(new URL('../schemas/study-plan.example.json',import.meta.url))).phases;await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p,2)));
  await assertFails(setDoc(ref,resourceEnvelope('planning',p,2)));await assertFails(setDoc(ref,resourceEnvelope('planning',{...p,qualificationId:'other'},3)));
  for(const client of [other,guest]){await assertFails(getDoc(doc(client,resourcePath('planner','planning'))));await assertFails(setDoc(doc(client,resourcePath('planner','planning')),resourceEnvelope('planning',p,3)));}
  await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/planner/qualifications/ap/resources')));

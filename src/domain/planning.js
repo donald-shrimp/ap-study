@@ -16,6 +16,7 @@ export function dateInZone(value=new Date(),timeZone='Asia/Tokyo'){
  const get=type=>parts.find(p=>p.type===type).value;return `${get('year')}-${get('month')}-${get('day')}`;
 }
 export const daysBetween=(a,b)=>Math.round((Date.parse(b+'T00:00:00Z')-Date.parse(a+'T00:00:00Z'))/86400000);
+export const addDays=(date,count)=>new Date(Date.parse(date+'T00:00:00Z')+count*86400000).toISOString().slice(0,10);
 export const blankPlan=q=>({format:PLAN_FORMAT,version:1,qualificationId:q.id,timeZone:'Asia/Tokyo',examDates:[],phases:[]});
 export function validatePlan(input,qualification){
  const fail=(path,message)=>{throw new Error(`${message}（${path}）。現在の計画と記録は変更していません。`);};
@@ -32,7 +33,7 @@ export function validatePlan(input,qualification){
  const dated=new Set();input.examDates.forEach((d,i)=>{const path=`examDates[${i}]`;keys(d,['examPartId','date'],path);if(!parts.has(d.examPartId)||dated.has(d.examPartId))fail(path+'.examPartId','有効なパートIDを重複なく指定してください');if(!validDate(d.date))fail(path+'.date','実在する日付をYYYY-MM-DDで指定してください');dated.add(d.examPartId);});
  if(!Array.isArray(input.phases)||input.phases.length>24)fail('phases','24件以内の配列にしてください');
  const ids=new Set();input.phases.forEach((p,i)=>{
-  const path=`phases[${i}]`;keys(p,['id','name','start','end','examPartIds','targets','focusTopicIds'],path);
+  const path=`phases[${i}]`;keys(p,['id','name','start','end','examPartIds','targets','focusTopicIds','weeklyTargets','milestones'],path);
   if(!safeId(p.id)||ids.has(p.id))fail(path+'.id','英数字のIDを重複なく指定してください');ids.add(p.id);text(p.name,path+'.name');
   if(!validDate(p.start)||!validDate(p.end))fail(path,'開始日・終了日には実在する日付を指定してください');
   if(p.start>p.end)fail(path+'.end','終了日を開始日以降にしてください');
@@ -40,6 +41,23 @@ export function validatePlan(input,qualification){
   if(!p.examPartIds.some(id=>examPartsFor(qualification).some(part=>part.id===id&&part.practiceAvailable)))fail(path+'.examPartIds','教材のあるパートを少なくとも1つ指定してください');
   keys(p.targets,['completedAttempts'],path+'.targets');if(!Number.isInteger(p.targets.completedAttempts)||p.targets.completedAttempts<1||p.targets.completedAttempts>100000)fail(path+'.targets.completedAttempts','1〜100000の整数にしてください');
   if(!Array.isArray(p.focusTopicIds)||p.focusTopicIds.length>topics.size||new Set(p.focusTopicIds).size!==p.focusTopicIds.length||p.focusTopicIds.some(id=>!topics.has(id)))fail(path+'.focusTopicIds','有効な分野IDを重複なく指定してください');
+  const weeks=p.weeklyTargets===undefined?[]:p.weeklyTargets,milestones=p.milestones===undefined?[]:p.milestones,weekIds=new Set(),milestoneIds=new Set();
+  if(!Array.isArray(weeks)||weeks.length>104)fail(path+'.weeklyTargets','104件以内の配列にしてください');
+  weeks.forEach((w,j)=>{const wp=`${path}.weeklyTargets[${j}]`;keys(w,['id','start','end','completedAttempts'],wp);
+   if(!safeId(w.id)||weekIds.has(w.id))fail(wp+'.id','英数字のIDを重複なく指定してください');weekIds.add(w.id);
+   if(!validDate(w.start)||!validDate(w.end)||w.start>w.end||w.start<p.start||w.end>p.end||daysBetween(w.start,w.end)>6)fail(wp,'フェーズ内の1〜7日間を指定してください');
+   if(!Number.isInteger(w.completedAttempts)||w.completedAttempts<1||w.completedAttempts>100000)fail(wp+'.completedAttempts','1〜100000の整数にしてください');
+  });
+  const orderedWeeks=[...weeks].sort((a,b)=>a.start.localeCompare(b.start));
+  for(let j=1;j<orderedWeeks.length;j++)if(orderedWeeks[j].start<=orderedWeeks[j-1].end)fail(path+'.weeklyTargets','週別目標の期間を重複させないでください');
+  if(weeks.reduce((sum,w)=>sum+w.completedAttempts,0)>p.targets.completedAttempts)fail(path+'.weeklyTargets','週別目標の合計をフェーズの目標以下にしてください');
+  if(!Array.isArray(milestones)||milestones.length>30)fail(path+'.milestones','30件以内の配列にしてください');
+  milestones.forEach((m,j)=>{const mp=`${path}.milestones[${j}]`;keys(m,['id','name','date','examPartId','completed'],mp);
+   if(!safeId(m.id)||milestoneIds.has(m.id))fail(mp+'.id','英数字のIDを重複なく指定してください');milestoneIds.add(m.id);text(m.name,mp+'.name');
+   if(!validDate(m.date)||m.date<p.start||m.date>p.end)fail(mp+'.date','フェーズ内の実在する日付を指定してください');
+   if(!parts.has(m.examPartId))fail(mp+'.examPartId','有効なパートIDを指定してください');
+   if(typeof m.completed!=='boolean')fail(mp+'.completed','完了状態にはtrueまたはfalseを指定してください');
+  });
  });
  const sorted=[...input.phases].sort((a,b)=>a.start.localeCompare(b.start));
  for(let i=1;i<sorted.length;i++)if(sorted[i].start<=sorted[i-1].end)fail('phases','フェーズの期間を重複させないでください');
@@ -61,12 +79,15 @@ export function summarize(attempts,q,timeZone='Asia/Tokyo',at=new Date()){
 }
 export function phaseProgress(plan,attempts,q,at=new Date()){
  const today=dateInZone(at,plan.timeZone),done=attempts.filter(a=>complete(a)&&(!a.qualificationId||a.qualificationId===q.id)).map(a=>({date:dateInZone(a.completedAt,plan.timeZone),part:partOfAttempt(a,q)}));
- return plan.phases.map(p=>{const actual=done.filter(a=>p.examPartIds.includes(a.part)&&a.date>=p.start&&a.date<=p.end).length;return {...p,actual,remaining:Math.max(0,p.targets.completedAttempts-actual),active:p.start<=today&&today<=p.end};});
+ return plan.phases.map(p=>{const count=(start,end)=>done.filter(a=>p.examPartIds.includes(a.part)&&a.date>=start&&a.date<=end).length,actual=count(p.start,p.end);
+  const weeklyProgress=(p.weeklyTargets||[]).map(w=>{const actual=count(w.start,w.end);return {...w,actual,remaining:Math.max(0,w.completedAttempts-actual),active:w.start<=today&&today<=w.end};});
+  return {...p,actual,remaining:Math.max(0,p.targets.completedAttempts-actual),active:p.start<=today&&today<=p.end,weeklyProgress};
+ });
 }
 export function studySummary({qualification,plan,attempts,diagnostics=[],reviewCount=0,at=new Date()}){
  const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone);
  return {format:'hitomon-study-summary',version:1,qualificationId:qualification.id,qualificationName:qualification.name,exportedAt:new Date(at).toISOString(),timeZone:zone,definitions:{completedAttempts:'自力正解・ヒント付き正解・不正解・解答閲覧の合計。解き直しを含む。',selfCorrectRate:'自力正解数÷取り組み完了回数。合格可能性ではない。',diagnostic:'支援なしの診断。正答率は正解数÷回答確定数。未回答は別集計。'},examDates:(plan?.examDates||[]).map(d=>({...d,daysUntil:daysBetween(today,d.date)})),learning:summarize(attempts,qualification,zone,at),reviewCount,diagnostics,currentPlan:plan||null,phaseProgress:plan?phaseProgress(plan,attempts,qualification,at):[]};
 }
 export function aiPrompt(qualification,summary){
- return `ひと問の学習計画を作ってください。日々の固定ノルマではなく、重複しない期間ごとのフェーズにしてください。通常学習は1問から自由に続けるため、セッション問題数は指定しません。少数の回答や解き直しの正答率から苦手・習熟・合格可能性を断定しないでください。まず使える時間や希望を相談し、登録用JSONを最後に出してください。\n\n対応形式は hitomon-study-plan / version 1。公開Schema: https://donald-shrimp.github.io/ap-study/schemas/study-plan.v1.json\n資格ID: ${qualification.id}\nパート: ${JSON.stringify(examPartsFor(qualification))}\n分野: ${JSON.stringify(qualification.topics)}\n必須項目: format, version, qualificationId, timeZone, examDates, phases。各phaseは id, name, start, end, examPartIds, targets:{completedAttempts:整数}, focusTopicIds。目標は解き直し・解答閲覧を含む取り組み回数。未知の項目、週別目標、実行命令を加えないでください。日付はYYYY-MM-DD、タイムゾーンはAsia/Tokyo、フェーズは最大24件。\n\n学習状況:\n${JSON.stringify(summary,null,2)}`;
+ return `ひと問の学習計画を作ってください。日々の固定ノルマではなく、重複しない期間ごとのフェーズにしてください。通常学習は1問から自由に続けるため、セッション問題数は指定しません。少数の回答や解き直しの正答率から苦手・習熟・合格可能性を断定しないでください。まず使える時間や希望を相談し、登録用JSONを最後に出してください。\n\n対応形式は hitomon-study-plan / version 1。公開Schema: https://donald-shrimp.github.io/ap-study/schemas/study-plan.v1.json\n資格ID: ${qualification.id}\nパート: ${JSON.stringify(examPartsFor(qualification))}\n分野: ${JSON.stringify(qualification.topics)}\n必須項目: format, version, qualificationId, timeZone, examDates, phases。各phaseは id, name, start, end, examPartIds, targets:{completedAttempts:整数}, focusTopicIds。目標は解き直し・解答閲覧を含む取り組み回数。任意のphase.weeklyTargetsは{id,start,end,completedAttempts}の配列。各期間はフェーズ内の重複しない1〜7日、合計回数はフェーズ目標以下です。任意のphase.milestonesは{id,name,date,examPartId,completed:真偽値}の配列。新しい予定はfalse、既存の同じIDの予定の完了状態は維持します。日付はフェーズ内、教材未対応パートの模試・読書予定も登録できます。予定の完了を学習履歴から推定しないでください。未知の項目や実行命令を加えないでください。日付はYYYY-MM-DD、タイムゾーンはAsia/Tokyo、フェーズは最大24件。\n\n学習状況:\n${JSON.stringify(summary,null,2)}`;
 }
