@@ -19,6 +19,7 @@ export function initPWA() {
   const updateButton = document.querySelector('#update-app');
   const status = document.querySelector('#pwa-status');
   let installPrompt = null, registration = null, reloadForUpdate = false;
+  let promptReceived = false, workerError = null;
   const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
   const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   function showInstallState() {
@@ -31,7 +32,7 @@ export function initPWA() {
   }
   showInstallState();
   window.addEventListener('beforeinstallprompt', event => {
-    event.preventDefault(); installPrompt = event; showInstallState();
+    event.preventDefault(); promptReceived = true; installPrompt = event; showInstallState();
   });
   window.addEventListener('appinstalled', () => {
     installPrompt = null; installButton.hidden = true; installHelp.textContent = 'ホーム画面に追加しました。';
@@ -41,6 +42,12 @@ export function initPWA() {
     const prompt = installPrompt; installPrompt = null;
     await prompt.prompt(); await prompt.userChoice; showInstallState();
   });
+  // Only the explicit troubleshooting URL exposes diagnostics; normal study stays unchanged.
+  if (new URL(location.href).searchParams.get('pwa-check') === '1') {
+    import('./pwa-diagnostics.js').then(({showPWADiagnostics}) => showPWADiagnostics(() => ({
+      promptReceived, promptAvailable: !!installPrompt, workerError
+    }))).catch(() => { status.textContent = '診断画面を読み込めませんでした。接続後に開き直してください。'; });
+  }
   if (!('serviceWorker' in navigator) || !isSecureContext) {
     status.textContent = 'このブラウザではオフライン保存を利用できません。'; return;
   }
@@ -60,7 +67,8 @@ export function initPWA() {
       reg.addEventListener('updatefound', () => {
         reg.installing?.addEventListener('statechange', showUpdate);
       });
-    }).catch(() => {
+    }).catch(error => {
+      workerError = String(error);
       if (!navigator.serviceWorker.controller) status.textContent = 'オフライン用の保存ができませんでした。接続後に開き直してください。';
     });
 }

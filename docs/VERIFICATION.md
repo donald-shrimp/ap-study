@@ -97,6 +97,12 @@ python tools/rebuild-images.py --pdf-dir /path/to/official-pdfs --verify
 
 ユーザーのAndroid Chromeでは、Squooshはインストールできる一方、ひと問は「インストールできません」となる報告があります。PC版Chromiumでインストール条件・beforeinstallprompt・ボタン表示・オフライン動作が通ることと、AndroidでのWebAPK生成・導入成功は別として扱います。Android実機のインストール成功は未確認です。
 
-公開版のマニフェストをChrome DevTools Protocolで解析すると、`id: "./"` が `https://donald-shrimp.github.io/` として解決されていました。起動先・スコープは `/ap-study/` でしたが、アプリ識別子がホスト全体になっています。`id: "/ap-study/"` へ修正し、実際にChromeが解決したIDを `tests/pwa.py` で確認します。マニフェストURLとサービスワーカーのリビジョンも更新して古い定義の再利用を避けます。この設定ミスの修正がAndroid側のエラーを解消するかは、公開後の実機再試行で確認が必要です。
+公開版のマニフェストをChrome DevTools Protocolで解析すると、`id: "./"` が `https://donald-shrimp.github.io/` として解決されていました。起動先・スコープは `/ap-study/` でしたが、アプリ識別子がホスト全体になっています。`id: "/ap-study/"` へ修正し、実際にChromeが解決したIDを `tests/pwa.py` で確認します。マニフェストURLとサービスワーカーのリビジョンも更新して古い定義の再利用を避けます。このID修正自体は公開版で確認済みですが、Android側のエラーは解消していません（後述）。
+
+ID修正版の公開後も、実機のスクリーンショットで「このアプリはインストールできません。」を確認しました。ID修正では解消しておらず、原因は未確定です。Chromeの追加メニューでインストール項目が既に無効になっているため、WebAPK生成・OSへの導入に進む前の取得・判定を調べます。
+
+[Chromiumの表示処理](https://chromium.googlesource.com/chromium/src/+/main/components/webapps/browser/android/java/src/org/chromium/components/webapps/pwa_universal_install/PwaUniversalInstallBottomSheetViewBinder.java)では、この文言はAPP_IS_NOT_INSTALLABLEの場合に表示されます。[データ取得処理](https://chromium.googlesource.com/chromium/src/+/main/components/webapps/browser/android/add_to_homescreen_data_fetcher.cc)はマニフェスト・アイコンの取得、適格性とURL互換性の判定、取得のタイムアウト時にショートカットへ分類します。これらのどの経路で実機が失敗したかは、画像だけでは判別できません。
+
+`?pwa-check=1` に限定した読み取り専用の診断を追加。ブラウザ情報、マニフェスト・PNGの取得時間とデコード結果、サービスワーカーの状態、beforeinstallprompt受信の有無をコピーできます。JavaScriptによる取得成功をChrome内部のインストール可否と同一視しません。`tests/pwa-diagnostics.py` で通常画面への非表示、診断表示とコピー、マニフェスト・アイコン取得失敗の報告、学習記録の保持と診断への非混入を確認します。Android実機による原因特定とインストール成功確認は引き続き未完了です。
 
 参照：[W3C Web Application Manifest — id](https://www.w3.org/TR/appmanifest/#id-member)。
