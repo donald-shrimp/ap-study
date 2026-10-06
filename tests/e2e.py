@@ -6,6 +6,9 @@ URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
 reveal_fixture=next(q for q in bank if not q['hints'][0]['revealsAnswer'] and q['hints'][1]['revealsAnswer'])
+pending_fixture=next(q for q in bank if q['enrichment']=='topic-guide' and q['answer']!=0 and q['sourceImages'])
+pending_id=pending_fixture['id']
+pending_hint_fixture=next(q for q in bank if q['enrichment']=='topic-guide' and q['id']!=pending_id and not q['hints'][0]['revealsAnswer'])
 reviewed_count=sum(q['enrichment']=='reviewed' for q in bank)
 complete_exams=[file.stem for file in (Path(__file__).resolve().parents[1]/'data/lessons').glob('*.json')]
 with sync_playwright() as p:
@@ -97,7 +100,7 @@ with sync_playwright() as p:
    assert a['hintCount']==0 and a['selected'] is None and not a['answerViewedBefore']
  print('PASS complete-exam 80-question filters / new lessons / all three stages / reveal warning / pause-resume / saved choice reasons / closed retry',flush=True)
  # Hints also remain available for questions whose full explanation is pending.
- open_q('r04h-q79');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+ open_q(pending_hint_fixture['id']);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  a=next(a for a in state()['attempts'] if a['id']==state()['currentId']);assert a['materialSnapshot']['enrichment']=='topic-guide'
  page.reload();page.locator('.hint-box').wait_for();assert page.locator('.hint-box').count()==1
  # An answer-revealing hint is labelled before opening and counts as answer viewing.
@@ -128,15 +131,16 @@ with sync_playwright() as p:
  page.evaluate('([k,s])=>{localStorage.setItem(k,JSON.stringify(s));localStorage.setItem=()=>{};}',[KEY,completed]);page.reload();page.locator('.hint-head h3').wait_for()
  page.get_by_role('button',name='最新のヒントで解き直す',exact=True).click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['selected'] is None and a['hintCount']==0 and not a['answerViewedBefore']
  print('PASS reported DAC question / decimal place-value reasoning / old guide to latest hints / selection preserved / old history unchanged / completed retry starts closed',flush=True)
- open_q('r04h-q80');assert page.locator('.source-question img').count()==1;assert page.locator('.question-meta').inner_text().find('2022年 春期')>=0
- answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：エ' in page.locator('.result').inner_text();assert '個別の解答解説は未追加' in page.locator('.result').inner_text();assert '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
- nav('review');assert page.locator('[data-action=start][data-id=r04h-q80]').count()==1
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option('2022');page.locator('[name=season]').select_option('spring');page.locator('[name=query]').fill(by_id['r04h-q80']['title']);page.locator('[data-action=edit][data-id=r04h-q80]').click()
+ exam_name=f"{pending_fixture['year']}年 {'春期' if pending_fixture['season']=='spring' else '秋期'}"
+ open_q(pending_id);assert page.locator('.source-question img').count()==1;assert exam_name in page.locator('.question-meta').inner_text()
+ answer(0);assert '不正解' in page.locator('#result-heading').inner_text();assert '正解：'+pending_fixture['choices'][pending_fixture['answer']]['label'] in page.locator('.result').inner_text();assert '個別の解答解説は未追加' in page.locator('.result').inner_text();assert '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
+ nav('review');assert page.locator(f'[data-action=start][data-id={pending_id}]').count()==1
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);page.locator(f'[data-action=edit][data-id={pending_id}]').click()
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
  # An old attempt keeps its original hints and pending explanation after editing.
- nav('history');old=next(a for a in state()['attempts'] if a['questionId']=='r04h-q80');page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
- open_q('r04h-q80');page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count+1}問');page.locator('[name=query]').fill(by_id['r04h-q80']['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q('r04h-q80')
+ nav('history');old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click();assert '個別の解答解説は未追加' in page.locator('.result').inner_text()
+ open_q(pending_id);page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count+1}問');page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
  print('PASS scanned source / official key / pending-explanation honesty / retry / personal notes / immutable snapshot',flush=True)
  page.set_viewport_size({'width':390,'height':844});page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.get_by_role('button',name='問題を拡大').click();assert page.locator('#image-dialog').is_visible();initial=page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth');page.get_by_role('button',name='画像を拡大',exact=True).click();assert page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth')>initial
