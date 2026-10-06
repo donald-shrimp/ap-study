@@ -1,5 +1,5 @@
 import {now} from '../utils.js';
-export const makeState = () => ({version:1, attempts:[], currentId:null, view:'home', settings:{largeText:false, sessionSize:1}, session:{goal:1, attemptIds:[], topic:null}, readingNotes:{}, overrides:{}});
+export const makeState = () => ({version:1, attempts:[], currentId:null, currentRunId:null, view:'home', settings:{largeText:false}, session:{attemptIds:[], topic:null}, readingNotes:{}, overrides:{}});
 export const complete = a => ['correct','assisted','incorrect','revealed'].includes(a.status);
 export const labels = {correct:'自力で正解',assisted:'ヒントで正解',incorrect:'不正解',revealed:'解答を確認',in_progress:'途中',postponed:'あとで解く'};
 export function hintTotal(a) { return a.materialSnapshot.hints.length; }

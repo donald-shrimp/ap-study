@@ -1,7 +1,7 @@
 // Transport-independent synchronization; remote pages and their cursor commit
 // together. The bound UID/store cannot change while an operation is in flight.
 export function createSyncEngine({uid,qualificationId,store,remote,validateAttempt,onRecords=()=>{},onFork=()=>{},onStatus=()=>{},isOnline=()=>navigator.onLine}){
- let stopped=false,running=null,timer,latestScheduled='',lastRun=0,retries=0;
+ let stopped=false,running=null,timer,latestScheduled='',lastRun=0,retries=0,rerun=false;
  const active=()=>!stopped;
  const bounded=operation=>new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(new Error('同期通信がタイムアウトしました。')),20000);operation.then(resolve,reject).finally(()=>clearTimeout(timeout));});
  async function download(){
@@ -45,8 +45,8 @@ export function createSyncEngine({uid,qualificationId,store,remote,validateAttem
    if(isOnline()&&(/unavailable|network-request-failed|deadline-exceeded/.test(error.code||'')||error.message==='同期通信がタイムアウトしました。'))timer=setTimeout(()=>run(),Math.min(60000,15000*2**retries++));
   }}
  }
- function run(){clearTimeout(timer);timer=null;if(stopped)return Promise.resolve();if(running)return running;
-  running=perform().finally(()=>{running=null;});return running;
+ function run(){clearTimeout(timer);timer=null;if(stopped)return Promise.resolve();if(running){rerun=true;return running;}
+  running=perform().finally(()=>{running=null;if(rerun&&active()){rerun=false;timer=setTimeout(run,0);}});return running;
  }
  async function schedule(){
   if(stopped)return;const items=await store.pending();if(stopped)return;

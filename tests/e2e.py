@@ -29,10 +29,10 @@ with sync_playwright() as p:
  def answer(index=None):
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);correct=by_id[a['questionId']]['answer']
   page.get_by_role('radio').nth(correct if index is None else index).check();page.get_by_role('button',name='回答する',exact=True).click()
- for n in [1,3,5]:
-  page.locator(f'.quick-start [data-count="{n}"]').click();s=state();assert s['session']['goal']==n and s['session']['topic'] is None
+ for _ in range(3):
+  page.locator('.quick-start [data-action=start-session]').click();s=state();assert 'goal' not in s['session'] and s['session']['topic'] is None
   page.get_by_role('button',name='中断',exact=True).click()
- print('PASS 1 / 3 / 5 start with one click',flush=True)
+ print('PASS unified start with one click',flush=True)
  nav('materials');assert page.locator('.page-heading .badge').inner_text()=='800問';assert page.locator('#catalog-results .row').count()==20
  page.locator('[name=year]').select_option('2022');page.locator('[name=season]').select_option('spring')
  assert page.locator('.catalog-count').inner_text().startswith('80問');page.get_by_role('button',name='次の20問').click();assert '21〜40' in page.locator('.catalog-count').inner_text()
@@ -46,7 +46,7 @@ with sync_playwright() as p:
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=enriched]').check()
   assert page.locator('.catalog-count').inner_text().startswith('80問'),exam
  nav('topics');assert page.locator('.topic-card').count()==17
- security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True));security.locator('summary').click();security.locator('input').fill('第4章 p.120 <script>alert(1)</script>');security.locator('[data-count="3"]').click()
+ security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True));security.locator('summary').click();security.locator('input').fill('第4章 p.120 <script>alert(1)</script>');security.locator('[data-action=topic-session]').click()
  scoped=[]
  for i in range(3):
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);scoped.append(a['questionId']);assert by_id[a['questionId']]['topic']=='セキュリティ'
@@ -55,8 +55,8 @@ with sync_playwright() as p:
    page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).check();state();page.reload();page.locator('.reading-context').wait_for();assert page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).is_checked();assert 'セキュリティのみ' in page.locator('.study-toolbar').inner_text()
   answer()
   if i<2:page.get_by_role('button',name='次の問題',exact=True).click()
- assert len(set(scoped))==3 and '3問の目安完了' in page.locator('.session-milestone').inner_text()
- page.get_by_role('button',name='終了',exact=True).click();page.locator('.quick-start [data-count="1"]').click();assert state()['session']['topic'] is None
+ assert len(set(scoped))==3 and page.locator('.session-milestone').count()==0
+ page.get_by_role('button',name='今日はここまで',exact=True).click();page.locator('.quick-start [data-action=start-session]').click();assert state()['session']['topic'] is None
  print('PASS textbook note / three different scoped questions / hint-selection resume / scope reset',flush=True)
  open_q('r06h-q10');page.get_by_role('button',name='ヒントを1つ見る').click();answer();open_q('r06h-q10');answer();assert 'ヒントなしで正解' in page.locator('.result .progress-feedback').inner_text()
  open_q('r06h-q1');answer(0);open_q('r06h-q1');answer();assert '不正解 → 自力で正解' in page.locator('.result .progress-feedback').inner_text()

@@ -8,7 +8,7 @@ const finished = tx => new Promise((resolve,reject)=>{
 });
 const serial = value => JSON.stringify(value);
 const sharedFields = ['settings','readingNotes','overrides'];
-const checkpoint = state => ({version:state.version,currentId:state.currentId,view:state.view,session:state.session});
+const checkpoint = state => ({version:state.version,currentId:state.currentId,currentRunId:state.currentRunId||null,view:state.view,session:state.session});
 const shared = state => Object.fromEntries(sharedFields.map(k=>[k,state[k]]));
 const transport = a => {const {scrollY,readingNote,...payload}=a;return JSON.parse(JSON.stringify(payload));};
 const changedResult = (before,after) => ['status','selected','selectedChoiceId','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));

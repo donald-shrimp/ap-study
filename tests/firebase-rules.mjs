@@ -4,9 +4,13 @@ import {readFileSync} from 'node:fs';
 import {initializeTestEnvironment,assertSucceeds,assertFails} from '@firebase/rules-unit-testing';
 import {doc,setDoc,getDoc,getDocs,collection,deleteDoc,serverTimestamp,writeBatch,query,orderBy,limit,startAfter} from 'firebase/firestore';
 import {createAttempt,selectAnswer,gradeAttempt,finalizeAttempt,openHint} from '../src/domain/study.js';
+import {createDiagnostic,submitDiagnostic} from '../src/domain/diagnostic.js';
+import {blankPlan} from '../src/domain/planning.js';
 
 let env;
-const q=JSON.parse(readFileSync(new URL('../data/qualifications/ap/packs/r07h.b3e22c032f801e9e.json',import.meta.url)))[0];
+const manifest=JSON.parse(readFileSync(new URL('../data/qualifications/ap/manifest.json',import.meta.url)));
+const questions=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.packs.find(p=>p.id==='r07h').url,import.meta.url)));
+const q=questions[0];
 const path=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/attempts/${id}`;
 function envelope(a,revision=1,deviceId='device-one'){
  const {scrollY,...payload}=a;return {version:1,deviceId,revision,operationId:`${a.id}:${revision}`,payload,updatedAt:serverTimestamp()};
@@ -44,4 +48,25 @@ test('同じサーバー時刻の105件を100件ずつ欠落なく取得でき�
  assert.equal(first.size,100);const last=first.docs.at(-1);
  const next=await assertSucceeds(getDocs(query(ref,orderBy('updatedAt'),orderBy('__name__'),startAfter(last.data().updatedAt,last.id),limit(100))));
  assert.equal(next.size,5);assert.equal(new Set([...first.docs,...next.docs].map(d=>d.id)).size,105);
+});
+const qualification=JSON.parse(readFileSync(new URL('../content/ap/qualification.json',import.meta.url)));
+const resourcePath=(uid,id)=>`users/${uid}/qualifications/ap/resources/${id}`;
+const resourceEnvelope=(kind,payload,revision=1)=>({version:1,kind,revision,operationId:`resource:${revision}`,deviceId:'device',payload,updatedAt:serverTimestamp()});
+test('計画は本人のみ保存でき、古い版・他資格・他人・削除を拒否する',async()=>{
+ const db=env.authenticatedContext('planner').firestore(),other=env.authenticatedContext('other').firestore(),guest=env.unauthenticatedContext().firestore(),p=blankPlan(qualification),ref=doc(db,resourcePath('planner','planning'));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p)));p.examDates=[{examPartId:'objective',date:'2026-11-04'}];await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p,2)));
+ await assertFails(setDoc(ref,resourceEnvelope('planning',p,2)));await assertFails(setDoc(ref,resourceEnvelope('planning',{...p,qualificationId:'other'},3)));
+ for(const client of [other,guest]){await assertFails(getDoc(doc(client,resourcePath('planner','planning'))));await assertFails(setDoc(doc(client,resourcePath('planner','planning')),resourceEnvelope('planning',p,3)));}
+ await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/planner/qualifications/ap/resources')));
+});
+test('30問診断を保存・回答・終了でき、支援と終了後の変更を拒否する',async()=>{
+ const db=env.authenticatedContext('diagnostic').firestore(),run=createDiagnostic(questions.slice(0,30),qualification),ref=doc(db,resourcePath('diagnostic',run.id));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('diagnostic',run)));
+ run.currentChoiceId=run.slots[0].attempt.questionSnapshot.correctChoiceId;await assertSucceeds(setDoc(ref,resourceEnvelope('diagnostic',run,2)));
+ const hinted=structuredClone(run);hinted.slots[0].attempt.hintCount=1;await assertFails(setDoc(ref,resourceEnvelope('diagnostic',hinted,3)));
+ submitDiagnostic(run,run.currentChoiceId);await assertSucceeds(setDoc(ref,resourceEnvelope('diagnostic',run,3)));
+ const changed=structuredClone(run);changed.responses[run.slots[0].id]='different';await assertFails(setDoc(ref,resourceEnvelope('diagnostic',changed,4)));
+ for(let i=1;i<30;i++)submitDiagnostic(run,run.slots[run.currentIndex].attempt.questionSnapshot.correctChoiceId);
+ await assertSucceeds(setDoc(ref,resourceEnvelope('diagnostic',run,4)));
+ const reopened=structuredClone(run);reopened.status='in_progress';reopened.completedAt=null;await assertFails(setDoc(ref,resourceEnvelope('diagnostic',reopened,5)));
 });

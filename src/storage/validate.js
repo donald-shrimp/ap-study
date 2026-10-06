@@ -4,7 +4,7 @@ const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','packId','packLabel','type','correctChoiceId','hintCount'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
@@ -41,8 +41,8 @@ export function createStateValidator({getQuestions,getTopics,getQualification}) 
   return function validateState(s) {
     const base=getQuestions(), topics=getTopics(), qualification=getQualification();
     const fail=()=>{throw new Error('この資格の有効な学習記録ファイルではありません。現在の記録は変更していません。');};
-    if(!s||s.version!==1||!Array.isArray(s.attempts)||s.attempts.length>20000||!['home','study','review','history','materials','topics'].includes(s.view)||!s.settings||typeof s.settings.largeText!=='boolean'||![1,3,5].includes(s.settings.sessionSize)||!s.session||!Number.isInteger(s.session.goal)||s.session.goal<1||s.session.goal>5||!Array.isArray(s.session.attemptIds)||!s.overrides||Array.isArray(s.overrides)||typeof s.overrides!=='object')fail();
-    s.readingNotes??={};s.session.topic??=null;
+    if(!s||s.version!==1||!Array.isArray(s.attempts)||s.attempts.length>20000||!['home','study','review','history','materials','topics','planning','diagnostics','diagnostic'].includes(s.view)||!s.settings||typeof s.settings.largeText!=='boolean'||!s.session||!Array.isArray(s.session.attemptIds)||!s.overrides||Array.isArray(s.overrides)||typeof s.overrides!=='object')fail();
+    s.currentRunId??=null;if(s.currentRunId!==null&&!id(s.currentRunId))fail();s.readingNotes??={};s.session.topic??=null;delete s.settings.sessionSize;delete s.session.goal;
     if(!s.readingNotes||Array.isArray(s.readingNotes)||typeof s.readingNotes!=='object'||!(s.session.topic===null||text(s.session.topic,200))||(s.session.topicId!==undefined&&s.session.topicId!==null&&!id(s.session.topicId)))fail();
     for(const [topic,note] of Object.entries(s.readingNotes))if(!text(topic,100)||topic==='__proto__'||!text(note,200))fail();
     const ids=new Set(), byId=new Map(base.map(q=>[q.id,q]));

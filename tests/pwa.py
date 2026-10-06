@@ -93,7 +93,7 @@ with sync_playwright() as p:
    changed['attempts']=[{key:[old.get(key),new.get(key)] for key in old if old.get(key)!=new.get(key)} for old,new in zip(before['attempts'],after['attempts'])]
   raise AssertionError(f'Offline guard changed record: {changed}')
  assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
- nav('home');page.locator('.quick-start [data-count="1"]').click();assert state()['currentId']!=attempt
+ nav('home');page.locator('.quick-start [data-action=start-session]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0
  page.screenshot(path=str(ARTIFACTS/'offline-mobile.png'),full_page=True)

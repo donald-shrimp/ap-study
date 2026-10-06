@@ -39,6 +39,7 @@ def hashed_json(directory, prefix, value):
 def normalize(raw, config):
     q = dict(raw)
     q['qualificationId'] = config['id']
+    q.setdefault('examPartId', config.get('defaultExamPartId', 'objective'))
     q.setdefault('type', 'singleChoice')
     require(q['type'] == 'singleChoice', f"Unsupported question type: {q['id']}")
     if config.get('adapter') == 'ipa-ap':
@@ -69,6 +70,7 @@ def validate_questions(questions, config, root):
     for q in questions:
         require(SAFE_ID.fullmatch(q['id']) and q['id'] not in ids, f"Duplicate/invalid question ID: {q['id']}")
         ids.add(q['id'])
+        require(q['examPartId'] in {p['id'] for p in config['examParts']}, f"Invalid exam part: {q['id']}")
         require(SAFE_ID.fullmatch(q['packId']), f"Invalid pack ID: {q['id']}")
         require(isinstance(q['title'], str) and q['title'], f"Missing title: {q['id']}")
         require(isinstance(q.get('number'), int) and q['number'] > 0, f"Missing question number: {q['id']}")
@@ -94,6 +96,10 @@ def validate_questions(questions, config, root):
 def compile_qualification(root, id):
     require(SAFE_ID.fullmatch(id), f'Invalid qualification ID: {id}')
     config = json.loads((root / 'content' / id / 'qualification.json').read_text())
+    config.setdefault('defaultExamPartId', 'objective')
+    config.setdefault('examParts', [{'id': 'objective', 'label': '選択式', 'practiceAvailable': True}])
+    require(len({p['id'] for p in config['examParts']}) == len(config['examParts']) and all(SAFE_ID.fullmatch(p['id']) and p.get('label') and isinstance(p.get('practiceAvailable'), bool) for p in config['examParts']), 'Invalid exam parts')
+    require(config['defaultExamPartId'] in {p['id'] for p in config['examParts']}, 'Invalid default exam part')
     require(config['id'] == id, 'Qualification ID mismatch')
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')
@@ -114,7 +120,7 @@ def compile_qualification(root, id):
         packs.append({'id': pack_id, 'label': records[0]['packLabel'], 'url': f'packs/{filename}', 'sha256': digest, 'count': len(records), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in records)})
         for q in records:
             # The index supports searching/scoping/offline availability, not lesson rendering.
-            fields = ['id','qualificationId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type']
+            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type']
             item = {k: q[k] for k in fields if k in q}
             item['choices'] = [{k: v for k, v in c.items() if k != 'text'} for c in q['choices']]
             item['hintCount'] = len(q['hints'])

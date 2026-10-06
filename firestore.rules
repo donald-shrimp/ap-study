@@ -34,6 +34,48 @@ service cloud.firestore {
     && d.operationId == id + ':' + string(d.revision)
     && d.updatedAt == request.time && valid(d.payload, id, qualificationId);
   }
+  function validDiagnostic(p, id, qualificationId) {
+   return p.keys().hasOnly(['id','qualificationId','version','blueprintVersion','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
+    && p.id == id && p.qualificationId == qualificationId && p.version == 1
+    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size == 30
+    && p.status in ['in_progress','completed','ended_early']
+    && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
+    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < 30
+    && p.responses is map && p.responses.size() <= 30
+    && (p.currentChoiceId == null || p.currentChoiceId is string)
+    && p.slots is list && p.slots.size() == 30;
+  }
+  function frozenDiagnostic(p, old) {
+   return p.diff(old).affectedKeys().hasOnly(['responses','currentChoiceId','status','currentIndex','completedAt'])
+    && p.slots == old.slots && p.currentIndex >= old.currentIndex
+    && p.responses.diff(old.responses).removedKeys().size() == 0
+    && p.responses.diff(old.responses).changedKeys().size() == 0;
+  }
+  function validPlan(p, qualificationId) {
+   return p.keys().hasOnly(['format','version','qualificationId','timeZone','examDates','phases'])
+    && p.format == 'hitomon-study-plan' && p.version == 1 && p.qualificationId == qualificationId
+    && p.timeZone is string && p.timeZone.size() > 0 && p.timeZone.size() <= 80
+    && p.examDates is list && p.examDates.size() <= 20 && p.phases is list && p.phases.size() <= 24;
+  }
+  function resourceEnvelope(id, qualificationId) {
+   let d = request.resource.data;
+   return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
+    && d.version == 1 && d.kind in ['planning','diagnostic']
+    && d.revision is int && d.revision >= 1 && d.operationId is string && d.operationId.size() <= 300
+    && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
+    && d.updatedAt == request.time
+    && (d.kind == 'planning' ? id == 'planning' && validPlan(d.payload, qualificationId) : validDiagnostic(d.payload, id, qualificationId));
+  }
+  match /users/{uid}/qualifications/{qualificationId}/resources/{id} {
+   allow read: if mine(uid);
+   allow create: if mine(uid) && resourceEnvelope(id, qualificationId) && request.resource.data.revision == 1;
+   allow update: if mine(uid) && resourceEnvelope(id, qualificationId)
+    && request.resource.data.revision == resource.data.revision + 1 && request.resource.data.kind == resource.data.kind
+    && (resource.data.kind == 'planning' || (resource.data.payload.status == 'in_progress'
+     ? frozenDiagnostic(request.resource.data.payload, resource.data.payload)
+     : request.resource.data.payload == resource.data.payload));
+   allow delete: if false;
+  }
   match /users/{uid}/qualifications/{qualificationId}/attempts/{id} {
    allow read: if mine(uid);
    allow create: if mine(uid) && envelope(id, qualificationId);
