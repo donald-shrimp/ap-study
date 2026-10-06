@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  function mine(uid) { return request.auth != null && request.auth.uid == uid; }
+  function completed(p) { return p.status in ['correct','assisted','incorrect','revealed']; }
+  function valid(p, id, qualificationId) {
+   return p.keys().hasOnly(['id','qualificationId','questionId','questionVersion','contentRevision','topic','topicId','readingNote','status','startedAt','updatedAt','completedAt','selected','selectedChoiceId','hintCount','hintsBeforeAnswer','hintEvents','answerViewedBefore','confidence','questionSnapshot','materialSnapshot','continuationOf','continuedAt','importedFrom'])
+    && p.id == id && p.qualificationId == qualificationId
+    && p.questionId is string && p.questionVersion is int && p.contentRevision is string
+    && p.status in ['in_progress','postponed','correct','assisted','incorrect','revealed']
+    && p.startedAt is string && p.updatedAt is string
+    && p.confidence is bool && p.answerViewedBefore is bool
+    && p.questionSnapshot is map && p.questionSnapshot.id == p.questionId
+    && p.questionSnapshot.qualificationId == qualificationId
+    && p.materialSnapshot is map && p.materialSnapshot.hints is list
+    && p.materialSnapshot.hints.size() >= 1 && p.materialSnapshot.hints.size() <= 20
+    && p.hintCount is int && p.hintCount >= 0 && p.hintCount <= p.materialSnapshot.hints.size()
+    && p.hintEvents is list && p.hintEvents.size() == p.hintCount
+    && p.questionSnapshot.choices is list && p.questionSnapshot.choices.size() >= 2 && p.questionSnapshot.choices.size() <= 20
+    && p.questionSnapshot.answer is int && p.questionSnapshot.answer >= 0 && p.questionSnapshot.answer < p.questionSnapshot.choices.size()
+    && (p.selected == null || p.selected is int && p.selected >= 0 && p.selected < p.questionSnapshot.choices.size())
+    && p.selectedChoiceId == (p.selected == null ? null : p.questionSnapshot.choices[p.selected].id)
+    && (completed(p) ? p.completedAt is string && p.hintsBeforeAnswer is int && p.hintsBeforeAnswer >= 0 && p.hintsBeforeAnswer <= p.hintCount : p.completedAt == null && p.hintsBeforeAnswer == null)
+    && (p.status != 'correct' || p.selected == p.questionSnapshot.answer && p.hintsBeforeAnswer == 0 && !p.answerViewedBefore)
+    && (p.status != 'assisted' || p.selected == p.questionSnapshot.answer && p.hintsBeforeAnswer > 0 && !p.answerViewedBefore)
+    && (p.status != 'incorrect' || p.selected != null && p.selected != p.questionSnapshot.answer && !p.answerViewedBefore)
+    && (p.status != 'revealed' || p.answerViewedBefore);
+  }
+  function envelope(id, qualificationId) {
+   let d = request.resource.data;
+   return d.keys().hasOnly(['version','deviceId','revision','operationId','payload','updatedAt'])
+    && d.version == 1 && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
+    && d.revision is int && d.revision >= 1
+    && d.operationId == id + ':' + string(d.revision)
+    && d.updatedAt == request.time && valid(d.payload, id, qualificationId);
+  }
+  match /users/{uid}/qualifications/{qualificationId}/attempts/{id} {
+   allow read: if mine(uid);
+   allow create: if mine(uid) && envelope(id, qualificationId);
+   allow update: if mine(uid) && envelope(id, qualificationId)
+    && request.resource.data.deviceId == resource.data.deviceId
+    && request.resource.data.revision > resource.data.revision
+    && request.resource.data.payload.hintCount >= resource.data.payload.hintCount
+    && request.resource.data.payload.questionSnapshot == resource.data.payload.questionSnapshot
+    && request.resource.data.payload.materialSnapshot == resource.data.payload.materialSnapshot
+    && request.resource.data.payload.startedAt == resource.data.payload.startedAt
+    && request.resource.data.payload.questionId == resource.data.payload.questionId
+    && (!completed(resource.data.payload) || request.resource.data.payload.diff(resource.data.payload).affectedKeys().hasOnly(['hintCount','hintEvents','updatedAt']));
+   // Removing local history is local only. Destructive cloud reset is not offered.
+   allow delete: if false;
+  }
+ }
+}

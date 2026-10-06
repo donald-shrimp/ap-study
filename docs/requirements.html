@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="description" content="応用情報の過去問学習アプリの定義書。要点、学習の流れ、試せるヒントの例、記録と復習のルール。">
-  <title>応用情報の学習アプリ｜読みやすい定義書 v0.11</title>
+  <title>応用情報の学習アプリ｜読みやすい定義書 v0.12</title>
   <style>
     :root{--ink:#253a3c;--muted:#536b6e;--accent:#17645b;--accent-soft:#e9f3ee;--paper:#fff;--bg:#f4f5ef;--line:#dce3db;--warm:#fff6e5;--radius:18px}
     *{box-sizing:border-box}html{scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.85 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;overflow-wrap:anywhere}a{color:var(--accent);text-underline-offset:4px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.52}button,a,input,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a85c16;outline-offset:4px}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.5;text-wrap:balance}h1{font-size:clamp(27px,4vw,42px);letter-spacing:.03em;margin-bottom:18px}h2{font-size:27px;margin-bottom:14px}h3{font-size:19px;margin-bottom:8px}p{margin-bottom:16px}ul,ol{padding-left:1.5em}li{margin:.45em 0}strong{font-weight:700}small,.small{font-size:14px}.muted{color:var(--muted)}.skip{position:absolute;left:16px;top:-80px;padding:10px 16px;background:var(--paper);z-index:10}.skip:focus{top:10px}.shell{max-width:1170px;margin:auto;padding:0 32px}.masthead{display:flex;justify-content:space-between;align-items:center;padding-top:28px;gap:16px;font-size:13px;letter-spacing:.08em}.brand{font-weight:700;color:var(--accent)}.version{border:1px solid var(--line);padding:4px 12px;border-radius:20px;color:var(--muted);white-space:nowrap}.hero{padding:40px 0 30px;max-width:780px}.eyebrow{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.12em;margin-bottom:14px}.lead{font-size:19px;max-width:650px;color:var(--muted)}.hero-note{font-size:14px;margin:0;color:var(--muted)}
@@ -20,12 +20,12 @@
 <body>
   <a class="skip" href="#main">本文へ移動</a>
   <header class="shell">
-    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.11 · 2026.10.06</span></div>
+    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.12 · 2026.10.06</span></div>
     <div class="hero">
       <p class="eyebrow">過去問を使った、効率的な学習のために</p>
       <h1>応用情報の学習アプリ<br>何を作るか、どう使うか。</h1>
       <p class="lead">1問から始める。困ったらヒントを使う。<br>あとで、助けなしでもう一度解いてみる。</p>
-      <p class="hero-note"><a href="../index.html">800問のアプリを使う →</a><br>2021〜2025年の春・秋、午前800問。<br>年度・分野・キーワードで探せます。<br>全800問に、問題に合わせた3段階のヒント。<br>2022〜2025年の春秋と2021年春の720問に、解説と各選択肢の理由があります。<br>詳しい個別解説は全体で722問です。<br>ホーム画面に追加し、開いた問題をオフラインで再開できます。<br>資格別の教材と保存を分離済み。Googleログイン・同期は次の工程です。<br>このページは目標仕様も含みます。今回の実装範囲は<a href="requirements.md">要件定義</a>で確認できます。</p><p class="hero-note">まずは「要点」だけで大丈夫です。細かな仕様は、必要なときに開けます。</p>
+      <p class="hero-note"><a href="../index.html">800問のアプリを使う →</a><br>2021〜2025年の春・秋、午前800問。<br>年度・分野・キーワードで探せます。<br>全800問に、問題に合わせた3段階のヒント。<br>2022〜2025年の春秋と2021年春の720問に、解説と各選択肢の理由があります。<br>詳しい個別解説は全体で722問です。<br>ホーム画面に追加し、開いた問題をオフラインで再開できます。<br>資格別の教材と保存を分離済み。Googleログイン・同期のコードを実装。最後にFirebaseのルール公開が必要です。<br>このページは目標仕様も含みます。今回の実装範囲は<a href="requirements.md">要件定義</a>で確認できます。</p><p class="hero-note">まずは「要点」だけで大丈夫です。細かな仕様は、必要なときに開けます。</p>
     </div>
   </header>
   <div class="reader doc-controls" aria-label="定義書の読み方">
@@ -63,7 +63,7 @@
         </div>
         <ul class="plain-list">
           <li><strong><span class="tag">前提</span> 今年中の受験に向けた過去問学習</strong><p>中心は、過去問の収集・解説・ヒント・演習・復習です。</p></li>
-          <li><strong><span class="tag proposal">初期案</span> まずは自分用、選択式の問題から</strong><p>スマホとPCで使える画面にします。現在はAndroid Chromeなどで利用。端末間同期は、Googleログインを使う次の工程です。</p></li>
+          <li><strong><span class="tag proposal">初期案</span> まずは自分用、選択式の問題から</strong><p>スマホとPCで使える画面にします。現在はAndroid Chromeなどで利用。Googleログインで学習記録を同期する仕組みを追加しました。</p></li>
         </ul>
         <details><summary>画面の表示方針</summary><div><p>ブランド名「ひと問」とホームの開始カードには少し個性を残します。その他は機能名・操作・学習記録を中心に表示し、キャッチコピーや英語の装飾ラベルを省きます。学習日や達成の詳細は、必要なときに開けます。</p></div></details><details><summary>開発中の変更方針を読む</summary><div><p>仕様・画面・データ構造は大きく変更できます。後方互換性や、旧仕様のデータを移す処理は必須にしません。</p><p>通常の利用中は履歴を残しますが、開発中の仕様変更をまたぐデータ互換性は保証しない方針です。</p></div></details>
       </section>
@@ -113,8 +113,8 @@
           <tr><th scope="row">途中・あとで</th><td>まだ回答を確定していない</td><td>内容を残して再開。誤答にしない</td></tr>
         </tbody></table></div>
         <div class="takeaway"><p class="takeaway-label">進捗の伝え方</p><p><strong>「別の日に自力正解：2回」のように、確認できた事実を示します。</strong><br>同じ日の繰り返しや、別の問題での結果は分けて見ます。</p></div>
-        <details><summary>保存する項目を詳しく見る</summary><div><ul><li><strong>問題：</strong>出典、年度、問題番号、図表、正答、ヒント、解説、分野、関連問題。</li><li><strong>解いた記録：</strong>日時、選んだ回答、正誤、回答前のヒント段階と閲覧履歴、答えを見た時点、任意の自信。</li><li><strong>途中の状態：</strong>選択中の回答、開いたヒント、問題内の位置。</li><li><strong>復習：</strong>前回の結果、次の候補日、延期、別の日の自力正解。</li></ul><p>解き直しは新しい記録として追加し、前の履歴を上書きしません。「自力」はアプリ内での操作についての意味です。</p><p>診断名や服薬などの医療情報は収集しません。</p></div></details>
-        <details><summary>データの保存先について読む</summary><div><p><span class="tag proposal">初期案</span> 現在はアカウントなしで、使っている端末へ資格別に保存します。書き出し・読み込み・削除を用意します。</p><p>ブラウザのデータ削除や端末の紛失で記録が失われることがあります。別タブで同時に解いた結果も保持します。Googleログインと端末間同期は未実装です。</p><p>保存に失敗したときは画面に表示します。書き出しと読み込みは同じ仕様での利用を対象にします。現在の既存記録も保持し、教材を更新しても過去の回答を採点し直しません。<a href="architecture-plan.html">共通化と同期の進み具合を見る</a>。</p></div></details>
+        <details><summary>保存する項目を詳しく見る</summary><div><ul><li><strong>問題：</strong>出典、年度、問題番号、図表、正答、ヒント、解説、分野、関連問題。</li><li><strong>解いた記録：</strong>日時、選んだ回答、正誤、回答前のヒント段階と閲覧履歴、答えを見た時点、任意の自信。</li><li><strong>途中の状態：</strong>選択中の回答、開いたヒント、問題内の位置。</li><li><strong>復習：</strong>前回の結果、次の候補日、延期、別の日の自力正解。</li></ul><p>解き直しは新しい記録として追加し、前の履歴を上書きしません。「自力」はアプリ内での操作についての意味です。</p><p>教科書メモ・文字サイズは端末ごと。クラウド同期が失敗しても、学習と端末内保存を続けられます。<a href="firebase-setup.md">最後のFirebase設定と試し方</a>。Google実機認証・本番ルールの配備は未確認です。</p><p>診断名や服薬などの医療情報は収集しません。</p></div></details>
+        <details><summary>データの保存先について読む</summary><div><p><span class="tag proposal">初期案</span> ログインなしでも、使っている端末へ資格別に保存します。書き出し・読み込み・削除を用意します。</p><p>ブラウザのデータ削除や端末の紛失で記録が失われることがあります。別タブで同時に解いた結果も保持します。Googleログインすると回答・ヒント・中断状態を同期します。元の端末内記録は選んで取り込めます。</p><p>保存に失敗したときは画面に表示します。書き出しと読み込みは同じ仕様での利用を対象にします。現在の既存記録も保持し、教材を更新しても過去の回答を採点し直しません。<a href="architecture-plan.html">共通化と同期の進み具合を見る</a>。</p></div></details>
       </section>
       <section class="chapter" id="review" tabindex="-1" data-title="解き直し" aria-labelledby="review-title">
         <p class="chapter-number">05 / 解き直し</p><h2 id="review-title">日をあけて、もう一度。</h2>
@@ -138,7 +138,7 @@
         <div class="takeaway"><p class="takeaway-label">初期版の中心</p><p><strong>過去問を準備する → 1問解く → 記録する → 後日解き直す。</strong></p></div>
         <p class="section-intro">まず、この流れが気持ちよく使えて、学習に役立つかを確かめます。アプリ本体はまだ実装・公開していません。</p>
         <div class="grid"><div class="card"><span class="num">A</span><h3>着手と再開</h3><p>入口が分かるか。中断しても、迷わず戻れるか。</p></div><div class="card"><span class="num">B</span><h3>後日の自力解答</h3><p>日をあけた初回の挑戦で、助けなしに解けるか。</p></div><div class="card"><span class="num">C</span><h3>負担の小ささ</h3><p>操作・入力・復習量が、取り組みの邪魔にならないか。</p></div></div>
-        <details><summary>初期版の13機能を確認する</summary><div class="table-wrap"><table><caption>要件定義 v0.11の機能一覧</caption><thead><tr><th scope="col">ID・機能</th><th scope="col">できること</th></tr></thead><tbody><tr><th scope="row">F01 問題</th><td>問題文、選択肢、図表、出典、分野を表示。</td></tr><tr><th scope="row">F02 ヒント</th><td>段階的に開き、読み返す。段数は教材ごとに変更可能。</td></tr><tr><th scope="row">F03 解説</th><td>正誤、正答、手順、各選択肢の理由を表示。</td></tr><tr><th scope="row">F04 履歴</th><td>試行ごとに回答、正誤、ヒント、解答閲覧、日時を保存。</td></tr><tr><th scope="row">F05 再開</th><td>選択中の回答、ヒント、問題内の位置を復元。</td></tr><tr><th scope="row">F06 解き直し</th><td>復習候補から出題。手動でも選べる。</td></tr><tr><th scope="row">F07 復習予定</th><td>次の候補日を提案。延期・変更も可能。</td></tr><tr><th scope="row">F08 学習状況</th><td>自力正解、ヒント付き正解、要復習、未回答を区別。今日の取り組み・小さな達成・前回からの前進を表示。</td></tr><tr><th scope="row">F09 学習単位</th><td>1・3・5問のボタンを押すだけで開始。</td></tr><tr><th scope="row">F10 データ管理</th><td>書き出し、読み込み、削除。保存先も説明。</td></tr><tr><th scope="row">F11 関連問題</th><td>同じ考え方を使う別問題で確かめる。</td></tr><tr><th scope="row">F12 基礎説明</th><td>短い説明や解法例へ戻れる。</td></tr><tr><th scope="row">F13 教材化</th><td>過去問と解答の取り込み、ヒント・解説の追加と編集。</td></tr></tbody></table></div></details>
+        <details><summary>初期版の13機能を確認する</summary><div class="table-wrap"><table><caption>要件定義 v0.12の機能一覧</caption><thead><tr><th scope="col">ID・機能</th><th scope="col">できること</th></tr></thead><tbody><tr><th scope="row">F01 問題</th><td>問題文、選択肢、図表、出典、分野を表示。</td></tr><tr><th scope="row">F02 ヒント</th><td>段階的に開き、読み返す。段数は教材ごとに変更可能。</td></tr><tr><th scope="row">F03 解説</th><td>正誤、正答、手順、各選択肢の理由を表示。</td></tr><tr><th scope="row">F04 履歴</th><td>試行ごとに回答、正誤、ヒント、解答閲覧、日時を保存。</td></tr><tr><th scope="row">F05 再開</th><td>選択中の回答、ヒント、問題内の位置を復元。</td></tr><tr><th scope="row">F06 解き直し</th><td>復習候補から出題。手動でも選べる。</td></tr><tr><th scope="row">F07 復習予定</th><td>次の候補日を提案。延期・変更も可能。</td></tr><tr><th scope="row">F08 学習状況</th><td>自力正解、ヒント付き正解、要復習、未回答を区別。今日の取り組み・小さな達成・前回からの前進を表示。</td></tr><tr><th scope="row">F09 学習単位</th><td>1・3・5問のボタンを押すだけで開始。</td></tr><tr><th scope="row">F10 データ管理</th><td>書き出し、読み込み、削除。保存先も説明。</td></tr><tr><th scope="row">F11 関連問題</th><td>同じ考え方を使う別問題で確かめる。</td></tr><tr><th scope="row">F12 基礎説明</th><td>短い説明や解法例へ戻れる。</td></tr><tr><th scope="row">F13 教材化</th><td>過去問と解答の取り込み、ヒント・解説の追加と編集。</td></tr></tbody></table></div></details>
         <details><summary>完成を確認する14項目を見る</summary><div><ol><li>ヒント2を使って正解したら、「ヒント付き正解・段階2」と保存され、復習候補になる。</li><li>回答前に答えを見たら、後から正答しても自力正解にしない。</li><li>回答後の解説閲覧で、回答前のヒント記録は変わらない。</li><li>途中で閉じても、同じ試行の回答候補とヒントを復元できる。</li><li>再挑戦は新しい試行になり、前の履歴が残る。</li><li>同日の連続正解は、別の日の自力正解回数に含めない。回数だけで習熟を断定しない。</li><li>復習は答えを伏せ、ヒントを閉じて始まる。</li><li>1問で終了でき、タイマーなしで基本機能を使える。</li><li>保存失敗が分かり、書き出した記録を読み戻せる。</li><li>スマホ、キーボード、文字拡大で問題・ヒント・回答・再開を操作できる。</li><li>「あとで」は誤答にならず、別の問題へ進め、あとから再開できる。</li><li>ヒントに待ち時間がなく、正答を明かす支援は自力正解に含めない。</li><li>関連する別問題の結果を、同じ問題への再回答と分けられる。</li><li>過去問に解答・図表・出典が対応づき、ヒント・解説を追加・編集できる。</li></ol></div></details>
         <details><summary>今は作らないもの・あとで決めること</summary><div><h3>初期版には含めない</h3><ul><li>制度変更への対応とシラバス比較。</li><li>記述式の自動採点、試験全体の模試、合格予測。</li><li>未確認のAI解説の自動配信。</li><li>SNS、ランキング、複雑な報酬、医療情報の収集。</li></ul><h3>使い方に合わせて決める</h3><ul><li>次に追加する資格と、教材の出典。Firebase接続の設定。</li><li>自分だけで使うか。通知が役立つか。</li><li>ヒントの段数、復習間隔、1回の学習量。</li></ul></div></details>
         <details><summary>学習法の根拠と、まだ確かめること</summary><div><p><strong>研究から参考にしたこと：</strong>思い出して答える練習、間隔をあけた復習、解法例と演習の組合せ、間違いの理由が分かる解説。</p><p><strong>設計指針から参考にしたこと：</strong>刺激を減らす、主要な操作を短くする、必要なときに支援を使える、現在地を示して再開しやすくする。</p><p>具体的なヒント数や復習日数は初期案です。一般の学習研究を参考にした部分もあり、このアプリのADHDの成人への効果は、実際に使って確かめる必要があります。</p><p>最初の1〜2週間は操作・着手・再開を見ます。保持と応用は数週間の利用で、後日の自力解答と別問題への適用を確認します。回答数と未実施数も分け、簡単な問題だけの正解率を全体の習熟にしません。</p><ul><li><a href="https://www.nice.org.uk/guidance/ng87/chapter/recommendations">NICE：ADHDの環境調整</a></li><li><a href="https://pubmed.ncbi.nlm.nih.gov/26173288/">学習技法の研究レビュー</a></li><li><a href="https://ies.ed.gov/ncee/wwc/PracticeGuide/1">IES：学習と指導の実践ガイド</a></li><li><a href="https://www.w3.org/TR/coga-usable/">W3C：認知・学習特性に配慮した設計指針</a></li></ul></div></details>
@@ -146,7 +146,7 @@
       <div class="bottom-nav doc-controls"><button type="button" class="btn" id="previous-chapter" disabled>← 前の章</button><button type="button" class="btn primary" id="next-chapter">次：使う流れ →</button></div>
     </main>
   </div>
-  <footer class="shell footer"><p>人間向けHTML定義書 · 仕様 v0.11 · 2026年10月6日</p><p>このファイルだけで閲覧できます。外部フォント・画像・サービスへの接続は不要です。</p><p><a href="requirements.md">元の要件定義</a><a href="learning-design.md">設計の詳しい説明</a><a href="research-notes.md">調査メモと全出典</a></p></footer>
+  <footer class="shell footer"><p>人間向けHTML定義書 · 仕様 v0.12 · 2026年10月6日</p><p>このファイルだけで閲覧できます。外部フォント・画像・サービスへの接続は不要です。</p><p><a href="requirements.md">元の要件定義</a><a href="learning-design.md">設計の詳しい説明</a><a href="research-notes.md">調査メモと全出典</a></p></footer>
   <script>
     (() => {
       'use strict';

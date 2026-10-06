@@ -19,6 +19,7 @@ with sync_playwright() as p:
       const state=makeState(),a=createAttempt(q);state.attempts=[a];state.currentId=a.id;state.view='study';state.session.attemptIds=[a.id];
       await first.write(state);let pending=await first.pending();assert(pending.length===1&&pending[0].owner===identity.owner&&identity.owner.startsWith('guest:'),'guest queue scope');
       assert(!('scrollY' in pending[0].payload),'scroll must not sync');
+      assert(!('readingNote' in pending[0].payload),'textbook notes must stay local');
       const initialOp=pending[0].operationId;state.attempts[0].scrollY=100;await first.write(state);assert((await first.pending())[0].operationId===initialOp,'scroll-only queued a new cloud operation');
       const staleRevision=pending[0].revision;openHint(a);await first.write(state);await first.acknowledge(a.id,staleRevision);assert((await first.pending()).length===1,'late acknowledgement discarded a newer save');
       const reopened=createLocalStore(options);const baseline=JSON.parse(await reopened.read());assert(baseline.attempts[0].hintCount===1&&(await reopened.pending()).length===1,'durable checkpoint/outbox');

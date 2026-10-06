@@ -10,7 +10,7 @@ const serial = value => JSON.stringify(value);
 const sharedFields = ['settings','readingNotes','overrides'];
 const checkpoint = state => ({version:state.version,currentId:state.currentId,view:state.view,session:state.session});
 const shared = state => Object.fromEntries(sharedFields.map(k=>[k,state[k]]));
-const transport = a => {const {scrollY,...payload}=a;return payload;};
+const transport = a => {const {scrollY,readingNote,...payload}=a;return JSON.parse(JSON.stringify(payload));};
 const changedResult = (before,after) => ['status','selected','selectedChoiceId','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));
 
 // Records and their durable outgoing item commit together. Navigation, scroll,
@@ -77,11 +77,12 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
      if(state.currentId===original)state.currentId=a.id;state.session.attemptIds=state.session.attemptIds.map(id=>id===original?a.id:id);
     }
     const old=existing.get(a.id),revision=(old?.revision||0)+1;
-    const row={owner,qualificationId,id:a.id,deviceId,revision,data:a};attempts.put(row);existing.set(a.id,row);
+    const originDevice=old&&complete(old.data)&&complete(a)&&!changedResult(old.data,a)?old.deviceId:deviceId;
+    const row={owner,qualificationId,id:a.id,deviceId:originDevice,revision,data:a};attempts.put(row);existing.set(a.id,row);
     const payload=transport(a),semantic=serial(payload);
     if(replace||!old||serial(transport(old.data))!==semantic){
      const blocked=new TextEncoder().encode(semantic).length>900000;
-     outbox.put({owner,qualificationId,id:a.id,deviceId,revision,operationId:`${a.id}:${revision}`,payload,blocked});
+     outbox.put({owner,qualificationId,id:a.id,deviceId:originDevice,revision,operationId:`${a.id}:${revision}`,payload,blocked});
     }
     nextBaseline.set(a.id,{data:serial(a),revision});
    }
@@ -107,5 +108,40 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
  }
  async function pending(){await queue.catch(()=>{});const db=await database(),tx=db.transaction('outbox'),done=finished(tx);const rows=await request(tx.objectStore('outbox').index('namespace').getAll(scope()));await done;return rows;}
  async function acknowledge(id,revision){const db=await database(),tx=db.transaction('outbox','readwrite'),done=finished(tx),store=tx.objectStore('outbox'),row=await request(store.get([owner,qualificationId,id]));if(row?.revision===revision)store.delete([owner,qualificationId,id]);await done;}
- return {read,snapshot,write,flush:()=>queue,pending,acknowledge,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
+ const cursorKey=()=>`${owner}|${qualificationId}|sync-cursor`;
+ async function cursor(){const db=await database(),tx=db.transaction('meta'),done=finished(tx);const value=await request(tx.objectStore('meta').get(cursorKey()));await done;return value?.data||null;}
+ async function remoteDevice(id){const db=await database(),tx=db.transaction('attempts'),done=finished(tx);const value=await request(tx.objectStore('attempts').get([owner,qualificationId,id]));await done;return value?.deviceId;}
+ function mergeRemote(rows,nextCursor){
+  const operation=queue.catch(()=>{}).then(async()=>{
+   const db=await database(),tx=db.transaction(['meta','attempts','outbox'],'readwrite'),done=finished(tx),attempts=tx.objectStore('attempts'),outbox=tx.objectStore('outbox'),changed=[];
+   try{
+    for(const row of rows){
+     const key=[owner,qualificationId,row.id];const [existing,pending]=await Promise.all([request(attempts.get(key)),request(outbox.get(key))]);
+     // Never overwrite an unsent local answer/checkpoint. The uploader handles
+     // foreign-device collisions by giving that local work a new UUID.
+     if(pending||existing&&existing.deviceId===row.deviceId&&existing.revision>=row.revision)continue;
+     const data={...row.payload,scrollY:existing?.data.scrollY||0,readingNote:existing?.data.readingNote||''};
+     attempts.put({owner,qualificationId,id:row.id,deviceId:row.deviceId,revision:row.revision,data});changed.push(data);
+    }
+    if(nextCursor)tx.objectStore('meta').put({key:cursorKey(),data:nextCursor});
+    await done;return changed;
+   }catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}
+  });queue=operation;return operation;
+ }
+ function forkPending(id,revision){
+  const operation=queue.catch(()=>{}).then(async()=>{
+   const db=await database(),tx=db.transaction(['meta','attempts','outbox'],'readwrite'),done=finished(tx),attempts=tx.objectStore('attempts'),outbox=tx.objectStore('outbox'),key=[owner,qualificationId,id];
+   try{
+    const [row,item]=await Promise.all([request(attempts.get(key)),request(outbox.get(key))]);if(!row||item?.revision!==revision){await done;return null;}
+    const newId=crypto.randomUUID(),data={...row.data,id:newId,continuationOf:id,continuedAt:new Date().toISOString()};
+    // Keep the original until the next remote page supplies its authoritative
+    // version, but stop trying to publish this device's copy under its ID.
+    outbox.delete(key);attempts.put({...row,id:newId,deviceId,revision:1,data});
+    outbox.put({...item,id:newId,deviceId,revision:1,operationId:`${newId}:1`,payload:transport(data)});
+    const local=await request(tx.objectStore('meta').get(tabKey()));if(local){if(local.data.currentId===id)local.data.currentId=newId;local.data.session.attemptIds=local.data.session.attemptIds.map(x=>x===id?newId:x);tx.objectStore('meta').put(local);}
+    await done;baseline.set(newId,{data:serial(data),revision:1});remaps.set(id,newId);return {before:id,after:newId,data};
+   }catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}
+  });queue=operation;return operation;
+ }
+ return {read,snapshot,write,flush:()=>queue,pending,acknowledge,cursor,mergeRemote,forkPending,remoteDevice,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
 }

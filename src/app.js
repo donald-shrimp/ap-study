@@ -6,8 +6,9 @@ import {createViews} from './ui/views.js';
 import {createStateValidator} from './storage/validate.js';
 import {createLocalStore} from './storage/local.js';
 import {loadCatalog,appRoot} from './content/catalog.js';
+import {initAccountControls,guestAttemptId} from './sync/account.js';
 
-let store, content, qualification;
+let store, content, qualification, account;
 let questionIndex = new Map(), progress = createProgress([]);
 let catalog = {year:'', season:'', topic:'', query:'', enriched:false, page:1};
 const PAGE_SIZE=20;
@@ -91,6 +92,7 @@ function save(options={}) {
     const ids=new Set(state.attempts.map(a=>a.id));for(const a of result.attempts)if(!ids.has(a.id)){state.attempts.push(a);ids.add(a.id);}
     state.attempts.sort((a,b)=>a.startedAt.localeCompare(b.startedAt)||a.id.localeCompare(b.id));rebuildProgress();
     if(version===saveVersion){storageOK=true;$('#save-state').textContent='この端末に保存済み';}
+    account?.changed();
     return true;
   }).catch(error=>{
     if(version===saveVersion){storageOK=false;$('#save-state').textContent='保存できていません';notice(`${error.message || 'ブラウザに保存できません。'} いまの学習は続けられます。「表示・データ」から記録を書き出してください。`);}
@@ -145,7 +147,12 @@ async function resume(id) {
  try {
   if(questionIndex.has(target.questionId))await content.ensure(target.questionId);if(token!==navigation)return;
   const old=current();if(old&&old.id!==id&&!complete(old))old.status='postponed';
-  const a=state.attempts.find(a=>a.id===id);if(!a)return;state.currentId=id;
+  let a=state.attempts.find(a=>a.id===id);if(!a)return;
+  // A synchronized checkpoint belongs to its creating device. Continue under
+  // a fresh UUID so two devices can both answer without overwriting each other.
+  const identity=await store.identity(),remote=(await store.remoteDevice?.(id));
+  if(!complete(a)&&remote&&remote!==identity.deviceId){a={...structuredClone(a),id:crypto.randomUUID(),continuationOf:id,continuedAt:now(),scrollY:0};state.attempts.push(a);id=a.id;}
+  state.currentId=id;
   if(!state.session.attemptIds.includes(id)||(state.session.topicId!==undefined?state.session.topicId!==(a.topicId||null):state.session.topic!==(a.topic||null)))state.session={goal:1,attemptIds:[id],topic:qualification.topics.find(t=>t.id===a.topicId)?.name||a.topic||null,topicId:a.topicId||null};
   if(!complete(a))a.status='in_progress';state.view='study';await save();if(token===navigation)render(true,a.scrollY||0);
  }catch(error){notice(error.message);}finally{if(token===navigation)main.setAttribute('aria-busy','false');}
@@ -230,6 +237,53 @@ window.addEventListener('scroll',()=>{if(state.view!=='study')return;clearTimeou
 function saveScroll(){if(state.view==='study'&&current()){current().scrollY=window.scrollY;save();}}
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
+async function switchOwner(owner,{restore=false}={}){
+ const identity=await store.identity();if(identity.owner===(owner||`guest:${identity.deviceId}`))return;
+ main.inert=true;document.querySelector('.sidebar').inert=true;
+ const controls=['import-state','export-state','clear-state','large-text'];controls.forEach(id=>$("#"+id).disabled=true);
+ clearTimeout(scrollTimer);navigation++;$('#editor-dialog').close();
+ try{
+  if(!await save())throw new Error('現在の記録を保存できません。');await saves;
+  const next=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState,owner});
+  let raw=await next.read(),candidate=raw?validateState(JSON.parse(raw)):makeState();
+  if(!raw){candidate.settings={...state.settings};await next.write(candidate);raw=await next.read();}
+  await store.close();store=next;state=validateState(JSON.parse(raw));corruptRaw=null;storageOK=true;editId=null;
+  // Explicit account changes open home; restoring the same browser's saved
+  // login preserves its own current question and scroll position.
+  if(!restore){state.currentId=null;state.view='home';state.session={goal:state.settings.sessionSize,attemptIds:[],topic:null};}
+  if(restore&&state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId).catch(()=>{});
+  await save();render(true,state.view==='study'?current()?.scrollY:0);notice('');
+  $('#clear-state').closest('details').hidden=!!owner;$('#import-state').closest('label').hidden=!!owner;
+ }finally{main.inert=false;document.querySelector('.sidebar').inert=false;controls.forEach(id=>$("#"+id).disabled=false);}
+}
+function validateSyncAttempt(a){const probe={...makeState(),attempts:[a]};validateState(probe);if(a.qualificationId!==qualification.id||!a.questionSnapshot)throw new Error('同期対象の問題情報がありません。');}
+function remoteRecords(records){
+ const byId=new Map(state.attempts.map(a=>[a.id,a]));for(const a of records)if(a.id!==state.currentId)byId.set(a.id,a);
+ state.attempts=[...byId.values()].sort((a,b)=>a.startedAt.localeCompare(b.startedAt)||a.id.localeCompare(b.id));rebuildProgress();
+ if(state.view!=='study')render(false);
+}
+function remoteFork({before,after,data}){
+ const a=state.attempts.find(x=>x.id===before);if(a)Object.assign(a,data);else state.attempts.push(data);
+ if(state.currentId===before)state.currentId=after;state.session.attemptIds=state.session.attemptIds.map(id=>id===before?after:id);rebuildProgress();
+}
+async function importGuest(uid){
+ if((await store.identity()).owner!==`uid:${uid}`)throw new Error('アカウントが変わりました。');
+ const guest=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState});
+ try{
+  const raw=await guest.read();if(!raw){$('#sync-state').textContent='取り込む端末内の記録はありません。';return;}
+  const source=validateState(JSON.parse(raw));if(!source.attempts.length){$('#sync-state').textContent='取り込む端末内の記録はありません。';return;}
+  if(!confirm(`ログイン前の${source.attempts.length}件の学習記録を、このGoogleアカウントへ追加します。元の記録は残します。取り込みますか？`))return;
+  const identity=await guest.identity(),prefix=`${identity.deviceId}:`,already=new Set(state.attempts.map(a=>a.importedFrom).filter(Boolean));
+  const mapping=new Map(await Promise.all(source.attempts.filter(a=>!already.has(prefix+a.id)).map(async a=>[a.id,await guestAttemptId(uid,prefix+a.id)])));
+  for(const original of source.attempts){if(!mapping.has(original.id))continue;const a=structuredClone(original);
+   if(!a.questionSnapshot){await content.ensure(a.questionId);a.questionSnapshot=createAttempt(question(a.questionId)).questionSnapshot;}
+   a.id=mapping.get(original.id);a.qualificationId=qualification.id;a.selectedChoiceId=a.selected===null?null:a.questionSnapshot.choices[a.selected].id;a.importedFrom=prefix+original.id;
+   if(a.continuationOf)a.continuationOf=mapping.get(a.continuationOf)||a.continuationOf;
+   validateSyncAttempt(a);state.attempts.push(a);
+  }
+  if(!await save())throw new Error('取り込んだ記録を保存できませんでした。');render(false);
+ }finally{await guest.close();}
+}
 async function initialize(){
 try {
   content=await loadCatalog(document.documentElement.dataset.qualification);
@@ -247,6 +301,7 @@ try {
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
+  initAccountControls({qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
   if(navigator.modelContext?.registerTool) {
     navigator.modelContext.registerTool({name:'get_study_summary',description:'Read counts of local study attempts and review candidates. Does not modify study records.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify({totalAttempts:state.attempts.length,completed:state.attempts.filter(complete).length,reviewCandidates:reviewQuestions().map(({q})=>({id:q.id,title:q.title})),storageSaved:storageOK&&corruptRaw===null})}]})});
   }

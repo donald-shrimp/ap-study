@@ -49,6 +49,7 @@ export function createStateValidator({getQuestions,getTopics,getQualification}) 
     for(const a of s.attempts) {
       if(!a||!id(a.id)||ids.has(a.id)||!id(a.questionId)||!Object.hasOwn(labels,a.status))fail();
       if(a.continuationOf!==undefined&&(!id(a.continuationOf)||a.continuationOf===a.id||!date(a.continuedAt)))fail();
+      if(a.importedFrom!==undefined&&!text(a.importedFrom,201))fail();
       if(a.qualificationId!==undefined&&a.qualificationId!==qualification.id)fail();
       if(a.questionSnapshot && (!questionSnapshot(a.questionSnapshot,qualification.id)||a.questionSnapshot.id!==a.questionId))fail();
       const q=a.questionSnapshot||byId.get(a.questionId);

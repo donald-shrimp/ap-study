@@ -1,0 +1,20 @@
+{
+  "name": "hitomon-study",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:firebase": "node tools/build-firebase.mjs",
+    "test:sync": "firebase emulators:exec --project demo-hitomon --only auth,firestore 'node --test tests/firebase-rules.mjs && python tests/sync.py'"
+  },
+  "dependencies": {
+    "firebase": "12.19.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.2",
+    "esbuild": "0.28.2",
+    "firebase-tools": "15.32.1"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "1.14.5"
+  }
+}

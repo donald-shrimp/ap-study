@@ -124,7 +124,7 @@ with sync_playwright() as p:
  assert a['hintCount']==0 and a['hintEvents']==[] and a['materialSnapshot']['hintStatus']=='individual'
  assert old['status']=='postponed' and old['hintCount']==1 and old['materialSnapshot']['hints'][0]['text']=='以前の分野共通ガイド'
  assert page.locator('.hint-head h3').inner_text()=='ヒント' and page.locator('.hint-update').count()==0 and page.get_by_role('radio').nth(1).is_checked()
- page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.reload();page.locator('.hint-box').wait_for();assert '入力が1増えると10ミリV' in page.locator('.hint-box').inner_text()
+ page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();state();page.reload();page.locator('.hint-box').wait_for();assert '入力が1増えると10ミリV' in page.locator('.hint-box').inner_text()
  page.get_by_role('button',name='次のヒントを見る',exact=True).click();assert '16の位' in page.locator('#hints').inner_text()
  page.get_by_role('button',name='次のヒントを見る',exact=True).click();assert '130×10' in page.locator('#hints').inner_text() and 'V単位なら' not in page.locator('#hints').inner_text()
  answer();assert '1,300ミリV' in page.locator('.result').inner_text() and page.locator('.reason-list li').count()==4

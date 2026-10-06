@@ -25,7 +25,7 @@ class Quiet(SimpleHTTPRequestHandler):
 
 with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
     root = Path(directory)/'ap-study'; root.mkdir()
-    for name in ['src','assets/icons','templates']:
+    for name in ['src','assets/icons','assets/vendor','templates']:
         shutil.copytree(ROOT/name,root/name)
     for name in ['app.js','styles.css','pwa.js','sw.js','manifest.webmanifest']:
         shutil.copy(ROOT/name,root/name)
