@@ -95,7 +95,7 @@ python tools/rebuild-images.py --pdf-dir /path/to/official-pdfs --verify
 
 ## Androidインストール不具合の調査（2026-10-06）
 
-ユーザーのAndroid Chromeでは、Squooshはインストールできる一方、ひと問は「インストールできません」となる報告があります。PC版Chromiumでインストール条件・beforeinstallprompt・ボタン表示・オフライン動作が通ることと、AndroidでのWebAPK生成・導入成功は別として扱います。Android実機のインストール成功は未確認です。
+ユーザーのAndroid Chromeでは、Squooshはインストールできる一方、ひと問は「インストールできません」となる報告がありました。PC版Chromiumでインストール条件・beforeinstallprompt・ボタン表示・オフライン動作が通ることと、AndroidでのWebAPK生成・導入成功は別として扱います。今回の不具合は広告ブロックによるもので、ユーザーから除外後の実機インストール成功の報告を受けています。
 
 公開版のマニフェストをChrome DevTools Protocolで解析すると、`id: "./"` が `https://donald-shrimp.github.io/` として解決されていました。起動先・スコープは `/ap-study/` でしたが、アプリ識別子がホスト全体になっています。`id: "/ap-study/"` へ修正し、実際にChromeが解決したIDを `tests/pwa.py` で確認します。マニフェストURLとサービスワーカーのリビジョンも更新して古い定義の再利用を避けます。このID修正自体は公開版で確認済みですが、Android側のエラーは解消していません（後述）。
 
@@ -103,6 +103,14 @@ ID修正版の公開後も、実機のスクリーンショットで「このア
 
 [Chromiumの表示処理](https://chromium.googlesource.com/chromium/src/+/main/components/webapps/browser/android/java/src/org/chromium/components/webapps/pwa_universal_install/PwaUniversalInstallBottomSheetViewBinder.java)では、この文言はAPP_IS_NOT_INSTALLABLEの場合に表示されます。[データ取得処理](https://chromium.googlesource.com/chromium/src/+/main/components/webapps/browser/android/add_to_homescreen_data_fetcher.cc)はマニフェスト・アイコンの取得、適格性とURL互換性の判定、取得のタイムアウト時にショートカットへ分類します。これらのどの経路で実機が失敗したかは、画像だけでは判別できません。
 
-`?pwa-check=1` に限定した読み取り専用の診断を追加。ブラウザ情報、マニフェスト・PNGの取得時間とデコード結果、サービスワーカーの状態、beforeinstallprompt受信の有無をコピーできます。JavaScriptによる取得成功をChrome内部のインストール可否と同一視しません。`tests/pwa-diagnostics.py` で通常画面への非表示、診断表示とコピー、マニフェスト・アイコン取得失敗の報告、学習記録の保持と診断への非混入を確認します。Android実機による原因特定とインストール成功確認は引き続き未完了です。
+`?pwa-check=1` に限定した読み取り専用の診断を追加。ブラウザ情報、マニフェスト・PNGの取得時間とデコード結果、サービスワーカーの状態、beforeinstallprompt受信の有無をコピーできます。JavaScriptによる取得成功をChrome内部のインストール可否と同一視しません。`tests/pwa-diagnostics.py` で通常画面への非表示、診断表示とコピー、マニフェスト・アイコン取得失敗の報告、学習記録の保持と診断への非混入を確認します。
+
+実機の診断ではChrome 154、secureContext=true、サービスワーカーactivatedである一方、manifestLink=nullでした。公開HTMLにはリンクがあり、アプリのコードはリンクを削除しません。ユーザーは広告ブロックの使用を確認し、サイト除外後にインストールできたと報告しています。[AdGuardのモバイルアプリバナーフィルター](https://github.com/AdguardTeam/AdguardFilters/blob/master/AnnoyancesFilter/MobileApp/sections/mobile-app_specific.txt)にはPWA追加を抑制するため `link[rel="manifest"]` を削除するルールがあります。ユーザーの利用製品・具体的なフィルター名までは未確認です。
+
+## 回答後のスマホ表示（2026-10-06）
+
+画像問題の4択へ「あなたの選択」「正解」を直接入れると、390px幅で文字が縦に折り返され、4枠が約220pxまで伸びることを再現しました。状態表示を選択肢の下の「あなたの回答」「正解」へまとめ、空の選択肢本文は描画しません。読み上げ用の正解・回答ラベルは選択肢にも残します。「ホーム」と「中断」は枠・背景・それぞれのアイコンを持つボタンに統一しました。
+
+Playwrightで320・390・1024px幅、それぞれ文字100%・200%を確認しました。画像問題の正解・不正解・未回答の解答表示でも4枠の高さが回答前と同じで、横はみ出しがありません。文章付き選択肢も読めます。「ホーム」は44px以上の押せる領域を持ち、押した後も回答済みの履歴を保持。390pxの画面を画像でも確認しました。`tests/e2e.py` と `tests/pwa.py` が通過し、学習・編集・バックアップ・オフライン再開・更新時の記録保持を確認しています。
 
 参照：[W3C Web Application Manifest — id](https://www.w3.org/TR/appmanifest/#id-member)。
