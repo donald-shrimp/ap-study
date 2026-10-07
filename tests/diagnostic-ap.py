@@ -25,6 +25,8 @@ with sync_playwright() as p:
         opts['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
     browser=p.chromium.launch(**opts)
     context=browser.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write'])
+    if URL.startswith('https:'):
+        context.set_default_timeout(60000)
     page=context.new_page(); errors=[]; requests=[]
     page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
     page.on('dialog',lambda d:d.accept())
@@ -88,7 +90,9 @@ with sync_playwright() as p:
     nav(page,'materials');assert not page.locator('[data-action=start][data-id^="ap-diagnostic-"]').count()
     assert all(not a['questionSnapshot'].get('diagnosticOnly') for a in state(page)['attempts'])
     context.set_offline(False);page.reload()
-    page.locator('.sidebar [data-view=home]').wait_for()
+    # The sidebar exists in the HTML before the application has opened its store.
+    # Wait for the restored view to render before clicking navigation on a slow host.
+    page.get_by_role('heading',name='問題と教材',exact=True).wait_for()
     page.locator('.sidebar [data-view=home]').click()
     page.get_by_role('button',name='診断結果を見る',exact=True).click()
     page.get_by_role('button',name='結果を見る',exact=True).click()
