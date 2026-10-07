@@ -26,14 +26,14 @@ def login(page,email):
  else:popup.get_by_text('Add new account').click();popup.locator('#email-input').fill(email);popup.locator('#display-name-input').fill('Plan test');popup.get_by_role('button',name='Sign in with Google.com',exact=True).click()
  page.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("google-logout").disabled');synced(page)
 def plan_view(page):
- page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='計画を見る' if page.get_by_role('button',name='計画を見る',exact=True).count() else '受験日・計画を登録',exact=True).click()
+ page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='計画を見る' if page.get_by_role('button',name='計画を見る',exact=True).count() else '計画を登録',exact=True).click()
  open_plan_editor(page);open_plan_ai(page)
 def set_date(page,date):
  page.locator('[name=exam-objective]').fill(date);page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
 
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);contexts=[b.new_context(viewport={'width':390,'height':844}) for _ in range(3)];pages=[c.new_page() for c in contexts];a,c,other=pages;errors=[]
- for page in pages:page.on('console',lambda message:print(message.text) if message.type=='warning' else None);page.on('pageerror',lambda e:errors.append(str(e)));page.goto(URL);page.get_by_role('button',name='とりあえずはじめる',exact=True).wait_for()
+ for page in pages:page.on('console',lambda message:print(message.text) if message.type=='warning' else None);page.on('pageerror',lambda e:errors.append(str(e)));page.goto(URL);page.get_by_role('button',name='おまかせで1問',exact=True).wait_for()
  email='planning-test-'+uuid.uuid4().hex+'@hitomon.test';login(a,email);login(c,email)
  plan_view(c);assert c.locator('[name=exam-objective]').input_value()==''
  plan_view(a);set_date(a,'2026-11-04');synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.id==="planning")');c.wait_for_function('document.querySelector("[name=exam-objective]").value==="2026-11-04"');assert not c.locator('#planning-stale').is_visible()

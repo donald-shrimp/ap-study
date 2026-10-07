@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {allowsQuestion} from '../src/domain/study-context.js';
+import {allowsQuestion,attemptEntryMode} from '../src/domain/study-context.js';
 import {nextCard,cardProgress,validateCardEvents,validateDeck} from '../src/domain/flashcards.js';
 import {chooseNextAction} from '../src/domain/next-action.js';
 const classification={items:[{questionId:'read',mode:'paperless'},{questionId:'write',mode:'desk'}]},questions=['read','write','unknown'].map(id=>({id,topicId:id==='read'?'terms':'math',examPartId:'a'}));
@@ -17,3 +17,6 @@ test('一周内の既出と一周後の直前カードを避け、もう一度�
 test('カードの出典分野違い、自己評価の不正な値・重複IDを拒否する',()=>{const deck={format:'hitomon-flashcards',version:1,qualificationId:'ap',cards};assert.equal(validateDeck(deck,qualification,questions),deck);assert.throws(()=>validateDeck({...deck,cards:[{...cards[0],relatedQuestionIds:['write']}]},qualification,questions));assert.throws(()=>validateCardEvents([event('one'),event('one')]));assert.throws(()=>validateCardEvents([{...event('one'),outcome:'correct'}]));});
 
 test('重点分野に紙なし候補がなければ、別分野を選んだ理由を明示する',()=>{const plan={timeZone:'Asia/Tokyo',phases:[{id:'p',name:'計算',start:'2026-10-01',end:'2026-10-31',examPartIds:['a'],focusTopicIds:['math']}]};const result=choose({plan,at:new Date('2026-10-07T01:00:00.000Z')});assert.equal(result.questionId,'read');assert.equal(result.reasonCode,'paperless_fallback');});
+
+test('書いて考える入口は机向けと個人指定だけを含み、未分類を混ぜない',()=>{assert.deepEqual(questions.map(q=>allowsQuestion(q,'desk',classification,[])),[false,true,false]);assert.equal(allowsQuestion(questions[0],'desk',classification,['read']),true);assert.equal(allowsQuestion(questions[0],'paperless',classification,['read']),false);});
+test('問題の分類ではなく開始した入口で再開先を分ける',()=>{const a={id:'a',questionId:'read',status:'postponed',entryMode:'all',updatedAt:'2026-10-07',startedAt:'2026-10-07'};assert.equal(attemptEntryMode(a,{attemptIds:[],paperMode:'paperless'}),'all');assert.equal(choose({attempts:[a],resumeAllowed:x=>attemptEntryMode(x,{attemptIds:[]})==='paperless'}).kind,'question');assert.equal(choose({attempts:[a],resumeAllowed:x=>x.entryMode==='all'}).kind,'resume');});

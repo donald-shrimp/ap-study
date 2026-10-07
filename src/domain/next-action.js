@@ -3,10 +3,10 @@ import {examPartsFor,partOfAttempt,dateInZone,daysBetween} from './planning.js';
 import {activePhase} from './analytics.js';
 
 // The returned question ID and scope are used by both the card and its button.
-export function chooseNextAction({qualification,questions,attempts,plan=null,reviewInfo,available=()=>true,practiceAllowed=()=>true,paperless=false,at=new Date(),ignorePaused=false,online=true}){
+export function chooseNextAction({qualification,questions,attempts,plan=null,reviewInfo,available=()=>true,practiceAllowed=()=>true,paperless=false,at=new Date(),ignorePaused=false,online=true,resumeAllowed=()=>true}){
  const ordinary=questions.filter(q=>!q.diagnosticOnly&&(!q.qualificationId||q.qualificationId===qualification.id)),byId=new Map(ordinary.map(q=>[q.id,q]));
  const continued=new Set(attempts.map(a=>a.continuationOf).filter(Boolean));
- const paused=attempts.filter(a=>!complete(a)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly&&!continued.has(a.id)&&(!a.qualificationId||a.qualificationId===qualification.id)&&byId.has(a.questionId)&&practiceAllowed(byId.get(a.questionId))&&available(byId.get(a.questionId))).sort((a,b)=>(a.updatedAt||a.startedAt).localeCompare(b.updatedAt||b.startedAt)||a.id.localeCompare(b.id)).at(-1);
+ const paused=attempts.filter(a=>!complete(a)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly&&!continued.has(a.id)&&(!a.qualificationId||a.qualificationId===qualification.id)&&byId.has(a.questionId)&&resumeAllowed(a)&&practiceAllowed(byId.get(a.questionId))&&available(byId.get(a.questionId))).sort((a,b)=>(a.updatedAt||a.startedAt).localeCompare(b.updatedAt||b.startedAt)||a.id.localeCompare(b.id)).at(-1);
  if(!ignorePaused&&paused&&practiceAllowed(byId.get(paused.questionId))&&available(byId.get(paused.questionId)))return {kind:'resume',attemptId:paused.id,questionId:paused.questionId,topicId:byId.get(paused.questionId).topicId,reasonCode:'paused',reason:`ヒント ${paused.hintCount}まで · ${paused.selected===null?'回答未確定':'回答候補を保存済み'}`,scope:{topicId:paused.topicId||null,examPartId:partOfAttempt(paused,qualification)}};
  const allowedParts=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
  const pool=ordinary.filter(q=>allowedParts.has(q.examPartId||qualification.defaultExamPartId)&&practiceAllowed(q)&&available(q));

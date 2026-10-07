@@ -24,8 +24,8 @@ with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-pool-') as directory
   with sync_playwright() as p:
    browser=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);context=browser.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write']);page=context.new_page();errors=[];requests=[]
    page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url));page.on('dialog',lambda d:d.accept())
-   page.goto(f'http://127.0.0.1:{server.server_port}/');page.get_by_role('button',name='とりあえずはじめる',exact=True).wait_for();assert not any('/data/qualifications/fixture/diagnostic.' in url for url in requests)
-   page.get_by_role('button',name='とりあえずはじめる',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();assert not page.evaluate(READ)['study']['attempts'][0]['questionSnapshot'].get('diagnosticOnly');page.get_by_role('button',name='中断',exact=True).click()
+   page.goto(f'http://127.0.0.1:{server.server_port}/');page.get_by_role('button',name='おまかせで1問',exact=True).wait_for();assert not any('/data/qualifications/fixture/diagnostic.' in url for url in requests)
+   page.get_by_role('button',name='おまかせで1問',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();assert not page.evaluate(READ)['study']['attempts'][0]['questionSnapshot'].get('diagnosticOnly');page.get_by_role('button',name='中断',exact=True).click()
    page.get_by_role('button',name='実力診断（30問）',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
    run=next(r['payload'] for r in page.evaluate(READ)['documents'] if r['kind']=='diagnostic');assert sum(s['kind']=='derived' for s in run['slots'])==3;assert len({s['parentQuestionId'] or s['attempt']['questionId'] for s in run['slots']})==30
    assert any('/data/qualifications/fixture/diagnostic.' in url for url in requests)
@@ -48,7 +48,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-pool-') as directory
    # questions with originals or prevent immediate ordinary study.
    damaged=browser.new_context(service_workers='block');broken=damaged.new_page();broken.route('**/data/qualifications/fixture/diagnostic.*.json',lambda route:route.fulfill(status=200,content_type='application/json',body='[]'))
    broken.goto(f'http://127.0.0.1:{server.server_port}/');broken.get_by_role('button',name='実力診断（30問）',exact=True).click();broken.get_by_role('button',name='30問の診断をはじめる',exact=True).click();broken.get_by_text('教材の確認に失敗しました',exact=False).wait_for();assert not broken.evaluate(READ)['documents']
-   broken.locator('.sidebar [data-view=home]').click();broken.get_by_role('button',name='とりあえずはじめる',exact=True).click();broken.get_by_role('button',name='回答する',exact=True).wait_for();damaged.close()
+   broken.locator('.sidebar [data-view=home]').click();broken.get_by_role('button',name='おまかせで1問',exact=True).click();broken.get_by_role('button',name='回答する',exact=True).wait_for();damaged.close()
    assert not errors,errors;browser.close()
  finally:server.shutdown();server.server_close()
 print('PASS diagnostic-only bank lazy load / 3 variants balanced with originals / family uniqueness / 30 unaided answers / offline frozen resume / result provenance / external export / no ordinary study, review or search contamination / return to original')

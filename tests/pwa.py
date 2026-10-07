@@ -78,7 +78,7 @@ with sync_playwright() as p:
  ctx.set_offline(True);page.wait_for_function('!navigator.onLine');page.reload();page.locator('.hint-box').wait_for()
  assert state()['currentId']==attempt and page.get_by_role('radio').nth(3).is_checked() and state()['attempts'][-1]['hintCount']==1
  page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.locator('#offline-status').is_visible()
- page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='続きから',exact=True).click();assert state()['currentId']==attempt
+ page.get_by_role('button',name='中断',exact=True).click();page.locator('.hero-start .primary[data-action=entry-resume]').click();assert state()['currentId']==attempt
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
  # Navigating during the debounced scroll save must preserve the study position.
  page.evaluate('window.scrollTo(0,400)')
@@ -94,7 +94,9 @@ with sync_playwright() as p:
    changed['attempts']=[{key:[old.get(key),new.get(key)] for key in old if old.get(key)!=new.get(key)} for old,new in zip(before['attempts'],after['attempts'])]
   raise AssertionError(f'Offline guard changed record: {changed}')
  assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
- nav('home');page.locator('.hero-start [data-action=start-session]').click();assert state()['currentId']!=attempt
+ nav('home');page.locator('.hero-start .primary[data-action=entry-resume]').click();assert state()['currentId']==attempt
+ answer=next(a for a in state()['attempts'] if a['id']==attempt)['questionSnapshot']['answer'];page.get_by_role('radio').nth(answer).check();page.get_by_role('button',name='回答する',exact=True).click();page.get_by_role('button',name='ホーム',exact=True).click()
+ page.locator('.hero-start .primary[data-action=entry-start]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0
  page.screenshot(path=str(ARTIFACTS/'offline-mobile.png'),full_page=True)

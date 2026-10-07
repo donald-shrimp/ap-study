@@ -10,7 +10,7 @@ const serial = value => JSON.stringify(value);
 const sharedFields = ['settings','readingNotes','overrides'];
 const checkpoint = state => ({version:state.version,currentId:state.currentId,currentRunId:state.currentRunId||null,view:state.view,session:state.session});
 const shared = state => Object.fromEntries(sharedFields.map(k=>[k,state[k]]));
-const transport = a => {const {scrollY,readingNote,...payload}=a;return JSON.parse(JSON.stringify(payload));};
+const transport = a => {const {scrollY,readingNote,entryMode,...payload}=a;return JSON.parse(JSON.stringify(payload));};
 const changedResult = (before,after) => ['status','selected','selectedChoiceId','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));
 
 // Records and their durable outgoing item commit together. Navigation, scroll,
@@ -120,7 +120,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
      // Never overwrite an unsent local answer/checkpoint. The uploader handles
      // foreign-device collisions by giving that local work a new UUID.
      if(pending||existing&&existing.deviceId===row.deviceId&&existing.revision>=row.revision)continue;
-     const data={...row.payload,scrollY:existing?.data.scrollY||0,readingNote:existing?.data.readingNote||''};
+     const data={...row.payload,scrollY:existing?.data.scrollY||0,readingNote:existing?.data.readingNote||'',...(existing?.data.entryMode?{entryMode:existing.data.entryMode}:{})};
      attempts.put({owner,qualificationId,id:row.id,deviceId:row.deviceId,revision:row.revision,data});changed.push(data);
     }
     if(nextCursor)tx.objectStore('meta').put({key:cursorKey(),data:nextCursor});
