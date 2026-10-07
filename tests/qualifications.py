@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real shared UI with two synthetic qualifications; fixtures are never published."""
 import hashlib
 import importlib.util
@@ -58,8 +59,8 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             assert any('/fixture-a/packs/' in r for r in requests) and not any('/fixture-b/packs/' in r for r in requests)
             page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='ヒントで正解'
-            page.goto(url+'fixture-b/');page.locator('.quick-start').wait_for();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
-            page.locator('.quick-start [data-action=start-session]').click();page.get_by_role('radio').last.wait_for();assert page.get_by_role('radio').count()==5
+            page.goto(url+'fixture-b/');page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
+            page.locator('.sidebar [data-view=home]').click();page.locator('.quick-start [data-action=start-session]').click();page.get_by_role('radio').last.wait_for();assert page.get_by_role('radio').count()==5
             for i in range(4):page.locator('[data-action=hint]').click();assert page.locator('.hint-box').count()==i+1
             page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='解答を確認' and page.locator('.reason-list li').count()==5
@@ -68,17 +69,17 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             # Add a second one-question pack without touching application code.
             path=root/'content/fixture-a/questions.json';old=fixtures.fixture(2);new=fixtures.fixture(2,'constructor','extra')
             path.write_text(json.dumps([old,new]));builder.build(root)
-            page.reload();page.locator('#result-heading').wait_for();page.locator('.sidebar [data-view=home]').click();assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
+            page.reload();page.locator('#result-heading').wait_for();page.locator('.sidebar [data-view=home]').click();page.locator('.sidebar [data-view=history]').click();assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
             # Change and then retire the question. The original answer stays graded
             # against its snapshot and remains readable after removal from the catalog.
             old['stem']='2＋2は幾つですか。';old['version']=2;old['correctChoiceId']='c0';old['summary']='2＋2＝4'
             cfg_path=root/'content/fixture-a/qualification.json';cfg=json.loads(cfg_path.read_text());cfg['topics'][0]['name']='改名した基礎';cfg_path.write_text(json.dumps(cfg))
-            path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();page.locator('[data-action=resume]').click()
+            path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();page.locator('[data-action=resume]').click()
             assert '2＋3' in page.locator('.question-stem').inner_text() and '正解：2' in ''.join(page.locator('.answer-selection').inner_text().split())
             page.locator('.sidebar [data-view=topics]').click();page.locator('.reading-note summary').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
-            page.locator('.sidebar [data-view=materials]').click();page.locator('[data-action=edit][data-id="same-question"]').click();page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
+            action_nav(page,'materials');page.locator('[data-action=edit][data-id="same-question"]').click();page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
             page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));builder.build(root)
-            page.reload();page.locator('.quick-start').wait_for();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
+            page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-action=start]').count()==0
             page.locator('[data-action=resume]').click();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
             page.locator('[data-action=next]').click();page.get_by_role('radio').last.wait_for();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('#result-heading').inner_text()=='自力で正解'

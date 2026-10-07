@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real UI: optional planning, JSON validation, unaided assessment and offline resume."""
 import json, shutil, tempfile
 from pathlib import Path
@@ -21,11 +22,12 @@ with sync_playwright() as p:
     assert page.locator('.session-milestone').count()==0 and '目安' not in page.locator('.study-toolbar').inner_text()
     page.get_by_role('button',name='中断',exact=True).click()
     page.get_by_role('button',name='受験日・計画を登録',exact=True).click()
+    open_plan_editor(page);open_plan_ai(page)
     page.locator('[name=exam-objective]').fill('2026-11-04');page.locator('[name=exam-written]').fill('2026-11-30');page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
     example=json.loads((ROOT/'schemas/study-plan.example.json').read_text());example['phases'][0]['targets']['completedAttempts']=120
-    page.locator('#plan-json').fill(json.dumps(example));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_role('heading',name='登録後の内容',exact=True).wait_for();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for()
+    open_plan_ai(page);page.locator('#plan-json').fill(json.dumps(example));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_role('heading',name='登録後の内容',exact=True).wait_for();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for()
     before=next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')
-    invalid={**example,'qualificationId':'other'};page.locator('#plan-json').fill(json.dumps(invalid));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_text('開いている資格と一致しません',exact=False).wait_for()
+    open_plan_ai(page);invalid={**example,'qualificationId':'other'};page.locator('#plan-json').fill(json.dumps(invalid));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_text('開いている資格と一致しません',exact=False).wait_for()
     assert next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')==before
     page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();exported=json.loads(page.evaluate('navigator.clipboard.readText()'));assert exported['format']=='hitomon-study-summary' and 'questionSnapshot' not in json.dumps(exported)
     page.get_by_role('button',name='ホーム',exact=True).click();page.get_by_role('button',name='実力診断（30問）',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
@@ -42,7 +44,7 @@ with sync_playwright() as p:
     assert page.locator('.hint-section').count()==0
     result=state(page);final=next(r['payload'] for r in result['documents'] if r['kind']=='diagnostic');assert final['status']=='ended_early'
     page.get_by_role('button',name='ホーム',exact=True).click();assert page.get_by_role('button',name='診断の続きから',exact=True).count()==0
-    page.locator('.sidebar [data-view=review]').click();assert page.locator('#main').inner_text()
+    action_nav(page,'review');assert page.locator('#main').inner_text()
     context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='診断結果を見る',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
     for i in range(30):
         page.locator('[name=diagnostic-answer]').first.check();page.get_by_role('button',name='回答して結果へ' if i==29 else '回答して次へ',exact=True).click()

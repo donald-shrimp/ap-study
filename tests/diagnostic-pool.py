@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real UI with a synthetic, reviewed diagnostic bank; never published."""
 import json,shutil,tempfile,threading
 from pathlib import Path
@@ -39,9 +40,9 @@ with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-pool-') as directory
    page.get_by_role('heading',name='診断結果',exact=True).wait_for();page.get_by_text('出題構成を確認',exact=True).click();assert '派生問題：3問出題・3問回答・0問正解' in page.locator('#main').inner_text()
    derived=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'));derived.first.locator('summary').click();assert derived.first.locator('.reason-list li').count()==2
    page.get_by_role('button',name='結果と学習状況をAIへ渡す',exact=True).click();page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();summary=json.loads(page.evaluate('navigator.clipboard.readText()'));assert summary['learning']['all']['completedAttempts']==27 and summary['diagnostics'][0]['answered']==30
-   page.locator('.sidebar [data-view=review]').click();assert not page.locator('[data-action=start][data-id^=v]').count();assert 'もう一度解く問題はありません' in page.locator('#main').inner_text() or page.locator('[data-action=start]').count()==0
+   action_nav(page,'review');assert not page.locator('[data-action=start][data-id^=v]').count();assert 'もう一度解く問題はありません' in page.locator('#main').inner_text() or page.locator('[data-action=start]').count()==0
    page.locator('.sidebar [data-view=history]').click();assert not page.locator('[data-action=resume][data-id^=v]').count()
-   page.locator('.sidebar [data-view=materials]').click();assert '診断専用検証' not in page.locator('#main').inner_text()
+   action_nav(page,'materials');assert '診断専用検証' not in page.locator('#main').inner_text()
    context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='診断結果を見る',exact=True).click();page.get_by_role('button',name='結果を見る',exact=True).click();derived=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'));derived.first.locator('summary').click();derived.first.get_by_role('button',name='元の過去問を学習',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();data=page.evaluate(READ);assert not data['study']['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
    # A damaged bank must fail diagnosis explicitly, never silently replace its
    # questions with originals or prevent immediate ordinary study.

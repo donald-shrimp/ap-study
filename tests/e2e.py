@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json,os,shutil,tempfile,time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -21,7 +22,7 @@ with sync_playwright() as p:
  page.goto(URL);page.locator('.quick-start').wait_for()
  def state():
   return stored_state(page)
- def nav(view):page.locator(f'.sidebar [data-view={view}]').click()
+ def nav(view):action_nav(page,view)
  def open_q(id):
   nav('materials');page.locator('[data-action=reset-filters]').click();q=by_id[id]
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=query]').fill(q['title'])
@@ -30,7 +31,7 @@ with sync_playwright() as p:
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);correct=by_id[a['questionId']]['answer']
   page.get_by_role('radio').nth(correct if index is None else index).check();page.get_by_role('button',name='回答する',exact=True).click()
  for _ in range(3):
-  page.locator('.quick-start [data-action=start-session]').click();s=state();assert 'goal' not in s['session'] and s['session']['topic'] is None
+  page.locator('.hero-start [data-action=start-session]').click();s=state();assert 'goal' not in s['session'] and s['session']['topic'] is None
   page.get_by_role('button',name='中断',exact=True).click()
  print('PASS unified start with one click',flush=True)
  nav('materials');assert page.locator('.page-heading .badge').inner_text()=='800問';assert page.locator('#catalog-results .row').count()==20
@@ -54,14 +55,14 @@ with sync_playwright() as p:
   if i==0:
    page.get_by_role('button',name='ヒントを1つ見る').click();page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).check();state();page.reload();page.locator('.reading-context').wait_for();assert page.get_by_role('radio').nth(by_id[a['questionId']]['answer']).is_checked();assert 'セキュリティのみ' in page.locator('.study-toolbar').inner_text()
   answer()
-  if i<2:page.get_by_role('button',name='次の問題',exact=True).click()
+  if i<2:page.get_by_role('button',name='もう1問',exact=True).click()
  assert len(set(scoped))==3 and page.locator('.session-milestone').count()==0
- page.get_by_role('button',name='今日はここまで',exact=True).click();page.locator('.quick-start [data-action=start-session]').click();assert state()['session']['topic'] is None
+ page.get_by_role('button',name='今日はここまで',exact=True).click();page.locator('.hero-start [data-action=start-session]').click();assert state()['session']['topic'] is None
  print('PASS textbook note / three different scoped questions / hint-selection resume / scope reset',flush=True)
  open_q('r06h-q10');page.get_by_role('button',name='ヒントを1つ見る').click();answer();open_q('r06h-q10');answer();assert 'ヒントなしで正解' in page.locator('.result .progress-feedback').inner_text()
  open_q('r06h-q1');answer(0);open_q('r06h-q1');answer();assert '不正解 → 自力で正解' in page.locator('.result .progress-feedback').inner_text()
  page.get_by_role('button',name='ヒントを1つ見る').click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and a['hintEvents'][-1]['phase']=='after'
- nav('home');page.locator('.achievements summary').click();assert '解き直して正解' in page.locator('.achievement-list').inner_text()
+ nav('history');page.locator('.achievements summary').click();assert '解き直して正解' in page.locator('.achievement-list').inner_text()
  print('PASS individual hints / wrong-to-correct recovery / motivation / after-answer hints',flush=True)
  # A complete 2025 spring lesson and its staged hints survive resume.
  open_q('r07h-q30');assert page.locator('.hint-head h3').inner_text()=='ヒント'
@@ -93,7 +94,7 @@ with sync_playwright() as p:
     assert hint['text'] in page.locator('#hints').inner_text()
     if stage==0:
      page.get_by_role('radio').nth(q['answer']).check();page.get_by_role('button',name='中断',exact=True).click()
-     page.get_by_role('button',name='再開する',exact=True).click();state();page.reload();page.locator('.hint-box').wait_for()
+     page.get_by_role('button',name='続きから',exact=True).click();state();page.reload();page.locator('.hint-box').wait_for()
      assert page.get_by_role('radio').nth(q['answer']).is_checked() and page.locator('.hint-box').count()==1
    answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
    expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'

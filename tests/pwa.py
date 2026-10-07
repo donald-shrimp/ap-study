@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Exercise installation metadata, offline study, and a service-worker update.
 
 A local server simulates a new release without touching repository files.
@@ -44,7 +45,7 @@ with sync_playwright() as p:
  ctx=p.chromium.launch_persistent_context(str(ARTIFACTS/'profile'),**options,viewport={'width':390,'height':844});page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  def state():
   return stored_state(page)
- def nav(view):page.locator(f'.sidebar [data-view={view}]').click()
+ def nav(view):action_nav(page,view)
  def choose_q(id):
   nav('materials');page.locator('[data-action=reset-filters]').click();q=by_id[id]
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=query]').fill(q['title'])
@@ -77,13 +78,13 @@ with sync_playwright() as p:
  ctx.set_offline(True);page.wait_for_function('!navigator.onLine');page.reload();page.locator('.hint-box').wait_for()
  assert state()['currentId']==attempt and page.get_by_role('radio').nth(3).is_checked() and state()['attempts'][-1]['hintCount']==1
  page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.locator('#offline-status').is_visible()
- page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='再開する',exact=True).click();assert state()['currentId']==attempt
+ page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='続きから',exact=True).click();assert state()['currentId']==attempt
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
  # Navigating during the debounced scroll save must preserve the study position.
  page.evaluate('window.scrollTo(0,400)')
  wait_for_async(page,'async()=>{const s=await ('+READ_STATE+')();return window.scrollY>0&&s.attempts.find(a=>a.id===s.currentId).scrollY===window.scrollY;}')
  assert state()['attempts'][-1]['scrollY']>0
- page.evaluate('()=>{window.dispatchEvent(new Event("scroll"));document.querySelector(".sidebar [data-view=materials]").click()}')
+ page.evaluate('window.dispatchEvent(new Event("scroll"))');nav('materials')
  before=state();page.wait_for_timeout(300);assert state()==before,'Leaving study overwrote its saved scroll position'
  # A missing image does not create an unreadable attempt or destroy the paused one.
  choose_q('r07h-q2');before=state();page.locator('[data-action=start][data-id=r07h-q2]').click();after=state()
@@ -93,7 +94,7 @@ with sync_playwright() as p:
    changed['attempts']=[{key:[old.get(key),new.get(key)] for key in old if old.get(key)!=new.get(key)} for old,new in zip(before['attempts'],after['attempts'])]
   raise AssertionError(f'Offline guard changed record: {changed}')
  assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
- nav('home');page.locator('.quick-start [data-action=start-session]').click();assert state()['currentId']!=attempt
+ nav('home');page.locator('.hero-start [data-action=start-session]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0
  page.screenshot(path=str(ARTIFACTS/'offline-mobile.png'),full_page=True)

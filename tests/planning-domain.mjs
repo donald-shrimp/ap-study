@@ -100,3 +100,11 @@ test('週の両端とJST境界で実績を数え、休んだ週の未達を繰�
  p.phases[0].milestones[0].completed=true;assert.equal(phaseProgress(p,attempts,q)[0].actual,4);assert.equal(JSON.stringify(attempts),before);
  const summary=studySummary({qualification:q,plan:p,attempts,at:'2026-10-14T00:00:00Z'});assert.equal(summary.phaseProgress[0].weeklyProgress[1].remaining,4);assert.equal(summary.currentPlan.phases[0].milestones[0].completed,true);
 });
+
+test('継続セッションの対象パートを検証し、既存のパート指定なし記録は保持する',()=>{
+ const a=createAttempt(questions[0]),s={...makeState(),attempts:[a],session:{attemptIds:[a.id],topic:null,topicId:null,examPartId:'objective'}};
+ assert.equal(validateState(structuredClone(s)).session.examPartId,'objective');
+ assert.throws(()=>validateState({...structuredClone(s),session:{...s.session,examPartId:'written'}}));
+ assert.throws(()=>validateState({...structuredClone(s),session:{...s.session,examPartId:'unknown'}}));
+ const old=structuredClone(s);delete old.session.examPartId;assert.equal(validateState(old).attempts[0].id,a.id);
+});

@@ -32,3 +32,25 @@ def wait_for_async(page, expression, timeout=10000):
         if page.evaluate(expression):return
         page.wait_for_timeout(50)
     raise AssertionError('Async condition did not complete: '+expression)
+
+
+def nav(page, view):
+    """Navigate through the three visible destinations and their real actions."""
+    if view == 'materials':
+        page.locator('.sidebar [data-view=topics]').click()
+        page.get_by_role('button', name='問題を探す', exact=True).click()
+    elif view == 'review':
+        page.locator('.sidebar [data-view=history]').click()
+        page.locator('.record-tools [data-view=review]').click()
+    else:
+        page.locator(f'.sidebar [data-view={view}]').click()
+
+def open_plan_editor(page):
+    editor = page.locator('#plan-editor')
+    if not editor.evaluate('(el)=>el.open'):
+        editor.locator(':scope > summary').click()
+
+def open_plan_ai(page):
+    ai = page.locator('#plan-ai')
+    if not ai.evaluate('(el)=>el.open'):
+        ai.locator(':scope > summary').click()

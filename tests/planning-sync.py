@@ -1,3 +1,4 @@
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real Auth/Firestore Emulator: plans and diagnostic runs across two browsers."""
 import json, shutil, uuid
 from playwright.sync_api import sync_playwright
@@ -26,6 +27,7 @@ def login(page,email):
  page.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("google-logout").disabled');synced(page)
 def plan_view(page):
  page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='計画を見る' if page.get_by_role('button',name='計画を見る',exact=True).count() else '受験日・計画を登録',exact=True).click()
+ open_plan_editor(page);open_plan_ai(page)
 def set_date(page,date):
  page.locator('[name=exam-objective]').fill(date);page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
 
@@ -39,8 +41,8 @@ with sync_playwright() as p:
  contexts[0].set_offline(True);set_date(a,'2026-12-03');set_date(c,'2026-12-15');synced(c);contexts[0].set_offline(False);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.conflict)');a.get_by_role('heading',name='計画の変更が競合しています',exact=True).wait_for();a.get_by_role('button',name='この端末の内容を使う',exact=True).click();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.examDates?.[0]?.date==="2026-12-03")',timeout=30000)
  # Optional phase fields and context are accepted by the updated Rules.
  example=json.loads(open('schemas/study-plan.example.json').read());example['examDates']=[{'examPartId':'objective','date':'2026-12-03'}]
- a.locator('#plan-json').fill(json.dumps(example));a.get_by_role('button',name='検証してプレビュー',exact=True).click();a.get_by_role('button',name='この内容で登録',exact=True).click();a.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.weeklyTargets?.length===2)')
- c.get_by_role('heading',name=example['phases'][0]['name'],exact=True).wait_for();assert not c.locator('#planning-stale').is_visible();assert c.locator('.context-list').first.inner_text().find(example['context']['rationale'])>=0
+ open_plan_ai(a);a.locator('#plan-json').fill(json.dumps(example));a.get_by_role('button',name='検証してプレビュー',exact=True).click();a.get_by_role('button',name='この内容で登録',exact=True).click();a.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.weeklyTargets?.length===2)')
+ c.get_by_role('heading',name=example['phases'][0]['name'],exact=True).first.wait_for();assert not c.locator('#planning-stale').is_visible();assert c.locator('#plan-overview .context-list').text_content().find(example['context']['rationale'])>=0
  # A real draft survives remote changes; an untouched page refreshes by itself.
  c.locator('.summary-preview').evaluate('(details)=>details.open=true');context_form=c.locator('#context-form');context_form.evaluate('(f)=>f.parentElement.open=true');context_form.locator('[name=rationale]').fill('まだ保存していないスマホ側の前提')
  form=a.locator('#context-form');form.evaluate('(f)=>f.parentElement.open=true');form.locator('[name=rationale]').fill('PCで更新した計画の前提');form.get_by_role('button',name='前提を保存',exact=True).click();a.get_by_text('計画の前提を保存しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.context?.rationale==="PCで更新した計画の前提")');c.locator('#planning-stale').wait_for(state='visible');assert context_form.locator('[name=rationale]').input_value()=='まだ保存していないスマホ側の前提';assert 'PCで更新した計画の前提' in c.locator('.summary-preview').inner_text();c.get_by_role('button',name='入力を破棄して最新版を表示',exact=True).click()

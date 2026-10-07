@@ -44,6 +44,7 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
     const fail=()=>{throw new Error('この資格の有効な学習記録ファイルではありません。現在の記録は変更していません。');};
     if(!s||s.version!==1||!Array.isArray(s.attempts)||s.attempts.length>20000||!['home','study','review','history','materials','topics','planning','diagnostics','diagnostic'].includes(s.view)||!s.settings||typeof s.settings.largeText!=='boolean'||!s.session||!Array.isArray(s.session.attemptIds)||!s.overrides||Array.isArray(s.overrides)||typeof s.overrides!=='object')fail();
     s.currentRunId??=null;if(s.currentRunId!==null&&!id(s.currentRunId))fail();s.readingNotes??={};s.session.topic??=null;delete s.settings.sessionSize;delete s.session.goal;
+    if(s.session.examPartId!==undefined&&s.session.examPartId!==null&&!(qualification?.examParts||[{id:qualification?.defaultExamPartId||'objective'}]).some(p=>p.id===s.session.examPartId))fail();
     if(!s.readingNotes||Array.isArray(s.readingNotes)||typeof s.readingNotes!=='object'||!(s.session.topic===null||text(s.session.topic,200))||(s.session.topicId!==undefined&&s.session.topicId!==null&&!id(s.session.topicId)))fail();
     for(const [topic,note] of Object.entries(s.readingNotes))if(!text(topic,100)||topic==='__proto__'||!text(note,200))fail();
     const ids=new Set(), byId=new Map(base.map(q=>[q.id,q]));
@@ -65,6 +66,7 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
     }
     if(s.currentId!==null&&!ids.has(s.currentId)||s.session.attemptIds.some(id=>!ids.has(id))||new Set(s.session.attemptIds).size!==s.session.attemptIds.length)fail();
     if(s.session.topic&&s.session.attemptIds.some(id=>{const a=s.attempts.find(a=>a.id===id);const q=a.questionSnapshot||byId.get(a.questionId);return s.session.topicId?q.topicId!==s.session.topicId:q.topic!==s.session.topic;}))fail();
+    if(s.session.examPartId&&s.session.attemptIds.some(id=>{const a=s.attempts.find(a=>a.id===id),q=a.questionSnapshot||byId.get(a.questionId);return (q.examPartId||qualification.defaultExamPartId)!==s.session.examPartId;}))fail();
     for(const [id,m] of Object.entries(s.overrides)){const q=byId.get(id)||s.attempts.find(a=>a.questionId===id&&a.questionSnapshot)?.questionSnapshot;if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id)||!material(m,q?.choices.length||m.choiceReasons?.length||0)||!text(m.revision,100))fail();}
     return s;
   };
