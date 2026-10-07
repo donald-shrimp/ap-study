@@ -6,12 +6,12 @@ spec=importlib.util.spec_from_file_location('builder',ROOT/'tools/build-content.
 cfg=json.loads((ROOT/'content/ap/qualification.json').read_text());raw=json.loads((ROOT/cfg['questionSource']).read_text());questions=[builder.normalize(q,cfg) for q in raw]
 context=json.loads((ROOT/cfg['studyContextSource']).read_text());deck=json.loads((ROOT/cfg['flashcardSource']).read_text())
 paperless=sum(i['mode']=='paperless' for i in context['items'])
-assert len(deck['cards'])==20
+assert len(deck['cards'])>=20
 completed=set(context['completedExamIds'])
 assert {q['id'] for q in raw if q['id'].split('-q')[0] in completed}=={i['questionId'] for i in context['items']}
 assert completed=={q['id'].split('-q')[0] for q in raw}
 assert len(context['items'])==len(raw)==800
-assert len({c['id'] for c in deck['cards']})==20
+assert len({c['id'] for c in deck['cards']})==len(deck['cards'])
 assert len({i['questionId'] for i in context['items']})==800
 by_id={i['questionId']:i for i in context['items']}
 def digest(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
@@ -19,7 +19,14 @@ review_dir=ROOT/'content/ap/study-context-reviews'
 root_review=json.loads((review_dir/'root.json').read_text())
 assert root_review['combinedContextSha256']==digest(context)
 assert root_review['preservedR07hItemsSha256']==digest(sorted((i for i in context['items'] if i['questionId'].startswith('r07h-q')),key=lambda i:int(i['questionId'].split('-q')[1])))
-for filename,sha in root_review['preservedContentSha256'].items():assert hashlib.sha256((ROOT/filename).read_bytes()).hexdigest()==sha,filename
+for filename,sha in root_review['preservedContentSha256'].items():
+ # This historical classification audit checked the original 20-card deck.
+ # Later card editions are independent of the unchanged question corpus.
+ if filename=='content/ap/flashcards.json':
+  archived=json.loads((ROOT/'data/qualifications/ap/flashcards.584bed40953eac03.json').read_text())
+  data=(json.dumps(archived,ensure_ascii=False,indent=2)+'\n').encode()
+ else:data=(ROOT/filename).read_bytes()
+ assert hashlib.sha256(data).hexdigest()==sha,filename
 for path in review_dir.glob('r*.json'):
  if path.stem=='root':continue
  review=json.loads(path.read_text());exam=review['examId']
@@ -38,7 +45,7 @@ with tempfile.TemporaryDirectory() as name:
  root=Path(name);out=root/'out';out.mkdir()
  for key in ['questionSource','studyContextSource','flashcardSource']:
   dest=root/cfg[key];dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy(ROOT/cfg[key],dest)
- result=builder.compile_learning_tools(root,cfg,questions,out);assert result['flashcards']['count']==20 and result['studyContext']['paperless']==paperless
+ result=builder.compile_learning_tools(root,cfg,questions,out);assert result['flashcards']['count']==len(deck['cards']) and result['studyContext']['paperless']==paperless
  def rejects(key,value):
   path=root/cfg[key];original=path.read_text();path.write_text(json.dumps(value,ensure_ascii=False))
   try:
@@ -54,4 +61,4 @@ with tempfile.TemporaryDirectory() as name:
  invalid=copy.deepcopy(context);invalid['items'].pop();rejects('studyContextSource',invalid)
  invalid=copy.deepcopy(context);invalid['completedExamIds']=['missing'];rejects('studyContextSource',invalid)
  invalid=copy.deepcopy(deck);invalid['cards'].append(invalid['cards'][0]);rejects('flashcardSource',invalid)
-print(f'PASS {paperless} paperless / {800-paperless} desk / all 10 exams / 20 authored cards / source hashes / malformed references rejected')
+print(f'PASS {paperless} paperless / {800-paperless} desk / all 10 exams / {len(deck['cards'])} authored cards / source hashes / malformed references rejected')
