@@ -250,3 +250,7 @@ python tests/planning-context.py
 python tests/diagnostic-content.py
 python tests/diagnostic-pool.py
 ```
+
+## 次の行動が分かる画面の設計案（2026-10-07）
+
+[操作できるHTML設計書](https://donald-shrimp.github.io/ap-study/docs/action-first-design.html)。ホームの「次の1問」と理由、残日数と現在の重点、通常学習／診断を分けた分野別グラフ、計画を見る／編集する流れ、P0〜P2の実装順をまとめています。6つの状態と学習フローを架空の記録で試せます。この設計案によるアプリ本体の改修はまだ行っていません。
