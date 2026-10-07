@@ -61,7 +61,7 @@ Auth／Firestore Emulatorは localhost の `?firebase-emulator=1` のときだ�
 
 ## 受験日・計画・診断を同期するための追加設定（2026-10-07）
 
-**前回の計画・診断用Rulesは利用者が公開・同期済み表示を確認済みです。今回の計画の前提（context）に対応したRulesは、再公開が必要です。** Webアプリ設定には管理者権限がなく、この作業環境のFirebase CLIも管理者認証がありません。前回の作業環境からは本番Rulesを配備せず、今回利用者が公開しました。計画と診断は端末内で利用・バックアップでき、許可不足は別の同期状態で表示します。
+**前回の計画・診断用Rulesは利用者が公開・同期済み表示を確認済みです。計画の前提（context）と診断の出題情報に対応した最新版Rulesも、2026-10-07に利用者が公開を報告しました。新しい項目の本番同期表示は確認待ちです。** Webアプリ設定には管理者権限がなく、この作業環境からは本番Rulesを配備していません。以下は設定・動作確認の手順です。公開を報告済みのRulesを再公開する必要はありません。計画と診断は端末内で利用・バックアップでき、許可不足は別の同期状態で表示します。
 
 1. 公開済みのルールが、最新の [firestore.rules](https://github.com/donald-shrimp/ap-study/blob/main/firestore.rules) **全体**と一致することを確認してください。通常のattemptsの許可も含まれています。
 2. 未設定なら単一フィールドの除外をもう1つ追加：コレクションID `resources`、フィールド `payload`（配下を含む）。`updatedAt` は除外しません。CLIの `firestore.indexes.json` も更新済みです。
@@ -80,7 +80,7 @@ Rulesと実SDKのEmulator試験で所有者・資格分離、競合、途中保�
 
 ## 計画の前提を同期する（今回・2026-10-07）
 
-今回 `planning.payload.context` と診断の `selectionPolicy` に対応するようRulesを更新しました。管理者認証がないため、この作業環境から本番へは配備していません。最新の [firestore.rules](https://github.com/donald-shrimp/ap-study/blob/main/firestore.rules) 全体をFirebaseのルール画面へコピーして公開してください。通常演習・診断の許可も含むので、ファイルの一部だけで置き換えないでください。インデックス設定は今回変更していません。
+今回 `planning.payload.context` と診断の `selectionPolicy` に対応するようRulesを更新しました。2026-10-07に利用者が最新版Rulesの公開を報告しました。この環境から管理者操作や公開内容の直接照合はしていません。公開対象は最新の [firestore.rules](https://github.com/donald-shrimp/ap-study/blob/main/firestore.rules) 全体です。インデックス設定は今回変更していません。
 
 公開前でも前提は端末へ保存・書き出しできます。前提を含む計画のクラウド送信は許可不足と表示し、送信待ちを保持します。通常演習は別の同期処理で続けます。前回のルールでは前提のない計画と、前回作成した診断は従来どおり扱えます。今回から始める診断には方針スナップショットが付くため、その同期にも更新が必要です。
 
