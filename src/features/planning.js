@@ -1,5 +1,5 @@
 import {createWorkspaceStore} from '../storage/workspace.js';
-import {blankPlan,validatePlan,parsePlan,examPartsFor,studySummary,aiPrompt} from '../domain/planning.js';
+import {blankPlan,validatePlan,parsePlan,examPartsFor,studySummary,aiPrompt,CONTEXT_FIELDS,dateInZone} from '../domain/planning.js';
 import {selectDiagnostic,createDiagnostic,submitDiagnostic,finishDiagnostic,diagnosticAttempts,diagnosticResult,validateDiagnostic} from '../domain/diagnostic.js';
 import {createPlanningViews} from '../ui/planning.js';
 
@@ -7,8 +7,9 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  let workspace,documents=[],preview=null,previewRevision=0,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,status='guest',generation=0,busy=false;
  const row=id=>documents.find(r=>r.id===id),plan=()=>row('planning')?.payload||blankPlan(qualification);
  const validate=(kind,payload)=>{if(kind==='planning')return validatePlan(payload,qualification);if(kind==='diagnostic')return validateDiagnostic(payload,qualification,validateAttempt);throw new Error('未対応の記録形式です。');};
- function allAttempts(){return [...getState().attempts,...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticAttempts(r.payload))];}
- const views=()=>createPlanningViews({qualification,documents,attempts:allAttempts(),currentRunId:getState().currentRunId,preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status});
+ function assessmentAttempts(){return [...getState().attempts,...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticAttempts(r.payload))];}
+ function allAttempts(){return assessmentAttempts().filter(a=>!a.questionSnapshot?.diagnosticOnly);}
+ const views=()=>createPlanningViews({qualification,documents,attempts:allAttempts(),summaryData:summary(),currentRunId:getState().currentRunId,preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status});
  function phaseIn(next,id){const phase=next.phases.find(p=>p.id===id);if(!phase)throw new Error('フェーズが更新されています。計画を開き直してください。');return phase;}
  async function bind(){const token=++generation,identity=await getStore().identity();await workspace?.close();if(token!==generation)return;workspace=createWorkspaceStore({...identity,rootPath,validate});try{documents=(await workspace.read()).filter(r=>{try{validate(r.kind,r.payload);return true;}catch{onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');return false;}});}catch{documents=[];onNotice('計画・診断を保存できません。通常学習は利用できます。');}if(workspace.error())onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');preview=null;jsonInput='';editingPhaseId=null;editingWeek=null;editingMilestone=null;status=identity.owner.startsWith('uid:')?'pending':'guest';onUpdate();}
  async function write(kind,id,payload,revision){const token=generation,target=workspace;await target.write(kind,id,payload,revision);if(token!==generation)return;documents=await target.read();onChanged();onUpdate();}
@@ -23,9 +24,11 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  async function startDiagnostic(){
   if(!navigator.onLine)throw new Error('新しい診断はオンラインで始めてください。中断した診断や通常学習はオフラインでも使えます。');
   const token=generation,nav=getNavigation();onNotice('診断の30問を準備しています。');
-  const chosen=selectDiagnostic(base,qualification,allAttempts());await Promise.all(chosen.map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
+  const variants=await content.loadDiagnostics();if(token!==generation||nav!==getNavigation())return;
+  const attempts=assessmentAttempts(),chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>!q.diagnosticOnly).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
   await cacheImages(chosen);if(token!==generation||nav!==getNavigation())return;
-  const run=createDiagnostic(chosen,qualification,allAttempts(),content.manifest.index.sha256);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
+  const revision=[content.manifest.index.sha256,content.manifest.diagnostic?.sha256||''].filter(Boolean).join(':');
+  const run=createDiagnostic(chosen,qualification,attempts,revision);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
  }
  async function action(el){
   const action=el.dataset.action,known=['reload-planning','copy-prompt','copy-summary','export-summary','export-plan','preview-plan','register-plan','edit-phase','cancel-phase','delete-phase','edit-week','cancel-week','delete-week','edit-milestone','cancel-milestone','delete-milestone','toggle-milestone','start-diagnostic','resume-diagnostic','pause-diagnostic','submit-diagnostic','skip-diagnostic','end-diagnostic','diagnostic-zoom','workspace-local','workspace-remote','workspace-copy-run','export-diagnostics'];
@@ -37,7 +40,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
    else if(action==='export-summary')download(summary(),`${qualification.id}-study-summary.json`);
    else if(action==='export-plan')download(plan(),`${qualification.id}-study-plan.json`);
    else if(action==='export-diagnostics')download({format:'hitomon-diagnostics',version:1,qualificationId:qualification.id,runs:documents.filter(r=>r.kind==='diagnostic').map(r=>r.payload)},`${qualification.id}-diagnostics.json`);
-   else if(action==='preview-plan'){preview=parsePlan(jsonInput,qualification);previewRevision=row('planning')?.localRevision||0;onUpdate();document.getElementById('plan-preview').scrollIntoView({block:'start'});onNotice('検証できました。登録後の内容を確認してください。');}
+   else if(action==='preview-plan'){preview=parsePlan(jsonInput,qualification);const retained=!Object.hasOwn(preview,'context')&&plan().context!==undefined;if(retained)preview.context=structuredClone(plan().context);previewRevision=row('planning')?.localRevision||0;onUpdate();document.getElementById('plan-preview').scrollIntoView({block:'start'});onNotice(retained?'検証できました。JSONに前提がないため、現在の前提を引き継ぎます。登録後の内容を確認してください。':'検証できました。登録後の内容を確認してください。');}
    else if(action==='register-plan'){if(!preview)throw new Error('先に計画を検証してください。');await write('planning','planning',preview,previewRevision);preview=null;jsonInput='';onUpdate();onNotice('受験日と計画を登録しました。');}
    else if(action==='edit-phase'){editingPhaseId=el.dataset.id;onUpdate();document.getElementById('phase-form').scrollIntoView({block:'start'});}
    else if(action==='cancel-phase'){editingPhaseId=null;onUpdate();}
@@ -80,14 +83,15 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   return false;
  }
  async function submit(form){
-  if(!['exam-form','phase-form'].includes(form.id)&&!['week','milestone'].includes(form.dataset.planningForm))return false;
+  if(!['exam-form','phase-form'].includes(form.id)&&!['week','milestone','context'].includes(form.dataset.planningForm))return false;
   if(busy)return true;busy=true;
   try{const fields=new FormData(form),next=structuredClone(plan());
    if(form.id==='exam-form')next.examDates=examPartsFor(qualification).map(p=>({examPartId:p.id,date:String(fields.get('exam-'+p.id)||'')})).filter(d=>d.date);
+   else if(form.dataset.planningForm==='context'){const context=Object.fromEntries(CONTEXT_FIELDS.map(([id])=>[id,String(fields.get(id)||'').trim()]).filter(([,v])=>v));const minutes=String(fields.get('weeklyMinutes')||'').trim();if(minutes!=='')context.weeklyMinutes=Number(minutes);if(Object.keys(context).length)context.updatedOn=dateInZone(new Date(),next.timeZone);next.context=context;}
    else if(form.dataset.planningForm==='week'){const phase=phaseIn(next,form.dataset.phase),week={id:form.dataset.id||'week-'+crypto.randomUUID(),start:String(fields.get('start')),end:String(fields.get('end')),completedAttempts:Number(fields.get('target'))};phase.weeklyTargets=[...(phase.weeklyTargets||[]).filter(w=>w.id!==week.id),week].sort((a,b)=>a.start.localeCompare(b.start));}
    else if(form.dataset.planningForm==='milestone'){const phase=phaseIn(next,form.dataset.phase),old=phase.milestones?.find(m=>m.id===form.dataset.id),milestone={id:form.dataset.id||'milestone-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),date:String(fields.get('date')),examPartId:String(fields.get('part')),completed:old?.completed||false};phase.milestones=[...(phase.milestones||[]).filter(m=>m.id!==milestone.id),milestone].sort((a,b)=>a.date.localeCompare(b.date));}
    else{const phase={...next.phases.find(p=>p.id===form.dataset.id),id:form.dataset.id||'phase-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),start:String(fields.get('start')),end:String(fields.get('end')),examPartIds:fields.getAll('part').map(String),targets:{completedAttempts:Number(fields.get('target'))},focusTopicIds:fields.getAll('topic').map(String)};next.phases=[...next.phases.filter(p=>p.id!==phase.id),phase].sort((a,b)=>a.start.localeCompare(b.start));}
-   await write('planning','planning',next,Number(form.dataset.revision));editingPhaseId=null;editingWeek=null;editingMilestone=null;onUpdate();onNotice(form.id==='exam-form'?'受験日を保存しました。':form.dataset.planningForm==='week'?'週別目標を保存しました。':form.dataset.planningForm==='milestone'?'予定を保存しました。':'フェーズを保存しました。');
+   await write('planning','planning',next,Number(form.dataset.revision));editingPhaseId=null;editingWeek=null;editingMilestone=null;onUpdate();onNotice(form.id==='exam-form'?'受験日を保存しました。':form.dataset.planningForm==='context'?'計画の前提を保存しました。':form.dataset.planningForm==='week'?'週別目標を保存しました。':form.dataset.planningForm==='milestone'?'予定を保存しました。':'フェーズを保存しました。');
   }catch(error){onNotice(error.message);}finally{busy=false;}return true;
  }
  async function importGuest(uid,deviceId){
@@ -100,5 +104,5 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  function validateBackup(value){if(value===undefined)return;if(!value||value.format!=='hitomon-workspace-backup'||value.version!==1||value.qualificationId!==qualification.id||!Array.isArray(value.runs)||value.runs.length>1000)throw new Error('受験日・計画・診断のバックアップを確認できません。記録は変更していません。');if(value.plan)validate('planning',value.plan);const ids=new Set();for(const run of value.runs){validate('diagnostic',run);if(ids.has(run.id))throw new Error('診断IDが重複しています。');ids.add(run.id);if(row(run.id)&&JSON.stringify(row(run.id).payload)!==JSON.stringify(run))throw new Error('同じIDの異なる診断があります。既存の記録は変更していません。');}}
  async function restoreBackup(value){if(!value)return;validateBackup(value);if(value.plan&&!row('planning'))await write('planning','planning',value.plan,0);for(const run of value.runs)if(!row(run.id))await write('diagnostic',run.id,run,0);}
  async function clearDiagnostics(){await workspace.clearDiagnostics();documents=await workspace.read();onUpdate();}
- return {bind,views,allAttempts,action,input,change,submit,summary,importGuest,backup,validateBackup,restoreBackup,clearDiagnostics,store:()=>workspace,derivedRun:id=>documents.find(r=>r.kind==='diagnostic'&&r.payload.slots.some(s=>s.id===id))?.id,onDocuments:rows=>{if(rows.some(r=>r.owner!==workspace.identity().owner))return;const changed=JSON.stringify(rows.map(r=>[r.id,r.localRevision,r.payload,r.conflict]))!==JSON.stringify(documents.map(r=>[r.id,r.localRevision,r.payload,r.conflict]));documents=rows;if(getState().view==='planning'){const conflicts=document.getElementById('workspace-conflicts');if(conflicts)conflicts.innerHTML=views().conflictsHTML();if(changed){const stale=document.getElementById('planning-stale');if(stale)stale.hidden=false;}onUpdate({preserveForm:true});}else if(changed)onUpdate();},onStatus:kind=>{status=kind;const markup=views().statusHTML();document.querySelectorAll('.workspace-status').forEach(el=>el.outerHTML=markup);const settingsStatus=document.getElementById('workspace-sync-state');if(settingsStatus)settingsStatus.innerHTML=markup;},refresh:()=>onUpdate()};
+ return {bind,views,allAttempts,action,input,change,submit,summary,importGuest,backup,validateBackup,restoreBackup,clearDiagnostics,store:()=>workspace,derivedRun:id=>documents.find(r=>r.kind==='diagnostic'&&r.payload.slots.some(s=>s.id===id))?.id,onDocuments:rows=>{if(rows.some(r=>r.owner!==workspace.identity().owner))return;const changed=JSON.stringify(rows.map(r=>[r.id,r.localRevision,r.payload,r.conflict]))!==JSON.stringify(documents.map(r=>[r.id,r.localRevision,r.payload,r.conflict]));documents=rows;if(getState().view==='planning'){const conflicts=document.getElementById('workspace-conflicts');if(conflicts)conflicts.innerHTML=views().conflictsHTML();if(changed){const summaryElement=document.querySelector('.summary-preview');if(summaryElement){const open=summaryElement.open;summaryElement.outerHTML=views().summaryHTML();document.querySelector('.summary-preview').open=open;}const stale=document.getElementById('planning-stale');if(stale)stale.hidden=false;}onUpdate({preserveForm:true});}else if(changed)onUpdate();},onStatus:kind=>{status=kind;const markup=views().statusHTML();document.querySelectorAll('.workspace-status').forEach(el=>el.outerHTML=markup);const settingsStatus=document.getElementById('workspace-sync-state');if(settingsStatus)settingsStatus.innerHTML=markup;},refresh:()=>onUpdate()};
 }

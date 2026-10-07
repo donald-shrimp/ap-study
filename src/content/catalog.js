@@ -52,6 +52,16 @@ export async function loadCatalog(requestedId) {
   if (questions.length !== manifest.count || byId.size !== questions.length) throw new Error('教材一覧の件数が一致しません。');
   const packs = new Map(manifest.packs.map(pack=>[pack.id,{...pack,url:new URL(pack.url,manifestURL).href}]));
   const loading = new Map();
+  let diagnosticsPromise;
+  function loadDiagnostics(){
+    const entry=manifest.diagnostic;
+    if(!entry)return Promise.resolve([]);
+    if(!diagnosticsPromise)diagnosticsPromise=readJSON(new URL(entry.url,manifestURL),entry.sha256).then(({value})=>{
+      if(!Array.isArray(value)||value.length!==entry.count||entry.reviewed!==entry.count||new Set(value.map(q=>q.id)).size!==value.length||value.some(q=>!q.diagnosticOnly||byId.has(q.id)||!byId.has(q.parentQuestionId)||q.qualificationId!==manifest.id||q.enrichment!=='reviewed'))throw new Error('診断専用教材の確認に失敗しました。通常学習は利用できます。');
+      return value.map(assets);
+    }).catch(error=>{diagnosticsPromise=null;throw error;});
+    return diagnosticsPromise;
+  }
   async function ensure(id) {
     const question = byId.get(id);
     if (!question) throw new Error('この問題は現在の教材一覧にありません。');
@@ -69,6 +79,6 @@ export async function loadCatalog(requestedId) {
     await loading.get(pack.id);
     return question;
   }
-  return {manifest, qualifications, questions, packs, ensure, online:loaded.online && index.online,
+  return {manifest, qualifications, questions, packs, ensure, loadDiagnostics, online:loaded.online && index.online,
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }

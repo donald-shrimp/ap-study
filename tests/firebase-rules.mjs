@@ -70,3 +70,17 @@ test('30問診断を保存・回答・終了でき、支援と終了後の変更
  await assertSucceeds(setDoc(ref,resourceEnvelope('diagnostic',run,4)));
  const reopened=structuredClone(run);reopened.status='in_progress';reopened.completedAt=null;await assertFails(setDoc(ref,resourceEnvelope('diagnostic',reopened,5)));
 });
+
+test('計画の前提は本人だけ保存でき、未知項目・型・長さ・学習時間を検証する',async()=>{
+ const db=env.authenticatedContext('context-planner').firestore(),ref=doc(db,resourcePath('context-planner','planning')),p={...blankPlan(qualification),context:{studiedScope:'教科書を一周',materials:'手元の教材',weeklyMinutes:180,constraints:'週末のみ',rationale:'広く確認',updatedOn:'2026-10-07'}};
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p)));
+ for(const context of [null,[],{unknown:'value'},{weeklyMinutes:-1},{weeklyMinutes:1.5},{weeklyMinutes:10081},{materials:'x'.repeat(2001)},{updatedOn:'not-date'}])await assertFails(setDoc(ref,resourceEnvelope('planning',{...p,context},2)));
+ await assertFails(getDoc(doc(env.authenticatedContext('other').firestore(),resourcePath('context-planner','planning'))));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planning',{...p,context:{}},2)));
+});
+
+test('診断専用問題は通常の試行コレクションへ書き込めない',async()=>{
+ const db=env.authenticatedContext('no-derived-attempt').firestore(),a=createAttempt(q);
+ a.questionSnapshot.diagnosticOnly=true;a.questionSnapshot.parentQuestionId='parent';
+ await assertFails(setDoc(doc(db,path('no-derived-attempt',a.id)),envelope(a)));
+});

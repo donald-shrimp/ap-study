@@ -12,6 +12,7 @@ service cloud.firestore {
     && p.confidence is bool && p.answerViewedBefore is bool
     && p.questionSnapshot is map && p.questionSnapshot.id == p.questionId
     && p.questionSnapshot.qualificationId == qualificationId
+    && !('diagnosticOnly' in p.questionSnapshot)
     && p.materialSnapshot is map && p.materialSnapshot.hints is list
     && p.materialSnapshot.hints.size() >= 1 && p.materialSnapshot.hints.size() <= 20
     && p.hintCount is int && p.hintCount >= 0 && p.hintCount <= p.materialSnapshot.hints.size()
@@ -35,7 +36,7 @@ service cloud.firestore {
     && d.updatedAt == request.time && valid(d.payload, id, qualificationId);
   }
   function validDiagnostic(p, id, qualificationId) {
-   return p.keys().hasOnly(['id','qualificationId','version','blueprintVersion','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
+   return p.keys().hasOnly(['id','qualificationId','version','blueprintVersion','selectionPolicy','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
     && p.id == id && p.qualificationId == qualificationId && p.version == 1
     && p.assistance == 'none' && p.feedback == 'after-finish' && p.size == 30
     && p.status in ['in_progress','completed','ended_early']
@@ -51,9 +52,19 @@ service cloud.firestore {
     && p.responses.diff(old.responses).removedKeys().size() == 0
     && p.responses.diff(old.responses).changedKeys().size() == 0;
   }
+  function validPlanContext(c) {
+   return c is map && c.keys().hasOnly(['studiedScope','materials','weeklyMinutes','constraints','rationale','updatedOn'])
+    && (!('studiedScope' in c) || c.studiedScope is string && c.studiedScope.size() <= 2000)
+    && (!('materials' in c) || c.materials is string && c.materials.size() <= 2000)
+    && (!('constraints' in c) || c.constraints is string && c.constraints.size() <= 2000)
+    && (!('rationale' in c) || c.rationale is string && c.rationale.size() <= 2000)
+    && (!('weeklyMinutes' in c) || c.weeklyMinutes is int && c.weeklyMinutes >= 0 && c.weeklyMinutes <= 10080)
+    && (!('updatedOn' in c) || c.updatedOn is string && c.updatedOn.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}'));
+  }
   function validPlan(p, qualificationId) {
-   return p.keys().hasOnly(['format','version','qualificationId','timeZone','examDates','phases'])
+   return p.keys().hasOnly(['format','version','qualificationId','timeZone','examDates','phases','context'])
     && p.format == 'hitomon-study-plan' && p.version == 1 && p.qualificationId == qualificationId
+    && (!('context' in p) || validPlanContext(p.context))
     && p.timeZone is string && p.timeZone.size() > 0 && p.timeZone.size() <= 80
     && p.examDates is list && p.examDates.size() <= 20 && p.phases is list && p.phases.size() <= 24;
   }

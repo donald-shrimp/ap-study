@@ -4,25 +4,26 @@ const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
   try { return ['http:','https:'].includes(new URL(value, 'https://example.invalid/').protocol); } catch { return false; }
 };
 
-function material(m, choices) {
+function material(m, choices, diagnosticOnly=false) {
   return m && Object.keys(m).every(k=>materialFields.includes(k))
     && (m.enrichment===undefined||['reviewed','topic-guide','personal'].includes(m.enrichment))
     && (m.hintStatus===undefined||['individual','topic-guide'].includes(m.hintStatus))
     && (m.choiceReasons===undefined||Array.isArray(m.choiceReasons)&&[0,choices].includes(m.choiceReasons.length)&&m.choiceReasons.every(r=>text(r)))
-    && Array.isArray(m.hints) && m.hints.length>=1 && m.hints.length<=20
+    && Array.isArray(m.hints) && m.hints.length>=(diagnosticOnly?0:1) && m.hints.length<=20
     && m.hints.every(h=>h && Object.keys(h).every(k=>['title','text','revealsAnswer'].includes(k)) && text(h.title,100) && text(h.text,10000) && typeof h.revealsAnswer==='boolean')
     && ['summary','explanation','takeaway'].every(k=>text(m[k]));
 }
 
 function questionSnapshot(q, qualificationId) {
   return q && Object.keys(q).every(k=>questionFields.includes(k)) && id(q.id)
+    && (q.diagnosticOnly===undefined&&q.parentQuestionId===undefined||q.diagnosticOnly===true&&id(q.parentQuestionId)&&q.parentQuestionId!==q.id)
     && q.qualificationId===qualificationId && q.type==='singleChoice'
     && Number.isInteger(q.version) && text(q.title) && text(q.topic)
     && Array.isArray(q.choices) && q.choices.length>=2 && q.choices.length<=20
@@ -37,7 +38,7 @@ function questionSnapshot(q, qualificationId) {
     && ['stem','source','adaptation'].every(k=>text(q[k]));
 }
 
-export function createStateValidator({getQuestions,getTopics,getQualification}) {
+export function createStateValidator({getQuestions,getTopics,getQualification,allowDiagnosticOnly=false}) {
   return function validateState(s) {
     const base=getQuestions(), topics=getTopics(), qualification=getQualification();
     const fail=()=>{throw new Error('この資格の有効な学習記録ファイルではありません。現在の記録は変更していません。');};
@@ -53,7 +54,7 @@ export function createStateValidator({getQuestions,getTopics,getQualification}) 
       if(a.qualificationId!==undefined&&a.qualificationId!==qualification.id)fail();
       if(a.questionSnapshot && (!questionSnapshot(a.questionSnapshot,qualification.id)||a.questionSnapshot.id!==a.questionId))fail();
       const q=a.questionSnapshot||byId.get(a.questionId);
-      if(!q || !material(a.materialSnapshot,q.choices.length))fail();
+      if(!q || q.diagnosticOnly&&!allowDiagnosticOnly || !material(a.materialSnapshot,q.choices.length,Boolean(q.diagnosticOnly)))fail();
       if(!(a.topic===undefined||a.topic===null||a.topic===q.topic)||!(a.readingNote===undefined||text(a.readingNote,200)))fail();
       if(!date(a.startedAt)||!date(a.updatedAt)||!(a.selected===null||Number.isInteger(a.selected)&&a.selected>=0&&a.selected<q.choices.length)||!Number.isInteger(a.hintCount)||a.hintCount<0||a.hintCount>a.materialSnapshot.hints.length||typeof a.confidence!=='boolean'||typeof a.answerViewedBefore!=='boolean'||!Number.isFinite(a.scrollY)||a.scrollY<0||!text(a.contentRevision,100)||!Number.isInteger(a.questionVersion))fail();
       if(a.selectedChoiceId!==undefined && a.selectedChoiceId!==(a.selected===null?null:q.choices[a.selected].id))fail();

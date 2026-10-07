@@ -18,6 +18,8 @@ let base = [], state = makeState(), storageOK = true, corruptRaw = null, editId 
 const main = $('#main');
 
 const validateState=createStateValidator({getQuestions:()=>base,getTopics:topics,getQualification:()=>qualification});
+const validateDiagnosticState=createStateValidator({getQuestions:()=>base,getTopics:topics,getQualification:()=>qualification,allowDiagnosticOnly:true});
+const validateDiagnosticAttempt=a=>validateDiagnosticState({...makeState(),attempts:[structuredClone(a)]});
 function rebuildProgress(){progress=createProgress(planner?.allAttempts()||state.attempts);}
 const latest=id=>progress.latest(id);
 const previousAttempt=a=>progress.previousAttempt(a);
@@ -302,7 +304,7 @@ try {
   online=content.online;base=content.questions;questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=await store.read();if(raw){try{state=validateState(JSON.parse(raw));if(state.session.topicId)state.session.topic=qualification.topics.find(t=>t.id===state.session.topicId)?.name||state.session.topic;}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   if(state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
-  planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,getNavigation:()=>navigation,content,base,validateAttempt:validateSyncAttempt,onUpdate:(options={})=>{rebuildProgress();if(state.view!=='study'&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download});
+  planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(state.view!=='study'&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download});
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';

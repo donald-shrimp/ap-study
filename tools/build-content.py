@@ -4,6 +4,7 @@ IPA's 80-question/source verification stays in corpus.py and the AP authoring to
 This compiler has no fixed exam years, question count, choice count, or hint count.
 """
 import argparse
+from datetime import datetime
 from collections import defaultdict
 import hashlib
 import html as html_tools
@@ -65,11 +66,12 @@ def normalize(raw, config):
     return q
 
 
-def validate_questions(questions, config, root):
+def validate_questions(questions, config, root, diagnostic=False):
     ids = set()
     for q in questions:
         require(SAFE_ID.fullmatch(q['id']) and q['id'] not in ids, f"Duplicate/invalid question ID: {q['id']}")
         ids.add(q['id'])
+        require(diagnostic or 'diagnosticOnly' not in q and 'parentQuestionId' not in q, f"Diagnostic question in ordinary source: {q['id']}")
         require(q['examPartId'] in {p['id'] for p in config['examParts']}, f"Invalid exam part: {q['id']}")
         require(SAFE_ID.fullmatch(q['packId']), f"Invalid pack ID: {q['id']}")
         require(isinstance(q['title'], str) and q['title'], f"Missing title: {q['id']}")
@@ -82,7 +84,7 @@ def validate_questions(questions, config, root):
         require(all(isinstance(c.get('label'), str) and c['label'] for c in q['choices']), f"Missing choice label: {q['id']}")
         require(q['enrichment'] in ['reviewed', 'topic-guide'], f"Invalid lesson state: {q['id']}")
         require(len(q['choiceReasons']) == (len(q['choices']) if q['enrichment'] == 'reviewed' else 0), f"Invalid reasons: {q['id']}")
-        require(1 <= len(q['hints']) <= 20 and all(h['title'] and h['text'] and isinstance(h['revealsAnswer'], bool) for h in q['hints']), f"Invalid hints: {q['id']}")
+        require((0 if diagnostic else 1) <= len(q['hints']) <= 20 and all(h['title'] and h['text'] and isinstance(h['revealsAnswer'], bool) for h in q['hints']), f"Invalid hints: {q['id']}")
         require(all(isinstance(q[f], str) for f in ['summary', 'explanation', 'takeaway', 'source']), f"Invalid text: {q['id']}")
         require(q['stem'] or q['sourceImages'], f"Missing question body: {q['id']}")
         require(len(q['sourceImages']) == len(q['imageSizes']), f"Missing image sizes: {q['id']}")
@@ -91,6 +93,47 @@ def validate_questions(questions, config, root):
                 require(not re.search(r'[<>\"\x00-\x1f]', asset) and "'" not in asset and not asset.startswith(('http:', 'https:', '//')) and (root / asset).is_file() and (root / asset).resolve().is_relative_to(root.resolve()), f"Missing/unsafe asset: {q['id']} {asset}")
     for q in questions:
         require(all(ref in ids for ref in q['related']), f"Missing related question: {q['id']}")
+
+
+def diagnostic_digest(raw):
+    """Hash the authored object, including choices and explanations, before defaults."""
+    return hashlib.sha256(json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def compile_diagnostics(root, config, originals, directory):
+    if 'diagnosticQuestionSource' not in config:
+        return None
+    def source(key):
+        path=root / config[key]
+        require(path.resolve().is_relative_to(root.resolve()), 'Diagnostic source is outside the repository')
+        return json.loads(path.read_text())
+    raw=source('diagnosticQuestionSource');reviews=source('diagnosticReviewSource')
+    require(isinstance(raw, list) and isinstance(reviews, list), 'Diagnostic sources must be lists')
+    by_id={q['id']:q for q in originals};review_by_id={r['questionId']:r for r in reviews}
+    require(len(review_by_id)==len(reviews), 'Duplicate diagnostic review')
+    require(set(review_by_id)=={q['id'] for q in raw}, 'Diagnostic review set mismatch')
+    generic={**config};generic.pop('adapter',None)
+    questions=[normalize({**q, 'hints':q.get('hints',[])}, generic) for q in raw]
+    validate_questions(questions, generic, root, diagnostic=True)
+    for q, authored in zip(questions, raw):
+        parent=by_id.get(q.get('parentQuestionId'))
+        require(q.get('diagnosticOnly') is True and q['id'] not in by_id and parent is not None, f"Invalid diagnostic parent: {q['id']}")
+        require(q['topicId']==parent['topicId'] and q['examPartId']==parent['examPartId'], f"Diagnostic parent scope mismatch: {q['id']}")
+        require(any(p['id']==q['examPartId'] and p['practiceAvailable'] for p in config['examParts']), f"Unsupported diagnostic part: {q['id']}")
+        require(q['enrichment']=='reviewed' and all(q['choiceReasons']) and q['explanation'].strip() and q['summary'].strip() and q['source'].strip() and q['adaptation'].strip(), f"Incomplete diagnostic material: {q['id']}")
+        review=review_by_id[q['id']]
+        require(review.get('version')==q['version'] and review.get('sha256')==diagnostic_digest(authored), f"Stale diagnostic review: {q['id']}")
+        require(isinstance(review.get('author'), str) and review['author'].strip() and isinstance(review.get('reviewer'), str) and review['reviewer'].strip() and review['author']!=review['reviewer'], f"Independent diagnostic reviewer missing: {q['id']}")
+        checks=review.get('checks',{})
+        require(all(checks.get(k) is True for k in ['source','answer','calculation','choices','wording']), f"Incomplete diagnostic checks: {q['id']}")
+        require(isinstance(review.get('notes'), str) and review['notes'].strip(), f"Missing diagnostic review evidence: {q['id']}")
+        try:
+            checked=datetime.fromisoformat(review['checkedAt'].replace('Z','+00:00'))
+            require(checked.tzinfo is not None, 'Review time needs a timezone')
+        except (KeyError, ValueError, TypeError) as error:
+            raise ValueError(f"Invalid diagnostic review date: {q['id']}") from error
+    filename,digest=hashed_json(directory, 'diagnostic', questions)
+    return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions)}
 
 
 def compile_qualification(root, id):
@@ -103,6 +146,8 @@ def compile_qualification(root, id):
     require(config['id'] == id, 'Qualification ID mismatch')
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')
+    limits=config.get('diagnosticBlueprint',{}).get('variantLimits',{})
+    require(isinstance(limits,dict) and all(k in {t['id'] for t in config['topics']} and type(v) is int and 0<=v<=30 for k,v in limits.items()), 'Invalid diagnostic variant limits')
     require(len({t['name'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic name')
     source = root / config['questionSource']
     require(source.resolve().is_relative_to(root.resolve()), 'Question source is outside the repository')
@@ -126,8 +171,11 @@ def compile_qualification(root, id):
             item['hintCount'] = len(q['hints'])
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource']}
+    diagnostic=compile_diagnostics(root, config, questions, directory)
+    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
+    if diagnostic is not None:
+        manifest['diagnostic']=diagnostic
     write_json(directory / 'manifest.json', manifest)
     return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions)}, config
 

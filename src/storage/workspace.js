@@ -15,7 +15,7 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
    if(old?.conflict)throw new Error('別端末の変更と競合しています。先にどちらの内容を使うか選んでください。');
    if(kind==='diagnostic'&&old){
     if(old.payload.status!=='in_progress'&&serial(old.payload)!==serial(payload))throw new Error('終了した診断は変更できません。');
-    if(serial(old.payload.slots)!==serial(payload.slots)||Object.entries(old.payload.responses).some(([id,value])=>!Object.hasOwn(payload.responses,id)||payload.responses[id]!==value))throw new Error('診断の問題と確定した回答は変更できません。');
+    if(['blueprintVersion','selectionPolicy','catalogRevision','size','startedAt'].some(k=>serial(old.payload[k])!==serial(payload[k]))||serial(old.payload.slots)!==serial(payload.slots)||Object.entries(old.payload.responses).some(([id,value])=>!Object.hasOwn(payload.responses,id)||payload.responses[id]!==value))throw new Error('診断の出題方針・問題と確定した回答は変更できません。');
    }
    const localRevision=(old?.localRevision||0)+1,operationId=`${deviceId}:${id}:${localRevision}`;
    const row={owner,qualificationId,id,kind,payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)};

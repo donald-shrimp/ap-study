@@ -202,7 +202,39 @@
           }
         }
       }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "studiedScope": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "materials": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "constraints": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "rationale": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "weeklyMinutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10080
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
     }
   },
-  "$comment": "2026-10-07: optional phase weeklyTargets and milestones added; existing required fields and their meanings are unchanged. Date references, bounds, overlap and totals are checked by the app."
+  "$comment": "2026-10-07: optional phase weeklyTargets and milestones added; existing required fields and their meanings are unchanged. Date references, bounds, overlap and totals are checked by the app. Optional plan context added: user-provided assumptions, omitted on import preserves current context; {} explicitly clears it."
 }
