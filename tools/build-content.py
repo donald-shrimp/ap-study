@@ -136,6 +136,42 @@ def compile_diagnostics(root, config, originals, directory):
     return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions)}
 
 
+def compile_learning_tools(root, config, questions, directory):
+    """Optional curated context and cards. Keep ordinary questions immutable."""
+    result = {}
+    by_id = {q['id']: q for q in questions}
+    raw_by_id = {q['id']: q for q in json.loads((root / config['questionSource']).read_text())}
+    topics = {t['id'] for t in config['topics']}
+    for key, source_key, format_name in [('studyContext', 'studyContextSource', 'hitomon-study-context'), ('flashcards', 'flashcardSource', 'hitomon-flashcards')]:
+        if not config.get(source_key):
+            continue
+        source = (root / config[source_key]).resolve()
+        require(source.is_relative_to(root.resolve()), 'Learning tool source outside repository')
+        data = json.loads(source.read_text())
+        require(data.get('format') == format_name and data.get('version') == 1 and data.get('qualificationId') == config['id'], 'Invalid learning tool header')
+        records = data.get('items' if key == 'studyContext' else 'cards')
+        require(isinstance(records, list) and len(records) <= 10000, 'Invalid learning tool records')
+        ids = set()
+        for item in records:
+            require(isinstance(item, dict), 'Invalid learning tool item')
+            identifier = item.get('questionId' if key == 'studyContext' else 'id')
+            require(isinstance(identifier, str) and SAFE_ID.fullmatch(identifier) and identifier not in ids, 'Duplicate/invalid learning tool ID')
+            ids.add(identifier)
+            if key == 'studyContext':
+                require(identifier in by_id and item.get('mode') in ['paperless', 'desk'] and isinstance(item.get('reason'), str) and 0 < len(item['reason']) <= 500, 'Invalid context classification')
+                require(item.get('sourceHash') == diagnostic_digest(raw_by_id[identifier]), 'Classification source changed: ' + identifier)
+            else:
+                require(type(item.get('version')) is int and item['version'] > 0 and item.get('topicId') in topics, 'Invalid card version/topic')
+                require(all(isinstance(item.get(f), str) and 0 < len(item[f]) <= limit for f, limit in [('front', 200), ('back', 1000), ('sourceNote', 500)]), 'Invalid card text')
+                refs = item.get('relatedQuestionIds')
+                require(isinstance(refs, list) and 1 <= len(refs) <= 10 and all(isinstance(ref, str) for ref in refs) and len(set(refs)) == len(refs) and all(ref in by_id and by_id[ref]['topicId'] == item['topicId'] for ref in refs), 'Invalid card references')
+        filename, digest = hashed_json(directory, key, data)
+        result[key] = {'url': filename, 'sha256': digest, 'count': len(records)}
+        if key == 'studyContext':
+            result[key]['paperless'] = sum(item['mode'] == 'paperless' for item in records)
+    return result
+
+
 def compile_qualification(root, id):
     require(SAFE_ID.fullmatch(id), f'Invalid qualification ID: {id}')
     config = json.loads((root / 'content' / id / 'qualification.json').read_text())
@@ -172,10 +208,11 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     diagnostic=compile_diagnostics(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource', 'studyContextSource', 'flashcardSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if diagnostic is not None:
         manifest['diagnostic']=diagnostic
+    manifest.update(compile_learning_tools(root, config, questions, directory))
     write_json(directory / 'manifest.json', manifest)
     return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions)}, config
 

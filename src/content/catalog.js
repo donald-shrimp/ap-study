@@ -53,6 +53,17 @@ export async function loadCatalog(requestedId) {
   const packs = new Map(manifest.packs.map(pack=>[pack.id,{...pack,url:new URL(pack.url,manifestURL).href}]));
   const loading = new Map();
   let diagnosticsPromise;
+  const learningPromises=new Map();
+  function loadLearningTool(key){
+    const entry=manifest[key];if(!entry)return Promise.resolve(null);
+    if(!learningPromises.has(key))learningPromises.set(key,readJSON(new URL(entry.url,manifestURL),entry.sha256).then(({value})=>{
+      const records=value[key==='studyContext'?'items':'cards'];
+      if(value.qualificationId!==manifest.id||value.version!==1||!Array.isArray(records)||records.length!==entry.count)throw new Error('移動中の学習教材を確認できません。通常学習は利用できます。');
+      if(key==='studyContext'&&(value.format!=='hitomon-study-context'||new Set(records.map(r=>r.questionId)).size!==records.length||records.some(r=>!byId.has(r.questionId)||!['paperless','desk'].includes(r.mode)||typeof r.reason!=='string')))throw new Error('問題の分類を確認できません。');
+      return value;
+    }).catch(error=>{learningPromises.delete(key);throw error;}));
+    return learningPromises.get(key);
+  }
   function loadDiagnostics(){
     const entry=manifest.diagnostic;
     if(!entry)return Promise.resolve([]);
@@ -80,5 +91,6 @@ export async function loadCatalog(requestedId) {
     return question;
   }
   return {manifest, qualifications, questions, packs, ensure, loadDiagnostics, online:loaded.online && index.online,
+    loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }
