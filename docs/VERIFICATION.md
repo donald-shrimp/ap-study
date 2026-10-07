@@ -420,4 +420,10 @@ gpt-6.1-solの4担当が残る9回720問の原本を閲覧し、主担当が48�
 - `tests/pwa.py`：/ap-study/のID・スコープ・アイコン、オフライン演習、更新後の学習記録保持が成功。
 - `git diff --check`：成功。
 
-ログは `/workspace/scratch/paperless-parallel/` の `packs-local.log`、`study-local.log`、`pwa-local.log`。UI・Firebase同期・800問の教材本文・20カード本文は変更していない。公開検証は実施後に追記する。
+ログは `/workspace/scratch/paperless-parallel/` の `packs-local.log`、`study-local.log`、`pwa-local.log`。UI・Firebase同期・800問の教材本文・20カード本文は変更していない。
+
+### 公開確認
+
+main `cec7c25d40d5ec9f6d37ad130ef32d104f9673c7` のPagesはbuilt・エラーなし。変更21ファイルの公開内容がSHA-256でローカルと一致。公開URLで `tests/mobile-classified-packs.py`・`tests/mobile-study.py`・`tests/pwa.py` が成功し、651候補表示、全10回の出題・保存再開・机向け除外、オプションの配置、単語帳の独立保存・バックアップ、モバイル表示、PWAとオフラインを確認した。本番サイトの新しい検証用ゲストであり、本人のログイン済み学習記録を操作していない。公開環境でのサービスワーカー更新の疑似差替えは行わず、更新の記録保持はローカル試験で確認した。
+
+ログは同ディレクトリの `packs-public.log`・`study-public.log`・`pwa-public.log`、照合は `public-hashes.json`、画面は `public-ui/`。確認記録の追記も公開し、公開内容との一致を確認する。
