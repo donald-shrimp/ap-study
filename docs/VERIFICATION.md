@@ -393,3 +393,9 @@ main `1edf5023eecb390f388bef71dcd9f3ce4893c007` を最新ref・ローカルtree�
 公開URLの `tests/pwa.py` も成功。アプリIDと /ap-study/ のスコープ、アイコン、画像・回答・ヒント・再開のオフライン動作、未取得画像の保護を維持している。更新を模擬する試験はローカルで実施し、公開版そのものを書き換える模擬更新は行っていない。
 
 ログ・公開内容照合・画面は `/workspace/scratch/mobile-public-browser.log`、`mobile-public-pwa.log`、`mobile-public-implementation-hashes.json`、`mobile-public/` に保存。確認記録を追記したこの文書もGitHubへ反映し、最終公開内容と照合する。
+
+## 紙なし候補の補助操作（2026-10-07）
+
+release `20261007-options1`。個人の机指定ボタンを「紙なしの候補から外して中断」に変更し、問題パネルの外・下側に閉じた「この問題のオプション」として配置した。回答操作とヒントの周辺から取り除き、開くと個人の候補除外・回答とヒントの保持・通常モードでの再開を説明する。
+
+`tests/mobile-study.py` で、初期状態でボタンが非表示、問題パネル・回答操作の内部に存在しないこと、オプションを開いて実行すると従来どおり選択とヒントを保持して中断することを確認。単語帳・独立保存・モバイル200%・オフラインの検証も成功。`tests/pwa.py` でスコープ・オフライン演習・更新後の記録保持を確認。`git diff --check` 成功。ログは `/workspace/scratch/options-browser.log`、`options-pwa.log`。
