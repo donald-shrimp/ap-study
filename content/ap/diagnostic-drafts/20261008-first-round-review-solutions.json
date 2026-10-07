@@ -1,0 +1,26 @@
+{
+  "format": "hitomon-diagnostic-review-solutions",
+  "version": 1,
+  "reviewRun": "codex-review-run-20261008-scheduled-continuation",
+  "previousAuthorRun": "codex-author-run-20261007T164320Z",
+  "method": "今回の実行では問題文・4択を抽出して先に解答を記録。その後に原本と草稿の正解・解説を照合する。単一担当の別実行であり、別人・別エージェント・並列確認ではない。前実行の会話要約を引き継いでいるため、正解を知らない独立コンテキストによる盲検確認とも称さない。作者の自己検算報告を確認記録へ転記しない。",
+  "solutions": [
+    {"topicId":"theory","choiceIndex":1,"reason":"P真・Q偽を代入。R偽なら4式は偽・真・偽・真、R真なら偽・真・真・偽。常に真なのはP∧(Q→R)だけ。"},
+    {"topicId":"logic","choiceIndex":3,"reason":"入力00,01,10,11でCは1,1,1,0。両入力CのNANDはCの否定なのでYは0,0,0,1。ANDと一致しOR/XOR/NORとは異なる。"},
+    {"topicId":"algorithm","choiceIndex":2,"reason":"g(0)=0からg(1)=1,g(2)=3,g(3)=6,g(4)=10。6はg(3)、16は4の二乗、24は階乗で加算再帰と異なる。"},
+    {"topicId":"architecture","choiceIndex":0,"reason":"共通命令数Nに対しA=1.5N ns、B=3N ns。A/B=0.5。CPI比2だけでは周期の違いを無視し、逆比2も問う向きと逆。"},
+    {"topicId":"system","choiceIndex":1,"reason":"I/O完了という事象を待っておりCPUを割り当てても実行不能なので待ち状態。実行可能はCPUだけを待ち、実行はCPU使用中、終了は処理完了。"},
+    {"topicId":"hardware","choiceIndex":3,"reason":"3Aは3×16+10=58。100+58×20=1260 mV。1160はオフセット未加算、1280は1段多い、900は3Aを40と読む誤り。58は8bit範囲内。"},
+    {"topicId":"interface","choiceIndex":2,"reason":"写真を含まない図形SVGは座標・形状を表示倍率に合わせて再描画できる。PNG可逆圧縮は画素密度を増やさず、欠落写真の細部復元も倍率別画像の必須保持もない。"},
+    {"topicId":"database","choiceIndex":0,"reason":"社員に部署番号を残し、部署番号→部署名を部署へ分離すれば部署のキーに従属し社員側の推移従属が消える。共通部署番号で部署全属性が決まり無損失。イは部署側に社員番号→部署番号→部署名が残る。ウは元表の推移従属が残る。エは社員と部署の対応を失う。"},
+    {"topicId":"network","choiceIndex":1,"reason":"MTUはIP全体の上限。TCPデータ上限1280−20−32=1228。2400−1228=1172。2個目のIP全長1224、1個目1280、データ合計2400。Ethernet18byteを引く必要はない。"},
+    {"topicId":"security","choiceIndex":3,"reason":"OSコマンド文字列をシェルで解釈させる経路をなくし固定exeと検証済み個別引数にする。HTML/SQLの処理は別の解釈器向け。長さだけでは短い制御文字の悪用を防げない。オプション注入やパス範囲も検証対象。"},
+    {"topicId":"development","choiceIndex":2,"reason":"既存4台を1台ずつ更新するローリング更新。別系統へ一括切替するブルーグリーン、稼働中機器交換のホットスワップ、障害待機のホットスタンバイと区別できる。"},
+    {"topicId":"project","choiceIndex":0,"reason":"CV=480−640=−160、SV=480−600=−120。CPI=0.75、SPI=0.8。残り出来高720/残り予算560=9/7≈1.286で現状0.75より高い効率が必要。同効率なら総費用640+720/0.75=1600万円で1200万円超過。"},
+    {"topicId":"service","choiceIndex":1,"reason":"問題に定めた契約ではOS/DB実行基盤の運用が事業者へ移るので基盤パッチ適用。アプリ請求ロジック・業務データ正確性・業務権限判断は自社に残る。PaaS一般の曖昧さは契約条件で限定済み。"},
+    {"topicId":"strategy","choiceIndex":3,"reason":"調達から販売までの需給・在庫を供給連鎖全体で調整するSCM。CRMは顧客関係、HRMは人材、財務管理は資金・収支で対象が異なる。"},
+    {"topicId":"business-strategy","choiceIndex":2,"reason":"2%<10%で低成長、1.8>=1で高シェアなので金のなる木。花形=高高、問題児=高成長低シェア、負け犬=低低。境界値ではなく分類は一意。"},
+    {"topicId":"business","choiceIndex":0,"reason":"A回転率900/300=3、B1200/600=2。A営業利益率45/300=15%、B96/600=16%。Aは回転率が高く営業利益率が低い。売上高営業利益率5%/8%と取り違えない。"},
+    {"topicId":"law","choiceIndex":1,"reason":"RoHSは電気電子機器の特定有害物質の使用制限。回収ルートはWEEE、電磁妨害はEMC、安全保障輸出管理は別制度。適用条件には閾値や適用除外があり全面ゼロと断定していない。"}
+  ]
+}

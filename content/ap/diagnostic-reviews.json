@@ -1,1 +1,597 @@
-[]
+[
+  {
+    "questionId": "ap-diagnostic-theory-001",
+    "version": 1,
+    "sha256": "9515652aa6d6586506b0561aa6d37a788d486ded7edd365dc1a895cc37f2d110",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "P真・Q偽を代入。R偽なら4式は偽・真・偽・真、R真なら偽・真・真・偽。常に真なのはP∧(Q→R)だけ。 原本の解き直し: P=Q=真でエの前件は(P→¬Q)∨(Q→¬P)=偽。偽からの含意はRに関係なく真。イの前件では¬(Q→¬P)=真なので結論Q→RはR次第。否定線は画像を拡大して区別した。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q1",
+      "officialAnswer": "エ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q1.webp",
+          "sha256": "0913a72bc118422715390663511a8ddbb9cf7441b3ab89f07f0581425ebfba67"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-logic-001",
+    "version": 1,
+    "sha256": "b3ca5b15c7e1591ab1931c356fb8252ee07d03e7f2b414ff1157608d530fcd7e",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "入力00,01,10,11でCは1,1,1,0。両入力CのNANDはCの否定なのでYは0,0,0,1。ANDと一致しOR/XOR/NORとは異なる。 原本の解き直し: 原タイミング図で00/01/10時の出力は1、11時だけ0。NANDはウの出力反転AND記号。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07a-q22",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+      "answerPdfSha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07a/r07a-q22.webp",
+          "sha256": "b9a5624babc74a0965c7fb7802ed6eaaf94660be1c68ff085ed7136f12ca0e68"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-algorithm-001",
+    "version": 1,
+    "sha256": "bf61164d3aadb4d35f1f3cd410c30067fae7620861839d4320a5e31bacc61256",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "g(0)=0からg(1)=1,g(2)=3,g(3)=6,g(4)=10。6はg(3)、16は4の二乗、24は階乗で加算再帰と異なる。 原本の解き直し: 階乗の停止値0!=1、n×fact(n−1)がウ。0停止やn+1再帰は不適切。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q7",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q7.webp",
+          "sha256": "a1f054e8e05018516a1fc31c4d650848684417cddceb2772628ce7a5be0c3601"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-architecture-001",
+    "version": 1,
+    "sha256": "a705eb247fc5c5eb69516d8812ac82488fc30832231e1c5e10297e0de942b4b5",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "共通命令数Nに対しA=1.5N ns、B=3N ns。A/B=0.5。CPI比2だけでは周期の違いを無視し、逆比2も問う向きと逆。 原本の解き直し: 元表A1ns×4=4ns、B4ns×0.5=2ns、A/B=2でウ。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q8",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q8.webp",
+          "sha256": "5a846a5d7e3dfeef31c1c321315c85fc8c6a2c1e3c62fb62d8220e34325c977f"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-system-001",
+    "version": 1,
+    "sha256": "b54a52dc761bff8db5148a67f9ffb26b7d7617c0ad9de3da6a6c05ab4ac6adc9",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "I/O完了という事象を待っておりCPUを割り当てても実行不能なので待ち状態。実行可能はCPUだけを待ち、実行はCPU使用中、終了は処理完了。 原本の解き直し: 原本はプリエンプション。I/O要求ではなくCPU取り上げなので実行可能状態イ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q14",
+      "officialAnswer": "イ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q14.webp",
+          "sha256": "b77a9f27f68a174cd8da9474f8e06552aeea8cb3a3f4245246c34cd97e3645a0"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-hardware-001",
+    "version": 1,
+    "sha256": "c0e3bfc53467ad7f53eddb1366818a1fe0080d7118141366321c1b93fce62fed",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "3Aは3×16+10=58。100+58×20=1260 mV。1160はオフセット未加算、1280は1段多い、900は3Aを40と読む誤り。58は8bit範囲内。 原本の解き直し: 元原本は入力0で0mV・1段10mV・16進82=130なので1300mV、ウ。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q18",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q18.webp",
+          "sha256": "e65d9819500db0d8a790552c6d5a4f39484a59ea197e5272a7400a2654d3fdb5"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-interface-001",
+    "version": 1,
+    "sha256": "24cd8c818baaefa3ecf5ca7fa0e9bbaf1bedd104f58fdd8f6e28e49120620eb3",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "写真を含まない図形SVGは座標・形状を表示倍率に合わせて再描画できる。PNG可逆圧縮は画素密度を増やさず、欠落写真の細部復元も倍率別画像の必須保持もない。 原本の解き直し: 図形をXMLで表す画像形式はSVG、ウ。OpenGLは画像ファイル形式ではない。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q23",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q23.webp",
+          "sha256": "1b3dabd29f25f9b15177caa1df5dfc68458eb9e65666d381d969c29ea08cb6e8"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-database-001",
+    "version": 1,
+    "sha256": "163c494aaa30b6d438044ed52bf19f6f4f0306543800d106d4d30b0799057b24",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "社員に部署番号を残し、部署番号→部署名を部署へ分離すれば部署のキーに従属し社員側の推移従属が消える。共通部署番号で部署全属性が決まり無損失。イは部署側に社員番号→部署番号→部署名が残る。ウは元表の推移従属が残る。エは社員と部署の対応を失う。 原本の解き直し: 第2から第3正規形では非キー属性間の推移従属を分解するイ。部分従属除去や単一値化と区別。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q26",
+      "officialAnswer": "イ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q26.webp",
+          "sha256": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-network-001",
+    "version": 1,
+    "sha256": "ce72e8a62da0ea74ad8d3639df2bea63d3d53c51c1e28c5cd07cde07dc2a3c60",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "MTUはIP全体の上限。TCPデータ上限1280−20−32=1228。2400−1228=1172。2個目のIP全長1224、1個目1280、データ合計2400。Ethernet18byteを引く必要はない。 原本の解き直し: 元MTU1500、両ヘッダー20、データ2000なので2000−(1500−40)=540、イ。Ethernetは外。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q30",
+      "officialAnswer": "イ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q30.webp",
+          "sha256": "2b8490e4ab86967eb525bfc62ae2169cc85b183e653bfcdb4e3f99f1d18a2e30"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-security-001",
+    "version": 1,
+    "sha256": "63fe5b59a5d0ac6f86dd8b23c86ebc0fe5d729ef9fa3cd8a0f9ca4c71820dc1e",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "OSコマンド文字列をシェルで解釈させる経路をなくし固定exeと検証済み個別引数にする。HTML/SQLの処理は別の解釈器向け。長さだけでは短い制御文字の悪用を防げない。オプション注入やパス範囲も検証対象。 原本の解き直し: URLのuser=;cat%20/etc/passwdはシェルでファイルを読むOSコマンドインジェクション、イ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q36",
+      "officialAnswer": "イ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q36.webp",
+          "sha256": "4532e42f2b1f80c115979650358e0e52f92675958dcabde1dbe362a3cbe86edc"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-development-001",
+    "version": 1,
+    "sha256": "8ee10deb380831a6b77a9448dd27a21e3a73b96e7bb524b46eaa60ca75aa3698",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "既存4台を1台ずつ更新するローリング更新。別系統へ一括切替するブルーグリーン、稼働中機器交換のホットスワップ、障害待機のホットスタンバイと区別できる。 原本の解き直し: 原文の二環境切替はブルーグリーン、ア。派生は既存4台の順次更新へ変えた。 公式正解はアでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q46",
+      "officialAnswer": "ア",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q46.webp",
+          "sha256": "eb6c6da27887d527cc110a277666e76dd00e8da436dfe9059b14d72d49956bd0"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-project-001",
+    "version": 1,
+    "sha256": "e8b29fa855d4c7583124200ec9dfb5c7b792a899d627ae789f3d551db1707af2",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "CV=480−640=−160、SV=480−600=−120。CPI=0.75、SPI=0.8。残り出来高720/残り予算560=9/7≈1.286で現状0.75より高い効率が必要。同効率なら総費用640+720/0.75=1600万円で1200万円超過。 原本の解き直し: 元CPI0.9で費用効率悪化、SPI1.1で予定より進み、TCPI1.2>CPI。残効率向上等を検討するイ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q52",
+      "officialAnswer": "イ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q52.webp",
+          "sha256": "ed1c6c06647acc8215c0c95ee435c8b9501124bdcbf55c484b76e8b534dbb37a"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-service-001",
+    "version": 1,
+    "sha256": "8bd0ab767c5161e082e057b785c32033331e3db50704e6e42c6ed81f3e86b9ba",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "問題に定めた契約ではOS/DB実行基盤の運用が事業者へ移るので基盤パッチ適用。アプリ請求ロジック・業務データ正確性・業務権限判断は自社に残る。PaaS一般の曖昧さは契約条件で限定済み。 原本の解き直し: 元IaaSで物理サーバ操作②と保守ランプ監視③が不要、PaaSで基盤パッチ④が不要、ウ。ジョブ監視①は残る。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q56",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q56.webp",
+          "sha256": "23e10a69915ef173fc3d86174ad53eec50dc00fdf9df721462409f5c48e5c181"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-strategy-001",
+    "version": 1,
+    "sha256": "4102c76f76075818434af7682353c938f887b0861fc42ed178965d7380532ed0",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "調達から販売までの需給・在庫を供給連鎖全体で調整するSCM。CRMは顧客関係、HRMは人材、財務管理は資金・収支で対象が異なる。 原本の解き直し: 元の顧客ワントゥワンはCRMのア。派生は供給連鎖全体のSCMへ変えた。 公式正解はアでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q62",
+      "officialAnswer": "ア",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q62.webp",
+          "sha256": "2577b125385751a2a4ca60e657879c0fde88a3f4e07fc537351ba21b1050b000"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-business-strategy-001",
+    "version": 1,
+    "sha256": "daaea13fc66a78c15b06d18cf5d6e63d5a7fbbd9e4b0ca96b7fb3335a3a9791c",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "2%<10%で低成長、1.8>=1で高シェアなので金のなる木。花形=高高、問題児=高成長低シェア、負け犬=低低。境界値ではなく分類は一意。 原本の解き直し: 元の成長率/相対シェアによる資源配分手法はPPMのウ。新しい四象限分類は低成長・高シェア。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q67",
+      "officialAnswer": "ウ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q67.webp",
+          "sha256": "f52297f948e8f801be98a23ebcd3e853444ce2447289398f073534c2aaa2c2c4"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-business-001",
+    "version": 1,
+    "sha256": "19e87a5e90d51b339adff0887acd48c2b264b877905996a7dfc64e8795e693fa",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "A回転率900/300=3、B1200/600=2。A営業利益率45/300=15%、B96/600=16%。Aは回転率が高く営業利益率が低い。売上高営業利益率5%/8%と取り違えない。 原本の解き直し: 元表Aの回転率800/100=8、B1000/900=10/9。資産利益率A20/100=20%、B90/900=10%。双方Aが高いエ。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q76",
+      "officialAnswer": "エ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q76.webp",
+          "sha256": "4d1679d78ecc43cca4372a58a338bc662a01d1317949ab0835ea248087652552"
+        }
+      ]
+    },
+    "changes": []
+  },
+  {
+    "questionId": "ap-diagnostic-law-001",
+    "version": 1,
+    "sha256": "5c4a9b5ad4e2747e2c4db31fad53a5d86fc948f0fbef9edc253dc559be16da56",
+    "author": "codex-author-run-20261007T164320Z",
+    "reviewer": "codex-review-run-20261008-scheduled-continuation",
+    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "checks": {
+      "source": true,
+      "answer": true,
+      "calculation": true,
+      "choices": true,
+      "wording": true
+    },
+    "notes": "RoHSは電気電子機器の特定有害物質の使用制限。回収ルートはWEEE、電磁妨害はEMC、安全保障輸出管理は別制度。適用条件には閾値や適用除外があり全面ゼロと断定していない。 原本の解き直し: 原本RoHSは有害物質の危険を最小化するエ。回収、電磁妨害、安全保障輸出は別制度。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "method": {
+      "separateExecution": true,
+      "separateAgent": false,
+      "blindContext": false,
+      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+    },
+    "sourceEvidence": {
+      "parentQuestionId": "r07h-q80",
+      "officialAnswer": "エ",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "sourceImages": [
+        {
+          "path": "assets/questions/r07h/r07h-q80.webp",
+          "sha256": "2a4019a7b95012056395ad06262e5c5b424ebea1d680b791c90c33c42b37cb3d"
+        }
+      ]
+    },
+    "changes": []
+  }
+]

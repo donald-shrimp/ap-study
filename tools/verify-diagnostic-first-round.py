@@ -81,4 +81,4 @@ saved=json.loads((root/'content/ap/diagnostic-drafts/20261008-first-round-author
 assert saved['independentReview'] is False
 progress=json.loads((root/'content/ap/diagnostic-progress.json').read_text());pending={item['questionId'] for item in progress['items'] if item['status']=='awaiting-independent-review'}
 assert not pending&{q['id'] for q in active}, 'Unreviewed draft reached active pool'
-print('PASS 17 draft structures / 17 topics / 17 different parents / original image hashes / active-pool exclusion / 10 numerical, logic and normalization checks. Independent review NOT completed.')
+print('PASS 17 archived draft structures / 17 topics / 17 different parents / original image hashes / pending-draft exclusion / 10 author calculations. This command only replays author checks; review evidence is stored separately.')
