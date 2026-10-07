@@ -477,4 +477,8 @@ release `20261008-study-entrances1`。「身軽に1問」「書いて考える1�
 - `tests/pwa.py`：/ap-study/のIDとscope、アイコン・インストール適格性、オフラインの画像と回答・ヒント、保存済み問題だけの出題、未保存画像の保護、更新後の記録と別アプリのキャッシュの保持。
 - `tests/storage.py`とdomainテスト：原子的保存・送信待ち・並行回答・利用者別保存、3つの候補範囲と再開元の識別。試行の入口は送信payloadから除外し、端末には保持する。
 - Firebase Auth／Firestoreエミュレーターで `tests/sync.py`、`tests/planning-sync.py`、`tests/mobile-account.py` が成功。回答・ヒントと同時回答の保持、オフライン送信待ち、計画・診断・前提・週目標・予定の別ブラウザ復元、編集保護、アカウント分離を確認。本番本人アカウントでの操作を今回代行したものではない。
-- `tools/build-content.py`と `tests/flashcard-review.py`：再生成、教材800問・カード681枚・既存ID・カード確認記録の一致。HTML・JavaScript・Pythonの構文と差分の空白チェックも成功。
+- `tools/build-content.py`と `tests/flashcard-review.py`：再生成、教材800問・カード681枚・既存ID・カード確認記録の一致。更新したHTMLの390px・文字拡大表示、JavaScript・Pythonの構文、差分の空白チェックも成功。
+
+### 公開版の確認
+
+Git Database APIで最新mainの親とローカルtreeの一致を確認して非force公開。教材や記録の形式・Firestore Rulesの再配備は不要。Pagesは `b91797409f337deea5cfe4a675036482c12e4439` でbuiltとなり、初回公開36ファイルすべてのSHA-256がローカルと一致した。公開URLに対する `tests/home-entries.py`、`tests/action-flow.py`、`tests/pwa.py` が成功。公開側でも3つの入口と候補範囲、回答・ヒントの再開、個人の机指定、分野の近道、コンパクトな計画、320／390pxと文字200%、アプリID・scope・保存済み画像・オフライン動作を確認した。更新を模擬するPWA試験はローカルのみで実施し、公開ファイルをテスト用に書き換えていない。
