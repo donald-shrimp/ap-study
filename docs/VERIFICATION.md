@@ -442,3 +442,9 @@ main `cec7c25d40d5ec9f6d37ad130ef32d104f9673c7` のPagesはbuilt・エラーな�
 - `tests/flashcard-expansion.py`：全17分野のカード表示・裏面・自己評価、旧版イベント保持と新版確認、長い略語の意味の320px・文字200%、オフライン再開が成功。実際の問題で選択とヒントを保存してから単語帳を操作し、回答・中断記録が不変であることも確認。
 
 アプリのUI・Firebase・800問の教材本文・紙なし分類・PWAのコードとIDは変更していない。ブラウザ試験は新しい検証用プロフィールで行い、本人の学習記録を操作していない。ローカルログと画像は `/workspace/scratch/cards-expansion/` に保存。公開環境の確認結果は公開後に追記する。
+
+### 公開確認
+
+main `393e85d9f9ef7bc69a8863771546600672fc3dec` のPagesはbuilt・エラーなし。変更14ファイルの公開内容がSHA-256でローカルと一致した。公開URLで `tests/mobile-study.py` と `tests/flashcard-expansion.py` が成功し、681枚・全17分野、裏面と自己評価、旧版イベントの保持と新版確認、長文の320px／文字200%表示、オフライン再開、通常演習の選択・ヒント・中断記録の保持を確認した。
+
+公開ログは `/workspace/scratch/cards-expansion/mobile-public.log` と `expansion-public.log`、照合は `public-hashes.json`、画面は `public-mobile/` と `public-expansion/`。この公開確認の追記も反映し、公開ファイルとの一致を確認する。
