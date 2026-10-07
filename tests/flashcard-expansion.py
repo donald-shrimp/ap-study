@@ -1,9 +1,10 @@
 """Expanded deck: all fields, prior card editions, long meanings, resume and offline."""
-import os,json,shutil
+import os,json,shutil,re
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import state
 ROOT=Path(__file__).resolve().parents[1]
+def plain(text):return re.sub(r'\s+','',text)
 DECK=json.loads((ROOT/'content/ap/flashcards.json').read_text())
 URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/')
 ART=Path(os.getenv('AP_STUDY_ARTIFACTS','/workspace/scratch/cards-expansion/browser'));ART.mkdir(parents=True,exist_ok=True)
@@ -22,8 +23,8 @@ with sync_playwright() as p:
  assert set(pg.locator('[name=card-topic] option').evaluate_all('(items)=>items.map(i=>i.value)'))==set(topics)|{''}
  for topic in topics:
   pg.locator('[name=card-topic]').select_option(topic);pg.get_by_role('button',name='意味を見る',exact=True).wait_for()
-  allowed=[c for c in DECK['cards'] if c['topicId']==topic];front=pg.locator('.flashcard h2').inner_text();assert front in [c['front'] for c in allowed]
-  pg.get_by_role('button',name='意味を見る',exact=True).click();pg.locator('.card-back').wait_for();assert pg.locator('.card-back').inner_text() in [c['back'] for c in allowed]
+  allowed=[c for c in DECK['cards'] if c['topicId']==topic];front=pg.locator('.flashcard h2').inner_text();assert plain(front) in [plain(c['front']) for c in allowed]
+  pg.get_by_role('button',name='意味を見る',exact=True).click();pg.locator('.card-back').wait_for();assert plain(pg.locator('.card-back').inner_text()) in [plain(c['back']) for c in allowed]
   pg.get_by_role('button',name='もう一度 → 次へ',exact=True).click();pg.get_by_role('button',name='意味を見る',exact=True).wait_for()
  # Old edition events remain exportable, while updated meanings need fresh confirmation.
  dma=next(c for c in DECK['cards'] if c['id']=='dma');assert dma['version']==2
@@ -36,7 +37,7 @@ with sync_playwright() as p:
  # English acronym expansions and the longest meanings wrap at 320px and 200% text.
  longest=sorted(DECK['cards'],key=lambda c:len(c['back']),reverse=True)[:4]
  for i,card in enumerate(longest):
-  pg.evaluate(SEED,{'card':card});pg.reload();pg.get_by_role('button',name='意味を見る',exact=True).click();pg.locator('.card-back').wait_for();assert pg.locator('.card-back').inner_text()==card['back']
+  pg.evaluate(SEED,{'card':card});pg.reload();pg.get_by_role('button',name='意味を見る',exact=True).click();pg.locator('.card-back').wait_for();assert plain(pg.locator('.card-back').inner_text())==plain(card['back'])
   pg.evaluate('document.documentElement.style.fontSize="32px"');assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth'),card['id']
   if i==0:pg.screenshot(path=str(ART/'long-meaning-320-200.png'),full_page=True)
   pg.evaluate('document.documentElement.style.fontSize=""')

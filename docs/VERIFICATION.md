@@ -448,3 +448,15 @@ main `cec7c25d40d5ec9f6d37ad130ef32d104f9673c7` のPagesはbuilt・エラーな�
 main `393e85d9f9ef7bc69a8863771546600672fc3dec` のPagesはbuilt・エラーなし。変更14ファイルの公開内容がSHA-256でローカルと一致した。公開URLで `tests/mobile-study.py` と `tests/flashcard-expansion.py` が成功し、681枚・全17分野、裏面と自己評価、旧版イベントの保持と新版確認、長文の320px／文字200%表示、オフライン再開、通常演習の選択・ヒント・中断記録の保持を確認した。
 
 公開ログは `/workspace/scratch/cards-expansion/mobile-public.log` と `expansion-public.log`、照合は `public-hashes.json`、画面は `public-mobile/` と `public-expansion/`。この公開確認の追記も反映し、公開ファイルとの一致を確認する。
+
+## 単語帳の改行修正（2026-10-07）
+
+見出しの均等な行幅への調整をやめ、複数の問いは問いごとに行を分ける。裏面は文ごとの段落として表示し、対応ブラウザでは日本語の句単位の折り返しを使う。長い英語は狭い画面でも横へはみ出さない。681枚の教材データ・カード版・自己評価・通常の学習記録は変更していない。
+
+- 報告されたプリエンプションのカードを320px・390px・文字200%で表示。二つの問いと三つの文、本文の保持、通常文字で「実行中」が分断されないことを確認。画面は `/workspace/scratch/card-reading/screens/`。
+- `tests/flashcard-expansion.py`：全17分野、裏面、旧版自己評価保持・新版確認、長い英語の320px／文字200%、オフライン・通常記録保持が成功。表示上の段落を除いて原文と一致する。
+- `tests/mobile-study.py`：単語帳の保存・再開・バックアップ・オフライン、演習の部分回答とヒント保持が成功。
+- `tests/pwa.py`：/ap-study/のIDとscope、オフライン、更新後の記録と取得済み画像の保持が成功。更新版は `20261007-card-reading1`。
+- `tests/flashcard-review.py`・`git diff --check`：成功。
+
+ローカルログは `/workspace/scratch/card-reading/` と `card-reading-expansion.log`。本人の学習記録は操作せず、新しい検証用プロフィールで確認した。
