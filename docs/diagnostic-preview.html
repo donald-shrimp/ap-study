@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>派生問題を試す｜ひと問</title>
+  <style>
+    :root{font:18px/1.8 system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#173153;background:#f4f6fa;--line:#d4dfe9;--teal:#087d78}
+    *{box-sizing:border-box}body{margin:0}main{max-width:44rem;margin:auto;padding:1.2rem 1rem 3rem}
+    a{color:#086c68;text-underline-offset:.2em}a,button,label,summary{touch-action:manipulation}
+    button,input{font:inherit}button,summary{cursor:pointer}button:disabled{opacity:.5;cursor:default}
+    button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+    h1{font-size:1.6rem;line-height:1.5;margin:.6rem 0 .3rem}h2{font-size:1.15rem;line-height:1.5;margin:0 0 .8rem}
+    h3{font-size:1rem;margin:1.1rem 0 .45rem}p{margin:.5rem 0 .9rem;line-break:strict;word-break:normal;overflow-wrap:anywhere}
+    .small{font-size:.85rem;color:#586b7e}.top{display:flex;justify-content:space-between;gap:.6rem;align-items:center;flex-wrap:wrap}
+    .top p{margin:0}.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:1.1rem 0}
+    button{min-width:0;min-height:48px;padding:.65rem 1rem;border:1px solid #b9c9d7;border-radius:.65rem;background:white;color:#173153;font-weight:650;white-space:normal;overflow-wrap:anywhere}
+    .tabs button[aria-pressed=true]{background:#173153;border-color:#173153;color:white}
+    .panel{padding:1.25rem;border:1px solid var(--line);border-radius:1rem;background:white}
+    .eyebrow{margin:0 0 .8rem;color:#586b7e;font-size:.85rem}.stem{white-space:pre-line;margin-bottom:1.2rem}
+    fieldset{padding:0;margin:0;border:0;min-width:0}legend{font-size:.85rem;color:#586b7e;margin-bottom:.45rem}
+    .choice{display:grid;grid-template-columns:1.1rem 1.2rem minmax(0,1fr);align-items:baseline;gap:.55rem;min-height:52px;padding:.8rem;border:1px solid var(--line);border-radius:.6rem;margin:.55rem 0;cursor:pointer;line-break:strict}
+    .choice:has(input:checked){background:#edf7f5;border-color:var(--teal)}input[type=radio]{width:1.1rem;height:1.1rem;margin:0;accent-color:var(--teal)}
+    .choice span,.reasons span{min-width:0;overflow-wrap:anywhere}
+    .actions{display:flex;gap:.65rem;flex-wrap:wrap;margin:1rem 0 0}.actions button{flex:1 1 12rem}.primary{background:var(--teal);color:white;border-color:var(--teal)}
+    .result{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:1.2rem}.result h2{margin-bottom:.35rem}
+    .answer{padding:.7rem .9rem;background:#edf7f5;border-left:3px solid var(--teal);border-radius:.2rem;white-space:pre-line}
+    .reasons{padding:0;margin:0;list-style:none}.reasons li{display:grid;grid-template-columns:1.2rem minmax(0,1fr);gap:.5rem;padding:.75rem 0;border-bottom:1px solid var(--line);line-break:strict}
+    details{margin-top:1.2rem;border-top:1px solid var(--line)}summary{min-height:48px;padding:.65rem 0;font-weight:650}
+    .original{display:block;width:100%;height:auto;margin:.8rem 0;border:1px solid var(--line)}.source{overflow-wrap:anywhere}
+    [hidden]{display:none!important}noscript p,.error{padding:1rem;background:#fff2df;border-radius:.6rem}
+    @media(max-width:400px){main{padding:1rem .8rem 2rem}.panel{padding:1rem}.choice{padding:.75rem .6rem;gap:.4rem}}
+    @media(prefers-reduced-motion:no-preference){button{transition:background-color .12s}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="top"><p class="small">ひと問 · 教材チェック</p><a href="../">アプリへ</a></div>
+    <h1>派生問題を2問試す</h1>
+    <p class="small">公開中の問題・解説をそのまま表示します。ここでの回答は保存しません。</p>
+  </header>
+  <nav class="tabs" aria-label="試す問題">
+    <button type="button" data-question="0" aria-pressed="true" disabled>1 · 計算</button>
+    <button type="button" data-question="1" aria-pressed="false" disabled>2 · 場面判断</button>
+  </nav>
+  <p id="loading" role="status">問題を読み込んでいます。</p>
+  <noscript><p>この確認ページではJavaScriptを有効にしてください。</p></noscript>
+  <article id="question" class="panel" hidden aria-labelledby="question-heading">
+    <p id="kind" class="eyebrow"></p>
+    <h2 id="question-heading" tabindex="-1"></h2>
+    <p id="stem" class="stem"></p>
+    <form id="answer-form">
+      <fieldset id="choices"><legend>回答をひとつ選ぶ</legend></fieldset>
+      <div class="actions" id="answer-actions">
+        <button class="primary" id="submit-answer" type="submit" disabled>回答して解説を見る</button>
+        <button id="reveal-answer" type="button">答えと解説を見る</button>
+      </div>
+    </form>
+    <section id="result" class="result" hidden aria-labelledby="result-heading">
+      <h2 id="result-heading" tabindex="-1"></h2>
+      <p id="answer-line"></p>
+      <p id="summary" class="answer"></p>
+      <h3>解き方・解説</h3><p id="explanation" class="stem"></p>
+      <h3>4つの選択肢の理由</h3><ul id="reasons" class="reasons"></ul>
+      <details id="source-details">
+        <summary>元の過去問・変更したところ</summary>
+        <p id="adaptation"></p>
+        <p id="source" class="small source"></p>
+        <p class="small">元問題の画像（押すと拡大）</p>
+        <a id="original-link" target="_blank" rel="noopener"><img id="original-image" class="original" loading="lazy" alt=""></a>
+      </details>
+      <div class="actions">
+        <button type="button" id="retry">もう一度試す</button>
+        <button type="button" id="other-question" class="primary"></button>
+      </div>
+      <p class="small">このページは教材確認用です。実際の診断では、終了するまで正誤・解説を表示しません。</p>
+    </section>
+  </article>
+</main>
+<script type="module">
+  const samples = [
+    {id:'ap-diagnostic-network-001',label:'計算 · ネットワーク',heading:'TCPのデータ分割',next:'場面判断の問題へ',parent:'r07h-q30'},
+    {id:'ap-diagnostic-security-001',label:'計算なし · セキュリティ',heading:'入力を安全に扱うには',next:'計算の問題へ',parent:'r07h-q36'}
+  ];
+  const $ = id => document.getElementById(id);
+  let questions = [], current = 0;
+  const answers = samples.map(() => ({selected:null,shown:false,submitted:false}));
+  function node(tag,text,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
+  function render(focus=false){
+    const q=questions[current],sample=samples[current],state=answers[current];
+    document.querySelectorAll('[data-question]').forEach(button=>{button.disabled=false;button.setAttribute('aria-pressed',String(Number(button.dataset.question)===current));});
+    $('kind').textContent=sample.label;$('question-heading').textContent=sample.heading;$('stem').textContent=q.stem;
+    $('choices').replaceChildren(node('legend','回答をひとつ選ぶ'));
+    q.choices.forEach(choice=>{
+      const label=node('label',undefined,'choice'),input=node('input');
+      input.type='radio';input.name='answer';input.value=choice.id;input.checked=state.selected===choice.id;input.disabled=state.shown;
+      input.addEventListener('change',()=>{state.selected=choice.id;$('submit-answer').disabled=false;});
+      label.append(input,node('strong',choice.label),node('span',choice.text));$('choices').append(label);
+    });
+    $('submit-answer').disabled=state.selected===null;$('answer-actions').hidden=state.shown;$('result').hidden=!state.shown;
+    $('source-details').open=false;
+    if(state.shown){
+      const correct=q.choices.find(choice=>choice.id===q.correctChoiceId),selected=q.choices.find(choice=>choice.id===state.selected);
+      $('result-heading').textContent=state.submitted?(state.selected===q.correctChoiceId?'正解':'不正解'):'解答を表示';
+      $('answer-line').textContent=`あなたの回答：${selected?.label||'未回答'} · 正解：${correct.label}`;
+      $('summary').textContent=q.summary;$('explanation').textContent=q.explanation;
+      $('reasons').replaceChildren(...q.choices.map((choice,i)=>{const li=node('li');li.append(node('strong',choice.label),node('span',q.choiceReasons[i]));return li;}));
+      $('adaptation').textContent=q.adaptation;$('source').textContent=q.source;
+      const original=new URL(`../assets/questions/${sample.parent.split('-')[0]}/${sample.parent}.webp`,location.href);
+      $('original-link').href=original.href;$('original-image').src=original.href;$('original-image').alt=`元のIPA公式問題：${sample.parent}`;
+      $('other-question').textContent=sample.next;
+    }
+    if(focus)$('question-heading').focus({preventScroll:true});
+  }
+  function reveal(submitted){const state=answers[current];if(state.shown||submitted&&state.selected===null)return;state.shown=true;state.submitted=submitted;render();$('result-heading').focus();}
+  $('answer-form').addEventListener('submit',event=>{event.preventDefault();reveal(true);});
+  $('reveal-answer').addEventListener('click',()=>reveal(false));
+  document.querySelectorAll('[data-question]').forEach(button=>button.addEventListener('click',()=>{current=Number(button.dataset.question);render(true);}));
+  $('retry').addEventListener('click',()=>{answers[current]={selected:null,shown:false,submitted:false};render(true);$('question').scrollIntoView({block:'start'});});
+  $('other-question').addEventListener('click',()=>{current=1-current;render(true);$('question').scrollIntoView({block:'start'});});
+  try{
+    const response=await fetch('../content/ap/diagnostic-questions.json',{cache:'no-cache'});
+    if(!response.ok)throw new Error('教材取得エラー');
+    const bank=await response.json();questions=samples.map(sample=>bank.find(q=>q.id===sample.id));
+    if(questions.some((q,i)=>!q||q.parentQuestionId!==samples[i].parent||q.enrichment!=='reviewed'||!q.diagnosticOnly||q.choices.length!==4||q.choiceReasons.length!==4||!q.choices.some(c=>c.id===q.correctChoiceId)))throw new Error('教材形式エラー');
+    render();$('loading').hidden=true;$('question').hidden=false;
+  }catch{
+    $('loading').textContent='問題を読み込めませんでした。接続を確認して再読み込みしてください。';$('loading').className='error';
+    const retry=node('button','再読み込み');retry.type='button';retry.addEventListener('click',()=>location.reload());$('loading').after(retry);
+  }
+</script>
+</body>
+</html>
