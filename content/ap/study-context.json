@@ -3,8 +3,488 @@
   "version": 1,
   "qualificationId": "ap",
   "reviewedAt": "2026-10-07",
-  "reviewMethod": "主担当が2025年春期80問の原本画像・公式正解・既存の独自解説を照合。図表や式の有無ではなく、別の表への書き起こし・数値の導出・状態の追跡の必要性で分類。",
+  "reviewMethod": "2025年春は主担当の既存原本照合を保持。残る9回720問はgpt-6.1-solの4担当が回ごとに全原本画像・公式正解・既存独自解説を照合し、主担当が境界候補を選択的に原本再確認して統合。図表や式の有無ではなく、数値計算・表の作成・状態更新や追跡の必要性で分類。",
   "items": [
+    {
+      "questionId": "r07a-q1",
+      "mode": "desk",
+      "reason": "4変数カルノー図から複数の積項を導出して照合する。論理式の組立が必要なため保守的にdeskへ変更。",
+      "sourceHash": "ecaf72ab1999d589be3e4bf38505a73b3082864497a167237979cbdb48c3b19a"
+    },
+    {
+      "questionId": "r07a-q2",
+      "mode": "desk",
+      "reason": "平均待ち時間の式へ条件を入れ、利用率について不等式を整理する。",
+      "sourceHash": "ed758cda7a79f930a47effaf6ad3f3070edc7fe0c4eac35095631e8ed2155173"
+    },
+    {
+      "questionId": "r07a-q3",
+      "mode": "paperless",
+      "reason": "ROC曲線における偽陽性率の分母と分子の意味を比較する。",
+      "sourceHash": "3a3d04db3b3ec1b9d86e950119af52c8c2c6a59a5dfae5e78aae6de140d53517"
+    },
+    {
+      "questionId": "r07a-q4",
+      "mode": "paperless",
+      "reason": "CRCの検査データの生成方法と送受信側の役割を比較する。",
+      "sourceHash": "33d2f0ba561ebf8a4cff8d5bfd22462463ad459ba6f9b7b0ea0294e799174640"
+    },
+    {
+      "questionId": "r07a-q5",
+      "mode": "paperless",
+      "reason": "ベストフィットの割当て規則と空き領域への影響を判断する。具体的な割当ての追跡はない。",
+      "sourceHash": "ee4144502644408b8ef97cb303d55be3d2014031bc2d5b7a6e05bb53a6ccfa29"
+    },
+    {
+      "questionId": "r07a-q6",
+      "mode": "desk",
+      "reason": "ブロック探索とブロック内探索の平均比較回数をそれぞれ導出し、合算する。",
+      "sourceHash": "cffeded90308cc2ceffbc0d1c1315244be4fe4e2542236b52f262cd3df26b04d"
+    },
+    {
+      "questionId": "r07a-q7",
+      "mode": "paperless",
+      "reason": "Scalaの言語特性を比較する。",
+      "sourceHash": "2de66ea4322aa914e99ad98e60c381d6d535a31192d5f2aeed3b66984d12173f"
+    },
+    {
+      "questionId": "r07a-q8",
+      "mode": "paperless",
+      "reason": "コンパイル時に複数の操作をまとめる高速化方式の特徴を識別する。",
+      "sourceHash": "67cc1409043160ada7de20e089120c3f62abd5d829fc1da99b8742a415953ed7"
+    },
+    {
+      "questionId": "r07a-q9",
+      "mode": "paperless",
+      "reason": "ユニファイドメモリ方式で表示領域をどこに置くかを判断する。",
+      "sourceHash": "3c0885e13b7890ec007d7cb9c6eafa22ec75ee2c85009b257298f9d907622acb"
+    },
+    {
+      "questionId": "r07a-q10",
+      "mode": "desk",
+      "reason": "クロック数をパルス周期へ換算し、1回転当たりのパルス数から回転数を計算する。",
+      "sourceHash": "18f53de8b5503e38cfebc115757d89c05a6f7af2fb9c5ed9cddb6864849a72cc"
+    },
+    {
+      "questionId": "r07a-q11",
+      "mode": "desk",
+      "reason": "更新条件から総コア数とノード数を計算し、演算性能の単位も換算する。",
+      "sourceHash": "5df1dec297b0f54d64a80baada04a981dc7d3146e47289d1a4cd008f96b84664"
+    },
+    {
+      "questionId": "r07a-q12",
+      "mode": "paperless",
+      "reason": "IaCの構成管理と自動適用の意味を比較する。",
+      "sourceHash": "6a0fb9f9d2830ffba9e72d3b194a005bbc76e2abca9587c0fe68f4c429539254"
+    },
+    {
+      "questionId": "r07a-q13",
+      "mode": "paperless",
+      "reason": "MTBF・MTTRと稼働率の式が表す意味を確認する。数値の代入はない。",
+      "sourceHash": "1c22ca77838e89bba46818b04abf9fe790c9e70a1f5540663961221a956d378a"
+    },
+    {
+      "questionId": "r07a-q14",
+      "mode": "paperless",
+      "reason": "キャパシティプランニングの目的を比較する。",
+      "sourceHash": "2d4e1692b708411f145685759e8dee39a42e9ee41fc415364e5585f2a234a845"
+    },
+    {
+      "questionId": "r07a-q15",
+      "mode": "desk",
+      "reason": "到着時刻と処理時間からジョブの実行順序を追い、完了時刻との差を計算する。",
+      "sourceHash": "52018262808fdd70b4605acf13b18e2551e843bfb465cf64b784004395a29c16"
+    },
+    {
+      "questionId": "r07a-q16",
+      "mode": "paperless",
+      "reason": "共有バスを排他的に使用するOS機能の役割を判断する。",
+      "sourceHash": "1a16eba0da45d6523a25d3997f99d642607abb387de3bb1edbaec8ffed2c7051"
+    },
+    {
+      "questionId": "r07a-q17",
+      "mode": "paperless",
+      "reason": "スレッドセーフの定義を比較する。",
+      "sourceHash": "ef34340a233173c080e16eb0f6c4ea13f1e745985d985e6bed30251781ed4a11"
+    },
+    {
+      "questionId": "r07a-q18",
+      "mode": "paperless",
+      "reason": "資源獲得順序とデッドロック防止の関係を比較する。具体的な実行履歴の追跡はない。",
+      "sourceHash": "ad816f079d98fded0a7ece2a834561e830a4760183c7a7f86e22072eac9dc71d"
+    },
+    {
+      "questionId": "r07a-q19",
+      "mode": "paperless",
+      "reason": "提示済みのキャッシュ状態表の各列を置換規則と照合する。更新の連続追跡はない。",
+      "sourceHash": "d133081da9b8786f5ca23f3c0eafd2849c66aab91c5abbc4ac776eb981519860"
+    },
+    {
+      "questionId": "r07a-q20",
+      "mode": "desk",
+      "reason": "回路全体とLEDの電力から割合を計算する。",
+      "sourceHash": "7b857aa4424c96ccc6d9cfba5e58a4648b8f9de706d8207345b153ac1d35fc54"
+    },
+    {
+      "questionId": "r07a-q21",
+      "mode": "paperless",
+      "reason": "今回と前回のスイッチ値の条件を論理式と照合する。全組合せの表は不要。",
+      "sourceHash": "47867622d2824fb42b4776d512071da06620f361effdb5ffa8a1134245822fe4"
+    },
+    {
+      "questionId": "r07a-q22",
+      "mode": "paperless",
+      "reason": "提示済みのタイミングチャートの入力と出力の関係を論理ゲートと照合する。チャートを作成しない。",
+      "sourceHash": "b4cbdbb44675b6ac362f85c5623134900da02fe21cabb123dc79d4e1a454a08c"
+    },
+    {
+      "questionId": "r07a-q23",
+      "mode": "desk",
+      "reason": "分周後の周期と初期カウント値から割込みまでの時間を計算する。",
+      "sourceHash": "a394eb7ed7a80d11a29e10d892849f0ff1cef56fe1fe5db7a9d2fd8ccc5fd099"
+    },
+    {
+      "questionId": "r07a-q24",
+      "mode": "paperless",
+      "reason": "三本線のアイコンによるメニューの名称を識別する。",
+      "sourceHash": "cfce4f6ef8350ae78b4caf658fb1181f2557e57c4e9f24219e44559f7d1b80d4"
+    },
+    {
+      "questionId": "r07a-q25",
+      "mode": "desk",
+      "reason": "標本化定理から必要周波数を求め、その逆数を周期に換算する。",
+      "sourceHash": "06c2eab1bb80fa140fee3261f18e49ff8a883c80c18d8addc8924d8bcb5991c3"
+    },
+    {
+      "questionId": "r07a-q26",
+      "mode": "paperless",
+      "reason": "BASE特性における更新反映と整合性の意味を比較する。",
+      "sourceHash": "56afd29a34c4a1f7edc7521dcbc57f3f644f2ccc39263c6ab378dde5ec96d001"
+    },
+    {
+      "questionId": "r07a-q27",
+      "mode": "paperless",
+      "reason": "各検索条件が等価検索か範囲検索かを読み、インデックスの特性と照合する。",
+      "sourceHash": "3f0fd235aa1e47731d345b29a400c6b87236a16d87d89dc5b701029973213144"
+    },
+    {
+      "questionId": "r07a-q28",
+      "mode": "paperless",
+      "reason": "関係データベースのビューの定義と更新制約を比較する。",
+      "sourceHash": "7040775a656f801badc23461cb3d3ff0aa2557501001502b373030554d94d1ad"
+    },
+    {
+      "questionId": "r07a-q29",
+      "mode": "paperless",
+      "reason": "異なる版を保持する同時実行制御方式を識別する。",
+      "sourceHash": "e857857f742505a0be9aa3a502e8385c08b62791961be58b52ede1db85ccfaa9"
+    },
+    {
+      "questionId": "r07a-q30",
+      "mode": "desk",
+      "reason": "バイト数をビット数に換算し、二つの通信速度の時間差からパケット数を計算する。",
+      "sourceHash": "5b267956a999d595594efc01b407adb935666a28255e8d90b1ae12a11f64606b"
+    },
+    {
+      "questionId": "r07a-q31",
+      "mode": "paperless",
+      "reason": "リバースプロキシの中継方向と役割を比較する。",
+      "sourceHash": "fc7ba0fb4b4a57c41909af642e6a830d4b525592588c03feaeea6730c9b2147b"
+    },
+    {
+      "questionId": "r07a-q32",
+      "mode": "paperless",
+      "reason": "クラスに依存せずアドレスを割り当てる方式の意味を識別する。",
+      "sourceHash": "935aa22f6c607d663d4179971c138e2c3849b26fb837f643583d147465611369"
+    },
+    {
+      "questionId": "r07a-q33",
+      "mode": "paperless",
+      "reason": "TCPとUDPのヘッダーフィールドを比較する。",
+      "sourceHash": "a66d985cd3c8790a74581e9b9b00160a48a44ed6c195271fa8fb8caf77df1dbb"
+    },
+    {
+      "questionId": "r07a-q34",
+      "mode": "paperless",
+      "reason": "レイヤー2のループを防ぐプロトコルの役割を識別する。",
+      "sourceHash": "16cdd7bd91c40e3516af692e7730a9fffdf757a2d99fc2e69fce791629f468d9"
+    },
+    {
+      "questionId": "r07a-q35",
+      "mode": "desk",
+      "reason": "ビット誤り率とパケット長から誤りを含む確率を求め、送信個数に掛ける。",
+      "sourceHash": "20a4d84edc92e94c5b56613c42067c774beb2a755c549365db9fa7110da53a96"
+    },
+    {
+      "questionId": "r07a-q36",
+      "mode": "paperless",
+      "reason": "各攻撃行為をサイバーキルチェーンの段階と照合する。",
+      "sourceHash": "977a0f22038ab8f4b2630fc8ee3334e0195734a11185549d892bdf97a892cdbd"
+    },
+    {
+      "questionId": "r07a-q37",
+      "mode": "paperless",
+      "reason": "ソフトウェア発行元の確認に用いる証明書の用途を識別する。",
+      "sourceHash": "663217137d50aefd493811d078a843c356a599022c0c20ad2d5ab7f3c6994ff7"
+    },
+    {
+      "questionId": "r07a-q38",
+      "mode": "paperless",
+      "reason": "暗号装置の観測情報を利用する攻撃の特徴を比較する。",
+      "sourceHash": "58261f24083a269187f3b8a630f46c6591ca91cad8ce1c8775f345c79805f443"
+    },
+    {
+      "questionId": "r07a-q39",
+      "mode": "paperless",
+      "reason": "CRLの対象と失効情報の役割を比較する。",
+      "sourceHash": "55a1b20962e43c0952f88eabc264189bd46b1ba0522c5cb8d0da6484fba643c0"
+    },
+    {
+      "questionId": "r07a-q40",
+      "mode": "paperless",
+      "reason": "PSIRTとCSIRTの対応範囲を事例に照らして判断する。",
+      "sourceHash": "a70c54ca6b406b14f16e52dea8b12efa442734d0cb1cc1eceefb77c0579e2293"
+    },
+    {
+      "questionId": "r07a-q41",
+      "mode": "paperless",
+      "reason": "提示された定義を真正性・信頼性などの特性名と照合する。",
+      "sourceHash": "d5f74cb78b8997a847d4850891f2b7aabbc720d501037b008f4b8baad6827818"
+    },
+    {
+      "questionId": "r07a-q42",
+      "mode": "paperless",
+      "reason": "CSPMが管理する対象と機能を比較する。",
+      "sourceHash": "6d6531fb060edff9ac402893e3256d12ebf42ed15f44f92ff7649d7bee942445"
+    },
+    {
+      "questionId": "r07a-q43",
+      "mode": "paperless",
+      "reason": "スキャンに対する応答メッセージの意味をポートの状態と照合する。",
+      "sourceHash": "d0f1be55b88a4e5b68bb14107f66fe1cc081112ccedaa8dc7101c41e4476e5ee"
+    },
+    {
+      "questionId": "r07a-q44",
+      "mode": "paperless",
+      "reason": "証拠の収集・検査・分析という手順に該当する活動を判断する。",
+      "sourceHash": "b8a097ee07dd7a372e8b2858207745ed310638bb15c1a587ab1b9d74c9cb71c4"
+    },
+    {
+      "questionId": "r07a-q45",
+      "mode": "paperless",
+      "reason": "メールヘッダーのデジタル署名による認証方式を識別する。",
+      "sourceHash": "1dc885ac3108c7f713370bd8f44b2151bf76a59822ea83e42d4c4cffcbbc81c3"
+    },
+    {
+      "questionId": "r07a-q46",
+      "mode": "paperless",
+      "reason": "要件定義で典型的な利用者像を表す用語を識別する。",
+      "sourceHash": "4f12044a40db1414dcb762332e057a8ff4f5e02edb39c572e827ce871b595ec6"
+    },
+    {
+      "questionId": "r07a-q47",
+      "mode": "paperless",
+      "reason": "UML各図の表現対象を比較する。",
+      "sourceHash": "6e8c3a0463aadc5d537efd9a67e7cccea48ab4e3e081adedd47fded4d31b0957"
+    },
+    {
+      "questionId": "r07a-q48",
+      "mode": "desk",
+      "reason": "埋込みエラーの発見率から真のエラー総数を推定し、既発見数を差し引く。",
+      "sourceHash": "9477c325a2f151530ddaaf0e37f022d6f2c1ac98c57079527b8cd0790f20a885"
+    },
+    {
+      "questionId": "r07a-q49",
+      "mode": "paperless",
+      "reason": "プログレッシブWebアプリの機能を比較する。",
+      "sourceHash": "7a3cdb986d3b720cb84eeea969f6f3bf6a212a0e23a8464335ec3ce144ce404b"
+    },
+    {
+      "questionId": "r07a-q50",
+      "mode": "paperless",
+      "reason": "著作者人格権の不行使条項と保守・修正への影響を判断する。",
+      "sourceHash": "dc862814bc50e2d171ed1e12617102386c6cd14426fe94e91fff24803244059b"
+    },
+    {
+      "questionId": "r07a-q51",
+      "mode": "paperless",
+      "reason": "スコープに属するプロセスを各管理領域の役割から判断する。WBSの作成自体は行わない。",
+      "sourceHash": "e71736517f40a78bd124ac08e080e97a15cc1c3dc3d9c53c639fd8ca69ba6009"
+    },
+    {
+      "questionId": "r07a-q52",
+      "mode": "paperless",
+      "reason": "チームの様子をタックマンモデルの発展段階と照合する。",
+      "sourceHash": "e05f32392361eb9390b0bba96b1f6afb461099036eaaf9be6f3cd3a9c6f31ee9"
+    },
+    {
+      "questionId": "r07a-q53",
+      "mode": "desk",
+      "reason": "離脱と引継ぎによる不足工数を求め、必要増員数と人件費の増加を計算する。",
+      "sourceHash": "b8af65fa330b3e9c785d271213d22334c005eae85fa2bb72ca45190dc643bbf0"
+    },
+    {
+      "questionId": "r07a-q54",
+      "mode": "desk",
+      "reason": "図に与えられた結果金額に各確率を掛け、期待金額を合計する。",
+      "sourceHash": "fe45136a066c46a5a7dec6c91ea7b1a1d13b88c99233423d993c751a673f24db"
+    },
+    {
+      "questionId": "r07a-q55",
+      "mode": "paperless",
+      "reason": "発生経路・原因と確率の分析に用いる手法の特徴を識別する。確率計算は求めない。",
+      "sourceHash": "417d145a8e152183e456fd49a39fbc88f47bd64f363f76d3b6663fcab3d01538"
+    },
+    {
+      "questionId": "r07a-q56",
+      "mode": "paperless",
+      "reason": "問題管理に属する活動を他の管理活動と比較する。",
+      "sourceHash": "ee94be28f5764c5fb2812418641839abfd2cff87e0326fffbcd2cfb3967af897"
+    },
+    {
+      "questionId": "r07a-q57",
+      "mode": "paperless",
+      "reason": "液浸冷却と他の液体冷却方式の説明を比較する。",
+      "sourceHash": "4615b2271dbcc285540890d3526de78cea0811493016922bf5177e733fd2c82c"
+    },
+    {
+      "questionId": "r07a-q58",
+      "mode": "paperless",
+      "reason": "システム監査で使用する用語の定義を比較する。",
+      "sourceHash": "c45d9b2e99b20b2b38b479252e693b39ccd1c4c16880a4997eabf2bfa54c8d35"
+    },
+    {
+      "questionId": "r07a-q59",
+      "mode": "paperless",
+      "reason": "監査人のフォローアップと被監査部門の責任を比較する。",
+      "sourceHash": "ec68a7659039a28523fa85206b2d39eb83178f5b34a939cad36eda7a9a7a6ffe"
+    },
+    {
+      "questionId": "r07a-q60",
+      "mode": "paperless",
+      "reason": "各監査項目をガバナンス・マネジメント・コントロールの視点に照らして判断する。",
+      "sourceHash": "5f89e70aa2bb0462fa4037ad470f79fcb2112a1a2ef5bab483f762e5d4896551"
+    },
+    {
+      "questionId": "r07a-q61",
+      "mode": "paperless",
+      "reason": "複数プロジェクトを統合するプログラムマネジメントの考え方を比較する。",
+      "sourceHash": "7a7adc503c25d2fe4f76c44ffff3bea2bfc19765848c3e4fc32bb7bc0f292f83"
+    },
+    {
+      "questionId": "r07a-q62",
+      "mode": "paperless",
+      "reason": "SOAの機能分割と連携の考え方を比較する。",
+      "sourceHash": "1f2938f3397ccc362dd470ad026ca0a4f78e985a10210b3144b9a1e86097348a"
+    },
+    {
+      "questionId": "r07a-q63",
+      "mode": "paperless",
+      "reason": "アソシエーション分析の目的と評価指標の意味を比較する。",
+      "sourceHash": "34a863a38f4faad50a8da5a6287df77913796c4342a997c944e26e885cad18d9"
+    },
+    {
+      "questionId": "r07a-q64",
+      "mode": "paperless",
+      "reason": "PBP法が何を評価し何を考慮するかを比較する。回収期間の計算はない。",
+      "sourceHash": "585a181f06b10f4cfe3edb68ccbdeb91106c5c7cee4564007a4b2075a355100d"
+    },
+    {
+      "questionId": "r07a-q65",
+      "mode": "desk",
+      "reason": "重み付きの実績点と目標点をそれぞれ合算し、達成度の割合を計算する。",
+      "sourceHash": "422962b51e055bca41d284e488b5c378cd1881e3ce3265699df6669eb6df2d16"
+    },
+    {
+      "questionId": "r07a-q66",
+      "mode": "paperless",
+      "reason": "契約形態と遅延原因から追加費用の負担主体を判断する。金額の計算はない。",
+      "sourceHash": "c3868b7eed07ac6d9c1fe767d81c99a99c62c2148bb6cfb81f55b86285f494a8"
+    },
+    {
+      "questionId": "r07a-q67",
+      "mode": "paperless",
+      "reason": "マーケティングの4Pと4Cの概念上の対応を判断する。",
+      "sourceHash": "4a0d725c4838c2d20314fe46b767d79da75ff966da665be2fe80e2198798b917"
+    },
+    {
+      "questionId": "r07a-q68",
+      "mode": "paperless",
+      "reason": "戦略マップの表現対象と四つの視点を比較する。図の作成はない。",
+      "sourceHash": "6a6e5e8d6bf343c0819d70bc03230271a74c24dac2d75c56a169f3270c7a1bda"
+    },
+    {
+      "questionId": "r07a-q69",
+      "mode": "paperless",
+      "reason": "フィージビリティスタディの目的を比較する。",
+      "sourceHash": "4907d374cd4186e0a83a48a4e83a7230b977f98e932f1fbdbaf537aa8aa7af9d"
+    },
+    {
+      "questionId": "r07a-q70",
+      "mode": "paperless",
+      "reason": "提示済みの成長マトリクスの軸に事例を当てはめる。",
+      "sourceHash": "f8641309c424f9f17c6f5fa7301263b32cc45e8c286cd4368fac71985fbd2b26"
+    },
+    {
+      "questionId": "r07a-q71",
+      "mode": "paperless",
+      "reason": "製造システムの三層とMESの役割を照合する。",
+      "sourceHash": "efc296abf6e248e77c0d5133633047ad7523679820344cf58b2821fb71fc85e1"
+    },
+    {
+      "questionId": "r07a-q72",
+      "mode": "paperless",
+      "reason": "PLMの管理範囲と目的を比較する。",
+      "sourceHash": "8d31ae7e00e2bac254623d8b4fb085e4e64dc310552280103d137979f8475bf2"
+    },
+    {
+      "questionId": "r07a-q73",
+      "mode": "paperless",
+      "reason": "LPWAの通信範囲・消費電力・用途の特徴を比較する。",
+      "sourceHash": "e9db436ecab2c1316c9d9ff16eb35688e41b92e29b6d3a497cdbe9f2adb9c0c8"
+    },
+    {
+      "questionId": "r07a-q74",
+      "mode": "desk",
+      "reason": "年間発注費と保管費の等式を立て、表の数値から経済的発注量を計算する。",
+      "sourceHash": "a3b50a7f23976f718f338ef9f591fb2873640d4530d99decc6e89929a4aa259c"
+    },
+    {
+      "questionId": "r07a-q75",
+      "mode": "desk",
+      "reason": "部品数の制約を式にし、実現可能な生産数と最大利益を求める。",
+      "sourceHash": "7bd36529e998b5475baf9b1cfe962ed4b2aa1df52527460f62a896ec81ff9601"
+    },
+    {
+      "questionId": "r07a-q76",
+      "mode": "desk",
+      "reason": "貸借対照表から自己資本と総資産を合算し、比率を計算する。",
+      "sourceHash": "166d268504e90d45181db5d85f45bddc93941b98273ef3a1e63c231d9317f375"
+    },
+    {
+      "questionId": "r07a-q77",
+      "mode": "desk",
+      "reason": "製品別に時間当たり限界利益を計算し、使用可能時間と固定費から最大利益を求める。",
+      "sourceHash": "26ee06d4e68d656b5d8df05fba9d9e12e7248b44124d0f810a0af3b6f5047321"
+    },
+    {
+      "questionId": "r07a-q78",
+      "mode": "paperless",
+      "reason": "著作権法の保護対象を各候補の性質に照らして判断する。",
+      "sourceHash": "5a2fe4ac6547b5e74f81f3bb102601e122ae80ec8c47c3a0375eaf5a916644b5"
+    },
+    {
+      "questionId": "r07a-q79",
+      "mode": "paperless",
+      "reason": "意匠法の保護対象を各候補の性質に照らして判断する。",
+      "sourceHash": "1416e9e8e5ffd550afc2312d3ef63f4b9ac847241e024b19e1934c810a036c27"
+    },
+    {
+      "questionId": "r07a-q80",
+      "mode": "paperless",
+      "reason": "労働施策総合推進法の規定を他の法律の内容と比較する。",
+      "sourceHash": "3fd5d558ec305595c2965d79a613ed9cca1ebee1104a15082ba44ee71010cdc9"
+    },
     {
       "questionId": "r07h-q1",
       "mode": "paperless",
@@ -484,9 +964,3858 @@
       "mode": "paperless",
       "reason": "RoHS指令の目的を比較する問題。",
       "sourceHash": "98b7bfb04fadeb442189befd662bcb5e3b85897806d19a23a92a109180642bcb"
+    },
+    {
+      "questionId": "r06a-q1",
+      "mode": "desk",
+      "reason": "利用率25％と40％を待ち時間の式へ代入し、二つの待ち時間の比を計算する。",
+      "sourceHash": "8100895aaee9252baa6c4c1e4a296b8df349b68c9ac68bdaccf3cec8710bb95e"
+    },
+    {
+      "questionId": "r06a-q2",
+      "mode": "paperless",
+      "reason": "交差検証の学習用・評価用データの入替えという特徴を説明文と照合する。",
+      "sourceHash": "4b572f8d920f507f28377d3a0323b96c159c21f067a2754f2afaaecc666218eb"
+    },
+    {
+      "questionId": "r06a-q3",
+      "mode": "paperless",
+      "reason": "A＋B×Cの演算優先順位と後置記法の配置を読む。数値の計算やスタックの実行追跡は不要。",
+      "sourceHash": "0e927978b3f06bb6f52275d5898feaf63998e0cf38f34b1c1c79ce9d110d9c09"
+    },
+    {
+      "questionId": "r06a-q4",
+      "mode": "paperless",
+      "reason": "各センサーの検出対象・距離・天候の影響を説明文で比較する。",
+      "sourceHash": "e55e015255313677d94e2f67bab547f4cfa5e2538e644d89286cd95103a63c30"
+    },
+    {
+      "questionId": "r06a-q5",
+      "mode": "paperless",
+      "reason": "提示された木で削除位置の左右の大小関係と置換候補を読む。連続した削除や木の再描画は不要。",
+      "sourceHash": "305b26a2ae4c1f39a241c340cce4442d20f9388c77aa8d5f9df1ae1999359d13"
+    },
+    {
+      "questionId": "r06a-q6",
+      "mode": "paperless",
+      "reason": "剰余が一致する条件を差・倍数の意味として読む。具体的なキーのハッシュ値計算は不要。",
+      "sourceHash": "4b833af5e7fc5009a1aa4e9ddd7eb7d066eaf4489045b02f1276f2c3fedfbf4c"
+    },
+    {
+      "questionId": "r06a-q7",
+      "mode": "paperless",
+      "reason": "統計解析用途と変数の型の特徴から言語の説明を照合する。",
+      "sourceHash": "b409f31be78c1bd771acc4041ba0416d2bb6d782b801d63821a75914eb59f922"
+    },
+    {
+      "questionId": "r06a-q8",
+      "mode": "paperless",
+      "reason": "提示された五つの段階を命令実行の基本順序と照合する。複数命令の時系列追跡は不要。",
+      "sourceHash": "203d524fd7f8e8087825c372dc208483c74cef290369d1568e8e3783a8596ade"
+    },
+    {
+      "questionId": "r06a-q9",
+      "mode": "paperless",
+      "reason": "量子超越性の意味と各説明文を照合する。",
+      "sourceHash": "9ddf3fcdf900dd71ed20f40c42a67582f7506f16fe4912f5ac11e5e20702a985"
+    },
+    {
+      "questionId": "r06a-q10",
+      "mode": "desk",
+      "reason": "キャッシュと主記憶のアクセス時間をヒット率で重み付けして実効時間の比を計算する。",
+      "sourceHash": "d7910e9b91bef852fa4d10cd8116c332677293c945299a9a698cf0b9646eb697"
+    },
+    {
+      "questionId": "r06a-q11",
+      "mode": "paperless",
+      "reason": "ファイバチャネルの媒体や接続形態を規格の特徴と照合する。",
+      "sourceHash": "bd662961356dd67053f46731c8be2088fdede3ec445d230ee6004edcbb0515f3"
+    },
+    {
+      "questionId": "r06a-q12",
+      "mode": "paperless",
+      "reason": "待機方式とセッション共有の有無から障害時の継続性を説明文で判断する。",
+      "sourceHash": "9e504fc1db3b58e82f64b0d1263ba7a78120c2c1935141bb38f5d880d4219557"
+    },
+    {
+      "questionId": "r06a-q13",
+      "mode": "paperless",
+      "reason": "オブジェクトストレージの保存単位とアクセス方法を照合する。",
+      "sourceHash": "e76de183bff88fcf112cf103411e99a2d1adf33f838dab8aa9089bce802c07ea"
+    },
+    {
+      "questionId": "r06a-q14",
+      "mode": "desk",
+      "reason": "三つの直列・並列構成の稼働率を式にし、差を比較して大小を導く。",
+      "sourceHash": "a627604220b35abd00b3e5e12253882f135f5d213ded3d17bba4c48480dcff75"
+    },
+    {
+      "questionId": "r06a-q15",
+      "mode": "desk",
+      "reason": "命令数からサーバ処理件数を求め、バイトをビットへ換算した回線処理件数と比較する。",
+      "sourceHash": "6d7fa71766acc165caf06199c950b527ca1eae9610e337c81a7386d7b0ad22ec"
+    },
+    {
+      "questionId": "r06a-q16",
+      "mode": "paperless",
+      "reason": "スケジューリング方式の説明から待ち続ける可能性を判断する。具体的なタスク列の追跡は不要。",
+      "sourceHash": "f46bf655254cbc9921dbb869004cf8c3b663acc862882c29fd0844887fd39793"
+    },
+    {
+      "questionId": "r06a-q17",
+      "mode": "paperless",
+      "reason": "ページ置換の頻発による性能低下という現象と用語を照合する。",
+      "sourceHash": "07489e2901aed2dca426a12bc1dc3f971bbe8cbf5d038ed097429cc451f28b10"
+    },
+    {
+      "questionId": "r06a-q18",
+      "mode": "paperless",
+      "reason": "固定長ページと可変長セグメントの長所を比較する。",
+      "sourceHash": "ec7d24813e5c636f6c42985be585ff4e851faf1c6e3ade8cbfddf91857bac576"
+    },
+    {
+      "questionId": "r06a-q19",
+      "mode": "paperless",
+      "reason": "ローカルに全履歴を持つという分散型管理の特徴をツールと照合する。",
+      "sourceHash": "deb29d8338925d3bac3ea47a52b8fa0d805c9fe05a69fe5f6bd0dd7ddf0c3635"
+    },
+    {
+      "questionId": "r06a-q20",
+      "mode": "paperless",
+      "reason": "コンパイラ処理の基本的な順序を用語から判断する。",
+      "sourceHash": "ed3f3dc86e29a48a9083db4d3058b772bd4c68822d1b90cddfda5a276214501d"
+    },
+    {
+      "questionId": "r06a-q21",
+      "mode": "paperless",
+      "reason": "直列スイッチの点灯条件を提示済み波形の各区間と照合する。新しいタイミングチャートの作図や内部状態の追跡は不要。",
+      "sourceHash": "8e86216e69500bf8ed464c588bc61f79fd15b83473b6a5a58fd49a0a0c1d88ff"
+    },
+    {
+      "questionId": "r06a-q22",
+      "mode": "paperless",
+      "reason": "SoCの集積単位について定義と説明文を照合する。",
+      "sourceHash": "a0aa663f874e1a10ce839fa70e30e1d63e0735ef1391ee666fee3768d1d09a9d"
+    },
+    {
+      "questionId": "r06a-q23",
+      "mode": "paperless",
+      "reason": "アクチュエーターのエネルギー変換という役割を説明文と照合する。",
+      "sourceHash": "34f577f46168e9f06a94320d88d247acbff496f57d661d33cff49b0e28b554e2"
+    },
+    {
+      "questionId": "r06a-q24",
+      "mode": "paperless",
+      "reason": "耐タンパ性の目的と各保護手法の意味を比較する。",
+      "sourceHash": "fb1479b089f83a979ae7af65602e759574b2a33db59a6caa1c045bb1844bd229"
+    },
+    {
+      "questionId": "r06a-q25",
+      "mode": "paperless",
+      "reason": "提示された画像切替えUIの特徴から名称を照合する。",
+      "sourceHash": "b0c2edad0b6da53c2e18e4120f4d8905bb1ad502ebea6fb3344741d4e92e5948"
+    },
+    {
+      "questionId": "r06a-q26",
+      "mode": "desk",
+      "reason": "画素数・色ビット数・毎秒フレーム数を掛けて無圧縮動画の帯域を算出する。",
+      "sourceHash": "656fd4609fc490bd6383fdb924439b7a912cb96498ac1da6794d3701ad2b86af"
+    },
+    {
+      "questionId": "r06a-q27",
+      "mode": "paperless",
+      "reason": "2相コミットの各段階で参加者が最終判断を知れるかを説明文で確認する。具体的なトランザクション列の追跡は不要。",
+      "sourceHash": "5a48920968134f810859bb92d4f4a12504ca2ea28e7fc8cf6978e6cd6dd46aa0"
+    },
+    {
+      "questionId": "r06a-q28",
+      "mode": "paperless",
+      "reason": "三表の列名を読み、求める集計に必要な情報と結合の対応が存在するかを確認する。",
+      "sourceHash": "846adc1482d4ec14497b33f22dbc9ec2bd5747a74167032bfc10b54e7f4a6bb3"
+    },
+    {
+      "questionId": "r06a-q29",
+      "mode": "paperless",
+      "reason": "提示されたインスタンスの関連線から多重度を読み、概念データモデルと照合する。",
+      "sourceHash": "aa5f3c193e76b0c235ce5e12d213966858db91fc4919e0dde14adf8f8e1795f1"
+    },
+    {
+      "questionId": "r06a-q30",
+      "mode": "paperless",
+      "reason": "SQLの集約対象とウィンドウ関数の分割・並べ方の意味を比較する。結果表を全行書き出す必要はない。",
+      "sourceHash": "5a921a7368051eca3b40d921aa7f9528dd8979b5b5d7fe3d743bb3f4cc643100"
+    },
+    {
+      "questionId": "r06a-q31",
+      "mode": "paperless",
+      "reason": "チェックポイントの回復処理上の役割を説明文と照合する。",
+      "sourceHash": "55c268cc2edd4775f4c1b3f100903718ca266fc578a7106fd3527d46f96ab1a3"
+    },
+    {
+      "questionId": "r06a-q32",
+      "mode": "desk",
+      "reason": "データ量をビットへ換算し、制限時間と伝送効率から必要回線速度を計算する。",
+      "sourceHash": "996595675b9a518823346d89feb2c9e624919ee56d307380623a61e5157d9590"
+    },
+    {
+      "questionId": "r06a-q33",
+      "mode": "paperless",
+      "reason": "DNSの正引き・逆引きやレコード種別の定義を比較する。",
+      "sourceHash": "c58ce82b1150fedbec72cce947857c737deb15d8b854d92bf96c749a73d6a2ff"
+    },
+    {
+      "questionId": "r06a-q34",
+      "mode": "paperless",
+      "reason": "ICMPの通知対象と役割を説明文と照合する。",
+      "sourceHash": "28e29b15abc6fcb3723c088853e16a1260e4e44c9cda29e89295bf7d655ad65c"
+    },
+    {
+      "questionId": "r06a-q35",
+      "mode": "paperless",
+      "reason": "クラスDアドレスの用途を定義から判断する。端末数の算出は不要。",
+      "sourceHash": "d60e97edf51b16c99779e9faadd16abc8a2b5b253f50c5e2e1f26d03ec28e9da"
+    },
+    {
+      "questionId": "r06a-q36",
+      "mode": "paperless",
+      "reason": "同一LANで直前に通信済みという条件からMACアドレスを確認するコマンドの用途を判断する。",
+      "sourceHash": "a475a29e16918ec5eda759368aa66496925117810ad9f17e755634767010ceb8"
+    },
+    {
+      "questionId": "r06a-q37",
+      "mode": "paperless",
+      "reason": "社内認証とクラウドサービス間で受け渡す情報をSAMLの仕組みと照合する。",
+      "sourceHash": "b8251cfc70a15dd3594a51c6bb4e7b4274c7d85e41cfc7b77007c6d1cb2d8953"
+    },
+    {
+      "questionId": "r06a-q38",
+      "mode": "paperless",
+      "reason": "未使用IPアドレスへ届く通信という条件と攻撃の探索動作を照合する。",
+      "sourceHash": "18bc314a16325737d04433bedb23df3debbe36de95938d60f72cd869f1aa0378"
+    },
+    {
+      "questionId": "r06a-q39",
+      "mode": "paperless",
+      "reason": "人物の音声や姿を偽造する技術の特徴を攻撃例と照合する。",
+      "sourceHash": "065422a9cdba6dc4af2ffff6be05a010c31b62c3d6b607ec6719a26aff6b7ca2"
+    },
+    {
+      "questionId": "r06a-q40",
+      "mode": "paperless",
+      "reason": "認証情報の流出と別サイトへの試行という攻撃手順を用語の定義と照合する。",
+      "sourceHash": "6d71b1e556768beb0cc685bb0a4712ff5e8b26cf512837379727629dddba0131"
+    },
+    {
+      "questionId": "r06a-q41",
+      "mode": "paperless",
+      "reason": "CVE識別子が識別する対象を説明文から判断する。",
+      "sourceHash": "1990c41604167aca8c86a91be5998150a330dab459e909801385d9a2b41f1ea4"
+    },
+    {
+      "questionId": "r06a-q42",
+      "mode": "paperless",
+      "reason": "DNS応答を偽装されにくくする対策の意味を比較する。",
+      "sourceHash": "cd0ab16bab54400c75d97812b2765e27c3b187c596ff64c72b3eb7e8f95cc377"
+    },
+    {
+      "questionId": "r06a-q43",
+      "mode": "paperless",
+      "reason": "SBOMに記録する情報の範囲を定義と照合する。",
+      "sourceHash": "22cf71ba2694df71ca595682851d4ea8443eaf4594baca7b527cc4dc37416574"
+    },
+    {
+      "questionId": "r06a-q44",
+      "mode": "paperless",
+      "reason": "DNSSECの署名対象と検証の役割を説明文で判断する。",
+      "sourceHash": "4d5df8382910ca6926465489a42fc36486fa2251231261540ab1efef5a185652"
+    },
+    {
+      "questionId": "r06a-q45",
+      "mode": "paperless",
+      "reason": "VLANによるセグメント分割の通信範囲への効果を読む。40台の具体的な割当て計算は不要。",
+      "sourceHash": "eefeb2c2244888c63d17b0475b504f9ea947a773edeecbf60a5c36a325e989e0"
+    },
+    {
+      "questionId": "r06a-q46",
+      "mode": "paperless",
+      "reason": "エクスプロイトコードの用途を定義と照合する。",
+      "sourceHash": "3ce071bd36c11c3fdc04fb414f9ac525f40143623c1d5259745987406a880c56"
+    },
+    {
+      "questionId": "r06a-q47",
+      "mode": "paperless",
+      "reason": "サービスを独立させる構成の利点を説明文で比較する。",
+      "sourceHash": "cc3f53d5155727e414d5be636b4a8004320488ab2461dff4b5ae3a9ff77583b9"
+    },
+    {
+      "questionId": "r06a-q48",
+      "mode": "paperless",
+      "reason": "提示された品質目標がどの品質特性を測るかを読む。時間や割合の計算は不要。",
+      "sourceHash": "588c0eabcc27b7a82784a5422ce4a0cf3e86109ed010166807625cff77eb0092"
+    },
+    {
+      "questionId": "r06a-q49",
+      "mode": "paperless",
+      "reason": "目的やスコープの共通認識を得る手法の説明と名称を照合する。",
+      "sourceHash": "e41d0a3e62acfc5f63a4611581b66fb14fad927a236ba776f4cc8bbed09903d4"
+    },
+    {
+      "questionId": "r06a-q50",
+      "mode": "paperless",
+      "reason": "画面サイズに応じて表示を変えるWeb機能を用途から判断する。",
+      "sourceHash": "3b4592729b0cfc0135b3686c21eb831d00e152b7e1f29a70dde3a5a05451800e"
+    },
+    {
+      "questionId": "r06a-q51",
+      "mode": "paperless",
+      "reason": "各変更例が作業範囲・費用・日程・人員のどれに関わるかを読む。",
+      "sourceHash": "9fa64a17371cbd3c837830db68bea5f9ef7e1ffed310d032d32881b2cdcd9fcf"
+    },
+    {
+      "questionId": "r06a-q52",
+      "mode": "paperless",
+      "reason": "WBSの最下位の管理単位を用語の定義から判断する。",
+      "sourceHash": "893426dcf27f55f83fcc93c08b7c20fea35b7afc7850969e7cbda093d8f9fbfd"
+    },
+    {
+      "questionId": "r06a-q53",
+      "mode": "paperless",
+      "reason": "同じ作業場所に集まるチーム施策の名称を照合する。",
+      "sourceHash": "b18ffb630fd198bb3fae6f5656b6952c83d2cd144078315acf88483520a723ac"
+    },
+    {
+      "questionId": "r06a-q54",
+      "mode": "paperless",
+      "reason": "工程を重ねる期間短縮手法の意味を事例と照合する。日程計算は不要。",
+      "sourceHash": "fc624f0a52f2f290a662e7a59756c9a8931ae887d0dee52861c96b2bef1a30fa"
+    },
+    {
+      "questionId": "r06a-q55",
+      "mode": "paperless",
+      "reason": "復旧目標の例について時間・復旧時点・サービス水準の違いを読む。数値を導出する必要はない。",
+      "sourceHash": "15043d99f50cef6b633a00cc36db05034a25d2781f746313fd0470773a136c56"
+    },
+    {
+      "questionId": "r06a-q56",
+      "mode": "paperless",
+      "reason": "継続的改善の対象・評価基準・測定の考え方を説明文で比較する。",
+      "sourceHash": "7df78b9ffeb129374f23b413de91cd9805d4c96a9b3feacf5702b3dfdb7002ec"
+    },
+    {
+      "questionId": "r06a-q57",
+      "mode": "paperless",
+      "reason": "入出力データの管理方針を権限と証跡の観点から比較する。",
+      "sourceHash": "96b2f300cf5b393633b13350845ff6e142ed81f8f7da4297e1fbddbf123725e2"
+    },
+    {
+      "questionId": "r06a-q58",
+      "mode": "paperless",
+      "reason": "データを処理工程に沿って確認する監査技法の説明を名称と照合する。",
+      "sourceHash": "291bb161e794faa7529e487ddcda9cd6b01033a35032bdd32254eefdd7b3c227"
+    },
+    {
+      "questionId": "r06a-q59",
+      "mode": "paperless",
+      "reason": "予備調査の目的と手続の説明を比較する。",
+      "sourceHash": "109a0f6b84e3d883d5498d3e65382200b5ce2c385ff28aa87b05f9576a54e64d"
+    },
+    {
+      "questionId": "r06a-q60",
+      "mode": "paperless",
+      "reason": "監査後のフォローアップの役割を各活動の説明と照合する。",
+      "sourceHash": "1645aa440d5b84b9eab5999765863c547bccb4dda0ffae7d61d85c1281400cf7"
+    },
+    {
+      "questionId": "r06a-q61",
+      "mode": "paperless",
+      "reason": "DXの基盤となるITシステムへの要求を説明文で比較する。",
+      "sourceHash": "5104272ce6f3c0e0ec68c02d94f195831bf9c0579542f99b21900f91c9960533"
+    },
+    {
+      "questionId": "r06a-q62",
+      "mode": "paperless",
+      "reason": "データ公開を前提に設計する方針を行政機関の取組例と照合する。",
+      "sourceHash": "a2b1a7d04ca5c8e6b237af455991177476858b5a87a3e33ea7523c9ef74ccc1b"
+    },
+    {
+      "questionId": "r06a-q63",
+      "mode": "paperless",
+      "reason": "業務改善例の行為がECRSのどの原則に当たるかを読む。",
+      "sourceHash": "eea207734f2cb1c3fde59016f6728921803384b1af6e926ffbea6e187583d44a"
+    },
+    {
+      "questionId": "r06a-q64",
+      "mode": "desk",
+      "reason": "四案ごとの空き時間・追加利益・人件費削減・委託費を計算し年間効果を比較する。",
+      "sourceHash": "2a27128d2cdab46844638e387acde41d1b168ebdfcd733b4cbaf8ad8a041f643"
+    },
+    {
+      "questionId": "r06a-q65",
+      "mode": "paperless",
+      "reason": "UXが重視する利用体験の範囲を説明文から判断する。",
+      "sourceHash": "be89a89f33270bcabad6553a78694e685a681961519347df0d732939de52adf6"
+    },
+    {
+      "questionId": "r06a-q66",
+      "mode": "paperless",
+      "reason": "処理の分岐・並行・同期を表せるUML図の用途を照合する。",
+      "sourceHash": "67488e0e93516573e98c2c14eea5634f892dfcf2ea8fdbbd192837139860a3e6"
+    },
+    {
+      "questionId": "r06a-q67",
+      "mode": "paperless",
+      "reason": "SCMの管理対象と目的を各説明文と照合する。",
+      "sourceHash": "a14eba80faaee368c0524db1058dc192b6413ed71f1f4a283252fe85b84f51d3"
+    },
+    {
+      "questionId": "r06a-q68",
+      "mode": "paperless",
+      "reason": "成長マトリクスの分類軸と戦略の種類を説明文で判断する。",
+      "sourceHash": "b12107cfc959f901edc8e5c3c8defd5289983e9256c30090dfd8661c8397ccf4"
+    },
+    {
+      "questionId": "r06a-q69",
+      "mode": "paperless",
+      "reason": "共創戦略で価値を生む主体と対象の範囲を比較する。",
+      "sourceHash": "1c958128a9c50c4e175490a259497a6b5a401dcd997bd1c50fbe5d093a8264bc"
+    },
+    {
+      "questionId": "r06a-q70",
+      "mode": "paperless",
+      "reason": "事業化から産業化という段階の障壁を名称と照合する。",
+      "sourceHash": "678064dc5040d5405d2449d105baafd85fe3f2e44726c34238d739c0b271fe96"
+    },
+    {
+      "questionId": "r06a-q71",
+      "mode": "paperless",
+      "reason": "学習済みモデルを追加学習で調整する方法の名称を説明と照合する。",
+      "sourceHash": "4467d72fe64073d505cd70decd9bf7fbd0234c35758ad008369de24bbd305cd8"
+    },
+    {
+      "questionId": "r06a-q72",
+      "mode": "desk",
+      "reason": "方向を持つ段取り時間表から複数の仕事順を検討し、三回分の合計時間を求めて最小化する。",
+      "sourceHash": "d550c4931435ea01f425573245584301031dd93ee59c4a64d209652fba68f3cf"
+    },
+    {
+      "questionId": "r06a-q73",
+      "mode": "desk",
+      "reason": "構成部品の必要個数を段階ごとに展開し、各階層の在庫を引いて正味所要量を求める。",
+      "sourceHash": "feb0b94225a4a179339ae5b7c2697955b2b9e7b5c74463faae12528576b34ce3"
+    },
+    {
+      "questionId": "r06a-q74",
+      "mode": "paperless",
+      "reason": "経営理念・全社戦略・事業戦略の階層関係を説明文で比較する。",
+      "sourceHash": "270260fb5457166b15ee31d068910a3d9e2ccdd1496d087a0fe01fb2a8513bfd"
+    },
+    {
+      "questionId": "r06a-q75",
+      "mode": "paperless",
+      "reason": "提示された2×2の利得表で相手の戦略を固定したときの大小を読む。利得の算出や新しい表の作成は不要。",
+      "sourceHash": "a21d382f92017aadb41bbbb9c5668abda370fb5bec9a5d817a705c7c3f7930c4"
+    },
+    {
+      "questionId": "r06a-q76",
+      "mode": "paperless",
+      "reason": "事前分布と事後分布を用いる統計理論の説明を定義と照合する。",
+      "sourceHash": "5f47f2a33f0c6945a14016b1bd3b5791d05e559e300eb073c23b378b34e2b527"
+    },
+    {
+      "questionId": "r06a-q77",
+      "mode": "desk",
+      "reason": "売上高と変動費から限界利益率を求め、固定費も用いて損益分岐点や売上変動の影響を比較する。",
+      "sourceHash": "15ff96aa8ea04cdc466f1ffdfc3888c29ad481ed10edd81234bb693eed59c279"
+    },
+    {
+      "questionId": "r06a-q78",
+      "mode": "paperless",
+      "reason": "プログラムの表現と解法・言語・規約の区別を著作権の保護対象と照合する。",
+      "sourceHash": "32815bfeeb3ea61391a6269fab8804ba397c60c8d30bdb1f4aee4d43620e4046"
+    },
+    {
+      "questionId": "r06a-q79",
+      "mode": "paperless",
+      "reason": "派遣先の契約・選考・苦情対応の行為を労働者派遣のルールと照合する。",
+      "sourceHash": "14c2558c13a56e633b9bda527078a6681c2032b5d455aa3b43c51a82201c171c"
+    },
+    {
+      "questionId": "r06a-q80",
+      "mode": "paperless",
+      "reason": "デジタル社会形成基本法の基本理念を各法律の目的の説明と比較する。",
+      "sourceHash": "a1a56485c278311e3c6af1490482f0b93b6bbb34c60c6648b2c05294e2c148d4"
+    },
+    {
+      "questionId": "r06h-q1",
+      "mode": "paperless",
+      "reason": "観測した玉の色から原因となる袋を推定するという事後確率の意味を照合すればよい。",
+      "sourceHash": "1cdb7a1da19e20783838b68b901e6a81d16fba5d29a07122fb60bbf16eb775f1"
+    },
+    {
+      "questionId": "r06h-q2",
+      "mode": "desk",
+      "reason": "支店統合後の到着率と利用率を条件から求め、待ち時間の式へ代入して式を整理する必要がある。",
+      "sourceHash": "b6dd1c3258a880cdd8c731793d3fbe2c9c0dd2358d1021c1ecb32509d5a46a78"
+    },
+    {
+      "questionId": "r06h-q3",
+      "mode": "paperless",
+      "reason": "多層のニューラルネットワークによる学習という概念を説明文と照合すればよい。",
+      "sourceHash": "11e3e237a30563c82885501019b1b56f894b5c0f66f0ecd052e08fb303b8a5da"
+    },
+    {
+      "questionId": "r06h-q4",
+      "mode": "desk",
+      "reason": "受信ビットを三つの検査式へ代入し、誤り位置を計算してビットを反転する必要がある。",
+      "sourceHash": "4fcada5a26802f41a2744cfacf6bdfed797b6af38fdabf57b36c0abacb45e6fd"
+    },
+    {
+      "questionId": "r06h-q5",
+      "mode": "desk",
+      "reason": "二つの流れ図の変数更新と反復終了時点を追い、同じ積になる条件を検討する必要がある。",
+      "sourceHash": "c882bdae90788a5aa27521e27c133cfc20700b1d046746351c961d1d7d818a2a"
+    },
+    {
+      "questionId": "r06h-q6",
+      "mode": "desk",
+      "reason": "右部分木と左部分木への再帰呼出しを順に追い、各ノードの出力順を記録する必要がある。",
+      "sourceHash": "89f3b93f543e6117643f587e45590c538ffa22618f7d50339fece0a307dec4ef"
+    },
+    {
+      "questionId": "r06h-q7",
+      "mode": "paperless",
+      "reason": "隣接要素の比較交換というバブルソートの手順の特徴を説明と照合すればよい。",
+      "sourceHash": "6103ecfe6dd2e309af3c859109e354338163ee39502977d1c9cd0063ca8da71c"
+    },
+    {
+      "questionId": "r06h-q8",
+      "mode": "desk",
+      "reason": "重なる転送範囲で各コピー後の内容を追い、上書きを避ける方向と開始アドレスを検討する必要がある。",
+      "sourceHash": "62c02331236aecfd15fa364d828582e398130d6c297286a4f7c710783a66c1c3"
+    },
+    {
+      "questionId": "r06h-q9",
+      "mode": "paperless",
+      "reason": "量子ビットと重ね合わせという量子計算の特徴を説明文と照合すればよい。",
+      "sourceHash": "e165bcfd7853fd6752823b16a6900b0f5bbd0f13132235371ed8861cfebd69d3"
+    },
+    {
+      "questionId": "r06h-q10",
+      "mode": "desk",
+      "reason": "キャッシュと主記憶のアクセス時間を加重平均の式に置き、ヒット率を逆算する必要がある。",
+      "sourceHash": "9c87a39b1979e56b02f6bced41c3e834f49ba6e0203cd66ca66bc871a5d31c82"
+    },
+    {
+      "questionId": "r06h-q11",
+      "mode": "desk",
+      "reason": "圧縮後のデータ量から転送時間と展開時間をそれぞれ計算し、加算する必要がある。",
+      "sourceHash": "15fa227902fe9b2c6224f6d56ec1383376bdaa8f6e84db71bf6bb89e8e45ac49"
+    },
+    {
+      "questionId": "r06h-q12",
+      "mode": "paperless",
+      "reason": "信頼性設計の各用語の意味と説明文の対応を確認すればよい。",
+      "sourceHash": "1ee8aff5f48fd66d610320b19baf43fd14fb2045ed71c2a856a748d8cb3acfb9"
+    },
+    {
+      "questionId": "r06h-q13",
+      "mode": "paperless",
+      "reason": "オブジェクトストレージの用途と拡張性の特徴を説明文と照合すればよい。",
+      "sourceHash": "27e89a9d713c7aa86d31195a7db50b629e9b7881857db350e1c6dcb08052ac10"
+    },
+    {
+      "questionId": "r06h-q14",
+      "mode": "desk",
+      "reason": "性能式をCPU台数で割るなどして極限の形へ整理し、定数を代入して上限値を求める必要がある。",
+      "sourceHash": "f752feb339003d3a5b0d93c528975e99739fd3c8837c8d59b26d062793408f33"
+    },
+    {
+      "questionId": "r06h-q15",
+      "mode": "paperless",
+      "reason": "シミュレーションによる性能評価の適用範囲を知識と照合すればよい。",
+      "sourceHash": "6c6e22d017bee67303ddac8085c0e7881a4a5ba60e69397c2d07a78af2a94a6b"
+    },
+    {
+      "questionId": "r06h-q16",
+      "mode": "paperless",
+      "reason": "ノンプリエンプティブ方式で切替えが起きる条件を説明文と照合すればよい。",
+      "sourceHash": "06de64fb5bff9bc50d3554b5da7b7befa53f902387eec0a83e3f2d0bbc117b52"
+    },
+    {
+      "questionId": "r06h-q17",
+      "mode": "desk",
+      "reason": "資源獲得順序を二つのプロセスについて追い、相互待ちになる途中の占有状態を検討する必要がある。",
+      "sourceHash": "c7eadfd66c3ec97156744f66e5460456935e759e8b8a49f67ea057586bba4352"
+    },
+    {
+      "questionId": "r06h-q18",
+      "mode": "desk",
+      "reason": "到着時刻と処理終了時刻を多重度ごとに追い、最後の終了時刻の差を計算する必要がある。",
+      "sourceHash": "f487fa11a28695dc85f22d236ede6d10dc2d2be438925c3fcbcaa187c03eb65b"
+    },
+    {
+      "questionId": "r06h-q19",
+      "mode": "paperless",
+      "reason": "実行回数や実行時間を収集する開発ツールの役割を照合すればよい。",
+      "sourceHash": "e8f165622a3bece312f99b08a86d84c918137954de87f7d299591ee40bf12d36"
+    },
+    {
+      "questionId": "r06h-q20",
+      "mode": "paperless",
+      "reason": "インバータが行う電力変換の種類を知識と照合すればよい。",
+      "sourceHash": "6d1915cdeee97c4214b6cf55655c2422929927194dac4f78cf05e4dd66cc4b78"
+    },
+    {
+      "questionId": "r06h-q21",
+      "mode": "paperless",
+      "reason": "提示された波形の各区間で入力と出力の対応を読み、論理ゲートの特徴と照合すればよい。",
+      "sourceHash": "ebb3fad729452af186944d1a0b8a6dfe8fa2e42bdfb3ac738fc5f46bada5f29b"
+    },
+    {
+      "questionId": "r06h-q22",
+      "mode": "desk",
+      "reason": "直線上の画素の座標を求め、行幅と一画素のバイト数からメモリアドレスを計算する必要がある。",
+      "sourceHash": "cd31f1414172435380b26393c392d0455c3f40e1410cbf425ff1b987de84c2bb"
+    },
+    {
+      "questionId": "r06h-q23",
+      "mode": "paperless",
+      "reason": "直流給電で削減できる電力変換と損失の関係を知識と照合すればよい。",
+      "sourceHash": "0c19134cd921116cf3bbf7f63d802a97a5aae55749866e5a2330e90049fcf1a2"
+    },
+    {
+      "questionId": "r06h-q24",
+      "mode": "paperless",
+      "reason": "アウトラインフォントとビットマップフォントの拡大時の特徴を照合すればよい。",
+      "sourceHash": "a84cfe96dc8126a7905dd693c7507ee343f149d1b3c67e354d0c1fa91950b6b1"
+    },
+    {
+      "questionId": "r06h-q25",
+      "mode": "paperless",
+      "reason": "DBMS側に処理を置くストアドプロシージャの利点を説明文と照合すればよい。",
+      "sourceHash": "e79ebd9f7f15f97005e139b5eb85e639dcdfb50e44422072b47c3186860da5bb"
+    },
+    {
+      "questionId": "r06h-q26",
+      "mode": "desk",
+      "reason": "結合後の部品別在庫を集計し、欠損値処理を含む各式の発注判定結果を与えられた結果表と比較する必要がある。",
+      "sourceHash": "89f9659d611af709001b9bccd163dee7f0416da39cbd894f0ce979947ffdc3e1"
+    },
+    {
+      "questionId": "r06h-q27",
+      "mode": "paperless",
+      "reason": "コミット済み更新をログから復元するという復旧操作の意味を照合すればよい。",
+      "sourceHash": "60108b35f42da4a72faa49475b84aaa30bf4fcdaa1b4b550086b08b9cc29e82a"
+    },
+    {
+      "questionId": "r06h-q28",
+      "mode": "paperless",
+      "reason": "スタースキーマで取引データを格納するテーブルの役割を照合すればよい。",
+      "sourceHash": "bda13ebb3b142a97a5a17e4e83dba9926b6d5cf7fd90b8809203bffb0c2314e8"
+    },
+    {
+      "questionId": "r06h-q29",
+      "mode": "paperless",
+      "reason": "NoSQLのデータモデルの特徴を各データベースの説明と照合すればよい。",
+      "sourceHash": "b4a39f98b56cc439ebf02f3a5427d54e93aa00b873b7cfaad20d7f322b9a0f9a"
+    },
+    {
+      "questionId": "r06h-q30",
+      "mode": "paperless",
+      "reason": "搬送波の確認と衝突後の再送というCSMA/CDの動作を照合すればよい。",
+      "sourceHash": "0a6a9f21effcd0cdc37401e0f7ba03bd1b9381c9fdfcccfdd540703b27047684"
+    },
+    {
+      "questionId": "r06h-q31",
+      "mode": "paperless",
+      "reason": "提示IPアドレスを既知の予約範囲の特徴と照合して種類を判定すればよい。",
+      "sourceHash": "14d4c1f09796cb229ec7932352b8b3a32cf3f9fead34b959b92beb8e32beb466"
+    },
+    {
+      "questionId": "r06h-q32",
+      "mode": "paperless",
+      "reason": "ルータ冗長化という用途と各プロトコルの役割を照合すればよい。",
+      "sourceHash": "5faf2c06f74a1c11f87dfa0bfcf76b052452ff287446dd90fb6e399302889151"
+    },
+    {
+      "questionId": "r06h-q33",
+      "mode": "desk",
+      "reason": "パケット長をビット数へ換算し、ビット誤り率と送信個数を掛けて期待値を計算する必要がある。",
+      "sourceHash": "4c1e4234c4aae2d52e466410627e6262e12518d886bfe020907820f01740d675"
+    },
+    {
+      "questionId": "r06h-q34",
+      "mode": "paperless",
+      "reason": "制御機能と転送機能を分離するSDNの構成を説明文と照合すればよい。",
+      "sourceHash": "c0799fdedb0e9db725f576bc16411e03e04c7f6867d2b607d3b0d9203752a3b8"
+    },
+    {
+      "questionId": "r06h-q35",
+      "mode": "paperless",
+      "reason": "取引情報を使ったリスクベース認証の特徴を説明文と照合すればよい。",
+      "sourceHash": "954287eccb054684e8eb59e5938e7332894c5d9137ed9f5d5ada025fc38fcbd1"
+    },
+    {
+      "questionId": "r06h-q36",
+      "mode": "paperless",
+      "reason": "DNSキャッシュの偽情報が名前解決結果と接続先へ及ぼす影響を照合すればよい。",
+      "sourceHash": "9c9a32be36781017754334ef3718a9a53549e3aaffe11ef68ec274c98a00c538"
+    },
+    {
+      "questionId": "r06h-q37",
+      "mode": "paperless",
+      "reason": "DNSSECが検証するデータの真正性と完全性を機能説明と照合すればよい。",
+      "sourceHash": "477ec6eb126845f0702984163ce5e94ed1ef78b82ec17117f748507a5c9cdea0"
+    },
+    {
+      "questionId": "r06h-q38",
+      "mode": "desk",
+      "reason": "各利用者が保持する鍵の個数を条件から数え、人数に応じた総鍵数の式を求める必要がある。",
+      "sourceHash": "d9dd31afe0b68fba20ea3368634666d9b4bc07f29fc8ec8aa0123d153225ef63"
+    },
+    {
+      "questionId": "r06h-q39",
+      "mode": "paperless",
+      "reason": "製品の脆弱性に対応する社内機能の役割を各名称と照合すればよい。",
+      "sourceHash": "ffcb4ae153789da0d0f8cc3aca9f963126ca15004198a694616e22177009d92e"
+    },
+    {
+      "questionId": "r06h-q40",
+      "mode": "paperless",
+      "reason": "リスク特定と分析・評価の各段階の目的を規格上の事項と照合すればよい。",
+      "sourceHash": "c33e240982781fb36e184e2518c75cde637fe6edbde18e1007bb2a7d60088d5d"
+    },
+    {
+      "questionId": "r06h-q41",
+      "mode": "paperless",
+      "reason": "WAFの対象となるWebアプリケーション通信と攻撃の種類を照合すればよい。",
+      "sourceHash": "163f97f630b37c3d211f6377647fa55ee2eccbd016025e946fbcbb9b676f5844"
+    },
+    {
+      "questionId": "r06h-q42",
+      "mode": "paperless",
+      "reason": "通信のネットワーク層で暗号化するプロトコルの役割を照合すればよい。",
+      "sourceHash": "4ca1afec218a9d9d5519c89d6cea780cefe937827f0d78d7084dc62b44e86fd0"
+    },
+    {
+      "questionId": "r06h-q43",
+      "mode": "paperless",
+      "reason": "送信元ドメインと送信サーバのIPを照合するSPFの仕組みを確認すればよい。",
+      "sourceHash": "e65f28ad754f8973dc218e144ec2e7f0851330c558892fdf6647acc2c75d7ce8"
+    },
+    {
+      "questionId": "r06h-q44",
+      "mode": "paperless",
+      "reason": "耐タンパ性の目的である内部情報の解析防止と各対策の作用を照合すればよい。",
+      "sourceHash": "8a2e0a5f51b9b20bace3a406ceae9b422ae5f63fea479d51ac65ec3ccc1aa4ea"
+    },
+    {
+      "questionId": "r06h-q45",
+      "mode": "paperless",
+      "reason": "継承・操作の再定義・集約などのクラス関係の意味を説明文と照合すればよい。",
+      "sourceHash": "ec87b209d8dcd7d615979a270ec9642d80059057748038ece55355e96fa9a63d"
+    },
+    {
+      "questionId": "r06h-q46",
+      "mode": "paperless",
+      "reason": "モジュール間で受け渡す情報と結合度の分類の対応を照合すればよい。",
+      "sourceHash": "2eec490fa7245260e74fef702f6bce3d7ea3af587e507611eb44f3312b55a855"
+    },
+    {
+      "questionId": "r06h-q47",
+      "mode": "paperless",
+      "reason": "提示された曲線の形を、ゴンペルツ曲線の増加と収束の特徴に照合すればよい。",
+      "sourceHash": "5a6bc62f46a1408c7c3d0569f96a77bd99ed0f48aa3c25e22d03b1c3356f52fd"
+    },
+    {
+      "questionId": "r06h-q48",
+      "mode": "paperless",
+      "reason": "工程と所要時間を可視化する開発手法の道具を用途と照合すればよい。",
+      "sourceHash": "ef06bbd30a590d83d090ab858d6394755c705cf60eaf13fef11cb2d7d7f79940"
+    },
+    {
+      "questionId": "r06h-q49",
+      "mode": "paperless",
+      "reason": "プロセスアセスメント規格の目的を他の管理規格と区別して照合すればよい。",
+      "sourceHash": "18a7939ffdc4914fe7fee10faef94cc6ca15e1299f5a3d342e68a52c8f664363"
+    },
+    {
+      "questionId": "r06h-q50",
+      "mode": "paperless",
+      "reason": "ソース中のコメントから文書を生成するツールの役割を照合すればよい。",
+      "sourceHash": "c5e1624f3b9374f18f296f6e33d35359dd81dc096779af7bb1e2cb1fae1cc4a2"
+    },
+    {
+      "questionId": "r06h-q51",
+      "mode": "paperless",
+      "reason": "既に描かれたPV・AC・EVの上下関係を読み、費用と進捗の見通しの意味を判断すればよい。",
+      "sourceHash": "1fc9156e78eb3c741d14d374ed523a3814fd61594eba1a2debae9dc2eabb7180"
+    },
+    {
+      "questionId": "r06h-q52",
+      "mode": "desk",
+      "reason": "各経路の作業日数を加算し、ダミー作業を含む先行制約から結合点の最早時刻を求める必要がある。",
+      "sourceHash": "665f9e196828cbbaeeeaf7b2f14e8f39b11628c26fe0f3de3ed1df1d117e9d55"
+    },
+    {
+      "questionId": "r06h-q53",
+      "mode": "paperless",
+      "reason": "リスク管理プロセスの目的を特定・評価・対応などの説明と照合すればよい。",
+      "sourceHash": "f34f0d0ef5db9fc01596cd9c1305934d463c12756327968ea2c80f3da685a2a4"
+    },
+    {
+      "questionId": "r06h-q54",
+      "mode": "desk",
+      "reason": "各案の収入を需要確率で加重し、投資額を差し引いて期待金額を比較する必要がある。",
+      "sourceHash": "570f63d308c43f1fa814e3461f1d8c1ba4eb5b0eb8e388674378045517c94f07"
+    },
+    {
+      "questionId": "r06h-q55",
+      "mode": "desk",
+      "reason": "各課金単価と月間利用量から売上を計算し、年額へ換算して年間費用を差し引く必要がある。",
+      "sourceHash": "04a72bf8e7e4acf98ab8ccbc1137dcf9d0b34c60452f2f7c43f8afeff0480e03"
+    },
+    {
+      "questionId": "r06h-q56",
+      "mode": "paperless",
+      "reason": "サービスレベル管理の活動をサービスの目標と合意の役割に照合すればよい。",
+      "sourceHash": "0fa87feb18040b0489e081cd398879a0a2e070ad314d4dc5309069a6cdff051e"
+    },
+    {
+      "questionId": "r06h-q57",
+      "mode": "paperless",
+      "reason": "提示表のスコープ定義を読み、排出源の管理主体と直接排出かどうかを事例に照合すればよい。",
+      "sourceHash": "7d9ff091287c40529aeb41d8e7a8b0c19584f4b78549d74f35f8a016a8f62701"
+    },
+    {
+      "questionId": "r06h-q58",
+      "mode": "paperless",
+      "reason": "監査調書の目的を報告書や監査計画の役割と区別して照合すればよい。",
+      "sourceHash": "85ea79059926fc8af5a00b6b840f0fd892fe121d58bdf1b0dff1b5bb4510bbde"
+    },
+    {
+      "questionId": "r06h-q59",
+      "mode": "paperless",
+      "reason": "システム監査の対象となる組織機能を監査基準の知識と照合すればよい。",
+      "sourceHash": "2b4083e1e1abdca86b416d834b4f543d01164aac5d5803446862e5e825602147"
+    },
+    {
+      "questionId": "r06h-q60",
+      "mode": "paperless",
+      "reason": "個々の業務処理への統制とIT全般への統制を対策の対象から区別すればよい。",
+      "sourceHash": "5e0825d062931345bc44eda07bf6b75a05e864e34ba96bbd30ccb23de2e995c9"
+    },
+    {
+      "questionId": "r06h-q61",
+      "mode": "paperless",
+      "reason": "EAの参照モデルのうち業務を扱うモデルの内容を照合すればよい。",
+      "sourceHash": "e182a63c1207321bd40e26221accdd049d7af58f8b3e8e8d78e74469a723dfb3"
+    },
+    {
+      "questionId": "r06h-q62",
+      "mode": "paperless",
+      "reason": "デジタルガバナンス・コードの対象と策定目的を説明文と照合すればよい。",
+      "sourceHash": "6c18e01e67c6ecbddaea8290a98d187aad4c5d14dd545604076c43ff7f305a65"
+    },
+    {
+      "questionId": "r06h-q63",
+      "mode": "paperless",
+      "reason": "SOAで機能を独立したサービスとして扱う考え方を照合すればよい。",
+      "sourceHash": "290b3c528747202ca53b97484a91bc9627eeea4aa5e797e9483fc96cb4fb4095"
+    },
+    {
+      "questionId": "r06h-q64",
+      "mode": "desk",
+      "reason": "シナリオごとに年次キャッシュインを累積し、投資額を回収する時点を比較する必要がある。",
+      "sourceHash": "dfe6d991e893cc7b2e279e2a56538ee137240acece2ec2af0d08fbbb02dd5f09"
+    },
+    {
+      "questionId": "r06h-q65",
+      "mode": "paperless",
+      "reason": "電子機器の製造受託というEMSの事業内容を照合すればよい。",
+      "sourceHash": "294d5db42266481194380388b65c5c5e4fe66245eb3d986e96ececcfb3d398c8"
+    },
+    {
+      "questionId": "r06h-q66",
+      "mode": "paperless",
+      "reason": "リスクが顕在化した場合の対処計画というコンティンジェンシープランの意味を照合すればよい。",
+      "sourceHash": "0b99d0458ce9a2c514d6173b28ff5d576eb4634072965c366997f253fb9f288c"
+    },
+    {
+      "questionId": "r06h-q67",
+      "mode": "paperless",
+      "reason": "PPMの各区分と投資資金を生む事業の特徴を照合すればよい。",
+      "sourceHash": "9ff46b9b1936f397b7f79e5ad66b262709c37a9d2e0a9270854e40df9c56d9c5"
+    },
+    {
+      "questionId": "r06h-q68",
+      "mode": "paperless",
+      "reason": "提示された五つの競争要因と分析フレームワークの定義を照合すればよい。",
+      "sourceHash": "57f355f311de820371b8b21eabcb6b4c66164ba1086f67fca87d8d1ce41cde37"
+    },
+    {
+      "questionId": "r06h-q69",
+      "mode": "paperless",
+      "reason": "実現可能性を調査するフィージビリティスタディの目的を照合すればよい。",
+      "sourceHash": "0c058bc060f5401fca4cf3c88522f434e0f4b7ea85a8d3ea126eea832f8234a1"
+    },
+    {
+      "questionId": "r06h-q70",
+      "mode": "paperless",
+      "reason": "センサデータで現実を仮想空間に再現するデジタルツインの特徴を照合すればよい。",
+      "sourceHash": "791b8d89a3e1594210d6186592a922398636d1757740cba003c3dc47b0187d3d"
+    },
+    {
+      "questionId": "r06h-q71",
+      "mode": "paperless",
+      "reason": "個別顧客に合わせた製品を効率的に製造する事業モデルの特徴を事例と照合すればよい。",
+      "sourceHash": "0a0c22f6a101e7fe7ea7823549fd9505a9623e59f60bb7594ce76767a6566cd3"
+    },
+    {
+      "questionId": "r06h-q72",
+      "mode": "paperless",
+      "reason": "端末近傍で処理するエッジコンピューティングの特徴を説明文と照合すればよい。",
+      "sourceHash": "17dad47cf03a8964d2e17c68e9c97ba905c5566d8bf58f96749d3ada0b3f8386"
+    },
+    {
+      "questionId": "r06h-q73",
+      "mode": "paperless",
+      "reason": "一人だけ戦略を変えても利益を増やせないナッシュ均衡の定義を照合すればよい。",
+      "sourceHash": "36614b8402c2cd3f3063a147541be9380e9fe0429b7d048e7298a4fb7e8d78ee"
+    },
+    {
+      "questionId": "r06h-q74",
+      "mode": "paperless",
+      "reason": "因果関係を追って問題構造を明らかにする図の用途を照合すればよい。",
+      "sourceHash": "539cf31f5ca914333ec64a835f26178af52de5ac75f4cf38b5498d618b049d9d"
+    },
+    {
+      "questionId": "r06h-q75",
+      "mode": "desk",
+      "reason": "部品数から生産量の制約式を立て、実現可能な生産量の組合せについて利益最大値を求める必要がある。",
+      "sourceHash": "786582091e81a1252fc7691bd48a4fd648eb75d16830fa9567def2ce82792b5d"
+    },
+    {
+      "questionId": "r06h-q76",
+      "mode": "desk",
+      "reason": "今年の営業利益を計算し、単価と固定費の変更を反映した利益式から必要台数を逆算する必要がある。",
+      "sourceHash": "014a814f46b02e87dbf53fe24c771057d1953f8d47e35400dab0b3d8004f4f12"
+    },
+    {
+      "questionId": "r06h-q77",
+      "mode": "desk",
+      "reason": "変動費率と固定費合計を損益資料から求め、損益分岐点売上高を計算する必要がある。",
+      "sourceHash": "5ed0eca1702e79d6211a5d92628126efeb512d7a78d1a25e4520bbf09c7d9da3"
+    },
+    {
+      "questionId": "r06h-q78",
+      "mode": "paperless",
+      "reason": "特許法が保護する発明の定義を他の知的財産の定義と区別して照合すればよい。",
+      "sourceHash": "ec6c46d5e348460ae6aab6950b0e17fa32691f613bd6e560df6f64faf93f25ad"
+    },
+    {
+      "questionId": "r06h-q79",
+      "mode": "paperless",
+      "reason": "ドメイン名利用などの事例を不正競争行為の法的条件と照合すればよい。",
+      "sourceHash": "786e06626e4027b17262e8cc2470aa11085246f27c845134e4ba8b586f20096a"
+    },
+    {
+      "questionId": "r06h-q80",
+      "mode": "paperless",
+      "reason": "要配慮個人情報の法的定義を各情報の内容と照合すればよい。",
+      "sourceHash": "bfb36c6b96be3c94d244cdf1b897c9c755ba1e1318c6c9b82ac057c53d7385c1"
+    },
+    {
+      "questionId": "r05a-q1",
+      "mode": "desk",
+      "reason": "2桁の2進数の各桁を整数除算で取り出し、交換後の式を展開して導く。",
+      "sourceHash": "a0abdd77969b7f8f9105d8729e0b4279db6cfdce389828b569a6de357f1c7e88"
+    },
+    {
+      "questionId": "r05a-q2",
+      "mode": "paperless",
+      "reason": "主成分分析の目的と変数を集約する説明を比較する。",
+      "sourceHash": "4a07fdf4719253701f80137822a3aceb16fea2cf1eda65664e697fbfd8c42dda"
+    },
+    {
+      "questionId": "r05a-q3",
+      "mode": "desk",
+      "reason": "後置記法の演算順序を追い、与えられた四つの値で減算・乗算・加算する。",
+      "sourceHash": "9b138b08be8a4df2e6c8fe171e240f5cc4e9b1b96a73d37d7791f746feb064db"
+    },
+    {
+      "questionId": "r05a-q4",
+      "mode": "paperless",
+      "reason": "行と列のパリティ異常の交点で誤りを特定できる範囲を判断する。",
+      "sourceHash": "fe649d83750db3b2710a7dd7b3c58504f419fabacd2a8d2b5482c45af4e7133b"
+    },
+    {
+      "questionId": "r05a-q5",
+      "mode": "desk",
+      "reason": "elem・next・prevの配列を参照し、挿入後のnext[6]とprev[6]という新しい2値を生成する。状態更新のためdeskへ変更。",
+      "sourceHash": "a4702b7f80c919f85f15b6d3f75292f561744eb1d98348af73d344d46f344daf"
+    },
+    {
+      "questionId": "r05a-q6",
+      "mode": "paperless",
+      "reason": "提示済みの整列途中の列を読み、走査ごとに末尾へ移る値の特徴から手法を識別する。",
+      "sourceHash": "20ea8c468ee372b248edcb6c644ac8537fc4bc91a090a6551a503c04156eabd3"
+    },
+    {
+      "questionId": "r05a-q7",
+      "mode": "paperless",
+      "reason": "名前と値の組及び順序付きリストというデータ記述仕様を識別する。",
+      "sourceHash": "dbfa1ed2fbd7527f7222adc2430ce5d0d7ad8e62f8b7ae3d097763e2083be8fe"
+    },
+    {
+      "questionId": "r05a-q8",
+      "mode": "paperless",
+      "reason": "目的の異なる複数種類のコアを組み合わせるプロセッサの概念を識別する。",
+      "sourceHash": "f2d561ea5eb984278b233b82fbba6c4c2830533245927337331db2fdaf911664"
+    },
+    {
+      "questionId": "r05a-q9",
+      "mode": "paperless",
+      "reason": "分岐先を予測して先行実行する技法の説明を比較する。",
+      "sourceHash": "56be0735966eb463336c4cae73df1144c390a732b1cdc6809ebb8a57eb63904d"
+    },
+    {
+      "questionId": "r05a-q10",
+      "mode": "paperless",
+      "reason": "フラッシュメモリの書換え回数を分散する技術の目的を確認する。",
+      "sourceHash": "533f665658f338e7eb47f79ce509e3b3f6067c98002a17f2f127aeb0330d63e6"
+    },
+    {
+      "questionId": "r05a-q11",
+      "mode": "paperless",
+      "reason": "表示用フレームバッファと主記憶を共有する方式の特徴を確認する。",
+      "sourceHash": "6ecd2152a9c0aaad98ce650b66e71d865b411c057338b406c9a1c8d1949d42b3"
+    },
+    {
+      "questionId": "r05a-q12",
+      "mode": "paperless",
+      "reason": "SANでのサーバとストレージの接続方式を比較する。",
+      "sourceHash": "8981bb2183176a0467a002dbe05ea2d1129d74a8773a7fd136e90da670765b6a"
+    },
+    {
+      "questionId": "r05a-q13",
+      "mode": "paperless",
+      "reason": "各システムの参照・更新特性から台数を増やす方式の適性を判断する。",
+      "sourceHash": "ccb720280d90e09ada319e1b19684fd28f826931e987854e894d153056fffffd"
+    },
+    {
+      "questionId": "r05a-q14",
+      "mode": "paperless",
+      "reason": "IaCがコードとして定義する対象と目的を比較する。",
+      "sourceHash": "4bfde6f8f20bc30f6dbd2e8cdc1d85b46629e9a82cc8c8246bf3e3e0468c04a7"
+    },
+    {
+      "questionId": "r05a-q15",
+      "mode": "desk",
+      "reason": "MTBF99時間、MTTR10時間と切替え2時間から停止時間を定め、稼働率を計算する。",
+      "sourceHash": "e68b5714135205ebb085043ed6ef2b106fcc78bfb263324bcd8bea7d42523415"
+    },
+    {
+      "questionId": "r05a-q16",
+      "mode": "desk",
+      "reason": "20ミリ秒と60ミリ秒の加重平均が30ミリ秒になる割合を方程式で求める。",
+      "sourceHash": "aaa1acd22b717778c9922d2aceceb4af45e7e6ab6da0818fa4004f9d2652f054"
+    },
+    {
+      "questionId": "r05a-q17",
+      "mode": "desk",
+      "reason": "四組の実行時間と周期で優先タスクの割込みを追い、低優先タスクの完了時刻を比較する。",
+      "sourceHash": "c5be3584e209bf99db93520a135d1687e72ffef7c4abb7af0e39b91e15db6da4"
+    },
+    {
+      "questionId": "r05a-q18",
+      "mode": "paperless",
+      "reason": "異なる命令形式向けの目的プログラムを生成する言語処理の役割を識別する。",
+      "sourceHash": "2a0da00b5d31cdd46e6c1aa0df99dc1fc307b08ba8c51caa225a676204e7876e"
+    },
+    {
+      "questionId": "r05a-q19",
+      "mode": "paperless",
+      "reason": "Linuxカーネルが提供する基本機能と周辺ソフトウェアを区別する。",
+      "sourceHash": "de98d0bda63378c5374b3e0786e9f63e4c63c618660871c06e85e6c71613b064"
+    },
+    {
+      "questionId": "r05a-q20",
+      "mode": "paperless",
+      "reason": "FPGAの再プログラム可能な論理回路という特徴を確認する。",
+      "sourceHash": "d1ae1988ed0e8a1b548fbecab058850659b2e7b38d399c065bf55ce842e98d2c"
+    },
+    {
+      "questionId": "r05a-q21",
+      "mode": "paperless",
+      "reason": "MOSトランジスタの構造と制御原理を他の半導体素子と比較する。",
+      "sourceHash": "4b180a946d8f28fcb0a110669821a1fe2ba328c251d0a50f6ba0f228dc1a2675"
+    },
+    {
+      "questionId": "r05a-q22",
+      "mode": "desk",
+      "reason": "Sを1から0、再び1へ変化させ、相互帰還する二つの出力の状態を順に追う。",
+      "sourceHash": "d18f6683c63f8a35ccaa81fb87b887c2c4fa21278bb25dccfc18bf17f08eb5e7"
+    },
+    {
+      "questionId": "r05a-q23",
+      "mode": "paperless",
+      "reason": "提示済みの多数決の真理値表と各回路のAND・OR結合の意味を照合する。",
+      "sourceHash": "37ddb2696dac7b77c8ae201f8730227250fbd85e76c922873572b03fff3fad34"
+    },
+    {
+      "questionId": "r05a-q24",
+      "mode": "paperless",
+      "reason": "規格で定義されたアイコンの習得性と他の評価観点を区別する。",
+      "sourceHash": "71046d29652a8e4f088b257d2bfbe241538207af942e5a00b93b7d7fdc2bc9ae"
+    },
+    {
+      "questionId": "r05a-q25",
+      "mode": "paperless",
+      "reason": "仮想世界の情報を画像へ変換するレンダリングの役割を確認する。",
+      "sourceHash": "54c7e43bca649691491800cd43b08a5f3ad45f15d360bba55073f2d1c4df496a"
+    },
+    {
+      "questionId": "r05a-q26",
+      "mode": "paperless",
+      "reason": "各検索条件が等値・範囲・前方一致のどれかを読み、索引方式の適性を判断する。",
+      "sourceHash": "5f44e5f0ad34d4b71c48c1a1ef39c8d643486da04cd8c944062e2b95929378dc"
+    },
+    {
+      "questionId": "r05a-q27",
+      "mode": "paperless",
+      "reason": "外部キーと候補キーの参照関係の定義を確認する。",
+      "sourceHash": "c16b6add618f1649bf5ea71b0387cb774d31a17669c8014ac935edabc6552762"
+    },
+    {
+      "questionId": "r05a-q28",
+      "mode": "paperless",
+      "reason": "提示されたSQLの重複排除・集約の有無からビューの更新可能性を判断する。",
+      "sourceHash": "acb5dd593ea86402b0619ed4e5196e401ae6cb496a85b95b6c21ed323b038726"
+    },
+    {
+      "questionId": "r05a-q29",
+      "mode": "desk",
+      "reason": "製品ごとに在庫表の複数行を照合し、NOT EXISTS条件を評価して結果の行数を数える。",
+      "sourceHash": "b0c2c1062c47baf25961aba4850880ea0016177cb2a413887377bfbc966d1438"
+    },
+    {
+      "questionId": "r05a-q30",
+      "mode": "paperless",
+      "reason": "提示済みの時系列図のコミット位置と書込み有無を読み、復旧操作の対象を分類する。",
+      "sourceHash": "730e2434b79ca5d3269b80836e43194be124d40017ce93f6f08df9ff6b807b12"
+    },
+    {
+      "questionId": "r05a-q31",
+      "mode": "desk",
+      "reason": "1000バイト1000件をビットへ換算し、100Mビット毎秒の効率50％で伝送時間を求める。",
+      "sourceHash": "8f08237f3927e5ca9d52b8a5e14f6713970e204dd73b1918469fea50849e0b1e"
+    },
+    {
+      "questionId": "r05a-q32",
+      "mode": "paperless",
+      "reason": "応答方向でNAPTが変換する宛先側のヘッダー項目を判断する。",
+      "sourceHash": "15f93b4250b7e210705ceed71864f38bf8747849cdfa45d1b554835a68c043df"
+    },
+    {
+      "questionId": "r05a-q33",
+      "mode": "paperless",
+      "reason": "pingによる到達性確認に用いるプロトコルを識別する。",
+      "sourceHash": "c7a79059a8b10cdfde4c8266ba38a79bfb85c4b8610b8f6c691dcffbc1947ae9"
+    },
+    {
+      "questionId": "r05a-q34",
+      "mode": "desk",
+      "reason": "IPアドレスとサブネットマスクのビット積を取り、ネットワークアドレスへ換算する。",
+      "sourceHash": "9c52a9574b41e3db53801ee80ed1a686ee81a9b484a03d7e7140f428e91db675"
+    },
+    {
+      "questionId": "r05a-q35",
+      "mode": "paperless",
+      "reason": "マルチキャストとブロードキャスト及びメール配送の用途を比較する。",
+      "sourceHash": "d29d7f44d98ae94819ac73a086b25434332971a725488c8b6529cedf8bc82a05"
+    },
+    {
+      "questionId": "r05a-q36",
+      "mode": "paperless",
+      "reason": "パスワードとハッシュの事前計算表を利用する攻撃の仕組みを識別する。",
+      "sourceHash": "b5f9542e5f86f883e7b7e36bbc31b1df8f9db49d90237f07cd06bce36507a881"
+    },
+    {
+      "questionId": "r05a-q37",
+      "mode": "paperless",
+      "reason": "楕円曲線暗号の鍵長と公開鍵方式の特徴を確認する。",
+      "sourceHash": "290bbbc1ef414b03aef5efedc4e300fe1fe9ca48b3161aced028650148314ab4"
+    },
+    {
+      "questionId": "r05a-q38",
+      "mode": "paperless",
+      "reason": "提示されたログの接続元・送信者・受信者が社内か社外かを読み、第三者中継を判断する。",
+      "sourceHash": "3258b366db1fda5a5021105307c70ef9986fcb157caf3fc07bb0755b38dca31d"
+    },
+    {
+      "questionId": "r05a-q39",
+      "mode": "paperless",
+      "reason": "コーディネーションセンターの機能とサービス対象の定義を比較する。",
+      "sourceHash": "42657f2a24e7a71823b635383868d0b496b9bad250ca11b324490927f812c5d1"
+    },
+    {
+      "questionId": "r05a-q40",
+      "mode": "paperless",
+      "reason": "認可されていない対象への利用と開示を防ぐ特性の定義を確認する。",
+      "sourceHash": "6eb18ced9fb76f31829b83f921a76b88687604c1547666353140a45c8a22748e"
+    },
+    {
+      "questionId": "r05a-q41",
+      "mode": "paperless",
+      "reason": "暗号実装から漏れる電磁波などを利用する攻撃の説明を比較する。",
+      "sourceHash": "6e7e19c3064fe26f80b9d371bc1f74f0b06b99d3a85711600e88b1d6dfe000a8"
+    },
+    {
+      "questionId": "r05a-q42",
+      "mode": "paperless",
+      "reason": "起動時の署名検証で信頼したコードだけを動かす技術を確認する。",
+      "sourceHash": "e42e0cb43343f70304081254bde4a33896f25548020bd56d11cb37729da80f1e"
+    },
+    {
+      "questionId": "r05a-q43",
+      "mode": "paperless",
+      "reason": "ランサムウェアに対する各保存方式の書換え可能性と復元性を比較する。",
+      "sourceHash": "2579c2e4830f4f9222be66b6be62d08de0861021629cecb7bb5fc7a53653df6b"
+    },
+    {
+      "questionId": "r05a-q44",
+      "mode": "paperless",
+      "reason": "DKIMの送信側署名と受信側検証の役割を確認する。",
+      "sourceHash": "dd65bf0e196753d927f12aa767a70482fd1218c72ca76003a86bfbf5f80de3b2"
+    },
+    {
+      "questionId": "r05a-q45",
+      "mode": "paperless",
+      "reason": "DNSSECによる応答の署名検証方式を比較する。",
+      "sourceHash": "aa0a93ae4beaa91859f0442817cfd77c32c3fbd6aae066a6a0b54ffb9eaa0afb"
+    },
+    {
+      "questionId": "r05a-q46",
+      "mode": "paperless",
+      "reason": "大量の異常入力と応答監視で脆弱性を検出するテストの概念を識別する。",
+      "sourceHash": "9fa7590b1be822948f1b0207861c2282d4bc328d4da0171f0c243d2f8e52c60a"
+    },
+    {
+      "questionId": "r05a-q47",
+      "mode": "paperless",
+      "reason": "GUIの部品組合せと一部コード記述という開発手法の特徴を確認する。",
+      "sourceHash": "55214695bcf53b09ed0d4de79359c343c984de8e108e10c1dfd2ad79fc783e05"
+    },
+    {
+      "questionId": "r05a-q48",
+      "mode": "paperless",
+      "reason": "故障がない状況で仕様書の不整合を解消する作業を保守分類に対応させる。",
+      "sourceHash": "b9b09d8cc0537d54a5eca9bf4d908753d15b373281d95e02bf0952e45cc5eaf8"
+    },
+    {
+      "questionId": "r05a-q49",
+      "mode": "paperless",
+      "reason": "アジャイル宣言で重視される四つの価値を比較する。",
+      "sourceHash": "6debda8fb8f277ee2085a62f04bc80db26e6c586ae9dab01aac43d7dcfb97ab9"
+    },
+    {
+      "questionId": "r05a-q50",
+      "mode": "paperless",
+      "reason": "組込み開発で用いるIDEの機能と他の機器・ソフトウェアの役割を区別する。",
+      "sourceHash": "eeecd105b5f222db0d17205500437a12fc3afb97b7c4a52f26b2f3db2034f98e"
+    },
+    {
+      "questionId": "r05a-q51",
+      "mode": "paperless",
+      "reason": "プロジェクト・スコープ記述書で明確にする範囲の項目を確認する。",
+      "sourceHash": "077bf6ac6c7263f60760efe3f5413232498ce5d9522a937e1308863d2e0dbece"
+    },
+    {
+      "questionId": "r05a-q52",
+      "mode": "paperless",
+      "reason": "EV−PVが負という供給済みの条件を、出来高と計画作業量の意味に対応させる。",
+      "sourceHash": "387498363e3ebfb2385b63c84e577e73fa48bcbda8828831ad48772fb7a017fa"
+    },
+    {
+      "questionId": "r05a-q53",
+      "mode": "desk",
+      "reason": "変更前後の作業経路の日数を合算し、並行作業とダミー依存を含む最長経路を比較する。",
+      "sourceHash": "658d2e2d626644fed366d19b2773757c7f49a202a80576f0e4db0a7aac1198fd"
+    },
+    {
+      "questionId": "r05a-q54",
+      "mode": "paperless",
+      "reason": "コンティンジェンシー計画を作成するリスク管理プロセスを確認する。",
+      "sourceHash": "16c33869831951b7c4e805a32a8b9c0a9c4dce305c2e6adef6884a3ed044d503"
+    },
+    {
+      "questionId": "r05a-q55",
+      "mode": "paperless",
+      "reason": "サービスマネジメントの是正処置が対象とする原因と再発防止の意味を比較する。",
+      "sourceHash": "5218de0dd2589623e228efe7f26ba8ddae025f6cc29321a07eddaa309f1bc2b2"
+    },
+    {
+      "questionId": "r05a-q56",
+      "mode": "desk",
+      "reason": "30日の総時間から毎週月曜の計画停止を除き、可用性99％から許容停止時間を計算して切り捨てる。",
+      "sourceHash": "662fb1a98f3e576ee127ab1b88b09d9e6a14fbe5ebbb8392c83da897f528f908"
+    },
+    {
+      "questionId": "r05a-q57",
+      "mode": "paperless",
+      "reason": "フルバックアップと差分バックアップの保存対象及び復旧順序の原則を確認する。",
+      "sourceHash": "7c01154d8e148ad07f4caf2612d55e30e5ee0ed2c32cfcb2987737fc80841931"
+    },
+    {
+      "questionId": "r05a-q58",
+      "mode": "paperless",
+      "reason": "監査調書に記録する内容と保管・共有の目的を確認する。",
+      "sourceHash": "99787a61f9c526ed11ad87bb95882ba23c672c872533dfdd40a896dea0525731"
+    },
+    {
+      "questionId": "r05a-q59",
+      "mode": "paperless",
+      "reason": "伝票入力の漏れと重複を確かめる監査手続の適性を比較する。",
+      "sourceHash": "d32950ee7b7364da36f72d00f0ba6e03df39cc738e4113a26b73f520cbceff31"
+    },
+    {
+      "questionId": "r05a-q60",
+      "mode": "paperless",
+      "reason": "IT全般統制と業務処理統制の区分及び有効性評価の原則を確認する。",
+      "sourceHash": "2e35be096428b58e76753566dc0ff257acbf572e4785738c08ab631a7d30bad0"
+    },
+    {
+      "questionId": "r05a-q61",
+      "mode": "paperless",
+      "reason": "未来のあるべき姿から課題と解決策を考える思考法を識別する。",
+      "sourceHash": "f803bdd75bde9db400629430f020bbe8794e7bff95c0de1cc8ac302faa9e2578"
+    },
+    {
+      "questionId": "r05a-q62",
+      "mode": "paperless",
+      "reason": "顧客ごとのマーケティングを支援する統合ソリューションの管理対象を確認する。",
+      "sourceHash": "bb6d5c68422f449bee70025ea6b8399c293275531d286ac92ff80bac5e8fb444"
+    },
+    {
+      "questionId": "r05a-q63",
+      "mode": "paperless",
+      "reason": "サービスを組み合わせて構成するSOAの概念を比較する。",
+      "sourceHash": "e29795aada8ac56afcfa7fb1380e1d4c7370831fb502fe15e92eb0428db0c9a2"
+    },
+    {
+      "questionId": "r05a-q64",
+      "mode": "paperless",
+      "reason": "投資支出を何年で回収できるかという指標の定義を識別する。",
+      "sourceHash": "2c2b557273075274a90440f33a65db964e98e89b8a0cb3f6cc3715d348e15ffc"
+    },
+    {
+      "questionId": "r05a-q65",
+      "mode": "paperless",
+      "reason": "文書の要求遵守を検査する検証手法の役割を比較する。",
+      "sourceHash": "2f12beaefe671226835bc13170636a60e7e303a833e97004596ff8535e9d175e"
+    },
+    {
+      "questionId": "r05a-q66",
+      "mode": "paperless",
+      "reason": "半導体の設計と製造の分担からファウンドリーサービスの事業形態を識別する。",
+      "sourceHash": "d0bad6fdfede41ac7f9b832274ab22fc2cb5c7e434f8e3de72c2b1cdba8c39c9"
+    },
+    {
+      "questionId": "r05a-q67",
+      "mode": "paperless",
+      "reason": "アンゾフの成長マトリクスの二つの軸を確認する。",
+      "sourceHash": "e2131e6bca39265a8f55a735967bf1af61e23d403743bb48518b7ca0ac2a60bc"
+    },
+    {
+      "questionId": "r05a-q68",
+      "mode": "paperless",
+      "reason": "顧客の同意範囲を段階的に広げるマーケティング手法を識別する。",
+      "sourceHash": "631294ac15425ef9fec61c8f2e65911f26c847ce64476e651608580d37c5ea1e"
+    },
+    {
+      "questionId": "r05a-q69",
+      "mode": "paperless",
+      "reason": "セグメント化の変数を人口統計・地理・心理・行動の定義に対応させる。",
+      "sourceHash": "6afb9579460ac4742c3994ecc7c71246d40974fccd4c5b187e447a17a6e53c04"
+    },
+    {
+      "questionId": "r05a-q70",
+      "mode": "paperless",
+      "reason": "外部の技術やアイデアを組み合わせて価値を創出する活動を比較する。",
+      "sourceHash": "d70093eecd222305c8dbbc35740a15b29b5af6eca809c76ea243d6159cecabec"
+    },
+    {
+      "questionId": "r05a-q71",
+      "mode": "paperless",
+      "reason": "現実世界のデータを仮想世界の分析に利用するCPSの事例を比較する。",
+      "sourceHash": "99eed1c2c2b6105f8cc3650f2212e30a3ec1a29d0b777dbf3d21d647f4d6e6e5"
+    },
+    {
+      "questionId": "r05a-q72",
+      "mode": "paperless",
+      "reason": "ネット経由で単発の仕事を受託する働き方の定義を識別する。",
+      "sourceHash": "4ff5e021103a8467fb0b3af1514fc7ddef35862d9f4ba809322f858879ec2869"
+    },
+    {
+      "questionId": "r05a-q73",
+      "mode": "paperless",
+      "reason": "AIによる画像認識を製造現場の検査に利用する目的を比較する。",
+      "sourceHash": "47145fca7677a854a4300b07533925fd54e3c1cf66361dc39873cf5c14aaa4f8"
+    },
+    {
+      "questionId": "r05a-q74",
+      "mode": "paperless",
+      "reason": "BCMにおけるレジリエンスの対応・回復能力という意味を確認する。",
+      "sourceHash": "97dab066cc8877637340ee1086f090c80e9830b24b8ce633f4c6992d7c326b58"
+    },
+    {
+      "questionId": "r05a-q75",
+      "mode": "paperless",
+      "reason": "リーダーの特性と状況の適合で有効性を説明する理論を比較する。",
+      "sourceHash": "ccd3cf38ba304f10b7dc516d37623c4a26845e6d0543ce2eba9d6514263e8636"
+    },
+    {
+      "questionId": "r05a-q76",
+      "mode": "paperless",
+      "reason": "要因別件数の上位を示す図法の目的を識別する。",
+      "sourceHash": "26b75f055a8696dd223600e2d7d10f9a8776273567f5535f5e4b645e4ef03c8a"
+    },
+    {
+      "questionId": "r05a-q77",
+      "mode": "desk",
+      "reason": "取得原価と償却率から2年間の減価償却を求め、残る帳簿価額と廃棄費用を合算する。",
+      "sourceHash": "ccb80587060381e008c59791d605afe4111122ee6f15e6dff701865d7317096f"
+    },
+    {
+      "questionId": "r05a-q78",
+      "mode": "paperless",
+      "reason": "プログラム著作物の複製・配布・改変に関する適法性の原則を比較する。",
+      "sourceHash": "d58f4252d6c4005198d6cda31c4990fff0dce32393ca3590293940986d9fcfab"
+    },
+    {
+      "questionId": "r05a-q79",
+      "mode": "paperless",
+      "reason": "匿名加工情報を第三者へ提供するときの公表義務を確認する。",
+      "sourceHash": "217bdee2ce72269efe2877a0084e80f25a3989666bc22ed66b1cb0032a6986ab"
+    },
+    {
+      "questionId": "r05a-q80",
+      "mode": "paperless",
+      "reason": "提示された企業と労働者の関係図を読み、請負・出向・派遣の指揮命令と雇用関係を比較する。",
+      "sourceHash": "72db274f73a1662f078f59d8855a901cd0d52af1b0460e5ab9ccb19b7e875c12"
+    },
+    {
+      "questionId": "r05h-q1",
+      "mode": "paperless",
+      "reason": "整数の循環条件とビットマスクの働きを各式と照合する。全整数の計算や状態追跡は不要。",
+      "sourceHash": "711d6d053f555cdfff0b103dc2d76af5b9716b32394f36ec0839ff3bc90e9b13"
+    },
+    {
+      "questionId": "r05h-q2",
+      "mode": "paperless",
+      "reason": "提示された曲線の対称性、中心、幅の表示を正規分布の条件と照合する。グラフの作成はない。",
+      "sourceHash": "7218a16b59132b9332179a3eb4190230d44b5bfd28bd4b452b92a47809f526b0"
+    },
+    {
+      "questionId": "r05h-q3",
+      "mode": "paperless",
+      "reason": "ROC曲線が表す二つの指標の意味を比較する。",
+      "sourceHash": "ae5756c40bed6e3ff5d3e5e64625440fa5eba7d8c9e72bcf87f3498a801b7fc4"
+    },
+    {
+      "questionId": "r05h-q4",
+      "mode": "paperless",
+      "reason": "ドップラー効果を応用したセンサーの測定対象を識別する。",
+      "sourceHash": "a4dcb8275271b5f77d5ffd3bd1fec5984254e6e8ad3f4b443db65e9f3f2a95b4"
+    },
+    {
+      "questionId": "r05h-q5",
+      "mode": "paperless",
+      "reason": "best-fitの検索基準と各データ構造の探索特性を比較する。",
+      "sourceHash": "38ac99178ed835ed567e2fe2a3821be2d35de5ef7799afbc76f75b83d67209a4"
+    },
+    {
+      "questionId": "r05h-q6",
+      "mode": "desk",
+      "reason": "探索成功時と失敗時の比較回数を求め、出現確率で重み付けした平均の式を導出する。",
+      "sourceHash": "cd7e76147a929fd2d3e5bb09446e840b4608f9c3fd380d3e1fcf6ed02cb0e591"
+    },
+    {
+      "questionId": "r05h-q7",
+      "mode": "desk",
+      "reason": "与えられた配列を基準値で二回分割し、各段階の要素順を追う。",
+      "sourceHash": "72f2f66c160537c39f6038d2b3fc24845337161c8d56fe49e08ebbfd53074d87"
+    },
+    {
+      "questionId": "r05h-q8",
+      "mode": "desk",
+      "reason": "クロック数と実行命令数の単位をそろえ、平均CPIを計算する。",
+      "sourceHash": "ac88dea1f2b8a0ed87e844c3a10fea20d6b667cc59f22936874c1942b4a389b7"
+    },
+    {
+      "questionId": "r05h-q9",
+      "mode": "desk",
+      "reason": "最初の命令の遅延と後続命令数を用いて必要サイクル数を計算する。",
+      "sourceHash": "46ecf8d85351de1b29075833fd7ad09a396d40b32fef0ba3120861f15e466aec"
+    },
+    {
+      "questionId": "r05h-q10",
+      "mode": "paperless",
+      "reason": "ライトスルーとライトバックの書込み先と反映時点を比較する。",
+      "sourceHash": "edf397cb2b2325d15fdcca21f37c11ef3e40656f4a14cb3382fd0357bead5700"
+    },
+    {
+      "questionId": "r05h-q11",
+      "mode": "paperless",
+      "reason": "ウェアレベリングの目的と物理書込み位置の選び方を識別する。",
+      "sourceHash": "46dcc50138da821416d1ad26750a24fefc23b7d1503742e3938ba8a994825fa0"
+    },
+    {
+      "questionId": "r05h-q12",
+      "mode": "paperless",
+      "reason": "有機ELディスプレイの表示原理を比較する。",
+      "sourceHash": "735f213dd0e46580f63790c6cd6258369637c071524ebe105fee278455615af1"
+    },
+    {
+      "questionId": "r05h-q13",
+      "mode": "paperless",
+      "reason": "スケールインと他の処理能力調整方法の違いを判断する。",
+      "sourceHash": "222391f0cfee28d3e184736f5a2ddb1114f3772b7f664eb9717e60065382c6f6"
+    },
+    {
+      "questionId": "r05h-q14",
+      "mode": "desk",
+      "reason": "CPUとディスクの並行処理の時間軸を追い、終了時間と各使用率を計算する。",
+      "sourceHash": "51c37092d2dae81629e4457971189fb253a1d2363d2ffd8ed296e253da4a30bf"
+    },
+    {
+      "questionId": "r05h-q15",
+      "mode": "paperless",
+      "reason": "信頼性を高める各技術の目的と故障時の動作を比較する。",
+      "sourceHash": "dd433892b76fd207471b7fc47d32331a2460725db0c6d3d9a76722951f614f10"
+    },
+    {
+      "questionId": "r05h-q16",
+      "mode": "desk",
+      "reason": "二つの直並列構成の稼働率を式にして差を整理し、全条件での大小を判断する。",
+      "sourceHash": "f167d2486c6b147689135a74e4b6dd46032abae08f71953451c1630fa091aca1"
+    },
+    {
+      "questionId": "r05h-q17",
+      "mode": "desk",
+      "reason": "FIFO規則で参照列を順に処理し、ページ枠の更新を追う。",
+      "sourceHash": "6c82dc09b24eeb6f2f5f654a58d85472d126ce76609faa56d9e1c8d073bc5199"
+    },
+    {
+      "questionId": "r05h-q18",
+      "mode": "paperless",
+      "reason": "仮想記憶とページ置換の用語・規則を比較する。",
+      "sourceHash": "f9acb228411d53881c931de236f92f3292890365eb16ffc277bf1ef1acf85661"
+    },
+    {
+      "questionId": "r05h-q19",
+      "mode": "paperless",
+      "reason": "衝突しないハッシュ探索の計算量を提示されたグラフの形と照合する。",
+      "sourceHash": "e54b26f985ed21bdcbf3ddd2b60b4b0619c9a170ad30521d139ce7578c9fb5c4"
+    },
+    {
+      "questionId": "r05h-q20",
+      "mode": "paperless",
+      "reason": "コンテナ型仮想化のOSSの用途を識別する。",
+      "sourceHash": "09eb947062bd54fc0403d8e63380371d2afe847fdffcd030398bef8bc60df62b"
+    },
+    {
+      "questionId": "r05h-q21",
+      "mode": "paperless",
+      "reason": "図の入力を反転するNANDとド・モルガンの法則を対応する式に照らして読む。全真理値表は不要。",
+      "sourceHash": "802c0f7f3db6886dfe3fd3fc8205ae23080e947c3839098690d5be91cfedda0a"
+    },
+    {
+      "questionId": "r05h-q22",
+      "mode": "paperless",
+      "reason": "ダイオードの向きと正負の入力時の働きを、提示された波形と照合する。数値計算はない。",
+      "sourceHash": "0878f765394e9cc4023bf76623f42b3511373582a0244d2541e6c94cd694dbee"
+    },
+    {
+      "questionId": "r05h-q23",
+      "mode": "paperless",
+      "reason": "LiDARと他のセンサーの測定原理を比較する。",
+      "sourceHash": "b955093ad8104ebb9328da1376b870baf1a90ced1ff630f0f66edd31b2f86ddb"
+    },
+    {
+      "questionId": "r05h-q24",
+      "mode": "paperless",
+      "reason": "NFCの通信距離・接続方式・機能を比較する。",
+      "sourceHash": "d1b7cd62dd87591924adb3bbf816c9d1118c67718bf368974415124153c57325"
+    },
+    {
+      "questionId": "r05h-q25",
+      "mode": "paperless",
+      "reason": "コンピュータグラフィックス各手法の働きを比較する。",
+      "sourceHash": "44fe63daae58d4677d4adb5077d9d96273ad8a5e48377debd1ab7b333d460e36"
+    },
+    {
+      "questionId": "r05h-q26",
+      "mode": "paperless",
+      "reason": "提示済みJSONの項目構成の違いを読み、適したデータ格納方式の特性と照合する。",
+      "sourceHash": "1c3021b9cb1ff38a1cac75fa8ab7e866a5f3ee734d5e1ae630c83a0855199b9a"
+    },
+    {
+      "questionId": "r05h-q27",
+      "mode": "paperless",
+      "reason": "ストアドプロシージャの呼出し方式とトリガーなどの機能を比較する。",
+      "sourceHash": "2bef2e7ecdefcfa03b8b63d74f9b8cf4d6788cc52a61b601f4a73a254c0668ba"
+    },
+    {
+      "questionId": "r05h-q28",
+      "mode": "paperless",
+      "reason": "べき等な操作の定義を比較する。操作列の具体的な実行追跡はない。",
+      "sourceHash": "f111c477d2defded0e0fe750fe1af8013d9db592da1934c9f6dd26f26366688b"
+    },
+    {
+      "questionId": "r05h-q29",
+      "mode": "paperless",
+      "reason": "所属の条件を提示済みUMLの関連端の多重度と照合する。",
+      "sourceHash": "c4be145092d217be8eacb263ac0a654a8bd13fd35678165cc9cf5a643f22cf69"
+    },
+    {
+      "questionId": "r05h-q30",
+      "mode": "paperless",
+      "reason": "親行の削除を子行へ連鎖させる参照制約の語句を識別する。",
+      "sourceHash": "55742385bf23bcfd519f1e502bcd623d43a3bfbbdf7bfa4dae140f79ef9d6516"
+    },
+    {
+      "questionId": "r05h-q31",
+      "mode": "paperless",
+      "reason": "通信技術としてのPLCの定義を比較する。",
+      "sourceHash": "06e4ccfd11f325f32baccdf7320c65ea09abacd5aaa2cccc5520a28ce40f4d15"
+    },
+    {
+      "questionId": "r05h-q32",
+      "mode": "desk",
+      "reason": "パケット長をビットに換算し、二つの速度の送信時間差から送信個数を計算する。",
+      "sourceHash": "3715841bd2c69f9892d143fc0d075cd8320499d6ea5982d51ce4351cfd9fd6fd"
+    },
+    {
+      "questionId": "r05h-q33",
+      "mode": "paperless",
+      "reason": "通信のカプセル化と各宛先情報の所属ヘッダーから送出順序を読む。",
+      "sourceHash": "d309da4c75b3aedfe466b7693997896bec724ad645740ab2a4fc07c524fa3649"
+    },
+    {
+      "questionId": "r05h-q34",
+      "mode": "paperless",
+      "reason": "各プロトコルとOSI参照モデルの層の対応を判断する。",
+      "sourceHash": "50579aa9daf4b4d38fa5ffe7af451806379f29cf64d54417fd9072fbc756511c"
+    },
+    {
+      "questionId": "r05h-q35",
+      "mode": "paperless",
+      "reason": "接続を維持した基地局切替えの用語を識別する。",
+      "sourceHash": "5f90ed0d220ae04eb5063b5e3c6676f4db3be34fe387eda105d26c4b91845ec5"
+    },
+    {
+      "questionId": "r05h-q36",
+      "mode": "paperless",
+      "reason": "ボットネットのC&Cサーバの役割を比較する。",
+      "sourceHash": "4e0d5fec23dc1a7bcac75712861aa4fc5d5c798eb7bf95f6043ec3ab7dfb8406"
+    },
+    {
+      "questionId": "r05h-q37",
+      "mode": "paperless",
+      "reason": "セキュアOSのアクセス制御による効果を比較する。",
+      "sourceHash": "fbf6fce8acae2c364e6e7c7294a0cd3a7e30e0f725bebe9de529ced9f52d4ebc"
+    },
+    {
+      "questionId": "r05h-q38",
+      "mode": "paperless",
+      "reason": "RSA署名の生成と検証で誰の鍵を使うかを照合する。暗号計算はない。",
+      "sourceHash": "1acb1176a28fcd2bbc77e0809f6a8185ecec24eeef79065bb48ad626aec360e4"
+    },
+    {
+      "questionId": "r05h-q39",
+      "mode": "paperless",
+      "reason": "ISMAP制度の対象と目的を比較する。",
+      "sourceHash": "d35768b78dfb3bde4644047e06dfb7cc2823b3b75cc1229f31d64004f332e920"
+    },
+    {
+      "questionId": "r05h-q40",
+      "mode": "paperless",
+      "reason": "脆弱性の識別・深刻度・分類に関する用語の用途を比較する。",
+      "sourceHash": "0cc836e7e300e256cdbd4826109a38baf1cc6d91d1f01a6e8036b4a04b001d46"
+    },
+    {
+      "questionId": "r05h-q41",
+      "mode": "paperless",
+      "reason": "TPMの機能と実装形態を比較する。",
+      "sourceHash": "0c6e7a3745ed765d5287c6ec5dff703f057fd7f59f76eaaf9b4752527ed0401b"
+    },
+    {
+      "questionId": "r05h-q42",
+      "mode": "paperless",
+      "reason": "デジタル証拠の検査・分析に該当する活動を判断する。",
+      "sourceHash": "afb471567176f86879146fd9b709daff531d80b07f51ed7f4a1aac1477053553"
+    },
+    {
+      "questionId": "r05h-q43",
+      "mode": "paperless",
+      "reason": "提示された無線LAN対策と効果の対応を比較する。設定変更の追跡はない。",
+      "sourceHash": "d9755ab5ac6f7845162696953c81e565115001630d6bdb3d4d541a33da4cfe25"
+    },
+    {
+      "questionId": "r05h-q44",
+      "mode": "paperless",
+      "reason": "サブミッションポートを導入する認証上の目的を判断する。",
+      "sourceHash": "0686b9decf81a5f30fdc63229a50dded31910573df5f855ea8fbfd278bde1466"
+    },
+    {
+      "questionId": "r05h-q45",
+      "mode": "paperless",
+      "reason": "席が変わる利用者を区別する要件と各セキュリティ技術の機能を照合する。",
+      "sourceHash": "debf67ed5470536c69c131eca2678eeeeb814ccdfbaac83855da3231276e3994"
+    },
+    {
+      "questionId": "r05h-q46",
+      "mode": "paperless",
+      "reason": "モジュール間で受け渡す情報の種類を結合度の概念と照合する。",
+      "sourceHash": "c38a53d5ba2a66507b54f79f90637f5cad5858caddd2b65ebd562413b2e671b9"
+    },
+    {
+      "questionId": "r05h-q47",
+      "mode": "desk",
+      "reason": "八つの条件組合せごとに適用する値引率を加算し、決定表の動作指示部を埋めて比較する。",
+      "sourceHash": "3aa17c102351e1d1a50b51a2279fafd80674bd2b82e88aa982c625fc83a5c2c8"
+    },
+    {
+      "questionId": "r05h-q48",
+      "mode": "paperless",
+      "reason": "スクラムイベントの目的と標準的な実施順序を判断する。実行状態のトレースはない。",
+      "sourceHash": "6423741c46596453b992c0b35529892ff66e447f01cf94ea50fc1c63fb470fdc"
+    },
+    {
+      "questionId": "r05h-q49",
+      "mode": "paperless",
+      "reason": "特許の効力・存続期間・先使用の条件を各事例に当てはめる。",
+      "sourceHash": "64e30f60bec5a950fc3977ceedee66d9eaf16fa8b4dd941d24dfd8872c598826"
+    },
+    {
+      "questionId": "r05h-q50",
+      "mode": "paperless",
+      "reason": "サーバプロビジョニングツールの目的を比較する。",
+      "sourceHash": "b1662d69e6bf8afc238a3b95e7d697b6f85bc9f39c804b1af39dcafc5b4c56e3"
+    },
+    {
+      "questionId": "r05h-q51",
+      "mode": "paperless",
+      "reason": "プロジェクト憲章と他の文書の役割を比較する。",
+      "sourceHash": "bb7d251ca43d8be7ce0746b9b76a8b34fd913b4a2bdd8ca8953772177af6810d"
+    },
+    {
+      "questionId": "r05h-q52",
+      "mode": "paperless",
+      "reason": "クリティカルチェーンを保護するバッファの配置目的を識別する。ネットワーク図の作成はない。",
+      "sourceHash": "ceaf4cf7fd4b9e66809d9cc5a85d5a8b5b867ef4c8df90f7ca61a66592d8b3e0"
+    },
+    {
+      "questionId": "r05h-q53",
+      "mode": "desk",
+      "reason": "完了期間から全体日数を逆算し、開発残量と後続工程の日数を合算する。",
+      "sourceHash": "71b533790abbe821a18efb85cecec3d6cf487c3b39a041ee59abc06253a9854d"
+    },
+    {
+      "questionId": "r05h-q54",
+      "mode": "paperless",
+      "reason": "デルファイ法と他のリスク特定手法の手順を比較する。",
+      "sourceHash": "4401dbd060f95345f9829959ca7df8f7ba1a47cbe57a90253af42f01b3af8a19"
+    },
+    {
+      "questionId": "r05h-q55",
+      "mode": "paperless",
+      "reason": "継続的改善の定義を他のサービス管理の概念と比較する。",
+      "sourceHash": "64eb50452c3340c2472fc3229b5c34459d5965d2727c05e7d358c04d2877fb3b"
+    },
+    {
+      "questionId": "r05h-q56",
+      "mode": "paperless",
+      "reason": "サービスパフォーマンスのレビュー時期に関する規定を判断する。",
+      "sourceHash": "604b4c57b5df52914ca05200c6f8c52026939605fb87a192c7ab3f36690fbff9"
+    },
+    {
+      "questionId": "r05h-q57",
+      "mode": "paperless",
+      "reason": "IaaSとPaaSの責任範囲を各運用作業と照合する。具体的な移行実行の追跡はない。",
+      "sourceHash": "76bceaf2e9c2540cc4b3bda0f21dd29691e4821dd1a9784befd34c683f280ddc"
+    },
+    {
+      "questionId": "r05h-q58",
+      "mode": "paperless",
+      "reason": "監査の予備調査で把握する内容と本調査の役割を比較する。",
+      "sourceHash": "92e1c277aabda891e6207151b94445ae1dbe3eb90011f3ab762f052bada15150"
+    },
+    {
+      "questionId": "r05h-q59",
+      "mode": "paperless",
+      "reason": "各監査技法の手順と実施主体を比較する。",
+      "sourceHash": "35c6f1fb81811b4475c75922d9dfccf52a08e02a793ce6b23eba59317c093c5d"
+    },
+    {
+      "questionId": "r05h-q60",
+      "mode": "paperless",
+      "reason": "内部統制に関係する各主体の役割と責任を比較する。",
+      "sourceHash": "8390bce3479cee2528b010988c7632e14edfd2abf8b60e7a7704d8f3c2cc07f3"
+    },
+    {
+      "questionId": "r05h-q61",
+      "mode": "paperless",
+      "reason": "ROIが示す利益と投資額の関係を識別する。数値計算はない。",
+      "sourceHash": "145b406c5a47a1e7f08d70c0fdc75e9d57e88bf4f748f35c05683f861e685941"
+    },
+    {
+      "questionId": "r05h-q62",
+      "mode": "paperless",
+      "reason": "カスタマーエクスペリエンスの意味を比較する。",
+      "sourceHash": "fcd2ddcbaa1ef8fd82e92e4ea1b58b518224d09b1772d319d973ccfdf9f6b9a6"
+    },
+    {
+      "questionId": "r05h-q63",
+      "mode": "paperless",
+      "reason": "情報銀行のデータ提供の仕組みと主体を比較する。",
+      "sourceHash": "9721938e233e4007543102dc9a8d44902cc0321792f3320d66182cfd459888b2"
+    },
+    {
+      "questionId": "r05h-q64",
+      "mode": "paperless",
+      "reason": "要求と成果物の追跡可能性を示す説明を判断する。",
+      "sourceHash": "40ea692e45dbff41acf9782bebe495e6e46047cc80f770eda311a7b566fcb068"
+    },
+    {
+      "questionId": "r05h-q65",
+      "mode": "paperless",
+      "reason": "RFIと他の調達文書・要求の目的を比較する。",
+      "sourceHash": "44f90d3a06b0df7e25a5f6c78665e5eb42e5efaa4f073d93fbc8151b6ef4c107"
+    },
+    {
+      "questionId": "r05h-q66",
+      "mode": "paperless",
+      "reason": "見積り依頼の前提として必要な文書の役割を判断する。",
+      "sourceHash": "edeaa79c120c74a7919530764c2e7f0b71b07a0ae31949664c54b5d3b360594c"
+    },
+    {
+      "questionId": "r05h-q67",
+      "mode": "desk",
+      "reason": "単価と販売個数から売上を計算し、広告費に対する割合を求める。",
+      "sourceHash": "f09c57cef229689dd7aacc141bd246fcdcadb35ffccd1a1d5e38816faccbb6d2"
+    },
+    {
+      "questionId": "r05h-q68",
+      "mode": "paperless",
+      "reason": "戦略マップの四視点と因果関係という表現目的を比較する。",
+      "sourceHash": "12df2816ad275aa9aea17372cbd543638b734693a2d7fa88fa8deeda92bf0c97"
+    },
+    {
+      "questionId": "r05h-q69",
+      "mode": "paperless",
+      "reason": "新規事業の実行可能性を調査する活動の目的を識別する。",
+      "sourceHash": "7a75047f94cca9e2fab574acdcbe94fa8fd5700cb56edec5a5518a1399bda1cd"
+    },
+    {
+      "questionId": "r05h-q70",
+      "mode": "paperless",
+      "reason": "企業と大学の共同研究における立場・費用・発明者を比較する。",
+      "sourceHash": "2caf2041129c982efa07ce9563296c1b0792b308b73cb7a1ff403f82c15b88b2"
+    },
+    {
+      "questionId": "r05h-q71",
+      "mode": "paperless",
+      "reason": "エネルギーハーベスティングと他の給電・省電力技術の原理を比較する。",
+      "sourceHash": "3c40577b13c571443bd3bea853650b549f7bc9411f68f44ec1a285ae8723bf0d"
+    },
+    {
+      "questionId": "r05h-q72",
+      "mode": "paperless",
+      "reason": "複数の事業者や機能を集約するサービスの特徴を比較する。",
+      "sourceHash": "59a8324d2f87c7c44222d936e6d1c974c8517940791547855ed09a8cece55a39"
+    },
+    {
+      "questionId": "r05h-q73",
+      "mode": "paperless",
+      "reason": "実データと仮想モデルを結び付ける技術の名称を識別する。",
+      "sourceHash": "fe32f47739d75cf87fe77b5c16159e96445b2e2bf294057ef86ddf98c14ddb32"
+    },
+    {
+      "questionId": "r05h-q74",
+      "mode": "paperless",
+      "reason": "事業部制組織の編成単位と責任の持たせ方を比較する。",
+      "sourceHash": "4589a785ee6655bed8505a01248a0930de1d8eeb57a314886cead69946d9835b"
+    },
+    {
+      "questionId": "r05h-q75",
+      "mode": "desk",
+      "reason": "二段階の分岐ごとに期待利益と追加費用を計算し、最適な施策を比較する。",
+      "sourceHash": "0c1eb6f3c6fc507b0b9d08b332595c0c3579e48118a6a88acf1f867f4f8cdf5a"
+    },
+    {
+      "questionId": "r05h-q76",
+      "mode": "paperless",
+      "reason": "各費用の性質を製造原価への算入基準と照合する。金額計算はない。",
+      "sourceHash": "00aefe8c175226b24d958b31d2389debc08d997e4ecdf2a9dce796d9f9664a01"
+    },
+    {
+      "questionId": "r05h-q77",
+      "mode": "desk",
+      "reason": "売上から変動費と固定費を引く式に目標利益を入れ、必要売上高を計算する。",
+      "sourceHash": "8be45fbc7928729fa8b9799811cf56f633c8e5152560bd33a1e03edb3733b238"
+    },
+    {
+      "questionId": "r05h-q78",
+      "mode": "paperless",
+      "reason": "下請法の書面交付などの規定を各委託事例に当てはめる。",
+      "sourceHash": "46bd0f10e2996a45bfbf2f4d2938d0f4e79ac0e4feacb5e67f3448170e1e7ee4"
+    },
+    {
+      "questionId": "r05h-q79",
+      "mode": "paperless",
+      "reason": "派遣元と派遣先の法的な措置・責任を比較する。",
+      "sourceHash": "cd7048511f2245076d929427e4aebeddc4576f70d90105b9fd2fadb6e55fdd0e"
+    },
+    {
+      "questionId": "r05h-q80",
+      "mode": "paperless",
+      "reason": "集団思考の特徴を他の意思決定上の問題と比較する。",
+      "sourceHash": "2314826f3783e8d1b2d2910e614a071ad0193b1ffd45e1fae00d39a45196b62e"
+    },
+    {
+      "questionId": "r04a-q1",
+      "mode": "desk",
+      "reason": "nビットの最大値を二乗した範囲を指数の式で導き、必要ビット数の上限を判断する。",
+      "sourceHash": "ac5fdcc7ce347b6ef51f607cc86aede7250ec95b888fcbe52878c34d18f11eb3"
+    },
+    {
+      "questionId": "r04a-q2",
+      "mode": "desk",
+      "reason": "r07a-q1と同一の4変数カルノー図。1のまとまりから複数積項を導出するためdeskへ揃える。",
+      "sourceHash": "6dc810fbdb2526429512ff7b39f0d919cfa5a860181516d16c7dd18a0d518749"
+    },
+    {
+      "questionId": "r04a-q3",
+      "mode": "desk",
+      "reason": "非復元抽出で残る良品数と全体数を減らしながら三回の確率を掛けて求める。",
+      "sourceHash": "c7512f13b337e13e7cb9c6d617ed58a080b48924851f195c0c2db4017b9bd87f"
+    },
+    {
+      "questionId": "r04a-q4",
+      "mode": "paperless",
+      "reason": "過学習時の訓練データと未知データへの精度の特徴を説明文と照合する。",
+      "sourceHash": "dc70fc939df0e195de70d61285f6d47ea93329988127db11bf931c2614f15097"
+    },
+    {
+      "questionId": "r04a-q5",
+      "mode": "paperless",
+      "reason": "剰余が一致する条件を差・倍数の意味として読む。具体的なキーのハッシュ値計算は不要。",
+      "sourceHash": "2e59868e3d06dc2990b75738ebe9779ccfe76f273ce6f42b08560929051fb2f9"
+    },
+    {
+      "questionId": "r04a-q6",
+      "mode": "paperless",
+      "reason": "流れ図の隣接要素の比較・交換という構造を整列方式の特徴と照合する。具体的な配列の実行追跡は不要。",
+      "sourceHash": "42e3cf317ee900aa0f906a0600cb04f7f166926822306064ed01330656804adf"
+    },
+    {
+      "questionId": "r04a-q7",
+      "mode": "paperless",
+      "reason": "XMLの符号化宣言を省略できる文字コードの規定を照合する。",
+      "sourceHash": "aa83aba5065114a4d1d5cbcb1ebeec22fdb964c3f6717b74463a8f6637b37a5e"
+    },
+    {
+      "questionId": "r04a-q8",
+      "mode": "paperless",
+      "reason": "GPUの演算機能と深層学習で行う処理の特徴を比較する。",
+      "sourceHash": "40601fe8b3c1d09ee6293cc62a6e96295e50bc71adff0a55416a9b3b5c508864"
+    },
+    {
+      "questionId": "r04a-q9",
+      "mode": "paperless",
+      "reason": "ライトスルーの書込み先とタイミングを説明文と照合する。",
+      "sourceHash": "0de3c16be62e9b4cb7b3c3472578f3d5e5b70f718a4161c7679066de5483a675"
+    },
+    {
+      "questionId": "r04a-q10",
+      "mode": "desk",
+      "reason": "L1を外れた割合とL2のヒット率を掛け、L1のヒット率と合わせて全体の率を算出する。",
+      "sourceHash": "5d431c28bfa695666f76470a5bc2374be4e02c42664f1b9621a722036cc0be1a"
+    },
+    {
+      "questionId": "r04a-q11",
+      "mode": "paperless",
+      "reason": "電気泳動型の表示原理を各装置の説明と照合する。",
+      "sourceHash": "4c2bb5c98099d8073ae12a400f9d388604ae4b3ea2feab2a15fdff9aea5c756a"
+    },
+    {
+      "questionId": "r04a-q12",
+      "mode": "paperless",
+      "reason": "コンテナ型仮想化でのホストOSとゲストOSの扱いを説明文で比較する。",
+      "sourceHash": "324a149665dfd17889c1662109e18ba81bb42953cb6070782cc4a0be937307ca"
+    },
+    {
+      "questionId": "r04a-q13",
+      "mode": "paperless",
+      "reason": "信頼性設計の各用語が目的とする動作を定義と照合する。",
+      "sourceHash": "e1cbd2355434639aeb9953993a82a91a8a2b5bb74cdab7342aa7823f75b408f9"
+    },
+    {
+      "questionId": "r04a-q14",
+      "mode": "desk",
+      "reason": "MTBFとMTTRをともに1.5倍にした稼働率の式を作り、元の稼働率との比を求める。",
+      "sourceHash": "dc50e3a0e47b592fd8e5f9d0dcdfc54456b5b85010ba051ead5ff6a51d1801ca"
+    },
+    {
+      "questionId": "r04a-q15",
+      "mode": "desk",
+      "reason": "命令数からサーバ処理件数を求め、バイトをビットへ換算した回線処理件数と比較する。",
+      "sourceHash": "6ddf7d863be5d4f186c2044aa09a912cf69f19330f30bd6c36ebd5769a52e994"
+    },
+    {
+      "questionId": "r04a-q16",
+      "mode": "paperless",
+      "reason": "資源獲得順序と循環待ちの関係からデッドロックを防ぐ方針を読む。",
+      "sourceHash": "b125a5907b4ad5435ea729e47e07ff2e5c6d849db20fef69603c9a6a4f55ab2e"
+    },
+    {
+      "questionId": "r04a-q17",
+      "mode": "paperless",
+      "reason": "プログラムが半ページ以下という条件を内部断片化と照合し、ページサイズ変更の効果を判断する。",
+      "sourceHash": "ebf3678fa503b614dc95ed2e3a4af4f5afe89befb99224e7fd5ce6579cfd8360"
+    },
+    {
+      "questionId": "r04a-q18",
+      "mode": "paperless",
+      "reason": "割込み禁止を考慮しない条件での割込み処理とタスクの優先関係を読む。",
+      "sourceHash": "f70bb2239f8e1d27505f8e682ee5a7cf5999a8fd9002711a7420b675c10e9535"
+    },
+    {
+      "questionId": "r04a-q19",
+      "mode": "desk",
+      "reason": "九つの印刷ジョブを三台の空き時刻に応じて順番に割り当て、Cの作業時間を追跡して合計する。",
+      "sourceHash": "701abcf6c3e8067b3fa439cc8cb554467fbf57dbb37c2a2fe0c27a730019631d"
+    },
+    {
+      "questionId": "r04a-q20",
+      "mode": "paperless",
+      "reason": "アクチュエーターの入力と出力の役割を説明文と照合する。",
+      "sourceHash": "a6d01afb0fad51fbd41a91fa192b82e8990850a326ac0b5369cedb0479e2edc9"
+    },
+    {
+      "questionId": "r04a-q21",
+      "mode": "paperless",
+      "reason": "整流作用をもつ電子部品を性質から判断する。",
+      "sourceHash": "02c408cd0ce6e1cb6336cae774ae54570f1833fbfc7b4f366d8cd550d095496f"
+    },
+    {
+      "questionId": "r04a-q22",
+      "mode": "paperless",
+      "reason": "フラッシュメモリの保持・消去・書込みの特徴を説明文で比較する。",
+      "sourceHash": "6b07c95351ed76867e71726fbf2991f8e2552707b02d6722aa11ad9112e857d8"
+    },
+    {
+      "questionId": "r04a-q23",
+      "mode": "desk",
+      "reason": "四つの多段論理回路で入力の組合せに対する各ゲートの出力を追い、同値条件を満たすか確認する。",
+      "sourceHash": "b880c106eba249b1530cf5f655240a886877b867a8a7b0150d2dbc8ed5e2b167"
+    },
+    {
+      "questionId": "r04a-q24",
+      "mode": "desk",
+      "reason": "三年間の顧客増加を累乗で計算し、26種類の文字の桁数ごとの組合せ数と比較する。",
+      "sourceHash": "c506377cad0d9bbc2442db0d454a2a2fc248ae364984493f0bdf8b4c0b1aca58"
+    },
+    {
+      "questionId": "r04a-q25",
+      "mode": "paperless",
+      "reason": "動画圧縮規格の役割を配信制御などの説明と比較する。",
+      "sourceHash": "88f4a3ed6514f2aeb401ba4b03359d53cecc0216dec50585e6a3a2013df0b5c3"
+    },
+    {
+      "questionId": "r04a-q26",
+      "mode": "paperless",
+      "reason": "二つの命名規約が保証する範囲と各不整合事例を照合する。",
+      "sourceHash": "194d63a6041d1a330faa2f87189091387eb946ca95d19945f36905a668669656"
+    },
+    {
+      "questionId": "r04a-q27",
+      "mode": "paperless",
+      "reason": "差集合の定義に沿って二表の共通行と残る行を提示された結果表と照合する。更新や複数段の演算追跡は不要。",
+      "sourceHash": "10c0218f8fb60c99fe7d54467c633d498ba04e6ff73704778234ace5843f4cc9"
+    },
+    {
+      "questionId": "r04a-q28",
+      "mode": "desk",
+      "reason": "各行の販売単価と仕入単価の差を求め、平均より大きい行を抽出し、重複する仕入先を除いて数える。",
+      "sourceHash": "c27cc33e08e12acbcf0dfb323c4dd73fa012883172afbc0fdd531fc1c7f43676"
+    },
+    {
+      "questionId": "r04a-q29",
+      "mode": "paperless",
+      "reason": "作図済みの時系列でチェックポイントとコミットの前後関係を読み、回復対象の定義を当てはめる。",
+      "sourceHash": "3aa08d3a1ba3fcac7910ccee8bd5d6e66310fb8e94d062ed6d11c81beac4d1fb"
+    },
+    {
+      "questionId": "r04a-q30",
+      "mode": "paperless",
+      "reason": "ACIDの四特性に含まれる用語を定義から判断する。",
+      "sourceHash": "cfadeb6e68179920c66c457b5f6432e2567cf771886eea8b57a2047db84d994c"
+    },
+    {
+      "questionId": "r04a-q31",
+      "mode": "paperless",
+      "reason": "DHCPによる初期設定とリースの性質を説明文で比較する。",
+      "sourceHash": "e3e7e822edf9d543356aaa4acdc1a665c1df261840b2805520e953fe0dbf2fa5"
+    },
+    {
+      "questionId": "r04a-q32",
+      "mode": "paperless",
+      "reason": "データ転送用と制御用の接続を分けるプロトコルの特徴を照合する。",
+      "sourceHash": "23c095ca9ebaeb5a87fd2780cc7747f99662951be26b27276250214e490011d1"
+    },
+    {
+      "questionId": "r04a-q33",
+      "mode": "desk",
+      "reason": "プレフィックス長からホスト部のビット数・アドレス範囲・使用可能個数を導いて比較する。",
+      "sourceHash": "99a98fdda7e858d8857ae8235cc29cd30a7fb0026a647202a67a5ea79e80081c"
+    },
+    {
+      "questionId": "r04a-q34",
+      "mode": "paperless",
+      "reason": "コネクションレスで確認応答や順序制御をもたないプロトコルを特徴から判断する。",
+      "sourceHash": "0e8d0a01f7d1ab522969546cb253980e1101778b7c45f47f839c8072a89b88de"
+    },
+    {
+      "questionId": "r04a-q35",
+      "mode": "paperless",
+      "reason": "提示されたURLの構文に沿ってポート番号を指定する箇所を読む。",
+      "sourceHash": "1fdd10d06a5727360b2321159dc40fb320375651519447917c82604f7d02730b"
+    },
+    {
+      "questionId": "r04a-q36",
+      "mode": "paperless",
+      "reason": "オープンリゾルバと送信元偽装を利用する攻撃手順を説明文で比較する。",
+      "sourceHash": "76aa78b410366ba398ff4174d877dcbd2e1fe64d32da88e078ed024d5d1171d7"
+    },
+    {
+      "questionId": "r04a-q37",
+      "mode": "paperless",
+      "reason": "サイドチャネル攻撃が利用する付随情報を攻撃例と照合する。",
+      "sourceHash": "9899feb6d87852501fc3e13822c5bbb6a8c9f15f3f336bf33eabd03d948066b1"
+    },
+    {
+      "questionId": "r04a-q38",
+      "mode": "paperless",
+      "reason": "証明書の失効状態を照会するプロトコルの用途を照合する。",
+      "sourceHash": "fbc07343b547e1041e03a6249967addb4f2d738e75d869a1a0000220d7b1e1e4"
+    },
+    {
+      "questionId": "r04a-q39",
+      "mode": "paperless",
+      "reason": "インシデント対応体制の構築を支援する資料の目的を名称と照合する。",
+      "sourceHash": "f8bf58387c4eba9436721797211c8b51f7e2cd22d86f0d5a1de8473a8cb95447"
+    },
+    {
+      "questionId": "r04a-q40",
+      "mode": "paperless",
+      "reason": "JVNの情報提供目的を各説明文と照合する。",
+      "sourceHash": "d2a4076b2240f4205168888b991dc87fe1c119b978f77ccb51613134a186bf5c"
+    },
+    {
+      "questionId": "r04a-q41",
+      "mode": "paperless",
+      "reason": "リスクアセスメントを構成するプロセスを用語の定義から判断する。",
+      "sourceHash": "b081c8daf037a38fc117f8051ab4c6a01bd5830eb2f5044149ca893319dfc56d"
+    },
+    {
+      "questionId": "r04a-q42",
+      "mode": "paperless",
+      "reason": "WAFの検査対象と各攻撃が利用する通信を照合する。",
+      "sourceHash": "c0041482a37c7f9a903e0db2173aaa54e5def1089b3892eb3180db94b8a76ee3"
+    },
+    {
+      "questionId": "r04a-q43",
+      "mode": "paperless",
+      "reason": "家庭用ルーターの各機能が持つ防御効果を説明文で比較する。",
+      "sourceHash": "f836546b02b1e8dd5fb040ecc9dabe9a71e0d714cb673fd6223c50c2777eb1e5"
+    },
+    {
+      "questionId": "r04a-q44",
+      "mode": "paperless",
+      "reason": "SPFで照合するドメイン情報と送信サーバ情報の仕組みを読む。",
+      "sourceHash": "b64b217a35fe924cd3cdc5ea58d595c128267fa007eeaa780393054e4103ffc9"
+    },
+    {
+      "questionId": "r04a-q45",
+      "mode": "paperless",
+      "reason": "ファジングの入力と異常検知の手順を説明文と照合する。",
+      "sourceHash": "b46bf2cabfee01614010c43f781ad808cacb0b0cdd31ba8bdb893d7e00c2f1fa"
+    },
+    {
+      "questionId": "r04a-q46",
+      "mode": "paperless",
+      "reason": "作成者を含め机上で振る舞いを確認するレビュー手法の名称を照合する。",
+      "sourceHash": "e5a5bdd44cf0027714e976c4a146e7f26393b535630461bb0f11610fb459f713"
+    },
+    {
+      "questionId": "r04a-q47",
+      "mode": "paperless",
+      "reason": "FTAで障害原因を表す分析の構造を説明文と照合する。",
+      "sourceHash": "c3233f38f511b35ad10162d19676e5eac7afa5aa33bc81b79b4deea56ad78976"
+    },
+    {
+      "questionId": "r04a-q48",
+      "mode": "desk",
+      "reason": "二つのテスト入力について流れ図の経路を追い、通った命令と分岐を数えて二種の網羅率を求める。",
+      "sourceHash": "d21685d42fa9fc12298c4e64b7c17e355d56b853ade92e6099ed6b9e78cad170"
+    },
+    {
+      "questionId": "r04a-q49",
+      "mode": "paperless",
+      "reason": "テスト駆動開発でテストと実装を行う順序を特徴から判断する。",
+      "sourceHash": "2af66530fb5307e8a2ec7e90b87f7d2e4c10eb97c8347a0ab9673346ddacaa9b"
+    },
+    {
+      "questionId": "r04a-q50",
+      "mode": "paperless",
+      "reason": "提示された振返り事例をKPTの継続・問題・試行の意味と照合する。",
+      "sourceHash": "d8fb7c9cb5d825629960d8f3f949fd97ff4e505fa5e0c9f53c8a5fed45c52af6"
+    },
+    {
+      "questionId": "r04a-q51",
+      "mode": "paperless",
+      "reason": "各変更例が作業範囲・費用・日程・人員のどれに関わるかを読む。",
+      "sourceHash": "964f23475307b0e848c3da8d6d352bd0060c169dba4b8dac961935a0f3f48ebf"
+    },
+    {
+      "questionId": "r04a-q52",
+      "mode": "desk",
+      "reason": "リードとラグを開始・終了時刻へ反映し、三作業の完了日を計算して全体の所要日数を求める。",
+      "sourceHash": "54c56fc830542a6156fdb3705428356147e0caae8bffcce1bfd46a73bb2123c9"
+    },
+    {
+      "questionId": "r04a-q53",
+      "mode": "desk",
+      "reason": "初級技術者の生産性を換算し、工程ごとの人数で工数を割った期間を追加前後で合計して比較する。",
+      "sourceHash": "e2d431e0426fa498d2dbdb3d2c165d3ba6b0e42e83fed576a6e9b63c3ac769b3"
+    },
+    {
+      "questionId": "r04a-q54",
+      "mode": "desk",
+      "reason": "四製品の評価点に項目の重みを掛け、各総合評価点を計算して比較する。",
+      "sourceHash": "f1c259e0a15602b570cb4ab14ec3360c49a62819ecbd38fabbc799ce1b77fa43"
+    },
+    {
+      "questionId": "r04a-q55",
+      "mode": "paperless",
+      "reason": "問題管理の目的を他のサービス管理活動の説明と比較する。",
+      "sourceHash": "a554ad47dedfd94cebf34ec255ebcc705829c6838874b8e8e53e84e18722688f"
+    },
+    {
+      "questionId": "r04a-q56",
+      "mode": "desk",
+      "reason": "一週間の必要シフト数と一人の最大勤務回数を算出し、満たせる最少人数を求める。",
+      "sourceHash": "38973c245bcdf2852e258564177cb9279003e81181ca28024535b966d9e26dc6"
+    },
+    {
+      "questionId": "r04a-q57",
+      "mode": "paperless",
+      "reason": "入出力データの管理方針を権限と証跡の観点から比較する。",
+      "sourceHash": "4f943935abf7335abf8af826b8f7e9db07a0e899e977f13c61fe94c34c8fea08"
+    },
+    {
+      "questionId": "r04a-q58",
+      "mode": "paperless",
+      "reason": "各監査結果の行為や順序をISMSの要求と照合する。",
+      "sourceHash": "63484e529010247f86b5400303d482784049f993119fc81233789500309ed9f1"
+    },
+    {
+      "questionId": "r04a-q59",
+      "mode": "paperless",
+      "reason": "監査手続の目的を計画や報告などの活動の説明と比較する。",
+      "sourceHash": "469e000238da79aa3e4785dfbf0a71c599d3cebd8d970c9493fa7ce970a78ab5"
+    },
+    {
+      "questionId": "r04a-q60",
+      "mode": "paperless",
+      "reason": "監査人の行為規範と管理状態の判断基準の役割を区別する。",
+      "sourceHash": "1ab1ea0e09d70635b2f9b8fb4639b54a94663e83dcd6a114bacd7d2569f86e61"
+    },
+    {
+      "questionId": "r04a-q61",
+      "mode": "paperless",
+      "reason": "BCPが定める中断時の手順と目的を説明文から判断する。",
+      "sourceHash": "4356390163bce868f11be1617365152c7570ab17564307c25d7d123eb2649faa"
+    },
+    {
+      "questionId": "r04a-q62",
+      "mode": "paperless",
+      "reason": "DXの基盤となるITシステムへの要求を説明文で比較する。",
+      "sourceHash": "ed0cca87c8f8b613f486960f6e19b858a50b3b12a3acdd7fcb5bcaae44139d97"
+    },
+    {
+      "questionId": "r04a-q63",
+      "mode": "paperless",
+      "reason": "EAで企業を分析する体系と全体最適の目的を説明文で照合する。",
+      "sourceHash": "604a8157f8dc83c30df9faef12d746ddc074860b78333b48fa3e61293587d409"
+    },
+    {
+      "questionId": "r04a-q64",
+      "mode": "desk",
+      "reason": "三年間の回収額を割引率で現在価値へ換算し、初期投資を引いて各案と投資しない案を比較する。",
+      "sourceHash": "a9a104fbd3e2e31dd1dcce30b53efb39491a8ed0e617d8e5e2713c11ec06a9f0"
+    },
+    {
+      "questionId": "r04a-q65",
+      "mode": "paperless",
+      "reason": "リスク発生時に備える計画の意味を外注製造の事例と照合する。",
+      "sourceHash": "c5e26530dac2b8aba793f9dde069c1319fd95f51418b3c4c22c6e036a7eb8eec"
+    },
+    {
+      "questionId": "r04a-q66",
+      "mode": "paperless",
+      "reason": "請負契約の完成責任と各開発フェーズの性質を提示済み工程範囲と照合する。",
+      "sourceHash": "7359933aba5905a00640cc36d85053b6ea6ddd7697d6d096d15415f0fbfd040a"
+    },
+    {
+      "questionId": "r04a-q67",
+      "mode": "paperless",
+      "reason": "買収対象企業を詳しく調査する行為の名称を照合する。",
+      "sourceHash": "74a39e5f50a4c8bf3f5cfdeecfe24c480ae0b6dbf18e9a9e0f4512167bd5985f"
+    },
+    {
+      "questionId": "r04a-q68",
+      "mode": "paperless",
+      "reason": "目標投資収益率を価格設定へ用いる手法の説明を読む。価格の計算は不要。",
+      "sourceHash": "445322c0937ce698603a4d99efaf1a59576d17c9a837e76b4c68535503721ddc"
+    },
+    {
+      "questionId": "r04a-q69",
+      "mode": "paperless",
+      "reason": "商品の複数属性の組合せを評価する分析手法の目的を照合する。",
+      "sourceHash": "45704af17911c4af0386a14a6e5f47b169b2faa49e20c9860569cbfd2a189609"
+    },
+    {
+      "questionId": "r04a-q70",
+      "mode": "paperless",
+      "reason": "APIを介した企業間の連携という特徴を事例と照合する。",
+      "sourceHash": "0db4d1237370e902b97a1aecb9784cfe1c3667303cd5be48c716544ba9fe1d79"
+    },
+    {
+      "questionId": "r04a-q71",
+      "mode": "paperless",
+      "reason": "ファブレスの設備保有と製造委託の特徴を説明文で比較する。",
+      "sourceHash": "de086cf7805f44bed09dea05c1d16a087783272547d19fe2125abcf52c7d9f56"
+    },
+    {
+      "questionId": "r04a-q72",
+      "mode": "desk",
+      "reason": "構成部品の必要個数を段階ごとに展開し、各階層の在庫を引いて正味所要量を求める。",
+      "sourceHash": "89661ca6bb1d6f7b0aaeb9e5143aa4c77646cf4eec94eb6fa9ccd04abdbf19ea"
+    },
+    {
+      "questionId": "r04a-q73",
+      "mode": "paperless",
+      "reason": "CPSで現実世界とサイバー空間をつなぐデータの循環を説明文で判断する。",
+      "sourceHash": "8a61b46d4dd0a02e9e19a37475299f1e6a459bbce111271022bd3218ec0d90f0"
+    },
+    {
+      "questionId": "r04a-q74",
+      "mode": "paperless",
+      "reason": "SL理論の分類基準とリーダーシップの説明を照合する。",
+      "sourceHash": "98cf7481ec9c4f6ca66803ff546909fc2408c39d26eb3f9251796b2f4841dd4d"
+    },
+    {
+      "questionId": "r04a-q75",
+      "mode": "paperless",
+      "reason": "専門家の回答を繰り返し集約する予測手法の説明を照合する。",
+      "sourceHash": "ec97fce28575db6d50c6d269677a9a5d6412f5acad893ca67047c3a33c57a5c1"
+    },
+    {
+      "questionId": "r04a-q76",
+      "mode": "paperless",
+      "reason": "類似する事実やアイデアをまとめる技法の名称を照合する。実際のカード分類は不要。",
+      "sourceHash": "9f16eda1ed282a321adeb0fa27e7cc4cae44e0f35160e64ac17215a5df135a3f"
+    },
+    {
+      "questionId": "r04a-q77",
+      "mode": "desk",
+      "reason": "二製品の時間当たり限界利益を計算し、制約時間での生産数量から固定費を引いて最大営業利益を求める。",
+      "sourceHash": "f0253f2ad7a6895683ab9ea459cf4e5a45e2062e91580e82492536636e0702d8"
+    },
+    {
+      "questionId": "r04a-q78",
+      "mode": "paperless",
+      "reason": "委託関係と実際の作成者を読み、特約のない場合の法人著作の規定を適用する。",
+      "sourceHash": "ba2a4167d0dcc3016ba71a0b3ed7faa003fd5377bfc0d4ab3cd62bdaaa612edd"
+    },
+    {
+      "questionId": "r04a-q79",
+      "mode": "paperless",
+      "reason": "請負契約の指揮命令権と雇用関係を作業場所の条件と照合する。",
+      "sourceHash": "f5be55c4cf12bffbb8579882657b5999ff51bc169ff628f2b48a08ee228c1ca5"
+    },
+    {
+      "questionId": "r04a-q80",
+      "mode": "paperless",
+      "reason": "製造物責任法の対象となる物の性質を各ソフトウェア・機器の例と照合する。",
+      "sourceHash": "14bbeac2e77f53b8fe15f8acb778ee0b317ac3fc2bd4537f8c4d89ce0ed86185"
+    },
+    {
+      "questionId": "r04h-q1",
+      "mode": "desk",
+      "reason": "演算順に指数をそろえて二進仮数を加減し、七ビットの範囲から外れる桁が生じるか検討する必要がある。",
+      "sourceHash": "767502cc7b4a262921bce6652a99b727cf7dc2a328fe41828ce23cf1c8df205f"
+    },
+    {
+      "questionId": "r04h-q2",
+      "mode": "paperless",
+      "reason": "補集合・差集合の記号の意味を読み、集合に属する条件の対応を照合すればよい。",
+      "sourceHash": "225c25aa03f269109d0abf1adbc76c3f44ef2b5777b6587a43740c79d87e53e0"
+    },
+    {
+      "questionId": "r04h-q3",
+      "mode": "desk",
+      "reason": "利用率ごとの平均待ち時間を待ち行列式へ代入し、増加倍率を計算する必要がある。",
+      "sourceHash": "9a916e827640016865bcc936dc68819a0ad356d625af71db95f8531d1eb1dc3e"
+    },
+    {
+      "questionId": "r04h-q4",
+      "mode": "desk",
+      "reason": "三つの排他的論理和の検査結果を求め、誤りビットを特定して訂正する必要がある。",
+      "sourceHash": "e6737ce0ec6d22ebcbfc528c0b923d3bc26bfd207504d2eaafe958cabde58d3c"
+    },
+    {
+      "questionId": "r04h-q5",
+      "mode": "paperless",
+      "reason": "配列とポインタによるリストの領域確保やアクセスの特徴を照合すればよい。",
+      "sourceHash": "a901c5edb081267a0413750b5b9bbf204fb64fde3e518b57d83c11f563a5a68a"
+    },
+    {
+      "questionId": "r04h-q6",
+      "mode": "paperless",
+      "reason": "再入可能プログラムの性質を他のプログラム特性と区別して照合すればよい。",
+      "sourceHash": "08e930e0222d29765a2c82a1cf67b320df1437282704981f7eb7f125a5fbf103"
+    },
+    {
+      "questionId": "r04h-q7",
+      "mode": "paperless",
+      "reason": "字下げでブロックを表すという言語の文法的特徴を照合すればよい。",
+      "sourceHash": "dc91d41f77fa264a7b6d8843c2cbcbf18bb9add5482fd3ac02b9329c29b93a95"
+    },
+    {
+      "questionId": "r04h-q8",
+      "mode": "paperless",
+      "reason": "コンパイラが並列動作を複合命令へまとめる高速化技法の特徴を照合すればよい。",
+      "sourceHash": "c541d086c1edabf9c2c766b49ab3477b792c62675df1b37f2bf5686335e57db7"
+    },
+    {
+      "questionId": "r04h-q9",
+      "mode": "desk",
+      "reason": "キャッシュと主記憶のアクセス時間比をヒット率で加重し、実効時間の比を計算する必要がある。",
+      "sourceHash": "d3e231d930ce7cc1be785fd62fed3a25badaf5fd70e7ae0d3289929ef60f355e"
+    },
+    {
+      "questionId": "r04h-q10",
+      "mode": "paperless",
+      "reason": "フルアソシアティブ方式におけるキャッシュの割当制約を説明文と照合すればよい。",
+      "sourceHash": "21ce166e8bf643c7f8fc2e7ff0314b61b81649313c5fbe98109693ed768c8fbd"
+    },
+    {
+      "questionId": "r04h-q11",
+      "mode": "desk",
+      "reason": "予備ディスクとパリティ分を除いた実効台数に一台の容量を掛ける必要がある。",
+      "sourceHash": "d83341795c1116260fea3d18bc72b4afef5b8060f2bedfc1ac505ed0e53e041d"
+    },
+    {
+      "questionId": "r04h-q12",
+      "mode": "paperless",
+      "reason": "並列化できない部分が速度向上の上限を決めるアムダールの法則の意味を照合すればよい。",
+      "sourceHash": "251a97e263fe02044ff23aa2d9633056d7da74bc842c5b58c7c8024304f10a33"
+    },
+    {
+      "questionId": "r04h-q13",
+      "mode": "paperless",
+      "reason": "ホットスタンバイの障害検知と自動切替えの仕組みを事例と照合すればよい。",
+      "sourceHash": "026c6ea17a7ba70dde54f561288246e12276d88b614cac8c5f4ea13c79cb5a71"
+    },
+    {
+      "questionId": "r04h-q14",
+      "mode": "paperless",
+      "reason": "修理時間の短縮と故障間隔の延長を各機能の目的から区別すればよい。",
+      "sourceHash": "1ea8a1bc8ca7d41ca81ba11799488644a12b06075bfca85439a47cf4baba6cc0"
+    },
+    {
+      "questionId": "r04h-q15",
+      "mode": "desk",
+      "reason": "片方だけが稼働する二つの排反事象の確率を独立性から計算し、加算する必要がある。",
+      "sourceHash": "d5234ca8cc1ec95de7408b144d761b0d6377becd00e2e7ccf4877057490d60b4"
+    },
+    {
+      "questionId": "r04h-q16",
+      "mode": "desk",
+      "reason": "ジョブの発生・実行待ち・終了を時系列で追い、一時ファイルの生成と削除による最大使用量を計算する必要がある。",
+      "sourceHash": "43b746c2b1be2792e93ae3341660af1897297bd3c11f1edbb4046d4def47b893"
+    },
+    {
+      "questionId": "r04h-q17",
+      "mode": "paperless",
+      "reason": "共有バスへのアクセスを排他制御するOS機能の役割を照合すればよい。",
+      "sourceHash": "af9685c9867a7934122edbc1e42a88c04086f0071a29b28645d43c511af60678"
+    },
+    {
+      "questionId": "r04h-q18",
+      "mode": "paperless",
+      "reason": "空き領域が断片化したときのメモリ確保への影響を説明文と照合すればよい。",
+      "sourceHash": "3e5ee74b7b9a59b4de5aaf326db42f4f34e153ff7fb6e90ecd968fef74f47ccc"
+    },
+    {
+      "questionId": "r04h-q19",
+      "mode": "desk",
+      "reason": "要求の到着と終了を多重度ごとに時系列で追い、全処理の終了時刻の差を計算する必要がある。",
+      "sourceHash": "738893bd5c6c23bb4ef0a029562e584151cbda1229770b578fa57d53d37dbb15"
+    },
+    {
+      "questionId": "r04h-q20",
+      "mode": "paperless",
+      "reason": "FPGAの論理回路を再構成できる特徴を各集積回路の説明と照合すればよい。",
+      "sourceHash": "fe67016e201f27dad5bb18fb9673e82c6f23e61be17c4badde99be3e7c9e2cdd"
+    },
+    {
+      "questionId": "r04h-q21",
+      "mode": "desk",
+      "reason": "直線上の画素座標を求め、行幅と一画素のバイト数を使って先頭アドレスを計算する必要がある。",
+      "sourceHash": "ab4be47fc139dc1ba11ba11ebbfa822608ca384dc8c8f76cda6247f1081d5e75"
+    },
+    {
+      "questionId": "r04h-q22",
+      "mode": "paperless",
+      "reason": "制御系の中でアクチュエータが担う役割を説明文と照合すればよい。",
+      "sourceHash": "46e23216825149a400184f0a45f0ab60890643712769abff63a92ba6ede06e7c"
+    },
+    {
+      "questionId": "r04h-q23",
+      "mode": "paperless",
+      "reason": "内部情報の物理的解析を防ぐ耐タンパ性の目的を各対策と照合すればよい。",
+      "sourceHash": "30dfe73716e3092d26281ff6d5f10ba3d23be01f551bd4c7b267bf7afcc177d8"
+    },
+    {
+      "questionId": "r04h-q24",
+      "mode": "paperless",
+      "reason": "各ユーザビリティ評価手法の参加者を、提示された組合せ表と照合すればよい。",
+      "sourceHash": "a4f29e74ab90e1aed4f452fb3d470db5baf71c382ed36c5ce5cb70b551688add"
+    },
+    {
+      "questionId": "r04h-q25",
+      "mode": "paperless",
+      "reason": "光線と物体との交点を扱うレイトレーシングの手法の特徴を説明文と照合すればよい。",
+      "sourceHash": "ceba25c532d607593f923f5ff4930b2e04b469edf287ddb517eb56cbe4252f4d"
+    },
+    {
+      "questionId": "r04h-q26",
+      "mode": "paperless",
+      "reason": "CAP定理の特性を示すA・Pの意味と説明文を照合すればよい。",
+      "sourceHash": "3ec5fcbbcffc74225c88fef224c5d9e39243c76674451f8104ba0d75de3368bf"
+    },
+    {
+      "questionId": "r04h-q27",
+      "mode": "paperless",
+      "reason": "三層スキーマの物理的な記憶構造を扱う層と設計項目を照合すればよい。",
+      "sourceHash": "8b636f6c81c20f53af1cc4e56c22b039749b4e81738aed00b4b0e99ee4fff713"
+    },
+    {
+      "questionId": "r04h-q28",
+      "mode": "paperless",
+      "reason": "各正規形の定義を、提示された属性の特徴と対応させればよい。",
+      "sourceHash": "2a38a1d0abf8dbb3284c3c4a143d4dfb43bade0bda9ff41dc17d4e17fa52e81c"
+    },
+    {
+      "questionId": "r04h-q29",
+      "mode": "paperless",
+      "reason": "undoとredoの目的から必要なログ情報の種類を判断し、提示表と照合すればよい。",
+      "sourceHash": "8e66f2bdae3142761c3f106dc3247e83295a0a4e018f5b78c4c8117592c06eb7"
+    },
+    {
+      "questionId": "r04h-q30",
+      "mode": "paperless",
+      "reason": "データマイニングの目的を他のデータ利用技術の説明と区別して照合すればよい。",
+      "sourceHash": "8ba6e5118bdb2f0d50be5bdc3783c99a228ac767d310954fc5e8832fc3ed95ee"
+    },
+    {
+      "questionId": "r04h-q31",
+      "mode": "paperless",
+      "reason": "IPv6の区切りとゼロ省略の表記規則を提示された表記に照合すればよい。",
+      "sourceHash": "ac5781be2222c0bf5e1e7efb89c5830d6cf21869604e1ab3d56756ffe9b68686"
+    },
+    {
+      "questionId": "r04h-q32",
+      "mode": "paperless",
+      "reason": "LAN上でPPPの接続確立と転送を実現するプロトコルの役割を照合すればよい。",
+      "sourceHash": "92349b8a54f57c91b94246861177314474590345c7313ddad18317bb863c57b1"
+    },
+    {
+      "questionId": "r04h-q33",
+      "mode": "paperless",
+      "reason": "各アプリケーションプロトコルが利用するトランスポートの種類を照合すればよい。",
+      "sourceHash": "174b58d25b945343fab7bea76703741458ba6796c56a20ccdece8f2f99ffb98f"
+    },
+    {
+      "questionId": "r04h-q34",
+      "mode": "desk",
+      "reason": "プレフィックス長からホスト部のビット数を求め、アドレス総数から予約分を引く必要がある。",
+      "sourceHash": "b99c2bcb5da21c6969d68919313c708499df31bcce41671e75a568f67245324a"
+    },
+    {
+      "questionId": "r04h-q35",
+      "mode": "paperless",
+      "reason": "SDNの制御機能と転送機能の分離という構成を説明文と照合すればよい。",
+      "sourceHash": "8c2184da47de36fa0ddf8a18660616df9b18c5722c6fcaee32afe75560e709e1"
+    },
+    {
+      "questionId": "r04h-q36",
+      "mode": "paperless",
+      "reason": "SAMLがシステム間で交換する情報の種類を仕様の役割と照合すればよい。",
+      "sourceHash": "daffd82b4c98eed8745cbc2952aca3f00f2c297e5d59f7fc9473af3b07f3cdb4"
+    },
+    {
+      "questionId": "r04h-q37",
+      "mode": "paperless",
+      "reason": "サイバーキルチェーンの偵察段階の目的を各攻撃行動と照合すればよい。",
+      "sourceHash": "a24b5c7b029a68c97130f7f2b9350e849f71180f49ca19fa6710ed5290d0d79f"
+    },
+    {
+      "questionId": "r04h-q38",
+      "mode": "paperless",
+      "reason": "チャレンジレスポンス認証のデータの受渡しの特徴を説明文と照合すればよい。",
+      "sourceHash": "dd21dbc34fdbeea5bb02e2a97779be8d21a2e98afe224a82ddd5c339b468e2f6"
+    },
+    {
+      "questionId": "r04h-q39",
+      "mode": "paperless",
+      "reason": "署名鍵が担う署名作成の役割を暗号化や検証の用途と区別して照合すればよい。",
+      "sourceHash": "f1b5bfcc2527747040c274a6e38b262c4240441b5c3f472d62ec69bd4687c48d"
+    },
+    {
+      "questionId": "r04h-q40",
+      "mode": "paperless",
+      "reason": "サードパーティcookieの用途とブロック時の効果を説明文と照合すればよい。",
+      "sourceHash": "469f8b254505d04a065da2473d0460a4e66111a2fa955055245458f545307461"
+    },
+    {
+      "questionId": "r04h-q41",
+      "mode": "paperless",
+      "reason": "クライアント証明書で認証するリバースプロキシの役割と情報の送信主体を照合すればよい。",
+      "sourceHash": "33d78000beb5aff35d8a54b59fde77fea6bed202ba562cd6dc0d95e7303eb47f"
+    },
+    {
+      "questionId": "r04h-q42",
+      "mode": "paperless",
+      "reason": "レインボー攻撃の事前計算表を用いる特徴を攻撃手法の説明と照合すればよい。",
+      "sourceHash": "021dea9db9e9582e4ff56c3eb8aeed2d3c335fcc2d02d54510d11cf308d6700c"
+    },
+    {
+      "questionId": "r04h-q43",
+      "mode": "paperless",
+      "reason": "情報セキュリティ規格におけるリスクレベルの定義を関連用語と区別して照合すればよい。",
+      "sourceHash": "96f51e0d2180737bd55dbcee1cb9fa0ff09d1d3d7188beb5ee0b0567b4d16b08"
+    },
+    {
+      "questionId": "r04h-q44",
+      "mode": "paperless",
+      "reason": "VDIがPCに渡すデータとサーバ側で実行する処理の関係を説明文と照合すればよい。",
+      "sourceHash": "75ee0e602eed19f14a6a56a7c438a4b201a0957265c5656f3f3b6a6c1278eb2e"
+    },
+    {
+      "questionId": "r04h-q45",
+      "mode": "paperless",
+      "reason": "多様な入力を与えて挙動から脆弱性を発見するファジングの特徴を照合すればよい。",
+      "sourceHash": "40384766b84b711c765d113d4a494d041fca0bfe604e073d147469cbcccc0d12"
+    },
+    {
+      "questionId": "r04h-q46",
+      "mode": "paperless",
+      "reason": "各モジュール結合の独立性の相対的な順序を知識と照合すればよい。",
+      "sourceHash": "6b1bc0dfb894c287400078a4898ecd4ee43c733ecd9c81a00db5e8ae0b1aa236"
+    },
+    {
+      "questionId": "r04h-q47",
+      "mode": "desk",
+      "reason": "各テスト入力を流れ図に適用してCの更新と二つの分岐結果を追い、網羅される経路を記録する必要がある。",
+      "sourceHash": "52ce585464b3a05ea174052053863d07fa3dc301eb11792a336ed1bffecad9e4"
+    },
+    {
+      "questionId": "r04h-q48",
+      "mode": "paperless",
+      "reason": "仕様書とソースの不整合を解消する保守の目的を保守分類と照合すればよい。",
+      "sourceHash": "66d4ee414cb1b570a9be30909a23cf193903c830e56769a9020c0b91cd3f0949"
+    },
+    {
+      "questionId": "r04h-q49",
+      "mode": "paperless",
+      "reason": "一定期間の生産量を表すスクラムの尺度の意味を照合すればよい。",
+      "sourceHash": "6580f91d7e1ccac82aa227eb2590d297b8a4e7b9adb37ebc68536434c4e326a4"
+    },
+    {
+      "questionId": "r04h-q50",
+      "mode": "paperless",
+      "reason": "IDEが統合する開発ツールの役割を説明文と照合すればよい。",
+      "sourceHash": "b1de92b682c9bf0c19b34dc61043a1be527d8b6b317a7854d0725dbec5283a7d"
+    },
+    {
+      "questionId": "r04h-q51",
+      "mode": "desk",
+      "reason": "表のEVとACからコスト効率を求め、BACに対する完了時総コストを計算する必要がある。",
+      "sourceHash": "08d1a57492311292d67bdd308c67bc129d647c426635018cf8b6a24952f5fa0c"
+    },
+    {
+      "questionId": "r04h-q52",
+      "mode": "paperless",
+      "reason": "資源追加で所要期間を短縮するスケジュール短縮技法の意味を照合すればよい。",
+      "sourceHash": "181641ec45360647fb223c53592ae3fb2e7357b4769706189d152baae6b8c868"
+    },
+    {
+      "questionId": "r04h-q53",
+      "mode": "desk",
+      "reason": "表の先行作業条件から各作業の開始・終了日を求め、並列作業の合流時点を比較する必要がある。",
+      "sourceHash": "2f539323df74e6d0f78bc29f33864487c1360d9843a976ebdf93ac59fc417d41"
+    },
+    {
+      "questionId": "r04h-q54",
+      "mode": "paperless",
+      "reason": "リスク発生条件に備えるコンティンジェンシー計画の内容を照合すればよい。",
+      "sourceHash": "e9d488a5e074bdbd86b3565abada26007e2495b440c1792980ee2979a2ca37de"
+    },
+    {
+      "questionId": "r04h-q55",
+      "mode": "paperless",
+      "reason": "提示された復旧目標の意味を読み、バックアップ間隔を制約する目標を照合すればよい。",
+      "sourceHash": "220ad77bb30fb9e404eab843c66a2ad9e0832ae5dfac00e750d664c03574aeb3"
+    },
+    {
+      "questionId": "r04h-q56",
+      "mode": "paperless",
+      "reason": "保守性を表す指標の意味を障害間隔などの関連指標と区別して照合すればよい。",
+      "sourceHash": "fe530df583cefe150555c02488a2e8535b891dfa6ad6c9f335b8129902450e29"
+    },
+    {
+      "questionId": "r04h-q57",
+      "mode": "paperless",
+      "reason": "DAとDBAの業務分担を各役割の説明と照合すればよい。",
+      "sourceHash": "e5cadc5bd36f5afbe0f901ce2a8bf9716012bacc719c7f7623660a48d4f70c1d"
+    },
+    {
+      "questionId": "r04h-q58",
+      "mode": "paperless",
+      "reason": "事業継続計画の備えとして適切な管理状態を事例と照合すればよい。",
+      "sourceHash": "6baf5b810da54a6709570bf5c2a6ac7525b1a42f4833303d2706807a3e7223a0"
+    },
+    {
+      "questionId": "r04h-q59",
+      "mode": "paperless",
+      "reason": "監査調書の目的と保存・記載の原則を説明文と照合すればよい。",
+      "sourceHash": "9d9a29bef362843fb66b20f239bbb46f7486aa34022a07a8456413cce66b2420"
+    },
+    {
+      "questionId": "r04h-q60",
+      "mode": "paperless",
+      "reason": "十分かつ適切な監査証拠を収集する原則を各記述と照合すればよい。",
+      "sourceHash": "8e220f8ab60c92d4dc809a2bfdf1a138ca3973def2450e3afa0cf90b18c0d430"
+    },
+    {
+      "questionId": "r04h-q61",
+      "mode": "paperless",
+      "reason": "ログの取得・保護・分析に関する管理原則を各記述と照合すればよい。",
+      "sourceHash": "72157dda7cb86bf6a653a7c21e8a7f936c46bf5b52ef3457c3f7710426febd68"
+    },
+    {
+      "questionId": "r04h-q62",
+      "mode": "paperless",
+      "reason": "SOAのサービス分割と連携という考え方を各手法の説明と照合すればよい。",
+      "sourceHash": "c7f6b97baab14ff82bd54cf15fa3f467e5a8e18e32624c04596d17f2b0b09304"
+    },
+    {
+      "questionId": "r04h-q63",
+      "mode": "paperless",
+      "reason": "BPOの外部委託という意味を関連する業務管理手法と区別して照合すればよい。",
+      "sourceHash": "eeb53155cdfdfc90254a28a4e54b953ac27db6d17c2a181b9de7c26db1a458ca"
+    },
+    {
+      "questionId": "r04h-q64",
+      "mode": "paperless",
+      "reason": "投資資金を回収するまでの期間という指標の意味を各指標の定義と照合すればよい。",
+      "sourceHash": "abbb6307e967b23f0432aa01a67ee9b02af6a670efd5eea29b0c42be5b5a0873"
+    },
+    {
+      "questionId": "r04h-q65",
+      "mode": "paperless",
+      "reason": "使用性に関する要求の対象を性能・移行・復旧の要求と区別して照合すればよい。",
+      "sourceHash": "a6e1390bd06dd48d55482d299f685c3c5aee06456b8a12684b554a04c66d4f60"
+    },
+    {
+      "questionId": "r04h-q66",
+      "mode": "paperless",
+      "reason": "分岐・並行処理・同期を表すUML図の用途を照合すればよい。",
+      "sourceHash": "ddba0c9ed68c4680834237508ea6d9a3c775d60ad3d8c5d986e443d52c6116a1"
+    },
+    {
+      "questionId": "r04h-q67",
+      "mode": "paperless",
+      "reason": "PPMの区分と投資資金を生み出す事業の性質を照合すればよい。",
+      "sourceHash": "1fbfcf3a634b3bf79c853b3df1e5d82098e2a8c9b798ba6462318fc8bbe4d9b4"
+    },
+    {
+      "questionId": "r04h-q68",
+      "mode": "paperless",
+      "reason": "市場と製品によって成長戦略を分類するアンゾフの考え方を照合すればよい。",
+      "sourceHash": "111dc30d78ac6ac546ea9a0d080e0164f8127f828709584b4619f3ec8415597b"
+    },
+    {
+      "questionId": "r04h-q69",
+      "mode": "paperless",
+      "reason": "口コミで情報が広まるバイラルマーケティングの特徴を説明文と照合すればよい。",
+      "sourceHash": "8504061b5fcf477121e2f2f632b724aff86f821aa911513f66e10bc09c2ee6ce"
+    },
+    {
+      "questionId": "r04h-q70",
+      "mode": "paperless",
+      "reason": "ファウンドリとファブレスの生産・設計の役割分担を説明文と照合すればよい。",
+      "sourceHash": "aa1acabf3621d4e2238de1c7fa5820a1c563de9e787f3696a4dcf60d962adfbc"
+    },
+    {
+      "questionId": "r04h-q71",
+      "mode": "paperless",
+      "reason": "XBRLが扱う情報の用途を知識と照合すればよい。",
+      "sourceHash": "9b95e62e0e2562aa3330815462e7928071f56d4bb2afb2cdf08113cfafba8823"
+    },
+    {
+      "questionId": "r04h-q72",
+      "mode": "paperless",
+      "reason": "後工程の必要量に応じて調達するかんばん方式の特徴を説明文と照合すればよい。",
+      "sourceHash": "89b938a5d1d5c1e93fa7a4fa6b753fda16f1e5464c624a352aee670058b4d56a"
+    },
+    {
+      "questionId": "r04h-q73",
+      "mode": "desk",
+      "reason": "仕事の実行順の候補ごとに方向付きの段取り時間を表から拾って加算し、最小値を比較する必要がある。",
+      "sourceHash": "24f018eb428f0b41a44e2ad374438bb2cc06791e3395be7f3d267c8f6dfd2976"
+    },
+    {
+      "questionId": "r04h-q74",
+      "mode": "paperless",
+      "reason": "会議でファシリテータが担う役割を専門家や事務担当の役割と区別して照合すればよい。",
+      "sourceHash": "eb7e253425938aeb0a54f9c7da2d2610fd0eea8fe1fdc728836b652a8f8667c8"
+    },
+    {
+      "questionId": "r04h-q75",
+      "mode": "paperless",
+      "reason": "PM理論が重視するリーダシップの二つの機能を説明文と照合すればよい。",
+      "sourceHash": "dfd53d2b4832befdc52177da4c312fd7c25c7283dc3aa652184f0e59da59a69e"
+    },
+    {
+      "questionId": "r04h-q76",
+      "mode": "desk",
+      "reason": "各設定価格と予測需要から売上と変動費を計算し、固定費を差し引いた利益を比較する必要がある。",
+      "sourceHash": "230f7c4ababc4edde347e5bf854db023562c75b2e153ea58640ddd527afbe394"
+    },
+    {
+      "questionId": "r04h-q77",
+      "mode": "paperless",
+      "reason": "委託作成したプログラムの原始的な著作権帰属を契約条件と法の原則に照合すればよい。",
+      "sourceHash": "32c91adebe62253f8265d2d2e69aafc1aa313a735ac66585ca413848447af823"
+    },
+    {
+      "questionId": "r04h-q78",
+      "mode": "paperless",
+      "reason": "識別符号の提供・取得・保管などの行為を、不正アクセスを助長する行為の規定と照合すればよい。",
+      "sourceHash": "c47f0a6361e59a2a1524353235ddfd28ab5a1410d0683d768e4acbf355c01bb5"
+    },
+    {
+      "questionId": "r04h-q79",
+      "mode": "paperless",
+      "reason": "作業場所と指揮命令主体を読み、請負と派遣の法的な区別に照合すればよい。",
+      "sourceHash": "9cf1ed358916fbd0b9de14ff42c27b78cb5736605ffaccec8ba433c26ad87103"
+    },
+    {
+      "questionId": "r04h-q80",
+      "mode": "paperless",
+      "reason": "RoHS指令の有害物質に関する目的を他の規制の目的と区別して照合すればよい。",
+      "sourceHash": "3e525d97dc5ca369f78a12bdba191a4776d3adc22ec4c6afe3f5e2ebd7955025"
+    },
+    {
+      "questionId": "r03a-q1",
+      "mode": "paperless",
+      "reason": "提示された接線とx軸の交点を反復する手順から近似解法を識別する。",
+      "sourceHash": "e98adc7848d1666bd08ca3c5bf55d13cf512310b494f2aeadadf9a081cd95372"
+    },
+    {
+      "questionId": "r03a-q2",
+      "mode": "desk",
+      "reason": "2支店統合で利用率が変わる条件を待ち行列の式へ代入し、平均待ち時間の式を導く。",
+      "sourceHash": "9133536a071ab396b8fab0975e3ca1c213d3d9ada9f8700427ae400169e16115"
+    },
+    {
+      "questionId": "r03a-q3",
+      "mode": "paperless",
+      "reason": "多層ニューラルネットワークによる学習の説明を他のAI手法と比較する。",
+      "sourceHash": "5e265d741e65c95797040154fa2ac827ff248b07c91034def757083ca1bbaac6"
+    },
+    {
+      "questionId": "r03a-q4",
+      "mode": "paperless",
+      "reason": "行と列のパリティ異常の交点で誤りを特定できる範囲を判断する。",
+      "sourceHash": "112f33d5a6312870cef48d7820639ef82b1a1397b32fa7d3068bc20a2be26420"
+    },
+    {
+      "questionId": "r03a-q5",
+      "mode": "paperless",
+      "reason": "隣接要素の比較交換という整列手法の定義を確認する。",
+      "sourceHash": "2d7c85402dca60878e037918582476ba3d1448b577478f1e694e22629d66c3fd"
+    },
+    {
+      "questionId": "r03a-q6",
+      "mode": "paperless",
+      "reason": "再使用可能・再入可能・再配置可能の性質と変数の初期化や共有を比較する。",
+      "sourceHash": "dbb3f807255a08d12a5cb7a1a3185edef38b542922b2a5fb8246ee4546c286bc"
+    },
+    {
+      "questionId": "r03a-q7",
+      "mode": "paperless",
+      "reason": "Web用言語の静的型付けの特徴を確認する。",
+      "sourceHash": "49e6fc3ced3af43105e492a399856da00bf76269ebb093b4c47510e28ef05ab4"
+    },
+    {
+      "questionId": "r03a-q8",
+      "mode": "paperless",
+      "reason": "符号の異なる加算は入力値の間に収まるという性質を各条件に照合する。",
+      "sourceHash": "456178bb124367585461dd847d8025f1bb349156b0c0eaf7e8a35d4f0d0afc28"
+    },
+    {
+      "questionId": "r03a-q9",
+      "mode": "paperless",
+      "reason": "主記憶を複数バンクに分けてアクセスを重ねる方式の概念を識別する。",
+      "sourceHash": "bc289fa600cc42b769e302ff2068371b6a71992f7b420df59ac1c358e8a35f45"
+    },
+    {
+      "questionId": "r03a-q10",
+      "mode": "paperless",
+      "reason": "供給済みのコネクタ断面図の外形と接点配置を読み、規格を識別する。",
+      "sourceHash": "98cf7cf754af366457388fc5461acde61369a9b4d6fa12447aae4f99a83ef001"
+    },
+    {
+      "questionId": "r03a-q11",
+      "mode": "desk",
+      "reason": "回転数から半回転の平均待ち時間を求め、1000バイトの転送時間とシーク時間を合算する。",
+      "sourceHash": "f1b6a76eeb573b88650d4db8840f2749f59d9c73217f65aa6dc3d2f688d70727"
+    },
+    {
+      "questionId": "r03a-q12",
+      "mode": "paperless",
+      "reason": "サーバ台数と1台当たり能力の増減からスケールインの意味を確認する。",
+      "sourceHash": "4e110fc2b38f6ea385d59c59a8d38673c86dd2645d168e51a1f58a4335964046"
+    },
+    {
+      "questionId": "r03a-q13",
+      "mode": "paperless",
+      "reason": "安全条件を満たさないとき停止するインタロックの具体例を比較する。",
+      "sourceHash": "fa03cb5a46474152cbe623c546a930e175877f2a4e7d652fa37d830c1f0994ba"
+    },
+    {
+      "questionId": "r03a-q14",
+      "mode": "paperless",
+      "reason": "ホストOSを共有して実行環境を分離するコンテナ型仮想化の概念を確認する。",
+      "sourceHash": "072a1b7321e09cee61b0cf19bdd07037aab42311d24cabf5cbfebe1a92c8fbe2"
+    },
+    {
+      "questionId": "r03a-q15",
+      "mode": "desk",
+      "reason": "読取り40・CPU30・書込み50ミリ秒の並列処理の律速段を定め、1分の最大件数を計算する。",
+      "sourceHash": "b4d15d330752148035b1009ebfb72e3527b1ecaa25d48167c0bd150930525b76"
+    },
+    {
+      "questionId": "r03a-q16",
+      "mode": "paperless",
+      "reason": "ページ置換えの頻発で性能が急落する現象を識別する。",
+      "sourceHash": "be1348232e159893fa7e687a6e46d42a649381b1ee85cf4705e517a53714af43"
+    },
+    {
+      "questionId": "r03a-q17",
+      "mode": "desk",
+      "reason": "1命令2アクセスと40ミリ秒の遅延を単位換算し、平均0.4マイクロ秒以下となる発生率を求める。",
+      "sourceHash": "fda4af81c1430aef9fb560000d822e060c3271055c02038af9600a14fa6ddb99"
+    },
+    {
+      "questionId": "r03a-q18",
+      "mode": "paperless",
+      "reason": "全履歴をローカルに保持してオフラインでも記録できる版管理ツールの特徴を識別する。",
+      "sourceHash": "99828a0c14c121873bac9a4eedb1cdbf1bce9f7cd1426028e43cb6c902103edb"
+    },
+    {
+      "questionId": "r03a-q19",
+      "mode": "paperless",
+      "reason": "仮想記憶で補助記憶が保持するページの役割を確認する。",
+      "sourceHash": "14ef85ec18d5376bfe1a4ad6aa8350acd019ea75ee21139fca0f31a20352d9c4"
+    },
+    {
+      "questionId": "r03a-q20",
+      "mode": "paperless",
+      "reason": "RFIDのパッシブタグの電力源と通信方式を比較する。",
+      "sourceHash": "fc6cc107f26149058d8771d4fc6229752dc7d3619709c9c1876d26dab9967099"
+    },
+    {
+      "questionId": "r03a-q21",
+      "mode": "paperless",
+      "reason": "タイマが所定時間内にクリアされない場合の異常検出と処置を確認する。",
+      "sourceHash": "138210f53b8b17b1781301c4c151011c1fc0136ff2e70dd7b3da884b2866b683"
+    },
+    {
+      "questionId": "r03a-q22",
+      "mode": "paperless",
+      "reason": "半加算器の桁上がりと下位の和の意味を供給済みの基本ゲート図に照合する。",
+      "sourceHash": "af0519e26b9a057ca88bf7c7205395cca7d4a4ba0c0924bfcc58fa4904af0520"
+    },
+    {
+      "questionId": "r03a-q23",
+      "mode": "desk",
+      "reason": "LEDの接続ビットを読み、16進マスクを2進のビット位置へ換算して各論理演算の効果を比較する。",
+      "sourceHash": "90ce7c872b832485f645323b7b191e32f5d6f9915dd746e90993c22fe469d07b"
+    },
+    {
+      "questionId": "r03a-q24",
+      "mode": "paperless",
+      "reason": "画素で表すフォントと輪郭で表すフォントの拡大特性を比較する。",
+      "sourceHash": "610843a180da8f0d18cf40efaf655208380b1288a056a46c1d0f070aab2397b6"
+    },
+    {
+      "questionId": "r03a-q25",
+      "mode": "paperless",
+      "reason": "相互反射や模様貼付けなどの画像生成手法の定義を比較する。",
+      "sourceHash": "a1700730a096a0621501734c6c2d830d868dda86fce6dbde17a6d77cc053d969"
+    },
+    {
+      "questionId": "r03a-q26",
+      "mode": "paperless",
+      "reason": "供給済みの関係R・S・Xの行の対応を読み、関係演算の意味を識別する。",
+      "sourceHash": "e8757d4e602a961c0d0366aab1cf536003aaa501dad96df1092a591d66abf264"
+    },
+    {
+      "questionId": "r03a-q27",
+      "mode": "paperless",
+      "reason": "チェックポイントとログの更新前・更新後情報を使う障害回復の原則を確認する。",
+      "sourceHash": "abe624f3099474c841a4f4b68ed5aa81cf1ff909bb38a02ac4f3585eec294740"
+    },
+    {
+      "questionId": "r03a-q28",
+      "mode": "paperless",
+      "reason": "受注番号・項番の複合キーと提示された属性の依存関係から正規形の要件を判断する。",
+      "sourceHash": "db7ddbd4e02d8d984e2f8a45c63a99d72e8a7e0c8354d17b3c17b3c7e4fb6c94"
+    },
+    {
+      "questionId": "r03a-q29",
+      "mode": "paperless",
+      "reason": "供給済みの元表と縦並びの結果を読み、各SQLの集合演算と結合の意味を比較する。",
+      "sourceHash": "25f625baa76b55fc8fda5999b744f1d1f62611e89c924e11647f4abc98dae352"
+    },
+    {
+      "questionId": "r03a-q30",
+      "mode": "paperless",
+      "reason": "分散データベースの複製に対する透過性の定義を確認する。",
+      "sourceHash": "04ff17ea61b1316f1fae568b035f60b993b367f8a050be68e49efda11338eb2c"
+    },
+    {
+      "questionId": "r03a-q31",
+      "mode": "paperless",
+      "reason": "イーサネットのブロードキャストの送信対象と送信回数の原則を確認する。",
+      "sourceHash": "a33e13cf6dc6deab631a862857a464e0dcc5d2744f872325755752c26f290aa3"
+    },
+    {
+      "questionId": "r03a-q32",
+      "mode": "paperless",
+      "reason": "ARPのIPアドレスとMACアドレスの対応付けの役割を識別する。",
+      "sourceHash": "7e481b4af200a1196a97a942e8af0902009f54474f46bc107183a715b5923ac6"
+    },
+    {
+      "questionId": "r03a-q33",
+      "mode": "paperless",
+      "reason": "外向きパケットでNAPTが変更する送信元のヘッダー項目を確認する。",
+      "sourceHash": "45914f82203c19c8d63435a2c38d7a1094f83c8767417d33797f1d764d890269"
+    },
+    {
+      "questionId": "r03a-q34",
+      "mode": "paperless",
+      "reason": "UDPとTCPのヘッダーに含まれる情報の違いを確認する。",
+      "sourceHash": "65aae14cba62e54222319619025d049867f53226c7ef46de37b2399cc6e13d23"
+    },
+    {
+      "questionId": "r03a-q35",
+      "mode": "paperless",
+      "reason": "ホスト部を1にする操作という意味からマスクの反転とビット演算の組合せを比較する。",
+      "sourceHash": "035bd384f2441b2a12c6e5d025e4de94bf8479af391465be27ae979b6051eec0"
+    },
+    {
+      "questionId": "r03a-q36",
+      "mode": "paperless",
+      "reason": "IPv6の拡張ヘッダーで実現するセキュリティ機能を確認する。",
+      "sourceHash": "84e8ae086e16d4758aa94815aa36273c007e4545b95cc9b5025c4a07e119a2b3"
+    },
+    {
+      "questionId": "r03a-q37",
+      "mode": "paperless",
+      "reason": "出荷後もIoT機器の安全性を維持する対策の目的を比較する。",
+      "sourceHash": "897b263415f857c7a0fa1ae5ee7f02d2256b273c95984cdca8da2b93d51018d8"
+    },
+    {
+      "questionId": "r03a-q38",
+      "mode": "paperless",
+      "reason": "脆弱性通知を受けた製品開発者と調整機関の役割を比較する。",
+      "sourceHash": "a568b7900513d3cfd3ff2f46180dd969445a190b930cde112e77c3510ef59b2b"
+    },
+    {
+      "questionId": "r03a-q39",
+      "mode": "paperless",
+      "reason": "システム利用の事実を証明する否認防止の定義を確認する。",
+      "sourceHash": "686ec2b346c85f29129f853f812be4e657f36531419d2db23763dc8ca62610cc"
+    },
+    {
+      "questionId": "r03a-q40",
+      "mode": "paperless",
+      "reason": "耐タンパ性で対処する物理的な解析と秘密情報の抽出への対策を比較する。",
+      "sourceHash": "859cd485a0f2c95055425150637c9ea782a5accb2b4979e66a711785e4c460bb"
+    },
+    {
+      "questionId": "r03a-q41",
+      "mode": "paperless",
+      "reason": "基本・現状・環境の三基準で脆弱性を評価する仕組みを識別する。",
+      "sourceHash": "041a67bcf67dd473841f0650d0af661a15b7306afe01c25f736058c3bd313cd8"
+    },
+    {
+      "questionId": "r03a-q42",
+      "mode": "paperless",
+      "reason": "盗難カードの記載情報だけで実施できる確認と追加の本人認証を比較する。",
+      "sourceHash": "308da13f91ce1af2093251af0615b025dcdb597c68d9fc2bf8e7ced91169778a"
+    },
+    {
+      "questionId": "r03a-q43",
+      "mode": "paperless",
+      "reason": "ネットワーク層でAHとESPを含む保護プロトコルを識別する。",
+      "sourceHash": "8ec5e3b561d2cf91b8ee46c4c2b2c18439c4b80f3b8dbf7d30ed90b1bd084072"
+    },
+    {
+      "questionId": "r03a-q44",
+      "mode": "paperless",
+      "reason": "正規サイトの転送機能を悪用するオープンリダイレクトの仕組みを比較する。",
+      "sourceHash": "3bd1b1f45aad5ca47401cdfda8fce38a310e57bbbddbfafb490f812e3020df1e"
+    },
+    {
+      "questionId": "r03a-q45",
+      "mode": "paperless",
+      "reason": "情報ネットワークとの通信が必要な機器の役割を読み、DMZへの配置目的を判断する。",
+      "sourceHash": "4493b5ddbe0e7aecae33ccd1cc8b3ea367884f1695e3b08c2026b3e306c5cbcd"
+    },
+    {
+      "questionId": "r03a-q46",
+      "mode": "paperless",
+      "reason": "各機能とエンティティの生成・参照・更新・削除を表すCRUDの定義を確認する。",
+      "sourceHash": "8c454029b2a76727a41a53ecb9ea0601bc54c2e6f8a6e8e4012e24b8a67eee02"
+    },
+    {
+      "questionId": "r03a-q47",
+      "mode": "paperless",
+      "reason": "UMLアクティビティ図が表す制御の流れを他の振る舞い図と比較する。",
+      "sourceHash": "00fa130d843d21de35b520fbb011a41aa146e61c50e7534a75552fd2b89974bc"
+    },
+    {
+      "questionId": "r03a-q48",
+      "mode": "paperless",
+      "reason": "供給済みのクラス図を読み、形状と線種の継承を分離して関連で結ぶ構造を比較する。",
+      "sourceHash": "fb196b0ba52d47b5f6ccffc10b8c3ca56d4a37af00959f1d4bdae5e1f5a69c1e"
+    },
+    {
+      "questionId": "r03a-q49",
+      "mode": "paperless",
+      "reason": "供給済みのグラフの軸と残作業の推移からバーンダウンチャートを識別する。",
+      "sourceHash": "331152857c4d6fc78f96e0923f2624c7b81c68e6b0dd820365b527835e661fbb"
+    },
+    {
+      "questionId": "r03a-q50",
+      "mode": "paperless",
+      "reason": "スクラムマスタとプロダクトオーナの責務を区別する。",
+      "sourceHash": "9419356e9e139b2fe6bd18a90e2c9d3abe0595855a185bec8c4cbcce1481532b"
+    },
+    {
+      "questionId": "r03a-q51",
+      "mode": "paperless",
+      "reason": "フェーズ終了時に行うゲートの評価と意思決定の目的を確認する。",
+      "sourceHash": "5b764b72a74a0c1a3e033f7f9b9cdb1cc2df6f0e1c944d9f2e71357fe621efa1"
+    },
+    {
+      "questionId": "r03a-q52",
+      "mode": "paperless",
+      "reason": "供給済みの依存図と候補図を読み、FS関係を表すダミー矢印の接続先を比較する。",
+      "sourceHash": "f934a3312b17abdcf5b50e6438f41b63f0fc4063b24833b67ce795ab0490235e"
+    },
+    {
+      "questionId": "r03a-q53",
+      "mode": "paperless",
+      "reason": "リスクの定量的分析と特定・定性分析・対応の活動を比較する。",
+      "sourceHash": "eed42d707e1c3a9500bdcd30a4038b46019e1af97e09abe12b315a652f26857d"
+    },
+    {
+      "questionId": "r03a-q54",
+      "mode": "paperless",
+      "reason": "問題管理の原因分析・既知の誤りの記録・管理継続の原則を確認する。",
+      "sourceHash": "6525a833cca55b7c81b11ee16f631fed791895379e701aca43423d904300b06a"
+    },
+    {
+      "questionId": "r03a-q55",
+      "mode": "desk",
+      "reason": "毎月のフルと差分の保管期間を6か月前の日付から数え、必要な暦月数とテープ本数を求める。",
+      "sourceHash": "66fe31d7ca52a67532812a57d3f54d68c711c4a43e716c98bd6856448cfdd918"
+    },
+    {
+      "questionId": "r03a-q56",
+      "mode": "desk",
+      "reason": "1日3シフト各2人の7日分の勤務回数を計算し、1人5回以内の条件で人数を切り上げる。",
+      "sourceHash": "33395e8b67d9c5242e938f12fd78a5d3fe8de4d2056ba32b6864a7f1e699b683"
+    },
+    {
+      "questionId": "r03a-q57",
+      "mode": "paperless",
+      "reason": "保証型と助言型の監査の目的及び実施方針を比較する。",
+      "sourceHash": "c11d7b99f144e91e9a280c1cacb852a37c086bd47a970d87bb72aeccd9d42094"
+    },
+    {
+      "questionId": "r03a-q58",
+      "mode": "paperless",
+      "reason": "アジャイル開発の反復と利害関係者のフィードバックを踏まえて監査の着眼点を比較する。",
+      "sourceHash": "c51a3cfff30ab2981e1af27a0a496370c01c59010b4a5a6f2283008979e90e3d"
+    },
+    {
+      "questionId": "r03a-q59",
+      "mode": "paperless",
+      "reason": "データ処理と統制を追跡する監査技法の定義を識別する。",
+      "sourceHash": "cf64fbf66b23e29a7462e1a2acbc3ec72bc1e63714c46db0da9afd18fe73e6f7"
+    },
+    {
+      "questionId": "r03a-q60",
+      "mode": "paperless",
+      "reason": "監査指摘への改善責任と監査人の独立性を確認する。",
+      "sourceHash": "ca16ffe19a15e79ada7c7b7e7800da7e65fe4f2f96213cd365b4a5756d23be83"
+    },
+    {
+      "questionId": "r03a-q61",
+      "mode": "paperless",
+      "reason": "サーバに仮想化したデスクトップを端末から利用するVDIの特徴を比較する。",
+      "sourceHash": "6b0b7f1defcd1f25eef2db576e159f9d687ccdbff6d0a4c7ee08b316b38a0ade"
+    },
+    {
+      "questionId": "r03a-q62",
+      "mode": "paperless",
+      "reason": "供給済みの改善活動図と目標例を読み、最終成果・成功要因・実績指標の役割を区別する。",
+      "sourceHash": "4a1c3c8bb6395ebf880c9e6256c5b625a949699c67c7e9caeb4ed8a5ab2d8c81"
+    },
+    {
+      "questionId": "r03a-q63",
+      "mode": "paperless",
+      "reason": "複数プロジェクトの統合で価値を高めるプログラムマネジメントの概念を確認する。",
+      "sourceHash": "80f38a7b78a97a5b1451160ef46516cffee2bb199268678f31ee653b534a643f"
+    },
+    {
+      "questionId": "r03a-q64",
+      "mode": "desk",
+      "reason": "10人5年分の削減費用と初期・運用費用を各単位に合わせて計算し、差額を求める。",
+      "sourceHash": "530ff9b16331cd5bdfdba7b9bcb552ff3571e1d5045c14efb0aac845f9fd9cd1"
+    },
+    {
+      "questionId": "r03a-q65",
+      "mode": "paperless",
+      "reason": "情報提供依頼と提案依頼などの文書の目的を比較する。",
+      "sourceHash": "7c62cd679355e684e81de64a01d8b358bdf881d9aeb9af2d4403ae85f75f3472"
+    },
+    {
+      "questionId": "r03a-q66",
+      "mode": "paperless",
+      "reason": "半導体の製造委託を受けるファウンドリの事業形態を確認する。",
+      "sourceHash": "4abe73246134c327aad61a6f4350f34289d25d665af30bdb24a15d3e6e52dd99"
+    },
+    {
+      "questionId": "r03a-q67",
+      "mode": "paperless",
+      "reason": "バリューチェーンが区分する主活動と支援活動の意味を確認する。",
+      "sourceHash": "b3d4b0b794e8288ac3f5fe8589f698e5d492ebf5bc650c1e6a356d9274b7c172"
+    },
+    {
+      "questionId": "r03a-q68",
+      "mode": "desk",
+      "reason": "6行の生産量とコストから単価及び個別生産費の合計を求め、規模効果と共同生産効果を比較する。",
+      "sourceHash": "ada8ee54b0bd446662ce8a7ac4ff9a8ad7059945e903c028b623fd61fff608b8"
+    },
+    {
+      "questionId": "r03a-q69",
+      "mode": "paperless",
+      "reason": "最小限の製品による構築・計測・学習の反復という事業手法を識別する。",
+      "sourceHash": "83f9bb99534b0b017321cf5bc6207e5d23c014481fee5350288cc3425e1ad653"
+    },
+    {
+      "questionId": "r03a-q70",
+      "mode": "paperless",
+      "reason": "営業活動の情報化による効率と品質の向上というSFAの目的を確認する。",
+      "sourceHash": "462bd3eb9df0102368116e49b7ed59c694c20860c9e2827f08005f4ec6c1bd18"
+    },
+    {
+      "questionId": "r03a-q71",
+      "mode": "paperless",
+      "reason": "現実のセンサデータから対応する仮想世界を構築するディジタルツインの定義を確認する。",
+      "sourceHash": "adde78150ef0c7dc72b577e4f0edf183b3309c694faa5fc565c91e012167c13e"
+    },
+    {
+      "questionId": "r03a-q72",
+      "mode": "paperless",
+      "reason": "ネット経由で単発の仕事を受託する経済形態を識別する。",
+      "sourceHash": "4c4af3928fa43b031476da867e038111d5b4bf59d92865167dd169f1475eacce"
+    },
+    {
+      "questionId": "r03a-q73",
+      "mode": "paperless",
+      "reason": "端末に近い場所へ処理資源を置くエッジコンピューティングの目的を確認する。",
+      "sourceHash": "41d0691e46cff7440565837a7cca29b5a6c1869c1c0ecefcd968fff7e8bca72c"
+    },
+    {
+      "questionId": "r03a-q74",
+      "mode": "paperless",
+      "reason": "部下の成熟度に合わせるSL理論の状況要因を比較する。",
+      "sourceHash": "9c6ecc7baff5c864a1fa6a6dddb5ebb59bc9cc8a280367da86f2fa0dc59c2de9"
+    },
+    {
+      "questionId": "r03a-q75",
+      "mode": "paperless",
+      "reason": "供給済みの利得表の各行で最小値を読み、その大小をマクシミン原理で比較する。",
+      "sourceHash": "c74c371023c2c5c52330da8aa0936004e22079167e3d87f266aa44c6e9a8df30"
+    },
+    {
+      "questionId": "r03a-q76",
+      "mode": "desk",
+      "reason": "部品ごとの数量制約を二つの不等式にし、実現可能な製品台数と最大利益を導く。",
+      "sourceHash": "c43196ed9f5f85aec1e97de3336af7fb7f6c6e49c609c87de129fc56aaa281df"
+    },
+    {
+      "questionId": "r03a-q77",
+      "mode": "desk",
+      "reason": "売上・変動費・固定費から限界利益率と損益分岐点を求め、増益効果と不況抵抗力を比較する。",
+      "sourceHash": "8b7c8c43573ef2681e28623deeee4d5e0d5bc0d84506d809d78bba9ab2b2c69b"
+    },
+    {
+      "questionId": "r03a-q78",
+      "mode": "paperless",
+      "reason": "記憶媒体経由のマルウェア侵入とデータ消去に適用される法の対象を確認する。",
+      "sourceHash": "3a6a4a29823da3b204e77c7bb6827430a21c290b92142780da6b4c265d740cd8"
+    },
+    {
+      "questionId": "r03a-q79",
+      "mode": "paperless",
+      "reason": "広告宣伝メールの事前同意に関する原則を確認する。",
+      "sourceHash": "5499d21f220e20130b069366cb4feab59f3ca3eab66eabfdadc98fc1c0ca3665"
+    },
+    {
+      "questionId": "r03a-q80",
+      "mode": "paperless",
+      "reason": "36協定の特別条項の臨時性と期間設定を各業務事情に照合する。",
+      "sourceHash": "11a2143b2ba1e1b5d90300d37b7533deaa28e0167423d2adf732675b00b75d95"
+    },
+    {
+      "questionId": "r03h-q1",
+      "mode": "paperless",
+      "reason": "排他的論理和の否定という関係を、演算名と提示済みベン図に照らして判断する。",
+      "sourceHash": "e558af749c5b71560d71b43fdbd56424e3a2a4f9c83c84d5f0f41dea67cafbf1"
+    },
+    {
+      "questionId": "r03h-q2",
+      "mode": "paperless",
+      "reason": "桁落ちと他の数値誤差の発生原因を比較する。実際の減算は求めない。",
+      "sourceHash": "87ec99b42814fa93c054b059c1addb04e4e9eb6828b2af3e48cd32f6c95e13b7"
+    },
+    {
+      "questionId": "r03h-q3",
+      "mode": "desk",
+      "reason": "標本化周波数と量子化ビット数を掛け、バイト・kバイトへ換算する。",
+      "sourceHash": "dd7a7f20ab52672d322ed61e924909342f0ee90ea9ba0b2e981541ae8c0c28fa"
+    },
+    {
+      "questionId": "r03h-q4",
+      "mode": "paperless",
+      "reason": "体温測定に用いるセンサーの検出原理を比較する。",
+      "sourceHash": "bdd8ab6293b77e77474b63e38377f4ee8bb077e0fe342eee5e0c95d1eea43691"
+    },
+    {
+      "questionId": "r03h-q5",
+      "mode": "desk",
+      "reason": "入力順を固定したスタックの挿入・取出しを追い、可能な出力順を列挙する。",
+      "sourceHash": "b031f0b0b614fb6fde24e33259fa077ed94e26395ef839cbb15443b5a288bc5c"
+    },
+    {
+      "questionId": "r03h-q6",
+      "mode": "paperless",
+      "reason": "配列の添字と二分木の親子関係から探索方式の特徴を読む。具体的な木の全節点の列挙は不要。",
+      "sourceHash": "a25c989ea8b410212a09ba031966a72d0e6dac1641bcdac9d577f61ad3829f47"
+    },
+    {
+      "questionId": "r03h-q7",
+      "mode": "paperless",
+      "reason": "分割統治法の設計上の考え方を比較する。",
+      "sourceHash": "a7ed7fba6c6cf5d1e7ef71177af5bd8c38ce405342fbb333d709108a61233557"
+    },
+    {
+      "questionId": "r03h-q8",
+      "mode": "paperless",
+      "reason": "列挙された言語・実行環境の特徴を各候補と照合する。",
+      "sourceHash": "6afbfe170d76a71c07519c8492320a04fe34919f0ff8a47c9599216dcd905b19"
+    },
+    {
+      "questionId": "r03h-q9",
+      "mode": "desk",
+      "reason": "命令ごとの時間を出現頻度で重み付けし、平均時間からMIPSへ換算する。",
+      "sourceHash": "981f58cfe2d54d598855526701ff1e0860f12ffe90b10e87c3b4ddbd6d3b3b93"
+    },
+    {
+      "questionId": "r03h-q10",
+      "mode": "paperless",
+      "reason": "ディープラーニングにおけるGPU利用の利点を比較する。",
+      "sourceHash": "657cd6616f529c3185be571c4b72c8d097e7edc67a0a2e862cc1ba9351a02476"
+    },
+    {
+      "questionId": "r03h-q11",
+      "mode": "paperless",
+      "reason": "グリッドコンピューティングの分散処理の形態を比較する。",
+      "sourceHash": "ac1b20e833b93d508340eab6868353f80699e6202d28dca4b445b6beb5bcf979"
+    },
+    {
+      "questionId": "r03h-q12",
+      "mode": "paperless",
+      "reason": "ライトスルーとライトバックの書込み先と反映時点を比較する。",
+      "sourceHash": "31db6e0d3523640038dda143968ba12194649b6c96d8ecd7111fb2aad488531d"
+    },
+    {
+      "questionId": "r03h-q13",
+      "mode": "paperless",
+      "reason": "信頼性設計の各概念の目的を比較する。",
+      "sourceHash": "4fd2b79432157df3109f3bb40c15febfb0441291ab19e4722f8c5bd66d9d5ff7"
+    },
+    {
+      "questionId": "r03h-q14",
+      "mode": "desk",
+      "reason": "直列枝と並列構成の稼働率を式にし、区間内で直線との大小が変わることを確かめる。",
+      "sourceHash": "11b6f3e60fcf14ee3902b0e116339d14c7ecca74cf117d6c8c562b3f94f12c12"
+    },
+    {
+      "questionId": "r03h-q15",
+      "mode": "paperless",
+      "reason": "密結合マルチプロセッサの資源共有と性能低下要因を比較する。",
+      "sourceHash": "67423faec969368eb9897201469e3b4ca6f8906c5b38bdec3913d4344dcac7a8"
+    },
+    {
+      "questionId": "r03h-q16",
+      "mode": "desk",
+      "reason": "ジョブの到着順に実行終了時刻を追い、到着から完了までの時間を計算する。",
+      "sourceHash": "d55151822ae9963b461783c2be3e3dbd49a0c5af00f46b0a8cd909838c5b216b"
+    },
+    {
+      "questionId": "r03h-q17",
+      "mode": "paperless",
+      "reason": "プリエンプションによる状態遷移の意味を判断する。連続した実行履歴の追跡はない。",
+      "sourceHash": "6dba8c35c0ccb7fff81397e2f9b18c697670e7e653c92cecc46e9ca50ded2237"
+    },
+    {
+      "questionId": "r03h-q18",
+      "mode": "paperless",
+      "reason": "主記憶管理の各処理の定義を比較する。",
+      "sourceHash": "5304ae1047a18ba1989671ea36968e72d3fbe55237f4ee09f55341290b766269"
+    },
+    {
+      "questionId": "r03h-q19",
+      "mode": "paperless",
+      "reason": "ページフォールト・ページイン・ページアウトの発生条件の関係を比較する。具体的な参照列はない。",
+      "sourceHash": "6de596d033d37c9a35c244c404d863d0179a040c677dee1cfebbcd5d919483a5"
+    },
+    {
+      "questionId": "r03h-q20",
+      "mode": "paperless",
+      "reason": "Hadoopの用途と提供する機能を比較する。",
+      "sourceHash": "a3592872e26d7ddd25ac48072b5ec6753af0a6f7acb43a631e7e871bf5c4f491"
+    },
+    {
+      "questionId": "r03h-q21",
+      "mode": "paperless",
+      "reason": "RFIDの通信方式と識別用途を各事例と照合する。",
+      "sourceHash": "6e9b7ce890c091b3ea15c1ee9bd222dc144a655e50ec6f9e940555187429a4ce"
+    },
+    {
+      "questionId": "r03h-q22",
+      "mode": "paperless",
+      "reason": "SoCの集積形態の意味を比較する。",
+      "sourceHash": "3e601ad0c840581c2663baa9d83287aec074492b6ca454abf6651d98cea47e3c"
+    },
+    {
+      "questionId": "r03h-q23",
+      "mode": "paperless",
+      "reason": "提示された回路のスイッチの位置と電流方向を、制御信号の組合せと照合する。状態の連続追跡はない。",
+      "sourceHash": "847c7aa9199e9a390b86c302beba180880df26150d6c7ef29bc3216699a1f7c4"
+    },
+    {
+      "questionId": "r03h-q24",
+      "mode": "paperless",
+      "reason": "コンデンサの直流・交流に対する働きを比較する。",
+      "sourceHash": "943e4e8ef4e8079f02c12faffbcb7782ebbcd9c308e5efc02b72bc5b35bb6fd8"
+    },
+    {
+      "questionId": "r03h-q25",
+      "mode": "desk",
+      "reason": "帰還回路で入力Sを変更し戻す二段階の操作について、XとYの変化と保持を順に追う。",
+      "sourceHash": "c6192c5be4f5e36387cf8709cad70f971edc63150fbda6ca2807ed879ab9821b"
+    },
+    {
+      "questionId": "r03h-q26",
+      "mode": "paperless",
+      "reason": "Webページの階層経路を表す用語を識別する。",
+      "sourceHash": "ab9a42adb76e5472f3d97ea8ef3907ec68864bfba9a58d66d8b4b133696de7d3"
+    },
+    {
+      "questionId": "r03h-q27",
+      "mode": "paperless",
+      "reason": "XMLで図形を記述する画像形式の特徴を識別する。",
+      "sourceHash": "1473050ddd1105a226504cd4ab895791ecb34de55802b584606bde78f1e8ee4f"
+    },
+    {
+      "questionId": "r03h-q28",
+      "mode": "paperless",
+      "reason": "グラフ指向DBと他のNoSQLデータモデルの構成要素を比較する。",
+      "sourceHash": "f273d6b829e2004a811dcfea34e99011c5c9a594ec1da68f09111e0041165afb"
+    },
+    {
+      "questionId": "r03h-q29",
+      "mode": "paperless",
+      "reason": "顧客・注文・明細・商品の関係を提示済みUMLの多重度と照合する。",
+      "sourceHash": "dc41292c424881a9eeeaddcc3873ab9ee88050e3dd73b87ad762935b27da7a3d"
+    },
+    {
+      "questionId": "r03h-q30",
+      "mode": "paperless",
+      "reason": "コストベース最適化が実行計画の見積りに用いる情報を判断する。実行計画の作成はない。",
+      "sourceHash": "b6b8c376ff2ef30221f721d3f8ef35ef15dd652e21e1d3803aef68b26230a0bf"
+    },
+    {
+      "questionId": "r03h-q31",
+      "mode": "paperless",
+      "reason": "データレイクの保存方法と他の分析関連概念を比較する。",
+      "sourceHash": "c73cc0fb8b815001d732cdc7470baa8f7b30b4a16438b7e7c8da8509a4f6ec60"
+    },
+    {
+      "questionId": "r03h-q32",
+      "mode": "paperless",
+      "reason": "無線PANに適した通信技術の距離・用途を比較する。",
+      "sourceHash": "b1b8ed5f975c385551367e85881ebc3c3dc004f1524f97f968334959382f620d"
+    },
+    {
+      "questionId": "r03h-q33",
+      "mode": "paperless",
+      "reason": "IEEE 802.11acの周波数帯・互換性・アクセス方式を比較する。",
+      "sourceHash": "5aec8b8cf8f459de250298a2eeaad41c0d906db99aa6e8a8084cf5e5b15c78c6"
+    },
+    {
+      "questionId": "r03h-q34",
+      "mode": "paperless",
+      "reason": "サブネットマスクの意味とビット演算の働きを式に照らして読む。具体的なIPアドレス計算はない。",
+      "sourceHash": "1015be0b0a0656f4a26086ba73389838f47c77a95914055a714fba2512099cec"
+    },
+    {
+      "questionId": "r03h-q35",
+      "mode": "paperless",
+      "reason": "OpenFlowを用いたSDNの制御と転送の分離を比較する。",
+      "sourceHash": "f53303666ace2a1768071d8dc3324b33367c9cbd8e1d0ea17da2ce36ce074e45"
+    },
+    {
+      "questionId": "r03h-q36",
+      "mode": "paperless",
+      "reason": "2.4GHz帯のチャネル干渉の性質を各割当て方針と照合する。",
+      "sourceHash": "6ad0abcd2dc5cc944cdbdf23942340a5490b02bcc7f0cb9c5e766e08d915ed49"
+    },
+    {
+      "questionId": "r03h-q37",
+      "mode": "paperless",
+      "reason": "クリックジャッキングの仕組みと各対策の効果を照合する。",
+      "sourceHash": "6f68f7a5dbbe7ef71d1ee10345858f7708dd61d65979eab37b5930f81b544bfd"
+    },
+    {
+      "questionId": "r03h-q38",
+      "mode": "paperless",
+      "reason": "フットプリンティングの目的と他の攻撃行為を比較する。",
+      "sourceHash": "d29d7d41638f17dcd517bc03f2cfefed8bcb3097e5c3127ec57566d684dcb813"
+    },
+    {
+      "questionId": "r03h-q39",
+      "mode": "paperless",
+      "reason": "リスクベース認証の利用条件と追加認証の関係を比較する。",
+      "sourceHash": "d1dcac2d72cdc647e5189112f645ad80cd390f716fda0c0360a99b63f6b55575"
+    },
+    {
+      "questionId": "r03h-q40",
+      "mode": "paperless",
+      "reason": "ハッシュ関数の原像計算困難性と他の性質を比較する。",
+      "sourceHash": "e4b756a14314a02f5776c37f4c920d59fecff8a259eb3504500b9ac520d84abe"
+    },
+    {
+      "questionId": "r03h-q41",
+      "mode": "paperless",
+      "reason": "サイバーセキュリティ経営ガイドラインの対象と構成を比較する。",
+      "sourceHash": "96c1b15abb3d9cb42e75d5467aa5cfa5e1f17482687093b84c06ea90e9c03e41"
+    },
+    {
+      "questionId": "r03h-q42",
+      "mode": "paperless",
+      "reason": "JPCERTコーディネーションセンターと他組織の役割を比較する。",
+      "sourceHash": "404eabdae50ca1d8fc5365629dd525c82a71569f5ecfb906a994ac1d73337775"
+    },
+    {
+      "questionId": "r03h-q43",
+      "mode": "paperless",
+      "reason": "カード加盟店の対面決済での不正対策と本人確認の効果を比較する。",
+      "sourceHash": "ca4fc1dc58a84efb74afb022c708ccfa60b82e2b9694e61fb83ae39019549acc"
+    },
+    {
+      "questionId": "r03h-q44",
+      "mode": "paperless",
+      "reason": "ログアウト時のセッション管理と乗っ取り防止の関係を判断する。",
+      "sourceHash": "8925a1798c8bc7834ef45223a754e28eee952afb476470fb245c082fc73c78d7"
+    },
+    {
+      "questionId": "r03h-q45",
+      "mode": "paperless",
+      "reason": "TLSの証明書送信と認証の依存関係から標準手順の順序を読む。具体的な通信履歴の追跡はない。",
+      "sourceHash": "0606f6631c8a096a0f811b385038fcd6c7a9b25b94827d4426255fbcd859ba3d"
+    },
+    {
+      "questionId": "r03h-q46",
+      "mode": "paperless",
+      "reason": "耐タンパ性の目的を各ICカード対策の働きと照合する。",
+      "sourceHash": "ed7e71c26130cf0875cf2248a8a7f4bad6499ce19e12c71a756f323c1d859985"
+    },
+    {
+      "questionId": "r03h-q47",
+      "mode": "desk",
+      "reason": "現在状態の列を更新しながら六つのイベントを順に適用し、最後の状態を追う。",
+      "sourceHash": "2ea66d43eb0f8459e98bcfd92f79281016d3e9acc0506292d0657be4805cc77d"
+    },
+    {
+      "questionId": "r03h-q48",
+      "mode": "desk",
+      "reason": "分岐後に合流する三段の経路について、全命令を通るテストの組合せと最小件数を確かめる。",
+      "sourceHash": "cc79418e9ddb5e46682ca971ba3c0e4d424885ada0703b6406383a9c27db0565"
+    },
+    {
+      "questionId": "r03h-q49",
+      "mode": "paperless",
+      "reason": "スクラムの各担当者の責任と役割を比較する。",
+      "sourceHash": "7041a4f01b612161f15f7a2f42d75da1cc28d8f631998a8dc2c52faf73a8eb10"
+    },
+    {
+      "questionId": "r03h-q50",
+      "mode": "paperless",
+      "reason": "ペアプログラミングの作業方法と目的を比較する。",
+      "sourceHash": "1565fffa7c0da70bfd5e7cbe8a487229f1865805c5fd960c46e77289b4067422"
+    },
+    {
+      "questionId": "r03h-q51",
+      "mode": "paperless",
+      "reason": "各プロジェクト管理プロセスが属するプロセス群を判断する。",
+      "sourceHash": "44a50b3a200cc3c7369945447b4992713bad97798101760ea8fd4b18b23d7a0b"
+    },
+    {
+      "questionId": "r03h-q52",
+      "mode": "paperless",
+      "reason": "提示済みRACI表のRとAの配置を、実行責任者と説明責任者の人数条件と照合する。表の再構成は不要。",
+      "sourceHash": "f1046113c02532cadbe20d259f37204f4449a78f0df22a82862f0f48fb9cd082"
+    },
+    {
+      "questionId": "r03h-q53",
+      "mode": "desk",
+      "reason": "変更前後の各経路の日数を合算し、ダミー作業の依存を含めて工期の差を計算する。",
+      "sourceHash": "39aee30c1fcdc06c67655d6acb6885fe6828a545cc37ecc66f4ff0f8405bacbe"
+    },
+    {
+      "questionId": "r03h-q54",
+      "mode": "paperless",
+      "reason": "好機に対する各リスク対応戦略の意味を比較する。",
+      "sourceHash": "63fc3f136ed85be32e93f23b3783aaeddb212663c7e42f27b93c81f4e71171f7"
+    },
+    {
+      "questionId": "r03h-q55",
+      "mode": "desk",
+      "reason": "総当たりの二人組の数を求め、会合一回の時間を掛けて延べ時間を計算する。",
+      "sourceHash": "f124736e0062e918698491314afc85de38e98ab818501908dd34564d3962b072"
+    },
+    {
+      "questionId": "r03h-q56",
+      "mode": "paperless",
+      "reason": "サービス・ポートフォリオに含まれるサービスの範囲を比較する。",
+      "sourceHash": "d81a56ebabcb199c46b10d91cd02a22de51eef3a4ceddad5e0f870b41ee4e2ed"
+    },
+    {
+      "questionId": "r03h-q57",
+      "mode": "paperless",
+      "reason": "フルと差分バックアップの保存範囲と復旧手順の関係を比較する。具体的な復旧状態の追跡はない。",
+      "sourceHash": "134516470877caaf479cd834cbc97ea920b9d8b4befddee0cc9b11c629aca75d"
+    },
+    {
+      "questionId": "r03h-q58",
+      "mode": "paperless",
+      "reason": "マルウェア対策の実施状況を組織の管理基準に照らして判断する。",
+      "sourceHash": "ccb41f60e4e29e6937e9e989edbf211219e8b800d736a456eda502c9ae5820bf"
+    },
+    {
+      "questionId": "r03h-q59",
+      "mode": "paperless",
+      "reason": "各監査項目を可用性などの性質と照合する。",
+      "sourceHash": "4f3b1f212af425c44a809d79fbcf25efa325019323a20d42805757995c0bfbd4"
+    },
+    {
+      "questionId": "r03h-q60",
+      "mode": "paperless",
+      "reason": "監査人の改善提案フォローアップと実施部門の責任を比較する。",
+      "sourceHash": "d3295f829aca93061e7223f32b44b2b546cad1399e6d4703049c25486b86b8fd"
+    },
+    {
+      "questionId": "r03h-q61",
+      "mode": "paperless",
+      "reason": "エンタープライズアーキテクチャの分類体系を識別する。",
+      "sourceHash": "c14412ec11c93ed72694727d3720d8ecf5eaf8709fab4a940cb47e9cd4913709"
+    },
+    {
+      "questionId": "r03h-q62",
+      "mode": "paperless",
+      "reason": "オープンAPIによる機能利用とデータ連携の意味を比較する。",
+      "sourceHash": "6015a24189884e2212dfb6e9304bc252f573f428b2b3328c4edfb683cc4c2761"
+    },
+    {
+      "questionId": "r03h-q63",
+      "mode": "paperless",
+      "reason": "協調フィルタリングの情報源と他の推薦方法を事例から比較する。",
+      "sourceHash": "d90f2158009e387aa6a90289ed411ee015292fe82e7c3fd5767a334198386c80"
+    },
+    {
+      "questionId": "r03h-q64",
+      "mode": "paperless",
+      "reason": "RFIと他の調達段階の要求の目的を比較する。",
+      "sourceHash": "e392addec2323dca10dde878db63dfd618eb96a83da32bc1c2d12b5a8c0b6861"
+    },
+    {
+      "questionId": "r03h-q65",
+      "mode": "paperless",
+      "reason": "環境に配慮した製品・サービスを選ぶ購買活動の名称を識別する。",
+      "sourceHash": "5b6941007e3849d7d5cf59e1216bc93e23509fb49e39d2257986570cc4c233a9"
+    },
+    {
+      "questionId": "r03h-q66",
+      "mode": "paperless",
+      "reason": "レベニューシェア契約の報酬と収益の関係を比較する。配分額の計算はない。",
+      "sourceHash": "b60644c20566676b6b46023e693b0e22ad9f433c76fa162b6846a6277aa978a3"
+    },
+    {
+      "questionId": "r03h-q67",
+      "mode": "paperless",
+      "reason": "提示済みPPMの各象限名と軸の指標を照合する。",
+      "sourceHash": "5afe26526c4be1fc913d5a05d9cbb0b494f08e8910cf549a9e70481ab6de9804"
+    },
+    {
+      "questionId": "r03h-q68",
+      "mode": "paperless",
+      "reason": "市場での立場に応じた競争戦略の特徴を比較する。",
+      "sourceHash": "df14b259368970c4c43f59f15aa656874aa79d1866adf4eb45699a6cfa006b6d"
+    },
+    {
+      "questionId": "r03h-q69",
+      "mode": "paperless",
+      "reason": "イノベータ理論の利用者区分とキャズムの位置を判断する。",
+      "sourceHash": "59997a5258a94c8ceb452b77814119447c7cfdae04e44efc8f9bf56de6408b30"
+    },
+    {
+      "questionId": "r03h-q70",
+      "mode": "paperless",
+      "reason": "バランススコアカードの四つの視点を識別する。",
+      "sourceHash": "733dc34bad6002c481e71e747552c78fbab9fa94935369bef240e789fcc91300"
+    },
+    {
+      "questionId": "r03h-q71",
+      "mode": "paperless",
+      "reason": "技術のSカーブが表す変化の意味を他の曲線と比較する。",
+      "sourceHash": "0e2b1c97f0cb04dfc2c56e265b485b3b75d3e7eedaad3d788bbb31657e18db30"
+    },
+    {
+      "questionId": "r03h-q72",
+      "mode": "paperless",
+      "reason": "超スマート社会の実現に関する取組の名称を識別する。",
+      "sourceHash": "0d571adeeea27dcdb8cc7c6e9e33befe88d7be6a096afe01e0f4cd7a68dc5dc0"
+    },
+    {
+      "questionId": "r03h-q73",
+      "mode": "paperless",
+      "reason": "フィルタバブルが生じる仕組みを情報格差などの問題と比較する。",
+      "sourceHash": "db9cac1d84011120584dabb1684f09f71392d38a4a6e3d1b08d8144684ee1148"
+    },
+    {
+      "questionId": "r03h-q74",
+      "mode": "paperless",
+      "reason": "事業者や機能を集約するサービスの特徴を比較する。",
+      "sourceHash": "c36e7a38942b8a25ca0c691dc280c7fda73894bb4212f061431d7f980f267261"
+    },
+    {
+      "questionId": "r03h-q75",
+      "mode": "paperless",
+      "reason": "SL理論の分類基準と他の組織・心理理論を比較する。",
+      "sourceHash": "43c669ce873a69ddb3738ee040c9fdf8e60c000d2945b1d7b6b32e3a8342376c"
+    },
+    {
+      "questionId": "r03h-q76",
+      "mode": "paperless",
+      "reason": "系統図法など各図法の使い方を比較する。図の作成は求めない。",
+      "sourceHash": "5f379a518551f46ebd690ed5e4ca93267e2f8f0a43742b37abbd4eba314b7192"
+    },
+    {
+      "questionId": "r03h-q77",
+      "mode": "paperless",
+      "reason": "各資金の動きをキャッシュフローの活動区分と照合する。金額計算はない。",
+      "sourceHash": "c2b1fb81ea9ea7f94d6bf6f6f8109f9a806b26d3574382cd4eaf39dcd5f57f4f"
+    },
+    {
+      "questionId": "r03h-q78",
+      "mode": "paperless",
+      "reason": "不正競争防止法の禁止行為を各事例と照合する。",
+      "sourceHash": "221b32c8f587df94638e14d0a4e0b9ba375e7669f2dc4231aa99b716eafb7e2c"
+    },
+    {
+      "questionId": "r03h-q79",
+      "mode": "paperless",
+      "reason": "電子メールの目的・経路・方式を法の規制対象と照合する。",
+      "sourceHash": "d42e6399adb5142574902da6fb9dfe487c0218fa97553808497b7b4e9d89b1d4"
+    },
+    {
+      "questionId": "r03h-q80",
+      "mode": "paperless",
+      "reason": "電子署名法の対象と効力に関する規定を比較する。",
+      "sourceHash": "7788de579aa62a723b4bb24998024fd75de775dd24033109f488508a6801612d"
     }
   ],
   "completedExamIds": [
-    "r07h"
+    "r07a",
+    "r07h",
+    "r06a",
+    "r06h",
+    "r05a",
+    "r05h",
+    "r04a",
+    "r04h",
+    "r03a",
+    "r03h"
   ]
 }
