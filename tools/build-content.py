@@ -165,6 +165,11 @@ def compile_learning_tools(root, config, questions, directory):
                 require(all(isinstance(item.get(f), str) and 0 < len(item[f]) <= limit for f, limit in [('front', 200), ('back', 1000), ('sourceNote', 500)]), 'Invalid card text')
                 refs = item.get('relatedQuestionIds')
                 require(isinstance(refs, list) and 1 <= len(refs) <= 10 and all(isinstance(ref, str) for ref in refs) and len(set(refs)) == len(refs) and all(ref in by_id and by_id[ref]['topicId'] == item['topicId'] for ref in refs), 'Invalid card references')
+        if key == 'studyContext' and data.get('completedExamIds') is not None:
+            completed = data['completedExamIds']
+            pack_ids = {q['packId'] for q in questions}
+            require(isinstance(completed, list) and all(isinstance(identifier, str) and identifier in pack_ids for identifier in completed) and len(set(completed)) == len(completed), 'Invalid completed classification packs')
+            require(all(q['id'] in ids for q in questions if q['packId'] in completed), 'Incomplete classification pack')
         filename, digest = hashed_json(directory, key, data)
         result[key] = {'url': filename, 'sha256': digest, 'count': len(records)}
         if key == 'studyContext':
