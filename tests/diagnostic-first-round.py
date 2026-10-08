@@ -2,8 +2,11 @@
 import hashlib
 import itertools
 import json
+import re
+import sqlite3
 from fractions import Fraction
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).resolve().parents[1]
 read = lambda p: json.loads((ROOT / p).read_text())
@@ -17,9 +20,22 @@ assert len(first) == len({q['parentQuestionId'] for q in first.values()}) == 17
 assert set(first) == {t['id'] for t in read('content/ap/qualification.json')['topics']}
 for s in solutions['solutions']:
     q = first[s['topicId']]; r = reviews[q['id']]
-    assert q['choices'][s['choiceIndex']]['id'] == q['correctChoiceId']
+    if r['method'].get('revisionRecord'):
+        journal = read(r['method']['revisionRecord'])
+        edit = next(item for item in journal['items'] if item['questionId'] == q['id'])
+        initial = edit['beforeReview']
+        assert initial['sha256'] == digest(edit['beforeQuestion'])
+        assert edit['beforeQuestion']['choices'][s['choiceIndex']]['id'] == edit['beforeQuestion']['correctChoiceId']
+        assert edit['afterVersion'] == q['version'] and edit['afterSha256'] == digest(q)
+        assert q['correctChoiceId'] == edit['solution']['correctChoiceId']
+        assert journal['sameEditorAndReviewer'] and not journal['independentReview']
+        assert edit['revisionAuthor'] == edit['revisionReviewer'] == r['editor'] == r['reviewer']
+        assert not r['method']['independentRevisionReview']
+    else:
+        initial = r
+        assert q['choices'][s['choiceIndex']]['id'] == q['correctChoiceId']
     assert r['sha256'] == digest(q) and r['version'] == q['version']
-    assert r['author'] == solutions['previousAuthorRun'] and r['reviewer'] == solutions['reviewRun']
+    assert r['author'] == initial['author'] == solutions['previousAuthorRun'] and initial['reviewer'] == solutions['reviewRun']
     assert r['method']['separateExecution'] and not r['method']['separateAgent'] and not r['method']['blindContext']
     assert all(r['checks'].values()) and len(q['choiceReasons']) == 4 and q['hints'] == []
     for image in r['sourceEvidence']['sourceImages']:
@@ -44,9 +60,24 @@ def g(n): return 0 if n == 0 else n + g(n-1)
 unique('algorithm', lambda text: int(text) == g(4))
 unique('architecture', lambda text: Fraction(text.removesuffix('倍')) == Fraction(1,2)*3/(2*Fraction(3,2)))
 unique('hardware', lambda text: int(text.replace(',', '')) == 100 + (3*16+10)*20)
-packets = [1280-20-32, 2400-(1280-20-32)]
+network = first['network']['stem']
+mtu = int(re.search(r'が([\d,]+)バイトに設定', network)[1].replace(',', ''))
+total = int(re.search(r'で、([\d,]+)バイトのデータ', network)[1].replace(',', ''))
+tcp = int(re.search(r'TCPヘッダー長は(\d+)', network)[1])
+ip = int(re.search(r'IPヘッダー長は(\d+)', network)[1])
+assert (mtu,total,tcp,ip) == (1280,2400,32,20)
+packets = [mtu-ip-tcp, total-(mtu-ip-tcp)]
 assert sum(packets) == 2400 and all(n+52 <= 1280 for n in packets)
 unique('network', lambda text: int(text.replace(',', '')) == packets[1])
+# Execute a harmless local SQL example, using the request value extracted from the stem.
+request = next(line for line in first['security']['stem'].splitlines() if line.startswith('GET '))
+value = parse_qs(urlparse(request.split()[1]).query)['user'][0]
+db = sqlite3.connect(':memory:')
+db.executescript("CREATE TABLE users(name TEXT);INSERT INTO users VALUES ('admin'),('reader');")
+assert db.execute("SELECT name FROM users WHERE name='"+value+"'").fetchall() == [('admin',),('reader',)]
+assert db.execute('SELECT name FROM users WHERE name=?',(value,)).fetchall() == []
+db.close()
+unique('security', lambda text: text == 'SQLインジェクション')
 assert (480-640, 480-600, Fraction(720,560), 640+720/Fraction(480,640)) == (-160,-120,Fraction(9,7),1600)
 assert first['project']['correctChoiceId'] == 'choice-0'
 assert (Fraction(900,300)>Fraction(1200,600), Fraction(45,300)>Fraction(96,600)) == (True, False)

@@ -1,0 +1,226 @@
+{
+  "format": "hitomon-diagnostic-revision",
+  "version": 1,
+  "qualificationId": "ap",
+  "runId": "codex-editorial-run-20261008-source-wording",
+  "checkedAt": "2026-10-08T00:07:33.737962+00:00",
+  "policy": "原問の語調・情報量・問う理解を保ち、暗記した数値や選択肢位置では解けない最小限の変更にする。補足は解説に置く。",
+  "sameEditorAndReviewer": true,
+  "independentReview": false,
+  "items": [
+    {
+      "questionId": "ap-diagnostic-network-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-network-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 9,
+        "title": "ヘッダー長が変わったTCPの分割",
+        "topicId": "network",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問30を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "IPv4のMTUは1,280バイトで、IPヘッダーは20バイト、TCPヘッダーはオプションを含め32バイトである。2,400バイトのアプリケーションデータをTCPで送り、先のパケットほど収容可能な上限までデータを入れる。IPフラグメンテーションは行わない。Ethernetヘッダー14バイトとトレーラー4バイトはMTUに含まれない。2番目のIPパケットに含まれるアプリケーションデータは何バイトか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "1,120"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "1,172"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "1,200"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "1,190"
+          }
+        ],
+        "correctChoiceId": "choice-1",
+        "enrichment": "reviewed",
+        "summary": "イ。先頭のデータは1,280−20−32=1,228バイトで、残りは2,400−1,228=1,172バイト。",
+        "explanation": "MTUはIPパケット全体の上限なので、1個目に入るアプリケーションデータは1,280−20−32=1,228バイト。2個目には残りの1,172バイトを入れる。この残りは1,228以下なので2個で収まり、2個目のIPパケット全体も1,172+20+32=1,224バイトでMTU以下。Ethernetの18バイトはIPパケットの外なので引かない。",
+        "takeaway": "MTU内のヘッダーだけを引き、残りも1個のパケットに収まるか確認する。",
+        "choiceReasons": [
+          "2,400−1,280の値。先頭パケットのIP・TCPヘッダー52バイトを考慮していない。",
+          "先頭で1,228バイト、残り1,172バイトを送るので条件を満たす。",
+          "2,400を均等に2分割した値。先のパケットを上限まで埋める条件に反する。",
+          "MTUからEthernetの18バイトまで余分に引いた結果、残りを18バイト多くした値。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q30",
+        "adaptation": "元問題のMTU1500・データ2000・TCPヘッダー20を、MTU1280・データ2400・TCPヘッダー32へ変更し、オプションを含む条件を明示した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-network-001",
+        "version": 1,
+        "sha256": "ce72e8a62da0ea74ad8d3639df2bea63d3d53c51c1e28c5cd07cde07dc2a3c60",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "MTUはIP全体の上限。TCPデータ上限1280−20−32=1228。2400−1228=1172。2個目のIP全長1224、1個目1280、データ合計2400。Ethernet18byteを引く必要はない。 原本の解き直し: 元MTU1500、両ヘッダー20、データ2000なので2000−(1500−40)=540、イ。Ethernetは外。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q30",
+          "officialAnswer": "イ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q30.webp",
+              "sha256": "2b8490e4ab86967eb525bfc62ae2169cc85b183e653bfcdb4e3f99f1d18a2e30"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "f9b561a8763d8f41879815246f43255cf24a26f34bdc2787647c289d68c33858",
+      "change": "原問にある説明量と文の構造へ戻し、出題のために必要な条件のみを残す。数値・正答・4択理由は変更なし。",
+      "solution": {
+        "correctChoiceId": "choice-1",
+        "dataPerFirstPacket": 1228,
+        "dataPerSecondPacket": 1172,
+        "secondIpLength": 1224,
+        "choices": {
+          "choice-0": "IP/TCPヘッダー52を引かず2400−1280=1120。",
+          "choice-1": "2400−(1280−20−32)=1172。",
+          "choice-2": "均等分割2400/2=1200で先頭を上限まで入れる条件に反する。",
+          "choice-3": "Ethernet18を余分に引くと2400−(1280−20−32−18)=1190。"
+        },
+        "originalAnswer": "イ",
+        "originalCalculation": "2000−(1500−20−20)=540。"
+      },
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-security-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-security-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 10,
+        "title": "OSコマンドへの入力混入を防ぐ",
+        "topicId": "security",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問36を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "画像変換サービスが、利用者指定のファイル名をOSコマンド文字列に連結し、シェルで実行している。ファイル名の入力をきっかけに意図しないOSコマンドが実行されることを防ぐ対策として、最も直接的なものはどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "ファイル名をHTMLエスケープしてから、従来どおりコマンド文字列に連結する。"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "ファイル名をSQLのパラメータとして処理するが、OSコマンドの呼出し方は変えない。"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "入力可能なファイル名の長さだけを制限し、内容の検証と呼出し方は変えない。"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "シェルを介さず固定の実行ファイルを呼び、許可した形式・範囲のファイル名を個別の引数として渡す。"
+          }
+        ],
+        "correctChoiceId": "choice-3",
+        "enrichment": "reviewed",
+        "summary": "エ。入力をシェルのコマンド構文として解釈させず、実行対象と引数を分ける。",
+        "explanation": "文字列をシェルへ渡すと、入力内の特殊文字などが追加のコマンド構文として解釈され得る。固定の実行ファイルを、シェルを介さない引数配列などで呼び出し、対象ファイルを許可したディレクトリや形式に限定する。先頭ハイフンによるオプション注入やパスの逸脱も検証する。HTMLやSQL向けの処理は、それぞれ別の解釈先に対する対策である。",
+        "takeaway": "入力がどの処理系に解釈されるかを見て、その境界でコードとデータを分ける。",
+        "choiceReasons": [
+          "HTMLエスケープはブラウザでのHTML解釈を扱う。シェルの構文解釈を避ける対策にはならない。",
+          "SQLパラメータはデータベースへのSQL構文混入を防ぐもの。OSコマンド文字列の連結は残っている。",
+          "短い入力でも特殊な構文を含められるため、長さだけでは防げない。",
+          "固定の実行対象と検証済みのファイル名を分け、シェルに入力を構文として解釈させない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q36",
+        "adaptation": "攻撃ログからOSコマンドインジェクションを識別する元問題を、画像変換サービスでの原因と対策を選ぶ問いへ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-security-001",
+        "version": 1,
+        "sha256": "63fe5b59a5d0ac6f86dd8b23c86ebc0fe5d729ef9fa3cd8a0f9ca4c71820dc1e",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "OSコマンド文字列をシェルで解釈させる経路をなくし固定exeと検証済み個別引数にする。HTML/SQLの処理は別の解釈器向け。長さだけでは短い制御文字の悪用を防げない。オプション注入やパス範囲も検証対象。 原本の解き直し: URLのuser=;cat%20/etc/passwdはシェルでファイルを読むOSコマンドインジェクション、イ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q36",
+          "officialAnswer": "イ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q36.webp",
+              "sha256": "4532e42f2b1f80c115979650358e0e52f92675958dcabde1dbe362a3cbe86edc"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "1388c2f00290cfbf0c879c2de7d4285272ae8d6af5291cf180b29c377a5e16e2",
+      "change": "原問と同じ種類判定へ戻し、攻撃入力だけをOSコマンドからSQLへ変える。正答・解説・全4択理由を新しい入力に合わせて更新。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "decodedInput": "admin' OR '1'='1' -- ",
+        "sqlLiteralConcatenationExampleRows": [
+          "admin",
+          "reader"
+        ],
+        "parameterBoundExampleRows": [],
+        "uniqueAnswerReason": "SQLの引用符・OR条件・コメントがあり、改行によるHTTP応答分割、OSコマンド、ブラウザスクリプトの構文とは区別できる。脆弱性の推測であり成功の断定ではない。",
+        "originalAnswer": "イ",
+        "originalReason": "原問は ;cat /etc/passwd によるOSコマンド実行を狙う入力。"
+      },
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording",
+      "independentRevisionReview": false
+    }
+  ]
+}

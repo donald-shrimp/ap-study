@@ -281,11 +281,11 @@
   },
   {
     "questionId": "ap-diagnostic-network-001",
-    "version": 1,
-    "sha256": "ce72e8a62da0ea74ad8d3639df2bea63d3d53c51c1e28c5cd07cde07dc2a3c60",
+    "version": 2,
+    "sha256": "f9b561a8763d8f41879815246f43255cf24a26f34bdc2787647c289d68c33858",
     "author": "codex-author-run-20261007T164320Z",
-    "reviewer": "codex-review-run-20261008-scheduled-continuation",
-    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "reviewer": "codex-editorial-run-20261008-source-wording",
+    "checkedAt": "2026-10-08T00:07:33.737962+00:00",
     "checks": {
       "source": true,
       "answer": true,
@@ -293,12 +293,16 @@
       "choices": true,
       "wording": true
     },
-    "notes": "MTUはIP全体の上限。TCPデータ上限1280−20−32=1228。2400−1228=1172。2個目のIP全長1224、1個目1280、データ合計2400。Ethernet18byteを引く必要はない。 原本の解き直し: 元MTU1500、両ヘッダー20、データ2000なので2000−(1500−40)=540、イ。Ethernetは外。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "notes": "原問にある説明量と文の構造へ戻し、出題のために必要な条件のみを残す。数値・正答・4択理由は変更なし。 原本画像と公式正解を再照合し、正答・全4択理由・改変箇所を確認。検算根拠と旧版の問題・レビューは改訂記録へ保存。authorは初版作者の識別、今回の改訂担当と再確認担当は同じ1担当・同一実行。別担当・並列・盲検による独立改訂レビューとは称さない。",
     "method": {
       "separateExecution": true,
       "separateAgent": false,
       "blindContext": false,
-      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+      "originalAuthorRun": "codex-author-run-20261007T164320Z",
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording",
+      "independentRevisionReview": false,
+      "revisionRecord": "content/ap/diagnostic-revisions/20261008-source-wording.json"
     },
     "sourceEvidence": {
       "parentQuestionId": "r07h-q30",
@@ -312,15 +316,18 @@
         }
       ]
     },
-    "changes": []
+    "changes": [
+      "原問にある説明量と文の構造へ戻し、出題のために必要な条件のみを残す。数値・正答・4択理由は変更なし。"
+    ],
+    "editor": "codex-editorial-run-20261008-source-wording"
   },
   {
     "questionId": "ap-diagnostic-security-001",
-    "version": 1,
-    "sha256": "63fe5b59a5d0ac6f86dd8b23c86ebc0fe5d729ef9fa3cd8a0f9ca4c71820dc1e",
+    "version": 2,
+    "sha256": "1388c2f00290cfbf0c879c2de7d4285272ae8d6af5291cf180b29c377a5e16e2",
     "author": "codex-author-run-20261007T164320Z",
-    "reviewer": "codex-review-run-20261008-scheduled-continuation",
-    "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+    "reviewer": "codex-editorial-run-20261008-source-wording",
+    "checkedAt": "2026-10-08T00:07:33.737962+00:00",
     "checks": {
       "source": true,
       "answer": true,
@@ -328,12 +335,16 @@
       "choices": true,
       "wording": true
     },
-    "notes": "OSコマンド文字列をシェルで解釈させる経路をなくし固定exeと検証済み個別引数にする。HTML/SQLの処理は別の解釈器向け。長さだけでは短い制御文字の悪用を防げない。オプション注入やパス範囲も検証対象。 原本の解き直し: URLのuser=;cat%20/etc/passwdはシェルでファイルを読むOSコマンドインジェクション、イ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+    "notes": "原問と同じ種類判定へ戻し、攻撃入力だけをOSコマンドからSQLへ変える。正答・解説・全4択理由を新しい入力に合わせて更新。 原本画像と公式正解を再照合し、正答・全4択理由・改変箇所を確認。検算根拠と旧版の問題・レビューは改訂記録へ保存。authorは初版作者の識別、今回の改訂担当と再確認担当は同じ1担当・同一実行。別担当・並列・盲検による独立改訂レビューとは称さない。",
     "method": {
       "separateExecution": true,
       "separateAgent": false,
       "blindContext": false,
-      "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+      "originalAuthorRun": "codex-author-run-20261007T164320Z",
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording",
+      "independentRevisionReview": false,
+      "revisionRecord": "content/ap/diagnostic-revisions/20261008-source-wording.json"
     },
     "sourceEvidence": {
       "parentQuestionId": "r07h-q36",
@@ -347,7 +358,10 @@
         }
       ]
     },
-    "changes": []
+    "changes": [
+      "原問と同じ種類判定へ戻し、攻撃入力だけをOSコマンドからSQLへ変える。正答・解説・全4択理由を新しい入力に合わせて更新。"
+    ],
+    "editor": "codex-editorial-run-20261008-source-wording"
   },
   {
     "questionId": "ap-diagnostic-development-001",

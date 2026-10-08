@@ -2,7 +2,7 @@
   "format": "hitomon-diagnostic-progress",
   "version": 1,
   "qualificationId": "ap",
-  "updatedAt": "2026-10-07T19:23:29.204036+00:00",
+  "updatedAt": "2026-10-08T00:07:33.737962+00:00",
   "publishedCount": 17,
   "draftCount": 0,
   "pendingReviewCount": 0,
@@ -176,9 +176,9 @@
       "status": "reviewed",
       "draftVersion": 1,
       "draftSha256": "920713dce89651e40be0cb80bacbc70daf1e970bcc6cb7a03963514c2514a165",
-      "publishedVersion": 1,
-      "publishedSha256": "ce72e8a62da0ea74ad8d3639df2bea63d3d53c51c1e28c5cd07cde07dc2a3c60",
-      "reviewRun": "codex-review-run-20261008-scheduled-continuation"
+      "publishedVersion": 2,
+      "publishedSha256": "f9b561a8763d8f41879815246f43255cf24a26f34bdc2787647c289d68c33858",
+      "reviewRun": "codex-editorial-run-20261008-source-wording"
     },
     {
       "questionId": "ap-diagnostic-security-001",
@@ -187,9 +187,9 @@
       "status": "reviewed",
       "draftVersion": 1,
       "draftSha256": "816b044ec210ba8839688f2644b8a837172137361707eca53a1e2572b150d782",
-      "publishedVersion": 1,
-      "publishedSha256": "63fe5b59a5d0ac6f86dd8b23c86ebc0fe5d729ef9fa3cd8a0f9ca4c71820dc1e",
-      "reviewRun": "codex-review-run-20261008-scheduled-continuation"
+      "publishedVersion": 2,
+      "publishedSha256": "1388c2f00290cfbf0c879c2de7d4285272ae8d6af5291cf180b29c377a5e16e2",
+      "reviewRun": "codex-editorial-run-20261008-source-wording"
     },
     {
       "questionId": "ap-diagnostic-development-001",
@@ -272,7 +272,7 @@
   "resume": {
     "scheduledLocalTime": "2026-10-08T04:20:00+09:00",
     "timeZone": "Asia/Tokyo",
-    "nextAction": "Initial 17 questions reviewed. All topics tied at 1. Next authoring starts with theory using a different 2021–2024 parent, then one full 17-topic round; leave new same-execution drafts pending a later review run.",
+    "nextAction": "Before adding more variants, review the remaining 15 existing questions against the source-faithful minimal-change policy; start with theory, then other topics. Do not equate editorial pending work with unreviewed mathematical correctness.",
     "questionOnlyExtraction": "python tools/read-diagnostic-drafts.py content/ap/diagnostic-drafts/20261008-first-round.json",
     "sourceChecks": "content/ap/diagnostic-drafts/20261008-first-round.json#sourceChecks",
     "authorChecks": "content/ap/diagnostic-drafts/20261008-first-round-author-checks.json",
@@ -285,5 +285,32 @@
   "parentExamCounts": {
     "r07h": 16,
     "r07a": 1
+  },
+  "editorialPolicy": {
+    "updatedAt": "2026-10-08T00:07:33.737962+00:00",
+    "name": "source-faithful-minimal-changes",
+    "alignedQuestionIds": [
+      "ap-diagnostic-network-001",
+      "ap-diagnostic-security-001"
+    ],
+    "pendingQuestionIds": [
+      "ap-diagnostic-theory-001",
+      "ap-diagnostic-logic-001",
+      "ap-diagnostic-algorithm-001",
+      "ap-diagnostic-architecture-001",
+      "ap-diagnostic-system-001",
+      "ap-diagnostic-hardware-001",
+      "ap-diagnostic-interface-001",
+      "ap-diagnostic-database-001",
+      "ap-diagnostic-development-001",
+      "ap-diagnostic-project-001",
+      "ap-diagnostic-service-001",
+      "ap-diagnostic-strategy-001",
+      "ap-diagnostic-business-strategy-001",
+      "ap-diagnostic-business-001",
+      "ap-diagnostic-law-001"
+    ],
+    "pendingCount": 15,
+    "notice": "他15問は正答等の確認済みだが、今回の文章方針による見直しは未着手。新規追加より先に確認する。"
   }
 }
