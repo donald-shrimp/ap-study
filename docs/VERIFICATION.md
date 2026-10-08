@@ -648,3 +648,5 @@ Aは問2のサービス時間条件、問30のトークンバス／リングの�
 - `tests/corpus.py`、`tests/e2e.py`、`tests/pwa.py`：通常教材・3段階ヒント・解答閲覧・保存／再開／解き直し、PWAのID・スコープ・オフラインと更新の回帰確認。これらは利用制限停止前に実行済みで、対象コードと通常教材は最終時点でも保持。
 
 [保持証拠](../content/ap/diagnostic-evidence/preservation.json)では開始mainの880ファイルをバイト比較して差分0。元画像・通常教材・カード・資格定義・共通コード・UI・PWA・Rulesを保持し、既存公開17派生のobjectも一致。学習記録の形式・同期を変更せず、本番Googleアカウントの追加同期検証は今回行っていない。
+
+公開教材コミット `ee7aa51fc13a222daf7095cca08dcdc0d1c283bd` のPagesが `built` になり、変更134ファイルの公開SHA-256が全てローカルと一致。[公開確認証拠](audits/diagnostic-mocks-public-20261008.json)。公開URLでも `tests/diagnostic-ap.py` と `tests/diagnostic-review.py` が成功し、実30問の支援なし・オフライン再開・結果とExport、180問すべての本文と画像、模試A／B各80、スマホと文字200%、実際の学習記録の前後一致を確認した。新規ゲストの検証であり、本人のGoogleアカウント同期確認ではない。
