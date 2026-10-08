@@ -1,0 +1,626 @@
+[
+  {
+    "id": "ap-mock-a-q2",
+    "stem": "ATM（現金自動預払機）が1台ずつ設置してある三つの支店を統合し，統合後の支店にはATMを1台設置する。統合後のATMの平均待ち時間を求める式はどれか。ここで，待ち時間はM/M/1の待ち行列モデルに従い，平均待ち時間にはサービス時間を含まず，ATMを1台に統合しても十分に処理できるものとする。\n\n〔条件〕\n(1) 統合前後の平均サービス時間：Tₛ\n(2) 統合前のATMの利用率：三支店ともρ\n(3) 統合後の利用者数：統合前の三支店の利用者数の合計",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "ρ/(1−ρ) × Tₛ"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "ρ/(1−3ρ) × Tₛ"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "3ρ/(1−ρ) × Tₛ"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "3ρ/(1−3ρ) × Tₛ"
+      }
+    ],
+    "correctChoiceId": "choice-3"
+  },
+  {
+    "id": "ap-mock-a-q4",
+    "stem": "符号長7ビット，情報ビット数4ビットのハミング符号による誤り訂正の方法を，次のとおりとする。\n受信した7ビットの符号語x₁ x₂ x₃ x₄ x₅ x₆ x₇（xₖ＝0又は1）に対して\nc₀＝x₁＋x₃＋x₅＋x₇\nc₁＝x₂＋x₃＋x₆＋x₇\nc₂＝x₄＋x₅＋x₆＋x₇\n（いずれもmod 2での計算）\nを計算し，c₀，c₁，c₂の中に少なくとも一つは0でないものがある場合には，\ni＝c₀＋c₁×2＋c₂×4\nを求めて，左からiビット目を反転することによって誤りを訂正する。\n受信した符号語が1001111であった場合，誤り訂正後の符号語はどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "1001110"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "1001011"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "0001111"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "1000111"
+      }
+    ],
+    "correctChoiceId": "choice-2"
+  },
+  {
+    "id": "ap-mock-a-q5",
+    "stem": "2以上の整数Mに対して，次の二つの流れ図に示すアルゴリズムを実行したとき，結果xの値が等しくなるようにしたい。aに入れる条件として，適切なものはどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "n > M−1"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "n > M"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "n > M＋1"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "n < M"
+      }
+    ],
+    "correctChoiceId": "choice-1",
+    "image": "assets/questions/diagnostic/mock-a-q5-flow.svg",
+    "imageAlt": "流れ図の終了条件の図"
+  },
+  {
+    "id": "ap-mock-a-q6",
+    "stem": "各ノードがもつデータを出力する再帰処理f（ノードn）を定義した。この処理を，図の2分木の根（最上位のノード）から始めたときの出力はどれか。\n\n〔f（ノードn）の定義〕\n1. ノードnの右に子ノードrがあれば，f（ノードr）を実行\n2. ノードnの左に子ノードlがあれば，f（ノードl）を実行\n3. 再帰処理f（ノードr），f（ノードl）を未実行の子ノード，又は子ノードがなければ，ノードn自身がもつデータを出力\n4. 終了",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "＋÷−ED×BCA"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "ACB×DE−÷＋"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "ED−BC×÷A＋"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "E−D÷B×C＋A"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q6-tree.svg",
+    "imageAlt": "二分木の再帰出力の図"
+  },
+  {
+    "id": "ap-mock-a-q8",
+    "stem": "同一メモリ空間で，転送元の開始アドレス，転送先の開始アドレス，方向フラグ及び転送語数をパラメータとして指定することによって，データをブロック転送できる機能をもつCPUがある。図のようにアドレス2003から2006のデータをアドレス2001から2004に転送するとき，指定するパラメータとして適切なものはどれか。ここで，転送は開始アドレスから1語ずつ行われ，方向フラグに0を指定するとアドレスの昇順に，1を指定するとアドレスの降順に転送を行うものとする。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "転送元の開始アドレス：2003，転送先の開始アドレス：2001，方向フラグ：0，転送語数：4"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "転送元の開始アドレス：2003，転送先の開始アドレス：2001，方向フラグ：1，転送語数：4"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "転送元の開始アドレス：2006，転送先の開始アドレス：2004，方向フラグ：0，転送語数：4"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "転送元の開始アドレス：2006，転送先の開始アドレス：2004，方向フラグ：1，転送語数：4"
+      }
+    ],
+    "correctChoiceId": "choice-0",
+    "image": "assets/questions/diagnostic/mock-a-q8-memory.svg",
+    "imageAlt": "重複領域のブロック転送の図"
+  },
+  {
+    "id": "ap-mock-a-q11",
+    "stem": "20Mバイトのプログラムを圧縮して，フラッシュメモリに格納している。プログラムのサイズは圧縮によって元のサイズの30%になっている。フラッシュメモリから主記憶への転送速度が15Mバイト/秒であり，1Mバイトに圧縮されたデータの展開に主記憶上で0.04秒が掛かるとき，このプログラムが主記憶に展開されるまでの時間は何秒か。ここで，フラッシュメモリから主記憶への転送と圧縮データの展開は同時には行われないものとする。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "0.40"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "0.64"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "0.80"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "1.20"
+      }
+    ],
+    "correctChoiceId": "choice-1"
+  },
+  {
+    "id": "ap-mock-a-q14",
+    "stem": "1台のCPUの性能を1とするとき，そのCPUをn台用いたマルチプロセッサの性能Pが，\nP＝n/{1＋(n−1)a}\nで表されるとする。ここで，aはオーバーヘッドを表す定数である。例えば，a＝0.2，n＝4とすると，P＝2.5なので，4台のCPUから成るマルチプロセッサの性能は2.5になる。この式で表されるマルチプロセッサの性能には上限があり，nを幾ら大きくしても，Pはある値以上には大きくならない。a＝0.2の場合，Pの上限は幾らか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "2.5"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "5"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "10"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "20"
+      }
+    ],
+    "correctChoiceId": "choice-1"
+  },
+  {
+    "id": "ap-mock-a-q17",
+    "stem": "三つの資源X〜Zを占有して処理を行う四つのプロセスA〜Dがある。各プロセスは処理の進行に伴い，表中の数値の順に資源を占有し，実行終了時に三つの資源を一括して解放する。プロセスAと同時にもう一つプロセスを動かした場合に，デッドロックを起こす可能性があるプロセスはどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "B，C，D"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "C，D"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "Cだけ"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "Dだけ"
+      }
+    ],
+    "correctChoiceId": "choice-3",
+    "image": "assets/questions/diagnostic/mock-a-q17-order.svg",
+    "imageAlt": "資源占有とデッドロックの図"
+  },
+  {
+    "id": "ap-mock-a-q18",
+    "stem": "複数のクライアントから接続されるサーバがある。このサーバのタスクの多重度が2以下の場合，タスク処理時間は常に3秒である。このサーバに1秒間隔で5件の処理要求が到着した場合，全ての処理が終わるまでの時間はタスクの多重度が1のときと2のときとで，何秒の差があるか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "4"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "5"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "6"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "7"
+      }
+    ],
+    "correctChoiceId": "choice-2"
+  },
+  {
+    "id": "ap-mock-a-q21",
+    "stem": "入力がAとB，出力がYの論理回路を動作させたとき，図のタイムチャートが得られた。この論理回路として，適切なものはどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "",
+        "image": "assets/questions/diagnostic/mock-a-q21-choice-0.webp"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "",
+        "image": "assets/questions/diagnostic/mock-a-q21-choice-1.webp"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "",
+        "image": "assets/questions/diagnostic/mock-a-q21-choice-2.webp"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "",
+        "image": "assets/questions/diagnostic/mock-a-q21-choice-3.webp"
+      }
+    ],
+    "correctChoiceId": "choice-1",
+    "image": "assets/questions/diagnostic/mock-a-q21-timing.svg",
+    "imageAlt": "論理回路とタイミングチャートの図"
+  },
+  {
+    "id": "ap-mock-a-q22",
+    "stem": "次の方式で画素にメモリを割り当てる640×480のグラフィックLCDモジュールがある。始点（3，2）から終点（7，6）まで直線を描画するとき，直線上のx＝5の画素に割り当てられたメモリのアドレスの先頭は何番地か。ここで，画素の座標は（x，y）で表すものとする。\n\n〔方式〕\n・メモリは0番地から昇順に使用する。\n・1画素は16ビットとする。\n・座標（0，0）から座標（639，479）までメモリを連続して割り当てる。\n・各画素は，x＝0からx軸の方向にメモリを割り当てていく。\n・x＝639の次はx＝0とし，yを1増やす。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "2565"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "5120"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "5130"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "6410"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q22-pixels.svg",
+    "imageAlt": "画素とメモリアドレスの図"
+  },
+  {
+    "id": "ap-mock-a-q26",
+    "stem": "“部品”表及び“在庫”表に対し，SQL文を実行して結果を得た。SQL文のaに入れる字句はどれか。\n\n〔SQL文〕\nSELECT 部品.部品ID AS 部品ID,\n  CASE WHEN 部品.発注点 > a\n    THEN N'必要' ELSE N'不要' END AS 発注要否\nFROM 部品 LEFT OUTER JOIN 在庫\n  ON 部品.部品ID = 在庫.部品ID\nGROUP BY 部品.部品ID, 部品.発注点",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "COALESCE(MIN(在庫.在庫数), 0)"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "COALESCE(MIN(在庫.在庫数), NULL)"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "COALESCE(SUM(在庫.在庫数), 0)"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "COALESCE(SUM(在庫.在庫数), NULL)"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q26-tables.svg",
+    "imageAlt": "SQLの集計とNULLの図"
+  },
+  {
+    "id": "ap-mock-a-q33",
+    "stem": "ビット誤り率が0.0002%の回線を使って，1,000バイトのパケットを5,000個送信するとき，誤りが含まれるパケットの個数の期待値はおよそ幾らか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "10"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "16"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "80"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "160"
+      }
+    ],
+    "correctChoiceId": "choice-2"
+  },
+  {
+    "id": "ap-mock-a-q38",
+    "stem": "公開鍵暗号方式を使った暗号通信を5人が相互に行う場合，全部で何個の異なる鍵が必要になるか。ここで，一組の公開鍵と秘密鍵は2個と数える。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "6"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "10"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "20"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "25"
+      }
+    ],
+    "correctChoiceId": "choice-1"
+  },
+  {
+    "id": "ap-mock-a-q51",
+    "stem": "EVMで管理しているプロジェクトがある。図は，プロジェクトの開始から完了予定までの期間の半分が経過した時点での状況である。コスト効率，スケジュール効率がこのままで推移すると仮定した場合の見通しのうち，適切なものはどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "計画に比べてコストは多くなり，プロジェクトの完了は遅くなる。"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "計画に比べてコストは多くなり，プロジェクトの完了は早くなる。"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "計画に比べてコストは少なくなり，プロジェクトの完了は遅くなる。"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "計画に比べてコストは少なくなり，プロジェクトの完了は早くなる。"
+      }
+    ],
+    "correctChoiceId": "choice-3",
+    "image": "assets/questions/diagnostic/mock-a-q51-evm.svg",
+    "imageAlt": "EVMの見通しの図"
+  },
+  {
+    "id": "ap-mock-a-q52",
+    "stem": "図のアローダイアグラムで表されるプロジェクトがある。結合点5の最早結合点時刻はプロジェクトの開始から第何日か。ここで，プロジェクトの開始日は0日目とする。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "6"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "7"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "10"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "11"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q52-arrow.svg",
+    "imageAlt": "最早結合点時刻の図"
+  },
+  {
+    "id": "ap-mock-a-q54",
+    "stem": "工場の生産能力を増強する方法として，新規システムを開発する案と既存システムを改修する案とを検討している。次の条件で，期待金額価値の高い案を採用するとき，採用すべき案と期待金額価値との組合せのうち，適切なものはどれか。ここで，期待金額価値は，収入と投資額との差で求める。\n\n〔条件〕\n・新規システムを開発する場合の投資額は90億円であって，既存システムを改修する場合の投資額は60億円である。\n・需要が拡大する確率は80%であって，需要が縮小する確率は20%である。\n・新規システムを開発した場合，需要が拡大したときは190億円の収入が見込まれ，需要が縮小したときは60億円の収入が見込まれる。\n・既存システムを改修した場合，需要が拡大したときは130億円の収入が見込まれ，需要が縮小したときは50億円の収入が見込まれる。\n・他の条件は考慮しない。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "既存システムの改修，54億円"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "既存システムの改修，114億円"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "新規システムの開発，74億円"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "新規システムの開発，164億円"
+      }
+    ],
+    "correctChoiceId": "choice-2"
+  },
+  {
+    "id": "ap-mock-a-q55",
+    "stem": "SaaS（Software as a Service）による新規サービスを提供するに当たって，顧客への課金方式を検討している。課金方式①〜④のうち，想定利用状況に基づいて最も高い利益が得られる課金方式を採用したときの，年間利益は何万円か。ここで，新規サービスの課金は月ごとに行い，各月の想定利用状況は同じとする。また，新規サービスの運用に掛かる費用は1,100万円/年とする。\n\n〔課金方式〕\n①月間のサービス利用時間による従量課金：3,500円/時間\n②月間のトランザクション件数による従量課金：600円/件\n③月末時点のディスク割当て量による従量課金：250円/GB\n④月末時点の利用者ID数による従量課金：1,800円/ID\n\n〔想定利用状況〕\n・サービス利用時間：300時間/月\n・トランザクション件数：1,800件/月\n・月末時点のディスク割当て量：4,000GB\n・月末時点の利用者ID数：700ID",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "100"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "160"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "196"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "412"
+      }
+    ],
+    "correctChoiceId": "choice-3"
+  },
+  {
+    "id": "ap-mock-a-q64",
+    "stem": "IT投資案件において，投資効果をPBP（Pay Back Period）で評価する。投資額が700のとき，期待できるキャッシュインの四つのシナリオa〜dのうち，効果が最も高いものはどれか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "a"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "b"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "c"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "d"
+      }
+    ],
+    "correctChoiceId": "choice-1",
+    "image": "assets/questions/diagnostic/mock-a-q64-cash-final.svg",
+    "imageAlt": "投資回収期間の比較の図"
+  },
+  {
+    "id": "ap-mock-a-q75",
+    "stem": "製品X，Yを1台製造するのに必要な部品数は，表のとおりである。製品1台当たりの利益がX，Yともに1万円のとき，利益は最大何万円になるか。ここで，部品Aは150個，部品Bは90個まで使えるものとする。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "45"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "50"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "60"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "90"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q75-parts.svg",
+    "imageAlt": "製造量と利益の最大化の図"
+  },
+  {
+    "id": "ap-mock-a-q76",
+    "stem": "今年度のA社の販売実績と費用（固定費，変動費）を表に示す。来年度，固定費が10%増加し，販売単価が5%低下すると予測されるとき，今年度と同じ営業利益を確保するためには，最低何台を販売する必要があるか。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "3,300"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "3,334"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "3,482"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "3,519"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q76-sales.svg",
+    "imageAlt": "利益を維持する販売台数の図"
+  },
+  {
+    "id": "ap-mock-a-q77",
+    "stem": "損益計算資料から求められる損益分岐点売上高は，何百万円か。",
+    "choices": [
+      {
+        "id": "choice-0",
+        "label": "ア",
+        "text": "240"
+      },
+      {
+        "id": "choice-1",
+        "label": "イ",
+        "text": "360"
+      },
+      {
+        "id": "choice-2",
+        "label": "ウ",
+        "text": "480"
+      },
+      {
+        "id": "choice-3",
+        "label": "エ",
+        "text": "540"
+      }
+    ],
+    "correctChoiceId": "choice-2",
+    "image": "assets/questions/diagnostic/mock-a-q77-breakeven.svg",
+    "imageAlt": "損益分岐点売上高の図"
+  }
+]

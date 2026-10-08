@@ -63,7 +63,8 @@ with sync_playwright() as p:
     if pending:
         assert page.locator('#draft-notice').is_visible()
         page.locator('#search').fill(pending[0]['parentQuestionId'])
-        assert page.locator('#question-list button').count() == 1
+        assert page.locator('#question-list button').count() >= 1
+        assert all(pending[0]['parentQuestionId'] in text for text in page.locator('#question-list button').all_text_contents())
         page.locator('#choices input').first.check()
         page.locator('#reveal').click()
         assert page.locator('#answer-heading').inner_text().startswith('正解：')
@@ -75,6 +76,16 @@ with sync_playwright() as p:
         assert pending[-1]['questionId'] in page.locator('#identity').inner_text()
     page.locator('#status').select_option('published')
     assert page.locator('#question-list button').count()==len(bank), 'Archived initial drafts do not appear twice.'
+    sets = json.loads((ROOT/'content/ap/mock-sets.json').read_text())['sets']
+    for pack in sets:
+        page.locator('#mock-set').select_option(pack['id'])
+        available=[slot for slot in pack['slots'] if slot['questionId'] in {q['id'] for q in bank}]
+        assert page.locator('#question-list button').count()==len(available)
+        assert f'完成{len(available)} / 80問' in page.locator('#mock-summary').inner_text()
+        displayed=page.locator('#question-list button').all_text_contents()
+        assert all(f'問{slot["number"]} · ' in text and slot['questionId'] in text for slot,text in zip(available,displayed))
+        if pack['status']=='ready': assert len(available)==80
+    page.locator('#mock-set').select_option('')
     page.locator('#next').click()
     assert page.locator('#result').is_hidden()
     # Every item, including diagrams and newly authored drafts, can be inspected.
@@ -88,6 +99,8 @@ with sync_playwright() as p:
         assert page.locator('#answer-heading').inner_text().startswith('正解：'+correct)
         assert page.locator('#reasons li').count()==4
         page.locator('#original-details').evaluate('(el)=>el.open=true')
+        for image in page.locator('#original-images img, #figures img, #choices img').all():
+            image.scroll_into_view_if_needed()
         page.wait_for_function('Array.from(document.querySelectorAll("#original-images img, #figures img, #choices img")).every(img=>img.complete&&img.naturalWidth>0)')
         parent=parents[q['parentQuestionId']]
         assert page.locator('#original-answer').text_content()=='公式正解：'+next(c['label'] for c in parent['choices'] if c['id']==parent['correctChoiceId'])

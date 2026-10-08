@@ -1,0 +1,87 @@
+{
+  "author": "codex-agent-author-mock-b-20261008T163032Z",
+  "createdAt": "2026-10-08T16:30:32.277221Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-b-q41",
+      "sha256": "ab2c280f9bce1f17a76cd14c4a6a7c2a393ae90f51e2da253cbd811690c073dc",
+      "independentReview": false,
+      "calculationAndChoices": "ア=CVE，イ=CWE，ウ=スクリーンショット，エ=製品種別。CWEは弱点の共通分類でありイだけ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をCVEからCWEへ変更し，弱点の種類という説明を正答に置換。元の識別対象を選ぶ4択形式を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q42",
+      "sha256": "c6c0eadf42b0b0fd11d48416896f69e9fef07507fe49735233edfecc42a0b7fd",
+      "independentReview": false,
+      "calculationAndChoices": "ア感染隔離，イID固定で弱化，ウsource port randomで予測困難，エdest53限定で通常DNS動作。ウだけ直接有効。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "有効なランダム化の対象をDNSヘッダーIDから送信元ポートへ変更。IDの候補を固定へ，ポートの候補をランダムへ変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q43",
+      "sha256": "4946f741c3a5f00590996257713b349a7a3cfa48d6a694f04ac9d1f89e91a0ab",
+      "independentReview": false,
+      "calculationAndChoices": "アITasset inventory，イSBOM，ウSIEM，エvulnerability management。SIEMはウのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う対象をSBOMからSIEMへ変更。元の4説明を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q44",
+      "sha256": "c4c42e65eacad8bcdf2629939a46c4ef5dd4531adf6b5989d062b70adc03299c",
+      "independentReview": false,
+      "calculationAndChoices": "アrandom source port，イDKIM，ウSPF，エDNSSEC。イだけメール署名。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をDNSSECからDKIMへ変更。原問の4仕様の説明を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q45",
+      "sha256": "9735a498e5c69cacb90c4a96d1de024f2378ad35875972e30c2abd1013a50f28",
+      "independentReview": false,
+      "calculationAndChoices": "アはVLANの効果，イICMP全遮断でない，ウIP基準でない，エMAC登録判別。エのみ。MAC詐称を完全排除するとは書かずリスク低減を保持。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "40台のVLAN分割の場面を60台のMACアドレス認証へ変更。原問の4効果の説明を維持し，認証の効果を選ぶ。"
+    },
+    {
+      "questionId": "ap-mock-b-q46",
+      "sha256": "38408be22ea03658a9632b4db2c5c1155d94bac628475b09e899e8e1b206f9ce",
+      "independentReview": false,
+      "calculationAndChoices": "アexploit，イOTP，ウMAC，エmalware signature。MACはウのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をエクスプロイトコードからメッセージ認証コードへ変更。原問の4説明を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q47",
+      "sha256": "268648c9fd242e40743c7d39764562c5baa90b248507f481e1f27ace530b9ddd",
+      "independentReview": false,
+      "calculationAndChoices": "ア技術独立性・ウ独立デプロイはmicroservices，イ単一transactionによる整合はmonolithの利点，エnetwork増は削減にならない。イのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をマイクロサービスからモノリシックへ変更。同じ4観点の比較を維持し，複数正解を避けて技術選択の候補は独立性を問う形に変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q48",
+      "sha256": "e28f79e4bd8863afb82b283d3b2127792a3335a7cc6bbb21ab1359d306e8f65c",
+      "independentReview": false,
+      "calculationAndChoices": "アfunctional suitability，イusability，ウmaintainability，エreliability recoverability。アのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う品質特性を使用性から機能適合性へ変更。元の4目標例を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q49",
+      "sha256": "5349d972996f30ed5922a9e8d5a5e9bc483d93d4f66f5583c723a4e115414ee9",
+      "independentReview": false,
+      "calculationAndChoices": "ア目的/範囲共有，イstory map，ウcard estimate，エmodeling。カード同時提示と差の議論はウのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "共通認識を得る対象を初期の目的・範囲からユーザーストーリーの作業量へ変更。原問の4手法を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q50",
+      "sha256": "eadd5f2d133b9dddf4ebf36652c6ee9227554d04060054467502b74df6e96053",
+      "independentReview": false,
+      "calculationAndChoices": "アCSS条件，イAPI組合せ，ウclient情報，エ持続接続双方向。エのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "表示領域への適応から継続的な双方向通信へ対象機能を変更。同じWeb実装の4技術から選ぶ形を維持。"
+    }
+  ]
+}

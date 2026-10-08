@@ -16,7 +16,8 @@ parents={q['id']:q for q in read('data/qualifications/ap/'+manifest['index']['ur
 assert not checks['independentReview'] and checks['author']==batch['author']
 assert len(batch['questions'])==8 and len({q['topicId'] for q in batch['questions']})==8
 assert len({q['parentQuestionId'] for q in batch['questions']})==8
-assert not {q['parentQuestionId'] for q in batch['questions']} & {q['parentQuestionId'] for q in published}
+first_round = [q for q in published if q['packId']=='ap-derived-first-round']
+assert not {q['parentQuestionId'] for q in batch['questions']} & {q['parentQuestionId'] for q in first_round}
 records={item['questionId']:item for item in progress['items']}
 evidence={e['questionId']:e for e in batch['sourceChecks']}
 authorchecks={c['questionId']:c for c in checks['checks']}
@@ -34,6 +35,11 @@ for q in batch['questions']:
     for image in evidence[q['id']]['sourceImages']:
         assert hashlib.sha256((ROOT/image['path']).read_bytes()).hexdigest()==image['sha256']
     if pending: assert q['id'] not in {p['id'] for p in published}
+    else:
+        finished=next(p for p in published if p['id']==q['id'])
+        review=next(v for v in read('content/ap/diagnostic-reviews.json') if v['questionId']==q['id'])
+        assert review['sha256']==digest(finished)==r['publishedSha256']
+        assert finished['enrichment']=='reviewed' and review['method']['separateAgent']
 
 def choice(q): return next(c['text'] for c in q['choices'] if c['id']==q['correctChoiceId'])
 theory=bytopic['theory']
@@ -52,4 +58,4 @@ assert '320×240' in interface['stem'] and '24ビット' in interface['stem'] an
 bits=320*240*24*30
 assert bits==55296000 and abs(bits-55*10**6)<10**6
 assert choice(interface)=='55Mビット／秒'
-print('8 drafts: source/hash/structure and numeric self-checks passed. Separate content review remains required.')
+print('8 historical drafts: source/hash/structure and numeric self-checks passed; reviewed versions checked when promoted.')

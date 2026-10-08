@@ -1,0 +1,87 @@
+{
+  "author": "codex-agent-author-mock-b-20261008T162515Z",
+  "createdAt": "2026-10-08T16:25:15.295491Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-b-q31",
+      "sha256": "a277c3d10fa3932462b565f4145d01f5b7a8837a6f72a8b4fe5c276354721e0f",
+      "independentReview": false,
+      "calculationAndChoices": "アcheckpoint，イsavepoint，ウ制約検査，エ2相commit決定。イのみ対象に一致。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う対象をチェックポイントからセーブポイントへ変更。原問の4説明を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q32",
+      "sha256": "8a76107505eea961721f1d8e92a074c36d3a08f2db54287ae506cf951afc37b7",
+      "independentReview": false,
+      "calculationAndChoices": "必要速度16/(6*.8)=3.333…Mbit/s。4回線の時間10=2s，2=10s，1=20s，4=5s。期限内は10と4，最小は4。仮にMバイトを2^20，Mbit/sを10^6と解釈しても4Mbit/sで5.24288秒で6秒以内，2Mbit/sでは10.48576秒で超える。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "データ量1Mバイトを2Mバイト，期限5秒を6秒，伝送効率60%を80%へ変更。回線4種類を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q33",
+      "sha256": "12c3598c824cc6a03cea9b376828ae1ca0a556aead50281b4a0b43a3cb7c5a93",
+      "independentReview": false,
+      "calculationAndChoices": "アMX/NS不一致，イresolver/resolution不一致，ウ正逆不一致，エCNAME別名で一致。エのみ正しい。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "正しい説明を逆引きからCNAMEへ変更。原問の4説明のうち逆引きを正引き，NSをCNAMEへ変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q34",
+      "sha256": "d6b0527b987c0f11cf23b78e37f382ec29f7f92567ec60d97e657ade0de84953",
+      "independentReview": false,
+      "calculationAndChoices": "アNAT，イDHCP，ウICMP，エRARPに対応。イのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象プロトコルをICMPからDHCPへ変更。元の4機能の説明を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q35",
+      "sha256": "940e42c8d897276039565137f95e51ae28eaa92c22f38ea562e08bba658cd1c2",
+      "independentReview": false,
+      "calculationAndChoices": "クラスC最大254，Dマルチキャスト，B65534，Aホスト24ビット。ウのみ。原問ウのプライベート通信はBも可能なので，曖昧な誤答を置換。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をクラスDからクラスBへ変更。重複を避け，原問のプライベート・ユニキャストの説明をクラスAの説明へ変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q36",
+      "sha256": "2b2331bc8150fc16e8fe645ac125572c88f0673f50939c728f42cb64e3c726fd",
+      "independentReview": false,
+      "calculationAndChoices": "netstat接続，arp対応表，pingICMP応答，ipconfig/ifconfig設定。ICMP応答を調べるのはウのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "調べる対象をプリンターのMACアドレスからICMP応答による通信可否へ変更。原問の4コマンドを保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q37",
+      "sha256": "f056d3419d42d0143580ed6236251c4aa40858432d9ef44493953caa59c54f41",
+      "independentReview": false,
+      "calculationAndChoices": "認証主体の配置変更後も資格情報をサービスへ送らず，認証結果を渡す。ア・ウパスワード送信，エchallenge responseで不適切。イのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "利用者管理と認証の配置を企業内から外部認証クラウドへ変更。認証クラウドと業務サービスが別主体という場面にし，同じSAML動作を問う。"
+    },
+    {
+      "questionId": "ap-mock-b-q38",
+      "sha256": "8ec392da5f56a8ad9b95114f5f5813174238f19bab7cd9b3de01219ad312b57e",
+      "independentReview": false,
+      "calculationAndChoices": "SYNの送信元が未使用IPなのでSYN/ACK宛先はそこ。残り3択は実在対象宛の通常/攻撃通信で条件を満たさない。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "未使用IP空間への到着原因を宛先探索から，未使用IPを送信元としたSYNへの応答に変更。パケットの種類を4説明から選ぶ。"
+    },
+    {
+      "questionId": "ap-mock-b-q39",
+      "sha256": "3c3b3701d25c6bcb3af463d79f98a4717c947706a1c3363d4a5b262f90dda5fc",
+      "independentReview": false,
+      "calculationAndChoices": "ア=deepfake，イ=虚偽の窃取脅迫，ウ=認証情報悪用，エ=ransomware。エのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う攻撃をディープフェイクからランサムウェアへ変更。原問の4場面を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q40",
+      "sha256": "778c71427b303bdca23aa0ece221d06408c116e976f7b021950d95c253d30c5a",
+      "independentReview": false,
+      "calculationAndChoices": "ハッシュ事前表，単語候補，漏えい組再利用，録画操作の4方式を区別。辞書攻撃はイだけ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う攻撃をパスワードリスト攻撃から辞書攻撃へ変更。原問の4場面を保持。"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "author": "codex-agent-author-mock-a-20261008T161211Z",
+  "createdAt": "2026-10-08T16:12:11.508153Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-a-q1",
+      "version": 1,
+      "sha256": "6842bdc635d51052dd18b76a1eabc68c288be8f202c298040b486351398354e9",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "P(機械|不良品)を問う選択肢はエだけ。機械が複数という条件で原因推定が成立する。",
+      "allFourChoices": [
+        "機械を原因として製品の品質という結果の確率を求めており，結果から原因を推定する事後確率ではない。",
+        "製品の品質という結果の組合せの確率を求めている。",
+        "観測した品質による更新前の，機械を選ぶ事前確率である。",
+        "不良品という観測結果を条件として，製造機械という原因の事後確率を求める。"
+      ],
+      "changes": "袋・白赤の玉・取出しを，製造機械・良不良の製品・製造へ変更。問い方と4択の因果方向を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q2",
+      "version": 1,
+      "sha256": "6b507e8df0bf351996ef54324b0d1906a35519f45803068bac9ee46a2fb0b48f",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "例ρ=0.2,Tₛ=1なら統合後0.6/(1−0.6)=1.5。4択は0.25,0.5,0.75,1.5でエのみ一致。ρの成立範囲0<ρ<1/3。",
+      "allFourChoices": [
+        "統合前1台の利用率ρを用いた式で，利用者増加を反映していない。",
+        "分母は統合後の利用率だが，分子が統合前のρのままである。",
+        "分子は統合後の利用率だが，分母が統合前の1−ρのままである。",
+        "分子・分母とも統合後の利用率3ρを用いている。"
+      ],
+      "changes": "二支店を三支店へ変更し，選択肢中の2ρを3ρへ変更。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q3",
+      "version": 1,
+      "sha256": "2551ae9705b572ecafa3ea4193493522c0a4b087314be60558eb23efadd1f4d1",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "エだけが専門知識をルールとして表現して推論する説明。アのニューラル学習，イ・ウのデータ分析は対象と異なる。",
+      "allFourChoices": [
+        "多層のニューラルネットワークを用いるディープラーニングの説明である。",
+        "大量のデータから規則を発見する分析に関する説明で，蓄えた専門知識による推論の説明ではない。",
+        "大量・多様なデータの分析に関する説明で，知識ベースと推論機構の説明ではない。",
+        "ルールで表現した知識を使って結論を導く，エキスパートシステムの方式を説明している。"
+      ],
+      "changes": "対象をディープラーニングからエキスパートシステムへ変更し，同じ記述選択の4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q4",
+      "version": 1,
+      "sha256": "0d3fbabbb9fbb1c426918253e3dc10877cd054b4c955f66ef6100f0ddb78be3d",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "作者Python検算c=(1,0,0),i=1,0001111。訂正後は全検査0。誤答は位置7・5・4の反転で，検査非0。",
+      "allFourChoices": [
+        "右端の7ビット目を反転しており，i＝1と一致しない。",
+        "5ビット目を反転しており，i＝1と一致しない。",
+        "左から1ビット目を反転した符号語である。",
+        "4ビット目を反転しており，i＝1と一致しない。"
+      ],
+      "changes": "受信語1000101を1001111へ変更。4択は変更後の受信語の異なる1ビットを反転した値に更新。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q5",
+      "version": 1,
+      "sha256": "42a3b4306f4e7f6b961a5427cad9f5a7a460a9985055525631776b324c3c9392",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "M=2,3,4,5で右の各条件を追跡。正答は2,6,24,120で左と一致。アは2,2,6,24，ウは6,24,120,720，エはM=2,3不停止，4,5は2。",
+      "allFourChoices": [
+        "M−1を掛けてn＝Mとなった時点で終了し，Mの因子が欠ける。M＝2では最初に2を掛けるため一致するが，全てのMでは成立しない。",
+        "2からMまでを掛け終えて，n＝M＋1で終了する。",
+        "M＋1まで掛けてしまい，結果が(M＋1)!となる。",
+        "Mが4以上なら最初の2を掛けた後n＝3で終了し，M!にならない。M＝2,3では条件が真にならず終了しない。"
+      ],
+      "changes": "左ループ終値1→2，右n初期値1→2。対応して整数Mを2以上とし，図の構造・選択肢の条件構成を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q6",
+      "version": 1,
+      "sha256": "060ca9b4c8f8f45c1c7cfc8d69c14940ef615f645c2e706cbc710a387df43192",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "変更後の右先後順はED−BC×÷A＋。ア右先前順，イ左先後順，エ右先中順となり全候補の違いを確認。",
+      "allFourChoices": [
+        "自分を先に出力しており，定義の右・左・自分という順序と異なる。",
+        "左・右・自分の順の出力で，左右の実行順が逆である。",
+        "右部分木ED−BC×÷，左部分木A，根＋の順になっている。",
+        "右・自分・左の順の出力で，自分の出力時点が異なる。"
+      ],
+      "changes": "木の形と演算子を保ち，×の左葉BをC，右葉CをBへ変更。出力候補も変更後の葉配置に対応。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q8",
+      "version": 1,
+      "sha256": "e1a8ecbbe5658e657d2fb08dead22956d40899b030909302bee961d141c9ec01",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "元2003,2004,2005,2006にA,B,C,Dを置き各候補を逐次実行。アの2001〜2004はA,B,C,D，エはC,D,C,Dとなり破壊。イ・ウは転送元範囲自体が異なる。",
+      "allFourChoices": [
+        "昇順に4語を転送し，未読の転送元を上書きしない。",
+        "2003→2001から降順に進むと，指定された転送元2003〜2006の範囲を読まない。",
+        "2006→2004から昇順に進むと，2007以降を読み，指定範囲を読まない。",
+        "2006→2004で未読の2004を上書きし，続く2005→2003でも未読の2003を上書きする。"
+      ],
+      "changes": "元1001〜1004から先1003〜1006を，元2003〜2006から先2001〜2004へ変更。図の二領域・4本の転送矢印を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q9",
+      "version": 1,
+      "sha256": "781642a4b09bb35e09a5c5986d893d384786b4d667545a2341802a3c52e266bd",
+      "author": "codex-agent-author-mock-a-20261008T161211Z",
+      "checkedAt": "2026-10-08T16:12:11.508153Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "アの2進データ表現が適合。イは加算能力，ウ・エは量子方式を述べ，対象に適合しない。表示結果の文字表現は内部の2進表現から変換される。",
+      "allFourChoices": [
+        "0又は1のビットに基づく通常のデジタルコンピュータの説明である。",
+        "通常のコンピュータは加算を行えるため，誤りである。",
+        "量子ビットの重ね合わせを利用する量子コンピュータの説明である。",
+        "通常のコンピュータは量子状態の観測で演算するものではなく，100℃以上で動作するという条件もない。"
+      ],
+      "changes": "問う対象を量子ゲート方式の量子コンピュータから量子ビットを用いない通常のデジタルコンピュータへ変更。同じ4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/questions/diagnostic/mock-a-q5-flow.svg",
+      "sha256": "2e0c6fa9f1bd6c0b4b528e88e53abcdec4c6dd4097c816be58b8b868fa732fb5"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q8-memory.svg",
+      "sha256": "fd94f4b092ba22deb951d1fb694dbde96be12decac7a29388b5bfb800a00d5d7"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q6-tree.svg",
+      "sha256": "71f512ad6b481529b011abb6a68ba7166ac1ca4b17a8e195a553d86c28e3a447"
+    }
+  ]
+}

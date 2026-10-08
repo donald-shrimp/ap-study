@@ -1,0 +1,1050 @@
+[
+  {
+    "questionId": "ap-mock-b-q2",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：正則化は複雑さの罰則。アはアンサンブル，ウはマルチタスク，エは交差検証。 原本再解答・全4択：ア正則化，イアンサンブル，ウマルチタスク，エ交差検証。入替評価はエ。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "d43c2b804cd77c5d9c187a0eba08325af564d6369233b96357df11425948dc48",
+    "afterSha256": "cad3335a6573cf8a15b80334bc1cef5d3eaef33c4cc4f68917de35ec1780534b"
+  },
+  {
+    "questionId": "ap-mock-b-q3",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：加算を先にA B ＋，その結果とCを乗算。アはA+B×C，ウは前置，エはA×(B+C)。 原本再解答・全4択：乗算を先にB C ×，Aとの和でA B C × ＋。ア/イ前置，エは別演算順。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "3b03e360fa4101584910abe65f13f55fb8e5e75b72a89a5038df4702660a8744",
+    "afterSha256": "fc0a422607ef9cd6dc2d4b220ebc60f7be328731fad0d2a7d324e7c5c793e928"
+  },
+  {
+    "questionId": "ap-mock-b-q4",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ミリ波レーダーは距離と相対速度を検知する。可視光は遮蔽物透視不可，超音波500mは不可，レーザーは色を識別するセンサーではない。 原本再解答・全4択：カメラは標識認識可能。超音波500m不可，ミリ波は灯色判定不可，レーザーは遮蔽透視不可。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "5eda6f2585c404af09e3e30dd62070fb17b57c1cfe8076a8e557953e530c4bbb",
+    "afterSha256": "129f8fb9761b96d294cc3173faa59b00a9f845dd22bdbebfb628149c3e16bac6"
+  },
+  {
+    "questionId": "ap-mock-b-q5",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q5-tree.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 590,
+              "height": 390
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q5-tree.svg",
+          "imageAlt": "2分探索木。根12，左8，右16。16の右は24，24の左20（子18と22），右28（子26と30）。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：画像視認。24の後継は右部分木最小26。先行22は選択肢にない。18/20を移すと22が左で大きくなり，28を移すと26が右で小さくなる。 原本再解答・全4択：削除12の右最小13が葉。9/10は左に大きい11が残り，14は右に小さい13が残る。左最大11は非選択肢。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。 修正後再確認：画像視認。24の後継は右部分木最小26。先行22は選択肢にない。18/20を移すと22が左で大きくなり，28を移すと26が右で小さくなる。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：画像視認。24の後継は右部分木最小26。先行22は選択肢にない。18/20を移すと22が左で大きくなり，28を移すと26が右で小さくなる。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "f8c9363bf73857d982290218290e8631b6a8ab15a11c04d80956299686695e08",
+    "afterSha256": "f58d9dfe799f235973c95836661f09cc216e85eace2f585435a39979a0c72be7"
+  },
+  {
+    "questionId": "ap-mock-b-q6",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：35 mod 13=9。12,23,48,52の余りは12,10,9,0。 原本再解答・全4択：同余の条件はa-bがn倍数。和の倍数もnが和/差の倍数も必要十分ではない。 表現/変更確認：原問の一般条件を具体キーへ置換したため選択肢は数値になるが，剰余衝突の同じ理解を問い，原問にある剰余の定義だけを保持。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "f50f8a10f592dc445f6d43f345d5e8ffef0a78e6f9cce2927fd73614a60736e5",
+    "afterSha256": "00032efe18f2483e8ab80a50dc02f3bc329d203fa73c18acd901f73f7a4eabbe"
+  },
+  {
+    "questionId": "ap-mock-b-q7",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：goroutineはGo。Kotlin/Scala/Rは当該仕組みではない。 原本再解答・全4択：統計パッケージ，動的変数型はR。Go/Kotlin/Scalaは静的型。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "32fae5d6718723a78b4649db046e4bedbfba7e105ff1cbc845b8243000cd21f2",
+    "afterSha256": "6492650f86257a33372d2a7bf92247a5ebb6534d9844c980b160b9b881bec39e"
+  },
+  {
+    "questionId": "ap-mock-b-q8",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：フェッチ→デコード→レジスタ読出し→実行→メモリ→書込。残りは依存する前段が逆。 原本再解答・全4択：④取得→③解釈読出→②計算→⑤メモリ→①書戻。ア/イ/エはフェッチやデコード・書込の依存違反。 表現/変更確認：原問のデコード兼レジスタ読出しを2段へ分離し，依存順を同様に問う。6段という前提とステージ一覧が必要で，解法の追加でない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "a8bafbe6c4c2d3c185b6b64db66828017e9c959c10ddc611241eaec09f0c802d",
+    "afterSha256": "db8687c968cb45a4c194668aca7ca701bfcb7fcf5a6cf3782e97620e1781e4f1"
+  },
+  {
+    "questionId": "ap-mock-b-q9",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：量子もつれは非分離の複合状態。アは量子優位性，ウは小型化，エは測定の性質に反する。 原本再解答・全4択：古典で実用不可の計算実行が量子超越。ア暗号安全性，イ物理基盤，エ小型化は定義でない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "607b33759d59956998a8d50176caa2380104eb522615dac9addb1f3fddda7a4c",
+    "afterSha256": "bbb44d20974c88d3e357f94e32c2a72077cc3089b8ae4e8117ea0f160c5a3d40"
+  },
+  {
+    "questionId": "ap-mock-b-q10",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：0.9×0.05+0.1×1=0.145，約0.15。逐次キャッシュも含めれば0.15。他値は一致しない。 原本再解答・全4択：.95/30+.05=.0816667≒.08。逐次.03333+.05=.08333でも同択。他3候補は加重平均と一致しない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "8125cc92bcdcd5e75c122a4c06452f7130de09a8bb889d87f525568eb967d6de",
+    "afterSha256": "f8643dbce79bcf86659b4f40faf50499b10c3106add7afdd68bb55c83263768b"
+  },
+  {
+    "questionId": "ap-mock-b-q11",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：iSCSIはIP上SCSI。FC限定でも光限定でもパラレル物理層でもない。 原本再解答・全4択：FCは電気/光の媒体可。IP上規格ではない，n対n限定でない，並列SCSI物理でない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "5446c0bff49e9b46908460d8afd6402318c11d124a75db832bf32976e7690ef8",
+    "afterSha256": "13f6432f82d31c40c0843b0dc56476d318bdf49c87bd4b651b9b4782b50c99ff"
+  },
+  {
+    "questionId": "ap-mock-b-q12",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：生存ノードでサービス継続，未共有セッション失われ当該トランザクション継続不可。ア/イは全体停止，エは状態共有必要。 原本再解答・全4択：共有クラスタは障害後サービスと取引継続可能。コールドでは切替中断あり，非共有では状態失われるためア/イ/ウの主張不成立。 表現/変更確認：共通条件を問題文へ移し非共有セッションを対象にすることで，同じサービス/トランザクションの継続判断を4組で問う。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "69523311577946d4bcf6f60fc2894503a61a9c05025e52073e87e249f910055d",
+    "afterSha256": "fbd8dcc5dc2f5abd8455b88b3eb745406ffa145f1d80da1d86512cbb4ff9b262"
+  },
+  {
+    "questionId": "ap-mock-b-q13",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ブロックは固定サイズアクセス。アはオブジェクト，イはファイル，エは階層とオブジェクトの混同。 原本再解答・全4択：オブジェクトはデータ+メタデータ，固有ID。アファイル，イ固定ブロック，ウの階層は固有ID方式ではない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "f1e0ab4c0206d5047e9349b99df07faefd480f655e2a9789dd953e52f9cec806",
+    "afterSha256": "8dfaa12ae2499ce6f9ab729bace192dfcb60d0baa8d4f56ba398134e47bca3b8"
+  },
+  {
+    "questionId": "ap-mock-b-q14",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q14-systems.webp"
+          ],
+          "imageSizes": [
+            {
+              "width": 877,
+              "height": 138
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q14-systems.webp",
+          "imageAlt": "AはX2台並列。BはX1台とX2台並列の直列。CはX2台直列の組2つの並列。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：図視認。A=1-.4²=.84，B=.6×.84=.504，C=1-(1-.6²)²=.5904。A>C>Bのみ。 原本再解答・全4択：A=2r-r²，B=2r²-r³，C=2r²-r⁴。A-C=r(1-r)²(r+2)>0，C-B=r³(1-r)>0。A>C>B。ほか3順は逆関係。 表現/変更確認：一般のrの大小比較を0.6へ具体化し，構成図3種類は原本通り。追加の独立故障説明は原本にもないため足さない。 修正後再確認：図視認。A=1-.4²=.84，B=.6×.84=.504，C=1-(1-.6²)²=.5904。A>C>Bのみ。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：図視認。A=1-.4²=.84，B=.6×.84=.504，C=1-(1-.6²)²=.5904。A>C>Bのみ。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "855eee7e98d83676e3f9cbbcf592d790ca12d0a0f3b772d4dcac97dff28fab51",
+    "afterSha256": "65952f4aee272bd9b3f170fd198bb8cca24736c4875a142eb8b5aabbf7a3828f"
+  },
+  {
+    "questionId": "ap-mock-b-q15",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：CPU100M/2M=50件，ネット80M/(100k×8)=100件。最小50。25/100/200は処理上限不一致。 原本再解答・全4択：サーバ100M/1M=100件，ネット80M/(200k×8)=50件，最小50。他100/200/400はボトルネック超過。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "62d5292c9aa9541b0e0aae970fea3f451b5572eb4a0de91e4f8a2fa1c792018b",
+    "afterSha256": "b7f74bcdfcb9cf0a1a28055071524616a2b74e6cf067d4215593ce62b46a26c2"
+  },
+  {
+    "questionId": "ap-mock-b-q16",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：一定量CPU→末尾がRR。アはエージング，イは短時間優先，ウは到着順。 原本再解答・全4択：短時間優先は長い仕事が新着短仕事で待ち続け得る。アはエージング防止，イRR巡回，エFCFS前順は有限で飢餓回避。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "926cc699b24b7efa9a0fd5c3dd69be6656413b153f174bbbc9f3dc25029f1843",
+    "afterSha256": "dd34c3ecef8e2c246dfa5cde03d3dc3c79d4e9814641261bc87032c530179737"
+  },
+  {
+    "questionId": "ap-mock-b-q17",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：不在ページ参照割込はページフォールト。スワップアウトは退避，断片化は空き分散，スラッシングは頻繁な置換。 原本再解答・全4択：置換頻発能力低下はスラッシング。スワップアウトは操作，断片化は空領域，ページフォールトは個別割込。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "cb9a639f5a08c8758bebcd300429a92f6ac58e1d0149ad2479e2313717079f2a",
+    "afterSha256": "6ef1c1e4103b48db5e278de8bb8cac9bf7da079c51ccefe92cead16f31ff3b6c"
+  },
+  {
+    "questionId": "ap-mock-b-q18",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：固定ページの余りが内部断片化。外部断片化/可変単位/連続空き必要はセグメント側。 原本再解答・全4択：固定ページは外部断片化無し。ア論理単位保護・イ共有容易・ウ論理領域伸縮はセグメントの長所。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "8785cf6cf83e868648e4dc3c19dafdf2793c0a34197eb30d1f6f3130baa802c2",
+    "afterSha256": "8c9cbe7d8bd3478bcb9b36b524809ffad72336a1b08cb47146ed8ddf691ec771"
+  },
+  {
+    "questionId": "ap-mock-b-q19",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：SVNの集中型で複数ファイル原子的コミット。CVSはファイル単位版，Gitは分散，RCSは個別ファイル管理。 原本再解答・全4択：完全履歴ローカル複製Git。SVN/CVS中央型，RCSファイル単位版管理。 表現/変更確認：集中型だけならCVSも該当する。複数ファイルを一つのリビジョンにする必要条件でSVNに一意化し，補足解法を加えない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "2f9993c3fe39ef0d9bcb4a765fa5dd12d828d8d64114428206edbd9496602c8d",
+    "afterSha256": "76aad6d8ab5269eeb8cf1052c73f9159c6919b9947c64d3a60f4ec09199e3ebb"
+  },
+  {
+    "questionId": "ap-mock-b-q20",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：字句→構文→意味→最適化。字句が最初。他段は後。 原本再解答・全4択：字句→構文→意味→最適化→生成。最後は最適化。他段はより前。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "08a36c994eeca1979a836d592c34495ecc32a0eb61a7f539405d25b811432e98",
+    "afterSha256": "d343ad0426b26a87908e83d2e25e0fc455988b6a2b8b9a9326d6430af07370e7"
+  },
+  {
+    "questionId": "ap-mock-b-q22",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：SiPは複数チップ単一パッケージ。イはソフト，ウボード，エSoC。 原本再解答・全4択：SoC単一チップ。アソフト，イボード，エSiP。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "32da4948a304766b873e6e05d9797a02fcaf38703316643b2e19015f04ed3163",
+    "afterSha256": "7546e0616258dd6e497f02e7773ec120174c2b694ba87526cfdff30ceb6639da"
+  },
+  {
+    "questionId": "ap-mock-b-q23",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：センサー検知→電気情報。ア制御器，イアクチュエータ，ウ増幅器。 原本再解答・全4択：ア制御器，イセンサー，ウアクチュエータ，エ増幅器。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "f052ffb2dc9e4143c6b237c632ac6e0d8cf85a312b1822ba2e012fb57c90b7b4",
+    "afterSha256": "4a2b549039ccdb65a4345907c4e5541788e67bbc021760c73d7af1bdb2af20cf"
+  },
+  {
+    "questionId": "ap-mock-b-q24",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ESDは端子保護回路で高電圧逃がす。他は検査パッド/耐タンパ/整然配置で放電保護でない。 原本再解答・全4択：解析時破壊が耐タンパ。アESD別問題，イ検査パッド残存は解析容易，エ整然配置も容易。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "62abfb589d7a4bcc82d8c97925b96fc04dc73fd5619e0f56172ed8b28ebc67c0",
+    "afterSha256": "ce64ec33b8c7427ced45be4c46f57bdb84f4468e7f4f4580046d6ae332eb69a1"
+  },
+  {
+    "questionId": "ap-mock-b-q25",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q25-accordion.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 640,
+              "height": 260
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q25-accordion.svg",
+          "imageAlt": "項目1の見出し直下に内容が展開され，項目2と項目3は折り畳まれている。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：描画図で項目1展開，2/3折畳はアコーディオン。カルーセル横送り，タブ切替，モーダル前面。 原本再解答・全4択：横画像送り図はカルーセル。ア縦開閉，ウ見出切替，エ背後操作制限。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。 修正後再確認：描画図で項目1展開，2/3折畳はアコーディオン。カルーセル横送り，タブ切替，モーダル前面。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：描画図で項目1展開，2/3折畳はアコーディオン。カルーセル横送り，タブ切替，モーダル前面。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "f43fac2529c7a6eb5ad4fc5598196b071a195acc4a313e4d0d40fd4c1a445a22",
+    "afterSha256": "1935eacf8c09aa9ee2ab02363caaec8ea37eda9711ddc122f85162a63e0b625c"
+  },
+  {
+    "questionId": "ap-mock-b-q27",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：コミット決定受信し完了済み。応答喪失は既決定覆さず。ア決定前，イ不可逆を戻す，エ他参加者判定へ戻る誤り。 原本再解答・全4択：準備後決定未通知は参加者独断不可。ア問合前は準備未，ウ応答前なら投票前，エ完了応答前は決定済み。 表現/変更確認：障害時点の違いを入力条件に移して参加者状態を問う。同じ2相コミットのフェーズ理解を維持。既に完了という条件が一意性の根拠。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "bb0199de2decbfba79ff62010f502372a36556853523f5cbccf8281c0e9ff2c4",
+    "afterSha256": "182ba5b652f78656d157d1dbae9bb99220430e8c7a4bf0df9669d81134005891"
+  },
+  {
+    "questionId": "ap-mock-b-q28",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q28-tables.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 800,
+              "height": 330
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q28-tables.svg",
+          "imageAlt": "顧客：顧客ID，氏名，生年月日。販売代理店別日別販売：販売代理店ID，日付，商品ID，販売数量。商品購入：顧客ID，販売代理店ID，商品ID，購入日，購入数量。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：描画図に性別なし。商品日別数量は日販，代理店購入者は顧客ID distinct日計，売れ筋は商品量集計。 原本再解答・全4択：購入に日付なし，日別人数不可。販売日別商品量/顧客結合性別売筋/代理店売筋は可能。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。 修正後再確認：描画図に性別なし。商品日別数量は日販，代理店購入者は顧客ID distinct日計，売れ筋は商品量集計。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：描画図に性別なし。商品日別数量は日販，代理店購入者は顧客ID distinct日計，売れ筋は商品量集計。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "d7bea6a1495d9f19d0e68bc8cdecc0285e977869209503fd39f7f2cfb8e10a8c",
+    "afterSha256": "54b9c56989d855ad34003145df4f90bd610ae45aa6c9a6b3bf3deb5bed600e11"
+  },
+  {
+    "questionId": "ap-mock-b-q29",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q29-objects.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 780,
+              "height": 420
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q29-objects.svg",
+          "imageAlt": "地域東京は仕入先11と25，大阪は25と37。11は仕入01・02・03，25は04・05，37は06。01と04は部品136，02と05は205，03と06は338へ関連するオブジェクト図。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：描画5図視認。仕入先25は東京大阪，東京は11/25で多対多。仕入先→仕入1対多，仕入→部品多対1。ア1:1不適合，イ地域1対多不適合，ウ後2関連逆。エのみ。 原本再解答・全4択：地域1対多仕入先1対多仕入多対1部品。ア地域1:1不足，ウ後段反対，エ地域*:*と後段反対。 表現/変更確認：関連1本追加で多対多になる。地域関連だけでなく後半2関連も全4候補で照合しエのみ成立。オブジェクト表記下線はChromium描画でも確認。 修正後再確認：描画5図視認。仕入先25は東京大阪，東京は11/25で多対多。仕入先→仕入1対多，仕入→部品多対1。ア1:1不適合，イ地域1対多不適合，ウ後2関連逆。エのみ。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：描画5図視認。仕入先25は東京大阪，東京は11/25で多対多。仕入先→仕入1対多，仕入→部品多対1。ア1:1不適合，イ地域1対多不適合，ウ後2関連逆。エのみ。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "805a479fccdf1f3e3f5e4ea950cae7630c1be3383b2045479e0041fe5058eeb1",
+    "afterSha256": "bec1d61c64425bcfd625b4aea508da578d75ca12107d99df4b938327e7301531"
+  },
+  {
+    "questionId": "ap-mock-b-q30",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q30-table.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 540,
+              "height": 395
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q30-table.svg",
+          "imageAlt": "成績表。学生番号・実施回・得点：S01・2・65，S01・8・75，S02・1・88，S02・6・81，S03・4・72，S03・10・86，S03・13・92，S04・7・98。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：図に各学生各回1行。学生分割，実施回降順で最終回抽出。アS02最高88を選ぶが最終81，イ全体1行，エ最初の回。 原本再解答・全4択：学生分割実施回昇順。初回S01=1/70,S02=2/85,S03=3/83,S04=6/100。ア全体1行，ウS03=9/78，エS01=7/80など不一致。 表現/変更確認：MAXへ対象変更し降順へ対応。原本と同じ具体的な成績表に対する同値結果なので，任意表の同点一般論は追加しない。 修正後再確認：図に各学生各回1行。学生分割，実施回降順で最終回抽出。アS02最高88を選ぶが最終81，イ全体1行，エ最初の回。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：図に各学生各回1行。学生分割，実施回降順で最終回抽出。アS02最高88を選ぶが最終81，イ全体1行，エ最初の回。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "d2ba9d2775dbad26cc61d6369aa3fd9b7bf0ef1785c3ce23df903d43582d4472",
+    "afterSha256": "314457f94987499c8a0d79ad3c4db1b94a34300eafe93b8baa78e14a6fe5ba93"
+  },
+  {
+    "questionId": "ap-mock-b-q31",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：任意途中ロールバック目印savepoint。アチェックポイント，ウ制約遅延，エ2PC判定。 原本再解答・全4択：ア制約時点，イ障害回復短縮のチェックポイント，ウセーブポイント，エ2PC決定。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "a277c3d10fa3932462b565f4145d01f5b7a8837a6f72a8b4fe5c276354721e0f",
+    "afterSha256": "4b4081e20ed22c170e127a7c6a0bd634f505763dfaba4bc28bce8cfaa00f5b36"
+  },
+  {
+    "questionId": "ap-mock-b-q32",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：必要16M/(6×.8)=3.333M。10,2,1,4の所要2,10,20,5秒，最小適格4。 原本再解答・全4択：8/(5×.6)=2.6667M。1/2/4/10Mで13.333/6.667/3.333/1.333秒，最低4。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "8a76107505eea961721f1d8e92a074c36d3a08f2db54287ae506cf951afc37b7",
+    "afterSha256": "488b6d605779fb861eeeda2e6cba855580140d442a5d7979228932253c692da4"
+  },
+  {
+    "questionId": "ap-mock-b-q33",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：CNAME別名。アNSをMX混同，イresolverをresolution混同，ウ逆引き。 原本再解答・全4択：アMXでなくNS，イresolutionでなくresolver，ウ逆引き正，エNSでなくCNAME。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "12c3598c824cc6a03cea9b376828ae1ca0a556aead50281b4a0b43a3cb7c5a93",
+    "afterSha256": "06c1520e6ad44802bf12557ea924c35aadbf08ec5eda22fc2a248894f1bbcac8"
+  },
+  {
+    "questionId": "ap-mock-b-q34",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：動的IP割当DHCP。アNAT，ウICMP，エRARP。 原本再解答・全4択：アRARP，イNAT，ウICMP制御通知，エDHCP。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "d6b0527b987c0f11cf23b78e37f382ec29f7f92567ec60d97e657ade0de84953",
+    "afterSha256": "66d7a4ba4420f4a947b67fe6ffd10be2cdc3c0fa5955482e777cde7e5d4b7d61"
+  },
+  {
+    "questionId": "ap-mock-b-q35",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：class Bは16bit host=65534台。アC，イD，エA。 原本再解答・全4択：classDはマルチキャスト。アC，イB，ウprivateはA/B/Cに存在。 表現/変更確認：クラスBでは原問のprivate unicastも当てはまるため，クラスAの8bitネットワーク部へ必要最小限差替え。一意性を回復。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "940e42c8d897276039565137f95e51ae28eaa92c22f38ea562e08bba658cd1c2",
+    "afterSha256": "3c25ffbbd9203d0c5cfc162e3d179efbe1385c891f995d3008a67b550a0321ef"
+  },
+  {
+    "questionId": "ap-mock-b-q36",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ICMP echo ping。netstat接続表，arp対応表，ifconfig設定。 原本再解答・全4択：直前使用キャッシュのIP→MACはarp。イ自身設定，ウ接続，エecho。 表現/変更確認：MAC対応表からICMP応答の確認へ対象を変更。ICMP条件はpingと他コマンドを区別する必須対象条件。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "2b2331bc8150fc16e8fe645ac125572c88f0673f50939c728f42cb64e3c726fd",
+    "afterSha256": "644334182ee6ba0123e3d1b98e6eb043ddebb8d91602b9654dd77e3fb258d295"
+  },
+  {
+    "questionId": "ap-mock-b-q37",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：SAML assertionをブラウザ経由SP送付。ア/ウPW共有なし，エchallenge応答で異なる。 原本再解答・全4択：SAMLは認証結果assertion送付。ア/イパスワード渡し不適合，エchallenge方式。 表現/変更確認：企業内IdPから認証クラウドIdPへ配置だけを変え，SAML結果送付を同じ選択説明で問う。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "f056d3419d42d0143580ed6236251c4aa40858432d9ef44493953caa59c54f41",
+    "afterSha256": "b0eccf69a0cd4beed523c37571794fb16b66efc9307ba6e32c2562fa274ef5ef"
+  },
+  {
+    "questionId": "ap-mock-b-q38",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：SYNの偽送信元へSYNACK返送。ほか実IP通信で未使用空間宛にならない。 原本再解答・全4択：未使用空間へのスキャン。アWeb実在，イIoT実在，エSMTP実在は宛先非該当。 表現/変更確認：未使用IPへの到着を問う構造を保ち，送信元詐称SYNへの応答という別の入力場面で宛先理解を問う。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "8ec392da5f56a8ad9b95114f5f5813174238f19bab7cd9b3de01219ad312b57e",
+    "afterSha256": "4427e5672dc61165305272907ad79c4de526c34d087d90a680df73a22d9e50d6"
+  },
+  {
+    "questionId": "ap-mock-b-q39",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "choices[3].text",
+        "before": "企業のPCをランサムウェアに感染させ，暗号化したデータを復号するための鍵と引き換えに，指定した方法で暗号資産を送付するよう指示した。",
+        "after": "企業のPCをマルウェアに感染させ，暗号化したデータを復号するための鍵と引き換えに，指定した方法で暗号資産を送付するよう指示した。",
+        "reason": "問いの攻撃名を正答へ明示してしまう補助を除去。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：暗号化と鍵引換身代金。ア音声偽装，イ虚偽漏洩脅迫，ウメール詐称。エに対象語が直接含まれ答えを明示している懸念。 原本再解答・全4択：AI音声CEOはディープフェイク。イランサム，ウ虚偽脅迫，エ資格情報不正はAI合成でない。 表現/変更確認：問いへ移した攻撃名が正答本文に残り答えの名称を直接提示していたため，感染させるものを一般名マルウェアへ変更。暗号化・復号鍵の身代金という識別条件は保持。 修正後再確認：暗号化と鍵引換身代金。ア音声偽装，イ虚偽漏洩脅迫，ウメール詐称。エに対象語が直接含まれ答えを明示している懸念。",
+    "postCorrectionVerification": "修正後再確認：暗号化と鍵引換身代金。ア音声偽装，イ虚偽漏洩脅迫，ウメール詐称。エに対象語が直接含まれ答えを明示している懸念。",
+    "beforeSha256": "3c3b3701d25c6bcb3af463d79f98a4717c947706a1c3363d4a5b262f90dda5fc",
+    "afterSha256": "6c2937a9816a4375416bf74adbc96f0cc5cf8f83408bd449991c8f0898907930"
+  },
+  {
+    "questionId": "ap-mock-b-q40",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：単語人名候補で辞書。アハッシュ事前表，ウ漏洩資格情報再利用，エ観察録画。 原本再解答・全4択：漏洩ID/PW再利用パスワードリスト。ア辞書，イハッシュ表，エ観察。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "778c71427b303bdca23aa0ece221d06408c116e976f7b021950d95c253d30c5a",
+    "afterSha256": "8453bdc6cc471c61493cec0b8350c23b1cb8a43d77d287f05a27551afc7c362b"
+  },
+  {
+    "questionId": "ap-mock-b-q41",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：CWE弱点種類分類。アCVE，ウ画像記録，エ製品分類。 原本再解答・全4択：CVE個別脆弱性。ア設定項目，イ画像，エ製品分類ではない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "ab2c280f9bce1f17a76cd14c4a6a7c2a393ae90f51e2da253cbd811690c073dc",
+    "afterSha256": "103706e872dd5acac5ce2e5c9cc4fe7ab7cf9578fdf26aa0d6fafded3a9b7af2"
+  },
+  {
+    "questionId": "ap-mock-b-q42",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ポートランダム化で偽応答一致困難。アマルウェア，イID固定危険，エ53通常動作。 原本再解答・全4択：IDランダムで偽応答一致困難。アマルウェア別対策，ウポート固定逆効果，エ53通常応答。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "c6c0eadf42b0b0fd11d48416896f69e9fef07507fe49735233edfecc42a0b7fd",
+    "afterSha256": "94b5c46fa58b2dfae413a19a641632394c1360b726cd5111541d2fa55f7b9bbd"
+  },
+  {
+    "questionId": "ap-mock-b-q43",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：SIEMログ集約相関分析。ア資産DB，イSBOM，エ脆弱性管理。 原本再解答・全4択：SBOM部品依存一覧。アSIEM，イ資産管理，ウ脆弱性管理。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "4946f741c3a5f00590996257713b349a7a3cfa48d6a694f04ac9d1f89e91a0ab",
+    "afterSha256": "1c0f42c89da6e2c2bfac8989391fd4c21788f96dbd18b3f57c0b5ecdd44a54bb"
+  },
+  {
+    "questionId": "ap-mock-b-q44",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：DKIMはメール署名DNS公開鍵。アDNS乱数化，ウSPF，エDNSSEC。 原本再解答・全4択：DNSSECはDNSレコード署名。アポート乱数化，ウSPF，エDKIM。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "c4c42e65eacad8bcdf2629939a46c4ef5dd4531adf6b5989d062b70adc03299c",
+    "afterSha256": "ffa070056a0342bb316f3cc059ef2c31b43842d40374753970a16b76a3da7490"
+  },
+  {
+    "questionId": "ap-mock-b-q45",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：許可MAC照合で不正接続減。アVLAN，イICMP一律遮断なし，ウIP基準違い。 原本再解答・全4択：VLANはbroadcast範囲制限。アICMP全遮断せず，ウMAC認証別，エ固定IPポート制限別。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "9735a498e5c69cacb90c4a96d1de024f2378ad35875972e30c2abd1013a50f28",
+    "afterSha256": "93b1adc0cd2e048ec7790e5c78e874754dc91d25e96e504c2e72aa7521b4ae0e"
+  },
+  {
+    "questionId": "ap-mock-b-q46",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：秘密鍵データ込みMAC改ざん検知。アexploit，イOTP，エsignature定義。 原本再解答・全4択：exploitは脆弱性悪用コード。イmalware signature，ウMAC，エOTP。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "38408be22ea03658a9632b4db2c5c1155d94bac628475b09e899e8e1b206f9ce",
+    "afterSha256": "3537508b891066a4862884c5af6c45ddefae3788df4d34e28f2bd706be8bccac"
+  },
+  {
+    "questionId": "ap-mock-b-q47",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "stem",
+        "before": "各機能を一つのアプリケーションとして実装するモノリシックアーキテクチャを利用するとき，マイクロサービスアーキテクチャと比較したシステム構築上の利点はどれか。",
+        "after": "モノリシックアーキテクチャを利用するとき，マイクロサービスアーキテクチャと比較したシステム構築上の利点はどれか。",
+        "reason": "原問にない用語定義の補助を問題文から外す。解説に説明がある。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：単一アプリで分散transactionより整合性容易。ア/ウmicroservice利点，エネット呼出増で負荷増。 原本再解答・全4択：独立サービスは個別変更容易。ア技術統一しにくい，イ分散整合困難，エ通信負荷増え得る。 表現/変更確認：追加されたモノリシックの定義句は原問にない解答補助なので削除。単一トランザクション整合性と技術独立性の比較という問いは維持。 修正後再確認：単一アプリで分散transactionより整合性容易。ア/ウmicroservice利点，エネット呼出増で負荷増。",
+    "postCorrectionVerification": "修正後再確認：単一アプリで分散transactionより整合性容易。ア/ウmicroservice利点，エネット呼出増で負荷増。",
+    "beforeSha256": "268648c9fd242e40743c7d39764562c5baa90b248507f481e1f27ace530b9ddd",
+    "afterSha256": "dc970a905fe5f07026ff10325f49409e7ca2475b21df81b8d88c1aa9dcc00f3f"
+  },
+  {
+    "questionId": "ap-mock-b-q48",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：機能完全性100%要求充足。イ習得usability，ウ保守性，エ回復性。 原本再解答・全4択：習得時間は使用性。ア回復性，ウ保守性，エ機能適合。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "e28f79e4bd8863afb82b283d3b2127792a3335a7cc6bbb21ab1359d306e8f65c",
+    "afterSha256": "6b53ca2db17fcb5d9e77bda2c4bbc614a95576d27c324c491461d3d558edd4d5"
+  },
+  {
+    "questionId": "ap-mock-b-q49",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：同時見積カードはplanning poker。デッキ目的共有，mapping流れ，modeling設計。 原本再解答・全4択：初期目的scope共有はinception deck。アmodeling，ウ見積poker，エ活動ストーリー配置。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "5349d972996f30ed5922a9e8d5a5e9bc483d93d4f66f5583c723a4e115414ee9",
+    "afterSha256": "b15e092247de2662f3d4f5ddbc719191957553f05e0e3586436456e4482d2b16"
+  },
+  {
+    "questionId": "ap-mock-b-q50",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：WebSocket持続双方向。mediaquery画面条件，mashup組合，UA端末情報。 原本再解答・全4択：responsive表示条件CSS media queries。アUA識別，イ双方向通信，ウサービス合成。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "eadd5f2d133b9dddf4ebf36652c6ee9227554d04060054467502b74df6e96053",
+    "afterSha256": "4579a72b43d1ee0aa8e4ddfaee2f6fe97877e4a1429582b3c62841843ff75f66"
+  },
+  {
+    "questionId": "ap-mock-b-q51",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：再見積と追加予算はcost。ア教育/日程，イscope，エ資源。 原本再解答・全4択：scopeは外部連携を別projectへ除外。ア教育日程，イcost，エ人資源。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "2927521c0f43b48eb8a4975cb5c79bc9c9a16b04bbbe863b26282ac00645aee7",
+    "afterSha256": "edd2958168536a00a9471bcc19dcbc3d32ede1928512eac0b4224cfa6d3b1f08"
+  },
+  {
+    "questionId": "ap-mock-b-q52",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：構成要素詳細文書WBS辞書。workpackage最下位，activity一覧，scope境界。 原本再解答・全4択：WBS最下位work package。ア詳細辞書，イ活動一覧，ウscope作業範囲。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "b3b96b74bbd29ec0aea27898019ba5e2a42caca3f135ab5b9f0c36f35a2b2a0d",
+    "afterSha256": "55edf18d0244afc4e71123b62d3fcb7906737ead8146ffb9c9297a15fc896814"
+  },
+  {
+    "questionId": "ap-mock-b-q53",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：離れ電子協働virtual team。networking人脈，facilitation調整，colocation同室。 原本再解答・全4択：同一場所はcolocation。イ人脈，ウ遠隔，エ会議調整。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "8331893cdd9ea4ef28d7fcd12e78616d26eb8408890226eed14d162d4035cdc2",
+    "afterSha256": "dbf0fa64c0bc1893418cdfaf20a9a3609236c95a438d200aca5c857fbe0ba76d"
+  },
+  {
+    "questionId": "ap-mock-b-q54",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：クリティカル活動資源追加crashing。残業禁止cost減，重ねるfast tracking，延期圧縮でない。 原本再解答・全4択：設計完了部から開発は工程重複fast tracking。ア資源追加crashing，イcost減，ウ延期。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "fcd0cc9d408c9e50cbc3273d2bf4488a1a29014f774d317965199948f9d829fa",
+    "afterSha256": "eb84adcd0d0020c67d1a5f2b205f6b0b3bd98a4517c0b172f6665c386c334542"
+  },
+  {
+    "questionId": "ap-mock-b-q55",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：復旧まで2hRTO，データ30m前RPO。アRPO/RLO，ウRPO+延長，エRTO/RLO。 原本再解答・全4択：1日以内RTO+重要業務限定RLO。アRPO/RLO，イRPO+延長，ウRTO/RPO。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "08a02c34bdec4d679cb1ba5635ac2bfb0a251890a5ff14b8c9b5aba60c43eef2",
+    "afterSha256": "7c0a81c7c8025c4b34f14b0194ee31939f46e27a63a1f7db0d7f101eeb203086"
+  },
+  {
+    "questionId": "ap-mock-b-q56",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：改善目標設定し目標測定。ア目標限定，イ整合不要，ウ目標無視不適切。 原本再解答・全4択：改善評価はSMS目的整合必要。ア品質費用両方必須でない，イSMSも対象，エ目標に照らす必要。 表現/変更確認：正答を目標測定へ移したため他の規定記述も必要範囲で変更され，目標限定/整合不要/目標未照合の3誤答が成立。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "f8bb05976844be17a5d09d169c844b6a4c4ee450825200494ea5387e7ca59cff",
+    "afterSha256": "727271cb6c24ae2d811a6e6a97f54e623fc65eaed07ec062984c452a7e62f1c3"
+  },
+  {
+    "questionId": "ap-mock-b-q57",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：入力誤り業務承認/履歴で修正。ア無管理，ウIT独断，エ即廃棄は証跡失う。 原本再解答・全4択：授受確実/重要度に応じ管理者手渡し適切。アIT単独停止不可，ウ業務確認無い修正不可，エ即廃棄不可。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "eb3d32ecc5cec49901606dd18e39be4334ce01b1c66933c7f468d27334c7f22c",
+    "afterSha256": "ea86ae9537ed8529341912bbb0e20667b96e56e982c9f483fbd5ee49873d247d"
+  },
+  {
+    "questionId": "ap-mock-b-q58",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：2記録一致比較は突合照合。checklist設問，review文書内容，walkthrough処理追跡。 原本再解答・全4択：データ生成→入力→処理→出力→利用追跡walkthrough。イチェック項目，ウ記録照合，エ文書読解。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "5e217ab08b465b6d4c97fdfb7b0534424f11888bef51800920a893ee68680c90",
+    "afterSha256": "e8edcd597cb894fa27b974a7a7715c03258dbdda0cbd860eb13de78afb045d45"
+  },
+  {
+    "questionId": "ap-mock-b-q59",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：本調査は十分証拠入手。現地必須/マニュアルだけ/対象先だけ限定は誤り。 原本再解答・全4択：予備は文書等から業務体制概要。イ現地必須でない，ウ証拠収集は本調査，エ関連先排除不可。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "22edb3276d8b4241a8487a06a195c9a18e1eafe7a5164b6020cebaea5e9cefbd",
+    "afterSha256": "ae08be2fb0fa14a2ee16bbdb73b24d07944d736c4d15b7429bc5b50f9d5c52c6"
+  },
+  {
+    "questionId": "ap-mock-b-q60",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：対象先自身改善計画。ア監査品質確認，イ追加調査，エフォローアップ。 原本再解答・全4択：監査人改善monitorがfollow-up。ア対象先計画，イ監査責任者確認，エ未了追加。 表現/変更確認：監査対象先と監査人の役割分担という原問の4活動を保持し，計画策定を対象へ変更。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "de280910ace7d45dcf8d889264209e8e85d29e8de70a9d487f830469e5c1ca56",
+    "afterSha256": "0ffce9983aee9907b0d119f11c14f2c4a9d840c9227a87049991631405301405"
+  },
+  {
+    "questionId": "ap-mock-b-q61",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：人材育成全体設計vendor選定。アリアルタイム軽視，イ個別最適，エ速度で人材でない。 原本再解答・全4択：求めるIT要素は環境対応速度。ア人材，ウリアルタイム軽視，エ全体最適軽視。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "a30d0cb96505c3500fab6386ba8010a912a66294840a0bb59187379e0cee8d9f",
+    "afterSha256": "92961be4429bd749d8b47fb676aef5a7907b8b1dcc4014d459124ce66d8e13da"
+  },
+  {
+    "questionId": "ap-mock-b-q62",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：オープンは二次利用commercial可 machine readable無料。個人情報届出のみ不可，行政限定不可，一次のみ不可。 原本再解答・全4択：公開前提で企画整備運用がopen by design。ア届出義務という主張不可，イ非営利限定不可，ウ行政限定不可。 表現/変更確認：公開前提の取組という問いを保持し，二次利用の公開条件を正答にする。元の正答の設計・運用句は誤答として一次のみ/非機械判読へ変更されており複数正答なし。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "99221450a8c4e7246293ae2458111daf89b7bc38c46dd9754691b288aaf8f387",
+    "afterSha256": "d7d6bf7b9add9ad4be8c7d66442ece87a624cfe971220c1ac142ee1dda58198f"
+  },
+  {
+    "questionId": "ap-mock-b-q63",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：重複議事録を一つ統合Combine。イ順番rearrange，ウ簡素化，エ除外eliminate。 原本再解答・全4択：配送順入替rearrange。アeliminate，ウsimplify，エcombine。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "82a0a5787c48d28a9643613636cc9ca5cc7310636d8b9f67500b5ff5668b2c7a",
+    "afterSha256": "72bfdcf7e7d4dd635597690effc81ef8867362adde133dd407b030ee8a4d3398"
+  },
+  {
+    "questionId": "ap-mock-b-q64",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q64-scenarios.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 840,
+              "height": 240
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q64-scenarios.svg",
+          "imageAlt": "シナリオa：4人で実施，外部委託する。b：4人，しない。c：5人，する。d：5人，しない。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：表視認。a=600+2200/100×20-350=690万円，b=600+200/100×20=640，c=4000/100×20-350=450，d=2000/100×20=400。a最大。 原本再解答・全4択：委託700。a600+440-700=340,b600+40=640,c800-700=100,d400。b最大。全時間人員図確認。 表現/変更確認：原本6条件・4シナリオそのままで委託固定費だけ350へ変更。原問にある補足条件を蛇足として削らない。 修正後再確認：表視認。a=600+2200/100×20-350=690万円，b=600+200/100×20=640，c=4000/100×20-350=450，d=2000/100×20=400。a最大。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：表視認。a=600+2200/100×20-350=690万円，b=600+200/100×20=640，c=4000/100×20-350=450，d=2000/100×20=400。a最大。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "16b179aca4f868e52b3f7c00273f950a6b796945534ab44c4ac6bcbf7ec1847a",
+    "afterSha256": "59187262934a8eb0c33cadebdea5828c3e090f8861aaeb46b9004cf8fcd601eb"
+  },
+  {
+    "questionId": "ap-mock-b-q65",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：設計からsecurity組込。アSOA，イUX，ウAPI公開連携。 原本再解答・全4択：体験価値UX。アsecurity design，イSOA，エ外部機能連携。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "721bfb5bb93da10bf25ca8c9f2c706ae0e54d8cea4ee19338387bf07693f9784",
+    "afterSha256": "a943fa8a24c1249ac6c5af4082a144b7a84351afee58be68bfd5edc485b3b5ef"
+  },
+  {
+    "questionId": "ap-mock-b-q66",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：state machine状態イベント遷移。class静的，usecase利用機能，activity業務フロー。 原本再解答・全4択：分岐並行同期フローactivity。イクラス静的，ウ状態遷移，エ利用者機能。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "30d23df47c2d2a9269a759c19ffb4dd507df0e52ad1bdbf23b8eb1d0c602bb8f",
+    "afterSha256": "b1067741aab70d50303d4dbe1d9969359b3f72e8f752ca4d4bc34f57a3463c7e"
+  },
+  {
+    "questionId": "ap-mock-b-q67",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：ERPは全基幹統合。アSFA，ウSCM，エCRM。 原本再解答・全4択：企業間調達販売chainはSCM。アSFA，イCRM，ウERP。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "97707a68ec91cd158e5585befa64f620e19d24e5ace4844c868232010cd9cea7",
+    "afterSha256": "979eae3b55babf9811584f76073c1ab68d5f6d2c42b5c46668ad3d3bff0feebe"
+  },
+  {
+    "questionId": "ap-mock-b-q68",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：BSC4視点財務顧客内部学習。アAnsoff，イPLC，ウSWOT。 原本再解答・全4択：市場製品4分類Ansoff。アSWOT，イBSC，エPLC。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "dff1e7818e7f80ca597a12700d7fd2725f4a48de3681b3dcd7c823a9c88d907e",
+    "afterSha256": "69a3096e3c91d6e61fa3b304838367bc8bb797d9e46138ea2b911273b94866e8"
+  },
+  {
+    "questionId": "ap-mock-b-q69",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：上下流取り込み垂直統合。イcustomization，ウ共創，エ内製主義のみで上下流統合でない。 原本再解答・全4択：顧客network経験価値共創。ア内製集中，イ個別仕様，エM&A一般は共創記述でない。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "e17ea67373bacceb8b2a87aa1546fc72fd39724391002978d2436e04e30fb108",
+    "afterSha256": "ac9c8b60814ccf89017dbf8740022777444a3218ec181c5a0367fe80658e66f0"
+  },
+  {
+    "questionId": "ap-mock-b-q70",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：研究→開発は魔の川。ダーウィン事業→産業，キャズムearly adopterからmajority，死の谷開発→事業。 原本再解答・全4択：事業から産業競争はDarwin sea。ア市場普及溝，イ開発事業death valley，エ研究開発river。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "fa4a4f0972e413604345974702bceec86483fcfcc937deb696c82879e3eb27cf",
+    "afterSha256": "4d0b8c5b1eb5d6fd45c3c81e8908ba3208a3a31426c0bd457aba5c007d820e1d"
+  },
+  {
+    "questionId": "ap-mock-b-q71",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：入力指示例工夫prompt engineering。cluster分群，finetune重み再学習，annotationラベル。 原本再解答・全4択：独自学習model適合fine tuning。アannotation，イcluster，エ入力指示設計。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "6d6fda40086771be68948e41724c1987e6a7dd3efb7a0537895bd9bc112dca47",
+    "afterSha256": "7b1796a355e0598f0a0964766b46c8362f093f68c7e62e952c4b98f5071caa29"
+  },
+  {
+    "questionId": "ap-mock-b-q72",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q72-setup.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 780,
+              "height": 330
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q72-setup.svg",
+          "imageAlt": "段取り時間表，単位時間。FROM a：TO b4，c2，d4。FROM b：TO a2，c2，d4。FROM c：TO a6，b4，d4。FROM d：TO a8，b6，c4。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：表視認。b→a→c→d=2+2+4=8hで最小。ほか候補10/12/14は最小でない。24順全探索も後で独立実行。 原本再解答・全4択：表全有向値視認。b a c d=1+1+2=4h最小。5/6/7は最小でない。 表現/変更確認：原本のFROM/TOと一度ずつの条件をそのまま保ち，有向全12値を2倍。24順序独立全探索。 修正後再確認：表視認。b→a→c→d=2+2+4=8hで最小。ほか候補10/12/14は最小でない。24順全探索も後で独立実行。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：表視認。b→a→c→d=2+2+4=8hで最小。ほか候補10/12/14は最小でない。24順全探索も後で独立実行。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "ec6cbab9421a2a004c637416db505321f210e6bfd6d27ff7a102118a2f5532b8",
+    "afterSha256": "8c2ae053ef3e6293b42959f79dfbc0c0c1c50ff5e69400e952b0d2cb195bc625"
+  },
+  {
+    "questionId": "ap-mock-b-q73",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q73-bom.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 820,
+              "height": 300
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q73-bom.svg",
+          "imageAlt": "構成表：Aはa3個とb2個，aはb1個とc2個で構成。在庫：A80，a120，b250，c350，単位個。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：A400-80=320製造。a320×3-120=840。b=320×2+840-250=1230。1350はa在庫未控除，1480はb在庫未控除，1630はA在庫未控除。 原本再解答・全4択：A300-100=200,a600-100=500,b400+500-300=600。200/900/1500はいずれか在庫/段階未反映。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。 修正後再確認：A400-80=320製造。a320×3-120=840。b=320×2+840-250=1230。1350はa在庫未控除，1480はb在庫未控除，1630はA在庫未控除。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：A400-80=320製造。a320×3-120=840。b=320×2+840-250=1230。1350はa在庫未控除，1480はb在庫未控除，1630はA在庫未控除。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "b9985bc0dbf0130d7d57ee92bac88b74e39124ffc79d7ff06fb65168b31fa87d",
+    "afterSha256": "da301b27ef25513ff9c3eac33e887324ad862ffe4ce76f0c131a55675c46a089"
+  },
+  {
+    "questionId": "ap-mock-b-q74",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：会社全体領域柱→事業内商品施策。イ階層逆，ウ理念と役割，エ会社全体廃止を事業策にする誤り。 原本再解答・全4択：理念→経営戦略→事業戦略順。ア具体抽象逆，イ長短逆，エ経営と事業順逆。 表現/変更確認：原問の理念最上位・経営戦略→事業戦略という同じ階層関係を具体例に置換。選択肢位置だけでなく会社全体と事業内施策の識別を問い，解法の定義を増やしていない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "3788f53ec2fa14b274927d401e6fa9d4f3aaf10246fc188ba3720f2fddf5dd49",
+    "afterSha256": "ba991af11ad4b62e6daa3cb4545d676cf25eae00fb41b9ffad221437b0e2a8b2"
+  },
+  {
+    "questionId": "ap-mock-b-q75",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q75-payoffs.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 650,
+              "height": 270
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q75-payoffs.svg",
+          "imageAlt": "市場シェア表。a1・b1はA30 B20，a1・b2はA35 B15，a2・b1はA45 B25，a2・b2はA40 B10。単位%。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：表視認。Aはb1で45>30,b2で40>35でa2。Bはa1で20>15,a2で25>10でb1。均衡a2b1のみ。他セルに改善余地。 原本再解答・全4択：Aのa1はb1で40>30,b2で50>25，B b2はa1で30>20,a2で25>10。a1b2のみ。他3セル一方改善可。 表現/変更確認：ナッシュ均衡の定義句は原本にも存在するので保持。各セル数値と最適応答を変更して4組全て確認。 修正後再確認：表視認。Aはb1で45>30,b2で40>35でa2。Bはa1で20>15,a2で25>10でb1。均衡a2b1のみ。他セルに改善余地。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：表視認。Aはb1で45>30,b2で40>35でa2。Bはa1で20>15,a2で25>10でb1。均衡a2b1のみ。他セルに改善余地。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "47ec9111c5ba6806c0bc8dfa61f9c392ff462b20cf33546d550dbc0617399f31",
+    "afterSha256": "8fd4e6b554809cd109a71e1e42ab525df4467825efda787bf8117c89ac581ec7"
+  },
+  {
+    "questionId": "ap-mock-b-q76",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：平均中央値分布記述stat。アopen限定でない，イ貿易指標目的，エBayesian。 原本再解答・全4択：Bayes事前事後。ア貿易統計，ウ記述，エopen限定不適切。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "ebe4b1b8c6d300dd07ec2adc6c99d8696fb688d036ebbb26a1b1402a314ef441",
+    "afterSha256": "b18200881d072ce6351cdae7ae5a869460f389e3b9a335095f60ee95403c1e28"
+  },
+  {
+    "questionId": "ap-mock-b-q77",
+    "status": "approved",
+    "contentCorrectionNeeded": true,
+    "changes": [
+      {
+        "field": "figure-metadata",
+        "before": {
+          "sourceImages": [
+            "assets/questions/diagnostic/mock-b-q77-finance.svg"
+          ],
+          "imageSizes": [
+            {
+              "width": 600,
+              "height": 280
+            }
+          ],
+          "image": null,
+          "imageAlt": null
+        },
+        "after": {
+          "sourceImages": [],
+          "imageSizes": [],
+          "image": "assets/questions/diagnostic/mock-b-q77-finance.svg",
+          "imageAlt": "財務比較表，単位億円。A/Bの順に，売上高1200/1200，変動費600/960，固定費450/90，営業利益150/150。"
+        },
+        "reason": "診断UIではstemありのときsourceImagesを描画しない。imageへ参照を移し内容を伝える代替テキストを設定。本文・図は保持。"
+      }
+    ],
+    "rationale": "派生独立解答・全4択：表視認A限界率.5 B.2，BE900対450，売増利益A.5対B.2。アBE低い逆，イ不況強い逆，ウ率低い逆。 原本再解答・全4択：A率.5 B.2, BE800対500。A増収利益大。イ率低い逆，ウBE低い逆，エ不況耐性逆。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。 修正後再確認：表視認A限界率.5 B.2，BE900対450，売増利益A.5対B.2。アBE低い逆，イ不況強い逆，ウ率低い逆。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "postCorrectionVerification": "修正後再確認：表視認A限界率.5 B.2，BE900対450，売増利益A.5対B.2。アBE低い逆，イ不況強い逆，ウ率低い逆。 imageとimageAltがstemとは別に描画される診断UIの条件分岐を確認。公開図はChromium/Playwrightで描画してview_imageで個別視認。",
+    "beforeSha256": "350439f7976007c79791345019558f0ef9fcba17af02e9c07de4d5e62ba2fd32",
+    "afterSha256": "79c6de7574d40ca410779c103a52d5de6f5ab8de2ce2c36a24a744f1dcc5db3f"
+  },
+  {
+    "questionId": "ap-mock-b-q78",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：画像編集のプログラムは具体的表現著作物。言語規約/通信規約/解法は除外。 原本再解答・全4択：compiler具体program保護。解法/言語/規約は除外。 表現/変更確認：コンパイラという保護対象を画像編集ソフトの具体プログラムに変更し，言語/規約/解法の除外との比較を維持。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "2d4758d5bbf74f8f3e9388961006b662ac6c64f0bca7810b508232c28d4ea0cf",
+    "afterSha256": "9a89a3bb42042762d7e0316dff6b51ddabc7424a45ac2cb763d5db56df860cd8"
+  },
+  {
+    "questionId": "ap-mock-b-q79",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：派遣先苦情処理連携適切。年齢性別選別/事前選考不可，雇用主は派遣元。 原本再解答・全4択：3年派遣期間契約適格。イ事前選考不可，ウ年齢性別指定不可，エ派遣先苦情放置不可。 表現/変更確認：適切な苦情処理へ場面変更し，期間契約を誤った雇用関係へ変更。例外条件に依存する複数適格を避ける。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "22e09974643ceb9e9482644cfb134781b4d089186e947a715487386aac20d738",
+    "afterSha256": "e3702ee7a9ae4ce8dfa23f659915d9152c03291598ca4383bccfb148e3ee868c"
+  },
+  {
+    "questionId": "ap-mock-b-q80",
+    "status": "approved",
+    "contentCorrectionNeeded": false,
+    "changes": [],
+    "rationale": "派生独立解答・全4択：広告メール適正化利用環境は特定電子メール法。アデジタル社会法，イ特定商取引，エプロバイダ責任。 原本再解答・全4択：全員IT享受/自由安全情報流通は基本理念。ア責任制限，イ特定電子メール，エ特商法。 表現/変更確認：対象法律を電子メール法へ変更したため基本理念という言い方を目的へ対応。他法の記述を変えず同じ区別を問う。",
+    "postCorrectionVerification": "先行解答と作者正解一致。原本・派生の全4択分類，数値/条件，解説の整合確認済み。",
+    "beforeSha256": "78503a55c2c8c02911e6a8292739b6006c0e516e5fef9dd3958c8fda52276b21",
+    "afterSha256": "1626d22b01eac70bab4f5592f7c52f6eab7383834ed1e72baf3126a9b00f18e9"
+  }
+]

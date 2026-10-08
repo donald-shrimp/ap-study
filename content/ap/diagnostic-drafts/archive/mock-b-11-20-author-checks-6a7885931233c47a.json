@@ -1,0 +1,87 @@
+{
+  "author": "codex-agent-author-mock-b-20261008T161537Z",
+  "createdAt": "2026-10-08T16:15:37.541408Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-b-q11",
+      "sha256": "5446c0bff49e9b46908460d8afd6402318c11d124a75db832bf32976e7690ef8",
+      "independentReview": false,
+      "calculationAndChoices": "4択でiSCSIの転送方式・接続制限・媒体制限・物理層を確認。アのみ成立。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "対象をFCからiSCSIへ変更し，対象に合う正答説明へ変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q12",
+      "sha256": "69523311577946d4bcf6f60fc2894503a61a9c05025e52073e87e249f910055d",
+      "independentReview": false,
+      "calculationAndChoices": "サービス継続=true，該当トランザクション継続=false。4組のうちウのみ。非共有であることと失ったセッションを使う処理という一意性条件を確認。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う構成をセッション共有クラスタから非共有クラスタへ変更。継続可否の4組を選ぶ形を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q13",
+      "sha256": "f1e0ab4c0206d5047e9349b99df07faefd480f655e2a9789dd953e52f9cec806",
+      "independentReview": false,
+      "calculationAndChoices": "固定長の単位を述べるウだけがブロック方式。アはオブジェクト，イはファイル，エはブロックとは異なる。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "問う方式をオブジェクトストレージからブロックストレージへ変更。元の説明4種類を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q14",
+      "sha256": "855eee7e98d83676e3f9cbbcf592d790ca12d0a0f3b772d4dcac97dff28fab51",
+      "independentReview": false,
+      "calculationAndChoices": "r=.6でA=.84 B=.504 C=.5904，4順序を全比較。図切出し座標=(82,207,959,345)，元画像SHAはsourceChecks，派生図SHAは別途保存。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "装置Xの条件0<r<1を具体値0.6に変更。原図の構造を維持し，図の部分のみを切り出した。"
+    },
+    {
+      "questionId": "ap-mock-b-q15",
+      "sha256": "62d5292c9aa9541b0e0aae970fea3f451b5572eb4a0de91e4f8a2fa1c792018b",
+      "independentReview": false,
+      "calculationAndChoices": "CPU100e6/2e6=50，network8e7/(1e5*8)=100。25,100,200はいずれも小さい方ではない。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "平均命令数100万を200万，転送量2×10⁵を1×10⁵バイトへ変更。ボトルネックをネットワークからサーバへ変更。"
+    },
+    {
+      "questionId": "ap-mock-b-q16",
+      "sha256": "926cc699b24b7efa9a0fd5c3dd69be6656413b153f174bbbc9f3dc25029f1843",
+      "independentReview": false,
+      "calculationAndChoices": "エだけに一定時間で中断し最後尾へ戻す条件がある。ア=aging，イ=短時間優先，ウ=FCFS。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "飢餓の可能性が高い方式から，ラウンドロビンという対象方式の説明を選ぶ問いへ変更。元の4説明を保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q17",
+      "sha256": "cb9a639f5a08c8758bebcd300429a92f6ac58e1d0149ad2479e2313717079f2a",
+      "independentReview": false,
+      "calculationAndChoices": "スワップアウト=退避，fragmentation=断片化，page fault=不在割込み，thrashing=過剰置換。ウのみ。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "現象をページ置換頻発による低下から，参照ページ不在による割込みへ変更。4用語は保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q18",
+      "sha256": "8785cf6cf83e868648e4dc3c19dafdf2793c0a34197eb30d1f6f3130baa802c2",
+      "independentReview": false,
+      "calculationAndChoices": "ア=外部断片化なし，イ=内部断片化あり，ウ=固定単位，エ=非連続配置可。イのみ短所。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "ページング方式の長所から短所へ対象を変更。記憶領域の性質を4択から選ぶ比較形式を維持。"
+    },
+    {
+      "questionId": "ap-mock-b-q19",
+      "sha256": "2f9993c3fe39ef0d9bcb4a765fa5dd12d828d8d64114428206edbd9496602c8d",
+      "independentReview": false,
+      "calculationAndChoices": "集中型だけだとCVSも該当するため，複数ファイルを一つのリビジョンで記録する条件を保持してSVNだけに限定。Git分散，RCSファイル個別。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "全履歴をローカルに持つ分散型から，中央履歴と複数ファイルの一括変更を扱う集中型へ特徴を変更。原問の4ツールを保持。"
+    },
+    {
+      "questionId": "ap-mock-b-q20",
+      "sha256": "08a36c994eeca1979a836d592c34495ecc32a0eb61a7f539405d25b811432e98",
+      "independentReview": false,
+      "calculationAndChoices": "4処理の前後関係を確認。字句解析だけが文字列を最初に処理する。",
+      "wording": "原問の問い方に沿い、解法は解説へ置いた。",
+      "adaptation": "コード生成までに最後に行う処理から，最初に行う処理へ変更。元の4処理を保持。"
+    }
+  ]
+}

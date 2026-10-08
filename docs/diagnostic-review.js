@@ -1,7 +1,7 @@
 // Read-only editorial viewer. Do not import app state, auth, sync or persistence.
 const $ = id => document.getElementById(id);
 const root = new URL('../', location.href);
-let entries = [], filtered = [], currentId = '', topics = [], parents = new Map(), sources = [];
+let entries = [], filtered = [], currentId = '', topics = [], parents = new Map(), sources = [], mockSets = [];
 function node(tag, text, className) {
   const element = document.createElement(tag);
   if (text !== undefined) element.textContent = text;
@@ -40,10 +40,12 @@ function pick(id, focus = false) {
 function renderList() {
   $('question-list').replaceChildren();
   $('list-heading').textContent = `問題一覧 · ${filtered.length}問`;
+  const set = mockSets.find(set => set.id === $('mock-set').value);
+  const numbers = new Map((set?.slots || []).map(slot => [slot.questionId,slot.number]));
   for (const {q, status} of filtered) {
     const li = node('li'), button = node('button'); button.type = 'button';
     button.setAttribute('aria-current', String(q.id === currentId));
-    button.append(node('span', q.title, 'list-title'), node('span', `${topicName(q.topicId)} · ${status === 'draft' ? '確認待ち' : '公開済み'}`, 'muted'), node('div', `${q.id} ← ${q.parentQuestionId}`, 'question-id'));
+    button.append(node('span', `${set ? `問${numbers.get(q.id)} · ` : ''}${q.title}`, 'list-title'), node('span', `${topicName(q.topicId)} · ${status === 'draft' ? '確認待ち' : '公開済み'}`, 'muted'), node('div', `${q.id} ← ${q.parentQuestionId}`, 'question-id'));
     button.addEventListener('click', () => pick(q.id, true)); li.append(button); $('question-list').append(li);
   }
 }
@@ -97,7 +99,16 @@ function renderQuestion() {
 }
 function filter() {
   const text = $('search').value.trim().toLocaleLowerCase();
-  filtered = entries.filter(({q, status}) => (!$('topic').value || q.topicId === $('topic').value) && (!$('status').value || status === $('status').value) && (!text || [q.id, q.parentQuestionId, q.title, q.stem, topicName(q.topicId)].join(' ').toLocaleLowerCase().includes(text)));
+  const set = mockSets.find(set => set.id === $('mock-set').value);
+  const positions = new Map((set?.slots || []).map(slot => [slot.questionId, slot.number]));
+  filtered = entries.filter(({q, status}) => (!set || positions.has(q.id)) && (!$('topic').value || q.topicId === $('topic').value) && (!$('status').value || status === $('status').value) && (!text || [q.id, q.parentQuestionId, q.title, q.stem, topicName(q.topicId)].join(' ').toLocaleLowerCase().includes(text)));
+  if (set) filtered.sort((a,b) => positions.get(a.q.id) - positions.get(b.q.id));
+  $('mock-summary').hidden = !set;
+  if (set) {
+    const ids = new Set(set.slots.map(slot => slot.questionId));
+    const complete = entries.filter(entry => entry.status === 'published' && ids.has(entry.q.id)).length;
+    $('mock-summary').textContent = `${set.label} · 完成${complete} / ${set.size}問 · テクノロジ50・マネジメント10・ストラテジ20。ここでは学習記録を付けずに問題を見られます。`;
+  }
   if (!filtered.some(entry => entry.q.id === currentId)) currentId = filtered[0]?.q.id || '';
   history.replaceState(null, '', `${location.pathname}${location.search}${currentId ? `#${currentId}` : ''}`);
   renderList(); renderQuestion();
@@ -115,11 +126,13 @@ $('reveal').addEventListener('click', () => {
   if ($('result').hidden) reveal();
   else {$('result').hidden = true; $('reveal').textContent = '解答・解説を確認'; $('reveal').setAttribute('aria-expanded', 'false');}
 });
-for (const id of ['topic', 'status', 'search']) $(id).addEventListener(id === 'search' ? 'input' : 'change', filter);
+for (const id of ['mock-set', 'topic', 'status', 'search']) $(id).addEventListener(id === 'search' ? 'input' : 'change', filter);
 for (const [id, delta] of [['previous', -1], ['next', 1]]) $(id).addEventListener('click', () => {const index = filtered.findIndex(entry => entry.q.id === currentId); if (filtered[index + delta]) pick(filtered[index + delta].q.id, true);});
 window.addEventListener('hashchange', () => {
   const id = location.hash.slice(1);
   if (!entries.some(entry => entry.q.id === id)) return;
+  const selected = mockSets.find(set => set.id === $('mock-set').value);
+  if (selected && !selected.slots.some(slot => slot.questionId === id)) $('mock-set').value = '';
   $('topic').value = ''; $('status').value = ''; $('search').value = ''; currentId = id; filter();
 });
 try {
@@ -127,6 +140,16 @@ try {
     read('content/ap/qualification.json'), read('content/ap/diagnostic-progress.json'), read('content/ap/diagnostic-questions.json'), read('content/ap/diagnostic-reviews.json'), read('data/qualifications/ap/manifest.json'), read('data/sources.json')
   ]);
   topics = qualification.topics; sources = sourceList;
+  if (progress.mockSetsPath) {
+    const collection = await read(progress.mockSetsPath);
+    if (collection.format !== 'hitomon-mock-sets' || collection.version !== 1 || collection.qualificationId !== qualification.id || !Array.isArray(collection.sets)) throw new Error('模試教材の形式が不正です');
+    mockSets = collection.sets;
+    for (const set of mockSets) {
+      if (!Array.isArray(set.slots) || set.slots.length !== set.size || new Set(set.slots.map(slot => slot.questionId)).size !== set.size) throw new Error('模試教材の出題一覧が不正です');
+      const option = node('option', `${set.label}（${set.size}問）`); option.value = set.id; $('mock-set').append(option);
+    }
+    $('mock-filter').hidden = !mockSets.length;
+  }
   const index = await read(manifest.index.url, new URL('data/qualifications/ap/manifest.json', root));
   parents = new Map(index.map(q => [q.id, q]));
   const reviewed = new Map(reviews.map(review => [review.questionId, review]));

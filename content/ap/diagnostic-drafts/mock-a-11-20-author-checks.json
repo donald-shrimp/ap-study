@@ -1,0 +1,183 @@
+{
+  "author": "codex-agent-author-mock-a-20261008T161651Z",
+  "createdAt": "2026-10-08T16:16:51.612497Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-a-q11",
+      "version": 1,
+      "sha256": "712d2795095183e6e87536ee3eea8ed1f674e0b3da7856ea857238e5ea801349",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "20*0.3=6，6/15+6*0.04=0.64。選択肢0.4,0.64,0.8,1.2は異なり，丸め不要。",
+      "allFourChoices": [
+        "転送時間だけで，展開時間0.24秒が含まれていない。",
+        "転送時間0.40秒と展開時間0.24秒を足した値である。",
+        "展開時間を圧縮前の20Mバイトに掛けた20×0.04の値で，転送時間も含まれない。",
+        "転送は圧縮後で計算しているが，展開を圧縮前のサイズで計算した0.40＋0.80の値である。"
+      ],
+      "changes": "元サイズ15→20Mバイト，圧縮率40→30%，転送20→15Mバイト/秒，展開0.03→0.04秒へ変更。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q12",
+      "version": 1,
+      "sha256": "e7c8dbe8c8bc9921745ec217784bb66def42456f42d98dc86e45d5b7c70cb5c6",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "変更後アだけ用語と説明が一致。イは原誤答保持，ウ・エはそれぞれ予防・安全移行を別概念に対応させた誤答。",
+      "allFourChoices": [
+        "利用者の操作ミスを防ぐ設計として適切である。",
+        "フェールソフトは故障時に機能を縮退して継続するので，「縮退させることなく」が誤りである。",
+        "構成要素の品質を高めて故障を防ぐのはフォールトアボイダンスである。",
+        "故障時に安全状態へ移行するのはフェールセーフである。"
+      ],
+      "changes": "アの対象フェールセーフ→フールプルーフ，ウの対象フォールトアボイダンス→フォールトトレランス，エの対象フォールトトレランス→フォールトアボイダンスへ変更。記述選択形式を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q13",
+      "version": 1,
+      "sha256": "0eeabec1a15f072b6a2d016c0d477cf15cd6871e031cc4187ee4a31ccbd9a420",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "イだけが専用ネットワークを明示。アはオブジェクト，ウはDAS，エは仮想化で対象が異なる。",
+      "allFourChoices": [
+        "非構造型データを扱うオブジェクトストレージの説明である。",
+        "ストレージ専用ネットワークを使った共有はSANの説明である。",
+        "サーバに個別接続されたDASに関する説明である。",
+        "複数ストレージをまとめるストレージ仮想化の説明で，専用ネットワークの説明ではない。"
+      ],
+      "changes": "対象をオブジェクトストレージからSANへ変更し，同じ4択の記述を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q14",
+      "version": 1,
+      "sha256": "c0bd365dadf6a939b6166c48eedb8d22bceaa34372096cf5430da85898ed3e9a",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "a=.2でn=4→2.5,n=10→3.571...,n=100→4.807...，極限5。分母正，nが増えると5未満で近づく。",
+      "allFourChoices": [
+        "n＝4の場合の性能で，上限ではない。",
+        "1/a＝1/0.2＝5である。",
+        "a＝0.1の場合の上限である。",
+        "a＝0.05の場合の上限である。"
+      ],
+      "changes": "aを0.1から0.2へ変更し，例の性能と4択を対応して更新。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q15",
+      "version": 1,
+      "sha256": "e873d18b88a739ceb624e5c9a7e5870eaefd24981a3c57fd6bfba5961c659993",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "アのみ数式を解く方法。イは精度保証なし，ウは解析不可を解析的に解く矛盾，エは検証可能性を否定するため誤り。",
+      "allFourChoices": [
+        "数式として表したモデルを解くという解析的な方法の説明である。",
+        "乱数を用いるだけで高精度になるわけではなく，乱数利用はシミュレーションで用いられる手法である。",
+        "解析的に解けないモデルを数値実験で評価できるのはシミュレーションの特徴である。",
+        "解析解とシミュレーション結果の比較による検証が可能なので誤りである。"
+      ],
+      "changes": "問う対象をシミュレーションから解析的な方法へ変更。アを解析法の説明へ更新し，イ・エの比較対象をシミュレーションへ対応変更。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q16",
+      "version": 1,
+      "sha256": "47a28a49a05a80b1c883a756fa8e214c15e63229a5db8ed1542757161e0d8f5e",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "エは優先度に基づくプリエンプション。アは切替防止，イは協調的，ウは終了処理であり不適合。",
+      "allFourChoices": [
+        "実行中のタスクの優先度を上げて切替えを防ぐ説明はプリエンプティブ方式の説明ではない。",
+        "自発的な中断要求によってだけ切り替えるのはノンプリエンプティブ方式である。",
+        "プリエンプションはタスクを終了させることではなく，中断して実行待ちに戻すことである。",
+        "OSによる中断と，高優先度タスクへの切替えを説明している。"
+      ],
+      "changes": "対象をノンプリエンプティブ方式からプリエンプティブ方式へ変更し，4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q17",
+      "version": 1,
+      "sha256": "e6e518e93b6f0deead5a6e0f1dda68a595eba70b87fb22f5d404d3dd35ab4b32",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "A/BとA/Cは共有する最初の資源Xで直列化。A/DはA:X,Y占有→Z待ち，D:Z占有→Y待ちで循環待ち。",
+      "allFourChoices": [
+        "BとCはAと同じXを最初に占有するので，互いに別資源を保持して待つ循環が成立しない。",
+        "CはXを最初に取るのでデッドロックの可能性がない。",
+        "CはAと同じXから開始し，一方がXを取るまで他方は資源を占有しない。",
+        "DはZから開始し，AのXとDのZを互いに待つ可能性がある。"
+      ],
+      "changes": "表のCの占有順位をX=2,Y=3,Z=1からX=1,Y=3,Z=2へ変更。A・B・Dと4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q18",
+      "version": 1,
+      "sha256": "9303e93634cf36309b4e0a62a21dfdba0732998859d8cef57ab4371eca2d3e86",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "開始単一0,3,6,9,12，完了3,6,9,12,15。二重開始0,1,3,4,6，完了3,4,6,7,9。差6，一意。",
+      "allFourChoices": [
+        "15秒と9秒の差は4秒ではない。",
+        "到着間隔に基づいて1秒ずつ処理をずらすだけでは，3秒の占有時間を反映できない。",
+        "多重度1の15秒と多重度2の9秒の差である。",
+        "到着時刻からの待ち時間を誤って加えた値で，処理完了時刻の差とは一致しない。"
+      ],
+      "changes": "タスク処理時間4→3秒，要求件数4→5件へ変更し，4択を再設定。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q19",
+      "version": 1,
+      "sha256": "6d939be46703535f9007454fc51049aeeea8748affdf3833a0b470948c94ac26",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "ウだけがブレークポイントとステップ実行を提供するツールの分類。ア・イの再現とエの性能収集とは異なる。",
+      "allFourChoices": [
+        "別の機器や実行環境の動作を再現するツールで，記述された原因調査機能の名称ではない。",
+        "モデルを動かして対象の振る舞いを再現・評価するツールである。",
+        "一時停止，変数の確認，ステップ実行によって不具合の原因を調べる。",
+        "実行回数や実行時間を収集して性能を分析するツールである。"
+      ],
+      "changes": "収集対象を実行回数・時間から，一時停止・変数確認・命令単位実行による不具合調査へ変更。ツール名の4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q20",
+      "version": 1,
+      "sha256": "6cb93c86d1586776af87d0f9f68c57aa4837ef0de2a86650067bc5affdb5b536",
+      "author": "codex-agent-author-mock-a-20261008T161651Z",
+      "checkedAt": "2026-10-08T16:16:51.612497Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "交流→直流だけが整流器の処理。昇降圧DC-DCと直流→交流は該当しない。",
+      "allFourChoices": [
+        "直流を昇圧するDC-DC変換の説明である。",
+        "直流を降圧するDC-DC変換の説明である。",
+        "整流器による交流から直流への変換である。",
+        "インバータによる直流から交流への変換である。"
+      ],
+      "changes": "対象をインバータからコンバータ（整流器）へ変更。コンバータの多義性を避けるため整流器という対象名を併記。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/questions/diagnostic/mock-a-q17-order.svg",
+      "sha256": "fd2e902e017a4633bdc3f3fbae15deabfc0662f9d888aff36aaf2c7be6874346"
+    }
+  ]
+}

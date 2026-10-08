@@ -1,0 +1,195 @@
+{
+  "author": "codex-agent-author-mock-a-20261008T163011Z",
+  "createdAt": "2026-10-08T16:30:11.914465Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-a-q41",
+      "version": 1,
+      "sha256": "6fe8919dbd4c3ec0504268540be7d12961c58f600f1c531a87519684baf4033b",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "入力フォームのSQL攻撃だけHTTPアプリ層要求。DNS汚染・SMTP不正中継・メール大量配送の3択は対象外。",
+      "allFourChoices": [
+        "DNSの応答やキャッシュが対象で，Webアプリケーションの要求を検査するWAFの対象ではない。",
+        "入力フォームから送られる不正なHTTP要求を検査し，SQLインジェクションを遮断できる。",
+        "SMTPの不正中継設定が対象であり，WAFによるWeb要求の検査では防げない。",
+        "メールサービスへの大量配送は，Webアプリケーションの入力検査では防げない。"
+      ],
+      "changes": "イの攻撃場面をREST APIの脆弱性からWeb入力フォームのSQLインジェクションへ変更。他3択と防御対象の判断を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q42",
+      "version": 1,
+      "sha256": "201203dc7b1f66945c1fc1f3be60cbe3f73b382b189d25e158708e5a5214312c",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "HTTPSで用いるのはTLS。IPsecはIP層，PPPはリンク層，SSHは遠隔操作なので一意。",
+      "allFourChoices": [
+        "ネットワーク層でIPパケットを保護する仕組みであり，HTTPSで利用するTLSとは異なる。",
+        "ポイントツーポイントのデータリンク接続のプロトコルである。",
+        "安全な遠隔ログインなどに使うプロトコルで，HTTPSの暗号化方式ではない。",
+        "HTTPSのHTTP通信を暗号化して保護する。"
+      ],
+      "changes": "通信対象をWebサーバにし，ネットワーク層の暗号化からHTTPS通信の暗号化へ変更。IPv6と4択の構成を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q43",
+      "version": 1,
+      "sha256": "1ea3de5d20e9a744ebeceacbb8892797423bc5a1fb6e19ce9a2fefe769461f8c",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "アは署名ドメインの公開鍵で署名対象の改ざん有無を検証するDKIMの正確な記述。イは送信IP照合のSPF，ウは保存，エは承認保留。Fromドメインの詐称防止をDKIM単独の保証としていない。",
+      "allFourChoices": [
+        "メールに付与された署名を検証して，署名ドメインの正当性と署名対象の完全性を確認する方式である。",
+        "送信サーバのIPアドレスを送信元ドメインのDNS情報と照合するSPFの説明である。",
+        "メール保存の機能で，送信元認証ではない。",
+        "承認まで送信を保留する機能で，送信元認証ではない。"
+      ],
+      "changes": "対象をSPFからDKIMへ変更。正答肢アは変更後の対象に合わせ，送信側ドメインの公開鍵による署名検証・改ざん検知の記述へ修正。他3択と仕組みの記述選択形式を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q44",
+      "version": 1,
+      "sha256": "1f4ec79d0e8f36080dee92f17bd074e42bdf6de5ed7ec243dba8654a003868f4",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "イのみ故障カードの代替を提供。アは利便性，ウは解析防止，エは失効処理なので他目的。",
+      "allFourChoices": [
+        "非接触化は利便性を高めるが，カード自体の故障時の代替手段ではない。",
+        "予備カードへの交換が故障したカードの代替となり，継続利用に役立つ。",
+        "物理的な情報解析を防ぐ耐タンパ対策で，故障時の継続利用対策ではない。",
+        "退職者の不正利用防止で，故障時に利用者の業務を継続する対策ではない。"
+      ],
+      "changes": "対象となる対策目的を耐タンパ性から故障時の業務継続へ変更。ICカードの4対策を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q45",
+      "version": 1,
+      "sha256": "ecb66d99fd8a9cb0e6801ad0cea515e9f434be7e7fecd191106a9e735902feca",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "変更後イは関連だけでは操作再定義不可，エは集約の全体部分で正しい。ア・ウは元の誤答理由を保持しエのみ正答。",
+      "allFourChoices": [
+        "3以上のクラスが関与する多項関連も定義できるので，「二つだけ」は誤りである。",
+        "操作の再定義は継承関係でのオーバーライドであり，単なる関連ではできない。",
+        "継承した操作はサブクラスのインスタンスが実行でき，別のスーパークラスインスタンスへの依頼は不要である。",
+        "集約の全体・部分の関係を正しく説明している。"
+      ],
+      "changes": "イの関係を継承から関連へ変更し，エの集約の対象を属性・操作の共有から全体・部分の関係へ変更。ア・ウと記述選択形式を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q46",
+      "version": 1,
+      "sha256": "5971f098ba7b6c3599e86db4b9eca262281697dc2b5ab010171af3cd3620e585",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "イは制御引数と用語が一致。アは内容，ウは外部，エは共通を別名に対応させた誤答。",
+      "allFourChoices": [
+        "他モジュールの内部へJUMPして制御を渡すのは内容結合で，外部結合ではない。",
+        "実行機能や論理を決める制御情報を渡すので制御結合である。",
+        "大域的な単一項目の共有は外部結合の説明で，制御結合ではない。",
+        "大域的なデータの共有は共通結合で，引数でデータだけを渡すデータ結合ではない。"
+      ],
+      "changes": "イの対象名を内容結合から制御結合へ，エを共通結合からデータ結合へ変更。4記述の処理場面を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q47",
+      "version": 1,
+      "sha256": "e05b22c215be2fd993d93591dcd88725fe098db6bf23523fab9b6ef8eec4f9c5",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "指数形m=a(1-exp(-bt))のm'=ab exp(-bt)>0,m''=-ab²exp(-bt)<0。エだけ全域で増加率が低下し飽和する。",
+      "allFourChoices": [
+        "増加率が次第に大きくなり，有限の上限に向かう指数形の成長とは異なる。",
+        "一定の増加率を持つ直線で，検出数の増加が緩やかにならない。",
+        "初期に増加率が大きくなる区間を持つS字形で，ゴンペルツなどのモデルに対応する。",
+        "初期の増加率が大きく，次第に減少して上限へ近づく指数形の曲線である。"
+      ],
+      "changes": "問う対象をゴンペルツ曲線から指数形ソフトウェア信頼度成長モデルへ変更。同じ4グラフを公式画像から切出して保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q48",
+      "version": 1,
+      "sha256": "80c235b4e318ff1f2999d1124a3e16a619effe7aaf3254dd05ee4556ea3d90f5",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "残量の時系列をグラフにするウ。ア要求カード，イ作業リスト，エ工程流れと時間で別対象。",
+      "allFourChoices": [
+        "ユーザーストーリーや要求を記したカードで，残作業量の時間変化を表すグラフではない。",
+        "スプリントで行う作業の計画や項目であり，推移を示すグラフの名称ではない。",
+        "時間と残作業量の関係を示し，進捗を確認する。",
+        "工程や所要時間を可視化し，ボトルネックや無駄を調べるための図である。"
+      ],
+      "changes": "リーン開発の工程と所要時間の可視化から，スクラムのスプリント残作業量の可視化へ変更。道具の4択保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q49",
+      "version": 1,
+      "sha256": "4e686466b2ed6eef3a6ef755774bd4b970dba7238e90a33b0e2b0f0315ac8ae8",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "エは対象規格の名称と共通枠組みに対応。ア改善，イ評価，ウ管理の手引きで別目的。規格年2021はJIS X0160改正年に対応。",
+      "allFourChoices": [
+        "継続的改善を目的とする品質マネジメントに関する説明である。",
+        "プロセスアセスメントの要求事項に関する説明である。",
+        "プロジェクトマネジメントの概念・プロセスの手引きに関する説明である。",
+        "ソフトウェアライフサイクルプロセスの共通枠組みという規格の目的に一致する。"
+      ],
+      "changes": "規格対象をJIS X 33002:2017のプロセスアセスメントからJIS X 0160:2021のソフトウェアライフサイクルプロセスへ変更。同じ4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q50",
+      "version": 1,
+      "sha256": "ae3494bad79d814b7c7146acc75b45ad0b36d0fcc58c833dfacda42fe396f7ed",
+      "author": "codex-agent-author-mock-a-20261008T163011Z",
+      "checkedAt": "2026-10-08T16:30:11.914465Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "ウだけひな形と入力データの合成。ア表示，イ説明文書生成，エ組版の役割と区別。",
+      "allFourChoices": [
+        "ブラウザなどのレンダリングエンジンの説明である。",
+        "コメントなどから説明文書を生成するドキュメンテーションジェネレーターの説明である。",
+        "ひな形とデータを合成して動的なページを生成するテンプレートエンジンの説明である。",
+        "マーク付きの文書から印刷用の体裁を作る組版ソフトウェアの説明である。"
+      ],
+      "changes": "対象をドキュメンテーションジェネレーターからWeb用テンプレートエンジンへ変更し，4択の記述を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/questions/diagnostic/mock-a-q47-choice-2.webp",
+      "sha256": "8ce66c2682dafe58e435b307d2893f0c13bb52cecd16901d685bd21146c1a598"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q47-choice-0.webp",
+      "sha256": "04168e976f56368806f1fb2b7e83c065f04c1744f26f00606d170c4d2aff6a6d"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q47-choice-1.webp",
+      "sha256": "40d59dafd6b9a8b5ff5f67f87942f84bc26f992db3fafbd8e2e498e3ad757ca0"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q47-choice-3.webp",
+      "sha256": "18821128455ed788a2036c24f11f385f7b3dd73fd4b70b5225170026d43701b9"
+    }
+  ]
+}

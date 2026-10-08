@@ -1,0 +1,207 @@
+{
+  "author": "codex-agent-author-mock-a-20261008T162051Z",
+  "createdAt": "2026-10-08T16:20:51.371386Z",
+  "independentReview": false,
+  "checks": [
+    {
+      "questionId": "ap-mock-a-q21",
+      "version": 1,
+      "sha256": "06008b20526d2f086d40868b00bafdc856bb0feb3937121d8c66107f77c826db",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "変更後7区間のY=[0,1,1,1,1,1,0]。4回路の真理値を照合しXNORのみ全区間一致。",
+      "allFourChoices": [
+        "XORは入力が異なるとき1になるため，図のYと反対になる。",
+        "XORの出力を否定するXNORであり，入力が同じとき1になる。",
+        "NANDは入力(0,1)と(1,0)で1となり，図では0なので一致しない。",
+        "NORは入力(1,1)で0となり，図では1なので一致しない。"
+      ],
+      "changes": "原問のA・B波形と4回路を保持し，YをNANDからXNORの波形へ変更。4回路だけ公式画像から切り出した。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q22",
+      "version": 1,
+      "sha256": "4e3ae11cf129d06cb72a4ca1414464b4cf7c54a2143855ea94ccbf919cf8195e",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "新対象(5,4)，2565画素目の先頭5130番地。バイト単位は図の8ビットに一致。4択は画素単位・行のみ・正答・y誤り。",
+      "allFourChoices": [
+        "画素数640×4＋5を求めただけで，1画素2バイトを反映していない。",
+        "4行分の5120バイトだけを求め，x＝5の10バイトを加えていない。",
+        "4行分5120バイトと5画素分10バイトの合計である。",
+        "y＝5と誤って求めた場合の(640×5＋5)×2である。"
+      ],
+      "changes": "始点(5,4)・終点(9,8)・対象x=7を(3,2)・(7,6)・x=5へ変更。画面寸法・16ビット・割当順序と図の構造は保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q23",
+      "version": 1,
+      "sha256": "fca663c003e16aaace14e3602b45f1857e0886609f69c6fcba31ce5d25ea2f8c",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "アは直流方式の利点，イはLSI電圧不一致，ウは停電可能性，エは交流変圧に適合。",
+      "allFourChoices": [
+        "変換に伴う電力損失の低減は，変換段数を減らす直流給電の利点である。",
+        "CPUなどのLSIに必要な電圧は受電電圧とは異なり，電圧変換が必要である。",
+        "交流給電でも停電が起こり得るので，バッテリを不要にはできない。",
+        "交流はトランスを用いて昇圧，降圧できる。"
+      ],
+      "changes": "給電方式を直流から交流へ変更し，4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q24",
+      "version": 1,
+      "sha256": "e84c65ceb179d7460b1e98f233823add39ed57aa3d1d211949ed75b7fefeaa8f",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "ア・イは方式によらず可能，ウは画素パターンの直接表示，エは輪郭の再描画による拡大なのでウだけ適切。",
+      "allFourChoices": [
+        "漢字はどちらの方式でも表示できる。",
+        "固定幅の文字はどちらの方式でも用意できる。",
+        "既に用意された画素パターンを使えるので，高速表示に適する。",
+        "任意倍率での滑らかな拡大には，輪郭を保持するアウトラインフォントが適する。"
+      ],
+      "changes": "比較方向を反転し，ビットマップフォントが適する場合を問う。同じ場面の4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q25",
+      "version": 1,
+      "sha256": "6640010db47b057ccdbf61e95fe744985794405f70e4bf73834997c80021c9cb",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "エのみインデックスによる行絞込みとI/O減少。アは通信，イ・ウは一括処理についての説明で索引機能と異なる。",
+      "allFourChoices": [
+        "ネットワーク通信の往復やデータ量を減らすことは，インデックス自体の利点ではない。",
+        "インデックスは要求を一括するものではなく，実行計画数を減らす機能でもない。",
+        "必要なバッファ数は要求や処理に依存し，インデックスによって一括要求のバッファを減らすわけではない。",
+        "条件に合う行の位置を効率よく探し，読み出すデータページを減らせる。"
+      ],
+      "changes": "対象をストアドプロシージャから検索列のインデックスへ変更。元の利点選択の形式を保ち，エを検索効率の記述へ対応変更。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q26",
+      "version": 1,
+      "sha256": "ff81e00729f94f1f81e413766f52cb54df824d44a45ef3de93458632162e9947",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "P01:MIN60,SUM140，P02:100，P03:NULL。MIN系はP01で失敗，SUM,NULLはP03で失敗，SUM,0だけ表の結果。",
+      "allFourChoices": [
+        "P01の最小在庫60で判定するので120>60が真となり，結果の「不要」と合わない。",
+        "P01を必要と判定し，P03ではNULLとの比較が真にならず不要となる。",
+        "P01は140，P02は100，P03は0で判定し，示された結果に一致する。",
+        "P03の在庫集計がNULLのままであり，80>NULLは真にならないので不要となる。"
+      ],
+      "changes": "発注点100/150/100を120/100/80へ，在庫90/90/150を60/80/100へ変更。表・外部結合・集計・結果と4択の構造を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q27",
+      "version": 1,
+      "sha256": "1be96b2078b5b7a37947403499091fd959d4f12629817ced0bd4b5f504e2558f",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "コミット前なのでUNDOが必要。3候補は並行制御・別復旧方式・REDOで，ウだけ取消しの名称。",
+      "allFourChoices": [
+        "並行実行の整合性を保つためのロック制御方式であり，ログを使って更新を取り消す復旧処理ではない。",
+        "ページの旧版を保持する復旧方式で，この問題のログを使う更新の取消しの名称ではない。",
+        "未コミットの更新を取り消して，トランザクション開始前の状態に戻す。",
+        "コミット済みの更新をログから再実行する処理で，未コミット更新の取消しではない。"
+      ],
+      "changes": "障害の時点をコミット後からコミット前へ，復旧対象を終了直後から開始直前へ変更。WAL・ログ使用と4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q28",
+      "version": 1,
+      "sha256": "604ec3db6d51a2a5ea1156a1c47c27028fd15a29eafacc1ab5ef0f0188d1fccc",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "イが分析軸の正式な役割名。アは集計，ウは測定，エは汎用参照表で対象の役割を表さない。",
+      "allFourChoices": [
+        "集計済みの結果を格納するためのテーブルで，分析軸の基本となるテーブルではない。",
+        "商品や顧客などの分析軸とその属性を格納する。",
+        "売上などの取引・測定値を格納する。",
+        "コードと名称の対応などを参照する一般的な名称で，スタースキーマの分析軸の役割の名称ではない。"
+      ],
+      "changes": "格納する対象を分析対象のトランザクションデータから商品・顧客などの分析軸の属性へ変更。4択保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q29",
+      "version": 1,
+      "sha256": "e52891c9c7527a88d92e916856a87e22666a05a29eb7727289f104f3de03dfe4",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "アだけが関係モデルのオブジェクト指向拡張。イはデータウェアハウス，ウはキー値，エはメタデータ管理。",
+      "allFourChoices": [
+        "関係モデルにオブジェクト指向の型や操作の機能を拡張している。",
+        "主題別・時系列の分析データを蓄積するデータウェアハウスの説明である。",
+        "キーと値の組で管理するNoSQLの一形態である。",
+        "データ辞書など，データの定義や特性を管理するものの説明である。"
+      ],
+      "changes": "分類対象をNoSQLからオブジェクト関係データベースへ変更し，同じ4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    },
+    {
+      "questionId": "ap-mock-a-q30",
+      "version": 1,
+      "sha256": "eab472bf14f33d5fc5b00d10167c138b899311ce817bf18dbfcad1927b4793d3",
+      "author": "codex-agent-author-mock-a-20261008T162051Z",
+      "checkedAt": "2026-10-08T16:20:51.371386Z",
+      "independentReview": false,
+      "numericalOrLogicalVerification": "ウは環状構成とトークン巡回の両方を明記。アは論理順のトークンバス，イはCSMA/CD，エは時分割。",
+      "allFourChoices": [
+        "論理的な順序で送信権を受け渡すトークンバスの説明で，環状の巡回を述べていない。",
+        "媒体の使用を確認し衝突時に再送するCSMA/CD方式である。",
+        "リングを巡回する特殊フレームによって送信権を制御するトークンリング方式である。",
+        "割り当てた時間枠で送信する時分割方式である。"
+      ],
+      "changes": "対象をCSMA/CDからトークンリングへ変更し，送信動作の4択を保持。",
+      "wordingReview": "原本画像の問い方・説明量と照合。解法は問題文に追加していない。"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/questions/diagnostic/mock-a-q26-tables.svg",
+      "sha256": "0a02eeae3773c8c18b09cbf30a29c9b0aa45f82fc4468dcc48881016df28707e"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q22-pixels.svg",
+      "sha256": "f53ea971532e8b329cd1fbf462f39150e8731869f270f13db14836fac661389d"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q21-choice-0.webp",
+      "sha256": "3d6e32b8c4d7052d82470c1f281991467120f6995674e4e9ad113ee3a5abc1f9"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q21-choice-2.webp",
+      "sha256": "efad89216b38c207320c32bbd0073a0395af178a7da46c4488271c64e3c790c6"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q21-choice-1.webp",
+      "sha256": "5373bee4cab55ba1ef797618535fe8cd2103435bdc85ab0f85f12dbfd7eef49f"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q21-choice-3.webp",
+      "sha256": "617b845c673a8659ec1080317cb36ca646f33f2c3cd00702429859197b809f9e"
+    },
+    {
+      "path": "assets/questions/diagnostic/mock-a-q21-timing.svg",
+      "sha256": "7030af49cbf0e2f8481a706e5ed006e87f9ca38de68856b3ae5fed320ceb29dd"
+    }
+  ]
+}
