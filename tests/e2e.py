@@ -94,7 +94,7 @@ with sync_playwright() as p:
     assert hint['text'] in page.locator('#hints').inner_text()
     if stage==0:
      page.get_by_role('radio').nth(q['answer']).check();page.get_by_role('button',name='中断',exact=True).click()
-     page.locator('.hero-start .primary[data-action=entry-resume]').click();state();page.reload();page.locator('.hint-box').wait_for()
+     nav('history');page.locator(f'[data-action=resume][data-id="{state()["attempts"][-1]["id"]}"]').click();state();page.reload();page.locator('.hint-box').wait_for()
      assert page.get_by_role('radio').nth(q['answer']).is_checked() and page.locator('.hint-box').count()==1
    answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
    expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'
@@ -125,7 +125,7 @@ with sync_playwright() as p:
  open_q(reveal_fixture['id']);page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
  page.get_by_role('button',name='次のヒントを見る（答えを含む）',exact=True).click();answer()
  s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='revealed' and a['answerViewedBefore'] and a['hintsBeforeAnswer']==2
- nav('review');assert page.locator(f'[data-action=start][data-id="{reveal_fixture["id"]}"]').count()==1
+ nav('review');assert page.locator(f'[data-action=review-start][data-id="{reveal_fixture["id"]}"]').count()==1
  # Reproduce the reported question reopened with an older common guide.
  open_q('r07h-q18');page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(1).check();page.locator('#confidence').check()
  legacy=state();a=next(a for a in legacy['attempts'] if a['id']==legacy['currentId']);old_id=a['id']
@@ -156,7 +156,7 @@ with sync_playwright() as p:
   assert '個別の解答解説は未追加' in page.locator('.result').inner_text() and '分野の復習メモ' in page.locator('.result').inner_text();assert page.locator('.reason-list').count()==0
  else:
   assert pending_fixture['summary'] in page.locator('.result').inner_text();assert '個別の解答解説は未追加' not in page.locator('.result').inner_text();assert page.locator('.reason-list li').count()==4
- nav('review');assert page.locator(f'[data-action=start][data-id={pending_id}]').count()==1
+ nav('review');assert page.locator(f'[data-action=review-start][data-id={pending_id}]').count()==1
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);page.locator(f'[data-action=edit][data-id={pending_id}]').click()
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
  # An old attempt keeps its original material after personal editing.

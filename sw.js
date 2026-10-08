@@ -1,5 +1,5 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261008-entry-heading1';
+const RELEASE = '20261008-selection2';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;
@@ -8,7 +8,7 @@ const CONTENT_CACHE = `${PREFIX}content`;
 const CORE = [
   'index.html', `app.js?v=${RELEASE}`, `styles.css?v=${RELEASE}`, 'pwa.js',
   'data/qualifications/catalog.json', `manifest.webmanifest?v=${RELEASE}`,
-  "src/app.js?v=20261008-entry-heading1", "src/utils.js", "src/ui/views.js", "src/domain/study.js", "src/domain/review.js", "src/domain/planning.js", "src/domain/analytics.js", "src/domain/study-context.js", "src/domain/flashcards.js", "src/features/cards.js", "src/storage/cards.js", "src/domain/next-action.js", "src/ui/field-progress.js", "src/domain/diagnostic.js", "src/ui/planning.js", "src/ui/plan-targets.js", "src/ui/plan-context.js", "src/features/planning.js", "src/storage/workspace.js", "src/sync/workspace.js", "schemas/study-plan.v1.json", "src/storage/local.js", "src/storage/validate.js", "src/content/catalog.js", "src/sync/account.js", "src/sync/engine.js", "src/sync/firebase.js", "src/sync/config.js", "assets/vendor/firebase.js",
+  "src/app.js?v=20261008-selection2", "src/utils.js", "src/ui/views.js", "src/domain/study.js", "src/domain/review.js", "src/domain/planning.js", "src/domain/analytics.js", "src/domain/study-context.js", "src/domain/flashcards.js", "src/features/cards.js", "src/storage/cards.js", "src/domain/next-action.js", "src/domain/practice.js", "src/ui/field-progress.js", "src/domain/diagnostic.js", "src/ui/planning.js", "src/ui/plan-targets.js", "src/ui/plan-context.js", "src/features/planning.js", "src/storage/workspace.js", "src/sync/workspace.js", "schemas/study-plan.v1.json", "src/storage/local.js", "src/storage/validate.js", "src/content/catalog.js", "src/sync/account.js", "src/sync/engine.js", "src/sync/firebase.js", "src/sync/config.js", "assets/vendor/firebase.js",
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png', 'assets/icons/apple-touch-icon.png'
 ];
 const CORE_URLS = new Map(CORE.map(path => {

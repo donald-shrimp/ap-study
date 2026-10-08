@@ -18,9 +18,14 @@ export function cardProgress(cards,events){
 }
 export function nextCard(cards,events,checkpoint={seen:[]}){
  const eligible=cards.filter(c=>!checkpoint.topicId||c.topicId===checkpoint.topicId);if(!eligible.length)return null;
- const progress=cardProgress(eligible,events);let seen=(checkpoint.seen||[]).filter(id=>eligible.some(c=>c.id===id));let pool=eligible.filter(c=>!seen.includes(c.id));if(!pool.length){seen=[];pool=eligible.length>1?eligible.filter(c=>c.id!==checkpoint.cardId):eligible;}
+ const progress=cardProgress(eligible,events),ids=new Set(eligible.map(c=>c.id));
+ const recent=(checkpoint.recent||events.slice().sort((a,b)=>a.at.localeCompare(b.at)||a.id.localeCompare(b.id)).slice(-10).map(e=>e.cardId)).filter(id=>ids.has(id)).slice(-10);
+ let seen=(checkpoint.seen||[]).filter(id=>ids.has(id));if(seen.length===eligible.length)seen=[];
+ const cooling=new Set(recent.slice(-3));if(checkpoint.cardId)cooling.add(checkpoint.cardId);
+ let pool=eligible.filter(c=>!cooling.has(c.id));
+ // Small decks shorten the gap, but still avoid the immediate previous card.
+ if(!pool.length)pool=eligible.filter(c=>c.id!==checkpoint.cardId);if(!pool.length)pool=eligible;
  const category=c=>{const e=progress.latest.get(c.id);return !e||e.cardVersion!==c.version?1:e.outcome==='again'?0:2;};
- // Each card appears once before a new cycle. The current card isn't immediately repeated.
- pool.sort((a,b)=>category(a)-category(b)||String(progress.latest.get(a.id)?.at||'').localeCompare(String(progress.latest.get(b.id)?.at||'')));
- return {cardId:pool[0].id,cardVersion:pool[0].version,flipped:false,seen,topicId:checkpoint.topicId||null};
+ pool.sort((a,b)=>category(a)-category(b)||Number(seen.includes(a.id))-Number(seen.includes(b.id))||String(progress.latest.get(a.id)?.at||'').localeCompare(String(progress.latest.get(b.id)?.at||''))||a.id.localeCompare(b.id));
+ return {cardId:pool[0].id,cardVersion:pool[0].version,flipped:false,seen,recent,topicId:checkpoint.topicId||null};
 }

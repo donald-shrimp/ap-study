@@ -1,6 +1,6 @@
 import {createWorkspaceStore} from '../storage/workspace.js';
 import {blankPlan,validatePlan,parsePlan,examPartsFor,studySummary,aiPrompt,CONTEXT_FIELDS,dateInZone} from '../domain/planning.js';
-import {selectDiagnostic,createDiagnostic,submitDiagnostic,finishDiagnostic,diagnosticAttempts,diagnosticResult,validateDiagnostic} from '../domain/diagnostic.js';
+import {selectDiagnostic,createDiagnostic,submitDiagnostic,finishDiagnostic,diagnosticAttempts,diagnosticExposure,diagnosticResult,validateDiagnostic} from '../domain/diagnostic.js';
 import {createPlanningViews} from '../ui/planning.js';
 
 export function createPlanningFeature({qualification,rootPath,getStore,getState,getNavigation,content,base,validateAttempt,onUpdate,onNavigate,onNotice,onChanged,getReviewCount,download,getTargetPart=()=>null}){
@@ -22,7 +22,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  }
  function phaseIn(next,id){const phase=next.phases.find(p=>p.id===id);if(!phase)throw new Error('フェーズが更新されています。計画を開き直してください。');return phase;}
  async function bind(){const token=++generation,identity=await getStore().identity();await workspace?.close();if(token!==generation)return;workspace=createWorkspaceStore({...identity,rootPath,validate});try{documents=(await workspace.read()).filter(r=>{try{validate(r.kind,r.payload);return true;}catch{onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');return false;}});}catch{documents=[];onNotice('計画・診断を保存できません。通常学習は利用できます。');}if(workspace.error())onNotice('計画・診断の保存データを読み取れません。通常学習は利用できます。');preview=null;jsonInput='';editingPhaseId=null;editingWeek=null;editingMilestone=null;editorOpen=false;aiOpen=false;status=identity.owner.startsWith('uid:')?'pending':'guest';onUpdate();}
- async function write(kind,id,payload,revision){const token=generation,target=workspace;await target.write(kind,id,payload,revision);if(token!==generation)return;documents=await target.read();onChanged();onUpdate();}
+ async function write(kind,id,payload,revision){if(!workspace)throw new Error('このブラウザでは計画・診断の記録を保存できません。通常演習は続けられます。');const token=generation,target=workspace;await target.write(kind,id,payload,revision);if(token!==generation)return;documents=await target.read();onChanged();onUpdate();}
  function summary(){return studySummary({qualification,plan:row('planning')?plan():null,attempts:allAttempts(),diagnostics:documents.filter(r=>r.kind==='diagnostic'&&r.payload.status!=='in_progress').map(r=>diagnosticResult(r.payload,qualification)),reviewCount:getReviewCount()});}
  async function copy(text){try{await navigator.clipboard.writeText(text);onNotice('コピーしました。');}catch{
   let dialog=document.getElementById('copy-dialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='copy-dialog';dialog.setAttribute('aria-label','コピーするテキスト');dialog.innerHTML='<form method="dialog"><div class="dialog-head"><h2>テキストをコピー</h2><button class="button secondary">閉じる</button></div></form><p class="small">下のテキストを選択してコピーしてください。</p><textarea rows="12" readonly aria-label="コピーする内容"></textarea><button type="button" class="button secondary select-copy">全選択</button>';document.body.append(dialog);dialog.querySelector('.select-copy').onclick=()=>dialog.querySelector('textarea').select();}dialog.querySelector('textarea').value=text;dialog.showModal();
@@ -35,7 +35,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   if(!navigator.onLine)throw new Error('新しい診断はオンラインで始めてください。中断した診断や通常学習はオフラインでも使えます。');
   const token=generation,nav=getNavigation();onNotice('診断の30問を準備しています。');
   const variants=await content.loadDiagnostics();if(token!==generation||nav!==getNavigation())return;
-  const attempts=assessmentAttempts(),chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>!q.diagnosticOnly).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
+  const attempts=[...assessmentAttempts(),...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticExposure(r.payload))],chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>!q.diagnosticOnly).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
   await cacheImages(chosen);if(token!==generation||nav!==getNavigation())return;
   const revision=[content.manifest.index.sha256,content.manifest.diagnostic?.sha256||''].filter(Boolean).join(':');
   const run=createDiagnostic(chosen,qualification,attempts,revision);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);

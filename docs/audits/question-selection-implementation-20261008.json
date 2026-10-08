@@ -1,0 +1,126 @@
+{
+  "format": "hitomon-selection-implementation",
+  "version": 1,
+  "date": "2026-10-08",
+  "auditCommit": "6732584fc243863fac3b26c32fe52132eca2cf12",
+  "release": "20261008-selection2",
+  "implementedFindings": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10"
+  ],
+  "unitTests": {
+    "command": "node --test tests/action-domain.mjs tests/mobile-domain.mjs tests/study-domain.mjs tests/planning-domain.mjs tests/selection-domain.mjs tests/sync-engine.mjs tests/workspace-race.mjs",
+    "passed": 60
+  },
+  "emulator": {
+    "command": "npm run test:sync",
+    "rulesTestsPassed": 8,
+    "browserSuites": [
+      "tests/sync.py",
+      "tests/planning-sync.py"
+    ],
+    "productionAccountUsed": false
+  },
+  "browserSuites": [
+    "tests/selection-flow.py",
+    "tests/home-entries.py",
+    "tests/mobile-study.py",
+    "tests/action-flow.py",
+    "tests/storage.py",
+    "tests/qualifications.py",
+    "tests/e2e.py",
+    "tests/pwa.py",
+    "tests/diagnostic-ap.py",
+    "tests/planning.py",
+    "tests/planning-context.py",
+    "tests/planning-targets.py",
+    "tests/scale.py"
+  ],
+  "preservedFiles": {
+    "data/questions.json": "5e3e71d9222eb616f58ee6bb11e6f71685e7d248420b813ea00373a80d76db24",
+    "content/ap/flashcards.json": "fa4300c39520172838bb5417f2707a561c7b04245522f1d68023b3aa7ad179a3",
+    "content/ap/diagnostic-questions.json": "4ba33f1eaeb6f603cb97ce9094c0b8590152ba071132ae9682a9584112280666",
+    "content/ap/diagnostic-reviews.json": "db1363522effb6933a42f52b714e57311e1f28616b2ff937f30f01d8bdf9ff68",
+    "content/ap/study-context.json": "fa6916023afe3cfacd4f0c052c9cb2453b399ffc874e50bad875533073745877",
+    "firestore.rules": "10e49c4b0072ff19d3852a9ee8f441e16fce6245d1b9cd97aac84b6deaf77076"
+  },
+  "limits": [
+    "入口・復習の細かい範囲・先送りの除外は端末内。遠隔の入口が不明ならおまかせ＋保存された単一分野＋問題パートで継続。",
+    "本番の本人アカウントの追加確認ではなくエミュレーターと合成遠隔記録で確認。",
+    "3枚の再確認間隔は初期仮説で、学習効果の保証ではない。"
+  ],
+  "browserRegressionCases": [
+    "F01 explicit plan scope / broad home / mobile home",
+    "F02 postpone / next / reload / saved-work resume",
+    "F02 failed-save rollback / same visible question retained",
+    "F03 history resume / unchanged entrance and work",
+    "F04 explicit calculation / return / unchanged home preference",
+    "F04 card-linked question / exact card return",
+    "F05 review-only continuation / stop",
+    "F06 oldest due first and next",
+    "F04 related question / original explicit field retained",
+    "P2 synthetic remote fallback / independent continuation / saved field"
+  ],
+  "reportLayoutChecks": [
+    {
+      "width": 390,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 19,
+      "sizes": {
+        "doc": 390,
+        "viewport": 390,
+        "body": 390,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 320,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 19,
+      "sizes": {
+        "doc": 320,
+        "viewport": 320,
+        "body": 320,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 900,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 19,
+      "sizes": {
+        "doc": 900,
+        "viewport": 900,
+        "body": 900,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 320,
+      "text200Percent": true,
+      "findings": 10,
+      "entries": 19,
+      "sizes": {
+        "doc": 320,
+        "viewport": 320,
+        "body": 320,
+        "font": "34px"
+      },
+      "errors": []
+    }
+  ]
+}

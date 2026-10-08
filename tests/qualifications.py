@@ -60,7 +60,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='ヒントで正解'
             page.goto(url+'fixture-b/');page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
-            page.locator('.sidebar [data-view=home]').click();page.locator('.quick-start [data-action=start-session]').click();page.get_by_role('radio').last.wait_for();assert page.get_by_role('radio').count()==5
+            page.locator('.sidebar [data-view=home]').click();page.locator('.quick-start [data-action=entry-start][data-paper-mode=all]').click();page.get_by_role('radio').last.wait_for();assert page.get_by_role('radio').count()==5
             for i in range(4):page.locator('[data-action=hint]').click();assert page.locator('.hint-box').count()==i+1
             page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='解答を確認' and page.locator('.reason-list li').count()==5
@@ -92,7 +92,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             assert not errors,errors
             # First direct qualification visit, with no earlier reload/cache.
             fresh=browser.new_context();direct=fresh.new_page();direct.goto(url+'fixture-b/');direct.locator('.quick-start').wait_for()
-            direct.locator('.quick-start [data-action=start-session]').click();direct.get_by_role('radio').last.wait_for()
+            direct.locator('.quick-start [data-action=entry-start][data-paper-mode=all]').click();direct.get_by_role('radio').last.wait_for()
             direct.evaluate('navigator.serviceWorker.ready.then(()=>true)');direct.wait_for_function('!!navigator.serviceWorker.controller')
             wait_for_async(direct,'async()=>!!(await caches.match(new URL("index.html",location.href)))')
             fresh.set_offline(True);direct.reload();direct.get_by_role('radio').last.wait_for();assert direct.get_by_role('radio').count()==5

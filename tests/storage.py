@@ -56,7 +56,7 @@ with sync_playwright() as p:
     # Real documents in two browser tabs use independent in-memory state.
     # The second tab starts from the first tab's saved unfinished checkpoint.
     context=browser.new_context();first=context.new_page();first.goto(URL);first.locator('.quick-start').wait_for()
-    first.locator('.quick-start [data-action=start-session]').click();first.get_by_role('radio').last.wait_for()
+    first.locator('.quick-start [data-action=entry-start][data-paper-mode=all]').click();first.get_by_role('radio').last.wait_for()
     from browser_storage import state as stored_state
     original=stored_state(first);attempt=original['attempts'][0];correct=attempt['questionSnapshot']['answer']
     second=context.new_page();second.goto(URL);second.get_by_role('radio').last.wait_for()

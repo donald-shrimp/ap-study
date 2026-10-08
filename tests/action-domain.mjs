@@ -35,20 +35,20 @@ test('通常の中断を最優先にし、診断・別資格・継続元は再�
  assert.equal(select([paused,diagnostic]).kind,'resume');assert.equal(select([paused,diagnostic]).attemptId,'db1');assert.equal(select([paused],{ignorePaused:true}).kind,'question');
  assert.equal(select([{...paused,qualificationId:'other'}]).kind,'question');assert.equal(select([paused,{...attempt('db2','correct'),continuationOf:'db1'}]).kind,'question');
 });
-test('重点の復習を選び、表示用のIDと学習範囲を同時に返す',()=>{
+test('期限到来の復習を選ぶが、計画から範囲を自動固定しない',()=>{
  const old=attempt('db2','assisted'),result=select([old],{plan,reviewInfo:q=>q.id==='db2'?{a:old,isDue:true,due:new Date('2026-10-06')}:null});
- assert.equal(result.questionId,'db2');assert.equal(result.reasonCode,'phase_due');assert.deepEqual(result.scope,{topicId:'db',examPartId:'a'});
+ assert.equal(result.questionId,'db2');assert.equal(result.reasonCode,'due');assert.equal(result.scope.topicId,null);assert.equal(result.scope.examPartId,null);
 });
-test('重点の未着手は問題種類の少ない分野から。全て既出なら古い記録を選ぶ',()=>{
+test('未着手を要復習より先に選び、重点は固定条件にしない',()=>{
  const a=attempt('db1','correct'),b=attempt('db2','correct');assert.equal(select([a,b],{plan}).questionId,'nw1');
- const c=attempt('nw1','correct','2026-10-02T03:00:00Z');assert.equal(select([a,b,c],{plan}).questionId,'nw1');assert.equal(select([a,b,c],{plan}).reasonCode,'phase_recheck');
+ const c=attempt('nw1','correct','2026-10-02T03:00:00Z');assert.equal(select([a,b,c],{plan}).questionId,'nw1');assert.equal(select([a,b,c],{plan}).reasonCode,'needs');
 });
 test('期限切れ・重点なしは通常出題、教材未対応パートは通常学習に混ぜない',()=>{
  assert.equal(select([],{plan:{...plan,phases:[{...plan.phases[0],end:'2026-10-05'}]}}).reasonCode,'new');assert.notEqual(select([],{plan:{...plan,phases:[{...plan.phases[0],examPartIds:['b']}]}}).questionId,'b1');
 });
-test('オフラインで重点が未保存なら保存済み分野を明示し、0問なら開始しない',()=>{
+test('オフラインで利用できる問題を選び、0問なら開始しない',()=>{
  const p={...plan,phases:[{...plan.phases[0],focusTopicIds:['db']}]},r=select([],{plan:p,online:false,available:q=>q.id==='nw1'});
- assert.equal(r.questionId,'nw1');assert.equal(r.reasonCode,'offline_fallback');assert.equal(select([],{available:()=>false,online:false}).kind,'unavailable');
+ assert.equal(r.questionId,'nw1');assert.equal(r.reasonCode,'new');assert.equal(r.scope.topicId,null);assert.equal(select([],{available:()=>false,online:false}).kind,'unavailable');
 });
 
 test('問題スナップショットのない旧記録も資格の問題一覧から分野に数える',()=>{
@@ -56,12 +56,12 @@ test('問題スナップショットのない旧記録も資格の問題一覧�
  const rows=learningFields({qualification,questions,attempts:[old],at,examPartId:'a'}).rows;
  assert.equal(rows.find(r=>r.topicId==='db').total,1);
 });
-test('複数の教材対応パートでも計画の対象パートを候補と継続範囲に保持する',()=>{
+test('明示した分野と教材対応パートは候補と継続範囲に保持する',()=>{
  const q={...qualification,examParts:qualification.examParts.map(p=>({...p,practiceAvailable:true}))},p={...plan,phases:plan.phases.map(p=>({...p,examPartIds:['b'],focusTopicIds:['db']}))};
- const selected=select([],{qualification:q,plan:p});assert.equal(selected.questionId,'b1');assert.deepEqual(selected.scope,{topicId:'db',examPartId:'b'});
+ const selected=select([],{qualification:q,plan:p,scope:{topicId:'db',examPartId:'b'}});assert.equal(selected.questionId,'b1');assert.equal(selected.scope.topicId,'db');assert.equal(selected.scope.examPartId,'b');
 });
 
-test('重点を未指定の計画でも、対象パートを選び、分野は固定しない',()=>{
+test('パートだけ明示した場合、分野は固定しない',()=>{
  const q={...qualification,examParts:qualification.examParts.map(p=>({...p,practiceAvailable:true}))},p={...plan,phases:plan.phases.map(p=>({...p,examPartIds:['b'],focusTopicIds:[]}))};
- const selected=select([],{qualification:q,plan:p});assert.equal(selected.questionId,'b1');assert.equal(selected.reasonCode,'part_new');assert.deepEqual(selected.scope,{topicId:null,examPartId:'b'});
+ const selected=select([],{qualification:q,plan:p,scope:{examPartId:'b'}});assert.equal(selected.questionId,'b1');assert.equal(selected.reasonCode,'new');assert.equal(selected.scope.topicId,null);assert.equal(selected.scope.examPartId,'b');
 });

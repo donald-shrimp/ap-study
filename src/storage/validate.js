@@ -48,11 +48,23 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
     s.currentRunId??=null;if(s.currentRunId!==null&&!id(s.currentRunId))fail();s.readingNotes??={};s.session.topic??=null;delete s.settings.sessionSize;delete s.session.goal;
     if(s.session.examPartId!==undefined&&s.session.examPartId!==null&&!(qualification?.examParts||[{id:qualification?.defaultExamPartId||'objective'}]).some(p=>p.id===s.session.examPartId))fail();
     if(!s.readingNotes||Array.isArray(s.readingNotes)||typeof s.readingNotes!=='object'||!(s.session.topic===null||text(s.session.topic,200))||(s.session.topicId!==undefined&&s.session.topicId!==null&&!id(s.session.topicId)))fail();
+    const validateScope=scope=>{
+      if(!scope||typeof scope!=='object'||Array.isArray(scope)||!['normal','topic','review','direct'].includes(scope.intent||'normal')||scope.paperMode!==undefined&&!['all','paperless','desk'].includes(scope.paperMode))fail();
+      for(const key of ['topicIds','examPartIds','excludedQuestionIds'])if(scope[key]!==undefined&&(!Array.isArray(scope[key])||scope[key].length>10000||new Set(scope[key]).size!==scope[key].length||!scope[key].every(id)))fail();
+      if(scope.topicId!==undefined&&scope.topicId!==null&&!id(scope.topicId))fail();
+      const parts=qualification.examParts||[{id:qualification.defaultExamPartId||'objective'}];
+      if(scope.examPartId&& !parts.some(p=>p.id===scope.examPartId)||(scope.examPartIds||[]).some(part=>!parts.some(p=>p.id===part)))fail();
+      if((scope.topicIds||[]).some(topic=>!qualification.topics.some(t=>t.id===topic)))fail();
+      if(scope.returnView!==undefined&&!['home','study','topics','review','history','materials','flashcards','diagnostic','diagnostics','planning'].includes(scope.returnView))fail();
+      if(scope.returnRunId!==undefined&&scope.returnRunId!==null&&!id(scope.returnRunId))fail();
+    };
+    validateScope(s.session);if(s.session.returnSession){validateScope(s.session.returnSession);if(s.session.returnSession.returnSession||!Array.isArray(s.session.returnSession.attemptIds))fail();}
     for(const [topic,note] of Object.entries(s.readingNotes))if(!text(topic,100)||topic==='__proto__'||!text(note,200))fail();
     const ids=new Set(), byId=new Map(base.map(q=>[q.id,q]));
     for(const a of s.attempts) {
       if(!a||!id(a.id)||ids.has(a.id)||!id(a.questionId)||!Object.hasOwn(labels,a.status))fail();
       if(a.continuationOf!==undefined&&(!id(a.continuationOf)||a.continuationOf===a.id||!date(a.continuedAt)))fail();
+      if(a.deferred!==undefined&&typeof a.deferred!=='boolean')fail();if(a.practiceScope!==undefined)validateScope(a.practiceScope);
       if(a.entryMode!==undefined&&!['all','paperless','desk'].includes(a.entryMode))fail();
       if(a.importedFrom!==undefined&&!text(a.importedFrom,201))fail();
       if(a.qualificationId!==undefined&&a.qualificationId!==qualification.id)fail();
