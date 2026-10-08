@@ -285,3 +285,6 @@ python tests/mobile-content.py
 python tests/mobile-study.py
 python tests/mobile-classified-packs.py
 ```
+
+
+[出題以外の仕様点検：12領域・修正候補5件](docs/spec-behavior-review.html)（2026-10-08、調査のみ）。
