@@ -96,3 +96,9 @@
 @media(max-width:480px){.home-core .hero-start{padding:18px 16px}.hero-start .study-entrance{font-size:1rem}.home-core .home-shortcuts,.home-core .compact-plan{padding:12px 14px}}
 
 .hero-start .entry-heading{color:#fff;margin:0 0 14px;line-height:1.5}
+
+/* The whole image is the tap target; only the small cue is translucent. */
+.image-zoom-target{position:relative;line-height:0;cursor:zoom-in}
+.question-figure .source-image-button{display:inline-block;width:auto;max-width:100%}
+.image-zoom-cue{position:absolute;right:6px;bottom:6px;display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(20,45,78,.15);border-radius:50%;background:rgba(255,255,255,.78);color:rgba(20,45,78,.72);pointer-events:none}
+.image-zoom-target:hover .image-zoom-cue,.image-zoom-target:focus-visible .image-zoom-cue{background:rgba(255,255,255,.95);color:var(--navy)}

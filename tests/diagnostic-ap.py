@@ -39,7 +39,7 @@ with sync_playwright() as p:
     page.get_by_role('button',name='実力診断（30問）',exact=True).click()
     page.get_by_role('button',name='30問の診断をはじめる',exact=True).click()
     page.locator('[name=diagnostic-answer]').first.wait_for()
-    initial=run(page); slots=initial['slots']; frozen=json.dumps(slots,sort_keys=True)
+    initial=run(page); slots=initial['slots']; frozen=json.dumps(slots,sort_keys=True);zoomed=set()
     derived=[s for s in slots if s['kind']=='derived']
     assert len(derived)==17 and len({s['attempt']['questionSnapshot']['topicId'] for s in derived})==17
     assert len({s['parentQuestionId'] or s['attempt']['questionId'] for s in slots})==30
@@ -47,6 +47,11 @@ with sync_playwright() as p:
     for i,s in enumerate(slots):
         q=s['attempt']['questionSnapshot']
         page.wait_for_function('Array.from(document.querySelectorAll(".diagnostic-question img")).every(img=>img.complete&&img.naturalWidth>0)')
+        zoom_kind='figure' if q.get('image') else 'source' if not q.get('stem') else None
+        if zoom_kind and zoom_kind not in zoomed:
+            target=page.locator('.question-figure .image-zoom-target' if zoom_kind=='figure' else '.source-question .image-zoom-target').first
+            expected=target.locator('img').get_attribute('src');target.locator('img').click();assert page.locator('#image-dialog').is_visible();assert page.locator('#image-scroll img').get_attribute('src')==expected;page.keyboard.press('Escape');assert not page.locator('#image-dialog').is_visible();target.focus();page.keyboard.press('Space');assert page.locator('#image-dialog').is_visible();page.keyboard.press('Escape');zoomed.add(zoom_kind)
+        assert page.get_by_role('button',name='問題を拡大',exact=True).count()==0
         if s['kind']=='derived' and q.get('image'):
             artifact=Path('/workspace/scratch/diagnostic-source-wording-all');artifact.mkdir(exist_ok=True)
             page.locator('.diagnostic-question').screenshot(path=str(artifact/f'{"public" if URL.startswith("https:") else "local"}-{q["topicId"]}.png'))
@@ -109,6 +114,7 @@ with sync_playwright() as p:
         print(page.locator('#main').inner_text(),page.locator('#notice').inner_text() if page.locator('#notice').count() else '',page.evaluate('navigator.onLine'),flush=True)
         raise
     assert not state(page)['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
+    assert zoomed=={'source','figure'},zoomed
     assert not errors,errors
     (artifact/('public-browser.json' if URL.startswith('https:') else 'local-browser.json')).write_text(json.dumps({'url':URL,'derived':17,'original':13,'families':30,'answered':30,'regularCompleted':13,'offlineFrozenResume':True,'choiceReasons':4,'errors':errors},ensure_ascii=False,indent=2)+'\n')
     browser.close()
