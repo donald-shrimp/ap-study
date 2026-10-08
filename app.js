@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261008-paper-button1';
+import './src/app.js?v=20261008-home-quiet1';

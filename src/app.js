@@ -225,7 +225,7 @@ main.addEventListener('click',async e=>{
   else if(action==='latest-hints') await useLatestHints();
   else if(action==='next') start();
   else if(action==='postpone'&&a&&!complete(a)){const before={status:a.status,deferred:a.deferred,updatedAt:a.updatedAt,excludedQuestionIds:state.session.excludedQuestionIds};a.status='postponed';a.deferred=true;a.updatedAt=now();state.session.excludedQuestionIds=[...new Set([...(state.session.excludedQuestionIds||[]),a.questionId])];state.currentId=null;if(!await save()){Object.assign(a,{status:before.status,deferred:before.deferred,updatedAt:before.updatedAt});state.currentId=a.id;state.session.excludedQuestionIds=before.excludedQuestionIds||[];render(false);return;}if(state.session.intent==='direct'){go(state.session.returnView==='study'?'home':state.session.returnView||'home');notice('先送りした問題は記録から再開できます。');}else if(pickQuestion().kind==='question')await start();else {const reason=pickQuestion().reason;go('home');notice(reason);}}
-  else if(['pause','end'].includes(action)) { if(a&&!complete(a)) {a.status='postponed';a.updatedAt=now();} const done=action==='end'?sessionCount():null;state.currentId=null;go('home');if(done!==null)notice(`${done}問に取り組みました。次も1問から始められます。`); }
+  else if(['pause','end'].includes(action)) { if(a&&!complete(a)) {a.status='postponed';a.updatedAt=now();} state.currentId=null;go('home'); }
   else if(action==='hint'&&a) {
     if(!openHint(a))return;
     const y=window.scrollY;save();render(false);window.scrollTo(0,y); const shown=document.querySelectorAll('.hint-box');shown[shown.length-1]?.focus({preventScroll:true});
