@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>派生問題の確認 | ひと問</title>
+  <style>
+    :root{color-scheme:light;--ink:#18324b;--muted:#536577;--line:#d9e2ea;--paper:#fff;--accent:#087c78}
+    *{box-sizing:border-box}body{margin:0;background:#f4f6fa;color:var(--ink);font:1rem/1.7 system-ui,sans-serif}header,main{max-width:1240px;margin:auto;padding:20px}header{padding-bottom:0}h1{font-size:1.5rem;margin:0}h2{font-size:1.3rem;margin:0 0 12px}h3{font-size:1.05rem}p{margin:10px 0}a{color:#126577}button,input,select{font:inherit;color:inherit}button,select,input[type=search]{border:1px solid #afbdca;border-radius:10px;padding:10px;background:white}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button:hover:not(:disabled){border-color:var(--accent)}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}input[type=radio]{accent-color:var(--accent)}.muted{color:var(--muted);font-size:.9rem}.topline,.nav,.counts,.filters{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.topline{justify-content:space-between}.counts{margin:12px 0}.badge{font-size:.8rem;padding:3px 9px;border-radius:6px;background:#e3f1ef;color:#125f57;display:inline-block}.draft{background:#fff1d5;color:#80551b}.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}.filters{margin-bottom:16px;align-items:flex-end}.filters label{display:grid;gap:3px;max-width:100%;font-size:.9rem}.filters .search{flex:1;min-width:160px}.filters input,.filters select{width:100%;min-width:0}.workspace{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:start}.listing{position:sticky;top:12px;padding:12px}.listing summary{cursor:pointer;font-weight:700;padding:6px}.question-list{list-style:none;padding:0;margin:10px 0 0;max-height:65vh;overflow:auto}.question-list button{width:100%;text-align:left;margin-bottom:6px;border-color:var(--line);font-size:.93rem}.question-list button[aria-current=true]{background:#e7f4f2;border-color:var(--accent)}.list-title{display:block;font-weight:650}.question-id{font-size:.75rem;overflow-wrap:anywhere;color:var(--muted)}.nav{justify-content:space-between;margin-bottom:18px}.stem,.explanation{white-space:pre-wrap;overflow-wrap:anywhere}.stem{font-size:1.1rem}.figure{display:block;max-width:100%;max-height:420px;height:auto;margin:16px auto}.choices{border:0;padding:0;margin:16px 0}.choices legend{font-size:.9rem;color:var(--muted)}.choice{display:flex;gap:12px;align-items:flex-start;padding:12px;margin-top:8px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.choice input{margin-top:7px;flex-shrink:0}.choice-body{min-width:0;flex:1;white-space:pre-wrap;overflow-wrap:anywhere}.choice img{max-width:100%;max-height:190px;height:auto}.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}.result{margin-top:20px;padding-top:16px;border-top:2px solid #97c5be}.reasons{padding-left:24px}.reasons li{padding:6px 0}.original{width:100%;height:auto;border:1px solid var(--line);margin:12px 0}.meta{border-top:1px solid var(--line);margin-top:20px;padding-top:14px}.meta details{margin:12px 0}.meta summary{cursor:pointer;font-weight:650}.hash{overflow-wrap:anywhere;font-size:.8rem}.topic-counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:4px 16px;font-size:.88rem;margin:12px 0}.topic-counts p{margin:0}.warning{border-left:4px solid #b68022;padding:8px 12px;background:#fff8e9}.notice{margin-bottom:18px}#error{color:#8c2424}body [hidden]{display:none!important}
+    body{overflow-wrap:anywhere}.panel,.choices{min-width:0}
+    @media(max-width:760px){header,main{padding:14px}.workspace{grid-template-columns:minmax(0,1fr);gap:12px}.listing{position:static}.question-list{max-height:38vh}.panel{padding:14px}.nav{gap:8px}.nav button{padding:8px 12px}.filters label:not(.search){flex:1;min-width:130px}.filters .search{flex-basis:100%}.stem{font-size:1.03rem}h1{font-size:1.25rem}.topline a{font-size:.9rem}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="topline"><h1>派生問題の確認</h1><a href="../">ひと問へ</a></div>
+  <p class="muted">教材を確認する公開ページです。回答・閲覧は学習記録に保存されず、ログインも不要です。</p>
+  <div class="counts" id="counts" aria-live="polite">読み込み中…</div>
+  <details><summary>分野ごとの件数</summary><div id="topic-counts" class="topic-counts"></div></details>
+</header>
+<main>
+  <p id="error" role="alert" hidden></p>
+  <section class="filters" aria-label="問題を探す">
+    <label>分野<select id="topic"><option value="">すべて</option></select></label>
+    <label>状態<select id="status"><option value="">すべて</option><option value="published">公開済み</option><option value="draft">確認待ち</option></select></label>
+    <label class="search">検索<input id="search" type="search" placeholder="用語・問題ID・元問題ID" autocomplete="off"></label>
+  </section>
+  <div class="workspace" id="workspace" hidden>
+    <details class="panel listing" id="list-panel" open>
+      <summary id="list-heading">問題一覧</summary><ul class="question-list" id="question-list"></ul>
+    </details>
+    <article class="panel" id="question-panel" aria-labelledby="title" hidden>
+      <div class="nav"><button id="previous" type="button">← 前の問題</button><span id="position" class="muted"></span><button id="next" type="button">次の問題 →</button></div>
+      <div class="counts"><span id="state" class="badge"></span><span id="field" class="muted"></span></div>
+      <h2 id="title" tabindex="-1"></h2><div id="identity" class="question-id"></div>
+      <p id="draft-notice" class="warning muted" hidden>作者の自己検算までの草稿です。別実行の確認待ちで、診断には出題されません。</p>
+      <p class="stem" id="stem"></p><div id="figures"></div>
+      <fieldset class="choices" id="choices"><legend>選択はこの画面内だけです</legend></fieldset>
+      <button class="primary" type="button" id="reveal" aria-expanded="false" aria-controls="result">解答・解説を確認</button>
+      <section class="result" id="result" hidden aria-labelledby="answer-heading">
+        <h3 id="answer-heading"></h3><p id="summary"></p><p id="explanation" class="explanation"></p>
+        <h3>4つの選択肢の理由</h3><ul id="reasons" class="reasons"></ul><p id="takeaway" class="muted"></p>
+      </section>
+      <section class="meta" aria-label="原問と確認の情報">
+        <h3>変更したところ</h3><p id="adaptation"></p><p id="source" class="muted"></p>
+        <details id="original-details"><summary id="original-heading">元のIPA問題と見比べる</summary><div id="original-images"></div><div id="source-links" class="nav"></div><details><summary>元問題の公式正解</summary><p id="original-answer"></p></details></details>
+        <details><summary>確認記録・版・ハッシュ</summary><div id="evidence" class="muted"></div></details>
+      </section>
+    </article>
+    <p id="empty" class="panel" hidden>該当する問題がありません。分野・状態・検索を変更してください。</p>
+  </div>
+</main>
+<script type="module" src="diagnostic-review.js"></script>
+</body>
+</html>
