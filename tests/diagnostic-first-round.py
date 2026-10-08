@@ -4,6 +4,7 @@ import itertools
 import json
 import re
 import sqlite3
+import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
@@ -40,26 +41,90 @@ for s in solutions['solutions']:
     assert all(r['checks'].values()) and len(q['choiceReasons']) == 4 and q['hints'] == []
     for image in r['sourceEvidence']['sourceImages']:
         assert hashlib.sha256((ROOT / image['path']).read_bytes()).hexdigest() == image['sha256']
+    for image in r.get('derivedImages', []):
+        assert hashlib.sha256((ROOT / image['path']).read_bytes()).hexdigest() == image['sha256']
 
 def unique(topic, valid):
     q = first[topic]
     ids = [c['id'] for c in q['choices'] if valid(c['text'])]
     assert ids == [q['correctChoiceId']], (topic, ids)
 
-# Truth tables and recurrence are recomputed from definitions, not stored answers.
-imp = lambda a, b: (not a) or b
-p, q = True, False
-table = [[imp(p, q) and r, p and imp(q, r), imp(q, p) and r, imp(r, q)] for r in (False, True)]
-assert [i for i in range(4) if all(row[i] for row in table)] == [1]
-assert first['theory']['correctChoiceId'] == first['theory']['choices'][1]['id']
-inputs = list(itertools.product((False, True), repeat=2))
-output = [not ((not (a and b)) and (not (a and b))) for a, b in inputs]
-gates = {'AND': lambda a,b:a and b, 'OR':lambda a,b:a or b, 'XOR':lambda a,b:a!=b, 'NOR':lambda a,b:not(a or b)}
-unique('logic', lambda text: [gates[text](a,b) for a,b in inputs] == output)
-def g(n): return 0 if n == 0 else n + g(n-1)
-unique('algorithm', lambda text: int(text) == g(4))
-unique('architecture', lambda text: Fraction(text.removesuffix('倍')) == Fraction(1,2)*3/(2*Fraction(3,2)))
-unique('hardware', lambda text: int(text.replace(',', '')) == 100 + (3*16+10)*20)
+# Evaluate the actual displayed Boolean expressions, including whole-expression negation.
+def boolean(text, values):
+    tokens=re.findall(r'[PQR¬∧∨→()]', text); pos=0
+    assert ''.join(tokens)==text.replace(' ','')
+    def atom():
+        nonlocal pos
+        token=tokens[pos];pos+=1
+        if token=='¬': return not atom()
+        if token=='(':
+            value=expr();assert tokens[pos]==')';pos+=1;return value
+        return values[token]
+    def chain(next_level, op, combine):
+        nonlocal pos
+        value=next_level()
+        while pos<len(tokens) and tokens[pos]==op:
+            pos+=1;right=next_level();value=combine(value,right)
+        return value
+    def conjunction(): return chain(atom,'∧',lambda a,b:a and b)
+    def disjunction(): return chain(conjunction,'∨',lambda a,b:a or b)
+    def expr():
+        nonlocal pos
+        left=disjunction()
+        if pos<len(tokens) and tokens[pos]=='→':
+            pos+=1;right=expr();return (not left) or right
+        return left
+    value=expr();assert pos==len(tokens);return value
+unique('theory',lambda text:all(boolean(text,{'P':False,'Q':True,'R':r}) for r in [False,True]))
+assert 'Pが偽、Qが真' in first['theory']['stem']
+
+def svg_data(path):
+    root=ET.parse(ROOT/path).getroot()
+    return root,json.loads(root.find('{http://www.w3.org/2000/svg}metadata').text)
+chart,signal=svg_data(first['logic']['image'])
+assert set(zip(signal['A'],signal['B']))==set(itertools.product((0,1),repeat=2))
+# Check that the rendered wave paths implement the data, rather than trusting metadata.
+wave_paths=[p.attrib['d'] for p in chart.findall('.//{http://www.w3.org/2000/svg}path') if p.attrib['d'].startswith('M92 ')]
+for row,values in enumerate([signal['A'],signal['B'],signal['Y']]):
+    high=32+row*100;low=high+46;expected=f'M92 {high if values[0] else low}'
+    for i,v in enumerate(values):
+        expected+=f'H{92+(i+1)*60}'
+        if i+1<len(values):expected+=f'V{high if values[i+1] else low}'
+    assert wave_paths[row]==expected
+gates={'XOR':lambda a,b:a!=b,'XNOR':lambda a,b:a==b,'NAND':lambda a,b:not(a and b),'NOR':lambda a,b:not(a or b)}
+matches=[]
+for c in first['logic']['choices']:
+    circuit,data=svg_data(c['image']);gate=data['gate']
+    # Inversion bubble and XOR extra curve must agree with the actual circuit symbol.
+    assert len(circuit.findall('.//{http://www.w3.org/2000/svg}circle'))==int(gate!='XOR')
+    extra=any(p.attrib['d']=='M53 18Q69 48 53 78' for p in circuit.findall('.//{http://www.w3.org/2000/svg}path'))
+    assert extra==(gate in ['XOR','XNOR'])
+    if [int(gates[gate](a,b)) for a,b in zip(signal['A'],signal['B'])]==signal['Y']:matches.append(c['id'])
+assert matches==[first['logic']['correctChoiceId']]
+
+# Interpret each recursion choice; test base value, termination and the requested sum.
+def recursive_sum(text,n):
+    match=re.fullmatch(r'if n=0 then return ([01]) else return n\+sum\(n([−+])1\)',text)
+    assert match
+    base=int(match[1]);step=-1 if match[2]=='−' else 1
+    def call(x,depth=0):
+        if depth>100:raise RecursionError('not converging')
+        return base if x==0 else x+call(x+step,depth+1)
+    return call(n)
+def valid_recursion(text):
+    try:return all(recursive_sum(text,n)==sum(range(n+1)) for n in range(12))
+    except RecursionError:return False
+unique('algorithm',valid_recursion)
+
+_,cpu=svg_data(first['architecture']['image'])
+periods=[Fraction(row[1].removesuffix('ナノ秒')) for row in cpu['rows']]
+cpis=[Fraction(row[2]) for row in cpu['rows']]
+unique('architecture',lambda text:Fraction(text)==periods[0]*cpis[0]/(periods[1]*cpis[1]))
+dac=first['hardware']['stem']
+step=int(re.search(r'出力が(\d+)ミリV変化',dac)[1])
+code=re.search(r'16進数で([0-9A-F]+)',dac)[1]
+assert 'データに0を与えたときの出力は0ミリV' in dac and int(code,16)<256
+unique('hardware',lambda text:int(text.replace(',',''))==int(code,16)*step)
 network = first['network']['stem']
 mtu = int(re.search(r'が([\d,]+)バイトに設定', network)[1].replace(',', ''))
 total = int(re.search(r'で、([\d,]+)バイトのデータ', network)[1].replace(',', ''))
@@ -78,19 +143,30 @@ assert db.execute("SELECT name FROM users WHERE name='"+value+"'").fetchall() ==
 assert db.execute('SELECT name FROM users WHERE name=?',(value,)).fetchall() == []
 db.close()
 unique('security', lambda text: text == 'SQLインジェクション')
-assert (480-640, 480-600, Fraction(720,560), 640+720/Fraction(480,640)) == (-160,-120,Fraction(9,7),1600)
-assert first['project']['correctChoiceId'] == 'choice-0'
-assert (Fraction(900,300)>Fraction(1200,600), Fraction(45,300)>Fraction(96,600)) == (True, False)
-assert first['business']['correctChoiceId'] == 'choice-0'
-unique('business-strategy', lambda text: text == {(True,True):'花形',(True,False):'問題児',(False,True):'金のなる木',(False,False):'負け犬'}[2>=10, Fraction('1.8')>=1])
-# Concrete witness: employees share one department; A reconstructs exactly, D loses affiliation.
-rows = {(1, '甲', 10, '開発'), (2, '乙', 10, '開発'), (3, '丙', 20, '営業')}
-employees = {(i,n,d) for i,n,d,label in rows}; departments = {(d,label) for i,n,d,label in rows}
-joined = {(i,n,d,label) for i,n,d in employees for d2,label in departments if d==d2}
-assert joined == rows
-without_link = {(i,n) for i,n,d,label in rows}
-assert {(i,n,d,label) for i,n in without_link for d,label in departments} != rows
-assert first['database']['correctChoiceId'] == 'choice-0'
+# Independently construct an EVM state that has the given ratios and assess each claim.
+ev,ac,pv,bac=360,450,400,1350
+cpi,spi,tcpi=Fraction(ev,ac),Fraction(ev,pv),Fraction(bac-ev,bac-ac)
+project=first['project']['stem']
+assert (cpi,spi,tcpi)==tuple(Fraction(re.search(label+r'[^\n]+：(\d+\.\d+)',project)[1]) for label in ['CPI','SPI','TCPI'])
+assert ev-ac<0 and ev-pv<0 and tcpi>1
+unique('project',lambda text: 'コストが予算を超えて' in text and 'スケジュールが予定より遅れ' in text and '上げる必要がある' in text)
+
+_,financials=svg_data(first['business']['image'])
+sales,profits,assets=[[Fraction(value.replace(',','')) for value in row[1:]] for row in financials['rows']]
+turnover=[s/a for s,a in zip(sales,assets)];margin=[p/s for p,s in zip(profits,sales)];returns=[p/a for p,a in zip(profits,assets)]
+predicates=[sales[0]<sales[1] and assets[0]<assets[1] and turnover[0]<turnover[1],margin[0]>margin[1] and returns[0]>returns[1],profits[0]<profits[1] and assets[0]<assets[1] and returns[0]<returns[1],turnover[0]>turnover[1] and returns[0]>returns[1]]
+assert [c['id'] for c,truth in zip(first['business']['choices'],predicates) if truth]==[first['business']['correctChoiceId']]
+
+# Partial dependency witness: product name depends on only one part of a composite key.
+rows={(1,10,'甲',100),(1,20,'甲',110),(2,10,'乙',200)}
+products={(p,name) for p,v,name,price in rows};offers={(p,v,price) for p,v,name,price in rows}
+joined={(p,v,name,price) for p,name in products for p2,v,price in offers if p==p2}
+assert joined==rows
+assert len({(p,v) for p,v,name,price in rows})==len(rows)
+assert len({p for p,v,name,price in rows})<len(rows) # product alone is not the candidate key
+assert '第1正規形から第2正規形' in first['database']['stem']
+unique('database',lambda text:text.startswith('候補キーの一部の属性から、候補キー以外の属性への'))
+unique('business-strategy',lambda text:text=='SWOT')
 
 progress = read('content/ap/diagnostic-progress.json')
 assert progress['publishedCount'] == len(questions)
@@ -98,4 +174,6 @@ assert progress['pendingReviewCount'] == sum(i['status']=='awaiting-independent-
 for topic, counts in progress['topicCounts'].items():
     assert counts['published'] == sum(q['topicId']==topic for q in questions)
 assert not read('content/ap/qualification.json')['diagnosticBlueprint']['variantLimits']
+assert set(progress['editorialPolicy']['alignedQuestionIds'])==set(by_id)
+assert progress['editorialPolicy']['pendingCount']==0 and progress['editorialPolicy']['pendingQuestionIds']==[]
 print('PASS first 17 reviewed questions / unique answers and fresh calculations / source hashes / final review hashes / honest single-worker review method / progress / unchanged per-topic cap')

@@ -1,0 +1,1558 @@
+{
+  "format": "hitomon-diagnostic-revision",
+  "version": 1,
+  "qualificationId": "ap",
+  "runId": "codex-editorial-run-20261008-source-wording-all",
+  "checkedAt": "2026-10-08T00:30:20.739466+00:00",
+  "policy": "原問の語調・情報量・問う理解を保つ。暗記対策に必要な数値・対象・入力だけを変え、選択肢順だけの派生や説明の追加を避ける。",
+  "sameEditorAndReviewer": true,
+  "independentReview": false,
+  "items": [
+    {
+      "questionId": "ap-diagnostic-theory-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-theory-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 1,
+        "title": "含意の左側が偽になる条件",
+        "topicId": "theory",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問1を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "命題Pは真、Qは偽である。Rの真偽にかかわらず真になる論理式はどれか。¬は否定、∧は論理積、→は含意を表す。含意は、左側が真で右側が偽のときだけ偽になる。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "(P→Q)∧R"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "P∧(Q→R)"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "(Q→P)∧R"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "R→Q"
+          }
+        ],
+        "correctChoiceId": "choice-1",
+        "enrichment": "reviewed",
+        "summary": "イ。Qが偽なのでQ→Rは常に真となり、真であるPとの論理積も真になる。",
+        "explanation": "P→Qは真→偽なので偽、Q→Rは左側が偽なのでRによらず真、Q→Pも左側が偽なので真になる。したがってイは真∧真で常に真である。アは常に偽、ウはR、エは¬Rとなり、Rの値によらず真という条件を満たさない。",
+        "takeaway": "含意を左側が偽なら真、真→偽だけ偽として評価する。",
+        "choiceReasons": [
+          "P→Qが偽なので、Rが真でも偽∧真は偽になる。",
+          "Q→Rは偽→Rなので常に真。Pも真のため全体が真になる。",
+          "Q→Pは真だが、真∧RはRそのもの。Rが偽なら全体も偽になる。",
+          "Qが偽なので、Rが真のとき真→偽となり偽になる。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q1",
+        "adaptation": "元問題のP=Q=真をP=真・Q=偽へ変更し、全4択の式を新しく組み立てた。Rの両方の値で真になるかを問う点は保つ。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-theory-001",
+        "version": 1,
+        "sha256": "9515652aa6d6586506b0561aa6d37a788d486ded7edd365dc1a895cc37f2d110",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "P真・Q偽を代入。R偽なら4式は偽・真・偽・真、R真なら偽・真・真・偽。常に真なのはP∧(Q→R)だけ。 原本の解き直し: P=Q=真でエの前件は(P→¬Q)∨(Q→¬P)=偽。偽からの含意はRに関係なく真。イの前件では¬(Q→¬P)=真なので結論Q→RはR次第。否定線は画像を拡大して区別した。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q1",
+          "officialAnswer": "エ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q1.webp",
+              "sha256": "0913a72bc118422715390663511a8ddbb9cf7441b3ab89f07f0581425ebfba67"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "98c454b9f9764d5f53af656b92b1086150c67db86b8bbec8abf11654f2c6c83e",
+      "change": "原問のP=Q=真をP=偽・Q=真へ変更。原問の複合式を保ち、一意の正答を得るためイの最外の左辺だけ∧を∨へ変更した。上線による否定は同じ意味の¬で表記する。",
+      "solution": {
+        "correctChoiceId": "choice-0",
+        "reason": "P=False,Q=True。R=False時は[True,False,True,False]、R=True時は[True,True,False,True]。原問P=Q=Trueでは[¬R,R,¬R,True]でエ。イの左辺を原問の∧のままにするとアとイがともに恒真となるので、∨への1か所変更が必要。",
+        "originalAnswer": "エ",
+        "originalSource": "r07h-q1"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-logic-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-logic-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 2,
+        "title": "NANDを2段つないだ回路",
+        "topicId": "logic",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年秋期午前問22を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "NANDゲートは、入力が両方1のときだけ0を出力する。第1段の出力をC=NAND(A,B)とし、第2段の両入力へ同じCを接続してY=NAND(C,C)とする。この回路全体と同じ論理を持つ2入力ゲートはどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "OR"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "XOR"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "NOR"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "AND"
+          }
+        ],
+        "correctChoiceId": "choice-3",
+        "enrichment": "reviewed",
+        "summary": "エ。第2段でCが反転するため、Y=¬¬(A∧B)=A∧Bとなる。",
+        "explanation": "第1段はC=¬(A∧B)。第2段はY=¬(C∧C)であり、同じ値の論理積C∧CはCだからY=¬Cになる。A,Bが00、01、10、11の順なら、Cは1、1、1、0、Yは0、0、0、1。これはANDの真理値表である。",
+        "takeaway": "同じ値をNANDの両入力に入れると否定になる。",
+        "choiceReasons": [
+          "ORは01や10でも1になるが、この回路では両方とも0である。",
+          "XORは入力が異なるとき1、11では0になる。この回路とは異なる。",
+          "NORは00だけ1になるが、この回路の00での出力は0である。",
+          "ANDは11だけ1。この回路の4通りの出力と一致する。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07a-q22",
+        "adaptation": "元問題のタイミングチャートから単独NANDを判定する問いを、NANDを2段接続した合成回路の評価へ変更。原図は流用せず接続を文章で指定した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-logic-001",
+        "version": 1,
+        "sha256": "b3ca5b15c7e1591ab1931c356fb8252ee07d03e7f2b414ff1157608d530fcd7e",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "入力00,01,10,11でCは1,1,1,0。両入力CのNANDはCの否定なのでYは0,0,0,1。ANDと一致しOR/XOR/NORとは異なる。 原本の解き直し: 原タイミング図で00/01/10時の出力は1、11時だけ0。NANDはウの出力反転AND記号。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07a-q22",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+          "answerPdfSha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07a/r07a-q22.webp",
+              "sha256": "b9a5624babc74a0965c7fb7802ed6eaaf94660be1c68ff085ed7136f12ca0e68"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "095ce766af86b1ba6f594337b8a71963d6d20a120d84ee8f2303651c721093e3",
+      "change": "原問の入力波形A、Bと4種類の回路図を保ち、出力Yの波形だけをNANDからNORへ変更した。回路の説明を問題文に足さず、タイミングチャートから選ぶ問いへ戻した。",
+      "solution": {
+        "correctChoiceId": "choice-3",
+        "reason": "入力区間A=[0,0,1,0,1,0,1],B=[1,0,1,0,1,0,0]。派生Y=[0,1,0,1,0,1,0]。00→1,01→0,10→0,11→0となりNORだけ一致。XOR/XNOR/NAND各出力も全区間で比較した。原問のY=[1,1,0,1,0,1,1]はNAND、ウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07a-q22"
+      },
+      "derivedImages": [
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-logic-001-v2-timing.svg",
+          "sha256": "72f4ddcf47a9c2454895bf6fdcdbc077ec72e0655fe254442b87f1a541a9fa69"
+        },
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-logic-001-v2-xor.svg",
+          "sha256": "d682b55b934701f0e54c4349ab5636b70cc2d9868126bfbe3e9b924be46862d7"
+        },
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-logic-001-v2-xnor.svg",
+          "sha256": "fc66ea770d200f3db1d54f06ead90952e36700b8cd9cdad610842e4153915bd7"
+        },
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-logic-001-v2-nand.svg",
+          "sha256": "001125ce480818b1a71db6ded65e71487d86394c3f6881f1e4813adedf555597"
+        },
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-logic-001-v2-nor.svg",
+          "sha256": "05c2c1d4c57d88b39721aa424263ab707addc1ecfecb0f8821dbb3795390a27a"
+        }
+      ],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-algorithm-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-algorithm-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 3,
+        "title": "再帰呼出しの戻り値",
+        "topicId": "algorithm",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問7を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "非負の整数nに対し、関数gを次のように定義する。整数演算にはオーバーフローがないものとする。\ng(n)：n=0なら0を返し、それ以外ならn+g(n−1)を返す。\ng(4)が返す値はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "6"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "16"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "10"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "24"
+          }
+        ],
+        "correctChoiceId": "choice-2",
+        "enrichment": "reviewed",
+        "summary": "ウ。g(4)=4+3+2+1+0=10である。",
+        "explanation": "呼出しはg(4)→g(3)→g(2)→g(1)→g(0)と進み、g(0)=0で止まる。戻るときにg(1)=1、g(2)=3、g(3)=6、g(4)=10となる。元の階乗のような掛け算ではなく、各段のnを足す関数である。",
+        "takeaway": "再帰では、停止値と戻るときの演算を両方追う。",
+        "choiceReasons": [
+          "6はg(3)の値。最上段の4を足していない。",
+          "16は4×4の値。この関数は同じ数を掛ける処理ではない。",
+          "4、3、2、1を順に足して10になる。",
+          "24は4!の値。今回は乗算ではなく加算を行う。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q7",
+        "adaptation": "階乗の定義を選ぶ元問題から、停止値を0・演算を加算にした関数の戻り値を追う問題へ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-algorithm-001",
+        "version": 1,
+        "sha256": "bf61164d3aadb4d35f1f3cd410c30067fae7620861839d4320a5e31bacc61256",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "g(0)=0からg(1)=1,g(2)=3,g(3)=6,g(4)=10。6はg(3)、16は4の二乗、24は階乗で加算再帰と異なる。 原本の解き直し: 階乗の停止値0!=1、n×fact(n−1)がウ。0停止やn+1再帰は不適切。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q7",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q7.webp",
+              "sha256": "a1f054e8e05018516a1fc31c4d650848684417cddceb2772628ce7a5be0c3601"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "b49ba60b7425812124333d15e3adddf7fe5eec738bb2b5a6e2c5ded7a4ea20b8",
+      "change": "原問の階乗fact(n)を整数の和sum(n)へ変更。関数の値を計算する問いではなく、原問と同じ再帰的な定義を選ぶ問いへ戻し、乗算を加算へ変更した。",
+      "solution": {
+        "correctChoiceId": "choice-0",
+        "reason": "sum(0..5)=[0,1,3,6,10,15]でn(n+1)/2と一致。選択肢ウは全て1過大。イ・エは正のnでn+1となり0に近づかず停止しない。原問は0!=1、n!=n*(n−1)!なのでウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q7"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-architecture-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-architecture-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 4,
+        "title": "クロック周期とCPIから時間を比べる",
+        "topicId": "architecture",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問8を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "コンピュータAとBは同じ命令セットを持ち、同じプログラムを同じ命令数で実行する。AのCPUクロック周期は0.5ナノ秒、CPIは3.0。Bの周期は2.0ナノ秒、CPIは1.5である。CPIは1命令当たりの平均クロック数を表す。Aの実行時間はBの何倍か。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "1/2倍"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "1倍"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "2倍"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "6倍"
+          }
+        ],
+        "correctChoiceId": "choice-0",
+        "enrichment": "reviewed",
+        "summary": "ア。1命令の時間はAが1.5ナノ秒、Bが3.0ナノ秒なので、A/B=1/2である。",
+        "explanation": "1命令の時間はクロック周期×CPIで求める。Aは0.5×3.0=1.5ナノ秒、Bは2.0×1.5=3.0ナノ秒。同じ命令数Nを掛けても時間の比でNは消えるため、A/B=1.5/3.0=1/2となる。処理速度の比を尋ねているのではないので逆数にしない。",
+        "takeaway": "同じ機種の周期とCPIを掛けてから、指定された向きに時間を割る。",
+        "choiceReasons": [
+          "実行時間の比は1.5/3.0=1/2である。",
+          "CPIだけでなくクロック周期も異なり、積は同じにならない。",
+          "2はB/A、又はAとBの処理速度の比。問われている時間A/Bとは逆である。",
+          "6はAのCPI3.0とBの周期2.0を混ぜた積で、同じ機種の1命令時間や時間比ではない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q8",
+        "adaptation": "周期とCPIをA:0.5ns・3.0、B:2.0ns・1.5へ変更。元問題の正答2倍とは逆向きの結果になる条件で、時間比の理解を確かめる。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-architecture-001",
+        "version": 1,
+        "sha256": "a705eb247fc5c5eb69516d8812ac82488fc30832231e1c5e10297e0de942b4b5",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "共通命令数Nに対しA=1.5N ns、B=3N ns。A/B=0.5。CPI比2だけでは周期の違いを無視し、逆比2も問う向きと逆。 原本の解き直し: 元表A1ns×4=4ns、B4ns×0.5=2ns、A/B=2でウ。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q8",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q8.webp",
+              "sha256": "5a846a5d7e3dfeef31c1c321315c85fc8c6a2c1e3c62fb62d8220e34325c977f"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "77286528c163930752c0620d19062992257d8d527f00272640485b9402b1a4ec",
+      "change": "原問の文と表の項目・比較方向を保ち、Aの周期1・CPI4.0を0.5・3.0、Bの周期4・CPI0.5を2・1.5へ変更。追加していた命令数の記号とCPIの定義は外した。",
+      "solution": {
+        "correctChoiceId": "choice-1",
+        "reason": "A/B=(0.5*3)/(2*1.5)=1/2。周期比1/4、CPI比2、逆周期比4は一致しない。原問は(1*4)/(4*.5)=2でウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q8"
+      },
+      "derivedImages": [
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-architecture-001-v2-table.svg",
+          "sha256": "254d3a65fa68d55e1cd260a607d712e4171f3993fa3cdba9778590dd6f3d0131"
+        }
+      ],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-system-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-system-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 5,
+        "title": "CPU以外の完了を待つタスク",
+        "topicId": "system",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問14を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "OSで実行中のタスクTがディスクへの入出力を要求した。Tはその完了通知が届くまで次の処理を実行できないためCPUを手放した。入出力が完了するまでのTの状態はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "実行可能状態"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "待ち状態"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "実行状態のまま"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "終了状態"
+          }
+        ],
+        "correctChoiceId": "choice-1",
+        "enrichment": "reviewed",
+        "summary": "イ。CPUだけでなく入出力完了という条件を待つので、待ち状態になる。",
+        "explanation": "実行可能状態は、CPUが割り当てられれば実行できる状態。今回はCPUを再び割り当てても、入出力が終わるまで次の処理へ進めない。したがって実行中から待ち状態へ移る。完了通知を受けると通常は実行可能状態になり、その後CPUを割り当てられて実行する。",
+        "takeaway": "CPUを待つのか、入出力など別の条件を待つのかを区別する。",
+        "choiceReasons": [
+          "入出力が未完了なので、CPUを割り当てるだけでは実行を再開できない。",
+          "入出力の完了というCPU以外の条件を待っており、待ち状態である。",
+          "CPUを手放しているため、引き続きCPU上で実行している状態ではない。",
+          "タスクの処理を終えたわけではなく、入出力完了後に続きを実行する。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q14",
+        "adaptation": "元問題のプリエンプションによるCPU取り上げを、入出力完了を待つためのCPU解放へ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-system-001",
+        "version": 1,
+        "sha256": "b54a52dc761bff8db5148a67f9ffb26b7d7617c0ad9de3da6a6c05ab4ac6adc9",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "I/O完了という事象を待っておりCPUを割り当てても実行不能なので待ち状態。実行可能はCPUだけを待ち、実行はCPU使用中、終了は処理完了。 原本の解き直し: 原本はプリエンプション。I/O要求ではなくCPU取り上げなので実行可能状態イ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q14",
+          "officialAnswer": "イ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q14.webp",
+              "sha256": "b77a9f27f68a174cd8da9474f8e06552aeea8cb3a3f4245246c34cd97e3645a0"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "45feee6fb299a837c9584428253bd378cf17a9ddcaea3cb6bd57c386c98ae7d3",
+      "change": "原問のプリエンプションを入出力要求へ変更。状態遷移を問う文と4状態の選択肢は原問に合わせ、CPUを譲る手順等の説明は解説へ移した。",
+      "solution": {
+        "correctChoiceId": "choice-3",
+        "reason": "通常のOS状態遷移で実行中→入出力要求→待ち、入出力完了→実行可能。終了でも休止でもない。原問のプリエンプションでは実行可能状態、イ。",
+        "originalAnswer": "イ",
+        "originalSource": "r07h-q14"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-hardware-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-hardware-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 6,
+        "title": "オフセット付きD/A変換",
+        "topicId": "hardware",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問18を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "理想的な8ビットD/A変換器で、入力0の出力は100ミリV、入力が1増えるごとに出力は20ミリV増える。入力は0〜255の符号なし整数で、飽和は起きない。16進数3Aを入力したときの出力は何ミリVか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "900"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "1,160"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "1,280"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "1,260"
+          }
+        ],
+        "correctChoiceId": "choice-3",
+        "enrichment": "reviewed",
+        "summary": "エ。3Aは十進数58なので、100+58×20=1,260ミリVとなる。",
+        "explanation": "16進数ではAが十進数10を表すため、3A=3×16+10=58。入力0の出力100ミリVを基準に、58段階分の増加58×20=1,160ミリVを足す。よって1,260ミリVである。入力0を含む59個の値が並んでも、0から58への増分は58段階である。",
+        "takeaway": "十六進数を十進数に直し、入力0の出力と1段階の増分を分けて計算する。",
+        "choiceReasons": [
+          "3の位の重みを16ではなく10として、100+(3×10+10)×20=900とした値。",
+          "58×20だけを計算した値。入力0の出力100ミリVを足していない。",
+          "100+59×20の値。入力0を1段階分として余計に数えている。",
+          "3×16+10=58を入力とし、100+58×20=1,260を求めた値。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q18",
+        "adaptation": "元問題の82・10mV/段・入力0で0mVを、3A・20mV/段・入力0で100mVへ変更。オフセットを加える必要も問う。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-hardware-001",
+        "version": 1,
+        "sha256": "c0e3bfc53467ad7f53eddb1366818a1fe0080d7118141366321c1b93fce62fed",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "3Aは3×16+10=58。100+58×20=1260 mV。1160はオフセット未加算、1280は1段多い、900は3Aを40と読む誤り。58は8bit範囲内。 原本の解き直し: 元原本は入力0で0mV・1段10mV・16進82=130なので1300mV、ウ。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q18",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q18.webp",
+              "sha256": "e65d9819500db0d8a790552c6d5a4f39484a59ea197e5272a7400a2654d3fdb5"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "b5622f9281639644085d6e5e665c744c4861a503ca8e2e379c767b7f721329ab",
+      "change": "原問の文、8ビット、ゼロ入力・ゼロ出力を保ち、最下位ビット当たり10ミリVを20ミリV、入力82を3Aへ変更。追加していた非ゼロのオフセットや飽和等の説明は外した。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "reason": "3A(hex)=3*16+10=58<256。0+58*20=1160。誤答800=40*20、960=48*20、1180=59*20で全て異なる。原問82(hex)=130、130*10=1300でウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q18"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-interface-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-interface-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 7,
+        "title": "図形の拡大で輪郭を保つ理由",
+        "topicId": "interface",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問23を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "Web画面のアイコンを、埋め込みの写真を含まない、円や線などの図形だけで構成したSVGにした。PNGの同じ小さなアイコンを拡大する場合と比べ、SVGの輪郭を保ちやすい理由として適切なものはどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "画素ごとの色を可逆圧縮して保存するので、拡大しても画素の大きさが変わらないから。"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "保存時に存在しなかった写真の細部を、拡大時に自動で復元するから。"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "座標や線などの図形情報を持ち、表示倍率に合わせて図形を描画できるから。"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "全ての表示倍率に対応する別々のビットマップを、必ずファイル内に持つから。"
+          }
+        ],
+        "correctChoiceId": "choice-2",
+        "enrichment": "reviewed",
+        "summary": "ウ。図形の形を座標などで記述し、拡大後の表示に合わせて描画できる。",
+        "explanation": "SVGは図形をXMLで記述するベクトル画像形式。今回は円や線だけなので、円の中心・半径や線の座標などから、表示倍率に合わせた輪郭を描ける。PNGは画素を保存する形式で、可逆圧縮で元画素を保持していても、拡大で新しい形状情報が増えるわけではない。写真を埋め込んだSVGの写真部分まで細部が増える、という意味ではない。",
+        "takeaway": "圧縮で情報を失わないことと、図形を倍率に合わせて描き直せることは別である。",
+        "choiceReasons": [
+          "可逆圧縮は元の画素を復元できる性質。拡大時の輪郭の滑らかさを保証する性質ではない。",
+          "存在しない写真の細部を復元する機能ではない。今回は写真を含まない図形の話である。",
+          "画素の配列ではなく図形の形を記述し、拡大後のサイズで再描画できる。",
+          "倍率ごとの別画像を全て格納することはSVGの必須条件ではない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q23",
+        "adaptation": "XMLの画像形式名を選ぶ元問題から、SVGを拡大する際の仕組みとPNGの違いを具体的なアイコンの場面で問う方向へ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-interface-001",
+        "version": 1,
+        "sha256": "24cd8c818baaefa3ecf5ca7fa0e9bbaf1bedd104f58fdd8f6e28e49120620eb3",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "写真を含まない図形SVGは座標・形状を表示倍率に合わせて再描画できる。PNG可逆圧縮は画素密度を増やさず、欠落写真の細部復元も倍率別画像の必須保持もない。 原本の解き直し: 図形をXMLで表す画像形式はSVG、ウ。OpenGLは画像ファイル形式ではない。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q23",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q23.webp",
+              "sha256": "1b3dabd29f25f9b15177caa1df5dfc68458eb9e65666d381d969c29ea08cb6e8"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "8e93cb9ab9a57bb183fdbb2b6390ce4040e8882829a1dca6ec3313c42913a428",
+      "change": "原問の画像フォーマットを識別する問いと4候補を保ち、SVGの図形・XMLという特徴をPNGの画素・可逆圧縮・透過情報へ変更。拡大時の理由を問う別の問いは外した。",
+      "solution": {
+        "correctChoiceId": "choice-1",
+        "reason": "PNGのW3C仕様、lossless raster、alphaを確認。TIFFもlossless/alphaに対応するので、それだけでは一意にならず原問にもあるW3C条件を保持。OpenGLはAPI、SVGはXMLベクタ。原問はSVG、ウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q23"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-database-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-database-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 8,
+        "title": "部署名の更新重複をなくす分解",
+        "topicId": "database",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問26を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "社員(社員番号,氏名,部署番号,部署名)という第2正規形の関係がある。候補キーは社員番号だけで、社員番号→氏名・部署番号、部署番号→部署名という関数従属がある。同じ部署に複数の社員がおり、全ての属性値は単一値である。元の情報を失わず、部署名の変更を社員ごとに繰り返さなくてよい第3正規形の分解はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "社員(社員番号,氏名,部署番号)と部署(部署番号,部署名)"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "社員(社員番号,氏名)と部署(社員番号,部署番号,部署名)"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "社員(社員番号,氏名,部署番号,部署名)と部署(部署番号,部署名)"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "社員(社員番号,氏名)と部署(部署番号,部署名)"
+          }
+        ],
+        "correctChoiceId": "choice-0",
+        "enrichment": "reviewed",
+        "summary": "ア。社員には部署番号を残し、部署番号で決まる部署名を部署表へ分ける。",
+        "explanation": "社員番号→部署番号→部署名という推移的関数従属があり、元の表では同じ部署名が社員の人数だけ重複する。アでは部署番号をキーに部署名を1か所で管理し、社員表に残した部署番号で結合すれば元の情報を復元できる。社員番号で氏名・部署番号が決まる社員表と、部署番号で部署名が決まる部署表に分ける。",
+        "takeaway": "非キー属性が決める別の非キー属性を分離し、結合に必要な参照属性を残す。",
+        "choiceReasons": [
+          "社員表に部署番号を残すので所属を失わず、部署名は部署番号ごとに1か所へ分離できる。",
+          "部署側に社員番号を残したままなので、社員番号→部署番号→部署名の推移的従属と重複が残る。",
+          "元の社員表にも部署名を残しており、その表の推移的従属を取り除けていない。",
+          "社員と部署を対応付ける部署番号が社員側から消え、誰がどの部署にいるか復元できない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q26",
+        "adaptation": "抽象的な正規化手順を選ぶ元問題から、候補キーと関数従属を明示した社員・部署の具体的な分解へ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-database-001",
+        "version": 1,
+        "sha256": "163c494aaa30b6d438044ed52bf19f6f4f0306543800d106d4d30b0799057b24",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "社員に部署番号を残し、部署番号→部署名を部署へ分離すれば部署のキーに従属し社員側の推移従属が消える。共通部署番号で部署全属性が決まり無損失。イは部署側に社員番号→部署番号→部署名が残る。ウは元表の推移従属が残る。エは社員と部署の対応を失う。 原本の解き直し: 第2から第3正規形では非キー属性間の推移従属を分解するイ。部分従属除去や単一値化と区別。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q26",
+          "officialAnswer": "イ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q26.webp",
+              "sha256": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "8cb210cdf9aa07de90504535b67849f5f627c4deefefdc88dc806ce244e2bc60",
+      "change": "原問の第2→第3正規形を第1→第2正規形へ変更。原問の一般的な手順を選ぶ問いと4選択肢を保ち、社員表の具体例や追加した関数従属の定義は問題文から外した。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "reason": "複合キー(商品番号,仕入先番号)→価格、商品番号→商品名の具体例では、キーの一部から非キー属性への部分関数従属を除く必要がある。ウのみ該当。原問第2→第3は非キー属性間の従属を分離するイ。分解・結合の無損失性も具体例で再確認。",
+        "originalAnswer": "イ",
+        "originalSource": "r07h-q26"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-development-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-development-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 11,
+        "title": "サーバを順番に更新する方式",
+        "topicId": "development",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問46を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "同じ役割のサーバ4台でサービスを提供している。更新では1台ずつロードバランサーの振り分け対象から外し、そのサーバを新版へ更新して戻す。この操作を全4台に順番に行い、残りのサーバでサービスを続ける。この更新方式はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "ホットスワップ"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "ブルーグリーンデプロイメント"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "ローリングアップデート"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "ホットスタンバイ"
+          }
+        ],
+        "correctChoiceId": "choice-2",
+        "enrichment": "reviewed",
+        "summary": "ウ。稼働サーバを1台ずつ順番に更新するので、ローリングアップデートである。",
+        "explanation": "ローリングアップデートでは、複数の稼働サーバを少数ずつ切り離して更新し、全体を一斉に停止せず新版へ置き換える。今回は既存4台を順次更新している。ブルーグリーンのように別の環境一式へ接続先をまとめて切り替える手順ではない。新旧版が一時的に混在するため、実際の運用では相互互換性にも配慮する。",
+        "takeaway": "環境一式を切り替えるのか、稼働サーバ群を少しずつ更新するのかで見分ける。",
+        "choiceReasons": [
+          "ホットスワップは稼働中の機器の部品交換を指す。サーバ群へのソフトウェアの順次更新とは異なる。",
+          "同等の環境を二つ用意し接続先を切り替える方式。今回は既存の4台を順次更新する。",
+          "一部を更新して戻す処理を順番に繰り返す方式で、今回の手順と一致する。",
+          "障害時に切り替えるための待機系の構成で、今回の更新手順の名称ではない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q46",
+        "adaptation": "二つの環境を切り替える元問題の場面を、既存4台の1台ずつの更新へ変更し、方式の違いを判定させる。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-development-001",
+        "version": 1,
+        "sha256": "8ee10deb380831a6b77a9448dd27a21e3a73b96e7bb524b46eaa60ca75aa3698",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "既存4台を1台ずつ更新するローリング更新。別系統へ一括切替するブルーグリーン、稼働中機器交換のホットスワップ、障害待機のホットスタンバイと区別できる。 原本の解き直し: 原文の二環境切替はブルーグリーン、ア。派生は既存4台の順次更新へ変えた。 公式正解はアでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q46",
+          "officialAnswer": "ア",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q46.webp",
+              "sha256": "eb6c6da27887d527cc110a277666e76dd00e8da436dfe9059b14d72d49956bd0"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "b559235c583d0e5a9a78195d7e26e63ac2f58b7cb914a78f3b54208b40e01950",
+      "change": "原問と同じシステム更新手法の識別を問い、二つの環境を切り替える場面を複数サーバの順次更新へ変更。原問の4候補を保ち、ローリングに保証できない短時間の切戻しという説明は引き継がない。",
+      "solution": {
+        "correctChoiceId": "choice-3",
+        "reason": "順次更新+残りのサーバで処理継続なのでローリングのみ。Blue-greenは2環境一括切替、hot standbyは待機構成、hot swapは稼働中の部品交換。原問は2環境をLBで切替、ア。",
+        "originalAnswer": "ア",
+        "originalSource": "r07h-q46"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-project-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-project-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 12,
+        "title": "EVMの実数から現状を評価する",
+        "topicId": "project",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問52を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "プロジェクトをEVMで管理している。ある時点で、BAC（完了時総予算）は1,200万円、PV（計画価値）は600万円、EV（出来高）は480万円、AC（実コスト）は640万円であった。BACに基づくTCPI（残作業効率指数）も踏まえ、現状の評価として適切なものはどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "出来高に比べ費用を使いすぎ、進捗も遅れている。予算内で終えるには、残作業で現状より高いコスト効率が必要である。"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "出来高に比べ費用を節約できているが、進捗は遅れている。残作業は現状より低いコスト効率でも予算内で終えられる。"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "出来高に比べ費用を使いすぎているが、進捗は予定より進んでいる。残作業には現状より高いコスト効率が必要である。"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "出来高に比べ費用を使いすぎ、進捗も遅れているが、残作業のコスト効率が現状と同じなら予算内で終えられる。"
+          }
+        ],
+        "correctChoiceId": "choice-0",
+        "enrichment": "reviewed",
+        "summary": "ア。CPI=0.75、SPI=0.8、BAC基準のTCPI=9/7であり、残作業には現在より高いコスト効率が必要。",
+        "explanation": "CPI=EV/AC=480/640=0.75で、達成した仕事量に比べ費用を使いすぎている。SPI=EV/PV=480/600=0.8なので進捗も予定より遅い。残作業の予算価値はBAC−EV=720万円、使える残予算はBAC−AC=560万円だからTCPI=720/560=9/7（約1.286）。現在の効率0.75を続けるのでは足りず、残作業の効率改善などを検討する。ACがBACを既に超えたという意味ではない。",
+        "takeaway": "現在のCPIと、残予算から求めたTCPIを別々に計算して比べる。",
+        "choiceReasons": [
+          "CPI<1、SPI<1、TCPI>CPIという三つの比較と一致する。",
+          "CPI=0.75<1なので節約できているとは言えず、TCPIは0.75より高い。",
+          "SPI=0.8<1なので予定より進んでいるという部分が誤り。",
+          "残作業で必要な効率9/7に対し現状は0.75。同じ効率では予算内で終えられない。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q52",
+        "adaptation": "指標の値を与える元問題から、BAC・PV・EV・ACの実数からCPI・SPI・TCPIを求める問いへ変更。進捗を予定より遅い条件にした。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-project-001",
+        "version": 1,
+        "sha256": "e8b29fa855d4c7583124200ec9dfb5c7b792a899d627ae789f3d551db1707af2",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "CV=480−640=−160、SV=480−600=−120。CPI=0.75、SPI=0.8。残り出来高720/残り予算560=9/7≈1.286で現状0.75より高い効率が必要。同効率なら総費用640+720/0.75=1600万円で1200万円超過。 原本の解き直し: 元CPI0.9で費用効率悪化、SPI1.1で予定より進み、TCPI1.2>CPI。残効率向上等を検討するイ。 公式正解はイでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q52",
+          "officialAnswer": "イ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q52.webp",
+              "sha256": "ed1c6c06647acc8215c0c95ee435c8b9501124bdcbf55c484b76e8b534dbb37a"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "6891209f819ab0d128c35cac84edb83bcd4ae0dde3a348befd147a9208310f2e",
+      "change": "原問と同じ指標値から評価・対策を選ぶ問いへ戻し、CPI0.9・SPI1.1・TCPI1.2を0.8・0.9・1.1へ変更。計算式や出来高の追加数値は問題文に足さず、正しい対策のコスト評価を新条件へ合わせた。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "reason": "EV360,AC450,PV400,BAC1350を独立した整合例として代入：CPI360/450=.8,SPI360/400=.9,TCPI(1350−360)/(1350−450)=1.1。CV−90,SV−40、残り990を900以内で行うには1.1効率が必要。ウだけコスト超過+遅れ+効率改善。原問SPI1.1で余裕あり、CPI.9超過、TCPI1.2改善必要なのでイ。",
+        "originalAnswer": "イ",
+        "originalSource": "r07h-q52"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-service-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-service-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 13,
+        "title": "PaaSへ移すと管理する作業はどう変わるか",
+        "topicId": "service",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問56を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "自社がOSとデータベースを管理していたIaaSから、OSとデータベース実行基盤の運用を事業者が担うPaaSへ移行する。業務アプリケーションの開発と業務データの管理は自社が続ける。この契約の下で、新たに事業者側の運用となる作業はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "自社アプリケーションの請求計算ロジックの変更"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "提供されるデータベース実行基盤への脆弱性修正パッチの適用"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "自社の業務データの内容が正しいかどうかの確認"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "自社の利用者に付与する業務権限の決定"
+          }
+        ],
+        "correctChoiceId": "choice-1",
+        "enrichment": "reviewed",
+        "summary": "イ。運用を委ねたデータベース実行基盤へのパッチは事業者側になる。",
+        "explanation": "設問の契約ではOS・データベース実行基盤の運用をPaaS事業者が担うので、その基盤のパッチ適用は事業者側へ移る。一方、請求ロジック、業務データの正確性、誰にどの業務権限を与えるかは利用企業のアプリケーションや業務判断の責任である。実際の分担はサービスと契約で確認するが、この問題では明示された分担に従う。",
+        "takeaway": "クラウドへの移行で、基盤の運用と自社の業務判断を分ける。",
+        "choiceReasons": [
+          "自社が開発を続ける業務アプリケーションの処理内容で、基盤パッチの運用ではない。",
+          "事業者が運用するデータベース実行基盤の保守なので、明示された分担に一致する。",
+          "業務データの内容が正しいかは、自社の業務上の確認である。",
+          "認証基盤が提供されても、誰にどの業務権限を与えるかは自社が決める。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q56",
+        "adaptation": "IaaSとPaaSへ段階的に移す元問題から、IaaSからPaaSへ移る一段階に絞り、具体的な責任分担を明示して作業を選ばせる。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-service-001",
+        "version": 1,
+        "sha256": "8bd0ab767c5161e082e057b785c32033331e3db50704e6e42c6ed81f3e86b9ba",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "問題に定めた契約ではOS/DB実行基盤の運用が事業者へ移るので基盤パッチ適用。アプリ請求ロジック・業務データ正確性・業務権限判断は自社に残る。PaaS一般の曖昧さは契約条件で限定済み。 原本の解き直し: 元IaaSで物理サーバ操作②と保守ランプ監視③が不要、PaaSで基盤パッチ④が不要、ウ。ジョブ監視①は残る。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q56",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q56.webp",
+              "sha256": "23e10a69915ef173fc3d86174ad53eec50dc00fdf9df721462409f5c48e5c181"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "a26ddb32abd1e296a8b5837569a0bfc73193554f8d75db2b6a32ecbb84b2331c",
+      "change": "原問の段階的なIaaS→PaaS移行と運用作業の組合せを保ち、③の物理保守ランプ監視をOSパッチ適用へ変更した。単なる番号の並べ替えではなく、OS管理を移す段階の理解を確かめる。",
+      "solution": {
+        "correctChoiceId": "choice-0",
+        "reason": "提供者責任：IaaS=物理基盤②のみ、PaaSで追加=OS③・middleware④。業務ジョブ①は顧客側。原問③が物理保守なのでIaaS②③/PaaS④のウ。OSへ変更するとIaaS②/PaaS③④のアのみ。物理/仮想の起動停止を混同しない。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q56"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-strategy-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-strategy-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 14,
+        "title": "供給連鎖の在庫と情報をまとめる",
+        "topicId": "strategy",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問62を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "仕入先、製造拠点、物流拠点、販売店の間で需要予測と在庫情報を共有し、供給連鎖全体の過剰在庫や欠品を減らす仕組みを導入する。この目的に最も適した管理の考え方はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "CRM"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "HRM"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "財務管理"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "SCM"
+          }
+        ],
+        "correctChoiceId": "choice-3",
+        "enrichment": "reviewed",
+        "summary": "エ。調達から販売までの供給連鎖を扱うSCMが適する。",
+        "explanation": "SCMはSupply Chain Managementで、調達・生産・物流・販売などをつなぐ供給連鎖の管理。拠点をまたぐ需要や在庫の情報を共有し、全体としての供給を調整する。今回の主対象は顧客個人への提案や従業員の配置ではなく、仕入れから販売までのモノと情報の流れである。",
+        "takeaway": "何を管理するかを、顧客・人材・資金・供給連鎖の対象で見分ける。",
+        "choiceReasons": [
+          "CRMはCustomer Relationship Managementで、顧客の属性・購入・対応履歴などの関係管理が中心。",
+          "HRMはHuman Resource Managementで、人材の採用・配置・育成などを扱う。",
+          "財務管理は資金調達・運用等を扱う。今回の供給連鎖の在庫調整の名称ではない。",
+          "調達・生産・物流・販売をつないで在庫と情報を管理するSCMの目的に一致する。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q62",
+        "adaptation": "ワントゥワンマーケティングのCRMを選ぶ元問題を、需要・在庫を拠点間で共有する供給連鎖の具体例へ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-strategy-001",
+        "version": 1,
+        "sha256": "4102c76f76075818434af7682353c938f887b0861fc42ed178965d7380532ed0",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "調達から販売までの需給・在庫を供給連鎖全体で調整するSCM。CRMは顧客関係、HRMは人材、財務管理は資金・収支で対象が異なる。 原本の解き直し: 元の顧客ワントゥワンはCRMのア。派生は供給連鎖全体のSCMへ変えた。 公式正解はアでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q62",
+          "officialAnswer": "ア",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q62.webp",
+              "sha256": "2577b125385751a2a4ca60e657879c0fde88a3f4e07fc537351ba21b1050b000"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "f2ce629c0050494b9a1593f26895107c40f2a8ae02d96f24f8a4eacc07e6807e",
+      "change": "原問のソリューションの提案から種類を識別する文と4候補を保ち、ワントゥワンマーケティングの場面を供給連鎖の在庫最適化へ変更した。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "reason": "調達→生産→物流→販売の連携と全体在庫最適化はSCM。CRM/HRM/財務は対象が異なる。原問ワントゥワンマーケティングはCRM、ア。",
+        "originalAnswer": "ア",
+        "originalSource": "r07h-q62"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-business-strategy-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-business-strategy-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 15,
+        "title": "PPMで投資対象を分類する",
+        "topicId": "business-strategy",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問67を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "PPM（Product Portfolio Management）で事業を分類する。ここでは市場成長率が10%以上なら高い、最大競合企業に対する相対的市場シェアが1以上なら高いとする。ある事業の市場成長率は2%、相対的市場シェアは1.8である。この事業の分類はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "花形"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "問題児"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "金のなる木"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "負け犬"
+          }
+        ],
+        "correctChoiceId": "choice-2",
+        "enrichment": "reviewed",
+        "summary": "ウ。市場成長率が低く、相対的市場シェアが高いので「金のなる木」である。",
+        "explanation": "2%は定義した成長率の境界10%より低く、1.8はシェアの境界1以上なので高い。PPMでは、成長率が高い・シェアが高い事業を花形、高い・低いを問題児、低い・高いを金のなる木、低い・低いを負け犬と呼ぶ。今回は低成長・高シェアの組合せである。利益や将来の成功をこの二つの値だけで保証するものではない。",
+        "takeaway": "PPMは二つの軸を別々に高低へ分類してから、四つの類型に対応付ける。",
+        "choiceReasons": [
+          "花形は高成長・高シェア。今回は成長率2%が低い。",
+          "問題児は高成長・低シェア。今回はどちらの条件も逆。",
+          "低成長・高シェアの組合せに当たる。",
+          "負け犬は低成長・低シェア。今回は相対的市場シェア1.8が高い。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q67",
+        "adaptation": "PPMの手法名を選ぶ元問題を、閾値と実数を明示して四つの類型へ分類する問いへ変更した。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-business-strategy-001",
+        "version": 1,
+        "sha256": "daaea13fc66a78c15b06d18cf5d6e63d5a7fbbd9e4b0ca96b7fb3335a3a9791c",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "2%<10%で低成長、1.8>=1で高シェアなので金のなる木。花形=高高、問題児=高成長低シェア、負け犬=低低。境界値ではなく分類は一意。 原本の解き直し: 元の成長率/相対シェアによる資源配分手法はPPMのウ。新しい四象限分類は低成長・高シェア。 公式正解はウでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q67",
+          "officialAnswer": "ウ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q67.webp",
+              "sha256": "f52297f948e8f801be98a23ebcd3e853444ce2447289398f073534c2aaa2c2c4"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "90734e51526ae8722666f4e8c296d0cb75a388261e5dbd5eebfe1fae2c26726b",
+      "change": "原問と同じ説明から経営手法名を選ぶ問いへ戻し、市場成長率・相対的市場シェアを内部と外部の四分類へ変更。原問の4候補を保ち、PPMの象限を問う別の問いと閾値の説明は外した。",
+      "solution": {
+        "correctChoiceId": "choice-3",
+        "reason": "内部S/W、外部O/Tの4区分はSWOTだけ。3Cの3対象、BSCの4視点、PPMの2軸と全候補比較。原問は成長率・相対シェアによるPPM、ウ。",
+        "originalAnswer": "ウ",
+        "originalSource": "r07h-q67"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-business-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-business-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 16,
+        "title": "売上と資産に対する比率を比べる",
+        "topicId": "business",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問76を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "A社の売上高は900百万円、営業利益は45百万円、総資産は300百万円。B社の売上高は1,200百万円、営業利益は96百万円、総資産は600百万円である。総資産回転率は売上高÷総資産、総資産営業利益率は営業利益÷総資産で求める。A社をB社と比較した記述として適切なものはどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "総資産回転率は高く、総資産営業利益率は低い。"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "総資産回転率も、総資産営業利益率も高い。"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "総資産回転率も、総資産営業利益率も低い。"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "総資産回転率は低く、総資産営業利益率は高い。"
+          }
+        ],
+        "correctChoiceId": "choice-0",
+        "enrichment": "reviewed",
+        "summary": "ア。A社の総資産回転率は3回でB社の2回より高く、総資産営業利益率は15%でB社の16%より低い。",
+        "explanation": "総資産回転率はA社900/300=3回、B社1,200/600=2回。総資産営業利益率はA社45/300=0.15（15%）、B社96/600=0.16（16%）。A社は資産を売上へつなげる回数が多いが、資産に対する営業利益の率はB社より少し低い。売上高や利益の金額だけで比率の大小を決めない。",
+        "takeaway": "売上高と営業利益を、それぞれ同じ総資産で割って比較する。",
+        "choiceReasons": [
+          "3回>2回、15%<16%という計算結果と一致する。",
+          "回転率は高いが、総資産営業利益率は15%<16%なので低い。",
+          "総資産営業利益率は低いが、回転率3回>2回なので低いとは言えない。",
+          "回転率と総資産営業利益率の大小を両方逆にした記述。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q76",
+        "adaptation": "A社とB社の財務数値を全面的に変更し、元問題ではA社が二指標とも高かった条件を、回転率は高いが利益率は低い条件にした。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-business-001",
+        "version": 1,
+        "sha256": "19e87a5e90d51b339adff0887acd48c2b264b877905996a7dfc64e8795e693fa",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "A回転率900/300=3、B1200/600=2。A営業利益率45/300=15%、B96/600=16%。Aは回転率が高く営業利益率が低い。売上高営業利益率5%/8%と取り違えない。 原本の解き直し: 元表Aの回転率800/100=8、B1000/900=10/9。資産利益率A20/100=20%、B90/900=10%。双方Aが高いエ。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q76",
+          "officialAnswer": "エ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q76.webp",
+              "sha256": "4d1679d78ecc43cca4372a58a338bc662a01d1317949ab0835ea248087652552"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "43c6a4805b85ebc7d5b09eebd1d252d8093c0d24a08b0d8c73f9123872bd4674",
+      "change": "原問の問いと4選択肢、財務表の項目を保ち、A社の売上高800・営業利益20・総資産100を900・45・300、B社の1,000・90・900を1,200・96・600へ変更。指標の計算式は問題文から解説へ移した。",
+      "solution": {
+        "correctChoiceId": "choice-2",
+        "reason": "A回転900/300=3、B1200/600=2、A売上利益率45/900=.05、B96/1200=.08、A資産利益率45/300=.15、B96/600=.16。アの回転低いは偽、イの利益率高いは2つとも偽、ウの3条件は全て真、エの資産利益率高いは偽。原問回転8対10/9、資産利益率.2対.1でエ。",
+        "originalAnswer": "エ",
+        "originalSource": "r07h-q76"
+      },
+      "derivedImages": [
+        {
+          "path": "assets/questions/diagnostic/ap-diagnostic-business-001-v2-table.svg",
+          "sha256": "ab393a2ff1288e21f94af65e7897072a5c53ca64424ed0fefa2e1a76c43bdbd8"
+        }
+      ],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    },
+    {
+      "questionId": "ap-diagnostic-law-001",
+      "beforeQuestion": {
+        "id": "ap-diagnostic-law-001",
+        "version": 1,
+        "packId": "ap-derived-first-round",
+        "packLabel": "診断専用・派生問題",
+        "number": 17,
+        "title": "RoHS対応で確認する事項",
+        "topicId": "law",
+        "examPartId": "objective",
+        "type": "singleChoice",
+        "source": "IPA公式の2025年春期午前問80を基に作成した、ひと問独自の派生問題。IPA公式問題そのものではない。",
+        "stem": "欧州向けに電気電子機器を販売する企業が、RoHS指令への対応を確認している。RoHSへの適合に直接関係する確認事項はどれか。",
+        "choices": [
+          {
+            "id": "choice-0",
+            "label": "ア",
+            "text": "廃棄された機器を回収し再利用するためのルートを確保しているか。"
+          },
+          {
+            "id": "choice-1",
+            "label": "イ",
+            "text": "部品や材料に含まれる制限対象物質の含有量が、適用される規制条件を満たすか。"
+          },
+          {
+            "id": "choice-2",
+            "label": "ウ",
+            "text": "機器からの電磁妨害が、他の機器の動作を妨げない水準か。"
+          },
+          {
+            "id": "choice-3",
+            "label": "エ",
+            "text": "輸出する技術が、安全保障上の輸出管理の対象に当たるか。"
+          }
+        ],
+        "correctChoiceId": "choice-1",
+        "enrichment": "reviewed",
+        "summary": "イ。RoHSは電気電子機器の特定有害物質の使用を制限する。",
+        "explanation": "RoHSはRestriction of Hazardous Substancesで、電気電子機器における鉛や水銀など特定有害物質の使用制限を扱う。したがって部品・材料の対象物質と含有量などが確認対象。具体的な閾値・適用除外・対象範囲は適用される規制で確認するので、全ての物質が常に完全なゼロでなければならない、という説明にはしない。",
+        "takeaway": "規制の名前だけでなく、何を制限しているかに対応する実務上の確認を選ぶ。",
+        "choiceReasons": [
+          "廃電気電子機器の回収・リサイクルはWEEEに関係する事項で、RoHSの有害物質の使用制限とは対象が異なる。",
+          "制限対象物質の含有量と適用条件は、RoHSへの適合に直接関係する。",
+          "電磁妨害の制限はEMCに関係する事項。特定有害物質の含有量の規制ではない。",
+          "安全保障上の輸出管理は兵器等への転用などを扱い、RoHSの目的とは異なる。"
+        ],
+        "hints": [],
+        "diagnosticOnly": true,
+        "parentQuestionId": "r07h-q80",
+        "adaptation": "RoHSの目的を選ぶ元問題から、部品・材料の適合を確認する実務場面へ変更。具体的な規制値を新たに捏造せず、含有量と適用条件を問う。"
+      },
+      "beforeReview": {
+        "questionId": "ap-diagnostic-law-001",
+        "version": 1,
+        "sha256": "5c4a9b5ad4e2747e2c4db31fad53a5d86fc948f0fbef9edc253dc559be16da56",
+        "author": "codex-author-run-20261007T164320Z",
+        "reviewer": "codex-review-run-20261008-scheduled-continuation",
+        "checkedAt": "2026-10-07T19:23:29.204036+00:00",
+        "checks": {
+          "source": true,
+          "answer": true,
+          "calculation": true,
+          "choices": true,
+          "wording": true
+        },
+        "notes": "RoHSは電気電子機器の特定有害物質の使用制限。回収ルートはWEEE、電磁妨害はEMC、安全保障輸出管理は別制度。適用条件には閾値や適用除外があり全面ゼロと断定していない。 原本の解き直し: 原本RoHSは有害物質の危険を最小化するエ。回収、電磁妨害、安全保障輸出は別制度。 公式正解はエでPDF・answer-keysと一致。草稿の全4択の理由、説明、変更内容と照合し、正答変更・本文訂正の必要はなし。enrichmentのみ確認済みにした。単一担当の別実行であり、別人/子エージェント/盲検レビューではない。",
+        "method": {
+          "separateExecution": true,
+          "separateAgent": false,
+          "blindContext": false,
+          "solutionRecord": "content/ap/diagnostic-drafts/20261008-first-round-review-solutions.json"
+        },
+        "sourceEvidence": {
+          "parentQuestionId": "r07h-q80",
+          "officialAnswer": "エ",
+          "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+          "answerPdfSha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+          "sourceImages": [
+            {
+              "path": "assets/questions/r07h/r07h-q80.webp",
+              "sha256": "2a4019a7b95012056395ad06262e5c5b424ebea1d680b791c90c33c42b37cb3d"
+            }
+          ]
+        },
+        "changes": []
+      },
+      "afterVersion": 2,
+      "afterSha256": "179b95940c2e6588590e13a85b30999540ed5d1b6cdee5a1e04acafb342a383e",
+      "change": "原問の指令の目的を選ぶ問いと4選択肢を保ち、対象をRoHS指令からEMC指令へ変更。EMCの対象に合わせて輸出品を電子部品から電子機器へ変更し、実務での対応作業を選ぶ別の問いは外した。",
+      "solution": {
+        "correctChoiceId": "choice-1",
+        "reason": "EMCのemission/immunity目的のうちイはemissionを正しく記述する。他はWEEE、security export、RoHSに該当し一意。原問RoHSは有害物質の制限、エ。",
+        "originalAnswer": "エ",
+        "originalSource": "r07h-q80"
+      },
+      "derivedImages": [],
+      "revisionAuthor": "codex-editorial-run-20261008-source-wording-all",
+      "revisionReviewer": "codex-editorial-run-20261008-source-wording-all",
+      "independentRevisionReview": false
+    }
+  ]
+}

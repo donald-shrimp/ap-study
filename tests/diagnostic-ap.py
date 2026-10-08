@@ -46,6 +46,10 @@ with sync_playwright() as p:
     assert initial['selectionPolicy']['defaultVariantLimit']==1 and initial['selectionPolicy']['variantLimits']=={}
     for i,s in enumerate(slots):
         q=s['attempt']['questionSnapshot']
+        page.wait_for_function('Array.from(document.querySelectorAll(".diagnostic-question img")).every(img=>img.complete&&img.naturalWidth>0)')
+        if s['kind']=='derived' and q.get('image'):
+            artifact=Path('/workspace/scratch/diagnostic-source-wording-all');artifact.mkdir(exist_ok=True)
+            page.locator('.diagnostic-question').screenshot(path=str(artifact/f'{"public" if URL.startswith("https:") else "local"}-{q["topicId"]}.png'))
         assert page.locator('.hint-section,.result,.correct-choice,.reason-list').count()==0
         assert page.get_by_role('button',name='ヒント',exact=False).count()==0
         answer=q['correctChoiceId'] if s['kind']=='original' else next(c['id'] for c in q['choices'] if c['id']!=q['correctChoiceId'])
@@ -58,7 +62,7 @@ with sync_playwright() as p:
             }''')
             page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener("controllerchange",r,{once:true}));}')
             # Wait for actual original images, not merely a truthy async Promise.
-            images=[path for slot in slots for path in slot['attempt']['questionSnapshot'].get('sourceImages',[])]
+            images=[path for slot in slots for path in [*slot['attempt']['questionSnapshot'].get('sourceImages',[]),slot['attempt']['questionSnapshot'].get('image'),*(c.get('image') for c in slot['attempt']['questionSnapshot']['choices'])] if path]
             assert page.evaluate('async paths=>{const cache=await caches.open(`hitomon-${new URL(".",document.baseURI).pathname}images`);return (await Promise.all(paths.map(p=>cache.match(p)))).every(Boolean);}',images)
             context.set_offline(True);page.reload()
             page.get_by_role('button',name='診断の続きから',exact=True).click()
