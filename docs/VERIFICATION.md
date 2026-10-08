@@ -542,3 +542,13 @@ TCPの派生問題を、IPA原本r07h問30の問い方・説明の構造へ戻�
 `tools/build-content.py`、`tests/content.py`、`tests/diagnostic-content.py`、`tests/diagnostic-first-round.py`、`tests/diagnostic-pool.py`、`node --test tests/planning-domain.mjs`（15件）が成功。通常800問・800解説のパックと一覧、681カード、651/149の分類、資格定義・分野上限、UI・PWA・Rulesの保持を確認。初版草稿・先行解答・旧教材ファイルも保持する。
 
 改訂後の実AP教材で `tests/diagnostic-ap.py` が成功。390×844で派生17＋既存13、30の独立した元問題、支援なし、選択保存とオフライン再開、4択理由、結果とAI出力、通常学習への非混入、元問への通常学習開始を確認。図表と全回路画像が読み込めること、その画像もオフラインキャッシュにあることを確認し、3問題のスクリーンショットで表示を視認した。ゲストの検証であり、本番Firebase同期の追加検証ではない。
+
+## 全入口の出題ロジック点検（2026-10-08）
+
+調査対象は `1dc963102c78140865ec8a5b6f84208b92138abd`。通常800問、診断専用17問、単語帳681枚の各入口・継続・中断・再開を点検した。[点検報告](question-selection-review.html)と[再現記録](audits/question-selection-20261008.json)に10項目を保存。P0は自動の分野固定、先送りの即時再開、履歴再開時の入口変更／阻止の3件。P1は7件で、既存仕様の不便さと実装上の不具合を区別する。今回の変更は文書のみで、改善案は未実装。
+
+`node --test tests/action-domain.mjs tests/study-domain.mjs tests/mobile-domain.mjs tests/planning-domain.mjs` の41件、および `tests/home-entries.py`、`tests/action-flow.py`、`tests/mobile-study.py`、`tests/diagnostic-ap.py` の4本が成功。新しいゲストブラウザと検証用履歴による追加8ケースで、計画の2重点分野からの固定、先送り、履歴再開、検索・単語帳の指定問題、復習の継続、復習期限の順を確認した。モジュールでも681カードの再確認までの間隔、UTC/JSTの復習期限、診断の既出とスキップ、実教材の先頭順を確認した。
+
+既存テストの成功は望ましい仕様の保証ではない。自動分野固定などを成功条件にする既存テストがある。本人の記録・本番Firebaseは変更しておらず、端末間同期は今回の追加検証に含まない。
+
+報告HTMLは390px・320px・900px、および320pxで文字サイズ200%を確認。10項目と全入口の詳細を開いても横にはみ出さず、目次のリンクが対応する。報告ページは学習記録を書き込まない。

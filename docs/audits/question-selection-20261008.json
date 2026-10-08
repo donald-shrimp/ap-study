@@ -1,0 +1,498 @@
+{
+  "format": "hitomon-selection-audit",
+  "version": 1,
+  "checkedAt": "2026-10-08T03:27:47.732658+00:00",
+  "reviewedCommit": "1dc963102c78140865ec8a5b6f84208b92138abd",
+  "applicationChanged": false,
+  "workerMethod": "1担当でコード確認・合成履歴を使った別ゲストのブラウザ再現。本人の学習記録は変更しない。",
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "P0",
+      "kind": "仕様の不整合",
+      "title": "計画の重点を、勝手に固定分野へ変換する",
+      "observed": "重点がDB・ネットワークでも、入口でDBを選ぶと「もう1問」もDBだけになる。3入口すべてが同じ選択器を使う。",
+      "cause": "最初の問題を勧めるための分野と、セッションを限定する分野を同じscope.topicIdで扱っている。",
+      "proposal": "3入口は紙・ペン条件だけを指定する。計画のおすすめは別の明示的な導線にし、分野の固定はユーザーが分野ボタンを押したときだけ行う。",
+      "cases": [
+        "F01"
+      ],
+      "sources": [
+        [
+          "src/domain/next-action.js",
+          27
+        ],
+        [
+          "src/app.js",
+          202
+        ]
+      ],
+      "acceptance": "重点を2分野設定しても、入口から始めたsessionの分野指定はnull。分野ボタンから始めた場合だけ、その分野を維持する。"
+    },
+    {
+      "id": "F02",
+      "priority": "P0",
+      "kind": "操作の不整合",
+      "title": "「あとで解く」が、その問題への即時再開になる",
+      "observed": "身軽でr07h-q1を開き「この問題はあとで解く」。ホームの身軽は同じ試行の「続きから」になる。新しい1問を選ぶ操作が同じ入口にはない。",
+      "cause": "pause・postpone・endを同じ分岐で処理し、未完了はどれも最新の再開候補にする。",
+      "proposal": "中断と先送りを分ける。中断は同じ問題を再開。先送りは回答・ヒントを保存し、その周回では除外して次の1問を出す。先送りした問題は復習等から再開できるようにする。",
+      "cases": [
+        "F02"
+      ],
+      "sources": [
+        [
+          "src/app.js",
+          217
+        ],
+        [
+          "src/domain/next-action.js",
+          9
+        ]
+      ],
+      "acceptance": "中断は同じ試行に戻る。先送り直後の次候補は別問題。候補が1問しかなければ、同じ問題の無限ループにせず終了・範囲変更を案内する。"
+    },
+    {
+      "id": "F03",
+      "priority": "P0",
+      "kind": "不具合",
+      "title": "履歴から再開すると、入口が変わる／再開できない",
+      "observed": "身軽で中断→書いて考えるを使用→履歴から身軽の問題を再開するとブロックされる。直前がおまかせなら再開できるが、元のentryModeがpaperlessからallに書き換わる。",
+      "cause": "履歴のresumeは保存された入口ではなくsettings.paperModeを使い、その値を元の試行へ書き戻す。",
+      "proposal": "履歴・復習・別端末の再開は保存された学習範囲を優先する。入口変更は明示操作として扱う。個人の机指定による移動は、その操作をしたときだけ反映する。",
+      "cases": [
+        "F03a",
+        "F03b"
+      ],
+      "sources": [
+        [
+          "src/app.js",
+          160
+        ],
+        [
+          "src/app.js",
+          169
+        ],
+        [
+          "src/domain/study-context.js",
+          14
+        ]
+      ],
+      "acceptance": "現在の端末設定にかかわらず元の試行・回答・ヒント・入口・分野で再開する。教材取得だけで入口を書き換えない。"
+    },
+    {
+      "id": "F04",
+      "priority": "P1",
+      "kind": "既存仕様のUX改善",
+      "title": "指定した問題にも、前の紙・ペン条件がかかる",
+      "observed": "身軽を使った後、検索でD/Aのr07h-q18を指定しても開けない。単語帳のD/Aカードから「過去問で確認する」を押しても同じ。復習・関連問題・診断後の元問も同じstart経路を通る。",
+      "cause": "自動選択の条件と、ユーザーが明示指定した問題の起動条件が分離されていない。検索の候補表示と起動可否も一致していない。",
+      "proposal": "指定問題はその1問を開く。紙・ペンの条件は自動出題へ適用し、指定問題を見たことで次の自動出題の条件を勝手に広げない。指定問題の終了後は元の学習へ戻る導線を用意する。",
+      "cases": [
+        "F04a",
+        "F04b"
+      ],
+      "sources": [
+        [
+          "src/app.js",
+          148
+        ],
+        [
+          "src/app.js",
+          213
+        ],
+        [
+          "src/features/cards.js",
+          11
+        ],
+        [
+          "src/ui/planning.js",
+          42
+        ]
+      ],
+      "acceptance": "検索・カード・診断結果から押したIDがそのまま開く。必要なら「書いて考える問題」と示すが、別のランダムな問題を解かせてから探し直す流れにしない。"
+    },
+    {
+      "id": "F05",
+      "priority": "P1",
+      "kind": "継続仕様の不足",
+      "title": "復習から始めても、次は通常の未着手問題になる",
+      "observed": "r07h-q8とq18を不正解にする。復習でq8を解き直し「もう1問」を押すと、残るq18でなく未着手のq1が出る。",
+      "cause": "セッションに「復習を続ける」という目的を保存せず、普通のpickQuestionを呼んでいる。",
+      "proposal": "復習入口は復習候補の範囲で続ける。復習が終われば終了を伝え、通常問題へ進むかは別操作にする。",
+      "cases": [
+        "F05"
+      ],
+      "sources": [
+        [
+          "src/app.js",
+          139
+        ],
+        [
+          "src/app.js",
+          126
+        ],
+        [
+          "src/ui/views.js",
+          79
+        ]
+      ],
+      "acceptance": "復習の「もう1問」は要復習・復習期限の候補から選ぶ。候補がなくなっても、黙って全問題へ切り替えない。"
+    },
+    {
+      "id": "F06",
+      "priority": "P1",
+      "kind": "実装の不統一",
+      "title": "最初と次で、復習の優先順が違う",
+      "observed": "q1を10日前、q2を20日前、q3を30日前の不正解にする。ホームは最も古いq3を選ぶが、次は残りで古いq2でなくデータ順のq1を選ぶ。",
+      "cause": "ホームはchooseNextAction、継続はpickQuestion。前者は期限をソートし、後者は最初に見つかった期限到来問題を取る。",
+      "proposal": "候補の絞り込み・優先順・同順位の選び方・除外・候補切れを1つの通常学習用選択器へまとめる。診断とカードは別の目的の選択器として維持する。",
+      "cases": [
+        "F06"
+      ],
+      "sources": [
+        [
+          "src/domain/next-action.js",
+          15
+        ],
+        [
+          "src/app.js",
+          126
+        ]
+      ],
+      "acceptance": "同じ状態・範囲なら、最初／継続で同じ優先順になる。範囲の違いは学習目的によるものとして明示する。"
+    },
+    {
+      "id": "F07",
+      "priority": "P1",
+      "kind": "出題の改善",
+      "title": "データ順の偏りと、別入口での同じ未回答問題の重複",
+      "observed": "履歴なしの未着手はデータの先頭から選ばれる。実教材の先頭20問はすべて2025春で、近い分野が固まる。身軽でq1を中断してからおまかせを新規開始すると、別の未完了試行としてq1をもう一度作る。",
+      "cause": "未着手を主に完了記録の有無で判断し、同順位では配列の先頭を取る。他入口の途中問題を新規候補から除外していない。",
+      "proposal": "優先度を保ちながら、同順位では分野・年度・直近の出題を分散する。他入口の途中問題は候補があれば一時除外する。明示的な解き直しは許可する。",
+      "cases": [
+        "F03b",
+        "I02"
+      ],
+      "sources": [
+        [
+          "src/domain/next-action.js",
+          31
+        ],
+        [
+          "src/app.js",
+          126
+        ],
+        [
+          "src/domain/review.js",
+          5
+        ]
+      ],
+      "acceptance": "新規出題が毎回最新年度の先頭へ偏らない。入口ごとの中断は保存しつつ、意図しない同一問題の複数開始を避ける。"
+    },
+    {
+      "id": "F08",
+      "priority": "P1",
+      "kind": "学習効率の改善",
+      "title": "単語帳の「もう一度」が、一周後まで戻らない",
+      "observed": "全681枚・履歴なしで、最初だけ「もう一度」、他は「思い出せた」にすると、同じカードへ戻るまで681回の自己評価、間に680枚が必要になる。",
+      "cause": "一周内では各カード1回という規則が、もう一度の優先順位より先に適用される。既存仕様どおりで、データ消失ではない。",
+      "proposal": "「もう一度」のカードは数枚挟んで再提示する。新規カード・再確認の小さな待ち列を設け、681枚を一周することを前提にしない。具体的な間隔は初期仮説として検証する。",
+      "cases": [
+        "F08"
+      ],
+      "sources": [
+        [
+          "src/domain/flashcards.js",
+          21
+        ],
+        [
+          "src/features/cards.js",
+          16
+        ]
+      ],
+      "acceptance": "同じカードを直後に繰り返さず、数枚後には再確認できる。分野指定・端末別保存・自己評価と四択の分離は保つ。"
+    },
+    {
+      "id": "F09",
+      "priority": "P1",
+      "kind": "時刻の不整合",
+      "title": "同じ記録でも、端末の時差で復習期限が変わる",
+      "observed": "JSTで10/8 00:30の不正解を、10/8 10:00に確認。UTC端末では期限到来、JST端末では未到来になる。計画は保存したタイムゾーンを使う一方、復習は端末ローカルを使う。",
+      "cause": "成功した日と復習日をday()・setHours()・setDate()で端末のタイムゾーンから計算する。",
+      "proposal": "復習の暦日計算を、計画または資格に定義したタイムゾーンへ統一する。表示と内部の期限判定も同じ日付基準を使う。",
+      "cases": [
+        "F09"
+      ],
+      "sources": [
+        [
+          "src/domain/review.js",
+          8
+        ],
+        [
+          "src/domain/review.js",
+          15
+        ],
+        [
+          "src/utils.js",
+          4
+        ]
+      ],
+      "acceptance": "同じ利用者・資格・基準タイムゾーン・記録なら、UTC/JSTの端末で期限到来と成功日数が一致する。"
+    },
+    {
+      "id": "F10",
+      "priority": "P1",
+      "kind": "既出の定義の不整合",
+      "title": "診断でスキップした問題は、既出に数えない",
+      "observed": "診断で表示された1問をスキップして終了し、その問題を再出題するとpreviouslySeenはfalse。一方、通常学習の未回答の途中試行はtrueになる。",
+      "cause": "診断から出題履歴を作る際に、回答確定済みの非nullだけをdiagnosticAttemptsで返す。表示・回答・正解が区別されていない。",
+      "proposal": "問題を見た履歴と回答結果を別に扱う。スキップも既出として選択器・結果・AI出力へ反映し、未表示の30問全体を既出扱いにはしない。",
+      "cases": [
+        "F10"
+      ],
+      "sources": [
+        [
+          "src/features/planning.js",
+          10
+        ],
+        [
+          "src/domain/diagnostic.js",
+          16
+        ],
+        [
+          "src/domain/diagnostic.js",
+          45
+        ]
+      ],
+      "acceptance": "表示／未表示／回答／スキップの区別が通常学習と診断で一致する。既出になっても回答数・正答率・計画実績は増やさない。"
+    }
+  ],
+  "browserObservations": [
+    {
+      "id": "F01",
+      "observed": true,
+      "detail": {
+        "planFocus": [
+          "database",
+          "network"
+        ],
+        "firstTopic": "database",
+        "nextTopic": "database",
+        "fixedScope": "database"
+      }
+    },
+    {
+      "id": "F02",
+      "observed": true,
+      "detail": {
+        "postponeQuestion": "r07h-q1",
+        "nextEntranceAction": "entry-resume",
+        "sameAttempt": true
+      }
+    },
+    {
+      "id": "F03a",
+      "observed": true,
+      "detail": {
+        "savedEntry": "paperless",
+        "currentMode": "desk",
+        "message": "この問題は今の入口の候補ではありません。分野画面で「すべて」を選んで、記録から再開できます。記録はそのまま残っています。"
+      }
+    },
+    {
+      "id": "F03b",
+      "observed": true,
+      "detail": {
+        "beforeEntry": "paperless",
+        "afterEntry": "all",
+        "duplicateCheckpointQuestion": true
+      }
+    },
+    {
+      "id": "F04a",
+      "observed": true,
+      "detail": {
+        "requested": "r07h-q18",
+        "source": "search",
+        "blocked": true,
+        "message": "この問題は「身軽に1問」の候補ではありません。ホームで「おまかせで1問」を選ぶと、すべての問題を解けます。記録は変更していません。"
+      }
+    },
+    {
+      "id": "F04b",
+      "observed": true,
+      "detail": {
+        "requested": "r07h-q18",
+        "source": "flashcard",
+        "blocked": true
+      }
+    },
+    {
+      "id": "F05",
+      "observed": true,
+      "detail": {
+        "reviewed": "r07h-q8",
+        "remainingReview": "r07h-q18",
+        "nextQuestion": "r07h-q1",
+        "scope": {
+          "topic": null,
+          "topicId": null,
+          "examPartId": null,
+          "paperMode": "all"
+        }
+      }
+    },
+    {
+      "id": "F06",
+      "observed": true,
+      "detail": {
+        "oldestDueHome": "r07h-q3",
+        "oldestRemainingDue": "r07h-q2",
+        "actualNext": "r07h-q1"
+      }
+    }
+  ],
+  "domainObservations": [
+    {
+      "id": "F08",
+      "detail": {
+        "deckSize": 681,
+        "ratingsUntilAgain": 681,
+        "otherCardsBeforeReturn": 680
+      }
+    },
+    {
+      "id": "F09",
+      "detail": {
+        "sameCompletedAt": "2026-10-07T15:30:00.000Z",
+        "sameNow": "2026-10-08T01:00:00.000Z",
+        "utc": {
+          "timezone": "UTC",
+          "due": "2026-10-08T00:00:00.000Z",
+          "isDue": true
+        },
+        "jst": {
+          "timezone": "Asia/Tokyo",
+          "due": "2026-10-08T15:00:00.000Z",
+          "isDue": false
+        }
+      }
+    },
+    {
+      "id": "I01",
+      "detail": {
+        "firstDerived": 17,
+        "secondDerived": 0,
+        "reason": "Unseen originals outrank seen derived questions; this follows the existing policy."
+      }
+    },
+    {
+      "id": "F10",
+      "detail": {
+        "skippedInPreviousDiagnostic": "r04a-q11",
+        "nextPreviouslySeen": false,
+        "normalUnansweredCheckpointPreviouslySeen": true
+      }
+    },
+    {
+      "id": "I02",
+      "detail": {
+        "first20CorpusTopics": [
+          "theory",
+          "theory",
+          "theory",
+          "theory",
+          "algorithm",
+          "algorithm",
+          "algorithm",
+          "architecture",
+          "architecture",
+          "architecture",
+          "architecture",
+          "architecture",
+          "architecture",
+          "system",
+          "system",
+          "system",
+          "system",
+          "hardware",
+          "hardware",
+          "hardware"
+        ],
+        "first20Packs": [
+          "r07h"
+        ]
+      }
+    }
+  ],
+  "existingChecks": {
+    "nodeTests": 41,
+    "nodePassed": 41,
+    "browserSuites": [
+      "tests/home-entries.py",
+      "tests/action-flow.py",
+      "tests/mobile-study.py",
+      "tests/diagnostic-ap.py"
+    ]
+  },
+  "limitations": [
+    "本人アカウントの本番Firebase同期・別端末での復元は今回追加確認していない。",
+    "複数資格・複数教材対応パートの実サイト運用は未確認。",
+    "時差・既出・カードの再現はモジュールと合成履歴による。学習効果を実測した結果ではない。"
+  ],
+  "reportLayoutChecks": [
+    {
+      "width": 390,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 9,
+      "sizes": {
+        "doc": 390,
+        "viewport": 390,
+        "body": 390,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 320,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 9,
+      "sizes": {
+        "doc": 320,
+        "viewport": 320,
+        "body": 320,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 900,
+      "text200Percent": false,
+      "findings": 10,
+      "entries": 9,
+      "sizes": {
+        "doc": 900,
+        "viewport": 900,
+        "body": 900,
+        "font": "17px"
+      },
+      "errors": []
+    },
+    {
+      "width": 320,
+      "text200Percent": true,
+      "findings": 10,
+      "entries": 9,
+      "sizes": {
+        "doc": 320,
+        "viewport": 320,
+        "body": 320,
+        "font": "34px"
+      },
+      "errors": []
+    }
+  ]
+}

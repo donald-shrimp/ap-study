@@ -148,6 +148,7 @@ python tests/lesson-preservation-r03a.py
 
 ## 文書と出典
 
+- [全入口の出題ロジック点検と改善案](docs/question-selection-review.html)（2026-10-08。P0：3件・P1：7件、出題処理は未改修）
 - [要件定義](docs/requirements.md)
 - [読みやすいHTML定義書](docs/requirements.html)
 - [開始ボタン・実力診断・受験日・学習計画の設計レビュー](docs/study-planning-review.html)（P0と30問診断を実装。週別目標・マイルストーンも実装。P2は後続）
