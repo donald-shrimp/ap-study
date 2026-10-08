@@ -53,8 +53,9 @@ with sync_playwright() as p:
     page.locator('.diagnostic-review').first.locator('summary').click();assert page.locator('.diagnostic-review').first.locator('.reason-list li').count()==4
     snapshot=state(page);assert sum(r['kind']=='diagnostic' and r['payload']['status']=='completed' for r in snapshot['documents'])==1
     page.screenshot(path=str(ARTIFACTS/'diagnostic-result.png'),full_page=True)
-    page.locator('.diagnostic-review').first.get_by_role('button',name='学習モードで解き直す',exact=True).click();page.get_by_role('button',name='ヒントを1つ見る',exact=True).wait_for();page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
+    review=page.locator('.diagnostic-review').first;source_id=review.locator('button[data-action=start]').get_attribute('data-id');review.locator('button[data-action=start]').click();page.get_by_role('button',name='ヒントを1つ見る',exact=True).wait_for();page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
     assert next(r['payload'] for r in state(page)['documents'] if r['id']==final['id'])==final
+    retry=state(page)['study'];assert next(a for a in retry['attempts'] if a['id']==retry['currentId'])['questionId']==source_id
     page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='計画を見る',exact=True).click();page.evaluate('document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
     page.screenshot(path=str(ARTIFACTS/'planning-mobile-200.png'),full_page=True)
     assert not errors,errors

@@ -1,6 +1,6 @@
 import {fieldBar,fieldLegend} from './field-progress.js';
-import {examPartsFor,dateInZone} from '../domain/planning.js';
-import {esc, now, day, dateText, timeText} from '../utils.js';
+import {examPartsFor,dateInZone,addDays} from '../domain/planning.js';
+import {esc, now, dateText, timeText} from '../utils.js';
 import {complete, labels, enriched, hintKind, hintTotal} from '../domain/study.js';
 
 // Render from a snapshot of the current context; this module does not save or navigate.
@@ -8,6 +8,7 @@ export function createViews(context) {
  const {state, workspaceViews, base, catalog, PAGE_SIZE, examLabel, question, current, reviewInfo, reviewQuestions, topics, topicPool, latest, previousAttempt, improvement, sessionCount, hasFreshTopicQuestion, materialUpdateAvailable, qualification, readNote} = context;
  const {cardsEnabled,recommendation,homeTopicPool,entryActions,studyContext,contextLabel,homeFields,nextAction,fieldData,fieldMode,fieldPartId,diagnosis,normalAttempts}=context;
  const activeQuestionIds=new Set(base.map(q=>q.id)),continuedParents=new Set(state.attempts.map(a=>a.continuationOf).filter(Boolean));
+ const timeZone=workspaceViews?.timeZone||qualification.timeZone||'Asia/Tokyo',at=now(),todayKey=dateInZone(at,timeZone),completed=state.attempts.filter(a=>complete(a)&&Date.parse(a.completedAt)<=Date.parse(at));
 function badge(a) { return `<span class="badge ${a.status==='correct'?'good':a.status==='incorrect'?'wrong':complete(a)?'help':''}">${labels[a.status]}</span>`; }
 function rowHTML(q, info, action = 'start', label='解く') {
   return `<div class="row"><div><p class="row-title">${esc(q.title)}</p><p class="row-meta">${examLabel(q)} · 問${q.number} · ${esc(q.topic)}</p>${state.settings.paperMode==='paperless'?`<p class="small muted">${esc(contextLabel(q))}</p>`:''}${info?`<div class="history-result">${badge(info.a)}<span class="small muted">解答前のヒント ${info.a.hintsBeforeAnswer}/${hintTotal(info.a)}</span></div>`:''}</div><div class="row-actions"><button class="button secondary" data-action="${action}" data-id="${q.id}">${label}</button></div></div>`;
@@ -19,7 +20,7 @@ function homeHTML() {
  const entrances=Object.entries(entryActions).map(([mode,a])=>{const selected=mode===state.settings.lastEntry,resume=a.kind==='resume',disabled=a.kind==='unavailable';return `<button class="button study-entrance ${selected?'primary':'secondary'}" data-action="${resume?'entry-resume':'entry-start'}" data-paper-mode="${mode}" data-id="${esc(resume?a.attemptId:a.questionId||'')}" data-topic-id="${esc(a.scope?.topicId||'')}" data-part-id="${esc(a.scope?.examPartId||'')}" ${disabled?'disabled':''} ${selected?'data-last-entry="true"':''}${disabled?` title="${esc(a.reason)}"`:''}><span>${names[mode]}</span><span class="entry-cue">${resume?'続きから ':''}<span aria-hidden="true">→</span></span></button>`;}).join('');
  const candidates=[...homeFields.rows.filter(r=>r.focus),...homeFields.rows.filter(r=>r.total)],quickTopics=candidates.filter((r,i)=>candidates.findIndex(x=>x.topicId===r.topicId)===i&&homeTopicPool(r.label,r.topicId).length).slice(0,2);
  const focus=homeFields.rows.filter(r=>r.total&&(r.focus||reviews.some(x=>x.q.topicId===r.topicId&&x.info.isDue))).slice(0,2);
- const today=normalAttempts.filter(a=>complete(a)&&dateInZone(a.completedAt,workspaceViews?.timeZone||'Asia/Tokyo')===dateInZone(new Date(),workspaceViews?.timeZone||'Asia/Tokyo')).length;
+ const today=normalAttempts.filter(a=>complete(a)&&Date.parse(a.completedAt)<=Date.parse(at)&&dateInZone(a.completedAt,timeZone)===todayKey).length;
  return `<div class="home-core"><section class="panel quick-start-panel hero-start"><h1 class="entry-heading">とりあえずはじめる</h1><div class="quick-start entry-list">${entrances}</div>${Object.values(entryActions).every(a=>a.kind==='unavailable')?`<p class="small start-note">${esc(nextAction.reason)}</p>`:''}</section>
  <section class="panel home-shortcuts" aria-label="単語帳と分野別演習"><div class="button-row">${cardsEnabled&&qualification.flashcards?.count?`<button class="button secondary" data-action="cards-open">単語帳 · ${qualification.flashcards.count}枚</button>`:''}<button class="button secondary" data-view="topics" data-paper-mode="${state.settings.lastEntry}">分野別に解く</button></div>${quickTopics.length?`<div class="button-row quick-topics">${quickTopics.map(r=>`<button class="button secondary" data-action="topic-session" data-topic="${esc(r.label)}" data-paper-mode="${state.settings.lastEntry}">${esc(r.label)}</button>`).join('')}</div>`:''}</section>
  ${workspaceViews?.homeSupportHTML({nextTopic:recommendation?.kind==='question'?question(recommendation.questionId)?.topic:q?.topic,resuming:!recommendation&&nextAction.kind==='resume',planRecommendation:recommendation?.kind==='question',paperMode:state.settings.lastEntry})||''}</div>
@@ -37,9 +38,9 @@ function topicsHTML() {
 }
 function progressFeedbackHTML(a) { const message=improvement(a);return message?`<p class="progress-feedback">${esc(message)}</p>`:''; }
 function achievements() {
-  const done=state.attempts.filter(complete);
+  const done=completed;
   const unique=new Set(done.map(a=>a.questionId)).size;
-  const days=new Set(done.map(a=>day(a.completedAt))).size;
+  const days=new Set(done.map(a=>dateInZone(a.completedAt,timeZone))).size;
   const recovered=done.some(a=>a.status==='correct'&&!a.confidence&&previousAttempt(a)?.status==='incorrect');
   return [
     {title:'1問に解答',detail:'1問に取り組む',earned:done.length>=1},
@@ -49,14 +50,14 @@ function achievements() {
   ];
 }
 function motivationHTML() {
-  const done=state.attempts.filter(complete);
-  const today=done.filter(a=>day(a.completedAt)===day(now()));
+  const done=completed;
+  const today=done.filter(a=>dateInZone(a.completedAt,timeZone)===todayKey);
   const unique=new Set(done.filter(a=>activeQuestionIds.has(a.questionId)).map(a=>a.questionId)).size;
   const awards=achievements();const earned=awards.filter(a=>a.earned);const next=awards.find(a=>!a.earned);
   const recent=done.slice().reverse().find(a=>improvement(a));
-  const dates=Array.from({length:7},(_,i)=>{const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-6+i);return d;});
-  const active=dates.filter(d=>done.some(a=>day(a.completedAt)===day(d))).length;
-  return `<section class="panel motivation-panel"><div class="heading-row"><h2>学習状況</h2><span class="badge ${today.length?'good':''}">${today.length?'✓ ':''}今日 ${today.length}問</span></div><p class="progress-counts">解答済み ${unique} / ${base.length}問・${done.length}回<span>直近7日 ${active}日</span></p>${recent?`<p class="progress-feedback">${esc(question(recent.questionId).title)}：${esc(improvement(recent))}</p>`:''}<details class="achievements"><summary>学習日・達成 ${earned.length} / 4</summary><div class="week-calendar" aria-label="この7日間の問題への取り組み">${dates.map(d=>{const count=done.filter(a=>day(a.completedAt)===day(d)).length;return `<div class="calendar-day ${count?'studied':''} ${day(d)===day(now())?'today':''}" aria-label="${dateText(d)}、${count}問に取り組みました"><span>${d.toLocaleDateString('ja-JP',{weekday:'short'})}</span><strong>${count?'✓':'・'}</strong><small>${d.getDate()}日</small></div>`;}).join('')}</div><div class="achievement-list">${earned.map(a=>`<div class="achievement"><span aria-hidden="true">✓</span><strong>${a.title}</strong></div>`).join('')}${next?`<p class="page-note">次の達成：${next.detail}</p>`:''}</div></details></section>`;
+  const dates=Array.from({length:7},(_,i)=>addDays(todayKey,i-6));
+  const active=dates.filter(d=>done.some(a=>dateInZone(a.completedAt,timeZone)===d)).length;
+  return `<section class="panel motivation-panel"><div class="heading-row"><h2>学習状況</h2><span class="badge ${today.length?'good':''}">${today.length?'✓ ':''}今日 ${today.length}問</span></div><p class="progress-counts">解答済み ${unique} / ${base.length}問・${done.length}回<span>直近7日 ${active}日</span></p>${recent?`<p class="progress-feedback">${esc(question(recent.questionId).title)}：${esc(improvement(recent))}</p>`:''}<details class="achievements"><summary>学習日・達成 ${earned.length} / 4</summary><div class="week-calendar" aria-label="この7日間の問題への取り組み">${dates.map(d=>{const count=done.filter(a=>dateInZone(a.completedAt,timeZone)===d).length;return `<div class="calendar-day ${count?'studied':''} ${d===todayKey?'today':''}" aria-label="${new Date(d).toLocaleDateString('ja-JP',{timeZone:'UTC',month:'long',day:'numeric'})}、${count}問に取り組みました"><span>${new Date(d).toLocaleDateString('ja-JP',{timeZone:'UTC',weekday:'short'})}</span><strong>${count?'✓':'・'}</strong><small>${Number(d.slice(-2))}日</small></div>`;}).join('')}</div><div class="achievement-list">${earned.map(a=>`<div class="achievement"><span aria-hidden="true">✓</span><strong>${a.title}</strong></div>`).join('')}${next?`<p class="page-note">次の達成：${next.detail}</p>`:''}</div></details></section>`;
 }
 function studyHTML() {
   const a=current(); const original=a.questionSnapshot||question(a.questionId); const q={...original,...a.materialSnapshot,choiceReasons:a.materialSnapshot.choiceReasons || [],hintStatus:hintKind(a.materialSnapshot)}; const answered=complete(a);

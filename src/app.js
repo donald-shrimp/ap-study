@@ -92,8 +92,9 @@ async function useLatestHints() {
   if(carrySelection) { const a=current();const index=selectedId?a.questionSnapshot.choices.findIndex(c=>c.id===selectedId):selected;selectAnswer(a,index);a.confidence=confidence;save();render(); }
 }
 function notice(message) { $('#notice').textContent = message; $('#notice').hidden = !message; }
-let saves=Promise.resolve(),saveVersion=0;
+let saves=Promise.resolve(),saveVersion=0,recordMaintenance=null;
 function save(options={}) {
+  if(recordMaintenance)return Promise.resolve(false);
   rebuildProgress();const version=++saveVersion;
   if (corruptRaw !== null) { notice('保存データを読み取れませんでした。表示・データから書き出すか、読み込み・初期化で復旧できます。元の記録は上書きしていません。'); return Promise.resolve(false); }
   $('#save-state').textContent='保存中…';
@@ -134,6 +135,7 @@ function render(focus = true, preserveY = null) {
   document.querySelectorAll('.nav-item').forEach(b=>{ const active = b.dataset.view === (state.view==='study'?'home':['planning','diagnostics','diagnostic','review'].includes(state.view)?'history':state.view==='materials'||state.view==='flashcards'?'topics':state.view); b.classList.toggle('active',active); active ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current'); });
   if(state.view==='home'){displayedEntryActions=entryActions();displayedNextAction=displayedEntryActions[state.settings.lastEntry]||nextAction();}
   main.innerHTML = state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML();
+  if(state.view==='planning')planner?.restoreDrafts();
   if (focus) { main.focus({preventScroll:true}); window.scrollTo(0, preserveY ?? 0); }
 }
 let navigation=0;
@@ -208,7 +210,7 @@ main.addEventListener('click',async e=>{
   if(action==='entry-start'||action==='entry-resume'){const mode=el.dataset.paperMode;if(!['all','paperless','desk'].includes(mode))return;if(mode!=='all'&&!studyContext)studyContext=await content.loadStudyContext();if(action==='entry-resume')await resume(el.dataset.id,mode);else await start(el.dataset.id,true,{topic:qualification.topics.find(t=>t.id===el.dataset.topicId)?.name||null,examPartId:el.dataset.partId||null,paperMode:mode});}
   else if(action==='paper-mode'){const mode=['paperless','desk'].includes(el.dataset.mode)?el.dataset.mode:'all',token=++navigation;if(mode!=='all'){studyContext=await content.loadStudyContext();if(token!==navigation)return;}state.settings.paperMode=mode;if(await save())notice('');render(false);}
   else if(action==='clear-desk'){state.settings.deskQuestionIds=[];await save();render(false);notice('机指定を解除しました。回答記録は保持しています。');}
-  else if(action==='desk-later'&&a&&!complete(a)){state.settings.deskQuestionIds=[...new Set([...state.settings.deskQuestionIds,a.questionId])];a.status='postponed';a.entryMode='desk';if(a.practiceScope)a.practiceScope.paperMode='desk';a.updatedAt=now();state.currentId=null;await save();go('home');notice('紙なしの候補から外して中断しました。回答候補とヒントは保存済みです。「書いて考える1問」から再開できます。');}
+  else if(action==='desk-later'&&a&&!complete(a)){const before={attempt:structuredClone(a),deskQuestionIds:state.settings.deskQuestionIds};state.settings.deskQuestionIds=[...new Set([...state.settings.deskQuestionIds,a.questionId])];a.status='postponed';a.entryMode='desk';if(a.practiceScope)a.practiceScope.paperMode='desk';a.updatedAt=now();state.currentId=null;if(!await save()){Object.assign(a,before.attempt);state.settings.deskQuestionIds=before.deskQuestionIds;state.currentId=a.id;render(false);return;}go('home');notice('紙なしの候補から外して中断しました。回答候補とヒントは保存済みです。「書いて考える1問」から再開できます。');}
   else if(action==='start-session') {const candidate=nextAction(false,state.settings.paperMode,true);if(candidate.kind==='resume'){await resume(candidate.attemptId);return;}if(candidate.kind==='question')await start(candidate.questionId,true,{topic:qualification.topics.find(t=>t.id===candidate.scope.topicId)?.name||null,examPartId:candidate.scope.examPartId,paperMode:el.dataset.paperMode||state.settings.paperMode});else notice(candidate.reason);}
   else if(action==='field-mode'){fieldMode=el.dataset.mode==='diagnostic'?'diagnostic':'learning';render(false);document.querySelector(`[data-action=field-mode][data-mode=${fieldMode}]`)?.focus({preventScroll:true});}
   else if(action==='field-focus'){fieldMode='learning';fieldPartId=null;go('topics');document.getElementById('field-'+el.dataset.topicId)?.scrollIntoView({block:'start'});}
@@ -258,13 +260,39 @@ $('#image-zoom-out').addEventListener('click',()=>{const img=$('#image-scroll im
 $('#settings-button').addEventListener('click',()=>$('#settings-dialog').showModal());
 $('#large-text').addEventListener('change',e=>{state.settings.largeText=e.target.checked;save();render(false);});
 $('#export-state').addEventListener('click',async()=>{await saves;download(corruptRaw??{...state,workspaceBackup:planner?.backup()},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
+// Full record replacement is guest-only. Keep navigation, background saves and
+// owner changes behind this short maintenance barrier, then display committed data.
+async function maintainRecords(operation){
+ if(recordMaintenance)throw new Error('記録の取り込み中です。完了してから操作してください。');
+ let release;recordMaintenance=new Promise(resolve=>release=resolve);
+ navigation++;
+ const previousInert=[main.inert,document.querySelector('.sidebar').inert],ids=['import-state','export-state','clear-state','large-text','google-login','google-logout','sync-now','import-guest'],disabled=ids.map(id=>[id,$('#'+id)?.disabled]);
+ main.inert=true;document.querySelector('.sidebar').inert=true;main.setAttribute('aria-busy','true');for(const [id] of disabled)if($('#'+id))$('#'+id).disabled=true;
+ clearTimeout(scrollTimer);
+ try{return await operation();}finally{
+  main.inert=previousInert[0];document.querySelector('.sidebar').inert=previousInert[1];main.setAttribute('aria-busy','false');for(const [id,value] of disabled)if($('#'+id))$('#'+id).disabled=value;
+  recordMaintenance=null;release();
+ }
+}
 $('#import-state').addEventListener('change',async e=>{
-  const file=e.target.files[0];if(!file)return;
-  try { if(file.size>64*1024*1024) throw new Error('ファイルが大きすぎます。64MB以下の学習記録を選んでください。'); const candidate=validateState(JSON.parse(await file.text()));planner?.validateBackup(candidate.workspaceBackup);
-    if((state.attempts.length||corruptRaw!==null)&&!confirm('通常演習の記録と教材編集を、ファイルの内容で置き換えます。計画・診断は追加し、既存のものは残します。先に書き出して保管してください。読み込みますか？'))return;
-    await saves;await planner?.restoreBackup(candidate.workspaceBackup);delete candidate.workspaceBackup;corruptRaw=null;state=candidate;if(state.view==='flashcards')state.view='home';notice('');await save({replace:true});if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));render();$('#settings-status').textContent=storageOK?'学習記録を読み込みました。':'読み込みましたが、ブラウザに保存できていません。書き出して保管してください。';
-  } catch(error) { $('#settings-status').textContent=error instanceof SyntaxError?'JSONを読み取れませんでした。現在の記録は変更していません。':error.message; }
-  finally {e.target.value='';}
+ const file=e.target.files[0];if(!file)return;
+ try{await maintainRecords(async()=>{
+  const target=store,identity=await target.identity();if(identity.owner.startsWith('uid:'))throw new Error('学習記録の置き換えはログアウトしてから行ってください。');
+  if(file.size>64*1024*1024)throw new Error('ファイルが大きすぎます。64MB以下の学習記録を選んでください。');
+  const candidate=validateState(JSON.parse(await file.text())),workspaceBackup=candidate.workspaceBackup;planner?.validateBackup(workspaceBackup);
+  if((state.attempts.length||corruptRaw!==null)&&!confirm('通常演習の記録と教材編集を、ファイルの内容で置き換えます。計画・診断は追加し、既存のものは残します。先に書き出して保管してください。読み込みますか？'))return;
+  await saves;if(store!==target)throw new Error('保存先が変わりました。記録は変更していません。');
+  delete candidate.workspaceBackup;if(candidate.view==='flashcards')candidate.view='home';
+  $('#save-state').textContent='保存中…';
+  try{await target.write(candidate,{replace:true});}catch(error){$('#save-state').textContent=storageOK?'この端末に保存済み':'保存できていません';throw new Error('学習記録を取り込めませんでした。現在の記録と計画は変更していません。 '+error.message);}
+  state=candidate;corruptRaw=null;storageOK=true;saveVersion++;rebuildProgress();$('#save-state').textContent='この端末に保存済み';notice('');
+  let result;
+  try{result=await planner?.restoreBackup(workspaceBackup);}catch(error){render();$('#settings-status').textContent='通常演習の記録は読み込み済みです。受験日・計画・診断は取り込めませんでした。同じファイルを選んで再試行できます。 '+error.message;return;}
+  if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));render();
+  const details=[];if(result?.plan==='restored')details.push('受験日・計画を追加しました。');if(result?.plan==='retained')details.push('既存の受験日・計画は保持しました。');if(workspaceBackup?.runs.length)details.push(`診断${result.diagnosticsAdded}件を追加、${result.diagnosticsRetained}件は登録済みです。`);
+  $('#settings-status').textContent='学習記録を読み込みました。'+(details.length?' '+details.join(' '):'');
+ });}catch(error){$('#settings-status').textContent=error instanceof SyntaxError?'JSONを読み取れませんでした。現在の記録は変更していません。':error.message;}
+ finally{e.target.value='';}
 });
 $('#clear-state').addEventListener('click',async()=>{if(!confirm('このブラウザの通常演習・診断の記録を削除します。単語帳・受験日・計画・教材の編集は残します。よろしいですか？'))return;await saves;const {settings,overrides}=state;corruptRaw=null;state={...makeState(),settings,overrides};notice('');await save({replace:true});await planner?.clearDiagnostics();render();$('#settings-status').textContent=storageOK?'通常演習・診断の学習記録を削除しました。受験日と計画は残しています。':'記録を初期化しましたが、保存に失敗しました。ブラウザの保存設定を確認してください。';});
 $('#close-editor').addEventListener('click',()=>$('#editor-dialog').close());
@@ -276,6 +304,7 @@ function saveScroll(){if(state.view==='study'&&current()){current().scrollY=wind
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 async function switchOwner(owner,{restore=false}={}){
+ if(recordMaintenance)await recordMaintenance;
  const identity=await store.identity();if(identity.owner===(owner||`guest:${identity.deviceId}`))return;
  main.inert=true;document.querySelector('.sidebar').inert=true;
  const controls=['import-state','export-state','clear-state','large-text'];controls.forEach(id=>$("#"+id).disabled=true);

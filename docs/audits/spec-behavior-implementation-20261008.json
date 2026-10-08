@@ -1,0 +1,259 @@
+{
+  "format": "hitomon-spec-behavior-implementation",
+  "version": 1,
+  "date": "2026-10-08",
+  "baseCommit": "e77811bb5c61aac8bdad08e5b6d6b83492525456",
+  "auditCommit": "6ba74781849de3f692f9a082cb3a3a5b24b3e62d",
+  "auditSourceCommit": "be9287f42dea3c8a5a77ddbe7280f319d973558a",
+  "release": "20261008-spec-fixes1",
+  "implementedFindings": [
+    "S02",
+    "S05",
+    "S01",
+    "S06",
+    "S04"
+  ],
+  "implementedImprovements": [
+    "I01",
+    "I02"
+  ],
+  "method": "1担当の逐次実装・検証。子エージェント・独立担当のレビューは使用していない。",
+  "unitTests": {
+    "command": "node --test tests/action-domain.mjs tests/mobile-domain.mjs tests/study-domain.mjs tests/planning-domain.mjs tests/selection-domain.mjs tests/spec-behavior-domain.mjs tests/sync-engine.mjs tests/workspace-race.mjs",
+    "passed": 61
+  },
+  "emulator": {
+    "command": "npm run test:sync",
+    "rulesTestsPassed": 8,
+    "browserSuites": [
+      "tests/sync.py",
+      "tests/planning-sync.py"
+    ],
+    "productionAccountUsed": false,
+    "addedChecks": [
+      "stale manual revision after rerender refuses overwrite",
+      "JSON and manual drafts both discarded",
+      "remote update notice survives rerender"
+    ]
+  },
+  "regression": {
+    "command": "python tests/spec-behavior-flow.py",
+    "passedCases": 10,
+    "pageErrors": 0,
+    "results": [
+      {
+        "id": "S01",
+        "screenAfterFailure": "study",
+        "persistedView": "study",
+        "persistedCurrent": "a24850cf-2582-4f62-9fc1-7cb1cc7e6ea0",
+        "persistedDeskIds": [],
+        "retrySucceeded": true
+      },
+      {
+        "id": "S02",
+        "entered": "まだ保存していない計画の理由",
+        "afterOpeningAI": "まだ保存していない計画の理由"
+      },
+      {
+        "id": "S02B",
+        "otherFormsPreserved": true,
+        "ownRevisionAdvanced": true,
+        "navigationPreserved": true,
+        "invalidPreviewPreserved": true
+      },
+      {
+        "id": "C03",
+        "links": [
+          {
+            "label": "公開フォーマット",
+            "url": "http://127.0.0.1:4173/docs/study-plan-format.md",
+            "status": 200
+          },
+          {
+            "label": "JSON Schema",
+            "url": "http://127.0.0.1:4173/schemas/study-plan.v1.json",
+            "status": 200
+          }
+        ],
+        "status": "正常：資格別ページでもbaseにより共有ルートへ解決"
+      },
+      {
+        "id": "S04",
+        "deviceZone": "UTC",
+        "now": "2026-10-07T15:30:00Z",
+        "answerAt": "2026-10-07T14:30:00Z",
+        "home": "今日 0回 ·\n記録を見る",
+        "historyToday": "今日 0問",
+        "summaryDate": "2026-10-08",
+        "summaryToday": 0
+      },
+      {
+        "id": "S04B",
+        "deviceZones": [
+          "UTC",
+          "Asia/Tokyo",
+          "America/New_York"
+        ],
+        "today": 1,
+        "studyDays": 2,
+        "calendarToday": "10月8日"
+      },
+      {
+        "id": "S05",
+        "ordinaryRecordRestored": false,
+        "planRestored": false,
+        "status": "学習記録を取り込めませんでした。現在の記録と計画は変更していません。 audit full",
+        "workspaceCount": 0
+      },
+      {
+        "id": "S05B",
+        "partialClearlyReported": true,
+        "workspaceBatchRolledBack": true,
+        "reloadMatchesCommittedState": true,
+        "retryRuns": 2,
+        "duplicateRuns": 0
+      },
+      {
+        "id": "S05C",
+        "oldQuestionLoadCancelled": true,
+        "importedEmptyRecordPreserved": true
+      },
+      {
+        "id": "S06",
+        "stale": true,
+        "entered": "{\"still\":\"unsaved JSON\"}",
+        "after": ""
+      }
+    ]
+  },
+  "futureRecordPolicy": {
+    "graphBeforeCompletion": 0,
+    "aiBeforeCompletion": 0,
+    "phaseBeforeCompletion": 0,
+    "weekBeforeCompletion": 0,
+    "eachAtCompletion": 1,
+    "originalRecordModified": false
+  },
+  "backupContract": {
+    "preflight": "validate all candidates before ordinary replacement",
+    "ordinaryFailure": "original ordinary state and all workspace documents retained",
+    "workspaceFailure": "ordinary replacement committed and displayed, workspace additions all aborted, partial result clearly reported",
+    "retry": "same backup, no duplicate diagnostic IDs",
+    "plan": "existing plan retained and reported",
+    "crossDatabaseAtomicity": false,
+    "importDuringEarlierQuestionLoad": "earlier question navigation cancelled"
+  },
+  "draftContract": {
+    "scope": "in-memory within current page and current owner",
+    "navigationPreserved": true,
+    "persistedAcrossReload": false,
+    "synced": false,
+    "ownerChangeClears": true,
+    "clearOnSave": "only saved form",
+    "explicitDiscard": "all manual drafts, editing IDs, JSON and preview",
+    "remoteRevision": "original revision preserved; own successful writes advance matching drafts only"
+  },
+  "browserSuites": [
+    "tests/planning.py",
+    "tests/planning-context.py",
+    "tests/planning-targets.py",
+    "tests/storage.py",
+    "tests/workspace.py",
+    "tests/e2e.py",
+    "tests/qualifications.py",
+    "tests/pwa.py"
+  ],
+  "dataSuites": [
+    "tools/build-content.py",
+    "tests/content.py",
+    "tests/corpus.py"
+  ],
+  "preservedContent": {
+    "ordinaryQuestions": 800,
+    "individualLessons": 800,
+    "flashcards": 681,
+    "diagnosticVariants": 17,
+    "integrity": {
+      "baseCommit": "e77811bb5c61aac8bdad08e5b6d6b83492525456",
+      "checkedFiles": 903,
+      "changed": [],
+      "hashes": {
+        "data/questions.json": "5e3e71d9222eb616f58ee6bb11e6f71685e7d248420b813ea00373a80d76db24",
+        "content/ap/flashcards.json": "fa4300c39520172838bb5417f2707a561c7b04245522f1d68023b3aa7ad179a3",
+        "content/ap/diagnostic-questions.json": "4ba33f1eaeb6f603cb97ce9094c0b8590152ba071132ae9682a9584112280666",
+        "content/ap/diagnostic-reviews.json": "db1363522effb6933a42f52b714e57311e1f28616b2ff937f30f01d8bdf9ff68",
+        "firestore.rules": "10e49c4b0072ff19d3852a9ee8f441e16fce6245d1b9cd97aac84b6deaf77076"
+      }
+    }
+  },
+  "reportLayouts": [
+    {
+      "page": "docs/spec-behavior-review.html",
+      "width": 320,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/spec-behavior-review.html",
+      "width": 390,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/spec-behavior-review.html",
+      "width": 900,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/spec-behavior-review.html",
+      "width": 320,
+      "fontSize": 34,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/requirements.html",
+      "width": 320,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/requirements.html",
+      "width": 390,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/requirements.html",
+      "width": 900,
+      "fontSize": 17,
+      "horizontalOverflow": false
+    },
+    {
+      "page": "docs/requirements.html",
+      "width": 320,
+      "fontSize": 34,
+      "horizontalOverflow": false
+    }
+  ],
+  "sourceSha256": {
+    "src/app.js": "35e2ee557aa340c572cc0d05254d9492d6e9d0f985d843b37fc95565ee8fe222",
+    "src/features/planning.js": "bcf2655c6496c2585c21e26b19d24348cd4212d2991edff5cbad95c3243a24c1",
+    "src/ui/planning-drafts.js": "8a189c49661a66b42f7f20f46f60b7b7837ce6f44f67610faebabe82ff6ccf89",
+    "src/ui/planning.js": "0a6ef759388d5f013eaed85feadb486e834a723802169787d5ba45abd2ede2a9",
+    "src/ui/views.js": "20e96f8b47074870da55629aa57679f1224a95836a51d18fc93c9e5015793e79",
+    "src/storage/workspace.js": "6aa625c706f983bc0828bad914eb2148ae7e1911076572726402752aaf0cc9a3",
+    "src/domain/planning.js": "1a5f7f51a8733018b1ae3c968443508793bdc254a13ec064b14d58747d09c3aa",
+    "app.js": "f6ba7d2c8bec80860d6bd9c9efef78b60bafcd613ce8a7300a51142c8bc9e367",
+    "sw.js": "c9904096cea930a0ac70aa0d14f572a0544273ab0ee6b282b5e43acf2b14de7f",
+    "index.html": "283d6c09640cae2ef6174e632261db540527c9bdda8e694eb2c64b68029e6f95",
+    "ap/index.html": "5bbf3fe223bf372450614843ad6540ae9ef84e8af7f903d57de8f61528cb114f",
+    "tests/spec-behavior-flow.py": "27e89a25abfe63bc46268a357a6561a60ea90e6bbafcb0fafc9f51182e43c491",
+    "tests/spec-behavior-domain.mjs": "3da38533fe9f3c52b0d008a1bd3c12717b180aa1a9972f8d38c522ce2c3a14d4",
+    "tests/planning-sync.py": "222c4f128ceca1ac4d0c46a7e6262fde27ccba35ac72aab9b75965ffc8aa6c5b"
+  },
+  "limits": [
+    "新しいゲストとテスト用Auth/Firestoreエミュレーターで検証。本番の本人アカウント・本人の学習記録・Android実機は操作していない。",
+    "全回線・容量・OS条件の網羅ではない。バックアップの2DB全体の原子性は追加していない。"
+  ]
+}

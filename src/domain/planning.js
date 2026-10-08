@@ -78,14 +78,14 @@ export function parsePlan(text,qualification){
 }
 export function partOfAttempt(a,q){return a.questionSnapshot?.examPartId||q.defaultExamPartId||examPartsFor(q).find(p=>p.practiceAvailable)?.id||examPartsFor(q)[0].id;}
 export function summarize(attempts,q,timeZone='Asia/Tokyo',at=new Date()){
- const done=attempts.filter(a=>complete(a)&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===q.id)),today=dateInZone(at,timeZone);
+ const done=attempts.filter(a=>complete(a)&&Date.parse(a.completedAt)<=new Date(at).valueOf()&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===q.id)),today=dateInZone(at,timeZone);
  const counts=list=>({completedAttempts:list.length,distinctQuestions:new Set(list.map(a=>a.questionId)).size,correct:list.filter(a=>a.status==='correct').length,assisted:list.filter(a=>a.status==='assisted').length,incorrect:list.filter(a=>a.status==='incorrect').length,revealed:list.filter(a=>a.status==='revealed').length,selfCorrectRate:list.length?list.filter(a=>a.status==='correct').length/list.length:null});
  const recent=n=>done.filter(a=>{const distance=daysBetween(dateInZone(a.completedAt,timeZone),today);return distance>=0&&distance<n;});
  const topics=q.topics.map(t=>{const rows=done.filter(a=>(a.questionSnapshot?.topicId||q.topics.find(t=>t.name===a.questionSnapshot?.topic)?.id)===t.id);return {topicId:t.id,label:t.name,...counts(rows)};});
  return {today,all:counts(done),todayCounts:counts(recent(1)),last7Days:counts(recent(7)),last28Days:counts(recent(28)),topics};
 }
 export function phaseProgress(plan,attempts,q,at=new Date()){
- const today=dateInZone(at,plan.timeZone),done=attempts.filter(a=>complete(a)&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===q.id)).map(a=>({date:dateInZone(a.completedAt,plan.timeZone),part:partOfAttempt(a,q)}));
+ const today=dateInZone(at,plan.timeZone),done=attempts.filter(a=>complete(a)&&Date.parse(a.completedAt)<=new Date(at).valueOf()&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===q.id)).map(a=>({date:dateInZone(a.completedAt,plan.timeZone),part:partOfAttempt(a,q)}));
  return plan.phases.map(p=>{const count=(start,end)=>done.filter(a=>p.examPartIds.includes(a.part)&&a.date>=start&&a.date<=end).length,actual=count(p.start,p.end);
   const weeklyProgress=(p.weeklyTargets||[]).map(w=>{const actual=count(w.start,w.end);return {...w,actual,remaining:Math.max(0,w.completedAttempts-actual),active:w.start<=today&&today<=w.end};});
   return {...p,actual,remaining:Math.max(0,p.targets.completedAttempts-actual),active:p.start<=today&&today<=p.end,weeklyProgress};

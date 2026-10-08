@@ -96,9 +96,9 @@ test('週別目標と予定は任意。未知項目・期間・件数・ID・合
 test('週の両端とJST境界で実績を数え、休んだ週の未達を繰り越さない',()=>{
  const p=detailedPlan(),attempts=['2026-10-06T15:00:00Z','2026-10-13T14:59:59Z','2026-10-13T15:00:00Z','2026-10-18T14:59:59Z','2026-10-18T15:00:00Z'].map(at=>{const a=createAttempt(questions[0],{at});selectAnswer(a,1);finalizeAttempt(a,'correct',at);return a;});
  const before=JSON.stringify(attempts),first=phaseProgress(p,attempts,q,'2026-10-13T14:59:59Z')[0],second=phaseProgress(p,attempts,q,'2026-10-13T15:00:00Z')[0];
- assert.equal(first.actual,4);assert.deepEqual(first.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,true],[2,4,false]]);assert.deepEqual(second.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,false],[2,4,true]]);
- p.phases[0].milestones[0].completed=true;assert.equal(phaseProgress(p,attempts,q)[0].actual,4);assert.equal(JSON.stringify(attempts),before);
- const summary=studySummary({qualification:q,plan:p,attempts,at:'2026-10-14T00:00:00Z'});assert.equal(summary.phaseProgress[0].weeklyProgress[1].remaining,4);assert.equal(summary.currentPlan.phases[0].milestones[0].completed,true);
+ assert.equal(first.actual,2);assert.deepEqual(first.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,true],[0,6,false]]);assert.equal(second.actual,3);assert.deepEqual(second.weeklyProgress.map(w=>[w.actual,w.remaining,w.active]),[[2,2,false],[1,5,true]]);
+ p.phases[0].milestones[0].completed=true;assert.equal(phaseProgress(p,attempts,q,'2026-10-18T14:59:59Z')[0].actual,4);assert.equal(JSON.stringify(attempts),before);
+ const summary=studySummary({qualification:q,plan:p,attempts,at:'2026-10-14T00:00:00Z'});assert.equal(summary.phaseProgress[0].weeklyProgress[1].remaining,5);assert.equal(summary.currentPlan.phases[0].milestones[0].completed,true);
 });
 
 test('継続セッションの対象パートを検証し、既存のパート指定なし記録は保持する',()=>{
