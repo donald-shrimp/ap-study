@@ -663,3 +663,5 @@ Aは問2のサービス時間条件、問30のトークンバス／リングの�
 - `tests/e2e.py`、`tests/action-flow.py`、`tests/selection-flow.py`、`tests/home-entries.py`、`tests/mobile-study.py`、`tests/qualifications.py`、`tests/diagnostic-ap.py`、`tests/pwa.py`が成功。新しい画面から教材検索へ進む矢印がアクセシブル名を変える不具合を検出し、矢印を装飾扱い・検索ボタン名を固定して修正後に再実行した。通常ヒント・正答閲覧・保存／再開、30問支援なし診断、他資格の問題追加・改名・削除後の履歴、PWA更新・保存済み画像とオフラインを確認。
 - `tests/sync.py`、`tests/planning-sync.py`、`tests/mobile-account.py`：Firebase Auth／Firestoreエミュレーターで2ブラウザ・オフライン・計画競合・診断結果・UID／資格分離・スマホのアカウント操作が成功。最初のNode実行ではエミュレーター未起動によるRulesの接続失敗があったが、起動後に全76件を成功させた。本番本人アカウントやAndroid実機での検証とは区別する。
 - `tests/content.py`、`tests/corpus.py`が成功。[保持・検証記録](audits/field-records-20261009.json)に開始コミットとのバイト比較件数と集計を保存。通常800問・個別教材800問・単語帳681枚・派生180問、原本画像、教材、保存／同期コード、Firestore Rules、マニフェストのID・スコープを保持。UIのリリース番号のみ更新した。
+
+実装コミット `5b020010759481cac7a505471d11443462cf8aad` のGitHub Pagesが `built` になった後、変更25ファイルと既存の教材・単語帳・派生・マニフェスト4ファイル、計29ファイルの公開SHA-256がローカルと一致。公開URLで `tests/field-navigation.py` と `tests/pwa.py` も成功し、入口・記録・メモ・復習・中断・スマホ幅・文字200%・オフラインを再確認した。[公開確認記録](audits/field-records-public-20261009.json)。新規ゲストでの検証であり、本人のGoogleアカウントやAndroid実機を操作していない。
