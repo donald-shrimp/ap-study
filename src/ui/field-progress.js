@@ -1,4 +1,8 @@
 import {esc} from '../utils.js';
+export function compactFieldProgress(row){
+ if(!row.total)return '<span class="field-measure small muted">未確認</span>';
+ return `<span class="field-measure"><span class="field-score">自力正解 ${row.correct} / ${row.total}問</span><span class="field-mini-bar" role="img" aria-label="自力正解 ${Math.round(row.rate*100)}%"><span style="width:${row.rate*100}%"></span></span>${row.smallSample?'<span class="small muted">記録少なめ</span>':''}</span>`;
+}
 export function fieldBar(row,{diagnostic=false}={}){
  if(!row.total)return `<p class="small muted field-empty">${diagnostic?'この診断では未回答':'この期間の記録なし'} · 未確認</p>`;
  const label=diagnostic?`正解 ${row.correct} / ${row.total}問`:`自力正解 ${Math.round(row.rate*100)}% · ${row.correct} / ${row.total}問`;

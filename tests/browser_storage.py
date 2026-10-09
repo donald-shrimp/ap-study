@@ -54,3 +54,9 @@ def open_plan_ai(page):
     ai = page.locator('#plan-ai')
     if not ai.evaluate('(el)=>el.open'):
         ai.locator(':scope > summary').click()
+
+
+def open_answer_history(page):
+    history=page.locator('.answer-history')
+    if not history.evaluate('(el)=>el.open'):
+        history.locator(':scope > summary').click()

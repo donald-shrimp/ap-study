@@ -20,7 +20,7 @@
 <body>
   <a class="skip" href="#main">本文へ移動</a>
   <header class="shell">
-    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.15 · 2026.10.08</span></div>
+    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.16 · 2026.10.09</span></div>
     <div class="hero">
       <p class="eyebrow">過去問を使った、効率的な学習のために</p>
       <h1>応用情報の学習アプリ<br>何を作るか、どう使うか。</h1>
@@ -66,7 +66,7 @@
           <li><strong><span class="tag">前提</span> 今年中の受験に向けた過去問学習</strong><p>中心は、過去問の収集・解説・ヒント・演習・復習です。</p></li>
           <li><strong><span class="tag proposal">初期案</span> まずは自分用、選択式の問題から</strong><p>スマホとPCで使える画面にします。現在はAndroid Chromeなどで利用。Googleログインで学習記録を同期する仕組みを追加しました。</p></li>
         </ul>
-        <div class="takeaway"><p class="takeaway-label">2026/10/7 · 画面の更新</p><p><strong>3つの入口 → 単語帳・分野 → 残日数と今日の分野。</strong></p><p>「学習」「分野」「記録」の3つから移動します。分野別のグラフで確認し、そのまま問題を始められます。計画は概要を先に読み、編集やAI用JSONは必要なときに開きます。</p><p><a href="action-first-design.html#home">画面の見本と実装状況を見る</a></p></div>
+        <div class="takeaway"><p class="takeaway-label">2026/10/9 · 分野と記録を整理</p><p><strong>3つの入口 → 単語帳・分野別・解き直し → 残日数と今日の分野。</strong></p><p>「学習」「分野」「記録」の3つから移動します。分野一覧は行を押してすぐ1問開始。同じ条件の中断があれば続きから。詳しいグラフとメモの入力は「記録」にまとめました。計画は概要を先に読み、編集やAI用JSONは必要なときに開きます。</p><p><a href="field-practice-mock.html">採用した画面の見本を見る</a></p></div>
         <details><summary>画面の表示方針</summary><div><p>ブランド名「ひと問」とホームの開始カードには少し個性を残します。その他は機能名・操作・学習記録を中心に表示し、キャッチコピーや英語の装飾ラベルを省きます。学習日や達成の詳細は、必要なときに開けます。</p></div></details><details><summary>開発中の変更方針を読む</summary><div><p>仕様・画面・データ構造は大きく変更できます。後方互換性や、旧仕様のデータを移す処理は必須にしません。</p><p>通常の利用中は履歴を残しますが、開発中の仕様変更をまたぐデータ互換性は保証しない方針です。</p></div></details>
       </section>
       <section class="chapter" id="flow" tabindex="-1" data-title="使う流れ" aria-labelledby="flow-title">
@@ -119,7 +119,7 @@
         <div class="takeaway"><p class="takeaway-label">進捗の伝え方</p><p><strong>「別の日に自力正解：2回」のように、確認できた事実を示します。</strong><br>同じ日の繰り返しや、別の問題での結果は分けて見ます。</p></div>
         <details><summary>保存する項目を詳しく見る</summary><div><ul><li><strong>問題：</strong>出典、年度、問題番号、図表、正答、ヒント、解説、分野、関連問題。</li><li><strong>解いた記録：</strong>日時、選んだ回答、正誤、回答前のヒント段階と閲覧履歴、答えを見た時点、任意の自信。</li><li><strong>途中の状態：</strong>選択中の回答、開いたヒント、問題内の位置。</li><li><strong>復習：</strong>前回の結果、次の候補日、延期、別の日の自力正解。</li></ul><p>解き直しは新しい記録として追加し、前の履歴を上書きしません。「自力」はアプリ内での操作についての意味です。</p><p>教科書メモ・文字サイズは端末ごと。クラウド同期が失敗しても、学習と端末内保存を続けられます。<a href="firebase-setup.md">最後のFirebase設定と試し方</a>。通常のGoogleログインは利用者が成功を確認済みです。前回の計画・診断用Rulesは利用者が公開・同期済み表示を確認済み。今回の計画の前提と診断の出題情報に対応した最新版Rulesも、2026-10-07に利用者が公開を報告済みです。本番の前提の同期と別端末復元は未確認です。</p><p>診断名や服薬などの医療情報は収集しません。</p></div></details>
         <details><summary>データの保存先について読む</summary><div><p><span class="tag proposal">初期案</span> ログインなしでも、使っている端末へ資格別に保存します。書き出し・読み込み・削除を用意します。</p><p>ブラウザのデータ削除や端末の紛失で記録が失われることがあります。別タブで同時に解いた結果も保持します。Googleログインすると回答・ヒント・中断状態を同期します。元の端末内記録は選んで取り込めます。</p><p>保存に失敗したときは画面に表示します。書き出しと読み込みは同じ仕様での利用を対象にします。現在の既存記録も保持し、教材を更新しても過去の回答を採点し直しません。<a href="architecture-plan.html">共通化と同期の進み具合を見る</a>。</p></div></details>
-        <details><summary>分野グラフの読み方</summary><div><p><strong>普段の学習：</strong>直近28日の同じ問題の最後の完了記録を数えます。自力正解、ヒント付き正解、不正解、解答閲覧を色と文字で表示。率だけでなく「2 / 5問」のように件数も添えます。</p><p><strong>診断：</strong>最新の終了した診断1回を別表示。回答した問題だけを分母にし、未回答は不正解にしません。</p><p>0問は「未確認」、10問未満は「記録少なめ」。苦手や合格を断定しません。AI出力の全試行の率と、計画の取り組み回数は別の集計です。</p></div></details>
+        <details><summary>分野グラフ・メモ・解き直し</summary><div><p><strong>記録の先頭：</strong>自力正答率、直近28日、パーセント、取り組んだ問題数と自力正解数だけを表示。ヒント付き正解を正解数に足しません。</p><p><strong>教科書メモ：</strong>記録の入力欄に直接記入。空なら「メモを書く」。分野一覧はメモがある分野だけ下段に表示します。過去に解いた時点のメモは残ります。</p><p><strong>解き直し：</strong>ホームから全分野、記録の各分野からその分野だけ。「もう1問」でも選んだ範囲を維持します。過去の回答・解説は記録の「回答履歴」から開けます。</p><p><strong>普段の学習：</strong>直近28日の同じ問題の最後の完了記録を数えます。自力正解、ヒント付き正解、不正解、解答閲覧を色と文字で表示。率だけでなく「2 / 5問」のように件数も添えます。</p><p><strong>診断：</strong>最新の終了した診断1回を別表示。回答した問題だけを分母にし、未回答は不正解にしません。</p><p>0問は「未確認」、10問未満は「記録少なめ」。苦手や合格を断定しません。AI出力の全試行の率と、計画の取り組み回数は別の集計です。</p></div></details>
       </section>
       <section class="chapter" id="review" tabindex="-1" data-title="解き直し" aria-labelledby="review-title">
         <p class="chapter-number">05 / 解き直し</p><h2 id="review-title">日をあけて、もう一度。</h2>

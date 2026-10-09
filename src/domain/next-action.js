@@ -9,3 +9,17 @@ export function chooseNextAction({qualification,questions,attempts,reviewInfo,av
  if(!pool.length)return {...result,reasonCode:'no_content',reason:paperless?(online?'紙・ペンなしで選べる問題がありません。すべてに切り替えるか、単語帳を使えます。':'紙・ペンなしで選べる保存済みの問題がありません。すべてに切り替えるか、保存済みの単語帳を使えます。'):online?'この資格には利用できる問題がありません。':'保存済みの問題がありません。'};
  return result;
 }
+
+// A field entrance resumes only an explicitly scoped ordinary field session.
+// A question in this field, started elsewhere, must not carry a broader scope in.
+export function chooseFieldAction(options){
+ const {topicId,examPartId=null,paperMode='all'}=options;
+ return chooseNextAction({...options,scope:{topicId,examPartId},intent:'topic',
+  resumeAllowed:a=>{
+   const saved=a.practiceScope;
+   return saved?.intent==='topic'&&saved.topicId===topicId
+    &&!(saved.topicIds?.length)&&!(saved.examPartIds?.length)
+    &&(saved.examPartId||null)===examPartId
+    &&(a.entryMode||saved.paperMode||'all')===paperMode;
+  }});
+}

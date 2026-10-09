@@ -2,7 +2,7 @@ from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json,os,shutil,tempfile,time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-from browser_storage import state as stored_state, write_state
+from browser_storage import state as stored_state, write_state, open_answer_history
 ROOT=Path(tempfile.mkdtemp(prefix='ap-study-e2e-'))
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 KEY='ap-study-mock.v1'
@@ -47,7 +47,7 @@ with sync_playwright() as p:
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=enriched]').check()
   assert page.locator('.catalog-count').inner_text().startswith('80問'),exam
  nav('topics');assert page.locator('.topic-card').count()==17
- security=page.locator('.topic-card').filter(has=page.get_by_role('heading',name='セキュリティ',exact=True));security.locator('summary').click();security.locator('input').fill('第4章 p.120 <script>alert(1)</script>');security.locator('[data-action=topic-session]').click()
+ nav('history');page.locator('#record-field-security input').fill('第4章 p.120 <script>alert(1)</script>');state();nav('topics');security=page.locator('#field-security');security.locator('[data-action=field-practice]').click()
  scoped=[]
  for i in range(3):
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);scoped.append(a['questionId']);assert by_id[a['questionId']]['topic']=='セキュリティ'
@@ -94,7 +94,7 @@ with sync_playwright() as p:
     assert hint['text'] in page.locator('#hints').inner_text()
     if stage==0:
      page.get_by_role('radio').nth(q['answer']).check();page.get_by_role('button',name='中断',exact=True).click()
-     nav('history');page.locator(f'[data-action=resume][data-id="{state()["attempts"][-1]["id"]}"]').click();state();page.reload();page.locator('.hint-box').wait_for()
+     nav('history');open_answer_history(page);page.locator(f'[data-action=resume][data-id="{state()["attempts"][-1]["id"]}"]').click();state();page.reload();page.locator('.hint-box').wait_for()
      assert page.get_by_role('radio').nth(q['answer']).is_checked() and page.locator('.hint-box').count()==1
    answer();a=next(a for a in state()['attempts'] if a['id']==state()['currentId'])
    expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'
@@ -160,7 +160,7 @@ with sync_playwright() as p:
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);page.locator(f'[data-action=edit][data-id={pending_id}]').click()
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
  # An old attempt keeps its original material after personal editing.
- nav('history');old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click()
+ nav('history');open_answer_history(page);old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click()
  assert old['materialSnapshot']['hints']==pending_fixture['hints'];assert '教科書 p.60 を確認' not in page.locator('.result').inner_text()
  assert ('個別の解答解説は未追加' in page.locator('.result').inner_text())==(pending_fixture['enrichment']=='topic-guide')
  open_q(pending_id);page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0

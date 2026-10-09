@@ -26,6 +26,10 @@ export function learningFields({qualification,attempts,questions=[],plan=null,at
  return {mode:'learning',days,timeZone:zone,asOf:today,examPartId,definition:'latestCompletedPerQuestion',rows};
 }
 const category=r=>!r.total?2:r.smallSample?1:0;
+export function summarizeFields(data){
+ const counts=data.rows.reduce((sum,row)=>({total:sum.total+row.total,correct:sum.correct+row.correct}),{total:0,correct:0});
+ return {...counts,rate:counts.total?counts.correct/counts.total:null};
+}
 export function diagnosticFields(result,qualification){
  return {mode:'diagnostic',result,rows:qualification.topics.map(t=>{
   const r=result?.topics.find(r=>r.topicId===t.id),total=r?.answered||0,correct=r?.correct||0;

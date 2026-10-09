@@ -4,7 +4,7 @@ import os
 import shutil
 import time
 from playwright.sync_api import sync_playwright
-from browser_storage import wait_for_async
+from browser_storage import open_answer_history, wait_for_async
 
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')+'?firebase-emulator=1'
 READ='''async()=>{
@@ -67,7 +67,7 @@ with sync_playwright() as p:
     print('PASS two browsers / selected choice and hint checkpoint / concurrent continuation keeps both answers',flush=True)
     # Post-answer hints on a downloaded completed attempt merge without another grade.
     second.locator('.sidebar [data-view=history]').click();correct=[a for a in history if a['status']=='assisted'][0]
-    second.locator('[data-action=resume][data-id="'+correct['id']+'"]').click();second.locator('[data-action=hint]').click();synced(second);synced(first)
+    open_answer_history(second);second.locator('[data-action=resume][data-id="'+correct['id']+'"]').click();second.locator('[data-action=hint]').click();synced(second);synced(first)
     wait_for_async(first,'async()=>(await ('+READ+')()).state.attempts.some(a=>a.id==='+json.dumps(correct['id'])+'&&a.hintCount===2)',timeout=30000)
     history=state(first)['state']['attempts'];assert len([a for a in history if a['completedAt']])==2
     assert next(a for a in history if a['id']==correct['id'])['hintCount']==2

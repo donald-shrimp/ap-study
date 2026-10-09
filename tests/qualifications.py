@@ -10,7 +10,7 @@ import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
-from browser_storage import wait_for_async
+from browser_storage import wait_for_async, open_answer_history
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('builder', ROOT/'tools/build-content.py')
@@ -53,8 +53,8 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.locator('.brand').click();assert page.get_by_role('heading',name='資格を選ぶ').is_visible()
             page.get_by_role('link',name='fixture-a · 1問').click();page.locator('.quick-start').wait_for()
             assert not any('/packs/' in r for r in requests)
-            page.locator('.sidebar [data-view=topics]').click();page.locator('.reading-note summary').click();page.locator('[data-reading-topic]').fill('第1章')
-            page.locator('[data-action=topic-session]').click();page.get_by_role('radio').last.wait_for()
+            page.locator('.sidebar [data-view=history]').click();page.locator('[data-reading-topic]').fill('第1章');page.locator('.sidebar [data-view=topics]').click()
+            page.locator('[data-action=field-practice]').click();page.get_by_role('radio').last.wait_for()
             assert page.get_by_role('radio').count()==2
             assert any('/fixture-a/packs/' in r for r in requests) and not any('/fixture-b/packs/' in r for r in requests)
             page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
@@ -74,14 +74,14 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             # against its snapshot and remains readable after removal from the catalog.
             old['stem']='2＋2は幾つですか。';old['version']=2;old['correctChoiceId']='c0';old['summary']='2＋2＝4'
             cfg_path=root/'content/fixture-a/qualification.json';cfg=json.loads(cfg_path.read_text());cfg['topics'][0]['name']='改名した基礎';cfg_path.write_text(json.dumps(cfg))
-            path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();page.locator('[data-action=resume]').click()
+            path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();open_answer_history(page);page.locator('[data-action=resume]').click()
             assert '2＋3' in page.locator('.question-stem').inner_text() and '正解：2' in ''.join(page.locator('.answer-selection').inner_text().split())
-            page.locator('.sidebar [data-view=topics]').click();page.locator('.reading-note summary').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
+            page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
             action_nav(page,'materials');page.locator('[data-action=edit][data-id="same-question"]').click();page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
             page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));builder.build(root)
             page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-action=start]').count()==0
-            page.locator('[data-action=resume]').click();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
+            open_answer_history(page);page.locator('[data-action=resume]').click();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
             page.locator('[data-action=next]').click();page.get_by_role('radio').last.wait_for();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('#result-heading').inner_text()=='自力で正解'
             assert code_before=={str(f.relative_to(root)):hashlib.sha256(f.read_bytes()).hexdigest() for f in root.rglob('*.js')}
             page.evaluate('document.documentElement.style.zoom="200%"');assert page.locator('.study-back-button').bounding_box()['height']>=44

@@ -102,3 +102,21 @@
 .question-figure .source-image-button{display:inline-block;width:auto;max-width:100%}
 .image-zoom-cue{position:absolute;right:6px;bottom:6px;display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(20,45,78,.15);border-radius:50%;background:rgba(255,255,255,.78);color:rgba(20,45,78,.72);pointer-events:none}
 .image-zoom-target:hover .image-zoom-cue,.image-zoom-target:focus-visible .image-zoom-cue{background:rgba(255,255,255,.95);color:var(--navy)}
+
+/* Choose a field to practise; detailed records and editable notes live in Records. */
+.field-list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.field-list .topic-card{padding:0;margin:0;min-width:0;border-radius:0;border-bottom:1px solid var(--line)}.field-list .topic-card:last-child{border-bottom:0}
+.field-start{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;width:100%;min-height:86px;border:0;background:#fff;color:var(--text);text-align:left;padding:14px 16px}
+.field-start:hover:not(:disabled){background:#f1f8f7}.field-start:disabled{opacity:1;cursor:default;background:#f8fafc}.field-start:disabled .field-direction{color:#8a96a5}
+.field-copy{display:block;min-width:0}.field-title{display:block;font-size:.95rem;line-height:1.45}.field-measure{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:.8rem}
+.field-start .field-score{font-size:inherit;margin:0;font-weight:400}.field-mini-bar{display:block;width:92px;height:5px;border-radius:4px;overflow:hidden;background:#e1e7ef}.field-mini-bar>span{display:block;height:100%;background:var(--accent)}
+.field-measure>.small{font-size:.7rem}.field-focus-tag{display:inline-block;margin-top:5px;padding:1px 5px;background:var(--pale);color:#14605b;border-radius:4px;font-size:.7rem}
+.field-note{display:block;color:var(--muted);font-size:.75rem;line-height:1.5;overflow-wrap:anywhere;margin-top:8px}.field-direction{display:flex;align-items:center;gap:6px;color:var(--accent)}.field-resume-label{font-size:.75rem;white-space:nowrap;font-weight:650}.field-arrow{display:grid;place-items:center;width:28px;height:28px;font-size:1.5rem;line-height:1}
+.field-unavailable{display:block;margin-top:8px}.field-scope{font-size:.75rem;margin:12px 0}.field-links{justify-content:space-between;margin-top:14px}.field-links .button{font-size:.8rem;padding:9px 4px}
+.overall-accuracy.panel{background:var(--navy);color:#fff;padding:20px}.overall-accuracy h2{font-size:.95rem;margin:0}.overall-accuracy h2 span{font-size:.75rem;font-weight:400;letter-spacing:0}.overall-rate{font-size:2.7rem;font-weight:750;line-height:1.2;margin:8px 0}.overall-rate small{font-size:1.2rem;margin-left:3px}.overall-count{font-size:.95rem;margin:0}
+.field-record-heading{font-size:1.05rem;margin:20px 0 8px}.field-records{padding:6px 18px}.field-record{padding:18px 0;border-bottom:1px solid var(--line)}.field-record:last-child{border-bottom:0}.field-record .heading-row{gap:10px}.field-record h3{margin:0;font-size:1rem;text-wrap:initial}.field-record .heading-row .button{flex-shrink:0;font-size:.8rem;padding:8px 4px}.field-record .field-score{font-size:.875rem;margin:8px 0}.field-record .field-empty{margin:8px 0}.field-record .field-breakdown{font-size:.75rem;margin:8px 0 12px}
+.field-note-input{display:block;width:100%;min-width:0;min-height:44px;padding:9px 12px;border:1px solid #dfe6ee;border-radius:8px;background:#f8fafc;color:var(--text);font-size:1rem;line-height:1.5}.field-note-input::placeholder{color:#7a8798}.field-note-input:focus{background:#fff;border-color:var(--accent)}
+.field-review{font-size:.8rem;margin-top:6px}.answer-history>summary{font-weight:650;min-height:44px;padding:10px 0}.answer-history{margin:18px 0}
+.content .study-mode{margin-top:0}.content .study-mode .button{flex:1;min-width:0;padding:9px 4px;font-size:.85rem}
+@media(max-width:480px){.field-tabs{display:flex;flex-wrap:nowrap;gap:8px}.field-tabs .button{width:auto;flex:1;font-size:.8rem;padding:9px 6px}.field-records{padding:6px 16px}.field-record .heading-row{flex-wrap:wrap}.home-shortcuts>.button-row>.button{font-size:.8rem;padding:9px 4px}}
+@media(min-width:650px){.field-start{padding:16px 20px}.field-mini-bar{width:150px}}

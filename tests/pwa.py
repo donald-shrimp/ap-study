@@ -9,7 +9,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import state as stored_state, READ_STATE,wait_for_async
+from browser_storage import state as stored_state, READ_STATE,wait_for_async,open_answer_history
 ROOT=Path(__file__).resolve().parents[1]
 RELEASE=(ROOT/'sw.js').read_text().split("const RELEASE = '",1)[1].split("'",1)[0]
 NEXT_RELEASE=RELEASE+'-test2'
@@ -78,7 +78,7 @@ with sync_playwright() as p:
  ctx.set_offline(True);page.wait_for_function('!navigator.onLine');page.reload();page.locator('.hint-box').wait_for()
  assert state()['currentId']==attempt and page.get_by_role('radio').nth(3).is_checked() and state()['attempts'][-1]['hintCount']==1
  page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.locator('#offline-status').is_visible()
- page.get_by_role('button',name='中断',exact=True).click();nav('history');page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
+ page.get_by_role('button',name='中断',exact=True).click();nav('history');open_answer_history(page);page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
  # Navigating during the debounced scroll save must preserve the study position.
  page.evaluate('window.scrollTo(0,400)')
@@ -94,7 +94,7 @@ with sync_playwright() as p:
    changed['attempts']=[{key:[old.get(key),new.get(key)] for key in old if old.get(key)!=new.get(key)} for old,new in zip(before['attempts'],after['attempts'])]
   raise AssertionError(f'Offline guard changed record: {changed}')
  assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
- nav('home');nav('history');page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
+ nav('home');nav('history');open_answer_history(page);page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
  answer=next(a for a in state()['attempts'] if a['id']==attempt)['questionSnapshot']['answer'];page.get_by_role('radio').nth(answer).check();page.get_by_role('button',name='回答する',exact=True).click();page.get_by_role('button',name='ホーム',exact=True).click()
  page.locator('.hero-start .primary[data-action=entry-start]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0

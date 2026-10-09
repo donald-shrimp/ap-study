@@ -1,0 +1,89 @@
+{
+  "format": "hitomon-field-records-verification",
+  "version": 1,
+  "checkedAt": "2026-10-09T00:51:08.831663+00:00",
+  "baselineCommit": "18d0430709ed902f370ab03106e3d18f4bcd25bd",
+  "release": "20261009-field-records1",
+  "preservation": {
+    "paths": [
+      "content",
+      "data",
+      "assets",
+      "schemas",
+      "src/storage",
+      "src/sync",
+      "src/features",
+      "src/domain/study.js",
+      "src/domain/planning.js",
+      "src/domain/review.js",
+      "src/domain/practice.js",
+      "src/domain/diagnostic.js",
+      "firestore.rules",
+      "manifest.webmanifest",
+      "pwa.js"
+    ],
+    "filesChecked": 1051,
+    "changes": [],
+    "fileListSha256": "0d23a7d85edadbb906136a1baab2860fd20c6edcd718df6ebc00f40070da0843",
+    "counts": {
+      "normalQuestions": 800,
+      "individualLessons": 800,
+      "flashcards": 681,
+      "publishedDiagnosticQuestions": 180
+    }
+  },
+  "localTests": {
+    "nodeCommand": "node --test tests/*.mjs",
+    "passed": 76,
+    "includesFirestoreRulesTests": 8,
+    "browserAndContentSuites": [
+      "field-navigation",
+      "e2e",
+      "action-flow",
+      "qualifications",
+      "selection-flow",
+      "pwa",
+      "diagnostic-ap",
+      "home-entries",
+      "mobile-study",
+      "content",
+      "corpus",
+      "sync",
+      "planning-sync",
+      "mobile-account"
+    ],
+    "logSha256": {
+      "field-navigation": "9eb338f9d361c84cf873f61401b62b77e30545e8cc63fd370d2b82df87d37a33",
+      "e2e": "595901c984b68658bfa82b051ee9ed4aee29798a7e4c454a2ea5c6942be0502e",
+      "action-flow": "ca7406f8450e9fe8321c719579ade887806384ca6f0d63e845971ea6768bee48",
+      "qualifications": "ab7e5f14dc66db2a9d49eefe15639c845a0b883c6ccfbc44387182b2d3038793",
+      "selection-flow": "20f86a243712d0ebc723342a3500b6e9c4223d88ee6a8245a5d0c99d2acfa1b3",
+      "pwa": "612fde4bdbce1813b96ef4d67fdbc01d0d378692392f6769351da412b9a423dc",
+      "diagnostic-ap": "4ea0b844959092af4a0809b352a101643dc7ff3c1b1cd40425d4f50cc7edd49d",
+      "home-entries": "e4b1a6d8a692358676a9a09b5409ded408ea0edff632bb9044c82e32def9bf78",
+      "mobile-study": "24e7113b0dad378165e24c185fb37b048d4c01dd1abf4d4be753678de23930d1",
+      "content": "76eb5a5fd40a69de1e0f12a456631ac59a566acabe6d86b694965f60c7bad02f",
+      "corpus": "e02e469529098b51f9317ddbb74504aeecd9cf7f72f99d25c68c296af85d34a2",
+      "sync": "8c38333442187d1f79737f3aaede04d1f87fc526794cf59bcff793083f20a61c",
+      "planning-sync": "5ae15c40c6fdb923d9ca0fe01027affabb25a3881463daa0c7e47469e98ef532",
+      "mobile-account": "1936b3c73a54e8ef0c31734c87b96e34b2eec2f44932e957c191b8bc97e65ad4"
+    }
+  },
+  "accountVerification": {
+    "emulator": "Firebase Auth/Firestore, demo-hitomon",
+    "productionGoogleAccountUsed": false
+  },
+  "storageAndRulesChanges": false,
+  "checks": [
+    "Home keeps three one-question entrances; review joins field and flashcard shortcuts",
+    "Field rows keep qualification topic order and display nonempty notes only",
+    "Field-owned resume matches qualification, field, part, entrance and availability",
+    "Latest completed unique questions only: four fixture questions, one self correct => 25%",
+    "Assisted, diagnostic, pending and future answers cannot increase self-correct numerator",
+    "Existing ID-keyed notes survive rename; attempt snapshot note stays immutable",
+    "Inline note text, cursor and focus survive background repaint; HTML escaped",
+    "Scoped review remains limited to field and part; completed candidate does not fall through to other fields",
+    "320px, 390px, 1280px and 200% text no horizontal overflow",
+    "Offline reload, service-worker upgrade, two-browser/account synchronization retained"
+  ]
+}
