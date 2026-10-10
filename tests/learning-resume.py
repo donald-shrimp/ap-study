@@ -1,0 +1,25 @@
+"""Regression cases identified by the separate implementation reviewer."""
+from pathlib import Path
+import json,time,shutil
+from playwright.sync_api import sync_playwright
+from browser_storage import nav,wait_for_async
+ROOT=Path(__file__).resolve().parents[1]
+exec(compile((ROOT/'tests/sync.py').read_text().split('with sync_playwright() as p:')[0],str(ROOT/'tests/sync.py'),'exec'))
+with sync_playwright() as p:
+ b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);ctx=b.new_context(service_workers='block');pg=ctx.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)))
+ # Hold only the new channel. Attempts and plans remain ordinary real SDK calls.
+ source=(ROOT/'src/sync/firebase.js').read_text().replace('pullLearning(uid,qualificationId,cursor){', 'async pullLearning(uid,qualificationId,cursor){if(window.__holdLearning){window.__learningWaiting=true;await new Promise(resolve=>window.__releaseLearning=resolve);}')
+ pg.route('**/src/sync/firebase.js',lambda route:route.fulfill(status=200,content_type='text/javascript',body=source))
+ pg.goto(URL);pg.locator('.study-entrance').first.wait_for()
+ # A guest with no answer may have personal question settings. Do not adopt implicitly.
+ pg.evaluate("""async()=>{const {createLocalStore}=await import('/src/storage/local.js'),{makeState}=await import('/src/domain/study.js');const s=createLocalStore({qualificationId:'ap',rootPath:'/'});try{await s.read();const state=makeState();state.settings.deskQuestionIds=['r07h-q1'];await s.write(state,{learningOperations:[{id:'desk--r07h-q1',kind:'desk',payload:{questionId:'r07h-q1',value:true},expectedLocalRevision:0}]});}finally{await s.close();}}""")
+ pg.reload();pg.locator('.study-entrance').first.wait_for();pg.wait_for_function('!document.getElementById("google-login").disabled');assert state(pg)['state']['settings']['deskQuestionIds']==['r07h-q1']
+ email=f'resume-{time.time_ns()}@example.test';login(pg,email);assert not state(pg)['state']['settings']['deskQuestionIds'];settings(pg);pg.once('dialog',lambda d:d.accept());pg.locator('#import-guest').click();pg.wait_for_function('!document.getElementById("import-guest").disabled');synced(pg);assert state(pg)['state']['settings']['deskQuestionIds']==['r07h-q1'];assert not state(pg)['state']['attempts']
+ print('PASS zero-answer guest settings require explicit adoption',flush=True)
+ pg.locator('.study-entrance[data-paper-mode=all]').click();pg.get_by_role('button',name='回答する',exact=True).wait_for();aid=state(pg)['state']['currentId'];pg.locator('[data-action=pause]').click();synced(pg)
+ pg.evaluate('window.__holdLearning=true');pg.locator('.study-entrance[data-action=entry-resume][data-paper-mode=all]').click();pg.wait_for_function('window.__learningWaiting===true');nav(pg,'topics');pg.evaluate('window.__holdLearning=false;window.__releaseLearning()');pg.wait_for_timeout(400);assert state(pg)['state']['view']=='topics';assert not pg.locator('[data-action=submit]').count()
+ print('PASS metadata wait cannot hijack navigation',flush=True)
+ # An unknown exam part in cloud metadata must never corrupt ordinary history.
+ result=pg.evaluate("""async id=>{const sdk=await import('/assets/vendor/firebase.js'),{createLocalStore}=await import('/src/storage/local.js'),{contextPayload,learningId}=await import('/src/domain/learning-state.js');const s=createLocalStore({qualificationId:'ap',rootPath:'/',owner:'uid:'+sdk.getAuth().currentUser.uid});try{const state=JSON.parse(await s.read()),a=state.attempts.find(a=>a.id===id),p=contextPayload(a),rows=await s.learningStore().read(),old=rows.find(r=>r.id===learningId('context',p));p.scope.examPartId='removed-part';await s.learningStore().merge({id:learningId('context',p),kind:'context',payload:p,version:1,revision:(old.remoteRevision||0)+100,deviceId:'unknown-source',operationId:'unknown-scope'});return true;}finally{await s.close();}}""",aid);assert result
+ pg.reload();pg.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("google-logout").disabled');pg.wait_for_function('!document.getElementById("main").inert');assert pg.locator('#save-state').inner_text()!='保存できていません';assert state(pg)['state']['attempts'][0]['id']==aid;assert state(pg)['state']['attempts'][0]['practiceScope']['examPartId']!='removed-part';assert not errors,errors
+ print('PASS unknown part metadata ignored; reload preserves ordinary record',flush=True);b.close()

@@ -29,15 +29,15 @@ export function createFirebaseClient(){
   observe:callback=>sdk.onAuthStateChanged(auth,callback),
   login:()=>sdk.signInWithPopup(auth,new sdk.GoogleAuthProvider()),
   logout:()=>sdk.signOut(auth),
-  async pullDocuments(uid,qualificationId,cursor){
-   authorize(uid);const ref=sdk.collection(db,'users',uid,'qualifications',qualificationId,'resources'),constraints=[sdk.orderBy('updatedAt'),sdk.orderBy('__name__'),sdk.limit(25)];
+  async pullDocuments(uid,qualificationId,cursor,collectionName='resources'){
+   authorize(uid);const ref=sdk.collection(db,'users',uid,'qualifications',qualificationId,collectionName),constraints=[sdk.orderBy('updatedAt'),sdk.orderBy('__name__'),sdk.limit(25)];
    if(cursor)constraints.splice(2,0,sdk.startAfter(new sdk.Timestamp(cursor.seconds,cursor.nanoseconds),cursor.id));
    const page=await sdk.getDocsFromServer(sdk.query(ref,...constraints));authorize(uid);
    const rows=page.docs.map(d=>({id:d.id,...d.data()})),last=page.docs.at(-1);
    return {rows,cursor:last?{seconds:last.data().updatedAt.seconds,nanoseconds:last.data().updatedAt.nanoseconds,id:last.id}:cursor,more:rows.length===25};
   },
-  async pushDocument(uid,qualificationId,item){
-   authorize(uid);const ref=sdk.doc(db,'users',uid,'qualifications',qualificationId,'resources',item.id);
+  async pushDocument(uid,qualificationId,item,collectionName='resources'){
+   authorize(uid);const ref=sdk.doc(db,'users',uid,'qualifications',qualificationId,collectionName,item.id);
    try{return await sdk.runTransaction(db,async tx=>{
     authorize(uid);const existing=await tx.get(ref),old=existing.exists()?{id:existing.id,...existing.data()}:null;
     if(old?.operationId===item.operationId)return {remote:old};
@@ -51,6 +51,8 @@ export function createFirebaseClient(){
     return recoverResourceWrite(error,item,async()=>{const current=await sdk.getDocFromServer(ref);return current.exists()?{id:current.id,...current.data()}:null;},()=>authorize(uid));
    }
   },
+  pullLearning(uid,qualificationId,cursor){return this.pullDocuments(uid,qualificationId,cursor,'learning');},
+  pushLearning(uid,qualificationId,item){return this.pushDocument(uid,qualificationId,item,'learning');},
   async pull(uid,qualificationId,cursor){
    authorize(uid);const constraints=[sdk.orderBy('updatedAt'),sdk.orderBy('__name__'),sdk.limit(100)];
    if(cursor)constraints.splice(2,0,sdk.startAfter(new sdk.Timestamp(cursor.seconds,cursor.nanoseconds),cursor.id));

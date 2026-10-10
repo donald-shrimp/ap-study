@@ -1,3 +1,4 @@
+import {validateLearning,learningId,contextPayload} from '../domain/learning-state.js';
 import {makeState, complete} from '../domain/study.js';
 
 const request = operation => new Promise((resolve,reject)=>{
@@ -14,7 +15,8 @@ const transport = a => {const {scrollY,readingNote,entryMode,practiceScope,defer
 const changedResult = (before,after) => ['status','selected','selectedChoiceId','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));
 
 // Records and their durable outgoing item commit together. Navigation, scroll,
-// settings and personal material stay local. A guest queue never targets a UID.
+// display settings and personal material stay local. Mutable learning metadata
+// uses its own outbox in meta. A guest queue never targets a UID.
 export function createLocalStore({qualificationId,rootPath='/',key,validate,owner:requestedOwner}={}) {
  if(!qualificationId)throw new Error('保存する資格が指定されていません。');
  const databaseName=`hitomon:${rootPath}:records`;
@@ -48,7 +50,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
   if(remember){baseline=new Map(rows.map(r=>[r.id,{data:serial(r.data),revision:r.revision}]));baselineShared=structuredClone(shared(state));seenGeneration=common.generation;}
   return serial(state);
  }
- async function commit(input,{replace=false,ifAbsent=false}={}){
+ async function commit(input,{replace=false,ifAbsent=false,learningOperations=[]}={}){
   const db=await database(),state=structuredClone(input);
   if(!replace){
    const present=new Set(state.attempts.map(a=>a.id)),queuedRemaps=new Map([...remaps].filter(([,after])=>!present.has(after)));
@@ -76,8 +78,8 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
      const original=a.id;a.id=crypto.randomUUID();a.continuationOf=original;a.continuedAt=new Date().toISOString();mapping[original]=a.id;
      if(state.currentId===original)state.currentId=a.id;state.session.attemptIds=state.session.attemptIds.map(id=>id===original?a.id:id);
     }
-    const old=existing.get(a.id),revision=(old?.revision||0)+1;
-    const originDevice=old&&complete(old.data)&&complete(a)&&!changedResult(old.data,a)?old.deviceId:deviceId;
+    const old=existing.get(a.id),metadataOnly=old&&serial(transport(old.data))===serial(transport(a)),revision=metadataOnly?old.revision:(old?.revision||0)+1;
+    const originDevice=metadataOnly||old&&complete(old.data)&&complete(a)&&!changedResult(old.data,a)?old.deviceId:deviceId;
     const row={owner,qualificationId,id:a.id,deviceId:originDevice,revision,data:a};attempts.put(row);existing.set(a.id,row);
     const payload=transport(a),semantic=serial(payload);
     if(replace||!old||serial(transport(old.data))!==semantic){
@@ -91,10 +93,20 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
    else for(const field of sharedFields){
     const next={...nextShared[field]};for(const item of new Set([...Object.keys(baselineShared[field]),...Object.keys(state[field])]))if(serial(baselineShared[field][item])!==serial(state[field][item])){if(Object.hasOwn(state[field],item))next[item]=state[field][item];else delete next[item];}nextShared={...nextShared,[field]:next};
    }
+   const learningChanges=[];
+   if(replace){const keys=await request(meta.getAllKeys(learningRange()));for(const key of keys)meta.delete(key);}
+   for(const [before,after] of Object.entries(mapping))if(!learningOperations.some(op=>op.kind==='context'&&op.payload.attemptId===before)){
+    const payload=contextPayload(existing.get(after).data);if(payload)learningChanges.push(await putLearning(meta,{id:learningId('context',payload),kind:'context',payload,expectedLocalRevision:0}));
+   }
+   for(const original of learningOperations){
+    const op=structuredClone(original);if(replace)op.expectedLocalRevision=0;
+    if(op.kind==='context'&&mapping[op.payload.attemptId]){op.payload.attemptId=mapping[op.payload.attemptId];op.id=learningId(op.kind,op.payload);op.expectedLocalRevision=0;}
+    learningChanges.push(await putLearning(meta,op));
+   }
    const generation=(common?.generation||1)+(replace?1:0);
    meta.put({key:sharedKey(),data:nextShared,checkpoint:checkpoint(state),generation});meta.put({key:tabKey(),data:checkpoint(state)});
    await done;seenGeneration=generation;baseline=nextBaseline;if(replace)remaps.clear();for(const [before,after] of Object.entries(mapping))remaps.set(before,after);baselineShared=structuredClone(shared(state));
-   return {attempts:[...existing.values()].map(r=>r.data),remap:mapping};
+   return {attempts:[...existing.values()].map(r=>r.data),remap:mapping,learningChanges};
   }catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}
  }
  function write(state,options){
@@ -137,11 +149,43 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
     // Keep the original until the next remote page supplies its authoritative
     // version, but stop trying to publish this device's copy under its ID.
     outbox.delete(key);attempts.put({...row,id:newId,deviceId,revision:1,data});
+    const context=contextPayload(data);if(context)await putLearning(tx.objectStore('meta'),{id:learningId('context',context),kind:'context',payload:context,expectedLocalRevision:0});
     outbox.put({...item,id:newId,deviceId,revision:1,operationId:`${newId}:1`,payload:transport(data)});
     const local=await request(tx.objectStore('meta').get(tabKey()));if(local){if(local.data.currentId===id)local.data.currentId=newId;local.data.session.attemptIds=local.data.session.attemptIds.map(x=>x===id?newId:x);tx.objectStore('meta').put(local);}
     await done;baseline.set(newId,{data:serial(data),revision:1});remaps.set(id,newId);return {before:id,after:newId,data};
    }catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}
   });queue=operation;return operation;
  }
- return {read,snapshot,write,flush:()=>queue,pending,acknowledge,cursor,mergeRemote,forkPending,remoteDevice,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
+
+ const learningPrefix=()=>`${owner}|${qualificationId}|learning:`;
+ const learningKey=id=>learningPrefix()+id;
+ const learningRange=()=>IDBKeyRange.bound(learningPrefix(),learningPrefix()+'\uffff');
+ async function putLearning(meta,op){
+  const payload=validateLearning(op.kind,op.payload);if(op.id!==learningId(op.kind,payload))throw new Error('学習設定のIDが一致しません。');
+  const old=(await request(meta.get(learningKey(op.id))))?.row;
+  if(old?.kind===op.kind&&serial(old.payload)===serial(payload))return old;
+  if((old?.localRevision||0)!==op.expectedLocalRevision)throw new Error('別タブで学習設定が変更されました。開き直してもう一度指定してください。');
+  const localRevision=(old?.localRevision||0)+1;
+  const row={owner,qualificationId,id:op.id,kind:op.kind,payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId:`${deviceId}:${op.id}:${localRevision}`,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)};
+  meta.put({key:learningKey(row.id),row});return row;
+ }
+ function learningTransaction(callback){
+  const operation=queue.catch(()=>{}).then(async()=>{const db=await database(),tx=db.transaction('meta','readwrite'),done=finished(tx);
+   try{const result=await callback(tx.objectStore('meta'));await done;return result;}catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}
+  });queue=operation;return operation;
+ }
+ function learningStore(){return {
+  identity:async()=>{await database();return {owner,deviceId,qualificationId};},
+  read:async()=>{await queue.catch(()=>{});const db=await database(),tx=db.transaction('meta'),done=finished(tx),values=await request(tx.objectStore('meta').getAll(learningRange()));await done;return values.map(v=>v.row);},
+  merge:remote=>learningTransaction(async meta=>{
+   if(remote.version!==1||!Number.isInteger(remote.revision)||remote.revision<1||typeof remote.deviceId!=='string'||typeof remote.operationId!=='string'||remote.id!==learningId(remote.kind,remote.payload))throw new Error('学習設定の同期形式を確認できません。');
+   const payload=validateLearning(remote.kind,remote.payload),old=(await request(meta.get(learningKey(remote.id))))?.row;
+   if(old&&remote.revision<=old.remoteRevision)return old;
+   if(old?.dirty&&remote.deviceId===deviceId&&old.ancestors.includes(remote.operationId)){const row={...old,remoteRevision:remote.revision};meta.put({key:learningKey(remote.id),row});return row;}
+   const discarded=Boolean(old?.dirty&&old.operationId!==remote.operationId&&serial(old.payload)!==serial(payload));
+   const row={owner,qualificationId,id:remote.id,kind:remote.kind,payload,localRevision:(old?.localRevision||0)+1,remoteRevision:remote.revision,deviceId:remote.deviceId,operationId:remote.operationId,dirty:false,ancestors:[],discarded};meta.put({key:learningKey(remote.id),row});return row;
+  }),
+  acknowledge:(id,operationId,remote)=>learningTransaction(async meta=>{const old=(await request(meta.get(learningKey(id))))?.row;if(!old)return;const row={...old,remoteRevision:remote.revision};if(old.operationId===operationId)row.dirty=false;meta.put({key:learningKey(id),row});return row;}),
+ };}
+ return {learningStore,read,snapshot,write,flush:()=>queue,pending,acknowledge,cursor,mergeRemote,forkPending,remoteDevice,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
 }

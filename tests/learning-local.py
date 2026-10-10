@@ -1,0 +1,16 @@
+"""Personal classification changes and the new qualification-scoped backup."""
+from pathlib import Path
+import json,shutil
+from playwright.sync_api import sync_playwright
+from browser_storage import state as stored_state,nav,wait_for_async
+ROOT=Path(__file__).resolve().parents[1]
+with sync_playwright() as p:
+ b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);pg=b.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.goto('http://127.0.0.1:4173/');pg.locator('.study-entrance[data-paper-mode=paperless]').click();pg.get_by_role('button',name='回答する',exact=True).wait_for();pg.get_by_role('radio').first.check();pg.locator('[data-action=hint]').click();original=stored_state(pg);aid=original['currentId'];pg.locator('[data-action=desk-later]').click();pg.locator('.desk-preferences > summary').click();pg.locator('[data-action=clear-desk]').click();entrance=pg.locator('.study-entrance[data-paper-mode=all][data-action=entry-resume]');entrance.wait_for();assert entrance.get_attribute('data-id')==aid;entrance.click();pg.get_by_role('button',name='回答する',exact=True).wait_for();s=stored_state(pg);a=next(a for a in s['attempts'] if a['id']==aid);assert a['entryMode']=='all' and a['hintCount']==1 and a['selected']==0;assert '紙ペン指定が変わった' in pg.locator('#notice').inner_text();pg.reload();pg.get_by_role('button',name='回答する',exact=True).wait_for();assert stored_state(pg)['currentId']==aid
+ pg.locator('[data-action=pause]').click();pg.locator('#settings-button').click()
+ with pg.expect_download() as event:pg.locator('#export-state').click()
+ backup=json.loads(Path(event.value.path()).read_text());assert backup['learningBackup']['qualificationId']=='ap';assert any(d['kind']=='desk' and d['payload']['value'] is False for d in backup['learningBackup']['documents'])
+ before=stored_state(pg)
+ foreign=json.loads(json.dumps(backup));foreign['learningBackup']['qualificationId']='other';pg.locator('#import-state').set_input_files({'name':'foreign.json','mimeType':'application/json','buffer':json.dumps(foreign).encode()});pg.wait_for_function('document.getElementById("settings-status").textContent.includes("バックアップを確認できません")');assert stored_state(pg)==before
+ wrong=json.loads(json.dumps(backup));doc=next(d for d in wrong['learningBackup']['documents'] if d['kind']=='context');doc['payload']['scope']['topicId']='network' if a['questionSnapshot']['topicId']!='network' else 'database';pg.locator('#import-state').set_input_files({'name':'wrong.json','mimeType':'application/json','buffer':json.dumps(wrong).encode()});pg.wait_for_function('document.getElementById("settings-status").textContent.includes("再開範囲と問題が一致しません")');assert stored_state(pg)==before
+ pg.once('dialog',lambda d:d.accept());pg.locator('#import-state').set_input_files({'name':'own.json','mimeType':'application/json','buffer':json.dumps(backup).encode()});pg.wait_for_function('!document.getElementById("main").inert && !document.getElementById("import-state").disabled');assert stored_state(pg)['attempts']==before['attempts'];assert not errors,errors;b.close()
+print('PASS designation release keeps paused trial reachable / all entrance and hints preserved / reload / false release backup / foreign and wrong-scope backup rejection before replacement / own roundtrip')

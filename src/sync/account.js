@@ -10,9 +10,9 @@ export async function guestAttemptId(uid,source){
 }
 
 const messages={pending:'同期待ち',syncing:'同期中…',synced:'同期済み',offline:'オフライン · 接続後に同期します',blocked:'大きすぎる記録はこの端末に保存しています'};
-export async function initAccountControls({qualificationId,getStore,getWorkspaceStore,switchOwner,importGuest,validateAttempt,onRecords,onFork,onDocuments,onWorkspaceStatus}){
+export async function initAccountControls({qualificationId,getStore,getWorkspaceStore,getLearningStore,onLearningRows,onLearningStatus,switchOwner,importGuest,validateAttempt,onRecords,onFork,onDocuments,onWorkspaceStatus}){
  const find=id=>document.getElementById(id),login=find('google-login'),logout=find('google-logout'),refresh=find('sync-now'),adopt=find('import-guest'),status=find('sync-state');
- let client,engine,workspaceEngine,user,observedUser,transition=Promise.resolve(),generation=0,busy=false,firstObservation=true;
+ let client,engine,workspaceEngine,learningEngine,user,observedUser,transition=Promise.resolve(),generation=0,busy=false,firstObservation=true;
  const showStatus=(kind,error)=>{
   if(kind==='error')console.warn('Study sync failed',error?.code||error?.name,error?.message);
   status.textContent=messages[kind]|| (kind==='error'?(String(error?.code).includes('permission-denied')?'同期の許可がありません。Firebaseのアクセスルールを確認してください。':'同期できませんでした。記録はこの端末に残っています。'):'ログインすると、学習記録を同期できます。');
@@ -29,12 +29,12 @@ export async function initAccountControls({qualificationId,getStore,getWorkspace
   client.login().catch(failure).finally(()=>{busy=false;buttons();});
  });
  logout.addEventListener('click',async()=>{
-  if(busy)return;busy=true;buttons();try{await engine?.stop();await workspaceEngine?.stop();await client.logout();}catch(error){failure(error);}finally{busy=false;buttons();}
+  if(busy)return;busy=true;buttons();try{await engine?.stop();await workspaceEngine?.stop();await learningEngine?.stop();await client.logout();}catch(error){failure(error);}finally{busy=false;buttons();}
  });
- refresh.addEventListener('click',()=>{engine?.run();workspaceEngine?.run();});
+ refresh.addEventListener('click',()=>{engine?.run();workspaceEngine?.run();learningEngine?.run();});
  adopt.addEventListener('click',async()=>{
   if(busy||!user)return;busy=true;buttons();const uid=user.uid;
-  try{await importGuest(uid);if(user?.uid===uid){await engine?.run();await workspaceEngine?.run();}}catch(error){status.textContent=error.message;}finally{busy=false;buttons();}
+  try{await importGuest(uid);if(user?.uid===uid){await engine?.run();await workspaceEngine?.run();await learningEngine?.run();}}catch(error){status.textContent=error.message;}finally{busy=false;buttons();}
  });
  try{
   const {createFirebaseClient}=await import('./firebase.js');client=createFirebaseClient();
@@ -43,17 +43,17 @@ export async function initAccountControls({qualificationId,getStore,getWorkspace
    const restore=firstObservation;firstObservation=false;
    const token=++generation;
    transition=transition.catch(()=>{}).then(async()=>{
-    busy=true;buttons();await engine?.stop();engine=null;await workspaceEngine?.stop();workspaceEngine=null;
+    busy=true;buttons();await engine?.stop();engine=null;await workspaceEngine?.stop();workspaceEngine=null;await learningEngine?.stop();learningEngine=null;
     if(token!==generation)return;
     await switchOwner(next?`uid:${next.uid}`:null,{restore});if(token!==generation)return;
     user=next;find('account-name').textContent=user?(user.email||user.displayName||'Googleアカウント'):'ログインなしで学習できます。';buttons();
-    if(user){engine=createSyncEngine({uid:user.uid,qualificationId,store:getStore(),remote:client,validateAttempt,onRecords,onFork,onStatus:showStatus});engine.run();if(getWorkspaceStore?.()){workspaceEngine=createWorkspaceSync({uid:user.uid,qualificationId,store:getWorkspaceStore(),remote:client,onChange:onDocuments,onStatus:onWorkspaceStatus});workspaceEngine.run();}}else {showStatus('guest');onWorkspaceStatus?.('guest');}
+    if(user){engine=createSyncEngine({uid:user.uid,qualificationId,store:getStore(),remote:client,validateAttempt,onRecords,onFork,onStatus:showStatus});engine.run();if(getWorkspaceStore?.()){workspaceEngine=createWorkspaceSync({uid:user.uid,qualificationId,store:getWorkspaceStore(),remote:client,onChange:onDocuments,onStatus:onWorkspaceStatus});workspaceEngine.run();}if(getLearningStore?.()){learningEngine=createWorkspaceSync({uid:user.uid,qualificationId,store:getLearningStore(),remote:{pullDocuments:(...args)=>client.pullLearning(...args),pushDocument:(...args)=>client.pushLearning(...args)},onChange:onLearningRows,onStatus:onLearningStatus});learningEngine.run();}}else {showStatus('guest');onWorkspaceStatus?.('guest');onLearningStatus?.('guest');}
    }).catch(error=>{status.textContent='保存先を切り替えられませんでした。先に学習記録を書き出してください。';console.error('Account storage transition failed',error.name);}).finally(()=>{busy=false;buttons();});
   });
  }catch(error){status.textContent='ログイン機能を読み込めませんでした。端末内で学習を続けられます。';login.disabled=true;}
- window.addEventListener('online',()=>{engine?.run();workspaceEngine?.run();});
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){engine?.refresh();workspaceEngine?.refresh();}});
- const interval=setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine){engine?.refresh();workspaceEngine?.refresh();}},60000);
+ window.addEventListener('online',()=>{engine?.run();workspaceEngine?.run();learningEngine?.run();});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){engine?.refresh();workspaceEngine?.refresh();learningEngine?.refresh();}});
+ const interval=setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine){engine?.refresh();workspaceEngine?.refresh();learningEngine?.refresh();}},60000);
  window.addEventListener('pagehide',()=>clearInterval(interval),{once:true});
- return {changed:()=>engine?.schedule(),workspaceChanged:()=>workspaceEngine?.schedule(),owner:()=>user?`uid:${user.uid}`:null};
+ return {learningChanged:()=>learningEngine?.schedule(),prepareLearning:async()=>{await learningEngine?.run();if(learningEngine)await onLearningRows(await getLearningStore().read());},changed:()=>engine?.schedule(),workspaceChanged:()=>workspaceEngine?.schedule(),owner:()=>user?`uid:${user.uid}`:null};
 }

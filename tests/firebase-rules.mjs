@@ -84,3 +84,24 @@ test('診断専用問題は通常の試行コレクションへ書き込めな�
  a.questionSnapshot.diagnosticOnly=true;a.questionSnapshot.parentQuestionId='parent';
  await assertFails(setDoc(doc(db,path('no-derived-attempt',a.id)),envelope(a)));
 });
+
+const learningPath=(uid,id)=>`users/${uid}/qualifications/ap/learning/${id}`;
+test('紙ペンと先送りは本人だけ保存・解除でき、旧版と削除を拒否する',async()=>{
+ const db=env.authenticatedContext('preferences').firestore(),ref=doc(db,learningPath('preferences','desk--q'));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('desk',{questionId:'q',value:true})));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('desk',{questionId:'q',value:false},2)));
+ await assertFails(setDoc(ref,resourceEnvelope('desk',{questionId:'q',value:true},2)));
+ await assertFails(setDoc(ref,resourceEnvelope('desk',{questionId:'q',value:'true'},3)));
+ await assertFails(setDoc(ref,resourceEnvelope('desk',{questionId:'other',value:true},3)));
+ await assertFails(deleteDoc(ref));
+ for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()])await assertFails(getDoc(doc(client,learningPath('preferences','desk--q'))));
+ await assertSucceeds(setDoc(doc(db,learningPath('preferences','deferred--q')),resourceEnvelope('deferred',{questionId:'q',value:true})));
+});
+test('再開範囲は回答とは別に保存し、不正な入口・戻り先・余分な回答を拒否する',async()=>{
+ const db=env.authenticatedContext('scope').firestore(),ref=doc(db,learningPath('scope','context--a'));
+ const p={attemptId:'a',questionId:'q',entryMode:'desk',scope:{intent:'review',topicId:'database',topicIds:[],examPartId:'objective',examPartIds:[],paperMode:'desk',returnView:'review',returnRunId:null}};
+ await assertSucceeds(setDoc(ref,resourceEnvelope('context',p)));
+ for(const bad of [{...p,entryMode:'paperless'},{...p,answer:3},{...p,scope:{...p.scope,returnView:'unsafe'}},{...p,scope:{...p.scope,extra:true}}])await assertFails(setDoc(ref,resourceEnvelope('context',bad,2)));
+ // New kinds cannot enter the old resources stream consumed by older PWAs.
+ await assertFails(setDoc(doc(db,resourcePath('scope','context--a')),resourceEnvelope('context',p)));
+});

@@ -348,6 +348,7 @@ P0・P1を実装。ホームの表示候補と開始する問題ID・範囲を�
 - `tests/action-flow.py`：実IndexedDBの保存と実画面で、表示したDBの候補と開始IDの一致、計画の変更と再読込をまたぐ同じ分野・パートの継続、通常と診断の両方が中断中の主操作、ヒントと選択の再開、同じ問題の最後の分類への置換、通常／診断の別グラフ、概要を先に表示する計画画面、390px／200%文字を確認。
 - `tests/planning.py`、`tests/planning-context.py`、`tests/planning-targets.py`：30問診断の中断・オフライン・完了、解説と通常復習、計画JSONの検証・前提引継ぎ・AI出力、週目標・手動予定・バックアップを保持。
 - `tests/planning-sync.py`、`tests/sync.py`：実Auth／Firestore Emulatorの複数ブラウザで計画・診断・通常学習の更新、未保存入力の保持、読取専用の最新版反映、オフライン競合・選択、二重完了の防止、別UIDへの分離を確認。本番の本人アカウントを操作した確認ではない。
+- `tests/pwa.py`：/ap-study/ のアプリID・manifest・画像、オフライン再開、更新の明示反映、保存済み問題・画像と記録の保持を確認。
 - `tests/storage.py`、`tests/workspace.py`：原子的保存・送信待ち、遅いACK・古いタブ・競合、資格／利用者分離、診断の固定状態、現在形式の記録を保持。
 - `tests/qualifications.py`：複数資格と問題IDの重複、2／5選択肢・可変ヒント、追加と引退した教材の固定履歴、分野名変更、パックの遅延読込・資格別のオフライン画面を保持。
 - `tests/diagnostic-pool.py`：独自の検証用派生問題を含む診断を実行し、通常のグラフ・学習・検索・復習へ混ざらないこと、診断時だけの取得、出典と元問題への導線を保持。
@@ -665,3 +666,19 @@ Aは問2のサービス時間条件、問30のトークンバス／リングの�
 - `tests/content.py`、`tests/corpus.py`が成功。[保持・検証記録](audits/field-records-20261009.json)に開始コミットとのバイト比較件数と集計を保存。通常800問・個別教材800問・単語帳681枚・派生180問、原本画像、教材、保存／同期コード、Firestore Rules、マニフェストのID・スコープを保持。UIのリリース番号のみ更新した。
 
 実装コミット `5b020010759481cac7a505471d11443462cf8aad` のGitHub Pagesが `built` になった後、変更25ファイルと既存の教材・単語帳・派生・マニフェスト4ファイル、計29ファイルの公開SHA-256がローカルと一致。公開URLで `tests/field-navigation.py` と `tests/pwa.py` も成功し、入口・記録・メモ・復習・中断・スマホ幅・文字200%・オフラインを再確認した。[公開確認記録](audits/field-records-public-20261009.json)。新規ゲストでの検証であり、本人のGoogleアカウントやAndroid実機を操作していない。
+
+## 端末をまたぐ学習設定 P0a（2026-10-10）
+
+実装前に別担当が現行の保存・回答不変性・計画同期・先送り・ゲスト取り込みを読み取りレビューし、主担当が統合。実装後の別担当レビューで同期待ち中の遷移と資格／対象問題に合わないcontextを指摘され、修正と追加検証を実施。詳しくは[cross-device-sync.md](cross-device-sync.md)。
+
+- `node --test tests/*.mjs`：87件成功。Rulesでは本人限定、他人・未認証・削除・旧リビジョン・不正型を拒否。既存回答不変性と計画／診断Rulesを保持。資格に存在しない、または存在しても対象問題に合わないscopeを通常記録へ適用しない。遅い受信のUID越境と、canonical先送りの全選択器への除外も確認。
+- `tests/learning-sync.py`：実Firebase SDKとAuth／Firestore Emulator、スマホ390px・PC1280pxの独立ブラウザ。同じアカウントで紙ペン指定→PC再開、分野・入口・候補選択・ヒント維持、継続UUID、開いているPC問題の非変更、確定回答の採点維持、指定解除、先送りと手動再開による全親試行・セッション除外解除、切断端末の再接続、通常保存とlearning outboxの原子性を確認。
+- `tests/learning-resume.py`：回答0件のゲスト指定は自動取り込みせず明示取り込み。同期待ち中の画面移動を優先。不明パートの受信を無視し、再読み込み後も通常記録を保持。
+- `tests/learning-local.py`：分類解除後の中断をおまかせ入口で再開し、ヒント・選択維持と再読み込み。解除falseを含むバックアップ、別資格・対象問題と違うscopeの事前拒否、同一バックアップの復元を確認。
+- `tests/learning-old-rules.py`：新collectionが未許可のルールに一時切替。新設定の端末保存・再開・回答と既存回答／計画同期は動作し、新経路だけ更新案内。新ルールへ戻すと再送が成功。実施後エミュレーターの最新版Rulesへ復帰。
+- 既存 `tests/sync.py`、`tests/planning-sync.py`、`tests/mobile-account.py`：明示ゲスト取り込み・同時回答・回答後ヒント・オフライン再送・UID分離、計画の未保存入力保護と競合、診断の中断／終了、単語帳の従来の端末保存を確認。
+- `tests/pwa.py`：/ap-study/ のアプリID・manifest・画像、オフライン再開、更新の明示反映、保存済み問題・画像と記録の保持を確認。
+- `tests/storage.py`、`tests/spec-behavior-flow.py`、`tests/selection-flow.py`、`tests/home-entries.py`、`tests/field-navigation.py`、`tests/e2e.py`：原子的保存・保存失敗・全入口・分野／記録／復習遷移・紙ペン範囲・教材／ヒントを確認。
+- `tests/content.py`、`tests/corpus.py`：通常800問・個別教材800問の保持。`content/`・`data/`・`assets/`・`schemas/`に今回の差分なし。単語帳681枚・派生180問も変更なし。
+
+Firestore Emulatorでの検証は本番ユーザーのスマホとPCの確認を代替しません。`firebase login:list`は認証済みアカウントなし。本番Rulesは未配備で、新しい学習設定同期には利用者による最新版`firestore.rules`の公開が必要です。単語帳評価・チェックポイント・前回の入口・教科書メモ同期は未実装。

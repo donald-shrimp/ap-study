@@ -87,6 +87,37 @@ service cloud.firestore {
      : request.resource.data.payload == resource.data.payload));
    allow delete: if false;
   }
+  function validLearning(p, kind, id) {
+   return kind in ['desk','deferred']
+    ? p.keys().hasOnly(['questionId','value']) && p.questionId is string && p.questionId.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}') && p.value is bool && id == kind + '--' + p.questionId
+    : kind == 'context' && p.keys().hasOnly(['attemptId','questionId','entryMode','scope'])
+     && p.attemptId is string && p.attemptId.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}')
+     && p.questionId is string && p.questionId.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}')
+     && id == 'context--' + p.attemptId && p.entryMode in ['all','paperless','desk']
+     && p.scope is map && p.scope.keys().hasOnly(['intent','topicId','topicIds','examPartId','examPartIds','paperMode','returnView','returnRunId'])
+     && p.scope.intent in ['normal','topic','review','direct'] && p.scope.paperMode == p.entryMode
+     && (p.scope.topicId == null || p.scope.topicId is string && p.scope.topicId.size() <= 100)
+     && (p.scope.examPartId == null || p.scope.examPartId is string && p.scope.examPartId.size() <= 100)
+     && (p.scope.returnRunId == null || p.scope.returnRunId is string && p.scope.returnRunId.size() <= 100)
+     && p.scope.topicIds is list && p.scope.topicIds.size() <= 100
+     && p.scope.examPartIds is list && p.scope.examPartIds.size() <= 100
+     && p.scope.returnView in ['home','topics','review','history','materials','flashcards','study','diagnostic','diagnostics','planning'];
+  }
+  function learningEnvelope(id) {
+   let d=request.resource.data;
+   return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
+    && d.version == 1 && d.kind in ['desk','deferred','context']
+    && d.revision is int && d.revision >= 1 && d.updatedAt == request.time
+    && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
+    && d.operationId is string && d.operationId.size() > 0 && d.operationId.size() <= 300
+    && validLearning(d.payload,d.kind,id);
+  }
+  match /users/{uid}/qualifications/{qualificationId}/learning/{id} {
+   allow read: if mine(uid);
+   allow create: if mine(uid) && learningEnvelope(id) && request.resource.data.revision == 1;
+   allow update: if mine(uid) && learningEnvelope(id) && request.resource.data.kind == resource.data.kind && request.resource.data.revision == resource.data.revision + 1;
+   allow delete: if false;
+  }
   match /users/{uid}/qualifications/{qualificationId}/attempts/{id} {
    allow read: if mine(uid);
    allow create: if mine(uid) && envelope(id, qualificationId);

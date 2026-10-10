@@ -1,0 +1,23 @@
+import {validateLearning,learningId,contextPayload,applyLearning,scopeBelongsToQualification,contextMatchesQuestion} from '../domain/learning-state.js';
+export function createLearningFeature({qualification,getStore,getState,onUpdate,onNotice}){
+ let store,rows=[],generation=0,status='guest';const notified=new Set();
+ const messages={guest:'ログインすると、紙ペン指定・先送り・再開範囲を同期できます。',pending:'学習設定：同期待ち',syncing:'学習設定：同期中…',synced:'学習設定も同期済み。',offline:'学習設定：オフライン · 接続後に同期します',rules:'学習設定：Firebaseルールの更新が必要です。端末内には保存しています。',error:'学習設定：同期できません。端末内には保存しています。'};
+ function show(kind){status=kind;const el=document.getElementById('learning-sync-state');if(el)el.textContent=messages[kind]||messages.error;}
+ async function bind(){
+  const token=++generation,boundStore=getStore().learningStore();store=boundStore;rows=[];
+  let next,identity;try{next=await boundStore.read();identity=await boundStore.identity();}catch{if(token===generation)show('error');return;}
+  if(token!==generation||boundStore!==store)return;rows=next;applyLearning(getState(),rows,qualification);show(identity.owner.startsWith('uid:')?'pending':'guest');
+ }
+ function operation(kind,payload){payload=validateLearning(kind,payload);const id=learningId(kind,payload),old=rows.find(r=>r.id===id);return {id,kind,payload,expectedLocalRevision:old?.localRevision||0};}
+ function contextOperation(a){const p=contextPayload(a);return p?operation('context',p):null;}
+ function clearDeferredOperations(questionId){return rows.some(r=>r.kind==='deferred'&&r.payload.questionId===questionId&&r.payload.value)||getState().attempts.some(a=>a.questionId===questionId&&a.deferred)?[operation('deferred',{questionId,value:false})]:[];}
+ async function accept(next,{remote=false}={}){
+  const token=generation,boundStore=store,identity=await boundStore.identity();if(token!==generation||boundStore!==store)return;if(next.some(r=>r.owner!==identity.owner))return;
+  rows=remote?next:[...new Map([...rows,...next].map(r=>[r.id,r])).values()];if(remote){const changed=applyLearning(getState(),rows,qualification);if(rows.some(r=>r.discarded&&!notified.has(r.operationId))){for(const row of rows)if(row.discarded)notified.add(row.operationId);onNotice('別端末で確定した学習設定を使用しました。変更したい場合はもう一度指定できます。');}if(changed)onUpdate();}
+ }
+ const refresh=async()=>{const token=generation,boundStore=store,next=await boundStore.read();if(token===generation&&boundStore===store)await accept(next,{remote:true});};
+ const backup=()=>({format:'hitomon-learning-state',version:1,qualificationId:qualification.id,documents:rows.filter(r=>r.kind!=='context'||scopeBelongsToQualification(r.payload,qualification)&&contextMatchesQuestion(r.payload,getState().attempts.find(a=>a.id===r.payload.attemptId&&a.questionId===r.payload.questionId)?.questionSnapshot,qualification)).map(({kind,payload})=>({kind,payload}))});
+ function validateBackup(value,attempts=null){if(!value)return;if(value.format!=='hitomon-learning-state'||value.version!==1||value.qualificationId!==qualification.id||!Array.isArray(value.documents)||value.documents.length>50000)throw new Error('学習設定のバックアップを確認できません。');const ids=new Set();for(const d of value.documents){const id=learningId(d.kind,d.payload);if(d.kind==='context'&&!scopeBelongsToQualification(d.payload,qualification))throw new Error('再開範囲の分野・科目がこの資格に対応していません。');if(d.kind==='context'&&attempts){const a=attempts.find(a=>a.id===d.payload.attemptId&&a.questionId===d.payload.questionId);if(!a||!contextMatchesQuestion(d.payload,a.questionSnapshot,qualification))throw new Error('再開範囲と問題が一致しません。');}if(ids.has(id))throw new Error('学習設定が重複しています。');ids.add(id);}}
+ function restoreOperations(value,{mapping=new Map()}={}){validateBackup(value);return (value?.documents||[]).map(d=>{const p=structuredClone(d.payload);if(d.kind==='context'){if(mapping.size&&!mapping.has(p.attemptId))return null;p.attemptId=mapping.get(p.attemptId)||p.attemptId;}return operation(d.kind,p);}).filter(Boolean);}
+ return {bind,operation,contextOperation,clearDeferredOperations,accept,refresh,apply:()=>applyLearning(getState(),rows,qualification),store:()=>store,hasContext:id=>rows.some(r=>r.kind==='context'&&r.payload.attemptId===id&&scopeBelongsToQualification(r.payload,qualification)&&contextMatchesQuestion(r.payload,getState().attempts.find(a=>a.id===id)?.questionSnapshot,qualification)),deferredIds:()=>rows.filter(r=>r.kind==='deferred'&&r.payload.value).map(r=>r.payload.questionId),hasQuestionSetting:(kind,id)=>rows.some(r=>r.kind===kind&&r.payload.questionId===id),onRows:next=>accept(next,{remote:true}),onStatus:show,status:()=>status,backup,validateBackup,restoreOperations};
+}
