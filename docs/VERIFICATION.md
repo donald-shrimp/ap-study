@@ -682,3 +682,5 @@ Aは問2のサービス時間条件、問30のトークンバス／リングの�
 - `tests/content.py`、`tests/corpus.py`：通常800問・個別教材800問の保持。`content/`・`data/`・`assets/`・`schemas/`に今回の差分なし。単語帳681枚・派生180問も変更なし。
 
 Firestore Emulatorでの検証は本番ユーザーのスマホとPCの確認を代替しません。`firebase login:list`は認証済みアカウントなし。本番Rulesは未配備で、新しい学習設定同期には利用者による最新版`firestore.rules`の公開が必要です。単語帳評価・チェックポイント・前回の入口・教科書メモ同期は未実装。
+
+公開確認：実装コミット`21d7663`のPages deployment [38059374449](https://github.com/donald-shrimp/ap-study/actions/runs/38059374449)はsuccess。公開先のアプリ・2つの入口HTML・新旧モジュール・SW・Rules・主要ドキュメントの18ファイルをコミットのバイト列とSHA-256で照合。公開先を新しい390pxブラウザで開き、紙なし演習・選択・ヒント・中断・新同期状態表示、横はみ出し／ページエラーなしを確認しました。本番本人アカウントでの新設定同期とRules配備は未確認・未実行です。
