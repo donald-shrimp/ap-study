@@ -69,7 +69,11 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
     const previous=baseline.get(a.id),dbRow=existing.get(a.id),value=serial(a);
     if(!replace&&previous?.data===value)continue;
     if(!replace&&dbRow&&serial(dbRow.data)===value){nextBaseline.set(a.id,{data:value,revision:dbRow.revision});continue;}
-    const conflict=!replace&&dbRow&&previous&&dbRow.revision!==previous.revision&&serial(transport(dbRow.data))!==serial(transport(JSON.parse(previous.data)));
+    // A stale metadata projection must preserve a newer downloaded answer.
+    if(!replace&&dbRow&&previous&&serial(transport(a))===serial(transport(JSON.parse(previous.data)))&&serial(transport(a))!==serial(transport(dbRow.data))){
+     const local=Object.fromEntries(['scrollY','readingNote','entryMode','practiceScope','deferred'].filter(k=>Object.hasOwn(a,k)).map(k=>[k,a[k]]));Object.assign(a,dbRow.data,local);
+    }
+    const conflict=!replace&&dbRow&&previous&&dbRow.revision!==previous.revision&&serial(transport(dbRow.data))!==serial(transport(JSON.parse(previous.data)))&&serial(transport(dbRow.data))!==serial(transport(a));
     const finalizedTogether=conflict&&complete(dbRow.data)&&complete(a)&&!changedResult(dbRow.data,a);
     if(finalizedTogether&&dbRow.data.hintCount>a.hintCount)Object.assign(a,dbRow.data);
     if(!replace&&dbRow&&complete(dbRow.data)&&complete(a)&&changedResult(dbRow.data,a)&&(!conflict||complete(JSON.parse(previous.data))))throw new Error('確定した回答を上書きできません。記録を書き出して保管してください。');
