@@ -170,7 +170,7 @@
           if (index === current) link.setAttribute('aria-current', 'location');
           else link.removeAttribute('aria-current');
         });
-        document.querySelector('#chapter-count').textContent = String(current + 1).padStart(2, '0') + ' / 07';
+        document.querySelector('#chapter-count').textContent = String(current + 1).padStart(2, '0') + ' / ' + String(chapters.length).padStart(2, '0');
         document.querySelector('#chapter-name').textContent = chapters[current].dataset.title;
         previous.disabled = current === 0;
         next.disabled = current === chapters.length - 1;
