@@ -179,7 +179,9 @@ async function start(id, newSession = false, options = {}) {
   }catch(error){notice(error.message);}finally{opening=false;if(token===navigation)main.setAttribute('aria-busy','false');if(token===navigation&&$('#notice').textContent==='教材を読み込んでいます。')notice('');}
 }
 async function resume(id,entryMode=null) {
- const token=++navigation,boundStore=store;await account?.prepareLearning?.();if(token!==navigation||boundStore!==store)return;learning?.apply();
+ const token=++navigation,boundStore=store,identity=await boundStore.identity(),source=await boundStore.remoteDevice(id);if(token!==navigation||boundStore!==store)return;
+ if(!complete(state.attempts.find(a=>a.id===id)||{})&&identity.owner.startsWith('uid:')&&source&&source!==identity.deviceId&&!learning?.hasContext(id)&&learning?.status()!=='synced')await account?.prepareLearning?.();
+ if(token!==navigation||boundStore!==store)return;learning?.apply();
  const runId=planner?.derivedRun(id);if(runId){await planner.action({dataset:{action:'resume-diagnostic',id:runId}});const detail=document.querySelector(`[data-diagnostic-slot="${id}"]`);if(detail){detail.open=true;detail.scrollIntoView({block:'start'});}return;}
  const target=state.attempts.find(a=>a.id===id);if(!target)return;if(!complete(target)&&!practicePool({qualification,questions:[question(target.questionId)||target.questionSnapshot]}).length){notice('この記録のパートは通常演習に対応していません。回答とヒントは保持しています。');return;}const savedMode=target.entryMode||target.practiceScope?.paperMode,mode=resumeMode(target);if(!complete(target)&&!allowsQuestion(question(target.questionId)||target.questionSnapshot,mode,studyContext,state.settings.deskQuestionIds)){notice('この問題は今の入口の候補ではありません。分野画面で「おまかせ」を選んで、記録から再開できます。記録はそのまま残っています。');return;}main.setAttribute('aria-busy','true');
  try {
