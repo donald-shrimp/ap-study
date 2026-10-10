@@ -365,9 +365,9 @@ async function importGuest(uid){
  if((await store.identity()).owner!==`uid:${uid}`)throw new Error('アカウントが変わりました。');
  const guest=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState});
  try{
-  const raw=await guest.read();if(!raw){await planner?.importGuest(uid,(await guest.identity()).deviceId);return;}
-  const source=validateState(JSON.parse(raw));
-  if(!confirm(`ログイン前の${source.attempts.length}件の学習記録と紙ペン・先送り設定を、このGoogleアカウントへ追加します。元の記録は残します。取り込みますか？`))return;
+  const raw=await guest.read(),cardEvents=await cards?.guestEvents()||[];
+  const source=raw?validateState(JSON.parse(raw)):makeState();
+  if(!confirm(`ログイン前の${source.attempts.length}件の学習記録・単語帳${cardEvents.length}件と紙ペン・先送り設定を、このGoogleアカウントへ追加します。元の記録は残します。取り込みますか？`))return;
   const identity=await guest.identity(),prefix=`${identity.deviceId}:`,already=new Set(state.attempts.map(a=>a.importedFrom).filter(Boolean));
   const mapping=new Map(await Promise.all(source.attempts.filter(a=>!already.has(prefix+a.id)).map(async a=>[a.id,await guestAttemptId(uid,prefix+a.id)])));
   for(const original of source.attempts){if(!mapping.has(original.id))continue;const a=structuredClone(original);
@@ -380,7 +380,7 @@ async function importGuest(uid){
   for(const row of guestRows){if(row.kind==='context'){const p=structuredClone(row.payload);if(!mapping.has(p.attemptId))continue;p.attemptId=mapping.get(p.attemptId);operations.push(learning?.operation('context',p));}else if(!learning?.hasQuestionSetting(row.kind,row.payload.questionId))operations.push(learning?.operation(row.kind,row.payload));}
   for(const questionId of source.settings.deskQuestionIds)if(!learning?.hasQuestionSetting('desk',questionId))operations.push(learning?.operation('desk',{questionId,value:true}));
   for(const a of source.attempts)if(a.deferred&&!learning?.hasQuestionSetting('deferred',a.questionId))operations.push(learning?.operation('deferred',{questionId:a.questionId,value:true}));
-  if(!await save({learningOperations:[...new Map(operations.filter(Boolean).map(op=>[op.id,op])).values()]}))throw new Error('取り込んだ記録を保存できませんでした。');if(learning?.apply()&&!await save())throw new Error('取り込んだ学習設定を保存できませんでした。');await planner?.importGuest(uid,identity.deviceId);render(false);
+  if(!await save({learningOperations:[...new Map(operations.filter(Boolean).map(op=>[op.id,op])).values()]}))throw new Error('取り込んだ記録を保存できませんでした。');if(learning?.apply()&&!await save())throw new Error('取り込んだ学習設定を保存できませんでした。');await cards?.importGuest(uid,cardEvents);await planner?.importGuest(uid,identity.deviceId);render(false);
  }finally{await guest.close();}
 }
 async function initialize(){
@@ -399,14 +399,14 @@ try {
   try { const raw=await store.read();if(raw){try{state=validateState(JSON.parse(raw));if(state.session.topicId)state.session.topic=qualification.topics.find(t=>t.id===state.session.topicId)?.name||state.session.topic;}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   if(state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
   if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));
-  cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
+  cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname,onChanged:()=>account?.cardsChanged()});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
   planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(state.view!=='study'&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download,getTargetPart:()=>displayedNextAction?.scope?.examPartId||null});
   learning=createLearningFeature({qualification,getStore:()=>store,getState:()=>state,onNotice:notice,onUpdate:()=>{save();if(!['study','planning','flashcards'].includes(state.view))render(false);}});await learning.bind();
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
   await planner.bind().catch(()=>notice('計画・診断の記録を保存できません。通常演習は続けられます。'));
-  initAccountControls({getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
+  initAccountControls({getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
   if(navigator.modelContext?.registerTool) {
     navigator.modelContext.registerTool({name:'get_study_summary',description:'Read counts of local study attempts and review candidates. Does not modify study records.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify(planner.summary())}]})});
   }

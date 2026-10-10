@@ -1,12 +1,36 @@
 import {validateCardEvents} from '../domain/flashcards.js';
+import {cardDocumentId,sameCardPayload,validateCardDocument,visibleCardEvents} from '../domain/card-sync.js';
 const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
 const done=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||new Error('単語帳を保存できません。'));tx.onerror=()=>{};});
-export function createCardStore({rootPath,owner,qualificationId}){
- const scope=[owner,qualificationId];let connection,queue=Promise.resolve();
+const chunks=items=>Array.from({length:Math.ceil(items.length/200)},(_,i)=>items.slice(i*200,i*200+200));
+export function createCardStore({rootPath,owner,qualificationId,deviceId}){
+ const scope=[owner,qualificationId];let connection,queue=Promise.resolve(),localDevice=deviceId;
  async function db(){if(!connection)connection=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:cards`,1);r.onupgradeneeded=()=>{const events=r.result.createObjectStore('events',{keyPath:['owner','qualificationId','id']});events.createIndex('namespace',['owner','qualificationId']);r.result.createObjectStore('checkpoints',{keyPath:['owner','qualificationId']});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return connection;}
- async function read(){await queue.catch(()=>{});const database=await db(),tx=database.transaction(['events','checkpoints']),finished=done(tx);const [events,checkpoint]=await Promise.all([request(tx.objectStore('events').index('namespace').getAll(scope)),request(tx.objectStore('checkpoints').get(scope))]);await finished;return {events:validateCardEvents(events.map(({owner,qualificationId,...e})=>e)),checkpoint:checkpoint?.value||null};}
- function write(checkpoint,event=null){const operation=queue.then(async()=>{if(event)validateCardEvents([event]);const database=await db(),tx=database.transaction(['events','checkpoints'],'readwrite'),finished=done(tx);try{if(event){const store=tx.objectStore('events');const count=await request(store.index('namespace').count(scope));if(count>=20000)throw new Error('単語帳の記録が2万件に達しました。');store.add({...event,owner,qualificationId});}tx.objectStore('checkpoints').put({owner,qualificationId,value:checkpoint});}catch(error){tx.abort();await finished.catch(()=>{});throw error;}await finished;});queue=operation.catch(()=>{});return operation;}
- function importEvents(events){validateCardEvents(events);const operation=queue.then(async()=>{const database=await db(),tx=database.transaction('events','readwrite'),finished=done(tx),store=tx.objectStore('events');try{let count=await request(store.index('namespace').count(scope));for(const e of events){const old=await request(store.get([...scope,e.id]));if(old){const {owner,qualificationId,...value}=old;if(['id','cardId','cardVersion','outcome','at'].some(k=>value[k]!==e[k]))throw new Error('同じIDの異なる記録があります。現在の記録は変更していません。');}else {if(++count>20000)throw new Error('取り込み後の単語帳の記録が2万件を超えます。');store.add({...e,owner,qualificationId});}}}catch(error){tx.abort();await finished.catch(()=>{});throw error;}await finished;});queue=operation.catch(()=>{});return operation;}
- function clear(){const operation=queue.then(async()=>{const database=await db(),tx=database.transaction(['events','checkpoints'],'readwrite'),finished=done(tx);const index=tx.objectStore('events').index('namespace');const rows=await request(index.getAllKeys(scope));for(const key of rows)tx.objectStore('events').delete(key);tx.objectStore('checkpoints').delete(scope);await finished;});queue=operation.catch(()=>{});return operation;}
- return {read,write,importEvents,clear,close:async()=>{await queue;if(connection)(await connection).close();}};
+ function operation(fn){const op=queue.then(async()=>{const database=await db(),tx=database.transaction(['events','checkpoints'],'readwrite'),finished=done(tx),store=tx.objectStore('events'),cps=tx.objectStore('checkpoints');try{
+   const [raw,oldCheckpoint]=await Promise.all([request(store.index('namespace').getAll(scope)),request(cps.get(scope))]);
+   const checkpoint=oldCheckpoint||{owner,qualificationId,value:null};localDevice||=checkpoint.sync?.deviceId||crypto.randomUUID();checkpoint.sync={...checkpoint.sync,deviceId:localDevice};
+   const rows=new Map(raw.filter(row=>row.kind).map(row=>[row.id,row]));
+   const make=(kind,payload)=>({owner,qualificationId,id:cardDocumentId(kind,payload.id),kind,payload:structuredClone(payload),deviceId:localDevice,operationId:cardDocumentId(kind,payload.id),dirty:true,remoteRevision:0,localRevision:1});
+   // Preserve pre-sync events in the same transaction as their durable outbox.
+   for(const old of raw.filter(row=>!row.kind)){const {owner,qualificationId,...payload}=old;validateCardEvents([payload]);const row=make('rating',payload),existing=rows.get(row.id);if(existing&&!sameCardPayload(existing.payload,payload))throw new Error('同じIDの異なる記録があります。');store.delete([...scope,old.id]);if(!existing){rows.set(row.id,row);store.put(row);}}
+   for(const row of rows.values())validateCardDocument(row);
+   const put=row=>{rows.set(row.id,row);store.put(row);};
+   const result=await fn({rows,checkpoint,put,make});cps.put(checkpoint);await finished;return result;
+  }catch(error){try{tx.abort();}catch{}await finished.catch(()=>{});throw error;}});queue=op.catch(()=>{});return op;}
+ const read=()=>operation(({rows,checkpoint})=>({events:visibleCardEvents([...rows.values()]),checkpoint:checkpoint.value||null}));
+ function write(checkpoint,event=null){if(event)validateCardEvents([event]);return operation(({rows,checkpoint:cp,put,make})=>{if(event){const row=make('rating',event),old=rows.get(row.id);if(old&&!sameCardPayload(old.payload,event))throw new Error('同じIDの異なる記録があります。');if(!old)put(row);visibleCardEvents([...rows.values()]);}cp.value=checkpoint;});}
+ function importEvents(events,{restoreDeleted=true}={}){validateCardEvents(events);return operation(({rows,put,make})=>{
+  for(const event of events){const row=make('rating',event),old=rows.get(row.id);if(old&&!sameCardPayload(old.payload,event))throw new Error('同じIDの異なる記録があります。現在の記録は変更していません。');if(!old)put(row);}
+  if(restoreDeleted){const visible=new Set(visibleCardEvents([...rows.values()]).map(e=>e.id)),hidden=events.filter(e=>!visible.has(e.id)).map(e=>e.id);
+   for(const eventIds of chunks(hidden)){const wanted=new Set(eventIds),resetIds=[...rows.values()].filter(r=>r.kind==='reset'&&r.payload.eventIds.some(id=>wanted.has(id))).map(r=>r.payload.id);for(const ids of chunks(resetIds))put(make('restore',{id:crypto.randomUUID(),eventIds,resetIds:ids}));}}
+  visibleCardEvents([...rows.values()]);
+ });}
+ const clear=()=>operation(({rows,checkpoint,put,make})=>{for(const eventIds of chunks(visibleCardEvents([...rows.values()]).map(e=>e.id)))put(make('reset',{id:crypto.randomUUID(),eventIds}));checkpoint.value=null;});
+ function accept(remote,{rows,put}){
+  validateCardDocument(remote);if(remote.version!==1||remote.revision!==1||remote.operationId!==remote.id||typeof remote.deviceId!=='string'||!remote.deviceId.length||remote.deviceId.length>100)throw new Error('単語帳の同期形式が正しくありません。');
+  const old=rows.get(remote.id);if(old&&(old.kind!==remote.kind||!sameCardPayload(old.payload,remote.payload)))throw new Error('同じIDの異なる単語帳記録があります。');
+  put({owner,qualificationId,id:remote.id,kind:remote.kind,payload:structuredClone(remote.payload),deviceId:remote.deviceId,operationId:remote.id,dirty:false,remoteRevision:1,localRevision:1});
+ }
+ const sync={identity:async()=>{await read();return {owner,qualificationId,deviceId:localDevice};},read:()=>operation(({rows})=>[...rows.values()]),merge:remote=>operation(ctx=>accept(remote,ctx)),acknowledge:(id,operationId,remote)=>operation(ctx=>{if(id!==operationId||id!==remote?.id)throw new Error('単語帳の同期応答が一致しません。');accept(remote,ctx);}),cursor:()=>operation(({checkpoint})=>checkpoint.sync.cursor||null),setCursor:cursor=>operation(({checkpoint})=>{checkpoint.sync.cursor=cursor;})};
+ return {read,write,importEvents,clear,syncStore:()=>sync,close:async()=>{await queue;if(connection)(await connection).close();}};
 }

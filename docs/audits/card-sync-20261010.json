@@ -1,0 +1,54 @@
+{
+  "baseCommit": "1e6914b0b09f21a092513440693c45f65f059bf1",
+  "phase": "P0b",
+  "review": "primary author sequential code review and automated tests; no separate reviewer this turn",
+  "preservation": {
+    "comparedTrackedFiles": 1032,
+    "changedFiles": [],
+    "normalQuestions": 800,
+    "individualLessons": 800,
+    "flashcards": 681,
+    "derivedQuestions": 180
+  },
+  "firebaseProduction": {
+    "learningRules": "user reported published",
+    "cardsRules": "not deployed by this environment",
+    "accountCrossDevice": "not verified in production"
+  },
+  "deferred": [
+    "card checkpoints",
+    "per-device previous entrance",
+    "textbook notes"
+  ],
+  "checks": {
+    "nodeDomainAndSyncTests": 83,
+    "firestoreRulesTests": 11,
+    "realSdk": "independent three browsers; ratings, offline reset, restore, guest import, UID isolation",
+    "indexedDb": "atomic rollback, observed controls, persisted cursor, legacy preservation, 205-event reset splitting",
+    "regressions": [
+      "sync.py",
+      "learning-sync.py",
+      "planning-sync.py",
+      "mobile-account.py",
+      "mobile-study.py",
+      "storage.py",
+      "learning-local.py",
+      "learning-resume.py",
+      "selection-flow.py",
+      "field-navigation.py",
+      "e2e.py",
+      "pwa.py",
+      "content.py",
+      "corpus.py"
+    ]
+  },
+  "files": {
+    "src/domain/card-sync.js": "f206ebdab2ced42a080e870ecb795ca1b87709ea71dcfb0fb0947985bd2b3912",
+    "src/storage/cards.js": "e60caa34f8831ef846e25db9075f217a130bef23b4918c9e4765727fa12d4933",
+    "src/features/cards.js": "130b6644b6b3c3e67493e1c7d32ab8822f1d124d9f3fd9a4897a051f1f18669e",
+    "src/sync/account.js": "dcbdd3fcd5c3f5c2911f3b18262e774b9a13ad121dd3e56b295235f73ff4242c",
+    "src/sync/firebase.js": "ce89a654c368cdfca175d7cc0ac782278af96bd66fd2afecaf532b5dbfdec6e4",
+    "src/sync/workspace.js": "34e0e9b9cb5965d8e2ec4c3e10f090a86267aaa6d22c590a7991219a83bc5591",
+    "firestore.rules": "22ef437d37750771bfe265026314f6b354000a03431c6ac57db4f725519af5b7"
+  }
+}

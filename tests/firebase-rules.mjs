@@ -105,3 +105,19 @@ test('再開範囲は回答とは別に保存し、不正な入口・戻り先�
  // New kinds cannot enter the old resources stream consumed by older PWAs.
  await assertFails(setDoc(doc(db,resourcePath('scope','context--a')),resourceEnvelope('context',p)));
 });
+
+test('単語帳評価と観測済み削除・復元は本人だけ追記し、既存文書の変更は拒否する',async()=>{
+ const uid='cards-rules',db=env.authenticatedContext(uid).firestore();
+ const make=(kind,payload)=>({version:1,kind,revision:1,operationId:`${kind}--${payload.id}`,deviceId:'phone',payload,updatedAt:serverTimestamp()});
+ const ref=(db,id)=>doc(db,`users/${uid}/qualifications/ap/cards/${id}`);
+ const rating={id:'event',cardId:'card',cardVersion:1,outcome:'again',at:'2026-10-10T00:00:00.000Z'};
+ for(const [kind,payload] of [['rating',rating],['reset',{id:'clear',eventIds:['event']}],['restore',{id:'import',eventIds:['event'],resetIds:['clear']}]]){
+  const value=make(kind,payload),r=ref(db,value.operationId);await assertSucceeds(setDoc(r,value));await assertSucceeds(getDoc(r));await assertFails(setDoc(r,value));await assertFails(deleteDoc(r));
+  for(const other of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(ref(other,value.operationId)));await assertFails(setDoc(ref(other,'rating--other'),make('rating',{...rating,id:'other'})));}
+ }
+ await assertSucceeds(getDocs(collection(db,`users/${uid}/qualifications/ap/cards`)));
+ for(const payload of [{...rating,id:'invalid',outcome:'unknown'},{...rating,id:'invalid',cardVersion:0},{...rating,id:'invalid',at:'not-date'},{...rating,id:'invalid',extra:1}])await assertFails(setDoc(ref(db,'rating--invalid'),make('rating',payload)));
+ for(const eventIds of [[],['e','e'],Array.from({length:201},(_,i)=>`e${i}`)])await assertFails(setDoc(ref(db,'reset--invalid'),make('reset',{id:'invalid',eventIds})));
+ await assertFails(setDoc(doc(db,resourcePath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
+ await assertFails(setDoc(doc(db,learningPath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
+});

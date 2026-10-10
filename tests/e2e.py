@@ -28,6 +28,9 @@ with sync_playwright() as p:
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=query]').fill(q['title'])
   page.locator(f'[data-action=start][data-id="{id}"]').click();page.wait_for_function('document.querySelector("#main").getAttribute("aria-busy")!=="true"')
  def answer(index=None):
+  # A resume reads its owner before setting aria-busy. Wait for the real
+  # question UI, rather than a not-yet-started home snapshot.
+  page.get_by_role('button',name='回答する',exact=True).wait_for()
   s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);correct=by_id[a['questionId']]['answer']
   page.get_by_role('radio').nth(correct if index is None else index).check();page.get_by_role('button',name='回答する',exact=True).click()
  for mode in ['paperless','desk','all']:

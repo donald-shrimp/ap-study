@@ -51,6 +51,15 @@ export function createFirebaseClient(){
     return recoverResourceWrite(error,item,async()=>{const current=await sdk.getDocFromServer(ref);return current.exists()?{id:current.id,...current.data()}:null;},()=>authorize(uid));
    }
   },
+  pullCards(uid,qualificationId,cursor){return this.pullDocuments(uid,qualificationId,cursor,'cards');},
+  async pushCard(uid,qualificationId,item){
+   authorize(uid);const ref=sdk.doc(db,'users',uid,'qualifications',qualificationId,'cards',item.id);
+   return sdk.runTransaction(db,async tx=>{
+    authorize(uid);const existing=await tx.get(ref);
+    if(existing.exists()){const old={id:existing.id,...existing.data()};if(old.kind!==item.kind||stable(old.payload)!==stable(item.payload))throw new Error('同じIDの異なる単語帳記録があります。');return {remote:old};}
+    const value={version:1,kind:item.kind,revision:1,operationId:item.id,deviceId:item.deviceId,payload:item.payload,updatedAt:sdk.serverTimestamp()};tx.set(ref,value);return {remote:{id:item.id,...value}};
+   });
+  },
   pullLearning(uid,qualificationId,cursor){return this.pullDocuments(uid,qualificationId,cursor,'learning');},
   pushLearning(uid,qualificationId,item){return this.pushDocument(uid,qualificationId,item,'learning');},
   async pull(uid,qualificationId,cursor){

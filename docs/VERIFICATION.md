@@ -685,3 +685,17 @@ Aは問2のサービス時間条件、問30のトークンバス／リングの�
 Firestore Emulatorでの検証は本番ユーザーのスマホとPCの確認を代替しません。`firebase login:list`は認証済みアカウントなし。本番Rulesは未配備で、新しい学習設定同期には利用者による最新版`firestore.rules`の公開が必要です。単語帳評価・チェックポイント・前回の入口・教科書メモ同期は未実装。
 
 公開確認：実装コミット`21d7663`のPages deployment [38059374449](https://github.com/donald-shrimp/ap-study/actions/runs/38059374449)はsuccess。公開先のアプリ・2つの入口HTML・新旧モジュール・SW・Rules・主要ドキュメントの18ファイルをコミットのバイト列とSHA-256で照合。公開先を新しい390pxブラウザで開き、紙なし演習・選択・ヒント・中断・新同期状態表示、横はみ出し／ページエラーなしを確認しました。本番本人アカウントでの新設定同期とRules配備は未確認・未実行です。
+
+## 単語帳の自己評価同期 P0b（2026-10-10、20261010-card-sync1）
+
+前段learning用Rulesは利用者が公開を報告済み。本段は主担当1人でコード・競合を確認して実装し、別担当確認は行っていない。単語帳の評価・観測済み評価の削除・専用バックアップからの明示復元を、新しい不変のcardsコレクションへ分離した。表示中のカード・裏表・フォーカス・中断位置は受信で変更しない。自力正答率・四択・計画実績に自己評価を混ぜない。
+
+- Nodeドメイン/同期テスト83件と、Firebase Rules Emulatorの11件、計94件成功。削除・復元の到着順と時計非依存、後続削除、制御件数の上限、カーソルの保存順と失敗時再取得、本人限定、追記後の変更/削除禁止、他人/未認証、既存コレクションへの新種別混入拒否を確認。
+- `tests/card-sync.py`：実Firebase SDKとAuth/Firestore Emulator、独立3ブラウザ。2端末の同じカードへの異なる自己評価を双方保持。遠隔受信時のカード・裏表・DOMとフォーカスを保持。オフライン評価・再読み込み・送信待ち・削除競合・未観測評価の生存、バックアップによる復元・再取り込みの冪等性・後の削除・第3端末復元、ゲストの明示取り込み・再取り込みでの削除済み評価の非復活・ログアウト・UID分離を確認。
+- `tests/card-store.py`：実IndexedDBで旧v1評価の保持、評価/outbox/チェックポイント保存途中の注入失敗による全体ロールバック、同期カーソルと削除の再読み込み、復元/重複/ゲスト取り込みの違い、同ID競合の全体中止、資格分離、205評価の削除を200件以内の2制御文書へ分割する動作。
+- `tests/card-old-rules.py`：cardsだけ未許可のRulesへ一時切替。評価は端末保存、更新案内を別表示。既存回答・learning・計画診断の同期が成功。最新版Rulesへの復帰後に送信待ち評価の同期が成功。
+- `tests/sync.py`、`tests/learning-sync.py`、`tests/planning-sync.py`、`tests/mobile-account.py`：既存の回答/ヒント/同時継続、紙ペン/先送り/範囲、計画/診断の同期と競合、UID分離を確認。
+- `tests/mobile-study.py`、`tests/storage.py`、`tests/learning-local.py`、`tests/learning-resume.py`、`tests/selection-flow.py`、`tests/field-navigation.py`、`tests/e2e.py`、`tests/pwa.py`：単語帳・専用バックアップ・オフライン・320/390pxと文字200%、原子的な通常記録、再開範囲、全入口・分野/記録/復習の導線、3段階ヒントと開示判定、PWA ID・scope・更新・保存画像を保持。E2Eの開始直後の状態取得で再開処理完了前のホームを読む失敗があり、採点ヘルパーを実際の回答画面待ちへ修正して成功。
+- `tests/content.py`、`tests/corpus.py`と[保持記録](audits/card-sync-20261010.json)：開始mainから教材・データ・画像・スキーマ1,032ファイルのバイト差分0。通常800問・個別教材800問・単語帳681枚・派生180問を保持。
+
+本番本人のGoogleアカウント・Android実機の同期確認は行っていない。今回追加したcards用Rulesは本実行環境から配備できず、最新版firestore.rules全文の追加公開が必要。前段のlearning Rules公開とは別。[具体的な手順](firebase-setup.md#cards-rules)。単語帳中断位置・端末別入口・教科書メモのクラウド保存はP1として保留。

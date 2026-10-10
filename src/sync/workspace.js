@@ -1,12 +1,13 @@
 // New synchronization is optional: an old production rule must not interrupt
 // the existing attempt sync or local learning.
 export function createWorkspaceSync({uid,qualificationId,store,remote,onChange=()=>{},onStatus=()=>{}}){
- let stopped=false,running=null,cursor=null,timer,lastRun=0,rerun=false;
+ let stopped=false,running=null,cursor=null,cursorLoaded=false,timer,lastRun=0,rerun=false;
  const bounded=promise=>new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(new Error('同期通信がタイムアウトしました。')),20000);promise.then(resolve,reject).finally(()=>clearTimeout(timeout));});
  async function perform(){
   if(stopped||!navigator.onLine)return;lastRun=Date.now();onStatus('syncing');
   try{
-   let more=true;while(!stopped&&more){const page=await bounded(remote.pullDocuments(uid,qualificationId,cursor));if(stopped)return;for(const row of page.rows){await store.merge(row);if(stopped)return;}cursor=page.cursor;more=page.more;}
+   if(!cursorLoaded){cursor=await store.cursor?.()||null;cursorLoaded=true;if(stopped)return;}
+   let more=true;while(!stopped&&more){const page=await bounded(remote.pullDocuments(uid,qualificationId,cursor));if(stopped)return;for(const row of page.rows){await store.merge(row);if(stopped)return;}await store.setCursor?.(page.cursor);if(stopped)return;cursor=page.cursor;more=page.more;}
    for(const row of await store.read()){
     if(stopped)return;if(!row.dirty||row.conflict)continue;
     if(row.owner!==`uid:${uid}`||row.qualificationId!==qualificationId)throw new Error('同期先のアカウントが一致しません。');

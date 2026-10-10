@@ -118,6 +118,27 @@ service cloud.firestore {
    allow update: if mine(uid) && learningEnvelope(id) && request.resource.data.kind == resource.data.kind && request.resource.data.revision == resource.data.revision + 1;
    allow delete: if false;
   }
+  function cardId(v) { return v is string && v.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}'); }
+  function cardIds(v) { return v is list && v.size() > 0 && v.size() <= 200 && v.toSet().size() == v.size(); }
+  function cardEnvelope(id) {
+   let d=request.resource.data;
+   let p=d.payload;
+   return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
+    && d.version == 1 && d.revision == 1 && d.operationId == id && d.updatedAt == request.time
+    && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
+    && cardId(p.id) && id == d.kind + '--' + p.id
+    && (d.kind == 'rating'
+     ? p.keys().hasOnly(['id','cardId','cardVersion','outcome','at']) && cardId(p.cardId)
+      && p.cardVersion is int && p.cardVersion > 0 && p.outcome in ['recalled','again']
+      && p.at is string && p.at.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z')
+     : (d.kind == 'reset' ? p.keys().hasOnly(['id','eventIds']) && cardIds(p.eventIds)
+       : d.kind == 'restore' && p.keys().hasOnly(['id','eventIds','resetIds']) && cardIds(p.eventIds) && cardIds(p.resetIds)));
+  }
+  match /users/{uid}/qualifications/{qualificationId}/cards/{id} {
+   allow read: if mine(uid);
+   allow create: if mine(uid) && cardEnvelope(id);
+   allow update, delete: if false;
+  }
   match /users/{uid}/qualifications/{qualificationId}/attempts/{id} {
    allow read: if mine(uid);
    allow create: if mine(uid) && envelope(id, qualificationId);
