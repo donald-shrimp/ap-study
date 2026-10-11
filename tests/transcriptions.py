@@ -23,7 +23,7 @@ for journal in journals:
         current=by_id[item['id']]
         q=current if module.digest(current)==item['afterQuestionSHA256'] else historical[item['afterQuestionSHA256']]
         before=item['beforeQuestion']
-        assert {k for k in q if q[k]!=before.get(k)}<={'stem','choices','image','imageAlt','version'}
+        assert {k for k in q if q[k]!=before.get(k)}<={'stem','choices','image','imageAlt','version','choicePresentation'}
         assert module.digest(q)==item['afterQuestionSHA256']
         assert {k:v for k,v in item['beforeContextItem'].items() if k!='sourceHash'}=={k:v for k,v in item['afterContextItem'].items() if k!='sourceHash'}
 for record in records:

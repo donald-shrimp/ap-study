@@ -87,6 +87,7 @@ def validate_questions(questions, config, root, diagnostic=False):
         require((0 if diagnostic else 1) <= len(q['hints']) <= 20 and all(h['title'] and h['text'] and isinstance(h['revealsAnswer'], bool) for h in q['hints']), f"Invalid hints: {q['id']}")
         require(all(isinstance(q[f], str) for f in ['summary', 'explanation', 'takeaway', 'source']), f"Invalid text: {q['id']}")
         require(q['stem'] or q['sourceImages'], f"Missing question body: {q['id']}")
+        require(q.get('choicePresentation','inline') in ['inline','codes'] and (q.get('choicePresentation')!='codes' or q.get('image')), f"Invalid choice presentation: {q['id']}")
         require(len(q['sourceImages']) == len(q['imageSizes']), f"Missing image sizes: {q['id']}")
         for asset in q['sourceImages'] + [q.get('image')] + [c.get('image') for c in q['choices']]:
             if asset:
@@ -227,7 +228,7 @@ def compile_qualification(root, id):
         packs.append({'id': pack_id, 'label': records[0]['packLabel'], 'url': f'packs/{filename}', 'sha256': digest, 'count': len(records), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in records)})
         for q in records:
             # The index supports searching/scoping/offline availability, not lesson rendering.
-            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type']
+            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type','choicePresentation']
             item = {k: q[k] for k in fields if k in q}
             item['choices'] = [{k: v for k, v in c.items() if k != 'text'} for c in q['choices']]
             item['hintCount'] = len(q['hints'])

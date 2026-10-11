@@ -29,7 +29,7 @@ def refresh_context_reviews(root,before_bank,after_bank,records,before_context,a
     for id,q in after.items():
         if q==before[id]:continue
         changed={k for k in q if q[k]!=before[id].get(k)}
-        if id not in record_map or not changed<={'stem','choices','image','imageAlt','version'}:
+        if id not in record_map or not changed<={'stem','choices','image','imageAlt','version','choicePresentation'}:
             raise ValueError(f'Non-transcription source edit: {id}')
         if {k:v for k,v in old_context[id].items() if k!='sourceHash'}!={k:v for k,v in new_context[id].items() if k!='sourceHash'}:
             raise ValueError(f'Classification changed: {id}')
@@ -80,6 +80,8 @@ def checked_records(root=ROOT):
             seen.add(id)
             if record['format']!='hitomon-markdown-math-v1' or not record['stem'].strip():
                 raise ValueError(f'Invalid format/body: {id}')
+            if record.get('choicePresentation','inline') not in ['inline','codes'] or record.get('choicePresentation')=='codes' and not record.get('image'):
+                raise ValueError(f'Invalid grouped choice presentation: {id}')
             if len(record['choices'])!=len(q['choices']) or [c['label'] for c in record['choices']]!=[c['label'] for c in q['choices']]:
                 raise ValueError(f'Choice count/order differs: {id}')
             if any(not isinstance(c.get('text'),str) or not(c['text'].strip() or c.get('image')) or set(c)-{'label','text','image'} for c in record['choices']):
@@ -122,6 +124,8 @@ def apply(root=ROOT):
         if classification and classification['sourceHash']!=digest(q):
             raise ValueError(f'Classification source changed before transcription: {q["id"]}')
         replacement={key:record[key] for key in ['stem','choices','image','imageAlt']}
+        if 'choicePresentation' in record or 'choicePresentation' in q:
+            replacement['choicePresentation']=record.get('choicePresentation','inline')
         if any(q.get(key)!=value for key,value in replacement.items()):
             q.update(replacement)
             q['version']+=1

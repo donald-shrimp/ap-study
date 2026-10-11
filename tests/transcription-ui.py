@@ -37,7 +37,10 @@ with sync_playwright() as p:
  page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for();assert page.get_by_role('radio').nth(0).is_checked();assert page.locator('.hint-box').count()==1
  page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('.result').count()==1
  page.locator('.result details').filter(has=page.locator('.reason-list')).locator('summary').click();assert page.locator('.reason-list li').count()==4
- open_q('r06h-q8');assert page.locator('.choices table').count()==4
+ open_q('r06h-q8');assert page.locator('.choices table,.choices .choice-text').count()==0;assert page.locator('.question-figure img').count()==1;assert page.locator('.choices .choice-code').all_text_contents()==['ア','イ','ウ','エ']
+ page.get_by_role('radio').nth(1).check();page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
+ assert page.get_by_role('radio').nth(1).is_checked() and page.locator('.choices table,.choices .choice-text').count()==0
+ assert page.locator('.question-figure img').evaluate('(img)=>img.complete&&img.naturalWidth===938')
  page.evaluate('document.documentElement.style.fontSize="200%"');fits();page.evaluate('document.documentElement.style.fontSize=""')
  open_q('r07h-q6');assert page.locator('.choices img').count()==4
  page.locator('.original-question>summary').click();page.get_by_role('button',name='問題画像を拡大',exact=True).click();assert page.locator('#image-dialog').is_visible();page.keyboard.press('Escape')
@@ -51,6 +54,16 @@ with sync_playwright() as p:
  return views.diagnosticHTML();
  }''')
  assert 'class="katex"' in diagnostic and '$((P' not in diagnostic and 'ヒントを' not in diagnostic and 'class="result"' not in diagnostic
+ grouped_diagnostic=page.evaluate('''async()=>{
+ const {loadCatalog}=await import('/src/content/catalog.js'),catalog=await loadCatalog('ap');
+ const {createAssessment}=await import('/src/domain/diagnostic.js'),{createPlanningViews}=await import('/src/ui/planning.js');
+ const run=createAssessment([await catalog.ensure('r06h-q8')],catalog.manifest);
+ const views=createPlanningViews({qualification:catalog.manifest,documents:[{id:run.id,kind:'diagnostic',payload:run}],attempts:[],currentRunId:run.id});
+ const node=document.createElement('div');node.innerHTML=views.diagnosticHTML();
+ return {choices:[...node.querySelectorAll('.choice-code')].map(el=>el.textContent),tables:node.querySelectorAll('.choices table,.choices .choice-text').length,image:node.querySelector('.question-figure img')?.getAttribute('src'),hint:node.textContent.includes('ヒントを')};
+ }''')
+ assert grouped_diagnostic['choices']==['ア','イ','ウ','エ'] and grouped_diagnostic['tables']==0 and not grouped_diagnostic['hint'],grouped_diagnostic
+ assert grouped_diagnostic['image'].endswith('r06h-q8-figure-and-choices.webp'),grouped_diagnostic
  # Core math assets and current question/figures/original survive no network.
  wait_for_async(page,'async()=>{await navigator.serviceWorker.ready;return Boolean(navigator.serviceWorker.controller)}')
  context.set_offline(True);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for();fits()

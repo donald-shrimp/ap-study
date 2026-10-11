@@ -26,7 +26,7 @@ try {
  async function render(){
   const ticket=++sequence;preview.setAttribute('aria-busy','true');
   const q=await catalog.ensure(select.value);if(ticket!==sequence)return;
-  preview.innerHTML=`<p class="small muted">${esc(q.topic)}</p><div class="question-stem rich-question">${questionTextHTML(q.stem)}</div>${q.image?`<figure class="question-figure"><img src="${esc(q.image)}" alt="${esc(q.imageAlt)}"></figure>`:''}${q.choices.map(c=>`<div class="preview-choice"><b>${esc(c.label)}</b><div class="rich-question">${questionTextHTML(c.text)}${c.image?`<img src="${esc(c.image)}" alt="選択肢${esc(c.label)}の図">`:''}</div></div>`).join('')}<details class="original-question"><summary>原本画像を見る</summary>${q.sourceImages.map(src=>`<img src="${esc(src)}" alt="原本の問題画像">`).join('')}</details>`;
+  preview.innerHTML=`<p class="small muted">${esc(q.topic)}</p><div class="question-stem rich-question">${questionTextHTML(q.stem)}</div>${q.image?`<figure class="question-figure"><img src="${esc(q.image)}" alt="${esc(q.imageAlt)}"></figure>`:''}${q.choices.map(c=>`<div class="preview-choice"><b>${esc(c.label)}</b><div class="rich-question">${q.choicePresentation==='codes'?'':questionTextHTML(c.text)}${q.choicePresentation!=='codes'&&c.image?`<img src="${esc(c.image)}" alt="選択肢${esc(c.label)}の図">`:''}</div></div>`).join('')}<details class="original-question"><summary>原本画像を見る</summary>${q.sourceImages.map(src=>`<img src="${esc(src)}" alt="原本の問題画像">`).join('')}</details>`;
   preview.setAttribute('aria-busy','false');const url=new URL(location.href);url.searchParams.set('q',q.id);history.replaceState(null,'',url);
  }
  select.disabled=false;select.addEventListener('change',()=>render().catch(e=>status.textContent=e.message));await render();

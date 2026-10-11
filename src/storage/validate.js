@@ -4,7 +4,7 @@ const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
@@ -25,6 +25,7 @@ function questionSnapshot(q, qualificationId) {
   return q && Object.keys(q).every(k=>questionFields.includes(k)) && id(q.id)
     && (q.diagnosticOnly===undefined&&q.parentQuestionId===undefined||q.diagnosticOnly===true&&id(q.parentQuestionId)&&q.parentQuestionId!==q.id)
     && q.qualificationId===qualificationId && q.type==='singleChoice'
+    && (q.choicePresentation===undefined||q.choicePresentation==='inline'||q.choicePresentation==='codes'&&Boolean(q.image))
     && Number.isInteger(q.version) && text(q.title) && text(q.topic)
     && Array.isArray(q.choices) && q.choices.length>=2 && q.choices.length<=20
     && new Set(q.choices.map(c=>c.id)).size===q.choices.length

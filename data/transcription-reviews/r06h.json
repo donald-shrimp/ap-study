@@ -108,8 +108,8 @@
   {
     "id": "r06h-q8",
     "status": "confirmed",
-    "reviewer": "/root/transcribe_r07h",
-    "reviewedTranscriptionSHA256": "9a908a502d8a54af43a42a2e785371fb6128a6561fea25de9357ed740d41bce7",
+    "reviewer": "/root/review_r06h_q8_layout",
+    "reviewedTranscriptionSHA256": "7791cb17672a07cb0269fde2bea4efc64a0a1f8e06d4cd4fab339102ca720fc5",
     "checks": {
       "wording": true,
       "math": true,
@@ -118,10 +118,12 @@
       "choices": true,
       "source": true
     },
-    "issues": [],
-    "evidence": "原本WebPを全文照合し、開始アドレス・方向フラグ0昇順/1降順・1語ずつの条件を確認。メモリ図クロップを目視し1000〜1007、1001→1003/1002→1004/1003→1005/1004→1006の4矢印と網掛けを保持。原本選択肢表の4行をア1001,1003,0,4／イ1001,1003,1,4／ウ1004,1006,0,4／エ1004,1006,1,4として一致確認。",
+    "issues": [
+      "ユーザー指摘：全4択を個別のMarkdown表として回答欄に表示すると、小画面で横スクロールが必要になる。対応：本文・choices[].textは維持し、メモリ図と4択の表を一体の原本クロップ画像に変更、choicePresentation=codesで回答欄はア〜エのみ表示。改訂後を作成者/rootとは別の担当/root/review_r06h_q8_layoutが原本から再照合した。"
+    ],
+    "evidence": "既存IPA原本WebPと改訂クロップをそれぞれ目視し、本文の転送元1001〜1004・転送先1003〜1006・1語ずつ・方向フラグ0昇順/1降順を転記と照合。図の実行前/実行後、1000〜1007、1001→1003/1002→1004/1003→1005/1004→1006の4矢印と元/先4語の網掛けを確認。表は転送元開始/転送先開始/方向/語数の4列、ア1001,1003,0,4・イ1001,1003,1,4・ウ1004,1006,0,4・エ1004,1006,1,4の4行を照合し、ア〜エ順と全罫線・見出しの保持および見切れがないことを確認。本文・全4択の転記は既存版と完全一致。新画像938×732pxは元WebPのcrop(32,326,970,1058)とRGB全画素が一致し、再描画・数値変更はない。原本SHA-256も作成元のsourceImageSHA256に一致。choicePresentationによる表示だけを変更し、意味・解答対応を保持。",
     "figureSHA256": {
-      "assets/transcriptions/transcribe_r06h/r06h-q8-figure.webp": "b4a79996ed1f7cc7bc947907139d9661f37be70134d7537cd8a68e58ba804198"
+      "assets/transcriptions/transcribe_r06h/r06h-q8-figure-and-choices.webp": "08c4440bbdf7d49242cfb329708ec21fee481792251583a56749ebb4b9e42cf2"
     }
   },
   {
