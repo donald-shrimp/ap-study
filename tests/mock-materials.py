@@ -18,7 +18,7 @@ originals={q['id']:q for q in read('data/qualifications/ap/'+manifest['index']['
 published={q['id']:q for q in read('content/ap/diagnostic-questions.json')}
 reviews={r['questionId']:r for r in read('content/ap/diagnostic-reviews.json')}
 progress=read('content/ap/diagnostic-progress.json')
-assert sets['format']=='hitomon-mock-sets' and sets['version']==1 and sets['qualificationId']=='ap' and sets['materialOnly']
+assert sets['format']=='hitomon-mock-sets' and sets['version']==1 and sets['qualificationId']=='ap' and not sets['materialOnly']
 assert len(sets['sets'])==2 and len({s['id'] for s in sets['sets']})==2
 all_ids=set();all_parents=set()
 for s in sets['sets']:

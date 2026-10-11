@@ -73,6 +73,12 @@ export async function loadCatalog(requestedId) {
     }).catch(error=>{diagnosticsPromise=null;throw error;});
     return diagnosticsPromise;
   }
+  async function loadMockSets(){
+    const entry=manifest.mockSets;if(!entry)return [];
+    const {value}=await readJSON(new URL(entry.url,manifestURL),entry.sha256);
+    if(value.format!=='hitomon-mock-sets'||value.version!==1||value.qualificationId!==manifest.id||!Array.isArray(value.sets)||value.sets.length!==entry.count)throw new Error('模試の教材を確認できません。');
+    return value.sets;
+  }
   async function ensure(id) {
     const question = byId.get(id);
     if (!question) throw new Error('この問題は現在の教材一覧にありません。');
@@ -90,7 +96,7 @@ export async function loadCatalog(requestedId) {
     await loading.get(pack.id);
     return question;
   }
-  return {manifest, qualifications, questions, packs, ensure, loadDiagnostics, online:loaded.online && index.online,
+  return {manifest, qualifications, questions, packs, ensure, loadDiagnostics, loadMockSets, online:loaded.online && index.online,
     loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }

@@ -1,3 +1,4 @@
+import {createMock} from '../src/domain/mock.js';
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -146,4 +147,21 @@ test('単語帳の再開位置は端末別文書で更新し、別端末IDへの
  await assertSucceeds(setDoc(ref,personalEnvelope('checkpoint',{...payload,checkpoint:null},2)));
  await assertSucceeds(setDoc(doc(db,personalPath('resume-cards','checkpoint--pc')),personalEnvelope('checkpoint',{...payload,deviceId:'pc'},1,'pc')));
  await assertFails(deleteDoc(ref));
+});
+
+test('固定80問の模試は本人だけ保存・再開でき、問題順・確定回答・終了後を変更できない',async()=>{
+ const sets=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.mockSets.url,import.meta.url))).sets;
+ const variants=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.diagnostic.url,import.meta.url)));
+ const run=createMock(sets[0],variants,qualification),db=env.authenticatedContext('mock-user').firestore(),ref=doc(db,resourcePath('mock-user',run.id));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('mock',run)));
+ for(const client of [env.authenticatedContext('mock-other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(doc(client,resourcePath('mock-user',run.id))));await assertFails(setDoc(doc(client,resourcePath('mock-user',run.id)),resourceEnvelope('mock',run,2)));}
+ const reorder=structuredClone(run);reorder.slots.reverse();await assertFails(setDoc(ref,resourceEnvelope('mock',reorder,2)));
+ const identity=structuredClone(run);identity.mockSet.label='changed';await assertFails(setDoc(ref,resourceEnvelope('mock',identity,2)));
+ const policy=structuredClone(run);policy.assistance='hints';await assertFails(setDoc(ref,resourceEnvelope('mock',policy,2)));
+ submitDiagnostic(run,run.slots[0].attempt.questionSnapshot.correctChoiceId);await assertSucceeds(setDoc(ref,resourceEnvelope('mock',run,2)));
+ const answer=structuredClone(run);answer.responses[run.slots[0].id]='choice-unknown';await assertFails(setDoc(ref,resourceEnvelope('mock',answer,3)));
+ for(let i=1;i<80;i++)submitDiagnostic(run,run.slots[i].attempt.questionSnapshot.correctChoiceId);
+ await assertSucceeds(setDoc(ref,resourceEnvelope('mock',run,3)));
+ const reopened=structuredClone(run);reopened.status='in_progress';reopened.completedAt=null;await assertFails(setDoc(ref,resourceEnvelope('mock',reopened,4)));await assertFails(deleteDoc(ref));
+ const wrongSize=createMock(sets[1],variants,qualification);wrongSize.size=30;await assertFails(setDoc(doc(db,resourcePath('mock-user',wrongSize.id)),resourceEnvelope('mock',wrongSize)));
 });

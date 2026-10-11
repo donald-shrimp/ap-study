@@ -136,6 +136,27 @@ def compile_diagnostics(root, config, originals, directory):
     return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions)}
 
 
+def compile_mock_sets(root, config, directory):
+    if not config.get('mockSetSource'):
+        return None
+    path=root / config['mockSetSource']
+    require(path.resolve().is_relative_to(root.resolve()), 'Mock sets outside repository')
+    data=json.loads(path.read_text())
+    require(data.get('format')=='hitomon-mock-sets' and data.get('version')==1 and data.get('qualificationId')==config['id'], 'Invalid mock header')
+    published={q['id']:q for q in json.loads((root/config['diagnosticQuestionSource']).read_text())}
+    sets=[dict(s,version=s.get('version',1)) for s in data['sets'] if s['status']=='ready']
+    require(len({s['id'] for s in sets})==len(sets), 'Duplicate mock set')
+    for s in sets:
+        require(SAFE_ID.fullmatch(s['id']) and isinstance(s['label'],str) and 0<len(s['label'])<=200 and type(s['version']) is int and s['version']>0, 'Invalid mock identity')
+        require(s['size']==len(s['slots'])==80 and len({slot['questionId'] for slot in s['slots']})==80 and len({slot['parentQuestionId'] for slot in s['slots']})==80, 'Mock requires 80 unique fixed questions')
+        for i,slot in enumerate(s['slots']):
+            q=published.get(slot['questionId'])
+            require(slot['number']==i+1 and q and q['diagnosticOnly'] and q['enrichment']=='reviewed' and q['parentQuestionId']==slot['parentQuestionId'] and q['topicId']==slot['topicId'], 'Invalid fixed mock question')
+    body={'format':'hitomon-mock-sets','version':1,'qualificationId':config['id'],'sets':sets}
+    filename,digest=hashed_json(directory,'mockSets',body)
+    return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{k:s[k] for k in ['id','label','version','size']} for s in sets]}
+
+
 def compile_learning_tools(root, config, questions, directory):
     """Optional curated context and cards. Keep ordinary questions immutable."""
     result = {}
@@ -213,10 +234,12 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     diagnostic=compile_diagnostics(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource', 'studyContextSource', 'flashcardSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if diagnostic is not None:
         manifest['diagnostic']=diagnostic
+    mock_sets=compile_mock_sets(root,config,directory)
+    if mock_sets is not None:manifest['mockSets']=mock_sets
     manifest.update(compile_learning_tools(root, config, questions, directory))
     write_json(directory / 'manifest.json', manifest)
     return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions)}, config

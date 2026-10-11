@@ -23,8 +23,11 @@ export function selectDiagnostic(questions,qualification,attempts=[],random=Math
 }
 export function createDiagnostic(questions,qualification,attempts=[],catalogRevision=''){
  if(questions.length!==DIAGNOSTIC_SIZE||new Set(questions.map(q=>q.id)).size!==DIAGNOSTIC_SIZE||new Set(questions.map(diagnosticFamily)).size!==DIAGNOSTIC_SIZE)throw new Error('診断は元問題が異なる30問で開始してください。');
+ return createAssessment(questions,qualification,attempts,catalogRevision);
+}
+export function createAssessment(questions,qualification,attempts=[],catalogRevision=''){
  const startedAt=new Date().toISOString(),seen=new Set(attempts.map(a=>a.questionId));
- return {id:crypto.randomUUID(),qualificationId:qualification.id,version:1,blueprintVersion:Math.max(DIAGNOSTIC_BLUEPRINT_VERSION,qualification.diagnosticBlueprint?.version||DIAGNOSTIC_BLUEPRINT_VERSION),selectionPolicy:policyFor(qualification),catalogRevision,assistance:'none',feedback:'after-finish',size:DIAGNOSTIC_SIZE,status:'in_progress',startedAt,completedAt:null,currentIndex:0,currentChoiceId:null,responses:{},slots:questions.map(q=>({id:crypto.randomUUID(),attempt:createAttempt(q,{at:startedAt,diagnostic:true}),previouslySeen:seen.has(q.id),kind:q.diagnosticOnly?'derived':'original',parentQuestionId:q.diagnosticOnly?q.parentQuestionId:null,parentPreviouslySeen:q.diagnosticOnly?seen.has(q.parentQuestionId):null}))};
+ return {id:crypto.randomUUID(),qualificationId:qualification.id,version:1,blueprintVersion:Math.max(DIAGNOSTIC_BLUEPRINT_VERSION,qualification.diagnosticBlueprint?.version||DIAGNOSTIC_BLUEPRINT_VERSION),selectionPolicy:policyFor(qualification),catalogRevision,assistance:'none',feedback:'after-finish',size:questions.length,status:'in_progress',startedAt,completedAt:null,currentIndex:0,currentChoiceId:null,responses:{},slots:questions.map(q=>({id:crypto.randomUUID(),attempt:createAttempt(q,{at:startedAt,diagnostic:true}),previouslySeen:seen.has(q.id),kind:q.diagnosticOnly?'derived':'original',parentQuestionId:q.diagnosticOnly?q.parentQuestionId:null,parentPreviouslySeen:q.diagnosticOnly?seen.has(q.parentQuestionId):null}))};
 }
 export function submitDiagnostic(run,choiceId){
  if(run.status!=='in_progress')throw new Error('終了した診断には回答できません。');
@@ -61,25 +64,29 @@ export function diagnosticSlots(run){
  return run.slots.map((s,i)=>{const answered=Object.hasOwn(run.responses,s.id),choice=answered?run.responses[s.id]:i===run.currentIndex&&run.status==='in_progress'?run.currentChoiceId:null;return {...s,selectedChoiceId:choice,submitted:answered&&choice!==null,skipped:answered&&choice===null};});
 }
 export function validateDiagnostic(run,qualification,validateAttempt){
+ if(run?.mode!==undefined)throw new Error('模試は診断とは別に保存してください。');
+ return validateAssessment(run,qualification,validateAttempt,{size:30,diagnostic:true});
+}
+export function validateAssessment(run,qualification,validateAttempt,{size,diagnostic=false}){
  const fail=()=>{throw new Error('診断データの形式を確認できません。記録は変更していません。');};
  const ids=new Set(),questions=new Set(),families=new Set();
- if(!run||run.version!==1||run.qualificationId!==qualification.id||typeof run.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(run.id)||run.size!==30||!Array.isArray(run.slots)||run.slots.length!==30||run.assistance!=='none'||run.feedback!=='after-finish'||!['in_progress','completed','ended_early'].includes(run.status)||!Number.isInteger(run.currentIndex)||run.currentIndex<0||run.currentIndex>=30||typeof run.startedAt!=='string'||Number.isNaN(Date.parse(run.startedAt))||run.status==='in_progress'&&run.completedAt!==null||run.status!=='in_progress'&&Number.isNaN(Date.parse(run.completedAt))||!run.responses||typeof run.responses!=='object'||Array.isArray(run.responses))fail();
+ if(!run||run.version!==1||run.qualificationId!==qualification.id||typeof run.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(run.id)||run.size!==size||!Array.isArray(run.slots)||run.slots.length!==size||run.assistance!=='none'||run.feedback!=='after-finish'||!['in_progress','completed','ended_early'].includes(run.status)||!Number.isInteger(run.currentIndex)||run.currentIndex<0||run.currentIndex>=size||typeof run.startedAt!=='string'||Number.isNaN(Date.parse(run.startedAt))||run.status==='in_progress'&&run.completedAt!==null||run.status!=='in_progress'&&Number.isNaN(Date.parse(run.completedAt))||!run.responses||typeof run.responses!=='object'||Array.isArray(run.responses))fail();
  if(!Number.isInteger(run.blueprintVersion)||run.blueprintVersion<1||run.blueprintVersion>10000||typeof run.catalogRevision!=='string'||run.catalogRevision.length>200)fail();
- if(run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){const p=run.selectionPolicy;if(!p||Object.keys(p).some(k=>!['sampling','defaultVariantLimit','variantLimits','preference'].includes(k))||p.sampling!=='topic-round-robin'||p.defaultVariantLimit!==1||JSON.stringify(p.preference)!==JSON.stringify(policyFor(qualification).preference)||!p.variantLimits||typeof p.variantLimits!=='object'||Array.isArray(p.variantLimits)||Object.entries(p.variantLimits).some(([id,n])=>!qualification.topics.some(t=>t.id===id)||!Number.isInteger(n)||n<0||n>30))fail();}
+ if(diagnostic&&run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){const p=run.selectionPolicy;if(!p||Object.keys(p).some(k=>!['sampling','defaultVariantLimit','variantLimits','preference'].includes(k))||p.sampling!=='topic-round-robin'||p.defaultVariantLimit!==1||JSON.stringify(p.preference)!==JSON.stringify(policyFor(qualification).preference)||!p.variantLimits||typeof p.variantLimits!=='object'||Array.isArray(p.variantLimits)||Object.entries(p.variantLimits).some(([id,n])=>!qualification.topics.some(t=>t.id===id)||!Number.isInteger(n)||n<0||n>30))fail();}
  for(const slot of run.slots){
   if(!slot||typeof slot.previouslySeen!=='boolean'||typeof slot.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(slot.id)||ids.has(slot.id))fail();ids.add(slot.id);
   const a=slot.attempt;validateAttempt(a);
   const q=a.questionSnapshot,family=diagnosticFamily(q);
   if(!qualification.topics.some(t=>t.id===q.topicId)||!examPartsFor(qualification).some(p=>p.practiceAvailable&&p.id===(q.examPartId||qualification.defaultExamPartId||'objective')))fail();
-  if(run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){if(slot.kind!==(q.diagnosticOnly?'derived':'original')||slot.parentQuestionId!==(q.diagnosticOnly?q.parentQuestionId:null)||(q.diagnosticOnly?typeof slot.parentPreviouslySeen!=='boolean':slot.parentPreviouslySeen!==null)||families.has(family))fail();families.add(family);}else if(q.diagnosticOnly)fail();
+  if(!diagnostic||run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){if(slot.kind!==(q.diagnosticOnly?'derived':'original')||slot.parentQuestionId!==(q.diagnosticOnly?q.parentQuestionId:null)||(q.diagnosticOnly?typeof slot.parentPreviouslySeen!=='boolean':slot.parentPreviouslySeen!==null)||families.has(family))fail();families.add(family);}else if(q.diagnosticOnly)fail();
   if(a.status!=='in_progress'||a.hintCount!==0||a.hintEvents.length||a.answerViewedBefore||a.selected!==null||questions.has(a.questionId)||a.qualificationId!==qualification.id)fail();questions.add(a.questionId);
   if(Object.hasOwn(run.responses,slot.id)&&run.responses[slot.id]!==null&&!a.questionSnapshot.choices.some(c=>c.id===run.responses[slot.id]))fail();
  }
- if(run.selectionPolicy&&qualification.topics.some(t=>run.slots.filter(s=>s.kind==='derived'&&s.attempt.questionSnapshot.topicId===t.id).length>(run.selectionPolicy.variantLimits[t.id]??1)))fail();
+ if(diagnostic&&run.selectionPolicy&&qualification.topics.some(t=>run.slots.filter(s=>s.kind==='derived'&&s.attempt.questionSnapshot.topicId===t.id).length>(run.selectionPolicy.variantLimits[t.id]??1)))fail();
  if(Object.keys(run.responses).some(id=>!ids.has(id)))fail();
  if(run.currentChoiceId!==null&&!run.slots[run.currentIndex].attempt.questionSnapshot.choices.some(c=>c.id===run.currentChoiceId))fail();
  for(let i=0;i<run.currentIndex;i++)if(!Object.hasOwn(run.responses,run.slots[i].id))fail();
  if(run.status==='in_progress'&&run.slots.slice(run.currentIndex).some(s=>Object.hasOwn(run.responses,s.id)))fail();
- if(run.status==='completed'&&Object.keys(run.responses).length!==30)fail();
+ if(run.status==='completed'&&Object.keys(run.responses).length!==size)fail();
  return structuredClone(run);
 }

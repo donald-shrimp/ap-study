@@ -46,6 +46,22 @@ service cloud.firestore {
     && (p.currentChoiceId == null || p.currentChoiceId is string)
     && p.slots is list && p.slots.size() == 30;
   }
+  function validMock(p, id, qualificationId) {
+   return p.keys().hasOnly(['id','qualificationId','version','mode','mockSet','blueprintVersion','selectionPolicy','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
+    && p.id == id && p.qualificationId == qualificationId && p.version == 1 && p.mode == 'mock'
+    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size == 80 && p.selectionPolicy == null
+    && p.mockSet is map && p.mockSet.keys().hasOnly(['id','label','version','questionIds'])
+    && p.mockSet.id is string && p.mockSet.id.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}')
+    && p.mockSet.label is string && p.mockSet.label.size() > 0 && p.mockSet.label.size() <= 200
+    && p.mockSet.version is int && p.mockSet.version > 0
+    && p.mockSet.questionIds is list && p.mockSet.questionIds.size() == 80
+    && p.status in ['in_progress','completed','ended_early']
+    && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
+    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < 80
+    && p.responses is map && p.responses.size() <= 80
+    && (p.currentChoiceId == null || p.currentChoiceId is string)
+    && p.slots is list && p.slots.size() == 80;
+  }
   function frozenDiagnostic(p, old) {
    return p.diff(old).affectedKeys().hasOnly(['responses','currentChoiceId','status','currentIndex','completedAt'])
     && p.slots == old.slots && p.currentIndex >= old.currentIndex
@@ -71,11 +87,11 @@ service cloud.firestore {
   function resourceEnvelope(id, qualificationId) {
    let d = request.resource.data;
    return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
-    && d.version == 1 && d.kind in ['planning','diagnostic']
+    && d.version == 1 && d.kind in ['planning','diagnostic','mock']
     && d.revision is int && d.revision >= 1 && d.operationId is string && d.operationId.size() <= 300
     && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
     && d.updatedAt == request.time
-    && (d.kind == 'planning' ? id == 'planning' && validPlan(d.payload, qualificationId) : validDiagnostic(d.payload, id, qualificationId));
+    && (d.kind == 'planning' ? id == 'planning' && validPlan(d.payload, qualificationId) : d.kind == 'mock' ? validMock(d.payload, id, qualificationId) : validDiagnostic(d.payload, id, qualificationId));
   }
   match /users/{uid}/qualifications/{qualificationId}/resources/{id} {
    allow read: if mine(uid);
