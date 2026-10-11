@@ -32,7 +32,7 @@ export function planChanges(before,after,q){
 // Period totals follow the currently selected branch. Competing revisions stay
 // in the change list, but cannot silently replace a past goal on this branch.
 export function completedPlanPeriods({plan,revisions,attempts,qualification,at=new Date()}){
- const snapshots=revisions.filter(r=>Date.parse(r.savedAt)<=Date.parse(at)).sort((a,b)=>a.savedAt.localeCompare(b.savedAt)||a.id.localeCompare(b.id));
+ const snapshots=revisions.filter(r=>Date.parse(r.savedAt)<=new Date(at).getTime()).sort((a,b)=>a.savedAt.localeCompare(b.savedAt)||a.id.localeCompare(b.id));
  const head=[...snapshots].reverse().find(r=>plan&&canonical(r.plan)===canonical(plan)),byId=new Map(snapshots.map(r=>[r.id,r])),chain=[],seen=new Set();
  let cursor=head;
  while(cursor&&!seen.has(cursor.id)){seen.add(cursor.id);chain.unshift(cursor);cursor=byId.get(cursor.previousId);}

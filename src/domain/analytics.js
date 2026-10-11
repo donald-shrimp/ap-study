@@ -33,7 +33,7 @@ export function summarizeFields(data){
 // Historical points cover the entire local calendar day; today's point stops
 // at now. Repeated questions use the last result within EACH 28-day window.
 export function learningTrend({qualification,attempts,questions=[],plan=null,at=new Date(),examPartId=null,topicId=null}){
- const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone),byId=new Map(questions.map(q=>[q.id,q])),topics=new Set(qualification.topics.map(t=>t.id)),cutoff=Date.parse(at);
+ const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone),byId=new Map(questions.map(q=>[q.id,q])),topics=new Set(qualification.topics.map(t=>t.id)),cutoff=new Date(at).getTime();
  const eligible=attempts.filter(a=>complete(a)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===qualification.id)&&Date.parse(a.completedAt)<=cutoff).flatMap(a=>{
   const q=a.questionSnapshot||byId.get(a.questionId),id=q?.topicId||qualification.topics.find(t=>t.name===q?.topic)?.id;
   if(!topics.has(id)||topicId&&id!==topicId||examPartId&&partOfAttempt(q?{...a,questionSnapshot:q}:a,qualification)!==examPartId)return [];

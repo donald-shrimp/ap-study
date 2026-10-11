@@ -48,3 +48,10 @@ test('履歴のルール未公開でも計画本体は同期し、履歴は同�
  const engine=createWorkspaceSync({uid:'user',qualificationId:'test',store:{read:async()=>rows,merge:async()=>{},acknowledge:async id=>{rows.find(r=>r.id===id).dirty=false;}},remote:{pullDocuments:async()=>({rows:[],cursor:null,more:false}),pushDocument:async(uid,qualificationId,row)=>{if(row.kind==='planRevision')throw {code:'permission-denied'};sent.push(row.id);return {remote:{revision:1}};}},onStatus:kind=>statuses.push(kind)});
  try{await engine.run();assert.deepEqual(sent,['planning']);assert.equal(rows[0].dirty,true);assert.equal(statuses.at(-1),'history-rules');}finally{engine.stop();}
 });
+
+test('回答と計画を保存した直後も、Dateのミリ秒を落とさず集計する',()=>{
+ const now=new Date('2026-10-11T03:00:00.900Z'),attempts=[attempt('now','same','correct','2026-10-11T03:00:00.800Z'),attempt('future','later','correct','2026-10-11T03:00:00.901Z')];
+ const {total,correct,rate}=learningTrend({qualification:q,attempts,at:now}).points.at(-1);assert.deepEqual({total,correct,rate},{total:1,correct:1,rate:1});assert.deepEqual({total,correct,rate},summarizeFields(learningFields({qualification:q,attempts,at:now})));
+ const p=plan(),old=revision(p,'before','2026-09-01T00:00:00Z'),changed=structuredClone(p);changed.phases[0].targets.completedAttempts=10;const saved=revision(changed,'now','2026-10-11T03:00:00.800Z','before');
+ assert.equal(completedPlanPeriods({plan:changed,revisions:[old,saved],attempts:[],qualification:q,at:now})[0].targets.completedAttempts,100);
+});

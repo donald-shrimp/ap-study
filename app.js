@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261011-growth-history1';
+import './src/app.js?v=20261011-growth-history2';
