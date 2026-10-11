@@ -1,7 +1,7 @@
 [
   {
     "id": "r07h-q1",
-    "version": 1,
+    "version": 2,
     "number": 1,
     "title": "論理式と含意",
     "topic": "基礎理論",
@@ -15,7 +15,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "論理式 $P$，$Q$ がいずれも真であるとき，論理式 $R$ の真偽にかかわらず真になる式はどれか。ここで，“$\\overline{\\phantom{A}}$” は否定を，“$\\lor$” は論理和を，“$\\land$” は論理積を，“$\\to$” は含意（“真 $\\to$ 偽” となるときに限り偽となる演算）を表す。",
     "searchText": "問1論理式P,0がいずれも真であるとき,論理式Rの真偽にかかわらず真になる式は\nEND,COC,“”BES,“V\"は論理和を,“A”RMS,“つ”は含意\n(“真つ偽”となるときに限り偽となる演算)を表す。\nア((Pっ0Q)人(0っP))っ(Rっ0)\nイ((PっQ)人(0っP))っ(0っR)\nウ((Pっ6)V(QっP))っ(Rっ6)\nェ((Pっ06)V(0っP))っ(0っR)",
     "sourceImages": [
       "assets/questions/r07h/r07h-q1.webp"
@@ -29,19 +29,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$((P \\to Q) \\land (Q \\to P)) \\to (R \\to \\overline{Q})$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$((P \\to Q) \\land (\\overline{Q \\to \\overline{P}})) \\to (Q \\to R)$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "$((P \\to \\overline{Q}) \\lor (Q \\to P)) \\to (R \\to \\overline{Q})$"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "$((P \\to \\overline{Q}) \\lor (Q \\to \\overline{P})) \\to (Q \\to R)$"
       }
     ],
     "answer": 3,
@@ -75,11 +75,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q1",
-    "lessonSource": "lessons/r07h.json:r07h-q1"
+    "lessonSource": "lessons/r07h.json:r07h-q1",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q2",
-    "version": 1,
+    "version": 2,
     "number": 2,
     "title": "二分法の繰り返し回数",
     "topic": "基礎理論",
@@ -93,7 +95,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "$0 \\leqq x \\leqq 1$ の範囲で単調に増加する連続関数 $f(x)$ が $f(0) < 0 \\leqq f(1)$ を満たすときに，区間内で $f(x) = 0$ である $x$ の値を近似的に求めるアルゴリズムにおいて，（2）は何回実行されるか。\n\n〔アルゴリズム〕\n\n（1）$x_{0} \\leftarrow 0$，$x_{1} \\leftarrow 1$ とする。\n\n（2）$x \\leftarrow \\dfrac{x_{0} + x_{1}}{2}$ とする。\n\n（3）$x_{1} - x < 0.001$ ならば $x$ の値を近似値として終了する。\n\n（4）$f(x) \\geqq 0$ ならば $x_{1} \\leftarrow x$ として，そうでなければ $x_{0} \\leftarrow x$ とする。\n\n（5）（2）に戻る。",
     "searchText": "問2OSxS51の範囲で単調に増加する連続関数f(x)がf(9)<0ミィ(1)を満た\nすときに,区間内でf(x)=0であるxの値を近似的に求めるアルゴリズムにおいて,\n(2)は何回実行されるか。\n〔アルゴリズム}\n(1)x。でと,xで1とする。\n(2)xeとする。\n(3)x—x<0.001ならばxの値を近似値として終了する。\n(4)f(x)竹9ならばxでxとして,そうでなければx。でxとする。\n(5)(2)に戻る。\nア10イ20ウ100エ1,000P",
     "sourceImages": [
       "assets/questions/r07h/r07h-q2.webp"
@@ -107,19 +109,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "10"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "20"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "100"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "1,000"
       }
     ],
     "answer": 0,
@@ -153,11 +155,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q2",
-    "lessonSource": "lessons/r07h.json:r07h-q2"
+    "lessonSource": "lessons/r07h.json:r07h-q2",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q3",
-    "version": 1,
+    "version": 2,
     "number": 3,
     "title": "2025年 春期 問3",
     "topic": "基礎理論",
@@ -171,7 +175,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "AIにおける機械学習の過程において，過学習と疑われたときの解消方法として，最も適切なものはどれか。",
     "searchText": "間3AIにおける機械学習の過程において,過学習と疑われたときの人解消方法として,\n最も適切なものはどれか。\nア訓練した時と同じ精度を出すために,訓練データをテストデータとして使用する。\n4精度を高めるために,元の訓練データに加工を施し,訓練データの量を増やす。\nウ予測した結果に近づけるために,モデルをより複雑にする。\nエより多くの未知のデータに対して予測できるように,汎化性能を下げる。",
     "sourceImages": [
       "assets/questions/r07h/r07h-q3.webp"
@@ -185,19 +189,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "訓練した時と同じ精度を出すために，訓練データをテストデータとして使用する。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "精度を高めるために，元の訓練データに加工を施し，訓練データの量を増やす。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "予測した結果に近づけるために，モデルをより複雑にする。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "より多くの未知のデータに対して予測できるように，汎化性能を下げる。"
       }
     ],
     "answer": 1,
@@ -231,11 +235,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q3",
-    "lessonSource": "lessons/r07h.json:r07h-q3"
+    "lessonSource": "lessons/r07h.json:r07h-q3",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q4",
-    "version": 1,
+    "version": 2,
     "number": 4,
     "title": "2025年 春期 問4",
     "topic": "基礎理論",
@@ -249,7 +255,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "リアルタイム性が求められる組込みシステムにおいて，システムへの入力に対するリアルタイムな応答の方法として，最も適切なものはどれか。",
     "searchText": "間4リアルタイム性が求められる組込みシステムにおいて,システムへの入力に対する\nリアルタイムな応答の方法として,最も適切なものはどれか。\nア0Sを使用しないで応答する。\n4定められた制限時間内に応答する。\nウ入力された順序を守って応答する。\nエ入力時刻を記録して応答する。",
     "sourceImages": [
       "assets/questions/r07h/r07h-q4.webp"
@@ -263,19 +269,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "OSを使用しないで応答する。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "定められた制限時間内に応答する。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "入力された順序を守って応答する。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "入力時刻を記録して応答する。"
       }
     ],
     "answer": 1,
@@ -309,11 +315,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q4",
-    "lessonSource": "lessons/r07h.json:r07h-q4"
+    "lessonSource": "lessons/r07h.json:r07h-q4",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q5",
-    "version": 1,
+    "version": 2,
     "number": 5,
     "title": "2025年 春期 問5",
     "topic": "アルゴリズム・プログラミング",
@@ -327,7 +335,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "A，B，Cの順序で入力されるデータがある。各データについてスタックへの挿入と取出しを1回ずつ行うことができる場合，データの出力順序は何通りあるか。",
     "searchText": "問5A,B,Cの順序で入力されるデータがある。各データについてスタックへの挿入と\n取出しを1回ずつ行うことができる場合,データの出力順序は何通りあるか。\n—,.B,C\nB\n.ス\nタ\nツ\nア3イ4ウ5エ6",
     "sourceImages": [
       "assets/questions/r07h/r07h-q5.webp"
@@ -341,19 +349,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "3"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "4"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "5"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "6"
       }
     ],
     "answer": 2,
@@ -387,11 +395,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q5",
-    "lessonSource": "lessons/r07h.json:r07h-q5"
+    "lessonSource": "lessons/r07h.json:r07h-q5",
+    "image": "assets/transcriptions/transcribe_r07h/r07h-q5-figure.webp",
+    "imageAlt": "A，B，Cの入力とスタックへの挿入・取出しを示す原本図"
   },
   {
     "id": "r07h-q6",
-    "version": 1,
+    "version": 2,
     "number": 6,
     "title": "2025年 春期 問6",
     "topic": "アルゴリズム・プログラミング",
@@ -405,7 +415,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "図の2分探索木に1と0の二つの要素を順に追加したAVL木として，適切なものはどれか。",
     "searchText": "問6図の2分探索木に1と0の二つの要素を順に追加したAVL木として,適切なかものは\nどれか。\n(3)\n(3(7)\nOQ©©\nアイ\n(2)(の\n(1)(5)(2)(6)\nOOO©(りりOQ©\nQ©\nウa\n(3)(5)\n(5)(7)(3)©)\nQ@O©QO©|\n(〇の©OQ©®",
     "sourceImages": [
       "assets/questions/r07h/r07h-q6.webp"
@@ -419,19 +429,23 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "",
+        "image": "assets/transcriptions/transcribe_r07h/r07h-q6-a.webp"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "",
+        "image": "assets/transcriptions/transcribe_r07h/r07h-q6-b.webp"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "",
+        "image": "assets/transcriptions/transcribe_r07h/r07h-q6-c.webp"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "",
+        "image": "assets/transcriptions/transcribe_r07h/r07h-q6-d.webp"
       }
     ],
     "answer": 2,
@@ -465,11 +479,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q6",
-    "lessonSource": "lessons/r07h.json:r07h-q6"
+    "lessonSource": "lessons/r07h.json:r07h-q6",
+    "image": "assets/transcriptions/transcribe_r07h/r07h-q6-figure.webp",
+    "imageAlt": "根が5で，3，7，2，4，6を含む2分探索木の原本図"
   },
   {
     "id": "r07h-q7",
-    "version": 1,
+    "version": 2,
     "number": 7,
     "title": "2025年 春期 問7",
     "topic": "アルゴリズム・プログラミング",
@@ -483,7 +499,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "$\\mathrm{fact}(n)$ は，非負の整数 $n$ に対して $n$ の階乗を返す。$\\mathrm{fact}(n)$ の再帰的な定義はどれか。",
     "searchText": "問7fact(n)は,非負の整数nに対してnの階乗を返す。fact(n)の再帰的な定義は\nどれか。\nアifn=0thenreturn9elsereturnnXfact(n—1)\n4ifn=0thenreturn@elsereturnnXfact(n+1)\nウifn=Othenreturn1elsereturnnXfact(n—1)\nxifn=0thenreturn1elsereturnnxfact(n+1)",
     "sourceImages": [
       "assets/questions/r07h/r07h-q7.webp"
@@ -497,19 +513,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "```\nif n=0 then return 0 else return n×fact(n−1)\n```"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "```\nif n=0 then return 0 else return n×fact(n+1)\n```"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "```\nif n=0 then return 1 else return n×fact(n−1)\n```"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "```\nif n=0 then return 1 else return n×fact(n+1)\n```"
       }
     ],
     "answer": 2,
@@ -543,11 +559,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q7",
-    "lessonSource": "lessons/r07h.json:r07h-q7"
+    "lessonSource": "lessons/r07h.json:r07h-q7",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q8",
-    "version": 1,
+    "version": 2,
     "number": 8,
     "title": "2025年 春期 問8",
     "topic": "コンピュータ構成",
@@ -561,7 +579,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "同じ命令セットをもつコンピュータAとBとがある。それぞれのCPUクロック周期，及びあるプログラムを実行したときのCPI（Cycles Per Instruction）は，表のとおりである。そのプログラムを実行したとき，コンピュータAの処理時間は，コンピュータBの処理時間の何倍になるか。\n\n|  | CPUクロック周期 | CPI |\n| --- | --- | --- |\n| コンピュータA | 1ナノ秒 | 4.0 |\n| コンピュータB | 4ナノ秒 | 0.5 |",
     "searchText": "問8同じ命令セットをもつコンピュータAとBとがある。それぞれのCPUクロック周期,\n及びあるプログラムを実行したときのCPI(CyclesPerInstruction)は,表のとお\nりである。そのプログラムを実行したとき,コンピュータAの処理時間は,コンピュ\nータBの処理時間の何倍になるか。\naero)2291\nァーーューィ+ウ2エ8\n322",
     "sourceImages": [
       "assets/questions/r07h/r07h-q8.webp"
@@ -575,19 +593,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$\\dfrac{1}{32}$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$\\dfrac{1}{2}$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "2"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "8"
       }
     ],
     "answer": 2,
@@ -621,11 +639,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q8",
-    "lessonSource": "lessons/r07h.json:r07h-q8"
+    "lessonSource": "lessons/r07h.json:r07h-q8",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q9",
-    "version": 1,
+    "version": 2,
     "number": 9,
     "title": "2025年 春期 問9",
     "topic": "コンピュータ構成",
@@ -639,7 +659,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "DMAコントローラーの説明として，適切なものはどれか。",
     "searchText": "間9DMAコントローラーの説明として,適切なものはどれか。\nAP|アMPUでは時間が掛かる積和演算を,高速に行う。\n前\nイ仮想メモリ機能.メモリ保護機能などのメモリ管理機能を提供する。\nウ動作クロックに合わせてカウントするカウントレジスタをもち,それによって時\n間の経過を保持する。\nエメモリと入出力装置,又はメモリとメモリとの間のデータ転送を,MPUを介さず\nに行う。",
     "sourceImages": [
       "assets/questions/r07h/r07h-q9.webp"
@@ -653,19 +673,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "MPUでは時間が掛かる積和演算を，高速に行う。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "仮想メモリ機能，メモリ保護機能などのメモリ管理機能を提供する。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "動作クロックに合わせてカウントするカウントレジスタをもち，それによって時間の経過を保持する。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "メモリと入出力装置，又はメモリとメモリとの間のデータ転送を，MPUを介さずに行う。"
       }
     ],
     "answer": 3,
@@ -699,11 +719,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q9",
-    "lessonSource": "lessons/r07h.json:r07h-q9"
+    "lessonSource": "lessons/r07h.json:r07h-q9",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q10",
-    "version": 1,
+    "version": 2,
     "number": 10,
     "title": "2025年 春期 問10",
     "topic": "コンピュータ構成",
@@ -717,7 +739,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "オブジェクトストレージの特徴として，適切なものはどれか。",
     "searchText": "間19オブジェクトストレージの特徴として,適切なものはどれか。\nアオブジェクトにはユニークな識別子が割り当てられ,識別子を使ってアクセスす\nる。\nイオブジェクトの内容を更新する際,上書き更新をする。\nウ広域分散を実現するためには,遠隔地のストレージと静止点を設けて同期を行う\n必要がある。\nエストレージはディレクトリの概念を使った階層構造である。",
     "sourceImages": [
       "assets/questions/r07h/r07h-q10.webp"
@@ -731,19 +753,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "オブジェクトにはユニークな識別子が割り当てられ，識別子を使ってアクセスする。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "オブジェクトの内容を更新する際，上書き更新をする。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "広域分散を実現するためには，遠隔地のストレージと静止点を設けて同期を行う必要がある。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "ストレージはディレクトリの概念を使った階層構造である。"
       }
     ],
     "answer": 0,
@@ -777,7 +799,9 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r07h.json:r07h-q10",
-    "lessonSource": "lessons/r07h.json:r07h-q10"
+    "lessonSource": "lessons/r07h.json:r07h-q10",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r07h-q11",
@@ -12559,7 +12583,7 @@
   },
   {
     "id": "r06h-q2",
-    "version": 1,
+    "version": 2,
     "number": 2,
     "title": "2024年 春期 問2",
     "topic": "基礎理論",
@@ -12573,7 +12597,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "ATM（現金自動預払機）が1台ずつ設置してある二つの支店を統合し，統合後の支店にはATMを1台設置する。統合後のATMの平均待ち時間を求める式はどれか。ここで，待ち時間はM/M/1の待ち行列モデルに従い，平均待ち時間にはサービス時間を含まず，ATMを1台に統合しても十分に処理できるものとする。\n\n〔条件〕\n\n(1) 統合後の平均サービス時間：$T_{s}$\n\n(2) 統合前のATMの利用率：両支店とも$\\rho$\n\n(3) 統合後の利用者数：統合前の両支店の利用者数の合計",
     "searchText": "間2ATM(現金自動預払機)が1台ずつ設置してある二つの支店を統合し,統合後の支\n店にはATMを1台設置する。統合後のATMの平均待ち時間を求める式はどれか。ここ\nで,待ち時間はM/M/1の待ち行列モデルに従い,平均待ち時間にはサービス時間を\nBES,ATMを1台に統合しても十分に処理できるものとする。\n〔条件\n(1)統合後の平均サービス時間:Ts\n(2)統合前のATMの利用率:両支店ともpo\n(3)統合後の利用者数:統合前の両支店の利用者数の合計\nァPLーg_2p__2p\nァーッ*イに261s9デュメTェちあ%",
     "sourceImages": [
       "assets/questions/r06h/r06h-q2.webp"
@@ -12587,19 +12611,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$\\frac{\\rho}{1-\\rho}\\times T_{s}$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$\\frac{\\rho}{1-2\\rho}\\times T_{s}$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "$\\frac{2\\rho}{1-\\rho}\\times T_{s}$"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "$\\frac{2\\rho}{1-2\\rho}\\times T_{s}$"
       }
     ],
     "answer": 3,
@@ -12633,11 +12657,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q2",
-    "lessonSource": "lessons/r06h.json:r06h-q2"
+    "lessonSource": "lessons/r06h.json:r06h-q2",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q3",
-    "version": 1,
+    "version": 2,
     "number": 3,
     "title": "2024年 春期 問3",
     "topic": "基礎理論",
@@ -12651,7 +12677,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "AIにおけるディープラーニングに関する記述として，最も適切なものはどれか。",
     "searchText": "間3AIにおけるディープラーニングに関する記述として,最も適切なものはどれか。\nアあるデータから結果を求める処理を,人間の脳神経回路のひように多層の処理を重\nねることによって,複雑な判断をできるようにする。\nイ大量のデータからまだ知られていない新たな規則や仮説を発見するために,想定\n値から大きく外れている例外事項を取り除きながら分析を繰り返す手法である。\nウ多様なデータや大量のデータに対して,三段論法,統計的手法やパターン認識手\n法を組み合わせることによって,高度なデータ分析を行う手法である。\nエ知識がルールに従って表現されており,演線手法を利用した推論によって有意な\n結論を導く手法である。",
     "sourceImages": [
       "assets/questions/r06h/r06h-q3.webp"
@@ -12665,19 +12691,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "あるデータから結果を求める処理を，人間の脳神経回路のように多層の処理を重ねることによって，複雑な判断をできるようにする。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "大量のデータからまだ知られていない新たな規則や仮説を発見するために，想定値から大きく外れている例外事項を取り除きながら分析を繰り返す手法である。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "多様なデータや大量のデータに対して，三段論法，統計的手法やパターン認識手法を組み合わせることによって，高度なデータ分析を行う手法である。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "知識がルールに従って表現されており，演繹手法を利用した推論によって有意な結論を導く手法である。"
       }
     ],
     "answer": 0,
@@ -12711,11 +12737,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q3",
-    "lessonSource": "lessons/r06h.json:r06h-q3"
+    "lessonSource": "lessons/r06h.json:r06h-q3",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q4",
-    "version": 1,
+    "version": 2,
     "number": 4,
     "title": "2024年 春期 問4",
     "topic": "基礎理論",
@@ -12729,7 +12757,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "符号長7ビット，情報ビット数4ビットのハミング符号による誤り訂正の方法を，次のとおりとする。\n\n受信した7ビットの符号語 $x_{1}\\ x_{2}\\ x_{3}\\ x_{4}\\ x_{5}\\ x_{6}\\ x_{7}$（$x_{k}=0$又は$1$）に対して\n\n$$\n\\begin{aligned}\nc_{0}&=x_{1}+x_{3}+x_{5}+x_{7}\\\\\nc_{1}&=x_{2}+x_{3}+x_{6}+x_{7}\\\\\nc_{2}&=x_{4}+x_{5}+x_{6}+x_{7}\n\\end{aligned}\n$$\n\n（いずれもmod 2での計算）\n\nを計算し，$c_{0}$，$c_{1}$，$c_{2}$の中に少なくとも一つは0でないものがある場合には，\n\n$$i=c_{0}+c_{1}\\times2+c_{2}\\times4$$\n\nを求めて，左から$i$ビット目を反転することによって誤りを訂正する。\n\n受信した符号語が1000101であった場合，誤り訂正後の符号語はどれか。",
     "searchText": "問4符号長7ビット,情報ビット数4ビットのハミング符号による誤り訂正の方法を,\n次のとおりとする。\n受信した7ビットの符号語るねん*%%る(%三9又は1)に対して\nQ=x+X+x5+x,\nq=Xotx3+xgtxX\nQ=XtXe+gt\n(いずれもmod2での計算)\nを計算し,@,の,@の中に少なくとも一つは0でないものがある場合には,\nf=@taX2+ax4\nを求めて,左から/ビット目を反転することによって誤りを訂正する。\n受信した符号語が1000101であった場合,誤り訂正後の符号語はどれか。\nア1000001イ1000101ウ1001101エ1010101",
     "sourceImages": [
       "assets/questions/r06h/r06h-q4.webp"
@@ -12743,19 +12771,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "1000001"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "1000101"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "1001101"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "1010101"
       }
     ],
     "answer": 3,
@@ -12789,11 +12817,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q4",
-    "lessonSource": "lessons/r06h.json:r06h-q4"
+    "lessonSource": "lessons/r06h.json:r06h-q4",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q5",
-    "version": 1,
+    "version": 2,
     "number": 5,
     "title": "2024年 春期 問5",
     "topic": "アルゴリズム・プログラミング",
@@ -12807,7 +12837,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "正の整数$M$に対して，次の二つの流れ図に示すアルゴリズムを実行したとき，結果$x$の値が等しくなるようにしたい。aに入れる条件として，適切なものはどれか。",
     "searchText": "FS正の整数Mに対して,次の二つの流れ図に示すアルゴリズムを実行したとき,結果\nxの値が等しくなるようにしたい。aに入れる条件として,適切なものはどれか。\n演算ループ端の繰返し指定は,\n変数名:初期値。増分終値\nYes\nアnぐMイnM一1ウn>Mエn>M十1",
     "sourceImages": [
       "assets/questions/r06h/r06h-q5.webp"
@@ -12821,19 +12851,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$n<M$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$n>M-1$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "$n>M$"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "$n>M+1$"
       }
     ],
     "answer": 2,
@@ -12867,11 +12897,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q5",
-    "lessonSource": "lessons/r06h.json:r06h-q5"
+    "lessonSource": "lessons/r06h.json:r06h-q5",
+    "image": "assets/transcriptions/transcribe_r06h/r06h-q5-figure.webp",
+    "imageAlt": "二つの流れ図。左はx←1の後，nをMから−1ずつ1まで変化させ，x←(x×n)を繰り返す。ループ端の繰返し指定は変数名：初期値，増分，終値を示す。右はx←1，n←1の後，x←(x×n)，n←(n＋1)を行い，条件aがNoなら乗算へ戻り，Yesなら終了する。"
   },
   {
     "id": "r06h-q6",
-    "version": 1,
+    "version": 2,
     "number": 6,
     "title": "2024年 春期 問6",
     "topic": "アルゴリズム・プログラミング",
@@ -12885,7 +12917,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "各ノードがもつデータを出力する再帰処理f（ノードn）を定義した。この処理を，図の2分木の根（最上位のノード）から始めたときの出力はどれか。\n\n〔f（ノードn）の定義〕\n\n1. ノードnの右に子ノードrがあれば，f（ノードr）を実行\n2. ノードnの左に子ノードlがあれば，f（ノードl）を実行\n3. 再帰処理f（ノードr），f（ノードl）を未実行の子ノード，又は子ノードがなければ，ノード自身がもつデータを出力\n4. 終了",
     "searchText": "問6各ノードがもつデータを出力する再帰処理(ノードn)を定義した。この処理を,\n図の2分木の根(最上位のノード)から始めたときの出力はどれか。\n〔f(ノードn)の定義〕\n1.ノードnの右に子ノードrがあれば,f(ノードr)を実行\n2.ノードnの左に子ノード【があれば,f(ノードDERG\n3.再帰処理f(ノードr),f(ノード!)を未実行の子ノード,又は子ノー\nドがなければ,ノード自身がもつデータを出力\n4.終了\nアテーEDXCBAイABCXDE—++\nウE-D+CXB+A=ED一CBX+A十",
     "sourceImages": [
       "assets/questions/r06h/r06h-q6.webp"
@@ -12899,19 +12931,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "＋÷−ED×CBA"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "ABC×DE−÷＋"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "E−D÷C×B＋A"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "ED−CB×÷A＋"
       }
     ],
     "answer": 3,
@@ -12945,11 +12977,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q6",
-    "lessonSource": "lessons/r06h.json:r06h-q6"
+    "lessonSource": "lessons/r06h.json:r06h-q6",
+    "image": "assets/transcriptions/transcribe_r06h/r06h-q6-figure.webp",
+    "imageAlt": "2分木。根は＋，左の子はA，右の子は÷。÷の左の子は×，右の子は−。×の左の子はB，右の子はC。−の左の子はD，右の子はE。"
   },
   {
     "id": "r06h-q7",
-    "version": 1,
+    "version": 2,
     "number": 7,
     "title": "2024年 春期 問7",
     "topic": "アルゴリズム・プログラミング",
@@ -12963,7 +12997,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "整列方法に関するアルゴリズムの記述のうち，バブルソートの記述はどれか。ここで，整列対象は重複のない1から9の数字がランダムに並んでいる数字列とする。",
     "searchText": "間7整列方法に関するアルゴリズムの記述のうち,バブルソートの記述はどれか。ここ\nで,整列対象は重複のない1から9の数字がランダムに並んでいる数字列とする。\nア数字列の最後の数字から最初の数字に向かって,隣り合う二つの数字を比較して\n小さい数字が前に来るよう数字を入れ替える操作を繰り返し行う。\nイ数字列の中からランダムに基準となる数を選び,基準より小さい数と大きい数の\n二つのグループに分け,それぞれのグループ内も同じ操作を繰り返し行う。\nウ数字列をほぼ同じ長さの二つの数字列のグループに分割していき,分割できなく\nなった時点から,グループ内で数字が小さい順に並べる操作を繰り返し行う。\nエ未処理の数字列の中から最小値を探索し,未処理の数字列の最初の数字と入れ替\nえる操作を繰り返し行う。",
     "sourceImages": [
       "assets/questions/r06h/r06h-q7.webp"
@@ -12977,19 +13011,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "数字列の最後の数字から最初の数字に向かって，隣り合う二つの数字を比較して小さい数字が前に来るよう数字を入れ替える操作を繰り返し行う。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "数字列の中からランダムに基準となる数を選び，基準より小さい数と大きい数の二つのグループに分け，それぞれのグループ内も同じ操作を繰り返し行う。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "数字列をほぼ同じ長さの二つの数字列のグループに分割していき，分割できなくなった時点から，グループ内で数字が小さい順に並べる操作を繰り返し行う。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "未処理の数字列の中から最小値を探索し，未処理の数字列の最初の数字と入れ替える操作を繰り返し行う。"
       }
     ],
     "answer": 0,
@@ -13023,11 +13057,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q7",
-    "lessonSource": "lessons/r06h.json:r06h-q7"
+    "lessonSource": "lessons/r06h.json:r06h-q7",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q8",
-    "version": 1,
+    "version": 2,
     "number": 8,
     "title": "2024年 春期 問8",
     "topic": "コンピュータ構成",
@@ -13041,7 +13077,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "同一メモリ空間で，転送元の開始アドレス，転送先の開始アドレス，方向フラグ及び転送語数をパラメータとして指定することによって，データをブロック転送できる機能をもつCPUがある。図のようにアドレス1001から1004のデータをアドレス1003から1006に転送するとき，指定するパラメータとして適切なものはどれか。ここで，転送は開始アドレスから1語ずつ行われ，方向フラグに0を指定するとアドレスの昇順に，1を指定するとアドレスの降順に転送を行うものとする。",
     "searchText": "AS同一メモリ空間で,転送元の開始アドレス,転送先の開始アドレス,方向フラグ及\nび転送語数をパラメータとして指定することによって,データをブロック転送できる\n機能をもつCPUがある。図のようにアドレス1001HS1004のデータをアドレス\n1003から1006に転送するとき,指定するパラメータとして適切かものはどれか。こ\nCC,転送は開始アドレスから1語ずつ行われ,方向フラグに9を指定するとアドレ\nスの昇順に,1を指定するとアドレスの降順に転送を行うものとする。\n実行前TK\nアoeレーンーニーポッドレス\n10001000\n10011001\n10021002\n10031003\n10041004\n10051005\n10061006\n10071007\nにーーデズ\n転送元の開始アドレス|転送先の開始アドレス\n7|wmnv|wt|sw|z\n|5| w| w|sw|sz\na",
     "sourceImages": [
       "assets/questions/r06h/r06h-q8.webp"
@@ -13055,19 +13091,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "| 転送元の開始アドレス | 転送先の開始アドレス | 方向フラグ | 転送語数 |\n| --- | --- | --- | --- |\n| 1001 | 1003 | 0 | 4 |"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "| 転送元の開始アドレス | 転送先の開始アドレス | 方向フラグ | 転送語数 |\n| --- | --- | --- | --- |\n| 1001 | 1003 | 1 | 4 |"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "| 転送元の開始アドレス | 転送先の開始アドレス | 方向フラグ | 転送語数 |\n| --- | --- | --- | --- |\n| 1004 | 1006 | 0 | 4 |"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "| 転送元の開始アドレス | 転送先の開始アドレス | 方向フラグ | 転送語数 |\n| --- | --- | --- | --- |\n| 1004 | 1006 | 1 | 4 |"
       }
     ],
     "answer": 3,
@@ -13101,11 +13137,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q8",
-    "lessonSource": "lessons/r06h.json:r06h-q8"
+    "lessonSource": "lessons/r06h.json:r06h-q8",
+    "image": "assets/transcriptions/transcribe_r06h/r06h-q8-figure.webp",
+    "imageAlt": "実行前と実行後のメモリ。アドレス1001，1002，1003，1004のデータを，それぞれ1003，1004，1005，1006へ移す矢印が示されている。アドレス1000から1007の区画が示され，転送元と転送先の一部が重なる。"
   },
   {
     "id": "r06h-q9",
-    "version": 1,
+    "version": 2,
     "number": 9,
     "title": "2024年 春期 問9",
     "topic": "コンピュータ構成",
@@ -13119,7 +13157,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "量子ゲート方式の量子コンピュータの説明として，適切なものはどれか。",
     "searchText": "(9量子ゲート方式の量子コンピュータの説明として,適切なものはどれか。\nア演算は2進数で行われ,結果も2進数で出力される。\nイ特定のアルゴリズムによる演算だけができ,加算演算はできない。\nウ複数の状態を同時に表現する量子ビットと,その重ね合わせを利用する。\nエ量子状態を変化させながら観測するので,190C以上の高温で動作する。",
     "sourceImages": [
       "assets/questions/r06h/r06h-q9.webp"
@@ -13133,19 +13171,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "演算は2進数で行われ，結果も2進数で出力される。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "特定のアルゴリズムによる演算だけができ，加算演算はできない。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "複数の状態を同時に表現する量子ビットと，その重ね合わせを利用する。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "量子状態を変化させながら観測するので，100℃以上の高温で動作する。"
       }
     ],
     "answer": 2,
@@ -13179,7 +13217,9 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q9",
-    "lessonSource": "lessons/r06h.json:r06h-q9"
+    "lessonSource": "lessons/r06h.json:r06h-q9",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q10",
@@ -13261,7 +13301,7 @@
   },
   {
     "id": "r06h-q11",
-    "version": 1,
+    "version": 2,
     "number": 11,
     "title": "2024年 春期 問11",
     "topic": "コンピュータ構成",
@@ -13275,7 +13315,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "15Mバイトのプログラムを圧縮して，フラッシュメモリに格納している。プログラムのサイズは圧縮によって元のサイズの40%になっている。フラッシュメモリから主記憶への転送速度が20Mバイト／秒であり，1Mバイトに圧縮されたデータの展開に主記憶上で0.03秒が掛かるとき，このプログラムが主記憶に展開されるまでの時間は何秒か。ここで，フラッシュメモリから主記憶への転送と圧縮データの展開は同時には行われないものとする。",
     "searchText": "間1115Mバイトのプログラムを圧縮して,フラッシュメモリに格納している。プログラ\nムのサイズは圧縮によって元のサイズの409%になっている。フラッシュメモリから\n主記憶への転送速度が20Mバイトン秒であり,1Mバイトに圧縮されたデータの展開\nに主記憶上で0.03秒が掛かるとき,このプログラムが主記憶に展開されるまでの時\n間は何秒か。COC,フラッシュメモリから主記憶への転送と圧縮データの展開は同\n時には行われないものとする。\nア0.48イ0.75ウ0,93エ1,20",
     "sourceImages": [
       "assets/questions/r06h/r06h-q11.webp"
@@ -13289,19 +13329,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "0.48"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "0.75"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "0.93"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "1.20"
       }
     ],
     "answer": 0,
@@ -13335,11 +13375,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q11",
-    "lessonSource": "lessons/r06h.json:r06h-q11"
+    "lessonSource": "lessons/r06h.json:r06h-q11",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q12",
-    "version": 1,
+    "version": 2,
     "number": 12,
     "title": "2024年 春期 問12",
     "topic": "コンピュータ構成",
@@ -13353,7 +13395,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "システムの信頼性設計に関する記述のうち，適切なものはどれか。",
     "searchText": "間12システムの信頼性設計に関する記述のうち,適切なものはどれか。\nアフェールセーフとは,利用者の誤操作によってシステムが異常終了してしまうこ\nとのないように,単純なミスを発生させないようにする設計方法である。\nイフェールソフトとは,故障が発生した場合でも機能を縮退させることなく稼働を\n継続する概念である。\nウフォールトアボイダンスとは,システム構成要素の個々の品質を高めて故障が発\n生しないようにする概念である。\nエエフォールトトレランスとは,故障が生じてもシステムに重大な影響が出ないよう\nに,あらかじめ定められた安全状態にシステムを固定し,全体として安全が維持さ\nれるような設計方法である。",
     "sourceImages": [
       "assets/questions/r06h/r06h-q12.webp"
@@ -13367,19 +13409,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "フェールセーフとは，利用者の誤操作によってシステムが異常終了してしまうことのないように，単純なミスを発生させないようにする設計方法である。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "フェールソフトとは，故障が発生した場合でも機能を縮退させることなく稼働を継続する概念である。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "フォールトアボイダンスとは，システム構成要素の個々の品質を高めて故障が発生しないようにする概念である。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "フォールトトレランスとは，故障が生じてもシステムに重大な影響が出ないように，あらかじめ定められた安全状態にシステムを固定し，全体として安全が維持されるような設計方法である。"
       }
     ],
     "answer": 2,
@@ -13413,7 +13455,9 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r06h.json:r06h-q12",
-    "lessonSource": "lessons/r06h.json:r06h-q12"
+    "lessonSource": "lessons/r06h.json:r06h-q12",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r06h-q13",
@@ -37451,7 +37495,7 @@
   },
   {
     "id": "r04h-q1",
-    "version": 1,
+    "version": 2,
     "number": 1,
     "title": "2022年 春期 問1",
     "topic": "基礎理論",
@@ -37465,7 +37509,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "浮動小数点数を，仮数部が7ビットである表示形式のコンピュータで計算した場合，情報落ちが++発生しないもの++はどれか。ここで，仮数部が7ビットの表示形式とは次のフォーマットであり，$(\\ )_{2}$内は2進数，$Y$は指数である。また，{ }内を先に計算するものとする。\n\n$$(1.\\ X_{1}\\ X_{2}\\ X_{3}\\ X_{4}\\ X_{5}\\ X_{6}\\ X_{7})_{2}\\times 2^{Y}$$",
     "searchText": "間1浮動小数点数を,仮数部が7ビットである表示形式のコンピュータで計算した場合\n情報落ちが発生しないものはどれか。ここで,仮数部が7ビットの表示形式とは次の\nフォーマットであり,()。内は2進数,Yは指数である。また,()内を先に計算\nするものとする。\n(1.XX。%XaXsXp72X2\"\nア{(1,.1).X273+(1.0)2%274}+(1,0)2X28\nイ{(1.1)2%279=(1.0)2%274}+(1.0)2%28\n{(1.0).X25+(1.1)2%273}+(1.0).x274\nエ{(1.0).X2—(1.0).274}+(1.1).*273",
     "sourceImages": [
       "assets/questions/r04h/r04h-q1.webp"
@@ -37479,19 +37523,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$\\{(1.1)_{2}\\times 2^{-3}+(1.0)_{2}\\times 2^{-4}\\}+(1.0)_{2}\\times 2^{5}$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$\\{(1.1)_{2}\\times 2^{-3}-(1.0)_{2}\\times 2^{-4}\\}+(1.0)_{2}\\times 2^{5}$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "$\\{(1.0)_{2}\\times 2^{5}+(1.1)_{2}\\times 2^{-3}\\}+(1.0)_{2}\\times 2^{-4}$"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "$\\{(1.0)_{2}\\times 2^{5}-(1.0)_{2}\\times 2^{-4}\\}+(1.1)_{2}\\times 2^{-3}$"
       }
     ],
     "answer": 0,
@@ -37525,11 +37569,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q1",
-    "lessonSource": "lessons/r04h.json:r04h-q1"
+    "lessonSource": "lessons/r04h.json:r04h-q1",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q2",
-    "version": 1,
+    "version": 2,
     "number": 2,
     "title": "2022年 春期 問2",
     "topic": "基礎理論",
@@ -37543,7 +37589,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "全体集合$S$内に異なる部分集合$A$と$B$があるとき，$\\overline{A}\\cap\\overline{B}$に等しいものはどれか。ここで，$A\\cup B$は$A$と$B$の和集合，$A\\cap B$は$A$と$B$の積集合，$\\overline{A}$は$S$における$A$の補集合，$A-B$は$A$から$B$を除いた差集合を表す。",
     "searchText": "問2全体集合S内に異なる部分集合AとBがあるとき,AnBに等しいものはどれか。\nここで,AUBはAとBの和和集合,AnBはAとBの積集合,AはSにおけるAの補集\n合,ABはAからBを除いた差集合を表す。\nアA-B\nイ(AUB)一(AnB)\nウ(S一A)U(S一B)\nエS一(AnB)",
     "sourceImages": [
       "assets/questions/r04h/r04h-q2.webp"
@@ -37557,19 +37603,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "$\\overline{A}-B$"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "$(\\overline{A}\\cup\\overline{B})-(A\\cap B)$"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "$(S-A)\\cup(S-B)$"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "$S-(A\\cap B)$"
       }
     ],
     "answer": 0,
@@ -37603,11 +37649,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q2",
-    "lessonSource": "lessons/r04h.json:r04h-q2"
+    "lessonSource": "lessons/r04h.json:r04h-q2",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q3",
-    "version": 1,
+    "version": 2,
     "number": 3,
     "title": "2022年 春期 問3",
     "topic": "基礎理論",
@@ -37621,7 +37669,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
     "searchText": "問3M/M/1の待ち行列モデルにおいて,窓口の利用率が25%から40%に増えると,平\n均待ち時間は何倍になるか。\nア1.2541,60ウ2.00エ3,00",
     "sourceImages": [
       "assets/questions/r04h/r04h-q3.webp"
@@ -37635,19 +37683,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "1.25"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "1.60"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "2.00"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "3.00"
       }
     ],
     "answer": 2,
@@ -37681,11 +37729,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q3",
-    "lessonSource": "lessons/r04h.json:r04h-q3"
+    "lessonSource": "lessons/r04h.json:r04h-q3",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q4",
-    "version": 1,
+    "version": 2,
     "number": 4,
     "title": "2022年 春期 問4",
     "topic": "基礎理論",
@@ -37699,7 +37749,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "ハミング符号とは，データに冗長ビットを付加して，1ビットの誤りを訂正できるようにしたものである。ここでは，$X_{1}$，$X_{2}$，$X_{3}$，$X_{4}$の4ビットから成るデータに，3ビットの冗長ビット$P_{3}$，$P_{2}$，$P_{1}$を付加したハミング符号$X_{1}X_{2}X_{3}P_{3}X_{4}P_{2}P_{1}$を考える。付加したビット$P_{1}$，$P_{2}$，$P_{3}$は，それぞれ\n\n$$X_{1}\\oplus X_{3}\\oplus X_{4}\\oplus P_{1}=0$$\n\n$$X_{1}\\oplus X_{2}\\oplus X_{4}\\oplus P_{2}=0$$\n\n$$X_{1}\\oplus X_{2}\\oplus X_{3}\\oplus P_{3}=0$$\n\nとなるように決める。ここで，$\\oplus$は排他的論理和を表す。\n\nハミング符号1110011には1ビットの誤りが存在する。誤りビットを訂正したハミング符号はどれか。",
     "searchText": "問4ハミング符号とは,データに冗長ビットを付加して,1ビットの誤りを訂正できる\nようにしたものである。ここでは,Mi,Xa,Xs,X4の4ビットから成るデータに,3\nビットの冗長ビットPs,Po,Piを付加したハミング符号XiXoXsPsXaPoPiを考える。\n付加したビットPi,Po,Psは,それぞれ\nXi®X3®Xa®P1=0\nXi®X2®Xa@P2=0\nXi®X2©X3®P3=0\nとなるように決める。ここで,©は排他的論理和を表す。\nハミング符号1119911には1ビットの誤りが存在する。誤りビットを訂正したハミ\nング符号はどれか。\nア0110011イ1010011ウ1100011エ1110111",
     "sourceImages": [
       "assets/questions/r04h/r04h-q4.webp"
@@ -37713,19 +37763,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "0110011"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "1010011"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "1100011"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "1110111"
       }
     ],
     "answer": 0,
@@ -37759,11 +37809,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q4",
-    "lessonSource": "lessons/r04h.json:r04h-q4"
+    "lessonSource": "lessons/r04h.json:r04h-q4",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q5",
-    "version": 1,
+    "version": 2,
     "number": 5,
     "title": "2022年 春期 問5",
     "topic": "アルゴリズム・プログラミング",
@@ -37777,7 +37829,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "リストには，配列で実現する場合とポインタで実現する場合とがある。リストを配列で実現した場合の特徴として，適切なものはどれか。ここで，配列を用いたリストは配列に要素を連続して格納することによってリストを構成し，ポインタを用いたリストは要素と次の要素へのポインタを用いることによってリストを構成するものとする。",
     "searchText": "問5リストには,配列で実現する場合とポインタで実現する場合とがある。リストを配\n列で実現した場合の特徴として,適切なものはどれか。ここで,配列を用いたリスト\nは配列に要素を連続して格納することによってリストを構成し,ポインタを用いたリ\nストは要素と次の要素へのポインタを用いることによってリストを構成するものとす\nる。\nアリストにある実際の要素数にかかわらず,リストに入れられる要素の最大個数に\n対応した領域を確保し,実際には使用されない領域が発生する可能性がある。\n4リストの中間要素を参照するには,リストの先頭から順番に要素をたどっていく\nことから,要素数に比例した時間が必要となる。\nウリストの要素を格納する領域の他に,次の要素を指し示すための領域が別途必要\nとなる。\nZLリストへの挿入位置が分かる場合には,リストにある実際の要素数にかかわらず\n要素の挿入を一定時間で行うことができる。",
     "sourceImages": [
       "assets/questions/r04h/r04h-q5.webp"
@@ -37791,19 +37843,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "リストにある実際の要素数にかかわらず，リストに入れられる要素の最大個数に対応した領域を確保し，実際には使用されない領域が発生する可能性がある。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "リストの中間要素を参照するには，リストの先頭から順番に要素をたどっていくことから，要素数に比例した時間が必要となる。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "リストの要素を格納する領域の他に，次の要素を指し示すための領域が別途必要となる。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "リストへの挿入位置が分かる場合には，リストにある実際の要素数にかかわらず，要素の挿入を一定時間で行うことができる。"
       }
     ],
     "answer": 0,
@@ -37837,11 +37889,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q5",
-    "lessonSource": "lessons/r04h.json:r04h-q5"
+    "lessonSource": "lessons/r04h.json:r04h-q5",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q6",
-    "version": 1,
+    "version": 2,
     "number": 6,
     "title": "2022年 春期 問6",
     "topic": "アルゴリズム・プログラミング",
@@ -37855,7 +37909,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "再入可能プログラムの特徴はどれか。",
     "searchText": "問6再入可能プログラムの特徴はどれか。\nア主記憶上のどのアドレスから配置しても,実行することができる。\nイ手続の内部から自分自身を呼び出すことができる。\nウ必要な部分を補助記憶装置から読み込みながら動作する。主記憶領域の大きさに\n制限があるときに,有効な手法である。\nエ複数のタスクからの呼出しに対して,並行して実行されても,それぞれのタスク\nに正しい結果を返す。",
     "sourceImages": [
       "assets/questions/r04h/r04h-q6.webp"
@@ -37869,19 +37923,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "主記憶上のどのアドレスから配置しても，実行することができる。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "手続の内部から自分自身を呼び出すことができる。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "必要な部分を補助記憶装置から読み込みながら動作する。主記憶領域の大きさに制限があるときに，有効な手法である。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "複数のタスクからの呼出しに対して，並行して実行されても，それぞれのタスクに正しい結果を返す。"
       }
     ],
     "answer": 3,
@@ -37915,11 +37969,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q6",
-    "lessonSource": "lessons/r04h.json:r04h-q6"
+    "lessonSource": "lessons/r04h.json:r04h-q6",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q7",
-    "version": 1,
+    "version": 2,
     "number": 7,
     "title": "2022年 春期 問7",
     "topic": "アルゴリズム・プログラミング",
@@ -37933,7 +37989,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "プログラム言語のうち，ブロックの範囲を指定する方法として特定の記号や予約語を用いず，等しい文字数の字下げを用いるという特徴をもつものはどれか。",
     "searchText": "問7プログラム言語のうち,ブロックの範囲を指定する方法として特定の記号や予約語\nを用いず,等しい文字数の字下げを用いるという特徴をもつものはどれか。\nアCイJavaウPHPエPython",
     "sourceImages": [
       "assets/questions/r04h/r04h-q7.webp"
@@ -37947,19 +38003,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "C"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "Java"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "PHP"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "Python"
       }
     ],
     "answer": 3,
@@ -37993,11 +38049,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q7",
-    "lessonSource": "lessons/r04h.json:r04h-q7"
+    "lessonSource": "lessons/r04h.json:r04h-q7",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q8",
-    "version": 1,
+    "version": 2,
     "number": 8,
     "title": "2022年 春期 問8",
     "topic": "コンピュータ構成",
@@ -38011,7 +38069,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "プロセッサの高速化技法の一つとして，同時に実行可能な複数の動作を，コンパイルの段階でまとめて一つの複合命令とし，高速化を図る方式はどれか。",
     "searchText": "AASプロセッサの高速化技法の一つとして,同時に実行可能な複数の動作を,コンパイ\nルの段階でまとめて一つの複合命令とし,高速化を図る方式はどれか。\nアCISCイMIMDウRISCエVLIW",
     "sourceImages": [
       "assets/questions/r04h/r04h-q8.webp"
@@ -38025,19 +38083,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "CISC"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "MIMD"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "RISC"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "VLIW"
       }
     ],
     "answer": 3,
@@ -38071,11 +38129,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q8",
-    "lessonSource": "lessons/r04h.json:r04h-q8"
+    "lessonSource": "lessons/r04h.json:r04h-q8",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q9",
-    "version": 1,
+    "version": 2,
     "number": 9,
     "title": "2022年 春期 問9",
     "topic": "コンピュータ構成",
@@ -38089,7 +38149,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "キャッシュメモリのアクセス時間が主記憶のアクセス時間の$1/30$で，ヒット率が95%のとき，実効メモリアクセス時間は，主記憶のアクセス時間の約何倍になるか。",
     "searchText": "問9キャッシュメモリのアクセス時間が主記憶のアクセス時間の1/30で,ヒット率が\n|959%のとき,実効メモリアクセス時間は,主記憶のアクセス時間の約何倍になるか。\nア0.03イ0.08ウ0.37エ0.95",
     "sourceImages": [
       "assets/questions/r04h/r04h-q9.webp"
@@ -38103,19 +38163,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "0.03"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "0.08"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "0.37"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "0.95"
       }
     ],
     "answer": 1,
@@ -38149,11 +38209,13 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q9",
-    "lessonSource": "lessons/r04h.json:r04h-q9"
+    "lessonSource": "lessons/r04h.json:r04h-q9",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q10",
-    "version": 1,
+    "version": 2,
     "number": 10,
     "title": "2022年 春期 問10",
     "topic": "コンピュータ構成",
@@ -38167,7 +38229,7 @@
     "season": "spring",
     "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
     "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
-    "stem": "",
+    "stem": "キャッシュメモリのフルアソシエイティブ方式に関する記述として，適切なものはどれか。",
     "searchText": "FOキャッシュメモリのフルアソシエイティブ方式に関する記述として,適切なものは\nどれか。\nアキャッシュメモリの各ブロックに主記憶のセットが固定されている。\nイキャッシュメモリの各ブロックに主記憶のブロックが固定されている。\nウ主記憶の特定の1ブロックに専用のキャッシュメモリが割り当てられる。\nエ任意のキャッシュメモリのブロックを主記憶のどの部分にも割り当てられる。",
     "sourceImages": [
       "assets/questions/r04h/r04h-q10.webp"
@@ -38181,19 +38243,19 @@
     "choices": [
       {
         "label": "ア",
-        "text": ""
+        "text": "キャッシュメモリの各ブロックに主記憶のセットが固定されている。"
       },
       {
         "label": "イ",
-        "text": ""
+        "text": "キャッシュメモリの各ブロックに主記憶のブロックが固定されている。"
       },
       {
         "label": "ウ",
-        "text": ""
+        "text": "主記憶の特定の1ブロックに専用のキャッシュメモリが割り当てられる。"
       },
       {
         "label": "エ",
-        "text": ""
+        "text": "任意のキャッシュメモリのブロックを主記憶のどの部分にも割り当てられる。"
       }
     ],
     "answer": 3,
@@ -38227,7 +38289,9 @@
     "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
     "hintStatus": "individual",
     "hintSource": "lessons/r04h.json:r04h-q10",
-    "lessonSource": "lessons/r04h.json:r04h-q10"
+    "lessonSource": "lessons/r04h.json:r04h-q10",
+    "image": null,
+    "imageAlt": ""
   },
   {
     "id": "r04h-q11",

@@ -142,4 +142,19 @@
 @media(max-width:350px){.growth-chart{padding-left:30px}.growth-point{width:40px}.history-periods,.history-changes{padding:0 12px}}
 
 /* Plan forms stay within the viewport when text is enlarged. */
+
+/* Reviewed text follows the device width; large formulas and tables scroll locally. */
+.rich-question{min-width:0;overflow-wrap:anywhere;line-break:strict;word-break:normal}
+.rich-question>p{margin:0 0 .8em;white-space:pre-line}.rich-question>p:last-child{margin-bottom:0}
+.choice-text.rich-question{flex:1;min-width:0}.choice-text.rich-question>p{margin:0}
+.rich-question .katex{font-size:1.12em;line-height:normal;overflow-wrap:normal;word-break:normal;display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle;padding:3px 1px}
+.question-math{max-width:100%;overflow-x:auto;padding:4px 0}.question-math .katex-display{margin:.45em 0}
+.question-table-scroll{max-width:100%;overflow-x:auto;margin:.8em 0}
+.question-table{border-collapse:collapse;width:max-content;min-width:100%;font-size:.95em}
+.question-table th,.question-table td{border:1px solid #9caaba;padding:.4em .6em;text-align:center}
+.question-table th{background:#eef3f8;font-weight:600}
+.question-code{max-width:100%;overflow-x:auto;white-space:pre;padding:12px;background:#f3f6fa;border-radius:8px;font-size:.9em}
+.math-error{white-space:pre-wrap;overflow-wrap:anywhere}
+.original-question{margin:16px 0 0}.original-question>summary{cursor:pointer;color:var(--muted);font-size:.85rem;padding:10px 0;min-height:44px}
+.original-question .source-question{margin:8px 0}
 #plan-editor .heading-row{flex-wrap:wrap}#plan-editor .heading-row .button{white-space:normal;max-width:100%}#plan-editor .editor-field{min-width:0;max-width:100%}#plan-editor .editor-field input,#plan-editor .editor-field select{min-width:0;max-width:100%;width:100%}

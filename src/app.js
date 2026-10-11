@@ -53,7 +53,7 @@ async function refreshOfflineQuestions() {
   if (!online) {
     const saved = await savedAssetURLs();
     offlineQuestionIds = new Set(base.filter(q => {
-      const assets = [...(q.stem ? [] : q.sourceImages), q.image, ...q.choices.map(c => c.image)].filter(Boolean);
+      const assets = [...q.sourceImages, q.image, ...q.choices.map(c => c.image)].filter(Boolean);
       return saved.has(content.packs.get(q.packId)?.url) && assets.every(src => saved.has(new URL(src, document.baseURI).href));
     }).map(q => q.id));
   }
