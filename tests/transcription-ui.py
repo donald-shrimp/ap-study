@@ -8,6 +8,10 @@ ROOT=Path(__file__).resolve().parents[1]
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
 bank={q['id']:q for q in json.loads((ROOT/'data/questions.json').read_text())}
 records=[r for file in sorted((ROOT/'data/transcriptions').glob('*.json')) for r in json.loads(file.read_text())]
+selected=set(os.environ.get('AP_TRANSCRIPTION_IDS','').split(','))-{''}
+if selected:
+ assert selected<={r['id'] for r in records}, 'Unreviewed ID requested'
+ records=[r for r in records if r['id'] in selected]
 artifacts=Path('/workspace/scratch/transcription-ui');artifacts.mkdir(exist_ok=True)
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path=shutil.which('chromium'),headless=True,args=['--no-sandbox'])
@@ -27,6 +31,13 @@ with sync_playwright() as p:
   current=next(a for a in state(page)['attempts'] if a['id']==state(page)['currentId'])
   assert current['questionSnapshot']['stem']==record['stem']
   assert page.locator('.original-question').count()==1
+ # Reviewed image-retention decisions leave the original question usable.
+ for entry in json.loads((ROOT/'data/transcription-image-retentions.json').read_text()):
+  open_q(entry['id'])
+  assert page.locator('.question-panel .question-stem').count()==0
+  page.wait_for_function('[...document.querySelectorAll(".source-question img")].every(img=>img.complete&&img.naturalWidth>0)')
+  assert page.locator('.source-question img').count()==len(bank[entry['id']]['sourceImages'])
+  assert page.locator('.choices input').count()==4
  for width in [320,780,1280]:
   page.set_viewport_size({'width':width,'height':900})
   for id in ['r04h-q1','r04h-q4','r06h-q2','r06h-q8','r07h-q1','r07h-q6','r07h-q7','r07h-q8']:

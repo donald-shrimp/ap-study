@@ -1,0 +1,29 @@
+[
+  {
+    "id": "r04h-q16",
+    "status": "image-retained",
+    "reason": "本文中の条件(4)(5)(6)に小図が入り、現行の単一図形式では原文の配置を忠実に保持できない。2026-10-11の利用者指示に従い形式を拡張せず、原本画像表示を維持する。",
+    "assessor": "/root/transcribe_r04h",
+    "reviewer": "/root/transcribe_r07h",
+    "sourceImageSHA256": [
+      "0c7f045b04b7c2d6fcd648a4e1225be1ed126614d9d9bf17ebb47c76a846ffe6"
+    ],
+    "evidence": "既存原本WebPをview_imageで開き、冒頭のジョブ群と実行の問い、条件(1)多重度2、(2)同一処理時間と影響なし、(3)開始時50Mバイト、(4)直後のジョブによる参照と終了時削除及び最初に生起されるジョブのみ参照、(5)全直後ジョブの上からの優先生起、(6)先行X/Y両方終了後Z、(7)待ち行列追加と順実行、(8)OSオーバヘッドなしを全文照合。選択肢100/150/200/250と順序が一致。主図と小図3点もそれぞれview_imageで開き、主図A→B/C、B→D/E、C→E、D/E→F、小図X→Y・X→Y/Z・X/Y→Zの矢印と全ラベルに欠けなし。原本画素とsourceRectangleの切出し画像が全4点で一致。主図が〔ジョブ群〕の直後、各小図が条件4〜6の文頭にあるという配置をtranscribedBlocksが保持。原本本文に下線・太字強調なし。",
+    "priorReview": "data/transcription-drafts/review_layout_r04h_q16_batch2.json",
+    "priorReviewSHA256": "b7d3cbf5a8c4c9e06ad31a74773807262ca9d17103db0f45e0946d7b0828b1a3",
+    "decisionRecordedBy": "/root",
+    "reviewedDecisionSHA256": "532759b832616e6c3f167fbe7c4e0ccefb28ee649fadb1ca8d3d907b55fc23e7"
+  },
+  {
+    "id": "r03a-q52",
+    "status": "image-retained",
+    "reason": "原本は本文のプレシデンスダイアグラムとア〜エのアローダイアグラム，作業名・ダミー作業の共有凡例を一体配置している。特に共有凡例がアとイの選択肢図の右側にまたがり，現行の本文画像1枚と各選択肢画像の形式では凡例を含む原文配置を忠実に保持しにくい。全図，A〜H，開始・終了，FS条件，実線と破線の矢印，凡例は原本で可読のため，原本画像の表示を維持する。",
+    "assessor": "/root/review_transcriptions_1",
+    "sourceImageSHA256": [
+      "4cdfe9c652599e296bc76cba5464a84a0c48d5063a4a48e305aa03d1684b3b2a"
+    ],
+    "reviewer": "/root/transcribe_finish_spring",
+    "evidence": "原本r03a-q52.webpを実表示し本文・5図・共有凡例・全4択を独立確認。上図は開始→A→C→E→G→終了と開始→B→D→F→H→終了，A→Fの追加依存，全てFS条件が可読。下の4アロー図は全てA〜H実線が可読，アはダミーなし，イはA後→D後へのダミー1本，ウはA後→D後及びF後への2本，エはA後→F後1本を照合。右の作業名凡例はア図右側，破線ダミー凡例はイ図右側にまたがる原文一体配置であり，個別選択肢cropでは共有凡例の重複又は脱落を招く。全5図を1枚codes画像にまとめることは技術的に可能だが本文図と4選択図の一体画像が非常に縦長になり原本表示と同程度で，忠実な原文配置を保つ本件の画像維持判断は妥当。原本は本文・条件・矢印・凡例・ラベル・ア〜エ順が全て可読であり元データ及び原本を変更しない。sourceSHA256実一致。小画面ブラウザ確認は本担当未実施。",
+    "reviewedDecisionSHA256": "745a691d32e32f6031e1e57d1f0b94a5c6ebc1e276ed8fcafc1111c54af0fe6e"
+  }
+]

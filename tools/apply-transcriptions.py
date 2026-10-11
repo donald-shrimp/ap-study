@@ -95,6 +95,17 @@ def checked_records(root=ROOT):
             hashes=[hashlib.sha256((root/path).read_bytes()).hexdigest() for path in q['sourceImages']]
             if hashes!=record['sourceImageSHA256']:
                 raise ValueError(f'Source changed: {id}')
+            source_evidence={}
+            for proof in record.get('sourceEvidence',[]):
+                path=proof['path']
+                if not path.startswith('assets/transcription-sources/') or not (root/path).resolve().is_relative_to(root.resolve()) or not (root/path).is_file():
+                    raise ValueError(f'Invalid supplemental source: {id}')
+                sha=hashlib.sha256((root/path).read_bytes()).hexdigest()
+                if sha!=proof['sha256'] or not proof.get('pdfSHA256') or not proof.get('reason'):
+                    raise ValueError(f'Supplemental source changed: {id}')
+                source_evidence[path]=sha
+            if source_evidence!=review.get('sourceEvidenceSHA256',{}):
+                raise ValueError(f'Supplemental source review mismatch: {id}')
             figure_hashes={}
             for image in [record.get('image'),*[c.get('image') for c in record['choices']]]:
                 if image and (not image.startswith('assets/transcriptions/') or not (root/image).resolve().is_relative_to(root.resolve()) or not (root/image).is_file()):
@@ -107,8 +118,42 @@ def checked_records(root=ROOT):
     return bank, records
 
 
+def checked_retentions(root=ROOT, bank=None, records=None):
+    """An independently checked decision to keep the unchanged original image."""
+    if bank is None or records is None:
+        bank, records = checked_records(root)
+    path = root/'data/transcription-image-retentions.json'
+    entries = json.loads(path.read_text()) if path.is_file() else []
+    by_id = {q['id']: q for q in bank}
+    seen = {r['id'] for r in records}
+    for entry in entries:
+        id = entry['id']; q = by_id.get(id)
+        if not q or id in seen:
+            raise ValueError(f'Unknown/duplicate image retention: {id}')
+        seen.add(id)
+        if entry.get('status') != 'image-retained' or not entry.get('reason') or not entry.get('evidence'):
+            raise ValueError(f'Incomplete image retention: {id}')
+        if not entry.get('assessor') or not entry.get('reviewer') or entry['assessor'] == entry['reviewer']:
+            raise ValueError(f'Independent retention review missing: {id}')
+        decision = {k:v for k,v in entry.items() if k != 'reviewedDecisionSHA256'}
+        if entry.get('reviewedDecisionSHA256') != digest(decision):
+            raise ValueError(f'Retention review hash mismatch: {id}')
+        hashes = [hashlib.sha256((root/p).read_bytes()).hexdigest() for p in q['sourceImages']]
+        if hashes != entry.get('sourceImageSHA256') or q.get('stem'):
+            raise ValueError(f'Retained image source/representation changed: {id}')
+        if entry.get('priorReview'):
+            previous_path=(root/entry['priorReview']).resolve()
+            if not previous_path.is_relative_to(root.resolve()):
+                raise ValueError(f'Invalid retention evidence path: {id}')
+            previous=next((r for r in json.loads(previous_path.read_text()) if r['id']==id),None)
+            if not previous or digest(previous)!=entry.get('priorReviewSHA256'):
+                raise ValueError(f'Retention evidence hash mismatch: {id}')
+    return entries
+
+
 def apply(root=ROOT):
     bank,records=checked_records(root)
+    retentions=checked_retentions(root,bank,records)
     context_path=root/'content/ap/study-context.json'
     context=json.loads(context_path.read_text()) if context_path.is_file() else None
     before_context=copy.deepcopy(context)
@@ -138,6 +183,8 @@ def apply(root=ROOT):
         context_path.write_text(json.dumps(context,ensure_ascii=False,indent=2)+'\n')
         refresh_context_reviews(root,before_bank,bank,records,before_context,context)
     ids={r['id'] for r in records}
+    retained_ids={r['id'] for r in retentions}
+    covered=ids|retained_ids
     packs=[]
     for pack in sorted({id.split('-q')[0] for id in ids}):
         chosen=sorted((id for id in ids if id.startswith(pack+'-q')),key=lambda id:int(id.split('-q')[1]))
@@ -149,14 +196,16 @@ def apply(root=ROOT):
     candidates=[p['id'] for p in packs]+sorted({q['id'].split('-q')[0] for q in bank}-{p['id'] for p in packs})
     next_batch=None
     for pack in candidates:
-        numbers=sorted(q['number'] for q in bank if q['id'].startswith(pack+'-q') and q['id'] not in ids)
+        numbers=sorted(q['number'] for q in bank if q['id'].startswith(pack+'-q') and q['id'] not in covered)
         if numbers:
             next_batch={'packId':pack,'numbers':numbers[:10]};break
     progress={'format':'hitomon-transcription-progress','version':1,'total':len(bank),'reviewed':len(records),
-        'remainingReview':len(bank)-len(records),'displayText':text_count,'preservedExistingText':text_count-len(records),
-        'pendingDrafts':len(draft_ids-ids),'packs':packs,'nextBatch':next_batch}
+        'imageRetained':len(retentions),'processed':len(covered),'imageRetainedIds':sorted(retained_ids),
+        'remainingReview':len(bank)-len(covered),'displayText':text_count,'preservedExistingText':text_count-len(records),
+        'pendingDrafts':len(draft_ids-covered),'packs':packs,'nextBatch':next_batch}
     (root/'data/transcription-progress.json').write_text(json.dumps(progress,ensure_ascii=False,indent=2)+'\n')
     print(f'Independently reviewed transcriptions: {len(records)}/{len(bank)}')
+    print(f'Original images retained: {len(retentions)}; coverage: {len(covered)}/{len(bank)}')
     if root==ROOT:
         subprocess.run([sys.executable,str(ROOT/'tools/build-content.py')],check=True)
 
