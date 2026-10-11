@@ -177,13 +177,13 @@
         <div class="stage"><span class="pill">P0-3 · 実装済み</span><h3>フェーズ計画と公開JSONの往復</h3><p>Schema・仕様・サンプル、プロンプトコピー、貼付検証、プレビュー、登録、Export。最低限の手動登録・編集も用意し、AIを必須にしません。実績はフェーズ単位で表示します。</p></div>
         <div class="stage"><span class="pill">P1 · 実装済み</span><h3>支援なしの30問診断</h3><p>専用の診断記録、中断・端末間再開、終了後の一括採点と解説、復習連携。週別目標と手動マイルストーンも実装。予定の完了は学習回数を増やしません。</p></div>
         <div class="stage"><span class="pill">次段 · 基盤を実装</span><h3>診断の材料と、AIへ渡す前提を充実</h3><p>前提の保存とAIへの出力、診断の構成・開始時の方針・既出状況のExportを実装。専用教材を通常問題集と分離し、分野別優先と元問題の重複回避を検証。公開派生問題はまだ0問です。これから独立確認した教材を少しずつ追加し、充実した分野の上限を増やします。</p></div>
-        <div class="stage"><span class="pill">P2 · 保留</span><h3>80問チェック・自動調整提案・計画履歴</h3><p>必要性を利用状況から判断し、個別に追加します。アプリ内の自動調整提案は必須にせず、まず外部AIへ相談できる材料を整えます。AI APIやMCPの直接接続も必須範囲にしません。</p></div>
+        <div class="stage"><span class="pill">P2 · 個別に導入</span><h3>成長・履歴と、将来の調整提案</h3><p>固定80問の模試、自力正答率の推移、計画履歴は実装済み。自動調整提案は保留。必要性を利用状況から判断し、個別に追加します。アプリ内の自動調整提案は必須にせず、まず外部AIへ相談できる材料を整えます。AI APIやMCPの直接接続も必須範囲にしません。</p></div>
         <div class="takeaway"><p><strong>最新版Rulesは、公開の報告を受けています。</strong></p><p>前回は利用者がルール公開・同期済み表示を確認済み。週別目標・予定の追加時は変更不要でしたが、今回の計画の前提と診断の出題情報に対応した最新版Rulesも、2026-10-07に利用者が公開を報告済みです。端末内保存・バックアップは使え、通常の演習同期も保持します。<a href="firebase-setup.md#planning-rules">同期とインデックス除外の確認手順</a>。前回の本人による同期済み確認とは別に、今回の前提の本番同期は未確認です。本番の別端末復元も別途確認します。</p></div><div class="takeaway"><p><strong>診断より先に計画を使える理由</strong></p><p>既にある学習履歴からAIへ相談できます。診断の新しい出題・再開・同期を完成させるまで、受験日と計画を待たせる必要はありません。</p></div>
         <details><summary>各段階で確認すること</summary><div><ul>
           <li>未登録・未診断・未ログインでも、開始は1操作。</li><li>計画の読込失敗やオフラインが通常学習を止めない。</li><li>通常学習は回答後に終了でき、途中の選択・ヒントも再開できる。</li><li>既存800問の教材、回答表示、PWAのID・スコープ・オフライン動作を保つ。</li><li>不正な計画importで既存計画・履歴が変わらない。</li><li>別資格・別利用者のデータを混ぜない。端末間の計画競合を黙って上書きしない。</li><li>診断中はヒント・答え・途中の正誤を表示せず、支援付き試行を診断結果として受け付けない。</li><li>診断の中断で結果を見せず、結果閲覧後に同じ診断を続行させない。</li><li>診断の問題一覧を途中で変更せず、未回答や継続記録を誤集計しない。</li><li>小さい画面・大きな文字でも開始が探しやすく、結果の母数が読める。</li><li>画面、StudyPlanの実績、AI用Summaryで同じ集計定義を使う。</li>
         </ul></div></details>
       </section>
-    </main>
+    <section class="chapter"><h2>成長と計画履歴：実装済み</h2><p>記録 → 普段の学習に直近6週の自力正答率、受験日・学習計画に終了期間の実績と変更履歴を追加しました。<a href="growth-history.md">現在の仕様</a>と<a href="firebase-setup.md#plan-history-rules">履歴同期のRules更新</a>を参照してください。</p></section></main>
     <div class="reader" aria-label="章の移動"><button id="previous" type="button">前の章</button><span id="chapter-position" role="status" aria-live="polite">1 / 7</span><button id="next" type="button">次の章</button></div>
     <footer><p><a href="requirements.html">現行のHTML定義書</a> · <a href="architecture-plan.html">複数資格・同期の既存計画</a> · <a href="learning-design.md">学習設計</a> · <a href="../">アプリへ</a></p><p>文書内の表示例は提案です。ここで読み方を変えても、学習記録やアプリの設定は変更しません。</p></footer>
   </div>

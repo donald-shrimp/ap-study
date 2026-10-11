@@ -4,17 +4,17 @@ export function createWorkspaceSync({uid,qualificationId,store,remote,onChange=(
  let stopped=false,running=null,cursor=null,cursorLoaded=false,timer,lastRun=0,rerun=false;
  const bounded=promise=>new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(new Error('同期通信がタイムアウトしました。')),20000);promise.then(resolve,reject).finally(()=>clearTimeout(timeout));});
  async function perform(){
-  if(stopped||!navigator.onLine)return;let mockRulesMissing=false;lastRun=Date.now();onStatus('syncing');
+  if(stopped||!navigator.onLine)return;let mockRulesMissing=false,historyRulesMissing=false;lastRun=Date.now();onStatus('syncing');
   try{
    if(!cursorLoaded){cursor=await store.cursor?.()||null;cursorLoaded=true;if(stopped)return;}
    let more=true;while(!stopped&&more){const page=await bounded(remote.pullDocuments(uid,qualificationId,cursor));if(stopped)return;for(const row of page.rows){await store.merge(row);if(stopped)return;}await store.setCursor?.(page.cursor);if(stopped)return;cursor=page.cursor;more=page.more;}
    for(const row of await store.read()){
     if(stopped)return;if(!row.dirty||row.conflict)continue;
     if(row.owner!==`uid:${uid}`||row.qualificationId!==qualificationId)throw new Error('同期先のアカウントが一致しません。');
-    let result;try{result=await bounded(remote.pushDocument(uid,qualificationId,row));}catch(error){if(row.kind==='mock'&&String(error.code).includes('permission-denied')){mockRulesMissing=true;continue;}throw error;}if(stopped)return;
+    let result;try{result=await bounded(remote.pushDocument(uid,qualificationId,row));}catch(error){if(['mock','planRevision'].includes(row.kind)&&String(error.code).includes('permission-denied')){if(row.kind==='mock')mockRulesMissing=true;else historyRulesMissing=true;continue;}throw error;}if(stopped)return;
     if(result.conflict)await store.merge(result.remote);else await store.acknowledge(row.id,row.operationId,result.remote);
    }
-   if(stopped)return;const rows=await store.read();onStatus(rows.some(r=>r.conflict)?'conflict':mockRulesMissing?'mock-rules':rows.some(r=>r.dirty)?'pending':'synced');onChange(rows);if(rows.some(r=>r.dirty&&!r.conflict))timer=setTimeout(run,15000);
+   if(stopped)return;const rows=await store.read();onStatus(rows.some(r=>r.conflict)?'conflict':historyRulesMissing?(mockRulesMissing?'extended-rules':'history-rules'):mockRulesMissing?'mock-rules':rows.some(r=>r.dirty)?'pending':'synced');onChange(rows);if(rows.some(r=>r.dirty&&!r.conflict))timer=setTimeout(run,15000);
   }catch(error){if(!stopped){console.warn('Planning sync failed',error.code||'',error.message);onStatus(String(error.code).includes('permission-denied')?'rules':'error',error);onChange(await store.read());}}
  }
  function run(){clearTimeout(timer);if(stopped)return Promise.resolve();if(running){rerun=true;return running;}running=perform().finally(()=>{running=null;if(rerun&&!stopped){rerun=false;timer=setTimeout(run,0);}});return running;}

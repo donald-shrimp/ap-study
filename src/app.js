@@ -1,10 +1,11 @@
+import {trendDetailHTML} from './ui/learning-trend.js';
 import {createPersonalFeature} from './features/personal.js';
 import {createLearningFeature} from './features/learning.js';
 import {initPWA, savedAssetURLs} from '../pwa.js';
 import {$,esc,now,day,dateText,timeText} from './utils.js';
 import {makeState,complete,labels,hintTotal,enriched,hintKind,createAttempt,openHint,gradeAttempt,finalizeAttempt,selectAnswer} from './domain/study.js';
 import {createProgress} from './domain/review.js';
-import {learningFields,diagnosticFields} from './domain/analytics.js';
+import {learningFields,learningTrend,diagnosticFields} from './domain/analytics.js';
 import {allowsQuestion,contextLabel,attemptEntryMode} from './domain/study-context.js';
 import {createCardFeature} from './features/cards.js';
 import {chooseNextAction,chooseFieldAction} from './domain/next-action.js';
@@ -19,6 +20,7 @@ import {createPlanningFeature} from './features/planning.js';
 
 let store, content, qualification, account, planner, cards, learning, personal;
 let studyContext=null;
+let trendTopicId=null,trendPointDate=null;
 let fieldMode='learning',fieldPartId=null,topicPartId=null,reviewTopicId=null,reviewPartId=null,displayedNextAction=null,displayedEntryActions=null;
 let questionIndex = new Map(), progress = createProgress([]);
 let catalog = {year:'', season:'', topic:'', query:'', enriched:false, page:1};
@@ -41,7 +43,7 @@ function entryActions(){return Object.fromEntries((qualification.studyContext?['
 function views(){
  const phase=activePhase(planner?.plan()),recommendation=phase?selectPractice({qualification,questions:base,attempts:planner.allAttempts(),reviewInfo,scope:{topicIds:phase.focusTopicIds,examPartIds:phase.examPartIds},excludedQuestionIds:learning?.deferredIds()||[],available:usableOffline,practiceAllowed:q=>allowsQuestion(q,state.settings.lastEntry,studyContext,state.settings.deskQuestionIds)}):null;
  const diagnosis=planner?.latestDiagnosis(),homeFields=learningFields({qualification,questions:base,attempts:state.attempts,plan:planner?.plan()}),fieldData=fieldMode==='diagnostic'?diagnosticFields(diagnosis,qualification):fieldPartId?learningFields({qualification,questions:base,attempts:state.attempts,plan:planner?.plan(),examPartId:fieldPartId}):homeFields;
- return createViews({noteConflictHTML:topicId=>personal?.conflictsHtml(topicId)||'',cardsEnabled:!!cards,recommendation,entryActions:displayedEntryActions||entryActions(),studyContext,contextLabel:q=>contextLabel(q,studyContext,state.settings.deskQuestionIds),homeFields,nextAction:displayedNextAction||nextAction(),fieldData,fieldMode,fieldPartId,topicPartId,fieldAction,reviewTopicId,reviewPartId,diagnosis,normalAttempts:state.attempts.filter(a=>!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly),state:{...state,attempts:planner?.allAttempts()||state.attempts},workspaceViews:planner?.store()?planner.views():null,base,catalog,PAGE_SIZE,examLabel,question,current,reviewInfo,reviewQuestions,topics,topicPool:state.view==='study'?topicPool:(topic,id,part)=>topicPool(topic,id,part,state.settings.paperMode),latest,previousAttempt,improvement,sessionCount,hasFreshTopicQuestion,materialUpdateAvailable,qualification,readNote});
+ return createViews({trendData:state.view==='history'&&fieldMode==='learning'?learningTrend({qualification,attempts:state.attempts,questions:base,plan:planner?.plan(),examPartId:fieldPartId,topicId:trendTopicId}):null,trendPointDate,noteConflictHTML:topicId=>personal?.conflictsHtml(topicId)||'',cardsEnabled:!!cards,recommendation,entryActions:displayedEntryActions||entryActions(),studyContext,contextLabel:q=>contextLabel(q,studyContext,state.settings.deskQuestionIds),homeFields,nextAction:displayedNextAction||nextAction(),fieldData,fieldMode,fieldPartId,topicPartId,fieldAction,reviewTopicId,reviewPartId,diagnosis,normalAttempts:state.attempts.filter(a=>!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly),state:{...state,attempts:planner?.allAttempts()||state.attempts},workspaceViews:planner?.store()?planner.views():null,base,catalog,PAGE_SIZE,examLabel,question,current,reviewInfo,reviewQuestions,topics,topicPool:state.view==='study'?topicPool:(topic,id,part)=>topicPool(topic,id,part,state.settings.paperMode),latest,previousAttempt,improvement,sessionCount,hasFreshTopicQuestion,materialUpdateAvailable,qualification,readNote});
 }
 let offlineQuestionIds = new Set();
 let online = navigator.onLine;
@@ -244,6 +246,8 @@ main.addEventListener('click',async e=>{
   else if(action==='zoom') openImage(el.dataset.id,Number(el.dataset.image));
   else if(action==='catalog-page'){catalog.page=Number(el.dataset.page);render();}
   else if(action==='reset-filters'){catalog={year:'',season:'',topic:'',query:'',enriched:false,page:1};render();}
+  else if(action==='trend-point'){trendPointDate=el.dataset.date;const data=learningTrend({qualification,attempts:state.attempts,questions:base,plan:planner?.plan(),examPartId:fieldPartId,topicId:trendTopicId});document.querySelector('.growth-detail').innerHTML=trendDetailHTML(data,trendPointDate);document.querySelectorAll('.growth-point').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.date===trendPointDate)));}
+  else if(action==='field-trend'){if(!qualification.topics.some(t=>t.id===el.dataset.topicId))return;trendTopicId=el.dataset.topicId;trendPointDate=null;render(false);document.querySelector('.growth-trend')?.scrollIntoView({block:'start'});document.querySelector('#trend-topic')?.focus({preventScroll:true});}
   else if(action==='plan-start'){const phase=activePhase(planner?.plan());if(!phase){notice('現在の期間の計画はありません。ホームから1問始められます。');return;}await start(null,true,{intent:'topic',topicIds:phase.focusTopicIds,examPartIds:phase.examPartIds,paperMode:el.dataset.paperMode||state.settings.paperMode});}
   else if(action==='review-start')await start(el.dataset.id,true,{intent:'review',topic:qualification.topics.find(t=>t.id===reviewTopicId)?.name||null,examPartId:reviewPartId,paperMode:'all',returnView:'review'});
   else if(action==='start'){const direct=state.session.intent==='direct'&&state.view==='study',returnView=direct?state.session.returnView:state.view==='study'?'study':state.view,returnSession=state.view==='study'?(direct?state.session.returnSession:structuredClone(state.session)):null,returnAttemptId=direct?state.session.returnAttemptId:state.currentId;await start(el.dataset.id,true,{intent:'direct',paperMode:'all',returnView,returnSession,returnAttemptId,returnRunId:state.currentRunId});}
@@ -273,6 +277,7 @@ main.addEventListener('change',async e=>{
   if(e.target.id==='import-cards'){try{await cards.importFile(e.target.files[0]);}catch(error){notice(error.message+' 現在の記録は変更していません。');}finally{e.target.value='';}return;}
   if(await cards?.change(e.target))return;
   if(e.target.name==='topic-part'){topicPartId=e.target.value||null;render(false);return;}
+  if(e.target.name==='trend-topic'){trendTopicId=e.target.value||null;trendPointDate=null;render(false);document.getElementById('trend-topic')?.focus({preventScroll:true});return;}
   if(e.target.name==='field-part'){fieldPartId=e.target.value||null;render(false);return;}
   if(await planner?.change(e.target))return;
   if(e.target.closest('#catalog-form'))return;
@@ -318,7 +323,7 @@ $('#import-state').addEventListener('change',async e=>{
   let result;
   try{await personal?.importNotes(candidate.readingNotes);result=await planner?.restoreBackup(workspaceBackup);}catch(error){render();$('#settings-status').textContent='通常演習の記録は読み込み済みです。分野メモ・受験日・計画・診断の取り込みを完了できませんでした。同じファイルを選んで再試行できます。 '+error.message;return;}
   if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));render();
-  const details=[];if(result?.plan==='restored')details.push('受験日・計画を追加しました。');if(result?.plan==='retained')details.push('既存の受験日・計画は保持しました。');if(workspaceBackup?.runs.length)details.push(`診断・模試${result.diagnosticsAdded}件を追加、${result.diagnosticsRetained}件は登録済みです。`);
+  const details=[];if(result?.plan==='restored')details.push('受験日・計画を追加しました。');if(result?.plan==='retained')details.push('既存の受験日・計画は保持しました。');if(result?.historyAdded||result?.historyRetained)details.push(`計画履歴${result.historyAdded}件を追加、${result.historyRetained}件は登録済みです。`);if(workspaceBackup?.runs.length)details.push(`診断・模試${result.diagnosticsAdded}件を追加、${result.diagnosticsRetained}件は登録済みです。`);
   $('#settings-status').textContent='学習記録を読み込みました。'+(details.length?' '+details.join(' '):'');
  });}catch(error){$('#settings-status').textContent=error instanceof SyntaxError?'JSONを読み取れませんでした。現在の記録は変更していません。':error.message;}
  finally{e.target.value='';}

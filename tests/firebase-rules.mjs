@@ -165,3 +165,14 @@ test('固定80問の模試は本人だけ保存・再開でき、問題順・確
  const reopened=structuredClone(run);reopened.status='in_progress';reopened.completedAt=null;await assertFails(setDoc(ref,resourceEnvelope('mock',reopened,4)));await assertFails(deleteDoc(ref));
  const wrongSize=createMock(sets[1],variants,qualification);wrongSize.size=30;await assertFails(setDoc(doc(db,resourcePath('mock-user',wrongSize.id)),resourceEnvelope('mock',wrongSize)));
 });
+
+import {createPlanRevision} from '../src/domain/plan-history.js';
+test('計画履歴は本人のみ保存・取得し、同じIDの内容変更・他資格・削除を拒否する',async()=>{
+ const db=env.authenticatedContext('history').firestore(),r=createPlanRevision(blankPlan(qualification),qualification),ref=doc(db,resourcePath('history',r.id));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planRevision',r)));await assertSucceeds(getDoc(ref));
+ await assertSucceeds(setDoc(ref,resourceEnvelope('planRevision',r,2)));
+ for(const patch of [{origin:'baseline'},{savedAt:'2026-10-01T00:00:00.000Z'},{plan:{...r.plan,examDates:[{examPartId:'objective',date:'2026-11-01'}]}}])await assertFails(setDoc(ref,resourceEnvelope('planRevision',{...r,...patch},3)));
+ await assertFails(deleteDoc(ref));
+ for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(doc(client,resourcePath('history',r.id))));await assertFails(setDoc(doc(client,resourcePath('history',r.id)),resourceEnvelope('planRevision',r,3)));}
+ for(const patch of [{id:'other'},{qualificationId:'other'},{origin:'invalid'},{extra:true},{previousId:'plan--invalid'},{savedAt:'invalid'}])await assertFails(setDoc(doc(db,resourcePath('history','plan--invalid')),resourceEnvelope('planRevision',{...r,id:'plan--invalid',...patch})));
+});

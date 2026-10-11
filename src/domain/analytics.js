@@ -1,5 +1,5 @@
 import {complete} from './study.js';
-import {dateInZone,daysBetween,examPartsFor,partOfAttempt} from './planning.js';
+import {dateInZone,daysBetween,examPartsFor,partOfAttempt,addDays} from './planning.js';
 
 export function activePhase(plan,at=new Date()){
  if(!plan)return null;const today=dateInZone(at,plan.timeZone);
@@ -30,6 +30,24 @@ export function summarizeFields(data){
  const counts=data.rows.reduce((sum,row)=>({total:sum.total+row.total,correct:sum.correct+row.correct}),{total:0,correct:0});
  return {...counts,rate:counts.total?counts.correct/counts.total:null};
 }
+// Historical points cover the entire local calendar day; today's point stops
+// at now. Repeated questions use the last result within EACH 28-day window.
+export function learningTrend({qualification,attempts,questions=[],plan=null,at=new Date(),examPartId=null,topicId=null}){
+ const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone),byId=new Map(questions.map(q=>[q.id,q])),topics=new Set(qualification.topics.map(t=>t.id)),cutoff=Date.parse(at);
+ const eligible=attempts.filter(a=>complete(a)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===qualification.id)&&Date.parse(a.completedAt)<=cutoff).flatMap(a=>{
+  const q=a.questionSnapshot||byId.get(a.questionId),id=q?.topicId||qualification.topics.find(t=>t.name===q?.topic)?.id;
+  if(!topics.has(id)||topicId&&id!==topicId||examPartId&&partOfAttempt(q?{...a,questionSnapshot:q}:a,qualification)!==examPartId)return [];
+  return [{a,day:Date.parse(dateInZone(a.completedAt,zone))/86400000}];
+ });
+ const points=Array.from({length:6},(_,i)=>{
+  const date=addDays(today,(i-5)*7),day=Date.parse(date)/86400000,latest=new Map();
+  for(const {a,day:completedDay} of eligible){const distance=day-completedDay;if(distance<0||distance>=28)continue;const old=latest.get(a.questionId);if(!old||a.completedAt>old.completedAt||a.completedAt===old.completedAt&&a.id>old.id)latest.set(a.questionId,a);}
+  const total=latest.size,correct=[...latest.values()].filter(a=>a.status==='correct').length;
+  return {date,total,correct,rate:total?correct/total:null,smallSample:total>0&&total<10};
+ });
+ return {points,topicId,examPartId,timeZone:zone,days:28};
+}
+
 export function diagnosticFields(result,qualification){
  return {mode:'diagnostic',result,rows:qualification.topics.map(t=>{
   const r=result?.topics.find(r=>r.topicId===t.id),total=r?.answered||0,correct=r?.correct||0;

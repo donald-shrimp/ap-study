@@ -87,18 +87,27 @@ service cloud.firestore {
   function resourceEnvelope(id, qualificationId) {
    let d = request.resource.data;
    return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
-    && d.version == 1 && d.kind in ['planning','diagnostic','mock']
+    && d.version == 1 && d.kind in ['planning','diagnostic','mock','planRevision']
     && d.revision is int && d.revision >= 1 && d.operationId is string && d.operationId.size() <= 300
     && d.deviceId is string && d.deviceId.size() > 0 && d.deviceId.size() <= 100
     && d.updatedAt == request.time
-    && (d.kind == 'planning' ? id == 'planning' && validPlan(d.payload, qualificationId) : d.kind == 'mock' ? validMock(d.payload, id, qualificationId) : validDiagnostic(d.payload, id, qualificationId));
+    && (d.kind == 'planning' ? id == 'planning' && validPlan(d.payload, qualificationId) : d.kind == 'planRevision' ? validPlanRevision(d.payload, id, qualificationId) : d.kind == 'mock' ? validMock(d.payload, id, qualificationId) : validDiagnostic(d.payload, id, qualificationId));
+  }
+  function validPlanRevision(p, id, qualificationId) {
+   return p.keys().hasOnly(['format','version','id','qualificationId','savedAt','origin','previousId','plan'])
+    && p.format == 'hitomon-plan-revision' && p.version == 1 && p.id == id
+    && id.matches('plan--[a-zA-Z0-9_-]{1,90}') && p.qualificationId == qualificationId
+    && p.savedAt is string && p.savedAt.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}Z')
+    && p.origin in ['registered','edited','imported','baseline','resolved','restored']
+    && (p.previousId == null || p.previousId is string && p.previousId.matches('plan--[a-zA-Z0-9_-]{1,90}') && p.previousId != id)
+    && validPlan(p.plan, qualificationId);
   }
   match /users/{uid}/qualifications/{qualificationId}/resources/{id} {
    allow read: if mine(uid);
    allow create: if mine(uid) && resourceEnvelope(id, qualificationId) && request.resource.data.revision == 1;
    allow update: if mine(uid) && resourceEnvelope(id, qualificationId)
     && request.resource.data.revision == resource.data.revision + 1 && request.resource.data.kind == resource.data.kind
-    && (resource.data.kind == 'planning' || (resource.data.payload.status == 'in_progress'
+    && (resource.data.kind == 'planning' || (resource.data.kind == 'planRevision' ? request.resource.data.payload == resource.data.payload : resource.data.payload.status == 'in_progress'
      ? frozenDiagnostic(request.resource.data.payload, resource.data.payload)
      : request.resource.data.payload == resource.data.payload));
    allow delete: if false;

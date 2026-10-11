@@ -39,6 +39,13 @@ with sync_playwright() as p:
  plan_view(a);set_date(a,'2026-11-04');synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.id==="planning")');c.wait_for_function('document.querySelector("[name=exam-objective]").value==="2026-11-04"');assert not c.locator('#planning-stale').is_visible()
  a.locator('[name=exam-objective]').fill('2026-12-24');set_date(c,'2026-11-30');synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.payload.examDates?.[0]?.date==="2026-11-30")');a.locator('#planning-stale').wait_for(state='visible');assert a.locator('[name=exam-objective]').input_value()=='2026-12-24';a.get_by_role('button',name='入力を破棄して最新版を表示',exact=True).click();assert a.locator('[name=exam-objective]').input_value()=='2026-11-30'
  contexts[0].set_offline(True);set_date(a,'2026-12-03');set_date(c,'2026-12-15');synced(c);contexts[0].set_offline(False);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.conflict)');a.get_by_role('heading',name='計画の変更が競合しています',exact=True).wait_for();a.get_by_role('button',name='この端末の内容を使う',exact=True).click();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.examDates?.[0]?.date==="2026-12-03")',timeout=30000)
+ # Both offline branches and the explicit resolution survive on both devices.
+ synced(a);synced(c);kick(a);kick(c)
+ for pg in [a,c]:wait_for_async(pg,'async()=>(await ('+READ+')()).filter(r=>r.kind==="planRevision").length>=5')
+ histories=lambda pg:{r['id']:r['payload'] for r in pg.evaluate(READ) if r['kind']=='planRevision'}
+ ha,hc=histories(a),histories(c);assert ha==hc
+ assert any(r['plan']['examDates'][0]['date']=='2026-12-15' for r in ha.values())
+ assert any(r['plan']['examDates'][0]['date']=='2026-12-03' and r['origin']=='resolved' for r in ha.values())
  # Optional phase fields and context are accepted by the updated Rules.
  example=json.loads(open('schemas/study-plan.example.json').read());example['examDates']=[{'examPartId':'objective','date':'2026-12-03'}]
  open_plan_ai(a);a.locator('#plan-json').fill(json.dumps(example));a.get_by_role('button',name='検証してプレビュー',exact=True).click();a.get_by_role('button',name='この内容で登録',exact=True).click();a.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.weeklyTargets?.length===2)')
@@ -55,4 +62,4 @@ with sync_playwright() as p:
  assert len([r for r in a.evaluate(READ) if r['kind']=='diagnostic'])==1
  login(other,'planning-other-'+uuid.uuid4().hex+'@hitomon.test');assert not other.evaluate(READ), 'other UID received plans/diagnostics'
  assert not errors,errors;b.close()
-print('PASS real Firebase plans / two browsers / untouched open planning page updates automatically / date and context drafts preserved / stale draft CAS after rerender / JSON and manual draft discard / offline CAS conflict and local choice / context, week targets and manual milestones / diagnostic checkpoint and closure across devices / no duplicate run / UID isolation')
+print('PASS real Firebase plans / two browsers / untouched open planning page updates automatically / date and context drafts preserved / stale draft CAS after rerender / JSON and manual draft discard / offline CAS conflict and local choice / context, week targets and manual milestones / diagnostic checkpoint and closure across devices / no duplicate run / immutable history branches and resolutions shared / UID isolation')
