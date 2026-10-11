@@ -4,6 +4,7 @@
 
 - 診断専用の派生問題：[`docs/diagnostic-authoring.md`](docs/diagnostic-authoring.md)。冒頭の「作問依頼を受けたときの確認事項」と「問題文は原問に寄せる」を必ず参照する。
 - 資格・問題集の追加や共通教材の形式：[`docs/content-authoring.md`](docs/content-authoring.md)。
+- 原本画像の文字起こし・数式表示：[`docs/transcription-authoring.md`](docs/transcription-authoring.md)。既存の切り出し画像を使い、原文と強調を保持する。確認済み進捗から再開し、別担当レビューと教材・図のハッシュ照合が通った問題だけ反映する。
 
 派生問題の目的は、数値や正答位置の暗記による回答を避け、原問が問う理解を確かめること。原問の語調・説明量・問い方・選択肢構成を尊重し、変更を必要な数値・対象・入力・場面に絞る。解法や用語の補足は解説へ置く。
 

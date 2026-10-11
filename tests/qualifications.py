@@ -82,7 +82,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-action=start]').count()==0
             open_answer_history(page);page.locator('[data-action=resume]').click();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
-            page.locator('[data-action=next]').click();page.get_by_role('radio').last.wait_for();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('#result-heading').inner_text()=='自力で正解'
+            page.locator('[data-action=next]').click();page.get_by_role('button',name='回答する',exact=True).wait_for();page.get_by_role('radio').last.wait_for();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('#result-heading').inner_text()=='自力で正解'
             assert code_before=={str(f.relative_to(root)):hashlib.sha256(f.read_bytes()).hexdigest() for f in root.rglob('*.js')}
             page.evaluate('document.documentElement.style.zoom="200%"');assert page.locator('.study-back-button').bounding_box()['height']>=44
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth')

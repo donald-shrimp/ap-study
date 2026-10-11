@@ -13,6 +13,8 @@
 
 ## 新しい資格を登録する
 
+原本画像をテキスト表示に切り替える場合は [文字起こし手順](transcription-authoring.md) を参照する。数式・表・コード・下線を含む限定形式を `stem` と選択肢の `text` に保存し、`python tools/apply-transcriptions.py` で別担当確認済みの内容だけを反映する。生成済みパックを直接編集しない。解説と正答はこの作業で変更しない。
+
 `content/<資格ID>/qualification.json` を作成し、`content/qualifications.json` の `qualifications` 配列へIDを追加する。資格ID・問題ID・パックID・分野ID・選択肢IDは、英数字で始まる100文字以下の英数字・`_`・`-`。表示名・公開年・公開パスを変えても識別IDを変更しない。
 
 ```json
