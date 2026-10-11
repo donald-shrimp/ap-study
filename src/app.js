@@ -17,6 +17,7 @@ import {createLocalStore} from './storage/local.js';
 import {loadCatalog,appRoot} from './content/catalog.js';
 import {initAccountControls,guestAttemptId} from './sync/account.js';
 import {createPlanningFeature} from './features/planning.js';
+import {createAIHandoff} from './features/ai-handoff.js';
 
 let store, content, qualification, account, planner, cards, learning, personal;
 let studyContext=null;
@@ -85,6 +86,7 @@ document.addEventListener('error', event => {
 }, true);
 function question(id) { const q=questionIndex.get(id)||(planner?.allAttempts()||state.attempts).find(a=>a.questionId===id&&a.questionSnapshot)?.questionSnapshot,override=Object.hasOwn(state.overrides,id)?state.overrides[id]:null;return q?{...q,...(override||{}),...(override?{enrichment:'personal',hintStatus:'individual'}:{})}:null; }
 function current() { return state.attempts.find(a => a.id === state.currentId); }
+const aiHandoff=createAIHandoff({getAttempt:current,getQuestion:a=>({...((a.questionSnapshot||question(a.questionId))||{}),...(a.materialSnapshot||{})}),getQualification:()=>qualification,getBaseURL:()=>document.baseURI});
 
 function materialUpdateAvailable(a) {
   if(!questionIndex.has(a.questionId))return false;
@@ -251,6 +253,7 @@ main.addEventListener('click',async e=>{
   else if(action==='field-practice'){if(!qualification.topics.some(t=>t.id===el.dataset.topicId))return;const mode=el.dataset.paperMode||state.settings.lastEntry;if(mode!=='all'&&!studyContext)studyContext=await content.loadStudyContext();if(el.dataset.resumeId)await resume(el.dataset.resumeId,mode);else await start(el.dataset.id||null,true,{topic:el.dataset.topic,examPartId:el.dataset.partId||null,paperMode:mode,returnView:state.view});}
   else if(action==='topic-session') { if(!topics().includes(el.dataset.topic))return;start(null,true,{topic:el.dataset.topic,examPartId:el.dataset.partId||null,paperMode:el.dataset.paperMode||state.settings.paperMode}); }
   else if(action==='zoom') openImage(el.dataset.id,Number(el.dataset.image));
+  else if(action==='ask-ai') aiHandoff.open();
   else if(action==='catalog-page'){catalog.page=Number(el.dataset.page);render();}
   else if(action==='reset-filters'){catalog={year:'',season:'',topic:'',query:'',enriched:false,page:1};render();}
   else if(action==='trend-point'){trendPointDate=el.dataset.date;const data=learningTrend({qualification,attempts:state.attempts,questions:base,plan:planner?.plan(),examPartId:fieldPartId,topicId:trendTopicId});document.querySelector('.growth-detail').innerHTML=trendDetailHTML(data,trendPointDate);document.querySelectorAll('.growth-point').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.date===trendPointDate)));}
