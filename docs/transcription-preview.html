@@ -4,11 +4,23 @@
 <title>文字起こし済みの問題｜ひと問</title>
 <link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
 <style>body{padding:20px}main{max-width:760px;margin:auto}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:1.25rem}select{width:100%;padding:12px;margin:12px 0 20px}.preview-choice{display:flex;gap:14px;padding:16px;border:1px solid var(--line);border-radius:12px;margin-top:10px}.preview-choice>b{flex-shrink:0}.preview-choice .rich-question{flex:1}.preview-choice img,.question-figure img,.original-question img{max-width:100%;height:auto}.original-question img{display:block;margin-top:12px}.small{margin:8px 0}.preview-status{min-height:24px}</style>
+<style>
+.preview-text-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 16px}.preview-text-controls .button{min-width:44px;padding:7px 12px}.preview-text-controls output{min-width:48px;text-align:center;font-size:.875rem;font-variant-numeric:tabular-nums}.preview-text-controls .text-size-label{width:100%;font-size:.875rem;color:var(--muted)}
+#preview{--preview-text-scale:1}#preview .question-stem{font-size:calc(1.1rem * var(--preview-text-scale))}#preview .preview-choice .rich-question{font-size:calc(1rem * var(--preview-text-scale))}
+@media(max-width:800px){#preview .question-stem{font-size:calc(1.05rem * var(--preview-text-scale))}}
+</style>
 <main>
 <div class="preview-head"><h1>文字起こし済みの問題</h1><a href="../">学習アプリへ</a></div>
 <p class="small muted">学習記録を変更せずに、本文・数式・図・選択肢を確認できます。</p>
 <p class="small preview-status" id="status" role="status">読み込んでいます。</p>
 <label for="question">問題を選ぶ</label><select id="question" disabled></select>
+<div class="preview-text-controls" role="group" aria-label="本文の文字サイズ">
+<span class="text-size-label">本文の文字</span>
+<button type="button" class="button" id="text-smaller" aria-label="本文の文字を小さくする">−</button>
+<output id="text-size" aria-live="polite" aria-atomic="true">100%</output>
+<button type="button" class="button" id="text-larger" aria-label="本文の文字を大きくする">＋</button>
+<button type="button" class="button" id="text-reset">標準</button>
+</div>
 <article class="panel" id="preview"></article>
 </main>
 <script type="module">
@@ -16,6 +28,18 @@ import {loadCatalog} from '../src/content/catalog.js';
 import {questionTextHTML} from '../src/ui/question-text.js';
 import {esc} from '../src/utils.js';
 const status=document.querySelector('#status'),select=document.querySelector('#question'),preview=document.querySelector('#preview');
+const smaller=document.querySelector('#text-smaller'),larger=document.querySelector('#text-larger'),sizeOutput=document.querySelector('#text-size');
+const requestedSize=Number(new URL(location.href).searchParams.get('textSize'));
+let textSize=[80,90,100,110,120,130,140].includes(requestedSize)?requestedSize:100;
+function applyTextSize(updateURL=false){
+ preview.style.setProperty('--preview-text-scale',String(textSize/100));sizeOutput.textContent=`${textSize}%`;
+ smaller.disabled=textSize===80;larger.disabled=textSize===140;
+ if(updateURL){const url=new URL(location.href);if(textSize===100)url.searchParams.delete('textSize');else url.searchParams.set('textSize',String(textSize));history.replaceState(null,'',url);}
+}
+smaller.addEventListener('click',()=>{textSize=Math.max(80,textSize-10);applyTextSize(true)});
+larger.addEventListener('click',()=>{textSize=Math.min(140,textSize+10);applyTextSize(true)});
+document.querySelector('#text-reset').addEventListener('click',()=>{textSize=100;applyTextSize(true)});
+applyTextSize();
 try {
  const root=new URL('../',location.href),progress=await fetch(new URL('data/transcription-progress.json',root)).then(r=>r.json()),catalog=await loadCatalog('ap');
  const ids=progress.packs.flatMap(p=>p.ids),questions=ids.map(id=>catalog.questions.find(q=>q.id===id));
