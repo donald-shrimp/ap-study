@@ -28,6 +28,11 @@ with sync_playwright() as p:
   assert page.locator('.question-panel .question-stem').count()==1
  for record in records:
   open_q(record['id']);fits()
+  page.wait_for_function('[...document.querySelectorAll(".question-panel img")].every(img=>img.complete&&img.naturalWidth>0)')
+  for width in [320,780,1280]:
+   page.set_viewport_size({'width':width,'height':900});fits()
+  page.set_viewport_size({'width':390,'height':844})
+  page.evaluate('document.documentElement.style.fontSize="200%"');fits();page.evaluate('document.documentElement.style.fontSize=""')
   current=next(a for a in state(page)['attempts'] if a['id']==state(page)['currentId'])
   assert current['questionSnapshot']['stem']==record['stem']
   assert page.locator('.original-question').count()==1
