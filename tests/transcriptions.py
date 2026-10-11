@@ -11,9 +11,13 @@ ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('transcriptions',ROOT/'tools/apply-transcriptions.py')
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 bank,records=module.checked_records()
+retentions=module.checked_retentions(ROOT,bank,records)
 by_id={q['id']:q for q in bank}
 progress=json.loads((ROOT/'data/transcription-progress.json').read_text())
-assert progress['reviewed']==len(records) and progress['remainingReview']==len(bank)-len(records)
+assert progress['reviewed']==len(records) and progress['imageRetained']==len(retentions)
+assert progress['processed']==len(records)+len(retentions)
+assert progress['remainingReview']==len(bank)-progress['processed']
+assert set(progress['imageRetainedIds'])=={r['id'] for r in retentions}
 assert {id for p in progress['packs'] for id in p['ids']}=={r['id'] for r in records}
 journals=[json.loads(path.read_text()) for path in (ROOT/'data/transcription-context-revisions').glob('*.json')]
 historical={module.digest(item['beforeQuestion']):item['beforeQuestion'] for journal in journals for item in journal['items']}
@@ -46,6 +50,9 @@ with tempfile.TemporaryDirectory() as directory:
         for path in q['sourceImages']+[q.get('image')]+[c.get('image') for c in q['choices']]:
             if path:
                 destination=root/path;destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/path,destination)
+    for record in records:
+        for proof in record.get('sourceEvidence',[]):
+            destination=root/proof['path'];destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/proof['path'],destination)
     first=records[0];source=root/'data/transcriptions'/f'{first["id"].split("-q")[0]}.json'
     content=json.loads(source.read_text());content[0]['stem']+='改ざん';source.write_text(json.dumps(content))
     try:module.checked_records(root);raise AssertionError('edited transcription accepted')
@@ -55,9 +62,33 @@ with tempfile.TemporaryDirectory() as directory:
     try:module.checked_records(root);raise AssertionError('self-review accepted')
     except ValueError as error:assert 'Independent review' in str(error)
     shutil.copyfile(ROOT/review_file.relative_to(root),review_file)
+    # Retention decisions also require independent exact-hash source review;
+    # they must never be used to inflate the text transcription count.
+    retention_file=ROOT/'data/transcription-image-retentions.json'
+    if retentions:
+        shutil.copyfile(retention_file,root/'data/transcription-image-retentions.json')
+        for entry in retentions:
+            if entry.get('priorReview'):
+                destination=root/entry['priorReview'];destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/entry['priorReview'],destination)
+        module.checked_retentions(root,bank,records)
+        edited=json.loads(retention_file.read_text());edited[0]['reason']+='改ざん'
+        (root/'data/transcription-image-retentions.json').write_text(json.dumps(edited))
+        try:module.checked_retentions(root,bank,records);raise AssertionError('edited retention accepted')
+        except ValueError as error:assert 'hash' in str(error)
+        edited=json.loads(retention_file.read_text());edited[0]['reviewer']=edited[0]['assessor']
+        edited[0]['reviewedDecisionSHA256']=module.digest({k:v for k,v in edited[0].items() if k!='reviewedDecisionSHA256'})
+        (root/'data/transcription-image-retentions.json').write_text(json.dumps(edited))
+        try:module.checked_retentions(root,bank,records);raise AssertionError('retention self-review accepted')
+        except ValueError as error:assert 'Independent' in str(error)
     figure=next(r['image'] for r in records if r['image']);(root/figure).write_bytes(b'changed')
     try:module.checked_records(root);raise AssertionError('edited figure accepted')
     except ValueError as error:assert 'figure changed' in str(error)
+    shutil.copyfile(ROOT/figure,root/figure)
+    supplemental=next((proof['path'] for r in records for proof in r.get('sourceEvidence',[])),None)
+    if supplemental:
+        (root/supplemental).write_bytes(b'changed')
+        try:module.checked_records(root);raise AssertionError('edited source supplement accepted')
+        except ValueError as error:assert 'Supplemental source changed' in str(error)
 
 subprocess.run(['node','tools/check-question-text.mjs'],cwd=ROOT,check=True)
 print(f'PASS {len(records)} independently reviewed transcriptions / source and figure hashes / immutable lessons / tamper rejection')
