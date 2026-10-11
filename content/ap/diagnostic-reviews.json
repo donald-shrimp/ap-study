@@ -3034,11 +3034,11 @@
   },
   {
     "questionId": "ap-mock-b-q31",
-    "version": 1,
-    "sha256": "4b4081e20ed22c170e127a7c6a0bd634f505763dfaba4bc28bce8cfaa00f5b36",
+    "version": 2,
+    "sha256": "b428b28a580ed06217fb91cd795dbcef4ae0ce056ec17a6b4188fdad4ead89b9",
     "author": "codex-agent-author-mock-b-20261008T162515Z",
-    "reviewer": "review-mock-b-independent-20261008",
-    "checkedAt": "2026-10-08T23:02:06.986961+00:00",
+    "reviewer": "codex-classification-revision-20261011",
+    "checkedAt": "2026-10-11T09:04:34.944171+00:00",
     "checks": {
       "source": true,
       "answer": true,
@@ -3046,21 +3046,17 @@
       "choices": true,
       "wording": true
     },
-    "notes": "派生独立解答・全4択：任意途中ロールバック目印savepoint。アチェックポイント，ウ制約遅延，エ2PC判定。 原本再解答・全4択：ア制約時点，イ障害回復短縮のチェックポイント，ウセーブポイント，エ2PC決定。 表現/変更確認：原本の問いの語調・4択構成を保持し，問う対象又は具体的入力を変更している。全選択肢の理由，summary，explanation，takeawayを問題条件と照合し，原本にない解法補足を問題文へ追加していない。",
+    "notes": "2026-10-11：分野だけをネットワークからデータベースへ訂正し版を2へ更新。原本画像を再視認し公式解答PDF全80キーと台帳を照合。原問はチェックポイント＝イ、派生はセーブポイント＝イ。問題文・4択・正答・解説・全4択理由は変更なし。現在の改訂と再確認は主担当1人の同じ実行で、別担当・並列・盲検の独立改訂レビューではない。初版の別エージェント確認記録は改訂台帳のbeforeReviewへそのまま保存。",
     "method": {
-      "separateAgent": true,
+      "separateAgent": false,
       "separateExecution": true,
-      "reviewerAgent": "review-mock-b-independent-20261008",
-      "answerBlindFirstPass": true,
       "blindContext": false,
-      "contextDisclosure": "担当範囲と作問方針を親から受領。01-10の先行解答保存後，出典調査でanswer-keys台帳出力に2024秋の全80公式キーが含まれた。したがって原問の公式キー未読の盲検とは称さない。全77派生の作者正解・解説・authorChecks・adaptationは各バッチの先行解答保存後に開示。原本77画像を各1枚ずつview_imageで視認し，公式転記だけでなく全択分類と計算を自分で実施。新図は先行解答時にCairoSVG描画，完成確認時にChromium描画も全15画像を個別視認。",
-      "firstPassSolutions": "content/ap/diagnostic-evidence/mock-b/solutions.json",
-      "batchFirstPassSolutions": "content/ap/diagnostic-evidence/mock-b/solutions-31-40.json",
-      "firstPassSavedAt": "2026-10-08T16:51:18.611127+00:00",
-      "independentChecks": "content/ap/diagnostic-evidence/mock-b/independent-checks.py",
-      "browserRenderRecords": "content/ap/diagnostic-evidence/mock-b/browser-render-records.json",
-      "findings": "content/ap/diagnostic-evidence/mock-b/findings.json",
-      "actualUiDisplayEvidence": "content/ap/diagnostic-evidence/mock-b/ui-display-checks.json"
+      "answerBlindFirstPass": false,
+      "originalAuthorRun": "codex-agent-author-mock-b-20261008T162515Z",
+      "revisionAuthor": "codex-classification-revision-20261011",
+      "revisionReviewer": "codex-classification-revision-20261011",
+      "independentRevisionReview": false,
+      "revisionRecord": "content/ap/diagnostic-revisions/20261011-database-classification.json"
     },
     "sourceEvidence": {
       "parentQuestionId": "r06a-q31",
@@ -3095,7 +3091,12 @@
       "answerPdfExtractedAnswer": "イ",
       "answerPdfAll80MatchLedger": true
     },
-    "derivedImages": []
+    "derivedImages": [],
+    "editor": "codex-classification-revision-20261011",
+    "changes": [
+      "topicId: network → database",
+      "version: 1 → 2（分類訂正）"
+    ]
   },
   {
     "questionId": "ap-mock-b-q32",

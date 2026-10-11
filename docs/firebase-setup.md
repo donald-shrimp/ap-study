@@ -103,7 +103,7 @@ learning用の本番ルール公開は2026-10-10に利用者が報告済みで�
 
 ## 単語帳の自己評価のルール更新（P0b）
 
-前段のlearningルールの公開報告は受領済みです。cards用Rulesの公開は2026-10-11に利用者が報告済みです。今回追加した **personalコレクションは別の許可** が必要です。この実行環境にはFirebaseのデプロイ認証がないため、personal用Rulesは本番未配備です。
+前段のlearningルールの公開報告は受領済みです。cards用Rulesの公開は2026-10-11に利用者が報告済みです。今回追加した **personalコレクションは別の許可** が必要です。personal用Rulesの公開は2026-10-11に利用者が報告済みです。こちらにはFirebase管理者認証がないため、本人アカウントでの実機同期は未確認です。
 
 1. 最新mainの [firestore.rules全文](https://github.com/donald-shrimp/ap-study/blob/main/firestore.rules) をFirestore Consoleのルールへ貼り付けて公開。
 2. ひと問を更新し、同じGoogleアカウントで「今すぐ同期」。**「単語帳の自己評価も同期済み。」** を確認。

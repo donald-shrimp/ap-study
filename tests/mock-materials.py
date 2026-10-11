@@ -39,7 +39,20 @@ for s in sets['sets']:
             assert q['parentQuestionId']==parent['id'] and q['topicId']==parent['topicId']
             assert len(q['choices'])==len(q['choiceReasons'])==4
             assert review['sha256']==digest(q) and review['author']!=review['reviewer']
-            assert review['method']['separateAgent'] is True and all(review['checks'][key] for key in ['source','answer','calculation','choices','wording'])
+            method=review['method']
+            if method.get('revisionRecord'):
+                journal=read(method['revisionRecord'])
+                edit=next(i for i in journal['items'] if i['questionId']==q['id'])
+                initial=edit['beforeReview']
+                assert initial['method']['separateAgent'] is True
+                assert initial['sha256']==digest(edit['beforeQuestion'])
+                assert edit['afterVersion']==q['version'] and edit['afterSha256']==digest(q)
+                assert journal['sameEditorAndReviewer'] and not journal['independentReview']
+                assert edit['revisionAuthor']==edit['revisionReviewer']==review['editor']==review['reviewer']
+                assert not method['independentRevisionReview'] and not method['separateAgent']
+            else:
+                assert method['separateAgent'] is True
+            assert all(review['checks'][key] for key in ['source','answer','calculation','choices','wording'])
             if q['id'].startswith('ap-mock-'):
                 assert not (q.get('stem') and q.get('sourceImages')), 'Text stems use image/imageAlt for figures in the diagnostic renderer.'
                 assets=set(filter(None,[q.get('image'),*q.get('sourceImages',[]),*(c.get('image') for c in q['choices'])]))
@@ -52,6 +65,20 @@ for s in sets['sets']:
     assert (s['status']=='ready')==(complete==80)
     if s['status']=='ready':assert all(id in published for id in set_ids)
 assert len(all_ids)==len(all_parents)==160
+# DBMS recovery must be admitted to DB practice and diagnostics, not NW.
+assert originals['r06a-q31']['topicId']==published['ap-mock-b-q31']['topicId']=='database'
+journal=read('content/ap/diagnostic-revisions/20261011-database-classification.json')
+edit=journal['items'][0];q=published[edit['questionId']]
+assert {k for k in q if q[k]!=edit['beforeQuestion'][k]}=={'topicId','version'}
+raw={q['id']:q for q in read('data/questions.json')}
+change=journal['originalRevision'];parent=raw[change['questionId']]
+assert {k for k in parent if parent[k]!=change['beforeQuestion'][k]}==set(change['changedFields'])
+assert digest(parent)==change['afterSha256'] and digest(change['beforeQuestion'])==change['beforeSha256']
+context=read('content/ap/study-context.json')
+context_item=next(i for i in context['items'] if i['questionId']==parent['id'])
+assert context_item==change['afterContextItem'] and context_item['sourceHash']==digest(parent)
+assert context_item['mode']==change['beforeContextItem']['mode']=='paperless'
+assert all(progress['topicCounts'][topic['id']]['published']==sum(q['topicId']==topic['id'] for q in published.values()) for topic in qualification['topics'])
 if args.complete:
     assert all(s['status']=='ready' for s in sets['sets']) and all(id in published for id in all_ids)
     assert progress['pendingReviewCount']==0
