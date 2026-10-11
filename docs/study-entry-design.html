@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>学習・診断・模試の入口案｜ひと問</title>
+<style>
+:root{color-scheme:light;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;--navy:#142f50;--ink:#24384f;--muted:#617185;--line:#d8e1eb;--teal:#087d79;color:var(--ink);background:#f4f6fb;line-height:1.5}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}a{color:var(--teal)}button:focus-visible,a:focus-visible{outline:3px solid #b96c0c;outline-offset:3px}h1,h2,p{margin:0}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{max-width:720px;margin:auto;min-height:68px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:9px;font-size:1.35rem;font-weight:750}.brand-mark{width:36px;height:36px;display:grid;place-items:center;background:var(--navy);color:#fff;border-radius:11px;font-size:1.6rem}.settings{min-height:44px;padding:8px 12px;background:#fff;border:1px solid var(--line);border-radius:11px;color:var(--muted);font-size:.9rem}.nav{max-width:720px;margin:auto;padding:10px 16px;display:flex;gap:8px}.nav button{flex:1;min-height:44px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--muted)}.nav button[aria-current]{background:#e5edf8;border-color:#a4b7d0;color:var(--navy);font-weight:700}main{max-width:720px;margin:auto;padding:16px}.home{display:grid;gap:12px}.hero{background:var(--navy);padding:16px;border-radius:19px;color:#fff}.hero h1{font-size:1.2rem;margin-bottom:12px}.entrances{display:grid;gap:8px}.entrance{width:100%;min-height:52px;padding:12px 14px;border-radius:11px;border:1px solid #7990ab;background:#203d61;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font-weight:700}.entrance.primary{background:#fff;border-color:#fff;color:var(--navy)}.cue{white-space:nowrap;font-size:.82rem}.assessments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.assessment{border:1px solid #b8c9dd;background:#edf2fa;border-radius:14px;padding:13px;min-height:108px;display:flex;flex-direction:column;align-items:stretch;gap:8px;text-align:left}.assessment:hover{background:#e4edf8}.assessment-top{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:1.05rem;font-weight:750}.assessment-line{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem;color:#475d78;margin-top:auto}.arrow{font-size:1.2rem;color:var(--navy);line-height:1}.shortcuts{display:flex;gap:8px}.shortcuts button{flex:1;min-width:0;min-height:48px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:.88rem;font-weight:650;padding:8px 4px}.plan{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px}.plan-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.plan h2{font-size:.92rem}.plan-top a{display:flex;align-items:center;gap:8px;min-height:32px;font-size:.8rem;text-decoration:none}.plan-action{margin-top:5px;font-size:.9rem;font-weight:650}.plan-progress{margin-top:5px;color:var(--muted);font-size:.8rem}.proposal{border-top:1px solid var(--line);margin-top:28px;padding-top:22px}.proposal h2{font-size:1.1rem}.proposal p{margin-top:12px;font-size:.92rem}.states{display:flex;gap:8px;margin:14px 0}.states button{flex:1;min-height:44px;padding:8px;border:1px solid var(--line);background:#fff;border-radius:10px;font-size:.85rem}.states button[aria-pressed=true]{border-color:var(--teal);background:#e7f5f2;color:#12645e;font-weight:700}.notice{font-size:.8rem!important;color:var(--muted)}footer{max-width:720px;margin:auto;padding:12px 16px 28px;font-size:.85rem}dialog{width:min(92vw,460px);border:1px solid var(--line);border-radius:16px;padding:22px;color:var(--ink);background:#fff}dialog::backdrop{background:#142f5080}dialog h2{font-size:1.15rem}dialog p{margin:14px 0;line-height:1.65}dialog button{min-height:44px;width:100%;border:0;border-radius:10px;padding:10px;background:var(--teal);color:#fff;font-weight:700}dialog .notice{margin-bottom:20px}button:hover{filter:brightness(.98)}
+@media(min-width:600px){main{padding-top:24px}.hero{padding:22px}.assessment{min-height:118px;padding:16px}.hero h1{font-size:1.35rem}.assessment-top{font-size:1.15rem}}
+@media(max-width:350px){.assessment{padding:12px 10px}.assessment-top{gap:6px;font-size:1rem}.assessment-top svg{width:20px;height:20px}.shortcuts button{font-size:.8rem}.entrance{padding:12px}.cue{font-size:.75rem}.plan-top{gap:6px}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner"><div class="brand"><span class="brand-mark" aria-hidden="true">一</span>ひと問</div><button class="settings" data-preview="settings">表示・データ</button></div></header>
+<nav class="nav" aria-label="画面"><button aria-current="page" data-preview="home">学習</button><button data-preview="fields">分野</button><button data-preview="records">記録</button></nav>
+<main>
+<div class="home" aria-label="ホーム画面案">
+<section class="hero" aria-labelledby="study-title"><h1 id="study-title">とりあえずはじめる</h1><div class="entrances">
+<button class="entrance primary" data-preview="paperless"><span>身軽に1問</span><span class="cue" id="resume-cue">→</span></button>
+<button class="entrance" data-preview="desk"><span>書いて考える1問</span><span class="cue">→</span></button>
+<button class="entrance" data-preview="all"><span>おまかせで1問</span><span class="cue">→</span></button>
+</div></section>
+<div class="assessments" aria-label="診断と模試">
+<button class="assessment" data-preview="diagnostic"><span class="assessment-top"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-8M22 20H2"/></svg><span>実力診断</span></span><span class="assessment-line"><span id="diagnostic-label">30問</span><span class="arrow" aria-hidden="true">→</span></span></button>
+<button class="assessment" data-preview="mock"><span class="assessment-top"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 4H5v17h14V4h-4M9 2h6v5H9zM8 12h8M8 16h5"/></svg><span>模試</span></span><span class="assessment-line"><span id="mock-label">80問 × 2回</span><span class="arrow" aria-hidden="true">→</span></span></button>
+</div>
+<div class="shortcuts" aria-label="その他の学習"><button data-preview="cards">単語帳</button><button data-preview="fields">分野別</button><button data-preview="review">解き直し</button></div>
+<section class="plan" aria-label="受験目標と学習計画"><div class="plan-top"><h2 id="plan-title">試験まで27日</h2><a href="#" data-preview="plan">計画を見る <span aria-hidden="true">→</span></a></div><p class="plan-action" id="plan-action">今週はデータベースを重点に</p><p class="plan-progress" id="plan-progress">73 / 120問 · あと47問</p></section>
+</div>
+<section class="proposal" aria-labelledby="proposal-title"><h2 id="proposal-title">ホームの入口を整理する案</h2><p>普段の勉強を最上段の大きな紺色カードに。診断と模試はそのすぐ下に、同じ大きさのカードで並べます。</p><p>単語帳・分野別・解き直しは短い1行にまとめ、その下に計画を置きます。まず解くか、実力を測るかが見渡せる配置です。</p><div class="states" role="group" aria-label="サンプル状態を切り替え"><button data-state="new" aria-pressed="true">初めて使うとき</button><button data-state="returning" aria-pressed="false">中断・結果・計画あり</button></div><p>診断を受けても入口は残します。「実力診断」の名前は変えず、下段だけ「結果を見る」に切り替える想定です。模試はいつも選択画面へ進み、各回の前回正答率をそこで確認します。</p><p>普段の勉強は、今と同じく各ボタンから直接1問へ。診断・模試を目立たせるための、追加のモード選択は挟みません。</p><p class="notice">これは画面案です。アプリ本体の変更や学習記録の保存はしません。数値はサンプルです。画面の高さや文字サイズにより、計画部分はスクロールが必要になる場合があります。</p></section>
+</main>
+<footer><a href="../">実際のひと問を開く</a></footer>
+<dialog id="preview" aria-labelledby="preview-title"><h2 id="preview-title"></h2><p id="preview-text"></p><p class="notice">遷移先を説明するモックです。問題の出題・採点・保存は行いません。</p><button id="close-preview">戻る</button></dialog>
+<script>
+'use strict';
+let state='new';
+const descriptions={
+ paperless:['身軽に1問','紙・ペンなしで解ける通常演習をすぐ開始します。中断中なら、その1問から再開します。'],
+ desk:['書いて考える1問','計算やメモ書きをしながら解く通常演習をすぐ開始します。'],
+ all:['おまかせで1問','出題範囲を限定せず、通常演習をすぐ開始します。'],
+ diagnostic:['実力診断','30問の診断へ進みます。ヒント・途中の正誤表示はありません。'],
+ mock:['模試','模試A・Bの選択画面へ進みます。受験済みの回には前回の正答率を表示します。各回80問で、問題と順序は固定です。'],
+ cards:['単語帳','既存の単語帳を開きます。'],fields:['分野別','分野一覧を開きます。分野を選ぶと通常演習を開始します。'],
+ review:['解き直し','復習する問題の一覧を開きます。'],records:['記録','通常学習・診断・模試の記録を開きます。'],
+ plan:['学習計画','受験日と学習計画の画面を開きます。未登録でも通常学習・診断・模試は利用できます。'],
+ settings:['表示・データ','表示設定やアカウント・同期の画面を開きます。'],home:['学習','ここが学習タブのホーム画面です。']
+};
+function setState(next){state=next;document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===state)));document.querySelector('#resume-cue').textContent=state==='returning'?'続きから →':'→';document.querySelector('#diagnostic-label').textContent=state==='returning'?'結果を見る':'30問';document.querySelector('#plan-title').textContent=state==='returning'?'試験まで27日':'受験目標・学習計画';document.querySelector('.plan-top a').innerHTML=state==='returning'?'計画を見る <span aria-hidden="true">→</span>':'登録する <span aria-hidden="true">→</span>';document.querySelector('#plan-action').textContent=state==='returning'?'今週はデータベースを重点に':'受験予定があれば、ここから';document.querySelector('#plan-progress').textContent=state==='returning'?'73 / 120問 · あと47問':'';}
+document.addEventListener('click',e=>{const control=e.target.closest('[data-preview],[data-state]');if(!control)return;if(control.dataset.state){setState(control.dataset.state);return;}e.preventDefault();const key=control.dataset.preview;let [title,description]=descriptions[key];if(key==='diagnostic'&&state==='returning')description='前回の30問の診断結果を開きます。結果画面から再診断も開始できます。';document.querySelector('#preview-title').textContent=title;document.querySelector('#preview-text').textContent=description;document.querySelector('#preview').showModal();});
+document.querySelector('#close-preview').addEventListener('click',()=>document.querySelector('#preview').close());
+setState('new');
+</script>
+</body>
+</html>
