@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>ひと問｜AIに聞く・同じタブ方式の動作確認</title>
+<style>
+:root{font:16px/1.65 system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#21354b;background:#f4f6fa;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}button,textarea{font:inherit}button,a,textarea{touch-action:manipulation}button,a,textarea:focus-visible{outline-offset:3px}
+header{background:#142d4e;color:#fff;padding:19px 16px}header>div,main,footer{max-width:650px;margin:auto}header a{color:#dcf2ef}h1{font-size:1.3rem;margin:0}h2{font-size:1.06rem;margin:0 0 10px}p{margin:8px 0 14px}
+main{padding:16px 14px 26px}.panel{background:white;border:1px solid #d7e0ea;border-radius:13px;padding:16px;margin-bottom:14px}
+.small{font-size:.84rem;color:#52677d}.problem{max-width:100%;width:100%;height:auto;display:block;margin:10px 0;border:1px solid #e0e6ed;border-radius:8px}
+.providers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+button,.link-button{border-radius:10px;min-height:48px;border:1px solid #aebbc9;background:#fff;color:#172c43;cursor:pointer;padding:10px 12px;text-align:center}
+.providers button{padding:10px 3px;font-weight:650;font-size:.9rem}
+.providers button[aria-pressed=true]{background:#d9f1ed;border-color:#138579;color:#075d54}
+label{display:block;font-weight:650;margin:14px 0 6px}
+textarea{display:block;width:100%;min-height:90px;border:1px solid #b0bdcb;border-radius:9px;background:#fff;padding:11px;color:#20354c;resize:vertical;font-size:16px}
+.primary{background:#11766d;color:white;border-color:#11766d;width:100%;font-weight:750;margin-top:14px;min-height:58px}
+.primary:disabled{opacity:.55;cursor:wait}.secondary{width:100%;margin-top:9px}
+.status{border:1px solid #d7e0ea;border-radius:10px;padding:12px;margin-top:13px;white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6fa;font-size:.9rem}
+.status.success{border-color:#9cd0b5;background:#ecf9f1}.status.failure{border-color:#e1ae9b;background:#fff3ee}
+details{margin-top:13px;border-top:1px solid #e1e7ee;padding-top:12px}summary{cursor:pointer;font-weight:650;min-height:42px}
+#prompt-preview{min-height:180px;font-size:.83rem}
+#manual-section{border-top:1px solid #e1e7ee;margin-top:12px;padding-top:12px}
+.link-button{display:block;text-decoration:none;line-height:1.5;margin-top:9px;background:#edf4fc;font-weight:650}
+.env{font-size:.8rem;white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f6;border-radius:8px;padding:10px;margin:10px 0}
+footer{padding:8px 14px 26px;color:#637186;font-size:.8rem}
+</style>
+</head>
+<body>
+<header><div><h1>ひと問｜AIに聞く</h1><div class="small" style="color:#d7e8f1">検証用モック・案1：コピーしてから同じタブで開く</div></div></header>
+<main>
+<section class="panel">
+<h2>このモックで試すこと</h2>
+<p>新しいタブを作らず、<strong>質問文のコピーに成功してから</strong>選んだAIへ同じタブで移動します。コピーに失敗した場合は移動せず、原因と手動コピー欄を表示します。</p>
+<p class="small">既存のひと問本体や学習記録は変更しません。スマホではHTTPSのこのページをChromeやSafariで開いて試してください。</p>
+</section>
+<section class="panel">
+<h2>サンプル問題</h2>
+<p><strong>令和4年度 春期 応用情報 午前 問4</strong>（ハミング符号）</p>
+<img class="problem" src="../assets/questions/r04h/r04h-q4.webp" alt="令和4年度春期 応用情報午前 問4の公式問題画像" width="1032" height="606">
+<p class="small">サンプル回答：イ　正解：ア。実際の質問文には問題文・選択肢・解説・自由質問が含まれます。</p>
+</section>
+<section class="panel">
+<h2>相談するAI</h2>
+<div class="providers" role="group" aria-label="相談するAI">
+<button type="button" data-provider="chatgpt" aria-pressed="true">ChatGPT</button>
+<button type="button" data-provider="gemini" aria-pressed="false">Gemini</button>
+<button type="button" data-provider="claude" aria-pressed="false">Claude</button>
+</div>
+<label for="question-detail">特に聞きたいこと（空欄でもOK）</label>
+<textarea id="question-detail" placeholder="例：なぜX₁が誤りだと分かる？"></textarea>
+<button type="button" class="primary" id="copy-open">質問文をコピーしてChatGPTを開く ↗</button>
+<p class="small" style="margin-top:9px">成功するとこのタブがAIのサイトに変わります。AI側で入力欄を長押しして「貼り付け」を試してください。戻る操作でこのモックに戻れます。</p>
+<button type="button" class="secondary" id="copy-only">コピーだけテストする（画面移動なし）</button>
+<div id="status" class="status" role="status" aria-live="polite">まだ実行していません。</div>
+<div id="manual-section" hidden>
+<p><strong>手動で試す</strong></p>
+<p class="small">下の文章を長押ししてコピーし、リンクからAIを開いて貼り付けてください。</p>
+<textarea id="manual-text" readonly aria-label="手動コピー用質問文"></textarea>
+<button type="button" class="secondary" id="select-prompt">質問文を選択する</button>
+<a id="manual-link" class="link-button" href="https://chatgpt.com/">ChatGPTを同じタブで開く ↗</a>
+</div>
+<details>
+<summary>コピーされる質問文を確認する</summary>
+<textarea id="prompt-preview" readonly aria-label="生成された質問文"></textarea>
+</details>
+<details>
+<summary>スマホ環境の診断情報</summary>
+<div id="diagnostics" class="env"></div>
+<button type="button" id="refresh-diagnostics">診断情報を更新</button>
+<p class="small">コピーできなかった場合、エラー名と上記の診断情報が原因の切り分けに役立ちます。診断欄には学習記録や個人情報を含めません。</p>
+</details>
+</section>
+<p class="small"><a href="./ai-explanation-mock.html">元の「AIに聞く」モックに戻る</a></p>
+</main>
+<footer>検証用ページです。ChatGPT・Gemini・Claudeへの自動送信は行いません。コピーした文章をAI側で貼り付けてください。</footer>
+<script>
+"use strict";
+(function(){
+const $=id=>document.getElementById(id);
+const providers={
+ chatgpt:{name:"ChatGPT",url:"https://chatgpt.com/"},
+ gemini:{name:"Gemini",url:"https://gemini.google.com/"},
+ claude:{name:"Claude",url:"https://claude.ai/"}
+};
+let provider="chatgpt";
+const stem="ハミング符号とは，データに冗長ビットを付加して，1ビットの誤りを訂正できるようにしたものである。ここでは，X₁，X₂，X₃，X₄の4ビットから成るデータに，3ビットの冗長ビットP₃，P₂，P₁を付加したハミング符号X₁X₂X₃P₃X₄P₂P₁を考える。付加したビットP₁，P₂，P₃は，それぞれ\nX₁ ⊕ X₃ ⊕ X₄ ⊕ P₁ = 0\nX₁ ⊕ X₂ ⊕ X₄ ⊕ P₂ = 0\nX₁ ⊕ X₂ ⊕ X₃ ⊕ P₃ = 0\nとなるように決める。ここで，⊕は排他的論理和を表す。\nハミング符号1110011には1ビットの誤りが存在する。誤りビットを訂正したハミング符号はどれか。";
+function makePrompt(){
+ return [
+ "応用情報技術者試験のこの問題について、既存の解説を読んでも理解できませんでした。日本語で噛み砕いて説明してください。",
+ "まず何を問う問題なのか説明し、必要な用語や略語を補足してください。考える順番を一つずつ示し、排他的論理和の計算では途中式とその意味を省略しないでください。最後に、自分で確かめる小さな問いを1つ出してください。",
+ "【問題】\n令和4年度 春期 応用情報技術者試験 午前 問4\n"+stem,
+ "【選択肢】\nア：0110011\nイ：1010011\nウ：1100011\nエ：1110111",
+ "【正解】\nア：0110011",
+ "【私の回答（サンプル）】\nイ：1010011",
+ "【ひと問の解答解説】\n受信語1110011をX₁X₂X₃P₃X₄P₂P₁に割り当てると、X₁=X₂=X₃=1、P₃=X₄=0、P₂=P₁=1です。三つの検査式は全て排他的論理和が1になり、不一致です。三つ全てに含まれるビットはX₁だけなので、X₁を1から0へ反転します。0110011なら三つの式が全て0になります。",
+ "【特に聞きたいこと】\n"+($("question-detail").value.trim()||"どこから考えればよいかを含め、基本からお願いします。"),
+ "【問題画像】\nhttps://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q4.webp"
+ ].join("\n\n");
+}
+function updatePrompt(){
+ const t=makePrompt();
+ $("prompt-preview").value=t;
+ $("manual-text").value=t;
+ return t;
+}
+function diag(){
+ return [
+  "HTTPSなど安全なページ: "+String(window.isSecureContext),
+  "ページのフォーカス: "+String(document.hasFocus()),
+  "ページの表示状態: "+document.visibilityState,
+  "Clipboard API: "+(navigator.clipboard&&typeof navigator.clipboard.writeText==="function"?"利用可能":"利用不可"),
+  "User agent: "+navigator.userAgent
+ ].join("\n");
+}
+function refreshDiag(){$("diagnostics").textContent=diag();}
+function status(message,kind){
+ $("status").textContent=message;
+ $("status").className="status"+(kind?" "+kind:"");
+}
+function showManual(){
+ updatePrompt();
+ $("manual-section").hidden=false;
+ $("manual-link").href=providers[provider].url;
+ $("manual-link").textContent=providers[provider].name+"を同じタブで開く ↗";
+}
+function setBusy(flag){
+ $("copy-open").disabled=flag;$("copy-only").disabled=flag;
+}
+async function copyPrompt(openAfter){
+ const dest=providers[provider],text=updatePrompt(),beforeFocus=document.hasFocus();
+ setBusy(true);
+ status("コピー処理中…",""); // Do not focus another element before the clipboard attempt.
+ try {
+  if(!window.isSecureContext)throw new Error("安全なHTTPSページではありません。");
+  if(!navigator.clipboard||typeof navigator.clipboard.writeText!=="function")throw new Error("このブラウザではClipboard APIを利用できません。");
+  await navigator.clipboard.writeText(text);
+  if(!openAfter){
+   status("コピー成功。AIを開かず、このページのままです。\n文字数："+text.length+"\nAIへ移動するボタンでも試せます。","success");
+   refreshDiag();
+   return;
+  }
+  status("コピー成功。"+dest.name+"へ同じタブで移動します。","success");
+  // No window.open(); navigation only occurs after a successful clipboard write.
+  window.location.assign(dest.url);
+ }catch(error){
+  const name=error&&error.name?error.name:"Error";
+  const message=error&&error.message?error.message:String(error);
+  status("コピー失敗。AIページへは移動していません。\nエラー: "+name+"\n詳細: "+message+
+  "\n実行開始時のフォーカス: "+beforeFocus+"\n失敗時のフォーカス: "+document.hasFocus()+
+  "\nHTTPS: "+window.isSecureContext+"\nClipboard API: "+!!navigator.clipboard+
+  "\n\n手動コピー欄を表示しました。","failure");
+  showManual();refreshDiag();
+ }finally{setBusy(false);}
+}
+document.querySelectorAll("[data-provider]").forEach(btn=>btn.addEventListener("click",()=>{
+ provider=btn.dataset.provider;
+ document.querySelectorAll("[data-provider]").forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
+ $("copy-open").textContent="質問文をコピーして"+providers[provider].name+"を開く ↗";
+ $("manual-link").href=providers[provider].url;
+ $("manual-link").textContent=providers[provider].name+"を同じタブで開く ↗";
+ refreshDiag();
+}));
+$("question-detail").addEventListener("input",updatePrompt);
+$("copy-open").addEventListener("click",()=>copyPrompt(true));
+$("copy-only").addEventListener("click",()=>copyPrompt(false));
+$("select-prompt").addEventListener("click",()=>{$("manual-text").focus();$("manual-text").select();});
+$("refresh-diagnostics").addEventListener("click",refreshDiag);
+document.addEventListener("visibilitychange",refreshDiag);
+updatePrompt();refreshDiag();
+})();
+</script>
+</body>
+</html>
