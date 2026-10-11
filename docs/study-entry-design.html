@@ -20,15 +20,16 @@
 <button class="entrance primary" data-preview="paperless"><span>身軽に1問</span><span class="cue" id="resume-cue">→</span></button>
 <button class="entrance" data-preview="desk"><span>書いて考える1問</span><span class="cue">→</span></button>
 <button class="entrance" data-preview="all"><span>おまかせで1問</span><span class="cue">→</span></button>
+<button class="entrance" data-preview="fields"><span>分野を選んで1問</span><span class="cue">→</span></button>
 </div></section>
 <div class="assessments" aria-label="診断と模試">
 <button class="assessment" data-preview="diagnostic"><span class="assessment-top"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-8M22 20H2"/></svg><span>実力診断</span></span><span class="assessment-line"><span id="diagnostic-label">30問</span><span class="arrow" aria-hidden="true">→</span></span></button>
 <button class="assessment" data-preview="mock"><span class="assessment-top"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 4H5v17h14V4h-4M9 2h6v5H9zM8 12h8M8 16h5"/></svg><span>模試</span></span><span class="assessment-line"><span id="mock-label">80問 × 2回</span><span class="arrow" aria-hidden="true">→</span></span></button>
 </div>
-<div class="shortcuts" aria-label="その他の学習"><button data-preview="cards">単語帳</button><button data-preview="fields">分野別</button><button data-preview="review">解き直し</button></div>
+<div class="shortcuts" aria-label="その他の学習"><button data-preview="cards">単語帳</button><button data-preview="review">解き直し</button></div>
 <section class="plan" aria-label="受験目標と学習計画"><div class="plan-top"><h2 id="plan-title">試験まで27日</h2><a href="#" data-preview="plan">計画を見る <span aria-hidden="true">→</span></a></div><p class="plan-action" id="plan-action">今週はデータベースを重点に</p><p class="plan-progress" id="plan-progress">73 / 120問 · あと47問</p></section>
 </div>
-<section class="proposal" aria-labelledby="proposal-title"><h2 id="proposal-title">ホームの入口を整理する案</h2><p>普段の勉強を最上段の大きな紺色カードに。診断と模試はそのすぐ下に、同じ大きさのカードで並べます。</p><p>単語帳・分野別・解き直しは短い1行にまとめ、その下に計画を置きます。まず解くか、実力を測るかが見渡せる配置です。</p><div class="states" role="group" aria-label="サンプル状態を切り替え"><button data-state="new" aria-pressed="true">初めて使うとき</button><button data-state="returning" aria-pressed="false">中断・結果・計画あり</button></div><p>診断を受けても入口は残します。「実力診断」の名前は変えず、下段だけ「結果を見る」に切り替える想定です。模試はいつも選択画面へ進み、各回の前回正答率をそこで確認します。</p><p>普段の勉強は、今と同じく各ボタンから直接1問へ。診断・模試を目立たせるための、追加のモード選択は挟みません。</p><p class="notice">これは画面案です。アプリ本体の変更や学習記録の保存はしません。数値はサンプルです。画面の高さや文字サイズにより、計画部分はスクロールが必要になる場合があります。</p></section>
+<section class="proposal" aria-labelledby="proposal-title"><h2 id="proposal-title">ホームの入口を整理する案</h2><p>普段の勉強を最上段の大きな紺色カードに。「分野を選んで1問」もこのカードのいちばん下に置きます。診断と模試はそのすぐ下に、同じ大きさのカードで並べます。</p><p>単語帳・解き直しは短い1行にまとめ、その下に計画を置きます。まず解くか、実力を測るかが見渡せる配置です。</p><div class="states" role="group" aria-label="サンプル状態を切り替え"><button data-state="new" aria-pressed="true">初めて使うとき</button><button data-state="returning" aria-pressed="false">中断・結果・計画あり</button></div><p>診断を受けても入口は残します。「実力診断」の名前は変えず、下段だけ「結果を見る」に切り替える想定です。模試はいつも選択画面へ進み、各回の前回正答率をそこで確認します。</p><p>上の3つは、今と同じく直接1問へ。「分野を選んで1問」は分野一覧を開き、分野を選ぶと通常演習を開始します。</p><p class="notice">これは画面案です。アプリ本体の変更や学習記録の保存はしません。数値はサンプルです。画面の高さや文字サイズにより、計画部分はスクロールが必要になる場合があります。</p></section>
 </main>
 <footer><a href="../">実際のひと問を開く</a></footer>
 <dialog id="preview" aria-labelledby="preview-title"><h2 id="preview-title"></h2><p id="preview-text"></p><p class="notice">遷移先を説明するモックです。問題の出題・採点・保存は行いません。</p><button id="close-preview">戻る</button></dialog>
