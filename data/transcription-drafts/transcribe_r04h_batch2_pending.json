@@ -1,0 +1,130 @@
+[
+  {
+    "id": "r04h-q16",
+    "format": "hitomon-transcription-layout-draft-v1",
+    "status": "pending",
+    "author": "/root/transcribe_r04h",
+    "sourceImageSHA256": [
+      "0c7f045b04b7c2d6fcd648a4e1225be1ed126614d9d9bf17ebb47c76a846ffe6"
+    ],
+    "reason": "本文中に条件(4)(5)(6)の小図が入り、現在の単一imageでは配置を忠実に保持できない。単一画像化で条件の文字データを落としたり、重複表示することを避け、公開反映を保留する。原本照合済みだが現行表示形式が未対応で公開保留。正式な表示形式に変換した後は、最終教材と画面表示を再びレビューする必要がある。",
+    "transcribedBlocks": [
+      {
+        "type": "text",
+        "text": "ジョブ群と実行の条件が次のとおりであるとき，一時ファイルを作成する磁気ディスクに必要な容量は最低何Mバイトか。"
+      },
+      {
+        "type": "text",
+        "text": "〔ジョブ群〕"
+      },
+      {
+        "type": "image",
+        "key": "jobs"
+      },
+      {
+        "type": "text",
+        "text": "〔実行の条件〕\n\n（1）ジョブの実行多重度を2とする。\n\n（2）各ジョブの処理時間は同一であり，他のジョブの影響は受けない。\n\n（3）各ジョブは開始時に50Mバイトの一時ファイルを新たに作成する。"
+      },
+      {
+        "type": "text",
+        "text": "（4）"
+      },
+      {
+        "type": "image",
+        "key": "condition4",
+        "placement": "inline"
+      },
+      {
+        "type": "text",
+        "text": "の関係があれば，ジョブXの開始時に作成した一時ファイルは，直後のジョブYで参照し，ジョブYの終了時にその一時ファイルを削除する。直後のジョブが複数個ある場合には，最初に生起されるジョブだけが先行ジョブの一時ファイルを参照する。"
+      },
+      {
+        "type": "text",
+        "text": "（5）"
+      },
+      {
+        "type": "image",
+        "key": "condition5",
+        "placement": "inline"
+      },
+      {
+        "type": "text",
+        "text": "はジョブXの終了時に，ジョブY，ZのようにジョブXと矢印で結ばれる全てのジョブが，上から記述された順に優先して生起されることを示す。"
+      },
+      {
+        "type": "text",
+        "text": "（6）"
+      },
+      {
+        "type": "image",
+        "key": "condition6",
+        "placement": "inline"
+      },
+      {
+        "type": "text",
+        "text": "は先行するジョブX，Y両方が終了したときにジョブZが生起されることを示す。\n\n（7）ジョブの生起とは実行待ち行列への追加を意味し，各ジョブは待ち行列の順に実行される。\n\n（8）OSのオーバヘッドは考慮しない。"
+      }
+    ],
+    "figures": {
+      "jobs": {
+        "path": "assets/transcriptions/transcribe_r04h_batch2/r04h-q16-jobs.webp",
+        "sourceRectangle": [
+          95,
+          220,
+          970,
+          420
+        ],
+        "sha256": "bd2bb256640fd1a9ab5af5b03d9a47056ec01d17e4f1571bf8abae5039bb4ca9"
+      },
+      "condition4": {
+        "path": "assets/transcriptions/transcribe_r04h_batch2/r04h-q16-condition4.webp",
+        "sourceRectangle": [
+          117,
+          661,
+          245,
+          713
+        ],
+        "sha256": "1948716a24dd2c0e2683501181552335f27e563d15ec5c67dcece3e13d68a873"
+      },
+      "condition5": {
+        "path": "assets/transcriptions/transcribe_r04h_batch2/r04h-q16-condition5.webp",
+        "sourceRectangle": [
+          117,
+          855,
+          250,
+          948
+        ],
+        "sha256": "f3576a92cb39d552381bd1b1cb21503f1525ab53e170d31e4faf34ef59f7960e"
+      },
+      "condition6": {
+        "path": "assets/transcriptions/transcribe_r04h_batch2/r04h-q16-condition6.webp",
+        "sourceRectangle": [
+          117,
+          1003,
+          250,
+          1095
+        ],
+        "sha256": "7d00179893cfc8fb38e1575c28f0d6d66d542cb3a048674bdac9cfa63409789e"
+      }
+    },
+    "choices": [
+      {
+        "label": "ア",
+        "text": "100"
+      },
+      {
+        "label": "イ",
+        "text": "150"
+      },
+      {
+        "label": "ウ",
+        "text": "200"
+      },
+      {
+        "label": "エ",
+        "text": "250"
+      }
+    ],
+    "layoutNotes": "jobsは〔ジョブ群〕の直後に独立して置く。condition4〜6は各条件番号の後、文頭の関係図としてインラインに置く。別担当が全原本・条件全文・主図と3小図・配置・4択を原本照合済み。正式な表示形式に変換した後、最終教材と画面表示を改めてレビューする。"
+  }
+]

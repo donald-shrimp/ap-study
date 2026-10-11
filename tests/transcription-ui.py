@@ -38,7 +38,7 @@ with sync_playwright() as p:
  page.get_by_role('button',name='回答する',exact=True).click();assert page.locator('.result').count()==1
  page.locator('.result details').filter(has=page.locator('.reason-list')).locator('summary').click();assert page.locator('.reason-list li').count()==4
  open_q('r06h-q8');assert page.locator('.choices table,.choices .choice-text').count()==0;assert page.locator('.question-figure img').count()==1;assert page.locator('.choices .choice-code').all_text_contents()==['ア','イ','ウ','エ']
- page.get_by_role('radio').nth(1).check();page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
+ page.get_by_role('radio').nth(1).check();state(page);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
  assert page.get_by_role('radio').nth(1).is_checked() and page.locator('.choices table,.choices .choice-text').count()==0
  assert page.locator('.question-figure img').evaluate('(img)=>img.complete&&img.naturalWidth===938')
  page.evaluate('document.documentElement.style.fontSize="200%"');fits();page.evaluate('document.documentElement.style.fontSize=""')
