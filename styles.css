@@ -158,3 +158,12 @@
 .original-question{margin:16px 0 0}.original-question>summary{cursor:pointer;color:var(--muted);font-size:.85rem;padding:10px 0;min-height:44px}
 .original-question .source-question{margin:8px 0}
 #plan-editor .heading-row{flex-wrap:wrap}#plan-editor .heading-row .button{white-space:normal;max-width:100%}#plan-editor .editor-field{min-width:0;max-width:100%}#plan-editor .editor-field input,#plan-editor .editor-field select{min-width:0;max-width:100%;width:100%}
+
+/* Text controls scale learning content; navigation and touch targets retain their size. */
+:root{--study-text-scale:1;--study-device-scale:1}
+.text-size-settings{padding-bottom:20px;margin-bottom:18px;border-bottom:1px solid var(--line)}.text-size-settings h3{font-size:1rem;margin-bottom:10px}.text-size-settings .button{min-width:44px}.text-size-settings output{min-width:48px;text-align:center;font-variant-numeric:tabular-nums}.text-size-settings>p{margin:12px 0 0}
+.question-panel .question-stem{font-size:calc(1.1rem * var(--study-device-scale) * var(--study-text-scale))}
+.question-panel .choice-text,.hint-box p,.result .explanation,.diagnostic-review .explanation{font-size:calc(1rem * var(--study-device-scale) * var(--study-text-scale))}
+.reason-list li,.result .takeaway{font-size:calc(.95rem * var(--study-device-scale) * var(--study-text-scale))}
+.result .takeaway strong{font-size:calc(.8rem * var(--study-device-scale) * var(--study-text-scale))}
+@media(max-width:800px){:root{--study-device-scale:.8}.question-panel .question-stem{font-size:calc(1.05rem * var(--study-device-scale) * var(--study-text-scale))}}

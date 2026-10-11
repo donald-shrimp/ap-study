@@ -140,10 +140,17 @@ function visitedQuestions(session){
 function pickQuestion(session=state.session){return selectPractice({qualification,questions:base,attempts:planner?.allAttempts()||state.attempts,reviewInfo,scope:scopeOf(session),available:usableOffline,practiceAllowed:q=>allowsQuestion(q,session.paperMode||'all',studyContext,state.settings.deskQuestionIds),intent:session.intent||'normal',excludedQuestionIds:[...(session.excludedQuestionIds||[]),...(learning?.deferredIds()||[])],visitedQuestionIds:visitedQuestions(session)});}
 function hasFreshTopicQuestion(){return pickQuestion().kind==='question';}
 
+function updateTextSize(){
+  const size=state.settings.textSize??100;
+  document.documentElement.classList.remove('large-text');
+  document.documentElement.style.setProperty('--study-text-scale',String(size/100));
+  $('#text-size').textContent=`${size}%`;
+  $('#text-smaller').disabled=size===50;$('#text-larger').disabled=size===140;
+}
+function changeTextSize(size){state.settings.textSize=size;updateTextSize();save();}
 function render(focus = true, preserveY = null) {
   if(!focus&&document.activeElement?.matches('input[data-reading-topic]'))return;
-  document.documentElement.classList.toggle('large-text', state.settings.largeText);
-  $('#large-text').checked = state.settings.largeText;
+  updateTextSize();
   document.querySelectorAll('.nav-item').forEach(b=>{ const active = b.dataset.view === (state.view==='study'||state.view==='mocks'||state.view==='diagnostic'&&planner?.run(state.currentRunId)?.mode==='mock'&&planner.run(state.currentRunId).status==='in_progress'?'home':['planning','diagnostics','diagnostic','review','mock-records'].includes(state.view)?'history':state.view==='materials'||state.view==='flashcards'?'topics':state.view); b.classList.toggle('active',active); active ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current'); });
   if(state.view==='home'){displayedEntryActions=entryActions();displayedNextAction=displayedEntryActions[state.settings.lastEntry]||nextAction();}
   main.innerHTML = state.view==='mocks'&&planner?planner.views().mocksHTML():state.view==='mock-records'&&planner?planner.views().mockDetailHTML():state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML();
@@ -292,7 +299,9 @@ $('#close-image').addEventListener('click',()=>$('#image-dialog').close());
 $('#image-zoom-in').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.min(4000,img.clientWidth*1.25)}px`;});
 $('#image-zoom-out').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.max(600,img.clientWidth/1.25)}px`;});
 $('#settings-button').addEventListener('click',()=>$('#settings-dialog').showModal());
-$('#large-text').addEventListener('change',e=>{state.settings.largeText=e.target.checked;save();render(false);});
+$('#text-smaller').addEventListener('click',()=>changeTextSize(Math.max(50,(state.settings.textSize??100)-10)));
+$('#text-larger').addEventListener('click',()=>changeTextSize(Math.min(140,(state.settings.textSize??100)+10)));
+$('#text-reset').addEventListener('click',()=>changeTextSize(100));
 $('#export-state').addEventListener('click',async()=>{await personal?.flush();await saves;download(corruptRaw??{...state,workspaceBackup:planner?.backup(),learningBackup:learning?.backup()},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
 // Full record replacement is guest-only. Keep navigation, background saves and
 // owner changes behind this short maintenance barrier, then display committed data.
@@ -300,12 +309,12 @@ async function maintainRecords(operation){
  if(recordMaintenance)throw new Error('記録の取り込み中です。完了してから操作してください。');
  let release;recordMaintenance=new Promise(resolve=>release=resolve);
  navigation++;
- const previousInert=[main.inert,document.querySelector('.sidebar').inert],ids=['import-state','export-state','clear-state','large-text','google-login','google-logout','sync-now','import-guest'],disabled=ids.map(id=>[id,$('#'+id)?.disabled]);
+ const previousInert=[main.inert,document.querySelector('.sidebar').inert],ids=['import-state','export-state','clear-state','text-smaller','text-larger','text-reset','google-login','google-logout','sync-now','import-guest'],disabled=ids.map(id=>[id,$('#'+id)?.disabled]);
  main.inert=true;document.querySelector('.sidebar').inert=true;main.setAttribute('aria-busy','true');for(const [id] of disabled)if($('#'+id))$('#'+id).disabled=true;
  clearTimeout(scrollTimer);
  try{return await operation();}finally{
   main.inert=previousInert[0];document.querySelector('.sidebar').inert=previousInert[1];main.setAttribute('aria-busy','false');for(const [id,value] of disabled)if($('#'+id))$('#'+id).disabled=value;
-  recordMaintenance=null;release();
+  recordMaintenance=null;updateTextSize();release();
  }
 }
 $('#import-state').addEventListener('change',async e=>{
@@ -341,14 +350,14 @@ async function switchOwner(owner,{restore=false}={}){
  if(recordMaintenance)await recordMaintenance;
  const identity=await store.identity();if(identity.owner===(owner||`guest:${identity.deviceId}`))return;
  main.inert=true;document.querySelector('.sidebar').inert=true;
- const controls=['import-state','export-state','clear-state','large-text'];controls.forEach(id=>$("#"+id).disabled=true);
+ const controls=['import-state','export-state','clear-state','text-smaller','text-larger','text-reset'];controls.forEach(id=>$("#"+id).disabled=true);
  clearTimeout(scrollTimer);navigation++;$('#editor-dialog').close();
  try{
   await personal?.flush();
   if(!await save())throw new Error('現在の記録を保存できません。');await saves;
   const next=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState,owner});
   let raw=await next.read(),candidate=raw?validateState(JSON.parse(raw)):makeState();
-  if(!raw){candidate.settings={largeText:state.settings.largeText,paperMode:state.settings.paperMode,lastEntry:state.settings.lastEntry,deskQuestionIds:[]};await next.write(candidate);raw=await next.read();}
+  if(!raw){candidate.settings={largeText:state.settings.largeText,textSize:state.settings.textSize??100,paperMode:state.settings.paperMode,lastEntry:state.settings.lastEntry,deskQuestionIds:[]};await next.write(candidate);raw=await next.read();}
   await store.close();store=next;state=validateState(JSON.parse(raw));displayedNextAction=null;fieldMode='learning';fieldPartId=null;topicPartId=null;reviewTopicId=null;reviewPartId=null;await personal?.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。');});await cards?.bind();await learning?.bind();await planner?.bind();corruptRaw=null;storageOK=true;editId=null;
   // Explicit account changes open home; restoring the same browser's saved
   // login preserves its own current question and scroll position.
@@ -358,7 +367,7 @@ async function switchOwner(owner,{restore=false}={}){
   if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
   await save();render(true,state.view==='study'?current()?.scrollY:0);notice('');
   $('#clear-state').closest('details').hidden=!!owner;$('#import-state').closest('label').hidden=!!owner;
- }finally{main.inert=false;document.querySelector('.sidebar').inert=false;controls.forEach(id=>$("#"+id).disabled=false);}
+ }finally{main.inert=false;document.querySelector('.sidebar').inert=false;controls.forEach(id=>$("#"+id).disabled=false);updateTextSize();}
 }
 function validateSyncAttempt(a){const probe={...makeState(),attempts:[a]};validateState(probe);if(a.qualificationId!==qualification.id||!a.questionSnapshot)throw new Error('同期対象の問題情報がありません。');}
 function remoteRecords(records){

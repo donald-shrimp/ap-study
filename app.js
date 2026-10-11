@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261011-transcription-tables1';
+import './src/app.js?v=20261011-text-size1';
