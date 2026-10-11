@@ -30,22 +30,22 @@ with sync_playwright() as p:
     open_plan_ai(page);invalid={**example,'qualificationId':'other'};page.locator('#plan-json').fill(json.dumps(invalid));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_text('開いている資格と一致しません',exact=False).wait_for()
     assert next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')==before
     page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();exported=json.loads(page.evaluate('navigator.clipboard.readText()'));assert exported['format']=='hitomon-study-summary' and 'questionSnapshot' not in json.dumps(exported)
-    page.get_by_role('button',name='ホーム',exact=True).click();page.get_by_role('button',name='実力診断（30問）',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
+    page.get_by_role('button',name='ホーム',exact=True).click();page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
     assert page.locator('.hint-section,.result,.correct-choice,.answer-selection').count()==0
     for i in range(3):
         page.locator('[name=diagnostic-answer]').first.check();page.get_by_role('button',name='回答して次へ',exact=True).click();page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()
     page.locator('[name=diagnostic-answer]').last.check();page.wait_for_function('document.querySelector("[data-action=submit-diagnostic]").disabled===false')
-    page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='診断の続きから',exact=True).wait_for()
+    page.get_by_role('button',name='中断',exact=True).click();page.locator('.home-assessments [data-action=resume-diagnostic]').wait_for()
     saved=state(page);run=next(r['payload'] for r in saved['documents'] if r['kind']=='diagnostic');assert run['status']=='in_progress' and run['currentIndex']==3 and len(run['responses'])==3
     assert not any(a['status'] in ['correct','incorrect'] for a in saved['study']['attempts'])
     page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(resolve=>navigator.serviceWorker.addEventListener("controllerchange",resolve,{once:true}));}')
-    context.set_offline(True);page.reload();page.get_by_role('button',name='診断の続きから',exact=True).click();page.get_by_text('診断 4 / 30問',exact=True).wait_for();assert page.locator('[name=diagnostic-answer]').last.is_checked()
+    context.set_offline(True);page.reload();page.locator('.home-assessments [data-action=resume-diagnostic]').click();page.get_by_text('診断 4 / 30問',exact=True).wait_for();assert page.locator('[name=diagnostic-answer]').last.is_checked()
     page.get_by_role('button',name='ここまでで診断終了',exact=True).click();page.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();assert '3 / 30問に回答' in page.locator('#main').inner_text()
     assert page.locator('.hint-section').count()==0
     result=state(page);final=next(r['payload'] for r in result['documents'] if r['kind']=='diagnostic');assert final['status']=='ended_early'
-    page.get_by_role('button',name='ホーム',exact=True).click();assert page.get_by_role('button',name='診断の続きから',exact=True).count()==0
+    page.get_by_role('button',name='ホーム',exact=True).click();assert page.locator('.home-assessments [data-action=resume-diagnostic]').count()==0
     action_nav(page,'review');assert page.locator('#main').inner_text()
-    context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='診断結果を見る',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
+    context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
     for i in range(30):
         page.locator('[name=diagnostic-answer]').first.check();page.get_by_role('button',name='回答して結果へ' if i==29 else '回答して次へ',exact=True).click()
         if i<29:page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()

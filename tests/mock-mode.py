@@ -12,8 +12,8 @@ with sync_playwright() as p:
  opts={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
  if URL.startswith('https:') and os.getenv('HTTPS_PROXY'):opts['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
  b=p.chromium.launch(**opts);ctx=b.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write']);page=ctx.new_page();page.set_default_timeout(60000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept())
- page.goto(URL);page.get_by_role('button',name='模試を受ける',exact=True).wait_for();assert page.locator('.study-entrance').count()==3
- page.get_by_role('button',name='模試を受ける',exact=True).click();page.get_by_role('heading',name='模試を選ぶ',exact=True).wait_for();assert page.locator('.mock-set').count()==2
+ page.goto(URL);page.locator('.home-assessments [data-view=mocks]').wait_for();assert page.locator('.study-entrance').count()==3
+ page.locator('.home-assessments [data-view=mocks]').click();page.get_by_role('heading',name='模試を選ぶ',exact=True).wait_for();assert page.locator('.mock-set').count()==2
  assert page.locator('.mock-previous').count()==0;page.screenshot(path=str(ART/'selection.png'),full_page=True)
  page.locator('[data-mock-set=ap-mock-a] [data-action=start-mock]').click();page.get_by_text('模試 A 1 / 80問',exact=True).wait_for()
  initial=run(page);frozen=json.dumps(initial['slots'],sort_keys=True);expected=json.loads((ROOT/'content/ap/mock-sets.json').read_text())['sets'][0]['slots'];assert [s['attempt']['questionId'] for s in initial['slots']]==[s['questionId'] for s in expected]
@@ -24,7 +24,7 @@ with sync_playwright() as p:
   if i==2:
    page.get_by_role('button',name='中断',exact=True).click();wait_for_async(page,'async()=>{const r=await ('+READ+')();return r.some(r=>r.kind==="mock"&&r.payload.currentChoiceId!==null)}')
    page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener("controllerchange",r,{once:true}));}')
-   ctx.set_offline(True);page.reload();page.get_by_role('button',name='模試を受ける',exact=True).click();page.locator('[data-mock-set=ap-mock-a]').get_by_role('button',name='続きから',exact=True).click();page.get_by_text('模試 A 3 / 80問',exact=True).wait_for()
+   ctx.set_offline(True);page.reload();page.locator('.home-assessments [data-view=mocks]').click();page.locator('[data-mock-set=ap-mock-a]').get_by_role('button',name='続きから',exact=True).click();page.get_by_text('模試 A 3 / 80問',exact=True).wait_for()
    assert page.locator(f'[name=diagnostic-answer][value="{answer}"]').is_checked();assert json.dumps(run(page)['slots'],sort_keys=True)==frozen
   page.get_by_role('button',name='未回答で次へ' if i==70 else '回答して結果へ' if i==79 else '回答して次へ',exact=True).click()
   if i<79:page.get_by_text(f'模試 A {i+2} / 80問',exact=True).wait_for()
@@ -38,7 +38,7 @@ with sync_playwright() as p:
  page.locator('[data-mock-set=ap-mock-a] [data-action=mock-records]').click();page.get_by_role('button',name='もう一度受ける',exact=True).click();page.get_by_text('模試 A 1 / 80問',exact=True).wait_for();rs=[r['payload'] for r in rows(page) if r['kind']=='mock'];assert len(rs)==2 and len({r['id'] for r in rs})==2;assert len({tuple(s['attempt']['questionId'] for s in r['slots']) for r in rs})==1
  page.get_by_role('button',name='中断',exact=True).click();nav(page,'history');page.locator('[data-action=field-mode][data-mode=mock]').click();page.locator('[data-mock-set=ap-mock-b] [data-action=mock-records]').click();page.get_by_role('heading',name='模試 Bの記録',exact=True).wait_for();assert 'まだ受けていません。' in page.locator('#main').inner_text()
  nav(page,'history');assert page.locator('.overall-rate').inner_text()=='未確認';page.get_by_role('button',name='診断結果',exact=True).click();assert '完了した診断はありません' in page.locator('#main').inner_text()
- nav(page,'home');page.get_by_role('button',name='模試を受ける',exact=True).click();assert '前回：75%' in page.locator('[data-mock-set=ap-mock-a]').inner_text()
+ nav(page,'home');page.locator('.home-assessments [data-view=mocks]').click();assert '前回：75%' in page.locator('[data-mock-set=ap-mock-a]').inner_text()
  page.evaluate('document.documentElement.classList.add("large-text")');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.screenshot(path=str(ART/'selection-completed.png'),full_page=True)
  assert not errors,errors;b.close()
 print('PASS fixed80 / unaided / 60 correct+19 incorrect+1 skipped / 75% denominator80 / offline selected answer and frozen resume / 80 explanations / repeated IDs / per-set record tabs / no ordinary or diagnostic pollution / mobile and 200%')

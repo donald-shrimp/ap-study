@@ -21,10 +21,10 @@ def login(page,email):
 def active(page):return next(r for r in page.evaluate(READ) if r['kind']=='mock')
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);contexts=[b.new_context(viewport={'width':390,'height':844}) for _ in range(3)];a,c,other=[ctx.new_page() for ctx in contexts];errors=[]
- for pg in [a,c,other]:pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(URL);pg.get_by_role('button',name='模試を受ける',exact=True).wait_for()
+ for pg in [a,c,other]:pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(URL);pg.locator('.home-assessments [data-view=mocks]').wait_for()
  email='mock-'+uuid.uuid4().hex+'@hitomon.test';login(a,email);login(c,email)
- a.get_by_role('button',name='模試を受ける',exact=True).click();a.locator('[data-mock-set=ap-mock-a] [data-action=start-mock]').click();a.get_by_text('模試 A 1 / 80問',exact=True).wait_for();synced(a);synced(c)
- c.get_by_role('button',name='模試を受ける',exact=True).click();c.locator('[data-mock-set=ap-mock-a]').get_by_role('button',name='続きから',exact=True).click();c.get_by_text('模試 A 1 / 80問',exact=True).wait_for();first=active(a);assert active(c)['id']==first['id']
+ a.locator('.home-assessments [data-view=mocks]').click();a.locator('[data-mock-set=ap-mock-a] [data-action=start-mock]').click();a.get_by_text('模試 A 1 / 80問',exact=True).wait_for();synced(a);synced(c)
+ c.locator('.home-assessments [data-view=mocks]').click();c.locator('[data-mock-set=ap-mock-a]').get_by_role('button',name='続きから',exact=True).click();c.get_by_text('模試 A 1 / 80問',exact=True).wait_for();first=active(a);assert active(c)['id']==first['id']
  frozen=json.dumps(first['payload']['slots'],sort_keys=True)
  a.locator('[name=diagnostic-answer]').first.check();a.get_by_role('button',name='回答して次へ',exact=True).click();a.get_by_text('模試 A 2 / 80問',exact=True).wait_for();synced(a);synced(c);c.get_by_text('模試 A 2 / 80問',exact=True).wait_for();assert json.dumps(active(c)['payload']['slots'],sort_keys=True)==frozen
  contexts[1].set_offline(True);c.locator('[name=diagnostic-answer]').first.check();wait_for_async(c,'async()=>{const r=await ('+READ+')();return r.some(r=>r.kind==="mock"&&r.dirty)}')

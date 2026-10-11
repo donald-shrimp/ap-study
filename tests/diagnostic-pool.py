@@ -26,7 +26,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-pool-') as directory
    page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url));page.on('dialog',lambda d:d.accept())
    page.goto(f'http://127.0.0.1:{server.server_port}/');page.get_by_role('button',name='おまかせで1問',exact=True).wait_for();assert not any('/data/qualifications/fixture/diagnostic.' in url for url in requests)
    page.get_by_role('button',name='おまかせで1問',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();assert not page.evaluate(READ)['study']['attempts'][0]['questionSnapshot'].get('diagnosticOnly');page.get_by_role('button',name='中断',exact=True).click()
-   page.get_by_role('button',name='実力診断（30問）',exact=True).click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
+   page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
    run=next(r['payload'] for r in page.evaluate(READ)['documents'] if r['kind']=='diagnostic');assert sum(s['kind']=='derived' for s in run['slots'])==3;assert len({s['parentQuestionId'] or s['attempt']['questionId'] for s in run['slots']})==30
    assert any('/data/qualifications/fixture/diagnostic.' in url for url in requests)
    for i in range(30):
@@ -36,18 +36,18 @@ with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-pool-') as directory
     if i<29:page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()
     if i==1:
      page.get_by_role('button',name='中断',exact=True).click();page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener("controllerchange",r,{once:true}));}')
-     context.set_offline(True);page.reload();page.get_by_role('button',name='診断の続きから',exact=True).click();page.get_by_text('診断 3 / 30問',exact=True).wait_for()
+     context.set_offline(True);page.reload();page.locator('.home-assessments [data-action=resume-diagnostic]').click();page.get_by_text('診断 3 / 30問',exact=True).wait_for()
    page.get_by_role('heading',name='診断結果',exact=True).wait_for();page.get_by_text('出題構成を確認',exact=True).click();assert '派生問題：3問出題・3問回答・0問正解' in page.locator('#main').inner_text()
    derived=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'));derived.first.locator('summary').click();assert derived.first.locator('.reason-list li').count()==2
    page.get_by_role('button',name='結果と学習状況をAIへ渡す',exact=True).click();page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();summary=json.loads(page.evaluate('navigator.clipboard.readText()'));assert summary['learning']['all']['completedAttempts']==27 and summary['diagnostics'][0]['answered']==30
    action_nav(page,'review');assert not page.locator('[data-action=start][data-id^=v]').count();assert 'もう一度解く問題はありません' in page.locator('#main').inner_text() or page.locator('[data-action=start]').count()==0
    page.locator('.sidebar [data-view=history]').click();assert not page.locator('[data-action=resume][data-id^=v]').count()
    action_nav(page,'materials');assert '診断専用検証' not in page.locator('#main').inner_text()
-   context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='診断結果を見る',exact=True).click();page.get_by_role('button',name='結果を見る',exact=True).click();derived=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'));derived.first.locator('summary').click();derived.first.get_by_role('button',name='元の過去問を学習',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();data=page.evaluate(READ);assert not data['study']['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
+   context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='結果を見る',exact=True).click();derived=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'));derived.first.locator('summary').click();derived.first.get_by_role('button',name='元の過去問を学習',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for();data=page.evaluate(READ);assert not data['study']['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
    # A damaged bank must fail diagnosis explicitly, never silently replace its
    # questions with originals or prevent immediate ordinary study.
    damaged=browser.new_context(service_workers='block');broken=damaged.new_page();broken.route('**/data/qualifications/fixture/diagnostic.*.json',lambda route:route.fulfill(status=200,content_type='application/json',body='[]'))
-   broken.goto(f'http://127.0.0.1:{server.server_port}/');broken.get_by_role('button',name='実力診断（30問）',exact=True).click();broken.get_by_role('button',name='30問の診断をはじめる',exact=True).click();broken.get_by_text('教材の確認に失敗しました',exact=False).wait_for();assert not broken.evaluate(READ)['documents']
+   broken.goto(f'http://127.0.0.1:{server.server_port}/');broken.locator('.home-assessments [data-view=diagnostics]').click();broken.get_by_role('button',name='30問の診断をはじめる',exact=True).click();broken.get_by_text('教材の確認に失敗しました',exact=False).wait_for();assert not broken.evaluate(READ)['documents']
    broken.locator('.sidebar [data-view=home]').click();broken.get_by_role('button',name='おまかせで1問',exact=True).click();broken.get_by_role('button',name='回答する',exact=True).wait_for();damaged.close()
    assert not errors,errors;browser.close()
  finally:server.shutdown();server.server_close()

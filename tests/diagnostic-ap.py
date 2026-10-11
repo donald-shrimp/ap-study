@@ -36,7 +36,7 @@ with sync_playwright() as p:
     page.get_by_role('button',name='回答する',exact=True).wait_for()
     assert not state(page)['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
     page.get_by_role('button',name='中断',exact=True).click();state(page)
-    page.get_by_role('button',name='実力診断（30問）',exact=True).click()
+    page.locator('.home-assessments [data-view=diagnostics]').click()
     page.get_by_role('button',name='30問の診断をはじめる',exact=True).click()
     page.locator('[name=diagnostic-answer]').first.wait_for()
     initial=run(page); slots=initial['slots']; frozen=json.dumps(slots,sort_keys=True);zoomed=set()
@@ -70,7 +70,7 @@ with sync_playwright() as p:
             images=[path for slot in slots for path in [*slot['attempt']['questionSnapshot'].get('sourceImages',[]),slot['attempt']['questionSnapshot'].get('image'),*(c.get('image') for c in slot['attempt']['questionSnapshot']['choices'])] if path]
             assert page.evaluate('async paths=>{const cache=await caches.open(`hitomon-${new URL(".",document.baseURI).pathname}images`);return (await Promise.all(paths.map(p=>cache.match(p)))).every(Boolean);}',images)
             context.set_offline(True);page.reload()
-            page.get_by_role('button',name='診断の続きから',exact=True).click()
+            page.locator('.home-assessments [data-action=resume-diagnostic]').click()
             page.get_by_text('診断 3 / 30問',exact=True).wait_for()
             assert page.locator(f'[name=diagnostic-answer][value="{answer}"]').is_checked()
             assert json.dumps(run(page)['slots'],sort_keys=True)==frozen
@@ -103,7 +103,7 @@ with sync_playwright() as p:
     # Wait for the restored view to render before clicking navigation on a slow host.
     page.get_by_role('heading',name='問題と教材',exact=True).wait_for()
     page.locator('.sidebar [data-view=home]').click()
-    page.get_by_role('button',name='診断結果を見る',exact=True).click()
+    page.locator('.home-assessments [data-view=diagnostics]').click()
     page.get_by_role('button',name='結果を見る',exact=True).click()
     reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'))
     reviews.first.locator('summary').click();reviews.first.get_by_role('button',name='元の過去問を学習',exact=True).click()
