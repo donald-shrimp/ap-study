@@ -749,3 +749,5 @@ personal用Firestore Rulesの本番公開は利用者から報告を受領。こ
 `tests/content.py`、`corpus.py`、`mobile-content.py`、`mock-materials.py --complete`、`diagnostic-content.py`、`mock-selection.mjs` 成功。`diagnostic-ap.py`、`field-navigation.py`、`pwa.py`、`e2e.py`、`storage.py`、`sync.py`、`planning-sync.py`、`personal-sync.py` 成功。既存の1操作開始・800問検索・段階ヒント・解き直し・分野メモ・診断30問と結果、CAS・アカウント分離・同期・バックアップ・オフライン・PWA更新と記録保持を検証。公開用シェルは `20261011-mock-mode1`。
 
 [仕様と追加方法](mock-mode.md)。本番の模試同期には、resourcesの `kind:mock` を許可する最新版Rulesの再公開が必要。personalまでのRules公開は利用者報告済みですが、今回の追加ルールを本番配備したとは報告していません。こちらにはFirebase管理者認証がありません。
+
+公開確認：実装コミット `541047afe875f287fb65453aa88a201d9ab3a404` のPages実行 `38128941167` は成功。公開37ファイルがコミットとバイト単位で一致。公開サイトの新規モバイルブラウザでも `tests/mock-mode.py` を実行し、80問の回答・75%採点・支援なし・未回答・オフライン再開・前回正答率・回別履歴・別IDの再受験・AI Export・通常／診断への非混入を確認しました。
