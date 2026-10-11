@@ -167,3 +167,33 @@
 .reason-list li,.result .takeaway{font-size:calc(.95rem * var(--study-device-scale) * var(--study-text-scale))}
 .result .takeaway strong{font-size:calc(.8rem * var(--study-device-scale) * var(--study-text-scale))}
 @media(max-width:800px){:root{--study-device-scale:.8}.question-panel .question-stem{font-size:calc(1.05rem * var(--study-device-scale) * var(--study-text-scale))}}
+
+
+/* Post-answer AI handoff: secondary action, below explanations and above continue. */
+.ai-explain-entry{margin:16px 0 20px;padding:16px 0;border-top:1px solid var(--line)}
+.ai-explain-entry .button{min-height:48px;border-color:#93bbb6;color:#14605a;background:#f0f7f6}
+.ai-explain-entry p{margin:7px 0 0;font-size:.8rem}
+#ai-handoff-dialog{width:min(94vw,540px);max-width:540px;max-height:90dvh;overflow:auto;padding:20px;color:var(--text);border:1px solid var(--line);border-radius:16px}
+#ai-handoff-dialog::backdrop{background:#142d4e90}
+#ai-handoff-dialog [hidden]{display:none!important}
+#ai-handoff-dialog .dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+#ai-handoff-dialog h2{font-size:1.16rem;margin:0}
+.ai-handoff-providers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:14px 0}
+.ai-handoff-providers .button{padding:8px 3px;font-size:.86rem;min-width:0}
+.ai-handoff-providers [aria-pressed=true]{border-color:var(--accent);background:var(--pale);color:#14605a}
+.ai-handoff-label{display:block;font-weight:650;margin:14px 0 6px}
+#ai-handoff-dialog textarea{display:block;width:100%;min-width:0;border:1px solid #adbdce;border-radius:9px;background:#fff;color:var(--text);padding:10px 12px;resize:vertical;font-size:16px;line-height:1.6}
+#ai-handoff-dialog .ai-handoff-primary{display:flex;width:100%;min-height:54px;margin-top:14px;white-space:normal}
+.ai-handoff-help{margin:8px 0 0;font-size:.8rem}
+.ai-handoff-status{margin:12px 0 0;padding:10px 12px;border:1px solid #b2d1ca;background:var(--pale);border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-handoff-manual{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.ai-handoff-manual p{margin-bottom:8px}
+.ai-handoff-manual .button{margin:9px 9px 0 0}
+#ai-handoff-dialog details{border-top:1px solid var(--line);margin-top:15px;padding-top:7px}
+#ai-handoff-dialog summary{min-height:44px;padding:9px 0;cursor:pointer;font-size:.86rem;color:var(--muted)}
+#ai-handoff-preview{font-size:.84rem!important}
+#ai-handoff-copy-only{margin-top:10px}
+.ai-handoff-image-info p{margin-bottom:8px}
+.ai-handoff-image-links{display:flex;gap:8px;flex-wrap:wrap}
+.ai-handoff-image-links .button{font-size:.82rem;min-width:0;overflow-wrap:anywhere}
+@media(max-width:480px){#ai-handoff-dialog{padding:16px 13px}#ai-handoff-dialog .ai-handoff-manual .button{width:100%}}

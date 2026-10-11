@@ -169,6 +169,8 @@ with sync_playwright() as p:
  open_q(pending_id);page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
  nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f"{reviewed_count+(pending_fixture['enrichment']=='topic-guide')}問");page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
  print('PASS scanned source / official key / explanation status / retry / personal notes / immutable snapshot',flush=True)
+ if page.locator('.original-question').count():
+  page.locator('.original-question>summary').click()
  page.set_viewport_size({'width':390,'height':844});page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  assert page.get_by_role('button',name='問題を拡大',exact=True).count()==0;page.get_by_role('button',name='問題画像を拡大',exact=True).click();assert page.locator('#image-dialog').is_visible();initial=page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth');page.get_by_role('button',name='画像を拡大',exact=True).click();assert page.locator('#image-scroll img').evaluate('(img)=>img.clientWidth')>initial
  assert page.locator('#image-scroll').evaluate('(e)=>e.scrollWidth>e.clientWidth');page.screenshot(path=str(ROOT/'question-zoom-mobile.png'));page.keyboard.press('Escape');assert not page.locator('#image-dialog').is_visible()
