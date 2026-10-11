@@ -55,14 +55,21 @@ export function buildAIPrompt({question:q,attempt:a,qualification,detail='',base
  return prompt.join('\n\n');
 }
 
-export function createAIHandoff({getAttempt,getQuestion,getQualification,getBaseURL}){
+export function createAIHandoff({getAttempt,getQuestion,getQualification,getBaseURL,beforeNavigate=()=>true}){
  const dialog=document.getElementById('ai-handoff-dialog');
  const $=id=>dialog.querySelector('#'+id);
  const buttons=[...dialog.querySelectorAll('[data-ai-provider]')];
- let provider='chatgpt',snapshot=null,operation=0;
+ let provider='chatgpt',snapshot=null,operation=0,working=false;
  const controls=[...buttons,$('ai-handoff-detail'),$('ai-handoff-open'),$('ai-handoff-copy-only'),$('ai-handoff-select')];
- function busy(value){for(const control of controls)control.disabled=value;}
+ function busy(value){working=value;for(const control of controls)control.disabled=value;$('ai-handoff-fallback').setAttribute('aria-disabled',String(value));}
  function cancel(){operation++;snapshot=null;busy(false);}
+ async function navigate(dest,token){
+  showStatus('学習記録の保存を確認しています。');
+  const saved=await beforeNavigate();
+  if(token!==operation||!dialog.open)return;
+  if(!saved)throw Error('学習記録を保存できなかったため、移動を止めました。問題画面の「表示・データ」から記録を書き出してください。');
+  window.location.assign(dest.url);
+ }
  function prompt(){
   if(!snapshot)throw Error('質問する問題を開き直してください。');
   return buildAIPrompt({...snapshot,detail:$('ai-handoff-detail').value});
@@ -130,10 +137,17 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
    copied=true;
    // Android Chrome/PWA: do not call window.open before copying; the tested
    // behavior navigates this tab only after clipboard success.
-   window.location.assign(dest.url);
+   await navigate(dest,token);
   }catch(error){
-   if(token===operation&&dialog.open)showManual((copied?'コピーはできましたが、移動に失敗しました。':'自動コピーに失敗しました。')+' '+(error?.name||'Error')+'：'+(error?.message||String(error))+' 下の質問文を手動でコピーしてください。');
+   if(token===operation&&dialog.open)showManual((copied?'質問文はコピー済みです。自動移動を止めました。':'自動コピーに失敗しました。')+' '+(error?.name||'Error')+'：'+(error?.message||String(error))+' 下の質問文を手動でコピーできます。');
   }finally{if(token===operation)busy(false);}
+ });
+ $('ai-handoff-fallback').addEventListener('click',async event=>{
+  event.preventDefault();if(working)return;
+  const token=++operation,dest=DESTINATIONS[provider];busy(true);
+  try{await navigate(dest,token);}
+  catch(error){if(token===operation&&dialog.open)showManual('自動移動を止めました。'+(error?.message||String(error)));}
+  finally{if(token===operation)busy(false);}
  });
  $('ai-handoff-copy-only').addEventListener('click',async()=>{
   const token=++operation,text=prompt();busy(true);$('ai-handoff-status').hidden=true;

@@ -86,7 +86,7 @@ document.addEventListener('error', event => {
 }, true);
 function question(id) { const q=questionIndex.get(id)||(planner?.allAttempts()||state.attempts).find(a=>a.questionId===id&&a.questionSnapshot)?.questionSnapshot,override=Object.hasOwn(state.overrides,id)?state.overrides[id]:null;return q?{...q,...(override||{}),...(override?{enrichment:'personal',hintStatus:'individual'}:{})}:null; }
 function current() { return state.attempts.find(a => a.id === state.currentId); }
-const aiHandoff=createAIHandoff({getAttempt:current,getQuestion:a=>({...((a.questionSnapshot||question(a.questionId))||{}),...(a.materialSnapshot||{})}),getQualification:()=>qualification,getBaseURL:()=>document.baseURI});
+const aiHandoff=createAIHandoff({getAttempt:current,getQuestion:a=>({...((a.questionSnapshot||question(a.questionId))||{}),...(a.materialSnapshot||{})}),getQualification:()=>qualification,getBaseURL:()=>document.baseURI,beforeNavigate:()=>save()});
 
 function materialUpdateAvailable(a) {
   if(!questionIndex.has(a.questionId))return false;
