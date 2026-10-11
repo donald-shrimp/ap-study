@@ -55,7 +55,7 @@ assert len(all_ids)==len(all_parents)==160
 if args.complete:
     assert all(s['status']=='ready' for s in sets['sets']) and all(id in published for id in all_ids)
     assert progress['pendingReviewCount']==0
-assert not qualification['diagnosticBlueprint']['variantLimits'], 'Do not silently change the 30-question allocation.'
+assert qualification['diagnosticBlueprint']['size']==30 and qualification['diagnosticBlueprint']['assistance']=='none'
 assert len(originals)==800 and not any(q.get('diagnosticOnly') for q in originals.values())
 for item in progress['items']:
     if item['status']=='awaiting-independent-review':assert item['questionId'] not in published

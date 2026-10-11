@@ -51,6 +51,8 @@ export function createFirebaseClient(){
     return recoverResourceWrite(error,item,async()=>{const current=await sdk.getDocFromServer(ref);return current.exists()?{id:current.id,...current.data()}:null;},()=>authorize(uid));
    }
   },
+  pullPersonal(uid,qualificationId,cursor){return this.pullDocuments(uid,qualificationId,cursor,'personal');},
+  pushPersonal(uid,qualificationId,item){return this.pushDocument(uid,qualificationId,item,'personal');},
   pullCards(uid,qualificationId,cursor){return this.pullDocuments(uid,qualificationId,cursor,'cards');},
   async pushCard(uid,qualificationId,item){
    authorize(uid);const ref=sdk.doc(db,'users',uid,'qualifications',qualificationId,'cards',item.id);

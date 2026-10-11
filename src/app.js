@@ -1,3 +1,4 @@
+import {createPersonalFeature} from './features/personal.js';
 import {createLearningFeature} from './features/learning.js';
 import {initPWA, savedAssetURLs} from '../pwa.js';
 import {$,esc,now,day,dateText,timeText} from './utils.js';
@@ -16,7 +17,7 @@ import {loadCatalog,appRoot} from './content/catalog.js';
 import {initAccountControls,guestAttemptId} from './sync/account.js';
 import {createPlanningFeature} from './features/planning.js';
 
-let store, content, qualification, account, planner, cards, learning;
+let store, content, qualification, account, planner, cards, learning, personal;
 let studyContext=null;
 let fieldMode='learning',fieldPartId=null,topicPartId=null,reviewTopicId=null,reviewPartId=null,displayedNextAction=null,displayedEntryActions=null;
 let questionIndex = new Map(), progress = createProgress([]);
@@ -40,11 +41,11 @@ function entryActions(){return Object.fromEntries((qualification.studyContext?['
 function views(){
  const phase=activePhase(planner?.plan()),recommendation=phase?selectPractice({qualification,questions:base,attempts:planner.allAttempts(),reviewInfo,scope:{topicIds:phase.focusTopicIds,examPartIds:phase.examPartIds},excludedQuestionIds:learning?.deferredIds()||[],available:usableOffline,practiceAllowed:q=>allowsQuestion(q,state.settings.lastEntry,studyContext,state.settings.deskQuestionIds)}):null;
  const diagnosis=planner?.latestDiagnosis(),homeFields=learningFields({qualification,questions:base,attempts:state.attempts,plan:planner?.plan()}),fieldData=fieldMode==='diagnostic'?diagnosticFields(diagnosis,qualification):fieldPartId?learningFields({qualification,questions:base,attempts:state.attempts,plan:planner?.plan(),examPartId:fieldPartId}):homeFields;
- return createViews({cardsEnabled:!!cards,recommendation,homeTopicPool:(topic,id)=>topicPool(topic,id,null,state.settings.lastEntry),entryActions:displayedEntryActions||entryActions(),studyContext,contextLabel:q=>contextLabel(q,studyContext,state.settings.deskQuestionIds),homeFields,nextAction:displayedNextAction||nextAction(),fieldData,fieldMode,fieldPartId,topicPartId,fieldAction,reviewTopicId,reviewPartId,diagnosis,normalAttempts:state.attempts.filter(a=>!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly),state:{...state,attempts:planner?.allAttempts()||state.attempts},workspaceViews:planner?.store()?planner.views():null,base,catalog,PAGE_SIZE,examLabel,question,current,reviewInfo,reviewQuestions,topics,topicPool:state.view==='study'?topicPool:(topic,id,part)=>topicPool(topic,id,part,state.settings.paperMode),latest,previousAttempt,improvement,sessionCount,hasFreshTopicQuestion,materialUpdateAvailable,qualification,readNote});
+ return createViews({noteConflictHTML:topicId=>personal?.conflictsHtml(topicId)||'',cardsEnabled:!!cards,recommendation,homeTopicPool:(topic,id)=>topicPool(topic,id,null,state.settings.lastEntry),entryActions:displayedEntryActions||entryActions(),studyContext,contextLabel:q=>contextLabel(q,studyContext,state.settings.deskQuestionIds),homeFields,nextAction:displayedNextAction||nextAction(),fieldData,fieldMode,fieldPartId,topicPartId,fieldAction,reviewTopicId,reviewPartId,diagnosis,normalAttempts:state.attempts.filter(a=>!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly),state:{...state,attempts:planner?.allAttempts()||state.attempts},workspaceViews:planner?.store()?planner.views():null,base,catalog,PAGE_SIZE,examLabel,question,current,reviewInfo,reviewQuestions,topics,topicPool:state.view==='study'?topicPool:(topic,id,part)=>topicPool(topic,id,part,state.settings.paperMode),latest,previousAttempt,improvement,sessionCount,hasFreshTopicQuestion,materialUpdateAvailable,qualification,readNote});
 }
 let offlineQuestionIds = new Set();
 let online = navigator.onLine;
-initPWA({beforeUpdate:()=>store?save():true});
+initPWA({beforeUpdate:async()=>{await personal?.flush();return store?save():true;}});
 function usableOffline(q) { return online || offlineQuestionIds.has(q.id); }
 async function refreshOfflineQuestions() {
   if (!online) {
@@ -138,14 +139,13 @@ function pickQuestion(session=state.session){return selectPractice({qualificatio
 function hasFreshTopicQuestion(){return pickQuestion().kind==='question';}
 
 function render(focus = true, preserveY = null) {
-  const memo=!focus&&document.activeElement?.matches('input[data-reading-topic]')?{topic:document.activeElement.dataset.readingTopic,start:document.activeElement.selectionStart,end:document.activeElement.selectionEnd}:null;
+  if(!focus&&document.activeElement?.matches('input[data-reading-topic]'))return;
   document.documentElement.classList.toggle('large-text', state.settings.largeText);
   $('#large-text').checked = state.settings.largeText;
   document.querySelectorAll('.nav-item').forEach(b=>{ const active = b.dataset.view === (state.view==='study'?'home':['planning','diagnostics','diagnostic','review'].includes(state.view)?'history':state.view==='materials'||state.view==='flashcards'?'topics':state.view); b.classList.toggle('active',active); active ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current'); });
   if(state.view==='home'){displayedEntryActions=entryActions();displayedNextAction=displayedEntryActions[state.settings.lastEntry]||nextAction();}
   main.innerHTML = state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML();
   if(state.view==='planning')planner?.restoreDrafts();
-  if(memo){const input=[...main.querySelectorAll('input[data-reading-topic]')].find(el=>el.dataset.readingTopic===memo.topic);if(input){input.focus({preventScroll:true});input.setSelectionRange(memo.start,memo.end);}}
   if (focus) { main.focus({preventScroll:true}); window.scrollTo(0, preserveY ?? 0); }
 }
 let navigation=0;
@@ -228,6 +228,7 @@ main.addEventListener('click',async e=>{
   if(el.dataset.view) { if(['all','paperless','desk'].includes(el.dataset.paperMode))state.settings.paperMode=el.dataset.paperMode;go(el.dataset.view,{reviewTopicId:el.dataset.reviewTopicId,reviewPartId:el.dataset.reviewPartId});if(el.dataset.openAi)await planner?.action({dataset:{action:'open-ai'}});return; }
   const action=el.dataset.action; const a=current();
   try {
+  if(await personal?.action(el))return;
   if(await cards?.action(el))return;
   if(await planner?.action(el))return;
   if(action==='entry-start'||action==='entry-resume'){const mode=el.dataset.paperMode;if(!['all','paperless','desk'].includes(mode))return;if(mode!=='all'&&!studyContext)studyContext=await content.loadStudyContext();if(action==='entry-resume')await resume(el.dataset.id,mode);else await start(el.dataset.id,true,{topic:qualification.topics.find(t=>t.id===el.dataset.topicId)?.name||null,examPartId:el.dataset.partId||null,paperMode:mode});}
@@ -265,7 +266,9 @@ main.addEventListener('click',async e=>{
 });
 document.querySelectorAll('header [data-view], .sidebar [data-view]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.view);}));
 main.addEventListener('toggle',e=>planner?.toggle(e.target),true);
-main.addEventListener('input',e=>{if(planner?.input(e.target))return;if(e.target.closest('#catalog-form')){const f=new FormData($('#catalog-form'));catalog={year:String(f.get('year')),season:String(f.get('season')),topic:String(f.get('topic')),query:String(f.get('query')),enriched:f.has('enriched'),page:1};$('#catalog-results').innerHTML=views().catalogRowsHTML();return;}if(e.target.dataset.readingTopic){const topic=qualification.topics.find(t=>t.name===e.target.dataset.readingTopic);state.readingNotes[topic?.id||e.target.dataset.readingTopic]=e.target.value.slice(0,200);save();}});
+main.addEventListener('focusin',e=>{const topic=qualification?.topics.find(t=>t.name===e.target.dataset.readingTopic);if(topic)personal?.focus(topic.id);});
+main.addEventListener('focusout',e=>{const topic=qualification?.topics.find(t=>t.name===e.target.dataset.readingTopic);if(topic)personal?.blur(topic.id);});
+main.addEventListener('input',e=>{if(planner?.input(e.target))return;if(e.target.closest('#catalog-form')){const f=new FormData($('#catalog-form'));catalog={year:String(f.get('year')),season:String(f.get('season')),topic:String(f.get('topic')),query:String(f.get('query')),enriched:f.has('enriched'),page:1};$('#catalog-results').innerHTML=views().catalogRowsHTML();return;}if(e.target.dataset.readingTopic){const topic=qualification.topics.find(t=>t.name===e.target.dataset.readingTopic);state.readingNotes[topic?.id||e.target.dataset.readingTopic]=e.target.value.slice(0,200);save();if(topic)personal?.edit(topic.id,e.target.value.slice(0,200));}});
 main.addEventListener('change',async e=>{
   if(e.target.id==='import-cards'){try{await cards.importFile(e.target.files[0]);}catch(error){notice(error.message+' 現在の記録は変更していません。');}finally{e.target.value='';}return;}
   if(await cards?.change(e.target))return;
@@ -285,7 +288,7 @@ $('#image-zoom-in').addEventListener('click',()=>{const img=$('#image-scroll img
 $('#image-zoom-out').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.max(600,img.clientWidth/1.25)}px`;});
 $('#settings-button').addEventListener('click',()=>$('#settings-dialog').showModal());
 $('#large-text').addEventListener('change',e=>{state.settings.largeText=e.target.checked;save();render(false);});
-$('#export-state').addEventListener('click',async()=>{await saves;download(corruptRaw??{...state,workspaceBackup:planner?.backup(),learningBackup:learning?.backup()},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
+$('#export-state').addEventListener('click',async()=>{await personal?.flush();await saves;download(corruptRaw??{...state,workspaceBackup:planner?.backup(),learningBackup:learning?.backup()},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
 // Full record replacement is guest-only. Keep navigation, background saves and
 // owner changes behind this short maintenance barrier, then display committed data.
 async function maintainRecords(operation){
@@ -307,20 +310,20 @@ $('#import-state').addEventListener('change',async e=>{
   if(file.size>64*1024*1024)throw new Error('ファイルが大きすぎます。64MB以下の学習記録を選んでください。');
   const candidate=validateState(JSON.parse(await file.text())),workspaceBackup=candidate.workspaceBackup;planner?.validateBackup(workspaceBackup);learning?.validateBackup(candidate.learningBackup,candidate.attempts);
   if((state.attempts.length||corruptRaw!==null)&&!confirm('通常演習の記録と教材編集を、ファイルの内容で置き換えます。計画・診断は追加し、既存のものは残します。先に書き出して保管してください。読み込みますか？'))return;
-  await saves;if(store!==target)throw new Error('保存先が変わりました。記録は変更していません。');
+  await personal?.flush();await saves;if(store!==target)throw new Error('保存先が変わりました。記録は変更していません。');
   const learningOperations=learning?.restoreOperations(candidate.learningBackup)||[];delete candidate.workspaceBackup;delete candidate.learningBackup;if(candidate.view==='flashcards')candidate.view='home';
   $('#save-state').textContent='保存中…';
   try{await target.write(candidate,{replace:true,learningOperations});await learning?.bind();}catch(error){$('#save-state').textContent=storageOK?'この端末に保存済み':'保存できていません';throw new Error('学習記録を取り込めませんでした。現在の記録と計画は変更していません。 '+error.message);}
   state=candidate;learning?.apply();corruptRaw=null;storageOK=true;saveVersion++;rebuildProgress();$('#save-state').textContent='この端末に保存済み';notice('');
   let result;
-  try{result=await planner?.restoreBackup(workspaceBackup);}catch(error){render();$('#settings-status').textContent='通常演習の記録は読み込み済みです。受験日・計画・診断は取り込めませんでした。同じファイルを選んで再試行できます。 '+error.message;return;}
+  try{await personal?.importNotes(candidate.readingNotes);result=await planner?.restoreBackup(workspaceBackup);}catch(error){render();$('#settings-status').textContent='通常演習の記録は読み込み済みです。分野メモ・受験日・計画・診断の取り込みを完了できませんでした。同じファイルを選んで再試行できます。 '+error.message;return;}
   if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));render();
   const details=[];if(result?.plan==='restored')details.push('受験日・計画を追加しました。');if(result?.plan==='retained')details.push('既存の受験日・計画は保持しました。');if(workspaceBackup?.runs.length)details.push(`診断${result.diagnosticsAdded}件を追加、${result.diagnosticsRetained}件は登録済みです。`);
   $('#settings-status').textContent='学習記録を読み込みました。'+(details.length?' '+details.join(' '):'');
  });}catch(error){$('#settings-status').textContent=error instanceof SyntaxError?'JSONを読み取れませんでした。現在の記録は変更していません。':error.message;}
  finally{e.target.value='';}
 });
-$('#clear-state').addEventListener('click',async()=>{if(!confirm('このブラウザの通常演習・診断の記録を削除します。単語帳・受験日・計画・教材の編集は残します。よろしいですか？'))return;await saves;const {settings,overrides}=state;corruptRaw=null;state={...makeState(),settings,overrides};notice('');await save({replace:true});await learning?.bind();await planner?.clearDiagnostics();render();$('#settings-status').textContent=storageOK?'通常演習・診断の学習記録を削除しました。受験日と計画は残しています。':'記録を初期化しましたが、保存に失敗しました。ブラウザの保存設定を確認してください。';});
+$('#clear-state').addEventListener('click',async()=>{if(!confirm('このブラウザの通常演習・診断の記録を削除します。分野メモ・単語帳・受験日・計画・教材の編集は残します。よろしいですか？'))return;await saves;const {settings,overrides,readingNotes}=state;corruptRaw=null;state={...makeState(),settings,overrides,readingNotes};notice('');await save({replace:true});await learning?.bind();await planner?.clearDiagnostics();render();$('#settings-status').textContent=storageOK?'通常演習・診断の学習記録を削除しました。受験日と計画は残しています。':'記録を初期化しましたが、保存に失敗しました。ブラウザの保存設定を確認してください。';});
 $('#close-editor').addEventListener('click',()=>$('#editor-dialog').close());
 $('#editor-form').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const q=question(editId);const changes={enrichment:'personal',hintStatus:'individual',hints:q.hints.map((h,i)=>({...h,text:String(f.get(`hint${i}`)).trim(),revealsAnswer:f.has(`reveal${i}`)})),revision:now()};for(const k of ['summary','explanation','takeaway'])changes[k]=String(f.get(k)).trim();if(changes.hints.some(h=>!h.text)||['summary','explanation','takeaway'].some(k=>!changes[k])){alert('空欄を埋めてから保存してください。');return;}state.overrides[editId]=changes;save();$('#editor-dialog').close();render(false);});
 $('#reset-material').addEventListener('click',()=>{if(!confirm('この問題のヒントと解説を、初期教材に戻しますか？'))return;delete state.overrides[editId];save();$('#editor-dialog').close();render(false);});
@@ -336,11 +339,12 @@ async function switchOwner(owner,{restore=false}={}){
  const controls=['import-state','export-state','clear-state','large-text'];controls.forEach(id=>$("#"+id).disabled=true);
  clearTimeout(scrollTimer);navigation++;$('#editor-dialog').close();
  try{
+  await personal?.flush();
   if(!await save())throw new Error('現在の記録を保存できません。');await saves;
   const next=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState,owner});
   let raw=await next.read(),candidate=raw?validateState(JSON.parse(raw)):makeState();
   if(!raw){candidate.settings={largeText:state.settings.largeText,paperMode:state.settings.paperMode,lastEntry:state.settings.lastEntry,deskQuestionIds:[]};await next.write(candidate);raw=await next.read();}
-  await store.close();store=next;state=validateState(JSON.parse(raw));displayedNextAction=null;fieldMode='learning';fieldPartId=null;topicPartId=null;reviewTopicId=null;reviewPartId=null;await cards?.bind();await learning?.bind();await planner?.bind();corruptRaw=null;storageOK=true;editId=null;
+  await store.close();store=next;state=validateState(JSON.parse(raw));displayedNextAction=null;fieldMode='learning';fieldPartId=null;topicPartId=null;reviewTopicId=null;reviewPartId=null;await personal?.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。');});await cards?.bind();await learning?.bind();await planner?.bind();corruptRaw=null;storageOK=true;editId=null;
   // Explicit account changes open home; restoring the same browser's saved
   // login preserves its own current question and scroll position.
   if(!restore){state.currentId=null;state.view='home';state.session={attemptIds:[],topic:null};}
@@ -355,7 +359,7 @@ function validateSyncAttempt(a){const probe={...makeState(),attempts:[a]};valida
 function remoteRecords(records){
  const byId=new Map(state.attempts.map(a=>[a.id,a]));for(const a of records)if(a.id!==state.currentId)byId.set(a.id,a);
  state.attempts=[...byId.values()].sort((a,b)=>a.startedAt.localeCompare(b.startedAt)||a.id.localeCompare(b.id));learning?.apply();rebuildProgress();
- if(records.length&&state.view!=='study'&&state.view!=='planning')render(false);
+ if(records.length&&!['study','planning','flashcards'].includes(state.view))render(false);
 }
 function remoteFork({before,after,data}){
  const a=state.attempts.find(x=>x.id===before);if(a)Object.assign(a,data);else state.attempts.push(data);
@@ -367,7 +371,7 @@ async function importGuest(uid){
  try{
   const raw=await guest.read(),cardEvents=await cards?.guestEvents()||[];
   const source=raw?validateState(JSON.parse(raw)):makeState();
-  if(!confirm(`ログイン前の${source.attempts.length}件の学習記録・単語帳${cardEvents.length}件と紙ペン・先送り設定を、このGoogleアカウントへ追加します。元の記録は残します。取り込みますか？`))return;
+  if(!confirm(`ログイン前の${source.attempts.length}件の学習記録・単語帳${cardEvents.length}件と分野メモ・紙ペン・先送り設定を、このGoogleアカウントへ追加します。元の記録は残します。取り込みますか？`))return;
   const identity=await guest.identity(),prefix=`${identity.deviceId}:`,already=new Set(state.attempts.map(a=>a.importedFrom).filter(Boolean));
   const mapping=new Map(await Promise.all(source.attempts.filter(a=>!already.has(prefix+a.id)).map(async a=>[a.id,await guestAttemptId(uid,prefix+a.id)])));
   for(const original of source.attempts){if(!mapping.has(original.id))continue;const a=structuredClone(original);
@@ -380,7 +384,7 @@ async function importGuest(uid){
   for(const row of guestRows){if(row.kind==='context'){const p=structuredClone(row.payload);if(!mapping.has(p.attemptId))continue;p.attemptId=mapping.get(p.attemptId);operations.push(learning?.operation('context',p));}else if(!learning?.hasQuestionSetting(row.kind,row.payload.questionId))operations.push(learning?.operation(row.kind,row.payload));}
   for(const questionId of source.settings.deskQuestionIds)if(!learning?.hasQuestionSetting('desk',questionId))operations.push(learning?.operation('desk',{questionId,value:true}));
   for(const a of source.attempts)if(a.deferred&&!learning?.hasQuestionSetting('deferred',a.questionId))operations.push(learning?.operation('deferred',{questionId:a.questionId,value:true}));
-  if(!await save({learningOperations:[...new Map(operations.filter(Boolean).map(op=>[op.id,op])).values()]}))throw new Error('取り込んだ記録を保存できませんでした。');if(learning?.apply()&&!await save())throw new Error('取り込んだ学習設定を保存できませんでした。');await cards?.importGuest(uid,cardEvents);await planner?.importGuest(uid,identity.deviceId);render(false);
+  if(!await save({learningOperations:[...new Map(operations.filter(Boolean).map(op=>[op.id,op])).values()]}))throw new Error('取り込んだ記録を保存できませんでした。');if(learning?.apply()&&!await save())throw new Error('取り込んだ学習設定を保存できませんでした。');await personal?.importNotes(source.readingNotes,{keepExisting:true});await cards?.importGuest(uid,cardEvents);await planner?.importGuest(uid,identity.deviceId);render(false);
  }finally{await guest.close();}
 }
 async function initialize(){
@@ -399,14 +403,15 @@ try {
   try { const raw=await store.read();if(raw){try{state=validateState(JSON.parse(raw));if(state.session.topicId)state.session.topic=qualification.topics.find(t=>t.id===state.session.topicId)?.name||state.session.topic;}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   if(state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
   if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));
-  cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname,onChanged:()=>account?.cardsChanged()});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
-  planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(state.view!=='study'&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download,getTargetPart:()=>displayedNextAction?.scope?.examPartId||null});
+  personal=createPersonalFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,onChanged:()=>account?.personalChanged(),onNotice:notice,onApplied:()=>{save();if(recordMaintenance||['study','planning','flashcards','diagnostic'].includes(state.view))return;if(state.view==='history'){for(const el of main.querySelectorAll('input[data-reading-topic]'))if(el!==document.activeElement)el.value=readNote(el.dataset.readingTopic);return;}render(false);},onCheckpoints:()=>cards?.refreshResumeControl()});await personal.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。通常学習は続けられます。');});
+  cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname,onChanged:()=>account?.cardsChanged(),saveCheckpoint:cp=>personal?.saveCheckpoint(cp),getCheckpoints:()=>personal?.checkpoints()||[]});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
+  planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(!['study','flashcards'].includes(state.view)&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download,getTargetPart:()=>displayedNextAction?.scope?.examPartId||null});
   learning=createLearningFeature({qualification,getStore:()=>store,getState:()=>state,onNotice:notice,onUpdate:()=>{save();if(!['study','planning','flashcards'].includes(state.view))render(false);}});await learning.bind();
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
   await planner.bind().catch(()=>notice('計画・診断の記録を保存できません。通常演習は続けられます。'));
-  initAccountControls({getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
+  initAccountControls({getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
   if(navigator.modelContext?.registerTool) {
     navigator.modelContext.registerTool({name:'get_study_summary',description:'Read counts of local study attempts and review candidates. Does not modify study records.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify(planner.summary())}]})});
   }

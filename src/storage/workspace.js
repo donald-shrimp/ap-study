@@ -4,10 +4,10 @@ const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result
 const finished=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||new Error('保存を中止しました。'));tx.onerror=()=>{};});
 const serial=JSON.stringify;
 export const MAX_WORKSPACE_BYTES=850000;
-export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,validate}){
+export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,validate,namespaceName='workspace'}){
  let dbPromise,queue=Promise.resolve(),validationError=null;
  const namespace=[owner,qualificationId],key=id=>[...namespace,id];
- async function db(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:workspace`,1);r.onupgradeneeded=()=>{const store=r.result.createObjectStore('documents',{keyPath:['owner','qualificationId','id']});store.createIndex('namespace',['owner','qualificationId']);};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return dbPromise;}
+ async function db(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:${namespaceName}`,1);r.onupgradeneeded=()=>{const store=r.result.createObjectStore('documents',{keyPath:['owner','qualificationId','id']});store.createIndex('namespace',['owner','qualificationId']);};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return dbPromise;}
  async function read(){const database=await db(),tx=database.transaction('documents'),done=finished(tx),rows=await request(tx.objectStore('documents').index('namespace').getAll(namespace));await done;validationError=null;return rows.filter(row=>{try{validate(row.kind,row.payload);return true;}catch(error){validationError=error;return false;}});}
  function transaction(callback){const op=queue.catch(()=>{}).then(async()=>{const database=await db(),tx=database.transaction('documents','readwrite'),done=finished(tx);try{const result=await callback(tx.objectStore('documents'));await done;return result;}catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}});queue=op;return op;}
  function write(kind,id,payload,expectedLocalRevision){
@@ -71,5 +71,17 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
   const localRevision=old.localRevision+1,row=useLocal?{...old,localRevision,remoteRevision:old.conflict.revision,conflict:null,operationId:`${deviceId}:${id}:${localRevision}`,deviceId,dirty:true}:{...old,payload:validate(old.kind,old.conflict.payload),localRevision,remoteRevision:old.conflict.revision,deviceId:old.conflict.deviceId,operationId:old.conflict.operationId,dirty:false,conflict:null,ancestors:[]};store.put(row);return row;
  });}
  function clearDiagnostics(){if(owner.startsWith('uid:'))throw new Error('ログイン中の診断は削除できません。');return transaction(async store=>{const rows=await request(store.index('namespace').getAll(namespace));for(const r of rows)if(r.kind==='diagnostic')store.delete(key(r.id));});}
- return {read,error:()=>validationError,write,restoreBackup,merge,acknowledge,resolve,clearDiagnostics,flush:()=>queue,close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();},identity:()=>({owner,qualificationId,deviceId})};
+ function writeNotes(items,{keepExisting=false}={}){
+  const checked=items.map(p=>JSON.parse(serial(validate('note',p))));
+  return transaction(async store=>{
+   for(const payload of checked){const id='note--'+payload.topicId,old=await request(store.get(key(id)));if(old&&keepExisting)continue;
+    if(old?.conflict)throw new Error('分野メモが競合しています。先に使う内容を選んでください。');
+    const localRevision=(old?.localRevision||0)+1,operationId=`${deviceId}:${id}:${localRevision}`;
+    store.put({owner,qualificationId,id,kind:'note',payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)});
+    store.delete(key('draft--'+payload.topicId));
+   }
+  });
+ }
+ function removeDraft(id){if(!id.startsWith('draft--'))throw new Error('下書き以外は削除できません。');return transaction(async store=>{const row=await request(store.get(key(id)));if(row?.kind==='draft')store.delete(key(id));});}
+ return {writeNotes,removeDraft,read,error:()=>validationError,write,restoreBackup,merge,acknowledge,resolve,clearDiagnostics,flush:()=>queue,close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();},identity:()=>({owner,qualificationId,deviceId})};
 }

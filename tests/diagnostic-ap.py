@@ -41,9 +41,9 @@ with sync_playwright() as p:
     page.locator('[name=diagnostic-answer]').first.wait_for()
     initial=run(page); slots=initial['slots']; frozen=json.dumps(slots,sort_keys=True);zoomed=set()
     derived=[s for s in slots if s['kind']=='derived']
-    assert len(derived)==17 and len({s['attempt']['questionSnapshot']['topicId'] for s in derived})==17
+    assert 20<=len(derived)<=24 and len({s['attempt']['questionSnapshot']['topicId'] for s in derived})==17
     assert len({s['parentQuestionId'] or s['attempt']['questionId'] for s in slots})==30
-    assert initial['selectionPolicy']['defaultVariantLimit']==1 and initial['selectionPolicy']['variantLimits']=={}
+    assert initial['selectionPolicy']['defaultVariantLimit']==1 and initial['selectionPolicy']['variantLimits']==json.loads((Path(__file__).resolve().parents[1]/'content/ap/qualification.json').read_text())['diagnosticBlueprint']['variantLimits']
     for i,s in enumerate(slots):
         q=s['attempt']['questionSnapshot']
         page.wait_for_function('Array.from(document.querySelectorAll(".diagnostic-question img")).every(img=>img.complete&&img.naturalWidth>0)')
@@ -78,10 +78,10 @@ with sync_playwright() as p:
         if i<29:page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()
     page.get_by_role('heading',name='診断結果',exact=True).wait_for()
     page.get_by_text('出題構成を確認',exact=True).click()
-    assert '派生問題：17問出題・17問回答・0問正解' in page.locator('#main').inner_text()
+    assert f'派生問題：{len(derived)}問出題・{len(derived)}問回答・0問正解' in page.locator('#main').inner_text()
     reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'))
-    assert reviews.count()==17
-    for i in range(17):
+    assert reviews.count()==len(derived)
+    for i in range(len(derived)):
         assert reviews.nth(i).locator('.reason-list li').count()==4
     reviews.first.locator('summary').click();assert reviews.first.locator('.reason-list li').count()==4
     artifact=Path('/workspace/scratch/diagnostic-review-20261008');artifact.mkdir(exist_ok=True)
@@ -90,11 +90,11 @@ with sync_playwright() as p:
     page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click()
     page.get_by_text('コピーしました。',exact=True).wait_for()
     summary=json.loads(page.evaluate('navigator.clipboard.readText()'))
-    assert summary['learning']['all']['completedAttempts']==13
+    assert summary['learning']['all']['completedAttempts']==30-len(derived)
     result=summary['diagnostics'][0]
-    assert result['answered']==30 and result['correct']==13 and result['assistance']=='none'
-    assert next(c for c in result['composition'] if c['kind']=='derived')['answered']==17
-    assert len([item for item in result['items'] if item['kind']=='derived' and item['parentQuestionId']])==17
+    assert result['answered']==30 and result['correct']==30-len(derived) and result['assistance']=='none'
+    assert next(c for c in result['composition'] if c['kind']=='derived')['answered']==len(derived)
+    assert len([item for item in result['items'] if item['kind']=='derived' and item['parentQuestionId']])==len(derived)
     nav(page,'review');assert not page.locator('[data-action=start][data-id^="ap-diagnostic-"]').count()
     nav(page,'materials');assert not page.locator('[data-action=start][data-id^="ap-diagnostic-"]').count()
     assert all(not a['questionSnapshot'].get('diagnosticOnly') for a in state(page)['attempts'])
@@ -116,6 +116,6 @@ with sync_playwright() as p:
     assert not state(page)['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
     assert zoomed=={'source','figure'},zoomed
     assert not errors,errors
-    (artifact/('public-browser.json' if URL.startswith('https:') else 'local-browser.json')).write_text(json.dumps({'url':URL,'derived':17,'original':13,'families':30,'answered':30,'regularCompleted':13,'offlineFrozenResume':True,'choiceReasons':4,'errors':errors},ensure_ascii=False,indent=2)+'\n')
+    (artifact/('public-browser.json' if URL.startswith('https:') else 'local-browser.json')).write_text(json.dumps({'url':URL,'derived':len(derived),'original':30-len(derived),'families':30,'answered':30,'regularCompleted':30-len(derived),'offlineFrozenResume':True,'choiceReasons':4,'errors':errors},ensure_ascii=False,indent=2)+'\n')
     browser.close()
-print('PASS actual AP 17 derived + 13 originals / 30 unique families / no assistance / offline frozen resume + selected answer / 4 reasons / result and AI export / normal-study exclusion / return to parent')
+print(f'PASS actual AP {len(derived)} derived + {30-len(derived)} originals / 30 unique families / no assistance / offline frozen resume + selected answer / 4 reasons / result and AI export / normal-study exclusion / return to parent')

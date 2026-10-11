@@ -59,7 +59,7 @@ with sync_playwright() as p:
     print('PASS Google popup in Auth Emulator / explicit guest adoption / concurrent and repeated import without duplicates',flush=True)
     # Download hint and selected choice in a separate browser; resume forks.
     login(second,email);imported_id=imported['state']['attempts'][0]['id'];download=state(second)['state'];assert download['attempts'][0]['hintCount']==1 and download['attempts'][0]['selected']==0
-    first.locator('.study-entrance[data-paper-mode=all][data-action=entry-resume]').click();second.locator('.study-entrance[data-paper-mode=all][data-action=entry-resume]').click();s1=state(first)['state'];s2=state(second)['state'];a1=next(a for a in s1['attempts'] if a['id']==s1['currentId']);a2=next(a for a in s2['attempts'] if a['id']==s2['currentId'])
+    first.locator('.study-entrance[data-paper-mode=all][data-action=entry-resume]').click();second.locator('.study-entrance[data-paper-mode=all][data-action=entry-resume]').click();first.locator('[data-action=submit]').wait_for();second.locator('[data-action=submit]').wait_for();s1=state(first)['state'];s2=state(second)['state'];a1=next(a for a in s1['attempts'] if a['id']==s1['currentId']);a2=next(a for a in s2['attempts'] if a['id']==s2['currentId'])
     assert a1['id']!=a2['id'] and a2['continuationOf']==imported_id
     answer=a1['questionSnapshot']['answer'];first.get_by_role('radio').nth(answer).check();first.locator('[data-action=submit]').click();second.get_by_role('radio').nth((answer+1)%4).check();second.locator('[data-action=submit]').click();synced(first);synced(second);synced(first)
     history=state(first)['state']['attempts'];assert {a['status'] for a in history if a['completedAt']}=={'assisted','incorrect'}

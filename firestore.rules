@@ -118,6 +118,32 @@ service cloud.firestore {
    allow update: if mine(uid) && learningEnvelope(id) && request.resource.data.kind == resource.data.kind && request.resource.data.revision == resource.data.revision + 1;
    allow delete: if false;
   }
+  function validPersonal(p,kind,id,deviceId) {
+   return kind == 'note'
+    ? p.keys().hasOnly(['topicId','text']) && cardId(p.topicId) && id == 'note--' + p.topicId && p.text is string && p.text.size() <= 200
+    : kind == 'checkpoint' && p.keys().hasOnly(['deviceId','checkpoint','at']) && cardId(p.deviceId) && p.deviceId == deviceId && id == 'checkpoint--' + p.deviceId
+     && p.at is string && p.at.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z')
+     && (p.checkpoint == null || p.checkpoint is map
+      && p.checkpoint.keys().hasOnly(['cardId','cardVersion','flipped','seen','recent','topicId'])
+      && cardId(p.checkpoint.cardId) && p.checkpoint.cardVersion is int && p.checkpoint.cardVersion > 0 && p.checkpoint.flipped is bool
+      && p.checkpoint.seen is list && p.checkpoint.seen.size() <= 10000 && p.checkpoint.seen.toSet().size() == p.checkpoint.seen.size()
+      && p.checkpoint.recent is list && p.checkpoint.recent.size() <= 10
+      && (p.checkpoint.topicId == null || cardId(p.checkpoint.topicId)));
+  }
+  function personalEnvelope(id) {
+   let d=request.resource.data;
+   return d.keys().hasOnly(['version','kind','revision','operationId','deviceId','payload','updatedAt'])
+    && d.version == 1 && d.kind in ['note','checkpoint'] && d.revision is int && d.revision >= 1 && d.updatedAt == request.time
+    && cardId(d.deviceId) && d.operationId is string && d.operationId.size() > 0 && d.operationId.size() <= 300
+    && validPersonal(d.payload,d.kind,id,d.deviceId);
+  }
+  match /users/{uid}/qualifications/{qualificationId}/personal/{id} {
+   allow read: if mine(uid);
+   allow create: if mine(uid) && personalEnvelope(id) && request.resource.data.revision == 1;
+   allow update: if mine(uid) && personalEnvelope(id) && request.resource.data.kind == resource.data.kind
+    && request.resource.data.revision == resource.data.revision + 1;
+   allow delete: if false;
+  }
   function cardId(v) { return v is string && v.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}'); }
   function cardIds(v) { return v is list && v.size() > 0 && v.size() <= 200 && v.toSet().size() == v.size(); }
   function cardEnvelope(id) {

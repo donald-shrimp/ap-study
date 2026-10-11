@@ -121,3 +121,29 @@ test('単語帳評価と観測済み削除・復元は本人だけ追記し、�
  await assertFails(setDoc(doc(db,resourcePath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
  await assertFails(setDoc(doc(db,learningPath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
 });
+
+const personalPath=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/personal/${id}`;
+const personalEnvelope=(kind,payload,revision=1,deviceId='phone')=>({version:1,kind,payload,revision,deviceId,operationId:`${deviceId}:${kind}:${revision}`,updatedAt:serverTimestamp()});
+test('分野メモは本人だけ更新・空欄化でき、文字数・未知種類・旧版・削除を拒否する',async()=>{
+ const db=env.authenticatedContext('notes').firestore(),ref=doc(db,personalPath('notes','note--network')),payload={topicId:'network',text:'教科書 p.20'};
+ await assertSucceeds(setDoc(ref,personalEnvelope('note',payload)));
+ for(const other of [env.unauthenticatedContext().firestore(),env.authenticatedContext('someone').firestore()]){await assertFails(getDoc(doc(other,personalPath('notes','note--network'))));await assertFails(setDoc(doc(other,personalPath('notes','note--network')),personalEnvelope('note',payload,2)));}
+ await assertFails(setDoc(ref,personalEnvelope('note',payload,1)));
+ await assertFails(setDoc(ref,personalEnvelope('note',{...payload,text:'x'.repeat(201)},2)));
+ await assertFails(setDoc(ref,personalEnvelope('note',{...payload,extra:true},2)));
+ await assertFails(setDoc(doc(db,personalPath('notes','draft--network')),personalEnvelope('draft',{...payload,baseRevision:1})));
+ await assertSucceeds(setDoc(ref,personalEnvelope('note',{...payload,text:''},2,'pc')));
+ await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/notes/qualifications/ap/personal')));
+ assert.equal((await getDoc(doc(db,personalPath('notes','note--network','other')))).exists(),false);
+});
+test('単語帳の再開位置は端末別文書で更新し、別端末IDへの変更を拒否する',async()=>{
+ const db=env.authenticatedContext('resume-cards').firestore(),ref=doc(db,personalPath('resume-cards','checkpoint--phone'));
+ const payload={deviceId:'phone',at:'2026-10-11T01:00:00.000Z',checkpoint:{cardId:'card',cardVersion:1,flipped:false,seen:[],recent:[],topicId:null}};
+ await assertSucceeds(setDoc(ref,personalEnvelope('checkpoint',payload)));
+ await assertFails(setDoc(ref,personalEnvelope('checkpoint',payload,2,'pc')));
+ await assertFails(setDoc(ref,personalEnvelope('checkpoint',{...payload,checkpoint:{...payload.checkpoint,flipped:'yes'}},2)));
+ await assertFails(setDoc(ref,personalEnvelope('checkpoint',{...payload,checkpoint:{...payload.checkpoint,recent:Array(11).fill('card')}},2)));
+ await assertSucceeds(setDoc(ref,personalEnvelope('checkpoint',{...payload,checkpoint:null},2)));
+ await assertSucceeds(setDoc(doc(db,personalPath('resume-cards','checkpoint--pc')),personalEnvelope('checkpoint',{...payload,deviceId:'pc'},1,'pc')));
+ await assertFails(deleteDoc(ref));
+});

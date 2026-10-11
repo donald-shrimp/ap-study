@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261010-card-sync1';
+import './src/app.js?v=20261011-personal-sync1';

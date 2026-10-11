@@ -1,7 +1,7 @@
 """Cards channel is optional until its new Firebase Rules are deployed."""
 from pathlib import Path
 exec(compile((Path(__file__).parent/'learning-old-rules.py').read_text().split("current=(ROOT/")[0],str(Path(__file__).parent/'learning-old-rules.py'),'exec'))
-current=(ROOT/'firestore.rules').read_text();start=current.index('  function cardId(');end=current.index('  match /users/{uid}/qualifications/{qualificationId}/attempts/',start);old=current[:start]+current[end:]
+current=(ROOT/'firestore.rules').read_text();start=current.index('  function validPersonal(');end=current.index('  match /users/{uid}/qualifications/{qualificationId}/attempts/',start);old=current[:start]+current[end:]
 try:
  rules(old)
  with sync_playwright() as p:

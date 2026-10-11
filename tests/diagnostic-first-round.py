@@ -173,7 +173,7 @@ assert progress['publishedCount'] == len(questions)
 assert progress['pendingReviewCount'] == sum(i['status']=='awaiting-independent-review' for i in progress['items'])
 for topic, counts in progress['topicCounts'].items():
     assert counts['published'] == sum(q['topicId']==topic for q in questions)
-assert not read('content/ap/qualification.json')['diagnosticBlueprint']['variantLimits']
+assert read('content/ap/qualification.json')['diagnosticBlueprint']['size']==30
 assert set(progress['editorialPolicy']['alignedQuestionIds'])==set(by_id)
 assert progress['editorialPolicy']['pendingCount']==0 and progress['editorialPolicy']['pendingQuestionIds']==[]
-print('PASS first 17 reviewed questions / unique answers and fresh calculations / source hashes / final review hashes / honest single-worker review method / progress / unchanged per-topic cap')
+print('PASS first 17 reviewed questions / unique answers and fresh calculations / source hashes / final review hashes / honest single-worker review method / progress / unchanged unaided 30-question mode')

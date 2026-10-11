@@ -699,3 +699,21 @@ Firestore Emulatorでの検証は本番ユーザーのスマホとPCの確認を
 - `tests/content.py`、`tests/corpus.py`と[保持記録](audits/card-sync-20261010.json)：開始mainから教材・データ・画像・スキーマ1,032ファイルのバイト差分0。通常800問・個別教材800問・単語帳681枚・派生180問を保持。
 
 本番本人のGoogleアカウント・Android実機の同期確認は行っていない。今回追加したcards用Rulesは本実行環境から配備できず、最新版firestore.rules全文の追加公開が必要。前段のlearning Rules公開とは別。[具体的な手順](firebase-setup.md#cards-rules)。単語帳中断位置・端末別入口・教科書メモのクラウド保存はP1として保留。
+
+## メモ・端末別単語帳再開と診断配分（2026-10-11）
+
+主担当1人で実装・コード点検・検証。子担当や新しい独立作問レビューは使っていません。通常800問・個別教材800問・681カード・公開派生180問と全レビューの教材本文を変更せず保持。`tests/corpus.py`、`content.py`、`diagnostic-content.py`、`diagnostic-pool.py`、`diagnostic-first-round.py`、`diagnostic-second-round.py`、`mock-materials.py --complete` で件数・本文・出典・確認ハッシュと非混入を検証しました。
+
+診断方針v3は7分野だけ派生上限2、他10分野は1。`tests/mock-selection.mjs` の再現可能な1000抽出で全180問が出題可能、30の異なる元問題、全17分野を確認。未着手状態は派生20〜24問＋既存6〜10問。`tests/diagnostic-ap.py` は実教材を30問解き、途中の選択とオフライン中断再開、開始時の出題方針・枠の固定、支援なし、全4択理由、結果とAI Export、通常学習への非混入を確認。これは難易度等価・合格予測の検証ではありません。[配分の判断記録](audits/diagnostic-policy-20261011.json)。
+
+`node --test tests/*.mjs`：98件成功。新personalの本文形式・資格の分野・カード版／参照チェック、Rulesの本人限定・未認証／他人拒否・種類／ID／文字数／版・端末別位置・削除禁止を含みます。新経路を含むRulesはFirestore Emulatorへ配備して検証し、本番へ配備したという意味ではありません。
+
+`tests/personal-sync.py`：独立した2ブラウザで実Auth/Firestore SDKを使用。メモの同期・空欄化・オフライン再読み込み・CAS競合・双方の選択・入力欄DOM／カーソル保護、端末別のカード位置・明示再開・受信でカード／裏面／フォーカスを変えないこと、ゲスト明示取り込み・UID分離・通常試行非混入を確認。モバイルと200%文字表示で横はみ出しなし。`tests/personal-storage.py`：中断したメモ書込の下書き復旧、古い下書きの自動採用禁止、バックアップによる明示置き換え、通常記録リセットでメモ保持を確認。
+
+`tests/personal-old-rules.py`：旧本番相当のRulesで新personal経路だけ許可不足になる一方、端末内メモ・単語帳、既存回答・カード評価・計画診断・学習設定の同期は継続。新Rules追加後に送信待ちを反映。`tests/card-sync.py`、`card-store.py`、`sync.py`、`planning-sync.py`、`learning-sync.py` の回帰も成功。通常同期の同時再開テストは、再開ボタン押下直後に保存だけを読む競合があったため、問題画面の表示を待ってから検証するよう修正しました。
+
+`tests/e2e.py`、`field-navigation.py`、`storage.py`、`qualifications.py`、`pwa.py` 成功。1操作開始・分野／記録／解き直し遷移・個別教材・保存・再開・バックアップ・2資格の分離・画像拡大・200%・オフライン・PWA更新を確認。新モジュールをシェルキャッシュへ追加、リリースを `20261011-personal-sync1` に更新。
+
+従来のlearning/cards用Rules公開と同期済み表示は利用者が報告済み。今回のpersonal用Rulesの本番配備と本人実機での同期は未確認。この環境にFirebase管理者認証がないため、[追加公開手順](firebase-setup.md#personal-rules)を用意しています。GitHub Pages公開とは別です。
+
+`tests/mock-selection.mjs` では実教材で旧v2（17派生）の診断を作り、v3の資格定義でも全スロットと保存方針を変更せず検証できることを追加確認。読みやすい3つのHTML文書も390px・200%表示で横はみ出しとJavaScriptエラーなし。公開検証はPages完了と公開ファイルの一致を確認してから完了扱いにします。
