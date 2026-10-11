@@ -99,10 +99,9 @@ export function planQueue({questionIds,progress,manifests=[],count=10}){
   batches.push({batchId:info.batchId,questionIds:info.questionIds,skipProposals:info.skipIds.size});
  }
  need(Number.isInteger(count)&&count>=1&&count<=20,'count must be between 1 and 20');
- const nextPref=progress.nextBatch?.packId&&Array.isArray(progress.nextBatch.numbers)
-  ?progress.nextBatch.numbers.map(n=>progress.nextBatch.packId+'-q'+n):[];
  const currentPack=progress.nextBatch?.packId;
- const priority=[...nextPref,...questionIds.filter(id=>pack(id)===currentPack),...questionIds];
+ const sorted=[...questionIds].sort((a,b)=>pack(a).localeCompare(pack(b))||number(a)-number(b));
+ const priority=[...sorted.filter(id=>pack(id)===currentPack),...sorted];
  const uniqueOrder=[...new Set(priority)].filter(id=>known.has(id));
  const free=uniqueOrder.filter(id=>!processed.has(id)&&!queued.has(id));
  const next=[];

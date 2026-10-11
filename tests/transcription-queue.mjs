@@ -39,6 +39,11 @@ test('既存PRの10問を予約すると次の問題へ進む',()=>{
  assert.deepEqual(result.nextQuestionIds,['r01h-q6']);
  assert.equal(result.nextBatchId,'r01h-q6-6');
 });
+test('古いnextBatchや入力順でも未処理の小さい番号から選ぶ',()=>{
+ const result=planQueue({questionIds:[...ids].reverse(),progress:{...progress,nextBatch:{packId:'r01h',numbers:[6]}},count:3});
+ assert.deepEqual(result.nextQuestionIds,['r01h-q3','r01h-q4','r01h-q6']);
+ assert.equal(result.nextBatchId,'r01h-q3-6');
+});
 
 test('同じ問題を予約する複数のPRは厳格に拒否',()=>{
  const same=manifest();

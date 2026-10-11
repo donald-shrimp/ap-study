@@ -25,7 +25,9 @@ node tools/transcription-queue.mjs status
 node tools/transcription-queue.mjs next --count 10
 ```
 
-`next` は最新の `data/transcription-progress.json` と、GitHubにある全open PRを読み、次の問題ID、推奨ブランチ名、マニフェストの雛形をJSON表示する。**表示するだけでPR・教材・学習記録は変更しない**。
+`status` / `next` / `check` はGitHubの最新mainのSHAを取得し、同じSHAの `data/transcription-progress.json` とカタログ、GitHubにある全open PRを読み、次の問題ID、推奨ブランチ名、マニフェストの雛形をJSON表示する。取得中にmainが変わったら停止する。ローカルの古い進捗を最新として扱わない。**表示するだけでPR・教材・学習記録は変更しない**。
+
+Node.js 24.5以上を推奨。プロキシ設定がある環境では、継承したHTTP_PROXY / HTTPS_PROXYを標準APIで使用する。対応していないNodeでは直接通信へ逃げず、エラーで停止する。
 
 例（2026-10-12のmainを参照した場合）：
 
@@ -56,7 +58,7 @@ node tools/transcription-queue.mjs next --count 10
 ```sh
 node tools/transcription-queue.mjs status
 node tools/transcription-queue.mjs check --manifest data/transcription-queue/r05a-q21-30.json --draft data/transcription-drafts/chatgpt_r05a_q21_30.json
-node --test tests/transcription-queue.mjs
+node --test tests/transcription-queue.mjs tests/transcription-queue-cli.mjs
 ```
 
 `check` は予約ID、草稿の件数・形式・選択肢・記録済み原本ハッシュの**構造だけ**を検証する。正しい文字起こしであることは証明しない。Codexは作成者とは独立にIPA原本を開き、全文・数式・表・図・選択肢を照合し、必要なら修正する。
@@ -73,7 +75,7 @@ python tests/content.py
 
 ## オフライン診断
 
-`--offline` はGitHub PRを読まずに候補を試算するための診断専用。出力の `safeToEnqueue` は `false` となる。これを根拠に作成PRを確定してはいけない。
+`--offline` はローカル進捗を使い、GitHub PRを読まずに候補を試算するための診断専用。出力の `safeToEnqueue` は `false` となる。これを根拠に作成PRを確定してはいけない。
 
 GitHubの公開APIは追加のOpenAI API課金を必要としない。利用枠、APIのアクセス制限、ネットワークや実機の制約は別途考慮する。
 

@@ -12,6 +12,7 @@
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import * as http from 'node:http';
 import {planQueue,validateManifest,validateDraft} from './transcription-queue-domain.mjs';
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
@@ -44,6 +45,16 @@ async function api(url){
  if(!result.ok)throw Error('GitHub queue query failed (HTTP '+result.status+'). Refusing unsafe selection.');
  return result.json();
 }
+async function remoteJSON(repo,path,ref){
+ const file=await api('https://api.github.com/repos/'+repo+'/contents/'+path+'?ref='+encodeURIComponent(ref));
+ if(file.encoding!=='base64'||!file.content)throw Error('Missing GitHub JSON: '+path);
+ return JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
+}
+async function mainRef(repo){
+ const ref=await api('https://api.github.com/repos/'+repo+'/git/ref/heads/main');
+ if(!/^[a-f0-9]{40}$/.test(ref.object?.sha))throw Error('Invalid main reference');
+ return ref.object.sha;
+}
 async function remoteManifests(repo){
  const collected=[];
  for(let page=1;;page++){
@@ -53,13 +64,11 @@ async function remoteManifests(repo){
   for(const pr of prs){
    const head=pr.head?.ref||'';
    if(!head.startsWith(BATCH_BRANCH))continue;
+   if(pr.base?.ref!=='main')throw Error('Transcription PR must target main: #'+pr.number);
    if(pr.head?.repo?.full_name!==repo)throw Error('Transcription PR from another repository: #'+pr.number);
    const id=head.slice(BATCH_BRANCH.length);
    if(!/^[a-z0-9]+-q[1-9][0-9]*-[1-9][0-9]*$/.test(id))throw Error('Unexpected transcription PR branch: '+head);
-   const url='https://api.github.com/repos/'+repo+'/contents/'+manifestPath(id)+'?ref='+encodeURIComponent(pr.head.sha);
-   const file=await api(url);
-   if(file.encoding!=='base64'||!file.content)throw Error('Missing queue manifest in PR #'+pr.number);
-   const payload=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
+   const payload=await remoteJSON(repo,manifestPath(id),pr.head.sha);
    if(payload.batchId!==id)throw Error('PR branch and batch manifest disagree in #'+pr.number);
    collected.push(payload);
   }
@@ -72,10 +81,15 @@ async function main(){
  if(!['status','next','check'].includes(command))throw Error('Use status, next, or check');
  const repo=safeRepo(argValue(args,'--repo',DEFAULT_REPO));
  const offline=args.includes('--offline');
+ if(!offline&&(process.env.HTTPS_PROXY||process.env.HTTP_PROXY||process.env.https_proxy||process.env.http_proxy)){
+  if(typeof http.setGlobalProxyFromEnv!=='function')throw Error('Proxy configured: use Node.js 24.5+ for inherited proxy support.');
+  http.setGlobalProxyFromEnv();
+ }
  const count=Number(argValue(args,'--count','10'));
+ const sourceRef=offline?null:await mainRef(repo);
  const [progress,catalog]=await Promise.all([
-  load('data/transcription-progress.json'),
-  load('data/qualifications/ap/manifest.json')
+  offline?load('data/transcription-progress.json'):remoteJSON(repo,'data/transcription-progress.json',sourceRef),
+  offline?load('data/qualifications/ap/manifest.json'):remoteJSON(repo,'data/qualifications/ap/manifest.json',sourceRef)
  ]);
  if(catalog.id!=='ap'||!Array.isArray(catalog.packs))throw Error('AP catalog not available');
  if(!catalog.packs.every(p=>p.count===80&&/^[a-z0-9]+$/.test(p.id)))throw Error('AP pack layout changed; update queue tooling');
@@ -88,13 +102,18 @@ async function main(){
   if(!manifestFile||!draftFile)throw Error('check requires --manifest and --draft');
   const [manifest,draft]=await Promise.all([load(manifestFile),load(draftFile)]);
   const info=validateManifest(manifest,known);
+  if(resolve(ROOT,draftFile)!==resolve(ROOT,info.draftFile))throw Error('Draft path does not match manifest');
   const colliding=manifests.filter(other=>other.batchId!==info.batchId&&other.questionIds.some(id=>info.questionIds.includes(id)));
   if(colliding.length)throw Error('Overlapping queue PR(s): '+colliding.map(x=>x.batchId).join(', '));
+  // A local manifest needs the same completed-ID check as a remote PR.
+  planQueue({questionIds,progress,manifests:[manifest],count});
   const result=validateDraft(manifest,draft,known);
-  console.log(JSON.stringify({ok:true,remoteVerified:!offline,...result},null,2));
+  if(!offline&&await mainRef(repo)!==sourceRef)throw Error('Main changed during queue query; retry.');
+  console.log(JSON.stringify({ok:true,remoteVerified:!offline,sourceRef,...result},null,2));
   return;
  }
- const result={...plan,remoteVerified:!offline,safeToEnqueue:!offline,repo};
+ if(!offline&&await mainRef(repo)!==sourceRef)throw Error('Main changed during queue query; retry.');
+ const result={...plan,remoteVerified:!offline,safeToEnqueue:!offline,repo,sourceRef};
  if(offline)result.warning='OFFLINE PREVIEW ONLY: open PRs were not checked. Do not enqueue based on this output.';
  if(command==='next'&&plan.nextBatchId){
   const batchId=plan.nextBatchId;
