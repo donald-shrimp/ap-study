@@ -30,13 +30,13 @@ import {esc} from '../src/utils.js';
 const status=document.querySelector('#status'),select=document.querySelector('#question'),preview=document.querySelector('#preview');
 const smaller=document.querySelector('#text-smaller'),larger=document.querySelector('#text-larger'),sizeOutput=document.querySelector('#text-size');
 const requestedSize=Number(new URL(location.href).searchParams.get('textSize'));
-let textSize=[80,90,100,110,120,130,140].includes(requestedSize)?requestedSize:100;
+let textSize=[50,60,70,80,90,100,110,120,130,140].includes(requestedSize)?requestedSize:100;
 function applyTextSize(updateURL=false){
  preview.style.setProperty('--preview-text-scale',String(textSize/100));sizeOutput.textContent=`${textSize}%`;
- smaller.disabled=textSize===80;larger.disabled=textSize===140;
+ smaller.disabled=textSize===50;larger.disabled=textSize===140;
  if(updateURL){const url=new URL(location.href);if(textSize===100)url.searchParams.delete('textSize');else url.searchParams.set('textSize',String(textSize));history.replaceState(null,'',url);}
 }
-smaller.addEventListener('click',()=>{textSize=Math.max(80,textSize-10);applyTextSize(true)});
+smaller.addEventListener('click',()=>{textSize=Math.max(50,textSize-10);applyTextSize(true)});
 larger.addEventListener('click',()=>{textSize=Math.min(140,textSize+10);applyTextSize(true)});
 document.querySelector('#text-reset').addEventListener('click',()=>{textSize=100;applyTextSize(true)});
 applyTextSize();
