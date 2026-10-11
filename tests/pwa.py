@@ -25,6 +25,10 @@ UPDATED_PACK_BODY=(json.dumps(UPDATED_PACK,ensure_ascii=False,separators=(',',':
 
 class Handler(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
+ def translate_path(self,path):
+  # Test this checkout, including worktrees whose name is not "ap-study".
+  if urlparse(path).path.startswith('/ap-study/') or urlparse(path).path=='/ap-study':path=path[len('/ap-study'): ] or '/'
+  return super().translate_path(path)
  def do_GET(self):
   path=urlparse(self.path).path
   if self.server.upgraded and path in ['/ap-study/sw.js','/ap-study/index.html','/ap-study/','/ap-study/data/qualifications/ap/manifest.json','/ap-study/data/qualifications/ap/'+FIRST_PACK['url']]:
@@ -36,7 +40,7 @@ class Handler(SimpleHTTPRequestHandler):
     body=(ROOT/filename).read_text().replace(RELEASE,NEXT_RELEASE).encode();kind='application/javascript' if filename=='sw.js' else 'text/html'
    self.send_response(200);self.send_header('Content-Type',kind+'; charset=utf-8');self.send_header('Cache-Control','no-cache');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
   else:super().do_GET()
-server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(ROOT.parent)));server.upgraded=False
+server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(ROOT)));server.upgraded=False
 threading.Thread(target=server.serve_forever,daemon=True).start()
 URL=os.environ.get('AP_STUDY_PWA_URL',f'http://127.0.0.1:{server.server_port}/ap-study/')
 with sync_playwright() as p:

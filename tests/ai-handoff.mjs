@@ -66,3 +66,9 @@ test('3つの宛先はHTTPSの固定URLのみ',()=>{
  assert.deepEqual(Object.keys(DESTINATIONS),['chatgpt','gemini','claude']);
  for(const d of Object.values(DESTINATIONS))assert.ok(d.url.startsWith('https://'));
 });
+
+test('原本と表示画像が同じならURLを重複させず、非HTTPの画像URLは使わない',()=>{
+ const value=build({...question,sourceImages:['assets/source.webp','javascript:alert(1)'],image:baseURL+'assets/source.webp'});
+ assert.match(value,/原本・図 1：https:\/\/example.com\/ap-study\/assets\/source.webp/);
+ assert.doesNotMatch(value,/原本・図 2|javascript:/);
+});
