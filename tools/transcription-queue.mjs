@@ -10,10 +10,11 @@
  *   node tools/transcription-queue.mjs next --offline  # unsafe preview ONLY
  */
 import {readFile} from 'node:fs/promises';
-import {resolve} from 'node:path';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {planQueue,validateManifest,validateDraft} from './transcription-queue-domain.mjs';
 
-const ROOT=resolve(import.meta.dirname,'..');
+const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const DEFAULT_REPO='donald-shrimp/ap-study';
 const BATCH_BRANCH='transcription/';
 const JSON_HEADERS={
