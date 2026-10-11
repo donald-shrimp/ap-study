@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>ひと問｜ChatGPTアプリ起動の動作テスト</title>
+<style>
+:root{font:16px/1.65 system-ui,-apple-system,"Noto Sans JP","Yu Gothic",sans-serif;background:#f4f6fa;color:#20344d;color-scheme:light}*{box-sizing:border-box}body{margin:0}button,textarea{font:inherit}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #c27a18;outline-offset:3px}header{background:#142d4e;color:#fff;padding:18px 16px}header>div,main,footer{max-width:680px;margin:auto}header h1{font-size:1.28rem;margin:0}main{padding:15px 13px 30px}h2{font-size:1.1rem;margin:0 0 8px}h3{font-size:1rem;margin:0 0 7px}p{margin:7px 0 12px}small,.muted{color:#596d7e}.panel{background:#fff;border:1px solid #d8e1eb;border-radius:14px;padding:16px;margin:0 0 13px}.pill{font-size:.76rem;color:#176159;font-weight:750;display:inline-block;border:1px solid #badbd3;border-radius:9px;padding:2px 8px;margin-bottom:8px}.btn{display:block;width:100%;text-align:center;min-height:50px;line-height:1.4;padding:13px;border:1px solid #abbacc;border-radius:10px;background:#fff;text-decoration:none;color:#20344d;cursor:pointer;font-weight:670;margin:10px 0}.btn.primary{background:#10756c;border-color:#10756c;color:#fff}.btn.secondary{background:#eaf3fa}.btn:disabled{opacity:.55;cursor:wait}.step{border-left:3px solid #10756c;padding-left:12px;margin-top:12px}.img{display:block;width:100%;height:auto;margin:12px 0;border-radius:8px;border:1px solid #dce3ec}.status{white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #cfdae5;background:#f5f7fa;border-radius:10px;padding:12px;margin-top:10px;font-size:.9rem}.status.good{background:#ebf7f0;border-color:#a8d7be}.status.bad{background:#fff2ed;border-color:#e4ad9c}.link{color:#126f75}.warn{background:#fff8e8;border:1px solid #e9d0a0;border-radius:9px;padding:10px 12px;font-size:.86rem}textarea{display:block;width:100%;min-height:98px;border:1px solid #b5c3cf;border-radius:9px;background:#fff;padding:10px;font-size:16px;color:#20344d;resize:vertical}label{display:block;font-weight:650;margin:10px 0 6px}details{margin-top:13px;border-top:1px solid #dde4ee;padding-top:10px}summary{cursor:pointer;font-weight:650;padding:9px 0}#preview{min-height:170px;font-size:.83rem}#diag{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f7;border-radius:8px;padding:10px;font-size:.77rem}footer{padding:0 15px 20px;color:#63768a;font-size:.78rem}
+</style>
+</head>
+<body>
+<header><div><h1>ひと問｜ChatGPTアプリ起動テスト</h1><div style="font-size:.82rem;color:#d8e9f1">既存アプリや学習履歴を変更しない検証専用モック</div></div></header>
+<main>
+<section class="panel">
+<h2>今回試したいこと</h2>
+<p>質問文をコピーしてから、<strong>インストール済みのChatGPTアプリ</strong>を起動できるか調べます。アプリが開くかどうかはAndroidの設定・ブラウザ・アプリのリンク対応に依存します。</p>
+<div class="warn">まず<strong>方法A（1タップ）</strong>を試してください。ブラウザが開いたら、このページに戻り、方法B（2タップ）を試します。アプリ側で質問文が自動入力される保証はありません。</div>
+</section>
+<section class="panel">
+<h2>サンプル問題</h2>
+<p><strong>令和4年度 春期・午前 問4</strong>（ハミング符号）</p>
+<img class="img" src="../assets/questions/r04h/r04h-q4.webp" width="1032" height="606" alt="ハミング符号の問題画像">
+<p class="muted" style="font-size:.86rem">回答例：イ ／ 正解：ア。質問文には問題文・選択肢・解説と自由質問を含めます。</p>
+<label for="detail">特に質問したいこと（空欄でもOK）</label>
+<textarea id="detail" placeholder="例：なぜX₁が誤っていると分かる？"></textarea>
+</section>
+<section class="panel">
+<div class="pill">方法A・最初に試す</div>
+<h2>1タップ：通常のアプリリンク</h2>
+<p>コピーが成功したら、同じタブで <code>https://chatgpt.com/</code> に移動します。AndroidがリンクをChatGPTアプリで開くよう設定されていれば、アプリに切り替わる可能性があります。</p>
+<button id="launch-https" class="btn primary" type="button">質問文をコピー → ChatGPTを開く ↗</button>
+<p class="muted" style="font-size:.82rem">これは前回成功したコピー方式と同じです。アプリが優先されなければブラウザ版になります。</p>
+</section>
+<section class="panel">
+<div class="pill">方法B・Aがブラウザになったら</div>
+<h2>2タップ：Androidアプリを明示的に指定</h2>
+<p>ChromeのAndroid Intentリンクを使い、ChatGPTアプリのパッケージ <code>com.openai.chatgpt</code> を指定します。コピーと外部アプリ起動を<strong>別々のタップ</strong>にすることで、ブラウザの制限を避ける実験です。</p>
+<div class="step">
+<h3>ステップ1：質問文をコピー</h3>
+<button id="copy-intent" class="btn secondary" type="button">質問文をコピーする</button>
+</div>
+<div class="step">
+<h3>ステップ2：アプリを起動</h3>
+<p class="muted" style="font-size:.84rem">コピーに成功するとボタンが表示されます。次に必ず<strong>直接タップ</strong>してください。</p>
+<a id="launch-intent" class="btn primary" href="intent://chatgpt.com/#Intent;scheme=https;package=com.openai.chatgpt;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;S.browser_fallback_url=https%3A%2F%2Fchatgpt.com%2F;end" hidden>ChatGPTアプリを開く ↗</a>
+</div>
+<p class="muted" style="font-size:.82rem">アプリを起動できなければChromeがブラウザ版へ移動することがあります。アプリのインストール状態をWebサイトから確実に判定するものではありません。</p>
+</section>
+<section class="panel">
+<h2>テスト結果・診断</h2>
+<div id="status" class="status" aria-live="polite" role="status">まだ操作していません。</div>
+<button type="button" id="copy-only" class="btn">コピーだけ試す（画面移動なし）</button>
+<details><summary>質問文を確認・手動でコピー</summary>
+<textarea id="preview" readonly aria-label="AIに渡す質問文"></textarea>
+<button type="button" id="select-text" class="btn">質問文を選択</button>
+<a class="btn secondary" href="https://chatgpt.com/">ブラウザ版ChatGPTを開く ↗</a>
+</details>
+<details><summary>端末・ブラウザの診断情報</summary>
+<div id="diag"></div>
+<button type="button" id="refresh-diag" class="btn">診断を更新</button>
+</details>
+</section>
+<p style="font-size:.88rem"><a class="link" href="./ai-handoff-same-tab-mock.html">前回成功したモックに戻る</a></p>
+</main>
+<footer>Android Chromeでの実験用ページです。アプリを強制起動できることや、入力欄への自動貼り付け・自動送信を保証するものではありません。</footer>
+<script>
+"use strict";
+(function(){
+const $=id=>document.getElementById(id);
+const dest="https://chatgpt.com/";
+const stem="ハミング符号とは，データに冗長ビットを付加して，1ビットの誤りを訂正できるようにしたものである。ここでは，X₁，X₂，X₃，X₄の4ビットから成るデータに，3ビットの冗長ビットP₃，P₂，P₁を付加したハミング符号X₁X₂X₃P₃X₄P₂P₁を考える。付加したビットP₁，P₂，P₃は，それぞれ\nX₁ ⊕ X₃ ⊕ X₄ ⊕ P₁ = 0\nX₁ ⊕ X₂ ⊕ X₄ ⊕ P₂ = 0\nX₁ ⊕ X₂ ⊕ X₃ ⊕ P₃ = 0\nとなるように決める。ここで，⊕は排他的論理和を表す。\nハミング符号1110011には1ビットの誤りが存在する。誤りビットを訂正したハミング符号はどれか。";
+function prompt(){
+return [
+"応用情報技術者試験のこの問題について、既存の解説を読んでも理解できませんでした。日本語で噛み砕いて説明してください。",
+"まず何を問う問題なのか説明し、必要な用語や略語を補足してください。考える順番を一つずつ示し、排他的論理和の計算では途中式とその意味を省略しないでください。最後に、自分で確かめる小さな問いを1つ出してください。",
+"【問題】\n令和4年度 春期 応用情報技術者試験 午前 問4\n"+stem,
+"【選択肢】\nア：0110011\nイ：1010011\nウ：1100011\nエ：1110111",
+"【正解】\nア：0110011",
+"【私の回答（サンプル）】\nイ：1010011",
+"【ひと問の解答解説】\n受信語1110011をX₁X₂X₃P₃X₄P₂P₁に割り当てると、X₁=X₂=X₃=1、P₃=X₄=0、P₂=P₁=1です。三つの検査式は全て排他的論理和が1になり、不一致です。三つ全てに含まれるビットはX₁だけなので、X₁を1から0へ反転します。0110011なら三つの式が全て0になります。",
+"【特に聞きたいこと】\n"+($("detail").value.trim()||"どこから考えればよいかを含め、基本からお願いします。"),
+"【問題画像】\nhttps://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q4.webp"
+].join("\n\n");
+}
+function refreshPrompt(){$("preview").value=prompt();}
+function diagnostics(){
+$("diag").textContent=[
+"Secure context: "+window.isSecureContext,
+"Document focus: "+document.hasFocus(),
+"Visibility: "+document.visibilityState,
+"Clipboard.writeText: "+!!navigator.clipboard?.writeText,
+"Android (UA): "+/Android/i.test(navigator.userAgent),
+"User agent: "+navigator.userAgent
+].join("\n");
+}
+function status(msg,kind){
+$("status").className="status"+(kind?" "+kind:"");
+$("status").textContent=msg;
+}
+async function copyText(){
+if(!window.isSecureContext)throw Error("HTTPSまたは安全なページではありません");
+if(!navigator.clipboard?.writeText)throw Error("このブラウザにClipboard APIがありません");
+const text=prompt();
+await navigator.clipboard.writeText(text);
+return text.length;
+}
+async function run(mode){
+$("launch-https").disabled=true;
+$("copy-intent").disabled=true;
+$("copy-only").disabled=true;
+const focusAtStart=document.hasFocus();
+try{
+const count=await copyText();
+$("launch-intent").hidden=false;
+if(mode==="https"){
+status("コピー成功（"+count+"文字）。通常のアプリリンクへ移動します。ChatGPTアプリが開くか確認してください。","good");
+window.location.assign(dest);
+}else if(mode==="intent"){
+status("コピー成功（"+count+"文字）。次に下の「ChatGPTアプリを開く」を直接タップしてください。\nアプリが開いた場合も、文章を自動入力できるとは限りません。","good");
+}else{
+status("コピー成功（"+count+"文字）。まだ画面移動していません。","good");
+}
+}catch(e){
+const name=e&&e.name||"Error",message=e&&e.message||String(e);
+status("コピー失敗。画面は移動していません。\n"+name+": "+message+"\n開始時フォーカス："+focusAtStart+"\n失敗時フォーカス："+document.hasFocus()+"\n安全なページ："+window.isSecureContext,"bad");
+$("launch-intent").hidden=true;
+}finally{
+$("launch-https").disabled=false;$("copy-intent").disabled=false;$("copy-only").disabled=false;
+diagnostics();
+}
+}
+$("detail").addEventListener("input",refreshPrompt);
+$("launch-https").addEventListener("click",()=>run("https"));
+$("copy-intent").addEventListener("click",()=>run("intent"));
+$("copy-only").addEventListener("click",()=>run("copy"));
+$("select-text").addEventListener("click",()=>{$("preview").focus();$("preview").select();});
+$("refresh-diag").addEventListener("click",diagnostics);
+document.addEventListener("visibilitychange",diagnostics);
+refreshPrompt();diagnostics();
+})();
+</script>
+</body>
+</html>
