@@ -6,6 +6,7 @@ A test-only external route prevents any real AI request or text submission.
 """
 import os
 import shutil
+import time
 from playwright.sync_api import sync_playwright
 from browser_storage import nav, state
 
@@ -32,7 +33,10 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     copied = []
-    page.expose_function("captureAICopy", lambda value: copied.append(value))
+    copy_times=[]
+    def capture_copy(value):
+        copied.append(value);copy_times.append(time.monotonic())
+    page.expose_function("captureAICopy",capture_copy)
 
     open_answered_question(page)
     page.locator('[data-action="ask-ai"]').click()
@@ -49,30 +53,25 @@ with sync_playwright() as p:
     page.locator('#ai-handoff-copy-only').click()
     page.wait_for_function('document.querySelector("#ai-handoff-status").textContent.includes("質問文をコピーしました")')
     assert page.evaluate('navigator.clipboard.readText()') == preview, "Native Chromium clipboard must receive the exact prompt"
-    assert page.url.startswith(BASE), "Copying alone must never navigate"
-    assert page.locator('#ai-handoff-open').inner_text() == 'ChatGPTを開く ↗'
 
     page.locator('[data-ai-provider="gemini"]').click()
     assert "Gemini" in page.locator("#ai-handoff-open").inner_text()
     page.locator('[data-ai-provider="chatgpt"]').click()
-    # Editing after a copy invalidates readiness; never open with stale text.
-    page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して。例も見たい')
-    preview=page.locator('#ai-handoff-preview').input_value()
-    assert page.locator('#ai-handoff-open').inner_text() == '質問文をコピー'
     page.evaluate("""() => {
         Object.defineProperty(navigator, 'clipboard', {
             configurable:true,
-            value:{writeText: async value => await window.captureAICopy(value)}
+            value:{writeText: async value => {await window.captureAICopy(value);window.aiCopiedAt=performance.now()}}
         });
     }""")
-    page.route("https://chatgpt.com/**", lambda route: route.fulfill(status=200, content_type="text/html", body="<h1>AI handoff navigation fixture</h1>"))
-    page.locator("#ai-handoff-open").click()
-    page.wait_for_function('document.querySelector("#ai-handoff-open").textContent.includes("ChatGPTを開く")')
-    assert page.url.startswith(BASE)
-    assert copied == [preview], "Copy must finish before a separate open gesture"
+    elapsed=[]
+    def reached_ai(route):
+        elapsed.append((time.monotonic()-copy_times[-1])*1000)
+        route.fulfill(status=200,content_type="text/html",body="<h1>AI handoff navigation fixture</h1>")
+    page.route("https://chatgpt.com/**",reached_ai)
     page.locator("#ai-handoff-open").click()
     page.wait_for_url("https://chatgpt.com/")
     assert copied == [preview], "Question must be copied before same-tab navigation"
+    assert elapsed[0]>=480, elapsed
     page.go_back()
     page.locator('[data-action="ask-ai"]').wait_for()
     after = state(page)
@@ -125,6 +124,21 @@ with sync_playwright() as p:
         assert other.locator('#ai-handoff-open').is_enabled()
         other.locator('#ai-handoff-close').click()
 
+    # Closing during the 500ms settlement window never causes a late redirect.
+    other.locator('[data-action="ask-ai"]').click()
+    other.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{window.aiDelayCopy=true}}})")
+    other.clock.install()
+    other.locator('#ai-handoff-open').click()
+    other.wait_for_function('Boolean(window.aiDelayCopy)')
+    assert other.url.startswith(BASE)
+    assert other.locator('#ai-handoff-open').is_disabled()
+    other.keyboard.press('Escape')
+    other.locator('[data-action="ask-ai"]').click()
+    other.clock.run_for(600)
+    assert other.url.startswith(BASE) and other.locator('#ai-handoff-dialog').is_visible()
+    other.locator('#ai-handoff-close').click()
+    other.clock.resume()
+
     # All providers use the same guarded clipboard-first route.
     other.expose_function('captureAICopy',lambda value:copied.append(value))
     for provider, url in [('gemini','https://gemini.google.com/'),('claude','https://claude.ai/')]:
@@ -133,11 +147,8 @@ with sync_playwright() as p:
         other.evaluate("""() => {Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>await window.captureAICopy(value)}})}""")
         other.route(url+'**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>Provider fixture</h1>'))
         other.locator('#ai-handoff-open').click()
-        other.wait_for_function('document.querySelector("#ai-handoff-open").textContent.includes("を開く")')
-        assert other.url.startswith(BASE)
-        other.locator('#ai-handoff-open').click()
         other.wait_for_url(url)
         other.go_back();other.locator('[data-action="ask-ai"]').wait_for()
     assert not errors, "Browser errors: " + repr(errors)
     browser.close()
-    print("AI handoff browser regression passed: native clipboard, separate copy/open gestures, edited-text invalidation, mobile, gating, all providers, return preserves records, fallback, keyboard, cancel/reopen during pending copy.")
+    print("AI handoff browser regression passed: native clipboard, mobile, gating, 500ms copy-to-navigation delay, cancellation during wait, all providers clipboard first, return preserves records, fallback, keyboard, cancel/reopen during pending copy.")
