@@ -18,6 +18,7 @@ import {loadCatalog,appRoot} from './content/catalog.js';
 import {initAccountControls,guestAttemptId} from './sync/account.js';
 import {createPlanningFeature} from './features/planning.js';
 import {createAIHandoff} from './features/ai-handoff.js';
+import {preferredQualification,rememberQualification,qualificationChooserHTML,installQualificationSwitch} from './ui/qualification-navigation.js';
 
 let store, content, qualification, account, planner, cards, learning, personal;
 let studyContext=null;
@@ -409,12 +410,14 @@ async function importGuest(uid){
 async function initialize(){
 main.inert=true;document.querySelector('.sidebar').inert=true;main.setAttribute('aria-busy','true');$('#settings-button').disabled=true;
 try {
-  content=await loadCatalog(document.documentElement.dataset.qualification);
+  const previous=preferredQualification(appRoot),choose=new URL(location.href).searchParams.has('qualifications');
+  content=await loadCatalog(document.documentElement.dataset.qualification,{preferredId:previous,choose});
   if(content.choose){
-    main.innerHTML='<section class="panel"><h1>資格を選ぶ</h1>'+content.qualifications.map(q=>`<p><a class="button secondary" href="${new URL(q.id+'/',appRoot).href}">${esc(q.name)} · ${q.count}問</a></p>`).join('')+'</section>';
+    main.innerHTML=qualificationChooserHTML(content.qualifications,appRoot,previous);
     document.querySelector('.sidebar').hidden=true;$('#settings-button').hidden=true;document.querySelector('.app-footer').hidden=true;document.title='ひと問｜資格を選ぶ';return;
   }
-  qualification=content.manifest;store=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState});
+  qualification=content.manifest;document.documentElement.dataset.qualification=qualification.id;
+  store=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState});
   document.title=`ひと問｜${qualification.shortName}の学習`;
   document.querySelector('.app-footer span').textContent=`問題出典：${qualification.sourceLabel} · ヒントと解説は独自作成`;
   document.querySelector('.app-footer a').href=new URL(qualification.sourceDoc,appRoot).href;
@@ -430,6 +433,18 @@ try {
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK)$('#save-state').textContent='保存できていません';
   await planner.bind().catch(()=>notice('計画・診断・模試の記録を保存できません。通常演習は続けられます。'));
+  rememberQualification(appRoot,qualification.id);
+  installQualificationSwitch({qualifications:content.qualifications,qualification,root:appRoot,onError:notice,beforeLeave:async()=>{
+   if(opening||recordMaintenance||planner?.isBusy()||cards?.isBusy()){notice('保存中です。少し待ってから切り替えてください。');return false;}
+   if(planner?.hasDraft()){notice('入力中の計画があります。保存するか入力を取り消してから、資格を切り替えてください。');return false;}
+   const target=store,token=navigation;main.inert=true;document.querySelector('.sidebar').inert=true;$('#settings-button').disabled=true;
+   try{
+    clearTimeout(scrollTimer);if(state.view==='study'&&current())current().scrollY=window.scrollY;
+    await personal?.flush();await planner?.store()?.flush();
+    if(target!==store||token!==navigation)return false;
+    return await save()&&target===store&&token===navigation;
+   }finally{main.inert=false;document.querySelector('.sidebar').inert=false;$('#settings-button').disabled=false;}
+  }});
   initAccountControls({getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
   if(navigator.modelContext?.registerTool) {
     navigator.modelContext.registerTool({name:'get_study_summary',description:'Read counts of local study attempts and review candidates. Does not modify study records.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify(planner.summary())}]})});

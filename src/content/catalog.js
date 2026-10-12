@@ -35,10 +35,12 @@ function assets(q) {
   return {...q, sourceImages:q.sourceImages.map(resolve), image:resolve(q.image), choices:q.choices.map(c=>({...c,image:resolve(c.image)}))};
 }
 
-export async function loadCatalog(requestedId) {
+export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}) {
   const listing = await readJSON(new URL('data/qualifications/catalog.json', appRoot));
   const qualifications = listing.value.qualifications;
   if (!Array.isArray(qualifications) || !qualifications.length) throw new Error('資格一覧を読み込めませんでした。');
+  if(choose)return {choose:true,qualifications};
+  if(!requestedId&&qualifications.some(q=>q.id===preferredId))requestedId=preferredId;
   if (!requestedId && qualifications.length > 1) return {choose:true, qualifications};
   const entry = qualifications.find(q=>q.id === (requestedId || qualifications[0].id));
   if (!entry) throw new Error('この資格はまだ公開されていません。');
