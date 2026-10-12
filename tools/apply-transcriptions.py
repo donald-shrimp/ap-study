@@ -151,6 +151,16 @@ def checked_retentions(root=ROOT, bank=None, records=None):
     return entries
 
 
+def draft_question_ids(root):
+    """Local external drafts count as pending too; review histories do not."""
+    ids=set()
+    folder=root/'data/transcription-drafts'
+    for pattern in ['transcribe_*.json','chatgpt_*.json']:
+        for file in folder.glob(pattern):
+            ids.update(r['id'] for r in json.loads(file.read_text()))
+    return ids
+
+
 def apply(root=ROOT):
     bank,records=checked_records(root)
     retentions=checked_retentions(root,bank,records)
@@ -189,9 +199,7 @@ def apply(root=ROOT):
     for pack in sorted({id.split('-q')[0] for id in ids}):
         chosen=sorted((id for id in ids if id.startswith(pack+'-q')),key=lambda id:int(id.split('-q')[1]))
         packs.append({'id':pack,'count':len(chosen),'ids':chosen})
-    draft_ids=set()
-    for file in (root/'data/transcription-drafts').glob('transcribe_*.json'):
-        draft_ids.update(r['id'] for r in json.loads(file.read_text()))
+    draft_ids=draft_question_ids(root)
     text_count=sum(bool(q['stem']) and all(c.get('text') or c.get('image') for c in q['choices']) for q in bank)
     candidates=[p['id'] for p in packs]+sorted({q['id'].split('-q')[0] for q in bank}-{p['id'] for p in packs})
     next_batch=None

@@ -19,6 +19,13 @@ assert progress['processed']==len(records)+len(retentions)
 assert progress['remainingReview']==len(bank)-progress['processed']
 assert set(progress['imageRetainedIds'])=={r['id'] for r in retentions}
 assert {id for p in progress['packs'] for id in p['ids']}=={r['id'] for r in records}
+assert progress['pendingDrafts']==len(module.draft_question_ids(ROOT)-{r['id'] for r in records}-{r['id'] for r in retentions})
+with tempfile.TemporaryDirectory() as directory:
+    root=Path(directory);folder=root/'data/transcription-drafts';folder.mkdir(parents=True)
+    (folder/'chatgpt_external.json').write_text(json.dumps([{'id':'r05a-q61'},{'id':'r05a-q62'}]))
+    (folder/'transcribe_local.json').write_text(json.dumps([{'id':'r05a-q62'},{'id':'r05a-q63'}]))
+    (folder/'review_history.json').write_text(json.dumps([{'id':'r05a-q64'}]))
+    assert module.draft_question_ids(root)=={'r05a-q61','r05a-q62','r05a-q63'}
 journals=[json.loads(path.read_text()) for path in (ROOT/'data/transcription-context-revisions').glob('*.json')]
 historical={module.digest(item['beforeQuestion']):item['beforeQuestion'] for journal in journals for item in journal['items']}
 for journal in journals:

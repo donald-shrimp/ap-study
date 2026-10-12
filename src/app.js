@@ -54,7 +54,9 @@ async function refreshOfflineQuestions() {
   if (!online) {
     const saved = await savedAssetURLs();
     offlineQuestionIds = new Set(base.filter(q => {
-      const assets = [...q.sourceImages, q.image, ...q.choices.map(c => c.image)].filter(Boolean);
+      // Grouped choices are already in q.image; hidden per-choice exports are
+      // not needed to read or answer the question offline.
+      const assets = [...q.sourceImages, q.image, ...(q.choicePresentation==='codes'?[]:q.choices.map(c => c.image))].filter(Boolean);
       return saved.has(content.packs.get(q.packId)?.url) && assets.every(src => saved.has(new URL(src, document.baseURI).href));
     }).map(q => q.id));
   }

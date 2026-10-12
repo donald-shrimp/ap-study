@@ -379,5 +379,1098 @@
     "issues": [],
     "evidence": "FPGA本文と全4択全文を照合。書換え可能不揮発性メモリ/限定した特定用途向け汎用集積回路/浮動小数点演算/基板実装後に再プログラムの語句を原文のまま保持。",
     "method": "作者とは異なる主担当/rootが、既存原本20問と図crop3点をview_imageで直接表示し全文を照合。OCR不使用。小画面・PC・操作検証は統合後に実施。"
+  },
+  {
+    "id": "r05a-q21",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "0f90fdd0c5a86ffb9eed3d476407251eabda28245ed7e8bd031acfd5a95154db",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "d81188e2c89f2a07d43a9a95d7a415d89d87d94752393cf0ea492419c1571f2f"
+    ],
+    "issues": [],
+    "evidence": "MOSトランジスタの問いと4選択肢全文を照合。pn接合の電子・正孔再結合，光電流，酸化物絶縁体，逆方向電圧の4説明を原文順に保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q22",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "07150f62c8a17d016bd32afa8615007905782a75231c4b29257223a47109a2b0",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q22-circuit.webp": "820c31d5a4ca5fe5467c79047b2b02be3d767cd60eca825ca164f6d35a4bd296"
+    },
+    "sourceImageSHA256": [
+      "b4e98086b0d770b63cd711311c03d5a93aeb138d62fbfed8d32205f4f206bd41"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "S=1，R=1，X=0，Y=1。Sを一旦0にした後，再び1に戻す。操作後のX，Yを問う。",
+      "choices": "ア X=0,Y=0／イ X=0,Y=1／ウ X=1,Y=0／エ X=1,Y=1。",
+      "figures": "S/Rの二入力，X/Yの二出力，2個のAND形ゲートと2個の否定器，相互帰還結線を原本cropで保存。交差位置を変更しない。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q22",
+        "source": "assets/questions/r05a/r05a-q22.webp",
+        "sourceImageSHA256": "b4e98086b0d770b63cd711311c03d5a93aeb138d62fbfed8d32205f4f206bd41",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q22-circuit.webp",
+        "rect": [
+          360,
+          140,
+          715,
+          331
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "820c31d5a4ca5fe5467c79047b2b02be3d767cd60eca825ca164f6d35a4bd296"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q23",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "ac61c88535cf3e3b8fff6919450a23bfaf837a5308cbf99cfe480d72e136eaf2",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q23-truth-table-and-all-circuits.webp": "678f1274d1ce08ce873a9dcd6fa75efc5101c213ce4961278ee086df479fd215",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-a.webp": "db1eef2c601e618db716d82223443418d83867e357083359529098228ca43580",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-i.webp": "00d876810a9af6892f66c656ba0426557d7a55babcb6970c730f6d7fcd7ab6c6",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-u.webp": "ff654009583cbfa4127e905515c03539c9e42f39a3f17a1eb4d3193854d2114f",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-e.webp": "6c8034eb08aa29b5b2f1cd1a7c78dcf3a37486e643928c03d8aac7676781159c"
+    },
+    "sourceImageSHA256": [
+      "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "「真理値表に示す3入力多数決回路はどれか。」のみ。",
+      "tables": "入力A/B/C，出力Y。上から000→0，001→0，010→0，011→1，100→0，101→1，110→1，111→1。",
+      "figures": "ア・イは上段，ウ・エは下段。各回路A/B/Cの入力とYの出力，全ゲートと接続点を保存。",
+      "presentation": "真理値表から全回路4択を一体imageとしcodes。独自回路説明は加えない。choices.textは空、各imageに対応する原本回路を保存し、既存validatorの非空text又はimage条件を満たす。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q23",
+        "source": "assets/questions/r05a/r05a-q23.webp",
+        "sourceImageSHA256": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q23-truth-table-and-all-circuits.webp",
+        "rect": [
+          55,
+          80,
+          947,
+          1008
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "678f1274d1ce08ce873a9dcd6fa75efc5101c213ce4961278ee086df479fd215"
+      },
+      {
+        "id": "r05a-q23",
+        "source": "assets/questions/r05a/r05a-q23.webp",
+        "sourceImageSHA256": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q23-a.webp",
+        "rect": [
+          58,
+          533,
+          471,
+          752
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "db1eef2c601e618db716d82223443418d83867e357083359529098228ca43580"
+      },
+      {
+        "id": "r05a-q23",
+        "source": "assets/questions/r05a/r05a-q23.webp",
+        "sourceImageSHA256": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q23-i.webp",
+        "rect": [
+          535,
+          529,
+          947,
+          752
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "00d876810a9af6892f66c656ba0426557d7a55babcb6970c730f6d7fcd7ab6c6"
+      },
+      {
+        "id": "r05a-q23",
+        "source": "assets/questions/r05a/r05a-q23.webp",
+        "sourceImageSHA256": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q23-u.webp",
+        "rect": [
+          58,
+          783,
+          471,
+          1008
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "ff654009583cbfa4127e905515c03539c9e42f39a3f17a1eb4d3193854d2114f"
+      },
+      {
+        "id": "r05a-q23",
+        "source": "assets/questions/r05a/r05a-q23.webp",
+        "sourceImageSHA256": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q23-e.webp",
+        "rect": [
+          535,
+          780,
+          947,
+          1008
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "6c8034eb08aa29b5b2f1cd1a7c78dcf3a37486e643928c03d8aac7676781159c"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q24",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "24042e7be1bfaeaa8379a78c72edfb3cb73e128753120edd075f1f68ed801773",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "d9e4e45810642504b994ec427effa6101c15dd4faf71cb57ab6da9441872ba16"
+    ],
+    "issues": [],
+    "evidence": "JIS X 9303-1:2006の規格名と習得性の問いを照合。4択の思い出す・図柄の詳細・以前の経験・近くの別アイコンという説明全文を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q25",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "b13ab56c4aa0c6e519269d864275d5538c0487ca0c5dc907d1eac5b49a2113f5",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "f15917d3e751e89d4f0444121abee6707a54399ebf13f6e764da55f702bf5cdd"
+    ],
+    "issues": [],
+    "evidence": "バーチャルリアリティとレンダリングの問いを照合。4択の非言語認識，描画可能な画像への変換，3次元座標一致，物理法則による変化を原文どおり保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q26",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "db3f1020d2aec0f02ddc3d474c1050c10df262c394b3021645dfff8f8198716d",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115"
+    ],
+    "issues": [],
+    "evidence": "売上表の6属性とB+木対ハッシュの問いを照合。4択の1万円以上／今月／DBで始まる／ID1001の条件と＜＞内の対象列を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q27",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "ffe643ababba1311a2ef9891fd4eee8c7d97049a9e51dd77f7b831691c916f36",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd"
+    ],
+    "issues": [],
+    "evidence": "外部キーの問いを照合。4択の候補キー参照・主キー以外・極小・組を含む集合の違いを原文どおり保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q28",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "c91dd507950d31d851ffe1c402c1606280a6cea72581cb3a5fb3cbba0d7aa8f3",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1"
+    ],
+    "issues": [],
+    "evidence": "更新可能なビューの条件と4つのSQLを照合。高額商品>1000，DISTINCT商品番号，SUMとGROUP BY，AVGの識別子・列・括弧を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q29",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "ce21ef7dba141ac71d51d26b36b80babd9a024ca4548be8d5146cbd2236e1581",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "9381436bb6ed35e5792fbf87c2d5ea2687f95e850361a05edb612fb416a1fdb8"
+    ],
+    "issues": [],
+    "evidence": "NOT EXISTS副問合せの在庫数>30及び製品番号結合を照合。製品表5行3列，在庫表8行3列の全セル，WH100〜103・AB1805〜ZZ9900と各数量／単価，全4択1/2/3/4を原本から照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q30",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "90d36be92a645684c4e85ade4164328a6034a9c87d876eeffc2c9c83fb6bc383",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q30-timeline-and-choice-table.webp": "80736c972669f64035e2c41654de5636c73a48ee67f7aecfd43aaf2283d1d9a3"
+    },
+    "sourceImageSHA256": [
+      "18d6e64073befe85fa6c8492cdb76a72aa6ea0c0a2c4e3dda29efb6dc511b335"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "再立上げ後のロールフォワードとロールバックの組合せを問う。先行条件表をMarkdown化。",
+      "tables": "処理表はT1,T2→Read 10,Write 20／T3,T4→Read 100／T5,T6→Read 20,Write 10。回答表はアT2,T5|T6／イT2,T5|T3,T6／ウT1,T2,T5|T6／エT1,T2,T5|T3,T6。",
+      "figures": "時間図から選択肢表まで一体crop。T1〜T6，チェックポイント，障害発生，時間，未コミット線とコミット済み終点●の2つの凡例を保存。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q30",
+        "source": "assets/questions/r05a/r05a-q30.webp",
+        "sourceImageSHA256": "18d6e64073befe85fa6c8492cdb76a72aa6ea0c0a2c4e3dda29efb6dc511b335",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q30-timeline-and-choice-table.webp",
+        "rect": [
+          45,
+          413,
+          921,
+          1178
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "80736c972669f64035e2c41654de5636c73a48ee67f7aecfd43aaf2283d1d9a3"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q31",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "589519194d1ae197cc005b7d2d45deca44d0e4ef164bfba1ff12e665e8db89c0",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "5fb40da758affbccbea97ce9906ac97eeccb32e8d94913fe776878b0ea423683"
+    ],
+    "issues": [],
+    "evidence": "100Mビット/秒，レコード1000バイト×1000件，伝送効率50%という全条件と4択0.02/0.08/0.16/1.6を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q32",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "7dd9d96f097a357b5dedc0f439078c04bc4f219df13fc22335757224804be759",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q32-choice-table.webp": "392f6381e90676cd6be74deec2eab54aa02ceba32f8a7fccc38a9b7638276975"
+    },
+    "sourceImageSHA256": [
+      "377befaf8472cf74b013b374f60c7f802f5958e2b22c54eb3979698c2bd6c727"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "WebサーバからPCへの応答パケットに含まれるヘッダーを書き換えるフィールドを問う。○の意味も本文に保持。",
+      "tables": "列順は宛先IPアドレス／送信元IPアドレス／宛先ポート番号／送信元ポート番号。○はア[1,2]，イ[1,3]，ウ[2,4]，エ[3,4]。空欄は空欄のまま。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q32",
+        "source": "assets/questions/r05a/r05a-q32.webp",
+        "sourceImageSHA256": "377befaf8472cf74b013b374f60c7f802f5958e2b22c54eb3979698c2bd6c727",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q32-choice-table.webp",
+        "rect": [
+          31,
+          288,
+          1016,
+          582
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "392f6381e90676cd6be74deec2eab54aa02ceba32f8a7fccc38a9b7638276975"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q33",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "56ef1ad25b68ac2dd4f4a5ee687e54679231ac2fcf36994183b102be50b03482",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "5966b73c5e9d9ae5d5077bf6f857918556bf098573bcf46f84bbd7d537957ac9"
+    ],
+    "issues": [],
+    "evidence": "TCP/IP環境のping接続確認という問いとCHAP/ICMP/SMTP/SNMPの4択を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q34",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "b5473766d87391d4c1a7f2e278b93093352774f29b431b3585c2678d11639c06",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "bb8c1c60d29a33e202521a9356fe443d942a7dde060bb472133c801afd852f78"
+    ],
+    "issues": [],
+    "evidence": "マスク255.255.252.0とIP172.30.123.45，4択の第3オクテット3/120/123/252を原本から照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q35",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "b82414906821485200444d7fe36959001f24604e2ee3a9e9f7a63fb0137682f4",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "07eb38cf77818b137061fa22b71af54f2a46d964aded54da8b97d6ca3b55571c"
+    ],
+    "issues": [],
+    "evidence": "IPv4マルチキャストの問いと全4択の文章を照合。DHCPでIP取得，ARPでMAC要求，SMTPメーリングリスト，RIP-2で隣接ルータに更新という条件を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q36",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "90ae87963956e36b9fa0d21c2ea90050b66218b77a97c21ddb27d463cb69b1cf",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "f145cbae57eff3d5b70cbbc9d45062e940feed7860746a15d267ad18c9c269a4"
+    ],
+    "issues": [],
+    "evidence": "レインボーテーブルの問いと全4択全文を照合。事前リスト使回し，総当たり，平文とハッシュ値のチェーン，個人情報の聞出しを原文順に保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q37",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "027c6a8d10ba8afca4329cf5716230c48b2935364ffb02912924259cb285b54b",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "351750ac43d3f9f46d14781f20a171d3665a3f2392fff14128a18d0c8434ba09"
+    ],
+    "issues": [],
+    "evidence": "楕円曲線暗号の問いと4択を照合。短い鍵長でRSAと同安全性，共通鍵，高速，総当たり不可能の数学的証明，復号鍵秘匿不要という原文の記述を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q38",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "590c6a9f22c120e8df1d83d016184a31549ae8d86240c9f10675ec2730379219",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q38-choice-table.webp": "3bcb142bca882a4039af3cbee00c08cd945a809edabf56cef8c64ac6aade68c9"
+    },
+    "sourceImageSHA256": [
+      "7458fba37a1a63cc91a0171ef241e0587835048e52e448e0ce6da82e2085649c"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "自社AAA.168.1.5とAAA.168.1.10，社外BBB.45.67.89とBBB.45.67.90。自社a.b.c，他社a.b.dとa.b.e。IPとドメイン名は詐称されていない。",
+      "tables": "列順は接続元IP／送信者ドメイン／受信者ドメイン。アAAA.168.1.5|a.b.c|a.b.d，イAAA.168.1.10|a.b.c|a.b.c，ウBBB.45.67.89|a.b.d|a.b.e，エBBB.45.67.90|a.b.d|a.b.c。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q38",
+        "source": "assets/questions/r05a/r05a-q38.webp",
+        "sourceImageSHA256": "7458fba37a1a63cc91a0171ef241e0587835048e52e448e0ce6da82e2085649c",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q38-choice-table.webp",
+        "rect": [
+          37,
+          388,
+          1041,
+          760
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "3bcb142bca882a4039af3cbee00c08cd945a809edabf56cef8c64ac6aade68c9"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q39",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "5b083385a23a0027d0734316ca9e4ee1fa524f427701d54ef7b4481fd40eb121",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q39-choice-table.webp": "7eef63711f2afd5adf10520d0db9852ff7c3c4bade95dc618503ae63cf8649f6"
+    },
+    "sourceImageSHA256": [
+      "34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "JPCERTコーディネーションセンター“CSIRTガイド（2021年11月30日）”。分類は六つ。コーディネーションセンターの機能とサービス対象を問う。",
+      "tables": "2列「機能」「サービス対象」，4行。ア：CSIRT間の情報連携，調整|他のCSIRT。イ：傾向分析，マルウェア解析，攻撃痕跡分析，必要に応じ注意喚起|関係組織，国又は地域。ウ：自社製品の脆弱性，パッチ作成や注意喚起|自社製品の利用者。エ：組織内CSIRTの機能の一部又は全部をサービスプロバイダとして有償請負|顧客。全文は作業JSONに原文どおり保存。",
+      "ruby": "ウ「脆弱性」の脆にルビ「ぜい」がある。選択肢一体画像に保持。Markdown textは語自体「脆弱性」を保存。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q39",
+        "source": "assets/questions/r05a/r05a-q39.webp",
+        "sourceImageSHA256": "34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q39-choice-table.webp",
+        "rect": [
+          30,
+          238,
+          1017,
+          678
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "7eef63711f2afd5adf10520d0db9852ff7c3c4bade95dc618503ae63cf8649f6"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q40",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "4530d79f9ffba85c305a6eccad9a840f558e7e78c55d4ecf7e238f5397f4cfe5",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "5b95960a87ed1489b49b808542bb47eabea0bf152c0b7380a530b70ce6d9b5be"
+    ],
+    "issues": [],
+    "evidence": "JIS Q 27000:2019の規格名，認可されていない個人・エンティティ・プロセスへの使用と開示の禁止，全4択機密性/真正性/認証/否認防止を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q41",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "80e0feb07224d00340cc1d68b9917a346312c00326411156ebfc17b8906c7ae1",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "2650f44107da0dd4190cda1522fee3e01deb227dd9fc6ff6a1ca96e6c6ed8f02"
+    ],
+    "issues": [],
+    "evidence": "IoT暗号とサイドチャネル攻撃の問いを照合。線形近似，電磁波測定，2平文と暗号文の差，復号鍵総当たりという4択全文を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q42",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "74699901526dad4acd0d12e263645e5393d5fdd97f1bc12d84c269118820a5f7",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "8cc7d4847e00eab076da7174273d997d9596c9d804f4bcff6283684d28541d17"
+    ],
+    "issues": [],
+    "evidence": "セキュアブートの問い及びBIOSパスワード，HDD/SSDパスワード，起動前署名検証，OS起動時スキャンという4択全文を照合。OS起動完了前の条件を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q43",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "58001c0e40337b2dbd595d861f77d2983c34afd3ac0637b0d24d7e6c51c26d70",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "aacb72f9de293914dd79068e75b20114b26a4f9dcedfb26e8ebb3a6438dddc54"
+    ],
+    "issues": [],
+    "evidence": "ランサムウェア被害低減という条件，WORM英語展開，RAID5と1台故障，常時レプリケーション，共有フォルダバックアップの4択を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q44",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "fc2ab5382341781d31bc6169c1ad03ca8331b0534bb8699ba6e9c0dd6a9211d4",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "a86aa2bcda6391b17efa53aa4007ad187bcf0193023d3af91aff78022b076a7f"
+    ],
+    "issues": [],
+    "evidence": "DKIM英語展開及び4択全文を照合。送信署名/受信検証，IDとパスワード認証，DNSポリシーと監視，送信メールサーバIP照合の原文を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q45",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "4ce0c2e2cb1c273855a2397d238d27cef4cffbfbbf7e988ac6fdcd0364e99363",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "3ea512d2ff947aa998409a0e489dba1deffc3c9f86cd7f6ff377bef68fb5745f"
+    ],
+    "issues": [],
+    "evidence": "DNSSECの問いと4択全文を照合。送信元ポートランダム化，再帰問合せクライアント制限，共通鍵メッセージ認証，公開鍵デジタル署名の区別を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q46",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "7599a38a76be92b6ef874712ab5e9b9b77150c5d1063a574c935b5edb9f35f00",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "f50eac9435effce779dc996dac6091428585c82e3be20fd656597942f0237821"
+    ],
+    "issues": [],
+    "evidence": "大量の問題データの応答・挙動による脆弱性テストという問いと限界値分析/実験計画法/ファジング/ロードテストを照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q47",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "89f5dd6c6618c2060e516431d1f29ddb3986ac8cdf7dc8bcf34273fc5edaa35c",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "9316d1be25b423b11fe0082118a652711c37a473bb51686962954bf9d8b565a5"
+    ],
+    "issues": [],
+    "evidence": "GUIによる部品/テンプレート組合せと必要に応じた一部ソース記述という条件，全4択継続的インテグレーション/ノーコード/プロトタイピング/ローコードを照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q48",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "37aa3be6139a8b8886438a8cd42a99912540fbe5d6dc5c926c4436a4a6008e24",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "c7511011a4a8009182750b9934d23b15f75943bb1936e10a1313c1addb1a33e2"
+    ],
+    "issues": [],
+    "evidence": "問題は未発生，仕様書とソースの不整合，リバースエンジニアリングで仕様書作成し直すという条件，全4択完全化/是正/適応/予防保守を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q49",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "cc434c42ee43a49df35c1a4db0ecf4bc14e3bbab2f72147c95cfc4d4fd6b093e",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "02253d9179e67fbfebfc0973fb5706897614ab079d54a7a1c95ada6c65b2a839"
+    ],
+    "issues": [],
+    "evidence": "アジャイル宣言の引用と別のことがらを問う条件を照合。4択全ての個人と対話/プロセスやツール，動くソフトウェア/包括的ドキュメント，顧客協調/契約交渉，変化対応/計画順守の組を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q50",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "5ceec7804f12c9074da8286dd4398a019bb6a9f7b6120d6c02585454ba7711c2",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "65f227eef0bcfeb58d684f97f2ecd30e9d1ef56cda02dc9e5b2e4f65b047a6bc"
+    ],
+    "issues": [],
+    "evidence": "組込みソフト開発IDEの問いと全4択を照合。エディター/コンパイラ/リンカ/デバッガ，専用ハードIF，ターゲットCPU評価ボード，タスクスケジューリングの記述を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q51",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "844c4757ed3c1aed0cc4ef932a0b681e42752d19a76a8b1353e2dd33e37b6927",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "fcff7e7b50477a999598621a3b86b7a2f1d2a2a71c6b96dd6827c4ff201cb29d"
+    ],
+    "issues": [],
+    "evidence": "PMBOK第7版，プロジェクト・スコープ記述書という条件と4択WBS/コスト見積額/ステークホルダー分類/プロジェクトの除外事項を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q52",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "5c265d622e106ecacdc3b3a4f37dca47aa46d5b8c1310b7995056746e0e7f375",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "2e3f9337e0d39deddd16c904486ef6ce36025859752881774db8f71c889f38b9"
+    ],
+    "issues": [
+      {
+        "finding": "EV−PVの減算が通常文字だった。",
+        "resolution": "原本の範囲を再確認してLaTeXに変更。問いの条件は不変。"
+      }
+    ],
+    "evidence": "EVM，開発途中のある時点でEV−PVが負という条件及び4択を照合。スケジュール効率/完了遅延/進捗遅延/進捗先行という原文の違いを保持。減算をLaTeX化。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q53",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "21916badacae68df8e403ab876916250d82588b2798f52db162ffd912a0985aa",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {
+      "assets/transcriptions/pr-skipped-author/r05a-q53-both-plans-and-legends.webp": "4eb944014071d2268e207ed20eb9e31630fec9a99de1e8a0368e14fae2b041cb"
+    },
+    "sourceImageSHA256": [
+      "b5c0044498e87da9659a4a3bc5ed7113a04c50e3cd9b7861ece88698b12018f0"
+    ],
+    "issues": [
+      {
+        "finding": "外部PRで画像保持が提案されていた。",
+        "resolution": "別作成担当が現行形式で文字化し，主担当が原本と完成cropの全文・表・図・4択を独立再照合。一体画像/codes等で忠実表示できるため保持対象にしない。"
+      }
+    ],
+    "evidence": {
+      "stem": "作業EをE1，E2，E3に分ける変更。図1/図2の参照を保持。",
+      "choices": "ア1／イ2／ウ3／エ4。",
+      "figures": "図1と図2を各キャプション・各凡例込みで一体crop。図1 A5,B8,C7,D7,E9,F5,G7,H4,I2。図2 A5,B8,C7,D7,E1=3,E2=4,E3=2,F5,G7,H4,I2。図2 E2先からE1先への点線ダミー作業と「ダミー作業」凡例を保存。"
+    },
+    "cropEvidence": [
+      {
+        "id": "r05a-q53",
+        "source": "assets/questions/r05a/r05a-q53.webp",
+        "sourceImageSHA256": "b5c0044498e87da9659a4a3bc5ed7113a04c50e3cd9b7861ece88698b12018f0",
+        "crop": "assets/transcriptions/pr-skipped-author/r05a-q53-both-plans-and-legends.webp",
+        "rect": [
+          98,
+          180,
+          1091,
+          814
+        ],
+        "coordinateConvention": "[left, top, right, bottom]; right/bottom exclusive; original image pixels",
+        "cropSHA256": "4eb944014071d2268e207ed20eb9e31630fec9a99de1e8a0368e14fae2b041cb"
+      }
+    ],
+    "method": "主担当/rootが原本画像7問と完成crop11枚をview_imageで実際に表示。別担当作成の本文全文，表全セル，図結線/日数/矢印と4択を照合し，各cropの原本画素一致とSHA-256を確認。"
+  },
+  {
+    "id": "r05a-q54",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "b3af73bd9f4c004df3d8c79cf57b9d705c167d7db3beab4f533276afa80b2951",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "8055afa18fe73c572140e1dd5935f7a7bfb0f5fc5f74be53dc7b9ba981ee1dcd"
+    ],
+    "issues": [],
+    "evidence": "コンティンジェンシー計画の作成プロセスという問いと4択リスクの管理/特定/評価/対応を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q55",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "31855eeba289e7c6268da3dd4352f139c1cac4fe4001537c80b7ffd77c71ff7f",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "9b70d5f873f99af40ce67a31760a2e1ad97092f4d38b7a6f5a815f3a8bce6ea0"
+    ],
+    "issues": [],
+    "evidence": "SMSの是正処置という問いと4択全文を照合。不適合原因除去/再発低減，構成情報更新，継続改善，記録分類から解決までの引用手順を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q56",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "72e35acdfd48e55746e6c58dc04061c81328afc8127470bd90d3acab2b926d48",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "d7dd618e7b9c7072b6d1125e677e9a0bf4f8988d814a01462cd9b6bca3ad026f"
+    ],
+    "issues": [],
+    "evidence": "Y社の30日・月曜4回・計画停止月曜0〜6時・毎日0〜24時・可用性99%以上・小数第1位切捨てという全条件と4択0/6/7/13を照合。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q57",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "44971a8aa163ae285cb8f6bc657578826dd244163d070b829e3b4605b85dbad3",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "5da0850fdef15868f4e7d13b709a68083aa2bdcd1e5432716078af7791c1515c"
+    ],
+    "issues": [],
+    "evidence": "フル/差分バックアップ併用という問いと4択全文を照合。差分だけ，フル復元後に差分反映，併用不可，差分の時間が長いという記述順を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q58",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "f46323025acdeb0708c72dea59170cf774a84ffb403051c329085eeb3246e7e5",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "f7838ba14af2f95be3d8fc5698cb755d1136e76264f333efe812b60da24b25ce"
+    ],
+    "issues": [],
+    "evidence": "監査人の監査調書という問いと4択全文を照合。任意，共有禁止，合理的根拠と発見事実/所見，不要備忘録の原文を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q59",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "243b0292ee1827877b475377d8678cb78295d831c4ae01d0f73d49f901acc57e",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "921f36aaf05e5ed3ff4ec940b4cb4e0cf8b08733943183625358b2dd7c30dcc0"
+    ],
+    "issues": [],
+    "evidence": "受注伝票入力の漏れと重複を確かめる監査という条件と4択全文を照合。例外取引承認，論理/書式チェック，プルーフリスト照合印，並行シミュレーションの文章を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
+  },
+  {
+    "id": "r05a-q60",
+    "status": "confirmed",
+    "reviewer": "/root",
+    "reviewedTranscriptionSHA256": "eac3908a36f0a3e802c4c0445d768707b576b096d97cb810aa8c30c56e576acc",
+    "checks": {
+      "wording": true,
+      "math": true,
+      "tables": true,
+      "figures": true,
+      "choices": true,
+      "source": true
+    },
+    "figureSHA256": {},
+    "sourceImageSHA256": [
+      "ac6b7fdc349e76908e5618eb9d1bcf2a112db3ce7c6d71b3c18b32916e624f35"
+    ],
+    "issues": [],
+    "evidence": "金融庁の実施基準令和元年とITへの対応の問い，4択全文を照合。内部限定IT環境，全般/業務処理統制，自動化有効，手作業なら直ちに不備という記述を保持。",
+    "method": "外部ChatGPT作者とは異なる主担当/rootが，既存切出し原本40問をview_imageで実際に開き，全文・条件・数字・4択を照合。OCRを正本にしない。"
   }
 ]

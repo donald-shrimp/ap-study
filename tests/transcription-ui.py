@@ -80,6 +80,21 @@ with sync_playwright() as p:
  }''')
  assert grouped_diagnostic['choices']==['ア','イ','ウ','エ'] and grouped_diagnostic['tables']==0 and not grouped_diagnostic['hint'],grouped_diagnostic
  assert grouped_diagnostic['image'].endswith('r06h-q8-figure-and-choices.webp'),grouped_diagnostic
+ # Grouped circuit choices keep per-choice crops for exports, but these hidden
+ # assets must not exclude an otherwise cached question from offline practice.
+ grouped=next((r for r in records if r.get('choicePresentation')=='codes' and any(c.get('image') for c in r['choices'])),None)
+ if grouped:
+  open_q(grouped['id']);aid=state(page)['currentId']
+  wait_for_async(page,'async()=>{await navigator.serviceWorker.ready;return Boolean(navigator.serviceWorker.controller)}')
+  visible=[*bank[grouped['id']]['sourceImages'],grouped['image']]
+  wait_for_async(page,'async()=>{const paths='+json.dumps(visible)+';return (await Promise.all(paths.map(p=>caches.match(new URL(p,document.baseURI).href)))).every(Boolean)}')
+  hidden=[c['image'] for c in grouped['choices'] if c.get('image')]
+  page.evaluate('async paths=>{for(const name of await caches.keys()){const cache=await caches.open(name);for(const p of paths)await cache.delete(new URL(p,document.baseURI).href)}}',hidden)
+  context.set_offline(True);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
+  open_q(grouped['id']);assert state(page)['currentId']!=aid
+  assert page.locator('.choices img,.choices .choice-text').count()==0 and page.locator('.question-figure img').count()==1
+  context.set_offline(False);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
+  open_q('r07h-q6')
  # Core math assets and current question/figures/original survive no network.
  wait_for_async(page,'async()=>{await navigator.serviceWorker.ready;return Boolean(navigator.serviceWorker.controller)}')
  context.set_offline(True);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for();fits()
