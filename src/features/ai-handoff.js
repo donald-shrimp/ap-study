@@ -1,4 +1,4 @@
-// AI explanation handoff. Clipboard success precedes same-tab navigation.
+// AI explanation handoff. Copy and same-tab navigation are separate gestures.
 // No AI API, study-record mutation, or unverified OCR transcription.
 const DESTINATIONS=Object.freeze({
  chatgpt:{name:'ChatGPT',url:'https://chatgpt.com/'},
@@ -59,10 +59,10 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
  const dialog=document.getElementById('ai-handoff-dialog');
  const $=id=>dialog.querySelector('#'+id);
  const buttons=[...dialog.querySelectorAll('[data-ai-provider]')];
- let provider='chatgpt',snapshot=null,operation=0,working=false;
+ let provider='chatgpt',snapshot=null,operation=0,working=false,copiedText=null;
  const controls=[...buttons,$('ai-handoff-detail'),$('ai-handoff-open'),$('ai-handoff-copy-only'),$('ai-handoff-select')];
  function busy(value){working=value;for(const control of controls)control.disabled=value;$('ai-handoff-fallback').setAttribute('aria-disabled',String(value));}
- function cancel(){operation++;snapshot=null;busy(false);}
+ function cancel(){operation++;snapshot=null;copiedText=null;busy(false);}
  async function navigate(dest,token){
   showStatus('学習記録の保存を確認しています。');
   const saved=await beforeNavigate();
@@ -84,7 +84,7 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   if(!Object.hasOwn(DESTINATIONS,name))return;
   provider=name;
   for(const b of buttons)b.setAttribute('aria-pressed',String(b.dataset.aiProvider===name));
-  $('ai-handoff-open').textContent='質問文をコピーして'+DESTINATIONS[name].name+'を開く ↗';
+  $('ai-handoff-open').textContent=copiedText!==null?DESTINATIONS[name].name+'を開く ↗':'質問文をコピー';
   $('ai-handoff-fallback').textContent=DESTINATIONS[name].name+'を開く ↗';
   $('ai-handoff-fallback').href=DESTINATIONS[name].url;
  }
@@ -98,7 +98,7 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   if(!attempt||!['correct','assisted','incorrect','revealed'].includes(attempt.status))return false;
   const question=getQuestion(attempt);
   if(!question)return false;
-  operation++;busy(false);
+  operation++;copiedText=null;busy(false);
   snapshot=structuredClone({question,attempt,qualification:getQualification(),baseURL:getBaseURL()});
   $('ai-handoff-detail').value='';
   $('ai-handoff-status').hidden=true;
@@ -125,21 +125,19 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
  $('ai-handoff-close').addEventListener('click',()=>{cancel();dialog.close();});
  dialog.addEventListener('cancel',cancel);
  dialog.addEventListener('close',()=>{if(!dialog.open)cancel();});
- $('ai-handoff-detail').addEventListener('input',refresh);
+ $('ai-handoff-detail').addEventListener('input',()=>{
+  copiedText=null;refresh();setProvider(provider);
+  $('ai-handoff-status').hidden=true;$('ai-handoff-manual').hidden=true;
+ });
  $('ai-handoff-open').addEventListener('click',async()=>{
-  const token=++operation,dest=DESTINATIONS[provider],text=prompt();
-  let copied=false;
+  if(working)return;
+  if(copiedText!==prompt()){await copy();return;}
+  const token=++operation,dest=DESTINATIONS[provider];
   busy(true);$('ai-handoff-manual').hidden=true;$('ai-handoff-status').hidden=true;
   try{
-   if(!navigator.clipboard?.writeText)throw Error('このブラウザでは自動コピーが利用できません。');
-   await navigator.clipboard.writeText(text);
-   if(token!==operation||!dialog.open)return;
-   copied=true;
-   // Android Chrome/PWA: do not call window.open before copying; the tested
-   // behavior navigates this tab only after clipboard success.
    await navigate(dest,token);
   }catch(error){
-   if(token===operation&&dialog.open)showManual((copied?'質問文はコピー済みです。自動移動を止めました。':'自動コピーに失敗しました。')+' '+(error?.name||'Error')+'：'+(error?.message||String(error))+' 下の質問文を手動でコピーできます。');
+   if(token===operation&&dialog.open)showManual('質問文はコピー済みです。移動を止めました。 '+(error?.message||String(error)));
   }finally{if(token===operation)busy(false);}
  });
  $('ai-handoff-fallback').addEventListener('click',async event=>{
@@ -149,16 +147,19 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   catch(error){if(token===operation&&dialog.open)showManual('自動移動を止めました。'+(error?.message||String(error)));}
   finally{if(token===operation)busy(false);}
  });
- $('ai-handoff-copy-only').addEventListener('click',async()=>{
-  const token=++operation,text=prompt();busy(true);$('ai-handoff-status').hidden=true;
+ async function copy(){
+  if(working)return;
+  const token=++operation,text=prompt();copiedText=null;busy(true);$('ai-handoff-status').hidden=true;$('ai-handoff-manual').hidden=true;
   try{
-   if(!navigator.clipboard?.writeText)throw Error('自動コピー不可');
+   if(!navigator.clipboard?.writeText)throw Error('このブラウザでは自動コピーが利用できません。');
    await navigator.clipboard.writeText(text);
    if(token!==operation||!dialog.open)return;
-   showStatus('質問文をコピーしました。AIに貼り付けてください。');
+   copiedText=text;setProvider(provider);
+   showStatus('質問文をコピーしました。「'+DESTINATIONS[provider].name+'を開く」を押して、AIに貼り付けてください。');
   }catch(error){if(token===operation&&dialog.open)showManual('コピーできませんでした。下の質問文を選択してコピーしてください。（'+(error?.name||'Error')+'）');}
   finally{if(token===operation)busy(false);}
- });
+ }
+ $('ai-handoff-copy-only').addEventListener('click',copy);
  $('ai-handoff-select').addEventListener('click',()=>{$('ai-handoff-manual-text').focus();$('ai-handoff-manual-text').select();});
  return {open};
 }

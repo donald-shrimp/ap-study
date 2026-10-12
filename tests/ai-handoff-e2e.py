@@ -27,7 +27,7 @@ def open_answered_question(page):
 
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=shutil.which("chromium"), headless=True, args=["--no-sandbox"])
-    context = browser.new_context(viewport={"width": 390, "height": 844})
+    context = browser.new_context(viewport={"width": 390, "height": 844},is_mobile=True,has_touch=True,user_agent='Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36')
     page = context.new_page()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
@@ -44,14 +44,21 @@ with sync_playwright() as p:
     assert "【正解】" in preview
     assert "【私の回答】" in preview
     context.grant_permissions(['clipboard-read','clipboard-write'],origin=page.evaluate('location.origin'))
+    page.evaluate('navigator.clipboard.writeText("前回コピーした別の文章")')
     page.locator('#ai-handoff-prompt-details>summary').click()
     page.locator('#ai-handoff-copy-only').click()
     page.wait_for_function('document.querySelector("#ai-handoff-status").textContent.includes("質問文をコピーしました")')
     assert page.evaluate('navigator.clipboard.readText()') == preview, "Native Chromium clipboard must receive the exact prompt"
+    assert page.url.startswith(BASE), "Copying alone must never navigate"
+    assert page.locator('#ai-handoff-open').inner_text() == 'ChatGPTを開く ↗'
 
     page.locator('[data-ai-provider="gemini"]').click()
     assert "Gemini" in page.locator("#ai-handoff-open").inner_text()
     page.locator('[data-ai-provider="chatgpt"]').click()
+    # Editing after a copy invalidates readiness; never open with stale text.
+    page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して。例も見たい')
+    preview=page.locator('#ai-handoff-preview').input_value()
+    assert page.locator('#ai-handoff-open').inner_text() == '質問文をコピー'
     page.evaluate("""() => {
         Object.defineProperty(navigator, 'clipboard', {
             configurable:true,
@@ -59,6 +66,10 @@ with sync_playwright() as p:
         });
     }""")
     page.route("https://chatgpt.com/**", lambda route: route.fulfill(status=200, content_type="text/html", body="<h1>AI handoff navigation fixture</h1>"))
+    page.locator("#ai-handoff-open").click()
+    page.wait_for_function('document.querySelector("#ai-handoff-open").textContent.includes("ChatGPTを開く")')
+    assert page.url.startswith(BASE)
+    assert copied == [preview], "Copy must finish before a separate open gesture"
     page.locator("#ai-handoff-open").click()
     page.wait_for_url("https://chatgpt.com/")
     assert copied == [preview], "Question must be copied before same-tab navigation"
@@ -122,8 +133,11 @@ with sync_playwright() as p:
         other.evaluate("""() => {Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>await window.captureAICopy(value)}})}""")
         other.route(url+'**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>Provider fixture</h1>'))
         other.locator('#ai-handoff-open').click()
+        other.wait_for_function('document.querySelector("#ai-handoff-open").textContent.includes("を開く")')
+        assert other.url.startswith(BASE)
+        other.locator('#ai-handoff-open').click()
         other.wait_for_url(url)
         other.go_back();other.locator('[data-action="ask-ai"]').wait_for()
     assert not errors, "Browser errors: " + repr(errors)
     browser.close()
-    print("AI handoff browser regression passed: native clipboard, mobile, gating, all providers clipboard first, return preserves records, fallback, keyboard, cancel/reopen during pending copy.")
+    print("AI handoff browser regression passed: native clipboard, separate copy/open gestures, edited-text invalidation, mobile, gating, all providers, return preserves records, fallback, keyboard, cancel/reopen during pending copy.")
