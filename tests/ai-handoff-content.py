@@ -28,9 +28,10 @@ with sync_playwright() as p:
   for width in [320,390,1280]:
    page.set_viewport_size({'width':width,'height':844});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1');assert page.locator('#ai-handoff-dialog').evaluate('(e)=>e.scrollWidth<=e.clientWidth+1')
   close();after=state(page);a=next(a for a in after['attempts'] if a['id']==attempt['id']);assert all(a[k]==attempt[k] for k in ['status','selected','hintCount','hintsBeforeAnswer','hintEvents','questionSnapshot','materialSnapshot'])
- page.set_viewport_size({'width':390,'height':844});open_q('r05h-q1');page.locator('[data-action=reveal]').click();text=ask();assert '原文の文字起こしは確認できていません' in text
- assert not bank['r05h-q1'].get('searchText') or bank['r05h-q1']['searchText'] not in text
- base=page.evaluate('document.baseURI');expected={urljoin(base,s) for s in bank['r05h-q1']['sourceImages']}
+ image_only=next(q['id'] for q in bank.values() if not q.get('stem'))
+ page.set_viewport_size({'width':390,'height':844});open_q(image_only);page.locator('[data-action=reveal]').click();text=ask();assert '原文の文字起こしは確認できていません' in text
+ assert not bank[image_only].get('searchText') or bank[image_only]['searchText'] not in text
+ base=page.evaluate('document.baseURI');expected={urljoin(base,s) for s in bank[image_only]['sourceImages']}
  assert expected <= set(page.locator('#ai-handoff-images a').evaluate_all('(links)=>links.map(a=>a.href)'));close()
  page.goto(urljoin(BASE,'ap/'));page.wait_for_function('document.querySelector("#main")?.getAttribute("aria-busy")==="false"');open_q('r05a-q17');page.locator('[data-action=reveal]').click();text=ask()
  assert bank['r05a-q17']['choices'][0]['text'] in text

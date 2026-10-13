@@ -48,11 +48,25 @@ with sync_playwright() as p:
     assert "【正解】" in preview
     assert "【私の回答】" in preview
     context.grant_permissions(['clipboard-read','clipboard-write'],origin=page.evaluate('location.origin'))
+    context.route('https://chatgpt.com/**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>AI handoff navigation fixture</h1>'))
     page.evaluate('navigator.clipboard.writeText("前回コピーした別の文章")')
     page.locator('#ai-handoff-prompt-details>summary').click()
     page.locator('#ai-handoff-copy-only').click()
     page.wait_for_function('document.querySelector("#ai-handoff-status").textContent.includes("質問文をコピーしました")')
     assert page.evaluate('navigator.clipboard.readText()') == preview, "Native Chromium clipboard must receive the exact prompt"
+
+    # Native copying must finish while the study tab is focused, before opening.
+    page.evaluate('navigator.clipboard.writeText("前回の文章を再設定")')
+    with context.expect_page() as opened:
+        page.locator('#ai-handoff-open').click()
+    ai=opened.value;ai.wait_for_url('https://chatgpt.com/')
+    assert ai.evaluate('window.opener===null'), 'External AI must not control the original tab'
+    assert page.url.startswith(BASE) and not page.locator('#ai-handoff-dialog').is_visible()
+    page.bring_to_front()
+    assert page.evaluate('navigator.clipboard.readText()')==preview
+    assert state(page)['currentId']==before['currentId']
+    ai.close();page.locator('[data-action="ask-ai"]').click()
+    page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して')
 
     page.locator('[data-ai-provider="gemini"]').click()
     assert "Gemini" in page.locator("#ai-handoff-open").inner_text()
@@ -67,12 +81,14 @@ with sync_playwright() as p:
     def reached_ai(route):
         elapsed.append((time.monotonic()-copy_times[-1])*1000)
         route.fulfill(status=200,content_type="text/html",body="<h1>AI handoff navigation fixture</h1>")
-    page.route("https://chatgpt.com/**",reached_ai)
-    page.locator("#ai-handoff-open").click()
-    page.wait_for_url("https://chatgpt.com/")
-    assert copied == [preview], "Question must be copied before same-tab navigation"
+    context.route("https://chatgpt.com/**",reached_ai)
+    with context.expect_page() as opened:
+        page.locator("#ai-handoff-open").click()
+    ai=opened.value;ai.wait_for_url('https://chatgpt.com/')
+    assert copied == [preview], "Question must be copied before new-tab navigation"
     assert elapsed[0]>=480, elapsed
-    page.go_back()
+    assert page.url.startswith(BASE)
+    ai.close();page.reload()
     page.locator('[data-action="ask-ai"]').wait_for()
     after = state(page)
     assert after['currentId'] == before['currentId']
@@ -93,6 +109,7 @@ with sync_playwright() as p:
     }""")
     other.locator("#ai-handoff-open").click()
     other.locator("#ai-handoff-manual:visible").wait_for()
+    assert len(context.pages)==2, 'Rejected copy must not open any tab'
     assert other.url.startswith(BASE)
     assert "NotAllowedError" in other.locator("#ai-handoff-status").inner_text()
     assert "【問題文】" in other.locator("#ai-handoff-manual-text").input_value()
@@ -104,7 +121,6 @@ with sync_playwright() as p:
 
     # Permission prompts can settle after the dialog has been dismissed.
     # Neither closing nor opening a new dialog may cause a late navigation.
-    other.route("https://chatgpt.com/**", lambda route: route.fulfill(status=200, content_type="text/html", body="<h1>Unexpected late navigation</h1>"))
     for dismiss in ['escape', 'close']:
         other.locator('[data-action="ask-ai"]').click()
         other.evaluate("""() => {
@@ -120,6 +136,7 @@ with sync_playwright() as p:
         other.locator('[data-action="ask-ai"]').click()
         other.evaluate('async()=>{window.finishAICopy();await new Promise(r=>setTimeout(r,100))}')
         assert other.url.startswith(BASE), "Canceled clipboard operation must not navigate later"
+        assert len(context.pages)==2, 'Canceled pending copy must never open a tab'
         assert other.locator('#ai-handoff-dialog').is_visible()
         assert other.locator('#ai-handoff-open').is_enabled()
         other.locator('#ai-handoff-close').click()
@@ -136,6 +153,7 @@ with sync_playwright() as p:
     other.locator('[data-action="ask-ai"]').click()
     other.clock.run_for(600)
     assert other.url.startswith(BASE) and other.locator('#ai-handoff-dialog').is_visible()
+    assert len(context.pages)==2, 'Cancel during settlement must close the reserved tab'
     other.locator('#ai-handoff-close').click()
     other.clock.resume()
 
@@ -145,10 +163,37 @@ with sync_playwright() as p:
         other.locator('[data-action="ask-ai"]').click()
         other.locator(f'[data-ai-provider="{provider}"]').click()
         other.evaluate("""() => {Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>await window.captureAICopy(value)}})}""")
-        other.route(url+'**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>Provider fixture</h1>'))
+        context.route(url+'**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>Provider fixture</h1>'))
+        with context.expect_page() as opened:
+            other.locator('#ai-handoff-open').click()
+        ai=opened.value;ai.wait_for_url(url)
+        assert ai.evaluate('window.opener===null') and other.url.startswith(BASE)
+        ai.close();other.locator('[data-action="ask-ai"]').wait_for()
+
+    # A browser blocking asynchronous popups must never replace the study tab.
+    other.locator('[data-action="ask-ai"]').click()
+    other.locator('[data-ai-provider="chatgpt"]').click()
+    other.evaluate('window.realOpen=window.open;window.open=()=>null')
+    other.locator('#ai-handoff-open').click()
+    other.locator('#ai-handoff-manual:visible').wait_for()
+    assert '別タブを開けません' in other.locator('#ai-handoff-status').inner_text()
+    assert other.url.startswith(BASE) and len(context.pages)==2
+    other.evaluate('()=>{window.open=window.realOpen}')
+    with context.expect_page() as opened:
+        other.locator('#ai-handoff-fallback').click()
+    ai=opened.value;ai.wait_for_url('https://chatgpt.com/');ai.close()
+    assert other.url.startswith(BASE)
+
+    # Closing the reserved tab is cancellation, rather than a silent redirect.
+    other.locator('[data-action="ask-ai"]').click()
+    other.clock.install()
+    with context.expect_page() as opened:
         other.locator('#ai-handoff-open').click()
-        other.wait_for_url(url)
-        other.go_back();other.locator('[data-action="ask-ai"]').wait_for()
+    opened.value.close();other.clock.run_for(600)
+    other.locator('#ai-handoff-manual:visible').wait_for()
+    assert 'タブが閉じられました' in other.locator('#ai-handoff-status').inner_text()
+    assert other.url.startswith(BASE) and len(context.pages)==2
+    other.clock.resume()
     assert not errors, "Browser errors: " + repr(errors)
     browser.close()
-    print("AI handoff browser regression passed: native clipboard, mobile, gating, 500ms copy-to-navigation delay, cancellation during wait, all providers clipboard first, return preserves records, fallback, keyboard, cancel/reopen during pending copy.")
+    print("AI handoff browser regression passed: native clipboard before new tab, opener detached, mobile, gating, 500ms copy-to-navigation delay, cancellation closes reserved tab, all providers, original tab retains records after reload, popup blocked/manual retry, keyboard, cancel/reopen during pending copy, user closes tab.")

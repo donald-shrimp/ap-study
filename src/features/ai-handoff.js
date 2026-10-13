@@ -60,11 +60,26 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
  const dialog=document.getElementById('ai-handoff-dialog');
  const $=id=>dialog.querySelector('#'+id);
  const buttons=[...dialog.querySelectorAll('[data-ai-provider]')];
- let provider='chatgpt',snapshot=null,operation=0,working=false;
+ let provider='chatgpt',snapshot=null,operation=0,working=false,pendingTab=null;
  const controls=[...buttons,$('ai-handoff-detail'),$('ai-handoff-open'),$('ai-handoff-copy-only'),$('ai-handoff-select')];
  function busy(value){working=value;for(const control of controls)control.disabled=value;$('ai-handoff-fallback').setAttribute('aria-disabled',String(value));}
- function cancel(){operation++;snapshot=null;busy(false);}
- async function navigate(dest,token,afterCopy=false){
+ function closePendingTab(){
+  const tab=pendingTab;pendingTab=null;
+  if(tab)try{tab.close();}catch{}
+ }
+ function cancel(){operation++;snapshot=null;closePendingTab();busy(false);}
+ function reserveTab(){
+  // Copy first while this document has focus. Reserve before awaiting saving
+  // or the settlement timer, while the click's user activation is still live.
+  const tab=window.open('about:blank','_blank');
+  if(!tab)throw Error('別タブを開けませんでした。下の「AIを開く」ボタンからもう一度お試しください。');
+  pendingTab=tab;
+  tab.opener=null;
+  tab.document.title='AIを開いています';
+  tab.document.body.textContent='AIを開いています…';
+  return tab;
+ }
+ async function navigate(dest,token,tab,afterCopy=false){
   const settled=afterCopy?new Promise(resolve=>setTimeout(resolve,CLIPBOARD_SETTLE_MS)):Promise.resolve();
   showStatus((afterCopy?'質問文をコピーしました。':'')+'学習記録の保存を確認しています。');
   const saved=await beforeNavigate();
@@ -72,7 +87,10 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   if(!saved)throw Error('学習記録を保存できなかったため、移動を止めました。問題画面の「表示・データ」から記録を書き出してください。');
   await settled;
   if(token!==operation||!dialog.open)return;
-  window.location.assign(dest.url);
+  if(tab.closed)throw Error('AIのタブが閉じられました。もう一度開いてください。');
+  tab.location.replace(dest.url);
+  pendingTab=null;
+  dialog.close();
  }
  function prompt(){
   if(!snapshot)throw Error('質問する問題を開き直してください。');
@@ -140,18 +158,17 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
    await navigator.clipboard.writeText(text);
    if(token!==operation||!dialog.open)return;
    copied=true;
-   // Android Chrome/PWA: do not call window.open before copying; the tested
-   // behavior navigates this tab only after clipboard success.
-   await navigate(dest,token,true);
+   await navigate(dest,token,reserveTab(),true);
   }catch(error){
+   if(token===operation)closePendingTab();
    if(token===operation&&dialog.open)showManual((copied?'質問文はコピー済みです。自動移動を止めました。':'自動コピーに失敗しました。')+' '+(error?.name||'Error')+'：'+(error?.message||String(error))+' 下の質問文を手動でコピーできます。');
   }finally{if(token===operation)busy(false);}
  });
  $('ai-handoff-fallback').addEventListener('click',async event=>{
   event.preventDefault();if(working)return;
   const token=++operation,dest=DESTINATIONS[provider];busy(true);
-  try{await navigate(dest,token);}
-  catch(error){if(token===operation&&dialog.open)showManual('自動移動を止めました。'+(error?.message||String(error)));}
+  try{await navigate(dest,token,reserveTab());}
+  catch(error){if(token===operation){closePendingTab();if(dialog.open)showManual('自動移動を止めました。'+(error?.message||String(error)));}}
   finally{if(token===operation)busy(false);}
  });
  $('ai-handoff-copy-only').addEventListener('click',async()=>{
