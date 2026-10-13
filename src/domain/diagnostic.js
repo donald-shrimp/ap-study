@@ -1,92 +1,47 @@
-import {createAttempt,selectAnswer,finalizeAttempt} from './study.js';
 import {examPartsFor} from './planning.js';
-export const DIAGNOSTIC_SIZE=30;
-export const DIAGNOSTIC_BLUEPRINT_VERSION=2;
-export const diagnosticFamily=q=>q.diagnosticOnly?q.parentQuestionId:q.id;
-const shuffle=(items,random)=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-const policyFor=qualification=>({sampling:'topic-round-robin',defaultVariantLimit:1,variantLimits:structuredClone(qualification.diagnosticBlueprint?.variantLimits||{}),preference:['unseen-derived','unseen-original','seen-derived','seen-original']});
-export function selectDiagnostic(questions,qualification,attempts=[],random=Math.random,variants=[]){
- const supported=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
- const originals=questions.filter(q=>!q.diagnosticOnly&&(!q.qualificationId||q.qualificationId===qualification.id)&&supported.has(q.examPartId||qualification.defaultExamPartId||'objective'));
- const byId=new Map(originals.map(q=>[q.id,q])),validTopics=new Set(qualification.topics.map(t=>t.id));
- if(new Set(variants.map(q=>q.id)).size!==variants.length||variants.some(q=>!q.diagnosticOnly||q.qualificationId&&q.qualificationId!==qualification.id||!byId.has(q.parentQuestionId)||byId.has(q.id)||q.topicId!==byId.get(q.parentQuestionId).topicId||(q.examPartId||qualification.defaultExamPartId||'objective')!==(byId.get(q.parentQuestionId).examPartId||qualification.defaultExamPartId||'objective')))throw new Error('診断専用教材の元問題・分野・パートを確認できません。');
- const eligible=[...originals,...variants];
- if(eligible.length<DIAGNOSTIC_SIZE)throw new Error('診断には対象パートの問題が30問以上必要です。通常学習は利用できます。');
- if(eligible.some(q=>!validTopics.has(q.topicId))||new Set(eligible.map(diagnosticFamily)).size<DIAGNOSTIC_SIZE)throw new Error('診断には元問題が異なる30問以上必要です。通常学習は利用できます。');
- const seen=new Set(attempts.map(a=>a.questionId));
- const priority=q=>(seen.has(q.id)?2:0)+(q.diagnosticOnly?0:1);
- const topics=shuffle(qualification.topics.map(t=>t.id),random),groups=new Map(topics.map(id=>[id,shuffle(eligible.filter(q=>q.topicId===id),random).sort((a,b)=>priority(a)-priority(b))]));
- const result=[],families=new Set(),variantCounts=new Map(),limits=qualification.diagnosticBlueprint?.variantLimits||{};
- for(const [topic,limit] of Object.entries(limits))if(!validTopics.has(topic)||!Number.isInteger(limit)||limit<0||limit>DIAGNOSTIC_SIZE)throw new Error('診断の派生問題配分を確認できません。');
- while(result.length<DIAGNOSTIC_SIZE){let added=false;for(const topic of topics){const group=groups.get(topic),limit=limits[topic]??1,index=group.findIndex(q=>!families.has(diagnosticFamily(q))&&(!q.diagnosticOnly||(variantCounts.get(topic)||0)<limit));if(index!==-1){const [q]=group.splice(index,1);families.add(diagnosticFamily(q));if(q.diagnosticOnly)variantCounts.set(topic,(variantCounts.get(topic)||0)+1);result.push(q);added=true;if(result.length===DIAGNOSTIC_SIZE)break;}}if(!added)throw new Error('診断の30問を分野別に用意できません。通常学習は利用できます。');}
+import {canUseQuestion,questionFamily,questionOrigin,validQuestionPolicy} from './content-policy.js';
+import {diagnosticPolicy,diagnosticSize,validDiagnosticBlueprint,MIN_DIAGNOSTIC_SIZE,DEFAULT_DIAGNOSTIC_SIZE} from './assessment-policy.js';
+import {shuffle,weightedQuotas} from './assessment-sampling.js';
+import {createAssessment,validateAssessment} from './assessment.js';
+export {createAssessment,validateAssessment};
+export {submitAssessment as submitDiagnostic,finishAssessment as finishDiagnostic,assessmentAttempts as diagnosticAttempts,assessmentExposure as diagnosticExposure,assessmentResult as diagnosticResult,assessmentSlots as diagnosticSlots} from './assessment.js';
+export const DIAGNOSTIC_SIZE=DEFAULT_DIAGNOSTIC_SIZE;
+export const DIAGNOSTIC_BLUEPRINT_VERSION=4;
+export const diagnosticFamily=questionFamily;
+
+export function diagnosticPool(questions,qualification,extras=[]){
+ const parts=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
+ const all=new Map([...questions,...extras].map(q=>[q.id,q]));
+ if(all.size!==questions.length+extras.length||extras.some(q=>canUseQuestion(q,'practice')||q.qualificationId&&q.qualificationId!==qualification.id||!validQuestionPolicy(q)))throw new Error('受験専用教材の用途・資格を確認できません。');
+ for(const q of extras){if(questionOrigin(q)==='derived'){const parent=all.get(q.parentQuestionId);if(!parent||parent.topicId!==q.topicId||(parent.examPartId||qualification.defaultExamPartId||'objective')!==(q.examPartId||qualification.defaultExamPartId||'objective')||questionOrigin(parent)==='derived'||questionFamily(q)!==questionFamily(parent))throw new Error('派生教材の母問題・分野・パートを確認できません。');}}
+ const scopes=new Map();for(const q of all.values()){const key=questionFamily(q),scope=[q.topicId,q.examPartId||qualification.defaultExamPartId||'objective'].join(':');if(scopes.has(key)&&scopes.get(key)!==scope)throw new Error('同じ内容の問題の分野・パートが一致しません。');scopes.set(key,scope);}
+ return [...questions,...extras].filter(q=>q.enrichment!=='topic-guide'&&canUseQuestion(q,'diagnostic')&&(!q.qualificationId||q.qualificationId===qualification.id)&&parts.has(q.examPartId||qualification.defaultExamPartId||'objective'));
+}
+export function selectDiagnostic(questions,qualification,attempts=[],random=Math.random,extras=[]){
+ // Direct domain callers may use the 30-question default; the UI requires an
+ // explicit blueprint to enable diagnostics for a qualification.
+ const configured=qualification.diagnosticBlueprint?qualification:{...qualification,diagnosticBlueprint:{size:DEFAULT_DIAGNOSTIC_SIZE}};
+ const size=diagnosticSize(configured),policy=diagnosticPolicy(configured);
+ if(!validDiagnosticBlueprint(configured))throw new Error('診断の出題設定を確認できません。');
+ const eligible=diagnosticPool(questions,configured,extras),validTopics=new Set(configured.topics.map(t=>t.id));
+ if(eligible.some(q=>!validTopics.has(q.topicId))||new Set(eligible.map(questionFamily)).size<size)throw new Error(`診断には内容が異なる${size}問以上必要です。通常学習は利用できます。`);
+ const seen=new Set(attempts.map(a=>a.questionId)),priority=q=>(seen.has(q.id)?2:0)+(canUseQuestion(q,'practice')?1:0);
+ const topics=shuffle(configured.topics.map(t=>t.id),random),groups=new Map(topics.map(id=>[id,shuffle(eligible.filter(q=>q.topicId===id),random).sort((a,b)=>priority(a)-priority(b))]));
+ const result=[],families=new Set(),derivedCounts=new Map(),counts=new Map(),quotas=policy.sampling==='topic-weighted'?weightedQuotas(policy.weights,size):null;
+ while(result.length<size){let added=false;for(const topic of topics){
+  if(quotas&&(counts.get(topic)||0)>=(quotas.get(topic)||0))continue;
+  const group=groups.get(topic),limit=Object.hasOwn(policy.variantLimits,topic)?policy.variantLimits[topic]:policy.defaultVariantLimit;
+  const index=group.findIndex(q=>!families.has(questionFamily(q))&&(questionOrigin(q)!=='derived'||(derivedCounts.get(topic)||0)<limit));
+  if(index!==-1){const [q]=group.splice(index,1);families.add(questionFamily(q));if(questionOrigin(q)==='derived')derivedCounts.set(topic,(derivedCounts.get(topic)||0)+1);counts.set(topic,(counts.get(topic)||0)+1);result.push(q);added=true;if(result.length===size)break;}
+ }if(!added)throw new Error(`設定した配分で診断の${size}問を用意できません。通常学習は利用できます。`);}
  return shuffle(result,random);
 }
 export function createDiagnostic(questions,qualification,attempts=[],catalogRevision=''){
- if(questions.length!==DIAGNOSTIC_SIZE||new Set(questions.map(q=>q.id)).size!==DIAGNOSTIC_SIZE||new Set(questions.map(diagnosticFamily)).size!==DIAGNOSTIC_SIZE)throw new Error('診断は元問題が異なる30問で開始してください。');
+ const size=diagnosticSize(qualification)||DEFAULT_DIAGNOSTIC_SIZE;
+ if(questions.length!==size||new Set(questions.map(q=>q.id)).size!==size||new Set(questions.map(questionFamily)).size!==size)throw new Error(`診断は内容が異なる${size}問で開始してください。`);
  return createAssessment(questions,qualification,attempts,catalogRevision);
 }
-export function createAssessment(questions,qualification,attempts=[],catalogRevision=''){
- const startedAt=new Date().toISOString(),seen=new Set(attempts.map(a=>a.questionId));
- return {id:crypto.randomUUID(),qualificationId:qualification.id,version:1,blueprintVersion:Math.max(DIAGNOSTIC_BLUEPRINT_VERSION,qualification.diagnosticBlueprint?.version||DIAGNOSTIC_BLUEPRINT_VERSION),selectionPolicy:policyFor(qualification),catalogRevision,assistance:'none',feedback:'after-finish',size:questions.length,status:'in_progress',startedAt,completedAt:null,currentIndex:0,currentChoiceId:null,responses:{},slots:questions.map(q=>({id:crypto.randomUUID(),attempt:createAttempt(q,{at:startedAt,diagnostic:true}),previouslySeen:seen.has(q.id),kind:q.diagnosticOnly?'derived':'original',parentQuestionId:q.diagnosticOnly?q.parentQuestionId:null,parentPreviouslySeen:q.diagnosticOnly?seen.has(q.parentQuestionId):null}))};
-}
-export function submitDiagnostic(run,choiceId){
- if(run.status!=='in_progress')throw new Error('終了した診断には回答できません。');
- const slot=run.slots[run.currentIndex];if(Object.hasOwn(run.responses,slot.id))throw new Error('この回答は確定しています。');
- if(choiceId!==null&&!slot.attempt.questionSnapshot.choices.some(c=>c.id===choiceId))throw new Error('有効な選択肢を選んでください。');
- run.responses[slot.id]=choiceId;run.currentChoiceId=null;
- if(run.currentIndex<run.size-1)run.currentIndex++;else finishDiagnostic(run);
- return run;
-}
-export function finishDiagnostic(run){
- if(run.status!=='in_progress')return run;
- run.status=Object.keys(run.responses).length===run.size?'completed':'ended_early';run.completedAt=new Date().toISOString();run.currentChoiceId=null;return run;
-}
-// Results are derived from the finalized run, rather than duplicated in the
-// attempt outbox. A run has one canonical slot per question across devices.
-const resultsCache=new WeakMap();
-export function diagnosticAttempts(run){
- if(run.status==='in_progress')return [];
- if(resultsCache.has(run))return resultsCache.get(run);
- const result=run.slots.filter(s=>Object.hasOwn(run.responses,s.id)&&run.responses[s.id]!==null).map(s=>{const a=structuredClone(s.attempt);a.id=s.id;selectAnswer(a,a.questionSnapshot.choices.findIndex(c=>c.id===run.responses[s.id]));finalizeAttempt(a,run.responses[s.id]===a.questionSnapshot.correctChoiceId?'correct':'incorrect',run.completedAt);a.diagnosticRunId=run.id;return a;});
- resultsCache.set(run,result);return result;
-}
-export function diagnosticExposure(run){
- return run.slots.filter((slot,i)=>i<=run.currentIndex||Object.hasOwn(run.responses,slot.id)).map(slot=>({questionId:slot.attempt.questionId,qualificationId:run.qualificationId,exposedAt:run.completedAt||run.startedAt}));
-}
-export function diagnosticResult(run,qualification){
- const attempts=diagnosticAttempts(run),correct=attempts.filter(a=>a.status==='correct').length;
- const sourceCounts=slots=>['original','derived'].map(kind=>{const selected=slots.filter(s=>(s.kind||(s.attempt.questionSnapshot.diagnosticOnly?'derived':'original'))===kind),ids=new Set(selected.map(s=>s.id)),answered=attempts.filter(a=>ids.has(a.id));return {kind,selected:selected.length,answered:answered.length,correct:answered.filter(a=>a.status==='correct').length,previouslySeen:selected.filter(s=>s.previouslySeen).length,parentPreviouslySeen:selected.filter(s=>s.parentPreviouslySeen).length};});
- const byId=new Map(attempts.map(a=>[a.id,a]));
- const items=run.slots.map((s,i)=>{const q=s.attempt.questionSnapshot;return {questionId:q.id,questionVersion:q.version,topicId:q.topicId,kind:s.kind||'original',parentQuestionId:s.parentQuestionId||null,previouslySeen:s.previouslySeen,parentPreviouslySeen:s.parentPreviouslySeen??null,exposed:i<=run.currentIndex||Object.hasOwn(run.responses,s.id),skipped:Object.hasOwn(run.responses,s.id)&&run.responses[s.id]===null,outcome:byId.get(s.id)?.status||'unanswered'};});
- return {id:run.id,status:run.status,completedAt:run.completedAt,size:run.size,answered:attempts.length,correct,incorrect:attempts.length-correct,unanswered:run.size-attempts.length,exposed:diagnosticExposure(run).length,skipped:Object.values(run.responses).filter(value=>value===null).length,correctRate:attempts.length?correct/attempts.length:null,previouslySeen:run.slots.filter(s=>s.previouslySeen).length,assistance:'none',blueprintVersion:run.blueprintVersion,selectionPolicy:run.selectionPolicy?structuredClone(run.selectionPolicy):null,catalogRevision:run.catalogRevision,composition:sourceCounts(run.slots),items,topics:qualification.topics.map(t=>{const rows=attempts.filter(a=>a.questionSnapshot.topicId===t.id);return {topicId:t.id,label:t.name,answered:rows.length,correct:rows.filter(a=>a.status==='correct').length,composition:sourceCounts(run.slots.filter(s=>s.attempt.questionSnapshot.topicId===t.id))};})};
-}
-export function diagnosticSlots(run){
- return run.slots.map((s,i)=>{const answered=Object.hasOwn(run.responses,s.id),choice=answered?run.responses[s.id]:i===run.currentIndex&&run.status==='in_progress'?run.currentChoiceId:null;return {...s,selectedChoiceId:choice,submitted:answered&&choice!==null,skipped:answered&&choice===null};});
-}
 export function validateDiagnostic(run,qualification,validateAttempt){
- if(run?.mode!==undefined)throw new Error('模試は診断とは別に保存してください。');
- return validateAssessment(run,qualification,validateAttempt,{size:30,diagnostic:true});
-}
-export function validateAssessment(run,qualification,validateAttempt,{size,diagnostic=false}){
- const fail=()=>{throw new Error('診断データの形式を確認できません。記録は変更していません。');};
- const ids=new Set(),questions=new Set(),families=new Set();
- if(!run||run.version!==1||run.qualificationId!==qualification.id||typeof run.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(run.id)||run.size!==size||!Array.isArray(run.slots)||run.slots.length!==size||run.assistance!=='none'||run.feedback!=='after-finish'||!['in_progress','completed','ended_early'].includes(run.status)||!Number.isInteger(run.currentIndex)||run.currentIndex<0||run.currentIndex>=size||typeof run.startedAt!=='string'||Number.isNaN(Date.parse(run.startedAt))||run.status==='in_progress'&&run.completedAt!==null||run.status!=='in_progress'&&Number.isNaN(Date.parse(run.completedAt))||!run.responses||typeof run.responses!=='object'||Array.isArray(run.responses))fail();
- if(!Number.isInteger(run.blueprintVersion)||run.blueprintVersion<1||run.blueprintVersion>10000||typeof run.catalogRevision!=='string'||run.catalogRevision.length>200)fail();
- if(diagnostic&&run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){const p=run.selectionPolicy;if(!p||Object.keys(p).some(k=>!['sampling','defaultVariantLimit','variantLimits','preference'].includes(k))||p.sampling!=='topic-round-robin'||p.defaultVariantLimit!==1||JSON.stringify(p.preference)!==JSON.stringify(policyFor(qualification).preference)||!p.variantLimits||typeof p.variantLimits!=='object'||Array.isArray(p.variantLimits)||Object.entries(p.variantLimits).some(([id,n])=>!qualification.topics.some(t=>t.id===id)||!Number.isInteger(n)||n<0||n>30))fail();}
- for(const slot of run.slots){
-  if(!slot||typeof slot.previouslySeen!=='boolean'||typeof slot.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(slot.id)||ids.has(slot.id))fail();ids.add(slot.id);
-  const a=slot.attempt;validateAttempt(a);
-  const q=a.questionSnapshot,family=diagnosticFamily(q);
-  if(!qualification.topics.some(t=>t.id===q.topicId)||!examPartsFor(qualification).some(p=>p.practiceAvailable&&p.id===(q.examPartId||qualification.defaultExamPartId||'objective')))fail();
-  if(!diagnostic||run.blueprintVersion>=DIAGNOSTIC_BLUEPRINT_VERSION){if(slot.kind!==(q.diagnosticOnly?'derived':'original')||slot.parentQuestionId!==(q.diagnosticOnly?q.parentQuestionId:null)||(q.diagnosticOnly?typeof slot.parentPreviouslySeen!=='boolean':slot.parentPreviouslySeen!==null)||families.has(family))fail();families.add(family);}else if(q.diagnosticOnly)fail();
-  if(a.status!=='in_progress'||a.hintCount!==0||a.hintEvents.length||a.answerViewedBefore||a.selected!==null||questions.has(a.questionId)||a.qualificationId!==qualification.id)fail();questions.add(a.questionId);
-  if(Object.hasOwn(run.responses,slot.id)&&run.responses[slot.id]!==null&&!a.questionSnapshot.choices.some(c=>c.id===run.responses[slot.id]))fail();
- }
- if(diagnostic&&run.selectionPolicy&&qualification.topics.some(t=>run.slots.filter(s=>s.kind==='derived'&&s.attempt.questionSnapshot.topicId===t.id).length>(run.selectionPolicy.variantLimits[t.id]??1)))fail();
- if(Object.keys(run.responses).some(id=>!ids.has(id)))fail();
- if(run.currentChoiceId!==null&&!run.slots[run.currentIndex].attempt.questionSnapshot.choices.some(c=>c.id===run.currentChoiceId))fail();
- for(let i=0;i<run.currentIndex;i++)if(!Object.hasOwn(run.responses,run.slots[i].id))fail();
- if(run.status==='in_progress'&&run.slots.slice(run.currentIndex).some(s=>Object.hasOwn(run.responses,s.id)))fail();
- if(run.status==='completed'&&Object.keys(run.responses).length!==size)fail();
- return structuredClone(run);
+ if(!run||run.mode!==undefined||run.size<MIN_DIAGNOSTIC_SIZE)throw new Error('この診断の形式を確認できません。');
+ return validateAssessment(run,qualification,validateAttempt,{size:run.size,diagnostic:true});
 }

@@ -1,4 +1,5 @@
 import {contentError} from './errors.js';
+import {canUseQuestion,validQuestionPolicy,questionOrigin} from '../domain/content-policy.js';
 export const appRoot = new URL('../../', import.meta.url);
 export const contentCacheName = `hitomon-${appRoot.pathname}content`;
 
@@ -67,11 +68,13 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}
     }).catch(error=>{learningPromises.delete(key);throw error;}));
     return learningPromises.get(key);
   }
-  function loadDiagnostics(){
-    const entry=manifest.diagnostic;
+  function loadAssessments(){
+    const entry=manifest.assessment;
     if(!entry)return Promise.resolve([]);
     if(!diagnosticsPromise)diagnosticsPromise=readJSON(new URL(entry.url,manifestURL),entry.sha256).then(({value})=>{
-      if(!Array.isArray(value)||value.length!==entry.count||entry.reviewed!==entry.count||new Set(value.map(q=>q.id)).size!==value.length||value.some(q=>!q.diagnosticOnly||byId.has(q.id)||!byId.has(q.parentQuestionId)||q.qualificationId!==manifest.id||q.enrichment!=='reviewed'))throw contentError('診断専用教材の確認に失敗しました。通常学習は利用できます。','診断の教材');
+      if(!Array.isArray(value))throw contentError('受験専用教材の形式を確認できません。','受験の教材');
+      const all=new Map([...questions,...value].map(q=>[q.id,q]));
+      if(!Array.isArray(value)||value.length!==entry.count||entry.reviewed!==entry.count||new Set(value.map(q=>q.id)).size!==value.length||value.some(q=>canUseQuestion(q,'practice')||!validQuestionPolicy(q)||byId.has(q.id)||questionOrigin(q)==='derived'&&!all.has(q.parentQuestionId)||q.qualificationId!==manifest.id||q.enrichment!=='reviewed'))throw contentError('受験専用教材の確認に失敗しました。通常学習は利用できます。','受験の教材');
       return value.map(assets);
     }).catch(error=>{diagnosticsPromise=null;throw error;});
     return diagnosticsPromise;
@@ -99,7 +102,7 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}
     await loading.get(pack.id);
     return question;
   }
-  return {manifest, qualifications, questions, packs, ensure, loadDiagnostics, loadMockSets, online:loaded.online && index.online,
+  return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, online:loaded.online && index.online,
     loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }

@@ -23,12 +23,12 @@
     <p class="lead">先に共通仕様を整え、その後で教材を追加する。</p>
     <p>問題数・出題配分・教材の扱いを共通部品へ整理します。資格切替・記録保存の基盤を活かし、<strong>開いてすぐ1問</strong>という体験を残します。</p>
   </header>
-  <p><span class="pill">調査・設計まで</span><span class="pill">教材はまだ未作成</span><span class="pill">アプリは未変更</span></p>
+  <p><span class="pill">共通基盤を実装</span><span class="pill">教材はまだ未作成</span><span class="pill">APの教材・配分を維持</span></p>
   <nav aria-label="読む場所を選ぶ"><a href="#common">先に共通整備</a><a href="#about">どんな資格？</a><a href="#scope">日本語の対象範囲</a><a href="#content">問題の作り方</a><a href="#ui">画面</a><a href="#phases">進める順番</a><a href="#technical">実装の注意点</a></nav>
 
   <section id="common">
     <h2>資格を増やす前に、共通部品を整える</h2>
-    <p>前の案で後段に置いた共通化を、先に進める順へ見直しました。今残っているAP向けの固定条件を、資格定義・試験セットの設定へ移します。</p>
+    <p>前の案で後段に置いた共通化を、先に進める順へ見直しました。AP向けの固定条件を、資格定義・試験セットの設定へ移しました。<a href="common-foundation.html">実装した共通仕様を見る</a>。</p>
     <ol class="steps"><li><strong>診断・模試の問題数と出題方針</strong>30問・80問の固定を外し、問題数・分野配分・専用教材の優先度を設定で扱う。APの設定は現在のまま。</li><li><strong>教材の用途と由来を分ける</strong>通常・診断・模試の用途と、公式原本・独自・派生の由来を区別。独自問題は母問題なしで診断・模試へ登録できるようにする。</li><li><strong>版・言語・レビューの共通形式</strong>対象範囲、出典、確認日と教材ハッシュを揃える。対象版が変わっても、過去の記録や受験途中の問題を読み替えない。</li><li><strong>画面・生成・保存・同期を揃える</strong>同じ共通仕様で検証する。資格追加は定義と教材の追加で済む形へ。必要な入口だけを表示する。</li></ol>
     <div class="callout"><p><strong>共通整備の完了条件</strong></p><p>APの30問診断・80問模試・学習記録を保ち、架空資格で異なる問題数、母問題のない独自問題、別の分野配分、資格間の記録分離を確認できること。</p></div>
     <details><summary>今回の共通整備に含める範囲</summary><p>診断・模試の実行部は共通の受験セッションとして整理し、支援の可否・採点のタイミング・固定順／抽出をモード設定から扱います。普段の学習、診断、模試の集計と表示上の区別は保ちます。</p><p>開始時に問題・対象版・配分・問題数を固定します。生成・読込・保存検証・Firestore Rulesも揃え、上限や回答範囲の検査を維持します。</p><p>複数選択や並べ替えなどは、表示・採点・保存を共通側で追加できる契約を整理します。今回は必要性が未確定の形式をすべて作るところまでは含めません。</p></details>
@@ -89,8 +89,8 @@
       <tr><td>資格切替</td><td>定義と問題JSONから<code>/ab730/</code>を生成。共通画面を使う。</td></tr>
       <tr><td>問題形式</td><td>現在は単一選択。初期版は4択。複数選択などは必要性を確認してから対応。</td></tr>
       <tr><td>保存・同期</td><td>ユーザー×資格で分離済み。第二資格の通常学習だけなら資格専用のRulesを追加する必要はない。</td></tr>
-      <tr><td>診断</td><td>30問固定・分野巡回。専用問題の既定上限は分野ごと1問。3分野なら最大3問、4分野なら最大4問なので、そのまま流用しない。</td></tr>
-      <tr><td>模試</td><td>80問固定・母問題必須を資格追加前に整理。問題数を可変にし、独自問題も直接登録できる共通形式へ。</td></tr>
+      <tr><td>診断</td><td>30〜200問・均等／重み付き配分を実装。独立した独自問題は派生上限の対象外。APの派生上限は維持。</td></tr>
+      <tr><td>模試</td><td>セットごと1〜200問。母問題のない独自問題も直接登録可能。APの固定80問は維持。</td></tr>
       <tr><td>集計</td><td>公式の700点をアプリの正答率70%に換算しない。母数と、自力／支援付き／解答閲覧を保つ。</td></tr>
     </tbody></table>
     <details><summary>診断の配分をどう扱うか</summary><p>資格追加前に均等／重み付き配分と教材用途を共通機能として整えます。AB-730の診断は専用教材の独立確認が揃ってから、その設定で公開します。AP側の上限は変えません。</p><p>実際の派生問題や共通シナリオがある場合は、資格内の問題ファミリーで重複を避けます。独立した問題は自分自身のIDで区別し、架空の母問題を付けません。対象版と配分は開始時に固定します。</p></details>
@@ -112,7 +112,7 @@
     <ul class="sources"><li><a href="https://learn.microsoft.com/ja-jp/credentials/certifications/ai-business-professional/" target="_blank" rel="noopener">資格概要・日本語対応・試験時間</a></li><li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-730" target="_blank" rel="noopener">英語ガイド・10月20日の改訂範囲</a></li><li><a href="https://learn.microsoft.com/ja-jp/credentials/certifications/resources/study-guides/ab-730" target="_blank" rel="noopener">日本語ガイド</a></li><li><a href="https://learn.microsoft.com/ja-jp/training/courses/ab-730t00" target="_blank" rel="noopener">公式トレーニング</a> · <a href="https://learn.microsoft.com/ja-jp/training/paths/transform-business-workflows-with-ai/" target="_blank" rel="noopener">ラーニングパス</a></li><li><a href="https://learn.microsoft.com/en-us/credentials/certifications/practice-assessments-for-microsoft-certifications" target="_blank" rel="noopener">無料Practice Assessment</a></li><li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exam-scoring-reports" target="_blank" rel="noopener">公式の採点方法</a></li></ul>
     <p class="muted">本番の問題数・形式の内訳、日本語版改訂の適用日は今回確定できていません。出題範囲の詳細は教材を作る時点で再確認します。受験日は未登録です。</p>
   </section>
-  <p class="footer">調査対象：main <code>0840ade</code>。2026-10-13、共通整備を先に進める順へ改訂。共通改修・教材作成は未着手。このページは学習記録を読み書きしません。<a href="../">ひと問へ戻る</a></p>
+  <p class="footer">調査対象：main <code>0840ade</code>。2026-10-13、共通整備を先に進める順へ改訂。共通基盤を実装・検証済み。AB-730教材は未着手。<a href="common-foundation.html">共通整備の結果</a>。このページは学習記録を読み書きしません。<a href="../">ひと問へ戻る</a></p>
 </main>
 </body>
 </html>

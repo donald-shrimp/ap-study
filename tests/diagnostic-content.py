@@ -6,10 +6,10 @@ from diagnostic_fixtures import builder,prepare,write,review
 with tempfile.TemporaryDirectory(prefix='hitomon-diagnostic-content-') as directory:
  root=Path(directory);config,variants=prepare(root);path=root/'content/fixture'
  manifest=json.loads((root/'data/qualifications/fixture/manifest.json').read_text())
- assert manifest['count']==40 and manifest['diagnostic']['count']==12
+ assert manifest['count']==40 and manifest['assessment']['count']==12
  index=(root/'data/qualifications/fixture'/manifest['index']['url']).read_bytes()
- assert not any(q.get('diagnosticOnly') for q in json.loads(index))
- assert len(json.loads((root/'data/qualifications/fixture'/manifest['diagnostic']['url']).read_text()))==12
+ assert not any('practice' not in q.get('uses', ['practice']) for q in json.loads(index))
+ assert len(json.loads((root/'data/qualifications/fixture'/manifest['assessment']['url']).read_text()))==12
  # Each invalid authored object is rehashed to ensure semantic validation, not
  # simply a stale hash, rejects the change.
  for change in [lambda q:q.update(parentQuestionId='missing'),lambda q:q.update(topicId='two'),lambda q:q.update(examPartId='missing'),lambda q:q.update(diagnosticOnly=False),lambda q:q.update(enrichment='topic-guide'),lambda q:q.update(choiceReasons=['','']),lambda q:q.update(adaptation='')]:

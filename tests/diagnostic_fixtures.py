@@ -18,7 +18,10 @@ def question(i,variant=False):
     return q
 
 def review(q):
-    return {'questionId':q['id'],'version':q['version'],'sha256':builder.diagnostic_digest(q),'author':'synthetic-author','reviewer':'synthetic-reviewer','checkedAt':'2026-10-07T00:00:00Z','checks':{k:True for k in ['source','answer','calculation','choices','wording']},'notes':'テスト専用の合成確認記録。公開教材の確認実績ではない。'}
+    cfg={'id':'fixture','topics':[{'id':id,'name':f'分野{i+1}'} for i,id in enumerate(['one','two','three'])]}
+    try:final_hash=builder.diagnostic_digest(builder.normalize(q,cfg))
+    except ValueError:final_hash='0'*64
+    return {'questionId':q['id'],'version':q['version'],'sha256':builder.diagnostic_digest(q),'normalizedSha256':final_hash,'author':'synthetic-author','reviewer':'synthetic-reviewer','checkedAt':'2026-10-07T00:00:00Z','checks':{k:True for k in ['source','answer','calculation','choices','wording']},'notes':'テスト専用の合成確認記録。公開教材の確認実績ではない。'}
 
 def prepare(root):
     for name in ['src','assets/icons','assets/vendor','templates','schemas']:
@@ -27,9 +30,12 @@ def prepare(root):
         shutil.copy(ROOT/name,root/name)
     path=root/'content'/'fixture';path.mkdir(parents=True)
     write(root/'content/qualifications.json',{'qualifications':['fixture']})
-    config={'id':'fixture','name':'診断専用の検証資格','shortName':'検証','questionSource':'content/fixture/questions.json','diagnosticQuestionSource':'content/fixture/diagnostic-questions.json','diagnosticReviewSource':'content/fixture/diagnostic-reviews.json','topics':[{'id':id,'name':f'分野{i+1}'} for i,id in enumerate(['one','two','three'])],'sourceLabel':'検証','sourceDoc':'docs/SOURCES.md','sourceDescription':'公開しない検証用教材','diagnosticBlueprint':{'version':2,'size':30,'sampling':'topic-round-robin','assistance':'none','variantLimits':{}}}
+    config={'id':'fixture','name':'診断専用の検証資格','shortName':'検証','questionSource':'content/fixture/questions.json','assessmentQuestionSource':'content/fixture/diagnostic-questions.json','assessmentReviewSource':'content/fixture/diagnostic-reviews.json','topics':[{'id':id,'name':f'分野{i+1}'} for i,id in enumerate(['one','two','three'])],'sourceLabel':'検証','sourceDoc':'docs/SOURCES.md','sourceDescription':'公開しない検証用教材','diagnosticBlueprint':{'version':2,'size':30,'sampling':'topic-round-robin','assistance':'none','variantLimits':{}}}
     write(path/'qualification.json',config)
     write(path/'questions.json',[question(i) for i in range(40)])
+    config['questionReviewSource']='content/fixture/question-reviews.json'
+    write(path/'qualification.json',config)
+    write(path/'question-reviews.json',[review(question(i)) for i in range(40)])
     variants=[question(i,True) for i in range(12)]
     write(path/'diagnostic-questions.json',variants);write(path/'diagnostic-reviews.json',[review(q) for q in variants])
     builder.build(root)

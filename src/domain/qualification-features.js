@@ -1,10 +1,14 @@
-import {DIAGNOSTIC_SIZE} from './diagnostic.js';
+import {diagnosticSize,validDiagnosticBlueprint} from './assessment-policy.js';
+import {canUseQuestion,questionFamily} from './content-policy.js';
+import {selectDiagnostic} from './diagnostic.js';
 import {examPartsFor} from './planning.js';
 
-// A blueprint opts a qualification into the currently supported 30-question
+// A blueprint opts a qualification into the configured question count
 // diagnostic. A small initial question pack must still be usable for practice.
 export function canStartDiagnostic(qualification,questions) {
- if(qualification.diagnosticBlueprint?.size!==DIAGNOSTIC_SIZE)return false;
+ if(!validDiagnosticBlueprint(qualification))return false;
  const parts=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
- return new Set(questions.filter(q=>!q.diagnosticOnly&&(!q.qualificationId||q.qualificationId===qualification.id)&&parts.has(q.examPartId||qualification.defaultExamPartId||'objective')).map(q=>q.id)).size>=DIAGNOSTIC_SIZE;
+ const normal=questions.filter(q=>canUseQuestion(q,'practice')),extra=qualification.assessment?.index||[],pool=[...normal,...extra];
+ if(new Set(pool.filter(q=>canUseQuestion(q,'diagnostic')&&(!q.qualificationId||q.qualificationId===qualification.id)&&parts.has(q.examPartId||qualification.defaultExamPartId||'objective')).map(questionFamily)).size<diagnosticSize(qualification))return false;
+ try{selectDiagnostic(normal,qualification,[],()=>.5,extra);return true;}catch{return false;}
 }

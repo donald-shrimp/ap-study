@@ -51,6 +51,9 @@ export function buildAIPrompt({question:q,attempt:a,qualification,detail='',base
   '【特に聞きたいこと】',
   nonempty(detail)||'どこから考えればよいかを含め、基本からお願いします。'
  ];
+ if(q.syllabus)prompt.push('【教材の対象範囲】',[nonempty(q.syllabus.label),nonempty(q.syllabus.language)].filter(Boolean).join(' · '));
+ if(q.objectivesSnapshot?.length)prompt.push('【学習する項目】',q.objectivesSnapshot.map(o=>nonempty(o.label)).filter(Boolean).join('、'));
+ if(q.sourceRefs?.length)prompt.push('【参考資料】',[...new Set(q.sourceRefs.map(src=>urlFor(src,baseURL)).filter(src=>src&&src!==urlFor(q.questionUrl,baseURL)))].join('\n'));
  if(nonempty(q.questionUrl))prompt.push('【公式問題・出典】',urlFor(q.questionUrl,baseURL));
  if(images.length)prompt.push('【問題画像・図】',images.join('\n'),'※画像URLがAIから参照できない場合は、元の学習画面から画像を添付してください。');
  return prompt.join('\n\n');

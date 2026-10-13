@@ -56,7 +56,7 @@ with tempfile.TemporaryDirectory() as name:
  invalid=copy.deepcopy(context);invalid['items'][0]['sourceHash']='0'*64;rejects('studyContextSource',invalid)
  invalid=copy.deepcopy(context);invalid['items'][0]=None;rejects('studyContextSource',invalid)
  invalid=copy.deepcopy(deck);invalid['cards'][0]['relatedQuestionIds']=['missing'];rejects('flashcardSource',invalid)
- invalid=copy.deepcopy(deck);invalid['cards'][0]['topicId']='database';rejects('flashcardSource',invalid)
+ invalid=copy.deepcopy(deck);invalid['cards'][0]['topicId']='unregistered';rejects('flashcardSource',invalid)
  invalid=copy.deepcopy(deck);invalid['cards'][0]['relatedQuestionIds']=[{}];rejects('flashcardSource',invalid)
  invalid=copy.deepcopy(context);invalid['items'].pop();rejects('studyContextSource',invalid)
  invalid=copy.deepcopy(context);invalid['completedExamIds']=['missing'];rejects('studyContextSource',invalid)

@@ -151,7 +151,7 @@ test('単語帳の再開位置は端末別文書で更新し、別端末IDへの
 
 test('固定80問の模試は本人だけ保存・再開でき、問題順・確定回答・終了後を変更できない',async()=>{
  const sets=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.mockSets.url,import.meta.url))).sets;
- const variants=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.diagnostic.url,import.meta.url)));
+ const variants=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.assessment.url,import.meta.url)));
  const run=createMock(sets[0],variants,qualification),db=env.authenticatedContext('mock-user').firestore(),ref=doc(db,resourcePath('mock-user',run.id));
  await assertSucceeds(setDoc(ref,resourceEnvelope('mock',run)));
  for(const client of [env.authenticatedContext('mock-other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(doc(client,resourcePath('mock-user',run.id))));await assertFails(setDoc(doc(client,resourcePath('mock-user',run.id)),resourceEnvelope('mock',run,2)));}
@@ -175,4 +175,20 @@ test('計画履歴は本人のみ保存・取得し、同じIDの内容変更・
  await assertFails(deleteDoc(ref));
  for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(doc(client,resourcePath('history',r.id))));await assertFails(setDoc(doc(client,resourcePath('history',r.id)),resourceEnvelope('planRevision',r,3)));}
  for(const patch of [{id:'other'},{qualificationId:'other'},{origin:'invalid'},{extra:true},{previousId:'plan--invalid'},{savedAt:'invalid'}])await assertFails(setDoc(doc(db,resourcePath('history','plan--invalid')),resourceEnvelope('planRevision',{...r,id:'plan--invalid',...patch})));
+});
+
+
+test('親なし独自40問の診断・模試を別資格で保存でき、用途とサイズ改変を拒否する',async()=>{
+ const qual={...qualification,id:'synthetic',diagnosticBlueprint:{size:40}};
+ const independent=questions.slice(0,40).map((source,i)=>{const q={...structuredClone(source),id:'independent-'+i,qualificationId:qual.id,sourceKind:'authored',uses:['diagnostic','mock']};delete q.parentQuestionId;delete q.diagnosticOnly;return q;});
+ const db=env.authenticatedContext('generic').firestore();
+ const ref=(id)=>doc(db,`users/generic/qualifications/synthetic/resources/${id}`);
+ const run=createDiagnostic(independent,qual);await assertSucceeds(setDoc(ref(run.id),resourceEnvelope('diagnostic',run)));
+ submitDiagnostic(run,run.slots[0].attempt.questionSnapshot.correctChoiceId);await assertSucceeds(setDoc(ref(run.id),resourceEnvelope('diagnostic',run,2)));
+ const resized=structuredClone(run);resized.size=41;await assertFails(setDoc(ref(run.id),resourceEnvelope('diagnostic',resized,3)));
+ const set={id:'fixed40',label:'非公開テスト',version:1,status:'ready',size:40,slots:independent.map((q,i)=>({number:i+1,questionId:q.id,topicId:q.topicId}))};
+ const mock=createMock(set,independent,qual);await assertSucceeds(setDoc(ref(mock.id),resourceEnvelope('mock',mock)));
+ submitDiagnostic(mock,mock.slots[0].attempt.questionSnapshot.correctChoiceId);await assertSucceeds(setDoc(ref(mock.id),resourceEnvelope('mock',mock,2)));
+ const foreign=env.authenticatedContext('other').firestore();await assertFails(getDoc(doc(foreign,ref(mock.id).path)));
+ const a=createAttempt({...independent[0],uses:['practice'],hints:[]});await assertSucceeds(setDoc(doc(db,path('generic',a.id,'synthetic')),envelope(a)));a.questionSnapshot.uses=['diagnostic','mock'];await assertFails(setDoc(doc(db,path('generic',a.id,'synthetic')),envelope(a,2)));
 });

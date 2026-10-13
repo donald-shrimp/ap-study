@@ -3,7 +3,9 @@ export function validateDeck(deck,qualification,questions){
  const byId=new Map(questions.map(q=>[q.id,q]));
  if(!deck||deck.format!=='hitomon-flashcards'||deck.version!==1||deck.qualificationId!==qualification.id||!Array.isArray(deck.cards)||deck.cards.length>10000)throw new Error('単語帳の形式が正しくありません。');
  const seen=new Set();for(const c of deck.cards){
-  if(!c||typeof c!=='object'||!id(c.id)||seen.has(c.id)||!Number.isInteger(c.version)||c.version<1||!qualification.topics.some(t=>t.id===c.topicId)||!['front','back','sourceNote'].every(k=>typeof c[k]==='string'&&c[k].length>0&&c[k].length<=(k==='back'?1000:k==='front'?200:500))||!Array.isArray(c.relatedQuestionIds)||!c.relatedQuestionIds.length||c.relatedQuestionIds.length>10||new Set(c.relatedQuestionIds).size!==c.relatedQuestionIds.length||c.relatedQuestionIds.some(ref=>!byId.has(ref)||byId.get(ref).topicId!==c.topicId))throw new Error('単語帳の内容を確認できません。');
+  if(!c||typeof c!=='object')throw new Error('単語帳の内容を確認できません。');
+  c.sourceNote??='';c.relatedQuestionIds??=[];
+  if(!id(c.id)||seen.has(c.id)||!Number.isInteger(c.version)||c.version<1||!qualification.topics.some(t=>t.id===c.topicId)||!['front','back','sourceNote'].every(k=>typeof c[k]==='string'&&c[k].length>=(k==='sourceNote'?0:1)&&c[k].length<=(k==='back'?1000:k==='front'?200:500))||!Array.isArray(c.relatedQuestionIds)||c.relatedQuestionIds.length>10||new Set(c.relatedQuestionIds).size!==c.relatedQuestionIds.length||c.relatedQuestionIds.some(ref=>!byId.has(ref)))throw new Error('単語帳の内容を確認できません。');
   seen.add(c.id);
  }return deck;
 }

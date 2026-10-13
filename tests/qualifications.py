@@ -36,11 +36,11 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
     (root/'content/qualifications.json').write_text(json.dumps({'qualifications':['fixture-a','fixture-b']}))
     for id,count in [('fixture-a',2),('fixture-b',5)]:
         path=root/'content'/id;path.mkdir()
-        config={'id':id,'name':id,'shortName':id,'questionSource':f'content/{id}/questions.json','topics':[{'id':'basic','name':'基礎'}],'sourceLabel':'検証用','sourceDoc':'docs/SOURCES.md','sourceDescription':'公開しない検証用の独自問題'}
+        config={'id':id,'name':id,'shortName':id,'questionSource':f'content/{id}/questions.json','questionReviewSource':f'content/{id}/question-reviews.json','topics':[{'id':'basic','name':'基礎'}],'sourceLabel':'検証用','sourceDoc':'docs/SOURCES.md','sourceDescription':'公開しない検証用の独自問題'}
         question=fixtures.fixture(count)
         if count==5:
             question['hints']=[{'title':f'操作{i+1}','text':'2から1ずつ増やして数える。','revealsAnswer':False} for i in range(3)]+[{'title':'答え','text':'2＋3＝5です。','revealsAnswer':True}]
-        (path/'qualification.json').write_text(json.dumps(config));(path/'questions.json').write_text(json.dumps([question]))
+        (path/'qualification.json').write_text(json.dumps(config));(path/'questions.json').write_text(json.dumps([question]));fixtures.write_question_reviews(root,id)
     builder.build(root)
     server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=directory));threading.Thread(target=server.serve_forever,daemon=True).start()
     url=f'http://127.0.0.1:{server.server_port}/ap-study/'
@@ -82,18 +82,18 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             path=root/'content/fixture-a/questions.json';old=fixtures.fixture(2);new=fixtures.fixture(2,'constructor','extra')
             new['enrichment']='topic-guide'
             new['choiceReasons']=[]
-            path.write_text(json.dumps([old,new]));builder.build(root)
+            path.write_text(json.dumps([old,new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root)
             page.reload();page.locator('#result-heading').wait_for();page.locator('.sidebar [data-view=home]').click();page.locator('.sidebar [data-view=history]').click();assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
             action_nav(page,'materials');page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==1;page.locator('[name=enriched]').uncheck();action_nav(page,'history');saved_state(page)
             # Change and then retire the question. The original answer stays graded
             # against its snapshot and remains readable after removal from the catalog.
             old['stem']='2＋2は幾つですか。';old['version']=2;old['correctChoiceId']='c0';old['summary']='2＋2＝4'
             cfg_path=root/'content/fixture-a/qualification.json';cfg=json.loads(cfg_path.read_text());cfg['topics'][0]['name']='改名した基礎';cfg_path.write_text(json.dumps(cfg))
-            path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();open_answer_history(page);page.locator('[data-action=resume]').click()
+            path.write_text(json.dumps([old,new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();open_answer_history(page);page.locator('[data-action=resume]').click()
             assert '2＋3' in page.locator('.question-stem').inner_text() and '正解：2' in ''.join(page.locator('.answer-selection').inner_text().split())
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
             action_nav(page,'materials');edit_material(page,'same-question');page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
-            page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));builder.build(root)
+            page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root)
             page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-action=start]').count()==0
             open_answer_history(page);page.locator('[data-action=resume]').click();assert page.locator('#result-heading').inner_text()=='ヒントで正解'

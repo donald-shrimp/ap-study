@@ -1,29 +1,30 @@
 import {labels, complete} from '../domain/study.js';
+import {validQuestionPolicy,canUseQuestion} from '../domain/content-policy.js';
 
 const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation','uses','sourceKind','familyId','syllabusId','language','objectiveIds','objectivesSnapshot','syllabus','sourceRefs'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
   try { return ['http:','https:'].includes(new URL(value, 'https://example.invalid/').protocol); } catch { return false; }
 };
 
-function material(m, choices, diagnosticOnly=false) {
+function material(m, choices) {
   return m && Object.keys(m).every(k=>materialFields.includes(k))
     && (m.enrichment===undefined||['reviewed','topic-guide','personal'].includes(m.enrichment))
     && (m.hintStatus===undefined||['individual','topic-guide'].includes(m.hintStatus))
     && (m.choiceReasons===undefined||Array.isArray(m.choiceReasons)&&[0,choices].includes(m.choiceReasons.length)&&m.choiceReasons.every(r=>text(r)))
-    && Array.isArray(m.hints) && m.hints.length>=(diagnosticOnly?0:1) && m.hints.length<=20
+    && Array.isArray(m.hints) && m.hints.length>=0 && m.hints.length<=20
     && m.hints.every(h=>h && Object.keys(h).every(k=>['title','text','revealsAnswer'].includes(k)) && text(h.title,100) && text(h.text,10000) && typeof h.revealsAnswer==='boolean')
     && ['summary','explanation','takeaway'].every(k=>text(m[k]));
 }
 
 function questionSnapshot(q, qualificationId) {
   return q && Object.keys(q).every(k=>questionFields.includes(k)) && id(q.id)
-    && (q.diagnosticOnly===undefined&&q.parentQuestionId===undefined||q.diagnosticOnly===true&&id(q.parentQuestionId)&&q.parentQuestionId!==q.id)
+    && validQuestionPolicy(q)
     && q.qualificationId===qualificationId && q.type==='singleChoice'
     && (q.choicePresentation===undefined||q.choicePresentation==='inline'||q.choicePresentation==='codes'&&Boolean(q.image))
     && Number.isInteger(q.version) && text(q.title) && text(q.topic)
@@ -72,7 +73,7 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
       if(a.qualificationId!==undefined&&a.qualificationId!==qualification.id)fail();
       if(a.questionSnapshot && (!questionSnapshot(a.questionSnapshot,qualification.id)||a.questionSnapshot.id!==a.questionId))fail();
       const q=a.questionSnapshot||byId.get(a.questionId);
-      if(!q || q.diagnosticOnly&&!allowDiagnosticOnly || !material(a.materialSnapshot,q.choices.length,Boolean(q.diagnosticOnly)))fail();
+      if(!q || !canUseQuestion(q,'practice')&&!allowDiagnosticOnly || !material(a.materialSnapshot,q.choices.length))fail();
       if(!(a.topic===undefined||a.topic===null||a.topic===q.topic)||!(a.readingNote===undefined||text(a.readingNote,200)))fail();
       if(!date(a.startedAt)||!date(a.updatedAt)||!(a.selected===null||Number.isInteger(a.selected)&&a.selected>=0&&a.selected<q.choices.length)||!Number.isInteger(a.hintCount)||a.hintCount<0||a.hintCount>a.materialSnapshot.hints.length||typeof a.confidence!=='boolean'||typeof a.answerViewedBefore!=='boolean'||!Number.isFinite(a.scrollY)||a.scrollY<0||!text(a.contentRevision,100)||!Number.isInteger(a.questionVersion))fail();
       if(a.selectedChoiceId!==undefined && a.selectedChoiceId!==(a.selected===null?null:q.choices[a.selected].id))fail();

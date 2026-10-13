@@ -11,9 +11,32 @@ import html as html_tools
 import json
 from pathlib import Path
 import re
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 SAFE_ID = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$')
+MAX_ASSESSMENT_SIZE = 200
+USES = {'practice', 'diagnostic', 'mock'}
+
+
+def question_uses(q):
+    return q.get('uses', ['diagnostic', 'mock'] if q.get('diagnosticOnly') else ['practice', 'diagnostic'])
+
+
+def origin(q):
+    return q.get('sourceKind', 'derived' if q.get('parentQuestionId') else 'official')
+
+
+def family(q):
+    return q.get('familyId') or q.get('parentQuestionId') or q['id']
+
+
+def valid_size(size, minimum=1):
+    return type(size) is int and minimum <= size <= MAX_ASSESSMENT_SIZE
+
+
+def safe_refs(refs):
+    return isinstance(refs, list) and len(refs) <= 10 and all(isinstance(u, str) and len(u) <= 4000 and urlparse(u).scheme in ['http', 'https'] and urlparse(u).netloc and not re.search(r'[<>\"\x00-\x1f]', u) for u in refs)
 
 
 def require(condition, message):
@@ -37,8 +60,15 @@ def hashed_json(directory, prefix, value):
     return name, digest
 
 
-def normalize(raw, config):
+def normalize(raw, config, ordinal=1):
     q = dict(raw)
+    require('qualificationId' not in q or q['qualificationId'] == config['id'], f"Question qualification mismatch: {q['id']}")
+    # Existing IPA authoring records keep their provenance. Published purpose
+    # uses one canonical field; a dedicated question is not necessarily derived.
+    if 'diagnosticOnly' in q:
+        require(q['diagnosticOnly'] is True and 'practice' not in q.get('uses', []), f"Invalid dedicated purpose: {q['id']}")
+        q.setdefault('uses', ['diagnostic', 'mock'])
+        del q['diagnosticOnly']
     q['qualificationId'] = config['id']
     q.setdefault('examPartId', config.get('defaultExamPartId', 'objective'))
     q.setdefault('type', 'singleChoice')
@@ -51,49 +81,96 @@ def normalize(raw, config):
         q['choices'] = [dict(c, id=f'choice-{i}') for i, c in enumerate(q['choices'])]
         q['correctChoiceId'] = q['choices'][q['answer']]['id']
     else:
+        if len(config['topics']) == 1:
+            q.setdefault('topicId', config['topics'][0]['id'])
         topic = next(t for t in config['topics'] if t['id'] == q['topicId'])
         q['topic'] = topic['name']
-        require(q.get('packLabel'), f"Missing pack label: {q['id']}")
+        q.setdefault('packId', 'study')
+        q.setdefault('packLabel', '学習問題')
+        q.setdefault('number', ordinal)
+        q.setdefault('title', f"問題{q['number']}")
+        if 'sourceKind' not in q and not q.get('parentQuestionId'):
+            q['sourceKind'] = 'authored'
         q['choices'] = [dict(c) for c in q['choices']]
         require('correctChoiceId' in q, f"Missing correct choice ID: {q['id']}")
         q['answer'] = next((i for i, c in enumerate(q['choices']) if c['id'] == q['correctChoiceId']), -1)
+    if config.get('defaultSyllabusId'):
+        q.setdefault('syllabusId', config['defaultSyllabusId'])
+    if config.get('language'):
+        q.setdefault('language', config['language'])
+    if q.get('syllabusId'):
+        scope = next((s for s in config.get('syllabuses', []) if s['id'] == q['syllabusId']), None)
+        require(scope is not None, f"Unknown syllabus: {q['id']}")
+        q['syllabus'] = dict(scope)
+    if q.get('objectiveIds'):
+        objectives = {o['id']: o for o in config.get('objectives', [])}
+        require(all(i in objectives for i in q['objectiveIds']), f"Unknown objective: {q['id']}")
+        q['objectivesSnapshot'] = [dict(objectives[i]) for i in q['objectiveIds']]
     for field, default in {
         'version': 1, 'year': None, 'season': '', 'concept': '', 'topicDescription': '',
         'sourceImages': [], 'imageSizes': [], 'stem': '', 'related': [], 'adaptation': '',
         'searchText': '', 'hintStatus': 'individual', 'page': None,
+        'hints': [], 'summary': '', 'explanation': '', 'takeaway': '',
+        'choiceReasons': [], 'source': config.get('sourceLabel', ''), 'enrichment': 'topic-guide',
     }.items():
         q.setdefault(field, default)
     return q
 
 
-def validate_questions(questions, config, root, diagnostic=False):
+def validate_questions(questions, config, root, diagnostic=False, related_ids=None):
     ids = set()
     for q in questions:
         require(SAFE_ID.fullmatch(q['id']) and q['id'] not in ids, f"Duplicate/invalid question ID: {q['id']}")
         ids.add(q['id'])
-        require(diagnostic or 'diagnosticOnly' not in q and 'parentQuestionId' not in q, f"Diagnostic question in ordinary source: {q['id']}")
+        uses = question_uses(q)
+        require(isinstance(uses, list) and 0 < len(uses) <= 3 and len(set(uses)) == len(uses) and all(u in USES for u in uses), f"Invalid uses: {q['id']}")
+        require(('practice' not in uses) if diagnostic else ('practice' in uses and not q.get('diagnosticOnly')), f"Assessment material in ordinary source: {q['id']}")
+        require(origin(q) in ['official', 'authored', 'derived'], f"Invalid source kind: {q['id']}")
+        require((isinstance(q.get('parentQuestionId'), str) and SAFE_ID.fullmatch(q['parentQuestionId']) and q['parentQuestionId'] != q['id']) if origin(q) == 'derived' else 'parentQuestionId' not in q, f"Invalid parent link: {q['id']}")
+        require(('diagnosticOnly' not in q or q['diagnosticOnly'] is True) and (not q.get('diagnosticOnly') or 'practice' not in uses), f"Invalid assessment flag: {q['id']}")
+        for key in ['familyId', 'syllabusId']:
+            require(key not in q or isinstance(q[key], str) and SAFE_ID.fullmatch(q[key]), f"Invalid {key}: {q['id']}")
+        require('language' not in q or isinstance(q['language'], str) and re.fullmatch(r'[a-zA-Z]{2,3}(?:-[a-zA-Z0-9]{2,8})*', q['language']), f"Invalid language: {q['id']}")
+        require('sourceRefs' not in q or safe_refs(q['sourceRefs']), f"Invalid source references: {q['id']}")
+        require('syllabusId' not in q or q['syllabusId'] in {s['id'] for s in config.get('syllabuses', [])}, f"Unknown syllabus: {q['id']}")
+        objectives = q.get('objectiveIds', [])
+        require(isinstance(objectives, list) and len(objectives) <= 20 and len(set(objectives)) == len(objectives) and all(isinstance(i, str) and i in {o['id'] for o in config.get('objectives', [])} for i in objectives), f"Unknown objective: {q['id']}")
         require(q['examPartId'] in {p['id'] for p in config['examParts']}, f"Invalid exam part: {q['id']}")
         require(SAFE_ID.fullmatch(q['packId']), f"Invalid pack ID: {q['id']}")
         require(isinstance(q['title'], str) and q['title'], f"Missing title: {q['id']}")
         require(isinstance(q.get('number'), int) and q['number'] > 0, f"Missing question number: {q['id']}")
-        require(isinstance(q['version'], int) and q['version'] > 0, f"Invalid version: {q['id']}")
+        require(type(q['version']) is int and q['version'] > 0, f"Invalid version: {q['id']}")
         require(2 <= len(q['choices']) <= 20, f"Invalid choice count: {q['id']}")
         choice_ids = [c['id'] for c in q['choices']]
         require(len(set(choice_ids)) == len(choice_ids) and all(SAFE_ID.fullmatch(c) for c in choice_ids), f"Invalid choice IDs: {q['id']}")
         require(q['correctChoiceId'] in choice_ids and q['answer'] >= 0, f"Invalid answer: {q['id']}")
-        require(all(isinstance(c.get('label'), str) and c['label'] for c in q['choices']), f"Missing choice label: {q['id']}")
+        require(all(set(c) <= {'id','label','text','image'} and isinstance(c.get('label'), str) and 0 < len(c['label']) <= 100 and ('text' not in c or isinstance(c['text'],str) and len(c['text'])<=20000) for c in q['choices']), f"Invalid choice text: {q['id']}")
         require(q['enrichment'] in ['reviewed', 'topic-guide'], f"Invalid lesson state: {q['id']}")
         require(len(q['choiceReasons']) == (len(q['choices']) if q['enrichment'] == 'reviewed' else 0), f"Invalid reasons: {q['id']}")
-        require((0 if diagnostic else 1) <= len(q['hints']) <= 20 and all(h['title'] and h['text'] and isinstance(h['revealsAnswer'], bool) for h in q['hints']), f"Invalid hints: {q['id']}")
-        require(all(isinstance(q[f], str) for f in ['summary', 'explanation', 'takeaway', 'source']), f"Invalid text: {q['id']}")
-        require(q['stem'] or q['sourceImages'], f"Missing question body: {q['id']}")
+        require(0 <= len(q['hints']) <= 20 and all(isinstance(h['title'],str) and 0<len(h['title'])<=100 and isinstance(h['text'],str) and 0<len(h['text'])<=10000 and isinstance(h['revealsAnswer'], bool) for h in q['hints']), f"Invalid hints: {q['id']}")
+        require(all(isinstance(r,str) and len(r)<=20000 for r in q['choiceReasons']), f"Invalid reason text: {q['id']}")
+        require(q['enrichment'] != 'reviewed' or q['explanation'].strip() and all(isinstance(r, str) and r.strip() for r in q['choiceReasons']), f"Missing reviewed explanation: {q['id']}")
+        require(all(isinstance(q[f], str) and len(q[f])<=20000 for f in ['summary', 'explanation', 'takeaway', 'source','adaptation']), f"Invalid text: {q['id']}")
+        require(isinstance(q['stem'], str) and len(q['stem']) <= 20000 and (q['stem'] or q['sourceImages']), f"Missing/invalid question body: {q['id']}")
         require(q.get('choicePresentation','inline') in ['inline','codes'] and (q.get('choicePresentation')!='codes' or q.get('image')), f"Invalid choice presentation: {q['id']}")
         require(len(q['sourceImages']) == len(q['imageSizes']), f"Missing image sizes: {q['id']}")
         for asset in q['sourceImages'] + [q.get('image')] + [c.get('image') for c in q['choices']]:
             if asset:
                 require(not re.search(r'[<>\"\x00-\x1f]', asset) and "'" not in asset and not asset.startswith(('http:', 'https:', '//')) and (root / asset).is_file() and (root / asset).resolve().is_relative_to(root.resolve()), f"Missing/unsafe asset: {q['id']} {asset}")
     for q in questions:
-        require(all(ref in ids for ref in q['related']), f"Missing related question: {q['id']}")
+        require(all(ref in (related_ids or ids) for ref in q['related']), f"Missing related question: {q['id']}")
+    by_id = {q['id']:q for q in questions}
+    if not diagnostic:
+        for q in questions:
+            if origin(q) == 'derived':
+                parent=by_id.get(q.get('parentQuestionId'))
+                require(parent is not None and origin(parent) != 'derived' and (q['topicId'],q['examPartId']) == (parent['topicId'],parent['examPartId']) and family(q)==family(parent), f"Derived parent scope mismatch: {q['id']}")
+    scopes = {}
+    for q in questions:
+        key = family(q)
+        scope = (q['topicId'], q['examPartId'])
+        require(key not in scopes or scopes[key] == scope, f"A content family crosses topics or parts: {q['id']}")
+        scopes[key] = scope
 
 
 def diagnostic_digest(raw):
@@ -101,58 +178,100 @@ def diagnostic_digest(raw):
     return hashlib.sha256(json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
-def compile_diagnostics(root, config, originals, directory):
-    if 'diagnosticQuestionSource' not in config:
+def validate_reviews(raw, reviews, normalized=None):
+    require(isinstance(reviews, list), 'Reviews must be a list')
+    by_id = {r['questionId']: r for r in reviews}
+    published = [q for q in raw if q.get('enrichment') == 'reviewed']
+    require(len(by_id) == len(reviews) and set(by_id) == {q['id'] for q in published}, 'Review set mismatch')
+    for q in published:
+        r = by_id[q['id']]
+        require(r.get('version') == q.get('version', 1) and r.get('sha256') == diagnostic_digest(q), f"Stale review: {q['id']}")
+        if normalized is not None:
+            final = next(item for item in normalized if item['id'] == q['id'])
+            require(r.get('normalizedSha256') == diagnostic_digest(final), f"Reviewed context or final record changed: {q['id']}")
+        require(all(isinstance(r.get(k), str) and r[k].strip() for k in ['author', 'reviewer', 'notes']) and r['author'] != r['reviewer'], f"Independent review missing: {q['id']}")
+        checks = r.get('checks', {})
+        require(all(checks.get(k) is True for k in ['source', 'answer', 'choices', 'wording']) and ('calculation' not in checks or checks['calculation'] is True or checks['calculation'] == 'not-applicable'), f"Incomplete review: {q['id']}")
+        try:
+            checked = datetime.fromisoformat(r['checkedAt'].replace('Z', '+00:00'))
+            require(checked.tzinfo is not None, 'Review time needs timezone')
+        except (KeyError, ValueError, TypeError) as error:
+            raise ValueError(f"Invalid review date: {q['id']}") from error
+
+
+def compile_assessments(root, config, originals, directory):
+    if 'assessmentQuestionSource' not in config:
         return None
     def source(key):
         path=root / config[key]
         require(path.resolve().is_relative_to(root.resolve()), 'Diagnostic source is outside the repository')
         return json.loads(path.read_text())
-    raw=source('diagnosticQuestionSource');reviews=source('diagnosticReviewSource')
+    raw=source('assessmentQuestionSource');reviews=source('assessmentReviewSource')
     require(isinstance(raw, list) and isinstance(reviews, list), 'Diagnostic sources must be lists')
     by_id={q['id']:q for q in originals};review_by_id={r['questionId']:r for r in reviews}
     require(len(review_by_id)==len(reviews), 'Duplicate diagnostic review')
     require(set(review_by_id)=={q['id'] for q in raw}, 'Diagnostic review set mismatch')
     generic={**config};generic.pop('adapter',None)
-    questions=[normalize({**q, 'hints':q.get('hints',[])}, generic) for q in raw]
-    validate_questions(questions, generic, root, diagnostic=True)
+    questions=[normalize(q, generic, i+1) for i,q in enumerate(raw)]
+    all_by_id = {**by_id, **{q['id']: q for q in questions}}
+    for q in questions:
+        parent = all_by_id.get(q.get('parentQuestionId'))
+        if parent and parent.get('familyId'):
+            q.setdefault('familyId', family(parent))
+    validate_reviews(raw, reviews, questions if config.get('adapter') != 'ipa-ap' else None)
+    validate_questions(questions, generic, root, diagnostic=True, related_ids=set(all_by_id))
     for q, authored in zip(questions, raw):
-        parent=by_id.get(q.get('parentQuestionId'))
-        require(q.get('diagnosticOnly') is True and q['id'] not in by_id and parent is not None, f"Invalid diagnostic parent: {q['id']}")
-        require(q['topicId']==parent['topicId'] and q['examPartId']==parent['examPartId'], f"Diagnostic parent scope mismatch: {q['id']}")
+        parent=all_by_id.get(q.get('parentQuestionId'))
+        require('practice' not in question_uses(q) and q['id'] not in by_id, f"Invalid assessment pool: {q['id']}")
+        require(origin(q) != 'derived' or parent is not None and origin(parent) != 'derived' and q['topicId']==parent['topicId'] and q['examPartId']==parent['examPartId'], f"Derived parent scope mismatch: {q['id']}")
+        require(origin(q) != 'derived' or family(q) == family(parent), f"Derived family mismatch: {q['id']}")
         require(any(p['id']==q['examPartId'] and p['practiceAvailable'] for p in config['examParts']), f"Unsupported diagnostic part: {q['id']}")
-        require(q['enrichment']=='reviewed' and all(q['choiceReasons']) and q['explanation'].strip() and q['summary'].strip() and q['source'].strip() and q['adaptation'].strip(), f"Incomplete diagnostic material: {q['id']}")
+        require(q['enrichment']=='reviewed' and all(q['choiceReasons']) and q['explanation'].strip() and (origin(q) != 'derived' or q['adaptation'].strip()), f"Incomplete assessment material: {q['id']}")
         review=review_by_id[q['id']]
         require(review.get('version')==q['version'] and review.get('sha256')==diagnostic_digest(authored), f"Stale diagnostic review: {q['id']}")
         require(isinstance(review.get('author'), str) and review['author'].strip() and isinstance(review.get('reviewer'), str) and review['reviewer'].strip() and review['author']!=review['reviewer'], f"Independent diagnostic reviewer missing: {q['id']}")
         checks=review.get('checks',{})
-        require(all(checks.get(k) is True for k in ['source','answer','calculation','choices','wording']), f"Incomplete diagnostic checks: {q['id']}")
+        require(all(checks.get(k) is True for k in ['source','answer','choices','wording']) and checks.get('calculation', 'not-applicable') in [True, 'not-applicable'], f"Incomplete assessment checks: {q['id']}")
         require(isinstance(review.get('notes'), str) and review['notes'].strip(), f"Missing diagnostic review evidence: {q['id']}")
         try:
             checked=datetime.fromisoformat(review['checkedAt'].replace('Z','+00:00'))
             require(checked.tzinfo is not None, 'Review time needs a timezone')
         except (KeyError, ValueError, TypeError) as error:
             raise ValueError(f"Invalid diagnostic review date: {q['id']}") from error
+    scopes = {}
+    for q in originals + questions:
+        scope=(q['topicId'],q['examPartId']);key=family(q)
+        require(key not in scopes or scopes[key]==scope, f"A content family crosses topics or parts: {q['id']}")
+        scopes[key]=scope
     filename,digest=hashed_json(directory, 'diagnostic', questions)
-    return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions)}
+    fields = ['id', 'qualificationId', 'topicId', 'examPartId', 'enrichment', 'parentQuestionId', 'familyId', 'sourceKind', 'uses']
+    return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions),'index':[{k: q[k] for k in fields if k in q} for q in questions]}
 
 
-def compile_mock_sets(root, config, directory):
+def compile_mock_sets(root, config, originals, directory):
     if not config.get('mockSetSource'):
         return None
     path=root / config['mockSetSource']
     require(path.resolve().is_relative_to(root.resolve()), 'Mock sets outside repository')
     data=json.loads(path.read_text())
     require(data.get('format')=='hitomon-mock-sets' and data.get('version')==1 and data.get('qualificationId')==config['id'], 'Invalid mock header')
-    published={q['id']:q for q in json.loads((root/config['diagnosticQuestionSource']).read_text())}
+    published={q['id']:q for q in originals}
+    if config.get('assessmentQuestionSource'):
+        generic={**config};generic.pop('adapter',None)
+        published.update({q['id']: normalize(q,generic,i+1) for i,q in enumerate(json.loads((root/config['assessmentQuestionSource']).read_text()))})
+    for q in published.values():
+        parent=published.get(q.get('parentQuestionId'))
+        if parent and parent.get('familyId'):
+            q.setdefault('familyId', family(parent))
     sets=[dict(s,version=s.get('version',1)) for s in data['sets'] if s['status']=='ready']
     require(len({s['id'] for s in sets})==len(sets), 'Duplicate mock set')
     for s in sets:
         require(SAFE_ID.fullmatch(s['id']) and isinstance(s['label'],str) and 0<len(s['label'])<=200 and type(s['version']) is int and s['version']>0, 'Invalid mock identity')
-        require(s['size']==len(s['slots'])==80 and len({slot['questionId'] for slot in s['slots']})==80 and len({slot['parentQuestionId'] for slot in s['slots']})==80, 'Mock requires 80 unique fixed questions')
+        require(valid_size(s['size']) and s['size']==len(s['slots']) and len({slot['questionId'] for slot in s['slots']})==s['size'], 'Mock requires unique fixed questions within bounds')
+        require(len({family(published[slot['questionId']]) for slot in s['slots'] if slot['questionId'] in published}) == s['size'], 'Mock content families overlap')
         for i,slot in enumerate(s['slots']):
             q=published.get(slot['questionId'])
-            require(slot['number']==i+1 and q and q['diagnosticOnly'] and q['enrichment']=='reviewed' and q['parentQuestionId']==slot['parentQuestionId'] and q['topicId']==slot['topicId'], 'Invalid fixed mock question')
+            require(slot['number']==i+1 and q and 'mock' in question_uses(q) and q['enrichment']=='reviewed' and ('parentQuestionId' not in slot or q.get('parentQuestionId')==slot['parentQuestionId']) and q['topicId']==slot['topicId'], 'Invalid fixed mock question')
     body={'format':'hitomon-mock-sets','version':1,'qualificationId':config['id'],'sets':sets}
     filename,digest=hashed_json(directory,'mockSets',body)
     return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{k:s[k] for k in ['id','label','version','size']} for s in sets]}
@@ -184,9 +303,11 @@ def compile_learning_tools(root, config, questions, directory):
                 require(item.get('sourceHash') == diagnostic_digest(raw_by_id[identifier]), 'Classification source changed: ' + identifier)
             else:
                 require(type(item.get('version')) is int and item['version'] > 0 and item.get('topicId') in topics, 'Invalid card version/topic')
-                require(all(isinstance(item.get(f), str) and 0 < len(item[f]) <= limit for f, limit in [('front', 200), ('back', 1000), ('sourceNote', 500)]), 'Invalid card text')
-                refs = item.get('relatedQuestionIds')
-                require(isinstance(refs, list) and 1 <= len(refs) <= 10 and all(isinstance(ref, str) for ref in refs) and len(set(refs)) == len(refs) and all(ref in by_id and by_id[ref]['topicId'] == item['topicId'] for ref in refs), 'Invalid card references')
+                item.setdefault('sourceNote', '')
+                item.setdefault('relatedQuestionIds', [])
+                require(all(isinstance(item.get(f), str) and (0 if f == 'sourceNote' else 1) <= len(item[f]) <= limit for f, limit in [('front', 200), ('back', 1000), ('sourceNote', 500)]), 'Invalid card text')
+                refs = item['relatedQuestionIds']
+                require(isinstance(refs, list) and len(refs) <= 10 and all(isinstance(ref, str) for ref in refs) and len(set(refs)) == len(refs) and all(ref in by_id for ref in refs), 'Invalid card references')
         if key == 'studyContext' and data.get('completedExamIds') is not None:
             completed = data['completedExamIds']
             pack_ids = {q['packId'] for q in questions}
@@ -202,6 +323,8 @@ def compile_learning_tools(root, config, questions, directory):
 def compile_qualification(root, id):
     require(SAFE_ID.fullmatch(id), f'Invalid qualification ID: {id}')
     config = json.loads((root / 'content' / id / 'qualification.json').read_text())
+    config.setdefault('shortName', config['name'])
+    config.setdefault('topics', [{'id': 'general', 'name': '全般'}])
     config.setdefault('defaultExamPartId', 'objective')
     config.setdefault('examParts', [{'id': 'objective', 'label': '選択式', 'practiceAvailable': True}])
     require(len({p['id'] for p in config['examParts']}) == len(config['examParts']) and all(SAFE_ID.fullmatch(p['id']) and p.get('label') and isinstance(p.get('practiceAvailable'), bool) for p in config['examParts']), 'Invalid exam parts')
@@ -210,11 +333,42 @@ def compile_qualification(root, id):
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')
     limits=config.get('diagnosticBlueprint',{}).get('variantLimits',{})
-    require(isinstance(limits,dict) and all(k in {t['id'] for t in config['topics']} and type(v) is int and 0<=v<=30 for k,v in limits.items()), 'Invalid diagnostic variant limits')
+    b = config.get('diagnosticBlueprint', {})
+    if b:
+        size = b.get('size')
+        require(valid_size(size, 30), 'Diagnostic size must be 30..200')
+        require(b.get('sampling', 'topic-round-robin') in ['topic-round-robin', 'topic-weighted'] and type(b.get('defaultVariantLimit', 1)) is int and 0 <= b.get('defaultVariantLimit', 1) <= size, 'Invalid diagnostic policy')
+        require(isinstance(limits,dict) and all(k in {t['id'] for t in config['topics']} and type(v) is int and 0<=v<=size for k,v in limits.items()), 'Invalid diagnostic variant limits')
+        weights=b.get('weights', {})
+        require(isinstance(weights, dict) and all(k in {t['id'] for t in config['topics']} and type(v) is int and 0 < v <= 100000 for k,v in weights.items()) and (bool(weights) if b.get('sampling') == 'topic-weighted' else not weights), 'Invalid diagnostic weights')
+    syllabuses=config.get('syllabuses', [])
+    require(isinstance(syllabuses,list) and len(syllabuses)<=100 and len({s['id'] for s in syllabuses})==len(syllabuses) and all(set(s)<= {'id','label','language','effectiveFrom','effectiveTo'} and SAFE_ID.fullmatch(s['id']) and isinstance(s.get('label'),str) and 0<len(s['label'])<=300 and isinstance(s.get('language'),str) and re.fullmatch(r'[a-zA-Z]{2,3}(?:-[a-zA-Z0-9]{2,8})*', s['language']) for s in syllabuses), 'Invalid syllabuses')
+    for scope in syllabuses:
+        for key in ['effectiveFrom', 'effectiveTo']:
+            if key in scope:
+                require(isinstance(scope[key], str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', scope[key]), 'Invalid syllabus date')
+                try:datetime.strptime(scope[key], '%Y-%m-%d')
+                except ValueError as error:raise ValueError('Invalid syllabus date') from error
+        require(not scope.get('effectiveFrom') or not scope.get('effectiveTo') or scope['effectiveFrom']<=scope['effectiveTo'], 'Syllabus date order')
+    require('defaultSyllabusId' not in config or config['defaultSyllabusId'] in {s['id'] for s in syllabuses}, 'Unknown default syllabus')
+    objectives=config.get('objectives', [])
+    require(isinstance(objectives,list) and len(objectives)<=1000 and len({o['id'] for o in objectives})==len(objectives) and all(set(o)<= {'id','label','topicId'} and SAFE_ID.fullmatch(o['id']) and isinstance(o.get('label'),str) and 0<len(o['label'])<=300 and o['topicId'] in {t['id'] for t in config['topics']} for o in objectives), 'Invalid objectives')
     require(len({t['name'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic name')
     source = root / config['questionSource']
     require(source.resolve().is_relative_to(root.resolve()), 'Question source is outside the repository')
-    questions = [normalize(q, config) for q in json.loads(source.read_text())]
+    raw = json.loads(source.read_text())
+    questions = [normalize(q, config, i+1) for i,q in enumerate(raw)]
+    by_id = {q['id']:q for q in questions}
+    for q in questions:
+        parent=by_id.get(q.get('parentQuestionId'))
+        if parent and parent.get('familyId'):
+            q.setdefault('familyId', family(parent))
+    if config.get('adapter') != 'ipa-ap' and any(q['enrichment']=='reviewed' for q in questions):
+        require(config.get('questionReviewSource'), 'Reviewed ordinary material needs a review source')
+    if config.get('questionReviewSource'):
+        review_path=(root/config['questionReviewSource']).resolve()
+        require(review_path.is_relative_to(root.resolve()), 'Reviews outside repository')
+        validate_reviews(raw,json.loads(review_path.read_text()),questions if config.get('adapter') != 'ipa-ap' else None)
     require(questions, f'Empty qualification: {id}')
     validate_questions(questions, config, root)
     directory = root / 'data' / 'qualifications' / id
@@ -228,18 +382,18 @@ def compile_qualification(root, id):
         packs.append({'id': pack_id, 'label': records[0]['packLabel'], 'url': f'packs/{filename}', 'sha256': digest, 'count': len(records), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in records)})
         for q in records:
             # The index supports searching/scoping/offline availability, not lesson rendering.
-            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type','choicePresentation']
+            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type','choicePresentation','uses','sourceKind','familyId','syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs']
             item = {k: q[k] for k in fields if k in q}
             item['choices'] = [{k: v for k, v in c.items() if k != 'text'} for c in q['choices']]
             item['hintCount'] = len(q['hints'])
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
-    diagnostic=compile_diagnostics(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'diagnosticQuestionSource', 'diagnosticReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource']}
+    assessment=compile_assessments(root, config, questions, directory)
+    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
-    if diagnostic is not None:
-        manifest['diagnostic']=diagnostic
-    mock_sets=compile_mock_sets(root,config,directory)
+    if assessment is not None:
+        manifest['assessment']=assessment
+    mock_sets=compile_mock_sets(root,config,questions,directory)
     if mock_sets is not None:manifest['mockSets']=mock_sets
     manifest.update(compile_learning_tools(root, config, questions, directory))
     write_json(directory / 'manifest.json', manifest)

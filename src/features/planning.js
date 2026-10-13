@@ -1,3 +1,4 @@
+import {canUseQuestion} from '../domain/content-policy.js';
 import {setSyncStatus,workspaceStatusHTML} from '../ui/sync-status.js';
 import {planRevisionHTML} from '../ui/plan-history.js';
 import {createPlanRevision,validatePlanRevision,canonical} from '../domain/plan-history.js';
@@ -8,15 +9,24 @@ import {blankPlan,validatePlan,parsePlan,examPartsFor,studySummary,aiPrompt,CONT
 import {selectDiagnostic,createDiagnostic,submitDiagnostic,finishDiagnostic,diagnosticAttempts,diagnosticExposure,diagnosticResult,validateDiagnostic} from '../domain/diagnostic.js';
 import {createPlanningViews} from '../ui/planning.js';
 import {canStartDiagnostic} from '../domain/qualification-features.js';
+import {diagnosticSize} from '../domain/assessment-policy.js';
 
 export function createPlanningFeature({qualification,rootPath,getStore,getState,getNavigation,content,base,validateAttempt,onUpdate,onNavigate,onNotice,onChanged,getReviewCount,download,getTargetPart=()=>null}){
  let workspace,documents=[],preview=null,previewRevision=0,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,editorOpen=false,aiOpen=false,status='guest',generation=0,busy=false,stale=false;
+ function setBusy(value){
+  busy=value;
+  const controls=document.querySelectorAll('[name="diagnostic-answer"], [data-action="submit-diagnostic"], [data-action="skip-diagnostic"], [data-action="end-diagnostic"], [data-action="pause-diagnostic"]');
+  for(const control of controls){
+   if(value&&!control.disabled){control.dataset.saveBusy='true';control.disabled=true;}
+   else if(!value&&control.dataset.saveBusy){delete control.dataset.saveBusy;control.disabled=false;}
+  }
+ }
  const row=id=>documents.find(r=>r.id===id),plan=()=>row('planning')?.payload||blankPlan(qualification);
  const validate=(kind,payload)=>{if(kind==='planRevision')return validatePlanRevision(payload,qualification);if(kind==='planning')return validatePlan(payload,qualification);if(kind==='diagnostic')return validateDiagnostic(payload,qualification,validateAttempt);if(kind==='mock')return validateMock(payload,qualification,validateAttempt);throw new Error('未対応の記録形式です。');};
  function assessmentAttempts(){return [...getState().attempts,...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticAttempts(r.payload))];}
- function allAttempts(){return assessmentAttempts().filter(a=>!a.questionSnapshot?.diagnosticOnly);}
+ function allAttempts(){return assessmentAttempts().filter(a=>canUseQuestion(a.questionSnapshot,'practice'));}
  const drafts=createPlanningDrafts(()=>getState().view==='planning');
- const views=()=>{drafts.capture();return createPlanningViews({qualification,documents,attempts:allAttempts(),summaryData:summary(),currentRunId:getState().currentRunId,currentMockSetId:getState().currentMockSetId,diagnosticEnabled:canStartDiagnostic(qualification,base),preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status,editorOpen,aiOpen,stale,targetPartId:getTargetPart()});};
+ const views=()=>{drafts.capture();return createPlanningViews({qualification,documents,attempts:allAttempts(),summaryData:summary(),currentRunId:getState().currentRunId,currentMockSetId:getState().currentMockSetId,diagnosticEnabled:canStartDiagnostic(qualification,base),practiceQuestionIds:new Set(base.map(q=>q.id)),practiceTopicIds:new Set(base.filter(q=>canUseQuestion(q,'practice')).map(q=>q.topicId)),preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status,editorOpen,aiOpen,stale,targetPartId:getTargetPart()});};
  // Preserve actual drafts, rather than freezing every open planning page.
  function hasPlanningDraft(){
   if(drafts.has()||preview||jsonInput.trim()||editingPhaseId||editingWeek||editingMilestone)return true;
@@ -30,7 +40,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  }
  function phaseIn(next,id){const phase=next.phases.find(p=>p.id===id);if(!phase)throw new Error('フェーズが更新されています。計画を開き直してください。');return phase;}
  async function bind(){document.getElementById('plan-revision-dialog')?.remove();const token=++generation,identity=await getStore().identity();await workspace?.close();if(token!==generation)return;workspace=createWorkspaceStore({...identity,rootPath,validate,planHistory:{canonical,create:(plan,options)=>createPlanRevision(plan,qualification,options)}});try{documents=(await workspace.read()).filter(r=>{try{validate(r.kind,r.payload);return true;}catch{onNotice('計画・診断・模試の保存データを読み取れません。通常学習は利用できます。');return false;}});}catch{documents=[];onNotice('計画・診断・模試を保存できません。通常学習は利用できます。');}if(workspace.error())onNotice('計画・診断・模試の保存データを読み取れません。通常学習は利用できます。');drafts.reset();stale=false;preview=null;jsonInput='';editingPhaseId=null;editingWeek=null;editingMilestone=null;editorOpen=false;aiOpen=false;status=identity.owner.startsWith('uid:')?'pending':'guest';onUpdate();}
- async function write(kind,id,payload,revision,{clearForm=null,discardDrafts=false,historyOrigin='edited'}={}){if(!workspace)throw new Error('このブラウザでは計画・診断・模試の記録を保存できません。通常演習は続けられます。');const token=generation,target=workspace,previousRevision=row('planning')?.localRevision||0;drafts.capture();const written=await target.write(kind,id,payload,revision,{historyOrigin});if(token!==generation)return;documents=await target.read();if(kind==='planning')drafts.advance(previousRevision,written.localRevision);if(discardDrafts){drafts.reset();stale=false;}else if(clearForm)drafts.clear(clearForm);onChanged();onUpdate();}
+ async function write(kind,id,payload,revision,{clearForm=null,discardDrafts=false,historyOrigin='edited'}={}){if(!workspace)throw new Error('このブラウザでは計画・診断・模試の記録を保存できません。通常演習は続けられます。');const token=generation,target=workspace,previousRevision=row('planning')?.localRevision||0;drafts.capture();const written=await target.write(kind,id,payload,revision,{historyOrigin});if(token!==generation)return;documents=await target.read();if(kind==='planning')drafts.advance(previousRevision,written.localRevision);if(discardDrafts){drafts.reset();stale=false;}else if(clearForm)drafts.clear(clearForm);onChanged();onUpdate();if(busy)setBusy(true);}
  function summary(){const result=studySummary({qualification,plan:row('planning')?plan():null,attempts:allAttempts(),diagnostics:documents.filter(r=>r.kind==='diagnostic'&&r.payload.status!=='in_progress').map(r=>diagnosticResult(r.payload,qualification)),reviewCount:getReviewCount()});result.mockExams=documents.filter(r=>r.kind==='mock'&&r.payload.status!=='in_progress').map(r=>mockResult(r.payload,qualification));return result;}
  async function copy(text){try{await navigator.clipboard.writeText(text);onNotice('コピーしました。');}catch{
   let dialog=document.getElementById('copy-dialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='copy-dialog';dialog.setAttribute('aria-label','コピーするテキスト');dialog.innerHTML='<form method="dialog"><div class="dialog-head"><h2>テキストをコピー</h2><button class="button secondary">閉じる</button></div></form><p class="small">下のテキストを選択してコピーしてください。</p><textarea rows="12" readonly aria-label="コピーする内容"></textarea><button type="button" class="button secondary select-copy">全選択</button>';document.body.append(dialog);dialog.querySelector('.select-copy').onclick=()=>dialog.querySelector('textarea').select();}dialog.querySelector('textarea').value=text;dialog.showModal();
@@ -42,28 +52,32 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  async function startDiagnostic(){
   if(!canStartDiagnostic(qualification,base))throw new Error('この資格の診断はまだ利用できません。通常学習は利用できます。');
   if(!navigator.onLine)throw new Error('新しい診断はオンラインで始めてください。中断した診断や通常学習はオフラインでも使えます。');
-  const token=generation,nav=getNavigation();onNotice('診断の30問を準備しています。');
-  const variants=await content.loadDiagnostics();if(token!==generation||nav!==getNavigation())return;
-  const attempts=[...assessmentAttempts(),...documents.filter(r=>['diagnostic','mock'].includes(r.kind)).flatMap(r=>diagnosticExposure(r.payload))],chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>!q.diagnosticOnly).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
+  const token=generation,nav=getNavigation();onNotice(`診断の${diagnosticSize(qualification)}問を準備しています。`);
+  const variants=await content.loadAssessments();if(token!==generation||nav!==getNavigation())return;
+  const attempts=[...assessmentAttempts(),...documents.filter(r=>['diagnostic','mock'].includes(r.kind)).flatMap(r=>diagnosticExposure(r.payload))],chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>canUseQuestion(q,'practice')).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
   await cacheImages(chosen);if(token!==generation||nav!==getNavigation())return;
-  const revision=[content.manifest.index.sha256,content.manifest.diagnostic?.sha256||''].filter(Boolean).join(':');
+  const revision=[content.manifest.index.sha256,content.manifest.assessment?.sha256||''].filter(Boolean).join(':');
   const run=createDiagnostic(chosen,qualification,attempts,revision);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
  }
  async function startMock(setId){
   const ongoing=documents.some(r=>r.kind==='mock'&&r.payload.mockSet.id===setId&&r.payload.status==='in_progress');
   if(ongoing&&!confirm('同じ模試が中断中です。中断した回は残して、新しい回を始めますか？'))return;
   if(!navigator.onLine)throw new Error('新しい模試はオンラインで始めてください。中断した模試はオフラインで続けられます。');
-  const token=generation,nav=getNavigation();onNotice('模試の80問を準備しています。');
-  const [sets,variants]=await Promise.all([content.loadMockSets(),content.loadDiagnostics()]);if(token!==generation||nav!==getNavigation())return;
+  const token=generation,nav=getNavigation();onNotice('模試の問題を準備しています。');
+  const [sets,variants]=await Promise.all([content.loadMockSets(),content.loadAssessments()]);if(token!==generation||nav!==getNavigation())return;
   const set=sets.find(s=>s.id===setId),exposure=[...assessmentAttempts(),...documents.filter(r=>['diagnostic','mock'].includes(r.kind)).flatMap(r=>diagnosticExposure(r.payload))];
-  const run=createMock(set,variants,qualification,exposure,[content.manifest.mockSets.sha256,content.manifest.diagnostic.sha256].join(':'));
+  if(!set)throw new Error('この模試は現在の教材にありません。');
+  const byId=new Map(variants.map(q=>[q.id,q]));
+  const fixed=await Promise.all(set.slots.map(slot=>byId.get(slot.questionId)||content.ensure(slot.questionId)));
+  if(token!==generation||nav!==getNavigation())return;
+  const run=createMock(set,fixed,qualification,exposure,[content.manifest.mockSets.sha256,content.manifest.assessment?.sha256||content.manifest.index.sha256].join(':'));
   await cacheImages(run.slots.map(s=>s.attempt.questionSnapshot));if(token!==generation||nav!==getNavigation())return;
   await write('mock',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
  }
 
  async function action(el){
   const action=el.dataset.action,known=['view-plan-revision','open-editor','open-ai','reload-planning','copy-prompt','copy-summary','export-summary','export-plan','preview-plan','register-plan','edit-phase','cancel-phase','delete-phase','edit-week','cancel-week','delete-week','edit-milestone','cancel-milestone','delete-milestone','toggle-milestone','start-diagnostic','start-mock','mock-records','mock-history','resume-diagnostic','pause-diagnostic','submit-diagnostic','skip-diagnostic','end-diagnostic','diagnostic-zoom','workspace-local','workspace-remote','workspace-copy-run','export-diagnostics'];
-  if(!known.includes(action))return false;if(busy)return true;busy=true;
+  if(!known.includes(action))return false;if(busy)return true;setBusy(true);
   try{
    if(action==='view-plan-revision'){const revision=row(el.dataset.id);if(revision?.kind!=='planRevision')throw new Error('計画履歴を見つけられません。');let dialog=document.getElementById('plan-revision-dialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='plan-revision-dialog';dialog.setAttribute('aria-labelledby','plan-revision-title');document.body.append(dialog);}dialog.innerHTML='<div class="dialog-head"><h2 id="plan-revision-title">保存した計画</h2><button class="button secondary history-close">閉じる</button></div>'+planRevisionHTML(revision.payload,qualification,allAttempts())+'<button class="button secondary history-export">この計画を書き出す</button>';dialog.querySelector('.history-close').onclick=()=>dialog.close();dialog.querySelector('.history-export').onclick=()=>download(revision.payload.plan,qualification.id+'-plan-'+revision.id+'.json');dialog.showModal();}
    else if(action==='open-editor'||action==='open-ai'){if(action==='open-editor')editorOpen=true;else aiOpen=true;onUpdate();document.getElementById(action==='open-editor'?'plan-editor':'plan-ai')?.scrollIntoView({block:'start'});}
@@ -104,14 +118,14 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
     else submitDiagnostic(run,action==='skip-diagnostic'?null:run.currentChoiceId);
     await write(original.kind,run.id,run,original.localRevision);onNavigate('diagnostic',run.id);
    }
-  }catch(error){onNotice(error.message);}finally{busy=false;}
+  }catch(error){onNotice(error.message);}finally{setBusy(false);}
   return true;
  }
  function input(el){if(el.id!=='plan-json'){if(getState().view==='planning'&&el.closest('form')){drafts.capture();return true;}return false;}jsonInput=el.value;preview=null;const output=document.getElementById('plan-preview');if(output)output.innerHTML='';return true;}
  async function change(el){
   if(getState().view==='planning'&&el.closest('form')){drafts.capture();return true;}
   if(el.name==='diagnostic-answer'){
-   if(busy)return true;busy=true;const submitButton=document.querySelector('[data-action=submit-diagnostic]');if(submitButton)submitButton.disabled=true;try{const original=row(getState().currentRunId);if(!original||original.payload.status!=='in_progress')throw new Error('この回は終了しています。');const run=structuredClone(original.payload);run.currentChoiceId=el.value;await write(original.kind,run.id,run,original.localRevision);}catch(error){onNotice(error.message);onUpdate();}finally{busy=false;}return true;
+   if(busy)return true;setBusy(true);try{const original=row(getState().currentRunId);if(!original||original.payload.status!=='in_progress')throw new Error('この回は終了しています。');const run=structuredClone(original.payload);run.currentChoiceId=el.value;await write(original.kind,run.id,run,original.localRevision);}catch(error){onNotice(error.message);onUpdate();}finally{setBusy(false);}return true;
   }
   if(el.id==='import-diagnostics'){
    const file=el.files[0];if(!file)return true;
@@ -121,7 +135,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  }
  async function submit(form){
   if(!['exam-form','phase-form'].includes(form.id)&&!['week','milestone','context'].includes(form.dataset.planningForm))return false;
-  if(busy)return true;busy=true;
+  if(busy)return true;setBusy(true);
   try{const fields=new FormData(form),next=structuredClone(plan());
    if(form.id==='exam-form')next.examDates=examPartsFor(qualification).map(p=>({examPartId:p.id,date:String(fields.get('exam-'+p.id)||'')})).filter(d=>d.date);
    else if(form.dataset.planningForm==='context'){const context=Object.fromEntries(CONTEXT_FIELDS.map(([id])=>[id,String(fields.get(id)||'').trim()]).filter(([,v])=>v));const minutes=String(fields.get('weeklyMinutes')||'').trim();if(minutes!=='')context.weeklyMinutes=Number(minutes);if(Object.keys(context).length)context.updatedOn=dateInZone(new Date(),next.timeZone);next.context=context;}
@@ -129,7 +143,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
    else if(form.dataset.planningForm==='milestone'){const phase=phaseIn(next,form.dataset.phase),old=phase.milestones?.find(m=>m.id===form.dataset.id),milestone={id:form.dataset.id||'milestone-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),date:String(fields.get('date')),examPartId:String(fields.get('part')),completed:old?.completed||false};phase.milestones=[...(phase.milestones||[]).filter(m=>m.id!==milestone.id),milestone].sort((a,b)=>a.date.localeCompare(b.date));}
    else{const phase={...next.phases.find(p=>p.id===form.dataset.id),id:form.dataset.id||'phase-'+crypto.randomUUID(),name:String(fields.get('name')).trim(),start:String(fields.get('start')),end:String(fields.get('end')),examPartIds:fields.getAll('part').map(String),targets:{completedAttempts:Number(fields.get('target'))},focusTopicIds:fields.getAll('topic').map(String)};next.phases=[...next.phases.filter(p=>p.id!==phase.id),phase].sort((a,b)=>a.start.localeCompare(b.start));}
    await write('planning','planning',next,Number(form.dataset.revision),{clearForm:drafts.key(form)});editingPhaseId=null;editingWeek=null;editingMilestone=null;onUpdate();onNotice(form.id==='exam-form'?'受験日を保存しました。':form.dataset.planningForm==='context'?'計画の前提を保存しました。':form.dataset.planningForm==='week'?'週別目標を保存しました。':form.dataset.planningForm==='milestone'?'予定を保存しました。':'フェーズを保存しました。');
-  }catch(error){onNotice(error.message);}finally{busy=false;}return true;
+  }catch(error){onNotice(error.message);}finally{setBusy(false);}return true;
  }
  async function importGuest(uid,deviceId){
   const guest=createWorkspaceStore({owner:`guest:${deviceId}`,deviceId,qualificationId:qualification.id,rootPath,validate});

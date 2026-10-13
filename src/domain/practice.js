@@ -1,17 +1,18 @@
+import {canUseQuestion} from './content-policy.js';
 import {complete} from './study.js';
 import {examPartsFor} from './planning.js';
 export function practicePool({qualification,questions,scope={},available=()=>true,practiceAllowed=()=>true}){
  const parts=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
  const topics=scope.topicIds?.length?scope.topicIds:scope.topicId?[scope.topicId]:[];
  const requestedParts=scope.examPartIds?.length?scope.examPartIds:scope.examPartId?[scope.examPartId]:[];
- return questions.filter(q=>!q.diagnosticOnly&&(!q.qualificationId||q.qualificationId===qualification.id)&&parts.has(q.examPartId||qualification.defaultExamPartId||'objective')&&(!topics.length||topics.includes(q.topicId))&&(!requestedParts.length||requestedParts.includes(q.examPartId||qualification.defaultExamPartId||'objective'))&&available(q)&&practiceAllowed(q));
+ return questions.filter(q=>canUseQuestion(q,'practice')&&(!q.qualificationId||q.qualificationId===qualification.id)&&parts.has(q.examPartId||qualification.defaultExamPartId||'objective')&&(!topics.length||topics.includes(q.topicId))&&(!requestedParts.length||requestedParts.includes(q.examPartId||qualification.defaultExamPartId||'objective'))&&available(q)&&practiceAllowed(q));
 }
 const hash=text=>{let n=2166136261;for(const c of text)n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;};
 // Recommendations are separate from explicit restrictions. Identical inputs
 // select the same candidate, both at entry and at the next question.
 export function selectPractice({qualification,questions,attempts=[],reviewInfo,scope={},available=()=>true,practiceAllowed=()=>true,excludedQuestionIds=[],visitedQuestionIds=[],intent='normal'}){
  const pool=practicePool({qualification,questions,scope,available,practiceAllowed});
- const rows=attempts.filter(a=>(!a.qualificationId||a.qualificationId===qualification.id)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly);
+ const rows=attempts.filter(a=>(!a.qualificationId||a.qualificationId===qualification.id)&&!a.diagnosticRunId&&canUseQuestion(a.questionSnapshot,'practice'));
  const continued=new Set(rows.map(a=>a.continuationOf).filter(Boolean));
  const latestCompleted=new Map();for(const a of rows.filter(complete))if(!latestCompleted.has(a.questionId)||a.completedAt>latestCompleted.get(a.questionId))latestCompleted.set(a.questionId,a.completedAt);
  const deferred=new Set(rows.filter(a=>!complete(a)&&!continued.has(a.id)&&a.deferred&&(!latestCompleted.has(a.questionId)||latestCompleted.get(a.questionId)<a.updatedAt)).map(a=>a.questionId));

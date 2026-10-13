@@ -1,3 +1,4 @@
+import {canUseQuestion} from './content-policy.js';
 // Mutable preferences and resumption metadata stay outside immutable answers.
 const identifier=v=>typeof v==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(v);
 const only=(value,keys)=>value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).every(k=>keys.includes(k));
@@ -18,7 +19,7 @@ export function validateLearning(kind,p){
 }
 export function learningId(kind,p){validateLearning(kind,p);return `${kind}--${kind==='context'?p.attemptId:p.questionId}`;}
 export function contextPayload(a){
- const s=a.practiceScope;if(!s||a.diagnosticRunId||a.questionSnapshot?.diagnosticOnly)return null;
+ const s=a.practiceScope;if(!s||a.diagnosticRunId||!canUseQuestion(a.questionSnapshot,'practice'))return null;
  const entryMode=a.entryMode||s.paperMode||'all';
  return validateLearning('context',{attemptId:a.id,questionId:a.questionId,entryMode,scope:{intent:s.intent||'normal',topicId:s.topicId||null,topicIds:s.topicIds||[],examPartId:s.examPartId||null,examPartIds:s.examPartIds||[],paperMode:entryMode,returnView:s.returnView||'home',returnRunId:s.returnRunId||null}});
 }

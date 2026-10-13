@@ -4,8 +4,8 @@ import {canStartDiagnostic} from '../src/domain/qualification-features.js';
 import {createPlanningViews} from '../src/ui/planning.js';
 
 test('診断は明示設定と対応パートの独立30問が揃った資格だけで開始できる',()=>{
- const q={id:'second',diagnosticBlueprint:{size:30},examParts:[{id:'a',practiceAvailable:true},{id:'b',practiceAvailable:false}]};
- const questions=Array.from({length:30},(_,i)=>({id:'q'+i,qualificationId:'second',examPartId:'a'}));
+ const q={id:'second',topics:[{id:'basic',name:'基礎'}],diagnosticBlueprint:{size:30},examParts:[{id:'a',practiceAvailable:true},{id:'b',practiceAvailable:false}]};
+ const questions=Array.from({length:30},(_,i)=>({id:'q'+i,qualificationId:'second',examPartId:'a',topicId:'basic'}));
  assert.equal(canStartDiagnostic(q,questions),true);
  assert.equal(canStartDiagnostic({...q,diagnosticBlueprint:undefined},questions),false);
  assert.equal(canStartDiagnostic({...q,diagnosticBlueprint:{size:10}},questions),false);

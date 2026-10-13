@@ -1,3 +1,4 @@
+import {canUseQuestion} from './content-policy.js';
 import {complete} from './study.js';
 import {dateInZone,daysBetween,examPartsFor,partOfAttempt,addDays} from './planning.js';
 
@@ -8,7 +9,7 @@ export function activePhase(plan,at=new Date()){
 export function learningFields({qualification,attempts,questions=[],plan=null,at=new Date(),days=28,examPartId=null}){
  const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone),latest=new Map(),byQuestion=new Map(questions.map(q=>[q.id,q]));
  for(const a of attempts){
-  if(!complete(a)||a.diagnosticRunId||a.questionSnapshot?.diagnosticOnly||a.qualificationId&&a.qualificationId!==qualification.id||!a.completedAt)continue;
+  if(!complete(a)||a.diagnosticRunId||!canUseQuestion(a.questionSnapshot,'practice')||a.qualificationId&&a.qualificationId!==qualification.id||!a.completedAt)continue;
   if(examPartId&&partOfAttempt(a.questionSnapshot?a:{...a,questionSnapshot:byQuestion.get(a.questionId)},qualification)!==examPartId)continue;
   const distance=daysBetween(dateInZone(a.completedAt,zone),today);
   if(distance<0||distance>=days||new Date(a.completedAt)>new Date(at))continue;
@@ -34,7 +35,7 @@ export function summarizeFields(data){
 // at now. Repeated questions use the last result within EACH 28-day window.
 export function learningTrend({qualification,attempts,questions=[],plan=null,at=new Date(),examPartId=null,topicId=null}){
  const zone=plan?.timeZone||'Asia/Tokyo',today=dateInZone(at,zone),byId=new Map(questions.map(q=>[q.id,q])),topics=new Set(qualification.topics.map(t=>t.id)),cutoff=new Date(at).getTime();
- const eligible=attempts.filter(a=>complete(a)&&!a.diagnosticRunId&&!a.questionSnapshot?.diagnosticOnly&&(!a.qualificationId||a.qualificationId===qualification.id)&&Date.parse(a.completedAt)<=cutoff).flatMap(a=>{
+ const eligible=attempts.filter(a=>complete(a)&&!a.diagnosticRunId&&canUseQuestion(a.questionSnapshot,'practice')&&(!a.qualificationId||a.qualificationId===qualification.id)&&Date.parse(a.completedAt)<=cutoff).flatMap(a=>{
   const q=a.questionSnapshot||byId.get(a.questionId),id=q?.topicId||qualification.topics.find(t=>t.name===q?.topic)?.id;
   if(!topics.has(id)||topicId&&id!==topicId||examPartId&&partOfAttempt(q?{...a,questionSnapshot:q}:a,qualification)!==examPartId)return [];
   return [{a,day:Date.parse(dateInZone(a.completedAt,zone))/86400000}];

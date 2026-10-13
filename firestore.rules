@@ -13,8 +13,9 @@ service cloud.firestore {
     && p.questionSnapshot is map && p.questionSnapshot.id == p.questionId
     && p.questionSnapshot.qualificationId == qualificationId
     && !('diagnosticOnly' in p.questionSnapshot)
+    && (!('uses' in p.questionSnapshot) || (p.questionSnapshot.uses is list && p.questionSnapshot.uses.size() > 0 && p.questionSnapshot.uses.size() <= 3 && p.questionSnapshot.uses.hasOnly(['practice','diagnostic','mock']) && p.questionSnapshot.uses.hasAny(['practice'])))
     && p.materialSnapshot is map && p.materialSnapshot.hints is list
-    && p.materialSnapshot.hints.size() >= 1 && p.materialSnapshot.hints.size() <= 20
+    && p.materialSnapshot.hints.size() >= 0 && p.materialSnapshot.hints.size() <= 20
     && p.hintCount is int && p.hintCount >= 0 && p.hintCount <= p.materialSnapshot.hints.size()
     && p.hintEvents is list && p.hintEvents.size() == p.hintCount
     && p.questionSnapshot.choices is list && p.questionSnapshot.choices.size() >= 2 && p.questionSnapshot.choices.size() <= 20
@@ -38,29 +39,29 @@ service cloud.firestore {
   function validDiagnostic(p, id, qualificationId) {
    return p.keys().hasOnly(['id','qualificationId','version','blueprintVersion','selectionPolicy','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
     && p.id == id && p.qualificationId == qualificationId && p.version == 1
-    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size == 30
+    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size is int && p.size >= 30 && p.size <= 200
     && p.status in ['in_progress','completed','ended_early']
     && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
-    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < 30
-    && p.responses is map && p.responses.size() <= 30
+    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < p.size
+    && p.responses is map && p.responses.size() <= p.size
     && (p.currentChoiceId == null || p.currentChoiceId is string)
-    && p.slots is list && p.slots.size() == 30;
+    && p.slots is list && p.slots.size() == p.size;
   }
   function validMock(p, id, qualificationId) {
    return p.keys().hasOnly(['id','qualificationId','version','mode','mockSet','blueprintVersion','selectionPolicy','catalogRevision','assistance','feedback','size','status','startedAt','completedAt','currentIndex','currentChoiceId','responses','slots'])
     && p.id == id && p.qualificationId == qualificationId && p.version == 1 && p.mode == 'mock'
-    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size == 80 && p.selectionPolicy == null
+    && p.assistance == 'none' && p.feedback == 'after-finish' && p.size is int && p.size >= 1 && p.size <= 200 && p.selectionPolicy == null
     && p.mockSet is map && p.mockSet.keys().hasOnly(['id','label','version','questionIds'])
     && p.mockSet.id is string && p.mockSet.id.matches('[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}')
     && p.mockSet.label is string && p.mockSet.label.size() > 0 && p.mockSet.label.size() <= 200
     && p.mockSet.version is int && p.mockSet.version > 0
-    && p.mockSet.questionIds is list && p.mockSet.questionIds.size() == 80
+    && p.mockSet.questionIds is list && p.mockSet.questionIds.size() == p.size
     && p.status in ['in_progress','completed','ended_early']
     && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
-    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < 80
-    && p.responses is map && p.responses.size() <= 80
+    && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < p.size
+    && p.responses is map && p.responses.size() <= p.size
     && (p.currentChoiceId == null || p.currentChoiceId is string)
-    && p.slots is list && p.slots.size() == 80;
+    && p.slots is list && p.slots.size() == p.size;
   }
   function frozenDiagnostic(p, old) {
    return p.diff(old).affectedKeys().hasOnly(['responses','currentChoiceId','status','currentIndex','completedAt'])

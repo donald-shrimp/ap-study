@@ -83,7 +83,7 @@ if args.complete:
     assert all(s['status']=='ready' for s in sets['sets']) and all(id in published for id in all_ids)
     assert progress['pendingReviewCount']==0
 assert qualification['diagnosticBlueprint']['size']==30 and qualification['diagnosticBlueprint']['assistance']=='none'
-assert len(originals)==800 and not any(q.get('diagnosticOnly') for q in originals.values())
+assert len(originals)==800 and not any('practice' not in q.get('uses', ['practice']) for q in originals.values())
 for item in progress['items']:
     if item['status']=='awaiting-independent-review':assert item['questionId'] not in published
 print('PASS '+('160 reviewed materials / ' if args.complete else 'planned materials / ')+'two 80-slot sets / 160 distinct source families / all17 fields / 50+10+20 per set / actual review hashes / unaided and ordinary-corpus isolation')

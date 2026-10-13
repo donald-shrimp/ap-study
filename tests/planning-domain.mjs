@@ -1,3 +1,4 @@
+import {canUseQuestion} from '../src/domain/content-policy.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -33,11 +34,11 @@ test('本人の計画の前提は任意・厳密に検証し、残日数と診�
 const variants=questions.slice(0,30).map((original,i)=>({...structuredClone(original),id:`variant-${i}`,diagnosticOnly:true,parentQuestionId:original.id,packId:'variants',packLabel:'検証専用',hints:[]}));
 test('派生問題は分野枠内で優先し、通常問題で補い、元問題の重複を避ける',()=>{
  const early=selectDiagnostic(questions,q,[],()=>.42,variants);
- assert.equal(early.length,30);assert.equal(early.filter(x=>x.diagnosticOnly).length,3);assert.deepEqual(q.topics.map(t=>early.filter(x=>x.topicId===t.id).length),[10,10,10]);assert.equal(new Set(early.map(x=>x.parentQuestionId||x.id)).size,30);
- const full=selectDiagnostic(questions,{...q,diagnosticBlueprint:{variantLimits:{one:8,two:8,three:8}}},[],()=>.42,variants);
- assert.equal(full.filter(x=>x.diagnosticOnly).length,24);assert.deepEqual(q.topics.map(t=>full.filter(x=>x.topicId===t.id).length),[10,10,10]);assert.equal(new Set(full.map(x=>x.parentQuestionId||x.id)).size,30);
+ assert.equal(early.length,30);assert.equal(early.filter(x=>!canUseQuestion(x,'practice')).length,3);assert.deepEqual(q.topics.map(t=>early.filter(x=>x.topicId===t.id).length),[10,10,10]);assert.equal(new Set(early.map(x=>x.parentQuestionId||x.id)).size,30);
+ const full=selectDiagnostic(questions,{...q,diagnosticBlueprint:{size:30,variantLimits:{one:8,two:8,three:8}}},[],()=>.42,variants);
+ assert.equal(full.filter(x=>!canUseQuestion(x,'practice')).length,24);assert.deepEqual(q.topics.map(t=>full.filter(x=>x.topicId===t.id).length),[10,10,10]);assert.equal(new Set(full.map(x=>x.parentQuestionId||x.id)).size,30);
  const additional={...variants[0],id:'same-parent-other'};const selected=selectDiagnostic(questions,q,[],()=>.42,[...variants,additional]);assert.ok(selected.filter(x=>(x.parentQuestionId||x.id)==='q0').length<=1);
- const unseenOriginal=selectDiagnostic(questions,q,variants.map(x=>({questionId:x.id})),()=>.42,variants);assert.equal(unseenOriginal.filter(x=>x.diagnosticOnly).length,0);
+ const unseenOriginal=selectDiagnostic(questions,q,variants.map(x=>({questionId:x.id})),()=>.42,variants);assert.equal(unseenOriginal.filter(x=>!canUseQuestion(x,'practice')).length,0);
  assert.throws(()=>selectDiagnostic(questions,q,[],()=>.42,[{...variants[0],topicId:'two'}]));assert.throws(()=>selectDiagnostic(questions,q,[],()=>.42,[{...variants[0],parentQuestionId:'missing'}]));assert.throws(()=>selectDiagnostic(questions,q,[],()=>.42,[variants[0],variants[0]]));
  assert.throws(()=>selectDiagnostic(questions.slice(0,20),q,[],()=>.42,variants.slice(0,20)));assert.throws(()=>selectDiagnostic(questions,{...q,diagnosticBlueprint:{variantLimits:{one:-1}}}));
 });
@@ -46,7 +47,7 @@ test('派生の結果と元問題の経験を分離し、通常学習・計画�
  validateDiagnostic(run,q,validateAssessmentAttempt);const frozen=JSON.stringify(run.slots);
  for(let i=0;i<30;i++)submitDiagnostic(run,run.slots[run.currentIndex].attempt.questionSnapshot.diagnosticOnly?'a':'b');
  const result=diagnosticResult(run,q),derived=result.composition.find(c=>c.kind==='derived');assert.equal(derived.selected,3);assert.equal(derived.answered,3);assert.equal(derived.correct,0);assert.equal(derived.parentPreviouslySeen,run.slots.filter(s=>s.kind==='derived'&&s.parentQuestionId==='q0').length);
- assert.equal(result.items.length,30);assert.equal(result.blueprintVersion,2);assert.equal(JSON.stringify(run.slots),frozen);
+ assert.equal(result.items.length,30);assert.equal(result.blueprintVersion,4);assert.equal(JSON.stringify(run.slots),frozen);
  const attempts=diagnosticAttempts(run);assert.equal(attempts.length,30);assert.equal(summarize(attempts,q).all.completedAttempts,27);assert.equal(summarize(attempts,q).all.incorrect,0);
  assert.throws(()=>createAttempt(variants[0]));assert.throws(()=>validateAttempt(run.slots.find(s=>s.kind==='derived').attempt));
  const clone=structuredClone(run);clone.slots[0].kind=clone.slots[0].kind==='derived'?'original':'derived';assert.throws(()=>validateDiagnostic(clone,q,validateAssessmentAttempt));

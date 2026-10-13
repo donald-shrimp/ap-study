@@ -34,7 +34,7 @@ with sync_playwright() as p:
     assert not any('/data/qualifications/ap/diagnostic.' in u for u in requests)
     page.get_by_role('button',name='おまかせで1問',exact=True).click()
     page.get_by_role('button',name='回答する',exact=True).wait_for()
-    assert not state(page)['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
+    assert 'practice' in state(page)['attempts'][-1]['questionSnapshot'].get('uses', ['practice'])
     page.get_by_role('button',name='中断',exact=True).click();state(page)
     page.locator('.home-assessments [data-view=diagnostics]').click()
     page.get_by_role('button',name='30問の診断をはじめる',exact=True).click()
@@ -77,9 +77,9 @@ with sync_playwright() as p:
         page.get_by_role('button',name='回答して結果へ' if i==29 else '回答して次へ',exact=True).click()
         if i<29:page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()
     page.get_by_role('heading',name='診断結果',exact=True).wait_for()
-    page.get_by_text('出題構成を確認',exact=True).click()
+    page.get_by_text('出題の内訳',exact=True).click()
     assert f'派生問題：{len(derived)}問出題・{len(derived)}問回答・0問正解' in page.locator('#main').inner_text()
-    reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'))
+    reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の問題を学習'))
     assert reviews.count()==len(derived)
     for i in range(len(derived)):
         assert reviews.nth(i).locator('.reason-list li').count()==4
@@ -97,7 +97,7 @@ with sync_playwright() as p:
     assert len([item for item in result['items'] if item['kind']=='derived' and item['parentQuestionId']])==len(derived)
     nav(page,'review');assert not page.locator('[data-action=start][data-id^="ap-diagnostic-"]').count()
     nav(page,'materials');assert not page.locator('[data-action=start][data-id^="ap-diagnostic-"]').count()
-    assert all(not a['questionSnapshot'].get('diagnosticOnly') for a in state(page)['attempts'])
+    assert all('practice' in a['questionSnapshot'].get('uses', ['practice']) for a in state(page)['attempts'])
     context.set_offline(False);page.reload()
     # The sidebar exists in the HTML before the application has opened its store.
     # Wait for the restored view to render before clicking navigation on a slow host.
@@ -105,16 +105,16 @@ with sync_playwright() as p:
     page.locator('.sidebar [data-view=home]').click()
     page.locator('.home-assessments [data-view=diagnostics]').click()
     page.get_by_role('button',name='結果を見る',exact=True).click()
-    reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の過去問を学習'))
-    reviews.first.locator('summary').click();reviews.first.get_by_role('button',name='元の過去問を学習',exact=True).click()
+    reviews=page.locator('.diagnostic-review').filter(has=page.locator('button').filter(has_text='元の問題を学習'))
+    reviews.first.locator('summary').click();reviews.first.get_by_role('button',name='元の問題を学習',exact=True).click()
     try:
         page.get_by_role('button',name='回答する',exact=True).wait_for(timeout=10000)
     except Exception:
         page.screenshot(path=str(artifact/'return-parent-failure.png'),full_page=True)
         print(page.locator('#main').inner_text(),page.locator('#notice').inner_text() if page.locator('#notice').count() else '',page.evaluate('navigator.onLine'),flush=True)
         raise
-    assert not state(page)['attempts'][-1]['questionSnapshot'].get('diagnosticOnly')
-    assert zoomed=={'source','figure'},zoomed
+    assert 'practice' in state(page)['attempts'][-1]['questionSnapshot'].get('uses', ['practice'])
+    assert zoomed=={('figure' if s['attempt']['questionSnapshot'].get('image') else 'source') for s in slots if s['attempt']['questionSnapshot'].get('image') or not s['attempt']['questionSnapshot'].get('stem')},zoomed
     assert not errors,errors
     (artifact/('public-browser.json' if URL.startswith('https:') else 'local-browser.json')).write_text(json.dumps({'url':URL,'derived':len(derived),'original':30-len(derived),'families':30,'answered':30,'regularCompleted':30-len(derived),'offlineFrozenResume':True,'choiceReasons':4,'errors':errors},ensure_ascii=False,indent=2)+'\n')
     browser.close()

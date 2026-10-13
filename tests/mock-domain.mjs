@@ -7,7 +7,7 @@ import {submitDiagnostic,finishDiagnostic,validateDiagnostic} from '../src/domai
 import {createStateValidator} from '../src/storage/validate.js';
 import {makeState} from '../src/domain/study.js';
 const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
-const qualification=read('data/qualifications/ap/manifest.json'),questions=read('data/qualifications/ap/'+qualification.diagnostic.url),sets=read('data/qualifications/ap/'+qualification.mockSets.url).sets;
+const qualification=read('data/qualifications/ap/manifest.json'),questions=read('data/qualifications/ap/'+qualification.assessment.url),sets=read('data/qualifications/ap/'+qualification.mockSets.url).sets;
 const validateState=createStateValidator({getQuestions:()=>questions,getTopics:()=>qualification.topics.map(t=>t.name),getQualification:()=>qualification,allowDiagnosticOnly:true});
 const validateAttempt=a=>validateState({...makeState(),attempts:[a]});
 test('模試A/Bの80問は固定順・固定4択、受け直しは別ID',()=>{

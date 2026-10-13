@@ -84,7 +84,7 @@ with sync_playwright() as p:
     contexts[0].set_offline(False)
     login(first,'other-'+email);assert state(first)['state']['attempts']==[] and state(first)['pending']==[]
     remaining=first.evaluate('''async owner=>{const {createLocalStore}=await import('./src/storage/local.js');const store=createLocalStore({qualificationId:'ap',rootPath:new URL('.',document.baseURI).pathname,owner});try{return await store.pending();}finally{await store.close();}}''',pending_owner['identity']['owner']);assert remaining
-    login(third,email);assert len([a for a in state(third)['state']['attempts'] if a['completedAt']])==3
+    login(third,email);wait_for_async(third,'async()=>(await ('+READ+')()).state.attempts.filter(a=>a.completedAt).length===3');assert len([a for a in state(third)['state']['attempts'] if a['completedAt']])==3
     assert third.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     assert not errors,errors
     third.screenshot(path='/workspace/scratch/firebase-sync/synced-mobile.png',full_page=True)
