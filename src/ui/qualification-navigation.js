@@ -13,7 +13,7 @@ export function qualificationChooserHTML(qualifications,root,previous) {
 export function installQualificationSwitch({qualifications,qualification,root,beforeLeave,onError}) {
  const link=document.createElement('a');link.id='qualification-switch';link.className='qualification-switch';
  link.href=new URL('?qualifications',root).href;link.setAttribute('aria-label',`資格を選ぶ（${qualification.name}）`);
- link.innerHTML=`<span>${esc(qualification.shortName||qualification.name)}</span><span aria-hidden="true">⌄</span>`;
+ link.innerHTML=`<span>${esc(qualification.shortName||qualification.name)}</span><span aria-hidden="true">▼</span>`;
  document.querySelector('.brand').after(link);
  let leaving=false;
  link.addEventListener('click',async event=>{

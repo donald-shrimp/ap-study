@@ -125,16 +125,18 @@
 .mock-set-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:18px}
 .mock-set{margin:0;display:flex;flex-direction:column;align-items:stretch;gap:12px}.mock-set h2,.mock-set p{margin:0}.mock-set .button{width:100%}.mock-previous{font-weight:700;color:var(--ink,#142f50)}.mock-score{font-size:1.2rem;font-weight:700}.mock-history .row{gap:12px}
 
-/* Assessment entrances stay visible beneath the dominant everyday-study card. */
-.qualification-switch{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:0 1 280px;min-width:0;min-height:44px;margin:0 auto 0 0;padding:8px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;font-size:.8rem;line-height:1.4;background:#fff;color:var(--text)}
+/* Give the brand, qualification chooser, and settings their own space. */
+.topbar:has(.qualification-switch){display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:24px}
+.qualification-switch{display:flex;align-items:center;justify-content:space-between;justify-self:center;gap:12px;width:max-content;max-width:100%;min-width:0;min-height:44px;padding:8px 14px;border:1px solid #dce5ef;border-radius:12px;text-decoration:none;font-size:.875rem;font-weight:600;line-height:1.4;background:#f3f6fa;color:var(--navy)}
 .qualification-switch>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.qualification-switch>span:last-child{flex-shrink:0}
+.qualification-switch>span:last-child{flex-shrink:0;font-size:.6rem;color:var(--muted)}
 .qualification-switch[aria-busy=true]{opacity:.6;pointer-events:none}
 .qualification-list{display:grid;gap:12px;margin-top:20px}
 .qualification-option{display:flex;justify-content:space-between;align-items:center;text-align:left;gap:16px;padding:16px}
 .qualification-option .small{display:block;margin-top:4px}
 .qualification-option[aria-current=true]{border-color:var(--accent);background:#effafa}
-@media(max-width:480px){.topbar:has(.qualification-switch){gap:8px}.qualification-switch{flex:1;margin:0;padding-inline:10px}.topbar:has(.qualification-switch) .brand{flex-shrink:0}.topbar:has(.qualification-switch) #settings-button{flex-shrink:0}}
+@media(max-width:480px){.topbar:has(.qualification-switch){column-gap:16px;min-height:72px;height:auto;padding:12px 20px}.qualification-switch{padding-inline:12px}}
+/* Assessment entrances stay visible beneath the dominant everyday-study card. */
 .home-assessments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .home-assessments>.assessment-card:only-child{grid-column:1/-1}
 .button.assessment-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;min-width:0;min-height:108px;padding:13px;border:1px solid #b8c9dd;border-radius:14px;background:var(--blue);color:var(--navy);text-align:left}
