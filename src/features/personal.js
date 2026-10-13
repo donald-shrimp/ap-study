@@ -1,10 +1,12 @@
+import {setSyncStatus} from '../ui/sync-status.js';
 import {createWorkspaceStore} from '../storage/workspace.js';
 import {validatePersonal,personalId} from '../domain/personal.js';
 import {esc,now} from '../utils.js';
 export function createPersonalFeature({qualification,rootPath,getStore,getState,onChanged,onNotice,onApplied,onCheckpoints}){
  let workspace,rows=[],identity,generation=0,queue=Promise.resolve(),status='guest';const editing=new Map(),unsaved=new Set();
  const row=id=>rows.find(r=>r.id===id);
- function show(kind){if(kind==='synced'&&rows.some(r=>r.kind==='draft'))kind=rows.some(r=>r.kind==='draft'&&r.payload.baseRevision!==(row('note--'+r.payload.topicId)?.localRevision||0))?'conflict':'pending';status=kind;const el=document.getElementById('personal-sync-state');if(el)el.textContent={guest:'ログインすると、分野メモ・単語帳の再開位置を同期できます。',pending:'メモ・再開位置：同期待ち',offline:'メモ・再開位置：オフライン · 接続後に同期します',syncing:'メモ・再開位置：同期中…',synced:'メモ・再開位置も同期済み。',conflict:'分野メモの変更が重なりました。使う内容を選んでください。',rules:'メモ・再開位置：Firebaseルールの更新が必要です。端末には保存しています。',error:'メモ・再開位置：同期できません。端末には保存しています。'}[kind]||'メモ・再開位置：同期待ち';}
+ function show(kind,error){if(kind==='synced'&&rows.some(r=>r.kind==='draft'))kind=rows.some(r=>r.kind==='draft'&&r.payload.baseRevision!==(row('note--'+r.payload.topicId)?.localRevision||0))?'conflict':'pending';status=kind;setSyncStatus('personal',kind,error);}
+
  function projected(){const state=getState();let changed=false;for(const r of rows.filter(r=>r.kind==='note')){if(editing.has(r.payload.topicId)||unsaved.has(r.payload.topicId)||row('draft--'+r.payload.topicId))continue;if(state.readingNotes[r.payload.topicId]!==r.payload.text){state.readingNotes[r.payload.topicId]=r.payload.text;changed=true;}}return changed;}
  function conflictsHtml(topicId){const r=row('note--'+topicId),d=row('draft--'+topicId);if(!r?.conflict&&(!d||d.payload.baseRevision===(r?.localRevision||0)))return '';const remote=r?.conflict?.payload.text??r?.payload.text??'';return `<p class="small">別端末のメモ：${esc(remote||'（空欄）')}</p><div class="button-row"><button class="button secondary" data-action="note-local" data-topic-id="${esc(topicId)}">この端末のメモを使う</button><button class="button secondary" data-action="note-remote" data-topic-id="${esc(topicId)}">別端末のメモを使う</button></div>`;}
  function refreshControls(){for(const t of qualification.topics){const box=document.getElementById('note-conflict-'+t.id);if(box){const html=conflictsHtml(t.id);if(box.innerHTML!==html&&!box.contains(document.activeElement))box.innerHTML=html;}}onCheckpoints?.();}

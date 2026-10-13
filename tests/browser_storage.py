@@ -60,3 +60,18 @@ def open_answer_history(page):
     history=page.locator('.answer-history')
     if not history.evaluate('(el)=>el.open'):
         history.locator(':scope > summary').click()
+
+def open_data_management(page, section=None):
+    if not page.locator('#settings-dialog').evaluate('(el)=>el.open'):
+        page.locator('#settings-button').click()
+    ids=['data-management']+(['special-data'] if section in ['cards','diagnostics'] else [])
+    for id in ids:
+        details=page.locator('#'+id)
+        if not details.evaluate('(el)=>el.open'):
+            details.locator(':scope > summary').click()
+
+def edit_material(page, question_id):
+    button=page.locator(f'[data-action="edit"][data-id="{question_id}"]')
+    if not button.is_visible():
+        button.locator('xpath=ancestor::details[1]').locator(':scope > summary').click()
+    button.click()

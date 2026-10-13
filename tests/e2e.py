@@ -1,3 +1,4 @@
+from browser_storage import edit_material, open_data_management
 from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json,os,shutil,tempfile,time
 from pathlib import Path
@@ -43,11 +44,11 @@ with sync_playwright() as p:
  page.locator('[name=query]').fill('存在しない検索条件ABCXYZ');assert page.locator('#catalog-results .row').count()==0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('DNS');assert page.locator('#catalog-results .row').count()>0
  page.locator('[data-action=reset-filters]').click();page.locator('[name=query]').fill('二乗のビット数');assert page.locator('[data-action=start][data-id=r04a-q1]').count()==1
- page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count}問')
+ page.locator('[data-action=reset-filters]').click();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f'{reviewed_count}問')
  print(f'PASS 800-question list / year-season filters / pagination / no results / OCR keyword search / {reviewed_count} reviewed',flush=True)
  for exam in complete_exams:
   page.locator('[data-action=reset-filters]').click();q=by_id[f'{exam}-q1']
-  page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=enriched]').check()
+  page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season'])
   assert page.locator('.catalog-count').inner_text().startswith('80問'),exam
  nav('topics');assert page.locator('.topic-card').count()==17
  nav('history');page.locator('#record-field-security input').fill('第4章 p.120 <script>alert(1)</script>');state();nav('topics');security=page.locator('#field-security');security.locator('[data-action=field-practice]').click()
@@ -160,14 +161,14 @@ with sync_playwright() as p:
  else:
   assert pending_fixture['summary'] in page.locator('.result').inner_text();assert '個別の解答解説は未追加' not in page.locator('.result').inner_text();assert page.locator('.reason-list li').count()==4
  nav('review');assert page.locator(f'[data-action=review-start][data-id={pending_id}]').count()==1
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);page.locator(f'[data-action=edit][data-id={pending_id}]').click()
+ nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=year]').select_option(str(pending_fixture['year']));page.locator('[name=season]').select_option(pending_fixture['season']);page.locator('[name=query]').fill(pending_fixture['title']);edit_material(page,pending_id)
  page.locator('[name=hint0]').fill('自分用メモ <script>alert(1)</script>');page.locator('[name=explanation]').fill('教科書 p.60 を確認');page.get_by_role('button',name='編集を保存する').click()
  # An old attempt keeps its original material after personal editing.
  nav('history');open_answer_history(page);old=next(a for a in state()['attempts'] if a['questionId']==pending_id);page.locator(f'[data-action=resume][data-id="{old["id"]}"]').click()
  assert old['materialSnapshot']['hints']==pending_fixture['hints'];assert '教科書 p.60 を確認' not in page.locator('.result').inner_text()
  assert ('個別の解答解説は未追加' in page.locator('.result').inner_text())==(pending_fixture['enrichment']=='topic-guide')
  open_q(pending_id);page.get_by_role('button',name='ヒントを1つ見る').click();assert '<script>alert(1)</script>' in page.locator('.hint-box').inner_text();assert page.locator('.hint-box script').count()==0
- nav('materials');page.locator('[data-action=reset-filters]').click();page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f"{reviewed_count+(pending_fixture['enrichment']=='topic-guide')}問");page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
+ nav('materials');page.locator('[data-action=reset-filters]').click();assert page.locator('#catalog-results .row').count()==20;assert page.locator('.catalog-count').inner_text().startswith(f"{reviewed_count+(pending_fixture['enrichment']=='topic-guide')}問");page.locator('[name=query]').fill(pending_fixture['title']);assert '自分で編集した教材' in page.locator('#catalog-results').inner_text();open_q(pending_id)
  print('PASS scanned source / official key / explanation status / retry / personal notes / immutable snapshot',flush=True)
  if page.locator('.original-question').count():
   page.locator('.original-question>summary').click()
@@ -177,6 +178,7 @@ with sync_playwright() as p:
  page.get_by_role('button',name='問題画像を拡大',exact=True).focus();page.keyboard.press('Enter');assert page.locator('#image-dialog').is_visible();page.keyboard.press('Escape')
  page.screenshot(path=str(ROOT/'question-mobile.png'),full_page=True)
  page.get_by_role('button',name='表示・データ',exact=True).click()
+ open_data_management(page)
  with page.expect_download() as download:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=ROOT/'record.json';download.value.save_as(str(backup));page.on('dialog',lambda d:d.accept());page.locator('#import-state').set_input_files(str(backup));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("読み込みました")')
  original=state();bad=json.loads(backup.read_text());bad['attempts'][0]['materialSnapshot']['stem']='<img src=x onerror=alert(1)>';bad_path=ROOT/'bad.json';bad_path.write_text(json.dumps(bad));page.locator('#settings-status').evaluate('(e)=>e.textContent=""');page.locator('#import-state').set_input_files(str(bad_path));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("現在の記録は変更していません")');assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original

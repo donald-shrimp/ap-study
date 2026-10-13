@@ -1,8 +1,8 @@
 import {validateLearning,learningId,contextPayload,applyLearning,scopeBelongsToQualification,contextMatchesQuestion} from '../domain/learning-state.js';
+import {setSyncStatus} from '../ui/sync-status.js';
 export function createLearningFeature({qualification,getStore,getState,onUpdate,onNotice}){
  let store,rows=[],generation=0,status='guest';const notified=new Set();
- const messages={guest:'ログインすると、紙ペン指定・先送り・再開範囲を同期できます。',pending:'学習設定：同期待ち',syncing:'学習設定：同期中…',synced:'学習設定も同期済み。',offline:'学習設定：オフライン · 接続後に同期します',rules:'学習設定：Firebaseルールの更新が必要です。端末内には保存しています。',error:'学習設定：同期できません。端末内には保存しています。'};
- function show(kind){status=kind;const el=document.getElementById('learning-sync-state');if(el)el.textContent=messages[kind]||messages.error;}
+ function show(kind,error){status=kind;setSyncStatus('learning',kind,error);}
  async function bind(){
   const token=++generation,boundStore=getStore().learningStore();store=boundStore;rows=[];
   let next,identity;try{next=await boundStore.read();identity=await boundStore.identity();}catch{if(token===generation)show('error');return;}

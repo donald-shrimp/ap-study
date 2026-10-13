@@ -24,18 +24,21 @@ export function initPWA({beforeUpdate=async()=>true}={}) {
   const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   function showInstallState() {
     installButton.hidden = standalone() || !installPrompt;
-    installHelp.textContent = standalone() ? 'ホーム画面から起動しています。'
+    installHelp.hidden=!!standalone();
+    installHelp.textContent = standalone() ? ''
       : installPrompt ? 'ホーム画面やアプリ一覧から起動できます。'
       : iOS
         ? 'Safariの共有メニューから「ホーム画面に追加」を選びます。'
         : 'ブラウザのメニューから「アプリをインストール」または「ホーム画面に追加」を選びます。';
+    document.querySelector('.pwa-settings').hidden=!!standalone()&&!registration?.waiting&&!status.textContent&&new URL(location.href).searchParams.get('pwa-check')!=='1';
+    document.getElementById('pwa-title').textContent=standalone()?'アプリの更新':'ホーム画面に追加';
   }
   showInstallState();
   window.addEventListener('beforeinstallprompt', event => {
     event.preventDefault(); promptReceived = true; installPrompt = event; showInstallState();
   });
   window.addEventListener('appinstalled', () => {
-    installPrompt = null; installButton.hidden = true; installHelp.textContent = 'ホーム画面に追加しました。';
+    installPrompt = null;showInstallState();
   });
   installButton.addEventListener('click', async () => {
     if (!installPrompt) return;
@@ -49,12 +52,12 @@ export function initPWA({beforeUpdate=async()=>true}={}) {
     }))).catch(() => { status.textContent = '診断画面を読み込めませんでした。接続後に開き直してください。'; });
   }
   if (!('serviceWorker' in navigator) || !isSecureContext) {
-    status.textContent = 'このブラウザではオフライン保存を利用できません。'; return;
+    status.textContent = 'このブラウザではオフライン保存を利用できません。';showInstallState();return;
   }
   updateButton.addEventListener('click', async () => {
     if (!registration?.waiting) return;
     updateButton.disabled = true;
-    if(!await beforeUpdate()){updateButton.disabled=false;status.textContent='記録を保存できていません。先に書き出して保管してください。';return;}
+    if(!await beforeUpdate()){updateButton.disabled=false;status.textContent='記録を保存できていません。先に書き出して保管してください。';showInstallState();return;}
     reloadForUpdate = true;
     registration.waiting.postMessage({type: 'ACTIVATE_UPDATE'});
   });
@@ -64,13 +67,13 @@ export function initPWA({beforeUpdate=async()=>true}={}) {
   navigator.serviceWorker.register(new URL('sw.js', appURL), {scope: appURL.pathname, updateViaCache: 'none'})
     .then(reg => {
       registration = reg;
-      const showUpdate = () => { updateButton.hidden = !reg.waiting; };
+      const showUpdate = () => { updateButton.hidden = !reg.waiting;showInstallState(); };
       showUpdate();
       reg.addEventListener('updatefound', () => {
         reg.installing?.addEventListener('statechange', showUpdate);
       });
     }).catch(error => {
       workerError = String(error);
-      if (!navigator.serviceWorker.controller) status.textContent = 'オフライン用の保存ができませんでした。接続後に開き直してください。';
+      if (!navigator.serviceWorker.controller) status.textContent = 'オフライン用の保存ができませんでした。接続後に開き直してください。';showInstallState();
     });
 }

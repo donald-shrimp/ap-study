@@ -17,7 +17,7 @@ def synced(page):
  kick(page)
  try:wait_for_async(page,'async()=>!(await ('+READ+')()).some(r=>r.dirty||r.conflict)')
  except AssertionError:
-  print('Sync status:',page.locator('#workspace-sync-state').inner_text());print('Pending metadata:',[{k:r.get(k) for k in ['kind','dirty','remoteRevision','localRevision']} for r in page.evaluate(READ)]);raise
+  print('Sync status:',page.locator('#sync-state').inner_text());print('Pending metadata:',[{k:r.get(k) for k in ['kind','dirty','remoteRevision','localRevision']} for r in page.evaluate(READ)]);raise
 def login(page,email):
  settings(page);page.wait_for_function('!document.getElementById("google-login").disabled')
  with page.expect_popup() as event:page.locator('#google-login').click()

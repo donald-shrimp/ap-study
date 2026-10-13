@@ -36,7 +36,7 @@ def login(page,email):
 
 def synced(page):
     settings(page);page.locator('#sync-now').click()
-    try:page.wait_for_function('document.getElementById("sync-state").textContent==="同期済み"',timeout=30000)
+    try:page.wait_for_function('document.getElementById("sync-state").dataset.study==="synced"',timeout=30000)
     except Exception:
         print('SYNC STATUS',page.locator('#sync-state').inner_text(),flush=True);print('PENDING',[(i['id'],i['revision'],i['payload']['status']) for i in state(page)['pending']],flush=True);raise
     wait_for_async(page,'async()=>!(await ('+READ+')()).pending.length')
@@ -55,7 +55,7 @@ with sync_playwright() as p:
     twin=contexts[0].new_page();twin.goto(URL);twin.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("import-guest").disabled');assert not state(twin)['state']['attempts']
     settings(first);settings(twin);first.once('dialog',lambda d:d.accept());twin.once('dialog',lambda d:d.accept());first.locator('#import-guest').click();twin.locator('#import-guest').click();first.wait_for_function('!document.getElementById("import-guest").disabled');twin.wait_for_function('!document.getElementById("import-guest").disabled');synced(first);synced(twin);assert len(state(twin)['state']['attempts'])==1;twin.close()
     imported=state(first);assert len(imported['state']['attempts'])==1 and imported['state']['attempts'][0]['id']!=guest_id
-    settings(first);first.once('dialog',lambda d:d.accept());first.locator('#import-guest').click();first.wait_for_function('!document.getElementById("import-guest").disabled');synced(first);assert len(state(first)['state']['attempts'])==1
+    settings(first);first.wait_for_function('document.getElementById("import-guest").hidden');synced(first);assert len(state(first)['state']['attempts'])==1
     print('PASS Google popup in Auth Emulator / explicit guest adoption / concurrent and repeated import without duplicates',flush=True)
     # Download hint and selected choice in a separate browser; resume forks.
     login(second,email);imported_id=imported['state']['attempts'][0]['id'];download=state(second)['state'];assert download['attempts'][0]['hintCount']==1 and download['attempts'][0]['selected']==0

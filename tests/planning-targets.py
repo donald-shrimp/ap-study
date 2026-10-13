@@ -1,3 +1,4 @@
+from browser_storage import open_data_management
 from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Week targets and manual milestones: real UI, backup and offline preservation."""
 import json,shutil,tempfile
@@ -33,11 +34,11 @@ with sync_playwright() as p:
  page.get_by_role('button',name='ホーム',exact=True).click();assert page.locator('.week-progress').inner_text()=='今週 1 / 8回 · あと7回';assert page.locator('.study-entrance').count()==3;page.get_by_role('button',name='計画を見る',exact=True).click()
  page.evaluate('document.querySelectorAll("#main details").forEach(d=>d.open=true);document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.screenshot(path=str(ARTIFACTS/'targets-mobile-200.png'),full_page=True)
  page.locator('#settings-button').click()
- with page.expect_download() as event:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
+ with page.expect_download() as event:open_data_management(page);page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=ARTIFACTS/'record.json';event.value.save_as(str(backup));assert json.loads(backup.read_text())['workspaceBackup']['plan']==plan;page.get_by_role('button',name='設定を閉じる').click()
  page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener("controllerchange",r,{once:true}));}')
  context.set_offline(True);page.reload();page.get_by_role('heading',name='受験日・学習計画',exact=True).wait_for();assert page.evaluate(READ)['payload']==plan;open_targets(page);assert '8回予定 / 現在1回 / あと7回' in page.locator('.phase-targets').inner_text();context.set_offline(False)
- fresh=browser.new_context();other=fresh.new_page();other.on('pageerror',lambda e:errors.append(str(e)));other.goto('http://127.0.0.1:4173/');other.get_by_role('button',name='おまかせで1問',exact=True).wait_for();other.locator('#settings-button').click();other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる').click();assert other.evaluate(READ)['payload']==plan
+ fresh=browser.new_context();other=fresh.new_page();other.on('pageerror',lambda e:errors.append(str(e)));other.goto('http://127.0.0.1:4173/');other.get_by_role('button',name='おまかせで1問',exact=True).wait_for();other.locator('#settings-button').click();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる').click();assert other.evaluate(READ)['payload']==plan
  page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='計画を見る',exact=True).click();open_targets(page);page.get_by_role('button',name='週別目標を削除',exact=True).last.click();page.get_by_text('目標・予定を削除しました。',exact=True).wait_for();open_targets(page);page.get_by_role('button',name='予定を削除',exact=True).click();page.get_by_text('目標・予定を削除しました。',exact=True).wait_for();assert len(page.evaluate(READ)['payload']['phases'][0]['weeklyTargets'])==1 and not page.evaluate(READ)['payload']['phases'][0]['milestones'];assert other.evaluate(READ)['payload']==plan
  assert not errors,errors;browser.close()
 print('PASS week add/edit/delete / invalid overlap unchanged / milestone part/date and manual completion / phase editing preserves targets / AI summary / home priority / backup restore / offline reload / mobile 200% / browser isolation')

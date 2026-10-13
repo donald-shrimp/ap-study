@@ -9,7 +9,7 @@ exec(compile((ROOT/'tests/sync.py').read_text().split('with sync_playwright() as
 BASE_READ=READ
 LEARNING='''async()=>{const root=new URL('.',document.baseURI),sdk=await import(new URL('assets/vendor/firebase.js',root)),{createLocalStore}=await import(new URL('src/storage/local.js',root));const s=createLocalStore({qualificationId:'ap',rootPath:root.pathname,owner:sdk.getAuth().currentUser?'uid:'+sdk.getAuth().currentUser.uid:undefined});try{return await s.learningStore().read();}finally{await s.close();}}'''
 def all_synced(page):
- settings(page);page.locator('#sync-now').click();page.wait_for_function('document.getElementById("sync-state").textContent==="同期済み" && document.getElementById("learning-sync-state").textContent==="学習設定も同期済み。"',timeout=30000);close_settings(page)
+ settings(page);page.locator('#sync-now').click();page.wait_for_function('document.getElementById("sync-state").textContent==="同期済み" && document.getElementById("sync-state").dataset.learning==="synced"',timeout=30000);close_settings(page)
 def active(page):
  s=state(page)['state'];return next(a for a in s['attempts'] if a['id']==s['currentId'])
 def field(page,topic='network',mode='paperless'):

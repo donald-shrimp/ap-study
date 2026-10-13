@@ -18,7 +18,7 @@ export function createMockViews({qualification,documents,currentSetId}){
   return `<article class="panel mock-set" data-mock-set="${esc(set.id)}"><h2>${esc(mockLabel(set.label))}</h2><p class="small muted">固定${set.size}問</p>${lastHTML(set.id)}${actionHTML}</article>`;
  }
  const cards=records=>sets.map(set=>cardHTML(set,records)).join('');
- function selectionHTML(){return `<div class="page-heading"><h1>模試を選ぶ</h1><button class="button study-back-button" data-view="home"><span aria-hidden="true">⌂</span> ホーム</button></div><p class="small muted">各回固定80問。ヒント・正誤・解説は終了後に表示します。途中で中断できます。</p><div class="mock-set-grid">${cards(false)}</div>${!sets.length?'<p class="empty">受けられる模試はまだありません。</p>':''}`;}
+ function selectionHTML(){return `<div class="page-heading"><h1>模試を選ぶ</h1><button class="button study-back-button" data-view="home"><span aria-hidden="true">⌂</span> ホーム</button></div><p class="small muted">80問・ヒントなし。終了後に採点。中断できます。</p><div class="mock-set-grid">${cards(false)}</div>${!sets.length?'<p class="empty">受けられる模試はまだありません。</p>':''}`;}
  function recordsHTML(){return `<div class="mock-set-grid">${cards(true)}</div>${!sets.length?'<p class="empty">模試はまだ登録されていません。</p>':''}`;}
  function detailHTML(){
   const selected=sets.find(s=>s.id===currentSetId),rows=forSet(currentSetId),label=selected?mockLabel(selected.label):rows[0]?.payload.mockSet.label||'模試';

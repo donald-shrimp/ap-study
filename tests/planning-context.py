@@ -1,3 +1,4 @@
+from browser_storage import open_data_management
 from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """User assumptions survive AI import, preview, offline editing and backup."""
 import json,shutil,tempfile
@@ -26,9 +27,9 @@ with tempfile.TemporaryDirectory(prefix='hitomon-context-') as directory,sync_pl
  context.set_offline(True);page.reload();page.get_by_role('heading',name='受験日・学習計画',exact=True).wait_for();form=edit(page);form.locator('[name=rationale]').fill('診断を見てから調整');form.get_by_role('button',name='前提を保存',exact=True).click();page.get_by_text('計画の前提を保存しました。',exact=True).wait_for();saved=plan(page);assert saved['context']['rationale']=='診断を見てから調整'
  page.evaluate('document.querySelectorAll("#main details").forEach(d=>d.open=true);document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.screenshot(path=str(Path(directory)/'context-mobile-200.png'),full_page=True)
  page.locator('#settings-button').click()
- with page.expect_download() as event:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
+ with page.expect_download() as event:open_data_management(page);page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=Path(directory)/'backup.json';event.value.save_as(str(backup));assert json.loads(backup.read_text())['workspaceBackup']['plan']['context']==saved['context']
- second=browser.new_context();other=second.new_page();other.on('dialog',lambda d:d.accept());other.goto('http://127.0.0.1:4173/');other.get_by_role('button',name='おまかせで1問',exact=True).wait_for();other.locator('#settings-button').click();other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();assert plan(other)['context']==saved['context'];second.close()
- open_plan_ai(page);context.set_offline(False);page.get_by_role('button',name='設定を閉じる').click();cleared=plan(page);cleared['context']={};page.locator('#plan-json').fill(json.dumps(cleared));page.get_by_role('button',name='検証してプレビュー',exact=True).click();assert '計画の前提は未登録です' in page.locator('#plan-preview').inner_text();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();assert plan(page)['context']=={}
+ second=browser.new_context();other=second.new_page();other.on('dialog',lambda d:d.accept());other.goto('http://127.0.0.1:4173/');other.get_by_role('button',name='おまかせで1問',exact=True).wait_for();other.locator('#settings-button').click();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();assert plan(other)['context']==saved['context'];second.close()
+ open_plan_ai(page);context.set_offline(False);page.get_by_role('button',name='設定を閉じる').click();cleared=plan(page);cleared['context']={};page.locator('#plan-json').fill(json.dumps(cleared));page.get_by_role('button',name='検証してプレビュー',exact=True).click();assert '計画の前提を削除します。' in page.locator('#plan-preview').inner_text();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();assert plan(page)['context']=={}
  assert not errors,errors;browser.close()
 print('PASS optional context / no setup gate / text escaping / AI import retains omitted context / explicit clear preview / invalid unchanged / external preview and summary / offline edit / backup restore / mobile 200%')

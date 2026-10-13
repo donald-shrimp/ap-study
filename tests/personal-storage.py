@@ -1,3 +1,4 @@
+from browser_storage import open_data_management
 """Interrupted memo commit recovery, durable conflict drafts, backup and reset."""
 from pathlib import Path
 exec(compile((Path(__file__).parent/'sync.py').read_text().split('with sync_playwright() as p:')[0],str(Path(__file__).parent/'sync.py'),'exec'))
@@ -7,9 +8,9 @@ with sync_playwright() as p:
  # A later canonical revision must not auto-adopt a stale draft on reload.
  pg.evaluate(SETUP,{'conflict':True});pg.reload();field.wait_for();assert field.input_value()=='中断時の入力';pg.locator('[data-action=note-remote][data-topic-id=network]').click();pg.wait_for_function('document.querySelector("[data-reading-topic=ネットワーク]").value==="別の変更"')
  field.fill('バックアップのメモ');pg.locator('.sidebar [data-view=home]').click();settings(pg)
- with pg.expect_download() as event:pg.locator('#export-state').click()
+ with pg.expect_download() as event:open_data_management(pg);pg.locator('#export-state').click()
  path=Path('/tmp/personal-backup-'+str(time.time_ns())+'.json');event.value.save_as(path)
- close_settings(pg);pg.locator('.sidebar [data-view=history]').click();field.fill('読み込み前のメモ');pg.locator('.sidebar [data-view=home]').click();settings(pg);pg.on('dialog',lambda d:d.accept());pg.locator('#import-state').set_input_files(str(path));pg.wait_for_function('document.getElementById("settings-status").textContent.includes("読み込みました")');close_settings(pg);pg.locator('.sidebar [data-view=history]').click();assert field.input_value()=='バックアップのメモ'
- settings(pg);pg.locator('#clear-state').evaluate('(el)=>el.click()');pg.wait_for_function('document.getElementById("settings-status").textContent.includes("削除しました")');close_settings(pg);pg.locator('.sidebar [data-view=history]').click();assert field.input_value()=='バックアップのメモ'
+ close_settings(pg);pg.locator('.sidebar [data-view=history]').click();field.fill('読み込み前のメモ');pg.locator('.sidebar [data-view=home]').click();settings(pg);pg.on('dialog',lambda d:d.accept());open_data_management(pg);pg.locator('#import-state').set_input_files(str(path));pg.wait_for_function('document.getElementById("settings-status").textContent.includes("読み込みました")');close_settings(pg);pg.locator('.sidebar [data-view=history]').click();assert field.input_value()=='バックアップのメモ'
+ settings(pg);open_data_management(pg);pg.locator('#clear-state').evaluate('(el)=>el.click()');pg.wait_for_function('document.getElementById("settings-status").textContent.includes("削除しました")');close_settings(pg);pg.locator('.sidebar [data-view=history]').click();assert field.input_value()=='バックアップのメモ'
  assert not errors,errors;b.close();path.unlink()
 print('PASS interrupted draft recovered / stale draft retained until choice / memo backup replacement / normal reset retains notes / no browser errors')

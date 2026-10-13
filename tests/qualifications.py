@@ -10,7 +10,7 @@ import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
-from browser_storage import wait_for_async, open_answer_history, state as saved_state
+from browser_storage import wait_for_async, open_answer_history, state as saved_state, edit_material
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = Path(tempfile.mkdtemp(prefix='hitomon-qualification-navigation-'))
@@ -80,8 +80,11 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.goto(url+'fixture-a/');page.locator('#result-heading').wait_for();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
             # Add a second one-question pack without touching application code.
             path=root/'content/fixture-a/questions.json';old=fixtures.fixture(2);new=fixtures.fixture(2,'constructor','extra')
+            new['enrichment']='topic-guide'
+            new['choiceReasons']=[]
             path.write_text(json.dumps([old,new]));builder.build(root)
             page.reload();page.locator('#result-heading').wait_for();page.locator('.sidebar [data-view=home]').click();page.locator('.sidebar [data-view=history]').click();assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
+            action_nav(page,'materials');page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==1;page.locator('[name=enriched]').uncheck();action_nav(page,'history');saved_state(page)
             # Change and then retire the question. The original answer stays graded
             # against its snapshot and remains readable after removal from the catalog.
             old['stem']='2＋2は幾つですか。';old['version']=2;old['correctChoiceId']='c0';old['summary']='2＋2＝4'
@@ -89,7 +92,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             path.write_text(json.dumps([old,new]));builder.build(root);page.reload();page.locator('.sidebar [data-view=history]').click();open_answer_history(page);page.locator('[data-action=resume]').click()
             assert '2＋3' in page.locator('.question-stem').inner_text() and '正解：2' in ''.join(page.locator('.answer-selection').inner_text().split())
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
-            action_nav(page,'materials');page.locator('[data-action=edit][data-id="same-question"]').click();page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
+            action_nav(page,'materials');edit_material(page,'same-question');page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
             page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));builder.build(root)
             page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-action=start]').count()==0
