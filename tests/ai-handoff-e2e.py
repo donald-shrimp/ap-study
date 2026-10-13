@@ -27,7 +27,7 @@ def open_answered_question(page):
 
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(executable_path=shutil.which("chromium"), headless=True, args=["--no-sandbox"])
+    browser = p.chromium.launch(executable_path=shutil.which("chromium"), headless=True, args=["--no-sandbox"],ignore_default_args=['--disable-popup-blocking'])
     context = browser.new_context(viewport={"width": 390, "height": 844},is_mobile=True,has_touch=True,user_agent='Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36')
     page = context.new_page()
     errors = []
@@ -57,6 +57,7 @@ with sync_playwright() as p:
 
     # Native copying must finish while the study tab is focused, before opening.
     page.evaluate('navigator.clipboard.writeText("前回の文章を再設定")')
+    page.evaluate('''()=>{window.aiOpened=[];const nativeOpen=window.open.bind(window);window.open=(...args)=>{window.aiOpened.push(args);return nativeOpen(...args)}}''')
     with context.expect_page() as opened:
         page.locator('#ai-handoff-open').click()
     ai=opened.value;ai.wait_for_url('https://chatgpt.com/')
@@ -64,6 +65,7 @@ with sync_playwright() as p:
     assert page.url.startswith(BASE) and not page.locator('#ai-handoff-dialog').is_visible()
     page.bring_to_front()
     assert page.evaluate('navigator.clipboard.readText()')==preview
+    assert page.evaluate('window.aiOpened')==[['https://chatgpt.com/','_blank']], 'Open destination directly, without a waiting tab'
     assert state(page)['currentId']==before['currentId']
     ai.close();page.locator('[data-action="ask-ai"]').click()
     page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して')
@@ -149,11 +151,12 @@ with sync_playwright() as p:
     other.wait_for_function('Boolean(window.aiDelayCopy)')
     assert other.url.startswith(BASE)
     assert other.locator('#ai-handoff-open').is_disabled()
+    assert len(context.pages)==2, 'Do not open any tab during the settlement delay'
     other.keyboard.press('Escape')
     other.locator('[data-action="ask-ai"]').click()
     other.clock.run_for(600)
     assert other.url.startswith(BASE) and other.locator('#ai-handoff-dialog').is_visible()
-    assert len(context.pages)==2, 'Cancel during settlement must close the reserved tab'
+    assert len(context.pages)==2, 'Canceled settlement must never open a tab'
     other.locator('#ai-handoff-close').click()
     other.clock.resume()
 
@@ -184,16 +187,6 @@ with sync_playwright() as p:
     ai=opened.value;ai.wait_for_url('https://chatgpt.com/');ai.close()
     assert other.url.startswith(BASE)
 
-    # Closing the reserved tab is cancellation, rather than a silent redirect.
-    other.locator('[data-action="ask-ai"]').click()
-    other.clock.install()
-    with context.expect_page() as opened:
-        other.locator('#ai-handoff-open').click()
-    opened.value.close();other.clock.run_for(600)
-    other.locator('#ai-handoff-manual:visible').wait_for()
-    assert 'タブが閉じられました' in other.locator('#ai-handoff-status').inner_text()
-    assert other.url.startswith(BASE) and len(context.pages)==2
-    other.clock.resume()
     assert not errors, "Browser errors: " + repr(errors)
     browser.close()
-    print("AI handoff browser regression passed: native clipboard before new tab, opener detached, mobile, gating, 500ms copy-to-navigation delay, cancellation closes reserved tab, all providers, original tab retains records after reload, popup blocked/manual retry, keyboard, cancel/reopen during pending copy, user closes tab.")
+    print("AI handoff browser regression passed with popup blocking enabled: native clipboard, direct destination without waiting tab, opener detached, mobile, gating, 500ms delay, no tab during wait/cancel, all providers, original records after reload, popup blocked/manual retry, keyboard, cancel/reopen during pending copy.")
