@@ -116,7 +116,7 @@ with sync_playwright() as p:
   wait_for_async(page,'async()=>!!(await navigator.serviceWorker.getRegistration()).waiting')
   # No automatic reload should interrupt an in-progress answer.
   assert state()['currentId']==before['currentId'] and page.get_by_role('radio').nth(2).is_checked()
-  page.get_by_role('button',name='表示・データ',exact=True).click();page.locator('#update-app').wait_for(state='visible')
+  page.get_by_role('button',name='設定',exact=True).click();page.locator('#update-app').wait_for(state='visible')
   with page.expect_navigation(wait_until='load'):
    page.locator('#update-app').click()
   page.locator('.hint-box').wait_for();wait_for_async(page,'async()=>!(await navigator.serviceWorker.getRegistration()).waiting')

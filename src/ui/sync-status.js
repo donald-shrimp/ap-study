@@ -16,6 +16,6 @@ export function setSyncAccount(value,scopes=[]){const local=states.local||{kind:
 export function setSyncStatus(scope,kind,error){states[scope]={kind,error:error?`${error.code||error.name||''}: ${error.message||error}`:null};render();}
 export function workspaceStatusHTML(kind){
  const failed=['rules','mock-rules','history-rules','extended-rules','error'].includes(kind);
- const text=kind==='conflict'?'計画などの変更が重なっています。使う内容を選んでください。':failed?'計画などを同期できません。「表示・データ」で確認してください。':'';
+ const text=kind==='conflict'?'計画などの変更が重なっています。使う内容を選んでください。':failed?'計画などを同期できません。「設定」で確認してください。':'';
  return `<div class="workspace-status" ${text?'':'hidden'}><p class="small" role="status">${esc(text)}</p></div>`;
 }

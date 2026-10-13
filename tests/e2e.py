@@ -177,7 +177,7 @@ with sync_playwright() as p:
  assert page.locator('#image-scroll').evaluate('(e)=>e.scrollWidth>e.clientWidth');page.screenshot(path=str(ROOT/'question-zoom-mobile.png'));page.keyboard.press('Escape');assert not page.locator('#image-dialog').is_visible()
  page.get_by_role('button',name='問題画像を拡大',exact=True).focus();page.keyboard.press('Enter');assert page.locator('#image-dialog').is_visible();page.keyboard.press('Escape')
  page.screenshot(path=str(ROOT/'question-mobile.png'),full_page=True)
- page.get_by_role('button',name='表示・データ',exact=True).click()
+ page.get_by_role('button',name='設定',exact=True).click()
  open_data_management(page)
  with page.expect_download() as download:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=ROOT/'record.json';download.value.save_as(str(backup));page.on('dialog',lambda d:d.accept());page.locator('#import-state').set_input_files(str(backup));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("読み込みました")')

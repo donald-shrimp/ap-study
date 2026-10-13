@@ -11,9 +11,8 @@ export function qualificationChooserHTML(qualifications,root,previous) {
  return `<section class="panel qualification-chooser"><h1>資格を選ぶ</h1><div class="qualification-list">${qualifications.map(q=>`<a class="button secondary qualification-option" href="${new URL(q.id+'/',root).href}" ${q.id===previous?'aria-current="true"':''}><span><strong>${esc(q.name)}</strong><span class="small muted">${q.count}問${q.id===previous?' · 前回の資格':''}</span></span><span aria-hidden="true">→</span></a>`).join('')}</div></section>`;
 }
 export function installQualificationSwitch({qualifications,qualification,root,beforeLeave,onError}) {
- if(qualifications.length<2)return;
  const link=document.createElement('a');link.id='qualification-switch';link.className='qualification-switch';
- link.href=new URL('?qualifications',root).href;link.setAttribute('aria-label',`資格を切り替える（${qualification.name}）`);
+ link.href=new URL('?qualifications',root).href;link.setAttribute('aria-label',`資格を選ぶ（${qualification.name}）`);
  link.innerHTML=`<span>${esc(qualification.shortName||qualification.name)}</span><span aria-hidden="true">⌄</span>`;
  document.querySelector('.brand').after(link);
  let leaving=false;

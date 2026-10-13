@@ -55,7 +55,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.locator('.qualification-option').filter(has_text='fixture-a').click();page.locator('.quick-start').wait_for()
             assert page.locator('.study-entrance').count()==1
             assert page.locator('.home-assessments,[data-action=cards-open]').count()==0
-            page.locator('#qualification-switch').wait_for()
+            page.locator('#qualification-switch').wait_for();assert page.locator('.brand-mark').count()==0;assert page.get_by_role('button',name='設定',exact=True).count()==1
             assert not any('/packs/' in r for r in requests)
             page.locator('.sidebar [data-view=history]').click();page.locator('[data-reading-topic]').fill('第1章');page.locator('.sidebar [data-view=topics]').click()
             page.locator('[data-action=field-practice]').click();page.get_by_role('radio').last.wait_for()

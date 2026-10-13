@@ -114,7 +114,7 @@ let saves=Promise.resolve(),saveVersion=0,recordMaintenance=null,saveFailureNoti
 function save(options={}) {
   if(recordMaintenance)return Promise.resolve(false);
   rebuildProgress();const version=++saveVersion;
-  if (corruptRaw !== null) { setSyncStatus('local','error',new Error('保存済みの記録を読み取れません。'));notice('保存データを読み取れませんでした。表示・データから書き出すか、読み込み・初期化で復旧できます。元の記録は上書きしていません。'); return Promise.resolve(false); }
+  if (corruptRaw !== null) { setSyncStatus('local','error',new Error('保存済みの記録を読み取れません。'));notice('保存データを読み取れませんでした。設定から書き出すか、読み込み・初期化で復旧できます。元の記録は上書きしていません。'); return Promise.resolve(false); }
   $('#save-state').textContent='保存中…';
   const operation=store.write(state,options).then(async result=>{
     for(const [before,after] of Object.entries(result.remap)){
@@ -128,7 +128,7 @@ function save(options={}) {
     account?.changed();
     return true;
   }).catch(error=>{
-    if(version===saveVersion){storageOK=false;$('#save-state').textContent='保存できていません';setSyncStatus('local','error',error);saveFailureNotice=`${error.message || 'ブラウザに保存できません。'} いまの学習は続けられます。「表示・データ」から記録を書き出してください。`;notice(saveFailureNotice);}
+    if(version===saveVersion){storageOK=false;$('#save-state').textContent='保存できていません';setSyncStatus('local','error',error);saveFailureNotice=`${error.message || 'ブラウザに保存できません。'} いまの学習は続けられます。「設定」から記録を書き出してください。`;notice(saveFailureNotice);}
     return false;
   });saves=operation;return operation;
 }
@@ -209,7 +209,7 @@ async function resume(id,entryMode=null) {
   // A synchronized checkpoint belongs to its creating device. Continue under
   // a fresh UUID so two devices can both answer without overwriting each other.
   const targetStore=store,identity=await targetStore.identity(),remote=(await targetStore.remoteDevice?.(id));if(token!==navigation||targetStore!==store)return;
-  if(!complete(a)&&identity.owner.startsWith('uid:')&&remote&&remote!==identity.deviceId&&learning&&learning.status()!=='synced'&&!learning.hasContext(id)){notice('別端末の再開範囲をまだ取得できません。表示・データの同期状態を確認してください。回答・ヒントは保持しています。');return;}
+  if(!complete(a)&&identity.owner.startsWith('uid:')&&remote&&remote!==identity.deviceId&&learning&&learning.status()!=='synced'&&!learning.hasContext(id)){notice('別端末の再開範囲をまだ取得できません。設定の同期状態を確認してください。回答・ヒントは保持しています。');return;}
   if(!complete(a)&&remote&&remote!==identity.deviceId){a={...structuredClone(a),id:crypto.randomUUID(),continuationOf:id,continuedAt:now(),scrollY:0};state.attempts.push(a);id=a.id;}
   state.currentId=id;if(a.practiceScope?.intent!=='direct'){state.settings.paperMode=mode;state.settings.lastEntry=mode;}a.entryMode=mode;
   const saved=a.practiceScope||{intent:a.topic?'topic':'normal',topicId:a.topicId||null,topicIds:[],examPartId:a.questionSnapshot?.examPartId||qualification.defaultExamPartId,examPartIds:[],paperMode:mode,returnView:'home'};

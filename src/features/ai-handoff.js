@@ -72,7 +72,7 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   showStatus((afterCopy?'質問文をコピーしました。':'')+'学習記録の保存を確認しています。');
   const saved=await beforeNavigate();
   if(token!==operation||!dialog.open)return;
-  if(!saved)throw Error('学習記録を保存できなかったため、移動を止めました。問題画面の「表示・データ」から記録を書き出してください。');
+  if(!saved)throw Error('学習記録を保存できなかったため、移動を止めました。問題画面の「設定」から記録を書き出してください。');
   await settled;
   if(token!==operation||!dialog.open)return;
   // Open the AI directly only after copying, saving, and the settlement delay.
