@@ -1,6 +1,6 @@
 # Firebase接続：最後の設定
 
-2026-10-15：新形式version 2は新しい保存先を使用します。以前公開したRulesでは新しい記録を同期できません。この環境のFirebase CLIは管理者認証がなく、本番Rulesは未配備です。下記の手順で**最新mainのfirestore.rules全体を改めて公開**してください。新しいcollectionは`attemptsV2/resourcesV2/learningV2/personalV2/cardsV2/writtenV2`。旧文書は削除せず保持します。旧ファイルは[一回変換](learning-record-v2.md)で取り込み、最後に別端末で件数・日時・回答・支援を照合します。
+2026-10-15：新形式version 2は新しい保存先を使用します。以前公開したRulesでは新しい記録を同期できません。利用者は最新Rulesの本番公開を報告済みです。この環境には本人の本番認証・ログイン済みブラウザ接続がなく、本番での同期確認は未実施です。再設定時は下記の手順で**最新mainのfirestore.rules全体を公開**してください。新しいcollectionは`attemptsV2/resourcesV2/learningV2/personalV2/cardsV2/writtenV2`。旧文書は削除せず保持します。旧ファイルは[一回変換](learning-record-v2.md)で取り込み、最後に別端末で件数・日時・回答・支援を照合します。
 
 2026-10-07：通常のGoogleログイン成功に加え、利用者が計画・診断用Rulesの公開を報告しました。この環境には本人の管理者認証やログイン済みブラウザの操作接続がなく、本人が「計画・診断も同期済み」の表示を確認済みです。本番の別端末復元と単一フィールドのインデックス除外は別途確認します。以下は設定と再確認の手順です。
 

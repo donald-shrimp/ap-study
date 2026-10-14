@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createCaseRun,caseFields,setCaseResponse,submitCaseField,viewCaseAnswer,rateCaseField,mayViewAnswer,caseResult,validateCaseRun,buildWrittenAIPrompt} from '../src/domain/case-study.js';
 import {createAttempt,makeState,selectAnswer,finalizeAttempt,gradeAttempt,openHint} from '../src/domain/study.js';
 import {blankPlan,validatePlan,phaseProgress,studySummary} from '../src/domain/planning.js';
-import {toRecord,fromRecord,encodeState,decodeState,validateRecord} from '../src/v2/records.js';
+import {toRecord,fromRecord,encodeState,decodeState,validateRecord,mergeBackupState} from '../src/v2/records.js';
 import {createDiagnostic,submitDiagnostic} from '../src/domain/diagnostic.js';
 import {encodeResource,decodeResource} from '../src/v2/resources.js';
 import {convertBackup,convertPlan} from '../tools/convert-study-backup.mjs';
@@ -13,6 +13,17 @@ const q=read('data/qualifications/ap/manifest.json'),bank=read('content/ap/writt
 const questions=q.packs.flatMap(p=>read('data/qualifications/ap/'+p.url));
 const date='2026-10-15T00:00:00.000Z',run=options=>createCaseRun(c,{at:date,...options});
 const fill=(r,slot)=>{const f=slot.field,value=f.type==='singleChoice'?f.choices.find(a=>a.label===f.referenceAnswers[0]).id:f.referenceAnswers[0];setCaseResponse(r,slot.key,value,date);submitCaseField(r,slot.key,date);};
+test('別端末の同一バックアップ再取り込みは表示位置を保持し、回答・教材の差だけを拒否する',()=>{
+ const a=createAttempt(questions[0],{at:date});selectAnswer(a,a.questionSnapshot.answer);finalizeAttempt(a,gradeAttempt(a),date);
+ const current={...makeState(),attempts:[a]},incoming=structuredClone(current);incoming.attempts[0].scrollY=420;incoming.attempts[0].readingNote='別端末の表示メモ';
+ const before=structuredClone(current),merged=mergeBackupState(current,incoming);
+ assert.equal(merged.attempts.length,1);assert.equal(merged.attempts[0].scrollY,0);assert.equal(merged.attempts[0].readingNote,'');assert.deepEqual(current,before);
+ const answer=structuredClone(incoming);answer.attempts[0].selectedChoiceId=a.questionSnapshot.choices.find(c=>c.id!==a.selectedChoiceId).id;
+ assert.throws(()=>mergeBackupState(current,answer),/同じIDの異なる学習記録/);
+ const lesson=structuredClone(incoming);lesson.attempts[0].materialSnapshot.summary+='改訂';assert.throws(()=>mergeBackupState(current,lesson),/同じIDの異なる学習記録/);
+ const assistance=structuredClone(incoming);assistance.attempts[0].answerViewedBefore=!a.answerViewedBefore;assert.throws(()=>mergeBackupState(current,assistance),/同じIDの異なる学習記録/);
+ assert.deepEqual(current,before);
+});
 test('記録・回答ベクトルは新形式のみ。状態・診断にも旧回答形式を残さない',()=>{
  const a=createAttempt(questions[0],{at:date});openHint(a,date);selectAnswer(a,a.questionSnapshot.answer);finalizeAttempt(a,gradeAttempt(a),date);const r=toRecord(a);assert.equal(r.version,2);assert.equal(r.evaluation.outcome,'assisted');assert.deepEqual(r.response.choiceIds,[a.selectedChoiceId]);assert.ok(!('answer' in r.material)&&!('correctChoiceId' in r.material));assert.deepEqual(fromRecord(r),a);
  const state={...makeState(),attempts:[a]},encoded=encodeState(state);assert.ok(!('attempts' in encoded));assert.deepEqual(decodeState(encoded).attempts,[a]);assert.throws(()=>decodeState({...state,version:1}));assert.throws(()=>validateRecord({...r,selected:0}));assert.throws(()=>validateRecord({...r,assistance:{...r.assistance,extra:true}}));assert.throws(()=>validateRecord({...r,progress:{...r.progress,confidence:'yes'}}));

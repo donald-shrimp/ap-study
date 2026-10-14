@@ -35,8 +35,11 @@ export function decodeState(s){if(s?.format!=='hitomon-study-state'||s.version!=
 // Logged-in import adds verified v2 records without replacing account history.
 export function mergeBackupState(current,incoming){
  const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
+ // Remote merge preserves each device's display cursor and reading note.
+ // Those local fields do not turn the same saved answer into a conflicting record.
+ const sharedRecord=a=>{const r=toRecord(a);delete r.progress.scrollY;delete r.progress.readingNote;return r;};
  const records=new Map(current.attempts.map(a=>[a.id,a]));
- for(const a of incoming.attempts){const old=records.get(a.id);if(old&&canonical(toRecord(old))!==canonical(toRecord(a)))throw Error('同じIDの異なる学習記録があります。取り込み前の記録は保持しています。');if(!old)records.set(a.id,clone(a));}
+ for(const a of incoming.attempts){const old=records.get(a.id);if(old&&canonical(sharedRecord(old))!==canonical(sharedRecord(a)))throw Error('同じIDの異なる学習記録があります。取り込み前の記録は保持しています。');if(!old)records.set(a.id,clone(a));}
  const overrides=clone(current.overrides);for(const [id,value] of Object.entries(incoming.overrides)){if(overrides[id]&&canonical(overrides[id])!==canonical(value))throw Error('教材編集の内容が競合しています。取り込み前の教材は保持しています。');overrides[id]=clone(value);}
  return {...(current.attempts.length?clone(current):clone(incoming)),attempts:[...records.values()],overrides,readingNotes:{...clone(incoming.readingNotes),...clone(current.readingNotes)}};
 }

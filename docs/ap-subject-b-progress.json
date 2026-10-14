@@ -1,8 +1,8 @@
 {
   "format": "hitomon-implementation-progress",
   "version": 1,
-  "updatedAt": "2026-10-14T18:58:20.520731+00:00",
-  "status": "application_published_awaiting_rules_and_personal_migration",
+  "updatedAt": "2026-10-14T23:05:56.756507+00:00",
+  "status": "awaiting_account_import_and_production_verification",
   "plan": "docs/ap-subject-b-plan.md",
   "worktree": "/workspace/ap-study-subject-b",
   "branch": "feature/subject-b",
@@ -10,13 +10,13 @@
   "archiveTag": "subject-b-before-v2-20261015",
   "automationTime": "2026-10-15T03:58:00+09:00",
   "backupConfirmedByUser": true,
-  "backupFilesReceived": false,
+  "backupFilesReceived": true,
   "oldFormatRuntimeCompatibility": false,
   "completed": [
     "3:58 JSTの継続確認予約",
     "旧mainをGitタグsubject-b-before-v2-20261015で退避・remote確認",
     "新形式v2の記録・受験・計画契約と隔離保存領域",
-    "科目A/B入口・B学習の試作（本番未公開）",
+    "科目A/B入口・B学習を実装・本番公開",
     "公式2025年春期午後問1の別担当作成＋主担当原本照合、6小問8欄",
     "既存AP800/AB174・原本文字起こし798の教材テスト通過",
     "v2のみのExport/Importと一回変換の合成照合",
@@ -27,11 +27,16 @@
     "実ブラウザの保存失敗・未保存入力Export・再試行と再読込通過",
     "A/B・AB-730・模試・診断・計画・履歴・PWA・AIの回帰確認",
     "mainへ非forceで7e2a57aを反映・GitHub Pages build成功",
-    "main/ref/tree一致・公開21ファイル一致・公開390/1440pxでA/B表示とエラーなし確認"
+    "main/ref/tree一致・公開21ファイル一致・公開390/1440pxでA/B表示とエラーなし確認",
+    "利用者から新版Rulesの本番公開報告を受領（こちらの本番認証による照合は未実施）",
+    "本人バックアップを非公開領域へ保管し、一回変換と厳密な原本照合・公開アプリの隔離ブラウザで取り込み／再書き出しを確認",
+    "別添の診断は同梱診断と同一、教材書き出しは公開800問と同内容であることを確認",
+    "同一バックアップ再取り込みで端末ごとの表示位置を誤って競合としない修正と回帰検査",
+    "本人の変換ファイルでAuth/Firestore Emulatorのアカウント取り込み・別端末復元・再取り込みを確認（本番アカウントではない）",
+    "Node164件と新版PWAの再検証通過"
   ],
   "remaining": [
-    "新版Firestore Rules全体の本番公開（Firebase CLIの管理者認証がないためユーザー操作が必要）",
-    "本人バックアップ3ファイル（AP・AB-730の学習記録とAP単語帳）の受領・一回変換・取り込み・本番の別端末照合"
+    "本人ログイン済み本番アカウントへ変換ファイルを取り込み、同期完了と別端末での復元を照合（この環境には本人の認証・操作接続がない）"
   ],
   "authors": [
     "/root",
@@ -39,7 +44,7 @@
   ],
   "completedDefinition": "新形式へ統一した学習・科目A/B分離・共有計画・B教材レビューと自己評価・保存同期バックアップAIを実装し検証・公開済み。未実施の本人データ移行は別途明記。",
   "verification": {
-    "nodeTests": 163,
+    "nodeTests": 164,
     "writtenCases": 1,
     "writtenItems": 6,
     "writtenFields": 8,
@@ -52,8 +57,9 @@
     "retainedImagesAP": 2,
     "saveFailure": "passed",
     "caseSync": "SDK/emulators; two browsers and batched multi-field CAS passed",
-    "productionRules": "not deployed; CLI authentication unavailable",
-    "personalMigration": "not executed; files not received"
+    "productionRules": "user reports latest Rules published; authenticated production verification pending",
+    "personalMigration": "files received; conversion and isolated public-browser import/export verified; production account import pending",
+    "personalAccountEmulator": "passed; logged-in additive import and second-device semantic records/plan/assessment/card equality; repeated import retains local display fields"
   },
   "publication": {
     "commit": "7e2a57aaae567a6fca7fdcfc8c003741322cb421",
@@ -154,5 +160,21 @@
     "productionFirestoreRules": "not deployed; administrator authentication unavailable",
     "personalDataMigration": "not executed; backup files not supplied"
   },
-  "nextAction": "ユーザーが最新mainのfirestore.rulesを本番へ公開し、保存済みのバックアップ3ファイルを提供。原本を保管してCLIで一度変換・照合し、新形式で追加取り込みする。"
+  "nextAction": "本人が新版へGoogleログインし、資格別の変換済み学習記録とAP単語帳記録を取り込んで今すぐ同期。別端末で復元を確認。個人ファイルは公開リポジトリへ追加しない。",
+  "backupConversionVerified": true,
+  "productionRulesPublication": {
+    "status": "published_reported_by_user",
+    "reportedOn": "2026-10-15",
+    "independentlyVerified": false
+  },
+  "personalMigration": {
+    "filesReceived": true,
+    "originalsRetainedOutsideRepository": true,
+    "converted": true,
+    "strictValidationPassed": true,
+    "publicGuestBrowserImportExportPassed": true,
+    "productionAccountImported": false,
+    "productionSecondDeviceVerified": false,
+    "accountEmulatorTwoDevicesPassed": true
+  }
 }
