@@ -417,9 +417,22 @@ def compile_qualification(root, id):
     if mock_sets is not None:manifest['mockSets']=mock_sets
     cases=compile_cases(root,config,directory,hashed_json)
     if cases is not None:manifest['cases']=cases
+    targets=[]
+    case_counts=defaultdict(int)
+    if cases:
+        for case in json.loads((directory / cases['url']).read_text())['cases']:
+            case_counts[case['examPartId']]+=1
+    for part in config['examParts']:
+        if not part['practiceAvailable']:
+            continue
+        unit=part.get('unit', 'questionAttempts')
+        count=case_counts[part['id']] if unit == 'cases' else sum(q['examPartId'] == part['id'] and 'practice' in q.get('uses', ['practice']) and not q.get('diagnosticOnly') for q in questions)
+        if count:
+            targets.append({'examPartId': part['id'], 'label': part['label'], 'unit': unit, 'count': count})
+    manifest['studyTargets']=targets
     manifest.update(compile_learning_tools(root, config, questions, directory))
     write_json(directory / 'manifest.json', manifest)
-    return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions)}, config
+    return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions), 'defaultExamPartId': config['defaultExamPartId'], 'studyTargets': targets}, config
 
 
 def build(root):

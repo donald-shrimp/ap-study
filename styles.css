@@ -128,12 +128,12 @@
 /* Give the brand, qualification chooser, and settings their own space. */
 .topbar:has(.qualification-switch){display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:24px}
 .qualification-switch{display:flex;align-items:center;justify-content:space-between;justify-self:center;gap:12px;width:max-content;max-width:100%;min-width:0;min-height:44px;padding:8px 14px;border:1px solid #dce5ef;border-radius:12px;text-decoration:none;font-size:.875rem;font-weight:600;line-height:1.4;background:#f3f6fa;color:var(--navy)}
-.qualification-switch>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qualification-label{display:flex;align-items:center;min-width:0}.qualification-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qualification-part{flex-shrink:0;white-space:nowrap}
 .qualification-switch>span:last-child{flex-shrink:0;font-size:.6rem;color:var(--muted)}
 .qualification-switch[aria-busy=true]{opacity:.6;pointer-events:none}
 /* The chooser has no sidebar: use one centered column at every desktop width. */
 .workspace.qualification-selection{grid-template-columns:minmax(0,1fr);max-width:960px}
-.qualification-list{display:grid;gap:12px;margin-top:20px}
+.qualification-list{display:grid;gap:24px;margin-top:24px}.qualification-group{min-width:0}.qualification-group h2{font-size:1rem;margin:0 0 12px}.qualification-targets{display:grid;gap:12px}
 .qualification-option{display:flex;justify-content:space-between;align-items:center;text-align:left;gap:16px;padding:16px}
 .qualification-option .small{display:block;margin-top:4px}
 .qualification-option[aria-current=true]{border-color:var(--accent);background:#effafa}
@@ -215,9 +215,6 @@
 @media(max-width:480px){#ai-handoff-dialog{padding:16px 13px}#ai-handoff-dialog .ai-handoff-manual .button{width:100%}}
 
 /* Subject boundaries remain visible through study, records and the shared plan. */
-.study-target{display:flex;gap:12px;margin:0 0 24px;flex-wrap:wrap}
-.study-target .button{min-width:104px}
-.study-target [aria-pressed=true]{background:var(--navy,#103553);color:#fff;border-color:var(--navy,#103553)}
 .written-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
 .written-body{max-height:calc(100dvh - 175px);overflow:auto;position:sticky;top:24px;scrollbar-gutter:stable}
 .written-body .question-table{min-width:0;width:100%;table-layout:auto}

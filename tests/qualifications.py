@@ -49,7 +49,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             browser=p.chromium.launch(executable_path=shutil.which('chromium'),headless=True,args=['--no-sandbox'])
             context=browser.new_context(viewport={'width':390,'height':844});page=context.new_page();errors=[];requests=[]
             page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
-            page.goto(url);page.get_by_role('heading',name='資格を選ぶ').wait_for()
+            page.goto(url);page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             assert page.locator('#main a').count()==2
             # With the sidebar hidden, desktop auto-placement must not use its narrow grid column.
             for width in [320,390,800,801,1024,1440,1920,2560]:
@@ -62,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.screenshot(path=str(ARTIFACTS/'chooser-desktop.png'))
             page.set_viewport_size({'width':390,'height':844})
 
-            page.locator('.brand').click();assert page.get_by_role('heading',name='資格を選ぶ').is_visible()
+            page.locator('.brand').click();assert page.get_by_role('heading',name='資格・科目を選ぶ').is_visible()
             page.locator('.qualification-option').filter(has_text='fixture-a').click();page.locator('.quick-start').wait_for()
             assert page.locator('.study-entrance').count()==1
             assert page.locator('.home-assessments,[data-action=cards-open]').count()==0
@@ -74,7 +74,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             assert any('/fixture-a/packs/' in r for r in requests) and not any('/fixture-b/packs/' in r for r in requests)
             page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='ヒントで正解'
-            page.locator('#qualification-switch').click();page.get_by_role('heading',name='資格を選ぶ').wait_for()
+            page.locator('#qualification-switch').click();page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             assert page.locator('.qualification-option[aria-current=true]').inner_text().startswith('fixture-a')
             page.locator('.qualification-option').filter(has_text='fixture-b').click();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()
             assert page.locator('[data-mode=diagnostic],[data-view=diagnostics]').count()==0
@@ -87,7 +87,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             # Installed/root entry reopens the previous qualification without a chooser.
             page.goto(url);page.locator('.quick-start').wait_for()
             assert page.locator('html').get_attribute('data-qualification')=='fixture-b'
-            assert page.get_by_role('heading',name='資格を選ぶ').count()==0
+            assert page.get_by_role('heading',name='資格・科目を選ぶ').count()==0
             page.goto(url+'fixture-a/');page.locator('#result-heading').wait_for();assert page.locator('#result-heading').inner_text()=='ヒントで正解'
             # Add a second one-question pack without touching application code.
             path=root/'content/fixture-a/questions.json';old=fixtures.fixture(2);new=fixtures.fixture(2,'constructor','extra')
@@ -115,7 +115,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.evaluate('document.documentElement.style.zoom=""')
             page.evaluate('navigator.serviceWorker.ready.then(()=>true)');page.wait_for_function('!!navigator.serviceWorker.controller')
             context.set_offline(True);page.reload();page.locator('#result-heading').wait_for();assert page.locator('html').get_attribute('data-qualification')=='fixture-a'
-            page.locator('#qualification-switch').click();page.get_by_role('heading',name='資格を選ぶ').wait_for()
+            page.locator('#qualification-switch').click();page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             page.locator('.qualification-option').filter(has_text='fixture-b').click();page.locator('.quick-start').wait_for()
             assert page.locator('html').get_attribute('data-qualification')=='fixture-b'
             page.goto(url);page.locator('.quick-start').wait_for()
@@ -123,7 +123,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             context.set_offline(False)
             # Removed/unknown preferences fall back to the explicit chooser.
             page.evaluate('localStorage.setItem("hitomon-/ap-study/last-qualification","retired")')
-            page.goto(url);page.get_by_role('heading',name='資格を選ぶ').wait_for()
+            page.goto(url);page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             page.goto(url+'fixture-a/');page.locator('#result-heading').wait_for()
             # A draft plan cannot disappear when switching qualifications.
             action_nav(page,'home');page.locator('[data-view=planning]').click();page.locator('#plan-editor>summary').click()
@@ -132,7 +132,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             assert '入力中の計画' in page.locator('#notice').inner_text()
             assert page.locator('#exam-form input[type=date]').first.input_value()=='2027-01-01'
             page.locator('#exam-form button[type=submit]').click();page.locator('#qualification-switch').click()
-            page.get_by_role('heading',name='資格を選ぶ').wait_for()
+            page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             assert not errors,errors
             # First direct qualification visit, with no earlier reload/cache.
             fresh=browser.new_context();direct=fresh.new_page();direct.goto(url+'fixture-b/');direct.locator('.quick-start').wait_for()
@@ -142,12 +142,12 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             direct.evaluate('''() => {window.originalPut=IDBObjectStore.prototype.put;IDBObjectStore.prototype.put=function(...args){if(this.name==='meta')throw new DOMException('test storage full','QuotaExceededError');return window.originalPut.apply(this,args);};}''')
             direct.locator('#qualification-switch').click()
             direct.wait_for_function('document.querySelector("#save-state").textContent.includes("保存でき")')
-            assert direct.url==url+'fixture-b/' and direct.get_by_role('radio').last.is_checked()
+            assert direct.url.split('?')[0]==url+'fixture-b/' and 'part=objective' in direct.url and direct.get_by_role('radio').last.is_checked()
             direct.evaluate('() => {IDBObjectStore.prototype.put=window.originalPut;}')
-            direct.locator('#qualification-switch').click();direct.get_by_role('heading',name='資格を選ぶ').wait_for()
+            direct.locator('#qualification-switch').click();direct.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
             direct.set_viewport_size({'width':320,'height':844});direct.screenshot(path=str(ARTIFACTS/'chooser-320.png'))
             assert direct.evaluate('document.documentElement.scrollWidth<=window.innerWidth')
-            direct.locator('.qualification-option').filter(has_text='fixture-b').click();direct.get_by_role('radio').last.wait_for()
+            direct.locator('.qualification-option').filter(has_text='fixture-b').click();direct.locator('.quick-start').wait_for();direct.locator('.study-entrance[data-paper-mode=all]').click();direct.get_by_role('radio').last.wait_for()
             assert direct.get_by_role('radio').last.is_checked() and saved_state(direct)['currentId']==attempt_id
             direct.screenshot(path=str(ARTIFACTS/'study-320.png'))
             assert direct.evaluate('document.documentElement.scrollWidth<=window.innerWidth')

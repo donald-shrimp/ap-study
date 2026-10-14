@@ -75,3 +75,14 @@ def edit_material(page, question_id):
     if not button.is_visible():
         button.locator('xpath=ancestor::details[1]').locator(':scope > summary').click()
     button.click()
+
+def select_target(page, part, qualification_id='ap', resume_written=False):
+    page.locator('#qualification-switch').click()
+    page.get_by_role('heading', name='資格・科目を選ぶ', exact=True).wait_for()
+    page.locator(f'.qualification-option[data-qualification-id="{qualification_id}"][data-part-id="{part}"]').click()
+    page.locator(f'#qualification-switch[data-part-id="{part}"]').wait_for()
+    if 'firebase-emulator=1' in page.url:
+        page.wait_for_function('!document.getElementById("google-login").disabled && !document.getElementById("google-logout").disabled')
+    if resume_written and part == 'written' and page.locator('.study-entry [data-action=written-resume]').count():
+        page.locator('.study-entry [data-action=written-resume]').click()
+        page.locator('.written-layout').wait_for()

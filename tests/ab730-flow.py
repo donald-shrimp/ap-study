@@ -17,7 +17,7 @@ with sync_playwright() as p:
  options={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
  if URL.startswith('https://') and os.environ.get('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'localhost,127.0.0.1'}
  browser=p.chromium.launch(**options);context=browser.new_context(viewport={'width':390,'height':844});page=context.new_page();page.set_default_timeout(15000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept())
- page.goto(URL);page.get_by_role('heading',name='資格を選ぶ').wait_for();page.locator('.qualification-option').filter(has_text='AB-730').click();page.locator('.quick-start').wait_for()
+ page.goto(URL);page.get_by_role('heading',name='資格・科目を選ぶ').wait_for();page.locator('.qualification-option').filter(has_text='AB-730').click();page.locator('.quick-start').wait_for()
  assert page.locator('#qualification-switch').inner_text().strip().startswith('AB-730')
  assert page.locator('.study-entrance').count()==1 and page.locator('[data-action=cards-open],[data-view=mocks]').count()==0
  page.locator('.study-entrance').click();page.locator('[name=answer]').first.wait_for();a=current(page);assert a['qualificationId']=='ab730';q=a['questionSnapshot'];choose_correct(page,q);page.locator('[data-action=submit]').click();page.locator('#result-heading').wait_for();assert current(page)['status']=='correct'
@@ -51,7 +51,7 @@ with sync_playwright() as p:
  with page.expect_download() as download:page.locator('#export-state').click()
  backup_path=artifacts/'backup.json';download.value.save_as(backup_path);backup=json.loads(backup_path.read_text());assert len(backup['records'])==ordinary and any(a['material']['type']=='multipleChoice' and a['response']['choiceIds'] for a in backup['records']);assert backup['workspaceBackup']['runs'][0]['size']==30
  restored_context=browser.new_context(viewport={'width':390,'height':844});restored=restored_context.new_page();restored.on('pageerror',lambda e:errors.append(str(e)));restored.on('dialog',lambda d:d.accept());restored.goto(URL+'ab730/');restored.locator('.quick-start').wait_for();open_data_management(restored);restored.locator('#import-state').set_input_files(str(backup_path));restored.locator('#settings-status').filter(has_text='学習記録を読み込みました').wait_for();close_settings(restored);assert len(state(restored)['attempts'])==ordinary;assert run(restored)['status']=='completed' and len(run(restored)['responses'])==30;restored_context.close()
- close_settings(page);nav(page,'home');page.locator('#qualification-switch').click();page.locator('.qualification-option').filter(has_text='応用情報').click();page.locator('.quick-start').wait_for();assert (state(page) or {}).get('attempts',[])==[]
+ close_settings(page);nav(page,'home');page.locator('#qualification-switch').click();page.locator('.qualification-option[data-qualification-id=ap][data-part-id=objective]').click();page.locator('.quick-start').wait_for();assert (state(page) or {}).get('attempts',[])==[]
  page.locator('#qualification-switch').click();page.locator('.qualification-option').filter(has_text='AB-730').click();page.locator('.quick-start').wait_for();assert len(state(page)['attempts'])==ordinary
  # All loaded packs remain available offline, including a different multi-choice question.
  context.set_offline(True);page.reload();page.locator('.quick-start').wait_for();open_q(multis[-1]);assert page.locator('[name=answer]').count()==len(multis[-1]['choices']);assert not errors,errors

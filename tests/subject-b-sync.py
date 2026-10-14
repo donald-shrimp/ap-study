@@ -1,7 +1,7 @@
 """Two independent browsers, real Firebase SDK/emulators and case CAS; no production account."""
 import json,shutil,uuid
 from playwright.sync_api import sync_playwright
-from browser_storage import nav,wait_for_async
+from browser_storage import nav,wait_for_async,select_target
 URL='http://127.0.0.1:4173/ap/?firebase-emulator=1'
 READ='''async()=>{const sdk=await import('/assets/vendor/firebase.js'),user=sdk.getAuth().currentUser,{createLocalStore}=await import('/src/storage/local.js'),s=createLocalStore({qualificationId:'ap',rootPath:'/',owner:user?`uid:${user.uid}`:undefined});try{const i=await s.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...i,rootPath:'/',namespaceName:'written',validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}finally{await s.close();}}'''
 def rows(page):return page.evaluate(READ)
@@ -21,7 +21,7 @@ def login(page,email):
  if existing.count():existing.click()
  else:popup.get_by_text('Add new account').click();popup.locator('#email-input').fill(email);popup.locator('#display-name-input').fill('v2 test');popup.get_by_role('button',name='Sign in with Google.com',exact=True).click()
  page.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("google-logout").disabled');sync(page)
-def target(page):page.locator('[data-action=switch-target][data-part-id=written]').click();page.locator('[data-part-id=written][aria-pressed=true]').wait_for()
+def target(page):select_target(page,'written')
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);contexts=[b.new_context(viewport={'width':390,'height':844}) for _ in range(2)];first,second=[c.new_page() for c in contexts];errors=[]
  for page in [first,second]:page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept());page.goto(URL);page.locator('.quick-start').wait_for()

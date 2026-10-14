@@ -72,11 +72,23 @@ edit=journal['items'][0];q=published[edit['questionId']]
 assert {k for k in q if q[k]!=edit['beforeQuestion'][k]}=={'topicId','version'}
 raw={q['id']:q for q in read('data/questions.json')}
 change=journal['originalRevision'];parent=raw[change['questionId']]
-assert {k for k in parent if parent[k]!=change['beforeQuestion'][k]}==set(change['changedFields'])
-assert digest(parent)==change['afterSha256'] and digest(change['beforeQuestion'])==change['beforeSha256']
 context=read('content/ap/study-context.json')
 context_item=next(i for i in context['items'] if i['questionId']==parent['id'])
-assert context_item==change['afterContextItem'] and context_item['sourceHash']==digest(parent)
+historical=parent;historical_context=context_item
+if digest(parent)!=change['afterSha256']:
+    # The immutable classification review predates this question's transcription.
+    # Verify the real archived version and its recorded bridge to the current one.
+    matches=[item for path in (ROOT/'data/transcription-context-revisions').glob('*.json')
+             for item in read(str(path.relative_to(ROOT)))['items']
+             if item['id']==parent['id'] and digest(item['beforeQuestion'])==change['afterSha256']]
+    assert len(matches)==1, 'Missing immutable classification source version'
+    archived=matches[0];historical=archived['beforeQuestion'];historical_context=archived['beforeContextItem']
+    assert archived['afterQuestionSHA256']==digest(parent)
+    assert archived['afterContextItem']==context_item
+assert {k for k in historical if historical[k]!=change['beforeQuestion'].get(k)}==set(change['changedFields'])
+assert digest(historical)==change['afterSha256'] and digest(change['beforeQuestion'])==change['beforeSha256']
+assert historical_context==change['afterContextItem']
+assert context_item['sourceHash']==digest(parent)
 assert context_item['mode']==change['beforeContextItem']['mode']=='paperless'
 assert all(progress['topicCounts'][topic['id']]['published']==sum(q['topicId']==topic['id'] for q in published.values()) for topic in qualification['topics'])
 if args.complete:

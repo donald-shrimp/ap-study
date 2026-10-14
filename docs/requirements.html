@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="description" content="応用情報の過去問学習アプリの定義書。要点、学習の流れ、試せるヒントの例、記録と復習のルール。">
-  <title>応用情報の学習アプリ｜読みやすい定義書 v0.18</title>
+  <title>応用情報の学習アプリ｜読みやすい定義書 v0.19</title>
   <style>
     :root{--ink:#253a3c;--muted:#536b6e;--accent:#17645b;--accent-soft:#e9f3ee;--paper:#fff;--bg:#f4f5ef;--line:#dce3db;--warm:#fff6e5;--radius:18px}
     *{box-sizing:border-box}html{scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.85 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;overflow-wrap:anywhere}a{color:var(--accent);text-underline-offset:4px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.52}button,a,input,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a85c16;outline-offset:4px}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.5;text-wrap:balance}h1{font-size:clamp(27px,4vw,42px);letter-spacing:.03em;margin-bottom:18px}h2{font-size:27px;margin-bottom:14px}h3{font-size:19px;margin-bottom:8px}p{margin-bottom:16px}ul,ol{padding-left:1.5em}li{margin:.45em 0}strong{font-weight:700}small,.small{font-size:14px}.muted{color:var(--muted)}.skip{position:absolute;left:16px;top:-80px;padding:10px 16px;background:var(--paper);z-index:10}.skip:focus{top:10px}.shell{max-width:1170px;margin:auto;padding:0 32px}.masthead{display:flex;justify-content:space-between;align-items:center;padding-top:28px;gap:16px;font-size:13px;letter-spacing:.08em}.brand{font-weight:700;color:var(--accent)}.version{border:1px solid var(--line);padding:4px 12px;border-radius:20px;color:var(--muted);white-space:nowrap}.hero{padding:40px 0 30px;max-width:780px}.eyebrow{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.12em;margin-bottom:14px}.lead{font-size:19px;max-width:650px;color:var(--muted)}.hero-note{font-size:14px;margin:0;color:var(--muted)}
@@ -18,9 +18,10 @@
   </style>
 </head>
 <body><aside style="max-width:1040px;margin:16px auto;padding:18px;background:#fff;border-radius:12px"><h2>科目Aと科目Bを、それぞれの続きから</h2><p>応用情報の科目を選んで学習。Aの自力正答率と、Bの大問の回答・自己評価を分けて保存します。受験日・計画は共通、目標はAの問数とBの題数を別々に数えます。</p><p>Bは2025年春期・情報セキュリティの大問1題（6小問・8欄）から。PCは本文と小問を左右に、スマホは「本文を見る」で往復します。解答を最後に確認する練習も選べます。説明文は解答例と確認ポイントで自己評価し、公式点数を推測しません。</p><p>記録・同期・計画は新形式だけへ統一。保存済みのバックアップは一度変換して取り込みます。<a href="learning-record-v2.md">移行の手順</a>。新版Rulesの本番公開と本人データの取り込みは別工程です。</p></aside><aside style="max-width:1040px;margin:16px auto;padding:16px;background:#edf8f5;border-radius:12px"><strong>複数資格の共通基盤を実装</strong><p>用途と由来、任意のヒント・関連リンク、対象版・言語・目標、診断・模試の問数と配分を共通化。APの教材とすぐ1問の体験は維持しています。<a href="common-foundation.html">読みやすい実装概要</a>。AB-730は確認済み174問を収録。</p></aside>
+  <aside class="shell"><p>2026-10-15：ヘッダの「応用情報・科目A ▼」などから資格・科目の選択画面へ移動します。応用情報の科目A/Bは同じ資格として並び、選択後は対象のホームから学習を始められます。前回選択・科目別の記録と中断・資格共通の計画を保持します。<a href="learning-target-navigation-plan.md">変更の詳細</a>。</p></aside>
   <a class="skip" href="#main">本文へ移動</a>
   <header class="shell">
-    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.18 · 2026.10.11</span></div>
+    <div class="masthead"><span class="brand">AP STUDY / 定義書</span><span class="version">仕様 v0.19 · 2026.10.11</span></div>
     <div class="hero">
       <p class="eyebrow">過去問を使った、効率的な学習のために</p>
       <h1>応用情報の学習アプリ<br>何を作るか、どう使うか。</h1>

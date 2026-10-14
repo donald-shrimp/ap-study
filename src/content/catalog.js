@@ -1,5 +1,6 @@
 import {contentError} from './errors.js';
 import {canUseQuestion,validQuestionPolicy,questionOrigin} from '../domain/content-policy.js';
+import {studyTargets,resolveStudyTarget} from '../domain/study-target.js';
 export const appRoot = new URL('../../', import.meta.url);
 export const contentCacheName = `hitomon-${appRoot.pathname}content`;
 
@@ -37,10 +38,19 @@ function assets(q) {
   return {...q, sourceImages:q.sourceImages.map(resolve), image:resolve(q.image), choices:q.choices.map(c=>({...c,image:resolve(c.image)}))};
 }
 
-export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}) {
+export async function loadCatalog(requestedId,{preferredId=null,choose=false,requestedPartId=null}={}) {
   const listing = await readJSON(new URL('data/qualifications/catalog.json', appRoot));
-  const qualifications = listing.value.qualifications;
+  let qualifications = listing.value.qualifications;
   if (!Array.isArray(qualifications) || !qualifications.length) throw contentError('資格一覧を読み込めませんでした。','資格一覧');
+  // Older public caches may contain the qualification-only index. Only in that
+  // case fetch lightweight manifests; the chooser never loads question packs.
+  qualifications=await Promise.all(qualifications.map(async q=>{
+    if(Array.isArray(q.studyTargets))return q;
+    try{
+      const {value}=await readJSON(new URL(q.url,new URL('data/qualifications/',appRoot)));
+      return {...q,defaultExamPartId:value.defaultExamPartId,studyTargets:studyTargets(value)};
+    }catch(error){if(navigator.onLine)throw error;return {...q,studyTargets:[]};}
+  }));
   if(choose)return {choose:true,qualifications};
   if(!requestedId&&qualifications.some(q=>q.id===preferredId))requestedId=preferredId;
   if (!requestedId && qualifications.length > 1) return {choose:true, qualifications};
@@ -50,6 +60,7 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}
   const loaded = await readJSON(manifestURL);
   const manifest = loaded.value;
   if (manifest.id !== entry.id) throw contentError('資格の教材が一致しません。','教材');
+  if(resolveStudyTarget(manifest,{requestedPartId})===null)return {choose:true,qualifications,invalidTarget:true};
   const indexURL = new URL(manifest.index.url, manifestURL);
   const index = await readJSON(indexURL, manifest.index.sha256);
   const questions = index.value.map(assets), byId = new Map(questions.map(q=>[q.id,q]));

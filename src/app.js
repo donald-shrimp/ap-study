@@ -25,18 +25,17 @@ import {initAccountControls,guestAttemptId} from './sync/account.js';
 import {createPlanningFeature} from './features/planning.js';
 import {createAIHandoff} from './features/ai-handoff.js';
 import {preferredQualification,rememberQualification,qualificationChooserHTML,installQualificationSwitch} from './ui/qualification-navigation.js';
+import {rememberedPart,rememberPart,resolveStudyTarget,targetLabel} from './domain/study-target.js';
 import {hasGuestImport} from './domain/guest-import.js';
 import {createWorkspaceStore} from './storage/workspace.js';
 import {setSyncStatus} from './ui/sync-status.js';
 
 let store, content, qualification, account, planner, cards, learning, personal, written;
 let targetPartId=null;
+const entryHome=new URL(location.href).searchParams.get('entry')==='home';
 const isWritten=()=>qualification?.examParts.some(p=>p.id===targetPartId&&p.unit==='cases');
 const activeView=()=>isWritten()?written?.view()||'home':state.view;
 const activeState=()=>({...state,view:activeView()});
-const targetKey=()=>`hitomon-v2:${appRoot.pathname}:${qualification.id}:target`;
-function targetControls(){return (qualification?.examParts.filter(p=>p.practiceAvailable).length||0)>1?`<nav class="study-target" aria-label="学習する科目">${qualification.examParts.filter(p=>p.practiceAvailable).map(p=>`<button class="button secondary" data-action="switch-target" data-part-id="${esc(p.id)}" aria-pressed="${p.id===targetPartId}">${esc(p.label)}</button>`).join('')}</nav>`:'';}
-async function switchTarget(id){if(!qualification.examParts.some(p=>p.id===id&&p.practiceAvailable)||id===targetPartId)return;if(opening||recordMaintenance||planner?.isBusy()||written?.isBusy())return;if(planner?.hasDraft()){notice('入力中の計画を保存するか取り消してから、科目を切り替えてください。');return;}try{await written?.flush();if(!await save())return;targetPartId=id;try{localStorage.setItem(targetKey(),id);}catch{}fieldPartId=id;topicPartId=id;reviewPartId=id;navigation++;render();notice('');}catch(e){notice(e.message);}}
 let studyContext=null;
 let trendTopicId=null,trendPointDate=null;
 let fieldMode='learning',fieldPartId=null,topicPartId=null,reviewTopicId=null,reviewPartId=null,displayedNextAction=null,displayedEntryActions=null;
@@ -175,7 +174,7 @@ function render(focus = true, preserveY = null) {
   updateTextSize();
   const displayView=activeView();document.querySelectorAll('.nav-item').forEach(b=>{const v=['home','study','mocks'].includes(displayView)?'home':['history','planning','diagnostics','diagnostic','review','mock-records'].includes(displayView)?'history':'topics',active=b.dataset.view===v;b.classList.toggle('active',active);active?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current');});
   if(state.view==='home'){displayedEntryActions=entryActions();displayedNextAction=displayedEntryActions[state.settings.lastEntry]||nextAction();}
-  main.innerHTML = targetControls()+(isWritten()?written?.html()||'<p>大問を読み込んでいます。</p>':state.view==='mocks'&&planner?planner.views().mocksHTML():state.view==='mock-records'&&planner?planner.views().mockDetailHTML():state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML());
+  main.innerHTML = (isWritten()?written?.html()||'<p>大問を読み込んでいます。</p>':state.view==='mocks'&&planner?planner.views().mocksHTML():state.view==='mock-records'&&planner?planner.views().mockDetailHTML():state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML());
   if(activeView()==='planning')planner?.restoreDrafts();
   if (focus) { main.focus({preventScroll:true}); window.scrollTo(0, preserveY ?? 0); }
   if(isWritten())written?.restoreDOM();
@@ -258,7 +257,7 @@ async function openEditor(id) {
 main.addEventListener('click',async e=>{
   const el=e.target.closest('[data-action],[data-view]'); if(!el) return;
   if(el.dataset.view) { if(['all','paperless','desk'].includes(el.dataset.paperMode))state.settings.paperMode=el.dataset.paperMode;go(el.dataset.view,{reviewTopicId:el.dataset.reviewTopicId,reviewPartId:el.dataset.reviewPartId});if(el.dataset.openAi)await planner?.action({dataset:{action:'open-ai'}});return; }
-  const action=el.dataset.action;if(action==='switch-target'){await switchTarget(el.dataset.partId);return;}if(isWritten()){if(action==='plan-start'){await written.action({dataset:{action:'written-plan'}});return;}const result=await written?.action(el);if(result?.ai)aiHandoff.open();if(result)return;if(await planner?.action(el))return;return;} const a=current();
+  const action=el.dataset.action;if(isWritten()){if(action==='plan-start'){await written.action({dataset:{action:'written-plan'}});return;}const result=await written?.action(el);if(result?.ai)aiHandoff.open();if(result)return;if(await planner?.action(el))return;return;} const a=current();
   try {
   if(await personal?.action(el))return;
   if(await cards?.action(el))return;
@@ -379,7 +378,7 @@ $('#editor-form').addEventListener('submit',e=>{e.preventDefault();const f=new F
 $('#reset-material').addEventListener('click',()=>{if(!confirm('この問題のヒントと解説を、初期教材に戻しますか？'))return;delete state.overrides[editId];save();$('#editor-dialog').close();render(false);});
 let scrollTimer;
 window.addEventListener('scroll',()=>{if(isWritten()){clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>written?.trackPageScroll(),200);return;}if(state.view!=='study')return;clearTimeout(scrollTimer);const attemptId=state.currentId;scrollTimer=setTimeout(()=>{if(state.view!=='study'||state.currentId!==attemptId)return;const a=current();if(a){a.scrollY=window.scrollY;save();}},200);},{passive:true});
-function saveScroll(){if(isWritten()){written?.flush().catch(e=>notice(e.message));return;}if(state.view==='study'&&current()){current().scrollY=window.scrollY;save();}}
+function saveScroll(){if(isWritten()){written?.trackPageScroll();written?.flush().catch(e=>notice(e.message));return;}if(state.view==='study'&&current()){current().scrollY=window.scrollY;save();}}
 window.addEventListener('pagehide',saveScroll);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveScroll();});
 async function switchOwner(owner,{restore=false}={}){
@@ -394,7 +393,8 @@ async function switchOwner(owner,{restore=false}={}){
   const next=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState,owner});
   let raw=await next.read(),candidate=raw?validateState(JSON.parse(raw)):makeState();
   if(!raw){candidate.settings={largeText:state.settings.largeText,textSize:state.settings.textSize??100,paperMode:state.settings.paperMode,lastEntry:state.settings.lastEntry,deskQuestionIds:[]};await next.write(candidate);raw=await next.read();}
-  await store.close();store=next;state=validateState(JSON.parse(raw));displayedNextAction=null;fieldMode='learning';fieldPartId=targetPartId;topicPartId=targetPartId;reviewTopicId=null;reviewPartId=targetPartId;await personal?.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。');});await cards?.bind();await learning?.bind();await planner?.bind();await written?.bind();corruptRaw=null;storageOK=true;editId=null;
+  await store.close();store=next;state=validateState(JSON.parse(raw));displayedNextAction=null;fieldMode='learning';fieldPartId=targetPartId;topicPartId=targetPartId;reviewTopicId=null;reviewPartId=targetPartId;await personal?.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。');});await cards?.bind();await learning?.bind();await planner?.bind();await written?.bind({loadMaterial:isWritten()});corruptRaw=null;storageOK=true;editId=null;
+  if(restore&&entryHome){if(isWritten())await written?.setView('home');else state.view='home';}
   // Explicit account changes open home; restoring the same browser's saved
   // login preserves its own current question and scroll position.
   if(!restore){state.currentId=null;state.view='home';state.session={attemptIds:[],topic:null};}
@@ -451,38 +451,41 @@ async function importGuest(uid){
 async function initialize(){
 main.inert=true;document.querySelector('.sidebar').inert=true;main.setAttribute('aria-busy','true');$('#settings-button').disabled=true;
 try {
-  const previous=preferredQualification(appRoot),choose=new URL(location.href).searchParams.has('qualifications');
-  content=await loadCatalog(document.documentElement.dataset.qualification,{preferredId:previous,choose});
+  const pageURL=new URL(location.href),previous=preferredQualification(appRoot),choose=pageURL.searchParams.has('qualifications'),pathQualification=document.documentElement.dataset.qualification;
+  content=await loadCatalog(pathQualification||pageURL.searchParams.get('qualification'),{preferredId:previous,choose,requestedPartId:pageURL.searchParams.get('part')});
   if(content.choose){
     document.querySelector('.workspace').classList.add('qualification-selection');
-    main.innerHTML=qualificationChooserHTML(content.qualifications,appRoot,previous);
-    document.querySelector('.sidebar').hidden=true;$('#settings-button').hidden=true;document.querySelector('.app-footer').hidden=true;document.title='ひと問｜資格を選ぶ';return;
+    main.innerHTML=qualificationChooserHTML(content.qualifications,appRoot,previous,{from:pageURL,selectedQualificationId:pathQualification||pageURL.searchParams.get('qualification')||previous,selectedPartId:pageURL.searchParams.get('part')});
+    document.querySelector('.sidebar').hidden=true;$('#settings-button').hidden=true;document.querySelector('.app-footer').hidden=true;document.title='ひと問｜資格・科目を選ぶ';if(content.invalidTarget)notice('この学習対象は利用できません。資格・科目を選び直してください。');return;
   }
-  qualification=content.manifest;try{targetPartId=localStorage.getItem(targetKey());}catch{}if(!qualification.examParts.some(p=>p.id===targetPartId&&p.practiceAvailable))targetPartId=qualification.defaultExamPartId;fieldPartId=targetPartId;topicPartId=targetPartId;reviewPartId=targetPartId;document.documentElement.dataset.qualification=qualification.id;
+  qualification=content.manifest;targetPartId=resolveStudyTarget(qualification,{requestedPartId:pageURL.searchParams.get('part'),rememberedPartId:rememberedPart(appRoot,qualification.id)});fieldPartId=targetPartId;topicPartId=targetPartId;reviewPartId=targetPartId;document.documentElement.dataset.qualification=qualification.id;document.documentElement.dataset.examPart=targetPartId;
   store=createLocalStore({qualificationId:qualification.id,rootPath:appRoot.pathname,key:qualification.storageKey,validate:validateState});
-  document.title=`ひと問｜${qualification.shortName}の学習`;
+  document.title=`ひと問｜${targetLabel(qualification,targetPartId,{short:true})}の学習`;
   document.querySelector('.app-footer span').textContent=`問題出典：${qualification.sourceLabel}`;
   document.querySelector('.app-footer a').href=new URL(qualification.sourceDoc,appRoot).href;
   online=content.online;base=content.questions;questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=await store.read();if(raw){try{state=validateState(JSON.parse(raw));if(state.session.topicId)state.session.topic=qualification.topics.find(t=>t.id===state.session.topicId)?.name||state.session.topic;}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
-  if(state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
+  if(entryHome&&!isWritten())state.view='home';
+  if(!isWritten()&&state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
   if(qualification.studyContext)await content.loadStudyContext().then(value=>studyContext=value).catch(error=>notice(error.message));
   personal=createPersonalFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:()=>state,onChanged:()=>account?.personalChanged(),onNotice:notice,onApplied:()=>{save();if(recordMaintenance||['study','planning','flashcards','diagnostic'].includes(state.view))return;if(state.view==='history'){for(const el of main.querySelectorAll('input[data-reading-topic]'))if(el!==document.activeElement)el.value=readNote(el.dataset.readingTopic);return;}render(false);},onCheckpoints:()=>cards?.refreshResumeControl()});await personal.bind().catch(()=>{personal=null;notice('分野メモ・再開位置の同期を準備できません。通常学習は続けられます。');});
   cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname,onChanged:()=>account?.cardsChanged(),saveCheckpoint:cp=>personal?.saveCheckpoint(cp),getCheckpoints:()=>personal?.checkpoints()||[]});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
   planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:activeState,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(!['study','flashcards'].includes(activeView())&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='history-mock'){go('history');fieldMode='mock';render();return;}if(view==='mock-records')state.currentMockSetId=runId;if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download,getTargetPart:()=>targetPartId,getCaseRuns:()=>written?.runs()||[]});
   learning=createLearningFeature({qualification,getStore:()=>store,getState:()=>state,onNotice:notice,onUpdate:()=>{save();if(!['study','planning','flashcards'].includes(state.view))render(false);}});await learning.bind();
-  if(qualification.cases){written=createWrittenFeature({qualification,rootPath:appRoot.pathname,content,getStore:()=>store,onUpdate:()=>{if(isWritten())render(false);},onChanged:()=>account?.writtenChanged(),onNotice:notice,getPlanViews:()=>planner?.views()});await written.bind();}
+  if(qualification.cases){written=createWrittenFeature({qualification,rootPath:appRoot.pathname,content,getStore:()=>store,onUpdate:()=>{if(isWritten())render(false);},onChanged:()=>account?.writtenChanged(),onNotice:notice,getPlanViews:()=>planner?.views()});await written.bind({loadMaterial:isWritten()});}
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(corruptRaw!==null)save();else if(!storageOK){$('#save-state').textContent='保存できていません';setSyncStatus('local','error',new Error('記録を保存できません。'));}
   await planner.bind().catch(()=>notice('計画・診断・模試の記録を保存できません。通常演習は続けられます。'));
-  rememberQualification(appRoot,qualification.id);
-  installQualificationSwitch({qualifications:content.qualifications,qualification,root:appRoot,onError:notice,beforeLeave:async()=>{
+  if(entryHome){if(isWritten())await written.setView('home');else await save();}
+  rememberQualification(appRoot,qualification.id);rememberPart(appRoot,qualification.id,targetPartId);
+  pageURL.searchParams.set('part',targetPartId);pageURL.searchParams.delete('entry');if(pathQualification)pageURL.searchParams.delete('qualification');else pageURL.searchParams.set('qualification',qualification.id);history.replaceState(history.state,'',pageURL);
+  installQualificationSwitch({qualification,partId:targetPartId,root:appRoot,onError:notice,beforeLeave:async()=>{
    if(opening||recordMaintenance||planner?.isBusy()||cards?.isBusy()||written?.isBusy()){notice('保存中です。少し待ってから切り替えてください。');return false;}
    if(planner?.hasDraft()){notice('入力中の計画があります。保存するか入力を取り消してから、資格を切り替えてください。');return false;}
    const target=store,token=navigation;main.inert=true;document.querySelector('.sidebar').inert=true;$('#settings-button').disabled=true;
    try{
-    clearTimeout(scrollTimer);if(state.view==='study'&&current())current().scrollY=window.scrollY;
+    clearTimeout(scrollTimer);if(isWritten())written?.trackPageScroll();else if(state.view==='study'&&current())current().scrollY=window.scrollY;
     await personal?.flush();await planner?.store()?.flush();await written?.flush();
     if(target!==store||token!==navigation)return false;
     return await save()&&target===store&&token===navigation;
