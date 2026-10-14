@@ -87,12 +87,12 @@ python tests/pwa.py
 
 現行のAP専用 `tests/corpus.py` は収録800問・公式正解・画像・教材確認を維持する。別資格には、その原本・正答・レビュー記録を照合する資格固有のチェックを追加する。公開時は最新main・教材保持・生成ハッシュ・ブラウザ・公開ファイルの一致を確認する。
 
-第二資格の本番教材は未登録。`tests/content.py`・`tests/qualifications.py` の架空問題は一時ディレクトリだけに生成する。
+2026-10-14、第二資格AB-730を174問で登録。`tests/content.py`・`tests/qualifications.py` の架空問題は一時ディレクトリだけに生成する。
 
 
 ## 共通の教材契約（2026-10-13）
 
-[読みやすい実装概要](common-foundation.html)。新しい資格は `qualification.json` と各作成元JSONで追加し、共通画面へ資格IDの分岐を加えない。公開対象はまだAPのみ。非公開の合成テスト教材を実資格の問題として使わない。
+[読みやすい実装概要](common-foundation.html)。新しい資格は `qualification.json` と各作成元JSONで追加し、共通画面へ資格IDの分岐を加えない。公開対象はAPとAB-730。非公開の合成テスト教材を実資格の問題として使わない。
 
 ### 用途と由来を分ける
 
@@ -207,8 +207,32 @@ python tools/import-question-drafts.py \
 
 `br` と段落を残し、radio／checkboxを区別。提供資料で確認できた注意書きの選択肢への混入は、本文へ移して正答位置を補正し、変換記録を残す。手動表示の選択肢も提供正答と一意に文字一致する場合だけ単一選択へ復元する。これは内容レビューではない。明示的な `data-type="freeText"` は採点保留の草稿として保存。表・画像・未知の形式・選択数不一致などは要確認の草稿に残す。取り込み先の資格やcollection不一致・同一コードの二重掲載・未対応のHTML全体はエラーにし、既存台帳を書き換えない。
 
-提供AB-730の前回抽出記録は124問（単一111・複数13）、内容確認済み・アプリ公開はいずれも0問。今回の環境では添付HTML原本は存在せず、前回の抽出記録を `content/ab730/question-drafts/previous-extraction.json` に保持している。現在の取り込み機能の検証は同構造の合成HTMLで行い、124問を再解析・内容確認したとは記録しない。対象版・分類・正答の資料確認・各選択肢理由を整えてから、少数の確認済み教材を資格設定へ登録する。
+形式整備時点の提供AB-730抽出記録は124問（単一111・複数13）、内容確認済み・アプリ公開はいずれも0問。共通形式整備の時点では添付HTML原本は存在せず、前回の抽出記録を `content/ab730/question-drafts/previous-extraction.json` に保持している。その時点の取り込み機能の検証は同構造の合成HTMLで行い、124問を再解析・内容確認したとは記録していない。完全版の教材化は下記を参照。対象版・分類・正答の資料確認・各選択肢理由を整えてから、少数の確認済み教材を資格設定へ登録する。
 
 取り込みCLIはPython標準ライブラリのみ。Schema検証テストには `jsonschema`、ブラウザテストには既存のPlaywright／Chromium、同期テストにはFirebase SDK／Emulatorを使用する。
 
 検証：`python tests/question-import.py`、`python tests/question-type-content.py`、`node --test tests/question-types.mjs`、`python tests/question-type-flow.py`。Firebase Rulesの複数選択はEmulatorで確認し、本番公開はFirebaseコンソールで別途必要。古いアプリは新形式の記録を受け取れないため、複数選択の本番教材を追加する前に各端末のアプリを更新する。
+
+
+### AB-730完全版と確認済み教材の登録（2026-10-14）
+
+完全版の `script#dataset[type="application/json"]` から187問を抽出。本文と選択肢をHTML化して既存抽出器へ渡し、埋め込みレンダラーは実行しない。`sourceId`を出典コードに使うため、画面のランダム順・GUI番号が変わっても同じ問題を識別する。JSON型・選択肢ID・提供正答の参照・一意性を検査する。この静的抽出は内容承認ではない。
+
+`content/ab730/intake/imports/` は提供原本と未確認抽出を保持し、`authoring/authoring-map.json` が抽出IDと公開ID `ab730-qN-N` をつなぐ。前回124問は完全版に含まれるので再登録せず、新規出典コード63問を区別した。提供元の重要度注記を回答候補から除く処理、製品仕様・設問・正答・全選択肢理由の訂正は、作者の差分記録と独立確認記録を保存して行った。
+
+提供正答と作者草稿を見る前の独立解答→公式資料本文の照合→完成教材と全候補理由の確認→修正後の再確認を実施。187問を分類し、177問を承認、根拠不足10問は草稿、承認済みの意味重複3問は除外。174問を公開した。`progress.json` に実数、保留理由と次の確認対象を保存。全問の文字化や公式試験問題の再現とは扱わない。
+
+```sh
+python tools/curate-reviewed-content.py --qualification ab730 \
+  --drafts content/ab730/authoring/author-drafts.json \
+  --reviews content/ab730/authoring/reviewer/final-reviews.json \
+  --exclusions content/ab730/authoring/publication-exclusions.json --register
+python tools/build-content.py
+python tests/ab730-content.py
+python tests/ab730-flow.py
+python tests/ab730-sync.py
+```
+
+昇格ツールは独立確認・承認状態・完成作成元と公開補完後の両ハッシュ・読んだ資料の保存ハッシュを照合し、非除外の未承認問題があれば登録を止める。確認記録は自動生成しない。抽出草稿は未確認のまま保存し、修正した別レコードの確認を偽って流用しない。追加ファイルは同じcollectionへ取り込み、改訂競合・意味重複・承認ハッシュを再確認する。公開問題のIDは変えない。本文変更の際は版を増やす。
+
+AB-730は4つの学習分野、単一157／複数17。分野均等の30問診断は公式試験の出題比率を再現するものではない。ヒント・紙ペン分類・カード・固定模試は未提供のため入口を作らない。日本語試験への新版適用日は未確認で、教材版は公式資料の確認日を示す。年度／春秋のない資格では該当フィルターを表示しない。

@@ -36,3 +36,15 @@ unknown=m.extract('<article class="question" data-type="ranking"><p class="stem"
 base=m.extract(html(),'fixture','originals','base.html')[0];noted=m.extract(html(choices=['正解はそれぞれ完全なソリューションを示します。','A','B','C'],correct='1,3'),'fixture','originals','noted.html')[0];assert base['fingerprint']==noted['fingerprint']
 one=m.extract(html(correct='0',stem='当てはまるものをすべて選んでください。'),'fixture','originals','one-answer.html')[0];assert one['question']['type']=='multipleChoice' and one['question']['selection']['mode']=='all'
 print('PASS static extraction / multi and exact count / manual 4-option recovery / preserved lines / mixed instructions / explicit freeText draft / unknown format guard / idempotence / revisions without overwrites / order-independent duplicate candidates / collection isolation / failed batch unchanged')
+
+# Embedded dataset: parse JSON, never execute renderer script; sourceId survives random order.
+def dataset_html(qs):return '<script id="dataset" type="application/json">'+json.dumps({'questions':qs},ensure_ascii=False)+'</script><script>throw Error("do not execute")</script>'
+qs=[{'id':'GUI1','sourceId':'STABLE1','kind':'single','stem':'本文\n条件','options':[{'id':'A','text':'一'},{'id':'B','text':'二'}],'key':['B'],'explanation':'説明\n参考リンク\nhttps://example.com/docs'},{'id':'GUI2','sourceId':'STABLE2','kind':'multi','stem':'2つ選んでください。','options':[{'id':'C','text':'三'},{'id':'A','text':'一'},{'id':'B','text':'二'}],'key':['B','C'],'explanation':'理由'}]
+r=m.extract(dataset_html(qs),'fixture','originals','embedded.html');assert len(r)==2 and r[1]['question']['selection']=={'mode':'exact','count':2};assert r[1]['question']['correctChoiceIds']==['choice-0','choice-2'];assert r[0]['question']['stem']=='本文\n条件';assert '静的に抽出' in r[0]['formatChanges'][0]
+ordered=m.extract(dataset_html(list(reversed(qs))),'fixture','originals','renamed.html');assert {x['question']['id'] for x in ordered}=={x['question']['id'] for x in r}
+for patch in [{'key':['Z']},{'key':['B','B']},{'kind':[]},{'options':[{'id':'A','text':1}]},{'sourceId':4}]:
+ altered=copy.deepcopy(qs);altered[0].update(patch)
+ try:m.extract(dataset_html(altered),'fixture','originals','invalid.html')
+ except ValueError:pass
+ else:raise AssertionError('Malformed embedded data accepted: '+str(patch))
+print('PASS embedded application/json / renderer never executed / original IDs across random reorder / invalid keys, type and option values rejected')

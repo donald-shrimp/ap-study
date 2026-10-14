@@ -1,0 +1,140 @@
+目次
+エディター モードを終了する
+Learn に質問する
+Learn に質問する
+読み取りモード
+目次
+英語で読む
+追加
+計画に追加する
+編集
+マークダウンのコピー
+印刷
+Note
+このページにアクセスするには、承認が必要です。 サインインまたはディレクトリの変更を試すことができます。
+このページにアクセスするには、承認が必要です。 ディレクトリの変更を試すことができます。
+Fostering appropriate reliance on GenAI
+フィードバック
+Overreliance on AI is one of the main barriers to user success
+When people use GenAI for productivity tasks, their success is threatened by overreliance on AI. Overreliance on AI happens when users accept incorrect or incomplete AI outputs, typically because AI system design makes it difficult to spot errors.​
+Because of overreliance on AI, people can make costly mistakes that can lead to severe harm (for example, when medical doctors accept incorrect AI outputs), and decreased productivity, loss of trust, and product abandonment.​
+We need to design AI systems that foster appropriate reliance—help users accept correct AI outputs and reject incorrect ones.​
+This article provides a step-by-step framework for product builders to identify and mitigate the risk of overreliance on AI in scenarios where the generated content is grounded in a reliable data source (e.g., domain-specific databases, web search results).
+While the framework is based on extensive research, mitigating overreliance on AI isn't a solved problem. It requires ongoing inquiry and innovation. This framework will evolve as we learn more.
+Overreliance on AI Risk Identification and Mitigation Framework
+The framework has two parts:
+Identifying overreliance risk
+Goal: Understand the risk of overreliance and its impact in your product.
+Deliverable: Assessment of overreliance risk and its impact (PM, engineering, UX research)
+Mitigating overreliance risk
+Goal: Mitigate overreliance on AI by accomplishing three UX Goals
+Deliverables:
+UX mitigations of overreliance on AI (UX design, engineering, PM)
+Evaluation of their effectiveness (UX research)
+Identifying overreliance on AI risk
+To identify the risk of your users overrelying on AI, follow these steps:
+Find out what the relevant risk factors for your feature or product are.
+Answer the "Questions to consider."
+Use the methods in the "How to assess" column to assess the level of risk.
+Then, document the risk of overreliance for your AI product. A good way to help you think through the risk is to imagine what the news headlines would be when users over-rely on your AI product.
+Example
+For product X, the risk of overreliance is high because missing information in the AI-generated documents could lead people to make wrong and costly business decisions. The risk is higher because our product will be used by people with low AI literacy and are new at their jobs (low task familiarity).
+News headline: "Company Loses Millions After Relying on Faulty GenAI Product Data."
+Risk factor
+Questions to consider
+How to assess
+AI mistakes
+What types of mistakes can be present in AI responses? For example, incorrect or missing information; correct GenAI responses that don't address user intent. How often can mistakes occur in AI responses? Note: Frequent mistakes increase the likelihood of users encountering mistakes. Rare mistakes might be harder to detect. The impact of overreliance may be high even for infrequent mistakes. How easy/hard is it for users to detect AI mistakes?Note: Harder-to-detect mistakes increase overreliance risk.
+Systematic measurement  Red teaming User feedback
+Impact of overreliance
+What are the negative effects of users accepting AI responses containing mistakes? For example, making wrong decisions, following incorrect advice, productivity loss, psychological or physical safety, ineffective human oversight, security breaches, product abandonment. How does the impact of overreliance differ across use cases? Note: Might not apply to simple products with one use case. Note: Overreliance risk is higher for complex, difficult user tasks. How does the impact of overreliance differ for low-, medium-, and high-stakes tasks? Note: Negative impact of overreliance is higher for high-stakes tasks.
+Impact assessment
+User characteristics
+How does overreliance risk and impact differ across user groups?Note: Emerging research shows differences in how and whether people over-rely on AI. For example, the following factors increase overreliance risk: low AI literacy, lack of domain expertise, low task familiarity, high overall trust in AI. Learn more
+Review existing research User research (surveys)
+Mitigating overreliance risk
+This section of the framework can help AI product teams plan mitigations for overreliance and assess their effectiveness. Lessons learned from multiple research studies on overreliance on AI point to three UX goals we need to accomplish to foster appropriate reliance:
+Create realistic mental models – help users understand:
+The AI system's capabilities and limitations: what kinds of mistakes it might make, and how often. (See HAX Guidelines 1 & 2)
+How the system works and why it does what it does, even if in a very simple, rudimentary way. (See HAX Guideline 11)
+Signal to users when to verify
+Make it easy for users to spot AI mistakes.
+Facilitate verification
+Decrease users’ cognitive load when verifying AI outputs​.
+Accomplishing these three goals might require UX innovation. The HAX Toolkit—a set of tools for planning user-facing AI systems—is a useful resource for mitigating overreliance risk. ​
+Keep in mind that many overreliance mitigations can backfire. Evidence from user research is indispensable to see if an AI product meets these goals.
+Mitigating overreliance risk
+UX goal
+Strategy
+Example mitigations
+Mitigation effectiveness
+What to assess
+How to assess
+Create realistic mental models
+Be transparentHAX Guidelines 1 & 2
+First-run experiences  Entry points to interacting with AI  Disclaimers Tooltips  UI messaging during latency  Uncertainty expressions
+Is there effective UI messaging about AI's existence?Note: Users may get a false sense of security if they're unaware of the AI's presence. Is there effective UI messaging about AI's role in interaction?Is there effective UI messaging about AI capabilities and limitations? Note: Capabilities can include intended use cases.Limitations include types and frequency of mistakes, model uncertainty.
+Usability testing
+Educate usersHAX Guideline 11
+Is there effective and easy to understand UI messaging about the AI system's workings? For example, do users understand that GenAI systems generate content and not merely retrieve it, or that AI-generated summaries may be incorrect or incomplete? Is this UI messaging easily discoverable and appropriately integrated into the user experience? Note: In addition to documentation, educating users through UI messaging can help set realistic expectations about the AI system.
+Heuristic evaluation User research
+Signal to users when to verify
+Make it easy to spot AI mistakes
+Uncertainty expressions (highlighting tokens with low output probability, verbal expressions) Cognitive forcing functions (friction, giving users time to think, confirmation dialogues, AI critiques, AI questioning)
+Do users understand the need to oversee and review AI responses?Are there effective ways of encouraging users to review, edit, and confirm AI outputs before use? Are there effective ways of encouraging users to review, edit, and confirm AI outputs before use? Note: Overreliance risk is higher in automation scenarios where the AI can perform actions without giving the user the opportunity to review them.
+Cognitive walkthroughUsability testing
+Facilitate verification
+Decrease users’ cognitive load when verifying AI outputs.​Make it easy for users to verify the correctness and completeness of AI - generated content
+Are verification aids such as sources and explanations easy to discover and appropriately integrated into the experience ？Do verification aids have reliability issues?  For example, fabricated sources or inaccurate explanations.Can users with accessibility needs oversee and review AI responses?Are verification aids such as sources and explanations effective at helping users verify AI responses?NoteOverreliance risk is high if it is hard to verify outputs.Overreliance mitigations can backfire. Explanations can increase user trust even when they are incorrect.The mere presence of sources can make users trust AI outputs more.Consider how verification aids can help novice users who might not have sufficient knowledge to spot mistakes.
+Usability testing (task accuracy, time on task, satisfaction)
+Acknowledgments
+This framework is the result of work undertaken by the Appropriate Reliance workstream under the New Future of Work. Lead contributors: Samir Passi, Mihaela Vorvoreanu, Ruth Kikin-Gil, Shipi Dhanorkar, Amy Heger, and Kathleen Walker.
+References
+Overreliance on AI, especially GenAI, is an emerging research area. The framework is based on state-of-the-art research in this area, including the following research papers and reports:
+Overreliance on AI
+For a comprehensive review of interdisciplinary research on overreliance on AI, see these technical reports:
+Overreliance on AI: Literature Review
+Appropriate Reliance on GenAI: Research Synthesis
+Fostering Appropriate Reliance on GenAI: Lessons Learned from Early Research
+Mental models
+Andrews, R. W., Lilly, J. M., Srivastava, D., & Feigh, K. M. (2022). The role of shared mental models in human-AI teams: a theoretical review. Theoretical Issues in Ergonomics Science, 24(2), 129–175. https://doi.org/10.1080/1463922X.2022.2061080
+Bansal, G., Nushi, B., Kamar, E., Lasecki, W. S., Weld, D. S., & Horvitz, E. (2019). Beyond Accuracy: The Role of Mental Models in Human-AI Team Performance. Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, 7(1), 19. https://doi.org/10.1609/hcomp.v7i1.5285
+Bos, N., Glasgow, K., Gersh, J., Harbison, I., & Lyn Paul, C. (2019). Mental models of AI-based systems: User predictions and explanations of image classification results. Proceedings of the Human Factors and Ergonomics Society Annual Meeting, 63(1), 184-188. https://doi.org/10.1177/1071181319631392
+Nourani, M., Roy, C., Block, J. E., Honeycutt, D., Rahman, T., Ragan, E., & Gogate, V.. 2021. Anchoring Bias Affects Mental Model Formation and User Reliance in Explainable AI Systems. In Proceedings of the 26th International Conference on Intelligent User Interfaces (IUI '21). Association for Computing Machinery, New York, NY, USA, 340–350. https://doi.org/10.1145/3397481.3450639
+User characteristics
+Chen, Z., & Chan, J. (2023). Large Language Model in Creative Work: The Role of Collaboration Modality and User Expertise. Available at SSRN: https:// dx.doi.org/10.2139/ssrn.4575598
+Choudhury, A., & Shamszare, H. (2023). Investigating the Impact of User Trust on the Adoption and Use of ChatGPT: Survey Analysis. Journal of Medical Internet Research, 25, e47184. https://doi.org/10.2196/47184
+Ehsan, U., Passi, S., Liao, Q. V., Chan, L., Lee, I., Muller, M., & Riedl., M. 2024. The Who in XAI: How AI Background Shapes Perceptions of AI Explanations. In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems (CHI '24). Association for Computing Machinery, New York, NY, USA, Article 316, 1–32. https://doi.org/10.1145/3613904.3642474
+Kazemitabaar, M., Chow, J., Ma, C. K. T., Ericson, B. J., Weintrop, D., & Grossman, T. (2023). Studying the effect of AI Code Generators on Supporting Novice Learners in Introductory Programming. Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems. https:// doi.org/10.1145/3544548.3580919.
+Prather, J., Reeves, B. N., Denny, P., Becker, B. A., Leinonen, J., Luxton-Reilly, A., Powell, G., Finnie-Ansley, J., & Santos, E. A. (2023). "It's Weird That it Knows What I Want": Usability and Interactions with Copilot for Novice Programmers. ACM Trans. Comput.-Hum. Interact., 31(1). https://doi.org/10.1145/3617367.
+Sarkar, A., Gordon, A. D., Negreanu, C., Poelitz, C., Ragavan, S. S., & Zorn, B. (2022). What is it like to program with artificial intelligence? In Proceedings of the 33rd Annual Conference of the Psychology of Programming Interest Group (PPIG 2022). https://doi.org/10.48550/arXiv.2208.06213.
+Zhai, C., Wibowo, S. & Li, L.D. The effects of over-reliance on AI dialogue systems on students' cognitive abilities: a systematic review. Smart Learn. Environ. 11, 28 (2024). https://doi.org/10.1186/s40561-024-00316-7
+Uncertainty expressions
+Kim, S., Liao, Q. V., Vorvoreanu, M., Ballard, S., & Vaughan, J. W. (2024). "I'm Not Sure, But...": Examining the Impact of Large Language Models' Uncertainty Expression on User Reliance and Trust. In Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT '24). Association for Computing Machinery, New York, NY, USA, 822–835. https://doi.org/10.1145/3630106.3658941
+Mielke, S. J., Szlam, A., Dinan, E., & Boureau, Y.-L. (2022). Reducing Conversational Agents' Overconfidence Through Linguistic Calibration. Transactions of the Association for Computational Linguistics, 10, 857–872. https://doi.org/10.1162/tacl_a_00494.
+Spatharioti, S. E., Rothschild, D. M., Goldstein, D. G., & Hofman, J. M. (2023). Comparing traditional and LLM-based search for consumer choice: A randomized experiment. arXiv preprint, arXiv:2307.03744. https://doi.org/10.48550/arXiv.2307.03744.
+Steyvers, M., Tejeda, H., Kumar, A., Belem, C., Karny, S., Hu, X., Mayer, L., & Smyth, P. (2024). The Calibration Gap between Model and Human Confidence in Large Language Models. arXiv preprint, arXiv: 2401.13835. https://doi.org/10.48550/arXiv.2401.13835.
+Vasconcelos, H., Bansal, G., Fourney, A., Liao, Q. V., & Wortman Vaughan, J. (2023). Generation probabilities are not enough: Exploring the effectiveness of uncertainty highlighting in AI-powered code completions. arXiv preprint, arXiv:2302.07248. https://doi.org/10.48550/arXiv.2302.07248.
+Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., & Hooi, B. (2023). Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs. arXiv preprint, arXiv:2306.13063. https://doi.org/10.48550/arXiv.2306.13063.
+Zhou, K., Jurafsky, D., & Hashimoto, T. (2023). Navigating the Grey Area: How Expressions of Uncertainty and Overconfidence Affect Language Models. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (pp. 5506–5524). Association for Computational Linguistics. https:// doi.org/10.18653/v1/2023.emnlp-main.335.
+Verification
+Chen, V., Liao, Q. V., Wortman Vaughan, J., & Bansal, G. (2023). Understanding the Role of Human Intuition on Reliance in Human-AI Decision-Making with Explanations. Proc. ACM Hum.-Comput. Interact. 7, CSCW2, Article 370 (October 2023), 32 pages. https://doi.org/10.1145/3610219.
+Danry, V., Pataranutaporn, P., Mao, Y., & Maes, P. (2023). Don't just tell me, ask me: AI systems that intelligently frame explanations as questions improve human logical discernment accuracy over causal AI explanations. In Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems (CHI '23), 13 pages. https://doi.org/10.1145/3544548.3580672
+Fok, R., & Weld, D. S. (2023). In search of verifiability: Explanations rarely enable complementary performance in ai-advised decision making. arXiv preprint, arXiv:2305.07722. https://doi.org/10.48550/arXiv.2305.07722.
+Gordon, A., Negreanu, C., Cambronero, J., Mudumbai Chakravarthy, R., Drosos, I., Fang, H., Mitra, B., Richardson, H., Sarkar, A., Simmons, S., Williams, J., & Zorn, B. (2023). Co-audit: tools to help humans double-check AI-generated content. arXiv preprint, arXiv: 2302.06590. https://doi.org/10.48550/arXiv.2310.01297.
+Goyal, N., Briakou, E., Liu, A., Baumler, C., Bonial, C., Micher, J., Voss, C. R., Carpuat, M., & Daumé, H. (2023). What Else Do I Need to Know? The Effect of Background Information on Users' Reliance on QA Systems. arXiv preprint, arXiv:2305.14331. https://doi.org/10.48550/arXiv.2305.14331.
+Saunders, W., Yeh, C., Wu, J., Bills, S., Ouyang, L., Ward, J., & Leike, J. (2022). Self-critiquing models for assisting human evaluators. arXiv preprint, arXiv: 2206.05802. https://doi.org/10.48550/arXiv.2206.05802.
+Schemmer, M., Kuehl, N., Benz, C., Bartos, A., & Satzger, G. (2023). Appropriate Reliance on AI Advice: Conceptualization and the Effect of Explanations. Proceedings of the 28th International Conference on Intelligent User Interfaces, 410–422. https://doi.org/10.1145/3581641.3584066.
+フィードバック
+このページはお役に立ちましたか?
+はい
+いいえ
+いいえ
+このトピックについてサポートが必要ですか?
+このトピックの意図を把握したり、理解を深めたりするために Ask Learn を使ってみませんか?
+Learn に質問する
+Learn に質問する
+修正を提案しますか?
+その他のリソース
+最終更新:
+2025-03-04

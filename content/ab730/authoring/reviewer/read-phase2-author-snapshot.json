@@ -1,0 +1,3289 @@
+[
+  {
+    "id": "ab730-q1-1",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 1,
+    "title": "自社の調達チーム向けにMicrosoft 365 Copilot エージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "自社の調達チーム向けにMicrosoft 365 Copilot エージェントを構築しています。\nエージェントは箇条書きで回答し、回答は3つの推奨事項に制限する必要があります。\nテスト中、エージェントは長い段落形式の回答を返します。\n何を構成すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "スタートプロンプト"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "カスタム指示"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ナレッジソース"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "機能"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "カスタム指示は、箇条書きの使用や推奨事項の数の制限など、エージェントが回答をどのように書式設定・構成するかを制御します。回答の形式が期待どおりでない場合、まず見直すべき設定です。",
+    "choiceReasons": [
+      "スタートプロンプトは利用者へ示す質問例で、すべての回答の書式を設定する指示とは異なります。",
+      "回答の形式と長さを継続的に指定するには、エージェントの指示へ箇条書きと3件の制約を記載します。",
+      "ナレッジは参照情報であり、回答の表現を決める指示そのものではありません。",
+      "機能は実行できる処理の種類で、箇条書きの書式や件数指定ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問1（Q1-1））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/build-your-own-agent-with-microsoft-365-copilot"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q1-15",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 2,
+    "title": "管理者向けに週次プロジェクト アップデートを要約するMicrosoft 365 Copilot エージェントの指示を構成しています。",
+    "topicId": "agents",
+    "stem": "管理者向けに週次プロジェクト アップデートを要約するMicrosoft 365 Copilot エージェントの指示を構成しています。\n回答が一貫していて簡潔であり、重要な情報に焦点を当てたものである必要があります。\nエージェントの指示として何を構成すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "週次プロジェクト アップデートを3つのラベル付きセクションに要約し、回答を150語以内に制限してください。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "週次アップデートのプロフェッショナルな要約を作成してください。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "各アップデートの詳細な要約を提供し、長さを制限せずにすべての関連情報を含めてください。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "週次プロジェクト アップデートを3つのセクションに要約し、できるだけ多くの詳細を含めてください。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "最も効果的な指示は、出力の構造（3つのラベル付きセクション）を明確に定義し、測定可能な長さの制約（150語以内）を含めるものです。これにより、一貫性のある簡潔な回答が保証されます。",
+    "choiceReasons": [
+      "見出しの数と語数の上限を明示し、求める構成と簡潔さを具体化しています。",
+      "プロフェッショナルという指定だけでは長さと重点が不明確です。",
+      "長さを制限せずすべての詳細を含める指示は、簡潔な週次報告の要件と逆です。",
+      "セクション数は指定していますが、詳細を最大化すると簡潔さを損ないます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問2（Q1-15））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/build-your-own-agent-with-microsoft-365-copilot"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q1-16",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 3,
+    "title": "あなたと数人のチームメンバーは、Microsoft 365のエージェント ビルダーを使用してエージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "あなたと数人のチームメンバーは、Microsoft 365のエージェント ビルダーを使用してエージェントを構築しています。\nエージェントが広く公開される前に、チームメンバーがそのエージェントにアクセスしてテストできるようにする必要があります。\n何をすべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "エージェントファイルをMicrosoft SharePoint Onlineのドキュメントライブラリにアップロードする。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェントをMicrosoft コマーシャルマーケットプレースに公開する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントビルダーの[共有の管理]を使用してアクセス権を付与する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Microsoft Teamsチャネルでエージェントへのリンクを共有する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "公開前にチームメンバーにテストしてもらうには、エージェント ビルダーの[共有の管理]を使ってアクセス権を付与するのが適切です。これにより、対象ユーザーだけがエージェントを利用できます。",
+    "choiceReasons": [
+      "ファイルをSharePointへ置くだけではエージェントへの利用権限を付与しません。",
+      "組織内の少数利用者による試行のために、外部マーケットへ公開する必要はありません。",
+      "共有の管理で、対象メンバーへエージェントの利用権限を設定できます。",
+      "リンクを送るだけでは、必要な共有権限を設定したことになりません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問3（Q1-16））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/build-your-own-agent-with-microsoft-365-copilot"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q1-17",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 4,
+    "title": "文を正しく完成させる回答(Target_A)を選択してください。",
+    "topicId": "agents",
+    "stem": "文を正しく完成させる回答(Target_A)を選択してください。\n新しいエージェントを作成することなく、既製のエージェントを追加してすぐに使い始めるには、[Target_A]を使用できます。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft 365 Copilotのエージェントビルダー"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェントストア"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Microsoft 365 Copilot Studio"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Microsoft 365 Copilot Chat"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェントストアは、新しいエージェントを作成することなく、既製のエージェントを閲覧・追加してすぐに使い始めるために使用します。\n\n構成作業を伴わずに利用を開始できる点が特徴です。",
+    "choiceReasons": [
+      "ビルダーは新しいエージェントを作るための機能です。",
+      "エージェントストアから既製のエージェントを探し、利用できます。",
+      "Copilot Studioは作成・構成のためのツールで、既製エージェントを探す入口とは異なります。",
+      "通常のチャットを開始することと、既製エージェントを追加する操作を区別します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問4（Q1-17））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/copilot-agent-install",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/copilot-studio-experience"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q1-18",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 5,
+    "title": "Microsoft 365 Copilot で新しいエージェントを作成しています。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot で新しいエージェントを作成しています。\nユーザーのプロンプトに応じて、エージェントが画像を生成できるようにする必要があります。\n画像生成に関係する能力が分類される項目はどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "説明"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "機能"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "指示"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ナレッジ"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "画像生成はエージェントの機能に分類されます。説明は紹介文、指示は応答方針、ナレッジは参照資料です。機能の有効化方法や初期状態は、利用する作成ツールによって異なります。",
+    "choiceReasons": [
+      "説明は、利用者へエージェントの目的を紹介する情報です。",
+      "画像生成はエージェントの機能に分類されます。ツールによって有効化方法や初期状態は異なります。",
+      "指示は応答の方針であり、画像生成能力そのものの分類ではありません。",
+      "ナレッジは回答の根拠となる資料です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問5（Q1-18））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/build-your-own-agent-with-microsoft-365-copilot"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q2-11",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 6,
+    "title": "文を正しく完成させる回答(Target_A)を選択してください。",
+    "topicId": "agents",
+    "stem": "文を正しく完成させる回答(Target_A)を選択してください。\nMicrosoft 365 Copilotのエージェント ビルダーは、[Target_A]を構築するために使用されます。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "トリガーとアクションを使用した自動化されたワークフローによるエージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "自然言語による指示または手動構成を使用する宣言型エージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "外部アプリまたはサービスに接続するロールベースのCopilotエクスペリエンス"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Azureにカスタムコードをデプロイすることによるエージェント"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェント ビルダーを使用すると、コードを書くことなく、自然言語による指示や手動構成で動作を定義することで宣言型エージェントを作成できます。",
+    "choiceReasons": [
+      "トリガーやワークフローによる自動化と、指示・知識を宣言する作成方法を区別します。",
+      "Agent Builderでは、自然言語の説明や設定によってMicrosoft 365 Copilotをカスタマイズする宣言型エージェントを作ります。",
+      "用途別の既製サービスと、Agent Builderで作る宣言型エージェントを区別します。",
+      "Azureへ独自コードをデプロイすることが、この作成方法の必須条件ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問6（Q2-11））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/copilot-studio-experience"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q2-25",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 7,
+    "title": "自社の法務チーム向けにMicrosoft 365 Copilotエージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "自社の法務チーム向けにMicrosoft 365 Copilotエージェントを構築しています。\nエージェントが常にフォーマルなトーンで回答し、すべての回答の最後に免責事項を含めるようにする必要があります。\nどの設定を構成すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "スタート プロンプト"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "指示"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "機能"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ナレッジ ソース"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "指示は、トーンや免責事項などの必要な要素を含め、エージェントがどのように振る舞い、回答を書式設定するかを定義する設定です。",
+    "choiceReasons": [
+      "質問例を示すだけでは、すべての回答に適用する文体と免責文を指示できません。",
+      "フォーマルなトーンと回答末尾の免責文を、エージェントの指示で明示します。",
+      "機能は処理の種類で、文体や回答末尾の文章の指定ではありません。",
+      "ナレッジの追加だけでは、回答形式の条件は伝わりません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問7（Q2-25））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q2-26",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 8,
+    "title": "自社の財務チーム向けにMicrosoft 365 Copilotエージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "自社の財務チーム向けにMicrosoft 365 Copilotエージェントを構築しています。\nこのエージェントは、Microsoft SharePoint Onlineサイト上の社内予算文書を参照して質問に回答する必要があります。\nこのエージェントが回答を生成する際にこれらの文書を使用するようにする必要があります。\n何をすべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "SharePointサイトをナレッジ ソースとして追加する。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "予算編成のサポートについて言及するようエージェントの説明を更新する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "予算編成に関連するスタート プロンプトを追加する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "予算編成プロセスを説明する指示を追加する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "SharePointサイトをナレッジ ソースとして追加すると、エージェントが回答を生成する際に社内の予算文書を参照できるようになります。",
+    "choiceReasons": [
+      "参照するSharePointの資料をナレッジに指定し、利用者のアクセス許可の範囲で回答の根拠にします。",
+      "紹介文を変えても、資料の取得対象を設定したことになりません。",
+      "質問例を追加するだけでは、予算文書を参照可能にしません。",
+      "業務の説明だけでは、根拠資料の接続先を構成できません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問8（Q2-26））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q2-28",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 9,
+    "title": "Sales West という名前のチーム向けにMicrosoft 365 Copilotエージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "Sales West という名前のチーム向けにMicrosoft 365 Copilotエージェントを構築しています。\nパイロット期間中、Sales Westのユーザーのみがこのエージェントを使用できるようにする必要があります。\nSales Westのメンバーだけを含む既存のセキュリティグループがあります。利用者を一人ずつ追加せず、このグループで共有を管理するには何をすべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "[共有の管理]を使用してSales Westのユーザーを個別に追加する。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Microsoft Teamsチャネルでエージェントのリンクを共有する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Sales Westの各ユーザー専用に新しいエージェントを作成する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Sales Westのユーザーを含むセキュリティグループを選択する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Sales Westのユーザーを含むセキュリティ グループを選択して共有することで、パイロット期間中、そのグループに属するユーザーのみにエージェントの使用を確実に限定できます。",
+    "choiceReasons": [
+      "個別ユーザーの共有でも制限はできますが、この条件ではグループでまとめて管理する方法を求めています。",
+      "リンクの送信だけでは、エージェントの共有対象を限定したことになりません。",
+      "一人ずつ別のエージェントを作る必要はありません。",
+      "対象の利用者だけを含む既存のグループを共有対象へ指定し、一括でアクセスを管理できます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問9（Q2-28））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-share-manage-agents",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q2-1",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 10,
+    "title": "文を正しく完成させる回答(Target_A)を選択してください。",
+    "topicId": "prompt",
+    "stem": "文を正しく完成させる回答(Target_A)を選択してください。\nMicrosoft 365 Copilot Chatでは、[Target_A]を使用して、既存の会話を関連資料とグループ化できます。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "プロンプト"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ノートブック"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "チャット履歴"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "ノートブックを使用すると、既存のCopilot Chatの会話を関連資料とグループ化できます。",
+    "choiceReasons": [
+      "プロンプトは依頼であり、複数会話と関連資料をまとめる入れ物ではありません。",
+      "エージェントは特定の作業支援で、既存会話と資料をまとめるノートブックとは役割が異なります。",
+      "ノートブックには、関連する会話やファイルなどの資料をまとめられます。",
+      "履歴は過去の会話一覧で、関連する参照資料の集約場所ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問10（Q2-1））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks",
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot-chat%E5%B1%A5%E6%AD%B4%E3%82%92%E8%A6%8B%E7%9B%B4%E3%81%99-6ea899e3-3bb1-450a-a2ae-220341ac193a"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q2-4",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 11,
+    "title": "ある会社が、組織の基準に基づいて文章作成やプレゼンテーションのコーチングを行うMicrosoft 365 Copilotエージェントを作成しようとしています。",
+    "topicId": "agents",
+    "stem": "ある会社が、組織の基準に基づいて文章作成やプレゼンテーションのコーチングを行うMicrosoft 365 Copilotエージェントを作成しようとしています。\nこのエージェントはMicrosoft SharePoint Onlineをナレッジソースとして使用し、外部の業務システムと連携します。\nこのエージェントがMicrosoft 365の外部でアクションを実行できるようにする必要があります。\nエージェントに追加すべき機能はどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "画像ジェネレーター"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "アダプティブ カード"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "カスタムAPIアクション"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Copilot コネクタ"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "カスタムAPIアクションを使用すると、Copilotエージェントが外部サービスを呼び出し、ナレッジの取得を超えたアクションを実行できるようになります。これは、エージェントがMicrosoft 365の外部にある業務システムと連携する必要がある場合に必要です。",
+    "choiceReasons": [
+      "画像生成は画像を作る機能で、外部システムの業務処理を呼び出す機能ではありません。",
+      "アダプティブカードは情報表示や入力の仕組みで、それだけで外部APIへ処理を実行するとは限りません。",
+      "カスタムAPIアクションで外部サービスの処理を呼び出し、エージェントの業務実行を拡張できます。",
+      "コネクタによる情報取得・検索と、外部APIのアクション実行を区別します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問11（Q2-4））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/copilot-studio-experience"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q2-5",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 12,
+    "title": "ある会社がMicrosoft 365 Copilotを導入しようとしています。",
+    "topicId": "agents",
+    "stem": "ある会社がMicrosoft 365 Copilotを導入しようとしています。\nユーザーは質問をし、回答を受け取り、組織のデータに基づいてコンテンツを時折生成する必要があります。\nこのやり取りにはタスクの実行や業務プロセスの自動化は必要ありません。\n適切なCopilotのやり取りの種類を選択する必要があります。\n何を選択すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "ユーザーに代わってタスクを実行するエージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "チャットベースのCopilotエクスペリエンス"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Microsoft Power Automateによってトリガーされる自動化されたワークフロー"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "マルチステップワークフローを持つカスタムCopilot Studioエージェント"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "チャットベースのCopilotエクスペリエンスは、タスクを実行することなく質問・コンテンツ生成・情報取得などその場限りのやり取りを行うのに適しており、このシナリオの要件に合致します。",
+    "choiceReasons": [
+      "この場面は質問とコンテンツ生成で、ユーザーに代わる業務実行は不要です。",
+      "チャットで質問・応答・必要な生成を行う使い方が要件に合います。",
+      "定期的な処理を自動実行するワークフローは必要ありません。",
+      "複数工程のエージェントを新規構築する必要はありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問12（Q2-5））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/which-copilot-for-your-organization",
+      "https://learn.microsoft.com/ja-jp/copilot/faq",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q2-14",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 13,
+    "title": "ある会社では、従業員が日々の業務の中ですばやく質問を行い、一度限りの回答を受け取れるようにMicrosoft 365 Copilotを使用しています。",
+    "topicId": "agents",
+    "stem": "ある会社では、従業員が日々の業務の中ですばやく質問を行い、一度限りの回答を受け取れるようにMicrosoft 365 Copilotを使用しています。\nこのやり取りは、あらかじめ定義された指示に従う必要も、再利用される必要も、整備された組織のナレッジを使用する必要もありません。\n適切なCopilotエクスペリエンスを選択する必要があります。\n何を選択すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft 365アプリ内のCopilot エクスペリエンス"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェント エクスペリエンス"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ロールベースのCopilotエクスペリエンス"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Microsoft 365 Copilot Chat エクスペリエンス"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilot Chatエクスペリエンスは、永続的な指示や再利用可能な動作を伴わない、その場限りの会話形式のやり取りと一度限りの回答をサポートしています。このシナリオの要件に合致します。",
+    "choiceReasons": [
+      "アプリ内の特定作業ではなく、一般の一度限りの質問の入口を求めています。",
+      "定型の指示とナレッジを設定したエージェントを作る必要はありません。",
+      "営業など特定業務向けのサービスを選ぶ必要はありません。",
+      "通常のCopilot Chatで、都度の質問へ回答を得る使い方が要件に合います。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問13（Q2-14））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/faq",
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/which-copilot-for-your-organization",
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-%E3%82%A2%E3%83%97%E3%83%AA%E3%81%A7copilot-chat%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B-676db5e8-9568-4bdb-bf0b-e207e29e056b"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q2-15",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 14,
+    "title": "ある会社が、定義された手順に従い、複数のユーザーが再利用できる反復可能な業務プロセスをAIで自動化したいと考えています。",
+    "topicId": "agents",
+    "stem": "ある会社が、定義された手順に従い、複数のユーザーが再利用できる反復可能な業務プロセスをAIで自動化したいと考えています。\n適切なCopilotの機能を選択する必要があります。\n何を選択すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "エージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Microsoft 365 Copilot for Sales"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Copilotチャット"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Microsoft 365アプリ内のCopilot"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェントは、定義された手順を持つ構造化され反復可能な業務プロセスを自動化し、複数のユーザー間で再利用できるように設計されています。",
+    "choiceReasons": [
+      "エージェントは役割・指示・知識・必要な処理を設定し、繰り返し使う業務へ適用できます。",
+      "営業専用の支援サービスを、すべての反復業務に使う必要はありません。",
+      "都度のチャット応答だけでは、定義した複数工程の自動化を構成したことになりません。",
+      "アプリ内の作業支援と、反復可能な業務プロセスの自動化は区別します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問14（Q2-15））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/which-copilot-for-your-organization"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q2-27",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 15,
+    "title": "Microsoft 365 Copilotライセンスを持っています。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilotライセンスを持っています。\n自社のHRポリシー文書に基づいて従業員の質問に回答するMicrosoft 365 Copilotエージェントを構築する必要があります。\nこのソリューションに何を追加すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "機能"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "指示"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "スタート プロンプト"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ナレッジ ソース"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "ナレッジ ソースを追加すると、エージェントは回答を生成する際にHRポリシー文書を参照できるようになり、会社のコンテンツに基づいて従業員の質問に回答するために必要です。",
+    "choiceReasons": [
+      "機能は画像生成やコード処理などの能力で、社内規程の参照先そのものではありません。",
+      "指示は振る舞いの設定で、規程の内容を取得するナレッジの指定とは別です。",
+      "質問例だけでは、社内規程の内容を回答の根拠にできません。",
+      "アクセス権のあるHRポリシーをナレッジへ指定し、その内容に基づいて回答させます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問15（Q2-27））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q3-4",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 16,
+    "title": "Microsoft 365 Copilotを使用する際に、Microsoftが組織のデータをどのように保護しているかを理解したいと考えています。",
+    "topicId": "foundation",
+    "stem": "Microsoft 365 Copilotを使用する際に、組織データへの不正なアクセスや脅威へどのように対処するかを理解したいと考えています。\nMicrosoftのセキュリティ対策を正確に説明しているのはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "AI生成のセーフガードを使用して既存のMicrosoftセキュリティサービスを置き換える"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "潜在的なデータ露出を防ぐために顧客管理の制御に頼る"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "生成結果を利用者が確認すれば十分で、データへのアクセス制御は行わない。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "安全なエンジニアリング プラクティスと脅威インテリジェンス、ゼロトラストのアクセス制御を組み合わせる"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotは既存のセキュリティ基盤を尊重し、安全な開発、脅威への対策、ゼロトラストのアクセス制御などを組み合わせます。生成結果の確認だけで、データアクセスの保護を置き換えるわけではありません。",
+    "choiceReasons": [
+      "AI向けの対策で、既存のセキュリティサービスを置き換えるわけではありません。",
+      "利用者側の制御だけに依存するものではなく、サービスの安全対策と組み合わせます。",
+      "人による出力確認だけでは、組織データへの不正アクセスを防止できません。",
+      "安全な開発・脅威への対策・ゼロトラストのアクセス制御などを組み合わせて保護します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問16（Q3-4））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/security-microsoft-365-copilot",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/microsoft-365-copilot-privacy",
+      "https://learn.microsoft.com/ja-jp/defender-xdr/security-for-ai/ai-agent-detection-protection"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q3-15",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 17,
+    "title": "社内向けステータスレポートを下書きするMicrosoft 365 Copilotエージェントに、次の指示を構成しています。",
+    "topicId": "agents",
+    "stem": "社内向けステータスレポートを下書きするMicrosoft 365 Copilotエージェントに、次の指示を構成しています。\n「すべてのプロジェクト活動について詳細な説明を提供し、回答は100語以内に収めてください。」\nしかし、テスト中、回答の長さと詳細さに一貫性がありません。\nこの問題の最も可能性の高い原因は何ですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "[機能]の設定が構成されていない。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェントの指示に矛盾するガイダンスが含まれている。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントには追加のナレッジ ソースが必要である。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェントにはスタート プロンプトを含める必要がある。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "この指示には、すべての活動について詳細な説明を求めることと、厳格な語数制限の両方が含まれており、矛盾するガイダンスとなっているため、回答に一貫性がなくなる可能性があります。",
+    "choiceReasons": [
+      "機能の未設定と、回答の長さ・詳細さの指示の矛盾は別です。",
+      "すべての詳細と100語以内という条件が両立しにくいため、重点を絞った一貫した指示へ直します。",
+      "根拠資料を増やすだけでは、矛盾する出力条件は解消しません。",
+      "質問例を追加しても、指示にある長さと詳細さの衝突は解消しません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問17（Q3-15））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q3-16",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 18,
+    "title": "自社のある部門向けにMicrosoft 365 Copilotエージェントを構成しています。",
+    "topicId": "agents",
+    "stem": "自社のある部門向けにMicrosoft 365 Copilotエージェントを構成しています。\nユーザーがエージェントを開いたときに、エージェントに尋ねることができる質問例を表示させたいと考えています。\nどの設定を構成すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "機能"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ナレッジ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "指示"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "推奨プロンプト"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "推奨プロンプトは、ユーザーがエージェントとやり取りする際に選択できる質問例を表示します。",
+    "choiceReasons": [
+      "実行できる処理の種類を設定する項目で、質問例の表示ではありません。",
+      "根拠となる資料の設定です。",
+      "すべての応答へ適用する方針の設定です。",
+      "推奨プロンプトを設定すると、利用者が始めやすい質問例を表示できます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問18（Q3-16））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q3-17",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 19,
+    "title": "自社では、マーケティングキャンペーンのアイデア生成を支援するエージェントを従業員に提供したいと考えています。",
+    "topicId": "agents",
+    "stem": "自社では、マーケティングキャンペーンのアイデア生成を支援するエージェントを従業員に提供したいと考えています。\nこの機能を持つ既製のソリューションはすでに利用可能です。\nこの機能を従業員が利用できるようにする必要があります。\nこの解決策は、設定にかかる手間を最小限に抑える必要があります。\n何を使用すべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "エージェントストア"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Microsoft 365 Copilot Studio"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Microsoft 365 Copilot のエージェント ビルダー"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Microsoft コマーシャル マーケットプレース"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェント ストアは、組織がすでに利用できる既製のエージェントを見つけて追加するために使用されるため、適切なソリューションがすでに存在し、最小限の設定で済む場合に適切な選択となります。",
+    "choiceReasons": [
+      "既製のエージェントをストアから追加すれば、自作する手間を減らせます。",
+      "既製のものが目的に合う場合、新たな作成は不要です。",
+      "Agent Builderで新規作成するより、既製のものを選ぶ方が設定の手間を減らせます。",
+      "Microsoft 365のエージェントを探す直接の入口は、ここではエージェントストアです。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問19（Q3-17））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/copilot-agent-store",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/copilot-studio-experience"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q3-27",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 20,
+    "title": "Microsoft 365 Copilotエージェントを構築しています。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilotエージェントを構築しています。\nエージェントが組織全体にリリースされる前に、少人数のユーザーグループにMicrosoft Teamsでこのエージェントをテストしてもらう必要があります。\n何をすべきですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "エージェントをサイドロードする。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェントをMicrosoft コマーシャル マーケットプレースに公開する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントを組織のカタログに送信する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェントを共有する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェントをサイドロードすると、より広範な展開の前に、限定的なテストのためにTeamsにインストールされます。",
+    "choiceReasons": [
+      "Teamsのカスタムアプリとして用意したエージェントの少人数試行では、許可されたカスタムアプリのアップロードによるテストが使えます。",
+      "外部マーケットへの公開は小規模な組織内テストに不要です。",
+      "組織全体のカタログ公開より、限定した試行の手順を選びます。",
+      "一般の共有と、Teamsアプリとしての開発・配布テストを区別する必要があります。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問20（Q3-27））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/agent-essentials/agent-policies/agent-sideload",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-share-manage-agents"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q3-28",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 21,
+    "title": "Microsoft 365 Copilotエージェントを構築し、自社のあるチームとそのエージェントを共有しようとしています。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilotエージェントを構築し、自社のあるチームとそのエージェントを共有しようとしています。\n[共有]オプションが使用できません。\nエージェントが正しく構成されていることを確認済みです。\nエージェントを共有できない理由を特定する必要があります。\n最も可能性の高い原因は何ですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "エージェントは、まずMicrosoft コマーシャル マーケットプレースに公開される必要がある。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェントにスタート プロンプトが含まれていない。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントの共有が組織レベルで制限されている。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェントにナレッジ ソースが構成されていない。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェントの共有は、管理者が構成した組織のポリシーによって制限される場合があり、これによりユーザーがエージェントを共有できなくなることがあります。",
+    "choiceReasons": [
+      "共有する前に外部マーケットへ公開することは必須ではありません。",
+      "質問例の有無だけで、エージェントの共有操作が禁止されるわけではありません。",
+      "管理者がエージェントの共有を組織のポリシーで制限できるため、その設定を確認します。",
+      "ナレッジの設定と、組織が共有を許可するかどうかの制御は別です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問21（Q3-28））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-share-manage-agents",
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/agent-essentials/m365-agents-admin-guide"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q4-1",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 22,
+    "title": "Microsoft 365 Copilot の会話を開いています。",
+    "topicId": "prompt",
+    "stem": "Microsoft 365 Copilot の会話を開いています。\n会話中に Agent1 という名前のエージェントとチャットする必要があります。\nAgent1 を呼び出すには何を入力すべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "#Agent1"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "@Agent1"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "[Agent1]"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "/Agent1"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365のエクスペリエンスでは、会話内でエージェントを呼び出す標準的な方法は@メンション パターンです。公式のエージェント概要ページでも、この方法が呼び出し構文として案内されています。",
+    "choiceReasons": [
+      "#はこのエージェント呼び出しの表記ではありません。",
+      "対応するチャットでは@でエージェントを呼び出し、対話の対象を選べます。",
+      "角括弧で名前を書くだけではエージェントを選択したことになりません。",
+      "/による参照の指定と、@によるエージェントの呼び出しは別の操作です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問22（Q4-1））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-5",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 23,
+    "title": "Microsoft 365 Copilot を使用しています。",
+    "topicId": "prompt",
+    "stem": "Microsoft 365 Copilot を使用しています。\n同じ 5 つのファイルを Copilot チャットに定期的にアップロードしています。\nチャットでのファイル参照を簡素化する必要があります。\n目標を達成する 2 つの方法は何ですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "ドキュメントを ZIP 圧縮し、ZIP ファイルをチャットにアップロードする。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ファイルを含むプロンプトを送信し、そのプロンプトを保存する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ファイルを参照するノートブックを作成する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ナレッジソースを持つエージェントを作成する。"
+      },
+      {
+        "id": "option-e",
+        "label": "オ",
+        "text": "データエンジニアにファインチューニングされたモデルの作成を依頼する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "同じファイルを毎回チャットに添付する手間を減らすには、ファイルを参照するノートブックを作成する方法と、ナレッジソースを持つエージェントを作成する方法のどちらも有効です。どちらも、毎回ファイルを再アップロードしなくても同じ資料を会話で再利用できる構成です。",
+    "choiceReasons": [
+      "ZIP化しただけでは、継続的に利用する参照の構成を作れません。",
+      "プロンプトの保存だけでは、毎回の添付作業を不要にする参照空間を構成したことになりません。",
+      "資料をノートブックの参照へまとめると、その範囲で継続して質問できます。",
+      "資料をナレッジに指定したエージェントを作れば、繰り返す作業で再利用できます。",
+      "業務文書を参照するために基盤モデルをファインチューニングする必要はありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問23（Q4-5））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/how-to-add-reference-files-to-your-microsoft-365-copilot-notebooks-73048ee1-fd1d-4f7b-b850-b011029e09f2"
+    ],
+    "correctChoiceIds": [
+      "option-c",
+      "option-d"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 2
+    }
+  },
+  {
+    "id": "ab730-q4-6",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 24,
+    "title": "複数の個別の Microsoft 365 Copilot の会話があります。",
+    "topicId": "prompt",
+    "stem": "複数の個別の Microsoft 365 Copilot の会話があります。\n会話をより簡単に見つけられるようにまとめ、会話間で同じ参考資料を共有できるようにする必要があります。\n目標を達成するための最適なソリューションは何ですか?\n複数の選択肢が目標を達成する可能性がありますので、最適な回答を一つ選択してください。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "アプリ"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ページ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェント"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ノートブック"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotのノートブックは、関連する会話と参照ファイルを同じワークスペースにまとめるための機能です。複数のチャットを探しやすくしながら、共通の参考資料を会話間で再利用したいという要件にそのまま対応します。",
+    "choiceReasons": [
+      "アプリ一覧では、関連会話と資料の共通の参照空間を作れません。",
+      "Pagesは共同編集する成果物で、会話と根拠資料を集めるノートブックとは用途が違います。",
+      "エージェントは作業を支援しますが、既存の複数会話の整理という目的にはノートブックが直接的です。",
+      "ノートブックへ会話と参照をまとめると、同じプロジェクトの資料を使って継続して作業できます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問24（Q4-6））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q4-13",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 25,
+    "title": "Microsoft 365 Copilot のエージェント ビルダーで、エージェントに実行させたい内容を自然言語で記述することで、生成 AI を活用してエージェントを構築できる機能",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot のエージェント ビルダーで、エージェントに実行させたい内容を自然言語で記述することで、生成 AI を活用してエージェントを構築できる機能はどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Copilot ページ"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "説明タブ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "構成タブ"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Copilot ノートブック"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "問題集の解説を参照してください。",
+    "choiceReasons": [
+      "Pagesは生成した内容を編集・共有する場所です。",
+      "自然言語で希望する動作を説明しながら構成するDescribeのタブを使います。",
+      "Configureのタブでは、項目を直接指定して構成します。",
+      "ノートブックは参照資料を集約する場所です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問25（Q4-13））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-16",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 26,
+    "title": "Microsoft 365 Copilot エージェントのナレッジソースとして使用できるのは次のうちどれですか？",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot エージェントのナレッジソースとして使用できるのは次のうちどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft Teams チャット"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "MP3 形式の音声録音"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Microsoft 365 Copilot の会話"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "JPG ファイルなどの画像ファイル"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotエージェントでは、Teamsメッセージや会議、メール、SharePoint/OneDrive、Webなどをナレッジ ソースとして構成できます。Microsoft Teams チャットは公式にサポートされたナレッジ ソースです。",
+    "choiceReasons": [
+      "対応するエージェントのナレッジとして、アクセス権のあるTeamsの情報を指定できます。",
+      "音声録音をこの設問のナレッジとして直接指定できるとする根拠は、対応形式の確認が必要です。",
+      "Copilotとの会話そのものは、ここで問う直接のナレッジソースの一覧には含まれません。",
+      "画像を生成・解析する能力と、画像ファイルを直接ナレッジに指定できるかは別の条件です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問26（Q4-16））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q4-17",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 27,
+    "title": "あなたは小規模コンサルティング会社のプロジェクトコーディネーターです。 クライアントとのコミュニケーションの追跡、プロジェクトのタイムライン管理、社内ステークホルダー向けの週次ステ",
+    "topicId": "foundation",
+    "stem": "あなたは小規模コンサルティング会社のプロジェクトコーディネーターです。 クライアントとのコミュニケーションの追跡、プロジェクトのタイムライン管理、社内ステークホルダー向けの週次ステータスレポートの作成を担当しています。 あなたは Microsoft 365 Copilot ライセンスを持っています。 プロジェクトのマイルストーンの監視、クライアントメールのフォローアップ、週次サマリーレポートの生成を支援するエージェントを作成しました。 このエージェントを誰と共有できますか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft Teams チャネルのメンバーのみ"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "組織内の人のみ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "有効なメールアドレスを持つすべての人"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "組織内ユーザーと個人用アカウント利用者"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotで作成したエージェントは、Microsoft Entra IDディレクトリ内のユーザー、グループ、チームに共有できますが、共有対象は組織内に限定されます。",
+    "choiceReasons": [
+      "Teamsの一つのチャネルのメンバーだけという限定ではありません。",
+      "組織内の対象者を指定して共有できます。必要なライセンスとナレッジの権限も確認します。",
+      "有効なメールアドレスだけで、組織外の誰にでも共有できるわけではありません。",
+      "個人用アカウントへ組織のエージェントを無条件に共有する説明ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問27（Q4-17））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-share-manage-agents"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-25",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 28,
+    "title": "Microsoft 365 サブスクリプションはありますが、Microsoft 365 Copilot ライセンスはなく、組織では従量課金制の Copilot サービスや追加の管理",
+    "topicId": "foundation",
+    "stem": "Microsoft 365 サブスクリプションはありますが、Microsoft 365 Copilot ライセンスはなく、組織では従量課金制の Copilot サービスや追加の管理者構成も有効化されていません。\n追加構成なしで、今すぐ可能な操作はどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Copilot でエンタープライズデータソース用のカスタムコネクタを作成する"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ドキュメントを Copilot Chat にアップロードして要約・分析する"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Copilot で Microsoft Graph 統合を使用してエンタープライズデータをクエリする"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "組織の SharePoint フォルダーにアクセスするエージェントを作成する"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilot Chatは、対象となるMicrosoft 365サブスクリプションを持つユーザーであれば、個別のMicrosoft 365 Copilotライセンスなしでもファイルをアップロードして要約や分析を行えます。この機能は追加のエージェント構成や課金設定を前提としません。",
+    "choiceReasons": [
+      "エンタープライズ情報への拡張は、追加の管理・利用条件を確認する必要があります。",
+      "標準のCopilot Chatでも、利用者がアップロードした文書を要約・分析する使い方ができます。",
+      "有償ライセンスなしの標準Chatが、組織の業務データ全体へ自動的にグラウンディングするわけではありません。",
+      "SharePointを参照するエージェントには、適切な利用条件や課金・管理構成が必要です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問28（Q4-25））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/microsoft-365-copilot-licensing",
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/agent-essentials/m365-agents-admin-guide"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-28",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 29,
+    "title": "あなたは、自社のマーケティングチーム向けに Microsoft 365 Copilot アプリでカスタムエージェントを作成しています。",
+    "topicId": "agents",
+    "stem": "あなたは、自社のマーケティングチーム向けに Microsoft 365 Copilot アプリでカスタムエージェントを作成しています。\nこのエージェントは、コピー、ロゴ、アートワークなどのマーケティング資料の制作に使用されます。\nこの用途に最も直接関係するエージェントの機能はどれですか？\n複数の選択肢が目的を達成できる可能性がありますので、最も適切な回答を一つ選択してください。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "テンプレート"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "コードインタープリター"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "推奨プロンプト"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "画像ジェネレーター"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "マーケティング向けのカスタム エージェントでコピーだけでなくロゴやアートワークまで制作させるには、画像アセットを生成できる画像ジェネレーター機能を追加する必要があります。",
+    "choiceReasons": [
+      "テンプレートは作成の開始点で、画像を生成する能力そのものではありません。",
+      "コードによる計算・データ処理と画像生成は別の能力です。",
+      "推奨プロンプトは質問例で、画像を作る能力そのものではありません。",
+      "ロゴやアートワークなどの生成に直接対応する能力は画像ジェネレーターです。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問29（Q4-28））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365-copilot/extensibility/image-generator"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q5-1",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 30,
+    "title": "あなたは Microsoft 365 Copilot アプリでカスタム分析エージェントを作成しています。",
+    "topicId": "agents",
+    "stem": "あなたは Microsoft 365 Copilot アプリでカスタム分析エージェントを作成しています。\nこのエージェントは、売上データを含む Microsoft Excel ファイルをナレッジとして使用します。\nエージェントがビジュアライゼーションの作成、数学的演算の実行、集計の作成、およびファイル内のデータ分析を行えるようにする必要があります。\nこの用途に最も直接関係するエージェントの機能はどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "テンプレート"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "画像ジェネレーター"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "推奨プロンプト"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "コードインタープリター"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Excelの表データに対する計算と可視化を実行できるようにするには、コード インタープリターが必要です。Excelデータを入力にPythonを安全な実行環境で動かし、集計、数学演算、グラフ作成まで行えます。",
+    "choiceReasons": [
+      "テンプレートは開始点で、数値計算やデータ分析の能力そのものではありません。",
+      "画像生成と、数値を読み取り計算するデータ処理を区別します。",
+      "質問例だけでは、計算やファイル分析を実行する能力を示しません。",
+      "コードインタープリターは、コードによる計算・データ分析・可視化に関係する機能です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問30（Q5-1））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/code-interpreter"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q5-9",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 31,
+    "title": "Copilot Studio エージェントビルダーを使用して Microsoft 365 Copilot でカスタム宣言型エージェントを作成しました。",
+    "topicId": "agents",
+    "stem": "Copilot Studio エージェントビルダーを使用して Microsoft 365 Copilot でカスタム宣言型エージェントを作成しました。\nチームの他のメンバーとエージェントを共有する前に、一般的なユーザークエリに対して正しく応答するかを確認したいと考えています。\nまず何をすべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Copilot Studio エージェントビルダーの組み込みテストペインを使用してエージェントの応答をプレビューする"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "フィードバックのためにエージェントのリンクを組織外の外部ユーザーに送信する"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Teams アプリストアにエージェントを公開し、同僚にテストを依頼する"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェントの構成を JSON ファイルとしてエクスポートし、設定を手動で確認する"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Copilot Studioエージェントビルダーの組み込みテストペインを使用すると、エージェントを公開・共有せずにテストクエリを送信し、リアルタイムで応答を確認できます。共有前にまずこれで動作検証を行うことで、意図しない応答がユーザーに公開されるリスクを回避できます。",
+    "choiceReasons": [
+      "組み込みのテスト用ペインで一般的な依頼を試し、共有前に応答を確認します。",
+      "組織外への公開は、内部の初期テストとして適切ではありません。",
+      "共有・公開前に作成環境内で確認する方が直接的です。",
+      "構成を見るだけでは、利用者の依頼へどう応答するかの実際のテストになりません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問31（Q5-9））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q5-11",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 32,
+    "title": "Web ブラウザーから Microsoft 365 Copilot にアクセスする必要があります。",
+    "topicId": "prompt",
+    "stem": "Web ブラウザーから Microsoft 365 Copilot にアクセスする必要があります。\nどの URL を使用すべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "https://myaccount.microsoft.com"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "https://myapps.microsoft.com"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "https://m365.cloud.microsoft.com"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "https://copilotstudio.microsoft.com"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 CopilotのWebアプリの入口は https://m365.cloud.microsoft.com です。My Accountはアカウント管理、My Appsはアプリ一覧、Copilot Studioはエージェント作成の入口で、目的が異なります。",
+    "choiceReasons": [
+      "My Accountはアカウントやプライバシー管理の入口です。元資料の誤記ドメインは修正しています。",
+      "My Appsは利用できるアプリの一覧で、Copilotのチャット画面の直接の入口とは異なります。",
+      "Microsoft 365 CopilotのWebアプリへアクセスするための入口です。現行の案内やリダイレクトも確認します。",
+      "Copilot Studioはエージェント作成・管理のサービスです。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問32（Q5-11））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q5-14",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 33,
+    "title": "Microsoft 365 Copilot で作成したカスタムエージェントにおいて、温かくフレンドリー、またはフォーマルで分析的といったエージェントのペルソナを定義するために使用す",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot で作成したカスタムエージェントにおいて、温かくフレンドリー、またはフォーマルで分析的といったエージェントのペルソナを定義するために使用する設定はどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "推奨プロンプト"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "機能"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "指示"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "説明"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "エージェント ビルダーの「指示」は、エージェントがどのような口調・スタイル・役割で応答するかを自然言語で定義する欄で、温かくフレンドリー、またはフォーマルで分析的といったペルソナはここで制御します。",
+    "choiceReasons": [
+      "推奨プロンプトは利用者に示す質問例です。",
+      "機能はコード処理や画像生成などの能力です。",
+      "指示に望むペルソナやトーンを記載し、応答の方針を明示します。",
+      "説明はエージェントの紹介文で、応答のトーンを継続的に指定する項目ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問33（Q5-14））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q5-15",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 34,
+    "title": "Microsoft 365 Copilot で作成されたカスタムエージェントの機能のうち、エージェントとの最適なやり取り方法を示すすぐに使える例を提供し、ユーザーがすばやく使い始め",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot で作成されたカスタムエージェントの機能のうち、エージェントとの最適なやり取り方法を示すすぐに使える例を提供し、ユーザーがすばやく使い始められるよう設計されているのはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "指示"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "推奨プロンプト"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "機能"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェント設定"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "推奨プロンプトは、ユーザーがエージェントを開いた直後にすぐ試せる質問例を提示し、どのような依頼が有効かを具体的に示すための機能です。\n\n会話開始のハードルを下げ、期待される入力パターンを学ばせる役割を持ちます。",
+    "choiceReasons": [
+      "指示はエージェント自身へ適用する応答方針です。",
+      "推奨プロンプトは、利用者が最初に試せる具体的な質問例として表示されます。",
+      "機能は実行できる処理の種類です。",
+      "設定全般という表現より、質問例を表示する推奨プロンプトが具体的に該当します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問34（Q5-15））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-build-agents"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q5-17",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 35,
+    "title": "Microsoft 365 サブスクリプションを持っていますが、Microsoft 365 Copilot ライセンスは持っていません。",
+    "topicId": "prompt",
+    "stem": "Microsoft 365 サブスクリプションを持っていますが、Microsoft 365 Copilot ライセンスは持っていません。\n標準の Microsoft 365 Copilot Chat の既定挙動として、プロンプトを送信した場合に Copilot Chat が応答に使用する 3 つのソースはどれですか。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft Teams のチャットデータ"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "インターネット検索データ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "プロンプトのコンテキスト"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "組織のデータベース"
+      },
+      {
+        "id": "option-e",
+        "label": "オ",
+        "text": "会話履歴"
+      },
+      {
+        "id": "option-f",
+        "label": "カ",
+        "text": "Microsoft 365 の組織データ"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotライセンスなしで標準のMicrosoft 365 Copilot Chatを使用する場合、既定の応答生成は会話履歴、プロンプトのコンテキスト、インターネット検索データが中心となります。",
+    "choiceReasons": [
+      "追加の有償業務グラウンディングなしの標準Chatで、組織のTeams情報を自動的に横断取得する説明ではありません。",
+      "Web検索が有効な場合、公開Webの情報を応答の根拠へ加えられます。",
+      "今回のプロンプトで与えた依頼や添付などの情報を利用します。",
+      "接続していない組織のデータベースを自動的に取得するわけではありません。",
+      "その会話でやり取りした文脈を踏まえて応答します。",
+      "Microsoft 365の全業務データを標準Chatが自動参照するわけではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問35（Q5-17））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/manage-public-web-access",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/microsoft-365-copilot-overview",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview"
+    ],
+    "correctChoiceIds": [
+      "option-b",
+      "option-c",
+      "option-e"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 3
+    }
+  },
+  {
+    "id": "ab730-q6-6",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 36,
+    "title": "あなたは Microsoft 365 Copilot でプロジェクトレポートの下書き作成に役立つプロンプトを作成しました。",
+    "topicId": "prompt",
+    "stem": "あなたは Microsoft 365 Copilot でプロジェクトレポートの下書き作成に役立つプロンプトを作成しました。\nそのプロンプトを Copilotプロンプトギャラリーで利用できるようにする必要があります。\nまず何をすべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "プロンプトを実行する。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ノートブックを作成する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントを追加する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ページを作成する。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "プロンプト ギャラリーで再利用したいプロンプトは、作成しただけでなく、一度実行したうえで保存対象にする必要があります。したがって最初の操作はプロンプトの実行です。",
+    "choiceReasons": [
+      "実行したプロンプトを保存する操作から、ギャラリーの保存済み一覧へ登録できます。",
+      "ノートブックの作成は、プロンプトを一覧へ保存する必須条件ではありません。",
+      "エージェントの追加はプロンプト保存の必須条件ではありません。",
+      "Pagesの作成はプロンプト保存の必須条件ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問36（Q6-6））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-55373730-2627-46a5-b0d8-772abe22dba4",
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/copilot-prompt-gallery"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q6-16",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 37,
+    "title": "Microsoft 365 Copilot の拡張方法の 1 つである宣言型エージェントについて正しく説明しているのはどれですか？",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot の拡張方法の 1 つである宣言型エージェントについて正しく説明しているのはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "宣言型エージェントは Azure OpenAI Service 上でのみ実行できる"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "宣言型エージェントは Microsoft 365 Copilot のオーケストレーターを活用し、指示、ナレッジ、アクションを通じてカスタマイズされた体験を提供する"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "宣言型エージェントは独自の AI モデルを使用してプロンプトを処理する"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "宣言型エージェントは管理者のみが作成でき、エンドユーザーは使用のみ可能である"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "宣言型エージェントはMicrosoft 365 Copilotのオーケストレーターを活用し、指示、ナレッジ、アクションを通じてカスタマイズされた体験を提供します。独自のモデルを必要とせず、Copilot Studioを使用して構築できます。",
+    "choiceReasons": [
+      "Microsoft 365 Copilotの宣言型エージェントをAzure OpenAI上だけの実行に限定する説明ではありません。",
+      "Microsoft 365 Copilotの仕組みを利用し、指示・ナレッジ・必要なアクションで用途をカスタマイズします。",
+      "独自の基盤モデルを必ず構築して使用するわけではありません。",
+      "組織の許可の範囲で利用者が作成でき、常に管理者だけの機能とは限りません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問37（Q6-16））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365-copilot/extensibility/overview-declarative-agent"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q6-18",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 38,
+    "title": "Microsoft 365 サブスクリプションを持っていますが、Microsoft 365 Copilot ライセンスは持っていません。",
+    "topicId": "prompt",
+    "stem": "Microsoft 365 サブスクリプションを持っていますが、Microsoft 365 Copilot ライセンスは持っていません。\nMicrosoft 365 Copilot Chat でプロンプトを送信した場合、Copilot Chat が応答に使用する 3 つのソースはどれですか？\n正しい回答はそれぞれ解決策の一部です。",
+    "choices": [
+      {
+        "id": "option-b",
+        "label": "ア",
+        "text": "プロンプトのコンテキスト"
+      },
+      {
+        "id": "option-c",
+        "label": "イ",
+        "text": "Microsoft 365 の組織データ"
+      },
+      {
+        "id": "option-d",
+        "label": "ウ",
+        "text": "組織のデータベース"
+      },
+      {
+        "id": "option-e",
+        "label": "エ",
+        "text": "Microsoft Teams のチャットデータ"
+      },
+      {
+        "id": "option-f",
+        "label": "オ",
+        "text": "会話履歴"
+      },
+      {
+        "id": "option-g",
+        "label": "カ",
+        "text": "インターネット検索データ"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotライセンスなしで標準のMicrosoft 365 Copilot Chatを使用する場合、既定の応答生成はプロンプトのコンテキスト、会話履歴、インターネット検索データが中心です。",
+    "choiceReasons": [
+      "プロンプトで与えた文脈を利用できます。",
+      "有償の業務グラウンディングなしの標準Chatで組織データ全体を自動的に取得する説明ではありません。",
+      "未接続の組織データベースを自動的に取得しません。",
+      "組織のTeamsチャットを標準Chatが自動的に横断参照するわけではありません。",
+      "その会話のやり取りの文脈を利用します。",
+      "Web検索が有効な場合、公開Webの情報を利用できます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問38（Q6-18））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/manage-public-web-access",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/microsoft-365-copilot-overview",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview"
+    ],
+    "correctChoiceIds": [
+      "option-b",
+      "option-f",
+      "option-g"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 3
+    }
+  },
+  {
+    "id": "ab730-q6-24",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 39,
+    "title": "Microsoft 365 Copilotのノートブックを、Word/PowerPointエージェントを使ってレポートを作成するための参照資料として活用しています。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilotのノートブックを、Word/PowerPointエージェントを使ってレポートを作成するための参照資料として活用しています。\nある宣言型エージェントが、このノートブックの参照リストを自動的に書き換えたり、新しい参照を追加したりできるかどうかを確認する必要があります。\n正しい説明はどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "宣言型エージェントはノートブックの参照を自動的に追加・更新できる。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ノートブックへの参照の追加や更新はユーザーが手動で行う操作であり、エージェントが自動的に行う機能ではない。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "エージェントを作成すると、既定でそのエージェントがすべてのノートブックに自動的に接続される。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ノートブックはエージェントの下位機能であり、エージェントが常に管理している。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "ノートブックは、Copilotの会話やファイル、ページ、会議ノートなどをユーザーが手動で参照として追加・整理するワークスペースです。追加済みの参照ファイルの内容が更新されれば、その参照は最新の状態に保たれ回答に反映されますが、これは参照そのものが更新された場合の挙動であり、宣言型エージェントがノートブックの参照リストを自動的に書き換えたり新たに追加したりする機能ではありません。",
+    "choiceReasons": [
+      "エージェントがノートブックの参照を自動追加・更新できるとする直接根拠が不足しています。",
+      "公式のノートブックには利用者が参照を追加する手順がありますが、すべてのエージェントの自動操作を禁止するとは断定できません。",
+      "エージェントを作るとすべてのノートブックへ自動接続するという説明はありません。",
+      "ノートブックは資料をまとめる作業空間で、エージェントの下位機能として常に自動管理される説明ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問39（Q6-24））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q6-25",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 40,
+    "title": "宣言型エージェントを構築しており、別のエージェントとのCopilotの会話内容を、この新しいエージェントのナレッジ ソースとして追加したいと考えています。",
+    "topicId": "agents",
+    "stem": "宣言型エージェントを構築しており、別のエージェントとのCopilotの会話内容を、この新しいエージェントのナレッジ ソースとして追加したいと考えています。\nこれは可能ですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "可能である。エージェントは他のエージェントとの会話をナレッジ ソースとして直接追加できる。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "可能である。ただし管理者の承認が必要である。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "可能ではない。ナレッジ ソースとして追加できるのはTeamsメッセージや会議、メール、SharePoint/OneDrive、Web、Copilotコネクタなどであり、他のエージェントとの会話は含まれない。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "可能ではない。ナレッジ ソースの追加自体がすべてのエージェントで無効化されている。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "宣言型エージェントに追加できるナレッジ ソースは、Teamsメッセージや会議、メール、SharePoint/OneDriveのファイルやサイト、パブリックWebサイト、Microsoft 365 Copilotコネクタなどです。他のエージェントとの会話やエージェントそのものをナレッジ ソースとして直接追加する機能は提供されていません。",
+    "choiceReasons": [
+      "別エージェントとの会話そのものを直接ナレッジへ追加する機能は、対応ソースの一覧にありません。",
+      "管理者承認だけで、対応していない種類の直接ナレッジを利用可能にするとはいえません。",
+      "現行の対応ソースの一覧と、会話を直接ナレッジに指定することを区別します。内容を別文書にまとめる方法とは別の問いです。",
+      "利用可能なナレッジの指定はエージェントの主要な機能の一つです。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問40（Q6-25））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder-add-knowledge"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q6-26",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 41,
+    "title": "プロジェクトの資料をまとめたMicrosoft 365 Copilotのノートブックがあります。",
+    "topicId": "agents",
+    "stem": "プロジェクトの資料をまとめたMicrosoft 365 Copilotのノートブックがあります。\nこのノートブックの内容をそのまま使って、再利用可能な宣言型エージェントを自動的に作成する機能はありますか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "ある。ノートブックの[エージェントを作成]ボタンを選択するだけで、参照済みのすべての内容がナレッジ ソースとして設定された宣言型エージェントが自動生成される。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ある。ただしCopilot Studioのライセンスが別途必要である。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ある。ただし、1つのノートブックにつき1つのエージェントしか作成できない。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ない。ノートブックはWord/PowerPointエージェントを使って参照資料からドキュメントを生成する機能を持つが、ノートブックの内容を宣言型エージェントに自動変換する機能は提供されていない。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "ノートブックはCopilotの会話やファイル、ページ、会議ノートなどの参照資料を1か所にまとめるワークスペースであり、Word/PowerPointエージェントを使ってノートブックの参照資料からドキュメントを直接生成することはできますが、ノートブックの内容をそのまま宣言型エージェントに自動変換する機能は提供されていません。\n\nエージェントを作成する場合は、エージェント ビルダーを使って個別にナレッジ ソースや指示を構成する必要があります。",
+    "choiceReasons": [
+      "このような自動変換ボタンの利用可否を、今回の公式資料から直接確認できません。",
+      "Copilot Studioのライセンスを追加するだけで、自動変換が利用できるとはいえません。",
+      "一つに制限するという仕様の根拠は確認できていません。",
+      "機能一覧に載っていないだけでは、将来・すべての環境の非存在を断定できないため、この設問は保留です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問41（Q6-26））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q6-34",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-4",
+    "packLabel": "Microsoft 365 Agent",
+    "number": 42,
+    "title": "頻繁に使う保存済みプロンプトを、より高度で再利用可能な機能に発展させたいと考えています。",
+    "topicId": "prompt",
+    "stem": "頻繁に使う保存済みプロンプトを、より高度で再利用可能な機能に発展させたいと考えています。\nこの場合、次のうち最も適切なアプローチはどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "保存済みプロンプトは自動的にエージェントへ変換する機能があるため、何もする必要はない。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "エージェント ビルダーを使って、新たに指示・ナレッジ ソース・スタート プロンプトなどを個別に構成し、独自のエージェントとして作り直す。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "プロンプト ギャラリーの設定画面で「エージェント化」ボタンを押すだけでよい。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "保存済みプロンプトをコピーしてノートブックに貼り付ければ自動的にエージェントになる。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "頻繁に使うプロンプトをより高度で再利用可能な機能に発展させたい場合は、エージェント ビルダーを使って指示、ナレッジ ソース、スタート プロンプトなどを個別に構成し、新しいエージェントとして構築する必要があります。\n\n保存済みプロンプトを自動的にエージェントへ変換する機能は提供されていません。",
+    "choiceReasons": [
+      "保存したプロンプトが操作なしで自動的にエージェントへ変わるわけではありません。",
+      "繰り返す業務の目的を指示として整理し、ナレッジと質問例を設定したエージェントを新しく構成します。",
+      "ギャラリーの保存機能と、Agent Builderでのエージェント作成は別の操作です。",
+      "ノートブックに文章を貼るだけでは、エージェントの構成を作ったことになりません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第4回・問42（Q6-34））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-55373730-2627-46a5-b0d8-772abe22dba4",
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agent-builder"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-3",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 1,
+    "title": "Microsoft 365 Copilot の 研究者(リサーチ)エージェントがレポートを生成した後、応答を共同で編集可能なアーティファクトにするには、どこに保存すべきですか？",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot の 研究者(リサーチ)エージェントがレポートを生成した後、応答を共同で編集可能なアーティファクトにするには、どこに保存すべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "ノートブック"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ページ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "会話"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "エージェント"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "研究者(リサーチ)エージェントの応答を共同編集できる成果物に変えるには、AIの出力を編集可能なページとして保存し、後から他のユーザーと共有できるようにする必要があります。",
+    "choiceReasons": [
+      "ノートブックは参照資料の集約で、レポートを直接共同編集する場所とは区別します。",
+      "Pagesに保存すると、生成した内容を編集・共有する成果物として扱えます。",
+      "会話の出力だけでは、複数人の直接共同編集の成果物になりません。",
+      "エージェントは作業支援で、結果を保存する文書ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問1（Q4-3））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-pages"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-12",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 2,
+    "title": "あなたはマネージャーとの予算会議の準備をしているマーケティングアシスタントです。",
+    "topicId": "agents",
+    "stem": "あなたはマネージャーとの予算会議の準備をしているマーケティングアシスタントです。\n昨年の主要な支出とパフォーマンスのトレンドを評価し、どのマーケティングチャネルが最も高い投資対効果（ROI）をもたらすかを把握する必要があります。\nこの目標を達成するために、Microsoft 365 Copilot の何を使用すべきですか？\n複数の選択肢が目標を達成できる可能性がありますので、最も適切な回答を一つ選択してください。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "アナリストエージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ノートブック"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "カスタム Copilot の作成"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "研究者(リサーチ)エージェント"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "問題集の解説を参照してください。",
+    "choiceReasons": [
+      "Analystは数値データの分析・計算・可視化に適しており、支出と成果を比較する目的に合います。",
+      "ノートブックは資料の集約に有用ですが、数値分析に特化したAnalystが直接的です。",
+      "既製のAnalystを使える場合、この作業のために新しいエージェントを作る必要はありません。",
+      "Researcherは複数資料の調査と報告が中心で、数値データの分析・可視化にはAnalystが適しています。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問2（Q4-12））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%A7%E3%81%AE%E3%82%A2%E3%83%8A%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%A6%82%E8%A6%81-ff505b9c-a06c-4be9-b855-69d89b1d25d2"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q4-23",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 3,
+    "title": "職場アカウントを使用して Microsoft 365 Copilot アプリにサインインしています。",
+    "topicId": "agents",
+    "stem": "必要なMicrosoft 365 Copilotライセンスが割り当てられ、組織でResearcherの利用が許可されています。職場アカウントを使用して Microsoft 365 Copilot アプリにサインインしています。\nCopilot アプリにはメインチャットインターフェイスと、ホーム、検出、エージェントを探索などのオプションを含む左側のナビゲーションペインが表示されています。\n同僚から、Microsoft 365 Copilot アプリを開くと 研究者(リサーチ)エージェントにアクセスできると聞きました。\n研究者(リサーチ)エージェントにアクセスする必要があります。\nどうすればよいですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Microsoft Edge から、職場アカウントを使用して https://copilot.microsoft.com にサインインする。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "「エージェントを探索」を選択し、Researcher(研究者)を検索する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "管理者に Microsoft 365 Copilot ライセンスを要求する。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "個人アカウントを使用して Copilot アプリにサインインする。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "すでにサインインしているMicrosoft 365 Copilotアプリ内で「エージェントを探索」を選択し、Researcher(研究者)を検索することが最初に行うべき操作です。",
+    "choiceReasons": [
+      "個人向けの入口ではなく、利用条件を満たす職場のMicrosoft 365 Copilotから利用します。",
+      "利用可能なエージェントを探索してResearcherを選択します。表示名は環境により変わるため、機能の役割も確かめます。",
+      "この修正版の条件では必要なライセンスは既に割り当てられています。",
+      "個人アカウントへの切替は職場のResearcherへのアクセス方法ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問3（Q4-23））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot-%E3%82%A2%E3%83%97%E3%83%AA%E3%81%A7%E3%81%AE%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%BF%E7%94%A8-943e563d-602d-40fa-bdd1-dbc83f582466"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q4-30",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 4,
+    "title": "Microsoft 365 Copilot の Researcher エージェントを使用して情報を整理しました。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot の Researcher エージェントを使用して情報を整理しました。\nその後、Microsoft 365 Copilot のワークフローを別のアプリで進める場合、公式ドキュメントで代表例として明示されている組み合わせはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "OneNote、Planner、Forms"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Word と Outlook のみ"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Word と Teams のみ"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Word、Teams、Outlook"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotのエージェントの概要ページは、冒頭でOutlook、Teams、Wordを具体例として示しており、これがCopilotとエージェントがMicrosoft 365アプリ間で作業を進められる代表的な組み合わせです。",
+    "choiceReasons": [
+      "現行公式資料で、この3つだけを選ぶための直接の根拠が不足しています。",
+      "WordとOutlookだけに限定する説明ではありません。",
+      "WordとTeamsだけに限定する説明ではありません。",
+      "この3アプリへの後続作業の説明は、現在の提供資料から直接確認できていないため保留です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問4（Q4-30））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/microsoft-365/copilot/extensibility/agents-overview"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q5-10",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 5,
+    "title": "あなたは Microsoft 365 Copilot ライセンスを持っています。",
+    "topicId": "agents",
+    "stem": "あなたは Microsoft 365 Copilot ライセンスを持っています。\nワークシートの統合、製品ライン別のセンチメント分析の実行、視覚化の作成を行う必要があります。\nCopilot が最適な応答を生成するために、どのエージェントまたはエクスペリエンスを使用すべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "アナリストエージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "研究者(リサーチ)エージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "PowerPointのCopilot"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "チャット"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "アナリストは、スプレッドシートや表形式データの分析、可視化、レポート作成を支援する用途に最適化されたエージェントです。ワークシートの統合、製品ライン別のセンチメント分析、視覚化の作成という要件は、アナリストの説明と直接一致します。",
+    "choiceReasons": [
+      "Analystはデータセットを使う分析・計算・可視化に適しています。",
+      "Researcherは調査・報告を中心とするエージェントで、この数値分析の目的にはAnalystが直接的です。",
+      "スライド作成より、まず元データの分析と可視化が必要です。",
+      "一般のChatでも対話はできますが、この専門的なデータ分析にはAnalystが適しています。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問5（Q5-10））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%A7%E3%81%AE%E3%82%A2%E3%83%8A%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%A6%82%E8%A6%81-ff505b9c-a06c-4be9-b855-69d89b1d25d2"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q5-13",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 6,
+    "title": "職場アカウントを使用して Microsoft 365 Copilot アプリにサインインしています。",
+    "topicId": "agents",
+    "stem": "必要なMicrosoft 365 Copilotライセンスが割り当てられ、組織でResearcherの利用が許可されています。職場アカウントを使用して Microsoft 365 Copilot アプリにサインインしています。\n同僚から、Microsoft 365 Copilot アプリを開くと 研究者(リサーチ)エージェントにアクセスできると言われました。\nあなたも 研究者(リサーチ)エージェントにアクセスする必要があります。\nどうすればよいですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "[エージェント] を開き、[すべてのエージェント] から研究者(リサーチ)を探す。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "管理者に Microsoft 365 Copilot ライセンスを要求する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Microsoft Edge から、職場アカウントを使用して https://copilot.microsoft.com にサインインする。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "個人アカウントを使用して Copilot アプリにサインインする。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "研究者(リサーチ)エージェントは、Microsoft 365 Copilotの組み込みエージェントで、Copilotアプリ内の[エージェント]メニューから[すべてのエージェント]を開いて見つけることができます。追加のサインインや管理者依頼なしで到達できます。",
+    "choiceReasons": [
+      "利用条件を満たすMicrosoft 365 Copilotで、エージェントの一覧からResearcherを探して開きます。",
+      "この修正版の条件では必要なライセンスは既に割り当てられています。",
+      "個人向けのWeb入口ではなく、職場のMicrosoft 365 Copilotのエージェントを選びます。",
+      "個人アカウントへの切替は職場のResearcherへのアクセス方法ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問6（Q5-13））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot-%E3%82%A2%E3%83%97%E3%83%AA%E3%81%A7%E3%81%AE%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%BF%E7%94%A8-943e563d-602d-40fa-bdd1-dbc83f582466"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q5-25",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 7,
+    "title": "Microsoft 365 Copilot の研究者(リサーチ)エージェントなどの組み込みエージェントについて、ユーザーができることを正しく説明しているのはどれですか？",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot の研究者(リサーチ)エージェントなどの組み込みエージェントについて、ユーザーができることを正しく説明しているのはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "ユーザーは組み込みの研究者(リサーチ)エージェントにカスタムナレッジソースを追加できる。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "ユーザーはエージェントの指示を変更して動作をカスタマイズできる。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "ユーザーはエージェントと対話して出力を改善できるが、組み込みエージェントのコア設定を変更することはできない。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "ユーザーは組み込みエージェントインターフェイスから推奨プロンプトを削除できる。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "研究者(リサーチ)などの組み込みエージェントでは、ユーザーは対話を続けながら出力を改善できますが、Microsoftが定義したコア設定や指示を変更することはできません。",
+    "choiceReasons": [
+      "会話へ参考資料を与えることと、組み込みエージェントのナレッジ構成そのものを変更することは別です。",
+      "利用者が組み込みエージェントのコアの指示を編集する説明ではありません。",
+      "対話で追加条件を伝えて成果を改善できますが、自作エージェントのようにコア設定を編集するものではありません。",
+      "組み込みの質問例の削除を、ユーザーがエージェントの構成変更として行う説明ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問7（Q5-25））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A6%E6%A7%8B%E7%AF%89%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88-9cc7cccf-b1ed-4b17-b416-2c15e5e13d5a"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q5-29",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 8,
+    "title": "あなたは Microsoft 365 Copilot の研究者(リサーチ)エージェントを使用してレポートを生成しました。",
+    "topicId": "agents",
+    "stem": "あなたは Microsoft 365 Copilot の研究者(リサーチ)エージェントを使用してレポートを生成しました。\nレポートが有効な情報源を使用して生成されたかどうかを確認するには、何を使用できますか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "機能"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "指示"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "引用"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "メモリ"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "研究者(リサーチ)エージェントは、Web と職場データを調べて構造化されたソース引用付きのレポートを生成します。レポートが有効な情報源を使用して生成されたかどうかを確認するには、引用を確認して元情報源をたどることができます。",
+    "choiceReasons": [
+      "機能は実行できる処理の種類で、回答の根拠を示す参照ではありません。",
+      "指示は作業方針で、実際に使った資料を確認する情報ではありません。",
+      "引用をたどり、元の資料が主張を支えているかを確認します。引用があるだけで正確性を保証するわけではありません。",
+      "メモリはパーソナライズ用の情報で、レポートの各主張の出典ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問8（Q5-29））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/get-started-with-researcher-in-microsoft-365-copilot-e63ab760-f3de-4c47-ae87-dad601b0e9c4"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q6-27",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 9,
+    "title": "マーケティング部門の担当者が、過去3年間の四半期ごとの広告費とコンバージョン率のExcelデータを分析し、どの媒体が最も費用対効果が高いかを数値的に比較するグラフを作成したいと考え",
+    "topicId": "agents",
+    "stem": "マーケティング部門の担当者が、過去3年間の四半期ごとの広告費とコンバージョン率のExcelデータを分析し、どの媒体が最も費用対効果が高いかを数値的に比較するグラフを作成したいと考えています。\nこの目的に最も適したCopilotの機能はどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "研究者(リサーチ)エージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "アナリストエージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "チャット"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "表形式データの分析、傾向の把握、比較、可視化、センチメント分析(超重要！)に特化しているアナリストエージェントが、数値データの費用対効果比較とグラフ作成という要件に最も直接的に対応します。",
+    "choiceReasons": [
+      "Researcherは外部・社内資料の調査とレポート作成が中心です。",
+      "Analystは表形式データの分析、数値比較、グラフ作成に適しています。",
+      "一般のChatより、明確なデータセットの高度な分析を扱うAnalystが目的に合います。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問9（Q6-27））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%A7%E3%81%AE%E3%82%A2%E3%83%8A%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%A6%82%E8%A6%81-ff505b9c-a06c-4be9-b855-69d89b1d25d2"
+    ],
+    "correctChoiceId": "option-b"
+  },
+  {
+    "id": "ab730-q6-28",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 10,
+    "title": "新規参入を検討している海外市場について、競合他社の動向、規制環境、消費者トレンドなど複数の情報源を横断的に調査し、構造化された引用付きレポートとしてまとめたいと考えています。",
+    "topicId": "agents",
+    "stem": "新規参入を検討している海外市場について、競合他社の動向、規制環境、消費者トレンドなど複数の情報源を横断的に調査し、構造化された引用付きレポートとしてまとめたいと考えています。\nこの目的に最も適したCopilotの機能はどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "研究者(リサーチ)エージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "アナリストエージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "チャット"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Webと職場データを横断的に調査し、引用付きの構造化されたレポートを生成(超重要！)する研究者(リサーチ)エージェントが、複数情報源の調査という要件に最も適しています。",
+    "choiceReasons": [
+      "Researcherは複数の資料を調査・比較して、根拠を示すレポートの作成を支援します。",
+      "Analystは主にデータ分析・計算・可視化の用途に適しています。",
+      "一般の対話より、複数資料の深い調査を行うResearcherが目的に合います。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問10（Q6-28））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%A7%E3%81%AE%E7%A0%94%E7%A9%B6%E8%80%85%E3%81%AE%E6%A6%82%E8%A6%81-e63ab760-f3de-4c47-ae87-dad601b0e9c4"
+    ],
+    "correctChoiceId": "option-a"
+  },
+  {
+    "id": "ab730-q5-6",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 11,
+    "title": "あなたは、自社と他社のパートナーシップに関する提案書を要約する予定です。",
+    "topicId": "agents",
+    "stem": "あなたは、自社と他社のパートナーシップに関する提案書を要約する予定です。\nMicrosoft 365 Copilot を使用して、提案書の情報をプロジェクトキックオフミーティング向けに 3〜5 個の要点を箇条書きにまとめる必要があります。\n各項目は簡潔でわかりやすい表現にする必要があります。\nプロンプトにどの 2 つの詳細を含めるべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "応答をグラウンディングするための特定のナレッジソース"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "提案書に対して何をすべきかの簡潔な指示"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "パートナーシップの主要な関係者の連絡先一覧"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "研究者(リサーチ)エージェントを使用して生成された両社のプロファイル"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "提案書をキックオフミーティング向けに要約する場合は、提案書に対して何をしてほしいかを明示する簡潔な指示と、応答の根拠となる資料(ナレッジソース)を指定することが重要です。",
+    "choiceReasons": [
+      "要約する提案書を参照として指定し、要約の根拠を明らかにします。",
+      "3〜5項目、箇条書き、簡潔な表現という処理の条件を指示します。",
+      "連絡先の一覧だけでは、提案書の内容と要約の出力条件を伝えられません。",
+      "別途生成した会社紹介は、今回の提案書の内容を要約するために必須ではありません。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問11（Q5-6））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/copilot-prompt-gallery"
+    ],
+    "correctChoiceIds": [
+      "option-a",
+      "option-b"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 2
+    }
+  },
+  {
+    "id": "ab730-q5-12",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 12,
+    "title": "あなたは、自社と他社とのパートナーシップ提案書を要約する予定です。",
+    "topicId": "agents",
+    "stem": "あなたは、自社と他社とのパートナーシップ提案書を要約する予定です。\nMicrosoft 365 Copilot を使用して、プロジェクトキックオフミーティング用に提案書の情報を 3〜5 つの要点の箇条書きリストとして要約する必要があります。\n各箇条書きは簡潔でわかりやすい表現にする必要があります。\nプロンプトにどの 2 つの詳細を含めるべきですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "提案書をどのように処理するかの簡潔な指示"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Researcher エージェントを使用して生成された両社のプロフィール"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "パートナーシップの主要な関係者の連絡先リスト"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "回答の根拠となる特定のナレッジソース"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Microsoft 365 Copilotでキックオフミーティング向けに提案書を要約する場合は、3〜5個の箇条書きで簡潔にまとめるという出力条件を簡潔な指示としてプロンプトに含め、提案書そのものを根拠となるナレッジソースとして指定することが重要です。こうすることで、Copilotは余計な背景情報ではなく対象文書に基づいた要点を整理しやすくなります。",
+    "choiceReasons": [
+      "提案書を3〜5項目へ要約するなど、求める処理と形式を明示します。",
+      "会社紹介の追加生成は、対象の提案書の要約に必須ではありません。",
+      "連絡先だけでは提案内容の根拠を与えられません。",
+      "対象の提案書を参照し、どの資料に基づいて要約するかを指定します。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問12（Q5-12））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/copilot-prompt-gallery"
+    ],
+    "correctChoiceIds": [
+      "option-a",
+      "option-d"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 2
+    }
+  },
+  {
+    "id": "ab730-q5-19",
+    "version": 1,
+    "type": "multipleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 13,
+    "title": "Microsoft 365 Copilot と Microsoft 365 Copilot Chat の違いを比較しています。",
+    "topicId": "foundation",
+    "stem": "Microsoft 365 Copilot と Microsoft 365 Copilot Chat の違いを比較しています。\nMicrosoft 365 Copilotライセンスを追加していない標準のCopilot Chatと、有償のMicrosoft 365 Copilotの両方で、必要なストレージサービスなどの条件を満たせば利用できるものを2つ選んでください。",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "研究者(リサーチ)エージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "Copilot in Excel"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "Copilot ページ"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "Copilot ノートブック"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "Copilot PagesとCopilot Notebooksは、必要なアカウント・ストレージサービスなどの条件を満たすCopilot Chatユーザーにも提供されます。Researcherやアプリ内の有償Copilotと、同じ条件ではありません。",
+    "choiceReasons": [
+      "この条件の標準Copilot ChatだけでResearcherの利用を保証するものではありません。",
+      "有償のアプリ内Copilotの利用条件と、標準Chatの機能を区別します。",
+      "必要なストレージなどの条件を満たす職場ユーザーは、Copilot ChatでもPagesを利用できます。",
+      "現行のNotebooks資料では、必要な条件を満たすCopilot Chatユーザーにもノートブックが提供されます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問13（Q5-19））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-pages",
+      "https://support.microsoft.com/ja-jp/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks"
+    ],
+    "correctChoiceIds": [
+      "option-c",
+      "option-d"
+    ],
+    "selection": {
+      "mode": "exact",
+      "count": 2
+    }
+  },
+  {
+    "id": "ab730-q6-8",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 14,
+    "title": "Microsoft 365 Copilot からカスタム指示を追加します。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot からカスタム指示を追加します。\nカスタム指示の動作を正しく説明しているのはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "カスタム指示はメインの Copilot Chat にのみ適用され、Researcher などのエージェントとの会話には影響しない。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "カスタム指示は既存の会話の過去の応答を遡って変更する。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "カスタム指示は各会話の終了後にリセットされ、新しい会話のために再構成する必要がある。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "カスタム指示は新しいチャット会話および研究者(リサーチ)やアナリストなどのエージェントとの新しい会話に適用される。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "カスタム指示は保存後、新しいチャット会話や研究者(リサーチ)、アナリストなどのエージェントとの新しい会話にも適用される永続的な設定です。",
+    "choiceReasons": [
+      "個人のカスタム指示と組み込みエージェントへの適用範囲は、直接の公式根拠を確認する必要があります。",
+      "新しい指示で、既存会話に保存された過去の出力を遡って書き換えるわけではありません。",
+      "カスタム指示は設定として保存するので、会話が終わるたびに必ず再設定するという説明は誤りです。",
+      "個人のカスタム指示がResearcherとAnalystにも適用されるという直接の根拠が不足しており、保留です。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問14（Q6-8））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%AE%E5%BF%9C%E7%AD%94%E6%96%B9%E6%B3%95%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%99%E3%82%8B-8b826c0d-eb78-493e-a30d-4490ec1c4b9e"
+    ],
+    "correctChoiceId": "option-d"
+  },
+  {
+    "id": "ab730-q6-15",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 15,
+    "title": "Microsoft 365 Copilot の研究者(リサーチ)エージェントを使用してレポートを生成しました。",
+    "topicId": "agents",
+    "stem": "Microsoft 365 Copilot の研究者(リサーチ)エージェントを使用してレポートを生成しました。\n結果レポートの後続アクションとして、公式に確認できるものはどれですか？",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "Word、Teams、Outlook で元の Researcher 会話をそのまま継続できる。"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "結果レポートは自動的に Excel ブックへ変換され、アナリストエージェントに引き継がれる。"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "結果レポートを編集または共有し、プレゼンテーションやドキュメントの開始に活用できる。"
+      },
+      {
+        "id": "option-d",
+        "label": "エ",
+        "text": "結果レポートは読み取り専用であり、共有や編集はできない。"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "研究者(リサーチ)が生成した結果レポートは、編集または共有し、プレゼンテーションやドキュメントの開始に活用できます。",
+    "choiceReasons": [
+      "別アプリで結果を利用することと、元のResearcher会話がそのまま継続することは区別します。",
+      "レポートが操作なしで自動的にExcelへ変換されるという説明はありません。",
+      "生成レポートを編集・共有し、新しい文書やプレゼンテーションの材料として利用できます。",
+      "結果は閲覧だけでなく、編集・共有などの後続作業にも利用できます。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問15（Q6-15））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://support.microsoft.com/ja-jp/topic/microsoft-365-copilot%E3%81%A7%E3%81%AE%E7%A0%94%E7%A9%B6%E8%80%85%E3%81%AE%E6%A6%82%E8%A6%81-e63ab760-f3de-4c47-ae87-dad601b0e9c4"
+    ],
+    "correctChoiceId": "option-c"
+  },
+  {
+    "id": "ab730-q6-29",
+    "version": 1,
+    "type": "singleChoice",
+    "packId": "supplied-5",
+    "packLabel": "Researcher・Analyst agent",
+    "number": 16,
+    "title": "従業員が、今日の会議のスケジュールを確認し、ついでに簡単な天気情報を尋ねるなど、深い分析や調査を必要としない日常的なちょっとした質問をしたいと考えています。",
+    "topicId": "agents",
+    "stem": "従業員が、今日の会議のスケジュールを確認し、ついでに簡単な天気情報を尋ねるなど、深い分析や調査を必要としない日常的なちょっとした質問をしたいと考えています。\nこの目的に最も適したCopilotの機能はどれですか?",
+    "choices": [
+      {
+        "id": "option-a",
+        "label": "ア",
+        "text": "研究者(リサーチ)エージェント"
+      },
+      {
+        "id": "option-b",
+        "label": "イ",
+        "text": "アナリストエージェント"
+      },
+      {
+        "id": "option-c",
+        "label": "ウ",
+        "text": "チャット"
+      }
+    ],
+    "grading": {
+      "method": "exactChoiceSet"
+    },
+    "explanation": "あらかじめ定義された指示や再利用可能な構成を必要としない、その場限りの簡単なやり取りにはチャットが最も適しています。",
+    "choiceReasons": [
+      "複数資料の深い調査を必要としない、単純な日常の質問です。",
+      "数値データの専門的な分析・可視化は不要です。",
+      "利用者のライセンス・権限・Web利用設定の範囲で、日常の質問をチャットで尋ねる使い方が適しています。"
+    ],
+    "hints": [],
+    "enrichment": "reviewed",
+    "sourceKind": "authored",
+    "uses": [
+      "practice",
+      "diagnostic"
+    ],
+    "source": "提供オリジナル（第5回・問16（Q6-29））をMicrosoft公式資料で確認・必要箇所を修正",
+    "sourceRefs": [
+      "https://learn.microsoft.com/ja-jp/copilot/microsoft-365/which-copilot-for-your-organization",
+      "https://learn.microsoft.com/ja-jp/copilot/faq"
+    ],
+    "correctChoiceId": "option-c"
+  }
+]

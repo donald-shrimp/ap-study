@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Static HTML intake. Never executes scripts or marks supplied answers reviewed."""
 import argparse,hashlib,json,re,tempfile,os
+from html import escape
 from datetime import datetime,timezone
 from html.parser import HTMLParser
 from pathlib import Path
@@ -38,7 +39,31 @@ def one(nodes):return nodes[0] if nodes else Node()
 def compact(s):return re.sub(r'\s+','',s)
 def extract(raw,qualification,collection,filename):
     parser=Parser();parser.feed(raw);articles=parser.root.find(lambda n:n.tag=='article' and n.has('question'))
-    if not articles:raise ValueError(f'{filename}: article.question が見つかりません。未対応のHTML形式です。')
+    if not articles:
+        datasets=parser.root.find(lambda n:n.tag=='script' and n.attrs.get('id')=='dataset' and n.attrs.get('type')=='application/json')
+        if len(datasets)==1:
+            data=json.loads(''.join(c for c in datasets[0].children if isinstance(c,str)))
+            if not isinstance(data,dict) or not isinstance(data.get('questions'),list) or not data['questions']:raise ValueError(f'{filename}: dataset.questions が配列ではありません。')
+            markup=[]
+            for i,q in enumerate(data['questions'],1):
+                if not isinstance(q,dict) or not isinstance(q.get('stem'),str) or not isinstance(q.get('options'),list) or not isinstance(q.get('key'),list):raise ValueError(f'{filename}: 問{i}の本文・選択肢・提供正答の型が不正です。')
+                options=q['options'];ids=[o.get('id') for o in options if isinstance(o,dict)]
+                if any(not isinstance(k,str) for k in q['key']) or len(set(q['key']))!=len(q['key']) or len(ids)!=len(options) or any(not isinstance(v,str) or not v for v in ids) or len(set(ids))!=len(ids) or any(not isinstance(o.get('text'),str) for o in options) or any(k not in ids for k in q['key']):raise ValueError(f'{filename}: 問{i}の選択肢IDか提供正答が不正です。')
+                code=q.get('sourceId') or q.get('id')
+                if not isinstance(q.get('kind'),str):raise ValueError(f'{filename}: 問{i}の形式が文字列ではありません。')
+                kind={'single':'singleChoice','multi':'multipleChoice'}.get(q['kind'],q['kind'])
+                if not isinstance(code,str) or not code:raise ValueError(f'{filename}: 問{i}の出典IDがありません。')
+                input_type='checkbox' if kind=='multipleChoice' else 'radio'
+                correct=','.join(str(j) for j,o in enumerate(options) if o['id'] in q['key'])
+                explanation=q.get('explanation','')
+                if not isinstance(explanation,str):raise ValueError(f'{filename}: 問{i}の解説が文字列ではありません。')
+                refs=re.findall(r'https?://[^\s<>]+',explanation)
+                core=explanation.split('補足（')[0].split('参考リンク')[0].strip()
+                markup.append('<article class="question" data-type="'+escape(kind,quote=True)+'" data-correct="'+correct+'"><div class="qhead"><small>'+escape(code)+'</small></div><p class="stem">'+escape(q['stem']).replace('\n','<br>')+'</p><div class="choices">'+''.join('<label class="choice"><input type="'+input_type+'"><span>'+escape(o['text'])+'</span></label>' for o in options)+'</div><details class="answer"><p>正答：</p><p>'+escape(core).replace('\n','<br>')+'</p>'+''.join('<a href="'+escape(u,quote=True)+'">参照</a>' for u in refs)+'</details></article>')
+            records=extract(''.join(markup),qualification,collection,filename)
+            for record in records:record['formatChanges'].insert(0,'application/jsonの埋め込みdatasetを静的に抽出。本文表示のJavaScriptは実行していない。')
+            return records
+        raise ValueError(f'{filename}: article.question または静的なdataset.questions が見つかりません。未対応のHTML形式です。')
     records=[]
     for number,article in enumerate(articles,1):
         changes=[];issues=[]

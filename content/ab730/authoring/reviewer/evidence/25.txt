@@ -1,0 +1,204 @@
+目次
+エディター モードを終了する
+Learn に質問する
+Learn に質問する
+読み取りモード
+目次
+英語で読む
+追加
+計画に追加する
+マークダウンのコピー
+印刷
+Note
+このページにアクセスするには、承認が必要です。 サインインまたはディレクトリの変更を試すことができます。
+このページにアクセスするには、承認が必要です。 ディレクトリの変更を試すことができます。
+ユーザーが保存、いいね! した、または Copilot プロンプト ギャラリーで共有したプロンプトをエクスポートする
+フィードバック
+Copilot プロンプト ギャラリーでは、ユーザーは、メンバーである特定のチーム (Microsoft Teams) とのプロンプトの共有を含め、作成したプロンプトを保存または共有できます。 ユーザーは、他のユーザーが作成したプロンプトにいいね! をすることもできます。 管理者は、Windows PowerShell を使用して、Copilot プロンプト ギャラリー内の次のいずれかの種類のプロンプトに関するデータをファイルにエクスポートできます:
+特定のユーザーの保存済み、いいね!、共有されたプロンプト。
+特定のチームと共有されているプロンプト。
+Windows PowerShell 環境の構成
+データをエクスポートするために PowerShell スクリプトを実行するユーザー アカウントに、グローバル管理者ロールを割り当てる必要があります。
+重要
+Microsoft では、アクセス許可が可能な限りで少ないロールを使用することをお勧めします。 アクセス許可の低いアカウントを使用すると、組織のセキュリティが向上します。 グローバル管理者は高い特権を持つロールであり、既存のロールを使用できない場合の緊急時に限定する必要があります。 詳細については、「Microsoft 365 管理センターの管理者ロールについて」を参照してください。
+ユーザーが Copilot プロンプト ギャラリーで保存、いいね! または共有したプロンプトをエクスポートする前に、次の手順を実行して PowerShell 環境を構成する必要があります。
+CopilotLabDSR PowerShell スクリプトをダウンロードします。
+MSAL.PS モジュールをインストールします。
+CopilotLabDSR モジュールを読み込みます。
+CopilotLabDSR PowerShell スクリプトをダウンロードする
+開始するには、 CopilotLabDSR PowerShell スクリプトをダウンロードする必要があります。
+エクスプローラーで、CopilotLabDSR.psm1 ファイルを保存した場所に移動します。
+CopilotLabDSR.psm1 ファイルを右クリックし、[プロパティ] を選択します。
+[ 全般 ] タブで、 ブロック解除 チェック ボックスを選択し、[ OK] を選択します。
+既定では、インターネットからダウンロードしたスクリプトの実行は許可されていないため、ファイルのブロックを解除する必要があります。
+MSAL.PS モジュールをインストールする
+PowerShell で次のコマンドを実行して、MSAL.PS モジュールがインストールされているかどうかを確認します。
+Get-Module -ListAvailable MSAL.PS
+モジュールがインストールされていない場合は、PowerShell で次のコマンドを実行してモジュールをインストールします。
+Install-Module -Name MSAL.PS -Scope CurrentUser
+CopilotLabDSR モジュールを読み込む
+PowerShell で次のコマンドを実行して、このセッションに対してのみインターネットからダウンロードされたスクリプトの実行を有効にします。 "Y" と入力すると確認するように求められる場合があります。
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+次のコマンドを実行して、使用可能なすべてのコマンドレットを含むモジュールをインポートします。
+Import-module "<location where you saved the CopilotLabDSR.psm1 file>"
+たとえば、ファイルが C:\AdminScripts に保存されている場合は、次のように入力します。
+Import-module "C:\AdminScripts\CopilotLabDSR.psm1"
+特定のユーザーの保存済み、いいね!、共有されたプロンプトをエクスポートする
+Windows PowerShell から、Export-PromptsUserContent コマンドレットを使用して、特定のユーザーの保存済み、いいね!、または共有されたプロンプトを Copilot プロンプト ギャラリー からエクスポートします。
+Export-PromptsUserContent -UserAadIdOrPrincipalName <Entra ID or UPN of user> -ExportDirectory <output location> -PromptType <type of prompt>
+パラメーター
+説明
+UserAadIdOrPrincipalName
+Microsoft Entra ID またはコンテンツをエクスポートするユーザーのユーザー プリンシパル名 (UPN) のいずれかを使用します。
+ExportDirectory
+出力ファイルを保存する場所です。 フォルダーは既に存在しているはずです。 指定しない場合、エクスポート ファイルは現在のフォルダーに保存されます。
+PromptType
+ユーザーが保存したプロンプトをエクスポートするには、"saved" を指定します。 プロンプトへの共有可能なリンクが生成されたプロンプトをエクスポートするには、"shared" を指定します。 "いいね!" を指定すると、ユーザーが気に入ったプロンプトをエクスポートできます。
+たとえば、次では、Reed Smiths の UPN を使用して Copilot プロンプト ギャラリーに保存されたプロンプトがエクスポートされ、エクスポート ファイルが C:\PromptsExportReedSmith の場所にダウンロードされます。
+Export-PromptsUserContent -UserAadIdOrPrincipalName reedsmith@contoso.com -ExportDirectory C:\PromptsExportReedSmith -PromptType saved
+認証を求められたら、エクスポートするユーザーではなく、グローバル管理ロールに割り当てられたアカウントでサインインします。
+PowerShell コマンドレットが正常に実行されたら、エクスポートの場所に移動して、エクスポートされたファイルを表示します。
+特定のチームと共有されているプロンプトをエクスポートする
+Windows PowerShell から、Export-PromptsGroupContent コマンドレットを使用して、Copilot プロンプト ギャラリー の特定のチームに公開されたプロンプトをエクスポートします。
+Export-PromptsGroupContent -M365TeamsGroupId <team ID> -ExportDirectory <output location>
+パラメーター
+説明
+M365TeamsGroupId
+プロンプトが共有されたチームの ID。
+ExportDirectory
+出力ファイルを保存する場所です。 フォルダーは既に存在しているはずです。 指定しない場合、エクスポート ファイルは現在のフォルダーに保存されます。
+たとえば、次の場合、Copilot プロンプト ギャラリーで共有されたプロンプトが、ID が "d0efcad2-6744-0de6-0624-ea467d4293af" のチームにエクスポートされ、エクスポート ファイルが C:\PromptsExportReedSmith の場所にダウンロードされます。
+Export-PromptsGroupContent -M365TeamsGroupId d0efcad2-6744-0de6-0624-ea467d4293af -ExportDirectory C:\PromptsExportReedSmith
+ヒント
+チームの ID を確認するには、Teams 管理センターの [Teams>チームの管理] に移動します。
+認証を求められたら、グローバル管理ロールに割り当てられたアカウントでサインインします。
+PowerShell コマンドレットが正常に実行されたら、エクスポートの場所に移動して、エクスポートされたファイルを表示します。
+エクスポート ファイルに含まれるプロパティとその説明
+PowerShell コマンドレットを実行して Copilot プロンプト ギャラリーからユーザーのデータをエクスポートすると、ダウンロード場所のフォルダーに 1 つのファイルが表示されます。 次のセクションの情報を使用すると、受信したファイルに表示されるプロパティを理解するのに役立ちます。
+特定のユーザーの保存済み、いいね!、共有されたプロンプトのファイルをエクスポートする
+ファイル名の前には「ユーザー」とユーザーの Microsoft Entra ID が続き、エクスポートに使用されるプロンプトの種類が続きます。 ファイルのプロパティは次の表に示すとおりです。
+プロパティ
+説明
+プロンプト
+ユーザーが保存または共有したプロンプト情報の配列。
+Prompt.Title
+プロンプトの保存中または共有中にユーザーが与えたプロンプトのタイトル。
+Prompt.PromptText
+プロンプト テキスト
+Prompt.Products
+ユーザーがプロンプトを保存または共有した製品を含むリスト。
+Prompt.IsFavorite
+ユーザーがプロンプトを保存または高評価したことを示すブール値 (true または false)。
+Prompt.UserActivity.Favorite.IsFavorite
+ユーザーがプロンプトを保存または高評価したことを示すブール値 (true または false)。
+Prompt.UserActivity.Favorite.ActivityDateTimeInUtc
+ユーザーがプロンプトを保存したか、高く評価された時刻。
+Prompt.CreatedTime
+ユーザーがプロンプトを保存した時刻。
+Prompt.SharedTime
+ユーザーがプロンプトを共有した時刻
+Prompt.HydratedEntities
+型とエンティティの情報を含むエンティティの一覧。
+Prompt.HydratedEntities.Type
+現在、People、File、Meeting のエンティティの種類がサポートされています。
+Prompt.HydratedEntities.Entity
+エンティティ型に基づくエンティティ情報。
+Prompt.HydratedEntities.Entity.Id
+一意のエンティティ ID。
+Prompt.HydratedEntities.Entity.DisplayName
+ユーザー エンティティの表示名。
+Prompt.HydratedEntities.Entity.EmailAddresses
+個人エンティティのメール アドレスの一覧。
+Prompt.HydratedEntities.Entity.ReferenceId
+インストルメント化マッピングの一意の ID。
+Prompt.HydratedEntities.Entity.FileName
+ファイル エンティティの名前。
+Prompt.HydratedEntities.Entity.AccessUrl
+ファイル エンティティのアクセス URL。
+Prompt.HydratedEntities.Entity.SpoId
+ファイル エンティティの SharePoint ドキュメント識別子。
+Prompt.HydratedEntities.Entity.OriginalId
+イベント エンティティの会議 ID。
+Prompt.HydratedEntities.Entity.Subject
+イベント エンティティのサブジェクト。
+Prompt.HydratedEntities.Entity.SkypeTeamsMeetingUrl
+イベント エンティティの URL。
+Prompt.HydratedEntities.Entity.Start
+イベント エンティティの開始時刻。
+Prompt.HydratedEntities.Entity.End
+イベント エンティティの終了時刻。
+Prompt.HydratedEntities.Entity.OrganizerName
+開催者: イベント エンティティの名前。
+Prompt.HydratedEntities.Entity.OrganizerAddress
+開催者 イベント エンティティのアドレス。
+Prompt.HydratedEntities.Entity.Attendees
+イベント エンティティの出席者リスト。
+特定のチームと共有されているプロンプトのエクスポート ファイル
+ファイル名の前には "Group" とチームの ID が付きます。 ファイルのプロパティは次の表に示すとおりです。
+プロパティ
+説明
+プロンプト
+ユーザーが保存または共有したプロンプト情報の配列。
+Prompt.Title
+プロンプトの保存中または共有中にユーザーが与えたプロンプトのタイトル。
+Prompt.PromptText
+プロンプト テキスト
+Prompt.Products
+ユーザーがプロンプトを保存または共有した製品を含むリスト。
+Prompt.PublishedTime
+プロンプトがチームに公開された時刻。
+Prompt.PublishedBy
+プロンプトをチームに発行したユーザーの UPN。
+Prompt.HydratedEntities
+型とエンティティの情報を含むエンティティの一覧。
+Prompt.HydratedEntities.Type
+現在、People、File、Meeting のエンティティの種類がサポートされています。
+Prompt.HydratedEntities.Entity
+エンティティ型に基づくエンティティ情報。
+Prompt.HydratedEntities.Entity.Id
+一意のエンティティ ID。
+Prompt.HydratedEntities.Entity.DisplayName
+ユーザー エンティティの表示名。
+Prompt.HydratedEntities.Entity.EmailAddresses
+個人エンティティのメール アドレスの一覧。
+Prompt.HydratedEntities.Entity.ReferenceId
+インストルメント化マッピングの一意の ID。
+Prompt.HydratedEntities.Entity.FileName
+ファイル エンティティの名前。
+Prompt.HydratedEntities.Entity.AccessUrl
+ファイル エンティティのアクセス URL。
+Prompt.HydratedEntities.Entity.SpoId
+ファイル エンティティの SharePoint ドキュメント識別子。
+Prompt.HydratedEntities.Entity.OriginalId
+イベント エンティティの会議 ID。
+Prompt.HydratedEntities.Entity.Subject
+イベント エンティティのサブジェクト。
+Prompt.HydratedEntities.Entity.SkypeTeamsMeetingUrl
+イベント エンティティの URL。
+Prompt.HydratedEntities.Entity.Start
+イベント エンティティの開始時刻。
+Prompt.HydratedEntities.Entity.End
+イベント エンティティの終了時刻。
+Prompt.HydratedEntities.Entity.OrganizerName
+開催者: イベント エンティティの名前。
+Prompt.HydratedEntities.Entity.OrganizerAddress
+開催者 イベント エンティティのアドレス。
+Prompt.HydratedEntities.Entity.Attendees
+イベント エンティティの出席者リスト。
+関連記事
+Copilot のプロンプト ギャラリーを理解する
+Microsoft Copilot のスケジュールされたプロンプトを管理する
+Microsoft 365 管理センターで Microsoft Copilot シナリオを管理する
+フィードバック
+このページはお役に立ちましたか?
+はい
+いいえ
+いいえ
+このトピックについてサポートが必要ですか?
+このトピックの意図を把握したり、理解を深めたりするために Ask Learn を使ってみませんか?
+Learn に質問する
+Learn に質問する
+修正を提案しますか?
+その他のリソース
+最終更新:
+2026-08-20

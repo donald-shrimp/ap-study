@@ -55,7 +55,7 @@ with sync_playwright() as p:
   page.locator('[name=year]').select_option(str(q['year']));page.locator('[name=season]').select_option(q['season']);page.locator('[name=query]').fill(q['title'])
  def open_q(id):
   choose_q(id);page.locator(f'[data-action=start][data-id="{id}"]').click();page.wait_for_function('document.querySelector("#main").getAttribute("aria-busy")!=="true"')
- page.goto(URL);page.locator('.quick-start').wait_for();page.evaluate('async()=>{await navigator.serviceWorker.ready}');page.wait_for_function('!!navigator.serviceWorker.controller')
+ page.add_init_script("if(!localStorage.getItem('hitomon-/ap-study/last-qualification'))localStorage.setItem('hitomon-/ap-study/last-qualification','ap')");page.goto(URL);page.locator('.quick-start').wait_for();page.evaluate('async()=>{await navigator.serviceWorker.ready}');page.wait_for_function('!!navigator.serviceWorker.controller')
  cdp=ctx.new_cdp_session(page);manifest=cdp.send('Page.getAppManifest');assert not manifest['errors'],manifest
  data=json.loads(manifest['data']);assert data['display']=='standalone' and data['name']=='ひと問'
  # Unlike start_url, id is resolved against the origin, not the manifest URL.
