@@ -1,8 +1,8 @@
 {
   "format": "hitomon-implementation-progress",
   "version": 1,
-  "updatedAt": "2026-10-14T18:54:36.569014+00:00",
-  "status": "implementation_verified_ready_for_publication",
+  "updatedAt": "2026-10-14T18:58:20.520731+00:00",
+  "status": "application_published_awaiting_rules_and_personal_migration",
   "plan": "docs/ap-subject-b-plan.md",
   "worktree": "/workspace/ap-study-subject-b",
   "branch": "feature/subject-b",
@@ -25,12 +25,13 @@
     "新版Rulesのエミュレータ検証と処理量上限の修正",
     "Node163件と新モデルの回答・評価分離／20欄／まとめ同期の検証通過",
     "実ブラウザの保存失敗・未保存入力Export・再試行と再読込通過",
-    "A/B・AB-730・模試・診断・計画・履歴・PWA・AIの回帰確認"
+    "A/B・AB-730・模試・診断・計画・履歴・PWA・AIの回帰確認",
+    "mainへ非forceで7e2a57aを反映・GitHub Pages build成功",
+    "main/ref/tree一致・公開21ファイル一致・公開390/1440pxでA/B表示とエラーなし確認"
   ],
   "remaining": [
-    "mainへの非force反映・Pages完了と公開ファイル一致確認",
-    "新版Firestore Rulesの本番公開（管理者認証がないためユーザー操作が必要）",
-    "本人バックアップ3ファイルの受領・一回変換・取り込み（未提供。実装と区別）"
+    "新版Firestore Rules全体の本番公開（Firebase CLIの管理者認証がないためユーザー操作が必要）",
+    "本人バックアップ3ファイル（AP・AB-730の学習記録とAP単語帳）の受領・一回変換・取り込み・本番の別端末照合"
   ],
   "authors": [
     "/root",
@@ -53,5 +54,105 @@
     "caseSync": "SDK/emulators; two browsers and batched multi-field CAS passed",
     "productionRules": "not deployed; CLI authentication unavailable",
     "personalMigration": "not executed; files not received"
-  }
+  },
+  "publication": {
+    "commit": "7e2a57aaae567a6fca7fdcfc8c003741322cb421",
+    "tree": "76f8bc05765fc62bc785cb3e03bf02fbf4b924d0",
+    "pagesBuilt": true,
+    "nonForceUpdate": true,
+    "files": [
+      {
+        "path": "index.html",
+        "sha256": "35e2cee0ccde53e9368f1ed09a9bde0e8bf864aec1e950f01a6daa97263862f8"
+      },
+      {
+        "path": "ap/index.html",
+        "sha256": "4b2d69e935b39ec4372bc0347fabc1c1e78409455645fdb46c8cb04b3d376d01"
+      },
+      {
+        "path": "ab730/index.html",
+        "sha256": "505f83fbef37b308cf286d088606c3dc08d4331953f93b20836f64c8ff34b827"
+      },
+      {
+        "path": "app.js",
+        "sha256": "30c15cc33588eab59e1ec5377c0c31b56b26e5bad71b9d9f8af585d3f5fcd4c6"
+      },
+      {
+        "path": "styles.css",
+        "sha256": "b058abcc432991882f879dce4616adcbe77e1e749693931c3b0c6db087c81aaf"
+      },
+      {
+        "path": "sw.js",
+        "sha256": "99278256bd65b44fa4b19a62d95f5ec5fbad4b20542156dad6937a4a722e68b5"
+      },
+      {
+        "path": "src/app.js",
+        "sha256": "41d049357f0ad1e34efe12f78b5d2df8c6a56caadc4c9fa1a8a2ca9c8320f930"
+      },
+      {
+        "path": "src/v2/records.js",
+        "sha256": "9c5aa107c491cd52b1fbae6570bae96104e6af579e4ed69bfbe05244f4a91a0b"
+      },
+      {
+        "path": "src/v2/resources.js",
+        "sha256": "88c1622e5879bee7b5d3a8fa7c62ce804847998f84c057fe9ede35c28c077487"
+      },
+      {
+        "path": "src/domain/case-study.js",
+        "sha256": "8b41c622bbba868b1354f07f5b2ae7d49723587376332467a27a9806c67c06da"
+      },
+      {
+        "path": "src/features/written.js",
+        "sha256": "e643d5638b954bc3dc2453876075b70e6a9944bcf2f8a0816a11c3aa9547af13"
+      },
+      {
+        "path": "src/storage/local.js",
+        "sha256": "53a86f07017cb68a7256d504de181f90cf09a332109ec8a0c7d49d4f8910d42b"
+      },
+      {
+        "path": "src/storage/workspace.js",
+        "sha256": "420b68a29659feae94784880162b9564e68c63ec915dcbb433a2855dd2f9f793"
+      },
+      {
+        "path": "src/sync/firebase.js",
+        "sha256": "698e2bf6ffd8f69db99b0771680a5b59bf8b7f420537272b4bbd46fe58066849"
+      },
+      {
+        "path": "firestore.rules",
+        "sha256": "752e8b5e36bfedbbe3e9e304c0771625d49a6ef80bc6e2891781e930d6cd26ee"
+      },
+      {
+        "path": "data/qualifications/ap/manifest.json",
+        "sha256": "bbe429f8f8f6678d8558b4c8895ec31e3929ba4e4d97179d8cc27a592588fb94"
+      },
+      {
+        "path": "data/qualifications/ab730/manifest.json",
+        "sha256": "f670f229561b61c8fc9a21bd7056aac2d1e5fbe239bf2d8af8f00f1150132c63"
+      },
+      {
+        "path": "data/qualifications/ap/cases.85353515b5bd6123.json",
+        "sha256": "85353515b5bd61231c3da8aa715cd4158c9425c00519740c127cf39c12b02e52"
+      },
+      {
+        "path": "schemas/study-plan.v2.json",
+        "sha256": "a0b43e622924017c1411abfac0f62868d3e119ed162693bf107c0a818fe2dcfa"
+      },
+      {
+        "path": "docs/learning-record-v2.md",
+        "sha256": "459fd48503c72cf9f5016493a065422593d45f234ce553d4a6dfe1d4361b8c8e"
+      },
+      {
+        "path": "assets/written/ap-r07h-pm1/figure-1.png",
+        "sha256": "5b4f81a86821488aa3984d94463dc04a51d3f5986322f3f6b5a9a296b3e2a3dc"
+      }
+    ],
+    "liveViewports": [
+      390,
+      1440
+    ],
+    "runtimeErrors": [],
+    "productionFirestoreRules": "not deployed; administrator authentication unavailable",
+    "personalDataMigration": "not executed; backup files not supplied"
+  },
+  "nextAction": "ユーザーが最新mainのfirestore.rulesを本番へ公開し、保存済みのバックアップ3ファイルを提供。原本を保管してCLIで一度変換・照合し、新形式で追加取り込みする。"
 }
