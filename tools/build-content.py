@@ -72,7 +72,8 @@ def normalize(raw, config, ordinal=1):
     q['qualificationId'] = config['id']
     q.setdefault('examPartId', config.get('defaultExamPartId', 'objective'))
     q.setdefault('type', 'singleChoice')
-    require(q['type'] == 'singleChoice', f"Unsupported question type: {q['id']}")
+    require(q['type'] in ['singleChoice','multipleChoice'], f"Unsupported runtime question type (freeText is draft-only): {q['id']}")
+    require('referenceAnswer' not in q, f"Reference answer belongs to freeText drafts: {q['id']}")
     if config.get('adapter') == 'ipa-ap':
         q['packId'] = q['id'].split('-q', 1)[0]
         label = config['seasonLabels'][q['season']]
@@ -92,8 +93,17 @@ def normalize(raw, config, ordinal=1):
         if 'sourceKind' not in q and not q.get('parentQuestionId'):
             q['sourceKind'] = 'authored'
         q['choices'] = [dict(c) for c in q['choices']]
-        require('correctChoiceId' in q, f"Missing correct choice ID: {q['id']}")
-        q['answer'] = next((i for i, c in enumerate(q['choices']) if c['id'] == q['correctChoiceId']), -1)
+        if q['type']=='multipleChoice':
+            require('correctChoiceId' not in q and 'answer' not in raw, f"Mixed answer format: {q['id']}")
+            correct=q.get('correctChoiceIds',[])
+            require(isinstance(correct,list) and all(isinstance(c,str) for c in correct) and len(set(correct))==len(correct) and all(c in {a['id'] for a in q['choices']} for c in correct), f"Invalid multiple answers: {q['id']}")
+            q['correctChoiceIds']=[c['id'] for c in q['choices'] if c['id'] in correct]
+            q['answer']=None
+            q.setdefault('selection', {'mode':'all'})
+            q.setdefault('grading', {'method':'exactChoiceSet'})
+        else:
+            require('correctChoiceId' in q, f"Missing correct choice ID: {q['id']}")
+            q['answer'] = next((i for i, c in enumerate(q['choices']) if c['id'] == q['correctChoiceId']), -1)
     if config.get('defaultSyllabusId'):
         q.setdefault('syllabusId', config['defaultSyllabusId'])
     if config.get('language'):
@@ -143,7 +153,14 @@ def validate_questions(questions, config, root, diagnostic=False, related_ids=No
         require(2 <= len(q['choices']) <= 20, f"Invalid choice count: {q['id']}")
         choice_ids = [c['id'] for c in q['choices']]
         require(len(set(choice_ids)) == len(choice_ids) and all(SAFE_ID.fullmatch(c) for c in choice_ids), f"Invalid choice IDs: {q['id']}")
-        require(q['correctChoiceId'] in choice_ids and q['answer'] >= 0, f"Invalid answer: {q['id']}")
+        require('grading' not in q or q['grading']=={'method':'exactChoiceSet'}, f"Unsupported grading: {q['id']}")
+        if q['type']=='multipleChoice':
+            correct=q.get('correctChoiceIds');selection=q['selection']
+            require(isinstance(correct,list) and 0<len(correct)<=len(choice_ids) and len(set(correct))==len(correct) and all(c in choice_ids for c in correct), f"Invalid multiple answers: {q['id']}")
+            q['correctChoiceIds']=[c for c in choice_ids if c in correct]
+            require(isinstance(selection,dict) and (selection=={'mode':'all'} or set(selection)=={'mode','count'} and selection['mode']=='exact' and type(selection['count']) is int and selection['count']==len(correct)), f"Invalid selection rule: {q['id']}")
+        else:
+            require('correctChoiceIds' not in q and 'selection' not in q and q['correctChoiceId'] in choice_ids and q['answer'] >= 0, f"Invalid answer: {q['id']}")
         require(all(set(c) <= {'id','label','text','image'} and isinstance(c.get('label'), str) and 0 < len(c['label']) <= 100 and ('text' not in c or isinstance(c['text'],str) and len(c['text'])<=20000) for c in q['choices']), f"Invalid choice text: {q['id']}")
         require(q['enrichment'] in ['reviewed', 'topic-guide'], f"Invalid lesson state: {q['id']}")
         require(len(q['choiceReasons']) == (len(q['choices']) if q['enrichment'] == 'reviewed' else 0), f"Invalid reasons: {q['id']}")
@@ -382,7 +399,7 @@ def compile_qualification(root, id):
         packs.append({'id': pack_id, 'label': records[0]['packLabel'], 'url': f'packs/{filename}', 'sha256': digest, 'count': len(records), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in records)})
         for q in records:
             # The index supports searching/scoping/offline availability, not lesson rendering.
-            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','type','choicePresentation','uses','sourceKind','familyId','syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs']
+            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','correctChoiceIds','selection','grading','type','choicePresentation','uses','sourceKind','familyId','syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs']
             item = {k: q[k] for k in fields if k in q}
             item['choices'] = [{k: v for k, v in c.items() if k != 'text'} for c in q['choices']]
             item['hintCount'] = len(q['hints'])

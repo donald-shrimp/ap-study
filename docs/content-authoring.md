@@ -1,6 +1,6 @@
 # 資格と問題を増やす
 
-同じ単一選択なら、画面のJavaScriptを変更せず「資格設定＋作成元JSON」から公開用ファイルを生成する。実際の資格と原本が決まった後、少数の独立確認済み問題から登録する。
+単一選択・複数選択なら、画面のJavaScriptを変更せず「資格設定＋作成元JSON」から公開用ファイルを生成する。実際の資格と原本が決まった後、少数の独立確認済み問題から登録する。
 
 ## 応用情報の既存教材を更新する
 
@@ -37,12 +37,12 @@
 | 項目 | 内容 |
 |---|---|
 | `id`, `version` | 資格内で一意の問題ID、正の整数の版。内容を改訂したら版を増やす |
-| `type` | `singleChoice`。未対応の形式は拒否する |
+| `type` | `singleChoice`／`multipleChoice`。記述式は草稿保管だけ（下記参照） |
 | `packId`, `packLabel` | 任意。省略時は `study`／学習問題。春秋・年度・80問に限定しない |
 | `number`, `title`, `topicId` | 番号とタイトルは任意（順番と「問題N」で補完）。分野が1つなら分野IDも補完 |
 | `stem` または `sourceImages` | 正確な問題文、または原本画像。画像の場合 `imageSizes` に幅と高さ |
 | `choices` | 2〜20個。各選択肢は安定した `id`、表示 `label`、`text`／`image` |
-| `correctChoiceId` | 正答の選択肢ID。配列を並べ替えても正答参照を保つ |
+| `correctChoiceId`／`correctChoiceIds` | 単一選択の正答ID／複数選択の正答ID配列。選択肢順とは別に参照する |
 | `hints` | 任意、0〜20段階。各段階は `title`、具体的な `text`、`revealsAnswer`（真偽値） |
 | `summary`, `explanation`, `takeaway` | 要約・要点は任意。確認済み教材には問題固有の解説が必須 |
 | `choiceReasons` | 個別解説付きなら選択肢と同数。各選択肢の正誤理由 |
@@ -152,4 +152,63 @@ canonical JSONはUTF-8・キーソート・空白なし・Unicode文字をその
 
 ### 新しい問題形式を増やすとき
 
-現在は `singleChoice` のみ。複数選択・並べ替え・ケース内複数設問は未対応。必要になったら、生成検証→表示→採点→スナップショット検証→Rules→バックアップ／AI Exportを同時に拡張する。単一選択の配列へ無理に押し込まない。
+単一選択と複数選択に対応。記述式は採点保留の草稿のみ。並べ替え・ケース内複数設問は未対応。新しい形式を公開するときは、生成検証→表示→採点→スナップショット検証→Rules→バックアップ／AI Exportを同時に拡張する。単一選択の配列へ無理に押し込まない。
+
+## 問題形式と複数ファイルの取り込み（2026-10-14）
+
+新しい一般教材の形式契約は [question-format.v1.json](../schemas/question-format.v1.json)。既存AP作成元の省略項目は従来のadapterで補完する。問題の `type` と採点方法 `grading.method` は別に保存する。公開用の選択問題は `exactChoiceSet`（正答の組み合わせの完全一致）を使い、部分点は付けない。単一選択で採点方法を省略した既存教材は、この方法として扱う。
+
+| `type` | 作成元JSON | 今回の対応範囲 |
+|---|---|---|
+| `singleChoice` | `choices` と `correctChoiceId` | 通常学習・診断・模試・保存・同期・AI |
+| `multipleChoice` | `choices` と `correctChoiceIds`、`selection` | 同上。チェックボックスで選び、回答ボタンで確定 |
+| `freeText` | `referenceAnswer`、`grading: {"method":"deferred"}` | 未確認草稿の保管だけ。受験・正誤判定・公開生成にはまだ使えない |
+
+```json
+{
+  "id": "stable-question-id",
+  "version": 1,
+  "type": "multipleChoice",
+  "stem": "当てはまるものを2つ選んでください。",
+  "choices": [
+    {"id": "a", "label": "ア", "text": "選択肢A"},
+    {"id": "b", "label": "イ", "text": "選択肢B"},
+    {"id": "c", "label": "ウ", "text": "選択肢C"}
+  ],
+  "correctChoiceIds": ["a", "c"],
+  "selection": {"mode": "exact", "count": 2},
+  "grading": {"method": "exactChoiceSet"}
+}
+```
+
+「すべて選択」は `selection: {"mode":"all"}`。正答が1つでも、チェックボックスで複数を選べる設問なら `multipleChoice` とする。`exact.count` は正答数と一致する必要がある。指定数より少ない／多い状態では回答ボタンを無効にする。選択解除は常に可能。余分な選択・選び忘れは不正解。表示順とクリック順を区別し、正答・本人の選択配列は選択肢の表示順へ揃える。
+
+複数選択の作成元へ `correctChoiceId` や数値 `answer` を混在させない。生成時には既存共通処理用の `answer:null` を補い、正答配列・選択条件・採点方法を軽量索引にも保存する。既存APの数値正答と単一選択の保存形式は維持する。選択途中と確定済みの履歴は `selectedChoiceIds` を使う。診断・模試では `currentChoiceId` と `responses[slotId]` が複数選択の場合だけ配列になり、単一選択の文字列／未回答のnullを保持する。
+
+Schemaに加え、ビルダーで正答IDが登録済み選択肢に属すること、ID・配列の一意性、指定数と正答数の一致、対応する採点方法、作成元と補完後の確認ハッシュを照合する。公開する一般教材には従来どおり別担当の内容確認・全選択肢理由が必要。未確認草稿を `reviewed` へ自動昇格させない。
+
+### HTMLを追加する手順
+
+```sh
+python tools/import-question-drafts.py \
+  --qualification ab730 \
+  --collection supplied-originals \
+  --output /workspace/scratch/ab730-question-imports \
+  incoming/第1回_模擬問題.html incoming/第2回_模擬問題.html
+```
+
+今後も同じ資格・同じ `collection`・同じ出力先を指定してファイルを追加する。各 `article.question` の `.qhead small` または `data-question-id` を安定した出典コードとして使用し、IDを作る。出典コードが再利用される別シリーズなら新しいcollectionを指定する。コードがない場合はファイル名を識別に使うため、改名を確認事項として残す。
+
+- `manifest.json`：元ファイルSHA-256・出典コード・問題ID・草稿の版一覧・重複候補・改訂競合・未確認件数。
+- `drafts/<問題ID>/<草稿ハッシュ>.json`：本文・形式・提供正答と解説・参照URL・変換内容・要確認事項。すべて `unreviewed` で、アプリの公開問題には入らない。
+- `sources/<SHA-256>.html.txt`：元のHTMLをそのまま保存。スクリプトは実行せず、静的な要素だけを抽出する。
+
+同じバイト列のファイルは再取り込みを省略。同じ出典コードで内容が変わったら、元の草稿を保持して新しい版と競合を追加する。本文・選択肢が同じ別コードの問題は、選択肢順が違っても重複候補にする。意味が近い問題や言い換えの重複は自動判定を保証しない。正答・出典の正しさも、この取り込みだけでは保証しない。
+
+`br` と段落を残し、radio／checkboxを区別。提供資料で確認できた注意書きの選択肢への混入は、本文へ移して正答位置を補正し、変換記録を残す。手動表示の選択肢も提供正答と一意に文字一致する場合だけ単一選択へ復元する。これは内容レビューではない。明示的な `data-type="freeText"` は採点保留の草稿として保存。表・画像・未知の形式・選択数不一致などは要確認の草稿に残す。取り込み先の資格やcollection不一致・同一コードの二重掲載・未対応のHTML全体はエラーにし、既存台帳を書き換えない。
+
+提供AB-730の前回抽出記録は124問（単一111・複数13）、内容確認済み・アプリ公開はいずれも0問。今回の環境では添付HTML原本は存在せず、前回の抽出記録を `content/ab730/question-drafts/previous-extraction.json` に保持している。現在の取り込み機能の検証は同構造の合成HTMLで行い、124問を再解析・内容確認したとは記録しない。対象版・分類・正答の資料確認・各選択肢理由を整えてから、少数の確認済み教材を資格設定へ登録する。
+
+取り込みCLIはPython標準ライブラリのみ。Schema検証テストには `jsonschema`、ブラウザテストには既存のPlaywright／Chromium、同期テストにはFirebase SDK／Emulatorを使用する。
+
+検証：`python tests/question-import.py`、`python tests/question-type-content.py`、`node --test tests/question-types.mjs`、`python tests/question-type-flow.py`。Firebase Rulesの複数選択はEmulatorで確認し、本番公開はFirebaseコンソールで別途必要。古いアプリは新形式の記録を受け取れないため、複数選択の本番教材を追加する前に各端末のアプリを更新する。

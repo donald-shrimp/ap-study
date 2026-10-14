@@ -1,3 +1,4 @@
+import {chooseAssessment} from '../domain/assessment.js';
 import {canUseQuestion} from '../domain/content-policy.js';
 import {setSyncStatus,workspaceStatusHTML} from '../ui/sync-status.js';
 import {planRevisionHTML} from '../ui/plan-history.js';
@@ -125,7 +126,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  async function change(el){
   if(getState().view==='planning'&&el.closest('form')){drafts.capture();return true;}
   if(el.name==='diagnostic-answer'){
-   if(busy)return true;setBusy(true);try{const original=row(getState().currentRunId);if(!original||original.payload.status!=='in_progress')throw new Error('この回は終了しています。');const run=structuredClone(original.payload);run.currentChoiceId=el.value;await write(original.kind,run.id,run,original.localRevision);}catch(error){onNotice(error.message);onUpdate();}finally{setBusy(false);}return true;
+   if(busy)return true;setBusy(true);try{const original=row(getState().currentRunId);if(!original||original.payload.status!=='in_progress')throw new Error('この回は終了しています。');const run=structuredClone(original.payload);chooseAssessment(run,el.value,el.checked);await write(original.kind,run.id,run,original.localRevision);}catch(error){onNotice(error.message);onUpdate();}finally{setBusy(false);}return true;
   }
   if(el.id==='import-diagnostics'){
    const file=el.files[0];if(!file)return true;

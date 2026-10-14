@@ -1,10 +1,11 @@
+import {isMultiple,canSubmit,chosenIds} from './domain/question-format.js';
 import {canUseQuestion} from './domain/content-policy.js';
 import {trendDetailHTML} from './ui/learning-trend.js';
 import {createPersonalFeature} from './features/personal.js';
 import {createLearningFeature} from './features/learning.js';
 import {initPWA, savedAssetURLs} from '../pwa.js';
 import {$,esc,now,day,dateText,timeText} from './utils.js';
-import {makeState,complete,labels,hintTotal,enriched,hintKind,createAttempt,openHint,gradeAttempt,finalizeAttempt,selectAnswer} from './domain/study.js';
+import {makeState,complete,labels,hintTotal,enriched,hintKind,createAttempt,openHint,gradeAttempt,finalizeAttempt,selectAnswer,toggleChoice} from './domain/study.js';
 import {createProgress} from './domain/review.js';
 import {learningFields,learningTrend,diagnosticFields} from './domain/analytics.js';
 import {allowsQuestion,contextLabel,attemptEntryMode} from './domain/study-context.js';
@@ -104,10 +105,10 @@ function materialUpdateAvailable(a) {
 }
 async function useLatestHints() {
   const old=current(); if(!old || !materialUpdateAvailable(old)) return;
-  const carrySelection=!complete(old), selected=old.selected, selectedId=old.selectedChoiceId??old.questionSnapshot?.choices[selected]?.id, confidence=old.confidence;
+  const carrySelection=!complete(old), selectedIds=chosenIds(old), selected=old.selected, selectedId=old.selectedChoiceId??old.questionSnapshot?.choices[selected]?.id, confidence=old.confidence;
   const created=await start(old.questionId);if(!created)return;
   // A new attempt keeps the previous hint history intact; unseen new hints start closed.
-  if(carrySelection) { const a=current();const index=selectedId?a.questionSnapshot.choices.findIndex(c=>c.id===selectedId):selected;selectAnswer(a,index);a.confidence=confidence;save();render(); }
+  if(carrySelection) { const a=current();const index=selectedId?a.questionSnapshot.choices.findIndex(c=>c.id===selectedId):selected;if(isMultiple(a.questionSnapshot)){for(const id of selectedIds)toggleChoice(a,id,true);}else selectAnswer(a,index);a.confidence=confidence;save();render(); }
 }
 function notice(message) { if($('#settings-dialog').open){$('#settings-status').textContent=message;return;}$('#notice').textContent = message; $('#notice').hidden = !message; }
 let saves=Promise.resolve(),saveVersion=0,recordMaintenance=null,saveFailureNotice=null;
@@ -279,7 +280,7 @@ main.addEventListener('click',async e=>{
     if(!openHint(a))return;
     const y=window.scrollY;save();render(false);window.scrollTo(0,y); const shown=document.querySelectorAll('.hint-box');shown[shown.length-1]?.focus({preventScroll:true});
   }
-  else if(action==='submit'&&a&&!complete(a)&&a.selected!==null) { finish(gradeAttempt(a,question(a.questionId).answer)); }
+  else if(action==='submit'&&a&&!complete(a)&&canSubmit(a)) { finish(gradeAttempt(a,question(a.questionId).answer)); }
   else if(action==='reveal'&&a&&!complete(a)) { a.answerViewedBefore=true;finish('revealed'); }
   else if(action==='edit') openEditor(el.dataset.id);
   else if(action==='export-materials') {await content.loadAll();download(base.map(q=>question(q.id)),`${qualification.id}-study-questions.json`);}
@@ -299,7 +300,7 @@ main.addEventListener('change',async e=>{
   if(await planner?.change(e.target))return;
   if(e.target.closest('#catalog-form'))return;
   const a=current();if(!a||complete(a))return;
-  if(e.target.name==='answer') {selectAnswer(a,Number(e.target.value),question(a.questionId));document.querySelectorAll('.choice').forEach(l=>l.classList.toggle('selected',$('input',l).checked)); $('[data-action="submit"]').disabled=false;}
+  if(e.target.name==='answer') {if(isMultiple(a.questionSnapshot))toggleChoice(a,a.questionSnapshot.choices[Number(e.target.value)].id,e.target.checked);else selectAnswer(a,Number(e.target.value),question(a.questionId));document.querySelectorAll('.choice').forEach(l=>l.classList.toggle('selected',$('input',l).checked)); $('[data-action="submit"]').disabled=!canSubmit(a);}
   else if(e.target.id==='confidence') a.confidence=e.target.checked;
   a.updatedAt=now();save();
 });

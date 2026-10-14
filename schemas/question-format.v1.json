@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://donald-shrimp.github.io/ap-study/schemas/question-format.v1.json",
+  "title": "ひと問 作成元の問題形式 v1",
+  "description": "問題オブジェクトの形式部分を検証。資格・分野・出典・確認記録はビルダーで別途検証する。記述式は草稿保存のみで公開不可。",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "type": {
+      "enum": [
+        "singleChoice",
+        "multipleChoice",
+        "freeText"
+      ]
+    },
+    "stem": {
+      "type": "string"
+    },
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "correctChoiceId": {
+      "type": "string"
+    },
+    "correctChoiceIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "referenceAnswer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceImages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "type": {
+          "const": "singleChoice"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "const": "exactChoiceSet"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "choices",
+        "correctChoiceId"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "correctChoiceIds"
+            ]
+          },
+          {
+            "required": [
+              "selection"
+            ]
+          },
+          {
+            "required": [
+              "referenceAnswer"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "multipleChoice"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "const": "exactChoiceSet"
+            }
+          },
+          "additionalProperties": false
+        },
+        "selection": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "const": "all"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "const": "exact"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "mode",
+                "count"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "choices",
+        "correctChoiceIds",
+        "selection"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "correctChoiceId"
+            ]
+          },
+          {
+            "required": [
+              "referenceAnswer"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "freeText"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "const": "deferred"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "grading",
+        "referenceAnswer",
+        "stem"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "choices"
+            ]
+          },
+          {
+            "required": [
+              "correctChoiceId"
+            ]
+          },
+          {
+            "required": [
+              "correctChoiceIds"
+            ]
+          },
+          {
+            "required": [
+              "selection"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$comment": "正答IDの所属、選択肢IDの一意性、exact.countと正答数の一致はtools/build-content.pyでも検証。省略された単一選択のgradingはexactChoiceSet。",
+  "anyOf": [
+    {
+      "required": [
+        "stem"
+      ],
+      "properties": {
+        "stem": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    {
+      "required": [
+        "sourceImages"
+      ]
+    }
+  ]
+}

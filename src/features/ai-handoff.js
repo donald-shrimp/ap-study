@@ -1,3 +1,4 @@
+import {chosenIds,correctIds,selectionInstruction} from '../domain/question-format.js';
 // AI explanation handoff. Allow clipboard consumers to settle before navigation.
 export const CLIPBOARD_SETTLE_MS=500;
 // No AI API, study-record mutation, or unverified OCR transcription.
@@ -23,9 +24,9 @@ function formatChoice(choice,baseURL) {
 
 export function buildAIPrompt({question:q,attempt:a,qualification,detail='',baseURL}){
  if(!q||!a||!['correct','assisted','incorrect','revealed'].includes(a.status))throw Error('解答後の問題だけAIに渡せます。');
- const choices=Array.isArray(q.choices)?q.choices:[];
- if(!choices.length||!Number.isInteger(q.answer)||!choices[q.answer])throw Error('選択肢と正解の情報がありません。');
- const selected=Number.isInteger(a.selected)&&choices[a.selected]?formatChoice(choices[a.selected],baseURL):'回答せず、解答を確認';
+ const choices=Array.isArray(q.choices)?q.choices.map((c,i)=>({...c,id:c.id??'choice-'+i})):[];
+ if(!choices.length||!correctIds(q).every(id=>choices.some(c=>c.id===id)))throw Error('選択肢と正解の情報がありません。');
+ const selectedIds=chosenIds(a,q),selected=selectedIds.length?choices.filter(c=>selectedIds.includes(c.id)).map(c=>formatChoice(c,baseURL)).join('\n'):'回答せず、解答を確認';
  const images=imageURLs(q,baseURL).map((src,i)=>'原本・図 '+(i+1)+'：'+src);
  const prompt=[
   '資格試験のこの問題について、既存の解説を読んでも理解できませんでした。日本語で分かりやすく説明してください。何を問う問題か、必要な用語、解法を考える順番、計算や判断の根拠を省略せず、最後に確認問題を1つ出してください。',
@@ -35,9 +36,9 @@ export function buildAIPrompt({question:q,attempt:a,qualification,detail='',base
   '【問題文】',
   nonempty(q.stem)||'この問題は原本画像で掲載されています。原文の文字起こしは確認できていません。画像を見られない場合は推測せず、画像の添付を依頼してください。',
   '【選択肢】',
-  choices.map(c=>formatChoice(c,baseURL)).join('\n'),
+  (q.type==='multipleChoice'?selectionInstruction(q)+'\n':'')+choices.map(c=>formatChoice(c,baseURL)).join('\n'),
   '【正解】',
-  formatChoice(choices[q.answer],baseURL),
+  choices.filter(c=>correctIds(q).includes(c.id)).map(c=>formatChoice(c,baseURL)).join('\n'),
   '【私の回答】',
   selected,
   '【採点結果】',

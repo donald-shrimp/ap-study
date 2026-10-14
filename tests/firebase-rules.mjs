@@ -192,3 +192,28 @@ test('親なし独自40問の診断・模試を別資格で保存でき、用途
  const foreign=env.authenticatedContext('other').firestore();await assertFails(getDoc(doc(foreign,ref(mock.id).path)));
  const a=createAttempt({...independent[0],uses:['practice'],hints:[]});await assertSucceeds(setDoc(doc(db,path('generic',a.id,'synthetic')),envelope(a)));a.questionSnapshot.uses=['diagnostic','mock'];await assertFails(setDoc(doc(db,path('generic',a.id,'synthetic')),envelope(a,2)));
 });
+
+test('複数選択の途中・採点・回答後ヒントを同期し、不明ID・重複・部分正解・型の混在を拒否',async()=>{
+ const multi={...structuredClone(q),type:'multipleChoice',answer:null,correctChoiceIds:['choice-0','choice-2'],selection:{mode:'exact',count:2},grading:{method:'exactChoiceSet'}};delete multi.correctChoiceId;
+ const uid='multi-rules',db=env.authenticatedContext(uid).firestore(),a=createAttempt(multi),ref=doc(db,path(uid,a.id));
+ await assertSucceeds(setDoc(ref,envelope(a)));a.selectedChoiceIds=['choice-2'];await assertSucceeds(setDoc(ref,envelope(a,2)));
+ for(const ids of [['unknown'],['choice-0','choice-0'],['choice-0',null]])await assertFails(setDoc(ref,envelope({...a,selectedChoiceIds:ids},3)));
+ for(const patch of [{selected:0},{selectedChoiceId:'choice-0'}])await assertFails(setDoc(ref,envelope({...a,...patch},3)));
+ const partial=structuredClone(a);finalizeAttempt(partial,'correct');await assertFails(setDoc(ref,envelope(partial,3)));
+ const short=structuredClone(a);finalizeAttempt(short,'incorrect');await assertFails(setDoc(ref,envelope(short,3)));
+ a.selectedChoiceIds=['choice-0','choice-2'];finalizeAttempt(a,gradeAttempt(a));await assertSucceeds(setDoc(ref,envelope(a,3)));openHint(a);await assertSucceeds(setDoc(ref,envelope(a,4)));
+ await assertFails(setDoc(ref,envelope({...a,selectedChoiceIds:['choice-1','choice-2'],status:'incorrect'},5)));
+ const wrong=createAttempt(multi);wrong.selectedChoiceIds=['choice-1','choice-2'];finalizeAttempt(wrong,gradeAttempt(wrong));await assertSucceeds(setDoc(doc(db,path(uid,wrong.id)),envelope(wrong)));
+ const twenty={...structuredClone(multi),choices:Array.from({length:20},(_,i)=>({id:'choice-'+i,label:String(i+1),text:'検証用'})),correctChoiceIds:['choice-0','choice-19']};const wide=createAttempt(twenty);wide.selectedChoiceIds=['choice-0','choice-19'];finalizeAttempt(wide,gradeAttempt(wide));await assertSucceeds(setDoc(doc(db,path(uid,wide.id)),envelope(wide)));
+ const defer=createAttempt(multi);defer.questionSnapshot.type='freeText';defer.questionSnapshot.grading={method:'deferred'};await assertFails(setDoc(doc(db,path(uid,defer.id)),envelope(defer)));
+});
+test('複数選択の診断・固定模試は配列の途中回答を保存し、確定組合せを変更できない',async()=>{
+ const questions=Array.from({length:30},(_,i)=>{const m={...structuredClone(q),id:'multi-'+i,type:'multipleChoice',sourceKind:'authored',uses:['diagnostic','mock'],answer:null,correctChoiceIds:['choice-0','choice-2'],selection:{mode:'exact',count:2},grading:{method:'exactChoiceSet'}};delete m.correctChoiceId;return m;});
+ const db=env.authenticatedContext('multi-assessment').firestore();
+ const set={id:'multi-fixed',label:'合成テスト',version:1,status:'ready',size:30,slots:questions.map((q,i)=>({number:i+1,questionId:q.id,topicId:q.topicId}))};
+ for(const [kind,run] of [['diagnostic',createDiagnostic(questions,qualification)],['mock',createMock(set,questions,qualification)]]){
+  const ref=doc(db,resourcePath('multi-assessment',run.id));await assertSucceeds(setDoc(ref,resourceEnvelope(kind,run)));run.currentChoiceId=['choice-2'];await assertSucceeds(setDoc(ref,resourceEnvelope(kind,run,2)));
+  run.currentChoiceId=['choice-0','choice-2'];submitDiagnostic(run,run.currentChoiceId);await assertSucceeds(setDoc(ref,resourceEnvelope(kind,run,3)));
+  const changed=structuredClone(run);changed.responses[run.slots[0].id]=['choice-1','choice-2'];await assertFails(setDoc(ref,resourceEnvelope(kind,changed,4)));
+ }
+});

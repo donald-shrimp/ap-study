@@ -1,5 +1,22 @@
 # 動作・教材の確認
 
+## 問題形式・複数HTMLの追加入稿（2026-10-14）
+
+リリース `20261014-question-types1`。問題形式 `singleChoice`／`multipleChoice`／`freeText` と採点方法を分離。公開の単一・複数選択は組み合わせ完全一致で採点。記述式は参考解答と採点保留の未確認草稿だけに対応し、公開生成と受験から除外する。APの教材データと生成済みパックは変更なし。
+
+- `node --test tests/*.mjs`：153件通過（ドメイン等135件＋実Firestore Rules18件）。複数選択の順不同・指定数・選び忘れ・余分な選択・支援／解答閲覧・保存形式・途中選択・終了後採点・AI／結果Exportを確認。Rulesは未知／重複ID、単一形式との混在、不正な正解・確定回答の変更を拒否。20択の上限も実Emulatorで通過。Rulesの評価式上限に収まるよう選択肢IDリストを共有する。
+- `tests/question-type-content.py`：非公開合成教材の通常・専用バンク・軽量索引・正答IDの並び・正答数・採点方法・確認ハッシュを検証。単一／複数の混在や記述式の本番登録を拒否。
+- `tests/question-import.py`：同構造の合成HTMLで、改行・radio／checkbox・選択数・手動表示の復元・注意書き移動・記述式草稿・未知の形式・再取り込み・改訂を残す競合・選択肢順を無視した重複候補・台帳分離・失敗バッチで既存台帳保持を確認。スクリプトは実行しない。提供正答の内容レビューをしたテストではない。
+- `tests/question-type-flow.py`：320／390／1280px、複数選択の操作と選択数によるボタン制御、通常学習の部分選択保存・正解・AI、診断の中断／オフライン再開／終了後採点、固定模試の選択保存／不正解／結果、通常記録への非混入。確定回答の配列を参照で比較して終了できなくなる箇所を内容比較へ修正。
+- `tests/question-type-sync.py`：非公開の合成資格を実SDK＋Auth／Firestore Emulatorへ接続。別ブラウザで通常問題の部分選択を受信し、別端末継続の確定正解を送り返す。診断の配列チェックポイント・終了結果を同期。実Firebaseプロジェクトには書き込んでいない。
+- AP保持：`tools/build-content.py`、`tests/content.py`、`tests/corpus.py`、`tests/transcriptions.py`、`tests/mobile-content.py`。通常800問・文字起こし798＋画像保持2・単語帳681・派生180・固定模試A／B各80を保持。作成元、公開教材、画像、文字起こし、確認記録に差分なし。
+- 既存動線：`tests/common-content.py`／`common-flow.py`／`qualifications.py`／`storage.py`／`e2e.py`／`pwa.py`。通常開始、ヒント、回答、教材更新、分野・復習、資格分離、未保存保護、原本画像、リリース更新・オフライン・中断記録を維持。文字表示のブラウザ確認は `tests/transcription-ui.py` を代表6問に限定して実行（全798問走査は中断し、通過扱いにはしない）。
+
+AB-730は公開0問。前回の未確認抽出124問（単一111・複数13）を `content/ab730/question-drafts/previous-extraction.json` に保持。今回の環境に添付HTML原本がないため、新しい取り込み機能で元4ファイルを再解析したとは扱わない。本文・正答・参照の内容確認と新台帳への移行は次の作業。新しいSchemaと手順は `docs/content-authoring.md`／`schemas/question-format.v1.json`、概要は `docs/common-foundation.html#types`。
+
+Firebase Rulesはリポジトリへ更新。今回の本番ルール配備は未実行。複数選択教材の公開前に、コンソールで最新版を公開し、利用端末のアプリを更新する必要がある。GitHub Pagesの公開確認は以下に追記する。
+
+
 ## ヘッダーの余白と資格選択の矢印（2026-10-13）
 
 リリース `20261013-header-spacing1`。矢印は「▼」。ヘッダーをひと問・資格選択・設定の3列にし、資格選択を中央の内容幅に合わせた淡い背景のボタンへ変更。スマホは左右20px・列間最低16px・高さ最低72pxで上下にも余白を取る。長い資格名は省略表示を維持。

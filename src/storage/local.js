@@ -12,7 +12,7 @@ const sharedFields = ['settings','readingNotes','overrides'];
 const checkpoint = state => ({version:state.version,currentId:state.currentId,currentRunId:state.currentRunId||null,view:state.view,session:state.session});
 const shared = state => Object.fromEntries(sharedFields.map(k=>[k,state[k]]));
 const transport = a => {const {scrollY,readingNote,entryMode,practiceScope,deferred,...payload}=a;return JSON.parse(JSON.stringify(payload));};
-const changedResult = (before,after) => ['status','selected','selectedChoiceId','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));
+const changedResult = (before,after) => ['status','selected','selectedChoiceId','selectedChoiceIds','confidence','completedAt','hintsBeforeAnswer','answerViewedBefore','questionSnapshot','materialSnapshot'].some(k=>serial(before[k])!==serial(after[k]));
 
 // Records and their durable outgoing item commit together. Navigation, scroll,
 // display settings and personal material stay local. Mutable learning metadata

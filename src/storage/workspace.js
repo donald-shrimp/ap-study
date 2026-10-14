@@ -28,7 +28,7 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
    if(kind==='planRevision'&&(id!==payload.id||old&&!samePayload(old.payload,payload)))throw new Error('同じIDの異なる計画履歴は保存できません。');
    if(['diagnostic','mock'].includes(kind)&&old){
     if(old.payload.status!=='in_progress'&&serial(old.payload)!==serial(payload))throw new Error('終了した診断は変更できません。');
-    if(['blueprintVersion','selectionPolicy','catalogRevision','size','startedAt','mode','mockSet'].some(k=>serial(old.payload[k])!==serial(payload[k]))||serial(old.payload.slots)!==serial(payload.slots)||Object.entries(old.payload.responses).some(([id,value])=>!Object.hasOwn(payload.responses,id)||payload.responses[id]!==value))throw new Error('診断の出題方針・問題と確定した回答は変更できません。');
+    if(['blueprintVersion','selectionPolicy','catalogRevision','size','startedAt','mode','mockSet'].some(k=>serial(old.payload[k])!==serial(payload[k]))||serial(old.payload.slots)!==serial(payload.slots)||Object.entries(old.payload.responses).some(([id,value])=>!Object.hasOwn(payload.responses,id)||serial(payload.responses[id])!==serial(value)))throw new Error('診断の出題方針・問題と確定した回答は変更できません。');
    }
    const localRevision=(old?.localRevision||0)+1,operationId=`${deviceId}:${id}:${localRevision}`;
    const row={owner,qualificationId,id,kind,payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)};

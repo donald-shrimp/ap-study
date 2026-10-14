@@ -1,5 +1,6 @@
-import {createAttempt,selectAnswer,finalizeAttempt} from './study.js';
-import {questionFamily,questionKind,canUseQuestion,} from './content-policy.js';
+import {isMultiple,validResponse,canonicalIds,canSubmitIds,correctIds,sameChoices} from './question-format.js';
+import {createAttempt,selectAnswer,finalizeAttempt,toggleChoice} from './study.js';
+import {questionFamily,questionKind,canUseQuestion} from './content-policy.js';
 import {validAssessmentSize,validSelectionPolicy,diagnosticPolicy} from './assessment-policy.js';
 import {weightedQuotas} from './assessment-sampling.js';
 export function createAssessment(questions,qualification,attempts=[],catalogRevision='',{mode='diagnostic'}={}){
@@ -10,8 +11,8 @@ export function createAssessment(questions,qualification,attempts=[],catalogRevi
 export function submitAssessment(run,choiceId){
  if(run.status!=='in_progress')throw new Error('終了した診断には回答できません。');
  const slot=run.slots[run.currentIndex];if(Object.hasOwn(run.responses,slot.id))throw new Error('この回答は確定しています。');
- if(choiceId!==null&&!slot.attempt.questionSnapshot.choices.some(c=>c.id===choiceId))throw new Error('有効な選択肢を選んでください。');
- run.responses[slot.id]=choiceId;run.currentChoiceId=null;
+ if(choiceId!==null&&(!validResponse(slot.attempt.questionSnapshot,choiceId)||!canSubmitIds(slot.attempt.questionSnapshot,Array.isArray(choiceId)?choiceId:[choiceId])))throw new Error('有効な選択肢を選んでください。');
+ run.responses[slot.id]=Array.isArray(choiceId)?[...choiceId]:choiceId;run.currentChoiceId=null;
  if(run.currentIndex<run.size-1)run.currentIndex++;else finishAssessment(run);
  return run;
 }
@@ -25,7 +26,7 @@ const resultsCache=new WeakMap();
 export function assessmentAttempts(run){
  if(run.status==='in_progress')return [];
  if(resultsCache.has(run))return resultsCache.get(run);
- const result=run.slots.filter(s=>Object.hasOwn(run.responses,s.id)&&run.responses[s.id]!==null).map(s=>{const a=structuredClone(s.attempt);a.id=s.id;selectAnswer(a,a.questionSnapshot.choices.findIndex(c=>c.id===run.responses[s.id]));finalizeAttempt(a,run.responses[s.id]===a.questionSnapshot.correctChoiceId?'correct':'incorrect',run.completedAt);a.diagnosticRunId=run.id;return a;});
+ const result=run.slots.filter(s=>Object.hasOwn(run.responses,s.id)&&run.responses[s.id]!==null).map(s=>{const a=structuredClone(s.attempt);a.id=s.id;const q=a.questionSnapshot,response=run.responses[s.id];if(isMultiple(q)){for(const id of response)toggleChoice(a,id,true);}else selectAnswer(a,q.choices.findIndex(c=>c.id===response));finalizeAttempt(a,sameChoices(Array.isArray(response)?response:[response],correctIds(q))?'correct':'incorrect',run.completedAt);a.diagnosticRunId=run.id;return a;});
  resultsCache.set(run,result);return result;
 }
 export function assessmentExposure(run){
@@ -37,7 +38,7 @@ export function assessmentResult(run,qualification){
  const byId=new Map(attempts.map(a=>[a.id,a]));
  const topics=new Map();
  for(const s of run.slots){const q=s.attempt.questionSnapshot;topics.set(q.topicId,{id:q.topicId,name:q.topic||topics.get(q.topicId)?.name||q.topicId});}
- const items=run.slots.map((s,i)=>{const q=s.attempt.questionSnapshot;return {questionId:q.id,questionVersion:q.version,...Object.fromEntries(['syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs'].filter(k=>q[k]!==undefined).map(k=>[k,structuredClone(q[k])])),topicId:q.topicId,kind:s.kind||questionKind(q),parentQuestionId:s.parentQuestionId||null,previouslySeen:s.previouslySeen,parentPreviouslySeen:s.parentPreviouslySeen??null,exposed:i<=run.currentIndex||Object.hasOwn(run.responses,s.id),skipped:Object.hasOwn(run.responses,s.id)&&run.responses[s.id]===null,outcome:byId.get(s.id)?.status||'unanswered'};});
+ const items=run.slots.map((s,i)=>{const q=s.attempt.questionSnapshot;return {questionId:q.id,questionVersion:q.version,...(isMultiple(q)?{type:q.type,selection:structuredClone(q.selection),grading:structuredClone(q.grading||{method:'exactChoiceSet'}),selectedChoiceIds:byId.get(s.id)?.selectedChoiceIds||[]}:{}),...Object.fromEntries(['syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs'].filter(k=>q[k]!==undefined).map(k=>[k,structuredClone(q[k])])),topicId:q.topicId,kind:s.kind||questionKind(q),parentQuestionId:s.parentQuestionId||null,previouslySeen:s.previouslySeen,parentPreviouslySeen:s.parentPreviouslySeen??null,exposed:i<=run.currentIndex||Object.hasOwn(run.responses,s.id),skipped:Object.hasOwn(run.responses,s.id)&&run.responses[s.id]===null,outcome:byId.get(s.id)?.status||'unanswered'};});
  return {id:run.id,status:run.status,completedAt:run.completedAt,size:run.size,answered:attempts.length,correct,incorrect:attempts.length-correct,unanswered:run.size-attempts.length,exposed:assessmentExposure(run).length,skipped:Object.values(run.responses).filter(value=>value===null).length,correctRate:attempts.length?correct/attempts.length:null,previouslySeen:run.slots.filter(s=>s.previouslySeen).length,assistance:'none',blueprintVersion:run.blueprintVersion,selectionPolicy:run.selectionPolicy?structuredClone(run.selectionPolicy):null,catalogRevision:run.catalogRevision,composition:sourceCounts(run.slots),items,topics:[...topics.values()].map(t=>{const rows=attempts.filter(a=>a.questionSnapshot.topicId===t.id);return {topicId:t.id,label:t.name,answered:rows.length,correct:rows.filter(a=>a.status==='correct').length,composition:sourceCounts(run.slots.filter(s=>s.attempt.questionSnapshot.topicId===t.id))};})};
 }
 export function assessmentSlots(run){
@@ -56,8 +57,8 @@ export function validateAssessment(run,qualification,validateAttempt,{size,diagn
   // A saved question and policy retain their scope even if the catalog changes.
   if(typeof q.topicId!=='string'||!q.topicId||typeof q.examPartId!=='string'||!q.examPartId||!canUseQuestion(q,diagnostic?'diagnostic':'mock'))fail();
   if(!diagnostic||run.blueprintVersion>=2){if(slot.kind!==questionKind(q)||slot.parentQuestionId!==(q.parentQuestionId||null)||(q.parentQuestionId?typeof slot.parentPreviouslySeen!=='boolean':slot.parentPreviouslySeen!==null)||families.has(family))fail();families.add(family);}else if(!canUseQuestion(q,'practice'))fail();
-  if(a.status!=='in_progress'||a.hintCount!==0||a.hintEvents.length||a.answerViewedBefore||a.selected!==null||questions.has(a.questionId)||a.qualificationId!==qualification.id)fail();questions.add(a.questionId);
-  if(Object.hasOwn(run.responses,slot.id)&&run.responses[slot.id]!==null&&!a.questionSnapshot.choices.some(c=>c.id===run.responses[slot.id]))fail();
+  if(a.status!=='in_progress'||a.hintCount!==0||a.hintEvents.length||a.answerViewedBefore||a.selected!==null||(a.selectedChoiceIds?.length||0)>0||questions.has(a.questionId)||a.qualificationId!==qualification.id)fail();questions.add(a.questionId);
+  if(Object.hasOwn(run.responses,slot.id)&&run.responses[slot.id]!==null&&(!validResponse(q,run.responses[slot.id])||!canSubmitIds(q,Array.isArray(run.responses[slot.id])?run.responses[slot.id]:[run.responses[slot.id]])))fail();
  }
  if(diagnostic&&run.selectionPolicy){
   const p=run.selectionPolicy,topics=new Set(run.slots.map(s=>s.attempt.questionSnapshot.topicId));
@@ -69,9 +70,17 @@ export function validateAssessment(run,qualification,validateAttempt,{size,diagn
   }
  }
  if(Object.keys(run.responses).some(id=>!ids.has(id)))fail();
- if(run.currentChoiceId!==null&&!run.slots[run.currentIndex].attempt.questionSnapshot.choices.some(c=>c.id===run.currentChoiceId))fail();
+ if(run.status!=='in_progress'&&run.currentChoiceId!==null)fail();
+ if(run.currentChoiceId!==null&&!validResponse(run.slots[run.currentIndex].attempt.questionSnapshot,run.currentChoiceId,{empty:true}))fail();
  for(let i=0;i<run.currentIndex;i++)if(!Object.hasOwn(run.responses,run.slots[i].id))fail();
  if(run.status==='in_progress'&&run.slots.slice(run.currentIndex).some(s=>Object.hasOwn(run.responses,s.id)))fail();
  if(run.status==='completed'&&Object.keys(run.responses).length!==size)fail();
  return structuredClone(run);
+}
+
+export function chooseAssessment(run,id,checked=true){
+ if(run.status!=='in_progress'||Object.hasOwn(run.responses,run.slots[run.currentIndex].id))throw Error('この回答は確定しています。');
+ const q=run.slots[run.currentIndex].attempt.questionSnapshot;if(!q.choices.some(c=>c.id===id))throw Error('選択肢を確認できません。');
+ if(!isMultiple(q)){run.currentChoiceId=id;return;}
+ const ids=new Set(run.currentChoiceId||[]);if(checked)ids.add(id);else ids.delete(id);run.currentChoiceId=canonicalIds(q,[...ids]);
 }

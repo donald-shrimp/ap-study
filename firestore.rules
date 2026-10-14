@@ -3,8 +3,59 @@ service cloud.firestore {
  match /databases/{database}/documents {
   function mine(uid) { return request.auth != null && request.auth.uid == uid; }
   function completed(p) { return p.status in ['correct','assisted','incorrect','revealed']; }
+  function choiceIds(q) {
+   // Rules cannot map a list: choices are bounded at 20 by the shared contract.
+   return [q.choices[0].id, q.choices[1].id,
+    q.choices.size() > 2 ? q.choices[2].id : null,
+    q.choices.size() > 3 ? q.choices[3].id : null,
+    q.choices.size() > 4 ? q.choices[4].id : null,
+    q.choices.size() > 5 ? q.choices[5].id : null,
+    q.choices.size() > 6 ? q.choices[6].id : null,
+    q.choices.size() > 7 ? q.choices[7].id : null,
+    q.choices.size() > 8 ? q.choices[8].id : null,
+    q.choices.size() > 9 ? q.choices[9].id : null,
+    q.choices.size() > 10 ? q.choices[10].id : null,
+    q.choices.size() > 11 ? q.choices[11].id : null,
+    q.choices.size() > 12 ? q.choices[12].id : null,
+    q.choices.size() > 13 ? q.choices[13].id : null,
+    q.choices.size() > 14 ? q.choices[14].id : null,
+    q.choices.size() > 15 ? q.choices[15].id : null,
+    q.choices.size() > 16 ? q.choices[16].id : null,
+    q.choices.size() > 17 ? q.choices[17].id : null,
+    q.choices.size() > 18 ? q.choices[18].id : null,
+    q.choices.size() > 19 ? q.choices[19].id : null];
+  }
+  function validIds(ids,available) {
+   return ids is list && ids.size() <= 20 && ids.toSet().size() == ids.size()
+    && !ids.hasAny([null]) && ids.hasOnly(available);
+  }
+  function multi(q) { return q.type == 'multipleChoice'; }
+  function validMulti(p) {
+   let q=p.questionSnapshot;
+   let available=choiceIds(q);
+   return !('correctChoiceId' in q) && q.answer == null && validIds(q.correctChoiceIds,available) && q.correctChoiceIds.size() > 0
+    && q.selection is map && (q.selection == {'mode':'all'} || q.selection.keys().hasOnly(['mode','count']) && q.selection.mode == 'exact' && q.selection.count is int && q.selection.count == q.correctChoiceIds.size())
+    && p.selected == null && p.selectedChoiceId == null && validIds(p.selectedChoiceIds,available);
+  }
+  function validFormat(p) {
+   let q=p.questionSnapshot;
+   return (!('grading' in q) || q.grading == {'method':'exactChoiceSet'})
+    && (multi(q) ? validMulti(p)
+     : q.type == 'singleChoice' && !('correctChoiceIds' in q) && !('selection' in q) && !('selectedChoiceIds' in p)
+      && q.answer is int && q.answer >= 0 && q.answer < q.choices.size() && q.correctChoiceId == q.choices[q.answer].id
+      && (p.selected == null || p.selected is int && p.selected >= 0 && p.selected < q.choices.size())
+      && p.selectedChoiceId == (p.selected == null ? null : q.choices[p.selected].id));
+  }
+  function submitted(p) {
+   return multi(p.questionSnapshot)
+    ? p.selectedChoiceIds.size() > 0 && (p.questionSnapshot.selection.mode == 'all' || p.selectedChoiceIds.size() == p.questionSnapshot.selection.count)
+    : p.selected != null;
+  }
+  function right(p) {
+   return multi(p.questionSnapshot) ? p.selectedChoiceIds.toSet() == p.questionSnapshot.correctChoiceIds.toSet() : p.selected == p.questionSnapshot.answer;
+  }
   function valid(p, id, qualificationId) {
-   return p.keys().hasOnly(['id','qualificationId','questionId','questionVersion','contentRevision','topic','topicId','readingNote','status','startedAt','updatedAt','completedAt','selected','selectedChoiceId','hintCount','hintsBeforeAnswer','hintEvents','answerViewedBefore','confidence','questionSnapshot','materialSnapshot','continuationOf','continuedAt','importedFrom'])
+   return p.keys().hasOnly(['id','qualificationId','questionId','questionVersion','contentRevision','topic','topicId','readingNote','status','startedAt','updatedAt','completedAt','selected','selectedChoiceId','selectedChoiceIds','hintCount','hintsBeforeAnswer','hintEvents','answerViewedBefore','confidence','questionSnapshot','materialSnapshot','continuationOf','continuedAt','importedFrom'])
     && p.id == id && p.qualificationId == qualificationId
     && p.questionId is string && p.questionVersion is int && p.contentRevision is string
     && p.status in ['in_progress','postponed','correct','assisted','incorrect','revealed']
@@ -19,13 +70,11 @@ service cloud.firestore {
     && p.hintCount is int && p.hintCount >= 0 && p.hintCount <= p.materialSnapshot.hints.size()
     && p.hintEvents is list && p.hintEvents.size() == p.hintCount
     && p.questionSnapshot.choices is list && p.questionSnapshot.choices.size() >= 2 && p.questionSnapshot.choices.size() <= 20
-    && p.questionSnapshot.answer is int && p.questionSnapshot.answer >= 0 && p.questionSnapshot.answer < p.questionSnapshot.choices.size()
-    && (p.selected == null || p.selected is int && p.selected >= 0 && p.selected < p.questionSnapshot.choices.size())
-    && p.selectedChoiceId == (p.selected == null ? null : p.questionSnapshot.choices[p.selected].id)
+    && validFormat(p)
     && (completed(p) ? p.completedAt is string && p.hintsBeforeAnswer is int && p.hintsBeforeAnswer >= 0 && p.hintsBeforeAnswer <= p.hintCount : p.completedAt == null && p.hintsBeforeAnswer == null)
-    && (p.status != 'correct' || p.selected == p.questionSnapshot.answer && p.hintsBeforeAnswer == 0 && !p.answerViewedBefore)
-    && (p.status != 'assisted' || p.selected == p.questionSnapshot.answer && p.hintsBeforeAnswer > 0 && !p.answerViewedBefore)
-    && (p.status != 'incorrect' || p.selected != null && p.selected != p.questionSnapshot.answer && !p.answerViewedBefore)
+    && (p.status != 'correct' || right(p) && p.hintsBeforeAnswer == 0 && !p.answerViewedBefore)
+    && (p.status != 'assisted' || right(p) && p.hintsBeforeAnswer > 0 && !p.answerViewedBefore)
+    && (p.status != 'incorrect' || submitted(p) && !right(p) && !p.answerViewedBefore)
     && (p.status != 'revealed' || p.answerViewedBefore);
   }
   function envelope(id, qualificationId) {
@@ -44,7 +93,7 @@ service cloud.firestore {
     && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
     && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < p.size
     && p.responses is map && p.responses.size() <= p.size
-    && (p.currentChoiceId == null || p.currentChoiceId is string)
+    && (p.currentChoiceId == null || p.currentChoiceId is string || p.currentChoiceId is list && p.currentChoiceId.size() <= 20)
     && p.slots is list && p.slots.size() == p.size;
   }
   function validMock(p, id, qualificationId) {
@@ -60,7 +109,7 @@ service cloud.firestore {
     && p.startedAt is string && (p.status == 'in_progress' ? p.completedAt == null : p.completedAt is string)
     && p.currentIndex is int && p.currentIndex >= 0 && p.currentIndex < p.size
     && p.responses is map && p.responses.size() <= p.size
-    && (p.currentChoiceId == null || p.currentChoiceId is string)
+    && (p.currentChoiceId == null || p.currentChoiceId is string || p.currentChoiceId is list && p.currentChoiceId.size() <= 20)
     && p.slots is list && p.slots.size() == p.size;
   }
   function frozenDiagnostic(p, old) {

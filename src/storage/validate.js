@@ -1,3 +1,4 @@
+import {validChoiceFormat,isMultiple,chosenIds,correctIds,sameChoices,validResponse,canSubmit} from '../domain/question-format.js';
 import {labels, complete} from '../domain/study.js';
 import {validQuestionPolicy,canUseQuestion} from '../domain/content-policy.js';
 
@@ -5,7 +6,7 @@ const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation','uses','sourceKind','familyId','syllabusId','language','objectiveIds','objectivesSnapshot','syllabus','sourceRefs'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceIds','selection','grading','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation','uses','sourceKind','familyId','syllabusId','language','objectiveIds','objectivesSnapshot','syllabus','sourceRefs'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
@@ -25,13 +26,13 @@ function material(m, choices) {
 function questionSnapshot(q, qualificationId) {
   return q && Object.keys(q).every(k=>questionFields.includes(k)) && id(q.id)
     && validQuestionPolicy(q)
-    && q.qualificationId===qualificationId && q.type==='singleChoice'
+    && q.qualificationId===qualificationId
     && (q.choicePresentation===undefined||q.choicePresentation==='inline'||q.choicePresentation==='codes'&&Boolean(q.image))
     && Number.isInteger(q.version) && text(q.title) && text(q.topic)
     && Array.isArray(q.choices) && q.choices.length>=2 && q.choices.length<=20
     && new Set(q.choices.map(c=>c.id)).size===q.choices.length
     && q.choices.every(c=>c && Object.keys(c).every(k=>['id','label','text','image'].includes(k)) && id(c.id) && text(c.label,100) && (c.text===undefined||text(c.text)) && safeURL(c.image))
-    && Number.isInteger(q.answer) && q.answer>=0 && q.answer<q.choices.length && q.choices[q.answer].id===q.correctChoiceId
+    && validChoiceFormat(q)
     && Array.isArray(q.sourceImages) && q.sourceImages.every(safeURL)
     && Array.isArray(q.imageSizes) && q.imageSizes.length===q.sourceImages.length
     && q.imageSizes.every(s=>s && Number.isFinite(s.width) && s.width>0 && Number.isFinite(s.height) && s.height>0)
@@ -76,10 +77,11 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
       if(!q || !canUseQuestion(q,'practice')&&!allowDiagnosticOnly || !material(a.materialSnapshot,q.choices.length))fail();
       if(!(a.topic===undefined||a.topic===null||a.topic===q.topic)||!(a.readingNote===undefined||text(a.readingNote,200)))fail();
       if(!date(a.startedAt)||!date(a.updatedAt)||!(a.selected===null||Number.isInteger(a.selected)&&a.selected>=0&&a.selected<q.choices.length)||!Number.isInteger(a.hintCount)||a.hintCount<0||a.hintCount>a.materialSnapshot.hints.length||typeof a.confidence!=='boolean'||typeof a.answerViewedBefore!=='boolean'||!Number.isFinite(a.scrollY)||a.scrollY<0||!text(a.contentRevision,100)||!Number.isInteger(a.questionVersion))fail();
+      if(isMultiple(q)){if(a.selected!==null||a.selectedChoiceId!==null||!validResponse(q,a.selectedChoiceIds,{empty:true}))fail();}else if(a.selectedChoiceIds!==undefined)fail();
       if(a.selectedChoiceId!==undefined && a.selectedChoiceId!==(a.selected===null?null:q.choices[a.selected].id))fail();
       if(complete(a)?!date(a.completedAt)||!Number.isInteger(a.hintsBeforeAnswer)||a.hintsBeforeAnswer<0||a.hintsBeforeAnswer>a.hintCount:a.completedAt!==null||a.hintsBeforeAnswer!==null)fail();
       if(!Array.isArray(a.hintEvents)||a.hintEvents.length!==a.hintCount||a.hintEvents.some((e,i)=>!e||e.step!==i+1||!date(e.at)||!['before','after'].includes(e.phase)))fail();
-      if(a.status==='correct'&&(a.selected!==q.answer||a.hintsBeforeAnswer!==0||a.answerViewedBefore)||a.status==='assisted'&&(a.selected!==q.answer||a.hintsBeforeAnswer===0||a.answerViewedBefore)||a.status==='incorrect'&&(a.selected===null||a.selected===q.answer)||a.status==='revealed'&&!a.answerViewedBefore)fail();
+      if(a.status==='correct'&&(!sameChoices(chosenIds(a,q),correctIds(q))||a.hintsBeforeAnswer!==0||a.answerViewedBefore)||a.status==='assisted'&&(!sameChoices(chosenIds(a,q),correctIds(q))||a.hintsBeforeAnswer===0||a.answerViewedBefore)||a.status==='incorrect'&&(!canSubmit(a,q)||sameChoices(chosenIds(a,q),correctIds(q))||a.answerViewedBefore)||a.status==='revealed'&&!a.answerViewedBefore)fail();
       ids.add(a.id);
     }
     if(s.currentId!==null&&!ids.has(s.currentId)||s.session.attemptIds.some(id=>!ids.has(id))||new Set(s.session.attemptIds).size!==s.session.attemptIds.length)fail();
