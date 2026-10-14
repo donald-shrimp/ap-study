@@ -14,7 +14,7 @@
 
 AB-730は公開0問。前回の未確認抽出124問（単一111・複数13）を `content/ab730/question-drafts/previous-extraction.json` に保持。今回の環境に添付HTML原本がないため、新しい取り込み機能で元4ファイルを再解析したとは扱わない。本文・正答・参照の内容確認と新台帳への移行は次の作業。新しいSchemaと手順は `docs/content-authoring.md`／`schemas/question-format.v1.json`、概要は `docs/common-foundation.html#types`。
 
-Firebase Rulesはリポジトリへ更新。今回の本番ルール配備は未実行。複数選択教材の公開前に、コンソールで最新版を公開し、利用端末のアプリを更新する必要がある。GitHub Pagesの公開確認は以下に追記する。
+Firebase Rulesはリポジトリへ更新。今回の本番ルール配備は未実行。複数選択教材の公開前に、コンソールで最新版を公開し、利用端末のアプリを更新する必要がある。実装コミット `bdf9075` をmainへ非forceで反映し、Pages run `38491685286` の成功を確認。公開先は https://donald-shrimp.github.io/ap-study/ 。公開の15ファイル（共通モジュール・Schema・ガイド・Rules・APマニフェスト・未確認抽出を含む）とローカルのバイト一致、公開画面の320／390／1280px、AP単一選択の開始・正解・AI質問、読みやすい形式ガイドを確認した。本番FirebaseのRules適用とは別である。
 
 
 ## ヘッダーの余白と資格選択の矢印（2026-10-13）
