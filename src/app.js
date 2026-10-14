@@ -442,6 +442,7 @@ try {
   const previous=preferredQualification(appRoot),choose=new URL(location.href).searchParams.has('qualifications');
   content=await loadCatalog(document.documentElement.dataset.qualification,{preferredId:previous,choose});
   if(content.choose){
+    document.querySelector('.workspace').classList.add('qualification-selection');
     main.innerHTML=qualificationChooserHTML(content.qualifications,appRoot,previous);
     document.querySelector('.sidebar').hidden=true;$('#settings-button').hidden=true;document.querySelector('.app-footer').hidden=true;document.title='ひと問｜資格を選ぶ';return;
   }

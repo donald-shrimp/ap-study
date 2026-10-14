@@ -131,6 +131,8 @@
 .qualification-switch>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .qualification-switch>span:last-child{flex-shrink:0;font-size:.6rem;color:var(--muted)}
 .qualification-switch[aria-busy=true]{opacity:.6;pointer-events:none}
+/* The chooser has no sidebar: use one centered column at every desktop width. */
+.workspace.qualification-selection{grid-template-columns:minmax(0,1fr);max-width:960px}
 .qualification-list{display:grid;gap:12px;margin-top:20px}
 .qualification-option{display:flex;justify-content:space-between;align-items:center;text-align:left;gap:16px;padding:16px}
 .qualification-option .small{display:block;margin-top:4px}

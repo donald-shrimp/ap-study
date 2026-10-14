@@ -51,6 +51,17 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
             page.goto(url);page.get_by_role('heading',name='資格を選ぶ').wait_for()
             assert page.locator('#main a').count()==2
+            # With the sidebar hidden, desktop auto-placement must not use its narrow grid column.
+            for width in [320,390,800,801,1024,1440,1920,2560]:
+                page.set_viewport_size({'width':width,'height':1080})
+                rect=page.locator('.qualification-chooser').bounding_box()
+                assert rect['width']>=min(width-70,600),(width,rect)
+                assert abs(rect['x']+rect['width']/2-width/2)<2,(width,rect)
+                assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),width
+                assert page.locator('.qualification-option').count()==2
+            page.screenshot(path=str(ARTIFACTS/'chooser-desktop.png'))
+            page.set_viewport_size({'width':390,'height':844})
+
             page.locator('.brand').click();assert page.get_by_role('heading',name='資格を選ぶ').is_visible()
             page.locator('.qualification-option').filter(has_text='fixture-a').click();page.locator('.quick-start').wait_for()
             assert page.locator('.study-entrance').count()==1
