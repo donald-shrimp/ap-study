@@ -1,6 +1,6 @@
 # 資格・科目をヘッダから選ぶ改修計画
 
-保存日：2026-10-15（JST）。状態：実装・ローカル検証済み。main反映とPages公開確認へ進む。
+保存日：2026-10-15（JST）。状態：実装・検証・main反映とPages公開確認を完了。公開実装commitはb3989c9。結果はlearning-target-navigation-progress.jsonを参照。
 確認したmain：`d8c99263ff2db383f4edb92e918828929f6b3c43`。関連：[科目A/Bと共通計画](ap-subject-b-plan.md)。
 
 ## 目指す使い方
