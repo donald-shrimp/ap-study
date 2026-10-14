@@ -1,3 +1,4 @@
+import {toRecord,fromRecord} from '../v2/records.js';
 import {validateLearning,learningId,contextPayload} from '../domain/learning-state.js';
 import {makeState, complete} from '../domain/study.js';
 
@@ -19,7 +20,7 @@ const changedResult = (before,after) => ['status','selected','selectedChoiceId',
 // uses its own outbox in meta. A guest queue never targets a UID.
 export function createLocalStore({qualificationId,rootPath='/',key,validate,owner:requestedOwner}={}) {
  if(!qualificationId)throw new Error('保存する資格が指定されていません。');
- const databaseName=`hitomon:${rootPath}:records`;
+ const databaseName=`hitomon:${rootPath}:records-v2`;
  let dbPromise,queue=Promise.resolve(),owner,deviceId,baseline=new Map(),baselineShared=shared(makeState()),remaps=new Map(),closed=false,seenGeneration=0;
  let tabId;
  try {const name=`hitomon:${rootPath}:tab`;tabId=sessionStorage.getItem(name)||crypto.randomUUID();sessionStorage.setItem(name,tabId);}catch{tabId=crypto.randomUUID();}
@@ -45,9 +46,9 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
   const db=await database(),tx=db.transaction(['meta','attempts'],'readonly'),done=finished(tx),meta=tx.objectStore('meta');
   const [common,local,rows]=await Promise.all([request(meta.get(sharedKey())),request(meta.get(tabKey())),request(tx.objectStore('attempts').index('namespace').getAll(scope()))]);await done;
   if(!common)return null;
-  const state={...makeState(),...common.data,...(local?.data||common.checkpoint),attempts:rows.map(r=>r.data).sort((a,b)=>a.startedAt.localeCompare(b.startedAt)||a.id.localeCompare(b.id))};
+  const state={...makeState(),...common.data,...(local?.data||common.checkpoint),attempts:rows.map(r=>fromRecord(r.data)).sort((a,b)=>a.startedAt.localeCompare(b.startedAt)||a.id.localeCompare(b.id))};
   const ids=new Set(state.attempts.map(a=>a.id));if(!ids.has(state.currentId)){state.currentId=null;if(state.view==='study')state.view='home';}state.session.attemptIds=state.session.attemptIds.filter(id=>ids.has(id));
-  if(remember){baseline=new Map(rows.map(r=>[r.id,{data:serial(r.data),revision:r.revision}]));baselineShared=structuredClone(shared(state));seenGeneration=common.generation;}
+  if(remember){baseline=new Map(rows.map(r=>[r.id,{data:serial(fromRecord(r.data)),revision:r.revision}]));baselineShared=structuredClone(shared(state));seenGeneration=common.generation;}
   return serial(state);
  }
  async function commit(input,{replace=false,ifAbsent=false,learningOperations=[]}={}){
@@ -62,7 +63,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
    const [common,rows]=await Promise.all([request(meta.get(sharedKey())),request(attempts.index('namespace').getAll(scope()))]);
    if(ifAbsent&&common){await done;return {attempts:[],remap:{}};}
    if(common&&seenGeneration&&common.generation!==seenGeneration&&!replace)throw new Error('別タブで記録が初期化・読み込みされています。書き出して保管後、再読み込みしてください。');
-   const existing=new Map(rows.map(r=>[r.id,r])),mapping={},nextBaseline=replace?new Map():new Map(baseline);
+   const existing=new Map(rows.map(r=>[r.id,{...r,data:fromRecord(r.data)}])),mapping={},nextBaseline=replace?new Map():new Map(baseline);
    if(replace){for(const r of rows){attempts.delete([owner,qualificationId,r.id]);outbox.delete([owner,qualificationId,r.id]);}existing.clear();}
    for(const a of state.attempts){
     if(a.qualificationId!==undefined&&a.qualificationId!==qualificationId)throw new Error('資格が異なる学習記録を保存できません。');
@@ -84,8 +85,8 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
     }
     const old=existing.get(a.id),metadataOnly=old&&serial(transport(old.data))===serial(transport(a)),revision=metadataOnly?old.revision:(old?.revision||0)+1;
     const originDevice=metadataOnly||old&&complete(old.data)&&complete(a)&&!changedResult(old.data,a)?old.deviceId:deviceId;
-    const row={owner,qualificationId,id:a.id,deviceId:originDevice,revision,data:a};attempts.put(row);existing.set(a.id,row);
-    const payload=transport(a),semantic=serial(payload);
+    const row={owner,qualificationId,id:a.id,deviceId:originDevice,revision,data:a};attempts.put({...row,data:toRecord(a)});existing.set(a.id,row);
+    const payload=toRecord(a),semantic=serial(transport(a));
     if(replace||!old||serial(transport(old.data))!==semantic){
      const blocked=new TextEncoder().encode(semantic).length>900000;
      outbox.put({owner,qualificationId,id:a.id,deviceId:originDevice,revision,operationId:`${a.id}:${revision}`,payload,blocked});
@@ -116,12 +117,8 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
  function write(state,options){
   const copy=structuredClone(state);const operation=queue.catch(()=>{}).then(()=>commit(copy,options));queue=operation;return operation;
  }
- async function read(){
-  const raw=await snapshot({remember:true});if(raw!==null)return raw;
-  let legacy;try{legacy=key&&localStorage.getItem(key);}catch{}
-  if(!legacy||requestedOwner)return null;
-  try{const state=validate(JSON.parse(legacy));await write(state,{ifAbsent:true});return await snapshot({remember:true});}catch{return legacy;}
- }
+ async function read(){return snapshot({remember:true});}
+
  async function pending(){await queue.catch(()=>{});const db=await database(),tx=db.transaction('outbox'),done=finished(tx);const rows=await request(tx.objectStore('outbox').index('namespace').getAll(scope()));await done;return rows;}
  async function acknowledge(id,revision){const db=await database(),tx=db.transaction('outbox','readwrite'),done=finished(tx),store=tx.objectStore('outbox'),row=await request(store.get([owner,qualificationId,id]));if(row?.revision===revision)store.delete([owner,qualificationId,id]);await done;}
  const cursorKey=()=>`${owner}|${qualificationId}|sync-cursor`;
@@ -136,8 +133,8 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
      // Never overwrite an unsent local answer/checkpoint. The uploader handles
      // foreign-device collisions by giving that local work a new UUID.
      if(pending||existing&&existing.deviceId===row.deviceId&&existing.revision>=row.revision)continue;
-     const data={...row.payload,scrollY:existing?.data.scrollY||0,readingNote:existing?.data.readingNote||'',...(existing?.data.entryMode?{entryMode:existing.data.entryMode}:{}),...(existing?.data.practiceScope?{practiceScope:existing.data.practiceScope}:{}),...(existing?.data.deferred!==undefined?{deferred:existing.data.deferred}:{})};
-     attempts.put({owner,qualificationId,id:row.id,deviceId:row.deviceId,revision:row.revision,data});changed.push(data);
+     const previous=existing?fromRecord(existing.data):null;const data={...fromRecord(row.payload),scrollY:previous?.scrollY||0,readingNote:previous?.readingNote||''};
+     attempts.put({owner,qualificationId,id:row.id,deviceId:row.deviceId,revision:row.revision,data:toRecord(data)});changed.push(data);
     }
     if(nextCursor)tx.objectStore('meta').put({key:cursorKey(),data:nextCursor});
     await done;return changed;
@@ -149,12 +146,12 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
    const db=await database(),tx=db.transaction(['meta','attempts','outbox'],'readwrite'),done=finished(tx),attempts=tx.objectStore('attempts'),outbox=tx.objectStore('outbox'),key=[owner,qualificationId,id];
    try{
     const [row,item]=await Promise.all([request(attempts.get(key)),request(outbox.get(key))]);if(!row||item?.revision!==revision){await done;return null;}
-    const newId=crypto.randomUUID(),data={...row.data,id:newId,continuationOf:id,continuedAt:new Date().toISOString()};
+    const newId=crypto.randomUUID(),data={...fromRecord(row.data),id:newId,continuationOf:id,continuedAt:new Date().toISOString()};
     // Keep the original until the next remote page supplies its authoritative
     // version, but stop trying to publish this device's copy under its ID.
-    outbox.delete(key);attempts.put({...row,id:newId,deviceId,revision:1,data});
+    outbox.delete(key);attempts.put({...row,id:newId,deviceId,revision:1,data:toRecord(data)});
     const context=contextPayload(data);if(context)await putLearning(tx.objectStore('meta'),{id:learningId('context',context),kind:'context',payload:context,expectedLocalRevision:0});
-    outbox.put({...item,id:newId,deviceId,revision:1,operationId:`${newId}:1`,payload:transport(data)});
+    outbox.put({...item,id:newId,deviceId,revision:1,operationId:`${newId}:1`,payload:toRecord(data)});
     const local=await request(tx.objectStore('meta').get(tabKey()));if(local){if(local.data.currentId===id)local.data.currentId=newId;local.data.session.attemptIds=local.data.session.attemptIds.map(x=>x===id?newId:x);tx.objectStore('meta').put(local);}
     await done;baseline.set(newId,{data:serial(data),revision:1});remaps.set(id,newId);return {before:id,after:newId,data};
    }catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}

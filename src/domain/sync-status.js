@@ -1,4 +1,4 @@
-export const syncLabels={local:'端末の保存',study:'回答・ヒント',planning:'計画・診断・模試',learning:'出題の設定',cards:'単語帳',personal:'メモ・再開位置'};
+export const syncLabels={local:'端末の保存',study:'回答・ヒント',planning:'計画・診断・模試',learning:'出題の設定',cards:'単語帳',written:'科目B',personal:'メモ・再開位置'};
 const failed=new Set(['error','blocked','rules','mock-rules','history-rules','extended-rules']);
 export function summarizeSync(states,signedIn){
  const special={'mock-rules':'模試','history-rules':'計画の履歴','extended-rules':'模試・計画の履歴'};

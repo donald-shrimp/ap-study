@@ -102,7 +102,7 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false}={}
     await loading.get(pack.id);
     return question;
   }
-  return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, online:loaded.online && index.online,
+  return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, loadCases:async()=>{if(!manifest.cases)return [];const {value}=await readJSON(new URL(manifest.cases.url,manifestURL),manifest.cases.sha256);if(value.format!=='hitomon-case-bank'||value.version!==2||value.qualificationId!==manifest.id||value.cases.length!==manifest.cases.count)throw contentError('大問教材を確認できません。','科目B');return value.cases;}, online:loaded.online && index.online,
     loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }

@@ -5,7 +5,7 @@ const done=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=(
 const chunks=items=>Array.from({length:Math.ceil(items.length/200)},(_,i)=>items.slice(i*200,i*200+200));
 export function createCardStore({rootPath,owner,qualificationId,deviceId}){
  const scope=[owner,qualificationId];let connection,queue=Promise.resolve(),localDevice=deviceId;
- async function db(){if(!connection)connection=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:cards`,1);r.onupgradeneeded=()=>{const events=r.result.createObjectStore('events',{keyPath:['owner','qualificationId','id']});events.createIndex('namespace',['owner','qualificationId']);r.result.createObjectStore('checkpoints',{keyPath:['owner','qualificationId']});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return connection;}
+ async function db(){if(!connection)connection=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon-v2:${rootPath}:cards`,1);r.onupgradeneeded=()=>{const events=r.result.createObjectStore('events',{keyPath:['owner','qualificationId','id']});events.createIndex('namespace',['owner','qualificationId']);r.result.createObjectStore('checkpoints',{keyPath:['owner','qualificationId']});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return connection;}
  function operation(fn){const op=queue.then(async()=>{const database=await db(),tx=database.transaction(['events','checkpoints'],'readwrite'),finished=done(tx),store=tx.objectStore('events'),cps=tx.objectStore('checkpoints');try{
    const [raw,oldCheckpoint]=await Promise.all([request(store.index('namespace').getAll(scope)),request(cps.get(scope))]);
    const checkpoint=oldCheckpoint||{owner,qualificationId,value:null};localDevice||=checkpoint.sync?.deviceId||crypto.randomUUID();checkpoint.sync={...checkpoint.sync,deviceId:localDevice};
@@ -27,7 +27,7 @@ export function createCardStore({rootPath,owner,qualificationId,deviceId}){
  });}
  const clear=()=>operation(({rows,checkpoint,put,make})=>{for(const eventIds of chunks(visibleCardEvents([...rows.values()]).map(e=>e.id)))put(make('reset',{id:crypto.randomUUID(),eventIds}));checkpoint.value=null;});
  function accept(remote,{rows,put}){
-  validateCardDocument(remote);if(remote.version!==1||remote.revision!==1||remote.operationId!==remote.id||typeof remote.deviceId!=='string'||!remote.deviceId.length||remote.deviceId.length>100)throw new Error('単語帳の同期形式が正しくありません。');
+  validateCardDocument(remote);if(remote.version!==2||remote.revision!==1||remote.operationId!==remote.id||typeof remote.deviceId!=='string'||!remote.deviceId.length||remote.deviceId.length>100)throw new Error('単語帳の同期形式が正しくありません。');
   const old=rows.get(remote.id);if(old&&(old.kind!==remote.kind||!sameCardPayload(old.payload,remote.payload)))throw new Error('同じIDの異なる単語帳記録があります。');
   put({owner,qualificationId,id:remote.id,kind:remote.kind,payload:structuredClone(remote.payload),deviceId:remote.deviceId,operationId:remote.id,dirty:false,remoteRevision:1,localRevision:1});
  }

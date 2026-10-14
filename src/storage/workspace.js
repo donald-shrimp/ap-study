@@ -1,15 +1,17 @@
+import {encodeResourceRow,decodeResourceRow} from '../v2/resources.js';
 // Mutable plans and diagnostic runs use compare-and-swap, independently of
 // immutable learning attempts. The outbox and local document commit together.
-const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(decodeResourceRow(r.result));r.onerror=()=>reject(r.error);});
 const finished=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||new Error('保存を中止しました。'));tx.onerror=()=>{};});
 const serial=JSON.stringify;
 export const MAX_WORKSPACE_BYTES=850000;
 export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,validate,namespaceName='workspace',planHistory=null}){
  let dbPromise,queue=Promise.resolve(),validationError=null;
  const namespace=[owner,qualificationId],key=id=>[...namespace,id],samePayload=(a,b)=>planHistory?planHistory.canonical(a)===planHistory.canonical(b):serial(a)===serial(b);
- async function db(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:${namespaceName}`,1);r.onupgradeneeded=()=>{const store=r.result.createObjectStore('documents',{keyPath:['owner','qualificationId','id']});store.createIndex('namespace',['owner','qualificationId']);};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});return dbPromise;}
+ async function db(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon-v2:${rootPath}:${namespaceName}`,1);r.onupgradeneeded=()=>{const store=r.result.createObjectStore('documents',{keyPath:['owner','qualificationId','id']});store.createIndex('namespace',['owner','qualificationId']);};r.onsuccess=()=>resolve(decodeResourceRow(r.result));r.onerror=()=>reject(r.error);});return dbPromise;}
+ const objectStore=tx=>{const raw=tx.objectStore('documents');return {get:(...a)=>raw.get(...a),index:(...a)=>raw.index(...a),delete:(...a)=>raw.delete(...a),put:row=>raw.put(encodeResourceRow(row)),add:row=>raw.add(encodeResourceRow(row))};};
  async function read(){const database=await db(),tx=database.transaction('documents'),done=finished(tx),rows=await request(tx.objectStore('documents').index('namespace').getAll(namespace));await done;validationError=null;return rows.filter(row=>{try{validate(row.kind,row.payload);return true;}catch(error){validationError=error;return false;}});}
- function transaction(callback){const op=queue.catch(()=>{}).then(async()=>{const database=await db(),tx=database.transaction('documents','readwrite'),done=finished(tx);try{const result=await callback(tx.objectStore('documents'));await done;return result;}catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}});queue=op;return op;}
+ function transaction(callback){const op=queue.catch(()=>{}).then(async()=>{const database=await db(),tx=database.transaction('documents','readwrite'),done=finished(tx);try{const result=await callback(objectStore(tx));await done;return result;}catch(error){try{tx.abort();}catch{}await done.catch(()=>{});throw error;}});queue=op;return op;}
  async function archivePlanning(store,before,after,origin='edited',force=false){
   if(!planHistory||!force&&before&&planHistory.canonical(before)===planHistory.canonical(after))return;
   const rows=await request(store.index('namespace').getAll(namespace));
@@ -29,6 +31,10 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
    if(['diagnostic','mock'].includes(kind)&&old){
     if(old.payload.status!=='in_progress'&&serial(old.payload)!==serial(payload))throw new Error('終了した診断は変更できません。');
     if(['blueprintVersion','selectionPolicy','catalogRevision','size','startedAt','mode','mockSet'].some(k=>serial(old.payload[k])!==serial(payload[k]))||serial(old.payload.slots)!==serial(payload.slots)||Object.entries(old.payload.responses).some(([id,value])=>!Object.hasOwn(payload.responses,id)||serial(payload.responses[id])!==serial(value)))throw new Error('診断の出題方針・問題と確定した回答は変更できません。');
+   }
+   if(kind==='case'&&old){
+    if(['format','version','kind','id','qualificationId','examPartId','caseId','caseVersion','material','mode','startedAt'].some(k=>serial(old.payload[k])!==serial(payload[k])))throw Error('大問の教材・開始条件は変更できません。');
+    for(const [key,response] of Object.entries(old.payload.responses))if(response.submittedAt){const next=payload.responses[key];if(!next||next.value!==response.value||next.submittedAt!==response.submittedAt||response.evaluation&&serial(next.evaluation)!==serial(response.evaluation))throw Error('確定した回答・評価は変更できません。新しく解き直してください。');}
    }
    const localRevision=(old?.localRevision||0)+1,operationId=`${deviceId}:${id}:${localRevision}`;
    const row={owner,qualificationId,id,kind,payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)};
@@ -63,8 +69,8 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
    return result;
   });
  }
- function merge(remote){
-  if(remote.version!==1||!Number.isInteger(remote.revision)||remote.revision<1||typeof remote.deviceId!=='string'||typeof remote.operationId!=='string'||remote.kind==='planning'&&remote.id!=='planning'||['diagnostic','mock','planRevision'].includes(remote.kind)&&remote.id!==remote.payload?.id)throw new Error('同期データの形式を確認できません。');
+ function merge(remote){remote=decodeResourceRow(remote);
+  if(remote.version!==2||!Number.isInteger(remote.revision)||remote.revision<1||typeof remote.deviceId!=='string'||typeof remote.operationId!=='string'||remote.kind==='planning'&&remote.id!=='planning'||['diagnostic','mock','planRevision'].includes(remote.kind)&&remote.id!==remote.payload?.id)throw new Error('同期データの形式を確認できません。');
   const payload=validate(remote.kind,remote.payload);
   return transaction(async store=>{const old=await request(store.get(key(remote.id)));
    if(remote.kind==='planRevision'&&old&&!samePayload(old.payload,payload))throw new Error('同期された計画履歴のIDが重複しています。既存の履歴は保持しました。');
@@ -82,7 +88,7 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
   const row={...old,remoteRevision:remote.revision};if(old.operationId===operationId){row.dirty=false;row.conflict=null;}store.put(row);return row;
  });}
  function resolve(id,useLocal){return transaction(async store=>{const old=await request(store.get(key(id)));if(!old?.conflict)return old;
-  if(useLocal&&['diagnostic','mock'].includes(old.kind))throw new Error('診断の確定回答は上書きできません。この端末の診断は別の回として保存してください。');
+  if(useLocal&&['diagnostic','mock','case'].includes(old.kind))throw new Error('診断の確定回答は上書きできません。この端末の診断は別の回として保存してください。');
   if(old.kind==='planning')await archivePlanning(store,useLocal?validate('planning',old.conflict.payload):old.payload,useLocal?old.payload:validate('planning',old.conflict.payload),'resolved',true);
   const localRevision=old.localRevision+1,row=useLocal?{...old,localRevision,remoteRevision:old.conflict.revision,conflict:null,operationId:`${deviceId}:${id}:${localRevision}`,deviceId,dirty:true}:{...old,payload:validate(old.kind,old.conflict.payload),localRevision,remoteRevision:old.conflict.revision,deviceId:old.conflict.deviceId,operationId:old.conflict.operationId,dirty:false,conflict:null,ancestors:[]};store.put(row);return row;
  });}

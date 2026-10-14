@@ -13,6 +13,9 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from written_content import compile_cases
 ROOT = Path(__file__).resolve().parents[1]
 SAFE_ID = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$')
 MAX_ASSESSMENT_SIZE = 200
@@ -406,12 +409,14 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     assessment=compile_assessments(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if assessment is not None:
         manifest['assessment']=assessment
     mock_sets=compile_mock_sets(root,config,questions,directory)
     if mock_sets is not None:manifest['mockSets']=mock_sets
+    cases=compile_cases(root,config,directory,hashed_json)
+    if cases is not None:manifest['cases']=cases
     manifest.update(compile_learning_tools(root, config, questions, directory))
     write_json(directory / 'manifest.json', manifest)
     return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions)}, config

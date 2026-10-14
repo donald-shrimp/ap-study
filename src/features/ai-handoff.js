@@ -60,7 +60,7 @@ export function buildAIPrompt({question:q,attempt:a,qualification,detail='',base
  return prompt.join('\n\n');
 }
 
-export function createAIHandoff({getAttempt,getQuestion,getQualification,getBaseURL,beforeNavigate=()=>true}){
+export function createAIHandoff({getAttempt,getQuestion,getQualification,getBaseURL,beforeNavigate=()=>true,buildPrompt=buildAIPrompt}){
  const dialog=document.getElementById('ai-handoff-dialog');
  const $=id=>dialog.querySelector('#'+id);
  const buttons=[...dialog.querySelectorAll('[data-ai-provider]')];
@@ -85,7 +85,7 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
  }
  function prompt(){
   if(!snapshot)throw Error('質問する問題を開き直してください。');
-  return buildAIPrompt({...snapshot,detail:$('ai-handoff-detail').value});
+  return buildPrompt({...snapshot,detail:$('ai-handoff-detail').value});
  }
  function refresh(){
   const text=prompt();

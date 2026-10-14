@@ -1,3 +1,4 @@
+import {fromRecord} from '../v2/records.js';
 // Transport-independent synchronization; remote pages and their cursor commit
 // together. The bound UID/store cannot change while an operation is in flight.
 export function createSyncEngine({uid,qualificationId,store,remote,validateAttempt,onRecords=()=>{},onFork=()=>{},onStatus=()=>{},isOnline=()=>navigator.onLine}){
@@ -9,8 +10,8 @@ export function createSyncEngine({uid,qualificationId,store,remote,validateAttem
   while(active()&&more){
    const page=await bounded(remote.pull(uid,qualificationId,cursor));if(!active())return;
    for(const row of page.rows){
-    if(row.version!==1||row.id!==row.payload?.id||!Number.isInteger(row.revision)||row.revision<1||typeof row.deviceId!=='string')throw new Error('同期データの形式を確認できません。');
-    validateAttempt({...row.payload,scrollY:0});
+    if(row.version!==2||row.id!==row.payload?.id||!Number.isInteger(row.revision)||row.revision<1||typeof row.deviceId!=='string')throw new Error('同期データの形式を確認できません。');
+    validateAttempt(fromRecord(row.payload));
    }
    const pending=new Map((await store.pending()).map(item=>[item.id,item]));
    for(const row of page.rows){const item=pending.get(row.id);if(item&&item.deviceId!==row.deviceId){
@@ -31,7 +32,7 @@ export function createSyncEngine({uid,qualificationId,store,remote,validateAttem
    for(let index=0;index<items.length&&active();index++){
     const item=items[index];if(item.blocked){blocked++;continue;}
     if(item.owner!==`uid:${uid}`||item.qualificationId!==qualificationId)throw new Error('送信先のアカウントが一致しません。');
-    validateAttempt({...item.payload,scrollY:0});
+    validateAttempt(fromRecord(item.payload));
     const result=await bounded(remote.push(uid,qualificationId,item));if(!active())return;
     if(result==='fork'){
      const fork=await store.forkPending(item.id,item.revision);if(fork){onFork(fork);items.push(...(await store.pending()).filter(x=>x.id===fork.after));}
