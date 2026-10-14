@@ -1075,3 +1075,5 @@ tests/transcriptions.py・content.py・mobile-content.py・corpus.py成功。既
 応用情報関連と共通の変更不要な基盤1589ファイルをmain `87b0688` のGit blobと現在バイト列で比較し、完全一致。`content/ab730/authoring/ap-preservation.json` に全対象とSHAを保存。Firestore Rules・認証設定・保存基盤・PWA IDとscope・styles.cssは不変。シェル版 `20261014-ab730-content1` を更新し、AB-730の入口と資格カタログ・問題パックを追加。ユーザーがRules公開済みと報告しているが、本人のログイン済み本番同期をこちらで操作したとは扱わない。
 
 完成教材と確認記録は `content/ab730/questions.json`／`reviews.json`、全件の分類と次の対象は `progress.json`。保存した承認対象と異なるレコードを公開しない。
+
+公開確認：教材コミット `6a19f0e89c88323746472f6bebf31833919778a2` を最新mainとの整合確認後、非forceで反映。GitHub Pagesは同じコミットで `built`（2026-10-14 05:02:20 UTC）。カタログ・各入口・本文モジュール・全7パックと索引・作成元／レビュー／進捗・問題確認ページ・AP通常800問など24公開ファイルのSHA-256がローカルと一致。実サイト390pxでも初回資格一覧、AB-730の単一／複数採点・全候補理由・30問診断入口・記録を作らない174問一覧を確認し、実行時エラーなし。本番のGoogleログインやFirestoreへの書き込みは行っていない。[公開確認の保存記録](ab730-publication.json)。
