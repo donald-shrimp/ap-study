@@ -1,8 +1,8 @@
 {
   "format": "hitomon-implementation-progress",
   "version": 1,
-  "updatedAt": "2026-10-14T17:44:28.111540+00:00",
-  "status": "implementation_in_progress",
+  "updatedAt": "2026-10-14T18:54:36.569014+00:00",
+  "status": "implementation_verified_ready_for_publication",
   "plan": "docs/ap-subject-b-plan.md",
   "worktree": "/workspace/ap-study-subject-b",
   "branch": "feature/subject-b",
@@ -22,17 +22,36 @@
     "v2のみのExport/Importと一回変換の合成照合",
     "科目A/Bの画面・端末中断・オフライン・バックアップ往復を実ブラウザで検証",
     "単一/複数/診断/模試のcanonical記録・本文図の維持",
-    "新版Rulesのエミュレータ検証と処理量上限の修正"
+    "新版Rulesのエミュレータ検証と処理量上限の修正",
+    "Node163件と新モデルの回答・評価分離／20欄／まとめ同期の検証通過",
+    "実ブラウザの保存失敗・未保存入力Export・再試行と再読込通過",
+    "A/B・AB-730・模試・診断・計画・履歴・PWA・AIの回帰確認"
   ],
   "remaining": [
-    "保存・同期・共通計画・A/AB既存機能の残りの回帰確認",
-    "ドキュメント・main反映とPages公開確認",
-    "新版Firestore Rulesの本番公開（CLIの認証がないためユーザー操作が必要）",
-    "本人バックアップの受領・一回変換・取り込み（ファイル未提供、実装とは区別）"
+    "mainへの非force反映・Pages完了と公開ファイル一致確認",
+    "新版Firestore Rulesの本番公開（管理者認証がないためユーザー操作が必要）",
+    "本人バックアップ3ファイルの受領・一回変換・取り込み（未提供。実装と区別）"
   ],
   "authors": [
     "/root",
     "/root/author_subject_b_pilot"
   ],
-  "completedDefinition": "新形式へ統一した学習・科目A/B分離・共有計画・B教材レビューと自己評価・保存同期バックアップAIを実装し検証・公開済み。未実施の本人データ移行は別途明記。"
+  "completedDefinition": "新形式へ統一した学習・科目A/B分離・共有計画・B教材レビューと自己評価・保存同期バックアップAIを実装し検証・公開済み。未実施の本人データ移行は別途明記。",
+  "verification": {
+    "nodeTests": 163,
+    "writtenCases": 1,
+    "writtenItems": 6,
+    "writtenFields": 8,
+    "ordinaryAP": 800,
+    "flashcardsAP": 681,
+    "assessmentAP": 180,
+    "fixedMockSetsAP": 2,
+    "ordinaryAB730": 174,
+    "transcriptionsAP": 798,
+    "retainedImagesAP": 2,
+    "saveFailure": "passed",
+    "caseSync": "SDK/emulators; two browsers and batched multi-field CAS passed",
+    "productionRules": "not deployed; CLI authentication unavailable",
+    "personalMigration": "not executed; files not received"
+  }
 }

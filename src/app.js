@@ -338,7 +338,7 @@ $('#settings-dialog').addEventListener('change',async e=>{
 $('#text-smaller').addEventListener('click',()=>changeTextSize(Math.max(50,(state.settings.textSize??100)-10)));
 $('#text-larger').addEventListener('click',()=>changeTextSize(Math.min(140,(state.settings.textSize??100)+10)));
 $('#text-reset').addEventListener('click',()=>changeTextSize(100));
-$('#export-state').addEventListener('click',async()=>{const target=store,token=navigation;await personal?.flush();await written?.flush();await saves;if(target!==store||token!==navigation){notice('保存先が変わりました。もう一度書き出してください。');return;}download(corruptRaw??{...encodeState({...state,workspaceBackup:planner?.backup(),learningBackup:learning?.backup(),writtenBackup:written?.backup()})},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
+$('#export-state').addEventListener('click',async()=>{const target=store,token=navigation;await personal?.flush();await written?.flush({allowUncommitted:true});await saves;if(target!==store||token!==navigation){notice('保存先が変わりました。もう一度書き出してください。');return;}download(corruptRaw??{...encodeState({...state,workspaceBackup:planner?.backup(),learningBackup:learning?.backup(),writtenBackup:written?.backup()})},`${qualification.id}-study-record-${day(now())}.json`,corruptRaw!==null);});
 // Full record replacement is guest-only. Keep navigation, background saves and
 // owner changes behind this short maintenance barrier, then display committed data.
 async function maintainRecords(operation){

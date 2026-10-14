@@ -1,16 +1,16 @@
-"""Real IndexedDB durability: legacy ratings, atomic outbox and controls/cursor."""
+"""Real IndexedDB durability: explicit v2 ratings, atomic outbox and controls/cursor."""
 import shutil
 from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
- b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);pg=b.new_page();pg.goto('http://127.0.0.1:4173/');pg.locator('.quick-start').wait_for()
+ b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);pg=b.new_page();pg.goto('http://127.0.0.1:4173/ap/');pg.locator('.quick-start').wait_for()
  result=pg.evaluate('''async()=>{
  const {createCardStore}=await import('./src/storage/cards.js'),rootPath=new URL('.',document.baseURI).pathname,owner='test-store',qualificationId='ap';const identity={rootPath,owner,qualificationId,deviceId:'device'};
  const e={id:'old',cardId:'one',cardVersion:1,outcome:'again',at:'2026-10-10T00:00:00.000Z'};
  let s=createCardStore(identity);await s.read();await s.close();
  // Seed the actual pre-sync v1 database layout.
- const db=await new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:cards`,1);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+ const db=await new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon:${rootPath}:cards`,1);r.onupgradeneeded=()=>r.result.createObjectStore('events',{keyPath:['owner','qualificationId','id']});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
  await new Promise((resolve,reject)=>{const tx=db.transaction('events','readwrite');tx.objectStore('events').put({...e,owner,qualificationId});tx.oncomplete=resolve;tx.onabort=reject;});db.close();
- s=createCardStore(identity);const initial=await s.read(),legacy=await s.syncStore().read();if(initial.events.length!==1||!legacy[0].dirty)throw Error('legacy lost');
+ s=createCardStore(identity);if((await s.read()).events.length)throw Error('old namespace auto-imported');await s.importEvents([e]);const initial=await s.read(),legacy=await s.syncStore().read();if(initial.events.length!==1||!legacy[0].dirty)throw Error('explicit import lost');
  const cursor={seconds:1,nanoseconds:2,id:'rating--old'};await s.syncStore().setCursor(cursor);await s.write({cardId:'one',flipped:true});
  // Failure after event/outbox insertion must roll back both as well as checkpoint.
  const original=IDBObjectStore.prototype.put;IDBObjectStore.prototype.put=function(value,...args){if(this.name==='checkpoints')throw Error('injected');return original.call(this,value,...args);};
@@ -26,4 +26,4 @@ with sync_playwright() as p:
  await s.close();return {rollback,legacy:true,atomicImport:conflict,namespace:true,controls:rows.length};
  }''')
  assert result['rollback'] and result['atomicImport'];b.close()
-print('PASS actual IDB legacy preservation / atomic event-outbox-checkpoint rollback / durable cursor/reset / backup restore / repeated import / guest no-resurrection / qualification isolation')
+print('PASS old namespace ignored / explicit v2 import / atomic event-outbox-checkpoint rollback / durable cursor/reset / backup restore / repeated import / guest no-resurrection / qualification isolation')

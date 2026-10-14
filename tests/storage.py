@@ -70,9 +70,9 @@ with sync_playwright() as p:
     # bytes intact for the explicit offline converter instead of auto-importing.
     import json
     backup=json.dumps(saved,ensure_ascii=False);legacy=browser.new_context();legacy.add_init_script('localStorage.setItem("ap-study-mock.v1",'+json.dumps(backup)+');')
-    restored=legacy.new_page();restored.goto(URL);restored.locator('.quick-start').wait_for();assert not stored_state(restored)['attempts']
+    restored=legacy.new_page();restored.goto(URL);restored.locator('.quick-start').wait_for();assert not (stored_state(restored) or {'attempts':[]})['attempts']
     assert restored.evaluate('localStorage.getItem("ap-study-mock.v1")')==backup
-    restored.reload();restored.locator('.quick-start').wait_for();assert not stored_state(restored)['attempts']
+    restored.reload();restored.locator('.quick-start').wait_for();assert not (stored_state(restored) or {'attempts':[]})['attempts']
     assert restored.evaluate('localStorage.getItem("ap-study-mock.v1")')==backup
     print('PASS v2-only runtime / old localStorage ignored and preserved byte-for-byte / no repeated import',flush=True)
     legacy.close();context.close();browser.close()

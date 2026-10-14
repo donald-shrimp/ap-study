@@ -3,8 +3,8 @@ import json,os,shutil,tempfile,collections
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,state,wait_for_async,open_data_management,open_plan_ai
-ROOT=Path(__file__).resolve().parents[1];URL=os.environ.get('HITOMON_TEST_URL','http://127.0.0.1:4181/');bank=json.loads((ROOT/'content/ab730/questions.json').read_text());byid={q['id']:q for q in bank};artifacts=Path(tempfile.mkdtemp(prefix='hitomon-ab730-flow-'))
-READ_RUNS='''async()=>{const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('hitomon:/:workspace');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});try{return await new Promise((resolve,reject)=>{const r=db.transaction('documents').objectStore('documents').getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}finally{db.close()}}'''
+ROOT=Path(__file__).resolve().parents[1];URL=os.environ.get('HITOMON_TEST_URL','http://127.0.0.1:4173/');bank=json.loads((ROOT/'content/ab730/questions.json').read_text());byid={q['id']:q for q in bank};artifacts=Path(tempfile.mkdtemp(prefix='hitomon-ab730-flow-'))
+READ_RUNS='''async()=>{const {createLocalStore}=await import('/src/storage/local.js'),s=createLocalStore({qualificationId:'ab730',rootPath:'/'});try{const identity=await s.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...identity,rootPath:'/',validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}finally{await s.close();}}'''
 def run(page):return next(r['payload'] for r in page.evaluate(READ_RUNS) if r['kind']=='diagnostic')
 def close_settings(page):page.get_by_role('button',name='設定を閉じる',exact=True).click()
 def current(page):s=state(page);return next(a for a in s['attempts'] if a['id']==s['currentId'])
@@ -49,7 +49,7 @@ with sync_playwright() as p:
  summary_path=artifacts/'summary.json';download.value.save_as(summary_path);summary=json.loads(summary_path.read_text());assert 'ab730' in json.dumps(summary) and 'diagnostic' in json.dumps(summary)
  open_data_management(page)
  with page.expect_download() as download:page.locator('#export-state').click()
- backup_path=artifacts/'backup.json';download.value.save_as(backup_path);backup=json.loads(backup_path.read_text());assert len(backup['attempts'])==ordinary and any(a.get('selectedChoiceIds') for a in backup['attempts']);assert backup['workspaceBackup']['runs'][0]['size']==30
+ backup_path=artifacts/'backup.json';download.value.save_as(backup_path);backup=json.loads(backup_path.read_text());assert len(backup['records'])==ordinary and any(a['material']['type']=='multipleChoice' and a['response']['choiceIds'] for a in backup['records']);assert backup['workspaceBackup']['runs'][0]['size']==30
  restored_context=browser.new_context(viewport={'width':390,'height':844});restored=restored_context.new_page();restored.on('pageerror',lambda e:errors.append(str(e)));restored.on('dialog',lambda d:d.accept());restored.goto(URL+'ab730/');restored.locator('.quick-start').wait_for();open_data_management(restored);restored.locator('#import-state').set_input_files(str(backup_path));restored.locator('#settings-status').filter(has_text='学習記録を読み込みました').wait_for();close_settings(restored);assert len(state(restored)['attempts'])==ordinary;assert run(restored)['status']=='completed' and len(run(restored)['responses'])==30;restored_context.close()
  close_settings(page);nav(page,'home');page.locator('#qualification-switch').click();page.locator('.qualification-option').filter(has_text='応用情報').click();page.locator('.quick-start').wait_for();assert (state(page) or {}).get('attempts',[])==[]
  page.locator('#qualification-switch').click();page.locator('.qualification-option').filter(has_text='AB-730').click();page.locator('.quick-start').wait_for();assert len(state(page)['attempts'])==ordinary

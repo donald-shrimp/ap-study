@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,state,wait_for_async,open_answer_history
 ROOT=Path(__file__).resolve().parents[1];bank=json.loads((ROOT/'content/ab730/questions.json').read_text());q=next(q for q in bank if q['type']=='multipleChoice')
-URL='http://127.0.0.1:4181/ab730/?firebase-emulator=1'
+URL='http://127.0.0.1:4173/ab730/?firebase-emulator=1'
 READ='''async()=>{const sdk=await import('/assets/vendor/firebase.js'),user=sdk.getAuth().currentUser,{createLocalStore}=await import('/src/storage/local.js');const store=createLocalStore({qualificationId:'ab730',rootPath:'/',owner:user?`uid:${user.uid}`:undefined});try{const identity=await store.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),workspace=createWorkspaceStore({...identity,rootPath:'/',validate:(kind,payload)=>payload});try{return {state:JSON.parse(await store.snapshot()),pending:await store.pending(),rows:await workspace.read()};}finally{await workspace.close();}}finally{await store.close();}}'''
 def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()

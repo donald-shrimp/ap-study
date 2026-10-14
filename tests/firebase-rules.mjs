@@ -227,8 +227,13 @@ test('Bの部分回答・自己評価・完了は本人のみ保存し、確定�
  const uid='written-rules',db=env.authenticatedContext(uid).firestore(),r=createCaseRun(pilot),ref=doc(db,casePath(uid,r.id));let rev=1;
  const save=()=>setDoc(ref,resourceEnvelope('case',r,rev++));await assertSucceeds(save());const slots=caseFields(pilot),first=slots[0];setCaseResponse(r,first.key,'未知表現');await assertSucceeds(save());submitCaseField(r,first.key);await assertSucceeds(save());viewCaseAnswer(r,first.key);await assertSucceeds(save());rateCaseField(r,first.key,'partial');await assertSucceeds(save());
  const altered=structuredClone(r);altered.responses[first.key].value='改ざん';await assertFails(setDoc(ref,resourceEnvelope('case',altered,rev)));const source=structuredClone(r);source.material.title='changed';await assertFails(setDoc(ref,resourceEnvelope('case',source,rev)));
- const fake=structuredClone(r);fake.responses[first.key].evaluation.outcome='correct';await assertFails(setDoc(ref,resourceEnvelope('case',fake,rev)));
- for(const slot of slots.slice(1)){submitCaseField(r,slot.key,undefined,{skip:true});await assertSucceeds(save());viewCaseAnswer(r,slot.key);await assertSucceeds(save());if(!r.responses[slot.key].evaluation){rateCaseField(r,slot.key,'notYet');await assertSucceeds(save());}}
- assert.equal(r.progress.status,'completed');const rewritten=structuredClone(r);rewritten.responses[first.key].evaluation.outcome='meets';await assertFails(setDoc(ref,resourceEnvelope('case',rewritten,rev)));for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()])await assertFails(getDoc(doc(client,casePath(uid,r.id))));await assertFails(deleteDoc(ref));
+ const fake=structuredClone(r);fake.evaluations[first.key].outcome='correct';await assertFails(setDoc(ref,resourceEnvelope('case',fake,rev)));
+ for(const slot of slots.slice(1)){submitCaseField(r,slot.key,undefined,{skip:true});await assertSucceeds(save());viewCaseAnswer(r,slot.key);await assertSucceeds(save());if(!r.evaluations[slot.key]){rateCaseField(r,slot.key,'notYet');await assertSucceeds(save());}}
+ assert.equal(r.progress.status,'completed');const rewritten=structuredClone(r);rewritten.evaluations[first.key].outcome='meets';await assertFails(setDoc(ref,resourceEnvelope('case',rewritten,rev)));for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()])await assertFails(getDoc(doc(client,casePath(uid,r.id))));await assertFails(deleteDoc(ref));
  const clone=structuredClone(r);clone.id='case--imported';await assertSucceeds(setDoc(doc(db,casePath(uid,clone.id)),resourceEnvelope('case',clone)));
+});
+test('上限20欄の合成大問バックアップもRulesの処理量内で取り込める',async()=>{
+ // Nonpublic contract fixture; this is not authored or reviewed exam material.
+ const synthetic={...structuredClone(pilot),id:'synthetic20',title:'非公開の20欄形式テスト',items:Array.from({length:20},(_,i)=>({id:'field'+i,label:'合成',prompt:'形式テスト',fields:[structuredClone(pilot.items[0].fields[0])]}))};
+ const r=createCaseRun(synthetic),db=env.authenticatedContext('limit20').firestore();for(const slot of caseFields(synthetic)){submitCaseField(r,slot.key,undefined,{skip:true});viewCaseAnswer(r,slot.key);rateCaseField(r,slot.key,'notYet');}await assertSucceeds(setDoc(doc(db,casePath('limit20',r.id)),resourceEnvelope('case',r)));
 });

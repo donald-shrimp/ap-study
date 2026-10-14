@@ -9,10 +9,8 @@ export function createCardStore({rootPath,owner,qualificationId,deviceId}){
  function operation(fn){const op=queue.then(async()=>{const database=await db(),tx=database.transaction(['events','checkpoints'],'readwrite'),finished=done(tx),store=tx.objectStore('events'),cps=tx.objectStore('checkpoints');try{
    const [raw,oldCheckpoint]=await Promise.all([request(store.index('namespace').getAll(scope)),request(cps.get(scope))]);
    const checkpoint=oldCheckpoint||{owner,qualificationId,value:null};localDevice||=checkpoint.sync?.deviceId||crypto.randomUUID();checkpoint.sync={...checkpoint.sync,deviceId:localDevice};
-   const rows=new Map(raw.filter(row=>row.kind).map(row=>[row.id,row]));
+   const rows=new Map(raw.map(row=>[row.id,row]));
    const make=(kind,payload)=>({owner,qualificationId,id:cardDocumentId(kind,payload.id),kind,payload:structuredClone(payload),deviceId:localDevice,operationId:cardDocumentId(kind,payload.id),dirty:true,remoteRevision:0,localRevision:1});
-   // Preserve pre-sync events in the same transaction as their durable outbox.
-   for(const old of raw.filter(row=>!row.kind)){const {owner,qualificationId,...payload}=old;validateCardEvents([payload]);const row=make('rating',payload),existing=rows.get(row.id);if(existing&&!sameCardPayload(existing.payload,payload))throw new Error('同じIDの異なる記録があります。');store.delete([...scope,old.id]);if(!existing){rows.set(row.id,row);store.put(row);}}
    for(const row of rows.values())validateCardDocument(row);
    const put=row=>{rows.set(row.id,row);store.put(row);};
    const result=await fn({rows,checkpoint,put,make});cps.put(checkpoint);await finished;return result;

@@ -34,7 +34,8 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
    }
    if(kind==='case'&&old){
     if(['format','version','kind','id','qualificationId','examPartId','caseId','caseVersion','material','mode','startedAt'].some(k=>serial(old.payload[k])!==serial(payload[k])))throw Error('大問の教材・開始条件は変更できません。');
-    for(const [key,response] of Object.entries(old.payload.responses))if(response.submittedAt){const next=payload.responses[key];if(!next||next.value!==response.value||next.submittedAt!==response.submittedAt||response.evaluation&&serial(next.evaluation)!==serial(response.evaluation))throw Error('確定した回答・評価は変更できません。新しく解き直してください。');}
+    for(const [key,response] of Object.entries(old.payload.responses))if(response.submittedAt){const next=payload.responses[key];if(!next||next.value!==response.value||next.submittedAt!==response.submittedAt||next.answerViewedBefore!==response.answerViewedBefore||next.skipped!==response.skipped)throw Error('確定した回答・評価は変更できません。新しく解き直してください。');}
+    for(const [key,evaluation] of Object.entries(old.payload.evaluations))if(serial(payload.evaluations[key])!==serial(evaluation))throw Error('確定した評価は変更できません。');
    }
    const localRevision=(old?.localRevision||0)+1,operationId=`${deviceId}:${id}:${localRevision}`;
    const row={owner,qualificationId,id,kind,payload,localRevision,remoteRevision:old?.remoteRevision||0,deviceId,operationId,dirty:true,ancestors:[...(old?.ancestors||[]),...(old?.operationId?[old.operationId]:[])].slice(-100)};

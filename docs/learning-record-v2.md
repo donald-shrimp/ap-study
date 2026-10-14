@@ -7,7 +7,7 @@
 学習記録は`hitomon-learning-record` / version 2です。`qualificationId`＋`examPartId`、教材ID・版・固定教材、回答、評価、支援の閲覧、開始／更新日時を保持します。
 
 - `kind: question`：`response.choiceIds`で単一・複数選択を同じ形に保存。教材の正答も`correctChoiceIds`。位置番号や単一用の正答IDを重複保存しません。`evaluation`は自動判定の結果・確定日時・回答前の支援数、`assistance`はヒントの履歴と正答開示、`progress`は途中状態・継続範囲等です。
-- `kind: case`：共通本文は大問に1つ。小問・解答欄のIDで`responses`を持ち、入力途中、回答確定、評価確定を分けます。`evaluation.source`は`automatic`または`self`。説明文は学習用観点で自己評価し、公式の部分点を推測しません。短答の未登録表現も自己評価へ残します。初期契約は1大問20欄までです。
+- `kind: case`：共通本文は大問に1つ。小問・解答欄のIDで`responses`を持ち、入力途中、回答確定、評価確定を分けます。`evaluations`を回答とは別に持ち、各欄の`source`は`automatic`または`self`。説明文は学習用観点で自己評価し、公式の部分点を推測しません。短答の未登録表現も自己評価へ残します。初期契約は1大問20欄までです。
 - 診断・模試は`hitomon-assessment` / version 2で固定した問題の`record`と、ID配列による回答を保存します。受験中にヒント・解説・AIを表示しません。
 - 計画、計画履歴、学習設定、単語帳のExportもversion 2です。表示・内部計算のための一時的な投影オブジェクトは保存契約とは別です。旧ファイルの読取器を二重運用する意味ではありません。
 
