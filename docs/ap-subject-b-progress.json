@@ -1,7 +1,7 @@
 {
   "format": "hitomon-implementation-progress",
   "version": 1,
-  "updatedAt": "2026-10-14T23:05:56.756507+00:00",
+  "updatedAt": "2026-10-14T23:07:19.971507+00:00",
   "status": "awaiting_account_import_and_production_verification",
   "plan": "docs/ap-subject-b-plan.md",
   "worktree": "/workspace/ap-study-subject-b",
@@ -33,7 +33,8 @@
     "別添の診断は同梱診断と同一、教材書き出しは公開800問と同内容であることを確認",
     "同一バックアップ再取り込みで端末ごとの表示位置を誤って競合としない修正と回帰検査",
     "本人の変換ファイルでAuth/Firestore Emulatorのアカウント取り込み・別端末復元・再取り込みを確認（本番アカウントではない）",
-    "Node164件と新版PWAの再検証通過"
+    "Node164件と新版PWAの再検証通過",
+    "再取り込み修正c0d0279のmain/ref/tree・Pages成功・公開26ファイル一致・公開スマホ／PC画面を確認"
   ],
   "remaining": [
     "本人ログイン済み本番アカウントへ変換ファイルを取り込み、同期完了と別端末での復元を照合（この環境には本人の認証・操作接続がない）"
@@ -62,26 +63,26 @@
     "personalAccountEmulator": "passed; logged-in additive import and second-device semantic records/plan/assessment/card equality; repeated import retains local display fields"
   },
   "publication": {
-    "commit": "7e2a57aaae567a6fca7fdcfc8c003741322cb421",
-    "tree": "76f8bc05765fc62bc785cb3e03bf02fbf4b924d0",
+    "commit": "c0d0279677378e47c57d951b663ec5c551290e66",
+    "tree": "78e6308988e5615a13d4aef4d7da5091aec8a497",
     "pagesBuilt": true,
     "nonForceUpdate": true,
     "files": [
       {
         "path": "index.html",
-        "sha256": "35e2cee0ccde53e9368f1ed09a9bde0e8bf864aec1e950f01a6daa97263862f8"
+        "sha256": "d2a4ee5dab538f392524d085c569dd97b9dfd995b5edb558f4c42c246bec02b9"
       },
       {
         "path": "ap/index.html",
-        "sha256": "4b2d69e935b39ec4372bc0347fabc1c1e78409455645fdb46c8cb04b3d376d01"
+        "sha256": "db428557d18630e804f8576eef5f00a3c6dface6d1190ae171676b1ac8905928"
       },
       {
         "path": "ab730/index.html",
-        "sha256": "505f83fbef37b308cf286d088606c3dc08d4331953f93b20836f64c8ff34b827"
+        "sha256": "0a859fd2fdddeab24a8a3711953f7eb375ca4e73bc6a4eb9a1ff89371de90ebc"
       },
       {
         "path": "app.js",
-        "sha256": "30c15cc33588eab59e1ec5377c0c31b56b26e5bad71b9d9f8af585d3f5fcd4c6"
+        "sha256": "7cdc5bea5ffe48b901c791b18a71b2a5938f61628fbb6a6bb86fb48a64b848eb"
       },
       {
         "path": "styles.css",
@@ -89,7 +90,7 @@
       },
       {
         "path": "sw.js",
-        "sha256": "99278256bd65b44fa4b19a62d95f5ec5fbad4b20542156dad6937a4a722e68b5"
+        "sha256": "6ee16f1631faff7b8a893707a7fb817029cf383700907e5437ae416fbeda33b5"
       },
       {
         "path": "src/app.js",
@@ -97,7 +98,7 @@
       },
       {
         "path": "src/v2/records.js",
-        "sha256": "9c5aa107c491cd52b1fbae6570bae96104e6af579e4ed69bfbe05244f4a91a0b"
+        "sha256": "b9c93306b6ef5d8ff8a924a77e18210df5fde34bc7df6496f1e8b75b1a21dd6c"
       },
       {
         "path": "src/v2/resources.js",
@@ -145,11 +146,31 @@
       },
       {
         "path": "docs/learning-record-v2.md",
-        "sha256": "459fd48503c72cf9f5016493a065422593d45f234ce553d4a6dfe1d4361b8c8e"
+        "sha256": "f28ca1b664501b7d10dcb345b362f288b64037418d7ede6af73907bb2630cea7"
       },
       {
         "path": "assets/written/ap-r07h-pm1/figure-1.png",
         "sha256": "5b4f81a86821488aa3984d94463dc04a51d3f5986322f3f6b5a9a296b3e2a3dc"
+      },
+      {
+        "path": "README.md",
+        "sha256": "4219693f300bf700df3a69c99caa305683b3755a4be4fbce8f16a975eb801cfd"
+      },
+      {
+        "path": "docs/ap-subject-b-progress.json",
+        "sha256": "b85d92a4b1fee11213ed87cf5a0fa69fff223bca68e7b9ae871e3ce48c3f2746"
+      },
+      {
+        "path": "docs/VERIFICATION.md",
+        "sha256": "990516fa24aa65155545dce5784d9f1e6442667b027835df9cd8069b4d841bc0"
+      },
+      {
+        "path": "docs/firebase-setup.md",
+        "sha256": "2586664ebea784f816169755d9e3383cd4319fb72bc0330ce237aba0a2bdbab4"
+      },
+      {
+        "path": "docs/ap-subject-b-plan.md",
+        "sha256": "a8e6b5ca72725dc9ef99ac66298a5b67da65d6d49b94696a414f0c098bd63a62"
       }
     ],
     "liveViewports": [
@@ -157,8 +178,8 @@
       1440
     ],
     "runtimeErrors": [],
-    "productionFirestoreRules": "not deployed; administrator authentication unavailable",
-    "personalDataMigration": "not executed; backup files not supplied"
+    "productionFirestoreRules": "user reports published; authenticated production verification pending",
+    "personalDataMigration": "converted and verified using private files and isolated public/browser-emulator tests; production account import pending"
   },
   "nextAction": "本人が新版へGoogleログインし、資格別の変換済み学習記録とAP単語帳記録を取り込んで今すぐ同期。別端末で復元を確認。個人ファイルは公開リポジトリへ追加しない。",
   "backupConversionVerified": true,
