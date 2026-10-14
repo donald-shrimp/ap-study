@@ -12,6 +12,7 @@ def compile_cases(root,config,directory,hashed_json):
         r=by_id[c['id']]
         assert c['status']=='reviewed' and r['status']=='approved' and r['author']!=r['reviewer'] and r['canonicalCaseSHA256']==hashlib.sha256(canonical(c)).hexdigest()
         assert c['qualificationId']==config['id'] and any(p['id']==c['examPartId'] and p.get('unit')=='cases' for p in config['examParts'])
+        assert sum(len(i['fields']) for i in c['items'])<=20
         assert c['body'] and c['items'] and len(c['items'])<=30
         assert len({i['id'] for i in c['items']})==len(c['items'])
         for i in c['items']:

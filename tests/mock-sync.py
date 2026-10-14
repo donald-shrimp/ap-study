@@ -2,7 +2,7 @@
 import json,shutil,uuid
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,wait_for_async,state
-URL='http://127.0.0.1:4173/?firebase-emulator=1'
+URL='http://127.0.0.1:4173/ap/?firebase-emulator=1'
 READ='''async()=>{const sdk=await import('/assets/vendor/firebase.js'),user=sdk.getAuth().currentUser,{createLocalStore}=await import('/src/storage/local.js'),study=createLocalStore({qualificationId:'ap',rootPath:'/',owner:user?`uid:${user.uid}`:undefined});try{const identity=await study.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...identity,rootPath:'/',validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}finally{await study.close();}}'''
 def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()

@@ -1,6 +1,6 @@
 {
   "format": "hitomon-study-plan",
-  "version": 1,
+  "version": 2,
   "qualificationId": "ap",
   "timeZone": "Asia/Tokyo",
   "examDates": [
@@ -16,11 +16,9 @@
       "start": "2026-10-07",
       "end": "2026-10-18",
       "examPartIds": [
-        "objective"
+        "objective",
+        "written"
       ],
-      "targets": {
-        "completedAttempts": 120
-      },
       "focusTopicIds": [
         "database",
         "network",
@@ -31,13 +29,35 @@
           "id": "week-1",
           "start": "2026-10-07",
           "end": "2026-10-13",
-          "completedAttempts": 70
+          "goals": [
+            {
+              "examPartId": "objective",
+              "unit": "questionAttempts",
+              "target": 70
+            },
+            {
+              "examPartId": "written",
+              "unit": "cases",
+              "target": 1
+            }
+          ]
         },
         {
           "id": "week-2",
           "start": "2026-10-14",
           "end": "2026-10-18",
-          "completedAttempts": 50
+          "goals": [
+            {
+              "examPartId": "objective",
+              "unit": "questionAttempts",
+              "target": 50
+            },
+            {
+              "examPartId": "written",
+              "unit": "cases",
+              "target": 2
+            }
+          ]
         }
       ],
       "milestones": [
@@ -47,6 +67,18 @@
           "date": "2026-10-18",
           "examPartId": "objective",
           "completed": false
+        }
+      ],
+      "goals": [
+        {
+          "examPartId": "objective",
+          "unit": "questionAttempts",
+          "target": 120
+        },
+        {
+          "examPartId": "written",
+          "unit": "cases",
+          "target": 3
         }
       ]
     }

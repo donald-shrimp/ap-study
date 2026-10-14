@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 from browser_storage import state, write_state, nav, open_plan_ai, open_answer_history
 
 ROOT=Path(__file__).resolve().parents[1]
-URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/')
+URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ART=Path(os.getenv('AP_STUDY_ARTIFACTS','/workspace/scratch/selection-implementation'));ART.mkdir(parents=True,exist_ok=True)
 corpus=json.loads((ROOT/'data/questions.json').read_text())
 deck=json.loads((ROOT/'content/ap/flashcards.json').read_text())

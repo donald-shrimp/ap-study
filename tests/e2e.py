@@ -5,7 +5,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import state as stored_state, write_state, open_answer_history
 ROOT=Path(tempfile.mkdtemp(prefix='ap-study-e2e-'))
-URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
+URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
 reveal_fixture=next(q for q in bank if not q['hints'][0]['revealsAnswer'] and q['hints'][1]['revealsAnswer'])

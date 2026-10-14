@@ -3,7 +3,7 @@ import json,shutil,uuid
 from pathlib import Path
 DECK_COUNT=len(json.loads((Path(__file__).resolve().parents[1]/'content/ap/flashcards.json').read_text())['cards'])
 from playwright.sync_api import sync_playwright
-URL='http://127.0.0.1:4173/?firebase-emulator=1'
+URL='http://127.0.0.1:4173/ap/?firebase-emulator=1'
 def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()
 def close(page):

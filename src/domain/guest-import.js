@@ -1,6 +1,7 @@
 // Guest data remains separate until explicitly adopted. Existing account
 // records, including card tombstones, do not become import candidates again.
-export function hasGuestImport({guest,current,prefix,guestCards=[],cardRows=[],guestLearning=[],learningRows=[],guestWorkspace=[],workspaceRows=[],personalRows=[]}){
+export function hasGuestImport({guest,current,prefix,guestCards=[],cardRows=[],guestLearning=[],learningRows=[],guestWorkspace=[],workspaceRows=[],personalRows=[],guestWritten=[],currentWritten=[]}){
+ const caseIds=new Set(currentWritten.map(r=>r.id));if(guestWritten.some(r=>!caseIds.has(r.id)))return true;
  const imported=new Set(current.attempts.map(a=>a.importedFrom));
  if(guest.attempts.some(a=>!imported.has(prefix+a.id)))return true;
  const cardIds=new Set(cardRows.filter(r=>r.kind==='rating').map(r=>r.payload.id));

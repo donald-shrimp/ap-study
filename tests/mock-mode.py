@@ -3,7 +3,7 @@ import json,os,shutil
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,state,wait_for_async
-URL=os.getenv('HITOMON_TEST_URL','http://127.0.0.1:4173/')
+URL=os.getenv('HITOMON_TEST_URL','http://127.0.0.1:4173/ap/')
 ROOT=Path(__file__).resolve().parents[1];ART=Path('/workspace/scratch/mock-mode');ART.mkdir(exist_ok=True)
 READ='''async()=>{const root=new URL('.',document.baseURI),{createLocalStore}=await import(new URL('src/storage/local.js',root)),s=createLocalStore({qualificationId:'ap',rootPath:root.pathname});try{const identity=await s.identity(),{createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root)),w=createWorkspaceStore({...identity,rootPath:root.pathname,validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}finally{await s.close();}}'''
 def rows(page):return page.evaluate(READ)
@@ -31,7 +31,7 @@ with sync_playwright() as p:
  page.get_by_role('heading',name='模試 Aの結果',exact=True).wait_for();assert '正答率：75% · 60 / 80問正解' in page.locator('#main').inner_text();assert page.locator('.diagnostic-review').count()==80
  page.locator('.diagnostic-review').first.locator('summary').click();assert page.locator('.diagnostic-review').first.locator('.reason-list li').count()==4
  assert state(page)['attempts']==[];ctx.set_offline(False);page.screenshot(path=str(ART/'result.png'),full_page=True)
- page.get_by_role('button',name='結果と学習状況をAIへ渡す',exact=True).click();page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();summary=json.loads(page.evaluate('navigator.clipboard.readText()'));assert summary['learning']['all']['completedAttempts']==0 and summary['diagnostics']==[] and len(summary['mockExams'])==1 and summary['mockExams'][0]['scoreRate']==.75
+ page.get_by_role('button',name='結果と学習状況をAIへ渡す',exact=True).click();page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();summary=json.loads(page.evaluate('navigator.clipboard.readText()'));assert summary['learningByPart'][0]['all']['completedAttempts']==0 and summary['diagnostics']==[] and len(summary['mockExams'])==1 and summary['mockExams'][0]['scoreRate']==.75
  nav(page,'history');page.get_by_role('button',name='模試結果',exact=True).click();page.locator('[data-mock-set=ap-mock-a] [data-action=mock-records]').click();page.get_by_role('button',name='結果を見る',exact=True).click();page.get_by_role('heading',name='模試 Aの結果',exact=True).wait_for()
  page.get_by_role('button',name='この模試の記録へ',exact=True).click();page.get_by_role('heading',name='模試 Aの記録',exact=True).wait_for();assert '75% · 60 / 80問正解' in page.locator('#main').inner_text()
  page.get_by_role('button',name='模試結果の一覧へ',exact=True).click();assert page.locator('[data-mode=mock][aria-pressed=true]').count()==1;assert '前回：75%' in page.locator('[data-mock-set=ap-mock-a]').inner_text()

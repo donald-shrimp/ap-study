@@ -3,7 +3,7 @@ import {encodeResourceRow,decodeResourceRow} from '../v2/resources.js';
 // immutable learning attempts. The outbox and local document commit together.
 const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(decodeResourceRow(r.result));r.onerror=()=>reject(r.error);});
 const finished=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||new Error('保存を中止しました。'));tx.onerror=()=>{};});
-const serial=JSON.stringify;
+const serial=value=>JSON.stringify(value,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 export const MAX_WORKSPACE_BYTES=850000;
 export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,validate,namespaceName='workspace',planHistory=null}){
  let dbPromise,queue=Promise.resolve(),validationError=null;

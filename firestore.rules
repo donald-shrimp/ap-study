@@ -35,6 +35,8 @@ service cloud.firestore {
    let q=p.material;
    let a=p.assistance;
    let e=p.evaluation;
+   let available=choiceIds(q);
+   let isRight=p.response.choiceIds.toSet() == q.correctChoiceIds.toSet();
    return p.keys().hasOnly(['format','version','id','qualificationId','examPartId','kind','questionId','questionVersion','contentRevision','material','lesson','response','evaluation','assistance','progress','startedAt','updatedAt','continuationOf','continuedAt','importedFrom'])
     && p.format == 'hitomon-learning-record' && p.version == 2 && p.kind == 'question' && p.id == id && p.qualificationId == qualificationId
     && p.examPartId is string && p.questionId is string && p.questionVersion is int && p.contentRevision is string
@@ -43,16 +45,16 @@ service cloud.firestore {
     && !('answer' in q) && !('correctChoiceId' in q) && !('diagnosticOnly' in q)
     && (!('uses' in q) || q.uses is list && q.uses.hasOnly(['practice','diagnostic','mock']) && q.uses.hasAny(['practice']))
     && q.choices is list && q.choices.size() >= 2 && q.choices.size() <= 20
-    && validIds(q.correctChoiceIds,choiceIds(q)) && q.correctChoiceIds.size() > 0
-    && p.response.keys().hasOnly(['choiceIds']) && validIds(p.response.choiceIds,choiceIds(q))
+    && validIds(q.correctChoiceIds,available) && q.correctChoiceIds.size() > 0
+    && p.response.keys().hasOnly(['choiceIds']) && validIds(p.response.choiceIds,available)
     && (q.type == 'singleChoice' ? q.correctChoiceIds.size() == 1 && p.response.choiceIds.size() <= 1 : q.type == 'multipleChoice' && q.selection is map && (q.selection.mode == 'all' || q.selection.mode == 'exact' && q.selection.count == q.correctChoiceIds.size()))
     && p.lesson is map && p.lesson.hints is list && p.lesson.hints.size() <= 20
     && a.keys().hasOnly(['hintCount','hintEvents','answerViewedBefore']) && a.answerViewedBefore is bool
     && a.hintCount is int && a.hintCount >= 0 && a.hintCount <= p.lesson.hints.size() && a.hintEvents is list && a.hintEvents.size() == a.hintCount
     && (e == null ? p.progress.status != 'completed' : e.keys().hasOnly(['source','outcome','at','hintsBeforeAnswer']) && p.progress.status == 'completed' && e.source == 'automatic' && e.at is string && e.hintsBeforeAnswer is int && e.hintsBeforeAnswer >= 0 && e.hintsBeforeAnswer <= a.hintCount
-      && (e.outcome == 'correct' && right(p) && e.hintsBeforeAnswer == 0 && !a.answerViewedBefore
-       || e.outcome == 'assisted' && right(p) && e.hintsBeforeAnswer > 0 && !a.answerViewedBefore
-       || e.outcome == 'incorrect' && submitted(p) && !right(p) && !a.answerViewedBefore
+      && (e.outcome == 'correct' && isRight && e.hintsBeforeAnswer == 0 && !a.answerViewedBefore
+       || e.outcome == 'assisted' && isRight && e.hintsBeforeAnswer > 0 && !a.answerViewedBefore
+       || e.outcome == 'incorrect' && submitted(p) && !isRight && !a.answerViewedBefore
        || e.outcome == 'revealed' && a.answerViewedBefore));
   }
   function envelope(id, qualificationId) {
@@ -218,15 +220,60 @@ service cloud.firestore {
    allow create: if mine(uid) && cardEnvelope(id);
    allow update, delete: if false;
   }
+  function validCaseResponse(r) {
+   let e=r.evaluation;
+   let submitted=r.submittedAt;
+   return r is map && r.keys().hasOnly(['value','submittedAt','evaluation','answerViewedBefore','skipped']) && r.value is string && r.value.size() <= 2000 && r.answerViewedBefore is bool
+    && (!('skipped' in r) || r.skipped == true && r.value == '' && submitted is string)
+    && (submitted == null ? e == null : submitted is string && (r.value.size() > 0 || 'skipped' in r))
+    && (e == null || submitted is string && e.keys().hasOnly(['source','outcome','at','assisted']) && e.at is string && e.assisted == r.answerViewedBefore
+      && (e.source == 'automatic' && e.outcome in ['correct','incorrect'] || e.source == 'self' && e.outcome in ['meets','partial','notYet','unsure']));
+  }
+  // Initial backup imports use bounded field shapes. Subsequent writes validate
+  // the one changed response in full; the client also validates the full case.
+  function validCaseSeedResponse(r) {
+   return r is map && r.keys().hasOnly(['value','submittedAt','evaluation','answerViewedBefore','skipped']) && r.value is string && r.value.size() <= 2000;
+  }
+  function validCaseResponses(responses) {
+   let keys=responses.keys();
+   return responses.size() <= 20
+    && (keys.size() <= 0 ? true : validCaseSeedResponse(responses[keys[0]]))
+    && (keys.size() <= 1 ? true : validCaseSeedResponse(responses[keys[1]]))
+    && (keys.size() <= 2 ? true : validCaseSeedResponse(responses[keys[2]]))
+    && (keys.size() <= 3 ? true : validCaseSeedResponse(responses[keys[3]]))
+    && (keys.size() <= 4 ? true : validCaseSeedResponse(responses[keys[4]]))
+    && (keys.size() <= 5 ? true : validCaseSeedResponse(responses[keys[5]]))
+    && (keys.size() <= 6 ? true : validCaseSeedResponse(responses[keys[6]]))
+    && (keys.size() <= 7 ? true : validCaseSeedResponse(responses[keys[7]]))
+    && (keys.size() <= 8 ? true : validCaseSeedResponse(responses[keys[8]]))
+    && (keys.size() <= 9 ? true : validCaseSeedResponse(responses[keys[9]]))
+    && (keys.size() <= 10 ? true : validCaseSeedResponse(responses[keys[10]]))
+    && (keys.size() <= 11 ? true : validCaseSeedResponse(responses[keys[11]]))
+    && (keys.size() <= 12 ? true : validCaseSeedResponse(responses[keys[12]]))
+    && (keys.size() <= 13 ? true : validCaseSeedResponse(responses[keys[13]]))
+    && (keys.size() <= 14 ? true : validCaseSeedResponse(responses[keys[14]]))
+    && (keys.size() <= 15 ? true : validCaseSeedResponse(responses[keys[15]]))
+    && (keys.size() <= 16 ? true : validCaseSeedResponse(responses[keys[16]]))
+    && (keys.size() <= 17 ? true : validCaseSeedResponse(responses[keys[17]]))
+    && (keys.size() <= 18 ? true : validCaseSeedResponse(responses[keys[18]]))
+    && (keys.size() <= 19 ? true : validCaseSeedResponse(responses[keys[19]]));
+  }
+  function frozenCaseResponses(p,old) {
+   let key=p.progress.lastResponseKey;
+   let previous=key is string ? old.responses.get(key,null) : null;
+   let next=key is string ? p.responses.get(key,null) : null;
+   return p.responses == old.responses || key is string && p.responses.diff(old.responses).affectedKeys().hasOnly([key]) && next != null && validCaseResponse(next) && (previous == null || previous.submittedAt == null
+    || next.value == previous.value && next.submittedAt == previous.submittedAt && next.answerViewedBefore == previous.answerViewedBefore && next.get('skipped',false) == previous.get('skipped',false) && (previous.evaluation == null || next.evaluation == previous.evaluation));
+  }
   function validCase(p,id,qualificationId) {
    return qualificationId == 'ap' && p.keys().hasOnly(['format','version','kind','id','qualificationId','examPartId','caseId','caseVersion','material','mode','responses','assistance','progress','startedAt','updatedAt','completedAt'])
     && p.format == 'hitomon-learning-record' && p.version == 2 && p.kind == 'case' && p.id == id && id.matches('case--[a-zA-Z0-9_-]{1,90}') && p.qualificationId == qualificationId && p.examPartId == 'written'
     && p.caseId is string && p.caseVersion is int && p.caseVersion > 0 && p.mode in ['learning','exam']
     && p.material is map && p.material.status == 'reviewed' && p.material.id == p.caseId && p.material.version == p.caseVersion && p.material.qualificationId == qualificationId && p.material.examPartId == p.examPartId
     && p.material.body is string && p.material.body.size() <= 200000 && p.material.items is list && p.material.items.size() > 0 && p.material.items.size() <= 30
-    && p.responses is map && p.responses.size() <= 600 && p.assistance.keys().hasOnly(['firstAnswerViewedAt','viewedFields']) && p.assistance.viewedFields is list && p.assistance.viewedFields.size() <= 600
+    && p.responses is map && p.responses.size() <= 20 && p.assistance.keys().hasOnly(['firstAnswerViewedAt','viewedFields']) && p.assistance.viewedFields is list && p.assistance.viewedFields.size() <= 600
     && (p.assistance.firstAnswerViewedAt == null || p.assistance.firstAnswerViewedAt is string)
-    && p.progress.keys().hasOnly(['status','currentItemId','bodyScroll','pane']) && p.progress.status in ['in_progress','partially_completed','awaiting_evaluation','completed'] && p.progress.currentItemId is string && p.progress.pane in ['questions','body'] && p.progress.bodyScroll is number && p.progress.bodyScroll >= 0 && p.progress.bodyScroll <= 10000000
+    && p.progress.keys().hasOnly(['status','currentItemId','bodyScroll','questionScroll','pane','lastResponseKey']) && p.progress.status in ['in_progress','partially_completed','awaiting_evaluation','completed'] && p.progress.currentItemId is string && (p.progress.lastResponseKey == null || p.progress.lastResponseKey is string) && p.progress.pane in ['questions','body'] && p.progress.bodyScroll is number && p.progress.questionScroll is number && p.progress.questionScroll >= 0 && p.progress.questionScroll <= 10000000 && p.progress.bodyScroll >= 0 && p.progress.bodyScroll <= 10000000
     && p.startedAt is string && p.updatedAt is string && (p.progress.status == 'completed' ? p.completedAt is string : p.completedAt == null);
   }
   function caseEnvelope(id,qualificationId) {
@@ -235,12 +282,12 @@ service cloud.firestore {
   }
   function frozenCase(p,old) {
    return p.diff(old).affectedKeys().hasOnly(['responses','assistance','progress','updatedAt','completedAt'])
-    && p.responses.diff(old.responses).removedKeys().size() == 0
+    && p.responses.diff(old.responses).removedKeys().size() == 0 && frozenCaseResponses(p,old)
     && (old.progress.status != 'completed' || p.responses == old.responses && p.completedAt == old.completedAt);
   }
   match /users/{uid}/qualifications/{qualificationId}/writtenV2/{id} {
    allow read: if mine(uid);
-   allow create: if mine(uid) && caseEnvelope(id,qualificationId) && request.resource.data.revision == 1;
+   allow create: if mine(uid) && caseEnvelope(id,qualificationId) && request.resource.data.revision == 1 && (request.resource.data.payload.responses.size() == 0 || validCaseResponses(request.resource.data.payload.responses));
    allow update: if mine(uid) && caseEnvelope(id,qualificationId) && request.resource.data.revision == resource.data.revision + 1 && frozenCase(request.resource.data.payload,resource.data.payload);
    allow delete: if false;
   }

@@ -5,7 +5,7 @@ from pathlib import Path
 DECK_COUNT=len(json.loads((Path(__file__).resolve().parents[1]/'content/ap/flashcards.json').read_text())['cards'])
 from playwright.sync_api import sync_playwright
 from browser_storage import state,nav
-URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/')
+URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ART=Path(os.getenv('AP_STUDY_ARTIFACTS','/workspace/scratch/mobile-study'));ART.mkdir(exist_ok=True)
 READ_CARDS='''async()=>{const root=new URL('.',document.baseURI);const {createCardStore}=await import(new URL('src/storage/cards.js',root));const {createLocalStore}=await import(new URL('src/storage/local.js',root));const main=createLocalStore({rootPath:root.pathname,qualificationId:'ap'});const {owner}=await main.identity();await main.close();const cards=createCardStore({rootPath:root.pathname,owner,qualificationId:'ap'});try{return await cards.read();}finally{await cards.close();}}'''
 with sync_playwright() as p:

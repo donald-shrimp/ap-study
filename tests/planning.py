@@ -17,14 +17,14 @@ with sync_playwright() as p:
     context=browser.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write'])
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.on('dialog',lambda d:d.accept())
-    page.goto('http://127.0.0.1:4173/')
+    page.goto('http://127.0.0.1:4173/ap/')
     page.get_by_role('button',name='おまかせで1問',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for()
     assert page.locator('.session-milestone').count()==0 and '目安' not in page.locator('.study-toolbar').inner_text()
     page.get_by_role('button',name='中断',exact=True).click()
     page.get_by_role('button',name='計画を登録',exact=True).click()
     open_plan_editor(page);open_plan_ai(page)
     page.locator('[name=exam-objective]').fill('2026-11-04');page.locator('[name=exam-written]').fill('2026-11-30');page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
-    example=json.loads((ROOT/'schemas/study-plan.example.json').read_text());example['phases'][0]['targets']['completedAttempts']=120
+    example=json.loads((ROOT/'schemas/study-plan.example.json').read_text());example['phases'][0]['goals'][0]['target']=120
     open_plan_ai(page);page.locator('#plan-json').fill(json.dumps(example));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_role('heading',name='登録後の内容',exact=True).wait_for();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for()
     before=next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')
     open_plan_ai(page);invalid={**example,'qualificationId':'other'};page.locator('#plan-json').fill(json.dumps(invalid));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_text('開いている資格と一致しません',exact=False).wait_for()

@@ -8,7 +8,7 @@ const request = operation => new Promise((resolve,reject)=>{
 const finished = tx => new Promise((resolve,reject)=>{
  tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||new Error('保存を中止しました。'));tx.onerror=()=>{};
 });
-const serial = value => JSON.stringify(value);
+const serial = value => JSON.stringify(value,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 const sharedFields = ['settings','readingNotes','overrides'];
 const checkpoint = state => ({version:state.version,currentId:state.currentId,currentRunId:state.currentRunId||null,view:state.view,session:state.session});
 const shared = state => Object.fromEntries(sharedFields.map(k=>[k,state[k]]));
@@ -88,7 +88,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
     const row={owner,qualificationId,id:a.id,deviceId:originDevice,revision,data:a};attempts.put({...row,data:toRecord(a)});existing.set(a.id,row);
     const payload=toRecord(a),semantic=serial(transport(a));
     if(replace||!old||serial(transport(old.data))!==semantic){
-     const blocked=new TextEncoder().encode(semantic).length>900000;
+     const blocked=new TextEncoder().encode(JSON.stringify(payload)).length>900000;
      outbox.put({owner,qualificationId,id:a.id,deviceId:originDevice,revision,operationId:`${a.id}:${revision}`,payload,blocked});
     }
     nextBaseline.set(a.id,{data:serial(a),revision});
@@ -179,7 +179,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
   identity:async()=>{await database();return {owner,deviceId,qualificationId};},
   read:async()=>{await queue.catch(()=>{});const db=await database(),tx=db.transaction('meta'),done=finished(tx),values=await request(tx.objectStore('meta').getAll(learningRange()));await done;return values.map(v=>v.row);},
   merge:remote=>learningTransaction(async meta=>{
-   if(remote.version!==1||!Number.isInteger(remote.revision)||remote.revision<1||typeof remote.deviceId!=='string'||typeof remote.operationId!=='string'||remote.id!==learningId(remote.kind,remote.payload))throw new Error('学習設定の同期形式を確認できません。');
+   if(remote.version!==2||!Number.isInteger(remote.revision)||remote.revision<1||typeof remote.deviceId!=='string'||typeof remote.operationId!=='string'||remote.id!==learningId(remote.kind,remote.payload))throw new Error('学習設定の同期形式を確認できません。');
    const payload=validateLearning(remote.kind,remote.payload),old=(await request(meta.get(learningKey(remote.id))))?.row;
    if(old&&remote.revision<=old.remoteRevision)return old;
    if(old?.dirty&&remote.deviceId===deviceId&&old.ancestors.includes(remote.operationId)){const row={...old,remoteRevision:remote.revision};meta.put({key:learningKey(remote.id),row});return row;}

@@ -3,7 +3,7 @@ import os
 import shutil
 from playwright.sync_api import sync_playwright
 
-URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
+URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=shutil.which('chromium'),headless=True,args=['--no-sandbox'])
     page=browser.new_page();page.goto(URL);page.locator('.quick-start').wait_for()
@@ -66,13 +66,13 @@ with sync_playwright() as p:
     assert saved['currentId']!=original['currentId'] and any(a.get('continuationOf')==original['currentId'] for a in saved['attempts'])
     second.reload();second.locator('#result-heading').wait_for();assert len(stored_state(second)['attempts'])==2
     print('PASS two real tabs / concurrent correct and incorrect answers / continuation persists after reload',flush=True)
-    # Copy the current, unmodified record format on first IndexedDB use. The
-    # former localStorage value remains byte-for-byte intact as a backup.
+    # The new application does not read old localStorage records. Keep their
+    # bytes intact for the explicit offline converter instead of auto-importing.
     import json
     backup=json.dumps(saved,ensure_ascii=False);legacy=browser.new_context();legacy.add_init_script('localStorage.setItem("ap-study-mock.v1",'+json.dumps(backup)+');')
-    restored=legacy.new_page();restored.goto(URL);restored.locator('#result-heading').wait_for();assert len(stored_state(restored)['attempts'])==2
+    restored=legacy.new_page();restored.goto(URL);restored.locator('.quick-start').wait_for();assert not stored_state(restored)['attempts']
     assert restored.evaluate('localStorage.getItem("ap-study-mock.v1")')==backup
-    restored.locator('.sidebar [data-view=home]').click();stored_state(restored);restored.reload();restored.locator('.quick-start').wait_for();assert len(stored_state(restored)['attempts'])==2
+    restored.reload();restored.locator('.quick-start').wait_for();assert not stored_state(restored)['attempts']
     assert restored.evaluate('localStorage.getItem("ap-study-mock.v1")')==backup
-    print('PASS existing current-format records retained / original browser value unchanged / no repeated import',flush=True)
+    print('PASS v2-only runtime / old localStorage ignored and preserved byte-for-byte / no repeated import',flush=True)
     legacy.close();context.close();browser.close()

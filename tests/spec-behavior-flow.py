@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tests'))
 from browser_storage import state,nav,write_state,open_plan_editor,open_plan_ai
-BASE='http://127.0.0.1:4173/'
+BASE='http://127.0.0.1:4173/ap/'
 OUT=Path('/tmp/hitomon-spec-fix');OUT.mkdir(parents=True,exist_ok=True);results=[];errors=[]
 def record(id,data):results.append({'id':id,**data});print(id,json.dumps(data,ensure_ascii=False),flush=True)
 READ_WORKSPACE='''async()=>{const {createLocalStore}=await import('/src/storage/local.js'),s=createLocalStore({qualificationId:'ap',rootPath:'/'});const identity=await s.identity();await s.close();const {createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...identity,rootPath:'/',validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}'''

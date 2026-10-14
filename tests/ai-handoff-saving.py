@@ -3,7 +3,7 @@ import os,shutil
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,state,wait_for_async
-ROOT=Path(__file__).resolve().parents[1];BASE=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
+ROOT=Path(__file__).resolve().parents[1];BASE=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 source=(ROOT/'src/storage/local.js').read_text().replace(' function write(state,options){',' function write(state,options){\n  if(globalThis.failLocalWrites)return Promise.reject(Error("simulated disk full"));\n  if(globalThis.pauseLocalWrites)return globalThis.pauseLocalWrites.then(()=>write(state,options));',1)
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path=shutil.which('chromium'),headless=True,args=['--no-sandbox'],ignore_default_args=['--disable-popup-blocking']);context=browser.new_context(service_workers='block');page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))

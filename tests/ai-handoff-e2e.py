@@ -10,7 +10,7 @@ import time
 from playwright.sync_api import sync_playwright
 from browser_storage import nav, state
 
-BASE = os.environ.get("AP_STUDY_URL", "http://127.0.0.1:4173/")
+BASE = os.environ.get("AP_STUDY_URL", "http://127.0.0.1:4173/ap/")
 
 
 def open_answered_question(page):

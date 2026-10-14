@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 from zoneinfo import ZoneInfo
 from playwright.sync_api import sync_playwright
 from browser_storage import state,nav,open_plan_ai
-ROOT=Path(__file__).resolve().parents[1];URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/')
+ROOT=Path(__file__).resolve().parents[1];URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ART=Path(os.getenv('AP_STUDY_ARTIFACTS','/workspace/scratch/entry-home/browser'));ART.mkdir(parents=True,exist_ok=True)
 classification={i['questionId']:i['mode'] for i in json.loads((ROOT/'content/ap/study-context.json').read_text())['items']}
 labels={'paperless':'身軽に1問','desk':'書いて考える1問','all':'おまかせで1問'}

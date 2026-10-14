@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 from playwright.sync_api import sync_playwright
 from browser_storage import state,nav,open_plan_ai
 ROOT=Path(__file__).resolve().parents[1]
-URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')
+URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ART=Path(os.environ.get('AP_STUDY_ARTIFACTS','/workspace/scratch/action-implementation'));ART.mkdir(exist_ok=True)
 today=datetime.now(ZoneInfo('Asia/Tokyo')).date()
 date=lambda n:(today+timedelta(days=n)).isoformat()

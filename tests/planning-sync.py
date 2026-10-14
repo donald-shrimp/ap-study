@@ -3,7 +3,7 @@ from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json, shutil, uuid
 from playwright.sync_api import sync_playwright
 from browser_storage import wait_for_async
-URL='http://127.0.0.1:4173/?firebase-emulator=1'
+URL='http://127.0.0.1:4173/ap/?firebase-emulator=1'
 READ='''async()=>{
  const sdk=await import('/assets/vendor/firebase.js'),user=sdk.getAuth().currentUser,{createLocalStore}=await import('/src/storage/local.js');
  const study=createLocalStore({qualificationId:'ap',rootPath:'/',owner:user?`uid:${user.uid}`:undefined});try{const identity=await study.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),workspace=createWorkspaceStore({...identity,rootPath:'/',validate:(kind,payload)=>payload});try{return await workspace.read();}finally{await workspace.close();}}finally{await study.close();}

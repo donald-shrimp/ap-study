@@ -1,3 +1,5 @@
+import {toRecord} from '../src/v2/records.js';
+import {encodeResource} from '../src/v2/resources.js';
 import {createMock} from '../src/domain/mock.js';
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,9 +14,9 @@ let env;
 const manifest=JSON.parse(readFileSync(new URL('../data/qualifications/ap/manifest.json',import.meta.url)));
 const questions=JSON.parse(readFileSync(new URL('../data/qualifications/ap/'+manifest.packs.find(p=>p.id==='r07h').url,import.meta.url)));
 const q=questions[0];
-const path=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/attempts/${id}`;
+const path=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/attemptsV2/${id}`;
 function envelope(a,revision=1,deviceId='device-one'){
- const {scrollY,...payload}=a;return {version:1,deviceId,revision,operationId:`${a.id}:${revision}`,payload,updatedAt:serverTimestamp()};
+ const payload=toRecord(a);return {version:2,deviceId,revision,operationId:`${a.id}:${revision}`,payload,updatedAt:serverTimestamp()};
 }
 before(async()=>{env=await initializeTestEnvironment({projectId:'hito-mon',firestore:{host:'127.0.0.1',port:8080,rules:readFileSync(new URL('../firestore.rules',import.meta.url),'utf8')}});await env.clearFirestore();});
 after(async()=>{await env.cleanup();});
@@ -23,12 +25,12 @@ test('本人の中断・回答・回答後ヒントだけ更新できる',async(
  await assertSucceeds(setDoc(ref,envelope(a)));openHint(a);await assertSucceeds(setDoc(ref,envelope(a,2)));
  selectAnswer(a,q.answer);finalizeAttempt(a,gradeAttempt(a));await assertSucceeds(setDoc(ref,envelope(a,3)));
  openHint(a);await assertSucceeds(setDoc(ref,envelope(a,4)));await assertSucceeds(getDoc(ref));
- await assertSucceeds(getDocs(collection(db,'users/alice/qualifications/ap/attempts')));
+ await assertSucceeds(getDocs(collection(db,'users/alice/qualifications/ap/attemptsV2')));
 });
 test('未認証・他人の参照/書込/一覧と削除は拒否する',async()=>{
  const a=createAttempt(q),alice=env.authenticatedContext('alice').firestore(),bob=env.authenticatedContext('bob').firestore(),guest=env.unauthenticatedContext().firestore();
  await assertSucceeds(setDoc(doc(alice,path('alice',a.id)),envelope(a)));
- for(const db of [bob,guest]){await assertFails(getDoc(doc(db,path('alice',a.id))));await assertFails(setDoc(doc(db,path('alice',a.id)),envelope(a,2)));await assertFails(getDocs(collection(db,'users/alice/qualifications/ap/attempts')));}
+ for(const db of [bob,guest]){await assertFails(getDoc(doc(db,path('alice',a.id))));await assertFails(setDoc(doc(db,path('alice',a.id)),envelope(a,2)));await assertFails(getDocs(collection(db,'users/alice/qualifications/ap/attemptsV2')));}
  await assertFails(deleteDoc(doc(alice,path('alice',a.id))));
  await assertFails(setDoc(doc(alice,'public/any'),{text:'no'}));
 });
@@ -44,21 +46,21 @@ test('確定回答・原本・端末・旧リビジョン・正答開示判定�
 });
 test('同じサーバー時刻の105件を100件ずつ欠落なく取得できる',async()=>{
  await env.withSecurityRulesDisabled(async context=>{const db=context.firestore(),batch=writeBatch(db);for(let i=0;i<105;i++){const a=createAttempt(q,{id:`page-${String(i).padStart(3,'0')}`});batch.set(doc(db,path('pagination',a.id)),envelope(a));}await batch.commit();});
- const db=env.authenticatedContext('pagination').firestore(),ref=collection(db,'users/pagination/qualifications/ap/attempts');
+ const db=env.authenticatedContext('pagination').firestore(),ref=collection(db,'users/pagination/qualifications/ap/attemptsV2');
  const first=await assertSucceeds(getDocs(query(ref,orderBy('updatedAt'),orderBy('__name__'),limit(100))));
  assert.equal(first.size,100);const last=first.docs.at(-1);
  const next=await assertSucceeds(getDocs(query(ref,orderBy('updatedAt'),orderBy('__name__'),startAfter(last.data().updatedAt,last.id),limit(100))));
  assert.equal(next.size,5);assert.equal(new Set([...first.docs,...next.docs].map(d=>d.id)).size,105);
 });
 const qualification=JSON.parse(readFileSync(new URL('../content/ap/qualification.json',import.meta.url)));
-const resourcePath=(uid,id)=>`users/${uid}/qualifications/ap/resources/${id}`;
-const resourceEnvelope=(kind,payload,revision=1)=>({version:1,kind,revision,operationId:`resource:${revision}`,deviceId:'device',payload,updatedAt:serverTimestamp()});
+const resourcePath=(uid,id)=>`users/${uid}/qualifications/ap/resourcesV2/${id}`;
+const resourceEnvelope=(kind,payload,revision=1)=>({version:2,kind,revision,operationId:`resource:${revision}`,deviceId:'device',payload:encodeResource(kind,payload),updatedAt:serverTimestamp()});
 test('計画は本人のみ保存でき、古い版・他資格・他人・削除を拒否する',async()=>{
  const db=env.authenticatedContext('planner').firestore(),other=env.authenticatedContext('other').firestore(),guest=env.unauthenticatedContext().firestore(),p=blankPlan(qualification),ref=doc(db,resourcePath('planner','planning'));
  await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p)));p.examDates=[{examPartId:'objective',date:'2026-11-04'}];p.phases=JSON.parse(readFileSync(new URL('../schemas/study-plan.example.json',import.meta.url))).phases;await assertSucceeds(setDoc(ref,resourceEnvelope('planning',p,2)));
  await assertFails(setDoc(ref,resourceEnvelope('planning',p,2)));await assertFails(setDoc(ref,resourceEnvelope('planning',{...p,qualificationId:'other'},3)));
  for(const client of [other,guest]){await assertFails(getDoc(doc(client,resourcePath('planner','planning'))));await assertFails(setDoc(doc(client,resourcePath('planner','planning')),resourceEnvelope('planning',p,3)));}
- await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/planner/qualifications/ap/resources')));
+ await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/planner/qualifications/ap/resourcesV2')));
 });
 test('30問診断を保存・回答・終了でき、支援と終了後の変更を拒否する',async()=>{
  const db=env.authenticatedContext('diagnostic').firestore(),run=createDiagnostic(questions.slice(0,30),qualification),ref=doc(db,resourcePath('diagnostic',run.id));
@@ -86,7 +88,7 @@ test('診断専用問題は通常の試行コレクションへ書き込めな�
  await assertFails(setDoc(doc(db,path('no-derived-attempt',a.id)),envelope(a)));
 });
 
-const learningPath=(uid,id)=>`users/${uid}/qualifications/ap/learning/${id}`;
+const learningPath=(uid,id)=>`users/${uid}/qualifications/ap/learningV2/${id}`;
 test('紙ペンと先送りは本人だけ保存・解除でき、旧版と削除を拒否する',async()=>{
  const db=env.authenticatedContext('preferences').firestore(),ref=doc(db,learningPath('preferences','desk--q'));
  await assertSucceeds(setDoc(ref,resourceEnvelope('desk',{questionId:'q',value:true})));
@@ -109,22 +111,22 @@ test('再開範囲は回答とは別に保存し、不正な入口・戻り先�
 
 test('単語帳評価と観測済み削除・復元は本人だけ追記し、既存文書の変更は拒否する',async()=>{
  const uid='cards-rules',db=env.authenticatedContext(uid).firestore();
- const make=(kind,payload)=>({version:1,kind,revision:1,operationId:`${kind}--${payload.id}`,deviceId:'phone',payload,updatedAt:serverTimestamp()});
- const ref=(db,id)=>doc(db,`users/${uid}/qualifications/ap/cards/${id}`);
+ const make=(kind,payload)=>({version:2,kind,revision:1,operationId:`${kind}--${payload.id}`,deviceId:'phone',payload,updatedAt:serverTimestamp()});
+ const ref=(db,id)=>doc(db,`users/${uid}/qualifications/ap/cardsV2/${id}`);
  const rating={id:'event',cardId:'card',cardVersion:1,outcome:'again',at:'2026-10-10T00:00:00.000Z'};
  for(const [kind,payload] of [['rating',rating],['reset',{id:'clear',eventIds:['event']}],['restore',{id:'import',eventIds:['event'],resetIds:['clear']}]]){
   const value=make(kind,payload),r=ref(db,value.operationId);await assertSucceeds(setDoc(r,value));await assertSucceeds(getDoc(r));await assertFails(setDoc(r,value));await assertFails(deleteDoc(r));
   for(const other of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()]){await assertFails(getDoc(ref(other,value.operationId)));await assertFails(setDoc(ref(other,'rating--other'),make('rating',{...rating,id:'other'})));}
  }
- await assertSucceeds(getDocs(collection(db,`users/${uid}/qualifications/ap/cards`)));
+ await assertSucceeds(getDocs(collection(db,`users/${uid}/qualifications/ap/cardsV2`)));
  for(const payload of [{...rating,id:'invalid',outcome:'unknown'},{...rating,id:'invalid',cardVersion:0},{...rating,id:'invalid',at:'not-date'},{...rating,id:'invalid',extra:1}])await assertFails(setDoc(ref(db,'rating--invalid'),make('rating',payload)));
  for(const eventIds of [[],['e','e'],Array.from({length:201},(_,i)=>`e${i}`)])await assertFails(setDoc(ref(db,'reset--invalid'),make('reset',{id:'invalid',eventIds})));
  await assertFails(setDoc(doc(db,resourcePath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
  await assertFails(setDoc(doc(db,learningPath(uid,'rating--invalid')),make('rating',{...rating,id:'invalid'})));
 });
 
-const personalPath=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/personal/${id}`;
-const personalEnvelope=(kind,payload,revision=1,deviceId='phone')=>({version:1,kind,payload,revision,deviceId,operationId:`${deviceId}:${kind}:${revision}`,updatedAt:serverTimestamp()});
+const personalPath=(uid,id,qual='ap')=>`users/${uid}/qualifications/${qual}/personalV2/${id}`;
+const personalEnvelope=(kind,payload,revision=1,deviceId='phone')=>({version:2,kind,payload,revision,deviceId,operationId:`${deviceId}:${kind}:${revision}`,updatedAt:serverTimestamp()});
 test('分野メモは本人だけ更新・空欄化でき、文字数・未知種類・旧版・削除を拒否する',async()=>{
  const db=env.authenticatedContext('notes').firestore(),ref=doc(db,personalPath('notes','note--network')),payload={topicId:'network',text:'教科書 p.20'};
  await assertSucceeds(setDoc(ref,personalEnvelope('note',payload)));
@@ -134,7 +136,7 @@ test('分野メモは本人だけ更新・空欄化でき、文字数・未知�
  await assertFails(setDoc(ref,personalEnvelope('note',{...payload,extra:true},2)));
  await assertFails(setDoc(doc(db,personalPath('notes','draft--network')),personalEnvelope('draft',{...payload,baseRevision:1})));
  await assertSucceeds(setDoc(ref,personalEnvelope('note',{...payload,text:''},2,'pc')));
- await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/notes/qualifications/ap/personal')));
+ await assertFails(deleteDoc(ref));await assertSucceeds(getDocs(collection(db,'users/notes/qualifications/ap/personalV2')));
  assert.equal((await getDoc(doc(db,personalPath('notes','note--network','other')))).exists(),false);
 });
 test('単語帳の再開位置は端末別文書で更新し、別端末IDへの変更を拒否する',async()=>{
@@ -182,7 +184,7 @@ test('親なし独自40問の診断・模試を別資格で保存でき、用途
  const qual={...qualification,id:'synthetic',diagnosticBlueprint:{size:40}};
  const independent=questions.slice(0,40).map((source,i)=>{const q={...structuredClone(source),id:'independent-'+i,qualificationId:qual.id,sourceKind:'authored',uses:['diagnostic','mock']};delete q.parentQuestionId;delete q.diagnosticOnly;return q;});
  const db=env.authenticatedContext('generic').firestore();
- const ref=(id)=>doc(db,`users/generic/qualifications/synthetic/resources/${id}`);
+ const ref=(id)=>doc(db,`users/generic/qualifications/synthetic/resourcesV2/${id}`);
  const run=createDiagnostic(independent,qual);await assertSucceeds(setDoc(ref(run.id),resourceEnvelope('diagnostic',run)));
  submitDiagnostic(run,run.slots[0].attempt.questionSnapshot.correctChoiceId);await assertSucceeds(setDoc(ref(run.id),resourceEnvelope('diagnostic',run,2)));
  const resized=structuredClone(run);resized.size=41;await assertFails(setDoc(ref(run.id),resourceEnvelope('diagnostic',resized,3)));
@@ -198,14 +200,14 @@ test('複数選択の途中・採点・回答後ヒントを同期し、不明ID
  const uid='multi-rules',db=env.authenticatedContext(uid).firestore(),a=createAttempt(multi),ref=doc(db,path(uid,a.id));
  await assertSucceeds(setDoc(ref,envelope(a)));a.selectedChoiceIds=['choice-2'];await assertSucceeds(setDoc(ref,envelope(a,2)));
  for(const ids of [['unknown'],['choice-0','choice-0'],['choice-0',null]])await assertFails(setDoc(ref,envelope({...a,selectedChoiceIds:ids},3)));
- for(const patch of [{selected:0},{selectedChoiceId:'choice-0'}])await assertFails(setDoc(ref,envelope({...a,...patch},3)));
+ for(const patch of [{selected:0},{selectedChoiceId:'choice-0'}]){const value=envelope(a,3);Object.assign(value.payload.response,patch);await assertFails(setDoc(ref,value));}
  const partial=structuredClone(a);finalizeAttempt(partial,'correct');await assertFails(setDoc(ref,envelope(partial,3)));
  const short=structuredClone(a);finalizeAttempt(short,'incorrect');await assertFails(setDoc(ref,envelope(short,3)));
  a.selectedChoiceIds=['choice-0','choice-2'];finalizeAttempt(a,gradeAttempt(a));await assertSucceeds(setDoc(ref,envelope(a,3)));openHint(a);await assertSucceeds(setDoc(ref,envelope(a,4)));
  await assertFails(setDoc(ref,envelope({...a,selectedChoiceIds:['choice-1','choice-2'],status:'incorrect'},5)));
  const wrong=createAttempt(multi);wrong.selectedChoiceIds=['choice-1','choice-2'];finalizeAttempt(wrong,gradeAttempt(wrong));await assertSucceeds(setDoc(doc(db,path(uid,wrong.id)),envelope(wrong)));
  const twenty={...structuredClone(multi),choices:Array.from({length:20},(_,i)=>({id:'choice-'+i,label:String(i+1),text:'検証用'})),correctChoiceIds:['choice-0','choice-19']};const wide=createAttempt(twenty);wide.selectedChoiceIds=['choice-0','choice-19'];finalizeAttempt(wide,gradeAttempt(wide));await assertSucceeds(setDoc(doc(db,path(uid,wide.id)),envelope(wide)));
- const defer=createAttempt(multi);defer.questionSnapshot.type='freeText';defer.questionSnapshot.grading={method:'deferred'};await assertFails(setDoc(doc(db,path(uid,defer.id)),envelope(defer)));
+ const defer=createAttempt(multi);defer.questionSnapshot.type='freeText';defer.questionSnapshot.correctChoiceId='choice-0';defer.questionSnapshot.grading={method:'deferred'};await assertFails(setDoc(doc(db,path(uid,defer.id)),envelope(defer)));
 });
 test('複数選択の診断・固定模試は配列の途中回答を保存し、確定組合せを変更できない',async()=>{
  const questions=Array.from({length:30},(_,i)=>{const m={...structuredClone(q),id:'multi-'+i,type:'multipleChoice',sourceKind:'authored',uses:['diagnostic','mock'],answer:null,correctChoiceIds:['choice-0','choice-2'],selection:{mode:'exact',count:2},grading:{method:'exactChoiceSet'}};delete m.correctChoiceId;return m;});
@@ -216,4 +218,17 @@ test('複数選択の診断・固定模試は配列の途中回答を保存し�
   run.currentChoiceId=['choice-0','choice-2'];submitDiagnostic(run,run.currentChoiceId);await assertSucceeds(setDoc(ref,resourceEnvelope(kind,run,3)));
   const changed=structuredClone(run);changed.responses[run.slots[0].id]=['choice-1','choice-2'];await assertFails(setDoc(ref,resourceEnvelope(kind,changed,4)));
  }
+});
+
+import {createCaseRun,caseFields,setCaseResponse,submitCaseField,viewCaseAnswer,rateCaseField} from '../src/domain/case-study.js';
+const pilot=JSON.parse(readFileSync(new URL('../content/ap/written-cases.json',import.meta.url)))[0];
+const casePath=(uid,id)=>`users/${uid}/qualifications/ap/writtenV2/${id}`;
+test('Bの部分回答・自己評価・完了は本人のみ保存し、確定回答・教材・他人・不正評価を拒否',async()=>{
+ const uid='written-rules',db=env.authenticatedContext(uid).firestore(),r=createCaseRun(pilot),ref=doc(db,casePath(uid,r.id));let rev=1;
+ const save=()=>setDoc(ref,resourceEnvelope('case',r,rev++));await assertSucceeds(save());const slots=caseFields(pilot),first=slots[0];setCaseResponse(r,first.key,'未知表現');await assertSucceeds(save());submitCaseField(r,first.key);await assertSucceeds(save());viewCaseAnswer(r,first.key);await assertSucceeds(save());rateCaseField(r,first.key,'partial');await assertSucceeds(save());
+ const altered=structuredClone(r);altered.responses[first.key].value='改ざん';await assertFails(setDoc(ref,resourceEnvelope('case',altered,rev)));const source=structuredClone(r);source.material.title='changed';await assertFails(setDoc(ref,resourceEnvelope('case',source,rev)));
+ const fake=structuredClone(r);fake.responses[first.key].evaluation.outcome='correct';await assertFails(setDoc(ref,resourceEnvelope('case',fake,rev)));
+ for(const slot of slots.slice(1)){submitCaseField(r,slot.key,undefined,{skip:true});await assertSucceeds(save());viewCaseAnswer(r,slot.key);await assertSucceeds(save());if(!r.responses[slot.key].evaluation){rateCaseField(r,slot.key,'notYet');await assertSucceeds(save());}}
+ assert.equal(r.progress.status,'completed');const rewritten=structuredClone(r);rewritten.responses[first.key].evaluation.outcome='meets';await assertFails(setDoc(ref,resourceEnvelope('case',rewritten,rev)));for(const client of [env.authenticatedContext('other').firestore(),env.unauthenticatedContext().firestore()])await assertFails(getDoc(doc(client,casePath(uid,r.id))));await assertFails(deleteDoc(ref));
+ const clone=structuredClone(r);clone.id='case--imported';await assertSucceeds(setDoc(doc(db,casePath(uid,clone.id)),resourceEnvelope('case',clone)));
 });

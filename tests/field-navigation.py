@@ -3,7 +3,7 @@ import json,os,shutil
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from browser_storage import state,write_state,nav
-ROOT=Path(__file__).resolve().parents[1];URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/')
+ROOT=Path(__file__).resolve().parents[1];URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ART=Path(os.getenv('AP_STUDY_ARTIFACTS','/workspace/scratch/field-implementation/browser'));ART.mkdir(parents=True,exist_ok=True)
 bank=json.loads((ROOT/'data/questions.json').read_text());qualification=json.loads((ROOT/'content/ap/qualification.json').read_text())
 ids=[next(q['id'] for q in bank if q['topic']==topic and q['hints'][0]['revealsAnswer']==False) for topic in ['データベース','データベース','ネットワーク','セキュリティ']]

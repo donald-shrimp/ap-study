@@ -6,7 +6,7 @@ import time
 from playwright.sync_api import sync_playwright
 from browser_storage import open_answer_history, wait_for_async
 
-URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/')+'?firebase-emulator=1'
+URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')+'?firebase-emulator=1'
 READ='''async()=>{
  const root=new URL('.',document.baseURI),sdk=await import(new URL('assets/vendor/firebase.js',root));
  const user=sdk.getAuth().currentUser,{createLocalStore}=await import(new URL('src/storage/local.js',root));
@@ -38,7 +38,7 @@ def synced(page):
     settings(page);page.locator('#sync-now').click()
     try:page.wait_for_function('document.getElementById("sync-state").dataset.study==="synced"',timeout=30000)
     except Exception:
-        print('SYNC STATUS',page.locator('#sync-state').inner_text(),flush=True);print('PENDING',[(i['id'],i['revision'],i['payload']['status']) for i in state(page)['pending']],flush=True);raise
+        print('SYNC STATUS',page.locator('#sync-state').inner_text(),flush=True);print('PENDING',[(i['id'],i['revision'],i['payload']['evaluation']['outcome'] if i['payload']['evaluation'] else i['payload']['progress']['status']) for i in state(page)['pending']],flush=True);raise
     wait_for_async(page,'async()=>!(await ('+READ+')()).pending.length')
     close_settings(page)
 
@@ -75,7 +75,7 @@ with sync_playwright() as p:
     # Offline SDK initialization, local answer/outbox, reload, automatic/manual retry.
     first.locator('.sidebar [data-view=home]').click();first.locator('.study-entrance[data-paper-mode=all][data-action=entry-start]').click();first.get_by_role('radio').first.wait_for();first.evaluate('async()=>await navigator.serviceWorker.ready')
     contexts[0].set_offline(True);first.locator('[data-action=hint]').click();first.get_by_role('radio').first.check();first.locator('[data-action=submit]').click();offline=state(first);assert offline['pending']
-    first.reload();first.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+')');first.locator('#result-heading').wait_for();assert state(first)['pending'] and state(first)['state']['currentId']==offline['state']['currentId']
+    first.reload();first.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+')');first.wait_for_timeout(700);print('OFFLINE RESTORE',first.locator('#notice').inner_text(),state(first)['state']['view'],state(first)['state']['currentId'],[(a['status'],a['id']) for a in state(first)['state']['attempts']],flush=True);first.locator('#result-heading').wait_for();assert state(first)['pending'] and state(first)['state']['currentId']==offline['state']['currentId']
     contexts[0].set_offline(False);synced(first);synced(second);assert len([a for a in state(second)['state']['attempts'] if a['completedAt']])==3
     print('PASS offline answer/hints / reload / durable pending queue / replay without duplicate',flush=True)
     # Log out restores the guest; another UID has no old records/outbox.

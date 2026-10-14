@@ -1,6 +1,6 @@
 import {encodeWorkspaceBackup,decodeWorkspaceBackup} from './resources.js';
 // The sole persisted question-record contract. UI projection is not an old-file reader.
-const clone=v=>structuredClone(v);
+const clone=v=>JSON.parse(JSON.stringify(v));
 const keys=(v,allowed)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).every(k=>allowed.includes(k));
 const id=v=>typeof v==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(v);
 export function toRecord(a){
@@ -29,3 +29,11 @@ export function validateRecord(r){
 }
 export function encodeState(s){const {attempts,...rest}=s;return {...rest,format:'hitomon-study-state',version:2,records:attempts.map(toRecord),...(rest.workspaceBackup?{workspaceBackup:encodeWorkspaceBackup(rest.workspaceBackup)}:{})};}
 export function decodeState(s){if(s?.format!=='hitomon-study-state'||s.version!==2||!Array.isArray(s.records))throw Error('新形式のバックアップではありません。');const {records,format,...rest}=s;return {...rest,attempts:records.map(fromRecord),...(rest.workspaceBackup?{workspaceBackup:decodeWorkspaceBackup(rest.workspaceBackup)}:{})};}
+// Logged-in import adds verified v2 records without replacing account history.
+export function mergeBackupState(current,incoming){
+ const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
+ const records=new Map(current.attempts.map(a=>[a.id,a]));
+ for(const a of incoming.attempts){const old=records.get(a.id);if(old&&canonical(toRecord(old))!==canonical(toRecord(a)))throw Error('同じIDの異なる学習記録があります。取り込み前の記録は保持しています。');if(!old)records.set(a.id,clone(a));}
+ const overrides=clone(current.overrides);for(const [id,value] of Object.entries(incoming.overrides)){if(overrides[id]&&canonical(overrides[id])!==canonical(value))throw Error('教材編集の内容が競合しています。取り込み前の教材は保持しています。');overrides[id]=clone(value);}
+ return {...(current.attempts.length?clone(current):clone(incoming)),attempts:[...records.values()],overrides,readingNotes:{...clone(incoming.readingNotes),...clone(current.readingNotes)}};
+}
