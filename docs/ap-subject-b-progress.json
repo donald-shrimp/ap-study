@@ -1,8 +1,8 @@
 {
   "format": "hitomon-implementation-progress",
   "version": 1,
-  "updatedAt": "2026-10-14T23:58:31.030529+00:00",
-  "status": "awaiting_account_import_and_production_verification",
+  "updatedAt": "2026-10-15T00:29:42.458510+00:00",
+  "status": "awaiting_production_second_device_verification",
   "plan": "docs/ap-subject-b-plan.md",
   "worktree": "/workspace/ap-study-subject-b",
   "branch": "feature/subject-b",
@@ -34,10 +34,11 @@
     "同一バックアップ再取り込みで端末ごとの表示位置を誤って競合としない修正と回帰検査",
     "本人の変換ファイルでAuth/Firestore Emulatorのアカウント取り込み・別端末復元・再取り込みを確認（本番アカウントではない）",
     "Node164件と新版PWAの再検証通過",
-    "再取り込み修正c0d0279のmain/ref/tree・Pages成功・公開26ファイル一致・公開スマホ／PC画面を確認"
+    "再取り込み修正c0d0279のmain/ref/tree・Pages成功・公開26ファイル一致・公開スマホ／PC画面を確認",
+    "利用者が本番アカウントへの記録の再登録完了を報告（別端末での確認は未実施）"
   ],
   "remaining": [
-    "本人ログイン済み本番アカウントへ変換ファイルを取り込み、同期完了と別端末での復元を照合（この環境には本人の認証・操作接続がない）"
+    "本番の同期完了と別端末での記録・計画・単語帳の復元を照合（再登録完了は利用者報告済み）"
   ],
   "authors": [
     "/root",
@@ -59,7 +60,7 @@
     "saveFailure": "passed",
     "caseSync": "SDK/emulators; two browsers and batched multi-field CAS passed",
     "productionRules": "user reports latest Rules published; authenticated production verification pending",
-    "personalMigration": "files received; conversion and isolated public-browser import/export verified; production account import pending",
+    "personalMigration": "conversion and isolated import/export verified; production account reimport reported by user; production sync and second-device verification pending",
     "personalAccountEmulator": "passed; logged-in additive import and second-device semantic records/plan/assessment/card equality; repeated import retains local display fields"
   },
   "publication": {
@@ -181,7 +182,7 @@
     "productionFirestoreRules": "user reports published; authenticated production verification pending",
     "personalDataMigration": "converted and verified using private files and isolated public/browser-emulator tests; production account import pending"
   },
-  "nextAction": "本人が新版へGoogleログインし、資格別の変換済み学習記録とAP単語帳記録を取り込んで今すぐ同期。別端末で復元を確認。個人ファイルは公開リポジトリへ追加しない。",
+  "nextAction": "今すぐ同期の完了を確認し、別端末で記録・回答・ヒント・計画・単語帳の復元を照合。個人ファイルは公開リポジトリへ追加しない。",
   "backupConversionVerified": true,
   "productionRulesPublication": {
     "status": "published_reported_by_user",
@@ -194,9 +195,14 @@
     "converted": true,
     "strictValidationPassed": true,
     "publicGuestBrowserImportExportPassed": true,
-    "productionAccountImported": false,
+    "productionAccountImported": true,
     "productionSecondDeviceVerified": false,
-    "accountEmulatorTwoDevicesPassed": true
+    "accountEmulatorTwoDevicesPassed": true,
+    "productionAccountImportConfirmation": {
+      "source": "reported_by_user",
+      "reportedOn": "2026-10-15",
+      "independentlyVerified": false
+    }
   },
   "learningTargetNavigation": {
     "status": "published",

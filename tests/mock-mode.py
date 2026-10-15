@@ -16,6 +16,12 @@ with sync_playwright() as p:
  page.locator('.home-assessments [data-view=mocks]').click();page.get_by_role('heading',name='模試を選ぶ',exact=True).wait_for();assert page.locator('.mock-set').count()==2
  assert page.locator('.mock-previous').count()==0;page.screenshot(path=str(ART/'selection.png'),full_page=True)
  page.locator('[data-mock-set=ap-mock-a] [data-action=start-mock]').click();page.get_by_text('模試 A 1 / 80問',exact=True).wait_for()
+ for width in [320,390,1280]:
+  page.set_viewport_size({'width':width,'height':844})
+  left=page.locator('[data-action=skip-diagnostic]').bounding_box();right=page.locator('[data-action=submit-diagnostic]').bounding_box()
+  assert left['x']+left['width']<=right['x'] and abs(left['y']-right['y'])<1,(width,left,right)
+  assert page.locator('[data-action=submit-diagnostic]').is_disabled()
+ page.set_viewport_size({'width':390,'height':844})
  initial=run(page);frozen=json.dumps(initial['slots'],sort_keys=True);expected=json.loads((ROOT/'content/ap/mock-sets.json').read_text())['sets'][0]['slots'];assert [s['attempt']['questionId'] for s in initial['slots']]==[s['questionId'] for s in expected]
  for i,slot in enumerate(initial['slots']):
   q=slot['attempt']['questionSnapshot'];assert page.locator('.hint-section,.result,.correct-choice,.reason-list').count()==0

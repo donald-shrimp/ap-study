@@ -35,6 +35,14 @@ with sync_playwright() as p:
   choose_correct(page,q);page.locator('[data-action=submit]').click();page.locator('#result-heading').wait_for();assert current(page)['status']=='correct';page.locator('.result details').filter(has=page.locator('.reason-list')).locator('summary').click();assert page.locator('.reason-list li').count()==len(q['choices'])
  page.set_viewport_size({'width':390,'height':844});nav(page,'topics');assert page.locator('.topic-card').count()==4;page.locator('.topic-card').first.locator('[data-action=field-practice]').click();page.locator('[name=answer]').first.wait_for();assert state(page)['session']['topicId'] in {q['topicId'] for q in bank}
  nav(page,'home');ordinary=len(state(page)['attempts']);page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for();r=run(page);assert len(r['slots'])==30 and len({s['attempt']['questionId'] for s in r['slots']})==30
+ for width in [320,390,1280]:
+  page.set_viewport_size({'width':width,'height':844})
+  skip=page.locator('[data-action=skip-diagnostic]');submit=page.locator('[data-action=submit-diagnostic]');left=skip.bounding_box();right=submit.bounding_box()
+  assert left['x']+left['width']<=right['x'] and abs(left['y']-right['y'])<1,(width,left,right)
+  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+  assert page.locator('.assessment-actions button').evaluate_all("buttons=>buttons.map(b=>b.dataset.action)")==['skip-diagnostic','submit-diagnostic']
+  assert submit.is_disabled()
+ page.set_viewport_size({'width':390,'height':844})
  counts=collections.Counter(s['attempt']['questionSnapshot']['topicId'] for s in r['slots']);assert set(counts.values())=={7,8} and len(counts)==4
  frozen=json.dumps(r['slots'],sort_keys=True)
  q=r['slots'][0]['attempt']['questionSnapshot'];first=(q.get('correctChoiceIds') or [q['correctChoiceId']])[0];page.locator(f'[name=diagnostic-answer][value="{first}"]').check();page.locator('[data-action=pause-diagnostic]').click();page.reload();page.locator('.home-assessments [data-action=resume-diagnostic]').click();page.locator('[name=diagnostic-answer]').first.wait_for();assert page.locator(f'[name=diagnostic-answer][value="{first}"]').is_checked();assert json.dumps(run(page)['slots'],sort_keys=True)==frozen
