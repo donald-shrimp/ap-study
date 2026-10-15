@@ -5,10 +5,15 @@ ROOT=Path(__file__).resolve().parents[1]
 read=lambda p:json.loads((ROOT/p).read_text())
 canonical=lambda v:json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
 cases=read('content/ap/written-cases.json');reviews=read('content/ap/written-reviews.json');by_id={r['caseId']:r for r in reviews}
-expected={f'ap-r0{year}{s}-pm{n}' for year in [6,7] for s in ['a','h'] for n in range(1,12)}
-assert len(cases)==44 and {c['id'] for c in cases}==expected
-assert set(by_id)==expected and len(reviews)==44
-preserved=read('content/ap/written-drafts/2024/preserved-2025-cases.json')
+progress=read('content/ap/written-drafts/2021-2023/progress.json');years=[6,7]+[y-2018 for y in progress['integratedYears']]
+assert progress['integratedYears'] in [[],[2023],[2023,2022],[2023,2022,2021]]
+expected={f'ap-r0{year}{s}-pm{n}' for year in years for s in ['a','h'] for n in range(1,12)}
+COUNT=len(expected)
+assert len(cases)==COUNT and {c['id'] for c in cases}==expected
+assert set(by_id)==expected and len(reviews)==COUNT
+preserved=read('content/ap/written-drafts/2021-2023/preserved-2024-2025.json')
+assert len(preserved['cases'])==44 and len(preserved['reviews'])==44
+assert set(preserved['cases'])<=expected and set(preserved['reviews'])<=expected
 for c in cases:
  if c['id'] in preserved['cases']:assert hashlib.sha256(canonical(c)).hexdigest()==preserved['cases'][c['id']],c['id']
 for r in reviews:
@@ -41,6 +46,6 @@ for c in cases:
    if field['type']!='singleChoice':assert all(len(a)<=field['maxLength'] for a in field['referenceAnswers']),(c['id'],item['id'],field['id'])
    assert field['type']!='freeText' or field['grading']['method']=='self'
 manifest=read('data/qualifications/ap/manifest.json');public=read('data/qualifications/ap/'+manifest['cases']['url'])
-assert public['cases']==cases and manifest['cases']['fields']==total and manifest['cases']['count']==44
+assert public['cases']==cases and manifest['cases']['fields']==total and manifest['cases']['count']==COUNT
 assert manifest['count']==800
-print(f'PASS four official sessions / 44 independently reviewed cases / {total} fields / original pilot unchanged / source+asset+case hashes / figure insertion order / all field constraints / generated bank equality / AP800 retained')
+print(f'PASS {len(years)*2} official sessions / {COUNT} independently reviewed cases / {total} fields / original pilot unchanged / source+asset+case hashes / figure insertion order / all field constraints / generated bank equality / AP800 retained')

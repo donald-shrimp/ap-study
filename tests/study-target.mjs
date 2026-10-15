@@ -5,10 +5,11 @@ import {studyTargets,resolveStudyTarget,rememberPart,rememberedPart,targetLabel,
 const root=new URL('https://donald-shrimp.github.io/ap-study/');
 const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
 const ap=read('data/qualifications/ap/manifest.json'),ab=read('data/qualifications/ab730/manifest.json');
-test('公開カタログは科目Aの800問と科目Bの44大問を分け、単一科目の資格を1行にする',()=>{
+const writtenCount=44+22*read('content/ap/written-drafts/2021-2023/progress.json').integratedYears.length;
+test('公開カタログは科目Aの800問と科目Bの大問を分け、単一科目の資格を1行にする',()=>{
  const catalog=read('data/qualifications/catalog.json');
  assert.deepEqual(catalog.qualifications.find(q=>q.id==='ap').studyTargets,ap.studyTargets);
- assert.deepEqual(studyTargets(ap).map(p=>[p.examPartId,targetCount(p)]),[['objective','800問'],['written','大問44題']]);
+ assert.deepEqual(studyTargets(ap).map(p=>[p.examPartId,targetCount(p)]),[['objective','800問'],['written',`大問${writtenCount}題`]]);
  assert.equal(studyTargets(ab).length,1);assert.equal(targetCount(studyTargets(ab)[0]),'174問');
  assert.equal(targetLabel(ap,'written',{short:true}),'応用情報・科目B');assert.equal(targetLabel(ab,'objective',{short:true}),'AB-730');
 });

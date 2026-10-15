@@ -7,6 +7,7 @@ from browser_storage import select_target,state,open_plan_editor,open_data_manag
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 ROOT=URL.rsplit('ap/',1)[0]
 ARTIFACTS=Path(tempfile.mkdtemp(prefix='hitomon-target-navigation-'))
+WRITTEN_COUNT=44+22*len(json.loads((Path(__file__).resolve().parents[1]/'content/ap/written-drafts/2021-2023/progress.json').read_text())['integratedYears'])
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox'])
  ctx=b.new_context(viewport={'width':390,'height':844});page=ctx.new_page();errors=[];requests=[]
@@ -14,7 +15,7 @@ with sync_playwright() as p:
  page.goto(ROOT+'?qualifications');page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
  assert page.locator('.qualification-option').count()==3
  assert page.locator('[data-qualification-id=ap][data-part-id=objective]').inner_text().startswith('応用情報－科目A\n800問')
- assert page.locator('[data-qualification-id=ap][data-part-id=written]').inner_text().startswith('応用情報－科目B\n大問44題')
+ assert page.locator('[data-qualification-id=ap][data-part-id=written]').inner_text().startswith(f'応用情報－科目B\n大問{WRITTEN_COUNT}題')
  assert not any('/packs/' in u or '/index.' in u for u in requests)
  for width in [320,390,800,801,1440,1920]:
   page.set_viewport_size({'width':width,'height':900});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
