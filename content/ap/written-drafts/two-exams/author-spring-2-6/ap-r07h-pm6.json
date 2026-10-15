@@ -1,0 +1,496 @@
+{
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "id": "ap-r07h-pm6",
+  "title": "販売管理システムの構築",
+  "topicId": "database",
+  "status": "draft",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問6",
+  "sourcePages": [
+    36,
+    37,
+    38,
+    39
+  ],
+  "sourceImages": [
+    "assets/written/ap-r07h-pm6/question-p36.png",
+    "assets/written/ap-r07h-pm6/question-p37.png",
+    "assets/written/ap-r07h-pm6/question-p38.png",
+    "assets/written/ap-r07h-pm6/question-p39.png"
+  ],
+  "body": "問6 販売管理システムの構築に関する次の記述を読んで，設問に答えよ。\n\nH社は，全国の店舗及びインターネットで釣り具の販売を行っている。これまで販売促進のためにキャンペーンを定期的に実施してきたが，売上に全く結びつかないものもあった。そこで，キャンペーンの機能を強化し，さらにその効率を上げるために，既存の販売管理システムを改修した新しい販売管理システム（以下，新システムという）を構築することになった。\n\n［キャンペーンの概要］\nキャンペーンとは，2週間～3か月間の定められた期間，幾つかの商品に安い売価を設定することで，新規会員の獲得や，他の商品も一緒に購入してもらうことによる売上の向上を目指す活動である。\n新システムで提供するキャンペーンを広報する手段は4種類あり，種別と呼ばれる英字1字で分類される。新システムで提供するキャンペーン種別について，表1に示す。\n\n表1 新システムで提供するキャンペーン種別\n| 種別 | 種別名 | 概要 |\n| --- | --- | --- |\n| H | 葉書 | キャンペーンについて，特定の会員に葉書で案内する。全国の店舗及びインターネットでの販売が対象の場合，直近1年以内に購入した実績がある会員に案内する。特定地域の店舗が対象の場合，店舗ごとに決められた範囲（以下，店舗エリアという）に住む会員に案内する。店舗エリアは，その店舗に来客が見込まれる会員の居住範囲を複数の郵便番号で定めた範囲として定義する。店舗エリアの範囲は，最初に対象店舗の半径5km以内の地域に該当する郵便番号を登録し，定期的に見直す。 |\n| E | 電子メール | キャンペーンについて，全ての会員に電子メールで案内する。案内の内容は，会員の住所や購入実績に応じてカスタマイズする。 |\n| B | バナー広告 | 釣り情報のWebサイトやソーシャルメディアにバナー広告を表示して，キャンペーンをアピールする。 |\n| L | リスティング広告（検索連動型広告） | Webサイトの検索エンジンにおいて，釣り関連のキーワードを入力した際，検索結果にURLリンク付きのテキストを表示して，キャンペーンをアピールする。 |\n\n各キャンペーンには，目標となる複数の指標と予算を設定し，その実施を複数回に分けて行うことがある。その予算を各種別に配賦する割合を変えることによって目標達成率を上げる工夫が求められる。\nバナー広告とリスティング広告のキャンペーン（以下，Webキャンペーンという）は，キャンペーン単位で広告内容と予算金額を設定してから，Webマーケティングを運営するT社に実施の詳細を委託する。T社からは，広告内容として設定した広告表示位置やキーワードごとに，その広告費用や表示回数，クリック数などの実績を週次で集計したレポートが送付される。\n新システムのE-R図（抜粋）を図1に示す。なお，新システムでは，E-R図のエンティティ名を表名にし，属性名を列名にして，適切なデータ型で表定義した関係データベースによって，データを管理する。\n\n図1 新システムのE-R図（抜粋）\n\n［キャンペーン種別ごとの実績の集計］\n新しいキャンペーンを計画するために，指定したキャンペーンについて，キャンペーン種別ごとの実績として，売上，原価，粗利，実施金額を集計するSQL文を図2に示す。ここで，“:キャンペーン番号”は指定したキャンペーン番号を表す埋込み変数である。なお，関数COALESCE(A, B)は，AがNULLでないときはAを，AがNULLのときはBを返す。\n\n図2 キャンペーン種別ごとの実績を集計するSQL文\n```sql\nSELECT CK.キャンペーン種別, COALESCE(UK.売上計,0) AS 売上計,\n  COALESCE(UK.原価計,0) AS 原価計,\n  COALESCE(UK.売上計,0) - COALESCE(UK.原価計,0) AS 粗利計,\n  CK.キャンペーン実施金額計\n［c］\n(SELECT キャンペーン種別, SUM(キャンペーン実施金額) AS キャンペーン実施金額計\n FROM キャンペーン実施\n WHERE キャンペーン番号 = :キャンペーン番号\n GROUP BY キャンペーン種別) CK\n［d］\n(SELECT U.キャンペーン種別, SUM(M.商品個数 * M.商品単価) AS 売上計,\n        ［e］ AS 原価計\n FROM 売上 U\n INNER JOIN 売上明細 M ON U.売上番号 = M.売上番号\n INNER JOIN 商品 S ON M.商品番号 = S.商品番号\n WHERE U.キャンペーン番号 = :キャンペーン番号\n GROUP BY U.キャンペーン種別) UK\nON CK.キャンペーン種別 = UK.キャンペーン種別\n```\n\n［葉書を送る店舗エリアの見直し］\n葉書を送る対象となる店舗エリアを，葉書キャンペーンによる会員の購入実績を基に見直すことを考える。対象の店舗における過去1年間に葉書キャンペーンで購入した会員の郵便番号ごとの売上実績数を，売上実績数の降順に出力するSQL文を図3に示す。ここで，“:店舗番号”は指定した店舗番号を，“:一年前年月日”は現在から1年前の年月日を表す埋込み変数である。\n\n図3 売上実績数を降順に出力するSQL文\n```sql\nSELECT K.会員郵便番号, COUNT(*) AS 売上実績数\nFROM 売上 U INNER JOIN 会員 K ON U.会員番号 = K.会員番号\nWHERE U.店舗番号 = :店舗番号\n  AND U.売上年月日 >= :一年前年月日\n  ［f］\nGROUP BY K.会員郵便番号\n［g］\n```\n\n［Webキャンペーン内容の定期的な見直しの検討］\nWebキャンペーンの効果をより高めるために，T社から送付されるレポートを基に，キャンペーン期間中に広告内容を適宜変更する依頼をT社に出すことを考える。Webキャンペーンの実績を記録するために追加した表の構造を図4に示す。\n\n図4 Webキャンペーンの実績を記録するために追加した表の構造\nWebキャンペーン実績（++キャンペーン番号++，++キャンペーン実施番号++，キャンペーン種別，++広告番号++，++実績年月日++，++広告表示位置++，キーワード，広告費用，表示回数，クリック数，会員登録数）\n注記 下線は主キーを示す。\n\nレビューを実施したところ，Webキャンペーン実績表は日次で実績を集計する想定になってしまっているので見直す必要がある，との指摘を受けた。\nその後，++①受けた指摘に対応すること++で，目的の機能を実装することができた。",
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図1中の［a］，［b］に入れる適切な属性名及びエンティティ間の関連を答え，E-R図を完成させよ。なお，属性名及びエンティティ間の関連の表記は，図1の凡例に倣うこと。",
+      "sourcePages": [
+        36,
+        37,
+        39
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "blank-a",
+        "blank-b"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a（属性名と主キー表記）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "店舗エリア郵便番号（実線の下線付き）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "店舗エリアは複数の郵便番号で定義される。店舗エリア詳細では店舗エリア番号と店舗エリア郵便番号の組合せで行を識別するため，追加する属性は店舗エリア郵便番号で，主キーを示す実線の下線も必要である。講評では主キーの実線下線を欠いた解答が指摘されている。原本の図示回答を文字入力で表すため，公式の属性名に下線付きという注記を添えて示した。属性名だけの一致を自動正解にはしない。",
+          "rubric": [
+            "属性名を店舗エリア郵便番号とする。",
+            "店舗エリア番号との複合主キーなので，属性名に実線の下線を付ける。",
+            "図の凡例に従う指定を満たしているか自己評価する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1の凡例に倣う。主キーは実線の下線で表す。",
+            "文字入力では，下線を付ける箇所を「実線の下線付き」等と併記して図示の代わりに表し，自己評価する。",
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              39
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "blank-a",
+              "blank-b"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          },
+          "officialAnswerNotation": {
+            "text": "店舗エリア郵便番号",
+            "solidUnderline": true,
+            "inputAdaptation": "Original requests completion of E-R drawing; app accepts textual annotation of underlining and requires self evaluation."
+          }
+        },
+        {
+          "id": "b",
+          "label": "b（関連の記号）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "→"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "一つの商品は複数のキャンペーン商品に登録でき，各キャンペーン商品は一つの商品に対応する。図1では商品が左，キャンペーン商品が右なので，1対多の関連を左から右への矢印で表す。",
+          "rubric": [
+            "商品からキャンペーン商品への1対多を，凡例に従う右矢印で示す。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1の凡例に倣い，関連の記号を答える。",
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              39
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "blank-a",
+              "blank-b"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図2中の［c］～［e］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        37,
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "figure-2",
+        "blank-c",
+        "blank-d",
+        "blank-e"
+      ],
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "FROM"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "SELECTで出力する列の取得元となる副問合せCKを指定するためFROMを置く。CKはキャンペーン実施を種別ごとに集約した表である。",
+          "rubric": [
+            "SELECT句に続いて取得元を指定するFROM句を置く。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              37,
+              38,
+              39
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "figure-2",
+              "blank-c",
+              "blank-d",
+              "blank-e"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "LEFT OUTER JOIN"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "実施したが売上につながらなかった種別も出力する必要がある。実施金額のCKを左にして左外部結合すれば，対応する売上UKがない種別も残り，COALESCEで売上や原価を0にできる。内部結合では売上のないキャンペーン種別が消えてしまう。講評もこの条件への注意を求めている。",
+          "rubric": [
+            "実施した全ての種別を残す。",
+            "売上が存在しない種別も残す左外部結合を指定する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              37,
+              38,
+              39
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "figure-2",
+              "blank-c",
+              "blank-d",
+              "blank-e"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "SUM(M.商品個数 * S.商品原価)"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "売上明細Mの販売個数に商品Sの一個当たり原価を掛けると明細ごとの原価になる。それを種別内でSUMして原価計を求める。商品単価は販売額の計算に使う値であり，原価とは異なる。",
+          "rubric": [
+            "明細の個数と商品の原価を掛ける。",
+            "種別ごとの原価をSUMで集計する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              37,
+              38,
+              39
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "figure-2",
+              "blank-c",
+              "blank-d",
+              "blank-e"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図3中の［f］，［g］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        36,
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "table-1",
+        "figure-3",
+        "blank-f",
+        "blank-g"
+      ],
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "AND U.キャンペーン種別 = 'H'"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "表1で葉書キャンペーンの種別はHである。売上Uのキャンペーン種別がHである条件を既存WHERE条件にANDで追加し，葉書経由の購入だけに限定する。店舗や期間の条件だけでは他種別の購入も含まれる。",
+          "rubric": [
+            "売上表のキャンペーン種別列を使う。",
+            "Hを文字列リテラルとして条件に加える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              38,
+              39
+            ],
+            "bodyRefs": [
+              "table-1",
+              "figure-3",
+              "blank-f",
+              "blank-g"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ORDER BY 売上実績数 DESC"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "郵便番号ごとのCOUNT(*)の結果には売上実績数という別名が付いている。大きい順を指定するDESCと組み合わせて並べ替える。GROUP BYは集約の指定であり結果の降順は保証しない。",
+          "rubric": [
+            "集計列の別名で並べ替える。",
+            "降順を表すDESCを指定する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              38,
+              39
+            ],
+            "bodyRefs": [
+              "table-1",
+              "figure-3",
+              "blank-f",
+              "blank-g"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "本文中の下線①について，対応した内容を35字以内で答えよ。",
+      "sourcePages": [
+        37,
+        39
+      ],
+      "bodyRefs": [
+        "figure-4",
+        "underline-1"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "対応内容",
+          "type": "freeText",
+          "referenceAnswers": [
+            "Webキャンペーン実績表の集計粒度を日次から週次に修正する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "T社のレポートは広告表示位置やキーワードごとに週次で集計されて送付される。その粒度に合わせて記録・見直しを行う必要があるため，日次で実績を集計する想定を週次に改める。データ提供元にない日次の詳細を推測して作り出す変更ではない。",
+          "rubric": [
+            "提供元レポートの集計粒度が週次である点に着目する。",
+            "実績表の集計を日次から週次へ修正することを35字以内で答える。"
+          ],
+          "maxLength": 35,
+          "evidence": {
+            "questionPages": [
+              37,
+              39
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "underline-1"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm6/figure-1.png",
+      "caption": "図1 新システムのE-R図（抜粋）",
+      "sourcePage": 37,
+      "placement": "replace-caption",
+      "anchor": "図1 新システムのE-R図（抜粋）",
+      "alt": "店舗エリア詳細の空欄aと商品－キャンペーン商品関連の空欄bを含むE-R図。全エンティティ，属性，関連の矢印，主キー実線下線・外部キー破線の凡例と注記を原図通り保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        37
+      ],
+      "anchor": "図1 新システムのE-R図（抜粋）"
+    },
+    "table-1": {
+      "sourcePages": [
+        36
+      ],
+      "anchor": "表1 新システムで提供するキャンペーン種別"
+    },
+    "figure-2": {
+      "sourcePages": [
+        38
+      ],
+      "anchor": "図2 キャンペーン種別ごとの実績を集計するSQL文"
+    },
+    "figure-3": {
+      "sourcePages": [
+        39
+      ],
+      "anchor": "図3 売上実績数を降順に出力するSQL文"
+    },
+    "figure-4": {
+      "sourcePages": [
+        39
+      ],
+      "anchor": "図4 Webキャンペーンの実績を記録するために追加した表の構造"
+    },
+    "blank-a": {
+      "sourcePages": [
+        37
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        37
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［e］"
+    },
+    "blank-f": {
+      "sourcePages": [
+        39
+      ],
+      "text": "［f］"
+    },
+    "blank-g": {
+      "sourcePages": [
+        39
+      ],
+      "text": "［g］"
+    },
+    "underline-1": {
+      "sourcePages": [
+        39
+      ],
+      "text": "①受けた指摘に対応すること"
+    }
+  },
+  "author": "/root/written_author_spring_2_6",
+  "authoringStatus": "awaiting-independent-review",
+  "imageSizes": {
+    "assets/written/ap-r07h-pm6/question-p36.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm6/question-p37.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm6/question-p38.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm6/question-p39.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  }
+}

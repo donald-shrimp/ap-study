@@ -1,0 +1,462 @@
+{
+  "id": "ap-r07a-pm6",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "database",
+  "title": "受講管理システムの改修",
+  "status": "reviewed",
+  "sourceKind": "official",
+  "body": "問6 受講管理システムの改修に関する次の記述を読んで，設問に答えよ。\n\nD社は，日本人を対象に英会話のオンライン教育サービスを提供する中堅企業である。従来は，ビジネス英会話の講座を提供していたが，それに加えて日常英会話の講座を追加することになった。\n\n従来のビジネス英会話講座と新規に追加する日常英会話講座との違いを表1に示す。\n\n表1 従来のビジネス英会話講座と新規に追加する日常英会話講座との違い\n\n日常英会話講座のジャンルは，サービスを開始してから1年程度は，申込み具合などを考慮して変更する可能性がある。\n\n講師は割り当てられた講座の開始時刻から終了時刻まで拘束されるが，それ以外の時間帯は自由である。現状は勤務日と講座担当の割当てだけで勤務を管理している。講座の受講管理には，受講管理システムを利用している。\n\n現状のビジネス英会話講座を管理する受講管理システムのE-R図を図1に示す。\n\n図1 現状のビジネス英会話講座を管理する受講管理システムのE-R図\n\n開催スケジュールについては，同じ講座が複数回開催されるので，開催番号で区別している。\n\n受講管理システムのデータベースでは，E-R図のエンティティ名を表名にし，属性名を列名にして，適切なデータ型で表定義した関係データベースによって，データを管理する。\n\n［受講管理システムの関係スキーマの変更］\n\n講座の種類には，表1に示す内容に沿った値以外のものを格納できないように定義域制約を適用する。\n\n日常英会話講座の追加に当たり，日常英会話講座のジャンルの変更の容易性と講師の勤務管理の厳密化を考慮して，受講管理システムの関係スキーマの変更内容を次のように検討した。\n\n・講座エンティティをスーパータイプにして，ビジネス英会話講座エンティティ，日常英会話講座エンティティをサブタイプとして新規に追加する。講座エンティティにビジネス英会話講座か日常英会話講座かを区別する講座区分属性を追加して，講座エンティティから［c］及び［d］の++①二つの属性をサブタイプに移す++。\n\n・勤務日でも講師が講座を受けもつことができない時間帯は予約できないようにするため，勤務日の勤務可能時間帯を管理する勤務可能時間エンティティを追加する。\n\n追加及び変更するエンティティを図2に示す。\n\n図2 追加及び変更するエンティティ\n\n［表の定義の追加，変更］\n\n受講管理システムの関係スキーマの変更に伴い，新規表の定義，既存表の変更を行う。今回の変更では，スーパータイプ，サブタイプのエンティティごとに別の表にしている。講座表の変更に当たり，削除する列の情報は削除前に保存して，追加したサブタイプに反映する。\n\n講座表の変更を行うSQL文を図3に示す。\n\n図3 講座表の変更を行うSQL文\n\n```sql\n［f］ TABLE 講座 ADD COLUMN 講座区分 VARCHAR(10)\n［f］ TABLE 講座 DROP COLUMN ［c］ CASCADE\n［f］ TABLE 講座 DROP COLUMN ［d］ CASCADE\n```\n\n勤務可能時間表を作成するSQL文を図4に示す。\n\n図4で，勤務日表の行が削除された場合は，参照元の勤務可能時間表の行も自動的に削除されるようにしている。\n\n図4 勤務可能時間表を作成するSQL文\n\n```sql\nCREATE TABLE 勤務可能時間(\n  勤務年月日 DATE,\n  講師コード CHAR(10),\n  開始時刻 TIME,\n  終了時刻 TIME,\n  PRIMARY KEY(勤務年月日, 講師コード, 開始時刻),\n  FOREIGN KEY(勤務年月日, 講師コード) REFERENCES 勤務日( ［g］ )\n            ON DELETE ［h］ )\n```\n\n［勤務日の削除］\n\n勤務日が削除可能となるのは，指定した日の勤務年月日に開催する講座を講師が担当していない場合である。\n\n指定した日にある講師が担当している講座の講座コードの一覧を取得するSQL文を図5に示す。ここで，“:講師コード”と“:勤務年月日”は，それぞれ対象となる講師の講師コードと指定した日の年月日を格納する埋込み変数である。\n\nなお，CAST指定は，データ型を変換する際に使用される。\n\n図5 指定した日にある講師が担当している講座の講座コードの一覧を取得するSQL文\n\n```sql\nSELECT DISTINCT t0.講座コード\nFROM 開催スケジュール t0\n  INNER JOIN 講座担当割当 t1 ［i］\nWHERE t1.講師コード = :講師コード AND t0.開催年月日 = CAST(:勤務年月日 AS DATE)\n```",
+  "sourceImages": [
+    "assets/written/ap-r07a-pm6/question-p36.png",
+    "assets/written/ap-r07a-pm6/question-p37.png",
+    "assets/written/ap-r07a-pm6/question-p38.png",
+    "assets/written/ap-r07a-pm6/question-p39.png",
+    "assets/written/ap-r07a-pm6/question-p40.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_cmnt.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図1中の［a］，［b］に入れる適切な属性名及びエンティティ間の関連を答え，E-R図を完成させよ。なお，属性名の表記及びエンティティ間の関連は図1の凡例に倣うこと。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a：属性名",
+          "type": "freeText",
+          "referenceAnswers": [
+            "開催番号"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "同じ講座には複数の開催があるので，受講予約・結果を識別するには受講者コードと講座コードに加えて開催番号が必要である。公式解答は開催番号に実線下線を付け，複合主キーの一部としている。主キーには外部キーの破線下線を付けないという凡例にも注意する。",
+          "rubric": [
+            "属性名が開催番号である。",
+            "開催番号が受講予約・結果の複合主キーに含まれ，原本では実線下線を付ける条件を満たす。",
+            "主キーの実線下線がある属性には外部キーの破線を付けないという凡例を守る。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本では属性名に主キーを示す実線の下線を付ける。",
+            "このテキスト入力欄では属性名を入力し，自己評価で主キーの下線表記も確認する。",
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        },
+        {
+          "id": "b",
+          "label": "b：エンティティ間の関連",
+          "type": "freeText",
+          "referenceAnswers": [
+            "←"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "一つの開催スケジュールには複数の受講者が参加し，複数の受講予約・結果が対応する。したがって開催スケジュール側が1，左の受講予約・結果側が多となり，図1の凡例では左向きの1対多矢印を描く。単なる1対1の横線ではない。",
+          "rubric": [
+            "開催スケジュール側が1，受講予約・結果側が多である。",
+            "原本の左右配置では左向きの1対多矢印（←）となる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1の凡例に倣って関連を答える。",
+            "このテキスト入力欄では矢印又は関連の向きを入力し，自己評価で図の表記を確認する。",
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        37,
+        40
+      ],
+      "bodyRefs": [
+        "figure-1"
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［受講管理システムの関係スキーマの変更］について答えよ。\n本文，図2及び図3中の［c］，［d］に入れる適切な属性名を答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "freeText",
+          "referenceAnswers": [
+            "レベル",
+            "ジャンル"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "cとdは，講座区分によって定義域が異なるレベルとジャンルであり，公式解答では順不同である。レベルはビジネスでは初級・中級・上級，日常ではA1〜C2，ジャンルも異なる分類を用いる。両欄を合わせて二つの属性を重複なく挙げる。",
+          "rubric": [
+            "cとdの二つの欄を合わせてレベルとジャンルの両方が挙がっている。",
+            "cとdの順序は問わないが，同一属性を両方に書かない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "cとdの解答順は問わない。両欄でレベルとジャンルを重複なく答える。",
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ジャンル",
+            "レベル"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "cとdにはレベルとジャンルが入る。順不同なのでc欄とd欄を入れ替えてもよいが，二つとも同じ属性にしてはいけない。日常英会話のジャンルが将来変更されても，ビジネス英会話側の定義域を変えずに済むよう分離する。",
+          "rubric": [
+            "cとdの二つの欄を合わせてジャンルとレベルを重複なく挙げる。",
+            "サブタイプごとに定義域を分ける二つの属性であることを確認する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "cとdの解答順は問わない。両欄でレベルとジャンルを重複なく答える。",
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "bodyRefs": [
+        "table-1",
+        "figure-2",
+        "program-3"
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［受講管理システムの関係スキーマの変更］について答えよ。\n本文中の下線①について，二つの属性をサブタイプに移した理由を20字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "理由",
+          "type": "freeText",
+          "referenceAnswers": [
+            "定義域が講座区分によって異なるから"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "属性名が共通でも，許される値の集合は講座区分で異なる。レベルは3段階と6段階，ジャンルは15種類と10種類であり，日常英会話のジャンルは変更の可能性もある。各サブタイプに置くことで，それぞれに固有の定義域制約を適用できる。",
+          "rubric": [
+            "レベルとジャンルの定義域が，ビジネス英会話と日常英会話で異なることを示す。",
+            "講座区分による定義域の違いを20字以内で説明する。"
+          ],
+          "maxLength": 20
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        40
+      ],
+      "bodyRefs": [
+        "table-1",
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "［受講管理システムの関係スキーマの変更］について答えよ。\n図2中の［e］に入れる適切な属性名を答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "年齢層"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "表1では，日常英会話にだけ幼児・小学生，中学生・高校生，大学生・大人という年齢層の分類がある。ビジネス英会話にはない固有の属性なので，日常英会話講座のサブタイプへ置く。",
+          "rubric": [
+            "表1では，日常英会話にだけ幼児・小学生，中学生・高校生，大学生・大人という年齢層の分類がある。ビジネス英会話にはない固有の属性なので，日常英会話講座のサブタイプへ置く。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        36,
+        38,
+        40
+      ],
+      "bodyRefs": [
+        "table-1",
+        "figure-2"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図3中の［f］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ALTER"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "既存表の定義へ列を追加・削除するDDLはALTER TABLEである。CREATE TABLEは新しい表の作成，DROP TABLEは表そのものの削除であり，既存の講座表の列変更には該当しない。",
+          "rubric": [
+            "既存表の定義へ列を追加・削除するDDLはALTER TABLEである。CREATE TABLEは新しい表の作成，DROP TABLEは表そのものの削除であり，既存の講座表の列変更には該当しない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        39,
+        40
+      ],
+      "bodyRefs": [
+        "program-3"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "図4中の［g］，［h］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "勤務年月日, 講師コード",
+            "勤務年月日，講師コード"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "外部キーの列の並びは勤務年月日，講師コードであり，参照先の勤務日表の複合主キーも同じ対応順で指定する。片方だけでは勤務日表の行を一意に特定できない。",
+          "rubric": [
+            "外部キーの列の並びは勤務年月日，講師コードであり，参照先の勤務日表の複合主キーも同じ対応順で指定する。片方だけでは勤務日表の行を一意に特定できない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        },
+        {
+          "id": "h",
+          "label": "h",
+          "type": "shortText",
+          "referenceAnswers": [
+            "CASCADE"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "参照先の勤務日が削除された際に，参照元の勤務可能時間も自動的に削除する参照動作はON DELETE CASCADEである。削除禁止やNULL設定では，本文の「行も自動的に削除」と一致しない。",
+          "rubric": [
+            "参照先の勤務日が削除された際に，参照元の勤務可能時間も自動的に削除する参照動作はON DELETE CASCADEである。削除禁止やNULL設定では，本文の「行も自動的に削除」と一致しない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        37,
+        39,
+        40
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "program-4"
+      ]
+    },
+    {
+      "id": "q5",
+      "label": "設問5",
+      "prompt": "図5中の［i］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "i",
+          "label": "i",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ON t0.講座コード = t1.講座コード AND t0.開催番号 = t1.開催番号"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "開催スケジュールの主キーは講座コードと開催番号の組であり，講座担当割当も両列を持っている。両方の一致条件で内部結合しなければ，同じ講座の別開催に割り当てられた講師まで混ざる。WHERE句で対象講師と開催日を絞るのは，その正しい開催単位の結合の後である。",
+          "rubric": [
+            "ONで結合条件を記述する。",
+            "t0とt1の講座コードが等しい条件，開催番号が等しい条件をANDで結ぶ。",
+            "条件の順序や空白などの表記差は許容するが，キーの片方だけの結合は不可。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本のSQL文を完成させる。",
+            "入力上限は2000字。原本に字数指定はない。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        37,
+        39,
+        40
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "program-5"
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和7年度秋期 応用情報技術者試験 午後 問6",
+  "sourcePages": [
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "imageSizes": {
+    "assets/written/ap-r07a-pm6/question-p36.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07a-pm6/question-p37.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07a-pm6/question-p38.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07a-pm6/question-p39.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07a-pm6/question-p40.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07a-pm6/table-1.png": {
+      "width": 827,
+      "height": 355
+    },
+    "assets/written/ap-r07a-pm6/figure-1.png": {
+      "width": 837,
+      "height": 540
+    },
+    "assets/written/ap-r07a-pm6/figure-2.png": {
+      "width": 730,
+      "height": 501
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "table-1",
+      "image": "assets/written/ap-r07a-pm6/table-1.png",
+      "caption": "表1 従来のビジネス英会話講座と新規に追加する日常英会話講座との違い",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "表1 従来のビジネス英会話講座と新規に追加する日常英会話講座との違い",
+      "alt": "両講座のレベル・ジャンル・年齢層，受講形態，受講予約方法の対比表。全行の条件，人数，分類，変更可能性の注記を原本どおり保持。"
+    },
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07a-pm6/figure-1.png",
+      "caption": "図1 現状のビジネス英会話講座を管理する受講管理システムのE-R図",
+      "sourcePage": 37,
+      "placement": "replace-caption",
+      "anchor": "図1 現状のビジネス英会話講座を管理する受講管理システムのE-R図",
+      "alt": "現状のE-R図。受講予約・結果の空欄a，関連b，開催スケジュール，講座，講座担当割当，講師，勤務日，受講者と全属性・主キーの実線・外部キーの破線・関連の方向・凡例・注記を原本どおり保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r07a-pm6/figure-2.png",
+      "caption": "図2 追加及び変更するエンティティ",
+      "sourcePage": 38,
+      "placement": "replace-caption",
+      "anchor": "図2 追加及び変更するエンティティ",
+      "alt": "講座スーパータイプとビジネス英会話講座・日常英会話講座サブタイプ，空欄c/d/e，勤務可能時間エンティティ，属性とキー下線及び凡例を原本どおり保持。"
+    }
+  ],
+  "bodyRefs": {
+    "table-1": {
+      "sourcePages": [
+        36
+      ],
+      "anchor": "表1 従来のビジネス英会話講座と新規に追加する日常英会話講座との違い"
+    },
+    "figure-1": {
+      "sourcePages": [
+        37
+      ],
+      "anchor": "図1 現状のビジネス英会話講座を管理する受講管理システムのE-R図"
+    },
+    "figure-2": {
+      "sourcePages": [
+        38
+      ],
+      "anchor": "図2 追加及び変更するエンティティ"
+    },
+    "program-3": {
+      "sourcePages": [
+        39
+      ],
+      "anchor": "図3 講座表の変更を行うSQL文"
+    },
+    "program-4": {
+      "sourcePages": [
+        39
+      ],
+      "anchor": "図4 勤務可能時間表を作成するSQL文"
+    },
+    "program-5": {
+      "sourcePages": [
+        39
+      ],
+      "anchor": "図5 指定した日にある講師が担当している講座の講座コードの一覧を取得するSQL文"
+    },
+    "underline-1": {
+      "sourcePages": [
+        38
+      ],
+      "text": "①二つの属性をサブタイプに移す"
+    }
+  },
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/written_author_autumn_1_6",
+  "authoringStatus": "independently-reviewed"
+}

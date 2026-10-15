@@ -1,0 +1,570 @@
+{
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "id": "ap-r07h-pm3",
+  "title": "スライドパズルを解くプログラム",
+  "topicId": "algorithm",
+  "status": "reviewed",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問3",
+  "sourcePages": [
+    4,
+    5,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "sourceImages": [
+    "assets/written/ap-r07h-pm3/question-p18.png",
+    "assets/written/ap-r07h-pm3/question-p19.png",
+    "assets/written/ap-r07h-pm3/question-p20.png",
+    "assets/written/ap-r07h-pm3/question-p21.png",
+    "assets/written/ap-r07h-pm3/question-p22.png",
+    "assets/written/ap-r07h-pm3/question-p23.png",
+    "assets/written/ap-r07h-pm3/question-p04.png",
+    "assets/written/ap-r07h-pm3/question-p05.png"
+  ],
+  "body": "問3 スライドパズルを解くプログラムに関する次の記述を読んで，設問に答えよ。\n\n表1のルールで定義されるスライドパズルについて考える。\n\n表1 スライドパズルのルール\n| 用語 | 説明 |\n| --- | --- |\n| 盤面 | 正方形の面に，1から順に1ずつ大きくなる数字の書かれた駒が配置されている。1か所だけ駒の置かれていない空白のマス（以下，空白マスという）がある。 |\n| 開始時点の盤面 | 開始時点では，駒と空白マスはランダムに配置されている。 |\n| ゴールの盤面 | 盤面左上に数字が1の駒があり，右の駒の数字は1ずつ増えていき，その行の右端の駒に書かれた数字より1大きい数字が，次の行の左端の駒の数字となる。盤面右下のマスが空白マスとなる。 |\n| 駒の移動 | 駒の上下左右のいずれかに空白マスがある場合，駒を空白マスに移動することができる。駒が移動した場合，駒が置かれていたマスが空白マスになる。駒を空白マスに移動させて盤面を変化させ，ゴールの盤面と同じにすることを目指す。 |\n\n一辺が3マスのスライドパズルの例を図1に示す。\n\n図1 一辺が3マスのスライドパズルの例\n\n本問では，一辺のマスの個数が任意のスライドパズルにおいて，ゴールの盤面になるまでの駒の移動回数が最小となる移動方法（以下，最小解という）を一つ求めるプログラムを作成する。\n\n［一辺がNマスのスライドパズルの最小解を幅優先探索を用いて求める方法］\n幅優先探索を行ったときの，スライドパズルの盤面の遷移を，グラフで表現する。開始時点の盤面をルートノード，ある時点の盤面をノード，駒の移動に伴う盤面の遷移をエッジで表現する。また，ゴールの盤面をゴールノードとして定義する。\n幅優先探索で最小解を求める方法を次のように考える。ここで，Nは2以上とする。\n探索対象のノードに対して，移動できる駒ごとにその駒を移動した後のノードを作成して，探索対象のノードの子ノードとし，探索対象のノードは探索済みとなる。このとき，子ノードが表す盤面が既に探索したノード（以下，探索済みノードという）と同じであれば，この子ノードは終端ノードとして，以降の探索は行わない。また，子ノードがゴールノードと同じであれば，最小解が見つかったと判断して探索を終了する。\n\n［Nが3の場合の例］\n一辺が3マスのスライドパズルの最小解を求める過程の例を図2に示す。\n\n図2 一辺が3マスのスライドパズルの最小解を求める過程の例\n\n(1) 1回目の駒の移動では，ルートノードを探索対象のノードとする。ここでは，移動できる駒が三つあるので，ルートノードから深さが1となる①～③の子ノードを作成し，ルートノードは探索済みノードとなる。ここで，①～③の子ノードに対して，ゴールノードの判定及び終端ノードの判定を行う。\n(2) 次に，作成した子ノードで終端ノード以外のノードをそれぞれ探索対象のノードとし，駒の移動にあわせて子ノードを作成する。図2では，①～③のノードから④～⑪の子ノードを作成し，①～③は探索済みノードとなる。ここで，④～⑪の子ノードに対して，ゴールノードの判定及び終端ノードの判定を行う。図2では，盤面が探索済みノードと一致する⑤，⑥及び⑩は終端ノードとなり，以降の探索は行わない。\n(3) 以降，(2)で作成したノードの子ノードの作成と，ゴールノードの判定及び終端ノードの判定を繰り返す。図2の⑫は，n回目の移動でゴールノードに至ったことを示している。なお，全てのリーフノードが終端ノードと判定された場合，ゴールの盤面に至る駒の移動方法がないことを意味しているので，その旨のメッセージを出力して探索を終了する。\n\n次に，配列を用いた盤面の表現方法を図3に示す。ここで，空白マスを表す値は最も大きい駒の数字である8に1を加えた9とする。なお，配列の要素番号は1から始まるものとする。\n\n図3 配列を用いた盤面の表現方法\n\n［一辺がNマスのスライドパズルの最小解を求めるプログラム］\n一辺がNマスのスライドパズルにおいて，開始時点の盤面をランダムに作成し，最小解を求め，開始時点の盤面からの遷移及び駒の移動回数を出力するプログラムを作成する。開始時点からの盤面の遷移を保持する単方向連結リストの要素となるクラスBoardStateの説明を図4に，キューを表現するクラスQueueの説明を図5に，リストを表現するクラスListの説明を図6に，プログラムで使用する主な関数を表2に，最小解を求めるプログラムを図7に示す。\n\n図4 クラスBoardStateの説明\n| メンバ変数 | 型 | 説明 |\n| --- | --- | --- |\n| board | 整数型配列の配列 | 盤面配列。初期状態は未定義。 |\n| space | 整数型の配列 | 空白マスの場所を示す行番号と列番号の二つの要素から成る配列。初期状態は未定義。 |\n| prev | BoardState | 駒が1回移動する前のBoardStateのインスタンスへの参照。開始時点の盤面からの遷移を出力する際に用いる。初期状態は未定義。 |\n\n| コンストラクタ | 説明 |\n| --- | --- |\n| BoardState() | インスタンスを初期化する。 |\n| BoardState(BoardState: st) | インスタンスを初期化し，メンバ変数に次の処理を行う。(1) メンバ変数boardに引数で渡されたBoardStateのインスタンスのboardの値を格納する。(2) メンバ変数spaceに引数で渡されたBoardStateのインスタンスのspaceの値を格納する。(3) メンバ変数prevに引数で渡されたBoardStateのインスタンスへの参照stを格納する。 |\n\n図5 クラスQueueの説明\n| コンストラクタ | 説明 |\n| --- | --- |\n| Queue() | 可変長のキューを生成する。 |\n\n| メソッド | 戻り値 | 説明 |\n| --- | --- | --- |\n| add(BoardState: st) | なし | キューにBoardStateのインスタンスへの参照stを追加する。 |\n| isEmpty() | 論理型 | キューが空の場合はtrueを返し，空でない場合はfalseを返す。 |\n| poll() | BoardState | 先頭のBoardStateのインスタンスへの参照を取り出して返す。 |\n| peek() | BoardState | 先頭のBoardStateのインスタンスへの参照を返す。 |\n\n図6 クラスListの説明\n| コンストラクタ | 説明 |\n| --- | --- |\n| List() | 可変長のリストを生成する。 |\n\n| メソッド | 戻り値 | 説明 |\n| --- | --- | --- |\n| add(整数型配列の配列: b) | なし | リストに盤面配列bを追加する。 |\n| isEmpty() | 論理型 | リストが空の場合はtrueを返し，空でない場合はfalseを返す。 |\n| peek() | 整数型配列の配列 | リストの先頭に存在する盤面配列を返す。 |\n\n表2 プログラムで使用する主な関数\n| 名称 | 戻り値 | 説明 |\n| --- | --- | --- |\n| createGoal(整数型: board_size) | 整数型配列の配列 | 引数board_sizeの値を一辺のマス数としたスライドパズルのゴールの盤面を表す配列（以下，ゴールの盤面配列という）を作成して返す。 |\n| createStart(整数型: board_size) | 整数型配列の配列 | 引数board_sizeの値を一辺のマス数としたスライドパズルの開始時点の盤面配列をランダムに作成し，出力して返す。なお，ゴールの盤面配列と同じものが作成されることはない。 |\n| getSpace(整数型配列の配列: b) | 整数型の配列 | 盤面配列bを用いて，空白マスの場所を行番号と列番号から成る配列で返す。 |\n| checkGoal(整数型配列の配列: b, 整数型配列の配列: g) | 論理型 | 第一引数の盤面配列bと第二引数のゴールの盤面配列gを用いて両者が一致しているかどうかを判定した結果を返す。一致する場合はtrueを返し，一致しない場合はfalseを返す。 |\n| printResult(BoardState: st) | なし | 引数として与えられたBoardStateのインスタンスへの参照stを用いて，開始時点の盤面からの遷移及び駒の移動回数を出力する。 |\n| checkSameBoard(整数型配列の配列: b, List: l) | 論理型 | 引数で渡される探索済みの盤面配列のリストへの参照lを用いて，盤面配列bが探索済みの盤面配列のリストに存在するかどうかを判定した結果を返す。存在する場合はtrueを返し，存在しない場合はfalseを返す。 |\n\n図7 最小解を求めるプログラム\n```\n 1: ○solveNPuzzle(整数型: board_size)\n 2:   BoardState: start_state  /* 開始時点の盤面を保持するBoardStateのインスタンスへの参照 */\n 3:   整数型配列の配列: goal_board  /* ゴールの盤面配列 */\n 4:   整数型配列の配列: direction  /* 駒の移動に伴う空白マスの移動方向を行番号の増減を1番目の要素，列番号の増減を2番目の要素で表現する配列 */\n 5:   Queue: explore_queue  /* 探索対象の盤面を保持するキューのインスタンスへの参照 */\n 6:   List: check_list  /* 探索済みの盤面配列を保持するリストのインスタンスへの参照 */\n 7:   BoardState: state  /* 駒が移動する前の盤面を保持するBoardStateのインスタンスへの参照 */\n 8:   BoardState: new_state  /* 駒が移動した後の盤面を保持するBoardStateのインスタンスへの参照 */\n 9:   整数型: change_num  /* 移動する駒の数字 */\n10:   整数型: i  /* forループ内で使用するカウンタ変数 */\n11:   start_state ← BoardState()\n12:   goal_board ← createGoal(board_size)\n13:   start_state.board ← createStart(board_size)\n14:   start_state.space ← getSpace(start_state.board)\n15:   direction ← {{1, 0}, {0, −1}, {−1, 0}, {0, 1}}\n16:   explore_queue ← Queue()\n17:   explore_queue.add(start_state)\n18:   check_list ← List()\n19:   check_list.add(start_state.board)\n20:   while (［ア］ がfalseと等しい)\n21:     state ← explore_queue.［イ］\n22:     for (iを1からdirectionの要素数まで1ずつ増やす)\n23:       if ((state.space[1] + ［ウ］ が1以上) かつ\n24:           (state.space[1] + ［ウ］ が ［エ］ 以下) かつ\n25:           (state.space[2] + ［オ］ が1以上) かつ\n26:           (state.space[2] + ［オ］ が ［エ］ 以下))\n27:         new_state ← BoardState(state)\n28:         new_state.space[1] ← state.space[1] + ［ウ］\n29:         new_state.space[2] ← state.space[2] + ［オ］\n30:         change_num ← new_state.board[new_state.space[1]][new_state.space[2]]\n31:         new_state.board[new_state.space[1]][new_state.space[2]] ← board_size × board_size\n32:         new_state.board[state.space[1]][state.space[2]] ← change_num\n33:         if (［カ］ がtrueと等しい)\n34:           printResult(new_state)\n35:           return\n36:         endif\n37:         if (checkSameBoard(new_state.board, check_list)がfalseと等しい)\n38:           explore_queue.［キ］\n39:           check_list.［ク］\n40:         endif\n41:       endif\n42:     endfor\n43:   endwhile\n44:   ゴールの盤面に至る駒の移動方法がない旨のメッセージを出力\n45:   return\n```\n\n\n［原本共通：擬似言語の記述形式（基本情報技術者試験，応用情報技術者試験用）］\n擬似言語を使用した問題では，各問題文中に注記がない限り，次の記述形式が適用されているものとする。\n\n［擬似言語の記述形式］\n| 記述形式 | 説明 |\n| --- | --- |\n| ○手続名又は関数名 | 手続又は関数を宣言する。 |\n| 型名: 変数名 | 変数を宣言する。 |\n| /* 注釈 */，// 注釈 | 注釈を記述する。 |\n| 変数名 ← 式 | 変数に式の値を代入する。 |\n| 手続名又は関数名(引数, …) | 手続又は関数を呼び出し，引数を受け渡す。 |\n| if (条件式1) 処理1 elseif (条件式2) 処理2 … elseif (条件式n) 処理n else 処理n+1 endif | 選択処理を示す。条件式を上から評価し，最初に真になった条件式に対応する処理を実行する。以降の条件式は評価せず，対応する処理も実行しない。どの条件式も真にならないときは，処理n+1を実行する。各処理は，0以上の文の集まりである。elseifと処理の組みは，複数記述することがあり，省略することもある。elseと処理n+1の組みは一つだけ記述し，省略することもある。 |\n| while (条件式) 処理 endwhile | 前判定繰返し処理を示す。条件式が真の間，処理を繰り返し実行する。処理は，0以上の文の集まりである。 |\n| do 処理 while (条件式) | 後判定繰返し処理を示す。処理を実行し，条件式が真の間，処理を繰り返し実行する。処理は，0以上の文の集まりである。 |\n| for (制御記述) 処理 endfor | 繰返し処理を示す。制御記述の内容に基づいて，処理を繰り返し実行する。処理は，0以上の文の集まりである。 |\n\n［演算子と優先順位］\n| 演算子の種類 | 演算子 | 優先度（上ほど高い） |\n| --- | --- | --- |\n| 式 | ( ) | 高 |\n| 単項演算子 | not ＋ − | ↓ |\n| 二項演算子：乗除 | mod × ÷ | ↓ |\n| 二項演算子：加減 | ＋ − | ↓ |\n| 二項演算子：関係 | ≠ ≦ ≧ ＜ ＝ ＞ | ↓ |\n| 二項演算子：論理積 | and | ↓ |\n| 二項演算子：論理和 | or | 低 |\n\n注記 演算子 . は，メンバ変数又はメソッドのアクセスを表す。演算子 mod は，剰余算を表す。\n\n［論理型の定数］\ntrue, false\n\n［配列］\n配列の要素は，“[”と“]”の間にアクセス対象要素の要素番号を指定することでアクセスする。なお，二次元配列の要素番号は，行番号，列番号の順に“,”で区切って指定する。\n“{”は配列の内容の始まりを，“}”は配列の内容の終わりを表す。ただし，二次元配列において，内側の“{”と“}”に囲まれた部分は，1行分の内容を表す。\n\n［未定義，未定義の値］\n変数に値が格納されていない状態を，“未定義”という。変数に“未定義の値”を代入すると，その変数は未定義になる。\n",
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図2中の②の盤面を図3に倣って，配列で答えよ。",
+      "sourcePages": [
+        18,
+        19,
+        20,
+        23
+      ],
+      "bodyRefs": [
+        "figure-2",
+        "figure-3"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "②の盤面",
+          "type": "shortText",
+          "referenceAnswers": [
+            "{{8, 6, 7}, {2, 9, 4}, {3, 5, 1}}"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "開始盤面の空白は3行2列にあり，②はその上の駒5を空白へ移す分岐である。2行2列が空白9，3行2列が5となり，他の要素は変わらない。配列は行の順に二重の波括弧で表す。",
+          "rubric": [
+            "駒5と空白9を入れ替える。",
+            "行順を維持して3×3の配列で答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              18,
+              19,
+              20,
+              23
+            ],
+            "bodyRefs": [
+              "figure-2",
+              "figure-3"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図7中の［ア］～［ク］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        21,
+        22,
+        23
+      ],
+      "bodyRefs": [
+        "figure-4",
+        "figure-5",
+        "figure-6",
+        "table-2",
+        "figure-7"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "explore_queue.isEmpty()"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "探索対象がなくなるまで繰り返すので，探索用キューが空かを判定する。条件はfalseと等しい間であり，check_listではなくexplore_queueを調べる。講評でもキューが空になった時点が探索終了であることを指摘している。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "poll()"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "幅優先探索ではFIFOの先頭を取り出して処理する。pollは参照を取り出して返す。peekでは先頭がキューに残り，同じ盤面を繰り返し処理する。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "c",
+          "label": "ウ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "direction[i][1]"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "space[1]は空白の行番号なので，移動方向の第1要素を加える。iは現在調べている移動方向を表す。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "d",
+          "label": "エ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "board_size"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "行・列の有効範囲は1から盤面一辺のマス数board_sizeまでである。directionの要素数4は方向の個数であり盤面の大きさではない。講評でもこの区別を指摘している。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "e",
+          "label": "オ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "direction[i][2]"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "space[2]は空白の列番号なので，移動方向の第2要素を加える。行用の第1要素と区別する。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "f",
+          "label": "カ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "checkGoal(new_state.board, goal_board)"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "駒を動かした後のnew_state.boardとゴールのgoal_boardをcheckGoalで比較する。一致したらそのnew_stateから移動経路を出力する。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "g",
+          "label": "キ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "add(new_state)"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "未登録の盤面を今後の探索対象に加えるため，BoardStateへの参照new_stateをexplore_queueに追加する。盤面だけではprevを用いた経路出力ができない。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "h",
+          "label": "ク",
+          "type": "shortText",
+          "referenceAnswers": [
+            "add(new_state.board)"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "重複判定用リストは盤面配列を保持するので，new_state.boardを追加する。探索用キューに追加するBoardStateそのものとは型を区別する。",
+          "rubric": [
+            "変数・メソッドの型と仕様に従って，対応する空欄を埋める。",
+            "空欄の外にあるドットや引数を重複させない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "bodyRefs": [
+              "figure-4",
+              "figure-5",
+              "figure-6",
+              "table-2",
+              "figure-7"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm3/figure-1.png",
+      "caption": "図1 一辺が3マスのスライドパズルの例",
+      "sourcePage": 18,
+      "placement": "replace-caption",
+      "anchor": "図1 一辺が3マスのスライドパズルの例",
+      "alt": "開始盤面は8,6,7／2,5,4／3,空白,1。ゴール盤面は1,2,3／4,5,6／7,8,空白。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r07h-pm3/figure-2.png",
+      "caption": "図2 一辺が3マスのスライドパズルの最小解を求める過程の例",
+      "sourcePage": 19,
+      "placement": "replace-caption",
+      "anchor": "図2 一辺が3マスのスライドパズルの最小解を求める過程の例",
+      "alt": "ルートから①②③へ展開する幅優先探索木。②の盤面は網掛けで表示されず設問1の対象。⑤⑥⑩が終端，⑫がゴール。原図の各盤面と遷移を保持。"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r07h-pm3/figure-3.png",
+      "caption": "図3 配列を用いた盤面の表現方法",
+      "sourcePage": 20,
+      "placement": "replace-caption",
+      "anchor": "図3 配列を用いた盤面の表現方法",
+      "alt": "盤面の行を整数型配列とし，空白9を含む{{8,6,7},{2,5,4},{3,9,1}}として表す。board[1][3]で1行3列を参照する。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        18
+      ],
+      "anchor": "図1 一辺が3マスのスライドパズルの例"
+    },
+    "figure-2": {
+      "sourcePages": [
+        19
+      ],
+      "anchor": "図2 一辺が3マスのスライドパズルの最小解を求める過程の例"
+    },
+    "figure-3": {
+      "sourcePages": [
+        20
+      ],
+      "anchor": "図3 配列を用いた盤面の表現方法"
+    },
+    "table-1": {
+      "sourcePages": [
+        18
+      ],
+      "anchor": "表1 スライドパズルのルール"
+    },
+    "figure-4": {
+      "sourcePages": [
+        21
+      ],
+      "anchor": "図4 クラスBoardStateの説明"
+    },
+    "figure-5": {
+      "sourcePages": [
+        21
+      ],
+      "anchor": "図5 クラスQueueの説明"
+    },
+    "figure-6": {
+      "sourcePages": [
+        21
+      ],
+      "anchor": "図6 クラスListの説明"
+    },
+    "table-2": {
+      "sourcePages": [
+        22
+      ],
+      "anchor": "表2 プログラムで使用する主な関数"
+    },
+    "figure-7": {
+      "sourcePages": [
+        22,
+        23
+      ],
+      "anchor": "図7 最小解を求めるプログラム"
+    },
+    "blank-1": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［ア］"
+    },
+    "blank-2": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［イ］"
+    },
+    "blank-3": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［ウ］"
+    },
+    "blank-4": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［エ］"
+    },
+    "blank-5": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［オ］"
+    },
+    "blank-6": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［カ］"
+    },
+    "blank-7": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［キ］"
+    },
+    "blank-8": {
+      "sourcePages": [
+        23
+      ],
+      "text": "［ク］"
+    }
+  },
+  "author": "/root/written_author_spring_2_6",
+  "authoringStatus": "independently-reviewed",
+  "imageSizes": {
+    "assets/written/ap-r07h-pm3/question-p18.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p19.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p20.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p21.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p22.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p23.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm3/question-p04.png": {
+      "width": 774,
+      "height": 1095
+    },
+    "assets/written/ap-r07h-pm3/question-p05.png": {
+      "width": 774,
+      "height": 1095
+    }
+  }
+}

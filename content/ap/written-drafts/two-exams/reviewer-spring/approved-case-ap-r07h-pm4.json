@@ -1,0 +1,727 @@
+{
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "id": "ap-r07h-pm4",
+  "title": "ビルエネルギーマネジメントシステムの非機能要件",
+  "topicId": "system",
+  "status": "reviewed",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問4",
+  "sourcePages": [
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "sourceImages": [
+    "assets/written/ap-r07h-pm4/question-p24.png",
+    "assets/written/ap-r07h-pm4/question-p25.png",
+    "assets/written/ap-r07h-pm4/question-p26.png",
+    "assets/written/ap-r07h-pm4/question-p27.png",
+    "assets/written/ap-r07h-pm4/question-p28.png"
+  ],
+  "body": "問4 ビルエネルギーマネジメントシステムの非機能要件に関する次の記述を読んで，設問に答えよ。\n\nE社は，オフィスビルのエネルギー使用量を一元管理するビルエネルギーマネジメントシステム（以下，BEMSという）を開発・運用している企業である。首都圏を中心に複数のオフィスビルを所有しているR社に対して，オンプレミス方式のBEMS（以下，オンプレBEMSという）を適用してきた。最近，R社から“複数のオフィスビルのオンプレBEMSを統合管理したい”という要望があり，E社はクラウド方式のBEMS（以下，クラウドBEMSという）を提案することになった。\nオンプレBEMSは，BEMSサーバ，BEMSクライアント及びBEMSゲートウェイで構成され，E社はこれらの設置・運用を行っている。ビル管理員はBEMSクライアント上のWebブラウザを用いてBEMSサーバにアクセスし，BEMSゲートウェイを介して照明機器や空調機器などの制御対象機器の制御や監視を行う。オンプレBEMSは複数のR社オフィスビルに導入されている。\nオンプレBEMSを用いた既存システム（以下，既存システムという）の構成の一部を図1に示す。なお，図1の各R社オフィスビルでは，制御対象機器を接続するビル制御LANと，BEMSサーバやBEMSクライアントを接続するビル管理LANとが既設されており，二つのLANをBEMSゲートウェイで接続している。\n\n図1 既存システムの構成（一部）\n\nE社は，R社の各オフィスビルに設置している既存システムから，複数のオフィスビルを統合管理できるクラウドBEMSを用いた新システム（以下，新システムという）へ移行する方法を検討した。新システムでは，ビル管理員はR社運用拠点のBEMSクライアントから，E社が別途サービスを提供しているIaaS型クラウドサービス（以下，E社クラウド基盤サービスという）の仮想サーバ上に構築したBEMSサーバを操作し，ファイアウォール（以下，FWという）とBEMSゲートウェイを介して制御対象機器の制御や監視を行う。E社はBEMSサーバ，BEMSクライアント及びBEMSゲートウェイを設置・運用する。FW及びインターネット接続環境はR社が設置・運用する。\n新システムの構成案の一部を図2に示す。\n\n図2 新システムの構成案（一部）\n\n［品質要件の検討］\nE社は，図2の構成案をR社に提案した。BEMSを新たなビルに導入する場合，既存システムでは，オフィスビルごとにBEMSサーバ，BEMSクライアント及びBEMSゲートウェイをそれぞれ導入する必要があった。一方，新システムでは，FW及びインターネット接続環境をR社が設置・運用すれば，E社がR社オフィスビル側に［a］を設置することによってBEMSを導入できる。R社が要望した統合管理が実現でき，さらにBEMS導入が比較的容易になることから，R社は新システムへの移行検討の具体化をE社に依頼した。\nE社の提案に対して，R社から次の要望が出された。\n・既存システムでは，BEMSサーバをメンテナンスする際に実施する計画停止の頻度が高く不便だったので，新システムでは計画停止の頻度を低くしてほしい。\n・既存システムでは，BEMSサーバのハードウェア障害の発生頻度は低いものの，障害発生時のシステム停止時間が長く不便だったので，新システムではできるだけ短くしてほしい。\n\nE社では，R社からの要望を受けて，既存システム及び新システムの非機能要件を改めて確認し，新システムの構成案を一部見直すとともに，その優位な点を指標を用いて示すことにした。既存システム及び新システムの非機能要件の指標とその指標値の一部を表1に示す。\n\n表1 既存システム及び新システムの非機能要件の指標とその指標値（一部）\n| 項番 | 非機能要件の分類 | 非機能要件の指標 | 指標値：既存システム | 指標値：新システム |\n| --- | --- | --- | --- | --- |\n| 1 | ［b］，［c］ | BEMSサーバのメンテナンスに伴う計画停止の頻度 | 年4回 | 計画停止なし |\n| 2 | ［c］ | BEMSサーバのハードウェア障害発生時の平均サービス回復時間 | 48時間 | 15分 |\n\n表1の項番1について，既存システムではBEMSサーバのメンテナンスのたびに計画停止が必要であった。新システムでは，E社クラウド基盤サービス上でBEMSサーバを仮想サーバとして構築できることを生かして，2台のBEMSサーバを［d］構成にすれば，計画停止をなくすことができる。そこで，図2の構成案に対して，E社クラウド基盤サービス上で，BEMSサーバを1台追加する。\n表1の項番2について，既存システムのBEMSサーバのハードウェア障害発生時には，保守サービス会社への連絡，保守員の駆けつけ，障害箇所の確認，ハードウェア交換，バックアップからのデータ復旧，サービスの再開，という手順で回復していた。この手順のうち，BEMSサーバがオフィスビル内に設置されていることに起因して保守員の駆けつけに要する時間が長かったが，新システムではBEMSサーバが配置されるE社クラウド基盤サービスの拠点に保守員が常駐するので，保守員の駆けつけに要する時間は大幅に短縮される。加えて，仮想サーバに障害が発生したときでも速やかにサービスを再開できるように，新システムではE社クラウド基盤サービスの［e］機能を活用して構成する。\n\n［クラウドサービス障害発生時の新システムへの影響］\n新システムでは，仮想サーバで構築したBEMSサーバのハードウェア障害発生時の平均サービス回復時間について大幅に短縮できることが確認できたが，E社クラウド基盤サービスに障害が発生した場合の，新システムに対する影響について，R社から説明を求められた。E社クラウド基盤サービスでは，仮想サーバを直接利用する顧客との契約時にサービスレベル合意書（以下，SLAという）を締結しているので，当該SLAの内容を引用して，どの程度の影響が新システムに及ぶかを説明することにした。\nE社クラウド基盤サービスのSLAの一部を図3に示す。\n\n図3 E社クラウド基盤サービスのSLA（一部）\n■月間の仮想サーバのサービス稼働率（以下，月間サービス稼働率という）：99.95%以上\n月間サービス稼働率は次の式で計算する。\n\n月間サービス稼働率 ＝（月間総［f］予定時間 − 月間累積障害時間）÷ 月間総［f］予定時間\n\nただし，仮想サーバは契約期間中，無停止で稼働することを前提とする。\n■月間累積障害時間の考え方\n月間累積障害時間とは，次のいずれかの状態であったことをE社がホームページで報告した時間又は利用者が証明することができた時間について，1か月分累積した時間のことである。\n・仮想サーバに管理画面からアクセスできない状態\n・仮想サーバにインターネットから全くアクセスできない状態\n・仮想サーバに接続されているディスクに全くアクセスできない状態\n■減額対応\n月間サービス稼働率が99.95%に満たなかった場合，SLAで示す稼働率を達成するための稼働時間より少なかった稼働時間に相当する利用料金を減額する。\n\nE社は新システムで重要な機能を担うBEMSサーバを例として取り上げ，そこで障害が発生した場合の影響について説明する資料を，追加で作成することにした。当該資料には，図3のE社クラウド基盤サービスのSLAの内容に加えて，月間サービス稼働率を満たした場合に月間累積障害時間が［g］分以内になることや，++①月間サービス稼働率が99.5%になった場合に減額される金額++など，具体的な事例を記載することにした。また，当該資料にはBEMSサーバのハードウェア，ソフトウェア及びネットワークに発生する可能性がある障害の要因を示し，++②図3のE社クラウド基盤サービスのSLAで保証されない要因++について説明を加えることにした。",
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［品質要件の検討］について答えよ。\n本文中の［a］に入れる適切な構成要素名を図2中から選び答えよ。",
+      "sourcePages": [
+        24,
+        25,
+        28
+      ],
+      "bodyRefs": [
+        "blank-a",
+        "figure-2"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "BEMSゲートウェイ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "サーバはクラウド側，クライアントはR社運用拠点に共通化される。新しいビル側でE社が設置するのは，既設の管理LANと制御LANを接続し通信プロトコルを変換するBEMSゲートウェイである。FWやインターネット接続環境はR社が設置する条件に注意する。",
+          "rubric": [
+            "E社とR社の設置分担を区別する。",
+            "図2中の構成要素名を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              28
+            ],
+            "bodyRefs": [
+              "blank-a",
+              "figure-2"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "表1中の［b］，［c］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        26,
+        28
+      ],
+      "bodyRefs": [
+        "table-1",
+        "blank-b",
+        "blank-c"
+      ],
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "保守作業に伴う計画停止の頻度は運用・保守性に関係する。また，サービスが利用できるかという可用性にも関係し，表1の項番1は両分類を併記している。",
+          "rubric": [
+            "計画メンテナンスという運用・保守の観点を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "移行性"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "運用・保守性"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "可用性"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "性能・拡張性"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              26,
+              28
+            ],
+            "bodyRefs": [
+              "table-1",
+              "blank-b",
+              "blank-c"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "停止頻度や障害時のサービス回復時間は，サービスを継続利用できるかという可用性の指標である。項番1と項番2に共通して入るのは可用性である。",
+          "rubric": [
+            "項番2の平均サービス回復時間から可用性を特定する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "移行性"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "運用・保守性"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "可用性"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "性能・拡張性"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              26,
+              28
+            ],
+            "bodyRefs": [
+              "table-1",
+              "blank-b",
+              "blank-c"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-3",
+      "label": "設問1(3)",
+      "prompt": "本文中の［d］，［e］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        26,
+        28
+      ],
+      "bodyRefs": [
+        "blank-d",
+        "blank-e"
+      ],
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "2台を稼働系と待機系の構成にし，片方を保守する間は他方でサービスを継続する。2台のサーバの役割を示すアクティブ－スタンバイが構成の名称である。",
+          "rubric": [
+            "2台のBEMSサーバで計画停止をなくす構成を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "CASB"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "RAID5"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "VPN"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "アクティブ－スタンバイ"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "クライアントサーバ"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "シンクライアント"
+            },
+            {
+              "id": "g",
+              "label": "キ",
+              "text": "ピアツーピア"
+            },
+            {
+              "id": "h",
+              "label": "ク",
+              "text": "ライブマイグレーション"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              26,
+              28
+            ],
+            "bodyRefs": [
+              "blank-d",
+              "blank-e"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ク"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "仮想サーバを別の物理サーバへ稼働したまま移動するライブマイグレーション機能を活用し，物理サーバ障害などに備える。アクティブ－スタンバイは2台の役割構成であり，ここではクラウド基盤側の移動機能を問う。講評も障害発生時に活用できるクラウドの機能の理解を求めている。",
+          "rubric": [
+            "クラウド基盤の仮想サーバ移動機能を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "CASB"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "RAID5"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "VPN"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "アクティブ－スタンバイ"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "クライアントサーバ"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "シンクライアント"
+            },
+            {
+              "id": "g",
+              "label": "キ",
+              "text": "ピアツーピア"
+            },
+            {
+              "id": "h",
+              "label": "ク",
+              "text": "ライブマイグレーション"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              26,
+              28
+            ],
+            "bodyRefs": [
+              "blank-d",
+              "blank-e"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［クラウドサービス障害発生時の新システムへの影響］について答えよ。\n図3中の［f］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "blank-f"
+      ],
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "サービス稼働率は，稼働予定時間のうち実際に稼働できた時間の割合である。分子は総稼働予定時間から障害時間を引いた時間，分母は総稼働予定時間となる。",
+          "rubric": [
+            "稼働率の分母と分子の時間の意味を確認する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "稼働"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "待機"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "超過"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "停止"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              27,
+              28
+            ],
+            "bodyRefs": [
+              "figure-3",
+              "blank-f"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "本文中の［g］に入れる適切な月間累積障害時間を分単位で，小数第1位を四捨五入して整数で答えよ。ここで，1か月は30日間とする。",
+      "sourcePages": [
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "blank-g"
+      ],
+      "fields": [
+        {
+          "id": "g",
+          "label": "g（分）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "22"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "1か月は30×24×60=43,200分である。99.95%以上を満たす障害時間は43,200×(1−0.9995)=21.6分以内となる。設問の指示どおり小数第1位を四捨五入した値は22分である。入力する整数は丸めた表示値であり，厳密な上限21.6分と区別する。",
+          "rubric": [
+            "30日を分へ換算して43,200分とする。",
+            "未稼働率0.05%を掛け，21.6分を整数22へ四捨五入する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "分単位。小数第1位を四捨五入して整数で答える。",
+            "1か月は30日間。",
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              27,
+              28
+            ],
+            "bodyRefs": [
+              "figure-3",
+              "blank-g"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "本文中の下線①の場合で，サーバの月間利用料金が20万円のときに減額される金額を円単位で，小数第1位を四捨五入して整数で答えよ。",
+      "sourcePages": [
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "underline-1"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "減額金額（円）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "900"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "保証される稼働率99.95%から実際の99.5%を引くと，不足する稼働時間は月間総時間の0.45%に当たる。図3はSLAを達成する時間に不足した分に相当する料金を減額すると定めているので，200,000×(0.9995−0.995)=900円となる。障害時間0.5%全部に相当する1,000円ではない。",
+          "rubric": [
+            "SLAの保証と実績の差0.45%を求める。",
+            "20万円に0.0045を掛け，円単位の整数を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "円単位。小数第1位を四捨五入して整数で答える。",
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              27,
+              28
+            ],
+            "bodyRefs": [
+              "figure-3",
+              "underline-1"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-4",
+      "label": "設問2(4)",
+      "prompt": "本文中の下線②について，BEMSサーバに発生する可能性のある障害の要因のうち，E社クラウド基盤サービスのSLAで保証されないものを解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "underline-2"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "保証されない要因",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "SLAに列挙されているのは管理画面，インターネット，ディスクへのアクセスができない状態であり，クラウド基盤の利用可否を保証する。利用者が構築したBEMSサーバのソフトウェア自体の障害は，このSLAの保証対象に挙げられていない。",
+          "rubric": [
+            "図3に列挙された保証対象と，利用者側のソフトウェア障害を区別する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "CPUの障害"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "ストレージの障害"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "ソフトウェアの障害"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ネットワークの障害"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              27,
+              28
+            ],
+            "bodyRefs": [
+              "figure-3",
+              "underline-2"
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm4/figure-1.png",
+      "caption": "図1 既存システムの構成（一部）",
+      "sourcePage": 24,
+      "placement": "replace-caption",
+      "anchor": "図1 既存システムの構成（一部）",
+      "alt": "複数ビルにBEMSサーバ・クライアント・ゲートウェイを配置。管理LANと制御LANをゲートウェイで接続する。L2SW凡例と注記2件を含め原図を保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r07h-pm4/figure-2.png",
+      "caption": "図2 新システムの構成案（一部）",
+      "sourcePage": 25,
+      "placement": "replace-caption",
+      "anchor": "図2 新システムの構成案（一部）",
+      "alt": "E社クラウド基盤にBEMSサーバ，R社運用拠点にクライアント。各ビルのFWとゲートウェイから制御対象機器へ接続する。注記2件を含め原図を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        24
+      ],
+      "anchor": "図1 既存システムの構成（一部）"
+    },
+    "figure-2": {
+      "sourcePages": [
+        25
+      ],
+      "anchor": "図2 新システムの構成案（一部）"
+    },
+    "table-1": {
+      "sourcePages": [
+        26
+      ],
+      "anchor": "表1 既存システム及び新システムの非機能要件の指標とその指標値（一部）"
+    },
+    "figure-3": {
+      "sourcePages": [
+        27
+      ],
+      "anchor": "図3 E社クラウド基盤サービスのSLA（一部）"
+    },
+    "blank-a": {
+      "sourcePages": [
+        25
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［e］"
+    },
+    "blank-f": {
+      "sourcePages": [
+        27
+      ],
+      "text": "［f］"
+    },
+    "blank-g": {
+      "sourcePages": [
+        27
+      ],
+      "text": "［g］"
+    },
+    "underline-1": {
+      "sourcePages": [
+        27
+      ],
+      "text": "①月間サービス稼働率が99.5%になった場合に減額される金額"
+    },
+    "underline-2": {
+      "sourcePages": [
+        27
+      ],
+      "text": "②図3のE社クラウド基盤サービスのSLAで保証されない要因"
+    }
+  },
+  "author": "/root/written_author_spring_2_6",
+  "authoringStatus": "independently-reviewed",
+  "imageSizes": {
+    "assets/written/ap-r07h-pm4/question-p24.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm4/question-p25.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm4/question-p26.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm4/question-p27.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm4/question-p28.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  }
+}

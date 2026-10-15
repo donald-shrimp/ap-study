@@ -1,0 +1,663 @@
+{
+  "id": "ap-r07h-pm8",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "development",
+  "title": "エラーハンドリング",
+  "status": "reviewed",
+  "sourceKind": "official",
+  "sourceImages": [
+    "assets/written/ap-r07h-pm8/question-p46.png",
+    "assets/written/ap-r07h-pm8/question-p47.png",
+    "assets/written/ap-r07h-pm8/question-p48.png",
+    "assets/written/ap-r07h-pm8/question-p49.png",
+    "assets/written/ap-r07h-pm8/question-p50.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "body": "問8 エラーハンドリングに関する次の記述を読んで，設問に答えよ。\n\nQ社は，業務システムの受託開発会社である。Q社は，スーパーマーケットの複数の店舗を運営するB社から，CRM（Customer Relationship Management）システムの開発と運用保守業務を受託した。CRMシステムは各店舗で利用され，顧客からの意見やクレーム，店舗での対応の内容が登録・蓄積される。CRMシステムを運用する際の関係者の一覧を表1に示す。\n\n表1 関係者の一覧\n\n| 関係者 | 説明 |\n| --- | --- |\n| 顧客 | B社の店舗に来店した顧客。意見やクレームを，店舗に勤務するB社の従業員に伝える。 |\n| 利用者 | CRMシステムへのアクセスが許可されたB社の従業員。顧客からの意見やクレームをCRMシステムに入力し，過去の類似案件の記録を参考に顧客対応を行う。顧客から聞き取った氏名と連絡先を，CRMシステムに顧客情報として登録することがある。顧客情報は，B社の従業員が顧客に連絡するためだけに利用する。 |\n| 運用担当者 | B社に常駐しているQ社の従業員。CRMシステムの運用手順書に従って，利用者からの質問や不具合発生時の問合せに対応する。問合せ時の状況や不具合の再現手順の確認のために，運用中のCRMシステムへのアクセスが許可されている。運用手順書で対応しきれない技術的な問題については，Q社の開発担当者に対応を依頼する。 |\n| 開発担当者 | Q社内で勤務しているQ社の開発担当者。運用担当者からの問合せの際は，調査に必要な最小限の情報として，不具合の状況，再現手順及び発生時刻付近のログを受け取る。運用中のCRMシステムへの入力情報を，直接参照することはできない。 |\n\nQ社は，システムのリリース後に想定される，店舗からの問合せに対する迅速な対応を可能にするために，想定される問合せのパターンと対応方法を事前に整理し，対応の際に必要な要件をシステムの設計に反映させることにした。\n\n［CRMシステムの構造］\n\nCRMシステムのクラス図（一部）を図1に示す。AbstractController，AbstractService及びAbstractDaoは，それぞれ画面遷移，ビジネスロジック及びデータベースアクセスの共通処理が実装された抽象クラスである。これらのクラスを［a］したクラスを作成して，具体的な機能を実装する。ログを出力するにはLoggerクラスを利用する。ログの出力時には“DEBUG”，“ERROR”などの，ログの種別（以下，ログ種別という）が記録される。図1に示すクラスを使った処理の流れの例として，システムにログインする際のシーケンス図を，図2に示す。\n\n図1 CRMシステムのクラス図（一部）\n\n図2 システムにログインする際のシーケンス図\n\n利用者がログイン画面で認証に必要な情報を入力しログインを実行すると，LoginControllerのログイン実行メソッドが呼び出される。ログイン実行メソッドは，画面から入力された情報をAuthServiceに引き渡す。AuthServiceは，UserDaoに実装されている，利用者情報の検索を行う機能を用いて，認証の判定に必要な利用者情報をデータベースから取得する。AuthServiceは，取得した利用者情報を用いてログイン認証の判定を行い，結果を返す。\n\nプログラムの実行中にエラーが発生した際の，例外処理用のクラスとしてExceptionクラスがある。Exceptionクラスは，エラーの詳細情報として，エラーの発生箇所のソースファイル名，行番号，メソッドの呼出し履歴及び直接的な原因を示すメッセージ文字列をもつ。エラー発生時には，エラーの発生箇所でExceptionクラスのオブジェクトを作成し，呼出し元ではそれを使って例外処理を行う。\n\n［CRMシステムのエラーの種別の整理とその対応］\n\nQ社は，運用中に起き得るエラーの種別（以下，エラー種別という）を整理し，対応方法について検討した。エラー種別と運用担当者の対応を表2に，対応を行うために必要な出力機能及び出力内容と，出力内容を参照する関係者を表3に示す。\n\n表2 エラー種別と運用担当者の対応\n\n| エラー種別 | 説明 | 運用担当者の対応 |\n| --- | --- | --- |\n| システム障害 | Webサーバやデータベースサーバの停止，プログラムの異常終了，ネットワーク障害などの原因によって，システム自体の稼動が継続不能になる。 | 利用者からの報告を受けて，サーバやサービスの稼働状況を確認し，必要に応じて再起動を行う。それでも復旧できない場合は開発担当者に対応を依頼する。 |\n| システムエラー | 主にプログラムの欠陥によって発生する，想定外のエラー。操作の途中で画面にエラーメッセージが表示され，業務を続行できない。 | 利用者から，操作した手順を聞き取り，状況を確認する。エラー発生時の前後のログをログファイルから切り出して開発担当者に送付し，対応を依頼する。 |\n| 業務エラー | 業務ルール上，入力値の内容が正しくないか，禁止されている操作をしたときに発生するエラー。プログラムで想定済みのエラーで，利用者が入力値の内容を修正し，操作をやり直すことによって業務を続行できる。 | 利用者から，操作した手順と，画面に表示されたエラーメッセージの内容を聞き取り，状況を確認する。運用手順書を参照し，エラーの回避方法を利用者に伝える。回避方法が不明な場合は，エラーの再現手順とエラー発生時の前後のログを開発担当者に送付し，回避方法の提示を求める。 |\n| 入力エラー | 文字列長や文字種に関する入力値の検証時のエラー。利用者自身が入力値を修正することによって業務を続行できる。 | 対応なし。利用者自身が，画面に表示されているエラーメッセージを参照してエラーを解消する。 |\n\n表3 出力機能及び出力内容と，出力内容を参照する関係者\n\n| 出力機能 | 出力内容 | 参照する関係者 |\n| --- | --- | --- |\n| ログ出力 | プログラムの実行中に想定外の事態が発生した場合は処理を中断し，処理の呼出し元にエラーの内容を返す。その際，エラーの概要，詳細情報及びメソッドの呼出し履歴をLoggerクラスを使ってログファイルに出力する。 | ［d］ |\n| エラーメッセージ表示 | エラーの概要，Exceptionクラスがもつエラーの詳細情報及び利用者が次に行うべき操作の案内を画面に表示する。 | 利用者 |\n\n表2，表3についてレビューを行ったところ，次の3点が指摘された。\n\n(1) 表2のシステム障害及びシステムエラーは，利用者の問合せの前にシステムが自動的に検出して運用担当者が対応を開始できるようにすべきである。\n(2) 表3の出力内容には，セキュリティの観点における潜在的なリスクがある。\n(3) 表3について，エラーに関するログだけでは，開発担当者が原因を調査するための情報としては不足するので，追加の情報を出力する必要がある。\n\n指摘事項の(1)に対応するために，++①監視の機能++を用意することにした。監視の機能は，監視対象の情報を定期的に取得し，エラー発生時の特徴を検出した場合に電子メールで運用担当者に通知する。指摘事項の(2)については，表3の++②出力内容を一部変更++することにした。指摘事項の(3)については，アスペクト指向プログラミングを導入して，プログラムの処理の中で，要所ごとにログを出力することにした。\n\n［アスペクト指向プログラミングの導入］\n\nレビューの指摘事項の(3)に関連して，利用者が行った操作内容を一律でログに出力することにし，これを実現するためにアスペクト指向プログラミングを導入することにした。\n\nアスペクト指向プログラミングでは，特定のルールを定義しておくことによって，そのルールに合致する全ての箇所で同じ処理を実行させる。ルールの定義の条件にはクラス名，メソッド名に含まれる文字列のパターンが利用できる。また，特定の条件に合致する場合には実行の対象から除外するように指定することもできる。ここでは，実装上の制約ができるだけ少なくなるようなルールの定義方法で，画面遷移に関するクラスに実装された全てのメソッドについて，クラス名，メソッド名及び全ての引数の内容をログに出力することにした。これを実現するために，［e］を親クラスにもつクラスの［f］には必ず特定の文字列のパターンを含み，それ以外のクラスの［f］には特定の文字列のパターンを含まないように命名規則を定義した。ただし，秘匿情報や個人情報の保護の観点から，認証に関する情報や，++③顧客情報を扱う箇所はログに出力しない++ようにした。\n\nQ社は，表2，表3に関する検討結果をシステムの設計に反映させ，開発を開始した。\n",
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文，図1及び図2中の［a］～［c］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        46,
+        47,
+        50
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "figure-2"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "継承"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "抽象クラスの共通処理を受け継ぎ，具体的な機能を実装する関係は継承である。クラス図の白抜き三角形の矢印も汎化を示す。",
+          "rubric": [
+            "抽象クラスと具象クラスの関係を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-1",
+              "figure-2"
+            ],
+            "questionPages": [
+              46,
+              47,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ID"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "AuthServiceはIDとPasswordを受け取り，IDで利用者情報を検索した後，取得した情報で認証を判定する。利用者情報を取得する検索引数はIDである。",
+          "rubric": [
+            "検索と認証判定を区別する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-1",
+              "figure-2"
+            ],
+            "questionPages": [
+              46,
+              47,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ログイン認証の判定結果"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "UserDaoが返すのは利用者情報，AuthServiceがLoginControllerへ返すのは取得した情報を使ったログイン認証の判定結果である。",
+          "rubric": [
+            "戻り先と戻り値の意味を対応させる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-1",
+              "figure-2"
+            ],
+            "questionPages": [
+              46,
+              47,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "表3中の［d］について，どの関係者に向けた表現として出力すべきか。表1の関係者から全て選び答えよ。",
+      "sourcePages": [
+        46,
+        48,
+        50
+      ],
+      "bodyRefs": [
+        "table-1",
+        "table-2",
+        "table-3"
+      ],
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "freeText",
+          "referenceAnswers": [
+            "運用担当者，開発担当者"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "運用担当者はエラー発生時前後のログを切り出して状況を調べ，開発担当者へ送る。開発担当者もそのログを用いて原因を調査するため，両者が理解できる表現が必要である。顧客や利用者向けの画面メッセージとは異なる。",
+          "rubric": [
+            "運用担当者と開発担当者の両方を挙げる。",
+            "並び順に意味はないため，記載順の異なる回答は自己評価で確認する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-1",
+              "table-2",
+              "table-3"
+            ],
+            "questionPages": [
+              46,
+              48,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "本文中の下線①について，業務運用中のCRMシステムの何を対象に監視するか。システム障害とシステムエラーのそれぞれについて，最も適切なものを解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        46,
+        48,
+        49,
+        50
+      ],
+      "bodyRefs": [
+        "table-2",
+        "underline-1"
+      ],
+      "fields": [
+        {
+          "id": "failure",
+          "label": "システム障害",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "システム障害はサーバ停止やネットワーク障害などによりシステム自体が稼働不能になる。データベースへの接続確認結果を監視すれば，サーバや接続経路が機能しなくなる事象を検出できる。",
+          "rubric": [
+            "障害により接続できなくなる結果を監視する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "画面に表示されたエラーメッセージ"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "データベースへの接続確認の結果"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "電子メール送信履歴"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ログ種別の文字列"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "ログファイルのサイズ"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "table-2",
+              "underline-1"
+            ],
+            "questionPages": [
+              46,
+              48,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "error",
+          "label": "システムエラー",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "想定外のエラーではLoggerがログを出力し，ログ種別にERRORなどが記録される。ログ種別の文字列を監視すれば，利用者の画面や業務を妨げずに検出できる。ログサイズだけではエラーの有無を特定できない。",
+          "rubric": [
+            "ログ種別によって想定外のエラーを識別する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "画面に表示されたエラーメッセージ"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "データベースへの接続確認の結果"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "電子メール送信履歴"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ログ種別の文字列"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "ログファイルのサイズ"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "table-2",
+              "underline-1"
+            ],
+            "questionPages": [
+              46,
+              48,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "本文中の下線②について，変更した出力機能を答えよ。また，その変更の内容を20字以内で答えよ。",
+      "sourcePages": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "bodyRefs": [
+        "table-3",
+        "underline-2"
+      ],
+      "fields": [
+        {
+          "id": "function",
+          "label": "出力機能",
+          "type": "shortText",
+          "referenceAnswers": [
+            "エラーメッセージ表示"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "利用者へ表示する詳細情報にはソースファイル名，行番号，呼出し履歴や原因文字列が含まれるため，内部構造を露出するリスクがある。変更対象は利用者に向けたエラーメッセージ表示である。",
+          "rubric": [
+            "ログ出力と利用者向け画面表示を区別する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-3",
+              "underline-2"
+            ],
+            "questionPages": [
+              47,
+              48,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "change",
+          "label": "内容",
+          "type": "freeText",
+          "referenceAnswers": [
+            "エラーの詳細情報を出力しない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "利用者の次の操作に必要な概要や案内を保ちながら，Exceptionがもつ詳細情報を画面に出さないようにする。調査に必要なログまでなくす変更ではない。",
+          "rubric": [
+            "エラー詳細情報を表示しないことを20字以内で答える。"
+          ],
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-3",
+              "underline-2"
+            ],
+            "questionPages": [
+              47,
+              48,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5-1",
+      "label": "設問5(1)",
+      "prompt": "［アスペクト指向プログラミングの導入］について答えよ。本文中の［e］，［f］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        46,
+        47,
+        49,
+        50
+      ],
+      "bodyRefs": [
+        "figure-1"
+      ],
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "AbstractController"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "画面遷移の共通処理を実装する抽象クラスはAbstractControllerであり，ログ対象はその子クラスに実装された全メソッドである。",
+          "rubric": [
+            "図1及び本文のクラス名を正確に答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-1"
+            ],
+            "questionPages": [
+              46,
+              47,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "クラス名"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "画面遷移のクラス全体を対象とし，メソッド名には余分な制約を付けないため，クラス名に文字列パターンを含める命名規則とする。",
+          "rubric": [
+            "全メソッドを対象とし実装上の制約を少なくする要件に対応する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-1"
+            ],
+            "questionPages": [
+              46,
+              47,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5-2",
+      "label": "設問5(2)",
+      "prompt": "本文中の下線③について，出力しないようにした理由を，20字以内で答えよ。",
+      "sourcePages": [
+        46,
+        49,
+        50
+      ],
+      "bodyRefs": [
+        "table-1",
+        "underline-3"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "理由",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ログは開発担当者も参照するから"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "顧客情報はB社従業員が連絡するためだけに利用する。開発担当者は入力情報を直接参照できないが，問合せ時にはログを受け取る。顧客情報をログへ書くと，許可されていない開発担当者にも参照可能になる。採点講評も情報を誰が参照し得るかの確認を求めている。",
+          "rubric": [
+            "ログを開発担当者も参照することを20字以内で説明する。"
+          ],
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-1",
+              "underline-3"
+            ],
+            "questionPages": [
+              46,
+              49,
+              50
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問8",
+  "sourcePages": [
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "imageSizes": {
+    "assets/written/ap-r07h-pm8/question-p46.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm8/question-p47.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm8/question-p48.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm8/question-p49.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm8/question-p50.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm8/figure-1.png",
+      "caption": "図1 CRMシステムのクラス図（一部）",
+      "sourcePage": 47,
+      "placement": "replace-caption",
+      "anchor": "図1 CRMシステムのクラス図（一部）",
+      "alt": "図1 CRMシステムのクラス図（一部）。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r07h-pm8/figure-2.png",
+      "caption": "図2 システムにログインする際のシーケンス図",
+      "sourcePage": 47,
+      "placement": "replace-caption",
+      "anchor": "図2 システムにログインする際のシーケンス図",
+      "alt": "図2 システムにログインする際のシーケンス図。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        47
+      ],
+      "anchor": "図1 CRMシステムのクラス図（一部）"
+    },
+    "figure-2": {
+      "sourcePages": [
+        47
+      ],
+      "anchor": "図2 システムにログインする際のシーケンス図"
+    },
+    "table-1": {
+      "sourcePages": [
+        46
+      ],
+      "text": "表1 関係者の一覧"
+    },
+    "table-2": {
+      "sourcePages": [
+        48
+      ],
+      "text": "表2 エラー種別と運用担当者の対応"
+    },
+    "table-3": {
+      "sourcePages": [
+        48
+      ],
+      "text": "表3 出力機能及び出力内容と，出力内容を参照する関係者"
+    },
+    "underline-1": {
+      "sourcePages": [
+        49
+      ],
+      "text": "①監視の機能"
+    },
+    "underline-2": {
+      "sourcePages": [
+        49
+      ],
+      "text": "②出力内容を一部変更"
+    },
+    "underline-3": {
+      "sourcePages": [
+        49
+      ],
+      "text": "③顧客情報を扱う箇所はログに出力しない"
+    }
+  },
+  "bodyPageMap": [
+    {
+      "page": 46,
+      "start": "問8 エラーハンドリング",
+      "end": "ログの種別"
+    },
+    {
+      "page": 47,
+      "start": "ログの種別",
+      "end": "直接的な原因を"
+    },
+    {
+      "page": 48,
+      "start": "直接的な原因を示すメッセージ文字列をもつ。",
+      "end": "利用者"
+    },
+    {
+      "page": 49,
+      "start": "表2，表3についてレビューを行ったところ",
+      "end": "開発を開始した。"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/written_author_spring_7_11",
+  "authoringStatus": "independently-reviewed"
+}

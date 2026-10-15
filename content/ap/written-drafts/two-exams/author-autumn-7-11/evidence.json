@@ -1,0 +1,270 @@
+{
+  "author": "/root/written_author_autumn_7_11",
+  "createdAt": "2026-10-15T04:01:29.375606+00:00",
+  "method": "IPA原問PNGの担当全24ページを実表示し，原文を手動文字起こし。紙幅折返しは段落へ統合，表はMarkdown化，原本図は忠実crop（再描画なし）。公式解答PDFの4〜6頁と講評PDFの2〜3頁をPNGでも実表示し，全欄を照合。説明・rubricは問題固有に独自作成。OCR使用なし。JSON組立のみ作業用Pythonを使用。未レビュー教材は公開ケースへ登録しない。",
+  "pdfSources": [
+    {
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_qs.pdf",
+      "path": "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_qs.pdf",
+      "sha256": "9eeb6e4844ea596670b83164dcff074383cf7ad920b6c80c321fc19c7953ab54",
+      "pages": 68,
+      "textChars": 0
+    },
+    {
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_ans.pdf",
+      "path": "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_ans.pdf",
+      "sha256": "5d44280a82179093499ef2aece4fa9ea0e74e7b59f8afd7ef23d32bebe260147",
+      "pages": 6,
+      "textChars": 4345
+    },
+    {
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_pm_cmnt.pdf",
+      "path": "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_cmnt.pdf",
+      "sha256": "10ba8584577625960f9f7229d3be77a9cd01aad04d13bb533eabf9074773f07f",
+      "pages": 3,
+      "textChars": 4306
+    }
+  ],
+  "answerAndCommentaryImageSHA256": {
+    "content/ap/written-drafts/two-exams/sources/r07a-ans-p04.png": "ab5217cb678ec4930db7460494157c1967a04d090d274589a6cc5a5702815500",
+    "content/ap/written-drafts/two-exams/sources/r07a-ans-p05.png": "aabb1d910428c670f091ca6c04bf15850707a9d036f8f7b030ffc4a40661be00",
+    "content/ap/written-drafts/two-exams/sources/r07a-ans-p06.png": "b7973226d2679af0b8b2fd3538ff2415b51712d160cf46ee87bba7774f2f5144",
+    "content/ap/written-drafts/two-exams/sources/r07a-cmnt-p02.png": "0d34eb85e19312b9d1ca71f46c7dc50e1a12a526bb1d2d6bf9c46fba1a35ec36",
+    "content/ap/written-drafts/two-exams/sources/r07a-cmnt-p03.png": "966150ec6e0346ab292886bb988ef1d68d551795e10252839005ab49f5461eda"
+  },
+  "crops": [
+    {
+      "caseId": "ap-r07a-pm7",
+      "sourcePage": 42,
+      "sourcePath": "assets/written/ap-r07a-pm7/question-p42.png",
+      "box": [
+        184,
+        510,
+        874,
+        856
+      ],
+      "image": "assets/written/ap-r07a-pm7/figure-1.png",
+      "method": "Pillow crop，座標は元PNGのピクセル，リサイズなし。完成cropを実表示してラベルと図の範囲を点検。"
+    },
+    {
+      "caseId": "ap-r07a-pm8",
+      "sourcePage": 49,
+      "sourcePath": "assets/written/ap-r07a-pm8/question-p49.png",
+      "box": [
+        126,
+        398,
+        970,
+        1043
+      ],
+      "image": "assets/written/ap-r07a-pm8/figure-1.png",
+      "method": "Pillow crop，座標は元PNGのピクセル，リサイズなし。完成cropを実表示してラベルと図の範囲を点検。"
+    },
+    {
+      "caseId": "ap-r07a-pm9",
+      "sourcePage": 57,
+      "sourcePath": "assets/written/ap-r07a-pm9/question-p57.png",
+      "box": [
+        166,
+        455,
+        900,
+        925
+      ],
+      "image": "assets/written/ap-r07a-pm9/figure-1.png",
+      "method": "Pillow crop，座標は元PNGのピクセル，リサイズなし。完成cropを実表示してラベルと図の範囲を点検。"
+    }
+  ],
+  "notes": [
+    "字数指定なしはmaxLength=2000＋アプリ入力上限との注記。公式条件と区別。",
+    "問11のh/iは順不同の組で同一重複を自動正解にしないためshortText/self。公式候補2種と一つずつの条件を両欄に保存。",
+    "全5大問とも20欄以下。質問と本文の空欄を正解で埋めていない。"
+  ],
+  "cases": [
+    {
+      "caseId": "ap-r07a-pm7",
+      "status": "draft",
+      "author": "/root/written_author_autumn_7_11",
+      "questionPagesActuallyViewed": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "officialAnswerPagesActuallyViewed": [
+        4
+      ],
+      "officialCommentaryPagesActuallyViewed": [
+        2
+      ],
+      "sourceImageSHA256": {
+        "assets/written/ap-r07a-pm7/question-p42.png": "cfe1a0962328350bd69f431b9c7ed8ad8c19b9d454c039ee291c715a0a73a07b",
+        "assets/written/ap-r07a-pm7/question-p43.png": "63fe4a9e630fe407fc0fe3016768975c101fb6e20a737141bc5b67c53c0d03db",
+        "assets/written/ap-r07a-pm7/question-p44.png": "3ee15cd09c409e25878d99d3e27a706bd024d5f3493ac2c684ec6acafec6a337",
+        "assets/written/ap-r07a-pm7/question-p45.png": "434cb05950567aa10ffb81a9bae237ebda3be18cef4ebe02de07ad2f54aad34b",
+        "assets/written/ap-r07a-pm7/question-p46.png": "787edd149737b6f9bddc336c861d593495ccb18ba20b2aa1791981593854b71f"
+      },
+      "figureSHA256": {
+        "assets/written/ap-r07a-pm7/figure-1.png": "36f3909427d8ca5e4784cf7b0fc8028391cab8cdac8f6d99005e0604d5d0d4e5"
+      },
+      "canonicalDraftSHA256": "36487fc36257fefbcb34cbfbea2e7fe782a1e2a9989c126fa19247062683f6dc",
+      "fields": 12,
+      "unverified": [
+        "作成者とは異なる担当者の全原本照合・承認待ち。"
+      ],
+      "authorCalculations": [
+        "2日目:860/950=0.9052631579,900/950=0.9473684211。両方95%以上でも90%未満でもないため警告。",
+        "4日目:900/1011=0.8902077151<0.9なので危険。",
+        "2000000*24*60/8/1000000=360 Mバイト。2000000*8*60/8/1000000=120 Mバイト。",
+        "10/5*150=300パルス。"
+      ]
+    },
+    {
+      "caseId": "ap-r07a-pm8",
+      "status": "draft",
+      "author": "/root/written_author_autumn_7_11",
+      "questionPagesActuallyViewed": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "officialAnswerPagesActuallyViewed": [
+        4
+      ],
+      "officialCommentaryPagesActuallyViewed": [
+        2
+      ],
+      "sourceImageSHA256": {
+        "assets/written/ap-r07a-pm8/question-p48.png": "a429e3dde4e950f807ebf23f4e81451ca2c47758d30a6804855955e974d01922",
+        "assets/written/ap-r07a-pm8/question-p49.png": "658ea1aba23f918cc948e2f3581b13d77ad32f03d7bfc025ce74a37bab1714dc",
+        "assets/written/ap-r07a-pm8/question-p50.png": "cc668aeebfd45c41dec3c15c52819edc206311cde9826cbb714ba251f573205e",
+        "assets/written/ap-r07a-pm8/question-p51.png": "0b729165d747d8766dfdaad408674ec7e6a5b391dc3a7e85f41492519e019fa8",
+        "assets/written/ap-r07a-pm8/question-p52.png": "002412d4bc78684c1ce218b03fb36ac751546962936d0c217b2a5cb1a824be78",
+        "assets/written/ap-r07a-pm8/question-p53.png": "0c7fdb97a84e28efffe477be2649a4b502add68a7f735538619ac60738fa5465"
+      },
+      "figureSHA256": {
+        "assets/written/ap-r07a-pm8/figure-1.png": "a27681a58b6c4f0c1fded4eaa61994eb96dc837b406fd26fc3c25c23d4c4e254"
+      },
+      "canonicalDraftSHA256": "c6fa3fb22abe9abbf24c5e378b875b38008f49e78f9bcbb6c59c07057386084c",
+      "fields": 10,
+      "unverified": [
+        "作成者とは異なる担当者の全原本照合・承認待ち。"
+      ],
+      "authorCalculations": "not-applicable"
+    },
+    {
+      "caseId": "ap-r07a-pm9",
+      "status": "draft",
+      "author": "/root/written_author_autumn_7_11",
+      "questionPagesActuallyViewed": [
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "officialAnswerPagesActuallyViewed": [
+        5
+      ],
+      "officialCommentaryPagesActuallyViewed": [
+        3
+      ],
+      "sourceImageSHA256": {
+        "assets/written/ap-r07a-pm9/question-p54.png": "587146bf05124bee3da9ddabf4e7d29dcb6c753cf9626ee2bf7765e9195de27e",
+        "assets/written/ap-r07a-pm9/question-p55.png": "44b1989888839570c618cd0bda4897a602d9791e15d5ead0bd57c08b7518089a",
+        "assets/written/ap-r07a-pm9/question-p56.png": "984948f2887b9ba43f0137a1b7f92a5b0672a7aedc366fea3b52d21b47d80b79",
+        "assets/written/ap-r07a-pm9/question-p57.png": "74c05891e20dd1b4b1b2337bbf8d1994aeccace7be882209cdfb59af03a9090a",
+        "assets/written/ap-r07a-pm9/question-p58.png": "a00b13f3c8553a27d424be0cbf67fd90aff971f5ccd3cde4cb72618a8c8516de"
+      },
+      "figureSHA256": {
+        "assets/written/ap-r07a-pm9/figure-1.png": "e0cd88e343edfdf5ae6f4ab3902539ff3d1cf184a5141b2d2f5018acab8d4bf6"
+      },
+      "canonicalDraftSHA256": "e568eb88f64c0a871244e15ea8e4b761f35a2789023aa4731bccd7c69733c69c",
+      "fields": 7,
+      "unverified": [
+        "作成者とは異なる担当者の全原本照合・承認待ち。"
+      ],
+      "authorCalculations": [
+        "図1で5日目実績残22枚、理想残22枚は4日目。5-4=1稼働日。"
+      ]
+    },
+    {
+      "caseId": "ap-r07a-pm10",
+      "status": "draft",
+      "author": "/root/written_author_autumn_7_11",
+      "questionPagesActuallyViewed": [
+        60,
+        61,
+        62,
+        63
+      ],
+      "officialAnswerPagesActuallyViewed": [
+        5
+      ],
+      "officialCommentaryPagesActuallyViewed": [
+        3
+      ],
+      "sourceImageSHA256": {
+        "assets/written/ap-r07a-pm10/question-p60.png": "0eca41a92229a469ad8072c64424cf92b30882b2c95cf0a2737caa5583fdb38d",
+        "assets/written/ap-r07a-pm10/question-p61.png": "514312f332cf92172b7392acc03f7fb61664231c46d3e34855c55a074ac33769",
+        "assets/written/ap-r07a-pm10/question-p62.png": "946d43b46f6119c790d80b71ef17679f0e3e8bca5176f70d35fc890f56484bfa",
+        "assets/written/ap-r07a-pm10/question-p63.png": "132b0cbc2afd9b8dad930b7dea0c5b2b51d4f178758b952aa1345f9dfb5da106"
+      },
+      "figureSHA256": {},
+      "canonicalDraftSHA256": "0c70ea6a5f82e77b643d75709c822c1d864ed06527eafd48e744bebbead10036",
+      "fields": 8,
+      "unverified": [
+        "作成者とは異なる担当者の全原本照合・承認待ち。"
+      ],
+      "authorCalculations": [
+        "22*24*60=31680分。31680*(1-0.995)=158.4分→切り捨て158分。"
+      ]
+    },
+    {
+      "caseId": "ap-r07a-pm11",
+      "status": "draft",
+      "author": "/root/written_author_autumn_7_11",
+      "questionPagesActuallyViewed": [
+        64,
+        65,
+        66,
+        67
+      ],
+      "officialAnswerPagesActuallyViewed": [
+        6
+      ],
+      "officialCommentaryPagesActuallyViewed": [
+        3
+      ],
+      "sourceImageSHA256": {
+        "assets/written/ap-r07a-pm11/question-p64.png": "54a61d56e3bbb7d65006b76e6afaff5fd31e8a5ee5c16b793ca5e8a8a9e0cbaf",
+        "assets/written/ap-r07a-pm11/question-p65.png": "049cf0b6c811f571e4f3850308a8848df704d251937e604bd333e381ee794082",
+        "assets/written/ap-r07a-pm11/question-p66.png": "a648d9f786e26efc86a44dd34d2af422fb5c12be6951cf2a4c9a9591ad7e4d5a",
+        "assets/written/ap-r07a-pm11/question-p67.png": "19955bebf0556edad89c551a7dcd77de3efbd56923f4a130a604d7d786958037"
+      },
+      "figureSHA256": {},
+      "canonicalDraftSHA256": "797c3924acf14c2e18df98d4d29f2d5ed626599b05b94eaae8f3a41b06a3af77",
+      "fields": 9,
+      "unverified": [
+        "作成者とは異なる担当者の全原本照合・承認待ち。"
+      ],
+      "authorCalculations": "not-applicable",
+      "authorCorrections": [
+        "独立確認者が原本p65拡大表示で検出した余分な『その』を削除し，原文『不備についての是正状況などを』へ訂正。再確認待ち。"
+      ]
+    }
+  ],
+  "verification": {
+    "schema": "Node validateCaseMaterialをstatusのみ一時reviewedにしたメモリ内オブジェクトで5件検証。保存ファイルはdraft維持。",
+    "fieldCounts": {
+      "ap-r07a-pm7": 12,
+      "ap-r07a-pm8": 10,
+      "ap-r07a-pm9": 7,
+      "ap-r07a-pm10": 8,
+      "ap-r07a-pm11": 9
+    },
+    "calculation": "Python fractions.Fractionで問7の90%/95%境界比較・録画サイズ360/120Mバイト・300パルス，問10の158.4分切捨て158分をassert。全通過。"
+  }
+}

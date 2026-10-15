@@ -1,0 +1,431 @@
+{
+  "id": "ap-r07h-pm11",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "service",
+  "title": "勤務管理に関連するシステムの監査",
+  "status": "draft",
+  "sourceKind": "official",
+  "sourceImages": [
+    "assets/written/ap-r07h-pm11/question-p64.png",
+    "assets/written/ap-r07h-pm11/question-p65.png",
+    "assets/written/ap-r07h-pm11/question-p66.png",
+    "assets/written/ap-r07h-pm11/question-p67.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "body": "問11 勤務管理に関連するシステムの監査について，次の記述を読んで，設問に答えよ。\n\n小売業を営むW社では，本社及び支社の部署，店舗など（以下，部店という）で，合計約3,000人の従業員が勤務している。従業員の勤務日，勤務時間帯などは，所属する部店，職種などによって異なっており，勤務管理システムで管理している。勤務管理システムは，人事管理システム，給与計算システムなどと連携しており，勤務形態の多様化，連携するシステムの改変などに伴って，随時保守が必要である。勤務管理に関連するシステムの概念図を図1に示す。\n\n図1 勤務管理に関連するシステムの概念図\n\n内部監査部長は，システム監査チームに対して，勤務管理に関連するシステムを監査するよう指示した。システム監査チームは，X年5月に予備調査を行い，次の事項を把握した。\n\n［勤務管理の概要］\n\n(1) 人事部は，勤務管理規程に基づき，従業員一人当たりの毎月の標準勤務時間を部店別及び職種別に定め，全社勤務時間管理表に記載している。標準勤務時間は，例えば，営業企画部の企画職では，1月180時間，2月165時間，店舗の販売職では，1月140時間，2月130時間，店舗の事務職では，1月160時間，2月150時間などである。\n(2) 標準勤務時間を超過した勤務時間（以下，超過勤務時間という）に対しては，給与規程に定めた超過勤務手当が支払われる。\n(3) 従業員の毎月の勤務日数，勤務時間などの記録（以下，勤務記録という）は，翌月7日を確定日としている。\n(4) TRに従業員用ICカードを読み取らせることによって，従業員が部店に入室した時刻（以下，TR開始時刻という）及び部店から退室した時刻（以下，TR終了時刻という）がTR管理システムに記録される。\n(5) 従業員は，TR開始時刻及びTR終了時刻を参考にして，勤務記録の確定日までに，勤務開始時刻及び勤務終了時刻を勤務管理システムに登録する。\n(6) 人事部は，一部の従業員について，X年10月からテレワークでの勤務を認める予定である。テレワークでの勤務の場合，従業員は，PCの稼働開始時刻（以下，PC開始時刻という）及び稼働終了時刻（以下，PC終了時刻という）を参考にして，勤務開始時刻及び勤務終了時刻を勤務管理システムに登録する。\n(7) X年10月からは，勤務形態について，例えば，次のような一定の組合せが認められる。\n① 8時～12時：部店勤務，13時～17時：テレワーク\n② 9時～11時：テレワーク，12時～15時：部店勤務，16時～18時：テレワーク\n\n［勤務管理に関連するシステムの概要］\n\n(1) 人事部は，全社勤務時間管理表に基づき，勤務管理システムに標準勤務時間を手作業で登録する。\n(2) 勤務管理システムは，TR管理システムからTR開始時刻及びTR終了時刻を日次バッチ処理で取り込み，従業員別の勤務実績画面に表示する。TR開始時刻と勤務開始時刻の差，又はTR終了時刻と勤務終了時刻の差が一定時間以上の場合，勤務実績画面に警告メッセージ（以下，時差確認メッセージという）を表示する。\n(3) 勤務管理システムのテレワーク対応では，PC管理システムからPC開始時刻及びPC終了時刻を日次バッチ処理で取り込み，勤務実績画面に表示する予定である。また，時差確認メッセージの表示条件は，++①PC開始時刻と勤務開始時刻の差，又はPC終了時刻と勤務終了時刻の差が一定時間以上++の場合などを想定している。\n(4) 従業員の超過勤務時間は，人事管理システムから月次バッチ処理で連携された従業員の所属部店及び職種，人事部が登録した標準勤務時間に基づき，算出される。\n(5) 給与計算システムは，勤務記録の確定日の夜間バッチ処理で，勤務記録を勤務管理システムから取り込み，給与支給額を算出する。\n\n［勤務管理に関連するシステム障害］\n\n(1) W社では，発生したシステム障害について，発生日，事象，重要度，直接原因，根本原因，暫定対応，恒久対応などを障害管理データベースに登録し，随時更新している。\n(2) 障害管理データベースを閲覧した結果，X年1月に，勤務管理に関連するシステム障害が発生していたことが分かった。X年2月末日時点における障害管理データベースの登録内容（抜粋）を表1に示す。\n\n表1 障害管理データベースの登録内容（抜粋）\n\n| 項目 | 登録内容 |\n| --- | --- |\n| 発生日 | X年1月25日 |\n| 事象 | 給与計算システムで算出した一部の給与支給額が誤っていた。 |\n| 重要度 | 高 |\n| 直接原因 | 勤務管理システムから給与計算システムに連携された超過勤務時間が誤っていた。 |\n| 根本原因 | 人事部が，人事管理システムに一部の従業員の職種を誤登録したことから，超過勤務時間が誤って算出された。 |\n| 暫定対応 | 人事部が，従業員の正しい職種に基づき，適正な給与支給額を算出した。 |\n| 恒久対応 | 人事管理システムについて，従業員の職種に関する入力コントロールを，X年3月末日までに改修する予定である。 |\n\n(3) さらに障害管理データベースを閲覧した結果，表1に示すシステム障害と同様の根本原因であるシステム障害がX年4月に再発していた。\n\n内部監査部長は，システム監査チームから予備調査の結果報告を受けて，X年7月に実施予定の本調査での監査手続について，次のとおり指示した。\n\n［内部監査部長の指示］\n\n(1) 勤務管理システムにおいて，標準勤務時間の登録が［a］であることから，ITに係る［b］が適切に組み込まれているか，確認すること。\n(2) ［勤務管理に関連するシステムの概要］(3)において，時差確認メッセージの表示条件について，下線①のほかに，［c］の［d］を想定しているか，確認すること。\n(3) ［勤務管理に関連するシステム障害］(3)を考慮したとき，［e］システムが，［f］を防止するために適切な内容で，［g］までに改修されていたか，確認すること。\n",
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［内部監査部長の指示］(1)について，答えよ。本文中の［a］に入れる適切な字句を，5字以内で答えよ。",
+      "sourcePages": [
+        65,
+        67
+      ],
+      "bodyRefs": [
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "手作業"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "全社勤務時間管理表から勤務管理システムへの標準勤務時間登録は，人事部が手作業で行う。自動連携ではないため，転記・入力誤りを防止又は検出する統制が必要になる。",
+          "rubric": [
+            "本文に明記された登録方法を5字以内で答える。"
+          ],
+          "maxLength": 5,
+          "constraints": [
+            "5字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "instructions"
+            ],
+            "questionPages": [
+              65,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "本文中の［b］に入れる適切な字句を，10字以内で答えよ。",
+      "sourcePages": [
+        65,
+        67
+      ],
+      "bodyRefs": [
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "入力コントロール"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "標準勤務時間の誤登録を防ぐため，入力時の検証などの入力コントロールが勤務管理システムに適切に組み込まれているか確認する。人事管理システムで職種を誤登録した別の障害と，対象を取り違えない。採点講評も標準勤務時間の誤登録リスクに対する入力コントロールの確認を指摘している。",
+          "rubric": [
+            "入力段階の誤りを防止・検出する統制名を10字以内で答える。"
+          ],
+          "maxLength": 10,
+          "constraints": [
+            "10字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "instructions"
+            ],
+            "questionPages": [
+              65,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［内部監査部長の指示］(2)について，答えよ。本文中の［c］に入れる適切な字句を，5字以内で答えよ。",
+      "sourcePages": [
+        65,
+        67
+      ],
+      "bodyRefs": [
+        "underline-1",
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "勤務形態"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "X年10月から部店勤務とテレワークを1日に組み合わせる勤務形態が認められる。一日中テレワークする場合のPC時刻と勤務時刻の差だけでなく，勤務形態の組合せを考慮する必要がある。",
+          "rubric": [
+            "監査で想定を確認すべき対象を5字以内で答える。"
+          ],
+          "maxLength": 5,
+          "constraints": [
+            "5字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "underline-1",
+              "instructions"
+            ],
+            "questionPages": [
+              65,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "本文中の［d］に入れる適切な字句を，10字以内で答えよ。",
+      "sourcePages": [
+        65,
+        67
+      ],
+      "bodyRefs": [
+        "underline-1",
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "一定の組合せ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "部店勤務の後にテレワークをする場合や，テレワークを部店勤務の前後に行う場合がある。これらの一定の組合せでも不適切な時差確認メッセージが出ないよう，表示条件へ反映されているか確認する。採点講評も勤務形態の一定の組合せの想定を求めている。",
+          "rubric": [
+            "勤務形態を組み合わせる条件を10字以内で答える。"
+          ],
+          "maxLength": 10,
+          "constraints": [
+            "10字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "underline-1",
+              "instructions"
+            ],
+            "questionPages": [
+              65,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［内部監査部長の指示］(3)について，答えよ。本文中の［e］に入れる適切な字句を，5字以内で答えよ。",
+      "sourcePages": [
+        66,
+        67
+      ],
+      "bodyRefs": [
+        "table-1",
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "人事管理"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "給与支給額誤りの根本原因は，人事管理システムへの職種誤登録である。恒久対応で改修すべき対象は人事管理システムで，給与計算システムや勤務管理システムそのものではない。",
+          "rubric": [
+            "空欄の後に「システム」が続くので，5字以内の「人事管理」で答える。"
+          ],
+          "maxLength": 5,
+          "constraints": [
+            "5字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-1",
+              "instructions"
+            ],
+            "questionPages": [
+              66,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "本文中の［f］に入れる適切な字句を，15字以内で答えよ。",
+      "sourcePages": [
+        66,
+        67
+      ],
+      "bodyRefs": [
+        "table-1",
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "従業員の職種の誤登録"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "超過勤務時間は所属部店・職種・標準勤務時間で計算されるため，職種を誤って登録すると勤務管理・給与計算に誤りが波及する。防止すべきなのは根本原因である従業員の職種の誤登録である。",
+          "rubric": [
+            "表1の根本原因に対応する誤登録を15字以内で答える。"
+          ],
+          "maxLength": 15,
+          "constraints": [
+            "15字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-1",
+              "instructions"
+            ],
+            "questionPages": [
+              66,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "本文中の［g］に入れる適切な字句を，10字以内で答えよ。",
+      "sourcePages": [
+        66,
+        67
+      ],
+      "bodyRefs": [
+        "table-1",
+        "instructions"
+      ],
+      "fields": [
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "X年3月末日"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "X年2月末時点の恒久対応計画では，入力コントロールをX年3月末日までに改修する予定だった。4月に同じ根本原因で再発しているので，計画期限までに適切な改修が実施されていたか確認する。監査本調査の7月や再発した4月を期限と取り違えない。",
+          "rubric": [
+            "表1の恒久対応期限を10字以内で答える。"
+          ],
+          "maxLength": 10,
+          "constraints": [
+            "10字以内。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-1",
+              "instructions"
+            ],
+            "questionPages": [
+              66,
+              67
+            ],
+            "officialAnswerPage": 6,
+            "officialCommentaryPage": 3
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問11",
+  "sourcePages": [
+    64,
+    65,
+    66,
+    67
+  ],
+  "imageSizes": {
+    "assets/written/ap-r07h-pm11/question-p64.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm11/question-p65.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm11/question-p66.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm11/question-p67.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm11/figure-1.png",
+      "caption": "図1 勤務管理に関連するシステムの概念図",
+      "sourcePage": 64,
+      "placement": "replace-caption",
+      "anchor": "図1 勤務管理に関連するシステムの概念図",
+      "alt": "図1 勤務管理に関連するシステムの概念図。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        64
+      ],
+      "anchor": "図1 勤務管理に関連するシステムの概念図"
+    },
+    "table-1": {
+      "sourcePages": [
+        66
+      ],
+      "text": "表1 障害管理データベースの登録内容（抜粋）"
+    },
+    "underline-1": {
+      "sourcePages": [
+        65
+      ],
+      "text": "①PC開始時刻と勤務開始時刻の差，又はPC終了時刻と勤務終了時刻の差が一定時間以上"
+    },
+    "instructions": {
+      "sourcePages": [
+        67
+      ],
+      "text": "［内部監査部長の指示］"
+    }
+  },
+  "bodyPageMap": [
+    {
+      "page": 64,
+      "start": "問11 勤務管理に関連するシステムの監査について",
+      "end": "店舗の事務職では，1月160時間，2月150時間などである。"
+    },
+    {
+      "page": 65,
+      "start": "(2) 標準勤務時間を超過した勤務時間",
+      "end": "場合などを想定している。"
+    },
+    {
+      "page": 66,
+      "start": "(4) 従業員の超過勤務時間は",
+      "end": "次のとおり指示した。"
+    },
+    {
+      "page": 67,
+      "start": "［内部監査部長の指示］",
+      "end": "確認すること。"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/written_author_spring_7_11",
+  "authoringStatus": "awaiting-independent-review"
+}

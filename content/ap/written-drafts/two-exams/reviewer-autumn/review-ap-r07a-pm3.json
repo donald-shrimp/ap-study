@@ -1,0 +1,37 @@
+{
+  "caseId": "ap-r07a-pm3",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/written_author_autumn_1_6",
+  "reviewer": "/root/written_review_autumn",
+  "reviewedAt": "2026-10-15T04:07:07.617944+00:00",
+  "canonicalCaseSHA256": "7a52c9fe7573db7ad0d98fec5ed103020828280f0d2f6a7fd78fbf6c5caf9a90",
+  "sourceEvidence": "content/ap/written-drafts/two-exams/reviewer-autumn/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_qs.pdf": "9eeb6e4844ea596670b83164dcff074383cf7ad920b6c80c321fc19c7953ab54",
+    "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_ans.pdf": "5d44280a82179093499ef2aece4fa9ea0e74e7b59f8afd7ef23d32bebe260147",
+    "content/ap/written-drafts/two-exams/sources/2025r07a_ap_pm_cmnt.pdf": "10ba8584577625960f9f7229d3be77a9cd01aad04d13bb533eabf9074773f07f"
+  },
+  "assetHashes": {
+    "assets/written/ap-r07a-pm3/question-p18.png": "108ffa478bff7d61078f1d45c935d24fe862c7d317eba4959bdf2413e59e885f",
+    "assets/written/ap-r07a-pm3/question-p19.png": "00dc5931336d597603fb4e183957872d7870bf7bff9c6189cfe7fe6fb15f53a8",
+    "assets/written/ap-r07a-pm3/question-p20.png": "aaad8dbb322156f191bed7b443e43866978d03ebabf4944513f89ec6a0e0b9f4",
+    "assets/written/ap-r07a-pm3/question-p21.png": "255ed75561ee7fef24c309675642800444d9c084ea8460bd8cc033220d4bdd47",
+    "assets/written/ap-r07a-pm3/question-p22.png": "022f253317a1e567638cda2e2bb90ed0392832adae2380623c9506d451a86140",
+    "assets/written/ap-r07a-pm3/figure-1.png": "3a986dd025501b7721bfc1ddfe12130c962e467f69ca830b2e0949a913e68a6b",
+    "assets/written/ap-r07a-pm3/figure-2.png": "d2dee9252204e3b7fa026220f6aa67ab0ba1c08409f2742495774c278cd4337b",
+    "assets/written/ap-r07a-pm3/figure-3.png": "572fc5ce5de1afe4527b80fded13730ec7898595c2c31d617bcf5803a0bbe954",
+    "content/ap/written-drafts/two-exams/sources/r07a-ans-p02.png": "6b93f7c544dbf5b9175ce74122ccdb71170fcfba1cd7fe32081a3a31171ee9d6",
+    "content/ap/written-drafts/two-exams/sources/r07a-cmnt-p01.png": "eb07b21cf343325e37ad890a92f183d782c80e8fc365e9eeddaf8c74c4b3ede3"
+  },
+  "method": "作者JSON及び公式解答を読む前に当該大問の公式問題全ページをview_imageで実表示し、解答方針をindependent-findings.jsonへ保存。その後公式解答例と採点講評の原本PNGを実表示し照合。作者JSONの全本文・表の全セル・全図crop・小問/全欄・全選択肢・条件/制限字数・公式例・説明・rubricを照合。全PDFと教材内全画像の実ファイルSHA-256を保存。",
+  "answerCheck": "先行解答の一部は誤答であったため同ファイルofficialComparisonに訂正を残した。作者の公式例は公式PDFの全欄と照合。全5頁、図1/2の全矢印/列、図3提示数値/未提示空セル/注記、図4全コード、小問4件8欄を照合。設問1第2列のD欠落を指摘し、作者がC,D,B,D,C,Aへ訂正。訂正後p22設問行を2倍拡大で再表示し、正しい6要素のPython独立DP結果4を再確認。ア=2/イ=4、全テーブルをpm3-independent-calculation.jsonへ保存。ASCII演算子版等も同値と確認。 作者の最終追記差分（原本字数指定なしと2000字アプリ上限の注記）だけを再比較し、他変更がないことを確認。",
+  "gradingCheck": "登録した短答/選択のみexactText、説明文はself。未登録表現を自動不正解にしない。rubricは学習用でIPA配点・部分点を称しない。",
+  "findings": [
+    {
+      "issue": "設問1の第2列にDが1文字欠落",
+      "resolution": "原本p22の設問行を拡大してC,D,B,D,C,Aの6文字を確認し作者訂正。正しい入力で独立DPを再実行し4を検算。",
+      "status": "resolved"
+    }
+  ]
+}

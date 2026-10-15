@@ -1,0 +1,41 @@
+{
+  "caseId": "ap-r07h-pm6",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/written_author_spring_2_6",
+  "reviewer": "/root/written_review_spring",
+  "reviewedAt": "2026-10-15T04:08:51.893313+00:00",
+  "canonicalCaseSHA256": "fd7f43a2aee7fa2613040b298371284733a7526ab4acec2adebec03f0e4455f1",
+  "sourceEvidence": "content/ap/written-drafts/two-exams/sources/sources.json",
+  "independentFindings": "content/ap/written-drafts/two-exams/reviewer-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_qs.pdf": "bb5d30aec1814e276a093d7930a94e4e641cd6892a467153ac780ad24979fd1b",
+    "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_ans.pdf": "8ac9a45ae67c822fdceb9a35973d9afd44ed8805edd4cd46d8812c2b02bb1583",
+    "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_cmnt.pdf": "4e79dbae3e2ba8c6928bac5bf9f68a7fe1336798c2c095e8e395f87d69aaaec5"
+  },
+  "assetHashes": {
+    "assets/written/ap-r07h-pm6/question-p36.png": "58a15d461edc9f292815883e491fb6682d66f84d662786eac4cf95cec90dbfd9",
+    "assets/written/ap-r07h-pm6/question-p37.png": "2369928e1dd023371235e660f8faf434ce58017668d72f167e1b7ad79aab9d39",
+    "assets/written/ap-r07h-pm6/question-p38.png": "9a5fc18e17d884d8b8318e968551bc5f0d39d3afe8b8369b48c28a1c69e96d98",
+    "assets/written/ap-r07h-pm6/question-p39.png": "65091167925603a8b14bbc9c66d87548a1b25719121f7966f8f21103dfbb7613",
+    "assets/written/ap-r07h-pm6/figure-1.png": "8a0a02a5c3c9251e5d0787487519cdabe4bc962f29b5ae89f616ae6263bc8d06",
+    "content/ap/written-drafts/two-exams/sources/r07h-ans-p03.png": "662d91e5117d17da9d39cd93eb9ff1d4a340de08715a4b606091653eed40214d",
+    "content/ap/written-drafts/two-exams/sources/r07h-cmnt-p02.png": "8db2e092008f447a35c1bf4e972300f2eec459cac493f84dc27d1a9a491c38d2",
+    "content/ap/written-drafts/two-exams/reviewer-spring/sql-check.py": "3accbcc90711cd6d115cb294d85fe95fd382b497c1763960710abe9a8f055e9c",
+    "content/ap/written-drafts/two-exams/reviewer-spring/sql-check.json": "d8f1a0a807052a4686ef0249fcc389b1298c3208f12147beee3c3ba798606cf5"
+  },
+  "method": "原本p36〜39全4頁、全ER図crop（全10エンティティ/属性/関連・主キーと外部キーの実線破線・凡例）、公式解答例p3/講評p2を実表示。表1全4種別、図2/3SQL全句と空欄c〜g、図4全主キー下線5箇所、4設問8欄/字数35/図1表記指定/公式例全欄を照合。原問aの図示解答は属性名の実線下線を文字注記で示す学習用変換として明示され自己評価に保持。",
+  "answerCheck": "作者JSON・公式解答例・講評を読む前に原問画像全頁を実表示し解答方針をindependent-findings.jsonへ逐次保存。その後公式例・講評画像と全解答欄/解説/rubric/字数指定を照合。自己の独立案と公式例の違いも同ファイルに記録。",
+  "gradingCheck": "選択・登録短答は登録例との一致時だけ自動正解。未一致を機械的不正解にしない。説明文・順不同/全列挙/図の記述は自己評価。rubricは学習用であり公式の点数・部分点基準を推定しない。",
+  "calculationCheck": "独立SQLite実行sql-check.py/jsonに保存。実施種別Hを2回合計150、売上なしE種別を売上/原価/粗利0で残す。売上400/原価140/粗利260を検算。葉書H・対象店・一年前以降のみ抽出し郵便番号111が2件→222が1件の降順を確認。",
+  "findings": [
+    {
+      "kind": "reviewer-correction",
+      "detail": "独立案で設問4を日時細分化としていたが、原本p37はT社レポートを週次で集計するため日次想定を週次へ修正するのが正しい。公式例と本文を再読して訂正。作者教材は週次と正しく説明している。"
+    },
+    {
+      "kind": "input-adaptation-reviewed",
+      "detail": "ER属性aは原本が店舗エリア郵便番号に実線下線を付す作図回答。登録はfreeText/selfで下線付き注記を付け、officialAnswerNotationに原文字/solidUnderlineを分離保持。属性名一致のみで自動正解にしないことを確認。"
+    }
+  ]
+}

@@ -1,0 +1,685 @@
+{
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "id": "ap-r07h-pm5",
+  "title": "社内LANの障害対応",
+  "topicId": "network",
+  "status": "draft",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問5",
+  "sourcePages": [
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "sourceImages": [
+    "assets/written/ap-r07h-pm5/question-p30.png",
+    "assets/written/ap-r07h-pm5/question-p31.png",
+    "assets/written/ap-r07h-pm5/question-p32.png",
+    "assets/written/ap-r07h-pm5/question-p33.png",
+    "assets/written/ap-r07h-pm5/question-p34.png"
+  ],
+  "body": "問5 社内LANの障害対応に関する次の記述を読んで，設問に答えよ。\n\nY社は，従業員約50名の経営コンサルティングサービスを提供する企業である。従業員は会社支給のPCを使用して，Y社のオフィスや自宅などのテレワーク環境で日々の業務を行っている。当該PCには，ディスク暗号化，PC利用時の多要素認証や自宅からY社のオフィスへのSSL-VPN接続などのセキュリティ対策を施している。\nY社のオフィスのLAN（以下，Y社LANという）は，社内LANセグメント（以下，社内LANという）とDMZセグメント（以下，DMZという）で構成され，Y社のオフィス内では，PCは社内LANに接続して利用している。\n社内LANには無線LANのアクセスポイント（以下，無線APという）が設置され，PCは有線LAN又は無線LANで社内LANに接続する。PCのネットワーク関連の設定は，社内LANに設置したDHCPサーバを利用して行われる。社内LANにはプリンタが設置されており，社内LAN上のPCから印刷することができる。\nDMZにはプロキシサーバ，キャッシュDNSサーバ及びファイルサーバが設置されており，社内LAN上のPCはプロキシサーバ経由でインターネットにアクセスしている。業務で使用するファイル類はファイルサーバに保管し，Y社のオフィスやテレワーク環境のPCを使って従業員間でファイルを共有している。\nY社LANは総務部が所管しており，B主任とCさんが日常的な運用管理と障害対応を行っている。Y社のネットワーク構成を図1に示す。また，IPアドレスを固定で割り当てている主な機器のIPアドレスとMACアドレスを表1に示す。\n\n図1 Y社のネットワーク構成\n\n表1 IPアドレスを固定で割り当てている主な機器のIPアドレスとMACアドレス\n| 機器 | IPアドレス | MACアドレス |\n| --- | --- | --- |\n| DHCPサーバ | 192.168.1.11 | 00-00-5E-00-53-B7 |\n| プリンタ | 192.168.1.21 | 00-00-5E-00-53-63 |\n| プロキシサーバ | 192.168.11.31 | 00-00-5E-00-53-75 |\n| キャッシュDNSサーバ | 192.168.11.41 | 00-00-5E-00-53-D8 |\n| ファイルサーバ | 192.168.11.51 | 00-00-5E-00-53-32 |\n\n［プリンタの印刷障害］\nある日，従業員から“社内LAN上のPCからプリンタへの印刷ができない”という報告が総務部にあった。連絡を受けたCさんが，社内LANに接続していた自身のPC（以下，PC-Cという）からプリンタに印刷を試みたところ，印刷できない状況であった。\nまずCさんはプリンタ本体の管理画面を確認し，プリンタのネットワーク接続に問題がないことや，ネットワークインタフェースのMACアドレス及びIPアドレスに誤りがないことを確認した。PC-Cからプリンタに対してpingコマンドを実行したところ，プリンタからの応答はなかった。\n次にPC-CのARPテーブルの内容を調べてみると，表2のとおりであった。\n\n表2 PC-CのARPテーブル\n| 項番 | IPアドレス | MACアドレス |\n| --- | --- | --- |\n| 1 | 192.168.1.1 | 00-00-5E-00-53-2B |\n| 2 | 192.168.1.11 | 00-00-5E-00-53-B7 |\n| 3 | 192.168.1.21 | 00-00-5E-00-53-E4 |\n| 4 | 192.168.1.101 | （省略） |\n| ⋮ | ⋮ | ⋮ |\n| 50 | 192.168.1.255 | FF-FF-FF-FF-FF-FF |\n\nCさんは表2を確認して，++①プリンタに割り当てられているIPアドレスが他の機器に設定されていると判断++し，従業員全員にPCのIPアドレスを確認するように依頼した。その結果，従業員のDさんから“自宅のテレワーク環境で会社支給のPCを接続した際にIPアドレスを手動で設定していたが，その設定のまま社内LANに接続した”との連絡を受けた。DさんのPC（以下，PC-Dという）を確認したところ，手動でIPアドレス［a］が設定されていた。CさんはPC-DのIPアドレスをDHCPサーバから自動で取得する設定に変更した後，PC-Cからプリンタに印刷できることを確認した。\nCさんは，プリンタの印刷障害への対応状況をB主任に報告した。B主任は，今回の障害への対応策として，++②社内LANを二つのサブネットに分割してPCとプリンタを別のセグメントに接続する対策++を検討するようにCさんに指示した。また，セキュリティ対策として，社内LANにPCを接続する際の，MACアドレス認証や認証サーバを用いたIEEE［b］認証を導入することの検討と，PCのIPアドレスをDHCPサーバから自動で取得する設定の変更を原則禁止とする旨の社内規程への明記及び従業員への周知をCさんに指示した。\n\n［インターネットのアクセス障害］\nある日，従業員から“インターネットにアクセスできない”という多数の報告が総務部にあった。Cさんが原因を調査するために，PC-Cからプロキシサーバ及びキャッシュDNSサーバに対してpingコマンドを実行して疎通確認を行ったところ，いずれも正常な応答が返ってきた。さらに，［c］コマンドを実行してキャッシュDNSサーバで名前解決ができるか確認したところ，名前解決はできなかった。\nCさんは，キャッシュDNSサーバのDNSソフトウェアに不具合が発生していると考えて，キャッシュDNSサーバを再起動した。再起動後，名前解決ができるようになり，インターネットへのアクセスが正常化したことを確認した。\nCさんは，インターネットのアクセス障害への対応状況をB主任に報告した。B主任は，今回の障害への対応策として，キャッシュDNSサーバの稼働状況を監視する対策に加えて，++③キャッシュDNSサーバの不具合時にもインターネットへのアクセスが継続できる対策++を検討するようにCさんに指示した。\n\n［インターネットのアクセス遅延］\nその後，従業員から“インターネットへのアクセスがとても遅い”という報告が総務部にあった。Cさんは，DMZのL2SWにミラーポートを設定して，DMZとインターネットとの間，及び社内LANとDMZとの間に流れている通信パケットを一定時間パケットアナライザーでキャプチャして分析することにした。分析の結果，DMZとインターネットとの間の通信量は少ないが，社内LANとDMZとの間の通信量が非常に多いことが分かった。そこで，社内LANとDMZとの間の送信元と送信先の組合せ別のパケットの割合を整理することにした。整理した結果の一部を表3に示す。\n\n表3 社内LANとDMZとの間の送信元と送信先の組合せ別のパケットの割合（一部）\n| 送信元IPアドレス | 送信先IPアドレス | パケットの割合（%）（降順） |\n| --- | --- | --- |\n| 192.168.11.51 | 192.168.1.146 | 18.0 |\n| 192.168.1.132 | 192.168.11.51 | 13.5 |\n| 192.168.11.51 | 192.168.1.132 | 10.3 |\n| 192.168.11.51 | 192.168.1.155 | 9.2 |\n| 192.168.1.155 | 192.168.11.51 | 7.6 |\n\nCさんは表3などを確認して，インターネットのアクセス遅延は，複数の従業員のPCが［d］との間で800Mビット／秒を超える大量の通信を繰り返し実行していることが原因であると判断し，当該する従業員にPCの操作を一時中断するように依頼した。その結果，インターネットのアクセス速度は平常時と同程度に戻った。\nCさんは，インターネットのアクセス遅延への対応状況をB主任に報告した。B主任は，今回の障害への対応策として，［d］と社内LANとの間のトラフィック量を++④L3SWのSNMPを用いた管理機能を使って監視する仕組み++や，［d］のQoS機能を使って［e］を制限する仕組みについて，導入の検討を行うようにCさんに指示した。",
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［プリンタの印刷障害］について答えよ。\n本文中の下線①について，Cさんが判断した理由を35字以内で答えよ。",
+      "sourcePages": [
+        31,
+        33
+      ],
+      "bodyRefs": [
+        "underline-1",
+        "table-1",
+        "table-2"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "理由",
+          "type": "freeText",
+          "referenceAnswers": [
+            "表2項番3のMACアドレスがプリンタのものと異なっていたから"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "表1でプリンタのIPは192.168.1.21，MACは00-00-5E-00-53-63と分かる。ところが表2の同じIPに対応するMAC末尾はE4であり，一致しない。同一IPの別の機器にARPが対応付けられているため，IPアドレスの重複を疑える。ping無応答だけではこの判断の根拠にならない。",
+          "rubric": [
+            "同じIPに対応する表1と表2項番3のMACを比較する。",
+            "MACがプリンタと異なることを35字以内で述べる。"
+          ],
+          "maxLength": 35,
+          "evidence": {
+            "questionPages": [
+              31,
+              33
+            ],
+            "bodyRefs": [
+              "underline-1",
+              "table-1",
+              "table-2"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "本文中の［a］に入れる適切なIPアドレスを答えよ。",
+      "sourcePages": [
+        31,
+        33
+      ],
+      "bodyRefs": [
+        "table-1",
+        "table-2",
+        "blank-a"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "192.168.1.21"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "PC-Dはプリンタと同じIPを手動設定していたため，プリンタのIPでARPを引くとPC-DのMACが得られた。プリンタの固定IPである192.168.1.21が該当する。",
+          "rubric": [
+            "表1のプリンタの固定IPを答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              31,
+              33
+            ],
+            "bodyRefs": [
+              "table-1",
+              "table-2",
+              "blank-a"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-3",
+      "label": "設問1(3)",
+      "prompt": "本文中の下線②について，サブネットに分割した結果，社内LAN上のPCからプリンタに届かなくなる通信の種類を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        32,
+        33
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "通信の種類",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "ルータやL3SWで分離された異なるサブネットへは，通常ブロードキャストが転送されない。ユニキャストや，それを使うFTP・ICMPなどは経路があればサブネット間でも通信できる。",
+          "rubric": [
+            "ブロードキャストの到達範囲がサブネット内であることを確認する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "FTP"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "ICMP"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "ブロードキャスト"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ユニキャスト"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              32,
+              33
+            ],
+            "bodyRefs": [
+              "underline-2"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q1-4",
+      "label": "設問1(4)",
+      "prompt": "本文中の［b］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        32,
+        34
+      ],
+      "bodyRefs": [
+        "blank-b"
+      ],
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "認証サーバを用いたポートベースのネットワークアクセス制御はIEEE802.1Xである。802.11aと802.11nは無線LANの通信規格，802.1QはVLANタグに関する規格で，接続時の認証方式とは異なる。講評でもMACアドレス認証とIEEE802.1X認証の理解を求めている。",
+          "rubric": [
+            "認証サーバを使う接続認証規格を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "802.11a"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "802.11n"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "802.1Q"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "802.1X"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              32,
+              34
+            ],
+            "bodyRefs": [
+              "blank-b"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［インターネットのアクセス障害］について答えよ。\n本文中の［c］に入れる適切な字句を答えよ。",
+      "sourcePages": [
+        32,
+        34
+      ],
+      "bodyRefs": [
+        "blank-c"
+      ],
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "nslookup"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "nslookupはDNSサーバに問い合わせて名前解決の結果を確認できる。pingで到達性が確認できてもDNSソフトウェアの処理が正常とは限らないため，DNSへの実問い合わせで切り分ける。講評でも対象DNSに実際に名前解決させる確認が要点とされている。",
+          "rubric": [
+            "疎通確認とDNSの名前解決機能確認を区別する。",
+            "名前解決を確認するコマンド名を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              32,
+              34
+            ],
+            "bodyRefs": [
+              "blank-c"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "本文中の下線③について，キャッシュDNSサーバのサービス継続に関連して取るべき対策はどれか。最も適切なものを解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        32,
+        34
+      ],
+      "bodyRefs": [
+        "underline-3"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "サービス継続の対策",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "一台のDNSに不具合が起きても別のDNSで名前解決できるよう，多重化が必要である。CPUやメモリの増設は性能対策，定期再起動は不具合の根本的な継続対策にならず，再起動中の停止も生じる。",
+          "rubric": [
+            "一台の障害時にも名前解決を継続できる構成を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "キャッシュDNSサーバのCPU数を増やす。"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "キャッシュDNSサーバのメモリを増やす。"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "キャッシュDNSサーバを多重化する。"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "キャッシュDNSサーバを定期的に再起動する。"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              32,
+              34
+            ],
+            "bodyRefs": [
+              "underline-3"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［インターネットのアクセス遅延］について答えよ。\n本文中の［d］に入れる適切な字句を図1中の機器名で答えよ。",
+      "sourcePages": [
+        30,
+        31,
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "table-1",
+        "table-3",
+        "blank-d"
+      ],
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ファイルサーバ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "表3の通信に共通するDMZ側IP192.168.11.51は，表1のファイルサーバである。PCとのファイル共有通信が大量に発生している。インターネット宛て通信を中継するプロキシサーバのIPとは異なる。",
+          "rubric": [
+            "表3の共通IPを表1の機器名へ対応付ける。",
+            "図1中の機器名で答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              30,
+              31,
+              33,
+              34
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "table-1",
+              "table-3",
+              "blank-d"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "本文中の下線④について，L3SWから運用管理者に通知する際に用いるSNMPの通知機能の名称を答えよ。また，その通知を送信する条件を答えよ。",
+      "sourcePages": [
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "underline-4"
+      ],
+      "fields": [
+        {
+          "id": "name",
+          "label": "名称",
+          "type": "shortText",
+          "referenceAnswers": [
+            "SNMPトラップ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "SNMPトラップは監視対象機器から管理側へ自発的に事象を通知する機能である。管理側から定期的に問い合わせるポーリングとは通知方向と契機が異なる。講評も障害を検知して運用管理者へ通知するトラップ機能を説明している。",
+          "rubric": [
+            "L3SW側を起点とする通知機能名を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "bodyRefs": [
+              "underline-4"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "condition",
+          "label": "条件",
+          "type": "freeText",
+          "referenceAnswers": [
+            "トラフィック量が800Mビット／秒を超える"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "原因調査ではファイルサーバとPCの通信が800Mビット／秒を超えたときにアクセス遅延が発生している。この閾値を超えることを通知条件にすれば，原因と対応した監視になる。時間や通信量の閾値を根拠なく追加しない。",
+          "rubric": [
+            "本文で遅延原因となった800Mビット／秒を閾値とする。",
+            "それを超えることを通知条件として述べる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "2000字はアプリの入力上限であり，原本の字数指定ではない。"
+          ],
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "bodyRefs": [
+              "underline-4"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "本文中の［e］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "blank-e"
+      ],
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "QoS機能を設定する対象はファイルサーバであり，混雑の原因になった社内LAN向けの大量の送信トラフィックを制限する。PC発のDMZ向け全通信やプロキシ向け通信ではなく，ファイルサーバから社内LANへの通信という送信元・送信先を選ぶ。",
+          "rubric": [
+            "QoSを設定する機器がファイルサーバであることを確認する。",
+            "障害原因に対応する社内LAN向け通信を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "DMZ内のトラフィック"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "特定のPCからDMZへのトラフィック"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "ファイルサーバから社内LANへのトラフィック"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ファイルサーバからプロキシサーバへのトラフィック"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "bodyRefs": [
+              "blank-e"
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm5/figure-1.png",
+      "caption": "図1 Y社のネットワーク構成",
+      "sourcePage": 30,
+      "placement": "replace-caption",
+      "anchor": "図1 Y社のネットワーク構成",
+      "alt": "社内LAN192.168.1.0/24とDMZ192.168.11.0/24をL3SWで接続し，DMZ側L2SWからFWとインターネットへ接続。図中機器・凡例とDHCP101〜200配布及びFWのNAPT/SSL-VPN注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        30
+      ],
+      "anchor": "図1 Y社のネットワーク構成"
+    },
+    "table-1": {
+      "sourcePages": [
+        31
+      ],
+      "anchor": "表1 IPアドレスを固定で割り当てている主な機器のIPアドレスとMACアドレス"
+    },
+    "table-2": {
+      "sourcePages": [
+        31
+      ],
+      "anchor": "表2 PC-CのARPテーブル"
+    },
+    "table-3": {
+      "sourcePages": [
+        33
+      ],
+      "anchor": "表3 社内LANとDMZとの間の送信元と送信先の組合せ別のパケットの割合（一部）"
+    },
+    "underline-1": {
+      "sourcePages": [
+        31
+      ],
+      "text": "①プリンタに割り当てられているIPアドレスが他の機器に設定されていると判断"
+    },
+    "underline-2": {
+      "sourcePages": [
+        32
+      ],
+      "text": "②社内LANを二つのサブネットに分割してPCとプリンタを別のセグメントに接続する対策"
+    },
+    "underline-3": {
+      "sourcePages": [
+        32
+      ],
+      "text": "③キャッシュDNSサーバの不具合時にもインターネットへのアクセスが継続できる対策"
+    },
+    "underline-4": {
+      "sourcePages": [
+        33
+      ],
+      "text": "④L3SWのSNMPを用いた管理機能を使って監視する仕組み"
+    },
+    "blank-a": {
+      "sourcePages": [
+        31
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        32
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        32
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［e］"
+    }
+  },
+  "author": "/root/written_author_spring_2_6",
+  "authoringStatus": "awaiting-independent-review",
+  "imageSizes": {
+    "assets/written/ap-r07h-pm5/question-p30.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm5/question-p31.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm5/question-p32.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm5/question-p33.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm5/question-p34.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  }
+}

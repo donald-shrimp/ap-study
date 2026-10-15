@@ -1,0 +1,727 @@
+{
+  "id": "ap-r07h-pm7",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "development",
+  "title": "電動キックボードのシェアリングシステム",
+  "status": "draft",
+  "sourceKind": "official",
+  "sourceImages": [
+    "assets/written/ap-r07h-pm7/question-p40.png",
+    "assets/written/ap-r07h-pm7/question-p41.png",
+    "assets/written/ap-r07h-pm7/question-p42.png",
+    "assets/written/ap-r07h-pm7/question-p43.png",
+    "assets/written/ap-r07h-pm7/question-p44.png",
+    "assets/written/ap-r07h-pm7/question-p45.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_pm_cmnt.pdf"
+  ],
+  "body": "問7 電動キックボードのシェアリングシステムに関する次の記述を読んで，設問に答えよ。\n\nG社は，電動キックボード（以下，電動KBという）のシェアリングシステム（以下，本システムという）を開発している。本システムは，利用者に対し，電動KBの貸出し，使用及び返却をさせるものである。本システムを利用する場合には，利用者が事前にスマートフォン（以下，スマホという）に専用アプリケーションプログラム（以下，アプリという）をインストールし，利用者情報を登録して，利用者IDを取得しておく必要がある。電動KBの外観を図1に，本システムの主な構成を図2に，本システムの主な構成要素を表1に示す。\n\n図1 電動KBの外観\n\n図2 本システムの主な構成\n\n表1 本システムの主な構成要素\n\n| 構成要素名 | 機能概要 |\n| --- | --- |\n| 制御部 | ・電動KB全体を制御する。・利用者のアクセルレバー（以下，アクセルという）の操作量を計測し，アクセルの操作量に応じてモーターのトルクの発生を制御する。・その他，ライトの点灯制御，BLE通信などの電動KBに必要な処理を行う。 |\n| 駆動部 | ・制御部から情報を受信して，車体を前方に加速するためにモーターの回転を制御する。・車輪ロック機構があり，貸出しされていないときは車輪をロックする。 |\n| 表示部 | 制御部表面のディスプレイに，電動KBの車体の速度（以下，現在速度という）及び電池残量を表示する。 |\n| ブレーキ | 利用者がブレーキレバーを握ると作動し，機械的に車体を減速させる。 |\n| 速度センサー | 現在速度を計測する。 |\n| ライト | 前照灯，尾灯，最高速度表示灯，制動灯などで構成され，用途に応じ点灯，消灯する。 |\n| 電池 | 制御部，駆動部，表示部，速度センサー，ライトなどに電力を供給する。 |\n| スマホ | アプリで，次のことを行う。・スマホの位置の情報（以下，位置情報という）を使用する。・インターネットを介して，管理サーバとメッセージをやり取りする。・電動KBの制御部とBLEで通信し，メッセージをやり取りする。 |\n| 管理サーバ | 利用者情報，電動KBの情報の管理などを行う。 |\n\n［本システムの利用方法］\n\n利用開始前の電動KBは，車輪がロックされた状態で，専用の貸出し用及び返却用の駐車スペース（以下，ポートという）に，駐車している。本システムには，複数のポートがあり，各ポートで電動KBの貸出し又は返却を行う。なお，ポート以外の場所では，電動KBの貸出し及び返却を行うことはできない。電動KBの利用手順を表2に示す。\n\n表2 電動KBの利用手順\n\n| 利用方法 | 詳細手順 |\n| --- | --- |\n| 利用者が電動KBを借りる場合 | ① 利用者がポートに駐車している任意の電動KBに近づき，アプリで電動KBの車体に貼られている2次元バーコードから，車体の識別情報である車体IDを読み取る。② アプリで電動KBを返却するポート（以下，返却ポートという）を予約する。③ アプリで“貸出し”を選択する。その結果，車体IDに対応した電動KBの車輪のロックが解除される。 |\n| 利用者が電動KBで走行する場合 | ① 利用者は，手押しで初速をつけて，地面を蹴りながら電動KBに乗車する。② 利用者がアクセルを押すと，アクセルの操作量に応じて，電動KBはモーターのトルクを発生させて最高速度（20km／時）まで加速することができる。③ 利用者は，アクセルを用いて加速，又はブレーキを用いて減速させて電動KBを操作する。 |\n| 利用者が電動KBを返却する場合 | ① 予約した返却ポートに，利用中の電動KBを駐車する。② アプリで“返却”を選択する。その結果，利用中の車体IDに対応した電動KBの車輪がロックされる。 |\n\n［電動KBの状態の遷移］\n\n電動KBの状態の遷移を図3に示す。\n\n図3 電動KBの状態の遷移\n\n［電動KBの動作概要］\n\n電動KBの動作概要を次に示す。\n\n・利用開始前の電動KBは，車輪をロックした待機中状態でポートに駐車している。\n・待機中状態で利用者がアプリで“貸出し”を選択すると，電動KBはアプリを介した管理サーバからの指示によって車輪のロックを解除して停止中状態になる。\n・停止中状態で手押しなどによって0.3km／時以上になると，走行準備状態になる。\n・走行準備状態で手押しなどを続けて3km／時以上になると，加速可能状態になる。\n・加速可能状態でアクセルを押すと，走行中状態になり次の動作のいずれかを行う。\n  - 現在速度が最高速度未満の場合は，アクセルの操作量に応じて，モーターのトルクの発生を制御する。\n  - 現在速度が最高速度に達した場合は，最高速度表示灯を点灯させ，モーターのトルクを抑制する。\n・走行中状態でアクセルを戻すと，加速可能状態になる。\n・走行準備状態，加速可能状態，走行中状態で0.1km／時未満が一定時間継続すると停止中状態になる。\n・停止中状態で利用者がアプリで“返却”を選択したとき，管理サーバは，++（ア）ある情報を確認してから++，返却の指示を行う。電動KBはアプリを介した管理サーバからの指示によって車輪をロックし，待機中状態になる。\n・状態に関係なく，ブレーキレバーを握ると，機械的にブレーキが掛かる。\n\n［本システムで使用する主なメッセージ］\n\n本システムで使用する主なメッセージを表3に示す。\n\n表3 本システムで使用する主なメッセージ\n\n| メッセージ名 | 送信元 | 送信先 | 構成データ名 |\n| --- | --- | --- | --- |\n| 貸出し要求 | アプリ | 管理サーバ | 車体ID，利用者ID，返却ポート，位置情報 |\n| 貸出し指示 | 管理サーバ | アプリ | 車体ID，利用者ID |\n| 貸出し応答 | アプリ | 管理サーバ | 車体ID，利用者ID，車輪ロック解除結果（成功・失敗） |\n| 返却要求 | アプリ | 管理サーバ | 車体ID，利用者ID，位置情報 |\n| 返却指示 | 管理サーバ | アプリ | 車体ID，利用者ID |\n| 返却応答 | アプリ | 管理サーバ | 車体ID，利用者ID，車輪ロック結果（成功・失敗） |\n| 車輪ロック指示 | アプリ | 電動KB | 車体ID |\n| 車輪ロック応答¹⁾ | 電動KB | アプリ | 車体ID，結果（成功・失敗） |\n| 車輪ロック解除指示 | アプリ | 電動KB | 車体ID |\n| 車輪ロック解除応答²⁾ | 電動KB | アプリ | 車体ID，結果（成功・失敗） |\n| 現在情報 | 電動KB | アプリ | 車体ID，電動KBの状態，現在速度 |\n\n注¹⁾ 車輪ロック応答の結果が失敗のときは，車輪ロック指示のメッセージを1回だけ再送する。\n注²⁾ 車輪ロック解除応答の結果が失敗のときは，車輪ロック解除指示のメッセージを1回だけ再送する。\n\n［電動KBの制御部のソフトウェア構成について］\n\n電動KBの制御部では，リアルタイムOSを使用する。制御部の主なタスクの処理概要を表4に示す。\n\n表4 制御部の主なタスクの処理概要\n\n| タスク名 | 処理概要 |\n| --- | --- |\n| メイン | ・電動KBの状態管理を行い，10秒間隔で“現在情報”をアプリに送信する。・アプリからメッセージを受信し，次のことを行う。― “車輪ロック解除指示”を受信すると，車輪のロックを解除し，状態を［b］状態にして，“車輪ロック解除応答”をアプリに送信する。― “車輪ロック指示”を受信すると，車輪をロックし，状態を待機中状態にして，“車輪ロック応答”をアプリに送信する。・現在速度及び電池残量の情報を表示タスクに通知する。・［c］をモータータスクに通知する。 |\n| 速度計測 | 速度センサーで計測した現在速度を，［d］タスクとモータータスクに通知する。 |\n| モーター | メインタスク，アクセルタスク，速度計測タスクの情報から，モーターのトルク・回転数を制御する。 |\n| 表示 | メインタスクから現在速度及び電池残量の情報を受けると，現在速度及び電池残量をディスプレイに表示し，最高速度表示灯を制御する。 |\n| アクセル | アクセルの操作量を計測し，メインタスクとモータータスクに通知する。 |\n",
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "電動KBを手押しからアクセルを押して加速した後，アクセルを戻して惰性で走行したときの状態の遷移を解答群の中から選び，記号で答えよ。",
+      "sourcePages": [
+        41,
+        42,
+        44
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "状態の遷移",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "手押しで走行準備から加速可能へ，アクセルを押すと走行中へ，戻すと加速可能へ戻る。アクセルを戻しただけで走行準備には戻らない。",
+          "rubric": [
+            "状態名と遷移条件を図3及び動作概要で照合する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "走行準備→加速可能"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "走行準備→加速可能→走行中"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "走行準備→加速可能→走行中→加速可能"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "走行準備→加速可能→走行中→加速可能→走行準備"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "figure-3"
+            ],
+            "questionPages": [
+              41,
+              42,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［電動KBの状態の遷移］及び［電動KBの動作概要］について答えよ。図3中の［a］に入れる適切な条件を答えよ。",
+      "sourcePages": [
+        41,
+        42,
+        44
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ],
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "freeText",
+          "referenceAnswers": [
+            "0.1km／時未満が一定時間継続"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "動作概要には，走行準備・加速可能・走行中の三つの状態から停止中へ戻る共通条件が示されている。0.3km／時は停止中から走行準備へ進む条件であり，混同しない。",
+          "rubric": [
+            "速度が0.1km／時未満というしきい値と，一定時間継続する条件の両方を含める。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-3"
+            ],
+            "questionPages": [
+              41,
+              42,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "下線（ア）について，ある情報には車体ID及び利用者ID以外に何があるか。本文中の字句を用いて答えよ。なお，スマホと電動KB間はBLE通信が安定的に行える状態にあるものとする。",
+      "sourcePages": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "bodyRefs": [
+        "underline-a",
+        "table-2",
+        "table-3"
+      ],
+      "fields": [
+        {
+          "id": "answer",
+          "label": "ある情報",
+          "type": "shortText",
+          "referenceAnswers": [
+            "位置情報"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "返却できるのは予約した返却ポートである。返却要求に含まれる位置情報で返却場所を確認する必要がある。BLE通信の安定は通信可否の条件であって，返却ポートにいることの確認にはならない。",
+          "rubric": [
+            "本文中の字句「位置情報」を用いる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "underline-a",
+              "table-2",
+              "table-3"
+            ],
+            "questionPages": [
+              40,
+              41,
+              42,
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "電動KBの制御部の主なタスクについて答えよ。表4中の［b］に入れる適切な電動KBの状態を図3中の字句で，表4中の［d］に入れる適切なタスク名を表4中のタスク名でそれぞれ答えよ。",
+      "sourcePages": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "table-4"
+      ],
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "停止中"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "貸出しで車輪ロックを解除した直後は，まだ動き始めていない停止中である。",
+          "rubric": [
+            "図3にある状態名を使う。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-3",
+              "table-4"
+            ],
+            "questionPages": [
+              41,
+              42,
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "メイン"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "メインタスクは状態を管理し，現在速度を表示タスクへも通知する。速度計測タスクはモーター以外にメインへ現在速度を渡す。",
+          "rubric": [
+            "表4のタスク名で答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-3",
+              "table-4"
+            ],
+            "questionPages": [
+              41,
+              42,
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "表4中の［c］に入れる適切な情報を答えよ。",
+      "sourcePages": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "bodyRefs": [
+        "figure-3",
+        "table-4"
+      ],
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "電動KBの状態"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "モーターのトルクを発生させてよいかどうかは，加速可能・走行中など電動KBの状態に依存する。状態を管理するメインからモーターへ，電動KBの状態を通知する必要がある。採点講評も各タスクに必要な情報を仕様から読み解くことを求めている。",
+          "rubric": [
+            "操作量や現在速度は別タスクから与えられることと区別し，状態管理情報を答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "figure-3",
+              "table-4"
+            ],
+            "questionPages": [
+              41,
+              42,
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "電動KBの貸出し・返却の処理について答えよ。利用者が電動KBを借りる処理において車輪のロック解除が失敗なく正常に行われた場合に，送受信されるメッセージの流れについて，［e］～［g］に入れる適切なメッセージ名を解答群の中から選び，記号で答えよ。\n“貸出し要求”→“貸出し指示”→“［e］”→“［f］”→“［g］”",
+      "sourcePages": [
+        43,
+        44
+      ],
+      "bodyRefs": [
+        "table-3"
+      ],
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "アプリは貸出し指示を受けると，電動KBへ車輪ロック解除指示を送る。",
+          "rubric": [
+            "送信元・送信先を追う。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "貸出し応答"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "車輪ロック指示"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "車輪ロック応答"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "車輪ロック解除指示"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "車輪ロック解除応答"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "table-3"
+            ],
+            "questionPages": [
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "オ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "電動KBはロック解除後，アプリへ車輪ロック解除応答を返す。",
+          "rubric": [
+            "解除指示の応答を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "貸出し応答"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "車輪ロック指示"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "車輪ロック応答"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "車輪ロック解除指示"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "車輪ロック解除応答"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "table-3"
+            ],
+            "questionPages": [
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "g",
+          "label": "g",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "アプリは解除結果を管理サーバへ貸出し応答として返す。",
+          "rubric": [
+            "管理サーバへの最終報告を選ぶ。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "貸出し応答"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "車輪ロック指示"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "車輪ロック応答"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "車輪ロック解除指示"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "車輪ロック解除応答"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "bodyRefs": [
+              "table-3"
+            ],
+            "questionPages": [
+              43,
+              44
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "利用者がアプリで“返却”を選択した後，電動KBは1回目では車輪のロックに失敗し，2回目で車輪のロックに成功した。管理サーバが結果を受信するまでの処理について，次の①及び②に要する時間は何秒かをそれぞれ答えよ。答えは小数第3位を四捨五入して，小数第2位まで求めよ。\nここで，管理サーバとアプリ間で一つのメッセージ通信には200ミリ秒掛かり，アプリと電動KB間で一つのメッセージ通信には10ミリ秒掛かるものとする。また，電動KBの車輪をロックする処理に成功した場合1秒，電動KBの車輪をロックする処理に失敗した場合1秒，メッセージ再送までに0.5秒掛かり，その他の管理サーバ，アプリ，電動KBの処理時間は無視できるものとする。\n① アプリで“返却”を選択してから，管理サーバから“返却指示”メッセージを受信するまで\n② アプリが，“返却指示”メッセージを受信してから，結果が成功の“車輪ロック応答”メッセージを受信するまで",
+      "sourcePages": [
+        43,
+        45
+      ],
+      "bodyRefs": [
+        "table-3"
+      ],
+      "fields": [
+        {
+          "id": "one",
+          "label": "①",
+          "type": "shortText",
+          "referenceAnswers": [
+            "0.40"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "返却要求がアプリから管理サーバへ200ms，返却指示が管理サーバからアプリへ200ms。合計400ms=0.40秒である。",
+          "rubric": [
+            "200ms×2を秒に直し，小数第2位まで示す。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-3"
+            ],
+            "questionPages": [
+              43,
+              45
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "two",
+          "label": "②",
+          "type": "shortText",
+          "referenceAnswers": [
+            "2.54"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "1回目は指示10ms＋失敗処理1秒＋応答10ms。再送待ち0.5秒の後，2回目も指示10ms＋成功処理1秒＋応答10ms。合計0.01+1+0.01+0.5+0.01+1+0.01=2.54秒。管理サーバへの返却応答200msは②の終点より後なので含めない。",
+          "rubric": [
+            "4回の10ms通信・2回の1秒処理・0.5秒再送待ちを含め，2.54秒を小数第2位まで示す。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。入力は2000字まで。"
+          ],
+          "evidence": {
+            "bodyRefs": [
+              "table-3"
+            ],
+            "questionPages": [
+              43,
+              45
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和7年度春期 応用情報技術者試験 午後 問7",
+  "sourcePages": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "imageSizes": {
+    "assets/written/ap-r07h-pm7/question-p40.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm7/question-p41.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm7/question-p42.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm7/question-p43.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm7/question-p44.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r07h-pm7/question-p45.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r07h-pm7/figure-1.png",
+      "caption": "図1 電動KBの外観",
+      "sourcePage": 40,
+      "placement": "replace-caption",
+      "anchor": "図1 電動KBの外観",
+      "alt": "図1 電動KBの外観。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r07h-pm7/figure-2.png",
+      "caption": "図2 本システムの主な構成",
+      "sourcePage": 40,
+      "placement": "replace-caption",
+      "anchor": "図2 本システムの主な構成",
+      "alt": "図2 本システムの主な構成。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r07h-pm7/figure-3.png",
+      "caption": "図3 電動KBの状態の遷移",
+      "sourcePage": 41,
+      "placement": "replace-caption",
+      "anchor": "図3 電動KBの状態の遷移",
+      "alt": "図3 電動KBの状態の遷移。結線・ラベル・空欄・配置は原本の切出し画像に保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        40
+      ],
+      "anchor": "図1 電動KBの外観"
+    },
+    "figure-2": {
+      "sourcePages": [
+        40
+      ],
+      "anchor": "図2 本システムの主な構成"
+    },
+    "figure-3": {
+      "sourcePages": [
+        41
+      ],
+      "anchor": "図3 電動KBの状態の遷移"
+    },
+    "table-1": {
+      "sourcePages": [
+        40
+      ],
+      "text": "表1 本システムの主な構成要素"
+    },
+    "table-2": {
+      "sourcePages": [
+        41
+      ],
+      "text": "表2 電動KBの利用手順"
+    },
+    "table-3": {
+      "sourcePages": [
+        43
+      ],
+      "text": "表3 本システムで使用する主なメッセージ"
+    },
+    "table-4": {
+      "sourcePages": [
+        43
+      ],
+      "text": "表4 制御部の主なタスクの処理概要"
+    },
+    "underline-a": {
+      "sourcePages": [
+        42
+      ],
+      "text": "（ア）ある情報を確認してから"
+    }
+  },
+  "bodyPageMap": [
+    {
+      "page": 40,
+      "start": "問7 電動キックボードのシェアリングシステム",
+      "end": "利用者情報，電動KBの情報の管理などを行う。"
+    },
+    {
+      "page": 41,
+      "start": "［本システムの利用方法］",
+      "end": "図3 電動KBの状態の遷移"
+    },
+    {
+      "page": 42,
+      "start": "［電動KBの動作概要］",
+      "end": "本システムで使用する主なメッセージを表3に示す。"
+    },
+    {
+      "page": 43,
+      "start": "表3 本システムで使用する主なメッセージ",
+      "end": "アクセルの操作量を計測し，メインタスクとモータータスクに通知する。"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/written_author_spring_7_11",
+  "authoringStatus": "awaiting-independent-review"
+}

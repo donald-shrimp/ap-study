@@ -22,7 +22,7 @@ with sync_playwright() as p:
   if width in [390,1440]:page.screenshot(path=str(ARTIFACTS/f'written-{width}.png'),full_page=True)
  page.set_viewport_size({'width':390,'height':844});page.locator('[data-action=written-pane][data-pane=body]').click();page.locator('.written-body').wait_for(state='visible');assert not page.locator('.written-items').is_visible();page.locator('[data-action=written-pane][data-pane=questions]').click();page.locator('.written-items').wait_for(state='visible')
  # An exam-like run hides all explanations until all fields are submitted.
- nav(page,'home');page.locator('[data-action=written-start][data-mode=exam]').click();page.locator('textarea[data-written-key]').fill('デジタルフォレンジックス');page.locator('[data-action=written-submit]').click();assert page.locator('[data-action=written-answer]').count()==0 and page.locator('.written-answer').count()==0
+ nav(page,'home');page.locator('[data-action=written-start][data-id=ap-r07h-pm1][data-mode=exam]').click();page.locator('textarea[data-written-key]').fill('デジタルフォレンジックス');page.locator('[data-action=written-submit]').click();assert page.locator('[data-action=written-answer]').count()==0 and page.locator('.written-answer').count()==0
  run=cases(page)[-1];assert run['mode']=='exam';mode_id=run['id'];slots=[(i,f) for i in run['material']['items'] for f in i['fields']]
  for item in run['material']['items']:
   page.locator('.written-item-nav [data-action=written-item][data-id='+item['id']+']').click();page.locator('.written-item-nav [data-id='+item['id']+'][aria-current=step]').wait_for()

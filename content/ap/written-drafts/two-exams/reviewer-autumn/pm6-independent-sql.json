@@ -1,0 +1,17 @@
+{
+  "reviewer": "/root/written_review_autumn",
+  "method": "SQLiteで原本の列名と複合キーを用いて独立フィクスチャを実行。SQLiteの日付CAST仕様は原SQLと異なるので日付テキストを直接比較。SQL構文を本番教材へ流用しない。",
+  "joinSQL": "SELECT DISTINCT t0.講座コード FROM 開催スケジュール t0 INNER JOIN 講座担当割当 t1 ON t0.講座コード=t1.講座コード AND t0.開催番号=t1.開催番号 WHERE t1.講師コード=? AND t0.開催年月日=?",
+  "assertions": {
+    "I1SameDay": [
+      "A"
+    ],
+    "I2SameDay": [
+      "B"
+    ],
+    "afterDeleteI1AvailableTime": [
+      "I2"
+    ]
+  },
+  "sourceConditions": "講座コードのみでなく開催番号をAND結合すると別開催の講師が混入しない。複合外部キー両列一致・ON DELETE CASCADEで該当勤務日のみ子行削除。"
+}
