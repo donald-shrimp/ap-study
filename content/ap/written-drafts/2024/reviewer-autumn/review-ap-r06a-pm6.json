@@ -1,0 +1,79 @@
+{
+  "caseId": "ap-r06a-pm6",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2024_autumn_1_6",
+  "reviewer": "/root/review_2024_autumn",
+  "reviewedAt": "2026-10-15T09:40:52.265684+00:00",
+  "canonicalCaseSHA256": "c56976455839ee815af55864af5fafecd0b69f95c02d250f697ef9fc912fda8a",
+  "sourceEvidence": "content/ap/written-drafts/2024/sources/sources.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_qs.pdf": "d0c24399c37b3ef20dd25d0fa12d88f0b2324b4c143940a351ca1514c102eb4d",
+    "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_ans.pdf": "0f932ad45533191657944f36e4153e53f3c224a6023d3ca0c1699616053e3e0f",
+    "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_cmnt.pdf": "df23d4965055c48c1533ecf21052a3e5382406a7fbf97f6f7e0a8a86c69c3839"
+  },
+  "assetHashes": {
+    "assets/written/ap-r06a-pm6/question-p30.png": "b105b13f8801fba527834d67cccc30d13fc851d8b41cd269c70a5e8e7084863e",
+    "assets/written/ap-r06a-pm6/question-p31.png": "492a13160a68083f41f6d7ace300daf236390dfb7c7c497d5af1fc6d4a5e767b",
+    "assets/written/ap-r06a-pm6/question-p32.png": "e469c02da36a4a0a36f40119815609bc148c5bba57859ca3a6e616b83030ca82",
+    "assets/written/ap-r06a-pm6/question-p33.png": "bd2d75ee459e5b872bb372ee5832f673b8b75d3868891f6f6f3e14afb6207e89",
+    "assets/written/ap-r06a-pm6/question-p34.png": "05e447a4830cc070cdaef12dd4bfd9e301f2169eebbeda344f840974fa5827bb",
+    "assets/written/ap-r06a-pm6/figure-1.png": "6be548653488770004f4bc22d90dd2d3bd8cc9a2242bf66fb132b02a89dffc9e",
+    "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_ans-p03.png": "bce8b25c1ea7cf61951e9741b03ea7e5627c8803430b396ce40c386a512ffa8c",
+    "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_cmnt-p02.png": "7f569ed340a464210ac54d37ea7327628fc5889755453ce3df09c83be074d595"
+  },
+  "method": "原問30〜34頁の全文・表1全8業務要件・表2全8列/表3全3列の定義/分布・図1全エンティティ/主外キー下線/矢印/凡例・SQL全行・全7候補順・全11欄を照合。図示3欄a/b/dは自己評価で向きと多重度を記述し原本図示の代替と明記。追跡番号は主キー指定なし。SQLiteで再帰CTEを独立実行し指定カテゴリ直下/孫の抽出・部分一致・価格/状態除外を検算。索引対象3列/PK既存/1/3>5%を確認。図1完成cropを実表示し図の全ラベル・凡例・全下線/注記を保持。",
+  "answerCheck": "作者草稿と公式解答例を読む前に原問全頁をview_imageで実表示し，ケースごとにindependent-findings.jsonへ解答方針を保存。次に公式解答例/講評の当該ページも実表示して全欄照合。草稿本文・全欄・制約・全図を照合し、最終canonicalと全原本/図SHAを独立再計算。",
+  "gradingCheck": "説明文・順不同の複数項目・図示は自己評価。短答は登録例一致だけ自動正解、未登録は自己評価へ。公式配点/部分点を推測せず学習用rubricと明記。原文無指定2000字は入力上限として区別。",
+  "pixelChecks": [
+    {
+      "path": "assets/written/ap-r06a-pm6/question-p30.png",
+      "pdfPage": 30,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r06a-pm6/question-p31.png",
+      "pdfPage": 31,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r06a-pm6/question-p32.png",
+      "pdfPage": 32,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r06a-pm6/question-p33.png",
+      "pdfPage": 33,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r06a-pm6/question-p34.png",
+      "pdfPage": 34,
+      "officialRenderPixelEqual": true
+    }
+  ],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r06a-pm6/question-p31.png",
+      "output": "assets/written/ap-r06a-pm6/figure-1.png",
+      "box": [
+        155,
+        495,
+        888,
+        1199
+      ],
+      "sha256": "6be548653488770004f4bc22d90dd2d3bd8cc9a2242bf66fb132b02a89dffc9e"
+    }
+  ],
+  "independentEvidence": [
+    "content/ap/written-drafts/2024/reviewer-autumn/independent-findings.json",
+    "content/ap/written-drafts/2024/reviewer-autumn/independent-calculations.json"
+  ],
+  "findings": [
+    {
+      "issue": "原本にない設問3(2)の全てへの下線",
+      "resolution": "作者が原本p34を拡大再確認して下線を削除。主担当確認者も原本/最終promptを再照合。",
+      "status": "resolved"
+    }
+  ]
+}

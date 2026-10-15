@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261015-written-two-exams';
+import './src/app.js?v=20261015-written-2024';

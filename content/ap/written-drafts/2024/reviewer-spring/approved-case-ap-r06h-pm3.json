@@ -1,0 +1,524 @@
+{
+  "id": "ap-r06h-pm3",
+  "topicId": "algorithm",
+  "title": "グラフのノード間の最短経路を求めるアルゴリズム",
+  "sourcePages": [
+    5,
+    6,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "body": "問3 グラフのノード間の最短経路を求めるアルゴリズムに関する次の記述を読んで，設問に答えよ。\n\nグラフ内の二つのノード間の最短経路を求めるアルゴリズムにダイクストラ法がある。このアルゴリズムは，車載ナビゲーションシステムなどに採用されている。\n\n［経路算定のモデル化］\n\nグラフは，有限個のノードの集合と，その中の二つのノードを結ぶエッジの集合とから成る数理モデルである。ダイクストラ法による最短経路の探索問題を考えるに当たり，本問では，エッジをどちらの方向にも行き来することができて，任意の二つのノード間に経路が存在するグラフを扱う。ここで，グラフを次のように定義する。\n\n・ノードの個数をNとし，Nは2以上とする。ノードの番号（以下，ノード番号という）は，始点のノード番号を1とし，1から始まる連続した整数とする。ノードには，ノード番号に対応させて，V1，V2，V3，…，VNとラベルを付ける。\n\n・二つのノードが他のノードを経由せずにエッジでつながっているとき，それらのノードは隣接するという。隣接するノード間のエッジには，ノード間の距離として正の数値を付ける。\n\n・始点のノード（以下，始点という）とは別のノードを終点のノード（以下，終点という）として定める。始点からあるノードまでの経路の中から，経路に含まれるエッジに付けられた距離の和が最小の距離を最短距離という。始点から終点までの最短距離となる経路を最短経路という。\n\n図1にノードが五つのグラフの例を示す。図1の例では，始点をV1のノードとし，終点をV5のノードとした場合の最短経路は，V1，V2，V3，V5のノードを順にたどる経路である。\n\n図1 ノードが五つのグラフの例\n\n［始点から終点までの最短距離を求める手順］\n\nダイクストラ法による始点から終点までの最短距離の算出は次のように行う。\n\n最初に，各ノードについて，始点からそのノードまでの距離（以下，始点ノード距離という）を作業用に導入して十分に大きい定数としておく。ただし，始点の始点ノード距離は0とする。この時点では，どのノードの最短距離も確定していない。\n\n次に，終点の最短距離が確定するまで，①〜③を繰り返す。ここで，始点との距離を算出する基準となるノードを更新起点ノードという。\n\n① 最短距離が確定していないノードの中で，始点ノード距離が最小のノードを更新起点ノードとして選び，そのときの始点ノード距離の値で，当該更新起点ノードの最短距離を確定する。更新起点ノードを選ぶ際に，始点ノード距離が最小となるノードが複数ある場合は，その中の任意のノードを更新起点ノードとして選ぶ。\n\n② 更新起点ノードが終点であれば，終了する。\n\n③ ①で選択した更新起点ノードに隣接しており，かつ，最短距離が確定していない全てのノードについて，更新起点ノードを経由した場合の始点ノード距離を計算する。ここで計算した始点ノード距離が，そのノードの現在までの始点ノード距離よりも小さい場合には，そのノードの現在までの始点ノード距離を更新する。\n\n［図1の例における最短距離を求める手順と始点ノード距離］\n\n図1の例において，始点V1から終点V5までの経路に対して，上の①〜③を繰り返し適用する。そのとき，更新起点ノードを選ぶたびに，更新起点ノードの始点ノード距離，更新起点ノードと隣接するノードの始点ノード距離，及び最短距離が確定していないノードの始点ノード距離を計算した内容を表1に示す。\n\n表1 図1の例における最短距離を求める手順と始点ノード距離\n\n| 探索適用回数 | 更新起点ノード | 最短距離が確定していない，更新起点ノードに隣接するノード | 最短距離が確定していないノード |\n| --- | --- | --- | --- |\n| 1回目 | V1〈0〉 | V2〈10〉，V3〈16〉 | V2〈10〉，V3〈16〉，V4〈INF〉，V5〈INF〉 |\n| 2回目 | V2〈10〉 | V3〈14〉，V4〈13〉 | V3〈14〉，V4〈13〉，V5〈INF〉 |\n| 3回目 | V4〈13〉 | V3〈14〉，V5〈19〉 | V3〈14〉，V5〈19〉 |\n| 4回目 | V3〈14〉 | V5〈［ア］〉 | V5〈［ア］〉 |\n| 5回目 | V5〈［ア］〉 | — | — |\n\n注記1 INFは，定数で十分大きい数を表す。\n\n注記2 〈〉内の数値は，当該ノードの始点ノード距離を表す。\n\n［最短距離の算出プログラム］\n\n始点から終点までの最短距離を求める関数distanceのプログラムを図2に示す。配列の要素番号は1から始まるものとする。また，行頭の数字は行の番号を表す。\n\n```text\n1: ○整数型: distance()\n2:   整数型: N                 /* ノードの個数 */\n3:   整数型: INF               /* 十分大きい定数 */\n4:   整数型の二次元配列: edge  /* edge[m, n]には，ノードmからノードnへの距離を格納\n                                  二つのノードが隣接していない場合にはINFを格納 */\n5:   整数型: GOAL              /* 終点のノード番号 */\n6:   整数型の配列: dist        /* 始点ノード距離。初期値はINF。要素番号がノード番号を表す。 */\n7:   整数型の配列: done        /* 初期値は0。最短距離が確定したら1を入れる。\n                                  要素番号がノード番号を表す。 */\n8:   整数型: curNode           /* 更新起点ノードのノード番号 */\n9:   整数型: minDist           /* 更新起点ノードを求める際に使用する一時変数 */\n10:  整数型: k                 /* 要素番号 */\n11:  dist[1] ← 0               /* 始点の始点ノード距離を0とする。 */\n12:  while (true)\n13:    minDist ← INF\n14:    for (kを1からNまで1ずつ増やす)\n15:      if (done[k]が0 かつ ［イ］)\n16:        minDist ← ［ウ］\n17:        curNode ← k\n18:      endif\n19:    endfor\n20:    done[curNode] ← 1\n21:    if (curNodeがGOALと等しい)\n22:      return dist[curNode]\n23:    endif\n24:    for (kを1からNまで1ずつ増やす)\n25:      if (［エ］がdist[k]より小さい かつ done[k]が0)\n26:        dist[k] ← ［エ］\n27:      endif\n28:    endfor\n29:  endwhile\n```\n\n図2 関数distanceのプログラム\n\n［最短経路の出力］\n\n関数distanceを変更して，求めた最短距離となる最短経路を出力できるようにする。具体的には，まず，ノード番号1〜Nを格納する配列viaNodeを使用するために，図3の変数宣言を図2の行10の直後に，図4のプログラムを図2の行21の直後に，それぞれ挿入する。さらに，各ノードの始点ノード距離を更新するたびに，直前に経由したノード番号をviaNodeに格納する++①代入文を一つ++，図2のプログラムの行［オ］の直後に挿入する。\n\nこのプログラムの変更によって，終点のノード番号を起点として［カ］たどることで，最短経路のノード番号を逆順に出力する。\n\n```text\n整数型の配列: viaNode  /* 最短経路のノード番号を格納する。初期値は0。 */\n整数型: j             /* 要素番号 */\n```\n\n図3 最短経路を出力するために関数distanceに挿入する変数宣言\n\n```text\nj ← GOAL                /* 終点のノード番号 */\nGOALを出力              /* 終点のノード番号の出力 */\nwhile (jが1より大きい)   /* 最短経路の出力 */\n  viaNode[j]を出力\n  j ← viaNode[j]\nendwhile\n```\n\n図4 最短経路を出力するために関数distanceに挿入するプログラム\n\n［計算量の考察］\n\n関数distanceでは，次の［キ］を選ぶために始点ノード距離を計算する回数は最大でもN回である。また，［キ］を選ぶ回数は，一度選ばれると当該ノードの最短距離は確定するので，最大でもN回である。よって，最悪の場合の計算量は，$O(［ク］)$である。\n\n学習用補足：擬似言語の共通記述形式・演算子の優先順位・配列の規則は，原本参照のPDF5・6ページに収録しています。上の問題文・プログラムは原本の内容です。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm3/figure-1.png",
+      "caption": "図1 ノードが五つのグラフの例",
+      "sourcePage": 19,
+      "placement": "replace-caption",
+      "anchor": "図1 ノードが五つのグラフの例",
+      "alt": "図1 ノードが五つのグラフの例。原本の図形・結線・ラベル・注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        19
+      ],
+      "anchor": "図1 ノードが五つのグラフの例"
+    },
+    "table-1": {
+      "sourcePages": [
+        20
+      ],
+      "anchor": "表1 図1の例における最短距離を求める手順と始点ノード距離"
+    },
+    "figure-2": {
+      "sourcePages": [
+        21
+      ],
+      "anchor": "図2 関数distanceのプログラム"
+    },
+    "figure-3": {
+      "sourcePages": [
+        22
+      ],
+      "anchor": "図3 最短経路を出力するために関数distanceに挿入する変数宣言"
+    },
+    "figure-4": {
+      "sourcePages": [
+        22
+      ],
+      "anchor": "図4 最短経路を出力するために関数distanceに挿入するプログラム"
+    },
+    "underline-1": {
+      "sourcePages": [
+        21
+      ],
+      "text": "①代入文を一つ"
+    },
+    "blank-ア": {
+      "sourcePages": [
+        20
+      ],
+      "text": "［ア］"
+    },
+    "blank-イ": {
+      "sourcePages": [
+        21
+      ],
+      "text": "［イ］"
+    },
+    "blank-ウ": {
+      "sourcePages": [
+        21
+      ],
+      "text": "［ウ］"
+    },
+    "blank-エ": {
+      "sourcePages": [
+        21
+      ],
+      "text": "［エ］"
+    },
+    "blank-オ": {
+      "sourcePages": [
+        22
+      ],
+      "text": "［オ］"
+    },
+    "blank-カ": {
+      "sourcePages": [
+        22
+      ],
+      "text": "［カ］"
+    },
+    "blank-キ": {
+      "sourcePages": [
+        22
+      ],
+      "text": "［キ］"
+    },
+    "blank-ク": {
+      "sourcePages": [
+        22
+      ],
+      "text": "［ク］"
+    }
+  },
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "表1中の［ア］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "17"
+          ],
+          "explanation": "V3の確定距離14にV3–V5の距離3を加えると17となり，それまでのV5の距離19より小さいので17へ更新する。",
+          "rubric": [
+            "更新起点までの14と隣接辺の3の和を求める。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              19,
+              20,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        19,
+        20,
+        23
+      ],
+      "bodyRefs": [
+        "table-1"
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図2中の［イ］〜［エ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "i",
+          "label": "イ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "dist[k]がminDistより小さい"
+          ],
+          "explanation": "未確定ノードから最小距離を選ぶため，現在見つかった最小値minDistよりdist[k]が小さい場合に候補を更新する。比較の向きを逆にしない。",
+          "rubric": [
+            "dist[k]とminDistの大小関係を正しい向きで示す。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "u",
+          "label": "ウ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "dist[k]"
+          ],
+          "explanation": "条件を満たした候補kの距離をminDistに保存する。ノード番号kそのものではない。",
+          "rubric": [
+            "最小距離を格納する配列要素を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "e",
+          "label": "エ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "dist[curNode] ＋ edge[curNode, k]"
+          ],
+          "explanation": "更新起点ノードまでの確定距離に，更新起点から対象kへの辺の距離を加える。edgeだけでもdistだけでも全経路の距離にならない。",
+          "rubric": [
+            "始点から更新起点までと，更新起点からkまでの距離を加える。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        21,
+        23
+      ],
+      "bodyRefs": [
+        "figure-2"
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［最短経路の出力］について答えよ。\n本文中の下線①と［オ］について，挿入すべき代入文と［オ］に入れる行の番号を答えよ。行の番号については，最も小さい番号を答えること。ただし，図2中の現在の行の番号は図3及び図4の挿入によって変化しないものとする。",
+      "fields": [
+        {
+          "id": "assignment",
+          "label": "代入文",
+          "type": "freeText",
+          "referenceAnswers": [
+            "viaNode[k] ← curNode"
+          ],
+          "explanation": "kへの距離を更新したとき，その直前のノードcurNodeをviaNode[k]に保存する。逆に格納すると終点から前のノードをたどれない。",
+          "rubric": [
+            "更新されるノードkの直前ノードとしてcurNodeを記録する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "o",
+          "label": "オ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "25"
+          ],
+          "explanation": "行25の条件が成立しているブロック内で前駆ノードを保存する必要がある。行25直後でも行26直後でも動作するが，最も小さい行番号を要求しているため25とする。",
+          "rubric": [
+            "条件が真のときだけ記録し，最小の挿入行番号25を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              21,
+              22,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        21,
+        22,
+        23
+      ],
+      "bodyRefs": [
+        "underline-1",
+        "figure-2",
+        "figure-3",
+        "figure-4"
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［最短経路の出力］について答えよ。\n本文中の［カ］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "ka",
+          "label": "カ",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "explanation": "viaNode[j]には最短経路における一つ前のノード番号が入っている。終点GOALから格納された番号を添字として繰り返し参照することで，終点から始点へ逆順にたどる。配列の要素番号を単に昇順・降順に並べても経路にはならない。",
+          "rubric": [
+            "格納された前駆ノード番号を次の添字に使ってたどる。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "viaNodeに格納してあるノード番号を"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "viaNodeの要素番号を大きい方から"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "viaNodeの要素番号を小さい方から"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              22,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        22,
+        23
+      ],
+      "bodyRefs": [
+        "blank-カ"
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "［計算量の考察］について答えよ。\n本文中の［キ］に入れる適切な字句を，本文中の字句を用いて10字以内で答えよ。",
+      "fields": [
+        {
+          "id": "ki",
+          "label": "キ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "更新起点ノード"
+          ],
+          "explanation": "未確定のノードから次の更新起点ノードを選び，確定したノードは再選択しない。本文の定義語を用いる。",
+          "rubric": [
+            "未確定ノードの距離を比較して選ぶ対象の名称を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 10,
+          "constraints": [
+            "本文中の字句を用いる。"
+          ],
+          "evidence": {
+            "questionPages": [
+              20,
+              22,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        20,
+        22,
+        23
+      ],
+      "bodyRefs": [
+        "blank-キ"
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "［計算量の考察］について答えよ。\n本文中の［ク］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "ku",
+          "label": "ク",
+          "type": "shortText",
+          "referenceAnswers": [
+            "N²",
+            "N^2"
+          ],
+          "explanation": "最大N回の更新起点選択について，各回でNノードを走査する。距離更新も各回Nノードであり，いずれも全体でN×Nに比例するためO(N²)となる。",
+          "rubric": [
+            "反復回数Nと各反復の走査Nを掛ける。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              22,
+              23
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        22,
+        23
+      ],
+      "bodyRefs": [
+        "blank-ク"
+      ]
+    }
+  ],
+  "author": "/root/author_2024_spring_1_6",
+  "authoringStatus": "independently-reviewed",
+  "status": "reviewed",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm3/question-p05.png",
+    "assets/written/ap-r06h-pm3/question-p06.png",
+    "assets/written/ap-r06h-pm3/question-p19.png",
+    "assets/written/ap-r06h-pm3/question-p20.png",
+    "assets/written/ap-r06h-pm3/question-p21.png",
+    "assets/written/ap-r06h-pm3/question-p22.png",
+    "assets/written/ap-r06h-pm3/question-p23.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm3/question-p05.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p06.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p19.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p20.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p21.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p22.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm3/question-p23.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問3",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ]
+}

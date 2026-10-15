@@ -1,0 +1,459 @@
+{
+  "id": "ap-r06h-pm4",
+  "topicId": "architecture",
+  "title": "CRMシステムの改修",
+  "sourcePages": [
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "body": "問4 CRM（Customer Relationship Management）システムの改修に関する次の記述を読んで，設問に答えよ。\n\nC社は，住宅やビルなどのアルミサッシを製造，販売する中堅企業である。取引先の設計・施工会社のニーズにきめ細かく対応するために，自社で開発したCRMシステム（以下，CRMシステムという）を使用している。CRMシステムは，データベースとWebアプリケーションプログラム（以下，Webアプリという）から成り，C社のLAN上にあるPCから利用される。このたび，営業担当者が外出先からスマートフォンやノートPCを用いてCRMシステムを利用できるようにするために，データベースは変更せずにWebアプリを改修することになった。\n\n［Webアプリの改修方針］\n\nWebアプリの改修方針を次に示す。\n\n・必要以上の開発コストを掛けない。\n\n・営業担当者が外出先で効率的にCRMシステムを利用できるように，スマートフォンに最適化した画面を追加する。\n\n・将来的に，CRMシステム以外の社内システムとも連携できるように拡張性をもたせる。\n\n［Webアプリの実装方式の検討］\n\nこれらの改修方針を受けて，図1のWebアプリを実装するシステムの構成案を検討した。\n\n図1 Webアプリを実装するシステムの構成案\n\n検討したWebアプリの実装方式を次に示す。\n\n・ユーザーインタフェースとデータ処理を分ける。ユーザーインタフェースは，WebサーバにHTML，Cascading Style Sheets（CSS），画像，スクリプトなどを静的なファイルとして配置する。データ処理は，APがDBから取得したデータをJSON形式のデータで返すWeb APIとして実装する。\n\n・ユーザーインタフェースとなる静的ファイルは，PCとスマートフォンそれぞれのWebブラウザ用に個別に作成し，データ処理用のWeb APIは共用する。\n\n・ユーザーインタフェースの表示速度を向上させるために，++①静的ファイルを最適化する++。\n\n［実現可能性の評価］\n\n［Webアプリの実装方式の検討］で示した方式の実現可能性を評価するために，プロトタイプを用いて多くのデータを扱う機能について検証した。その結果，スマートフォンの特定の画面において次の問題が発生した。\n\n・扱うデータ量が増えるに連れて，レスポンスが著しく低下する。\n\n・++②スマートフォンのCPU負荷が大きく++，頻繁に使用するとバッテリの消耗が激しい。\n\nそこで，これらの問題の原因を調べるために，Webアプリの処理を分析した。レスポンスの悪かった日誌一覧の表示画面を図2に，Web APIからの応答データを図3に示す。\n\n図2 日誌一覧の表示画面\n\n```text\n{\n  \"customer\": \"○△×設計事務所\",\n  \"count\": 16,\n  \"diaries\": [  ← α\n    {\"date\": \"2023-08-21\",\n     \"salesperson\": \"情報花子\",\n     \"salesprocess\": \"問合せ\",\n     \"diary\": （省略）},\n         …\n    {\"date\": \"2023-10-04\",\n     \"salesperson\": \"情報太郎\",\n     \"salesprocess\": \"製品概要紹介\",\n     \"diary\": （省略）},\n         …\n  ]  ← β\n}\n```\n\n図3 Web APIからの応答データ\n\nスマートフォンのWebブラウザから図2の画面をリクエストしてから描画されるまでの一連の処理について，処理ごとに所要時間を測定した結果を表1に示す。\n\n表1 処理ごとに所要時間を測定した結果\n\n| No. | 処理概要 | 所要時間（ミリ秒） |\n| --- | --- | --- |\n| 1 | Webブラウザが画面に必要となる静的なファイルを全て受信する。 | 300 |\n| 2 | WebブラウザがWeb APIにリクエストして，図3の応答データを全て受信する。 | 800 |\n| 3 | Webブラウザ内で日誌のデータを日付の降順にソートして，画面に表示する最大件数である4件目までを抽出する。 | 1,200 |\n| 4 | 日誌本文が42文字を超える場合，先頭から41文字と文字“…”を結合した42文字の文字列にする。 | 300 |\n| 5 | 日誌一覧の表示を実行したユーザーが作成した日誌か否かを判断して，本人が作成した日誌には“編集”ボタンを表示する。 | 200 |\n| 6 | データをWebブラウザに描画する。 | 500 |\n\n表1から，図3の応答データのスマートフォンへの転送処理と，Webブラウザ内でその応答データを加工する処理に多くの時間を要していることが判明した。\n\n［Webアプリの見直し］\n\nWebブラウザが画面をリクエストしてから描画されるまでの所要時間の目標値を3秒以内に設定して，それを達成するために，次の三つの方式を検討した。\n\n① スマートフォンのユーザーインタフェースをアプリケーションプログラム（以下，スマホアプリという）として開発して，そのスマホアプリ内でWeb APIからの応答データを加工・描画する方式\n\n② リクエストのあった応答データのうち，Webブラウザに描画するデータだけを返すWeb APIを開発して，スマートフォンのWebブラウザからそのWeb APIを利用する方式\n\n③ ②で開発したWeb APIを①で開発したスマホアプリから利用する方式\n\n各方式について，応答データを加工・描画するソフトウェア又はサーバと，その実現可能性を評価するために，設けた評価項目について整理した結果を表2に示す。各評価項目の評価点に対する重み付けは均一とし，また，将来的な拡張性については各実装方法を設計するタイミングで検討することにした。\n\nなお，［実現可能性の評価］においてプロトタイプを用いて検証した方式を方式Ⓟとする。\n\n表2 整理した結果\n\n| 方式 | ソフトウェア／サーバ：データ描画 | ソフトウェア／サーバ：データ加工 | 評価項目：レスポンス | 評価項目：開発コスト | 評価項目：CPU負荷 | 評価点合計 |\n| --- | --- | --- | --- | --- | --- | --- |\n| Ⓟ | Webブラウザ | Webブラウザ | × | ◎ | × | 3点 |\n| ① | スマホアプリ | スマホアプリ | ○ | △ | △ | 4点 |\n| ② | Webブラウザ | AP | ○ | ○ | ○ | 6点 |\n| ③ | スマホアプリ | AP | ◎ | × | ○ | 5点 |\n\n凡例 ◎：とても優れている，3点 ○：優れている，2点 △：あまり優れていない，1点 ×：優れていない，0点\n\n［レスポンス時間の試算］\n\n表2の結果から，方式②について更に検討を進めることになり，そのレスポンスが実用上問題ないか，表1を基に所要時間を試算した。\n\n表1中のNo.2の所要時間について考える。方式②のWeb APIからの応答データのサイズは，図3のデータのサイズの4分の1になり，サーバ側でのデータ転送には時間を要しないものと仮定すると，No.2の所要時間は［a］ミリ秒となる。\n\n次に，No.3〜No.5の処理時間について考える。No.3の処理はDBで，No.4とNo.5の処理はAPで行われる。処理時間は各機器のCPU処理能力だけに依存すると仮定する。各機器のCPU処理能力は，スマートフォンが10,000MIPS相当，DBが40,000MIPS相当，APが20,000MIPS相当の場合，No.3〜No.5の処理時間の合計は［b］ミリ秒となる。\n\n以上の試算の結果，方式②で十分なレスポンスが期待できることから，方式②を採用することにした。\n\n［システム構成の検討］\n\n方式②で開発したWeb APIの配置について検討した。図1のAP上に配置する案も検討したが，++③将来的な拡張性++を考慮した結果，図1のAPとは別に，スマートフォンやノートPCから呼び出されるWeb APIのためのAPを，新たに追加する構成にした。\n\nこのシステム構成を採用した結果，問題を解消し，さらに将来的な拡張性をもたせることができた。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm4/figure-1.png",
+      "caption": "図1 Webアプリを実装するシステムの構成案",
+      "sourcePage": 25,
+      "placement": "replace-caption",
+      "anchor": "図1 Webアプリを実装するシステムの構成案",
+      "alt": "図1 Webアプリを実装するシステムの構成案。原本の図形・結線・ラベル・注記を保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r06h-pm4/figure-2.png",
+      "caption": "図2 日誌一覧の表示画面",
+      "sourcePage": 26,
+      "placement": "replace-caption",
+      "anchor": "図2 日誌一覧の表示画面",
+      "alt": "図2 日誌一覧の表示画面。原本の図形・結線・ラベル・注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        25
+      ],
+      "anchor": "図1 Webアプリを実装するシステムの構成案"
+    },
+    "figure-2": {
+      "sourcePages": [
+        26
+      ],
+      "anchor": "図2 日誌一覧の表示画面"
+    },
+    "figure-3": {
+      "sourcePages": [
+        26
+      ],
+      "anchor": "図3 Web APIからの応答データ"
+    },
+    "table-1": {
+      "sourcePages": [
+        27
+      ],
+      "anchor": "表1 処理ごとに所要時間を測定した結果"
+    },
+    "table-2": {
+      "sourcePages": [
+        28
+      ],
+      "anchor": "表2 整理した結果"
+    },
+    "underline-1": {
+      "sourcePages": [
+        26
+      ],
+      "text": "①静的ファイルを最適化する"
+    },
+    "underline-2": {
+      "sourcePages": [
+        26
+      ],
+      "text": "②スマートフォンのCPU負荷が大きく"
+    },
+    "underline-3": {
+      "sourcePages": [
+        28
+      ],
+      "text": "③将来的な拡張性"
+    }
+  },
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の下線①に該当するものを解答群の中から++全て++選び，記号で答えよ。\n\n解答群\nア HTML，CSS，スクリプトなどのコードに，パイプライン処理を有効にする設定を行う。\nイ HTML，CSS，スクリプトなどのコードに含まれる，余分な改行やコメントを削除する。\nウ 画像を，BMPやTIFFなどの画像フォーマットにする。\nエ 画像を，PNGやSVGなどの画像フォーマットにする。\nオ 全てのファイルをバイトコードに変換して圧縮する。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "全ての記号",
+          "type": "freeText",
+          "referenceAnswers": [
+            "イ，エ"
+          ],
+          "explanation": "余分な改行・コメントの削除は静的ファイルのサイズを減らし，PNGやSVGの利用もWebで扱う画像のデータ量や描画の効率を改善する。パイプライン処理の設定はコードの静的最適化の説明ではなく，全ファイルのバイトコード化もブラウザで配信するHTML等に適用できない。BMP・TIFFはこの目的に適する選択ではない。",
+          "rubric": [
+            "イとエの両方を挙げ，その他を含めない。",
+            "順不同の複数選択として全体を自己評価する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "全て選び，記号で答える。順不同。"
+          ],
+          "evidence": {
+            "questionPages": [
+              26,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        26,
+        29
+      ],
+      "bodyRefs": [
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［実現可能性の評価］について答えよ。\n本文中の下線②の要因として，最も適切なものを解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "記号",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "explanation": "表1では日誌のソート・抽出だけで1,200ミリ秒を要し，さらに文字列加工などを端末で行う。端末メモリ上の日誌データ加工がCPU負荷の主要因である。通信やHTML等の描画も処理の一部だが，測定結果に対応する主要因はウとなる。",
+          "rubric": [
+            "処理ごとの計測結果に基づき端末上のデータ加工を選ぶ。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "JSON形式の応答データを送受信する処理"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "WebブラウザにHTML，CSS，画像ファイルをレンダリングする処理"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "スマートフォンのメモリ上で日誌のデータを加工する処理"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "日誌一覧の各担当がログインユーザーか否かを判別する処理"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              26,
+              27,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        26,
+        27,
+        29
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［実現可能性の評価］について答えよ。\n図3中のαとβの箇所にある“［”及び“］”で囲まれたデータはどのようなデータを表現するものか。データ形式に着目し，“日誌”という単語を用いて，15字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "データの表現",
+          "type": "freeText",
+          "referenceAnswers": [
+            "日誌の繰返しデータ"
+          ],
+          "explanation": "JSONの角括弧は配列を表す。diariesには一つずつの日誌オブジェクトが並んでおり，日誌が繰り返されるデータを表現している。単一の日誌の属性集合を表す波括弧との違いに着目する。",
+          "rubric": [
+            "「日誌」を用いて，同じ形式の日誌が繰り返される配列であることを述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 15,
+          "constraints": [
+            "“日誌”という単語を用いる。"
+          ],
+          "evidence": {
+            "questionPages": [
+              26,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        26,
+        29
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "表2中の方式②のレスポンスが，方式Ⓟに比べて優れていると評価した理由を二つ挙げ，それぞれ30字以内で答えよ。",
+      "fields": [
+        {
+          "id": "reason1",
+          "label": "理由①",
+          "type": "freeText",
+          "referenceAnswers": [
+            "応答データの加工処理をサーバ側で行うから"
+          ],
+          "explanation": "方式②ではソート・抽出・文字列加工等をサーバで行い，スマートフォンのWebブラウザ内の処理を減らせる。もう一つの理由である転送量削減と区別して，処理場所の変更を説明する。",
+          "rubric": [
+            "応答データ加工がスマートフォンからサーバへ移ることを述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 30,
+          "evidence": {
+            "questionPages": [
+              26,
+              27,
+              28,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "reason2",
+          "label": "理由②",
+          "type": "freeText",
+          "referenceAnswers": [
+            "応答データの転送量が削減されるから"
+          ],
+          "explanation": "方式Ⓟは日誌データ全体を返すが，方式②は描画に必要なデータだけ返す。転送するデータ量が減り，受信時間を短縮できる。二つの理由の記入順は入れ替わってもよい。",
+          "rubric": [
+            "描画に必要なデータだけ返すため転送量が削減されることを述べる。",
+            "二つの欄全体で，サーバ加工と転送量削減の異なる二理由を満たす（順不同）。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 30,
+          "evidence": {
+            "questionPages": [
+              26,
+              27,
+              28,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        26,
+        27,
+        28,
+        29
+      ],
+      "bodyRefs": [
+        "table-1",
+        "table-2"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "本文中の［a］，［b］に入れる適切な数値を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a（ミリ秒）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "200"
+          ],
+          "explanation": "転送データ量が4分の1になるので，800÷4＝200ミリ秒となる。サーバ側のデータ転送時間は無視するという仮定を用いる。",
+          "rubric": [
+            "800ミリ秒にデータ量の比1/4を掛ける。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              27,
+              28,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "b",
+          "label": "b（ミリ秒）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "550"
+          ],
+          "explanation": "No.3はCPU能力が4倍のDBで行うので1,200÷4＝300ミリ秒。No.4とNo.5は能力が2倍のAPで行うので300÷2＝150，200÷2＝100ミリ秒。合計300＋150＋100＝550ミリ秒となる。",
+          "rubric": [
+            "処理ごとの移行先のCPU能力比で時間を換算して合計する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              27,
+              28,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        27,
+        28,
+        29
+      ],
+      "bodyRefs": [
+        "table-1"
+      ]
+    },
+    {
+      "id": "q5",
+      "label": "設問5",
+      "prompt": "本文中の下線③の拡張性とは何か。40字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "拡張性",
+          "type": "freeText",
+          "referenceAnswers": [
+            "Web APIを介してCRMシステム以外の社内システムとも連携する拡張性"
+          ],
+          "explanation": "改修方針には，将来CRM以外の社内システムと連携することが明記されている。端末向けAPIを専用APに分離すると，複数システムのAPIを組み合わせて端末向けのデータを提供しやすくなる。単なるサーバ増設や端末数増加ではなく，本文の連携方針に対応して答える。",
+          "rubric": [
+            "Web APIを介した，CRM以外の社内システムとの連携を述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 40,
+          "evidence": {
+            "questionPages": [
+              25,
+              28,
+              29
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        25,
+        28,
+        29
+      ],
+      "bodyRefs": [
+        "underline-3"
+      ]
+    }
+  ],
+  "author": "/root/author_2024_spring_1_6",
+  "authoringStatus": "awaiting-independent-review",
+  "status": "draft",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm4/question-p25.png",
+    "assets/written/ap-r06h-pm4/question-p26.png",
+    "assets/written/ap-r06h-pm4/question-p27.png",
+    "assets/written/ap-r06h-pm4/question-p28.png",
+    "assets/written/ap-r06h-pm4/question-p29.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm4/question-p25.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm4/question-p26.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm4/question-p27.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm4/question-p28.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm4/question-p29.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問4",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ]
+}

@@ -14,7 +14,7 @@ with sync_playwright() as p:
  page.goto(ROOT+'?qualifications');page.get_by_role('heading',name='資格・科目を選ぶ').wait_for()
  assert page.locator('.qualification-option').count()==3
  assert page.locator('[data-qualification-id=ap][data-part-id=objective]').inner_text().startswith('応用情報－科目A\n800問')
- assert page.locator('[data-qualification-id=ap][data-part-id=written]').inner_text().startswith('応用情報－科目B\n大問22題')
+ assert page.locator('[data-qualification-id=ap][data-part-id=written]').inner_text().startswith('応用情報－科目B\n大問44題')
  assert not any('/packs/' in u or '/index.' in u for u in requests)
  for width in [320,390,800,801,1440,1920]:
   page.set_viewport_size({'width':width,'height':900});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')

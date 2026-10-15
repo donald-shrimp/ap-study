@@ -1,0 +1,515 @@
+{
+  "id": "ap-r06h-pm1",
+  "topicId": "security",
+  "title": "リモート環境のセキュリティ対策",
+  "sourcePages": [
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "body": "次の問1は必須問題です。必ず解答してください。\n\n問1 リモート環境のセキュリティ対策に関する次の記述を読んで，設問に答えよ。\n\nQ社は，首都圏で複数の学習塾を経営する会社であり，各学習塾で対面授業を行っている。生徒及び生徒の保護者からはリモートでも受講が可能なハイブリッド型授業の導入要望があり，Q社の従業員からはテレワーク勤務の導入要望がある。\n\n［Q社の現状のネットワーク構成］\n\nQ社のネットワーク構成（抜粋）を図1に示す。\n\n図1 Q社のネットワーク構成（抜粋）\n\n［Q社の現状のセキュリティ対策］\n\nQ社のセキュリティ対策は次のとおりである。\n\n・パケットフィルタリングポリシーに従った通信だけをFWで許可し，その他の通信を遮断している。\n\n・業務上必要なサイトのURL情報を基に，URLフィルタリングを行うソフトウェアをプロキシサーバに導入して，業務上不要なサイトへの接続を禁止している。\n\n・PC及びサーバ機器には，外部媒体の使用ができない設定をした上で，マルウェア対策ソフトを導入して，マルウェア感染対策を行っている。\n\n・PC，ネットワーク機器及びサーバ機器には，脆弱性に対応する修正プログラム（以下，セキュリティパッチという）を定期的に確認した後，適用する方法で，脆弱性対策を行っている。\n\n［Q社の現状のセキュリティ対策に関する課題］\n\n・ネットワーク機器及びサーバ機器のEOL（End Of Life）時期が近づいており，機器の更新が必要である。\n\n・セキュリティパッチが提供されているかの調査及び適用してよいかの判断に時間が掛かることがある。\n\n・ルータとFWを利用した++①境界型防御++によるセキュリティ対策では，防御しきれない攻撃がある。\n\n・セキュリティインシデントの発生を，迅速に検知する仕組みがない。\n\nQ社では，ハイブリッド型授業とテレワーク勤務が行えるリモート環境を実現し，Q社のセキュリティに関する課題を解決する新たな環境を，クラウドサービスを利用して構築することになり，情報システム部のR課長が担当することになった。\n\n［リモート環境の構築方針］\n\nR課長は，境界型防御の環境に代えて，いかなる通信も信頼しないという［a］の考え方に基づくリモート環境を構築することにした。\n\nR課長は，リモート環境について次の構築方針を立てた。\n\n・クラウドサービスへの移行に伴い，ネットワーク機器及びサーバ機器は廃棄し，今後のQ社としてのEOL対応を不要とする。\n\n・++②課題となっている作業++を不要にするために，クラウドサービスはSaaS型を利用する。\n\n・セキュリティインシデントの発生を迅速に検知する仕組みを導入する。\n\n・従業員にモバイルルータとセキュリティ対策を実施したノートPC（以下，貸与PCという）を貸与する。今後は，本社，学習塾及びテレワークでの全ての業務において，貸与PCとモバイルルータを使用してクラウドサービスを利用する。\n\n・貸与PCから業務上不要なサイトへの接続は禁止とする。\n\n・生徒は，自宅などのPC（以下，自宅PCという）からクラウドサービスを利用してリモートでも授業を受講できる。\n\n［リモート環境構築案の検討］\n\nR課長はリモート環境の構築方針を部下のS君に説明し，構築する環境の検討を指示した。\n\nS君はリモート環境構築案を検討した。\n\n・リモート環境の構築には，T社クラウドサービスを利用する。\n\n・貸与PCからWebサイトを閲覧する際は，++③プロキシを経由する++。\n\n・貸与PCからインターネットを経由して接続するWeb会議，オンラインストレージ及び電子メール（以下，メールという）を利用することで，Q社の業務及びリモートでの授業を行う。\n\n・貸与PCからT社クラウドサービスへのログインは，ログインを集約管理するクラウドサービスであるIDaaS（Identity as a Service）を利用する。従業員はIDとパスワードを用いてシングルサインオンで接続してクラウドサービスを利用する。\n\n・++④SIEM（Security Information and Event Management）の導入++と，アラート発生時に対応する体制の構築を行う。\n\n・貸与PCには，マルウェア対策ソフトを導入し，外部媒体が使用できない設定を行う。また，++⑤紛失時の情報漏えいリスクを低減する対策をとる++。\n\n・生徒は，自宅PCからインターネット経由で，Web会議に接続して，リモートで授業を受講できる。\n\nS君が検討したリモート環境構築案（抜粋）を図2に示す。\n\n図2 リモート環境構築案（抜粋）\n\n［構築案への指摘と追加対策の検討］\n\nS君は検討した構築案についてR課長に説明した。すると，セキュリティ対策の不足に起因するセキュリティインシデントの発生を懸念したR課長は，“［a］では，クラウドサービスにアクセスする通信を信頼せずセキュリティ対策を行う必要があるので，エンドポイントである貸与PCと自宅PCに対する攻撃への対策及びクラウドサービスのユーザー認証を強化する対策が必要である。追加の対策を検討するように。”と指摘した。\n\nR課長が懸念したセキュリティインシデント（抜粋）を表1に示す。\n\n表1 R課長が懸念したセキュリティインシデント（抜粋）\n\n| 項番 | 分類 | セキュリティインシデント |\n| --- | --- | --- |\n| 1 | 貸与PC | ゼロデイ攻撃によるマルウェア感染 |\n| 2 | 貸与PC | ファイルレスマルウェア攻撃によるマルウェア感染 |\n| 3 | 自宅PC | マルウェア感染した自宅PCからWeb会議への不正アクセス |\n| 4 | クラウドサービスのユーザー認証 | 不正ログインによる情報漏えい |\n\nS君は，R課長の指摘に対して，表1のセキュリティインシデントに対応した次の対策を追加することにした。\n\n・項番1，2の対策として，貸与PCに++⑥EDR（Endpoint Detection and Response）ソフトを導入する++。\n\n・項番3の対策として，T社クラウドサービスは不正アクセス及びマルウェア感染の対策がとられていることを確認した。\n\n・項番4の対策として，知識情報であるIDとパスワードによる認証に加えて，所持情報である従業員のスマートフォンにインストールしたアプリケーションソフトウェアに送信されるワンタイムパスワードを組み合わせて認証を行う，［b］を採用する。\n\nS君は，これらの対策を追加した構築案をR課長に報告し，構築案は了承された。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm1/figure-1.png",
+      "caption": "図1 Q社のネットワーク構成（抜粋）",
+      "sourcePage": 7,
+      "placement": "replace-caption",
+      "anchor": "図1 Q社のネットワーク構成（抜粋）",
+      "alt": "図1 Q社のネットワーク構成（抜粋）。原本の図形・結線・ラベル・注記を保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r06h-pm1/figure-2.png",
+      "caption": "図2 リモート環境構築案（抜粋）",
+      "sourcePage": 9,
+      "placement": "replace-caption",
+      "anchor": "図2 リモート環境構築案（抜粋）",
+      "alt": "図2 リモート環境構築案（抜粋）。原本の図形・結線・ラベル・注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "underline-1": {
+      "sourcePages": [
+        8
+      ],
+      "text": "①境界型防御"
+    },
+    "underline-2": {
+      "sourcePages": [
+        8
+      ],
+      "text": "②課題となっている作業"
+    },
+    "underline-3": {
+      "sourcePages": [
+        9
+      ],
+      "text": "③プロキシを経由する"
+    },
+    "underline-4": {
+      "sourcePages": [
+        9
+      ],
+      "text": "④SIEM（Security Information and Event Management）の導入"
+    },
+    "underline-5": {
+      "sourcePages": [
+        9
+      ],
+      "text": "⑤紛失時の情報漏えいリスクを低減する対策をとる"
+    },
+    "underline-6": {
+      "sourcePages": [
+        10
+      ],
+      "text": "⑥EDR（Endpoint Detection and Response）ソフトを導入する"
+    },
+    "blank-a": {
+      "sourcePages": [
+        8,
+        9
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        10
+      ],
+      "text": "［b］"
+    },
+    "table-1": {
+      "sourcePages": [
+        10
+      ],
+      "anchor": "表1 R課長が懸念したセキュリティインシデント（抜粋）"
+    }
+  },
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の下線①について，++防御できる++攻撃を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "記号",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "explanation": "FWが許可しない通信を遮断することが境界型防御の直接の効果である。内部犯行，許可されたメール経由の未知のマルウェア，ルータ自体の脆弱性は，通信境界の制御だけでは防ぎ切れない。",
+          "rubric": [
+            "境界での通信許可・遮断という機能に対応する選択肢を選ぶ。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "システム管理者による内部犯行"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "パケットフィルタリングのポリシーで許可していない通信による，内部ネットワークへの侵入"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "標的型メール攻撃での，添付ファイル開封による未知のマルウェア感染"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ルータの脆弱性を利用した，インターネット接続の切断"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              8,
+              10
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        8,
+        10
+      ],
+      "bodyRefs": [
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［リモート環境の構築方針］について答えよ。\n本文中の［a］に入れる適切な字句を6字で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ゼロトラスト"
+          ],
+          "explanation": "内部・外部の別で通信を信頼せず，アクセスごとに検証する考え方がゼロトラストである。クラウド移行と端末・認証の対策を関連付けて理解する。",
+          "rubric": [
+            "いかなる通信も信頼しないという本文の定義から名称を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 6,
+          "constraints": [
+            "6字で答える。"
+          ],
+          "evidence": {
+            "questionPages": [
+              8,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        8,
+        11
+      ],
+      "bodyRefs": [
+        "blank-a"
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［リモート環境の構築方針］について答えよ。\n本文中の下線②について，課題となっている作業を25字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "作業",
+          "type": "freeText",
+          "referenceAnswers": [
+            "セキュリティパッチ提供の調査及び適用の判断"
+          ],
+          "explanation": "課題欄ではパッチの提供状況の調査と適用可否の判断に時間が掛かるとされる。SaaSではサービス提供者が基盤やソフトウェアを管理するため，Q社自身のこれらの作業を不要にする方針と対応する。",
+          "rubric": [
+            "パッチ提供の調査と適用判断の両方を述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 25,
+          "evidence": {
+            "questionPages": [
+              8,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        8,
+        11
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［リモート環境構築案の検討］について答えよ。\n本文中の下線③で実現すべきセキュリティ対策を，本文中の字句を用いて15字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "対策",
+          "type": "freeText",
+          "referenceAnswers": [
+            "URLフィルタリング",
+            "業務上不要なサイトへの接続禁止"
+          ],
+          "explanation": "従来のプロキシはURL情報に基づいて業務上不要なサイトを遮断していた。新環境の貸与PCにも同じ接続禁止の方針があり，クラウドのプロキシでURLフィルタリングを実現する。",
+          "rubric": [
+            "本文に示されたURLフィルタリングまたは不要サイトへの接続禁止を答える。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 15,
+          "constraints": [
+            "本文中の字句を用いる。"
+          ],
+          "evidence": {
+            "questionPages": [
+              7,
+              8,
+              9,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        7,
+        8,
+        9,
+        11
+      ],
+      "bodyRefs": [
+        "underline-3"
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［リモート環境構築案の検討］について答えよ。\n本文中の下線④を導入した目的を，［Q社の現状のセキュリティ対策に関する課題］と［リモート環境の構築方針］とを考慮して30字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "目的",
+          "type": "freeText",
+          "referenceAnswers": [
+            "セキュリティインシデントの発生を迅速に検知するため"
+          ],
+          "explanation": "SIEMは様々な機器のログを集約し，相関分析によって異常の兆候を検知する。本文の課題は迅速な検知の仕組みがないことであり，単なるログ保存ではなくインシデントを迅速に検知する目的を答える。",
+          "rubric": [
+            "課題と構築方針に共通する「セキュリティインシデントの迅速な検知」を述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 30,
+          "evidence": {
+            "questionPages": [
+              8,
+              9,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        8,
+        9,
+        11
+      ],
+      "bodyRefs": [
+        "underline-4"
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "［リモート環境構築案の検討］について答えよ。\n本文中の下線⑤について，対策として適切なものを解答群の中から++全て++選び，記号で答えよ。\n\n解答群\nア 貸与PCのストレージ全体を暗号化する。\nイ 貸与PCのモニターにのぞき見防止フィルムを貼付する。\nウ リモートロック及びリモートワイプの機能を導入する。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "全ての記号",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ア，ウ"
+          ],
+          "explanation": "ストレージ暗号化は紛失端末からのデータ読出しを防ぎ，リモートロック・ワイプは第三者による利用や保存情報の残存を抑える。のぞき見防止フィルムは使用中の画面を保護するもので，紛失端末の情報保護には対応しない。",
+          "rubric": [
+            "アとウの両方を挙げ，イを含めない。",
+            "順不同の複数選択なので全体を自己評価する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "全て選び，記号で答える。順不同。"
+          ],
+          "evidence": {
+            "questionPages": [
+              9,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        9,
+        11
+      ],
+      "bodyRefs": [
+        "underline-5"
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "［構築案への指摘と追加対策の検討］について答えよ。\n本文中の下線⑥について，表1の項番1，2のセキュリティインシデントが発生した場合のEDRソフトの動作として適切なものを解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "記号",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "explanation": "EDRは侵入後の端末上の不審な動作を検知して対応する。未知の攻撃やファイルレス攻撃が発生した場合，端末のネットワーク隔離と不審プロセスの終了で拡大を抑える。既知パターンによる侵入防御や機密情報の送信制御とは役割が異なる。",
+          "rubric": [
+            "感染発生後の端末での検知・隔離・対処に着目する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "貸与PCをネットワークから遮断し，不審なプロセスを終了する。"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "登録された振る舞いを行うマルウェアの侵入を防御する。"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "登録した機密情報の外部へのデータ送信をブロックする。"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "パターン情報に登録されているマルウェアの侵入を防御する。"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              10,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        10,
+        11
+      ],
+      "bodyRefs": [
+        "underline-6",
+        "table-1"
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "［構築案への指摘と追加対策の検討］について答えよ。\n本文中の［b］に入れる適切な字句を5字で答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "多要素認証",
+            "2要素認証",
+            "多段階認証",
+            "2段階認証"
+          ],
+          "explanation": "知識情報のパスワードに，所持情報であるスマートフォンへのワンタイムパスワードを組み合わせているため，多要素認証に該当する。公式解答は2要素認証も正答とし，多段階認証・2段階認証も可としている。",
+          "rubric": [
+            "知識と所持という異なる要素を組み合わせた認証を5字で答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 5,
+          "constraints": [
+            "5字で答える。"
+          ],
+          "evidence": {
+            "questionPages": [
+              10,
+              11
+            ],
+            "officialAnswerPage": 1,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        10,
+        11
+      ],
+      "bodyRefs": [
+        "blank-b"
+      ]
+    }
+  ],
+  "author": "/root/author_2024_spring_1_6",
+  "authoringStatus": "independently-reviewed",
+  "status": "reviewed",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm1/question-p07.png",
+    "assets/written/ap-r06h-pm1/question-p08.png",
+    "assets/written/ap-r06h-pm1/question-p09.png",
+    "assets/written/ap-r06h-pm1/question-p10.png",
+    "assets/written/ap-r06h-pm1/question-p11.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm1/question-p07.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm1/question-p08.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm1/question-p09.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm1/question-p10.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm1/question-p11.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問1",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ]
+}

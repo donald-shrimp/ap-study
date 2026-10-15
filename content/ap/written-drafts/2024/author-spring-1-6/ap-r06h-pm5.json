@@ -1,0 +1,611 @@
+{
+  "id": "ap-r06h-pm5",
+  "topicId": "network",
+  "title": "クラウドサービスを活用した情報提供システムの構築",
+  "sourcePages": [
+    31,
+    32,
+    33,
+    34
+  ],
+  "body": "問5 クラウドサービスを活用した情報提供システムの構築に関する次の記述を読んで，設問に答えよ。\n\nL社は，国内の気象情報を様々な業種の顧客に提供する企業である。現在は，社外から購入した気象データを分析し，気象情報として提供している。今回，全国に設置するIoT機器から気象データを収集し，S社のクラウドサービス（以下，S社クラウドという）で分析した結果を気象情報として提供する新しい気象情報システム（以下，新システムという）を構築することになった。新システムの設計を，L社の情報システム部のMさんが担当することになった。\n\nMさんは，新システムの構成と，新システムが備えるべき主な機能を検討した。新システムの構成案を図1に，新システムが備えるべき主な機能を表1に示す。情報提供先のPC，IoT機器やL社の保守用PCから，S社クラウド上に構築された新システムの各機能に対応するサーバにアクセスして，必要な機能を利用する。\n\n図1 新システムの構成案\n\n表1 新システムが備えるべき主な機能\n\n| 機能 | 機能の概要 |\n| --- | --- |\n| データ収集機能 | 全国に設置したIoT機器から気象データを受信し，データ収集用サーバのデータベースに蓄積する。データ収集用サーバにはデータ収集用のWeb API（以下，データ収集APIという）があり，IoT機器はデータ収集APIを利用して気象データを送信する。 |\n| データ分析機能 | データ収集用サーバのデータベースに蓄積した気象データを定期的に処理して気象情報を作成し，情報提供用サーバに保存する。 |\n| 情報提供機能 | 情報提供先からの要求に対して必要な気象情報を送信する。情報提供用サーバには情報提供用のWeb API（以下，情報提供APIという）があり，情報提供先のPC上のアプリケーションプログラム（以下，情報提供先アプリという）の情報提供APIを利用した要求に対して気象情報を送信する。 |\n\nMさんが検討した新システムの構成について，情報システム部のN部長は次の検討を行うようにMさんに指示した。\n\n・IoT機器から送信される気象データの特徴を踏まえて，データ収集APIに用いる通信プロトコルを選定すること。\n\n・新システムにインターネットからアクセス可能な機器の数を最小限にするように，S社クラウド上のFWに設定する通信を許可するルール（以下，FWの許可ルールという）の設計を行うこと。\n\n・将来，IoT機器の数や情報提供先の数が増加した場合に備えて，各機能の処理遅延対策を行うこと。\n\n［データ収集APIに用いる通信プロトコルの検討］\n\nIoT機器は全国に10,000台設置する計画であり，通信事業者のLPWA（Low Power Wide Area）サービスを用いて各IoT機器から1件当たり最大500バイトの気象データを，1分ごとに++①データ収集用サーバに送信する++設計とした。気象データは，1件当たりのデータ量は少ないが，IoT機器からデータ収集用サーバへの通信回数が多く，データ収集用サーバへアクセスが集中するおそれがある。そこで，データ収集APIには，通信の都度TCPコネクションを確立して通信を行うHTTPではなく，++②TCP上でHTTPよりプロトコルヘッダサイズが小さく，多対1通信に対応するプロトコル++を用いることにした。\n\n［FWの許可ルールの設計］\n\nMさんは，S社クラウド上のFWの許可ルールの設計方針を検討した。\n\n・IoT機器からデータ収集用サーバへのアクセスや情報提供先アプリから情報提供用サーバへのアクセスに対しては，通信プロトコルの制限を行うが，インターネットの接続元IPアドレスによる制限は行わない。\n\n・L社の保守用PCから各サーバへのアクセスに対しては，各サーバにログインして更新プログラムの適用などの保守作業を行うために，SSHだけを許可する。\n\n・各サーバからインターネットへのアクセスに対しては，ソフトウェアベンダーのWebサイトから更新プログラムをダウンロードするために，任意のWebサイトへのHTTPSだけを許可する。\n\nMさんが検討した，FWの許可ルールを表2に示す。\n\n表2 FWの許可ルール\n\n| 項番 | アクセス経路 | 送信元 | 宛先 | プロトコル/宛先ポート番号 |\n| --- | --- | --- | --- | --- |\n| 1 | インターネット→S社クラウド | any | 200.a.b.11 | 省略 |\n| 2 | インターネット→S社クラウド | any | ［a］ | TCP/443 |\n| 3 | L社→S社クラウド | ［b］ | 200.a.b.11 | TCP/22 |\n| 4 | L社→S社クラウド | ［b］ | 200.a.b.12 | TCP/22 |\n| 5 | L社→S社クラウド | ［b］ | 200.a.b.13 | TCP/22 |\n| 6 | S社クラウド→インターネット | 200.a.b.11 | any | ［c］ |\n| 7 | S社クラウド→インターネット | 200.a.b.12 | any | ［c］ |\n| 8 | S社クラウド→インターネット | 200.a.b.13 | any | ［c］ |\n\n注記1 FWは，応答パケットを自動的に通過させる，ステートフルパケットインスペクション機能をもつ。\n\n注記2 ルールは項番の小さい順に参照され，最初に該当したルールが適用される。\n\n［処理遅延対策の検討］\n\nMさんは，IoT機器の数や情報提供先の数が現在の計画よりも増加した場合に，表1の各機能の処理にどのような処理遅延が発生するか確認した。\n\nIoT機器の数が増加した場合，全国に設置したIoT機器からS社クラウドのFWを経由してデータ収集用サーバにアクセスする通信が増加する。また，情報提供先の数が増加した場合，情報提供先アプリからS社クラウドのFWを経由して情報提供用サーバにアクセスする通信が増加する。\n\n特に［d］については，データ収集機能の通信と情報提供機能の通信の両方が経由することから，単位時間内に処理できる通信の量を表す［e］と，同時に処理できる接続元の数を表す［f］が，必要な性能を満たすよう管理することにした。\n\nまた，データ収集用サーバと情報提供用サーバの性能を超えた要求が発生して，データ収集APIと情報提供APIの両方に処理遅延が発生した場合の対策として，++③スケールアウトによってシステムの処理性能を高めるために必要な機能++を新システムで利用することにした。\n\nMさんは指示された内容の検討結果をN部長に説明し，了承されたので，新システムの設計及び構築を進めることになった。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm5/figure-1.png",
+      "caption": "図1 新システムの構成案",
+      "sourcePage": 31,
+      "placement": "replace-caption",
+      "anchor": "図1 新システムの構成案",
+      "alt": "図1 新システムの構成案。原本の図形・結線・ラベル・注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        31
+      ],
+      "anchor": "図1 新システムの構成案"
+    },
+    "table-1": {
+      "sourcePages": [
+        31
+      ],
+      "anchor": "表1 新システムが備えるべき主な機能"
+    },
+    "table-2": {
+      "sourcePages": [
+        33
+      ],
+      "anchor": "表2 FWの許可ルール"
+    },
+    "underline-1": {
+      "sourcePages": [
+        32
+      ],
+      "text": "①データ収集用サーバに送信する"
+    },
+    "underline-2": {
+      "sourcePages": [
+        32
+      ],
+      "text": "②TCP上でHTTPよりプロトコルヘッダサイズが小さく，多対1通信に対応するプロトコル"
+    },
+    "underline-3": {
+      "sourcePages": [
+        33
+      ],
+      "text": "③スケールアウトによってシステムの処理性能を高めるために必要な機能"
+    },
+    "blank-a": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［e］"
+    },
+    "blank-f": {
+      "sourcePages": [
+        33
+      ],
+      "text": "［f］"
+    }
+  },
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［データ収集APIに用いる通信プロトコルの検討］について答えよ。\n本文中の下線①について，全国のIoT機器からデータ収集用サーバに送信される1時間当たりの最大になる気象データ量を答えよ。答えはMバイト単位とし，小数第1位を四捨五入して整数で求めよ。ここで，1Mバイトは1,000kバイト，1kバイトは1,000バイトとする。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "データ量（Mバイト）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "300"
+          ],
+          "explanation": "各機器は1分に最大500バイトなので，1時間の総量は10,000台×60回×500バイト＝300,000,000バイト。1Mバイト＝1,000,000バイトだから300Mバイトである。LPWAの通信ヘッダ等は気象データ量に含めない。",
+          "rubric": [
+            "台数・1時間の送信回数・1件のデータ量を掛け，十進単位に換算する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "constraints": [
+            "Mバイト単位。小数第1位を四捨五入して整数。1Mバイト＝1,000kバイト，1kバイト＝1,000バイト。",
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "maxLength": 2000,
+          "evidence": {
+            "questionPages": [
+              32,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        32,
+        34
+      ],
+      "bodyRefs": [
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "［データ収集APIに用いる通信プロトコルの検討］について答えよ。\n本文中の下線②について，適切な通信プロトコル名の略称を5字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "略称",
+          "type": "shortText",
+          "referenceAnswers": [
+            "MQTT"
+          ],
+          "explanation": "MQTTはTCP上で動作する軽量なメッセージングプロトコルで，小さいヘッダとブローカを介する送受信の仕組みをもつ。多数のIoT機器から小さなデータを頻繁に収集する用途に適する。",
+          "rubric": [
+            "TCP上の軽量IoT向けプロトコルを略称で答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 5,
+          "constraints": [
+            "通信プロトコル名の略称。"
+          ],
+          "evidence": {
+            "questionPages": [
+              32,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        32,
+        34
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［FWの許可ルールの設計］について答えよ。\n表2中の［a］〜［c］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "200.a.b.13"
+          ],
+          "explanation": "項番2はインターネットの情報提供先アプリから情報提供用サーバへのHTTPS通信を許可する。図1の情報提供用サーバのIPアドレス200.a.b.13を指定する。",
+          "rubric": [
+            "情報提供機能の宛先サーバのIPアドレスを図1から読む。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              31,
+              32,
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "200.c.d.101"
+          ],
+          "explanation": "L社の保守用PCからのSSHだけを許可する方針なので，送信元には図1の保守用PCのグローバルIPアドレスを指定する。",
+          "rubric": [
+            "保守用PCの接続元IPアドレスを答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              31,
+              32,
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "TCP/443"
+          ],
+          "explanation": "サーバが更新プログラムをダウンロードする通信はHTTPSに限るため，TCPの宛先443番を許可する。SSHの22番は保守PCからログインする方向に使う。",
+          "rubric": [
+            "HTTPSのトランスポートと宛先ポート番号を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              31,
+              32,
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "table-2",
+        "figure-1"
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［FWの許可ルールの設計］について答えよ。\nL社の保守用PCを用いてデータ分析用サーバのOSやミドルウェアなどの更新ファイルをインターネットから取得して適用する場合，表2のどのルールによって許可されるか。表2の項番を全て答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "全ての項番",
+          "type": "freeText",
+          "referenceAnswers": [
+            "4，7"
+          ],
+          "explanation": "保守用PCはSSHでデータ分析用サーバ200.a.b.12へログインするので項番4が必要となる。そのサーバがインターネットからHTTPSで更新を取得する通信は項番7で許可される。応答はFWのステートフル機能で通過するため逆方向用の追加ルールは不要である。",
+          "rubric": [
+            "項番4と7を両方挙げ，他の項番を含めない。",
+            "順不同の複数回答全体を自己評価する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "表2の項番を全て答える。順不同。"
+          ],
+          "evidence": {
+            "questionPages": [
+              32,
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        32,
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "table-2"
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［処理遅延対策の検討］について答えよ。\n本文中の［d］に入れる適切な字句を，図1の構成要素名で答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "FW"
+          ],
+          "explanation": "データ収集用サーバへの通信と情報提供用サーバへの通信の両方が通るのはFWである。サーバごとの負荷だけでなく，共通経路にある機器の処理能力を管理する必要がある。",
+          "rubric": [
+            "二種類の通信が共通して経由する図1の構成要素名を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "constraints": [
+            "図1の構成要素名で答える。",
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "maxLength": 2000,
+          "evidence": {
+            "questionPages": [
+              31,
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        31,
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "blank-d",
+        "figure-1"
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［処理遅延対策の検討］について答えよ。\n本文中の［e］，［f］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "explanation": "単位時間内に処理できる通信量はスループットである。拡張の容易さであるスケーラビリティや，設定するルール数とは区別する。",
+          "rubric": [
+            "通信量を時間で割った処理能力の指標を選ぶ。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "コネクション数"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "スケーラビリティ"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "スループット"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "フィルタリングルール数"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "プロビジョニング"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "ポート数"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "explanation": "同時に処理できる接続数はコネクション数で管理する。単位時間の通信量と同時接続数は異なる性能指標なので，両方を満たす必要がある。",
+          "rubric": [
+            "同時接続を表す指標を選ぶ。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "コネクション数"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "スケーラビリティ"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "スループット"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "フィルタリングルール数"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "プロビジョニング"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "ポート数"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "blank-e",
+        "blank-f"
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "［処理遅延対策の検討］について答えよ。\n本文中の下線③について，新システムに追加する機能の名称を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "記号",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "explanation": "スケールアウトはサーバ台数を増やして処理能力を高める方法であり，要求を複数のサーバに分散するロードバランサーが必要となる。IDSやWAFは攻撃の検知・防御，NASはストレージ共有を担い，この要求分散の機能とは異なる。",
+          "rubric": [
+            "増設したサーバへ要求を分散する機能を選ぶ。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "IDS"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "NAS"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "WAF"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "ロードバランサー"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          },
+          "evidence": {
+            "questionPages": [
+              33,
+              34
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        33,
+        34
+      ],
+      "bodyRefs": [
+        "underline-3"
+      ]
+    }
+  ],
+  "author": "/root/author_2024_spring_1_6",
+  "authoringStatus": "awaiting-independent-review",
+  "status": "draft",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm5/question-p31.png",
+    "assets/written/ap-r06h-pm5/question-p32.png",
+    "assets/written/ap-r06h-pm5/question-p33.png",
+    "assets/written/ap-r06h-pm5/question-p34.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm5/question-p31.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm5/question-p32.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm5/question-p33.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm5/question-p34.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問5",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ]
+}

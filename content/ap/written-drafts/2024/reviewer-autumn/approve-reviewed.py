@@ -1,0 +1,30 @@
+import json,pathlib,hashlib,datetime,sys,fitz
+from PIL import Image
+ROOT=pathlib.Path(__file__).resolve().parents[5];BASE=ROOT/'content/ap/written-drafts/2024';OUT=BASE/'reviewer-autumn'
+def sha(p):return hashlib.sha256((ROOT/p).read_bytes()).hexdigest()
+def canon(x):return hashlib.sha256(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+notes={1:'原問6〜9頁の全文・下線①〜④・表1全6行の会員番号/64桁ハッシュ・全候補7/5件と順を照合。25/漢字3/漢字4/35字・指数表記の条件を確認。21717202と30781985の同一ハッシュ，70^(10−6)を独立計算。2図の完成cropを実表示しラベル欠けなしを確認。',2:'原問10〜13頁の全段落・サービスプロフィットチェーン・空欄a〜f・下線①/②・全9解答欄を照合。8/20/15/8/20/3/25字、本文語句指定と機会/強みの区分を確認。LTVの公式2例を両方保持。未見解答時にd/fを誤ったためその理由を独立記録へ保存し，公式と照合した草稿のリピート率/共感を確認。完成図cropの閉ループ矢印・二系列の括り・全ラベル実表示。',3:'原問14〜17頁の全本文・疑似コード3本の1始まり添字/初期値/コメント/L1〜L3・全9解答欄を全文照合。共通4/5頁も実表示し追加規則の適用範囲を確認。作者実行を流用せず自作Python3本でN2〜300の素数列一致、N20の171/13/2を検算。数式/演算順/奇数の逆添字(t−1)÷2を確認。図はコード文字表示で全行保持。',4:'原問18〜22頁の全文・図1・表1〜5の全行/列・全6候補・11解答欄を照合。整数演算は4記号全てを自己評価とし単一選択にしない。800/500=1.6、100000/(4×500)=50、100000/10000=10、500×8/1000=4、100×8/1000=0.8を独立実計算。小数第2位四捨五入・整数指定・35/30/20字・全原文注記を確認。図1完成crop実表示。',7:'原問36〜40頁の全文・図1/2・表1〜4の全機能/周期/処理時間/注記・全10欄・全5/6候補を照合。a/b順不同は双方自己評価で二機能重複不可のrubric。クロックの再開5msと周期2/5/40ms、40字制限確認。自作Fraction応答時間再帰で倍率2/1.5/1全締切り成立と各低倍率失敗を実検算。音源1ではマイク処理＋特定語検出がともに必要。4cropを全実表示し下線①・矢印・凡例・表の注記まで確認。',8:'原問42〜45頁の全段落・図1全プロトコル/形式と図2全クラス/可視性/引数/戻り型/斜体抽象表記・全10欄・6候補順を照合。d公式例データ取得()、e/f=オ/ア、g/h=XML/HTTPSを条件から確認。親クラス全2件は自己評価で過不足/順不同確認、共通文字コード変換はフォーマット。完成2cropを全表示、図2の凡例/下線①②対応も確認。'}
+notes.update({5:'原問24〜28頁の全本文・図1/2の全IPラベル/ネットワーク線・表1/2の全ルール・全8解答欄・全5候補順を照合。NAPT4字/URL3字・図中語句/機器名条件・eの公式例プロキシサーバ/ip3双方を確認。通信経路とNAPT前後からip1/ip8/443を独立判断。2cropを実表示しFW/L3SW/DMZ/各セグメント/凡例/注記保持を確認。p25のE社外は当初Fに見えたため作者の拡大画像も実表示し下横棒を確認、E社外の原稿が正しいと判定訂正。',6:'原問30〜34頁の全文・表1全8業務要件・表2全8列/表3全3列の定義/分布・図1全エンティティ/主外キー下線/矢印/凡例・SQL全行・全7候補順・全11欄を照合。図示3欄a/b/dは自己評価で向きと多重度を記述し原本図示の代替と明記。追跡番号は主キー指定なし。SQLiteで再帰CTEを独立実行し指定カテゴリ直下/孫の抽出・部分一致・価格/状態除外を検算。索引対象3列/PK既存/1/3>5%を確認。図1完成cropを実表示し図の全ラベル・凡例・全下線/注記を保持。',9:'原問46〜50頁の全段落・表1全2行/表2全4役割の全列/表3全3リスクと下線②④・全8解答欄・全4候補順を照合。20/30/2/40/15字、本文語句条件を確認。市場は消費者向けヘルスケア、製品サービスは健康増進の提供と具体化。未見段階aを回避と誤ったため独立記録へ保存し，会議設置は確率/影響軽減と公式の軽減を照合。b公式の受容/保有を双方保持。3表crop全実表示で全役割/担当/対応策/省略指定/下線範囲を確認。',10:'原問52〜56頁の全段落・表1〜4全行/列・下線①〜③・全7解答欄を照合。10/20/15/35/10字制限と本文/表1語句指定を確認。通常変更から標準変更へ移管する因果とSLA/内部KPIの違いを確認。自作Fractionで700×1.2×1.2/480=2.1を小数第1位切上げ3人日と実検算し，要員数と区別。3cropを全実表示し表1注記3件・表3の全分岐/番号参照まで確認。',11:'原問58〜61頁の全段落・図1全ラベル/データ矢印・表1全4リスク/監査手続/箇条書き・全8欄・全4候補順を照合。5/10字制限と本文語句指定を確認。学習/テスト分離，新製品の手入力，6か月の季節網羅不足，性能要件，目標レベルと指標自体の違い，本番移行前評価，業務側受入を独立判断。図表2cropを全実表示してa〜dと全文章・矢印を確認。当初レビューで問合せ件数の件欠落と誤読したが、元画素拡大で原文は問合せ数はと確認し指摘を撤回。作者初版どおりに戻した最終本文を原本再照合。'})
+ans={1:1,2:1,3:2,4:2,5:3,6:3,7:4,8:4,9:5,10:5,11:6};cmnt={1:1,2:1,3:1,4:1,5:2,6:2,7:2,8:2,9:3,10:3,11:3}
+for n in map(int,sys.argv[1:]):
+ cid=f'ap-r06a-pm{n}';p=next(BASE.glob(f'author-autumn*/{cid}.json'));case=json.loads(p.read_text());evidence=json.loads((p.parent/'evidence.json').read_text());ec=evidence['cases'][cid]
+ # Re-render each full page directly from the official PDF and compare every pixel.
+ pdf=fitz.open(BASE/'sources/2024r06a_ap_pm_qs.pdf')
+ pixelchecks=[]
+ for path in case['sourceImages']:
+  page=int(path.split('question-p')[1].split('.')[0]);pix=pdf[page-1].get_pixmap(matrix=fitz.Matrix(2,2));im=Image.open(ROOT/path).convert('RGB');expected=Image.frombytes('RGB',[pix.width,pix.height],pix.samples)
+  assert im.size==expected.size and im.tobytes()==expected.tobytes(),path
+  pixelchecks.append({'path':path,'pdfPage':page,'officialRenderPixelEqual':True})
+ for crop in ec.get('crops',[]):
+  src=Image.open(ROOT/crop['source']);actual=Image.open(ROOT/crop.get('output',crop.get('path')));assert actual.mode==src.mode and actual.size==src.crop(crop.get('box',crop.get('rect'))).size and actual.tobytes()==src.crop(crop.get('box',crop.get('rect'))).tobytes(),crop
+ for i in case['items']:
+  for f in i['fields']:
+   if f['type']!='singleChoice':assert 'maxLength' in f and all(len(a)<=f['maxLength'] for a in f['referenceAnswers'])
+   else:assert all(a['id'].isascii() for a in f['choices'])
+ case['status']='reviewed';case['authoringStatus']='independently-reviewed'
+ assets=case['sourceImages']+[f['image'] for f in case.get('bodyFigures',[])]+[f'content/ap/written-drafts/2024/sources/2024r06a_ap_pm_ans-p0{ans[n]}.png',f'content/ap/written-drafts/2024/sources/2024r06a_ap_pm_cmnt-p0{cmnt[n]}.png']
+ if n==11:
+  assert '問合せ数は' in case['body'] and '問合せ件数は' not in case['body']
+  assets.append('content/ap/written-drafts/2024/reviewer-autumn/pm11-wording-check.png')
+ review={'caseId':cid,'version':case['version'],'status':'approved','author':case['author'],'reviewer':'/root/review_2024_autumn','reviewedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'canonicalCaseSHA256':canon(case),'sourceEvidence':str((BASE/'sources/sources.json').relative_to(ROOT)),'sourceHashes':{f'content/ap/written-drafts/2024/sources/2024r06a_ap_pm_{kind}.pdf':sha(f'content/ap/written-drafts/2024/sources/2024r06a_ap_pm_{kind}.pdf') for kind in ['qs','ans','cmnt']},'assetHashes':{path:sha(path) for path in assets},'method':notes[n],'answerCheck':'作者草稿と公式解答例を読む前に原問全頁をview_imageで実表示し，ケースごとにindependent-findings.jsonへ解答方針を保存。次に公式解答例/講評の当該ページも実表示して全欄照合。草稿本文・全欄・制約・全図を照合し、最終canonicalと全原本/図SHAを独立再計算。','gradingCheck':'説明文・順不同の複数項目・図示は自己評価。短答は登録例一致だけ自動正解、未登録は自己評価へ。公式配点/部分点を推測せず学習用rubricと明記。原文無指定2000字は入力上限として区別。','pixelChecks':pixelchecks,'cropChecks':ec.get('crops',[]),'independentEvidence':['content/ap/written-drafts/2024/reviewer-autumn/independent-findings.json','content/ap/written-drafts/2024/reviewer-autumn/independent-calculations.json'],'findings':([{'issue':'原本にない設問3(2)の全てへの下線','resolution':'作者が原本p34を拡大再確認して下線を削除。主担当確認者も原本/最終promptを再照合。','status':'resolved'}] if n==6 else [{'issue':'レビュー担当が原文問合せ数を問合せ件数と誤読し、不要な件追加を要求した。','resolution':'原本元画素cropを拡大実表示して誤読を確認、指摘を撤回。作者が初版の原文表記問合せ数へ復元した最終本文を再照合。','status':'resolved'}] if n==11 else [])}
+ (OUT/f'approved-case-{cid}.json').write_text(json.dumps(case,ensure_ascii=False,indent=2)+'\n');(OUT/f'review-{cid}.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n');print(cid,review['canonicalCaseSHA256'])

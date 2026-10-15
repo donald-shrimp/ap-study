@@ -1,0 +1,597 @@
+{
+  "id": "ap-r06h-pm6",
+  "topicId": "database",
+  "title": "人事評価システムの設計と実装",
+  "sourcePages": [
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "body": "問6 人事評価システムの設計と実装に関する次の記述を読んで，設問に答えよ。\n\nK社は，人事評価システムを中小企業に提供するSaaS事業者である。現在は，契約している会社ごとに仮想サーバを作成して，その中にデータベースを個別に作成している。現在のシステムのOSやフレームワークのサポート期限が迫ってきたのを機に，機能は変更せずにサーバリソース最適化を目的として，システムを再構築することにした。\n\n［人事評価システムの機能概要］\n\n人事評価システムの機能概要を表1に示す。\n\n表1 人事評価システムの機能概要\n\n| 機能名 | 概要 |\n| --- | --- |\n| 祝日管理 | 国民の祝日に加えて，創立記念日などの会社ごとの記念日を年月日で管理する。 |\n| 入社 | 従業員が入社した際，従業員番号を割り振り，配属先の部署及び入社年月日を登録する。 |\n| 評価者管理 | 部署の管理者を評価者として登録する。1人の従業員が複数の部署を管理する場合がある。管理者の評価者は，評価時に個別に設定する。 |\n| 目標設定 | 年度の始めに，その年度の目標を設定する。目標は複数設定することができ，重要度や達成までの期間などを考慮して重み付けする。 |\n| 実績入力 | 年度の終わりに，その年度の実績を入力する。実績は，年度の始めに設定した目標に対して，実績内容や目標達成度を自己評価として記入する。 |\n| 評価 | 年度の終わりに，管理者は評価対象の従業員が設定した目標とそれに対する実績を評価して，評価内容や達成度合を記入する。 |\n| 退職 | 従業員の退職が決まると，その退職年月日と在籍期間を登録する。さらに，部署の管理者や人事部が対象の従業員にヒアリングした退職理由を登録する。 |\n| 退職分析 | 人事部の管理者が自社及び自社と同じ業種の退職者について，在籍期間と退職理由を分析する。 |\n\n［単一データベース・単一スキーマ方式の検討］\n\nデータベースのリソースを最適化するために，会社ごとに個別に作成していたデータベース及びスキーマを一つにまとめることを考える。検討したE-R図を図1に示す。なお，再構築するシステムでは，E-R図のエンティティ名を表名に，属性名を列名にして，適切なデータ型で表定義した関係データベースによって，データを管理する。\n\n図1 E-R図\n\n図1を関係データベースに実装した際のSQL文を考える。\n\n(1) 指定された会社と年度における，国民の祝日と会社記念日の一覧を日付の昇順に出力するSQL文を図2に示す。ここで“:会社番号”は指定された会社の会社番号を，“:年度開始日”，“:年度終了日”は，それぞれ指定された年度の開始日，終了日を表す埋込み変数である。\n\n```sql\nSELECT 祝日 AS 日付, 祝日名 AS 日付名\nFROM 国民の祝日\nWHERE 祝日 ［b］\nUNION ALL\nSELECT 会社記念日 AS 日付, 会社記念日名 AS 日付名\nFROM 会社記念日\nWHERE 会社番号 = :会社番号\n  AND 会社記念日 ［b］\n［c］ 日付\n```\n\n図2 国民の祝日と会社記念日の一覧を日付の昇順に出力するSQL文\n\n(2) 指定された管理者が評価する対象の従業員の一覧を部署番号，従業員番号の昇順に出力するSQL文を図3に示す。ここで“:会社番号”と“:管理者番号”は，それぞれ指定された管理者の会社番号と従業員番号を表す埋込み変数である。\n\n```sql\nSELECT DEP.部署番号, DEP.部署名, EMP.従業員番号, EMP.従業員氏名\nFROM 従業員 EMP INNER JOIN 部署 DEP\n  ON EMP.会社番号 = DEP.会社番号\n    AND ［d］\n    AND EMP.会社番号 = :会社番号\n    AND DEP.管理者番号 = :管理者番号\n［c］ DEP.部署番号, EMP.従業員番号\n```\n\n注記 ［c］には，図2中の［c］と同じ字句が入る。\n\n図3 従業員の一覧を部署番号，従業員番号の昇順に出力するSQL文\n\n［単一データベース・単一スキーマ方式のレビュー］\n\n検討した単一データベース・単一スキーマ方式のレビューを受けたところ，次の指摘とアドバイスを受けた。\n\n・指摘\n\nこの検討案は，サーバリソース最適化を実現することができるが，SQLインジェクションの脆弱性が見つかってしまった場合，多くの情報が漏えいしてしまうおそれがある。\n\n・アドバイス\n\nデータベースは一つのまま，システム全体で共有するデータだけを格納する共有用のスキーマと，++①システム利用者の会社ごとのスキーマに分ける方式++にするとよい。共有用のスキーマに作成した表は，会社ごとのスキーマに対象の表と同じ名前のビューを作成して照会できるようにすると，現在のシステムのSQL文への修正を少なくすることができる。\n\n［単一データベース・個別スキーマ方式の検討］\n\n［単一データベース・単一スキーマ方式のレビュー］のアドバイスを受け，複数のスキーマを作成して各スキーマに表とビューを配置する。検討したスキーマを整理した結果を表2に示す。\n\n表2 スキーマを整理した結果\n\n| スキーマ種類 | スキーマ名 | 配置する表 | 配置するビュー |\n| --- | --- | --- | --- |\n| 共有用 | PUB | 会社，国民の祝日 | — |\n| 個別会社用 | Cxxx（xxxは任意の英数字） | 会社記念日，従業員，部署，目標，実績，評価，退職 | 会社，国民の祝日 |\n\n次に，ビューを作成するSQL文について考える。\n\nスキーマC001に国民の祝日ビューを作成するSQL文を図4に示す。\n\n```sql\nCREATE VIEW ［e］ (祝日, 祝日名)\nAS SELECT 祝日, 祝日名\nFROM ［f］\n```\n\n図4 国民の祝日ビューを作成するSQL文\n\n［単一データベース・個別スキーマ方式のレビュー］\n\n検討した単一データベース・個別スキーマ方式のレビューを受けたところ，次の指摘を受けた。\n\n・システム利用者ごとに，利用するスキーマを指定するために，［g］表に［h］列を追加する必要がある。\n\n・表2の表とビューの配置のままでは++②利用できない機能++があるので，++③配置を一部見直す++必要がある。\n\nレビューで受けた指摘に全て対応することで，システムを再構築することができた。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm6/figure-1.png",
+      "caption": "図1 E-R図",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "図1 E-R図",
+      "alt": "図1 E-R図。原本の図形・結線・ラベル・注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        36
+      ],
+      "anchor": "図1 E-R図"
+    },
+    "figure-2": {
+      "sourcePages": [
+        36
+      ],
+      "anchor": "図2 国民の祝日と会社記念日の一覧を日付の昇順に出力するSQL文"
+    },
+    "figure-3": {
+      "sourcePages": [
+        37
+      ],
+      "anchor": "図3 従業員の一覧を部署番号，従業員番号の昇順に出力するSQL文"
+    },
+    "figure-4": {
+      "sourcePages": [
+        38
+      ],
+      "anchor": "図4 国民の祝日ビューを作成するSQL文"
+    },
+    "table-1": {
+      "sourcePages": [
+        35
+      ],
+      "anchor": "表1 人事評価システムの機能概要"
+    },
+    "table-2": {
+      "sourcePages": [
+        38
+      ],
+      "anchor": "表2 スキーマを整理した結果"
+    },
+    "underline-1": {
+      "sourcePages": [
+        37
+      ],
+      "text": "①システム利用者の会社ごとのスキーマに分ける方式"
+    },
+    "underline-2": {
+      "sourcePages": [
+        38
+      ],
+      "text": "②利用できない機能"
+    },
+    "underline-3": {
+      "sourcePages": [
+        38
+      ],
+      "text": "③配置を一部見直す"
+    },
+    "blank-a": {
+      "sourcePages": [
+        36
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        36
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        36
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        37
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［e］"
+    },
+    "blank-f": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［f］"
+    },
+    "blank-g": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［g］"
+    },
+    "blank-h": {
+      "sourcePages": [
+        38
+      ],
+      "text": "［h］"
+    }
+  },
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［単一データベース・単一スキーマ方式の検討］について答えよ。\n図1中の［a］に入れる適切なエンティティ間の関連を答え，E-R図を完成させよ。なお，エンティティ間の関連の表記は，図1の凡例に倣うこと。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a（エンティティ間の関連）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "→"
+          ],
+          "explanation": "評価者管理では，1人の従業員が複数の部署の管理者となる場合がある。一つの部署には管理者番号が一つ設定されるので，従業員から部署へ向かう1対多の関連を示す右向き矢印となる。既に上側に描かれている所属部署と従業員の関連とは異なる。",
+          "rubric": [
+            "従業員側が1，部署側が多となる関連を図1の向きで確認する。",
+            "公式解答の矢印は従業員→部署。現UIでは描画できないため，矢印の向き・1対多の内容を記述して原本と自己確認する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "constraints": [
+            "原問はE-R図を図1の凡例に倣って完成する要求。現UIでは図の内容（従業員から部署への1対多の矢印）を記述し自己確認する。",
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "maxLength": 2000,
+          "evidence": {
+            "questionPages": [
+              35,
+              36,
+              38
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        35,
+        36,
+        38
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "blank-a"
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "［単一データベース・単一スキーマ方式の検討］について答えよ。\n図2中の［b］，図2及び図3中の［c］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "freeText",
+          "referenceAnswers": [
+            "BETWEEN :年度開始日 AND :年度終了日"
+          ],
+          "explanation": "祝日と会社記念日の両方を，指定年度の開始日から終了日までの範囲に絞る。BETWEENは両端を含むので年度の開始日・終了日も対象になる。",
+          "rubric": [
+            "比較対象の日付を年度開始日以上・年度終了日以下にする。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ORDER BY"
+          ],
+          "explanation": "図2は日付順，図3は部署番号・従業員番号順に並べる。昇順はORDER BYの既定であり，空欄にはORDER BYを入れる。",
+          "rubric": [
+            "結果を指定列の昇順に並べる句を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38
+      ],
+      "bodyRefs": [
+        "figure-2",
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q1-3",
+      "label": "設問1(3)",
+      "prompt": "［単一データベース・単一スキーマ方式の検討］について答えよ。\n図3中の［d］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "freeText",
+          "referenceAnswers": [
+            "EMP.部署番号 = DEP.部署番号"
+          ],
+          "explanation": "会社番号だけで結合すると，同じ会社の全ての部署と従業員が組み合わされてしまう。従業員の所属部署番号と部署表の部署番号を一致させ，管理者番号が指定された部署に所属する従業員を抽出する。",
+          "rubric": [
+            "同一会社という既存条件に加え，従業員の所属部署番号を部署表と対応させる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "本文中の下線①の方式にする利点は何か。20字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "利点",
+          "type": "freeText",
+          "referenceAnswers": [
+            "漏れる情報を会社単位に制限できる。"
+          ],
+          "explanation": "会社ごとにスキーマを分け，会社の接続権限を当該スキーマに限定することで，SQLインジェクション等があっても他社情報まで漏れる被害範囲を狭められる。単に整理しやすいという利便性ではなく，本文で指摘された情報漏えいへの利点を答える。",
+          "rubric": [
+            "漏えい時の情報の範囲を会社単位に限定できることを述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "evidence": {
+            "questionPages": [
+              37,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        37,
+        39
+      ],
+      "bodyRefs": [
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図4中の［e］，［f］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "C001.国民の祝日"
+          ],
+          "explanation": "ビューは個別会社用のC001スキーマ内に作成する。元表と同じ名前にして既存SQLの修正を減らす。",
+          "rubric": [
+            "作成先スキーマC001とビュー名を指定する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "PUB.国民の祝日"
+          ],
+          "explanation": "全社共通の国民の祝日の元表は共有用PUBスキーマに配置されている。ビューの参照元にはそのスキーマ名付きの表名を指定する。",
+          "rubric": [
+            "共有スキーマPUBの元表を参照する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "figure-4"
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "［単一データベース・個別スキーマ方式のレビュー］について答えよ。\n本文中の［g］，［h］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "会社"
+          ],
+          "explanation": "会社ごとに利用するスキーマを特定するため，会社に対応する情報として会社表にスキーマ名を持たせる。",
+          "rubric": [
+            "スキーマと対応させる会社の表を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "h",
+          "label": "h",
+          "type": "shortText",
+          "referenceAnswers": [
+            "スキーマ名"
+          ],
+          "explanation": "接続する会社を識別した後，その会社のデータが格納されたスキーマを選べるように，会社表へスキーマ名の列を追加する。",
+          "rubric": [
+            "会社と使用スキーマを対応付ける列を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "blank-g",
+        "blank-h"
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "［単一データベース・個別スキーマ方式のレビュー］について答えよ。\n本文中の下線②の機能を，表1の機能名から答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "機能名",
+          "type": "shortText",
+          "referenceAnswers": [
+            "退職分析"
+          ],
+          "explanation": "退職分析は自社だけでなく，同業種の他社の退職者についても分析する機能である。退職表が会社別スキーマ内に閉じている現配置では，他社の退職データを参照できない。",
+          "rubric": [
+            "自社と同業種の他社データを必要とする表1の機能名を答える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "constraints": [
+            "表1の機能名から答える。",
+            "原問に字数指定なし。2000字はアプリ入力上限。"
+          ],
+          "maxLength": 2000,
+          "evidence": {
+            "questionPages": [
+              35,
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        35,
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "underline-2",
+        "table-1"
+      ]
+    },
+    {
+      "id": "q4-3",
+      "label": "設問4(3)",
+      "prompt": "［単一データベース・個別スキーマ方式のレビュー］について答えよ。\n本文中の下線③の見直した内容を，20字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "見直した内容",
+          "type": "freeText",
+          "referenceAnswers": [
+            "退職表を共有用スキーマに配置する。"
+          ],
+          "explanation": "同業種の他社の退職者を分析できるように，退職表を共有用スキーマへ移す。会社表の業種と退職情報を関連付けて必要な範囲を分析できるようにする。他社スキーマを無制限に参照可能にするという変更ではない。",
+          "rubric": [
+            "退職表を共有用スキーマへ配置する変更を述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "evidence": {
+            "questionPages": [
+              35,
+              38,
+              39
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        35,
+        38,
+        39
+      ],
+      "bodyRefs": [
+        "underline-3",
+        "table-2"
+      ]
+    }
+  ],
+  "author": "/root/author_2024_spring_1_6",
+  "authoringStatus": "independently-reviewed",
+  "status": "reviewed",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm6/question-p35.png",
+    "assets/written/ap-r06h-pm6/question-p36.png",
+    "assets/written/ap-r06h-pm6/question-p37.png",
+    "assets/written/ap-r06h-pm6/question-p38.png",
+    "assets/written/ap-r06h-pm6/question-p39.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm6/question-p35.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm6/question-p36.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm6/question-p37.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm6/question-p38.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm6/question-p39.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問6",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ]
+}

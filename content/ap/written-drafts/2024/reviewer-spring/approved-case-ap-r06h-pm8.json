@@ -1,0 +1,477 @@
+{
+  "id": "ap-r06h-pm8",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "development",
+  "title": "ダッシュボードの設計",
+  "status": "reviewed",
+  "sourceKind": "official",
+  "body": "問8 ダッシュボードの設計に関する次の記述を読んで，設問に答えよ。\n\nY社は，食品などを販売する店舗を経営する企業である。複数ある店舗では，商品の販売状況や在庫状況に合わせて，割引率を設定したり，店舗間で在庫の移動を行ったりしている。販売に関する情報は販売管理システムで管理しているが，状況をリアルタイムで監視するには不向きであった。そこで，販売状況をリアルタイムで監視できるシステム（以下，ダッシュボードという）を開発することにした。\n\nY社では，商品ごとに商品分類を設定し，売上金額や販売数の集計に利用している。Y社が扱う情報のデータモデル（抜粋）を図1に，ダッシュボードのイメージ（一部）を図2に示す。\n\n図1 データモデル（抜粋）\n\n図2 ダッシュボードのイメージ（一部）\n\n販売状況や在庫状況はデータベースで管理する。データベースに新たな販売実績が追加されたり，在庫数が更新されたりすると，その内容がダッシュボードに随時反映され，最新の情報が表示される。\n\nY社は，ダッシュボードの開発をZ社に依頼し，Z社はその設計に取り掛かった。\n\n［ダッシュボードのクラスの設計］\n\nZ社は，ダッシュボードのクラスの設計を行った。設計したクラス図を図3に，表示できるグラフの種類を表1に，主なクラスの説明を表2に示す。Controllerクラスは，システム全体の挙動を制御するクラスである。Viewクラスは，画面にグラフを表示する機能をもつクラスである。グラフには複数の種類があるので，その種類ごとに，Viewクラスを［a］したクラスを作成する。Subjectクラスは，データベースが更新されたことをViewクラスのオブジェクトに通知するクラスである。図1のデータモデル中のテーブルのうち，ダッシュボードで監視したい情報に関するテーブルのそれぞれについて，Subjectクラスを［a］したクラスを作成する。以下，Viewクラス，Subjectクラスを［a］したクラスのオブジェクトを，それぞれViewオブジェクト，Subjectオブジェクトという。\n\n図3 クラス図\n\n表1 表示できるグラフの種類\n\n| 種類 | グラフの構成要素 | 説明 |\n| --- | --- | --- |\n| 棒グラフ | 横軸の項目，集計対象の項目，分類 | 横軸の項目について，任意の値の範囲で区切り，集計対象の項目の値を縦棒で表現する。縦棒の値は，分類ごとに色分けし，それらを積み上げて表示する。 |\n| 円グラフ | 集計対象の項目，分類 | 集計対象の項目について，分類ごとに集計して，その割合を扇形の面積で表現する。扇形は分類ごとに色分けして表示する。 |\n| 折れ線グラフ | 横軸の項目，集計対象の項目，分類 | 横軸の項目について，任意の値の範囲で区切り，集計対象の項目の値の推移を折れ線で表現する。折れ線は分類ごとに分けて表示する。 |\n\n表2 主なクラスの説明\n\n| クラス | 説明 |\n| --- | --- |\n| Controller | プログラムの流れを制御するクラス。データベースが更新されたときに，更新されたテーブル名の配列を引数にして，dbUpdatedメソッドを呼び出す。 |\n| DAO | データベースにアクセスするためのクラス。 |\n| Subject | データの更新をViewオブジェクトに通知するクラス。通知先は，addObserverメソッドで登録する。notifyObserversメソッドは，登録された全ての通知先のnotifyメソッドを呼び出す。 |\n| View | ダッシュボードに一つのグラフを表示するクラス。グラフの軸や集計対象の項目の情報を，集計項目オブジェクトの配列で保持している。notifyメソッドは，画面表示更新メソッドを呼び出す。画面表示更新メソッドは，対象に関する集計を行い，画面の表示を更新する。 |\n| 集計処理 | グラフを表示する際に必要になる，各種の集計の処理を実装したクラス。 |\n\n［グラフの新規表示］\n\n例えば，“時間帯ごと商品分類ごとの売上金額”のグラフを新たに画面上に表示する場合を考える。グラフの種類は棒グラフなので，棒グラフViewクラスのオブジェクトを作成する。次に，++①関係するSubjectオブジェクト++のaddObserverメソッドを呼び出す。その後，画面の初期表示のために，画面表示更新メソッドを呼び出す。\n\n［グラフの表示内容更新］\n\n店舗で商品が販売されると，販売管理システムが，データベースにレコードを追加する。このとき，ダッシュボードのControllerクラスに実装されているdbUpdatedメソッドが呼び出されるように，システム間の連携が行われている。\n\nControllerクラスは，dbUpdatedメソッドが呼び出されると，更新されたテーブルに対応するSubjectオブジェクトのnotifyObserversメソッドを呼び出す。notifyObserversメソッドは，そのオブジェクトが属性としてもつ配列viewsに格納されている全てのViewオブジェクトのnotifyメソッドを呼び出す。notifyメソッドは，画面表示更新メソッドを呼び出す。Viewクラスの画面表示更新メソッドは［d］メソッドなので，例えば，“時間帯ごと商品分類ごとの売上金額”の場合は［e］クラスに実装されたメソッドを呼び出す。\n\n［データのフィルタリング］\n\nY社からの追加の要求で，集計結果をフィルタリングする機能を追加することになった。例えば，“時間帯ごと商品分類ごとの売上金額”のグラフ上で，特定の商品分類の表示箇所をマウスでクリックしたときに，表示されている全てのグラフについて，指定した商品分類で絞り込んだ結果を表示したい。そこで，絞込条件を取り扱うクラスとして絞込条件クラスを導入し，次の改修を加えることで機能を実現することにした。\n\n・絞込条件クラスは，属性として“テーブル名”，“項目名”，“絞込条件の値”をもつ。例えば，商品分類で絞り込む場合は，テーブル名に“商品マスタ”，項目名に“商品分類コード”，絞込条件の値に“商品分類コードの値”が入る。\n\n・Controllerクラスの属性に絞込条件クラスのオブジェクトを追加し，その属性に条件を設定するためのsetFilterメソッドを追加する。\n\n・Viewオブジェクトが画面の表示を更新する際に，絞込条件のオブジェクトが引き渡されるようにするために，SubjectクラスのnotifyObserversメソッドと，Viewクラスのnotifyメソッドのそれぞれについて，呼出しの++②仕様を変更する++。\n\n・集計処理クラスの処理で絞込条件を考慮して集計し，画面を更新する。\n\n画面の操作が行われたら，Viewオブジェクトが絞込条件オブジェクトを生成し，ControllerオブジェクトのsetFilterメソッドを呼び出す。その後，全てのViewオブジェクトの画面表示更新メソッドを呼び出すことで，機能を実現する。\n\n［過負荷の回避］\n\n設計レビューを実施したところ，次の点が指摘された。\n\n・販売管理システムが，データベースに販売実績のレコードを連続で追加すると，ダッシュボードが過負荷になるおそれがある。\n\n・一つのViewオブジェクトは［f］ので，1回の販売実績の登録で，表示の更新が複数回発生してしまう。\n\nそこで，Viewクラスの属性に“更新フラグ”を追加し，notifyメソッドでは画面表示更新メソッドを呼び出すのではなく，“更新フラグ”を立てるようにした。また，“更新フラグ”を立てる処理とは別に，定期的に画面表示更新メソッドを呼び出す仕組みを用意し，“更新フラグ”が立っている場合だけ画面の更新処理を実行してから“更新フラグ”を降ろすようにした。",
+  "sourceImages": [
+    "assets/written/ap-r06h-pm8/question-p45.png",
+    "assets/written/ap-r06h-pm8/question-p46.png",
+    "assets/written/ap-r06h-pm8/question-p47.png",
+    "assets/written/ap-r06h-pm8/question-p48.png",
+    "assets/written/ap-r06h-pm8/question-p49.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_pm_cmnt.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の［a］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "継承"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "棒グラフViewなどはViewの機能を受け継ぎ，種類に応じた処理を追加する。各Subjectの派生クラスも同様であり，図3の白抜き三角形が示す継承関係に対応する。",
+          "rubric": [
+            "棒グラフViewなどはViewの機能を受け継ぎ，種類に応じた処理を追加する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              46,
+              49
+            ],
+            "bodyRefs": [
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        46,
+        49
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図3中の［b］，［c］に入れる適切なクラス間の関係又は多重度を答え，クラス図を完成させよ。なお，表記は図3の凡例に倣うこと。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b：多重度",
+          "type": "shortText",
+          "referenceAnswers": [
+            "0..*"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "一つのSubjectには複数のViewを通知先として登録でき，まだ登録がなければ0個である。そのためSubjectから見たView側の多重度は0..*となる。",
+          "rubric": [
+            "一つのSubjectには複数のViewを通知先として登録でき，まだ登録がなければ0個である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図3の凡例に倣う。",
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              46,
+              49
+            ],
+            "bodyRefs": [
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "c",
+          "label": "c：クラス間の関係",
+          "type": "freeText",
+          "referenceAnswers": [
+            "△（白抜き三角形，下から縦線でつなぐ上向きの継承矢印）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "販売実績Subject・在庫Subject・販売明細SubjectはSubjectを，棒グラフView等はViewを継承する。原図では上にある親クラスを指す白抜き三角形と縦線で継承関係を描く。図示の表記条件も自己評価し，単に用語が一致しただけでは自動正解にしない。 公式解答は図記号であり，ここに示した解答例の括弧内はその記号を文字で説明したもので，公式解答の文章ではない。",
+          "rubric": [
+            "親クラス（Subject又はView）へ向かう継承関係である。",
+            "凡例に倣い白抜き三角形と下からの実線で上向きに表す。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図3の凡例に倣ってクラス間の関係を描く。",
+            "この入力欄では記号又は向きを文章で表し，自己評価で白抜き三角形の継承矢印も確認する。",
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              46,
+              49
+            ],
+            "bodyRefs": [
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2,
+            "officialAnswerRepresentation": "公式図記号（上向き白抜き三角形と縦線）を文字で説明。原図は公式解答PDF4頁。"
+          }
+        }
+      ],
+      "sourcePages": [
+        46,
+        49
+      ],
+      "bodyRefs": [
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "本文中の下線①について，関係するSubjectオブジェクトのクラス名を図3中から選び++全て++答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "クラス名（全て）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "販売実績Subject，販売明細Subject"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "時間帯は販売実績の販売日時から，商品分類ごとの売上は販売明細の商品コード・単価・数量を商品マスタ等と結び付けて集計する。販売実績と販売明細のどちらの更新も反映する必要があるので，両Subjectへ登録する。在庫Subjectはこのグラフの集計対象ではない。",
+          "rubric": [
+            "販売実績Subjectと販売明細Subjectの両方を挙げる。",
+            "在庫Subject等の無関係なクラスを混ぜない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図3中からクラス名を全て答える。",
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              45,
+              46,
+              47,
+              49
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "figure-3",
+              "underline-1"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        45,
+        46,
+        47,
+        49
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "figure-3",
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "本文中の［d］，［e］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "抽象"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "図3のViewにある画面表示更新は斜体で記され，凡例は斜字体が抽象を意味するとしている。共通のViewでは具体的な描画を定めず，派生クラスで実装する抽象メソッドである。",
+          "rubric": [
+            "図3のViewにある画面表示更新は斜体で記され，凡例は斜字体が抽象を意味するとしている。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              45,
+              46,
+              48,
+              49
+            ],
+            "bodyRefs": [
+              "figure-2",
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "棒グラフView"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "時間帯ごと商品分類ごとの売上金額は棒グラフとして表示するので，実行時のオブジェクトに応じて棒グラフViewクラスで実装された画面表示更新メソッドを呼び出す。",
+          "rubric": [
+            "時間帯ごと商品分類ごとの売上金額は棒グラフとして表示するので，実行時のオブジェクトに応じて棒グラフViewクラスで実装された画面表示更新メソッドを呼び出す。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原問に字数指定なし。入力上限2000字はアプリ上の制約。"
+          ],
+          "evidence": {
+            "questionPages": [
+              45,
+              46,
+              48,
+              49
+            ],
+            "bodyRefs": [
+              "figure-2",
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        45,
+        46,
+        48,
+        49
+      ],
+      "bodyRefs": [
+        "figure-2",
+        "figure-3"
+      ]
+    },
+    {
+      "id": "q5",
+      "label": "設問5",
+      "prompt": "本文中の下線②について，仕様変更の内容を30字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "仕様変更の内容",
+          "type": "freeText",
+          "referenceAnswers": [
+            "引数に絞込条件クラスのオブジェクトを追加する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "SubjectのnotifyObserversからViewのnotifyへと呼出しが伝わる際，絞込条件を引き渡す必要がある。このため両メソッドの引数に絞込条件オブジェクトを加える。クラスの関連構造そのものの変更ではなく，メソッド呼出し仕様として答える。",
+          "rubric": [
+            "両メソッドの引数に絞込条件クラスのオブジェクトを追加すると述べる。",
+            "クラス間の関連の変更だけに終始しない。",
+            "30字以内で答える。"
+          ],
+          "maxLength": 30,
+          "constraints": [],
+          "evidence": {
+            "questionPages": [
+              48,
+              49
+            ],
+            "bodyRefs": [
+              "underline-2"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        48,
+        49
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ]
+    },
+    {
+      "id": "q6",
+      "label": "設問6",
+      "prompt": "本文中の［f］に入れる適切な字句を，30字以内で答えよ。",
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "freeText",
+          "referenceAnswers": [
+            "複数のSubjectオブジェクトに登録される"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "一つのグラフが販売実績と販売明細など複数テーブルを集計する場合，同じViewが複数Subjectの通知先となる。1回の販売で複数テーブルが更新されると，各Subjectから同じViewのnotifyが呼ばれるため，表示更新が重複する。更新フラグで通知をまとめ，定期更新時に一度だけ反映する対策につながる。",
+          "rubric": [
+            "一つのViewが複数のSubjectの通知先として登録されると述べる。",
+            "複数のViewが登録されるという主客逆転を避ける。",
+            "30字以内で空欄に続く「ので」とつながる表現にする。"
+          ],
+          "maxLength": 30,
+          "constraints": [],
+          "evidence": {
+            "questionPages": [
+              45,
+              46,
+              47,
+              48,
+              49
+            ],
+            "bodyRefs": [
+              "figure-1",
+              "figure-3"
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "figure-3"
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和6年度春期 応用情報技術者試験 午後 問8",
+  "sourcePages": [
+    45,
+    46,
+    47,
+    48,
+    49
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06h-pm8/question-p45.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm8/question-p46.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm8/question-p47.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm8/question-p48.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06h-pm8/question-p49.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06h-pm8/figure-1.png",
+      "caption": "図1 データモデル（抜粋）",
+      "sourcePage": 45,
+      "placement": "replace-caption",
+      "anchor": "図1 データモデル（抜粋）",
+      "alt": "店舗マスタ，販売実績，在庫，販売明細，商品分類マスタ，商品マスタの項目と関連。1対1，1対多，多対多の凡例も保持。"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r06h-pm8/figure-2.png",
+      "caption": "図2 ダッシュボードのイメージ（一部）",
+      "sourcePage": 45,
+      "placement": "replace-caption",
+      "anchor": "図2 ダッシュボードのイメージ（一部）",
+      "alt": "時間帯ごと商品分類ごとの売上金額を示す積上げ棒グラフ，店舗別売上金額割合の円グラフ，時刻ごと店舗ごとの売上金額推移の折れ線グラフ。目盛と凡例を保持。"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r06h-pm8/figure-3.png",
+      "caption": "図3 クラス図",
+      "sourcePage": 46,
+      "placement": "replace-caption",
+      "anchor": "図3 クラス図",
+      "alt": "Controller，Subject，View，集計項目，集計処理，DAOと各継承クラスのUMLクラス図。空欄b/c，多重度，操作，属性，静的下線，抽象斜体，関連/集約/継承/依存/コンポジションの凡例と軸識別子注記を保持。"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        45
+      ],
+      "anchor": "図1 データモデル（抜粋）"
+    },
+    "figure-2": {
+      "sourcePages": [
+        45
+      ],
+      "anchor": "図2 ダッシュボードのイメージ（一部）"
+    },
+    "figure-3": {
+      "sourcePages": [
+        46
+      ],
+      "anchor": "図3 クラス図"
+    },
+    "underline-1": {
+      "sourcePages": [
+        47
+      ],
+      "text": "①関係するSubjectオブジェクト"
+    },
+    "underline-2": {
+      "sourcePages": [
+        48
+      ],
+      "text": "②仕様を変更する"
+    }
+  },
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2024_spring_7_11",
+  "authoringStatus": "independently-reviewed"
+}

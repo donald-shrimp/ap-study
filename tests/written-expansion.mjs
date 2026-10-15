@@ -4,11 +4,11 @@ import {readFileSync} from 'node:fs';
 import {createCaseRun,caseFields,setCaseResponse,submitCaseField,viewCaseAnswer,rateCaseField,validateCaseMaterial,validateCaseRun,caseResult,buildWrittenAIPrompt} from '../src/domain/case-study.js';
 const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
 const qualification=read('data/qualifications/ap/manifest.json'),cases=read('content/ap/written-cases.json');
-const expected=['h','a'].flatMap(season=>Array.from({length:11},(_,i)=>`ap-r07${season}-pm${i+1}`));
+const expected=[6,7].flatMap(year=>['h','a'].flatMap(season=>Array.from({length:11},(_,i)=>`ap-r0${year}${season}-pm${i+1}`)));
 const date='2026-10-15T00:00:00.000Z';
-test('直近公開2回の全22大問が重複せず生成され、Aの800問とは別に数えられる',()=>{
- assert.deepEqual(cases.map(c=>c.id).sort(),expected.sort());assert.equal(qualification.cases.count,22);
- assert.equal(qualification.count,800);assert.equal(qualification.studyTargets.find(p=>p.examPartId==='written').count,22);
+test('公開4回の全44大問が重複せず生成され、Aの800問とは別に数えられる',()=>{
+ assert.deepEqual(cases.map(c=>c.id).sort(),expected.sort());assert.equal(qualification.cases.count,44);
+ assert.equal(qualification.count,800);assert.equal(qualification.studyTargets.find(p=>p.examPartId==='written').count,44);
 });
 for(const c of cases)test(`${c.id}: 全欄の回答・評価・記録往復・AIと原本参照`,()=>{
  validateCaseMaterial(c,qualification);const run=createCaseRun(c,{mode:'exam',at:date}),slots=caseFields(c);

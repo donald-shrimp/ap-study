@@ -1,0 +1,457 @@
+{
+  "id": "ap-r06a-pm5",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "network",
+  "title": "セキュアWebゲートウェイサービスの導入",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問5 セキュアWebゲートウェイサービスの導入に関する次の記述を読んで，設問に答えよ。\n\nE社は，インターネットを利用した人材紹介業を営む会社である。\n\nE社のネットワークは，DMZセグメント，内部セグメント及びサーバセグメントから構成されている。DMZセグメントには，コンテンツフィルタリング機能やWebサイトのアクセス制御機能をもつプロキシサーバ及びDNSサーバが設置されている。プロキシサーバでは，内部セグメントからインターネット向けのHTTP通信，HTTP Over TLS（以下，HTTPSという）通信を中継し，アクセスログを保管している。内部セグメントにはE社の従業員が利用するPCが，サーバセグメントには業務サーバが，それぞれ設置されている。\n\nE社の従業員は，PCのWebブラウザを用いて，HTTP通信でサーバセグメントの業務サーバに直接アクセスして業務を実施したり，HTTPS通信でY社が提供するSaaS（以下，Y社SaaSという）にアクセスして，電子メールサービス，ファイル共有サービス，チャットサービスなどを活用したりしている。\n\n［E社のネットワーク構成］\n\nE社のネットワーク構成を，図1に示す。\n\n図1 E社のネットワーク構成\n\n注記 ip1，ip2，…，ip7はグローバル又はプライベートIPアドレスである。\n\nE社のルータでは，［a］機能を用いて，E社内に割り当てられたプライベートIPアドレスをグローバルIPアドレス及びポート番号に変換している。\n\nY社SaaSでは，E社からのアクセスに対して++①送信元IPアドレスでアクセス制限を行っている++。\n\n［セキュアWebゲートウェイサービスの導入検討］\n\nE社では，近年の業務拡大に伴い，インターネット利用の機会が急激に拡大してきた。情報システム部のF部長は，悪意のあるWebサイトへ意図せずにアクセスしたり，社内の機密情報や顧客情報が漏えいしたりするおそれがあると考え，インターネットアクセスに対するセキュリティ対策を強化することにした。そこで，部下のG主任に，社内のプロキシサーバに代えて，Z社がSaaSとして提供するセキュアWebゲートウェイサービス（以下，サービスZという）の導入検討を指示した。\n\n［サービスZの概要］\n\nG主任は，サービスZの概要を調査した。\n\nサービスZは，PCからインターネット上のWebサイトへのアクセスを安全に行うためのサービスであり，主な機能は次の三つである。\n\n(1) アクセス先の［b］やIPアドレスから悪意のあるWebサイトであるかどうかを評価し，安全でないと評価された場合はアクセスを遮断する機能\n\n(2) 機密情報や顧客情報がE社外に漏えいしないように，TLSで暗号化された通信内容をサービスZ内で復号して通信内容を検査し，これらの情報が含まれていないことを確認する機能\n\n(3) ++②インターネット上のWebサイトから受け取ったプログラムをサービスZ内の保護された領域で動作させ，E社システムが不正に操作されるおそれがないことを確認する機能++\n\nサービスZを利用するためには，E社の全てのPCに専用のクライアントソフトウェア（以下，ソフトCという）を導入し，PCのWebブラウザからインターネット上のWebサイトへのアクセスを，ソフトCを介して行う必要がある。ソフトCからサービスZには，HTTPS通信を用いて接続する。サービスZは，PCからインターネット上への全てのWebアクセスについて，どのPCからアクセスされたものかを識別して，アクセスの監視や各種制御を行う。\n\n［ネットワーク構成の変更］\n\nG主任は，サービスZの調査結果を基に，サービスZ導入後のE社のネットワーク構成案を図2のように考えた。\n\n図2 サービスZ導入後のE社のネットワーク構成案\n\n注記 ip1，ip2，ip4，ip5，…，ip8はグローバル又はプライベートIPアドレスである。\n\nG主任は，サービスZ導入に当たって必要となる作業を検討し，次の四点に整理した。\n\n(1) 現行のE社のネットワーク構成からプロキシサーバを廃止し，社内のPCからインターネット上のWebサイトへのアクセスは，宛先IPアドレスが［c］のものだけを許可するように，FWの許可ルールを変更する。\n\n(2) PCにソフトCを導入する。このソフトCは，各PC上でローカルプロキシとして動作する。各PCのプロキシ設定を変更して，このソフトCをプロキシとして利用する。ソフトCからHTTPS通信によってインターネット上のWebサイトへアクセスできるようにするために，［c］を宛先IPアドレスとするようソフトCの通信設定を行う。\n\n(3) PCのプロキシ設定で，［d］については，これまでどおり直接HTTP通信ができるように設定する。\n\n(4) Y社SaaSの送信元IPアドレスでのアクセス制限の設定を変更する。\n\n［FWの許可ルールの見直し］\n\nサービスZ導入前のE社FWの許可ルールでは，PCのWebブラウザからインターネットへのHTTP通信やHTTPS通信について，E社プロキシサーバを経由する通信だけを許可する設定になっていた。\n\nG主任は，サービスZ導入後に必要なFWの許可ルールを検討した。\n\nサービスZ導入前のE社FWの許可ルールを表1に，サービスZ導入後のE社FWの許可ルールを表2に示す。なお，ルールは項番の小さい順に参照され，最初に該当したルールが適用される。\n\n表1 サービスZ導入前のE社FWの許可ルール（抜粋）\n\n| 項番 | 送信元 | 宛先 | プロトコル名／ポート番号 |\n| --- | --- | --- | --- |\n| 1 | 内部セグメント | ［e］ | TCP/443 |\n| 2 | 内部セグメント | ［e］ | TCP/80 |\n| 3 | ［e］ | インターネット | TCP/443 |\n| 4 | ［e］ | インターネット | TCP/80 |\n\n注記 FWは，応答パケットを自動的に通過させる，ステートフルパケットインスペクション機能をもつ。\n\n表2 サービスZ導入後のE社FWの許可ルール（抜粋）\n\n| 項番 | 送信元 | 宛先 | プロトコル名／ポート番号 |\n| --- | --- | --- | --- |\n| 1 | 内部セグメント | ［c］ | TCP/［f］ |\n\n注記 FWは，応答パケットを自動的に通過させる，ステートフルパケットインスペクション機能をもつ。\n\nG主任は，これまでの調査内容をF部長に報告し，サービスZの主な三つの機能を導入することになった。",
+  "sourceImages": [
+    "assets/written/ap-r06a-pm5/question-p24.png",
+    "assets/written/ap-r06a-pm5/question-p25.png",
+    "assets/written/ap-r06a-pm5/question-p26.png",
+    "assets/written/ap-r06a-pm5/question-p27.png",
+    "assets/written/ap-r06a-pm5/question-p28.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_cmnt.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［E社のネットワーク構成］について答えよ。本文中の［a］に入れる適切な字句をアルファベット4字で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "NAPT"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "IPアドレスに加えてポート番号も変換し，複数の内部端末の通信を外部のアドレスへ対応付ける機能はNAPTである。IPアドレスだけを変換するNATと区別する。",
+          "rubric": [
+            "IPアドレスに加えてポート番号も変換し，複数の内部端末の通信を外部のアドレスへ対応付ける機能はNAPTである。IPアドレスだけを変換するNATと区別する。"
+          ],
+          "maxLength": 4,
+          "constraints": [
+            "アルファベット4字で答える。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        28
+      ],
+      "bodyRefs": [
+        "blank-a"
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "［E社のネットワーク構成］について答えよ。本文中の下線①について，アクセスが許可される送信元IPアドレスを，図1中の字句を用いて答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "送信元IPアドレス",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ip1"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "Y社SaaSから見える送信元は，NAPT後のE社ルータのインターネット側アドレスip1である。プロキシサーバの内部側アドレスip3やY社側ip7を答えない。",
+          "rubric": [
+            "Y社SaaSから見える送信元は，NAPT後のE社ルータのインターネット側アドレスip1である。プロキシサーバの内部側アドレスip3やY社側ip7を答えない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1中の字句を用いる。",
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        28
+      ],
+      "bodyRefs": [
+        "figure-1",
+        "underline-1"
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［サービスZの概要］について答えよ。本文中の［b］に入れる適切な字句をアルファベット3字で答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "URL"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "Webサイトの危険性の判別には，アクセス先のURLやIPアドレスを使う。講評が述べるように，URLの内容を確認する役割も重要である。",
+          "rubric": [
+            "Webサイトの危険性の判別には，アクセス先のURLやIPアドレスを使う。講評が述べるように，URLの内容を確認する役割も重要である。"
+          ],
+          "maxLength": 3,
+          "constraints": [
+            "アルファベット3字で答える。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        25,
+        28
+      ],
+      "bodyRefs": [
+        "blank-b"
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［サービスZの概要］について答えよ。本文中の下線②の機能の名称を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "機能名",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "プログラムを隔離された保護領域で実行し，挙動を確認する機能はサンドボックスである。復号するだけのHTTPSデコードや既知の特徴などを検出するアンチウイルスとは動作が異なる。",
+          "rubric": [
+            "プログラムを隔離された保護領域で実行し，挙動を確認する機能はサンドボックスである。復号するだけのHTTPSデコードや既知の特徴などを検出するアンチウイルスとは動作が異なる。"
+          ],
+          "choices": [
+            {
+              "id": "0",
+              "label": "ア",
+              "text": "HTTPSデコード"
+            },
+            {
+              "id": "1",
+              "label": "イ",
+              "text": "アンチウイルス"
+            },
+            {
+              "id": "2",
+              "label": "ウ",
+              "text": "サンドボックス"
+            },
+            {
+              "id": "3",
+              "label": "エ",
+              "text": "セキュアブラウジング"
+            },
+            {
+              "id": "4",
+              "label": "オ",
+              "text": "トラフィック検査"
+            }
+          ],
+          "selection": {
+            "mode": "exact",
+            "count": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        25,
+        28
+      ],
+      "bodyRefs": [
+        "underline-2"
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［ネットワーク構成の変更］について答えよ。本文及び表2中の［c］に入れる適切な字句を，図2中のIPアドレスを用いて答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ip8"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "PCのソフトCは，インターネット上の各Webサイトへ直接接続せずサービスZへHTTPS接続する。したがって許可する宛先はZ社SaaSのip8である。",
+          "rubric": [
+            "PCのソフトCは，インターネット上の各Webサイトへ直接接続せずサービスZへHTTPS接続する。したがって許可する宛先はZ社SaaSのip8である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図2中のIPアドレスを用いる。",
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        26,
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "figure-2",
+        "blank-c",
+        "table-2"
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［ネットワーク構成の変更］について答えよ。本文中の［d］に入れる適切な字句を，図2中の機器の名称を用いて答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "業務サーバ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "社内サーバセグメントの業務サーバには従来どおり直接HTTP通信する。インターネット用のサービスZを経由させないよう，プロキシ設定の例外に業務サーバを指定する。",
+          "rubric": [
+            "社内サーバセグメントの業務サーバには従来どおり直接HTTP通信する。インターネット用のサービスZを経由させないよう，プロキシ設定の例外に業務サーバを指定する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図2中の機器の名称を用いる。",
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        24,
+        26,
+        28
+      ],
+      "bodyRefs": [
+        "figure-2",
+        "blank-d"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "表1中の［e］，表2中の［f］に入れる適切な字句を，図1，図2又は表1中の字句を用いて答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "プロキシサーバ",
+            "ip3"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "導入前は内部PCからプロキシサーバへの通信と，プロキシサーバから外部への通信を許可する。両方に現れるeはプロキシサーバ又はそのアドレスip3である。",
+          "rubric": [
+            "導入前は内部PCからプロキシサーバへの通信と，プロキシサーバから外部への通信を許可する。両方に現れるeはプロキシサーバ又はそのアドレスip3である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1，図2又は表1中の字句を用いる。",
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "443"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "サービスZへはHTTPS通信を用いるのでTCPの宛先ポート番号は443となる。応答パケットはFWのステートフルパケットインスペクション機能で通過する。",
+          "rubric": [
+            "サービスZへはHTTPS通信を用いるのでTCPの宛先ポート番号は443となる。応答パケットはFWのステートフルパケットインスペクション機能で通過する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "図1，図2又は表1中の字句を用いる。",
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "bodyRefs": [
+        "table-1",
+        "table-2"
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和6年度秋期 応用情報技術者試験 午後 問5",
+  "sourcePages": [
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06a-pm5/question-p24.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm5/question-p25.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm5/question-p26.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm5/question-p27.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm5/question-p28.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm5/figure-1.png": {
+      "width": 822,
+      "height": 299
+    },
+    "assets/written/ap-r06a-pm5/figure-2.png": {
+      "width": 822,
+      "height": 295
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r06a-pm5/figure-1.png",
+      "caption": "図1 E社のネットワーク構成",
+      "sourcePage": 24,
+      "placement": "replace-caption",
+      "anchor": "図1 E社のネットワーク構成",
+      "alt": "図1 E社のネットワーク構成"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r06a-pm5/figure-2.png",
+      "caption": "図2 サービスZ導入後のE社のネットワーク構成案",
+      "sourcePage": 26,
+      "placement": "replace-caption",
+      "anchor": "図2 サービスZ導入後のE社のネットワーク構成案",
+      "alt": "図2 サービスZ導入後のE社のネットワーク構成案"
+    }
+  ],
+  "bodyRefs": {
+    "figure-1": {
+      "sourcePages": [
+        24
+      ],
+      "anchor": "図1 E社のネットワーク構成"
+    },
+    "figure-2": {
+      "sourcePages": [
+        26
+      ],
+      "anchor": "図2 サービスZ導入後のE社のネットワーク構成案"
+    },
+    "underline-1": {
+      "sourcePages": [
+        25
+      ],
+      "text": "①送信元IPアドレスでアクセス制限を行っている"
+    },
+    "underline-2": {
+      "sourcePages": [
+        25
+      ],
+      "text": "②インターネット上のWebサイトから受け取ったプログラムをサービスZ内の保護された領域で動作させ，E社システムが不正に操作されるおそれがないことを確認する機能"
+    },
+    "blank-a": {
+      "sourcePages": [
+        24
+      ],
+      "text": "［a］"
+    },
+    "blank-b": {
+      "sourcePages": [
+        25
+      ],
+      "text": "［b］"
+    },
+    "blank-c": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［c］"
+    },
+    "blank-d": {
+      "sourcePages": [
+        26
+      ],
+      "text": "［d］"
+    },
+    "blank-e": {
+      "sourcePages": [
+        27
+      ],
+      "text": "［e］"
+    },
+    "blank-f": {
+      "sourcePages": [
+        27
+      ],
+      "text": "［f］"
+    },
+    "table-1": {
+      "sourcePages": [
+        27
+      ],
+      "anchor": "表1 サービスZ導入前のE社FWの許可ルール（抜粋）"
+    },
+    "table-2": {
+      "sourcePages": [
+        27
+      ],
+      "anchor": "表2 サービスZ導入後のE社FWの許可ルール（抜粋）"
+    }
+  },
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2024_autumn_1_6",
+  "authoringStatus": "awaiting-independent-review"
+}

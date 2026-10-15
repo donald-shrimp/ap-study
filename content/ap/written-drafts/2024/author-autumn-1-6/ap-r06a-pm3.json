@@ -1,0 +1,342 @@
+{
+  "id": "ap-r06a-pm3",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "algorithm",
+  "title": "素数を列挙するアルゴリズム",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問3 素数を列挙するアルゴリズムに関する次の記述を読んで，設問に答えよ。\n\n素数とは，2以上の自然数のうち，正の約数が1と自身だけである数のことである。2以上の自然数Nに対して，N以下の素数を列挙する関数prime1のプログラムを図1に示す。なお，本問では，配列の要素番号は1から始まり，要素数が0の配列を{}で表す。\n\n図1 関数prime1のプログラム\n\n```\n○整数型の配列: prime1(整数型: N)\n  整数型の配列: primes ← {}  /* 結果となる素数の一覧を格納する一次元配列 */\n  論理型: isPrime  /* ループ内で着目している数が素数か否かを表す変数。\n                     trueであれば素数であることを表し，falseであれば\n                     素数ではないことを表す */\n  整数型: d ← 2\n  整数型: t\n  /* メイン処理開始 */\n  while (d が N 以下)\n    isPrime ← true  /* 仮で素数として扱う */\n    t ← 2\n    while (t が d 未満)\n      if (d mod t が 0 と等しい)\n        isPrime ← false\n      endif\n      t ← t + 1                     ← (L1)\n    endwhile\n    if (isPrime が true と等しい)\n      primesの末尾にdの値を追加する\n    endif\n    d ← d + 1\n  endwhile\n  /* メイン処理終了 */\n  return primes\n```\n\nこの関数prime1の時間計算量は，Nを用いて表すと$O(［ア］)$である。\n\n［アルゴリズムの改良1］\n\n素数の定義によって，2以上の自然数sについて，s自身を除くsの正の倍数uは，1とu以外にsも約数に含むので素数ではない。この性質を利用して関数prime1を改良し，次の手順で素数を列挙する関数prime2を考える。\n\n(1) 2以上N以下の自然数について，全て“素数である”とマークする。\n\n(2) 2以上N以下の自然数dについて，次の(a)，(b)を行う。\n\n(a) dが“素数ではない”とマークされている場合，何もしない。\n\n(b) dが“素数である”とマークされている場合，次の処理を行う。\n\n① dが素数であることを確定させる。\n\n② d以上の自然数xについて，dをx倍した数を“素数ではない”とマークする。\n\n関数prime2のプログラムを図2に示す。\n\n図2 関数prime2のプログラム\n\n```\n○整数型の配列: prime2(整数型: N)\n  整数型の配列: primes ← {}  /* 結果となる素数の一覧を格納する一次元配列 */\n  論理型の配列: isPrime ← {false}  /* isPrime[k]がtrueであればkが素数であることを\n                                    表し，falseであればkが素数ではないことを表す\n                                    一次元配列 */\n  整数型: c ← 2\n  整数型: d ← 2\n  整数型: t\n  while (c が N 以下)\n    isPrimeの末尾にtrueを追加する\n    c ← c + 1\n  endwhile\n  /* メイン処理開始 */\n  while (d が N 以下)\n    if (［イ］)\n      primesの末尾にdの値を追加する\n      t ← d × d\n      while (t が N 以下)\n        isPrime[t] ← false\n        t ← ［ウ］                  ← (L2)\n      endwhile\n    endif\n    d ← d + 1\n  endwhile\n  /* メイン処理終了 */\n  return primes\n```\n\n関数prime2は関数prime1と比較してメイン処理部の時間計算量を小さくすることができ，引数Nの値が同一の場合において，関数prime2の(L2)の行の実行回数は，関数prime1の(L1)の行の実行回数以下となる。\n\n［アルゴリズムの改良2］\n\n4以上の偶数は全て2の倍数であるので素数ではない。したがって，2以外の素数を列挙するためには奇数だけを考慮すればよい。この性質を利用して，関数prime2に次の変更を加えた関数prime3を考える。\n\n(1) 関数の戻り値として素数の一覧が格納されるprimesにあらかじめ2を格納しておく。\n\n(2) いずれのループも奇数についてだけ実行されるようにする。\n\n(3) 3以上の自然数2k＋1が素数か否かをisPrime[k]で表すようにする。\n\n関数prime3のプログラムを図3に示す。\n\n図3 関数prime3のプログラム\n\n```\n○整数型の配列: prime3(整数型: N)\n  整数型の配列: primes ← {2}  /* 結果となる素数の一覧を格納する一次元配列 */\n  論理型の配列: isPrime ← {}  /* isPrime[k]がtrueであれば2k＋1が素数であることを\n                               表し，falseであれば2k＋1が素数ではないことを表す\n                               一次元配列 */\n  整数型: c ← 3\n  整数型: d ← 3\n  整数型: t\n  while (c が N 以下)\n    isPrimeの末尾にtrueを追加する\n    c ← c + 2\n  endwhile\n  /* メイン処理開始 */\n  while (d が N 以下)\n    if (［エ］)\n      primesの末尾にdの値を追加する\n      t ← d × d\n      while (t が N 以下)\n        isPrime[［オ］] ← false\n        t ← ［カ］                  ← (L3)\n      endwhile\n    endif\n    d ← d + 2\n  endwhile\n  /* メイン処理終了 */\n  return primes\n```\n\n関数prime3は関数prime2と比較してメイン処理部の二重ループの実行回数を減らすことができる。引数Nの値が同一の場合において，関数prime3の(L3)の行の実行回数は，関数prime2の(L2)の行の実行回数の半分以下となる。加えて，計算に必要な配列isPrimeの要素数も半分以下に減らすことができる。\n\n［擬似言語の記述形式（共通規則から本問で用いる記述）］\n\n擬似言語を使用した問題では，各問題文中に注記がない限り，次の記述形式が適用されているものとする。\n\n| 記述形式 | 説明 |\n| --- | --- |\n| ○手続名又は関数名 | 手続又は関数を宣言する。 |\n| 型名: 変数名 | 変数を宣言する。 |\n| /* 注釈 */，// 注釈 | 注釈を記述する。 |\n| 変数名 ← 式 | 変数に式の値を代入する。 |\n| 手続名又は関数名(引数，…) | 手続又は関数を呼び出し，引数を受け渡す。 |\n| if (条件式₁) 処理₁ elseif (条件式₂) 処理₂ … elseif (条件式ₙ) 処理ₙ else 処理ₙ₊₁ endif | 選択処理を示す。条件式を上から評価し，最初に真になった条件式に対応する処理を実行する。以降の条件式は評価せず，対応する処理も実行しない。どの条件式も真にならないときは，処理ₙ₊₁を実行する。各処理は，0以上の文の集まりである。elseifと処理の組みは，複数記述することがあり，省略することもある。elseと処理ₙ₊₁の組みは一つだけ記述し，省略することもある。 |\n| while (条件式) 処理 endwhile | 前判定繰返し処理を示す。条件式が真の間，処理を繰返し実行する。処理は，0以上の文の集まりである。 |\n\n［演算子と優先順位］\n\n| 演算子の種類 | 演算子 |\n| --- | --- |\n| 式 | ( ) . |\n| 単項演算子 | not ＋ － |\n| 二項演算子（乗除） | mod × ÷ |\n| 二項演算子（加減） | ＋ － |\n| 二項演算子（関係） | ≠ ≦ ≧ ＜ ＝ ＞ |\n| 二項演算子（論理積） | and |\n| 二項演算子（論理和） | or |\n\n優先度は表の上ほど高く，下ほど低い。\n\n注記 演算子 . は，メンバ変数又はメソッドのアクセスを表す。\n\n演算子modは，剰余算を表す。\n\n［論理型の定数］\n\ntrue，false\n\n［配列］\n\n配列の要素は，“[”と“]”の間にアクセス対象要素の要素番号を指定することでアクセスする。なお，二次元配列の要素番号は，行番号，列番号の順に“，”で区切って指定する。\n\n“{”は配列の内容の始まりを，“}”は配列の内容の終わりを表す。ただし，二次元配列において，内側の“{”と“}”に囲まれた部分は，1行分の内容を表す。",
+  "sourceImages": [
+    "assets/written/ap-r06a-pm3/question-p04.png",
+    "assets/written/ap-r06a-pm3/question-p05.png",
+    "assets/written/ap-r06a-pm3/question-p14.png",
+    "assets/written/ap-r06a-pm3/question-p15.png",
+    "assets/written/ap-r06a-pm3/question-p16.png",
+    "assets/written/ap-r06a-pm3/question-p17.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_qs.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_pm_cmnt.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の［ア］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "N^2",
+            "N²"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "外側のdについて2〜Nを走査し，各dに対して内側がd−2回実行される。総回数は(N−2)(N−1)/2なので，時間計算量はO(N²)である。",
+          "rubric": [
+            "外側のdについて2〜Nを走査し，各dに対して内側がd−2回実行される。総回数は(N−2)(N−1)/2なので，時間計算量はO(N²)である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        14,
+        17
+      ],
+      "bodyRefs": [
+        "program-1",
+        "blank-a"
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図2中の［イ］，［ウ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "isPrime[d]がtrueと等しい",
+            "isPrime[d] が true と等しい"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "dがまだ素数としてマークされている場合にだけdを素数一覧へ追加し，その倍数をふるい落とす。参照するのは自然数dに対応する要素isPrime[d]である。",
+          "rubric": [
+            "dがまだ素数としてマークされている場合にだけdを素数一覧へ追加し，その倍数をふるい落とす。参照するのは自然数dに対応する要素isPrime[d]である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "ウ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "t＋d",
+            "t+d",
+            "t + d"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "d²から始めてdの倍数を順に消すには，tをdずつ増やす。d²より小さい合成数の倍数は，それより小さい素数の処理で既にマークされている。",
+          "rubric": [
+            "d²から始めてdの倍数を順に消すには，tをdずつ増やす。d²より小さい合成数の倍数は，それより小さい素数の処理で既にマークされている。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        15,
+        17
+      ],
+      "bodyRefs": [
+        "program-2"
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図3中の［エ］～［カ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "エ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "isPrime[(d－1)÷2]がtrueと等しい",
+            "isPrime[(d - 1) / 2] が true と等しい",
+            "isPrime[(d-1)÷2]がtrueと等しい"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "isPrime[k]が表す数は2k＋1である。これがdとなる添字はk=(d−1)/2なので，この要素を参照してdが素数かを確認する。",
+          "rubric": [
+            "isPrime[k]が表す数は2k＋1である。これがdとなる添字はk=(d−1)/2なので，この要素を参照してdが素数かを確認する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "e",
+          "label": "オ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "(t－1)÷2",
+            "(t-1)÷2",
+            "(t-1)/2"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "マークする対象の奇数tは，2k＋1=tを満たす添字k=(t−1)/2に格納されている。数値tをそのまま添字にしない。",
+          "rubric": [
+            "マークする対象の奇数tは，2k＋1=tを満たす添字k=(t−1)/2に格納されている。数値tをそのまま添字にしない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "f",
+          "label": "カ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "t＋2×d",
+            "t+2*d",
+            "t + 2 × d"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "dは奇数であり，d²も奇数である。次の奇数の倍数へ進むには2dを加える。dだけ加えると，配列に保持しない偶数の倍数まで扱ってしまう。",
+          "rubric": [
+            "dは奇数であり，d²も奇数である。次の奇数の倍数へ進むには2dを加える。dだけ加えると，配列に保持しない偶数の倍数まで扱ってしまう。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        16,
+        17
+      ],
+      "bodyRefs": [
+        "program-3"
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "prime1(20)，prime2(20)，prime3(20)をそれぞれ実行したとき，図1中の(L1)の行，図2中の(L2)の行，図3中の(L3)の行が実行される回数をそれぞれ答えよ。",
+      "fields": [
+        {
+          "id": "l1",
+          "label": "(L1)",
+          "type": "shortText",
+          "referenceAnswers": [
+            "171"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "d=2〜20の各dに対してtは2〜d−1を走る。実行回数は0＋1＋…＋18=171回である。",
+          "rubric": [
+            "d=2〜20の各dに対してtは2〜d−1を走る。実行回数は0＋1＋…＋18=171回である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "l2",
+          "label": "(L2)",
+          "type": "shortText",
+          "referenceAnswers": [
+            "13"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "d=2のとき4,6,…,20の9回，d=3のとき9,12,15,18の4回で計13回。d≥5ではd²>20なので内側のループは実行されない。",
+          "rubric": [
+            "d=2のとき4,6,…,20の9回，d=3のとき9,12,15,18の4回で計13回。d≥5ではd²>20なので内側のループは実行されない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        },
+        {
+          "id": "l3",
+          "label": "(L3)",
+          "type": "shortText",
+          "referenceAnswers": [
+            "2"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "奇数だけを扱うのでd=3のときt=9,15の2回。次の素数5では25>20となり，内側のループは実行されない。",
+          "rubric": [
+            "奇数だけを扱うのでd=3のときt=9,15の2回。次の素数5では25>20となり，内側のループは実行されない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字は入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "bodyRefs": [
+        "program-1",
+        "program-2",
+        "program-3"
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和6年度秋期 応用情報技術者試験 午後 問3",
+  "sourcePages": [
+    4,
+    5,
+    14,
+    15,
+    16,
+    17
+  ],
+  "imageSizes": {
+    "assets/written/ap-r06a-pm3/question-p14.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm3/question-p15.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm3/question-p16.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm3/question-p17.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm3/question-p04.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r06a-pm3/question-p05.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "bodyFigures": [],
+  "bodyRefs": {
+    "program-1": {
+      "sourcePages": [
+        14
+      ],
+      "anchor": "図1 関数prime1のプログラム"
+    },
+    "program-2": {
+      "sourcePages": [
+        15
+      ],
+      "anchor": "図2 関数prime2のプログラム"
+    },
+    "program-3": {
+      "sourcePages": [
+        16
+      ],
+      "anchor": "図3 関数prime3のプログラム"
+    },
+    "blank-a": {
+      "sourcePages": [
+        14
+      ],
+      "text": "O(［ア］)"
+    },
+    "common-pseudocode": {
+      "sourcePages": [
+        4,
+        5
+      ],
+      "anchor": "［擬似言語の記述形式（共通規則から本問で用いる記述）］"
+    }
+  },
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2024_autumn_1_6",
+  "authoringStatus": "awaiting-independent-review"
+}

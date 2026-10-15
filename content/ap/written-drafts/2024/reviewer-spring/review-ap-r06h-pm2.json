@@ -1,0 +1,40 @@
+{
+  "caseId": "ap-r06h-pm2",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2024_spring_1_6",
+  "reviewer": "/root/review_2024_spring",
+  "reviewedAt": "2026-10-15T09:42:10.830783+00:00",
+  "canonicalCaseSHA256": "8fcab776b57b213ecbd086626c688f28c6da868a18512233675cf2d81d3ee1a1",
+  "sourceEvidence": "content/ap/written-drafts/2024/reviewer-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_qs.pdf": "43a003abf1229427d0597b76e23896398280b11770147d117238cc9da6c33798",
+    "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_ans.pdf": "772d9531137a4e1c36c3528db40da20b88723d0b0d6e8a10570d52b9f906a283",
+    "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_cmnt.pdf": "a99ad7c3f37a112953a4838dee8469901ac69a5e3d70e84909895c71243e11f1"
+  },
+  "assetHashes": {
+    "assets/written/ap-r06h-pm2/question-p13.png": "fdc0dad640dd0d00dfa0c9fae7a0fe202169f2e9f20b166f202388b855dab753",
+    "assets/written/ap-r06h-pm2/question-p14.png": "cf518916afb8b9c60cc910285a008a60e1832e6ce42557eb439457d7bb78c619",
+    "assets/written/ap-r06h-pm2/question-p15.png": "f56814aa83dea89d34a02e9ef43b49c057ddf9db91a412fac095a17308a03438",
+    "assets/written/ap-r06h-pm2/question-p16.png": "1ed7153c8813d5f21da531c1e6960bca1010c13adf7d3ea4da7fb64e4a092837",
+    "assets/written/ap-r06h-pm2/question-p17.png": "9ba36c1eff65aabc112d0d7318e119eb7f8abcaee21784dda5fc4693efc21a68",
+    "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_ans-p01.png": "74fe158093502965db98bf67ea2e0b7b1e2c3c7497dec08f950fbfa7cbd50314",
+    "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_cmnt-p01.png": "c3ef9e0cf0c5c8544cc9157c0cfabee29d8018a14310e72643e26f8c357aee87"
+  },
+  "method": "原問全頁・全cropをview_imageで実表示し、全本文/全表セル/全図ラベル結線凡例/下線範囲/全設問/全回答欄/全選択肢/字数条件を作者草稿と照合。公式解答例・採点講評PNGも実表示し公式例全件と説明/rubricを照合。全PDF・教材画像・実読公式PNGのSHAと最終case canonical SHAを保存。",
+  "answerCheck": "公式問13〜17の5頁/図なし/表1全4行3列と表2全5行3列/全10欄/全8選択肢/6,10,35,15,30字と字句条件を照合。問1と同じ公式答頁で先に問2答が見えたため未見解答とは扱わず、原文から全欄の因果を独立再確認。表内改行崩れを指摘し、作者の一行セル修正後全文を再照合。",
+  "gradingCheck": "公式登録例の短答・単一選択だけexactText。説明・順不同複数等はself、未登録表現を機械的不正解にせず自己評価へ。rubricは学習用でIPA配点ではない。",
+  "findings": [
+    {
+      "issue": "表1/2のセル中の実改行がMarkdown行を途切れさせる。",
+      "resolution": "作者がセル内を一行化し原文の各箇条書き語句を保持。修正後全表セルと全文を再照合。"
+    }
+  ],
+  "metadataRecheck": "作者によるtopicId最終訂正をqualification.json登録分野と照合。本文/設問/全解答/解説/rubricは変更なしをオブジェクト比較確認。",
+  "actualCounts": {
+    "items": 8,
+    "fields": 10,
+    "sourceImages": 5,
+    "bodyFigures": 0
+  }
+}
