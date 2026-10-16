@@ -1,0 +1,63 @@
+{
+  "caseId": "ap-r05h-pm8",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2023_spring",
+  "reviewer": "/root/author_2021_spring",
+  "reviewedAt": "2026-10-15T19:54:50.880679+00:00",
+  "canonicalCaseSHA256": "61b62cdb407684d983353316f2b5e5ca56b42c9d81b14cd36cd986dadcf2305e",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2023-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_qs.pdf": "801f06d5f13652b6d3a8a09e72d0b1bf01746278db3f8590b952ec5341c9940c",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans.pdf": "dea64ec1f36d2aeabe4ff8eb1fbe66c75229757b84be574aa161cfa0ec40c0fa",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt.pdf": "796fbcb644f17ec9ab60b151e527757b92d1aec53d235117ce65667148ab4390"
+  },
+  "assetHashes": {
+    "assets/written/ap-r05h-source/question-p44.png": "91edfcea1f5acc238217e1f05a4894b1977c24365352f19e9374fd805a218bf6",
+    "assets/written/ap-r05h-source/question-p45.png": "852367a644dddd3c7792be5aab5e846b88a2555f0bfbe6c883004e85411589ca",
+    "assets/written/ap-r05h-source/question-p46.png": "f0069acf7ce6c9a573ab4f8c40e3235a4e272b7fc16042f1ff918b7f44a6e519",
+    "assets/written/ap-r05h-source/question-p47.png": "379a12989848c11a0d69f3c0e5d997a62c25edc2a3202687dbce1bbcb0565a9c",
+    "assets/written/ap-r05h-source/question-p48.png": "98dd5599dec249b263394a5d0e1a710092eb69102d3928352ed51d064e636ad3",
+    "assets/written/ap-r05h-pm8/branch-tree.png": "9bdf9ce8430c6df1359b5e60946a261e66f20b2517866d5c074cb026e9d7eed9",
+    "assets/written/ap-r05h-pm8/development-flow.png": "dc11182b8c18ab25ef133c62fb6aef72572f79f2c9a4969e1ab8ce3879684aff",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans-p04.png": "a60d1d21b6dae13cbc51ce19eaeba8691c00ef32abab9ca66c9a395878eaaff6",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt-p02.png": "9114081a70b57cae88594b5e3989c22fab7b2ae0b49c3742158e5c9490f1ddaf"
+  },
+  "method": "原問の全対象頁をview_imageで実表示し作者草稿/公式解答例を開く前に独立解答方針を保存した後、公式解答例と講評の該当PNG、草稿全本文・表セル・全小問/欄・選択肢・制約・解説/rubricを照合。全完成cropを実表示して原本と比較し、元PNGとcrop座標の全画素一致をPILで独立検証。最終case及び公式PDF/画像のSHA-256を再計算。共有公式解答頁の他問が先に見えた場合はindependent-findingsに明示。",
+  "answerCheck": "原問44〜48頁の全文、表1全6コマンドと即時push注記/表2全4ブランチ、図1全運用ルール・図2/3全矢印/凡例/コミット順を照合。5設問8欄、10/40字とコマンド名/図3字句/表2用語条件を確認。先行解答は公式全欄と一致。リバートはオ→ウの順、develop→featureの方向をrubricに保持。",
+  "gradingCheck": "全単一選択と登録短答はexactText、説明/式/順不同複数はself。原本字数制約とアプリ上限を区別。未登録短答表現は自動不正解とせず自己評価へ。学習用rubricは公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r05h-source/question-p46.png",
+      "box": [
+        120,
+        645,
+        900,
+        844
+      ],
+      "output": "assets/written/ap-r05h-pm8/branch-tree.png",
+      "pixelMatch": true,
+      "sha256": "9bdf9ce8430c6df1359b5e60946a261e66f20b2517866d5c074cb026e9d7eed9"
+    },
+    {
+      "source": "assets/written/ap-r05h-source/question-p46.png",
+      "box": [
+        120,
+        1095,
+        912,
+        1348
+      ],
+      "output": "assets/written/ap-r05h-pm8/development-flow.png",
+      "pixelMatch": true,
+      "sha256": "dc11182b8c18ab25ef133c62fb6aef72572f79f2c9a4969e1ab8ce3879684aff"
+    }
+  ],
+  "calculationChecks": [],
+  "actualCounts": {
+    "items": 5,
+    "fields": 8,
+    "sourceImages": 5,
+    "bodyFigures": 2
+  }
+}

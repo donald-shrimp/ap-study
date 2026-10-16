@@ -1,0 +1,79 @@
+{
+  "caseId": "ap-r05h-pm3",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2023_spring",
+  "reviewer": "/root/author_2021_spring",
+  "reviewedAt": "2026-10-15T19:48:54.145096+00:00",
+  "canonicalCaseSHA256": "aabb6d702d0ad482ee420e51681bba36988e8f963266f70ac270771440800a35",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2023-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_qs.pdf": "801f06d5f13652b6d3a8a09e72d0b1bf01746278db3f8590b952ec5341c9940c",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans.pdf": "dea64ec1f36d2aeabe4ff8eb1fbe66c75229757b84be574aa161cfa0ec40c0fa",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt.pdf": "796fbcb644f17ec9ab60b151e527757b92d1aec53d235117ce65667148ab4390"
+  },
+  "assetHashes": {
+    "assets/written/ap-r05h-source/question-p16.png": "c9c5a9dc98a7394a6b0bb04614108a9e9979d590ead7d696a5be52c3dc4d125e",
+    "assets/written/ap-r05h-source/question-p17.png": "a97cc77225922659cf264b508cdfc0faeb0d93189dd140086d689d932d45e796",
+    "assets/written/ap-r05h-source/question-p18.png": "c0e148405f2bb1598870e5d93ce5dc29c563a54ce4ec9c23a4e7908af4041db6",
+    "assets/written/ap-r05h-source/question-p19.png": "109fa58bf39aff1607be3fbda9eddac60e433a3e0e1b25118c6f59eaf13e612b",
+    "assets/written/ap-r05h-source/question-p20.png": "1a06f6b7bb89d938b717f19ce7c9be81b8299bd200b5dff161cfcaafda04929f",
+    "assets/written/ap-r05h-pm3/carry-example.png": "f9aac51deb460aa26f0ab1783a6c5d2b7dfd1a0749451ce2d561f189756b8beb",
+    "assets/written/ap-r05h-pm3/karatsuba-tree.png": "488fe54f419ed6b560d7c17c606600bc41f1f16a2a9633bc7e1c7b33b5347105",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans-p02.png": "268153167f2affac8fbdfb12594df8c4ba0985ccfe107fa0d0088f9e1f064da5",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt-p01.png": "4dc603bcdea7d21e46a10ac0d8864df3000dedf48202817086528c64a14d2d74"
+  },
+  "method": "原問の全対象頁をview_imageで実表示し作者草稿/公式解答例を開く前に独立解答方針を保存した後、公式解答例と講評の該当PNG、草稿全本文・表セル・全小問/欄・選択肢・制約・解説/rubricを照合。全完成cropを実表示して原本と比較し、元PNGとcrop座標の全画素一致をPILで独立検証。最終case及び公式PDF/画像のSHA-256を再計算。共有公式解答頁の他問が先に見えた場合はindependent-findingsに明示。",
+  "answerCheck": "原問16〜20頁、2図と3表全セル、2コード全行・引数/添字、5設問13欄を照合。410組の1/2/4/8桁積を遅延繰上げを保持する別実装で実検算し通常乗算と一致。層2〜5の幅・全子添字も検算。先行解答の設問5 N+1は誤りで公式2Nを最悪値9…9の積で独立確認して訂正をfindingsに記録。",
+  "gradingCheck": "全単一選択と登録短答はexactText、説明/式/順不同複数はself。原本字数制約とアプリ上限を区別。未登録短答表現は自動不正解とせず自己評価へ。学習用rubricは公式配点ではない。",
+  "findings": [
+    {
+      "issue": "図4の指数を表すコメントが「10のK」「10のK/2」と誤転記。",
+      "resolution": "作者がコード内の10^Kと10^(K/2)へ修正。p20と最終codeを再照合。"
+    }
+  ],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r05h-source/question-p16.png",
+      "box": [
+        165,
+        625,
+        905,
+        780
+      ],
+      "output": "assets/written/ap-r05h-pm3/carry-example.png",
+      "pixelMatch": true,
+      "sha256": "f9aac51deb460aa26f0ab1783a6c5d2b7dfd1a0749451ce2d561f189756b8beb"
+    },
+    {
+      "source": "assets/written/ap-r05h-source/question-p17.png",
+      "box": [
+        175,
+        745,
+        900,
+        960
+      ],
+      "output": "assets/written/ap-r05h-pm3/karatsuba-tree.png",
+      "pixelMatch": true,
+      "sha256": "488fe54f419ed6b560d7c17c606600bc41f1f16a2a9633bc7e1c7b33b5347105"
+    }
+  ],
+  "calculationChecks": [
+    {
+      "evidence": "content/ap/written-drafts/2021-2023/reviewer-2023-spring/calculation-ap-r05h-pm3.json",
+      "passedProducts": 410,
+      "widths": [
+        1,
+        2,
+        4,
+        8
+      ]
+    }
+  ],
+  "actualCounts": {
+    "items": 5,
+    "fields": 13,
+    "sourceImages": 5,
+    "bodyFigures": 2
+  }
+}

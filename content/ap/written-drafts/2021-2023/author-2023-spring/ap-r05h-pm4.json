@@ -1,0 +1,345 @@
+{
+  "id": "ap-r05h-pm4",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "title": "ITニュース配信サービスの再構築",
+  "topicId": "system",
+  "sourceKind": "official",
+  "status": "draft",
+  "author": "/root/author_2023_spring",
+  "authoringStatus": "awaiting-independent-review",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "body": "問4 ITニュース配信サービスの再構築に関する次の記述を読んで，設問に答えよ。\n\nH社は，IT関連のニュースを配信するサービスを提供している。このたび，OSや開発フレームワークの保守期間終了を機に，システムを再構築することにした。\n\n［現状のシステム構成と課題］\n\nITニュース配信サービスでは，多くの利用者にサービスを提供するために，複数台のサーバでシステムを構成している。配信される記事には，それぞれ固有の記事番号が割り振られている。現状のシステム構成を図1に，ニュースを表示する画面一覧を表1に示す。\n\n図1 現状のITニュース配信サービスのシステム構成\n\n表1 画面一覧\n\n| 画面名 | 概要 |\n| --- | --- |\n| ITニュース一覧 | 記事に関連する画像，見出し，投稿日時を新しいものから順に一覧形式で表示する。一覧は一定の記事数ごとにページを切り替えることで，古い記事の一覧を閲覧することができる。 |\n| ITニュース記事 | ITニュース一覧画面で記事を選択すると，この画面に遷移し，選択された記事の見出し，投稿日時，本文及び本文内の画像を表示する。さらに，選択された記事と関連する一定数の記事の画像と見出しを一覧形式で表示する。 |\n\n現状のシステム構成では，PC，タブレット，スマートフォン，それぞれに最適化したWebサイトを用意している。APでは，RDBとのデータ入出力とHTMLファイルの生成を行っている。また，関連する記事を見つけるために，夜間にWebサーバのアクセスログをRDBに取り込み，URL中の記事番号を用いたアクセス解析をRDB上のストアドプロシージャによって行っている。\n\n最近，利用者の増加に伴い，通勤時間帯などにアクセスが集中すると，応答速度が遅くなったり，タイムアウトが発生したりしている。\n\n［新システムの方針］\n\nこの課題を解消するために，次の方針に沿った新システムの構成とする。\n\n・［a］の機能を用いて，一つのWebサイトで全ての種類の端末に最適な画面を表示できるようにする。\n\n・APでの動的なHTMLの生成処理を行わない，SPA（Single Page Application）の構成にする。HTML，スクリプトなどのファイルはWebサーバに配置する。動的なデータはAPからWeb APIを通して提供し，データ形式は各端末のWebブラウザ上で実行されるスクリプトが扱いやすい［b］とする。\n\n・RDBへの負荷を減らし，応答速度を短縮するために，キャッシュサーバを配置する。\n\n・ITニュース一覧画面に表示する記事の一覧のデータと，ITニュース記事画面に表示する関連する記事に関するデータは，キャッシュサーバに格納する。キャッシュサーバには，これらのデータを全て格納できるだけの容量をもたせる。その上で，記事のデータは，閲覧されたデータをキャッシュサーバに設定したメモリの上限値まで格納する。\n\n・RDBのデータベース構造と，関連する記事を見つける処理は現状の仕組みを利用する。\n\nAPで提供するWeb APIを表2に示す。\n\n表2 APで提供するWeb API\n\n| Web API名 | 概要 |\n| --- | --- |\n| ITNewsList | 表示させたいITニュース一覧画面のページ番号を受け取り，そのページに含まれる記事の記事番号，関連する画像のURL，見出し，投稿日時のリストを返す。データは，キャッシュサーバから取得する。 |\n| ITNewsDetail | ITニュース記事画面に必要な見出し，投稿日時，本文，本文内に表示する画像のURL，関連する記事の記事番号のリストを返す。1件の記事に対して関連する記事は6件である。データは，キャッシュサーバに格納されている場合はそのデータを，格納されていない場合は，RDBから取得してキャッシュサーバに格納して利用する。キャッシュするデータは++①LFU方式++で管理する。 |\n| ITNewsHeadline | ITニュース記事画面に表示する，関連する記事1件分の記事に関する画像のURLと見出しを返す。データは，キャッシュサーバから取得する。 |\n\n次に，Webブラウザ上で実行されるスクリプトの概要を表3に示す。\n\n表3 Webブラウザ上で実行されるスクリプトの概要\n\n| 画面名 | 概要 |\n| --- | --- |\n| ITニュース一覧 | 表示させたいITニュース一覧画面のページ番号を指定してWeb API“ITNewsList”を呼び出し，取得したデータを一覧表として整形する。 |\n| ITニュース記事 | 表示させたい記事の記事番号を指定してWeb API“ITNewsDetail”を呼び出し，対象記事のデータを取得する。次に，表示させたい記事に関連する記事の記事番号を一つずつ指定してWeb API“ITNewsHeadline”を呼び出し，関連する記事の表示に必要なデータを取得する。最後に，取得したデータを文書フォーマットとして整形する。 |\n\n［キャッシュサーバの実装方式の検討］\n\nキャッシュサーバの実装方式として，次に示す二つの方式を検討する。\n\n(1) 各APの内部にインメモリデータベースとして実装する方式\n\n(2) 1台のNoSQLデータベースとして実装する方式\n\nAPのOSのスケジューラーが5分間隔で，ITニュース一覧画面に表示する記事の一覧と，各記事に関連する記事の一覧のデータを更新する処理を起動する。(1)の場合，各AP上のプロセスが内部のキャッシュデータを更新する。(2)の場合，特定のAP上のプロセスがキャッシュデータを更新する。\n\nなお，APのCPU使用率が高い場合，Web APIの応答速度を優先するために，更新処理は行わない。\n\n［応答速度の試算］\n\n新システムにおける応答速度を試算するために，キャッシュサーバの二つの方式をそれぞれテスト環境に構築して，本番相当のテストデータを用いて処理時間を測定した。その結果を表4に示す。\n\n表4 テストデータを用いて処理時間を測定した結果\n\n| No. | 測定内容 | 測定結果：方式(1) | 測定結果：方式(2) |\n| --- | --- | --- | --- |\n| 1 | WebサーバがITニュース一覧画面又はITニュース記事画面のリクエストを受けてから，HTMLやスクリプトなどのファイルを全て転送するまでの時間 | 80ms | 80ms |\n| 2 | APがWeb API“ITNewsList”のリクエストを受けてから，応答データを全て転送するまでの時間 | 100ms | 200ms |\n| 3 | APがWeb API“ITNewsDetail”でリクエストされた対象記事のデータがキャッシュサーバに格納されている割合 | 60% | 90% |\n| 4 | APがWeb API“ITNewsDetail”のリクエストを受けてから，キャッシュサーバにある対象記事のデータを全て転送するまでの時間 | 60ms | 120ms |\n| 5 | APがWeb API“ITNewsDetail”のリクエストを受けてから，RDBにある対象記事のデータを全て転送するまでの時間 | 300ms | 300ms |\n| 6 | APがWeb API“ITNewsHeadline”のリクエストを受けてから，応答データを全て転送するまでの時間 | 15ms | 20ms |\n\n注記 ms：ミリ秒\n\nインターネットを介した転送時間やWebブラウザ上の処理時間は掛からないと仮定して応答時間を考える。その場合，ITニュース一覧画面を初めて表示する場合の応答時間は，方式(1)では180ms，方式(2)では［c］msである。ITニュース一覧画面のページを切り替える場合の応答時間は，方式(1)では100ms，方式(2)では［d］msである。次に，記事をリクエストした際の平均応答時間を考える。Web API“ITNewsDetail”の平均応答時間は，方式(1)では156ms，方式(2)では［e］msである。したがって，Web API“ITNewsHeadline”の呼び出しも含めたITニュース記事画面を表示するための平均応答時間は，方式(1)では［f］ms，方式(2)では258msとなる。\n\n以上の試算から，方式(1)を採用することにした。\n\n［不具合の指摘と改修］\n\n新システムの方式(1)を採用した構成についてレビューを実施したところ，次の指摘があった。\n\n(1) ITニュース記事画面の応答速度の不具合\n\nITニュース記事画面を生成するスクリプトが実際にインターネットを介して実行された場合，試算した応答速度より大幅に遅くなってしまうことが懸念される。Web API“［g］”内から，Web API“［h］”を呼び出すように処理を改修する必要がある。\n\n(2) APのCPU使用率が高い状態が続いた場合の不具合\n\nAPに処理が偏ってCPU使用率が高い状態が続いた場合，++②ある画面の表示内容に不具合が出てしまう++。\n\nこの不具合を回避するためには，各APのCPU使用率を監視して，しきい値を超えた状態が一定時間以上続いた場合，APをスケールアウトして負荷を分散させる仕組みをあらかじめ用意する。\n\n(3) 関連する記事が取得できない不具合\n\n関連する記事を見つける処理について，++③現状の仕組みのままでは関連する記事が見つけられない++。Webサーバのアクセスログを解析する処理を，APのアクセスログを解析する処理に改修する必要がある。\n\n以上の指摘を受けて，必要な改修を行った結果，新システムをリリースできた。",
+  "sourcePages": [
+    22,
+    23,
+    24,
+    25,
+    26
+  ],
+  "sourceImages": [
+    "assets/written/ap-r05h-source/question-p22.png",
+    "assets/written/ap-r05h-source/question-p23.png",
+    "assets/written/ap-r05h-source/question-p24.png",
+    "assets/written/ap-r05h-source/question-p25.png",
+    "assets/written/ap-r05h-source/question-p26.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05h-source/question-p22.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p23.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p24.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p25.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p26.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "source": "IPA 令和5年度春期 応用情報技術者試験 午後 問4",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_qs.pdf"
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "bodyFigures": [
+    {
+      "anchor": "図1 現状のITニュース配信サービスのシステム構成",
+      "caption": "図1 現状のITニュース配信サービスのシステム構成",
+      "alt": "PC、タブレット、スマートフォンからインターネット、FWを経由しWebサーバ1/2へ、さらにFWを経由しAP1/2/3とRDBへ接続する。FWはファイアウォール、APはアプリケーションサーバ、RDBは関係データベースサーバ。",
+      "image": "assets/written/ap-r05h-pm4/current-system.png",
+      "sourcePage": 22
+    }
+  ],
+  "items": [
+    {
+      "id": "s1-1",
+      "label": "設問1(1)",
+      "prompt": "［新システムの方針］について答えよ。本文中の［a］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ア"
+          ],
+          "explanation": "CSSのメディアクエリなどによって端末の表示条件に応じたレイアウトを適用できる。DOMは文書構造、HREFは参照先指定、Pythonはプログラミング言語である。",
+          "rubric": [
+            "CSSのメディアクエリなどによって端末の表示条件に応じたレイアウトを適用できる。DOMは文書構造、HREFは参照先指定、Pythonはプログラミング言語である。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "CSS"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "DOM"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "HREF"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "Python"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s1-2",
+      "label": "設問1(2)",
+      "prompt": "本文中の［b］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "JSON"
+          ],
+          "explanation": "JSONはJavaScriptなどでオブジェクトとして扱いやすいテキスト形式で、Web APIの動的データの受渡しに利用できる。",
+          "rubric": [
+            "JSONはJavaScriptなどでオブジェクトとして扱いやすいテキスト形式で、Web APIの動的データの受渡しに利用できる。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s1-3",
+      "label": "設問1(3)",
+      "prompt": "表2中の下線①の方式にすることで，どのような記事がキャッシュサーバに格納されやすくなるか。15字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "記事",
+          "type": "freeText",
+          "referenceAnswers": [
+            "参照回数の多い記事"
+          ],
+          "explanation": "LFUは参照頻度が低いデータから追い出す方式なので、参照回数の多い記事が残りやすい。最近参照された順を重視するLRUと区別する。",
+          "rubric": [
+            "LFUは参照頻度が低いデータから追い出す方式なので、参照回数の多い記事が残りやすい。最近参照された順を重視するLRUと区別する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 15,
+          "constraints": [
+            "15字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "label": "設問2",
+      "prompt": "本文中の［c］～［f］に入れる適切な数値を答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "280"
+          ],
+          "explanation": "初回はWebファイル80msと一覧API200msを加え、80＋200＝280ms。",
+          "rubric": [
+            "初回はWebファイル80msと一覧API200msを加え、80＋200＝280ms。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "200"
+          ],
+          "explanation": "ページ切替では既にHTMLとスクリプトを取得済みなので一覧APIだけの200ms。",
+          "rubric": [
+            "ページ切替では既にHTMLとスクリプトを取得済みなので一覧APIだけの200ms。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "138"
+          ],
+          "explanation": "方式(2)のヒット率90%で120ms、ミス率10%で300ms。0.9×120＋0.1×300＝138ms。",
+          "rubric": [
+            "方式(2)のヒット率90%で120ms、ミス率10%で300ms。0.9×120＋0.1×300＝138ms。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "246"
+          ],
+          "explanation": "方式(1)のDetail平均は0.6×60＋0.4×300＝156ms。関連6記事のHeadlineは6×15＝90msで、合計246ms。",
+          "rubric": [
+            "方式(1)のDetail平均は0.6×60＋0.4×300＝156ms。関連6記事のHeadlineは6×15＝90msで、合計246ms。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-1",
+      "label": "設問3(1)",
+      "prompt": "［不具合の指摘と改修］について答えよ。本文中の［g］，［h］に入れる適切な字句を，表2中のWeb API名の中から答えよ。",
+      "fields": [
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ITNewsDetail"
+          ],
+          "explanation": "記事の取得を受けるDetail内部で関連6記事のHeadlineをまとめて取得し、ブラウザからの繰り返し往復を減らす。",
+          "rubric": [
+            "記事の取得を受けるDetail内部で関連6記事のHeadlineをまとめて取得し、ブラウザからの繰り返し往復を減らす。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "h",
+          "label": "h",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ITNewsHeadline"
+          ],
+          "explanation": "呼び出す側は対象記事のDetail、呼び出される側は関連する記事見出しを得るHeadline。",
+          "rubric": [
+            "呼び出す側は対象記事のDetail、呼び出される側は関連する記事見出しを得るHeadline。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-2",
+      "label": "設問3(2)",
+      "prompt": "本文中の下線②にある不具合とは何か。35字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "不具合",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ITニュース一覧と各記事に関連する記事の一覧が更新されない。"
+          ],
+          "explanation": "CPU高負荷時にはキャッシュ更新処理が行われないため、キャッシュ内の一覧と関連記事一覧が古いままになる。応答遅延の言換えではなく表示内容の不具合を述べる。",
+          "rubric": [
+            "CPU高負荷時にはキャッシュ更新処理が行われないため、キャッシュ内の一覧と関連記事一覧が古いままになる。応答遅延の言換えではなく表示内容の不具合を述べる。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 35,
+          "constraints": [
+            "35字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-3",
+      "label": "設問3(3)",
+      "prompt": "本文中の下線③の理由を，40字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "理由",
+          "type": "freeText",
+          "referenceAnswers": [
+            "記事間の遷移がWebサーバのアクセスログのURLでは解析できないから"
+          ],
+          "explanation": "SPAでは記事間の遷移をブラウザのスクリプトとAPのAPIが処理し、Webサーバから記事ごとのHTMLを取得しない。Webサーバのログでは記事番号を伴う遷移が解析できない。",
+          "rubric": [
+            "SPAでは記事間の遷移をブラウザのスクリプトとAPのAPIが処理し、Webサーバから記事ごとのHTMLを取得しない。Webサーバのログでは記事番号を伴う遷移が解析できない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 40,
+          "constraints": [
+            "40字以内。"
+          ]
+        }
+      ]
+    }
+  ]
+}

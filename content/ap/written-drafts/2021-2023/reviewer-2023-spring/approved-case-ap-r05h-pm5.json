@@ -1,0 +1,290 @@
+{
+  "id": "ap-r05h-pm5",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "title": "Webサイトの増設",
+  "topicId": "network",
+  "sourceKind": "official",
+  "status": "reviewed",
+  "author": "/root/author_2023_spring",
+  "authoringStatus": "independently-reviewed",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "body": "問5 Webサイトの増設に関する次の記述を読んで，設問に答えよ。\n\nF社は，契約した顧客（以下，顧客という）にインターネット経由でマーケット情報を提供する情報サービス会社である。F社では，マーケット情報システム（以下，Mシステムという）で顧客向けに情報を提供している。Mシステムは，Webアプリケーションサーバ（以下，WebAPサーバという），DNSサーバ，ファイアウォール（以下，FWという）などから構成されるWebサイトとF社の運用PCから構成される。現在，Webサイトは，B社のデータセンター（以下，b-DCという）に構築されている。\n\n現在のMシステムのネットワーク構成（抜粋）を図1に，DNSサーバbに登録されているAレコードの情報を表1に示す。\n\n図1 現在のMシステムのネットワーク構成（抜粋）\n\n表1 DNSサーバbに登録されているAレコードの情報\n\n| 項番 | 機器名称 | サーバのFQDN | IPアドレス |\n| --- | --- | --- | --- |\n| 1 | DNSサーバb | nsb.example.jp | 200.a.b.1/28 |\n| 2 | WebAPサーバb | miap.example.jp | 200.a.b.2/28 |\n| 3 | DNSサーバb | nsb.f-sha.example.lan | 192.168.0.1/24 |\n| 4 | WebAPサーバb | apb.f-sha.example.lan | 192.168.0.2/24 |\n\n注記1 200.x.y.z（x，y，zは，0～255の整数）のIPアドレスは，グローバルアドレスである。\n\n注記2 各リソースレコードのTTL（Time To Live）は，604800が設定されている。\n\n［Mシステムの構成と運用］\n\n・Mシステムを利用するにはログインが必要である。\n\n・FWbには，DMZに設定されたプライベートアドレスとインターネット向けのグローバルアドレスを1対1で静的に変換するNATが設定されており，表1に示した内容で，WebAPサーバb及びDNSサーバbのIPアドレスの変換を行う。\n\n・DNSサーバbは，インターネットに公開するドメインexample.jpとF社の社内向けのドメインf-sha.example.lanの二つのドメインのゾーン情報を管理する。\n\n・F社のL3SWの経路表には，b-DCのWebサイトbへの経路と++①デフォルトルート++が登録されている。\n\n・運用PCには，++②優先DNSサーバとして，FQDNがnsb.f-sha.example.lanのDNSサーバbが登録されている++。\n\n・F社の運用担当者は，運用PCを使用してMシステムの運用作業を行う。\n\n［Mシステムの応答速度の低下］\n\n最近，顧客から，Mシステムの応答が遅くなることがあるという苦情が，Mシステムのサポート窓口に入ることが多くなった。そこで，F社の情報システム部（以下，システム部という）の運用担当者のD主任は，運用PCを使用して次の手順で原因究明を行った。\n\n(i) 顧客と同じURLであるhttps://［a］/でWebAPサーバbにアクセスし，顧客からの申告と同様の事象が発生することを確認した。\n\n(ii) FWbのログを検査し，異常な通信は記録されていないことを確認した。\n\n(iii) SSHを使用し，++③広域イーサ網経由でWebAPサーバbにログインしてCPU使用率を調べた++ところ，設計値を超えた値が継続する時間帯のあることを確認した。\n\nこの結果から，D主任は，WebAPサーバbの処理能力不足が応答速度低下の原因であると判断した。\n\n［Webサイトの増設］\n\nD主任の判断を基に，システム部では，これまでのシステムの構築と運用の経験を生かすことができる，現在と同一構成のWebサイトの増設を決めた。システム部のE課長は，C社のデータセンター（以下，c-DCという）にWebサイトcを構築してMシステムを増強する方式の設計を，D主任に指示した。\n\nD主任は，c-DCにb-DCと同一構成のWebサイトを構築し，DNSラウンドロビンを利用して二つのWebサイトの負荷を分散する方式を設計した。\n\nD主任が設計した，Mシステムを増強する構成を図2に示す。\n\n図2 Mシステムを増強する構成\n\n図2の構成では，DNSサーバbをプライマリDNSサーバ，DNSサーバcをセカンダリDNSサーバに設定する。また，運用PCには，新たに［b］を代替DNSサーバに登録して，［b］も利用できるようにする。\n\nそのほかに，L3SWの経路表にWebサイトcのDMZへの経路を追加する。\n\nDNSサーバbに追加登録するAレコードの情報を表2に示す。\n\n表2 DNSサーバbに追加登録するAレコードの情報\n\n| 項番 | 機器名称 | サーバのFQDN | IPアドレス |\n| --- | --- | --- | --- |\n| 1 | DNSサーバc | nsc.example.jp | 200.c.d.81/28 |\n| 2 | WebAPサーバc | miap.example.jp | 200.c.d.82/28 |\n| 3 | DNSサーバc | nsc.f-sha.example.lan | 192.168.1.1/24 |\n| 4 | WebAPサーバc | apc.f-sha.example.lan | 192.168.1.2/24 |\n\n注記 各リソースレコードのTTLは，表1と同じ604800を設定する。\n\n表2の情報を追加登録することによって，WebAPサーバb，cが同じ割合で利用されるようになる。DNSサーバb，cには［c］転送の設定を行い，DNSサーバbの情報を更新すると，その内容がDNSサーバcにコピーされるようにする。\n\nWebAPサーバのメンテナンス時は，作業を行うWebサイトは停止する必要があるので，次の手順で作業を行う。++④メンテナンス中は，一つのWebサイトでサービスを提供することになるので，Mシステムを利用する顧客への影響は避けられない++。\n\n(i) 事前にDNSサーバbのリソースレコードの［d］を小さい値にする。\n\n(ii) メンテナンス作業を開始する前に，メンテナンスを行うWebサイトの，インターネットに公開するドメインのWebAPサーバのFQDNに対応するAレコードを，DNSサーバb上で無効化する。\n\n(iii) この後，一定時間経てばメンテナンス作業が可能になるが，作業開始が早過ぎると顧客に迷惑を掛けるおそれがある。そこで，++⑤手順(ii)でAレコードを無効化したWebAPサーバの状態を確認++し，問題がなければ作業を開始する。\n\nD主任は，検討結果を基に作成したWebサイトの増設案を，E課長に提出した。増設案が承認され実施に移されることになった。",
+  "sourcePages": [
+    28,
+    29,
+    30,
+    31
+  ],
+  "sourceImages": [
+    "assets/written/ap-r05h-source/question-p28.png",
+    "assets/written/ap-r05h-source/question-p29.png",
+    "assets/written/ap-r05h-source/question-p30.png",
+    "assets/written/ap-r05h-source/question-p31.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05h-source/question-p28.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p29.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p30.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p31.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "source": "IPA 令和5年度春期 応用情報技術者試験 午後 問5",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_qs.pdf"
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "bodyFigures": [
+    {
+      "anchor": "図1 現在のMシステムのネットワーク構成（抜粋）",
+      "caption": "図1 現在のMシステムのネットワーク構成（抜粋）",
+      "alt": "b-DCのDMZ192.168.0.0/24にWebAPサーバb、DNSサーバb、L2SWb。FWbがインターネットと広域イーサ網に接続し、F社L3SW、運用PCへ接続。F社にはインターネット向けFWf。L2SWはレイヤー2スイッチ、L3SWはレイヤー3スイッチ、広域イーサ網は広域イーサネットサービス網。",
+      "image": "assets/written/ap-r05h-pm5/current-network.png",
+      "sourcePage": 28
+    },
+    {
+      "anchor": "図2 Mシステムを増強する構成",
+      "caption": "図2 Mシステムを増強する構成",
+      "alt": "b-DCのWebサイトbとc-DCのWebサイトcが広域イーサ網でF社へ接続。cのDMZは192.168.1.0/24でWebAPサーバc、DNSサーバc、L2SWc、FWcがあり、インターネットの顧客も両サイトへ接続する。",
+      "image": "assets/written/ap-r05h-pm5/expanded-network.png",
+      "sourcePage": 30
+    }
+  ],
+  "items": [
+    {
+      "id": "s1-1",
+      "label": "設問1(1)",
+      "prompt": "［Mシステムの構成と運用］について答えよ。本文中の下線①について，デフォルトルートのネクストホップとなる機器を，図1中の名称で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "機器",
+          "type": "shortText",
+          "referenceAnswers": [
+            "FWf"
+          ],
+          "explanation": "b-DC宛ての経路は個別に登録されている。その他の宛先、特にインターネットへ送るデフォルト経路の次ホップはF社のFWf。",
+          "rubric": [
+            "b-DC宛ての経路は個別に登録されている。その他の宛先、特にインターネットへ送るデフォルト経路の次ホップはF社のFWf。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s1-2",
+      "label": "設問1(2)",
+      "prompt": "本文中の下線②の設定の下で，運用PCからDNSサーバbにアクセスしたとき，パケットがDNSサーバbに到達するまでに経由する機器を，図1中の名称で++全て++答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "経由機器",
+          "type": "freeText",
+          "referenceAnswers": [
+            "L3SW，FWb，L2SWb"
+          ],
+          "explanation": "社内用FQDNは192.168.0.1を指すので、L3SWから広域イーサ網を通りFWb、L2SWbを経由する。インターネット側のFWfを含めない。",
+          "rubric": [
+            "社内用FQDNは192.168.0.1を指すので、L3SWから広域イーサ網を通りFWb、L2SWbを経由する。インターネット側のFWfを含めない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2-1",
+      "label": "設問2(1)",
+      "prompt": "［Mシステムの応答速度の低下］について答えよ。本文中の［a］に入れる適切なFQDNを答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "miap.example.jp"
+          ],
+          "explanation": "顧客と同じURLには公開用のWebAPサーバbのFQDN、miap.example.jpを指定する。",
+          "rubric": [
+            "顧客と同じURLには公開用のWebAPサーバbのFQDN、miap.example.jpを指定する。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2-2",
+      "label": "設問2(2)",
+      "prompt": "本文中の下線③について，アクセス先サーバのFQDNを答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "FQDN",
+          "type": "shortText",
+          "referenceAnswers": [
+            "apb.f-sha.example.lan"
+          ],
+          "explanation": "広域イーサ網を通る運用アクセスでは、プライベートアドレス192.168.0.2に対応する社内向けFQDNを使う。",
+          "rubric": [
+            "広域イーサ網を通る運用アクセスでは、プライベートアドレス192.168.0.2に対応する社内向けFQDNを使う。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-1",
+      "label": "設問3(1)",
+      "prompt": "［Webサイトの増設］について答えよ。本文中の［b］～［d］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "DNSサーバc"
+          ],
+          "explanation": "セカンダリDNSサーバcを運用PCの代替DNSとして登録し、優先側が利用できない場合にも名前解決できるようにする。",
+          "rubric": [
+            "セカンダリDNSサーバcを運用PCの代替DNSとして登録し、優先側が利用できない場合にも名前解決できるようにする。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ゾーン"
+          ],
+          "explanation": "DNSの管理領域の情報をプライマリからセカンダリへ複製するのがゾーン転送。",
+          "rubric": [
+            "DNSの管理領域の情報をプライマリからセカンダリへ複製するのがゾーン転送。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "TTL"
+          ],
+          "explanation": "TTLはリソースレコードのキャッシュ有効時間。事前に短縮することで停止予定のサーバ情報が長く残るのを抑える。",
+          "rubric": [
+            "TTLはリソースレコードのキャッシュ有効時間。事前に短縮することで停止予定のサーバ情報が長く残るのを抑える。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-2",
+      "label": "設問3(2)",
+      "prompt": "本文中の下線④について，顧客に与える影響を25字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "影響",
+          "type": "freeText",
+          "referenceAnswers": [
+            "Mシステムの応答速度が低下することがある。"
+          ],
+          "explanation": "増設前は単一WebAPの処理能力不足で遅延していた。片側停止で再び一方に負荷が集中するため、応答速度が低下し得る。全サービス停止と断定しない。",
+          "rubric": [
+            "増設前は単一WebAPの処理能力不足で遅延していた。片側停止で再び一方に負荷が集中するため、応答速度が低下し得る。全サービス停止と断定しない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 25,
+          "constraints": [
+            "25字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3-3",
+      "label": "設問3(3)",
+      "prompt": "本文中の下線⑤について，確認する内容を20字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "確認内容",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ログイン中の利用者がいないこと"
+          ],
+          "explanation": "DNSレコードが更新されても、既にログインしている顧客のセッションは残り得る。停止対象にログイン中の利用者がいないことを確認してから停止する。",
+          "rubric": [
+            "DNSレコードが更新されても、既にログインしている顧客のセッションは残り得る。停止対象にログイン中の利用者がいないことを確認してから停止する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ]
+        }
+      ]
+    }
+  ]
+}

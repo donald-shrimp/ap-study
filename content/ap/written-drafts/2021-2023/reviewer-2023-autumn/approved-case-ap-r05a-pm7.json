@@ -1,0 +1,385 @@
+{
+  "id": "ap-r05a-pm7",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "hardware",
+  "title": "トマトの自動収穫を行うロボット",
+  "status": "reviewed",
+  "sourceKind": "official",
+  "body": "問7 トマトの自動収穫を行うロボットに関する次の記述を読んで，設問に答えよ。\n\nG社は，温室で栽培されているトマトの自動収穫を行うロボット（以下，収穫ロボットという）を開発している。収穫ロボットの外観を図1に，収穫ロボットのシステム構成を図2に，収穫ロボットの主な構成要素を表1に，収穫ロボットの状態遷移の一部を図3に示す。\n\n図1 収穫ロボットの外観\n\n図2 収穫ロボットのシステム構成\n\n表1 収穫ロボットの主な構成要素\n\n図3 収穫ロボットの状態遷移の一部\n\n［収穫ロボットの動作概要］\n\n収穫ロボットの動作概要を次に示す。\n\n・収穫ロボットは，管理者スマホから管理サーバを介して収穫開始の指示を受けると，状態を待機状態から開始／終了状態に遷移させ，あらかじめ管理サーバから設定された経路（待機位置→収穫開始位置→収穫終了位置→待機位置）に沿って温室内を50cm／秒の速度で移動を開始する。\n\n・待機位置から収穫開始位置まで移動すると，状態を検出中状態に遷移させ，認識用カメラで撮影したトマトの画像の解析を行いながら移動を続ける。収穫に適したトマトを検出すると，移動を停止して状態を収穫中状態に遷移させ，収穫を行う。\n\n・認識ユニットの解析結果から，ハンドを収穫対象のトマトに近づけ，近接カメラで撮影した画像でハンドの位置を補正して収穫を行う。\n\n・ハンドには圧力センサーが取り付けられており，トマトを傷つけないように把持できる。トマトを把持した後，ハンドの先端にあるカッターでトマトの柄の部分を切断して収穫する。\n\n・トマトを柄から切り離して把持できた場合，収穫成功と判断し，状態を積載中状態に遷移させ，収穫したトマトを近接カメラで撮影した画像から判定した収穫トレーの空き領域に載せる。\n\n・トマトを収穫トレーに載せた後，更に収穫に適したトマトが残っており，かつ，収穫トレーに空き領域が残っていれば，状態を積載中状態から収穫中状態に遷移させ，検出している全てのトマトを収穫するか収穫トレーの空き領域がなくなるまで収穫動作を繰り返す。\n\n・トマトを柄から切り離すことができなかった場合や切り離した後にハンドから落とした場合などは収穫失敗と判断し，収穫中状態のまま，検出している次のトマトの収穫を行う。\n\n・検出している全てのトマトに対して収穫動作を終えると，収穫を終えたときの状態と収穫ロボットの経路上の位置，収穫トレーの空き領域の状況から次の状態遷移先と動作を決定する。\n\n・収穫終了位置で，収穫に適したトマトを検出していない場合は，収穫を終了し，待機位置へ移動する。\n\n・収穫ロボットは動作状況や収穫状況などの情報を定期的に管理サーバに送信する。\n\n・管理者は管理者スマホを使用して管理サーバに保管されている情報を参照することができる。\n\n・収穫ロボットが移動中に，台車の先頭に取り付けられた超音波センサーが，進路上1m以内の距離にある障害物を検知すると移動を停止し，状態を異常状態に遷移させ，管理サーバを介して管理者スマホに警告メッセージを送信する。\n\n［アームの関節部について］\n\nアームには，軸1，軸2，軸3の三つの回転軸があり，それぞれの回転軸にはサーボモーターが使用されている。サーボモーターはPWM方式で，入力する制御パルスのデューティ比によって回転する角度を制御する。\n\nサーボモーターの仕様を表2に，各サーボモーターの制御角とアームの可動範囲を図4に示す。サーボモーターは，制御パルス幅1.0ミリ秒の場合，制御角が-90度（反時計回りに90度）に，制御パルス幅11.0ミリ秒の場合，制御角が90度（時計回りに90度）になるように回転する。\n\n表2 サーボモーターの仕様\n\n図4 各サーボモーターの制御角とアームの可動範囲\n\n［制御部のソフトウェア構成について］\n\n収穫ロボットの制御部では，リアルタイムOSを使用する。制御部の主なタスクの処理概要を表3に示す。\n\n表3 制御部の主なタスクの処理概要\n\n図5 サーボモーターへの入力制御パルス",
+  "sourceImages": [
+    "assets/written/ap-r05a-source/question-p36.png",
+    "assets/written/ap-r05a-source/question-p37.png",
+    "assets/written/ap-r05a-source/question-p38.png",
+    "assets/written/ap-r05a-source/question-p39.png",
+    "assets/written/ap-r05a-source/question-p40.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "収穫ロボットの状態遷移について答えよ。収穫終了位置まで移動したときに開始／終了状態への状態遷移が発生するのはどのような場合か。25字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "場合",
+          "type": "freeText",
+          "referenceAnswers": [
+            "収穫に適したトマトを検出していない場合"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "収穫終了位置でも収穫に適したトマトがあれば収穫する。適したトマトを検出していない場合に収穫を終えて開始／終了状態へ戻る。障害物検知は異常状態の条件であり区別する。",
+          "rubric": [
+            "収穫終了位置でも収穫に適したトマトがあれば収穫する。適したトマトを検出していない場合に収穫を終えて開始／終了状態へ戻る。障害物検知は異常状態の条件であり区別する。"
+          ],
+          "maxLength": 25,
+          "constraints": [
+            "25字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "収穫ロボットの状態遷移について答えよ。収穫終了位置で，収穫に適した2個のトマトを検出した。2個目のトマトの把持に失敗したとき，1個目のトマトの収穫を開始した時点から2個目のトマトの把持に失敗して次の動作に移るまでの状態遷移として，適切なものを解答群の中から選び記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "状態遷移",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "1個目は収穫成功して積載中へ移り，2個目に着手するため収穫中へ戻る。2個目失敗では積載しないので収穫中のまま，対象がなくなり開始／終了状態へ移る。",
+          "rubric": [
+            "1個目は収穫成功して積載中へ移り，2個目に着手するため収穫中へ戻る。2個目失敗では積載しないので収穫中のまま，対象がなくなり開始／終了状態へ移る。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "収穫中状態→積載中状態→開始／終了状態"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "収穫中状態→積載中状態→収穫中状態→開始／終了状態"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "収穫中状態→積載中状態→収穫中状態→積載中状態→開始／終了状態"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "収穫中状態→積載中状態→収穫中状態→積載中状態→収穫中状態→開始／終了状態"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "制御部のタスクについて答えよ。認識タスクから収穫トレーの空き領域の情報を受け取ったとき，メインタスクが開始／終了状態へ遷移する条件を20字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "条件",
+          "type": "freeText",
+          "referenceAnswers": [
+            "収穫トレーに空き領域がない"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "トレーが満杯なら検出済みのトマトが残っていても追加積載できないため収穫を終了する。状態管理はメインタスクが行う。",
+          "rubric": [
+            "トレーが満杯なら検出済みのトマトが残っていても追加積載できないため収穫を終了する。状態管理はメインタスクが行う。"
+          ],
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "制御部のタスクについて答えよ。認識タスクがメインタスクに収穫に適したトマトを検出したことを通知するときに合わせて通知する必要がある情報を答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "情報",
+          "type": "freeText",
+          "referenceAnswers": [
+            "トマトの個数"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "メインタスクは全てのトマトに収穫動作を行ったかを管理する必要があるため，検出したトマトの個数を受け取る。個々の位置など収穫制御用の情報はアーム制御へ，トレー空き領域は別の通知である。",
+          "rubric": [
+            "メインタスクは全てのトマトに収穫動作を行ったかを管理する必要があるため，検出したトマトの個数を受け取る。個々の位置など収穫制御用の情報はアーム制御へ，トレー空き領域は別の通知である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "制御部のタスクについて答えよ。表3中の［a］に入れるタスク名を，表3中のタスク名で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "メイン"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "空き領域の情報は積載の制御を行うアーム制御と，空きがなくなった際の状態遷移を管理するメインに通知する。",
+          "rubric": [
+            "空き領域の情報は積載の制御を行うアーム制御と，空きがなくなった際の状態遷移を管理するメインに通知する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "アームの制御について，アームの各関節部の軸に制御パルスが図5のように入力された場合，アームはどのような姿勢に変化するか。解答群の中から選び記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "姿勢",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "1〜11msが-90〜90度なので角度は18×(パルス幅-6)。軸1の6msは0度，軸2の10msは72度，軸3の3msは-54度になる。PWM周期20msとパルス幅を取り違えない。",
+          "rubric": [
+            "1〜11msが-90〜90度なので角度は18×(パルス幅-6)。軸1の6msは0度，軸2の10msは72度，軸3の3msは-54度になる。PWM周期20msとパルス幅を取り違えない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "軸1が-54度，軸2が5度，軸3が-72度変化した姿勢"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "軸1が0度，軸2が-54度，軸3が72度変化した姿勢"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "軸1が0度，軸2が72度，軸3が-54度変化した姿勢"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "軸1が5度，軸2が-54度，軸3が72度変化した姿勢"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "障害物の検知について，収穫ロボットが直進中，超音波センサーが正面の障害物を検知して，移動を停止したとき，超音波センサーが超音波を出力してから検知に掛かった時間は最大何ミリ秒か。超音波が反射して戻ってくるまでに収穫ロボットが移動する距離を考慮して答えよ。ここで，音速は340m／秒とし，障害物は検知した位置から動かず，ソフトウェアの処理時間は考えないものとする。答えは小数第3位を切り上げ，小数第2位まで求めよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "最大時間（ミリ秒）",
+          "type": "shortText",
+          "referenceAnswers": [
+            "5.90"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "検知時の障害物までの距離を最大1m，往復時間をt秒とすると，送信時の距離は1+0.5t。音の往復距離は(1+0.5t)+1なので340t=2+0.5t。t=2/339.5秒=5.891...msとなり，小数第3位切上げで5.90ms。ロボットの移動を無視した2/340とは異なる。",
+          "rubric": [
+            "検知時の障害物までの距離を最大1m，往復時間をt秒とすると，送信時の距離は1+0.5t。音の往復距離は(1+0.5t)+1なので340t=2+0.5t。t=2/339.5秒=5.891...msとなり，小数第3位切上げで5.90ms。ロボットの移動を無視した2/340とは異なる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "ミリ秒で，小数第3位を切り上げ，小数第2位まで求める。",
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和5年度秋期 応用情報技術者試験 午後 問7",
+  "sourcePages": [
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05a-pm7/figure-1.png": {
+      "width": 421,
+      "height": 388
+    },
+    "assets/written/ap-r05a-pm7/figure-2.png": {
+      "width": 373,
+      "height": 420
+    },
+    "assets/written/ap-r05a-pm7/table-1.png": {
+      "width": 584,
+      "height": 302
+    },
+    "assets/written/ap-r05a-pm7/figure-3.png": {
+      "width": 614,
+      "height": 192
+    },
+    "assets/written/ap-r05a-pm7/table-2.png": {
+      "width": 407,
+      "height": 184
+    },
+    "assets/written/ap-r05a-pm7/figure-4.png": {
+      "width": 577,
+      "height": 439
+    },
+    "assets/written/ap-r05a-pm7/table-3.png": {
+      "width": 842,
+      "height": 493
+    },
+    "assets/written/ap-r05a-pm7/figure-5.png": {
+      "width": 594,
+      "height": 327
+    },
+    "assets/written/ap-r05a-source/question-p36.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p37.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p38.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p39.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p40.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r05a-pm7/figure-1.png",
+      "caption": "図1 収穫ロボットの外観",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "図1 収穫ロボットの外観",
+      "alt": "図1 収穫ロボットの外観"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r05a-pm7/figure-2.png",
+      "caption": "図2 収穫ロボットのシステム構成",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "図2 収穫ロボットのシステム構成",
+      "alt": "図2 収穫ロボットのシステム構成"
+    },
+    {
+      "id": "table-1",
+      "image": "assets/written/ap-r05a-pm7/table-1.png",
+      "caption": "表1 収穫ロボットの主な構成要素",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "表1 収穫ロボットの主な構成要素",
+      "alt": "表1 収穫ロボットの主な構成要素"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r05a-pm7/figure-3.png",
+      "caption": "図3 収穫ロボットの状態遷移の一部",
+      "sourcePage": 36,
+      "placement": "replace-caption",
+      "anchor": "図3 収穫ロボットの状態遷移の一部",
+      "alt": "図3 収穫ロボットの状態遷移の一部"
+    },
+    {
+      "id": "table-2",
+      "image": "assets/written/ap-r05a-pm7/table-2.png",
+      "caption": "表2 サーボモーターの仕様",
+      "sourcePage": 38,
+      "placement": "replace-caption",
+      "anchor": "表2 サーボモーターの仕様",
+      "alt": "表2 サーボモーターの仕様"
+    },
+    {
+      "id": "figure-4",
+      "image": "assets/written/ap-r05a-pm7/figure-4.png",
+      "caption": "図4 各サーボモーターの制御角とアームの可動範囲",
+      "sourcePage": 38,
+      "placement": "replace-caption",
+      "anchor": "図4 各サーボモーターの制御角とアームの可動範囲",
+      "alt": "図4 各サーボモーターの制御角とアームの可動範囲"
+    },
+    {
+      "id": "table-3",
+      "image": "assets/written/ap-r05a-pm7/table-3.png",
+      "caption": "表3 制御部の主なタスクの処理概要",
+      "sourcePage": 39,
+      "placement": "replace-caption",
+      "anchor": "表3 制御部の主なタスクの処理概要",
+      "alt": "表3 制御部の主なタスクの処理概要"
+    },
+    {
+      "id": "figure-5",
+      "image": "assets/written/ap-r05a-pm7/figure-5.png",
+      "caption": "図5 サーボモーターへの入力制御パルス",
+      "sourcePage": 40,
+      "placement": "replace-caption",
+      "anchor": "図5 サーボモーターへの入力制御パルス",
+      "alt": "図5 サーボモーターへの入力制御パルス"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2023_autumn",
+  "authoringStatus": "independently-reviewed"
+}

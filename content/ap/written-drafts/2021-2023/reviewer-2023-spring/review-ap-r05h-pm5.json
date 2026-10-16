@@ -1,0 +1,62 @@
+{
+  "caseId": "ap-r05h-pm5",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2023_spring",
+  "reviewer": "/root/author_2021_spring",
+  "reviewedAt": "2026-10-15T15:35:45.987525+00:00",
+  "canonicalCaseSHA256": "aa42cff37912b5d0c6aa6e16bf8e07ef468fbc42abda8c75cdd231589fe8bd78",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2023-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_qs.pdf": "801f06d5f13652b6d3a8a09e72d0b1bf01746278db3f8590b952ec5341c9940c",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans.pdf": "dea64ec1f36d2aeabe4ff8eb1fbe66c75229757b84be574aa161cfa0ec40c0fa",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt.pdf": "796fbcb644f17ec9ab60b151e527757b92d1aec53d235117ce65667148ab4390"
+  },
+  "assetHashes": {
+    "assets/written/ap-r05h-source/question-p28.png": "40847dda7c537f93db7a9a8d5276fe53044cb446bd282149a6d72b871f8b24e9",
+    "assets/written/ap-r05h-source/question-p29.png": "2ed9b59af223e1578f5deab07d711bbf1dc365f6ebf5d63f14e5ffdd0af2849a",
+    "assets/written/ap-r05h-source/question-p30.png": "197eed919f7d10c643477e961822e64a561a3ac041d9baae61c38c2818df767f",
+    "assets/written/ap-r05h-source/question-p31.png": "69333222997d45a4c080efbbd932ce8ac60ccc333af3f4377708439519409753",
+    "assets/written/ap-r05h-pm5/current-network.png": "c7ee65d92b6c0b8cee721beeed1de329c8bb8fc3a58b9a5dc9ec7b27d66b837d",
+    "assets/written/ap-r05h-pm5/expanded-network.png": "ae28a61776415e4476d19c43bf5eb6814b1c8d1d48abe91568de51f8c3bbf34d",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans-p03.png": "fde9a7b07c64a7f0b399622e2922423415b16a1a293124a782c1a5e84763b856",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt-p02.png": "9114081a70b57cae88594b5e3989c22fab7b2ae0b49c3742158e5c9490f1ddaf"
+  },
+  "method": "原問の全対象頁をview_imageで実表示し作者草稿/公式解答例を開く前に独立解答方針を保存した後、公式解答例と講評の該当PNG、草稿全本文・表セル・全小問/欄・選択肢・制約・解説/rubricを照合。全完成cropを実表示して原本と比較し、元PNGとcrop座標の全画素一致をPILで独立検証。最終case及び公式PDF/画像のSHA-256を再計算。共有公式解答頁の他問が先に見えた場合はindependent-findingsに明示。",
+  "answerCheck": "原問28〜31頁、ネットワーク2図の全結線/ラベルとAレコード2表各4行、7設問9欄、全て条件及び25/20字を照合。公開IPと社内用IPの経路、ラウンドロビン/ゾーン転送/TTL/既存セッションの因果を別途追跡。公式例9欄一致、最終欄では単なるDNSキャッシュでなくログイン中利用者なしを要点にしていることを確認。",
+  "gradingCheck": "全単一選択と登録短答はexactText、説明/式/順不同複数はself。原本字数制約とアプリ上限を区別。未登録短答表現は自動不正解とせず自己評価へ。学習用rubricは公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r05h-source/question-p28.png",
+      "box": [
+        120,
+        580,
+        875,
+        963
+      ],
+      "output": "assets/written/ap-r05h-pm5/current-network.png",
+      "pixelMatch": true,
+      "sha256": "c7ee65d92b6c0b8cee721beeed1de329c8bb8fc3a58b9a5dc9ec7b27d66b837d"
+    },
+    {
+      "source": "assets/written/ap-r05h-source/question-p30.png",
+      "box": [
+        120,
+        300,
+        915,
+        728
+      ],
+      "output": "assets/written/ap-r05h-pm5/expanded-network.png",
+      "pixelMatch": true,
+      "sha256": "ae28a61776415e4476d19c43bf5eb6814b1c8d1d48abe91568de51f8c3bbf34d"
+    }
+  ],
+  "calculationChecks": [],
+  "actualCounts": {
+    "items": 7,
+    "fields": 9,
+    "sourceImages": 4,
+    "bodyFigures": 2
+  }
+}

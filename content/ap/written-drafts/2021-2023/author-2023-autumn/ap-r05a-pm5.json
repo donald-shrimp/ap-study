@@ -1,0 +1,370 @@
+{
+  "id": "ap-r05a-pm5",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "network",
+  "title": "メールサーバの構築",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問5 メールサーバの構築に関する次の記述を読んで，設問に答えよ。\n\nL社は，複数の衣料品ブランドを手がけるアパレル会社である。L社では，顧客層を拡大するために，新しい衣料品ブランド（以下，新ブランドという）を立ち上げることにした。新ブランドの立ち上げに向けて，L社の社員20名で構成するプロジェクトチームを結成し，都内のオフィスビルにプロジェクトルームを新設した。新ブランドの知名度向上のために新ブランド用Webサイトと新ブランド用メールアドレスを利用した電子メール（以下，メールという）による広報を計画しており，プロジェクトチームのMさんが，Webサーバ機能とメールサーバ機能を有する広報サーバを構築することになった。\n\n［プロジェクトルームのネットワーク設計］\n\nMさんは，新ブランドのプロジェクトチームのメンバーが各メンバーに配布されたPC（以下，広報PCという）を利用して，新ブランド用Webサイトの更新や，新ブランド用メールアドレスによるメールの送受信を行う設計を考えた。Mさんが考えたネットワーク構成（抜粋）を図1に示す。\n\n図1 ネットワーク構成（抜粋）\n\nMさんが考えたネットワーク構成は次のとおりである。\n\n・プロジェクトルーム内に広報サーバを設置し，FW1に接続する。\n\n・インターネット接続は，ISP N社のサービスを利用し，N社とFW1とを光回線で接続する。\n\n・広報サーバのメールサーバ機能は，SMTP（Simple Mail Transfer Protocol）によるメール送信機能とPOP（Post Office Protocol）によるメール受信機能の二つの機能を実装する。\n\n・FW1にNAPT（Network Address Port Translation）の設定と，インターネット上の機器から広報サーバにメールとWebの通信だけができるように，インターネットからFW1宛てに送信されたIPパケットのうち，［a］ポート番号が25，80，又は［b］のIPパケットだけを，広報サーバのIPアドレスに転送する設定を行う。\n\nN社のインターネット接続サービスでは，N社のDNSサーバを利用した名前解決の機能と，N社のメールサーバを中継サーバとしてN社のネットワーク外へメールを転送する機能が提供されている。\n\n［新ブランドのドメイン名取得とDNSの設計］\n\n新ブランドのドメイン名として“example.jp”を取得し，広報サーバをWebサーバとメールサーバとして利用できるように，N社のDNSサーバにホスト名やIPアドレスなどのゾーン情報を設定することを考えた。DNSサーバに設定するゾーン情報（抜粋）を図2に示す。\n\n図2 DNSサーバに設定するゾーン情報（抜粋）\n\n［メール送受信のテスト］\n\nMさんの設計が承認され，ネットワークの工事及び広報サーバの設定が完了した。新ブランドのメール受信のテストのために，Mさんは，L社本社のPCを用いてL社の自分のメールアドレスから新ブランドの自分のメールアドレスであるsyainM@example.jpへメールを送信し，エラーなくメールが送信できることを確認した。次に，新ブランドプロジェクトルームの広報PCのメールソフトウェアに受信メールサーバとしてserv.example.jp，POP3のポート番号として110番ポートを設定し，メール受信のテストを行った。しかし，メールソフトウェアのメール受信ボタンを押してもエラーが発生し，メールを受信できなかった。広報サーバのログを確認したところ，広報PCからのアクセスはログに記録されていなかった。\n\nMさんは，設定の誤りに気づき，++①メールの受信エラーの問題を修正して++メールが受信できることを確認した後に，広報PCからメール送信のテストを行った。テストの結果，新ブランドの管理者のメールアドレスであるkanriD@example.jpからsyainM@example.jp宛てのメールは届いたが，kanriD@example.jpからインターネット上の他ドメインのメールアドレス宛てのメールは届かなかった。広報サーバのログを確認したところ，N社のネットワークを経由した宛先ドメインのメールサーバへのTCPコネクションの確立に失敗したことを示すメッセージが記録されていた。\n\n調査の結果，他ドメインのメールアドレス宛てのメールが届かなかった事象は，N社の++②OP25B（Outbound Port 25 Blocking）++と呼ばれる対策によるものであることが分かった。OP25Bは，N社からインターネット宛てに送信される宛先ポート番号が25のIPパケットのうち，N社のメールサーバ以外から送信されたIPパケットを遮断する対策である。このセキュリティ対策に対応するため，++③広報サーバに必要な設定を++行い，インターネット上の他ドメインのメールアドレス宛てのメールも届くことを確認した。\n\n［メールサーバのセキュリティ対策］\n\n広報サーバが大量のメールを送信する踏み台サーバとして不正利用されないために，メールの送信を許可する接続元のネットワークアドレスとして［e］/24を広報サーバに設定する対策を行った。また，プロジェクトチームのメンバーのメールアドレスとパスワードを利用して，広報PCからメール送信時に広報サーバでSMTP認証を行う設定を追加した。\n\nその後，Mさんは広報サーバとネットワークの構築を完了させ，L社は新ブランドの広報を開始した。",
+  "sourceImages": [
+    "assets/written/ap-r05a-source/question-p26.png",
+    "assets/written/ap-r05a-source/question-p27.png",
+    "assets/written/ap-r05a-source/question-p28.png",
+    "assets/written/ap-r05a-source/question-p29.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の［a］，［b］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "オ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "外部から要求するサービスは宛先ポート番号で識別する。送信元ポートは通常動的でありSMTPやWebサービスを示さない。",
+          "rubric": [
+            "外部から要求するサービスは宛先ポート番号で識別する。送信元ポートは通常動的でありSMTPやWebサービスを示さない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "21"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "22"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "23"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "443"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "宛先"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "送信元"
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "SMTPは25，HTTPは80，HTTPSは443である。21はFTP，22はSSH，23はTelnetでありWebの通信には該当しない。",
+          "rubric": [
+            "SMTPは25，HTTPは80，HTTPSは443である。21はFTP，22はSSH，23はTelnetでありWebの通信には該当しない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "21"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "22"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "23"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "443"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "宛先"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "送信元"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図2中の［c］，［d］に入れる適切な字句を，図1及び図2中の字句を用いて答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "serv",
+            "www"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "MXはメールを受け取るホストを指すので広報サーバ名servを設定する。公式例はserv又はその別名wwwを許容している。",
+          "rubric": [
+            "MXはメールを受け取るホストを指すので広報サーバ名servを設定する。公式例はserv又はその別名wwwを許容している。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "w.x.y.z"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "公開DNSのAレコードにはインターネットから到達するFW1のグローバルIPアドレスw.x.y.zを指定する。内部用192.168.1.10では外部から到達できない。",
+          "rubric": [
+            "公開DNSのAレコードにはインターネットから到達するFW1のグローバルIPアドレスw.x.y.zを指定する。内部用192.168.1.10では外部から到達できない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［メール送受信のテスト］について答えよ。本文中の下線①について，エラーの問題を修正するために変更したメールソフトウェアの設定項目を15字以内で答えよ。また，変更後の設定内容を図1，図2中の字句を用いて答えよ。",
+      "fields": [
+        {
+          "id": "setting",
+          "label": "設定項目",
+          "type": "shortText",
+          "referenceAnswers": [
+            "受信メールサーバ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "serv.example.jpは外部DNSでFW1のグローバルIPへ解決されるが，FW1が外部から転送するのは25/80/443だけで110ではない。広報PCから内部アドレスへ直接接続するよう受信メールサーバを変更する。",
+          "rubric": [
+            "serv.example.jpは外部DNSでFW1のグローバルIPへ解決されるが，FW1が外部から転送するのは25/80/443だけで110ではない。広報PCから内部アドレスへ直接接続するよう受信メールサーバを変更する。"
+          ],
+          "maxLength": 15,
+          "constraints": [
+            "15字以内。"
+          ]
+        },
+        {
+          "id": "value",
+          "label": "設定内容",
+          "type": "shortText",
+          "referenceAnswers": [
+            "192.168.1.10"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "広報PCと広報サーバはFW1の別セグメントにあり，広報サーバの内部IPアドレス192.168.1.10を指定すれば内部経路でPOP3に接続できる。",
+          "rubric": [
+            "広報PCと広報サーバはFW1の別セグメントにあり，広報サーバの内部IPアドレス192.168.1.10を指定すれば内部経路でPOP3に接続できる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［メール送受信のテスト］について答えよ。本文中の下線②について，OP25Bによって軽減できるサイバーセキュリティ上の脅威は何か，最も適切なものを解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "脅威",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "エ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "ISPの正規メールサーバ以外から外部宛て25番ポートへの送信を遮断し，感染端末や不正中継サーバからスパムを直接大量送信する行為を抑制する。DDoS，侵入，受信内容の不正参照を直接防ぐ対策ではない。",
+          "rubric": [
+            "ISPの正規メールサーバ以外から外部宛て25番ポートへの送信を遮断し，感染端末や不正中継サーバからスパムを直接大量送信する行為を抑制する。DDoS，侵入，受信内容の不正参照を直接防ぐ対策ではない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "広報PCが第三者のWebサービスへのDDoS攻撃の踏み台にされる。"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "広報PCに外部からアクセス可能なバックドアを仕掛けられる。"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "広報サーバが受信したメールを不正に参照される。"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "スパムメールの送信に広報サーバが利用される。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "［メール送受信のテスト］について答えよ。本文中の下線③について，広報サーバに行う設定を，図1中の機器名を用いて35字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "設定",
+          "type": "freeText",
+          "referenceAnswers": [
+            "N社のメールサーバを中継サーバとしてメールを送信する設定"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "本文で提供されているN社の中継機能を用いれば，外部への送信元はOP25Bの例外であるN社メールサーバになる。広報PCだけの設定変更やFWでの解除ではない。",
+          "rubric": [
+            "本文で提供されているN社の中継機能を用いれば，外部への送信元はOP25Bの例外であるN社メールサーバになる。広報PCだけの設定変更やFWでの解除ではない。"
+          ],
+          "maxLength": 35,
+          "constraints": [
+            "35字以内。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "label": "設問4",
+      "prompt": "本文中の［e］に入れる適切なネットワークアドレスを答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "192.168.0.0"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "広報PC側のFW1インタフェースは192.168.0.1/24なので，接続元ネットワークは192.168.0.0/24。端末やFWのホストアドレスではなくホスト部を0にしたネットワークアドレスを答える。",
+          "rubric": [
+            "広報PC側のFW1インタフェースは192.168.0.1/24なので，接続元ネットワークは192.168.0.0/24。端末やFWのホストアドレスではなくホスト部を0にしたネットワークアドレスを答える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和5年度秋期 応用情報技術者試験 午後 問5",
+  "sourcePages": [
+    26,
+    27,
+    28,
+    29
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05a-pm5/figure-1.png": {
+      "width": 817,
+      "height": 328
+    },
+    "assets/written/ap-r05a-pm5/figure-2.png": {
+      "width": 779,
+      "height": 185
+    },
+    "assets/written/ap-r05a-source/question-p26.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p27.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p28.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p29.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r05a-pm5/figure-1.png",
+      "caption": "図1 ネットワーク構成（抜粋）",
+      "sourcePage": 26,
+      "placement": "replace-caption",
+      "anchor": "図1 ネットワーク構成（抜粋）",
+      "alt": "図1 ネットワーク構成（抜粋）"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r05a-pm5/figure-2.png",
+      "caption": "図2 DNSサーバに設定するゾーン情報（抜粋）",
+      "sourcePage": 27,
+      "placement": "replace-caption",
+      "anchor": "図2 DNSサーバに設定するゾーン情報（抜粋）",
+      "alt": "図2 DNSサーバに設定するゾーン情報（抜粋）"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2023_autumn",
+  "authoringStatus": "awaiting-independent-review"
+}

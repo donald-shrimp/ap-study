@@ -1,0 +1,358 @@
+{
+  "id": "ap-r05h-pm3",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "title": "多倍長整数の演算",
+  "topicId": "algorithm",
+  "sourceKind": "official",
+  "status": "draft",
+  "author": "/root/author_2023_spring",
+  "authoringStatus": "awaiting-independent-review",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "body": "問3 多倍長整数の演算に関する次の記述を読んで，設問に答えよ。\n\nコンピュータが一度に処理できる整数の最大桁には，CPUが一度に扱える情報量に依存した限界がある。一度に扱える桁数を超える演算を行う一つの方法として，10を基数とした多倍長整数（以下，多倍長整数という）を用いる方法がある。\n\n［多倍長整数の加減算］\n\n多倍長整数の演算では，整数の桁ごとの値を，1の位から順に1次元配列に格納して管理する。例えば整数123は，要素数が3の配列に{3，2，1}を格納して表現する。多倍長整数の加算は，“桁ごとの加算”の後，“繰り上がり”を処理することで行う。456＋789を計算した例を図1に示す。\n\n図1 456＋789を計算した例\n\n“桁ごとの加算”を行うと，配列の内容は{15，13，11}となる。1の位は15になるが，15は10×1＋5なので，10の位である13に1を繰り上げて{5，14，11}とする。これを最上位まで繰り返す。最上位で繰り上がりが発生する場合は，配列の要素数を増やして対応する。減算も同様に“桁ごとの減算”と“繰り下がり”との処理で計算できる。\n\n［多倍長整数の乗算］\n\n多倍長整数の乗算については，計算量を削減するアルゴリズムが考案されており，その中の一つにカラツバ法がある。ここでは，桁数が2のべき乗で，同じ桁数をもった正の整数同士の乗算について，カラツバ法を適用した計算を行うことを考える。桁数が2のべき乗でない整数や，桁数が異なる整数同士の乗算を扱う場合は，上位の桁を0で埋めて処理する。例えば，123×4は0123×0004として扱う。\n\n［ツリー構造の構築］\n\nカラツバ法を適用した乗算のアルゴリズムは，計算のためのツリー構造（以下，ツリーという）を作る処理と，ツリーを用いて演算をする処理から成る。ツリーは，多倍長整数の乗算の式を一つのノードとし，一つのノードは3個の子ノードをもつ。\n\nM桁×M桁の乗算の式について，乗算記号の左右にある値を，それぞれM/2桁ずつに分けてA，B，C，Dの四つの多倍長整数を作る。これらの整数を使って，①A×C，②B×D，③(A＋B)×(C＋D)の3個の子ノードを作り，M/2桁×M/2桁の乗算を行う層を作る。(A＋B)，(C＋D)は多倍長整数の加算の結果であるが，ここでは“桁ごとの加算”だけを行い，“繰り上がり”の処理はツリーを用いて行う演算の最後でまとめて行う。生成した子ノードについても同じ手順を繰り返し，1桁×1桁の乗算を行う最下層のノードまで展開する。\n\n1234×5678についてのツリーを図2に示す。図2の層2の場合，①は12×56，②は34×78，③は46×134となる。③の(C＋D)は，“桁ごとの加算”だけの処理を行うと，10の位が5＋7＝12，1の位が6＋8＝14となるので，12×10＋14＝134となる。\n\n図2 1234×5678についてのツリー\n\n［ツリーを用いた演算］\n\nツリーの最下層のノードは，整数の乗算だけで計算できる。最下層以外の層は，子ノードの計算結果を使って，次の式で計算できることが分かっている。ここで，α，β，γは，それぞれ子ノード①，②，③の乗算の計算結果を，Kは対象のノードの桁数を表す。\n\n$$\\alpha\\times10^K+(\\gamma-\\alpha-\\beta)\\times10^{K/2}+\\beta\\quad\\cdots\\cdots(1)$$\n\n図2のルートノードの場合，K＝4，α＝672，β＝2652，γ＝6164なので，計算結果は次のとおりとなる。\n\n$$672\\times10000+(6164-672-2652)\\times100+2652=7006652$$\n\n［多倍長整数の乗算のプログラム］\n\n桁数が2のべき乗の多倍長整数val1，val2の乗算を行うプログラムを作成した。プログラム中で利用する多倍長整数と，ツリーのノードは構造体で取り扱う。構造体の型と要素を表1に示す。構造体の各要素には，構造体の変数名.要素名でアクセスできる。また，配列の添字は1から始まる。\n\n表1 構造体の型と要素\n\n| 構造体の型 | 要素名 | 要素の型 | 内容 |\n| --- | --- | --- | --- |\n| 多倍長整数 | N | 整数 | 多倍長整数の桁数 |\n| 多倍長整数 | values | 整数の配列 | 桁ごとの値を管理する1次元配列。1の位の値から順に値を格納する。配列の要素は，必要な桁を全て格納するのに十分な数が確保されているものとする。 |\n| ノード | N | 整数 | ノードが取り扱う多倍長整数の桁数。図2の1234×5678のノードの場合は4である。 |\n| ノード | val1 | 多倍長整数 | 乗算記号の左側の値 |\n| ノード | val2 | 多倍長整数 | 乗算記号の右側の値 |\n| ノード | result | 多倍長整数 | 乗算の計算結果 |\n\n多倍長整数の操作を行う関数を表2に，プログラムで使用する主な変数，配列及び関数を表3に，与えられた二つの多倍長整数からツリーを構築するプログラムを図3に，そのツリーを用いて演算を行うプログラムを図4に，それぞれ示す。表2，表3中のp，q，v1，v2の型は多倍長整数である。また，図3，図4中の変数は全て大域変数である。\n\n表2 多倍長整数の操作を行う関数\n\n| 名称 | 型 | 内容 |\n| --- | --- | --- |\n| add(p, q) | 多倍長整数 | pとqについて，“桁ごとの加算”を行う。 |\n| carry(p) | 多倍長整数 | pについて“繰り上がり”・“繰り下がり”の処理を行う。 |\n| left(p, k) | 多倍長整数 | pについて，valuesの添字が大きい方のk個の要素を返す。pのvaluesが{4，3，2，1}，kが2であれば，valuesが{2，1}の多倍長整数を返す。 |\n| right(p, k) | 多倍長整数 | pについて，valuesの添字が小さい方のk個の要素を返す。pのvaluesが{4，3，2，1}，kが2であれば，valuesが{4，3}の多倍長整数を返す。 |\n| lradd(p, k) | 多倍長整数 | add(left(p, k), right(p, k))の結果を返す。 |\n| shift(p, k) | 多倍長整数 | pを$10^k$倍する。 |\n| sub(p, q) | 多倍長整数 | pとqについて，“桁ごとの減算”を行いp－qを返す。 |\n\n表3 使用する主な変数，配列及び関数\n\n| 名称 | 種類 | 型 | 内容 |\n| --- | --- | --- | --- |\n| elements[] | 配列 | ノード | ツリーのノードを管理する配列。ルートノードを先頭に，各層の左側のノードから順に要素を格納する。図2の場合は，{1234×5678，12×56，34×78，46×134，1×5，2×6，…}の順で格納する。 |\n| layer_top[] | 配列 | 整数 | ルートノードから順に，各層の左端のノードの，elements配列上での添字の値を格納する。図2の場合は1234×5678，12×56，1×5の添字に対応する{1，2，5}が入る。 |\n| mod(m, k) | 関数 | 整数 | mをkで割った剰余を整数で返す。 |\n| new_elem(k,v1,v2) | 関数 | ノード | 取り扱う多倍長整数の桁数がkで，v1×v2の乗算を表すノード構造体を新規に一つ作成して返す。 |\n| pow(m, k) | 関数 | 整数 | mのk乗を整数で返す。kが0の場合は1を返す。 |\n| t_depth | 変数 | 整数 | ツリーの層の数。図2の場合は3である。 |\n| val1, val2 | 変数 | 多倍長整数 | 乗算する対象の二つの値。図2の場合，ルートノードの二つの値で，val1は1234，val2は5678である。 |\n| answer | 変数 | 多倍長整数 | 乗算の計算結果を格納する変数 |\n\n```text\n// ツリーの各層の，elements配列上での先頭インデックスを算出する\nlayer_top[1] ← 1                         // ルートノードは先頭なので1を入れる\nfor (iを1からt_depth － 1まで1ずつ増やす)\n  layer_top[i ＋ 1] ← layer_top[i] ＋ ［ウ］\nendfor\n\n// ツリーを構築する\nelements[1] ← new_elem(val1.N, val1, val2) // ルートノードを用意。桁数はval1の桁数を使う\nfor (dpを1からt_depth － 1まで1ずつ増やす) // ルートノードの層から，最下層以外の層を順に処理\n  for (iを1からpow(3, dp － 1)まで1ずつ増やす) // 親ノードになる層の要素数だけ繰り返す\n    pe ← elements[layer_top[dp] ＋ (i － 1)] // 親ノードの要素を取得\n    cn ← pe.N / 2                          // 子ノードの桁数を算出\n    tidx ← layer_top[dp ＋ 1] ＋ ［エ］     // 子ノード①へのインデックス\n    elements[tidx    ] ← new_elem(cn, left(［オ］, cn), left(［カ］, cn))\n    elements[tidx ＋ 1] ← new_elem(cn, right(［オ］, cn), right(［カ］, cn))\n    elements[tidx ＋ 2] ← new_elem(cn, lradd(［オ］, cn), lradd(［カ］, cn))\n  endfor\nendfor\n```\n\n図3 与えられた二つの多倍長整数からツリーを構築するプログラム\n\n```text\n// 最下層の計算\nfor (iを1からpow(3, t_depth － 1)まで1ずつ増やす) // 最下層の要素数は3のt_depth－1乗個\n  el ← elements[layer_top[t_depth] ＋ (i － 1)] // 最下層のノード\n  mul ← el.val1.values[1] * el.val2.values[1]   // 最下層の乗算\n  el.result.N ← 2                            // 計算結果は2桁の多倍長整数\n  el.result.values[1] ← ［キ］                // 1の位\n  el.result.values[2] ← mul / 10              // 10の位\nendfor\n\n// 最下層以外の計算\nfor (dpをt_depth － 1から1まで1ずつ減らす) // 最下層より一つ上の層から順に処理\n  for (iを1からpow(3, dp － 1)まで1ずつ増やす) // 各層の要素数だけ繰り返す\n    el ← elements[layer_top[dp] ＋ (i － 1)] // 計算対象のノード\n    cidx ← layer_top[dp ＋ 1] ＋ ［エ］      // 子ノード①へのインデックス\n    s1 ← sub(［ク］.result, ［ケ］.result)\n    s2 ← sub(s1, elements[cidx ＋ 1].result) // γ－α－βを計算\n    p1 ← shift(elements[cidx].result, el.N) // α×10^Kを計算\n    p2 ← shift(s2, el.N / 2)               // (γ－α－β)×10^(K/2)を計算\n    p3 ← elements[cidx ＋ 1].result        // βを計算\n    el.result ← add(add(p1, p2), p3)\n  endfor\nendfor\n\n// 繰り上がり処理\nanswer ← carry(elements[1].result)         // 計算結果をanswerに格納\n```\n\n注記 図4中の［エ］には，図3中の［エ］と同じ字句が入る。\n\n図4 ツリーを用いて演算を行うプログラム",
+  "sourcePages": [
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "sourceImages": [
+    "assets/written/ap-r05h-source/question-p16.png",
+    "assets/written/ap-r05h-source/question-p17.png",
+    "assets/written/ap-r05h-source/question-p18.png",
+    "assets/written/ap-r05h-source/question-p19.png",
+    "assets/written/ap-r05h-source/question-p20.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05h-source/question-p16.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p17.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p18.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p19.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05h-source/question-p20.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "source": "IPA 令和5年度春期 応用情報技術者試験 午後 問3",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_pm_qs.pdf"
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "bodyFigures": [
+    {
+      "anchor": "図1 456＋789を計算した例",
+      "caption": "図1 456＋789を計算した例",
+      "alt": "桁ごとの和{15,13,11}から1の位、10の位、100の位を順に繰り上げ{5,4,2,1}とする。",
+      "image": "assets/written/ap-r05h-pm3/carry-example.png",
+      "sourcePage": 16
+    },
+    {
+      "anchor": "図2 1234×5678についてのツリー",
+      "caption": "図2 1234×5678についてのツリー",
+      "alt": "層1の1234×5678を、層2の12×56、34×78、46×134、および3個ずつの層3子ノードへ展開する。空欄ア・イを含む。注記：この例では層3が最下層となる。",
+      "image": "assets/written/ap-r05h-pm3/karatsuba-tree.png",
+      "sourcePage": 17
+    }
+  ],
+  "items": [
+    {
+      "id": "s1",
+      "label": "設問1",
+      "prompt": "図2中の［ア］，［イ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "3×7"
+          ],
+          "explanation": "34×78を上位桁と下位桁に分けた上位同士の積なので3×7。",
+          "rubric": [
+            "34×78を上位桁と下位桁に分けた上位同士の積なので3×7。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "4×12"
+          ],
+          "explanation": "46は{6,4}、134は繰上げ前の{14,12}で保持される。上位同士の積は4×12。",
+          "rubric": [
+            "46は{6,4}、134は繰上げ前の{14,12}で保持される。上位同士の積は4×12。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "label": "設問2",
+      "prompt": "図2中の層2にある46×134のノードについて，本文中の式(1)の数式は具体的にどのような計算式になるか。次の式の①～④に入れる適切な整数を答えよ。\n\n$（①）\\times100+（（②）-（③）-84）\\times10+（④）$",
+      "fields": [
+        {
+          "id": "n1",
+          "label": "1",
+          "type": "shortText",
+          "referenceAnswers": [
+            "48"
+          ],
+          "explanation": "αは上位同士の4×12＝48。",
+          "rubric": [
+            "αは上位同士の4×12＝48。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "n2",
+          "label": "2",
+          "type": "shortText",
+          "referenceAnswers": [
+            "260"
+          ],
+          "explanation": "γは桁ごとの和同士の(4＋6)×(12＋14)＝10×26＝260。",
+          "rubric": [
+            "γは桁ごとの和同士の(4＋6)×(12＋14)＝10×26＝260。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "n3",
+          "label": "3",
+          "type": "shortText",
+          "referenceAnswers": [
+            "48"
+          ],
+          "explanation": "交差項はγ－α－βなのでα＝48を差し引く。",
+          "rubric": [
+            "交差項はγ－α－βなのでα＝48を差し引く。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "n4",
+          "label": "4",
+          "type": "shortText",
+          "referenceAnswers": [
+            "84"
+          ],
+          "explanation": "βは下位同士の6×14＝84。48×100＋(260－48－84)×10＋84＝6164。",
+          "rubric": [
+            "βは下位同士の6×14＝84。48×100＋(260－48－84)×10＋84＝6164。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "label": "設問3",
+      "prompt": "図3中の［ウ］～［カ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "ウ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "pow(3, i － 1)"
+          ],
+          "explanation": "層iには3^(i－1)個のノードがあり、次層先頭は現層先頭にその数を加えた位置。",
+          "rubric": [
+            "層iには3^(i－1)個のノードがあり、次層先頭は現層先頭にその数を加えた位置。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "エ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "3*(i － 1)"
+          ],
+          "explanation": "親の順番iごとに子は3個ずつ配置されるので、次層先頭からのずれは3×(i－1)。",
+          "rubric": [
+            "親の順番iごとに子は3個ずつ配置されるので、次層先頭からのずれは3×(i－1)。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "ef",
+          "label": "オ・カ（順不同）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "pe.val1，pe.val2"
+          ],
+          "explanation": "親の左右の多倍長整数pe.val1、pe.val2を上位、下位、両者和に分割する。乗算の左右交換は可能なので二つ一組で自己評価。",
+          "rubric": [
+            "親の左右の多倍長整数pe.val1、pe.val2を上位、下位、両者和に分割する。乗算の左右交換は可能なので二つ一組で自己評価。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "label": "設問4",
+      "prompt": "図4中の［キ］～［ケ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "g",
+          "label": "キ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "mod(mul, 10)"
+          ],
+          "explanation": "積を10で割った余りが1の位となり、10の位はmul/10で得る。",
+          "rubric": [
+            "積を10で割った余りが1の位となり、10の位はmul/10で得る。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "h",
+          "label": "ク",
+          "type": "freeText",
+          "referenceAnswers": [
+            "elements[cidx ＋ 2]"
+          ],
+          "explanation": "3番目の子ノードがγ＝(A＋B)(C＋D)の結果を持つ。",
+          "rubric": [
+            "3番目の子ノードがγ＝(A＋B)(C＋D)の結果を持つ。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        },
+        {
+          "id": "i",
+          "label": "ケ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "elements[cidx]"
+          ],
+          "explanation": "最初の子ノードがα＝ACを持ち、s1でγからαを引く。",
+          "rubric": [
+            "最初の子ノードがα＝ACを持ち、s1でγからαを引く。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "label": "設問5",
+      "prompt": "N桁同士の乗算をする場合，多倍長整数の構造体において，配列valuesに必要な最大の要素数は幾つか。Nを用いて答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "要素数",
+          "type": "freeText",
+          "referenceAnswers": [
+            "2×N"
+          ],
+          "explanation": "N桁の正整数同士の積は最大2N桁。例えば99×99＝9801のように最上位まで保持するには2N要素を確保する。",
+          "rubric": [
+            "N桁の正整数同士の積は最大2N桁。例えば99×99＝9801のように最上位まで保持するには2N要素を確保する。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数制限の指定なし。2000字はアプリ入力上限。"
+          ]
+        }
+      ]
+    }
+  ]
+}

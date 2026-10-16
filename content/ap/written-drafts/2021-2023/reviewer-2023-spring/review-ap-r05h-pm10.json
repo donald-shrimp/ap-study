@@ -1,0 +1,45 @@
+{
+  "caseId": "ap-r05h-pm10",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2023_spring",
+  "reviewer": "/root/author_2021_spring",
+  "reviewedAt": "2026-10-15T19:58:22.553695+00:00",
+  "canonicalCaseSHA256": "363e50002dad56a0355b4d3d64c4b59c96e9c60dba4bd2f8fffc7568db4c0c02",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2023-spring/independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_qs.pdf": "801f06d5f13652b6d3a8a09e72d0b1bf01746278db3f8590b952ec5341c9940c",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans.pdf": "dea64ec1f36d2aeabe4ff8eb1fbe66c75229757b84be574aa161cfa0ec40c0fa",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt.pdf": "796fbcb644f17ec9ab60b151e527757b92d1aec53d235117ce65667148ab4390"
+  },
+  "assetHashes": {
+    "assets/written/ap-r05h-source/question-p56.png": "2cf0dae6a73a415bb83d33ec3b3289c27eeb05994293e0409fbfdbd8c7b9d661",
+    "assets/written/ap-r05h-source/question-p57.png": "f8f06356dd1ed3be5b5fcc7c811853384f33ac1f1104270979d35416959594f9",
+    "assets/written/ap-r05h-source/question-p58.png": "45bb5545dfd81d8d84588ceeb599019fbf87e587e771600e977dbc88bc7dab4e",
+    "assets/written/ap-r05h-source/question-p59.png": "b5ac7aed1f747e1f5c2ab25fbe79a39a575a6384ab89a03bb57f1a173250d014",
+    "assets/written/ap-r05h-source/question-p60.png": "d1e773849273f0e84cd015863d25150e72769c6c41787071ae9bd686c51d5cad",
+    "assets/written/ap-r05h-source/question-p61.png": "a7b5591b756bf8f0aee04726e070f1b5777665809778e2af02e4ea09e110cfb4",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_ans-p05.png": "35a9330bf5ed25fbe85f7dd30f8d4b7be2c96721afc7fbda9c90c0d179419480",
+    "content/ap/written-drafts/2021-2023/sources/2023r05h_ap_pm_cmnt-p03.png": "8ba04438252829b8caca9e22cacaba8ea79e4194b008dbbd237e76d4f83aeea5"
+  },
+  "method": "原問の全対象頁をview_imageで実表示し作者草稿/公式解答例を開く前に独立解答方針を保存した後、公式解答例と講評の該当PNG、草稿全本文・表セル・全小問/欄・選択肢・制約・解説/rubricを照合。全完成cropを実表示して原本と比較し、元PNGとcrop座標の全画素一致をPILで独立検証。最終case及び公式PDF/画像のSHA-256を再計算。共有公式解答頁の他問が先に見えた場合はindependent-findingsに明示。",
+  "answerCheck": "原問56〜61頁の全文、業務2種/可用性3特性/サービスカタログと合意SLAの4表全セル、全9設問9欄、4択/複数全5肢/5択、5/20/30/25/15字と四捨五入条件を照合。先行独立解答の概念は公式例と整合、最大復旧時間と重要事業機能の支援度合いの要点を保持。Fractionで600時間の0.5%=180分、90分停止99.75%を独立検算。",
+  "gradingCheck": "全単一選択と登録短答はexactText、説明/式/順不同複数はself。原本字数制約とアプリ上限を区別。未登録短答表現は自動不正解とせず自己評価へ。学習用rubricは公式配点ではない。",
+  "findings": [],
+  "cropChecks": [],
+  "calculationChecks": [
+    {
+      "method": "Python FractionでSLAの月間サービス時間と許容停止/3月稼働率を再計算",
+      "serviceMinutes": 36000,
+      "allowedStopMinutes": 180,
+      "marchStopMinutes": 90,
+      "marchAvailability": "99.75%"
+    }
+  ],
+  "actualCounts": {
+    "items": 9,
+    "fields": 9,
+    "sourceImages": 6,
+    "bodyFigures": 0
+  }
+}

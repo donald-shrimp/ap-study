@@ -18,6 +18,7 @@ def prepare(year):
  assert integrated in [[],[2023],[2023,2022]],'All annual batches already integrated or invalid order'
  assert year==[2023,2022,2021][len(integrated)],'Integrate newest remaining year first'
  cases=read(ROOT/'content/ap/written-cases.json');reviews=read(ROOT/'content/ap/written-reviews.json')
+ topics={t['id'] for t in read(ROOT/'content/ap/qualification.json')['topics']}
  assert len(cases)==len(reviews)==44+22*len(integrated)
  assert len({c['id'] for c in cases})==len(cases) and len({r['caseId'] for r in reviews})==len(reviews)
  fixed=read(BASE/'preserved-2024-2025.json')
@@ -33,6 +34,7 @@ def prepare(year):
    assert c['id']==r['caseId']==cid and c['version']==r['version']
    assert c['status']=='reviewed' and r['status']=='approved' and c['author']==r['author']!=r['reviewer']
    assert r['canonicalCaseSHA256']==seal(c),(cid,'review seal mismatch')
+   assert c['topicId'] in topics,(cid,'unknown topic',c['topicId'])
    assert c['qualificationId']=='ap' and c['examPartId']=='written' and c['sourceKind']=='official'
    for kind in ['qs','ans','cmnt']:
     filename=f'{year}r{year-2018:02}{era}_ap_pm_{kind}.pdf'

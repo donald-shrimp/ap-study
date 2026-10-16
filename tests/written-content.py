@@ -34,7 +34,7 @@ for c in cases:
   assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h,(c['id'],p)
  cursor=0
  for figure in c.get('bodyFigures',[]):
-  anchor=figure['anchor'];pos=c['body'].find(anchor,cursor);assert pos>=0,(c['id'],'figure order/anchor',figure['id']);cursor=pos+len(anchor)
+  anchor=figure['anchor'];assert c['body'].count(anchor)==1,(c['id'],'nonunique figure anchor',figure['id']);pos=c['body'].find(anchor,cursor);assert pos>=0,(c['id'],'figure order/anchor',figure['id']);cursor=pos+len(anchor)
   assert figure['image'] in r['assetHashes'] and figure['alt'] and figure['caption']
  for path in c['sourceImages']:assert path in r['assetHashes'] and path in c['imageSizes']
  known=c.get('bodyRefs',{})

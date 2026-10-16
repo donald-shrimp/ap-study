@@ -1,0 +1,364 @@
+{
+  "id": "ap-r05a-pm3",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "algorithm",
+  "title": "2分探索木",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問3 2分探索木に関する次の記述を読んで，設問に答えよ。\n\n2分探索木とは，木に含まれる全てのノードがキー値をもち，各ノードNが次の二つの条件を満たす2分木のことである。ここで，重複したキー値をもつノードは存在しないものとする。\n\n・Nの左側の部分木にある全てのノードのキー値は，Nのキー値よりも小さい。\n\n・Nの右側の部分木にある全てのノードのキー値は，Nのキー値よりも大きい。\n\n2分探索木の例を図1に示す。図中の数字はキー値を表している。\n\n図1 2分探索木の例\n\n2分探索木をプログラムで表現するために，ノードを示す構造体Nodeを定義する。構造体Nodeの構成要素を表1に示す。\n\n表1 構造体Nodeの構成要素\n\n構造体Nodeを新しく生成し，その構造体への参照を変数pに代入する式を次のように書く。\n\n```\np ← new Node(k)\n```\n\nここで，引数kは生成するノードのキー値であり，構成要素keyの初期値となる。構成要素left及びrightは，参照するノードがないこと（以下，空のノードという）を表すNULLで初期化される。また，生成したpの各構成要素へのアクセスには“.”を用いる。例えば，キー値はp.keyでアクセスする。\n\n［2分探索木におけるノードの探索・挿入］\n\nキー値kをもつノードの探索は次の手順で行う。\n\n(1) 探索対象の2分探索木の根を参照する変数をtとする。\n\n(2) tが空のノードであるかを調べる。\n\n(2-1) tが空のノードであれば，探索失敗と判断して探索を終了する。\n\n(2-2) tが空のノードでなければ，tのキー値t.keyとkとを比較する。\n\n・t.key = kの場合，探索成功と判断して探索を終了する。\n\n・t.key > kの場合，tの左側の子ノードを新たなtとして(2)から処理を行う。\n\n・t.key < kの場合，tの右側の子ノードを新たなtとして(2)から処理を行う。\n\nキー値kをもつノードKの挿入は，探索と同様の手順で根から順にたどっていき，空のノードが見つかった位置にノードKを追加することで行う。ただし，キー値kと同じキー値をもつノードが既に2分探索木中に存在するときは何もしない。\n\nこれらの手順によって探索を行う関数searchのプログラムを図2に，挿入を行う関数insertのプログラムを図3に示す。関数searchは，探索に成功した場合は見つかったノードへの参照を返し，失敗した場合はNULLを返す。関数insertは，得られた木の根への参照を返す。\n\n図2 探索を行う関数searchのプログラム\n\n図3 挿入を行う関数insertのプログラム\n\n関数searchを用いてノードの総数がn個の2分探索木を探索するとき，探索に掛かる最悪の場合の時間計算量（以下，最悪時間計算量という）は $O(［ア］)$ である。これは葉を除く全てのノードについて左右のどちらかにだけ子ノードが存在する場合である。一方で，葉を除く全てのノードに左右両方の子ノードが存在し，また，全ての葉の深さが等しい完全な2分探索木であれば，最悪時間計算量は $O(［イ］)$ となる。したがって，高速に探索するためには，なるべく左右両方の子ノードが存在するように配置して，高さができるだけ低くなるように構成した木であることが望ましい。このような木のことを平衡2分探索木という。\n\n［2分探索木における回転操作］\n\n2分探索木中のノードXとXの左側の子ノードYについて，XをYの右側の子に，元のYの右側の部分木をXの左側の部分木にする変形操作を右回転といい，逆の操作を左回転という。回転操作後も2分探索木の条件は維持される。木の回転の様子を図4に示す。ここで，$t_{1}$〜$t_{3}$は部分木を表している。また，根から$t_{1}$〜$t_{3}$の最も深いノードまでの深さを，図4(a)では$d_{1}$〜$d_{3}$，図4(b)では$d'_{1}$〜$d'_{3}$でそれぞれ表している。ここで，$d'_{1}=d_{1}-1$，$d'_{2}=d_{2}$，$d'_{3}=d_{3}+1$，が成り立つ。\n\n図4 木の回転の様子\n\n右回転を行う関数rotateRのプログラムを図5に，左回転を行う関数rotateLのプログラムを図6に示す。これらの関数は，回転した結果として得られた木の根への参照を返す。\n\n図5 右回転を行う関数rotateRのプログラム\n\n図6 左回転を行う関数rotateLのプログラム\n\n［回転操作を利用した平衡2分探索木の構成］\n\n全てのノードについて左右の部分木の高さの差が1以下という条件（以下，条件Balという）を考える。条件Balを満たす場合，完全ではないときでも比較的左右均等にノードが配置された木になる。\n\n条件Balを満たす2分探索木Wに対して図3の関数insertを用いてノードを挿入した2分探索木をW′とすると，ノードが挿入される位置によっては左右の部分木の高さの差が2になるノードが生じるので，W′は条件Balを満たさなくなることがある。その場合，挿入したノードから根まで，親をたどった各ノードTに対して順に次の手順を適用することで，条件Balを満たすようにW′を変形することができる。\n\n(1) Tの左側の部分木の高さがTの右側の部分木の高さより2大きい場合\n\nTを根とする部分木に対して右回転を行う。ただし，Tの左側の子ノードUについて，Uの右側の部分木の方がUの左側の部分木よりも高い場合は，先にUを根とする部分木に対して左回転を行う。\n\n(2) Tの右側の部分木の高さがTの左側の部分木の高さより2大きい場合\n\nTを根とする部分木に対して左回転を行う。ただし，Tの右側の子ノードVについて，Vの左側の部分木の方がVの右側の部分木よりも高い場合は，先にVを根とする部分木に対して右回転を行う。\n\nこの手順(1)，(2)によって木を変形する関数balanceのプログラムを図7に，関数balanceを適用するように関数insertを修正した関数insertBのプログラムを図8に示す。ここで，関数heightは，引数で与えられたノードを根とする木の高さを返す関数である。関数balanceは，変形の結果として得られた木の根への参照を返す。\n\n図7 関数balanceのプログラム\n\n図8 関数insertBのプログラム\n\n条件Balを満たすノードの総数がn個の2分探索木に対して関数insertBを実行した場合，挿入に掛かる最悪時間計算量は $O(［キ］)$ となる。",
+  "sourceImages": [
+    "assets/written/ap-r05a-source/question-p14.png",
+    "assets/written/ap-r05a-source/question-p15.png",
+    "assets/written/ap-r05a-source/question-p16.png",
+    "assets/written/ap-r05a-source/question-p17.png",
+    "assets/written/ap-r05a-source/question-p18.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の［ア］，［イ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "n"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "片側にだけ子を持つ木は高さがnに比例し，最悪で全ノードを順に調べるためO(n)となる。",
+          "rubric": [
+            "片側にだけ子を持つ木は高さがnに比例し，最悪で全ノードを順に調べるためO(n)となる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "log n",
+            "log₂ n",
+            "log2 n"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "完全な2分木の高さはnの対数に比例するため，1段ずつ下る探索はO(log n)である。底の定数倍はオーダに影響しない。",
+          "rubric": [
+            "完全な2分木の高さはnの対数に比例するため，1段ずつ下る探索はO(log n)である。底の定数倍はオーダに影響しない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［回転操作を利用した平衡2分探索木の構成］について答えよ。図7中の［ウ］〜［カ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "u",
+          "label": "ウ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "h1が2と等しい"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "h1は左の高さ－右の高さである。左が2高いとき右回転側の処理に入るのでh1=2とする。",
+          "rubric": [
+            "h1は左の高さ－右の高さである。左が2高いとき右回転側の処理に入るのでh1=2とする。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "e",
+          "label": "エ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "height(t.left.right) - height(t.left.left)"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "左の子の右部分木の方が高いかを判定するため，その右の高さから左の高さを引く。正なら先に左部分木を左回転してLR型を解消する。",
+          "rubric": [
+            "左の子の右部分木の方が高いかを判定するため，その右の高さから左の高さを引く。正なら先に左部分木を左回転してLR型を解消する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "o",
+          "label": "オ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "h1が-2と等しい"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "右が2高いとh1は-2になる。左回転側はこの条件で実行する。",
+          "rubric": [
+            "右が2高いとh1は-2になる。左回転側はこの条件で実行する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "k",
+          "label": "カ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "height(t.right.left) - height(t.right.right)"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "右の子の左部分木から右部分木の高さを引く。正なら右部分木を先に右回転してRL型を解消する。",
+          "rubric": [
+            "右の子の左部分木から右部分木の高さを引く。正なら右部分木を先に右回転してRL型を解消する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［回転操作を利用した平衡2分探索木の構成］について答えよ。図1の2分探索木の根を参照する変数をrとしたとき，次の処理を行うことで生成される2分探索木を図示せよ。2分探索木は図1に倣って表現すること。\n\n```\ninsertB(insertB(r, 4), 8)\n```",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "2分探索木（図の親子関係を文字で説明）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "根は5。5の左の子は3，右の子は8。3の左の子は1，右の子は4。8の左の子は6，右の子は9。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "4を挿入すると6を根とする部分でLR回転が必要になり，根は5になる。次に8を挿入すると6の部分でRL回転し，右部分木は根8・子6と9になる。全キーの配置，左右の枝，親子関係，探索木条件と高さ差1以下の全てを照合する。",
+          "rubric": [
+            "4を挿入すると6を根とする部分でLR回転が必要になり，根は5になる。次に8を挿入すると6の部分でRL回転し，右部分木は根8・子6と9になる。全キーの配置，左右の枝，親子関係，探索木条件と高さ差1以下の全てを照合する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本は図示問題。図1に倣う図に相当する全ノードと左右の親子関係を文章又はテキスト図で示し，自己評価する。",
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "［回転操作を利用した平衡2分探索木の構成］について答えよ。本文中の［キ］に入れる適切な字句を答えよ。なお，図7中の関数heightの処理時間は無視できるものとする。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "キ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "log n",
+            "log₂ n",
+            "log2 n"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "条件Balを保つ木の高さはO(log n)。挿入経路上の各段で定数回の回転・比較を行うので，全体もO(log n)となる。heightを実際に毎回探索する実装の計算量は設問条件から除外されている。",
+          "rubric": [
+            "条件Balを保つ木の高さはO(log n)。挿入経路上の各段で定数回の回転・比較を行うので，全体もO(log n)となる。heightを実際に毎回探索する実装の計算量は設問条件から除外されている。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和5年度秋期 応用情報技術者試験 午後 問3",
+  "sourcePages": [
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05a-pm3/figure-1.png": {
+      "width": 231,
+      "height": 195
+    },
+    "assets/written/ap-r05a-pm3/table-1.png": {
+      "width": 401,
+      "height": 158
+    },
+    "assets/written/ap-r05a-pm3/figure-2.png": {
+      "width": 382,
+      "height": 405
+    },
+    "assets/written/ap-r05a-pm3/figure-3.png": {
+      "width": 376,
+      "height": 405
+    },
+    "assets/written/ap-r05a-pm3/figure-4.png": {
+      "width": 751,
+      "height": 287
+    },
+    "assets/written/ap-r05a-pm3/figure-5.png": {
+      "width": 409,
+      "height": 297
+    },
+    "assets/written/ap-r05a-pm3/figure-6.png": {
+      "width": 408,
+      "height": 294
+    },
+    "assets/written/ap-r05a-pm3/figure-7.png": {
+      "width": 401,
+      "height": 593
+    },
+    "assets/written/ap-r05a-pm3/figure-8.png": {
+      "width": 398,
+      "height": 415
+    },
+    "assets/written/ap-r05a-source/question-p14.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p15.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p16.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p17.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p18.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r05a-pm3/figure-1.png",
+      "caption": "図1 2分探索木の例",
+      "sourcePage": 14,
+      "placement": "replace-caption",
+      "anchor": "図1 2分探索木の例",
+      "alt": "図1 2分探索木の例"
+    },
+    {
+      "id": "table-1",
+      "image": "assets/written/ap-r05a-pm3/table-1.png",
+      "caption": "表1 構造体Nodeの構成要素",
+      "sourcePage": 14,
+      "placement": "replace-caption",
+      "anchor": "表1 構造体Nodeの構成要素",
+      "alt": "表1 構造体Nodeの構成要素"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r05a-pm3/figure-2.png",
+      "caption": "図2 探索を行う関数searchのプログラム",
+      "sourcePage": 15,
+      "placement": "replace-caption",
+      "anchor": "図2 探索を行う関数searchのプログラム",
+      "alt": "図2 探索を行う関数searchのプログラム"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r05a-pm3/figure-3.png",
+      "caption": "図3 挿入を行う関数insertのプログラム",
+      "sourcePage": 15,
+      "placement": "replace-caption",
+      "anchor": "図3 挿入を行う関数insertのプログラム",
+      "alt": "図3 挿入を行う関数insertのプログラム"
+    },
+    {
+      "id": "figure-4",
+      "image": "assets/written/ap-r05a-pm3/figure-4.png",
+      "caption": "図4 木の回転の様子",
+      "sourcePage": 16,
+      "placement": "replace-caption",
+      "anchor": "図4 木の回転の様子",
+      "alt": "図4 木の回転の様子"
+    },
+    {
+      "id": "figure-5",
+      "image": "assets/written/ap-r05a-pm3/figure-5.png",
+      "caption": "図5 右回転を行う関数rotateRのプログラム",
+      "sourcePage": 17,
+      "placement": "replace-caption",
+      "anchor": "図5 右回転を行う関数rotateRのプログラム",
+      "alt": "図5 右回転を行う関数rotateRのプログラム"
+    },
+    {
+      "id": "figure-6",
+      "image": "assets/written/ap-r05a-pm3/figure-6.png",
+      "caption": "図6 左回転を行う関数rotateLのプログラム",
+      "sourcePage": 17,
+      "placement": "replace-caption",
+      "anchor": "図6 左回転を行う関数rotateLのプログラム",
+      "alt": "図6 左回転を行う関数rotateLのプログラム"
+    },
+    {
+      "id": "figure-7",
+      "image": "assets/written/ap-r05a-pm3/figure-7.png",
+      "caption": "図7 関数balanceのプログラム",
+      "sourcePage": 18,
+      "placement": "replace-caption",
+      "anchor": "図7 関数balanceのプログラム",
+      "alt": "図7 関数balanceのプログラム"
+    },
+    {
+      "id": "figure-8",
+      "image": "assets/written/ap-r05a-pm3/figure-8.png",
+      "caption": "図8 関数insertBのプログラム",
+      "sourcePage": 18,
+      "placement": "replace-caption",
+      "anchor": "図8 関数insertBのプログラム",
+      "alt": "図8 関数insertBのプログラム"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2023_autumn",
+  "authoringStatus": "awaiting-independent-review"
+}

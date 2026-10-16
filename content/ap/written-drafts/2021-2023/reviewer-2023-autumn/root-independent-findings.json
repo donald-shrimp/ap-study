@@ -1,0 +1,261 @@
+{
+  "reviewer": "/root",
+  "scope": [
+    "ap-r05a-pm6",
+    "ap-r05a-pm7",
+    "ap-r05a-pm8",
+    "ap-r05a-pm9",
+    "ap-r05a-pm10",
+    "ap-r05a-pm11"
+  ],
+  "cases": {
+    "ap-r05a-pm6": {
+      "recordedAt": "2026-10-15T15:35:38.127654+00:00",
+      "sourcePagesViewed": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "sourceViewMethod": "All five existing full-page original PNGs displayed with view_image, full text/figures/SQL/questions read.",
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": true,
+      "answers": {
+        "a": "倉庫→在庫推移状況の1対多（矢印先は在庫推移状況）。年/月/倉庫/商品ごとに履歴が複数。",
+        "b": "引当情報",
+        "c": "引当予定",
+        "d": "日（新しい日次履歴の主キーの一部として実線下線が必要）",
+        "e": "引当予定",
+        "f": "在庫",
+        "g": "入荷明細",
+        "h": "入荷済数",
+        "i": "OVER",
+        "j": "ORDER BY"
+      },
+      "reasoning": "予約段階は未入荷引当予定を増やし実在庫を引き当てない。入荷時に未入荷引当済総数を減らし在庫実在庫数/引当済総数を増やし入荷明細と引当情報の入荷済数を記録。SQLは倉庫/商品ごとに年月日順で現在行含む7日分をAVG/SUM。原本の6 PRECEDINGとCURRENT ROWを保持。",
+      "independentCalculation": "root-sql-check.py independently executed SQLite/Python 36 rows, 3 partitions, 12 days crossing 2022/2023 boundary, expected AVG/SUM for last up-to7 rows all matched.",
+      "figureReading": "図1/図2の多重度、図2dの主キー実線下線、引当番号/倉庫商品の外部キー、図3のWINDOW/OVER構文/4注記、図4の空欄i/jを確認。",
+      "openQuestions": []
+    },
+    "ap-r05a-pm7": {
+      "recordedAt": "2026-10-15T19:47:07.148445+00:00",
+      "sourcePagesViewed": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "sourceViewMethod": "All five existing full-page PNGs viewed and read, robot/state diagrams, full table1/table2/table3, PWM waveform and all choices.",
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": true,
+      "beforeOfficialCommentary": false,
+      "priorExposure": "Root viewed entire official cmnt-p02 while reviewing Q6, which also shows commentary for Q7/8/9. Q7 tips about state machine and wrong tray-info answer were therefore already seen; this is not a wholly blind solution. Official Q7 answer and author draft not yet read.",
+      "answers": {
+        "q1-1": "収穫に適したトマトを検出していない場合。",
+        "q1-2": "イ：収穫中→積載中→収穫中→開始／終了。2個目失敗では積載中を通らず全検出分終了。",
+        "q2-1": "収穫トレーの空き領域がないとき。",
+        "q2-2": "検出した収穫に適したトマトの個数。全検出分への試行を終えたかをメインが収穫結果ごとに数えて状態遷移するため。",
+        "q2-3": "メイン",
+        "q3": "ウ（軸1=0度、軸2=72度、軸3=-54度）",
+        "q4": "5ミリ秒（小数点以下切捨て）"
+      },
+      "reasoning": "Q2(2)は位置候補も検討したが、経路上位置管理は台車/メインの既存機能であり、全検出トマトの試行終了を判断する個数通知が必要と判断。失敗を積載と混同しない。PWM仕様の1ms=-90度/11ms=90度から線形補間。ロボット速度50cm/s=0.5m/s、最大往復時間tは340t=2*1-0.5tで2/340.5秒。",
+      "independentCalculation": {
+        "pulseMilliseconds": [
+          6,
+          10,
+          3
+        ],
+        "anglesDegrees": [
+          "0",
+          "72",
+          "-54"
+        ],
+        "echoSeconds": "4/681",
+        "echoMilliseconds": "4000/681",
+        "floorMilliseconds": 5,
+        "executedWith": "Python fractions.Fraction exact arithmetic before official answer lookup"
+      },
+      "openQuestions": [],
+      "officialComparison": {
+        "allExceptQ4": "原問からの先行判断は公式例と一致。",
+        "q4InitialError": "rootは原問p40下端の丸め条件を誤読し小数切捨て5msとした。また1mを送信時距離と仮定した。公式解答5.90と不一致のため原文元画素の2倍拡大を実表示して再確認。",
+        "q4FinalVerification": "原文は小数第3位切上げ/小数第2位まで。検知時距離1mに対し送信時は1+0.5tなので340t=2+0.5t、t=2/339.5秒=4000/679ms。Fractionで独立再計算し2桁切上げ5.90を確認。作者のprompt/reference/explanationは正しく修正不要。",
+        "q2Wording": "原文拡大で合わせて（併せてではない）を確認、作者prompt一致。",
+        "pendingAuthorFix": "figure-1の超音波センサーラベルが右端clip、作者へ拡張依頼。",
+        "cropResolution": "右端558への作者修正後、rootが完成cropを実表示してラベル全字と隣図非混入を確認済み。"
+      }
+    },
+    "ap-r05a-pm8": {
+      "recordedAt": "2026-10-15T19:53:29.303684+00:00",
+      "sourcePagesViewed": [
+        42,
+        43,
+        44,
+        45
+      ],
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": false,
+      "priorExposure": "Q7用公式ans-p04全頁閲覧でQ8の全解答も見え、さらに作者の進捗メッセージで460ms/経路1→3→5→6→7を先に受領。Q8を完全未見で独立解答したとは扱わない。",
+      "sourceViewMethod": "Four full-page originals displayed and all text, table1 processes/durations/dependencies, interface figure and every option read.",
+      "answers": {
+        "a": "イ Webアプリケーション",
+        "b": "エ ネイティブアプリケーション",
+        "c": "エ プロセス",
+        "d": "ウ スレッド",
+        "q2-2": "ア 画面への表示処理はワーカーではない",
+        "q3-1": "処理2、処理7（UI描画のみ）",
+        "e": "ウ join",
+        "q3-3": "一定時間でタイムアウトする処理",
+        "q3-4": "460ミリ秒"
+      },
+      "reasoning": "原文のGUI操作禁止規則よりmainはメッセージと完成画像表示、通信/画像処理はworkers。独立メモリはprocess、共有単位はthread。二つの画像加工枝の完了をjoinで待ち合わせる。サーバ無応答には制限時間を置く。1完了100、2完了110、3完了200、4完了350、5完了400、join後6完了450、7完了460。全順次620ではなく支配枝1/3/5/6/7を採用。",
+      "independentCalculation": "root-thread-check.py run, source table dependencies/durations used directly; not a blind solution because official/example exposure was recorded.",
+      "openQuestions": [],
+      "comparison": "全本文/全9欄/全4選択群/2crop/原本図表全セルを照合、DAG460ms一致。下線①/②/否定ではないは一致、③終端のみ指摘。",
+      "underlineResolution": "作者が下線③終端を追加までに修正、rootが最終bodyで++③処理5のプログラムにある処理を追加++した。と原本拡大を再照合。"
+    },
+    "ap-r05a-pm9": {
+      "recordedAt": "2026-10-15T19:56:34.904458+00:00",
+      "sourcePagesViewed": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "sourceViewMethod": "All four full originals displayed; all paragraphs, team table4 rows, vendor matrix5x4 and 4 notes/underlines, all questions/options read.",
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": false,
+      "priorExposure": "Q6用公式cmnt-p02のQ9講評（比較/定着化）を先行閲覧。作者進捗メッセージでQ社が解答と先に受領。原問の独立検算は可能だが未見ではない。",
+      "answers": {
+        "a": "頻繁なスコープの変更を想定する",
+        "b": "期限内に自社だけでは技術習得できない",
+        "c": "Q",
+        "reason": "定着化と使用性の評価が十分だから",
+        "q2-2": "イ：実現性を検証することが目的である",
+        "q2-3": "頻繁なスコープ変更に柔軟に対応できるか確認するため",
+        "q3-1": "マーケティング業務の専門家であり顧客視点に詳しいから",
+        "q3-2": "顧客関係性の強化の達成状況"
+      },
+      "reasoning": "POはマーケ専門家のD主任。PMのC課長はCRM統括とアジャイル経験をもち役割を分ける。技術習得2年に対し最初リリース6か月で自社リソースもないため委託する。ベンダは定着化支援と顧客視点の使用性の双方4を満たすQのみ、総合点を単純に最大にしない（Q/R合計同点17）。PoCは実現性検証を成果とし完成保証の請負と区別する。変更対応のリードタイム/増員条件は頻繁変更への追随性確認。MVPの評価は最初に設定した顧客関係性強化の定量的CSFを測る。",
+      "independentCalculation": {
+        "sourceScores": {
+          "P": [
+            3,
+            2,
+            4,
+            4,
+            3
+          ],
+          "Q": [
+            3,
+            4,
+            3,
+            4,
+            3
+          ],
+          "R": [
+            3,
+            3,
+            4,
+            3,
+            4
+          ],
+          "S": [
+            4,
+            4,
+            3,
+            3,
+            2
+          ]
+        },
+        "bothPriorityCriteriaSufficient": [
+          "Q"
+        ],
+        "totalScoresForContrast": {
+          "P": 16,
+          "Q": 17,
+          "R": 17,
+          "S": 16
+        },
+        "executedWith": "Python independent filtering of source table; selected company had already been exposed in author progress message."
+      },
+      "openQuestions": [],
+      "officialComparison": {
+        "q2-3": "先行判断は頻繁スコープ変更に偏ったが、公式例と本文の未知リスク段落を再照合し、求める目的はシステム開発フェーズの回復力確認と確定。作者解説は当初から正しい。",
+        "q3-1": "作者の公式例はマーケ業務と開発プロジェクト参加の両方を含み正しい。root先行判断のマーケ専門性だけでは理由の一部であり、両面を最終確認。",
+        "otherFields": "a/b/c/理由/PoC準委任のイ/CSFまたは顧客関係性強化の達成状況の例は原問条件と一致。",
+        "constraints": "20/20/1字+20/25/30/15字を確認。",
+        "pendingFix": "下線②末尾のしを外へ。③考え/①委託する/④測定するの下線終端は原本拡大と一致。",
+        "resolvedFix": "下線②を確認までへ作者が訂正、最終bodyと元画素拡大を再照合済み。"
+      }
+    },
+    "ap-r05a-pm10": {
+      "recordedAt": "2026-10-15T20:01:00.509259+00:00",
+      "sourcePagesViewed": [
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "sourceViewMethod": "All five original pages displayed/read: complete service workflow, both SLA tables/notes, five underline spans, every question/choice.",
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": false,
+      "priorExposure": "Q9用公式ans-p05全頁閲覧でQ10全解答例が先に見えた。未見解答とは扱わず原問全頁からの根拠照合を行う。",
+      "answers": {
+        "q1": "ウ：新システムへの提案作成要求から納期/価格表示までの時間",
+        "a": "ア 契約書",
+        "q2-2": "表1のサービス目標達成に必要な内部供給者目標との合意",
+        "q2-3": "サービス全体の回復時間には開発課の復旧時間以外の作業時間も含む",
+        "q3-1": "開始まで2週間では1か月前条件のサービスデスク増員体制を確保できない",
+        "q3-2": "デスクのサポート時間外でも利用者自身で疑問を解決できる"
+      },
+      "reasoning": "顧客向けSLA/外部供給者契約/内部供給者合意の責務を区別。時間目標は情報登録平均3秒だけでなく連動処理のユーザ観点の納期価格表示応答が必要。表1全体回復8hに対して表2開発課復旧8hではエスカレーション/診断依頼や完了通知/利用者確認の余地なし。夜間は回復所要時間の計時範囲に含まず、例15時受理→翌12時は3+3=6h。Y社増員通知は1か月前、開始2週間前では容量増加に間に合わずFAQで削減し、24h365日Webなので時間外自己解決にもなる。",
+      "openQuestions": [],
+      "finalChecks": "全5頁/全本文/6欄・全候補・2表全セル/両注記/公式例p5と講評p3を照合。文書化の文は作者再点検で補完、①の終端を追加までへroot指摘で修正。元画素拡大5枚で全下線再照合。"
+    },
+    "ap-r05a-pm11": {
+      "recordedAt": "2026-10-16T01:17:47.406758+00:00",
+      "sourcePagesViewed": [
+        56,
+        57,
+        58,
+        59
+      ],
+      "sourceViewMethod": "全4頁の本文、図1全構成とバックアップ経路、表1全3行、全設問/6候補/字数条件を実表示して読んだ。",
+      "beforeAuthorDraft": true,
+      "beforeOfficialAnswer": false,
+      "priorExposure": "問10照合時に公式講評p3の問11講評を先に閲覧。公式解答と作者草稿はまだ未読。",
+      "answers": {
+        "a": "カ 目標復旧時間",
+        "b": "イ CP発動基準",
+        "c": "オ 評価項目",
+        "q2": [
+          "障害発生時の影響の拡大",
+          "サイバー攻撃の脅威の増大"
+        ],
+        "d": "処理能力を増強",
+        "e": "バックオフィス系サーバ",
+        "f": "暫定復旧の作業手順",
+        "q5": "社内業務が停止する影響"
+      },
+      "reasoning": "5年前の復旧テスト以来、通販側は昨年処理性能を増強したが西サーバは同時導入のまま、必要最小限性能の再検証が必要。現訓練は保守停止時のセットアップ/DB復元だけで、危機時の社内システム停止判断・停止、ネットワーク切替/設定から復旧まで全手順が未訓練。停止対象の人事給与/会計/ワークフロー/グループウェアの業務影響も評価する。",
+      "openQuestions": [],
+      "officialComparison": {
+        "allFields": "公式例p6の全8欄と全解説を照合、aカ/bイ/cオ/dサーバの処理能力を増強/eバックオフィス系サーバと一致。二つのリスクは順不同一欄自己評価で各25字を明記。",
+        "f": "rootの先行判断は復旧手順全般と広く捉えたが、公式は未実施のネットワーク切替えを含む環境設定に絞る。作者例・解説は正しい。",
+        "q5": "作者例が業務とコミュニケーション両方を含むことを確認。",
+        "underline": "rootは初回59頁表示で②終端を影響までと誤読し作者へ指摘したが、元画素2倍表示で懸念されるまでと確認し直ちに訂正を通知。作者の元の範囲が正しく、この誤読を残す。①終端ことまで、句点外も拡大で一致。",
+        "crops": "図1全ラベル/矢印/東西接続と表1全3行全セルを完成crop実表示で確認。"
+      }
+    }
+  },
+  "futureExposure": {
+    "ap-r05a-pm8": "Q7用公式ans-p04全頁閲覧でQ8の全解答も見え、さらに作者の進捗メッセージで460ms/経路1→3→5→6→7を先に受領。Q8を完全未見で独立解答したとは扱わない。",
+    "ap-r05a-pm9": "Q6用公式cmnt-p02のQ9講評（比較/定着化）を先行閲覧。作者進捗メッセージでQ社が解答と先に受領。原問の独立検算は可能だが未見ではない。",
+    "ap-r05a-pm10": "Q9用公式ans-p05全頁閲覧でQ10全解答例が先に見えた。未見解答とは扱わず原問全頁からの根拠照合を行う。"
+  }
+}

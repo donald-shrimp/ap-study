@@ -1,0 +1,369 @@
+{
+  "id": "ap-r05a-pm6",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "database",
+  "title": "在庫管理システム",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問6 在庫管理システムに関する次の記述を読んで，設問に答えよ。\n\nM社は，ネットショップで日用雑貨の販売を行う企業である。M社では，在庫管理について次の課題を抱えている。\n\n・在庫が足りない商品の注文を受けることができず，機会損失につながっている。\n\n・商品の仕入れの間隔や個数を調整する管理サイクルが長く，余計な在庫を抱える傾向にある。\n\n［現状の在庫管理］\n\n現在，在庫管理を次のように行っている。\n\n・商品の注文を受けた段階で，出荷先に最も近い倉庫を見つけて，その倉庫の在庫から注文個数を引き当てる。この引き当てられた注文個数を引当済数という。各倉庫において，引き当てられた各商品単位の個数の総計を引当済総数という。\n\n・実在庫数から引当済総数を引いたものを在庫数といい，在庫数以下の注文個数の場合だけ注文を受け付ける。\n\n・商品が倉庫に入荷すると，入荷した商品の個数を実在庫数に足し込む。\n\n・倉庫から商品を出荷すると，出荷個数を実在庫数から引くとともに引当済総数からも引くことで，引き当ての消し込みを行う。\n\nM社では，月末の日次バッチ処理で毎月の締めの在庫数と売上個数を記録した分析用の表を用いて，商品ごとの在庫数と売上個数の推移を評価している。\n\nまた，期末に商品の在庫回転日数を集計して，来期の仕入れの間隔や個数を調整している。\n\nM社では，商品の在庫回転日数を，簡易的に次の式で計算している。\n\n在庫回転日数 = 期間内の平均在庫数×期間内の日数÷期間内の売上個数\n\n在庫回転日数の計算において，現状では，期間内の平均在庫数として12か月分の締めの在庫数の平均値を使用している。\n\n現状の在庫管理システムのE-R図（抜粋）を図1に示す。\n\n在庫管理システムのデータベースでは，E-R図のエンティティ名を表名にし，属性名を列名にして，適切なデータ型で表定義した関係データベースによって，データを管理している。\n\n図1 現状の在庫管理システムのE-R図（抜粋）\n\n［在庫管理システム改修内容］\n\n課題を解決するために，在庫管理システムに次の改修を行うことにした。\n\n・在庫数が足りない場合は，在庫からは引き当てず，予約注文として受け付ける。なお，予約注文ごとに商品を発注することで，注文を受けた商品の個数が入荷される。\n\n・商品の仕入れの間隔や個数を調整する管理サイクルを短くするために，在庫の評価を月次から日次の処理に変更して，毎日の締めの在庫数と売上個数を在庫推移状況エンティティに記録する。\n\n現状では，在庫数が足りない商品の予約注文を受けようとしても，在庫引当を行うと実在庫数より引当済総数の方が多くなってしまい，注文に応えられない。そこで，予約注文の在庫引当を商品の入荷のタイミングにずらすために，E-R図に予約注文用の二つのエンティティを追加することにした。追加するエンティティを表1に，改修後の在庫管理システムのE-R図（抜粋）を図2に示す。\n\n表1 追加するエンティティ\n\n図2 改修後の在庫管理システムのE-R図（抜粋）\n\n在庫管理システムにおける予約注文を受けた商品の個数に関する処理内容を表2に示す。\n\n表2 在庫管理システムにおける予約注文を受けた商品の個数に関する処理内容\n\n［在庫の評価］\n\nより正確かつ迅速に在庫回転日数を把握するために，在庫推移状況エンティティから，期間を1週間（7日間）として，倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数で在庫回転日数を集計することにする。可読性を良くするために，SQL文にはウィンドウ関数を使用することにする。\n\nウィンドウ関数を使うと，FROM句で指定した表の各行ごとに集計が可能であり，各行ごとに集計期間が異なるような移動平均も簡単に求めることができる。ウィンドウ関数で使用する構文（抜粋）を図3に示す。\n\n図3 ウィンドウ関数で使用する構文（抜粋）\n\nウィンドウ関数を用いて，倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数を集計するSQL文を図4に示す。\n\n図4 倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数を集計するSQL文",
+  "sourceImages": [
+    "assets/written/ap-r05a-source/question-p30.png",
+    "assets/written/ap-r05a-source/question-p31.png",
+    "assets/written/ap-r05a-source/question-p32.png",
+    "assets/written/ap-r05a-source/question-p33.png",
+    "assets/written/ap-r05a-source/question-p34.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図1及び図2中の［a］に入れる適切なエンティティ間の関連を答え，E-R図を完成させよ。なお，エンティティ間の関連の表記は図1の凡例に倣うこと。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a（関連の線と向きを説明）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "倉庫から在庫推移状況へ向かう下向きの1対多の矢印（↓）。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "一つの倉庫は年月・商品ごとに複数の在庫推移状況を持つ。在庫推移状況の倉庫コードは倉庫を参照する外部キーなので，倉庫側が1，在庫推移状況側が多となる。凡例の1対多の矢印を下向きに描く。",
+          "rubric": [
+            "一つの倉庫は年月・商品ごとに複数の在庫推移状況を持つ。在庫推移状況の倉庫コードは倉庫を参照する外部キーなので，倉庫側が1，在庫推移状況側が多となる。凡例の1対多の矢印を下向きに描く。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本はE-R図の関連を図示する問題。線の種類（1対多）と矢印の向き・両端エンティティを文字で説明し自己評価する。",
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［在庫管理システム改修内容］について答えよ。図2中の［b］，［c］に入れる適切なエンティティ名を表1中のエンティティ名を用いて答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "引当情報"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "bは引当番号をキーに，引当済数と入荷済数を注文単位で保持するため引当情報である。",
+          "rubric": [
+            "bは引当番号をキーに，引当済数と入荷済数を注文単位で保持するため引当情報である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "引当予定"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "cは倉庫・商品単位で未入荷引当済総数を管理するため，引当予定である。",
+          "rubric": [
+            "cは倉庫・商品単位で未入荷引当済総数を管理するため，引当予定である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［在庫管理システム改修内容］について答えよ。図2中の［d］に入れる，在庫推移状況エンティティに追加すべき適切な属性名を答えよ。なお，属性名の表記は図1の凡例に倣うこと。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d（属性名と主キー表記）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "日（実線の下線を付ける）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "月次から日次に変えるには年月に日を追加し，同じ倉庫・商品でも日付ごとの行を区別する。日も複合主キーを構成するので実線の下線を付ける必要がある。",
+          "rubric": [
+            "月次から日次に変えるには年月に日を追加し，同じ倉庫・商品でも日付ごとの行を区別する。日も複合主キーを構成するので実線の下線を付ける必要がある。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本は属性名と凡例による下線の記入。属性名「日」と主キーを示す実線下線の両方を自己評価する。",
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "［在庫管理システム改修内容］について答えよ。表2中の［e］〜［h］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "引当予定"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "入荷した分は未入荷ではなくなるので，引当予定の未入荷引当済総数を減らす。",
+          "rubric": [
+            "入荷した分は未入荷ではなくなるので，引当予定の未入荷引当済総数を減らす。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "在庫"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "入荷した商品は実物の在庫を増やし，同時に予約注文向けの引当済総数も増やすため在庫を更新する。",
+          "rubric": [
+            "入荷した商品は実物の在庫を増やし，同時に予約注文向けの引当済総数も増やすため在庫を更新する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "入荷明細"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "入荷した個々の商品数量は入荷明細の個数に記録する。",
+          "rubric": [
+            "入荷した個々の商品数量は入荷明細の個数に記録する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "h",
+          "label": "h",
+          "type": "shortText",
+          "referenceAnswers": [
+            "入荷済数"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "注文単位の引当情報に入荷を反映する項目は入荷済数である。引当済数は予約を受け付けた時点の注文数量を保持する。",
+          "rubric": [
+            "注文単位の引当情報に入荷を反映する項目は入荷済数である。引当済数は予約を受け付けた時点の注文数量を保持する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図4中の［i］，［j］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "i",
+          "label": "i",
+          "type": "shortText",
+          "referenceAnswers": [
+            "OVER",
+            "over"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "集計関数AVG/SUMの直後にOVERを置き，名前付きウィンドウ期間定義を適用する。WINDOWは定義を宣言する句なので関数の直後には置かない。",
+          "rubric": [
+            "集計関数AVG/SUMの直後にOVERを置き，名前付きウィンドウ期間定義を適用する。WINDOWは定義を宣言する句なので関数の直後には置かない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        },
+        {
+          "id": "j",
+          "label": "j",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ORDER BY",
+            "order by"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "倉庫・商品で分割した各パーティションを年月日昇順に並べるにはORDER BYを用いる。ROWS BETWEEN 6 PRECEDING AND CURRENT ROWが当日を含む直近7行を集計する。",
+          "rubric": [
+            "倉庫・商品で分割した各パーティションを年月日昇順に並べるにはORDER BYを用いる。ROWS BETWEEN 6 PRECEDING AND CURRENT ROWが当日を含む直近7行を集計する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリの入力上限。"
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和5年度秋期 応用情報技術者試験 午後 問6",
+  "sourcePages": [
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "imageSizes": {
+    "assets/written/ap-r05a-pm6/figure-1.png": {
+      "width": 809,
+      "height": 566
+    },
+    "assets/written/ap-r05a-pm6/table-1.png": {
+      "width": 818,
+      "height": 131
+    },
+    "assets/written/ap-r05a-pm6/figure-2.png": {
+      "width": 803,
+      "height": 432
+    },
+    "assets/written/ap-r05a-pm6/table-2.png": {
+      "width": 819,
+      "height": 417
+    },
+    "assets/written/ap-r05a-pm6/figure-3.png": {
+      "width": 823,
+      "height": 482
+    },
+    "assets/written/ap-r05a-pm6/figure-4.png": {
+      "width": 826,
+      "height": 336
+    },
+    "assets/written/ap-r05a-source/question-p30.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p31.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p32.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p33.png": {
+      "width": 1032,
+      "height": 1458
+    },
+    "assets/written/ap-r05a-source/question-p34.png": {
+      "width": 1032,
+      "height": 1458
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r05a-pm6/figure-1.png",
+      "caption": "図1 現状の在庫管理システムのE-R図（抜粋）",
+      "sourcePage": 31,
+      "placement": "replace-caption",
+      "anchor": "図1 現状の在庫管理システムのE-R図（抜粋）",
+      "alt": "図1 現状の在庫管理システムのE-R図（抜粋）"
+    },
+    {
+      "id": "table-1",
+      "image": "assets/written/ap-r05a-pm6/table-1.png",
+      "caption": "表1 追加するエンティティ",
+      "sourcePage": 32,
+      "placement": "replace-caption",
+      "anchor": "表1 追加するエンティティ",
+      "alt": "表1 追加するエンティティ"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r05a-pm6/figure-2.png",
+      "caption": "図2 改修後の在庫管理システムのE-R図（抜粋）",
+      "sourcePage": 32,
+      "placement": "replace-caption",
+      "anchor": "図2 改修後の在庫管理システムのE-R図（抜粋）",
+      "alt": "図2 改修後の在庫管理システムのE-R図（抜粋）"
+    },
+    {
+      "id": "table-2",
+      "image": "assets/written/ap-r05a-pm6/table-2.png",
+      "caption": "表2 在庫管理システムにおける予約注文を受けた商品の個数に関する処理内容",
+      "sourcePage": 32,
+      "placement": "replace-caption",
+      "anchor": "表2 在庫管理システムにおける予約注文を受けた商品の個数に関する処理内容",
+      "alt": "表2 在庫管理システムにおける予約注文を受けた商品の個数に関する処理内容"
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r05a-pm6/figure-3.png",
+      "caption": "図3 ウィンドウ関数で使用する構文（抜粋）",
+      "sourcePage": 33,
+      "placement": "replace-caption",
+      "anchor": "図3 ウィンドウ関数で使用する構文（抜粋）",
+      "alt": "図3 ウィンドウ関数で使用する構文（抜粋）"
+    },
+    {
+      "id": "figure-4",
+      "image": "assets/written/ap-r05a-pm6/figure-4.png",
+      "caption": "図4 倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数を集計するSQL文",
+      "sourcePage": 34,
+      "placement": "replace-caption",
+      "anchor": "図4 倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数を集計するSQL文",
+      "alt": "図4 倉庫コード，商品コードごとに，各年月日の6日前から当日までの平均在庫数及び売上個数を集計するSQL文"
+    }
+  ],
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2023_autumn",
+  "authoringStatus": "awaiting-independent-review"
+}

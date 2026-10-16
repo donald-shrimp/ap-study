@@ -1,0 +1,85 @@
+{
+  "caseId": "ap-r05a-pm5",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2023_autumn",
+  "reviewer": "/root/author_2021_autumn",
+  "reviewedAt": "2026-10-15T19:44:53.311140+00:00",
+  "canonicalCaseSHA256": "bb3fc36f556db212d0f534e769d569cf5d453f319defd6360c5d99e9128d4a4e",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/sources/sources.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2023r05a_ap_pm_qs.pdf": "4f2b3aceff152364a41e9550d669196a2ff00f398573f6ea6b9e4dbd0ae1ae69",
+    "content/ap/written-drafts/2021-2023/sources/2023r05a_ap_pm_ans.pdf": "36ed6bedd545f68d1eb72e996b53a0510da0c27a40df0b0d5ba4596bfbd652e0",
+    "content/ap/written-drafts/2021-2023/sources/2023r05a_ap_pm_cmnt.pdf": "0d71d902cdb50767f0bbab24e2ab61f4879c18ec6acf2c788bf2ebbb6eee7517"
+  },
+  "assetHashes": {
+    "assets/written/ap-r05a-source/question-p26.png": "daf3db9fe986da1781bb43568567c699fa27a04b5f1fcd52cbc532cbf4f58a15",
+    "assets/written/ap-r05a-source/question-p27.png": "722ff0b87ddcc0b3c6edde5496020d3f9d3f1fafdc97f3e6a93e452a6287b211",
+    "assets/written/ap-r05a-source/question-p28.png": "bf14565694f5a89425ece779caf338e2dae819377ba874374fb206e4f53a320d",
+    "assets/written/ap-r05a-source/question-p29.png": "5ef29b5f9f3a78246a5e020935021b15ad59b14ae501a3839490387cb9db2021",
+    "assets/written/ap-r05a-pm5/figure-1.png": "35154b1246d0f111a2d091f788af69069b7eb3441e6fab8d490061938e98425c",
+    "assets/written/ap-r05a-pm5/figure-2.png": "125c7fd2efb0f266a3a9a0fe50c3358a52894934f536b751a93e41900702b0fc",
+    "content/ap/written-drafts/2021-2023/sources/2023r05a_ap_pm_ans-p03.png": "8eeebeb45af4caf2082afad9eb188a1384d3d6c40c1cdfc8247ac5ec7b929d3d",
+    "content/ap/written-drafts/2021-2023/sources/2023r05a_ap_pm_cmnt-p02.png": "2ab6d5c9dcb4ce9ea6225b866fb41d98ebdea74fdad735b5f4dbf04bba2d2da4"
+  },
+  "method": "原問26〜29頁を作者/公式解答例前に全実表示、FW1の全IP/24/ポート25,80,443/POP110/DNS全行と9入力欄/6+4候補/15,35字制限を照合。独立解で宛先/443/serv/外側IP/POP内部IP/OP25B/ISP中継/192.168.0.0を導出。2完成crop実表示、公式PDF再描画とcrop元画素一致を確認。Python ipaddressで192.168.0.1/24→192.168.0.0/24を検算。公式例のMX別名wwwも確認済み例として保持。",
+  "answerCheck": "先に原問全対象頁を実表示し独立判断を保存。公式資料の共有ページで他題解答・講評が先に見えた制限はindependent-findings.jsonへ明記。次に公式解答・講評と作者草稿の全文・全欄・全cropを照合。",
+  "gradingCheck": "説明・図形・順不同複数は自己評価。短答未登録表現は自己評価。公式配点を推測せず独自rubricを明記し、原本無指定の2000字はアプリ上限と区別。",
+  "pixelChecks": [
+    {
+      "path": "assets/written/ap-r05a-source/question-p26.png",
+      "pdfPage": 26,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r05a-source/question-p27.png",
+      "pdfPage": 27,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r05a-source/question-p28.png",
+      "pdfPage": 28,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r05a-source/question-p29.png",
+      "pdfPage": 29,
+      "officialRenderPixelEqual": true
+    }
+  ],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r05a-source/question-p26.png",
+      "box": [
+        119,
+        799,
+        936,
+        1127
+      ],
+      "output": "assets/written/ap-r05a-pm5/figure-1.png",
+      "sha256": "35154b1246d0f111a2d091f788af69069b7eb3441e6fab8d490061938e98425c",
+      "originalPixelsEqual": true
+    },
+    {
+      "source": "assets/written/ap-r05a-source/question-p27.png",
+      "box": [
+        147,
+        862,
+        926,
+        1047
+      ],
+      "output": "assets/written/ap-r05a-pm5/figure-2.png",
+      "sha256": "125c7fd2efb0f266a3a9a0fe50c3358a52894934f536b751a93e41900702b0fc",
+      "originalPixelsEqual": true
+    }
+  ],
+  "independentEvidence": [
+    "content/ap/written-drafts/2021-2023/reviewer-2023-autumn/independent-findings.json"
+  ],
+  "findings": [
+    {
+      "issue": "下線③の終端が原本「設定を」を越え「行い」まで拡大。",
+      "resolution": "作者が++終端を「設定を」の後へ移し原本28頁と最終草稿を再照合。"
+    }
+  ]
+}
