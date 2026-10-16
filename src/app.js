@@ -31,6 +31,7 @@ import {createWorkspaceStore} from './storage/workspace.js';
 import {setSyncStatus} from './ui/sync-status.js';
 
 let store, content, qualification, account, planner, cards, learning, personal, written;
+let initializing=true;
 let targetPartId=null;
 const entryHome=new URL(location.href).searchParams.get('entry')==='home';
 const isWritten=()=>qualification?.examParts.some(p=>p.id===targetPartId&&p.unit==='cases');
@@ -169,6 +170,9 @@ function updateTextSize(){
 }
 function changeTextSize(size){state.settings.textSize=size;updateTextSize();save();}
 function render(focus = true, preserveY = null) {
+  // Local features and Auth restore asynchronously. Keep the loading screen
+  // until the active owner's checkpoint is ready, including callback renders.
+  if(initializing)return;
   if(!focus&&isWritten()&&document.activeElement?.matches('textarea[data-written-key]'))return;
   if(!focus&&document.activeElement?.matches('input[data-reading-topic]'))return;
   updateTextSize();
@@ -403,7 +407,7 @@ async function switchOwner(owner,{restore=false}={}){
   if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
   await save();render(true,state.view==='study'?current()?.scrollY:0);notice('');
   $('#clear-state').closest('details').hidden=!!owner;$('#import-state').closest('label').hidden=false;
- }finally{main.inert=false;document.querySelector('.sidebar').inert=false;controls.forEach(id=>$("#"+id).disabled=false);updateTextSize();}
+ }finally{if(!initializing){main.inert=false;document.querySelector('.sidebar').inert=false;}controls.forEach(id=>$("#"+id).disabled=false);updateTextSize();}
 }
 function validateSyncAttempt(a){const probe={...makeState(),attempts:[a]};validateState(probe);if(a.qualificationId!==qualification.id||!a.questionSnapshot)throw new Error('同期対象の問題情報がありません。');}
 function remoteRecords(records){
@@ -449,7 +453,7 @@ async function importGuest(uid){
  }finally{await guest.close();}
 }
 async function initialize(){
-main.inert=true;document.querySelector('.sidebar').inert=true;main.setAttribute('aria-busy','true');$('#settings-button').disabled=true;
+main.inert=true;document.querySelector('.sidebar').inert=true;document.querySelector('.topbar').inert=true;main.setAttribute('aria-busy','true');$('#settings-button').disabled=true;
 try {
   const pageURL=new URL(location.href),previous=preferredQualification(appRoot),choose=pageURL.searchParams.has('qualifications'),pathQualification=document.documentElement.dataset.qualification;
   content=await loadCatalog(pathQualification||pageURL.searchParams.get('qualification'),{preferredId:previous,choose,requestedPartId:pageURL.searchParams.get('part')});
@@ -474,12 +478,14 @@ try {
   learning=createLearningFeature({qualification,getStore:()=>store,getState:()=>state,onNotice:notice,onUpdate:()=>{save();if(!['study','planning','flashcards'].includes(state.view))render(false);}});await learning.bind();
   if(qualification.cases){written=createWrittenFeature({qualification,rootPath:appRoot.pathname,content,getStore:()=>store,onUpdate:()=>{if(isWritten())render(false);},onChanged:()=>account?.writtenChanged(),onNotice:notice,getPlanViews:()=>planner?.views()});await written.bind({loadMaterial:isWritten()});}
   await refreshOfflineQuestions();
-  if(state.view==='study'&&!current())state.view='home'; rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
+  if(state.view==='study'&&!current())state.view='home';
   if(corruptRaw!==null)save();else if(!storageOK){$('#save-state').textContent='保存できていません';setSyncStatus('local','error',new Error('記録を保存できません。'));}
   await planner.bind().catch(()=>notice('計画・診断・模試の記録を保存できません。通常演習は続けられます。'));
   if(entryHome){if(isWritten())await written.setView('home');else await save();}
   rememberQualification(appRoot,qualification.id);rememberPart(appRoot,qualification.id,targetPartId);
   pageURL.searchParams.set('part',targetPartId);pageURL.searchParams.delete('entry');if(pathQualification)pageURL.searchParams.delete('qualification');else pageURL.searchParams.set('qualification',qualification.id);history.replaceState(history.state,'',pageURL);
+  account=await initAccountControls({getWrittenStore:()=>written?.store(),onWrittenRows:()=>written?.onRows(),getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,getGuestImportAvailable,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork});
+  await account.ready;
   installQualificationSwitch({qualification,partId:targetPartId,root:appRoot,onError:notice,beforeLeave:async()=>{
    if(opening||recordMaintenance||planner?.isBusy()||cards?.isBusy()||written?.isBusy()){notice('保存中です。少し待ってから切り替えてください。');return false;}
    if(planner?.hasDraft()){notice('入力中の計画があります。保存するか入力を取り消してから、資格を切り替えてください。');return false;}
@@ -491,10 +497,10 @@ try {
     return await save()&&target===store&&token===navigation;
    }finally{main.inert=false;document.querySelector('.sidebar').inert=false;$('#settings-button').disabled=false;}
   }});
-  initAccountControls({getWrittenStore:()=>written?.store(),onWrittenRows:()=>written?.onRows(),getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,getGuestImportAvailable,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork}).then(value=>{account=value;});
+  initializing=false;rebuildProgress();render(true,state.view==='study'?current()?.scrollY:0);
   if(navigator.modelContext?.registerTool) {
     navigator.modelContext.registerTool({name:'get_study_summary',description:'Read counts of local study attempts and review candidates. Does not modify study records.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:async()=>({content:[{type:'text',text:JSON.stringify(planner.summary())}]})});
   }
-} catch(error) { main.innerHTML='<div class="empty"><h1>問題を読み込めませんでした。</h1><p>接続を確認し、このページを再読み込みしてください。</p><button class="button primary" id="reload">再読み込み</button></div>';$('#reload').addEventListener('click',()=>location.reload());console.error(error); }finally{main.inert=false;document.querySelector('.sidebar').inert=false;main.setAttribute('aria-busy','false');$('#settings-button').disabled=false;}
+} catch(error) { main.innerHTML='<div class="empty"><h1>ひと問を読み込めませんでした。</h1><p>接続を確認し、このページを再読み込みしてください。</p><button class="button primary" id="reload">再読み込み</button></div>';$('#reload').addEventListener('click',()=>location.reload());console.error(error); }finally{main.inert=false;document.querySelector('.sidebar').inert=false;document.querySelector('.topbar').inert=false;main.setAttribute('aria-busy','false');$('#settings-button').disabled=false;}
 }
 await initialize();
