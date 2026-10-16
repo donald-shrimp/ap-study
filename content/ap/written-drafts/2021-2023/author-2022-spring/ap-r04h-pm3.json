@@ -1,0 +1,484 @@
+{
+  "id": "ap-r04h-pm3",
+  "topicId": "algorithm",
+  "title": "パズルの解答を求めるプログラム",
+  "sourcePages": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "body": "問3 パズルの解答を求めるプログラムに関する次の記述を読んで，設問1～3に答えよ。\n\n太線で3×3の枠に区切られた9×9のマスから成る正方形の盤面に，1～9の数字を入れるパズルの解答を求めるプログラムを考える。このパズルは，図1に示すように幾つかのマスに数字が入れられている状態から，数字の入っていない各マスに，1～9のうちのどれか一つの数字を入れていく。このとき，盤面の横1行，縦1列，及び太線で囲まれた3×3の枠内の全てにおいて，1～9の数字が一つずつ入ることが，このパズルのルールである。パズルの問題例を図1に，図1の解答を図2に示す。\n\n図1 問題例 ／ 図2 図1の解答\n\nこのパズルを解くための方針を次に示す。\n\n方針：数字が入っていない空白のマスに，1～9の数字を入れて，パズルのルールにのっとって全部のマスを埋めることができる解答を探索する。\n\nこの方針に沿ってパズルを解く手順を考える。\n\n［パズルを解く手順］\n\n(1) 盤面の左上端から探索を開始する。マスは左端から順に右方向に探索し，右端に達したら一行下がり，左端から順に探索する。\n\n(2) 空白のマスを見つける。\n\n(3) (2)で見つけた空白のマスに，1～9の数字を順番に入れる。\n\n(4) 数字を入れたときに，その状態がパズルのルールにのっとっているかどうかをチェックする。\n\n(4-1) ルールにのっとっている場合は，(2)に進んで次の空白のマスを見つける。\n\n(4-2) ルールにのっとっていない場合は，(3)に戻って次の数字を入れる。このとき，入れる数字がない場合には，マスを空白に戻して一つ前に数字を入れたマスに戻り，(3)から再開する。\n\n(5) 最後のマスまで数字が入り，空白のマスがなくなったら，それが解答となる。\n\n［盤面の表現］\n\nこの手順をプログラムに実装するために，9×9の盤面を次のデータ構造で表現することにした。\n\n・9×9の盤面を81個の要素をもつ1次元配列boardで表現する。添字は0から始まる。各要素にはマスに入れられた数字が格納され，空白の場合は0を格納する。\n\n配列boardによる盤面の表現を図3に示す。ここで括弧内の数字は配列boardの添字を表す。\n\n図3 配列boardによる盤面の表現\n\n［ルールのチェック方法］\n\nパズルのルールにのっとっているかどうかのチェックでは，数字を入れたマスが含まれる横1行の左端のマス，縦1列の上端のマス，3×3の枠内の左上端のマスを特定し，行，列，枠内のマスに既に格納されている数字と，入れた数字がそれぞれ重複していないことを確認する。このチェックを“重複チェック”という。\n\n［解法のプログラム］\n\nプログラムで使用する配列，関数，変数及び定数の一部を表1に示す。なお，表1の配列及び変数は大域変数とする。\n\n表1 プログラムで使用する配列，関数，変数及び定数の一部\n\n| 名称 | 種類 | 内容 |\n| --- | --- | --- |\n| board[ ] | 配列 | 盤面の情報を格納する配列。初期化時には問題に合わせて要素に数字が設定される。 |\n| solve(x) | 関数 | パズルを解くための手順を実行する関数。盤面を表すboard[ ]の添字xを引数とする。 |\n| row_ok(n, x) | 関数 | 横1行の重複チェックを行う関数。チェック対象の数字n，チェック対象のマスを示す添字xを引数とする。数字の重複がない場合はtrue，重複がある場合はfalseを返す。 |\n| column_ok(n, x) | 関数 | 縦1列の重複チェックを行う関数。チェック対象の数字n，チェック対象のマスを示す添字xを引数とする。数字の重複がない場合はtrue，重複がある場合はfalseを返す。 |\n| frame_ok(n, x) | 関数 | 3×3の枠内の重複チェックを行う関数。チェック対象の数字n，チェック対象のマスを示す添字xを引数とする。数字の重複がない場合はtrue，重複がある場合はfalseを返す。 |\n| check_ok(n, x) | 関数 | row_ok，column_ok，frame_okを呼び出し，全ての重複チェックを実行する関数。チェック対象の数字n，チェック対象のマスを示す添字xを引数とする。全てのチェックで数字の重複がない場合はtrue，一つ以上のチェックで数字の重複がある場合はfalseを返す。 |\n| div(n, m) | 関数 | 整数nを整数mで割った商を求める関数。 |\n| mod(n, m) | 関数 | 整数nを整数mで割った剰余を求める関数。 |\n| print_board( ) | 関数 | board[ ]の内容を9×9の形に出力する関数。 |\n| row_top | 変数 | 数字を入れようとするマスが含まれる横1行の左端のマスを示す添字を格納する変数。 |\n| column_top | 変数 | 数字を入れようとするマスが含まれる縦1列の上端のマスを示す添字を格納する変数。 |\n| frame_top | 変数 | 数字を入れようとするマスが含まれる3×3の枠内の左上端のマスを示す添字を格納する変数。 |\n| MAX_BOARD | 定数 | 盤面に含まれるマスの数を表す定数で81。 |\n\n解法のプログラムのメインプログラムを図4に，関数solveのプログラムを図5に，重複チェックを行うプログラムの一部を図6に示す。\n\n```\nfunction main()\n  board[ ]を初期化する    //問題を盤面に設定する\n  solve(0)              //盤面の左上端のマスを示す添字を引数として関数solveを呼び出す\nendfunction\n```\n\n図4 メインプログラム\n\n```\nfunction solve(x)\n  if (xがMAX_BOARD－1より大きい)\n    print_board()                       //解答を出力する\n    exit()                              //メインプログラムの処理を終了する\n  else\n    if (［ア］)                         //対象のマスが空白でない場合\n      solve(［イ］)                     //次の探索\n    else\n      for (nを1から9まで1ずつ増やす)    //1～9の数字を順にマスに入れる\n        if (［ウ］)\n          board[x] ← n\n          solve(［イ］)                 //次の探索\n          board[x] ← ［エ］             //再帰から戻った場合のマスの初期化\n        endif\n      endfor\n    endif\n  endif\nendfunction\n```\n\n図5 関数solveのプログラム\n\n```\nfunction row_ok(n, x)                      //横1行の重複チェック\n  row_top ← ［オ］                        //行の左端のマスを示す添字を求める\n  for (iを0から8まで1ずつ増やす)\n    if (［カ］)\n      return false\n    endif\n  endfor\n  return true\nendfunction\n\nfunction column_ok(n, x)                   //縦1列の重複チェック\n  column_top ← ［キ］                     //列の上端のマスを示す添字を求める\n  for (iを0から8まで1ずつ増やす)\n    if (［ク］)\n      return false\n    endif\n  endfor\n  return true\nendfunction\n\nfunction frame_ok(n, x)                    //3×3の枠内の重複チェック\n  frame_top ← x － ［ケ］ － mod(x, 3)     //枠内の左上端のマスを示す添字を求める\n  for (iを0から2まで1ずつ増やす)\n    for (jを0から2まで1ずつ増やす)\n      if (board[frame_top ＋ 9 * i ＋ j]がnと等しい)\n        return false\n      endif\n    endfor\n  endfor\n  return true\nendfunction\n```\n\n図6 重複チェックを行うプログラムの一部\n\n［プログラムの改善］\n\n解法のプログラムは深さ優先探索であり，探索の範囲が広くなるほど，再帰呼出しの回数が指数関数的に増加し，重複チェックの実行回数も増加する。\n\nそこで，重複チェックの実行回数を少なくするために，各マスに入れることができる数字を保持するためのデータ構造Zを考える。データ構造Zは盤面のマスの数×9の要素をもち，添字xは0から，添字nは1から始まる2次元配列とする。Z[x][n]は，ゲームのルールにのっとってboard[x]に数字nを入れることができる場合は要素に1を，できない場合は要素に0を格納する。データ構造Zの初期化処理と更新処理を表2のように定義した。\n\nなお，データ構造Zは大域変数として導入する。\n\n表2 データ構造Zの初期化処理と更新処理\n\n| 処理の名称 | 処理の内容 |\n| --- | --- |\n| 初期化処理 | 初期化時の盤面に対して，個々の空白のマスについて1～9の数字を入れた場合の重複チェックを行う。重複チェックの結果によって，初期化時の盤面の状態で個々の空白のマスに入れることができない数字は，データ構造Zの該当する数字の要素に0を設定する。それ以外の要素には1を設定する。 |\n| 更新処理 | 空白のマスに数字を入れたとき，そのマスが含まれる横1行，縦1列，3×3の枠内の全てのマスを対象に，データ構造Zの該当する数字の要素を0に更新する。 |\n\n［パズルを解く手順］の(1)の前にデータ構造Zの初期化処理を追加し，［パズルを解く手順］の(2)～(5)を次の(2)～(4)のように変更した。\n\n(2) 空白のマスを見つける。\n\n(3) データ構造Zを参照し，(2)で見つけた空白のマスに入れることができる数字のリストを取得し，リストの数字を順番に入れる。\n\n(3-1) 入れる数字がある場合，++①処理A++を行った後，マスに数字を入れる。その後，データ構造Zの更新処理を行い，(2)に進んで次の空白のマスを見つける。\n\n(3-2) 入れる数字がない場合，マスを空白に戻し，++②処理B++を行った後，一つ前に数字を入れたマスに戻り，戻ったマスで取得したリストの次の数字から再開する。\n\n(4) 最後のマスまで数字が入り，空白のマスがなくなったら，それが解答となる。",
+  "bodyFigures": [
+    {
+      "id": "figures-1-2",
+      "image": "assets/written/ap-r04h-pm3/figures-1-2.png",
+      "caption": "図1 問題例 ／ 図2 図1の解答",
+      "anchor": "図1 問題例 ／ 図2 図1の解答",
+      "placement": "replace-caption",
+      "alt": "図1 問題例 ／ 図2 図1の解答。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 14
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r04h-pm3/figure-3.png",
+      "caption": "図3 配列boardによる盤面の表現",
+      "anchor": "図3 配列boardによる盤面の表現",
+      "placement": "replace-caption",
+      "alt": "図3 配列boardによる盤面の表現。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 15
+    }
+  ],
+  "bodyRefs": {},
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図5中の［ア］～［エ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "board[x]が0でない"
+          ],
+          "explanation": "0は空白を表す。既存の数字があるマスでは数字を変えず次の添字へ進む。",
+          "rubric": [
+            "0は空白を表す。既存の数字があるマスでは数字を変えず次の添字へ進む。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "x＋1"
+          ],
+          "explanation": "盤面を左から右，次の行へ進む1次元表現なので添字を1増やす。",
+          "rubric": [
+            "盤面を左から右，次の行へ進む1次元表現なので添字を1増やす。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "c",
+          "label": "ウ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "check_ok(n, x)がtrueと等しい"
+          ],
+          "explanation": "候補nが行・列・枠の全ての重複チェックを通る場合にだけ配置する。",
+          "rubric": [
+            "候補nが行・列・枠の全ての重複チェックを通る場合にだけ配置する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "d",
+          "label": "エ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "0"
+          ],
+          "explanation": "再帰から戻って次の候補を試すとき，候補を取り消して空白の0へ戻す。",
+          "rubric": [
+            "再帰から戻って次の候補を試すとき，候補を取り消して空白の0へ戻す。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図6中の［オ］～［ケ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "オ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "div(x, 9)*9"
+          ],
+          "explanation": "xを9で割った商が行番号であり，9倍すると行の先頭の添字になる。",
+          "rubric": [
+            "xを9で割った商が行番号であり，9倍すると行の先頭の添字になる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "f",
+          "label": "カ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "board[row_top＋i]がnと等しい"
+          ],
+          "explanation": "行先頭からi=0..8の各マスを調べ，候補nと一致すれば重複。",
+          "rubric": [
+            "行先頭からi=0..8の各マスを調べ，候補nと一致すれば重複。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "g",
+          "label": "キ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "mod(x, 9)"
+          ],
+          "explanation": "xを9で割った余りが列番号で，最上段にある同列の添字となる。",
+          "rubric": [
+            "xを9で割った余りが列番号で，最上段にある同列の添字となる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "h",
+          "label": "ク",
+          "type": "shortText",
+          "referenceAnswers": [
+            "board[column_top＋9*i]がnと等しい"
+          ],
+          "explanation": "同じ列で1行下のマスへ進むたび添字を9増やして候補nとの一致を検査する。",
+          "rubric": [
+            "同じ列で1行下のマスへ進むたび添字を9増やして候補nとの一致を検査する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "i",
+          "label": "ケ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "mod(div(x, 9)*9, 27)"
+          ],
+          "explanation": "行先頭の添字を27で割った余りは，3行のブロック内の行ずれ0/9/18を与える。xからこれと列ずれmod(x,3)を引くと枠の左上端。",
+          "rubric": [
+            "行先頭の添字を27で割った余りは，3行のブロック内の行ずれ0/9/18を与える。xからこれと列ずれmod(x,3)を引くと枠の左上端。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "［プログラムの改善］について，下線①の処理A及び下線②の処理Bの内容を，“データ構造Z”という字句を含めて，それぞれ20字以内で述べよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "処理A",
+          "type": "freeText",
+          "referenceAnswers": [
+            "データ構造Zを退避する"
+          ],
+          "explanation": "候補を置く前のZ全体を保存し，探索に伴う変更から元の候補状態を守る。",
+          "rubric": [
+            "候補を置く前のZ全体を保存し，探索に伴う変更から元の候補状態を守る。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        },
+        {
+          "id": "b",
+          "label": "処理B",
+          "type": "freeText",
+          "referenceAnswers": [
+            "退避したデータ構造Zを取り出す"
+          ],
+          "explanation": "バックトラックでは盤面だけでなくZも保存した状態へ戻す。候補除外を残すと別の枝の解を誤って捨てる。",
+          "rubric": [
+            "バックトラックでは盤面だけでなくZも保存した状態へ戻す。候補除外を残すと別の枝の解を誤って捨てる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 20,
+          "constraints": [
+            "20字以内。"
+          ],
+          "evidence": {
+            "questionPages": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "officialAnswerPage": 2,
+            "officialCommentaryPage": 1
+          }
+        }
+      ],
+      "sourcePages": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "author": "/root/author_2022_spring",
+  "authoringStatus": "awaiting-independent-review",
+  "status": "draft",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r04h-source/question-p14.png",
+    "assets/written/ap-r04h-source/question-p15.png",
+    "assets/written/ap-r04h-source/question-p16.png",
+    "assets/written/ap-r04h-source/question-p17.png",
+    "assets/written/ap-r04h-source/question-p18.png",
+    "assets/written/ap-r04h-source/question-p19.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04h-source/question-p14.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p15.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p16.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p17.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p18.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p19.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和4年度春期 応用情報技術者試験 午後 問3",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_qs.pdf"
+  ]
+}

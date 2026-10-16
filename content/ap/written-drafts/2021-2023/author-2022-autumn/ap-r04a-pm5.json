@@ -1,0 +1,458 @@
+{
+  "id": "ap-r04a-pm5",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "network",
+  "title": "テレワーク環境への移行",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問5 テレワーク環境への移行に関する次の記述を読んで，設問に答えよ。\n\nW社は，東京に本社があり，全国に2か所の営業所をもつ，社員数200名のホームページ制作会社である。W社では本社と各営業所との間をVPNサーバを利用してインターネットVPNで接続している。\n\n本社のDMZでは，プロキシサーバ，VPNサーバ及びWebサーバを，本社の内部ネットワークではファイル共有サーバ及び認証サーバを運用している。\n\nW社では，一部の社員が，社員のテレワーク環境からインターネットを介して本社VPNサーバにリモート接続することで，テレワークとWeb会議を試行している。\n\nW社のネットワーク構成を図1に示す。\n\n図1 W社のネットワーク構成\n\n［W社の各サーバの機能］\n\nW社の各サーバの機能を次に示す。\n\n・本社VPNサーバは，各営業所のVPNサーバとの間でインターネットVPNで拠点間を接続する。また，社員のテレワーク環境にあるPCにリモートアクセス機能を提供する。\n\n・本社，各営業所及び社員のテレワーク環境のPCのWebブラウザからインターネット上のWebサイトへの接続は，本社のプロキシサーバを経由して行われる。プロキシサーバは，インターネット上のWebサイトへのアクセス時のコンテンツフィルタリングやログの取得を行う。\n\n・ファイル共有サーバには，社員ごとや組織ごとに保存領域があり，PCにはファイルを保存しない運用をしている。\n\n・認証サーバでは，社員のID，パスワードなどを管理して，PCやファイル共有サーバへのログイン認証を行っている。\n\n現在利用している本社のインターネット接続回線は，契約帯域が100Mビット／秒（上り／下り）で帯域非保証型である。\n\n［テレワークの拡大］\n\nW社では，テレワークを拡大することになり，情報システム部のX部長の指示でYさんがテレワーク環境への移行を担当することになった。\n\nYさんが移行計画を検討したところ，テレワークに必要なPC（以下，リモートPCという），VPNサーバ及びリモートアクセスに必要なソフトウェアとそのライセンスの入手は即時可能であるが，本社のインターネット接続回線の帯域増強工事は，2か月掛かることが分かった。そこでYさんは，ネットワークの帯域増強工事が完了するまでの間，ネットワークに流れる通信量を監視しながら移行を進めることにした。\n\n［W社が採用したリモートアクセス方式］\n\n今回Yさんが採用したリモートアクセス方式は，［a］で暗号化された［b］通信を用いたインターネットVPN接続機能によって，社員がリモートPCのWebブラウザからVPNサーバを経由して本社と各営業所の内部ネットワークのPC（以下，内部PCという）を遠隔操作する方式である。ここで，リモートPCからの内部PCの遠隔操作は，内部PCのOSに標準装備された機能を利用して，ネットワーク経由で内部PCのデスクトップ画面情報をリモートPCが受け取って表示し，リモートPCから内部PCのデスクトップ操作を行うことで実現する。\n\nこの方式では，リモートPCから内部PCを直接操作することになるので，従来の社内作業をそのままリモートPCから行うことができる。リモートPCからの遠隔操作で作成した業務データもファイル共有サーバに保存するので，社員が出社した際にも業務データをそのまま利用できる。\n\nなお，本社VPNサーバと各営業所のVPNサーバとの間を接続する通信で用いられている暗号化機能は，［a］とは異なり，ネットワーク層で暗号化する［c］を用いている。\n\n［リモートアクセスの認証処理］\n\nWebサーバにリモートアクセス認証で必要なソフトウェアをインストールして，あらかじめ社員ごとに払い出されたリモートアクセス用IDなどを登録しておく。また，++①リモートPCにはリモートアクセスに必要な2種類の証明書をダウンロードする++。\n\nテレワークの社員がリモートアクセスするときの認証処理は，次の二段階で行われる。\n\n第一段階の認証処理は，本社VPNサーバにリモートPCのWebブラウザからVPN接続をする際の認証である。まず，社員はWebサーバのリモートログイン専用のページにアクセスして，リモートアクセス用のIDを入力することによってVPN接続に必要で一定時間だけ有効な［d］を入手する。このリモートログイン専用のページにアクセスする際には，リモートPC上の証明書が利用される。次にWebブラウザから本社VPNサーバにアクセスして，リモートアクセス用のIDと［d］を入力することによってリモートPC上の証明書と合わせてVPN接続の認証が行われる。\n\n第二段階の認証処理は，通常社内で内部PCにログインする際に利用するIDとパスワードを用いて［e］で行われる。\n\n［テレワークで利用するWeb会議サービス］\n\nテレワークで利用するWeb会議サービスは，インターネット上でSaaSとして提供されているV社のWeb会議サービスを採用することになった。このWeb会議サービスは，内部PCのWebブラウザとSaaS上のWeb会議サービスとを接続して利用する。Web会議サービスでは，同時に複数のPCが参加することができ，ビデオ映像と音声が参加しているPC間で共有される。利用者はマイクとカメラの利用の要否をそれぞれ選択することができる。\n\n［テレワーク移行中に発生したシステムトラブルの原因と対策］\n\nテレワークへの移行を進めていたある日，リモートPCから内部PCにリモート接続するPC数が増えたことで，リモートPCでは画面応答やファイル操作などの反応が遅くなったり，Web会議サービスでは画面の映像や音声が中断したりする事象が頻発した。\n\n社員から業務に支障を来すと申告を受けたYさんは，直ちに原因を調査した。\n\nYさんが原因を調査した結果，次のことが分かった。\n\n(1) 社内ネットワークを流れる通信量を複数箇所で測定したところ，本社のインターネット接続回線の帯域使用率が非常に高い。\n\n(2) 本社のインターネット接続回線を流れる通信量を通信の種類ごとに調べたところ，Web会議サービスの通信量が特に多い。このWeb会議サービスの++②通信経路に関する要因++のほかに，映像通信が集中して通信量が増大することが要因となったのではないかと考え，利用者1人当たりの10分間の平均転送データ量を実測した。その結果は，映像と音声を用いた通信方式の場合で120Mバイトであった。これを通信帯域に換算すると［f］Mビット／秒となる。\n\n社員200名のうち60％の社員が同時にこのWeb会議サービスの通信方式を利用する場合，使用する通信帯域は［g］Mビット／秒となり，この通信だけで本社のインターネット接続回線の契約帯域を超えてしまう。\n\nYさんは，本社のインターネット接続回線を流れる通信量を抑える方策として，営業所1と営業所2に設置された++③UTMを利用してインターネットの特定サイトへアクセスする設定と営業所PCのWebブラウザに例外設定とを追加した++。\n\nYさんは，今回の原因調査の結果と対策案をX部長に報告しトラブル対策を実施した。その後本社のインターネット接続回線の帯域増強工事が完了し，UTMと営業所PCのWebブラウザの設定を元に戻し，テレワーク環境への移行が完了した。",
+  "sourceImages": [
+    "assets/written/ap-r04a-source/question-p26.png",
+    "assets/written/ap-r04a-source/question-p27.png",
+    "assets/written/ap-r04a-source/question-p28.png",
+    "assets/written/ap-r04a-source/question-p29.png",
+    "assets/written/ap-r04a-source/question-p30.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "本文中の［a］〜［c］に入れる適切な字句を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "カ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "WebブラウザからのVPNでHTTPを暗号化するTLSを用いる。IPSecは本文のネットワーク層で暗号化する別方式に対応する。",
+          "rubric": [
+            "WebブラウザからのVPNでHTTPを暗号化するTLSを用いる。IPSecは本文のネットワーク層で暗号化する別方式に対応する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "FTP"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "HTTPS"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "IPSec"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "Kerberos"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "LDAP"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "TLS"
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "TLSで保護されたHTTP通信はHTTPSと呼ぶ。FTPはファイル転送，KerberosやLDAPはここでのWeb通信方式ではない。",
+          "rubric": [
+            "TLSで保護されたHTTP通信はHTTPSと呼ぶ。FTPはファイル転送，KerberosやLDAPはここでのWeb通信方式ではない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "FTP"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "HTTPS"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "IPSec"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "Kerberos"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "LDAP"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "TLS"
+            }
+          ]
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "ウ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "ネットワーク層でパケットを保護する方式はIPSecである。TLSと層が異なる。",
+          "rubric": [
+            "ネットワーク層でパケットを保護する方式はIPSecである。TLSと層が異なる。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "FTP"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "HTTPS"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "IPSec"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "Kerberos"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "LDAP"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "TLS"
+            }
+          ]
+        }
+      ],
+      "sourcePages": [
+        27,
+        28,
+        30
+      ]
+    },
+    {
+      "id": "q2-1",
+      "label": "設問2(1)",
+      "prompt": "［リモートアクセスの認証処理］について答えよ。本文中の下線①について，どのサーバの認証機能を利用するために必要な証明書か。図1中のサーバ名を用いて全て答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "サーバ名（全て）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "Webサーバ，本社VPNサーバ"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "最初の証明書はWebサーバのログインページ用，次は本社VPNサーバへのVPN接続用である。第二段階の認証サーバでは通常のIDとパスワードを用いるのでここには含めない。",
+          "rubric": [
+            "Webサーバと本社VPNサーバを両方挙げる。順序は問わない。",
+            "認証サーバやファイル共有サーバと取り違えない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        26,
+        28,
+        30
+      ]
+    },
+    {
+      "id": "q2-2",
+      "label": "設問2(2)",
+      "prompt": "［リモートアクセスの認証処理］について答えよ。本文中の［d］に入れる適切な字句を片仮名10字で答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ワンタイムパスワード"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "一定時間だけ有効でVPN接続時に使う認証情報はワンタイムパスワードである。固定パスワードとは区別する。",
+          "rubric": [
+            "一定時間だけ有効でVPN接続時に使う認証情報はワンタイムパスワードである。固定パスワードとは区別する。"
+          ],
+          "maxLength": 10,
+          "constraints": [
+            "片仮名10字で答える。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        28,
+        30
+      ]
+    },
+    {
+      "id": "q2-3",
+      "label": "設問2(3)",
+      "prompt": "［リモートアクセスの認証処理］について答えよ。本文中の［e］に入れる適切な字句を，図1中のサーバ名を用いて8字以内で答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "認証サーバ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "PCやファイル共有サーバへの通常ログインの認証を行う機器は認証サーバである。",
+          "rubric": [
+            "PCやファイル共有サーバへの通常ログインの認証を行う機器は認証サーバである。"
+          ],
+          "maxLength": 8,
+          "constraints": [
+            "8字以内。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        26,
+        27,
+        28,
+        30
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［テレワーク移行中に発生したシステムトラブルの原因と対策］について答えよ。本文中の下線②について，要因となるのはどのようなことか。適切な記述を解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "要因",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "イ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "本社プロキシ経由でWeb会議へ接続するので，全てのWeb会議通信が本社の契約回線へ集中する。ウは利用割合であって経路要因ではない。営業所1のUTMへの一極集中もない。",
+          "rubric": [
+            "本社プロキシ経由でWeb会議へ接続するので，全てのWeb会議通信が本社の契約回線へ集中する。ウは利用割合であって経路要因ではない。営業所1のUTMへの一極集中もない。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "Web会議サービスの全ての通信が営業所1内のUTMを通る。"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "Web会議サービスの全ての通信が本社のインターネット接続回線を通る。"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "社員の60％がWeb会議サービスを利用する。"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "本社VPNサーバの認証処理を利用しない。"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "本社のファイル共有サーバと本社の内部PCとの通信は本社の内部ネットワーク内を通る。"
+            }
+          ]
+        }
+      ],
+      "sourcePages": [
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "［テレワーク移行中に発生したシステムトラブルの原因と対策］について答えよ。本文中の［f］，［g］に入れる適切な数値を答えよ。",
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "1.6"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "120Mバイト×8ビット/バイト÷(10×60秒)=1.6Mビット/秒。時間を秒へ換算する。",
+          "rubric": [
+            "120Mバイト×8ビット/バイト÷(10×60秒)=1.6Mビット/秒。時間を秒へ換算する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "g",
+          "label": "g",
+          "type": "shortText",
+          "referenceAnswers": [
+            "192"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "200名×60％=120名が同時利用するため，1.6×120=192Mビット/秒となり100を超える。",
+          "rubric": [
+            "200名×60％=120名が同時利用するため，1.6×120=192Mビット/秒となり100を超える。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        29,
+        30
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "［テレワーク移行中に発生したシステムトラブルの原因と対策］について答えよ。本文中の下線③の設定によって，UTMに設定されたアクセスを許可する，FW以外の接続先を図1中の用語を用いて全て答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "接続先（全て）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "Web会議サービス，本社VPNサーバ"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "営業所PCからUTMを通じてWeb会議へ直接出し，本社へのリモート接続も通す必要がある。FW以外としてWeb会議サービスと本社VPNサーバを両方挙げる。",
+          "rubric": [
+            "Web会議サービスと本社VPNサーバの両方を挙げる。順序は問わない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        26,
+        29,
+        30
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和4年度秋期 応用情報技術者試験 午後 問5",
+  "sourcePages": [
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04a-source/question-p26.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p27.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p28.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p29.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p30.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-pm5/figure-1.png": {
+      "width": 817,
+      "height": 426
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r04a-pm5/figure-1.png",
+      "caption": "図1 W社のネットワーク構成",
+      "sourcePage": 26,
+      "placement": "replace-caption",
+      "anchor": "図1 W社のネットワーク構成",
+      "alt": "図1 W社のネットワーク構成"
+    }
+  ],
+  "bodyRefs": {},
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2022_autumn",
+  "authoringStatus": "awaiting-independent-review"
+}

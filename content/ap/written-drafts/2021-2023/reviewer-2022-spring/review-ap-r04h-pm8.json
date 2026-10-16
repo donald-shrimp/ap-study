@@ -1,0 +1,52 @@
+{
+  "caseId": "ap-r04h-pm8",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2022_spring",
+  "reviewer": "/root/author_2023_spring",
+  "reviewedAt": "2026-10-16T14:59:53.521189+00:00",
+  "canonicalCaseSHA256": "4e09e8fa072d2c511495e4b81a8d2036358745f42c057fa6fc5211b624534312",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2022-spring/author-2023-spring-independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans.pdf": "f428f105bf27e010edab5be950f9d1249febd83ab0082fbdf04b918292e1ede7",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt.pdf": "4f4fdd3db407c918724972b7223ab4083524a6f8799daa1952dab3e55c3a2f38",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_qs.pdf": "2655ebf47995c24045c304a1577f88aed3c4d17d2e17a4e3b940d75bbfbee406"
+  },
+  "assetHashes": {
+    "assets/written/ap-r04h-source/question-p42.png": "1d00e6f6d3619ce950efb1b35111ef814d56b1d7dddccc62eebeb4967f2ace7d",
+    "assets/written/ap-r04h-source/question-p43.png": "5b9b963b6254c3d3dc81a29ffc989c465333d537f7662d241fbee88c89ed4406",
+    "assets/written/ap-r04h-source/question-p44.png": "b02ed7540723dc49770b237803848f00013c9ee7e2e4c36ceaeb67164c696c3c",
+    "assets/written/ap-r04h-source/question-p45.png": "bf23c5a9905145b276845c82fbc846ee7248ddc5f2a82a0c8a63845377d81a3d",
+    "assets/written/ap-r04h-source/question-p46.png": "d2a6533fefb1976550639e8ce773820574125dc7074981d0be9e1ccd65db1277",
+    "assets/written/ap-r04h-pm8/figure-1.png": "32e8f18aabca93444ab34831bc17bce6d8b3a2b696453c3bf31a99a28f622152",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans-p04.png": "c0416e224f9763fc77b6f841a10e0de611d5ad3e52b96296e94f6c3ad3067c22",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt-p02.png": "cd76998da050f1a8f47b98f758f7d5c9acdac7d91c84f1bf10cc86a0bb6df949"
+  },
+  "method": "全原問頁をview_imageで実表示し独立解答方針を保存した後、公式解答例・講評の該当PNG、作者草稿の全文・全表セル・図・全小問/欄・全選択肢・制約・下線・解説/rubricを照合。共有公式解答頁の先行露出は独立所見へ明記。全完成cropも実表示し、元PNGの指定矩形との全画素一致をPILで独立検証。全PDF/画像SHAと最終case canonical SHAを再計算。",
+  "answerCheck": "原問42〜46全5頁、7表の全行/列/結合セルの文字・図1全データフロー/凡例、図2全3処理、全6小問9欄・全4択/4選択肢・20/35字条件と公式例/講評/全rubricを照合。G社コードは独立変換し8桁G0030110、初期化により取得失敗便はnullになることを独立再現。共有解答p4先行露出を独立所見へ記録。",
+  "gradingCheck": "単一選択と登録短答はexactText、説明・図示・順不同複数はself。図示は形・端点・方向を確認し語句だけで自動正解にしない。未登録短答は自己評価へ、原本字数条件とアプリ上限を区別。rubricは学習用で公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r04h-source/question-p42.png",
+      "box": [
+        118,
+        803,
+        930,
+        1223
+      ],
+      "output": "assets/written/ap-r04h-pm8/figure-1.png",
+      "sha256": "32e8f18aabca93444ab34831bc17bce6d8b3a2b696453c3bf31a99a28f622152",
+      "pixelMatch": true
+    }
+  ],
+  "calculationChecks": [
+    "author-2023-spring-calculation-ap-r04h-pm8.json：G社日付/時刻/8桁コードと取得失敗時null初期化の独立実験。"
+  ],
+  "actualCounts": {
+    "items": 6,
+    "fields": 9,
+    "sourceImages": 5,
+    "bodyFigures": 1
+  }
+}

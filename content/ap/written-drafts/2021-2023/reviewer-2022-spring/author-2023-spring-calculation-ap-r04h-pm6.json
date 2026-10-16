@@ -1,0 +1,16 @@
+{
+  "reviewer": "/root/author_2023_spring",
+  "engine": "3.53.1",
+  "checks": {
+    "compositeUniqueAllowsNull": true,
+    "sameMemberWithYBlocked": true,
+    "sameIssuedSerialRaceBlocked": true,
+    "serialAssignmentsIncludingCap": [
+      1,
+      2,
+      "duplicate-primary-key"
+    ]
+  },
+  "limits": "SQLite独立実験でUNIQUE/主キー/上限条件の論理を確認。問題のRDBMS方言や行単位ロック同時実行をSQLiteで再現したとは主張しない。",
+  "independentArithmetic": "MAX既存連番+1を同時参照する2取引は同じ連番になり片方がPK衝突。管理行UPDATEをRDBMSの指定ロックで直列化すれば上限前の発行は順次となる。"
+}

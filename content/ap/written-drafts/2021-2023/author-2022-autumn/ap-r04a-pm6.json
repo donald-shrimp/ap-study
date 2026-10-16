@@ -1,0 +1,401 @@
+{
+  "id": "ap-r04a-pm6",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "database",
+  "title": "スマートデバイス管理システムのデータベース設計",
+  "status": "draft",
+  "sourceKind": "official",
+  "body": "問6 スマートデバイス管理システムのデータベース設計に関する次の記述を読んで，設問に答えよ。\n\nJ社は，グループ連結で従業員約3万人を抱える自動車メーカーである。従来は事業継続性・災害時対応施策の一環として，本社の部長職以上にスマートフォン及びタブレットなどのスマートデバイス（以下，情報端末という）を貸与していた。昨今の働き方改革の一環として，従業員全員がいつでもどこでも作業できるようにするために，情報端末の配布対象をグループ企業も含む全従業員に拡大することになった。\n\n現在は情報端末の貸与先が少人数なので，表計算ソフトでスマートデバイス管理台帳（以下，管理台帳という）を作成して貸与状況などを管理している。今後は貸与先が3万人を超えるので，スマートデバイス管理システム（以下，新システムという）を新たに構築することになった。情報システム部門のKさんは，新システムのデータ管理者として，新システム構築プロジェクトに参画した。\n\n［現在の管理台帳］\n\n現在の管理台帳の項目を表1に示す。管理台帳は，一つのワークシートで管理されている。\n\n表1 管理台帳の項目\n\n表1 管理台帳の項目（続き）\n\n［現在の管理方法における課題と新システムに対する要件］\n\nKさんは，新システムの設計に際して，まず，現在の情報端末の運用について，運用管理担当者に対して課題と新システムに対する要件をヒアリングした。ヒアリング結果を表2に示す。\n\n表2 ヒアリング結果\n\n［新システムのE-R図］\n\nKさんは，表1の管理台帳の項目と表2のヒアリング結果を基に，新システムのE-R図を作成した。E-R図（抜粋）を図1に示す。なお，J社内の部署の階層構造は，自己参照の関連を用いて表現する。\n\n図1 新システムのE-R図（抜粋）\n\n［表定義］\n\nこのデータベースでは，E-R図のエンティティ名を表名に，属性名を列名にして，適切なデータ型で表定義した関係データベースによって，データを管理する。Kさんは，図1のE-R図を実装するために，詳細設計として表定義の内容を検討した。契約表の表定義を表3に，料金プラン表の表定義を表4に示す。\n\n表3及び表4のデータ型欄には，適切なデータ型，適切な長さ，精度，位取りを記入する。PK欄は主キー制約，UK欄はUNIQUE制約，非NULL欄は非NULL制約の指定をするかどうかを記入する。指定する場合にはYを，指定しない場合にはNを記入する。ただし，主キーに対してはUNIQUE制約を指定せず，非NULL制約は指定するものとする。\n\n表3 契約表の表定義\n\n表4 料金プラン表の表定義\n\n［表の作成とアクセス制御］\n\nKさんは，実装に必要な各種SQL文を表定義に基づいて作成した。表3のアクセス制御を設定するためのSQL文を図2に，表4の料金プラン表を作成するためのSQL文を図3に示す。なお，運用管理担当者のユーザーアカウントに対しては適切なアクセス制御が設定されているものとする。\n\n図2 表3のアクセス制御を設定するためのSQL文\n\n```\nGRANT ［j］ ON 契約 TO ADMIN\n```\n\n図3 表4の料金プラン表を作成するためのSQL文\n\n```\nCREATE TABLE 料金プラン\n(料金プランコード CHAR(8) NOT NULL,\n 通信事業者コード ［k］,\n 料金プラン名 VARCHAR(30) NOT NULL,\n 基本料金 DECIMAL(5,0) NOT NULL,\n 通話単価 DECIMAL(5,2) NOT NULL,\n 通信単価 DECIMAL(5,4) NOT NULL,\n ［l］ (料金プランコード),\n ［m］ (通信事業者コード) REFERENCES 通信事業者(通信事業者コード))\n```",
+  "sourceImages": [
+    "assets/written/ap-r04a-source/question-p32.png",
+    "assets/written/ap-r04a-source/question-p33.png",
+    "assets/written/ap-r04a-source/question-p34.png",
+    "assets/written/ap-r04a-source/question-p35.png",
+    "assets/written/ap-r04a-source/question-p36.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "図1中の［a］〜［f］に入れる適切なエンティティ間の関連及び属性名を答え，E-R図を完成させよ。なお，エンティティ間の関連及び属性名の表記は，図1の凡例に倣うこと。\n\n図で回答する箇所は，線・矢印の向きと多重度，属性の下線を言葉でも説明し，原本及び公式例と照合して自己評価してください。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "freeText",
+          "referenceAnswers": [
+            "年月（下線なし）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "請求は部署だけでなく年月ごとに管理する要件である。請求番号が主キーであり年月は主キーでも外部キーでもないため，下線を付けない。",
+          "rubric": [
+            "属性名は年月。",
+            "主キー・外部キーを示す下線は付けない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "freeText",
+          "referenceAnswers": [
+            "契約から情報端末への1対多の関連（上向き矢印↑）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "同じ回線番号のまま2年ごとに端末交換するので，一つの契約に複数の情報端末が対応する。図の上側の情報端末へ矢印を向ける。",
+          "rubric": [
+            "契約が1側，情報端末が多側の1対多。",
+            "図1の凡例の一本線と片矢印を用い，矢印先は上側の情報端末。",
+            "単に矢印や1対多という語だけでなく，両端と向きも確認する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "cd",
+          "label": "c・d（順不同）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "従業員ID，情報端末ID（両方に外部キーの破線下線）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "利用は従業員と情報端末の組合せを表す。利用IDが主キーなので従業員ID・情報端末IDは外部キーの破線下線を付ける。c,dの順序は問わない。",
+          "rubric": [
+            "従業員IDと情報端末IDを両方，一つずつ。順不同。",
+            "両属性とも外部キーを表す破線下線を付け，主キーの実線下線にはしない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "freeText",
+          "referenceAnswers": [
+            "利用からアプリ追加への1対多の関連（下向き矢印↓）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "一つの利用で複数のアプリ追加を許可できる。利用が1側，下側のアプリ追加が多側となる。",
+          "rubric": [
+            "利用1対アプリ追加多。",
+            "図の下側のアプリ追加へ一本の矢印を向ける。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "f",
+          "label": "f",
+          "type": "freeText",
+          "referenceAnswers": [
+            "部署の右側へ出て折れ曲がり部署へ戻る自己参照の1対多（上位部署1：下位部署多）"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "部署の上位部署IDは部署自身を参照する。一つの上位部署に複数の下位部署が属する階層を自己関連で表す。",
+          "rubric": [
+            "部署自身の二箇所を結ぶ折れ線の自己関連。",
+            "片端は矢印なしの1側，他端は矢印ありの多側。公式例と同じ折れ線・左向きの戻り矢印を確認する。",
+            "上位部署1に対し下位部署多を示す。部署の語だけでは図の解答を満たさない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        32,
+        33,
+        34,
+        36
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "表3，表4中の［g］〜［i］に入れる適切な字句の組合せを解答群の中から選び，記号で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "組合せ",
+          "type": "singleChoice",
+          "referenceAnswers": [
+            "オ"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "契約IDと料金プランコードはいずれも主キーなのでgはY。本文の指定で主キーには別のUNIQUEを指定しないのでhはN，非NULLは指定するのでiはYとなる。ほかの組合せはこの三条件のいずれかに反する。",
+          "rubric": [
+            "契約IDと料金プランコードはいずれも主キーなのでgはY。本文の指定で主キーには別のUNIQUEを指定しないのでhはN，非NULLは指定するのでiはYとなる。ほかの組合せはこの三条件のいずれかに反する。"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "label": "ア",
+              "text": "g：N，h：N，i：N"
+            },
+            {
+              "id": "b",
+              "label": "イ",
+              "text": "g：N，h：N，i：Y"
+            },
+            {
+              "id": "c",
+              "label": "ウ",
+              "text": "g：N，h：Y，i：N"
+            },
+            {
+              "id": "d",
+              "label": "エ",
+              "text": "g：N，h：Y，i：Y"
+            },
+            {
+              "id": "e",
+              "label": "オ",
+              "text": "g：Y，h：N，i：Y"
+            },
+            {
+              "id": "f",
+              "label": "カ",
+              "text": "g：Y，h：Y，i：Y"
+            }
+          ]
+        }
+      ],
+      "sourcePages": [
+        35,
+        36
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図2，図3中の［j］〜［m］に入れる適切な字句又は式を答えよ。",
+      "fields": [
+        {
+          "id": "j",
+          "label": "j",
+          "type": "shortText",
+          "referenceAnswers": [
+            "SELECT (契約ID, 暗証番号)"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "ADMINに必要な権限は契約IDと暗証番号の参照なので列を限定してSELECT権限を付与する。SELECT *や更新権限の付与は表定義と一致しない。",
+          "rubric": [
+            "ADMINに必要な権限は契約IDと暗証番号の参照なので列を限定してSELECT権限を付与する。SELECT *や更新権限の付与は表定義と一致しない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "k",
+          "label": "k",
+          "type": "shortText",
+          "referenceAnswers": [
+            "CHAR(4) DEFAULT '1234' NOT NULL"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "通信事業者コードは固定長4字，初期値1234，非NULLである。文字列の初期値を引用符で囲み，DEFAULT句とNOT NULL制約を指定する。",
+          "rubric": [
+            "通信事業者コードは固定長4字，初期値1234，非NULLである。文字列の初期値を引用符で囲み，DEFAULT句とNOT NULL制約を指定する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "l",
+          "label": "l",
+          "type": "shortText",
+          "referenceAnswers": [
+            "PRIMARY KEY"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "料金プランコードは主キーなのでPRIMARY KEY句を置く。単にUNIQUEとすると主キーとしての定義を満たさない。",
+          "rubric": [
+            "料金プランコードは主キーなのでPRIMARY KEY句を置く。単にUNIQUEとすると主キーとしての定義を満たさない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "m",
+          "label": "m",
+          "type": "shortText",
+          "referenceAnswers": [
+            "FOREIGN KEY"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "通信事業者コードは通信事業者表を参照する外部キーである。列名の前にFOREIGN KEY句を置き，REFERENCESで参照先を指定する。",
+          "rubric": [
+            "通信事業者コードは通信事業者表を参照する外部キーである。列名の前にFOREIGN KEY句を置き，REFERENCESで参照先を指定する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        35,
+        36
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和4年度秋期 応用情報技術者試験 午後 問6",
+  "sourcePages": [
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04a-source/question-p32.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p33.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p34.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p35.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p36.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-pm6/table-1.png": {
+      "width": 822,
+      "height": 454
+    },
+    "assets/written/ap-r04a-pm6/table-1-cont.png": {
+      "width": 819,
+      "height": 246
+    },
+    "assets/written/ap-r04a-pm6/table-2.png": {
+      "width": 825,
+      "height": 457
+    },
+    "assets/written/ap-r04a-pm6/figure-1.png": {
+      "width": 727,
+      "height": 935
+    },
+    "assets/written/ap-r04a-pm6/table-3.png": {
+      "width": 836,
+      "height": 442
+    },
+    "assets/written/ap-r04a-pm6/table-4.png": {
+      "width": 836,
+      "height": 359
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "table-1",
+      "image": "assets/written/ap-r04a-pm6/table-1.png",
+      "caption": "表1 管理台帳の項目",
+      "sourcePage": 32,
+      "placement": "replace-caption",
+      "anchor": "表1 管理台帳の項目\n\n",
+      "alt": "表1 管理台帳の項目"
+    },
+    {
+      "id": "table-1-cont",
+      "image": "assets/written/ap-r04a-pm6/table-1-cont.png",
+      "caption": "表1 管理台帳の項目（続き）",
+      "sourcePage": 33,
+      "placement": "replace-caption",
+      "anchor": "表1 管理台帳の項目（続き）",
+      "alt": "表1 管理台帳の項目（続き）"
+    },
+    {
+      "id": "table-2",
+      "image": "assets/written/ap-r04a-pm6/table-2.png",
+      "caption": "表2 ヒアリング結果",
+      "sourcePage": 33,
+      "placement": "replace-caption",
+      "anchor": "表2 ヒアリング結果",
+      "alt": "表2 ヒアリング結果"
+    },
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r04a-pm6/figure-1.png",
+      "caption": "図1 新システムのE-R図（抜粋）",
+      "sourcePage": 34,
+      "placement": "replace-caption",
+      "anchor": "図1 新システムのE-R図（抜粋）",
+      "alt": "図1 新システムのE-R図（抜粋）"
+    },
+    {
+      "id": "table-3",
+      "image": "assets/written/ap-r04a-pm6/table-3.png",
+      "caption": "表3 契約表の表定義",
+      "sourcePage": 35,
+      "placement": "replace-caption",
+      "anchor": "表3 契約表の表定義",
+      "alt": "表3 契約表の表定義"
+    },
+    {
+      "id": "table-4",
+      "image": "assets/written/ap-r04a-pm6/table-4.png",
+      "caption": "表4 料金プラン表の表定義",
+      "sourcePage": 35,
+      "placement": "replace-caption",
+      "anchor": "表4 料金プラン表の表定義",
+      "alt": "表4 料金プラン表の表定義"
+    }
+  ],
+  "bodyRefs": {},
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2022_autumn",
+  "authoringStatus": "awaiting-independent-review"
+}

@@ -286,3 +286,8 @@ IPAの[2024年度公式問題・解答例・採点講評](https://www.ipa.go.jp/
 IPAの[2023年度公式問題・解答例・採点講評](https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html)から春秋各11大問を追加。既存44題のcanonical SHAを保持し、計66大問・418小問・583欄。全本文・図表・選択肢・全欄・字数と下線・公式例・講評・学習用解説を作者と別担当が確認した。先行して見えた公式例、確認者の誤読と訂正も所見へ保存し、全題未見で解答したとは扱わない。図示や順不同回答は自己評価、2000字は原本無指定時のアプリ上限。
 
 [計画と公開順](written-expansion-2021-2023.md)、[公式PDFのURL/SHA](../content/ap/written-drafts/2021-2023/sources/sources.json)、[既存44題の固定台帳](../content/ap/written-drafts/2021-2023/preserved-2024-2025.json)、[進捗](../content/ap/written-drafts/2021-2023/progress.json)。2023年のauthor/reviewer各ディレクトリに本文・独立所見・修正経緯・原本/切出し画像SHA・最終教材SHAを保存。2022/2021年の未確認草稿は今回の公開バンクに含めない。
+
+
+## 科目B：2022年春期・秋期の全大問（2026-10-16）
+
+IPAの[2022年度公式問題・解答例・講評](https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html)から春秋各11題を追加。既存2023〜2025年66題の教材/レビューcanonical SHAを固定し、計88題・554小問・782欄。新22題の全本文・全図表・字数と下線・全回答欄・公式例・講評・解説を作者と異なる担当が原本から照合し、SQL・タイマ・通信量・スケジュール等の検算を保存した。先行閲覧や確認担当自身の初回判断の誤りも記録し、確認実態を偽らない。各回のauthor/reviewer領域と[進捗](../content/ap/written-drafts/2021-2023/progress.json)、[公式資料一覧](../content/ap/written-drafts/2021-2023/sources/sources.json)、[既存66題固定台帳](../content/ap/written-drafts/2021-2023/preserved-2023-2025.json)を参照。

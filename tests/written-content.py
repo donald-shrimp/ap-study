@@ -18,6 +18,11 @@ for c in cases:
  if c['id'] in preserved['cases']:assert hashlib.sha256(canonical(c)).hexdigest()==preserved['cases'][c['id']],c['id']
 for r in reviews:
  if r['caseId'] in preserved['reviews']:assert hashlib.sha256(canonical(r)).hexdigest()==preserved['reviews'][r['caseId']],r['caseId']
+fixed66=read('content/ap/written-drafts/2021-2023/preserved-2023-2025.json')
+assert len(fixed66['cases'])==len(fixed66['reviews'])==66
+for key,rows,idkey in [('cases',cases,'id'),('reviews',reviews,'caseId')]:
+ indexed={r[idkey]:r for r in rows}
+ for cid,digest in fixed66[key].items():assert hashlib.sha256(canonical(indexed[cid])).hexdigest()==digest,cid
 pilot=next(c for c in cases if c['id']=='ap-r07h-pm1')
 assert hashlib.sha256(canonical(pilot)).hexdigest()=='5de9a5445337d04da197d262105611c1b1f996af7ee48dab5be1e4667f55dcfb','existing pilot must remain unchanged'
 config=read('content/ap/qualification.json');topics={t['id'] for t in config['topics']};total=0

@@ -23,9 +23,13 @@ def prepare(year):
  assert len({c['id'] for c in cases})==len(cases) and len({r['caseId'] for r in reviews})==len(reviews)
  fixed=read(BASE/'preserved-2024-2025.json')
  assert len(fixed['cases'])==len(fixed['reviews'])==44
- for key,rows,idkey in [('cases',cases,'id'),('reviews',reviews,'caseId')]:
-  by_id={v[idkey]:v for v in rows}
-  for cid,digest in fixed[key].items():assert cid in by_id and seal(by_id[cid])==digest,('published material changed',cid)
+ ledgers=[fixed]
+ previous=BASE/'preserved-2023-2025.json'
+ if previous.exists():ledgers.append(read(previous))
+ for ledger in ledgers:
+  for key,rows,idkey in [('cases',cases,'id'),('reviews',reviews,'caseId')]:
+   by_id={v[idkey]:v for v in rows}
+   for cid,digest in ledger[key].items():assert cid in by_id and seal(by_id[cid])==digest,('published material changed',cid)
  pending=[]
  for season,era in [('autumn','a'),('spring','h')]:
   folder=BASE/f'reviewer-{year}-{season}'

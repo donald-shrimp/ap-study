@@ -1,0 +1,78 @@
+{
+  "caseId": "ap-r04a-pm3",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2022_autumn",
+  "reviewer": "/root/author_2023_autumn",
+  "reviewedAt": "2026-10-15T19:56:37.414012+00:00",
+  "canonicalCaseSHA256": "ea2e08fa69dd9a2c2a37cf097e8a1f2633491588565d433a508198195c646020",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/sources/sources.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2022r04a_ap_pm_qs.pdf": "55ad29e7f2448e5784eee28ea48b37b18ac94829eb0bcb417dfc8ab87373975c",
+    "content/ap/written-drafts/2021-2023/sources/2022r04a_ap_pm_ans.pdf": "e8bef42fa9f56c605f9afeb8de859af735f80adeb5a799035c778f667dc280a5",
+    "content/ap/written-drafts/2021-2023/sources/2022r04a_ap_pm_cmnt.pdf": "c1fcb585220f59a68694b9fb6e094aab62133198ef810da203f5d7b63d9fc200"
+  },
+  "assetHashes": {
+    "assets/written/ap-r04a-source/question-p16.png": "660ae62bcd70e289c262efbff8fd40feb47fdbae75d444be4558950f3c5d1f3d",
+    "assets/written/ap-r04a-source/question-p17.png": "c027b0b61b56191ebd9aa04a9f121f34f7fbc17051525b96e868fb1824047eb9",
+    "assets/written/ap-r04a-source/question-p18.png": "0fd7e05eb31e88c47ec241931e6d3bf79956aa9102b0493566991b4b41bf732b",
+    "assets/written/ap-r04a-source/question-p19.png": "ffa49a5ec13fbc6cbee45abf5f08a59846eafd1a5760086d568fc8cb2d4c7867",
+    "assets/written/ap-r04a-pm3/figure-1.png": "9ae62f37834fc577a911baa5e08e47a5253ab310d384011b1689335df41bbcc7",
+    "assets/written/ap-r04a-pm3/figure-2.png": "ffb73a44f2f2895da616f8be1d63b24ea63b3a5ccc371910db75b4739a2cd947",
+    "content/ap/written-drafts/2021-2023/sources/2022r04a_ap_pm_ans-p02.png": "25b6e82e793f40942eea69fab8540f59f8694414e492ce145968cccf908d3158",
+    "content/ap/written-drafts/2021-2023/sources/2022r04a_ap_pm_cmnt-p01.png": "4f7de4f93f01fb7085991917a076e1314f5e40a2bcbb7732079f7efc89fae08a"
+  },
+  "method": "原問16〜19頁の全本文/条件、迷路2図の全壁・障害物、12行の変数表、visit/main全文コード、全9欄を照合。原図から独立DFSを実装し解4件・未訪問3/13回後2/次引数5,3/基点後22移動/3訪問を再現。公式例2頁/講評1頁と全欄照合。2crop完成表示と画素一致確認。",
+  "answerCheck": "全対象原問画像を実表示し，作者草稿と公式解答を読む前にindependent-findings.jsonへ独立判断を保存。その後，公式解答例・講評の当該原本画像を表示し，作者最終全文・全欄・全選択肢・制約・解説・rubricと全cropを照合。",
+  "gradingCheck": "説明/図示/順不同複数は自己評価。登録例のみの短答自動一致は学習用途。原本無指定2000字はアプリ上限。公式配点/部分点基準を推測しない。",
+  "pixelChecks": [
+    {
+      "path": "assets/written/ap-r04a-source/question-p16.png",
+      "pdfPage": 16,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r04a-source/question-p17.png",
+      "pdfPage": 17,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r04a-source/question-p18.png",
+      "pdfPage": 18,
+      "officialRenderPixelEqual": true
+    },
+    {
+      "path": "assets/written/ap-r04a-source/question-p19.png",
+      "pdfPage": 19,
+      "officialRenderPixelEqual": true
+    }
+  ],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r04a-source/question-p16.png",
+      "box": [
+        143,
+        641,
+        467,
+        1025
+      ],
+      "output": "assets/written/ap-r04a-pm3/figure-1.png",
+      "sha256": "9ae62f37834fc577a911baa5e08e47a5253ab310d384011b1689335df41bbcc7"
+    },
+    {
+      "source": "assets/written/ap-r04a-source/question-p16.png",
+      "box": [
+        567,
+        642,
+        908,
+        1025
+      ],
+      "output": "assets/written/ap-r04a-pm3/figure-2.png",
+      "sha256": "ffb73a44f2f2895da616f8be1d63b24ea63b3a5ccc371910db75b4739a2cd947"
+    }
+  ],
+  "independentEvidence": [
+    "content/ap/written-drafts/2021-2023/reviewer-2022-autumn/independent-findings.json"
+  ],
+  "findings": []
+}

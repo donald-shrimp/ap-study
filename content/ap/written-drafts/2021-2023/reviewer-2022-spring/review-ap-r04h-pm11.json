@@ -1,0 +1,51 @@
+{
+  "caseId": "ap-r04h-pm11",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2022_spring",
+  "reviewer": "/root/author_2023_spring",
+  "reviewedAt": "2026-10-16T15:05:41.935679+00:00",
+  "canonicalCaseSHA256": "3791367bbf3322fdf60369088afeee5a9b6acc87911bc662d9b2d60f69f594cf",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2022-spring/author-2023-spring-independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans.pdf": "f428f105bf27e010edab5be950f9d1249febd83ab0082fbdf04b918292e1ede7",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt.pdf": "4f4fdd3db407c918724972b7223ab4083524a6f8799daa1952dab3e55c3a2f38",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_qs.pdf": "2655ebf47995c24045c304a1577f88aed3c4d17d2e17a4e3b940d75bbfbee406"
+  },
+  "assetHashes": {
+    "assets/written/ap-r04h-source/question-p60.png": "30fd6c979b70b463d58e5e366de0dfd2965d4a05f79544b3c11dbc95e5d1e93a",
+    "assets/written/ap-r04h-source/question-p61.png": "850006f6c9d2ce2374ade17d1a72257c376713b61e133b05dd73815332c91fc3",
+    "assets/written/ap-r04h-source/question-p62.png": "b6db766e596d63508096f0eb9988a41e3d3e3ca3ad309d3a5f53d9de7a21eff9",
+    "assets/written/ap-r04h-source/question-p63.png": "ecbccc0eb56a60330577cc1d7f0a01750489e299ac35833c0fb75e5e18d117db",
+    "assets/written/ap-r04h-pm11/figure-1.png": "3aa3f65f00c0ffcaf25b19c9a7437d6c8a2964ec9c4bba2dacaac56e16435801",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans-p06.png": "42b45e3ec3942db649352cdd0467d3e050e96aa53f897e738fc47135cb56812d",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt-p03.png": "2dd9fd2ea7c4d312cc649f482947a3b1e760e595a8ae3da839fecbddd49b1ec4"
+  },
+  "method": "全原問頁をview_imageで実表示し独立解答方針を保存した後、公式解答例・講評の該当PNG、作者草稿の全文・全表セル・図・全小問/欄・全選択肢・制約・下線・解説/rubricを照合。共有公式解答頁の先行露出は独立所見へ明記。全完成cropも実表示し、元PNGの指定矩形との全画素一致をPILで独立検証。全PDF/画像SHAと最終case canonical SHAを再計算。",
+  "answerCheck": "原問60〜63全4頁、図1全データ流/マスタ/出荷指図・在庫・売上・外部残高と全表1の監査要点/手続、全4設問6欄・9解答群・10/25字条件・下線①を全文照合。公式例/講評と全解説/rubricも確認。aは元データというレビュー担当初回表現を出荷指図データへ具体化し、作者公式例は正確。topicId serviceも確認。",
+  "gradingCheck": "単一選択と登録短答はexactText、説明・図示・順不同複数はself。図示は形・端点・方向を確認し語句だけで自動正解にしない。未登録短答は自己評価へ、原本字数条件とアプリ上限を区別。rubricは学習用で公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r04h-source/question-p61.png",
+      "box": [
+        104,
+        301,
+        931,
+        693
+      ],
+      "output": "assets/written/ap-r04h-pm11/figure-1.png",
+      "sha256": "3aa3f65f00c0ffcaf25b19c9a7437d6c8a2964ec9c4bba2dacaac56e16435801",
+      "pixelMatch": true
+    }
+  ],
+  "calculationChecks": [
+    "author-2023-spring-calculation-ap-r04h-pm11.json：指図10/実出荷8の反例で指図と売上一致の限界、在庫90/倉庫92の差異検出を独立検算。"
+  ],
+  "actualCounts": {
+    "items": 4,
+    "fields": 6,
+    "sourceImages": 4,
+    "bodyFigures": 1
+  }
+}

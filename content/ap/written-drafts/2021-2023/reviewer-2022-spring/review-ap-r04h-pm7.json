@@ -1,0 +1,65 @@
+{
+  "caseId": "ap-r04h-pm7",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2022_spring",
+  "reviewer": "/root/author_2023_spring",
+  "reviewedAt": "2026-10-16T14:57:59.716632+00:00",
+  "canonicalCaseSHA256": "c9eb9c95539dc4399c189f3c499ca6640be0bfba0d75c7b46ed5fb904d47d638",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2022-spring/author-2023-spring-independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans.pdf": "f428f105bf27e010edab5be950f9d1249febd83ab0082fbdf04b918292e1ede7",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt.pdf": "4f4fdd3db407c918724972b7223ab4083524a6f8799daa1952dab3e55c3a2f38",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_qs.pdf": "2655ebf47995c24045c304a1577f88aed3c4d17d2e17a4e3b940d75bbfbee406"
+  },
+  "assetHashes": {
+    "assets/written/ap-r04h-source/question-p36.png": "c8aeea97e606a16e32729c4617e893a0bdebd5bb9dd9835fac34b1b497427dc7",
+    "assets/written/ap-r04h-source/question-p37.png": "00dd861c885ab2fc14cd72f256578ac7d1c85c14c76530bb0a45f2097b167b1e",
+    "assets/written/ap-r04h-source/question-p38.png": "09c56314eb9c62315748d9477217d1fac33ce39a1da8109422bbae0c7c7a8e7b",
+    "assets/written/ap-r04h-source/question-p39.png": "0f4e917e824147a64cc35e9a7a6087f1bb774e8e2e888e010238fd5d2b44e25d",
+    "assets/written/ap-r04h-source/question-p40.png": "53bebc6275e495f111e762945d8c5befbfef87de458faaa3787b7b88e34d2997",
+    "assets/written/ap-r04h-pm7/figure-1.png": "4a3e0c2c6cdec27d1508b536e56353a6f469b10021c1f87e4a65a5dfee40728e",
+    "assets/written/ap-r04h-pm7/figure-2.png": "1598d61c9f2a179f9a08e97d5018c80ff0252f9b1768b71e8e35148d99a2613b",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans-p04.png": "c0416e224f9763fc77b6f841a10e0de611d5ad3e52b96296e94f6c3ad3067c22",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt-p02.png": "cd76998da050f1a8f47b98f758f7d5c9acdac7d91c84f1bf10cc86a0bb6df949"
+  },
+  "method": "全原問頁をview_imageで実表示し独立解答方針を保存した後、公式解答例・講評の該当PNG、作者草稿の全文・全表セル・図・全小問/欄・全選択肢・制約・下線・解説/rubricを照合。共有公式解答頁の先行露出は独立所見へ明記。全完成cropも実表示し、元PNGの指定矩形との全画素一致をPILで独立検証。全PDF/画像SHAと最終case canonical SHAを再計算。",
+  "answerCheck": "原問36〜40全5頁、全3表4/6/8行、図1と図2の全状態・全遷移/処理番号・凡例、全8小問11欄、40字条件と公式例/講評/解説を照合。原本先行の解答は全公式例と意味一致。共有講評p2のリングバッファ論点先行露出を独立所見へ明記。",
+  "gradingCheck": "単一選択と登録短答はexactText、説明・図示・順不同複数はself。図示は形・端点・方向を確認し語句だけで自動正解にしない。未登録短答は自己評価へ、原本字数条件とアプリ上限を区別。rubricは学習用で公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r04h-source/question-p36.png",
+      "box": [
+        179,
+        686,
+        827,
+        952
+      ],
+      "output": "assets/written/ap-r04h-pm7/figure-1.png",
+      "sha256": "4a3e0c2c6cdec27d1508b536e56353a6f469b10021c1f87e4a65a5dfee40728e",
+      "pixelMatch": true
+    },
+    {
+      "source": "assets/written/ap-r04h-source/question-p39.png",
+      "box": [
+        125,
+        215,
+        925,
+        830
+      ],
+      "output": "assets/written/ap-r04h-pm7/figure-2.png",
+      "sha256": "1598d61c9f2a179f9a08e97d5018c80ff0252f9b1768b71e8e35148d99a2613b",
+      "pixelMatch": true
+    }
+  ],
+  "calculationChecks": [
+    "author-2023-spring-calculation-ap-r04h-pm7.json：タイマ置換3ケース、障害中要求消失による60秒、全状態と待機→S2の①③⑦を独立確認。"
+  ],
+  "actualCounts": {
+    "items": 8,
+    "fields": 11,
+    "sourceImages": 5,
+    "bodyFigures": 2
+  }
+}

@@ -1,0 +1,534 @@
+{
+  "id": "ap-r04h-pm7",
+  "topicId": "hardware",
+  "title": "ワイヤレス防犯カメラの設計",
+  "sourcePages": [
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "body": "問7 ワイヤレス防犯カメラの設計に関する次の記述を読んで，設問1～4に答えよ。\n\nI社は，有線の防犯カメラを製造している。有線の防犯カメラの設置には通信ケーブルの配線，電源の電気工事などが必要である。そこで，充電可能な電池を内蔵して，太陽電池と接続することで，外部からの電力の供給が不要なワイヤレス防犯カメラ（以下，ワイヤレスカメラという）を設計することになった。\n\nワイヤレスカメラは，人などの動体を検知したときだけ，一定時間動画を撮影する。撮影の開始時にスマートフォン（以下，スマホという）に通知する。また，スマホから要求することで，現在の状況をスマホで視聴することができる。\n\n［ワイヤレスカメラのシステム構成］\n\nワイヤレスカメラのシステム構成を図1に示す。ワイヤレスカメラはWi-Fiルータを介してインターネットと接続し，サーバ及びスマホと通信を行う。\n\n図1 ワイヤレスカメラのシステム構成\n\n・カメラ部はカメラ及びマイクから構成される。動画用のエンコーダを内蔵しており，音声付きの動画データを生成する。\n\n・動体センサは人体などが発する赤外線を計測して，赤外線の量の変化で人などの動体を検知する。\n\n・通信部はWi-FiでWi-Fiルータを介してサーバ及びスマホと通信する。\n\n・制御部は，カメラ部，動体センサ及び通信部を制御する。\n\n［ワイヤレスカメラの機能］\n\nワイヤレスカメラには，自動撮影及び遠隔撮影の機能がある。\n\n(1) 自動撮影\n\n・動体を検知すると撮影を開始する。撮影を開始したとき，スマホに撮影を開始したことを通知する。\n\n・撮影を開始してからTa秒間撮影する。ここで，Taはパラメタである。\n\n・撮影した動画データは，一時的に制御部のバッファに書き込まれる。このとき，動画データはバッファの先頭から書き込まれる。Ta秒間の撮影が終わるとバッファの動画データはサーバに送信される。\n\n・撮影中に新たに動体を検知すると，バッファにあるその時点までの動画データをサーバに送信し始めると同時に，更にTa秒間撮影を行う。このとき，動画データはバッファの先頭から書き込まれる。\n\n(2) 遠隔撮影\n\n・スマホから遠隔撮影開始が要求されると撮影を開始する。\n\n・撮影した動画データはスマホに送信され，そのままスマホで視聴することができる。\n\n・スマホから遠隔撮影終了が要求される，又は撮影を開始してから60秒経過すると撮影を終了する。\n\n・撮影中に再度，遠隔撮影開始が要求されると，その時点から60秒間又は遠隔撮影終了が要求されるまで，撮影を続ける。\n\n・ワイヤレスカメラとスマホが通信するときに通信障害が発生すると，データの再送は行わず，障害発生中の送受信データは消滅するが，撮影は続ける。\n\n［ワイヤレスカメラの状態遷移］\n\n(1) 状態\n\nワイヤレスカメラの状態を表1に示す。\n\n表1 ワイヤレスカメラの状態\n\n| 状態名 | 説明 |\n| --- | --- |\n| 待機状態 | カメラ部には電力が供給されておらず，撮影していない状態 |\n| 自動撮影状態 | 自動撮影だけを行っている状態 |\n| 遠隔撮影状態 | 遠隔撮影だけを行っている状態 |\n| マルチ撮影状態 | 自動撮影と遠隔撮影を同時に行っている状態 |\n\n(2) イベント\n\n状態遷移のトリガとなるイベントを表2に示す。\n\n表2 状態遷移のトリガとなるイベント\n\n| イベント名 | 説明 |\n| --- | --- |\n| 遠隔撮影開始イベント | スマホから遠隔撮影開始が要求されたときに通知されるイベント |\n| 遠隔撮影終了イベント | スマホから遠隔撮影終了が要求されたときに通知されるイベント |\n| 動体検知通知イベント | 動体センサで動体を検知したときに通知されるイベント |\n| 動画データ通知イベント | カメラ部からのエンコードされた動画データが生成されたときに通知されるイベント |\n| 自動撮影タイマ通知イベント | 自動撮影で使用するタイマでTa秒後に通知されるイベント |\n| 遠隔撮影タイマ通知イベント | 遠隔撮影で使用するタイマで60秒後に通知されるイベント |\n\n(3) 処理\n\n状態遷移したときに行う処理を表3に示す。それぞれのタイマは新たに設定されると，直前のタイマ要求は取り消される。\n\n表3 状態遷移したときに行う処理\n\n| 項番 | 処理名 | 処理内容 |\n| --- | --- | --- |\n| ① | カメラ初期化 | 撮影を開始するとき，カメラ部に電力を供給して初期化する。 |\n| ② | 撮影終了 | カメラ部の電力の供給を停止して撮影を終了する。 |\n| ③ | 撮影開始 | バッファを初期化して，スマホに撮影を開始したことを通知する。 |\n| ④ | バッファに書込み | 動画データをバッファに書き込む。 |\n| ⑤ | サーバに動画データ送信 | バッファの動画データをサーバに送信する。 |\n| ⑥ | スマホに動画データ送信 | 動画データをスマホに送信する。 |\n| ⑦ | 自動撮影タイマ設定 | 自動撮影時のTa秒のタイマを設定する。 |\n| ⑧ | 遠隔撮影タイマ設定 | 遠隔撮影時の60秒のタイマを設定する。 |\n\nワイヤレスカメラの状態遷移図を図2に示す。\n\n図2 ワイヤレスカメラの状態遷移図\n\n［サーバに送られた動画データの不具合］\n\n自動撮影のテストを行ったとき，サーバに異常な動画データが送られてくる不具合が発生した。通信及びハードウェアには問題がなかった。\n\nこの不具合は，自動撮影中に動体を検知したときに発生しており，バッファの使い方に問題があることが判明した。\n\nそこで，撮影中に新たに動体を検知した時点で，書き込まれているバッファの続きから動画データを書き込み，バッファの［d］まで書き込んだ場合は，バッファの［e］に戻る方式の［f］に変更した。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r04h-pm7/figure-1.png",
+      "caption": "図1 ワイヤレスカメラのシステム構成",
+      "anchor": "図1 ワイヤレスカメラのシステム構成",
+      "placement": "replace-caption",
+      "alt": "図1 ワイヤレスカメラのシステム構成。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 36
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r04h-pm7/figure-2.png",
+      "caption": "図2 ワイヤレスカメラの状態遷移図",
+      "anchor": "図2 ワイヤレスカメラの状態遷移図",
+      "placement": "replace-caption",
+      "alt": "図2 ワイヤレスカメラの状態遷移図。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 39
+    }
+  ],
+  "bodyRefs": {},
+  "items": [
+    {
+      "id": "q1",
+      "label": "設問1",
+      "prompt": "時刻t1に動体を検知して自動撮影を開始した。時刻t1から時刻t2まで途切れることなく自動撮影を続けており，時刻t2に最後の動体を検知した。このときの自動撮影は何秒間行われたか。時間を表す式を答えよ。ここで，処理の遅延及び通信の遅延は無視できるものとする。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "時間を表す式",
+          "type": "shortText",
+          "referenceAnswers": [
+            "(t2-t1)+Ta"
+          ],
+          "explanation": "最後の検知t2から更にTa秒撮影するので，終了t2+Taから開始t1を引く。同値の式は自己評価で確認する。",
+          "rubric": [
+            "最後の検知t2から更にTa秒撮影するので，終了t2+Taから開始t1を引く。同値の式は自己評価で確認する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "スマホから要求を行い動画の視聴を開始した。その10秒後に送受信の通信障害が20秒間発生した。通信障害が発生してから5秒後にスマホから遠隔撮影開始を要求した。スマホでの視聴が終了するのは視聴を開始してから何秒後か。整数で答えよ。ここで，処理の遅延及び通信の遅延は無視できるものとする。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "秒後",
+          "type": "shortText",
+          "referenceAnswers": [
+            "60"
+          ],
+          "explanation": "t=10～30秒は通信不能でありt=15秒の再要求は届かず再送もされない。当初の60秒タイマは更新されずt=60秒で終了する。",
+          "rubric": [
+            "t=10～30秒は通信不能でありt=15秒の再要求は届かず再送もされない。当初の60秒タイマは更新されずt=60秒で終了する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［ワイヤレスカメラの状態遷移］について答えよ。図2の状態遷移図の状態S1，S2に入れる適切な状態名を，表1中の状態名で答えよ。",
+      "fields": [
+        {
+          "id": "s1",
+          "label": "S1",
+          "type": "shortText",
+          "referenceAnswers": [
+            "遠隔撮影状態"
+          ],
+          "explanation": "S1は動画データをスマホへ送る⑥を行い，60秒タイマ⑧で管理される遠隔撮影だけの状態。",
+          "rubric": [
+            "S1は動画データをスマホへ送る⑥を行い，60秒タイマ⑧で管理される遠隔撮影だけの状態。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "s2",
+          "label": "S2",
+          "type": "shortText",
+          "referenceAnswers": [
+            "自動撮影状態"
+          ],
+          "explanation": "S2は動画をバッファへ書く④と，動体再検知時の送信⑤・自動タイマ⑦に対応する自動撮影だけの状態。",
+          "rubric": [
+            "S2は動画をバッファへ書く④と，動体再検知時の送信⑤・自動タイマ⑦に対応する自動撮影だけの状態。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "図2中の［a］，［b］に入れる適切なイベント名を，表2中のイベント名で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "遠隔撮影開始イベント"
+          ],
+          "explanation": "待機からカメラを初期化①し遠隔撮影タイマ⑧を設定してS1へ進むトリガは遠隔撮影開始。",
+          "rubric": [
+            "待機からカメラを初期化①し遠隔撮影タイマ⑧を設定してS1へ進むトリガは遠隔撮影開始。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "自動撮影タイマ通知イベント"
+          ],
+          "explanation": "S3からS1への移行は自動撮影が終わり遠隔撮影だけが残る場合。自動タイマ通知を受けてバッファをサーバへ送る⑤。",
+          "rubric": [
+            "S3からS1への移行は自動撮影が終わり遠隔撮影だけが残る場合。自動タイマ通知を受けてバッファをサーバへ送る⑤。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q3-3",
+      "label": "設問3(3)",
+      "prompt": "図2中の［c］に入れる適切な処理を，表3中の項番で全て答えよ。",
+      "fields": [
+        {
+          "id": "c",
+          "label": "c（全ての項番）",
+          "type": "freeText",
+          "referenceAnswers": [
+            "①，③，⑦"
+          ],
+          "explanation": "待機から動体検知で自動撮影へ移るので，カメラの電力・初期化①，バッファ初期化と開始通知③，Ta秒タイマ⑦が必要。不要な項番を加えず三つとも挙げる。",
+          "rubric": [
+            "待機から動体検知で自動撮影へ移るので，カメラの電力・初期化①，バッファ初期化と開始通知③，Ta秒タイマ⑦が必要。不要な項番を加えず三つとも挙げる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "［サーバに送られた動画データの不具合］について答えよ。不具合が発生した理由を40字以内で述べよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "理由",
+          "type": "freeText",
+          "referenceAnswers": [
+            "書込みと読込みが同時に行われ，バッファの先頭のデータが上書きされた。"
+          ],
+          "explanation": "サーバへ送信中の既存データを読み出す一方で，新しい動画を同じ先頭から書くため，未送信データが上書きされる。",
+          "rubric": [
+            "サーバへ送信中の既存データを読み出す一方で，新しい動画を同じ先頭から書くため，未送信データが上書きされる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 40,
+          "constraints": [
+            "40字以内。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "本文中の［d］，［e］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "終端"
+          ],
+          "explanation": "バッファの終端まで書いたら循環して先頭へ戻る。",
+          "rubric": [
+            "バッファの終端まで書いたら循環して先頭へ戻る。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "始端"
+          ],
+          "explanation": "終端の次を始端として扱うことで，配列を論理的に環状に使用する。",
+          "rubric": [
+            "終端の次を始端として扱うことで，配列を論理的に環状に使用する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "q4-3",
+      "label": "設問4(3)",
+      "prompt": "本文中の［f］に入れるバッファの名称を答えよ。",
+      "fields": [
+        {
+          "id": "f",
+          "label": "f",
+          "type": "shortText",
+          "referenceAnswers": [
+            "リングバッファ"
+          ],
+          "explanation": "終端から始端へ戻る方式をリングバッファという。読み書き位置を区別して未読データを保護する。",
+          "rubric": [
+            "終端から始端へ戻る方式をリングバッファという。読み書き位置を区別して未読データを保護する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "officialAnswerPage": 4,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "author": "/root/author_2022_spring",
+  "authoringStatus": "awaiting-independent-review",
+  "status": "draft",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r04h-source/question-p36.png",
+    "assets/written/ap-r04h-source/question-p37.png",
+    "assets/written/ap-r04h-source/question-p38.png",
+    "assets/written/ap-r04h-source/question-p39.png",
+    "assets/written/ap-r04h-source/question-p40.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04h-source/question-p36.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p37.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p38.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p39.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p40.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和4年度春期 応用情報技術者試験 午後 問7",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_qs.pdf"
+  ]
+}

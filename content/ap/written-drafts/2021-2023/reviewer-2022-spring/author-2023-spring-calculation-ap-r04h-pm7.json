@@ -1,0 +1,45 @@
+{
+  "autoDeadlineSimulation": [
+    {
+      "events": [
+        0,
+        5,
+        9
+      ],
+      "Ta": 10,
+      "duration": 19
+    },
+    {
+      "events": [
+        10,
+        15,
+        19,
+        28
+      ],
+      "Ta": 10,
+      "duration": 28
+    },
+    {
+      "events": [
+        100,
+        101,
+        103
+      ],
+      "Ta": 60,
+      "duration": 63
+    }
+  ],
+  "remoteRequestAt15DroppedInOutage10to30": true,
+  "remoteEnd": 60,
+  "stateCheck": {
+    "S1": "remote only,⑥/⑧",
+    "S2": "automatic only,④/⑤/⑦",
+    "S3": "both,④/⑥",
+    "waitingToS2": [
+      "①",
+      "③",
+      "⑦"
+    ]
+  },
+  "bufferCheck": "送信読出中に同一先頭から書込みを再開すると先頭の未読データが上書きされる。循環では書込ポインタを続きから進め終端の次に始端へ戻す。"
+}

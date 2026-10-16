@@ -1,0 +1,52 @@
+{
+  "caseId": "ap-r04h-pm6",
+  "version": 1,
+  "status": "approved",
+  "author": "/root/author_2022_spring",
+  "reviewer": "/root/author_2023_spring",
+  "reviewedAt": "2026-10-16T14:56:36.989925+00:00",
+  "canonicalCaseSHA256": "c05afdfe069e7f9ebfbba69e65a681a86d8f10ab788753cfeb325106e6d0f8e4",
+  "sourceEvidence": "content/ap/written-drafts/2021-2023/reviewer-2022-spring/author-2023-spring-independent-findings.json",
+  "sourceHashes": {
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans.pdf": "f428f105bf27e010edab5be950f9d1249febd83ab0082fbdf04b918292e1ede7",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt.pdf": "4f4fdd3db407c918724972b7223ab4083524a6f8799daa1952dab3e55c3a2f38",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_qs.pdf": "2655ebf47995c24045c304a1577f88aed3c4d17d2e17a4e3b940d75bbfbee406"
+  },
+  "assetHashes": {
+    "assets/written/ap-r04h-source/question-p30.png": "88ca37e51626dd89b88e8925c7ef6595795970cf30c25a0ad322a6a77addb77a",
+    "assets/written/ap-r04h-source/question-p31.png": "345efe9cca281997d9f38d60cf180927732e08d26fe67a5fc7b9fb2549478650",
+    "assets/written/ap-r04h-source/question-p32.png": "6e7ec089097743c2e2ac2af216b04d44835ba148167f4556f3257c956353cb90",
+    "assets/written/ap-r04h-source/question-p33.png": "1a208a5f367f149c147dabd3dda4d0f216f529bf0504930fe4e0cdbad717e039",
+    "assets/written/ap-r04h-source/question-p34.png": "c9350e1a847e50164964fe5268dbdd4d737bf289a467ac138f4e17a3d5d6cba9",
+    "assets/written/ap-r04h-pm6/figure-1.png": "bf16fd7e2bcc6ab5cd624e7e4052f4dd47da1350c97b47739a1ab0de1a88c203",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_ans-p03.png": "3da4780325a1849ba81401853b38b7e3f5dfb8b5c625a7da31b1eafbeb50df34",
+    "content/ap/written-drafts/2021-2023/sources/2022r04h_ap_pm_cmnt-p02.png": "cd76998da050f1a8f47b98f758f7d5c9acdac7d91c84f1bf10cc86a0bb6df949"
+  },
+  "method": "全原問頁をview_imageで実表示し独立解答方針を保存した後、公式解答例・講評の該当PNG、作者草稿の全文・全表セル・図・全小問/欄・全選択肢・制約・下線・解説/rubricを照合。共有公式解答頁の先行露出は独立所見へ明記。全完成cropも実表示し、元PNGの指定矩形との全画素一致をPILで独立検証。全PDF/画像SHAと最終case canonical SHAを再計算。",
+  "answerCheck": "原問30〜34頁の全本文、表1/2/3、SQL図2/4/5、CRUD全6行、ER全属性/下線/凡例と図示条件、全6小問9欄を照合。原本先行独立解答は全公式例と一致。a/b順不同FKは破線下線、c施設→利用プラン上矢印を自己評価で保持。",
+  "gradingCheck": "単一選択と登録短答はexactText、説明・図示・順不同複数はself。図示は形・端点・方向を確認し語句だけで自動正解にしない。未登録短答は自己評価へ、原本字数条件とアプリ上限を区別。rubricは学習用で公式配点ではない。",
+  "findings": [],
+  "cropChecks": [
+    {
+      "source": "assets/written/ap-r04h-source/question-p31.png",
+      "box": [
+        115,
+        575,
+        919,
+        1226
+      ],
+      "output": "assets/written/ap-r04h-pm6/figure-1.png",
+      "sha256": "bf16fd7e2bcc6ab5cd624e7e4052f4dd47da1350c97b47739a1ab0de1a88c203",
+      "pixelMatch": true
+    }
+  ],
+  "calculationChecks": [
+    "author-2023-spring-calculation-ap-r04h-pm6.json：NULL含み複合UNIQUE/同一会員Y重複/同一連番競合/上限2発行をSQLiteで独立検算。行ロック実験とは主張しない。"
+  ],
+  "actualCounts": {
+    "items": 6,
+    "fields": 9,
+    "sourceImages": 5,
+    "bodyFigures": 1
+  }
+}

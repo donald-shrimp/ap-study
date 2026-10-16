@@ -1,0 +1,493 @@
+{
+  "id": "ap-r04h-pm5",
+  "topicId": "network",
+  "title": "ネットワークの構成変更",
+  "sourcePages": [
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "body": "問5 ネットワークの構成変更に関する次の記述を読んで，設問1～3に答えよ。\n\nP社は，本社と営業所をもつ中堅商社である。P社では，本社と営業所の間を，IPsecルータを利用してインターネットVPNで接続している。本社では，情報共有のためのサーバ（以下，ISサーバという）を運用している。電子メールの送受信には，SaaS事業者のQ社が提供する電子メールサービス（以下，Mサービスという）を利用している。ノートPC（以下，NPCという）からISサーバ及びMサービスへのアクセスは，HTTP Over TLS（以下，HTTPSという）で行っている。P社のネットワーク構成（抜粋）を図1に示す。\n\n図1 P社のネットワーク構成（抜粋）\n\n［P社のネットワーク機器の設定内容と動作］\n\nP社のネットワークのサーバ及びNPCの設定内容と動作を次に示す。\n\n・本社及び営業所（以下，社内という）のNPCは，社内DNSサーバで名前解決を行う。\n\n・社内DNSサーバは，内部LANのサーバのIPアドレスを管理し，管理外のサーバの名前解決要求は，外部DNSサーバに転送する。\n\n・外部DNSサーバは，DMZのサーバのグローバルIPアドレスを管理するとともに，DNSキャッシュサーバ機能をもつ。\n\n・プロキシサーバでは，利用者認証，URLフィルタリングを行うとともに，通信ログを取得する。\n\n・外出先及び社内のNPCのWebブラウザには，HTTP及びHTTPS通信がプロキシサーバを経由するように，プロキシ設定にプロキシサーバのFQDNを登録する。ただし，社内のNPCからISサーバへのアクセスは，プロキシサーバを経由せずに直接行う。\n\n・ISサーバには，社内のNPCだけからアクセスしている。\n\n・外出先及び社内のNPCからMサービス及びインターネットへのアクセスは，プロキシサーバ経由で行う。\n\nNPCによる各種通信時に経由する社内の機器又はサーバを図2に示す。ここで，L2SWの記述は省略している。\n\n図2 NPCによる各種通信時に経由する社内の機器又はサーバ\n\nFWに設定されている通信を許可するルール（抜粋）を表1に示す。\n\n表1 FWに設定されている通信を許可するルール（抜粋）\n\n| 項番 | アクセス経路 | 送信元 | 宛先 | プロトコル／宛先ポート番号 |\n| --- | --- | --- | --- | --- |\n| 1 | インターネット→DMZ | any | ［a］ | TCP／53，UDP／53 |\n| 2 | インターネット→DMZ | any | プロキシサーバ | TCP／8080（注1） |\n| 3 | DMZ→インターネット | 外部DNSサーバ | any | TCP／53，UDP／53 |\n| 4 | DMZ→インターネット | ［b］ | any | TCP／80，TCP／443 |\n| 5 | 内部LAN→DMZ | ［c］ | 外部DNSサーバ | TCP／53，UDP／53 |\n| 6 | 内部LAN→DMZ | 社内のNPC | プロキシサーバ | TCP／8080（注1） |\n\n注記 FWは，応答パケットを自動的に通過させる，ステートフルパケットインスペクション機能をもつ。\n\n注1 TCP／8080は，プロキシサーバでの代替HTTPの待受けポートである。\n\nこのたび，P社では，サーバの運用負荷の軽減と外出先からの社内情報へのアクセスを目的に，ISサーバを廃止し，Q社が提供するグループウェアサービス（以下，Gサービスという）を利用することにした。Gサービスへの通信は，Mサービスと同様にHTTPSによって安全性が確保されている。Gサービスを利用するためのネットワーク（以下，新ネットワークという）の設計を，情報システム部のR主任が担当することになった。\n\n［新ネットワーク構成と利用形態］\n\nR主任が設計した，新ネットワーク構成（抜粋）を図3に示す。\n\n図3 新ネットワーク構成（抜粋）\n\n新ネットワークでは，サービスとインターネットの利用状況を管理するために，外出先及び社内のNPCからMサービス，Gサービス及びインターネットへのアクセスを，プロキシサーバ経由で行うことにした。\n\nR主任は，ISサーバの廃止に伴って不要になる，次の設定情報を削除した。\n\n・++①NPCのWebブラウザの，プロキシ例外設定に登録されているFQDN++\n\n・社内DNSサーバのリソースレコード中の，ISサーバのAレコード\n\n［Gサービス利用開始後に発生した問題と対策］\n\nGサービス利用開始後，インターネットを経由する通信の応答速度が，時間帯によって低下するという問題が発生した。FWのログの調査によって，FWが管理するセッション情報が大量になったことによる，FWの負荷増大が原因であることが判明した。そこで，FWを通過する通信量を削減するために，Mサービス及びGサービス（以下，二つのサービスを合わせてq-SaaSという）には，プロキシサーバを経由せず，外出先のNPCはHTTPSでアクセスし，本社のNPCはIPsecルータ1から，営業所のNPCはIPsecルータ2から，インターネットVPNを経由せずHTTPSでアクセスすることにした。この変更によって，q-SaaSの利用状況は，プロキシサーバの通信ログに記録されなくなるので，Q社から提供されるアクセスログによって把握することにした。\n\n外出先及び社内のNPCからq-SaaSアクセス時に経由する社内の機器を図4に示す。ここで，L2SWの記述は省略している。\n\n図4 外出先及び社内のNPCからq-SaaSアクセス時に経由する社内の機器\n\n図4に示した経路に変更するために，R主任は，++②L3SWの経路表に新たな経路の追加++，及びIPsecルータ1とIPsecルータ2の設定変更を行うとともに，NPCのWebブラウザでは，q-SaaS利用時にプロキシサーバを経由させないよう，プロキシ例外設定に，Mサービス及びGサービスのFQDNを登録した。\n\n設定変更後のIPsecルータ1の処理内容（抜粋）を表2に示す。IPsecルータ1は，受信したパケットと表2中の照合する情報とを比較し，パケット転送時に一致した項番の処理を行う。\n\n表2 設定変更後のIPsecルータ1の処理内容（抜粋）\n\n| 項番 | 照合する情報：送信元 | 宛先 | プロトコル | 処理 |\n| --- | --- | --- | --- | --- |\n| 1 | 内部LAN | ［d］ | HTTPS | NAPT後にインターネットに転送 |\n| 2 | 内部LAN | ［e］ | any | インターネットVPNに転送 |\n\nIPsecルータ2もIPsecルータ1と同様の設定変更を行う。これらの追加設定と設定変更によってFWの負荷が軽減し，インターネット利用時の応答速度の低下がなくなり，R主任は，ネットワークの構成変更を完了させた。",
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r04h-pm5/figure-1.png",
+      "caption": "図1 P社のネットワーク構成（抜粋）",
+      "anchor": "図1 P社のネットワーク構成（抜粋）",
+      "placement": "replace-caption",
+      "alt": "図1 P社のネットワーク構成（抜粋）。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 24
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r04h-pm5/figure-2.png",
+      "caption": "図2 NPCによる各種通信時に経由する社内の機器又はサーバ",
+      "anchor": "図2 NPCによる各種通信時に経由する社内の機器又はサーバ",
+      "placement": "replace-caption",
+      "alt": "図2 NPCによる各種通信時に経由する社内の機器又はサーバ。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 25
+    },
+    {
+      "id": "figure-3",
+      "image": "assets/written/ap-r04h-pm5/figure-3.png",
+      "caption": "図3 新ネットワーク構成（抜粋）",
+      "anchor": "図3 新ネットワーク構成（抜粋）",
+      "placement": "replace-caption",
+      "alt": "図3 新ネットワーク構成（抜粋）。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 26
+    },
+    {
+      "id": "figure-4",
+      "image": "assets/written/ap-r04h-pm5/figure-4.png",
+      "caption": "図4 外出先及び社内のNPCからq-SaaSアクセス時に経由する社内の機器",
+      "anchor": "図4 外出先及び社内のNPCからq-SaaSアクセス時に経由する社内の機器",
+      "placement": "replace-caption",
+      "alt": "図4 外出先及び社内のNPCからq-SaaSアクセス時に経由する社内の機器。原本の図形・結線・ラベル・注記を保持。",
+      "sourcePage": 27
+    }
+  ],
+  "bodyRefs": {},
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［P社のネットワーク機器の設定内容と動作］について答えよ。営業所のNPCがMサービスを利用するときに，図2中の（あ）を通過するパケットのIPヘッダ中の宛先IPアドレス及び送信元IPアドレスが示す，NPC，機器又はサーバ名を，図2中の名称でそれぞれ答えよ。",
+      "fields": [
+        {
+          "id": "destination",
+          "label": "宛先IPアドレスが示す名称",
+          "type": "shortText",
+          "referenceAnswers": [
+            "プロキシサーバ"
+          ],
+          "explanation": "NPCはまずプロキシへ通信するので，FWからプロキシへ入る（あ）での宛先はプロキシサーバである。Mサービス宛ての接続はプロキシが別に作る。",
+          "rubric": [
+            "NPCはまずプロキシへ通信するので，FWからプロキシへ入る（あ）での宛先はプロキシサーバである。Mサービス宛ての接続はプロキシが別に作る。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "source",
+          "label": "送信元IPアドレスが示す名称",
+          "type": "shortText",
+          "referenceAnswers": [
+            "営業所のNPC"
+          ],
+          "explanation": "IPsecルータ間のトンネルを通過しても内側のIPヘッダの送信元は営業所のNPCのままである。ルータ名を答えない。",
+          "rubric": [
+            "IPsecルータ間のトンネルを通過しても内側のIPヘッダの送信元は営業所のNPCのままである。ルータ名を答えない。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "外出先のNPCからインターネット上のWebサーバにアクセスするとき，L2SW以外で経由する社内の機器又はサーバ名を，図2中の名称で全て答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "全ての名称",
+          "type": "freeText",
+          "referenceAnswers": [
+            "ルータ，FW，プロキシサーバ"
+          ],
+          "explanation": "図2の外出先NPCからルータ，FW，プロキシサーバを経て，再びFW・ルータからWebサーバへ出る経路を追う。重複せず三つを全て挙げる。",
+          "rubric": [
+            "図2の外出先NPCからルータ，FW，プロキシサーバを経て，再びFW・ルータからWebサーバへ出る経路を追う。重複せず三つを全て挙げる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "q1-3",
+      "label": "設問1(3)",
+      "prompt": "表1中の［a］～［c］に入れる適切な機器又はサーバ名を，図1中の名称で答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "a",
+          "type": "shortText",
+          "referenceAnswers": [
+            "外部DNSサーバ"
+          ],
+          "explanation": "インターネットからDNSポート53への問合せを受けるDMZのサーバが外部DNSサーバ。",
+          "rubric": [
+            "インターネットからDNSポート53への問合せを受けるDMZのサーバが外部DNSサーバ。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "type": "shortText",
+          "referenceAnswers": [
+            "プロキシサーバ"
+          ],
+          "explanation": "HTTP/HTTPSでインターネットへアクセスするDMZ側の送信元はプロキシサーバ。",
+          "rubric": [
+            "HTTP/HTTPSでインターネットへアクセスするDMZ側の送信元はプロキシサーバ。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "type": "shortText",
+          "referenceAnswers": [
+            "社内DNSサーバ"
+          ],
+          "explanation": "管理外の名前解決要求を外部DNSサーバへ転送するのは社内DNSサーバ。",
+          "rubric": [
+            "管理外の名前解決要求を外部DNSサーバへ転送するのは社内DNSサーバ。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "本文中の下線①について，削除するFQDNをもつ機器又はサーバ名を，図1中の名称で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "名称",
+          "type": "shortText",
+          "referenceAnswers": [
+            "ISサーバ"
+          ],
+          "explanation": "従来社内NPCから直接アクセスしていたISサーバだけがプロキシ例外の対象であり，廃止に合わせて削除する。",
+          "rubric": [
+            "従来社内NPCから直接アクセスしていたISサーバだけがプロキシ例外の対象であり，廃止に合わせて削除する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "q3-1",
+      "label": "設問3(1)",
+      "prompt": "［Gサービス利用開始後に発生した問題と対策］について答えよ。本文中の下線②について，新たに追加する経路を，“q-SaaS”という字句を用いて，40字以内で答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "追加する経路",
+          "type": "freeText",
+          "referenceAnswers": [
+            "q-SaaS宛ての通信のネクストホップがIPsecルータ1となる経路"
+          ],
+          "explanation": "宛先q-SaaSへのパケットだけをFW側でなくIPsecルータ1へ送る。経路表に必要な宛先と次ホップの両方を述べる。",
+          "rubric": [
+            "宛先q-SaaSへのパケットだけをFW側でなくIPsecルータ1へ送る。経路表に必要な宛先と次ホップの両方を述べる。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "maxLength": 40,
+          "constraints": [
+            "40字以内。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "q3-2",
+      "label": "設問3(2)",
+      "prompt": "表2中の［d］，［e］に入れる適切なネットワークセグメント，サーバ又はサービス名を，本文中の名称で答えよ。",
+      "fields": [
+        {
+          "id": "d",
+          "label": "d",
+          "type": "shortText",
+          "referenceAnswers": [
+            "q-SaaS"
+          ],
+          "explanation": "HTTPSで直接インターネットへ出す宛先はMサービスとGサービスの総称q-SaaS。",
+          "rubric": [
+            "HTTPSで直接インターネットへ出す宛先はMサービスとGサービスの総称q-SaaS。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        },
+        {
+          "id": "e",
+          "label": "e",
+          "type": "shortText",
+          "referenceAnswers": [
+            "営業所LAN"
+          ],
+          "explanation": "本社内部LANから営業所LANへの通信は従来どおりIPsecルータ間のVPNで転送する。q-SaaSへの直接通信と区別する。",
+          "rubric": [
+            "本社内部LANから営業所LANへの通信は従来どおりIPsecルータ間のVPNで転送する。q-SaaSへの直接通信と区別する。",
+            "確認ポイントは学習用であり，IPAの公式採点・部分点基準ではない。"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "maxLength": 2000,
+          "constraints": [
+            "原本に字数指定なし。2000字はアプリの入力上限。"
+          ],
+          "evidence": {
+            "questionPages": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ],
+            "officialAnswerPage": 3,
+            "officialCommentaryPage": 2
+          }
+        }
+      ],
+      "sourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    }
+  ],
+  "author": "/root/author_2022_spring",
+  "authoringStatus": "awaiting-independent-review",
+  "status": "draft",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "sourceKind": "official",
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "sourceImages": [
+    "assets/written/ap-r04h-source/question-p24.png",
+    "assets/written/ap-r04h-source/question-p25.png",
+    "assets/written/ap-r04h-source/question-p26.png",
+    "assets/written/ap-r04h-source/question-p27.png",
+    "assets/written/ap-r04h-source/question-p28.png"
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04h-source/question-p24.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p25.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p26.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p27.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04h-source/question-p28.png": {
+      "width": 1032,
+      "height": 1459
+    }
+  },
+  "source": "IPA 令和4年度春期 応用情報技術者試験 午後 問5",
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_pm_qs.pdf"
+  ]
+}

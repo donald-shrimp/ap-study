@@ -1,0 +1,324 @@
+{
+  "id": "ap-r04a-pm3",
+  "qualificationId": "ap",
+  "examPartId": "written",
+  "version": 1,
+  "topicId": "algorithm",
+  "title": "迷路の探索処理",
+  "status": "reviewed",
+  "sourceKind": "official",
+  "body": "問3 迷路の探索処理に関する次の記述を読んで，設問に答えよ。\n\n始点と終点を任意の場所に設定するn×mの2次元のマスの並びから成る迷路の解を求める問題を考える。本問の迷路では次の条件で解を見つける。\n\n・迷路内には障害物のマスがあり，n×mのマスを囲む外壁のマスがある。障害物と外壁のマスを通ることはできない。\n\n・任意のマスから，そのマスに隣接し，通ることのできるマスに移動できる。迷路の解とは，この移動の繰返しで始点から終点にたどり着くまでのマスの並びである。ただし，迷路の解では同じマスを2回以上通ることはできない。\n\n・始点と終点は異なるマスに設定されている。\n\n5×5の迷路の例を示す。解が一つの迷路の例を図1に，解が複数（四つ）ある迷路の例を図2に示す。\n\n図1 解が一つの迷路の例\n\n図2 解が複数ある迷路の例\n\n［迷路の解を見つける探索］\n\n迷路の解を全て見つける探索の方法を次のように考える。\n\n迷路と外壁の各マスの位置をx座標とy座標で表し，各マスについてそのマスに関する情報（以下，マス情報という）を考える。与えられた迷路に対して，障害物と外壁のマス情報にはNGフラグを，それ以外のマス情報にはOKフラグをそれぞれ設定する。マス情報全体を迷路図情報という。\n\n探索する際の“移動”には，“進む”と“戻る”の二つの動作がある。“進む”は，現在いるマスから①y座標を1増やす，②x座標を1増やす，③y座標を1減らす，④x座標を1減らす，のいずれかの方向に動くことである。マスに“進む”と同時にそのマスのマス情報に足跡フラグを入れる。足跡フラグが入ったマスには“進む”ことはできない。“戻る”は，今いるマスから“進んで”きた一つ前のマスに動くことである。マスに“移動”したとき，移動先のマスを“訪問”したという。\n\n探索は，始点のマスのマス情報に足跡フラグを入れ，始点のマスを“訪問”したマスとして，始点のマスから開始する。現在いるマスから次のマスに“進む”試みを①〜④の順に行い，もし試みた方向のマスに“進む”ことができなければ，次の方向に“進む”ことを試みる。4方向いずれにも“進む”ことができないときには，現在いるマスのマス情報をOKフラグに戻し，一つ前のマスに“戻る”。これを終点に到達するまで繰り返す。終点に到達したとき，始点から終点まで“進む”ことでたどってきたマスの並びが迷路の解の一つとなる。\n\n迷路の解を見つけた後も，他の解を見つけるために，終点から一つ前のマスに“戻り”，迷路の探索を続け，全ての探索を行ったら終了する。迷路を探索している間，それまでの経過をスタックに格納しておく。終点にたどり着いた時点でスタックの内容を順にたどると，それが解の一つになる。\n\n図1の迷路では，始点から始めて，(1,1)→(1,2)→(1,3)→(1,4)→(1,5)→(2,5)→(1,5)→(1,4)のように“移動”する。ここまででマスの“移動”は7回起きていて，このときスタックには経過を示す4個の座標が格納されている。さらに探索を続けて，始めから13回目の“移動”が終了した時点では，スタックには［ア］個の座標が格納されている。\n\n［迷路の解を全て求めて表示するプログラム］\n\n迷路の解を全て求めて表示するプログラムを考える。プログラム中で使用する主な変数，定数及び配列を表1に示す。配列の添字は全て0から始まり，要素の初期値は全て0とする。迷路を探索してマスを“移動”する関数visitのプログラムを図3に，メインプログラムを図4に示す。メインプログラム中の変数及び配列は大域変数とする。\n\n表1 プログラム中で使用する主な変数，定数及び配列\n\n| 名称 | 種類 | 内容 |\n| --- | --- | --- |\n| maze[x][y] | 配列 | 迷路図情報を格納する2次元配列 |\n| OK | 定数 | OKフラグ |\n| NG | 定数 | NGフラグ |\n| VISITED | 定数 | 足跡フラグ |\n| start_x | 変数 | 始点のx座標 |\n| start_y | 変数 | 始点のy座標 |\n| goal_x | 変数 | 終点のx座標 |\n| goal_y | 変数 | 終点のy座標 |\n| stack_visit[k] | 配列 | それまでの経過を格納するスタック |\n| stack_top | 変数 | スタックポインタ |\n| sol_num | 変数 | 見つけた解の総数 |\n| paths[u][v] | 配列 | 迷路の全ての解の座標を格納する2次元配列。添字のuは解の番号，添字のvは解を構成する座標の順番である。 |\n\n図3 関数visitのプログラム\n\n```\nfunction visit(x, y)\n  maze[x][y] ← VISITED                    //足跡フラグを入れる\n  stack_visit[stack_top] ← (x, y)         //スタックに座標を入れる\n  if(xがgoal_xと等しい かつ yがgoal_yと等しい)  //終点に到達\n    for(kを0からstack_topまで1ずつ増やす)\n      ［イ］ ← stack_visit[k]\n    endfor\n    sol_num ← sol_num+1\n  else\n    stack_top ← stack_top+1\n    if(maze[x][y+1]がOKと等しい)\n      visit(x, y+1)\n    endif\n    if(maze[x+1][y]がOKと等しい)\n      visit(x+1, y)\n    endif\n    if(maze[x][y-1]がOKと等しい)\n      visit(x, y-1)\n    endif\n    if(maze[x-1][y]がOKと等しい)\n      visit(x-1, y)\n    endif\n    stack_top ← ［ウ］\n  endif\n  ［エ］ ← OK\nendfunction\n```\n\n図4 メインプログラム\n\n```\nfunction main\n  stack_top ← 0\n  sol_num ← 0\n  maze[x][y]に迷路図情報を設定する\n  start_x, start_y, goal_x, goal_yに始点と終点の座標を設定する\n  visit(start_x, start_y)\n  if(［オ］が0と等しい)\n    “迷路の解は見つからなかった”と印字する\n  else\n    paths[][]を順に全て印字する\n  endif\nendfunction\n```\n\n［解が複数ある迷路］\n\n図2は解が複数ある迷路の例で，一つ目の解が見つかった後に，他の解を見つけるために，迷路の探索を続ける。一つ目の解が見つかった後で，最初に実行される関数visitの引数の値は［カ］である。この引数の座標を基点として二つ目の解が見つかるまでに，マスの“移動”は［キ］回起き，その間に座標が(4,2)のマスは［ク］回“訪問”される。",
+  "sourceImages": [
+    "assets/written/ap-r04a-source/question-p16.png",
+    "assets/written/ap-r04a-source/question-p17.png",
+    "assets/written/ap-r04a-source/question-p18.png",
+    "assets/written/ap-r04a-source/question-p19.png"
+  ],
+  "sourceRefs": [
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_ans.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_cmnt.pdf",
+    "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_pm_qs.pdf"
+  ],
+  "items": [
+    {
+      "id": "q1-1",
+      "label": "設問1(1)",
+      "prompt": "［迷路の解を見つける探索］について答えよ。図1の例で終点に到達したときに，この探索で“訪問”されなかったマスの総数を，障害物と外壁のマスを除き答えよ。",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "マスの総数",
+          "type": "shortText",
+          "referenceAnswers": [
+            "3"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "終点で最初の解を発見した時点までの訪問履歴を数え，通行可能でも未訪問の3マスを数える。障害物・外壁や，再訪を別マスとして数えない。",
+          "rubric": [
+            "終点で最初の解を発見した時点までの訪問履歴を数え，通行可能でも未訪問の3マスを数える。障害物・外壁や，再訪を別マスとして数えない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        16,
+        17,
+        19
+      ]
+    },
+    {
+      "id": "q1-2",
+      "label": "設問1(2)",
+      "prompt": "［迷路の解を見つける探索］について答えよ。本文中の［ア］に入れる適切な数値を答えよ。",
+      "fields": [
+        {
+          "id": "a",
+          "label": "ア",
+          "type": "shortText",
+          "referenceAnswers": [
+            "2"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "行き止まりから戻るたびにスタックを一つ短くする。13回目の移動では(2,1)に達し，始点とその座標の2個がスタックに残る。",
+          "rubric": [
+            "行き止まりから戻るたびにスタックを一つ短くする。13回目の移動では(2,1)に達し，始点とその座標の2個がスタックに残る。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        16,
+        17,
+        19
+      ]
+    },
+    {
+      "id": "q2",
+      "label": "設問2",
+      "prompt": "図3中の［イ］〜［エ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "b",
+          "label": "イ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "paths[sol_num][k]"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "解番号sol_numの行，経路順kの列へ現在の経路スタックを複写する。配列の添字は0から始まる。",
+          "rubric": [
+            "解番号sol_numの行，経路順kの列へ現在の経路スタックを複写する。配列の添字は0から始まる。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "ウ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "stack_top - 1"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "再帰呼出し前に増やしたスタックポインタを，自分の階層に戻す際に1減らす。",
+          "rubric": [
+            "再帰呼出し前に増やしたスタックポインタを，自分の階層に戻す際に1減らす。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "d",
+          "label": "エ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "maze[x][y]"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "関数から戻る際に現在のマスの足跡を消し，別の経路から訪問可能にする。隣のマスや全体の初期化ではない。",
+          "rubric": [
+            "関数から戻る際に現在のマスの足跡を消し，別の経路から訪問可能にする。隣のマスや全体の初期化ではない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        18,
+        19
+      ]
+    },
+    {
+      "id": "q3",
+      "label": "設問3",
+      "prompt": "図4中の［オ］に入れる適切な字句を答えよ。",
+      "fields": [
+        {
+          "id": "e",
+          "label": "オ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "sol_num"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "見つけた解の総数が0なら解なしと判定する。stack_topは再帰から戻ると0に戻るので解の有無を表さない。",
+          "rubric": [
+            "見つけた解の総数が0なら解なしと判定する。stack_topは再帰から戻ると0に戻るので解の有無を表さない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        18,
+        19
+      ]
+    },
+    {
+      "id": "q4-1",
+      "label": "設問4(1)",
+      "prompt": "［解が複数ある迷路］について答えよ。本文中の［カ］に入れる適切な引数を答えよ。",
+      "fields": [
+        {
+          "id": "f",
+          "label": "カ",
+          "type": "freeText",
+          "referenceAnswers": [
+            "5，3"
+          ],
+          "grading": {
+            "method": "self"
+          },
+          "explanation": "最初の終点(5,5)から呼出し元(5,4)へ戻る。(5,4)で次に試すy−1方向は(5,3)なので次のvisitはvisit(5,3)となる。二つの座標を一組として自己評価する。",
+          "rubric": [
+            "最初の終点(5,5)から呼出し元(5,4)へ戻る。(5,4)で次に試すy−1方向は(5,3)なので次のvisitはvisit(5,3)となる。二つの座標を一組として自己評価する。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        16,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "q4-2",
+      "label": "設問4(2)",
+      "prompt": "［解が複数ある迷路］について答えよ。本文中の［キ］，［ク］に入れる適切な数値を答えよ。",
+      "fields": [
+        {
+          "id": "g",
+          "label": "キ",
+          "type": "shortText",
+          "referenceAnswers": [
+            "22"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "(5,3)を基点に進む移動と再帰から戻る移動の両方を数え，次の解(5,5)に至るまで22回となる。関数呼出し数だけを数えない。",
+          "rubric": [
+            "(5,3)を基点に進む移動と再帰から戻る移動の両方を数え，次の解(5,5)に至るまで22回となる。関数呼出し数だけを数えない。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        },
+        {
+          "id": "h",
+          "label": "ク",
+          "type": "shortText",
+          "referenceAnswers": [
+            "3"
+          ],
+          "grading": {
+            "method": "exactText"
+          },
+          "explanation": "同じマスでも，別の経路で進むときと再帰から戻るときはそれぞれ訪問となる。指定区間で(4,2)への訪問は3回である。",
+          "rubric": [
+            "同じマスでも，別の経路で進むときと再帰から戻るときはそれぞれ訪問となる。指定区間で(4,2)への訪問は3回である。"
+          ],
+          "maxLength": 2000,
+          "constraints": [
+            "原本の字数指定なし。2000字はアプリ上の入力上限。"
+          ]
+        }
+      ],
+      "sourcePages": [
+        16,
+        18,
+        19
+      ]
+    }
+  ],
+  "bodyFormat": "hitomon-markdown-math-v1",
+  "source": "IPA 令和4年度秋期 応用情報技術者試験 午後 問3",
+  "sourcePages": [
+    16,
+    17,
+    18,
+    19
+  ],
+  "imageSizes": {
+    "assets/written/ap-r04a-source/question-p16.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p17.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p18.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-source/question-p19.png": {
+      "width": 1032,
+      "height": 1459
+    },
+    "assets/written/ap-r04a-pm3/figure-1.png": {
+      "width": 324,
+      "height": 384
+    },
+    "assets/written/ap-r04a-pm3/figure-2.png": {
+      "width": 341,
+      "height": 383
+    }
+  },
+  "bodyFigures": [
+    {
+      "id": "figure-1",
+      "image": "assets/written/ap-r04a-pm3/figure-1.png",
+      "caption": "図1 解が一つの迷路の例",
+      "sourcePage": 16,
+      "placement": "replace-caption",
+      "anchor": "図1 解が一つの迷路の例",
+      "alt": "図1 解が一つの迷路の例"
+    },
+    {
+      "id": "figure-2",
+      "image": "assets/written/ap-r04a-pm3/figure-2.png",
+      "caption": "図2 解が複数ある迷路の例",
+      "sourcePage": 16,
+      "placement": "replace-caption",
+      "anchor": "図2 解が複数ある迷路の例",
+      "alt": "図2 解が複数ある迷路の例"
+    }
+  ],
+  "bodyRefs": {},
+  "rubricNotice": "確認ポイントは学習用に独自作成したものです。IPAの公式配点・部分点基準ではありません。",
+  "author": "/root/author_2022_autumn",
+  "authoringStatus": "independently-reviewed"
+}
