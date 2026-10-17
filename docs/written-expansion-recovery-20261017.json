@@ -1,0 +1,75 @@
+{
+  "format": "hitomon-written-expansion-recovery-checkpoint",
+  "version": 1,
+  "updatedAt": "2026-10-17 04:02:56 UTC",
+  "status": "blocked_environment_offline_before_2021_integration",
+  "observedMain": "9f51178ef1dfc11b4b3125bc1959485c31a18880",
+  "workspace": "/workspace/ap-study-written-2021-2023",
+  "branch": "feature/subject-b-2021-2023",
+  "published": {
+    "cases": 88,
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "implementationCommit": "9f51178ef1dfc11b4b3125bc1959485c31a18880",
+    "pagesRun": 38922406152,
+    "priorPublicVerification": {
+      "matchedFiles": 180,
+      "bytes": 84219253,
+      "newYearBrowserCases": 22,
+      "runtimeErrors": 0,
+      "evidenceWorkspacePath": "/workspace/scratch/written-2021-2023/publication-2022.json"
+    }
+  },
+  "reviewHandoff": {
+    "newDrafts": 66,
+    "independentApprovals": 66,
+    "source": "Previous verified checkpoint plus final author/reviewer handoffs; rerun local hash validator after reconnect before integration.",
+    "lastCase": "ap-r03h-pm11",
+    "author": "/root/author_2021_spring",
+    "reviewer": "/root/author_2022_spring",
+    "canonicalSHA256": "b589e69c519c406bb11806541ad33ba483788f276c02f23bc881d393fc3ad9f2",
+    "reviewPath": "content/ap/written-drafts/2021-2023/reviewer-2021-spring/review-ap-r03h-pm11.json",
+    "approvedCasePath": "content/ap/written-drafts/2021-2023/reviewer-2021-spring/approved-case-ap-r03h-pm11.json",
+    "reviewerEvidence": "content/ap/written-drafts/2021-2023/reviewer-2021-spring/q11-review-evidence.json",
+    "lastFix": "設問3の15字自己評価が公式解答例以上の記述を要求しないよう修正。別担当が原本4頁・図表・全8欄・公式例・講評と最終SHAを確認。"
+  },
+  "expectedFinalCandidate": {
+    "cases": 110,
+    "items": 696,
+    "fields": 968,
+    "bodyFigures": 213,
+    "notYetIntegratedOrTested": true
+  },
+  "blocker": {
+    "connectivity": "offline",
+    "execError": "exec-server transport disconnected; failed to resume exec-server session: recovery timed out after 25s",
+    "localFilesReReadThisTurn": false
+  },
+  "remaining": [
+    "環境復旧後、AGENTS.md・最新main・全worktree・既存担当・未コミット作業を再確認。今回のdocs-only checkpoint commitをfetchして既存編集を保持して取り込む。",
+    "scratch/check.pyで66草稿・66承認とSHAを再検証。2021年22題をtools/integrate-written-cases.py --year 2021でpreview後register。",
+    "release.py 2021でリリース識別子更新、build-content、written-content.py、written-batch-integration.py、Node全テスト（Rules以外）、全110題browser、subject-b/target-navigation/PWA/preservationを実施。",
+    "README・SOURCES・VERIFICATION・計画・進捗を実測結果で更新。2021作者/承認/図を含めcommit、最新ref確認・非force push。",
+    "Pages成功と公開ファイル一致、公開2021年22題browser確認。実際のreceiptを保存し、最終docs反映とPages確認を行う。",
+    "完了済み条件が揃った場合のみ『完了🎉』。"
+  ],
+  "scratchScripts": "/workspace/scratch/written-2021-2023/{check.py,release.py,preservation.py,verify-publication.py}",
+  "locallySavedButNotCommitted": [
+    "2021春秋の作者・承認・図",
+    "docs/written-2022-publication.json",
+    "docs/VERIFICATION.md の2022公開結果",
+    "docs/ap-subject-b-progress.json の2022公開結果",
+    "content/ap/written-drafts/2021-2023/progress.json の2022公開結果"
+  ],
+  "guardrails": [
+    "元44題と追加2023年22題のcanonicalを保持",
+    "A800/681カード/180派生/固定模試とAB730174を保持",
+    "startup restoration fix 465af3cを保持",
+    "個人記録を公開しない。本番別端末照合は教材完成とは別件",
+    "このcheckpointは承認ファイル自体のバックアップではない。未公開2021素材を再取得したと扱わない"
+  ]
+}
