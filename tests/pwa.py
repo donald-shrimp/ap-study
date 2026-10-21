@@ -111,7 +111,11 @@ with sync_playwright() as p:
   # An unrelated app cache must survive activation of our newer worker.
   page.evaluate('async()=>{const c=await caches.open("other-app-test");await c.put("/unrelated",new Response("keep"))}')
   server.upgraded=True
-  updated=page.evaluate('async()=>{const url=new URL("data/qualifications/ap/manifest.json",document.baseURI);const m=await(await fetch(url)).json();return await(await fetch(new URL(m.packs[0].url,url))).json();}');assert '更新確認' in updated[0]['summary']
+  # Mutable manifests refresh after returning the saved version. The new SHA
+  # must repair a formerly cached bank even when a server reuses its filename.
+  page.evaluate('async()=>await fetch(new URL("data/qualifications/ap/manifest.json",document.baseURI))')
+  wait_for_async(page,'async()=>{const root=new URL(".",document.baseURI),c=await caches.open(`hitomon-${root.pathname}content`),r=await c.match(new URL("data/qualifications/ap/manifest.json",root));return r&&(await r.json()).packs[0].sha256==='+json.dumps(hashlib.sha256(UPDATED_PACK_BODY).hexdigest())+';}')
+  updated=page.evaluate('async()=>{const {loadCatalog}=await import(new URL("src/content/catalog.js",document.baseURI)),c=await loadCatalog("ap");return await c.ensure(c.questions.find(q=>q.packId===c.manifest.packs[0].id).id);}');assert '更新確認' in updated['summary']
   page.evaluate('async()=>{const r=await navigator.serviceWorker.ready;await r.update()}')
   wait_for_async(page,'async()=>!!(await navigator.serviceWorker.getRegistration()).waiting')
   # No automatic reload should interrupt an in-progress answer.

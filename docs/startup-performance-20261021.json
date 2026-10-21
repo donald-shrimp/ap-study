@@ -1,0 +1,205 @@
+{
+  "format": "hitomon-startup-performance",
+  "version": 1,
+  "release": "20261021-fast-start",
+  "baselineCommit": "520ed218c0326e384c76088840448002778eb64e",
+  "measuredAt": "2026-10-21",
+  "environment": "Linux Chromium desktop, 390x844, private guest checkpoints, local threaded HTTP/1.0 server; not a measurement of the user phone or production login",
+  "measurementEnd": "#main aria-busy=false after initial render",
+  "method": "Same controlled.py and persistent.py as baseline; saved SW and content caches. Controlled server delays all responses or manifest only. Persistent variant closes/reopens the browser with saved profile. Individual samples, affected by process/HTTP caches; no representative-user speed claim.",
+  "controlledBeforeAfter": [
+    {
+      "target": "ap/?part=objective",
+      "condition": "cached_normal",
+      "beforeMs": 500.9,
+      "afterMs": 440.7
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "all_responses_150ms",
+      "beforeMs": 932.5,
+      "afterMs": 248.8
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "all_responses_500ms",
+      "beforeMs": 2861.2,
+      "afterMs": 312.8
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "manifest_response_2sec",
+      "beforeMs": 2247.8,
+      "afterMs": 166.1
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "offline",
+      "beforeMs": 250,
+      "afterMs": 190.2
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "cached_normal",
+      "beforeMs": 535.1,
+      "afterMs": 236.8
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "all_responses_150ms",
+      "beforeMs": 1186,
+      "afterMs": 144.6
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "all_responses_500ms",
+      "beforeMs": 3414,
+      "afterMs": 139.5
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "manifest_response_2sec",
+      "beforeMs": 2221.7,
+      "afterMs": 183.3
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "offline",
+      "beforeMs": 216.7,
+      "afterMs": 153.3
+    },
+    {
+      "target": "ab730/",
+      "condition": "cached_normal",
+      "beforeMs": 467.7,
+      "afterMs": 251.1
+    },
+    {
+      "target": "ab730/",
+      "condition": "all_responses_150ms",
+      "beforeMs": 746.7,
+      "afterMs": 117.4
+    },
+    {
+      "target": "ab730/",
+      "condition": "all_responses_500ms",
+      "beforeMs": 2152.9,
+      "afterMs": 111.5
+    },
+    {
+      "target": "ab730/",
+      "condition": "manifest_response_2sec",
+      "beforeMs": 2109.4,
+      "afterMs": 138.6
+    },
+    {
+      "target": "ab730/",
+      "condition": "offline",
+      "beforeMs": 169,
+      "afterMs": 94
+    }
+  ],
+  "browserReopenBeforeAfter": [
+    {
+      "target": "ap/?part=objective",
+      "condition": "reopen",
+      "beforeMs": 1502.3,
+      "afterMs": 793.2
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "reopen_150ms",
+      "beforeMs": 6169.4,
+      "afterMs": 781.6
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "reopen_500ms",
+      "beforeMs": 25438.1,
+      "afterMs": 1307.9
+    },
+    {
+      "target": "ap/?part=objective",
+      "condition": "reopen_offline",
+      "beforeMs": 921.5,
+      "afterMs": 2587
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "reopen",
+      "beforeMs": 1376.2,
+      "afterMs": 1426.5
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "reopen_150ms",
+      "beforeMs": 1870.4,
+      "afterMs": 1139.5
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "reopen_500ms",
+      "beforeMs": 20343.6,
+      "afterMs": 625
+    },
+    {
+      "target": "ap/?part=written",
+      "condition": "reopen_offline",
+      "beforeMs": 628.5,
+      "afterMs": 1358.7
+    },
+    {
+      "target": "ab730/",
+      "condition": "reopen",
+      "beforeMs": 1212.4,
+      "afterMs": 348
+    },
+    {
+      "target": "ab730/",
+      "condition": "reopen_150ms",
+      "beforeMs": 1243.4,
+      "afterMs": 429.7
+    },
+    {
+      "target": "ab730/",
+      "condition": "reopen_500ms",
+      "beforeMs": 3582.2,
+      "afterMs": 999.5
+    },
+    {
+      "target": "ab730/",
+      "condition": "reopen_offline",
+      "beforeMs": 1058.5,
+      "afterMs": 1047.6
+    }
+  ],
+  "stalledNetworkCheck": {
+    "test": "tests/startup-cache.py",
+    "serverResponseHoldSeconds": 12,
+    "passedTargets": [
+      "ap objective saved question",
+      "ap written saved answer",
+      "ab730 saved question"
+    ],
+    "noIntermediateHome": true
+  },
+  "checks": {
+    "nodeTests": 243,
+    "pwaUpdateAndOffline": true,
+    "ab730ActualBankAndDiagnosis": true,
+    "subjectBIsolationAndBackup": true,
+    "contentBuild": true,
+    "realAuthRestoreEmulators": true,
+    "authRestoreChecks": "real delayed Auth (1200ms), guest/account isolation, A selection/hints/result/history/home/cards, B input, explicit home entry, offline, no intermediate screen or runtime errors"
+  },
+  "coreAssets": {
+    "before": 132,
+    "after": 92,
+    "qualificationEntriesPrecached": 2,
+    "beforeBytes": 2861242,
+    "afterBytes": 2045452,
+    "beforeFontFiles": 60,
+    "afterFontFiles": 20
+  },
+  "personalRecords": "Private profiles contain synthetic guest answers only; no personal records read or published."
+}

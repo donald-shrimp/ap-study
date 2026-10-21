@@ -456,6 +456,8 @@ async function initialize(){
 main.inert=true;document.querySelector('.sidebar').inert=true;document.querySelector('.topbar').inert=true;main.setAttribute('aria-busy','true');$('#settings-button').disabled=true;
 try {
   const pageURL=new URL(location.href),previous=preferredQualification(appRoot),choose=pageURL.searchParams.has('qualifications'),pathQualification=document.documentElement.dataset.qualification;
+  // Start SDK download alongside public content; owner restoration still gates rendering.
+  if(!choose&&(pathQualification||pageURL.searchParams.get('qualification')||previous))import('./sync/firebase.js').catch(()=>{});
   content=await loadCatalog(pathQualification||pageURL.searchParams.get('qualification'),{preferredId:previous,choose,requestedPartId:pageURL.searchParams.get('part')});
   if(content.choose){
     document.querySelector('.workspace').classList.add('qualification-selection');

@@ -6,24 +6,45 @@ export const contentCacheName = `hitomon-${appRoot.pathname}content`;
 
 async function readJSON(url, sha256) {
   const key = new URL(url); key.search = '';
-  let response, cachedFallback=false;
-  try { response = await fetch(url, {cache: 'no-cache'}); }
+  let cache;
+  try{cache=await globalThis.caches?.open(contentCacheName);}catch{}
+  const decode=async response=>{
+    if (!response.ok) throw contentError('教材を読み込めませんでした。','教材');
+    const text=await response.text();
+    if(sha256){
+      const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))].map(n=>n.toString(16).padStart(2,'0')).join('');
+      if(hash!==sha256)throw contentError('教材の確認に失敗しました。オンラインで開き直してください。','教材');
+    }
+    let value;try{value=JSON.parse(text);}catch(error){throw contentError('Invalid content JSON: '+key.pathname,'教材',error);}
+    return {value,text};
+  };
+  let reload=false;
+  // A bank is reusable only if it matches the currently selected manifest's
+  // full SHA. This also works before the first SW has taken control.
+  if(sha256&&cache){
+    try{
+      const saved=await cache.match(key.href);
+      if(saved){
+        try{const {value}=await decode(saved);return {value,online:navigator.onLine};}
+        catch{reload=true;await cache.delete(key.href);}
+      }
+    }catch{}
+  }
+  let response,cachedFallback=false;
+  try { response = await fetch(url, {cache: reload?'reload':'no-cache'}); }
   catch (error) {
-    response = await globalThis.caches?.match(key.href);cachedFallback=true;
+    try{response=await cache?.match(key.href);}catch{}
+    cachedFallback=true;
     if (!response) throw contentError('Network and cache unavailable: '+key.pathname,'教材',error);
   }
-  if (!response.ok) throw contentError('教材を読み込めませんでした。','教材');
-  const text = await response.text();
-  if (sha256) {
-    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))].map(n=>n.toString(16).padStart(2,'0')).join('');
-    if (hash !== sha256) throw contentError('教材の確認に失敗しました。オンラインで開き直してください。','教材');
-  }
-  let value;try{value=JSON.parse(text);}catch(error){throw contentError('Invalid content JSON: '+key.pathname,'教材',error);}
+  const {value,text}=await decode(response);
   // The first visit may load before the SW controls the page. Save public content
   // here too so a first question can be resumed offline without an extra reload.
   try {
-    const cache = await globalThis.caches?.open(contentCacheName);
-    await cache?.put(key.href, new Response(text, {headers:{'Content-Type':'application/json'}}));
+    // A SW may already be refreshing this mutable manifest in the background.
+    // Writing its old response back would race with and undo the refresh.
+    if(response.headers.get('X-Hitomon-Cache')!=='1')
+      await cache?.put(key.href, new Response(text, {headers:{'Content-Type':'application/json'}}));
   } catch { /* Cache quota does not turn a successful read into a failure. */ }
   return {value, online: !cachedFallback && navigator.onLine && response.headers.get('X-Hitomon-Offline') !== '1'};
 }
