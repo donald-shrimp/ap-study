@@ -95,10 +95,10 @@ with sync_playwright() as p:
   assert page.locator('.choices img,.choices .choice-text').count()==0 and page.locator('.question-figure img').count()==1
   context.set_offline(False);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for()
   open_q('r07h-q6')
- # Core math assets and current question/figures/original survive no network.
+ # Required question/figures/fonts survive no network; supplemental originals stay online.
  wait_for_async(page,'async()=>{await navigator.serviceWorker.ready;return Boolean(navigator.serviceWorker.controller)}')
  context.set_offline(True);page.reload();page.get_by_role('button',name='回答する',exact=True).wait_for();fits()
- page.locator('.original-question>summary').click();assert page.locator('.original-question img').evaluate('(img)=>img.complete&&img.naturalWidth>0')
+ page.locator('.original-question>summary').click();page.locator('.original-content').filter(has_text='オンライン').wait_for();assert page.locator('.original-question img').count()==0
  assert page.locator('.choices img').evaluate_all('(imgs)=>imgs.every(img=>img.complete&&img.naturalWidth>0)')
  assert page.locator('.choices .katex').count()==0
  assert not errors,errors
@@ -106,4 +106,4 @@ with sync_playwright() as p:
  assert page.evaluate('document.fonts.check("16px KaTeX_Main")')
  assert not errors,errors
  browser.close()
-print(f'PASS {len(records)} actual questions / 320-1280px / 200% / math-table-figures / hints-choice resume / four reasons / diagnostic math unaided / offline original and fonts')
+print(f'PASS {len(records)} actual questions / 320-1280px / 200% / math-table-figures / hints-choice resume / four reasons / diagnostic math unaided / online originals / offline required figures and fonts')

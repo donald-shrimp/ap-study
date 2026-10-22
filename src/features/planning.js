@@ -1,3 +1,4 @@
+import {requiredQuestionAssets} from '../domain/offline-assets.js';
 import {encodeResource,decodeResource} from '../v2/resources.js';
 import {chooseAssessment} from '../domain/assessment.js';
 import {canUseQuestion} from '../domain/content-policy.js';
@@ -48,7 +49,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   let dialog=document.getElementById('copy-dialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='copy-dialog';dialog.setAttribute('aria-label','コピーするテキスト');dialog.innerHTML='<form method="dialog"><div class="dialog-head"><h2>テキストをコピー</h2><button class="button secondary">閉じる</button></div></form><p class="small">下のテキストを選択してコピーしてください。</p><textarea rows="12" readonly aria-label="コピーする内容"></textarea><button type="button" class="button secondary select-copy">全選択</button>';document.body.append(dialog);dialog.querySelector('.select-copy').onclick=()=>dialog.querySelector('textarea').select();}dialog.querySelector('textarea').value=text;dialog.showModal();
  }}
  async function cacheImages(questions){
-  const urls=[...new Set(questions.flatMap(q=>[...(q.sourceImages||[]),q.image,...q.choices.map(c=>c.image)].filter(Boolean)))],cache=await globalThis.caches?.open(`hitomon-${rootPath}images`),pending=[...urls];
+  const urls=[...new Set(questions.flatMap(requiredQuestionAssets))],cache=await globalThis.caches?.open(`hitomon-${rootPath}images`),pending=[...urls];
   await Promise.all(Array.from({length:Math.min(6,pending.length)},async()=>{while(pending.length){const url=pending.shift();if(await cache?.match(url))continue;const response=await fetch(url);if(!response.ok)throw new Error('診断の問題画像を準備できませんでした。接続を確認してください。');await cache?.put(url,response);}}));
  }
  async function startDiagnostic(){

@@ -1,0 +1,68 @@
+{
+  "format": "hitomon-offline-verification",
+  "version": 1,
+  "release": "20261022-offline-materials",
+  "baseCommit": "2495878344e80262bb0bc010a3237708b1312b9e",
+  "materials": [
+    {
+      "qualification": "ap",
+      "examPartId": "objective",
+      "groups": 10,
+      "items": 800,
+      "bytesIncludingSharedMetadata": 11316646
+    },
+    {
+      "qualification": "ap",
+      "examPartId": "written",
+      "groups": 8,
+      "items": 88,
+      "bytesIncludingSharedMetadata": 29312756
+    },
+    {
+      "qualification": "ab730",
+      "examPartId": "objective",
+      "groups": 7,
+      "items": 174,
+      "bytesIncludingSharedMetadata": 794658
+    }
+  ],
+  "optionalOriginalScans": false,
+  "essentialImageOnlyQuestions": [
+    "r04h-q16",
+    "r03a-q52"
+  ],
+  "inventoryIntegrity": {
+    "allAssetsHaveFullSHA256AndByteCount": true,
+    "requiredChoiceImagesIncluded": true,
+    "supplementaryOriginalsExcluded": true
+  },
+  "tests": {
+    "node": 250,
+    "offlineStoreFaultChecks": [
+      "interrupt",
+      "resume remaining files",
+      "cancellation",
+      "quota",
+      "corrupt cache",
+      "bad SHA",
+      "shared deletion",
+      "missing cached files"
+    ],
+    "browser": [
+      "A selected session and all800 downloaded",
+      "AB selected pack and all174 downloaded",
+      "image-only question offline",
+      "B required figures, free text, example, self rating, reload",
+      "unsaved B case cannot begin offline",
+      "320/390/1440 dialog",
+      "download does not create study records",
+      "material deletion retains study records",
+      "no startup inventory fetch",
+      "PWA manual update and offline resume",
+      "delayed real Auth and account isolation",
+      "startup with stalled network"
+    ],
+    "publishedQuestionContentChanged": false
+  },
+  "scope": "Normal question study and AP flashcards. Preparing new diagnostic/mock sessions and external references excluded. Previously prepared sessions retain existing offline behavior."
+}

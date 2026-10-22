@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from written_content import compile_cases
+from offline_content import compile_offline
 ROOT = Path(__file__).resolve().parents[1]
 SAFE_ID = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$')
 MAX_ASSESSMENT_SIZE = 200
@@ -431,6 +432,7 @@ def compile_qualification(root, id):
             targets.append({'examPartId': part['id'], 'label': part['label'], 'unit': unit, 'count': count})
     manifest['studyTargets']=targets
     manifest.update(compile_learning_tools(root, config, questions, directory))
+    manifest['offline']=compile_offline(root,manifest,questions,directory,hashed_json)
     write_json(directory / 'manifest.json', manifest)
     return {'id': id, 'name': config['name'], 'shortName': config['shortName'], 'url': f'{id}/manifest.json', 'count': len(questions), 'defaultExamPartId': config['defaultExamPartId'], 'studyTargets': targets}, config
 

@@ -136,5 +136,6 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false,req
   }
   return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, loadCases:async()=>{if(!manifest.cases)return [];const {value}=await readJSON(new URL(manifest.cases.url,manifestURL),manifest.cases.sha256);if(value.format!=='hitomon-case-bank'||value.version!==2||value.qualificationId!==manifest.id||value.cases.length!==manifest.cases.count)throw contentError('大問教材を確認できません。','科目B');return value.cases;}, online:loaded.online && index.online,
     loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
+    loadOffline:async()=>{if(!manifest.offline)throw contentError('Offline inventory not available','保存用の教材一覧');return (await readJSON(new URL(manifest.offline.url,manifestURL),manifest.offline.sha256)).value;},
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};
 }

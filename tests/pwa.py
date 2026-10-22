@@ -70,8 +70,8 @@ with sync_playwright() as p:
   dimensions=page.evaluate('async path=>{const i=new Image();i.src=new URL(path,document.baseURI);await i.decode();return `${i.naturalWidth}x${i.naturalHeight}`}',icon['src']);assert dimensions==icon['sizes']
  installability=cdp.send('Page.getInstallabilityErrors');assert not installability['installabilityErrors'],installability
  print('PASS manifest / project-specific app identity / 192 and 512px icons / maskable / subdirectory scope',flush=True)
- open_q('r07h-q1');page.locator('.source-question img').evaluate('(img)=>img.decode()')
- wait_for_async(page,'async()=>!!(await caches.match(new URL("assets/questions/r07h/r07h-q1.webp",document.baseURI)))')
+ open_q('r07h-q5');page.locator('.question-figure img').evaluate('(img)=>img.decode()')
+ wait_for_async(page,'async()=>!!(await caches.match(new URL("assets/transcriptions/transcribe_r07h/r07h-q5-figure.webp",document.baseURI)))')
  page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(3).check();attempt=state()['currentId']
  pause=page.get_by_role('button',name='中断',exact=True)
  appearance=pause.evaluate('(el)=>{const s=getComputedStyle(el);return {border:s.borderTopStyle,color:s.borderTopColor,bg:s.backgroundColor,h:el.offsetHeight}}')
@@ -81,7 +81,7 @@ with sync_playwright() as p:
  page.screenshot(path=str(ARTIFACTS/'pause-mobile.png'),full_page=True)
  ctx.set_offline(True);page.wait_for_function('!navigator.onLine');page.reload();page.locator('.hint-box').wait_for()
  assert state()['currentId']==attempt and page.get_by_role('radio').nth(3).is_checked() and state()['attempts'][-1]['hintCount']==1
- page.locator('.source-question img').evaluate('(img)=>img.decode()');assert page.locator('#offline-status').is_visible()
+ page.locator('.question-figure img').evaluate('(img)=>img.decode()');page.locator('#offline-status').wait_for(state='visible')
  page.get_by_role('button',name='中断',exact=True).click();nav('history');open_answer_history(page);page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
  assert page.get_by_role('radio').nth(3).is_checked() and page.locator('.hint-box').count()==1
  # Navigating during the debounced scroll save must preserve the study position.
@@ -91,7 +91,7 @@ with sync_playwright() as p:
  page.evaluate('window.dispatchEvent(new Event("scroll"))');nav('materials')
  before=state();page.wait_for_timeout(300);assert state()==before,'Leaving study overwrote its saved scroll position'
  # A missing image does not create an unreadable attempt or destroy the paused one.
- choose_q('r07h-q2');before=state();page.locator('[data-action=start][data-id=r07h-q2]').click();after=state()
+ choose_q('r07h-q6');before=state();page.locator('[data-action=start][data-id=r07h-q6]').click();after=state()
  if after!=before:
   changed={key:[before.get(key),after.get(key)] for key in before if before.get(key)!=after.get(key)}
   if 'attempts' in changed:
@@ -105,7 +105,7 @@ with sync_playwright() as p:
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0
  page.screenshot(path=str(ARTIFACTS/'offline-mobile.png'),full_page=True)
  print('PASS visible pause control / offline reload / images / selection and hint resume / scroll preserved on navigation / cached-only picking / missing-image guard',flush=True)
- ctx.set_offline(False);page.reload();page.get_by_role('radio').first.wait_for();page.wait_for_function('navigator.onLine');open_q('r07h-q1');page.locator('.source-question img').evaluate('(img)=>img.decode()')
+ ctx.set_offline(False);page.reload();page.get_by_role('radio').first.wait_for();page.wait_for_function('navigator.onLine');open_q('r07h-q5');page.locator('.question-figure img').evaluate('(img)=>img.decode()')
  page.get_by_role('button',name='ヒントを1つ見る',exact=True).click();page.get_by_role('radio').nth(2).check();before=state()
  if not os.environ.get('AP_STUDY_PWA_URL'):
   # An unrelated app cache must survive activation of our newer worker.
@@ -127,7 +127,7 @@ with sync_playwright() as p:
   assert state()['currentId']==before['currentId'] and page.get_by_role('radio').nth(2).is_checked() and page.locator('.hint-box').count()==1
   names=page.evaluate('async()=>await caches.keys()');assert 'other-app-test' in names and any(name.endswith('shell-'+NEXT_RELEASE) for name in names)
   assert not any(name.endswith('shell-'+RELEASE) for name in names)
-  ctx.set_offline(True);page.reload();page.locator('.hint-box').wait_for();page.locator('.source-question img').evaluate('(img)=>img.decode()')
+  ctx.set_offline(True);page.reload();page.locator('.hint-box').wait_for();page.locator('.question-figure img').evaluate('(img)=>img.decode()')
   assert state()['currentId']==before['currentId'];assert '更新確認' in page.evaluate('async()=>{const url=new URL("data/qualifications/ap/manifest.json",document.baseURI);const m=await(await fetch(url)).json();return await(await fetch(new URL(m.packs[0].url,url))).json();}')[0]['summary']
   print('PASS online bank freshness / update on request / record unchanged / old shell removed / other caches and saved images retained / offline new release',flush=True)
  assert not errors,errors

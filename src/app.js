@@ -1,3 +1,4 @@
+import {requiredQuestionAssets} from './domain/offline-assets.js';
 import {createWrittenFeature} from './features/written.js';
 import {buildWrittenAIPrompt} from './domain/case-study.js';
 import {buildAIPrompt} from './features/ai-handoff.js';
@@ -65,6 +66,8 @@ function views(){
 }
 let offlineQuestionIds = new Set();
 let online = navigator.onLine;
+// Preserve a failed connectivity probe that arrives during cached startup.
+let observedNetwork=null;
 initPWA({beforeUpdate:async()=>{await personal?.flush();await written?.flush();return store?save():true;}});
 function usableOffline(q) { return online || offlineQuestionIds.has(q.id); }
 async function refreshOfflineQuestions() {
@@ -73,7 +76,7 @@ async function refreshOfflineQuestions() {
     offlineQuestionIds = new Set(base.filter(q => {
       // Grouped choices are already in q.image; hidden per-choice exports are
       // not needed to read or answer the question offline.
-      const assets = [...q.sourceImages, q.image, ...(q.choicePresentation==='codes'?[]:q.choices.map(c => c.image))].filter(Boolean);
+      const assets = requiredQuestionAssets(q);
       return saved.has(content.packs.get(q.packId)?.url) && assets.every(src => saved.has(new URL(src, document.baseURI).href));
     }).map(q => q.id));
   }
@@ -81,9 +84,10 @@ async function refreshOfflineQuestions() {
   $('#offline-status').textContent = 'オフライン · 保存済みの問題を解けます。';
 }
 async function setConnection(available) {
+  observedNetwork=available;
   available = available && navigator.onLine;
   if (online === available) return;
-  online = available; await refreshOfflineQuestions();
+  online = available; await refreshOfflineQuestions();await written?.refreshAvailability();
   if (base.length && activeView()!=='planning') render(false);
 }
 window.addEventListener('offline', () => setConnection(false));
@@ -179,6 +183,7 @@ function render(focus = true, preserveY = null) {
   const displayView=activeView();document.querySelectorAll('.nav-item').forEach(b=>{const v=['home','study','mocks'].includes(displayView)?'home':['history','planning','diagnostics','diagnostic','review','mock-records'].includes(displayView)?'history':'topics',active=b.dataset.view===v;b.classList.toggle('active',active);active?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current');});
   if(state.view==='home'){displayedEntryActions=entryActions();displayedNextAction=displayedEntryActions[state.settings.lastEntry]||nextAction();}
   main.innerHTML = (isWritten()?written?.html()||'<p>大問を読み込んでいます。</p>':state.view==='mocks'&&planner?planner.views().mocksHTML():state.view==='mock-records'&&planner?planner.views().mockDetailHTML():state.view==='flashcards'&&cards?cards.html():state.view==='planning'&&planner ? planner.views().planningHTML() : state.view==='diagnostics'&&planner ? planner.views().diagnosticsHTML() : state.view==='diagnostic'&&planner ? planner.views().diagnosticHTML() : state.view==='study' && current() ? views().studyHTML() : state.view==='topics' ? views().topicsHTML() : state.view==='review' ? views().reviewHTML() : state.view==='history' ? views().historyHTML() : state.view==='materials' ? views().materialsHTML() : views().homeHTML());
+  if(activeView()==='home')main.insertAdjacentHTML('beforeend','<section class="panel offline-entry"><h2>オフラインで学習する</h2><p class="small muted">乗車前に教材を保存して、未着手の問題もこの端末で解けます。</p><button class="button secondary" data-action="offline-open">オフライン学習用に保存</button></section>');
   if(activeView()==='planning')planner?.restoreDrafts();
   if (focus) { main.focus({preventScroll:true}); window.scrollTo(0, preserveY ?? 0); }
   if(isWritten())written?.restoreDOM();
@@ -258,10 +263,12 @@ async function openEditor(id) {
   $('#editor-dialog').showModal();
 }
 
+main.addEventListener('toggle',e=>{const d=e.target;if(!d.matches?.('.original-question')||!d.open)return;const box=d.querySelector('.original-content');if(!box)return;if(!online){box.textContent='原本画像はオンラインで参照できます。';return;}if(!box.querySelector('img'))box.innerHTML=views().sourceImagesHTML(current()?.questionSnapshot||question(d.dataset.questionId));},true);
+
 main.addEventListener('click',async e=>{
   const el=e.target.closest('[data-action],[data-view]'); if(!el) return;
   if(el.dataset.view) { if(['all','paperless','desk'].includes(el.dataset.paperMode))state.settings.paperMode=el.dataset.paperMode;go(el.dataset.view,{reviewTopicId:el.dataset.reviewTopicId,reviewPartId:el.dataset.reviewPartId});if(el.dataset.openAi)await planner?.action({dataset:{action:'open-ai'}});return; }
-  const action=el.dataset.action;if(isWritten()){if(action==='plan-start'){await written.action({dataset:{action:'written-plan'}});return;}const result=await written?.action(el);if(result?.ai)aiHandoff.open();if(result)return;if(await planner?.action(el))return;return;} const a=current();
+  const action=el.dataset.action;if(action==='offline-open'){try{const {openOffline}=await import('./features/offline.js');await openOffline({content,qualification,partId:targetPartId,rootURL:appRoot,getOnline:()=>online,onChanged:async()=>{await refreshOfflineQuestions();await written?.refreshAvailability();if(activeView()==='home')render(false);}});}catch(error){notice(error.message);}return;}if(isWritten()){if(action==='plan-start'){await written.action({dataset:{action:'written-plan'}});return;}const result=await written?.action(el);if(result?.ai)aiHandoff.open();if(result)return;if(await planner?.action(el))return;return;} const a=current();
   try {
   if(await personal?.action(el))return;
   if(await cards?.action(el))return;
@@ -469,7 +476,7 @@ try {
   document.title=`ひと問｜${targetLabel(qualification,targetPartId,{short:true})}の学習`;
   document.querySelector('.app-footer span').textContent=`問題出典：${qualification.sourceLabel}`;
   document.querySelector('.app-footer a').href=new URL(qualification.sourceDoc,appRoot).href;
-  online=content.online;base=content.questions;questionIndex=new Map(base.map(q=>[q.id,q]));
+  online=content.online&&observedNetwork!==false;base=content.questions;questionIndex=new Map(base.map(q=>[q.id,q]));
   try { const raw=await store.read();if(raw){try{state=validateState(JSON.parse(raw));if(state.session.topicId)state.session.topic=qualification.topics.find(t=>t.id===state.session.topicId)?.name||state.session.topic;}catch{corruptRaw=raw;}} } catch {storageOK=false;notice('このブラウザでは記録を保存できません。学習後に記録を書き出してください。');}
   if(entryHome&&!isWritten())state.view='home';
   if(!isWritten()&&state.view==='study'&&current()&&questionIndex.has(current().questionId))await content.ensure(current().questionId);
@@ -478,7 +485,7 @@ try {
   cards=createCardFeature({qualification,content,getStore:()=>store,getNavigation:()=>navigation,onNavigate:go,onUpdate:()=>{if(state.view==='flashcards')render(false);},onNotice:notice,download,rootPath:appRoot.pathname,onChanged:()=>account?.cardsChanged(),saveCheckpoint:cp=>personal?.saveCheckpoint(cp),getCheckpoints:()=>personal?.checkpoints()||[]});await cards.bind().catch(()=>{cards=null;if(state.view==='flashcards')state.view='home';notice('単語帳の記録を保存できません。通常演習は続けられます。');});if(state.view==='flashcards')await cards.load().catch(error=>{state.view='home';notice(error.message);});
   planner=createPlanningFeature({qualification,rootPath:appRoot.pathname,getStore:()=>store,getState:activeState,getNavigation:()=>navigation,content,base,validateAttempt:validateDiagnosticAttempt,onUpdate:(options={})=>{rebuildProgress();if(!['study','flashcards'].includes(activeView())&&!options.preserveForm)render(false);},onNavigate:(view,runId)=>{if(view==='history-mock'){go('history');fieldMode='mock';render();return;}if(view==='mock-records')state.currentMockSetId=runId;if(view==='diagnostic'){const a=current();if(a&&!complete(a))a.status='postponed';state.currentId=null;state.currentRunId=runId;}go(view);},onNotice:notice,onChanged:()=>account?.workspaceChanged(),getReviewCount:()=>reviewQuestions().length,download,getTargetPart:()=>targetPartId,getCaseRuns:()=>written?.runs()||[]});
   learning=createLearningFeature({qualification,getStore:()=>store,getState:()=>state,onNotice:notice,onUpdate:()=>{save();if(!['study','planning','flashcards'].includes(state.view))render(false);}});await learning.bind();
-  if(qualification.cases){written=createWrittenFeature({qualification,rootPath:appRoot.pathname,content,getStore:()=>store,onUpdate:()=>{if(isWritten())render(false);},onChanged:()=>account?.writtenChanged(),onNotice:notice,getPlanViews:()=>planner?.views()});await written.bind({loadMaterial:isWritten()});}
+  if(qualification.cases){written=createWrittenFeature({qualification,rootPath:appRoot.pathname,content,getStore:()=>store,onUpdate:()=>{if(isWritten())render(false);},onChanged:()=>account?.writtenChanged(),onNotice:notice,getPlanViews:()=>planner?.views(),getOnline:()=>online,getSavedAssets:savedAssetURLs});await written.bind({loadMaterial:isWritten()});}
   await refreshOfflineQuestions();
   if(state.view==='study'&&!current())state.view='home';
   if(corruptRaw!==null)save();else if(!storageOK){$('#save-state').textContent='保存できていません';setSyncStatus('local','error',new Error('記録を保存できません。'));}
