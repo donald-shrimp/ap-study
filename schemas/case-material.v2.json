@@ -78,7 +78,10 @@
             "type": "string"
           },
           "anchor": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "pattern": "\\S"
           },
           "alt": {
             "type": "string"
@@ -145,5 +148,5 @@
       "sourceRecord"
     ]
   },
-  "$comment": "全小問を合わせ20欄以下。FP2級ではsourceRecordとlegalReviewが必須。公開には独立レビュー・原本と画像のハッシュ照合も必要。"
+  "$comment": "全小問を合わせ20欄以下。FP2級ではsourceRecordとlegalReviewが必須。公開には独立レビュー・原本と画像のハッシュ照合も必要。 図のanchorは本文中で一意、bodyFiguresは出現順。位置と順序はビルダー・受け入れ検証でも照合する。"
 }

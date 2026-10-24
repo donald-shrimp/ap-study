@@ -47,3 +47,12 @@ def validate_source_hashes(root,material,review):
         require(file.is_relative_to(root.resolve()) and file.is_file() and hashlib.sha256(file.read_bytes()).hexdigest()==digest,'Source file changed: '+path)
     s=material['sourceRecord']
     require(s['questionSha256'] in hashes.values() and s['answerSha256'] in hashes.values(),'Source record SHA differs from reviewed PDFs')
+
+def validate_case_figures(material):
+    body=material['body'];cursor=0
+    for figure in material['bodyFigures']:
+        anchor=figure.get('anchor')
+        require(isinstance(anchor,str) and anchor.strip() and len(anchor)<=500,'Invalid figure anchor')
+        position=body.find(anchor,cursor)
+        require(position>=0 and body.find(anchor)==body.rfind(anchor),'Missing, ambiguous or out-of-order figure anchor: '+anchor)
+        cursor=position+len(anchor)

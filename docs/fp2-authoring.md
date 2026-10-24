@@ -1,6 +1,6 @@
 # FP2級：外注する教材の仕様
 
-基盤は共通エンジンを使う。現時点で実問題は0件、FP2級は公開カタログに載せていない。まず学科60問を作り、実技は代表的な形式から確認する。これは教材作成の依頼仕様であり、未確認教材の公開許可ではない。
+基盤は共通エンジンを使う。2026年5月公表の学科60問を独立レビュー・修正後に登録済み。実技は未収録で、代表的な形式から確認する。収録範囲と原本は [FP2級の出典](FP2-SOURCES.md)。これは教材作成の依頼仕様であり、未確認教材の公開許可ではない。
 
 ## 外注へ渡す依頼
 
@@ -61,7 +61,7 @@ delivery/
 - ○×・4択・語群は`singleChoice`欄。`choices`は`{id,label,text}`。`referenceAnswers`は正答の表示labelを1つ入れる。`grading:{"method":"exactText"}`。選択肢の図はラベルと対応させて`bodyFigures`に含める。
 - 短答は`shortText`、自由記述は`freeText`。字数制限を`maxLength`へ。自由記述は`grading:{"method":"self"}`。短答の登録例以外は自己評価へ回る。
 - 各欄に`explanation`と`rubric`を用意する。他の欄の解説を流用せず、その回答の根拠を説明する。
-- 必須の図・表は `bodyFigures:[{image,anchor,alt,caption}]`。`body`の該当箇所に一意のanchor文字列を置く。原本ページは`sourceImages`へ置けるが学習に必須ではない。
+- 必須の図・表は `bodyFigures:[{image,anchor,alt,caption}]`。`body`の該当箇所に一意のanchor文字列を置き、`bodyFigures`を本文に現れる順に並べる。空・未配置・重複・順序不一致は草稿の検証でも拒否する。原本ページは`sourceImages`へ置けるが学習に必須ではない。
 
 ### 数値欄
 
@@ -112,6 +112,8 @@ delivery/
 
 `legalReview.status`は`unverified`／`current`／`outdated`。確認済み状態には確認日・現行法令の一次資料URL・具体的な確認内容が必要。基準日不明のまま確認済みにしない。`outdated`でも当時の公式正答を現行制度の答えへ書き換えない。差異は`note`と解説注記へ記載する。開始済みの学習記録は旧版の本文・正答・基準日を保持する。
 
+過去問の内容確認と正誤判定は原本の法令基準で行う。現行法令との全問照合は、過去問として公開するための必須条件ではない。原本の基準日と、現行法令を確認したかどうかは別々に記録する。
+
 ## 検証と受け入れ
 
 このリポジトリ側で、納品フォルダを指定する。
@@ -124,7 +126,7 @@ python tools/check-fp2-delivery.py /path/to/delivery
 
 作者とは別担当が、原本・公式解答から全本文・全図表・全選択肢・全欄・数値計算・解説・基準日を確認する。修正後の版とハッシュへ再確認記録を付ける。学科レビューは共通契約、実技は既存caseレビューと同じ形式。両方とも`sourceHashes`に使った原本・解答のリポジトリ相対パスと完全SHA256を保存する。原本に`sourceRecord`の両SHAが含まれることを機械照合する。
 
-独立確認後に、学科を`enrichment: "reviewed"`、実技を`status: "reviewed"`へ変更し、実際の別担当による確認台帳を添えて検証する。
+独立確認後に、学科を`enrichment: "reviewed"`、実技を`status: "reviewed"`へ変更し、実際の別担当による確認台帳を添えて検証する。`--reviewed`は全問題の確認状態と台帳を照合し、`topic-guide`や状態省略によるレビューの省略を認めない。FP2級の設定では`requiresReviewedContent: true`を指定し、公開ビルドでも未レビュー問題を拒否する。
 
 ```sh
 python tools/check-fp2-delivery.py /path/to/delivery --reviewed

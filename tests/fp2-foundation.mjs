@@ -13,6 +13,14 @@ const q=JSON.parse(readFileSync(new URL('../content/fp2/qualification.json',impo
 const at='2026-10-24T00:00:00.000Z';
 const filled=(text,field=numericField())=>{const c=fixtureCase();c.items[0].fields=[field];const r=createCaseRun(c,{at});setCaseResponse(r,'q1--'+field.id,text,at);submitCaseField(r,'q1--'+field.id,at);return r;};
 
+test('case figures require unique anchors in rendering order, including saved material',()=>{
+ const c=fixtureCase(),figure={image:'assets/written/synthetic/figure.png',anchor:'[one]',alt:'合成図',caption:'合成図'};
+ c.body='Before [one] between [two] after';c.bodyFigures=[figure,{...figure,anchor:'[two]'}];validateCaseMaterial(c,q);validateCaseRun(createCaseRun(c,{at}),q);
+ for(const change of [c=>c.bodyFigures[0].anchor='missing',c=>c.bodyFigures[0].anchor='',c=>c.body+='[one]',c=>c.bodyFigures.reverse(),c=>c.bodyFigures[1].anchor='[one]']){
+  const bad=structuredClone(c);change(bad);assert.throws(()=>validateCaseMaterial(bad,q));assert.throws(()=>validateCaseRun(createCaseRun(bad,{at}),q));
+ }
+});
+
 test('decimal comparison preserves large integers and exact small fractions',()=>{
  for(const [text,value] of [['１，４９０，０００','1490000'],[' +0001490000 ','1490000'],['0.4350','0.435'],['-0.00','0'],['9007199254740993','9007199254740993']])assert.equal(decimalValue(text),value);
  for(const text of ['1,49,000','1e6','149万円','1490000円','0x10','NaN','Infinity','1 490 000','0.','①','−1'])assert.equal(decimalValue(text),null,text);

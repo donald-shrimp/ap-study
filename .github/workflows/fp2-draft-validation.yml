@@ -4,6 +4,13 @@ on:
     paths:
       - 'delivery/**'
       - 'deliveries/**'
+      - 'content/fp2/**'
+      - 'content/qualifications.json'
+      - 'data/qualifications/fp2/**'
+      - 'assets/fp2/**'
+      - 'sources/fp2/**'
+      - 'tests/fp2-content.py'
+      - 'tools/**'
       - '.github/workflows/fp2-draft-validation.yml'
   workflow_dispatch:
 permissions:
@@ -31,3 +38,9 @@ jobs:
             fi
           done
           test "$count" -gt 0
+      - name: Verify reviewed FP2 publication
+        run: |
+          python tools/check-fp2-delivery.py . --reviewed
+          python tools/build-content.py
+          python tests/fp2-content.py
+          git diff --exit-code

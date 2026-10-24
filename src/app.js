@@ -177,7 +177,7 @@ function render(focus = true, preserveY = null) {
   // Local features and Auth restore asynchronously. Keep the loading screen
   // until the active owner's checkpoint is ready, including callback renders.
   if(initializing)return;
-  if(!focus&&isWritten()&&document.activeElement?.matches('textarea[data-written-key]'))return;
+  if(!focus&&isWritten()&&document.activeElement?.matches('textarea[data-written-key],input[type="text"][data-written-key]'))return;
   if(!focus&&document.activeElement?.matches('input[data-reading-topic]'))return;
   updateTextSize();
   const displayView=activeView();document.querySelectorAll('.nav-item').forEach(b=>{const v=['home','study','mocks'].includes(displayView)?'home':['history','planning','diagnostics','diagnostic','review','mock-records'].includes(displayView)?'history':'topics',active=b.dataset.view===v;b.classList.toggle('active',active);active?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current');});

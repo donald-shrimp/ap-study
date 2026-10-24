@@ -1,6 +1,6 @@
 """Independently reviewed common-passage cases; no normal-question pool mixing."""
 import json,hashlib,re
-from material_contracts import validate_legal,validate_numeric,validate_source_hashes
+from material_contracts import validate_legal,validate_numeric,validate_source_hashes,validate_case_figures
 
 def canonical(value):
     return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
@@ -12,6 +12,7 @@ def compile_cases(root,config,directory,hashed_json):
     for c in cases:
         r=by_id[c['id']]
         validate_legal(c,config.get('requiresLegalContext',False))
+        validate_case_figures(c)
         validate_source_hashes(root,c,r)
         assert c['status']=='reviewed' and r['status']=='approved' and r['author']!=r['reviewer'] and r['canonicalCaseSHA256']==hashlib.sha256(canonical(c)).hexdigest()
         assert c['qualificationId']==config['id'] and any(p['id']==c['examPartId'] and p.get('unit')=='cases' for p in config['examParts'])
