@@ -1,0 +1,89 @@
+{
+  "id": "fp2",
+  "name": "2級ファイナンシャル・プランニング技能検定",
+  "shortName": "FP2級",
+  "description": "2級FP技能検定の学科・実技。",
+  "questionSource": "content/fp2/questions.json",
+  "questionReviewSource": "content/fp2/question-reviews.json",
+  "caseSource": "content/fp2/practical-cases.json",
+  "caseReviewSource": "content/fp2/practical-reviews.json",
+  "sourceLabel": "日本FP協会・金融財政事情研究会",
+  "sourceDoc": "docs/fp2-authoring.md",
+  "sourceDescription": "公式公表問題。教材ごとに出典・加工内容・法令基準日を記録する。",
+  "defaultExamPartId": "objective",
+  "examParts": [
+    {
+      "id": "objective",
+      "label": "学科",
+      "practiceAvailable": true,
+      "unit": "questionAttempts"
+    },
+    {
+      "id": "jafp-practical",
+      "label": "実技（日本FP協会）",
+      "practiceAvailable": true,
+      "unit": "cases",
+      "caseLabel": "問題",
+      "countLabel": "問"
+    },
+    {
+      "id": "kinzai-personal",
+      "label": "実技（きんざい・個人資産）",
+      "practiceAvailable": true,
+      "unit": "cases",
+      "caseLabel": "事例",
+      "countLabel": "題"
+    },
+    {
+      "id": "kinzai-business",
+      "label": "実技（きんざい・中小事業主）",
+      "practiceAvailable": true,
+      "unit": "cases",
+      "caseLabel": "事例",
+      "countLabel": "題"
+    },
+    {
+      "id": "kinzai-life",
+      "label": "実技（きんざい・生保顧客）",
+      "practiceAvailable": true,
+      "unit": "cases",
+      "caseLabel": "事例",
+      "countLabel": "題"
+    },
+    {
+      "id": "kinzai-nonlife",
+      "label": "実技（きんざい・損保顧客）",
+      "practiceAvailable": true,
+      "unit": "cases",
+      "caseLabel": "事例",
+      "countLabel": "題"
+    }
+  ],
+  "requiresLegalContext": true,
+  "topics": [
+    {
+      "id": "life-planning",
+      "name": "ライフプランニングと資金計画"
+    },
+    {
+      "id": "risk-management",
+      "name": "リスク管理"
+    },
+    {
+      "id": "financial-assets",
+      "name": "金融資産運用"
+    },
+    {
+      "id": "tax",
+      "name": "タックスプランニング"
+    },
+    {
+      "id": "real-estate",
+      "name": "不動産"
+    },
+    {
+      "id": "inheritance",
+      "name": "相続・事業承継"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {validateLegalContext} from '../domain/legal-context.js';
 import {encodeWorkspaceBackup,decodeWorkspaceBackup} from './resources.js';
 // The sole persisted question-record contract. UI projection is not an old-file reader.
 const clone=v=>JSON.parse(JSON.stringify(v));
@@ -20,6 +21,7 @@ export function fromRecord(r){
 export function validateRecord(r){
  const fail=()=>{throw Error('新形式の学習記録を確認できません。旧形式は変換ツールで変換してください。');};
  if(!keys(r,['format','version','id','qualificationId','examPartId','kind','questionId','questionVersion','contentRevision','material','lesson','response','evaluation','assistance','progress','startedAt','updatedAt','continuationOf','continuedAt','importedFrom'])||r.format!=='hitomon-learning-record'||r.version!==2||r.kind!=='question'||![r.id,r.qualificationId,r.examPartId,r.questionId].every(id)||r.material?.id!==r.questionId||r.material.qualificationId!==r.qualificationId||r.material.examPartId!==r.examPartId||r.material.version!==r.questionVersion||!['singleChoice','multipleChoice'].includes(r.material.type)||'answer' in r.material||'correctChoiceId' in r.material)fail();
+ validateLegalContext(r.material);
  const q=r.material,ids=q.choices?.map(c=>c.id),answer=q.correctChoiceIds,selected=r.response?.choiceIds;
  if(!Array.isArray(ids)||ids.length<2||ids.length>20||new Set(ids).size!==ids.length||!Array.isArray(answer)||!answer.length||new Set(answer).size!==answer.length||answer.some(v=>!ids.includes(v))||q.type==='singleChoice'&&answer.length!==1||!keys(r.response,['choiceIds'])||!Array.isArray(selected)||new Set(selected).size!==selected.length||selected.some(v=>!ids.includes(v))||q.type==='singleChoice'&&selected.length>1)fail();
  if(!keys(r.evaluation,['source','outcome','at','hintsBeforeAnswer'])&&r.evaluation!==null||r.evaluation&&(r.evaluation.source!=='automatic'||!['correct','assisted','incorrect','revealed'].includes(r.evaluation.outcome)||!Number.isFinite(Date.parse(r.evaluation.at))))fail();

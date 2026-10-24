@@ -223,6 +223,24 @@ test('複数選択の診断・固定模試は配列の途中回答を保存し�
 import {createCaseRun,caseFields,setCaseResponse,submitCaseField,viewCaseAnswer,rateCaseField} from '../src/domain/case-study.js';
 const pilot=JSON.parse(readFileSync(new URL('../content/ap/written-cases.json',import.meta.url)))[0];
 const casePath=(uid,id)=>`users/${uid}/qualifications/ap/writtenV2/${id}`;
+import {fixtureCase} from './fp2-fixtures.mjs';
+test('複数実技の数値回答と法令スナップショットを既存Rulesで同期し、確定後の改変と他人の読取を拒否する',async()=>{
+ const uid='fp2-contract',db=env.authenticatedContext(uid).firestore();
+ for(const part of ['jafp-practical','kinzai-personal']){
+  const r=createCaseRun(fixtureCase(part)),path=`users/${uid}/qualifications/fp2/writtenV2/${r.id}`,ref=doc(db,path);
+  await assertSucceeds(setDoc(ref,resourceEnvelope('case',r)));
+  setCaseResponse(r,'q1--amount','1,490,000');submitCaseField(r,'q1--amount');
+  await assertSucceeds(setDoc(ref,resourceEnvelope('case',r,2)));
+  const material=structuredClone(r);material.material.sourceRecord.legalAsOf='2026-10-01';
+  await assertFails(setDoc(ref,resourceEnvelope('case',material,3)));
+  const changed=structuredClone(r);changed.responses['q1--amount'].value='149';
+  await assertFails(setDoc(ref,resourceEnvelope('case',changed,3)));
+  const fresh=env.authenticatedContext(uid).firestore(),saved=await assertSucceeds(getDoc(doc(fresh,path)));
+  assert.equal(saved.data().payload.examPartId,part);assert.equal(saved.data().payload.responses['q1--amount'].value,'1,490,000');
+  await assertFails(getDoc(doc(env.authenticatedContext('other').firestore(),path)));
+  await assertFails(setDoc(doc(db,`users/${uid}/qualifications/ap/writtenV2/${r.id}`),resourceEnvelope('case',r)));
+ }
+});
 test('Bの部分回答・自己評価・完了は本人のみ保存し、確定回答・教材・他人・不正評価を拒否',async()=>{
  const uid='written-rules',db=env.authenticatedContext(uid).firestore(),r=createCaseRun(pilot),ref=doc(db,casePath(uid,r.id));let rev=1;
  const save=()=>setDoc(ref,resourceEnvelope('case',r,rev++));await assertSucceeds(save());const slots=caseFields(pilot),first=slots[0];setCaseResponse(r,first.key,'未知表現');await assertSucceeds(save());submitCaseField(r,first.key);await assertSucceeds(save());viewCaseAnswer(r,first.key);await assertSucceeds(save());rateCaseField(r,first.key,'partial');await assertSucceeds(save());

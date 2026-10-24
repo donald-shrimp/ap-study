@@ -16,7 +16,7 @@ export function targetLabel(qualification,partId,{short=false,separator=short?'�
  const name=short?qualification.shortName||qualification.name:qualification.name;
  return studyTargets(qualification).length>1?`${name}${separator}${studyTargets(qualification).find(p=>p.examPartId===partId)?.label||''}`:name;
 }
-export function targetCount(target){return Number.isInteger(target.count)?target.unit==='cases'?`大問${target.count}題`:`${target.count}問`:'';}
+export function targetCount(target){return Number.isInteger(target.count)?target.unit==='cases'?`${target.caseLabel||'大問'}${target.count}${target.countLabel||'題'}`:`${target.count}問`:'';}
 export function withRuntimeNavigation(url,from){
  if(['localhost','127.0.0.1'].includes(from.hostname)&&from.searchParams.get('firebase-emulator')==='1')url.searchParams.set('firebase-emulator','1');
  return url;

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://donald-shrimp.github.io/ap-study/schemas/legal-context.v1.json",
+  "title": "原本の時点と現行法令の確認",
+  "type": "object",
+  "required": [
+    "sourceRecord",
+    "legalReview"
+  ],
+  "properties": {
+    "sourceRecord": {
+      "$ref": "#/$defs/sourceRecord"
+    },
+    "legalReview": {
+      "$ref": "#/$defs/legalReview"
+    }
+  },
+  "$defs": {
+    "sourceRecord": {
+      "type": "object",
+      "required": [
+        "publisher",
+        "publishedAt",
+        "legalAsOf",
+        "questionUrl",
+        "questionSha256",
+        "answerUrl",
+        "answerSha256",
+        "modifiedFromOriginal",
+        "modificationNote"
+      ],
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "publishedAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "legalAsOf": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "questionUrl": {
+          "type": "string",
+          "pattern": "^https?://",
+          "maxLength": 2000
+        },
+        "questionSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "answerUrl": {
+          "type": "string",
+          "pattern": "^https?://",
+          "maxLength": 2000
+        },
+        "answerSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "modifiedFromOriginal": {
+          "type": "boolean"
+        },
+        "modificationNote": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      },
+      "additionalProperties": false
+    },
+    "legalReview": {
+      "type": "object",
+      "required": [
+        "status",
+        "checkedAt",
+        "sourceRefs",
+        "note"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "unverified",
+            "current",
+            "outdated"
+          ]
+        },
+        "checkedAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^https?://",
+            "maxLength": 2000
+          },
+          "uniqueItems": true,
+          "maxItems": 20
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$comment": "暦日、確認済み状態の根拠、原本PDFの実SHAは共通ビルダーでも検証する。"
+}

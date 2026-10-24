@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://donald-shrimp.github.io/ap-study/schemas/case-field.v1.json",
+  "title": "共通本文の回答欄",
+  "type": "object",
+  "required": [
+    "id",
+    "label",
+    "type",
+    "grading",
+    "referenceAnswers",
+    "explanation",
+    "rubric"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "type": {
+      "enum": [
+        "singleChoice",
+        "shortText",
+        "freeText",
+        "numeric"
+      ]
+    },
+    "maxLength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2000
+    },
+    "referenceAnswers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "maxLength": 2000
+      }
+    },
+    "explanation": {
+      "type": "string"
+    },
+    "rubric": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+          },
+          "label": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "numeric": {
+      "type": "object",
+      "required": [
+        "unit",
+        "decimalPlaces",
+        "rounding"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "decimalPlaces": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "rounding": {
+          "enum": [
+            "none",
+            "halfUp",
+            "floor",
+            "ceil",
+            "truncate"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "type": {
+          "const": "singleChoice"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "exactText"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "choices"
+      ]
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "shortText"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "exactText",
+                "self"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "maxLength"
+      ]
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "freeText"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "self"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "maxLength"
+      ]
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "numeric"
+        },
+        "grading": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "exactDecimal"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "numeric",
+        "maxLength"
+      ]
+    }
+  ],
+  "$comment": "数値の正答は単位・区切りなしの十進文字列。入力への自動丸めや単位換算は行わない。"
+}

@@ -1,8 +1,8 @@
 """Two independent browsers, real Firebase SDK/emulators and case CAS; no production account."""
-import json,shutil,uuid
+import json,shutil,uuid,os
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,wait_for_async,select_target
-URL='http://127.0.0.1:4173/ap/?firebase-emulator=1'
+URL=os.environ.get('AP_STUDY_SYNC_URL','http://127.0.0.1:4173/ap/?firebase-emulator=1')
 READ='''async()=>{const sdk=await import('/assets/vendor/firebase.js'),user=sdk.getAuth().currentUser,{createLocalStore}=await import('/src/storage/local.js'),s=createLocalStore({qualificationId:'ap',rootPath:'/',owner:user?`uid:${user.uid}`:undefined});try{const i=await s.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...i,rootPath:'/',namespaceName:'written',validate:(k,p)=>p});try{return await w.read();}finally{await w.close();}}finally{await s.close();}}'''
 def rows(page):return page.evaluate(READ)
 def settings(page):

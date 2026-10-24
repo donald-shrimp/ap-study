@@ -1,5 +1,6 @@
 """Independently reviewed common-passage cases; no normal-question pool mixing."""
 import json,hashlib,re
+from material_contracts import validate_legal,validate_numeric,validate_source_hashes
 
 def canonical(value):
     return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
@@ -7,9 +8,11 @@ def canonical(value):
 def compile_cases(root,config,directory,hashed_json):
     if not config.get('caseSource'):return None
     cases=json.loads((root/config['caseSource']).read_text());reviews=json.loads((root/config['caseReviewSource']).read_text());by_id={r['caseId']:r for r in reviews}
-    assert len(by_id)==len(reviews) and len({c['id'] for c in cases})==len(cases)
+    assert len(by_id)==len(reviews) and len({c['id'] for c in cases})==len(cases) and set(by_id)=={c['id'] for c in cases}
     for c in cases:
         r=by_id[c['id']]
+        validate_legal(c,config.get('requiresLegalContext',False))
+        validate_source_hashes(root,c,r)
         assert c['status']=='reviewed' and r['status']=='approved' and r['author']!=r['reviewer'] and r['canonicalCaseSHA256']==hashlib.sha256(canonical(c)).hexdigest()
         assert c['qualificationId']==config['id'] and any(p['id']==c['examPartId'] and p.get('unit')=='cases' for p in config['examParts'])
         keys=[i['id']+'--'+f['id'] for i in c['items'] for f in i['fields']]
@@ -19,11 +22,13 @@ def compile_cases(root,config,directory,hashed_json):
         for i in c['items']:
             assert i['prompt'] and 1<=len(i['fields'])<=20 and len({f['id'] for f in i['fields']})==len(i['fields'])
             for f in i['fields']:
-                assert f['type'] in ('singleChoice','shortText','freeText') and f['referenceAnswers'] and f['explanation'] and f['rubric']
-                assert f['grading']['method'] in ('exactText','self')
+                assert f['type'] in ('singleChoice','shortText','freeText','numeric') and f['referenceAnswers'] and f['explanation'] and f['rubric']
+                assert f['grading']['method'] in ('exactText','self','exactDecimal')
                 assert f['type']!='freeText' or f['grading']['method']=='self'
-                if f['type']=='singleChoice':
-                    assert len({a['id'] for a in f['choices']})==len(f['choices'])
+                assert f['type']=='numeric' or f['grading']['method']!='exactDecimal'
+                if f['type']=='numeric':validate_numeric(f)
+                elif f['type']=='singleChoice':
+                    assert 2<=len(f['choices'])<=20 and len({a['id'] for a in f['choices']})==len(f['choices']) and f['grading']['method']=='exactText'
                     assert len(f['referenceAnswers'])==1 and f['referenceAnswers'][0] in [a['label'] for a in f['choices']]
                 else:assert all(len(a)<=f.get('maxLength',2000) for a in f['referenceAnswers'])
         paths=c['sourceImages']+[f['image'] for f in c.get('bodyFigures',[])]

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://donald-shrimp.github.io/ap-study/schemas/case-material.v2.json",
+  "title": "共通本文・複数小問の作成元 v2",
+  "type": "object",
+  "required": [
+    "id",
+    "qualificationId",
+    "examPartId",
+    "topicId",
+    "version",
+    "status",
+    "title",
+    "source",
+    "body",
+    "sourceImages",
+    "bodyFigures",
+    "items"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "qualificationId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "examPartId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "topicId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200000
+    },
+    "sourceImages": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "string"
+      }
+    },
+    "bodyFigures": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": [
+          "image",
+          "anchor",
+          "alt",
+          "caption"
+        ],
+        "properties": {
+          "image": {
+            "type": "string"
+          },
+          "anchor": {
+            "type": "string"
+          },
+          "alt": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "prompt",
+          "fields"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+          },
+          "label": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "bodyRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "$ref": "case-field.v1.json"
+            }
+          }
+        }
+      }
+    },
+    "sourceRecord": {
+      "$ref": "legal-context.v1.json#/$defs/sourceRecord"
+    },
+    "legalReview": {
+      "$ref": "legal-context.v1.json#/$defs/legalReview"
+    }
+  },
+  "dependentRequired": {
+    "sourceRecord": [
+      "legalReview"
+    ],
+    "legalReview": [
+      "sourceRecord"
+    ]
+  },
+  "$comment": "全小問を合わせ20欄以下。FP2級ではsourceRecordとlegalReviewが必須。公開には独立レビュー・原本と画像のハッシュ照合も必要。"
+}

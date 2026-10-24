@@ -1,3 +1,4 @@
+import {validateLegalContext} from '../domain/legal-context.js';
 import {validChoiceFormat,isMultiple,chosenIds,correctIds,sameChoices,validResponse,canSubmit} from '../domain/question-format.js';
 import {labels, complete} from '../domain/study.js';
 import {validQuestionPolicy,canUseQuestion} from '../domain/content-policy.js';
@@ -6,7 +7,7 @@ const text = (v,max=20000) => typeof v==='string' && v.length<=max;
 const date = v => typeof v==='string' && !Number.isNaN(new Date(v).valueOf());
 const id = v => text(v,100) && /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(v);
 const materialFields = ['hints','summary','explanation','takeaway','revision','enrichment','hintStatus','choiceReasons'];
-const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceIds','selection','grading','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation','uses','sourceKind','familyId','syllabusId','language','objectiveIds','objectivesSnapshot','syllabus','sourceRefs'];
+const questionFields = ['id','version','number','title','topic','topicId','concept','topicDescription','field','related','source','page','year','season','questionUrl','answerUrl','stem','sourceImages','imageSizes','choices','answer','image','imageAlt','adaptation','enrichment','hintStatus','qualificationId','examPartId','packId','packLabel','type','correctChoiceIds','selection','grading','correctChoiceId','hintCount','diagnosticOnly','parentQuestionId','choicePresentation','uses','sourceKind','familyId','syllabusId','language','objectiveIds','objectivesSnapshot','syllabus','sourceRefs','sourceRecord','legalReview'];
 const safeURL = value => {
   if (value===undefined || value===null || value==='') return true;
   if (!text(value,4000) || /[<>"'\r\n]/.test(value)) return false;
@@ -24,6 +25,7 @@ function material(m, choices) {
 }
 
 function questionSnapshot(q, qualificationId) {
+  try{validateLegalContext(q);}catch{return false;}
   return q && Object.keys(q).every(k=>questionFields.includes(k)) && id(q.id)
     && validQuestionPolicy(q)
     && q.qualificationId===qualificationId

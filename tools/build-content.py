@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from material_contracts import validate_legal, validate_source_hashes
 from written_content import compile_cases
 from offline_content import compile_offline
 ROOT = Path(__file__).resolve().parents[1]
@@ -149,6 +150,7 @@ def validate_questions(questions, config, root, diagnostic=False, related_ids=No
         require('syllabusId' not in q or q['syllabusId'] in {s['id'] for s in config.get('syllabuses', [])}, f"Unknown syllabus: {q['id']}")
         objectives = q.get('objectiveIds', [])
         require(isinstance(objectives, list) and len(objectives) <= 20 and len(set(objectives)) == len(objectives) and all(isinstance(i, str) and i in {o['id'] for o in config.get('objectives', [])} for i in objectives), f"Unknown objective: {q['id']}")
+        validate_legal(q,config.get('requiresLegalContext',False))
         require(q['examPartId'] in {p['id'] for p in config['examParts']}, f"Invalid exam part: {q['id']}")
         require(SAFE_ID.fullmatch(q['packId']), f"Invalid pack ID: {q['id']}")
         require(isinstance(q['title'], str) and q['title'], f"Missing title: {q['id']}")
@@ -199,13 +201,14 @@ def diagnostic_digest(raw):
     return hashlib.sha256(json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
-def validate_reviews(raw, reviews, normalized=None):
+def validate_reviews(raw, reviews, normalized=None, root=None):
     require(isinstance(reviews, list), 'Reviews must be a list')
     by_id = {r['questionId']: r for r in reviews}
     published = [q for q in raw if q.get('enrichment') == 'reviewed']
     require(len(by_id) == len(reviews) and set(by_id) == {q['id'] for q in published}, 'Review set mismatch')
     for q in published:
         r = by_id[q['id']]
+        if root is not None:validate_source_hashes(root,q,r)
         require(r.get('version') == q.get('version', 1) and r.get('sha256') == diagnostic_digest(q), f"Stale review: {q['id']}")
         if normalized is not None:
             final = next(item for item in normalized if item['id'] == q['id'])
@@ -239,7 +242,7 @@ def compile_assessments(root, config, originals, directory):
         parent = all_by_id.get(q.get('parentQuestionId'))
         if parent and parent.get('familyId'):
             q.setdefault('familyId', family(parent))
-    validate_reviews(raw, reviews, questions if config.get('adapter') != 'ipa-ap' else None)
+    validate_reviews(raw, reviews, questions if config.get('adapter') != 'ipa-ap' else None, root)
     validate_questions(questions, generic, root, diagnostic=True, related_ids=set(all_by_id))
     for q, authored in zip(questions, raw):
         parent=all_by_id.get(q.get('parentQuestionId'))
@@ -350,6 +353,8 @@ def compile_qualification(root, id):
     config.setdefault('examParts', [{'id': 'objective', 'label': '選択式', 'practiceAvailable': True}])
     require(len({p['id'] for p in config['examParts']}) == len(config['examParts']) and all(SAFE_ID.fullmatch(p['id']) and p.get('label') and isinstance(p.get('practiceAvailable'), bool) for p in config['examParts']), 'Invalid exam parts')
     require(config['defaultExamPartId'] in {p['id'] for p in config['examParts']}, 'Invalid default exam part')
+    require(all(all(isinstance(p[k],str) and 0<len(p[k])<=20 for k in ['caseLabel','countLabel'] if k in p) for p in config['examParts']), 'Invalid case unit label')
+    require(type(config.get('requiresLegalContext',False)) is bool,'Invalid legal context setting')
     require(config['id'] == id, 'Qualification ID mismatch')
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')
@@ -389,8 +394,7 @@ def compile_qualification(root, id):
     if config.get('questionReviewSource'):
         review_path=(root/config['questionReviewSource']).resolve()
         require(review_path.is_relative_to(root.resolve()), 'Reviews outside repository')
-        validate_reviews(raw,json.loads(review_path.read_text()),questions if config.get('adapter') != 'ipa-ap' else None)
-    require(questions, f'Empty qualification: {id}')
+        validate_reviews(raw,json.loads(review_path.read_text()),questions if config.get('adapter') != 'ipa-ap' else None,root)
     validate_questions(questions, config, root)
     directory = root / 'data' / 'qualifications' / id
     grouped = defaultdict(list)
@@ -403,7 +407,7 @@ def compile_qualification(root, id):
         packs.append({'id': pack_id, 'label': records[0]['packLabel'], 'url': f'packs/{filename}', 'sha256': digest, 'count': len(records), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in records)})
         for q in records:
             # The index supports searching/scoping/offline availability, not lesson rendering.
-            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','correctChoiceIds','selection','grading','type','choicePresentation','uses','sourceKind','familyId','syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs']
+            fields = ['id','qualificationId','examPartId','packId','packLabel','version','number','title','topic','topicId','topicDescription','concept','searchText','year','season','enrichment','hintStatus','sourceImages','imageSizes','image','imageAlt','related','stem','answer','correctChoiceId','correctChoiceIds','selection','grading','type','choicePresentation','uses','sourceKind','familyId','syllabusId','syllabus','language','objectiveIds','objectivesSnapshot','sourceRefs','sourceRecord','legalReview']
             item = {k: q[k] for k in fields if k in q}
             item['choices'] = [{k: v for k, v in c.items() if k != 'text'} for c in q['choices']]
             item['hintCount'] = len(q['hints'])
@@ -418,6 +422,7 @@ def compile_qualification(root, id):
     if mock_sets is not None:manifest['mockSets']=mock_sets
     cases=compile_cases(root,config,directory,hashed_json)
     if cases is not None:manifest['cases']=cases
+    require(questions or cases and cases['count'], f'Empty qualification: {id}')
     targets=[]
     case_counts=defaultdict(int)
     if cases:
@@ -429,8 +434,10 @@ def compile_qualification(root, id):
         unit=part.get('unit', 'questionAttempts')
         count=case_counts[part['id']] if unit == 'cases' else sum(q['examPartId'] == part['id'] and 'practice' in q.get('uses', ['practice']) and not q.get('diagnosticOnly') for q in questions)
         if count:
-            targets.append({'examPartId': part['id'], 'label': part['label'], 'unit': unit, 'count': count})
+            targets.append({'examPartId': part['id'], 'label': part['label'], 'unit': unit, 'count': count, **{k:part[k] for k in ['caseLabel','countLabel'] if k in part}})
     manifest['studyTargets']=targets
+    available_parts={t['examPartId'] for t in targets}
+    manifest['examParts']=[{**p,'practiceAvailable':p['practiceAvailable'] and p['id'] in available_parts} for p in config['examParts']]
     manifest.update(compile_learning_tools(root, config, questions, directory))
     manifest['offline']=compile_offline(root,manifest,questions,directory,hashed_json)
     write_json(directory / 'manifest.json', manifest)

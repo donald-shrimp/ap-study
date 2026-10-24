@@ -78,6 +78,12 @@
         "type": "string"
       },
       "minItems": 1
+    },
+    "sourceRecord": {
+      "$ref": "legal-context.v1.json#/$defs/sourceRecord"
+    },
+    "legalReview": {
+      "$ref": "legal-context.v1.json#/$defs/legalReview"
     }
   },
   "oneOf": [
@@ -277,5 +283,13 @@
         "sourceImages"
       ]
     }
-  ]
+  ],
+  "dependentRequired": {
+    "sourceRecord": [
+      "legalReview"
+    ],
+    "legalReview": [
+      "sourceRecord"
+    ]
+  }
 }

@@ -1,3 +1,4 @@
+import {legalAIPrompt} from '../domain/legal-context.js';
 import {chosenIds,correctIds,selectionInstruction} from '../domain/question-format.js';
 // AI explanation handoff. Allow clipboard consumers to settle before navigation.
 export const CLIPBOARD_SETTLE_MS=500;
@@ -57,6 +58,7 @@ export function buildAIPrompt({question:q,attempt:a,qualification,detail='',base
  if(q.sourceRefs?.length)prompt.push('【参考資料】',[...new Set(q.sourceRefs.map(src=>urlFor(src,baseURL)).filter(src=>src&&src!==urlFor(q.questionUrl,baseURL)))].join('\n'));
  if(nonempty(q.questionUrl))prompt.push('【公式問題・出典】',urlFor(q.questionUrl,baseURL));
  if(images.length)prompt.push('【問題画像・図】',images.join('\n'),'※画像URLがAIから参照できない場合は、元の学習画面から画像を添付してください。');
+ const legal=legalAIPrompt(q);if(legal)prompt.push(legal);
  return prompt.join('\n\n');
 }
 
