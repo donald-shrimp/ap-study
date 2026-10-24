@@ -1,6 +1,6 @@
 # FP2級 日本FP協会・実技 2026年公表分 全40問
 
-PR36の外部草稿を原本から独立レビューし、指摘箇所を修正・再確認した納品物。**40cases / 40items / 68回答欄**（選択46・数値22）。公開登録は未実施で、公開用の作成元・カタログ・HTML・学習記録は変更していない。`status:draft`を保ち、受け入れた草稿全40件のハッシュを保存している。
+PR36の外部草稿を原本から独立レビューし、指摘箇所を修正・再確認した納品物。**40cases / 40items / 68回答欄**（選択46・数値22）。公開用の作成元は `content/fp2/practical-cases.json`、正式台帳は `content/fp2/practical-reviews.json`。本フォルダはレビュー時の草稿を `status:draft` のまま保存し、全40件の受け入れハッシュを保持する。公開登録の照合記録は `docs/fp2-practical-publication-review.json`。
 
 ## レビューと修正
 
@@ -41,4 +41,4 @@ python deliveries/fp2-jafp-202605-samples/review/verify-figures.py deliveries/fp
 - [図](review/figure-check.json)：23枚を旧PNG矩形／公式PDFレンダーと独立に画素照合。
 - [画面](review/browser-results.json)：非公開プレビューで40caseを描画し、68欄を実入力して正解を確認。幅320/390/1440、必須23図、事前保存後のオフライン描画を検証。プレビューの状態変更は納品物や本番へ反映していない。
 
-公開登録時は受け入れハッシュと一致する草稿だけを使い、`status:reviewed`への変更後に正式台帳と公開データを生成して再検証する。今回のレビューで未解決の内容指摘は0件。
+公開登録は受け入れハッシュと一致する草稿を使い、本文・正答・解説を変更せず `status:reviewed` として正式台帳と公開データを生成した。今回のレビューで未解決の内容指摘は0件。
