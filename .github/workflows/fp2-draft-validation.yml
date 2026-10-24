@@ -1,0 +1,18 @@
+name: FP2 draft delivery validation
+on:
+  push:
+    branches: [draft/fp2-202605-jafp-practical-samples]
+    paths: [.github/workflows/fp2-draft-validation.yml]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate original PDFs and draft schemas
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/check-fp2-delivery.py delivery
