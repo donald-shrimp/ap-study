@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first forty authored explanations and hints
+      - name: Verify January first fifty authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -31,7 +31,9 @@ jobs:
                     'option-3','option-2','option-4','option-4','option-3',
                     'option-3','option-4','option-1','option-3','option-2',
                     'option-4','option-2','option-2','option-4','option-2',
-                    'option-2','option-2','option-2','option-1','option-1']
+                    'option-2','option-2','option-2','option-1','option-1',
+                    'option-3','option-3','option-1','option-3','option-3',
+                    'option-3','option-2','option-4','option-1','option-4']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -60,5 +62,10 @@ jobs:
           payout=lambda z: z['dividends']/z['profit']
           assert roe(x)<roe(y) and per(x)>per(y) and pbr(x)>pbr(y) and payout(x)>payout(y)
           assert qs[25]['correctChoiceId']=='option-3' and '6,000億円' in qs[25]['stem']
-          print('PASS: 60 official draft questions; Q01-Q40 have 40 detailed explanations, 160 choice-specific reasons, 80 hints. Independent reviewer not claimed.')
+          # Real estate source-rule consistency checks added in the two batches.
+          assert '表題登記' in qs[40]['explanation'] and '所有権保存登記' in qs[40]['explanation']
+          assert '区分所有者' in qs[46]['choiceReasons'][1]
+          assert '5％' in qs[48]['explanation'] and '15.315％' in qs[48]['explanation']
+          assert '建設資金' in qs[49]['choiceReasons'][3]
+          print('PASS: 60 official draft questions; Q01-Q50 have 50 detailed explanations, 200 choice-specific reasons, 100 hints. Independent reviewer not claimed.')
           PY
