@@ -81,3 +81,38 @@ jobs:
           assert '2027年3月31日' in qs[59]['explanation']
           print('PASS: 60 official draft questions; Q01-Q60 have 60 detailed explanations, 240 choice-specific reasons, 120 hints. Independent reviewer not claimed.')
           PY
+
+      - name: Verify September 2024 academic first ten explanations and hints
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('work/fp2/historical/202409/questions.json')
+          qs=json.loads(p.read_text(encoding='utf-8'))
+          assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
+          official=['option-4','option-2','option-2','option-4','option-2',
+                    'option-3','option-1','option-3','option-4','option-2']
+          for i,q in enumerate(qs):
+              assert q['id']==f'fp2-202409-objective-q{i+1:02d}'
+              assert len(q['choices'])==4
+              if i>=10: continue
+              assert q['correctChoiceId']==official[i],q['id']
+              assert q['sourceRecord']['legalAsOf']=='2024-04-01',q['id']
+              assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified',q['id']
+              assert len(q.get('explanation',''))>250,q['id']
+              assert len(q.get('choiceReasons',[]))==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
+              assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
+              assert all(h['title'] and len(h['text'])>30 and h['revealsAnswer'] is False for h in q['hints']),q['id']
+              assert len(q.get('sourceRefs',[]))>=2 and all(ref.startswith('https://') for ref in q['sourceRefs']),q['id']
+              assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
+          # Key 2024-specific public-rule checks.
+          assert '著作権法32条2項' in qs[0]['explanation']
+          assert '1年以上' in qs[2]['explanation'] and '75歳' in qs[2]['explanation']
+          assert '第1～7級' in qs[3]['explanation'] and '第8～14級' in qs[3]['explanation']
+          assert '2回まで分割' in qs[4]['explanation']
+          assert '受給権' in qs[6]['choiceReasons'][0]
+          assert '12か月未満' in qs[7]['explanation']
+          assert '期間短縮型' in qs[8]['choiceReasons'][3]
+          assert '即時' in qs[9]['choiceReasons'][1]
+          print('PASS: 60 official Sep 2024 draft questions; Q01-Q10 have 10 explanations, 40 choice reasons, 20 non-revealing hints; review remains unverified.')
+          PY
