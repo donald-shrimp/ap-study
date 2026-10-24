@@ -15,10 +15,14 @@ export function validateLegalContext(material,{required=false}={}){
 export function legalContextLines(material){
  if(!material.sourceRecord)return [];
  const s=material.sourceRecord,r=material.legalReview;
- return [`法令基準日：${s.legalAsOf||'不明'}`,r.status==='current'?`現行法令確認：${r.checkedAt}`:r.status==='outdated'?'現行法令との差異あり':'現行法令：未確認'];
+ return [`法令基準日：${s.legalAsOf||'不明'}`,...(r.status==='outdated'?['法令改正あり（学習非推奨）']:[])];
 }
+// Existing review metadata is the source of truth: an unchecked item is not
+// evidence of a law change. Keep review dates internal and preserve snapshots.
+export const hasLawChange=material=>material?.legalReview?.status==='outdated';
+export const legalStudyAllowed=(material,{excludeOutdated=true}={})=>!excludeOutdated||!hasLawChange(material);
 export function legalAIPrompt(material){
  if(!material.sourceRecord)return '';
  const s=material.sourceRecord,r=material.legalReview;
- return ['【出典・法令基準】',`公表元：${s.publisher} · 公表日：${s.publishedAt||'不明'}`,...legalContextLines(material),`原本：${s.questionUrl}\n原本SHA256：${s.questionSha256}`,`公式解答：${s.answerUrl}\n解答SHA256：${s.answerSha256}`,`加工：${s.modifiedFromOriginal?s.modificationNote:'なし'}`,r.note,...r.sourceRefs,'出題当時の公式正答と現行法令を区別し、未確認の現行法令を断定しないでください。'].filter(Boolean).join('\n');
+ return ['【出典・法令基準】',`公表元：${s.publisher} · 公表日：${s.publishedAt||'不明'}`,...legalContextLines(material),`最終法令チェック：${r.checkedAt||'未実施'} · 法令改正フラグ：${hasLawChange(material)?'あり':r.status==='current'?'なし':'未判定'}`,`原本：${s.questionUrl}\n原本SHA256：${s.questionSha256}`,`公式解答：${s.answerUrl}\n解答SHA256：${s.answerSha256}`,`加工：${s.modifiedFromOriginal?s.modificationNote:'なし'}`,r.note,...r.sourceRefs,'出題当時の公式正答と現行法令を区別し、未確認の現行法令を断定しないでください。'].filter(Boolean).join('\n');
 }

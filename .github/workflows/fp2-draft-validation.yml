@@ -10,6 +10,10 @@ on:
       - 'assets/fp2/**'
       - 'sources/fp2/**'
       - 'tests/fp2-content.py'
+      - 'tests/legal-study-filter*'
+      - 'src/domain/legal-context.js'
+      - 'src/domain/diagnostic.js'
+      - 'src/domain/qualification-features.js'
       - 'tools/**'
       - '.github/workflows/fp2-draft-validation.yml'
   workflow_dispatch:
@@ -44,3 +48,5 @@ jobs:
           python tools/build-content.py
           python tests/fp2-content.py
           git diff --exit-code
+      - name: Verify law-study filtering and saved snapshots
+        run: node --test tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs
