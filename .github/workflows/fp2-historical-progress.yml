@@ -1,0 +1,42 @@
+name: FP2 historical authoring progress checks
+on:
+  push:
+    branches: [draft/fp2-202501-202409-202405-source]
+    paths:
+      - 'work/fp2/historical/**/questions.json'
+      - '.github/workflows/fp2-historical-progress.yml'
+  pull_request:
+    paths:
+      - 'work/fp2/historical/**/questions.json'
+      - '.github/workflows/fp2-historical-progress.yml'
+permissions:
+  contents: read
+jobs:
+  author-draft-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify January first ten authored explanations and hints
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('work/fp2/historical/202501/questions.json')
+          qs=json.loads(p.read_text(encoding='utf-8'))
+          assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
+          official=['option-1','option-4','option-1','option-2','option-3',
+                    'option-1','option-3','option-2','option-4','option-3']
+          for i,q in enumerate(qs):
+              assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
+              assert len(q['choices'])==4
+              if i>=len(official): continue
+              assert q['correctChoiceId']==official[i], q['id']
+              assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified'
+              assert len(q['choiceReasons'])==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
+              assert len(q.get('explanation',''))>200,q['id']
+              assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
+              assert all(h['title'] and h['text'] and h['revealsAnswer'] is False for h in q['hints']),q['id']
+              assert len(q.get('sourceRefs',[]))>=2 and all(s.startswith('https://') for s in q['sourceRefs']),q['id']
+              assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
+          print('PASS: 60 official draft questions; Q01-Q10 have 10 detailed explanations, 40 choice-specific reasons, 20 hints. Independent reviewer not claimed.')
+          PY
