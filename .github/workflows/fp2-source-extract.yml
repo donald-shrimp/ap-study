@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Install PDF text extractor
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Download and validate original PDF
@@ -25,5 +28,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: fp2-202605-official-pdf-and-text
-          path: output/
+          path: |
+            output/
+            tools/
+            schemas/
+            content/fp2/
+            src/domain/
+            package.json
           retention-days: 30
