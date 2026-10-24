@@ -11,7 +11,7 @@
 
 ## 受入状況
 
-**原本PDFバイナリと問55の家族関係図PNGはこのGitツリーに未格納です。** 文書中のSHA-256は実PDFから計算したが、ハッシュの記載だけでは `tools/check-fp2-delivery.py` をGitチェックアウト直後に実行できません。公式原本をPDF保存し、問55の画像を `delivery/assets/fp2/202605/q55-family-chart.png` に置く必要があります。PDFと画像を含む完全ZIPはチャットの納品物として作成しています。
+**原本PDFと問55の家族関係図PNGはGitツリーへ格納済み。** このブランチをチェックアウトし、リポジトリルートから `python tools/check-fp2-delivery.py delivery` を実行できる納品一式です。SHA-256は原本から実測したものです。PDFと図を含む完全ZIPもチャット成果物として作成しています。
 
 原本同梱のローカル完全納品に対する `python tools/check-fp2-delivery.py <delivery>` は、`questions=60, cases=0, fields=0, mode=draft structure only; not approved` を返し成功。ただし**内容の独立レビューを意味しません**。
 
