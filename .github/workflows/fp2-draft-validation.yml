@@ -1,0 +1,46 @@
+name: FP2 draft delivery validation
+on:
+  pull_request:
+    paths:
+      - 'delivery/**'
+      - 'deliveries/**'
+      - 'content/fp2/**'
+      - 'content/qualifications.json'
+      - 'data/qualifications/fp2/**'
+      - 'assets/fp2/**'
+      - 'sources/fp2/**'
+      - 'tests/fp2-content.py'
+      - 'tools/**'
+      - '.github/workflows/fp2-draft-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify original PDFs and draft material structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          if [ -f delivery/content/fp2/questions.json ]; then
+            python tools/check-fp2-delivery.py delivery
+            count=$((count+1))
+          fi
+          shopt -s nullglob
+          for folder in deliveries/fp2-*/; do
+            if [ -f "$folder/content/fp2/questions.json" ]; then
+              python tools/check-fp2-delivery.py "$folder"
+              count=$((count+1))
+            fi
+          done
+          test "$count" -gt 0
+      - name: Verify reviewed FP2 publication
+        run: |
+          python tools/check-fp2-delivery.py . --reviewed
+          python tools/build-content.py
+          python tests/fp2-content.py
+          git diff --exit-code

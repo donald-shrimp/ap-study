@@ -1,0 +1,87 @@
+{
+  "scope": "Independent publication integration review only. Full original-question and correction content reviews are preserved from their actual prior reviewers; not re-performed or claimed here.",
+  "reviewer": "/root/review_fp2_publication",
+  "integrationAuthor": "/root",
+  "checkedAt": "2026-10-24T12:12:48.415102+00:00",
+  "originMain": "3a5306a5cf9cfcf4fd6d131909f3543bb26f1dd9",
+  "acceptedDraftHead": "d56639f7537d95b3de14c998b23cdf5e05c25c18",
+  "status": "integration-review-pass",
+  "findings": [],
+  "method": [
+    "Read AGENTS.md and the content/FP publication contracts. Reviewed publication docs, source attribution and test changes.",
+    "Compared all 60 public question objects to accepted delivery, requiring only enrichment draft to reviewed change. Recomputed canonical JSON SHA256 and normalized hashes; validated each actual initial/correction review author, reviewer, time and accepted draft hash.",
+    "Read actual stored review records rather than inventing new content verification. Three corrected records retain version2; other57 retain version1, official answers unchanged.",
+    "Validated all original PDF and referenced figure hashes and sourceRecord membership. Compared generated pack to all60 normalized authored records and checked manifest/index/pack/offline hashes.",
+    "Verified source attribution, objective default and exactly one objective60 study target. Practical subjects all unavailable, no diagnostic/mock/card feature artificially added.",
+    "Compared 3243 existing AP/AB authored/generated corpus and source/figure files byte-for-byte to origin/main. Inspected release-only shell changes.",
+    "Executed tests/fp2-content.py including real60 acceptance and isolated negative/synthetic contracts, tools/check-fp2-delivery.py . --reviewed, and git diff --check. All passed. Expected negative fixture error traces do not indicate failed assertions."
+  ],
+  "checks": {
+    "questions": 60,
+    "choices": 240,
+    "draftContentExactlyPreservedExceptEnrichment": true,
+    "canonicalRawAndNormalizedHashesMatch": true,
+    "actualSeparateReviewersAndTimesMatch": true,
+    "allVersionsAndAnswersPreserved": true,
+    "officialPDFHashMatches": true,
+    "figureHashMatches": true,
+    "all60GeneratedPackMatchesNormalize": true,
+    "objectiveOnlyCatalog": true,
+    "q55IncludedInOfflineInventory": true,
+    "existingCorpusAndFigureFilesByteUnchanged": 3243,
+    "publishedCorpusAndSyntheticContractTests": "pass",
+    "reviewedDeliveryValidator": "pass",
+    "diffCheck": "pass"
+  },
+  "finalFileSHA256": {
+    "content/fp2/questions.json": "ade920b622b4284cebedc02c64a3b9e00d686386c09ccf513222f70ab1e395d6",
+    "content/fp2/question-reviews.json": "0266b00ebe1bf259b72519108fb36d6429fccae7b9cb6295f0831c8b5d1e068f",
+    "content/fp2/qualification.json": "253ff5330b7917c6d78d6bb4b47b115ffd7bfbf374fe1f31e6b3f2415dba6d05",
+    "data/qualifications/fp2/manifest.json": "fc60530de1c987c6e50e7be14df40e1a86734dd5a5610f427509c11a6c4a3bd7",
+    "data/qualifications/catalog.json": "b66aac9e6c6b0944c7c62761a809be1b1b528806cefca5619b00f636dc25780f",
+    "sources/fp2/g2_202605_qa.pdf": "525d190bb489b4187d39d6782eac999fc4b14bfdd1f489842b96685465b804ef",
+    "assets/fp2/202605/q55-family-chart.png": "f3eae7deed4ce1213983e446e2583767fb6cfacbe76ef3823a24dde466c7da87"
+  },
+  "limitations": "No live Pages deployment verification or new browser execution performed by this integration reviewer; parent performs these. Current-law verification is not a requirement for these past questions; all retain original2025-04-01 basis and unverified current-law metadata.",
+  "supplementalReview": {
+    "checkedAt": "2026-10-24T12:21:27.426415+00:00",
+    "scope": "Read-only review of final test/workflow additions; no full suite rerun claimed",
+    "baselineQualificationInvestigation": {
+      "reviewer": "/root/review_fp2_publication",
+      "checkedAt": "2026-10-24T12:16:03.944799+00:00",
+      "baseline": "/workspace/ap-study @ 3a5306a5cf9cfcf4fd6d131909f3543bb26f1dd9",
+      "baselineResult": "fails identically at tests/qualifications.py line97 after fixture second-pack addition",
+      "baselineLog": "qualifications-baseline.log",
+      "cause": "Mutable manifest requests return saved cache immediately and refresh network in background (sw.js refreshInBackground); first reload intentionally reads prior manifest. Fixture test assumed synchronous network refresh. Existing tests/pwa.py already waits for cached manifest SHA after triggering refresh.",
+      "minimalFix": "Test-only helper after each of three fixture rebuilds: fetch mutable fixture-a manifest to trigger refresh; wait_for_async until Cache Storage contains expected index SHA from newly built manifest; then reload. No arbitrary sleeps or app-code changes.",
+      "probe": "qualifications-wait-probe.py",
+      "probeLog": "qualifications-wait-probe.log",
+      "probeResult": "full baseline qualifications UI test passes with three refresh waits, including retire/history snapshots, unsaved-plan protection, storage failures and offline switching",
+      "repoFilesModified": false,
+      "status": "baseline test-race confirmed; test synchronization fix proven"
+    },
+    "checks": {
+      "qualificationsCacheWait": "pass: expected mutable-manifest index SHA awaited at each of three rebuilds, preserves semantics and avoids arbitrary sleep",
+      "e2eScanFixture": "pass: both primary and fallback candidates require missing stem so optional reference scans cannot masquerade as required displayed originals",
+      "fp2PublishedBrowserTest": "pass on inspection: fresh guest contexts, actual objective-only catalog60, managed download before unseen questions, offline figure decode/resume/grade/reasons, AI basis/figure, backup import and AP separation; parent owns execution results",
+      "workflowReviewedRootCheck": "pass on inspection: read-only delivery verification, reviewed-root evidence check, deterministic build, FP content tests and clean diff; runner dependencies use Python standard library and available Node"
+    },
+    "findings": [
+      {
+        "priority": "P2",
+        "path": ".github/workflows/fp2-draft-validation.yml",
+        "finding": "Root publication validation added but pull_request path filter still covers only delivery/deliveries and workflow itself, so later FP public-source-only edits do not trigger it.",
+        "recommendation": "Include content/fp2/**, data/qualifications/fp2/**, assets/fp2/**, sources/fp2/**, tests/fp2-content.py and relevant tools paths.",
+        "status": "reported-to-parent"
+      }
+    ]
+  },
+  "integrationResponses": [
+    {
+      "author": "/root",
+      "finding": ".github/workflows/fp2-draft-validation.yml path coverage",
+      "status": "resolved",
+      "response": "Added public FP source, registry, generated data, figures, PDFs, content test and tools paths. Final workflow itself will run the reviewed-root check before merge."
+    }
+  ]
+}

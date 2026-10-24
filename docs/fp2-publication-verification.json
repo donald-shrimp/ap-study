@@ -1,0 +1,53 @@
+{
+  "format": "hitomon-fp2-publication-verification",
+  "version": 1,
+  "scope": "Pre-publication verification; deployment confirmation is recorded after merge separately.",
+  "checkedAt": "2026-10-24T12:25:57.765935+00:00",
+  "release": "20261024-fp2-objective",
+  "acceptedDraftHead": "d56639f7537d95b3de14c998b23cdf5e05c25c18",
+  "baseMain": "3a5306a5cf9cfcf4fd6d131909f3543bb26f1dd9",
+  "questions": 60,
+  "lawBasis": "2025-04-01",
+  "publicParts": [
+    "objective"
+  ],
+  "reviewEvidence": "docs/fp2-publication-review.json",
+  "checks": {
+    "reviewedDelivery": "pass",
+    "draftPreserved": "pass",
+    "build": "pass",
+    "fp2ContentAndReviewGates": "pass",
+    "nodeTests": {
+      "total": 260,
+      "failed": 0
+    },
+    "existingContentAndCorpus": "pass",
+    "writtenContent": "pass",
+    "offlineContent": "pass",
+    "commonContent": "pass",
+    "storage": "pass after starting required local HTTP server",
+    "qualifications": "pass with cache SHA synchronization at fixture updates",
+    "fp2SyntheticFlow": "pass",
+    "fp2RealPublishedFlow": "pass: managed offline download, unseen questions, diagram, resume, grading, all reasons, AI, backup import, AP isolation, 320/390/1440px",
+    "e2e": "pass; actual retained-scan fixture and v2 backup negative cases",
+    "pwa": "pass including update, original records, saved images and unrelated caches",
+    "diffCheck": "pass"
+  },
+  "offlineGroupBytes": 346798,
+  "unchanged": {
+    "existingAPQuestions": 800,
+    "APCards": 681,
+    "APDerivedQuestions": 180,
+    "AB730Questions": 174,
+    "existingWrittenCases": 88,
+    "corpusAndFigureFilesComparedByIndependentReviewer": 3243,
+    "firestoreRules": true,
+    "recordFormat": true
+  },
+  "notes": [
+    "Past questions are judged at the original law basis; current-law verification is not a publication prerequisite.",
+    "Private guest profiles only. No personal backups or production user records added.",
+    "Qualification test baseline failed at stale cached manifest expectation; corrected test waits for expected cache SHA without changing app behavior.",
+    "Legacy e2e negative backup checks updated to current records[].lesson v2 format, preserving hostile input rejection coverage."
+  ]
+}
