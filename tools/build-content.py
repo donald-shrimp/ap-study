@@ -135,6 +135,7 @@ def normalize(raw, config, ordinal=1):
 def validate_questions(questions, config, root, diagnostic=False, related_ids=None):
     ids = set()
     for q in questions:
+        require(not config.get('requiresReviewedContent',False) or q.get('enrichment')=='reviewed', f"Unreviewed content cannot be published: {q['id']}")
         require(SAFE_ID.fullmatch(q['id']) and q['id'] not in ids, f"Duplicate/invalid question ID: {q['id']}")
         ids.add(q['id'])
         uses = question_uses(q)
@@ -268,7 +269,7 @@ def compile_assessments(root, config, originals, directory):
         require(key not in scopes or scopes[key]==scope, f"A content family crosses topics or parts: {q['id']}")
         scopes[key]=scope
     filename,digest=hashed_json(directory, 'diagnostic', questions)
-    fields = ['id', 'qualificationId', 'topicId', 'examPartId', 'enrichment', 'parentQuestionId', 'familyId', 'sourceKind', 'uses']
+    fields = ['id', 'qualificationId', 'topicId', 'examPartId', 'enrichment', 'parentQuestionId', 'familyId', 'sourceKind', 'uses', 'sourceRecord', 'legalReview']
     return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions),'index':[{k: q[k] for k in fields if k in q} for q in questions]}
 
 
@@ -298,7 +299,7 @@ def compile_mock_sets(root, config, originals, directory):
             require(slot['number']==i+1 and q and 'mock' in question_uses(q) and q['enrichment']=='reviewed' and ('parentQuestionId' not in slot or q.get('parentQuestionId')==slot['parentQuestionId']) and q['topicId']==slot['topicId'], 'Invalid fixed mock question')
     body={'format':'hitomon-mock-sets','version':1,'qualificationId':config['id'],'sets':sets}
     filename,digest=hashed_json(directory,'mockSets',body)
-    return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{k:s[k] for k in ['id','label','version','size']} for s in sets]}
+    return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{**{k:s[k] for k in ['id','label','version','size']}, **({'hasLawChange':True} if any(published[slot['questionId']].get('legalReview',{}).get('status')=='outdated' for slot in s['slots']) else {})} for s in sets]}
 
 
 def compile_learning_tools(root, config, questions, directory):
@@ -355,6 +356,7 @@ def compile_qualification(root, id):
     require(config['defaultExamPartId'] in {p['id'] for p in config['examParts']}, 'Invalid default exam part')
     require(all(all(isinstance(p[k],str) and 0<len(p[k])<=20 for k in ['caseLabel','countLabel'] if k in p) for p in config['examParts']), 'Invalid case unit label')
     require(type(config.get('requiresLegalContext',False)) is bool,'Invalid legal context setting')
+    require(type(config.get('requiresReviewedContent',False)) is bool,'Invalid reviewed content setting')
     require(config['id'] == id, 'Qualification ID mismatch')
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')

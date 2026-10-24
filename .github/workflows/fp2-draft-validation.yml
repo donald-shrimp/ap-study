@@ -4,6 +4,17 @@ on:
     paths:
       - 'delivery/**'
       - 'deliveries/**'
+      - 'content/fp2/**'
+      - 'content/qualifications.json'
+      - 'data/qualifications/fp2/**'
+      - 'assets/fp2/**'
+      - 'sources/fp2/**'
+      - 'tests/fp2-content.py'
+      - 'tests/legal-study-filter*'
+      - 'src/domain/legal-context.js'
+      - 'src/domain/diagnostic.js'
+      - 'src/domain/qualification-features.js'
+      - 'tools/**'
       - '.github/workflows/fp2-draft-validation.yml'
   workflow_dispatch:
 permissions:
@@ -31,3 +42,11 @@ jobs:
             fi
           done
           test "$count" -gt 0
+      - name: Verify reviewed FP2 publication
+        run: |
+          python tools/check-fp2-delivery.py . --reviewed
+          python tools/build-content.py
+          python tests/fp2-content.py
+          git diff --exit-code
+      - name: Verify law-study filtering and saved snapshots
+        run: node --test tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs

@@ -14,7 +14,7 @@ import {createPlanningViews} from '../ui/planning.js';
 import {canStartDiagnostic} from '../domain/qualification-features.js';
 import {diagnosticSize} from '../domain/assessment-policy.js';
 
-export function createPlanningFeature({qualification,rootPath,getStore,getState,getNavigation,content,base,validateAttempt,onUpdate,onNavigate,onNotice,onChanged,getReviewCount,download,getTargetPart=()=>null,getCaseRuns=()=>[]}){
+export function createPlanningFeature({qualification,rootPath,getStore,getState,getNavigation,content,base,studyAllowed=()=>true,validateAttempt,onUpdate,onNavigate,onNotice,onChanged,getReviewCount,download,getTargetPart=()=>null,getCaseRuns=()=>[]}){
  let workspace,documents=[],preview=null,previewRevision=0,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,editorOpen=false,aiOpen=false,status='guest',generation=0,busy=false,stale=false;
  function setBusy(value){
   busy=value;
@@ -29,7 +29,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
  function assessmentAttempts(){return [...getState().attempts,...documents.filter(r=>r.kind==='diagnostic').flatMap(r=>diagnosticAttempts(r.payload))];}
  function allAttempts(){return assessmentAttempts().filter(a=>canUseQuestion(a.questionSnapshot,'practice'));}
  const drafts=createPlanningDrafts(()=>getState().view==='planning');
- const views=()=>{drafts.capture();return createPlanningViews({qualification,documents,attempts:allAttempts(),summaryData:summary(),currentRunId:getState().currentRunId,currentMockSetId:getState().currentMockSetId,diagnosticEnabled:canStartDiagnostic(qualification,base),practiceQuestionIds:new Set(base.map(q=>q.id)),practiceTopicIds:new Set(base.filter(q=>canUseQuestion(q,'practice')).map(q=>q.topicId)),preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status,editorOpen,aiOpen,stale,targetPartId:getTargetPart(),caseRuns:getCaseRuns()});};
+ const views=()=>{drafts.capture();return createPlanningViews({qualification,documents,attempts:allAttempts(),summaryData:summary(),currentRunId:getState().currentRunId,currentMockSetId:getState().currentMockSetId,diagnosticEnabled:canStartDiagnostic(qualification,base,studyAllowed),practiceQuestionIds:new Set(base.map(q=>q.id)),practiceTopicIds:new Set(base.filter(q=>canUseQuestion(q,'practice')).map(q=>q.topicId)),preview,jsonInput,editingPhaseId,editingWeek,editingMilestone,workspaceStatus:status,editorOpen,aiOpen,stale,targetPartId:getTargetPart(),excludeOutdated:getState().settings.excludeOutdated!==false,caseRuns:getCaseRuns()});};
  // Preserve actual drafts, rather than freezing every open planning page.
  function hasPlanningDraft(){
   if(drafts.has()||preview||jsonInput.trim()||editingPhaseId||editingWeek||editingMilestone)return true;
@@ -53,11 +53,11 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   await Promise.all(Array.from({length:Math.min(6,pending.length)},async()=>{while(pending.length){const url=pending.shift();if(await cache?.match(url))continue;const response=await fetch(url);if(!response.ok)throw new Error('診断の問題画像を準備できませんでした。接続を確認してください。');await cache?.put(url,response);}}));
  }
  async function startDiagnostic(){
-  if(!canStartDiagnostic(qualification,base))throw new Error('この資格の診断はまだ利用できません。通常学習は利用できます。');
+  if(!canStartDiagnostic(qualification,base,studyAllowed))throw new Error('この資格の診断はまだ利用できません。通常学習は利用できます。');
   if(!navigator.onLine)throw new Error('新しい診断はオンラインで始めてください。中断した診断や通常学習はオフラインでも使えます。');
   const token=generation,nav=getNavigation();onNotice(`診断の${diagnosticSize(qualification)}問を準備しています。`);
   const variants=await content.loadAssessments();if(token!==generation||nav!==getNavigation())return;
-  const attempts=[...assessmentAttempts(),...documents.filter(r=>['diagnostic','mock'].includes(r.kind)).flatMap(r=>diagnosticExposure(r.payload))],chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants);await Promise.all(chosen.filter(q=>canUseQuestion(q,'practice')).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
+  const attempts=[...assessmentAttempts(),...documents.filter(r=>['diagnostic','mock'].includes(r.kind)).flatMap(r=>diagnosticExposure(r.payload))],chosen=selectDiagnostic(base,qualification,attempts,Math.random,variants,studyAllowed);await Promise.all(chosen.filter(q=>canUseQuestion(q,'practice')).map(q=>content.ensure(q.id)));if(token!==generation||nav!==getNavigation())return;
   await cacheImages(chosen);if(token!==generation||nav!==getNavigation())return;
   const revision=[content.manifest.index.sha256,content.manifest.assessment?.sha256||''].filter(Boolean).join(':');
   const run=createDiagnostic(chosen,qualification,attempts,revision);await write('diagnostic',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);
@@ -73,6 +73,7 @@ export function createPlanningFeature({qualification,rootPath,getStore,getState,
   const byId=new Map(variants.map(q=>[q.id,q]));
   const fixed=await Promise.all(set.slots.map(slot=>byId.get(slot.questionId)||content.ensure(slot.questionId)));
   if(token!==generation||nav!==getNavigation())return;
+  if(fixed.some(q=>!studyAllowed(q)))throw new Error('法令改正のある問題を含むため、この模試は除外中です。');
   const run=createMock(set,fixed,qualification,exposure,[content.manifest.mockSets.sha256,content.manifest.assessment?.sha256||content.manifest.index.sha256].join(':'));
   await cacheImages(run.slots.map(s=>s.attempt.questionSnapshot));if(token!==generation||nav!==getNavigation())return;
   await write('mock',run.id,run,0);if(token!==generation||nav!==getNavigation())return;onNotice('');onNavigate('diagnostic',run.id);

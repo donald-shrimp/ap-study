@@ -1,52 +1,44 @@
-# FP2級 日本FP協会・実技 2026年公表分 全40問（作成者Draft）
+# FP2級 日本FP協会・実技 2026年公表分 全40問
 
-これは `docs/fp2-authoring.md` に従う **未レビューの納品** です。学科60問のPR #35とは分離した、実技40問分の原本付きDraft。マージ・一般公開・レビュー済みへの昇格は未実施です。
+PR36の外部草稿を原本から独立レビューし、指摘箇所を修正・再確認した納品物。**40cases / 40items / 68回答欄**（選択46・数値22）。公開登録は未実施で、公開用の作成元・カタログ・HTML・学習記録は変更していない。`status:draft`を保ち、受け入れた草稿全40件のハッシュを保存している。
 
-## 収録範囲と回答単位
+## レビューと修正
 
-- 対象：日本FP協会・2級実技「資産設計提案業務」2026年公表分、**公式問1〜40の全40問**。
-- 公式1問を1case、1itemとし、**40cases / 40items / 68fields** として登録。複数の○×や計算欄を独立して回答できるようにした。公式の「40問」は68回答欄や点数を意味しません。
-- 回答欄形式：`singleChoice` 46欄、`numeric` 22欄。公式の○×・4択・語群からの選択・数値をそれぞれ採点する。語群の問23は3つの番号欄を別々に扱う。
-- 原本の保険証券、税率表、相続関係図、建築図、教育費・資産表などを **画像22枚** として切り出し、各caseの `bodyFigures` から参照する。本文・図表は独立レビューで必ず原本と照合する。
-- `status: "draft"`、`legalReview.status: "unverified"`。確認できていない法令基準日・公表の暦日は `null` のままとし、推定値で埋めない。
-- 各回答欄の解説・評価基準は**作成担当の草稿**であり、法令や計算の正しさは独立レビューで再確認が必要です。元の公式正答は変更しません。
+- 確認担当：Codex `/root`（外部作成者とは別担当）。公式問題32頁・模範解答1頁を実表示し、全文・条件・図表・全選択肢・68正答・全解説を照合。数値22欄は単位・端数処理まで再計算した。
+- 修正作成担当：Codex `/root/pr36_corrections`。主担当が完成した全25修正caseと23図を原本へ再照合した。公式正答の変更は0件。
+- 問14・20の「最も不適切」という誤った欄名を修正。問15の役職限定加入、問27の配偶者居住権の説明を訂正。問10の指定日の説明を精密化し、問36の未確認法令に関する定型注意書きを削除。
+- 問16の個人賠償責任特約、問39の表前半、問33の次頁バランスシートを補完。既存の22PNGは保持し、新しい版の図23枚（既存画像から20枚、欠落のPDF補完3枚）へ参照を変更した。
+- 二重表示していたOCR表、次問や本文断片の混入、余白を整理。本文の該当位置へ図を配置し、問15の表も復元した。変更caseはversion2。
 
-## 原本とSHA-256
+記録：[`review/pr36-review-evidence.json`](review/pr36-review-evidence.json)、[`review/progress.json`](review/progress.json)。元・完成case、原本PDF、各図のSHA-256と実際の担当を記録。図の矩形・倍率・補完理由は[`review/correction-provenance.json`](review/correction-provenance.json)。旧版はGit履歴と既存PNGに残る。
 
-| 公式原本 | リポジトリ内 | SHA-256 |
-|---|---|---|
+## 原本と利用条件
+
+| 公式原本 | 保存先 | SHA-256 |
+| --- | --- | --- |
 | [問題PDF](https://www.jafp.or.jp/exam/mohan/files/j2_202605_q.pdf) | `sources/fp2/j2_202605_q.pdf` | `3760b39cbeffc2062de054639a2910b615df63d8b9f592e8dd3e1b368a0d02ef` |
 | [模範解答PDF](https://www.jafp.or.jp/exam/mohan/files/j2_202605_a.pdf) | `sources/fp2/j2_202605_a.pdf` | `9c3508ba491a84ce97b96157942d63f865084ef2b098359fb425f68728334abd` |
 
-- 公式問題・解答の原本バイト列をこのフォルダに保存。リポジトリ内の `content/fp2/source-files.json` と各caseの `sourceRecord` に完全SHA-256を記録。
-- 出典：日本FP協会「2級ファイナンシャル・プランニング技能検定 実技試験（資産設計提案業務）2026年公表分」。
-- 加工：画面表示用の文字起こし、case / fieldへの分割、必要な図表の切り出し、個別解説・評価ルーブリックの追加。
-- 引用・加工条件と図表に含まれる第三者資料の権利は独立レビュー時にも確認する。
+公式URLから取得し直したファイルとバイト一致。出典：日本FP協会「2級ファイナンシャル・プランニング技能検定 実技試験（資産設計提案業務）2026年公表分」。画面表示用の文字起こし、case・回答欄への分割、図表の切り出し、個別解説・評価基準の加筆を行った。[協会の利用条件](https://www.jafp.or.jp/exam/mohan/files/exam_riyou.pdf)は出典・加工の明記を求め、申請不要としている。確認した条件PDFは`review/sources/exam-riyou.pdf`へ保存。
+
+過去問は原本の条件で確認した。法令基準日・公表日は推定せずnullを維持し、現行法令との全問照合はしていない。`legalReview.status:unverified`を保持する。現行法令の確認は過去問公開の必須条件ではない。公式の欄別配点は非公表なので、独自の100点換算・合否判定は作らない。
 
 ## 検証
 
-リポジトリルートから次を実行。
+リポジトリルートから：
 
 ```sh
 python tools/check-fp2-delivery.py deliveries/fp2-jafp-202605-samples
+python deliveries/fp2-jafp-202605-samples/review/verify-answers.py deliveries/fp2-jafp-202605-samples
+node deliveries/fp2-jafp-202605-samples/review/verify-grading.mjs deliveries/fp2-jafp-202605-samples/content/fp2/practical-cases.json
+python deliveries/fp2-jafp-202605-samples/review/verify-figures.py deliveries/fp2-jafp-202605-samples
 ```
 
-期待される結果：
+最後の図検証にはPyMuPDFとPillowが必要。納品チェッカーは40cases / 68fieldsで成功し、draftとして構造を検証する。公開承認台帳の代用にはしない。
 
-```json
-{"questions":0,"cases":40,"fields":68,"mode":"draft structure only; not approved"}
-```
+- [再計算](review/calculations.json)：68公式正答と一致、22数値欄の独立計算・単位・端数処理。
+- [採点](review/grading.json)：137選択経路、22数値欄の正誤・全角・桁区切り・単位付き入力の扱い。
+- [図](review/figure-check.json)：23枚を旧PNG矩形／公式PDFレンダーと独立に画素照合。
+- [画面](review/browser-results.json)：非公開プレビューで40caseを描画し、68欄を実入力して正解を確認。幅320/390/1440、必須23図、事前保存後のオフライン描画を検証。プレビューの状態変更は納品物や本番へ反映していない。
 
-作成者のローカル環境で検証済み。GitHub Actionsでも **実際にコミットされた原本・PNG・JSON** を対象に構造検証が成功：[ワークフロー実行ログ](https://github.com/donald-shrimp/ap-study/actions/runs/40091668792)。
-
-このチェッカーは構造・ファイル存在・原本PDFのハッシュを確認しますが、公式原文・解説・現行法令の正しさを保証しません。
-
-## 独立レビュー前の注意点
-
-1. 各設問の原文・図表・答え、図表のクロップ範囲を公式問題・模範解答と突合する。特に問13（保険2契約）、問14（生命保険料控除区分）、問23（相続関係図）、問28・29（キャッシュフロー）、問34・35（端数処理・繰上返済）。
-2. `sourceRecord.legalAsOf` が特定できないため、現行法令適合の判定を勝手に `current` へ変更しない。
-3. 作成者と異なる担当が独立して計算・法令・選択肢を照合し、実際のレビュー台帳と完成物ハッシュを記録するまで `reviewed` にしない。
-4. 公式の欄別配点は非公表。独自の100点換算や合否判定を追加しない。
-5. `content/fp2/` の公開用作成元、`data/qualifications/`、本番HTML、既存AP/AB-730学習記録は一切変更しない。
-
-学科60問・実技40問ともに、**教材作成完了は「独立レビュー・公開準備完了」とは異なります**。
+公開登録時は受け入れハッシュと一致する草稿だけを使い、`status:reviewed`への変更後に正式台帳と公開データを生成して再検証する。今回のレビューで未解決の内容指摘は0件。

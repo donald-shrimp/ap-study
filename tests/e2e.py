@@ -9,8 +9,10 @@ URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
 KEY='ap-study-mock.v1'
 bank=json.loads((Path(__file__).resolve().parents[1]/'data/questions.json').read_text());by_id={q['id']:q for q in bank}
 reveal_fixture=next(q for q in bank if not q['hints'][0]['revealsAnswer'] and q['hints'][1]['revealsAnswer'])
-pending_candidates=[q for q in bank if q['enrichment']=='topic-guide' and q['answer']!=0 and q['sourceImages']]
-pending_fixture=(pending_candidates or [q for q in bank if q['id'].startswith('r03a-') and q['answer']!=0 and q['sourceImages']])[0]
+pending_candidates=[q for q in bank if q['enrichment']=='topic-guide' and q['answer']!=0 and q['sourceImages'] and not q.get('stem')]
+# This scenario verifies full-scan rendering; transcribed questions now keep
+# sourceImages only as optional online references.
+pending_fixture=(pending_candidates or [q for q in bank if q['answer']!=0 and q['sourceImages'] and not q.get('stem')])[0]
 pending_id=pending_fixture['id']
 pending_hint_candidates=[q for q in bank if q['enrichment']=='topic-guide' and q['id']!=pending_id and not q['hints'][0]['revealsAnswer']]
 pending_hint_fixture=(pending_hint_candidates or [q for q in bank if q['id'].startswith('r03a-') and q['id']!=pending_id and not q['hints'][0]['revealsAnswer']])[0]
@@ -181,8 +183,8 @@ with sync_playwright() as p:
  open_data_management(page)
  with page.expect_download() as download:page.get_by_role('button',name='学習記録を書き出す',exact=True).click()
  backup=ROOT/'record.json';download.value.save_as(str(backup));page.on('dialog',lambda d:d.accept());page.locator('#import-state').set_input_files(str(backup));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("読み込みました")')
- original=state();bad=json.loads(backup.read_text());bad['attempts'][0]['materialSnapshot']['stem']='<img src=x onerror=alert(1)>';bad_path=ROOT/'bad.json';bad_path.write_text(json.dumps(bad));page.locator('#settings-status').evaluate('(e)=>e.textContent=""');page.locator('#import-state').set_input_files(str(bad_path));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("現在の記録は変更していません")');assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
- bad=json.loads(backup.read_text());bad['attempts'][0]['materialSnapshot']['hintStatus']='invalid';bad_path.write_text(json.dumps(bad));page.locator('#settings-status').evaluate('(e)=>e.textContent=""');page.locator('#import-state').set_input_files(str(bad_path));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("現在の記録は変更していません")');assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
+ original=state();bad=json.loads(backup.read_text());bad['records'][0]['lesson']['stem']='<img src=x onerror=alert(1)>';bad_path=ROOT/'bad.json';bad_path.write_text(json.dumps(bad));page.locator('#settings-status').evaluate('(e)=>e.textContent=""');page.locator('#import-state').set_input_files(str(bad_path));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("現在の記録は変更していません")');assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
+ bad=json.loads(backup.read_text());bad['records'][0]['lesson']['hintStatus']='invalid';bad_path.write_text(json.dumps(bad));page.locator('#settings-status').evaluate('(e)=>e.textContent=""');page.locator('#import-state').set_input_files(str(bad_path));page.wait_for_function('document.querySelector("#settings-status").textContent.includes("現在の記録は変更していません")');assert '現在の記録は変更していません' in page.locator('#settings-status').inner_text();assert state()==original
  page.get_by_role('button',name='設定を閉じる',exact=True).click();nav('home');page.screenshot(path=str(ROOT/'home-mobile.png'),full_page=True);nav('topics');page.evaluate('document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  assert not errors,errors
  print('PASS mobile image zoom / 200% text / valid backup import / hostile snapshot rejection / no runtime errors',flush=True)

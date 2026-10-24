@@ -13,6 +13,14 @@ const q=JSON.parse(readFileSync(new URL('../content/fp2/qualification.json',impo
 const at='2026-10-24T00:00:00.000Z';
 const filled=(text,field=numericField())=>{const c=fixtureCase();c.items[0].fields=[field];const r=createCaseRun(c,{at});setCaseResponse(r,'q1--'+field.id,text,at);submitCaseField(r,'q1--'+field.id,at);return r;};
 
+test('case figures require unique anchors in rendering order, including saved material',()=>{
+ const c=fixtureCase(),figure={image:'assets/written/synthetic/figure.png',anchor:'[one]',alt:'合成図',caption:'合成図'};
+ c.body='Before [one] between [two] after';c.bodyFigures=[figure,{...figure,anchor:'[two]'}];validateCaseMaterial(c,q);validateCaseRun(createCaseRun(c,{at}),q);
+ for(const change of [c=>c.bodyFigures[0].anchor='missing',c=>c.bodyFigures[0].anchor='',c=>c.body+='[one]',c=>c.bodyFigures.reverse(),c=>c.bodyFigures[1].anchor='[one]']){
+  const bad=structuredClone(c);change(bad);assert.throws(()=>validateCaseMaterial(bad,q));assert.throws(()=>validateCaseRun(createCaseRun(bad,{at}),q));
+ }
+});
+
 test('decimal comparison preserves large integers and exact small fractions',()=>{
  for(const [text,value] of [['１，４９０，０００','1490000'],[' +0001490000 ','1490000'],['0.4350','0.435'],['-0.00','0'],['9007199254740993','9007199254740993']])assert.equal(decimalValue(text),value);
  for(const text of ['1,49,000','1e6','149万円','1490000円','0x10','NaN','Infinity','1 490 000','0.','①','−1'])assert.equal(decimalValue(text),null,text);
@@ -38,14 +46,14 @@ test('four true/false fields are one question record with four separately assess
  const p=blankPlan(q);p.phases=[{id:'p',name:'実技',start:'2026-10-24',end:'2026-10-25',examPartIds:['jafp-practical'],focusTopicIds:[],goals:[{examPartId:'jafp-practical',unit:'cases',target:1}]}];validatePlan(p,q);assert.equal(phaseProgress(p,[],q,at,[r])[0].goalProgress[0].actual,1);assert.match(goalsText(p.phases[0].goals,q),/1問/);assert.equal(targetCount({unit:'cases',caseLabel:'問題',countLabel:'問',count:40}),'問題40問');
 });
 test('legal context distinguishes historical source and present verification without inferring currency',()=>{
- const c=fixtureCase();validateLegalContext(c,{required:true});assert.ok(legalContextLines(c).includes('現行法令：未確認'));
+ const c=fixtureCase();validateLegalContext(c,{required:true});assert.deepEqual(legalContextLines(c),['法令基準日：2026-04-01']);
  c.sourceRecord.publishedAt=null;validateLegalContext(c,{required:true});c.sourceRecord.legalAsOf=null;assert.ok(legalContextLines(c).includes('法令基準日：不明'));validateLegalContext(c,{required:true});
  for(const change of [c=>delete c.sourceRecord,c=>c.sourceRecord.legalAsOf='2026-02-30',c=>c.sourceRecord.questionSha256='bad',c=>c.sourceRecord.modifiedFromOriginal=true,c=>c.legalReview.status='current',c=>c.legalReview.checkedAt='2026-10-24']){const v=fixtureCase();change(v);assert.throws(()=>validateLegalContext(v,{required:true}));}
- c.sourceRecord.legalAsOf='2026-04-01';c.legalReview={status:'outdated',checkedAt:'2026-10-24',sourceRefs:['https://example.com/law'],note:'合成テストの差異。'};validateLegalContext(c,{required:true});assert.ok(legalContextLines(c).includes('現行法令との差異あり'));
+ c.sourceRecord.legalAsOf='2026-04-01';c.legalReview={status:'outdated',checkedAt:'2026-10-24',sourceRefs:['https://example.com/law'],note:'合成テストの差異。'};validateLegalContext(c,{required:true});assert.ok(legalContextLines(c).includes('法令改正あり（学習非推奨）'));
 });
 test('numeric snapshot, legal basis and units survive backup, AI and new material versions',()=>{
  const r=filled('1,490,000'),snapshot=structuredClone(r.material);const copy=JSON.parse(JSON.stringify(r));validateCaseRun(copy,q);assert.deepEqual(copy.responses,r.responses);const c=fixtureCase();c.version=2;c.sourceRecord.legalAsOf='2026-10-01';assert.deepEqual(r.material,snapshot);
- const prompt=buildWrittenAIPrompt({question:r.material,attempt:{fieldKey:'q1--amount',response:r.responses['q1--amount']},baseURL:'https://example.com/'});for(const text of ['円','1490000','2026-04-01','現行法令：未確認',sourceRecord.questionSha256])assert.ok(prompt.includes(text),text);assert.ok(!prompt.startsWith('科目B'));
+ const prompt=buildWrittenAIPrompt({question:r.material,attempt:{fieldKey:'q1--amount',response:r.responses['q1--amount']},baseURL:'https://example.com/'});for(const text of ['円','1490000','2026-04-01','最終法令チェック：未実施',sourceRecord.questionSha256])assert.ok(prompt.includes(text),text);assert.ok(!prompt.startsWith('科目B'));
 });
 test('question v2 records keep and validate the immutable legal context',()=>{
  const q0={...JSON.parse(readFileSync(new URL('../data/qualifications/ab730/manifest.json',import.meta.url))).packs[0]};const manifest=JSON.parse(readFileSync(new URL('../data/qualifications/ab730/manifest.json',import.meta.url)));const question=JSON.parse(readFileSync(new URL('../data/qualifications/ab730/'+q0.url,import.meta.url)))[0];question.sourceRecord=structuredClone(sourceRecord);question.legalReview=structuredClone(legalReview);

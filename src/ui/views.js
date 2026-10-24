@@ -12,12 +12,12 @@ import {canStartDiagnostic} from '../domain/qualification-features.js';
 
 // Render from a snapshot of the current context; this module does not save or navigate.
 export function createViews(context) {
- const {state, workspaceViews, base, catalog, PAGE_SIZE, examLabel, question, current, reviewInfo, reviewQuestions, topics, topicPool, latest, previousAttempt, improvement, sessionCount, hasFreshTopicQuestion, materialUpdateAvailable, qualification, readNote} = context;
+ const {studyAllowed=()=>true,state, workspaceViews, base, catalog, PAGE_SIZE, examLabel, question, current, reviewInfo, reviewQuestions, topics, topicPool, latest, previousAttempt, improvement, sessionCount, hasFreshTopicQuestion, materialUpdateAvailable, qualification, readNote} = context;
  const {cardsEnabled,recommendation,entryActions,studyContext,contextLabel,homeFields,nextAction,fieldData,fieldMode,fieldPartId,topicPartId,fieldAction,reviewTopicId,reviewPartId,diagnosis,normalAttempts}=context;
  const explanationCount=base.reduce((n,q)=>n+Number(enriched(question(q.id)||q)),0),mixedExplanations=explanationCount>0&&explanationCount<base.length;
  const mockSizes=[...new Set((qualification.mockSets?.sets||[]).map(s=>s.size))],mockDescription=mockSizes.length===1?`${mockSizes[0]}問 × ${qualification.mockSets.count}回`:`${qualification.mockSets?.count||0}回`;
  const mocksAvailable=Boolean(qualification.mockSets?.count||workspaceViews?.hasMocks);
- const diagnosticsAvailable=canStartDiagnostic(qualification,base)||workspaceViews?.hasDiagnostics;
+ const diagnosticsAvailable=canStartDiagnostic(qualification,base,studyAllowed)||workspaceViews?.hasDiagnostics;
  const activeQuestionIds=new Set(base.map(q=>q.id)),continuedParents=new Set(state.attempts.map(a=>a.continuationOf).filter(Boolean));
  const timeZone=workspaceViews?.timeZone||qualification.timeZone||'Asia/Tokyo',at=now(),todayKey=dateInZone(at,timeZone),completed=state.attempts.filter(a=>complete(a)&&Date.parse(a.completedAt)<=Date.parse(at));
 function badge(a) { return `<span class="badge ${a.status==='correct'?'good':a.status==='incorrect'?'wrong':complete(a)?'help':''}">${labels[a.status]}</span>`; }
@@ -109,7 +109,7 @@ function historyHTML(){if(fieldMode==='mock')return `<div class="page-heading"><
 
 function catalogMatches() {
   const words=catalog.query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-  return base.filter(q=>(!catalog.year||String(q.year)===catalog.year)&&(!catalog.season||q.season===catalog.season)&&(!catalog.topic||q.topic===catalog.topic)&&(!catalog.enriched||enriched(question(q.id)))&&words.every(w=>`${q.title} ${q.topic} ${q.concept || ''} ${q.searchText || q.stem} ${q.year} ${q.number}`.toLocaleLowerCase().includes(w)));
+  return base.filter(q=>studyAllowed(q)&&(!catalog.year||String(q.year)===catalog.year)&&(!catalog.season||q.season===catalog.season)&&(!catalog.topic||q.topic===catalog.topic)&&(!catalog.enriched||enriched(question(q.id)))&&words.every(w=>`${q.title} ${q.topic} ${q.concept || ''} ${q.searchText || q.stem} ${q.year} ${q.number}`.toLocaleLowerCase().includes(w)));
 }
 function catalogRowsHTML() {
   const matches=catalogMatches(),pages=Math.max(1,Math.ceil(matches.length/PAGE_SIZE));catalog.page=Math.min(catalog.page,pages);
