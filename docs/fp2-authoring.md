@@ -44,7 +44,7 @@ delivery/
 
 ## 学科
 
-解説の役割（`summary`＝何を問うか／`explanation`＝どう判断するか／`takeaway`＝覚えるべきこと）と、`**重要部分**` による限定的な太字強調は、**FP2固有ではなく全資格共通**の [解説表示仕様（提案）](explanation-presentation-spec.md)・[教材記述ルール（提案）](explanation-authoring-rules.md) に従う。現時点では仕様提案であり、既存問題の強調と表示実装は別PRで行う。
+解説の役割（`summary`＝何を問うか／`explanation`＝なぜその答えになるか／`takeaway`＝類題で使える知識）と、`**重要部分**` による限定的な太字強調は、**FP2固有ではなく全資格共通**の [解説表示仕様（提案）](explanation-presentation-spec.md)・[教材記述ルール（提案）](explanation-authoring-rules.md) に従う。`summary`・`takeaway` は任意とし、短い解説で足りる問題を引き延ばさない。現時点では仕様提案であり、表示実装と教材改稿は別PRで行う。草稿の作成は先行できるが、強調付き教材の公開は共通表示対応の公開・確認後とする。
 
 [`question-format.v1.json`](../schemas/question-format.v1.json) と [共通教材契約](content-authoring.md) に従う。
 
