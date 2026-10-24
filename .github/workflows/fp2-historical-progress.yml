@@ -42,8 +42,13 @@ jobs:
               if i>=len(official): continue
               assert q['correctChoiceId']==official[i], q['id']
               assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified'
-              assert len(q['choiceReasons'])==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
-              assert len(q.get('explanation',''))>200,q['id']
+              # Completeness and consistency, NOT character count. Clarity must be reviewed by a person.
+              assert all(isinstance(q.get(k),str) and q[k].strip() for k in ('summary','explanation','takeaway')),q['id']
+              assert len(q['choiceReasons'])==4 and all(isinstance(r,str) and r.strip() for r in q['choiceReasons']),q['id']
+              assert q['summary'].strip()!=q['takeaway'].strip(),q['id']
+              assert all(r.strip()!=q['explanation'].strip() for r in q['choiceReasons']),q['id']
+              assert any('**' in q[k] for k in ('summary','explanation','takeaway')),q['id']
+              assert all(v.count('**')%2==0 for v in [q['summary'],q['explanation'],q['takeaway'],*q['choiceReasons']]),q['id']
               assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
               assert all(h['title'] and h['text'] and h['revealsAnswer'] is False for h in q['hints']),q['id']
               assert len(q.get('sourceRefs',[]))>=2 and all(s.startswith('https://') for s in q['sourceRefs']),q['id']
@@ -79,7 +84,7 @@ jobs:
           assert '相続放棄' in qs[57]['choiceReasons'][3]
           assert '株主総会' in qs[58]['choiceReasons'][1]
           assert '2027年3月31日' in qs[59]['explanation']
-          print('PASS: 60 official draft questions; Q01-Q60 have 60 detailed explanations, 240 choice-specific reasons, 120 hints. Independent reviewer not claimed.')
+          print('PASS: 60 official draft questions; Q01-Q60 have explanations, choice-specific reasons, non-revealing hints, and learning-point emphasis. Independent reviewer not claimed.')
           PY
 
       - name: Verify September 2024 academic first twenty explanations and hints
@@ -101,10 +106,15 @@ jobs:
               assert q['correctChoiceId']==official[i],q['id']
               assert q['sourceRecord']['legalAsOf']=='2024-04-01',q['id']
               assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified',q['id']
-              assert len(q.get('explanation',''))>250,q['id']
-              assert len(q.get('choiceReasons',[]))==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
+              # Do not reward verbosity; check presence of each learning-role, then independent reviewer checks meaning.
+              assert all(isinstance(q.get(k),str) and q[k].strip() for k in ('summary','explanation','takeaway')),q['id']
+              assert len(q.get('choiceReasons',[]))==4 and all(isinstance(r,str) and r.strip() for r in q['choiceReasons']),q['id']
+              assert q['summary'].strip()!=q['takeaway'].strip(),q['id']
+              assert all(r.strip()!=q['explanation'].strip() for r in q['choiceReasons']),q['id']
+              assert any('**' in q[k] for k in ('summary','explanation','takeaway')),q['id']
+              assert all(v.count('**')%2==0 for v in [q['summary'],q['explanation'],q['takeaway'],*q['choiceReasons']]),q['id']
               assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
-              assert all(h['title'] and len(h['text'])>30 and h['revealsAnswer'] is False for h in q['hints']),q['id']
+              assert all(h['title'] and h['text'].strip() and h['revealsAnswer'] is False for h in q['hints']),q['id']
               assert len(q.get('sourceRefs',[]))>=2 and all(ref.startswith('https://') for ref in q['sourceRefs']),q['id']
               assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
           # Key 2024-specific public-rule checks.
@@ -127,5 +137,5 @@ jobs:
           assert '圧縮記帳' in qs[17]['choiceReasons'][3]
           assert '療養を受けた時点' in qs[18]['choiceReasons'][3]
           assert '団体就業不能保障保険' in qs[19]['choiceReasons'][1]
-          print('PASS: 60 official Sep 2024 draft questions; Q01-Q20 have 20 explanations, 80 choice reasons, 40 non-revealing hints; review remains unverified.')
+          print('PASS: 60 official Sep 2024 draft questions; Q01-Q20 have explanations, option-specific reasons, staged non-revealing hints and learning-point emphasis; review remains unverified.')
           PY
