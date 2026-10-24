@@ -1,0 +1,27 @@
+name: FP2 source extraction (draft only)
+on:
+  push:
+    branches: [draft/fp2-202605-objective-authoring-01]
+    paths: [.github/workflows/fp2-source-extract.yml]
+permissions:
+  contents: read
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and validate original PDF
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          curl --fail --location --retry 3 --max-time 90 --output output/g2_202605_qa.pdf https://www.jafp.or.jp/exam/mohan/files/g2_202605_qa.pdf
+          test "$(head -c 5 output/g2_202605_qa.pdf)" = '%PDF-'
+          echo '525d190bb489b4187d39d6782eac999fc4b14bfdd1f489842b96685465b804ef  output/g2_202605_qa.pdf' | sha256sum -c
+          pdftotext -layout output/g2_202605_qa.pdf output/202605-layout.txt
+          pdftotext -raw output/g2_202605_qa.pdf output/202605-raw.txt
+          sha256sum output/g2_202605_qa.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fp2-202605-official-pdf-and-text
+          path: output/
+          retention-days: 30
