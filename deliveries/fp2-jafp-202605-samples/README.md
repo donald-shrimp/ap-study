@@ -20,12 +20,12 @@
 - 公式模範解答：https://www.jafp.or.jp/exam/mohan/files/j2_202605_a.pdf
   - SHA-256：`9c3508ba491a84ce97b96157942d63f865084ef2b098359fb425f68728334abd`
 - GitHub Actionsによるダウンロードと検証：[実行ログ](https://github.com/donald-shrimp/ap-study/actions/runs/40086059591)。公式PDFの原本バイト列は同RunのArtifactに保存。
-- **問題PDFと公式模範解答PDFを、このブランチの `delivery/sources/fp2/` に格納済み**。各PDFのSHA-256は上記実測値に一致します。完全な原本を含むZIPもチャット納品物として作成済み。
+- **問題PDFと公式模範解答PDFを、このブランチの `deliveries/fp2-jafp-202605-samples/sources/fp2/` に格納済み**。各PDFのSHA-256は上記実測値に一致します。完全な原本を含むZIPもチャット納品物として作成済み。
 
 `publishedAt`・`legalAsOf`は資料で厳密な日付を確認できていないためnull。現行法令の確認は `unverified` です。
 
 ## 検査
-作成者のローカル検証：`python tools/check-fp2-delivery.py <delivery>` → `{questions:0,cases:4,fields:8,mode:'draft structure only; not approved'}`。チェックは原本PDF2件を同梱したローカル納品ディレクトリで実行したものであり、上記のPDF欠落状態のGitツリーで同じ検証が通ると主張するものではありません。
+原本を含むフォルダに対する作成者の検証：`python tools/check-fp2-delivery.py deliveries/fp2-jafp-202605-samples` → `{questions:0,cases:4,fields:8,mode:'draft structure only; not approved'}`。チェックは原本PDF2件を同梱したローカル納品ディレクトリで実行したものであり、GitHub上の実ファイルを用いた検証も成功しています（https://github.com/donald-shrimp/ap-study/actions/runs/40087394708）。
 
 ## 実施していないこと
 - 独立レビュー、`reviewed`昇格、正式な法令の現行確認
