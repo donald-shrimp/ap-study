@@ -22,6 +22,19 @@ jobs:
       - name: Generate and validate exam drafts in chronological batches
         run: |
           python tools/build-fp2-historical-drafts.py
+      - name: Export text datasets for Git tree staging
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64
+          from pathlib import Path
+          for era in ('202501','202409','202405'):
+              root=Path('deliveries')/f'fp2-jafp-{era}-draft/content/fp2'
+              for name in ('questions.json','practical-cases.json','source-files.json'):
+                  blob=base64.b64encode((root/name).read_bytes()).decode('ascii')
+                  for i in range(0,len(blob),4096):
+                      print(f'FP2EXPORT::{era}::{name}::{i//4096}::{blob[i:i+4096]}',flush=True)
+          PY
       - name: Upload validated 2025-01 draft
         uses: actions/upload-artifact@v4
         with:
