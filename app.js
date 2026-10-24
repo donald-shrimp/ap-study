@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261024-fp2-objective';
+import './src/app.js?v=20261025-answer-emphasis';
