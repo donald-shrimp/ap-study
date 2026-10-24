@@ -1,0 +1,118 @@
+name: FP2 historical authoring progress checks
+on:
+  push:
+    branches: [draft/fp2-202501-202409-202405-source]
+    paths:
+      - 'work/fp2/historical/**/questions.json'
+      - '.github/workflows/fp2-historical-progress.yml'
+  pull_request:
+    paths:
+      - 'work/fp2/historical/**/questions.json'
+      - '.github/workflows/fp2-historical-progress.yml'
+permissions:
+  contents: read
+jobs:
+  author-draft-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all sixty January 2025 authored explanations and hints
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('work/fp2/historical/202501/questions.json')
+          qs=json.loads(p.read_text(encoding='utf-8'))
+          assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
+          official=['option-1','option-4','option-1','option-2','option-3',
+                    'option-1','option-3','option-2','option-4','option-3',
+                    'option-3','option-2','option-3','option-4','option-4',
+                    'option-3','option-1','option-3','option-3','option-3',
+                    'option-3','option-2','option-4','option-4','option-3',
+                    'option-3','option-4','option-1','option-3','option-2',
+                    'option-4','option-2','option-2','option-4','option-2',
+                    'option-2','option-2','option-2','option-1','option-1',
+                    'option-3','option-3','option-1','option-3','option-3',
+                    'option-3','option-2','option-4','option-1','option-4',
+                    'option-2','option-4','option-1','option-1','option-2',
+                    'option-2','option-1','option-4','option-2','option-3']
+          for i,q in enumerate(qs):
+              assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
+              assert len(q['choices'])==4
+              if i>=len(official): continue
+              assert q['correctChoiceId']==official[i], q['id']
+              assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified'
+              assert len(q['choiceReasons'])==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
+              assert len(q.get('explanation',''))>200,q['id']
+              assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
+              assert all(h['title'] and h['text'] and h['revealsAnswer'] is False for h in q['hints']),q['id']
+              assert len(q.get('sourceRefs',[]))>=2 and all(s.startswith('https://') for s in q['sourceRefs']),q['id']
+              assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
+          # Numerical bond-yield formulas, reconstructed from the original PDF.
+          bond=qs[22]
+          assert '0.1÷101.20×100' in bond['choices'][1]['text']
+          assert '（102.00－101.20）÷5' in bond['choices'][2]['text']
+          assert '（102.00－100.00）÷5' in bond['choices'][3]['text']
+          assert '（100－102）÷5' in bond['explanation']
+          assert bond['correctChoiceId']=='option-4'
+          # Four ratios recomputed independently from original question table.
+          x={'price':2500,'profit':210,'equity':6000,'dividends':120,'shares':4}
+          y={'price':1300,'profit':190,'equity':2800,'dividends':70,'shares':3}
+          roe=lambda z: z['profit']/z['equity']
+          per=lambda z: z['price']/(z['profit']/z['shares'])
+          pbr=lambda z: z['price']/(z['equity']/z['shares'])
+          payout=lambda z: z['dividends']/z['profit']
+          assert roe(x)<roe(y) and per(x)>per(y) and pbr(x)>pbr(y) and payout(x)>payout(y)
+          assert qs[25]['correctChoiceId']=='option-3' and '6,000億円' in qs[25]['stem']
+          # Real estate source-rule consistency checks added in the two batches.
+          assert '表題登記' in qs[40]['explanation'] and '所有権保存登記' in qs[40]['explanation']
+          assert '区分所有者' in qs[46]['choiceReasons'][1]
+          assert '5％' in qs[48]['explanation'] and '15.315％' in qs[48]['explanation']
+          assert '建設資金' in qs[49]['choiceReasons'][3]
+          # Final inheritance/tax batch: reviewable 2024-law basis and defined exceptions.
+          assert '契約' in qs[50]['explanation'] and '遺贈' in qs[50]['explanation']
+          assert '相続税評価額' in qs[51]['choiceReasons'][1] and '時価' in qs[51]['choiceReasons'][1]
+          assert '2024年1月1日' in qs[52]['explanation'] and '110万円' in qs[52]['explanation']
+          assert '分割見込書' in qs[54]['choiceReasons'][1]
+          assert '10％' in qs[55]['choiceReasons'][0]
+          assert '相続時精算課税' in qs[56]['choiceReasons'][0]
+          assert '相続放棄' in qs[57]['choiceReasons'][3]
+          assert '株主総会' in qs[58]['choiceReasons'][1]
+          assert '2027年3月31日' in qs[59]['explanation']
+          print('PASS: 60 official draft questions; Q01-Q60 have 60 detailed explanations, 240 choice-specific reasons, 120 hints. Independent reviewer not claimed.')
+          PY
+
+      - name: Verify September 2024 academic first ten explanations and hints
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('work/fp2/historical/202409/questions.json')
+          qs=json.loads(p.read_text(encoding='utf-8'))
+          assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
+          official=['option-4','option-2','option-2','option-4','option-2',
+                    'option-3','option-1','option-3','option-4','option-2']
+          for i,q in enumerate(qs):
+              assert q['id']==f'fp2-202409-objective-q{i+1:02d}'
+              assert len(q['choices'])==4
+              if i>=10: continue
+              assert q['correctChoiceId']==official[i],q['id']
+              assert q['sourceRecord']['legalAsOf']=='2024-04-01',q['id']
+              assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified',q['id']
+              assert len(q.get('explanation',''))>250,q['id']
+              assert len(q.get('choiceReasons',[]))==4 and all(len(r)>40 for r in q['choiceReasons']),q['id']
+              assert len(q.get('hints',[]))==2 and q['hintStatus']=='individual',q['id']
+              assert all(h['title'] and len(h['text'])>30 and h['revealsAnswer'] is False for h in q['hints']),q['id']
+              assert len(q.get('sourceRefs',[]))>=2 and all(ref.startswith('https://') for ref in q['sourceRefs']),q['id']
+              assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
+          # Key 2024-specific public-rule checks.
+          assert '著作権法32条2項' in qs[0]['explanation']
+          assert '1年以上' in qs[2]['explanation'] and '75歳' in qs[2]['explanation']
+          assert '第1～7級' in qs[3]['explanation'] and '第8～14級' in qs[3]['explanation']
+          assert '2回まで分割' in qs[4]['explanation']
+          assert '受給権' in qs[6]['choiceReasons'][0]
+          assert '12か月未満' in qs[7]['explanation']
+          assert '期間短縮型' in qs[8]['choiceReasons'][3]
+          assert '即時' in qs[9]['choiceReasons'][1]
+          print('PASS: 60 official Sep 2024 draft questions; Q01-Q10 have 10 explanations, 40 choice reasons, 20 non-revealing hints; review remains unverified.')
+          PY
