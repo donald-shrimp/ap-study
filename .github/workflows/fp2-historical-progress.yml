@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first twenty-five authored explanations and hints
+      - name: Verify January first thirty authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -28,7 +28,8 @@ jobs:
                     'option-1','option-3','option-2','option-4','option-3',
                     'option-3','option-2','option-3','option-4','option-4',
                     'option-3','option-1','option-3','option-3','option-3',
-                    'option-3','option-2','option-4','option-4','option-3']
+                    'option-3','option-2','option-4','option-4','option-3',
+                    'option-3','option-4','option-1','option-3','option-2']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -48,5 +49,14 @@ jobs:
           assert '（102.00－100.00）÷5' in bond['choices'][3]['text']
           assert '（100－102）÷5' in bond['explanation']
           assert bond['correctChoiceId']=='option-4'
-          print('PASS: 60 official draft questions; Q01-Q25 have 25 detailed explanations, 100 choice-specific reasons, 50 hints. Independent reviewer not claimed.')
+          # Four ratios recomputed independently from original question table.
+          x={'price':2500,'profit':210,'equity':6000,'dividends':120,'shares':4}
+          y={'price':1300,'profit':190,'equity':2800,'dividends':70,'shares':3}
+          roe=lambda z: z['profit']/z['equity']
+          per=lambda z: z['price']/(z['profit']/z['shares'])
+          pbr=lambda z: z['price']/(z['equity']/z['shares'])
+          payout=lambda z: z['dividends']/z['profit']
+          assert roe(x)<roe(y) and per(x)>per(y) and pbr(x)>pbr(y) and payout(x)>payout(y)
+          assert qs[25]['correctChoiceId']=='option-3' and '6,000億円' in qs[25]['stem']
+          print('PASS: 60 official draft questions; Q01-Q30 have 30 detailed explanations, 120 choice-specific reasons, 60 hints. Independent reviewer not claimed.')
           PY
