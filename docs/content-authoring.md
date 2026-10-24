@@ -248,3 +248,5 @@ AB-730は4つの学習分野、単一157／複数17。分野均等の30問診断
 ## FP2級の受け入れ基盤（2026-10-24）
 
 [外注仕様](fp2-authoring.md)。`content/fp2/` は実教材0件の非公開枠。共通のcasesは複数科目の教材・履歴・中断を科目IDで分離し、資格全体の計画・同期・バックアップを共有する。数値欄は`numeric`／`exactDecimal`で、単位と桁・丸め指示を保存し、十進文字列の値を照合する。未対応表記は自己評価へ。`sourceRecord`（原本の時点・PDFハッシュ）と`legalReview`（現行法令の確認）を分離し、開始時の情報を保存・AI Exportに保持する。確認台帳は原本の実SHAとも照合する。公開教材のない科目はmanifest上のpracticeAvailableをfalseにし、入口・計画目標を追加しない。casesだけの資格も生成できる。
+
+教材の全件確認を必須にする資格は`requiresReviewedContent: true`を設定する。通常問題・受験専用問題とも`enrichment: reviewed`と独立確認台帳が必要で、状態省略や`topic-guide`への変更では公開できない。FP2級はこの設定を有効にしている。大問の図のanchorは空でなく本文中で一意であり、`bodyFigures`は本文での出現順とする。受け入れ・公開・記録読込で不一致を拒否する。

@@ -12,6 +12,8 @@ def check(root,reviewed=False):
     builder.require(isinstance(raw,list) and isinstance(cases,list) and isinstance(sources,dict),'Arrays and source-file map required')
     builder.require(len({q['id'] for q in raw})==len(raw) and len({c['id'] for c in cases})==len(cases),'Duplicate material IDs')
     normal=copy.deepcopy(raw);draft_cases=copy.deepcopy(cases)
+    if reviewed:
+        builder.require(all(q.get('enrichment')=='reviewed' for q in raw),'Reviewed delivery requires reviewed questions and independent evidence for every question')
     if not reviewed:
         for q in normal:
             builder.require(q.get('enrichment')=='draft','Draft questions must have enrichment=draft');q['enrichment']='reviewed'

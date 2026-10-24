@@ -61,7 +61,7 @@ delivery/
 - ○×・4択・語群は`singleChoice`欄。`choices`は`{id,label,text}`。`referenceAnswers`は正答の表示labelを1つ入れる。`grading:{"method":"exactText"}`。選択肢の図はラベルと対応させて`bodyFigures`に含める。
 - 短答は`shortText`、自由記述は`freeText`。字数制限を`maxLength`へ。自由記述は`grading:{"method":"self"}`。短答の登録例以外は自己評価へ回る。
 - 各欄に`explanation`と`rubric`を用意する。他の欄の解説を流用せず、その回答の根拠を説明する。
-- 必須の図・表は `bodyFigures:[{image,anchor,alt,caption}]`。`body`の該当箇所に一意のanchor文字列を置く。原本ページは`sourceImages`へ置けるが学習に必須ではない。
+- 必須の図・表は `bodyFigures:[{image,anchor,alt,caption}]`。`body`の該当箇所に一意のanchor文字列を置き、`bodyFigures`を本文に現れる順に並べる。空・未配置・重複・順序不一致は草稿の検証でも拒否する。原本ページは`sourceImages`へ置けるが学習に必須ではない。
 
 ### 数値欄
 
@@ -124,7 +124,7 @@ python tools/check-fp2-delivery.py /path/to/delivery
 
 作者とは別担当が、原本・公式解答から全本文・全図表・全選択肢・全欄・数値計算・解説・基準日を確認する。修正後の版とハッシュへ再確認記録を付ける。学科レビューは共通契約、実技は既存caseレビューと同じ形式。両方とも`sourceHashes`に使った原本・解答のリポジトリ相対パスと完全SHA256を保存する。原本に`sourceRecord`の両SHAが含まれることを機械照合する。
 
-独立確認後に、学科を`enrichment: "reviewed"`、実技を`status: "reviewed"`へ変更し、実際の別担当による確認台帳を添えて検証する。
+独立確認後に、学科を`enrichment: "reviewed"`、実技を`status: "reviewed"`へ変更し、実際の別担当による確認台帳を添えて検証する。`--reviewed`は全問題の確認状態と台帳を照合し、`topic-guide`や状態省略によるレビューの省略を認めない。FP2級の設定では`requiresReviewedContent: true`を指定し、公開ビルドでも未レビュー問題を拒否する。
 
 ```sh
 python tools/check-fp2-delivery.py /path/to/delivery --reviewed

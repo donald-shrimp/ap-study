@@ -135,6 +135,7 @@ def normalize(raw, config, ordinal=1):
 def validate_questions(questions, config, root, diagnostic=False, related_ids=None):
     ids = set()
     for q in questions:
+        require(not config.get('requiresReviewedContent',False) or q.get('enrichment')=='reviewed', f"Unreviewed content cannot be published: {q['id']}")
         require(SAFE_ID.fullmatch(q['id']) and q['id'] not in ids, f"Duplicate/invalid question ID: {q['id']}")
         ids.add(q['id'])
         uses = question_uses(q)
@@ -355,6 +356,7 @@ def compile_qualification(root, id):
     require(config['defaultExamPartId'] in {p['id'] for p in config['examParts']}, 'Invalid default exam part')
     require(all(all(isinstance(p[k],str) and 0<len(p[k])<=20 for k in ['caseLabel','countLabel'] if k in p) for p in config['examParts']), 'Invalid case unit label')
     require(type(config.get('requiresLegalContext',False)) is bool,'Invalid legal context setting')
+    require(type(config.get('requiresReviewedContent',False)) is bool,'Invalid reviewed content setting')
     require(config['id'] == id, 'Qualification ID mismatch')
     require(len({t['id'] for t in config['topics']}) == len(config['topics']), 'Duplicate topic ID')
     require(all(SAFE_ID.fullmatch(t['id']) and isinstance(t['name'], str) and t['name'] for t in config['topics']), 'Invalid topic')

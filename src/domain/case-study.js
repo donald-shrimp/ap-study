@@ -49,11 +49,21 @@ export function caseResult(run){
  const slots=caseFields(run.material),values=Object.values(run.evaluations),automatic=values.filter(e=>e.source==='automatic'),self=values.filter(e=>e.source==='self');
  return {total:slots.length,submitted:slots.filter(x=>run.responses[x.key]?.submittedAt).length,evaluated:automatic.length+self.length,automatic:{count:automatic.length,correct:automatic.filter(e=>e.outcome==='correct').length},self:Object.fromEntries(Object.keys(SELF_OUTCOMES).map(k=>[k,self.filter(e=>e.outcome===k).length]))};
 }
+export function validateCaseFigures(material){
+ let cursor=0;
+ for(const figure of material.bodyFigures){
+  const anchor=figure.anchor;
+  if(typeof anchor!=='string'||!anchor.trim()||anchor.length>500)throw Error('図の挿入位置を確認できません。');
+  const position=material.body.indexOf(anchor,cursor);
+  if(position<0||material.body.indexOf(anchor)!==material.body.lastIndexOf(anchor))throw Error('本文と図の挿入位置・順序が一致しません。');
+  cursor=position+anchor.length;
+ }
+}
 export function validateCaseMaterial(c,q){
  const fail=()=>{throw Error('大問教材の形式を確認できません。');},safeId=v=>typeof v==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(v),text=(v,max=20000)=>typeof v==='string'&&v.length<=max,asset=v=>text(v,500)&&/^assets\/written\/[a-zA-Z0-9_/-]+\.png$/.test(v)&&!v.split('/').includes('..');
  if(!c||!safeId(c.id)||c.qualificationId!==q.id||!q.examParts.some(p=>p.id===c.examPartId&&p.unit==='cases')||!Number.isInteger(c.version)||c.version<1||c.status!=='reviewed'||!text(c.title,200)||!text(c.body,200000)||!Array.isArray(c.sourceImages)||c.sourceImages.length>30||!c.sourceImages.every(asset)||!Array.isArray(c.bodyFigures)||c.bodyFigures.length>30||c.bodyFigures.some(f=>!asset(f.image)||!text(f.anchor,500)||!text(f.alt,1000)||!text(f.caption,1000))||!Array.isArray(c.items)||!c.items.length||c.items.length>30||new Set(c.items.map(i=>i.id)).size!==c.items.length)fail();
  for(const i of c.items){if(!safeId(i.id)||!text(i.prompt)||!text(i.label,100)||!Array.isArray(i.fields)||!i.fields.length||i.fields.length>20||new Set(i.fields.map(f=>f.id)).size!==i.fields.length)fail();for(const f of i.fields){if(!safeId(f.id)||!text(f.label,100)||!['singleChoice','shortText','freeText','numeric'].includes(f.type)||!Array.isArray(f.referenceAnswers)||!f.referenceAnswers.length||f.referenceAnswers.length>20||!f.referenceAnswers.every(a=>text(a,2000))||!text(f.explanation)||!Array.isArray(f.rubric)||f.rubric.length>20||!f.rubric.every(v=>text(v,2000))||!['exactText','self','exactDecimal'].includes(f.grading?.method)||f.type!=='numeric'&&f.grading.method==='exactDecimal'||f.type==='freeText'&&f.grading.method!=='self')fail();if(f.type==='numeric'){if(!validNumericField(f))fail();}else if(f.type==='singleChoice'){if(!Array.isArray(f.choices)||f.choices.length<2||f.choices.length>20||new Set(f.choices.map(a=>a.id)).size!==f.choices.length||f.choices.some(a=>!safeId(a.id)||!text(a.label,50)||!text(a.text))||f.referenceAnswers.length!==1||!f.choices.some(a=>a.label===f.referenceAnswers[0])||f.grading.method!=='exactText')fail();}else if(!Number.isInteger(f.maxLength)||f.maxLength<1||f.maxLength>2000||f.referenceAnswers.some(a=>[...a].length>f.maxLength))fail();}}
- validateLegalContext(c,{required:q.requiresLegalContext===true});return c;
+ validateCaseFigures(c);validateLegalContext(c,{required:q.requiresLegalContext===true});return c;
 }
 export function validateCaseRun(run,qualification){
  const fail=()=>{throw Error('大問の学習記録を確認できません。');},allowed=['format','version','kind','id','qualificationId','examPartId','caseId','caseVersion','material','mode','responses','evaluations','assistance','progress','startedAt','updatedAt','completedAt'];
