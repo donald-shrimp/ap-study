@@ -82,7 +82,7 @@ jobs:
           print('PASS: 60 official draft questions; Q01-Q60 have 60 detailed explanations, 240 choice-specific reasons, 120 hints. Independent reviewer not claimed.')
           PY
 
-      - name: Verify September 2024 academic first ten explanations and hints
+      - name: Verify September 2024 academic first twenty explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -91,11 +91,13 @@ jobs:
           qs=json.loads(p.read_text(encoding='utf-8'))
           assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
           official=['option-4','option-2','option-2','option-4','option-2',
-                    'option-3','option-1','option-3','option-4','option-2']
+                    'option-3','option-1','option-3','option-4','option-2',
+                    'option-3','option-3','option-1','option-3','option-1',
+                    'option-2','option-2','option-2','option-4','option-2']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202409-objective-q{i+1:02d}'
               assert len(q['choices'])==4
-              if i>=10: continue
+              if i>=20: continue
               assert q['correctChoiceId']==official[i],q['id']
               assert q['sourceRecord']['legalAsOf']=='2024-04-01',q['id']
               assert q['enrichment']=='draft' and q['legalReview']['status']=='unverified',q['id']
@@ -114,5 +116,16 @@ jobs:
           assert '12か月未満' in qs[7]['explanation']
           assert '期間短縮型' in qs[8]['choiceReasons'][3]
           assert '即時' in qs[9]['choiceReasons'][1]
-          print('PASS: 60 official Sep 2024 draft questions; Q01-Q10 have 10 explanations, 40 choice reasons, 20 non-revealing hints; review remains unverified.')
+          # Key insurance and corporate-accounting requirements for Q11-Q20.
+          assert '1,000万円' in qs[10]['explanation'] and '控除' in qs[10]['explanation']
+          assert '契約者配当準備金' in qs[11]['choiceReasons'][2]
+          assert '基本保険金額' in qs[12]['choiceReasons'][1]
+          assert '一時所得' in qs[13]['choiceReasons'][2]
+          assert '40万円' in qs[14]['choiceReasons'][3]
+          assert '給付・反対給付均等の原則' in qs[15]['choiceReasons'][2]
+          assert '地震' in qs[16]['choiceReasons'][1]
+          assert '圧縮記帳' in qs[17]['choiceReasons'][3]
+          assert '療養を受けた時点' in qs[18]['choiceReasons'][3]
+          assert '団体就業不能保障保険' in qs[19]['choiceReasons'][1]
+          print('PASS: 60 official Sep 2024 draft questions; Q01-Q20 have 20 explanations, 80 choice reasons, 40 non-revealing hints; review remains unverified.')
           PY
