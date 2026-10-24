@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first fifteen authored explanations and hints
+      - name: Verify January first twenty authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -26,7 +26,8 @@ jobs:
           assert len(qs)==60, f'Expected 60 questions, got {len(qs)}'
           official=['option-1','option-4','option-1','option-2','option-3',
                     'option-1','option-3','option-2','option-4','option-3',
-                    'option-3','option-2','option-3','option-4','option-4']
+                    'option-3','option-2','option-3','option-4','option-4',
+                    'option-3','option-1','option-3','option-3','option-3']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -39,5 +40,5 @@ jobs:
               assert all(h['title'] and h['text'] and h['revealsAnswer'] is False for h in q['hints']),q['id']
               assert len(q.get('sourceRefs',[]))>=2 and all(s.startswith('https://') for s in q['sourceRefs']),q['id']
               assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
-          print('PASS: 60 official draft questions; Q01-Q15 have 15 detailed explanations, 60 choice-specific reasons, 30 hints. Independent reviewer not claimed.')
+          print('PASS: 60 official draft questions; Q01-Q20 have 20 detailed explanations, 80 choice-specific reasons, 40 hints. Independent reviewer not claimed.')
           PY
