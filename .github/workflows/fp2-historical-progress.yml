@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first twenty authored explanations and hints
+      - name: Verify January first twenty-five authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -27,7 +27,8 @@ jobs:
           official=['option-1','option-4','option-1','option-2','option-3',
                     'option-1','option-3','option-2','option-4','option-3',
                     'option-3','option-2','option-3','option-4','option-4',
-                    'option-3','option-1','option-3','option-3','option-3']
+                    'option-3','option-1','option-3','option-3','option-3',
+                    'option-3','option-2','option-4','option-4','option-3']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -40,5 +41,12 @@ jobs:
               assert all(h['title'] and h['text'] and h['revealsAnswer'] is False for h in q['hints']),q['id']
               assert len(q.get('sourceRefs',[]))>=2 and all(s.startswith('https://') for s in q['sourceRefs']),q['id']
               assert '法令・計算根拠は独立レビューで検証する' not in q['explanation'],q['id']
-          print('PASS: 60 official draft questions; Q01-Q20 have 20 detailed explanations, 80 choice-specific reasons, 40 hints. Independent reviewer not claimed.')
+          # Numerical bond-yield formulas, reconstructed from the original PDF.
+          bond=qs[22]
+          assert '0.1÷101.20×100' in bond['choices'][1]['text']
+          assert '（102.00－101.20）÷5' in bond['choices'][2]['text']
+          assert '（102.00－100.00）÷5' in bond['choices'][3]['text']
+          assert '（100－102）÷5' in bond['explanation']
+          assert bond['correctChoiceId']=='option-4'
+          print('PASS: 60 official draft questions; Q01-Q25 have 25 detailed explanations, 100 choice-specific reasons, 50 hints. Independent reviewer not claimed.')
           PY
