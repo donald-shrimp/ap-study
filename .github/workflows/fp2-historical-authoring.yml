@@ -1,0 +1,42 @@
+name: FP2 historical draft authoring and validation
+on:
+  push:
+    branches: [draft/fp2-202501-202409-202405-source]
+    paths:
+      - tools/build-fp2-historical-drafts.py
+      - .github/workflows/fp2-historical-authoring.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          python -m pip install --quiet pymupdf
+      - name: Generate and validate exam drafts in chronological batches
+        run: |
+          python tools/build-fp2-historical-drafts.py
+      - name: Upload validated 2025-01 draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: fp2-202501-draft-delivery
+          path: deliveries/fp2-jafp-202501-draft/
+          retention-days: 30
+      - name: Upload validated 2024-09 draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: fp2-202409-draft-delivery
+          path: deliveries/fp2-jafp-202409-draft/
+          retention-days: 30
+      - name: Upload validated 2024-05 draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: fp2-202405-draft-delivery
+          path: deliveries/fp2-jafp-202405-draft/
+          retention-days: 30
