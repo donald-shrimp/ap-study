@@ -139,3 +139,7 @@ jobs:
           assert '団体就業不能保障保険' in qs[19]['choiceReasons'][1]
           print('PASS: 60 official Sep 2024 draft questions; Q01-Q20 have explanations, option-specific reasons, staged non-revealing hints and learning-point emphasis; review remains unverified.')
           PY
+
+      - name: Validate authored explanation emphasis rendering
+        run: |
+          node --test tests/answer-format.mjs
