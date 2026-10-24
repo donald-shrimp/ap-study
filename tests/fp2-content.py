@@ -1,5 +1,5 @@
-"""Published FP objective corpus plus isolated draft/evidence/case-only contracts."""
-import copy,importlib.util,json,subprocess,tempfile
+"""Published FP60/40 corpus plus isolated draft/evidence/case-only contracts."""
+import copy,hashlib,importlib.util,json,subprocess,tempfile
 from pathlib import Path
 from fp2_fixtures import prepare,builder,write,ROOT
 from material_contracts import decimal_value,validate_numeric,validate_legal
@@ -7,8 +7,18 @@ spec=importlib.util.spec_from_file_location('delivery_check',ROOT/'tools/check-f
 assert 'fp2' in json.loads((ROOT/'content/qualifications.json').read_text())['qualifications']
 catalog=json.loads((ROOT/'data/qualifications/catalog.json').read_text())['qualifications']
 published=next(q for q in catalog if q['id']=='fp2');assert published['count']==60
-assert published['studyTargets']==[{'examPartId':'objective','label':'学科','unit':'questionAttempts','count':60}]
-assert delivery.check(ROOT,True)=={'questions':60,'cases':0,'fields':0,'mode':'reviewed evidence'}
+assert published['studyTargets']==[{'examPartId':'objective','label':'学科','unit':'questionAttempts','count':60},{'examPartId':'jafp-practical','label':'実技（日本FP協会）','unit':'cases','count':40,'caseLabel':'問題','countLabel':'問'}]
+assert delivery.check(ROOT,True)=={'questions':60,'cases':40,'fields':68,'mode':'reviewed evidence'}
+practical=ROOT/'deliveries/fp2-jafp-202605-samples'
+accepted=json.loads((practical/'content/fp2/practical-cases.json').read_text())
+registered=json.loads((ROOT/'content/fp2/practical-cases.json').read_text())
+evidence={r['caseId']:r for r in json.loads((practical/'review/pr36-review-evidence.json').read_text())['cases']}
+assert len(accepted)==len(registered)==len(evidence)==40
+for c,d in zip(registered,accepted):
+ assert c=={**d,'status':'reviewed'} and builder.diagnostic_digest(d)==evidence[c['id']]['acceptedDraftSHA256']
+ for path,digest in evidence[c['id']]['assetHashes'].items():assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest
+assert sum(len(i['fields']) for c in registered for i in c['items'])==68
+assert sum(f['type']=='numeric' for c in registered for i in c['items'] for f in i['fields'])==22
 raw=json.loads((ROOT/'content/fp2/questions.json').read_text());draft=json.loads((ROOT/'delivery/content/fp2/questions.json').read_text())
 assert len(raw)==len(draft)==60
 for q,d in zip(raw,draft):assert q=={**d,'enrichment':'reviewed'}
@@ -18,9 +28,14 @@ for q in raw:
   import hashlib
   assert hashlib.sha256((ROOT/asset).read_bytes()).hexdigest()==digest
 manifest=json.loads((ROOT/'data/qualifications/fp2/manifest.json').read_text())
-assert manifest['reviewed']==60 and sum(p['practiceAvailable'] for p in manifest['examParts'])==1
+assert manifest['reviewed']==60 and sum(p['practiceAvailable'] for p in manifest['examParts'])==2
+assert manifest['cases']['count']==40 and manifest['cases']['fields']==68
 offline=json.loads((ROOT/'data/qualifications/fp2'/manifest['offline']['url']).read_text())
 assert 'assets/fp2/202605/q55-family-chart.png' in offline['assets']
+practical_groups=[g for g in offline['groups'] if g['examPartId']=='jafp-practical']
+assert len(practical_groups)==1 and practical_groups[0]['count']==40 and practical_groups[0]['unit']=='cases'
+assert {f['image'] for c in registered for f in c['bodyFigures']}<=set(practical_groups[0]['files'])
+assert not any(p.endswith('.pdf') for p in offline['assets'])
 for text,expected in [('１，４９０，０００','1490000'),('0.4350','0.435'),('1,49',None),('149万円',None),('1e6',None),('①',None)]:assert decimal_value(text)==expected
 with tempfile.TemporaryDirectory(prefix='fp2-content-') as d:
  root=Path(d);cfg,normal,cases=prepare(root);base=root/'content/fp2'
@@ -43,4 +58,4 @@ with tempfile.TemporaryDirectory(prefix='fp2-drafts-') as d:
  else:raise AssertionError('Unreviewed draft accepted as reviewed')
 with tempfile.TemporaryDirectory(prefix='fp2-case-only-') as d:
  root=Path(d);prepare(root,cases_only=True);m=json.loads((root/'data/qualifications/fp2/manifest.json').read_text());assert m['count']==0 and len(m['studyTargets'])==2;assert all(t['unit']=='cases' for t in m['studyTargets'])
-print('PASS FP60 reviewed corpus / accepted draft contents preserved / figure hash and offline inventory / objective-only catalog / isolated draft, legal, numeric and case-only contracts')
+print('PASS FP60+40 reviewed corpus / accepted draft contents preserved / figure hash and offline inventory / separated subject counts / isolated draft, legal, numeric and case-only contracts')

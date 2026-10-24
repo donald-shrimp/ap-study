@@ -19,10 +19,13 @@ try:
   options={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
   if BASE.startswith('https://') and os.environ.get('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
   b=p.chromium.launch(**options);ctx=b.new_context(viewport={'width':390,'height':844});pg=ctx.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept())
-  pg.goto(BASE+'?qualifications');pg.locator('.qualification-option[data-qualification-id=fp2]').wait_for()
-  assert pg.locator('.qualification-option[data-qualification-id=fp2]').count()==1
-  assert '60問' in pg.locator('.qualification-option[data-qualification-id=fp2]').inner_text()
-  pg.locator('.qualification-option[data-qualification-id=fp2]').click();pg.locator('.quick-start').wait_for()
+  pg.goto(BASE+'?qualifications');pg.locator('.qualification-option[data-qualification-id=fp2]').first.wait_for()
+  assert pg.locator('.qualification-option[data-qualification-id=fp2]').count()==2
+  objective=pg.locator('.qualification-option[data-qualification-id=fp2][data-part-id=objective]')
+  assert '60問' in objective.inner_text()
+  practical=pg.locator('.qualification-option[data-qualification-id=fp2][data-part-id=jafp-practical]')
+  assert '40問' in practical.inner_text()
+  objective.click();pg.locator('.quick-start').wait_for()
   assert pg.locator('[data-mode=diagnostic],[data-view=diagnostics],[data-view=mocks],[data-action=cards-open]').count()==0
   assert state(pg)['attempts']==[]
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
@@ -55,5 +58,5 @@ try:
   fresh=b.new_context();other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(BASE+'fp2/');other.locator('.quick-start').wait_for();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();assert len(state(other)['attempts'])==3
   assert not errors,errors;b.close()
 finally:server.shutdown()
-print('PASS FP60 objective-only chooser / new questions and required diagram offline after managed download / choice and checkpoint resume / three corrected answers and all reasons / AI source basis and figure / guest backup import / AP record separation / 320,390,1440 / no JS errors')
+print('PASS FP60 objective + practical chooser / objective questions and required diagram offline / checkpoint / corrected answers / AI / backup / AP separation / 320,390,1440 / no JS errors')
 print('Artifacts:',ART)
