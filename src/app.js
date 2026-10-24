@@ -336,7 +336,7 @@ $('#close-image').addEventListener('click',()=>$('#image-dialog').close());
 $('#image-zoom-in').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.min(4000,img.clientWidth*1.25)}px`;});
 $('#image-zoom-out').addEventListener('click',()=>{const img=$('#image-scroll img');img.style.width=`${Math.max(600,img.clientWidth/1.25)}px`;});
 function refreshDataControls(){if(!qualification)return;$('#card-data-management').hidden=!qualification.flashcards;$('#card-backup-note').hidden=!qualification.flashcards;$('#diagnostic-data').hidden=!qualification.diagnosticBlueprint&&!planner?.views().hasDiagnostics;}
-$('#settings-button').addEventListener('click',()=>{refreshDataControls();$('#legal-study-settings').hidden=!(qualification.requiresLegalContext||base.some(q=>q.legalReview));$('#exclude-outdated').checked=state.settings.excludeOutdated!==false;$('#settings-dialog').showModal();account?.refreshGuestAvailability();});
+$('#settings-button').addEventListener('click',()=>{refreshDataControls();$('#legal-study-settings').hidden=!(qualification?.requiresLegalContext||base.some(q=>q.legalReview));$('#exclude-outdated').checked=state.settings.excludeOutdated!==false;$('#settings-dialog').showModal();account?.refreshGuestAvailability();});
 $('#settings-dialog').addEventListener('click',async e=>{
  const el=e.target.closest('[data-action]');if(!el)return;
  if(main.inert||recordMaintenance){notice('保存中です。少し待ってから操作してください。');return;}
