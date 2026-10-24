@@ -1,0 +1,35 @@
+name: FP2 historical originals extraction
+on:
+  push:
+    branches: [draft/fp2-202501-202409-202405-source]
+    paths: [.github/workflows/fp2-historical-originals.yml]
+permissions:
+  contents: read
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Get 2025-01, 2024-09, 2024-05 JAFP source PDFs and text
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          for era in 202501 202409 202405; do
+            mkdir -p "output/$era"
+            for name in g2_${era}_q g2_${era}_a j2_${era}_q j2_${era}_a; do
+              url="https://www.jafp.or.jp/exam/mohan/files/${name}.pdf"
+              curl --fail --location --silent --show-error --retry 3 --max-time 90 --output "output/$era/${name}.pdf" "$url"
+              test "$(head -c 5 "output/$era/${name}.pdf")" = '%PDF-'
+              sha256sum "output/$era/${name}.pdf"
+              pdftotext -layout "output/$era/${name}.pdf" "output/$era/${name}-layout.txt"
+              pdftotext -raw "output/$era/${name}.pdf" "output/$era/${name}-raw.txt"
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fp2-historical-official-202501-202409-202405
+          path: output/
+          retention-days: 30
