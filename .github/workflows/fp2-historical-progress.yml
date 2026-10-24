@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first thirty-five authored explanations and hints
+      - name: Verify January first forty authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -30,7 +30,8 @@ jobs:
                     'option-3','option-1','option-3','option-3','option-3',
                     'option-3','option-2','option-4','option-4','option-3',
                     'option-3','option-4','option-1','option-3','option-2',
-                    'option-4','option-2','option-2','option-4','option-2']
+                    'option-4','option-2','option-2','option-4','option-2',
+                    'option-2','option-2','option-2','option-1','option-1']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -59,5 +60,5 @@ jobs:
           payout=lambda z: z['dividends']/z['profit']
           assert roe(x)<roe(y) and per(x)>per(y) and pbr(x)>pbr(y) and payout(x)>payout(y)
           assert qs[25]['correctChoiceId']=='option-3' and '6,000億円' in qs[25]['stem']
-          print('PASS: 60 official draft questions; Q01-Q35 have 35 detailed explanations, 140 choice-specific reasons, 70 hints. Independent reviewer not claimed.')
+          print('PASS: 60 official draft questions; Q01-Q40 have 40 detailed explanations, 160 choice-specific reasons, 80 hints. Independent reviewer not claimed.')
           PY
