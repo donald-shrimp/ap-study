@@ -14,13 +14,13 @@ import {diagnosticResult,diagnosticAttempts,diagnosticSlots} from '../domain/dia
 import {diagnosticSize} from '../domain/assessment-policy.js';
 import {canUseQuestion} from '../domain/content-policy.js';
 
-export function createPlanningViews({qualification,documents,attempts,currentRunId,currentMockSetId,preview,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,workspaceStatus='guest',diagnosticEnabled=Boolean(diagnosticSize(qualification)&&qualification.count>=diagnosticSize(qualification)),summaryData,editorOpen=false,aiOpen=false,stale=false,targetPartId=null,practiceQuestionIds=null,practiceTopicIds=null,caseRuns=[]}){
+export function createPlanningViews({qualification,documents,attempts,currentRunId,currentMockSetId,preview,jsonInput='',editingPhaseId=null,editingWeek=null,editingMilestone=null,workspaceStatus='guest',diagnosticEnabled=Boolean(diagnosticSize(qualification)&&qualification.count>=diagnosticSize(qualification)),summaryData,editorOpen=false,aiOpen=false,stale=false,targetPartId=null,practiceQuestionIds=null,practiceTopicIds=null,excludeOutdated=true,caseRuns=[]}){
  const size=diagnosticSize(qualification)||30;
  const planRow=documents.find(r=>r.id==='planning'),plan=planRow?.payload||blankPlan(qualification),parts=examPartsFor(qualification);
  const runs=documents.filter(r=>r.kind==='diagnostic').sort((a,b)=>b.payload.startedAt.localeCompare(a.payload.startedAt));
  const active=runs.find(r=>r.payload.status==='in_progress'),finished=runs.filter(r=>r.payload.status!=='in_progress');
  const runRow=documents.find(r=>['diagnostic','mock'].includes(r.kind)&&r.id===currentRunId),run=runRow?.payload,mock=run?.mode==='mock',runTitle=mock?run.mockSet.label:'診断';
- const mockViews=createMockViews({qualification,documents,currentSetId:currentMockSetId});
+ const mockViews=createMockViews({qualification,documents,currentSetId:currentMockSetId,excludeOutdated});
  const progress=phaseProgress(plan,attempts,qualification,new Date(),caseRuns),phase=progress.find(p=>p.active),week=phase?.weeklyProgress.find(w=>w.active);
  const partName=id=>parts.find(p=>p.id===id)?.label||id;
  const statusHTML=()=>workspaceStatusHTML(workspaceStatus);

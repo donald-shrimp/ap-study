@@ -269,7 +269,7 @@ def compile_assessments(root, config, originals, directory):
         require(key not in scopes or scopes[key]==scope, f"A content family crosses topics or parts: {q['id']}")
         scopes[key]=scope
     filename,digest=hashed_json(directory, 'diagnostic', questions)
-    fields = ['id', 'qualificationId', 'topicId', 'examPartId', 'enrichment', 'parentQuestionId', 'familyId', 'sourceKind', 'uses']
+    fields = ['id', 'qualificationId', 'topicId', 'examPartId', 'enrichment', 'parentQuestionId', 'familyId', 'sourceKind', 'uses', 'sourceRecord', 'legalReview']
     return {'url':filename,'sha256':digest,'count':len(questions),'reviewed':len(questions),'index':[{k: q[k] for k in fields if k in q} for q in questions]}
 
 
@@ -299,7 +299,7 @@ def compile_mock_sets(root, config, originals, directory):
             require(slot['number']==i+1 and q and 'mock' in question_uses(q) and q['enrichment']=='reviewed' and ('parentQuestionId' not in slot or q.get('parentQuestionId')==slot['parentQuestionId']) and q['topicId']==slot['topicId'], 'Invalid fixed mock question')
     body={'format':'hitomon-mock-sets','version':1,'qualificationId':config['id'],'sets':sets}
     filename,digest=hashed_json(directory,'mockSets',body)
-    return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{k:s[k] for k in ['id','label','version','size']} for s in sets]}
+    return {'url':filename,'sha256':digest,'count':len(sets),'sets':[{**{k:s[k] for k in ['id','label','version','size']}, **({'hasLawChange':True} if any(published[slot['questionId']].get('legalReview',{}).get('status')=='outdated' for slot in s['slots']) else {})} for s in sets]}
 
 
 def compile_learning_tools(root, config, questions, directory):
