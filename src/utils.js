@@ -12,7 +12,7 @@ export const timeText = value => new Date(value).toLocaleString('ja-JP', {month:
  */
 export function answerTextHTML(value='') {
   const source=String(value??'');
-  const marker=/\*\*([^*\r\n]+)\*\*/g;
+  const marker=/(?<!\*)\*\*([^*\r\n]+)\*\*(?!\*)/g;
   let html='',offset=0;
   for(const m of source.matchAll(marker)){
     html+=esc(source.slice(offset,m.index));
