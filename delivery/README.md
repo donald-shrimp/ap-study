@@ -20,7 +20,7 @@
 - 公式模範解答：https://www.jafp.or.jp/exam/mohan/files/j2_202605_a.pdf
   - SHA-256：`9c3508ba491a84ce97b96157942d63f865084ef2b098359fb425f68728334abd`
 - GitHub Actionsによるダウンロードと検証：[実行ログ](https://github.com/donald-shrimp/ap-study/actions/runs/40086059591)。公式PDFの原本バイト列は同RunのArtifactに保存。
-- PDFはこのブランチのGitツリーへは **まだ格納していません**。`delivery/sources/fp2/`に2ファイルを配置する場合、必ずハッシュ照合してください。完全な原本を含むZIPはチャット納品物としても作成済み。
+- **問題PDFと公式模範解答PDFを、このブランチの `delivery/sources/fp2/` に格納済み**。各PDFのSHA-256は上記実測値に一致します。完全な原本を含むZIPもチャット納品物として作成済み。
 
 `publishedAt`・`legalAsOf`は資料で厳密な日付を確認できていないためnull。現行法令の確認は `unverified` です。
 
