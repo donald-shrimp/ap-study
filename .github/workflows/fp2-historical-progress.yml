@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify January first fifty authored explanations and hints
+      - name: Verify all sixty January 2025 authored explanations and hints
         run: |
           python - <<'PY'
           import json
@@ -33,7 +33,9 @@ jobs:
                     'option-4','option-2','option-2','option-4','option-2',
                     'option-2','option-2','option-2','option-1','option-1',
                     'option-3','option-3','option-1','option-3','option-3',
-                    'option-3','option-2','option-4','option-1','option-4']
+                    'option-3','option-2','option-4','option-1','option-4',
+                    'option-2','option-4','option-1','option-1','option-2',
+                    'option-2','option-1','option-4','option-2','option-3']
           for i,q in enumerate(qs):
               assert q['id']==f'fp2-202501-objective-q{i+1:02d}'
               assert len(q['choices'])==4
@@ -67,5 +69,15 @@ jobs:
           assert '区分所有者' in qs[46]['choiceReasons'][1]
           assert '5％' in qs[48]['explanation'] and '15.315％' in qs[48]['explanation']
           assert '建設資金' in qs[49]['choiceReasons'][3]
-          print('PASS: 60 official draft questions; Q01-Q50 have 50 detailed explanations, 200 choice-specific reasons, 100 hints. Independent reviewer not claimed.')
+          # Final inheritance/tax batch: reviewable 2024-law basis and defined exceptions.
+          assert '契約' in qs[50]['explanation'] and '遺贈' in qs[50]['explanation']
+          assert '相続税評価額' in qs[51]['choiceReasons'][1] and '時価' in qs[51]['choiceReasons'][1]
+          assert '2024年1月1日' in qs[52]['explanation'] and '110万円' in qs[52]['explanation']
+          assert '分割見込書' in qs[54]['choiceReasons'][1]
+          assert '10％' in qs[55]['choiceReasons'][0]
+          assert '相続時精算課税' in qs[56]['choiceReasons'][0]
+          assert '相続放棄' in qs[57]['choiceReasons'][3]
+          assert '株主総会' in qs[58]['choiceReasons'][1]
+          assert '2027年3月31日' in qs[59]['explanation']
+          print('PASS: 60 official draft questions; Q01-Q60 have 60 detailed explanations, 240 choice-specific reasons, 120 hints. Independent reviewer not claimed.')
           PY
