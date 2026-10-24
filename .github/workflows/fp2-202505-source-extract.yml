@@ -1,0 +1,31 @@
+name: FP2 2025 official source extraction (temporary)
+on:
+  push:
+    branches: [draft/fp2-202505-jafp-all]
+    paths: [.github/workflows/fp2-202505-source-extract.yml]
+permissions:
+  contents: read
+jobs:
+  sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Install PDF text extraction
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Download official PDFs, verify signatures, extract original text
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          for name in g2_202505_qa j2_202505_q j2_202505_a; do
+            curl --fail --location --silent --show-error --retry 3 --max-time 100 --output "output/${name}.pdf" "https://www.jafp.or.jp/exam/mohan/files/${name}.pdf"
+            test "$(head -c 5 "output/${name}.pdf")" = '%PDF-'
+            sha256sum "output/${name}.pdf"
+            pdftotext -layout "output/${name}.pdf" "output/${name}-layout.txt"
+            pdftotext -raw "output/${name}.pdf" "output/${name}-raw.txt"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fp2-202505-official-pdfs-text
+          path: output/
+          retention-days: 30
