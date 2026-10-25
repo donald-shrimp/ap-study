@@ -45,7 +45,7 @@
 | `stem` または `sourceImages` | 正確な問題文、または原本画像。画像の場合 `imageSizes` に幅と高さ |
 | `choices` | 2〜20個。各選択肢は安定した `id`、表示 `label`、`text`／`image` |
 | `correctChoiceId`／`correctChoiceIds` | 単一選択の正答ID／複数選択の正答ID配列。選択肢順とは別に参照する |
-| `hints` | 任意、0〜20段階。各段階は `title`、具体的な `text`、`revealsAnswer`（真偽値） |
+| `hints` | 任意、0〜20段階。各段階は `title`、具体的な `text`、`revealsAnswer`（真偽値）。品質・開示判定は [共通ヒント基準](hint-authoring.md) |
 | `summary`, `explanation`, `takeaway` | 要約・要点は任意。確認済み教材には問題固有の解説が必須 |
 | `choiceReasons` | 個別解説付きなら選択肢と同数。各選択肢の正誤理由 |
 | `enrichment`, `hintStatus` | 確認済み解説は `reviewed`。個別ヒントは `individual` |

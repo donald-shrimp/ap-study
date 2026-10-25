@@ -2,6 +2,8 @@
 
 作業を始める前に、対象に応じた手順を読む。
 
+ヒントを新規作成・追加・改稿・レビューするときは、全資格共通の [`docs/hint-authoring.md`](docs/hint-authoring.md) を読む。既存の公開教材も対象。初学者に必要な知識・手順を教え、答えを実質的に渡す場合は `revealsAnswer:true` とする。段数や定型文を一括適用せず、問題ごとに点検する。
+
 - 診断専用の派生問題：[`docs/diagnostic-authoring.md`](docs/diagnostic-authoring.md)。冒頭の「作問依頼を受けたときの確認事項」と「問題文は原問に寄せる」を必ず参照する。
 - 資格・問題集の追加や共通教材の形式：[`docs/content-authoring.md`](docs/content-authoring.md)。先に土台・受け入れ仕様を整え、その仕様に合わせて各問題をdraftで作る。既存の土台は再利用し、形式チェック・内容の独立レビュー・公開を区別する。
 - 原本画像の文字起こし・数式表示：[`docs/transcription-authoring.md`](docs/transcription-authoring.md)。既存の切り出し画像を使い、原文と強調を保持する。確認済み進捗から再開し、別担当レビューと教材・図のハッシュ照合が通った問題だけ反映する。
