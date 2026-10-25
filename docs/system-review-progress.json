@@ -1,0 +1,115 @@
+{
+  "format": "hitomon-system-review",
+  "version": 1,
+  "reviewDate": "2026-10-25",
+  "timeZone": "Asia/Tokyo",
+  "baseline": "0e6aeac6453b7cdb015a58438733ffaad2502a6c",
+  "trackingIssue": 57,
+  "checkpoint": "initial review complete; first fix implemented and locally verified",
+  "areas": [
+    {
+      "id": "R1",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R2",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R3",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R4",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R5",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R6",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R7",
+      "status": "initial_scope_checked"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "issue": 58,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F02",
+      "issue": 59,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F03",
+      "issue": 60,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F04",
+      "issue": 61,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F05",
+      "issue": 62,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F06",
+      "issue": 63,
+      "implementation": "not_started"
+    },
+    {
+      "id": "F07",
+      "issue": 64,
+      "implementation": "implemented"
+    }
+  ],
+  "firstFix": {
+    "issue": 64,
+    "scope": "current storage regression tests and shared CI",
+    "localVerification": "passed",
+    "integrationEvidence": "GitHub Issue #64 records the final PR, CI and publication status"
+  },
+  "checks": {
+    "nodeFiles": 36,
+    "nodeTestsPassed": 283,
+    "contentChecksPassed": 6,
+    "repairedTestsPassed": [
+      "tests/workspace.py",
+      "tests/learning-storage-race.py",
+      "tests/subject-b-saving.py"
+    ],
+    "browserChecksPassed": [
+      "tests/storage.py",
+      "tests/case-batch-check.py",
+      "tests/design-language.py",
+      "tests/pwa.py"
+    ],
+    "workflowYAMLAndPaths": "passed"
+  },
+  "nextIssue": 58,
+  "remaining": [
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "unverified": [
+    "production personal records on another device",
+    "full Firebase Emulator rules suite in this review",
+    "mobile real-device and screen-reader matrix",
+    "long-term learning balance and large-history performance"
+  ],
+  "privateDataUsed": false
+}
