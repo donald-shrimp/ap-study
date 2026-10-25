@@ -5,7 +5,7 @@
   "timeZone": "Asia/Tokyo",
   "baseline": "0e6aeac6453b7cdb015a58438733ffaad2502a6c",
   "trackingIssue": 57,
-  "checkpoint": "initial review complete; first fix implemented and locally verified",
+  "checkpoint": "sequential fixes in progress; latest integration evidence is linked from each Issue",
   "areas": [
     {
       "id": "R1",
@@ -40,7 +40,12 @@
     {
       "id": "F01",
       "issue": 58,
-      "implementation": "not_started"
+      "implementation": "implemented",
+      "checks": [
+        "account-lifecycle: failure/late response/success/concurrent UID change",
+        "sync-engine and workspace-race",
+        "PWA"
+      ]
     },
     {
       "id": "F02",
@@ -96,9 +101,8 @@
     ],
     "workflowYAMLAndPaths": "passed"
   },
-  "nextIssue": 58,
+  "nextIssue": 59,
   "remaining": [
-    58,
     59,
     60,
     61,
