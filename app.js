@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261025-case-study-queues-v2';
+import './src/app.js?v=20261025-common-study-design';

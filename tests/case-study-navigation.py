@@ -21,7 +21,8 @@ def current(pg,q='fp2'):
  rs=rows(pg,q);active=pg.evaluate('''q=>{const suffix=':'+q+':written-view'+(q==='fp2'?':jafp-practical':'');const key=Object.keys(localStorage).find(k=>k.endsWith(suffix));return JSON.parse(localStorage.getItem(key)).currentId;}''',q);return next(r for r in rs if r['id']==active)
 def complete(pg,c):
  for item in c['items']:
-  pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]').click()
+  nav_item=pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]')
+  if nav_item.count():nav_item.click()
   for f in item['fields']:
    field=pg.locator(f'.written-field[data-written-key="{item["id"]}--{f["id"]}"]')
    if f['type']=='singleChoice':field.locator('input[value="'+next(a['id'] for a in f['choices'] if a['label']==f['referenceAnswers'][0])+'"]').check()
@@ -29,7 +30,8 @@ def complete(pg,c):
    field.locator('[data-action=written-submit]').click()
  # In exam mode all responses must be submitted before opening any answer.
  for item in c['items']:
-  pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]').click()
+  nav_item=pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]')
+  if nav_item.count():nav_item.click()
   for f in item['fields']:
    field=pg.locator(f'.written-field[data-written-key="{item["id"]}--{f["id"]}"]')
    field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for()
@@ -57,7 +59,7 @@ try:
   with pg.expect_download() as event:pg.locator('#export-state').click()
   backup=ART/'synthetic-navigation-backup.json';event.value.save_as(str(backup));saved=json.loads(backup.read_text());assert saved['writtenBackup']['studyContexts'];assert saved['records']==[]
   fresh=b.new_context(viewport={'width':390,'height':844});other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(BASE+'fp2/?part=jafp-practical&entry=home');other.locator('.quick-start').wait_for();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる',exact=True).click();other.locator('.quick-start [data-action=written-resume]').click();other.locator('.written-layout').wait_for();assert '番号順' in other.locator('.case-study-scope').inner_text();fresh.close()
-  ap=b.new_context(viewport={'width':1440,'height':1000});page=ap.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.goto(BASE+'ap/?part=written&entry=home');page.locator('.quick-start').wait_for();page.locator('[data-action=written-packs]').click();assert page.locator('.case-pack-card').count()==8;page.locator('[data-action=written-pack][data-pack="2025-spring"]').click();assert page.locator('.written-case-option').count()==11;page.locator('[name=written-study-mode]').select_option('exam');page.locator('[data-action=written-sequence]').click();page.locator('.written-layout').wait_for();run=current(page,'ap');assert run['caseId']=='ap-r07h-pm1' and run['mode']=='exam';complete(page,next(c for c in banks['ap'] if c['id']==run['caseId']));page.locator('[data-action=written-next]').click();page.locator('.written-layout').wait_for();assert current(page,'ap')['caseId']=='ap-r07h-pm2';assert '番号順' in page.locator('.case-study-scope').inner_text();page.reload();page.locator('.written-layout').wait_for();assert current(page,'ap')['caseId']=='ap-r07h-pm2';assert not errors,errors
+  ap=b.new_context(viewport={'width':1440,'height':1000});page=ap.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.goto(BASE+'ap/?part=written&entry=home');page.locator('.quick-start').wait_for();page.locator('[data-action=written-packs]').click();assert page.locator('.case-pack-card').count()==8;page.locator('[data-action=written-pack][data-pack="2025-spring"]').click();assert page.locator('.written-case-option').count()==11;page.locator('.case-options').evaluate('(el)=>el.open=true');page.locator('[name=written-study-mode]').select_option('exam');page.locator('[data-action=written-sequence]').click();page.locator('.written-layout').wait_for();run=current(page,'ap');assert run['caseId']=='ap-r07h-pm1' and run['mode']=='exam';complete(page,next(c for c in banks['ap'] if c['id']==run['caseId']));page.locator('[data-action=written-next]').click();page.locator('.written-layout').wait_for();assert current(page,'ap')['caseId']=='ap-r07h-pm2';assert '番号順' in page.locator('.case-study-scope').inner_text();page.reload();page.locator('.written-layout').wait_for();assert current(page,'ap')['caseId']=='ap-r07h-pm2';assert not errors,errors
   b.close()
 finally:server.shutdown()
 print('PASS recommended/topic/pack queues / numeric order / whole AP cases / offline / resume / backup / responsive / no JS errors');print('Artifacts:',ART)
