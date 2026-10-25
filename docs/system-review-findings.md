@@ -13,7 +13,7 @@
 | F02 | P1 | 保存済み画像も弱回線のネットワーク応答を待つ | [#59](https://github.com/donald-shrimp/ap-study/issues/59) | 実装・ローカル検証済み（反映証跡はIssue） |
 | F03 | P2 | 新inventoryから削除しても旧版だけの画像が残る | [#60](https://github.com/donald-shrimp/ap-study/issues/60) | 実装・ローカル検証済み（反映証跡はIssue） |
 | F04 | P2 | workspace系同期のカーソルが起動後に引き継がれない | [#61](https://github.com/donald-shrimp/ap-study/issues/61) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F05 | P2 | FP実技の同期対象も「科目B」と表示する | [#62](https://github.com/donald-shrimp/ap-study/issues/62) | 未修正 |
+| F05 | P2 | FP実技の同期対象も「科目B」と表示する | [#62](https://github.com/donald-shrimp/ap-study/issues/62) | 実装・ローカル検証済み（反映証跡はIssue） |
 | F06 | P2 | 図内参照など6件のbodyRefsが実DOMに解決しない | [#63](https://github.com/donald-shrimp/ap-study/issues/63) | 未修正 |
 
 まずF07で保存と更新の検証を自動化する。その後、F01→F02を別の小PRで直す。F04のカーソル導入は文書保存との整合が必要で、速度だけを理由にカーソルを先に進めない。

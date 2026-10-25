@@ -1,3 +1,4 @@
+import {qualificationSyncLabels} from './domain/sync-status.js';
 import {legalStudyAllowed} from './domain/legal-context.js';
 import {requiredQuestionAssets} from './domain/offline-assets.js';
 import {createWrittenFeature} from './features/written.js';
@@ -497,7 +498,7 @@ try {
   if(entryHome){if(isWritten())await written.setView('home');else await save();}
   rememberQualification(appRoot,qualification.id);rememberPart(appRoot,qualification.id,targetPartId);
   pageURL.searchParams.set('part',targetPartId);pageURL.searchParams.delete('entry');if(pathQualification)pageURL.searchParams.delete('qualification');else pageURL.searchParams.set('qualification',qualification.id);history.replaceState(history.state,'',pageURL);
-  account=await initAccountControls({getWrittenStore:()=>written?.store(),onWrittenRows:()=>written?.onRows(),getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,getGuestImportAvailable,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork});
+  account=await initAccountControls({syncScopeLabels:qualificationSyncLabels(qualification),getWrittenStore:()=>written?.store(),onWrittenRows:()=>written?.onRows(),getPersonalStore:()=>personal?.syncStore(),onPersonalRows:()=>personal?.onRows(),onPersonalStatus:status=>personal?.onStatus(status),getCardStore:()=>cards?.syncStore(),onCardRows:()=>cards?.onRows(),onCardStatus:status=>cards?.onStatus(status),getLearningStore:()=>learning.store(),onLearningRows:learning.onRows,onLearningStatus:learning.onStatus,getWorkspaceStore:()=>planner.store(),onDocuments:planner.onDocuments,onWorkspaceStatus:planner.onStatus,qualificationId:qualification.id,getStore:()=>store,switchOwner,importGuest,getGuestImportAvailable,validateAttempt:validateSyncAttempt,onRecords:remoteRecords,onFork:remoteFork});
   await account.ready;
   installQualificationSwitch({qualification,partId:targetPartId,root:appRoot,onError:notice,beforeLeave:async()=>{
    if(opening||recordMaintenance||planner?.isBusy()||cards?.isBusy()||written?.isBusy()){notice('保存中です。少し待ってから切り替えてください。');return false;}

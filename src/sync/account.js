@@ -10,7 +10,7 @@ export async function guestAttemptId(uid,source){
  const hex=[...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
 }
 
-export async function initAccountControls({qualificationId,getStore,getWorkspaceStore,getLearningStore,onLearningRows,onLearningStatus,getCardStore,onCardRows,onCardStatus,getWrittenStore,onWrittenRows,getPersonalStore,onPersonalRows,onPersonalStatus,switchOwner,importGuest,getGuestImportAvailable=async()=>false,validateAttempt,onRecords,onFork,onDocuments,onWorkspaceStatus}){
+export async function initAccountControls({qualificationId,syncScopeLabels={},getStore,getWorkspaceStore,getLearningStore,onLearningRows,onLearningStatus,getCardStore,onCardRows,onCardStatus,getWrittenStore,onWrittenRows,getPersonalStore,onPersonalRows,onPersonalStatus,switchOwner,importGuest,getGuestImportAvailable=async()=>false,validateAttempt,onRecords,onFork,onDocuments,onWorkspaceStatus}){
  const find=id=>document.getElementById(id),login=find('google-login'),logout=find('google-logout'),refresh=find('sync-now'),adopt=find('import-guest'),status=find('sync-state');
  let client,engine,workspaceEngine,learningEngine,cardsEngine,personalEngine,writtenEngine,user,observedUser,transition=Promise.resolve(),generation=0,busy=false,firstObservation=true,guestAvailable=false;
  // Startup waits for the local owner/checkpoint, never a cloud sync round trip.
@@ -63,7 +63,7 @@ export async function initAccountControls({qualificationId,getStore,getWorkspace
     busy=true;guestAvailable=false;buttons();await stopSync();setSyncAccount(false);
     if(token!==generation)return;
     await switchOwner(next?`uid:${next.uid}`:null,{restore});if(token!==generation)return;
-    user=next;find('account-name').hidden=!user;find('account-name').textContent=user?(user.email||user.displayName||'Googleアカウント'):'';setSyncAccount(!!user,user?['study',...(getWorkspaceStore?.()?['planning']:[]),...(getLearningStore?.()?['learning']:[]),...(getCardStore?.()?['cards']:[]),...(getPersonalStore?.()?['personal']:[]),...(getWrittenStore?.()?['written']:[])]:[]);buttons();
+    user=next;find('account-name').hidden=!user;find('account-name').textContent=user?(user.email||user.displayName||'Googleアカウント'):'';setSyncAccount(!!user,user?['study',...(getWorkspaceStore?.()?['planning']:[]),...(getLearningStore?.()?['learning']:[]),...(getCardStore?.()?['cards']:[]),...(getPersonalStore?.()?['personal']:[]),...(getWrittenStore?.()?['written']:[])]:[],syncScopeLabels);buttons();
     startSync();
     resolveReady();
     await refreshGuestAvailability();
