@@ -1,5 +1,6 @@
 """Published FP60/40 corpus plus isolated draft/evidence/case-only contracts."""
-import copy,hashlib,importlib.util,json,subprocess,tempfile
+import copy,hashlib,importlib.util,json,subprocess,tempfile,jsonschema
+from referencing import Registry,Resource
 from pathlib import Path
 from fp2_fixtures import prepare,builder,write,ROOT
 from material_contracts import decimal_value,validate_numeric,validate_legal
@@ -21,7 +22,27 @@ assert sum(len(i['fields']) for c in registered for i in c['items'])==68
 assert sum(f['type']=='numeric' for c in registered for i in c['items'] for f in i['fields'])==22
 raw=json.loads((ROOT/'content/fp2/questions.json').read_text());draft=json.loads((ROOT/'delivery/content/fp2/questions.json').read_text())
 assert len(raw)==len(draft)==60
-for q,d in zip(raw,draft):assert q=={**d,'enrichment':'reviewed'}
+revision=ROOT/'work/fp2/revisions/202605-objective-v2'
+revised=json.loads((revision/'questions.json').read_text())
+question_schema=json.loads((ROOT/'schemas/question-format.v1.json').read_text());legal_schema=json.loads((ROOT/'schemas/legal-context.v1.json').read_text())
+registry=Registry().with_resource(legal_schema['$id'],Resource.from_contents(legal_schema))
+validator=jsonschema.Draft202012Validator(question_schema,registry=registry)
+for q in revised+raw:validator.validate(q)
+review=json.loads((revision/'review/independent-review.json').read_text())
+revised_evidence={r['questionId']:r for r in review['questions']}
+previous=json.loads((revision/'review/previous-publication-reviews.json').read_text())
+historical=[{**d,'enrichment':'reviewed'} for d in draft]
+cfg=json.loads((ROOT/'content/fp2/qualification.json').read_text())
+builder.validate_reviews(historical,previous,[builder.normalize(q,cfg,n+1) for n,q in enumerate(historical)],ROOT)
+assert review['status']=='approved-after-independent-review' and len(revised_evidence)==len(revised)==60
+assert review['officialSource']['pagesInspected']==list(range(1,35))
+allowed={'version','enrichment','summary','explanation','takeaway','choiceReasons'}
+for q,d,old in zip(raw,revised,historical):
+ assert q=={**d,'enrichment':'reviewed'} and q['version']==old['version']+1
+ assert {k:v for k,v in q.items() if k not in allowed}=={k:v for k,v in old.items() if k not in allowed}
+ item=revised_evidence[q['id']]
+ assert item['acceptedDraftSHA256']==builder.diagnostic_digest(d) and item['author']!=item['reviewer'] and item['status']=='approved'
+ assert item['officialAnswerLabel']==next(c['label'] for c in q['choices'] if c['id']==q['correctChoiceId'])
 ledger={r['questionId']:r for r in json.loads((ROOT/'content/fp2/question-reviews.json').read_text())}
 for q in raw:
  for asset,digest in ledger[q['id']]['assetHashes'].items():
