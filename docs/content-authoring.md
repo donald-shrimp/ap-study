@@ -130,6 +130,8 @@ AP科目Aの既存解説は `data/lessons/<回>.json`、文字起こしは `data
 
 通常問題の選択肢画像は `choices[].image` を使う。casesの図は選択肢図も含めて `bodyFigures` に、画像・本文内の一意な `anchor`・`alt`・`caption`を記録する。本文の位置・図の順序と一致させ、選択肢ラベルと対応させる。case画像は既存契約の `assets/written/` 以下のPNGとする。改訂時に古い記録が参照する図や原本を上書きしない。APの詳細は [文字起こし手順](transcription-authoring.md)を参照。
 
+図表内の空欄・下線など、本文テキストにない参照先は、`caseCatalogSource` の対象entryに任意の `referenceTargets` を記録する。形式は `{"blank-a":"figure-1"}`（参照ID→図表の参照ID）。両IDはそのcaseの `bodyRefs` に存在し、対応先は `bodyFigures` のキャプションと一致し、原本ページが重なることが必要。原本画像で対象文字と対応を確認し、別担当の確認を残す。本文が検索できないことだけを根拠に図へ推定対応しない。確認済み本文・正答・図・レビュー済みcanonicalは書き換えない。`tests/body-reference-targets.py` が対応情報と別担当確認を、`tests/body-references.py` が実DOM上の全参照を確認する。
+
 ### 2-5. 出題時点と現行法令を混ぜない
 
 過去問は原本の法令基準日・製品仕様等に沿って正答と解説を作る。確認できない日付は推測せず、法令情報を持つ形式では `null` にする。現行法令との照合は別の確認であり、過去問公開の必須条件にはしない。

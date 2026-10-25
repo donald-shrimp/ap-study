@@ -45,9 +45,16 @@ def compile_cases(root,config,directory,hashed_json):
         entries=catalog['entries'];known={c['id']:c for c in cases};packs={};numbers=set()
         assert isinstance(entries,list) and len(entries)==len(known) and {e['caseId'] for e in entries}==set(known)
         for e in entries:
-            assert set(e)=={'caseId','packId','packLabel','number'} and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',e['packId'])
+            assert {'caseId','packId','packLabel','number'}<=set(e)<={'caseId','packId','packLabel','number','referenceTargets'} and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',e['packId'])
             assert isinstance(e['packLabel'],str) and 0<len(e['packLabel'])<=200 and type(e['number']) is int and e['number']>0
+            c=known[e['caseId']];refs=c.get('bodyRefs',{});targets=e.get('referenceTargets',{})
+            assert isinstance(targets,dict) and len(targets)<=len(refs),'Invalid image reference targets'
+            for source,target in targets.items():
+                assert isinstance(target,str) and source in refs and target in refs and source!=target,'Unknown image reference'
+                assert any(f['caption'].strip()==(refs[target].get('text') or refs[target].get('anchor') or '').strip() for f in c.get('bodyFigures',[])),'Reference target is not a figure'
+                assert set(refs[source].get('sourcePages',[])) & set(refs[target].get('sourcePages',[])),'Image reference pages disagree'
             key=(known[e['caseId']]['examPartId'],e['packId']);assert packs.setdefault(key,e['packLabel'])==e['packLabel']
             position=(*key,e['number']);assert position not in numbers;numbers.add(position)
         result['index']=entries
+        result['referenceTargetsVersion']=1
     return result
