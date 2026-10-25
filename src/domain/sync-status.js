@@ -1,8 +1,12 @@
-export const syncLabels={local:'端末の保存',study:'回答・ヒント',planning:'計画・診断・模試',learning:'出題の設定',cards:'単語帳',written:'科目B',personal:'メモ・再開位置'};
+export const syncLabels={local:'端末の保存',study:'回答・ヒント',planning:'計画・診断・模試',learning:'出題の設定',cards:'単語帳',written:'記述・実技',personal:'メモ・再開位置'};
 const failed=new Set(['error','blocked','rules','mock-rules','history-rules','extended-rules']);
-export function summarizeSync(states,signedIn){
+export function qualificationSyncLabels(qualification){
+ const parts=(qualification.examParts||[]).filter(p=>p.unit==='cases'&&p.practiceAvailable);
+ return parts.length===1?{written:parts[0].label}:{};
+}
+export function summarizeSync(states,signedIn,labels=syncLabels){
  const special={'mock-rules':'模試','history-rules':'計画の履歴','extended-rules':'模試・計画の履歴'};
- const entries=Object.entries(states).map(([scope,state])=>({scope,label:special[state.kind]||syncLabels[scope],...state}));
+ const entries=Object.entries(states).map(([scope,state])=>({scope,label:special[state.kind]||labels[scope]||syncLabels[scope],...state}));
  const failures=entries.filter(e=>failed.has(e.kind)),conflicts=entries.filter(e=>e.kind==='conflict');
  if(failures.some(e=>e.scope==='local'))return {kind:'error',text:'記録を保存できません。書き出して保管してください。',details:[...failures,...conflicts]};
  if(failures.length)return {kind:'error',text:signedIn?'一部の記録を同期できません。記録はこの端末に残っています。':'記録の保存を確認してください。',details:[...failures,...conflicts]};
