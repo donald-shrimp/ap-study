@@ -1,0 +1,106 @@
+name: Shared application validation
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - 'schemas/**'
+      - 'content/**'
+      - 'data/**'
+      - 'assets/**'
+      - '*.js'
+      - '*.css'
+      - '*.html'
+      - '*.webmanifest'
+      - '*/index.html'
+      - 'templates/**'
+      - 'package*.json'
+      - 'firestore.rules'
+      - '.github/workflows/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - 'schemas/**'
+      - 'content/**'
+      - 'data/**'
+      - 'assets/**'
+      - '*.js'
+      - '*.css'
+      - '*.html'
+      - '*.webmanifest'
+      - '*/index.html'
+      - 'templates/**'
+      - 'package*.json'
+      - 'firestore.rules'
+      - '.github/workflows/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: shared-validation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'jsonschema>=4.18,<5' 'pymupdf>=1.24,<2'
+      - name: Run all domain tests except the Firebase Emulator suite
+        shell: bash
+        run: |
+          tests=()
+          for file in tests/*.mjs; do
+            if [ "$file" != tests/firebase-rules.mjs ]; then tests+=("$file"); fi
+          done
+          node --test "${tests[@]}"
+      - name: Verify publication contracts and generated content
+        run: |
+          python tools/build-content.py
+          python tests/common-content.py
+          python tests/written-content.py
+          python tests/fp2-content.py
+          python tests/fp2-review-gates.py
+          python tests/body-reference-targets.py
+          python tests/offline-content.py
+          git diff --exit-code
+  browser-storage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'playwright>=1.50,<2'
+      - run: python -m playwright install --with-deps chromium
+      - name: Verify storage, recovery, shared study UI and PWA updates
+        shell: bash
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/hitomon-http.log" 2>&1 &
+          review_server_pid=$!
+          trap 'kill "$review_server_pid" 2>/dev/null || true' EXIT
+          python tests/account-lifecycle.py
+          python tests/storage.py
+          python tests/workspace.py
+          python tests/workspace-cursor.py
+          python tests/learning-storage-race.py
+          python tests/subject-b-saving.py
+          python tests/case-batch-check.py
+          python tests/body-references.py
+          python tests/sync-labels.py
+          python tests/practice-scheduling.py
+          python tests/fp2-revision-published.py
+          python tests/design-language.py
+          python tests/image-cache.py
+          python tests/pwa.py

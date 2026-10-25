@@ -40,6 +40,14 @@ export function viewCaseAnswer(run,key,at=stamp()){
  if(!mayViewAnswer(run,key))throw Error('先に回答を確定してください。');
  if(!run.assistance.viewedFields.includes(key)){run.assistance.viewedFields.push(key);run.assistance.firstAnswerViewedAt??=at;run.updatedAt=at;}
 }
+export function checkCaseItem(run,itemId,at=stamp()){
+ const item=run.material.items.find(i=>i.id===itemId);if(!item)throw Error('小問が見つかりません。');
+ const slots=caseFields(run.material).filter(s=>s.item.id===itemId);
+ // Lock every entered answer before revealing any answer in this group.
+ // Empty fields remain editable; later answers retain the assistance flag.
+ for(const {key} of slots)if(!run.responses[key]?.submittedAt&&run.responses[key]?.value.trim())submitCaseField(run,key,at);
+ for(const {key} of slots)if(mayViewAnswer(run,key))viewCaseAnswer(run,key,at);
+}
 export function rateCaseField(run,key,outcome,at=stamp()){
  if(!Object.hasOwn(SELF_OUTCOMES,outcome)||!mayViewAnswer(run,key)||!run.assistance.viewedFields.includes(key)||run.evaluations[key])throw Error('解答例を確認してから自己評価してください。');
  run.evaluations[key]={source:'self',outcome,at,assisted:run.responses[key].answerViewedBefore};updateCaseStatus(run,at);

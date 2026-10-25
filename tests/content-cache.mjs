@@ -71,3 +71,9 @@ test('本当に存在しない科目は再取得を繰り返さず、選び直�
  for(const key of [url('data/qualifications/catalog.json'),url('data/qualifications/fp2/manifest.json')])assert.equal(f.calls.filter(c=>c.key===key).length,2);
  assert(!f.calls.some(c=>c.key.includes('/packs/')));
 });
+
+test('図内参照情報より古いmanifestも初回に一度だけ更新する',async t=>{
+ const f=await fixture(t),key=url('data/qualifications/fp2/manifest.json'),fresh=JSON.stringify(f.fpManifest),old=JSON.parse(fresh);delete old.cases.referenceTargetsVersion;
+ f.overrides.set(key,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
+ const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});assert.equal(c.manifest.cases.referenceTargetsVersion,1);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
+});

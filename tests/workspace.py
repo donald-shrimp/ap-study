@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);page=b.new_page();page.goto('http://127.0.0.1:4173/')
  result=page.evaluate('''async()=>{
-  const {createWorkspaceStore}=await import('/src/storage/workspace.js'),{blankPlan,validatePlan}=await import('/src/domain/planning.js');
+  const {createWorkspaceStore}=await import('/src/storage/workspace.js'),{blankPlan,validatePlan}=await import('/src/domain/planning.js'),{canonical}=await import('/src/domain/plan-history.js');
   const q=await (await fetch('/content/ap/qualification.json')).json(),assert=(ok,message)=>{if(!ok)throw new Error(message);};
   const make=(owner='uid:a',qualificationId='ap')=>createWorkspaceStore({owner,qualificationId,deviceId:'device-a',rootPath:'/workspace-test/',validate:(kind,payload)=>validatePlan(payload,{...q,id:qualificationId})});
   let store=make();const first=await store.write('planning','planning',blankPlan(q),0);assert(first.dirty,'outbox not committed');await store.close();store=make();assert((await store.read())[0].operationId===first.operationId,'outbox not durable');
@@ -22,7 +22,7 @@ with sync_playwright() as p:
   const manifest=await (await fetch('/data/qualifications/ap/manifest.json')).json(),questions=await (await fetch('/data/qualifications/ap/'+manifest.packs[0].url)).json(),validateState=createStateValidator({getQuestions:()=>questions,getTopics:()=>q.topics.map(t=>t.name),getQualification:()=>q,allowDiagnosticOnly:true});
   const diagnosticStore=createWorkspaceStore({owner:'uid:a',qualificationId:'ap',deviceId:'device-a',rootPath:'/workspace-test-diagnostic/',validate:(kind,payload)=>validateDiagnostic(payload,q,a=>validateState({...makeState(),attempts:[a]}))}),run=createDiagnostic(questions.slice(0,30),q);
   await diagnosticStore.write('diagnostic',run.id,run,0);
-  for(const modify of [r=>r.selectionPolicy.variantLimits.theory=2,r=>r.catalogRevision='another-bank',r=>r.blueprintVersion=3]){const changed=structuredClone(run);modify(changed);validateDiagnostic(changed,q,a=>validateState({...makeState(),attempts:[a]}));let frozen=false;try{await diagnosticStore.write('diagnostic',run.id,changed,1);}catch{frozen=true;}assert(frozen&&JSON.stringify((await diagnosticStore.read())[0].payload)===JSON.stringify(run),'diagnostic policy changed');}
+  for(const modify of [r=>r.selectionPolicy.variantLimits.theory=(run.selectionPolicy.variantLimits.theory||0)+1,r=>r.catalogRevision='another-bank',r=>r.blueprintVersion=3]){const changed=structuredClone(run);modify(changed);validateDiagnostic(changed,q,a=>validateState({...makeState(),attempts:[a]}));let frozen=false;try{await diagnosticStore.write('diagnostic',run.id,changed,1);}catch{frozen=true;}assert(frozen&&canonical((await diagnosticStore.read())[0].payload)===canonical(run),'diagnostic policy changed');}
   await diagnosticStore.close();return true;
  }''');assert result;b.close()
 print('PASS workspace atomic outbox / reload / late ACK / ancestor replay / stale tab / explicit conflict choices / UID and qualification isolation / invalid write unchanged / frozen diagnostic policy and catalog')

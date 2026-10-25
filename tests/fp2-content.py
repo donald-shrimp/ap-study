@@ -37,13 +37,40 @@ builder.validate_reviews(historical,previous,[builder.normalize(q,cfg,n+1) for n
 assert review['status']=='approved-after-independent-review' and len(revised_evidence)==len(revised)==60
 assert review['officialSource']['pagesInspected']==list(range(1,35))
 allowed={'version','enrichment','summary','explanation','takeaway','choiceReasons'}
-for q,d,old in zip(raw,revised,historical):
+explanation_reviewed=[{**d,'enrichment':'reviewed'} for d in revised]
+for q,d,old in zip(explanation_reviewed,revised,historical):
  assert q=={**d,'enrichment':'reviewed'} and q['version']==old['version']+1
  assert {k:v for k,v in q.items() if k not in allowed}=={k:v for k,v in old.items() if k not in allowed}
  item=revised_evidence[q['id']]
  assert item['acceptedDraftSHA256']==builder.diagnostic_digest(d) and item['author']!=item['reviewer'] and item['status']=='approved'
  assert item['officialAnswerLabel']==next(c['label'] for c in q['choices'] if c['id']==q['correctChoiceId'])
+# The hint revision is a separate independently sealed layer over the preserved
+# explanation revision. Old reviews never certify the new hints by themselves.
+hint_root=ROOT/'work/fp2/revisions/202605-objective-hints-v3'
+read=lambda p:json.loads(p.read_text())
+assert read(hint_root/'review/previous-publication-questions.json')==explanation_reviewed
+old_hint_reviews=read(hint_root/'review/previous-publication-reviews.json')
+builder.validate_reviews(explanation_reviewed,old_hint_reviews,[builder.normalize(q,cfg,n+1) for n,q in enumerate(explanation_reviewed)],ROOT)
+hint_drafts=[q for p in sorted((hint_root/'drafts').glob('q*.json')) for q in read(p)]
+assert len(hint_drafts)==len(raw)==60
+hint_reviews=[read(p) for p in sorted((hint_root/'review').glob('independent-q*.json'))]
+assert len(hint_reviews)==6 and all(r['status']=='approved' and r['author']!=r['reviewer'] for r in hint_reviews)
+hint_evidence={r['questionId']:r for batch in hint_reviews for r in batch['questions']}
+assert len(hint_evidence)==60
+allowed_hint_keys={'version','enrichment','hintStatus','hints'}
+for q,d,old in zip(raw,hint_drafts,explanation_reviewed):
+ assert q=={**d,'enrichment':'reviewed'} and q['version']==old['version']+1
+ assert {k:v for k,v in q.items() if k not in allowed_hint_keys}=={k:v for k,v in old.items() if k not in allowed_hint_keys}
+ assert d['enrichment']=='draft' and q['hintStatus']=='individual' and len(q['hints'])==2
+ assert all(h['title'].strip() and h['text'].strip() and type(h['revealsAnswer']) is bool for h in q['hints'])
+ item=hint_evidence[q['id']]
+ assert item['status']=='approved' and item['officialCorrectChoiceId']==q['correctChoiceId']
+ assert item['acceptedSHA256']==builder.diagnostic_digest(q) and item['draftSHA256']==builder.diagnostic_digest(d)
+ assert item['hintFlags']==[h['revealsAnswer'] for h in q['hints']]
 ledger={r['questionId']:r for r in json.loads((ROOT/'content/fp2/question-reviews.json').read_text())}
+assert len(ledger)==60
+builder.validate_reviews(raw,list(ledger.values()),[builder.normalize(q,cfg,n+1) for n,q in enumerate(raw)],ROOT)
+
 for q in raw:
  for asset,digest in ledger[q['id']]['assetHashes'].items():
   import hashlib

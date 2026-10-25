@@ -10,7 +10,7 @@ from fp2_fixtures import builder
 
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-fp2-revision-'))
 questions=json.loads((ROOT/'content/fp2/questions.json').read_text());cfg=json.loads((ROOT/'content/fp2/qualification.json').read_text())
-old=[builder.normalize({**q,'enrichment':'reviewed'},cfg,n+1) for n,q in enumerate(json.loads((ROOT/'delivery/content/fp2/questions.json').read_text()))]
+old=[builder.normalize({**q,'enrichment':'reviewed'},cfg,n+1) for n,q in enumerate(json.loads((ROOT/'work/fp2/revisions/202605-objective-hints-v3/review/previous-publication-questions.json').read_text()))]
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
  def translate_path(self,path):
@@ -29,7 +29,17 @@ try:
   pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for q in questions:
    nav(pg,'materials');pg.locator('[name=query]').fill('問'+str(q['number']));pg.locator('[data-action=start][data-id="'+q['id']+'"]').click();pg.locator('.choices').wait_for();assert pg.locator('#result').count()==0
-   index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId']);pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click();pg.locator('#result').wait_for();pg.locator('#result details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+   index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId'])
+   assert pg.locator('.hint-box').count()==0
+   for stage,hint in enumerate(q['hints']):
+    button=pg.locator('[data-action=hint]');assert ('答えを含む' in button.inner_text())==hint['revealsAnswer'];button.click()
+    assert pg.locator('.hint-box').count()==stage+1 and plain(hint['text']) in pg.locator('#hints').inner_text()
+    assert pg.locator('#result').count()==0
+    if stage==0 and q['number'] in [1,14,27,55,57,60]:
+     pg.get_by_role('radio').nth(index).check();state(pg);pg.reload();pg.locator('.hint-box').wait_for();assert pg.locator('.hint-box').count()==1 and pg.get_by_role('radio').nth(index).is_checked()
+   pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click();pg.locator('#result').wait_for()
+   saved=state(pg);trial=next(a for a in saved['attempts'] if a['id']==saved['currentId']);expected='revealed' if any(h['revealsAnswer'] for h in q['hints']) else 'assisted'
+   assert trial['status']==expected and trial['hintsBeforeAnswer']==len(q['hints']) and all(e['phase']=='before' for e in trial['hintEvents']);pg.locator('#result details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
    assert pg.locator('#result details > p.explanation').text_content()==plain(q['explanation']),q['id']
    assert pg.locator('.takeaway').text_content()=='要点'+plain(q['takeaway']),q['id']
    assert pg.locator('.reason-list li').all_text_contents()==[c['label']+plain(r) for c,r in zip(q['choices'],q['choiceReasons'])],q['id']
@@ -56,9 +66,19 @@ try:
   }''',old)
   before=state(pg);before.update(attempts=[seeded['finished'],seeded['paused']],currentId=seeded['paused']['id'],view='study');write_state(pg,before);pg.reload();pg.locator('.question-panel').wait_for();assert pg.get_by_role('radio').nth(old[54]['answer']).is_checked()
   after=state(pg);assert after['currentId']==before['currentId'];assert next(a for a in after['attempts'] if a['id']==seeded['paused']['id'])['materialSnapshot']==seeded['paused']['materialSnapshot']
-  nav(pg,'history');open_answer_history(pg);pg.locator('[data-action=resume][data-id="'+seeded['finished']['id']+'"]').click();pg.locator('#result').wait_for();assert pg.locator('#result details > p.explanation').text_content()==seeded['finished']['materialSnapshot']['explanation']
-  nav(pg,'materials');pg.locator('[name=query]').fill('問14');pg.locator('[data-action=start][data-id="fp2-202605-objective-q14"]').click();pg.locator('.choices').wait_for();s=state(pg);current=next(a for a in s['attempts'] if a['id']==s['currentId']);assert current['questionVersion']==3 and current['materialSnapshot']['explanation']==questions[13]['explanation']
+  # Zero-hint snapshots must still offer the update action, without a 0/0 panel.
+  assert pg.locator('.hint-box,.hint-head').count()==0
+  pg.locator('[data-action=latest-hints]').click();pg.locator('.question-panel').wait_for();upgraded=state(pg);new=next(a for a in upgraded['attempts'] if a['id']==upgraded['currentId'])
+  assert new['id']!=seeded['paused']['id'] and new['questionVersion']==questions[54]['version'] and new['selected']==seeded['paused']['selected']
+  assert len(new['materialSnapshot']['hints'])==2 and new['hintCount']==0 and not new['answerViewedBefore']
+  assert next(a for a in upgraded['attempts'] if a['id']==seeded['paused']['id'])['materialSnapshot']==seeded['paused']['materialSnapshot']
+  nav(pg,'history');open_answer_history(pg);pg.locator('[data-action=resume][data-id="'+seeded['finished']['id']+'"]').click();pg.locator('#result').wait_for();assert pg.locator('#result details > p.explanation').text_content()==plain(seeded['finished']['materialSnapshot']['explanation'])
+  nav(pg,'materials');pg.locator('[name=query]').fill('問14');pg.locator('[data-action=start][data-id="fp2-202605-objective-q14"]').click();pg.locator('.choices').wait_for();s=state(pg);current=next(a for a in s['attempts'] if a['id']==s['currentId']);assert current['questionVersion']==questions[13]['version'] and current['materialSnapshot']['explanation']==questions[13]['explanation']
+  # Reading answer-containing hints after grading preserves independent success.
+  nav(pg,'materials');pg.locator('[name=query]').fill('問1');pg.locator('[data-action=start][data-id="fp2-202605-objective-q01"]').click();pg.locator('.choices').wait_for();q=questions[0];index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId']);pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click();pg.locator('#result').wait_for()
+  for h in q['hints']:pg.locator('[data-action=hint]').click()
+  s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and not a['answerViewedBefore'] and all(e['phase']=='after' for e in a['hintEvents'])
   assert not errors,errors;b.close()
 finally:server.shutdown()
-(ART/'results.json').write_text(json.dumps({'revisedQuestions':60,'choiceReasons':240,'offlineManagedDownload':True,'widths':[320,390,1440],'fontScalePercent':[100,200],'backupImportRecords':60,'oldPausedAndCompletedSnapshotsPreserved':True,'newAttemptUsesNewVersion':True,'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')
-print('PASS FP60 revision /240 reasons / offline / responsive / backup / old and new versions');print('Artifacts:',ART)
+(ART/'results.json').write_text(json.dumps({'revisedQuestions':60,'choiceReasons':240,'hintsChecked':sum(len(q['hints']) for q in questions),'beforeAnswerRevealRecords':sum(any(h['revealsAnswer'] for h in q['hints']) for q in questions),'assistedRecords':sum(not any(h['revealsAnswer'] for h in q['hints']) for q in questions),'offlineManagedDownload':True,'widths':[320,390,1440],'fontScalePercent':[100,200],'backupImportRecords':60,'oldPausedAndCompletedSnapshotsPreserved':True,'newAttemptUsesNewVersion':True,'zeroHintSnapshotUpgrade':True,'afterGradingHintsPreserveOutcome':True,'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')
+print('PASS FP60 revision /120 hints / disclosure and grading /240 reasons / offline / responsive / backup / old and new versions');print('Artifacts:',ART)

@@ -36,15 +36,26 @@ export function createOfflineStore({rootURL,inventory,cacheStorage=globalThis.ca
   }catch(e){firstError||=e;}}}));
   if(firstError)throw firstError;abort();await scan();
   if(ids.some(id=>!status().get(id).saved))throw Error('保存が不足しています。接続後に再開してください。');
-  for(const id of ids){const g=groups.get(id);state.groups[key(id)]={revision:g.revision,files:g.files,savedAt:new Date().toISOString()};}
+  for(const id of ids){
+   const g=groups.get(id),previous=state.groups[key(id)],priorFiles=Array.isArray(previous?.files)?previous.files:[];
+   // Retain ownership of older downloaded files until the user removes this group.
+   // Old receipts did not record keep flags; conservatively retain their shared data.
+   const priorKeep=Array.isArray(previous?.keepFiles)?previous.keepFiles:priorFiles.filter(k=>typeof k==='string'&&k.startsWith('data/'));
+   state.groups[key(id)]={revision:g.revision,files:[...new Set([...priorFiles,...g.files])],keepFiles:[...new Set([...priorKeep,...g.files.filter(k=>assets.get(k).keep)])],savedAt:new Date().toISOString()};
+  }
   await saveState();return status();
  }
  async function remove(id){
   const g=groups.get(id);if(!g)throw Error('教材が見つかりません。');await loadState();
   const protect=new Set([...groups.values()].filter(x=>x.id!==id).flatMap(x=>x.files));
   for(const [k,v] of Object.entries(state.groups))if(k!==key(id))for(const f of v.files||[])protect.add(f);
-  const previous=state.groups[key(id)]?.files||[];
-  for(const k of new Set([...g.files,...previous])){const a=assets.get(k);if(!a||a.keep||protect.has(k))continue;await(await cacheStorage.open(cacheName(a))).delete(a.href);valid.delete(k);}
+  const receipt=state.groups[key(id)],previous=Array.isArray(receipt?.files)?receipt.files:[],keep=new Set(Array.isArray(receipt?.keepFiles)?receipt.keepFiles:previous.filter(k=>typeof k==='string'&&k.startsWith('data/')));
+  for(const k of new Set([...g.files,...previous])){
+   if(typeof k!=='string'||!/^(assets\/|data\/qualifications\/)/.test(k)||k.split('/').some(p=>p==='.'||p==='..'))continue;
+   const url=new URL(k,root);if(url.origin!==root.origin||url.pathname!==root.pathname+k||url.search||url.hash)continue;
+   const a=assets.get(k)||{url:k,href:url.href};if(a.keep||keep.has(k)||protect.has(k))continue;
+   await(await cacheStorage.open(cacheName(a))).delete(a.href);valid.delete(k);
+  }
   delete state.groups[key(id)];await saveState();return status();
  }
  return {scan,status,estimate,download,remove};

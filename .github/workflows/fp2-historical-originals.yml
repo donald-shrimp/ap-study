@@ -1,0 +1,38 @@
+name: FP2 source and figure recovery
+on:
+  workflow_dispatch:
+    inputs:
+      draft_ref:
+        description: Branch or commit containing the authored draft
+        required: true
+      draft_folder:
+        description: Directory containing the three draft JSON files
+        default: work/fp2/historical/202501
+        required: true
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.draft_ref }}
+          path: draft-source
+          sparse-checkout: ${{ inputs.draft_folder }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'pymupdf>=1.24,<2'
+      - name: Recover sources and figures; validate unchanged authored material
+        env:
+          DRAFT_FOLDER: draft-source/${{ inputs.draft_folder }}
+        run: python tools/prepare-fp2-delivery.py "$DRAFT_FOLDER" --output "$RUNNER_TEMP/fp2-delivery"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fp2-recovered-delivery
+          path: ${{ runner.temp }}/fp2-delivery/
+          retention-days: 30

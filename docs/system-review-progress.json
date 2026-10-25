@@ -1,0 +1,161 @@
+{
+  "format": "hitomon-system-review",
+  "version": 1,
+  "reviewDate": "2026-10-25",
+  "timeZone": "Asia/Tokyo",
+  "baseline": "0e6aeac6453b7cdb015a58438733ffaad2502a6c",
+  "trackingIssue": 57,
+  "checkpoint": "all initial findings implemented; final integration evidence is on the linked Issues",
+  "areas": [
+    {
+      "id": "R1",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R2",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R3",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R4",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R5",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R6",
+      "status": "initial_scope_checked"
+    },
+    {
+      "id": "R7",
+      "status": "initial_scope_checked"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "issue": 58,
+      "implementation": "implemented",
+      "checks": [
+        "account-lifecycle: failure/late response/success/concurrent UID change",
+        "sync-engine and workspace-race",
+        "PWA"
+      ],
+      "pullRequest": 66,
+      "mainCommit": "dfa0eb8478ee7408b67d44f689103227d93cd208",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/58"
+    },
+    {
+      "id": "F02",
+      "issue": 59,
+      "implementation": "implemented",
+      "checks": [
+        "real SW: stalled cached fallback in 304ms",
+        "fresh/background/reload/cache-miss/offline",
+        "PWA and content-cache/offline-store"
+      ],
+      "pullRequest": 67,
+      "mainCommit": "7afb9b5d1448b555f0292da883244233567cca1e",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/59"
+    },
+    {
+      "id": "F03",
+      "issue": 60,
+      "implementation": "implemented",
+      "checks": [
+        "offline-store 10 tests: retired files across updates / legacy receipt / shared assets / cross-qualification / safe URLs",
+        "PWA"
+      ],
+      "pullRequest": 68,
+      "mainCommit": "1ceec8c844b20ce304c93cc2f784829d2b577e92",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/60"
+    },
+    {
+      "id": "F04",
+      "issue": 61,
+      "implementation": "implemented",
+      "checks": [
+        "51 docs initially, 0 docs on restart",
+        "document/cursor failure and replay",
+        "durable conflicts / stale tabs / UTF-8 ID order / scope isolation / learning store",
+        "sync engine and PWA"
+      ],
+      "pullRequest": 69,
+      "mainCommit": "3c684a7f0909df0583fbd80d084584cd46c48109",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/61"
+    },
+    {
+      "id": "F05",
+      "issue": 62,
+      "implementation": "implemented",
+      "checks": [
+        "AP/FP error and conflict labels from published exam parts",
+        "320/390/1440px, normal state remains concise",
+        "domain, account lifecycle and shared design"
+      ],
+      "pullRequest": 70,
+      "mainCommit": "5d8ae6d77158390551898aaf10a9a42ea38bd69a",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/62"
+    },
+    {
+      "id": "F06",
+      "issue": 63,
+      "implementation": "implemented",
+      "checks": [
+        "independent review of 6 explicit image-reference mappings",
+        "128 cases / 183 figures / all 404 references / 6 image aliases",
+        "invalid metadata and missing text are rejected/not guessed",
+        "old manifest refresh, content seals, common design and PWA"
+      ],
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/63"
+    },
+    {
+      "id": "F07",
+      "issue": 64,
+      "implementation": "implemented",
+      "pullRequest": 65,
+      "mainCommit": "9220976b6a5e00a7eb9597820a7b26d4476b240c",
+      "integrationEvidence": "https://github.com/donald-shrimp/ap-study/issues/64"
+    }
+  ],
+  "firstFix": {
+    "issue": 64,
+    "scope": "current storage regression tests and shared CI",
+    "localVerification": "passed",
+    "integrationEvidence": "GitHub Issue #64 records the final PR, CI and publication status"
+  },
+  "checks": {
+    "nodeFiles": 36,
+    "nodeTestsPassed": 283,
+    "contentChecksPassed": 6,
+    "repairedTestsPassed": [
+      "tests/workspace.py",
+      "tests/learning-storage-race.py",
+      "tests/subject-b-saving.py"
+    ],
+    "browserChecksPassed": [
+      "tests/storage.py",
+      "tests/case-batch-check.py",
+      "tests/design-language.py",
+      "tests/pwa.py"
+    ],
+    "workflowYAMLAndPaths": "passed",
+    "bodyReferences": 404,
+    "imageReferenceAliases": 6,
+    "independentReferenceReview": "docs/audits/body-reference-targets-review-20261025.json"
+  },
+  "nextIssue": null,
+  "remaining": [],
+  "unverified": [
+    "production personal records on another device",
+    "full Firebase Emulator rules suite in this review",
+    "mobile real-device and screen-reader matrix",
+    "long-term learning balance and large-history performance"
+  ],
+  "privateDataUsed": false
+}

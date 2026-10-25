@@ -1,3 +1,4 @@
+import {createSyncCursorStore} from './sync-cursor.js';
 import {toRecord,fromRecord} from '../v2/records.js';
 import {validateLearning,learningId,contextPayload} from '../domain/learning-state.js';
 import {makeState, complete} from '../domain/study.js';
@@ -22,6 +23,8 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
  if(!qualificationId)throw new Error('保存する資格が指定されていません。');
  const databaseName=`hitomon:${rootPath}:records-v2`;
  let dbPromise,queue=Promise.resolve(),owner,deviceId,baseline=new Map(),baselineShared=shared(makeState()),remaps=new Map(),closed=false,seenGeneration=0;
+ let learningCursor;
+ async function learningCursorStore(){await database();return learningCursor||=createSyncCursorStore({rootPath,owner,qualificationId,namespaceName:'learning'});}
  let tabId;
  try {const name=`hitomon:${rootPath}:tab`;tabId=sessionStorage.getItem(name)||crypto.randomUUID();sessionStorage.setItem(name,tabId);}catch{tabId=crypto.randomUUID();}
  async function database(){
@@ -176,6 +179,7 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
   });queue=operation;return operation;
  }
  function learningStore(){return {
+  cursor:async()=>(await learningCursorStore()).cursor(),setCursor:async cursor=>(await learningCursorStore()).setCursor(cursor),
   identity:async()=>{await database();return {owner,deviceId,qualificationId};},
   read:async()=>{await queue.catch(()=>{});const db=await database(),tx=db.transaction('meta'),done=finished(tx),values=await request(tx.objectStore('meta').getAll(learningRange()));await done;return values.map(v=>v.row);},
   merge:remote=>learningTransaction(async meta=>{
@@ -188,5 +192,5 @@ export function createLocalStore({qualificationId,rootPath='/',key,validate,owne
   }),
   acknowledge:(id,operationId,remote)=>learningTransaction(async meta=>{const old=(await request(meta.get(learningKey(id))))?.row;if(!old)return;const row={...old,remoteRevision:remote.revision};if(old.operationId===operationId)row.dirty=false;meta.put({key:learningKey(id),row});return row;}),
  };}
- return {learningStore,read,snapshot,write,flush:()=>queue,pending,acknowledge,cursor,mergeRemote,forkPending,remoteDevice,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
+ return {learningStore,read,snapshot,write,flush:()=>queue,pending,acknowledge,cursor,mergeRemote,forkPending,remoteDevice,identity:async()=>{await database();return {owner,deviceId,qualificationId};},close:async()=>{await queue.catch(()=>{});await learningCursor?.close();if(dbPromise)(await dbPromise).close();closed=true;},databaseName};
 }
