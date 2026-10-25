@@ -76,8 +76,7 @@
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "minItems": 1
+      }
     },
     "sourceRecord": {
       "$ref": "legal-context.v1.json#/$defs/sourceRecord"
@@ -281,7 +280,12 @@
     {
       "required": [
         "sourceImages"
-      ]
+      ],
+      "properties": {
+        "sourceImages": {
+          "minItems": 1
+        }
+      }
     }
   ],
   "dependentRequired": {
