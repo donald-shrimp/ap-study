@@ -42,3 +42,27 @@ test('保存中の中止は完成済みファイルを残し、再開では残�
  await assert.rejects(m.download(['a'],{signal:c.signal,onProgress:({done})=>{if(done)c.abort();}}),{name:'AbortError'});await m.scan();assert(!m.status().get('a').saved);assert(m.status().get('a').partial===false);assert.equal(m.estimate(['a']),10);
  f.setFail(null);f.calls.length=0;await m.download(['a']);assert.equal(f.calls.length,2);assert(m.status().get('a').saved);
 });
+test('新版保存後も旧版の画像とパックを追跡し、削除時に共通keepと共有画像を残す',async()=>{
+ const f=fixture(),old='assets/retired.svg',next='assets/new.svg',oldPack='data/qualifications/q/packs/a.json';
+ f.data.set(old,'retired');f.inventory.assets[old]={url:old,bytes:7,sha256:sha('retired')};f.inventory.groups[0].files.push(old);
+ await f.create().download(['a']);
+ f.data.set(next,'new');f.inventory.assets[next]={url:next,bytes:3,sha256:sha('new')};delete f.inventory.assets[old];delete f.inventory.assets[oldPack];
+ f.inventory.groups[0].files=f.inventory.groups[0].files.filter(k=>![old,oldPack].includes(k)).concat(next);f.inventory.groups[0].revision=sha('v2');
+ const updated=f.create();await updated.download(['a']);await updated.remove('a');
+ const images=f.stores.get('hitomon-/app/images'),content=f.stores.get('hitomon-/app/content');
+ assert(!images.has('https://example.com/app/'+old));assert(!images.has('https://example.com/app/'+next));assert(!content.has('https://example.com/app/'+oldPack));
+ assert(images.has('https://example.com/app/assets/choice.svg'));assert(content.has('https://example.com/app/data/qualifications/q/index.json'));
+});
+test('旧保存台帳からも廃止画像を削除し、保護情報のない共通データは保持する',async()=>{
+ const f=fixture(),old='assets/legacy.svg';f.data.set(old,'legacy');f.inventory.assets[old]={url:old,bytes:6,sha256:sha('legacy')};f.inventory.groups[0].files.push(old);await f.create().download(['a']);
+ const stateCache=await f.caches.open('hitomon-/app/offline-state'),key='https://example.com/app/offline-download-state.json',receipt=await(await stateCache.match(key)).json();delete receipt.groups['q/a'].keepFiles;receipt.groups['q/a'].files.push('../outside.svg','https://elsewhere.test/file.svg','assets/../../outside.svg','assets/x.svg?query');await stateCache.put(key,new Response(JSON.stringify(receipt)));
+ delete f.inventory.assets[old];f.inventory.groups[0].files=f.inventory.groups[0].files.filter(k=>k!==old);
+ const images=await f.caches.open('hitomon-/app/images');for(const url of ['https://example.com/outside.svg','https://elsewhere.test/file.svg','https://example.com/app/assets/x.svg?query'])await images.put(url,new Response('keep'));
+ await f.create().remove('a');assert(!f.stores.get('hitomon-/app/images').has('https://example.com/app/'+old));for(const url of ['https://example.com/outside.svg','https://elsewhere.test/file.svg','https://example.com/app/assets/x.svg?query'])assert(await images.match(url));
+ assert(f.stores.get('hitomon-/app/content').has('https://example.com/app/data/qualifications/q/index.json'));
+});
+test('別資格の保存台帳が使う廃止画像は、その資格の削除まで保持する',async()=>{
+ const f=fixture(),old='assets/shared-retired.svg';f.data.set(old,'shared');f.inventory.assets[old]={url:old,bytes:6,sha256:sha('shared')};f.inventory.groups[0].files.push(old);await f.create().download(['a']);
+ const otherInventory={...structuredClone(f.inventory),qualificationId:'other'},other=createOfflineStore({rootURL:'https://example.com/app/',inventory:otherInventory,cacheStorage:f.caches,fetcher:async url=>new Response(f.data.get(new URL(url).pathname.slice(5)))});await other.download(['a']);
+ delete f.inventory.assets[old];f.inventory.groups[0].files=f.inventory.groups[0].files.filter(k=>k!==old);await f.create().remove('a');assert(f.stores.get('hitomon-/app/images').has('https://example.com/app/'+old));await other.remove('a');assert(!f.stores.get('hitomon-/app/images').has('https://example.com/app/'+old));
+});
