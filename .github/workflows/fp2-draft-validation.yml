@@ -18,6 +18,9 @@ on:
       - 'tests/case-study-navigation.py'
       - 'tests/design-language.py'
       - 'tests/body-references.py'
+      - 'tests/case-batch-check*'
+      - 'src/domain/case-study.js'
+      - 'src/features/written.js'
       - 'tests/fp2-delivery-preparation.py'
       - 'tests/fp2-revision-published.py'
       - 'tests/question-type-content.py'
@@ -90,4 +93,4 @@ jobs:
           python tests/question-type-content.py
           git diff --exit-code
       - name: Verify cached content, law-study filtering and saved snapshots
-        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs tests/study-queue.mjs
+        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs tests/study-queue.mjs tests/case-batch-check.mjs
