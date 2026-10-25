@@ -89,6 +89,7 @@ jobs:
           python -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/hitomon-http.log" 2>&1 &
           review_server_pid=$!
           trap 'kill "$review_server_pid" 2>/dev/null || true' EXIT
+          python tests/account-lifecycle.py
           python tests/storage.py
           python tests/workspace.py
           python tests/learning-storage-race.py

@@ -9,7 +9,7 @@
 | ID | 優先度 | 改善点 | Issue | 状態 |
 | --- | --- | --- | --- | --- |
 | F07 | P1 | 共通CIの不足と保存系テスト3本の現行仕様とのずれ | [#64](https://github.com/donald-shrimp/ap-study/issues/64) | 初回修正対象 |
-| F01 | P1 | ログアウト失敗後、同じUIDのまま全同期が停止する | [#58](https://github.com/donald-shrimp/ap-study/issues/58) | 次の修正対象 |
+| F01 | P1 | ログアウト失敗後、同じUIDのまま全同期が停止する | [#58](https://github.com/donald-shrimp/ap-study/issues/58) | 実装・ローカル検証済み（反映証跡はIssue） |
 | F02 | P1 | 保存済み画像も弱回線のネットワーク応答を待つ | [#59](https://github.com/donald-shrimp/ap-study/issues/59) | 未修正 |
 | F03 | P2 | 新inventoryから削除しても旧版だけの画像が残る | [#60](https://github.com/donald-shrimp/ap-study/issues/60) | 未修正 |
 | F04 | P2 | workspace系同期のカーソルが起動後に引き継がれない | [#61](https://github.com/donald-shrimp/ap-study/issues/61) | 未修正 |
