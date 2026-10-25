@@ -16,6 +16,11 @@ on:
       - 'src/domain/qualification-features.js'
       - 'src/content/**'
       - 'src/app.js'
+      - 'src/ui/**'
+      - 'styles.css'
+      - 'tests/inline-text.mjs'
+      - 'tests/explanation-presentation.py'
+      - 'tests/question-text.mjs'
       - 'sw.js'
       - 'tests/content-cache.mjs'
       - 'tests/catalog-refresh.py'
@@ -54,4 +59,4 @@ jobs:
           python tests/fp2-content.py
           git diff --exit-code
       - name: Verify cached content, law-study filtering and saved snapshots
-        run: node --test tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs
+        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs
