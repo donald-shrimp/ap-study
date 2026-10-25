@@ -27,13 +27,25 @@ export function selectPractice({qualification,questions,attempts=[],reviewInfo,s
  const recent=rows.slice().sort((a,b)=>String(b.startedAt).localeCompare(String(a.startedAt))||b.id.localeCompare(a.id)).slice(0,20);
  const topicCount=new Map(),packCount=new Map(),lastSeen=new Map();
  for(const a of recent){const q=byId.get(a.questionId)||a.questionSnapshot;if(!q)continue;topicCount.set(q.topicId,(topicCount.get(q.topicId)||0)+1);packCount.set(q.packId,(packCount.get(q.packId)||0)+1);if(!lastSeen.has(q.id))lastSeen.set(q.id,a.startedAt);}
- const rank=q=>{const i=info(q);return i?.isDue?0:!i?1:i.needs?2:3;};
+ // Reserve two new questions per review while both kinds are available.
+ // Reconstruct first encounters from existing records, so opening a new session
+ // or another device cannot reset the mix. Explicit review/direct work doesn't
+ // consume the ordinary recommendation slots; neither do other parts/scopes.
+ const poolIds=new Set(pool.filter(q=>!scope.packId||q.packId===scope.packId).map(q=>q.id)),seen=new Set(),mix=[];
+ for(const a of rows.filter(complete).slice().sort((a,b)=>String(a.completedAt).localeCompare(String(b.completedAt))||a.id.localeCompare(b.id))){
+  const fresh=!seen.has(a.questionId);seen.add(a.questionId);
+  if(poolIds.has(a.questionId)&&!['review','direct'].includes(a.practiceScope?.intent))mix.push(fresh);
+ }
+ const preferNew=intent!=='review'&&!(mix.length>=2&&mix.slice(-2).every(Boolean));
+ const category=q=>{const i=info(q);return i?.isDue?'due':!i?'new':i.needs?'needs':'recheck';};
+ const order=preferNew?['new','due','needs','recheck']:['due','new','needs','recheck'];
+ const rank=q=>order.indexOf(category(q));
  const seed=recent[0]?.id||qualification.id;
  candidates=studyQueue(candidates,{scope:{order:scope.order,packId:scope.packId},compareRecommended:(a,b)=>{
   const ra=rank(a),rb=rank(b),ia=info(a),ib=info(b);
-  return ra-rb||(ra===0?ia.due-ib.due:ra===3?Date.parse(ia.a.completedAt)-Date.parse(ib.a.completedAt):0)||(topicCount.get(a.topicId)||0)-(topicCount.get(b.topicId)||0)||(packCount.get(a.packId)||0)-(packCount.get(b.packId)||0)||String(lastSeen.get(a.id)||'').localeCompare(String(lastSeen.get(b.id)||''))||hash(seed+':'+a.id)-hash(seed+':'+b.id)||a.id.localeCompare(b.id);
+  return ra-rb||(category(a)==='due'&&category(b)==='due'?ia.due-ib.due:category(a)==='recheck'&&category(b)==='recheck'?Date.parse(ia.a.completedAt)-Date.parse(ib.a.completedAt):0)||(topicCount.get(a.topicId)||0)-(topicCount.get(b.topicId)||0)||(packCount.get(a.packId)||0)-(packCount.get(b.packId)||0)||String(lastSeen.get(a.id)||'').localeCompare(String(lastSeen.get(b.id)||''))||hash(seed+':'+a.id)-hash(seed+':'+b.id)||a.id.localeCompare(b.id);
  }});
- const q=candidates[0],reasonCode=['due','new','needs','recheck'][rank(q)];
+ const q=candidates[0],reasonCode=category(q);
  const reasons={due:'復習日が来た問題です。',new:'まだ回答していない問題です。',needs:'前に解いた問題をもう一度確認します。',recheck:'前に解いた問題を再確認します。'};
  return {kind:'question',questionId:q.id,topicId:q.topicId,scope:{topicId:scope.topicId||null,topicIds:scope.topicIds||[],examPartId:scope.examPartId||null,examPartIds:scope.examPartIds||[]},reasonCode,reason:reasons[reasonCode],pool};
 }
