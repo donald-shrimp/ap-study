@@ -5,7 +5,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import state
+from browser_storage import open_written_case, state
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-catalog-refresh-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -30,8 +30,8 @@ try:
    path='?qualifications&qualification=fp2&part=jafp-practical' if scenario=='chooser' else 'fp2/?part=jafp-practical&entry=home'
    pg.goto(BASE+path)
    if scenario=='chooser':pg.locator('.qualification-option[data-qualification-id=fp2][data-part-id=jafp-practical]').click()
-   pg.locator('.study-entry').wait_for();assert '40問' in pg.locator('#main').inner_text();assert pg.locator('#qualification-switch').get_attribute('data-part-id')=='jafp-practical';assert pg.locator('#main h1').filter(has_text='読み込めません').count()==0
-   pg.locator('.written-case-option [data-action=written-start][data-id=fp2-202605-jafp-q04]').first.click();pg.locator('input[data-written-key="item1--yield"]').fill('0.435');pg.reload();pg.locator('input[data-written-key="item1--yield"]').wait_for();assert pg.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'
+   pg.locator('.study-entry').wait_for();assert pg.locator('.quick-start').count()==1;assert pg.locator('#qualification-switch').get_attribute('data-part-id')=='jafp-practical';assert pg.locator('#main h1').filter(has_text='読み込めません').count()==0
+   open_written_case(pg,'fp2-202605-jafp-q04');pg.locator('input[data-written-key="item1--yield"]').fill('0.435');pg.reload();pg.locator('input[data-written-key="item1--yield"]').wait_for();assert pg.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'
    pg.screenshot(path=str(ART/(scenario+'.png')))
    pg.goto(BASE+'ap/');pg.locator('.question-panel').wait_for();assert state(pg)['currentId']==before['currentId'];assert pg.get_by_role('radio').first.is_checked();assert state(pg)['attempts']==before['attempts'];assert not errors,errors
    print('PASS first visit from stale cache:',scenario,'/ AP answers preserved / FP numeric checkpoint',flush=True);ctx.close()

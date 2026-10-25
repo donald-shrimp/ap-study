@@ -1,6 +1,7 @@
 import {canUseQuestion} from './content-policy.js';
 import {complete} from './study.js';
 import {examPartsFor} from './planning.js';
+import {studyQueue} from './study-queue.js';
 export function practicePool({qualification,questions,scope={},available=()=>true,practiceAllowed=()=>true}){
  const parts=new Set(examPartsFor(qualification).filter(p=>p.practiceAvailable).map(p=>p.id));
  const topics=scope.topicIds?.length?scope.topicIds:scope.topicId?[scope.topicId]:[];
@@ -28,10 +29,10 @@ export function selectPractice({qualification,questions,attempts=[],reviewInfo,s
  for(const a of recent){const q=byId.get(a.questionId)||a.questionSnapshot;if(!q)continue;topicCount.set(q.topicId,(topicCount.get(q.topicId)||0)+1);packCount.set(q.packId,(packCount.get(q.packId)||0)+1);if(!lastSeen.has(q.id))lastSeen.set(q.id,a.startedAt);}
  const rank=q=>{const i=info(q);return i?.isDue?0:!i?1:i.needs?2:3;};
  const seed=recent[0]?.id||qualification.id;
- candidates.sort((a,b)=>{
+ candidates=studyQueue(candidates,{scope:{order:scope.order,packId:scope.packId},compareRecommended:(a,b)=>{
   const ra=rank(a),rb=rank(b),ia=info(a),ib=info(b);
   return ra-rb||(ra===0?ia.due-ib.due:ra===3?Date.parse(ia.a.completedAt)-Date.parse(ib.a.completedAt):0)||(topicCount.get(a.topicId)||0)-(topicCount.get(b.topicId)||0)||(packCount.get(a.packId)||0)-(packCount.get(b.packId)||0)||String(lastSeen.get(a.id)||'').localeCompare(String(lastSeen.get(b.id)||''))||hash(seed+':'+a.id)-hash(seed+':'+b.id)||a.id.localeCompare(b.id);
- });
+ }});
  const q=candidates[0],reasonCode=['due','new','needs','recheck'][rank(q)];
  const reasons={due:'復習日が来た問題です。',new:'まだ回答していない問題です。',needs:'前に解いた問題をもう一度確認します。',recheck:'前に解いた問題を再確認します。'};
  return {kind:'question',questionId:q.id,topicId:q.topicId,scope:{topicId:scope.topicId||null,topicIds:scope.topicIds||[],examPartId:scope.examPartId||null,examPartIds:scope.examPartIds||[]},reasonCode,reason:reasons[reasonCode],pool};
