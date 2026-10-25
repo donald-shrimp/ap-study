@@ -94,6 +94,7 @@ def written_list(page):
 
 def open_written_case(page, case_id, mode='learning'):
     written_list(page)
+    page.locator('.case-options').evaluate('(el)=>el.open=true')
     page.locator('[name=written-study-mode]').select_option(mode)
     page.locator(f'.written-case-option [data-action=written-start][data-id="{case_id}"]').click()
     page.locator('.written-layout').wait_for()

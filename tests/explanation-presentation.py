@@ -95,7 +95,8 @@ try:
    elif info['type']=='numeric':field.locator('input').fill(info['answer'])
    else:field.locator('textarea').fill(info['answer'])
    field.locator('[data-action=written-submit]').click();field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for()
-   assert field.locator('.written-answer strong').first.inner_text()=='ケース条件';assert field.locator('.katex').count()==1;assert field.locator('td strong').inner_text()=='表の条件';assert field.locator('pre code').inner_text()=='**literal** <tag>'
+   field.locator('.written-explanation').evaluate('(el)=>el.open=true')
+   assert field.locator('.written-answer .explanation strong').first.inner_text()=='ケース条件';assert field.locator('.katex').count()==1;assert field.locator('td strong').inner_text()=='表の条件';assert field.locator('pre code').inner_text()=='**literal** <tag>'
    assert field.locator('p p').count()==0
    pg.reload();field.locator('.written-answer').wait_for();assert field.locator('.katex').count()==1
    pg.screenshot(path=str(ART/(qual+'-case.png')),full_page=True);checks.append(qual+': case rich blocks, disclosure, snapshot resume');ctx.close()

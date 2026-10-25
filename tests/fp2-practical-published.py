@@ -21,7 +21,7 @@ try:
   b=p.chromium.launch(**options);ctx=b.new_context(viewport={'width':1440,'height':1000});pg=ctx.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(base+'fp2/?part=jafp-practical&entry=home');pg.locator('.study-entry').wait_for();assert pg.locator('.quick-start').count()==1
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
   for n,c in enumerate(cases,1):
-   if n>1:pg.locator('#main .page-heading [data-view=home]').click();pg.locator('.study-entry').wait_for()
+   if n>1:pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for()
    open_written_case(pg,c['id']);pg.locator('.written-layout').wait_for()
    assert pg.locator('section.written-field').count()==sum(len(i['fields']) for i in c['items'])
    if c['bodyFigures']:
@@ -40,9 +40,9 @@ try:
      else:pg.locator('input'+selector).fill(f['referenceAnswers'][0])
      pg.locator('[data-action=written-submit]'+selector).click();pg.locator('section.written-field'+selector).filter(has_text='自動判定：正解').wait_for()
    print('checked',n,flush=True)
-  pg.locator('#main .page-heading [data-view=home]').click();pg.locator('.study-entry').wait_for();pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
+  pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for();pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
   open_written_case(pg,'fp2-202605-jafp-q16');pg.locator('.written-layout').wait_for();pg.wait_for_function('Array.from(document.querySelectorAll(".written-body img")).every(i=>i.complete&&i.naturalWidth>0)');assert pg.locator('.written-body img').count()==1
-  pg.locator('#main .page-heading [data-view=home]').click();pg.locator('.study-entry').wait_for()
+  pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for()
   open_written_case(pg,'fp2-202605-jafp-q04');pg.locator('input[data-written-key="item1--yield"]').fill('0.435');pg.reload();pg.locator('input[data-written-key="item1--yield"]').wait_for();assert pg.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'
   ctx.set_offline(False);open_data_management(pg)
   with pg.expect_download() as ev:pg.locator('#export-state').click()
