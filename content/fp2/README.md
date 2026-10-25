@@ -7,3 +7,5 @@
 学科の解説改訂版は `work/fp2/revisions/202605-objective-v2/` の草稿・修正来歴・独立レビューを正本とし、確認済み60問を公開作成元へ反映した。初回公開の確認台帳も同フォルダの `review/previous-publication-reviews.json` に保持する。問題ID・原文・正答・原本と法令基準はそのまま、教材版を1増やしている。
 
 作成・納品形式は [外注用手順](../../docs/fp2-authoring.md)。ヒントの新規作成・既存教材の改稿は [共通ルール](../../docs/hint-authoring.md)を使う。科目ID・分野IDは `qualification.json` を使う。
+
+学科60問に共通ルールによる2段ヒント120件を追加した。最新のヒント改訂と独立レビューは [`work/fp2/revisions/202605-objective-hints-v3/`](../../work/fp2/revisions/202605-objective-hints-v3/README.md)を参照。上記の解説改訂版と直前の公開問題・レビューは保持する。
