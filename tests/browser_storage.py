@@ -86,3 +86,14 @@ def select_target(page, part, qualification_id='ap', resume_written=False):
     if resume_written and part == 'written' and page.locator('.study-entry [data-action=written-resume]').count():
         page.locator('.study-entry [data-action=written-resume]').click()
         page.locator('.written-layout').wait_for()
+
+def written_list(page):
+    nav(page, 'topics')
+    page.locator('.case-topic').first.wait_for()
+    page.locator('.case-topic details').evaluate_all('(els)=>els.forEach(el=>el.open=true)')
+
+def open_written_case(page, case_id, mode='learning'):
+    written_list(page)
+    page.locator('[name=written-study-mode]').select_option(mode)
+    page.locator(f'.written-case-option [data-action=written-start][data-id="{case_id}"]').click()
+    page.locator('.written-layout').wait_for()

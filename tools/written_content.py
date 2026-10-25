@@ -36,4 +36,18 @@ def compile_cases(root,config,directory,hashed_json):
         for path in paths:assert path.startswith('assets/written/') and '..' not in path.split('/') and r['assetHashes'][path]==hashlib.sha256((root/path).read_bytes()).hexdigest()
         for path,digest in {**r['sourceHashes'],**r['assetHashes']}.items():assert digest==hashlib.sha256((root/path).read_bytes()).hexdigest()
     name,digest=hashed_json(directory,'cases',{'format':'hitomon-case-bank','version':2,'qualificationId':config['id'],'cases':cases})
-    return {'url':name,'sha256':digest,'count':len(cases),'fields':sum(len(i['fields']) for c in cases for i in c['items'])}
+    result={'url':name,'sha256':digest,'count':len(cases),'fields':sum(len(i['fields']) for c in cases for i in c['items'])}
+    if config.get('caseCatalogSource'):
+        path=(root/config['caseCatalogSource']).resolve()
+        assert path.is_relative_to(root.resolve())
+        catalog=json.loads(path.read_text())
+        assert catalog['format']=='hitomon-case-catalog' and catalog['version']==1 and catalog['qualificationId']==config['id']
+        entries=catalog['entries'];known={c['id']:c for c in cases};packs={};numbers=set()
+        assert isinstance(entries,list) and len(entries)==len(known) and {e['caseId'] for e in entries}==set(known)
+        for e in entries:
+            assert set(e)=={'caseId','packId','packLabel','number'} and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',e['packId'])
+            assert isinstance(e['packLabel'],str) and 0<len(e['packLabel'])<=200 and type(e['number']) is int and e['number']>0
+            key=(known[e['caseId']]['examPartId'],e['packId']);assert packs.setdefault(key,e['packLabel'])==e['packLabel']
+            position=(*key,e['number']);assert position not in numbers;numbers.add(position)
+        result['index']=entries
+    return result

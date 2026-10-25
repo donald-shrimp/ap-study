@@ -5,7 +5,7 @@ from pathlib import Path
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import state,nav,select_target,wait_for_async
+from browser_storage import written_list, state,nav,select_target,wait_for_async
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-offline-materials-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -43,6 +43,6 @@ try:
    assert not errors,errors;print('PASS complete',id,'download / unseen late pack or image-only question / no study records from download',flush=True);ctx.close()
   # B uses a shared text bank but requires every selected session's figure.
   ctx=b.new_context(viewport={'width':1440,'height':900});pg=ctx.new_page();pg.goto(BASE+'ap/');pg.locator('.quick-start').wait_for();select_target(pg,'written');pg.locator('.study-entry').wait_for();pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');before=state(pg);d=save(pg,'cases-ap-r07h-pm1');assert state(pg)==before;d.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
-  assert pg.locator('[data-action=written-start][data-id=ap-r07a-pm1]').first.is_disabled();pg.locator('[data-action=written-start][data-id=ap-r07h-pm1]').first.click();pg.locator('.written-layout').wait_for();pg.locator('.written-body .question-figure img').first.evaluate('(i)=>i.decode()');pg.locator('textarea[data-written-key]').first.fill('オフライン回答');pg.locator('[data-action=written-submit]').first.click();pg.locator('[data-action=written-answer]').first.click();pg.locator('.written-answer').wait_for();pg.locator('[data-action=written-rate][data-outcome=unsure]').first.click();pg.reload();pg.locator('textarea[data-written-key]').first.wait_for();assert pg.locator('textarea[data-written-key]').first.input_value()=='オフライン回答';pg.screenshot(path=str(ART/'written-offline.png'),full_page=True);print('PASS B required figures and shared bank / unsaved case disabled / free text, example, self rating and reload',flush=True);ctx.close();b.close()
+  written_list(pg);assert pg.locator('[data-action=written-start][data-id=ap-r07a-pm1]').first.is_disabled();pg.locator('[data-action=written-start][data-id=ap-r07h-pm1]').first.click();pg.locator('.written-layout').wait_for();pg.locator('.written-body .question-figure img').first.evaluate('(i)=>i.decode()');pg.locator('textarea[data-written-key]').first.fill('オフライン回答');pg.locator('[data-action=written-submit]').first.click();pg.locator('[data-action=written-answer]').first.click();pg.locator('.written-answer').wait_for();pg.locator('[data-action=written-rate][data-outcome=unsure]').first.click();pg.reload();pg.locator('textarea[data-written-key]').first.wait_for();assert pg.locator('textarea[data-written-key]').first.input_value()=='オフライン回答';pg.screenshot(path=str(ART/'written-offline.png'),full_page=True);print('PASS B required figures and shared bank / unsaved case disabled / free text, example, self rating and reload',flush=True);ctx.close();b.close()
 finally:s.shutdown()
 print('Artifacts:',ART)

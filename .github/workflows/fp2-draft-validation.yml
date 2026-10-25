@@ -7,17 +7,23 @@ on:
       - 'work/fp2/revisions/**'
       - 'work/fp2/historical/**'
       - 'content/fp2/**'
+      - 'content/ap/case-catalog.json'
+      - 'content/ap/qualification.json'
       - 'content/qualifications.json'
       - 'data/qualifications/fp2/**'
       - 'assets/fp2/**'
       - 'sources/fp2/**'
       - 'tests/fp2-content.py'
+      - 'tests/study-queue.mjs'
+      - 'tests/case-study-navigation.py'
       - 'tests/fp2-delivery-preparation.py'
       - 'tests/fp2-revision-published.py'
       - 'tests/question-type-content.py'
       - 'schemas/question-format.v1.json'
       - 'tests/legal-study-filter*'
       - 'src/domain/legal-context.js'
+      - 'src/domain/study-queue.js'
+      - 'src/domain/practice.js'
       - 'src/domain/diagnostic.js'
       - 'src/domain/qualification-features.js'
       - 'src/content/**'
@@ -82,4 +88,4 @@ jobs:
           python tests/question-type-content.py
           git diff --exit-code
       - name: Verify cached content, law-study filtering and saved snapshots
-        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs
+        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs tests/study-queue.mjs
