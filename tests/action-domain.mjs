@@ -35,8 +35,8 @@ test('通常の中断を最優先にし、診断・別資格・継続元は再�
  assert.equal(select([paused,diagnostic]).kind,'resume');assert.equal(select([paused,diagnostic]).attemptId,'db1');assert.equal(select([paused],{ignorePaused:true}).kind,'question');
  assert.equal(select([{...paused,qualificationId:'other'}]).kind,'question');assert.equal(select([paused,{...attempt('db2','correct'),continuationOf:'db1'}]).kind,'question');
 });
-test('期限到来の復習を選ぶが、計画から範囲を自動固定しない',()=>{
- const old=attempt('db2','assisted'),result=select([old],{plan,reviewInfo:q=>q.id==='db2'?{a:old,isDue:true,due:new Date('2026-10-06')}:null});
+test('復習入口では期限到来を選ぶが、計画から範囲を自動固定しない',()=>{
+ const old=attempt('db2','assisted'),result=select([old],{plan,intent:'review',reviewInfo:q=>q.id==='db2'?{a:old,isDue:true,due:new Date('2026-10-06')}:null});
  assert.equal(result.questionId,'db2');assert.equal(result.reasonCode,'due');assert.equal(result.scope.topicId,null);assert.equal(result.scope.examPartId,null);
 });
 test('未着手を要復習より先に選び、重点は固定条件にしない',()=>{
