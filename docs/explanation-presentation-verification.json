@@ -1,0 +1,60 @@
+{
+  "release": "20261025-explanation-emphasis",
+  "pullRequest": 42,
+  "scope": "Shared explanation rendering; published learning material is unchanged",
+  "localVerification": {
+    "nodeTests": {
+      "passed": 40,
+      "command": "node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs"
+    },
+    "browser": {
+      "command": "python tests/explanation-presentation.py",
+      "material": "Synthetic snapshots in isolated guest browser profiles; production content is not edited",
+      "practice": {
+        "qualifications": ["ap", "ab730", "fp2"],
+        "outcomes": ["correct with hint", "incorrect with hint", "answer revealed"],
+        "summaryExplanationChoiceReasonsTakeaway": true,
+        "optionalHintEmphasis": true,
+        "htmlEscaped": true,
+        "noDisclosureBeforeAnswer": true,
+        "widths": [320, 390, 1440],
+        "fontScalePercent": [100, 200],
+        "takeawayEmphasisInlineAndSameFontSize": true,
+        "offlineReloadKeepsSnapshot": true
+      },
+      "assessmentRenderers": {
+        "modes": ["diagnostic", "mock"],
+        "syntheticSlotsPerMode": 30,
+        "takeawayFromSavedSnapshot": true,
+        "noEmptyLegacySummaryOrTakeaway": true,
+        "noDisclosureBeforeFinish": true,
+        "slotsNotMutated": true
+      },
+      "caseStudy": {
+        "targets": ["ap/written", "fp2/jafp-practical"],
+        "productionStorageAndWrittenFeature": true,
+        "emphasisMathTableCodePreserved": true,
+        "noDisclosureBeforeAnswer": true,
+        "resumeSavedSnapshot": true
+      },
+      "pageErrors": []
+    },
+    "existingChecks": {
+      "python tests/fp2-content.py": "passed; reviewed60 questions and40 cases with68 fields retained",
+      "python tests/fp2-practical-published.py": "passed; all40 cases and68 fields, offline figures, checkpoint and backup import",
+      "python tests/pwa.py": "passed; offline, update, cached assets and records retained",
+      "python tests/catalog-refresh.py": "passed on rerun; one earlier run hit the test's immediate numeric-input/reload timing assertion"
+    },
+    "previousReleaseUpgrade": {
+      "previousRelease": "20261025-home-layout",
+      "oldRuntimeServedFromCommit": "bb4a34a6e59b2f08314f19beac0222e38cb9ae41",
+      "waitingWorkerDoesNotReloadAnswer": true,
+      "selectionHintAndSnapshotRetained": true,
+      "newInlineModuleCached": true,
+      "offlineSubmissionAfterExplicitUpdate": true
+    }
+  },
+  "publicationEvidence": "The PR records CI, Pages deployment and deployed-file/browser verification after merge.",
+  "materialChanges": [],
+  "followUp": "Independently review and publish any future emphasis added to learning content, including Draft38, after renderer deployment verification."
+}
