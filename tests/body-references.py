@@ -22,9 +22,10 @@ try:
   b=p.chromium.launch(**opts);pg=b.new_page(viewport={'width':1440,'height':1000});errors=[];pg.on('pageerror',lambda e:errors.append(str(e)))
   pg.goto(BASE+'ap/?part=written&entry=home');pg.locator('.quick-start').wait_for()
   result=pg.evaluate('''async cases=>{
-   const {caseBodyHTML,addBodyReferences}=await import('./src/ui/case-body.js');let figures=0,markers=0;
+   const {caseBodyHTML,addBodyReferences}=await import('./src/ui/case-body.js');let figures=0,markers=0,imageAliases=0;
+   const mappings=Object.fromEntries((await(await fetch(new URL('data/qualifications/ap/manifest.json',document.baseURI))).json()).cases.index.map(e=>[e.caseId,e.referenceTargets||{}]));
    for(const c of cases){
-    const root=document.createElement('div');root.innerHTML=caseBodyHTML(c,document.baseURI);
+    const root=document.createElement('div');root.innerHTML=caseBodyHTML(c,document.baseURI,mappings[c.id]);
     const images=[...root.querySelectorAll('figure img')];
     if(images.length!==c.bodyFigures.length)throw Error(c.id+': figure count');
     c.bodyFigures.forEach((f,i)=>{
@@ -35,7 +36,9 @@ try:
     });
     for(const [id,ref] of Object.entries(c.bodyRefs||{})){
      const text=ref.text||ref.anchor,target=[...root.querySelectorAll('[id]')].find(e=>e.id==='written-ref-'+id);
-     if(target)markers++;
+     if(!target)throw Error(c.id+': unresolved reference '+id);markers++;
+     if(!['text','figure'].includes(target.dataset.bodyRefKind))throw Error(c.id+': unclassified reference '+id);
+     if(mappings[c.id]?.[id]){const expected=root.querySelector('#written-ref-'+mappings[c.id][id]);if(target.closest('figure')!==expected||target.dataset.bodyRefKind!=='figure')throw Error(c.id+': wrong image target '+id);imageAliases++;}
      if(c.bodyFigures.some(f=>f.caption===text)&&target?.tagName!=='FIGURE')throw Error(c.id+': figure reference not on figure');
     }
    }
@@ -43,7 +46,12 @@ try:
    const root=document.createElement('div');root.innerHTML=addBodyReferences(html,{split:{text:'分割された参照'},attribute:{text:'属性だけの参照'},quote:{text:'quoted'}});
    if(root.querySelector('img').getAttribute('alt')!=='属性だけの参照 " quoted'||root.querySelector('img').getAttribute('loading')!=='lazy'||root.querySelector('a').textContent.trim())throw Error('synthetic attribute integrity');
    if(!root.querySelector('#written-ref-split strong')||root.querySelector('#written-ref-attribute,#written-ref-quote'))throw Error('synthetic text-only markers');
-   return {cases:cases.length,figures,markers};
+   const figureHTML='<figure><a><img alt="図内の語"></a><figcaption>図1</figcaption></figure><p>図内の語</p>';
+   root.innerHTML=addBodyReferences(figureHTML,{figure:{anchor:'図1'},inside:{text:'図内の語'},missing:{text:'未定義の語'}},{inside:'figure'});
+   if(root.querySelector('#written-ref-inside')?.closest('figure')?.id!=='written-ref-figure'||root.querySelector('#written-ref-missing'))throw Error('explicit image reference / unresolved reference');
+   root.innerHTML=addBodyReferences(figureHTML,{figure:{anchor:'図1'},missing:{text:'未定義の語'}});
+   if(root.querySelector('#written-ref-missing'))throw Error('missing text guessed as image');
+   return {cases:cases.length,figures,markers,imageAliases};
   }''',cases)
   open_written_case(pg,'ap-r07h-pm8')
   pg.evaluate('async()=>{await Promise.all([...document.querySelectorAll(".written-body img")].map(img=>{img.loading="eager";return img.decode();}));}')
@@ -55,6 +63,9 @@ try:
    pg.set_viewport_size({'width':width,'height':1000})
    if width<=390:pg.locator('[data-action=written-pane][data-pane=body]').click()
    assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1');pg.screenshot(path=str(ART/f'pm8-{width}.png'))
+  open_written_case(pg,'ap-r07h-pm6');pg.locator('[data-action=written-reference]').click();pg.locator('.written-layout[data-pane=body]').wait_for();
+  assert pg.locator('#written-ref-blank-a').evaluate('e=>e.closest("figure").id')=='written-ref-figure-1'
+  pg.locator('#written-ref-blank-a').evaluate('e=>e.scrollIntoView({block:"start"})');assert pg.locator('#written-ref-blank-a').evaluate('e=>Math.abs(e.getBoundingClientRect().top-e.closest("figure").getBoundingClientRect().top)')<24
   assert not errors,errors;b.close()
 finally:server.shutdown()
 (ART/'results.json').write_text(json.dumps({**result,'pm8FigureReferenceJump':True,'typedAnswerPreserved':True,'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')

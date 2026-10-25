@@ -8,15 +8,15 @@
 
 | ID | 優先度 | 改善点 | Issue | 状態 |
 | --- | --- | --- | --- | --- |
-| F07 | P1 | 共通CIの不足と保存系テスト3本の現行仕様とのずれ | [#64](https://github.com/donald-shrimp/ap-study/issues/64) | 初回修正対象 |
-| F01 | P1 | ログアウト失敗後、同じUIDのまま全同期が停止する | [#58](https://github.com/donald-shrimp/ap-study/issues/58) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F02 | P1 | 保存済み画像も弱回線のネットワーク応答を待つ | [#59](https://github.com/donald-shrimp/ap-study/issues/59) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F03 | P2 | 新inventoryから削除しても旧版だけの画像が残る | [#60](https://github.com/donald-shrimp/ap-study/issues/60) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F04 | P2 | workspace系同期のカーソルが起動後に引き継がれない | [#61](https://github.com/donald-shrimp/ap-study/issues/61) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F05 | P2 | FP実技の同期対象も「科目B」と表示する | [#62](https://github.com/donald-shrimp/ap-study/issues/62) | 実装・ローカル検証済み（反映証跡はIssue） |
-| F06 | P2 | 図内参照など6件のbodyRefsが実DOMに解決しない | [#63](https://github.com/donald-shrimp/ap-study/issues/63) | 未修正 |
+| F07 | P1 | 共通CIの不足と保存系テスト3本の現行仕様とのずれ | [#64](https://github.com/donald-shrimp/ap-study/issues/64) | 修正済み（CI・公開証跡はIssue） |
+| F01 | P1 | ログアウト失敗後、同じUIDのまま全同期が停止する | [#58](https://github.com/donald-shrimp/ap-study/issues/58) | 修正済み（CI・公開証跡はIssue） |
+| F02 | P1 | 保存済み画像も弱回線のネットワーク応答を待つ | [#59](https://github.com/donald-shrimp/ap-study/issues/59) | 修正済み（CI・公開証跡はIssue） |
+| F03 | P2 | 新inventoryから削除しても旧版だけの画像が残る | [#60](https://github.com/donald-shrimp/ap-study/issues/60) | 修正済み（CI・公開証跡はIssue） |
+| F04 | P2 | workspace系同期のカーソルが起動後に引き継がれない | [#61](https://github.com/donald-shrimp/ap-study/issues/61) | 修正済み（CI・公開証跡はIssue） |
+| F05 | P2 | FP実技の同期対象も「科目B」と表示する | [#62](https://github.com/donald-shrimp/ap-study/issues/62) | 修正済み（CI・公開証跡はIssue） |
+| F06 | P2 | 図内参照など6件のbodyRefsが実DOMに解決しない | [#63](https://github.com/donald-shrimp/ap-study/issues/63) | 修正済み（CI・公開証跡はIssue） |
 
-まずF07で保存と更新の検証を自動化する。その後、F01→F02を別の小PRで直す。F04のカーソル導入は文書保存との整合が必要で、速度だけを理由にカーソルを先に進めない。
+F07の検証基盤を先に整え、F01→F02→F03→F04→F05→F06を小PRで修正した。各IssueにCI・main・Pagesと公開確認の証跡を残す。カーソルは文書の保存後にだけ進める。
 
 ## 点検した範囲
 
@@ -52,3 +52,14 @@ python docs/audits/system-review-20261025.py
 初回基準で実行した教材チェックは `tools/build-content.py`、`tests/common-content.py`、`tests/written-content.py`、`tests/fp2-content.py`、`tests/fp2-review-gates.py`、`tests/offline-content.py`。すべて成功。公開ゲートの異常入力テストでは意図的な拒否ログが出るため、ログ中のError文字列だけで失敗とせず、各プロセスの終了コードと最終判定を確認した。
 
 実施結果と次の対象は [進捗JSON](system-review-progress.json) に記録する。未公開教材PR、個人記録、本番の認証情報には変更を加えない。
+
+## 順次修正の結果
+
+- F01：ログアウト失敗時、同じUIDが継続している場合だけ6系統の同期を復帰。古い応答と同時UID変更を検証。
+- F02：保存済み画像は弱回線でも約300msでキャッシュへ切替え、裏で更新。明示ダウンロードのSHA検証は維持。
+- F03：新版保存後も旧ファイルの所有情報を保持し、削除時に回収。共通keep、他教材・他資格の参照、アプリ外URLを保護。
+- F04：同期位置をアカウント・資格・保存領域別に保存。合成51件の初回取得が再起動後0件となり、文書/位置保存失敗・競合・別タブも検証。既存の記録DBの版と構造は不変。
+- F05：APは科目B、FPは実技（日本FP協会）という資格定義の名称を使い、未公開科目を表示しない。
+- F06：図表内の6参照をカタログのreferenceTargetsで明示し、本文と画像の参照を区別。404/404参照が実DOMへ解決する。6対応は[別担当確認](audits/body-reference-targets-review-20261025.json)を行い、本文・正答・図・既存内容レビューは変更していない。古いキャッシュからのメタデータ更新も検証。
+
+これは初回点検で登録した7件の対応結果であり、本番本人記録の別端末照合や未実施の実機検証を完了扱いにするものではない。初回の測定JSONは当時の再現記録として保持する。

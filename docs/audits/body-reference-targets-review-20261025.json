@@ -1,0 +1,342 @@
+{
+  "kind": "body-reference-targets-metadata-review",
+  "issue": 63,
+  "status": "approved",
+  "reviewer": "/root/review_image_reference_targets",
+  "metadataAuthor": "/root",
+  "reviewedAt": "2026-10-25T08:42:03.649050+00:00",
+  "baseCommit": "5d8ae6d77158390551898aaf10a9a42ea38bd69a",
+  "scope": "content/ap/case-catalog.jsonの4ケースに追加したreferenceTargetsの6対応のみを独立確認した。問題全体の新規内容レビューではなく，既存の本文・正答・解説・図・内容承認を変更または再承認する記録ではない。",
+  "instructionsRead": [
+    "AGENTS.md",
+    "docs/content-authoring.md"
+  ],
+  "method": [
+    "作者とは別の担当として，written-cases.jsonの対象bodyRefs・sourcePages・bodyFiguresと小問prompt・bodyRefsを照合した。",
+    "view_imageで対象5枚の図表切り出し画像を実際に読み，空欄a・b及び下線①・②・④の字句と位置を確認した。",
+    "view_imageで対応する原本ページ画像5枚も読み，図表と保存済み出典ページの対応を確認した。",
+    "git showで基準mainのバイト列を取得し，教材・レビュー台帳・既存画像及び対象の原本PDFと直接比較した。SHA256と既存レビューのハッシュも照合した。",
+    "テスト成功を内容承認の根拠として用いていない。"
+  ],
+  "catalog": {
+    "path": "content/ap/case-catalog.json",
+    "sha256": "0881922dffe4956ca8c92ccd348dfe4b5dfda8d8f1fd8109441d2cec29d5d571",
+    "canonicalSHA256": "8221d7dca85132f379d335fb8eadc109dbfbd8730780d1a681f53fce56e5c4d7",
+    "canonicalMethod": "UTF-8・キーソート・空白なし・Unicode文字をそのまま保存。json.dumps(ensure_ascii=False, sort_keys=True, separators=(\",\",\":\"))",
+    "onlyExpectedSixMappingsAdded": true,
+    "otherwiseEqualToBaseline": true
+  },
+  "mappings": [
+    {
+      "caseId": "ap-r07h-pm6",
+      "referenceKey": "blank-a",
+      "targetId": "figure-1",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          37
+        ],
+        "text": "［a］"
+      },
+      "targetReference": {
+        "sourcePages": [
+          37
+        ],
+        "anchor": "図1 新システムのE-R図（抜粋）"
+      },
+      "image": "assets/written/ap-r07h-pm6/figure-1.png",
+      "imageSHA256": "8a0a02a5c3c9251e5d0787487519cdabe4bc962f29b5ae89f616ae6263bc8d06",
+      "sourcePageImage": "assets/written/ap-r07h-pm6/question-p37.png",
+      "sourcePageImageSHA256": "2369928e1dd023371235e660f8faf434ce58017668d72f167e1b7ad79aab9d39",
+      "sourcePageConvention": "sourcePagesと保存済みページ画像の対応を確認。",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "図1中の［a］，［b］に入れる適切な属性名及びエンティティ間の関連を答え，E-R図を完成させよ。なお，属性名及びエンティティ間の関連の表記は，図1の凡例に倣うこと。",
+          "sourcePages": [
+            36,
+            37,
+            39
+          ],
+          "bodyRefs": [
+            "figure-1",
+            "blank-a",
+            "blank-b"
+          ]
+        }
+      ],
+      "observation": "図1左上の「店舗エリア詳細」内で「店舗エリア番号」の下に枠付きの空欄aがある。設問1は図1中のaを問うため，figure-1への対応は妥当。"
+    },
+    {
+      "caseId": "ap-r07h-pm6",
+      "referenceKey": "blank-b",
+      "targetId": "figure-1",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          37
+        ],
+        "text": "［b］"
+      },
+      "targetReference": {
+        "sourcePages": [
+          37
+        ],
+        "anchor": "図1 新システムのE-R図（抜粋）"
+      },
+      "image": "assets/written/ap-r07h-pm6/figure-1.png",
+      "imageSHA256": "8a0a02a5c3c9251e5d0787487519cdabe4bc962f29b5ae89f616ae6263bc8d06",
+      "sourcePageImage": "assets/written/ap-r07h-pm6/question-p37.png",
+      "sourcePageImageSHA256": "2369928e1dd023371235e660f8faf434ce58017668d72f167e1b7ad79aab9d39",
+      "sourcePageConvention": "sourcePagesと保存済みページ画像の対応を確認。",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "図1中の［a］，［b］に入れる適切な属性名及びエンティティ間の関連を答え，E-R図を完成させよ。なお，属性名及びエンティティ間の関連の表記は，図1の凡例に倣うこと。",
+          "sourcePages": [
+            36,
+            37,
+            39
+          ],
+          "bodyRefs": [
+            "figure-1",
+            "blank-a",
+            "blank-b"
+          ]
+        }
+      ],
+      "observation": "図1中央下の「商品」と右側の「キャンペーン商品」を結ぶ位置に枠付きの空欄bがある。設問1は図1中のbを問うため，figure-1への対応は妥当。"
+    },
+    {
+      "caseId": "ap-r06a-pm7",
+      "referenceKey": "underline-1",
+      "targetId": "table-2",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          37
+        ],
+        "text": "①特定のイベントによって再開する"
+      },
+      "targetReference": {
+        "sourcePages": [
+          37
+        ],
+        "anchor": "表2 Sイヤホンの構成要素の機能概要"
+      },
+      "image": "assets/written/ap-r06a-pm7/table-2.png",
+      "imageSHA256": "f5e23d53fece07eda8f8a19fd7491b76b27c9ba7b462dbf303215cd8b0831ce2",
+      "sourcePageImage": "assets/written/ap-r06a-pm7/question-p37.png",
+      "sourcePageImageSHA256": "76dbff79e6a58c90ce8d7436f94443fff572df1ed5d90450c98376bba1d9e0bc",
+      "sourcePageConvention": "sourcePagesと保存済みページ画像の対応を確認。",
+      "items": [
+        {
+          "id": "q1-2",
+          "prompt": "Sイヤホンの機能について答えよ。\n表2中の下線①の特定のイベントとして適切なものを解答群の中から選び，記号で答えよ。",
+          "sourcePages": [
+            37,
+            39
+          ],
+          "bodyRefs": [
+            "table-2",
+            "underline-1"
+          ]
+        }
+      ],
+      "observation": "表2の「クロック部」の機能欄に，下線①「特定のイベントによって再開する」がある。設問1(2)も「表2中の下線①」を指定しており，table-2への対応は妥当。"
+    },
+    {
+      "caseId": "ap-r06a-pm9",
+      "referenceKey": "underline-2",
+      "targetId": "table-1",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          48
+        ],
+        "text": "②抵抗する"
+      },
+      "targetReference": {
+        "sourcePages": [
+          48
+        ],
+        "anchor": "表1 社外のステークホルダ登録簿"
+      },
+      "image": "assets/written/ap-r06a-pm9/table-1.png",
+      "imageSHA256": "37be372c1ed86537826204130f90e142bb53cc2c3b7645c40ce508c7b5af88fb",
+      "sourcePageImage": "assets/written/ap-r06a-pm9/question-p48.png",
+      "sourcePageImageSHA256": "aa142b9f542f4c5e3ad99b601862b4d4ee6c515cdd493fe3de92591dbcae4815",
+      "sourcePageConvention": "sourcePagesと保存済みページ画像の対応を確認。",
+      "items": [
+        {
+          "id": "q2-1",
+          "prompt": "［プロジェクト計画の作成］について答えよ。\n表1中の下線②について，C課長が，S氏に対してとるべきステークホルダマネジメントとしての最も適切な行動を，解答群の中から選び，記号で答えよ。",
+          "sourcePages": [
+            46,
+            47,
+            48,
+            49,
+            50
+          ],
+          "bodyRefs": [
+            "overview",
+            "launch",
+            "table-1",
+            "underline-2"
+          ]
+        }
+      ],
+      "observation": "表1の項番2「R社のS氏」の「プロジェクトに対する姿勢」欄に下線②「抵抗する」がある。設問2(1)も「表1中の下線②」を指定しており，table-1への対応は妥当。"
+    },
+    {
+      "caseId": "ap-r06a-pm9",
+      "referenceKey": "underline-4",
+      "targetId": "table-3",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          49
+        ],
+        "text": "④メンバーの活動を阻害する不安要因を排除して，メンバーが活動しやすい環境を作る。"
+      },
+      "targetReference": {
+        "sourcePages": [
+          49
+        ],
+        "anchor": "表3 リスク登録簿（抜粋）"
+      },
+      "image": "assets/written/ap-r06a-pm9/table-3.png",
+      "imageSHA256": "dcdb9d8207b5576aca0df4a7a6eb9dc6b0190e34d086744da3841661c063e5ca",
+      "sourcePageImage": "assets/written/ap-r06a-pm9/question-p49.png",
+      "sourcePageImageSHA256": "28ad937b086e200a7e3e1f0c6007cfb1c17bafd5fc1960d505b8ef139f007b92",
+      "sourcePageConvention": "sourcePagesと保存済みページ画像の対応を確認。",
+      "items": [
+        {
+          "id": "q3-2",
+          "prompt": "［リスクマネジメント計画］について答えよ。\n表3中の下線④について，C課長が，この対応策によってリスクへの対応ができると考えた理由は何か。本文中の字句を用いて40字以内で答えよ。",
+          "sourcePages": [
+            48,
+            49,
+            50
+          ],
+          "bodyRefs": [
+            "plan",
+            "table-2",
+            "table-3",
+            "underline-4"
+          ]
+        }
+      ],
+      "observation": "表3の項番3「リスクへの対応策」欄に，下線④「メンバーの活動を阻害する不安要因を排除して，メンバーが活動しやすい環境を作る。」が改行をまたいである。設問3(2)も「表3中の下線④」を指定しており，table-3への対応は妥当。"
+    },
+    {
+      "caseId": "ap-r06h-pm6",
+      "referenceKey": "blank-a",
+      "targetId": "figure-1",
+      "status": "approved",
+      "reference": {
+        "sourcePages": [
+          36
+        ],
+        "text": "［a］"
+      },
+      "targetReference": {
+        "sourcePages": [
+          36
+        ],
+        "anchor": "図1 E-R図"
+      },
+      "image": "assets/written/ap-r06h-pm6/figure-1.png",
+      "imageSHA256": "0545ca1fa2ae1895a3ddf546b7535fc14d9f9af7a1eb0eb25c304d3889823760",
+      "sourcePageImage": "assets/written/ap-r06h-pm6/question-p36.png",
+      "sourcePageImageSHA256": "8717e43db058bda0948cefbc83fd90711bac14a1459b85f2d7d880e8b57e7515",
+      "sourcePageConvention": "sourcePagesは保存済みPDFのページ位置。ap-r06h-pm6/question-p36.pngの紙面下部は35。",
+      "items": [
+        {
+          "id": "q1-1",
+          "prompt": "［単一データベース・単一スキーマ方式の検討］について答えよ。\n図1中の［a］に入れる適切なエンティティ間の関連を答え，E-R図を完成させよ。なお，エンティティ間の関連の表記は，図1の凡例に倣うこと。",
+          "sourcePages": [
+            35,
+            36,
+            38
+          ],
+          "bodyRefs": [
+            "figure-1",
+            "blank-a"
+          ]
+        }
+      ],
+      "observation": "図1の左側「従業員」と中央「部署」の間で，上側の既存矢印より下に枠付きの空欄aがある。設問1(1)は図1中のaの関連を問うため，figure-1への対応は妥当。"
+    }
+  ],
+  "preservationChecks": {
+    "files": [
+      {
+        "path": "content/ap/written-cases.json",
+        "scope": "全ケースの本文・設問・正答・解説・図の定義",
+        "sha256": "56cf23ad2cd620243a004d71ab50d7af09e9d120641b8b6db34d1312abad18f8",
+        "baselineSHA256": "56cf23ad2cd620243a004d71ab50d7af09e9d120641b8b6db34d1312abad18f8",
+        "bytesEqualToBaseline": true,
+        "canonicalSHA256": "6ee39c5c579714da7c8da2001731ff0679ee80f969796c5a3df03a499905f29e"
+      },
+      {
+        "path": "content/ap/written-reviews.json",
+        "scope": "既存レビュー台帳",
+        "sha256": "df5f968cb92bdbb8e2d4552d8ff33282f742f2f24c9fd6c917bd901c49b43700",
+        "baselineSHA256": "df5f968cb92bdbb8e2d4552d8ff33282f742f2f24c9fd6c917bd901c49b43700",
+        "bytesEqualToBaseline": true,
+        "canonicalSHA256": "fb8c898fc763973ff8433dacfa3c153aa80ffa9eade6a6d1b71d12bd190f8875"
+      }
+    ],
+    "cases": [
+      {
+        "caseId": "ap-r07h-pm6",
+        "canonicalCaseSHA256": "fd7f43a2aee7fa2613040b298371284733a7526ab4acec2adebec03f0e4455f1",
+        "baselineCanonicalCaseSHA256": "fd7f43a2aee7fa2613040b298371284733a7526ab4acec2adebec03f0e4455f1",
+        "existingReviewSealMatches": true
+      },
+      {
+        "caseId": "ap-r06a-pm7",
+        "canonicalCaseSHA256": "4495ff5eef7ecac331a17edeada09652e8619bfcbd0ce0b4dabc6466eea475f1",
+        "baselineCanonicalCaseSHA256": "4495ff5eef7ecac331a17edeada09652e8619bfcbd0ce0b4dabc6466eea475f1",
+        "existingReviewSealMatches": true
+      },
+      {
+        "caseId": "ap-r06a-pm9",
+        "canonicalCaseSHA256": "3a4149d8d8e591b98abce42bdc4908f20576de1346365058fc1c27b612c0a803",
+        "baselineCanonicalCaseSHA256": "3a4149d8d8e591b98abce42bdc4908f20576de1346365058fc1c27b612c0a803",
+        "existingReviewSealMatches": true
+      },
+      {
+        "caseId": "ap-r06h-pm6",
+        "canonicalCaseSHA256": "7fd013cc81a4b383e7f4dd5f9d4749eed472ad2739ce0bb69f49efbb38d6a22f",
+        "baselineCanonicalCaseSHA256": "7fd013cc81a4b383e7f4dd5f9d4749eed472ad2739ce0bb69f49efbb38d6a22f",
+        "existingReviewSealMatches": true
+      }
+    ],
+    "writtenAssets": {
+      "path": "assets/written/",
+      "baselineTrackedFileCount": 801,
+      "allBytesEqualToBaseline": true,
+      "changedFiles": [],
+      "pathToSHA256MapCanonicalSHA256": "141a2654b8615b916d18e2033536b9607fffcfdc91acfa012a6fa240651da8d9"
+    },
+    "targetSourcePDFs": {
+      "allBytesEqualToBaseline": true,
+      "sha256": {
+        "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_ans.pdf": "0f932ad45533191657944f36e4153e53f3c224a6023d3ca0c1699616053e3e0f",
+        "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_cmnt.pdf": "df23d4965055c48c1533ecf21052a3e5382406a7fbf97f6f7e0a8a86c69c3839",
+        "content/ap/written-drafts/2024/sources/2024r06a_ap_pm_qs.pdf": "d0c24399c37b3ef20dd25d0fa12d88f0b2324b4c143940a351ca1514c102eb4d",
+        "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_ans.pdf": "772d9531137a4e1c36c3528db40da20b88723d0b0d6e8a10570d52b9f906a283",
+        "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_cmnt.pdf": "a99ad7c3f37a112953a4838dee8469901ac69a5e3d70e84909895c71243e11f1",
+        "content/ap/written-drafts/2024/sources/2024r06h_ap_pm_qs.pdf": "43a003abf1229427d0597b76e23896398280b11770147d117238cc9da6c33798",
+        "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_ans.pdf": "8ac9a45ae67c822fdceb9a35973d9afd44ed8805edd4cd46d8812c2b02bb1583",
+        "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_cmnt.pdf": "4e79dbae3e2ba8c6928bac5bf9f68a7fe1336798c2c095e8e395f87d69aaaec5",
+        "content/ap/written-drafts/two-exams/sources/2025r07h_ap_pm_qs.pdf": "bb5d30aec1814e276a093d7930a94e4e641cd6892a467153ac780ad24979fd1b"
+      }
+    },
+    "note": "既存教材全体と台帳はバイト単位で基準mainと一致。本文・正答・図及びレビュー済みcanonicalを保持している。"
+  },
+  "findings": [],
+  "result": "6対応を承認。参照先メタデータ以外の教材修正は必要と認めなかった。"
+}
