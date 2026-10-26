@@ -34,7 +34,7 @@ jobs:
           cases=json.loads((p/"practical-cases.json").read_text())
           assert len(o)==60 and len(cases)==40
           assert len(o[52]["sourceImages"])==1
-          assert len([q for q in cases if q["bodyFigures"]])==19
+          assert len([q for q in cases if q["bodyFigures"]])==21
           for q in cases:
               for f in q["bodyFigures"]:
                   assert Path(f["image"]).is_file(),f["image"]
