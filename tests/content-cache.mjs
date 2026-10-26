@@ -17,7 +17,7 @@ async function fixture(t){
  // Node imports this module from file://. Give the FP image an HTTP fixture
  // URL while retaining the real corpus; production intentionally rejects file assets.
  const fpURL=url('data/qualifications/fp2/manifest.json'),fp=JSON.parse(await readFile(new URL(fpURL),'utf8')),fpIndexURL=new URL(fp.index.url,fpURL).href,fpIndex=JSON.parse(await readFile(new URL(fpIndexURL),'utf8'));
- for(const q of fpIndex)if(q.image)q.image=new URL(q.image,'https://fixture.test/').href;
+ for(const q of fpIndex){q.sourceImages=q.sourceImages.map(p=>new URL(p,'https://fixture.test/').href);if(q.image)q.image=new URL(q.image,'https://fixture.test/').href;for(const c of q.choices)if(c.image)c.image=new URL(c.image,'https://fixture.test/').href;}
  const fpBody=JSON.stringify(fpIndex);fp.index.sha256=digest(fpBody);overrides.set(fpIndexURL,fpBody);overrides.set(fpURL,JSON.stringify(fp));
  return {saved,cache,overrides,calls,manifest,indexURL,fpManifest:fp};
 }

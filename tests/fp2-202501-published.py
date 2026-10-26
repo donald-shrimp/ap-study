@@ -45,7 +45,7 @@ try:
   select_target(pg,'objective','fp2');pg.locator('.quick-start').wait_for()
   ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for q in qs:
-   nav(pg,'materials');pg.locator('[name=query]').fill('問'+str(q['number']))
+   nav(pg,'materials');pg.locator('[name=query]').fill(q['title'])
    pg.locator(f'[data-action=start][data-id="{q["id"]}"]').click();pg.locator('.choices').wait_for()
    assert pg.locator('#result,.hint-box').count()==0
    if q['number']==26:assert pg.locator('.question-stem table').count()==1

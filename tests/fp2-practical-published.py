@@ -55,4 +55,4 @@ try:
 except Exception:
  pg.screenshot(path=str(scratch/'browser-failure.png')); print(pg.locator('#main').inner_text()[:2000],flush=True);raise
 finally:server.shutdown()
-print('PASS FP practical80case/136field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)
+print('PASS FP practical120case/204field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)
