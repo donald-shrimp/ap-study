@@ -38,5 +38,5 @@ assert manifest['count']==manifest['reviewed']==174 and manifest['diagnosticBlue
 assert not any(k in manifest for k in ['studyContext','flashcards','mockSets','assessment'])
 assert {q['id'] for q in actual}.isdisjoint(q['id'] for q in read('data/questions.json'))
 assert 'effectiveFrom' not in cfg['syllabuses'][0]
-assert {q['id'] for q in read('data/qualifications/catalog.json')['qualifications']}=={'ap','ab730'}
+assert {q['id'] for q in read('data/qualifications/catalog.json')['qualifications']}==set(read('content/qualifications.json')['qualifications'])
 print('PASS AB-730 actual187 source -> independent177 / held10 / duplicates3 / public174; exact raw+normalized review hashes; read official evidence+excerpt hashes; full choice reasons; stable IDs and original archive; generated174; optional features and AP separation')

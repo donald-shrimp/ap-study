@@ -22,15 +22,15 @@ try:
   pg.goto(BASE+'?qualifications');pg.locator('.qualification-option[data-qualification-id=fp2]').first.wait_for()
   assert pg.locator('.qualification-option[data-qualification-id=fp2]').count()==2
   objective=pg.locator('.qualification-option[data-qualification-id=fp2][data-part-id=objective]')
-  assert '60問' in objective.inner_text()
+  assert '120問' in objective.inner_text()
   practical=pg.locator('.qualification-option[data-qualification-id=fp2][data-part-id=jafp-practical]')
-  assert '40問' in practical.inner_text()
+  assert '80問' in practical.inner_text()
   objective.click();pg.locator('.quick-start').wait_for()
   assert pg.locator('[data-mode=diagnostic],[data-view=diagnostics],[data-view=mocks],[data-action=cards-open]').count()==0
   assert state(pg)['attempts']==[]
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();assert pg.locator('[data-offline-group]').count()==1
-  pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();assert state(pg)['attempts']==[]
+  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();assert pg.locator('[data-offline-group]').count()==2
+  pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();assert state(pg)['attempts']==[]
   ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for n,correct in [(55,1),(14,2),(35,0)]:
    nav(pg,'materials');pg.locator('[name=query]').fill(f'問{n}');qid=f'fp2-202605-objective-q{n:02}';pg.locator(f'[data-action=start][data-id="{qid}"]').click();pg.locator('.choices').wait_for()

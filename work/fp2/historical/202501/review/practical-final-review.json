@@ -1,0 +1,1051 @@
+{
+  "reviewer": "Codex /root/pr48_practical_review",
+  "checkedAt": "2026-10-25T23:39:27.717081+00:00",
+  "reviewState": "approved-content-only",
+  "scope": "2025年1月FP2級実技40ケース68回答欄",
+  "draftSetCanonicalSha256": "c026c28ccf92683fdfa69817562cc9ccfd54d4f7710e0e249e8e5b0168714ed4",
+  "sourceHashes": {
+    "sources/fp2/j2_202501_q.pdf": "fd95e08cb4c9a9323a22066022fc85dd7ed0fef6a586689239fbcd5460559c5a",
+    "sources/fp2/j2_202501_a.pdf": "8eefc5a3302b4671aeb12206bd159185e0f8b1d6141ea2141b2ba7a20750919b"
+  },
+  "method": "作者および修正作者とは別エージェントとして、原本問題全37頁のテキスト・全37頁画像、公式解答1頁のテキスト・画像を確認。全40本文・全選択肢・全68欄・説明・rubric・採点設定を照合し計算を検算。修正後全Markdown表の行列・数値・空欄・条件・注記を原本に照合。学習用図8枚を原本と視認し、9配置のPNGが指定clipで原本から再現可能なこともハッシュ照合。全40冒頭段落と公式68答の保持を機械照合。",
+  "legalBaseline": "2024-10-01（原本1頁で視認）",
+  "limitations": [
+    "現行法令の全問再確認は実施していない。過去問内容確認と区別する。",
+    "実画面/オフライン/採点/保存再開は主担当が別途確認する。",
+    "実学習者・初学者による効果測定はしていない。"
+  ],
+  "publication": "草稿はdraftのまま。別担当による内容レビューの承認であり、mainマージや教材の公開を意味しない。実画面・オフライン・保存・採点は主担当の別検証を参照。",
+  "caseCount": 40,
+  "fieldCount": 68,
+  "learningFigureUniqueCount": 8,
+  "learningFigurePlacements": 9,
+  "allOfficialAnswersMatch": true,
+  "allFirstParagraphsPreserved": true,
+  "findings": [
+    {
+      "key": "P48-P-01",
+      "severity": "major",
+      "cases": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        28,
+        29,
+        33,
+        34,
+        36,
+        38,
+        39
+      ],
+      "description": "bodyFiguresが学習用図ではなく広いページ自動切出し。隣問の本文や共通設例混入、問題文/選択肢重複。必要図表のみ残し不要画像をsourceImagesへ分離する。原本文字の空白整形表は段落描画で列対応を保持できないので表または正しい図を使う。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-02",
+      "severity": "major",
+      "cases": [
+        33
+      ],
+      "description": "原本p26共通設例の工藤直樹49歳が本文から欠落。加入期間計算に必要。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-03",
+      "severity": "major",
+      "cases": [
+        36
+      ],
+      "description": "原本p33共通設例の復興特別所得税除外指示が欠落。源泉徴収税額の前提。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-04",
+      "severity": "major",
+      "cases": [
+        37
+      ],
+      "description": "孝子=配偶者、憲一=同居長男という原本p32共通家族条件が欠落。本文の㎡表記も崩れ。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-05",
+      "severity": "minor",
+      "cases": [
+        24
+      ],
+      "description": "253*1.02^4=273.85533648であり解説の273.856…は誤記。最終274万円は正しい。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-06",
+      "severity": "minor",
+      "cases": [
+        2
+      ],
+      "description": "ランサムウェア暗号化で復元不可を一律滅失とする説明は毀損との区別が曖昧。不正行為に起因する漏えい等・利用不能の説明へ修正。",
+      "state": "resolved",
+      "supportingSource": {
+        "url": "https://www.ppc.go.jp/personalinfo/legal/guidelines_tsusoku/",
+        "section": "3-5-1-3 毀損の事例3、3-5-3-1 不正の目的による漏えい等の報告事例2",
+        "quote": "ランサムウェア等により個人データが暗号化され、復元できなくなった場合",
+        "scopeNote": "現行掲載の定義と原本問2の報告必要性を照合。当時版全文の照合やlegalReview.currentへの昇格ではない。"
+      },
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-R1",
+      "severity": "major",
+      "cases": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        19
+      ],
+      "description": "修正途中版の資料/図置換起点ミスで冒頭条件を削除。元の第一段落を全40ケース完全復元後に再確認。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    },
+    {
+      "key": "P48-P-R2",
+      "severity": "minor",
+      "cases": [
+        11,
+        14,
+        33
+      ],
+      "description": "切出し見出しの端切れ（q11/q33）、資料見出しの重複（q14）を再修正・画像/本文再確認。",
+      "state": "resolved",
+      "recheckedAt": "2026-10-25T23:39:27.717081+00:00"
+    }
+  ],
+  "figures": [
+    {
+      "caseId": "fp2-202501-jafp-q07",
+      "image": "assets/written/fp2/202501/review-v3/q07-land.png",
+      "sha256": "78e5dd4e8e2ac32dbf5e16dc4285cfe4ff771e9ead8b09200435099a08b99e63",
+      "sourcePage": 6,
+      "clip": [
+        55,
+        212,
+        541,
+        440
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q11",
+      "image": "assets/written/fp2/202501/review-v3/q11-insurance-proposal.png",
+      "sha256": "019fdb74cba89eeabade8f0d896aa5d6575235ae73466b88116102ee0f84f991",
+      "sourcePage": 8,
+      "clip": [
+        55,
+        195,
+        535,
+        757
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q13",
+      "image": "assets/written/fp2/202501/review-v3/q13-hospitalization.png",
+      "sha256": "b03de25297b8239b3208c310bbfae28803e8321568fb948ff2ebacc4d437d255",
+      "sourcePage": 11,
+      "clip": [
+        72,
+        225,
+        530,
+        290
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q14",
+      "image": "assets/written/fp2/202501/review-v3/q14-insurance-policies.png",
+      "sha256": "ebfbe8981c13c8b5bd787123ebd4e3e22ec2714286aa99663e1c8649840c76ef",
+      "sourcePage": 12,
+      "clip": [
+        65,
+        219,
+        535,
+        695
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q19",
+      "image": "assets/written/fp2/202501/review-v3/q19-family.png",
+      "sha256": "ecbd0ea4bf37f51f9c6d6328054ae021e600b639054f1f82f03a24380c4e2682",
+      "sourcePage": 18,
+      "clip": [
+        130,
+        232,
+        475,
+        379
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q21",
+      "image": "assets/written/fp2/202501/review-v3/q21-family.png",
+      "sha256": "b081026d3dae242c79e808a63779980ed7e4eca5c42bfce41df959b532f9f118",
+      "sourcePage": 20,
+      "clip": [
+        87,
+        290,
+        279,
+        375
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q23",
+      "image": "assets/written/fp2/202501/review-v3/q23-24-cash-flow.png",
+      "sha256": "b337281bcd24479e15f3cb0b42ec3e28eb136ff3221a7e842f884c12b58d8d3b",
+      "sourcePage": 22,
+      "clip": [
+        54,
+        210,
+        545,
+        641
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q24",
+      "image": "assets/written/fp2/202501/review-v3/q23-24-cash-flow.png",
+      "sha256": "b337281bcd24479e15f3cb0b42ec3e28eb136ff3221a7e842f884c12b58d8d3b",
+      "sourcePage": 22,
+      "clip": [
+        54,
+        210,
+        545,
+        641
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    },
+    {
+      "caseId": "fp2-202501-jafp-q33",
+      "image": "assets/written/fp2/202501/review-v3/q33-benefit-days.png",
+      "sha256": "dd19fafa9149f64c7af702f25a88eb695d505bc319a092ae8dc9a4bb3c503798",
+      "sourcePage": 30,
+      "clip": [
+        65,
+        287,
+        535,
+        520
+      ],
+      "visualChecked": true,
+      "originalPdfCropBytesMatch": true
+    }
+  ],
+  "questions": [
+    {
+      "id": "fp2-202501-jafp-q01",
+      "version": 2,
+      "draftCanonicalSha256": "645b6d424e49df9e85a00f2471e874ccb3f3dfacb9f8675ded20d615d7a9aa20",
+      "reviewedProjectionCanonicalSha256": "6ba5029afa044e2b9a2d3c8eafdf23d6b7c42b12d84b889dd77bbb1077081c2f",
+      "originalDraftCanonicalSha256": "645b6d424e49df9e85a00f2471e874ccb3f3dfacb9f8675ded20d615d7a9aa20",
+      "sourcePages": [
+        2
+      ],
+      "result": "approved-content",
+      "notes": "○×○×。一般のねんきんネット年金試算と社労士業務を区別、無償申告書作成は不可、公正証書証人の資格、募集登録を全記述で確認。",
+      "answers": [
+        "○",
+        "×",
+        "○",
+        "×"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q02",
+      "version": 3,
+      "draftCanonicalSha256": "c35964b120c53aa099b7d12cd32e2f587b6215fe61d537f39ff4f3cff64d79b2",
+      "reviewedProjectionCanonicalSha256": "ac01b7a11eaf16b2d4f4db3d052892c9dc5ec3b943e1f410170d770b1839a7a6",
+      "originalDraftCanonicalSha256": "6e299d9cf77ae8c3fe03adabd3ac1c8e41b8a14741f7bd5eb28f715ce4fbfcbd",
+      "sourcePages": [
+        2
+      ],
+      "result": "approved-content",
+      "notes": "正答2。CC300件は1000人超基準ではない、他の報告事由なし、新聞複製と適法引用要件を全肢確認。暗号化不能の説明で滅失と毀損を混同する記述を訂正要。 再確認：「毀損など」「報告対象となり得る」へ訂正。PPC通則の毀損事例と原本の報告要否に整合。",
+      "answers": [
+        "2"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q02-p02.png": "32a922c4c4e11bb206aab2e8ae700ed83a22e0f844fb0e440dc36a5bfc5521d6",
+        "assets/written/fp2/202501/q02-p03.png": "b487d56db7724004872979ce0e3343994c9cb4338f1e3ca3877663b927ee3559"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q03",
+      "version": 3,
+      "draftCanonicalSha256": "76ac1941ba5e2aa973eeb7f2f0e1b034985c90ad086ad1c4663911e715350897",
+      "reviewedProjectionCanonicalSha256": "f92b77f15efe3b0542cdd4d2b45778305d747c0de2e5765e40738c54fda8739a",
+      "originalDraftCanonicalSha256": "230b3bd89a72a8137f7669f575228ea80c3901e2bf5cd33b655bcbb6e802caea",
+      "sourcePages": [
+        3
+      ],
+      "result": "approved-content",
+      "notes": "原本の50万口解約を確認。購入895000+19332=914332、50万口取得457166、解約539000-539-457166=81295で2。税込手数料8%も一致。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "2"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q03-p03.png": "b487d56db7724004872979ce0e3343994c9cb4338f1e3ca3877663b927ee3559"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q04",
+      "version": 3,
+      "draftCanonicalSha256": "0670794674a50903b47c71e7c3eed0ffcd95d416d8c792ce7c91a7b039184868",
+      "reviewedProjectionCanonicalSha256": "fa4538a5b218797586274ca7db23512b90a4b85f00f52d0ff96af2e10d24d422",
+      "originalDraftCanonicalSha256": "f4dc42c14072de1981e53ee75f2eef6fe2f4a46e79b06d03df95d4055ec5c96e",
+      "sourcePages": [
+        4
+      ],
+      "result": "approved-content",
+      "notes": "分配後18320<個別元本18540の差220が元本払戻金、350-220=普通分配130、個別元本18320。選択肢1と一致。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q04-p03.png": "b487d56db7724004872979ce0e3343994c9cb4338f1e3ca3877663b927ee3559",
+        "assets/written/fp2/202501/q04-p04.png": "f591b6c62555da47173a99de97a53f53e4a55dccb17104df9a9f93f8d3feb206"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q05",
+      "version": 3,
+      "draftCanonicalSha256": "503091d3aaf86646d498739daa8075a9d892517f5282b69ba8db6727a47bcc9e",
+      "reviewedProjectionCanonicalSha256": "bba94fed42af6d8ab135feb49fa9d7809959c5ac6e9dec2d8c59a45585b29740",
+      "originalDraftCanonicalSha256": "8d145b35dde010b6a63b195bd30754a7db2c46be46f9712f9e3d33f16fc3a73d",
+      "sourcePages": [
+        4
+      ],
+      "result": "approved-content",
+      "notes": "163/445*100=36.629…→36.63、5000/445=11.235…→11.24。指定第3位四捨五入で4。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "4"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q05-p04.png": "f591b6c62555da47173a99de97a53f53e4a55dccb17104df9a9f93f8d3feb206"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q06",
+      "version": 3,
+      "draftCanonicalSha256": "5afbef1cc5e67cd7b75fbea1e5021c599b4520dea4a12372b0ab8cf6fc9ced32",
+      "reviewedProjectionCanonicalSha256": "9f7a6f56983a313059fb626be8856d2377e99bcdb8bcbd5afea65a14576041f8",
+      "originalDraftCanonicalSha256": "90aa4858ce3ea6c70c95852489a7281b422db5edc9623c05002e12e1fc34e411",
+      "sourcePages": [
+        5
+      ],
+      "result": "approved-content",
+      "notes": "ア半年ごと2、イ0.66=6、ウ2回=7、エ毎月=1。原本の3タイプ共通欄・利率例外・0.79685・9語の対応と全説明を確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "2",
+        "6",
+        "7",
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q06-p04.png": "f591b6c62555da47173a99de97a53f53e4a55dccb17104df9a9f93f8d3feb206",
+        "assets/written/fp2/202501/q06-p05.png": "2870640e10c785d78fe5acd790c3db88277405ef4864a8dea4103eb8bccca7c6",
+        "assets/written/fp2/202501/q06-p06.png": "f734f8e39676c9a60eb48049e62e3b8af39df394636b806ca1a6357e827086ca"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q07",
+      "version": 3,
+      "draftCanonicalSha256": "17fc7ad5336812678b4465ddcb24e2ffdfbc329d431e01eb4d39bb1e9f330c1e",
+      "reviewedProjectionCanonicalSha256": "75eac9457e78fa17b05f67969b372dd0061a7059bf7209a86c6752b1b31b7745",
+      "originalDraftCanonicalSha256": "e88a89c7b53fbedbc0ef17f5b4e1966565d0e032222bf543d926bbdd1ff1de5c",
+      "sourcePages": [
+        6
+      ],
+      "result": "approved-content",
+      "notes": "広い道路5m*4/10=200%、指定300%より小、150㎡*2=300㎡。建蔽率60%を使わない。土地配置は線が必要。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "300"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q07-p06.png": "f734f8e39676c9a60eb48049e62e3b8af39df394636b806ca1a6357e827086ca",
+        "assets/written/fp2/202501/review-v3/q07-land.png": "78e5dd4e8e2ac32dbf5e16dc4285cfe4ff771e9ead8b09200435099a08b99e63"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q08",
+      "version": 3,
+      "draftCanonicalSha256": "a8905f22f984b12a95359d460ab4177b3353748d983952a252b46cd194d89fb5",
+      "reviewedProjectionCanonicalSha256": "9ac54209132a7bf5cf0dd0fce9e206834c730688f22f504517ee71d8e422aa7f",
+      "originalDraftCanonicalSha256": "614cc1f4262bd779dce6b7c5b6d44776669d9d72d75bf88f0a83137947b07c7d",
+      "sourcePages": [
+        6
+      ],
+      "result": "approved-content",
+      "notes": "70000*12/16000000=5.25%、経費(17000+3000)*12+10000+40000=290000、純550000/16000000=3.4375%→3.44、肢3。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q08-p06.png": "f734f8e39676c9a60eb48049e62e3b8af39df394636b806ca1a6357e827086ca"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q09",
+      "version": 2,
+      "draftCanonicalSha256": "dccb4011c54d7d766fc211b223380bae77a70b4167fa1943b59ae7a32c56abe2",
+      "reviewedProjectionCanonicalSha256": "49299d37fc0831677ce8af18db926c6f01a573dcda0b096a00a3b170073c1dc9",
+      "originalDraftCanonicalSha256": "dccb4011c54d7d766fc211b223380bae77a70b4167fa1943b59ae7a32c56abe2",
+      "sourcePages": [
+        7
+      ],
+      "result": "approved-content",
+      "notes": "380/10%=建物税抜3800、6980-(3800+380)=2800万円。土地非課税、halfUp指示と単位一致。",
+      "answers": [
+        "2800"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q10",
+      "version": 3,
+      "draftCanonicalSha256": "544fad63c03284e0fcfd2998e0fba0f71d312270fa3c1816477ef19cff37b548",
+      "reviewedProjectionCanonicalSha256": "75df49002c678ed4e1b30c8c9a7a4ea3739bdd96981c7e1a3e7e3ab091649ed0",
+      "originalDraftCanonicalSha256": "9b0fedaaaddbe5306f7a65670022c419e62f66e31942d92621b25dd7c675b055",
+      "sourcePages": [
+        7
+      ],
+      "result": "approved-content",
+      "notes": "8500-5050-300-3000=150万円、2025年1月1日時点2020年1月24日取得は5年以下で短期、肢1。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q10-p07.png": "b762642dafa1837c17421ab88e347f0cc511f4b305db499d9bed06a55df80df2",
+        "assets/written/fp2/202501/q10-p08.png": "5da04f59057a918a3a897444a0b7c0c015b53bfb9bd3ba2beea95b214433f0ac"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q11",
+      "version": 3,
+      "draftCanonicalSha256": "ea8185d556d5d43211dacefe740708b4813f72c7fc263c0b4d2f749e655962b8",
+      "reviewedProjectionCanonicalSha256": "77dfcba572de1d575a6a875db77840b4ef2d3d419b1382b6675ac9a2461bacf4",
+      "originalDraftCanonicalSha256": "8444aa36e4ff01bfff66e880006e32038b84b993070838aa95680c89ecaa430c",
+      "sourcePages": [
+        8,
+        9
+      ],
+      "result": "approved-content",
+      "notes": "40日入院の1日/30日2回*20=40万円、入院中手術に外来手術2万円は付けない。45→65歳120*20+認知症100=2500、死亡枠100+1000=1100。全3欄一致。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "40",
+        "2500",
+        "1100"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q11-p08.png": "5da04f59057a918a3a897444a0b7c0c015b53bfb9bd3ba2beea95b214433f0ac",
+        "assets/written/fp2/202501/q11-p09.png": "53c405a37e199a4164aabf8391073c8cf395e2b63305b97da3ebc93b31fb67d1",
+        "assets/written/fp2/202501/review-v3/q11-insurance-proposal.png": "019fdb74cba89eeabade8f0d896aa5d6575235ae73466b88116102ee0f84f991"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q12",
+      "version": 3,
+      "draftCanonicalSha256": "11aeec1a3985457b5653570b95b9681f3f7edea6e95807383b7f5aa9fe3e4623",
+      "reviewedProjectionCanonicalSha256": "045a2e51a9f116805406c565ff97694cb5bea687ced80d32302cd78f6fe9ca97",
+      "originalDraftCanonicalSha256": "a977077c876328b1e7e3116418cd833eb4fd52dc1264de07d6fe28a7e3cd2e06",
+      "sourcePages": [
+        10
+      ],
+      "result": "approved-content",
+      "notes": "2025年2〜12月11*16000=176000、個人年金控除4万円。税制適格減額返戻金は一時支払されない、雑所得の経費控除、10年確定年金承継を確認。○×○○。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "○",
+        "×",
+        "○",
+        "○"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q12-p09.png": "53c405a37e199a4164aabf8391073c8cf395e2b63305b97da3ebc93b31fb67d1",
+        "assets/written/fp2/202501/q12-p10.png": "dd8c3742a26e861d2da9234a813771c8ec8a46452eb0672aa461b25a7fcffb14"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q13",
+      "version": 3,
+      "draftCanonicalSha256": "cdbbed8fdadcee15153f28a50a60c65a48fe06f41a6a309f2ca8ce6c2e7ce216",
+      "reviewedProjectionCanonicalSha256": "1d9869ab4666da4aaa3a840d52857ff77a7b250fb8577bdacb42b959cbe3ba45",
+      "originalDraftCanonicalSha256": "39e7613a3417fb52dedb9ee085315ef62bbe58f5f8c200ee21955cb548e5ae16",
+      "sourcePages": [
+        11
+      ],
+      "result": "approved-content",
+      "notes": "原本の肺がん退院から再入院まで169日の矢印を視認。がん29+42無制限、肝炎min(82,60)=60、131日。給付未受取/通算1095前提保持。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "131"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q13-p10.png": "dd8c3742a26e861d2da9234a813771c8ec8a46452eb0672aa461b25a7fcffb14",
+        "assets/written/fp2/202501/q13-p11.png": "50e48ab5fbc6a9ce8d50b70ddc526240bd62e966f234cfe01b22190251ca2b60",
+        "assets/written/fp2/202501/review-v3/q13-hospitalization.png": "b03de25297b8239b3208c310bbfae28803e8321568fb948ff2ebacc4d437d255"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q14",
+      "version": 3,
+      "draftCanonicalSha256": "16451f8fefff6e5c79d650d632564c1fa33da1d99c4bd829ec651fc47db3b8e2",
+      "reviewedProjectionCanonicalSha256": "f8583584d4fcb39a6bf1a3a6160d005b33c2c88fda49831eb276be87731914b7",
+      "originalDraftCanonicalSha256": "8698f96595a7b5aace73e20f948458d581588642e6448f833ce0038d1864f4e1",
+      "sourcePages": [
+        12,
+        13
+      ],
+      "result": "approved-content",
+      "notes": "原本保険2表と8語群を照合。火災建物○と車両○、雪災カーポート×/車○、個賠1億で犬○、20万絵画盗難家財○。4/3/7/7。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "4",
+        "3",
+        "7",
+        "7"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q14-p11.png": "50e48ab5fbc6a9ce8d50b70ddc526240bd62e966f234cfe01b22190251ca2b60",
+        "assets/written/fp2/202501/q14-p12.png": "9aaa5cc2057b431aac2f34479f609769651b787ac632d3c2c623aa200b3610bd",
+        "assets/written/fp2/202501/q14-p13.png": "03b8db926d23d894323ed162cb186b6b01ba18a5c537f439f7cde92949088eb1",
+        "assets/written/fp2/202501/q14-p14.png": "dcd3a3130bee1dd61f868239ed6f9754c6b04b5829cec2bb858653e1fc5335bc",
+        "assets/written/fp2/202501/review-v3/q14-insurance-policies.png": "ebfbe8981c13c8b5bd787123ebd4e3e22ec2714286aa99663e1c8649840c76ef"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q15",
+      "version": 3,
+      "draftCanonicalSha256": "4dca91855b237ce2b626bf9075900e83863390b90b89e43d98e2a84e8ecb7577",
+      "reviewedProjectionCanonicalSha256": "222000bdb86248106d09068bc96fd77e778c31405ba3c872f0bda74b5b03e04d",
+      "originalDraftCanonicalSha256": "b1b1734dc5dc79aa0fbf497e35b971e7c71739eb7d5c3ee6ec0d310e85a81e21",
+      "sourcePages": [
+        14
+      ],
+      "result": "approved-content",
+      "notes": "不動産損120から土地借入利子80を除外し40。上場株60と雑7は給与通算不可。1。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q15-p14.png": "dcd3a3130bee1dd61f868239ed6f9754c6b04b5829cec2bb858653e1fc5335bc"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q16",
+      "version": 3,
+      "draftCanonicalSha256": "338a010be7f521d3667f4e757d990cd0fcf0811f00903063fec2bd442f997f8d",
+      "reviewedProjectionCanonicalSha256": "9a1ea0776353ed8622031b3e5acd46eebd593f063b5a4139c37182fe1fc369ed",
+      "originalDraftCanonicalSha256": "e3757130761b1188b632e7023428ec5865014a704fb0279ddf4f97b2feae2c11",
+      "sourcePages": [
+        15
+      ],
+      "result": "approved-content",
+      "notes": "給与1300-控除350=950、配当45+12=57、課税1007。50*10%+7*5%=5.35万円=53500円で3。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q16-p14.png": "dcd3a3130bee1dd61f868239ed6f9754c6b04b5829cec2bb858653e1fc5335bc",
+        "assets/written/fp2/202501/q16-p15.png": "9caccd6d2c65273ee6d5a69db2632c39276b5c2a5de6bad865bc64b38aa19375"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q17",
+      "version": 3,
+      "draftCanonicalSha256": "1579156503777926389f29b770f4e5d8a1fd2217bab856ed9cb493442e4e870a",
+      "reviewedProjectionCanonicalSha256": "96c9e9bedba803224d27c6148aeb7e0c368a17a29baae03159fafe7fdda09f8e",
+      "originalDraftCanonicalSha256": "c41440f3f0b0dcecaf2d9bf485d5b034674228ab1df5015c78963d53797516ef",
+      "sourcePages": [
+        16
+      ],
+      "result": "approved-content",
+      "notes": "本人1050-195=855で900以下列。妻180-(180*.4-10)=118、115超120以下行。16万円。2024年の表を使用。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "16"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q17-p15.png": "9caccd6d2c65273ee6d5a69db2632c39276b5c2a5de6bad865bc64b38aa19375",
+        "assets/written/fp2/202501/q17-p16.png": "cb19b741b918b9cf69b505b2bba899d49c42adf95da0b51c704dda106468a5d4"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q18",
+      "version": 3,
+      "draftCanonicalSha256": "96b250d16719cca6717406ddd69f74e1bab957871d51e8905c911076e919df01",
+      "reviewedProjectionCanonicalSha256": "41bf9d776c469a2367fadbde22f1174a48efe06d61b7cf9fbd00110ce661ad2d",
+      "originalDraftCanonicalSha256": "198810b29ef86614c11be988327ec96f5af39c97ae94cd46096d34e78dac41a7",
+      "sourcePages": [
+        17
+      ],
+      "result": "approved-content",
+      "notes": "(450-370-50)*1/2=15万円。単なる一時所得30との違いを確認、1。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q18-p16.png": "cb19b741b918b9cf69b505b2bba899d49c42adf95da0b51c704dda106468a5d4",
+        "assets/written/fp2/202501/q18-p17.png": "538b8a4d091beba67e0fdcc40484ab4a1f0f6734dc3ad8b35bdbc78c82fa8492",
+        "assets/written/fp2/202501/q18-p18.png": "84f46766f0f34f4f10bacf89c609e181e47f9719985a8baa2bab308592dc8ce3"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q19",
+      "version": 3,
+      "draftCanonicalSha256": "7ad6f295b1606cbf98a0246ea33371dca17149e28b15559225e3da94bd399461",
+      "reviewedProjectionCanonicalSha256": "fe28ec7799ad9ce54dfef4910c96b86f3fe236aa49e1477f05763e7023d0a65d",
+      "originalDraftCanonicalSha256": "b9990eeafbd7a0fbf6993a6b7a330731dece44259790ea36dd7f9469a0f4eb9f",
+      "sourcePages": [
+        18
+      ],
+      "result": "approved-content",
+      "notes": "原本図の父死亡/母存命/子放棄を視認。相続は配偶者2/3母1/3、全体遺留分1/2で配偶者1/3・母1/6。4/3/7。 表・図置換時に冒頭設問段落を削った途中版は不承認とし、元の問い・条件・丸め指示の完全復元後に再確認。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "4",
+        "3",
+        "7"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q19-p18.png": "84f46766f0f34f4f10bacf89c609e181e47f9719985a8baa2bab308592dc8ce3",
+        "assets/written/fp2/202501/review-v3/q19-family.png": "ecbd0ea4bf37f51f9c6d6328054ae021e600b639054f1f82f03a24380c4e2682"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q20",
+      "version": 2,
+      "draftCanonicalSha256": "23d7f5eedb2da6bcec4e241d5ee2357692b2b34edd3fb63c490114d8dd04162f",
+      "reviewedProjectionCanonicalSha256": "4a600aecf0d81a3a1b56363bb546ccd08b636ae59303539ce98806d22be984e4",
+      "originalDraftCanonicalSha256": "23d7f5eedb2da6bcec4e241d5ee2357692b2b34edd3fb63c490114d8dd04162f",
+      "sourcePages": [
+        19
+      ],
+      "result": "approved-content",
+      "notes": "遺言異方式撤回可、非自書財産目録全頁署名押印、保管申請本人出頭、法務局保管は検認不要。○○○×。",
+      "answers": [
+        "○",
+        "○",
+        "○",
+        "×"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q21",
+      "version": 3,
+      "draftCanonicalSha256": "8df42affcca5ba751bbd6c509f18374091c093fb220db2305f6645c28ab0b547",
+      "reviewedProjectionCanonicalSha256": "ff776c87fad56b9ad70b85ef3ef9e4831249a1a6fed819cb61cb7f6d205615df",
+      "originalDraftCanonicalSha256": "0f154dd2b7b3d6d8b6ebe4248ba22ceee5c6a269c5797cd2612b64a2e8c32de9",
+      "sourcePages": [
+        20
+      ],
+      "result": "approved-content",
+      "notes": "法定相続人は配偶者と子2人。保険非課税1500。960+2200+3500+(2800-1500)-1000=6960万円、1。原本家系図線視認。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q21-p19.png": "31d42a2113d0d5d8504522c9f259e9e77eb34726d275c97bb20c4544afe1ea19",
+        "assets/written/fp2/202501/q21-p20.png": "344ef9e6dfb4b3894b9ee7d4fbbade71a1c9792ad8584e87de6c596b0fa69490",
+        "assets/written/fp2/202501/review-v3/q21-family.png": "b081026d3dae242c79e808a63779980ed7e4eca5c42bfce41df959b532f9f118"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q22",
+      "version": 3,
+      "draftCanonicalSha256": "30eca3a1b8837929a460196d97efe7ef95fed0cfa76d6b8bb868d22ce591016b",
+      "reviewedProjectionCanonicalSha256": "23affa809dcf78ceb863bedb3a218ddf47230538afaf69b5f01fe2827f7d58e2",
+      "originalDraftCanonicalSha256": "3bc72bded0e08a0748ac53a76ba777c075d31029b77beb76e4f4e1f53a6d631c",
+      "sourcePages": [
+        21
+      ],
+      "result": "approved-content",
+      "notes": "2980-配偶者2000-基礎110=870、夫婦贈与は一般税率40%-125、223万円、3。特例/一般全表と欄を確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q22-p20.png": "344ef9e6dfb4b3894b9ee7d4fbbade71a1c9792ad8584e87de6c596b0fa69490",
+        "assets/written/fp2/202501/q22-p21.png": "b0fcf64c94f15612a0f3c022b5c3602e19067c72af74cc2b163875dd5a132194",
+        "assets/written/fp2/202501/q22-p22.png": "f87f8abc4fae2f67eb3bf8cb3fdbcb64619219127611c1518ca6c173caabbe96"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q23",
+      "version": 3,
+      "draftCanonicalSha256": "15d9827ddc41414d34bf54149f4344dc8b6658df74f4a5db0c6828b7b53a8600",
+      "reviewedProjectionCanonicalSha256": "02f03cab263eea279c608985bd06c98f27d2eef6834323ad8f949aff13ccb4c1",
+      "originalDraftCanonicalSha256": "f3e53f81dbcd11ad65e60a3c40d7a2275da644ef71ea44f3555082d983ceebaf",
+      "sourcePages": [
+        22,
+        23
+      ],
+      "result": "approved-content",
+      "notes": "780-(71+44+4+25+34)=602万円。貯蓄・持株・社内販売は可処分所得控除外。表のア=2024給与欄、脚注の可処分所得を確認。 学習図を専用切出しで原本と視認照合。隣問なし。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "602"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q23-p22.png": "f87f8abc4fae2f67eb3bf8cb3fdbcb64619219127611c1518ca6c173caabbe96",
+        "assets/written/fp2/202501/q23-p23.png": "4a2e8107e19cbdb95fe878456e873eda6f55c60868b19dda40f4637621e4a37a",
+        "assets/written/fp2/202501/review-v3/q23-24-cash-flow.png": "b337281bcd24479e15f3cb0b42ec3e28eb136ff3221a7e842f884c12b58d8d3b"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q24",
+      "version": 3,
+      "draftCanonicalSha256": "f94ee2636639348cacaa1186bd1a7e51756947495f3db623ea426ed2d17cc9f0",
+      "reviewedProjectionCanonicalSha256": "fbe15d423a43e6acb9bcfa7405e192325e5acc0f153d8e1defdab95eb50a06a5",
+      "originalDraftCanonicalSha256": "b56cea35355bb3e9a09a8c69016cea05115af176544c540607c1989f5dd43bfd",
+      "sourcePages": [
+        22,
+        23
+      ],
+      "result": "approved-content",
+      "notes": "イは2028年生活費、253*1.02^4=273.85533648→274万円。最終値/丸め正しいが解説途中273.856は誤記、訂正要。 再確認：中間値を273.85533648へ訂正。最終274万円と丸めは不変。 学習図を専用切出しで原本と視認照合。隣問なし。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "274"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q24-p23.png": "4a2e8107e19cbdb95fe878456e873eda6f55c60868b19dda40f4637621e4a37a",
+        "assets/written/fp2/202501/review-v3/q23-24-cash-flow.png": "b337281bcd24479e15f3cb0b42ec3e28eb136ff3221a7e842f884c12b58d8d3b"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q25",
+      "version": 3,
+      "draftCanonicalSha256": "3c54222203b6eb9bed52c8342c6fb3b02cd390b6dcfacb51104b6f86bb35e1a2",
+      "reviewedProjectionCanonicalSha256": "5f4a6eb12cf78229a42ee3302697844ea2816332344b4579df7fbbe430b44b34",
+      "originalDraftCanonicalSha256": "0cbeba1937d5412090dd74d925e3ac113e185a9edc8df2e637a37802a5bd4b22",
+      "sourcePages": [
+        24
+      ],
+      "result": "approved-content",
+      "notes": "表の毎月109703一定は元利均等。利息軽減は期間短縮、元本充当、当初から最終返済まで10年未満では控除不可。1。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q25-p23.png": "4a2e8107e19cbdb95fe878456e873eda6f55c60868b19dda40f4637621e4a37a",
+        "assets/written/fp2/202501/q25-p24.png": "e2a1709d92d1f71e8adeadc41e59244483c495e95138e6c31677c26bcb0cc11a",
+        "assets/written/fp2/202501/q25-p25.png": "5d4e083587deecbfd5e34ac8c37425bb3deb89a1c8415a567f30aad2549d3a07"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q26",
+      "version": 3,
+      "draftCanonicalSha256": "62a2625ba72871acbd67d2ca36858021c9b17d4d1c3a34063327bc5c919d9e98",
+      "reviewedProjectionCanonicalSha256": "1a2b4563209ecaa9aac183b6c0b0d129ead49f8301c67e93efc87cbe4a3c147e",
+      "originalDraftCanonicalSha256": "62bed853b7107d41160a4570472c59a8cec561c6b45b7b0564f1e969d25a3f6d",
+      "sourcePages": [
+        25
+      ],
+      "result": "approved-content",
+      "notes": "公式指定係数表の1%・15年終価1.161を乗算。15000000*1.161=17415000円。厳密複利式へ置換せず表を使う。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "17415000"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q27",
+      "version": 3,
+      "draftCanonicalSha256": "2a5211cf71e412d65bf32d9477b7fb7175dcdbd019e48dfe4405721d589c3d25",
+      "reviewedProjectionCanonicalSha256": "7bab2f8f50a82aed7ddf7802be7f9df3e8c001890b4fcb151558fe5935e1d47e",
+      "originalDraftCanonicalSha256": "a27aa5a8dd1ef028cb4a23cb790ccccb792092a5865cce415502cdb4a565ab91",
+      "sourcePages": [
+        25
+      ],
+      "result": "approved-content",
+      "notes": "元利均等毎年返済は資本回収5年1%0.206、1800000*.206=370800円。係数表乗算指示保持。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "370800"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q28",
+      "version": 3,
+      "draftCanonicalSha256": "e3556f2c6275546c4490a44261ab4d291ac85af1cc502413dc6f9f530077c055",
+      "reviewedProjectionCanonicalSha256": "f6939c4b80c83ff85162ff0771ba44f60ec19b3ce7aa01f92e4355a45da382ff",
+      "originalDraftCanonicalSha256": "2c07e1b3986557228ef04eb98b2634935c4e3e1ad6b277c6c984786bd027c488",
+      "sourcePages": [
+        25
+      ],
+      "result": "approved-content",
+      "notes": "年末受取25年年金現価22.023、2400000*22.023=52855200円。税考慮せず。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "52855200"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q28-p25.png": "5d4e083587deecbfd5e34ac8c37425bb3deb89a1c8415a567f30aad2549d3a07",
+        "assets/written/fp2/202501/q28-p26.png": "aa8882fc1ae2418a2f6a4a55810e6db59c42ba58627a485cf682a4622c95b51e",
+        "assets/written/fp2/202501/q28-p27.png": "8550ba3ba8c2ed62cf755adbe46a5e2c9999236fc9455e953fd164109b4910e9"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q29",
+      "version": 3,
+      "draftCanonicalSha256": "546100e0e01876149aaf0d4144e9a2245a093f96d3b14e19cbe87f39d564ef3a",
+      "reviewedProjectionCanonicalSha256": "b8b56904d80f2a7a6b4a3b6379e19f4be7ee31301b23550a38225253df693bc1",
+      "originalDraftCanonicalSha256": "c3b1941df52f3e43d16adc0b4ebd562559511b606a557106e6b95da1f12ffc58",
+      "sourcePages": [
+        27
+      ],
+      "result": "approved-content",
+      "notes": "ア預金保険対象外、イ源泉分離、ウTTS151+1=152*10000=1520000で3、エ円高。4肢説明確認。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q29-p27.png": "8550ba3ba8c2ed62cf755adbe46a5e2c9999236fc9455e953fd164109b4910e9"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q30",
+      "version": 2,
+      "draftCanonicalSha256": "3b0c5dbf38f34c05e8d58b2d282821b380027d26f981c57088433aeec609639e",
+      "reviewedProjectionCanonicalSha256": "c19e0055684d61b22f675da817d021c88acefaf35ee2e4de9327549cd78d4503",
+      "originalDraftCanonicalSha256": "3b0c5dbf38f34c05e8d58b2d282821b380027d26f981c57088433aeec609639e",
+      "sourcePages": [
+        28
+      ],
+      "result": "approved-content",
+      "notes": "固定資産税小規模200㎡1/6=3、新築一般1200万円控除=5、贈与取得は課税/相続合併非課税=7。3/5/7。",
+      "answers": [
+        "3",
+        "5",
+        "7"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q31",
+      "version": 2,
+      "draftCanonicalSha256": "ae5fc64f5fac92d576595d5c1e0a730c4a2066ee699720d57628a1d7dd26ff3c",
+      "reviewedProjectionCanonicalSha256": "de71e16f59c4ac14d0fee3e47f93fe207ac7b54b3d27e5d9a23989d2d2cfb782",
+      "originalDraftCanonicalSha256": "ae5fc64f5fac92d576595d5c1e0a730c4a2066ee699720d57628a1d7dd26ff3c",
+      "sourcePages": [
+        28
+      ],
+      "result": "approved-content",
+      "notes": "不適切肢3。死亡3000・傷害120は正、自車損害と自損事故自傷は自賠責外。全4肢説明。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q32",
+      "version": 3,
+      "draftCanonicalSha256": "89f728eeb6e55ad5dc7177522c136c32227d560324ff8a424edb6fe4a0931d20",
+      "reviewedProjectionCanonicalSha256": "90dd25031fcf00c5d5b3936e77ee278862ef0da15682c3899eca2aecca9f618c",
+      "originalDraftCanonicalSha256": "19039336d4770748077fd64a44d50677c0a0d6a579a7e8088fc39dc878c19eb6",
+      "sourcePages": [
+        29
+      ],
+      "result": "approved-content",
+      "notes": "第二種上限3%、給付型学力+家計、第二種定額のみで1。原本3種類の表対応を確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q33",
+      "version": 3,
+      "draftCanonicalSha256": "327d2bcaad39d7113dcc70fdd6aca44be1ea0df4c5c90af23cbcd5e88838ecf3",
+      "reviewedProjectionCanonicalSha256": "defe2af4cb1e908833fbf83ce06aeeafda2b5485e7a536da6bd998b405970d42",
+      "originalDraftCanonicalSha256": "b1c0746accac9c0cc87b2501b18df8c8aecfcc4913fc790d75b9c0cdd0ca2ce7",
+      "sourcePages": [
+        26,
+        30
+      ],
+      "result": "approved-content",
+      "notes": "原本共通p26に49歳。22歳から継続加入で20年以上一般150日。原則受給1年・最大4年、2025年1月退職は7日待期+原則2月制限。○××○。ただし49歳条件が草稿本文から欠落。 再確認：原本p26の1975年5月26日生・2025年1月1日時点49歳を明記。所定日数表は専用切出しで全列保持。 学習図を専用切出しで原本と視認照合。隣問なし。",
+      "answers": [
+        "○",
+        "×",
+        "×",
+        "○"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q33-p29.png": "84443cc1c8e37d6dd2c6c4b98bfd172ebd134d101161cf2063a5e44f088c0f8b",
+        "assets/written/fp2/202501/q33-p30.png": "3c9affe13093f4c0a02ccf07d96a7d9b2802c0786fb88fb304fa19994bcda454",
+        "assets/written/fp2/202501/review-v3/q33-benefit-days.png": "dd19fafa9149f64c7af702f25a88eb695d505bc319a092ae8dc9a4bb3c503798"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q34",
+      "version": 3,
+      "draftCanonicalSha256": "1034eed9a8a45e7112f6385b4781acff48df9455ea9ba0de272382ba5c1dadfe",
+      "reviewedProjectionCanonicalSha256": "7d02b3908172c11e37bf093f38670fcdd81ce139577beafebc23e34f870b53e2",
+      "originalDraftCanonicalSha256": "92a06cf3ac18a8fd7a7c0fd47a47b716f4cec748a452b3a56b7c8a5d1c225289",
+      "sourcePages": [
+        31
+      ],
+      "result": "approved-content",
+      "notes": "15休→16出勤で待期中断、17-19休/公休で連続3日、20から支給=2。日額12月平均/30*2/3=5、通算1年6月=8。原本出勤図視認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "2",
+        "5",
+        "8"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q34-p30.png": "3c9affe13093f4c0a02ccf07d96a7d9b2802c0786fb88fb304fa19994bcda454",
+        "assets/written/fp2/202501/q34-p31.png": "063a44562cf15633e10db53f477396c3553d06b0898c464591bff4ac38ce70d9",
+        "assets/written/fp2/202501/q34-p32.png": "a2280559f123af7a8d08fb04e8991eb79ff8a9e859a7354c44eb256c7d8c0089",
+        "assets/written/fp2/202501/q34-p33.png": "5c30645c5d09f751efaf32d23f9b47c9bc0365fad8f0b0f500b6feb4ac8e3a6e"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q35",
+      "version": 3,
+      "draftCanonicalSha256": "a0e58eedba67057d2ef8bf390abc4d533dd18137adfbdda1b57b2177d06a8af5",
+      "reviewedProjectionCanonicalSha256": "c9823495a4a3e5453c212867253d1431e929aee59be05cd73125a792f1ca1ab2",
+      "originalDraftCanonicalSha256": "4f728cada8ea4eb382aba2cfabb0bc23a67f2f8dda5387509969f1a94b404748",
+      "sourcePages": [
+        32,
+        33
+      ],
+      "result": "approved-content",
+      "notes": "預金1860+570、株1420+120、返戻金280+280+220、土地3300、建物680、動産220+40で8990。負債720+110=830、純8160万円。資料の保険金額は加えない。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "8160"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q36",
+      "version": 3,
+      "draftCanonicalSha256": "f52e7788fc82ed2f97e38315594cacc5c25c5228c87aeff50e3fd9dafe525c69",
+      "reviewedProjectionCanonicalSha256": "89921eab4a482c9544feabec6713f29310db7cafd3ecf96d4672aa216022443d",
+      "originalDraftCanonicalSha256": "a7f680cba5fd56a33bc528343d623e6cb594d746e2407deca51676c2db75f48d",
+      "sourcePages": [
+        33,
+        34
+      ],
+      "result": "approved-content",
+      "notes": "1990-04-01→2025-06-30は35年3月→36年、800+70*16=1920万円控除、(3600-1920)/2=840万、*.23-636000=1296000円、1。共通p33の復興税除外が本文欠落。 再確認：原本共通資料の復興特別所得税除外を回答前本文へ復元。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q36-p33.png": "5c30645c5d09f751efaf32d23f9b47c9bc0365fad8f0b0f500b6feb4ac8e3a6e",
+        "assets/written/fp2/202501/q36-p34.png": "4aa5de04d4e3418499c609b08f299d7c41bde54796c4fe3b11246dc1c310abfa"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q37",
+      "version": 3,
+      "draftCanonicalSha256": "3d0da253f0dbd3514e6a90feb97e15feb0270a5ea68d64f5ad4188f8d97047e4",
+      "reviewedProjectionCanonicalSha256": "1b46e9a3ea7b9152921c037e1fd2dd5ac5cc0004d9582f855ca8c4921ed5cf0f",
+      "originalDraftCanonicalSha256": "c584e76b8c7e8a315314a58ecad0eca6708a4833dffb7ed0e3fdfa6e5732a16c",
+      "sourcePages": [
+        32,
+        35
+      ],
+      "result": "approved-content",
+      "notes": "特定居住用330㎡80%、妻に保有/居住継続要件なし、同居長男に申告期限まで継続居住保有要件で1。孝子=妻/憲一=長男という共通p32の家族表が本文欠落。㎡文字も本文崩れ。 再確認：孝子=妻・憲一=長男・同居を本文に復元、選択肢の㎡崩れ解消。",
+      "answers": [
+        "1"
+      ],
+      "assetHashes": {}
+    },
+    {
+      "id": "fp2-202501-jafp-q38",
+      "version": 3,
+      "draftCanonicalSha256": "835b639e24d79da002bac164801677eae672a94aa85e537f50b93fc152e61074",
+      "reviewedProjectionCanonicalSha256": "eed224bc4332832a39977d5d9ffd4bd48f21c06009ff8cb43081c0de3b2bafc4",
+      "originalDraftCanonicalSha256": "2f2f970197f41416dee063f62045017a6139b4795f62a924fe7f0a276613085b",
+      "sourcePages": [
+        35
+      ],
+      "result": "approved-content",
+      "notes": "(.60+(100-96.70)/8)/96.70*100=1.0470527…、第4位切捨=1.047%。単位％・3桁・floor一致。",
+      "answers": [
+        "1.047"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q38-p35.png": "a9d746fdbc1ae05b8be0d052873749ebf1fd78f76b4dac11cf8c30a79189a1f2"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q39",
+      "version": 3,
+      "draftCanonicalSha256": "2cb4246b81dd553063cdaba70bf39d92fa670e1e3477143d258b4c7531853c82",
+      "reviewedProjectionCanonicalSha256": "843ae93af9ba0d234f3c0c3a9438495dfed910544fd11ce96957dc65aaf68e61",
+      "originalDraftCanonicalSha256": "b1ca65eca13079e83ec3798c01725515a935254620e41ed319134edb9b292431",
+      "sourcePages": [
+        32,
+        36
+      ],
+      "result": "approved-content",
+      "notes": "1320000-300000+58280+408100=1486380円、3。妻65未満/加入9年/生計維持、子年齢と障害なしを確認。共通年齢は最低限追記済み。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "3"
+      ],
+      "assetHashes": {
+        "assets/written/fp2/202501/q39-p35.png": "a9d746fdbc1ae05b8be0d052873749ebf1fd78f76b4dac11cf8c30a79189a1f2",
+        "assets/written/fp2/202501/q39-p36.png": "868614d073ec4ac4e54b87ca3a60e69fb40d822fe3a64c8998d30e0959aaf925"
+      }
+    },
+    {
+      "id": "fp2-202501-jafp-q40",
+      "version": 3,
+      "draftCanonicalSha256": "f5b810294bcced57f221398eb464903f34c392f6781628134143cbfd838abcd2",
+      "reviewedProjectionCanonicalSha256": "2c84aa31c0d2c682a9f0ab4cedc72f7851f4ad11a584163869fea7f63a159b02",
+      "originalDraftCanonicalSha256": "654f5ae95b22d12b06ffce63d9995089b034a1ee9e922382b60871eb7b337e22",
+      "sourcePages": [
+        37
+      ],
+      "result": "approved-content",
+      "notes": "広域連合3、75歳5、徴収市町村特別区9。65〜75一定障害認定、保険料個人単位、運営と徴収区分を全欄確認。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+      "answers": [
+        "3",
+        "5",
+        "9"
+      ],
+      "assetHashes": {}
+    }
+  ]
+}

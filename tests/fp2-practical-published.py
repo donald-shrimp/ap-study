@@ -46,13 +46,13 @@ try:
   open_written_case(pg,'fp2-202605-jafp-q04');pg.locator('input[data-written-key="item1--yield"]').fill('0.435');pg.reload();pg.locator('input[data-written-key="item1--yield"]').wait_for();assert pg.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'
   ctx.set_offline(False);open_data_management(pg)
   with pg.expect_download() as ev:pg.locator('#export-state').click()
-  backup=scratch/'test-backup.json';ev.value.save_as(str(backup));saved=json.loads(backup.read_text());assert len(saved['writtenBackup']['runs'])==42 and saved['records']==[]
+  backup=scratch/'test-backup.json';ev.value.save_as(str(backup));saved=json.loads(backup.read_text());assert len(saved['writtenBackup']['runs'])==len(cases)+2 and saved['records']==[]
   pg.get_by_role('button',name='設定を閉じる').click()
   fresh=b.new_context(viewport={'width':390,'height':844});other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(base+'fp2/?part=jafp-practical&entry=home');other.locator('.study-entry').wait_for();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる').click();other.locator('.study-entry [data-action=written-resume]').click();other.locator('input[data-written-key="item1--yield"]').wait_for();assert other.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'
   select_target(other,'objective','fp2');other.locator('.quick-start').wait_for();assert state(other)['attempts']==[]
   assert not errors,errors
-  b.close();(scratch/'browser-results.json').write_text(json.dumps({'mode':'published material via real application','casesRendered':40,'fieldsSubmittedCorrectly':68,'requiredFiguresDecoded':23,'viewports':[320,390,1440],'offlineManagedDownloadAndQ16Figure':True,'offlineNumericCheckpoint':True,'backupImport':True,'objectiveRecordsSeparated':True,'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')
+  b.close();(scratch/'browser-results.json').write_text(json.dumps({'mode':'published material via real application','casesRendered':len(cases),'fieldsSubmittedCorrectly':sum(len(i['fields']) for c in cases for i in c['items']),'requiredFiguresDecoded':sum(len(c['bodyFigures']) for c in cases),'viewports':[320,390,1440],'offlineManagedDownloadAndQ16Figure':True,'offlineNumericCheckpoint':True,'backupImport':True,'objectiveRecordsSeparated':True,'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')
 except Exception:
  pg.screenshot(path=str(scratch/'browser-failure.png')); print(pg.locator('#main').inner_text()[:2000],flush=True);raise
 finally:server.shutdown()
-print('PASS FP practical40case/68field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)
+print('PASS FP practical80case/136field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)

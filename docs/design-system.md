@@ -91,6 +91,6 @@
 ```sh
 python tests/design-language.py          # 科目Aとの実スタイル比較、色・文字・入力・開示
 python tests/case-study-navigation.py    # 範囲・順序・中断・バックアップ・オフライン
-python tests/fp2-practical-published.py  # FP全40問題・68欄と図の実画面
+python tests/fp2-practical-published.py  # FP全80問題・136欄と図の実画面
 python tests/pwa.py                     # 更新と既存記録の保持
 ```
