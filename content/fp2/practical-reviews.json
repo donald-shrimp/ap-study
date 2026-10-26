@@ -2321,13 +2321,13 @@
   },
   {
     "caseId": "fp2-202501-jafp-q17",
-    "version": 3,
+    "version": 4,
     "status": "approved",
-    "author": "外部ChatGPT（PR48草稿作者）・Codex /root（指摘対応の修正作者）",
-    "reviewer": "Codex /root/pr48_practical_review（作者・修正作者と別担当）",
-    "checkedAt": "2026-10-25T23:39:27.717081+00:00",
-    "registeredAt": "2026-10-25T23:39:27.717081+00:00",
-    "canonicalCaseSHA256": "96c9e9bedba803224d27c6148aeb7e0c368a17a29baae03159fafe7fdda09f8e",
+    "author": "Codex /root (legal metadata revision); previous authors retained in previous publication evidence",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "4c53c2ed1b4867bf7fa1dc034e0930ff42d276d14d114a72fca4c6b4f4fb147e",
     "sourceHashes": {
       "sources/fp2/j2_202501_q.pdf": "fd95e08cb4c9a9323a22066022fc85dd7ed0fef6a586689239fbcd5460559c5a",
       "sources/fp2/j2_202501_a.pdf": "8eefc5a3302b4671aeb12206bd159185e0f8b1d6141ea2141b2ba7a20750919b"
@@ -2339,28 +2339,53 @@
     "sourceEvidenceSHA256": {},
     "checks": {
       "sourcePageImagesOpened": true,
-      "fullBodyAndConditions": true,
-      "allFiguresAndTables": true,
-      "allChoicesAndOfficialAnswers": true,
-      "allFieldExplanationsAndRubrics": true,
-      "independentCalculation": "recalculated against source conditions"
+      "historicalBodyAndAnswerPreserved": true,
+      "legalChangePrimarySources": true,
+      "effectiveDate": true,
+      "legalMetadataOnly": true,
+      "independentCalculation": true
     },
-    "notes": "本人1050-195=855で900以下列。妻180-(180*.4-10)=118、115超120以下行。16万円。2024年の表を使用。 Markdown表の各行列、数値、条件、空欄と脚注を原本画像/本文に照合。",
+    "notes": "原本2024年分の給与180万円−控除62万円=配偶者所得118万円、本人1050−195=855万円、旧表交点16万円と公式解答を原本p16/模範解答p1画像で確認。2025年分ではNTA公表の最低控除65万円により配偶者所得115万円、NTA1195の本人900万円以下の列の交点21万円へ変わる。法令改正のoutdatedフラグ・施行日・確認日・一次資料3URLは妥当。本文、表、旧公式正答16万円、入力/採点、旧基準日は変更しない。",
     "reviewEvidence": {
-      "originalDraftSHA256": "c41440f3f0b0dcecaf2d9bf485d5b034674228ab1df5015c78963d53797516ef",
-      "acceptedDraftSHA256": "1579156503777926389f29b770f4e5d8a1fd2217bab856ed9cb493442e4e870a",
-      "record": "work/fp2/historical/202501/review/practical-final-review.json",
+      "record": "work/fp2/revisions/202501-practical-q17-law/review/independent-review.json",
+      "acceptedDraftSHA256": "e12517fe9dd7dafd1837588dce3941afbea6d2f3c5cc74870277be15bd7621a5",
+      "previousPublishedCanonicalSHA256": "96c9e9bedba803224d27c6148aeb7e0c368a17a29baae03159fafe7fdda09f8e",
       "sourcePages": [
         16
       ],
       "sourcePageImageSHA256": {
         "16": "2e789cbd001f7d186901c1ab396dc05d2ce696a87f183bc6e18c3f51f6ce1792"
       },
-      "sourcePageImageMethod": "PyMuPDF 1.26.6、原本PDF物理頁、RGB/alpha既定、matrix1.2",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "d5bb49fcd2ea39fa32231663f1225571f6bcd7d92f9edd655d26222b68c4eb7d"
+      },
+      "pageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false,matrix1.2",
       "publicationChanges": [
         "status:draft -> reviewed only"
       ],
-      "publicationScope": "内容承認の将来統合用投影。PR内教材はdraftのまま。本番公開、UI/保存/オフライン検証は別工程。"
+      "legalEvidence": [
+        {
+          "url": "https://www.nta.go.jp/users/gensen/2025kiso/",
+          "file": "income2025.html",
+          "sha256": "5b1c39edc19e060ef7357b47e9e33873feece4cff13d74b709118c6628f950f1",
+          "quote": "原則として令和7年12月1日施行、令和7年分以後。給与所得控除55万円から65万円へ。"
+        },
+        {
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm",
+          "file": "salary.html",
+          "sha256": "df763b0259059e8810ffe27385cf2a326b0bee008b7a62f2a67b66b9500d9a41",
+          "quote": "令和7年分の収入190万円まで給与所得控除65万円。2026年分74万円は2026-12-01施行の別規定。"
+        },
+        {
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1195.htm",
+          "file": "spouse1195-review.html",
+          "sha256": "ee1364c58db7f9e45d1f7adebd58b2c6dfe5c701b39b96d9567176c5649b3414",
+          "quote": "令和7年分、配偶者所得110万円超115万円以下・納税者900万円以下の交点は21万円。"
+        }
+      ]
     }
   },
   {
@@ -5180,6 +5205,2054 @@
         "status:draft -> reviewed only"
       ],
       "publicationScope": "Final content approval of reviewed projection. App runtime, grading/persistence/offline and actual publication are separate root checks."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q01",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "9584af3a632b272bfa543c544dcf8da5e89e3bb950b0ae06e31aabfb119a8ba8",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "示談代理・投資助言登録・有料一般税法説明・有償申請書作成の4記述と理由を原本/公式解答へ照合。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "83779e6348a6e31386bbf32409f91cdbc77865700f51d71aea6379b12ce1fa37",
+      "acceptedDraftSHA256": "1a875774475d71482db22860c83b951f45adf314296a9c93d26fb48a705e7caf",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        2
+      ],
+      "sourcePageImageSHA256": {
+        "2": "853a6c7af5125eb078f5f7ea4e3982e192581386cbd20c2ca7ba5e35983e3b3c"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q02",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "6f01cb8e57c04b274f7fac667f2b04eb82bed1214895ca8fa5dfe61699271956",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q02-p02.png": "fe3e2ae3fb7a8bec56fc0706e92cca15f1e374f50122150daeb9facd803df9e4"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "消費者定義、取消権の1年/5年、故意重過失の扱いが不明な一部免責、解除権判断委譲の4肢を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "210f3ac228cd3d54d6a2b56930b26c922f993eb808d4973a4f0209b60621054d",
+      "acceptedDraftSHA256": "a9fb3a60a29ae9b66e7323fac1abd2a740a63727c8815ae2ec7e08f8479984e0",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        2
+      ],
+      "sourcePageImageSHA256": {
+        "2": "853a6c7af5125eb078f5f7ea4e3982e192581386cbd20c2ca7ba5e35983e3b3c"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q03",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "e5dde6020353f7fe0a7f09486035a1f39fad132a4e651106bdd9b3016151bff8",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q03-p03.png": "067eecb49c6048363f256e6d55a70f59308031480059ee78bfc38d4cba68d75e"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "100万円×3.3%=33,000円。特別分配200円、普通分配800円。表の全手数料/単位/運用データと4組合せを確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "ad826fd380bd4475d8cce74ac7eef8b89ba73099aad23ad8359da73acb0fa7b2",
+      "acceptedDraftSHA256": "fda25dea612ff20e5e54750487d0a00c379dd7e3ee8a107490d2bc64411c3e5e",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        3
+      ],
+      "sourcePageImageSHA256": {
+        "3": "f51e3e23b6c3f516411c45285acab00273206cf15d42c2725b73d8669b3882cc"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q04",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "1cba1075b002a476b38a9167ff57ec68c785b6d1eafa00b48da89d3d08bd8ba2",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q04-p04.png": "f3d1c6986d5f80c196aab563dcfa671a1b157ff550b3052b54eef4dab6ef1d8a"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "安藤400000/112.2≈3565.06円、井川393580/110=3578円。3月末68/66株、配当権/議決権と注文方式の4肢を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "b3cc29c0d5026047af1b09d020f4cc6799676156c0e8e6b8df40b5da2b2e0267",
+      "acceptedDraftSHA256": "6f534e35304e0f7afaeb8294bcc17c6c5c21e6cd260cd0462f35dc3695fee714",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        4
+      ],
+      "sourcePageImageSHA256": {
+        "4": "f6a6a1d99ba6b2b686be07ff161a9b054f39f19ff6e0ddba4afec7afdd5800b8"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q05",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "542a41ed0abc5d8726bc16b10e8b28da28d4f2549ca3e004065e396e24cef472",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q05-p05.png": "973404136c79776e639310372d5c05990d964309cafedbf36bd58eb6a8e4de14"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "原本の円未満切捨てをrounding:floorへ修正済み。TTS141で取得費1269000円、TTB149で償還1490000円、差益221000円×20%=44200円、受取1445800円を独立再計算。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "dad140d670bdf4e8cf0f34034f4c1ed40415e6072a1668f4617c21f088acfd67",
+      "acceptedDraftSHA256": "53f3908db6d0e4a016644839568257003ea8885f2f64649bf465cc88c7074380",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        5
+      ],
+      "sourcePageImageSHA256": {
+        "5": "d5f84367a593bd86fedbfbe5a6d526c5b7d5e1216894b6029c9d35db30f084f1"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q06",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "d8025315edb9789f4a71919333acce19efc03555e777a98dd068328d416bcc5b",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q06-p06.png": "8a55d985ae5a3d4c32e50038975f68fab851c83fefc0e4f412d8c2bf4c1f4c16"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "財形契約55歳未満、貯蓄型年金+住宅550万円、保険型年金385万円上限、年金60歳/5年以上20年以内、目的外払出過去5年。全表の行列/型別と10択対応を原本から確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "f366d6eea04bf5bac69b6490a8ee61e81884300d803f9000de1d539fa7f2b4d1",
+      "acceptedDraftSHA256": "b6789a4312ff42dcdaf54e93c70cdd28c4081183460e69cca93c83f06bfe8720",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        6
+      ],
+      "sourcePageImageSHA256": {
+        "6": "5384d3ca5beb74b5509bec60dd41932733fe6c764746e26417437d6a628ec8d6"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q07",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "76c91a5b8432507f64731929a8ae27d4ff0917e2bcd875c5e3d909e149ee0a20",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q07-p07.png": "e19a2b146727a57e710f8d36bb4ff36631abd167f9920e83ae477d507b30b61a",
+      "assets/written/fp2/202409/review-v3/q07-land.png": "f5634d6d7e8dcf7bc81b8cc4c0e17538bbab905ddd8dac58f6b41e8b2b6a619d"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "用途地域別150㎡×60%+50㎡×80%=130㎡。土地図の用途面積・建蔽率と前面道路6mを確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。必要図は3cropの担当範囲を実表示し、原本指定矩形の再描画PNGとbyte一致を確認。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "86a45a56adc2ddb40ef7c98d3fdfbbdaff960a6a37fed29f4c8b66b08a5853d5",
+      "acceptedDraftSHA256": "43e1d6179a8a494b63dff58e8ab9352797e84ba5090d291070fa0ba36808dac2",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        7
+      ],
+      "sourcePageImageSHA256": {
+        "7": "46c964ca1bb0000a81b6ddafc295961e7897580cd344312e8aceef227307eef8"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q08",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "9e7a0eaf51e4099d4a9d0808c03311e1ebab07783d75dd97f1928ac80ba272c9",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q08-p07.png": "e19a2b146727a57e710f8d36bb4ff36631abd167f9920e83ae477d507b30b61a"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "固定資産税は市町村(東京23区は都)、賦課期日1/1、小規模住宅用地200㎡・1/6。全会話・9語群・4欄を照合。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "e826a6ef900969fad241cd6ae20a1a7ca0b1a3260c5e09e2ff2a4ee02b8cade6",
+      "acceptedDraftSHA256": "9987409f8f1e280e6295050de44c12f9cbcdff948e18c31a2c9665925e2b2094",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        7
+      ],
+      "sourcePageImageSHA256": {
+        "7": "46c964ca1bb0000a81b6ddafc295961e7897580cd344312e8aceef227307eef8"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q09",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "80ed4255f50127ad7e55778a18dfbd9a22c907c6bad4cd57fa1dee0d8670dae6",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q09-p08.png": "28233bf9c9e35ac35a88ea6465ef37411c74a42671822dae621148e0e6ff69e9"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "居住用財産3000万円控除に合計所得2000万円の制限はない。居住終了2024/10/31→2027/12/31、特別関係者、前年前々年適用の4肢を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "95a3ad68dd01f02da177904f2e1ebbc28eb20a8ce46fd10b7cd9f4d34adc7cd1",
+      "acceptedDraftSHA256": "86d7df362f1ffa49b979414533fdc9fed3d9d86ba5ed8d4e119aee13253b7864",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        8
+      ],
+      "sourcePageImageSHA256": {
+        "8": "b304ed0e358ff9d90eb3e0c3fb15665599005e5a03b91751614a8460cdecce5f"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q10",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "c5bfd705cf777f5a2ac5ee37bf54a630155e7f55feabd85ae561461f8c2958a6",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q10-p08.png": "28233bf9c9e35ac35a88ea6465ef37411c74a42671822dae621148e0e6ff69e9"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "普通/定期借家の契約方法、更新拒絶正当事由、1年未満普通借家は期間の定めなし、定期借家期間制限なし。再構成テキストと原本表の全セル・8語群を比較。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "77d401e87fcbd7577e1a64d599c18c30a189148dbfaec8b5cb3516c38e660eea",
+      "acceptedDraftSHA256": "678e2f385c5498dac9088e6475d74134749f6aff2286af710e3e7c1891733a51",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        8
+      ],
+      "sourcePageImageSHA256": {
+        "8": "b304ed0e358ff9d90eb3e0c3fb15665599005e5a03b91751614a8460cdecce5f"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q11",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "c995c84e96badaa983b92f7ffd994eb364edf7ee90d4ae05e1a707e2dbcc0ba2",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q11-p09.png": "a5dd37b31a9a0d74a1bc264dcf145b5968aac6880a28a9b71a4912341e7232ba"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "年賃料168万円−経費49万円=純収入119万円、総費用2800万円→4.25%。借入利息/元金の税務区別と全4組合せを確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "ada7848bfc1a5664f0420dc4f7a5c687b52a10facdbfb2cc87d2055de153f68e",
+      "acceptedDraftSHA256": "f6d5c6168f4cfb800bcee2495e524efc9452cf0caee4ffb38f2723242a0969b0",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        9
+      ],
+      "sourcePageImageSHA256": {
+        "9": "4d6a6bc0113a24b4091c1c60ca43a0c8381a38cc170751d6bfd96c7cf9c10a61"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q12",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "7bb15d00ca9e1b314c25320901f3fcd2985874309698448e1aa5284a8498e8bf",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q12-p10.png": "8ad582db5cd8d312af52bcae7920cb80eee953f9169faa4359cdbb81e1f9ad9a",
+      "assets/written/fp2/202409/q12-p11.png": "62d1462ac7ced7abf69ef9f331d6a40386e3b9bf4cdd7617864e25567809e0d6",
+      "assets/written/fp2/202409/review-v3/q12-coverage-plan.png": "9f52c4f33e1392ba3b11dce2c19b2bc01323e3d07c7cd61f02e7f6851d2c8fc1"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "契約4年目の120万円×32回=3840万円。脳卒中100+60+10=170万円。肺がん100+7+317=424万円。保障図、全表、2脚注、年金回数・入院限度・手術/先進医療条件を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。必要図は3cropの担当範囲を実表示し、原本指定矩形の再描画PNGとbyte一致を確認。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "8e53d36053b87e05cf08167efed4d637bf0b04294aa477e2a9f9af120bce1de9",
+      "acceptedDraftSHA256": "c468be459202e20a03c59516433c8c36f0b503acf2363fd093c13d2eb3008abb",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        10,
+        11
+      ],
+      "sourcePageImageSHA256": {
+        "10": "665e4c86a1eda97dbaa4689ead9b49b693dc5249c4b248286f4a200a01a58046",
+        "11": "4357378f62e9d880f34572bb4c66373c99cd8b076f0d9056db9ac218fab54993"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q13",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "9e296a9327f5828a4d1874bf6d15da932e32b91684dbd7abb06c706e43aa16a6",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "指定代理請求の対象、特約保険料不要、途中変更可能、所定条件の払込免除代理請求の4肢と説明を照合。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "1be4b0e1d83da77ba96dc972cf0b4fb3fa7dc3b92aa3eed37200f38333891c38",
+      "acceptedDraftSHA256": "53932c8c0c9102d8e8daa6febe0a3f628bfb3d77e937d085df9550b0572c51e1",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        11
+      ],
+      "sourcePageImageSHA256": {
+        "11": "4357378f62e9d880f34572bb4c66373c99cd8b076f0d9056db9ac218fab54993"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q14",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "b73fbd25da7aa3b8ba0fc7baef53acaad30db325fe28c8bab316e0e07804416d",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q14-p12.png": "23b719b7e003f432567aa93ea6b9586066671fa12209548d5bd269cff12ba74a",
+      "assets/written/fp2/202409/q14-p13.png": "65eca0ddd79d2d0a326a905ba210076641e66aacebbaacd3e04c63b2b52a1467"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "携行品の定義/スマホ免責/自宅内対象外、日常生活賠償/職務遂行免責を全表・脚注・4肢で確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "1d05ef756e071230b68c2d2bac53f24c325c304a47dc67f7813d62ea2f84fdbb",
+      "acceptedDraftSHA256": "2e0d19d048277714cc5c176abe81ecb65c93fddb3afc047cdbacb1f1a46d1b85",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        12,
+        13
+      ],
+      "sourcePageImageSHA256": {
+        "12": "6062de845d406e5edde328bd5a4960186bf80e542cc52a9a6bc5b6718ef412a9",
+        "13": "65e6aa71d508ead85483f50610b60eec53740ded4fd434393eec361dde159bc3"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q15",
+    "version": 5,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "56e7be52a1146888d0bcbd48792766520ac87237265a40b007c271b22d30a372",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q15-p14.png": "c73f900dad74d301347e4c9a9c8cd147c31000861e6c1e2cc1da667ba837223b"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "家族表と3保険の負担者/被保険者/受取人を照合。500万×3=1500万円、生前給付非課税、三者別贈与税、自己負担自己受取満期所得税を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "fa1f6fe0c974b5307e04cb4c5dc8f425e3b05eaef27f718bf89cdcd264e69360",
+      "acceptedDraftSHA256": "a8918f2bfe5d5cef38e8e17195f38a99a6976202685f60d53ad0a68cb5f2ac7d",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        14
+      ],
+      "sourcePageImageSHA256": {
+        "14": "07979dd2ca29ad3ae2bda65816c4d479b92322c06d13439e35aa402ca6d51b38"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q16",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "cdddc3370fec5416005bbc77fd1300329389d084d43b8a11ca9d7fc7c65753ea",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q16-p15.png": "25759d116ab997da44f7f6ac00042050bde0692b554ffae059133b38e8aa769a"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "前年度償却4200000×.333×6/12=699300、期首3500700、当年×.333=1165733.1をceilして1165734円。4選択肢・定率法選定・保証額無視条件を確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "47c9d1e0197a00056b2cd367ab7f3d341bd03e5c4c8d2995389342e1554cffc4",
+      "acceptedDraftSHA256": "f57534ae36b3185c4b53b92cfce9c8c3173e804d1598b04db760a35ef9a815a0",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        15
+      ],
+      "sourcePageImageSHA256": {
+        "15": "027f5a79858a57ba4d5f41709749fc74d6195c45094c13d0f65255aabdf6f2dd"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q17",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "197417d0b4739cf56e40ef55898ac918f77fc06dfd8cc481e55c6ab0a91800ee",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q17-p15.png": "25759d116ab997da44f7f6ac00042050bde0692b554ffae059133b38e8aa769a"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "勤続25年1か月→26年、控除800+70×6=1220万円、(2250−1220)/2=515万円。申告書/役員/障害の除外条件保持。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "e72e3d13c82c388f6a692d9b8b7ff2b4b759d81659a12e8dcca60743930ddfa2",
+      "acceptedDraftSHA256": "094f1bc001c3523f14bd98c58a47ae37e5ad7b9bd00fa1f28f7d87b46dab8c3e",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        15
+      ],
+      "sourcePageImageSHA256": {
+        "15": "027f5a79858a57ba4d5f41709749fc74d6195c45094c13d0f65255aabdf6f2dd"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q18",
+    "version": 3,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "0f4fc8d525ad00eefeaaca705561b5d309440c583608638b23d3757a2212c351",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "公的年金400万円/他所得20万円申告不要、他所得依存の控除、65歳区分、先物雑所得の分離課税を全4肢で確認。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "2c53e741e2b27047f84a74b56421bb5fce539278e22b4527c84723c29072a35e",
+      "acceptedDraftSHA256": "ef3147f3829c67330a7cead858964b91faa7624460bb2fdab52eaad97fab07a8",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        16
+      ],
+      "sourcePageImageSHA256": {
+        "16": "771e88039eb14c5aabffbbc473d4b8911dfb58e7017a2e80a9edcb9e575776bd"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q19",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "b73a4da2ae17e2243ee23c0397cd44c0d9ca5a92b0bcd565d40191fedcf1ae14",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q19-p16.png": "ec7a403b64255790abf4c0ca0a12c4390f989e9fed675ad4d8fc592d322f0906"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "通常申告2/16、還付翌1/1から5年、青色純損失原則3年。8語群と全4欄を照合。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "66eb948615b8081284937de000923f3e5fdd933ae2c5d07b1e8ba77d2a3bfed8",
+      "acceptedDraftSHA256": "3663f47815e42049c09716b6d8845eaaad129779bd05293f757a906e23493a42",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        16
+      ],
+      "sourcePageImageSHA256": {
+        "16": "771e88039eb14c5aabffbbc473d4b8911dfb58e7017a2e80a9edcb9e575776bd"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q20",
+    "version": 4,
+    "status": "approved",
+    "author": "External PR49 authors; corrections Codex /root/pr49_fix_practical_01_20 and /root",
+    "reviewer": "Codex /root/pr49_final_practical_01_20",
+    "checkedAt": "2026-10-26T22:19:10.905387+00:00",
+    "registeredAt": "2026-10-26T22:19:10.905387+00:00",
+    "canonicalCaseSHA256": "98cfa827d067a87dd07045328f2da58ba242a1e635a14193f59106f9537632b8",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q20-p17.png": "bfb9799cb0624197ba098f051f7ab9a11311c3a7007727db08c4eb81f6437bcb",
+      "assets/written/fp2/202409/review-v3/q20-family.png": "8155fbe660063d38ae5f368af1a824b7e425e2a0005f0f7e055f054e219edd3c"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "相続人3人の親族図・全資産/保険/注記を確認。800+200+3000+(3000−1500)−200=5300万円。基礎控除をまだ引かない段階の説明も正しい。 表・全条件・全選択肢/語群・全回答欄の解説と欄別rubricを修正後の最終稿から原本に再照合。必要図は3cropの担当範囲を実表示し、原本指定矩形の再描画PNGとbyte一致を確認。",
+    "reviewEvidence": {
+      "originalDraftSHA256": "087575e03a9354e98dff5e965dfba928f7035081f0cd0caf8ae3a92b3740fde6",
+      "acceptedDraftSHA256": "e16f09265753c5ce6faf1362ffe328051d177d941590323e27dc4abbc29c4fb7",
+      "record": "work/fp2/historical/202409/review/practical-final-01-20.json",
+      "sourcePages": [
+        17
+      ],
+      "sourcePageImageSHA256": {
+        "17": "dcbc27c7b436c9626efb07d3809dcfb61272447ebb21575edfc2f0f1ae24a47d"
+      },
+      "sourcePageImageMethod": "PyMuPDF1.26.6, physical PDF pages, RGB alpha=false, matrix1.0",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF1.26.6, RGB alpha=false, matrix1.5",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Content approval only; runtime, storage, offline and publication verification remains separate integration responsibility."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q21",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "af512ada0d03fd80723982e6a347eeceb96451253ae38e23dc0ac167e83f0f3a",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "相続税10か月、準確定4か月、相続放棄3か月・家庭裁判所。全8語群・全4欄と異なる起算点を原本p18と照合。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "70207db4e147d41153e62c680d1507ecc5981f70a2af61010badcb21e3baabb4",
+      "acceptedDraftSHA256": "0a7ab9308d001de4989319dcf81b6350215c5a0f9e097a49273dd0fe1fc27ee8",
+      "sourcePages": [
+        18
+      ],
+      "sourcePageImageSHA256": {
+        "18": "fede8fb5e67477d41301ae83cfe706d7c8681150ceb2b61858bb0e401bd19d9f"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q22",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "14bcc57202bf95123cf67a7ad3b793c835f2fac70aac07d4872dc5dacffe9ccd",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q22-p19.png": "a933cd2d4b8578309cfd84d19ccb849edf198ca714e9588405fc3d7672cd6b04",
+      "assets/written/fp2/202409/review-v3/q22-family.png": "6e8a18cbc75af26a27a045b09f743571708311223c106e1546eab6266c23484f"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "配偶者3/4、兄弟側1/4を弟・姉系統で等分。弟1/8、甥1/16、配偶者遺留分1/2。親族図の父母・姉の既死亡、甥姪二名と全9語群を確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "506cc94328d223c0d67e1083b185cce92e795e2b4bdcddcd60132fc882764dbb",
+      "acceptedDraftSHA256": "e3d609ce6dcd487564a3519c6f36bb9c413404a41701a7c0e6d3a09481eb2aee",
+      "sourcePages": [
+        19
+      ],
+      "sourcePageImageSHA256": {
+        "19": "01023126b929aefa35530ffb4c9f95bc4cc6a3b964f46d3dc68c5bea385941ab"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q23",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "ea87ad756d653dc82817ad280b09c630e2c4c59676633a740178a2563c15fe9d",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q23-p20.png": "e951c7a811af0cd499f738375e7bdf9d51dfa64e46b59d0a5f49ec8a07ac518a",
+      "assets/written/fp2/202409/review-v3/q23-land.png": "6bd385b071970edb42668ed16a085aeb555c89afcbf85aa57a5be266da6c7acb"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "350C・奥行補正1.00・300㎡・借地70%・借家30%・全室賃貸の注1～4、全4式を確認。105000000×(1−.7×.3×1)=82950000円。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "d9c083a331ba8d64547f567036c0d9c149f071e440670bf099bb8f862c921dcc",
+      "acceptedDraftSHA256": "0dbe62d9a0b7066ab59dad7d936ad7269627a33093fd09f1a7f9d5a020a14321",
+      "sourcePages": [
+        20
+      ],
+      "sourcePageImageSHA256": {
+        "20": "5c7c7f4a4c4f0b0d6c044162e3aac3b0bc166c67d0f64d1395f9eb5b9241c421"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q24",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "978fb4184566c23cfc040e72af9f42a0e9d602188eb2148b88c56f18d1556881",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q24-p22.png": "b16e65fd536a5c211cc3005f3c7e26cd26a3dfd76e7aa213ca93051abd8aecce",
+      "assets/written/fp2/202409/q24-p23.png": "46fa00aacd251015a69a4c732c44716c89f8f286c230265bf4f54c79f29a7f58"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "2023年312万円から4年の2%複利337.71883392→338万円。キャッシュフロー表全行列・空欄・注記を確認。最終ライフイベントは2025英夫中学、2026綾乃高校、2027空欄で原本p22と一致。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "22f478abd01bde4904f7dd3fcf6310d3bbabdc5aa5d2a81245b7e542faeadfdb",
+      "acceptedDraftSHA256": "2c4d79ef6cd0d85fda78192343225d0e0368e80301df6fa07ef5a3e881f46296",
+      "sourcePages": [
+        22,
+        23
+      ],
+      "sourcePageImageSHA256": {
+        "22": "47a8f4d9f2cdedb311c5b867ee4d308d304a89efe7cca8cfae404f6252560044",
+        "23": "d9ff209f35dd95c08cb97aede6ad2e43f1477b343501aa7345530fb54d41d52c"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q25",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "8d445e4b75255f3619bdf99b109a6c15ac685eb61f132ac8314e880476dc4ee0",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q25-p22.png": "b16e65fd536a5c211cc3005f3c7e26cd26a3dfd76e7aa213ca93051abd8aecce",
+      "assets/written/fp2/202409/q25-p23.png": "46fa00aacd251015a69a4c732c44716c89f8f286c230265bf4f54c79f29a7f58"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "2025末686×1.01＋2026収入1066−支出966=792.86→793万円。表全行列・空欄・注記とライフイベント修正を原本p22から再確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "5963180259e7ccd2826950bebd18177e31704a19aca648cfeda1a6247d80677a",
+      "acceptedDraftSHA256": "1b4dd942e164d5c0622ae74b4651ec7eca054fcac111aad5e0df418a442b8a02",
+      "sourcePages": [
+        22,
+        23
+      ],
+      "sourcePageImageSHA256": {
+        "22": "47a8f4d9f2cdedb311c5b867ee4d308d304a89efe7cca8cfae404f6252560044",
+        "23": "d9ff209f35dd95c08cb97aede6ad2e43f1477b343501aa7345530fb54d41d52c"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q26",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "72f60c452342d1f90a4e815b2e5e1a8c7c0345355b4046b9d93ab1d8eb38b248",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q26-p23.png": "46fa00aacd251015a69a4c732c44716c89f8f286c230265bf4f54c79f29a7f58"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "原本4肢と最適3を確認。元本10万・100万と上限20・18・15%を区別、残高スライド、キャッシング金利、事業資金使途の各誤りにも理由あり。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "c813ae39f6a8c3802c3d7444b812daa6f19947f27f634a27767ed33d49e93814",
+      "acceptedDraftSHA256": "9e804ea73c10b07af8d8cbe201fb0bf26e1cd5e9eb10c0bfa0061ddb19d7b61b",
+      "sourcePages": [
+        23
+      ],
+      "sourcePageImageSHA256": {
+        "23": "d9ff209f35dd95c08cb97aede6ad2e43f1477b343501aa7345530fb54d41d52c"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q27",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "14d181d058e9ccad1bfd3066b8cb0c4cd0859e07ebb7d21326db042dc6d51917",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q27-p24.png": "133476416f5abb908ed4f25448dd40023708cc1c6fc01ef3fda400fe0f4625ab"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "原本係数表14行×6係数を確認。250万円×5年終価1.051=2627500円。設問指定値を使用。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "88a18c193a4d7942f1df59ed68267bdb2d1cf52508d6ed06220ce0e22109bb6d",
+      "acceptedDraftSHA256": "97d1cd612cc65658c9564e63716569914f1307e491d0c0cbf2deec4f7141f734",
+      "sourcePages": [
+        24
+      ],
+      "sourcePageImageSHA256": {
+        "24": "ad0bbc0fb13454f762b12fdbd56026944b6ce45545753b9715efe6858ecae1ba"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q28",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "75bb0c226d2f14a7f0fa9de0b356a46320a40f97ba6442bfefe421c9680eff6a",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q28-p24.png": "133476416f5abb908ed4f25448dd40023708cc1c6fc01ef3fda400fe0f4625ab"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "同係数表全行・列と年末30万円×10年年金終価10.462=3138600円を確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "1224d0389c389dd8f9f1f032e7582f4b012875db91ca168f74ee3eb193c08df2",
+      "acceptedDraftSHA256": "9fc0095a73950a79f3399f761721d5d70b2e703806e956257f4795d65cfe5dfb",
+      "sourcePages": [
+        24
+      ],
+      "sourcePageImageSHA256": {
+        "24": "ad0bbc0fb13454f762b12fdbd56026944b6ce45545753b9715efe6858ecae1ba"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q29",
+    "version": 4,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "556ad82dc02a1ac6759f80603bd4e354c31351bbb6a5a94fcb1079d2a0f7ce4f",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q29-p24.png": "133476416f5abb908ed4f25448dd40023708cc1c6fc01ef3fda400fe0f4625ab"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "同係数表全行・列と9年後120万円×減債基金0.107=128400円を確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "63dfe22594d57b4e2347c789165242c4540c0c771849c35d0f004fd05ded1e42",
+      "acceptedDraftSHA256": "ca8f16806d0075a473c354b848366063a69d82ad3447283cbf3b30a4390a9524",
+      "sourcePages": [
+        24
+      ],
+      "sourcePageImageSHA256": {
+        "24": "ad0bbc0fb13454f762b12fdbd56026944b6ce45545753b9715efe6858ecae1ba"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q30",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "5487d33dbf393f6654088b1fb753224511b00a935d91c4136aac3825c345ad3d",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "共通設例の家族・資産・保険・条件を原本p26/27と照合。変動10年は半年ごと利率見直し。0.05%下限、発行1年後換金、直前2回利子から調整額を全4肢で確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "a4feaf0e118ad44c30399335f147cd785950c522d864a01fc11406678eeca8bb",
+      "acceptedDraftSHA256": "9affa3690ab5d9b9a1863c1504bf644e2de050e21ecad0342689dbf84bd644e6",
+      "sourcePages": [
+        26,
+        27
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q31",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "58ae74d33004019ffc0ce966d4bf951208d23a1e5fdf46afa5fc64c890ccbdf5",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q31-p28.png": "cb46ab347b86999e62b61459e0a417c5c5eac1d61b28abbbfbc82a4bf2748735"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "DC比較表の勤務先条件・掛金・55000/23000円・マッチング上限・税制・管理費の全行を原本p28と照合。原本正答3は小規模企業共済等掛金控除。最終確認で肢1の2026-04-01上限撤廃影響を発見し、root修正後outdated情報と一次資料を再確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "6379620b8b67ae81c6aaed5f09d47603c9e45f1a88973dba6777b4c6641f3c42",
+      "acceptedDraftSHA256": "fc1ed2c2a67c37691e0d0359eb6c1d02ae901c7f4ab6e2d97f3e5398b0249954",
+      "sourcePages": [
+        26,
+        27,
+        28
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f",
+        "28": "697483331daee4842a619bed0f5cebce09adf430645924ebabf35517ca9e14a7"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q32",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "aa8e9ee4235150d69089afdda96ec4bfe9137fbe73af82975126e6f2ffc9437e",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q32-p29.png": "a1fa2b83fc3ea3ebeb4de719cfcd8e7adbdad0326cd2ff48062953c3c18da3c9"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "世帯手取り850万円×20%=170万円、月額141666円へ切捨て、25年2.5%4486円を使い3157万円へ切捨て。3×3返済表・全指示一致。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "62bfb6a370ed5742435a697393acd332a2d0164918e96c143a419ca3147b3c35",
+      "acceptedDraftSHA256": "7551feacdfdb957c2446474465c78c0dd9fc945d7e93c9d20eea3d64ec3ab74d",
+      "sourcePages": [
+        26,
+        27,
+        29
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f",
+        "29": "b547786d6ddeb4d74beffe8e9dce34ae7a417bce45c0eaa5c141764187aefd02"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q33",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "c8901a4474b4f5811668b5ba24c61e26cacb91cc82bfc74633cb16a9c778fc08",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q33-p30.png": "4f16b4d125bcb7cc9ad3e3ccd7ae07842cfb2c2b9f2aa99c39ec99e9bda79148"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "毎月315000円→標準320000円、37歳の10%労使折半で16000円。2行の標準表と2料率・賞与80万円/年2回・全4肢を確認。本人負担全額所得控除が正答3。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "5af71ea96d7dbaa0f3bac2b3e1108ae5b0db5c35d0fe8e5aa5ff8401a5b8c12d",
+      "acceptedDraftSHA256": "8f8dbf5f5a5961202ee6f68807c6ab1c67364240986322e9dc2c59eba179c586",
+      "sourcePages": [
+        26,
+        27,
+        30
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f",
+        "30": "03108a1c73b4f38671adde5586ed792c308f6f003a1a27eb0e1afe13eab2d7da"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q34",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "c3a85200c9d2742432a80fa47ae9a374ab45c6e7dc46896bf658026fd8ecdd0c",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {},
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "原本の障害なし・在職死亡・末子条件と全9語群を確認。18歳到達年度末、3/4、短期要件300月のみなし。3欄の解説・rubricが各理由を説明。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "3fd3f71560787e159c15508e592219e7421b6b4cf2c166f28119f86820c1cbce",
+      "acceptedDraftSHA256": "3d6d4b27480a689291814ca4339fc1bc89d329ad4eb58fea70865bc85ec0b347",
+      "sourcePages": [
+        26,
+        27,
+        31
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f",
+        "31": "b611b24de4f58ec5d1901f6158e3c30100daa049086749a991c08bac1237bb52"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q35",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "c0ac24db11af55670d91e8fc486078f97bdbaca934b0e3dc2e6ca4f3e97f06ac",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q35-p31.png": "40cd8f5b879aab9dc94cc58ce0043aed90acacb535cdd589f7ad3db5467bc9ec"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": "not-applicable"
+    },
+    "notes": "原本4記述×○×○と全条件を確認。アの理由は2024年自己都合2か月へ修正済み、エとの整合を再確認。2025-04-01以降1か月の一次資料とoutdated情報も一致。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "6ea795e15d52eae55c412891336d101154f089cac6b01d818ee6c196ff71e721",
+      "acceptedDraftSHA256": "4eca58a28a03b03ff5f6a5515bf1ca123cc634698af9e8fe2e54157666872e8a",
+      "sourcePages": [
+        26,
+        27,
+        31
+      ],
+      "sourcePageImageSHA256": {
+        "26": "a68931af157f2f408e0cfb08f1c536bf81594bee08d52752e9b9f683f2620d86",
+        "27": "988557a89336726caedcbf0eac4088a128b3ea65fc76229b646b5e03606f6b3f",
+        "31": "b611b24de4f58ec5d1901f6158e3c30100daa049086749a991c08bac1237bb52"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q36",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "cbfe6ac28e6fa260282c031495e83b6ef15721c956cd328773923c0327413161",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q35-p32.png": "aa73614856c16df484003839af24b3f1916b3b33a3a424a92a287c84964b374e",
+      "assets/written/fp2/202409/q35-p33.png": "ab8e632b604d56ee0ab289dc086fd4f926c0e1a5323ff66cf1ce3b61accea294"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "p32/33の家族・親族関係・資産時価・負債・全保険5契約/注2～5を確認。バランス表全行と純資産8090万円、団信ローンも生存時負債に含める。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "29e176365c8dfa87f32b9579085d17738409940bb08982f86532103e4c63b802",
+      "acceptedDraftSHA256": "96d96607f3f774e5a670c2592b160b4abb89a727a1a7f3e0cc7e4cbb3b9c0569",
+      "sourcePages": [
+        32,
+        33
+      ],
+      "sourcePageImageSHA256": {
+        "32": "2059f2f9abe2e3a70583f534da2cc1fe1610098b31cc2662e2eaed4208dacb8c",
+        "33": "8b8e518fd7bc457b50de106094a484b1505df46a7bf0f95d6f1bb3982c889eca"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q37",
+    "version": 3,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "b205c6753a4de0f09887524097903a751ad4a2cb8d225bf5df47175c0753baa3",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q35-p32.png": "aa73614856c16df484003839af24b3f1916b3b33a3a424a92a287c84964b374e",
+      "assets/written/fp2/202409/q35-p33.png": "ab8e632b604d56ee0ab289dc086fd4f926c0e1a5323ff66cf1ce3b61accea294"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "がん死亡金1600、継続C/D返戻330、現預金2830・株式1450で6210万円。事業借入1310のみ返済して4900万円。団信・敷金除外・災害割増除外・B/E返戻二重計上なしを確認。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "24a89056fcdea70a927c75ac82e5daa5aaa65b68ff09fc3395237d572c9a646a",
+      "acceptedDraftSHA256": "22936da4d5e38f3bbcf1ed7444076f73809f471efbee36fda3e38b97cd5e596b",
+      "sourcePages": [
+        32,
+        33,
+        34
+      ],
+      "sourcePageImageSHA256": {
+        "32": "2059f2f9abe2e3a70583f534da2cc1fe1610098b31cc2662e2eaed4208dacb8c",
+        "33": "8b8e518fd7bc457b50de106094a484b1505df46a7bf0f95d6f1bb3982c889eca",
+        "34": "6bab574f17744f7c7552bf64d39f038fc0008f814a1eef52288a5fe5ec42ca6f"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q38",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "c51a0294e0772bd943d0b60c2d343c74ec8dbe54611c44c11118df8ffa909339",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q38-p35.png": "cc0c6aac6498be45df26adeb4d4eda48e86289c330ad079f9068ce86b37e3c55"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "所得表4行・申告書全12欄・伏字を確認。事業620＋不動産80＋為替4＋一時所得80の半分40=744万円。原本正答1に一致。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "f0cc502eb12dbf7da75444c5bee3f698ad91727e6c3f2297e4e1793e69946b95",
+      "acceptedDraftSHA256": "4ee8dc4165ccfc79d54e86bf5d22f9a90882762d581e96fbef997a6d88360276",
+      "sourcePages": [
+        32,
+        33,
+        35
+      ],
+      "sourcePageImageSHA256": {
+        "32": "2059f2f9abe2e3a70583f534da2cc1fe1610098b31cc2662e2eaed4208dacb8c",
+        "33": "8b8e518fd7bc457b50de106094a484b1505df46a7bf0f95d6f1bb3982c889eca",
+        "35": "bfd50fae4bd2fe5b8435e82b6d9c0b3371b420307a94d7acfcfa4c3273fd2bb7"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q39",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "bb30deb4d093fc9c17261b3f97765d9a98d3f5f1516953308f2548357062a113",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q39-p36.png": "566278e67ea252d4dc2d4d020cf14acba60216567ecb18d640397ec97608e483"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "原本の①～⑥区分と36/54/66/145/179/60月、未納・付加の区別・満額816000・40年を照合。納付438月/付加239月で792400円、当時指定の数値のみで計算。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "d9483290d7ffc4f5f91a6d85397cd3e234718e4584cd2e8417cbb6edeaa27395",
+      "acceptedDraftSHA256": "af8378135447f10c84b4def4091998a0d58488d808251528476eebd5a7aad94a",
+      "sourcePages": [
+        32,
+        33,
+        36
+      ],
+      "sourcePageImageSHA256": {
+        "32": "2059f2f9abe2e3a70583f534da2cc1fe1610098b31cc2662e2eaed4208dacb8c",
+        "33": "8b8e518fd7bc457b50de106094a484b1505df46a7bf0f95d6f1bb3982c889eca",
+        "36": "2ce38015add128d55ffe557579847f6bec3e7d3313521af51a090760dbd66181"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
+    }
+  },
+  {
+    "caseId": "fp2-202409-jafp-q40",
+    "version": 5,
+    "status": "approved",
+    "author": "PR #49 external authors; corrections Codex /root/pr49_fix_practical_21_40 and Codex /root",
+    "reviewer": "Codex /root/pr49_final_practical_21_40",
+    "checkedAt": "2026-10-26T22:19:20.556363+00:00",
+    "registeredAt": "2026-10-26T22:19:20.556363+00:00",
+    "canonicalCaseSHA256": "14d16afc50234ae626a8def02ea79bd299d65a00f028798e9a2b75073222200e",
+    "sourceHashes": {
+      "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+      "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+    },
+    "assetHashes": {
+      "assets/written/fp2/202409/q40-p37.png": "2262d959e305aa7e960644f1c825e138a0e17801d9723219d2a3e7bebb29744d",
+      "assets/written/fp2/202409/review-v3/q40-medical-costs.png": "8e6c9b8c1a81d64ac1f2d94363e20e56b687e6c1e7e386dcbfff5d123c1b3efc"
+    },
+    "sourceEvidenceSHA256": {},
+    "checks": {
+      "sourcePageImagesOpened": true,
+      "fullBodyAndConditions": true,
+      "allFiguresAndTables": true,
+      "allChoicesAndOfficialAnswers": true,
+      "allFieldExplanationsAndRubrics": true,
+      "independentCalculation": true
+    },
+    "notes": "支払33/3/18万円・賦課849万円、旧限度表全5区分、30%関係図と全4肢を照合。110万円の10割医療費から旧限度172820円・高額療養費157180円。2026-08改正の一次資料を確認し、原問2024年7月の答えを保持したoutdated情報に一致。",
+    "reviewEvidence": {
+      "record": "work/fp2/historical/202409/review/practical-final-21-40.json",
+      "originalDraftSHA256": "53b475c353a08c076a2bd1316225adbe11a7960138fb9830d96f6e01dfba5e30",
+      "acceptedDraftSHA256": "265a4cef18535f11731212e0701e683a7e3ba86bd2ffdd53452609f4de89f6db",
+      "sourcePages": [
+        32,
+        33,
+        37
+      ],
+      "sourcePageImageSHA256": {
+        "32": "2059f2f9abe2e3a70583f534da2cc1fe1610098b31cc2662e2eaed4208dacb8c",
+        "33": "8b8e518fd7bc457b50de106094a484b1505df46a7bf0f95d6f1bb3982c889eca",
+        "37": "d37bbcbce2f2eb8287f7542a776dabb428dd444e0463fb72d42294b3c3ccaf6b"
+      },
+      "sourcePageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.2; actual opened images",
+      "answerPages": [
+        1
+      ],
+      "answerPageImageSHA256": {
+        "1": "1ade2167c77b3511faab2b87829f0b3a0dbd333f3b62e73c51b630e72639bf2c"
+      },
+      "answerPageImageMethod": "PyMuPDF 1.26.6 physical PDF page RGB alpha=False matrix1.5; actual opened image",
+      "publicationChanges": [
+        "status:draft -> reviewed only"
+      ],
+      "publicationScope": "Final content approval of exact reviewed projection. UI/offline/storage/publication validation remains root scope."
     }
   }
 ]

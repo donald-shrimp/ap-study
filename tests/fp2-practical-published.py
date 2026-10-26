@@ -19,13 +19,15 @@ try:
   options={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
   if base.startswith('https://') and os.environ.get('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
   b=p.chromium.launch(**options);ctx=b.new_context(viewport={'width':1440,'height':1000});pg=ctx.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(base+'fp2/?part=jafp-practical&entry=home');pg.locator('.study-entry').wait_for();assert pg.locator('.quick-start').count()==1
+  pg.locator('#settings-button').click();pg.locator('#exclude-outdated').uncheck();pg.get_by_role('button',name='設定を閉じる').click()
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
   for n,c in enumerate(cases,1):
    if n>1:pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for()
    open_written_case(pg,c['id']);pg.locator('.written-layout').wait_for()
    assert pg.locator('section.written-field').count()==sum(len(i['fields']) for i in c['items'])
    if c['bodyFigures']:
-    pg.wait_for_function('Array.from(document.querySelectorAll(".written-body img")).every(i=>i.complete&&i.naturalWidth>0)')
+    for image in pg.locator('.written-body img').all():
+     image.scroll_into_view_if_needed();image.evaluate('(img)=>img.decode()');assert image.evaluate('(img)=>img.naturalWidth>0')
    for width in [320,390,1440]:
     pg.set_viewport_size({'width':width,'height':1000})
     if width<1000:pg.locator('[data-action=written-pane][data-pane=body]').click();pg.locator('.written-layout[data-pane=body]').wait_for()
@@ -55,4 +57,4 @@ try:
 except Exception:
  pg.screenshot(path=str(scratch/'browser-failure.png')); print(pg.locator('#main').inner_text()[:2000],flush=True);raise
 finally:server.shutdown()
-print('PASS FP practical120case/204field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)
+print('PASS FP practical160case/274field; three widths; required figures/offline/checkpoint/backup/subject separation');print('Artifacts:',scratch)

@@ -1,0 +1,871 @@
+{
+  "targetHead": "a2d5cb68d182995dc1da224b6e7cd0cfe849013f",
+  "reviewer": "Codex /root/pr49_objective_01_30",
+  "reviewedAt": "2026-10-26T11:29:59.467806+00:00",
+  "scope": {
+    "academicQuestions": 30,
+    "choicesAndReasons": 120,
+    "hints": 60,
+    "range": "01–30"
+  },
+  "status": "review_complete_no_content_blocker_minor_source_and_table_presentation_notes",
+  "reviewedFile": "work/fp2/historical/202409/questions.json",
+  "draftFileSHA256": "acef8e470b1fedd961346752b6f54dc262a4b798f48a40d46c33bd5e93d1d424",
+  "draftSubsetCanonicalSHA256": "0a5fbcced0a1b69a8caac81d613b4d4f27455a6d6182067a2750fcfb5b90dbb7",
+  "sourceHashes": {
+    "sources/fp2/g2_202409_q.pdf": "1b8b1727e79dfe8df94a5e368ac3ac9c527533adfbd84f7b3842d9182be9a36b",
+    "sources/fp2/g2_202409_a.pdf": "aa107889a13f155a1854a93c847172db539ef124379f822571890b9c8070843a"
+  },
+  "sourceComparison": {
+    "questionCount": 30,
+    "allOfficialAnswersMatch": true,
+    "exactChoicesAfterNFKCWhitespaceRemoval": 119,
+    "semanticChoicesMatch": 120,
+    "remainingDifference": "q11 choice1 missing comma only",
+    "tableSourcePagesVisuallyOpened": [
+      11,
+      12
+    ],
+    "machineComparisonFile": "/workspace/scratch/pr49-review/objective-01-30-source-comparison.json",
+    "tableParserLimit": "Choice-heading pattern also matches decimal values in source tables; q25/27 original numeric tables were visually confirmed instead."
+  },
+  "hintReview": {
+    "H1RevealsTrue": 0,
+    "H2RevealsFalseQuestions": [
+      23,
+      25,
+      27
+    ],
+    "H2RevealsTrueQuestions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      24,
+      26,
+      28,
+      29,
+      30
+    ],
+    "allFlagsConsistent": true,
+    "reviewerDidNotRewriteHints": true
+  },
+  "findings": [
+    {
+      "id": "OBJ25-27-TABLE-PRESENTATION",
+      "severity": "P3",
+      "questionIds": [
+        "fp2-202409-objective-q25",
+        "fp2-202409-objective-q27"
+      ],
+      "path": "work/fp2/historical/202409/questions.json",
+      "lines": [
+        2225,
+        2406
+      ],
+      "title": "本文の表を構造化し任意原本画像への参照文を整理する",
+      "description": "2問とも必要な数値自体は本文に転記され、原表との値の不一致はない。しかし表は空白による列配置で、問27はヘッダが複数行へ分断される。末尾の「表・図は添付した原本画像を参照する」はsourceImagesが通常本文ではなく任意オンライン原本参照となる現行エンジンと一致しない。",
+      "recommendation": "原本と同じ行列・単位でパイプ表に整え、表を読むのに原本画像が必須であるような文は除く。sourceImagesは任意原本として保持できる。",
+      "sourcePages": [
+        11,
+        12
+      ],
+      "contentMissing": false
+    },
+    {
+      "id": "OBJ11-COMMA",
+      "severity": "P3",
+      "questionId": "fp2-202409-objective-q11",
+      "path": "work/fp2/historical/202409/questions.json",
+      "line": 950,
+      "field": "choices[0].text",
+      "title": "原文の読点1文字を戻す",
+      "source": "原則として、１,５００万円",
+      "draft": "原則として１,５００万円",
+      "impact": "意味・正答への影響なし。全肢の原文一致という観点での軽微な転記差分。",
+      "sourcePage": 5
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "fp2-202409-objective-q01",
+      "version": 5,
+      "sourcePage": 2,
+      "officialCorrectChoice": "4",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "d48ff4ddf849ab0bd4a2e5f9400587ab640cb85e56750e99e2206c158a05cb27",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "顧客利益・秘密保持・説明責任、国等の周知資料の説明用転載条件を全4肢で区別。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q02",
+      "version": 4,
+      "sourcePage": 2,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "26d209c568206582c78a05ec1de3113d89f4c13d0ff87393f80926b163eecc88",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "一般保険説明と有償年金書類作成代行、任意後見受任者・遺言証人の資格要件を区別。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q03",
+      "version": 5,
+      "sourcePage": 2,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "2113c44035edc89e2ffdd536853fb515155ccca9b38bdd377f77996536b71eba",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "傷病手当金の退職後継続1年以上、任意継続全額本人負担、後期高齢者75歳/所得別負担を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q04",
+      "version": 5,
+      "sourcePage": 3,
+      "officialCorrectChoice": "4",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "f8af5f2342685289128a8cf6936c1596e6284a5d3f7e53192470ee743916691f",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "派遣元労災、第4日休業、葬祭、障害1–7級年金/8–14級一時金を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q05",
+      "version": 5,
+      "sourcePage": 3,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "ce685ed0623a28680e5df60927d92cceb0f888aca8561b06ae154af430389953",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "出生時育児休業8週内28日/2回分割、育休67%→50%、介護3回93日/配偶者父母を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q06",
+      "version": 4,
+      "sourcePage": 3,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "8d5b8d8054a8add6f95e6d9dafcdc37c60d11d5f3ec035b261c944ec68b0deec",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "繰上げ同時請求、付加年金繰下げ、障害基礎年金の子加算、30歳未満無子妻5年を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q07",
+      "version": 4,
+      "sourcePage": 4,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "dc66b6c7f866879d22d4f653e0a729567e713c3c30c4656c29c400df92a21293",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "企業型DC受給権と再加入、2024年マッチング掛金上限、iDeCo併用/iDeCo+を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q08",
+      "version": 4,
+      "sourcePage": 4,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "a111bf28bda6f796ad52e9204f1d8cb6e8c3662026d4f7eead019e9f11f4a6aa",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "基金掛金年齢性差、小規模共済とiDeCo別上限、12か月未満解約手当なし、中退共全額事業主。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q09",
+      "version": 4,
+      "sourcePage": 5,
+      "officialCorrectChoice": "4",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "e607e8cd0460e41b8a0d930e9b8bb6be0edff9c859798584daa35a02b6759d7a",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "借換固定金利/元金均等/担保登記費用と期間短縮型の利息軽減を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q10",
+      "version": 4,
+      "sourcePage": 5,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "a16dec7cd6ddfd80dd610ce7c63c5c5a0e7f4920f85a6b9b605265b21e4d7b1a",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "後払いクレジット/即時デビット/前払電子マネー/コード決済2方式の4肢を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q11",
+      "version": 4,
+      "sourcePage": 5,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "8549d02c24e334a0dd3554a735e3557f8da82f143e5674685157dbc7489df4af",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "少額短期保険合計1000万原則、契約者保護対象外、所得控除対象外、生命医療1年/損害2年。原文読点1文字のみ欠落。",
+      "findings": [
+        "OBJ11-COMMA"
+      ]
+    },
+    {
+      "questionId": "fp2-202409-objective-q12",
+      "version": 5,
+      "sourcePage": 6,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "eeba241830685010061672606bd05be3b5cfef295fe5e54ec7ad78ea1817b3cf",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "大数/収支相等/純付加保険料と、責任準備金と配当準備金の別を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q13",
+      "version": 4,
+      "sourcePage": 6,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "2ba0f2ffec70f53956b749c8fbcd1c7492824d7f30d799fbb848986813b68fc1",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "養老高度障害で消滅、変額終身死亡最低保証、外貨受取特約で為替リスク残存、収入保障一括割引。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q14",
+      "version": 4,
+      "sourcePage": 6,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "29059b763aa852385e89d17e2db73d37b4daddcf3175d1cf4759c22d35480fda",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "医療給付非課税、一時払個人年金保有年数、負担者＝受取人の死亡保険所得税、他人の年金受給権贈与。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q15",
+      "version": 4,
+      "sourcePage": 7,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "c58a5b03ded393b52f0d36863ca500f80912d1c080ed2d36296efc7bde8a97ba",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "法人終身解約返戻金と資産残高精算、医療給付益金、養老法人受取全額資産、返戻率60%の当初40%期間の資産40%。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q16",
+      "version": 4,
+      "sourcePage": 7,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "66299b7bf023644163e021984d89dfeb5361bc78e9a05fd812fe38e15e0cefab",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "第三分野、超過保険利得禁止、給付反対給付均等と適合性の別、純付加保険料の使途を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q17",
+      "version": 4,
+      "sourcePage": 8,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "cd087fd1253cd1edd86f25d3cc56910a8cd4f01e7836c1fd85a6e3cf213240e4",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "普通傷害の海外地震免責、過失交通事故、エスカレーター交通事故傷害、国内旅行細菌性食中毒を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q18",
+      "version": 4,
+      "sourcePage": 8,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "d8072ecdd40cb694b7d2cfc71fa14532ca7922d26430cc1e521c1ccd3ca5deb5",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "法人地震保険料の損金と個人控除の別、保険金益金/原状回復費損金、業務傷害福利厚生、保険差益圧縮記帳。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q19",
+      "version": 4,
+      "sourcePage": 9,
+      "officialCorrectChoice": "4",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "8ec13e48e5e85bf2d40a5279081bc77e3eedf635d974b3316a3768daa7392b1b",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "就業不能所定継続、更新型給付歴、再入院180日、先進医療は療養時点を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q20",
+      "version": 4,
+      "sourcePage": 9,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "88e5b554436ff437bb1e150ace95c4ddae09877d294526147e4976438f2227db",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "団信残債/団体就業不能休業給付/総合福祉団体定期弔慰金退職金/Bグループ任意自助保障を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q21",
+      "version": 5,
+      "sourcePage": 9,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "9fdcbb37c537dcc8decccd30ea2648bcbdc0810f89bb458b4fb4f850d7887f61",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "純金積立額設定頻度と日々買付頻度を区別し、商品先物/ETF/通常金地金総合課税を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q22",
+      "version": 5,
+      "sourcePage": 10,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "f7d6c2b5219c072cd4300b668e958f90636a6e44f90d9d2499f00787afddc7af",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "ETF市場売却留保額なし、成行指値、インバース日次負倍率、東証アクティブETFを確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q23",
+      "version": 4,
+      "sourcePage": 10,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "e78307ba0147d64eda285b176295eb567bc5de6c3ecb707fa9c8dc7a30bf1f0c",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        false
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2も式と代入までで最終計算を本人が行う。",
+      "note": "所有期間0.816326…→0.82%、最終0.918367…→0.92%を独立計算。H2は式と代入までで最終計算/比較が残る。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q24",
+      "version": 5,
+      "sourcePage": 10,
+      "officialCorrectChoice": "2",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "9bf9c13d99091a093d6880f75a8078eee94bb58d31d5a69db0a5af5e292d5476",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "グロースにも上場基準、プライム区分変更、TOPIX構成銘柄/浮動株時価総額、日経225選定を区別。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q25",
+      "version": 6,
+      "sourcePage": 11,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "1d862a23db0a28e78071cd54ee894a9704558f57603c7979a5afa4a4d5b217ee",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        false
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2も式と代入までで最終計算を本人が行う。",
+      "note": "原本PDF11頁表を目視。時価総額3000億/PER25/PBR1/ROE4%/配当2%を独立計算。H2は代入と比較を残す。",
+      "findings": [
+        "OBJ25-27-TABLE-PRESENTATION"
+      ]
+    },
+    {
+      "questionId": "fp2-202409-objective-q26",
+      "version": 5,
+      "sourcePage": 11,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "368a4e15e7737ca419cfc3218ef3202d8908a9c203a86334845b79bef3f1552d",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "オプション時間価値、先物買い損益/上昇予想買い、先物と株式譲渡の税務区分を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q27",
+      "version": 6,
+      "sourcePage": 12,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "24bb4dba5bde9a82f10daf133f97a32014338d107e9b24d1ca2f66add50f6d5f",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        false
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2も式と代入までで最終計算を本人が行う。",
+      "note": "原本PDF12頁表を目視。0.6×0.1+0.2×1+0.2×8=1.86%を独立計算。H2は計算を残す。",
+      "findings": [
+        "OBJ25-27-TABLE-PRESENTATION"
+      ]
+    },
+    {
+      "questionId": "fp2-202409-objective-q28",
+      "version": 5,
+      "sourcePage": 12,
+      "officialCorrectChoice": "3",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "a06b3bf8d6962385c66f781a5486afde5c5bf9439782970cb656e0039a1d6690",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "NISA国内株式配当の株式数比例配分、NISA損失通算不可/課税口座損3年繰越、所得住民課税方式一致。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q29",
+      "version": 5,
+      "sourcePage": 13,
+      "officialCorrectChoice": "1",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "7dda2399e6f862cb9549a7cb78e83c6b052dda68deff5c11496a8ecc1fb91b01",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "決済用全額保護/一般預金1000万+利息/外貨譲渡性対象外/名義借用/FX保護基金対象外を確認。",
+      "findings": []
+    },
+    {
+      "questionId": "fp2-202409-objective-q30",
+      "version": 5,
+      "sourcePage": 13,
+      "officialCorrectChoice": "4",
+      "verdict": "content_consistent_with_official_source",
+      "draftCanonicalSHA256": "08ae02c818b43740a0c2d035197bb567a271e7714da95b3e6df803f3e765faf6",
+      "checks": {
+        "stemAndAllFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "explanationSummaryTakeaway": true,
+        "hintLearningSupport": true,
+        "hintDisclosureAgainstQuestionChoicesAndPreviousHints": true,
+        "legalBaseline20240401": true
+      },
+      "hintFlagsChecked": [
+        false,
+        true
+      ],
+      "hintAssessment": "H1は分類軸・前提・見る条件を示し、正答を確定する固有の規則/結論は残す。H2は定義・条件または全誤答の排除を示すため解答開示trueで整合。",
+      "note": "金融サービス法対象外会員権、勧誘方針、保証金供託、損害推定は元本欠損額で100−70=30を確認。",
+      "findings": []
+    }
+  ],
+  "independentCalculations": {
+    "q15": {
+      "assetYears": "30×0.4=12年",
+      "annualAsset": "100万円×0.4=40万円",
+      "annualExpense": "100−40=60万円"
+    },
+    "q23": {
+      "holdingYield": 0.816326530612242,
+      "maturityYield": 0.9183673469387756,
+      "rounded": [
+        "0.82%",
+        "0.92%"
+      ]
+    },
+    "q25": {
+      "marketCapitalizationOku": 3000.0,
+      "PER": 25.0,
+      "PBR": 1.0,
+      "ROEPercent": 4.0,
+      "dividendYieldPercent": 2.0
+    },
+    "q27": {
+      "expectedPercent": 1.86
+    },
+    "q30": {
+      "examplePrincipalLossManYen": 30
+    }
+  },
+  "notPerformed": [
+    "Original author draft edits",
+    "Publication review-ledger promotion",
+    "Full runtime/import/sync/offline tests (root responsibility)",
+    "Exhaustive present-law review",
+    "Actual beginner trial"
+  ],
+  "approvalLedgerCreated": false
+}

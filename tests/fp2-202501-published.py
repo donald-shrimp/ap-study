@@ -33,6 +33,8 @@ try:
   ctx=b.new_context(viewport={'width':390,'height':900});pg=ctx.new_page()
   pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept())
   pg.goto(url);pg.locator('.quick-start').wait_for()
+  # Include the historical q17 explicitly; known law changes are excluded by default.
+  pg.locator('#settings-button').click();pg.locator('#exclude-outdated').uncheck();pg.get_by_role('button',name='設定を閉じる').click()
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
   pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for()
   pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click()

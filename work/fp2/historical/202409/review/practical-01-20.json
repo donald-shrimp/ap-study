@@ -1,0 +1,982 @@
+{
+  "reviewer": "Codex /root/pr49_practical_01_20",
+  "reviewedAt": "2026-10-26T11:29:20.725128+00:00",
+  "targetHead": "a2d5cb68d182995dc1da224b6e7cd0cfe849013f",
+  "scope": "Practical cases01–20,40 fields,19 required figure placements. Independent review only, no author changes or approval ledger.",
+  "rulesRoot": "/workspace/ap-study",
+  "draftPath": "work/fp2/historical/202409/practical-cases.json",
+  "draftFileSHA256": "aa010af52253b18ee8240c0539df4d73152a15e947ca0b4517efc9bd60c667ab",
+  "sourceHashes": {
+    "sources/fp2/j2_202409_q.pdf": "e663d4f8fba1ab900e2d41ba331f73825c484e30bfc58c0b6b25c2482613abce",
+    "sources/fp2/j2_202409_a.pdf": "30cc208d57ed0c98f880890133835d248d843b271eae8c9df09c3199a1618e4e"
+  },
+  "legalBaseline": "2024-04-01 verified original question PDF physical p1",
+  "verdict": "changes_required",
+  "summary": {
+    "cases": 20,
+    "fields": 40,
+    "officialAnswerMismatches": 0,
+    "numericCalculationMismatches": 0,
+    "numericMetadataMismatches": 1,
+    "requiredFigurePlacements": 19
+  },
+  "methods": [
+    "Read all original PDF p1–17 and visually compared contact sheets with full originals/crops for financial/insurance tables and diagrams.",
+    "Opened official answer PDF rendered page1 and independently matched all40 answer fields.",
+    "Read all20 full body texts,all choices and wordgroups,40 explanations/rubrics; independently recalculated numeric/financial questions.",
+    "Inspected all19 reconstructed required PNG placements; this review distinguishes correct page mapping from overbroad same-page content inclusion."
+  ],
+  "findings": [
+    {
+      "id": "PR49-PRACTICAL-Q05-ROUNDING",
+      "priority": "P2",
+      "caseIds": [
+        "fp2-202409-jafp-q05"
+      ],
+      "path": "work/fp2/historical/202409/practical-cases.json",
+      "line": 431,
+      "title": "原本の円未満切り捨てをnumeric.roundingへ反映する",
+      "quote": "\"rounding\": \"none\"",
+      "originalEvidence": {
+        "physicalPDFPage": 5,
+        "text": "計算結果について円未満の端数が生じる場合は切り捨てること。"
+      },
+      "problem": "本文の指定に対して数値欄の指示情報がnoneになっており、現行UIのnumericInstructionは整数しか表示せず、切り捨てを伝えない。現時点の正答1445800円は整数で採点誤りはないが、教材の原本端数処理情報が一致していない。",
+      "requestedChange": "単位円/小数0桁/正答1445800を保ち、roundingをfloorへ変更。元の採点は入力を自動丸めしないので、正答を変更せず、版と内容確認台帳を更新する。"
+    },
+    {
+      "id": "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+      "priority": "P2",
+      "caseIds": [
+        "fp2-202409-jafp-q02",
+        "fp2-202409-jafp-q03",
+        "fp2-202409-jafp-q04",
+        "fp2-202409-jafp-q05",
+        "fp2-202409-jafp-q06",
+        "fp2-202409-jafp-q07",
+        "fp2-202409-jafp-q08",
+        "fp2-202409-jafp-q09",
+        "fp2-202409-jafp-q10",
+        "fp2-202409-jafp-q11",
+        "fp2-202409-jafp-q12",
+        "fp2-202409-jafp-q14",
+        "fp2-202409-jafp-q15",
+        "fp2-202409-jafp-q16",
+        "fp2-202409-jafp-q17",
+        "fp2-202409-jafp-q19",
+        "fp2-202409-jafp-q20"
+      ],
+      "path": "work/fp2/historical/202409/practical-cases.json",
+      "line": 162,
+      "title": "必須図を原本ページ全体から必要な図表へ分ける",
+      "problem": "担当範囲17case/19配置は対応するPDF頁自体は正しいが、機械切出しのほぼページ全体を本文へ重複表示する。問2画像に問1、問7/8画像に互いの設問、問9/10画像に互いの設問、問12の11頁に問13、問16/17画像に互いの設問、問19画像に問18が混在する。空白で整形した元の表と画像も重複し、モバイルで行列や空欄と回答欄を照合しづらい。原本の見出し上端が切れる画像もあるが、主要表のラベルが全面欠落するとは判断していない。",
+      "requestedChange": "原本ページを任意のsourceImagesへ移し、単純な表は全行列・空欄・単位・脚注を保持するパイプ表にする。土地図、生命保険提案書、親族関係図等の必要部分だけを適切に切り出してbodyFiguresへ。アンカー/alt/captionを実際の図に合わせて再レビューする。",
+      "examples": [
+        {
+          "case": 2,
+          "image": "assets/written/fp2/202409/q02-p02.png",
+          "alsoContains": [
+            1
+          ]
+        },
+        {
+          "case": 8,
+          "image": "assets/written/fp2/202409/q08-p07.png",
+          "alsoContains": [
+            7
+          ]
+        },
+        {
+          "case": 10,
+          "image": "assets/written/fp2/202409/q10-p08.png",
+          "alsoContains": [
+            9
+          ]
+        },
+        {
+          "case": 12,
+          "image": "assets/written/fp2/202409/q12-p11.png",
+          "alsoContains": [
+            13
+          ]
+        },
+        {
+          "case": 17,
+          "image": "assets/written/fp2/202409/q17-p15.png",
+          "alsoContains": [
+            16
+          ]
+        },
+        {
+          "case": 19,
+          "image": "assets/written/fp2/202409/q19-p16.png",
+          "alsoContains": [
+            18
+          ]
+        }
+      ],
+      "scopeNote": "最新原稿の頁修正は認識している。これは誤った別ページ参照という指摘ではなく、正しい同頁内にある別問題まで必須図へ取り込む配置の指摘。"
+    },
+    {
+      "id": "PR49-PRACTICAL-GENERIC-RUBRIC",
+      "priority": "P3",
+      "path": "work/fp2/historical/202409/practical-cases.json",
+      "line": 44,
+      "caseIds": [
+        "fp2-202409-jafp-q01",
+        "fp2-202409-jafp-q02",
+        "fp2-202409-jafp-q03",
+        "fp2-202409-jafp-q04",
+        "fp2-202409-jafp-q05",
+        "fp2-202409-jafp-q06",
+        "fp2-202409-jafp-q07",
+        "fp2-202409-jafp-q08",
+        "fp2-202409-jafp-q09",
+        "fp2-202409-jafp-q10",
+        "fp2-202409-jafp-q11",
+        "fp2-202409-jafp-q12",
+        "fp2-202409-jafp-q13",
+        "fp2-202409-jafp-q14",
+        "fp2-202409-jafp-q15",
+        "fp2-202409-jafp-q16",
+        "fp2-202409-jafp-q17",
+        "fp2-202409-jafp-q18",
+        "fp2-202409-jafp-q19",
+        "fp2-202409-jafp-q20"
+      ],
+      "title": "確認ポイントを各欄固有の判断材料にする",
+      "problem": "rubricが「記述の全条件と公式解答を比較する」「出題時の制度・資料・端数処理を再計算して照合する」「選択肢・語群の番号と公式模範解答を照合する」の定型文で、explanationにある具体的な判断の分岐点を確認し直す情報がない。解説自体は概ね十分であり、採点値の不備ではない。",
+      "requestedChange": "例：問5はTTS/TTBと円換算差益への20%課税、問12(イ)は特定疾病100万円・入院60日上限・手術10万円、問17は勤続年数の切上げと控除後1/2。文量のノルマは設けず短い観点にする。"
+    }
+  ],
+  "questions": [
+    {
+      "caseId": "fp2-202409-jafp-q01",
+      "version": 2,
+      "draftCanonicalSHA256": "83779e6348a6e31386bbf32409f91cdbc77865700f51d71aea6379b12ce1fa37",
+      "physicalPDFPages": [
+        2
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "×",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "×",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "○",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "×",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "示談代理・投資助言登録・有料一般税法説明・有償申請書作成の4記述と理由を原本/公式解答へ照合。",
+      "findingIds": [
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q02",
+      "version": 3,
+      "draftCanonicalSHA256": "210f3ac228cd3d54d6a2b56930b26c922f993eb808d4973a4f0209b60621054d",
+      "physicalPDFPages": [
+        2
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "1",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "消費者定義、取消権の1年/5年、故意重過失の扱いが不明な一部免責、解除権判断委譲の4肢を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q03",
+      "version": 3,
+      "draftCanonicalSHA256": "ad826fd380bd4475d8cce74ac7eef8b89ba73099aad23ad8359da73acb0fa7b2",
+      "physicalPDFPages": [
+        3
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "4",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "100万円×3.3%=33,000円。特別分配200円、普通分配800円。表の全手数料/単位/運用データと4組合せを確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q04",
+      "version": 4,
+      "draftCanonicalSHA256": "b3cc29c0d5026047af1b09d020f4cc6799676156c0e8e6b8df40b5da2b2e0267",
+      "physicalPDFPages": [
+        4
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "安藤400000/112.2≈3565.06円、井川393580/110=3578円。3月末68/66株、配当権/議決権と注文方式の4肢を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q05",
+      "version": 4,
+      "draftCanonicalSHA256": "dad140d670bdf4e8cf0f34034f4c1ed40415e6072a1668f4617c21f088acfd67",
+      "physicalPDFPages": [
+        5
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings_numeric_metadata_fix_needed",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "numeric",
+          "officialAnswer": "1445800",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "円",
+          "rounding": "none",
+          "checksAgainstOriginal": false
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "償還1490000円、取得費1269000円、差益221000円×20%=44200円、円貨受取1445800円を独立検算。本文は円未満切捨てだがnumeric.rounding noneの不一致あり。",
+      "findingIds": [
+        "PR49-PRACTICAL-Q05-ROUNDING",
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q06",
+      "version": 4,
+      "draftCanonicalSHA256": "f366d6eea04bf5bac69b6490a8ee61e81884300d803f9000de1d539fa7f2b4d1",
+      "physicalPDFPages": [
+        6
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "5",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "9",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "6",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "財形契約55歳未満、貯蓄型年金+住宅550万円、保険型年金385万円上限、年金60歳/5年以上20年以内、目的外払出過去5年。全表の行列/型別と10択対応を原本から確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q07",
+      "version": 3,
+      "draftCanonicalSHA256": "86a45a56adc2ddb40ef7c98d3fdfbbdaff960a6a37fed29f4c8b66b08a5853d5",
+      "physicalPDFPages": [
+        7
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "numeric",
+          "officialAnswer": "130",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "㎡",
+          "rounding": "none",
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "用途地域別150㎡×60%+50㎡×80%=130㎡。土地図の用途面積・建蔽率と前面道路6mを確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q08",
+      "version": 2,
+      "draftCanonicalSHA256": "e826a6ef900969fad241cd6ae20a1a7ca0b1a3260c5e09e2ff2a4ee02b8cade6",
+      "physicalPDFPages": [
+        7
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "4",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "6",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "9",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "固定資産税は市町村(東京23区は都)、賦課期日1/1、小規模住宅用地200㎡・1/6。全会話・9語群・4欄を照合。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q09",
+      "version": 3,
+      "draftCanonicalSHA256": "95a3ad68dd01f02da177904f2e1ebbc28eb20a8ce46fd10b7cd9f4d34adc7cd1",
+      "physicalPDFPages": [
+        8
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "居住用財産3000万円控除に合計所得2000万円の制限はない。居住終了2024/10/31→2027/12/31、特別関係者、前年前々年適用の4肢を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q10",
+      "version": 4,
+      "draftCanonicalSHA256": "77d401e87fcbd7577e1a64d599c18c30a189148dbfaec8b5cb3516c38e660eea",
+      "physicalPDFPages": [
+        8
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "4",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "6",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "1",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "普通/定期借家の契約方法、更新拒絶正当事由、1年未満普通借家は期間の定めなし、定期借家期間制限なし。再構成テキストと原本表の全セル・8語群を比較。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q11",
+      "version": 4,
+      "draftCanonicalSHA256": "ada7848bfc1a5664f0420dc4f7a5c687b52a10facdbfb2cc87d2055de153f68e",
+      "physicalPDFPages": [
+        9
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "年賃料168万円−経費49万円=純収入119万円、総費用2800万円→4.25%。借入利息/元金の税務区別と全4組合せを確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q12",
+      "version": 3,
+      "draftCanonicalSHA256": "8e53d36053b87e05cf08167efed4d637bf0b04294aa477e2a9f9af120bce1de9",
+      "physicalPDFPages": [
+        10,
+        11
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "numeric",
+          "officialAnswer": "3840",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "万円",
+          "rounding": "none",
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "numeric",
+          "officialAnswer": "170",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "万円",
+          "rounding": "none",
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "numeric",
+          "officialAnswer": "424",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "万円",
+          "rounding": "none",
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "契約4年目の120万円×32回=3840万円。脳卒中100+60+10=170万円。肺がん100+7+317=424万円。保障図、全表、2脚注、年金回数・入院限度・手術/先進医療条件を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q13",
+      "version": 2,
+      "draftCanonicalSHA256": "1be4b0e1d83da77ba96dc972cf0b4fb3fa7dc3b92aa3eed37200f38333891c38",
+      "physicalPDFPages": [
+        11
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "指定代理請求の対象、特約保険料不要、途中変更可能、所定条件の払込免除代理請求の4肢と説明を照合。",
+      "findingIds": [
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q14",
+      "version": 4,
+      "draftCanonicalSHA256": "1d05ef756e071230b68c2d2bac53f24c325c304a47dc67f7813d62ea2f84fdbb",
+      "physicalPDFPages": [
+        12,
+        13
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "携行品の定義/スマホ免責/自宅内対象外、日常生活賠償/職務遂行免責を全表・脚注・4肢で確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q15",
+      "version": 4,
+      "draftCanonicalSHA256": "fa1f6fe0c974b5307e04cb4c5dc8f425e3b05eaef27f718bf89cdcd264e69360",
+      "physicalPDFPages": [
+        14
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "4",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "6",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "7",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "家族表と3保険の負担者/被保険者/受取人を照合。500万×3=1500万円、生前給付非課税、三者別贈与税、自己負担自己受取満期所得税を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q16",
+      "version": 2,
+      "draftCanonicalSHA256": "47c9d1e0197a00056b2cd367ab7f3d341bd03e5c4c8d2995389342e1554cffc4",
+      "physicalPDFPages": [
+        15
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "前年度償却4200000×.333×6/12=699300、期首3500700、当年×.333=1165733.1をceilして1165734円。4選択肢・定率法選定・保証額無視条件を確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q17",
+      "version": 2,
+      "draftCanonicalSHA256": "e72e3d13c82c388f6a692d9b8b7ff2b4b759d81659a12e8dcca60743930ddfa2",
+      "physicalPDFPages": [
+        15
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "numeric",
+          "officialAnswer": "515",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": "万円",
+          "rounding": "none",
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "勤続25年1か月→26年、控除800+70×6=1220万円、(2250−1220)/2=515万円。申告書/役員/障害の除外条件保持。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q18",
+      "version": 2,
+      "draftCanonicalSHA256": "2c53e741e2b27047f84a74b56421bb5fce539278e22b4527c84723c29072a35e",
+      "physicalPDFPages": [
+        16
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "2",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "公的年金400万円/他所得20万円申告不要、他所得依存の控除、65歳区分、先物雑所得の分離課税を全4肢で確認。",
+      "findingIds": [
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q19",
+      "version": 3,
+      "draftCanonicalSHA256": "66eb948615b8081284937de000923f3e5fdd933ae2c5d07b1e8ba77d2a3bfed8",
+      "physicalPDFPages": [
+        16
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "field-a",
+          "label": "（ア）",
+          "type": "singleChoice",
+          "officialAnswer": "3",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-i",
+          "label": "（イ）",
+          "type": "singleChoice",
+          "officialAnswer": "1",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-u",
+          "label": "（ウ）",
+          "type": "singleChoice",
+          "officialAnswer": "7",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        },
+        {
+          "id": "field-e",
+          "label": "（エ）",
+          "type": "singleChoice",
+          "officialAnswer": "6",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "通常申告2/16、還付翌1/1から5年、青色純損失原則3年。8語群と全4欄を照合。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    },
+    {
+      "caseId": "fp2-202409-jafp-q20",
+      "version": 3,
+      "draftCanonicalSHA256": "087575e03a9354e98dff5e965dfba928f7035081f0cd0caf8ae3a92b3740fde6",
+      "physicalPDFPages": [
+        17
+      ],
+      "officialAnswerPhysicalPDFPage": 1,
+      "verdict": "content_and_official_answers_match_with_display_findings",
+      "fields": [
+        {
+          "id": "answer",
+          "label": "回答",
+          "type": "singleChoice",
+          "officialAnswer": "1",
+          "matches": true,
+          "explanationChecked": true,
+          "unit": null,
+          "rounding": null,
+          "checksAgainstOriginal": true
+        }
+      ],
+      "bodyConditionsAndChoicesChecked": true,
+      "allFiguresTablesAndNotesVisuallyCompared": true,
+      "notes": "相続人3人の親族図・全資産/保険/注記を確認。800+200+3000+(3000−1500)−200=5300万円。基礎控除をまだ引かない段階の説明も正しい。",
+      "findingIds": [
+        "PR49-PRACTICAL-REQUIRED-WHOLE-PAGES",
+        "PR49-PRACTICAL-GENERIC-RUBRIC"
+      ]
+    }
+  ],
+  "notPerformed": [
+    "Actual full application runtime/browser/offline/backup; owned by root.",
+    "No real beginner trial.",
+    "No exhaustive current-law review, and legalReview:unverified is not a publication failure."
+  ],
+  "caseHintAbsenceIsNotFailure": true,
+  "authorFilesChanged": false,
+  "approvalLedgerCreated": false
+}
