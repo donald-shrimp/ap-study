@@ -2,6 +2,8 @@
 
 [教材を作る・改訂する](docs/content-authoring.md) · [ヒントの共通ルール](docs/hint-authoring.md) · [解説の共通ルール](docs/explanation-authoring-rules.md)
 
+FP2級に2025年1月の学科60問・実技40問を追加し、計学科120問・実技80問（136回答欄）へ。新規全問を独立レビュー・修正確認済み。[追加範囲と確認記録](work/fp2/historical/202501/README.md)。
+
 FP2級・2026年5月公表の学科60問に、全資格共通ルールの段階ヒントを各2件追加。[作成・独立レビュー記録](work/fp2/revisions/202605-objective-hints-v3/README.md)。
 
 [全体改善レビューの計画](docs/system-review-plan.md) · [初回点検と改善Issue](docs/system-review-findings.md)

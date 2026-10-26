@@ -48,7 +48,7 @@ test('古い資格一覧に新しい資格がなくても、SWの再検証を待
  old.qualifications=old.qualifications.filter(q=>q.id!=='fp2');
  f.overrides.set(listingURL,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
  const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});
- assert.equal(c.manifest.cases.count,40);assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);assert.equal(f.calls.filter(c=>c.key===listingURL)[1].options.cache,'reload');
+ assert.equal(c.manifest.cases.count,f.fpManifest.cases.count);assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);assert.equal(f.calls.filter(c=>c.key===listingURL)[1].options.cache,'reload');
  f.calls.length=0;assert.equal((await loadCatalog(null,{preferredId:'fp2'})).manifest.id,'fp2');assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);
 });
 test('新科目を含まない資格manifestも一度取り直し、選択画面へ戻さない',async t=>{
@@ -56,7 +56,7 @@ test('新科目を含まない資格manifestも一度取り直し、選択画面
  old.studyTargets=old.studyTargets.filter(p=>p.examPartId!=='jafp-practical');old.cases.count=0;
  f.overrides.set(key,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
  const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});
- assert.equal(c.choose,undefined);assert.equal(c.manifest.cases.count,40);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
+ assert.equal(c.choose,undefined);assert.equal(c.manifest.cases.count,f.fpManifest.cases.count);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
 });
 test('古い一覧から開く科目選択でも、新しい科目を表示する',async t=>{
  const f=await fixture(t),key=url('data/qualifications/catalog.json'),fresh=await readFile(new URL(key),'utf8'),old=JSON.parse(fresh);

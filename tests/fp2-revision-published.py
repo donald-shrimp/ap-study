@@ -9,7 +9,7 @@ from browser_storage import nav,state,write_state,open_data_management,open_answ
 from fp2_fixtures import builder
 
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-fp2-revision-'))
-questions=json.loads((ROOT/'content/fp2/questions.json').read_text());cfg=json.loads((ROOT/'content/fp2/qualification.json').read_text())
+questions=[q for q in json.loads((ROOT/'content/fp2/questions.json').read_text()) if q['packId']=='202605'];cfg=json.loads((ROOT/'content/fp2/qualification.json').read_text())
 old=[builder.normalize({**q,'enrichment':'reviewed'},cfg,n+1) for n,q in enumerate(json.loads((ROOT/'work/fp2/revisions/202605-objective-hints-v3/review/previous-publication-questions.json').read_text()))]
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -26,7 +26,7 @@ try:
   if BASE.startswith('https://') and os.getenv('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
   b=p.chromium.launch(**options);ctx=b.new_context(viewport={'width':390,'height':844});pg=ctx.new_page();pg.on('pageerror',lambda e:errors.append(str(e)))
   pg.goto(BASE+'fp2/?part=objective&entry=home');pg.locator('.quick-start').wait_for();pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
+  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for q in questions:
    nav(pg,'materials');pg.locator('[name=query]').fill('問'+str(q['number']));pg.locator('[data-action=start][data-id="'+q['id']+'"]').click();pg.locator('.choices').wait_for();assert pg.locator('#result').count()==0
    index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId'])
