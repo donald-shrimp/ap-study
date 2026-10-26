@@ -47,7 +47,21 @@ S=[
 ("q35-family-insurance.png",34,(54,63,542,464),[35]),
 ("q36-withholding-slip.png",35,(54,228,542,540),[36]),
 ("q38-brokerage.png",37,(54,197,542,543),[38]),
-("q40-leave-calendar.png",38,(54,179,542,551),[40])]
+("q40-leave-calendar.png",38,(54,179,542,551),[40]),
+("q05-stock-transactions.png",4,(54,179,475,292),[5]),
+("q06-savings-bonds.png",4,(54,493,475,618),[6]),
+("q08-lease-terms.png",6,(54,167,542,405),[8]),
+("q11-medical-policy-a.png",9,(54,218,542,632),[11]),
+("q11-medical-policy-b.png",10,(54,87,542,461),[11]),
+("q12-insurance-matrix.png",11,(54,164,542,391),[12]),
+("q13-policy-start.png",12,(54,165,427,264),[13]),
+("q14-auto-policy.png",13,(54,161,542,560),[14]),
+("q15-pension-table.png",14,(54,217,542,550),[15]),
+("q16-health-expenses.png",15,(54,195,542,380),[16]),
+("q17-loss-table.png",16,(54,179,493,312),[17]),
+("q19-family-tree.png",17,(54,185,542,373),[19]),
+("q32-in-service-pension.png",30,(54,193,542,431),[32]),
+("q37-sale-conditions.png",36,(54,219,542,480),[37])]
 def run():
  p=original("j2_202405_q.pdf");o=original("g2_202405_q.pdf")
  cases=json.loads((DATA/"practical-cases.json").read_text())
@@ -64,16 +78,28 @@ def run():
  sz=png(o,21,(54,157,542,318),asset)
  q=questions[52]
  if q["id"]!="fp2-202405-objective-q53":raise ValueError("Q53 changed")
- prefix=q["stem"].split("\n\n＜親族関係図")[0]
- if len(prefix)<30:raise ValueError("Q53 stem mismatch")
- q["stem"]=prefix;q["sourceImages"]=[asset];q["imageSizes"]=[sz];q["version"]+=1
- # For spatial questions, never replace the source diagram with a narrated geometry.
- cases[6]["body"]="建築基準法に従い、下記＜資料＞の土地に建築物を建てる場合の延べ面積（床面積の合計）の最高限度を計算しなさい。なお、記載のない事項は一切考慮しないものとする。また、解答に当たっては、解答用紙に記載されている単位に従うこと。"
+ if not q.get("sourceImages"):
+  prefix=q["stem"].split("\n\n＜親族関係図")[0]
+  if len(prefix)<30:raise ValueError("Q53 stem mismatch")
+  q["stem"]=prefix;q["sourceImages"]=[asset];q["imageSizes"]=[sz];q["version"]+=1
+ # For spatial questions, keep the diagram instead of narrated geometry.
+ original_q7="建築基準法に従い、下記＜資料＞の土地に建築物を建てる場合の延べ面積（床面積の合計）の最高限度を計算しなさい。なお、記載のない事項は一切考慮しないものとする。また、解答に当たっては、解答用紙に記載されている単位に従うこと。"
+ if not cases[6].get("bodyFigures"):cases[6]["body"]=original_q7
+ if not cases[18].get("bodyFigures"):
+  cases[18]["body"]=("下記＜親族関係図＞の場合において、民法の規定に基づく法定相続分および遺留分に関する次の記述の空欄（ア）〜（ウ）に当てはまる適切な語句または数値を語群から選び、その番号を答えなさい。なお、同じ番号を何度選んでもよい。\n\n"
+    "・被相続人の配偶者の法定相続分は（ア）である。\n"
+    "・被相続人の弟の法定相続分は（イ）、遺留分は（ウ）である。\n\n"
+    "＜語群＞1．ゼロ／2．1/2／3．1/3／4．1/4／5．1/6／6．1/8／7．1/12／8．1/16／9．2/3／10．3/4")
  for n,imgs in refs.items():
   q=cases[n-1]
-  if q["id"]!=f"fp2-202405-jafp-q{n:02d}" or q.get("bodyFigures"):raise ValueError(f"Unexpected case state {n}")
-  for pic in imgs:q["body"]+="\n\n"+pic["anchor"]
-  q["bodyFigures"]=imgs;q["version"]+=1
+  if q["id"]!=f"fp2-202405-jafp-q{n:02d}":raise ValueError(f"Unexpected case state {n}")
+  existing=q.get("bodyFigures",[])
+  oldpaths={f["image"] for f in existing}
+  fresh=[pic for pic in imgs if pic["image"] not in oldpaths]
+  for pic in fresh:q["body"]+="\n\n"+pic["anchor"]
+  if fresh:
+   q["bodyFigures"]=existing+fresh
+   q["version"]+=1
  for name,data in [("practical-cases.json",cases),("questions.json",questions)]:
   (DATA/name).write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n")
  print("DONE:",len(S),"source crops; attached",sum(map(len,refs.values())),"practical references across",len(refs),"cases + objective Q53",flush=True)
