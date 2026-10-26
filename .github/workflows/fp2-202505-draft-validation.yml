@@ -1,0 +1,24 @@
+name: FP2 2025 May draft delivery validation
+on:
+  pull_request:
+    paths:
+      - 'deliveries/fp2-jafp-202505/**'
+      - '.github/workflows/fp2-202505-draft-validation.yml'
+  push:
+    branches: [draft/fp2-202505-jafp-all]
+    paths:
+      - 'deliveries/fp2-jafp-202505/**'
+      - '.github/workflows/fp2-202505-draft-validation.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all original PDF SHA256s and draft content contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/check-fp2-delivery.py deliveries/fp2-jafp-202505

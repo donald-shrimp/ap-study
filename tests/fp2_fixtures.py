@@ -28,6 +28,7 @@ def prepare(root,draft=False,cases_only=False):
         ah={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in c['sourceImages']+[f['image'] for f in c['bodyFigures']]}
         reviews.append({'caseId':c['id'],'status':'approved','author':'synthetic-author','reviewer':'synthetic-reviewer','canonicalCaseSHA256':builder.diagnostic_digest(c),'sourceHashes':hashes,'assetHashes':ah})
     normal_review={'questionId':normal['id'],'version':1,'sha256':builder.diagnostic_digest(normal),'normalizedSha256':builder.diagnostic_digest(builder.normalize(normal,cfg)),'author':'synthetic-author','reviewer':'synthetic-reviewer','checkedAt':'2026-10-24T00:00:00Z','checks':{k:True for k in ['source','answer','choices','wording']},'notes':'Synthetic evidence only.','sourceHashes':hashes} if not draft else None
+    write(base/'case-catalog.json',{'format':'hitomon-case-catalog','version':1,'qualificationId':'fp2','entries':[{'caseId':c['id'],'packId':'synthetic','packLabel':'合成セット','number':n+1} for n,c in enumerate(cases)]})
     write(root/'content/qualifications.json',{'qualifications':['fp2']});write(base/'qualification.json',cfg)
     for name,value in [('questions.json',[] if cases_only else [normal]),('practical-cases.json',cases),('source-files.json',hashes),('question-reviews.json',[] if cases_only or draft else [normal_review]),('practical-reviews.json',[] if draft else reviews)]:write(base/name,value)
     if not draft:builder.build(root)

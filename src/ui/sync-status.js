@@ -1,9 +1,9 @@
 import {esc} from '../utils.js';
 import {summarizeSync,syncLabels} from '../domain/sync-status.js';
 
-let signedIn=false,enabled=new Set(),states={};
+let signedIn=false,enabled=new Set(),states={},scopeLabels=syncLabels;
 function render(){
- const active=Object.fromEntries(Object.entries(states).filter(([key])=>!signedIn||enabled.has(key))),summary=summarizeSync(active,signedIn);
+ const active=Object.fromEntries(Object.entries(states).filter(([key])=>!signedIn||enabled.has(key))),summary=summarizeSync(active,signedIn,scopeLabels);
  const el=document.getElementById('sync-state');
  if(el){el.textContent=summary.text;el.dataset.status=summary.kind;for(const scope of Object.keys(syncLabels))el.dataset[scope]=active[scope]?.kind||'';}
  const foot=document.getElementById('cloud-state');if(foot){foot.hidden=!signedIn;foot.textContent=summary.kind==='error'?'同期を確認してください':summary.text;}
@@ -12,7 +12,7 @@ function render(){
  const technical=document.getElementById('sync-technical');
  if(technical){technical.hidden=summary.kind!=='error';const out=technical.querySelector('pre');if(out)out.textContent=summary.details.map(s=>`${s.label}: ${s.kind}${s.error?`\n${s.error}`:''}`).join('\n\n');}
 }
-export function setSyncAccount(value,scopes=[]){const local=states.local||{kind:'synced'};signedIn=value;enabled=new Set(['local',...scopes]);states={local,...Object.fromEntries(scopes.map(scope=>[scope,{kind:value?'pending':'guest'}]))};render();}
+export function setSyncAccount(value,scopes=[],labels={}){scopeLabels={...syncLabels,...labels};const local=states.local||{kind:'synced'};signedIn=value;enabled=new Set(['local',...scopes]);states={local,...Object.fromEntries(scopes.map(scope=>[scope,{kind:value?'pending':'guest'}]))};render();}
 export function setSyncStatus(scope,kind,error){states[scope]={kind,error:error?`${error.code||error.name||''}: ${error.message||error}`:null};render();}
 export function workspaceStatusHTML(kind){
  const failed=['rules','mock-rules','history-rules','extended-rules','error'].includes(kind);

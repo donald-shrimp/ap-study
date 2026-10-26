@@ -1,0 +1,526 @@
+{
+  "reviewer": "/root/pr37_objective_31_60",
+  "role": "independent reviewer, no author edits",
+  "reviewedAt": "2026-10-26T06:20:41.314455+00:00",
+  "pr": 37,
+  "head": "acb267f43aff68daa21af9cebb2a1002367a219c",
+  "scope": "Academic questions31–60, all120choices/reasons, explanations and takeaways, official answers. No hints present; no hints added.",
+  "legalBaseline": "2024-04-01",
+  "sourcePath": "sources/fp2/g2_202505_qa.pdf",
+  "sourceSHA256": "6a33591659764ffa2eb231cf3a5808f29a72a2990a461bedf1d04c72933428a4",
+  "draftFileSHA256": "9fd7d807d444b0f7aaf03fc0d0a90c06c9d571009dd8c94eb40c00c18e516f84",
+  "status": "review_complete_changes_requested",
+  "sourceComparison": {
+    "questions": 30,
+    "choices": 120,
+    "stemChoiceMismatches": 0,
+    "officialAnswerMismatches": 0,
+    "normalization": "NFKC, whitespace removal only; explanation markup excluded from content fields where applicable",
+    "renderedPagesVisuallyInspected": [
+      18,
+      26,
+      32
+    ]
+  },
+  "calculationsChecked": [
+    "所得金額調整控除： (1000−850)×0.1=15万円",
+    "長期譲渡所得税率：15.315%+5%=20.315%",
+    "原則新築住宅控除1200万円、長期優良特例1300万円（1500万円ではない）",
+    "相続税基礎控除3000万円+600万円×法定相続人数"
+  ],
+  "findings": [
+    {
+      "id": "F32",
+      "severity": "P2",
+      "questionId": "fp2-202505-objective-q32",
+      "field": "choiceReasons[1]",
+      "line": 2293,
+      "title": "所得金額調整控除の計算基礎を給与収入と明記する",
+      "quote": "所得金額調整控除の最大額は15万円（給与所得控除後の金額等による）。",
+      "problem": "23歳未満扶養親族等の調整控除は給与所得控除後の金額を基礎にしない。給与等の収入額（1000万円超は1000万円）から850万円を引いた額の10%。最大15万円は正しいが括弧の根拠が異なる。",
+      "suggestedText": "所得金額調整控除は、給与等の収入金額（1,000万円を上限）から850万円を差し引いた額の10％で、最大15万円。",
+      "evidence": [
+        {
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1411.htm",
+          "quote": "{給与等の収入金額（1,000万円超の場合は1,000万円） － 850万円}×10％＝控除額",
+          "scope": "算式の裏付け。現行法令の全問確認ではない。"
+        }
+      ]
+    },
+    {
+      "id": "F48",
+      "severity": "P2",
+      "questionId": "fp2-202505-objective-q48",
+      "field": "choiceReasons[3]",
+      "line": 3447,
+      "title": "住宅取得税控除の誤った1500万円への誘導を除く",
+      "quote": "一般の新築住宅控除額は通常最高1,200万円で、1,500万円は別要件。",
+      "problem": "1500万円にも別要件の住宅控除があると学習者が誤認し得る。設問の1500万円は誤りであり、要件を満たす一般新築住宅は1200万円、認定長期優良住宅の特例は1300万円。別要件という不明瞭な肯定を除く。",
+      "suggestedText": "所定の要件を満たす一般の新築住宅の控除額は1戸当たり1,200万円で、1,500万円ではない。認定長期優良住宅の特例は1,300万円。",
+      "evidence": [
+        {
+          "pdfPage": 26,
+          "source": "sources/fp2/g2_202505_qa.pdf",
+          "quote": "住宅（認定長期優良住宅を除く）…最高で1,500万円",
+          "officialCorrectChoice": "1（したがって肢4は誤り）"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/zeimu/aramashi/shurui/hudousan-keigen.html",
+          "quote": "一戸（一区画）につき1,200万円（長期優良住宅は1,300万円）",
+          "scope": "控除額の裏付けのみ。現在ページの新しい床面積要件等を2024年原問へ移していない。"
+        }
+      ]
+    },
+    {
+      "id": "F59",
+      "severity": "P2",
+      "questionId": "fp2-202505-objective-q59",
+      "field": "explanation",
+      "line": 4234,
+      "title": "正答1の適用不可となる条件を主解説へ示す",
+      "quote": "別居の子、別居配偶者、同居の孫では取扱いが異なるため、単に『同居していないから対象外』とは判断しない。",
+      "problem": "主解説は配偶者の保有継続不要など誤答肢側の話が中心で、なぜ正答1の別居子が対象外になるかを説明しない。肢1理由には正しく記述があるので内容矛盾ではなく解説の決め手欠落。",
+      "suggestedText": "被相続人に配偶者がいるため、別居の子は、配偶者がいないことなどを要するいわゆる家なき子の適用条件を満たさない。したがって設問1が適切。",
+      "evidence": [
+        {
+          "pdfPage": 32,
+          "source": "sources/fp2/g2_202505_qa.pdf",
+          "officialCorrectChoice": "1"
+        },
+        {
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4124.htm",
+          "quote": "上記1および2以外の親族…(2) 被相続人に配偶者がいないこと。"
+        }
+      ]
+    },
+    {
+      "id": "F36",
+      "severity": "P3",
+      "questionId": "fp2-202505-objective-q36",
+      "field": "explanation",
+      "line": 2578,
+      "title": "給与の支払先を支払元へ",
+      "quote": "給与の支払先の数",
+      "problem": "労働者側の申告要件なので数えるのは給与の受取元（勤務先）。",
+      "suggestedText": "給与の支払元の数"
+    },
+    {
+      "id": "F37",
+      "severity": "P3",
+      "questionId": "fp2-202505-objective-q37",
+      "field": "choiceReasons[1] / explanation",
+      "line": 2653,
+      "title": "異動届の提出先が異動前税務署であることも示す",
+      "quote": "納税地の変更は所定の異動届出が必要。",
+      "problem": "原問正答肢の条件である異動前の所轄税務署への提出を理由が省いており、単に届出必要では出題の区別が伝わりにくい。原文の転記/正答は正しい。",
+      "suggestedText": "法人の納税地に異動があった場合は、原則として異動前の納税地の所轄税務署長に届け出る。"
+    }
+  ],
+  "checks": [
+    {
+      "questionId": "fp2-202505-objective-q31",
+      "version": 2,
+      "pdfPage": 18,
+      "printedPage": 17,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "所得10区分、相続税の申告納税方式、消費税の間接税、法人税国税/不動産取得税地方税を全肢確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q32",
+      "version": 2,
+      "pdfPage": 18,
+      "printedPage": 17,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-4",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "needs_revision",
+      "findings": [
+        "F32"
+      ],
+      "reviewNote": "配当所得/不動産所得/給与所得の区分と公式正答4は整合。肢2理由の計算基礎に誤記あり（指摘F32）。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q33",
+      "version": 2,
+      "pdfPage": 19,
+      "printedPage": 18,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-4",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "土地取得負債利子・先物雑所得・生活用自動車譲渡損失の通算制限と事業損失を全肢確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q34",
+      "version": 2,
+      "pdfPage": 19,
+      "printedPage": 18,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-4",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "19–22歳/70歳、本人所得1000万円超、法律婚と内縁を区別。出題時点の判定に不一致なし。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q35",
+      "version": 2,
+      "pdfPage": 20,
+      "printedPage": 19,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "国内法人配当の総合課税と配当控除、公募投信の所定条件、負債利子控除、損益通算前を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q36",
+      "version": 2,
+      "pdfPage": 20,
+      "printedPage": 19,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass_with_note",
+      "findings": [
+        "F36"
+      ],
+      "reviewNote": "給与1500万円/2000万円基準、同族会社役員の賃料、未年調給与25万円、原則2/16–3/15を確認。支払先→支払元の語修正提案F36。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q37",
+      "version": 2,
+      "pdfPage": 21,
+      "printedPage": 20,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass_with_note",
+      "findings": [
+        "F37"
+      ],
+      "reviewNote": "納税地本店等、異動前税務署への届け、申告2か月、新設青色期限（3か月経過日と期末の早い方の前日）を確認。提出先は原文通りだが理由で省略される（任意改善F37）。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q38",
+      "version": 2,
+      "pdfPage": 21,
+      "printedPage": 20,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "2016-04-01以後の建物等定額法、損金経理、10万円未満即時、20万円未満3年均等を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q39",
+      "version": 2,
+      "pdfPage": 22,
+      "printedPage": 21,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "基準期間個人前々年/法人前々事業年度、売上1000万円超、特定期間、法人申告2か月を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q40",
+      "version": 2,
+      "pdfPage": 22,
+      "printedPage": 21,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "売上総利益=売上−原価、営業利益=売上総利益−販管費、無形固定資産、固定負債1年基準を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q41",
+      "version": 2,
+      "pdfPage": 23,
+      "printedPage": 22,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "法務局、抵当権乙区、一般建物壁芯/区分建物内法、証明書利害関係不要を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q42",
+      "version": 2,
+      "pdfPage": 23,
+      "printedPage": 22,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-3",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "非顕名代理の例外、単独持分譲渡、引渡前滅失危険負担、相手方履行着手前手付解除を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q43",
+      "version": 2,
+      "pdfPage": 24,
+      "printedPage": 23,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "普通借地原則30年以上/上限50年でない、債務不履行解除で買取請求不可、更新時建物必要、公正証書不要を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q44",
+      "version": 2,
+      "pdfPage": 24,
+      "printedPage": 23,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "期間定めなし貸主申入6か月/正当事由、1年未満は定めなし、通常損耗経年変化、造作買取排除特約を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q45",
+      "version": 2,
+      "pdfPage": 25,
+      "printedPage": 24,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-3",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "線引き任意例、開発行為の建築等目的、区画整理施行許可不要、市街化調整区域の農林漁業従事者住宅例外を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q46",
+      "version": 2,
+      "pdfPage": 25,
+      "printedPage": 24,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-3",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "前面道路12m未満容積率低い方、準防火耐火の建蔽率緩和、セットバック算入不可、用途制限敷地過半を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q47",
+      "version": 2,
+      "pdfPage": 26,
+      "printedPage": 25,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "共用部分費用原則持分比、管理者集会選任、管理組合全員、持分専有床面積比を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q48",
+      "version": 2,
+      "pdfPage": 26,
+      "printedPage": 25,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "needs_revision",
+      "findings": [
+        "F48"
+      ],
+      "reviewNote": "特定遺贈/死因贈与/等価交換の取得税、一般住宅1200万円控除は整合。1500万円を別要件とする理由を修正要F48。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q49",
+      "version": 2,
+      "pdfPage": 27,
+      "printedPage": 26,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "概算取得費5%、譲渡年1月1日所有5年超、長期15.315+5=20.315%、仲介手数料譲渡費用を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q50",
+      "version": 2,
+      "pdfPage": 27,
+      "printedPage": 26,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "事業受託資金負担土地所有者、建設協力金テナント借入、定期借地建物借地人、等価交換建物一部を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q51",
+      "version": 2,
+      "pdfPage": 28,
+      "printedPage": 27,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "定期贈与一方死亡、書面なし未履行解除、負担付催告後解除、死因贈与検認不要を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q52",
+      "version": 2,
+      "pdfPage": 28,
+      "printedPage": 27,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "暦年受贈者年110万円、年初18歳直系尊属特例、2024年精算課税110万円、一律20%を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q53",
+      "version": 2,
+      "pdfPage": 29,
+      "printedPage": 28,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "実子養子/嫡出非嫡出等分、半血兄弟全血1/2、代襲単独同分を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q54",
+      "version": 2,
+      "pdfPage": 29,
+      "printedPage": 28,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "単純承認負債含む、放棄原則3か月/家庭裁判所、放棄代襲なし、限定全員共同を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q55",
+      "version": 2,
+      "pdfPage": 30,
+      "printedPage": 29,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-4",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "基礎控除3000万+600万×人数、放棄みなし算入、特別養子実子、普通養子原則実子あり1/なし2を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q56",
+      "version": 2,
+      "pdfPage": 30,
+      "printedPage": 29,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "申告10か月/被相続人死亡時住所、保険金非課税で基礎控除以下申告不要、特例後物納価額、第三者財産延納担保を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q57",
+      "version": 2,
+      "pdfPage": 31,
+      "printedPage": 30,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "小会社純資産/大会社比準、70人以上大会社、非同族配当還元、比準配当利益純資産を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q58",
+      "version": 2,
+      "pdfPage": 31,
+      "printedPage": 30,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-2",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "倍率固定資産税評価×倍率/不整形追加補正なし、一体利用一画地、正面路線奥行補正後比較を確認。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q59",
+      "version": 2,
+      "pdfPage": 32,
+      "printedPage": 31,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-1",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "needs_revision",
+      "findings": [
+        "F59"
+      ],
+      "reviewNote": "公式正答1、全肢理由は整合。主解説に正答1の配偶者あり→家なき子要件不可の決め手が欠けるF59。"
+    },
+    {
+      "questionId": "fp2-202505-objective-q60",
+      "version": 2,
+      "pdfPage": 33,
+      "printedPage": 32,
+      "stemAndAllFourChoices": "match after NFKC + whitespace-only normalization",
+      "officialCorrectChoice": "option-4",
+      "allFourReasonsRead": true,
+      "explanationAndTakeawayRead": true,
+      "verdict": "pass",
+      "findings": [],
+      "reviewNote": "自社株買取分散抑制、法人生命保険退職金原資、特例承継計画、贈与納税猶予と精算課税併用可能を確認。"
+    }
+  ],
+  "limitations": [
+    "Current-law sources were checked only for the specific correction evidence; no exhaustive current-law audit or legalReview state change.",
+    "No browser/display/record verification by this reviewer; root handles implementation audit.",
+    "No blind beginner trial. No publication approval ledger or canonical approval hash issued while requested revisions remain."
+  ]
+}

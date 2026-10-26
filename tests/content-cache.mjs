@@ -17,7 +17,7 @@ async function fixture(t){
  // Node imports this module from file://. Give the FP image an HTTP fixture
  // URL while retaining the real corpus; production intentionally rejects file assets.
  const fpURL=url('data/qualifications/fp2/manifest.json'),fp=JSON.parse(await readFile(new URL(fpURL),'utf8')),fpIndexURL=new URL(fp.index.url,fpURL).href,fpIndex=JSON.parse(await readFile(new URL(fpIndexURL),'utf8'));
- for(const q of fpIndex)if(q.image)q.image=new URL(q.image,'https://fixture.test/').href;
+ for(const q of fpIndex){q.sourceImages=q.sourceImages.map(p=>new URL(p,'https://fixture.test/').href);if(q.image)q.image=new URL(q.image,'https://fixture.test/').href;for(const c of q.choices)if(c.image)c.image=new URL(c.image,'https://fixture.test/').href;}
  const fpBody=JSON.stringify(fpIndex);fp.index.sha256=digest(fpBody);overrides.set(fpIndexURL,fpBody);overrides.set(fpURL,JSON.stringify(fp));
  return {saved,cache,overrides,calls,manifest,indexURL,fpManifest:fp};
 }
@@ -48,7 +48,7 @@ test('古い資格一覧に新しい資格がなくても、SWの再検証を待
  old.qualifications=old.qualifications.filter(q=>q.id!=='fp2');
  f.overrides.set(listingURL,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
  const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});
- assert.equal(c.manifest.cases.count,40);assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);assert.equal(f.calls.filter(c=>c.key===listingURL)[1].options.cache,'reload');
+ assert.equal(c.manifest.cases.count,f.fpManifest.cases.count);assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);assert.equal(f.calls.filter(c=>c.key===listingURL)[1].options.cache,'reload');
  f.calls.length=0;assert.equal((await loadCatalog(null,{preferredId:'fp2'})).manifest.id,'fp2');assert.equal(f.calls.filter(c=>c.key===listingURL).length,2);
 });
 test('新科目を含まない資格manifestも一度取り直し、選択画面へ戻さない',async t=>{
@@ -56,7 +56,7 @@ test('新科目を含まない資格manifestも一度取り直し、選択画面
  old.studyTargets=old.studyTargets.filter(p=>p.examPartId!=='jafp-practical');old.cases.count=0;
  f.overrides.set(key,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
  const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});
- assert.equal(c.choose,undefined);assert.equal(c.manifest.cases.count,40);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
+ assert.equal(c.choose,undefined);assert.equal(c.manifest.cases.count,f.fpManifest.cases.count);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
 });
 test('古い一覧から開く科目選択でも、新しい科目を表示する',async t=>{
  const f=await fixture(t),key=url('data/qualifications/catalog.json'),fresh=await readFile(new URL(key),'utf8'),old=JSON.parse(fresh);
@@ -70,4 +70,10 @@ test('本当に存在しない科目は再取得を繰り返さず、選び直�
  assert.equal(c.choose,true);assert.equal(c.invalidTarget,true);
  for(const key of [url('data/qualifications/catalog.json'),url('data/qualifications/fp2/manifest.json')])assert.equal(f.calls.filter(c=>c.key===key).length,2);
  assert(!f.calls.some(c=>c.key.includes('/packs/')));
+});
+
+test('図内参照情報より古いmanifestも初回に一度だけ更新する',async t=>{
+ const f=await fixture(t),key=url('data/qualifications/fp2/manifest.json'),fresh=JSON.stringify(f.fpManifest),old=JSON.parse(fresh);delete old.cases.referenceTargetsVersion;
+ f.overrides.set(key,options=>options.cache==='reload'?fresh:new Response(JSON.stringify(old),{headers:{'X-Hitomon-Cache':'1'}}));
+ const c=await loadCatalog('fp2',{requestedPartId:'jafp-practical'});assert.equal(c.manifest.cases.referenceTargetsVersion,1);assert.equal(f.calls.filter(c=>c.key===key).length,2);assert.equal(f.calls.filter(c=>c.key===key)[1].options.cache,'reload');
 });

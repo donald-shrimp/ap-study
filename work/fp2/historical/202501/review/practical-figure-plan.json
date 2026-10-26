@@ -1,0 +1,180 @@
+{
+  "reviewer": "Codex /root/pr48_practical_review",
+  "source": "sources/fp2/j2_202501_q.pdf",
+  "sourceSha256": "fd95e08cb4c9a9323a22066022fc85dd7ed0fef6a586689239fbcd5460559c5a",
+  "bboxUnits": "PDF points, 1-based physical page; proposed from text blocks, visual confirmation required after cropping",
+  "figures": [
+    {
+      "cases": [
+        7
+      ],
+      "page": 6,
+      "bbox": [
+        55,
+        212,
+        541,
+        440
+      ],
+      "kind": "土地配置図",
+      "required": true,
+      "reason": "道路と土地の接続・幅員5m/4m・150㎡・法定乗数の対応は空白区切りでは保持できない",
+      "visualSourceChecked": true
+    },
+    {
+      "cases": [
+        13
+      ],
+      "page": 11,
+      "bbox": [
+        72,
+        225,
+        530,
+        290
+      ],
+      "kind": "入院推移図",
+      "required": true,
+      "reason": "肺がん29日/42日・肝炎82日・169日の矢印の対応"
+    },
+    {
+      "cases": [
+        19
+      ],
+      "page": 18,
+      "bbox": [
+        130,
+        232,
+        475,
+        379
+      ],
+      "kind": "親族関係図",
+      "required": true,
+      "reason": "父死亡・母存命・兄・配偶者・放棄した子の線の対応"
+    },
+    {
+      "cases": [
+        21
+      ],
+      "page": 20,
+      "bbox": [
+        87,
+        290,
+        279,
+        375
+      ],
+      "kind": "親族関係図",
+      "required": true,
+      "reason": "配偶者/長男/長女3人の相続人"
+    },
+    {
+      "cases": [
+        23,
+        24
+      ],
+      "page": 22,
+      "bbox": [
+        54,
+        220,
+        545,
+        641
+      ],
+      "kind": "キャッシュフロー表・脚注",
+      "required": "unless_markdown_table",
+      "reason": "アが2024給与、イが2028基本生活費、年2％と4年の列対応"
+    },
+    {
+      "cases": [
+        26,
+        27,
+        28
+      ],
+      "page": 25,
+      "bbox": [
+        63,
+        160,
+        535,
+        429
+      ],
+      "kind": "係数表・注記",
+      "required": "unless_markdown_table",
+      "reason": "係数の年/種別の列を正確に対応させる"
+    },
+    {
+      "cases": [
+        34
+      ],
+      "page": 31,
+      "bbox": [
+        68,
+        238,
+        505,
+        345
+      ],
+      "kind": "出勤推移図",
+      "required": "unless_markdown_table",
+      "reason": "15日休業→16日出勤→17-19日待期の列対応"
+    },
+    {
+      "cases": [
+        35
+      ],
+      "page": 32,
+      "bbox": [
+        64,
+        490,
+        541,
+        661
+      ],
+      "kind": "保有資産表",
+      "required": "unless_markdown_table",
+      "reason": "照之・孝子の列対応。現金/株/土地/動産等"
+    },
+    {
+      "cases": [
+        35
+      ],
+      "page": 33,
+      "bbox": [
+        65,
+        142,
+        542,
+        306
+      ],
+      "kind": "生命保険表と注記",
+      "required": "unless_markdown_table",
+      "reason": "契約者・被保険者・受取人・返戻金の対応"
+    },
+    {
+      "cases": [
+        35
+      ],
+      "page": 33,
+      "bbox": [
+        55,
+        490,
+        543,
+        665
+      ],
+      "kind": "バランスシート",
+      "required": "unless_markdown_table",
+      "reason": "純資産空欄と資産/負債を別列で保持"
+    }
+  ],
+  "otherTables": "q3/q4/q5/q6/q8/q11/q12/q14/q15/q16/q17/q22/q25/q29/q32/q33/q36/q39/q40 have full textual values but use PDF-aligned whitespace. Replace with correctly matched Markdown table or table-only crop; plain paragraphs collapse the columns. No need to keep whole page images.",
+  "sharedContextFixes": [
+    {
+      "case": 33,
+      "sourcePage": 26,
+      "required": "工藤直樹1975-05-26生、2025-01-01時点49歳"
+    },
+    {
+      "case": 36,
+      "sourcePage": 33,
+      "required": "復興特別所得税については考慮しない"
+    },
+    {
+      "case": 37,
+      "sourcePage": 32,
+      "required": "孝子は照之の妻、憲一は長男、同居家族"
+    }
+  ]
+}

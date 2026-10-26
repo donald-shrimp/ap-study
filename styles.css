@@ -226,7 +226,7 @@
 .written-field textarea{width:100%;min-height:5em;font-size:calc(1rem * var(--study-text-scale,1));line-height:1.65}
 .written-choices{display:grid;gap:8px;border:0;padding:0;margin:12px 0}
 .written-choices .choice{display:flex;gap:10px;align-items:center;cursor:pointer}
-.written-answer{margin-top:16px;border-left:3px solid #c9d7e4;padding-left:14px}
+.written-answer{margin-top:16px}
 .written-self{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .written-originals{margin-top:16px}
 .written-case-option+.written-case-option{margin-top:24px}
@@ -243,3 +243,42 @@
 .numeric-field .numeric-answer{display:flex;align-items:center;gap:12px}.numeric-answer input{min-width:0;flex:1}.numeric-answer>span{flex-shrink:0;margin:0}.legal-context{color:var(--muted)}
 
 .offline-entry{display:flex;margin:0 0 8px;padding:0}.offline-entry>.button{max-width:100%;min-height:44px;font-size:.875rem;padding:10px 14px}
+
+/* Case screens use the same controls and visual roles as ordinary practice. */
+.case-options{margin:0 0 18px;color:var(--muted);font-size:.875rem}
+.case-options>summary{min-height:44px;padding:10px 0}
+.case-mode{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:6px 0 14px;color:var(--muted);font-size:.875rem}
+.case-mode select{min-width:0;max-width:65%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--text);font:inherit}
+.case-pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.case-pack-card{display:flex;justify-content:space-between;gap:14px;padding:20px;text-align:left;min-width:0}
+.case-pack-card strong{overflow-wrap:anywhere}.case-pack-card span{flex-shrink:0;color:var(--muted)}
+.case-topic{padding:0;overflow:hidden}.case-topic>.field-start{min-height:86px}
+.case-topic-count{display:block;margin-top:5px}.case-topic>details{border-top:1px solid var(--line);padding:0 20px 14px}
+.case-topic>details>summary{min-height:44px;padding:10px 0;font-size:.875rem;color:var(--muted)}
+.written-case-option{padding:18px 0;border-top:1px solid var(--line)}
+.written-case-option+.written-case-option{margin-top:0}.written-case-option h3{margin:0 0 8px}
+.case-meta{margin-bottom:12px}.case-meta .case-study-scope{color:var(--muted)}
+.case-heading{margin-bottom:12px}
+.written-panel-title{font-size:1.1rem;margin:0 0 18px;line-height:1.5}
+.written-item-nav{margin-bottom:18px}.written-item-nav .button{font-size:.875rem}
+.written-field{padding:20px 0;border-top:1px solid var(--line)}
+.written-field:first-of-type{border-top:0;padding-top:0}.written-field h3{font-size:1rem;margin-bottom:12px}
+.written-field .choices{margin:0}.written-choices .choice{align-items:flex-start;gap:13px}
+.written-field .choice-text{font-size:calc(1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.8}
+.written-body .question-stem,.written-items>.question-stem{font-size:calc(1.1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.95}
+.written-field textarea,.written-field input[type=text]{font-size:calc(1rem * var(--study-text-scale));line-height:1.8}
+.written-field-actions{margin-top:18px}.written-field-status{margin:16px 0 0}
+.written-answer.result{margin-top:18px}
+.written-answer h4{font-size:1rem;margin:0 0 10px}.written-answer .reference-answer{margin-bottom:14px}
+.written-answer>.written-explanation,.written-answer>.written-rubric{margin:14px 0}
+.written-answer details>summary{min-height:44px;padding:8px 0}
+.written-answer .explanation{margin-top:10px}.written-rubric ul{padding-left:1.4em;margin-bottom:0}
+.written-self .button[aria-pressed=true]{background:var(--pale);border-color:var(--accent);color:var(--accent)}
+.written-answer .ai-explain-entry{margin:16px 0 0;padding-bottom:0}.written-restart{margin-top:12px}
+.written-items>.finish-actions{padding-top:18px;border-top:1px solid var(--line)}
+@media(max-width:1000px){
+ .written-body .question-stem,.written-items>.question-stem{font-size:calc(1.05rem * var(--study-device-scale) * var(--study-text-scale))}
+ .written-field textarea,.written-field input[type=text]{font-size:max(16px,calc(1rem * var(--study-text-scale)))}
+ .written-choices .choice{gap:9px}.written-mobile-tabs{margin:12px 0 16px}
+ .written-mobile-tabs .button{flex:1;min-width:0}
+}

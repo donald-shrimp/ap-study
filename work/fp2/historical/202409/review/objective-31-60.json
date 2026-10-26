@@ -1,0 +1,1446 @@
+{
+  "reviewer": "Codex /root/pr49_objective_31_60",
+  "role": "independent reviewer, not author; review only",
+  "reviewedAt": "2026-10-26T11:33:53.341779+00:00",
+  "targetHead": "a2d5cb68d182995dc1da224b6e7cd0cfe849013f",
+  "pr": 49,
+  "scope": {
+    "questions": 30,
+    "range": "31–60",
+    "choicesAndReasons": 120,
+    "hints": 60
+  },
+  "draftPath": "work/fp2/historical/202409/questions.json",
+  "draftFileSHA256": "acef8e470b1fedd961346752b6f54dc262a4b798f48a40d46c33bd5e93d1d424",
+  "sourceHashes": {
+    "sources/fp2/g2_202409_q.pdf": "1b8b1727e79dfe8df94a5e368ac3ac9c527533adfbd84f7b3842d9182be9a36b",
+    "sources/fp2/g2_202409_a.pdf": "aa107889a13f155a1854a93c847172db539ef124379f822571890b9c8070843a"
+  },
+  "officialAnswersMatch": 30,
+  "sourceComparison": {
+    "choiceMismatches": 0,
+    "stemExactNormalized": 29,
+    "stemDataPreservedWithAddedImageCaption": 1,
+    "evidence": "objective-31-60-source-comparison.json"
+  },
+  "visualMethods": {
+    "contactSheetPhysicalPages": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "fullPageImagesOpened": [
+      14,
+      22
+    ],
+    "officialAnswerImageOpened": true,
+    "q33Table3RowsAndConditionsChecked": true
+  },
+  "legalBaseline": "2024-04-01",
+  "specificHistoricalLawEvidence": {
+    "civilCode202404Revision": "129AC0000000089_20240401_504AC0000000102",
+    "url": "https://laws.e-gov.go.jp/api/2/law_data/129AC0000000089_20240401_504AC0000000102",
+    "articlesChecked": [
+      "1028",
+      "1037"
+    ],
+    "localFileSHA256": "ed7f693291d3ca19134f643609b6e92e4c850eeadefd3e5ccae6cc8e5cfcd231"
+  },
+  "findings": [
+    {
+      "id": "OBJ56-LONG-SHORT-RESIDENCE-CONFUSION",
+      "priority": "P2",
+      "questionId": "fp2-202409-objective-q56",
+      "version": 6,
+      "field": "choiceReasons[0], hints[1].text",
+      "line": 4972,
+      "additionalLine": 5014,
+      "title": "長期の配偶者居住権に短期居住権の無償居住要件を混ぜない",
+      "quote": "相続開始時に被相続人所有の建物に配偶者が無償で居住していたことが基本要件",
+      "description": "民法1028条の配偶者居住権は相続開始時に「居住していた」ことを要件とする。相続開始時に「無償で居住していた」ことを要するのは1037条の配偶者短期居住権。草稿の肢1理由と第2ヒントは、有償で居住していた配偶者は長期居住権も取得できないという誤った追加条件を教える。権利取得後の使用収益が無償であることと、取得前の居住が無償であることは別。公式正答1は一致する。",
+      "requestedChange": "肢1理由・第2ヒントの取得要件から「無償で」を除く。相続開始時の居住、遺産分割・遺贈等による取得手続、第三者共有の制限を長期居住権として説明する。必要なら短期居住権の無償居住要件は別制度であると対比する。",
+      "evidence": [
+        {
+          "source": "sources/fp2/g2_202409_q.pdf",
+          "physicalPage": 22,
+          "officialCorrectChoice": "option-1"
+        },
+        {
+          "url": "https://laws.e-gov.go.jp/api/2/law_data/129AC0000000089_20240401_504AC0000000102",
+          "revision": "2024-04-01施行版",
+          "articles": {
+            "1028": "被相続人の財産に属した建物に相続開始の時に居住していた場合",
+            "1037": "被相続人の財産に属した建物に相続開始の時に無償で居住していた場合"
+          },
+          "localEvidence": "civil-code-202404.json"
+        }
+      ]
+    },
+    {
+      "id": "OBJ46-H1-REVEALS",
+      "priority": "P2",
+      "questionId": "fp2-202409-objective-q46",
+      "version": 5,
+      "field": "hints[0].revealsAnswer",
+      "line": 4139,
+      "title": "問46の第1ヒントは正答肢を直接否定するのでtrueへ",
+      "quote": "構造上独立した部屋でも、その使い道を規約で共用扱いにできる場合がある。",
+      "description": "タイトルも「部屋として独立しても共用にできる」。最も不適切な肢3は「構造上・利用上の独立性がある部分は、規約によって共用部分とすることはできない」とするため、タイトルと本文がその誤りを直接教えている。残るのは同義文の対応だけで、計算や条件適用はない。falseのままだとこのヒントを読んだ正答がassistedになり、実際の解答開示を記録できない。",
+      "requestedChange": "有用な説明を維持したままhints[0].revealsAnswerをtrueへ。定義を隠した曖昧な文へ弱める必要はない。",
+      "evidence": [
+        {
+          "source": "docs/hint-authoring.md",
+          "rule": "正答肢そのものと実質同じ説明、定義の言い換えもtrue"
+        },
+        {
+          "source": "sources/fp2/g2_202409_q.pdf",
+          "physicalPage": 18,
+          "correctChoiceText": "区分所有建物のうち、構造上の独立性と利用上の独立性を備えた建物の部分は、区分所有権の目的となる専有部分であり、規約によって共用部分とすることはできない。"
+        }
+      ]
+    },
+    {
+      "id": "OBJ50-H1-REVEALS",
+      "priority": "P2",
+      "questionId": "fp2-202409-objective-q50",
+      "version": 5,
+      "field": "hints[0].revealsAnswer",
+      "line": 4487,
+      "title": "問50のNOI定義ヒントは解答開示として記録する",
+      "quote": "家賃収入の総額と、管理費・修繕費など物件の運営経費を引いた純営業収益（NOI）は違う。",
+      "description": "最も不適切な肢3はNOI利回りの分子を年間の総収入と定義している。第1ヒントはNOIを経費控除後と定義して総収入との違いをそのまま教え、「利回りの分子に何を使うか」と結び付ける。数値計算はなく、定義の照合だけで肢3の誤りが確定する。初学者に必要な説明として内容は有用だが、falseでは開示判定が一致しない。",
+      "requestedChange": "hints[0].revealsAnswerをtrueへ変更し、NOIの意味を教える内容は維持する。",
+      "evidence": [
+        {
+          "source": "sources/fp2/g2_202409_q.pdf",
+          "physicalPage": 20,
+          "correctChoiceText": "ＮＯＩ利回り（純利回り）は、対象不動産から得られる年間の総収入を総投資額で除して算出される利回りであり、不動産の収益性を測る指標である。"
+        }
+      ]
+    },
+    {
+      "id": "OBJ48-H1-REVEALS",
+      "priority": "P2",
+      "questionId": "fp2-202409-objective-q48",
+      "version": 5,
+      "field": "hints[0].revealsAnswer",
+      "line": 4313,
+      "title": "取得日の引継ぎを教えた第1ヒントもtrueとする",
+      "quote": "譲渡所得が長期か短期かは、単に手元に置いた年数ではなく、税法上の取得日の引継ぎと判定基準日で決まる。",
+      "description": "第1ヒントは相続登記日と被相続人の購入日を並べたうえで「取得日の引継ぎ」を教える。最も不適切な肢1は「相続人の相続登記日が取得日」とするため、この引継ぎの知識が肢1を実質的に否定する。ここでは保有期間の具体的計算を問わず、登記日起算かどうかの定義が設問の決め手。",
+      "requestedChange": "現行内容を維持するならhints[0].revealsAnswerをtrueへ。単なる比較軸だけのfalseと扱う場合は、どの実質的な判断が残るかを改めて示して判定する。",
+      "evidence": [
+        {
+          "source": "sources/fp2/g2_202409_q.pdf",
+          "physicalPage": 19,
+          "correctChoiceText": "相続により取得した土地を譲渡した場合、その土地の所有期間を判定する際の取得の日は、相続人が当該相続を登記原因として所有権移転登記をした日である。"
+        }
+      ]
+    }
+  ],
+  "suggestions": [
+    {
+      "priority": "P3",
+      "questionId": "fp2-202409-objective-q35",
+      "field": "hints[1].text / explanation",
+      "note": "与件は公的年金の「雑所得250万円」で、H2の条件は「年金収入400万円以下」。未知の学習者はそのまま比較できない。65歳以上なら年金収入360万円、65歳未満なら370万円になる逆算（またはその換算値）を簡潔に補うと、収入と所得を混同せず正答4を辿れる。現在の結論・正答は正しい。",
+      "calculations": {
+        "age65plus": "250+110=360万円",
+        "ageUnder65": "(250+27.5)/0.75=370万円",
+        "salaryIncome": "70−55=15万円≤20万円"
+      }
+    },
+    {
+      "priority": "P3",
+      "questionId": "fp2-202409-objective-q33",
+      "field": "stem",
+      "note": "3行のデータと条件は本文に揃っておりオフラインで解答可能。原本画像参照の補助文を省き、2列パイプ表にすると行列が読みやすい。必須画像欠落としては扱わない。"
+    }
+  ],
+  "nonFindings": [
+    {
+      "questionId": "fp2-202409-objective-q40",
+      "note": "H1の請求書記載事項対計算法の区別は比較軸。別の制度であるだけでは利用要件が独立することまでは言っておらず、H2で不要条件を明示してtrueとなる構成を許容。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q33",
+      "note": "H2falseは600−50の最終計算を残しており適切。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q49",
+      "note": "H1は翌年末対3年経過年末を比較させるが正しい期限を断言していないためfalse許容。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "fp2-202409-objective-q31",
+      "version": 5,
+      "sourcePhysicalPage": 13,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "de07d261d68d1d78565957f6fe016f936d49a7b62acb1808530b525769dedc12",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "税率・課税方法・税の種類",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "直接税/間接税の分類軸",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "所得税・贈与税・法人税・登録免許税",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "超過累進税率、贈与税申告納税、法人税直接/消費税間接、登録免許税国税の四肢と理由を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q32",
+      "version": 5,
+      "sourcePhysicalPage": 14,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "005accf275d5fd91d37837d585ad19ff2414f747941cf74093972de834f7e763",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "所得の区分は収入の原因で決まる",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "資金源でなく発生原因で所得区分",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "四つの所得区分の対応",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "土地売却/賃貸/本人個人年金/事業資金株式配当の所得区分と各理由が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q33",
+      "version": 4,
+      "sourcePhysicalPage": 14,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "f7c09eb1fa0f97806060af46e56b0bb8ab861159d384a856e3cf1c9d5441a882",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "q33は原本データ3行が同じで末尾にオンライン画像案内を追加。他29本文と全120肢はNFKC/空白正規化・PDFページフッター除去後一致。",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "赤字はすべて引けるわけではない",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "損失の種類による通算可否",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "通算できる損失を式へ",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "損失の対象を具体化し600－50を自分で計算する",
+          "remainingJudgment": "損益通算後の差引計算",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "給与600－不動産損失50＝550。土地取得借入利子なし、ゴルフ会員権損180は不算入。表の3行を原本画像でも確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q34",
+      "version": 5,
+      "sourcePhysicalPage": 14,
+      "officialAnswer": 2,
+      "registeredCorrectChoiceId": "option-2",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "6dec131d76e719a4d4ab9f37f761f7b5ac0b959db5166d4a73a0c7e792011f81",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "2024年の住宅ローン控除の条件",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "入居年による基準と独立要件",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "2,000万円・10年・併用制限",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "2024年入居所得2000万、取得6月以内、10年償還、旧居3000万特例併用制限が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q35",
+      "version": 5,
+      "sourcePhysicalPage": 15,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "adf0df4fb1a4fac99bf6b9f48ff6a98a53063a27825233245e735321e5b0658c",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "収入金額と所得金額は違う",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "収入と所得、一時所得の1/2算入",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "給与・年金の申告不要を数字で判定",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "給与3000万超、従給与30万、一時所得50の1/2=25万、給与70−55=15万を確認。年金雑所得250の年金収入は65歳以上360万/未満370万、いずれも400万以下。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q36",
+      "version": 5,
+      "sourcePhysicalPage": 15,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "ca5d9073edfbb36eb24161c8dc986da079134e69d46cd69b7f2bef23aa17d75c",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "法人税は会社単位で見る",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "会社単位の課税と各要件",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "納税地・青色申告期限・800万円",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "法人納税地/異動前署提出/設立青色早い日前日/中小法人800万軽減の区別が適切。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q37",
+      "version": 5,
+      "sourcePhysicalPage": 15,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "d977215aac33128850a5fc5f6bd83c514176ce9e6e7273f9ac2934b063c33d9e",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "支出＝損金、ではない",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "支出と損金の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "償却・寄附・会議費・税金の扱い",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "償却限度、特定公益増進法人寄附限度、通常会議費、法人税/法人住民税損金不可を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q38",
+      "version": 5,
+      "sourcePhysicalPage": 16,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "a6f2fd5e6c3e11b172043cb5108cd2d128b57138743fbe43c5bc85eeb21f5845",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "基準期間と特定期間を区別",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "期間と届出/申告の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "5,000万円と2か月の期限",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "特定期間前年1–6月、簡易基準5000万/事前届出、法人2月申告を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q39",
+      "version": 5,
+      "sourcePhysicalPage": 16,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "7f0713ef5106b8342b06c1de98b9f52ec335152b9a8b7dbd8819a04d63ce9e60",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "利益を受けたのは役員か会社か",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "経済的利益の帰属先",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "会社から役員への利益は給与が基本",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "会社から役員の経済的利益は給与、会社受贈益/債務免除益との向きを確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q40",
+      "version": 6,
+      "sourcePhysicalPage": 16,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "3ebe5f6bfd63f99c3b6a96b6705acd0d15499ca247087f12f7ede37486edf6e5",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "『簡易』でも二つの別制度",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "請求書記載と消費税計算の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "簡易インボイスに簡易課税は不要",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "簡易インボイスと簡易課税は別要件。第1ヒントは記載事項対計算方法の比較軸で、独立した利用要件までは教えないためfalse許容。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q41",
+      "version": 5,
+      "sourcePhysicalPage": 17,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "891a787d6c310fb2ad06a5153debd1f937d6cdb387d40027a41a041215aa96dd",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "登記の『どこに何を書くか』",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "所有権/担保と公信力の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "甲区は所有権、乙区は抵当権",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "甲区所有権/乙区担保、公信力なし、公図概略、未登記借地の可能性が適切。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q42",
+      "version": 5,
+      "sourcePhysicalPage": 17,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "f6532b237f72b7a012a343745728e892dfa235eeb516546c70a064ea0daa3bcd",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "宅建業者が売主なら買主を保護",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "売主業者による買主保護と媒介の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "手付20％・倍額返還・専任3か月",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "非宅建業者買主の手付20%/倍額現実提供/履行着手、専任媒介3月短縮を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q43",
+      "version": 5,
+      "sourcePhysicalPage": 17,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "a8f8dc5656be725e92911e8d3fea1431e71b54aafafa9fc997c6b76433462e82",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "普通借地と定期借地を区別",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "普通と定期の制度の違い",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "普通30年・一般定期50年以上",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "普通30年、更新時建物、一般定期50年以上、公正証書等対事業用公正証書を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q44",
+      "version": 5,
+      "sourcePhysicalPage": 18,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "3e2d913532fdc244895079df373f3d6d096c4374f432548c0ab42d0f622ee40a",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "『進める区域』と『抑える区域』",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "市街化を進める/抑える区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "市街化区域には用途地域を定める",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "非線引きの存在、市街化/調整と用途地域、開発許可小規模例外を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q45",
+      "version": 5,
+      "sourcePhysicalPage": 18,
+      "officialAnswer": 2,
+      "registeredCorrectChoiceId": "option-2",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "b91418b7be54298c01be5a887175fbe3497fe47a534fe23e11feadc2cc7fcc45",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "建蔽率と容積率の分子が違う",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "建蔽率と容積率の定義",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "準防火の10ポイント緩和と面積計算",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "セットバック除外、準防火準耐火緩和10ポイント、区域加重平均、道路幅制限は容積率を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q46",
+      "version": 5,
+      "sourcePhysicalPage": 18,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "changes_requested",
+      "draftCanonicalSHA256": "bf05c4a9d516ad7e4cacaa320b4dedf98886bc649f657730e18d6ee74ff20cea",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "部屋として独立しても共用にできる",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "規約共用部分の定義自体",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "規約共用部分と議決権の原則",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [
+        "OBJ46-H1-REVEALS"
+      ],
+      "reviewNote": "原文/正答/解説は一致。第1ヒントが規約共用可を直接教えるfalse開示だけ要修正。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q47",
+      "version": 5,
+      "sourcePhysicalPage": 19,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "62abc6d185bcecf7ffda85cea66bca24ed6de2cb979f3c5c23ffa04b7761b9be",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "不動産取得税と登録免許税は別",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "取得税と登録税の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "相続0.4％、贈与2％が基本",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "固定資産評価額、精算課税贈与取得税、相続土地100万免税、相続0.4/贈与2%を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q48",
+      "version": 5,
+      "sourcePhysicalPage": 19,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "changes_requested",
+      "draftCanonicalSHA256": "927fc42e1ab924824e543a5e6f0ca3134119a358577786254425023e67856cb9",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "所有期間は登記した日から？",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "相続土地の取得日引継ぎ自体",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "被相続人の取得日と5年基準",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [
+        "OBJ48-H1-REVEALS"
+      ],
+      "reviewNote": "被相続人取得日引継ぎ、1/1の5年基準、概算5%、短期30.63+9%を確認。第1ヒント開示判定要修正。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q49",
+      "version": 5,
+      "sourcePhysicalPage": 19,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "3fbeaa211c847397d09850836b2aa7749a078c402f7a2103522a39fa7441a411",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "空き家特例は『家の条件＋売る期限』",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "家屋条件と期限の二類型",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "3年経過する日の属する年末が期限",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "単独居住/区分所有外/1981-05-31以前/相続から3年経過年末が一致。H1は二期限を比較させるがどちらが正しいか明示せずfalse許容。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q50",
+      "version": 5,
+      "sourcePhysicalPage": 20,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "changes_requested",
+      "draftCanonicalSHA256": "20eff8e30ba8e2f88b0013456ec286355b12fd920518d28a82f467cfd4d10a8b",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "総収入と手元に残る利益を区別",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "NOIの定義自体",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "NOI利回り＝純営業収益÷投資額",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [
+        "OBJ50-H1-REVEALS"
+      ],
+      "reviewNote": "NOIと総収入、DCF、IRR、レバレッジは適切。H1の定義自体が正答肢を否定するため開示判定要修正。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q51",
+      "version": 4,
+      "sourcePhysicalPage": 20,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "c28bf4958a005b8a0b1d9131f81d11c7bb2d51e7c517b33e3764571481488baa",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "贈与は「合意」と「履行時点」を分ける",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "贈与契約と遺贈の成立方式",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "定期・負担付・死因贈与の違い",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "定期贈与当事者死亡、第三者利益負担付、死因贈与合意、無書面履行済不可が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q52",
+      "version": 5,
+      "sourcePhysicalPage": 20,
+      "officialAnswer": 2,
+      "registeredCorrectChoiceId": "option-2",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "e2bdffde34f14e6b63cd5c49b3f4f455987304e62cfb6a367788feb600f73646",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "住まいの贈与に使う夫婦の特例",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "住居贈与の配偶者特例の対象",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "20年は贈与日までに満たす",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "婚姻20年は贈与日、同一配偶者一度、控除部分加算対象外、敷地だけ可が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q53",
+      "version": 6,
+      "sourcePhysicalPage": 21,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "e1dd530e14073ba491707abb7d100a48b570c4dae7fdcf87e7382e5e2d090ba4",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "制度を選ぶ単位を知る",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "贈与者単位の選択",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "年齢要件・変更不可・財産の範囲",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "贈与者ごと/撤回不可、1/1の60/18歳、財産回数無制限、2024基礎110万受贈者按分が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q54",
+      "version": 6,
+      "sourcePhysicalPage": 21,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "77a2f656b7e6c9d1f973462f2b30d42d5e930a35a9c0e9b474a78834975923ae",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "契約する時点と開始する時点",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "契約時点と開始時点の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "家庭裁判所の監督人選任で発効",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "契約公正証書と監督人選任で発効、監督人欠格を区別。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q55",
+      "version": 5,
+      "sourcePhysicalPage": 21,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "1623768062e21ebaa7563ff7efeb5cf15d3b886cd0f10dff69c9839e01116851",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "全員協議・部分分割・裁判所",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "全員協議と書類形式の違い",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "協議書は公正証書でなくてもよい",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "遺言分割禁止5年、一部分割、家庭裁判所、私文書で可能を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q56",
+      "version": 6,
+      "sourcePhysicalPage": 22,
+      "officialAnswer": 1,
+      "registeredCorrectChoiceId": "option-1",
+      "verdict": "changes_requested",
+      "draftCanonicalSHA256": "3fc671e89869a49e70235e1b4ae719618194fa016bdd9c41caeca0f01ce1d522",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "配偶者が家に住み続ける権利",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "所有権とは別の居住権",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "相続開始時の居住が基本要件",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": false
+        }
+      ],
+      "findingIds": [
+        "OBJ56-LONG-SHORT-RESIDENCE-CONFUSION"
+      ],
+      "reviewNote": "原文/正答は一致。1028長期/1037短期の居住要件を2024-04-01施行版と照合し、肢1理由とH2に誤り。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q57",
+      "version": 5,
+      "sourcePhysicalPage": 22,
+      "officialAnswer": 4,
+      "registeredCorrectChoiceId": "option-4",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "cbe47a4aca266e5ae136f984dea4cdab3fac52e079c43b9ab5d49c03833e7036",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "配偶者が相続で取得した額を見る",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "実際取得額と税額/申告/対象者の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "1億6千万円・法定相続分・法律婚",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "配偶者軽減16000万と法定相続分最大、申告必要、放棄後遺贈可能、法律婚対象を確認。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q58",
+      "version": 5,
+      "sourcePhysicalPage": 22,
+      "officialAnswer": 2,
+      "registeredCorrectChoiceId": "option-2",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "3c8ea9e64df0cc4baefbcc5a445285646e2ef252a792cb3b027ea6dd88462f0a",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "TTBと評価に使う時点を分ける",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "TTBの意味と為替時点",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "外貨預金は相続開始時のTTB",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "課税時期TTB、普通預金少額利息、債券税引後既経過利息、未発生保険解約返戻評価が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q59",
+      "version": 4,
+      "sourcePhysicalPage": 23,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "2e7bc6390810a6e1f3feb4298643f0b7eb5bfa1b9715e841e897ec4ca7209056",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "遺言の効力と遺留分は別",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "遺留分と遺言の効力の区別",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "分割方法の委託と執行者指定もできる",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "遺留分侵害無効でない、一部相続分指定可、第三者委託と執行者指定可が一致。"
+    },
+    {
+      "questionId": "fp2-202409-objective-q60",
+      "version": 5,
+      "sourcePhysicalPage": 23,
+      "officialAnswer": 3,
+      "registeredCorrectChoiceId": "option-3",
+      "verdict": "content_checked_no_findings",
+      "draftCanonicalSHA256": "188fa11c03c85d4140ba68c5f0b23ea26f3d03cb928b19f5a6f6e05c53ddc755",
+      "checks": {
+        "stem": true,
+        "allFourChoices": true,
+        "officialAnswer": true,
+        "allFourReasons": true,
+        "summaryExplanationTakeaway": true,
+        "allTwoHintsRead": true,
+        "legalAsOf": "2024-04-01"
+      },
+      "sourceComparisonNote": "原本一致（NFKC・空白正規化とPDFフッター除去）",
+      "hints": [
+        {
+          "stage": 1,
+          "title": "株式譲渡と事業譲渡では移るものが違う",
+          "currentRevealsAnswer": false,
+          "recommendedRevealsAnswer": false,
+          "newKnowledge": "株式/事業譲渡で移るものの違い",
+          "remainingJudgment": "未提示の数値・条件を第2段または知識と照合して判定する",
+          "contentValid": true
+        },
+        {
+          "stage": 2,
+          "title": "重要な事業譲渡には特別決議",
+          "currentRevealsAnswer": true,
+          "recommendedRevealsAnswer": true,
+          "newKnowledge": "問題固有の数値・定義・適用条件を具体的に教える",
+          "remainingJudgment": "正答肢と知識の対応だけで実質的解答開示",
+          "contentValid": true
+        }
+      ],
+      "findingIds": [],
+      "reviewNote": "株式譲渡存続/事業譲渡個別、重要事業譲渡特別決議、同隣市20年競業禁止が一致。"
+    }
+  ],
+  "calculationsChecked": [
+    {
+      "question": 33,
+      "result": "600−50=550;180のゴルフ会員権損不算入"
+    },
+    {
+      "question": 35,
+      "result": "給与70−55=15、一時所得50×1/2=25、公的年金収入360または370"
+    },
+    {
+      "question": 48,
+      "result": "短期所得税30%×1.021=30.63%、住民税9%"
+    },
+    {
+      "question": 50,
+      "result": "H2例NOI(120−20)/2000×100=5%、総収入120/2000×100=6%"
+    }
+  ],
+  "limitations": [
+    "レビューのみ。草稿の変更・マージ・公開・確認台帳作成は行っていない。",
+    "原本の出題基準で確認。全問の現行法令網羅照合やlegalReview確認済み化ではない。",
+    "実際の初学者試用・実画面・同期・バックアップはこの担当では未実施。",
+    "H1の答え開示は内容と段階を合わせて判定。必要な定義を削らずtrueにする方針。"
+  ]
+}

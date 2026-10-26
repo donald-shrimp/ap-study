@@ -1,3 +1,4 @@
+import {createSyncCursorStore} from './sync-cursor.js';
 import {encodeResourceRow,decodeResourceRow} from '../v2/resources.js';
 // Mutable plans and diagnostic runs use compare-and-swap, independently of
 // immutable learning attempts. The outbox and local document commit together.
@@ -6,6 +7,7 @@ const finished=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabo
 const serial=value=>JSON.stringify(value,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 export const MAX_WORKSPACE_BYTES=850000;
 export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,validate,namespaceName='workspace',planHistory=null}){
+ const syncCursor=createSyncCursorStore({rootPath,owner,qualificationId,namespaceName});
  let dbPromise,queue=Promise.resolve(),validationError=null;
  const namespace=[owner,qualificationId],key=id=>[...namespace,id],samePayload=(a,b)=>planHistory?planHistory.canonical(a)===planHistory.canonical(b):serial(a)===serial(b);
  async function db(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const r=indexedDB.open(`hitomon-v2:${rootPath}:${namespaceName}`,1);r.onupgradeneeded=()=>{const store=r.result.createObjectStore('documents',{keyPath:['owner','qualificationId','id']});store.createIndex('namespace',['owner','qualificationId']);};r.onsuccess=()=>resolve(decodeResourceRow(r.result));r.onerror=()=>reject(r.error);});return dbPromise;}
@@ -106,5 +108,5 @@ export function createWorkspaceStore({owner,qualificationId,deviceId,rootPath,va
   });
  }
  function removeDraft(id){if(!id.startsWith('draft--'))throw new Error('下書き以外は削除できません。');return transaction(async store=>{const row=await request(store.get(key(id)));if(row?.kind==='draft')store.delete(key(id));});}
- return {writeNotes,removeDraft,read,error:()=>validationError,write,restoreBackup,merge,acknowledge,resolve,clearDiagnostics,flush:()=>queue,close:async()=>{await queue.catch(()=>{});if(dbPromise)(await dbPromise).close();},identity:()=>({owner,qualificationId,deviceId})};
+ return {cursor:syncCursor.cursor,setCursor:syncCursor.setCursor,writeNotes,removeDraft,read,error:()=>validationError,write,restoreBackup,merge,acknowledge,resolve,clearDiagnostics,flush:()=>queue,close:async()=>{await queue.catch(()=>{});await syncCursor.close();if(dbPromise)(await dbPromise).close();},identity:()=>({owner,qualificationId,deviceId})};
 }

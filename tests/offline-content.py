@@ -1,5 +1,5 @@
 """Generated download inventories preserve banks and include every required image."""
-import json,hashlib
+import json,hashlib,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 for q in ['ap','ab730']:
@@ -22,3 +22,23 @@ for q in ['ap','ab730']:
   for c in cases:
    g=next(g for g in groups if c['id'] in g['itemIds']);assert {f['image'] for f in c.get('bodyFigures',[])}<=set(g['files']);assert not set(c['sourceImages'])&set(g['files'])
  print('PASS',q,len(seen),'questions / full SHA and sizes / required choice images / optional originals excluded / source-only',fallback)
+
+# Two sessions without optional sourceRefs still download separately. The case
+# catalog, rather than a qualification-specific ID pattern, defines the split.
+from fp2_fixtures import prepare,builder,write
+with tempfile.TemporaryDirectory(prefix='offline-case-sessions-') as d:
+ root=Path(d);cfg,normal,cases=prepare(root);base=root/'content/fp2'
+ cases[1]['examPartId']=cases[0]['examPartId']
+ reviews=json.loads((base/'practical-reviews.json').read_text())
+ reviews[1]['canonicalCaseSHA256']=builder.diagnostic_digest(cases[1])
+ write(base/'practical-cases.json',cases);write(base/'practical-reviews.json',reviews)
+ catalog=json.loads((base/'case-catalog.json').read_text())
+ for n,e in enumerate(catalog['entries']):e.update(packId='session-'+str(n),packLabel='試験回'+str(n),number=1)
+ write(base/'case-catalog.json',catalog);builder.build(root)
+ folder=root/'data/qualifications/fp2';m=json.loads((folder/'manifest.json').read_text());o=json.loads((folder/m['offline']['url']).read_text())
+ groups=[g for g in o['groups'] if g['unit']=='cases']
+ assert [g['label'] for g in groups]==['試験回0','試験回1']
+ assert [g['itemIds'] for g in groups]==[[c['id']] for c in cases]
+ assert all(g['count']==1 for g in groups)
+ assert cases[0]['bodyFigures'][0]['image'] in groups[0]['files'] and cases[0]['bodyFigures'][0]['image'] not in groups[1]['files']
+print('PASS separate case-session downloads with empty sourceRefs / labels / counts / required images')
