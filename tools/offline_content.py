@@ -32,14 +32,18 @@ def compile_offline(root,manifest,questions,directory,hashed_json):
             if qs:group('pack-'+p['id']+'-'+part['id'],p['label'],part['id'],'questions',[q['id'] for q in qs],[entry(p)]+[i for q in qs for i in images(q)])
     if manifest.get('cases'):
         bank=manifest['cases'];path=entry(bank,True);cases=json.loads((directory/bank['url']).read_text())['cases'];batches=defaultdict(list)
+        catalog={e['caseId']:e for e in bank.get('index',[])}
         for c in cases:
-            # Official sessions share source refs. Other future material falls
-            # back to its published source label, without assuming 11 cases.
-            key=(c['examPartId'],tuple(c.get('sourceRefs',[])))
+            # The published catalog defines sessions. Optional sourceRefs can
+            # be empty for multiple sessions and must not merge their downloads.
+            record=catalog.get(c['id'])
+            scope=('pack',record['packId']) if record else ('sources',tuple(c.get('sourceRefs',[])))
+            key=(c['examPartId'],scope)
             batches[key].append(c)
         for n,((part,_),batch) in enumerate(batches.items()):
             source=batch[0].get('source',batch[0]['title']);match=re.search(r'令和(\d+)年度(春期|秋期)',source)
-            label=f'{2018+int(match[1])}年 {match[2]}' if match else source
+            record=catalog.get(batch[0]['id'])
+            label=f'{2018+int(match[1])}年 {match[2]}' if match else record['packLabel'] if record else source
             files=[path]+[asset(f['image']) for c in batch for f in c.get('bodyFigures',[])]
             group('cases-'+batch[0]['id'],label,part,'cases',[c['id'] for c in batch],files)
     if manifest.get('flashcards'):

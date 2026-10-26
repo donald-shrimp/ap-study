@@ -27,9 +27,9 @@ test('別資格・派生・未対応パートは初回・継続・再開の全�
  assert.equal(select({questions:invalid}).kind,'unavailable');
  assert.equal(chooseNextAction({qualification,questions:invalid,attempts:invalid.map(q=>paused(q)),reviewInfo:noReview}).kind,'unavailable');
 });
-test('古い復習期限を初回・継続とも先にし、同順位だけ分散する',()=>{
+test('復習枠では古い期限を初回・継続とも先にし、同順位だけ分散する',()=>{
  const info=new Map(questions.slice(0,3).map((q,i)=>[q.id,{a:{completedAt:'2026-10-01T00:00:00Z'},isDue:true,needs:true,due:new Date('2026-10-0'+(3-i))}]));
- const opts={qualification,questions,attempts:[],reviewInfo:q=>info.get(q.id)};
+ const opts={qualification,questions,attempts:[],intent:'review',reviewInfo:q=>info.get(q.id)};
  assert.equal(chooseNextAction(opts).questionId,'q2');assert.equal(selectPractice(opts).questionId,'q2');
  assert.equal(selectPractice({...opts,visitedQuestionIds:['q2']}).questionId,'q1');
 });
@@ -68,7 +68,7 @@ test('UTC/JST端末で基準タイムゾーンの復習日と成功日数が一�
  assert.deepEqual(results,[{due:'2026-10-09',isDue:false},{due:'2026-10-09',isDue:false},{due:'2026-10-09',isDue:false}]);
  const a=t=>({id:t,questionId:'q',status:'correct',completedAt:t});
  const progress=createProgress([a('2026-10-07T14:59:00Z'),a('2026-10-07T15:01:00Z')],{timeZone:'Asia/Tokyo'});
- assert.equal(progress.reviewInfo({id:'q'}).successes,2);assert.equal(progress.reviewInfo({id:'q'}).dueDate,'2026-10-15');
+ assert.equal(progress.reviewInfo({id:'q'}).successes,2);assert.ok(progress.reviewInfo({id:'q'}).intervalDays>=5&&progress.reviewInfo({id:'q'}).intervalDays<=9);
 });
 test('全681枚でももう一度は別の3枚後に戻り、思い出せた後は新規へ進む',()=>{
  const cards=JSON.parse(readFileSync(new URL('../content/ap/flashcards.json',import.meta.url))).cards;

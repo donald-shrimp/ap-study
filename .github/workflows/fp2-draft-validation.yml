@@ -1,0 +1,96 @@
+name: FP2 draft delivery validation
+on:
+  pull_request:
+    paths:
+      - 'delivery/**'
+      - 'deliveries/**'
+      - 'work/fp2/revisions/**'
+      - 'work/fp2/historical/**'
+      - 'content/fp2/**'
+      - 'content/ap/case-catalog.json'
+      - 'content/ap/qualification.json'
+      - 'content/qualifications.json'
+      - 'data/qualifications/fp2/**'
+      - 'assets/fp2/**'
+      - 'sources/fp2/**'
+      - 'tests/fp2-content.py'
+      - 'tests/study-queue.mjs'
+      - 'tests/case-study-navigation.py'
+      - 'tests/design-language.py'
+      - 'tests/body-references.py'
+      - 'tests/case-batch-check*'
+      - 'src/domain/case-study.js'
+      - 'src/features/written.js'
+      - 'tests/fp2-delivery-preparation.py'
+      - 'tests/fp2-revision-published.py'
+      - 'tests/question-type-content.py'
+      - 'schemas/question-format.v1.json'
+      - 'tests/legal-study-filter*'
+      - 'src/domain/legal-context.js'
+      - 'src/domain/study-queue.js'
+      - 'src/domain/practice.js'
+      - 'src/domain/diagnostic.js'
+      - 'src/domain/qualification-features.js'
+      - 'src/content/**'
+      - 'src/app.js'
+      - 'src/ui/**'
+      - 'styles.css'
+      - 'tests/inline-text.mjs'
+      - 'tests/explanation-presentation.py'
+      - 'tests/question-text.mjs'
+      - 'sw.js'
+      - 'tests/content-cache.mjs'
+      - 'tests/catalog-refresh.py'
+      - 'tools/**'
+      - '.github/workflows/fp2-draft-validation.yml'
+      - '.github/workflows/fp2-historical-originals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install schema validator
+        run: python -m pip install 'jsonschema>=4.18,<5' 'pymupdf>=1.24,<2'
+      - name: Verify source recovery and shared validation contracts
+        run: python tests/fp2-delivery-preparation.py
+      - name: Verify original PDFs and draft material structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          if [ -f delivery/content/fp2/questions.json ]; then
+            python tools/check-fp2-delivery.py delivery
+            count=$((count+1))
+          fi
+          shopt -s nullglob
+          for folder in deliveries/fp2-*/; do
+            if [ -f "$folder/content/fp2/questions.json" ]; then
+              python tools/check-fp2-delivery.py "$folder"
+              count=$((count+1))
+            fi
+          done
+          test "$count" -gt 0
+      - name: Validate each authored historical draft with the shared checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for folder in work/fp2/historical/*/; do
+            python tools/prepare-fp2-delivery.py "$folder" --output "$RUNNER_TEMP/fp2-historical/$(basename "$folder")"
+          done
+      - name: Verify reviewed FP2 publication
+        run: |
+          python tools/check-fp2-delivery.py . --reviewed
+          python tools/build-content.py
+          python tests/fp2-content.py
+          python tests/question-type-content.py
+          git diff --exit-code
+      - name: Verify cached content, law-study filtering and saved snapshots
+        run: node --test tests/inline-text.mjs tests/question-text.mjs tests/content-cache.mjs tests/legal-study-filter.mjs tests/fp2-foundation.mjs tests/common-assessment.mjs tests/study-queue.mjs tests/case-batch-check.mjs

@@ -1,5 +1,6 @@
 import katex from '../../assets/vendor/katex/katex.mjs';
 import {esc} from '../utils.js';
+import {inlineTextHTML} from './inline-text.js';
 
 // A deliberately small, HTML-free format shared by question bodies and choices.
 // No links, arbitrary tags, Markdown images, or executable LaTeX commands.
@@ -13,14 +14,7 @@ function math(expression, displayMode=false) {
 }
 
 function inline(text) {
-  const pattern=/\$([^$\n]+)\$|\*\*([^*\n]+)\*\*|\+\+([^+\n]+)\+\+/g;
-  let html='',offset=0;
-  for(const match of text.matchAll(pattern)) {
-    html+=esc(text.slice(offset,match.index));
-    html+=match[1]!==undefined?math(match[1]):match[2]!==undefined?`<strong>${esc(match[2])}</strong>`:`<u>${esc(match[3])}</u>`;
-    offset=match.index+match[0].length;
-  }
-  return html+esc(text.slice(offset));
+  return inlineTextHTML(text,{renderMath:math});
 }
 
 const cells = line => line.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());

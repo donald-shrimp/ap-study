@@ -8,11 +8,11 @@
   <meta name="theme-color" content="#142d4e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="ひと問">
-  <link rel="manifest" href="manifest.webmanifest?v=20261024-fp2-review-fixes">
+  <link rel="manifest" href="manifest.webmanifest?v=20261026-fp2-202505">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23142d4e'/%3E%3Cpath d='M12 10h16v21H12z' fill='none' stroke='white' stroke-width='2'/%3E%3Cpath d='M16 16h8m-8 5h5m-5 5h8' stroke='%234bd1c0' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261024-fp2-review-fixes"><script type="module" src="app.js?v=20261024-fp2-review-fixes"></script>
+  <link rel="stylesheet" href="styles.css?v=20261026-fp2-202505"><script type="module" src="app.js?v=20261026-fp2-202505"></script>
 </head>
 <body>
   <a class="skip" href="#main">本文へ</a>
@@ -24,6 +24,7 @@
   <dialog id="settings-dialog" aria-labelledby="settings-title">
     <form method="dialog"><div class="dialog-head"><h2 id="settings-title">設定</h2><button class="icon-button" aria-label="設定を閉じる">閉じる</button></div></form>
     <section class="text-size-settings" aria-labelledby="text-size-title"><h3 id="text-size-title">本文の文字サイズ</h3><div class="button-row" role="group" aria-labelledby="text-size-title"><button type="button" class="button secondary" id="text-smaller" aria-label="本文の文字を小さくする">−</button><output id="text-size" aria-live="polite" aria-atomic="true">100%</output><button type="button" class="button secondary" id="text-larger" aria-label="本文の文字を大きくする">＋</button><button type="button" class="button secondary" id="text-reset">標準</button></div></section>
+    <section id="legal-study-settings" hidden><h3>出題対象</h3><label><input type="checkbox" id="exclude-outdated" checked> 法令改正のある問題を除外</label></section>
     <section class="account-settings" aria-labelledby="account-title"><h3 id="account-title">アカウント・同期</h3><p id="account-name" class="small" hidden></p>
       <div class="button-row"><button type="button" class="button secondary" id="google-login" disabled>Googleでログイン</button><button type="button" class="button secondary" id="google-logout" hidden>ログアウト</button><button type="button" class="button secondary" id="sync-now" hidden>今すぐ同期</button><button type="button" class="button secondary" id="import-guest" hidden>ログイン前の記録を取り込む</button></div>
       <p id="sync-state" class="small" role="status" aria-live="polite">ログインすると、別の端末でも続けられます。</p><div id="sync-details" hidden></div>

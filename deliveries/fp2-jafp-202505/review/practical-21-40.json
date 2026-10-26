@@ -1,0 +1,830 @@
+{
+  "reviewer": "/root/pr37_practical_21_40",
+  "reviewedAt": "2026-10-26T06:21:11.872637+00:00",
+  "targetHead": "acb267f43aff68daa21af9cebb2a1002367a219c",
+  "scope": "Independent review of practical q21–40 only. No author edits. Not publication approval.",
+  "methods": [
+    "Read JSON and official source text for all20 cases and33 fields",
+    "Compared all official referenceAnswers against answer PDF page1",
+    "Recomputed all numeric expressions and calculation choices using Decimal/integer sums",
+    "Visually inspected all29 required image placements in5 contact sheets; full original pages15/20/25 for relationship/timing/table geometry",
+    "Reviewed source legal timing, instructions, units/rounding, explanation/rubric, figure isolation; no personal account or beginner trial"
+  ],
+  "rulesRoot": "/workspace/ap-study",
+  "officialAnswersMatch": 33,
+  "caseCount": 20,
+  "requiredFigurePlacements": 29,
+  "currentLawExhaustiveAudit": false,
+  "browserRuntimeReview": false,
+  "legalAsOfUnknownIsNotFailure": true,
+  "caseHintAbsentIsNotFailure": true,
+  "findings": [
+    {
+      "id": "PRACTICAL-29-YEAR-LABEL",
+      "priority": "P2",
+      "caseIds": [
+        "fp2-202505-jafp-q29"
+      ],
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 2724,
+      "title": "キャッシュフローの年次ラベルを1年戻す",
+      "description": "原本PDF20頁では金融資産621万円は1年後、年間収支101万円と空欄728万円は2年後。草稿解説は621を2年後、101を3年後と説明しており、直前年末残高へ当年運用と収支を反映する手順を誤って教える。最終数値728と採点契約は正しい。",
+      "suggestedCorrection": "1年後の金融資産残高621万円を1年間1％で運用し、2年後の年間収支101万円を加える。621×1.01＋101＝728.21万円→728万円。",
+      "sourcePages": [
+        20
+      ]
+    },
+    {
+      "id": "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+      "priority": "P2",
+      "caseIds": [
+        "fp2-202505-jafp-q23",
+        "fp2-202505-jafp-q24",
+        "fp2-202505-jafp-q25",
+        "fp2-202505-jafp-q26",
+        "fp2-202505-jafp-q28",
+        "fp2-202505-jafp-q29",
+        "fp2-202505-jafp-q30",
+        "fp2-202505-jafp-q31",
+        "fp2-202505-jafp-q32",
+        "fp2-202505-jafp-q33",
+        "fp2-202505-jafp-q34",
+        "fp2-202505-jafp-q35",
+        "fp2-202505-jafp-q37",
+        "fp2-202505-jafp-q38",
+        "fp2-202505-jafp-q39"
+      ],
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 2100,
+      "title": "必須資料から無関係な前問と原本ページ全体を外す",
+      "description": "担当範囲15case/29画像配置の必須bodyFiguresにほぼ1ページの原本抜粋が重複し、前ページの別問題を混入。問23のp14画像は問21/22、問30のp20画像は問29、問37のp26画像は問35/36を表示する。問38の唯一のp27画像も問37の家族資料・選択肢を含む。対象資料は後続画像や本文にもあるが、学習に不要な問題と選択肢が必須オフライン教材に出る。左端で文字が欠けた画像もあり原本参照としても不完全。",
+      "suggestedCorrection": "関係図/表だけを適切な範囲で切り出すか、行列・空欄・注記を保持するMarkdown表へ変換。不要な前問ページをbodyFiguresから削除し、原本ページを必要ならsourceImagesへ分離。本文の図アンカー/alt/captionも新範囲に一致させ、再レビューする。",
+      "examples": [
+        {
+          "case": 23,
+          "image": "assets/written/fp2/202505/q23-data-p14.png",
+          "unrelated": [
+            21,
+            22
+          ]
+        },
+        {
+          "case": 30,
+          "image": "assets/written/fp2/202505/q30-data-p20.png",
+          "unrelated": [
+            29
+          ]
+        },
+        {
+          "case": 37,
+          "image": "assets/written/fp2/202505/q37-data-p26.png",
+          "unrelated": [
+            35,
+            36
+          ]
+        },
+        {
+          "case": 38,
+          "image": "assets/written/fp2/202505/q38-data-p27.png",
+          "unrelated": [
+            37
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRACTICAL-GENERIC-RUBRIC",
+      "priority": "P3",
+      "caseIds": [
+        "fp2-202505-jafp-q22",
+        "fp2-202505-jafp-q23",
+        "fp2-202505-jafp-q26",
+        "fp2-202505-jafp-q27",
+        "fp2-202505-jafp-q30",
+        "fp2-202505-jafp-q35",
+        "fp2-202505-jafp-q36",
+        "fp2-202505-jafp-q37",
+        "fp2-202505-jafp-q38",
+        "fp2-202505-jafp-q39",
+        "fp2-202505-jafp-q40"
+      ],
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 1983,
+      "title": "定型の確認ポイントを問題ごとの着眼点にする",
+      "description": "○×欄のrubricが「問題中の当該記述の全条件と出題当時の制度を照合する。」、4択欄が「公式問題の4選択肢を比較し…」という同一文になっており、確認ポイントとして新しい情報がない。各欄のexplanationは概ね適切であり採点誤りではない。",
+      "suggestedCorrection": "例：問23父の欄なら「父母の法定相続分は各1/6、全体の遺留分率は1/2」、問35なら「毎月返済額ではなく繰上げ対象の元金を合計する」等、判断の分岐点を簡潔に記載。必須文章量ノルマは設けない。"
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "fp2-202505-jafp-q21",
+      "version": 2,
+      "line": 1883,
+      "sourceQuestionPage": 14,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "12500"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 0,
+      "notes": "20万円×定額法0.250×3/12=12,500円。無選定の個人事業主の定額法・月割り、原本表の率を照合。",
+      "findings": [],
+      "verdict": "content_matches_original; generic rubric advisory where noted"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q22",
+      "version": 2,
+      "line": 1943,
+      "sourceQuestionPage": 14,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "field-a",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-i",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-u",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-e",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 0,
+      "notes": "×××○。地震5万円、生計一親族医療費対象、所得による基礎控除減額、所得税の寄附金所得控除を各欄照合。",
+      "findings": [
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "content_matches_original; generic rubric advisory where noted"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q23",
+      "version": 2,
+      "line": 2090,
+      "sourceQuestionPage": 15,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "field-a",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-i",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-u",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "×○×。子は放棄、配偶者2/3、姉遺留分0、父遺留分(1/2)×(1/3)×(1/2)=1/12。親子・婚姻線と父母生存を画像確認。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q24",
+      "version": 2,
+      "line": 2223,
+      "sourceQuestionPage": 16,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "3900"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "1,200+400+2,000+2,000-500×3-200=3,900万円。配偶者・娘2人、放棄なし、保険受取人/費用負担/贈与条件と関係図を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q25",
+      "version": 2,
+      "line": 2296,
+      "sourceQuestionPage": 17,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "54"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "(500+30-110)×20%-30=54万円。36歳、父母直系尊属、基礎控除年合算・特例表を全行照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q26",
+      "version": 2,
+      "line": 2369,
+      "sourceQuestionPage": 18,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "3"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "第3肢330㎡/200㎡/80%。結合セルと3年条件、全4肢を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q27",
+      "version": 2,
+      "line": 2458,
+      "sourceQuestionPage": 18,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "field-a",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-i",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-u",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-e",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 0,
+      "notes": "×○○×。遺言執行費用不算入・香典返戻費用不算入・申告10か月・放棄3か月を照合。",
+      "findings": [
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "content_matches_original; generic rubric advisory where noted"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q28",
+      "version": 2,
+      "line": 2605,
+      "sourceQuestionPage": 19,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "464"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "450×1.01^3=463.635450万円、万円未満四捨五入464万円。空欄は3年後、給与可処分・各年末・途中丸めなしを確認。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q29",
+      "version": 2,
+      "line": 2678,
+      "sourceQuestionPage": 20,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "728"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "621×1.01+101=728.21万円、万円未満四捨五入728万円。空欄は2年後、621は1年後。解説の年次ラベルは誤り。",
+      "findings": [
+        "PRACTICAL-29-YEAR-LABEL",
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q30",
+      "version": 2,
+      "line": 2751,
+      "sourceQuestionPage": 21,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "4"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "5月利息3125→残203125、6月利息2539.0625切捨て2539。第4肢。表の月/元利定額/15%/円未満切捨てと全4肢を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q31",
+      "version": 2,
+      "line": 2840,
+      "sourceQuestionPage": 22,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "3656000"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "9年1%の現価係数0.914×4,000,000=3,656,000円。原本の乗算指示、全係数列を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q32",
+      "version": 2,
+      "line": 2913,
+      "sourceQuestionPage": 23,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "44046000"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "25年1%の年金現価係数22.023×2,000,000=44,046,000円。毎年末受取り・開始年初と全係数列を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q33",
+      "version": 2,
+      "line": 2986,
+      "sourceQuestionPage": 24,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "192000"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "10年1%の減債基金係数0.096×2,000,000=192,000円。毎年末積立・乗算指示と全係数列を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q34",
+      "version": 2,
+      "line": 3059,
+      "sourceQuestionPage": 25,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "amount",
+          "answer": [
+            "6020"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "資産9190-負債(1320+1850)=6020万円。高志/陽子の資産列・解約返戻金・バランスシート空欄を原本画像と照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q35",
+      "version": 2,
+      "line": 3132,
+      "sourceQuestionPage": 26,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "3"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "121〜131回元金741369円、132回まで809781円。80万円以内最大11か月、第3肢。120回返済後・手数料なし・表15行と全4肢を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q36",
+      "version": 2,
+      "line": 3221,
+      "sourceQuestionPage": 26,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "field-a",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-i",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-u",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-e",
+          "answer": [
+            "○"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 0,
+      "notes": "×○○○。任意加入中不可、繰上げ原則同時、加給は繰下げ増額対象外、取消不可を全欄照合。",
+      "findings": [
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "content_matches_original; generic rubric advisory where noted"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q37",
+      "version": 2,
+      "line": 3368,
+      "sourceQuestionPage": 27,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "3"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "第3肢。妻35歳/子5歳、厚生年金継続、障害なし/その他受給要件、年収・日付、全4肢を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q38",
+      "version": 2,
+      "line": 3457,
+      "sourceQuestionPage": 27,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "4"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 1,
+      "notes": "第4肢。410000×10%÷2=20500円、35歳は介護第2号外、社会保険料控除、被扶養者人数による加算なし、支部別料率を全肢照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q39",
+      "version": 2,
+      "line": 3540,
+      "sourceQuestionPage": 28,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "answer",
+          "answer": [
+            "2"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 2,
+      "notes": "総医療費120万円、限度80100+(1200000-267000)×1%=89430円、360000-89430=270570円、第2肢。食事/差額ベッド除外・原本表全5行・標準報酬47万円と全肢を照合。",
+      "findings": [
+        "PRACTICAL-REQUIRED-FIGURES-PREVIOUS-PAGES",
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "changes_requested"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q40",
+      "version": 2,
+      "line": 3629,
+      "sourceQuestionPage": 29,
+      "officialAnswerPage": 1,
+      "officialAnswers": [
+        {
+          "fieldId": "field-a",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-i",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        },
+        {
+          "fieldId": "field-u",
+          "answer": [
+            "×"
+          ],
+          "verdict": "matches official"
+        }
+      ],
+      "textChoicesInstructionsAndExplanationsReviewed": true,
+      "figuresReviewed": 0,
+      "notes": "×××。原則離職前2年12か月、離職前6か月賃金、翌日起算1年。原本伏字と例外条件を保持。",
+      "findings": [
+        "PRACTICAL-GENERIC-RUBRIC"
+      ],
+      "verdict": "content_matches_original; generic rubric advisory where noted"
+    }
+  ],
+  "images": [
+    {
+      "caseId": "fp2-202505-jafp-q23",
+      "image": "assets/written/fp2/202505/q23-data-p14.png",
+      "sha256": "6979cdc8005c32557ca58d1e7962f62fbd68fd54b8b2326e8847718274577b8f"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q23",
+      "image": "assets/written/fp2/202505/q23-data-p15.png",
+      "sha256": "1b5976f7aae53f68d0652bac700b487f108a50c1c87be0ef43228590fb45b5ec"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q24",
+      "image": "assets/written/fp2/202505/q24-data-p15.png",
+      "sha256": "ac68f68090ead8ceff737d87848d0f189d2ab12097a85bed9f4a38800b8fb7fd"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q24",
+      "image": "assets/written/fp2/202505/q24-data-p16.png",
+      "sha256": "2722b3c8c57ee6410eae20c0d7d9f7a052e5d0e748476b60d47c51ba11dcb1a9"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q25",
+      "image": "assets/written/fp2/202505/q25-data-p16.png",
+      "sha256": "64d00b10ab66eaafc1eddccc0c307ca0bec03611bf563d641e29cde8a1d538c5"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q25",
+      "image": "assets/written/fp2/202505/q25-data-p17.png",
+      "sha256": "2d7e6bd0049dec35b9317cef99d9d34e87e78091d38469a03c8dfd425fa8ad22"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q26",
+      "image": "assets/written/fp2/202505/q26-data-p17.png",
+      "sha256": "8432a14b64991002041234bd76575d0b68cacddbc9fedc2df2d6ee956cd3a9b4"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q26",
+      "image": "assets/written/fp2/202505/q26-data-p18.png",
+      "sha256": "bbbc3bc2a0992581e08a6ea51712134610ad9a064f2cad5fadab6891215a09b0"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q28",
+      "image": "assets/written/fp2/202505/q28-data-p18.png",
+      "sha256": "642865c9f55b3586bfff1238320016baa4e8701ee89a040ac3364bda68473ec6"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q28",
+      "image": "assets/written/fp2/202505/q28-data-p19.png",
+      "sha256": "7e3312db5fdb006838925561656c4bfe0a4c9d764274fe6a7ca1a31da64e8910"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q29",
+      "image": "assets/written/fp2/202505/q29-data-p19.png",
+      "sha256": "5b6ec909437298d1d7d4cacd83f9b31ffbeb7ad9ee7d9b16c505333cccc946b5"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q29",
+      "image": "assets/written/fp2/202505/q29-data-p20.png",
+      "sha256": "0fdb493169a584d45f3ad60f22f99f02010c9caf618eae7b2702e072fcad7827"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q30",
+      "image": "assets/written/fp2/202505/q30-data-p20.png",
+      "sha256": "ba477261ca7c0001f7f40ec3a0ae00a01f7c941ee864bce2e6c3713d530b69e5"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q30",
+      "image": "assets/written/fp2/202505/q30-data-p21.png",
+      "sha256": "c2e7a80100ad089eea6bf66cf4c549617c16b42369d176ff7519ea96c379622c"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q31",
+      "image": "assets/written/fp2/202505/q31-data-p21.png",
+      "sha256": "620b0ebfbba8c15b0bd8510db871e607d9fe089ef37eb6106b5af39c84ec3b6a"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q31",
+      "image": "assets/written/fp2/202505/q31-data-p22.png",
+      "sha256": "6472b2e20c5af3ce0ba0ba571a69e6269be49eb6f243609f61736a006401a046"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q32",
+      "image": "assets/written/fp2/202505/q32-data-p22.png",
+      "sha256": "16191a744b83e7e7333f398d229880bc70e0c0b135e6c69bab078dcfc6217f71"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q32",
+      "image": "assets/written/fp2/202505/q32-data-p23.png",
+      "sha256": "a1adef351e904e0db56e78d383330a1d69d7f3d40f336e6146f2363ddb407a6d"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q33",
+      "image": "assets/written/fp2/202505/q33-data-p23.png",
+      "sha256": "fe34e42df053935b4e654270e5d56a3681e72e645e75300676aa1d976afc1228"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q33",
+      "image": "assets/written/fp2/202505/q33-data-p24.png",
+      "sha256": "dcbb1766725b6e991b48cd64f6fe4bce09ceb3fe25f719e31253254b6807c0aa"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q34",
+      "image": "assets/written/fp2/202505/q34-data-p24.png",
+      "sha256": "e13808b225fa52d0208b48dda49d1b3bca0451a515318148b7475cb16adc1f06"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q34",
+      "image": "assets/written/fp2/202505/q34-data-p25.png",
+      "sha256": "0a507d4d95dbf9499a3fc88f084580ad1f30d0b5169b4de8f066294cd8659903"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q35",
+      "image": "assets/written/fp2/202505/q35-data-p25.png",
+      "sha256": "1cf6468977ab1d275f93db4eb8f4183aec73bf74cae0b7308bff05198975df16"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q35",
+      "image": "assets/written/fp2/202505/q35-data-p26.png",
+      "sha256": "074cfd4d1ec20b4f84704acba8b68c4d408d9b556e7be9f790d95aad4f798f77"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q37",
+      "image": "assets/written/fp2/202505/q37-data-p26.png",
+      "sha256": "e8001e5fde26e210e7e0bce09045e0d1d7e804b4e352feba6fbf8d7aebfc1358"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q37",
+      "image": "assets/written/fp2/202505/q37-data-p27.png",
+      "sha256": "e5ed9e0a1a5024813f8f97b4dea0df465f49639bd88d30a098918746dd9a9a9d"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q38",
+      "image": "assets/written/fp2/202505/q38-data-p27.png",
+      "sha256": "ae55687f0ee57a3f7a8e25ac23b2f280d5a812db7139fe1a0671ce94d25bac1e"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q39",
+      "image": "assets/written/fp2/202505/q39-data-p27.png",
+      "sha256": "ae55687f0ee57a3f7a8e25ac23b2f280d5a812db7139fe1a0671ce94d25bac1e"
+    },
+    {
+      "caseId": "fp2-202505-jafp-q39",
+      "image": "assets/written/fp2/202505/q39-data-p28.png",
+      "sha256": "a98ab093266e2cdb04e2fc9eb95f57546a8241b175adcadd77dcc49bbd6eb3e6"
+    }
+  ],
+  "draftSHA256": "941b76eed9100c49bbea73867d9069fddcf72ae30f1152e865ee00000c4b7467",
+  "sourceHashes": {
+    "sources/fp2/g2_202505_qa.pdf": "6a33591659764ffa2eb231cf3a5808f29a72a2990a461bedf1d04c72933428a4",
+    "sources/fp2/j2_202505_q.pdf": "df7d6d243787defb7f32c4f4d4da8c20f7819717fabeb3e62098e3b6d5d367bb",
+    "sources/fp2/j2_202505_a.pdf": "51dce471c7cccb55d6470b8599b79517c1fc31b17b56da6b3edcd9944289d4f8"
+  }
+}

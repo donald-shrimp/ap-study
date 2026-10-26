@@ -1,0 +1,34 @@
+{
+  "status": "fixed-under-publication",
+  "baseCommit": "248f989890228d26ddaa192d856cee634a576c0a",
+  "verifiedAt": "2026-10-24T15:20:50.437232+00:00",
+  "reproducedBeforeFix": {
+    "scenario": "Installed PWA returns a cached qualification catalog from before FP2 publication, then opens FP2 directly.",
+    "consoleError": "この資格はまだ公開されていません。",
+    "screen": "ひと問を読み込めませんでした。",
+    "oldCachedCatalogWasRefreshedInBackgroundButNotUsedByCurrentStartup": true
+  },
+  "fix": [
+    "Retry a missing requested/preferred qualification or requested part with cache:reload once.",
+    "Retry a qualification manifest without the requested part once; preserve valid cached startup and full SHA checks.",
+    "Keep settings/PWA update controls accessible when qualification initialization failed."
+  ],
+  "checks": {
+    "contentCacheAndTargetDomainTests": 16,
+    "ciDomainTests": 30,
+    "browserScenarios": [
+      "missing qualification in stale catalog",
+      "missing part in stale catalog and manifest",
+      "chooser opened from a stale catalog",
+      "settings after unavailable qualification"
+    ],
+    "savedRecords": "AP current answer and choice preserved; FP numeric answer survives reload",
+    "startupCache": "AP A/B and AB730 cached checkpoints with stalled network, no home flash",
+    "pwaUpdate": "passed; records and content caches preserved",
+    "fp2ObjectiveBrowser": "passed; objective/practical selection, offline, AI and backup",
+    "fp2ReviewedContent": "60questions / 40cases / 68fields accepted",
+    "build": "deterministic",
+    "allPublishedMaterialFilesUnchanged": true
+  },
+  "release": "20261025-catalog-refresh"
+}

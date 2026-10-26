@@ -1,0 +1,6 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {evaluateCaseField} from '../../../src/domain/case-study.js';
+const cases=JSON.parse(fs.readFileSync(process.argv[2]));let fields=0,choices=0,normalized=0;
+for(const c of cases)for(const i of c.items)for(const f of i.fields){fields++;if(f.type==='singleChoice')for(const a of f.choices){assert.equal(evaluateCaseField(f,{value:a.id}),a.label===f.referenceAnswers[0]?'correct':'incorrect',c.id+'/'+f.id+'/'+a.id);choices++;}else{const v=f.referenceAnswers[0];assert.equal(evaluateCaseField(f,{value:v}),'correct');assert.equal(evaluateCaseField(f,{value:String(Number(v)+1)}),'incorrect');const full=v.replace(/[0-9]/g,d=>String.fromCharCode(d.charCodeAt(0)+0xfee0));assert.equal(evaluateCaseField(f,{value:full}),'correct');const [a,b]=v.split('.');assert.equal(evaluateCaseField(f,{value:a.replace(/\B(?=(\d{3})+(?!\d))/g,',')+(b?'.'+b:'')}),'correct');assert.equal(evaluateCaseField(f,{value:v+f.numeric.unit}),null);normalized++;}}
+assert.equal(fields,68);assert.equal(normalized,22);console.log(JSON.stringify({fields,choicePaths:choices,numericFields:normalized,checks:['all correct and incorrect choice paths','22 exact numerics','22 wrong numeric values','fullwidth and grouped digits','unit-appended fallback']},null,2));

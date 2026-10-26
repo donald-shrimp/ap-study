@@ -2,16 +2,16 @@
 import json,os,shutil,tempfile
 from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
-from browser_storage import nav,open_data_management,wait_for_async
+from browser_storage import written_list, nav,open_data_management,wait_for_async
 ROOT=Path(__file__).resolve().parents[1];BANK=json.loads((ROOT/'content/ap/written-cases.json').read_text());URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/');ART=Path(tempfile.mkdtemp(prefix='hitomon-written-expansion-'));SCOPE=[c for c in BANK if c['id'].startswith(os.getenv('HITOMON_CASE_PREFIX',''))];COUNT=len(SCOPE);LIBRARY=44+22*len(json.loads((ROOT/'content/ap/written-drafts/2021-2023/progress.json').read_text())['integratedYears'])
 READ='''async()=>{const root=new URL('.',document.baseURI),{createLocalStore}=await import(new URL('src/storage/local.js',root)),s=createLocalStore({qualificationId:'ap',rootPath:root.pathname});try{const i=await s.identity(),{createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root)),w=createWorkspaceStore({...i,rootPath:root.pathname,namespaceName:'written',validate:(k,p)=>p});try{return (await w.read()).map(r=>r.payload);}finally{await w.close();}}finally{await s.close();}}'''
 with sync_playwright() as p:
  opts={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
  if URL.startswith('https:') and os.getenv('HTTPS_PROXY'):opts['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
  b=p.chromium.launch(**opts);ctx=b.new_context(viewport={'width':1440,'height':1000});page=ctx.new_page();page.set_default_timeout(45000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept());page.goto(URL+'?part=written');page.locator('.study-entry').wait_for()
- assert len(BANK)==LIBRARY and COUNT>0;assert page.locator('.written-case-option').count()==LIBRARY and page.locator('.study-entry .button.primary').count()==1
+ assert len(BANK)==LIBRARY and COUNT>0;assert page.locator('.written-case-option').count()==0 and page.locator('.study-entry .button.primary').count()==1
  for c in SCOPE:
-  if not page.locator('.written-case-option').count():nav(page,'home')
+  written_list(page)
   page.locator(f'.written-case-option [data-action=written-start][data-id="{c["id"]}"]:not([data-mode])').click();page.locator('.written-layout').wait_for();assert page.locator('.written-answer').count()==0
   for item in c['items']:
    page.locator(f'.written-item-nav [data-id="{item["id"]}"]').click();page.locator(f'.written-item-nav [data-id="{item["id"]}"][aria-current=step]').wait_for();assert page.locator('.written-field').count()==len(item['fields'])

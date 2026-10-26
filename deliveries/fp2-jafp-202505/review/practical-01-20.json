@@ -1,0 +1,934 @@
+{
+  "kind": "independent_content_review_not_approval",
+  "reviewer": "/root/pr37_practical_01_20",
+  "reviewedAt": "2026-10-26T06:21:47.318676+00:00",
+  "targetHead": "acb267f43aff68daa21af9cebb2a1002367a219c",
+  "scope": "practical q01–20,35answerfields,19requiredfigureplacements",
+  "draftPath": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+  "draftFileSHA256": "941b76eed9100c49bbea73867d9069fddcf72ae30f1152e865ee00000c4b7467",
+  "sources": {
+    "sources/fp2/j2_202505_a.pdf": "51dce471c7cccb55d6470b8599b79517c1fc31b17b56da6b3edcd9944289d4f8",
+    "sources/fp2/j2_202505_q.pdf": "df7d6d243787defb7f32c4f4d4da8c20f7819717fabeb3e62098e3b6d5d367bb"
+  },
+  "method": "Read original extracted text and all20draft cases/35fields/choices/explanations/rubrics; visually inspect full PDF pages1–13 and all19 providedfigureplacements, plus officialanswerPDFpage1. Independently calculate numericanswers withDecimal. Review only; no draft edits and no public integration approval. Not beginner usabilitytrial; no personal records accessed.",
+  "rules": [
+    "/workspace/ap-study/AGENTS.md",
+    "/workspace/ap-study/docs/content-authoring.md",
+    "/workspace/ap-study/docs/explanation-authoring-rules.md",
+    "/workspace/ap-study/docs/fp2-authoring.md",
+    "/workspace/ap-study/docs/hint-authoring.md"
+  ],
+  "verdict": "changes_requested",
+  "summary": {
+    "cases": 20,
+    "fields": 35,
+    "officialAnswerMismatches": 0,
+    "numericCalculationMismatches": 0,
+    "requiredFigurePlacements": 19,
+    "findingsBySeverity": {
+      "P1": 2,
+      "P2": 2,
+      "P3": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "PRACTICAL-IMAGES-WRONG-QUESTION",
+      "severity": "P1",
+      "title": "Remove previous-question images from required learning figures",
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 752,
+      "cases": [
+        9,
+        11,
+        13,
+        14,
+        16,
+        17,
+        18
+      ],
+      "evidence": [
+        {
+          "case": 9,
+          "image": "q09-data-p04.png",
+          "actual": "Question 8 land drawing / question7 choices, not q9"
+        },
+        {
+          "case": 11,
+          "image": "q11-data-p05.png",
+          "actual": "Questions9/10, not q11"
+        },
+        {
+          "case": 13,
+          "image": "q13-data-p06.png",
+          "actual": "Questions11/12, not q13"
+        },
+        {
+          "case": 14,
+          "image": "q14-data-p08.png",
+          "actual": "Question13 insurance policy and subquestions, not q14"
+        },
+        {
+          "case": 16,
+          "image": "q16-data-p09.png",
+          "actual": "Questions14/15, not q16"
+        },
+        {
+          "case": 17,
+          "image": "q17-data-p10.png",
+          "actual": "Question16 motor insurance plans, not q17"
+        },
+        {
+          "case": 18,
+          "image": "q18-data-p11.png",
+          "actual": "Question17 earthquake rate table, not q18"
+        }
+      ],
+      "impact": "Learners receive irrelevant scenarios and preceding question contents in required bodyFigures/offline downloads; figure alt/caption incorrectly attribute them to current question.",
+      "fix": "Drop mistaken pages; keep only the actual required table/diagram for the current question. Optional original pages belong in sourceImages, not required bodyFigures."
+    },
+    {
+      "id": "PRACTICAL-IMAGES-CLIPPED",
+      "severity": "P1",
+      "title": "Recrop diagrams without cutting the original labels and text",
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 1150,
+      "cases": [
+        6,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        16,
+        17,
+        18,
+        20
+      ],
+      "evidence": "Visually compared all19 figure placements with original rendered pages1–13. E.g q13-data-p07.png begins with １３ instead of 問１３, chops left side of 保険契約者/終身保険金額, and right edge of insurance text. q06-data-p03.png cuts table row labels, q18-data-p12.png cuts left edge of age categories. These are page crops clipped horizontally, not complete learning figures.",
+      "impact": "Original table labels/conditions are cut. At mobile size students must interpret duplicate OCR-like space tables plus incomplete image; the required diagrams are not a faithful replacement.",
+      "fix": "Convert plain tables into actual Markdown tables; crop only spatial diagrams/policies with safe padding and recheck every edge, label, footnote, blank and supplied choice. Existing page crops may be preserved as optional original references but not required learning figures."
+    },
+    {
+      "id": "PRACTICAL-EXPLANATION-ALL-CHOICES",
+      "severity": "P2",
+      "title": "Explain the non-selected legal/insurance statements in case choice fields",
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 199,
+      "cases": [
+        2,
+        7,
+        14,
+        16
+      ],
+      "evidence": {
+        "q02": "Only the valid false-statement/important-fact cancellation rule is explained. No reason for excluding corporations, the wrong two-year limit, or the store preventing the person leaving.",
+        "q07": "Other three choices mentioned as things to judge, without stating actual conditions.",
+        "q14": "Only cancer diagnosis benefit exemption; no explanation of lump-sum inheritance taxation, annuity inheritance/income split, or premium payer=recipient temporary income.",
+        "q16": "Only single-car accident vs economy plan. No explanation why non-cohabiting friend34 is covered despite35+ age requirement, or why typhoon and bicycle accident are covered."
+      },
+      "impact": "The common authoring contract requires reasons for all choices within the case field explanation. These items are exactly the rules learners may have misunderstood even when they selected the correct answer.",
+      "fix": "Add concise choice-specific grounds in existing field.explanation; preserve original options and official answer. No new schema fields needed."
+    },
+    {
+      "id": "PRACTICAL-FIRST-NUMERIC-LABELS",
+      "severity": "P2",
+      "title": "Label first multi-answer field with original blank identifier",
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 381,
+      "cases": [
+        5,
+        13
+      ],
+      "evidence": "Question5 first field id amount label 金額 is actually （ア）配当利回り, unit％. Question13 first amount field 金額 is blank（ア）肺炎入院給付. Remaining fields use（イ）/（ウ）, while generic item prompt repeats original reference instructions and does not establish first-field mapping.",
+      "impact": "Original blank-to-field association is less clear; q5 calls a percentage 金額.",
+      "fix": "Keep stable field IDs, change displayed first label to（ア）配当利回り or original（ア）. For q13 label（ア）. Single numeric q8 area should likewise not be called 金額."
+    },
+    {
+      "id": "PRACTICAL-ZAIKEI-NAME",
+      "severity": "P3",
+      "title": "Use exact 財形年金貯蓄・財形住宅貯蓄 names in q6 explanation",
+      "path": "deliveries/fp2-jafp-202505/content/fp2/practical-cases.json",
+      "line": 489,
+      "cases": [
+        6
+      ],
+      "evidence": "Explanation says 一般財形年金・住宅は原則55歳未満. 一般財形貯蓄 is a distinct product without this age limit; the phrase may teach the wrong scope.",
+      "fix": "Write 財形年金貯蓄・財形住宅貯蓄の契約締結時は55歳未満. Do not introduce 一般財形 into the55-year condition."
+    }
+  ],
+  "questions": [
+    {
+      "id": "fp2-202505-jafp-q01",
+      "version": 2,
+      "line": 3,
+      "originalQuestionPDFPages": [
+        1
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "field-a",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-i",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-u",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-e",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [],
+      "note": "All4 statements and answers○○×○ agree. Required coverage estimate vs募集, witness qualification, paid timing advice and hypothetical tax explanation are correctly distinguished. Rubrics are generic and could name each actual criterion."
+    },
+    {
+      "id": "fp2-202505-jafp-q02",
+      "version": 2,
+      "line": 150,
+      "originalQuestionPDFPages": [
+        1
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "4"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-EXPLANATION-ALL-CHOICES"
+      ],
+      "note": "All4 source options and answer4 agree; valid statement reason correct, but other cancellation rules need explanation."
+    },
+    {
+      "id": "fp2-202505-jafp-q03",
+      "version": 2,
+      "line": 226,
+      "originalQuestionPDFPages": [
+        2
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "3"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [],
+      "note": "Source condition and4choices agree. Special distribution400 and postdistribution original10400 independently recomputed; answer3 correct."
+    },
+    {
+      "id": "fp2-202505-jafp-q04",
+      "version": 2,
+      "line": 302,
+      "originalQuestionPDFPages": [
+        2
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "879240"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "円",
+            "decimalPlaces": 0,
+            "rounding": "floor"
+          }
+        }
+      ],
+      "findings": [],
+      "note": "All source notes retained including20% assumed tax, month calculation and final floor. Independently computed10200AUD×86.20=879240JPY; numeric metadata correct. Exchange rate data should be a real table for reflow."
+    },
+    {
+      "id": "fp2-202505-jafp-q05",
+      "version": 2,
+      "line": 362,
+      "originalQuestionPDFPages": [
+        3
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "7.87"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "％",
+            "decimalPlaces": 2,
+            "rounding": "halfUp"
+          }
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "i",
+          "referenceAnswers": [
+            "5.29"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "倍",
+            "decimalPlaces": 2,
+            "rounding": "halfUp"
+          }
+        }
+      ],
+      "findings": [
+        "PRACTICAL-FIRST-NUMERIC-LABELS"
+      ],
+      "note": "All source five values and rounding retained; computed7.87%,5.29times, both official fields agree. First field label金額 lacks（ア）and is misleading."
+    },
+    {
+      "id": "fp2-202505-jafp-q06",
+      "version": 2,
+      "line": 443,
+      "originalQuestionPDFPages": [
+        3
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 1,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "field-a",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-i",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-u",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-e",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-CLIPPED",
+        "PRACTICAL-ZAIKEI-NAME"
+      ],
+      "note": "All source table numbers/asterisks and fourjudgments×○×○ agree. Explanation rules55/550/385/5 correct apart from misleading 一般財形 wording. Crop truncated and includesq5; table requires proper structure."
+    },
+    {
+      "id": "fp2-202505-jafp-q07",
+      "version": 2,
+      "line": 597,
+      "originalQuestionPDFPages": [
+        4
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "3"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-EXPLANATION-ALL-CHOICES"
+      ],
+      "note": "All source4choices and answer3 agree. Deadline explanation correct; add actual three other option rules."
+    },
+    {
+      "id": "fp2-202505-jafp-q08",
+      "version": 2,
+      "line": 673,
+      "originalQuestionPDFPages": [
+        4
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 1,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "720"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "㎡",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "Source240㎡,10m/6mroads and300% retained. min(300%,10m×0.4)=300%,240×3=720㎡. Crop includesq7 and source text reflow loses geometry. Change generic金額label for area."
+    },
+    {
+      "id": "fp2-202505-jafp-q09",
+      "version": 2,
+      "line": 740,
+      "originalQuestionPDFPages": [
+        5
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "2"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All source table contents/4choices and answer2 agree;7/1,国税庁,80% explanation correct. First image is whollyq8, second includesq10; crop/table layout blocks final approval."
+    },
+    {
+      "id": "fp2-202505-jafp-q10",
+      "version": 2,
+      "line": 829,
+      "originalQuestionPDFPages": [
+        5
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 1,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "field-a",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-i",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-u",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-e",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All source table data/fourstatements and judgments○○×○ agree. Explanations of ordinary method/no renewal/indefinite period/shortfixed-term correct. Required crop includesq9 and cutsleft."
+    },
+    {
+      "id": "fp2-202505-jafp-q11",
+      "version": 2,
+      "line": 983,
+      "originalQuestionPDFPages": [
+        6
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "3"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All source cost data and4choices correct. Calculatedgross6.00%,expenses410000JPY/net4.975→4.98%; answer3 correct. First image is q9/10; correct page alsoincludesq12."
+    },
+    {
+      "id": "fp2-202505-jafp-q12",
+      "version": 2,
+      "line": 1072,
+      "originalQuestionPDFPages": [
+        6
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "2980"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "万円",
+            "decimalPlaces": 0,
+            "rounding": "halfUp"
+          }
+        }
+      ],
+      "findings": [],
+      "note": "Original fullconditions retained. 320/.1=3200 and6500−3520=2980万円, halfUp correct; officialanswer2980 matches."
+    },
+    {
+      "id": "fp2-202505-jafp-q13",
+      "version": 2,
+      "line": 1132,
+      "originalQuestionPDFPages": [
+        7,
+        8
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 3,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "3"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "万円",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "i",
+          "referenceAnswers": [
+            "694"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "万円",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "u",
+          "referenceAnswers": [
+            "5610"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "万円",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED",
+        "PRACTICAL-FIRST-NUMERIC-LABELS"
+      ],
+      "note": "All two policies,renewal/no previousclaims/independent scenarios/surgerynotes retained in text. Three official fields3/694/5610 computed andconfirmed. First figureentirelyq11/12, otherpolicycrops cutedges. First amountfield shouldcarry（ア）."
+    },
+    {
+      "id": "fp2-202505-jafp-q14",
+      "version": 2,
+      "line": 1253,
+      "originalQuestionPDFPages": [
+        9
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "4"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED",
+        "PRACTICAL-EXPLANATION-ALL-CHOICES"
+      ],
+      "note": "All policyrows/sourcefootnote/4choices match. Cancerdiagnosisexemption correct,answer4. Firstimageispreviousq13; otherchoices taxreasons notexplained."
+    },
+    {
+      "id": "fp2-202505-jafp-q15",
+      "version": 2,
+      "line": 1342,
+      "originalQuestionPDFPages": [
+        9
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "field-a",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-i",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-u",
+          "referenceAnswers": [
+            "×"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        },
+        {
+          "itemId": "item1",
+          "fieldId": "field-e",
+          "referenceAnswers": [
+            "○"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [],
+      "note": "All sourcefourblankstatements/choices×○×○correct. Explanationproperclaiminability/nofee/changepermitted/samepersonpaymentwaiver agree. Genericrubricoptionalqualityimprovement."
+    },
+    {
+      "id": "fp2-202505-jafp-q16",
+      "version": 2,
+      "line": 1489,
+      "originalQuestionPDFPages": [
+        10
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "2"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED",
+        "PRACTICAL-EXPLANATION-ALL-CHOICES"
+      ],
+      "note": "All sourceplanvalues/4choices retained andanswer2correct. Econvehiclecoverage distinction correct; other3optionreasonsmissing. Previousq14/15 imagewrong; correctpagecropped."
+    },
+    {
+      "id": "fp2-202505-jafp-q17",
+      "version": 2,
+      "line": 1578,
+      "originalQuestionPDFPages": [
+        11
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "41100"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "円",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All sourceprefectures/rates/footnote retained (merged4,110row association in spaced text). 2000×50%=1000万円 and10×4110=41100 correct. Previousq16 imagewrong; correctearthquakefigureclipped."
+    },
+    {
+      "id": "fp2-202505-jafp-q18",
+      "version": 2,
+      "line": 1651,
+      "originalQuestionPDFPages": [
+        12
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 2,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "amount",
+          "referenceAnswers": [
+            "1950000"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": {
+            "unit": "円",
+            "decimalPlaces": 0,
+            "rounding": "none"
+          }
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-WRONG-QUESTION",
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All sourceincomeand20yearinsurance/postpremiumnote,pensiontable retained. Pensionincome190万円+temporarytaxable5万円=195万円/1950000円 matches. Previousq17imagewrong; correcttableclipped."
+    },
+    {
+      "id": "fp2-202505-jafp-q19",
+      "version": 2,
+      "line": 1724,
+      "originalQuestionPDFPages": [
+        13
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 0,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "1"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [],
+      "note": "All source15y2m/900万円/notdirector/nodisability and4choices retained. Roundserviceup16,40×16=640,(900−640)/2=130万円 answer1 correct."
+    },
+    {
+      "id": "fp2-202505-jafp-q20",
+      "version": 2,
+      "line": 1800,
+      "originalQuestionPDFPages": [
+        13
+      ],
+      "bodyAndAllChoicesCompared": true,
+      "requiredFigurePlacementsVisuallyInspected": 1,
+      "officialAnswersMatch": true,
+      "fields": [
+        {
+          "itemId": "item1",
+          "fieldId": "answer",
+          "referenceAnswers": [
+            "1"
+          ],
+          "officialAnswerMatch": true,
+          "explanationReviewed": true,
+          "rubricReviewed": true,
+          "numeric": null
+        }
+      ],
+      "findings": [
+        "PRACTICAL-IMAGES-CLIPPED"
+      ],
+      "note": "All sourceincomeamounts/expense200/landloaninterest40 and4choices retained. Loss20lessmin(20,40)=0;stockandmisc cannotoffsetsalary; answer1andexplanationcorrect. Cropincludesq19andcutsright."
+    }
+  ],
+  "calculationFile": "/workspace/scratch/pr37-review/practical-01-20-calculations.json",
+  "notBlockers": [
+    "No case hints, because current case contract does not support hintfields/history.",
+    "legalAsOf:null is honest because practicalPDFdoesnotstatebaseline; no exhaustive currentlawcheckneeded for historicalpublication."
+  ],
+  "approval": false
+}

@@ -1,0 +1,45 @@
+{
+  "format": "hitomon-law-study-filter-verification",
+  "version": 1,
+  "checkedAt": "2026-10-24T13:50:32.899559+00:00",
+  "release": "20261024-legal-study",
+  "base": "b2c85f878fa3c40485c7dc85f9e15725e6f26391",
+  "metadata": {
+    "lastLawCheck": "legalReview.checkedAt",
+    "lawChanged": "legalReview.status == outdated",
+    "uncheckedItemsRemainEligible": true
+  },
+  "preference": {
+    "name": "excludeOutdated",
+    "default": true,
+    "scope": "qualification and owner in local device settings; included in backup"
+  },
+  "behavior": [
+    "UI shows the original law basis; internal unverified/current review status and dates are hidden.",
+    "Confirmed changed-law questions show a study-not-recommended badge when included.",
+    "Exclusion applies to ordinary starts, recommendations, review candidates, catalog, new diagnostics and new case choices.",
+    "Fixed mock sets containing excluded material disable new starts; slots are never removed.",
+    "Historical answers, begun assessment runs and typed case inputs remain accessible."
+  ],
+  "checks": {
+    "nodeTests": 264,
+    "nodeFailures": 0,
+    "syntheticChangedLawBrowser": "pass including include/exclude persistence, old metadata in backup, normal/case choices, fixed mock block and saved-run resume, typed input and historical answers",
+    "realFP60Browser": "pass including offline download, diagram, resume, grade/reasons, AI, backup import, AP isolation, 320/390/1440px",
+    "syntheticFPFlow": "pass",
+    "numericFocus": "pass",
+    "pwaOfflineAndUpdate": "pass",
+    "fp2ContentAndReviewGates": "pass",
+    "commonContent": "pass",
+    "APCorpus": "pass",
+    "writtenContent": "pass",
+    "build": "pass",
+    "diffCheck": "pass"
+  },
+  "unchanged": [
+    "All authored questions, versions and official answer IDs",
+    "All source PDFs, figures and public content packs",
+    "Firestore Rules and record format"
+  ],
+  "scope": "Pre-publication checks. No synthetic materials or personal guest records are registered as public questions."
+}

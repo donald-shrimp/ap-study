@@ -5,6 +5,13 @@ import jsonschema
 from common_fixtures import prepare,builder,write,review
 ROOT=Path(__file__).resolve().parents[1]
 schema=json.loads((ROOT/'schemas/question-format.v1.json').read_text())
+text_question={'id':'text-and-empty-images','version':1,'type':'singleChoice','stem':'本文がある問題。','sourceImages':[],'choices':[{'id':'a','label':'A'},{'id':'b','label':'B'}],'correctChoiceId':'a'}
+jsonschema.validate(text_question,schema)
+image_question={**text_question,'sourceImages':['assets/question.png']};image_question.pop('stem');jsonschema.validate(image_question,schema)
+for missing in [{k:v for k,v in text_question.items() if k!='stem'},{**text_question,'stem':''}]:
+    try:jsonschema.validate(missing,schema)
+    except jsonschema.ValidationError:pass
+    else:raise AssertionError('Neither text nor a source image is available')
 def as_multi(q):
     q=copy.deepcopy(q);q['choices']+=[{'id':'c','label':'C','text':'3'}];q.pop('correctChoiceId');q.update(type='multipleChoice',correctChoiceIds=['c','a'],selection={'mode':'exact','count':2},grading={'method':'exactChoiceSet'},choiceReasons=['奇数','偶数','奇数'],stem='奇数を2つ選んでください。',explanation='1と3が奇数。');return q
 with tempfile.TemporaryDirectory() as d:

@@ -1,5 +1,5 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261024-fp2-review-fixes';
+const RELEASE = '20261026-fp2-202505';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;
@@ -7,14 +7,15 @@ const IMAGE_CACHE = `${PREFIX}images`;
 const CONTENT_CACHE = `${PREFIX}content`;
 const CORE = [
   'src/domain/decimal-answer.js','src/domain/legal-context.js','src/ui/legal-context.js',
-  'src/domain/offline-assets.js','src/features/offline.js','src/features/offline-store.js',
+  'src/domain/study-queue.js','src/domain/offline-assets.js','src/features/offline.js','src/features/offline-store.js',
+  'src/storage/sync-cursor.js',
   'src/v2/records.js', 'src/v2/resources.js', 'src/domain/case-study.js', 'src/features/written.js',
   'src/domain/sync-status.js', 'src/ui/sync-status.js', 'src/domain/guest-import.js', 'src/ui/plan-conflict.js', 'src/content/errors.js',
   'src/ui/qualification-navigation.js', 'src/domain/study-target.js', 'src/domain/qualification-features.js',
   'index.html', `app.js?v=${RELEASE}`, `styles.css?v=${RELEASE}`, 'pwa.js',
   'data/qualifications/catalog.json', `manifest.webmanifest?v=${RELEASE}`,
-  "src/domain/plan-history.js", "src/ui/plan-history.js", "src/ui/learning-trend.js", "src/domain/mock.js", "src/domain/content-policy.js", "src/domain/assessment-policy.js", "src/domain/assessment-sampling.js", "src/domain/assessment.js", "src/ui/mocks.js", "src/domain/personal.js", "src/features/personal.js", "src/app.js?v=20261024-fp2-review-fixes", "src/domain/learning-state.js", "src/features/learning.js", "src/features/ai-handoff.js", "src/utils.js", "src/ui/views.js", "src/ui/image-zoom.js", "src/domain/study.js", "src/domain/question-format.js", "src/domain/review.js", "src/domain/planning.js", "src/domain/analytics.js", "src/domain/study-context.js", "src/domain/flashcards.js", "src/domain/card-sync.js", "src/features/cards.js", "src/storage/cards.js", "src/domain/next-action.js", "src/domain/practice.js", "src/ui/field-progress.js", "src/domain/diagnostic.js", "src/ui/planning.js", "src/ui/plan-targets.js", "src/ui/plan-context.js", "src/ui/planning-drafts.js", "src/features/planning.js", "src/storage/workspace.js", "src/sync/workspace.js", "schemas/study-plan.v2.json", "src/storage/local.js", "src/storage/validate.js", "src/content/catalog.js", "src/sync/account.js", "src/sync/engine.js", "src/sync/firebase.js", "src/sync/config.js", "assets/vendor/firebase.js",
-  'src/ui/question-text.js', 'assets/vendor/katex/katex.mjs', 'assets/vendor/katex/katex.min.css', 'assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff2', 'assets/vendor/katex/fonts/KaTeX_Math-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Script-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2',
+  "src/domain/plan-history.js", "src/ui/plan-history.js", "src/ui/learning-trend.js", "src/domain/mock.js", "src/domain/content-policy.js", "src/domain/assessment-policy.js", "src/domain/assessment-sampling.js", "src/domain/assessment.js", "src/ui/mocks.js", "src/domain/personal.js", "src/features/personal.js", "src/app.js?v=20261026-fp2-202505", "src/domain/learning-state.js", "src/features/learning.js", "src/features/ai-handoff.js", "src/utils.js", "src/ui/views.js", "src/ui/image-zoom.js", "src/domain/study.js", "src/domain/question-format.js", "src/domain/review.js", "src/domain/planning.js", "src/domain/analytics.js", "src/domain/study-context.js", "src/domain/flashcards.js", "src/domain/card-sync.js", "src/features/cards.js", "src/storage/cards.js", "src/domain/next-action.js", "src/domain/practice.js", "src/ui/field-progress.js", "src/domain/diagnostic.js", "src/ui/planning.js", "src/ui/plan-targets.js", "src/ui/plan-context.js", "src/ui/planning-drafts.js", "src/features/planning.js", "src/storage/workspace.js", "src/sync/workspace.js", "schemas/study-plan.v2.json", "src/storage/local.js", "src/storage/validate.js", "src/content/catalog.js", "src/sync/account.js", "src/sync/engine.js", "src/sync/firebase.js", "src/sync/config.js", "assets/vendor/firebase.js",
+  'src/ui/case-body.js','src/ui/study-controls.js','src/ui/inline-text.js', 'src/ui/question-text.js', 'assets/vendor/katex/katex.mjs', 'assets/vendor/katex/katex.min.css', 'assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff2', 'assets/vendor/katex/fonts/KaTeX_Math-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff2', 'assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Script-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff2', 'assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2',
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png', 'assets/icons/apple-touch-icon.png'
 ];
 const CORE_URLS = new Map(CORE.map(path => {
@@ -93,6 +94,19 @@ async function cacheFirst(request, cacheName, cacheKey, event) {
   return await cache.match(cacheKey) || networkFirst(request,cacheName,cacheKey,event);
 }
 
+async function imageWithFallback(request, cacheKey, event) {
+  const saved=await (await caches.open(IMAGE_CACHE)).match(cacheKey);
+  // Explicit downloads must receive fresh bytes for the inventory's SHA check.
+  if(!saved||request.cache==='reload')return networkFirst(request,IMAGE_CACHE,cacheKey,event);
+  const refresh=networkFirst(request,IMAGE_CACHE,cacheKey,event);
+  event.waitUntil(refresh.catch(()=>{}));
+  let timer;
+  try {
+    // Prefer a quick fresh response; a weak connection must not hide a saved diagram.
+    return await Promise.race([refresh,new Promise(resolve=>{timer=setTimeout(()=>resolve(saved),300);})]);
+  } finally {clearTimeout(timer);}
+}
+
 async function refreshInBackground(request, cacheKey, event) {
   const cache=await caches.open(CONTENT_CACHE);
   let saved=await cache.match(cacheKey);
@@ -128,6 +142,6 @@ self.addEventListener('fetch', event => {
     event.respondWith(cacheFirst(request, SHELL_CACHE, CORE_URLS.get(url.pathname), event));
   } else if (url.pathname.startsWith(new URL('assets/', ROOT).pathname)) {
     url.search = '';
-    event.respondWith(networkFirst(request, IMAGE_CACHE, url.href, event));
+    event.respondWith(imageWithFallback(request, url.href, event));
   }
 });
