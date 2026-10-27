@@ -693,11 +693,11 @@
     "id": "r03a-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "9b4b3937f02e3e1b556abdc60a14136577ff34fe60a47f19a7d311f0adafb9c7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q15",
-      "summary": "エ。最も遅い書込み50ミリ秒が律速となり、毎分1,200件です。",
+      "summary": "読取り・CPU・書込みを重ねて実行する処理で、最も遅い段から定常的な毎分処理件数を求める。",
       "explanation": "読取り40ミリ秒、CPU処理30ミリ秒、書込み50ミリ秒を別のデータについて並行に実行します。パイプラインの定常状態で1件を送り出す最短間隔は、最も時間のかかる段の50ミリ秒です。1分=60,000ミリ秒なので最大処理件数は60,000/50=1,200件です。三段の時間の合計は1件の通過時間であり、定常状態の処理間隔ではありません。",
       "choiceReasons": [
         "500件/分は処理間隔120ミリ秒に対応し、三段を並行化した最大能力より小さい値です。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "n件目の書込み中に別のデータのCPU処理と読取りが進む点から、三つの段の時間を足すべきか考えます。",
+          "text": "設問では、別々のデータに対して読取り40ミリ秒、CPU処理30ミリ秒、書込み50ミリ秒を同時に進められます。1件が全工程を通る時間と、連続して1件ずつ完了する間隔は異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "段を並行動作させても、最も遅い段より速く次のデータを送り出せません。40、30、50ミリ秒の最大値を1件当たりの間隔にします。",
+          "text": "このように処理を段に分けて重ねる方式はパイプライン処理です。全段が動き始めた後の出力間隔は、最も長くかかる段より短くできません。三つのうち最大の50ミリ秒を使います。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "律速は書込み50ミリ秒なので、60,000÷50=1,200件/分です。",
+          "text": "1分＝60,000ミリ秒です。定常状態では50ミリ秒ごとに1件を送り出せるので、60,000÷50＝1,200件/分になります。40＋30＋50では割りません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "1件の処理時間40+30+50を、そのままパイプラインの送り出し間隔だと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "重ね合わせで処理できる別データと処理間隔の違い",
+          "remainingWork": "段ごとの時間と前後関係を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原問の前提の理解にとどまり最終時間は未提示"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ボトルネック段の考え方と50ミリ秒という律速値",
+          "remainingWork": "1分に何間隔分を処理できるか計算",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "算出に必要な時間を示すが件数の割算が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "60,000ミリ秒を律速値で割った処理件数",
+          "remainingWork": "得られた件数を選択肢から選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終処理件数を渡す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=ecf4191615e28ca8792117b5fc550db954aa00a43cc6745e115b3243d21bac5e。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本はread40ms+CPU30ms+write50ms、n/n+1/n+2を重ねる条件。定常最大スループット60000/50=1200件/分。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "7ab226928dbc64b833086139ede81dd52bba47dce7c30af19e3a9d1a20a5568b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q16",
-      "summary": "イ。ノンプリエンプティブ方式では、タスクが自ら実行権を譲るまで強制切替をしません。",
+      "summary": "ノンプリエンプティブ方式で実行権を強制的に奪うか、タスクの自発的な状態変化で切り替えるかを区別する。",
       "explanation": "プリエンプションはOSが実行中のタスクから実行権を取り上げることです。ノンプリエンプティブ方式では、タスクの終了や自発的な中断・待ちへの移行によって次のタスクへ切り替えます。\n優先度が高いタスクが来ても、それだけで現在のタスクを中断しません。自ら中断を要求した場合に切り替えるイが適切です。",
       "choiceReasons": [
         "アは優先度を引き上げる仕組みを説明しています。非強制切替を実現する定義ではありません。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "高優先度のタスクが来たとき、実行中のタスクをOSが勝手に止めるかを考えます。",
+          "text": "プリエンプティブ方式は、OSが実行中タスクからCPUの実行権を取り上げられる方式です。『ノンプリエンプティブ』はこの強制的な取上げを行わないことを意味します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "この方式の切替は実行中タスクの終了や、自ら要求した待ち・中断が契機です。",
+          "text": "ノンプリエンプティブでは実行中タスクが終了したり、自ら待ち・中断を要求したりした時に次へ切り替わります。単に高優先度の別タスクが現れても、実行中のタスクを強制的に止めません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "イの「自らの中断を要求」とエの「優先度が高いタスクが追加」を比べ、誰が実行権を譲るきっかけを作るか確認します。",
-          "revealsAnswer": false
+          "text": "したがって実行中タスク自身が中断をOSに要求したときに切り替える記述が適切です。優先度で切り替える肢はプリエンプティブ、無限ループを自動終了させることもこの方式の定義ではありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "優先度の高さと実行中のタスクを中断できる仕組みを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "プリエンプションという動作の定義",
+          "remainingWork": "各肢で切替えを起こす主体を確認",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方式の語義を説明するだけで肢の対応は本人に残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "非プリエンプティブでの切替契機と高優先度到着時の扱い",
+          "remainingWork": "定義に合う選択肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を実質的に言い換えた切替契機を教える"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "正答肢の自発的中断と誤答の違い",
+          "remainingWork": "適切な肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答記述の内容を直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q16.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=f2194dc683d6840cac44e70a731db11dd1e86a00608f36dabe736c39caf46e80。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本のイは実行中タスクによる自発的な中断要求、エは高優先度タスクの追加。非プリエンプティブの区別を確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "640323e25a61aee65924f90e9738d16529aa4415a33a7f4ecc9534b7c93833ed",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q23",
-      "summary": "イ。読み出した値と08とのORでビット3だけを1にします。",
+      "summary": "GPIOの特定ビットだけを1にしてLED1を点灯し、LED2の出力ビットは保持する論理演算を選ぶ。",
       "explanation": "図ではLED1がビット3、LED2がビット6に接続され、出力が1のとき接地側へ電流が流れて点灯します。08₁₆=00001000₂とのORならビット3を1にし、他のビットは元の値を保持します。LED2のビット6は変わりません。読出し値を変更して書き戻せることと、途中で他の操作がないことがこの方法を支えています。",
       "choiceReasons": [
         "08とのANDはビット3を元のまま残し、ビット6など他のビットを0にするのでLED2を保持できません。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図のLED1とLED2をポートの何番のビットが駆動するかたどり、接地側へ電流を流す出力値を考えます。",
+          "text": "原図ではLED1が**ビット3**、LED2が**ビット6**につながります。出力1でLEDが点灯する回路です。LED1だけを1に変え、LED2は現在の状態を保たなければなりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "LED1はビット3です。08=00001000₂、48=01001000₂と展開し、ANDとORでビット3・6がどう変わるか確かめます。",
+          "text": "論理和ORには『0とのORは元値を保持、1とのORは必ず1』という性質があります。反対にANDは0を含む場所を0にします。ビット3だけ1のマスクを作れば、ORで他のビットを保てます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "読出し値OR08ならビット3だけを1にし、LED2のビット6は元のままです。",
+          "text": "ビット3だけを1にした8ビットのマスクは00001000₂＝08₁₆です。出力を読み、**その値と08の論理和**を書き戻す選択肢を選びます。48₁₆はビット6まで1にしてしまいます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ビット番号を1から数える、またはAND・ORの効果と16進マスク08/48を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "LED1/LED2の接続ビットと保持要件",
+          "remainingWork": "LED1/2の線を図から追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対象のビット位置のみでマスク・演算の組は未確定"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "OR・ANDの各ビットへの作用",
+          "remainingWork": "必要なマスクを16進に変換し演算を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ORの一般則を渡しても08/48の対応計算を残す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "08マスクと論理和の具体的指定",
+          "remainingWork": "4肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の演算と16進値を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=6957239d10a6b08f4649e33b0ce25e8381bd7b09fd1d7265b61d048c95b554e0。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原図からLED1=bit3/LED2=bit6、接地側アノード電流。read OR 0x08ならbit3を1にしbit6保持、ANDは他ビットを消す。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "b1549a557a71d5cea404dffe74b41e29168a4f4a827474219fc99a5599e37eb3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q20",
-      "summary": "エ。大規模データを分散処理する基盤です。",
+      "summary": "HadoopがWebサーバやRDBMSではなく、大規模なデータを複数計算機で扱う仕組みであることを判定する。",
       "explanation": "Hadoopは大規模データを複数ノードに分散して保存・処理するためのソフトウェア群です。HDFSなどの分散ファイルシステムやMapReduceによる分散処理を提供します。",
       "choiceReasons": [
         "Java EE準拠のアプリケーションサーバの説明で、Hadoopの目的と異なります。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の用途をWebアプリ実行、Web配信、関係データ管理、大規模分散処理に分けます。",
+          "text": "選択肢の4つの役割は『業務アプリ実行』『Webページ配信』『表形式データベース』『大量データの分散処理』です。何を実現する技術かに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Hadoopでデータを複数ノードに分けて処理する場面を考えます。",
+          "text": "多数の計算機にデータを分けて保存・処理するには、分散ファイルシステムと処理を分担させる仕組みを組み合わせます。単独のWebサーバや関係データベースとは目的が異なります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "大規模なデータセットを分散処理するソフトウェアライブラリを選びます。",
+          "text": "HadoopはそのためのOSS群で、HDFSによる分散保存、MapReduceによる分散処理などを提供します。したがって大規模データセットの分散処理という説明が一致します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "Hadoopという固有名詞を知らないと、4種のサーバ・データ技術を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢を機能別に分類する軸",
+          "remainingWork": "名前と4種の機能の関係を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "カテゴリを提示するが正答名称と対応は教えない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "分散保存・計算の特徴と他3技術との対比",
+          "remainingWork": "分散処理に当たる肢を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を実質的に説明し、他三用途を除外する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Hadoopの名称とHDFS/MapReduceの役割",
+          "remainingWork": "対応を選択肢に記す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "Hadoop固有の名称と正答の説明を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q20.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=818c57713dcebe1d3e30d655b716823ead9887834b5c2a716ea66580f16905fd。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本全肢はJava EEアプリケーションサーバ/Webサーバ/RDBMS/大規模分散処理ライブラリ。Hadoopの目的と照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "311e443cbcda26432d7c6e6f91d67d2f681a8b6f826d3007499d1083eb3dae2a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q23",
-      "summary": "ウ。S3とS2を導通させて電流を右から左へ流します。",
+      "summary": "Hブリッジ回路でDCモータに流す電流を逆向きにするスイッチの組合せを図から決める。",
       "explanation": "正転は図の左の+端子から右の−端子への電流です。逆転では+V→S3→右端子→モータ→左端子→S2→接地の経路を作ります。よってA1=Low,A2=High,A3=High,A4=Lowです。",
       "choiceReasons": [
         "全スイッチが開き、モータを流れる電流がありません。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "正転の矢印を左端子から右端子へ描き、逆転に必要な反対向きの電流を確認します。",
+          "text": "設問ではモータの左（＋）端子から右（－）端子へ電流が流れると正転です。逆転には右端子から左端子へ流す必要があります。各信号がHighなら対応スイッチが閉じます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "右端子を+Vへ、左端子を接地へ接続するスイッチを図でたどります。",
+          "text": "図では上側が＋V、下側が接地です。逆向きに流すには**右側の上のスイッチ**を通して右端子に給電し、**左側の下のスイッチ**を通して接地へ戻す電流の道筋を作ります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "右上S3と左下S2を閉じるためLow,High,High,Lowです。",
+          "text": "右上はS3（A3）、左下はS2（A2）なのでA2・A3をHigh、A1・A4をLowにします。A1～A4は順にLow, High, High, Lowです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "High/Lowを電流の向きと勘違いし、対角の2スイッチの電源・接地経路を追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "モータ正転と逆転の電流方向・Highの働き",
+          "remainingWork": "左右端子の電流方向を確認",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理と必要な電流方向だけを渡す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "給電側と帰路に使う対角スイッチ",
+          "remainingWork": "スイッチ番号を図から特定",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "右上と左下の指定で原図から正答が一意に決まる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "制御信号A1～A4のHigh/Low",
+          "remainingWork": "正答の組合せを選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と同じ信号列を直接提示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=3bd6b9fe465128043ddd5cd4f6ce2c7368f9aa9ae1ca2a82e8e1ec0ef22ba75f。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本Hブリッジでは左上S1、左下S2、右上S3、右下S4。逆転経路+V→S3→右端子→モータ→左端子→S2→GND。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "826dd069efce581579f277ff06db75d1c0abbe6415a53048d1ffc29b55d94aa0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q20",
-      "summary": "アの20%。同じ電流が流れるため、電力比は2V/10Vです。",
+      "summary": "LEDと抵抗の直列回路で、LED消費電力が回路全体に占める割合を求める。",
       "explanation": "直列回路なのでLEDと抵抗の電流は共に10mA=0.01A。LED電力は2×0.01=0.02W、回路全体は10×0.01=0.10Wです。\n比率は0.02/0.10×100=20%。抵抗には残り8Vが掛かり、0.08Wを消費します。",
       "choiceReasons": [
         "LEDの0.02Wを全体0.10Wで割った20%が正しいです。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "電源10VのうちLEDの順方向電圧は2Vです。残りの電圧は抵抗に掛かります。",
+          "text": "原図は10Vの電源にLEDと抵抗が直列です。LEDの順方向電圧は2Vなので、抵抗には10－2＝8Vがかかります。直列なので電流はどちらも10mAです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "LEDと抵抗は直列なので電流は共通です。P=VIをLEDと回路全体にそれぞれ適用します。",
+          "text": "電力はP＝V×I。LEDは2V×0.010A、回路全体は10V×0.010Aで求めます。割合は**LEDの電力÷回路全体の電力×100**です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "LEDは2×0.01W、全体は10×0.01Wです。求める分母は抵抗の電力ではなく全体の電力であることを確認しましょう。",
-          "revealsAnswer": false
+          "text": "同じ電流が流れるので比を取ると電流は打ち消され、2V÷10V×100＝20%です。2÷8は『LEDと抵抗の電力比』であり『全体に占める割合』ではありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "LEDの電力を抵抗の電力で割り、全体に占める割合と取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "直列回路の電圧分担と共通電流",
+          "remainingWork": "図の電源10VとLED2Vを読み取る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "回路の条件だけで数値は渡さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "電力P=VIと全体を分母にする割合の式",
+          "remainingWork": "LED/全体の電力を計算し比を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式と変数の値を示すが乗除算は本人ができる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "電圧比2/10からの最終割合",
+          "remainingWork": "20%を選択肢で選ぶ",
+          "revealsAnswer": true,
+          "reason": "最終の数値20%を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q20.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=e5d9b868167e016edec7cb622e0889048827fb8a738dd29fa98d102a1323aaf6。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原図の電源10V、LED順方向2V、同電流10mA。LED電力0.02W/全体0.10W=20%。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "1e2952a39638e43594757c5c34d943b7852732f2596d640c4cbe4ce32b724074",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q23",
-      "summary": "LiDARはレーザー光と反射光を使って方向・距離・形状を測ります。",
+      "summary": "自動運転の距離センサーのうち、LiDARの測距に使う物理的な信号を他の方式と区別する。",
       "explanation": "LiDARはLight Detection and Rangingの略で、レーザー光を照射し、戻ってくる反射光を測定するセンサーです。パルスの往復時間から距離を求め、照射方向ごとの測定を集めることで周囲の形状を把握します。光を使うエが該当し、超音波やミリ波を使う方式とは異なります。",
       "choiceReasons": [
         "超音波を利用する距離センサーの説明です。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補は、超音波、画像の遠近法、ミリ波、レーザー光を使っています。",
+          "text": "四肢はすべて距離の測り方を表しています。超音波・ミリ波・画像の遠近法・レーザー光では、観測する信号や仕組みが異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "LiDARのLightに対応する物理的な信号を考え、Rangingは距離を測ることと結び付けます。",
+          "text": "LiDARはLight Detection and Rangingの略で、**光**の反射を測って対象までの距離を求めます。照射した光が戻るまでの往復時間を使う方式が代表的です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "レーザーパルスの往復時間tなら距離は光速×t/2です。この測定を述べる候補を探します。",
+          "text": "レーザー光のパルスを照射し、反射光が戻った方向と時間から距離を計算します。距離は『光速×往復時間÷2』で求めます。この動作を述べる肢がLiDARです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "レーザー・ミリ波レーダー・超音波のいずれも反射波で測距するため区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各候補で用いる信号の分類",
+          "remainingWork": "方式名と対象信号を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "物理的な手段の分類だけでLiDARの手段を教えない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "LiDARの略語と光による反射測距の原理",
+          "remainingWork": "正答肢に一致する信号を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢のレーザー光を実質的に特定する『光反射』を示す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "レーザーパルスと往復時間の計算",
+          "remainingWork": "距離・方向の測定原理を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の仕組みを直接説明する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=e575efd56c0747b255de23703d408b42ee44b3f7e4c599aca47e46a023d1aea1。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のア=超音波、イ=遠近法、ウ=ミリ波、エ=レーザー光を照合。LiDARはレーザーパルスの反射測距。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "aa6c35967717dfe6e3e5cc07993e6842f1d07aa506a48c0f1587458e7377773b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q21",
-      "summary": "ウ。MOSは金属・酸化物絶縁体・半導体の構造です。",
+      "summary": "MOSという名称の構成材料と、発光・受光・逆方向定電圧の半導体素子を区別する。",
       "explanation": "MOSはMetal Oxide Semiconductorの略です。金属と半導体の間に酸化物の絶縁体を挟む構造をもち、ゲート電圧による電界で電流を制御します。\n発光、光の受光、逆方向の定電圧特性を利用する素子とは区別します。",
       "choiceReasons": [
         "電子と正孔の再結合による発光を利用する発光ダイオードなどの説明です。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各選択肢は発光、受光、積層構造、定電圧の説明です。MOSという名称が何を表すか考えます。",
+          "text": "選択肢には電子・正孔の再結合による発光、光を受ける作用、三層の材料構造、逆方向での定電圧特性が並びます。MOSの名を構造に結び付けられるかがポイントです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "MOSのM、O、SをMetal、Oxide、Semiconductorへ展開します。三つの材料の位置関係に対応する説明を探します。",
+          "text": "MOSはMetal（金属）、Oxide（酸化物）、Semiconductor（半導体）の略です。金属電極と半導体の間に酸化物の絶縁層を挟む構造が名前の由来です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "MetalとSemiconductorの間にOxideの絶縁層を挟みます。選択肢の材料と構造を照合しましょう。",
+          "text": "この絶縁層を介したゲート電界で電流を制御する素子がMOSトランジスタです。光で電流が出るフォトダイオードや発光ダイオード、ツェナーダイオードとは異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "トランジスタを電流制御素子としか知らず、MOSの材料構造が何を意味するか分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "4肢の作用と材料構造の分類",
+          "remainingWork": "MOSが略語である点を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類軸のみで正答文そのものは示していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "MOSの語の展開と酸化物絶縁層の位置",
+          "remainingWork": "正答の材料構造を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の材料配置を明示する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ゲート制御の仕組みと他の半導体素子との差",
+          "remainingWork": "他3肢に対応する素子を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の仕組みと誤答を提示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q21.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=d81188e2c89f2a07d43a9a95d7a415d89d87d94752393cf0ea492419c1571f2f。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本ではウが金属と半導体の間に酸化物絶縁体、アは発光、イは受光、エは逆方向定電圧。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "ef50d76196242caa965fcafab702e53824435033912ba5547e98a1142c28641f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q24",
-      "summary": "NFCは近距離の非接触通信で、ピアツーピア通信もできます。",
+      "summary": "NFCを近距離の非接触データ通信として捉え、通信範囲・接触式IC・P2P機能を区別する。",
       "explanation": "NFCは数cm程度に近づけて行う無線通信です。非接触ICカードの読取りやカードエミュレーションだけでなく、対応機器同士が対等にデータを交換するピアツーピア機能も備えています。したがってエが適切です。接触式カードや位置検出用のタッチセンサーとは役割が違います。",
       "choiceReasons": [
         "タッチ位置を検出する静電容量式センサーの説明で、NFCの通信ではありません。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Near Fieldは近い範囲の通信です。位置を測る機能か、データを交換する機能かを見ます。",
+          "text": "NFCはNear Field Communicationの略で、近距離の電磁界を使う非接触のデータ通信です。タッチ位置を検出するセンサーや接点を直接つなぐICカードとは役割が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "通信距離とカードの接触・非接触を確認し、機器同士のデータ交換の記述も調べます。",
-          "revealsAnswer": false
+          "text": "NFCは通常、端末同士やカードとリーダーを数cm程度に近づけて通信します。10m級の無線方式ではありません。読み書きやカード模擬以外の端末間通信機能にも注目します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "NFCには読書き、カードエミュレーション、ピアツーピアのモードがあります。候補の機能と照合します。",
+          "text": "NFCにはカード読み書き、カードエミュレーションのほか、対応機器同士が通信するピアツーピア機能もあります。設問ではこの説明が適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『近距離』を10m級と誤解したり、カード読取り専用と考えて機器間通信を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "NFCの略語・非接触データ通信という役割",
+          "remainingWork": "方式の分類を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "接触型・タッチセンサーは否定できるが距離とP2Pの判断が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "数cm程度の近距離性と端末間通信の可能性",
+          "remainingWork": "選択肢の『10m』『接触式』と比べる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "距離条件を確定して10mを否定し、残る肢が一意になる"
+        },
+        {
+          "newInformation": "P2Pモードの名称と正答肢への一致",
+          "remainingWork": "正答の機能を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答のP2Pを名称で示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q24.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=2c198ec349adf720e299064aaf259bc387e7341b79ab46e699c59d81d2855324。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本の4肢(タッチ/接触カード/10m/P2P)を確認。NFCは近距離非接触でP2P機能あり。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "a249ef6a4f46242af25274bfd049a04b39546c236ee50c4273575428378f07de",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q19",
-      "summary": "イ。PLCは主にラダー図で表すシーケンスプログラムによって制御する。",
+      "summary": "産業機器の制御に使うPLCと、PID制御・A/D変換・物理リレー配線の機能を区別する。",
       "explanation": "PLCはProgrammable Logic Controller。入力されたスイッチやセンサの状態を読み、プログラムに従ってモータなどへ出力する。リレー回路に似たラダー図で条件や動作の順序を表せることが代表的な特徴。\n\n比例・積分・微分による制御はPID制御、アナログからデジタルへの変換はA/D変換、リレー回路だけの制御はハードワイヤードなリレーシーケンス。PLCにPID等の機能が搭載されることはあるが、選択肢ではその基本的な説明を選ぶ。",
       "choiceReasons": [
         "比例・積分・微分の3要素はPID制御の説明。PLCそのものの代表的な説明ではない。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "PLCのPはProgrammable。配線そのものを組み替える装置か、プログラムで条件や順序を変える装置かを見る。",
+          "text": "PLCはProgrammable Logic Controllerで、センサー等の入力に応じて、モータや装置への出力を**プログラムで**制御する産業用装置です。制御内容を配線の組替えだけに頼りません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "比例・積分・微分はPID、アナログ→デジタルはA/D変換。まずこれらを別の機能として除く。",
+          "text": "比例・積分・微分の三要素を使うのはPID制御、アナログ電圧をデジタル値にするのはA/D変換です。どちらもPLCそのものの代表的な定義ではありません。残る『プログラム』と『リレー回路の配線』を比べます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "残る二つについて、物理的なリレー配線で動くのか、リレー回路に似た図で書くプログラムで動くのかを比べる。",
-          "revealsAnswer": false
+          "text": "PLCではリレーの接点に似せたラダー図を使い、シーケンス（動作の順序や条件）をプログラム化することが代表的です。物理的なリレー結線だけで制御する方式とは区別します。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "PLC・PIDという似た略語やラダー図の役割を知らないため正誤を決められない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "PLCの略語とプログラム可能な産業制御装置という基本",
+          "remainingWork": "PLCの用途を候補と対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "PLCの用途と名称を提示するがラダー図の選択は残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "PID・A/D変換の役割と残る2肢の比較軸",
+          "remainingWork": "プログラム方式か物理リレー回路か決める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ア・ウは除けるもののイ・エの判断が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "ラダー図によるシーケンス制御の正しい対応",
+          "remainingWork": "正答肢を選択する",
+          "revealsAnswer": true,
+          "reason": "正答肢の『ラダー図のシーケンスプログラム』と同義の内容を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=313fea18f899738ca1daf09d441589fb247a7ab1e36f30827cec666fdc1db232。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本はアPID、イラダー図シーケンス、ウA/D、エリレー回路のハードウェア。PLCはラダー制御のプログラマブル装置。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   }
 ]
