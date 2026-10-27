@@ -3,11 +3,11 @@
     "id": "r07h-q44",
     "baseVersion": 2,
     "baseLessonSHA256": "b779f795496a95a6cb305b7d6445a448ebc8c55f5186a8121b3bbc7df2bbadb2",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q44",
-      "summary": "ウ。ストレッチングはハッシュ計算を繰り返して試行の計算量を増やす。",
+      "summary": "パスワードのハッシュ照合を遅くするストレッチングと、ソルト・アカウントロックを区別する。",
       "explanation": "パスワード候補を一つ試すたびにハッシュ計算を多数回必要にすると、大量の候補を調べる攻撃に時間がかかる。これがストレッチング。照合用の値を繰り返しハッシュして作るウが該当する。\n\n失敗回数による停止はアカウントロック、利用者ごとに違う値を加えるのはソルト。ソルトとストレッチングは併用できるが、同じ対策ではない。現在の実装では専用のパスワード用KDF等を使う。",
       "choiceReasons": [
         "質問を追加する認証手続。ハッシュ計算を重くする対策ではない。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つを、追加質問・試行回数制限・繰返し計算・異なる文字列の付加に分ける。",
+          "text": "パスワード対策には、オンラインの試行回数を抑えるものと、漏えいした照合用ハッシュを攻撃者が調べる速度を下げるものがあります。まず守る場面を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "stretchは計算を引き延ばすイメージ。攻撃者が候補を一つ確かめる時間を長くする仕組みを考える。",
-          "revealsAnswer": false
+          "text": "**ストレッチング**は、照合用の値を計算する処理を意図的に重くして、候補パスワード1件の検証コストを上げることです。試験の方式ではハッシュ計算を繰り返します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ユーザーごとの文字列はソルト。ハッシュ処理自体を何度も行う説明と区別する。",
-          "revealsAnswer": false
+          "text": "**ソルト**は利用者ごとに違う値を付けてハッシュを作る対策です。失敗回数の制限はアカウントロック。計算を何度も繰り返すものと混ぜずに選びましょう。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "繰り返しハッシュする目的がわからず、ユーザー固有文字列を足すソルトと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "パスワード対策には、オンラインの試行回数を抑えるものと、漏えいした照合用ハッシュを攻撃者が調べる速度を下げるものがあります。まず守る場面を分けます。",
+          "remainingWork": "オンライン制限とオフライン解析の区別",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**ストレッチング**は、照合用の値を計算する処理を意図的に重くして、候補パスワード1件の検証コストを上げることです。試験の方式ではハッシュ計算を繰り返します。",
+          "remainingWork": "繰返し計算を行う肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**ソルト**は利用者ごとに違う値を付けてハッシュを作る対策です。失敗回数の制限はアカウントロック。計算を何度も繰り返すものと混ぜずに選びましょう。",
+          "remainingWork": "ソルト・追加質問などとの違いを確認",
+          "revealsAnswer": true,
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r07h/r07h-q44.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 4cdd8c451b279cf1e62630f90cb3c05325f907a6efc55f34a7bf5d26ec596d00。",
+        "context記載の正答 ウ を確認。作者の判断: 原本は追加質問・試行停止・繰返しハッシュ・利用者ID別文字列の四肢。繰返しがストレッチング、利用者別付加はソルト。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r06a-q40",
     "baseVersion": 2,
     "baseLessonSHA256": "dc144214a0c777e0cc26b1d867dd97f80058f2b7407ce45da3385296a1d1f050",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q40",
-      "summary": "ウ。流出したID・パスワードの組を別サイトで試す攻撃です。",
+      "summary": "流出した認証情報の使い回しを狙う攻撃を、辞書攻撃・ハッシュ解析と区別する。",
       "explanation": "パスワードリスト攻撃は、流出した利用者IDとパスワードの組を、別のサービスへそのまま試す攻撃です。複数サイトで同じ認証情報を使い回している利用者が狙われます。\n一般的な単語を候補にするのは辞書攻撃、ハッシュ値との対応を調べるのはレインボーテーブルなどの攻撃、画面操作の観察はショルダーハッキングに相当します。",
       "choiceReasons": [
         "単語や人名から候補を作るのは辞書攻撃です。流出したID・パスワードの組を使う攻撃とは異なります。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の作り方を比べます。単語から推測、ハッシュから解析、流出した組を再利用、画面を録画という違いがあります。",
+          "text": "「リスト」に何が入っていて、**どこに試すのか**を読み分けます。単語だけの候補集と、利用者IDとパスワードが組になった流出情報は異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じIDとパスワードを複数のサイトで使うと、一つのサイトで漏れた組が別サイトでも通るかもしれません。",
+          "text": "パスワードリスト攻撃は、あるサービスから漏えいした**IDとパスワードの組**を、**別のサービスのログイン**へ流用する手口です。パスワードを使い回す利用者が狙われます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "流出したID・パスワードのリストを別サイトで試すウが該当します。単語リストを作るアは辞書攻撃です。",
+          "text": "一般的な単語を順に試すのは辞書攻撃、入手したハッシュ値を候補表と照合するのはハッシュ解析です。流出した認証情報を**別サイトへ試す**記述を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『パスワードのリスト』という語だけで辞書攻撃を選んでしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「リスト」に何が入っていて、**どこに試すのか**を読み分けます。単語だけの候補集と、利用者IDとパスワードが組になった流出情報は異なります。",
+          "remainingWork": "候補リストの内容と試行先を確認",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "パスワードリスト攻撃は、あるサービスから漏えいした**IDとパスワードの組**を、**別のサービスのログイン**へ流用する手口です。パスワードを使い回す利用者が狙われます。",
+          "remainingWork": "正答の攻撃の仕組みを定義から理解",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一般的な単語を順に試すのは辞書攻撃、入手したハッシュ値を候補表と照合するのはハッシュ解析です。流出した認証情報を**別サイトへ試す**記述を選びます。",
+          "remainingWork": "辞書攻撃・ハッシュ解析などとの違いを確認",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r06a/r06a-q40.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 238bf9e8e5dae2035a33e58b58dc9d2e3498ecd45ea1a846138b73e19a0893e9。",
+        "context記載の正答 ウ を確認。作者の判断: 原本ア辞書候補、イハッシュ対応表、ウ流出したID・パスワードを別Webサイトへ試行、エ録画した入力。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r04a-q45",
     "baseVersion": 2,
     "baseLessonSHA256": "b7695fae0d3134ce19e930efb9faf957cc129c8e3476561424db96b98f3e3bed",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q45",
-      "summary": "イ。問題を起こしそうな入力を与え、異常を観測する手法です。",
+      "summary": "ファジングによる脆弱性検査を、負荷試験・辞書攻撃・エスケープ処理から見分ける。",
       "explanation": "ファジングは、想定外・不正・境界的なデータをソフトウェアへ入力し、クラッシュなどの異常を監視して脆弱性を探すテストです。大量のアクセスを送ること自体や、入力を無害化する処理とは異なります。",
       "choiceReasons": [
         "大量リクエストで処理量や耐性を測るのは負荷テストです。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で変えるものがアクセス量、入力内容、パスワード、文字表現のどれかを確認します。",
+          "text": "各肢で何を変え、何を観測するかを分けます。アクセスの**件数**を増やす試験と、データの**形式や内容**を揺さぶる試験は目的が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ソフトウェアが予期しない値や形式を受けたときの挙動を観測するテストを考えます。",
-          "revealsAnswer": false
+          "text": "ファジングでは長さが極端、不正な形式、予期しない組合せなどのデータを入力し、**クラッシュや例外処理などの挙動**を観測して脆弱性を探します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "問題を起こしそうな多種類のデータを入力して異常を監視する候補を選びます。",
+          "text": "負荷耐性の測定、パスワード候補の試行、特殊文字を置換するエスケープは、それぞれ別の操作です。**問題を起こしそうな多様な入力と挙動の監視**の組を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "「大量に送る」ことだけを目印にし、入力内容の変化と異常監視の役割を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各肢で何を変え、何を観測するかを分けます。アクセスの**件数**を増やす試験と、データの**形式や内容**を揺さぶる試験は目的が異なります。",
+          "remainingWork": "入力量と入力内容の違いを理解",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ファジングでは長さが極端、不正な形式、予期しない組合せなどのデータを入力し、**クラッシュや例外処理などの挙動**を観測して脆弱性を探します。",
+          "remainingWork": "異常入力による脆弱性発見の仕組みを学ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
+        },
+        {
+          "newInformation": "負荷耐性の測定、パスワード候補の試行、特殊文字を置換するエスケープは、それぞれ別の操作です。**問題を起こしそうな多様な入力と挙動の監視**の組を選びます。",
+          "remainingWork": "他3肢の役割を除外して選ぶ",
+          "revealsAnswer": true,
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r04a/r04a-q45.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 87925c57ea614b546595cd33051303015f8091520b4d83a7396debd7dafa45e3。",
+        "context記載の正答 イ を確認。作者の判断: 原本ア大量リクエスト負荷、イ異常入力と監視、ウ辞書攻撃、エエスケープ。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r04h-q45",
     "baseVersion": 2,
     "baseLessonSHA256": "001112d181f3340f2e25b29c2920448b32f6045fb47daf23692c15ddafa05cc7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q45",
-      "summary": "ウ。多様な問題を起こしそうな入力で挙動を調べるのがファジングです。",
+      "summary": "ファジングを、ポートスキャン・ログ監視・パケットシグネチャ検査と区別する。",
       "explanation": "ファジングは想定外・不正・境界的なデータなどを自動的に入力し、異常終了やメモリ破壊等の挙動から脆弱性を探す手法です。既知の攻撃パターン照合だけに限定せず、入力に対する処理の問題を発見します。ポート探索、ログ解析、通信監視とは試験対象と方法が異なります。",
       "choiceReasons": [
         "FINパケットへの応答から稼働サービスを探すのはポートスキャンの手法です。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の作業を「通信の応答観測」「ログ解析」「入力を与える」「通信パターン照合」に分けます。",
+          "text": "選択肢のうち**ソフトウェアへ入力を与える操作**と、既存の通信・ログを**受け取って調べる操作**を分けてください。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "入力の長さを極端にしたり、不正な形式を与えたりして、ソフトウェアが異常な動作をするか調べる試験を考えます。",
+          "text": "ファジングはテスト対象に想定外・不正・境界的なデータを投入し、例外、停止、異常動作などを観測します。**攻撃パターンの一致を監視するだけ**の手法ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "多様な問題を起こしそうなデータをソフトウェアに入力して挙動を監視する候補がファジングです。",
+          "text": "FIN送信によるサービス探索はポートスキャン、ログ解析は監査、パケットの既知パターン照合は侵入検知です。**入力して挙動を監視する**肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "既知の攻撃を探す監視と、テスト対象に自分から異常入力を与える試験を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "選択肢のうち**ソフトウェアへ入力を与える操作**と、既存の通信・ログを**受け取って調べる操作**を分けてください。",
+          "remainingWork": "入力の能動的生成と観測だけの違いを理解",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ファジングはテスト対象に想定外・不正・境界的なデータを投入し、例外、停止、異常動作などを観測します。**攻撃パターンの一致を監視するだけ**の手法ではありません。",
+          "remainingWork": "ファジングの入力・観測・目的を把握",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "FIN送信によるサービス探索はポートスキャン、ログ解析は監査、パケットの既知パターン照合は侵入検知です。**入力して挙動を監視する**肢を選びます。",
+          "remainingWork": "他3肢の機能と分けて正答を決める",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r04h/r04h-q45.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: bf69cea71c6c8318d1fc4b9836597358fa3da1edfb05bead50b00465b4bd8d8b。",
+        "context記載の正答 ウ を確認。作者の判断: 原本アFINスキャン、イログ改ざん検知、ウ問題データの投入と挙動監視、エパケットのパターン照合。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r05a-q46",
     "baseVersion": 2,
     "baseLessonSHA256": "f2e600a9c33ed98b67beef3efce1458f8fc1b8cd0608154fc93b9b786789bd28",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q46",
-      "summary": "ウのファジング。多様な異常入力を与えて応答や挙動を観測します。",
+      "summary": "問題を誘発する大量の入力でソフトウェアの脆弱性を探すテストの名称を判定する。",
       "explanation": "ファジングは、問題を誘発しそうなデータを大量に生成・入力し、クラッシュや異常動作などを監視してソフトウェアの脆弱性を検出するテスト手法です。\n負荷の大きさを主目的にするロードテストや、入力範囲の境界を選ぶ限界値分析とは、入力の選び方と検出目的が異なります。",
       "choiceReasons": [
         "入力範囲の境界値付近を重点的に選ぶ手法です。大量の異常入力を生成して脆弱性を探す方式とは異なります。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「問題を引き起こす可能性があるデータ」と「脆弱性を検出」を確認します。単に多数の利用者を同時接続する条件ではありません。",
+          "text": "設問の『大量に入力』の目的は処理速度ではなく、**脆弱性につながる異常な応答・挙動**を発見することです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "形式不正などの多様な入力を大量に与え、クラッシュや異常挙動を検出するテストを思い出します。",
+          "text": "入力形式の破損、極端な値、意外なデータの組合せを多数送り、クラッシュや異常応答を見つけるのが**ファジング**です。未知の不具合を探すテストに向きます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "fuzzは乱れた・不規則な入力に由来する語です。異常入力による検査の名称を選びます。",
+          "text": "限界値分析は境界値を重点的に調べ、実験計画法は因子の組合せ、ロードテストは性能・負荷を調べます。名称と入力方法・観測目的が一致する肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "限界値分析・実験計画法・負荷試験がどれも多数の条件を扱うため区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問の『大量に入力』の目的は処理速度ではなく、**脆弱性につながる異常な応答・挙動**を発見することです。",
+          "remainingWork": "テストで見たい故障の種類を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "入力形式の破損、極端な値、意外なデータの組合せを多数送り、クラッシュや異常応答を見つけるのが**ファジング**です。未知の不具合を探すテストに向きます。",
+          "remainingWork": "ファジングの目的と具体的な入力を理解",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "限界値分析は境界値を重点的に調べ、実験計画法は因子の組合せ、ロードテストは性能・負荷を調べます。名称と入力方法・観測目的が一致する肢を選びます。",
+          "remainingWork": "他の試験方法を対比して肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r05a/r05a-q46.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: f50eac9435effce779dc996dac6091428585c82e3be20fd656597942f0237821。",
+        "context記載の正答 ウ を確認。作者の判断: 原本ア限界値、イ実験計画、ウファジング、エロードテスト。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r05h-q36",
     "baseVersion": 2,
     "baseLessonSHA256": "1d185f63acb8afc1f13ae9f362b86fcc9e97b8ecc0c17fcd5a3bdf99d989e45b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q36",
-      "summary": "C&Cサーバは感染したボットへ情報収集や攻撃を指示します。",
+      "summary": "ボットネットのC&Cサーバが、感染機器に対して担う役割を理解する。",
       "explanation": "C&CはCommand and Controlです。ボットネットでは、遠隔操作可能なマルウェアに感染した多数の機器へ指令を送り、情報収集やDDoSなどの攻撃を実行させる役割を担います。攻撃側の指揮系統を述べるアが該当します。防御側が不正な通信を遮断する装置とは異なります。",
       "choiceReasons": [
         "遠隔操作可能なマルウェアを指揮して情報収集や攻撃を行わせます。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "ボットネットは遠隔操作される感染端末の集まりです。サーバがどこを指揮するかを考えます。",
+          "text": "ボットネットは、外部から操作され得るマルウェア感染機器の集まりです。**C&Cサーバ**がどの立場で、誰へ情報を送るかを考えましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "C&CのCommand and Controlを、感染端末へ送る操作指示と結び付けます。",
+          "text": "C&Cは**Command and Control（指揮・制御）**。攻撃者側の指令を感染端末へ送り、情報の収集や攻撃の開始などを遠隔操作します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "感染端末に「情報を集める」「攻撃を開始する」と命令する役割を述べる候補を選びます。",
+          "text": "不正通信を遮断する防御装置、証明書発行、Webコンテンツ管理は目的が違います。**感染端末に情報収集や攻撃を命令する**説明を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ボットネットが攻撃を指揮する側なのか、防御側の遮断装置なのか混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ボットネットは、外部から操作され得るマルウェア感染機器の集まりです。**C&Cサーバ**がどの立場で、誰へ情報を送るかを考えましょう。",
+          "remainingWork": "攻撃者と感染端末の関係を知る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "C&Cは**Command and Control（指揮・制御）**。攻撃者側の指令を感染端末へ送り、情報の収集や攻撃の開始などを遠隔操作します。",
+          "remainingWork": "C&Cの語義と指令の具体例を理解",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不正通信を遮断する防御装置、証明書発行、Webコンテンツ管理は目的が違います。**感染端末に情報収集や攻撃を命令する**説明を選びます。",
+          "remainingWork": "他の機能を除外して選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r05h/r05h-q36.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: cb9feebdfbc4314c313efa8133f9593c1407f4367affa47d8d4a3462902915fc。",
+        "context記載の正答 ア を確認。作者の判断: 原本アマルウェアへ情報収集・攻撃の指示、イ攻撃通信遮断、ウ証明書発行、エWeb情報の管理。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r07a-q43",
     "baseVersion": 2,
     "baseLessonSHA256": "764ec220a9b6b5e8ea2663dbcc754ad8e199b81c0aefaaf77abbfefa92422bb9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q43",
-      "summary": "ウ。UDP送信に対するICMP port unreachableは閉じたポートの応答です。",
+      "summary": "TCPのSYN応答とUDPのICMPエラーからポートの開閉を判定する。",
       "explanation": "TCPのSYNに対してSYN/ACKが来れば接続要求を受け入れる開いたポート、RST/ACKなら拒否される閉じたポートと判断します。\nUDPにはTCPのような接続応答がありません。指定ポートを利用できない場合に返るICMP port unreachableは、そのポートが閉じていることを示します。無応答だけでは開放とフィルタリングを区別できない場合があります。",
       "choiceReasons": [
         "RST/ACKは接続の拒否・リセットを示し、許可ではありません。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "TCPの接続開始はSYN→SYN/ACK→ACKです。この2番目が返るときの意味を確認します。",
+          "text": "TCPでは接続開始時に**SYN**を送り、許可されれば通常**SYN/ACK**が返ります。拒否された場合はRSTなどのリセット応答です。両者の意味を先に分けましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "RSTはリセットです。受け付ける応答と拒否する応答を取り違えないようにします。",
+          "text": "UDPはコネクションレスなのでTCPのようなSYN応答はありません。宛先ポートを使えない場合、**ICMP port unreachable**という到達不能のエラーが返ることがあります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "UDPの選択肢は同じICMP応答を示し、開閉の判定だけが逆です。port unreachableの「ポートに到達できない」という意味を使いましょう。",
+          "text": "原本では同じ`ICMP port unreachable`を『開いている／閉じている』とする二肢があります。**port unreachable＝その宛先ポートが利用不能**という意味で選びます。応答がないだけの場合は、開放とフィルタリングが区別できないこともあります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "TCPのSYN/ACKとRST/ACKを逆に覚え、UDPにも同様の接続応答があると思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "TCPでは接続開始時に**SYN**を送り、許可されれば通常**SYN/ACK**が返ります。拒否された場合はRSTなどのリセット応答です。両者の意味を先に分けましょう。",
+          "remainingWork": "TCPの受理応答とリセットを分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "UDPはコネクションレスなのでTCPのようなSYN応答はありません。宛先ポートを使えない場合、**ICMP port unreachable**という到達不能のエラーが返ることがあります。",
+          "remainingWork": "UDPのICMPエラーの意味を理解",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原本では同じ`ICMP port unreachable`を『開いている／閉じている』とする二肢があります。**port unreachable＝その宛先ポートが利用不能**という意味で選びます。応答がないだけの場合は、開放とフィルタリングが区別できないこともあります。",
+          "remainingWork": "ICMP応答に対応する閉状態の肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r07a/r07a-q43.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 417988fa2c6b8d369d191ab2e584cea0c2bacde335098757941b479f1f1668a0。",
+        "context記載の正答 ウ を確認。作者の判断: 原本アRST/ACKを接続許可と誤認、イSYN/ACKを拒否と誤認、ウICMP port unreachableを閉とする、エを開とする。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r05a-q38",
     "baseVersion": 2,
     "baseLessonSHA256": "5415e471abf58d23391d365048cd29951e883f1fc62b3348e4928fafbd346bb1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q38",
-      "summary": "ウ。外部から他社宛てのメールを自社サーバが中継しています。",
+      "summary": "外部ネットワークからの第三者メール中継を、正規送信と正規受信から識別する。",
       "explanation": "第三者中継は、自社の送信者・受信者ではない外部同士のメールを自社の中継サーバが転送することです。設問ではIPアドレスとドメインは詐称されていません。\nウは接続元BBB.45.67.89が社外、送信者a.b.dも他社、受信者a.b.eも他社です。自社と無関係の外部間の転送に当たります。エは外部から自社宛てなので通常の受信です。",
       "choiceReasons": [
         "接続元と送信者が自社で、他社宛ての正規の送信に当たります。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "自社はAAAで始まる二つのIPとa.b.cです。各行に社内・社外の印を付けます。",
+          "text": "表の3列を**接続元IP・送信者ドメイン・受信者ドメイン**に分けます。自社IPは`AAA...`、自社ドメインは`a.b.c`、`BBB...`と`a.b.d/e`は社外です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "外部からの接続だけでは第三者中継と断定できません。受信者が自社なら通常の受信です。送信者と受信者の所属も確認します。",
+          "text": "第三者中継は、自社と無関係な**社外送信者→社外受信者**のメールを、自社のサーバが中継することです。社外から自社宛ては通常の受信、自社から社外宛ては通常の送信です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "BBBの接続元で、送信者も受信者もa.b.c以外の行を探します。自社宛てでない外部間の転送を見つけましょう。",
+          "text": "各行を社内・社外で印付けし、**接続元も社外、送信者も受信者も他社ドメイン**の行を探します。接続元が社外でも受信先が`a.b.c`なら通常の自社宛て受信です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "接続元が社外であればすべて不正中継と思い、送受信ドメインの組合せを見ない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表の3列を**接続元IP・送信者ドメイン・受信者ドメイン**に分けます。自社IPは`AAA...`、自社ドメインは`a.b.c`、`BBB...`と`a.b.d/e`は社外です。",
+          "remainingWork": "自社／社外のIPとドメイン条件を知る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "第三者中継は、自社と無関係な**社外送信者→社外受信者**のメールを、自社のサーバが中継することです。社外から自社宛ては通常の受信、自社から社外宛ては通常の送信です。",
+          "remainingWork": "第三者中継と通常の送受信を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各行を社内・社外で印付けし、**接続元も社外、送信者も受信者も他社ドメイン**の行を探します。接続元が社外でも受信先が`a.b.c`なら通常の自社宛て受信です。",
+          "remainingWork": "該当する3条件をすべて適用する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r05a/r05a-q38.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 7458fba37a1a63cc91a0171ef241e0587835048e52e448e0ce6da82e2085649c。",
+        "context記載の正答 ウ を確認。作者の判断: 原本ウはBBB.45.67.89、送信a.b.d、受信a.b.eで全て外部。エはBBBの社外接続でも受信は自社a.b.c。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r05a-q43",
     "baseVersion": 2,
     "baseLessonSHA256": "89a0f32da0900d373e0a1b7afd1e0c3abbef639d34d9d0a5bf3213c36371d4f3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q43",
-      "summary": "ア。WORMのバックアップは保存済みデータの上書きを防げます。",
+      "summary": "ランサムウェアに備えるバックアップの不変性を、RAIDや常時複製と区別する。",
       "explanation": "ランサムウェアは書込み可能なデータを暗号化するなどして利用不能にします。重要なのは、PC上のデータが破壊されても復元に使えるバックアップを残すことです。\nWORMは一度書いたデータを後から変更できないため、保存済みのバックアップがランサムウェアによって上書きされる危険を低減できます。RAIDや常時複製は暗号化された変更も保存先へ反映され得ます。",
       "choiceReasons": [
         "一度書いたデータを変更できないWORMへバックアップするので、保存済みデータの不正な上書きを防げます。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "被害はディスクの物理故障ではなく、データの不正な書換えです。バックアップ側まで書換えられるか確認します。",
+          "text": "ランサムウェアはファイルを書き換えて暗号化するため、物理ディスクの故障と**論理的な改ざん・暗号化**は別の被害です。バックアップ自身が書換え可能か確認します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Write Once Read Manyは一度書いた後の変更を許さない方式です。感染しても保存済みバックアップを上書きできるか考えます。",
+          "text": "**WORM（Write Once Read Many）**は一度書いたデータを後から上書きできない特性です。保存済みバックアップを改変できなければ、復元できる状態を保持しやすくなります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "RAID・常時複製・書込み可能な共有フォルダと、変更不能なバックアップを比較し、元データが残る方式を選びます。",
+          "text": "RAID5はディスク故障への対策、常時レプリケーションや書込み可能なネットワーク共有は暗号化変更も反映され得ます。**書換えできない保存済みのバックアップ**を選びましょう。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ディスク故障に強い構成ならランサムウェアにも強いと思い、暗号化された変更の複製を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ランサムウェアはファイルを書き換えて暗号化するため、物理ディスクの故障と**論理的な改ざん・暗号化**は別の被害です。バックアップ自身が書換え可能か確認します。",
+          "remainingWork": "論理的な暗号化と物理故障の差を理解",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**WORM（Write Once Read Many）**は一度書いたデータを後から上書きできない特性です。保存済みバックアップを改変できなければ、復元できる状態を保持しやすくなります。",
+          "remainingWork": "WORMの不変性と復元可能性を把握",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "RAID5はディスク故障への対策、常時レプリケーションや書込み可能なネットワーク共有は暗号化変更も反映され得ます。**書換えできない保存済みのバックアップ**を選びましょう。",
+          "remainingWork": "RAID・常時複製・共有フォルダとの違いを確かめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r05a/r05a-q43.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: aacb72f9de293914dd79068e75b20114b26a4f9dcedfb26e8ebb3a6438dddc54。",
+        "context記載の正答 ア を確認。作者の判断: 原本アWORMにバックアップ、イRAID5、ウ内蔵常時レプリケーション、エ書込可能なネットワークドライブ。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
     "id": "r04a-q41",
     "baseVersion": 2,
     "baseLessonSHA256": "a219dd63e100d54f15075be0dcdfee28889def8706c1daad720a3f102fedb1d8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch21-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q41",
-      "summary": "イ。リスク特定・分析・評価の三つです。",
+      "summary": "JIS Q 31000:2019のリスクアセスメントを構成する三つのプロセスを区別する。",
       "explanation": "リスクアセスメントでは、リスクを特定し、発生可能性や影響を分析し、基準と比較して評価します。受容や対応は、評価結果を踏まえてどう扱うかを決める段階であり、この三つに含まれません。",
       "choiceReasons": [
         "分析が抜け、受容が入っているため不適切です。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の動詞を、調べる活動と処置を決める活動に分けます。",
+          "text": "まずリスクを**見つけて判断する活動**と、その後で**受け入れる／対策する活動**を分けます。設問は2019年版JISのアセスメントの範囲です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "何が起こるかを見つけ、その性質を調べ、基準に照らすという順を考えます。",
-          "revealsAnswer": false
+          "text": "リスクアセスメントは、**リスク特定→リスク分析→リスク評価**の三つで構成されます。何が起きるかを見つけ、起こりやすさと結果を調べ、基準に照らします。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "特定・分析・評価をそろえ、対応や受容を含まない組合せを選びます。",
+          "text": "**リスク対応**や**リスク受容**は評価後の扱いであり、アセスメントの三要素そのものではありません。特定・分析・評価だけを含む組合せを選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "リスク受容・対応もリスクアセスメントの一部だと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "まずリスクを**見つけて判断する活動**と、その後で**受け入れる／対策する活動**を分けます。設問は2019年版JISのアセスメントの範囲です。",
+          "remainingWork": "評価作業と対応・受容の段階を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原理や確認方法は示すが、原本選択肢の条件適用または肢の比較がまだ残るため非開示とする。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "リスクアセスメントは、**リスク特定→リスク分析→リスク評価**の三つで構成されます。何が起きるかを見つけ、起こりやすさと結果を調べ、基準に照らします。",
+          "remainingWork": "アセスメント三工程を具体的に理解",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
+        },
+        {
+          "newInformation": "**リスク対応**や**リスク受容**は評価後の扱いであり、アセスメントの三要素そのものではありません。特定・分析・評価だけを含む組合せを選びます。",
+          "remainingWork": "3工程の組合せを原本の肢から特定する",
+          "revealsAnswer": true,
+          "reason": "問題文・4肢・先行ヒントを合わせると正答肢の定義または必要条件を実質的に特定できるため開示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubから原本 assets/questions/r04a/r04a-q41.webp を取得・表示し、問題文と全選択肢（表がある場合は各列）を目視照合。context記載の原本SHA256: 4b6fb455b9a82f4386e954648cce10f5a917c7e1fae1f1a84cb217c221d4192b。",
+        "context記載の正答 イ を確認。作者の判断: 原本ア特定・評価・受容、イ特定・分析・評価、ウ分析・対応・受容、エ分析・評価・対応。",
+        "原本画像は表示・確認済み。公式解答PDFの独立照合・独立レビュー・公開反映は別担当。"
+      ]
     }
   },
   {
