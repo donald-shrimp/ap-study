@@ -3,12 +3,12 @@
     "id": "r03h-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "7589a9802071ea0bc111fa2f359226b235b0660b327786f8a1b2ad6331e21847",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q25",
-      "summary": "ウ。Sを0にして戻すとX=1、Y=0を保持します。",
-      "explanation": "図は交差帰還をもつNAND二個の回路でX=¬(S∧Y)、Y=¬(R∧X)です。S=0にするとX=1となり、R=1だからY=0になります。Sを1へ戻してもX=¬(1∧0)=1、Y=¬(1∧1)=0となり、その状態を保持します。",
+      "summary": "交差帰還をもつ論理回路で、入力を変えて戻した後の保持状態を追う。",
+      "explanation": "NANDはAND（両入力が1のときだけ1）の結果を反転する回路です。式の¬は否定（0と1の反転）、∧はANDを表します。図は交差帰還をもつNAND二個の回路でX=¬(S∧Y)、Y=¬(R∧X)です。S=0にするとX=1となり、R=1だからY=0になります。Sを1へ戻してもX=¬(1∧0)=1、Y=¬(1∧1)=0となり、その状態を保持します。",
       "choiceReasons": [
         "S=R=1でX=Y=0なら両出力は1へ変わるので安定状態ではありません。",
         "操作前の状態で、S=0がXを1へ変える効果を反映していません。",
@@ -18,58 +18,67 @@
       "takeaway": "帰還回路は入力を戻した後も、変化後の出力を次の入力に使う。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "上のANDとNOTを合わせて、XをSとYの式で書きます。",
+          "title": "帰還と反転を読む",
+          "text": "上段にはSとY、下段にはRとXが入ります。ANDは両入力が1のときだけ1、その後のNOTは0と1を逆にします。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "Sを0にすると、もう一方の入力に関係なく上のNAND出力が1になります。それを下へ帰還させます。",
+          "title": "入力を変えた順に追う",
+          "text": "上段の式はX=¬(S∧Y)です。S=0ならANDの結果が0になるのでX=1。そのXを下段のY=¬(R∧X)へ入れます。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "X=1が下のNANDに入りY=0。Sを戻してもX=1,Y=0を保ちます。",
+          "title": "戻した後を確認する",
+          "text": "R=1、X=1からY=0です。Sを1へ戻してもX=¬(1∧0)=1、Y=¬(1∧1)=0となり、この状態が保たれます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "帰還先を取り違える、又は入力を戻すと出力も初期値へ戻ると思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "相互帰還の接続先とAND・NOTの動作",
+          "remainingWork": "各段を式にして操作順に代入する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "出力値はまだ計算していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "S=0でX=1となる理由と、次に代入する下段の式",
+          "remainingWork": "Yを計算し、Sを戻した後も再計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中のXのみで、最終組合せを得るには帰還を追う必要がある。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Y=0及びS復帰後の両式の自己整合",
+          "remainingWork": "保持の仕組みを読み直す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終X=1,Y=0を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints",
+        "explanation"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r03h/r03h-q25.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf を取得し問25＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：X=¬(S∧Y)、Y=¬(R∧X)。S:1→0→1で(X,Y):(0,1)→(1,0)→(1,0)。ア00/エ11は復帰後の両式を満たさず、イは初期状態のまま。",
+        "独立確認者4の指摘により、解説単独の記号・略語・変数の定義又はH3の具体例を補足。原本条件と解答は維持。"
+      ]
     }
   },
   {
     "id": "r05a-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "ad37f95f534be3d949f02e01f29fe849747e621d3f9635386ca515659ce9f2c4",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q22",
-      "summary": "ウ。操作後はX=1、Y=0となり、その状態を保持します。",
+      "summary": "相互に出力を帰還させたNAND回路の、入力変更後の安定状態を求める。",
       "explanation": "上段はSとYのANDを反転するのでX=¬(S∧Y)、下段はRとXのANDを反転するのでY=¬(R∧X)です。\nSを0にすると、Yに関係なくX=1になります。R=1なのでY=¬(1∧1)=0です。その後Sを1に戻しても、X=¬(1∧0)=1、Y=¬(1∧1)=0で矛盾なく保持されます。",
       "choiceReasons": [
         "R=S=1でX=Y=0を入れると両出力が1へ変わるため、保持状態ではありません。",
@@ -80,58 +89,65 @@
       "takeaway": "相互接続回路は入力変更時を先に追い、戻した後の値が自己整合するか確かめる。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "上段ANDへのもう一方の入力はY、下段ANDへのもう一方の入力はXです。交差する線の接続先を追います。",
+          "title": "交差する線の接続先",
+          "text": "上段のANDにはSとY、下段にはRとXが入ります。三角形の先の小丸は、直前の値の0と1を逆にするNOTです。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "ANDの後に反転があるのでNANDです。入力の片方を0にすると出力はもう片方によらず1になります。",
+          "title": "NANDの規則",
+          "text": "ANDは両入力が1のときだけ1です。ANDの後にNOTを置くNANDでは、片方が0なら出力は1。式はX=¬(S∧Y)、Y=¬(R∧X)です。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "S=0を上段へ入れてXを求め、そのXとR=1でYを求めます。最後にS=1へ戻して同じ二式を確認しましょう。",
+          "title": "操作を二つに分ける",
+          "text": "まずS=0としてXを計算し、そのXとR=1でYを計算します。次に、得られたYを使ってS=1の式を再計算し、両出力が変わらないか調べます。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "線の交差を接続点と誤認し、NANDの帰還を順番に追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "上段S,Y／下段R,Xという接続とNOT記号",
+          "remainingWork": "ANDを含めた回路動作を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式や出力の最終値を渡していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ANDとNANDの真理値及び二つの帰還式",
+          "remainingWork": "S=0とS=1の順に式へ代入する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般式とゲート規則であり、与件の代入・状態確認を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一時変更と復帰を分ける具体的な計算順",
+          "remainingWork": "二段の値を求めて復帰後の整合性を確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終数値は出さず、計算と安定性判定が残る。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r05a/r05a-q22.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf を取得し問22＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：上段NAND=¬(S∧Y)、下段=¬(R∧X)。S=0でX=1、R=1でY=0、S=1でも双方不変。00と11は不整合、01は操作前。"
+      ]
     }
   },
   {
     "id": "r05a-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "cf4e1647d8c5520617dd5b45b890836f656aa90f5a22b224e98799a488dd44f5",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q23",
-      "summary": "ア。二つ以上が1ならAB、BC、CAのいずれかが1になります。",
+      "summary": "三入力のうち二つ以上が1のとき出力1となる多数決回路を、真理値表と対応させる。",
       "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
       "choiceReasons": [
         "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
@@ -160,40 +176,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "多数決という語から回路を想像できず、AND・OR・XORや反転丸を読み違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "真理値表を1の個数でまとめる視点",
+          "remainingWork": "出力1の条件を抽出する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "回路の選択やゲート構成は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二つ以上の1をAB・BC・CAのANDのORで表す",
+          "remainingWork": "図のANDとORの位置を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答回路と実質同じ構成を教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "左側AND三個と右側ORという図上の対応、反転丸の注意",
+          "remainingWork": "図記号を見分ける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段と合わせてアを直接識別できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r05a/r05a-q23.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf を取得し問23＝アと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：000,001,010,011,100,101,110,111についてアのAB∨BC∨CAは00010111。イは100で1、ウ/エは000で1となり不適合。"
+      ]
     }
   },
   {
     "id": "r04a-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "5c10a852b557662ed86d30388a4a16028d661e65b709e56a243896dcfa8a8107",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q23",
-      "summary": "ウ。NANDを組み合わせた回路が同値を判定します。",
+      "summary": "入力が一致する00と11だけを1にする論理を、各回路の反転位置から判定する。",
       "explanation": "入力が等しいのは00と11です。ウの上段は¬(XY)、下段は¬(¬X¬Y)、最後もNANDなのでZ=¬{¬(XY)・¬(¬X¬Y)}=XY+¬X¬Yとなります。00と11で1、01と10で0です。",
       "choiceReasons": [
         "(XY)・(¬X¬Y)なので、同時に成立せず常に0です。",
@@ -204,58 +226,65 @@
       "takeaway": "同値判定は00と11の真理値を確かめ、出力の否定も式に含める。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "入力00,01,10,11の四行を作り、求めるZを先に書きます。",
+          "title": "必要な真理値を決める",
+          "text": "X,Yが00と11ならZ=1、01と10ならZ=0が必要です。この4行を、各候補の出力と比べます。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "まずアの上段はXとYのANDなのでXY、下段はそれぞれを反転してANDなので¬X¬Yと書けます。各候補も同じように二段を式にし、出力端の小丸があればその段全体を否定します。",
+          "title": "ゲートを式にする",
+          "text": "ANDは両方1のときだけ1、ORは片方でも1なら1です。三角形や出力端の小丸はNOTを表し、その直前の結果を反転します。線を入力から順に追い、最後のゲートまで計算します。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "ウは¬{¬(XY)・¬(¬X¬Y)}です。外側の否定をド・モルガンで展開します。",
+          "title": "NANDを組み合わせる",
+          "text": "ウはZ=¬{¬(X∧Y)∧¬(¬X∧¬Y)}です。ド・モルガンの法則¬(P∧Q)=¬P∨¬Qで展開すると、(X∧Y)∨(¬X∧¬Y)。11又は00のときだけ1になります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "出力端の小丸を落とし、AND/ORとNAND/NORを同じに計算する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "求める四行は00→1,01→0,10→0,11→1",
+          "remainingWork": "各候補を評価する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "設問の条件を真理値へ直した段階で、回路選択は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AND・OR・NOTの規則とゲート順の計算法",
+          "remainingWork": "各候補の全段を計算して真理値を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般的な規則のみで正答候補を指定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ウの式とド・モルガンによる同値論理への変形",
+          "remainingWork": "式と真理値の関係を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢ウと一致条件を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r04a/r04a-q23.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf を取得し問23＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：入力00,01,10,11順にア0000、イ1111、ウ1001、エ0110。最後の反転まで計算し公式ウと一致。"
+      ]
     }
   },
   {
     "id": "r03a-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "7bb64f016bde334736d31e29cd49a74cb7bf0956090e501b894a78bee49a12e9",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q22",
-      "summary": "ア。桁上がりXはAND、和YはXORです。",
+      "summary": "1桁の2進加算で、桁上がりと下位桁の和を別々の論理出力として求める。",
       "explanation": "入力A,Bが00、01、10、11のとき、和はそれぞれ00、01、01、10です。桁上がりXは11のときだけ1なのでANDです。下位の和Yは入力が異なるときだけ1なのでXORです。図アでは上側がAND、下側が入力側に曲線を追加したXORで、半加算器を構成しています。",
       "choiceReasons": [
         "XがAND、YがXORで、四つの入力組合せの加算結果に一致します。",
@@ -266,58 +295,65 @@
       "takeaway": "半加算器は桁上がりAND、和XOR。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "A,Bの組合せ00、01、10、11について、2進数の加算結果を2桁で書きます。",
+          "title": "2桁で加算結果を書く",
+          "text": "1+1は2進数で10です。A,Bの00、01、10、11をそれぞれ加算し、結果の上位桁をX、下位桁をYに分けます。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "上位桁Xが1になる入力と、下位桁Yが1になる入力を別々に取り出し、論理ゲートの真理値表に対応させます。",
+          "title": "ゲートの規則と照合する",
+          "text": "ANDは両方1のときだけ1、ORは片方でも1なら1、XORは入力が異なるときだけ1です。XとYそれぞれの4行をこの規則と比べます。XORの図記号はORの入力側に曲線を一本追加した形です。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "Xは11だけで1となるAND、Yは01と10で1となるXORなので、アの回路です。",
+          "title": "二つの出力を確認する",
+          "text": "桁上がりXは11だけで1となるAND、和Yは01と10だけで1となるXORです。上側AND・下側XORのアが半加算器になります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "二進加算の桁上がりと下位桁を混同し、ORとXORの記号も区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1+1=10と上位X・下位Yという対応",
+          "remainingWork": "四種類の加算結果を作る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "四行の出力やゲートの答えをまだ与えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AND・OR・XORの真理値規則とXOR記号",
+          "remainingWork": "加算結果のX,Yに各規則を対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般規則を示し、与件の加算・照合を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "X=AND,Y=XORの対応と図ア",
+          "remainingWork": "二出力で加算を表す仕組みを理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答回路と両出力を直接示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r03a/r03a-q22.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf を取得し問22＝アと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：00,01,10,11の(X,Y)は00,01,01,10。イは01/10で桁上がり、ウは01/10で上下が逆、エは11の下位和が1になる。"
+      ]
     }
   },
   {
     "id": "r06h-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "0575f41869996b8101e6f99455a1e80960c0d612bcdcc39d82046af63edcd4d0",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q21",
-      "summary": "AとBが両方1のときだけ0を出すので、否定論理積（NAND）です。",
+      "summary": "タイムチャートを入力と出力の組に直し、論理ゲートの真理値と照合する。",
       "explanation": "NANDは、ANDの出力を反転した回路です。ANDは両方の入力が1のときだけ1なので、NANDはそのときだけ0になります。\n図の出力は、(A,B)=(1,1)で0、(0,0)、(0,1)、(1,0)で1となっており、ウのNANDと一致します。",
       "choiceReasons": [
         "XORは入力が異なるときに1です。両方0なら0なので、図と一致しません。",
@@ -328,58 +364,65 @@
       "takeaway": "区間を1つずつ読む。候補の違いが出る入力を選ぶと、比べやすい。",
       "hints": [
         {
-          "title": "注目すること",
-          "text": "波形全体を一度に読まず、縦の点線で区切られた1区間を選びます。AとBの値、そのときのYを並べましょう。",
+          "title": "同じ時刻の三本を読む",
+          "text": "波形の高い水平線が1、低い水平線が0です。縦の点線で区切られた区間ごとに、同じ時刻のA、B、Yを一組として記録します。",
           "revealsAnswer": false
         },
         {
-          "title": "違いが出る区間を探す",
-          "text": "まずAとBが両方1の区間を見ます。次に両方0の区間を見ます。この2種類の入力で、候補の回路を比べましょう。",
+          "title": "図記号の意味",
+          "text": "アは入力が異なるとき1のXOR、イはその出力を反転したXNORです。ウは両方1のときだけ1のANDを反転したNAND、エは片方でも1なら1のORを反転したNORです。波形から読んだ組と比べます。",
           "revealsAnswer": false
         },
         {
-          "title": "候補を確かめる",
-          "text": "図では、A=B=1のときY=0、A=B=0のときY=1です。さらにA=0、B=1のときもY=1。各候補の真理値と一致するか確認します。",
+          "title": "四種類の入力で確認",
+          "text": "波形では00、01、10のときY=1、11のときだけY=0です。ANDの結果を逆にするNAND、すなわちウに一致します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "波形の時間区間をずらして読み、ゲートの真理値も分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "水平線の高さと同時刻の三値を一組で読む操作",
+          "remainingWork": "各区間のA,B,Yを読み取る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "どの候補かを示す真理値はまだ渡さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "全候補の論理ゲート名と一般の出力規則",
+          "remainingWork": "波形から読み取った値と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般規則を教える段階で、問題図の読み取りが残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "波形の全入力組と出力、NANDへの照合",
+          "remainingWork": "反転による出力の違いを理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "NAND及びウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r06h/r06h-q21.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf を取得し問21＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：左から(A,B,Y)は011,001,110,001,110,001,101。四入力へまとめると00→1,01→1,10→1,11→0。XORは00、XNORは11、NORは01で不一致。"
+      ]
     }
   },
   {
     "id": "r07h-q6",
     "baseVersion": 2,
     "baseLessonSHA256": "f0ca6f260685032e9feb80336720d43b7780d701f2e438fdf863b7bf5334fd86",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q6",
-      "summary": "ウ。0の挿入で節点2が不均衡になり、節点1を中心に右回転します。",
+      "summary": "AVL木への順次挿入で生じる最初の不均衡を見つけ、二分探索木の順序を保って回転する。",
       "explanation": "二分探索木では、小さい値を左、大きい値を右へ進めます。1は5→3→2と進んで2の左、0は5→3→2→1と進んで1の左へ入ります。\nAVL木は各節点の左右部分木の高さの差を1以内に保ちます。0を入れた後、最初に差が2になるのは節点2です。左の子1のさらに左へ挿入したため、2を右回転し、1の右の子を2にします。\n根5と右部分木7→6はそのままです。3の左側に1、その下に0と2があるウになります。",
       "choiceReasons": [
         "根を3へ変更する回転は不要です。最初の不均衡は節点2で解消できます。",
@@ -408,40 +451,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "探索木の挿入位置とAVLの高さ条件を同時に追えず、不要な回転をする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "小さい値を左に挿入し、1は2の左、0は1の左となる",
+          "remainingWork": "高さ差を調べて回転箇所を決める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "挿入位置は示すが、修正後の木はまだ出していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AVLの高さ差1以内と、最初に差2となる節点2",
+          "remainingWork": "左左型の不均衡を修正する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "回転の向きと結果が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "節点1を上げる右回転と残す枝の配置",
+          "remainingWork": "各図を対応させ回転を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウだけに一致する最終配置を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r07h/r07h-q6.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf を取得し問6＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：1挿入後は全節点の高さ差≦1。0挿入後2で左高さ2/右0となる。2を右回転し1の左0/右2、3の右4、根5の右7(左6)。他肢は不要な根/右部分木の変更。"
+      ]
     }
   },
   {
     "id": "r05a-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "08e09978da4250dc358927eb0588a0dce77e8205b8cd32d94875b26f8aa1f457",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q7",
-      "summary": "イのJSON。オブジェクトと配列でデータを表します。",
+      "summary": "名前と値の組及び順序付きリストを基本構造とするデータ記述形式を識別する。",
       "explanation": "JSONはJavaScriptのオブジェクト表記法を基にしたデータ交換用の記述形式です。「名前と値との組みの集まり」はオブジェクト、「値の順序付きリスト」は配列に対応します。\nたとえば{\"name\":\"A\",\"scores\":[10,20]}のように二つの構造を組み合わせて表せます。",
       "choiceReasons": [
         "文書を木構造のオブジェクトとして扱うためのモデル・APIで、設問のデータ記述仕様ではありません。",
@@ -452,59 +501,67 @@
       "takeaway": "JSONは名前と値のオブジェクト、順序付きの配列を組み合わせる。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "「JavaScriptを基に」「名前と値」「順序付きリスト」の三つを手掛かりにします。タグを使うという記述はありません。",
+          "title": "二種類の構造",
+          "text": "名前と値の組は、例えば名前nameに値Aを対応させる形です。順序付きリストは、10、20のように並び順にも意味がある値の列です。設問は、この両方を表す記述形式を探しています。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "名前と値の組はオブジェクト、順序付きリストは配列に対応します。この二つをそのまま使う記述形式を思い出します。",
-          "revealsAnswer": false
+          "title": "JSONの基本形",
+          "text": "JSON（JavaScript Object Notation）は、名前と値の組の集まりをオブジェクト{ }、値の順序付きリストを配列[ ]で表します。設問の二構造はこの定義に対応します。",
+          "revealsAnswer": true
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "JavaScript Object Notationの略称です。名称の頭文字と選択肢を照合しましょう。",
+          "title": "組み合わせた例",
+          "text": "JSONの例は{\"name\":\"A\",\"scores\":[10,20]}です。外側は名前と値の組、scoresの値は配列です。データの構造を記す形式であり、文書を操作するDOMやメッセージ交換のSOAPとは役割が違います。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "オブジェクトと配列という構造に対応する仕様名を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "名前と値の組と順序付きリストの具体的な意味",
+          "remainingWork": "仕様名との対応を判断する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "設問の構造を具体化するが名称を与えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "JSONの正式名称、オブジェクトと配列の記法",
+          "remainingWork": "定義と設問の対応を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答JSONを名称と定義で明示。"
+        },
+        {
+          "newInformation": "オブジェクトに配列を入れる例とDOM/SOAPの役割",
+          "remainingWork": "構造の組合せを読み取る",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みであり、例でもJSONを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r05a/r05a-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf を取得し問7＝イと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：JSONはオブジェクトと配列が二つの構造。DOMは文書操作のモデル/API、SOAPはXMLメッセージのプロトコル、XMLはタグによる記述。RFC 8259 §4/§5のobject/array定義も照合。",
+        "補助一次資料：RFC 8259 https://www.rfc-editor.org/rfc/rfc8259.txt を取得しobject/arrayの定義を確認。"
+      ]
     }
   },
   {
     "id": "r07a-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "d641f74a47f7c54199921647be3cbb8660e5be9f20408a0e28e3ee54eafc4a5d",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q7",
-      "summary": "ア。Scalaはオブジェクト指向と関数型の両方を扱います。",
-      "explanation": "Scalaはクラスやオブジェクトを用いるオブジェクト指向と、関数を値として扱う関数型の機能を備える言語です。\n型推論はありますが静的型付けです。代表的な実行形態はJVM向けのバイトコードで、ネイティブコード生成が必須という説明は合いません。",
+      "summary": "Scalaのプログラミング方式、継承、実行形式、型付けの特徴を区別する。",
+      "explanation": "Scalaはクラスやオブジェクトを用いるオブジェクト指向と、関数を値として扱う関数型の機能を備える言語です。\n型推論はありますが静的型付けです。代表的な実行形態はJVM（Java Virtual Machine：Java仮想マシン）向けのバイトコードで、ネイティブコード生成が必須という説明は合いません。",
       "choiceReasons": [
         "オブジェクト指向と関数型を組み合わせられる点がScalaの特徴です。",
         "クラスを複数継承するのではなく、トレイトを組み合わせる仕組みを利用します。",
@@ -514,120 +571,141 @@
       "takeaway": "Scalaはオブジェクト指向と関数型を併用する静的型付け言語。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "Scalaの型推論は、型を書く手間を減らす機能です。実行時に型を決めることとは区別します。",
+          "title": "型推論と動的型付け",
+          "text": "型推論は、型名を書かなくてもコンパイラが型を推定する機能です。Scalaは型推論を備えますが静的型付けであり、実際の値によって実行時に型を決定するという説明とは異なります。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "クラスとオブジェクトに加え、関数を値として渡せる機能を備えるかを考えます。",
+          "title": "二つの方式を併用する",
+          "text": "Scalaではクラスやオブジェクトを使うオブジェクト指向と、関数を値として渡すなどの関数型プログラミングを両方使えます。これがアの説明です。",
           "revealsAnswer": true
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "継承の説明では「クラス」と「トレイト」を混同しないこと、実行形式ではJVM上で動く場合を想定して候補を点検しましょう。",
-          "revealsAnswer": false
+          "title": "継承と実行先も整理する",
+          "text": "Scalaのクラスは複数のクラスを直接継承するのではなく、トレイトを組み合わせられます。またJVM向けバイトコードにコンパイルして実行できるので、ネイティブコードの生成は必須ではありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "型推論を動的型付けと誤解し、Scalaの併用できる方式を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "型推論の役割とScalaの静的型付け",
+          "remainingWork": "残るプログラミング方式・継承・実行形式を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "エを除けるが、残り三肢の判断が必要。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Scalaがオブジェクト指向と関数型を併用する事実",
+          "remainingWork": "両方式の意味を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの正答内容を明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "トレイトとクラス継承の違い、JVMバイトコードという実行先",
+          "remainingWork": "他の誤答の誤りを整理する",
+          "revealsAnswer": true,
+          "reason": "前段の正答開示に加え、全誤肢も除外する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints",
+        "explanation"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r07a/r07a-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得し問7＝アと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：公式ア。Scala公式Tour原稿でOO/functional統合・静的型付け・JVMを確認。クラスの多重継承ではなくtrait composition、ネイティブ生成は必須でない。",
+        "補助一次資料：Scala公式Tour原稿 https://raw.githubusercontent.com/scala/docs.scala-lang/main/_tour/tour-of-scala.md を取得してOO/functional・静的型付け・JVMを確認。docs.scala-lang.orgとwww.scala-lang.orgは403で本文未取得。",
+        "独立確認者4の指摘により、解説単独の記号・略語・変数の定義又はH3の具体例を補足。原本条件と解答は維持。"
+      ]
     }
   },
   {
     "id": "r04a-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "ab6a93a69f7a0a73511bdc2e5c78c2ffc5cfae5b0419b7044f91f6414ce94c19",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q7",
-      "summary": "エ。UTF-16では符号化宣言を省略できます。",
-      "explanation": "XMLは符号化宣言がない場合にもUTF-8とUTF-16を扱えるよう定められています。UTF-16はバイト順マークなどで識別でき、宣言を省略できます。日本語向けの他の符号化を使う場合はencodingの指定が必要です。",
+      "summary": "XML宣言の符号化宣言を省略できる文字コードと、識別に必要な条件を確認する。",
+      "explanation": "XML処理系はUTF-8とUTF-16を扱えることが要求されます。外部から符号化の情報が与えられない場合でも、この二つは符号化宣言を省略できます。UTF-16で符号化したXMLには、バイト順を示すBOM（バイト順マーク）が必要です。選択肢ではUTF-16が該当します。EUC-JP、ISO-2022-JP、Shift-JISは、この設問の通常の条件では符号化宣言で明示します。",
       "choiceReasons": [
-        "EUC-JPはXMLが宣言なしで扱う既定の符号化ではありません。",
-        "ISO-2022-JPを使うには符号化宣言で明示する必要があります。",
-        "Shift-JISを使うには符号化宣言で明示する必要があります。",
-        "UTF-16はXMLが宣言なしでも扱う符号化の一つです。"
+        "EUC-JPはUTF-8/UTF-16と異なり、外部から符号化情報が与えられない通常の条件では符号化宣言が必要です。",
+        "ISO-2022-JPは、外部から符号化情報が与えられない通常の条件では符号化宣言で明示します。",
+        "Shift-JISは、外部から符号化情報が与えられない通常の条件では符号化宣言で明示します。",
+        "UTF-16はXML処理系が標準で扱い、符号化宣言を省略できます。ただしBOMによるバイト順の識別が必要です。"
       ],
-      "takeaway": "XMLで宣言を省略できる基本の符号化はUTF-8とUTF-16。",
+      "takeaway": "XMLはUTF-8とUTF-16を標準で扱う。符号化宣言を省くUTF-16でもBOMは必要。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "選択肢を、日本語固有の符号化とUnicode系の符号化に分けてみます。",
+          "title": "符号化宣言の役割",
+          "text": "文字コードは文字とバイト列を対応させる規則です。XML宣言のencodingは、そのXMLをどの規則で読み取るかを処理系に伝えます。省略するには、処理系が別の手掛かりで読み取れる必要があります。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "符号化宣言を省いてもXML処理系が標準で扱う符号化を考えます。",
-          "revealsAnswer": false
+          "title": "標準で扱う文字コード",
+          "text": "XML処理系はUTF-8とUTF-16を扱える必要があり、これらでは符号化宣言を省略できます。選択肢にあるのはUTF-16です。",
+          "revealsAnswer": true
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "XMLが基本として扱うUTF-8とUTF-16のうち、候補にある方を選びます。",
+          "title": "宣言省略時にも必要なもの",
+          "text": "UTF-16のXMLにはBOM（バイト順マーク）が必要です。BOMでバイトの並び順を識別できるので、符号化宣言を省けることと、識別情報が全く不要なことは区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "符号化宣言の意味やXML標準で読み取れる符号化を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "文字コードとencodingの役割、省略時の識別という観点",
+          "remainingWork": "標準の対象文字コードを知り選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "特定の候補を支持する文字コード名はまだ出さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "UTF-8/UTF-16は標準で扱い、宣言を省略できること",
+          "remainingWork": "選択肢との対応を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "選択肢のUTF-16を明示する。"
+        },
+        {
+          "newInformation": "UTF-16ではBOMが必要という条件",
+          "remainingWork": "符号化宣言省略と識別情報不要を区別する",
+          "revealsAnswer": true,
+          "reason": "前段で開示済み、同じ正答の条件を補う。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "takeaway",
+        "hints",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r04a/r04a-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf を取得し問7＝エと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：W3C XML 1.0 §4.3.3を確認。外部符号化情報がない場合、UTF-8/UTF-16以外には宣言が必要。UTF-16にはBOM必須。候補ではエだけ。",
+        "補助一次資料：W3C XML 1.0 https://www.w3.org/TR/xml/#charencoding の§4.3.3を取得しUTF-8/UTF-16、外部情報がない場合の宣言、UTF-16のBOM条件を確認。"
+      ]
     }
   },
   {
     "id": "r04h-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "a1b8813ad283917089637460292cd467b2d737cade4bc016129764eb14a8b153",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q7",
-      "summary": "エ。Pythonはインデントでブロックを表します。",
+      "summary": "字下げがブロックの所属を決める言語と、記号で区切る言語を区別する。",
       "explanation": "Pythonではifやfor、関数定義などの本体を、同じ深さのインデントでまとまりとして表します。C、Java、PHPは通常、波括弧によってブロックの範囲を区切ります。字下げはこれらでも読みやすさに役立ちますが、ブロック指定そのものではありません。",
       "choiceReasons": [
         "Cは{ }でブロックを区切ります。",
@@ -638,58 +716,66 @@
       "takeaway": "Pythonの字下げは構文の一部であり、見た目だけの整形ではない。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "候補の言語でif文の本体をどう囲むか思い出します。波括弧の有無と、字下げを変えたときの意味を比べましょう。",
+          "title": "ブロックの意味",
+          "text": "ブロックとは、ifの条件が成立したときに実行する処理など、文を一つのまとまりとして扱う範囲です。字下げが単なる読みやすさの工夫なのか、範囲を決める構文なのかを区別します。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "問題は予約語や記号ではなく「等しい字数の字下げ」をブロック指定に使う言語を尋ねています。見やすさのための字下げとは分けます。",
-          "revealsAnswer": false
+          "title": "Pythonの構文",
+          "text": "Pythonでは、ifやforの本体を前の行より深く字下げし、同じ深さの行を同じブロックに含めます。字下げを戻すと、そのブロックが終わります。これが設問の特徴に一致します。",
+          "revealsAnswer": true
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "Pythonではif条件の次行から字下げした行が本体になります。字下げを戻すとブロックが終わります。",
+          "title": "他の候補との違い",
+          "text": "C、Java、PHPでは通常{ }でブロックを区切ります。これらでも字下げは読みやすさに役立ちますが、Pythonのように字下げ自体で文の所属を決める方式とは異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ブロックの意味と字下げの構文上の役割を知らず、見た目の整形と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ブロックという処理のまとまりと構文/整形の区別",
+          "remainingWork": "その方式を採る言語を識別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "特定言語の構文はまだ教えていない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Pythonで同じ深さのインデントが所属を決める仕組み",
+          "remainingWork": "与件の特徴との対応を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "Pythonという正答名称と特徴を直接教える。"
+        },
+        {
+          "newInformation": "C/Java/PHPの通常の波括弧との比較",
+          "remainingWork": "字下げを戻したときの意味を整理する",
+          "revealsAnswer": true,
+          "reason": "前段で正答を示し、残る全候補も除外する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r04h/r04h-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf を取得し問7＝エと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：Python公式Lexical analysis §2.1.8のgrouping of statementsを確認。問7は取得PDFが画像のためpdftoppm→view_imageでエを目視照合。",
+        "補助一次資料：Python言語リファレンス https://docs.python.org/3/reference/lexical_analysis.html#indentation の§2.1.8を取得し、字下げが文のまとまりを決めることを確認。"
+      ]
     }
   },
   {
     "id": "r05h-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "f5c0959a2edaaff7ba821cf910435deaa039f57e80ca252b70450ec6806db608",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q7",
-      "summary": "2回目の分割後は1, 2, 3, 5, 4です。",
+      "summary": "左端を基準にし、グループ内の元の順序を保つクイックソートの2回目までを追跡する。",
       "explanation": "最初の基準値は左端の2です。2より小さいグループは[1]、大きいグループは元の順を保つ[3,5,4]なので、1回目の結果は[1,2,3,5,4]です。次の分割対象[3,5,4]の基準値は3です。小さい値はなく、大きいグループ[5,4]も順を保つため、2回目が終わっても[1,2,3,5,4]です。",
       "choiceReasons": [
         "2で分けた後、3で分けても5,4の順が保存される結果です。",
@@ -700,58 +786,65 @@
       "takeaway": "クイックソートの途中状態では、各グループ全体が整列済みとは限らない。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "基準値は毎回グループの左端で、グループ内では元の順序を保つという指定を使います。",
+          "title": "分割の指定を読む",
+          "text": "この問題では基準値をグループの左端から選びます。分割結果を「基準より小さい列、基準値、基準より大きい列」の順に並べ、各列の中では元の順を保ちます。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "最初に基準2を除き、2より小さい値と大きい値を元の順に書き出しましょう。",
+          "title": "最初の基準値で分類",
+          "text": "最初の基準値は2です。残りの3、5、4、1を順に見て、2より小さい側と大きい側へ振り分けます。一要素だけの側は、もう分割する必要がありません。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "1回目の大きい側は[3,5,4]です。次の基準3に対して5と4がどちら側になるか確かめます。",
+          "title": "2回目の対象",
+          "text": "1回目は[1]、2、[3,5,4]になります。2回目は右側の基準3で分けますが、5と4はともに大きい側で元の順を保つので、全体は1,2,3,5,4のままです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "通常の交換型クイックソートや完成形を想定し、元の順序保持と分割回数を無視する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "小さい列・基準値・大きい列の並びと列内順序保持",
+          "remainingWork": "2回分の分割を行う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "設問固有の手順のみで途中配列は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の基準は2、各値を一度ずつ振り分ける具体操作",
+          "remainingWork": "最初の列を作り、次の基準で分割する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "振分け結果は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の三部分と次の基準3、最終列1,2,3,5,4",
+          "remainingWork": "未整列5,4が残る理由を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終数列を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r05h/r05h-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf を取得し問7＝アと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：2,3,5,4,1→[1],2,[3,5,4]→[1],2,[],3,[5,4]。2回目まででは5,4の順は変えない。イは3を後へ、ウ/エは1を2より後へ置き不適合。"
+      ]
     }
   },
   {
     "id": "r03h-q5",
     "baseVersion": 2,
     "baseLessonSHA256": "df5ad7bbe5f9a4099b5e2a1fd0622e9881857f719069d372daa36e252cfc9b43",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q5",
-      "summary": "ウ。スタックで可能な出力順は5通りです。",
+      "summary": "入力順を固定したスタックで実現できる出力順列を、後入れ先出しの制約から数える。",
       "explanation": "A,B,Cを入力順に挿入し、最上段だけ取り出します。可能なのはABC、ACB、BAC、BCA、CBAです。CABはCを出すためA,B,Cを積んだ後、BがAの上に残るので実現できません。",
       "choiceReasons": [
         "ABC、ACB、BAC、BCA、CBAの5通りを、挿入と取出しを交互に行うことで実現できるため、3通りでは不足します。",
@@ -762,58 +855,65 @@
       "takeaway": "スタックの順序制約は、取り出した時点の最上段で確認する。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "A,B,Cの六つの並べ方を書き、Cを最初に出す場合の積み方から確認します。",
+          "title": "取り出せる位置",
+          "text": "スタックは最後に挿入したデータを先に取り出す構造です。挿入はA、B、Cの順ですが、途中で取り出しても構いません。出力順の候補は3×2×1=6順列あります。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "Cを出すにはA,B,Cを順に積みます。その後の最上段がBであることに注意します。",
+          "title": "Cを先に出す場合",
+          "text": "最初にCを出すにはA、B、Cを全部積む必要があります。Cを取り出すと、上にB、その下にAが残ります。Cから始まる二つの順列が両方可能かを、この状態で判定します。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "CABだけ実現できず、6−1=5通りです。",
+          "title": "他の順序も確認",
+          "text": "ABCは一つ積むごとに取り出せます。ACBはAを出してからB,Cを積み、BACとBCAはA,Bを積んでBを先に出せば作れます。CBAも可能ですがCABは不可なので、全部で5通りです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "入力の順序固定と途中取出し可能を両立できず、3!全部又はCBAだけと数える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "後入れ先出し、途中取出し可能、全候補6順列",
+          "remainingWork": "各順列の操作可能性を調べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最大候補数6だけで有効な総数は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Cを最初に出した直後にBが最上段となる状態",
+          "remainingWork": "C始まりと他の四順列の可否を調べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "CABの制約は分かるが他四順列の実現確認は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "可能な五順列とCAB不可の具体操作",
+          "remainingWork": "操作と出力の対応を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終個数5を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r03h/r03h-q5.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf を取得し問5＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：push/popを手動追跡しABC,ACB,BAC,BCA,CBA可、CAB不可。補助スクリプトでも全5有効push/pop列から同じ五つの出力を列挙。"
+      ]
     }
   },
   {
     "id": "r03a-q5",
     "baseVersion": 2,
     "baseLessonSHA256": "2c1e6b9dfdb33b0171ae61c5b09f598b8851e8b51af95ebe8b1dba9c2e8fb757",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q5",
-      "summary": "ウ。隣り合う要素を比較・交換するバブルソートです。",
+      "summary": "ソートを、比較する要素の位置と交換・分割の操作から識別する。",
       "explanation": "バブルソートは隣接する2要素を比較し、整列したい順と逆なら交換します。端まで走査すると最大値又は最小値が端に移り、この走査を繰り返して整列します。間隔を変える方法、基準値で分割する方法、順序木を使う方法とは区別します。",
       "choiceReasons": [
         "間隔を徐々に狭めて部分列を整列するシェルソートです。",
@@ -835,47 +935,55 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "隣り合う要素を比較し、大小の順が逆なら入れ替える説明を選びます。",
+          "text": "例えば3,1,2を小さい順にするとき、隣の3と1を交換して1,3,2にし、次に3と2を交換して1,2,3にします。このように、隣の二つが逆順なら交換する説明が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "代表的ソートを名称だけで覚え、比較・移動の単位が区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢を比較対象の位置や構造で分類する軸",
+          "remainingWork": "バブルソートの操作を知り対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "各操作と方式名の対応をまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "バブルソートで隣接交換しながら端へ値を移す動作",
+          "remainingWork": "記述と操作を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウと実質同じ定義を教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "3,1,2から隣接交換で1,3,2、1,2,3へ進む具体例。",
+          "remainingWork": "一走査で大きい値が端へ移ることを追う。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段のバブルソートの定義に加え、正答肢の隣接交換を具体化している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r03a/r03a-q5.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf を取得し問5＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：原本のアは間隔縮小=シェル、イは基準分割=クイック、ウは隣接交換=バブル、エは順序木の最小取出し。全肢理由はこの識別点を既に備え維持。",
+        "独立確認者4の指摘により、解説単独の記号・略語・変数の定義又はH3の具体例を補足。原本条件と解答は維持。"
+      ]
     }
   },
   {
     "id": "r06h-q7",
     "baseVersion": 2,
     "baseLessonSHA256": "2e7ec996b7fc6fd487da6e8051f02df961e02a4582d3ba23566201d12a1c2074",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q7",
-      "summary": "ア。隣り合う要素の比較と交換を繰り返すのがバブルソートです。",
+      "summary": "隣接する値の比較交換を繰り返す整列手順を、他の代表的なソートと区別する。",
       "explanation": "バブルソートは隣り合う二つの値を比較し、大小が逆なら交換する操作を繰り返します。この選択肢では末尾から先頭へ比較し、小さい値が前へ移動します。\n基準値で二分するクイックソート、分割した列を併合するマージソート、最小値を選んで先頭と交換する選択ソートとは、比較・移動の単位が異なります。",
       "choiceReasons": [
         "アは隣り合う二値の比較・交換を繰り返すバブルソートです。",
@@ -904,40 +1012,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "末尾から先頭への走査を見てバブルソートと分からず、最小値選択と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "比較相手が隣、全体最小、基準値という違い",
+          "remainingWork": "バブルソートの特徴と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "操作と名称の答えをまだ結び付けない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "3,2,1を末尾から隣接交換し1が先頭へ移る例",
+          "remainingWork": "原文との対応を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答アの操作を具体例で実質的に教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "他三肢の基準値分割・二分割・最小値探索との対比",
+          "remainingWork": "各ソートの比較単位を整理する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段の正答開示に加え全誤答の区別を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r06h/r06h-q7.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf を取得し問7＝アと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：末尾からの隣接交換がア=バブル。イ=クイック、ウ=マージ、エ=選択。3,2,1→3,1,2→1,3,2で一走査の移動を検算。"
+      ]
     }
   },
   {
     "id": "r03a-q6",
     "baseVersion": 2,
     "baseLessonSHA256": "55b6456302866e59b4c9883171affc6a737ee5f937c12359023ba56b465bef80",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q6",
-      "summary": "イ。再使用可能プログラムは実行前後に変数を初期状態にします。",
+      "summary": "再帰・再使用・再入・再配置というプログラムの性質を、実行状態と配置の条件で区別する。",
       "explanation": "再使用可能とは、前の実行による状態を次の実行へ持ち越さず、同じプログラムを繰り返し実行できる性質です。開始時の初期化又は終了時の状態復元で実現できます。再入可能は複数の実行が同時に進んでも互いの状態を壊さない性質で、実行ごとの作業データを分離します。",
       "choiceReasons": [
         "再帰呼出しでは各呼出しの局所変数などを保持する必要があり、全データ共用とはいえません。",
@@ -948,59 +1062,66 @@
       "takeaway": "再使用は状態の復元、再入は実行状態の分離、再配置は配置位置の自由。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "繰返し実行と同時実行を分け、変数が前回の値を保持すると何が起きるか考えます。",
+          "title": "繰返しと同時実行",
+          "text": "一つの実行が終わった後に再び使うことと、前の実行が終わる前に別の実行を始めることは異なります。変数に前の値が残る問題と、複数の実行が互いの変数を書き換える問題を分けます。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "同じプログラムを次回も正しく使うには、実行の開始時か終了時に変数を初期状態にそろえます。",
+          "title": "再使用可能の条件",
+          "text": "再使用可能プログラムは、前回の実行状態を次回へ持ち越さず繰り返し使えるものです。開始時に変数を初期化するか、終了前に初期状態へ戻すというイの説明に対応します。",
           "revealsAnswer": true
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "変数を開始時に初期化するか、終了時に戻すという再使用可能の説明が正しいです。",
+          "title": "他の性質との対比",
+          "text": "再帰呼出しでは呼出しごとの局所データを保持します。再入可能では同時に動く実行の作業データを分離し、再配置可能では主記憶上の異なる位置でも実行できます。全データ共用や固定位置に限定する説明は合いません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "再使用と再入の違い、共有コードと作業データの違いを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "逐次の繰返し利用と実行の重なりに伴う別々の状態問題",
+          "remainingWork": "各用語と要件を対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "どの説明がどの用語の正しい定義かはまだ渡さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "再使用可能の定義と初期化・復元の実装方法",
+          "remainingWork": "イの説明の意味を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答イを直接教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "再帰の呼出し別データ、再入のデータ分離、再配置の位置自由",
+          "remainingWork": "他三肢の誤りを整理する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段で正答を示し、全誤肢の理由を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r03a/r03a-q6.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf を取得し問6＝イと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：イは逐次再使用の初期化/復元。アは全データ共有が誤り、ウは作業データまで共有が誤り、エは固定領域限定が逆。"
+      ]
     }
   },
   {
     "id": "r05h-q5",
     "baseVersion": 2,
     "baseLessonSHA256": "1031d5c21104944b4da5bedc7a1701322442b9bbce376b136c622c190841998c",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q5",
-      "summary": "空き領域の大きさをキーとする2分探索木が適しています。",
-      "explanation": "best-fitは、要求量以上の大きさの領域のうち最小のものを探します。比較すべき値はアドレスではなく領域の大きさです。大きさをキーにした2分探索木なら、要求量との大小を比較しながら候補を絞り、平均的にはO(log n)で検索できます。大きさ順の連結リストは先頭から順にたどるので平均O(n)です。",
+      "summary": "ベストフィットに必要な最小適合領域の検索を、管理キーとデータ構造の探索時間から比較する。",
+      "explanation": "best-fitは、要求量以上の空き領域のうち最小のものを探します。大きさをキーにした2分探索木なら、節点の大きさが要求量以上のときは候補として記録して左へ進み、要求量未満なら右へ進んで、最小の適合領域を探せます。空き領域数をnとすると、探索の比較回数は木の高さに依存し、平均的にはO(log n)です。ただし偏った木ではO(n)になります。大きさ順の片方向連結リストは先頭から順にたどるため平均O(n)です。アドレス順の木とビットマップでは、大きさの順序を利用して候補を絞れません。",
       "choiceReasons": [
         "アドレス順の木では大きさの順序がなく、最小の適合領域を絞れません。",
         "大きさ順でも連結リストには途中へ直接アクセスできず、順に探索します。",
@@ -1010,58 +1131,67 @@
       "takeaway": "探索の条件に使う量をデータ構造のキーにする。",
       "hints": [
         {
-          "title": "注目するところ",
-          "text": "求めるのは要求量以上で「最小の大きさ」の空き領域です。領域の位置と大きさを区別します。",
+          "title": "適合条件と比較する量",
+          "text": "ベストフィットは要求量以上で最小の領域を選びます。例えば要求30に対し空き20、32、50なら、使えるのは32と50です。住所に当たるアドレスと、領域の大きさは別の情報です。",
           "revealsAnswer": false
         },
         {
-          "title": "使う考え方",
-          "text": "木の左右へ進むには、探す条件とキーの大小関係が対応している必要があります。",
+          "title": "木とリストの探索",
+          "text": "2分探索木はキーより小さい値を左、大きい値を右にまとめ、比較ごとに進む側を選べます。片方向連結リストは次へのリンクを先頭から順にたどります。必要な大きさで候補を絞れる管理方法を比べます。",
           "revealsAnswer": false
         },
         {
-          "title": "この問題に当てはめる",
-          "text": "要求量を領域の大きさと比較し、以上なら候補を記録して小さい側へ進む検索を考えましょう。",
+          "title": "最小適合値を木で探す",
+          "text": "大きさをキーにした木なら、要求量以上の節点を候補として左へ、足りない節点では右へ進めます。この検索をできるウが、選択肢の中で平均的に短い処理時間になります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "検索条件の大きさと位置のアドレスを混同し、木と連結リストの探索を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "要求以上の候補に絞る具体例とアドレス/大きさの区別",
+          "remainingWork": "最小適合領域を速く探せる構造を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "適合候補例だけで管理構造の答えは示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "探索木の大小による枝選択とリストの逐次リンク探索",
+          "remainingWork": "大きさを比較条件へ当てはめ各構造の処理を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般の検索規則を教え、キーと要求の対応比較を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "大きさキーの木で最小適合値を探す分岐",
+          "remainingWork": "平均時間と最悪時間の違いを理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウという正答とその検索手順を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r05h/r05h-q5.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf を取得し問5＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：要求30なら20を除外し32を候補に左の適合値を探索。大きさキーBSTは高さ依存、平均O(log n)、偏ればO(n)。大きさ順単方向リストは平均O(n)。位置キー木/ビットマップはサイズで枝刈り不可。",
+        "独立確認者4の指摘により、解説単独の記号・略語・変数の定義又はH3の具体例を補足。原本条件と解答は維持。"
+      ]
     }
   },
   {
     "id": "r07a-q5",
     "baseVersion": 2,
     "baseLessonSHA256": "b789693cae4d2b8ae7b0f7c2b938de8c37d6667dd33b894d83eeec3148014ebb",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q5",
-      "summary": "イ。要求を満たす最小の空き領域を使うため、小さな残片が生じやすくなります。",
+      "summary": "ベストフィットの割当て基準と、繰り返すことで残る空き領域の傾向を確認する。",
       "explanation": "ベストフィットは、要求サイズ以上の空きブロックの中から最小のものを選びます。例えば30必要で空きが32,50,80なら32を使い、2の空きが残ります。\n余りを最小にするため、小さすぎて次の要求に使いにくい空きブロックが多数できる傾向があります。",
       "choiceReasons": [
         "低いアドレスから最初に適合する領域を選ぶファーストフィットの特徴です。",
@@ -1090,40 +1220,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ベストという名称から位置・ハッシュなど速度の良さと思い込み、余りの傾向を追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "適合は要求サイズとの対応でありアドレスとは異なる",
+          "remainingWork": "選択基準を知り残片の傾向を判断する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "具体的な割当て基準はまだ教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "要求30に32を選ぶ、要求以上の最小という基準の例",
+          "remainingWork": "余りを計算して特徴と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの正答の選択基準と実質同じ説明を与える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "余り2は大きな要求に使えないという断片化の説明",
+          "remainingWork": "繰返し時の空きの傾向を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段の基準と合わせイの特徴全体を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r07a/r07a-q5.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得し問5＝イと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：要求30、空き32/50/80→32を使用、残り2。イの最小適合と小断片傾向に合う。アは低位アドレス優先、ウのハッシュ/エの位置順併合は方式の定義でない。"
+      ]
     }
   },
   {
     "id": "r06a-q5",
     "baseVersion": 2,
     "baseLessonSHA256": "37ddcc2e60b7a8d1f8b3cab50868a56a2bca96be5f6a1f98bf6d1481819399b4",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q5",
-      "summary": "ウ。右部分木の最小値13を12の位置へ移せます。",
+      "summary": "二分探索木の内部節点を削除し、一つの要素の移動だけで大小関係を保つ置換値を選ぶ。",
       "explanation": "二分探索木では、各節点の左部分木はその値より小さく、右部分木は大きい値です。12を置き換えるには、左部分木の最大値11か、右部分木の最小値13を用います。\n候補のうち13だけが該当します。13を元の葉から取り除いて12の位置へ移すと、左の9・10・11より大きく、右に残る14・15より小さいので条件を保ちます。",
       "choiceReasons": [
         "9を置くと、左部分木に9より大きい10と11が残り、大小関係が崩れます。",
@@ -1152,40 +1288,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "子との比較だけでなく部分木の全要素の大小を維持する必要を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "削除対象12の左右に属する六要素の所在",
+          "remainingWork": "置換後の全要素の大小を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "候補のどれを移すかは示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "左全要素＜置換値＜右全要素と境界を探す方法",
+          "remainingWork": "左右の端の値を読み取り候補に照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般の境界規則だけで数値計算と図の適用が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "左最大11は候補外、右最小13が候補内",
+          "remainingWork": "置換後の大小関係を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答13を直接示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r06a/r06a-q5.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf を取得し問5＝ウと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：左は9,10,11、右は13,14,15。元の葉を除いた13なら11<13<14を保つ。9では10/11、10では11、14では右の13が違反。"
+      ]
     }
   },
   {
     "id": "r06h-q6",
     "baseVersion": 2,
     "baseLessonSHA256": "aa1fba1e0f465fff93a0766238628b4b0c1e745e8ec596199530e5d5e6b04006",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave01_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q6",
-      "summary": "エ。右部分木、左部分木、自分の順に出力し、ED−CB×÷A+となります。",
+      "summary": "右の子、左の子、自分の出力という再帰処理を、部分木ごとに追跡する。",
       "explanation": "各ノードの出力は、右の子の再帰処理と左の子の再帰処理が終わった後です。したがって右→左→自分の後順走査になります。\n根+の右に進み、−の部分木でE,D,−を出力します。続いて×の部分木でC,B,×を出力し、その親÷を出力します。最後に根の左A、根+を出力するのでED−CB×÷A+です。",
       "choiceReasons": [
         "アは親を先に出力する右優先の前順です。この定義では親の出力は子の処理後です。",
@@ -1214,29 +1356,35 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "再帰呼出しを戻る前に親を出力し、呼出し順と出力位置を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "根+から最初に÷を呼び、+は保留する",
+          "remainingWork": "再帰の戻りと出力を追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "アを除けるが、最終列を識別するにはさらに追跡が必要。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の部分木−でE,Dを先に処理してから−を出力する",
+          "remainingWork": "残りの×,÷,A,+を追跡する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "全肢の先頭を比べるとED−はエだけで、正答を実質確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "×部分木の右C・左B・自身×と、その後の÷,A,+",
+          "remainingWork": "各呼出しが戻る順を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段から正答が確定し、残りの出力も実質示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本 assets/questions/r06h/r06h-q6.webp をview_imageで開き、問題文・全4肢・図又は処理定義を目視確認。",
+        "IPA公式解答 https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf を取得し問6＝エと照合。取得SHA-256はreview/author-3-evidence.json。",
+        "作者の解き直し・全肢確認：右左自分を全節点へ適用：−部分木=ED−、×部分木=CB×、÷部分木=ED−CB×÷、全体=ED−CB×÷A+。アは右優先前順、イは左優先後順、ウは右優先中順。"
+      ]
     }
   }
 ]

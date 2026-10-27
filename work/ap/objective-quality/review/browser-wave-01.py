@@ -10,7 +10,7 @@ from browser_storage import nav,state,write_state,open_data_management,open_answ
 ROOT=Path(__file__).resolve().parents[4];W=ROOT/'work/ap/objective-quality';ART=Path(tempfile.mkdtemp(prefix='hitomon-ap-quality-'))
 read=lambda p:json.loads(p.read_text());ids=[id for n in range(1,5) for id in read(W/f'batches/batch-{n:02d}/assignment.json')['questionIds']];m=read(ROOT/'data/qualifications/ap/manifest.json')
 bank=[q for pack in m['packs'] for q in read(ROOT/'data/qualifications/ap'/pack['url'])];by={q['id']:q for q in bank};qs=[by[id] for id in ids]
-sys.path.insert(0,str(ROOT/'tools'));spec=importlib.util.spec_from_file_location('builder',ROOT/'tools/build-content.py');builder=importlib.util.module_from_spec(spec);spec.loader.exec_module(builder);cfg=read(ROOT/'content/ap/qualification.json');old={q['id']:builder.normalize(q,cfg,n+1) for n,q in enumerate(read(W/'baseline/questions.json')) if q['id'] in ids or q['id'] in ['r03a-q3','r07h-q14']}
+sys.path.insert(0,str(ROOT/'tools'));spec=importlib.util.spec_from_file_location('builder',ROOT/'tools/build-content.py');builder=importlib.util.module_from_spec(spec);spec.loader.exec_module(builder);cfg=read(ROOT/'content/ap/qualification.json');old={q['id']:builder.normalize(q,cfg,n+1) for n,q in enumerate(read(W/'baseline/questions.json')) if q['id'] in ids or q['id'] in ['r07h-q4','r05a-q1']}
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
  def translate_path(self,path):
@@ -44,12 +44,12 @@ try:
     if q['id'] in ['r05a-q1','r05h-q21','r06h-q21','r04a-q5'] and width==390 and scale==100:pg.screenshot(path=str(ART/(q['id']+'-390.png')),full_page=True)
    pg.evaluate('document.documentElement.style.removeProperty("--study-text-scale")');pg.set_viewport_size({'width':390,'height':900});print('PASS wave01',n,q['id'],flush=True)
   # A first-stage answer and a cumulative second-stage answer must be revealed immediately.
-  for id,count in [('r03a-q3',1),('r07h-q7',2)]:
+  for id,count in [('r07h-q4',1),('r03h-q2',2)]:
    q=by[id];open_q(q)
    for _ in range(count):pg.locator('[data-action=hint]').click()
    pg.get_by_role('radio').nth(q['answer']).check();state(pg);pg.reload();pg.locator('.hint-box').first.wait_for();assert pg.locator('.hint-box').count()==count;assert pg.get_by_role('radio').nth(q['answer']).is_checked();a=submit(q);assert a['status']=='revealed' and a['hintsBeforeAnswer']==count
   # Later hints preserve a result obtained without help.
-  q=by['r03a-q3'];open_q(q);a=submit(q);assert a['status']=='correct'
+  q=by['r07h-q4'];open_q(q);a=submit(q);assert a['status']=='correct'
   for _ in q['hints']:pg.locator('[data-action=hint]').click()
   s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and all(e['phase']=='after' for e in a['hintEvents'])
   ctx.set_offline(False);open_data_management(pg)
@@ -57,10 +57,10 @@ try:
   backup=ART/'synthetic-backup.json';event.value.save_as(str(backup));assert len(read(backup)['records'])==83
   fresh=b.new_context();other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(BASE+'ap/?part=objective&entry=home');other.locator('.quick-start').wait_for();open_data_management(other);other.locator('#import-state').set_input_files(str(backup));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();assert len(state(other)['attempts'])==83;fresh.close()
   legacy=b.new_context();pg=legacy.new_page();pg.on('pageerror',lambda e:errors.append(str(e)));pg.goto(BASE+'ap/?part=objective&entry=home');pg.locator('.quick-start').wait_for()
-  seeded=pg.evaluate('''async old=>{const {createAttempt,selectAnswer,openHint,gradeAttempt,finalizeAttempt}=await import(new URL('src/domain/study.js',document.baseURI));const finished=createAttempt(old['r03a-q3']),paused=createAttempt(old['r07h-q14']);openHint(finished);selectAnswer(finished,old['r03a-q3'].answer,old['r03a-q3']);finalizeAttempt(finished,gradeAttempt(finished));selectAnswer(paused,old['r07h-q14'].answer,old['r07h-q14']);return {finished,paused};}''',old)
+  seeded=pg.evaluate('''async old=>{const {createAttempt,selectAnswer,openHint,gradeAttempt,finalizeAttempt}=await import(new URL('src/domain/study.js',document.baseURI));const finished=createAttempt(old['r07h-q4']),paused=createAttempt(old['r05a-q1']);openHint(finished);selectAnswer(finished,old['r07h-q4'].answer,old['r07h-q4']);finalizeAttempt(finished,gradeAttempt(finished));selectAnswer(paused,old['r05a-q1'].answer,old['r05a-q1']);return {finished,paused};}''',old)
   assert seeded['finished']['status']=='assisted';s=state(pg);s.update(attempts=[seeded['finished'],seeded['paused']],currentId=seeded['paused']['id'],view='study');write_state(pg,s);pg.reload();pg.locator('.question-panel').wait_for()
   s=state(pg);assert next(a for a in s['attempts'] if a['id']==seeded['paused']['id'])['materialSnapshot']==seeded['paused']['materialSnapshot']
-  pg.locator('[data-action=latest-hints]').click();pg.locator('.question-panel').wait_for();s=state(pg);new=next(a for a in s['attempts'] if a['id']==s['currentId']);assert new['id']!=seeded['paused']['id'] and new['questionVersion']==by['r07h-q14']['version'] and new['selected']==seeded['paused']['selected'];assert next(a for a in s['attempts'] if a['id']==seeded['paused']['id'])['materialSnapshot']==seeded['paused']['materialSnapshot']
+  pg.locator('[data-action=latest-hints]').click();pg.locator('.question-panel').wait_for();s=state(pg);new=next(a for a in s['attempts'] if a['id']==s['currentId']);assert new['id']!=seeded['paused']['id'] and new['questionVersion']==by['r05a-q1']['version'] and new['selected']==seeded['paused']['selected'];assert next(a for a in s['attempts'] if a['id']==seeded['paused']['id'])['materialSnapshot']==seeded['paused']['materialSnapshot']
   nav(pg,'history');open_answer_history(pg);pg.locator(f'[data-action=resume][data-id="{seeded["finished"]["id"]}"]').click();pg.locator('#result').wait_for();assert pg.locator('#result details > p.explanation').text_content()==plain(seeded['finished']['materialSnapshot']['explanation']);assert next(a for a in state(pg)['attempts'] if a['id']==seeded['finished']['id'])['status']=='assisted'
   assert not errors,errors;b.close()
 finally:server.shutdown()

@@ -1,1 +1,566 @@
-[]
+[
+  {
+    "id": "r07a-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.952418+00:00",
+    "baseLessonSHA256": "5754c3949a394fe34c83e8436e43f6e9bd5913e3ce1c8b889d7eb167d14db290",
+    "reviewedLessonSHA256": "92980d3c70ead060a43d60c4f671192979a0efcb3205d3641c2a03798fac523f",
+    "questionSHA256": "a8b95d842fae1882a8280c2c1422894881d659f4aa9979b25c9a2afa4b53bd64",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q6.webp": "b6cdc7c0ba6266649581a05a3f50edf16cce848810da23ada6ac037eeb88fbd9",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "ブロック数n/mとブロック内mを区別し両平均を足す説明、全4式の欠落/最悪回数との違いを確認。H1は対象数、H2は成功線形探索平均、H3は別数値例で一般化が残るため全false。summaryは合計の論点、takeawayは二段探索の再利用則。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。ブロック末尾の探索対象はn/m個、ブロック内はm個。それぞれ平均約半分でn/(2m)+m/2。十分大きいmの近似。",
+    "issues": []
+  },
+  {
+    "id": "r04h-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.952616+00:00",
+    "baseLessonSHA256": "f0ed1bf83176838af8150513fc1bbcc1cfa27654bf6371f0aa82e63a926a5983",
+    "reviewedLessonSHA256": "712f5e35103e720e7cfe2a2bee773f3f69d8a3ddbe96cda3cc8e7a0fcf7408ff",
+    "questionSHA256": "69084663390cc67d5ccd96c3a47d17e6408fac63ed48992e08aea3c5d9e8aa4b",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q6.webp": "9688bd3bf81bd01ad5d21157cc7dad39386b80ef2aceecda97987058da785844",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "再配置/再帰/部分読込/再入の4肢を原本どおり区別。H2は正答の定義でtrue。H3の反復を差戻し、作者が途中値10を別タスクが壊す具体例に変更した最終全文を再読。H1 false、以後true。タスク別作業領域は対策例として適切。",
+    "officialAnswer": "エ",
+    "independentResult": "エ。再入可能は同じプログラムへ並行して入っても実行ごとの作業データが干渉しない。ア再配置可能、イ再帰、ウオーバーレイ。",
+    "issues": []
+  },
+  {
+    "id": "r03h-q7",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.952810+00:00",
+    "baseLessonSHA256": "f4e73ef1ab498467a672ad75e6350fdcc9651bd637b4bec25dd3702952516902",
+    "reviewedLessonSHA256": "92c24c93f2fb4d49ef7112832c8be017649dfa6ca6e3314dd46ea4f63d630beb",
+    "questionSHA256": "9e47fbc01a0131b9fe6e8bffd540e8cc419e611004f71b60e57b8f0219662261",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q7.webp": "b0ecb1305c34bd4ab85cca4737d5633899de1706586fc41ab948d414b083376b",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "逐次改良、候補探索、独立小問題の結合、貪欲法の各肢理由を確認。H1は分割後を考える入口、H2で結合まで定義を渡すのでtrue。H3差戻し後に貪欲法の局所選択との比較が増え、累積trueを確認。マージソートの解説例も正しい。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ。小問題へ分割、独立に解き、結果を結合。ア逐次改良、イ組合せ探索、エ貪欲法。",
+    "issues": []
+  },
+  {
+    "id": "r04a-q5",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.952918+00:00",
+    "baseLessonSHA256": "21be7aea173a370ea8374e67abe22e91a48e300cd33d6729ccb63eeaff8701d6",
+    "reviewedLessonSHA256": "c13c64e25bde11a425f6c60b538b526c9d41512d727e1cd86f51db86f19515ee",
+    "questionSHA256": "6f25b88a798613bb8144bbf7271606c4b32830bbd0519ecf77ecfbf4bc55ad57",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q5.webp": "aa602bbb8cfeab86283160e9334cb76c48baeb136e69c24a5e5336fb24333cd2",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "商と共通剰余を置く導出と逆方向を確認。ア/ウ/エの反例を各選択肢の倍数の向きに合わせて検算。H1衝突の定義、H2は引算の操作が残るのでfalse、H3は差が法の倍数そのものなのでtrue。summaryとtakeawayの役割は分離。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。a=pn+r,b=qn+rならa−b=(p−q)n。逆も成り立つ。和の条件ではない。",
+    "issues": []
+  },
+  {
+    "id": "r06a-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953024+00:00",
+    "baseLessonSHA256": "85a7b17b81e30d635ecb5bc0382a8d5d6521f25fb55d58ef5735c5af993fb87b",
+    "reviewedLessonSHA256": "65e5edb9edad5f2cddb377667668c4254fbee04a95df9a5a4450dbb890eafdea",
+    "questionSHA256": "b1c3203c60523fc97bb366c11397412787eccc11755914e81ca7ad90b6c27306",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q6.webp": "3088c5627ef8077986f1f7e0adb1438fbc171e83346e41f21fb98c3bf8f8242d",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "別原本の同じハッシュ式も個別に読んだ。全3誤肢の反例と差の必要十分条件が妥当。H2は共通rを消す引算が本人に残りfalse、H3は差の倍数を明示してtrue。解説の式は符号/商の変数を一貫して使用。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。別原本の同一内容。mod nが同じなら差がnの倍数。",
+    "issues": []
+  },
+  {
+    "id": "r05a-q5",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953335+00:00",
+    "baseLessonSHA256": "79603709cfa256b4514f334ea20a84d021fd3e6a6992036a4881026a63fad442",
+    "reviewedLessonSHA256": "aaa057e266b2432e555238bff6999c4437f2c5701cc0580d8abae7f67f834995",
+    "questionSHA256": "10eda8bc7c31367cd8c7e874dc6c03054bd3adf4c278fb327a31f0ab10bd9a51",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q5.webp": "03400e042cdf2e32ba81e725312d7eb7fdbb132e130121b95c3a17d4cc0ca540",
+      "assets/transcriptions/transcribe_r05a_batch1/r05a-q5-arrays-and-choice-table.webp": "111762ad6ac10aa932f8535713b9db45bab4e447750cb565c2ae17af315f3d15",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "elem/next/prev、Head1/Tail2、追加位置6を原図から再構成。CをD3とE5の間に置き、逆方向も追跡してnext6=5/prev6=3。各誤肢の接続違いを確認。H3はH2と合わせ番号の組を直接渡すためtrue、前二段は図の参照が残る。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ。元の順序A(1)→B(4)→D(3)→E(5)→F(2)。Cは配列末尾6へ追加しDとE間に挿入するのでnext[6]=5,prev[6]=3。",
+    "issues": []
+  },
+  {
+    "id": "r05a-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953434+00:00",
+    "baseLessonSHA256": "5d4f3196ffdef7182fcdb636a98442bbc604a2527ad26384c01f565d45baff39",
+    "reviewedLessonSHA256": "68305e3e22542075daa2befbf82f12478cd27848e43a2a4fe1ff1228595c495a",
+    "questionSHA256": "0d56bf107d0b524a122a38405d8215b8f9b226330302253e76c8d90bd80475ae",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q6.webp": "b0d726cbdd28fab78c7a860fa92fff26029829d532578ea353347233fd956ceb",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "実際の隣接比較で状態1,2を再現。挿入なら3,5,6,9,1,2となる対比例、基準値分割、ヒープとの手順差が各肢理由。H1相対順序の観察はfalse、H2でバブル名称を教え以後true。summaryは推移の読み、要点は一巡で最大値を送る特徴。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ。左から隣接比較して9を右端、次に6を右から2番へ移すバブルソート。挿入なら整列済み左部分が伸びるが状態1の左部分はそうなっていない。",
+    "issues": []
+  },
+  {
+    "id": "r04a-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953628+00:00",
+    "baseLessonSHA256": "19753732a9fd7660bc497bf5da9ab4c53cfb031755f5bccc6f7feb4b4060d1af",
+    "reviewedLessonSHA256": "d019c730757d6da93799eda74b9f6c0edd557c423d8377d5d17d59377c7b7c81",
+    "questionSHA256": "f68c60611ee70b5a462bdb8d600617e6a52040704522a33810b28854d9c1ba12",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q6.webp": "e84d11a974c062b9b3f5c67047b103d931eb115eb248ec159462b5afca2bcaf9",
+      "assets/transcriptions/transcribe_r04a_batch1/r04a-q6-sort-flow.webp": "1fc03699f29e90b02e31967689fe672170ff48f5a75f51c7bcfc5613a5dc8977",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "j=n,-1,i+1と小なり分岐後の3代入を図から追った。最小値が左へ進むバブルであり、選択最小位置記録/挿入/基準値分割とは異なる。H1の走査方向、H2の5/2交換は計算と名称対応が残るfalse、H3は方式名を教えるtrue。",
+    "officialAnswer": "エ",
+    "independentResult": "エ。j=nからi+1まで戻り、A[j]<A[j−1]なら隣接交換するバブルソート。今回は小さいものが左端へ浮く。",
+    "issues": []
+  },
+  {
+    "id": "r06h-q5",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953826+00:00",
+    "baseLessonSHA256": "5fe9cb9a26fd1838b780df394a6017c7db411c2b746c1db9c4c346b97795b3c2",
+    "reviewedLessonSHA256": "c8de6fc4c490173a2276339a700721d19ca41fd8b89462fdc4160924153a9f55",
+    "questionSHA256": "58b8e55f05a69bed538b0278fdc917bd413b8e3377d747ba3eac0a2c7a6f6bf0",
+    "sourceHashes": {
+      "assets/questions/r06h/r06h-q5.webp": "ade42f800c2259e6fdf8d77f3489f8878a9958da60223a0756d143665fd11ae9",
+      "assets/transcriptions/transcribe_r06h/r06h-q5-figure.webp": "3308b58983acffccb0cf7cb6b8fd953e518bb77a18a2b00674b7631a8822c3ad",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "左はM!、右は乗算→n増分→判定の順序。M=3で四条件の結果1,2,6,24、ウはM=1でも一致。全肢の終了時点の説明が正しい。H3はM=3の判定値のみで条件評価は本人に残しfalse。summaryとtakeawayが更新時点の判断へ焦点化。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ。左はM!。右はnの乗算後n←n+1で検査するので、最後にMを掛けた直後のn=M+1で終了、条件n>M。M=1もx=1で正しく終了。",
+    "issues": []
+  },
+  {
+    "id": "r06a-q7",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.953935+00:00",
+    "baseLessonSHA256": "47405be40bf7cdbc8f2c5573fe38f7fb2dba393db9c1b5b247483dafdcb51e85",
+    "reviewedLessonSHA256": "5deab9536d8b14b179cbe404e06ff8a0f94368b4c90c4bc7c52709f715b5ddfa",
+    "questionSHA256": "78a7eef9ac3797d76e19627e6cd98bb20bd7f93c0affac5eef893939c4c76512",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q7.webp": "05568bf7b1c95ca7998c650e79e43c0630e8bbf6be293460a1d1c6d1fc2f9dab",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "Go/Kotlin/Scalaの静的型推論とRの動的型の対比を確認。Rは統計解析のオープンソース環境で三特徴を満たす。H1は型の比較基準、H2で全誤肢を静的型として除外するためtrue、H3もtrue。単にオープンソースのみで選ばせない解説が妥当。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ(R)。統計解析環境、オープンソース、実行時の動的型という組合せ。Go/Kotlin/Scalaは静的型。",
+    "issues": []
+  },
+  {
+    "id": "r05h-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954056+00:00",
+    "baseLessonSHA256": "acc621dabeff61789183793994d79402e5671daddf550ff496c8e51d90856d3d",
+    "reviewedLessonSHA256": "7aa30a63c53c29f3bb37bcc6fa4ae75a5de72a18cf20b9051e9b0a4434a0c5f3",
+    "questionSHA256": "87731784fef6ffb92c386118808f15ca0e6876b30bd16a89065b1f40b6c2347b",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q6.webp": "dd8533764b02eb00b49ac5a40b0d0ca356409051c7ae2bbfecff77ed4e895a75",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "不在確率aを成功確率と取り違えないこと、成功時(n+1)/2、不成功時nを重み付けする期待値を検算。各誤肢の確率/項の欠落を説明。H2は数列和と確率の代入が残るfalse、H3は最終式を渡すtrue。takeawayは期待値の一般則。",
+    "officialAnswer": "エ",
+    "independentResult": "エ。存在確率1−aで平均(1+…+n)/n=(n+1)/2、不在確率aでn回、合計(1−a)(n+1)/2+an。",
+    "issues": []
+  },
+  {
+    "id": "r04h-q5",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954267+00:00",
+    "baseLessonSHA256": "61d931891159a84d82584b6fc3d7932b9859daad3b323d713fbb83c4e987d10e",
+    "reviewedLessonSHA256": "f3a32717c4189e87369564a10407bb426b710e26c1e590b06de6d4d4718f4a2e",
+    "questionSHA256": "183b26582f8078052e2074701151c7df3b69b71fd3586a39be8a30da55b5de0b",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q5.webp": "4941129ccd5d947f8ecdad10d7fa0305fc783534373ae4097423037b585e0433",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "連続配列が前提の原問と照合。ア容量の空き、イリンク逐次走査、ウ次ポインタ領域、エ途中挿入移動の理由が独立。H1は途中挿入を図示する課題で具体的な移動結果未提示、H2でも容量/挿入判断が残りfalse、H3で容量余りを教えtrue。",
+    "officialAnswer": "ア",
+    "independentResult": "ア。連続配列で最大容量を確保すると未使用部分が残る。イ/ウはリンク構造、エの定数時間挿入は配列のシフトで成り立たない。",
+    "issues": []
+  },
+  {
+    "id": "r03h-q6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954385+00:00",
+    "baseLessonSHA256": "b8594456a212d1670fefd82176135e961560b6ba2fe80433fb288fb0b090edb3",
+    "reviewedLessonSHA256": "813fb17096d20e91444f9b9d1ebcc40d4cfbe12166fe882ce3353ecf0210c3a9",
+    "questionSHA256": "8898982f9959ba80ff7944b6c58b1e9c420ae26b9664d7ef2b61f75a3a7424d4",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q6.webp": "5edd0ca09258faa98421136b2394ea1edd047e8e781f3b1f02e55fec671fc57b",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "1/(2,3)/(4,5,6,7)という木の深さを再構成し、先行/後行/中間の訪問との相違を全肢で確認。H2は探索の定義と木への適用が残るfalse、H3は幅優先を明示してtrue。要約は子の添字規則、解説は階層順の根拠、要点は再利用できる添字順。",
+    "officialAnswer": "エ",
+    "independentResult": "エ。添字1,2,3,4,5,6,7は根、次階層、その次階層の順、幅優先。",
+    "issues": []
+  },
+  {
+    "id": "r03a-q7",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954483+00:00",
+    "baseLessonSHA256": "41891af853e43e8ff2956e5399e77380b6b876dacc6f22d41fcc712611baff98",
+    "reviewedLessonSHA256": "f6dbecf1230ec0d658fc863ba4a8f7bb6832ed184103d331f7d15a52c100990d",
+    "questionSHA256": "4bfbeddc3a5583e71fdebbc6b88b0755b17b06e0951f025c817d3560b961399e",
+    "sourceHashes": {
+      "assets/questions/r03a/r03a-q7.webp": "fff1b085925ccf1c726cafc77bfe7cb487e6eac426f579fbd018b40710b1fd02",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "TypeScriptとECMAScript/JavaScript/VBScriptの型の違いを原問時点で確認。H1の検査時点の定義はfalse、H2でTypeScript名称を示すtrue、H3に数値型/文字列代入と型推論時の検査という新情報がある。各肢理由は実行前の型検査に対応。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウ。TypeScriptが型注釈と静的型チェックを加える。ECMAScript/JavaScript/VBScriptは動的。",
+    "issues": []
+  },
+  {
+    "id": "r05h-q8",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954570+00:00",
+    "baseLessonSHA256": "36cd0ecaf1000628fb3e29e8eef1f3748d96f4d57bb0610c2ed981fe849fb3a3",
+    "reviewedLessonSHA256": "0d2dacbfed13057443a4b394adfed06ea085898dcfcf902cc9efeea19aa29ccb",
+    "questionSHA256": "fcc089093084572367b39dee2dfc1dde04a4923ea711d662671ed1f211654fcc",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q8.webp": "7d287e59cb3f98bc6d5b727d8c37f0a9f6d1187df0dbd043813029746d99c101",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "同じ1秒のクロック数と命令数でCPI=1.25を検算。逆数0.8、2.5なら5億命令、10なら1.25億命令という各肢理由を確認。H3も未計算式で最後の除算が本人に残るため全false。CPI正式名称と単位、Gの意味を補った本文が適切。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。CPI=1.25×10^9サイクル毎秒÷10^9命令毎秒=1.25サイクル/命令。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q9",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954683+00:00",
+    "baseLessonSHA256": "af56a9bd981d864762fbf124563728e002ddb5a55296d0367c92758461a94ed9",
+    "reviewedLessonSHA256": "6c9b88d383b0137c6b75a5929d2666e7330d209ef909b2497a7c1b9a6d3bb420",
+    "questionSHA256": "64d426e5ea38d44c909680acf6d6933370122bdde7ca5a11bf2b70c53ef161e3",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q9.webp": "fd741a0cea4133cadcdcb38ba3b53e3eda32adbe04c094e496151f9adcf5dea8",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "データ転送を積和演算/DSP、仮想メモリ/MMU、計時/タイマーと区別。MPUの初期設定と個々の転送への不介在を区別した解説に過剰断定なし。H2は転送の定義そのものなのでtrue、H3も他肢排除でtrue。最終MPU略語補足を全文で再読。",
+    "officialAnswer": "エ",
+    "independentResult": "エ。DMAはCPU/MPUに転送ごとの処理をさせず、メモリと入出力又はメモリ間を転送。ア積和演算、イMMU、ウタイマー。",
+    "issues": []
+  },
+  {
+    "id": "r03h-q10",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.954847+00:00",
+    "baseLessonSHA256": "0d719e14dcfef7e6f164abc55839ab37adb9656ea610e3b92448da20389b7a96",
+    "reviewedLessonSHA256": "0c5443c01e24abb888f1d97ca9d4ad95c4d3f5655e68ac360a717073ed49495a",
+    "questionSHA256": "64895fa973c5bf006f050d3bd371711a9430cf2b660711303410e790d59d4d2e",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q10.webp": "e187f10054f8fbed77ad4845363a8295eae90510adbc956dd1dc856455a83141",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "原問の汎用行列演算ユニットを含む全肢を確認。学習の反復積和とGPU並列性が根拠。H3差戻し後に独立な二積和a*x+b*y,c*x+d*yとCPUも浮動小数点演算可という比較が増えた。H1 false/H2以後true。CPUの正式名称を解説/H3で再確認。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。深層学習の大量の行列演算を並列に高速化できるGPUが有利。独立した異プログラム、単なる浮動小数点コプロセッサ、分岐予測ではない。",
+    "issues": []
+  },
+  {
+    "id": "r04a-q8",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.955020+00:00",
+    "baseLessonSHA256": "3b8f1183db7d097c26ae1390c7a4e627fa4bc39d1ef8d6b01657c59377e7ada8",
+    "reviewedLessonSHA256": "a8953f4078e51ca59c0a5a682fb28ec45997eaaddbe61f961ae6925c7236a159",
+    "questionSHA256": "3a835334ebaf7e3c88c2aaaf4cfbb65f5169b076d796cd9df81f2833b3c82fb6",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q8.webp": "73c5fbeca737ccd07b8e3e8a85779c7e84b4d525e3ddeb3b63f0e47b4d481c7a",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "別原本を個別に読み、行列演算高速化とCPUの分岐/演算可否を区別。H3修正後、各行の出力の独立性という新たな根拠を確認。CPU正式名称も補足。H1は一般並列構造、H2以後は正答肢の行列高速化を教えtrue。summary/要点は学習計算と並列性へ分離。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。別原本も行列演算高速化。GPUの一般的な利点を選ぶ。",
+    "issues": []
+  },
+  {
+    "id": "r07a-q11",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.955284+00:00",
+    "baseLessonSHA256": "7abb36c3d706f62ff3fc1146b7efa92c261fde19e29e4d386d290c038dd331fe",
+    "reviewedLessonSHA256": "bc5a8fa39148df737376e076deecc00594e013e1fb9722db0f0743ad019baf22",
+    "questionSHA256": "b59231b73bcce35d125d0c2b86cbc44dcbf3c02ba5eb651a38c715b277ca7445",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q11.webp": "2bd0787479a73c02faa94275003981dd87a3fdc7fe4e41778923af36bb836c2c",
+      "assets/transcriptions/pr-batch4-figures/r07a-q11-choices.webp": "8506a33d344d388a0d029ea5c9cc275fe990b919b93b4f482610800e4e49b117",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "現状8000→32000コア、16コア/ノードで2000ノード、20GFLOPS/コアで640TFLOPSと再計算。四肢それぞれノード/性能の片方又は両方が違う根拠が具体的。全ヒントは計算・単位換算が残るfalse。FLOPS/G/Tの定義と再利用する倍率整理を確認。",
+    "officialAnswer": "イ",
+    "independentResult": "イ。現状総コア8000、更新32000、ノード内16なので2000ノード。1コア20GFLOPS×32000=640000GFLOPS=640TFLOPS。",
+    "issues": []
+  },
+  {
+    "id": "r07a-q13",
+    "author": "Codex /root/ap_wave01_author_4",
+    "reviewer": "Codex /root/ap_wave01_author_1",
+    "status": "approved",
+    "checkedAt": "2026-10-27T05:06:33.955411+00:00",
+    "baseLessonSHA256": "ad5979d707a063b6b05addb654582afcf948e5521c6e49992fed658e0897cc67",
+    "reviewedLessonSHA256": "0558a511c10385e95cb5ece0487dad5676a2ec693a356d59529e49092ec07ca6",
+    "questionSHA256": "e89ac099b8973479d89ba46e7fba1b44fb66b74dd4a628d91742e4f593c4546d",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q13.webp": "99b9b49ae021adb587c3d0069009e2e15ee319f209c32d89df38eb371581ef6e",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "MTBFは正常稼働平均、MTTRは修復平均で、差ではない。一度の初回故障と平均の区別、復旧後の稼働と修復の区別が全肢にある。100/102の例を検算。H1は記号の定義未提示、H2で式同義の定義を渡すので以後true。summaryは指標の意味、要点は割合の一般則。",
+    "officialAnswer": "ア",
+    "independentResult": "ア。MTBFは平均稼働時間、MTTRは平均修復時間。全サイクルMTBF+MTTRに対する正常稼働の割合がMTBF/(MTBF+MTTR)。イは差に意味を取り違え、ウは平均でなく最初の一回、エはMTBF側の説明。",
+    "issues": []
+  }
+]

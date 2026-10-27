@@ -43,6 +43,21 @@ class QualityGates(unittest.TestCase):
         quality.write(work/'registrations.json', [])
         shutil.copyfile(work/'baseline/questions.json', cls.root/'data/questions.json')
         shutil.copytree(work/'baseline/lessons', cls.root/'data/lessons', dirs_exist_ok=True)
+        # Real remaining batches may now be claimed, revised or registered.
+        # Contract fixtures start from an unassigned baseline, independent of
+        # the live content workflow and its genuine author/reviewer identities.
+        baseline_lessons = {row['id']: row for path in (work/'baseline/lessons').glob('*.json') for row in quality.read(path)}
+        for folder in (work/'batches').iterdir():
+            if not folder.is_dir() or folder.name == 'pilot-00':
+                continue
+            assignment = quality.read(folder/'assignment.json')
+            assignment.update(author=None, reviewer=None)
+            quality.write(folder/'assignment.json', assignment)
+            drafts = quality.read(folder/'drafts.json')
+            for draft in drafts:
+                draft.update(author=None, decision='pending', lesson=copy.deepcopy(baseline_lessons[draft['id']]), design=None)
+            quality.write(folder/'drafts.json', drafts)
+            quality.write(folder/'reviews.json', [])
         cls.base_files = {p.relative_to(cls.root): p.read_bytes() for p in cls.root.rglob('*') if p.is_file()}
 
     @classmethod
