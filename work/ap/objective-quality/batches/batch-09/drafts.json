@@ -693,11 +693,11 @@
     "id": "r04h-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "f681439721cda19d38a2893edb269fc1789ff5c1c47335afdbfffb67997c6d9f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q14",
-      "summary": "ア。エラーログ取得機能は原因調査を速め、MTTRの短縮に役立ちます。",
+      "summary": "故障間隔を延ばす対策と、故障後の修復時間を短くする対策を見分ける。",
       "explanation": "MTTRは故障から復旧までの平均修理時間です。エラーログで発生時の状況や原因を調べやすくすると、診断と修復に要する時間を短くできます。故障を起きにくくする対策や、誤りを運転中に訂正する機能とは目的を区別します。",
       "choiceReasons": [
         "障害原因の特定を助け、修理・復旧の時間を短くするのでMTTRの改善に直接役立ちます。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問の「MTBFを長くするよりもMTTRを短くする」に注目し、故障する前と故障した後に対策を分けます。",
+          "text": "MTBFはMean Time Between Failures（平均故障間隔）で、大きいほど故障しにくい指標です。MTTRはMean Time To Repair（平均修理時間）で、小さいほど復旧が速い指標です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "復旧までを「障害を検知→原因を特定→修理」と分けます。各候補がこの故障後の工程を短くするのか、故障そのものを起こりにくくするのかを分類しましょう。",
+          "text": "復旧の時間には故障の検知・原因の切分け・修理などが含まれます。設問は故障発生の予防ではなく、故障後のどの工程を短くできるかを選ばせています。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "エラーログがあれば原因調査が速まり、修理・復旧時間の短縮につながります。",
+          "text": "エラーログは故障前後の状態を記録し、原因の切分けを速めます。一方、ビット訂正や命令再試行は運転中の誤り対策、予防保全は故障を防ぐ取組みです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "MTBFとMTTRの略語の意味を知らず、障害対策をすべて同じ効果と捉えてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "MTBF・MTTRの定義と増減の意味",
+          "remainingWork": "各選択肢が故障前・後のどちらに効くか比べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "指標の説明のみで選択肢名を確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "故障後の切分け・修理工程という比較軸",
+          "remainingWork": "具体的な機能を工程に当てはめる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較の基準は示すが特定の肢は選ばない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "エラーログと他の障害対策の用途",
+          "remainingWork": "正答の機能を決める",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の名称と作用を提示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q14.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 51e7d65411b4a978ca2fc40acb11481a760bc845bda217103e79ae74819b72b3。",
+        "公式正答はcontext.json記録のア。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "0c4f7f4a0c7f362133bf492bc6b346259326620b580a903b78fd1a28d45c48f5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q16",
-      "summary": "ウ。短いタスクが続くと、長いタスクが待ち続ける可能性があります。",
+      "summary": "タスクのスケジューリングで、特定のタスクが実行されずに待ち続ける条件を考える。",
       "explanation": "処理予定時間の短いタスクを優先すると、新たに短いタスクが到着するたびに長いタスクが後回しになることがあります。これが飢餓（スターベーション）です。\nアは待つほど優先度を上げるエージングで飢餓を抑え、イのラウンドロビンとエの到着順方式は待ち行列順にCPUを割り当てます。",
       "choiceReasons": [
         "待ち時間に応じて優先度を上げるエージングを行うので、後回しにされ続けることを抑えます。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「待ち続ける可能性」は、単に一度の待ち時間が長いことではなく、後から来たタスクに繰り返し追い越されることです。",
+          "text": "CPUを長く待ち続ける問題を飢餓（スターベーション）と呼びます。一度待つだけでなく、新しいタスクが来ても待っている側の順番が進まないかがポイントです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "長いタスクが一つ待っているところへ、短いタスクが次々到着する場面を想像します。どの方式なら後から来たものが前へ進みますか。",
-          "revealsAnswer": false
+          "text": "例えば実行時間の長いタスクが待つ間に、短いタスクが次々到着したらどうなるでしょう。予定処理時間が短いものを優先する方式では、長いタスクが後回しになり続ける可能性があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ウは毎回最短の処理予定時間を選ぶため、長いタスクが追い越され続けます。アは待つほど優先度が上がるので対策があります。",
+          "text": "短い順に選ぶ方式がこの危険を持ちます。待つほど優先度を上げるエージング、一定時間ずつ回すラウンドロビン、到着順のFIFOは、後から短いタスクが追い越し続ける構造と異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "単なる長い待ち時間と、短いタスクに繰り返し追い越されて実行機会を失う飢餓を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "飢餓の定義と通常の待ち時間との差",
+          "remainingWork": "各スケジューリング方針で待機順を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "現象名と判定基準だけを教える"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "短いタスクが続くと長いタスクが飢餓になる因果",
+          "remainingWork": "4肢の方式の説明に対応付ける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の『最短処理時間優先』を実質的に言い換える"
+        },
+        {
+          "newInformation": "エージング・ラウンドロビン・到着順との比較",
+          "remainingWork": "ほかの方式が飢餓を抑える理由を確認",
+          "revealsAnswer": true,
+          "reason": "正答方式を直接特定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 1d76821137e34bd37f92c4ef2a3254a0d355618bf67aeddce820c135f244a0ae。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "9de454eb08a6875c911e2dd042f669a54a77148336bcf47ff27724d51ed61ec1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q15",
-      "summary": "エの11秒。Bは12秒に完了し、到着1秒との差が11秒です。",
+      "summary": "到着済みのジョブから処理時間の短い順に実行し、対象ジョブのターンアラウンドタイムを求める。",
       "explanation": "処理時間順方式では、実行待ちの中で処理時間が短いジョブを先に実行します。Aを0〜2秒、Cを2〜5秒、Eを5〜6秒、Dを6〜8秒、Bを8〜12秒に処理します。\nBの到着は1秒。ターンアラウンドタイムは到着から完了までなので、12−1=11秒です。待ち時間だけなら8−1=7秒で、処理時間4秒を含めます。",
       "choiceReasons": [
         "8秒はBの開始時刻です。到着から完了までの時間ではありません。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "最初の0秒にはAしかいません。Aが終わる2秒ではBとCが待っているので、処理時間を比べます。",
+          "text": "処理時間順では『その時点で到着していて待っているジョブ』の中から短いものを選びます。多重度1なので実行中のジョブを同時に走らせません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Cを開始した後にD,Eが到着します。C終了の5秒で待っているB,D,Eから最短を選びます。",
+          "text": "時刻0にはAだけなので0～2秒で処理します。2秒時点の待機はB（4秒）とC（3秒）で、短いCを2～5秒に動かします。この間にD（3秒到着）とE（4秒到着）が加わります。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Bより前の実行時間はAの2秒、Cの3秒、Eの1秒、Dの2秒です。Bの4秒を加えて完了時刻を出し、到着1秒を引きましょう。",
+          "text": "5秒にはB・D・Eが待っており、処理時間は順に4・2・1秒です。短い順に実行してBの終了時刻を求め、**ターンアラウンドタイム＝終了時刻－到着時刻（Bは1秒）**を計算してください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "将来到着するジョブまで先に並べ替える、あるいは開始時刻からの時間を答えてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "到着済みだけで処理時間順に選ぶという規則",
+          "remainingWork": "0～2秒で次の候補を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "選択方式の原理だけで実行順や数値は出さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の2区間とその間の後続ジョブ到着",
+          "remainingWork": "5秒以降の実行順とBの終了時刻を決める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最初の2区間のみ、後半の実行順は本人に残す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "5秒時点の待機リストとターンアラウンドの式",
+          "remainingWork": "最終時刻から1秒を引いて選択肢を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "必要な数値と式を示すがBの終了時刻・最終差は本人が計算する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q15.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 8fdf3250810bfa2cb6d8d44861d29852c93b415efdced0cebad148aaaf1c3529。",
+        "公式正答はcontext.json記録のエ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "10b4d7420c9300cb1665b5dd4774fad771bdc1eb008288bfc76ffb60aae999c2",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q18",
-      "summary": "ウ。Gitは各ローカル環境に全履歴を持つ分散型管理ツールです。",
+      "summary": "ローカルに履歴を持つ分散型と中央サーバ主体の集中型の版管理を区別する。",
       "explanation": "Gitでは通常のcloneでリポジトリの履歴をローカルに複製します。ローカルで履歴の調査やコミットができ、共有リポジトリと通信できない間も作業を記録できます。SubversionやCVSのように中央リポジトリへ変更を記録する方式とは、この履歴と記録の所在が異なります。",
       "choiceReasons": [
         "中央リポジトリを中心に変更を管理する集中型のツールです。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「全履歴の完全な複製」と「中央へアクセスできない間の変更記録」がどこにあるかを考えます。",
+          "text": "版管理では、ソースコードの今の内容だけでなく『誰がいつどの変更を記録したか』という履歴の保存場所を見ます。設問は中央サーバなしで履歴確認・変更記録が可能かを聞いています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "作業用ファイルだけでなく履歴をローカルに持つ方式なら、履歴調査と変更の記録を通信なしで行えます。",
-          "revealsAnswer": true
+          "text": "集中型では通常、履歴の中心は中央サーバ側にあります。分散型では各開発者が履歴を含むリポジトリを手元に持ち、ネットにつながらなくてもローカルへコミットできます。",
+          "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ローカルリポジトリに全履歴を持ちコミットできる分散型ツールはGitです。",
+          "text": "Gitは通常のcloneで履歴を含むリポジトリを複製し、ローカルコミットできます。Subversion・CVSは集中型、RCSは個々のファイルの版管理を中心とするツールです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "作業ファイルのローカルコピーと、履歴を含むリポジトリの完全な複製の違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "作業ファイルと履歴の所在を分ける視点",
+          "remainingWork": "説明の要件を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "設問の比較軸だけを示す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
+          "newInformation": "集中型・分散型の履歴管理とコミット可能性",
+          "remainingWork": "四つの製品の特性を照合",
+          "revealsAnswer": false,
+          "reason": "分散型の意味は学べるが製品名はまだ渡していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "GitとSubversion・CVS・RCSの分類",
+          "remainingWork": "該当するツールを選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答名を示し他3肢を除外する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 7fb629e6fa3de190fcc13e97c21df8c3ae68638e28edf752a7e1509b264dbba7。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "09c5ecfdddd88998b8a9781ae3cd562c2d48b9e27a5ca6a7d4e93e6f5fac73db",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q19",
-      "summary": "ウ。Gitは履歴を含むリポジトリをローカルに保持します。",
+      "summary": "中央リポジトリが利用不能でも履歴を調べてコミットできる版管理方式を特定する。",
       "explanation": "Gitは分散型のバージョン管理ツールです。各開発者がリポジトリを複製し、通常は履歴も手元に持つため、サーバに接続できなくても履歴の調査やローカルのコミットができます。\nApache SubversionとCVSは中央リポジトリを中心とする集中型です。RCSは主に個々のファイルの版を管理するツールで、問題の分散型の説明に該当しません。",
       "choiceReasons": [
         "Apache Subversionは集中型で、履歴全体を持つ分散型の説明とは異なります。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "手元にあるのが最新の作業ファイルだけか、「全履歴を含む完全な複製」かが決め手です。",
+          "text": "通信が切れても可能とされているのは『履歴の調査』と『変更の記録』の二つです。単なるファイルのローカル保存で、その両方ができるか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "通信できないときも変更を記録できるという条件から、記録先のリポジトリが各開発者のローカルにある方式を探します。",
+          "text": "分散型では履歴を含むリポジトリを各開発者が複製します。commitはローカルに履歴を記録でき、共有先への送信（push）は後で行えます。集中型は通常中央のリポジトリが記録の中心です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "集中型のSubversion・CVSと、分散型のGitを区別します。全履歴を手元に持つという条件がGitに一致します。",
+          "text": "Gitは分散型です。通常のcloneでローカルに履歴を持つため、オフラインで履歴調査・コミットができます。SubversionとCVSは集中型、RCSは主にファイル単位の版管理です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "中央とローカルのどちらに履歴の実体があるかを意識せず、どのツールも同じだと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "オフラインで必要な二つの操作の確認",
+          "remainingWork": "保存対象が作業ファイルのみか履歴全体か判断",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "正答名称を示さず要件のみを整理"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "clone・commit・pushの役割と履歴の所在",
+          "remainingWork": "ツール名と方式を照らし合わせる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分散型の仕組みを教えるが製品名は渡さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "4ツールの区別とGitの該当性",
+          "remainingWork": "正答を選択する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の名称を特定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: ede4a7d92694934c3e01cf5aa0c6a1c102bd39e971a6348d72cdf53bd65b6bc4。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "550f518c8c859f231afe2941928ddc81ebc6380a7bceaeb6912824ffdd614ea6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q18",
-      "summary": "イのクロスコンパイラ。動かす計算機とは別の計算機でコンパイルします。",
+      "summary": "コンパイラを動かすホストと、生成された目的プログラムの実行先であるターゲットを区別する。",
       "explanation": "設問では、言語処理プログラムを動かしているコンピュータと、生成した目的プログラムを動かすコンピュータで命令形式が違います。\nこのようにホストと異なるターゲット向けの機械語を生成するコンパイラをクロスコンパイラと呼びます。組込み機器向けプログラムをPC上で生成する場面などで使います。",
       "choiceReasons": [
         "ほかの計算機の動作を模倣して実行するものです。別の命令形式の目的プログラムを生成する言語処理系ではありません。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "実行しているのは言語処理プログラム、生成するのは別の計算機向けの目的プログラムです。二つの実行場所を分けます。",
+          "text": "コンパイラはソースコードを目的プログラムへ翻訳するプログラムです。設問ではコンパイラ自身を動かすホストと、生成コードが走るターゲットの命令形式が違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "設問はコードの最適化ではなく、生成先の命令形式がホストと違うことを問うています。",
+          "text": "エミュレーターは他のCPUの動作を模倣してプログラムを実行します。最適化コンパイラは速度・サイズの改善が主眼です。設問は動作の模倣でも最適化でもなく、『異なる命令形式の目的コードを生成』する仕組みです。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "異なるターゲット向けにコンパイルする「クロス」という語を含む名称を選びます。",
+          "text": "ホストと異なるターゲット向けの目的コードを生成するのがクロスコンパイラです。例としてPC上で組込み機器用の機械語を作ります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "別の計算機で『プログラムを実行』することと、その計算機用の『目的プログラムを生成』することを取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ホスト・ターゲット・目的プログラムの定義",
+          "remainingWork": "ホストとターゲットを対応付ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "前提となる用語だけを説明する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "エミュレーター・最適化と生成先の違い",
+          "remainingWork": "生成する言語処理系に該当する肢を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "誤答2肢を除くが正答名は言わず、残る比較がある"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "クロスコンパイラの名称と具体例",
+          "remainingWork": "残るプログラムジェネレーターとの違いも確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答名称を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 809e9c3b997e361aecb951d02d04ff2c0f24c10834db8f323d927ed190c9a9ff。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "be40df0bbbc9eca2f6047ae268ba723a7b94273dc793807c63de2da3da88f2d5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q16",
-      "summary": "ア。Cの到着3秒から終了14秒までの11秒です。",
+      "summary": "到着順・多重度1でのジョブ終了時刻を出し、待ち時間を含むターンアラウンドを計算する。",
       "explanation": "到着順で多重度1なのでAは0〜5秒、Bは5〜11秒、Cは11〜14秒に実行されます。Cのターンアラウンドタイムは待ち時間を含め、終了14−到着3=11秒です。",
       "choiceReasons": [
         "14−3=11秒で正しいです。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Aが0秒に到着して5秒実行する区間を時間軸に描きます。",
+          "text": "ターンアラウンドタイムは『ジョブの到着から完了まで』の時間です。実行時間だけでなく、順番待ちも含めます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "BとCはAの終了を待ちます。Bの6秒を続け、その後Cの3秒を置きます。",
+          "text": "多重度1・到着順なのでAは0～5秒、次のBは5～11秒です。Cは3秒に到着しても、Bが終わるまでは実行できません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Cは14秒に終了するため、14−3=11秒です。",
+          "text": "Cは11秒から3秒動いて14秒に完了します。Cのターンアラウンドタイム＝14－到着3＝11秒です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ジョブCの処理時間3秒だけを答える、またはCの終了時刻14秒をそのまま答える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "到着・実行開始・完了とターンアラウンドの定義",
+          "remainingWork": "表の時刻から実行順を組む",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式のみで数値を導かない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AとBの実行区間からCの開始時刻を得る",
+          "remainingWork": "Cの3秒間を足し、到着との差を計算",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "Cの開始は分かるが終了と差は本人が求める"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Cの終了時刻と到着からの経過時間",
+          "remainingWork": "選択肢を照合",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終数値を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: d5eed6b850d328d7f885b01935955411b7c6e462f6a353e83d068f220d222db9。",
+        "公式正答はcontext.json記録のア。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "4eb9c01f396f154a64e4aa1941c906172ac87c9c1ad9f23f9c34daf2ddc3b471",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q18",
-      "summary": "ウ。割込み処理は最優先タスクより優先されます。",
+      "summary": "優先度付きタスクの切替えと、タスクより優先される割込み処理を区別する。",
       "explanation": "割込み禁止状態を考慮しない条件では、割込みが発生すると実行中タスクを中断して割込み処理ルーチンを実行します。タスク間の優先度によるスケジューリングと、ハードウェア割込みの受理は別です。",
       "choiceReasons": [
         "タスク切替禁止は割込み禁止と異なり、割込み処理の呼出しまで禁止しません。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題が割込み禁止状態を除外していることを確認し、タスクと割込み処理を分けます。",
+          "text": "設問は『割込み禁止状態を考慮しない』条件です。タスクはスケジューラが選ぶ処理、割込み処理ルーチンは割込み発生に対応して呼び出される処理です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "タスクを切り替えないことと、外部からの割込みを受け付けないことは別の制御です。",
+          "text": "タスク切替の禁止は、別タスクへのスケジューリングを抑えることです。割込みの受付禁止とは別なので、タスク切替を止めても割込み処理まで止めたことにはなりません。また割込み中は通常のタスク処理が進みません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "最優先タスクを実行中でも、受け付けた割込みの処理へ先に移ります。",
+          "text": "受け付けた割込みの処理は最優先タスクよりも先に実行されます。処理が長いと応答性に影響し、割込み処理は割り込まれたタスクと同一の実行コンテキストではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "タスクの切替禁止を割込み禁止と同一視し、割込み処理時間やコンテキストの影響を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "タスクとISRの役割と設問の前提",
+          "remainingWork": "各肢の『禁止』対象を見分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "設問の用語を定義するにとどまる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "タスク切替禁止と割込み禁止の差、割込み中の進行",
+          "remainingWork": "応答性・コンテキストを含めて肢を比較",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "アは除外できても他の選択肢が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最優先タスクとの優先関係と他肢の誤り",
+          "remainingWork": "正しい割込み優先関係を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と同じ優先関係を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 5219cdb570110783f3aa21897ae7c01ef9969bf50bdf2be4ed3a316e7b4cee6a。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "0f21951f587489397f67986b9a024b5d8f6a89aa0d96fcb3a2aa42155c916771",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q19",
-      "summary": "イ。多重度1と2で完了時刻の差は7秒です。",
+      "summary": "到着間隔のある4件の要求を1枠と2枠で処理したときの最終完了時刻を比較する。",
       "explanation": "要求の到着時刻を0、1、2、3秒とします。多重度1では各4秒を順に実行し、終了は4、8、12、16秒です。多重度2では最初の二つが0〜4秒と1〜5秒に動作し、待っている後続二つは4〜8秒、5〜9秒に動作します。全ての完了は16秒と9秒で、差は7秒です。",
       "choiceReasons": [
         "6秒ではありません。多重度2の最終完了は2件目開始の1秒を含めて9秒です。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "4件の到着時刻を0、1、2、3秒として書き出します。実行開始は到着と同じとは限りません。",
+          "text": "最初の要求を時刻0とすると、4件の到着は0・1・2・3秒です。処理時間はどちらの多重度でも1件4秒。到着前に処理を始めることはできません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "1件4秒なので、まず多重度1では最初の要求が0〜4秒、次の要求が4〜8秒です。多重度2では2枠目を1秒到着の要求が使えます。到着時刻と空き枠の両方を満たした時点から開始し、各条件の最後の終了時刻を比べます。",
+          "text": "多重度1では要求を一つずつ4秒処理し、完了は4・8・12・16秒です。多重度2では0秒と1秒に二つの枠が埋まり、最初の完了は4秒と5秒です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "多重度1の終了は4、8、12、16秒。多重度2は4、5、8、9秒なので、差は16−9=7秒です。",
+          "text": "多重度2の空き枠へ残り2件を順に入れると、終了は8秒と9秒です。全件完了の差は16－9＝7秒となります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "4件が同時到着したかのように並列処理し、2枠目の開始が1秒遅いことを見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1秒間隔での到着時刻と1件4秒という条件",
+          "remainingWork": "各開始時刻を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "到着条件を整理するだけで答えは出さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "多重度1の4件の完了と2枠の最初の完了",
+          "remainingWork": "残り2件がいつ始まるか決める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "多重度2の最終完了までは示していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "2枠での残り2件の完了と差",
+          "remainingWork": "差と選択肢を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終時間差の値を渡す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: ada769607dc47439ad4a9f96ba1e2603fcda1548bb28084c5badd9a2b4402bc4。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "60479c2fbf277e91b51206c93f50f83bd0e512b3716716fadb842f9c6df7e812",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q18",
-      "summary": "多重度1では16秒、多重度2では9秒で終わるので、差は7秒です。",
+      "summary": "同じ4件の依頼を1枠と2枠でさばく際、並列化しても各要求の4秒は変わらないことを使う。",
       "explanation": "最初の到着を時刻0とすると、4件は時刻0,1,2,3に到着します。多重度1は一件ずつ4秒かかり、終了は4,8,12,16です。\n多重度2では最初の二件が0〜4と1〜5で実行されます。空いた枠へ後の二件が入り、2秒目の要求は4〜8、3秒目の要求は5〜9で実行されます。全件終了は9なので差は16−9=7秒です。",
       "choiceReasons": [
         "アの6秒ではありません。多重度2の二つ目の枠は1秒遅れて始まり、最後は9秒に終わります。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "4件の到着を0,1,2,3秒として書きます。処理時間は並列でも一件4秒のままです。",
+          "text": "各要求の処理時間4秒は、多重度2でも短くなりません。並列化で変わるのは『同時に走らせられる要求の数』です。到着時刻は0、1、2、3秒と置きます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "多重度1では終了した直後に待っている次の要求を開始します。多重度2は二つの枠を別々に追います。",
+          "text": "多重度1なら0～4、4～8、8～12、12～16秒と処理します。2枠では最初の2件はそれぞれ0～4秒、1～5秒に動きます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "二枠の最初の終了は4秒と5秒です。残りをそれぞれ開始するといつ終わるか計算し、逐次処理の16秒との差を求めます。",
+          "text": "2枠の空きが出る時刻4秒・5秒に残りの要求を1件ずつ開始します。それぞれ4秒の処理を加え、全件終了時刻を比べて差を計算してください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "多重度2を単純に処理時間の半分と考え、到着タイミングと2枠の待ち行列を無視する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "多重度は同時処理件数であり個別処理時間は一定",
+          "remainingWork": "到着時刻と実行枠の対応を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "処理方法の説明で答えを渡さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1枠での実行区間と2枠の最初の2件",
+          "remainingWork": "残りの要求の待ちを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "2枠の後半の終了時刻はまだ出していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "2枠の残り要求の開始時刻の確定",
+          "remainingWork": "最終完了時刻と差を算出する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "4秒加算と差を本人が計算する余地が残る"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 6b6d2892f2b94aa0aff5e8cbb8aaa1123969d18923357e540eb80e7d21f5b732。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   }
 ]
