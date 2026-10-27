@@ -22,6 +22,7 @@ for path,size in [('icon-192.png',192),('icon-512.png',512),('apple-touch-icon.p
 for page in ['index.html','ap/index.html','fp2/index.html']:
     html=(root/page).read_text()
     assert 'class="brand-logo"' in html
+    assert '<span class="sr-only">ひと問</span>' in html
     assert 'assets/icons/hitomon-logo.svg' in html
     assert 'assets/icons/hitomon-app-icon.svg' in html
     assert 'apple-touch-icon.png' in html
