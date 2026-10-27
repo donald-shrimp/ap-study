@@ -1,0 +1,175 @@
+{
+  "r03a-q17": {
+    "maxProbability": "1/200000",
+    "delaysMicroseconds": [
+      "2/5",
+      "4/5",
+      "4",
+      "8"
+    ]
+  },
+  "r03h-q14": {
+    "formula": "1-(1-x^2)^2=2x^2-x^4",
+    "atHalf": 0.4375,
+    "atPointEight": 0.8704,
+    "internalIntersection": 0.6180339887498949
+  },
+  "r04h-q16": {
+    "phases": [
+      {
+        "event": "A start",
+        "files": [
+          "A"
+        ],
+        "megabytes": 50
+      },
+      {
+        "event": "B,C start",
+        "files": [
+          "A",
+          "B",
+          "C"
+        ],
+        "megabytes": 150
+      },
+      {
+        "event": "B,C finish",
+        "files": [
+          "B",
+          "C"
+        ],
+        "megabytes": 100
+      },
+      {
+        "event": "D,E start",
+        "files": [
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "megabytes": 200
+      },
+      {
+        "event": "D,E finish",
+        "files": [
+          "D",
+          "E"
+        ],
+        "megabytes": 100
+      },
+      {
+        "event": "F start",
+        "files": [
+          "D",
+          "E",
+          "F"
+        ],
+        "megabytes": 150
+      }
+    ],
+    "peakMegabytes": 200
+  },
+  "r07a-q15": [
+    {
+      "job": "A",
+      "start": 0,
+      "end": 2,
+      "turnaround": 2
+    },
+    {
+      "job": "C",
+      "start": 2,
+      "end": 5,
+      "turnaround": 3
+    },
+    {
+      "job": "E",
+      "start": 5,
+      "end": 6,
+      "turnaround": 2
+    },
+    {
+      "job": "D",
+      "start": 6,
+      "end": 8,
+      "turnaround": 5
+    },
+    {
+      "job": "B",
+      "start": 8,
+      "end": 12,
+      "turnaround": 11
+    }
+  ],
+  "r03h-q16": [
+    {
+      "job": "A",
+      "start": 0,
+      "end": 5,
+      "turnaround": 5
+    },
+    {
+      "job": "B",
+      "start": 5,
+      "end": 11,
+      "turnaround": 9
+    },
+    {
+      "job": "C",
+      "start": 11,
+      "end": 14,
+      "turnaround": 11
+    }
+  ],
+  "server-slots-1": {
+    "timeline": [
+      [
+        0,
+        0,
+        4
+      ],
+      [
+        1,
+        4,
+        8
+      ],
+      [
+        2,
+        8,
+        12
+      ],
+      [
+        3,
+        12,
+        16
+      ]
+    ],
+    "finish": 16
+  },
+  "server-slots-2": {
+    "timeline": [
+      [
+        0,
+        0,
+        4
+      ],
+      [
+        1,
+        1,
+        5
+      ],
+      [
+        2,
+        4,
+        8
+      ],
+      [
+        3,
+        5,
+        9
+      ]
+    ],
+    "finish": 9
+  }
+}
