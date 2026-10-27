@@ -3,11 +3,11 @@
     "id": "r05a-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "8909854895fa940d613b931a2cec028453e2519b15f4fce6a202ca164e666b1b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q26",
-      "summary": "エ。ハッシュインデックスは利用者IDの完全一致検索に適します。",
+      "summary": "B⁺木索引とハッシュ索引の特性を、検索条件が等値か範囲かで比較する。",
       "explanation": "ハッシュはキー値から格納先を計算するため、指定した値と等しいデータを探す等値検索に向きます。一方、大小順を保存しないため範囲検索や前方一致には適しません。\n売上金額の下限、今月の日付範囲、商品名の先頭文字列はB⁺木の順序を使う方が適切です。利用者ID=1001の等値条件がハッシュ向きです。",
       "choiceReasons": [
         "1万円以上という範囲検索です。値の順序を保持するB⁺木が適します。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "検索条件を「以上」「今月」「で始まる」「1001と等しい」に分けます。完全なキー値が指定されているか確認します。",
+          "text": "「1万円以上」は下限のある範囲、「今月」は日付の範囲、「DBで始まる」は文字列の前方一致、「1001と等しい」は一つの値の指定です。まず条件の種類を分類します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ハッシュ値はキーの大小順を保持しません。順にたどる必要がある条件と、一つの値を探す条件を区別します。",
+          "text": "B⁺木はキーを順序付きで保持し、範囲や前方一致をたどれます。ハッシュはキーから位置を求めるので完全一致には強い一方、大小順や接頭辞の近さを保持しません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "1001という利用者ID全体から格納先を求める検索を考えます。これは範囲ではなく等値検索です。",
+          "text": "利用者IDが「1001」と等しい条件では値全体が指定されています。ほかの三条件は範囲または前方一致なので、ハッシュをB⁺木より優先するのは等値検索の肢です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ハッシュが等値検索向きという知識がなく、以上・日付範囲・前方一致も同じ検索と考えてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「1万円以上」は下限のある範囲、「今月」は日付の範囲、「DBで始まる」は文字列の前方一致、「1001と等しい」は一つの値の指定です。まず条件の種類を分類します。",
+          "remainingWork": "各検索が順序を使うか判断する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では各検索が順序を使うか判断するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "B⁺木はキーを順序付きで保持し、範囲や前方一致をたどれます。ハッシュはキーから位置を求めるので完全一致には強い一方、大小順や接頭辞の近さを保持しません。",
+          "remainingWork": "4条件を索引の特性と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、ハッシュが利用者IDの完全一致に向くことが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "利用者IDが「1001」と等しい条件では値全体が指定されています。ほかの三条件は範囲または前方一致なので、ハッシュをB⁺木より優先するのは等値検索の肢です。",
+          "remainingWork": "等値条件と対応する選択肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、ハッシュが利用者IDの完全一致に向くことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q26.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115。",
+        "context記載の公式正答 エ と原本の肢を照合。ハッシュが利用者IDの完全一致に向く点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r07a-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "dd91ae61517724f5ef3a9c78aca9761d9e39e5625e702ab3b5f8d6dfa6b98b93",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q27",
-      "summary": "エ。利用者IDが1001と等しい検索はハッシュ索引に適します。",
+      "summary": "B⁺木とハッシュの索引方式の違いから、どの検索条件にハッシュが適するか判断する。",
       "explanation": "ハッシュインデックスはキーをハッシュ関数に通して格納位置を求めるため、指定した値との等価検索に適します。大小や文字列の順序を保たないので、範囲や前方一致の検索には不向きです。\n利用者IDが1001という等価条件のエが適切です。年月日の「今月」は複数の日付にまたがる範囲になります。",
       "choiceReasons": [
         "1万円以上という範囲条件は、キー順にたどれるB+木の方が適します。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの条件を「一つの値と同じ」と「複数の値の範囲」に分けます。「今月」は月内の複数日です。",
+          "text": "四つの条件を比較します。「以上」と「今月」は複数値の範囲、「DBで始まる」は接頭辞の範囲、「1001と等しい」は指定値との一致です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ハッシュ値は元の値の大小順を保ちません。ある金額以上やDBで始まる文字列を連続してたどれない点を考えます。",
-          "revealsAnswer": false
+          "text": "B⁺木はキーの大小・辞書順を維持するので範囲を連続して探索できます。ハッシュ索引はキー全体の値から格納位置を計算し、**等値検索**に適しますが範囲検索には向きません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "年月日、商品名、金額の条件には幅があります。特定のID値一つをそのままキーにできる条件を確認しましょう。",
+          "text": "金額・年月日・商品名の三条件は順序を利用します。一つの利用者IDに一致する行だけを探す条件なら、ハッシュ索引の利点が直接生きます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ハッシュ索引の「同じ値を直接探す」とB⁺木の「並びをたどる」を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの条件を比較します。「以上」と「今月」は複数値の範囲、「DBで始まる」は接頭辞の範囲、「1001と等しい」は指定値との一致です。",
+          "remainingWork": "索引が必要とする順序の有無を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では索引が必要とする順序の有無を考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "B⁺木はキーの大小・辞書順を維持するので範囲を連続して探索できます。ハッシュ索引はキー全体の値から格納位置を計算し、**等値検索**に適しますが範囲検索には向きません。",
+          "remainingWork": "各条件をB⁺木かハッシュに割り当てる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、利用者ID=1001だけが等値検索であることが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "金額・年月日・商品名の三条件は順序を利用します。一つの利用者IDに一致する行だけを探す条件なら、ハッシュ索引の利点が直接生きます。",
+          "remainingWork": "選択肢の列名と検索条件を照合する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、利用者ID=1001だけが等値検索であることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07a/r07a-q27.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e。",
+        "context記載の公式正答 エ と原本の肢を照合。利用者ID=1001だけが等値検索である点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r07a-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "5c400786ed97f4f1d47213000a4a450985d0765addb5b689494c8a3a42827ab4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q28",
-      "summary": "ア。ビューの列には、基表と異なる列名を付けられます。",
+      "summary": "ビューを定義するSELECTの機能と、ビューの更新可否の制約を区別する。",
       "explanation": "ビューは問合せ結果を表のように扱う仕組みで、定義時に列名を指定したり別名を付けたりできます。例えば基表のpriceをビューで売価と名付けられます。\n列だけでなくWHERE条件で行を絞り、UNIONで和を表すこともできます。一方、結合など複雑なビューを常に更新できるとは限りません。",
       "choiceReasons": [
         "ビューの列名を基表と異なる名称で定義できるので正しいです。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "ビューはSELECT文を表として扱うものと考えます。SELECTで列に別名を付けられるかを確認します。",
+          "text": "ビューはSELECTの結果を表のように扱う**仮想的な表**です。元の表のデータをどう見せるかを定義するもので、列だけのコピーとは限りません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "SELECTにはWHEREやUNIONも使えます。それらを使った結果をビューとして扱う場合を考えます。",
+          "text": "SELECTでは列に`AS`で別名を付けたり、`WHERE`で行を絞ったり、`UNION`で結果を合わせたりできます。これらを使うビューも定義できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「行を抜き出せない」「結合なら必ず更新できる」「和集合では作れない」という断定を、SELECTの機能や更新制限と照合しましょう。",
+          "text": "一方、複数表の結合結果などは元の行を一意に更新できるとは限りません。列の別名は可能、行抽出とUNIONも可能、結合ビューは常に更新可能とは限らない、という四点で全肢を確認します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ビューを単なる列の抜粋と誤解し、WHERE・UNION・列別名や更新制約を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ビューはSELECTの結果を表のように扱う**仮想的な表**です。元の表のデータをどう見せるかを定義するもので、列だけのコピーとは限りません。",
+          "remainingWork": "SELECTで利用できる構文を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段ではSELECTで利用できる構文を考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SELECTでは列に`AS`で別名を付けたり、`WHERE`で行を絞ったり、`UNION`で結果を合わせたりできます。これらを使うビューも定義できます。",
+          "remainingWork": "列名変更・行抽出・和集合の肢を判定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、ビューで基表と異なる列名を付けられることが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一方、複数表の結合結果などは元の行を一意に更新できるとは限りません。列の別名は可能、行抽出とUNIONも可能、結合ビューは常に更新可能とは限らない、という四点で全肢を確認します。",
+          "remainingWork": "各肢の断定を検証する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、ビューで基表と異なる列名を付けられることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07a/r07a-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9。",
+        "context記載の公式正答 ア と原本の肢を照合。ビューで基表と異なる列名を付けられる点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r04h-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "6ac39716ef5af85b6a16fa151c55efaf1903c81466ed0cf1b01a259a8ed8b833",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q27",
-      "summary": "ア。インデックスの定義は、物理的な格納・アクセスを扱う内部スキーマに含まれます。",
+      "summary": "ANSI/SPARCの3層スキーマのうち、内部スキーマが担当する設計対象を選ぶ。",
       "explanation": "ANSI/SPARCの3層スキーマでは、外部スキーマは利用者ごとの見え方、概念スキーマはデータ全体の論理構造、内部スキーマは格納方法やアクセス経路を表します。SQL問合せを速めるインデックスはアクセス経路に関する定義であり、内部スキーマの設計です。",
       "choiceReasons": [
         "検索を高速化するインデックスは物理的なアクセス経路の定義なので内部スキーマです。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補を「論理的に何を表すか」と「実際にどう格納・検索するか」に分けて読みます。",
-          "revealsAnswer": false
+          "text": "3層は**外部**（利用者ごとの見え方）、**概念**（データ全体の論理構造）、**内部**（格納やアクセスの仕組み）という異なる視点を分離します。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "内部スキーマは物理的なデータ配置やアクセス経路の層です。関連や制約の定義と、検索を速める構造を区別します。",
-          "revealsAnswer": false
+          "text": "内部スキーマはデータの配置やアクセス経路など、実際にどう格納・検索するかを扱います。E-R図・整合性制約・正規化は論理構造の設計です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "問合せ応答時間を改善するインデックスは、検索のアクセス経路なので内部スキーマに含まれます。",
+          "text": "検索を速くするインデックスの定義は、表の意味を変えるのでなく**アクセス経路**を定めるものです。これを内部スキーマの候補として選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "内部・概念・外部という名前だけでは、索引と論理的な制約をどの層に置くか分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "3層は**外部**（利用者ごとの見え方）、**概念**（データ全体の論理構造）、**内部**（格納やアクセスの仕組み）という異なる視点を分離します。",
+          "remainingWork": "4肢を物理と論理に分類する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第1段までの内容と原問の全肢を合わせると、インデックスが物理アクセス経路に属することが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "内部スキーマはデータの配置やアクセス経路など、実際にどう格納・検索するかを扱います。E-R図・整合性制約・正規化は論理構造の設計です。",
+          "remainingWork": "各肢の設計対象を三層へ当てはめる",
+          "revealsAnswer": true,
+          "reason": "第2段までの内容と原問の全肢を合わせると、インデックスが物理アクセス経路に属することが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "検索を速くするインデックスの定義は、表の意味を変えるのでなく**アクセス経路**を定めるものです。これを内部スキーマの候補として選びます。",
+          "remainingWork": "論理構造の3肢と比較する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、インデックスが物理アクセス経路に属することが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04h/r04h-q27.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e。",
+        "context記載の公式正答 ア と原本の肢を照合。インデックスが物理アクセス経路に属する点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r06a-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "561c68144ecebfd586e22efdfe23ebaeb7fab02fd6a6cb595c01a70d0ec67973",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q27",
-      "summary": "イ。参加者が可否を返した後、最終決定を受け取る前の障害で判断を待ちます。",
+      "summary": "2相コミットの各段階を追い、参加者が最終決定を待つ状態での障害を特定する。",
       "explanation": "2相コミットでは、まず調停者が各参加者へコミット可能かを問い合わせ、全員の応答を集めて、次にコミットまたはロールバックの決定を通知します。\nコミット可能と答えた参加者は、他の参加者の応答や調停者の最終決定を知らないため、勝手に確定も取消しもできません。調停者が最終決定を送る直前に通信障害となるイが、この判断待ちを生じさせます。",
       "choiceReasons": [
         "問い合わせ前なら参加者はコミットへの合意を返しておらず、最終決定待ちの状態には入りません。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "手順を「問い合わせ→可否の応答→最終決定の通知→完了応答」と並べます。コミットか取消しかを知るのは最終決定の通知です。",
+          "text": "2相コミットは①調停者がコミット可否を問い合わせる、②参加者が可否を答える、③調停者が全員の回答から確定/取消しを決めて通知する、④参加者が完了を返す、の順です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "自分がコミット可能でも、別の参加者が不可と答えるかもしれません。可否を返した後は調停者の決定を待つ必要があります。",
-          "revealsAnswer": false
+          "text": "参加者が「コミット可能」と答えても、他の参加者が不可かもしれません。**可否を返した後、最終決定が届くまでは**参加者だけでコミット/ロールバックを決められません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "最終決定を送る直前なら、参加者には可否の問い合わせと応答は済んでいますが、確定か取消しかの通知が届きません。イです。",
+          "text": "調停者が**最終決定を送る直前**に障害になると、参加者は準備に同意済みなのに結果を受信できません。問い合わせ前や完了応答直前の障害とは異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "調停者からの準備問合せと最終決定通知を混同し、どの時点で参加者が待機するか分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "2相コミットは①調停者がコミット可否を問い合わせる、②参加者が可否を答える、③調停者が全員の回答から確定/取消しを決めて通知する、④参加者が完了を返す、の順です。",
+          "remainingWork": "各選択肢の障害時点を並べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では各選択肢の障害時点を並べるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "参加者が「コミット可能」と答えても、他の参加者が不可かもしれません。**可否を返した後、最終決定が届くまでは**参加者だけでコミット/ロールバックを決められません。",
+          "remainingWork": "その待機区間に当たる障害を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、準備可否の応答後で最終決定の送信前に障害が起こることが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "調停者が**最終決定を送る直前**に障害になると、参加者は準備に同意済みなのに結果を受信できません。問い合わせ前や完了応答直前の障害とは異なります。",
+          "remainingWork": "障害時点と各肢を照合する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、準備可否の応答後で最終決定の送信前に障害が起こることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r06a/r06a-q27.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019。",
+        "context記載の公式正答 イ と原本の肢を照合。準備可否の応答後で最終決定の送信前に障害が起こる点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r03a-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "c1c3d8c95d0373d3fdbce8b0f3d8c2a59b89e5661f91272be7a771c0302aacf4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q28",
-      "summary": "イ。受注番号だけに依存する属性があるため第2正規形ではありません。",
+      "summary": "受注明細表の複合キーと関数従属を確認し、第1〜第3正規形のどこまで満たすか判断する。",
       "explanation": "各セルが単一値なので第1正規形です。明細のキーは受注番号と項番の組です。受注日・得意先コードは受注番号だけで決まり、複合キーの一部への部分関数従属があります。したがって第2正規形ではありません。さらに商品コード→単価という従属もありますが、まず第2正規形の要件を満たさないため、第3正規形にもなりません。",
       "choiceReasons": [
         "各セルは単一値で繰返し項目を一つのセルに持たないので、第1正規形です。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "明細を一行に特定するには受注番号だけで足りるか確認し、項番と組み合わせてキーを考えます。",
+          "text": "各セルに値が一つずつ入っていれば第1正規形です。明細一行を特定するには受注番号だけでなく、同じ受注内の**項番**も必要なのでキーは(受注番号,項番)です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "第2正規形には、非キー属性が複合キーの一部だけに依存しないことが必要です。受注日や得意先コードは項番が変わっても同じ受注なら変わりません。",
+          "text": "第2正規形は、複合キーの**一部分だけ**で決まる非キー属性を残さない形です。この表の受注日と得意先コードは、項番が違っても受注番号が同じなら同じ値になります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "受注日・得意先コードが受注番号だけに従属するので、第1正規形だが第2正規形でない表です。",
+          "text": "(受注番号,項番)のうち**受注番号だけ**で受注日・得意先コードが決まるため、第2正規形の条件を満たしません。商品コード→単価の依存もありますが、まず最初に満たさない段階を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "表が一行一明細なので正規化済みと考え、受注番号への部分関数従属を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各セルに値が一つずつ入っていれば第1正規形です。明細一行を特定するには受注番号だけでなく、同じ受注内の**項番**も必要なのでキーは(受注番号,項番)です。",
+          "remainingWork": "キー以外の列がキーのどの部分に依存するか調べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段ではキー以外の列がキーのどの部分に依存するか調べるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "第2正規形は、複合キーの**一部分だけ**で決まる非キー属性を残さない形です。この表の受注日と得意先コードは、項番が違っても受注番号が同じなら同じ値になります。",
+          "remainingWork": "第1正規形と第2正規形の条件を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、受注番号だけで受注日・得意先が決まる部分関数従属ことが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "(受注番号,項番)のうち**受注番号だけ**で受注日・得意先コードが決まるため、第2正規形の条件を満たしません。商品コード→単価の依存もありますが、まず最初に満たさない段階を選びます。",
+          "remainingWork": "正規形の選択肢を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、受注番号だけで受注日・得意先が決まる部分関数従属ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03a/r03a-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825。",
+        "context記載の公式正答 イ と原本の肢を照合。受注番号だけで受注日・得意先が決まる部分関数従属点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r04a-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "4fff4f98599fce1fa088017cdc79e77f530c980897a3ce888a174b525e8069bf",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q26",
-      "summary": "イ。値の範囲の違いは、この命名規約だけでは防げません。",
+      "summary": "データ項目の命名・型・意味の統一規約で防げる事象と、値域制約が別に必要な事象を区別する。",
       "explanation": "規約(1)は末尾の区分語とデータ型を一致させ、(2)は名称と意味の辞書で同義語・異義語を整理します。どちらも値の許容範囲をテーブル間で統一する規約ではないので、受注金額の範囲差は回避できません。",
       "choiceReasons": [
         "年月日という区分語にデータ型を定める(1)で、日付型と文字列型の混在を防げます。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "規約(1)(2)が直接定める対象を、名前・型・意味に分けて線を引きます。",
+          "text": "規約(1)は末尾の「名・コード・金額・年月日」などで**項目名とデータ型**を統一し、規約(2)は辞書で**名称と意味**の対応を統一します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各選択肢の問題が、その対象のどれかに含まれるかを確認します。",
-          "revealsAnswer": false
+          "text": "例えば「金額」は同じ数値型でも、許される最小値・最大値・NULLの扱いは別に定める必要があります。データ型の一致だけでは**値域**まで一致しません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "受注金額が0以上か上限が何円かという値域は、命名と型だけでは統一できません。",
+          "text": "受信年月日の型の混在は(1)、賞与/ボーナスの同義語は(2)、取引先コード/名の曖昧さは(1)で防げます。**受注金額の範囲差**は両規約の対象外です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "同じ項目名・同じデータ型なら取り得る値の範囲まで統一されると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "規約(1)は末尾の「名・コード・金額・年月日」などで**項目名とデータ型**を統一し、規約(2)は辞書で**名称と意味**の対応を統一します。",
+          "remainingWork": "各肢が名称・型・意味のどれを問うか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では各肢が名称・型・意味のどれを問うか分類するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば「金額」は同じ数値型でも、許される最小値・最大値・NULLの扱いは別に定める必要があります。データ型の一致だけでは**値域**まで一致しません。",
+          "remainingWork": "値域の不一致を述べる肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、命名規約は受注金額の許容値域を定めていないことが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "受信年月日の型の混在は(1)、賞与/ボーナスの同義語は(2)、取引先コード/名の曖昧さは(1)で防げます。**受注金額の範囲差**は両規約の対象外です。",
+          "remainingWork": "防げる3事象を消去する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、命名規約は受注金額の許容値域を定めていないことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04a/r04a-q26.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae。",
+        "context記載の公式正答 イ と原本の肢を照合。命名規約は受注金額の許容値域を定めていない点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r05h-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "95a1a5b90fd3bde0b5b61b637b5951e8e8d95fa1f3c8b62393bb35510da4553a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q26",
-      "summary": "構造が異なるJSONを商品単位で保存するドキュメントDBが適切です。",
+      "summary": "項目数・項目名・型が変化するJSONを、商品ごとに保存するデータベース方式を選ぶ。",
       "explanation": "図1は品名や関連商品idの配列をもち、価格は文字列です。図2は商品名、生産地、画像URLをもち、価格は数値です。今後の項目も予測できず、検索キーを限定しないため、固定列を前提とする表より、各JSONを一つのドキュメントとして格納して任意の項目を検索できる方式が合います。ウです。",
       "choiceReasons": [
         "項目名から値への2階層だけでは、どの商品に属する値かや配列を含む構造を商品単位のまま表せません。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図1と図2は項目名、項目数、価格の型、配列の有無が違います。取得元も今後変わります。",
+          "text": "図1は「品名」「関連商品_id」の配列と文字列の価格、図2は「商品名」「生産地」「画像URL」と数値の価格です。**項目名・型・配列の有無**が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "商品全体の項目と値の対応を保ち、事前の固定列に縛られず検索できる保存単位を考えます。",
-          "revealsAnswer": false
+          "text": "リレーショナル表で項目ごとに固定列を用意すると、予測不能な項目追加に弱くなります。**ドキュメントDB**はJSONのような文書を商品単位で保持し、商品ごとに異なる項目を扱えます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "各JSONを丸ごと一つのドキュメントとして保存すれば、商品ごとに違う構造を保持できます。この方式の候補を見ます。",
+          "text": "必要なのは「商品AのJSON」「商品BのJSON」をそれぞれ一まとまりとして保存し、項目が増えても対応できることです。項目名ノードと値ノードに分ける案では元の対応関係を表しにくくなります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "JSONの構造がサービスごとに違い、配列や価格の型も異なるのに固定列の表を想定してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図1は「品名」「関連商品_id」の配列と文字列の価格、図2は「商品名」「生産地」「画像URL」と数値の価格です。**項目名・型・配列の有無**が異なります。",
+          "remainingWork": "将来の項目追加で表定義を変える必要があるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では将来の項目追加で表定義を変える必要があるか考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "リレーショナル表で項目ごとに固定列を用意すると、予測不能な項目追加に弱くなります。**ドキュメントDB**はJSONのような文書を商品単位で保持し、商品ごとに異なる項目を扱えます。",
+          "remainingWork": "選択肢の格納単位を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、商品単位で可変構造を保存するドキュメントDBことが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "必要なのは「商品AのJSON」「商品BのJSON」をそれぞれ一まとまりとして保存し、項目が増えても対応できることです。項目名ノードと値ノードに分ける案では元の対応関係を表しにくくなります。",
+          "remainingWork": "文書単位の格納方式を選ぶ",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、商品単位で可変構造を保存するドキュメントDBことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05h/r05h-q26.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627。",
+        "context記載の公式正答 ウ と原本の肢を照合。商品単位で可変構造を保存するドキュメントDB点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r05a-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "10aeea41eaa78ffbf86791cf78ee72a7711121faf070865a224e16723124ac67",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q27",
-      "summary": "ア。外部キーは関係の候補キーを参照する属性の組です。",
+      "summary": "外部キーを、行を一意に識別するキーではなく他の関係を参照する属性として区別する。",
       "explanation": "外部キーは、ある関係の候補キーを参照する属性または属性の組です。たとえば注文表の顧客番号が顧客表の顧客番号を参照する場合、注文表の顧客番号が外部キーになります。\n参照先の候補キーは行を一意に識別しますが、参照元の外部キー値は複数の注文で重複しても構いません。",
       "choiceReasons": [
         "候補キーを参照する属性または属性の組という外部キーの説明です。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢には「参照」と「タプルを一意に識別」の二つの観点があります。外部キーが担う関係を考えます。",
+          "text": "「タプル」は表の**1行**です。候補キーは行を一意に識別できる最小の属性組、スーパーキーは余分な属性を含んでも一意に識別できる属性組です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "注文の顧客番号から顧客表の行を指す例を考えます。同じ顧客の注文が複数あっても、その番号は使えます。",
+          "text": "**外部キー**は別の関係（または同じ関係）の候補キーを**参照**する属性・属性組です。注文表の顧客IDは顧客表の候補キーを指し、注文表内で同じ顧客IDが複数回現れても構いません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "外部キーは参照先の候補キーに対応する属性組です。「候補キーを参照」と書かれた説明を選びます。",
+          "text": "「候補キーを参照する」が外部キーです。「主キー以外で一意」は代替キー、「一意で極小」は候補キー、「一意で余分な属性を含んでもよい」はスーパーキーです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "候補キー・主キー・スーパーキー・外部キーの定義が混ざり、どれも「一意に識別する属性」と思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「タプル」は表の**1行**です。候補キーは行を一意に識別できる最小の属性組、スーパーキーは余分な属性を含んでも一意に識別できる属性組です。",
+          "remainingWork": "識別用のキーと参照用のキーを区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では識別用のキーと参照用のキーを区別するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**外部キー**は別の関係（または同じ関係）の候補キーを**参照**する属性・属性組です。注文表の顧客IDは顧客表の候補キーを指し、注文表内で同じ顧客IDが複数回現れても構いません。",
+          "remainingWork": "選択肢の参照関係の記述を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、候補キーを参照する属性が外部キーであることが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「候補キーを参照する」が外部キーです。「主キー以外で一意」は代替キー、「一意で極小」は候補キー、「一意で余分な属性を含んでもよい」はスーパーキーです。",
+          "remainingWork": "4肢のキー定義を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、候補キーを参照する属性が外部キーであることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q27.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd。",
+        "context記載の公式正答 ア と原本の肢を照合。候補キーを参照する属性が外部キーである点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r06h-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "1a1d71ab232d40f9a732fb40f0bc2790f8ecd38d4c3970482b52a0cb55a8daee",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q26",
-      "summary": "ウ。倉庫ごとの在庫数をSUMし、在庫行のない部品は0として判定します。",
+      "summary": "LEFT OUTER JOIN後の在庫集計で、倉庫間の合計と在庫なしのNULLを正しく扱う式を選ぶ。",
       "explanation": "P01は二つの倉庫に90ずつあるので総在庫は180。発注点100より多く、「不要」となります。MINなら90を使って「必要」にしてしまいます。\nP03は在庫行がなく、LEFT OUTER JOINの在庫側がNULLになります。SUMの結果もNULLなのでCOALESCEで0に変えると100>0が真で「必要」です。P02は150>150が偽で「不要」。全結果に合うのはCOALESCE(SUM(在庫.在庫数),0)です。",
       "choiceReasons": [
         "アはP01をMIN=90として必要にしてしまいます。複数倉庫の合計が必要です。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "結果が不要のP01には、在庫が90の行が二つあります。一倉庫の最小値と総在庫を比べます。",
+          "text": "P01はW01に90、W02に90あります。発注点は100で結果は「不要」です。**MINなら90、SUMなら180**になるので、結果と照合します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "P01を発注点100以上にするには90+90の合計が必要です。次に在庫に行がないP03の集計結果を考えます。",
+          "text": "LEFT OUTER JOINは在庫行のないP03も残しますが、在庫数はNULLです。`SUM`は該当する数値がないとNULLを返すので、`COALESCE(値,0)`で0へ置換する必要があります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "P03の集計結果がNULLのままだと100>NULLは真になりません。「必要」にするにはNULLを在庫なしの0へ置き換えます。",
+          "text": "P01は180で100>180が偽、P02は150で150>150が偽、P03は0で100>0が真です。**COALESCE(SUM(在庫.在庫数),0)**なら結果の不要・不要・必要と一致します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "複数倉庫の在庫をMINで判定し、在庫行がない部品のSUMがNULLになる点を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "P01はW01に90、W02に90あります。発注点は100で結果は「不要」です。**MINなら90、SUMなら180**になるので、結果と照合します。",
+          "remainingWork": "P03に在庫行がない場合の集計を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段ではP03に在庫行がない場合の集計を考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "LEFT OUTER JOINは在庫行のないP03も残しますが、在庫数はNULLです。`SUM`は該当する数値がないとNULLを返すので、`COALESCE(値,0)`で0へ置換する必要があります。",
+          "remainingWork": "SUMとCOALESCEの組合せを選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、SUMで複数倉庫を合計しNULLを0に変えることが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "P01は180で100>180が偽、P02は150で150>150が偽、P03は0で100>0が真です。**COALESCE(SUM(在庫.在庫数),0)**なら結果の不要・不要・必要と一致します。",
+          "remainingWork": "CASE式の比較結果を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、SUMで複数倉庫を合計しNULLを0に変えることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r06h/r06h-q26.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004。",
+        "context記載の公式正答 ウ と原本の肢を照合。SUMで複数倉庫を合計しNULLを0に変える点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
