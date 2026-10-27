@@ -1,0 +1,305 @@
+{
+  "reviewer": "Codex /root/ap_pilot_review_a",
+  "checkedAt": "2026-10-26T23:51:41.824928+00:00",
+  "scope": "First10 pilot IDs, original source image and official answer-key verification before revised pilot content review",
+  "contextDisclosure": "The parent context contained previous historical lesson examples for q1/q5; this is not claimed as an answer-blind experiment. All ten original WEBP images were opened individually at full available resolution, and calculations/choice reasoning were independently reconstructed. New pilot draft lessons have not been read.",
+  "actualSourceRead": "Original question WEBP images, data/answer-keys.json and source metadata hashes. No claim of newly downloading original PDFs.",
+  "status": "awaiting_final_pilot_drafts",
+  "records": [
+    {
+      "id": "r07h-q1",
+      "independentAnswer": "エ",
+      "officialAnswer": "エ",
+      "matchesOfficial": true,
+      "independentResult": "P=Q=真。ア=¬R、イ=R、ウ=¬R、エ=真。イの否定線はQ→¬P全体を覆う。Rを偽・真の両方で真理値を検算。",
+      "independentChoiceReasons": [
+        "R=真でアは偽",
+        "否定線の範囲を保つとR=偽でイは偽",
+        "R=真でウは偽",
+        "左辺偽なので含意は常に真"
+      ],
+      "calculation": {
+        "truthTableRFalseThenTrue": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ]
+        ]
+      },
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q1.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q1.webp": "0913a72bc118422715390663511a8ddbb9cf7441b3ab89f07f0581425ebfba67",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "690f3587817436af8c76ca3f85dc9b9c49fb0d7f6aa99dc2297df0f53f6256ac",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q5",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "入力ABCと後入れ先出しの制約で可能なのはABC/ACB/BAC/BCA/CBAの5通り。CABはCを出した直後の頂上Bを飛び越せない。",
+      "independentChoiceReasons": [
+        "3は数え落とし",
+        "4も数え落とし",
+        "5が全探索と一致",
+        "6は不可能なCABを含む"
+      ],
+      "calculation": {
+        "enumerated": [
+          "ABC",
+          "ACB",
+          "BAC",
+          "BCA",
+          "CBA"
+        ],
+        "count": 5
+      },
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q5.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q5.webp": "da0d7bb400d6b1c87ea522d0f2fb4506cb0dd8997be847628e433ae012c553fb",
+        "assets/transcriptions/transcribe_r07h/r07h-q5-figure.webp": "c730627ffeef9a985610069ecebc4c28c68dde09a865b33f4c59fa235389e649",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "f4981944a49cc555f95fa52555c5647649921234890c99f83c22fb380a8fcf43",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q8",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "命令数は同じなので実行時間比は(CPI_A×周期_A)/(CPI_B×周期_B)=(4×1)/(0.5×4)=2。周期は周波数の逆なので逆転に注意。",
+      "independentChoiceReasons": [
+        "1/32は周期とCPIの比を誤る",
+        "1/2はA/Bを逆にする",
+        "2が正しい",
+        "8はクロック周期差を適切に反映しない"
+      ],
+      "calculation": {
+        "perInstructionNsA": 4,
+        "perInstructionNsB": 2,
+        "ratio": 2
+      },
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q8.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q8.webp": "5a846a5d7e3dfeef31c1c321315c85fc8c6a2c1e3c62fb62d8220e34325c977f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "70e00ae98f8237b95763674e668b4d2cf92f96f74c01171c3f44f618b4a04629",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q14",
+      "independentAnswer": "イ",
+      "officialAnswer": "イ",
+      "matchesOfficial": true,
+      "independentResult": "プリエンプションはCPU使用権の強制回収で、タスクは実行可能状態へ。I/O等の事象待ちを要求したわけではない。",
+      "independentChoiceReasons": [
+        "休止は実行対象外で別の操作",
+        "実行可能が正しい",
+        "終了は処理完了など",
+        "待ちはI/Oや資源などの条件待ち"
+      ],
+      "calculation": null,
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q14.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q14.webp": "b77a9f27f68a174cd8da9474f8e06552aeea8cb3a3f4245246c34cd97e3645a0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "229238da05d010111b976a9263f970019750de63c8c05e209a0e96225800836c",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q18",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "16進82=8×16+2=130。1LSB=10mV、零入力0mVなので130×10=1300mV。8bit最大255段階は本問入力値と区別する。",
+      "independentChoiceReasons": [
+        "十進82と取り違えた820",
+        "1024は与件の変換結果ではない",
+        "1300が正しい",
+        "1312も指定の整数コード値と10mV刻みに合わない"
+      ],
+      "calculation": {
+        "hex82Decimal": 130,
+        "stepMillivolts": 10,
+        "outputMillivolts": 1300
+      },
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q18.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q18.webp": "e65d9819500db0d8a790552c6d5a4f39484a59ea197e5272a7400a2654d3fdb5",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "fbe1364c9cc74114467868aaaae105e6c165360960e418ed1573afaf2aecd7f7",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q22",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "思考発話法は利用者が操作しながら考えを発話する参加型。ヒューリスティック評価は専門家が経験則で評価する。回顧法も利用者、認知的ウォークスルーは専門家による操作過程の点検。",
+      "independentChoiceReasons": [
+        "回顧法は専門家だけではない",
+        "思考発話法は専門家だけではない",
+        "思考発話/ヒューリスティックの組合せが正しい",
+        "認知的ウォークスルーは利用者参加型という位置付けではない"
+      ],
+      "calculation": null,
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q22.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q22.webp": "a6e53f1d0970cfb41ba94a684013c948579ed161066eadfa45c917e41b32cf10",
+        "assets/transcriptions/transcribe_r07h_batch3/r07h-q22-choices.webp": "788e857fd6822d7a59e7747be05e5425949c5f804922aa9b170455cd0d176df5",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "7d2671452498b3e21fb775f4bf80ead7ae2dc1de65f0eec505f0da5d2db6cc61",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q25",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "顧客1対付加情報多なので付加情報に顧客への外部キーを置く。注文の指定送付先は0..1で、注文側に付加情報への任意参照を置く。同じ顧客に属する追加条件も図の制約にある。",
+      "independentChoiceReasons": [
+        "注文主顧客と一致する付加情報に制限される",
+        "1対多で行数一致は不要",
+        "付加情報→顧客の参照制約が正しい",
+        "注文を参照する向きの外部キーは付加情報側ではない"
+      ],
+      "calculation": null,
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q25.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q25.webp": "0e47c16f50a282852b9346b2870ad977336629a743affaea7fc61b87168a81d1",
+        "assets/transcriptions/transcribe_r07h_batch3/r07h-q25-figure.webp": "833b74049cde35033fd876863abe8b001f0c4cb8d14ebac05527822eb9a028e5",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "d7aa2438ba776f1b0c143dce14ef08b5951bc084d9a745e2e57b87dba282e6de",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q31",
+      "independentAnswer": "エ",
+      "officialAnswer": "エ",
+      "matchesOfficial": true,
+      "independentResult": "192.168.1.1は全4経路に一致。/26は192.168.1.0～63で含まれる。最長26bitの行を選び、そのネクストホップ10.1.0.4。",
+      "independentChoiceReasons": [
+        "/0は最短の既定経路",
+        "/16より長い一致あり",
+        "/24より長い/26にも一致",
+        "/26の10.1.0.4が正しい"
+      ],
+      "calculation": {
+        "matchingRoutes": [
+          [
+            "0.0.0.0/0",
+            "10.1.0.1"
+          ],
+          [
+            "192.168.0.0/16",
+            "10.1.0.2"
+          ],
+          [
+            "192.168.1.0/24",
+            "10.1.0.3"
+          ],
+          [
+            "192.168.1.0/26",
+            "10.1.0.4"
+          ]
+        ],
+        "selectedNextHop": "10.1.0.4"
+      },
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q31.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q31.webp": "befa649e07b313b314eb63713df95f6e1384d8a47419293f8509d8b8f0c57ccc",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "098bb91e432066a199aa07fa9f34cd654bd5c3baacd33227bf982ed4c71bcc29",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q35",
+      "independentAnswer": "ウ",
+      "officialAnswer": "ウ",
+      "matchesOfficial": true,
+      "independentResult": "電子政府推奨暗号リストは安全性・実装性能確認に加え利用実績や普及見込みを考慮して推奨する。推奨候補は今後の推奨入りの候補。互換性維持で限定利用するものは運用監視暗号リスト。",
+      "independentChoiceReasons": [
+        "説明は電子政府推奨暗号リストのもの",
+        "互換性維持は運用監視暗号で推奨候補ではない",
+        "電子政府推奨の説明が正しい",
+        "候補に格下げ互換性という説明ではない"
+      ],
+      "calculation": null,
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q35.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q35.webp": "d375dc86547026d7bc813bfba17a8fa3850ce5001c958ab43d048169efb5b532",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "97da4e104a9147a052ce604786fb95172bc471eccec8988066cf1aab22fb151c",
+      "status": "original_checked_awaiting_final_draft"
+    },
+    {
+      "id": "r07h-q45",
+      "independentAnswer": "ア",
+      "officialAnswer": "ア",
+      "matchesOfficial": true,
+      "independentResult": "デザインレビューは設計工程中に設計成果物の問題・欠陥を発見する技術的レビュー。出荷判定、プログラム検査、プロジェクト管理過程の監査とは異なる。",
+      "independentChoiceReasons": [
+        "設計工程中の設計成果物の問題発見が正しい",
+        "品質部門の出荷可否判定と違う",
+        "対象がプログラムのサンプリング検査と違う",
+        "プロジェクト管理プロセスの問題発見と違う"
+      ],
+      "calculation": null,
+      "originalImagesOpened": [
+        "assets/questions/r07h/r07h-q45.webp"
+      ],
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q45.webp": "3ae4827edde9872652b46e811c8e54b97a1c4d372c8316c1569f6d96d70ab983",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionSHA256": "f1ceb391570a18ee288bd8f8f27494a563d30c0df6dd46142d96e8a736af6523",
+      "status": "original_checked_awaiting_final_draft"
+    }
+  ]
+}

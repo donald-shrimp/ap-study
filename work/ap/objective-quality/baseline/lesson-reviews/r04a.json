@@ -1,0 +1,1234 @@
+[
+  {
+    "id": "r04a-q1",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "nビット整数はa<2^n。二乗はb<2^(2n)なので最大2nビット。n=2,a=3なら9=1001で4ビット。n+1は不足、n²と2^nはビット上限の式でない（n=3は最大6）。",
+      "readEvidence": "assets/questions/r04a/r04a-q1.webp; 原本の問題文・図表・4選択肢を実見。montage-01.jpg",
+      "originalImageSHA256": "ac887fce3edf7ce4d272943bf45f30280ec90b9d738411b2a58900ba74a6d083"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "Q1の初手が抽象的だったため、n=3の111₂=7から平方・2進変換へ進む操作、およびkビット最大2ᵏ−1という桁数対応の理由を追加。元: {'title': '注目するところ', 'text': 'nビットで表せる最大値を、2の累乗から1を引いて書きましょう。', 'revealsAnswer': False} 修正: {'title': '注目するところ', 'text': 'nビットの全てを1にするとaが最大になります。まずn=3なら111₂=7を例に、7を平方し、その値を2進数にして桁数を数えます。同じ手順を一般のnへ広げましょう。', 'revealsAnswer': False}",
+      "Q1の初手が抽象的だったため、n=3の111₂=7から平方・2進変換へ進む操作、およびkビット最大2ᵏ−1という桁数対応の理由を追加。元: {'title': '使う考え方', 'text': '最大値を平方し、2の何乗より小さいかを調べます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'aの最大値は2ⁿ−1です。kビットでは先頭の重みが2ᵏ⁻¹、全て1でも最大2ᵏ−1なので、値は2ᵏ未満です。aの最大値を平方したものを2の累乗で挟み、必要な桁数へ結び付けます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。",
+      "追加修正後にq1個別原本を再表示。nビットaを平方してbの最大ビット数を問う条件と111₂=7の部分例は妥当。第1/2段に最終桁数や正答記号を置かずfalse、第3段は2²ⁿを示すためtrue。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "26f750f291bd00cbd0b9e2e8b16330f66f1653ab2b6c4b3025a363d268f45640"
+  },
+  {
+    "id": "r04a-q2",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "図のAB=00行のCD=00,10は端をまとめて¬A¬B¬D。AB=01,11のCD=01,11の四マスはBD。和は¬A¬B¬D+BD。ア/ウの¬B¬DはAB=10まで1にし、イはC=1,D=0の左上端を漏らす。",
+      "readEvidence": "assets/questions/r04a/r04a-q2.webp; 原本の問題文・図表・4選択肢を実見。montage-01.jpg",
+      "originalImageSHA256": "d3d069186d21e977d0ec0d01dfd46be6b0008fa3add3d28143357b8fc700b399"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "原本ウの第1項を¬AB¬Dと取り違えていた。拡大画像の否定線を再読してABDに訂正し、漏れる1と余分な0を具体化。 元: ['AB¬CDは中央の四つの1を覆えず、¬B¬DはAB=10の0まで1にします。', '¬A¬B¬C¬Dは上段CD=10の1を覆えません。', '¬AB¬Dは中央のD=1の1を覆わず、¬B¬Dは最下段の0も含みます。', '中央の四つと上段両端の二つを、余分な0を含まず覆います。'] 修正: ['AB¬CDは中央の四つの1を覆えず、¬B¬DはAB=10の0まで1にします。', '¬A¬B¬C¬Dは上段CD=10の1を覆えません。', 'ウはAB・D+¬B・¬Dです。AB・DはAB=01行のD=1の二つの1を覆えず、¬B・¬DはAB=10行のCD=00,10の0まで1にします。', '中央の四つと上段両端の二つを、余分な0を含まず覆います。']",
+      "カルノー図の実際の行列と変数を消す理由を追加。 元: {'title': '使う考え方', 'text': '行と列のラベルから、囲んだ範囲で変わらない変数だけを拾います。左右端は隣接します。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '中央の囲みはAB=01,11行とCD=01,11列です。AとCは0/1に変わるので項から消し、固定される文字を拾います。上段の左右端も隣接して一組です。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。",
+      "個別拡大でウ=ABD+¬B¬Dを再読。16入力検算でエのみ図に一致。修正済み誤答理由のAB=01/D=1の漏れ、AB=10/D=0の余分な1を検算結果と再照合。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b0b55b59f55376b1121b4832b1915568dec2e23e58baf7ec2ddb1508780e4715"
+  },
+  {
+    "id": "r04a-q3",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "無復元抽出なので90/100×89/99×88/98=178/245。405/539、89/110、87/97はいずれもこの3回の条件付き積と一致しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q3.webp; 原本の問題文・図表・4選択肢を実見。montage-01.jpg",
+      "originalImageSHA256": "b1b6c5165793489a86e9cd2cfb227add5ea552b14270381dbcdf322152a1fa45"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "無復元抽出の具体的な最初の条件付き代入を追加。 元: {'title': '使う考え方', 'text': '最初が良品なら、2個目の時点では良品も全体も1個減っています。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '1個目が良品だった条件で、残りは良品89個・全99個です。2個目の確率89/99を最初の90/100に掛け、3個目でも同じ減らし方をします。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e38c03e20f9dee3b1a76bc16ac72c0fda6cbcc31cfa0538e0893f7d5f7485369"
+  },
+  {
+    "id": "r04a-q4",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "訓練精度は高いが未知データで下がるのが過学習。アは転移学習、ウは誤差逆伝播、エは報酬を使う強化学習。",
+      "readEvidence": "assets/questions/r04a/r04a-q4.webp; 原本の問題文・図表・4選択肢を実見。montage-01.jpg",
+      "originalImageSHA256": "be63b889a1186cd32caa219ad0e987a6db65a04db7e496a900fcc37e70490e31"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ff4ef2070b4d7882d709693dd418ea80c1558d0b6e97537f4c5be36b97a2cf05"
+  },
+  {
+    "id": "r04a-q5",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "衝突はa mod n=b mod n、a=kn+r,b=ln+rならa-b=(k-l)n。アは和、ウ/エは倍数方向が逆で一般に同じ余りを保証しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q5.webp; 原本の問題文・図表・4選択肢を実見。montage-01.jpg",
+      "originalImageSHA256": "aa602bbb8cfeab86283160e9334cb76c48baeb136e69c24a5e5336fb24333cd2"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "21be7aea173a370ea8374e67abe22e91a48e300cd33d6729ccb63eeaff8701d6"
+  },
+  {
+    "id": "r04a-q6",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "内側はj=nからi+1へ逆順、隣接A[j],A[j-1]で左が大きければ交換。最小値を左へ泡のように移すバブルソート。クイックは分割、選択は最小位置探索、挿入は整列済列への挿入なので図と異なる。",
+      "readEvidence": "assets/questions/r04a/r04a-q6.webp; 原本の問題文・図表・4選択肢を実見。montage-06.jpg",
+      "originalImageSHA256": "e84d11a974c062b9b3f5c67047b103d931eb115eb248ec159462b5afca2bcaf9"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "代入3本の具体的追跡と数値例を追加。 元: {'title': '使う考え方', 'text': '条件が小なりのとき、三つの代入によってどちらの値が左へ移るか追います。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '図のA[j]<A[j−1]の下側へ進むと、wに右の値を退避し、右に左の値、左にwを入れます。例えば左5・右2なら左2・右5となるので、小さい値が進む向きを追えます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "19753732a9fd7660bc497bf5da9ab4c53cfb031755f5bccc6f7feb4b4060d1af"
+  },
+  {
+    "id": "r04a-q7",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "XMLはUTF-8/UTF-16なら符号化宣言を省略可能。選択肢にはUTF-16だけがある。EUC-JP、ISO-2022-JP、Shift-JISはいずれも宣言必要。",
+      "readEvidence": "assets/questions/r04a/r04a-q7.webp; 原本の問題文・図表・4選択肢を実見。montage-06.jpg",
+      "originalImageSHA256": "c68bf4726b4331392378df7d4204a5c8057cfce10332105f5030cf7bbc098387"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ab6a93a69f7a0a73511bdc2e5c78c2ffc5cfae5b0419b7044f91f6414ce94c19"
+  },
+  {
+    "id": "r04a-q8",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "ディープラーニングは大量の行列演算を要するためGPUの行列演算ユニットが高速化。アはMIMD的説明、ウは通常CPUでも可能な浮動小数点一般、エはCPUの分岐予測でGPU固有の利点でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q8.webp; 原本の問題文・図表・4選択肢を実見。montage-06.jpg",
+      "originalImageSHA256": "73c5fbeca737ccd07b8e3e8a85779c7e84b4d525e3ddeb3b63f0e47b4d481c7a"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "3b8f1183db7d097c26ae1390c7a4e627fa4bc39d1ef8d6b01657c59377e7ada8"
+  },
+  {
+    "id": "r04a-q9",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "ライトスルーはCPU書込みをキャッシュと主記憶へ同時反映。ア/ウはキャッシュだけにまず書いて追出し時に主記憶更新するライトバック。エの低バス占有はライトバック側の特徴。",
+      "readEvidence": "assets/questions/r04a/r04a-q9.webp; 原本の問題文・図表・4選択肢を実見。montage-06.jpg",
+      "originalImageSHA256": "c1aaecbd94877eb425110ffeaf737273b9d7ec0b7a3c76f76683fdfd429ee7e5"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "第2段階で最終構造を言い切らず、比較対象と分類する理由を具体化。 元: {'title': '使う考え方', 'text': '書込みを主記憶まで通す方式なら、どちらの記憶内容がその場で更新されるか考えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'CPUが書き込む時点と、変更済みのキャッシュを追い出す時点の二列で、主記憶を更新する候補を整理します。更新時点の違いが方式を分けます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "0a911c6c5aa0264c6c02dbeca7ac47afb317b5166fa5fcff9d831b59632712f3"
+  },
+  {
+    "id": "r04a-q10",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "L1失敗0.05のうちL2でも失敗するのは0.4だから全失敗0.05×0.4=0.02、ヒット0.98。0.57はヒット率の積、0.6はL2だけ、0.95はL1だけ。L2ヒット率0.6はL1ミス後の参照として計算。",
+      "readEvidence": "assets/questions/r04a/r04a-q10.webp; 原本の問題文・図表・4選択肢を実見。montage-06.jpg",
+      "originalImageSHA256": "489e7bbe2b533cf93dae9b53c2a0edd5b9d8568bddc3010b366abd3f23bac742"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "L2の条件付き率の基点と掛ける理由を明記。 元: {'title': '使う考え方', 'text': 'L2へ進む割合は1−0.95です。その中で当たる割合が0.6です。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'L1で外れた分だけがL2へ進むので、まず1−0.95=0.05を求めます。この0.05を母集団にしてL2の0.6を掛け、L1のヒット分と重複しない量を作ります。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6f420dcf5d47ea920bc40924cfdad8c4413f5f4a06e2cf29f0d8471f8d2fb514"
+  },
+  {
+    "id": "r04a-q11",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "電気泳動は帯電した着色粒子を電極へ集め表示。アは液晶の透過率、ウは有機EL等の発光、エはDMD微小鏡反射。",
+      "readEvidence": "assets/questions/r04a/r04a-q11.webp; 原本の問題文・図表・4選択肢を実見。montage-11.jpg",
+      "originalImageSHA256": "9b1edca5d889f4dac24d378ca3e865c338e34cd628aa73641affcbab26a2b450"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "213089b811b676750c2eecf3082a4bc12d85db1db6e4410209400e253981ae5a"
+  },
+  {
+    "id": "r04a-q12",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "コンテナはホストOSを共有し個別ゲストOSを持たない実行環境。アはOSをどちらかに持てばよいという誤り、イはベアメタル型、エはホスト型でゲストOSあり。",
+      "readEvidence": "assets/questions/r04a/r04a-q12.webp; 原本の問題文・図表・4選択肢を実見。montage-11.jpg",
+      "originalImageSHA256": "91e694c18d341096040df03a1104e177020dd0128e6bf641e89acaa4c77b7d8b"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6588065b6b3c6a3dd2ea117da563899d51bf7cc46f15bc930a8844231807528f"
+  },
+  {
+    "id": "r04a-q13",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "フォールトアボイダンスは構成要素品質を上げ故障を避ける。アはフールプルーフをフェールセーフと誤称、イは機能縮退ありのフェールソフトに『縮退なし』とする誤り、エは安全状態への移行なのでフェールセーフ。",
+      "readEvidence": "assets/questions/r04a/r04a-q13.webp; 原本の問題文・図表・4選択肢を実見。montage-11.jpg",
+      "originalImageSHA256": "df0e93db046cf9bde5068ad5325e9bcc6d13753ded4a68a6d700f042a31f0160"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e3b3a59c820dc2480c67635c90cc35da913ca297d57a39c27112f2cb7802c8ff"
+  },
+  {
+    "id": "r04a-q14",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "稼働率MTBF/(MTBF+MTTR)。両方1.5倍なら分子分母で相殺し変わらない。2/3、1.5、2.25にはならない。",
+      "readEvidence": "assets/questions/r04a/r04a-q14.webp; 原本の問題文・図表・4選択肢を実見。montage-11.jpg",
+      "originalImageSHA256": "8cdb32c8056d2673a7f879c603401a2338e6860aeeb87678f3a6d83b3e7ec817"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "18120d2c878c04f55e771e377e7390159e1db23ef95e53fb36df9f8a90dc29c1"
+  },
+  {
+    "id": "r04a-q15",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "サーバ100×10^6命令/秒÷10^6命令/件=100件/秒。通信8×10^7bit/秒÷(2×10^5byte/件×8)=50件/秒。遅い通信で50件。100はCPUのみ、200/400は単位換算や能力制約無視。",
+      "readEvidence": "assets/questions/r04a/r04a-q15.webp; 原本の問題文・図表・4選択肢を実見。montage-11.jpg",
+      "originalImageSHA256": "3a5ae454c17d85b3dde34362f41fd2acc8a1f84924448bdd849de36c32b708b1"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "bf8c51aa072b52d73c5e847ef8259d61064d605f0cef5c0c1a23218ce0c8673e"
+  },
+  {
+    "id": "r04a-q16",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "双方を資源1→資源2の同順にして循環待ちを防ぐ。逆順は互いに片方保持で待つ。優先度を一方だけ高く/同じにしても資源の循環待ちを解消しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q16.webp; 原本の問題文・図表・4選択肢を実見。montage-16.jpg",
+      "originalImageSHA256": "3616605ef7ce8c9ded3359df8dc5b62a2f1d4db259f32209ff779586b2b2e6fd"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b82bd8eb89be0feaf983731beefe427b753191eae1e2045b8d1a689550a17462"
+  },
+  {
+    "id": "r04a-q17",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "ほとんどのプログラムは旧ページ半分以下なので半分化後も1ページに収まり内部断片が減る。アは管理ページ増でオーバーヘッド減とは言えない、イはページ内余裕と置換を誤結合、エは1ページ維持でフォルト増とは言えない。",
+      "readEvidence": "assets/questions/r04a/r04a-q17.webp; 原本の問題文・図表・4選択肢を実見。montage-16.jpg",
+      "originalImageSHA256": "72fc4c661706fcc7647392713f2683b329df055e77725ea42e7f5b932b62ce56"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6c0f20325dd2c78490868da03e0b9555c052ec1b87b6cdde4a1070eab7482364"
+  },
+  {
+    "id": "r04a-q18",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "割込み禁止は考慮なし。ISRは最優先タスクより優先。タスク切替禁止と割込み禁止は別（ア）。ISR長時間は応答を遅らせる（イ）。ISRは割込まれたタスクとは別の割込みコンテキスト（エ）。末尾エ全文まで修復済画像を確認。",
+      "readEvidence": "assets/questions/r04a/r04a-q18.webp; 原本の問題文・図表・4選択肢を実見。montage-16.jpg",
+      "originalImageSHA256": "5219cdb570110783f3aa21897ae7c01ef9969bf50bdf2be4ed3a316e7b4cee6a"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。",
+      "修復済み共有原本を独立解答時と最終確認時に実見し、選択肢エの末尾全文まで確認。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "4eb9c01f396f154a64e4aa1941c906172ac87c9c1ad9f23f9c34daf2ddc3b471"
+  },
+  {
+    "id": "r04a-q19",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "初期A4,B6,C3。時刻3にCへ2(終5)、4にAへ5(終9)、5にCへ3(終8)、6にBへ4(終10)、8にCへ3(終11)、9にAへ1(終10)。Cは3+2+3+3=11分、選択肢ウ。7/9/12はいずれもこの割当列に合わない。初回保存時候補記号をイと誤記したため計算列と再照合してウに修正。",
+      "readEvidence": "assets/questions/r04a/r04a-q19.webp; 原本の問題文・図表・4選択肢を実見。montage-16.jpg",
+      "originalImageSHA256": "b9e20ce48248654d9beb3f2e69fa3cb89dd042f95c52a35132ae4da801345e51"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "最初の割当て更新3+2と再比較の列を追加。 元: {'title': '使う考え方', 'text': '次の印刷を、現在最も早く空くプリンターへ渡して終了時刻を更新します。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '最初に空くのは終了時刻3のCです。次の2分の仕事をCに渡して終了時刻を3+2へ更新し、A=4,B=6ともう一度比べます。空きが同時ならA,B,Cの順を使います。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "8723745e0d4d4749df7eeb0faf7d694300cb422dd2d27e8f2b8e0163230f1335"
+  },
+  {
+    "id": "r04a-q20",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "アクチュエータはコンピュータの電気出力を力学的運動へ変換。アはAD変換、イは入力装置、エはセンサ。",
+      "readEvidence": "assets/questions/r04a/r04a-q20.webp; 原本の問題文・図表・4選択肢を実見。montage-16.jpg",
+      "originalImageSHA256": "419889dda3d48b76d2149e4250e1aa7015eac16e6c6982ccdb11fb33fc1e85a0"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7c91fef6d543abec7eff2b3fcdd028c7387c3950a1904fa4ff323bcb5776cb58"
+  },
+  {
+    "id": "r04a-q21",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "整流は一方向へ電流を通すダイオード。コイルは磁気エネルギー、コンデンサは電荷蓄積、抵抗は電流制限で一方向だけ通す性質でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q21.webp; 原本の問題文・図表・4選択肢を実見。montage-21.jpg",
+      "originalImageSHA256": "d5bff57fd9c838dc22f98d47312cd0371dc251f4ed244cfe3762369014eb26a6"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c59221f36371f490bf0202758c38f442045528dd3bc3e93003a0c985334b19ac"
+  },
+  {
+    "id": "r04a-q22",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "フラッシュは不揮発、電気消去後に書込。アは書込回数有限、イは基板上で書換え可能、ウのリフレッシュはDRAM。",
+      "readEvidence": "assets/questions/r04a/r04a-q22.webp; 原本の問題文・図表・4選択肢を実見。montage-21.jpg",
+      "originalImageSHA256": "2066195fa50b6d675e57bb4b97c8d5667da51adf1376e7b394c360c3d41ab18d"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "a3b24b9a4507060f315713657417adb3a6366e4732057eebcf38c04a82ff1f42"
+  },
+  {
+    "id": "r04a-q23",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "同じ入力00,11だけ1はXNOR。ウはNANDを3個使い¬(¬XY·¬(¬X¬Y))=XY+¬X¬Y。アはXY·¬X¬Y=0、イはX+Y+¬X+¬Y=1、エは(X+Y)(¬X+¬Y)=XOR。ゲート末端の否定丸を読んだ。",
+      "readEvidence": "assets/questions/r04a/r04a-q23.webp; 原本の問題文・図表・4選択肢を実見。montage-21.jpg",
+      "originalImageSHA256": "5dcad45869c8640d0946ad4d6ef7978cf17022a1028b81d148c9a2b72802d156"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "具体的な最初のゲート式と否定丸の適用範囲を追加。 元: {'title': '使う考え方', 'text': '各ゲートの出力の小さな丸は否定です。上段と下段を別々に式にします。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'まずアの上段はXとYのANDなのでXY、下段はそれぞれを反転してANDなので¬X¬Yと書けます。各候補も同じように二段を式にし、出力端の小丸があればその段全体を否定します。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "5c10a852b557662ed86d30388a4a16028d661e65b709e56a243896dcfa8a8107"
+  },
+  {
+    "id": "r04a-q24",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "3年後8000×1.2³=13824、26²=676では不足、26³=17576で足りる。最小3桁。4/5/6は最小でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q24.webp; 原本の問題文・図表・4選択肢を実見。montage-21.jpg",
+      "originalImageSHA256": "5aab36099f2277c020869aa26d1577ac00d74d7d7914b587c4ac5d0c04438671"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "823973f557c4a6d5c9459860a99405d5def383d6172e24ba5db559e856ec0e8b"
+  },
+  {
+    "id": "r04a-q25",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "H.264/MPEG-4 AVCは動画圧縮符号化。アはストリーミング制御プロトコル、イは通信制御、ウは番組メタデータで動画符号化と異なる。",
+      "readEvidence": "assets/questions/r04a/r04a-q25.webp; 原本の問題文・図表・4選択肢を実見。montage-21.jpg",
+      "originalImageSHA256": "fd826ce3a82aa44bbf695008bb89247cfc5aa354c08a5828f70577e04d223d23"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "864ea86396a249a68bee0ae9da910856f95a1f51b93bd81a7aab3b0946f55207"
+  },
+  {
+    "id": "r04a-q26",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "規則1は末尾区分語で型固定しアの混在とエの曖昧さを回避、規則2は辞書でウの同義異名を回避。受注金額の取り得る値の範囲は命名/型規定だけでは統一不能。『回避できない』を選ぶ。",
+      "readEvidence": "assets/questions/r04a/r04a-q26.webp; 原本の問題文・図表・4選択肢を実見。montage-26.jpg",
+      "originalImageSHA256": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "4fff4f98599fce1fa088017cdc79e77f530c980897a3ce888a174b525e8069bf"
+  },
+  {
+    "id": "r04a-q27",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "差集合は従業員から異動にもあるA005,B010を除く。残るA001,C003,C011はイ。アは和集合、ウは共通集合、エは逆方向の差D080。",
+      "readEvidence": "assets/questions/r04a/r04a-q27.webp; 原本の問題文・図表・4選択肢を実見。montage-26.jpg",
+      "originalImageSHA256": "50610d0b2e9e6b44c298a91e35e078eaec72296bffe46a7ef65be3aac9ca0ec2"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b854d3e8dd873675788484d3efa8baa3d79c419e3b05828a9f5c89bbca6b4cbb"
+  },
+  {
+    "id": "r04a-q28",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "売価-仕入は200,200,100,900,400,200,300,500,500,300、合計3600平均360。平均より大はD004,E005,H008,I009、仕入先S1,S1,S4,S5。DISTINCTで3件。1/2は過少、4はS1の重複を除かない数。",
+      "readEvidence": "assets/questions/r04a/r04a-q28.webp; 原本の問題文・図表・4選択肢を実見。montage-26.jpg",
+      "originalImageSHA256": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "最初の数値代入と平均の母集団を判断するSQL根拠を追加。 元: {'title': '使う考え方', 'text': '副問合せのAVGは全商品の差の平均です。仕入先別平均ではありません。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '最初のA001では1,000−800=200です。同様に全10商品の差を足し、10で割ってAVGを求めます。副問合せにGROUP BYがないので、仕入先別でなく全商品の平均です。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f2b7779ecd7034cb5157e149efb20e3079fc6736a880d95c9b1cf18914bed2b4"
+  },
+  {
+    "id": "r04a-q29",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "チェックポイント後にコミットしたT4,T5をログでredo。T1はチェックポイント前に確定し反映済。T2,T3は障害時未コミットでundo対象。エはT4漏れ。",
+      "readEvidence": "assets/questions/r04a/r04a-q29.webp; 原本の問題文・図表・4選択肢を実見。montage-26.jpg",
+      "originalImageSHA256": "f45e11f30327603d47a5048bcff615898b01cba0b935615c2e6d39efb5e34af6"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f612c137295fe1db7f10c4dc210ffaf27a4a4162ee60c695acd011117a977fa0"
+  },
+  {
+    "id": "r04a-q30",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "ACID=Atomicity原子性,Consistency一貫性,Isolation独立性,Durability耐久性。可用性は含まれない。ア/ウ/エはいずれも含まれる。",
+      "readEvidence": "assets/questions/r04a/r04a-q30.webp; 原本の問題文・図表・4選択肢を実見。montage-26.jpg",
+      "originalImageSHA256": "489fca9594533fc9faaa085f525ed4e5c23952f0306d38d3b334165d67fa5d05"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b877af6b7bc94efdee7c4b390f0db4b47060c2d3584e55b4a80140942e127116"
+  },
+  {
+    "id": "r04a-q31",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "クライアントはDiscoverをブロードキャストするのでDHCPサーバの事前アドレス不要。アはマスク/ゲートウェイも配布可能、イはプール外の固定IPと混在可能、エはリース切れ等で変更もあり『必ず同じ』でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q31.webp; 原本の問題文・図表・4選択肢を実見。montage-31.jpg",
+      "originalImageSHA256": "a063bc5f7c363f52cf2344e37840e0d7409ed1228439f7af0c406cbfedfaec6b"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "第2段階の直接的な事前IP不要の断定を避け、探索操作から導く形へ改善。 元: {'title': '使う考え方', 'text': '特定サーバのIPを知らなくても、同一LAN全体へ探索を送れます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'まだIPが設定されていないPCの初回探索を、特定の1台に送る方法とLAN全体へ送る方法に分けます。後者なら送信先を一台に絞るための情報が必要かを確かめられます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fc85eaf3a7b9fb1e1ca869e6a98f57b4f7d13173916850a50d2d37b21a6c2046"
+  },
+  {
+    "id": "r04a-q32",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "FTPは制御TCP21とデータTCP20（能動）の異なるウェルノウンポート。POP3=110、SMTP=25は同じ接続で制御と転送。SNMP=161/162は要求応答/通知の区別でFTPのデータ/制御ではない。",
+      "readEvidence": "assets/questions/r04a/r04a-q32.webp; 原本の問題文・図表・4選択肢を実見。montage-31.jpg",
+      "originalImageSHA256": "cf6060324025d335be359ca41190cf93673ee15d66da817670f05b084065f848"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b3713442f885c383aab394a90c7ad36b8e1e4d6c1a0387b41282490c31df0b96"
+  },
+  {
+    "id": "r04a-q33",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "/29はホスト3bit、8アドレス中ネットワークとブロードキャスト除き6個。192.168.16.40–47が範囲で48は別（ア）。マスク末尾248で240は/28（イ）。29bitはネットワーク部でホストでない（エ）。",
+      "readEvidence": "assets/questions/r04a/r04a-q33.webp; 原本の問題文・図表・4選択肢を実見。montage-31.jpg",
+      "originalImageSHA256": "2cd4bc808e940bbdd90195e6a84268a534b1f7e5fc32d2ce3152c9970cc90800"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b3614d9d1e2545000d1239995d1a2efbb112889c37f06c64fe4a972bf22c7fd7"
+  },
+  {
+    "id": "r04a-q34",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "UDPはIP上のコネクションレス、順序/ACK無し。ICMPは制御通知、PPPはリンク層、TCPは接続型で順序/ACKあり。",
+      "readEvidence": "assets/questions/r04a/r04a-q34.webp; 原本の問題文・図表・4選択肢を実見。montage-31.jpg",
+      "originalImageSHA256": "25396ffe4218b9b67b9172ba13bae38d7720fb356ff16bdedeb28be73fe51007"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "0e11c9170b33965a19f2959840c518dc36ee57458f2bc70389fd3d3c732c3895"
+  },
+  {
+    "id": "r04a-q35",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "URLはscheme://host:port/path?query。www.example.com直後に:8080を置く。アはクエリ値、ウはパスの一部、イはスキームを壊し受理ポート指定にならない。",
+      "readEvidence": "assets/questions/r04a/r04a-q35.webp; 原本の問題文・図表・4選択肢を実見。montage-31.jpg",
+      "originalImageSHA256": "e02797a609a00671732d01899cd855a040fd7e3b3f090377adee7d20fa334c67"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "ホスト直後という最終構造をfalseで直接示していたため、早い段階は各URL部分の役割から導くよう変更。 元: {'title': '使う考え方', 'text': 'ポートは接続先サーバの情報なので、ホスト名と同じ部分に置きます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'ポート番号は同じコンピュータ上のサービスを区別する情報です。四つのURL部分を、接続先を決める情報と、接続後に要求する資源・パラメータに分けて置き場所を検討します。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "16dc7c471db94b692f63c0d62dccddb959761a390760903cbefbdcf02fdfdbc4"
+  },
+  {
+    "id": "r04a-q36",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "オープンリゾルバは誰からでもDNS問合せを受ける。被害者IPに送信元を偽装したDNS問合せで大量の応答を被害者へ送る反射攻撃。アはICMPの反射、イはhosts改ざん、エはオープンリレーSMTPを使ったスパム。修復済画像でエの『大量に送信する』まで確認。",
+      "readEvidence": "assets/questions/r04a/r04a-q36.webp; 原本の問題文・図表・4選択肢を実見。montage-36.jpg",
+      "originalImageSHA256": "078fac4b3cedf9235793d6d3bbac644d737805910fbf1a9fdb62db3de100920e"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。",
+      "修復済み共有原本を独立解答時と最終確認時に実見し、選択肢エの末尾全文まで確認。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "eb3870054a63925d760939774e3bfff05902476678978bf0929243594d3bf7b1"
+  },
+  {
+    "id": "r04a-q37",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "処理時間/消費電力/エラーという副次情報から秘密を得るサイドチャネル。イはごみ箱あさり、ウは中間者攻撃、エはSQLインジェクション。",
+      "readEvidence": "assets/questions/r04a/r04a-q37.webp; 原本の問題文・図表・4選択肢を実見。montage-36.jpg",
+      "originalImageSHA256": "5b67e3a152e44e105634af1010dd17266e851184a62c8495de047b4a467e7342"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b358bd8ae4f6ff562b44d7843d36f93667b2e252cf71a1c84fd28be27763609e"
+  },
+  {
+    "id": "r04a-q38",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "OCSPはOnline Certificate Status Protocolで失効状態照会。CHAPはチャレンジ認証、LDAPはディレクトリ、SNMPはネットワーク管理。",
+      "readEvidence": "assets/questions/r04a/r04a-q38.webp; 原本の問題文・図表・4選択肢を実見。montage-36.jpg",
+      "originalImageSHA256": "d81e5e9106b4973e14aef11eea3287ed359b68229f3bd4b2bca773f61a0e890d"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fb26b21ae120a833e23c404f05b6079a1d5ae8fa44c3142195c6a8d0bd8069e9"
+  },
+  {
+    "id": "r04a-q39",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "JPCERTのCSIRTマテリアルは組織のインシデント対応体制構築を支援。ISMSユーザーズガイドは管理体制一般、証拠保全は証拠取扱、内部不正防止は内部者対策でこの名称に該当しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q39.webp; 原本の問題文・図表・4選択肢を実見。montage-36.jpg",
+      "originalImageSHA256": "dd6a0414a6c0fdb126fd5cbe27f9822ebd171735b49d32a0905e0280c6c11fcf"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9828b510663cec1146cc87124ac596d05d46dd15c443b797e32cba03a62c4293"
+  },
+  {
+    "id": "r04a-q40",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "JVN=Japan Vulnerability Notesは脆弱性と対策情報の提供。アは検出そのもの、ウはCVSS等評価方法、エはCWE等分類でJVNの情報ポータル目的と違う。",
+      "readEvidence": "assets/questions/r04a/r04a-q40.webp; 原本の問題文・図表・4選択肢を実見。montage-36.jpg",
+      "originalImageSHA256": "2e32fd9bfbc64c34b300d9459730ceccdc23e230000ef02d50ae1f500f9f944c"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c36a176e21b61e00f8c874a6685f94df88e68671d6f02d43f5666f0fac46254b"
+  },
+  {
+    "id": "r04a-q41",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "リスクアセスメントは特定→分析→評価。アの受容、ウの対応/受容、エの対応は評価後の処置側でアセスメント3過程ではない。",
+      "readEvidence": "assets/questions/r04a/r04a-q41.webp; 原本の問題文・図表・4選択肢を実見。montage-41.jpg",
+      "originalImageSHA256": "4b6fb455b9a82f4386e954648cce10f5a917c7e1fae1f1a84cb217c221d4192b"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "a219dd63e100d54f15075be0dcdfee28889def8706c1daad720a3f102fedb1d8"
+  },
+  {
+    "id": "r04a-q42",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "WAFはHTTPリクエストを検査しWeb API脆弱性攻撃へ有効。DNSポイズニング/SMTP不正中継/メール爆弾はDNS/メールプロトコル対象でWAFのWeb検査とは違う。",
+      "readEvidence": "assets/questions/r04a/r04a-q42.webp; 原本の問題文・図表・4選択肢を実見。montage-41.jpg",
+      "originalImageSHA256": "b55f6cb28d890bdc9818b0de4f3ad931ba3df480cf3fcd6c70a4cfec646b6a7b"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "25185d6334dab6d9a43244a85f2a82eb596bf397ea81c1e0cf89b0222b38cef5"
+  },
+  {
+    "id": "r04a-q43",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "IPマスカレードにより外部から内部PCへの対応づけのない着信を通さず侵入抑止。PPPoEは暗号化でない、WPAは無線区間保護で悪質サイト選別しない、WPSは設定補助でマルウェア対策でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q43.webp; 原本の問題文・図表・4選択肢を実見。montage-41.jpg",
+      "originalImageSHA256": "fdea62056ba254495541cf9e47f7fde5c5f6179e5d1170063af27431eb7210f5"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f39d9bc30074218a38f321bef236aa5632b3a2342e6ce6a6413a8992941d6241"
+  },
+  {
+    "id": "r04a-q44",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "SPFは受信サーバが送信元ドメインのDNSに公表された許可IPと接続元IPを照合。アの署名はDKIM。ウはアーカイブ、エは承認保留で送信元認証でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q44.webp; 原本の問題文・図表・4選択肢を実見。montage-41.jpg",
+      "originalImageSHA256": "85e45864c463c8c29117ff6170b5be2c75f334590362c7333450095d9a687952"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "ドメイン許可情報と接続元の照合という一意の最終構造を示すため、開示設定をtrueへ変更。 元: {'title': '使う考え方', 'text': 'ドメインがDNSへ公開した送信許可情報を、実際の接続元と照合する流れを考えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'ドメインがDNSへ公開した送信許可情報を、実際の接続元と照合する流れを考えます。', 'revealsAnswer': True}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6613a969c5e445a1ddff3672fa278452134716a045ff6b2bd619497877e42e17"
+  },
+  {
+    "id": "r04a-q45",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "ファジングは異常/多様入力を送り動作を監視し脆弱性探索。アは負荷試験、ウは辞書攻撃、エはサニタイジング。",
+      "readEvidence": "assets/questions/r04a/r04a-q45.webp; 原本の問題文・図表・4選択肢を実見。montage-41.jpg",
+      "originalImageSHA256": "87925c57ea614b546595cd33051303015f8091520b4d83a7396debd7dafa45e3"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b7695fae0d3134ce19e930efb9faf957cc129c8e3476561424db96b98f3e3bed"
+  },
+  {
+    "id": "r04a-q46",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "作者を含む複数人の机上シミュレーションはウォークスルー。サンドイッチ/トップダウンは結合試験の進め方、並行シミュレーションは別系統で結果を照合する監査等の技法。",
+      "readEvidence": "assets/questions/r04a/r04a-q46.webp; 原本の問題文・図表・4選択肢を実見。montage-46.jpg",
+      "originalImageSHA256": "0d0aee953b15d00b91a321d3052d29203e1a8afee329bc1e17935f807ebbe778"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "34eabb14f6e38c16c5f0aaaa8efad48f067c83f6e68dc397156a839eb7fef6ec"
+  },
+  {
+    "id": "r04a-q47",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "FTAはトップ障害から中間・基本原因を論理ゲートで結ぶ樹形図。アは故障モードから影響を見るFMEA、ウはなぜなぜ分析、エはODC分類。",
+      "readEvidence": "assets/questions/r04a/r04a-q47.webp; 原本の問題文・図表・4選択肢を実見。montage-46.jpg",
+      "originalImageSHA256": "8d2066882116cc7d6cf07b730e88672a3c886b3a0854b1179837d4785bf156af"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6ae99e1149e9b3f8b94e5c38621337d719a095250797524f89ba6ff7c6337c9c"
+  },
+  {
+    "id": "r04a-q48",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "ケース全0は命令1,2,4、全1は命令3,5を実行し全5命令=100%。分岐はV,W0,Y0の3判断が両方、W≠0とY≠0の判断はYesだけ。5判断×2=10分岐中8=80%。アは未実行No二本を無視、ウ/エは命令カバレージも誤る。",
+      "readEvidence": "assets/questions/r04a/r04a-q48.webp; 原本の問題文・図表・4選択肢を実見。montage-46.jpg",
+      "originalImageSHA256": "927d69a65d61966a0ba8d86b888bbfd1a5aeaead911bca1ffc554072571c4c44"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "「不一致判定」は二値間の不一致と誤解するため、図の非0条件を明記。 元: ['二つの不一致判定のNo枝が未実行なので分岐100%ではありません。', '全命令を通り、10分岐のうち8分岐を通る組合せです。', '命令は五つすべて実行され、命令80%ではありません。また分岐100%でもありません。', '命令網羅は100%なので80%とする点が誤りです。'] 修正: ['W≠0かつX≠0の判定と、Y≠0かつZ≠0の判定のNo枝が未実行なので、分岐100%ではありません。', '全命令を通り、10分岐のうち8分岐を通る組合せです。', '命令は五つすべて実行され、命令80%ではありません。また分岐100%でもありません。', '命令網羅は100%なので80%とする点が誤りです。']",
+      "実際の最初のひし形で分岐を数える操作を追加。 元: {'title': '使う考え方', 'text': '次に命令とは別に、各ひし形のYes/Noを二つずつ数えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '最上段のV=0は全0ならYes、全1ならNoなので両枝を通ります。各ひし形について同じ二列の記録を作り、Yes/Noを一枝ずつ数えます。命令箱の個数とは分けて集計します。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "32d2603ba72dd2c65700004577fa0b3976328f95a0323e4041389dd89ac333b4"
+  },
+  {
+    "id": "r04a-q49",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "テスト駆動は実装前にテストコードを書く。アは初回バグ摘出、イはテスト改善、ウは網羅率向上でTDDの特徴的順序でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q49.webp; 原本の問題文・図表・4選択肢を実見。montage-46.jpg",
+      "originalImageSHA256": "1c01f1ebb0c8dacadfdcfe50473029edf4127eaf9694e63296cc32cabe381ea8"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "06f36d4cdfa1ca79485397d916bf398de5a58d2877bd839af5037f57da7cb13d"
+  },
+  {
+    "id": "r04a-q50",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "KPTのT=Tryで次のスプリントにタイムキーパーを置く改善試行。アはKeep（ペアプロ継続）、イとエはProblem（集合/所要時間の問題）。",
+      "readEvidence": "assets/questions/r04a/r04a-q50.webp; 原本の問題文・図表・4選択肢を実見。montage-46.jpg",
+      "originalImageSHA256": "c9127138e374725d2f67f46d14fb07dd710183b9f08fcc07591cf4fea06077ce"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c21bc60e135c71e5e8e9e2e3e68074e86fdf903453e4d4cf0d3bca891067bf42"
+  },
+  {
+    "id": "r04a-q51",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "スコープ管理は作業範囲管理。外部連携を別プロジェクトに移すことで対象範囲を変えるウ。アは教育スケジュール、イは予算、エは要員交替で範囲変更でない。",
+      "readEvidence": "assets/questions/r04a/r04a-q51.webp; 原本の問題文・図表・4選択肢を実見。montage-51.jpg",
+      "originalImageSHA256": "2e01d080f207315af9824b06ecadad34a139dccd5175b0535499d728f42c16be"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fdf0ae3817641555250c9d1a4778c3c794ef653e68889c4c1de5da60ac1db6e8"
+  },
+  {
+    "id": "r04a-q52",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "A開始0終了6。終了開始リード2でB開始4終了11。B→C開始開始ラグ3でC開始7終了12。全完了max(6,11,12)=12。11はBのみ、13/14はリード・ラグの加減/基点誤り。",
+      "readEvidence": "assets/questions/r04a/r04a-q52.webp; 原本の問題文・図表・4選択肢を実見。montage-51.jpg",
+      "originalImageSHA256": "d7cc8f8d0e46f0b41cfcc35d8845a951ebf29da3fbe1ee777b4defa85a08416d"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ae22635925843da45d047aba8c57ee5a06ed2d7034088f8ab8890e4277cd2633"
+  },
+  {
+    "id": "r04a-q53",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "初級はプログラム作成単体テストで上級の半分の生産性。旧期間=設計6/2=3,プログラム12/(2+2×0.5)=4,結合12/2=6で13月。上級1追加後2+3+4=9月。短縮4月。1/2/3は一部工程だけ計上などで総短縮と異なる。",
+      "readEvidence": "assets/questions/r04a/r04a-q53.webp; 原本の問題文・図表・4選択肢を実見。montage-51.jpg",
+      "originalImageSHA256": "6c1c8a5153332baea6d35181cb55b977a43fd2288819d0942258c552cd57de65"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "換算方向と最初の2÷2の代入を追加。 元: {'title': '注目するところ', 'text': '表1は上級基準です。作成・単体テストの初級2人を上級何人分かへ換算します。', 'revealsAnswer': False} 修正: {'title': '注目するところ', 'text': '表1の工数は上級基準です。作成・単体テストでは上級が初級の2倍働けるので、初級2人を2÷2=上級1人相当へ換算し、表2の上級2人へ加えます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e7355dd3ae2725d75b1053b4b89ee8a0ed5875823c84554b3310b02911c49f4a"
+  },
+  {
+    "id": "r04a-q54",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "重み5,1,4でA=7×5+9+8×4=76、B=8×5+10+5×4=70、C=9×5+4+7×4=77、D=9×5+7+6×4=76。C最高。費用は安さの評価点なので大きいほど良く符号反転不要。",
+      "readEvidence": "assets/questions/r04a/r04a-q54.webp; 原本の問題文・図表・4選択肢を実見。montage-51.jpg",
+      "originalImageSHA256": "1994ac65eecd4e49acfa8618805f39f6d69b4c9590cf93f6d67d7aec0e330c8f"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "対応させるだけでなくA列の最初の乗算を追加。 元: {'title': '注目するところ', 'text': '表の重み5,1,4を各製品の三つの点へ対応させます。', 'revealsAnswer': False} 修正: {'title': '注目するところ', 'text': '機能要件の重み5を製品Aの7点に掛けて5×7と書きます。同じ列の非機能要件9点には重み1、費用の安さ8点には重み4を対応させ、三項を足す準備をします。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "259038b090ec5698a6fecd414d4816beb7557107597bc6096f21898a56968d5f"
+  },
+  {
+    "id": "r04a-q55",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "問題管理は未知の根本原因を特定し発生/再発防止。アはインシデント管理、ウはサービス継続管理、エは変更管理。",
+      "readEvidence": "assets/questions/r04a/r04a-q55.webp; 原本の問題文・図表・4選択肢を実見。montage-51.jpg",
+      "originalImageSHA256": "3c553326f26711eac2651618f1e8e44451fa9017036f761a99887c13594598fd"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9cad8e195eba4db7d9f83526ce763c465725925e902a6a6692bc913b10948d6f"
+  },
+  {
+    "id": "r04a-q56",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "1日シフト枠2+4+2=8、7日で56枠。1回労働7.5hで40h上限だから1人最大floor(40/7.5)=5回、ceil(56/5)=12人。ア8は1日のみ、イ11は420h/40の総量だけで個人シフト離散性を無視、エ14は最低でない。引継30分は8.5hの重なりに含み休憩1hを引いて7.5h。",
+      "readEvidence": "assets/questions/r04a/r04a-q56.webp; 原本の問題文・図表・4選択肢を実見。montage-56.jpg",
+      "originalImageSHA256": "2b64994c5d5a063f7875c36412ab713a2c6c1f562404bfdd86f2fc7141f9cff3"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "切捨ての理由と最初の除算を明示。 元: {'title': '使う考え方', 'text': '1人が7.5時間のシフトに何回入れるか、40時間を超えない整数で数えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '1回7.5時間なので40÷7.5で1人の週勤務回数を見積もります。シフトを途中で分割できず40時間を超えてはならないため、端数は切り上げず切り捨てます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "194463e81c74c0a2a27c85946a3bb217b297a0a770f627d74fca500e4068ce9c"
+  },
+  {
+    "id": "r04a-q57",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "授受管理表で帳票受渡しを記録、重要情報は管理者へ手渡しが適切。アは利用業務側の合意なくITだけで停止、ウは業務データをIT独断で修正、エは保存/監査証跡必要な取引原票を即廃棄で不適切。",
+      "readEvidence": "assets/questions/r04a/r04a-q57.webp; 原本の問題文・図表・4選択肢を実見。montage-56.jpg",
+      "originalImageSHA256": "cb9d59b2c7a5bfafcb4b5aeb0c42291111709b5b0eaffa63bde56b8cbafb7b70"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "58b7a264ebda38a12fa0b794ae5e6afbdc53234513d52fe2535a19d063ac970c"
+  },
+  {
+    "id": "r04a-q58",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "リスク受容基準は評価の前に定める必要があり評価後決定を指摘。アは手順通りのUSB許可、イは規定通り事故報告、ウは検出駆除済の正常な対応でそれ自体は違反なし。",
+      "readEvidence": "assets/questions/r04a/r04a-q58.webp; 原本の問題文・図表・4選択肢を実見。montage-56.jpg",
+      "originalImageSHA256": "78443992a83400d90faef3c7fddaa5a943d27d6ea13f3784669b84b0fd1802b7"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "3d00b827d3b015fb212850e6f30d85f2941999c38e5efb2a63fc20f0366106f1"
+  },
+  {
+    "id": "r04a-q59",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "監査手続は十分適切な証拠の入手方法。アは監査計画/進捗、イは報告書作成、エはチーム編成で証拠収集の監査手続と違う。",
+      "readEvidence": "assets/questions/r04a/r04a-q59.webp; 原本の問題文・図表・4選択肢を実見。montage-56.jpg",
+      "originalImageSHA256": "5d54dca5225adf8a117aa3b9659b5281042993f3b2bf560a7b0233dc00849cca"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "8e310e894b9b56a0c90573900bd91944e7ac7a1add5b76b297da4862aaaac49e"
+  },
+  {
+    "id": "r04a-q60",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "システム監査基準は監査人の行動規範と監査品質/有効効率を確保する基準。イは監査人能力水準、ウ/エは対象システムを判断するシステム管理基準の趣旨。",
+      "readEvidence": "assets/questions/r04a/r04a-q60.webp; 原本の問題文・図表・4選択肢を実見。montage-56.jpg",
+      "originalImageSHA256": "6133fc4e2b079263e567e98f8d4e81655c5dfc258ba00e8b6df387095a0f4cf9"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ba87cf44985d7caacbe7e1cc2d0880e9efdc73e35250574971804daeb08d3ba5"
+  },
+  {
+    "id": "r04a-q61",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "BCPは中断・阻害時に復旧再開し定めたレベルへ回復する手順の文書化。アはBSC四視点、イはBPM継続改善、ウはBPO外注。",
+      "readEvidence": "assets/questions/r04a/r04a-q61.webp; 原本の問題文・図表・4選択肢を実見。montage-61.jpg",
+      "originalImageSHA256": "28850eb62b1a84b488c83a6436b896ff06bcafa4daf8dacf6ceb93c0eb4c57fc"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1d589a50db92e2b8d37c40d5c3cf39d71dea229a615536ad285353300a83a7e3"
+  },
+  {
+    "id": "r04a-q62",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "DXのIT要素は環境変化へ迅速対応し必要なデリバリースピードを満たすシステム。アは人材育成の別観点、ウの事後分析偏重はリアルタイム活用不足、エの個別最適は全体最適と逆。",
+      "readEvidence": "assets/questions/r04a/r04a-q62.webp; 原本の問題文・図表・4選択肢を実見。montage-61.jpg",
+      "originalImageSHA256": "19b84e43ed6cb6e399a38876eddfc2588164a1a424a73d722feb3b665e3f3bd2"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ae3e5915f7ce51499a92608501aeb18f7ab4260e35e7c2ca284c547cc6509556"
+  },
+  {
+    "id": "r04a-q63",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "EAはビジネス/データ/アプリケーション/テクノロジーの四体系で全体最適を分析。アはUML、イはERモデル、エはDFDの4要素。",
+      "readEvidence": "assets/questions/r04a/r04a-q63.webp; 原本の問題文・図表・4選択肢を実見。montage-61.jpg",
+      "originalImageSHA256": "6c3c5f20d30edaaab2d604b95b8492cacd5fd0f8895f0f969e49e11ccf0c6365"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "四体系の組合せを既に一意に示すため開示設定をtrueへ変更。 元: {'title': '使う考え方', 'text': '業務だけでなくデータ、アプリ、技術も相互に合わせる必要を考えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '業務だけでなくデータ、アプリ、技術も相互に合わせる必要を考えます。', 'revealsAnswer': True}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "bd1b012e52394d56d6b882db10b6db0f131ea16667a1fd635a328381a8e05029"
+  },
+  {
+    "id": "r04a-q64",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "NPV=-220+各年回収/(1.05)^年。総回収240は同じなので早期回収のBが最大。B=120/1.05+80/1.05²+40/1.05³-220≈1.40>0。A≈-5.68,C≈-2.14、投資なし0なのでB。",
+      "readEvidence": "assets/questions/r04a/r04a-q64.webp; 原本の問題文・図表・4選択肢を実見。montage-61.jpg",
+      "originalImageSHA256": "0994ca2a7bb2b8e8099626c482955e81beb7560581b539eb66eda6a14d8cb586"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "割引する理由と原本A行の最初の数値代入を追加。 元: {'title': '使う考え方', 'text': '1年後、2年後、3年後の回収をそれぞれ1.05、1.05²、1.05³で割ります。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '将来の1万円は今の1万円より割引かれるので、t年後の回収は1.05のt乗で割ります。例えばAの1年目40万円は40/1.05、2年目80万円は80/1.05²と現在価値へそろえて足します。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c860fb8b3c146059191cc549163185f643b57fe0f64d7e2110839b0685913fdd"
+  },
+  {
+    "id": "r04a-q65",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "コンティンジェンシープランはリスク顕在化時の対処計画。アは発生確率の事前低減、イは契約による品質確認、ウは調達先選定で発生後対処ではない。",
+      "readEvidence": "assets/questions/r04a/r04a-q65.webp; 原本の問題文・図表・4選択肢を実見。montage-61.jpg",
+      "originalImageSHA256": "a08d47675da17c3d01fcecde249323a398b4fbfab487d1302c83fa81d7d676bc"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c6160ef133178d9a3368277777385fb9e4300204d59ee6af4be5699aecefd490"
+  },
+  {
+    "id": "r04a-q66",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "モデル第三版では仕様の明確な内部設計からソフトウェア設計/作成/テストとシステム結合を請負範囲。上流計画・要件・外部設計と受入/導入等は準委任が適す。図のエは内部設計左境界→結合右境界。ア/イ/ウは不確実な上流を含む。",
+      "readEvidence": "assets/questions/r04a/r04a-q66.webp; 原本の問題文・図表・4選択肢を実見。montage-66.jpg",
+      "originalImageSHA256": "e48a3fc0451a6c167983ba1c86fddd055898cdbad9e3b50943c49a49f8b56ee7"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "図の各矢印の始点を具体化。範囲の正答は第3段階で示す。 元: {'title': '注目するところ', 'text': '図の矢印の始点と終点を、要件が固まる段階と完成物を作る段階に対応させます。', 'revealsAnswer': False} 修正: {'title': '注目するところ', 'text': '図のアはシステム化計画の左端、イとウは要件定義の左端、エはシステム内部設計の左端から始まっています。まず各始点で、完成すべき仕様がどこまで固まっているかを確認します。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "641128296f7d5080a0d1583c31e55ee1c414e18f21c18ca97807021439120026"
+  },
+  {
+    "id": "r04a-q67",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "買収前の経営実態/資産負債/収益性の詳細調査はデューデリジェンス。アは株主総会請求、イはTOB開始公告、ウは市場等の区分。",
+      "readEvidence": "assets/questions/r04a/r04a-q67.webp; 原本の問題文・図表・4選択肢を実見。montage-66.jpg",
+      "originalImageSHA256": "26e7668e445e297b1b9333dd564436e1a612218b8c7b4d5aed996bc980900848"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "671fb7da020c16fbfc5b6569d055c3357bf7a8b20bd5378092e05c5dd430259e"
+  },
+  {
+    "id": "r04a-q68",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "ターゲットリターンは目標投資収益率を達成する価格。アは競争志向、イは市場セグメント別価格、エは消費者価値志向。",
+      "readEvidence": "assets/questions/r04a/r04a-q68.webp; 原本の問題文・図表・4選択肢を実見。montage-66.jpg",
+      "originalImageSHA256": "eeb9d36ee53b293d641f80e7bd387601d256fda693e14958542019b0a904acee"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f0113f09ec34f6e79571bc48f86a7d04aed9c08de9c9da039ead14bf2de5e75f"
+  },
+  {
+    "id": "r04a-q69",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "コンジョイントは価格/デザイン/使いやすさなど複数属性組合せの選好分析。アは顧客ABC等の売上序列、ウはコーホート、エはポジショニングマップ。",
+      "readEvidence": "assets/questions/r04a/r04a-q69.webp; 原本の問題文・図表・4選択肢を実見。montage-66.jpg",
+      "originalImageSHA256": "409369190553ae185bf56cf946b3d76138ac2378b104a34ec5868609c669ab1e"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "021fa9eaab654361bf95590839abf4de3ada3ce29ce625586a50b14ac560db97"
+  },
+  {
+    "id": "r04a-q70",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "APIエコノミーは他社公開APIの組合せで事業サービスを作る。ホテルがタクシー配車APIを組込み提供するエ。アは学内統合、イは社内部署への提供、ウは社内データ可視化で企業間API連携の価値創出に該当しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q70.webp; 原本の問題文・図表・4選択肢を実見。montage-66.jpg",
+      "originalImageSHA256": "4cecbecb7b83f8f869180cdbf764b425f15260e8f05cfc10efb76076817b28cc"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "203acf8ece12ac6d5fcd63f027096c2f7c6ca4e744761460ead1fc2da59f4f5b"
+  },
+  {
+    "id": "r04a-q71",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "ファブレスは自社工場を持たず企画開発へ集中、固定費圧縮。アはセル生産、イはかんばん、エは製造受託のファウンドリ。",
+      "readEvidence": "assets/questions/r04a/r04a-q71.webp; 原本の問題文・図表・4選択肢を実見。montage-71.jpg",
+      "originalImageSHA256": "1c6071e96251a4da7f6fa480b392547ee06f36822cf32ad2b9c788d7941150ff"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "工場を持たないという正答の特徴を直接示すため開示設定をtrueへ変更。 元: {'title': '使う考え方', 'text': 'fabは製造工場、lessは持たないことです。設計と製造の分担を考えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'fabは製造工場、lessは持たないことです。設計と製造の分担を考えます。', 'revealsAnswer': True}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f8992a41044ad8ff94d4755cb1393fdf26a1f9adb90393452d5e2f3e4c4e8609"
+  },
+  {
+    "id": "r04a-q72",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "A300出荷のうち在庫100なので新製造200。a総600から在庫100引き新製造500。bはA直結200×2=400、a経由500×1=500、合計900から在庫300引き正味600。200はa経由不足、900は在庫控除忘れ、1500はA/a在庫を誤処理。c在庫400はb必要量に影響しない。",
+      "readEvidence": "assets/questions/r04a/r04a-q72.webp; 原本の問題文・図表・4選択肢を実見。montage-71.jpg",
+      "originalImageSHA256": "b730381e14e35260d9615763deb0e4dd0a224f8dae473c56d26b16f30179e08e"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "在庫控除の具体的順序と二重展開しない理由を追加。 元: {'title': '使う考え方', 'text': 'aの在庫は、そのaに組み込まれたbも既に確保済みという意味です。新しく作るaだけを下へ展開します。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': 'Aの新規製造数にaの構成数量3を掛け、a在庫100を引いて新しく作るaを求めます。在庫のaにはbが既に組み込まれているので、その在庫分をさらにbへ展開しないのが理由です。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "cf4261fb986498aba245ed5f6c92b442b2dfd299ae5b997978a63e1cd1ddc2c0"
+  },
+  {
+    "id": "r04a-q73",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "CPSは現実データ収集→サイバー空間で分析加工→現実へリアルタイムフィードバック。アはサーバ仮想化、イはVR、エは暗号資産等電子通貨の説明。",
+      "readEvidence": "assets/questions/r04a/r04a-q73.webp; 原本の問題文・図表・4選択肢を実見。montage-71.jpg",
+      "originalImageSHA256": "e05edd42e66a1cdf286b22d78d8c763e0da8371694266fbc6e9067085a9ccb12"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "第1段階の現実から取って戻す一意構造を直接示す部分を、具体的な三列整理へ変更。 元: {'title': '注目するところ', 'text': '候補の中で現実世界からデータを取り込み、結果を戻す矢印があるか確認します。', 'revealsAnswer': False} 修正: {'title': '注目するところ', 'text': '各候補を、データの情報源・情報を処理する場所・処理結果の行先の三列で整理します。サーバ内のOS、仮想体験、現実データ、電子通貨という扱う対象の違いから始めましょう。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "204a25063b816658e04d40f437e6394260a5adc15ded78e4c73d8e33ba99ed58"
+  },
+  {
+    "id": "r04a-q74",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "SL理論は部下の成熟度に応じ教示・説得・参加・委任の4スタイル。アはジョハリの窓、ウはSECI知識創造、エはマズロー欲求段階。",
+      "readEvidence": "assets/questions/r04a/r04a-q74.webp; 原本の問題文・図表・4選択肢を実見。montage-71.jpg",
+      "originalImageSHA256": "488296d15e48ef6d14275563f6d7b68a2962c907f2a02dc6dd46af3a648b3a74"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "8dd19702ba3baad6101a2748133115c8f4ce40802341899aaec20bf50eb4ee1b"
+  },
+  {
+    "id": "r04a-q75",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "デルファイ法は複数専門家への反復アンケートと回答フィードバックで収束。アは先行指標、イは計量モデル方程式、ウは統計比較分析で専門家反復なし。",
+      "readEvidence": "assets/questions/r04a/r04a-q75.webp; 原本の問題文・図表・4選択肢を実見。montage-71.jpg",
+      "originalImageSHA256": "b2dc2303bb815ecd630cec955956bd581802f3c695bad2696425eb8216865926"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "専門家回答の反復という正答候補を一意に表すため開示設定をtrueへ変更。 元: {'title': '使う考え方', 'text': '専門家同士が一度討論するのではなく、回答を集計し再考してもらう流れを考えます。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '専門家同士が一度討論するのではなく、回答を集計し再考してもらう流れを考えます。', 'revealsAnswer': True}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b9ceacd3f975f63a22174bc51486847fdf7b323927fa11be9139739bbf63d0fc"
+  },
+  {
+    "id": "r04a-q76",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "類似の事実/アイデアをグループ化して収束する親和図法。NMは類比発想、ゴードンは抽象テーマから発想、ブレストは自由に多く発散させる。",
+      "readEvidence": "assets/questions/r04a/r04a-q76.webp; 原本の問題文・図表・4選択肢を実見。montage-76.jpg",
+      "originalImageSHA256": "8fcbd692daa41479257fbea41852a876302bd6092185600bed205a6303caadbe"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9de2ffc8042256715e3bab489460eb2a2b5914115911a094d2cfcb8e506cc707"
+  },
+  {
+    "id": "r04a-q77",
+    "independentResult": {
+      "answer": "イ",
+      "reasoning": "甲の限界利益/時間=(30-18)/10=1.2千円、乙=(25-14)/8=1.375千円。制約は機械時間だけなので乙1250個、限界利益13750千円-固定10000=営業利益3750千円。2000は甲だけ、4750/6150は時間/固定費計算に合わない。",
+      "readEvidence": "assets/questions/r04a/r04a-q77.webp; 原本の問題文・図表・4選択肢を実見。montage-76.jpg",
+      "originalImageSHA256": "3d2f7e448cf8c1cffe16d13590a563ec140b7d255a477d709b397c4d5e7906d7"
+    },
+    "officialAnswer": "イ",
+    "issues": [
+      "最初の数値代入と時間当たりで比べる理由を追加。 元: {'title': '使う考え方', 'text': '限界利益を機械使用時間で割ります。利益/個ではなく利益/時間で優先します。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '甲について(30−18)/10と書き、1時間当たり限界利益へそろえます。乙も(25−14)/8で同じ単位にします。制約が機械の10,000時間なので、利益/個でなく利益/時間を比較するのが理由です。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ee9aa524e062f3d68ee9d21be01acbb65efa6582b880563d38818e950cb46c3b"
+  },
+  {
+    "id": "r04a-q78",
+    "independentResult": {
+      "answer": "ウ",
+      "reasoning": "特約なし。C社の業務で社員Dが開発するプログラムは職務著作でC社に帰属。発注A/元請Bに委託だけで移転しない。社員D個人でなく雇用主C。プログラム職務著作は法人名義公表条件不要。",
+      "readEvidence": "assets/questions/r04a/r04a-q78.webp; 原本の問題文・図表・4選択肢を実見。montage-76.jpg",
+      "originalImageSHA256": "647cc9a114d09e914b402a5b3efba21a0165d118135ff335719dfbcecf9f7650"
+    },
+    "officialAnswer": "ウ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "37a8a8b73f3717b990d0f21d8a7591185a86aa5faa1691e02f16763bcc0aec0a"
+  },
+  {
+    "id": "r04a-q79",
+    "independentResult": {
+      "answer": "エ",
+      "reasoning": "請負なら発注者に直接指揮命令権なし、受注者の労働者は発注者と新規雇用契約せずその場所で作業できる。ア/イは指揮命令を発注側と誤る、ウは雇用契約追加を要求する誤り。",
+      "readEvidence": "assets/questions/r04a/r04a-q79.webp; 原本の問題文・図表・4選択肢を実見。montage-76.jpg",
+      "originalImageSHA256": "1a6584067be1fee3b62a7c6308ea4d49466bf8083fd45c8c8fb699207d595bf2"
+    },
+    "officialAnswer": "エ",
+    "issues": [
+      "元教材のsummary/explanation/choiceReasons4件/hints3段階を独立解答と比較し、原本の条件・4択を再表示して確認。正答/誤答理由/ヒントの開示設定に修正必要な問題なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7e43ece30a7ff16561cbf8dd1221d473ae0a54e11b9c291475f629b36a4238fb"
+  },
+  {
+    "id": "r04a-q80",
+    "independentResult": {
+      "answer": "ア",
+      "reasoning": "PL法の製造物は製造加工された動産。ROMソフト内蔵組込み機器はその機器として対象。ソフト単体パッケージ、利用者インストールOS、ダウンロードデータ自体は無体物で対象外。",
+      "readEvidence": "assets/questions/r04a/r04a-q80.webp; 原本の問題文・図表・4選択肢を実見。montage-76.jpg",
+      "originalImageSHA256": "2f730a9de872d57abb0aa0d95802e1178d9a6dee744a847b89a2ebdfe68d2f95"
+    },
+    "officialAnswer": "ア",
+    "issues": [
+      "早い段階で組込み機器が対象と断定する前に、対象の物と情報の読み分けを操作として明示。 元: {'title': '使う考え方', 'text': '製造・加工された動産が対象です。欠陥の原因がソフトでも機器そのものは動産です。', 'revealsAnswer': False} 修正: {'title': '使う考え方', 'text': '製造物責任法が対象とする「製造・加工された動産」に各候補が当てはまるか確認します。まず、機器という物そのものと、その中で動く情報のどちらが候補として挙げられているかを読み分けます。', 'revealsAnswer': False}",
+      "修正後再確認：保存済みfinal-lessons.jsonの変更箇所を再読し、原本画像を再表示して式・代入値・図の位置・4択・ヒントの開示段階と照合。独立解答との矛盾なし。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c673133bbecaab25d7780f68de0616b11ea9b580455a021f7af7df8dab884c03"
+  }
+]

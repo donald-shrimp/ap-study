@@ -4,15 +4,25 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '1ac6547adddb659fd1026aee48d413bce2bd5d98'
+COMPLETED = 'b5d5464916706ac3febf0f4d51fc3529ddd89b95'
 
 def original(path):
     return subprocess.check_output(['git','show',f'{BASE}:{path}'],cwd=ROOT)
 
+sys.path.insert(0, str(ROOT/'tools'))
+from ap_lesson_quality import validate_workspace
+validate_workspace(ROOT)
+# Keep every original historical preservation assertion against the exact
+# completed integration commit. Later transcription/UI/lesson revisions have
+# their own evidence and must not be mistaken for the historical post-state.
+def completed(path):
+    return subprocess.check_output(['git','show',f'{COMPLETED}:{path}'],cwd=ROOT)
 before = {q['id']:q for q in json.loads(original('data/questions.json'))}
-after = {q['id']:q for q in json.loads((ROOT/'data/questions.json').read_bytes())}
+after = {q['id']:q for q in json.loads(completed('data/questions.json'))}
 assert set(before)==set(after) and len(after)==800
 educational = ['summary','explanation','choiceReasons','takeaway','hints']
 for id, old in before.items():
@@ -35,6 +45,6 @@ files = subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,
     'styles.css','sw.js','manifest.webmanifest','index.html','ap/index.html',
     'firebase'],cwd=ROOT,text=True).splitlines()
 for path in files:
-    assert (ROOT/path).read_bytes()==original(path),path
-digest=hashlib.sha256((ROOT/'data/questions.json').read_bytes()).hexdigest()
-print(f'PASS 720 unchanged question records / all 722 existing lesson texts (two disclosure flags corrected) / {len(files)} existing source, review, UI, PWA and Firebase files / bank SHA-256 {digest}')
+    assert completed(path)==original(path),path
+digest=hashlib.sha256(completed('data/questions.json')).hexdigest()
+print(f'PASS 720 unchanged question records / all 722 existing lesson texts (two disclosure flags corrected) / {len(files)} historical source, review, UI, PWA and Firebase files / historical bank SHA-256 {digest}')

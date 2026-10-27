@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r05h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c890a0f6ab0ba8082c76ded8cb33342e3a05f05e291ecea102519d3b0c3f42c1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q34",
+      "summary": "トランスポート層に位置するのはUDPです。",
+      "explanation": "トランスポート層はアプリケーション間の通信を扱い、ポート番号で送り先の処理を識別します。UDPはコネクションを確立せずにデータグラムを届けるトランスポート層のプロトコルです。HTTPとSMTPはアプリケーション層、ICMPはIPのエラー通知や制御を担うネットワーク層なのでエです。",
+      "choiceReasons": [
+        "HTTPはWebの要求・応答を定めるアプリケーション層のプロトコルです。",
+        "ICMPはIP通信のエラー通知や制御を扱うネットワーク層のプロトコルです。",
+        "SMTPは電子メール転送を扱うアプリケーション層のプロトコルです。",
+        "UDPはポート番号を使うトランスポート層のプロトコルです。"
+      ],
+      "takeaway": "用途の通信規約と、そのデータを運ぶ層を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補にはWeb、メール、IP制御、データグラム配送のプロトコルが混ざっています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アプリ固有の処理か、IP経路の通知か、アプリ間へデータを運ぶ機能かで層を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "トランスポート層の代表はTCPとUDPです。候補中の名称と対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5ffd7232e1a7ed0f29049d05617a771227dc62c010ecbe9eaa0e217f0576a3ea",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q33",
+      "summary": "1パケットの誤り確率は約0.012なので、10,000個中およそ120個です。",
+      "explanation": "0.0001％を確率に直すと0.000001=10⁻⁶です。1,500バイトは12,000ビットなので、1パケットの期待誤りビット数は12,000×10⁻⁶=0.012です。\n誤りがまれなため、誤りビット数と誤りパケット数をほぼ同じとして10,000×0.012=120個と近似できます。独立誤りを仮定した厳密な誤りパケット確率は1−(1−10⁻⁶)¹²⁰⁰⁰≈0.01193で、期待値約119.3も120に近い値です。",
+      "choiceReasons": [
+        "アの10はパケット内の12,000ビット分の誤り機会を正しく反映していません。",
+        "イの15は1,500をバイトのまま使った値です。ビット誤り率なので8倍します。",
+        "ウの80はパケット長1,500バイトを正しく反映した値ではありません。",
+        "エの120は1,500×8×10⁻⁶×10,000による近似値です。"
+      ],
+      "takeaway": "ビット誤り率は％を確率へ直し、パケット長もビット単位にそろえる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "原本の条件は0.0001％、1,500バイト、10,000個です。まず％を100で割って確率へ直します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1パケットは1,500×8ビットです。誤りが少ない場合、これとビット誤り確率の積を誤りパケットの割合に近似できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "10,000×(1,500×8)×(0.0001÷100)を計算します。バイトを8倍することと％を100で割ることを別々に確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bab3826a275a8f9c566941e6d5280b7c3f1ee8575b4bf93bec5259f9949b6a26",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q35",
+      "summary": "エのおよそ120個。1パケット12000ビットに誤り率10⁻⁶を適用します。",
+      "explanation": "0.0001%は百分率を100で割って0.000001=10⁻⁶です。1500バイトのパケットは12000ビットなので、誤りを含む確率はおよそ12000×10⁻⁶=0.012です。\n10000個では10000×0.012=120個。独立なビット誤りなら厳密には10000×{1−(1−10⁻⁶)¹²⁰⁰⁰}で約119.3個となり、選択肢は同じです。",
+      "choiceReasons": [
+        "10個ならパケット誤り率0.001に相当し、条件から求まる約0.012より小さ過ぎます。",
+        "15個は1500バイトを1500ビットとして扱った近似値です。",
+        "80個は12000ビットと誤り率から求める期待値に一致しません。",
+        "1パケットの誤り確率約0.012に10000個を掛けた約120個です。"
+      ],
+      "takeaway": "ビット誤り率の%を割合へ直し、パケットのビット数を掛ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "0.0001%をそのまま割合として使わず、100で割ります。1500バイトも8倍してビットへ直します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1パケットに含むビット数×ビット誤り率が、小さな誤り率でのパケット誤り確率の近似になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "12000×0.000001をまず求め、それを送るパケット数10000倍します。単位は誤りビット数ではなく、誤りを含むパケット数の近似です。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fe544c8c1c76b08a4588c8af54d92e2443e488f0e1e4be73a599e4ff615e39cf",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q35",
+      "summary": "エ。IPアドレスと反転したサブネットマスクのORを取ります。",
+      "explanation": "ブロードキャストアドレスはネットワーク部を元のままにし、ホスト部をすべて1にしたアドレスです。マスクの反転はネットワーク部が0、ホスト部が1になります。これをIPアドレスとORすると、ネットワーク部は元の値を保ち、ホスト部は1にできます。式はIP OR (NOT mask)です。",
+      "choiceReasons": [
+        "反転IPとマスクのANDではネットワーク部が反転し、ホスト部は0になります。",
+        "反転IPとマスクのORではネットワーク部がすべて1になり、ホスト部も元の反転値となります。",
+        "IPと反転マスクのANDではネットワーク部が0になり、ホスト部は元の値のままです。",
+        "IPと反転マスクのORでネットワーク部を保ち、ホスト部をすべて1にできます。"
+      ],
+      "takeaway": "ブロードキャストはネットワーク部を保存し、ホスト部を全1にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "マスクで1の部分がネットワーク部、0の部分がホスト部です。ブロードキャストでそれぞれをどうしたいか書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ホスト部を全1にするにはORの相手のホスト部を1にします。ネットワーク部を保持するには、その部分のORの相手を0にします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "マスクの反転がそのビット列なので、IPアドレスOR反転マスクを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b5b63868ff75a4d87f899e76da3bac401d24119d00246e14ab657a55e92c3e90",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q34",
+      "summary": "ア。/28では利用可能なホスト数は14です。",
+      "explanation": "IPv4は32ビットです。/28ではネットワーク部が28ビットなので、ホスト部は32−28=4ビットです。アドレス数は2⁴=16で、ネットワークアドレス192.168.30.32とブロードキャストアドレス192.168.30.47を除くと、ホストに使えるのは.33〜.46の14個です。",
+      "choiceReasons": [
+        "16個からネットワークとブロードキャストの2個を除き、14台に割り当てられます。",
+        "16はサブネット全体のアドレス数で、予約される2個を除いていません。",
+        "28はプレフィックス長であり、ホスト数ではありません。",
+        "30はホスト部5ビットの/27の場合のホスト数です。本問は/28です。"
+      ],
+      "takeaway": "IPv4の通常のサブネットではホスト数=2^(32−プレフィックス長)−2。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "192.168.30.32/28の/28がネットワーク部のビット数であることを確認し、32ビットから引きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まず32−28でホスト部のビット数を求めます。そのビット列の全組合せは2のべき乗で数えますが、全0はネットワーク、全1はブロードキャスト用なので2個を除きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホスト部は4ビットなので2⁴−2=14です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "acae6bc2d8c7cdf9468dbba64ba169ba42c350d4ffdaaa68f9054fc01765f73f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q34",
+      "summary": "ウ。a & ~mでホスト部だけを取り出します。",
+      "explanation": "サブネットマスクmの1はネットワーク部、0はホスト部です。mを反転するとホスト部だけが1になるので、IPアドレスaとANDを取ればネットワーク部を0にしてホスト部だけ残せます。例えば末尾がa=00001010,m=00000000なら末尾10が残ります。",
+      "choiceReasons": [
+        "~a & mは反転したアドレスのネットワーク部を抽出してしまいます。",
+        "~a | mはマスクのネットワーク部を全て1にし、ホスト部も反転します。",
+        "a & ~mはホスト部のビットだけ残すので正しいです。",
+        "a | ~mはホスト部を全て1にし、元のホストアドレスを取り出せません。"
+      ],
+      "takeaway": "取り出す位置を1にしたマスクとANDする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "マスクの1はネットワーク部、0はホスト部と書き、例11111111.11111111.11111111.00000000を見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ホスト部だけ1となるようマスクを反転します。ANDは1の位置だけ元のビットを残します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "反転マスク~mとaの論理積a & ~mを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0fe4f2af8dd31c73d531378b287f0bcbab5feea04b614e92bd97430f8aaee4d8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q35",
+      "summary": "エ。RIP-2は隣接ルータへの更新にマルチキャストを使います。",
+      "explanation": "マルチキャストは特定のグループに属する相手への送信です。RIP-2はIPv4のマルチキャストアドレス224.0.0.9を使い、RIP-2のルータへ経路更新を送信します。\nIPv4のDHCPによる初期取得やARP要求はブロードキャストが基本です。メーリングリストもIPマルチキャストではなくメールサーバの配送で各利用者へ届けます。",
+      "choiceReasons": [
+        "LANに初めて参加するPCのDHCP初期要求はブロードキャストを使います。",
+        "IPv4のARP要求はLAN内へブロードキャストし、該当する機器の応答を求めます。",
+        "複数の受信者へのメール配送でも、SMTP通信はIPマルチキャストにはなりません。",
+        "RIP-2ルータのグループ宛てに224.0.0.9で経路更新を送ります。"
+      ],
+      "takeaway": "複数人へ同じ内容を届けることと、IPマルチキャストを使うことは別。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「グループへの送信」と「LAN全体への送信」を分けます。SMTPの複数宛先もIPの送信方式とは別に考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "IPv4のDHCP初期要求とARP要求はブロードキャストです。ルータ同士の経路更新で使われるグループ宛ての方式を確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "RIP-2の経路更新先は224.0.0.9です。このマルチキャストを用いる利用例を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9eb065e0f8a5f7bc943656e21f1a9ebb39da0375a2cf1135bb42b0e5defb2dd1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q31",
+      "summary": "ア。リバースプロキシは外部から公開Webサーバーへの通信を中継します。",
+      "explanation": "リバースプロキシは、サーバー側の窓口としてクライアントからの要求を受け、内部のWebサーバーへ転送します。内部構成を隠したり、負荷分散などを行ったりできます。\n内部PCの外部アクセスを代行するフォワードプロキシとは、中継の方向と代理する側が逆です。",
+      "choiceReasons": [
+        "インターネット側から公開Webサーバーへの通信を中継するので正しいです。",
+        "攻撃を監視・検知する説明はIDSなどで、リバースプロキシの説明ではありません。",
+        "仮想専用ネットワークを確立するのはVPNの説明です。",
+        "内部PCのインターネット通信を代理するのはフォワードプロキシです。"
+      ],
+      "takeaway": "リバースはサーバー側の代理、フォワードはクライアント側の代理。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "通信の始点と終点を書きます。外部利用者から内部Webサーバーへ向かうか、内部PCから外部へ向かうかを区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "リバースプロキシは公開サービスの入口です。外部の要求を一度受けて、実際のサーバーへ渡す位置を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "監視だけをする仕組みや、暗号化された専用網を作る仕組みではありません。残る通信中継の説明を方向で比べましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a62da628d449160c46bc46fab19f7a9b9ba2d7a111f4a850f4f8d1d03d20a02c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q32",
+      "summary": "エ。VRRPは複数ルータを仮想的な一台として扱い、故障時に引き継ぎます。",
+      "explanation": "VRRP（Virtual Router Redundancy Protocol）は、複数のルータで仮想ルータを構成する冗長化プロトコルです。端末が使う仮想IPアドレスを共通にし、稼働中のルータが故障したときに他のルータが役割を引き継ぎます。\nPPPは回線接続、RARPはアドレス取得、SNMPは機器監視・管理であり、冗長な仮想ルータを構成するプロトコルではありません。",
+      "choiceReasons": [
+        "アのPPPはポイント間のデータリンク接続に使います。",
+        "イのRARPはMACアドレスからIPアドレスを得るためのプロトコルです。",
+        "ウのSNMPは機器の状態監視や管理に使います。冗長化そのもののプロトコルではありません。",
+        "エのVRRPは仮想ルータの稼働役を複数機器間で引き継ぎます。"
+      ],
+      "takeaway": "ルータの冗長化はVRRP、監視管理はSNMP。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "デフォルトゲートウェイの物理ルータが故障しても、同じ宛先で通信を続ける状況を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "複数のルータに共通の仮想IPアドレスを持たせ、稼働役を選ぶ仕組みが必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Virtual Router Redundancyという語の頭文字を、候補のプロトコル名に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "878ccd9dc4cf46ce3d6897b731c71c6f50200fdc676454d35a4025c60ca98c24",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q31",
+      "summary": "ウの0.16秒。8Mビットを実効50Mビット/秒で送ります。",
+      "explanation": "総データ量は1,000バイト×1,000件=1,000,000バイトです。1バイトは8ビットなので8,000,000ビット=8Mビットです。\n伝送効率50%により実効速度は100Mビット/秒×0.5=50Mビット/秒。時間=データ量÷速度=8/50=0.16秒です。",
+      "choiceReasons": [
+        "総量1Mバイトをビットへ変換せず実効50Mビット/秒で割った値が0.02ですが、単位が一致していません。",
+        "8Mビットを公称100Mビット/秒で割ると0.08です。効率50%で速度が半分になる条件を反映していません。",
+        "8Mビット÷50Mビット/秒=0.16秒で、単位と伝送効率の両方を反映しています。",
+        "条件の総量と実効速度からは0.16秒となり、1.6秒は10倍大きい値です。"
+      ],
+      "takeaway": "伝送時間は総ビット量÷実効ビット速度。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "レコード長はバイト、LAN速度はビット/秒です。1,000件分を求めた後、8倍して単位をそろえます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "効率50%なので100Mビット/秒を半分にした速度で計算します。総量をその実効速度で割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "総量は8,000,000ビット、実効速度は50,000,000ビット/秒です。8/50を計算しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6588791293b574520dc0bf07bf3cc5b5c4cdd1aa73fa290f3b31bae526f9eed1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q32",
+      "summary": "ア。近距離・低消費電力のBLEです。",
+      "explanation": "BLEはBluetooth Low Energyの略で、センサなどの近距離通信を低消費電力で行う技術です。身の回りの機器同士をつなぐ無線PANに使われます。",
+      "choiceReasons": [
+        "近距離の無線PANでセンサなどの省電力通信に使えます。",
+        "LTEは携帯電話の広域移動通信です。",
+        "PLCは電力線を伝送路にする有線通信です。",
+        "PPPは二地点を結ぶ通信のプロトコルで、無線PAN技術そのものではありません。"
+      ],
+      "takeaway": "PANは個人の周囲の近距離機器を接続する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "身に付けたセンサから近くのスマートフォンへ少量のデータを送る場面を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "広域携帯通信、電力線、二地点プロトコルを除き、近距離の低消費電力無線を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Bluetooth Low EnergyであるBLEが該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b3713442f885c383aab394a90c7ad36b8e1e4d6c1a0387b41282490c31df0b96",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q32",
+      "summary": "ア。FTPは制御用とデータ用を分けます。",
+      "explanation": "FTPは制御接続にTCP21番、データ転送用にTCP20番（アクティブモードの標準）を使います。パッシブモードでは別のデータ用ポートを使いますが、制御とデータを分離する構造は同じです。",
+      "choiceReasons": [
+        "FTPは制御21番とデータ20番という別のウェルノウンポートが割り当てられています。",
+        "POP3はメール受信用の110番で、この制御・データ分離には当たりません。",
+        "SMTPはメール送信用の25番で、この制御・データ分離には当たりません。",
+        "SNMPの161番と162番は要求と通知であり、問われるデータ転送用と制御用の区分ではありません。"
+      ],
+      "takeaway": "FTPは制御接続とデータ接続を別にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ファイル転送、メール受信、メール送信、機器管理に各プロトコルを対応させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コマンドを送る接続とファイル内容を送る接続を分ける方式を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "制御21番とデータ20番の組合せを持つFTPを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "782e0284c0c700979ccf9e6815289792b365e124ebdabcf3428082f674e133b9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q33",
+      "summary": "ア。FTPは制御用21番と、伝統的なデータ用20番を持つ。",
+      "explanation": "FTPはログインや転送要求を送る制御接続と、ファイルの中身を送るデータ接続を分離する。ウェルノウンポートは制御用TCP21、アクティブモードのデータ接続のサーバ側TCP20。\n\nパッシブモードのデータ接続では別途通知されたポートを使うので、全てのFTPデータ転送が20番という意味ではない。POP3はメール取得、SMTPはメール送信、SNMPはネットワーク管理である。",
+      "choiceReasons": [
+        "FTPは制御接続とデータ接続を分け、制御21番・アクティブデータ20番が割り当てられる。",
+        "POP3はメール取得用のプロトコル。FTPのような制御・データの二接続ではない。",
+        "SMTPはメール配送用。通常その通信でメール内容を送る。",
+        "SNMPは通常161番の要求・応答と162番の通知を使う。ファイル転送の制御・データの区分ではない。"
+      ],
+      "takeaway": "ポートが複数ある理由まで区別する。FTPは制御とデータ、SNMPは要求と通知。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題は単にポートが複数ある方式ではなく、「転送するデータ」と「転送の制御」を別にする方式。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ファイル転送では、転送要求を送る接続とファイル本体を流す接続を分けるプロトコルがある。メールや監視のプロトコルと区別する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "制御用21番、アクティブモードのデータ用20番という組を思い出し、該当するファイル転送プロトコルを選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f18df3eb941e7838e9599e17e4e8cbebad938626364afd94b9c9e798358c5888",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q32",
+      "summary": "1パケットの時間差0.09msから、N=100です。",
+      "explanation": "1パケットは1,250×8=10,000ビットです。100Mビット/秒では10,000/(100×10^6)=0.1ms、1Gビット/秒では10,000/10^9=0.01msかかります。同じ個数を送るので、共通の送信間隔1msの寄与は差を取ると消えます。1個の差0.09msより0.09N=9、N=100です。",
+      "choiceReasons": [
+        "10個なら時間差は0.9msで、9msに足りません。",
+        "80個なら時間差は7.2msで、9msに足りません。",
+        "100個なら0.09×100=9msで条件に合います。",
+        "800個なら時間差は72msで、9msを超えます。"
+      ],
+      "takeaway": "両条件に共通の待ち時間は差の計算で相殺する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "両LANとも間隔は1msです。速度によって変わるのはパケット自体を送る時間です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "バイトをビットへ換算してから、データ量÷速度で1個の送信時間を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1個の送信時間は0.1msと0.01msです。差にNを掛けて9msになる式を作りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f0867033286055a5f97d5c9327f3ce5174f7041464e8f4a7a48ec754bf5387aa",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q30",
+      "summary": "ウの100個。1パケットの送信時間差0.09ミリ秒で9ミリ秒を割ります。",
+      "explanation": "1パケットは1250×8=10000ビット。100Mbpsでは0.1ミリ秒、1Gbpsでは0.01ミリ秒なので、差は0.09ミリ秒です。\nパケット間隔1ミリ秒は両LANで同じ個数だけ含まれるため、差を取ると打ち消されます。0.09N=9よりN=100です。",
+      "choiceReasons": [
+        "10個の差は0.9ミリ秒で、9ミリ秒に届きません。",
+        "80個の差は7.2ミリ秒です。バイトからビットへ8倍する換算を確認します。",
+        "100個なら0.09×100=9ミリ秒です。",
+        "800個の時間差は0.09×800=72ミリ秒で、9ミリ秒を超えます。"
+      ],
+      "takeaway": "共通の待ち時間は差で相殺。転送量をビットへ直し、速度別の時間差を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ヘッダー込みの1250バイトを8倍してビットへ直します。追加のヘッダー計算は不要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "100Mbpsと1Gbpsの時間をそれぞれ10000/速度で求め、同じ単位にそろえます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "間隔1ミリ秒は両方に同じ数だけ含まれます。送信部分の差を1個分出し、9ミリ秒をその差で割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e7db23ca8000325a1edb80929852697f6ebf3c5a6dd84e37ed367db882b60748",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q35",
+      "summary": "接続を維持したまま基地局を切り替えるのはハンドオーバーです。",
+      "explanation": "移動によって現在の基地局の電波が弱くなったとき、通信を継続しながら別の基地局に引き継ぐ処理をハンドオーバーといいます。問題は契約外の事業者のネットワークを使うローミングではなく、接続中の端末の基地局切替えを述べているのでイです。",
+      "choiceReasons": [
+        "テザリングはモバイル端末の回線を他の機器へ提供する機能です。",
+        "基地局間で通信接続を引き継ぐハンドオーバーの説明です。",
+        "フォールバックは利用できない方式から代替の方式へ切り替えることです。",
+        "ローミングは契約先以外の事業者などのネットワークを利用する仕組みです。"
+      ],
+      "takeaway": "基地局間の接続の引継ぎはハンドオーバー。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "条件は「移動中」「接続を維持」「別の基地局へ」の三つです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "他の端末へ回線を分ける操作や、他事業者の回線を利用する操作と区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "基地局Aから基地局Bへ接続を引き継ぐ操作はハンドオーバーです。条件と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2065e77842fb9d656ca4a42c63bb860eb345d100f1d48c6b0a591aee5918fd6e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q32",
+      "summary": "ウ。効率を考慮すると約2.67Mビット/秒以上必要で、4Mの回線を選びます。",
+      "explanation": "1Mバイトは8Mビットです。5秒以内に送るには実効速度8/5=1.6Mビット/秒以上が必要です。\n公称回線速度をvとすると伝送効率60%で0.6vが実効速度になるので、v≥1.6/0.6=約2.67Mビット/秒。選択肢で条件を満たす最低速度は4Mビット/秒です。",
+      "choiceReasons": [
+        "実効速度0.6Mビット/秒では8Mビットを送るのに約13.3秒掛かります。",
+        "実効速度1.2Mビット/秒では約6.67秒掛かり、5秒を超えます。",
+        "実効速度2.4Mビット/秒で約3.33秒となり、条件を満たす最低の選択肢です。",
+        "実効速度6Mビット/秒なら条件は満たしますが、4Mの回線でも足りるので最低速度ではありません。"
+      ],
+      "takeaway": "必要な公称速度はデータ量÷時間÷伝送効率。選択肢の中で条件を満たす最小値を取る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "送信量はバイト、回線速度はビットです。1Mバイトを8Mビットへ直してから、5秒で割りましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "回線がvMビット/秒でもデータを運べるのは0.6vです。0.6v×5≥8という不等式を作ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "v≥8/(5×0.6)となります。境界値を計算し、それ以上の選択肢から一番小さい回線速度を選びます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6e77119e5e4b3ebf22f0373d91491d407339fbbaec1bddca3803e37ccb5b2155",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q31",
+      "summary": "PLCは電力線を通信回線として利用する技術です。",
+      "explanation": "通信技術としてのPLCはPower Line Communicationの略です。電気を供給する電力線に通信信号を重ね、既存の配線を使ってデータを伝送します。したがってイです。音声のIP伝送や無線LANの規格、無線の暗号化方式とは異なります。",
+      "choiceReasons": [
+        "音声をIPネットワークで伝えるVoIPの説明です。",
+        "電力線をデータ通信にも使うPLCの説明です。",
+        "IEEE 802.11シリーズは無線LANの規格で、電力線通信ではありません。",
+        "PLCは伝送媒体を利用する通信技術で、無線暗号化方式の名称ではありません。"
+      ],
+      "takeaway": "通信のPLCはPower Line Communicationで、伝送媒体は電力線。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題は制御装置ではなく「通信技術」のPLCを聞いています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各候補が伝送媒体、扱うデータ、標準規格、暗号化のどれを説明しているか分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "PLCのPower Lineは電力線です。これを通信に利用する記述へ対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3d52f22daefbeb848ac1a0611205973b33462dfaf153b9ef3f12ea5e84a6836b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q39",
+      "summary": "エ。有効期限内に失効した証明書のシリアル番号をCRLへ載せます。",
+      "explanation": "CRLはCertificate Revocation Listで、認証局が発行する失効証明書の一覧です。秘密鍵の漏えいなどで、有効期限の前に信頼できなくなった証明書をシリアル番号などで示します。\n認証局の公開鍵が分かれば署名は検証できますが、それだけでは現在も有効かを確認できません。失効情報の確認が別に必要です。",
+      "choiceReasons": [
+        "一律に失効後1年間載せるという規定ではありません。証明書の期限との関係を踏まえて扱います。",
+        "認証局の公開鍵で署名が正しいと分かっても、証明書の失効状態は別に確認する必要があります。",
+        "全証明書の有効期限を列挙する一覧ではなく、失効した証明書の情報を載せます。",
+        "有効期限内に失効した証明書をシリアル番号で記載する説明が正しいです。"
+      ],
+      "takeaway": "署名検証、有効期間、失効状態は別の確認。CRLは失効した証明書の一覧。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "証明書に印刷された期限が来る前に、秘密鍵漏えいで使えなくなった場合を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "署名の正しさは認証局が発行したことを示しますが、その後取り消されたかは失効情報で確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "一覧の対象は全ての証明書ではなく、取り消された証明書です。個々の証明書を識別する番号を記載する候補を確認しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "76fe30dfb9a31dff7d781edd578c9c265a9a1635104330c3b87beaf513ecf3fa",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q39",
+      "summary": "ア。他のCSIRT間の情報連携と調整を担います。",
+      "explanation": "コーディネーションセンターは複数のCSIRTの間をつなぎ、インシデント対応に必要な情報の連携や対応の調整を行います。サービス対象は他のCSIRTです。\n分析情報の提供、自社製品の脆弱性対応、有償での対応受託は、分類上それぞれ別の機能です。",
+      "choiceReasons": [
+        "他のCSIRTを対象に、CSIRT間の情報連携と調整を行うコーディネーションセンターの説明です。",
+        "インシデント傾向やマルウェア・痕跡の分析と注意喚起で、分析センターの説明です。",
+        "自社製品の脆弱性に対応するベンダーチームの説明です。",
+        "顧客から機能を有償で受託するセキュリティサービスプロバイダの説明です。"
+      ],
+      "takeaway": "コーディネーションは他のCSIRTをつなぐ連携・調整。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の左列は機能、右列はサービス対象です。各行を「何をするか」「誰へ提供するか」の二つに分け、コーディネーションという役割との対応を考えましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "coordinationは関係者の活動を調整することです。複数のCSIRTが関わるインシデントで何を担うか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "CSIRT間の情報連携・調整を行い、他のCSIRTを対象にする組合せを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

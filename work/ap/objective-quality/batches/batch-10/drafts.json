@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r05a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "109b44807e7921d3da7f94ca65f7f79f64787ef8e8c77f009b7c626987ffb682",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q17",
+      "summary": "ア。最悪の同時起動でもBは7ミリ秒で終わり、周期8に収まります。",
+      "explanation": "Aが高優先度なので、同時に起動した場合はAを先に実行し、その後もAの周期ごとにBが中断されます。\nアではAを0〜2、Bを2〜4、Aを4〜6、Bを6〜7に実行でき、Bの実行時間3を周期8内で確保できます。\nイではAを0〜3と6〜9に実行するため、Bの4ミリ秒目は9〜10となり期限9を超えます。ウはAを0〜3、5〜8、10〜13に実行し、Bの完了は14。エはAを0〜4、6〜10、12〜16に実行し、Bの完了は17です。",
+      "choiceReasons": [
+        "Bは2〜4と6〜7に合計3ミリ秒実行でき、完了7は周期8以内です。",
+        "Bは3〜6の3ミリ秒だけでは足りず、残り1は9以後になります。完了10は周期9を超えます。",
+        "Bは3〜5と8〜10で4ミリ秒実行しますが、残り1は13以後です。完了14は周期13を超えます。",
+        "Bは4〜6と10〜12で4ミリ秒実行しますが、残り1は16以後です。完了17は周期15を超えます。"
+      ],
+      "takeaway": "高優先度タスクの周期的な割込みを時間軸に置き、低優先度の実行時間を積み上げる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Aが高優先度で、共有資源も切替え時間もありません。AとBが同時に起動した時間0からの最悪の場合を描きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各Aの周期の先頭から最大実行時間分をAに割り当て、残る区間をBに割り当てます。Bは中断後も残りを続けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アでは0〜2と4〜6がAの区間です。2〜4と6以後にBを置き、合計3ミリ秒を終える時刻と8を比べましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ddc651f74164577571317186de0555d04835bcb9cb739a3a4bdd02c304bf5d75",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q19",
+      "summary": "エ。実行回数や処理時間を集め、性能改善を助けるツールはプロファイラです。",
+      "explanation": "プロファイラはプログラムの実行状況を測定し、関数ごとの呼出し回数・実行時間などを収集するツールです。時間を多く使う箇所を見つけ、性能改善の対象を絞れます。\nデバッガは誤動作の原因を調べるための実行停止や変数確認、エミュレータは別の実行環境の再現、シミュレータはモデルの動作を模擬する用途です。",
+      "choiceReasons": [
+        "アのエミュレータは別の機器や実行環境を再現します。実行統計を集めるツールの名称ではありません。",
+        "イのシミュレータは対象のモデルを模擬します。関数ごとの性能統計を集める目的とは異なります。",
+        "ウのデバッガは停止・ステップ実行などで不具合を調べます。設問の目的は性能の分析です。",
+        "エのプロファイラは実行回数や時間などを測定し、ボトルネックを調べます。"
+      ],
+      "takeaway": "不具合の調査はデバッガ、実行時間の分析はプロファイラ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問はプログラムを一行ずつ止める話ではなく、「どの関数が何回、何秒動いたか」を集める話です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ関数が多数呼ばれる場合や、一回に長い時間を使う場合を統計で見つける用途です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "実行の統計情報をprofileとしてまとめるツール名を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7865e0845495e718d71174092a44ea0d2a25aa1e47d87b0634bbb047fafe918c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q15",
+      "summary": "ア。共有主記憶へのアクセス競合が性能向上を制限します。",
+      "explanation": "密結合マルチプロセッサは主記憶を共有します。複数プロセッサが同時にメモリやバスへアクセスすると待ちが発生し、台数に比例した処理性能になりません。",
+      "choiceReasons": [
+        "共有主記憶の帯域を争うため、台数増加による性能向上を妨げます。",
+        "通信回線を介する分散型の構成で問題になる要因です。",
+        "ディスパッチの負荷はありますが、密結合で台数比例を妨げる共有資源の本質的要因ではありません。",
+        "割込みは一台でも発生し、共有主記憶競合ほど構成固有の要因ではありません。"
+      ],
+      "takeaway": "密結合では共有するメモリやバスがボトルネックになる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "密結合の複数CPUと主記憶の接続図を描き、各候補の処理がどの資源を使うか書き込みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CPUが同時に読み書きしようとしても、共有資源の処理能力には上限があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "主記憶へのアクセス競合が待ちを生むため、性能は台数に比例しません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b38a604965d59f7491f63e478c12ffb38f4ea9d7b53ab9dcc0beb716f2026b7a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q15",
+      "summary": "エの約0.98。停止時間は修理10時間ではなく切替え2時間です。",
+      "explanation": "二重に障害は発生しないので、稼働中サーバが故障しても切替え後は待機側で処理を続けられます。故障したサーバの修理10時間全体がシステム停止時間になるわけではありません。\nシステムの平均稼働時間99時間に対し、故障時の停止はフェールオーバーの2時間です。稼働率=99/(99+2)=99/101≒0.9802なので約0.98です。",
+      "choiceReasons": [
+        "0.82は条件の稼働時間99と停止時間2から求める値と合いません。二重障害なしでは両サーバ故障による長い停止を加える必要はありません。",
+        "0.89は99/(99+10+2)に近い値ですが、切替え後の修理時間をシステムの停止として加えることはできません。",
+        "0.91は単体の99/(99+10)に近い値です。待機側への切替えで停止時間が短くなる条件を反映していません。",
+        "99/(99+2)≒0.98で、切替え時間だけを停止時間として計算しています。"
+      ],
+      "takeaway": "冗長システムは部品の修理時間とサービス停止時間を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "二重に障害は起きません。故障サーバを修理している間、待機側へ切り替えたシステムが動けるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "稼働率は稼働時間÷（稼働時間＋停止時間）です。10時間の修理と2時間の切替えのうち、サービスが止まる時間を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平均稼働時間99、停止時間2として99/(99+2)を計算し、小数第2位程度で比較しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "40b7eb70112f5599b6d1d641ff8bfeb12ac900510a9f2d3da90c0cce650d02c1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q15",
+      "summary": "ウ。解析的に解けないモデルでも、動作を模擬して数値的な結果を得られます。",
+      "explanation": "シミュレーションはモデルの動作を計算機で再現し、処理時間や待ち時間などを数値として評価します。複雑で解析式を導けないモデルにも使える点が特徴です。\n一方、繰返し実行に多くの計算が必要なことがあり、乱数による結果には統計的な誤差もあります。解析解があるモデルと照合し、モデルや実装を検証する用途にも使えます。",
+      "choiceReasons": [
+        "アは計算量が必ず少ないとしていますが、多数の試行で大きくなる場合があります。",
+        "イは乱数を使えば高精度になるとしていますが、試行数やモデルによる誤差が残ります。",
+        "ウは解析的に解けないモデルにも数値的な評価が可能という特徴です。",
+        "エは誤りです。解析解とシミュレーション結果を比較して検証できます。"
+      ],
+      "takeaway": "シミュレーションは解析式の難しいモデルにも使えるが、計算量と誤差の確認が要る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "待ち行列が複雑で、待ち時間を表す式を導けない場合を想像します。動きを再現すれば測れるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "到着と処理を繰り返し再現して平均待ち時間を集計できます。ただし試行数が少なければ結果はばらつきます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「解析的に解けないモデル」と「数値的に求める」を結ぶ記述を確認します。乱数だけで精度が保証されるかも比べましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "56350509b52f9226eee96b1cb68b0741d54d83de716682eb63a85c735b685179",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q15",
+      "summary": "重要部品の多重化で故障に備えるのはフォールトトレランスです。",
+      "explanation": "フォールトトレランスは、故障が発生しても必要な機能を継続するための考え方です。重要部品を多重化し、一つが故障しても別の部品で処理できるようにするのはその代表的な技術です。部品自体の信頼性を高めて故障を減らすフォールトアボイダンスとは区別します。",
+      "choiceReasons": [
+        "故障を起こさないよう信頼性を高めるのはフォールトアボイダンスです。フェールセーフは故障時に安全側へ移行します。",
+        "フェールソフトは機能・性能を落として継続する考え方で、ソフトウェア起因だけに限定しません。",
+        "故障後も継続できるようにするのはフォールトトレランスです。",
+        "冗長な構成で故障の影響を吸収するフォールトトレランスの説明です。"
+      ],
+      "takeaway": "故障の予防、故障時の安全、縮退継続、故障の許容を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各文が「故障を防ぐ」「故障後に継続する」のどちらを述べるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "トレランスは故障を許容する考え方です。一つが故障しても必要な機能を保つ構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "重要部品の多重化なら、故障部品の代わりに別の部品が働けます。この記述と名称の対応を確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3e9c8e050e6b8a416f7eec26f824b36b0bbf478c3901c1fa102876f4a494f738",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q14",
+      "summary": "イ。稼働率はA、C、Bの順に高くなります。",
+      "explanation": "一台の稼働率をr（0<r<1）とします。並列は全台停止したときだけ停止するので、A=1−(1−r)²=2r−r²です。Bは一台と並列二台の直列なのでrA=2r²−r³、Cは直列二台の組を二つ並列にするので1−(1−r²)²=2r²−r⁴です。\nC−B=r³(1−r)>0、A−C=r(1−r)²(r＋2)>0。したがってA>C>Bです。",
+      "choiceReasons": [
+        "BよりCの方が高いので、A、B、Cの順ではありません。",
+        "A>C>Bとなるので、この順が正しいです。",
+        "CよりAが高いので、Cを先頭には置けません。",
+        "Aが最も高く、Bが最も低いので、この順は逆です。"
+      ],
+      "takeaway": "直列は稼働率を掛け、並列は全停止確率を1から引く。式の差で大小を確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図のまとまりを読むと、Aは二台並列、Bは一台の後ろに二台並列、Cは二台直列の経路が二つ並列です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一台をrとするとA=1−(1−r)²、B=rAです。Cは各経路がr²なので、全停止確率は(1−r²)²となります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "C−Bを計算するとr³(1−r)です。0<r<1なので正になります。Aとの比較もA−Cを因数分解して符号を確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f7d9083722c653cbdfa0265f169bd28fd2e65d02e483f5fcb125a78b49a7db64",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q16",
+      "summary": "Zを迂回できる経路があるBの稼働率が常に高くなります。",
+      "explanation": "X,Y,Zの稼働率をx,y,zとします。AはXとYの並列部にZが直列なので、A=(x+y−xy)zです。BはXZの直列経路とYの並列なので、B=xz+y−xyzです。差はB−A=y−yz=y(1−z)。0<y<1、0<z<1より差は正で、常にB>Aです。",
+      "choiceReasons": [
+        "差y(1−z)は与えられた範囲で必ず正なので大小は逆転しません。",
+        "Zが故障してYが稼働する場合にBだけが動くため、等しくありません。",
+        "AではZの故障で全停止するため、Bより高くはなりません。",
+        "B−A=y(1−z)>0なので常にBが高くなります。"
+      ],
+      "takeaway": "直列は積、並列は1−全故障確率。共通式を引いて大小を比べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "並列部分はどちらか一方の稼働でよい点と、各図でZが置かれた位置に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "直列は稼働率の積、並列は1−両方の故障確率で式を作ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "A=(x+y−xy)z、B=xz+y−xyzです。B−Aを整理し、0<y,z<1で符号を調べましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8723745e0d4d4749df7eeb0faf7d694300cb422dd2d27e8f2b8e0163230f1335",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q19",
+      "summary": "ウ。プリンターCの印刷完了は11分です。",
+      "explanation": "時刻0でA=4分、B=6分、C=3分を割り当てます。時刻3でCに2分（終了5）、時刻4でAに5分（終了9）、時刻5でCに3分（終了8）、時刻6でBに4分（終了10）、時刻8でCに3分（終了11）、時刻9でAに1分（終了10）です。Cは3+2+3+3=11分連続して印刷します。",
+      "choiceReasons": [
+        "7分はCに割り当てられる四つの印刷時間の合計に届きません。",
+        "9分は最後の3分の印刷が終わる前です。",
+        "Cの担当は3,2,3,3分なので合計11分です。",
+        "Cの割当て合計は11分で、途中の待機もないため12分にはなりません。"
+      ],
+      "takeaway": "待ち行列は各機器の次に空く時刻を更新し、同時なら指定順で割り当てる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初の4,6,3分をA,B,Cへ置き、終了時刻を書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "最初に空くのは終了時刻3のCです。次の2分の仕事をCに渡して終了時刻を3+2へ更新し、A=4,B=6ともう一度比べます。空きが同時ならA,B,Cの順を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Cは時刻3,5,8に次の仕事を受けます。初回3分に2,3,3分を足します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "842e8ae8e68cead31024d02a266f9fcbd49f422985fc6938558b62221541876e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q17",
+      "summary": "イ。Aと資源の取得順が異なるC・Dでは、相互に待つ状態が起こり得ます。",
+      "explanation": "AとBはX→Y→Zの同じ順です。先にXを取った側が処理を進め、もう一方はXを待つので、二者間の循環待ちはできません。\nCはZ→X→Yです。AがX、CがZを保持すると、Aは最後にZを待ち、CはXを待って停止できます。DはZ→Y→Xで、AがX、DがZとYを保持すれば、AはY、DはXを待ちます。したがってCとDです。",
+      "choiceReasons": [
+        "アはBも含めています。同じ取得順のAとBでは、片方が最初のXを待つだけで循環しません。",
+        "イは取得順が異なり、Aとの循環待ちを作れるCとDです。",
+        "ウはDを除外しています。AがX、DがZ・Yを持つと互いに待ちます。",
+        "エはCを除外しています。AがX・Y、CがZを持つと互いに待ちます。"
+      ],
+      "takeaway": "資源取得の順番を矢印にし、互いが保持する資源を待つ状況を作れるか調べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の1→2→3を資源名の順へ変えます。AはX→Y→Z、CはZ→X→Yです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "取得済み資源は終了まで解放しません。AがXを持つ間に他方がZを取得した状況から、次に何を待つか追います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "DがZ→Yを取得し、AがXを取得した場合、Aが次に欲しい資源とDが最後に欲しい資源を比べます。Bの最初の資源にも注目します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9b4b3937f02e3e1b556abdc60a14136577ff34fe60a47f19a7d311f0adafb9c7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q15",
+      "summary": "エ。最も遅い書込み50ミリ秒が律速となり、毎分1,200件です。",
+      "explanation": "読取り40ミリ秒、CPU処理30ミリ秒、書込み50ミリ秒を別のデータについて並行に実行します。パイプラインの定常状態で1件を送り出す最短間隔は、最も時間のかかる段の50ミリ秒です。1分=60,000ミリ秒なので最大処理件数は60,000/50=1,200件です。三段の時間の合計は1件の通過時間であり、定常状態の処理間隔ではありません。",
+      "choiceReasons": [
+        "500件/分は処理間隔120ミリ秒に対応し、三段を並行化した最大能力より小さい値です。",
+        "666件/分では処理間隔が約90.1ミリ秒となり、律速段50ミリ秒から求めた値ではありません。",
+        "750件/分は処理間隔80ミリ秒となり、三段の最大時間50ミリ秒と一致しません。",
+        "60,000/50=1,200件/分で、書込み段の能力に一致します。"
+      ],
+      "takeaway": "パイプラインの定常スループットは最も遅い段で決まる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "n件目の書込み中に別のデータのCPU処理と読取りが進む点から、三つの段の時間を足すべきか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "段を並行動作させても、最も遅い段より速く次のデータを送り出せません。40、30、50ミリ秒の最大値を1件当たりの間隔にします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "律速は書込み50ミリ秒なので、60,000÷50=1,200件/分です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7ab226928dbc64b833086139ede81dd52bba47dce7c30af19e3a9d1a20a5568b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q16",
+      "summary": "イ。ノンプリエンプティブ方式では、タスクが自ら実行権を譲るまで強制切替をしません。",
+      "explanation": "プリエンプションはOSが実行中のタスクから実行権を取り上げることです。ノンプリエンプティブ方式では、タスクの終了や自発的な中断・待ちへの移行によって次のタスクへ切り替えます。\n優先度が高いタスクが来ても、それだけで現在のタスクを中断しません。自ら中断を要求した場合に切り替えるイが適切です。",
+      "choiceReasons": [
+        "アは優先度を引き上げる仕組みを説明しています。非強制切替を実現する定義ではありません。",
+        "イは実行中タスクの自発的な中断で切り替える方式です。",
+        "ウの無限ループの検知・強制終了は、このスケジューリング方式の動作条件ではありません。",
+        "エは優先度に基づいて実行権を取り上げるプリエンプティブ方式です。"
+      ],
+      "takeaway": "ノンプリエンプティブは、OSによる実行権の強制的な取上げをしない方式。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "高優先度のタスクが来たとき、実行中のタスクをOSが勝手に止めるかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "この方式の切替は実行中タスクの終了や、自ら要求した待ち・中断が契機です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イの「自らの中断を要求」とエの「優先度が高いタスクが追加」を比べ、誰が実行権を譲るきっかけを作るか確認します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "640323e25a61aee65924f90e9738d16529aa4415a33a7f4ecc9534b7c93833ed",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q23",
+      "summary": "イ。読み出した値と08とのORでビット3だけを1にします。",
+      "explanation": "図ではLED1がビット3、LED2がビット6に接続され、出力が1のとき接地側へ電流が流れて点灯します。08₁₆=00001000₂とのORならビット3を1にし、他のビットは元の値を保持します。LED2のビット6は変わりません。読出し値を変更して書き戻せることと、途中で他の操作がないことがこの方法を支えています。",
+      "choiceReasons": [
+        "08とのANDはビット3を元のまま残し、ビット6など他のビットを0にするのでLED2を保持できません。",
+        "08とのORはビット3を1にし、ビット6を含む他のビットを保持します。",
+        "48とのANDはビット3もビット6も元の値のままなので、LED1を必ず点灯させられません。",
+        "48とのORはビット3とビット6をともに1にし、消灯中のLED2を点灯させてしまいます。"
+      ],
+      "takeaway": "特定ビットを1にして他を保持するには、そのビットだけ1のマスクとのOR。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図のLED1とLED2をポートの何番のビットが駆動するかたどり、接地側へ電流を流す出力値を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LED1はビット3です。08=00001000₂、48=01001000₂と展開し、ANDとORでビット3・6がどう変わるか確かめます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "読出し値OR08ならビット3だけを1にし、LED2のビット6は元のままです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b1549a557a71d5cea404dffe74b41e29168a4f4a827474219fc99a5599e37eb3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q20",
+      "summary": "エ。大規模データを分散処理する基盤です。",
+      "explanation": "Hadoopは大規模データを複数ノードに分散して保存・処理するためのソフトウェア群です。HDFSなどの分散ファイルシステムやMapReduceによる分散処理を提供します。",
+      "choiceReasons": [
+        "Java EE準拠のアプリケーションサーバの説明で、Hadoopの目的と異なります。",
+        "HTTP要求を処理するWebサーバの説明で、分散データ処理の説明ではありません。",
+        "リレーショナルデータベース管理システムそのものではありません。",
+        "大規模データセットを分散処理するソフトウェアという説明が合います。"
+      ],
+      "takeaway": "Hadoopはデータの分散保存と分散処理の基盤。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の用途をWebアプリ実行、Web配信、関係データ管理、大規模分散処理に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Hadoopでデータを複数ノードに分けて処理する場面を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "大規模なデータセットを分散処理するソフトウェアライブラリを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "311e443cbcda26432d7c6e6f91d67d2f681a8b6f826d3007499d1083eb3dae2a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q23",
+      "summary": "ウ。S3とS2を導通させて電流を右から左へ流します。",
+      "explanation": "正転は図の左の+端子から右の−端子への電流です。逆転では+V→S3→右端子→モータ→左端子→S2→接地の経路を作ります。よってA1=Low,A2=High,A3=High,A4=Lowです。",
+      "choiceReasons": [
+        "全スイッチが開き、モータを流れる電流がありません。",
+        "S2とS4が閉じ、両端が接地電位となって駆動電圧がかかりません。",
+        "S3から右端へ入りS2へ抜ける逆転経路ができます。",
+        "S1から左端へ入りS4へ抜けるので、問題文で定義された正転です。"
+      ],
+      "takeaway": "Hブリッジでは対角のスイッチでモータ電流の向きを変える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正転の矢印を左端子から右端子へ描き、逆転に必要な反対向きの電流を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "右端子を+Vへ、左端子を接地へ接続するスイッチを図でたどります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "右上S3と左下S2を閉じるためLow,High,High,Lowです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "826dd069efce581579f277ff06db75d1c0abbe6415a53048d1ffc29b55d94aa0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q20",
+      "summary": "アの20%。同じ電流が流れるため、電力比は2V/10Vです。",
+      "explanation": "直列回路なのでLEDと抵抗の電流は共に10mA=0.01A。LED電力は2×0.01=0.02W、回路全体は10×0.01=0.10Wです。\n比率は0.02/0.10×100=20%。抵抗には残り8Vが掛かり、0.08Wを消費します。",
+      "choiceReasons": [
+        "LEDの0.02Wを全体0.10Wで割った20%が正しいです。",
+        "2/8=25%はLED対抵抗の比で、全体に占める割合ではありません。",
+        "80%は抵抗が全体に占める割合です。",
+        "抵抗でも電力を消費するので、LEDが全電力を使うわけではありません。"
+      ],
+      "takeaway": "直列で電流が同じなら、各部の電力比は電圧比に等しい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "電源10VのうちLEDの順方向電圧は2Vです。残りの電圧は抵抗に掛かります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LEDと抵抗は直列なので電流は共通です。P=VIをLEDと回路全体にそれぞれ適用します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "LEDは2×0.01W、全体は10×0.01Wです。求める分母は抵抗の電力ではなく全体の電力であることを確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1e2952a39638e43594757c5c34d943b7852732f2596d640c4cbe4ce32b724074",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q23",
+      "summary": "LiDARはレーザー光と反射光を使って方向・距離・形状を測ります。",
+      "explanation": "LiDARはLight Detection and Rangingの略で、レーザー光を照射し、戻ってくる反射光を測定するセンサーです。パルスの往復時間から距離を求め、照射方向ごとの測定を集めることで周囲の形状を把握します。光を使うエが該当し、超音波やミリ波を使う方式とは異なります。",
+      "choiceReasons": [
+        "超音波を利用する距離センサーの説明です。",
+        "画像の遠近法や消失点を使う方式で、レーザーの反射測定ではありません。",
+        "ミリ波レーダーの説明で、LiDARが使う光とは波長帯が異なります。",
+        "レーザー光の反射を測定するLiDARの説明です。"
+      ],
+      "takeaway": "LiDARは光、レーダーは電波、超音波センサーは音で測る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補は、超音波、画像の遠近法、ミリ波、レーザー光を使っています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LiDARのLightに対応する物理的な信号を考え、Rangingは距離を測ることと結び付けます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "レーザーパルスの往復時間tなら距離は光速×t/2です。この測定を述べる候補を探します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "aa6c35967717dfe6e3e5cc07993e6842f1d07aa506a48c0f1587458e7377773b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q21",
+      "summary": "ウ。MOSは金属・酸化物絶縁体・半導体の構造です。",
+      "explanation": "MOSはMetal Oxide Semiconductorの略です。金属と半導体の間に酸化物の絶縁体を挟む構造をもち、ゲート電圧による電界で電流を制御します。\n発光、光の受光、逆方向の定電圧特性を利用する素子とは区別します。",
+      "choiceReasons": [
+        "電子と正孔の再結合による発光を利用する発光ダイオードなどの説明です。",
+        "光を受けて電流が生じるフォトダイオードなどの説明です。",
+        "金属・酸化物絶縁体・半導体というMOSの構造を述べています。",
+        "逆方向の降伏を利用して電圧をほぼ一定にするツェナーダイオードの説明です。"
+      ],
+      "takeaway": "MOSの名称はMetal・Oxide・Semiconductorの構造を表す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢は発光、受光、積層構造、定電圧の説明です。MOSという名称が何を表すか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "MOSのM、O、SをMetal、Oxide、Semiconductorへ展開します。三つの材料の位置関係に対応する説明を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "MetalとSemiconductorの間にOxideの絶縁層を挟みます。選択肢の材料と構造を照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ef50d76196242caa965fcafab702e53824435033912ba5547e98a1142c28641f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q24",
+      "summary": "NFCは近距離の非接触通信で、ピアツーピア通信もできます。",
+      "explanation": "NFCは数cm程度に近づけて行う無線通信です。非接触ICカードの読取りやカードエミュレーションだけでなく、対応機器同士が対等にデータを交換するピアツーピア機能も備えています。したがってエが適切です。接触式カードや位置検出用のタッチセンサーとは役割が違います。",
+      "choiceReasons": [
+        "タッチ位置を検出する静電容量式センサーの説明で、NFCの通信ではありません。",
+        "NFCは非接触通信であり、端子を接触させるICカードの方式ではありません。",
+        "NFCは数cm程度の通信を想定し、最大10m程度という説明は合いません。",
+        "近接した対応機器同士のピアツーピア通信機能を備えています。"
+      ],
+      "takeaway": "NFCでは近接・非接触に加え、機器同士の通信モードも押さえる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Near Fieldは近い範囲の通信です。位置を測る機能か、データを交換する機能かを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "通信距離とカードの接触・非接触を確認し、機器同士のデータ交換の記述も調べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "NFCには読書き、カードエミュレーション、ピアツーピアのモードがあります。候補の機能と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a249ef6a4f46242af25274bfd049a04b39546c236ee50c4273575428378f07de",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q19",
+      "summary": "イ。PLCは主にラダー図で表すシーケンスプログラムによって制御する。",
+      "explanation": "PLCはProgrammable Logic Controller。入力されたスイッチやセンサの状態を読み、プログラムに従ってモータなどへ出力する。リレー回路に似たラダー図で条件や動作の順序を表せることが代表的な特徴。\n\n比例・積分・微分による制御はPID制御、アナログからデジタルへの変換はA/D変換、リレー回路だけの制御はハードワイヤードなリレーシーケンス。PLCにPID等の機能が搭載されることはあるが、選択肢ではその基本的な説明を選ぶ。",
+      "choiceReasons": [
+        "比例・積分・微分の3要素はPID制御の説明。PLCそのものの代表的な説明ではない。",
+        "ラダー図によるシーケンスプログラムはPLCの代表的な制御方法。",
+        "アナログ信号のデジタル化はA/D変換器の役割。",
+        "物理的なリレー回路による制御。プログラムで制御を変更するPLCとは異なる。"
+      ],
+      "takeaway": "PLCは条件と順序をプログラム化する産業用制御装置。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "PLCのPはProgrammable。配線そのものを組み替える装置か、プログラムで条件や順序を変える装置かを見る。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "比例・積分・微分はPID、アナログ→デジタルはA/D変換。まずこれらを別の機能として除く。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "残る二つについて、物理的なリレー配線で動くのか、リレー回路に似た図で書くプログラムで動くのかを比べる。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

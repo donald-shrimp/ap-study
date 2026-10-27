@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r06a-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d7db907b6d9f22622eb71646535383fbb8d3289c5314e8ea9823d0cec502aadf",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q12",
+      "summary": "エ。セッションを共有するクラスタなら、別サーバへ引き継げます。",
+      "explanation": "クラスタでは複数のサーバでサービスを提供します。セッション情報を共有していれば、一台が故障しても他のサーバが利用者の処理状態を引き継ぎ、サービスや一連の処理を継続できます。\nコールドスタンバイは待機系を起動・切替する時間が必要なので、サービスは一時中断します。セッション非共有のクラスタでは、サービス自体を他の台で提供できても、故障した台が保持していた利用者の処理状態をそのまま引き継げません。",
+      "choiceReasons": [
+        "コールドスタンバイは待機系の起動・切替までサービスが中断するので、「中断しない」が誤りです。",
+        "コールドスタンバイだけでは障害時のセッション状態を引き継ぐことを保証できず、「トランザクションは継続」が不適切です。",
+        "クラスタの残るサーバでサービスは続けられますが、非共有のセッションに依存する処理状態の引継ぎはできません。",
+        "共有されたセッション情報を利用して、他のサーバがサービスと利用者の一連の処理を引き継げます。"
+      ],
+      "takeaway": "サーバの冗長化とセッション情報の引継ぎは、両方を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の二つの結果、「サービス」と「トランザクション」を別々に見ます。別のサーバが動くことと、利用者の途中の状態を持つことは別です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コールドスタンバイは障害後に待機系を起動します。クラスタの他サーバは稼働していても、セッションを共有しなければ途中の状態を読めません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "稼働中の他サーバがあり、そのサーバもセッション情報を読める構成なら両方を継続できます。セッション共有クラスタのエです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1103e1ca73508662c62c9ac31a79e150f4cba4df51bf70d19ae2d7d8aa859557",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q12",
+      "summary": "有機ELは電圧をかけた発光素子が自ら発光します。",
+      "explanation": "有機ELディスプレイは有機材料の発光層に電圧をかけ、素子自身の発光を画素として使います。液晶のように別の光源から来る光の透過量を調節する方式ではありません。自発光素子による表示を述べるアが適切です。",
+      "choiceReasons": [
+        "電圧をかけた素子そのものの発光を使う有機ELの方式です。",
+        "電子ビームを蛍光体に当てるのはCRTの方式です。",
+        "光の透過量を制御するのは液晶ディスプレイの方式です。",
+        "放電で紫外線を発生させ蛍光体を光らせるのはプラズマディスプレイの方式です。"
+      ],
+      "takeaway": "有機ELは自発光、液晶は透過光の制御。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で光を発生させるものが、素子、電子ビーム、別の光源、放電のどれかを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "有機材料に電気を加えて光を出す方式を、光の透過量を変える方式と区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "有機ELの画素では電圧を加えた発光層自身が光ります。この動作を書いた候補と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "45656a6ace8cf4322982a2715bce0338a6fbc1b53535a0179ddd5412c5f12620",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q12",
+      "summary": "ウ。インフラの構成や設定をコードで記述し、自動適用する方式です。",
+      "explanation": "IaCはサーバーやネットワークなどの構成をコードとして管理し、ツールで構築・設定を実行する方法です。同じ定義を使って環境を再現し、変更も履歴管理できます。\n手作業で設定することや、未設定のサーバーを用意すること自体を指す用語ではありません。",
+      "choiceReasons": [
+        "何も導入していないサーバーは初期状態の説明で、コードによる構成管理ではありません。",
+        "手動で資源を割り当てる方式で、自動適用するIaCの特徴に合いません。",
+        "構成をプログラムとして記述し、専用ソフトウェアが適用する説明がIaCです。",
+        "利用者が手動でソフトウェアを導入する能力の説明で、IaCの説明ではありません。"
+      ],
+      "takeaway": "IaCはインフラ構成をコードとして管理し、ツールで再現する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "英語のas Codeが、構成をどの形で扱うかを示しています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "サーバー台数や設定値を定義ファイルに書き、ツールがその定義どおりに構築する場面を想像します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "候補中の作業主体を確認します。人が個別に手動設定するのか、記述された構成をソフトウェアが自動適用するのかで判断しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b934c59fded82f9185a3fd1f287b6a6e0d92deea1b49496224b942fbb14073ba",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q8",
+      "summary": "ウ。ヘテロジニアスは異なる種類のコアを組み合わせます。",
+      "explanation": "設問の要点はコアが「複数」なだけでなく「異なる目的に適した複数の種類」であることです。高性能コアと省電力コアなどを組み合わせ、負荷に適したコアを使う構成をヘテロジニアスマルチコアと呼びます。\n同じ種類のコアを並べるホモジニアスマルチコアと区別します。",
+      "choiceReasons": [
+        "複数の命令を同時に実行できる方式です。異種コアを搭載することを意味しません。",
+        "FPGAなどのプログラマブルな回路上に実装するプロセッサです。異なる目的のコアの組合せという分類ではありません。",
+        "異種コアを搭載し、性能や消費電力の特性に応じて使い分ける構成です。",
+        "同種のコアを複数搭載する構成なので「複数の種類」という条件に合いません。"
+      ],
+      "takeaway": "ヘテロジニアスは異種、ホモジニアスは同種のコア。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「異なる目的に適した」「複数の種類」を確認します。単にコア数が多いだけでは条件を満たしません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "高性能用と省電力用でコアの特性が違う構成を考えます。同種か異種かを表す用語の対を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "heterogeneousは異種、homogeneousは同種です。設問のコアの種類に合う方を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b6f8a8f8431bd230a79263f1d6c5b72fdf0042ac931c9ca54ec873a359c9b721",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q13",
+      "summary": "エ。並列部分の稼働率に、直列の装置の稼働率を掛ける。",
+      "explanation": "装置単体の稼働率をpとする。左の2台は両方停止したときだけ使えなくなるので、稼働率は1−(1−p)²。右の1台も動く必要があるため、全体はp{1−(1−p)²}=2p²−p³となる。\n\np=0.5なら全体は0.5×0.75=0.375。対角線より下に来る。また全体/p=2p−p²=1−(1−p)²≤1なので、途中で対角線を上回らない。この二つを満たすのはエ。通常の稼働率計算として各装置の故障を独立と扱う。",
+      "choiceReasons": [
+        "アは対角線より上にあり、直列の1台より全体の稼働率が高くなってしまう。",
+        "イは全体=p。左の並列部分の停止確率を無視している。",
+        "ウはp=0.5で0.5となり、正しい0.375と一致しない。",
+        "エはp=0.5で0.375付近を通り、途中も対角線の下にある。"
+      ],
+      "takeaway": "直列は全台の稼働が必要、並列は全台停止の確率を1から引く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "左の2台は片方だけ動けばよい。右の1台は必ず動く必要がある。まずこの二つを別々に考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "単体の稼働率をpとすると、並列部分は1−(1−p)²。全体は右の装置との直列なので、これにpを掛ける。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "p=0.5を代入して0.5×{1−0.5²}を計算する。その高さに点があり、対角線より上にならないグラフを探す。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e43cf1aa4b04d84794bcd5686016b50553e4796900457ce04256df16fff239ee",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q11",
+      "summary": "ア。平均読取り時間は15.1ミリ秒です。",
+      "explanation": "読取り時間は平均シーク時間＋平均回転待ち時間＋転送時間です。6,000回転/分は100回転/秒なので1回転10ミリ秒、平均回転待ちは半回転の5ミリ秒です。1,000バイトを10Mバイト/秒で転送する時間は0.1ミリ秒です。合計は10+5+0.1=15.1ミリ秒です。コントローラ時間はシーク時間に含まれるので重ねて加えません。",
+      "choiceReasons": [
+        "10+5+0.1=15.1ミリ秒で、必要な三つの時間の合計です。",
+        "16.0ミリ秒は計算結果より0.9ミリ秒長く、表の条件からは得られません。",
+        "20.1ミリ秒は計算結果より5ミリ秒長く、平均回転待ちは5ミリ秒です。",
+        "21.0ミリ秒は計算結果より5.9ミリ秒長く、表の回転数と転送速度による合計ではありません。"
+      ],
+      "takeaway": "ディスクの平均アクセス時間はシーク＋半回転待ち＋転送。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の回転数を秒当たりに直し、シーク・回転待ち・転送の時間を分けて求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1回転は60/6,000=0.01秒です。平均の回転待ちはその半分で、転送時間はデータ量÷転送速度です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "10ミリ秒＋5ミリ秒＋1,000/(10×10⁶)秒=15.1ミリ秒です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7759907bb13aadfbab91779114b90527613e1c2c324958d3fc2241ec754fdf81",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q12",
+      "summary": "イ。稼働率が等しければ、修復時間と故障間隔の比も等しくなります。",
+      "explanation": "稼働率α=MTBF/(MTBF+MTTR)です。分子・分母をMTBFで割るとα=1/(1+MTTR/MTBF)となります。\nこの式はMTTR/MTBFの比だけで決まるので、αが等しければその比も等しくなります。両方の時間が同じである必要はありません。例えば100/10と200/20なら稼働率は同じです。\n稼働率が高いほどMTTR/MTBFは小さくなるので、エの大小関係は逆です。",
+      "choiceReasons": [
+        "MTBF=100・MTTR=10と、200・20でも稼働率は同じです。時間そのものの一致は不要です。",
+        "α=1/(1+MTTR/MTBF)なので、αが等しいときMTTR/MTBFも等しくなります。",
+        "稼働率が高くても、MTBFとMTTRが両方大きいとは限りません。修復時間だけ短い場合もあります。",
+        "MTTR/MTBFが大きいほど停止の割合が増え、稼働率は低下します。大小が逆です。"
+      ],
+      "takeaway": "稼働率を1/(1+MTTR/MTBF)へ直すと、等しさや大小を判断しやすい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「時間が同じ」と「時間の割合が同じ」を分けます。稼働率の式MTBF/(MTBF+MTTR)を書きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "分子と分母をMTBFで割ると1/(1+MTTR/MTBF)になります。この式は二つの時間の比だけで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "100時間動き10時間直す場合と、200時間動き20時間直す場合を比べましょう。稼働率が同じでも時間自体は違い、MTTR/MTBFは同じです。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9694b20765597c18fd0f3272d261287a1275c8aefa0bae25a635af1e48513ce5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q8",
+      "summary": "エ。異符号の加算では16ビット符号付き整数の範囲を超えません。",
+      "explanation": "2の補数の16ビット符号付き整数の範囲は−32,768〜32,767です。正と負を足した結果は二つの入力値の間に収まるため、入力が範囲内なら結果も範囲内です。同符号の加算は、入力が各々範囲内でも和が範囲を超えることがあります。",
+      "choiceReasons": [
+        "16,384+16,384=32,768は条件を満たしますが、正の上限32,767を超えます。",
+        "20,000+20,000=40,000は両方の絶対値が32,767未満でも範囲を超えます。",
+        "積が正なら同符号です。例えば20,000同士の加算は範囲を超えます。",
+        "異符号の和は二つの入力値の間に収まり、範囲を超えません。"
+      ],
+      "takeaway": "2の補数の加算でオーバフローし得るのは同符号同士。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず2の補数16ビットの最小値と最大値を書き、正の上限と負の下限の差に注意します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "範囲は−2¹⁵〜2¹⁵−1です。正数と負数を足した結果は、どちらの入力よりも外側へは進みません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "異符号なら和は入力の間に収まるので、すべての組合せでオーバフローしません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6a4a6eae5f2d2e20bc5ad58b1710e3752c8850669f190a1646fda01caac68098",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q8",
+      "summary": "ウ。統計解析向けの動的型付け言語Rです。",
+      "explanation": "Rは統計計算とグラフ描画に広く使われ、データ分析の多数のパッケージを提供します。変数には型を固定せず、格納されるオブジェクトに実行時の型があるという条件も合致します。",
+      "choiceReasons": [
+        "Goは静的型付けの言語で、示された動的な型の条件が合いません。",
+        "Kotlinも静的型付けで、統計解析を主目的にした環境ではありません。",
+        "Rは統計解析・描画用パッケージと動的型の条件を満たします。",
+        "Scalaは静的型付けで、オブジェクトの型が実行時に決まるという条件に合いません。"
+      ],
+      "takeaway": "言語の用途だけでなく型が決まる時点も確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "統計解析・グラフ描画と、実行時にオブジェクトの型が決まるという二つの条件を分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Go、Kotlin、Scalaの型がコンパイル時に確認される点と比較します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "統計解析に特化した動的型付けのRが条件に一致します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q8",
+    "baseVersion": 3,
+    "baseLessonSHA256": "bebd6bb95b037e1cb584aa2910be2eb967cc5ec4ae034a6c069401e90bf82db9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q8",
+      "summary": "エ。1004→1006から始め、降順で4語を転送します。",
+      "explanation": "転送元1001〜1004と転送先1003〜1006は重なっています。昇順だと1001を1003へ書いた後、元の1003が失われ、3語目で誤った値を読みます。\n後ろから1004→1006、1003→1005、1002→1004、1001→1003と転送すれば、未読の元データを上書きしません。開始は元1004・先1006、降順の方向フラグ1、転送語数4です。",
+      "choiceReasons": [
+        "アは昇順で1003・1004の元データを読む前に上書きします。",
+        "イは1001から降順なので1000以下を読み、指定された元の4語を転送できません。",
+        "ウは1004から昇順なので1005以上を読み、元1001〜1004を転送しません。",
+        "エは双方の末尾から降順に4語転送し、重なりによる破壊を避けます。"
+      ],
+      "takeaway": "重なる領域のコピーは、未読の元データを壊さない方向で進める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初に1001→1003と書くと、元1003のデータがどうなるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送先が高いアドレス側に重なるので、元の末尾から処理すれば未読部分を守れます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1004→1006を最初に転送し、次は1003→1005です。アドレスを減らす方向フラグと、1001までの語数を照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "26ad034298667b2cc68d6ad5180fbe526e25cd23952e61fe88a2ae46d845ac80",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q9",
+      "summary": "ウ。量子ビットの重ね合わせを量子ゲートで操作します。",
+      "explanation": "量子ゲート方式は、量子ビットの状態を量子ゲートで変化させて計算する方式です。量子ビットは0と1の状態の重ね合わせを表せ、量子干渉などを利用する回路を構成します。\n観測結果は通常のビットとして得られますが、演算中の状態まで通常の2進数だけで説明できるわけではありません。加算を構成する回路も作れます。",
+      "choiceReasons": [
+        "アは通常の2進演算だけで説明しており、量子状態を使う演算の特徴を捉えていません。",
+        "イは誤りです。量子ゲートを組み合わせた加算回路も構成できます。",
+        "ウは量子ビットと重ね合わせという基本的な特徴を述べています。",
+        "エの100℃以上という条件はありません。実装によっては極低温など、量子状態を保つ環境が必要です。"
+      ],
+      "takeaway": "量子ゲート方式の鍵は、量子ビットの重ね合わせを保って回路で操作すること。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "通常のビットは0か1の一方です。量子ビットでは演算中の状態がどう表現されるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "0と1に対応する状態の重ね合わせを、量子ゲートで変化させます。この状態の性質に合う記述を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "加算ができないという制限や100℃以上という温度条件には根拠があるか、量子ビットの特徴と分けて判断しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c3f5f7e2c2acd5ef3e38f9a56d2528b065bf2bc94881ee1b36f4ad77834d6742",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q9",
+      "summary": "ウ。従来の計算機で実用的時間内に難しい計算を、量子計算機で実行できることです。",
+      "explanation": "量子超越性は、ある計算課題で量子コンピュータが従来のコンピュータの実用的な計算能力を上回ることです。全ての用途で高速になるという意味ではなく、特定の課題での優位を示します。\n暗号の安全性、量子力学を利用する仕組み、装置の小型化は、この計算能力の比較そのものではありません。",
+      "choiceReasons": [
+        "量子暗号の安全性の説明であり、計算時間に関する量子超越性ではありません。",
+        "依拠する物理原理の違いだけでは、従来機に対する計算上の優位を示していません。",
+        "従来機では実用的な時間内に困難な計算を量子機で実行するという説明が該当します。",
+        "装置の物理的な小ささは量子超越性の基準ではありません。"
+      ],
+      "takeaway": "量子超越性の比較対象は特定課題の計算能力。全用途の優位とは限らない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補は、安全性、物理原理、計算時間、装置寸法をそれぞれ比べています。「超越性」が何の能力の比較なのかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "量子力学を使って作るだけでは性能の優位は証明できません。同じ計算課題を従来機で処理する難しさとの比較が必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「従来機では実用的な時間で処理できない計算」を「量子機では高速に実行」する候補が、計算能力の超越を述べています。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "213089b811b676750c2eecf3082a4bc12d85db1db6e4410209400e253981ae5a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q11",
+      "summary": "イ。帯電粒子を電極側へ移動させて表示します。",
+      "explanation": "電気泳動型電子ペーパーは、電界によって着色した帯電粒子を移動させ、見る側へ現れる粒子の色を変えます。粒子の配置が保持されるため、表示を保つ電力を抑えられます。",
+      "choiceReasons": [
+        "電圧で光の透過状態を変えるのは液晶表示の説明です。",
+        "帯電粒子の移動を使う電気泳動の説明です。",
+        "電圧で薄膜が発光するのは有機ELなどの説明です。",
+        "微小な鏡の向きを変えるのはDMDを用いた表示の説明です。"
+      ],
+      "takeaway": "電気泳動は電界による帯電粒子の移動。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補で動かす対象を、光・粒子・発光膜・鏡に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "電圧を加えたとき、電荷をもつ物体へどのような力が働くか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "電極へ着色した粒子を集めて見える色を変える候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "92d371fec93fd62f2af2bb43819aed01646b545ff5296e7fb5be28c64395b245",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q14",
+      "summary": "全体は25秒で終了し、CPU使用率0.60、ディスク使用率0.68です。",
+      "explanation": "AはCPUを0〜3秒、ディスクを3〜10秒使います。Aのディスク処理中、BはCPUを3〜15秒使えます。BのCPU終了時にはディスクが空いており、Bは15〜25秒にディスクを使います。全体の終了は25秒です。CPU稼働時間は3+12=15秒なので15/25=0.60。ディスク稼働時間は7+10=17秒なので17/25=0.68です。",
+      "choiceReasons": [
+        "32秒はCPUとディスクの全処理時間の和ですが、二つの装置の並行動作があるため経過時間ではありません。",
+        "共通の経過時間25秒で、CPU15秒とディスク17秒を割った組合せです。",
+        "0.79と0.89は、実際の経過時間25秒を分母にした値ではありません。",
+        "ディスクは0〜3秒と10〜15秒に空いており、使用率1.00にはなりません。"
+      ],
+      "takeaway": "使用率の分母は装置ごとの稼働時間の和ではなく、全体の経過時間。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各ジョブはCPUの後にディスクを使います。別の装置なら同時に動作できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "時間軸にAのCPU0〜3秒とディスク3〜10秒を置き、CPUが空いた3秒からBを置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "BのCPUは3〜15秒、続くディスクは15〜25秒です。各装置の稼働時間を全体の終了時刻で割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8082f73c4081dd1855c6a6cf8f1a079b88005ff75aff5fe8ff48a9e1986969a8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q17",
+      "summary": "FIFOでは最初に入った1を追い出し、状態は3,4,2です。",
+      "explanation": "ステップ3では枠に[1,4,2]があり、入れた順は1→4→2です。次の参照4と1は既に存在するため、ページを入れ替えません。FIFOは参照の新しさでなく読み込んだ順で追い出します。最後の3は未格納なので、最も早く入れた1の枠を3に置き換え、[3,4,2]になります。",
+      "choiceReasons": [
+        "1を残して4,2を変える結果は、最古の1を置き換えるFIFOに合いません。",
+        "2を追い出していますが、最初に入ったのは1です。",
+        "最初に入った1を3に置き換え、他の枠をそのままにしています。",
+        "参照した4と1のために枠の位置や投入順を入れ替える操作はFIFOでは行いません。"
+      ],
+      "takeaway": "FIFOの順番はロード順。ヒットしても順番を更新しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初の三つのロード順は1、4、2です。実記憶の枠の位置も固定して追跡します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FIFOで更新するのは新しいページを入れたときです。既にある4と1の参照ではロード順は変わりません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最後の3を入れるとき、最初にロードしたページの枠を置き換えましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5f8ed1d1697035f61cfee87dfdadfc602342a4cf907df279d07102717022d38b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q14",
+      "summary": "エ。IaCはインフラの構成や状態をコードで定義します。",
+      "explanation": "IaCはInfrastructure as Codeの略です。サーバ、ネットワークなどのシステム構成や望ましい状態をコードにし、ソフトウェアで環境の作成・設定を自動実行できるようにします。\n同じ定義から再現でき、構成変更をバージョン管理できることも利点です。アプリケーションの生成・試験手順だけの定義はCIの話です。",
+      "choiceReasons": [
+        "インシデント対応手順の自動化を述べています。インフラ構成そのもののコード化とは異なります。",
+        "開発支援ツール間の連携の定義であり、インフラの構成・状態を定義するものではありません。",
+        "継続的インテグレーションのビルド・試験手順です。IaCの定義対象はインフラです。",
+        "システムの構成や状態をコード化して自動実行するのでIaCに一致します。"
+      ],
+      "takeaway": "IaCでコードにする対象はインフラの構成と状態。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Infrastructureの対象を意識して読みます。選択肢のコード化対象は対応手順、ツール連携、アプリ生成、構成・状態です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じコードからサーバやネットワークの環境を再現する場面を考えます。何を定義すれば環境を作れるでしょうか。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "必要なのはインフラの構成と望ましい状態の定義です。「システムの構成や状態」を述べる説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dd0fea3f3701ed5daba44edb81ecf73b9c9bd9af71172458652508a834017acc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q15",
+      "summary": "ウ。最後のページ4は6000番地へ入る。",
+      "explanation": "LRUは最後に参照された時刻が最も古いページを追い出す。古い→新しい順の列を作り、参照のたびに対象を末尾へ動かす。\n\n1,2,3,4で列は[1,2,3,4]。2の参照で[1,3,4,2]。5で1を4000から追い出し[3,4,2,5]。3で[4,2,5,3]。1で4を7000から追い出し[2,5,3,1]。6で2を5000から追い出し[5,3,1,6]。5で[3,1,6,5]。最後の4で3を6000から追い出す。\n\nページ番号と番地は別。追い出されたページが入っていた番地へ、新しいページが入る。",
+      "choiceReasons": [
+        "4000はページ5の場所。最後には5が直前に参照されているので追い出されない。",
+        "5000はページ6の場所。6より3の最後の参照が古い。",
+        "6000のページ3が最も長く参照されていないので、ここに4を入れる。",
+        "7000は途中でページ4からページ1に置き換わっている。最後の対象はページ3。"
+      ],
+      "takeaway": "LRUは読込み順ではなく、最後の参照順で更新する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "4000→1、5000→2、6000→3、7000→4の表を作る。参照済みページでも、再び参照したら新しさが更新される。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "古い→新しい順を[1,2,3,4]と書く。次の2で[1,3,4,2]になり、5を入れるときは先頭の1を追い出す。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同じ操作を最後の4の直前まで続ける。列の先頭に残るページを探し、そのページの番地を表から読む。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3a96ca232fc809d77e755d25151fc24b8b0fcce5cd5c0c9f614286f7596e08ac",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q19",
+      "summary": "エ。Linuxカーネルはプロセスやメモリを管理します。",
+      "explanation": "カーネルはOSの中核として、プロセスの実行、メモリ、デバイスなどの資源を管理します。アプリケーションはその基本機能を利用して動作します。\nコマンドを解釈するシェル、GUIのデスクトップ環境、ブラウザなどのアプリケーションは、カーネルと別のソフトウェアです。",
+      "choiceReasons": [
+        "シェルはカーネルに組み込まれた機能ではなく、コマンドを解釈してカーネルの機能を利用するプログラムです。",
+        "GUIのデスクトップ環境はカーネルとは別に提供されます。カーネル自体の説明ではありません。",
+        "ブラウザやワープロなどはアプリケーションであり、カーネルに含まれるものではありません。",
+        "資源管理など、アプリケーションが動作するための基本機能を提供するという説明です。"
+      ],
+      "takeaway": "カーネルは資源管理の中核で、シェル・GUI・アプリケーションは別の層。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の対象はコマンド入力、GUI、業務アプリ、資源管理です。OSの中核が担当する機能を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アプリケーションを複数動かすとき、CPU実行やメモリを割り当てる機能が必要になります。その担当を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "カーネルの代表的機能はプロセス管理とメモリ管理です。この二つを挙げた説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "18120d2c878c04f55e771e377e7390159e1db23ef95e53fb36df9f8a90dc29c1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q14",
+      "summary": "エ。稼働率は変わりません。",
+      "explanation": "稼働率はMTBF/(MTBF+MTTR)です。両方が1.5倍なら1.5MTBF/{1.5(MTBF+MTTR)}となり、分子と分母の1.5が約分されます。停止も稼働も同じ比率で長くなるので割合は同じです。",
+      "choiceReasons": [
+        "2/3になるのは分母だけを1.5倍するような計算で、MTBFの増加を反映しません。",
+        "1.5倍になるのは分子だけを増やした計算で、MTTRの増加を反映しません。",
+        "二つの1.5を掛ける量ではなく、稼働時間の比率なので2.25倍にはなりません。",
+        "分子と分母の共通倍率が消えるため変わりません。"
+      ],
+      "takeaway": "比率の分子・分母を同じ倍率にすると比率は不変。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1サイクルを稼働時間MTBFと修理時間MTTRに分け、稼働時間の割合を書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "式のMTBFとMTTRの両方へ1.5を掛けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1.5MTBF/(1.5MTBF+1.5MTTR)の共通因子を約分します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f8a84d959f826906654b39116a003496ceab42175938eb473874b975ace928ea",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q16",
+      "summary": "ア。表のa〜dはGPL、LGPL、MPL、BSD。",
+      "explanation": "この表では公開義務が広い順に読む。aは修正・静的リンク・動的リンクの全てが○でGPL。bは修正と静的リンクが○、動的リンクが×でLGPL。cはOSS自体を修正したときだけ○でMPL。dは全て×でBSD。\n\nLGPLのリンク方法、MPLのファイル単位の義務などを簡略化した試験上の比較である。実際の配布ではライセンスの版と条件を確認する。BSDも著作権表示等の条件はあり、「×」は無条件で使えるという意味ではない。",
+      "choiceReasons": [
+        "アはGPL→LGPL→MPL→BSDで、表の公開義務の範囲と一致する。",
+        "イはbがMPL、cがBSD、dがLGPLでそれぞれの公開義務と合わない。",
+        "ウはaとbが逆。動的リンクで×の列はGPLではない。",
+        "エはaからdの配置が合わず、全て×のdにGPLを置いている。"
+      ],
+      "takeaway": "表は下の行ほどリンク先まで公開義務が及ぶかを見る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず「全て×」のdと「全て○」のaを探す。○はソース公開義務であり、著作権表示の有無ではない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "強いコピーレフトは結合したプログラムにも義務が及ぶ。弱いコピーレフトはリンク方法や修正ファイルの範囲で扱いが変わる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "GPLはa、BSDはd。残るbとcは、静的リンクでも○になるか、OSS自体の修正だけ○になるかで分ける。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

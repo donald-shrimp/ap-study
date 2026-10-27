@@ -4,11 +4,18 @@ from pathlib import Path
 import subprocess
 import sys
 
+from ap_lesson_quality import validate_workspace, load_workspace, expected_material, require
+
 ROOT = Path(__file__).resolve().parents[1]
 TITLES = ['注目するところ', '使う考え方', 'この問題に当てはめる']
 
 
 def main():
+    # New revisions must be registered with exact independent approval first.
+    validate_workspace(ROOT)
+    quality_state = load_workspace(ROOT)
+    _, expected_bank = expected_material(quality_state)
+    expected_by_id = {q['id']: q for q in expected_bank}
     path = ROOT / 'data/questions.json'
     bank = json.loads(path.read_text())
     by_id = {q['id']: q for q in bank}
@@ -68,6 +75,10 @@ def main():
             by_id[id].update({f: lesson[f] for f in [*fields, 'choiceReasons', 'hints']})
             by_id[id].update(enrichment='reviewed', hintStatus='individual', hintSource=source,
                              lessonSource=source)
+    # A version belongs to the accepted revision, not each regeneration.
+    for q in bank:
+        q['version'] = expected_by_id[q['id']]['version']
+    require(bank == expected_bank, 'Hint application differs from independently registered AP composition')
     # Validate all records before writing, so a broken authoring file cannot erase the corpus.
     path.write_text(json.dumps(bank, ensure_ascii=False, indent=2) + '\n')
     print(f'Individual hints: {len(bank)}; hint assignments: {len(assigned)}; complete lessons: {len(lessons)}')

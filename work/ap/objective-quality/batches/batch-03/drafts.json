@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r03h-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7589a9802071ea0bc111fa2f359226b235b0660b327786f8a1b2ad6331e21847",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q25",
+      "summary": "ウ。Sを0にして戻すとX=1、Y=0を保持します。",
+      "explanation": "図は交差帰還をもつNAND二個の回路でX=¬(S∧Y)、Y=¬(R∧X)です。S=0にするとX=1となり、R=1だからY=0になります。Sを1へ戻してもX=¬(1∧0)=1、Y=¬(1∧1)=0となり、その状態を保持します。",
+      "choiceReasons": [
+        "S=R=1でX=Y=0なら両出力は1へ変わるので安定状態ではありません。",
+        "操作前の状態で、S=0がXを1へ変える効果を反映していません。",
+        "S=0でX=1,Y=0となり、S=1へ戻しても帰還によって保持します。",
+        "S=R=1でX=Y=1なら両出力は0へ変わるので安定状態ではありません。"
+      ],
+      "takeaway": "帰還回路は入力を戻した後も、変化後の出力を次の入力に使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "上のANDとNOTを合わせて、XをSとYの式で書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Sを0にすると、もう一方の入力に関係なく上のNAND出力が1になります。それを下へ帰還させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "X=1が下のNANDに入りY=0。Sを戻してもX=1,Y=0を保ちます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ad37f95f534be3d949f02e01f29fe849747e621d3f9635386ca515659ce9f2c4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q22",
+      "summary": "ウ。操作後はX=1、Y=0となり、その状態を保持します。",
+      "explanation": "上段はSとYのANDを反転するのでX=¬(S∧Y)、下段はRとXのANDを反転するのでY=¬(R∧X)です。\nSを0にすると、Yに関係なくX=1になります。R=1なのでY=¬(1∧1)=0です。その後Sを1に戻しても、X=¬(1∧0)=1、Y=¬(1∧1)=0で矛盾なく保持されます。",
+      "choiceReasons": [
+        "R=S=1でX=Y=0を入れると両出力が1へ変わるため、保持状態ではありません。",
+        "操作前の値です。Sを0にした時点で上段のNAND出力Xは1へ変化します。",
+        "S=0でX=1、続いてY=0になり、Sを1へ戻してもその組合せが保持されます。",
+        "R=S=1でX=Y=1を入れると両出力が0へ変わるため、安定した状態ではありません。"
+      ],
+      "takeaway": "相互接続回路は入力変更時を先に追い、戻した後の値が自己整合するか確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "上段ANDへのもう一方の入力はY、下段ANDへのもう一方の入力はXです。交差する線の接続先を追います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ANDの後に反転があるのでNANDです。入力の片方を0にすると出力はもう片方によらず1になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "S=0を上段へ入れてXを求め、そのXとR=1でYを求めます。最後にS=1へ戻して同じ二式を確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "cf4e1647d8c5520617dd5b45b890836f656aa90f5a22b224e98799a488dd44f5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q23",
+      "summary": "ア。二つ以上が1ならAB、BC、CAのいずれかが1になります。",
+      "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
+      "choiceReasons": [
+        "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
+        "XORの出力をORしています。例えば100でもAとBのXORが1になり、表の出力0に合いません。",
+        "OR三組のANDを最後に反転しています。000を入れると出力1になり、表の0と逆です。",
+        "XOR三組のANDを最後に反転しています。000で出力1となり、表の0に合いません。"
+      ],
+      "takeaway": "三入力多数決は、二入力ANDの三組をORでまとめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "出力1の四行で、A・B・Cに含まれる1の個数を数えます。1が一つだけの行と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つ以上が1なら、AB・BC・CAの少なくとも一組がともに1です。各組でANDを取り、その結果をORする構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。出力の反転の丸にも注意します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5c10a852b557662ed86d30388a4a16028d661e65b709e56a243896dcfa8a8107",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q23",
+      "summary": "ウ。NANDを組み合わせた回路が同値を判定します。",
+      "explanation": "入力が等しいのは00と11です。ウの上段は¬(XY)、下段は¬(¬X¬Y)、最後もNANDなのでZ=¬{¬(XY)・¬(¬X¬Y)}=XY+¬X¬Yとなります。00と11で1、01と10で0です。",
+      "choiceReasons": [
+        "(XY)・(¬X¬Y)なので、同時に成立せず常に0です。",
+        "(X+Y)+(¬X+¬Y)なので常に1です。",
+        "ド・モルガンの法則によりXY+¬X¬Yとなり、等しい場合だけ1です。",
+        "NORの組合せは(X+Y)・(¬X+¬Y)となり、異なる場合に1です。"
+      ],
+      "takeaway": "同値判定は00と11の真理値を確かめ、出力の否定も式に含める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "入力00,01,10,11の四行を作り、求めるZを先に書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まずアの上段はXとYのANDなのでXY、下段はそれぞれを反転してANDなので¬X¬Yと書けます。各候補も同じように二段を式にし、出力端の小丸があればその段全体を否定します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ウは¬{¬(XY)・¬(¬X¬Y)}です。外側の否定をド・モルガンで展開します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7bb64f016bde334736d31e29cd49a74cb7bf0956090e501b894a78bee49a12e9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q22",
+      "summary": "ア。桁上がりXはAND、和YはXORです。",
+      "explanation": "入力A,Bが00、01、10、11のとき、和はそれぞれ00、01、01、10です。桁上がりXは11のときだけ1なのでANDです。下位の和Yは入力が異なるときだけ1なのでXORです。図アでは上側がAND、下側が入力側に曲線を追加したXORで、半加算器を構成しています。",
+      "choiceReasons": [
+        "XがAND、YがXORで、四つの入力組合せの加算結果に一致します。",
+        "XがORなので、01や10でも誤って桁上がりが1になります。",
+        "XがOR、YがANDなので、01や10でX=1,Y=0となり、1+0の結果と合いません。",
+        "XはANDですがYがORなので、11でY=1となり、1+1=10の下位桁0と合いません。"
+      ],
+      "takeaway": "半加算器は桁上がりAND、和XOR。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "A,Bの組合せ00、01、10、11について、2進数の加算結果を2桁で書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "上位桁Xが1になる入力と、下位桁Yが1になる入力を別々に取り出し、論理ゲートの真理値表に対応させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Xは11だけで1となるAND、Yは01と10で1となるXORなので、アの回路です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0575f41869996b8101e6f99455a1e80960c0d612bcdcc39d82046af63edcd4d0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q21",
+      "summary": "AとBが両方1のときだけ0を出すので、否定論理積（NAND）です。",
+      "explanation": "NANDは、ANDの出力を反転した回路です。ANDは両方の入力が1のときだけ1なので、NANDはそのときだけ0になります。\n図の出力は、(A,B)=(1,1)で0、(0,0)、(0,1)、(1,0)で1となっており、ウのNANDと一致します。",
+      "choiceReasons": [
+        "XORは入力が異なるときに1です。両方0なら0なので、図と一致しません。",
+        "XNORは入力が同じときに1です。両方1なら1なので、図と一致しません。",
+        "NANDは両方1のときだけ0を出し、図の全区間と一致します。",
+        "NORは両方0のときだけ1です。入力が0と1の区間でも図は1なので、一致しません。"
+      ],
+      "takeaway": "区間を1つずつ読む。候補の違いが出る入力を選ぶと、比べやすい。",
+      "hints": [
+        {
+          "title": "注目すること",
+          "text": "波形全体を一度に読まず、縦の点線で区切られた1区間を選びます。AとBの値、そのときのYを並べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "違いが出る区間を探す",
+          "text": "まずAとBが両方1の区間を見ます。次に両方0の区間を見ます。この2種類の入力で、候補の回路を比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "候補を確かめる",
+          "text": "図では、A=B=1のときY=0、A=B=0のときY=1です。さらにA=0、B=1のときもY=1。各候補の真理値と一致するか確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f0ca6f260685032e9feb80336720d43b7780d701f2e438fdf863b7bf5334fd86",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q6",
+      "summary": "ウ。0の挿入で節点2が不均衡になり、節点1を中心に右回転します。",
+      "explanation": "二分探索木では、小さい値を左、大きい値を右へ進めます。1は5→3→2と進んで2の左、0は5→3→2→1と進んで1の左へ入ります。\nAVL木は各節点の左右部分木の高さの差を1以内に保ちます。0を入れた後、最初に差が2になるのは節点2です。左の子1のさらに左へ挿入したため、2を右回転し、1の右の子を2にします。\n根5と右部分木7→6はそのままです。3の左側に1、その下に0と2があるウになります。",
+      "choiceReasons": [
+        "根を3へ変更する回転は不要です。最初の不均衡は節点2で解消できます。",
+        "根を4へ変更する結果は、今回の挿入と最初の不均衡の修正から得られません。",
+        "節点2の右回転後、1の左に0、右に2が並び、根5と右部分木を保っています。",
+        "右部分木は追加した1・0の経路に含まれず、不均衡になりません。7と6の配置を変える必要はありません。"
+      ],
+      "takeaway": "AVL挿入は、挿入位置から上へたどり、最初に高さの差が2になった節点を回転する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "小さい値は左へ進みます。1は5→3→2の左へ入り、続いて0はその1の左へ入ります。まずこの二つを書き足しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "AVL木では左右の高さの差を1以内にします。0から上へたどり、1、2、3、5の順に高さを比べると、節点2で左側が二段深くなります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "節点2の左の子1を上げ、2を1の右へ下げる右回転を試します。1の左に0を残し、根5と右部分木7・6を変えない図を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "08e09978da4250dc358927eb0588a0dce77e8205b8cd32d94875b26f8aa1f457",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q7",
+      "summary": "イのJSON。オブジェクトと配列でデータを表します。",
+      "explanation": "JSONはJavaScriptのオブジェクト表記法を基にしたデータ交換用の記述形式です。「名前と値との組みの集まり」はオブジェクト、「値の順序付きリスト」は配列に対応します。\nたとえば{\"name\":\"A\",\"scores\":[10,20]}のように二つの構造を組み合わせて表せます。",
+      "choiceReasons": [
+        "文書を木構造のオブジェクトとして扱うためのモデル・APIで、設問のデータ記述仕様ではありません。",
+        "名前と値の組をもつオブジェクトと順序付きの配列を使うJSONに一致します。",
+        "XMLを使ってメッセージを交換するプロトコルであり、設問の二構造を基礎とする形式ではありません。",
+        "タグによる階層構造でデータを記述します。JavaScriptの表記を基にしたJSONとは異なります。"
+      ],
+      "takeaway": "JSONは名前と値のオブジェクト、順序付きの配列を組み合わせる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「JavaScriptを基に」「名前と値」「順序付きリスト」の三つを手掛かりにします。タグを使うという記述はありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "名前と値の組はオブジェクト、順序付きリストは配列に対応します。この二つをそのまま使う記述形式を思い出します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "JavaScript Object Notationの略称です。名称の頭文字と選択肢を照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d641f74a47f7c54199921647be3cbb8660e5be9f20408a0e28e3ee54eafc4a5d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q7",
+      "summary": "ア。Scalaはオブジェクト指向と関数型の両方を扱います。",
+      "explanation": "Scalaはクラスやオブジェクトを用いるオブジェクト指向と、関数を値として扱う関数型の機能を備える言語です。\n型推論はありますが静的型付けです。代表的な実行形態はJVM向けのバイトコードで、ネイティブコード生成が必須という説明は合いません。",
+      "choiceReasons": [
+        "オブジェクト指向と関数型を組み合わせられる点がScalaの特徴です。",
+        "クラスを複数継承するのではなく、トレイトを組み合わせる仕組みを利用します。",
+        "JVMのバイトコードへコンパイルする形態があり、ネイティブコード生成は必須ではありません。",
+        "型推論があっても型はコンパイル時に決まる静的型付けです。"
+      ],
+      "takeaway": "Scalaはオブジェクト指向と関数型を併用する静的型付け言語。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Scalaの型推論は、型を書く手間を減らす機能です。実行時に型を決めることとは区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "クラスとオブジェクトに加え、関数を値として渡せる機能を備えるかを考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "継承の説明では「クラス」と「トレイト」を混同しないこと、実行形式ではJVM上で動く場合を想定して候補を点検しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ab6a93a69f7a0a73511bdc2e5c78c2ffc5cfae5b0419b7044f91f6414ce94c19",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q7",
+      "summary": "エ。UTF-16では符号化宣言を省略できます。",
+      "explanation": "XMLは符号化宣言がない場合にもUTF-8とUTF-16を扱えるよう定められています。UTF-16はバイト順マークなどで識別でき、宣言を省略できます。日本語向けの他の符号化を使う場合はencodingの指定が必要です。",
+      "choiceReasons": [
+        "EUC-JPはXMLが宣言なしで扱う既定の符号化ではありません。",
+        "ISO-2022-JPを使うには符号化宣言で明示する必要があります。",
+        "Shift-JISを使うには符号化宣言で明示する必要があります。",
+        "UTF-16はXMLが宣言なしでも扱う符号化の一つです。"
+      ],
+      "takeaway": "XMLで宣言を省略できる基本の符号化はUTF-8とUTF-16。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢を、日本語固有の符号化とUnicode系の符号化に分けてみます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "符号化宣言を省いてもXML処理系が標準で扱う符号化を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "XMLが基本として扱うUTF-8とUTF-16のうち、候補にある方を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a1b8813ad283917089637460292cd467b2d737cade4bc016129764eb14a8b153",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q7",
+      "summary": "エ。Pythonはインデントでブロックを表します。",
+      "explanation": "Pythonではifやfor、関数定義などの本体を、同じ深さのインデントでまとまりとして表します。C、Java、PHPは通常、波括弧によってブロックの範囲を区切ります。字下げはこれらでも読みやすさに役立ちますが、ブロック指定そのものではありません。",
+      "choiceReasons": [
+        "Cは{ }でブロックを区切ります。",
+        "Javaは{ }でブロックを区切ります。",
+        "PHPも通常は{ }を使い、等しい字下げだけでブロックを決めません。",
+        "Pythonは等しい深さのインデントを使ってブロックの所属を表します。"
+      ],
+      "takeaway": "Pythonの字下げは構文の一部であり、見た目だけの整形ではない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の言語でif文の本体をどう囲むか思い出します。波括弧の有無と、字下げを変えたときの意味を比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "問題は予約語や記号ではなく「等しい字数の字下げ」をブロック指定に使う言語を尋ねています。見やすさのための字下げとは分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Pythonではif条件の次行から字下げした行が本体になります。字下げを戻すとブロックが終わります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f5c0959a2edaaff7ba821cf910435deaa039f57e80ca252b70450ec6806db608",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q7",
+      "summary": "2回目の分割後は1, 2, 3, 5, 4です。",
+      "explanation": "最初の基準値は左端の2です。2より小さいグループは[1]、大きいグループは元の順を保つ[3,5,4]なので、1回目の結果は[1,2,3,5,4]です。次の分割対象[3,5,4]の基準値は3です。小さい値はなく、大きいグループ[5,4]も順を保つため、2回目が終わっても[1,2,3,5,4]です。",
+      "choiceReasons": [
+        "2で分けた後、3で分けても5,4の順が保存される結果です。",
+        "基準値3は5と4より前に置かれるので、末尾にはなりません。",
+        "1は最初の基準値2より小さいため、2の前に置かれます。",
+        "1は2より小さく、また5,4はまだ互いの大小で分割されていません。"
+      ],
+      "takeaway": "クイックソートの途中状態では、各グループ全体が整列済みとは限らない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "基準値は毎回グループの左端で、グループ内では元の順序を保つという指定を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "最初に基準2を除き、2より小さい値と大きい値を元の順に書き出しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1回目の大きい側は[3,5,4]です。次の基準3に対して5と4がどちら側になるか確かめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "df5ad7bbe5f9a4099b5e2a1fd0622e9881857f719069d372daa36e252cfc9b43",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q5",
+      "summary": "ウ。スタックで可能な出力順は5通りです。",
+      "explanation": "A,B,Cを入力順に挿入し、最上段だけ取り出します。可能なのはABC、ACB、BAC、BCA、CBAです。CABはCを出すためA,B,Cを積んだ後、BがAの上に残るので実現できません。",
+      "choiceReasons": [
+        "ABC、ACB、BAC、BCA、CBAの5通りを、挿入と取出しを交互に行うことで実現できるため、3通りでは不足します。",
+        "可能な五通りのうち一つを数え漏らしています。",
+        "ABC、ACB、BAC、BCA、CBAの五通りです。",
+        "六順列のうちCABは後入れ先出しに反するため除きます。"
+      ],
+      "takeaway": "スタックの順序制約は、取り出した時点の最上段で確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "A,B,Cの六つの並べ方を書き、Cを最初に出す場合の積み方から確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Cを出すにはA,B,Cを順に積みます。その後の最上段がBであることに注意します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "CABだけ実現できず、6−1=5通りです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2c1e6b9dfdb33b0171ae61c5b09f598b8851e8b51af95ebe8b1dba9c2e8fb757",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q5",
+      "summary": "ウ。隣り合う要素を比較・交換するバブルソートです。",
+      "explanation": "バブルソートは隣接する2要素を比較し、整列したい順と逆なら交換します。端まで走査すると最大値又は最小値が端に移り、この走査を繰り返して整列します。間隔を変える方法、基準値で分割する方法、順序木を使う方法とは区別します。",
+      "choiceReasons": [
+        "間隔を徐々に狭めて部分列を整列するシェルソートです。",
+        "基準値で大小に分けて再帰的に整列するクイックソートです。",
+        "隣接要素の比較・交換を繰り返すバブルソートです。",
+        "木構造から最小値を取り出す方式で、隣接要素の交換を基本とする方法ではありません。"
+      ],
+      "takeaway": "ソートは比較する相手と要素を移す操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の比較対象を、間隔を空けた要素・基準値・隣接要素・木の要素に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "バブルソートでは、一度の走査で大きな値が隣の要素と交換されながら端へ移動します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "隣り合う要素を比較し、大小の順が逆なら入れ替える説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2e7ec996b7fc6fd487da6e8051f02df961e02a4582d3ba23566201d12a1c2074",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q7",
+      "summary": "ア。隣り合う要素の比較と交換を繰り返すのがバブルソートです。",
+      "explanation": "バブルソートは隣り合う二つの値を比較し、大小が逆なら交換する操作を繰り返します。この選択肢では末尾から先頭へ比較し、小さい値が前へ移動します。\n基準値で二分するクイックソート、分割した列を併合するマージソート、最小値を選んで先頭と交換する選択ソートとは、比較・移動の単位が異なります。",
+      "choiceReasons": [
+        "アは隣り合う二値の比較・交換を繰り返すバブルソートです。",
+        "イは基準値で小さい群と大きい群に分けるクイックソートです。",
+        "ウは列を分割し、整列して併合するマージソートを述べています。",
+        "エは未処理範囲の最小値を選ぶ選択ソートです。"
+      ],
+      "takeaway": "ソートは「何を比較するか」「どう分割・移動するか」で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "比較の相手が隣の数字か、列全体の最小値か、基準値かを読み分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例として3,2,1の末尾の2と1を交換し、次に3と1を交換すると、小さい1が先頭へ移ります。この隣接交換が手掛かりです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イの基準値、ウの二分割、エの最小値探索を、直前の隣接交換の操作と照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "55b6456302866e59b4c9883171affc6a737ee5f937c12359023ba56b465bef80",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q6",
+      "summary": "イ。再使用可能プログラムは実行前後に変数を初期状態にします。",
+      "explanation": "再使用可能とは、前の実行による状態を次の実行へ持ち越さず、同じプログラムを繰り返し実行できる性質です。開始時の初期化又は終了時の状態復元で実現できます。再入可能は複数の実行が同時に進んでも互いの状態を壊さない性質で、実行ごとの作業データを分離します。",
+      "choiceReasons": [
+        "再帰呼出しでは各呼出しの局所変数などを保持する必要があり、全データ共用とはいえません。",
+        "変数の初期化・復元により、前回の実行状態が次回に影響しないようにします。",
+        "コードは共用できても、各タスクの作業データまで一律に共用すると相互干渉します。",
+        "再配置可能は異なる主記憶位置でも実行できる性質であり、定まった領域での実行に限定されません。"
+      ],
+      "takeaway": "再使用は状態の復元、再入は実行状態の分離、再配置は配置位置の自由。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "繰返し実行と同時実行を分け、変数が前回の値を保持すると何が起きるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じプログラムを次回も正しく使うには、実行の開始時か終了時に変数を初期状態にそろえます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "変数を開始時に初期化するか、終了時に戻すという再使用可能の説明が正しいです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1031d5c21104944b4da5bedc7a1701322442b9bbce376b136c622c190841998c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q5",
+      "summary": "空き領域の大きさをキーとする2分探索木が適しています。",
+      "explanation": "best-fitは、要求量以上の大きさの領域のうち最小のものを探します。比較すべき値はアドレスではなく領域の大きさです。大きさをキーにした2分探索木なら、要求量との大小を比較しながら候補を絞り、平均的にはO(log n)で検索できます。大きさ順の連結リストは先頭から順にたどるので平均O(n)です。",
+      "choiceReasons": [
+        "アドレス順の木では大きさの順序がなく、最小の適合領域を絞れません。",
+        "大きさ順でも連結リストには途中へ直接アクセスできず、順に探索します。",
+        "大きさを比較して要求量以上の最小値を木で検索できます。",
+        "ビットマップはアドレスごとの空き状態を表し、要求量以上の最小領域をサイズ順に検索できません。"
+      ],
+      "takeaway": "探索の条件に使う量をデータ構造のキーにする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "求めるのは要求量以上で「最小の大きさ」の空き領域です。領域の位置と大きさを区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "木の左右へ進むには、探す条件とキーの大小関係が対応している必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "要求量を領域の大きさと比較し、以上なら候補を記録して小さい側へ進む検索を考えましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b789693cae4d2b8ae7b0f7c2b938de8c37d6667dd33b894d83eeec3148014ebb",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q5",
+      "summary": "イ。要求を満たす最小の空き領域を使うため、小さな残片が生じやすくなります。",
+      "explanation": "ベストフィットは、要求サイズ以上の空きブロックの中から最小のものを選びます。例えば30必要で空きが32,50,80なら32を使い、2の空きが残ります。\n余りを最小にするため、小さすぎて次の要求に使いにくい空きブロックが多数できる傾向があります。",
+      "choiceReasons": [
+        "低いアドレスから最初に適合する領域を選ぶファーストフィットの特徴です。",
+        "要求を満たす最小領域を選ぶベストフィットの特徴です。",
+        "ハッシュ関数の利用はベストフィットの定義ではありません。サイズに合う最小領域を探します。",
+        "アドレス順の管理や隣接領域の併合は、ベストフィット固有の割当て基準ではありません。"
+      ],
+      "takeaway": "ベストフィットは最小の適合領域を選ぶので、小さな空きが残りやすい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "名前の「フィット」は要求サイズへの適合度を指します。アドレスの大小とは分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "要求30に対して空き32,50,80なら、差が最も小さい32を選ぶ方式です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この例の余り2は次の大きな要求には使えません。同じ選び方を繰り返したとき、残る空きの大きさを考えましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "37ddcc2e60b7a8d1f8b3cab50868a56a2bca96be5f6a1f98bf6d1481819399b4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q5",
+      "summary": "ウ。右部分木の最小値13を12の位置へ移せます。",
+      "explanation": "二分探索木では、各節点の左部分木はその値より小さく、右部分木は大きい値です。12を置き換えるには、左部分木の最大値11か、右部分木の最小値13を用います。\n候補のうち13だけが該当します。13を元の葉から取り除いて12の位置へ移すと、左の9・10・11より大きく、右に残る14・15より小さいので条件を保ちます。",
+      "choiceReasons": [
+        "9を置くと、左部分木に9より大きい10と11が残り、大小関係が崩れます。",
+        "10を置くと、左部分木の11が10より大きくなり、条件を満たしません。",
+        "13は右部分木の最小値で、元の葉を除いて移せば左右の大小関係を保てます。",
+        "14を置くと、右部分木に14より小さい13が残り、条件を満たしません。"
+      ],
+      "takeaway": "二つの子をもつ節点の削除は、左の最大値か右の最小値で置き換える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の12の下だけを見ます。左には10、その下に9と11、右には14、その下に13と15があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "置換後も左の全要素＜置換値＜右の全要素が必要です。左部分木で一番右、右部分木で一番左へ進むと境界の値が見つかります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左部分木の最大値は11ですが選択肢にありません。右部分木で14から左へ進むと13があり、これを移せます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "aa1fba1e0f465fff93a0766238628b4b0c1e745e8ec596199530e5d5e6b04006",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q6",
+      "summary": "エ。右部分木、左部分木、自分の順に出力し、ED−CB×÷A+となります。",
+      "explanation": "各ノードの出力は、右の子の再帰処理と左の子の再帰処理が終わった後です。したがって右→左→自分の後順走査になります。\n根+の右に進み、−の部分木でE,D,−を出力します。続いて×の部分木でC,B,×を出力し、その親÷を出力します。最後に根の左A、根+を出力するのでED−CB×÷A+です。",
+      "choiceReasons": [
+        "アは親を先に出力する右優先の前順です。この定義では親の出力は子の処理後です。",
+        "イは左の子から先に出力する後順です。定義では右の子を先に呼び出します。",
+        "ウは右→自分→左の中順に相当します。自分の出力は左右の処理後です。",
+        "エは右→左→自分を全ての部分木で繰り返した順序です。"
+      ],
+      "takeaway": "再帰の出力順は、子を呼ぶ順番と自分を出力する位置の二つで決まる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "根+では右の÷の処理を先に呼び出します。+はまだ出力しません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "÷の右は−です。−の右E、左Dを処理し終えてから−自身を出力します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "−の部分木の出力を記録したら、×の右C・左B・×の順を続けます。その後、÷、A、+がどの順で出るか追いましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r07a-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "67ff492cb219638760246952232c4934f866520714143c3f1b98e3c95546a455",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q29",
+      "summary": "イのMVCC。同じデータの複数の版を使って同時実行性を高めます。",
+      "explanation": "MVCCはMulti-Version Concurrency Controlです。更新前後など複数の版を保持し、トランザクションが見るべき版を読み出します。\n読み手が更新途中の値を待つ代わりに適切な過去の版を使えるので、読取りと更新の競合を減らし、同時実行性を高められます。",
+      "choiceReasons": [
+        "2相ロッキングはロックの獲得・解放の段階を管理する方式で、複数版を用意する仕組みではありません。",
+        "MVCCは複数版を保持して並行トランザクションを制御します。",
+        "WALはデータ変更に先立ってログを記録し、障害回復を支える仕組みです。",
+        "共有ロックは複数の読取りを許すロックで、同じ項目の異なる版を用意する方式ではありません。"
+      ],
+      "takeaway": "複数版で並行性を確保するのがMVCC。ログやロックの方式と分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問が強調するのはロックの順序ではなく、同じ項目の「異なる版」です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "更新側が新しい版を作っても、読取り側が開始時点で有効だった版を読める場面を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "英語名にMulti-Versionを含む方式と、Lockingやログの記録を目的にする方式を区別しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c6eb3c656658ebe704362ec5978d9af8812e506b7863bf04a482647d240e0d4c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q30",
+      "summary": "エ。同じ表の複製が複数サーバにあっても意識せず利用できます。",
+      "explanation": "複製に対する透過性とは、同じ論理的な表のコピーが複数サーバにあることを、利用プログラムが意識しなくてよい性質です。プログラム側で各コピーを別の表として扱ったり、どのコピーを利用するかを指定したりする必要を隠します。分割配置や配置場所、DBMSの違いに関する透過性とは対象が違います。",
+      "choiceReasons": [
+        "DBMSの種類の違いを隠す透過性で、複製の有無とは異なります。",
+        "一つの表を分割した配置を隠す分割に対する透過性です。",
+        "表の所在や移動を隠す位置に対する透過性です。",
+        "同じ表が重複して存在することを意識させない複製に対する透過性です。"
+      ],
+      "takeaway": "透過性は何を利用者から隠すかで分類する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補に、隠す対象がDBMSの種類・表の分割・表の所在・表のコピーのどれかを書き添えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "複製では論理的な表は一つで、物理的なコピーが複数あります。そのコピーの数や利用先をプログラムに意識させません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "複数サーバに一つの表が重複して存在しても、重複を意識する必要がない説明です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ceac1ea60683547c541473bec1ba73e009e7e03d71b04e831444b1de28df30f2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q30",
+      "summary": "親の注文削除に伴って明細も削除する指定はCASCADEです。",
+      "explanation": "注文明細の注文番号は、注文表の注文番号を参照する外部キーです。親の注文行を削除したときに子の明細行も自動削除したいので、外部キーの参照制約にON DELETE CASCADEを指定します。関連する削除を子側へ連鎖させる動作です。",
+      "choiceReasons": [
+        "参照元の注文明細も連鎖的に削除します。",
+        "INTERSECTは問合せ結果の共通部分を取る集合演算で、削除規則ではありません。",
+        "RESTRICTは参照する明細がある場合に注文の削除を拒否します。",
+        "UNIQUEは値の重複を禁止する制約で、親削除時の子の動作を指定しません。"
+      ],
+      "takeaway": "ON DELETE CASCADEは親削除を子へ連鎖、RESTRICTは親削除を拒否する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "注文番号は注文側で主キー、明細側で外部キーです。削除の起点は注文側です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "参照制約の削除規則では、親を消すときに子を残すか、一緒に消すか、拒否するかを指定します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "対応する明細へ削除を「連鎖」させたいという要求に、CASCADEの動作を当てはめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dbd1b86aa1760e0ca934411ba3bd82ad34699795ba5f0a7507f42bb523676668",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q27",
+      "summary": "ア。ON DELETE CASCADEで、参照する受注行も削除する。",
+      "explanation": "受注.商品コードは商品.商品コードを参照する外部キー。商品表の行を削除したときに、同じ商品コードを持つ受注行を自動的に削除するなら、ON DELETE CASCADEを指定する。\n\nCASCADEは親の削除を子の削除へ連鎖させる。RESTRICTは参照中の削除を拒否し、SET DEFAULTやSET NULLは外部キーの値を書き換える。問題は値の変更ではなく、受注行自体の削除を求めている。",
+      "choiceReasons": [
+        "CASCADEは商品行の削除に連鎖して、それを参照する受注行を削除する。",
+        "RESTRICTは参照する受注行がある場合、商品行の削除を禁止する。",
+        "SET DEFAULTは外部キーを既定値に変更する。受注行を削除しない。",
+        "SET NULLは外部キーをNULLにする。受注行を削除しない。"
+      ],
+      "takeaway": "親の削除に連鎖して子も削除する指定はCASCADE。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "外部キーがあるのは受注表。商品が親、受注が子とし、親を消した後に子へ何をしたいかを読む。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "求めているのは子の行の削除。削除拒否や、外部キーだけを別の値にする動作ではない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "RESTRICTは拒否、SET DEFAULTとSET NULLは値の変更。削除を連鎖させる動作に対応する語を選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ad0a8a06307b9d4f393b65746734a74b41d1a9d300609d6b4de7c8ea98ef5d82",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q26",
+      "summary": "エ。RとSの行を重複を除いて集める和です。",
+      "explanation": "Rの3行に、Sにだけある(0002,a,200)を加えるとXの4行になります。(0001,a,100)は両方にありますがXでは1行です。同じIDでもAが違う(0002,a,200)と(0002,b,200)は別の行として残ります。したがって行全体の重複を除いて集める和演算です。",
+      "choiceReasons": [
+        "IDで結合すると一致する行どうしを横に組み合わせます。Xのように元の3列のまま4行を集める演算ではありません。",
+        "差では一方だけにある行を残し、共通行(0001,a,100)は残りません。",
+        "直積ではRの3行とSの2行の全組合せ、6行を作ります。",
+        "両関係の行を集めて共通行を1行にし、Xの4行を得ます。"
+      ],
+      "takeaway": "和の重複判定はIDだけでなく行全体で行う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Xの0002の2行はAの値が異なることと、0001の共通行は1行だけであることに注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RとSの行を丸ごと並べ、全列が同じ行だけ重複として取り除いてみます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "3行＋2行−共通1行=4行となりXに一致するので、和です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b854d3e8dd873675788484d3efa8baa3d79c419e3b05828a9f5c89bbca6b4cbb",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q27",
+      "summary": "イ。従業員にだけ存在するA001、C003、C011が残ります。",
+      "explanation": "従業員−異動は、従業員表に含まれ異動表には含まれない行を取り出します。両表にあるA005とB010を除き、A001,C003,C011が残ります。異動表だけにあるD080を追加する演算ではありません。",
+      "choiceReasons": [
+        "全行を合わせる和集合の結果です。",
+        "従業員表から共通のA005,B010を除いた差集合です。",
+        "両表の共通行を取り出す積集合です。",
+        "異動−従業員の逆向きの差集合です。"
+      ],
+      "takeaway": "差集合A−BはAの行からBにある行を除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず両方の表に同じ従業員ID・氏名・所属の行があるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "差集合は左側の表を出発点にし、右側にもある行を消します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "従業員表のA005とB010を消し、残った3行を候補と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "45482d9ddd91d28f57d3f325d4c6f68a79e004c311b96c5fd349dfbd6edc116d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q30",
+      "summary": "ア。T2・T5をロールフォワードし、T6をロールバックします。",
+      "explanation": "チェックポイントより後にコミットした更新トランザクションは、確定した更新を復元するためロールフォワードします。該当するのはT2とT5です。T1はチェックポイント前にコミット済みなので再実行対象ではありません。\n障害時に未コミットで書込みを行っているT6はロールバックします。T3とT4はReadだけでWriteがなく、データベースの更新を取り消す必要がありません。",
+      "choiceReasons": [
+        "T2・T5の確定更新を再実行し、未確定のT6更新を取り消す組合せです。",
+        "T3は未コミットでもReadだけです。取り消すデータ更新がないのでロールバック対象に加えません。",
+        "T1はチェックポイント前にコミット済みです。回復に必要なロールフォワード対象へ加える必要はありません。",
+        "T1の不要な再実行と、更新のないT3のロールバックの両方を含んでいます。"
+      ],
+      "takeaway": "回復処理はコミット時点とWriteの有無の両方で判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "黒丸がコミットです。T1・T2・T5の黒丸がチェックポイントの前か後かを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "確定した更新を復元するのがロールフォワード、未確定更新を取り消すのがロールバックです。Readだけの処理は更新を残しません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "T2とT5はチェックポイント後にコミットしています。障害時未コミットのT3・T4・T6について、表のWrite回数の有無を確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b3614d9d1e2545000d1239995d1a2efbb112889c37f06c64fe4a972bf22c7fd7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q33",
+      "summary": "ウ。使用できるホストアドレスは6個です。",
+      "explanation": "/29はネットワーク部29ビットなのでホスト部は32−29=3ビット。1サブネットは2³=8アドレスで、192.168.16.40〜47です。ネットワーク40とブロードキャスト47を除く41〜46の6個が使用できます。マスクは255.255.255.248です。",
+      "choiceReasons": [
+        ".48は次の8個区間のネットワークで、.40/29には入りません。",
+        "末尾240は/28です。/29の末尾は248です。",
+        "8個からネットワークとブロードキャストの2個を除いて6個です。",
+        "29はネットワーク部の長さで、ホスト部は3ビットです。"
+      ],
+      "takeaway": "CIDRの残りビットから区間幅を求め、両端をホスト用から除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "IPv4全体の32ビットから/29の29ビットを引きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "残ったビットの全組合せ数を求め、ネットワークとブロードキャストを除きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2³=8で区間は.40〜.47です。両端を除く個数を数えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f2853ed81f3630bb9ae7f7bd534201def077690da446df02e20d4bc4173daaea",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q36",
+      "summary": "イ。隣接APには1、6、11など離れたチャネルを割り当てます。",
+      "explanation": "2.4GHz帯では隣接チャネルの使用帯域が重なります。隣接するAP同士は1と6、6と11など十分に離したチャネルを使って干渉を減らします。SSIDの違いは電波の重なりを解消しません。",
+      "choiceReasons": [
+        "同一チャネルでは隣接APが電波資源を共有し、干渉や競合が増えます。",
+        "1、6、11のように間隔を取ることで帯域の重なりを避けます。",
+        "SSIDが異なっても同じ周波数を使用すれば相互に影響します。",
+        "1、2、3の隣接チャネルは帯域が重なり、干渉を増やします。"
+      ],
+      "takeaway": "チャネル番号が違うだけでは不十分で、帯域の重なりを避ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "2.4GHzのチャネルを周波数軸に並べ、一チャネルの幅が番号間隔より広い点を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "隣り合う番号では使用帯域が重なるので、十分離れた組合せを探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "隣接APに1と6、6と11など離れた番号を割り当てる候補です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "74a44e11b3ecb78dd7e3160f5cce88dfd837da9dbf870a7071b180c1d079170a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q32",
+      "summary": "ア。ARPはIPアドレスからMACアドレスを求めます。",
+      "explanation": "同じリンク上でIPパケットをイーサネットフレームに入れて送るには、次の送り先のMACアドレスが必要です。ARPはそのIPアドレスに対応するMACアドレスを問い合わせます。経路決定やIPアドレスの割当てではなく、ネットワーク層の宛先情報をリンク層のアドレスに対応させる役割です。",
+      "choiceReasons": [
+        "IPアドレスから同じリンク上の相手のMACアドレスを求めるARPです。",
+        "IP通信のエラー報告や制御メッセージはICMPの役割です。",
+        "ホップ数に基づく経路制御はRIPの説明です。",
+        "動的なIPアドレスの割当てはDHCPの役割です。"
+      ],
+      "takeaway": "ARPは同じリンク上のIPアドレスをMACアドレスに対応させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "IPで指定した相手へイーサネットフレームを送るとき、フレームの宛先にどのアドレスが必要か考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "IPの送り先が分かっても、同じリンク上のフレーム転送には相手の物理的なアドレスが必要です。その対応を問い合わせます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "IPアドレスからMACアドレスを得るプロトコルがARPです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ada820987f09f13712e9cbc6669d9aa6ad38b830720902941611859ff3038321",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q36",
+      "summary": "ア。arpコマンドでIPアドレスとMACアドレスの対応を確認します。",
+      "explanation": "同一LANでIPv4通信するには、宛先IPアドレスに対応するMACアドレスをARPで調べます。その対応はARPキャッシュに保存されます。\nプリンターを直前に使った条件から対応がキャッシュにあると考え、arpコマンドで確認します。ipconfigやifconfigは主に自分のインターフェースの設定、netstatは接続情報、pingは疎通確認です。",
+      "choiceReasons": [
+        "ARPキャッシュのIPとMACの対応を表示するarpコマンドが適切です。",
+        "ipconfigやifconfigはPC自身のインターフェース情報を調べるもので、既知のプリンターIPに対応するMACの表を見る用途ではありません。",
+        "netstatは接続や通信状態などを表示し、ARPの対応表を確認するコマンドではありません。",
+        "pingは到達性を調べます。ARPキャッシュを作るきっかけにはなりますが、MACの対応を表示するにはarpを使います。"
+      ],
+      "takeaway": "同一LANのIP→MACの対応はARPキャッシュで確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "相手は同じLAN上で、IPアドレスが既知です。名前解決ではなく、IPとリンク層のアドレスの対応を調べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "「直前に使用している」ので、PCがそのプリンターへ送った際のIPとMACの対応がキャッシュに残っていると考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "その対応表を表示するarpコマンドを使います。PC自身の設定を出すipconfigとは対象が違います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f5373c3334175e3638f4c9f6ba871852c0f42c81447c83ec040ef482eb8fe7d7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q34",
+      "summary": "ウ。base64で約4/3倍になるので、30kバイトは約40kバイト。",
+      "explanation": "base64は元データ3バイト=24ビットを6ビットずつ4組にし、それぞれを1文字で表す。4文字を1バイトずつ送るため、3バイトが4バイトになり、長さは約4/3倍。\n\n30×4/3=40kバイト。改行やMIMEヘッダーなどの付加分はあるが、問題の「およそ」ではこの比率で判断する。base64は圧縮方式ではない。",
+      "choiceReasons": [
+        "20は元より小さくなる。base64は圧縮ではなく符号化なので合わない。",
+        "30は符号化で増える分を無視している。",
+        "40は30×4/3で求まる。",
+        "60は2倍。1バイトを16進2文字で表す場合などとは比率が異なる。"
+      ],
+      "takeaway": "base64は3バイトを4文字へ変換するため、およそ4/3倍。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "JPEGが既に圧縮されていても、メール添付の符号化では長さが増える。画像圧縮とbase64を別々に考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "元の3バイトは24ビット。6ビットで1文字を選ぶため4文字になり、送ると4バイトになる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "30kバイトに4/3を掛ける。問われているのはおよそのサイズなので、細かい改行等は主計算に入れない。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "16eb7e04cc7f2b31d46049d0faa64249a1f70e669027cae14b108129a0dd6634",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q30",
+      "summary": "イ。媒体の空きを調べて送信し、衝突したらランダムに待って再送します。",
+      "explanation": "CSMA/CDは搬送波感知・多重アクセス・衝突検出を組み合わせる方式です。各ノードは媒体が空いていれば送信しますが、複数が同時に始めると衝突し得ます。\n衝突を検出したノードは送信を中止し、ランダムな時間待って再送を試みます。送信権のトークンや固定のタイムスロットを渡す方式とは異なります。",
+      "choiceReasons": [
+        "アは論理的な順番にトークンを渡すトークンパッシングです。",
+        "イは媒体の確認と衝突検出、ランダム待機による再送を説明しています。",
+        "ウは環状にトークンを巡回させるトークンリングです。",
+        "エは時間枠を割り当てる時分割方式です。"
+      ],
+      "takeaway": "CSMA/CDは空き確認→送信→衝突検出→ランダム待機→再送。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の送信開始条件を、送信権の受取り・媒体の空き・タイムスロットに分けます。さらに送信が重なったときの記述があるか探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同時に送信を始めた二台が同じ時間だけ待つと、再び衝突します。待ち時間をランダムにする理由を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "送信権の受渡しや固定時間枠ではなく、媒体の確認とランダム再送が両方書かれた候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fc85eaf3a7b9fb1e1ca869e6a98f57b4f7d13173916850a50d2d37b21a6c2046",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q31",
+      "summary": "ウ。DHCPサーバのアドレスをPCへ事前設定する必要はありません。",
+      "explanation": "DHCPクライアントは初期探索のブロードキャストなどでサーバを探し、IPアドレスやネットワーク設定を受け取ります。割当てはリースとして期限があり、必ず同じアドレスが再割当てされるとは限りません。",
+      "choiceReasons": [
+        "DHCPはサブネットマスクやデフォルトゲートウェイも配布できます。",
+        "固定アドレスを動的割当て範囲から除けば両者を混在できます。",
+        "サーバ探索を行うため、サーバのアドレスをPCにあらかじめ指定する必要はありません。",
+        "リース期限や利用状況によって違うアドレスになることがあり、必ず同じとはいえません。"
+      ],
+      "takeaway": "DHCPは探索とリースにより、アドレスと関連設定を自動配布する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "IP未設定のPCが最初にどのようにサーバを見つけるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まだIPが設定されていないPCの初回探索を、特定の1台に送る方法とLAN全体へ送る方法に分けます。後者なら送信先を一台に絞るための情報が必要かを確かめられます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "DHCPの初期探索はブロードキャストで行えるので、サーバの事前指定は不要です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0cb6c0dcf3b1d4fb850fe352577e2301797635cf885dc0c9b9cdf75137c4bc06",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q33",
+      "summary": "ウ。IPアドレスから対応するホスト名を調べるのが逆引きです。",
+      "explanation": "DNSでホスト名からIPアドレスを調べるのが正引き、IPアドレスから名前を調べるのが逆引きです。逆引きにはPTRレコードが使われます。\nMXはメール配送先、NSはそのドメインの名前解決を担当するDNSサーバ、CNAMEは別名を示します。問合せを行うソフトウェアはリゾルバで、名前解決の処理はレゾリューションです。",
+      "choiceReasons": [
+        "MXレコードはメール配送先のサーバを示します。DNSサーバを示すのはNSです。",
+        "問合せを行うソフトウェアはリゾルバです。レゾリューションは名前解決の処理を指します。",
+        "IPアドレスに対応するホスト名を調べることが逆引きです。",
+        "別名を登録するのはCNAMEレコードで、NSはDNSサーバを示します。"
+      ],
+      "takeaway": "DNSの方向は名前→IPが正引き、IP→名前が逆引き。MX・NS・CNAMEを用途で覚える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正引きではwww.exampleのような名前からIPアドレスを求めます。逆引きでは、入口と出口がどちらになるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "レコード名の役割を確認します。MXのMはメール、NSはName Serverです。これらを別名の登録とは区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "IPアドレスを入口にしてホスト名を求めるウが逆引きです。別名の登録はCNAMEです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2f40b3c8bbf25890896ca80e9094fc54d08077a910cbf117d895a84a4989472d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q31",
+      "summary": "ア。同一セグメントの全ノードへ一度に送信します。",
+      "explanation": "イーサネットのブロードキャストはブロードキャストMACアドレス宛てにフレームを一度送信し、同一セグメントの全ノードを送信対象にします。相手を選んで複数へ送るマルチキャストや、相手ごとに個別送信を繰り返す方法とは異なります。ルータを越えてすべてのネットワークへ配る意味ではありません。",
+      "choiceReasons": [
+        "全ノードに対して一度の送信で伝送するブロードキャストの説明です。",
+        "全ノードに順番に個別送信する方式で、一度のフレーム送信ではありません。",
+        "選択された複数ノードを対象にするマルチキャストの説明です。",
+        "選択された相手への個別送信の繰返しで、全ノードへ一度に送る方式ではありません。"
+      ],
+      "takeaway": "ブロードキャストは全員へ一度、マルチキャストは選択したグループへ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の受信対象を「全ノード」と「選択された複数ノード」、送信方法を「一度」と「順番」に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "イーサネットでは一つの宛先MACアドレスで、そのセグメントの全員を送信対象にできます。相手ごとの送信を繰り返す必要はありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同一セグメント内の全ノードに、一度の送信で伝送する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1b5550f22570da764d561db0891c551f1403abf90b37d3149e8638d04d55f84c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q34",
+      "summary": "ウ。ICMPはIP通信のエラーや制御情報を通知します。",
+      "explanation": "ICMPは、IPパケットの配送で発生したエラーなどの制御メッセージを送るプロトコルです。宛先到達不能やTTL超過を送信元へ通知し、pingで使うエコー要求・応答も扱います。\nアドレスの変換や割当てを行うプロトコルではなく、IP通信の状態を知らせる役割です。",
+      "choiceReasons": [
+        "MACアドレスからIPアドレスを求める機能はRARPの説明で、ICMPではありません。",
+        "グローバル・プライベートIPアドレスの変換はNATの役割です。",
+        "IPパケットのエラー報告などの制御メッセージを通知するのがICMPです。",
+        "IPアドレスなどを動的に割り当てるのはDHCPです。"
+      ],
+      "takeaway": "ICMPはエラー・制御通知。NATの変換、DHCPの割当てと区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の動詞は解決、変換、通知、割当てです。ICMPのCはControlなので、IP通信の状態を伝える機能を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ルータでTTLが尽きたり宛先へ届かなかったりしたとき、送信元へ事情を知らせるメッセージが必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "IPパケットの送信エラーを送信元へ通知するウがICMPです。アドレスを配るエはDHCPの役割です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "221eef5e6f378b6b2c939e74250cf15fca613823dd6e87db9a85eb1fb29a019b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q33",
+      "summary": "エ。IEEE 802.11acは5GHz帯を使用します。",
+      "explanation": "IEEE 802.11acは5GHz帯で動作する無線LAN規格です。802.11gは2.4GHz帯であり、acのみの対応では互換通信できません。アクセス制御はCSMA/CAで、最大通信速度600Mbpsは802.11nに対応する値です。",
+      "choiceReasons": [
+        "gは2.4GHz、acは5GHzなので両規格のみでは通信できません。複数規格対応機器とは区別します。",
+        "600Mbpsは802.11nの最大値で、acの最大値ではありません。",
+        "無線LANはCSMA/CAを使い、衝突検出のCSMA/CDではありません。",
+        "802.11acは5GHz帯を使うので正しいです。"
+      ],
+      "takeaway": "無線LAN規格は周波数帯、速度、アクセス制御を別々に確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "802.11gの2.4GHzと、acの対応帯域を区別して読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "無線では送信中の衝突検出が難しく、衝突回避を使う点も確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "acの使用周波数帯は5GHzなのでエです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7e7c297b8a2a1da986841902277af0be852f6cb4dedb0b339d7e2d9f504fbe2a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q31",
+      "summary": "ア。208.77.188.166はプライベート範囲やマルチキャスト範囲に含まれません。",
+      "explanation": "IPv4のプライベート範囲は10.0.0.0/8、172.16.0.0/12、192.168.0.0/16です。208.77.188.166はこれらに含まれず、マルチキャストの224.0.0.0〜239.255.255.255にも含まれません。\n全ビット1の255.255.255.255でもなく、通常のグローバルユニキャストアドレスです。サブネットのブロードキャストはホスト部が全て1ですが、末尾166は2進数10100110で、通常のホスト部の条件にも合いません。",
+      "choiceReasons": [
+        "アはインターネットで使うグローバルアドレスの分類です。",
+        "イのプライベート範囲は10、172.16〜172.31、192.168で始まる範囲です。208は含まれません。",
+        "ウは一斉送信用です。255.255.255.255やホスト部が全て1のアドレスには該当しません。",
+        "エのIPv4マルチキャストは先頭オクテット224〜239です。208は範囲外です。"
+      ],
+      "takeaway": "IPv4の特殊な用途の範囲を先に除外し、通常のグローバルユニキャストを判定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "先頭の208を、プライベートアドレスの10、172.16〜31、192.168と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "マルチキャストの先頭は224〜239です。ブロードキャストは全体又はホスト部が全て1という別の条件があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "208.77.188.166がどの特殊範囲にも入らないか確認し、残る通常のインターネット用の分類を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4b61fc6784521c00e786a96e8e62035fef667e571479d397f671be14bb90558d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q31",
+      "summary": "イ。2001:db8::3ab:ff01はIPv6の正しい表記です。",
+      "explanation": "IPv6は128ビットを16ビットずつの8ブロックに分け、各ブロックを16進数で表しコロンで区切ります。連続する0のブロックは一度だけ::で省略できます。2001:db8::3ab:ff01は不足する4ブロックを0として復元でき、正しい表記です。",
+      "choiceReasons": [
+        "::が二箇所にあると、それぞれに省略した0の数を一意に決められないため不適切です。",
+        "コロン区切りの16進表記で、::を一度だけ使って連続する0のブロックを省略しています。",
+        "db8と3abの間にピリオドがあり、IPv6の通常の16進ブロック区切りになっていません。",
+        "16進ブロックをピリオドだけで区切っており、IPv6の表記規則に合いません。"
+      ],
+      "takeaway": "IPv6の0省略「::」は一つのアドレス中で一度だけ使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の区切り文字を確認し、コロンとピリオドを区別します。::が何回現れるかも数えましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "IPv6は16進数の8ブロックをコロンで区切ります。0の連続ブロックを省略するとき、復元する0の数が一意に決まる必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2001:db8::3ab:ff01では::を0の4ブロックに置き換えると8ブロックに復元できます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

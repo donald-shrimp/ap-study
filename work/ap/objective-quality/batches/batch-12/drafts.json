@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r06h-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3d404d69f8d905bb1fdfe174b54c978b74117cbbe1eb1e038eb4109f011a23af",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q22",
+      "summary": "直線上の画素は(7,6)。先頭アドレスは(640×6+7)×2=7694番地です。",
+      "explanation": "始点(5,4)から終点(9,8)まではxもyも4増えるので、直線の傾きは1です。x=7は始点より2右なのでy=6です。\n各行は640画素。y=6の行までに640×6画素があり、x=7までに更に7画素あります。1画素16ビット=2バイトで、図の1番地は8ビットなので先頭アドレスは(640×6+7)×2=7694です。",
+      "choiceReasons": [
+        "アの3847は画素の通し番号です。1画素2バイトを掛けていません。",
+        "イの7680は(0,6)の先頭アドレスです。x=7の14バイトを加えていません。",
+        "ウの7694は(7,6)の先頭アドレスです。",
+        "エの8978はy=7で計算した(640×7+9)×2に当たり、指定の画素(7,6)とは違います。"
+      ],
+      "takeaway": "画素位置は行番号×行の画素数+列番号。バイトアドレスへは画素当たりのバイト数を掛ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "始点と終点はxもyも4増えます。xを5から7へ進めたときのyをまず求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "メモリはx方向に640画素並べて次の行へ進みます。図の1番地は8ビットなので、16ビットの画素は2番地分です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "求めたyを使い、(640×y+7)×2を計算します。座標は0始まりなので、行数や列番号に1を足しません。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ef5344c54baaf214a68f529f25d7cca6ec4bec76f65a4813b9910802f539bcaf",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q21",
+      "summary": "ウ。二つのスイッチが同時にオンのときだけ点灯します。",
+      "explanation": "AとBは電池からLEDへ至る一つの経路に直列に入っています。片方でもオフなら経路が切れ、両方オンの場合だけ電流が流れます。したがってY=A∧Bです。\nウの波形はAとBが同時に1の二つの区間だけY=1となり、最後にAだけが1になる区間ではY=0のままです。",
+      "choiceReasons": [
+        "YはAかBのどちらかが1なら1となるORの波形で、直列回路と合いません。",
+        "両方0のときY=1となるNORの波形で、スイッチを開いた回路では点灯しません。",
+        "両方1の区間だけY=1なので、直列スイッチのAND動作に一致します。",
+        "両方1でY=0となるNANDの波形で、点灯と消灯が逆です。"
+      ],
+      "takeaway": "直列スイッチはAND。波形は入力が同時に1の区間を探して比較する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "電池からLEDまで指で経路をたどると、AとBの両方を通ります。片方を開くと経路が切れることを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各候補の点線間でA=1かつB=1となる区間を探します。その区間だけYが1なら回路と一致します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ウでは中央の二つの同時オン区間でYが1です。右端のAだけ1の区間では0なので、直列条件を満たします。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "10fbfee722e4ef062b31a1e279fab84c3aafa44695b96ca6801c9b50e3811f52",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q21",
+      "summary": "ウ。待機時間は少なくとも約111.1秒必要。",
+      "explanation": "平均電流は、1周期で流れる電荷を周期の長さで割る。動作時間0.01秒、動作電流10,000μA、待機時間t秒、待機電流0.1μAに単位をそろえる。\n\n平均=(10,000×0.01+0.1t)/(0.01+t)≤1。100+0.1t≤0.01+tからt≥99.99/0.9=111.1秒となる。単純に二つの電流の平均を取ると、時間の長さの違いを無視してしまう。",
+      "choiceReasons": [
+        "1.1秒では平均は約90.2μAで、1μAを超える。",
+        "11.1秒では平均は約9.10μAで、1μAを超える。",
+        "111.1秒では平均が1μAとなり、条件を満たす最短の選択肢。",
+        "1111.1秒でも条件を満たすが、最短ではない。"
+      ],
+      "takeaway": "時間の長さが異なる電流は、電流×時間の合計を総時間で割る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "10mAと0.1μAをそのまま足さない。電流をμA、時間を秒にそろえ、10mA=10,000μA、10ms=0.01秒とする。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "待機をt秒と置く。1周期の電流×時間は10,000×0.01+0.1t、周期は0.01+t。両者を割ると平均電流になる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "(100+0.1t)/(0.01+t)≤1を解く。分母は正なので両辺に掛け、tの下限を求めて最短の選択肢を選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "197e034c4ecc2d255cdc327a6bb5e4c2cf537713fe1e2759ae41c4c5c5c02df9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q25",
+      "summary": "ウ。ラジオシティ法は拡散面どうしの相互反射を考慮します。",
+      "explanation": "ラジオシティ法は面から出る光のエネルギーを面間で扱い、拡散反射面どうしの相互反射を考慮して輝度を求めます。テクスチャマッピングは表面に模様を貼る方法、レイトレーシングは視線や光線を追跡する方法です。メタボールは複数の場を合成して滑らかにつながる曲面を表す手法です。",
+      "choiceReasons": [
+        "視線と物体の交点を調べて可視面を選ぶ説明はレイトレーシングで、テクスチャマッピングではありません。",
+        "空間中のデータから光線の反射・透過を追わず輝度を求める説明はボリュームレンダリングで、メタボールではありません。",
+        "拡散反射面間の相互反射を考慮するラジオシティ法の説明です。",
+        "物体表面に模様を貼る説明はテクスチャマッピングで、レイトレーシングではありません。"
+      ],
+      "takeaway": "CG手法は光線追跡・面間反射・模様貼付け・形状表現を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補が扱う対象を、視線との交点・空間データ・面間の反射・表面の模様に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "光線を一本ずつ追う方法と、面どうしでやり取りする拡散反射エネルギーを求める方法を区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "拡散反射面間の相互反射を考慮して輝度を求めるのはラジオシティ法です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "965f16cb6acd598b344673a67992e1ff597e778a86b7df847adf79897247d7e9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q25",
+      "summary": "拡散反射面どうしの相互反射を考えるのはラジオシティ法です。",
+      "explanation": "ラジオシティ法は面を小領域に分け、拡散反射面間でやり取りされる光のエネルギーを計算します。光源から直接届く光だけでなく、他の面で反射して届く間接光も考慮して輝度を決めるため、ウが適切です。視線を追う方法や、表面に画像を貼る方法と区別します。",
+      "choiceReasons": [
+        "視線と物体の交点を計算する説明はレイトレーシングです。",
+        "メタボールは空間中の影響関数から滑らかな形状を定義する方法で、輝度を計算する方式の名称ではありません。",
+        "拡散反射面間の光の相互反射を扱うラジオシティ法の説明です。",
+        "物体表面へ模様を貼る説明はテクスチャマッピングです。"
+      ],
+      "takeaway": "ラジオシティは面間の光、レイトレーシングは光線、テクスチャは表面の模様。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各文が形状、光の伝わり方、模様の貼付けのどれを扱っているか分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "視線を追跡する処理と、面から面へ反射光が届く処理は異なる描画の考え方です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ラジオシティでは拡散反射面どうしが交換する光を計算します。「相互反射」と名称の対応を確かめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "864ea86396a249a68bee0ae9da910856f95a1f51b93bd81a7aab3b0946f55207",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q25",
+      "summary": "エ。H.264/MPEG-4 AVCは動画の圧縮符号化方式です。",
+      "explanation": "H.264/MPEG-4 AVCは、フレーム内・フレーム間の予測などによって動画データ量を圧縮する規格です。配信を制御する通信手順や、番組情報の記述規格とは役割が異なります。",
+      "choiceReasons": [
+        "ストリーミング配信の制御はRTSPなどが担い、H.264は通信制御方式ではありません。",
+        "双方向ビデオ通信の制御はH.323などの役割で、動画圧縮規格とは異なります。",
+        "番組内容のメタデータ記述はMPEG-7などの対象で、H.264の役割ではありません。",
+        "ワンセグやインターネットでも使われる動画圧縮符号化方式です。"
+      ],
+      "takeaway": "圧縮コーデックと、配信制御・メタデータの規格を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の目的を、転送の制御・番組の説明・データ量の削減に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "動画を小さいデータ量で表す処理と、通信を開始・停止する処理は別です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "AVCのCはCodingです。動画自体を圧縮符号化する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e0f5cecc338f03366f7bd666b5a4849c1edd4cf5832eb87be5df4da597c822c7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q27",
+      "summary": "ウ。XMLで図形を記述するSVGです。",
+      "explanation": "SVGはScalable Vector Graphicsで、矩形、円、線、文字などをXMLの要素や属性として記述するベクトル画像形式です。Webページに埋め込み、拡大しても図形を再描画できます。",
+      "choiceReasons": [
+        "OpenGLは描画用APIで、XML画像ファイル形式ではありません。",
+        "PNGは画素を保存するラスター画像形式です。",
+        "XMLで図形オブジェクトを記述するベクトル形式です。",
+        "TIFFは主に画素を保存する画像形式で、XML図形記述ではありません。"
+      ],
+      "takeaway": "SVGは図形の形状をXMLで表す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "画素の色を並べる形式か、円や直線の位置を記述する形式かを分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "circleやrectなどのXML要素で図形を指定できる形式に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "XMLによるベクトル画像形式SVGを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "967b5fa9cd5dae6a97587cd84e94803f77223a956d627f47f80152aa07cab3b6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q23",
+      "summary": "ウ。SVGは図形をXMLで記述するベクトル画像形式。",
+      "explanation": "SVG（Scalable Vector Graphics）は円・矩形・線・文字などをXMLで記述する。例えば円なら中心座標や半径を属性として持つ。画素の並びよりも図形の情報で表すため、拡大しても輪郭を保ちやすい。\n\nPNGとTIFFは主に画素を保存する画像形式。OpenGLは描画APIであり、このXML画像形式の名前ではない。",
+      "choiceReasons": [
+        "OpenGLはグラフィックスの描画API。XMLで保存する画像フォーマットではない。",
+        "PNGは画素で表すラスター画像形式。",
+        "SVGは図形オブジェクトをXMLで記述し、Webページでも表示できる。",
+        "TIFFは主にラスター画像を扱う画像形式。"
+      ],
+      "takeaway": "XMLで円・線・文字を記述する画像はSVG。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「XML形式」「円や直線をオブジェクトとして記述」の二つを拾う。色の付いた画素を並べる画像か、図形の座標を保存する画像か。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "座標や半径で図形を表すのはベクトル形式。PNGやTIFFの画素中心の保存方法とは違う。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "OpenGLは描画するためのAPI。残る、Webで使えるベクトル画像の略語を確認する。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d6b6311ef2788c081162d4335dee47aa0be9f86c9f823d64178c15404ebad511",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q24",
+      "summary": "ア。習得性は、理解した機能を後で容易に思い出せる性質です。",
+      "explanation": "この規格におけるアイコンの習得性は、アイコンが表す機能をいったん理解した後、その機能をどれだけ容易に思い出せるかを示します。\n細部の見やすさ、過去の類似アイコンの経験による認識、近くの別アイコンとの区別とは、それぞれ評価の観点が異なります。",
+      "choiceReasons": [
+        "理解された機能を後で容易に思い出せるという、規格の習得性の説明です。",
+        "図柄の詳細を見分ける容易さで、記憶した機能を思い出す習得性とは異なります。",
+        "同じ・類似アイコンの経験に基づく識別の容易さで、親しみやすさの観点です。",
+        "近くの別アイコンと見分ける容易さで、識別性の観点です。"
+      ],
+      "takeaway": "アイコンの習得性は一度学んだ機能の思い出しやすさ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「理解された後」「以前の経験」「図柄の詳細」「別アイコンとの区別」という評価場面の違いを読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "習得した後に再びそのアイコンを使う場面を考えます。見た機能を記憶から呼び戻せるかが手掛かりです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "いったん理解した機能をどれだけ容易に思い出せるか、という説明に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c694eb53c749028d5f5031c40f35ff6d64f59b6ef971b9237818258f62855ee9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q24",
+      "summary": "エ。任意倍率で文字を拡大するときにアウトラインフォントが適します。",
+      "explanation": "ビットマップフォントは文字を画素の配列として持つため、そのまま拡大すると輪郭の段差が目立ちます。アウトラインフォントは輪郭を線や曲線で表し、表示する大きさに合わせて画素へ変換できるので、任意倍率でも滑らかな輪郭を得やすくなります。漢字の有無や等幅表示は、どちらの方式でも実現できます。",
+      "choiceReasons": [
+        "漢字はどちらの方式でも表現でき、アウトライン固有の利点ではありません。",
+        "等幅の文字はどちらの方式でも用意でき、輪郭表現の必要性を示しません。",
+        "画素が用意済みのビットマップは高速表示に適し、アウトラインは輪郭から画素を生成する処理が必要です。",
+        "輪郭を倍率に合わせて再描画できるため、任意倍率の拡大に適します。"
+      ],
+      "takeaway": "アウトラインは輪郭を持つので拡大縮小に強い。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "文字の種類・幅・表示速度・拡大という用途のうち、元の画素数が制約になるものを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ビットマップの画素をそのまま増やす場合と、曲線の輪郭を新しい大きさで描き直す場合を比べます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "任意の倍率に拡大しても輪郭を描き直せるので、拡大表示の用途が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bd57d467a8e197568128175a80a6e98fda02856892f3646eaa8b76802ff2858f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q24",
+      "summary": "エ。アウトラインフォントは輪郭を数式で持つため、任意倍率でも滑らかに描けます。",
+      "explanation": "ビットマップフォントは決まった大きさの点の配列を保存します。そのまま大きくすると点の形が目立ち、輪郭が階段状になります。\nアウトラインフォントは文字の輪郭を線や曲線で表し、必要な大きさで画素へ変換します。任意倍率への拡大に適します。漢字や等幅文字の表示はどちらの方式でも可能です。",
+      "choiceReasons": [
+        "アの漢字は両方式で表示でき、アウトライン方式を選ぶ決め手ではありません。",
+        "イの等幅表示も両方式で可能です。",
+        "ウの高速表示だけなら、描画する点が既に決まっているビットマップ方式が有利な場合があります。",
+        "エは輪郭を倍率に応じて描き直せるアウトライン方式の利点です。"
+      ],
+      "takeaway": "拡大・縮小の品質は輪郭データ、高速な固定サイズ表示は点のデータに着目する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "点の配列をそのまま何倍にも大きくすると、文字の斜め線がどう見えるか想像します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "線や曲線で保存した輪郭なら、指定した大きさで描き直せます。固定した点の配列との違いです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「任意の倍率」の要件を、輪郭を描き直す仕組みと照合しましょう。漢字や等幅は方式の違いではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "823973f557c4a6d5c9459860a99405d5def383d6172e24ba5db559e856ec0e8b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q24",
+      "summary": "ア。3桁あれば3年後まで割り当てられます。",
+      "explanation": "3年後の人数は8,000×1.2³=13,824人です。26種類の文字をn桁使うと26ⁿ通り。26²=676では足りず、26³=17,576なら13,824を収容できるので最小3桁です。",
+      "choiceReasons": [
+        "26³=17,576で必要人数13,824を上回り、最小です。",
+        "4桁も十分ですが、3桁で足りるので最少ではありません。",
+        "5桁は必要数を大幅に超え、最少ではありません。",
+        "6桁は必要数を大幅に超え、最少ではありません。"
+      ],
+      "takeaway": "複利の増加を計算し、文字種類数の累乗でコード容量と比較する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "毎年2割増は1.2倍です。現在人数に何回掛けるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "必要人数と26²、26³、26⁴を比べ、初めて必要数以上になる桁を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "8,000×1.2³と26³を計算し、2桁では足りないことも確かめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6caab5cc16588aec52eb17ce0d077737129cfc4260d18c97dba47b1f45d07dd8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q26",
+      "summary": "エ。トップから現在位置までの経路はパンくずリストです。",
+      "explanation": "パンくずリストは「ホーム > 分類 > 現在のページ」のように階層上の位置を示します。サイト全体の構造図や主要ページへのメニューとは異なり、現在位置へ至る経路を表示します。",
+      "choiceReasons": [
+        "サイトマップはサイト全体のページ構成を一覧化します。",
+        "スクロールバーは表示範囲を移動する操作部品です。",
+        "ナビゲーションバーは主要な移動先を並べるメニューです。",
+        "トップから現在ページまでの経路を表示する部品です。"
+      ],
+      "takeaway": "現在位置の階層経路と、全体構造や移動先メニューを区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "現在のページに表示する情報です。サイト全体の一覧なのか、トップから現在位置までの経路なのか、示す範囲を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "現在のページがサイトのどの階層にあるか、トップから順に示す部品を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "その経路表示をパンくずリストと呼びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d63bc39cb97faf6d60478241fda388905d7ec20528108595c809bc7d94bab8c6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q24",
+      "summary": "ウ。利用者による思考発話法と、専門家によるヒューリスティック評価法の組合せです。",
+      "explanation": "思考発話法では利用者が実際に操作しながら考えていることを話し、観察者が迷いなどを調べます。ヒューリスティック評価法は専門家が経験則や評価原則に照らして問題点を見つけます。回顧法も利用者に操作後の考えを尋ねる方法で、認知的ウォークスルーは通常専門家が操作過程を検討する方法です。",
+      "choiceReasons": [
+        "アンケートは利用者が参加しますが、回顧法も利用者の経験を尋ねるので専門家だけの手法ではありません。",
+        "回顧法は利用者参加ですが、思考発話法も利用者に考えを話してもらう方法です。",
+        "思考発話法は利用者参加、ヒューリスティック評価法は専門家による評価なので適切です。",
+        "認知的ウォークスルーは通常、専門家が利用者の操作を想定して検討するので、左欄の区分が不適切です。"
+      ],
+      "takeaway": "思考発話・回顧・アンケートは利用者から情報を得る。ヒューリスティック評価は専門家が原則で検査する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の左欄は利用者参加、右欄は専門家だけです。各手法が誰から情報を得るかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "思考発話は利用者が操作中に考えを話す方法、回顧は利用者が後から振り返る方法です。どちらも利用者が必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "思考発話法を左欄、専門家が評価原則に照らすヒューリスティック評価法を右欄に置く組合せを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "16a78e781ccd82bed99ef78ff30a062b167d55276b3002e26ce5e00aea45f3a3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q25",
+      "summary": "ア。レイトレーシングは視点からの光線と物体の交点を求めて描画します。",
+      "explanation": "レイトレーシングは画素に対応する視線を追い、物体との交差を調べます。視点に最も近い交点を表面として、反射や透過などの性質を考慮して色を求めます。走査線ごとの面との交差計算、遠方からの重ね描き、深度をピクセルごとに保存する方法とは区別します。",
+      "choiceReasons": [
+        "視線と物体の交点を調べ、最も近い点を反射・透過も考慮して描く記述がレイトレーシングです。",
+        "走査線に対応する面と物体の交差を求めるのはスキャンライン法の説明です。",
+        "遠くの物体から順に重ね描きするのはペインタ法です。",
+        "ピクセルごとの最小深度を作業領域に保存するのはZバッファ法です。"
+      ],
+      "takeaway": "レイトレーシングは光線の追跡、Zバッファは画素ごとの深度比較、ペインタ法は遠方からの描画。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補ごとに、処理する単位が「視線」「走査線の面」「物体の描画順」「ピクセルの距離保存」のどれか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "レイは光線です。視点から一つの画素へ向かう線を延ばしたとき、どの物体の表面に最初に当たるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "視線と物体の交点を求め、視点に最も近い点を反射・透過も含めて計算する記述を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9f68fc93a407349b4e8e3f607a6b4eaf8cfad1ad3e23a1165ff6db866b5d6b20",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q25",
+      "summary": "イ。レンダリングは仮想世界の情報から表示画像を生成する処理です。",
+      "explanation": "仮想世界には物体の形状、位置、材質、光源、視点などの情報があります。レンダリングはこれらを使い、ディスプレイに表示できる画像へ変換します。\nセンサーから利用者の動きを得る処理、現実と仮想の座標を合わせる処理、物体の動きを計算する処理とは分けて考えます。",
+      "choiceReasons": [
+        "カメラや慣性センサーで現実の情報を認識する入力側の処理です。画像を生成するレンダリングではありません。",
+        "仮想世界の情報を描画可能な画像に変換する、レンダリングの説明です。",
+        "現実と仮想の座標を一致させる位置合わせの処理です。",
+        "物理法則に基づいて時間変化を計算するシミュレーションの説明です。"
+      ],
+      "takeaway": "レンダリングはモデルや光・視点の情報を画面用の画像へ変える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの処理は情報の認識、画像変換、座標合わせ、時間変化です。表示するための処理を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "3次元の物体や光源の情報は、そのままでは画面の画素ではありません。視点に応じて画素の画像へ変える工程を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "仮想世界の情報からディスプレイへ描画できる画像を作る説明がレンダリングです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9d4400f03b4ebcb7457358f388e1dc5d799e17804758ec1bb05419a3ff9b05d5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q24",
+      "summary": "ウのハンバーガーメニュー。三本線のアイコンからメニューを開きます。",
+      "explanation": "ハンバーガーメニューは、三本の横線のアイコンを選ぶと隠れていたナビゲーション項目が現れる仕組みです。画面が小さい場合に、常時表示の面積を節約できます。\n折り畳む階層や表示の出方を指す他の名称とは、三本線という目印で区別します。",
+      "choiceReasons": [
+        "アコーディオンは見出しを選ぶとその部分を展開・折り畳む形式です。",
+        "ドロップダウンは選択欄などから一覧が下へ開く形式です。",
+        "三本線アイコンを入口にメニューを開くハンバーガーメニューです。",
+        "ポップアップは操作に応じて一時的に浮かぶメニューで、三本線という入口の名称ではありません。"
+      ],
+      "takeaway": "三本線の入口はハンバーガーメニュー。展開形式とアイコンの名称を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文が挙げる入口は「三本線」です。表示項目が上下に伸びるかどうかより、入口の形を手掛かりにします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "三本の横線を、上下のパンと中央の具に見立てた呼び名があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "見出しごとの開閉、一覧の下への展開、一時的な浮上表示をそれぞれ思い浮かべ、三本線の呼び名と区別しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ae905bb9089aab78af00a0cb8733b2f67056c80e80a8e9eaa728b6725cf27a9b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q25",
+      "summary": "ウの25マイクロ秒。最高周波数20kHzの2倍で標本化します。",
+      "explanation": "標本化定理では、最高周波数fの信号を再現するための標本化周波数は少なくとも2fです。この信号の最高周波数は20kHzなので、最低40kHzで標本化します。\n周期は周波数の逆数だから、最大周期は1/40000秒=25マイクロ秒です。周期が長すぎると標本化周波数が不足します。",
+      "choiceReasons": [
+        "2.5マイクロ秒は400kHzの標本化に相当し、使えますが最大周期ではありません。",
+        "5マイクロ秒は200kHzに相当し、必要以上に短い周期です。",
+        "40kHzの逆数25マイクロ秒が求める最大周期です。",
+        "50マイクロ秒は20kHzであり、最高周波数の2倍という条件を満たしません。"
+      ],
+      "takeaway": "標本化周波数≧2×最高周波数。最大周期は必要最低周波数の逆数。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "帯域の上端20kHzが計算に使う最高周波数です。0〜20の幅をさらに足す必要はありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "標本化定理の2倍を20kHzへ適用し、必要最低の標本化周波数を出します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "周期=1/周波数を使い、秒を1000000倍してマイクロ秒へ直しましょう。最大周期なので最小の必要周波数を使います。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6f992f9fa8142e0af438abf43a51d127b06f16ae38ec08c4cbcb252c99a99898",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q25",
+      "summary": "イ。横方向へ順番に画像を切り替える要素はカルーセルです。",
+      "explanation": "カルーセルは、固定された表示領域に複数の画像やカードを並べ、矢印やスワイプ操作で順に切り替えるUIです。図の左右の矢印と現在位置を表す点が、その操作を示しています。\nアコーディオンは項目の展開・折畳み、タブは見出しによる内容の切替、モーダルウィンドウは前面の画面を操作して閉じるまで背景への操作を制限する要素です。",
+      "choiceReasons": [
+        "アコーディオンは内容を展開したり折り畳んだりする要素です。",
+        "左右へ画像を送り、固定領域に順次表示する要素はカルーセルです。",
+        "タブは見出しを選んで内容を切り替える要素で、図の左右送りとは異なります。",
+        "モーダルウィンドウは背景の操作を制限する前面のウィンドウで、横送りの画像列ではありません。"
+      ],
+      "takeaway": "UI名称は、展開、見出し切替、横送り、前面表示という操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の左右の三角矢印と、下の五つの点を見ます。内容を広げるのではなく、表示する位置を前後へ送る仕組みです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タブは見出しを選び、アコーディオンは見出しの下を開閉します。今回の図は複数画像を横へ送り出す操作です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "固定領域で画像やカードを順に横送りするUIをカルーセルと呼びます。イです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "156fd05ec08d9e40c59489a6215cad0243b783c33f8e18846b87fe2b0ee05320",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q26",
+      "summary": "エ。必要な帯域幅は約350Mビット/秒です。",
+      "explanation": "無圧縮なので、一画素の24ビットを画素数とフレーム数にそのまま掛けます。一フレームは800×600×24=11,520,000ビットです。\n毎秒30フレームでは11,520,000×30=345,600,000ビット/秒=345.6Mビット/秒となり、約350Mビット/秒です。24ビットは既にビット単位なので8倍や8分の1にする必要はありません。",
+      "choiceReasons": [
+        "350kビット/秒は必要な345.6Mビット/秒の約1/1000で、桁が不足します。",
+        "3.5Mビット/秒は必要な値の約1/100で、画素・色・フレーム数の積に合いません。",
+        "35Mビット/秒は必要な値の約1/10です。",
+        "800×600×24×30=345.6Mビット/秒なので約350Mビット/秒です。"
+      ],
+      "takeaway": "動画の帯域は横画素数×縦画素数×一画素のビット数×毎秒フレーム数。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず一枚の画素数800×600を求めます。「24ビットカラー」は一画素当たりの量です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一フレームの量は800×600×24ビットです。圧縮しない条件なので、この量を削減する係数は掛けません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "一フレームは11,520,000ビット。毎秒30枚なので30倍し、最後に10⁶で割ってMビット/秒へ直しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

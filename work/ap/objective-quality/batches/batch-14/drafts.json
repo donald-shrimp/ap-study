@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r05a-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8909854895fa940d613b931a2cec028453e2519b15f4fce6a202ca164e666b1b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q26",
+      "summary": "エ。ハッシュインデックスは利用者IDの完全一致検索に適します。",
+      "explanation": "ハッシュはキー値から格納先を計算するため、指定した値と等しいデータを探す等値検索に向きます。一方、大小順を保存しないため範囲検索や前方一致には適しません。\n売上金額の下限、今月の日付範囲、商品名の先頭文字列はB⁺木の順序を使う方が適切です。利用者ID=1001の等値条件がハッシュ向きです。",
+      "choiceReasons": [
+        "1万円以上という範囲検索です。値の順序を保持するB⁺木が適します。",
+        "今月の開始日から終了日までの日付範囲検索なのでB⁺木が適します。",
+        "DBで始まる前方一致検索は文字列の順序を使えます。全値からハッシュを求める方式は向きません。",
+        "利用者IDが1001と等しい条件なので、ハッシュから候補の格納先へ直接進めます。"
+      ],
+      "takeaway": "ハッシュは等値検索、B⁺木は等値に加えて範囲・前方一致にも向く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "検索条件を「以上」「今月」「で始まる」「1001と等しい」に分けます。完全なキー値が指定されているか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ハッシュ値はキーの大小順を保持しません。順にたどる必要がある条件と、一つの値を探す条件を区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1001という利用者ID全体から格納先を求める検索を考えます。これは範囲ではなく等値検索です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dd91ae61517724f5ef3a9c78aca9761d9e39e5625e702ab3b5f8d6dfa6b98b93",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q27",
+      "summary": "エ。利用者IDが1001と等しい検索はハッシュ索引に適します。",
+      "explanation": "ハッシュインデックスはキーをハッシュ関数に通して格納位置を求めるため、指定した値との等価検索に適します。大小や文字列の順序を保たないので、範囲や前方一致の検索には不向きです。\n利用者IDが1001という等価条件のエが適切です。年月日の「今月」は複数の日付にまたがる範囲になります。",
+      "choiceReasons": [
+        "1万円以上という範囲条件は、キー順にたどれるB+木の方が適します。",
+        "今月という日付の範囲を探すので、順序をもつB+木の方が適します。",
+        "DBで始まる前方一致は、文字列の順序を利用する検索で、ハッシュでは直接まとめて探せません。",
+        "単一の利用者IDとの等価条件は、ハッシュから格納位置を求める検索に適します。"
+      ],
+      "takeaway": "ハッシュは等価検索、B+木は等価に加えて範囲・前方一致にも向く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの条件を「一つの値と同じ」と「複数の値の範囲」に分けます。「今月」は月内の複数日です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ハッシュ値は元の値の大小順を保ちません。ある金額以上やDBで始まる文字列を連続してたどれない点を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "年月日、商品名、金額の条件には幅があります。特定のID値一つをそのままキーにできる条件を確認しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5c400786ed97f4f1d47213000a4a450985d0765addb5b689494c8a3a42827ab4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q28",
+      "summary": "ア。ビューの列には、基表と異なる列名を付けられます。",
+      "explanation": "ビューは問合せ結果を表のように扱う仕組みで、定義時に列名を指定したり別名を付けたりできます。例えば基表のpriceをビューで売価と名付けられます。\n列だけでなくWHERE条件で行を絞り、UNIONで和を表すこともできます。一方、結合など複雑なビューを常に更新できるとは限りません。",
+      "choiceReasons": [
+        "ビューの列名を基表と異なる名称で定義できるので正しいです。",
+        "WHEREなどで条件を満たす行だけのビューを定義できます。",
+        "結合ビューの更新可否には制限があります。結合の仕方によらず常に更新可能という説明は誤りです。",
+        "和両立な表のUNIONを使ってビューを定義することもできます。"
+      ],
+      "takeaway": "ビューは列の別名、行の抽出、結合・集合演算を使えるが、更新には制限がある。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ビューはSELECT文を表として扱うものと考えます。SELECTで列に別名を付けられるかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "SELECTにはWHEREやUNIONも使えます。それらを使った結果をビューとして扱う場合を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「行を抜き出せない」「結合なら必ず更新できる」「和集合では作れない」という断定を、SELECTの機能や更新制限と照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6ac39716ef5af85b6a16fa151c55efaf1903c81466ed0cf1b01a259a8ed8b833",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q27",
+      "summary": "ア。インデックスの定義は、物理的な格納・アクセスを扱う内部スキーマに含まれます。",
+      "explanation": "ANSI/SPARCの3層スキーマでは、外部スキーマは利用者ごとの見え方、概念スキーマはデータ全体の論理構造、内部スキーマは格納方法やアクセス経路を表します。SQL問合せを速めるインデックスはアクセス経路に関する定義であり、内部スキーマの設計です。",
+      "choiceReasons": [
+        "検索を高速化するインデックスは物理的なアクセス経路の定義なので内部スキーマです。",
+        "エンティティ間の関連を表すE-Rモデルは論理構造に関する概念スキーマの設計です。",
+        "一意性制約や参照制約はデータの論理的な整合性条件で、概念スキーマに関係します。",
+        "正規化は論理的なデータ構造を整理する概念スキーマの設計です。"
+      ],
+      "takeaway": "内部スキーマは格納・索引、概念スキーマは論理構造・制約、外部スキーマは利用者の見え方。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補を「論理的に何を表すか」と「実際にどう格納・検索するか」に分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "内部スキーマは物理的なデータ配置やアクセス経路の層です。関連や制約の定義と、検索を速める構造を区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "問合せ応答時間を改善するインデックスは、検索のアクセス経路なので内部スキーマに含まれます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "561c68144ecebfd586e22efdfe23ebaeb7fab02fd6a6cb595c01a70d0ec67973",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q27",
+      "summary": "イ。参加者が可否を返した後、最終決定を受け取る前の障害で判断を待ちます。",
+      "explanation": "2相コミットでは、まず調停者が各参加者へコミット可能かを問い合わせ、全員の応答を集めて、次にコミットまたはロールバックの決定を通知します。\nコミット可能と答えた参加者は、他の参加者の応答や調停者の最終決定を知らないため、勝手に確定も取消しもできません。調停者が最終決定を送る直前に通信障害となるイが、この判断待ちを生じさせます。",
+      "choiceReasons": [
+        "問い合わせ前なら参加者はコミットへの合意を返しておらず、最終決定待ちの状態には入りません。",
+        "可否の応答後に最終決定が届かなくなると、参加者はコミットかロールバックかを判断できなくなります。",
+        "可否の応答を返す前の障害は、応答済みの参加者が最終決定を待つという状況とは異なります。",
+        "完了の応答を返す直前には最終決定を受けて処理しており、どちらを行うかは既に分かっています。"
+      ],
+      "takeaway": "2相コミットの判断待ちは、コミット可能の応答から最終決定の受信までの間に起こる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "手順を「問い合わせ→可否の応答→最終決定の通知→完了応答」と並べます。コミットか取消しかを知るのは最終決定の通知です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "自分がコミット可能でも、別の参加者が不可と答えるかもしれません。可否を返した後は調停者の決定を待つ必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最終決定を送る直前なら、参加者には可否の問い合わせと応答は済んでいますが、確定か取消しかの通知が届きません。イです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c1c3d8c95d0373d3fdbce8b0f3d8c2a59b89e5661f91272be7a771c0302aacf4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q28",
+      "summary": "イ。受注番号だけに依存する属性があるため第2正規形ではありません。",
+      "explanation": "各セルが単一値なので第1正規形です。明細のキーは受注番号と項番の組です。受注日・得意先コードは受注番号だけで決まり、複合キーの一部への部分関数従属があります。したがって第2正規形ではありません。さらに商品コード→単価という従属もありますが、まず第2正規形の要件を満たさないため、第3正規形にもなりません。",
+      "choiceReasons": [
+        "各セルは単一値で繰返し項目を一つのセルに持たないので、第1正規形です。",
+        "複合キー(受注番号,項番)の一部で受注日・得意先コードが決まるため、第2正規形ではありません。",
+        "部分関数従属が残るため、第2正規形であるという前提が誤りです。",
+        "第2正規形の要件を満たさず、商品コードから単価への従属もあるため第3正規形ではありません。"
+      ],
+      "takeaway": "複合キーの一部だけで決まる非キー属性があれば、第2正規形でない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "明細を一行に特定するには受注番号だけで足りるか確認し、項番と組み合わせてキーを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "第2正規形には、非キー属性が複合キーの一部だけに依存しないことが必要です。受注日や得意先コードは項番が変わっても同じ受注なら変わりません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "受注日・得意先コードが受注番号だけに従属するので、第1正規形だが第2正規形でない表です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4fff4f98599fce1fa088017cdc79e77f530c980897a3ce888a174b525e8069bf",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q26",
+      "summary": "イ。値の範囲の違いは、この命名規約だけでは防げません。",
+      "explanation": "規約(1)は末尾の区分語とデータ型を一致させ、(2)は名称と意味の辞書で同義語・異義語を整理します。どちらも値の許容範囲をテーブル間で統一する規約ではないので、受注金額の範囲差は回避できません。",
+      "choiceReasons": [
+        "年月日という区分語にデータ型を定める(1)で、日付型と文字列型の混在を防げます。",
+        "同名項目の取り得る値の範囲は規約で定めていません。",
+        "同じ意味の賞与金額とボーナス金額は辞書を使う(2)で統一できます。",
+        "取引先の区分が不明な名称は、コード・名などを付ける(1)で区別できます。"
+      ],
+      "takeaway": "名前・型・意味の統一と、値域の統一は別の規約。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "規約(1)(2)が直接定める対象を、名前・型・意味に分けて線を引きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各選択肢の問題が、その対象のどれかに含まれるかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "受注金額が0以上か上限が何円かという値域は、命名と型だけでは統一できません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "95a1a5b90fd3bde0b5b61b637b5951e8e8d95fa1f3c8b62393bb35510da4553a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q26",
+      "summary": "構造が異なるJSONを商品単位で保存するドキュメントDBが適切です。",
+      "explanation": "図1は品名や関連商品idの配列をもち、価格は文字列です。図2は商品名、生産地、画像URLをもち、価格は数値です。今後の項目も予測できず、検索キーを限定しないため、固定列を前提とする表より、各JSONを一つのドキュメントとして格納して任意の項目を検索できる方式が合います。ウです。",
+      "choiceReasons": [
+        "項目名から値への2階層だけでは、どの商品に属する値かや配列を含む構造を商品単位のまま表せません。",
+        "項目名の集合と値の集合だけでは個々の項目と値の対応が表せず、商品の関係も適切にモデル化できません。",
+        "商品ごとに異なる項目や配列を含む構造を一つのドキュメントとして格納できます。",
+        "項目を個別の列として先に定義する方式では、予測できない項目追加に表定義の変更が必要です。"
+      ],
+      "takeaway": "異種・可変構造のJSONをその単位で保持するにはドキュメントDBを考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図1と図2は項目名、項目数、価格の型、配列の有無が違います。取得元も今後変わります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "商品全体の項目と値の対応を保ち、事前の固定列に縛られず検索できる保存単位を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "各JSONを丸ごと一つのドキュメントとして保存すれば、商品ごとに違う構造を保持できます。この方式の候補を見ます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "10aeea41eaa78ffbf86791cf78ee72a7711121faf070865a224e16723124ac67",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q27",
+      "summary": "ア。外部キーは関係の候補キーを参照する属性の組です。",
+      "explanation": "外部キーは、ある関係の候補キーを参照する属性または属性の組です。たとえば注文表の顧客番号が顧客表の顧客番号を参照する場合、注文表の顧客番号が外部キーになります。\n参照先の候補キーは行を一意に識別しますが、参照元の外部キー値は複数の注文で重複しても構いません。",
+      "choiceReasons": [
+        "候補キーを参照する属性または属性の組という外部キーの説明です。",
+        "行を一意に識別できるキーのうち主キー以外のものを述べており、参照関係を示しません。",
+        "一意識別に必要な最小の属性組である候補キーの説明です。",
+        "一意に識別できる属性組に余分な属性を加えてもよい、スーパーキーに関する説明です。"
+      ],
+      "takeaway": "外部キーは自分の行の識別ではなく、候補キーへの参照を表す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢には「参照」と「タプルを一意に識別」の二つの観点があります。外部キーが担う関係を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "注文の顧客番号から顧客表の行を指す例を考えます。同じ顧客の注文が複数あっても、その番号は使えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "外部キーは参照先の候補キーに対応する属性組です。「候補キーを参照」と書かれた説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1a1d71ab232d40f9a732fb40f0bc2790f8ecd38d4c3970482b52a0cb55a8daee",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q26",
+      "summary": "ウ。倉庫ごとの在庫数をSUMし、在庫行のない部品は0として判定します。",
+      "explanation": "P01は二つの倉庫に90ずつあるので総在庫は180。発注点100より多く、「不要」となります。MINなら90を使って「必要」にしてしまいます。\nP03は在庫行がなく、LEFT OUTER JOINの在庫側がNULLになります。SUMの結果もNULLなのでCOALESCEで0に変えると100>0が真で「必要」です。P02は150>150が偽で「不要」。全結果に合うのはCOALESCE(SUM(在庫.在庫数),0)です。",
+      "choiceReasons": [
+        "アはP01をMIN=90として必要にしてしまいます。複数倉庫の合計が必要です。",
+        "イはP01が誤るうえ、P03のNULLを0へ置き換えません。",
+        "ウはP01を180、P03を0として、結果表と一致します。",
+        "エはP03のSUMがNULLのままです。100>NULLは真にならず、CASEのELSEで不要になります。"
+      ],
+      "takeaway": "外部結合後の集計は、複数行の合計と一致行がない場合のNULLを両方確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "結果が不要のP01には、在庫が90の行が二つあります。一倉庫の最小値と総在庫を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "P01を発注点100以上にするには90+90の合計が必要です。次に在庫に行がないP03の集計結果を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "P03の集計結果がNULLのままだと100>NULLは真になりません。「必要」にするにはNULLを在庫なしの0へ置き換えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1fb6551987bfeb8d6fda441bad964214093d28900dd91d8ef2714f452b1181dc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q28",
+      "summary": "イ。Rから、Rにだけある部分を除くと共通部分になる。",
+      "explanation": "R−Sは「RにはあるがSにはない」要素の集合。これをRから取り除けば、RにもSにもある要素だけが残るので、R−(R−S)=R∩S。\n\n例えばR={1,2}、S={2,3}なら共通部分は{2}。R−S={1}なのでイは{1,2}−{1}={2}となる。和両立とは和集合等の演算ができるように属性の数・対応する型などが整っていること。",
+      "choiceReasons": [
+        "(R−S)と(S−R)は重ならないので、結果はR−S。例では{1}で共通部分ではない。",
+        "RからRだけにある部分を除くので、共通部分が残る。",
+        "S−RはRと重ならないので、Rから除いてもRのまま。例では{1,2}。",
+        "R−SはSと重ならないので、Sから除いてもSのまま。例では{2,3}。"
+      ],
+      "takeaway": "差集合の括弧は内側から計算し、残したい領域を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "∩は両方にある要素。R={1,2}、S={2,3}として、目標の集合を先に書く。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まずR−SとS−Rをそれぞれ求める。この二つは互いに重ならず、片方はS、もう片方はRとも重ならない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "各選択肢の括弧内を先に計算する。Rから「Rにだけある要素」を除く式なら、目標の共通部分だけが残る。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f2b7779ecd7034cb5157e149efb20e3079fc6736a880d95c9b1cf18914bed2b4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q28",
+      "summary": "ウ。重複を除くと仕入先コードは3種類です。",
+      "explanation": "各商品の販売単価−仕入単価は順に200,200,100,900,400,200,300,500,500,300です。合計3,600、10商品なので平均360。これより大きいのはD,E,H,Iで、仕入先はS1,S1,S4,S5です。DISTINCTで重複するS1を一つにするので3種類です。",
+      "choiceReasons": [
+        "平均超過の仕入先はS1だけではなくS4,S5もあります。",
+        "S1の重複を取り除いてもS4,S5を合わせ3種類です。",
+        "平均360を超える4商品の仕入先を重複除去すると3種類です。",
+        "条件に合う商品行は4件ですが、DISTINCTによりS1の重複を除きます。"
+      ],
+      "takeaway": "WHEREで行を絞った後、SELECT DISTINCTで選択列の重複を除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の各行で販売単価から仕入単価を引き、十個の差をメモします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "最初のA001では1,000−800=200です。同様に全10商品の差を足し、10で割ってAVGを求めます。副問合せにGROUP BYがないので、仕入先別でなく全商品の平均です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平均360より大きいD,E,H,Iの仕入先を並べ、同じS1を一つにまとめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "548c92ac1c88f52eb9e4f3987f1bdd731b56fa0a4648b06a27a4fdb664f9065c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q29",
+      "summary": "部門にも社員にも所属履歴が1件以上必要なので、a,bは1..*です。",
+      "explanation": "aは一つの部門に対応する所属履歴の件数です。部門には1人以上の社員が所属し、その所属を履歴として記録するため、最低1件で上限は複数です。bは一人の社員に対応する履歴の件数です。社員はいずれかの部門に必ず所属し、異動により複数の履歴を持ち得るため、こちらも1..*です。エになります。",
+      "choiceReasons": [
+        "a,bとも0件を許しますが、部門も社員も所属が必須です。",
+        "aが0件を許すため、1人以上が所属する部門の条件を満たしません。",
+        "bが0件を許すため、必ず部門に所属する社員の条件を満たしません。",
+        "両側の履歴件数が最低1件、上限は複数で条件に合います。"
+      ],
+      "takeaway": "多重度は反対側の一つに対して何件あるか、最小と最大を別に読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "a,bは所属履歴側に書かれています。部門1件、社員1件に対する履歴数を読んでいます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "条件(1)(2)から履歴が0件でもよいかを判断し、異動などで複数件を持てるかを別に考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "社員は必ずどこかに所属し、部門にも必ず社員がいます。この最低件数をa,bの先頭の数へ当てはめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f1a04aafb0ec0a15d6e2337e469b600f3a1d804faf24976fd839a827e80e69c3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q28",
+      "summary": "ア。単一表の行と列を選ぶだけなので基底表へ更新を対応させられます。",
+      "explanation": "アは商品表から商品単価>1000の行を選び、商品番号・商品名・商品単価をそのまま表示します。ビューの値と元の行・列の対応が明確なので更新できます。\nDISTINCTによる重複排除やSUM・AVGの集約は、表示値が複数の元行からできることがあります。その値を変えても、どの元行をどう変更するか一意に対応しません。",
+      "choiceReasons": [
+        "単一基底表の直接の列を、WHEREで絞るだけです。元の行への対応が保たれ、更新可能です。",
+        "DISTINCTで複数の元行を一つの値へまとめるため、通常の更新可能ビューの条件を満たしません。",
+        "GROUP BYとSUMで受注を集約しています。合計値を直接元の一行へ対応させられません。",
+        "AVGで全受注の平均を一つの値にしています。平均値の変更を元の行の変更に一意に対応させられません。"
+      ],
+      "takeaway": "更新可能ビューは表示する行・列が元の行・列へ直接対応するか確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各SELECTにDISTINCT、SUM、GROUP BY、AVGが含まれるか印を付けます。単に行を絞るWHEREとの違いを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ビューの一つの値を更新したとき、どの基底表の行を変えるか決められる必要があります。複数行をまとめた値でないか調べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アのSELECTは商品表の三列をそのまま取得し、単価条件で行を選ぶだけです。ほかの候補の重複排除・集約と比較しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fadce9daa9bff33bbb66ec4d670a9e39d3dde12921c527f6ef30c46afc1663d5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q24",
+      "summary": "エ。行ごとに列を柔軟に持てるワイドカラムモデル。",
+      "explanation": "問題の決め手は「行ごとに任意の列数」「列ごとに複数の値」。ワイドカラムモデルは行キーと列の組合せでデータを管理し、行ごとに異なる列を持つなど柔軟に格納できる。\n\nグラフはノードとエッジ、ドキュメントはJSON等の文書単位、リレーショナルは定義された表の列を中心に表す。大量のIoTという用途だけではモデルを特定できないため、格納構造で選ぶ。",
+      "choiceReasons": [
+        "グラフはデータ間の関係をノードとエッジで表す。",
+        "ドキュメントは文書単位の入れ子構造などで表す。問題は行と列を明示している。",
+        "リレーショナルは表に定義した列を使う。行ごとに任意の列を持つという特徴ではない。",
+        "ワイドカラムは柔軟な列構成を持つ行でデータを格納する。"
+      ],
+      "takeaway": "NoSQLの分類は用途よりも、文書・関係・行と列という保存構造で判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "IoTや大量という言葉だけでは決めない。「行」と「列」の柔軟さが、この問題のモデルを特定する条件。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "グラフならノードとエッジ、ドキュメントなら文書、通常の関係表ならあらかじめ定義した列。どれが問題の構造に合うか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "列（column）を行ごとに柔軟に広げて持つモデルの名称を、残る選択肢の語から確認する。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "327f44c3893fe8f4e6b8a58f150dbfcc34cdb1c9387363ddd34b59703364a6bc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q29",
+      "summary": "イ。期ごとのSELECT結果をUNIONで縦に連結します。",
+      "explanation": "第1期のSELECTで(部門コード,第1期,第1期売上)を3行、第2期のSELECTで(部門コード,第2期,第2期売上)を3行作ります。この二つをUNIONで縦に集め、ORDER BY部門コード,期で並べると、指定された6行になります。期の文字列が違うので、UNIONの重複除去によってこの6行が減ることもありません。",
+      "choiceReasons": [
+        "INTERSECTは共通行だけ残します。期の値が必ず異なるため共通行はなく、結果は0行です。",
+        "同じ3列の二つの結果をUNIONで集め、部門コード・期の順に並べるので指定の6行になります。",
+        "CROSS JOINでは3×3=9組を作り、SELECTする期はすべて第1期なので指定の結果になりません。",
+        "部門コードでINNER JOINすると3組となり、SELECTする期は第1期のままなので第2期の行を出せません。"
+      ],
+      "takeaway": "列を期ごとの行に展開するときは、同じ列構成のSELECT結果をUNIONする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "結果では各部門が第1期と第2期の2行になっています。横の2列を、同じ3列構成の二つのSELECTに分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ列構成の結果を縦に追加する集合演算と、行どうしを横に結ぶJOINを区別します。期の文字列が違えば共通行にもなりません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "第1期の3行と第2期の3行をUNIONで集めて並べるイが、指定の6行を作ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4fd9b2640b96af42ed3c67239109d5ea78e229c56990c0a2d403b04c9968554f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q28",
+      "summary": "ウ。第1正規形はc、第2正規形はa、第3正規形はbです。",
+      "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
+      "choiceReasons": [
+        "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
+        "第3のbは正しいですが、第1のaと第2のcが入れ替わっています。",
+        "第1=c、第2=a、第3=bで、各段階の特徴に一致します。",
+        "第1のcは正しいですが、第2のbと第3のaが入れ替わっています。"
+      ],
+      "takeaway": "正規化は繰返し→部分関数従属→推移的関数従属の順に除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "aの「主キーの真部分集合」、bの「推移的」、cの「繰返し」に注目し、それぞれ除く問題を区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "正規化はまず属性を単一値にし、その後に主キーの一部への依存、さらに別の非キー属性を介する依存を整理します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "繰返しをなくすcが第1、部分への依存をなくすaが第2、推移的依存をなくすbが第3です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fea1fd6459afae8f98d5ef99e5030b1019209f6742ded19e78b73e8aacc5f13f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q29",
+      "summary": "ア。a顧客、b注文、c注文明細、d商品です。",
+      "explanation": "一人の顧客が複数注文を出すのでa=顧客,b=注文です。一注文が複数明細を持つためc=注文明細です。各明細は一種類の商品に対応し、同じ商品が複数明細に現れるのでd=商品となります。",
+      "choiceReasons": [
+        "顧客1→注文多、注文1→明細多、商品1→明細多の条件を全て満たします。",
+        "商品1→注文多、顧客1→明細多になり、注文の所有者の条件が表せません。",
+        "注文1→注文明細多は一部合いますが、その後が明細1→顧客多となって不適切です。",
+        "明細1→商品多となり、各明細が一種類の商品という条件に反します。"
+      ],
+      "takeaway": "多重度は関係先の個数を読み、文中の一対多と対応させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図のa側1、b側*を「一つのaに複数のb」と読み直します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "何度も注文する主体をaへ置き、注文に複数含まれる記録をcへ置きます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "顧客→注文→注文明細←商品の一対多を作るのでアです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3aaf1141bbb9ef21dfb87366afddff98dfc9cf3ffd6a802339928e16a5aade7e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q26",
+      "summary": "イ。非キー属性間の依存を分けて、推移的関数従属を取り除く。",
+      "explanation": "第2正規形では、複合候補キーの一部分だけで非キー属性が決まる部分関数従属は取り除かれている。第3正規形へ進めるときは、キー→非キー属性→別の非キー属性という推移的関数従属を分解する。\n\n例えば社員番号→部署番号→部署名なら、社員表から部署名を分け、部署番号と部署名を部署表にする。問題の選択肢では非キー属性間の関数従属を分解するイが該当する。厳密な定義では各関数従属の決定項や候補キーへの所属も確認する。",
+      "choiceReasons": [
+        "非キー属性から候補キーの一部への依存という逆方向で、第3正規形への通常の手順を示していない。",
+        "非キー属性間の依存を分け、キーからの推移的な依存を解消する。",
+        "キーの一部→非キー属性の分解は、第1正規形から第2正規形への手順。",
+        "一つの属性を単一の値にするのは、第1正規形にする段階。"
+      ],
+      "takeaway": "第1正規形は値を単一に、第2は部分依存、第3は推移的依存を解消する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "既に第2正規形なので、キーの一部分にだけ依存する問題は解決済み。次に残る依存を考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "社員番号→部署番号→部署名では、部署名は部署番号を経由して決まる。部署番号と部署名を別表へ分けると更新の重複がなくなる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この例で分解しているのはキーの一部との依存か、非キー属性同士の依存か。選択肢の矢印の向きも確認する。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e822991626e99d128cd380191782de7310751ede349ea8b8d5010512278d8521",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q28",
+      "summary": "ウ。顧客の購入に日付がないので、購入者数の日別差異を求められません。",
+      "explanation": "商品ごとの日別販売数量は、日付を持つ販売代理店別日別販売表から集計できます。性別ごとの売れ筋は、商品購入表の顧客IDで顧客表と結合し、性別・商品IDごとに購入数量を集計できます。\nしかし商品購入表には日付がなく、日別販売表には顧客IDがありません。同じ代理店と商品の行を結合しても個々の購入日を特定できないので、代理店ごとの購入者数を日別には数えられません。",
+      "choiceReasons": [
+        "日別販売表の日付、商品ID、販売数量を使い、商品ごとの日別数量を比較できます。",
+        "顧客表と商品購入表を顧客IDで結合して、性別ごとの商品購入数量を集計できます。",
+        "購入者の顧客IDと日付を結び付ける情報がないため、代理店別の購入者数を日別に集計できません。",
+        "代理店IDと商品IDで数量を集計すれば、代理店ごとの売れ筋を求められます。"
+      ],
+      "takeaway": "集計したい単位を結び付ける列があるか確認する。数量だけでは購入者数は分からない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "三つの表で日付があるのは「販売代理店別日別販売」だけです。この表に購入した顧客IDがあるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "「商品購入」には顧客IDがありますが、購入日がありません。代理店IDと商品IDが一致しても、複数日のどの日の購入かは決められません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "日付と購入者を結び付けられないので、日別の購入者数を問うウが取得できない情報です。商品の日別数量とは区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

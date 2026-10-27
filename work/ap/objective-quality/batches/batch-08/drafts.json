@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r07h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ec0e736af8dec7458f151e59db1a67f95e983c70fd425b953f76ff5af3bb6c19",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q17",
+      "summary": "エ。SwaggerはOpenAPIによるAPI定義・開発を支援する。",
+      "explanation": "OpenAPIは、APIのパス、操作、要求・応答の形式などを機械的に読める形で記述する仕様。Swaggerはその定義を作るエディタ、ドキュメント表示、コード生成などのツール群として知られる。\n\ncurlはHTTPなどで通信するコマンド、OpenAMは認証・アクセス管理、Serverspecはサーバ構成を検証するテスト用ツール。単にAPIへアクセスできることと、OpenAPI定義の開発支援は区別する。",
+      "choiceReasons": [
+        "curlは通信・転送用のコマンド。OpenAPI定義を編集・可視化するツール群ではない。",
+        "OpenAMは認証やシングルサインオンなどのアクセス管理。",
+        "Serverspecはサーバの設定・状態を検証するためのテスト用ツール。",
+        "SwaggerはOpenAPI定義の編集、表示、コード生成などを支援する。"
+      ],
+      "takeaway": "OpenAPIはAPIの記述仕様、Swaggerはそれを扱うツール群。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われているのはHTTP通信を行うだけの道具ではなく、APIの定義を作成・表示する開発支援。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "curlは通信コマンド、OpenAMは認証管理、Serverspecはサーバ構成のテスト。まずこの三つの役割を対応させる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Swagger EditorやSwagger UIを思い出す。OpenAPI定義の編集や、定義からのドキュメント表示を行う。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0664fe6ee04849c149077a219da6916038590bdeb7c1ced469d59eb830dad88d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q15",
+      "summary": "エ。ちょうど1台が稼働する確率は0.46です。",
+      "explanation": "一方だけ稼働する場合は、1台目が稼働して2台目が故障する場合と、その逆の二つです。独立なので、それぞれ0.7×(1−0.6)=0.28、(1−0.7)×0.6=0.18です。互いに重ならないため足し、0.28+0.18=0.46となります。",
+      "choiceReasons": [
+        "0.18は1台目が故障し2台目が稼働する場合だけの確率です。",
+        "0.28は1台目が稼働し2台目が故障する場合だけの確率です。",
+        "0.42は両方が稼働する確率0.7×0.6です。",
+        "一方だけ稼働する二つの場合を足すと0.46になります。"
+      ],
+      "takeaway": "「ちょうど一つ」は一方成功・他方失敗の二つの排他的な場合を足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「いずれか一方が稼働していて、他方が故障」は両方稼働を含みません。二つのプリンタの状態を表にします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "独立なので2台の同時状態は掛け算です。まず1台目だけ稼働する場合を0.7×(1−0.6)と書きます。次に1台目が故障し2台目が稼働する場合も作り、重ならない2場合を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "0.7×0.4+0.3×0.6=0.28+0.18=0.46です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "558c1da77cc1b9d3f4665aaa98b86d076560465ce3953e6398c020fa5dc7fc75",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q19",
+      "summary": "エのLRU。最終参照時刻が最も古いC2を置換します。",
+      "explanation": "LRUは最後に使ってから最も長く経過したブロックを置換します。最終参照時刻はC0が0:08、C1が0:06、C2が0:05、C3が0:10なので、最も古いC2です。\nロード時刻を使うFIFOやLIFO、回数を使うLFUとは、比較する列が異なります。",
+      "choiceReasons": [
+        "FIFOは最も早くロードしたC0を置換します。",
+        "LFUは参照回数が最小のC1を置換します。",
+        "LIFOは最後にロードしたC3を置換します。",
+        "LRUは最終参照時刻が最も古い0:05のC2を置換します。"
+      ],
+      "takeaway": "置換方式ごとに見る列を変える。LRUは最終参照時刻。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "C2のロード時刻0:04、最終参照0:05、参照回数3を別々に見ます。どの列で端の値になるでしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ロード時刻の最小はC0、最大はC3、参照回数の最小はC1です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最終参照時刻0:08,0:06,0:05,0:10を古い順に並べます。その列を基準に置換する方式名を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "915d741bd2209fc388d4a609f0399fd954f305048eb894165a12a22337ae6a70",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q14",
+      "summary": "イ。現在を測定・監視し、将来も必要な応答性能を維持するために計画します。",
+      "explanation": "キャパシティプランニングは、利用量の増加など将来の需要を見込み、必要な処理能力や資源を計画する活動です。現在の性能や利用状況の測定・監視は、その判断材料になります。\n現在のボトルネック解消やチューニングだけを目的にする説明より、将来を含めて応答時間を維持するイが適切です。",
+      "choiceReasons": [
+        "一つのボトルネックの改善に限定した説明で、将来の需要を踏まえる計画の目的を十分表していません。",
+        "現在を調査・監視し、将来を含む必要性能を維持する目的に合います。",
+        "現状の能力を最大限引き出す性能チューニングの説明です。",
+        "特定資源の利用効率改善だけに限定しており、需要と必要容量を計画する目的とは異なります。"
+      ],
+      "takeaway": "現在の測定を使い、将来の需要に応じた容量と性能を計画する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問は今ある資源の調整技法ではなく、キャパシティを「計画」する目的を問います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用者が来年2倍になっても応答時間を守るには、現在の負荷を測り、増強時期や必要容量を見積もります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "各候補の対象期間を比べます。「現状を最大化」「特定資源を改善」と、将来の応答性能まで扱う説明を区別しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "29c69cb3b2b1ad4396c45d83fa918ee02196d10619d7e3c56a468a49a6846684",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q14",
+      "summary": "ア。必要なプログラムやライブラリをまとめ、ホストOS上で隔離して動かします。",
+      "explanation": "コンテナ型仮想化はホストOSのカーネルを共有しながら、アプリケーションの実行環境を分離します。必要なプログラムやライブラリをコンテナにまとめられます。各環境が独立したゲストOSを起動する仮想マシン方式や、画面だけをクライアントに転送する方式とは異なります。",
+      "choiceReasons": [
+        "ホストOSを使いつつアプリケーションと依存物をまとめて分離実行するコンテナの説明です。",
+        "複数のゲストOSを仮想化ソフトウェア上で動かす仮想マシン方式です。",
+        "サーバ側で実行し画面と操作情報を転送するシンクライアント方式の説明です。",
+        "ホストOS上の仮想化ソフトウェアでゲストOSを動かすホスト型仮想化です。"
+      ],
+      "takeaway": "コンテナはホストのカーネルを共有し、アプリケーション環境を分離する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補でゲストOSを起動するか、アプリケーションだけをホストOSで動かすかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コンテナは環境ごとにOS全体を起動するのではなく、ホストのカーネルを共有して実行環境を隔離します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "プログラムやライブラリをまとめ、ホストOSで動かして独立性を保つ説明が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "feada766869f056450ee34624dfe127fdf9ce81d406d7e0f018255621d4b4572",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q20",
+      "summary": "コンテナの構築・実行・管理基盤を提供するのはDockerです。",
+      "explanation": "DockerはOSのカーネルを共有するコンテナ型仮想化を使い、アプリケーションと依存環境をイメージにまとめて構築・配布・実行できます。問題の「コンテナ型」「構築、実行、管理のプラットフォーム」に該当するOSSはDockerです。ほかの候補は主に仮想マシンを実現する仕組みです。",
+      "choiceReasons": [
+        "コンテナイメージの構築とコンテナの実行・管理を提供します。",
+        "KVMはLinuxカーネルを利用する仮想マシン用の仮想化機構です。",
+        "QEMUはCPUや周辺機器をエミュレートして仮想マシンを実行するソフトウェアです。",
+        "XenはゲストOSを動かすハイパーバイザで、コンテナ基盤の説明ではありません。"
+      ],
+      "takeaway": "コンテナはカーネルを共有し、仮想マシンはゲストOSを実行する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「コンテナ型」の環境でアプリケーションを構築するという条件が選別点です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アプリを依存環境ごとイメージ化し、そのイメージからコンテナを起動する基盤を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Dockerfileでイメージを構築し、そのイメージからコンテナを実行するOSSに対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "130cfeec089848306f6650a9d733dfaa022d093d03c2b4bfe57e92b96bc28303",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q20",
+      "summary": "ウ。最適化は解析を済ませ、コードを生成する前に行います。",
+      "explanation": "典型的なコンパイラは、字句解析で文字列をトークンへ分け、構文解析で文法上の構造を作り、意味解析で型などの整合性を確認します。その後、中間表現を最適化してから目的コードを生成します。\n選択肢の中で最も後なのは最適化です。コード生成自体は選択肢にありません。",
+      "choiceReasons": [
+        "意味解析は型や名前の整合性を確認する段階で、最適化より前です。",
+        "構文解析はトークン列の文法構造を調べ、意味解析より前に行います。",
+        "最適化は各解析で得た表現を改善し、コード生成前に行うので選択肢の中で最後です。",
+        "字句解析は文字列をトークンへ分ける最初の解析です。"
+      ],
+      "takeaway": "コンパイルの典型順は字句、構文、意味、最適化、コード生成。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ソースの「a＋1」を読むには、まず文字を名前・演算子・数値などのトークンへ分ける必要があります。字句解析が最初です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "トークンを式として組み立てる構文解析の後に、aと1を加えてよい型かを意味解析で確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "文法と意味の確認を終えた中間表現へ、無駄な計算の削除などを行うのが最適化です。その後コード生成へ進みます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bf8c51aa072b52d73c5e847ef8259d61064d605f0cef5c0c1a23218ce0c8673e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q15",
+      "summary": "ア。ネットワークが上限となり毎秒50件です。",
+      "explanation": "サーバは100MIPS=10⁸命令/秒、1件に10⁶命令なので100件/秒処理できます。ネットワークは1件2×10⁵バイト=1.6×10⁶ビットを転送するので、8×10⁷÷1.6×10⁶=50件/秒です。両方の処理が必要なので小さい能力50件/秒が上限です。",
+      "choiceReasons": [
+        "ネットワークの50件/秒がボトルネックです。",
+        "サーバだけの能力で、ネットワークの制約を考慮していません。",
+        "サーバの100件/秒もネットワークの50件/秒も超えています。",
+        "バイトをビットに換算せず8×10⁷÷2×10⁵とした値で、8倍過大です。"
+      ],
+      "takeaway": "各資源を同じ件/秒に換算し、最小値を選ぶ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "サーバの命令/秒とネットワークのビット/秒を、それぞれ1件当たりの量で割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送量はバイト、速度はビットなので、2×10⁵を8倍して単位をそろえます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバは10⁸/10⁶、ネットワークは8×10⁷/(8×2×10⁵)。小さい方が上限です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d9860ab969a8c85c9d2e4a6e9451311626b06d608e4d448f2752905e45652393",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q15",
+      "summary": "ア。ネットワークがボトルネックとなり、毎秒50件です。",
+      "explanation": "サーバは100MIPS=毎秒10⁸命令なので、1件10⁶命令の検索を毎秒100件処理できます。\nネットワークは1件当たり2×10⁵バイト×8=1.6×10⁶ビットを転送します。8×10⁷÷1.6×10⁶=50件/秒です。システムの処理量はサーバとネットワークのうち小さい方に制限されるため、50件/秒です。",
+      "choiceReasons": [
+        "サーバ100件/秒、ネットワーク50件/秒のうち小さい50件/秒が上限です。",
+        "100件/秒はサーバ単体の能力で、ネットワークの50件/秒を超えています。",
+        "サーバの100件/秒とネットワークの50件/秒のどちらも超えるため処理できません。",
+        "8倍のビット換算を省くとネットワークを400件/秒と誤算します。サーバ能力も超えています。"
+      ],
+      "takeaway": "各資源の処理能力を件/秒へそろえ、最小値をボトルネックとして選ぶ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1件の命令数は100万=10⁶、サーバは100MIPS=10⁸命令/秒です。まずサーバだけの件/秒を割算で求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送速度の単位はビット/秒です。1件の2×10⁵バイトを8倍してビットへ変換してから割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバ側は10⁸/10⁶、ネットワーク側は8×10⁷/(8×2×10⁵)です。両方の能力が必要なので、小さい方を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9ad66f1e42b840a7c5596e78b975c32a180d36841f3862ccc69a2d5e4b15ea38",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q17",
+      "summary": "ウ。複数スレッドから並行実行しても、正しい動作を保てる性質です。",
+      "explanation": "スレッドセーフとは、複数のスレッドが同時期に関数やデータを利用しても、競合による破損などを起こさず正しい結果を保てることです。\n共有データの更新をロックで保護するなどして実現します。一つのスレッドだけで動かすことや、競合後に停止することを意味しません。",
+      "choiceReasons": [
+        "複数スレッドからの呼出しを禁止する性質ではありません。並行利用時の正しさを指します。",
+        "単一スレッドでの動作に限定する説明で、スレッドセーフの性質とは異なります。",
+        "複数スレッドで並行実行しても問題が起きない説明が正しいです。",
+        "競合後の安全停止ではなく、競合しても正しい動作を保つよう設計する性質です。"
+      ],
+      "takeaway": "スレッドセーフは、並行利用を許しても動作の正しさを守る性質。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "同じ共有カウンターを二つのスレッドが更新する場面を考えます。更新の取りこぼしが起きるかが問題です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "排他制御などで同時更新を調整し、並行に呼ばれても結果が正しくなるようにします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「複数から呼ばせない」「一つだけで動かす」「停止する」と、複数から使っても正常に実行できる説明を比べましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a4660aac4f6ef7852e6ea697f93e0033b827f765668ac6948c08b898453a8dd7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q17",
+      "summary": "イ。セマフォでI²Cバスへのアクセスを排他制御します。",
+      "explanation": "二つのタスクが同じI²Cバスを同時に使うと、通信操作が競合するおそれがあります。共有資源であるバスを一度に一つのタスクだけが使えるよう、セマフォを取得してから通信し、終了後に解放します。キューやスケジューリング方式だけでは、この資源の排他利用を直接保証しません。",
+      "choiceReasons": [
+        "キューはデータや要求の受渡しを行う仕組みで、それだけでタスクのバス使用を排他にしません。",
+        "セマフォは共有資源への進入を制御でき、二つのタスクの通信を排他にできます。",
+        "マルチスレッドは複数の実行流を扱う仕組みで、むしろ共有資源の同期が別途必要です。",
+        "ラウンドロビンは実行時間を順に配る方式で、バス操作のまとまり全体を排他にする機能ではありません。"
+      ],
+      "takeaway": "共有バスや装置の排他利用には、取得・利用・解放の同期機能を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "二つのセンサが「一つのI²Cバス」に接続されている点を確認します。二つのタスクが共有する資源は何でしょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "通信開始から終了まで他のタスクが同じバスを使わないよう、利用権を取得して最後に返す手順を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "セマフォを一つ用意し、バス使用前に取得、終了後に解放すれば、同時利用を防げます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7c8bf8a69ba6f9f71ab66b830d2604c883cb7558ea001ba6de80182f884cc1c2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q16",
+      "summary": "イのセマフォ。共通I²Cバスへのアクセスを排他制御します。",
+      "explanation": "センサーが別でも、同じI²Cバスを同時に使うと通信操作が競合します。共有バスの使用前にセマフォを獲得し、通信終了後に解放すれば、もう一方のタスクを待たせられます。\n初期値1のセマフォを使うと、一度に一タスクだけがバスを使うよう制御できます。",
+      "choiceReasons": [
+        "キューはデータやメッセージの受渡し用で、共有バスの排他制御を直接行う機能ではありません。",
+        "セマフォでバス使用権を獲得・解放し、同時アクセスを防げます。",
+        "マルチスレッドは複数の実行の仕組みで、それ自体では排他になりません。",
+        "メモリプールは記憶領域の割当て用で、I²Cバス使用の排他制御ではありません。"
+      ],
+      "takeaway": "共有通信路も排他対象。使用前に獲得し、終了後に解放する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "二つのセンサーではなく、それらが接続された一つのI²Cバスが共有資源です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タスク1が通信中なら、タスク2はバスが空くまで待つ必要があります。使用権を一つに制限する仕組みを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "バス使用前に待ち操作、通信終了後に解放操作を行うOS機能を、データ受渡しやメモリ割当ての機能と区別しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b82bd8eb89be0feaf983731beefe427b753191eae1e2045b8d1a689550a17462",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q16",
+      "summary": "イ。資源獲得順序を両タスクで統一します。",
+      "explanation": "一方が資源Xを確保してYを待ち、もう一方がYを確保してXを待つと循環待ちになります。両者ともX→Yの順に獲得すれば、Yだけを持ってXを待つ状態が生じず、循環待ちを防げます。",
+      "choiceReasons": [
+        "優先度を高くしても、必要資源が他方に確保されていれば処理を進められません。",
+        "同じ獲得順にすると循環待ちを作れません。",
+        "逆順はXとYを互いに持って待つ状態を作りやすくします。",
+        "同じ優先度でも資源の循環待ちは解消されません。"
+      ],
+      "takeaway": "共有資源に全体で共通の獲得順序を設けると循環待ちを防げる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "二つの資源をX,Yと名付け、各タスクが一つずつ持つ状態を描きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "互いに相手の持つ資源を待つ輪を作れない獲得順を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "両者がX→Yの順なら、Xを取れなかった側はYも保持していません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "282193454471ceac4a5db05d1457b1a0e9732f219e5252987bc770048f4a9840",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q18",
+      "summary": "イ。両タスクで資源を獲得する順序を統一します。",
+      "explanation": "資源X,Yを使うとき、タスク1がXを持ってYを待ち、タスク2がYを持ってXを待つと、互いに解放を待つデッドロックになります。\n両方がX→Yの順に獲得する規則なら、Xを取れなかったタスクはYを先に保持しません。循環待ちを防げるため、デッドロックを防止できます。",
+      "choiceReasons": [
+        "優先度を上げても、必要資源を相手が保持していれば進めず、循環待ちは消えません。",
+        "獲得順を統一すれば、二つの資源を逆に持って待ち合う状態を防げます。",
+        "逆の順で獲得すると、それぞれ一つを保持してもう一つを待つ状態を作りやすくなります。",
+        "同じ優先度にしても、資源の保持・待合いを防ぐ規則にはなりません。"
+      ],
+      "takeaway": "全タスクで資源獲得順を統一し、循環待ちをなくす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Xを保持してY待ちのタスクと、Yを保持してX待ちのタスクを図にすると、待ちの矢印が循環します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "両方がまずXを取り、次にYを取る場合を考えます。Xを取れなかった側がYを保持できるでしょうか。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "優先度の大小では資源の保持は解消されません。二つの資源をどの順に取るかを変える候補で循環を防げるか確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ad4f221a2b4cb8ecbcb2010d602b32905e0fda6c4e6b0c947bf5408537ef777d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q19",
+      "summary": "ハッシュ値の衝突がなければ、1件の探索時間は一定です。",
+      "explanation": "ハッシュ表はキーからハッシュ値を計算し、その値に対応する格納位置へ直接アクセスします。この問題では同じハッシュ値をもつ複数データがなく、衝突の解決のために候補をたどる必要がありません。そのため表内の件数nが増えても、1件当たりの理論的な探索時間はO(1)で、水平なエです。",
+      "choiceReasons": [
+        "件数とともに探索時間が加速して増える形で、衝突なしの直接アクセスに合いません。",
+        "件数に比例する形は線形探索などの時間であり、衝突なしのハッシュ探索ではありません。",
+        "増加が緩くても件数に応じて時間が増えており、一定時間の条件に合いません。",
+        "件数によらず一定時間を表す水平なグラフです。"
+      ],
+      "takeaway": "衝突なしのハッシュ探索は件数によらずO(1)。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "縦軸は全件の処理時間ではなく「データ1個当たりの探索時間」です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じハッシュ値がない条件なら、計算した格納位置の候補を順番に探索する必要がありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "キーから位置を計算して1か所にアクセスする回数は、表の件数が増えても変わりません。対応する線の形を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9cc6d374db3bfeabc79cb47fd2594200b9682f083e5980c0515c484d2e33bbd5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q17",
+      "summary": "イ。CPUを奪われたタスクは実行可能状態へ戻ります。",
+      "explanation": "プリエンプションはOSが実行中のタスクからCPUを強制的に取り上げることです。処理は終わっておらず、入出力待ちにもなっていないので、再びCPUが割り当てられれば実行できる実行可能状態へ移ります。",
+      "choiceReasons": [
+        "休止はタスクの開始前などの状態で、CPUを奪われただけでは移りません。",
+        "CPUの割当てを待つ実行可能状態になります。",
+        "処理が完了したわけではないので終了状態ではありません。",
+        "入出力やイベントを待つ要因がないため待ち状態ではありません。"
+      ],
+      "takeaway": "CPU待ちと入出力待ちは異なる状態。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「実行中」から矢印を描き、今回は終了・入出力要求・CPUの取上げのどれが遷移の原因なのかを問題文から記入します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "入出力完了などの条件がなく、CPUの再割当てだけを待つ状態を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "CPUさえ与えられれば実行できる実行可能状態です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0df7005d9ddee66d9c4dec38266553cf261bed101b6dfe6ed288ff725e0f84a6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q14",
+      "summary": "P=n/(0.9+0.1n)なので、nを増やしたときの上限は10です。",
+      "explanation": "a=0.1を代入するとP=n/{1+(n−1)×0.1}=n/(0.9+0.1n)です。分子と分母をnで割るとP=1/(0.9/n+0.1)。\nnが大きくなると0.9/nは0へ近づくので、Pは1/0.1=10へ近づきます。有限のnでは分母が0.1より大きいためP<10です。",
+      "choiceReasons": [
+        "アの5は上限ではありません。例えばn=10ではP=10/1.9で5を超えます。",
+        "イの10はnを無限に増やした極限1/aです。",
+        "ウの15は上限10を超え、この式では到達できません。",
+        "エの20も上限10を超えます。CPU数と性能は比例し続けません。"
+      ],
+      "takeaway": "nを含む分数の上限は、分子と分母をnで割って小さくなる項を調べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "分母の(n−1)aを展開し、a=0.1を代入します。分母にもnが残る点に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "P=n/(0.9+0.1n)を、分子・分母をnで割った形へ変えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "P=1/(0.9/n+0.1)で、nを非常に大きくしたとき0.9/nがどうなるか考え、残った分母の逆数を求めます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9546c257667df67108457dad40c8cb99a0b39797bc8442a55f74b6a40e619981",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q19",
+      "summary": "エ。ページフォールトとページインは同数で、ページアウトはそれ以下です。",
+      "explanation": "主記憶にないページへのアクセスでページフォールトが起こり、そのページをページインします。空き枠があればページアウトは不要です。また追い出すページが未変更なら書出しを省略できるので、ページアウトが必ず同数になるわけではありません。",
+      "choiceReasons": [
+        "ページアウトがページイン以上とは限りません。空き枠なら書出しは不要です。",
+        "ページインはフォールトの都度必要なので、フォールトより少なくはなりません。",
+        "ページアウトは必ずフォールトと同数ではなく、不要な場合があります。",
+        "フォールト=ページイン≧ページアウトが成り立ちます。"
+      ],
+      "takeaway": "欠けたページの読込みは必須でも、追出し時の書込みは条件付き。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "空きページ枠が一つある状況で、未読込みページへ初めてアクセスする例を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "その例ではフォールトと読込みが一回ずつ起きますが、何かを書き出す必要はありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "フォールトとページインは同数、ページアウトはそれ以下なのでエです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6c0f20325dd2c78490868da03e0b9555c052ec1b87b6cdde4a1070eab7482364",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q17",
+      "summary": "ウ。ページ内の空きが減り、主記憶不足が緩和します。",
+      "explanation": "ほとんどのプログラムが元のページの半分以下なので、1ページに割り当てた領域の多くが使われません。ページを半分にしてもそれらは1ページに収まり、割当て量を減らせます。主記憶不足という条件では、この内部断片化の削減が有効です。",
+      "choiceReasons": [
+        "ページが小さいと管理するページ数は増え得るため、管理負荷が減るとはいえません。",
+        "半分以下のプログラムは新しい1ページにも収まり、余白減少による性能低下とはいえません。",
+        "1プログラムに割り当てるページ内の無駄が減り、主記憶を有効に使えます。",
+        "ページフォールトが必ず増えるわけではなく、記憶不足の緩和で減る可能性もあります。"
+      ],
+      "takeaway": "小さいプログラムに大きいページを割り当てると内部断片化が大きい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ほとんどがページの半分以下」という条件から、1ページ内で使わない量を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ページを半分にしても何ページに収まるかを確認し、割当て量を比較します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "元も変更後も1ページに収まるなら、占有する主記憶は半分になり空きの無駄を減らせます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2b79df47285172ff0ca45694790d6c8d18daaafc8ef38127ff05ca255e5088bc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q16",
+      "summary": "エの0.75。20ミリ秒で終わる場合が全体の75%です。",
+      "explanation": "ページインだけの割合をpとすると、ページアウトを伴う割合は1−pです。二種類の処理時間20、60の加重平均が30になります。\n20p+60(1−p)=30より、60−40p=30、40p=30、p=0.75です。",
+      "choiceReasons": [
+        "0.25では平均20×0.25+60×0.75=50となり、30ではありません。これはページアウトを伴う割合に対応します。",
+        "0.33では平均が約46.8ミリ秒となり、30より大きくなります。",
+        "0.67では平均が約33.2ミリ秒となり、30にはなりません。",
+        "0.75なら20×0.75+60×0.25=30ミリ秒で条件を満たします。"
+      ],
+      "takeaway": "二種類の平均時間は各時間に発生割合を掛けて足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "求めるのはページアウトを「伴わない」割合です。この場合が20ミリ秒、残りが60ミリ秒となります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "求める割合をpにすると、もう一方は1−pです。平均30を20p+60(1−p)で表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "20p+60−60p=30を整理すると40p=30です。pを求め、0から1の範囲で選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

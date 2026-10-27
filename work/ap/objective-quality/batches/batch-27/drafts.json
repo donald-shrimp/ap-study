@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r04a-q54",
+    "baseVersion": 2,
+    "baseLessonSHA256": "259038b090ec5698a6fecd414d4816beb7557107597bc6096f21898a56968d5f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q54",
+      "summary": "ウ。重み付き合計77点の製品Cが最高です。",
+      "explanation": "重み5,1,4を各行の評価点に掛けて足します。A=5×7+1×9+4×8=76、B=5×8+1×10+4×5=70、C=5×9+1×4+4×7=77、D=5×9+1×7+4×6=76です。評価が高いほどよい条件なので最大のCです。",
+      "choiceReasons": [
+        "76点でCの77点より低い評価です。",
+        "70点で、非機能要件の高得点だけでは重み付き合計を最大にできません。",
+        "77点で四製品中の最高です。",
+        "76点で、機能要件はCと同点でも費用の差を補えません。"
+      ],
+      "takeaway": "評価点を単純合計せず、項目の重みを掛けて比較する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "機能要件の重み5を製品Aの7点に掛けて5×7と書きます。同じ列の非機能要件9点には重み1、費用の安さ8点には重み4を対応させ、三項を足す準備をします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "重み付き合計は、各項目の評価点×重みの総和です。安さも高得点ほどよいと明記されています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Aについて5×7+9+4×8を計算し、同じ式をB,C,Dへ適用します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2d4913066356948e84168984501947e025e11a841e90e60794b56882eb72e4fc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q55",
+      "summary": "イ。停止時間を0.6時間減らせば99.5%に届く。",
+      "explanation": "評価対象は1日22−7=15時間を20日、計300時間。24時間×月の日数ではない。可用性の差は99.5−99.3=0.2ポイント、割合に直すと0.002。\n\n減らす必要がある停止時間は300×0.002=0.6時間。別の確認として、実際の停止は300×0.007=2.1時間、許容停止は300×0.005=1.5時間、その差も0.6時間。",
+      "choiceReasons": [
+        "0.4時間では必要な0.6時間に足りない。",
+        "0.6時間を減らすと停止が2.1から1.5時間になり、可用性99.5%になる。",
+        "1.3時間でも達成するが、最小ではない。",
+        "1.95時間でも達成するが、最小ではない。"
+      ],
+      "takeaway": "SLAの提供時間だけを分母にし、百分率の差を割合へ直して掛ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "提供時間帯7〜22時は何時間か。それを20日分にし、月の評価対象時間を求める。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "99.5%と99.3%の差は0.2%。0.2をそのまま掛けず、0.002へ直す。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "評価対象時間×0.002で、回復すべき稼働時間を求める。それと同じ時間だけ停止を減らせばよい。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q54",
+    "baseVersion": 2,
+    "baseLessonSHA256": "921f134d3be281fa21607cb05f55e26734e1e8b4b2dcc0e2f1d13cbea21a8495",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q54",
+      "summary": "インシデントの傾向から問題を特定する",
+      "explanation": "正解はエ。問題管理はインシデントの原因や潜在的原因を管理する。インシデントのデータや傾向を分析して問題を特定し、既知の誤りや回避策などを記録して再発防止・影響低減に役立てる。すべての問題を必ず恒久解決できるわけではない。",
+      "choiceReasons": [
+        "費用や技術的制約などにより恒久解決できない場合もあり、「必ず恒久的に解決する」は適切でない。",
+        "既知の誤りは記録し、対処や重複防止に利用する必要がある。",
+        "解決後も記録を保持し、必要な評価や傾向分析などに活用するため、直ちに対象から除外するのは適切でない。",
+        "インシデントのデータ・傾向を分析して原因に関わる問題を特定するのは問題管理の活動である。"
+      ],
+      "takeaway": "問題管理では原因の分析と知識の蓄積を行い、恒久解決だけに限定しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題管理の対象はインシデントそのものの応急復旧だけでなく、その原因。候補の「必ず」「記録しない」「直ちに」に注意する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "繰り返す障害や共通の傾向を見れば潜在的な原因を見つけられる。既知の誤りの記録は、その後の対処に役立つ。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "インシデントのデータと傾向を分析して問題を特定するエを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9cad8e195eba4db7d9f83526ce763c465725925e902a6a6692bc913b10948d6f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q55",
+      "summary": "イ。根本原因を特定し、発生や再発を防ぐことです。",
+      "explanation": "問題管理はインシデントの根本原因や潜在的な原因を管理し、発生可能性と影響を減らす活動です。目の前のサービスを早く復旧するインシデント管理とは区別します。",
+      "choiceReasons": [
+        "合意時間内の復旧を確実にするのはインシデント管理の目的です。",
+        "未知の根本原因を特定して発生・再発を防ぐ問題管理の目的です。",
+        "サービス継続のコミットメントはサービス継続管理の目的です。",
+        "変更の影響を評価して承認するのは変更管理です。"
+      ],
+      "takeaway": "インシデント管理は復旧、問題管理は根本原因と再発防止。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補が復旧、原因解明、継続、変更のどれを扱うか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ障害を繰り返さないため、復旧後にさらに何を調べるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "未知の根本原因を特定し発生・再発を防ぐ候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q54",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7418398a2438972f039d6a49dcf1ff923f87bbe20910647ebd6bc9a7bbe91bcb",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q54",
+      "summary": "エ。強化は好機の発生確率やプラスの影響を増大させます。",
+      "explanation": "プラスのリスクへの強化は、好機の発生確率または好機が起きたときの影響を大きくする対応です。必ず発生させようとする活用、第三者と利益を分ける共有、積極的な働き掛けをしない受容とは異なります。",
+      "choiceReasons": [
+        "積極的行動を取らず、実現した場合に利益を得るのは受容です。",
+        "発生を確実にするのは活用です。強化は100%を保証することを意味しません。",
+        "第三者にオーナーシップを移して利益の一部を共有するのは共有です。",
+        "発生確率や影響度を増やすことが強化です。"
+      ],
+      "takeaway": "好機の強化は確率や利益を増やす対応で、確実化する活用と区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補に書かれた確率の扱いを、変更なし・100%・第三者移転・増大に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば成功確率を30%から50%に上げる対応は、確実に成功させる対応とは違います。好機をより起きやすくする考え方です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "好機の発生確率または影響度、あるいは両方を増大させる説明が強化です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q53",
+    "baseVersion": 2,
+    "baseLessonSHA256": "65ce31ca86173aeae49f66dd0f6a16bc3f4e6331563d5491b763e21519d0d65e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q53",
+      "summary": "ウの450万円。5人の追加費用1250万円から、離脱4人の費用800万円を引きます。",
+      "explanation": "8〜9月に4人が抜けると4×2=8人月の開発が不足します。さらに引継ぎ中の7月後半は元の4人も開発しないので4×0.5=2人月不足し、合計10人月を補います。\n増員者が開発できるのは8〜9月の2か月だけなので5人必要です。7月後半の引継ぎを含む2.5か月の費用は5×2.5×100=1250万円。元の4人が離れる2か月の800万円を差し引き、増加は450万円です。",
+      "choiceReasons": [
+        "200万円は元の4人の引継ぎによる開発不足2人月の費用相当で、増員の総差額ではありません。",
+        "250万円は増員5人の引継ぎ0.5か月分だけの費用です。",
+        "追加1250万円から離脱分800万円を引いた450万円が正しいです。",
+        "700万円では、開発不足10人月から求める5人の費用差額に一致しません。"
+      ],
+      "takeaway": "引継ぎで既存メンバーの開発も止まる。必要増員数と元計画との差額を分けて計算する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "失う開発量は8〜9月の4人分だけではありません。7月後半の引継ぎでは元の4人も開発しない条件を加えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "不足は4×2+4×0.5人月です。増員者は引継ぎ後の2か月だけ開発するので、不足人月を2で割って人数を出します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "増員者の人件費は引継ぎを含む2.5か月分です。元計画では支払う予定だった離脱4人の2か月分を引き、増加額を求めましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d617a55c7445cd3bf0495082fb3ea348d254f894d5676a23a11fa91de1ee7d52",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q55",
+      "summary": "アのFTA。望ましくない事象から原因の組合せを木状に分解します。",
+      "explanation": "FTAは頂上事象となる障害から、その原因をAND・ORなどの論理で下へ分解する手法です。基本事象の確率と組合せを使い、頂上事象の発生確率を算出できます。\n部品の故障から影響を調べるFMEAや、構成要素の障害影響を対応表にするCFIAとは分析の向きや表現が異なります。",
+      "choiceReasons": [
+        "FTAは事象の発生経路・原因を論理木で分析し、確率算出にも使えます。",
+        "FMEAは各故障モードを起点に影響や重大性などを分析します。",
+        "CFIAはコンポーネントの障害がサービスに与える影響を分析します。",
+        "SPOF分析は一つの故障でサービス停止につながる単一障害点を探します。"
+      ],
+      "takeaway": "原因のAND/OR木と発生確率の計算はFTA。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "発生経路・原因・確率という三条件に注目します。各候補が、部品の故障から影響を追うのか、結果から原因をたどるのかを整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの故障が両方必要ならAND、どちらかで停止するならORで表し、基本故障の確率から計算します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "部品から影響を追う方式や、単一障害点を探す方式と、頂上事象から原因を木状に展開する方式を区別しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a143f56854f0202e746095973a1d6602ecfbbc1f5e5ac81ac819a706e7bea6ea",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q55",
+      "summary": "ア。是正処置は不適合の原因を除去し、再発を減らす処置です。",
+      "explanation": "是正処置は、検出された不適合や望ましくない状況について、その原因を取り除く、または再発しやすさを減らすための処置です。目の前の問題を直すだけでなく、なぜ起こったかに対応します。\n構成情報の更新、継続的改善全般、問題の記録から解決までの管理手順とは別の定義です。",
+      "choiceReasons": [
+        "原因を除去し再発の起こりやすさを低減するので、是正処置の説明です。",
+        "構成品目の変更に合わせて構成情報を更新する処置で、構成管理に関する説明です。",
+        "SMSやサービスの適切性などを繰り返し向上する継続的改善の説明です。",
+        "問題を記録・分類・優先度付けし解決まで扱う問題管理の説明です。"
+      ],
+      "takeaway": "是正処置は原因への対処と再発防止を含む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の処置対象を、原因、構成情報、パフォーマンス全般、問題の管理手順に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ不適合が繰り返されないようにするには、その原因へ働きかけます。「原因の除去」「再発の低減」を確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "不適合の原因を除去する、または再発の起こりやすさを低減する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q52",
+    "baseVersion": 2,
+    "baseLessonSHA256": "194e5db23cfbca99a7e940a1916a0d54cc4015b3de865be34f0f1409350e4c8f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q52",
+      "summary": "エ。結合点5はダミー作業で結合点4の完了も待つため、最早時刻は7日です。",
+      "explanation": "結合点2はAの3日で時刻3。結合点3はBによる2とA+Cによる3+1=4の遅い方で時刻4。結合点4は3+4=7です。\n結合点5への到着候補は2からEで3+2=5、3からFで4+2=6、4からダミーで7+0=7です。全ての先行作業の完了を待つため最大の7が最早結合点時刻です。ダミーは日数0でも依存関係を表します。",
+      "choiceReasons": [
+        "アの4は結合点3の最早時刻です。結合点5へ続く作業を反映していません。",
+        "イの5はA+Eの経路だけで、Fとダミーの前提を見落としています。",
+        "ウの6はA+C+Fの経路です。結合点4からのダミーを待つ必要があります。",
+        "エの7はE・F・ダミーの到着時刻の最大値です。"
+      ],
+      "takeaway": "合流点の最早時刻は、全ての先行経路の所要時間の最大値。ダミーも前提に含める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "結合点5にはE、F、4からの点線の三本が入っています。点線も前提の矢印として数えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各点の最早時刻は、入る矢印の始点時刻+所要日数の最大です。点線の所要日数は0です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2の時刻は3、3はmax(2,3+1)、4は3+4です。これらにE・F・ダミーの日数を足し、5の最大値を求めましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6147fe6896f27e4fcc6edea4f66bbac0e024e842324247b8d94870ddae30cf49",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q55",
+      "summary": "6か月前までの復元には七つの暦月を保持する",
+      "explanation": "正解はウ、14本。例えば10月中に6か月前の4月の指定日まで復元するには、4月から10月までの七つの暦月を扱う。各月にフルバックアップ用1本と差分用1本が必要なので、最大で7×2＝14本となる。4月の途中を復元するには4月1日のフルも保持しなければならない。",
+      "choiceReasons": [
+        "12本は月当たり2本を六つの月に割り当てた本数で、最古月から現在月までの七つの月を同時に保持できない。",
+        "13本では七つの月のフル用・差分用をすべて保持できず、差分が必要な月中日の復元が欠ける。",
+        "七つの暦月にそれぞれフル用1本と差分用1本を用意するので14本必要である。",
+        "14本で条件を満たすため、15本は最少の本数ではない。"
+      ],
+      "takeaway": "保存期間が6か月でも、月単位の媒体は最古月と現在月を含む七つの月にまたがる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "10月の月中日を例に、6か月前の4月の同一日から現在まで、どの月の媒体を残す必要があるか数える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "4・5・6・7・8・9・10月を保持する。最古月の途中を復元するにも、その月の1日のフルバックアップと指定日の差分が必要。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "保持する七つの月ごとにフル用と差分用の2本が必要なので、7×2＝14本となる。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q53",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e7355dd3ae2725d75b1053b4b89ee8a0ed5875823c84554b3310b02911c49f4a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q53",
+      "summary": "エ。1人追加すると合計4か月短縮します。",
+      "explanation": "見積工数は上級技術者基準です。変更前の設計は6/2=3か月、プログラム作成・単体テストは初級2人が上級1人相当なので12/(2+2/2)=4か月、結合テストは12/2=6か月で計13か月。上級を1人追加すると6/3=2、12/(3+2/2)=3、12/3=4で計9か月。工程を重ねないので差は4か月です。",
+      "choiceReasons": [
+        "設計だけの短縮1か月で、他工程の短縮を含みません。",
+        "結合テストだけでも2か月短縮し、全工程の差はこれを超えます。",
+        "初級を上級と同じ生産性で数えると作成工程の差を誤ります。正しくは合計4か月です。",
+        "変更前13か月、変更後9か月の差4か月です。"
+      ],
+      "takeaway": "生産性の基準をそろえた実効人数で工数を割り、直列工程の期間を足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表1の工数は上級基準です。作成・単体テストでは上級が初級の2倍働けるので、初級2人を2÷2=上級1人相当へ換算し、表2の上級2人へ加えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "変更前後それぞれで、工程工数を実効人数で割ります。工程は重ならないので合計します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "変更前は6/2+12/3+12/2、変更後は6/3+12/4+12/3を比べます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7c464b672fe8acaa570cb3f680aea0814d320c5ae37f5bbe7964191d846b8b2e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q55",
+      "summary": "継続的改善は、パフォーマンスを向上するための繰り返される活動です。",
+      "explanation": "サービスマネジメントシステムの継続的改善は、パフォーマンスを向上するために繰り返し行う活動です。単にサービスを中断せず継続する能力とは異なり、現状を評価して改善し、その効果を確認して次の改善へつなげます。定義に合うのはエです。",
+      "choiceReasons": [
+        "入力から意図した結果を生み出す一連の活動はプロセスの説明です。",
+        "サービスの活動と資源を指揮・管理する能力とプロセスはサービスマネジメントの説明です。",
+        "中断せず合意した可用性を提供する能力はサービス継続の説明です。",
+        "パフォーマンス向上のために繰り返される活動が継続的改善です。"
+      ],
+      "takeaway": "継続的改善の「継続」は繰返し改善することを指す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「継続的改善」を、サービスを止めない能力と混同しないようにします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "活動の目的が管理そのものなのか、結果の向上なのかを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "パフォーマンスを向上するために繰り返す活動という定義を候補へ対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q51",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3755b46cd66f116aeddfe73a1f34d0f5a2e16fd755f8cc21f616b048f436c706",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q51",
+      "summary": "ア。スコープの定義は計画のプロセス群に属します。",
+      "explanation": "計画では、何を成果物として作り、どの作業を対象にするかというスコープを定義します。プロジェクト憲章の作成は立上げ、品質保証の遂行とプロジェクトチームの編成は実行に属します。作業を実際に行う段階と、その範囲を決める段階を区別します。",
+      "choiceReasons": [
+        "成果物・作業の範囲を決めるスコープの定義は計画です。",
+        "品質保証の遂行は実行のプロセスです。",
+        "プロジェクトを正式に承認する憲章の作成は立上げです。",
+        "チームを編成するのは実行のプロセスです。"
+      ],
+      "takeaway": "立上げは承認、計画は作業範囲や進め方の定義、実行は実施。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補ごとに「開始を承認する」「範囲を決める」「実施する」のどの段階かを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "計画では実作業に先立ち、成果物と必要作業の境界を定めます。プロジェクトを承認する憲章とは役割が違います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "作業範囲を決めるスコープの定義が計画のプロセスです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q55",
+    "baseVersion": 2,
+    "baseLessonSHA256": "50c73708531ce9c3a9c61d3c1806b7404677f98372c1dbd649b64c34a88be987",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q55",
+      "summary": "ウ。月収が最大の方式②は105万円で、年間利益は210万円です。",
+      "explanation": "月収は①4,000×250=100万円、②700×1,500=105万円、③300×3,300=99万円、④1,600×650=104万円です。運用費用はどの方式も同じなので、月収最大の②を選びます。\n年収105×12=1,260万円から年費用1,050万円を引き、年間利益210万円となります。月収と年費用を直接引かず、期間と単位をそろえます。",
+      "choiceReasons": [
+        "アの150万円は方式①の年間利益100×12−1,050です。最大ではありません。",
+        "イの198万円は方式④の年間利益104×12−1,050です。方式②の210万円より低く、最大ではありません。",
+        "ウの210万円は方式②の年収1,260万円から年費用を引いた最大利益です。",
+        "エの260万円は正しい年収1,260万円から費用1,000万円を引いた値で、指定費用1,050万円と異なります。"
+      ],
+      "takeaway": "同じ費用なら収入最大の方式を選び、月収を年収へ直して年費用を引く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "課金は月ごと、費用は年1,050万円です。まず四方式の月収を同じ万円単位で並べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用時間・件数・容量・IDのそれぞれに対応する単価を掛けます。月末の容量やID数も毎月同じ料金を生みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "①4,000×250、②700×1,500、③300×3,300、④1,600×650を比べ、最大月収×12−1,050万円を計算します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q53",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5889fb6a0896282f29b42050d01409e847ded047e0ef126acb7f9c1ecfeb719c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q53",
+      "summary": "全期間400日を基に、残りは22+44+84=150日です。",
+      "explanation": "日数を求めるので工数比ではなく期間比を使います。完了済みのシステム要件定義〜内部設計は0.25+0.21+0.11=0.57です。全期間Tは0.57T=228よりT=400日。プログラム開発は0.11T=44日で、200本中100本が完了し各本の期間が同じなので残り半分は22日です。結合は0.11T=44日、テストは0.21T=84日。残期間は22+44+84=150日です。",
+      "choiceReasons": [
+        "残期間の期間比0.055+0.11+0.21=0.375を400日に掛けると150日で、140日ではありません。",
+        "開発残22日、結合44日、テスト84日を合計した150日です。",
+        "日数には期間比を使うため、0.375×400=150日であり161日にはなりません。",
+        "172日は開発44日を丸ごと残した44+44+84ですが、開発の半分は既に完了しています。"
+      ],
+      "takeaway": "期間を問うなら期間比。工数比は人日などの作業量を配分する比。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表は工数比と期間比の2行です。問われているのは残り「何日」なので期間比の行に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "完了した三工程の期間比の和が228日に対応します。これを使ってモデル全体の期間を逆算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "全期間は228/(0.25+0.21+0.11)です。残りの比0.11×100/200+0.11+0.21を掛けて計算しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q57",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a70727d026d9eaae4623cc9be93cfea1ef9990651f84b8db935aaa14c6fcf5d3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q57",
+      "summary": "イ。DAは論理データベース設計やデータ項目の標準化を担当します。",
+      "explanation": "DAは組織のデータを業務上の資源として管理し、意味・構造・標準化などを扱います。論理データベース設計とデータ項目の管理・標準化はDAの役割です。DBAはデータベースの物理設計、容量・性能・バックアップ・回復など技術的な運用管理を担当します。",
+      "choiceReasons": [
+        "ディスク増設等の容量管理はDBAの技術的・物理的な管理業務です。",
+        "論理データベース設計とデータ項目の標準化は、データを組織的に管理するDAの役割です。",
+        "パフォーマンスチューニングはDBAが担当する技術的な性能管理です。",
+        "障害時の回復や整合性チェックはDBAの運用管理業務です。"
+      ],
+      "takeaway": "DAはデータの意味・論理構造・標準化、DBAはDBの物理構成・性能・運用。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの業務を「データの論理的な定義」と「装置・性能・回復の技術管理」に分けます。DAとDBAを別の担当として考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "DAは組織でデータを同じ意味・項目で使えるよう管理します。ディスク追加やチューニングはDBMS運用の側です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "論理データベース設計を行い、データ項目を管理して標準化する候補がDAの役割です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q57",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3cf90f1a40b6793a090b36393bab8c6df5ce5fee81c0221a7980527e9c6b2839",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q57",
+      "summary": "ウ。X社が管理する発電装置からの排出は、自社排出源の直接排出です。",
+      "explanation": "スコープ1は自社が所有又は管理する排出源からの直接排出です。X社の発電装置の燃料を燃やして出る温室効果ガスは、この条件に該当します。\n買った電力を使うために外部の発電所で出るガスはスコープ2です。廃棄処理を委託した他社の排出など、自社の活動に関連するその他の間接排出はスコープ3です。IT機器の管理者だけでなく、実際にガスを出す排出源を確認します。",
+      "choiceReasons": [
+        "アは購入電力の発電に伴う間接排出なのでスコープ2です。",
+        "イは廃棄物処理事業者の排出源から出るガスで、X社にとってスコープ3です。",
+        "ウはX社が管理する発電装置から直接出るガスでスコープ1です。",
+        "エは顧客企業が購入した電力の発電に伴う排出です。少なくともX社管理の排出源からの直接排出ではありません。"
+      ],
+      "takeaway": "電気を使う機器の持主ではなく、ガスを出す排出源の所有・管理者を見る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補でガスが出る場所を、購入電力の発電所・廃棄物処理事業者・自社発電装置に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "表のスコープ1の条件は「自社が所有又は管理する排出源」です。購入電力の場合、IT機器自体から発電のガスは出ません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "X社の発電装置はX社が管理する排出源です。他社の発電所や廃棄物処理設備と管理主体を比べます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q58",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3d00b827d3b015fb212850e6f30d85f2941999c38e5efb2a63fc20f0366106f1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q58",
+      "summary": "エ。受容基準をアセスメント後に定めるのは不適切です。",
+      "explanation": "リスク受容基準は、アセスメント結果を評価する前に確立しておく必要があります。結果を見てから基準を決めると、その結果に合わせた恣意的な受容が可能になり、適切な判断を保証できません。",
+      "choiceReasons": [
+        "規定の手順でUSB利用を許可しており、この記述から不適合は認められません。",
+        "事故を規定どおり報告しており、指摘すべき逸脱は示されていません。",
+        "検出されたスパイウェアを駆除しており、この事実だけでは統制不備とはいえません。",
+        "受容基準を後から決めており、事前に基準を確立する要求に合いません。"
+      ],
+      "takeaway": "評価基準は結果を見る前に定める。事故の発生だけで不適合とは決めない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で事故の有無よりも、定められた手順から逸脱しているかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "リスクを受容するかの判断基準は、結果の評価より前か後かを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アセスメントを実施した後で受容基準を決めた、という順序を指摘します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q60",
+    "baseVersion": 2,
+    "baseLessonSHA256": "08a9a709fae2b5cce941249db830c9527960cba3a208ceb004ae9f00b4a00e08",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q60",
+      "summary": "イ。ITの統制はIT全般統制とIT業務処理統制から成ります。",
+      "explanation": "IT全般統制はシステム開発・変更、運用、アクセス管理などの基盤を支える統制です。IT業務処理統制は業務アプリケーションで入力・処理・出力の完全性や正確性などを確保する統制です。\nITを利用しただけで統制が有効と決まるわけではなく、設計と運用を評価します。手作業であることだけを理由に不備とすることもできません。",
+      "choiceReasons": [
+        "IT環境は社内だけに限定されず、外部委託先や外部ネットワークなどの影響も含めて捉えます。",
+        "基盤に関するIT全般統制と、業務処理に関するIT業務処理統制という二つの区分です。",
+        "自動化しても誤った設計や設定はあり得ます。有効性は設計・運用を評価して判断します。",
+        "手作業の統制でも適切に設計・運用すれば有効です。IT未利用だけで直ちに不備とはなりません。"
+      ],
+      "takeaway": "IT統制は全般統制と業務処理統制。自動化の有無だけで有効性を決めない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「社内に限る」「自動なら有効」「手作業なら不備」のような断定の根拠を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ITの統制を、開発・運用・アクセスなどの土台と、個々の業務の入力・処理・出力の統制に分けます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この二つをIT全般統制とIT業務処理統制と呼びます。二分類を述べた説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q57",
+    "baseVersion": 2,
+    "baseLessonSHA256": "66c776ae8de18f6e6ebf17f70478fb1b4b3a5fe7035e916a470b15d0c3b8a6f4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q57",
+      "summary": "IaaSで②③、PaaSで④が不要となり、業務ジョブ監視①は残ります。",
+      "explanation": "IaaSでは物理サーバやネットワークを提供者が管理するため、利用者による物理サーバの起動・停止②とハードウェア保守ランプの目視③が不要になります。その段階ではミドルウェア管理は利用者側ですが、全ミドルウェアをPaaSへ移すとパッチ適用④も提供者側の役割になります。業務バッチのジョブ監視①はアプリケーション運用として残るのでウです。",
+      "choiceReasons": [
+        "①の業務ジョブ監視は残り、②の物理サーバ操作はPaaSを待たずIaaSで不要になります。",
+        "①はIaaSでも残ります。②が不要になるのはIaaSへの移行時です。",
+        "物理層の②③がIaaS、ミドルウェアの④がPaaSで不要になります。",
+        "②の物理サーバ操作もIaaS時点で提供者側へ移るため、PaaSまで残すのは誤りです。"
+      ],
+      "takeaway": "クラウドの責任分界を物理層、ミドルウェア、業務アプリに分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "②③は物理機器、④はミドルウェア、①は業務処理に対する作業です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "IaaSで提供者が引き受ける物理基盤と、PaaSでさらに提供されるミドルウェアを順に考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "IaaSで物理サーバの操作と保守を外し、PaaSでミドルウェアのパッチを外します。業務ジョブの監視は残します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

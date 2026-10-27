@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r03a-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2eb04f30a74fc96ba57d1a5807ab210c9e23e077aeaed38123917ecb768b94d8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q12",
+      "summary": "イ。スケールインはサーバの台数を減らします。",
+      "explanation": "スケールインは負荷低下などに合わせてサーバ台数を減らす水平縮小です。台数を増やすのはスケールアウトです。1台当たりのCPUやメモリの能力を上げ下げする垂直方向の調整は、それぞれスケールアップ、スケールダウンと呼びます。",
+      "choiceReasons": [
+        "サーバ台数を増やすのでスケールアウトです。",
+        "サーバ台数を減らしてリソースと費用を調整するスケールインです。",
+        "1台当たりの能力を高めるスケールアップです。",
+        "1台当たりの能力を下げるスケールダウンです。"
+      ],
+      "takeaway": "台数の増減はアウト／イン、1台の能力の増減はアップ／ダウン。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補を「サーバの台数の変更」と「CPU・メモリの変更」に分け、増加か減少かも整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "イン／アウトは台数を変える水平調整、アップ／ダウンは1台の能力を変える垂直調整です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "インは台数を減らす方向なので、物理サーバを減らして無駄なコストを削減する説明です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "871e11f743bebb083f84cf05ee2e5b399beac0afbc1cdfe30abfee598fd9ce07",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q13",
+      "summary": "スケールインは、過剰なサーバ台数を減らすことです。",
+      "explanation": "台数で処理能力を調整する水平スケーリングでは、台数を増やすのがスケールアウト、減らすのがスケールインです。1台のCPUやメモリの能力を変える垂直スケーリングとは区別します。イは処理量に対して過剰なサーバ台数を減らすのでスケールインです。",
+      "choiceReasons": [
+        "1台のCPU能力を減らす操作はスケールダウンです。",
+        "サーバ台数を減らす水平方向の縮小なのでスケールインです。",
+        "サーバ台数を増やすのはスケールアウトです。",
+        "1台のメモリ容量を増やすのはスケールアップです。"
+      ],
+      "takeaway": "in/outは台数、down/upは1台の能力で判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補にはCPU能力、サーバ台数、メモリ容量という異なる調整対象があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "水平スケーリングは台数、垂直スケーリングは1台の能力の変更です。まずこの二つに分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "台数の変更で、増やす方がout、減らす方がinです。台数と増減の両方が一致する候補を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "97b858af304c3d9f0398a3df32580e6224d173fc70c9f3ca963d7466a273f097",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q9",
+      "summary": "5段のパイプラインで20命令を実行するには24サイクルです。",
+      "explanation": "最初の命令は5ステージ全てを通るので5サイクル後に完了します。停止がなく各ステージ1サイクルなら、パイプラインが埋まった後は毎サイクル1命令ずつ完了します。残り19命令に19サイクルを加え、5+(20−1)=24サイクルです。",
+      "choiceReasons": [
+        "20では最初の命令が5段を通るまでの充填時間を含めていません。",
+        "必要な追加時間は1ではなく、20命令に対して4サイクルです。",
+        "最初の5サイクルと、残り19命令の19サイクルで24です。",
+        "最初の5サイクルに加えるのは残り19命令分であり、20命令分ではありません。"
+      ],
+      "takeaway": "停止のないパイプラインは段数＋命令数−1サイクル。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "全5ステージ、各1サイクル、途中停止なしという条件を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "最初の命令の完了時間と、その後の命令が完了する間隔を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1命令目は5サイクル目、2命令目は6サイクル目です。同じ間隔で20命令目まで数えましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "31349b103acf0765f53cdbe0ee6f4fab9c3b930aab6c7244aa1c7b452eed1b49",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q8",
+      "summary": "ウ。④→③→②→⑤→①の順です。",
+      "explanation": "命令を取り出す④フェッチ、意味を解釈し入力値を読む③デコード・レジスタ読出し、②実行・アドレス生成、⑤メモリアクセス、①結果書込みの順です。\nメモリアクセスには計算したアドレスが必要で、デコードには取り出した命令が必要です。パイプラインは複数命令の段階を重ねますが、一命令内の依存順は変わりません。",
+      "choiceReasons": [
+        "③が④より先なので、命令を取り出す前にデコードしてしまいます。",
+        "③が④より先で、⑤も②より先です。命令取得とアドレス生成の依存関係に反します。",
+        "④フェッチ→③デコード→②実行→⑤メモリ→①書込みという依存順です。",
+        "⑤が③・②より先です。解読とアドレス生成を済ませてからメモリへアクセスします。"
+      ],
+      "takeaway": "一命令の順序は取得、解読、実行、メモリ、書込み。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "番号④の命令フェッチは、命令をメモリから取り出す段階です。まだ取得していない命令は③で解読できません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "②にはアドレス生成が含まれます。そのアドレスを使う⑤メモリアクセスは②の後です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "先頭を④、次を③とし、②で演算・アドレス生成を行った後に⑤、最後に①と並べると④③②⑤①です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0f9836d3d1e53f567e7f339671a37503bd1520339c612c970d7d6d8b4f45cb67",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q10",
+      "summary": "アの毎秒50回転。100パルス/秒を1回転当たり2パルスで割ります。",
+      "explanation": "1MHzのクロックは毎秒100万カウントです。隣接するパルスの周期10000カウントは10000/1000000=0.01秒なので、パルスは毎秒100回出ます。\nセンサーは1回転に2パルスを出すため、回転数は100/2=50回転/秒です。",
+      "choiceReasons": [
+        "周期0.01秒から100パルス/秒を求め、2で割った50回転/秒です。",
+        "100は毎秒のパルス数です。1回転2パルスの条件を反映していません。",
+        "2パルスの条件を掛けています。回転数を求めるにはパルス数を2で割ります。",
+        "クロック周波数と周期の単位を正しく換算すると5000回転/秒にはなりません。"
+      ],
+      "takeaway": "カウント数÷クロック周波数で周期を求め、パルス数/回転で換算する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の矢印は隣り合う立上り間の周期です。1回転の時間ではなく、1パルス周期を測っています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1MHz=1000000Hzなので、10000カウントに要する時間は10000/1000000秒です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "その時間の逆数が毎秒のパルス数です。最後に「1回転ごとに2回出力」の2で割り、回転/秒へ直しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e95702cb88e498ab68796c753043597025e8a56c6e196a9f01b53a2c70119aa9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q11",
+      "summary": "ウ。FCは電気ケーブルと光ケーブルを利用できます。",
+      "explanation": "FC（ファイバチャネル）はストレージ接続に使われる高速な通信規格です。名称にファイバとありますが、伝送媒体は光だけに限らず電気ケーブルも利用できます。\n接続にはポイントツーポイント、ループ、スイッチを用いたファブリックなどがあり、TCP/IPの上位層として作られた規格ではありません。SCSIのコマンドを運ぶことはあっても、パラレルSCSIをFCの物理層にするという説明は異なります。",
+      "choiceReasons": [
+        "FCはTCP/IPの上位層として作られた規格ではありません。IPでSCSIを運ぶiSCSIなどと区別します。",
+        "FCの接続はスイッチを用いた構成だけでなく、ポイントツーポイントなどもあります。",
+        "光ケーブルと電気ケーブルの両方を伝送媒体として使えるため適切です。",
+        "SCSIコマンドの転送と物理層は別です。FCの物理層としてパラレルSCSIを使うわけではありません。"
+      ],
+      "takeaway": "FCは名称だけで光専用と判断しない。媒体、接続形態、上位プロトコルを分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ファイバ」という名前から光専用と決めつけず、規格の伝送媒体と接続形態を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "TCP/IPの上でストレージのコマンドを運ぶ方式と、FC自体の通信規格を区別します。SCSIコマンドを運ぶことは物理層がSCSIという意味ではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "FCには銅線の電気ケーブルと光ケーブルの双方があります。これを述べたウが適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1953dfdb431acec3ed4edd995a8f60167b92c29b357da4487baa199ab657bfd1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q10",
+      "summary": "アのウェアレベリング。書換えを特定ブロックへ集中させません。",
+      "explanation": "フラッシュメモリはブロックごとの消去・書換え回数に上限があります。同じ論理位置への更新を同じ物理ブロックに集中させると、一部だけが早く寿命を迎えます。\nウェアレベリングは各ブロックの使用状況を管理し、書換え回数が偏らないよう物理的な書込み先を分散して寿命を延ばします。",
+      "choiceReasons": [
+        "ブロックごとの書換え回数を均す技術で、寿命を延ばすという目的に合います。",
+        "更新履歴を先に記録し、障害時のファイルシステムの整合性回復を助ける技術です。",
+        "分散したファイルの断片をまとめる技術です。書換え回数の平準化ではありません。",
+        "要求された書込み量より内部の実書込み量が増える現象です。寿命を延ばす技術名ではありません。"
+      ],
+      "takeaway": "フラッシュの寿命対策は書換え回数の偏りをならす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "管理対象はファイルの断片や更新履歴ではなく「ブロックごとの書換え回数」です。回数が偏ると何が起こるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一部のブロックだけが限界に達しないよう、更新先を分散して各ブロックの消耗を均します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "wearは消耗、levelingは平準化です。この意味を合わせた技術名を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7376073393f2aa4a49b2348f45ce155d526f230e03299698e693c319dd4b8819",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q11",
+      "summary": "ウェアレベリングは各ブロックの書込み回数を均等化します。",
+      "explanation": "フラッシュメモリには書込み・消去回数の寿命があります。同じ物理ブロックばかり更新すると、そこだけが早く劣化します。ウェアレベリングは論理的な書込み先に対応する物理的な位置を調整し、各ブロックの書込み回数がなるべく均等になるようにする技術なのでアです。",
+      "choiceReasons": [
+        "特定ブロックへの書込み集中を避けて、劣化を平準化します。",
+        "セルの電荷量を段階に分けて複数ビットを保存する多値記録の説明です。",
+        "不良ブロックを予備領域で置き換える不良ブロック管理の説明です。",
+        "ブロック単位の消去・書込みはフラッシュの動作で、回数の均等化を説明していません。"
+      ],
+      "takeaway": "ウェアレベリングは容量を増やす技術ではなく、物理ブロックの劣化を分散する技術。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補は、書込み回数、記録量、不良部品、消去単位という別の観点を述べています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フラッシュは繰返し書込み・消去で劣化します。どの候補が特定の場所への負担の集中を避けるでしょうか。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同じ論理アドレスを何度も更新するとき、物理的な書込み先を選び直して回数をならす操作を探します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b95ce03f16ed58a5ef57a893aeff97ea757f9b93fbf0c90baec7ce9d5c569dc9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q13",
+      "summary": "ア。現用系の生存確認メッセージが途切れたことを契機に切り替えます。",
+      "explanation": "ホットスタンバイでは待機系も切替えに備えて動作し、現用系を監視します。定期的な生存確認メッセージであるハートビートが届かなくなると、現用系の障害を疑い、待機系への切替えを開始できます。手動操作や処理残量の監視だけでは、障害時の自動切替えを直接表しません。",
+      "choiceReasons": [
+        "現用系が動作中と知らせる定期メッセージの途絶は、障害検知と切替えの契機になります。",
+        "オペレータのコンソール操作は手動の切替えであり、ホットスタンバイの自動障害検知としては最適ではありません。",
+        "処理残量が多いだけでは現用系の障害と判断できず、負荷増加の場合もあります。",
+        "待機系から現用系へ診断プログラムを毎回ロードする方式は、一般的なハートビートによる監視の説明ではありません。"
+      ],
+      "takeaway": "ホットスタンバイの切替えでは、現用系からのハートビート途絶に注目する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題が求めるのは「現用系に障害が発生して待機系に切り替わる契機」です。単に負荷が高い場合と区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "待機系が現用系の動作を継続的に知るには、定期的な連絡を監視できます。連絡が途切れたときに何を疑うか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "動作中を知らせるメッセージが届かなくなれば、現用系の停止や障害を疑って切り替えられます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9cd1e04f7c5d322d35d8169936e50f3e575bc2d14d0d64cd4674434f6f9503c5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q9",
+      "summary": "エ。主記憶を複数のバンクに分け、アクセスを並列化します。",
+      "explanation": "メモリインタリーブは主記憶を複数の独立したバンクに分け、アクセスを分散して重ね合わせる方式です。例えば連続するアドレスを順に異なるバンクへ割り当てると、あるバンクの処理中に別のバンクへのアクセスを進められます。",
+      "choiceReasons": [
+        "主記憶容量より大きなアドレス空間を提供する仮想記憶の説明です。",
+        "主記憶とディスクの速度差をバッファで補う説明です。",
+        "CPUを介さず主記憶と入出力装置で転送するDMAの説明です。",
+        "主記憶をバンクに分割し、アクセス処理を並列化する説明です。"
+      ],
+      "takeaway": "インタリーブは主記憶のバンクを分けてアクセスを重ねる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の対象が、アドレス空間・ディスクとの転送・入出力装置との転送・主記憶内部のどれかを整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一つの記憶領域の処理待ちを減らすため、独立した記憶領域に要求を分散して重ね合わせます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "主記憶を複数バンクに分け、CPUからのアクセス要求を並列的に処理する説明です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "44a78266f149c33989ad6316a119eb1f767370248b8b107f29154d5261bbd5cc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q11",
+      "summary": "イ。主記憶の一部をフレームバッファとして使います。",
+      "explanation": "ユニファイドメモリ方式は、CPUが使う主記憶と画面表示用の記憶領域を共用します。画面の画素情報を置くフレームバッファを、主記憶の一部に確保します。\n専用の表示用メモリを主記憶と別に設ける方式とは異なります。メモリの共用は画面のリフレッシュを不要にすることを意味しません。",
+      "choiceReasons": [
+        "主記憶から独立した専用メモリをもつ方式で、共用するユニファイドメモリ方式ではありません。",
+        "主記憶の一部を表示領域に使い、主記憶と表示メモリを共用する構成です。",
+        "描画コマンドや接続方式の説明であり、フレームバッファの置き場所を示していません。",
+        "画面の更新方法とメモリの共用は別です。ユニファイドメモリでも表示リフレッシュは必要です。"
+      ],
+      "takeaway": "ユニファイドメモリは主記憶と表示領域の共用。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問は表示デバイスとの接続方式ではなく、フレームバッファのメモリ方式を尋ねています。保存先に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "unifiedは統合されたという意味です。CPU用と画面用の領域をどのメモリに置くか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "専用メモリを別に設けず、主記憶に画面の画素情報を確保します。これを述べる選択肢を探します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ea56068508c9855e053fcf80e30a55c5b73aec1fee9458c2cb007d1317a5072d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q9",
+      "summary": "イ。ユニファイドメモリでは主記憶の一部を画面表示にも使います。",
+      "explanation": "ユニファイドメモリ方式は、CPUの主記憶と表示用のメモリ領域を共有する方式です。表示内容の画素データを置くフレームバッファに主記憶の一部を割り当てます。\n専用の表示メモリを別に持つ方式との違いが問われています。表示デバイスへの接続方法やリフレッシュの必要性を表す用語ではありません。",
+      "choiceReasons": [
+        "主記憶と別の専用フレームバッファを持つ説明で、共有する方式に合いません。",
+        "主記憶の一部をフレームバッファに使う説明が正しいです。",
+        "シリアル接続や描画コマンドは接続・制御方法で、メモリ共有方式の特徴ではありません。",
+        "メモリを共有しても表示のリフレッシュが不要になるわけではありません。"
+      ],
+      "takeaway": "ユニファイドメモリは表示用領域と主記憶を共有する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ユニファイド」は統合・共有を意味します。何の領域を共通化するのかに注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フレームバッファは画面の画素データを記憶する領域です。これを専用メモリに置くか主記憶に置くかを比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "接続がシリアルか、画面を更新するかではなく、画素データを格納するメモリの場所を説明する候補を探しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0a70d3989d9d0481ac1f7f18f751c1132b144c98d645ee89e0662516d09787d0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q12",
+      "summary": "ウ。並列化できない部分があると、プロセッサを増やしても速度向上率に上限があります。",
+      "explanation": "並列化可能な割合をp、プロセッサ数をnとすると、アムダールの法則は速度向上率S=1/{(1−p)+p/n}です。p<1ならnを増やしても、直列部分1−pは残り、Sは1/(1−p)に近づきます。全て並列化できるp=1なら、理想的にはS=nです。",
+      "choiceReasons": [
+        "全て並列化できる場合、理想的な速度向上率はプロセッサ数nであり、有限の上限へ近づくとは限りません。",
+        "並列化できない部分が残ると、速度向上率はnに比例し続けません。",
+        "直列部分が律速となるため、プロセッサを増やすと速度向上率は上限に漸近します。",
+        "並列化できる割合が増えれば速度向上率は高まります。プロセッサ数に反比例して減るという説明は逆です。"
+      ],
+      "takeaway": "アムダールの法則では、残る直列部分が並列化の効果の上限を決める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補ごとに「全て並列化できる」と「並列化できない部分がある」の条件を分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "処理時間を1として、直列部分1−pはそのまま、並列部分pだけをnで割ります。全体は(1−p)+p/nです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "nを非常に大きくするとp/nは0に近づきます。直列部分が残れば速度向上率は1/(1−p)へ近づきます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6f420dcf5d47ea920bc40924cfdad8c4413f5f4a06e2cf29f0d8471f8d2fb514",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q10",
+      "summary": "エ。全体のヒット率は0.98です。",
+      "explanation": "L1に当たる確率は0.95です。L1に当たらない0.05のうち、L2に当たる割合が0.6なので、L2で救われる確率は0.05×0.6=0.03です。全体では0.95+0.03=0.98。両方外れる確率0.05×0.4=0.02を1から引いても同じです。",
+      "choiceReasons": [
+        "0.95×0.6は両段階の率を単純に掛けた値で、L1だけで当たるアクセスを落としています。",
+        "0.6はL2の率だけであり、L1で当たる分を加えていません。",
+        "0.95はL1だけの率で、L1ミス後のL2ヒットを含みません。",
+        "L1ヒット0.95にL2が救う0.03を加えた値です。"
+      ],
+      "takeaway": "多段キャッシュは前段のミス分にだけ次段のヒット率を掛ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "L1で当たるアクセスと、L1で外れた後にL2で当たるアクセスを分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "L1で外れた分だけがL2へ進むので、まず1−0.95=0.05を求めます。この0.05を母集団にしてL2の0.6を掛け、L1のヒット分と重複しない量を作ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "0.95+(1−0.95)×0.6を計算します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f9a39937169de2217c45397f4bbac6e536fb6a2ec0dcd20dfe77083b160ac80c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q13",
+      "summary": "ウ。構成要素の品質を上げて故障を防ぐのがフォールトアボイダンスです。",
+      "explanation": "フォールトアボイダンスは故障の発生そのものを減らす考え方です。高品質な部品や十分な検証を利用します。故障した後の安全性や処理継続を扱う用語と区別します。",
+      "choiceReasons": [
+        "利用者のミスを防ぐのはフールプルーフです。",
+        "フェールソフトは機能を縮退させて処理を継続するので、縮退なしという記述が誤りです。",
+        "個々の品質を高めて故障の発生を防ぐ説明で正しいです。",
+        "安全状態に固定するのはフェールセーフで、フォールトトレランスの説明ではありません。"
+      ],
+      "takeaway": "故障を防ぐ、故障後も続ける、安全側へ止めるを区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各文が故障前の対策か、故障後の動作かを分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "avoidは避けるという意味です。故障発生の確率を下げる対策がどれか確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "構成要素の品質を高め故障を発生させないという記述が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e3b3a59c820dc2480c67635c90cc35da913ca297d57a39c27112f2cb7802c8ff",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q13",
+      "summary": "ウ。部品の品質を高め、故障自体の発生を防ぎます。",
+      "explanation": "フォールトアボイダンスは、高品質な構成要素や設計によって故障を起こしにくくする考え方です。故障後にどう継続するか、安全をどう守るかとは区別します。",
+      "choiceReasons": [
+        "利用者の単純な誤操作を防ぐ説明はフールプルーフで、フェールセーフではありません。",
+        "フェールソフトは故障時に機能を縮退して継続するので、「縮退することなく」は誤りです。",
+        "個々の品質向上による故障予防はフォールトアボイダンスです。",
+        "安全状態へ固定する説明はフェールセーフであり、フォールトトレランスではありません。"
+      ],
+      "takeaway": "故障予防、故障への耐性、安全側への移行を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各説明が、故障する前の予防か故障後の動作かを確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "「縮退しない」「安全状態へ固定」などの動作と、付けられた用語が合うか比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "構成要素の品質を高めて故障発生を防ぐのがアボイダンスです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "baff6f95bb983a5a872c11f2082d82b89c28932831cba4ca0b6527020206a4e1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q12",
+      "summary": "ウ。フォールトアボイダンスは部品などの品質を高め、故障の発生を減らします。",
+      "explanation": "フォールトアボイダンスは、構成要素の品質・設計・検査などを改善し、故障そのものを起こりにくくする考え方です。これを述べるウが適切です。\nフェールセーフは故障時に安全側へ移ること、フェールソフトは機能を縮退して稼働を続けること、フォールトトレランスは故障に耐えて必要な機能を維持することです。利用者のミスを防ぐ設計はフールプルーフです。",
+      "choiceReasons": [
+        "アはフールプルーフの説明です。フェールセーフは故障時の安全確保です。",
+        "イは「縮退させることなく」が誤りです。フェールソフトでは一部機能を制限して継続します。",
+        "ウは構成要素の品質を高めて故障を避けるフォールトアボイダンスの説明です。",
+        "エは故障時に安全状態へ移すフェールセーフの説明です。"
+      ],
+      "takeaway": "故障を避ける・故障に耐える・縮退する・安全側にする、を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "アは利用者のミス、ウは部品などの故障に着目しています。故障前の予防か、故障後の対応かを分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "avoidanceは回避、toleranceは耐えるという意味です。ソフトは縮退、セーフは安全状態への移行と結び付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ウの「個々の品質を高めて故障が発生しないようにする」が、故障を回避する説明と一致するか確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bf451b048be4856f14159344ce0fd7856633f3d9c23119671677602ad14ce4be",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q9",
+      "summary": "ウの投機実行。分岐結果を待たず予測した側を実行します。",
+      "explanation": "条件分岐の結果が出るまで待つと、パイプラインに空きが生じます。そこで分岐先を予測し、その先の命令を先に実行する技法が投機実行です。\n予測が正しければ結果を利用でき、外れた場合は実行結果を破棄して正しい経路からやり直します。",
+      "choiceReasons": [
+        "実行可能な命令を元の順番に拘束されず実行する技法です。条件未確定の分岐先を予測することとは別の観点です。",
+        "分岐の直後に有効な命令を配置し、分岐による空きを埋める方式です。予測による先行実行ではありません。",
+        "分岐条件が未確定でも予測した経路を実行する技法です。",
+        "レジスタの名前を付け替えて見かけ上の依存関係を取り除きます。分岐先の予測を指しません。"
+      ],
+      "takeaway": "分岐予測は進む先の判断、投機実行はその予測に基づく先行実行。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "条件の結果が出る「前」に実行しています。待ち時間をどのように埋めるか、設問の動作に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "予測が外れる可能性のある経路を先に実行し、外れた結果は破棄する方式です。命令の順番変更だけではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "確定していない見込みに基づく実行を「投機」と呼びます。この語に対応する選択肢を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d088ccc83266496316ae3cb2fd5e30377a3f4f862c3d642e52a91b49348b0e1b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q9",
+      "summary": "ウ。平均25ナノ秒なので40MIPSです。",
+      "explanation": "平均命令時間は10×0.50+40×0.30+40×0.20=25ナノ秒です。1秒で10⁹÷25=40,000,000命令を実行するため、百万命令毎秒の単位では40MIPSです。",
+      "choiceReasons": [
+        "11は時間を単純に合計した90nsの逆数に近い値です。出現頻度を反映した平均時間の逆数ではありません。",
+        "25は平均時間のナノ秒の値で、MIPSへの変換前です。",
+        "10⁹÷25÷10⁶=40MIPSで一致します。",
+        "90は三種類の時間を単純に足した値で、頻度と単位を反映していません。"
+      ],
+      "takeaway": "命令ミックスは時間の加重平均を取り、その逆数を性能にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "整数10nsが50%、移動40nsが30%、分岐40nsが20%という三行を書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各時間に頻度を掛けて足し、平均1命令の時間を求めます。性能はその時間の逆数です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平均は5+12+8=25ns、1,000÷25=40MIPSです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4fa38271b814f3d89a4d51667869575d72c0f2d3d64afaa4b609d42c4b16283d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q11",
+      "summary": "圧縮後6Mバイトの転送0.30秒と展開0.18秒を足し、0.48秒です。",
+      "explanation": "圧縮後のデータ量は15×0.40=6Mバイトです。転送時間は6÷20=0.30秒。展開時間の基準も「1Mバイトに圧縮されたデータ」なので6×0.03=0.18秒です。\n転送と展開は同時に行われないため、合計0.30+0.18=0.48秒となります。元の15Mバイトで展開時間を計算しない点が重要です。",
+      "choiceReasons": [
+        "アの0.48秒は圧縮後6Mバイトの転送・展開の合計です。",
+        "イの0.75秒は転送0.30秒に元の15Mバイト×0.03秒を足した値です。展開の基準を取り違えています。",
+        "ウの0.93秒は元の15Mバイトの転送0.75秒を使っています。転送されるのは6Mバイトです。",
+        "エの1.20秒は転送も展開も15Mバイトを使った値で、圧縮率が反映されていません。"
+      ],
+      "takeaway": "速度・単位時間が圧縮前後のどちらのデータ量を基準にしているか読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "フラッシュメモリにあるのは元の40％のデータです。まず15Mバイトから転送量を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送はデータ量÷20、展開は圧縮されたデータ量×0.03で計算します。同時にしないので時間を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "6÷20と6×0.03を別々に計算し、二つを足して選択肢と比べましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

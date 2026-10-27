@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r04h-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ce749482daa01d9649bc0583683c06802bd2948c383a8520c4a38a4b2abcd962",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q11",
+      "summary": "イ。実効データ容量は32Tバイトです。",
+      "explanation": "6台のうちホットスペア1台は通常のデータ保存に使わないので、RAID5を構成する稼働ディスクは5台です。RAID5のパリティには合計1台分の容量が必要です。実効容量は(6−1−1)×8=32Tバイトです。",
+      "choiceReasons": [
+        "24Tバイトは3台分であり、ホットスペアとパリティ以外にもう1台分を差し引いています。",
+        "5台でRAID5を構成し、そのうち1台分がパリティなので4×8=32Tバイトです。",
+        "40Tバイトはホットスペアを除いた5台の総容量で、パリティ分を引いていません。",
+        "48Tバイトは6台の総容量で、ホットスペアとパリティを考慮していません。"
+      ],
+      "takeaway": "RAID5容量は構成台数−1台分。ホットスペアは先に構成台数から除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「6台」に予備ディスク1台が含まれる点を確認し、通常のRAID5を構成する台数を数えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "稼働ディスク数は6−1台です。RAID5はパリティを分散保存しても合計で1台分を使うので、この稼働台数からさらに1台分を引き、1台の8Tバイトを掛けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホットスペア1台とパリティ1台分を除き、(6−1−1)×8=32Tバイトになります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0d05592deac8004eff487ab90a8cafa2d1d8e1385f72d7af79dc6e93c74211c5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q12",
+      "summary": "イ。SANはストレージ接続用のネットワークを使います。",
+      "explanation": "SANはサーバとストレージを接続するためのネットワークです。代表的にはファイバチャネルなどを使い、サーバからストレージへブロック単位でアクセスします。\nCIFSやNFSによるLAN経由のファイル共有はNASの説明です。内蔵ディスクの1対1接続とも区別します。",
+      "choiceReasons": [
+        "サーバへ直接取り付けるDASの説明で、ストレージ接続用ネットワークではありません。",
+        "ファイバチャネルなどの専用ネットワークでサーバとストレージを接続するSANの説明です。",
+        "CIFSはファイル共有のプロトコルで、LAN経由のNASの説明です。",
+        "NFSもファイル共有のプロトコルで、NASの説明です。"
+      ],
+      "takeaway": "DASは直接接続、NASはファイル共有、SANはストレージ用ネットワーク。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の接続を、直接1対1、専用ネットワーク、LAN上のファイル共有の三つに分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "SANのサーバはストレージのブロックへアクセスします。CIFSやNFSのようなファイル共有との違いを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "SANの代表的な接続技術はファイバチャネルです。その接続を述べる選択肢を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "709ee851a0f04a4e3ccce7030d3659f216c81d21d7ff25808ce379b7fe8e2132",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q10",
+      "summary": "イ。丸みのある対称形で上下二列の接点を持つ図がUSB Type-Cです。",
+      "explanation": "USB Type-Cは上下を反転しても挿入できるコネクタで、外形は両端が丸い扁平な形です。図イは上下対称の外形と二列の接点を示しています。図アは長方形のType-A、図ウはMini-B、図エはMicro-Bの形です。縮尺は同一でないので、大きさではなく外形と接点配置で判別します。",
+      "choiceReasons": [
+        "長方形の外形で片側に接点が並ぶUSB Type-Aです。",
+        "両端が丸い上下対称の形と二列の接点がType-Cの特徴です。",
+        "段差を持つ外形で、USB Mini-Bの形です。",
+        "扁平で角を落とした外形で、USB Micro-Bの形です。"
+      ],
+      "takeaway": "Type-Cは縮尺ではなく、上下対称の丸い外形と接点配置で見分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の縮尺は同一ではありません。四つの図について、外形の角の形と接点の列数をそれぞれ書き出します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Type-Cは表裏を気にせず挿せるので、上下対称の構造が必要です。外周の角と接点の列数を確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "両端が丸い扁平な外形で上下二列の接点を持つイがType-Cです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9ead593a19ae32682fec102e4eb4c7dd59c7caff7b18d3b2dd70c9fe82f6a97c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q11",
+      "summary": "エ、6台。二つの高速化率の比を3と置いて解きます。",
+      "explanation": "r=0.9ならE₀.₉=1/(0.1+0.9/n)、r=0.3ならE₀.₃=1/(0.7+0.3/n)です。\n条件E₀.₉=3E₀.₃へ代入すると、0.7+0.3/n=3(0.1+0.9/n)。整理して0.4=2.4/n、したがってn=6です。\n確認するとE₀.₉=4、E₀.₃=4/3なので、確かに前者は後者の3倍です。",
+      "choiceReasons": [
+        "3台での比は(0.7+0.3/3)/(0.1+0.9/3)=2です。",
+        "4台での比は31/13≒2.38で、3に届きません。",
+        "5台での比は19/7≒2.71で、3に届きません。",
+        "6台なら比は0.75/0.25=3です。"
+      ],
+      "takeaway": "比を求めるとき、逆数の式を割れば分母同士の比が逆向きになることに注意する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "同じ台数nで、r=0.9の場合とr=0.3の場合を別々に式へ入れます。高速化率の比が3になるnを探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの式は1/(0.1+0.9/n)と1/(0.7+0.3/n)。前者=3×後者と置き、分母を払うと0.7+0.3/n=3(0.1+0.9/n)です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "右辺を展開して0.4=2.4/nへ整理します。両辺にnを掛け、最後に0.4で割って台数を求めましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5c6ec13b8d3d4ff34db44e7ebb1f574fb6cd3d2812b237b6bb7a78c62b66b8ff",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q13",
+      "summary": "エ。人の立入りを検知して機械を停止させる仕組みがインタロックです。",
+      "explanation": "インタロックは、安全条件が成立しないときに機械の動作を禁止又は停止する仕組みです。危険区域への人の立入りをセンサで検知して停止する例は、操作ミスなどが危険な動作につながるのを防ぐフールプルーフを実現します。故障後の代替切替えや縮退運転とは目的と契機が違います。",
+      "choiceReasons": [
+        "故障した機械から代替機に切り替える冗長構成の仕組みです。",
+        "利用できる人を限定するアクセス制御の仕組みです。",
+        "不具合部分を切り離して運転を続けるフェールソフトの仕組みです。",
+        "危険な立入りを条件に動作を停止し、安全を確保するインタロックです。"
+      ],
+      "takeaway": "インタロックは安全条件と機械の動作許可を連動させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "停止・切替え・利用許可のどれを制御しているかと、そのきっかけが故障か人の行動かを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フールプルーフでは人の誤操作が事故につながらないようにします。安全条件が崩れたときに危険な動作を止める連動機構を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "人の立入りをセンサが感知したら機械を停止させる例がインタロックです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "68183489d66fc303635f3e0d7d969f9e01e44d25493f2304348feb5604afab7e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q13",
+      "summary": "エ。オブジェクトはデータとメタデータをまとめ、識別子でアクセスします。",
+      "explanation": "オブジェクトストレージは、データと属性を示すメタデータを一つのオブジェクトとして保存し、固有の識別子を指定して読み書きします。ディレクトリの階層をたどるファイルアクセスや、固定サイズのブロックを指定する方式とは異なります。\n階層のような表示や名前付けを提供する製品でも、オブジェクトを識別する基本的なアクセス方法が要点です。",
+      "choiceReasons": [
+        "ファイルシステム上のファイル単位でアクセスするのはファイルストレージです。",
+        "固定サイズの単位でアクセスするのはブロックストレージです。",
+        "データとメタデータをまとめる点は合いますが、階層構造をたどることを基本とする説明は異なります。",
+        "データとメタデータをセットにし、固有の識別子で指定する方式がオブジェクトストレージです。"
+      ],
+      "takeaway": "ファイルはパス、ブロックは区画、オブジェクトは識別子で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の「アクセスする単位」を確認します。ファイル、固定サイズ、階層、固有の識別子という四つの手がかりがあります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "オブジェクトには内容だけでなく属性情報も含みます。内容の保存形式と、どう指定して取得するかを両方読んでください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "メタデータを含むオブジェクトを固有の識別子で指定するのがエです。階層をたどるウとの違いが決め手です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a9377829a5810f5d26a68b31060fd84ceb568dafe6a688c51a37f9efd151dc46",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q10",
+      "summary": "ア。オブジェクトは、固有の識別子を指定してアクセスします。",
+      "explanation": "オブジェクトストレージは、データ本体とメタデータをひとまとまりのオブジェクトとして管理し、固有の識別子でアクセスします。ファイルシステムのディレクトリ階層で管理する方式とは異なります。\n更新は通常オブジェクト全体を再作成・置換えする形で扱います。広域分散でも、全体を止める静止点を必ず設けることが方式の必須条件ではありません。",
+      "choiceReasons": [
+        "固有の識別子で対象オブジェクトへアクセスする、という特徴に合います。",
+        "ファイルの一部分を直接書き換えるような上書き更新を基本の特徴とはしません。通常は全体を再作成・置換えして扱います。",
+        "広域分散のために静止点を必ず設けて同期する、という条件はありません。",
+        "ディレクトリ階層はファイルストレージの基本的な構造です。"
+      ],
+      "takeaway": "オブジェクトは「データ＋メタデータ」を識別子で指定する。ファイルのパスとは区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「フォルダーの中のファイル」という管理と、「固有の番号やキーで指定するデータのまとまり」という管理を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "オブジェクトはデータ本体とメタデータをまとめた単位です。アクセスでは、フォルダーを順にたどる代わりに対象の識別子を指定します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ディレクトリ階層を述べる候補はファイル型です。固有の識別子で対象を直接指定する記述が、オブジェクト型の特徴に合うか確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bfd24069a8d3dfe99275832ed05dbacf291d70beec205406a70b669b21b957f3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q13",
+      "summary": "ア。オブジェクトストレージは非構造型データを大規模に保存するのに適します。",
+      "explanation": "オブジェクトストレージはデータとメタデータをオブジェクトとして扱い、識別子でアクセスする方式です。画像・動画・バックアップなど、更新頻度の低い非構造型データの大容量保存に向き、分散した装置へ拡張できます。\n専用ネットワークでブロックストレージを共有するSAN、サーバ専用のストレージ、複数装置を一台に見せる仮想化とは、説明の焦点が異なります。",
+      "choiceReasons": [
+        "アはオブジェクトストレージの用途と拡張性を述べています。",
+        "イは専用ネットワークで共有するSANの説明です。オブジェクト単位の保存を示していません。",
+        "ウはサーバごとの専用ストレージの説明で、オブジェクトストレージの特徴ではありません。",
+        "エはストレージ仮想化の説明です。データをオブジェクトとして扱うこととは別です。"
+      ],
+      "takeaway": "オブジェクトストレージは識別子で扱う大容量の画像・動画・バックアップに適する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "毎秒細かく書き換えるデータと、一度保存した写真や動画では必要な保存方式が違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "写真や動画をデータとメタデータのまとまりとして保存し、識別子で取得する用途を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "選択肢の主題を、非構造型データの保存・専用ネットワーク・サーバ専用装置・装置仮想化に分けて、用途と照合します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "de265014b7c6efdf99fbbaaebbd53877c1da2fb198950c9c410c0215c9b6fd00",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q10",
+      "summary": "ヒット率で重み付けした平均が15ナノ秒になるように、式を立てます。",
+      "explanation": "10h + 60(1−h) = 15\n10h + 60 − 60h = 15\n50h = 45\nh = 0.9\n\n確かめると、10×0.9 + 60×0.1 = 9 + 6 = 15ナノ秒です。求めるのはヒット率なので、答えはエです。",
+      "choiceReasons": [
+        "0.1は、正しいヒット率0.9に対するミス率です。ヒット率0.1なら平均は55ナノ秒になります。",
+        "ヒット率0.17なら、10×0.17 + 60×0.83 = 51.5ナノ秒で条件に合いません。",
+        "ヒット率0.83なら、10×0.83 + 60×0.17 = 18.5ナノ秒で条件に合いません。",
+        "平均が10×0.9 + 60×0.1 = 15ナノ秒となり、条件に合います。"
+      ],
+      "takeaway": "平均時間＝速い場合の時間×割合＋遅い場合の時間×割合。最後に代入して確認する。",
+      "hints": [
+        {
+          "title": "注目すること",
+          "text": "実効アクセス時間は、速いキャッシュを使える場合と、遅い主記憶を使う場合の平均です。どちらが何割を占めるかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "式を作る",
+          "text": "ヒット率をhとすると、キャッシュを使う割合はh、主記憶を使う割合は1−hです。10×h + 60×(1−h) = 15 と置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "計算を進める",
+          "text": "式を整理すると 60−50h = 15、つまり 50h = 45 です。最後に両辺を50で割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8fdc3cf0badbe374b7ee074bcc11e6b61be258098a67e0237c0e9bbdf3098f9d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q9",
+      "summary": "イ。実効アクセス時間は主記憶の約0.08倍です。",
+      "explanation": "主記憶アクセス時間を1とすると、キャッシュは1/30、ヒット率は0.95、ミス率は0.05です。重み付き平均は0.95×1/30+0.05×1=0.08166…なので、約0.08倍です。キャッシュ確認の時間をミス時にも加える扱いでも約0.0833となり、選択肢は変わりません。",
+      "choiceReasons": [
+        "0.03はキャッシュ時間1/30に近い値で、5%のミスを無視しています。",
+        "0.95/30+0.05=約0.0817なので、約0.08倍です。",
+        "0.37は95%のヒット率を使う重み付き平均と一致しません。",
+        "0.95はヒット率そのものであり、アクセス時間の比ではありません。"
+      ],
+      "takeaway": "アクセス時間はヒット時とミス時を確率で重み付けして平均する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "主記憶のアクセス時間を1と置きます。キャッシュ時間は1/30、主記憶を使う確率は1−0.95です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "速いヒット時と遅いミス時の平均なので、各時間に発生確率を掛けて足します。ヒット側は0.95×(1/30)です。残る確率1−0.95に主記憶時間1を掛けた項を加えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "0.95×1/30+0.05×1=0.08166…です。近い候補は0.08です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d530dc71d513b3123588bc47e64dabe0b89d41822e727bbb072b97e8c3ada66a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q10",
+      "summary": "イ。実効アクセス時間は主記憶の約0.08倍です。",
+      "explanation": "主記憶のアクセス時間を1と置くと、キャッシュは1/30です。ヒットする95%と、主記憶を使う5%を重み付けし、0.95×1/30＋0.05×1=約0.0817です。\nミス時のキャッシュ確認時間も加えるモデルなら1/30＋0.05=約0.0833となり、どちらも選択肢の0.08に最も近くなります。",
+      "choiceReasons": [
+        "約0.03はキャッシュ時間1/30だけに近い値で、5%の主記憶アクセスを反映していません。",
+        "95%のキャッシュと5%の主記憶の時間を平均すると約0.08倍です。",
+        "与えられたヒット率と時間比で計算した約0.082とは大きく異なります。",
+        "0.95はヒット率そのものであり、実効時間の比ではありません。"
+      ],
+      "takeaway": "平均時間は各経路の時間にその発生率を掛けて足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "主記憶の時間を1として、キャッシュの時間を1/30と書きます。ヒット率95%に対するミス率は5%です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均を求めるので、速い経路と遅い経路を95対5で重み付けします。ヒット率そのものを答えにしないようにします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "0.95×(1/30)＋0.05×1を計算しましょう。最初の項は約0.0317なので、そこへ0.05を加えます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "96b0001d328ba33197f564cc90765ab303d94c38d0db655d373bcd3f639bd1b0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q12",
+      "summary": "イ。ライトスルーでは主記憶にも書き、内容を最新に保ちます。",
+      "explanation": "ライトスルーは書込み時にキャッシュと主記憶を共に更新します。ライトバックはまずキャッシュだけ更新し、変更済みブロックを追い出すときなどに主記憶へ書き戻します。",
+      "choiceReasons": [
+        "キャッシュだけへの書込みはライトバックの基本動作です。",
+        "両方へ書くため、主記憶に最新の内容が反映されます。",
+        "両方への同時書込みはライトスルーの説明で、ライトバックではありません。",
+        "変更済みブロックを追い出す場合は読出しミスでも書戻しが必要です。"
+      ],
+      "takeaway": "ライトバックでは追出し対象が変更済みかを確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "書込み先をキャッシュと主記憶の二列に分け、二方式の更新時点を整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "スルーは主記憶まで書込みを通し、バックは変更を後から書き戻すと考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ライトスルーで両方へ書くため主記憶が最新という記述を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0a911c6c5aa0264c6c02dbeca7ac47afb317b5166fa5fcff9d831b59632712f3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q9",
+      "summary": "イ。書込み時にキャッシュと主記憶の両方を更新します。",
+      "explanation": "ライトスルーは、CPUの書込みをキャッシュだけで止めず主記憶にも反映する方式です。主記憶との整合性を保ちやすい一方、書込みのたびに主記憶へのアクセスが発生します。",
+      "choiceReasons": [
+        "キャッシュだけに書く動作はライトバックの書込み時の説明です。",
+        "書込みをキャッシュと主記憶へ反映するライトスルーの説明です。",
+        "追出し時に主記憶へ反映する方式はライトバックです。",
+        "ライトスルーでは主記憶への書込みが多く、アクセス頻度が少ないという説明は合いません。"
+      ],
+      "takeaway": "ライトスルーは即時反映、ライトバックは変更データの追出し時に反映。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の主記憶へ反映する時点を、CPU書込み時と追出し時に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CPUが書き込む時点と、変更済みのキャッシュを追い出す時点の二列で、主記憶を更新する候補を整理します。更新時点の違いが方式を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "キャッシュを更新するたびに主記憶にも同じデータを反映する候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "16a24018991457cb41c0372222f9a98e468d46f0b75ab8967c43946a60b40344",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q10",
+      "summary": "ライトスルーはキャッシュと主記憶を同時に更新します。",
+      "explanation": "ライトスルーではCPUの書込みをキャッシュと主記憶の両方へ反映するので、書込み後の内容が一致します。ライトバックはまずキャッシュを更新し、変更済みブロックを追い出すときなどに主記憶へ書き戻します。従ってライトスルーの両方への同時書込みを述べるイが適切です。",
+      "choiceReasons": [
+        "キャッシュだけを先に更新するのはライトバックの特徴です。",
+        "ライトスルーの書込み先は両方なので、主記憶も更新されます。",
+        "毎回両方へ同時に書くのはライトスルーであり、ライトバックではありません。",
+        "読出しによるミスでも、追い出すブロックが変更済みなら主記憶への書戻しが必要です。"
+      ],
+      "takeaway": "書込みのたびに主記憶へ反映するか、変更済みブロックの追出しまで遅らせるかで区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で、書込み直後の主記憶に最新の値があるかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの方式は主記憶へ反映するタイミングが違います。書込み時とブロック追出し時を分けましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ライトスルーは書込み時に両方を更新します。ライトバックでは変更済みの追出し時に書戻しが要る点も確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9d95762acf0a771cb15bb453d3ab604e0d8de4ec43a350daa40d757aefb41014",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q10",
+      "summary": "エ。フルアソシアティブ方式では、主記憶のどのブロックも任意のキャッシュブロックに置けます。",
+      "explanation": "フルアソシアティブ方式は、主記憶のブロックとキャッシュ上の格納先との対応を固定しません。空きや置換方針に従って、どのキャッシュブロックにも置けます。直接対応を固定するダイレクトマップ方式や、格納できるセットを限定するセットアソシアティブ方式と区別します。",
+      "choiceReasons": [
+        "セットとの対応を固定する記述はセットアソシアティブ方式です。",
+        "主記憶ブロックとキャッシュブロックの対応を固定するのはダイレクトマップ方式です。",
+        "特定の主記憶ブロックに専用領域を用意する方式ではなく、キャッシュ全体から格納先を選べます。",
+        "任意のキャッシュブロックへ任意の主記憶ブロックを格納できることが、フルアソシアティブ方式の特徴です。"
+      ],
+      "takeaway": "キャッシュ方式は、格納先が一箇所・セット内・全体のどれかで区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補で、主記憶とキャッシュの対応が「固定」される範囲を確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ダイレクトマップは一箇所、セットアソシアティブは特定のセット内という制約があります。フルではその制約がどうなるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "フルアソシアティブでは主記憶のブロックをキャッシュ全体の任意のブロックに格納できます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2d4fc050c662ba723cef7c57bca26cde1c392aec3d1a473a50126f6051de47a8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q11",
+      "summary": "イ。ネットワーク上の計算資源を協調利用する方式です。",
+      "explanation": "グリッドコンピューティングは、PCから大型機までネットワーク上の複数の計算資源へ処理を分散し、一つの大規模な処理を実行します。単一装置内のプロセッサの役割分担とは区別します。",
+      "choiceReasons": [
+        "役割を固定して分担する非対称型マルチプロセッサの説明です。",
+        "ネットワーク上の異種の計算資源を協調利用するグリッドの説明です。",
+        "同等のプロセッサを用いる対称型マルチプロセッサの説明です。",
+        "スレッド単位の並列化はマルチスレッディングの説明です。"
+      ],
+      "takeaway": "グリッドはネットワークをまたぐ計算資源の統合利用。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補が一台の装置内のプロセッサか、ネットワーク上の複数装置かを読み分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "PCから大型コンピュータまでの資源を一つの処理に使うという規模の記述に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ネットワーク上の複数プロセッサへ分散する記述がグリッドです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q12",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6588065b6b3c6a3dd2ea117da563899d51bf7cc46f15bc930a8844231807528f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q12",
+      "summary": "ウ。ホストOSを共有し、個別のゲストOSをもちません。",
+      "explanation": "コンテナ型仮想化は、ホストOSのカーネルを共有したままプロセスなどの実行環境を隔離します。仮想マシンのように各環境へ別々のゲストOSを起動する必要がありません。",
+      "choiceReasons": [
+        "物理サーバと仮想環境のどちらかにOSがあればよいという説明は不適切で、ホストOSが必要です。",
+        "ホストOSを置かず個別ゲストOSを動かすのはハイパーバイザ型です。",
+        "ホストOS上で実行環境を隔離し、各環境にゲストOSをもたない説明が適切です。",
+        "ホストOS上で個別ゲストOSを動かすのはホスト型仮想化です。"
+      ],
+      "takeaway": "コンテナはカーネル共有、仮想マシンはゲストOSを個別に起動。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補でホストOSとゲストOSの有無を表にして比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コンテナで隔離するのは実行環境です。OS全体を各環境へ複製する必要があるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホストOSを使い、個別ゲストOSは不要という組合せを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "25f0611d9f21d7e09951ada8e8502527276e70ca00bf4ea469e6b9c141e9dd8c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q8",
+      "summary": "エ。VLIWはコンパイラが複数の動作を一つの長い命令にまとめます。",
+      "explanation": "問題では、同時に実行できる動作をコンパイル時に選び、一つの複合命令にまとめる方式を問います。VLIWはVery Long Instruction Wordの略で、複数の演算を長い命令語に組み込みます。ハードウェアが実行時に並列性を見つける方式とは、命令を組み立てる時点が異なります。",
+      "choiceReasons": [
+        "CISCは複雑な命令セットの分類であり、コンパイラが並列動作を長い命令にまとめる方式の名称ではありません。",
+        "MIMDは複数の命令流が複数のデータを処理する並列構成です。",
+        "RISCは比較的単純な命令セットの分類です。複合命令へのまとめ方を表していません。",
+        "VLIWはコンパイラが並列実行できる動作をまとめ、長い命令語で指定します。"
+      ],
+      "takeaway": "VLIWはコンパイル時の並列化と長い命令語を結び付けて覚える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文の「コンパイルの段階」と「一つの複合命令」に線を引き、実行時の処理ではない点を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "独立した加算と乗算などを一つの命令語に並べて、複数の演算器へ同時に指示する構成を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Very Long Instruction Wordという名称は、複数の動作を含む長い命令語を表します。略称を候補に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "20bec0c3e23ed5a4f925e740a34a5c3d0fa70e476ca9a763a23a521cd1fb31d2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q8",
+      "summary": "エのVLIW。並列に実行する複数操作をコンパイラが長い命令にまとめます。",
+      "explanation": "VLIWはVery Long Instruction Wordの略です。コンパイラが依存関係を調べ、同時実行できる複数の操作を一つの長い命令語へ詰めます。\n実行時にプロセッサが全ての並列性を見つけるのではなく、コンパイル段階のスケジューリングを使う点が設問の決め手です。",
+      "choiceReasons": [
+        "CISCは複雑で多様な命令をもつ設計で、コンパイラが並列操作を束ねる方式の名前ではありません。",
+        "MIMDは複数の命令列と複数のデータ列を扱う並列計算の分類です。",
+        "RISCは命令を単純化する設計で、複数操作を長い複合命令へまとめる特徴とは異なります。",
+        "VLIWはコンパイラが並列操作を一つの長い命令語にまとめる方式です。"
+      ],
+      "takeaway": "「コンパイル時に並列操作を一命令へまとめる」がVLIWの手掛かり。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文の「コンパイルの段階」と「一つの複合命令」をセットで捉えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば依存しない加算と乗算を、別々の実行ユニットに同時に指示する長い命令語を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "命令を単純化する設計、多くの独立した命令列を動かす分類、長い命令語へ操作を詰める方式を区別して候補を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "52bb30664af6d8c8ada8af0f05253faf35077ade1d9a2dd95658ede66173c6a3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q13",
+      "summary": "イ。参照処理を複数サーバへ分散し、台数追加で能力を上げられます。",
+      "explanation": "スケールアウトはサーバなどの台数を増やしてシステム全体の処理能力を上げる方法です。独立に実行しやすい参照トランザクションが多ければ、要求を複数サーバへ分けやすくなります。\n一括処理を分割できない場合や、更新のたびに複数サーバ間の整合性を取る必要がある場合は、台数追加の効果を調整コストが妨げます。",
+      "choiceReasons": [
+        "並列処理が困難なので、台数を増やしても一つの大きな処理を分担しにくい構成です。",
+        "参照中心の処理は複数サーバへ分散しやすく、台数追加による性能向上に向いています。",
+        "更新整合性のオーバーヘッドを小さくする必要があり、分散先を増やすと調整が課題になります。",
+        "同じマスターの複製を更新するたび整合性維持が必要で、台数追加による性能向上を制約します。"
+      ],
+      "takeaway": "スケールアウトは独立に分散できる仕事で効果を出しやすい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「台数を増やす」方法として各処理を複数サーバへ振り分けられるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "参照と更新を比べます。更新はデータ整合性を保つ調整が必要ですが、参照要求は独立に処理しやすい性質があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "すでに複数サーバで分散している参照中心のシステムなら、追加サーバへ要求を振り分けられます。該当する説明を探します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

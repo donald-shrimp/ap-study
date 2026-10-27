@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r03h-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9891497647d52174e6d30dd9a5d6e0cf3b9b0c065bab5e8c1bee6e526335630c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q42",
+      "summary": "ウ。JPCERT/CCは独立した組織としてインシデント対応を支援します。",
+      "explanation": "JPCERTコーディネーションセンターは、特定の政府機関や企業から独立した立場で、コンピュータセキュリティインシデントの報告受付、対応支援、状況把握、分析、再発防止への助言を行います。規格の審議、暗号の評価、国の司令塔という役割と区別します。",
+      "choiceReasons": [
+        "産業標準化に関する調査・審議は日本産業標準調査会の役割です。",
+        "電子政府推奨暗号を評価するプロジェクトはCRYPTRECです。",
+        "独立した組織として報告受付と対応支援を行うJPCERT/CCの説明です。",
+        "内閣官房に設置された司令塔はNISCの説明です。"
+      ],
+      "takeaway": "JPCERT/CCはインシデント情報の収集と対応の調整・支援を行う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の業務を「標準」「暗号」「事故対応」「国の司令塔」に分類します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CERTはコンピュータセキュリティ事故への対応に関わります。組織名の分野と、候補の業務内容を対応させましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "特定の政府機関や企業から独立し、インシデント報告を受け付けて対応を支援する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c36a176e21b61e00f8c874a6685f94df88e68671d6f02d43f5666f0fac46254b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q40",
+      "summary": "イ。JVNは脆弱性情報と対策情報を提供します。",
+      "explanation": "JVNはJapan Vulnerability Notesで、JPCERT/CCとIPAが共同運営する脆弱性対策情報ポータルです。脆弱性の内容、影響する製品、対策などを提供し、利用者の修正対応を支援します。",
+      "choiceReasons": [
+        "JVN自体の目的はソフトウェアを検査して脆弱性を検出することではありません。",
+        "脆弱性関連情報と対策情報を公開する目的に一致します。",
+        "脆弱性の深刻度評価方法はCVSSなどであり、JVNの目的そのものではありません。",
+        "弱点の種類を分類する基準はCWEなどであり、JVNの目的そのものではありません。"
+      ],
+      "takeaway": "JVNは対策情報の提供、CVSSは深刻度評価、CWEは弱点分類。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補を、発見・情報公開・評価・分類の四つの活動に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用者が製品の更新や回避策を決めるために、ポータルが提供する内容を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "JVNでは脆弱性の内容と、その修正・回避策を公開します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fbe792d72a503a4e3fc956fe38a2fbc873b3007a9b918a94961756bc94f19f3a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q38",
+      "summary": "ウ。OCSPは証明書の失効状態をオンラインで問い合わせる。",
+      "explanation": "OCSPはOnline Certificate Status Protocol。証明書の有効期限がまだ来ていなくても、鍵の漏えい等で失効することがある。OCSPレスポンダへ対象証明書の状態を問い合わせ、失効していないかを確認する。\n\n秘密鍵の再発行や証明書の更新の進捗管理、鍵交換のエラー確認を行うものではない。期限の確認と失効状態の確認も別々に行う。",
+      "choiceReasons": [
+        "秘密鍵の再発行手続の進捗を調べるプロトコルではない。",
+        "鍵交換失敗時の認証状態を確認する目的ではない。",
+        "証明書の失効状態を問い合わせる目的に合う。",
+        "証明書更新手続の進捗を調べる目的ではない。"
+      ],
+      "takeaway": "期限内の証明書でも失効し得る。その状態をオンラインで確認するのがOCSP。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "PKIでは、期限内でも鍵の漏えい等によって証明書を使えなくすることがある。何の状態を確かめたいか考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "OCSPのSはStatus。新しい鍵を発行する処理や更新の進み具合ではなく、既存の証明書を確認する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「まだ使ってよい証明書か」を、失効状態として問い合わせる説明を選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5c4cf1ae328ba00dba839acd450a9e198a16faf53672ade14d0061f2ad955536",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q42",
+      "summary": "イ。シェルを起動する実装を避け、OS命令としての解釈を防ぐ。",
+      "explanation": "OSコマンドインジェクションは、入力値がOSのコマンドの一部として解釈されることで発生する。外部入力を連結してシェルを起動する実装を避け、目的の処理を専用API等で実現するのが基本的な対策。\n\nSQLのプレースホルダーはSQLインジェクション、直接メモリ操作の回避はメモリ破壊、ファイル名のディレクトリ確認はパストラバーサルに関連する対策。この問題では命令を解釈する実行環境に対処する。",
+      "choiceReasons": [
+        "SQLのプレースホルダーはSQLインジェクション対策。",
+        "シェル起動を避けると、外部入力がシェル命令として解釈される経路を減らせる。",
+        "直接メモリ操作の回避はバッファオーバーフロー等への対策。",
+        "ディレクトリの確認はパストラバーサル対策で、シェル命令の混入全般を防がない。"
+      ],
+      "takeaway": "注入された命令を解釈する場所を特定し、その呼出しを避ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "何に入力が混ざる攻撃かを確認する。データベースのSQL、メモリ、ファイルのパス、OSのシェルは別の対象。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "外部入力を文字列でコマンドへ連結し、シェルに渡すと、入力が命令として動く恐れがある。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "命令を解釈するシェルを起動せず、専用APIで処理する方向の選択肢を探す。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f241a8748363608f66027311463a4af86cbf4a9c7306a18da631d1301d09ac2c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q39",
+      "summary": "イ。自社製品の脆弱性を扱う組織機能はPSIRTです。",
+      "explanation": "PSIRTはProduct Security Incident Response Teamの略で、製品のセキュリティに関する報告を受け、脆弱性の調査・修正・情報公開などを調整する組織です。自社製品の脆弱性に起因するリスクという条件に合います。\nCSIRTは組織の情報システムに関わるインシデント対応、SOCは継続的な監視や分析が主な役割です。WHOISの技術連絡先はドメイン等の登録上の連絡先です。",
+      "choiceReasons": [
+        "アのCSIRTは組織のシステムでのインシデント対応が中心で、製品セキュリティを専門とする名称はPSIRTです。",
+        "イのPSIRTは自社製品の脆弱性への対応を担います。",
+        "ウのSOCはログなどの監視・分析を担います。製品脆弱性への対応機能を表すものではありません。",
+        "エはドメイン等の技術連絡先で、製品脆弱性対応を行う社内機能ではありません。"
+      ],
+      "takeaway": "自社システムの事故対応と、自社製品の脆弱性対応を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "対象は自社のネットワークで起きた事故ではなく、顧客へ提供する「製品」の脆弱性です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "製品の脆弱性報告を受け、開発部門の修正と顧客への情報提供を調整する部署を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Product Security Incident Response Teamの頭文字を取った名称を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9d90975e512bc1c06bccbf4b5e86a4aa2fa7108993372b68af95626bf0309825",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q40",
+      "summary": "ア。PSIRTは顧客へ提供した製品に関するインシデントを扱います。",
+      "explanation": "PSIRTのPはProductで、組織の製品・サービスの脆弱性や、それらの利用で起きたセキュリティ問題に対応するチームです。製品の調査、修正、顧客への情報提供などを扱います。\n社内の在庫・販売・従業員情報管理システムで起きる組織内のインシデントは、通常CSIRTの対象です。",
+      "choiceReasons": [
+        "顧客に販売した製品とその利用のインシデントで、PSIRTの対象です。",
+        "社内の在庫管理システムのインシデントはCSIRTの対象です。",
+        "社内の販売管理システムのインシデントはCSIRTの対象です。",
+        "社内の従業員情報管理システムのインシデントはCSIRTの対象です。"
+      ],
+      "takeaway": "PSIRTは提供製品、CSIRTは組織内のコンピューター環境の対応を中心にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "同じ「製品」という語でも、顧客が使う販売製品と、社内で製品在庫を管理するシステムを分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "PSIRTはProduct Security Incident Response Teamです。組織が提供した製品の問題に対応する役割を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "選択肢の利用者が顧客か社内担当者かを確認し、提供製品そのものの問題を述べている候補を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "12f77be06f94abce0f8529ad54f82c4fd1d11e9327239c3b6cd9ddca6b81742c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q36",
+      "summary": "エ。SAMLは認証や認可に関する情報をシステム間で交換する仕様です。",
+      "explanation": "SAMLは認証結果や属性、認可に関係する情報をXML形式のアサーションとして交換するための仕様です。複数サービス間でログイン情報を連携するシングルサインオンなどに利用されます。通信そのものの暗号化や、システム監視・脅威情報の交換の仕様ではありません。",
+      "choiceReasons": [
+        "負荷や動作状況の送信は監視情報に関する説明で、SAMLが扱う認証情報とは異なります。",
+        "脆弱性や脅威情報の交換はセキュリティ情報共有の分野であり、SAMLの目的ではありません。",
+        "VPNによる暗号通信を実現する仕様ではありません。",
+        "認証・認可に関する情報を交換し、複数サービスの認証連携に使う仕様です。"
+      ],
+      "takeaway": "SAMLは認証結果等の連携。暗号トンネルや脅威情報の共有とは分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補を、監視情報・脅威情報・暗号通信・利用者の認証情報に分けます。複数サービス間で何を共有したいか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "あるサービスで確認したログイン結果を別のサービスへ伝えると、何度もログインせずに利用できます。この連携のために交換する情報を確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "SAMLは認証や認可に関する情報を交換する仕様です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "061bc226e7e1d8e3df2e5ed9ede984735f870ea6c9c53e9f4a14f4d006d16653",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q37",
+      "summary": "ウ。社内の認証結果をクライアント経由でクラウドへ渡します。",
+      "explanation": "SAMLは、認証を担当するIdPとサービスを提供するSPの間で認証結果を共有するための仕組みです。この問題では社内認証サーバがIdP、クラウドサービスがSPです。\n利用者は社内で認証され、その結果を表すSAMLアサーションをクライアント経由でクラウドへ送ります。社内のパスワードそのものをクラウドへ渡す必要はありません。",
+      "choiceReasons": [
+        "ディレクトリのIDとパスワードをクラウドが取り出す方式ではありません。",
+        "パスワードをクラウドへ転送するのではなく、認証結果を渡します。",
+        "社内で認証した結果をクライアント経由でクラウドへ渡すSAMLの動作に一致します。",
+        "乱数とパスワードによるチャレンジレスポンスの説明で、SAMLの認証結果の連携ではありません。"
+      ],
+      "takeaway": "SAML連携は認証結果の受渡し。認証先のパスワードをサービスへ渡す仕組みではない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "条件ではIDとパスワードを社内で管理し、認証も社内サーバで行います。クラウドが本人確認を信頼するために必要な情報を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "社内で本人確認を済ませたなら、クラウドは「認証済み」という証明を検証できます。元のパスワードを取り寄せる必要はありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "認証サーバの認証結果をクライアント経由で送るウが該当します。ID・パスワードを渡すアとイは違います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "450db45b6168c4af6a422b671d5edccf19f91df72462fb0f8441a7af3aa98d8b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q43",
+      "summary": "エ。SBOMはソフトウェアの構成部品と依存関係の一覧です。",
+      "explanation": "SBOMはSoftware Bill of Materials、ソフトウェア部品表です。ソフトウェアを構成するライブラリなどのコンポーネントや、その相互依存関係を記録します。\n部品に脆弱性が見つかったとき、どの製品でその部品を利用しているか調べる手がかりになります。ログ分析システムや組織全体の資産台帳、脆弱性管理活動そのものとは異なります。",
+      "choiceReasons": [
+        "アラート・ログを集約し分析するのはSIEMの説明です。",
+        "組織のIT資産の台帳であり、一つのソフトウェアの構成部品表とは範囲が違います。",
+        "脆弱性や設定ミスを特定・処理する管理活動の説明です。SBOMはその活動に使える部品情報です。",
+        "ソフトウェアのコンポーネントと依存関係を一覧にしたものがSBOMです。"
+      ],
+      "takeaway": "SBOMの部品情報から、脆弱なライブラリを含む製品の影響を追う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補の対象を、ログ、一組織の資産、管理の活動、一製品の構成へ分けます。「一覧」と書かれたイとエも、何を数える一覧かが違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "あるライブラリに脆弱性が見つかったとき、自社製品のどこへ含まれるかを追うには、ライブラリと依存関係の一覧が必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "コンポーネントと相互依存関係を列挙したエがSBOMです。アラート分析や脆弱性管理の手順そのものではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b5b4faf79b12dc42cc95d54136db38cb07921f4a3e9f1a98470038f8ab88c3ff",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q40",
+      "summary": "イ。SBOMで構成部品を把握し、該当する脆弱性を管理できる。",
+      "explanation": "SBOMはソフトウェアの部品表。使っているライブラリやそのバージョン、依存関係などを把握する。あるライブラリに脆弱性が公表されたとき、製品にそのバージョンが入っているかを照合し、対応対象を調べられる。\n\n部品表を持つだけで脆弱性が自動的に修正されるわけではない。利用者アカウント、ソースコードへのアクセス制御、バックアップやマルウェア検査は、それぞれ別の仕組みが担う。",
+      "choiceReasons": [
+        "利用者アカウントの一元管理は認証・ID管理の役割。",
+        "構成部品とバージョンを脆弱性情報と照合できるので、脆弱性管理に使える。",
+        "ソースコードの変更履歴やアクセス制御はバージョン管理等の役割。",
+        "バックアップやマルウェア混入の防止は部品表そのものの役割ではない。"
+      ],
+      "takeaway": "SBOMの部品とバージョンを、脆弱性情報へ結び付ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Bill of Materialsは部品表。ソフトを誰が使うかではなく、どのライブラリ等で作られているかを一覧化する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "「ライブラリXのバージョンYに脆弱性」と公表されたとき、自分の製品に含まれるかを部品表から調べられる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この照合で管理できるのは何か。アカウント、ソース変更、バックアップと区別して選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6613a969c5e445a1ddff3672fa278452134716a045ff6b2bd619497877e42e17",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q44",
+      "summary": "イ。送信元ドメインが許可したIPと送信サーバのIPを照合します。",
+      "explanation": "SPFでは送信側ドメインのDNSに、メール送信を許可するサーバを公開します。受信サーバは送信元ドメインのSPF情報を取得し、接続してきた送信サーバのIPアドレスが許可されているかを確認します。電子署名を検証する方式ではありません。",
+      "choiceReasons": [
+        "メールに付けたディジタル署名を使うのはDKIMです。",
+        "ドメインの許可情報と送信サーバIPの照合がSPFです。",
+        "全メールのアーカイブは記録保存であり、送信元認証ではありません。",
+        "上司の承認まで送信を保留するのはメール承認の仕組みです。"
+      ],
+      "takeaway": "SPFは送信IPの許可確認、DKIMはメールの署名確認。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "送信元確認を行う側が受信サーバか送信サーバかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ドメインがDNSへ公開した送信許可情報を、実際の接続元と照合する流れを考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "受信サーバが送信元ドメイン情報と送信サーバIPを使う候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "efd0eb488d0560bef4123aad3743b95e32d14ab5061f4204951f51292b5e3e1c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q43",
+      "summary": "イ。SPFは送信元ドメインが許可した送信サーバのIPアドレスと照合します。",
+      "explanation": "SPFではドメイン管理者が、メール送信を許可するサーバをDNSのTXTレコードで公表します。受信サーバはSMTP接続元のIPアドレスが、エンベロープ送信元などのドメインの許可リストに合うか確認します。\nメールに電子署名を付けて検証するDKIMとは違い、送信サーバのIPアドレスとドメインの関係を調べる方式です。",
+      "choiceReasons": [
+        "アはメールの署名を検証するDKIMの仕組みです。SPFは送信サーバのIPを照合します。",
+        "イは送信元ドメインの許可情報と接続元IPを照合するSPFの仕組みです。",
+        "ウは送信メールのアーカイブで、送信元認証ではありません。",
+        "エは上司承認による送信保留で、送信元ドメインの詐称確認ではありません。"
+      ],
+      "takeaway": "SPFはIPの許可、DKIMは署名の検証。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の実行者を受信サーバと送信サーバに分け、使う材料を署名・送信元IP・保存・上司承認に分けます。送信元認証に関係するものを比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ドメインのDNSに「このIPから送信してよい」と登録した情報を、受信サーバが参照します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "署名を検証する候補ではなく、送信元ドメインと送信サーバのIPアドレスを使う候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q45",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9f3be0fa91cd3ca0dbfadb6969dcbb3e66a2ac97979b1b9b5d7d95009fb47642",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q45",
+      "summary": "ウ。サーバ証明書の送付b、クライアント証明書の送付a、認証cの順です。",
+      "explanation": "TLSのクライアント認証では、まずサーバがサーバ証明書を送り、クライアントが通信相手を確認します。続いてクライアント証明書を送り、サーバはその証明書と秘密鍵の所持を示す署名などを検証してクライアントを認証します。提示された三処理の順はb→a→cです。証明書の受信前にクライアント認証を終えることはできません。",
+      "choiceReasons": [
+        "a→b→cはサーバ証明書より先にクライアント証明書を送るため、TLSの提示順と異なります。",
+        "a→c→bはサーバ証明書が最後になり、順序が誤っています。",
+        "b→a→cならサーバの証明書提示後にクライアント証明書を受け取り、認証できます。",
+        "c→a→bはクライアント証明書を受け取る前に認証しており、前提を満たしません。"
+      ],
+      "takeaway": "TLSの相互認証はサーバの証明書提示から始まり、クライアントの認証へ進む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表のa・bを証明書の送信方向で書き分け、cの判断に必要な情報を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "サーバがクライアントを認証するには、まずクライアント証明書を受け取る必要があります。その前に通信相手であるサーバの証明書が提示されます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバからクライアントへのb、逆方向へのa、サーバによる認証cを順に並べます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "68655e1af9f430fade502c686500038c6cc8a0a43f4efd084a59a5598c71dedd",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q41",
+      "summary": "TPMは鍵生成や暗号処理を行うセキュリティチップです。",
+      "explanation": "TPMはPCなどに搭載されるセキュリティ用のハードウェアです。鍵の生成・保護、ハッシュ演算、暗号処理などを行い、プラットフォームの信頼性を支えます。ネットワーク装置やメール認証の仕組みではなく、機器内のセキュリティチップを述べるアです。",
+      "choiceReasons": [
+        "機器に搭載され、鍵生成や暗号処理を行うTPMの説明です。",
+        "電子メールの送信ドメインを認証するSPFやDKIMなどの説明です。",
+        "複数の防御機能を統合するUTMの説明です。",
+        "ログの集中管理と相関分析を行うSIEMの説明です。"
+      ],
+      "takeaway": "TPMは端末内の暗号処理・鍵保護を支えるハードウェア。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補は端末内の部品、メール認証、ネットワーク装置、ログ分析システムを述べています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Trusted Platform Moduleはプラットフォームの信頼を支える部品です。鍵や暗号処理をどこで保護するか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "PC搭載のセキュリティチップが鍵生成・ハッシュ・暗号処理を行う記述に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be2c399f86d9d58ce1a49cee9c465fa745eb3d6cb9089403a286d5015e620aa6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q44",
+      "summary": "ウ。VDIはWeb処理をサーバで行い、PCへは画面の画像だけを送ります。",
+      "explanation": "VDIでは仮想デスクトップ上のブラウザがWebサイトからデータを受け取り、実行や描画をサーバ側で行います。PCは画面表示用の画像データを受け取り、キーボードやマウスの操作をサーバへ返します。WebコンテンツをPC側で直接処理しないため、未知のマルウェアをPCへ持ち込むことを抑えられます。",
+      "choiceReasons": [
+        "IPsecで暗号化しても、受信データにマルウェアが含まれていれば安全にはなりません。",
+        "実行ファイルだけの削除では、スクリプトや文書に含まれる攻撃を防ぎ切れません。",
+        "Web処理はサーバ内で行い、生成した画面の画像だけをPCへ渡す動作が効果の理由です。",
+        "既知の不正コードの検知に頼る方法では、未知のマルウェアを防ぐ説明になりません。"
+      ],
+      "takeaway": "VDIによる分離では、コンテンツ処理をサーバへ置き、端末には画面を送る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問の目的は「未知のマルウェアがPCにダウンロードされるのを防ぐ」です。既知パターンの検知に頼る候補は目的に合うか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "VDIサーバとPCを二つの箱で描き、Webブラウザをサーバの箱に置きます。Webデータを処理する場所と、PCが遠隔操作に必要な情報を分けて考えます。未知のコードは既知パターン検査だけで排除できるとは限りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバで処理して生成したデスクトップ画面の画像だけをPCへ送る動作が、端末への持込みを防ぎます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q45",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b2722d289de73ff416fb6f8aaef10deb3c5a137ce9455021cf42a12858c44262",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q45",
+      "summary": "イ。VLAN分割はブロードキャストが届く範囲を限定します。",
+      "explanation": "VLANは一台のスイッチ上でも、ポートを別々の論理的なLANへ分ける機能です。ブロードキャストは同じVLAN内へ届くので、全40台が同じLANにいる場合よりも届く範囲を狭くできます。\nこれによりARPなどに含まれるアドレス情報が不要な端末へ届くリスクを減らします。VLAN設定だけで全ICMPの遮断、MACによる接続許可、特定IPを持つ端末だけの接続許可が行われるわけではありません。",
+      "choiceReasons": [
+        "VLAN分割は全てのICMPを遮断する機能ではなく、同一VLAN内の通信も可能です。",
+        "ブロードキャストドメインを分割し、アドレス情報が届く範囲を制限できます。",
+        "MACアドレスで接続可否を判定するのはポートセキュリティなどの別の制御です。",
+        "IPと物理ポートを結び付ける接続制御はVLAN分割だけで自動的に行われません。"
+      ],
+      "takeaway": "VLANの基本効果は論理LANとブロードキャストドメインの分割。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "一台のスイッチでもポートをグループ分けすると、全40台が同じ論理LANではなくなります。分割によって通信が届く範囲を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ARPなどのブロードキャストは同一LANへ広がります。VLANを分けると、その情報が別のグループへは広がらなくなります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ブロードキャストの到達範囲を制限するイが基本的な効果です。端末のMACやIPによる接続許可は別の機能です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "77cd4c00a06ab388f7fe837823ddfae3311e10c6cd41543a008a38d480e88b1b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q43",
+      "summary": "ウ。相対的には上からTLS、IPsec、L2TPの順。",
+      "explanation": "L2TPはLayer 2 Tunneling Protocolで、レイヤ2のフレームを運ぶトンネルを作る。IPsecはIPのネットワーク層に対する保護。TLSはTCP等の上で動作し、アプリケーションに安全な通信を提供する。\n\nOSIとの対応を厳密に一つの層へ当てはめるより、この問題は相対関係を問う。上からTLS→IPsec→L2TPとなる図C、選択肢ウが正しい。L2TPが実際にIP/UDP上を使うことと、トンネルが扱うレイヤの分類を混同しない。",
+      "choiceReasons": [
+        "AはIPsecを最上位、TLSを最下位にしていて逆。",
+        "BはL2TPが最下位だが、TLSとIPsecが逆。",
+        "CはTLSがIPsecより上、IPsecがL2TPより上で相対関係が合う。",
+        "DはTLSが上だが、L2TPとIPsecが逆。"
+      ],
+      "takeaway": "L2TPはレイヤ2、IPsecはIP層、TLSはTCP等より上という相対位置で読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の上がアプリケーション側、下が物理側。プロトコルが保護・運搬する対象を確認する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "L2TPの2はレイヤ2、IPsecのIPはネットワーク層。まずこの二つの上下を決める。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "TLSはTCP等の上で使い、IPsecより上に置く。二つの上下関係を同時に満たす図を探す。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "25185d6334dab6d9a43244a85f2a82eb596bf397ea81c1e0cf89b0222b38cef5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q42",
+      "summary": "イ。REST APIに対する攻撃はWAFの防御対象です。",
+      "explanation": "WAFはWebアプリケーションのHTTPリクエストの内容を検査し、不正な入力などを遮断します。REST APIもHTTPで提供されるため、APIの脆弱性を狙うリクエストに対して有効な防御になります。すべての攻撃を防げるという意味ではありません。",
+      "choiceReasons": [
+        "DNSキャッシュポイズニングはDNSの攻撃で、HTTP検査のWAFの対象ではありません。",
+        "HTTPで提供されるREST APIへの不正リクエストはWAFの検査対象です。",
+        "SMTPの第三者中継を防ぐにはメールサーバの中継制限などが必要です。",
+        "大量メールの攻撃はメールサービスで対策し、WAFのHTTP検査とは異なります。"
+      ],
+      "takeaway": "WAFはHTTPのアプリケーション入力を検査する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各攻撃がDNS、HTTP、SMTPのどの通信を使うか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Web Application Firewallが見るのはWebアプリケーションへのリクエスト内容です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "REST APIのHTTP入力を検査できるので、その脆弱性を狙う攻撃が対象です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bf8a1b80fe86e29756509dad4bbe92e7dfc49376ddfe7be68c3b097824748cb7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q41",
+      "summary": "イ。WAFはHTTP通信を検査し、REST APIなどのWebアプリへの攻撃を防御します。",
+      "explanation": "WAFはWeb Application Firewallで、HTTP/HTTPSのリクエスト内容を検査し、SQLインジェクションなどWebアプリケーションの脆弱性を狙う攻撃を遮断します。HTTPで提供するREST APIにも適用できます。\nDNSの偽応答やSMTPの不正中継・大量メールは、HTTPアプリケーションの検査対象とは異なるため、対応するサーバ・プロトコルでの対策が必要です。",
+      "choiceReasons": [
+        "アのDNSキャッシュポイズニングはDNS応答の問題で、Webリクエストを検査するWAFの対象ではありません。",
+        "イのHTTPで提供されるREST APIへの攻撃にはWAFの検査・遮断が有効です。ただし全てのAPI脆弱性を解消するわけではありません。",
+        "ウはSMTPの不正中継設定の問題です。メールサーバ側の対策が必要です。",
+        "エは電子メールによる負荷の問題です。HTTPのWAFで直接防御する対象ではありません。"
+      ],
+      "takeaway": "WAFの適用範囲は、Webアプリケーションへ届くHTTPの内容。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の通信をDNS、HTTPのAPI、SMTPのメールに分けます。WAFが読む通信はどれか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "WAFはWebリクエストのパス・パラメータ・本文などを検査します。REST APIもこれらで要求を受け取ります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "APIの不正な入力はWebリクエストの検査対象です。DNSやSMTPは別のプロトコルであることを確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fb0168c074140f60993664a6efcec3f7d370bacdd4cbd17cc542d9784c4f460b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q46",
+      "summary": "ア。エクスプロイトコードは脆弱性を利用するためのコードです。",
+      "explanation": "エクスプロイトコードは、ソフトウェアの脆弱性を利用して本来許されない動作を引き起こすコードです。攻撃に使われる一方、許可された環境で脆弱性が実際に悪用可能かを検証する用途もあります。\nマルウェアを見分けるパターン、秘密データを用いた認証用ハッシュ、一度だけ使う認証コードとは異なります。",
+      "choiceReasons": [
+        "脆弱性を悪用するコードであり、検証にも利用できるという説明が適切です。",
+        "マルウェア検出用のシグネチャ・定義情報の説明です。",
+        "メッセージと秘密鍵などから作るメッセージ認証コード（MAC）の説明です。",
+        "毎回変わる認証コードはワンタイムパスワードなどの説明です。"
+      ],
+      "takeaway": "エクスプロイトは欠陥を利用するコード。検出パターンや認証コードとは役割が違う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "同じ「コード」でも、アは弱点の利用、イはマルウェアの検出、ウは改ざんの検出、エはログイン認証に使います。役割の違いを先に整理しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "脆弱性情報だけでなく、実際にその欠陥を利用できるか検証するコードを考えます。検証環境と攻撃の両方に使われ得ます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ソフトウェアの脆弱性を悪用する攻撃コードを述べるアです。イの定義ファイルは攻撃を検出する側の情報です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

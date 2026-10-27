@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r03a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "14c0861d460d2b0b5b66d2fecc0ddf2e80d68152f2074bb54081d6eb36d9134d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q17",
+      "summary": "ア。許容発生率はアクセス1回当たり5×10⁻⁶です。",
+      "explanation": "ページフォールト発生率をpとすると、1命令当たりの遅れはアクセス2回×p×40ミリ秒です。40ミリ秒=40,000マイクロ秒なので、2p×40,000≤0.4よりp≤0.4/80,000=5×10⁻⁶です。1命令当たりのアクセス回数と、ミリ秒からマイクロ秒への換算を両方反映します。",
+      "choiceReasons": [
+        "遅れは2×5×10⁻⁶×40,000=0.4マイクロ秒で上限に一致します。",
+        "遅れは0.8マイクロ秒で、許容値0.4を超えます。",
+        "遅れは4マイクロ秒で、許容値の10倍です。",
+        "遅れは8マイクロ秒で、許容値の20倍です。"
+      ],
+      "takeaway": "平均遅れはアクセス回数×発生率×1回の遅れ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "発生率を主記憶へのアクセス1回当たりのpと置き、1命令のアクセスが平均2回あることを式に入れます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "40ミリ秒を40,000マイクロ秒に直します。1命令の平均遅れは2×p×40,000マイクロ秒です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2p×40,000≤0.4を解くとp≤5×10⁻⁶となります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "cb0f2c15f9d4861c5647a0574b868f9603dbb2f6d316cf68ea08831ae43c7045",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q18",
+      "summary": "エ。固定長ページの配置では外部断片化が発生しません。",
+      "explanation": "ページングは仮想記憶と主記憶を同じ固定サイズのページ・ページ枠に分けます。空いている枠ならどこへでもページを置けるため、領域間の小さな空きが利用できなくなる外部断片化は生じません。\nセグメンテーションは論理的な単位を可変サイズで扱うので、保護や共有に適する一方、外部断片化が起こり得ます。ページングにもページ内部の未使用部分という内部断片化はあります。",
+      "choiceReasons": [
+        "論理単位ごとの保護は、コードやデータなどを分けるセグメンテーションに適した特徴です。",
+        "論理的な単位の共有はセグメンテーションの特徴で、ページングの比較上の長所ではありません。",
+        "可変サイズの領域を動的に伸縮する特徴は、セグメントの扱いに対応します。",
+        "固定長の枠へ配置するため、主記憶の外部断片化が生じないことがページングの長所です。"
+      ],
+      "takeaway": "ページングは外部断片化を防ぐが、ページ内の内部断片化は残る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "比較するのは固定長のページと、論理的なまとまりごとに長さが変わるセグメントです。サイズが一定という点に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "空きページ枠はどれも同じ大きさなので、一つのページを置くために連続した大きな空きを探す必要がありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "可変長領域の間に小さな空きができる外部断片化は、固定長枠のページングでは発生しません。エです。内部断片化とは分けます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d72de30c6f3658b563de9682500ea8ab5f5c0de9ded54032c9176c821c9c76dc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q16",
+      "summary": "ア。ページ置換えが頻発し性能が急落するスラッシングです。",
+      "explanation": "実行に必要なページを主記憶に十分保持できないと、ページを入れ替えた直後にまた別のページが必要になり、置換えが頻発します。CPU処理よりページの入出力に多くの時間を費やし、処理能力が急落する状態をスラッシングといいます。ページフォールトは、必要なページが主記憶にないという個々の事象です。",
+      "choiceReasons": [
+        "ページ置換えの頻発による性能の急激な低下を指します。",
+        "主記憶の内容を補助記憶へ退避する操作を指します。",
+        "空き領域が細かく分かれるなど、領域利用に無駄が生じる状態です。",
+        "必要なページが主記憶に存在しないという事象で、性能急落の状態そのものではありません。"
+      ],
+      "takeaway": "ページフォールトは事象、スラッシングは置換え頻発による性能悪化。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ページ置換えの発生頻度が高い」と「処理能力が急激に低下」の二つを一組の状態として捉えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "必要なページを保持しきれないと、処理のたびに読み戻しと追出しが続き、実行より入出力に時間を使います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この性能悪化の状態をスラッシングと呼びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c3f896571925c9d8d3bebc2d7beb181ddf5eef14de63af3d06fbe7eb8c2390c8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q17",
+      "summary": "ア。ページ置換が多発して性能が急落する現象はスラッシングです。",
+      "explanation": "主記憶が不足すると、必要なページを読み込んだ直後に別のページを追い出し、すぐまた読み込むという置換が続くことがあります。実処理よりページの入出力に時間を費やし、処理能力が急落する状態をスラッシングと呼びます。\nページフォールトは必要なページが主記憶にないという個別の事象であり、それが起きるだけでスラッシングとは限りません。",
+      "choiceReasons": [
+        "ページ置換が多発して実処理が進まなくなる状態をスラッシングと呼びます。",
+        "スワップアウトは主記憶の内容を補助記憶へ移す操作です。性能急落の現象名ではありません。",
+        "フラグメンテーションは記憶領域が断片化することです。",
+        "ページフォールトは参照したページが主記憶にない事象で、性能急落の状態全体を指す語ではありません。"
+      ],
+      "takeaway": "ページフォールトは事象、スラッシングは過剰な置換で実処理が進まない状態。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題は一回のページ不在ではなく、「置換頻度が高まり、処理能力が急激に低下」という状態全体を聞いています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "必要ページを読み込むたびに別の必要ページが追い出されると、計算よりもページの出し入れに時間を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ページ不在を表すページフォールトと、入出力ばかりになるスラッシングを分けます。状態名を聞くのでアです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2f6ea9a46dd0ca46fd7b3b43a53cdd793e97d2af08502775caeba66783a785f8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q18",
+      "summary": "ウ。空き容量の合計が十分でも、断片化により必要な領域を確保できないことがあります。",
+      "explanation": "可変長領域を繰り返し確保・解放すると、空き領域が細かく分散する外部フラグメンテーションが生じます。例えば10Mバイトの空きが三つ離れて存在しても、連続20Mバイトの領域は確保できません。固定長方式では領域内の未使用部分という内部フラグメンテーションも区別します。",
+      "choiceReasons": [
+        "可変長方式は様々な大きさの領域の確保・返却によって外部フラグメンテーションが発生します。",
+        "固定長方式が可変長方式より外部フラグメンテーションを起こしやすいという説明は不適切です。固定長でも内部の未使用領域は生じ得ます。",
+        "空きが小片に分散すれば、合計容量が十分でも必要な連続領域を確保できないことがあります。",
+        "返却のたびにガーベジコレクションを行う必要はありません。また、ガーベジコレクションは不要領域の回収で、必ず断片化を解消するとは限りません。"
+      ],
+      "takeaway": "空きの総量と連続した空きの大きさは別。外部フラグメンテーションでは後者が不足する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "可変長のメモリ領域で、確保・返却を繰り返した配置を描きます。使用中の領域の間に小さな空きが分かれた場合を作り、空きの合計と一続きの空きの長さを別々に数えましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "使用中領域を挟んで小さい空きが点在している図を描きます。空きの合計と、最大の連続空き領域をそれぞれ数えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "10Mバイトの空きが三つあっても、連続20Mバイトを確保できない場合があります。この状況を述べる候補が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q16",
+    "baseVersion": 1,
+    "baseLessonSHA256": "ac3b5f6a877dfd3480623a51c1e4e6530d9e9eeee76e755ec9ffe3c8b7e5768b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q16",
+      "summary": "ウ。必要な容量の最大値は200Mバイトです。",
+      "explanation": "Aの開始で50Mバイトを作ります。A終了後にB、Cが同時開始し、それぞれ50Mバイトを作るので計150Mバイトです。Aのファイルは最初に生起するBだけが参照し、B終了で消えます。BとC終了後にはB、Cのファイル計100Mバイトが残り、D、E開始で各50Mバイト追加され、計200Mバイトになります。DはBを参照、EはCを参照し、両者の終了でそれらを消します。最後のF開始時はD、E、Fの計150Mバイトです。最大は200Mバイトです。",
+      "choiceReasons": [
+        "100MバイトではB、Cが同時にファイルを作る時点の150Mバイトにも足りません。",
+        "150MバイトではD、E開始時に残るB、Cの100Mバイトと、新規100Mバイトを同時保持できません。",
+        "D、E開始時のB、C、D、Eの4ファイルで4×50=200Mバイトが最大です。",
+        "250MバイトはAのファイルも残ると数えた値ですが、AのファイルはB終了時に削除済みです。"
+      ],
+      "takeaway": "一時ファイルの容量はジョブの開始と終了で増減を追い、消える時点を先行関係から確定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図のA→B・C、B→D・E、C→E、D・E→Fを確認します。同時実行は2で、上にあるジョブを先に生起させる条件も読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "開始ごとに50Mバイト追加、参照ジョブ終了で先行ファイル削除です。最初はAの50Mバイト、続いてB・C開始では50+50+50と記録します。分岐先のうち先に生起するBだけがAを参照するので、B終了時に何が消えるかも記入します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "B・C終了後にはBとCのファイルが残ります。D・E開始時に二つ加わり、4×50=200Mバイトとなります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "754812217a19175c93de6f01989827f98519c7a6521932930026442082e7224b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q18",
+      "summary": "イ。不要なヒープ領域を回収するのがガーベジコレクションです。",
+      "explanation": "ガーベジコレクションは、プログラムから使用されなくなったオブジェクトの領域を検出し、ヒープの空きとして再利用可能にします。主記憶の配置移動やモジュール読込みとは別の処理です。",
+      "choiceReasons": [
+        "空き領域をまとめるのはコンパクションで、可変区画方式という方式名ではありません。",
+        "不要なヒープ領域の回収という説明で正しいです。",
+        "格納位置の移動は動的再配置で、動的リンキングではありません。",
+        "必要時のロードは動的ローディングで、動的再配置ではありません。"
+      ],
+      "takeaway": "回収、配置移動、結合、読込みを操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の操作を、不要領域の回収・領域の移動・必要モジュールの読込みに分類します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ヒープ上で使われなくなったオブジェクトを再利用可能にする操作に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "不要なヒープ領域の回収はガーベジコレクションです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "517a526bb51b1346263bbc63670aa3f00b3c51f413ad18c6a8b4c4494b58b6bc",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q14",
+      "summary": "エ。2x²−x⁴は初めに直線より下、後半に上となります。",
+      "explanation": "各直列枝の稼働率はx²、二枝並列の稼働率は1−(1−x²)²=2x²−x⁴です。x=0.5では0.4375<0.5、x=0.8では0.8704>0.8。端点は0と1で、直線との内部交点は(√5−1)/2≈0.618です。したがって下から上へ交差するエです。",
+      "choiceReasons": [
+        "全域で直線より上の形ですが、x=0.5では下になります。",
+        "全域で直線より下の形ですが、x=0.8では上になります。",
+        "前半で上、後半で下の形で、実際の比較と逆です。",
+        "前半で下、後半で上へ交差する形が計算と一致します。"
+      ],
+      "takeaway": "直列は積、並列は全枝故障確率の補数で計算する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の上の枝は装置二個が直列です。まず枝一本が動く確率を書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一本の枝はx²。両枝が故障する確率を(1−x²)²として、全体が動く確率を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "f(x)=2x²−x⁴で、x=0.5では下、x=0.8では上なのでエの形です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6e0d552b7e895938a19c54020d520563c2b92d831e0fd113ed140e9d2e15d1e7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q18",
+      "summary": "LRUは最後に使ってから最も長く経ったページを置換します。",
+      "explanation": "LRU（Least Recently Used）は、最近最も使われていないページを追い出す方式です。各ページの最後の参照時刻を比較し、現在までの経過時間が最大のページを置換します。アはこの基準を正しく述べています。ページフォールトは必要なページが実記憶にない状態で、通常は補助記憶からページを読み込みます。",
+      "choiceReasons": [
+        "最後の使用後の経過時間が最長というLRUの置換基準です。",
+        "通常のインデックス方式のページ表は仮想ページから実ページへの対応を管理します。実記憶の全ページだけの表という説明ではありません。",
+        "ページフォールトの対処は必要なページの読込みで、不要オブジェクトの回収であるGCとは別です。",
+        "等サイズのページ枠を使うページングでは、小さな外部空き領域が散在する説明は当たりません。"
+      ],
+      "takeaway": "LRUは最終使用時刻、FIFOは読込み時刻に着目する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "アの「使用後」、イのページ表、ウのページフォールト、エの空き領域を別々に確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "置換方式では、古さをロードから測るか、最後の使用から測るかが違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "LRUのRecently Usedは最近の使用です。最後の使用から最も長く経ったページを追い出す記述と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "02623b8120670349b1fc362bd2ab85ee37422f554c156ad98ada06255dfdd053",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q19",
+      "summary": "ア。補助記憶はページアウトされたページの退避先になります。",
+      "explanation": "仮想記憶では、主記憶に置ききれないページを補助記憶に退避し、必要になればページインします。補助記憶の役割はこのページの格納先であって、主記憶の内容全体をバックアップすることや、更新前の値を履歴として保存することではありません。",
+      "choiceReasons": [
+        "ページアウトしたページを保存し、後のページインに備えます。",
+        "更新前の内容を残すのは更新履歴・回復用情報の役割で、仮想記憶の説明ではありません。",
+        "物理主記憶と補助記憶を連続した仮想アドレスに単純に割り当てる方式ではなく、ページごとに所在を管理します。",
+        "主記憶全体のバックアップが目的ではなく、必要に応じて退避ページを保持します。"
+      ],
+      "takeaway": "仮想記憶の補助記憶は主記憶から追い出したページを保持する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補で保存する対象を、ページ・更新前の値・アドレス空間・全体の複製に分け、仮想記憶の主記憶と補助記憶の役割に対応させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ページ表で各ページの所在を管理し、使うページを主記憶へ戻せるよう退避先に内容を残します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "主記憶からページアウトされたページを格納する役割です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f681439721cda19d38a2893edb269fc1789ff5c1c47335afdbfffb67997c6d9f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q14",
+      "summary": "ア。エラーログ取得機能は原因調査を速め、MTTRの短縮に役立ちます。",
+      "explanation": "MTTRは故障から復旧までの平均修理時間です。エラーログで発生時の状況や原因を調べやすくすると、診断と修復に要する時間を短くできます。故障を起きにくくする対策や、誤りを運転中に訂正する機能とは目的を区別します。",
+      "choiceReasons": [
+        "障害原因の特定を助け、修理・復旧の時間を短くするのでMTTRの改善に直接役立ちます。",
+        "ビット誤り訂正は誤りによる故障を防ぐ対策で、主に信頼性向上に寄与します。",
+        "命令再試行は一時的な誤りから動作を継続する対策で、修理時間短縮とは性格が異なります。",
+        "予防保全は故障する前に対処して故障間隔を長くする、MTBF向上の対策です。"
+      ],
+      "takeaway": "MTBFは故障しにくさ、MTTRは故障後の復旧の速さ。原因調査の支援はMTTRに効く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問の「MTBFを長くするよりもMTTRを短くする」に注目し、故障する前と故障した後に対策を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "復旧までを「障害を検知→原因を特定→修理」と分けます。各候補がこの故障後の工程を短くするのか、故障そのものを起こりにくくするのかを分類しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "エラーログがあれば原因調査が速まり、修理・復旧時間の短縮につながります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0c4f7f4a0c7f362133bf492bc6b346259326620b580a903b78fd1a28d45c48f5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q16",
+      "summary": "ウ。短いタスクが続くと、長いタスクが待ち続ける可能性があります。",
+      "explanation": "処理予定時間の短いタスクを優先すると、新たに短いタスクが到着するたびに長いタスクが後回しになることがあります。これが飢餓（スターベーション）です。\nアは待つほど優先度を上げるエージングで飢餓を抑え、イのラウンドロビンとエの到着順方式は待ち行列順にCPUを割り当てます。",
+      "choiceReasons": [
+        "待ち時間に応じて優先度を上げるエージングを行うので、後回しにされ続けることを抑えます。",
+        "ラウンドロビンでは一定時間ずつ順番にCPUを与えるので、特定タスクの飢餓を抑えます。",
+        "短い仕事が優先され続けると、処理時間の長いタスクがCPUを得られない可能性があります。",
+        "到着順に先頭から実行する方式なので、後から来た短いタスクが追い越し続けることはありません。"
+      ],
+      "takeaway": "優先条件が固定だと飢餓が起き得る。待ち時間に応じた優先度上昇は対策になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「待ち続ける可能性」は、単に一度の待ち時間が長いことではなく、後から来たタスクに繰り返し追い越されることです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "長いタスクが一つ待っているところへ、短いタスクが次々到着する場面を想像します。どの方式なら後から来たものが前へ進みますか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ウは毎回最短の処理予定時間を選ぶため、長いタスクが追い越され続けます。アは待つほど優先度が上がるので対策があります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9de454eb08a6875c911e2dd042f669a54a77148336bcf47ff27724d51ed61ec1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q15",
+      "summary": "エの11秒。Bは12秒に完了し、到着1秒との差が11秒です。",
+      "explanation": "処理時間順方式では、実行待ちの中で処理時間が短いジョブを先に実行します。Aを0〜2秒、Cを2〜5秒、Eを5〜6秒、Dを6〜8秒、Bを8〜12秒に処理します。\nBの到着は1秒。ターンアラウンドタイムは到着から完了までなので、12−1=11秒です。待ち時間だけなら8−1=7秒で、処理時間4秒を含めます。",
+      "choiceReasons": [
+        "8秒はBの開始時刻です。到着から完了までの時間ではありません。",
+        "完了12秒から到着1秒を引くと11秒で、9秒にはなりません。",
+        "Bの完了は12秒で、到着1秒を引くと11秒です。10秒ではありません。",
+        "Bの完了12秒と到着1秒の差11秒が正しいです。"
+      ],
+      "takeaway": "待ちジョブだけで短い順を選び、ターンアラウンドは完了−到着で求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初の0秒にはAしかいません。Aが終わる2秒ではBとCが待っているので、処理時間を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Cを開始した後にD,Eが到着します。C終了の5秒で待っているB,D,Eから最短を選びます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Bより前の実行時間はAの2秒、Cの3秒、Eの1秒、Dの2秒です。Bの4秒を加えて完了時刻を出し、到着1秒を引きましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "10b4d7420c9300cb1665b5dd4774fad771bdc1eb008288bfc76ffb60aae999c2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q18",
+      "summary": "ウ。Gitは各ローカル環境に全履歴を持つ分散型管理ツールです。",
+      "explanation": "Gitでは通常のcloneでリポジトリの履歴をローカルに複製します。ローカルで履歴の調査やコミットができ、共有リポジトリと通信できない間も作業を記録できます。SubversionやCVSのように中央リポジトリへ変更を記録する方式とは、この履歴と記録の所在が異なります。",
+      "choiceReasons": [
+        "中央リポジトリを中心に変更を管理する集中型のツールです。",
+        "中央リポジトリを中心に履歴と変更を管理する集中型のツールです。",
+        "全履歴をローカルに持ち、通信できない間も履歴調査やコミットができます。",
+        "主にファイル単位の版を管理するツールで、問われている分散型リポジトリの複製とは異なります。"
+      ],
+      "takeaway": "分散型では共有先と通信せずローカルに履歴を記録できる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「全履歴の完全な複製」と「中央へアクセスできない間の変更記録」がどこにあるかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "作業用ファイルだけでなく履歴をローカルに持つ方式なら、履歴調査と変更の記録を通信なしで行えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ローカルリポジトリに全履歴を持ちコミットできる分散型ツールはGitです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "09c5ecfdddd88998b8a9781ae3cd562c2d48b9e27a5ca6a7d4e93e6f5fac73db",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q19",
+      "summary": "ウ。Gitは履歴を含むリポジトリをローカルに保持します。",
+      "explanation": "Gitは分散型のバージョン管理ツールです。各開発者がリポジトリを複製し、通常は履歴も手元に持つため、サーバに接続できなくても履歴の調査やローカルのコミットができます。\nApache SubversionとCVSは中央リポジトリを中心とする集中型です。RCSは主に個々のファイルの版を管理するツールで、問題の分散型の説明に該当しません。",
+      "choiceReasons": [
+        "Apache Subversionは集中型で、履歴全体を持つ分散型の説明とは異なります。",
+        "CVSは中央リポジトリを利用する集中型です。",
+        "Gitは履歴を含むローカルリポジトリで調査やコミットを行える分散型です。",
+        "RCSはファイル単位の版管理が中心で、全履歴を複製する分散開発の説明ではありません。"
+      ],
+      "takeaway": "ローカルで履歴確認とコミットができるのは、作業ファイルだけでなくリポジトリを持つから。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "手元にあるのが最新の作業ファイルだけか、「全履歴を含む完全な複製」かが決め手です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "通信できないときも変更を記録できるという条件から、記録先のリポジトリが各開発者のローカルにある方式を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "集中型のSubversion・CVSと、分散型のGitを区別します。全履歴を手元に持つという条件がGitに一致します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "550f518c8c859f231afe2941928ddc81ebc6380a7bceaeb6912824ffdd614ea6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q18",
+      "summary": "イのクロスコンパイラ。動かす計算機とは別の計算機でコンパイルします。",
+      "explanation": "設問では、言語処理プログラムを動かしているコンピュータと、生成した目的プログラムを動かすコンピュータで命令形式が違います。\nこのようにホストと異なるターゲット向けの機械語を生成するコンパイラをクロスコンパイラと呼びます。組込み機器向けプログラムをPC上で生成する場面などで使います。",
+      "choiceReasons": [
+        "ほかの計算機の動作を模倣して実行するものです。別の命令形式の目的プログラムを生成する言語処理系ではありません。",
+        "コンパイラを動かすホストとは別の命令形式のターゲット向けにコードを生成するものです。",
+        "実行速度やコードサイズを改善するコンパイラの性質です。生成先の命令形式が異なることを表しません。",
+        "仕様やパラメータからプログラムを自動生成するものです。ホストとターゲットの命令形式の違いによる名称ではありません。"
+      ],
+      "takeaway": "クロスコンパイラはホストと異なるターゲット向けのコードを生成する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "実行しているのは言語処理プログラム、生成するのは別の計算機向けの目的プログラムです。二つの実行場所を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "設問はコードの最適化ではなく、生成先の命令形式がホストと違うことを問うています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "異なるターゲット向けにコンパイルする「クロス」という語を含む名称を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be40df0bbbc9eca2f6047ae268ba723a7b94273dc793807c63de2da3da88f2d5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q16",
+      "summary": "ア。Cの到着3秒から終了14秒までの11秒です。",
+      "explanation": "到着順で多重度1なのでAは0〜5秒、Bは5〜11秒、Cは11〜14秒に実行されます。Cのターンアラウンドタイムは待ち時間を含め、終了14−到着3=11秒です。",
+      "choiceReasons": [
+        "14−3=11秒で正しいです。",
+        "12秒となる開始・終了時刻は到着順の実行に合いません。",
+        "13秒は到着時刻3秒の差引きと一致しません。",
+        "14秒はCの終了時刻であり、到着からの経過時間ではありません。"
+      ],
+      "takeaway": "ターンアラウンドタイムは終了時刻−到着時刻。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Aが0秒に到着して5秒実行する区間を時間軸に描きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "BとCはAの終了を待ちます。Bの6秒を続け、その後Cの3秒を置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Cは14秒に終了するため、14−3=11秒です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4eb9c01f396f154a64e4aa1941c906172ac87c9c1ad9f23f9c34daf2ddc3b471",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q18",
+      "summary": "ウ。割込み処理は最優先タスクより優先されます。",
+      "explanation": "割込み禁止状態を考慮しない条件では、割込みが発生すると実行中タスクを中断して割込み処理ルーチンを実行します。タスク間の優先度によるスケジューリングと、ハードウェア割込みの受理は別です。",
+      "choiceReasons": [
+        "タスク切替禁止は割込み禁止と異なり、割込み処理の呼出しまで禁止しません。",
+        "割込み処理が長いとタスクの再開が遅れ、応答性に影響します。",
+        "割込み処理は最優先タスクを含むタスクの処理より優先されます。",
+        "割込みではタスクの状態を保存して割込み処理へ移るので、タスクと同一コンテキストで実行するという説明は不適切です。"
+      ],
+      "takeaway": "タスク切替禁止と割込み禁止を混同しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題が割込み禁止状態を除外していることを確認し、タスクと割込み処理を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タスクを切り替えないことと、外部からの割込みを受け付けないことは別の制御です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最優先タスクを実行中でも、受け付けた割込みの処理へ先に移ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0f21951f587489397f67986b9a024b5d8f6a89aa0d96fcb3a2aa42155c916771",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q19",
+      "summary": "イ。多重度1と2で完了時刻の差は7秒です。",
+      "explanation": "要求の到着時刻を0、1、2、3秒とします。多重度1では各4秒を順に実行し、終了は4、8、12、16秒です。多重度2では最初の二つが0〜4秒と1〜5秒に動作し、待っている後続二つは4〜8秒、5〜9秒に動作します。全ての完了は16秒と9秒で、差は7秒です。",
+      "choiceReasons": [
+        "6秒ではありません。多重度2の最終完了は2件目開始の1秒を含めて9秒です。",
+        "単独実行では16秒、2件同時実行では9秒に完了するため、差は7秒です。",
+        "8秒は全要求が同時到着した場合の差です。本問は1秒間隔で到着します。",
+        "9秒は多重度2での完了までの時間であり、二つの条件の差ではありません。"
+      ],
+      "takeaway": "到着間隔がある処理は、到着時刻・実行開始・終了を時系列で追う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "4件の到着時刻を0、1、2、3秒として書き出します。実行開始は到着と同じとは限りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1件4秒なので、まず多重度1では最初の要求が0〜4秒、次の要求が4〜8秒です。多重度2では2枠目を1秒到着の要求が使えます。到着時刻と空き枠の両方を満たした時点から開始し、各条件の最後の終了時刻を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "多重度1の終了は4、8、12、16秒。多重度2は4、5、8、9秒なので、差は16−9=7秒です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "60479c2fbf277e91b51206c93f50f83bd0e512b3716716fadb842f9c6df7e812",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q18",
+      "summary": "多重度1では16秒、多重度2では9秒で終わるので、差は7秒です。",
+      "explanation": "最初の到着を時刻0とすると、4件は時刻0,1,2,3に到着します。多重度1は一件ずつ4秒かかり、終了は4,8,12,16です。\n多重度2では最初の二件が0〜4と1〜5で実行されます。空いた枠へ後の二件が入り、2秒目の要求は4〜8、3秒目の要求は5〜9で実行されます。全件終了は9なので差は16−9=7秒です。",
+      "choiceReasons": [
+        "アの6秒ではありません。多重度2の二つ目の枠は1秒遅れて始まり、最後は9秒に終わります。",
+        "イの7秒は16秒と9秒の差です。",
+        "ウの8秒は二枠とも時刻0に開始した計算です。二件目の到着は1秒後です。",
+        "エの9秒は多重度2での全件終了時刻であり、問われる二方式の差ではありません。"
+      ],
+      "takeaway": "並列処理は到着時刻と空き枠の時刻を並べて開始・終了を決める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "4件の到着を0,1,2,3秒として書きます。処理時間は並列でも一件4秒のままです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "多重度1では終了した直後に待っている次の要求を開始します。多重度2は二つの枠を別々に追います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二枠の最初の終了は4秒と5秒です。残りをそれぞれ開始するといつ終わるか計算し、逐次処理の16秒との差を求めます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

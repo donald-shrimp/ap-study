@@ -174,8 +174,16 @@ for path in ['content/fp2/questions.json','content/fp2/question-reviews.json','c
  assert builder.diagnostic_digest(previous)==proof['canonicalSHA256'],path
 catalog_before=read(ROOT/'content/fp2/case-catalog.json');catalog_before['entries']=catalog_before['entries'][:120]
 assert builder.diagnostic_digest(catalog_before)==preserved['content/fp2/case-catalog.json']['canonicalSHA256']
-for path in ['data/qualifications/ap/manifest.json','data/qualifications/ab730/manifest.json']:
- assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==preserved[path]['fileSHA256']
+# PR49's AP preservation proof remains historical when independently reviewed
+# AP lesson revisions are subsequently registered. Current AP must pass its own gate.
+ap_manifest=ROOT/'data/qualifications/ap/manifest.json'
+quality_root=ROOT/'work/ap/objective-quality'
+if (quality_root/'manifest.json').is_file():
+ from ap_lesson_quality import validate_workspace
+ validate_workspace(ROOT)
+ ap_manifest=quality_root/'baseline/ap-manifest.json'
+assert hashlib.sha256(ap_manifest.read_bytes()).hexdigest()==preserved['data/qualifications/ap/manifest.json']['fileSHA256']
+assert hashlib.sha256((ROOT/'data/qualifications/ab730/manifest.json').read_bytes()).hexdigest()==preserved['data/qualifications/ab730/manifest.json']['fileSHA256']
 
 for text,expected in [('１，４９０，０００','1490000'),('0.4350','0.435'),('1,49',None),('149万円',None),('1e6',None),('①',None)]:assert decimal_value(text)==expected
 with tempfile.TemporaryDirectory(prefix='fp2-content-') as d:

@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r07h-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b779f795496a95a6cb305b7d6445a448ebc8c55f5186a8121b3bbc7df2bbadb2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q44",
+      "summary": "ウ。ストレッチングはハッシュ計算を繰り返して試行の計算量を増やす。",
+      "explanation": "パスワード候補を一つ試すたびにハッシュ計算を多数回必要にすると、大量の候補を調べる攻撃に時間がかかる。これがストレッチング。照合用の値を繰り返しハッシュして作るウが該当する。\n\n失敗回数による停止はアカウントロック、利用者ごとに違う値を加えるのはソルト。ソルトとストレッチングは併用できるが、同じ対策ではない。現在の実装では専用のパスワード用KDF等を使う。",
+      "choiceReasons": [
+        "質問を追加する認証手続。ハッシュ計算を重くする対策ではない。",
+        "誤り回数によるアカウントロック。オンライン試行を制限する。",
+        "ハッシュを繰り返し、候補1件あたりの計算量を増やすストレッチング。",
+        "利用者ごとに異なる文字列を加えるのはソルト。"
+      ],
+      "takeaway": "ストレッチングは繰返し計算、ソルトは利用者等ごとの異なる付加値。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つを、追加質問・試行回数制限・繰返し計算・異なる文字列の付加に分ける。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "stretchは計算を引き延ばすイメージ。攻撃者が候補を一つ確かめる時間を長くする仕組みを考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ユーザーごとの文字列はソルト。ハッシュ処理自体を何度も行う説明と区別する。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dc144214a0c777e0cc26b1d867dd97f80058f2b7407ce45da3385296a1d1f050",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q40",
+      "summary": "ウ。流出したID・パスワードの組を別サイトで試す攻撃です。",
+      "explanation": "パスワードリスト攻撃は、流出した利用者IDとパスワードの組を、別のサービスへそのまま試す攻撃です。複数サイトで同じ認証情報を使い回している利用者が狙われます。\n一般的な単語を候補にするのは辞書攻撃、ハッシュ値との対応を調べるのはレインボーテーブルなどの攻撃、画面操作の観察はショルダーハッキングに相当します。",
+      "choiceReasons": [
+        "単語や人名から候補を作るのは辞書攻撃です。流出したID・パスワードの組を使う攻撃とは異なります。",
+        "パスワードとハッシュ値の対応を使う解析で、レインボーテーブル攻撃などに相当します。",
+        "他サイトから流出したID・パスワードの組を試すので、パスワードリスト攻撃です。",
+        "入力操作を撮影して盗み見る手口で、ショルダーハッキングに相当します。"
+      ],
+      "takeaway": "リスト攻撃のリストは流出したID・パスワードの組。使い回しが被害を広げる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の作り方を比べます。単語から推測、ハッシュから解析、流出した組を再利用、画面を録画という違いがあります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じIDとパスワードを複数のサイトで使うと、一つのサイトで漏れた組が別サイトでも通るかもしれません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "流出したID・パスワードのリストを別サイトで試すウが該当します。単語リストを作るアは辞書攻撃です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q45",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b7695fae0d3134ce19e930efb9faf957cc129c8e3476561424db96b98f3e3bed",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q45",
+      "summary": "イ。問題を起こしそうな入力を与え、異常を観測する手法です。",
+      "explanation": "ファジングは、想定外・不正・境界的なデータをソフトウェアへ入力し、クラッシュなどの異常を監視して脆弱性を探すテストです。大量のアクセスを送ること自体や、入力を無害化する処理とは異なります。",
+      "choiceReasons": [
+        "大量リクエストで処理量や耐性を測るのは負荷テストです。",
+        "様々な問題入力を与え、動作の異常から脆弱性を発見するファジングです。",
+        "よく使われるパスワードの一覧による試行は辞書攻撃です。",
+        "特殊文字の置換はエスケープ処理で、入力を使った脆弱性探索ではありません。"
+      ],
+      "takeaway": "ファジングは変化させた入力を使い、異常動作を探索する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で変えるものがアクセス量、入力内容、パスワード、文字表現のどれかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ソフトウェアが予期しない値や形式を受けたときの挙動を観測するテストを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "問題を起こしそうな多種類のデータを入力して異常を監視する候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q45",
+    "baseVersion": 2,
+    "baseLessonSHA256": "001112d181f3340f2e25b29c2920448b32f6045fb47daf23692c15ddafa05cc7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q45",
+      "summary": "ウ。多様な問題を起こしそうな入力で挙動を調べるのがファジングです。",
+      "explanation": "ファジングは想定外・不正・境界的なデータなどを自動的に入力し、異常終了やメモリ破壊等の挙動から脆弱性を探す手法です。既知の攻撃パターン照合だけに限定せず、入力に対する処理の問題を発見します。ポート探索、ログ解析、通信監視とは試験対象と方法が異なります。",
+      "choiceReasons": [
+        "FINパケットへの応答から稼働サービスを探すのはポートスキャンの手法です。",
+        "ログや履歴を解析して改ざんを検出するのは監査・ログ解析です。",
+        "問題を引き起こしそうな多様な入力を与え、挙動から脆弱性を発見するのでファジングです。",
+        "パケットを既知の攻撃パターンと照合するのはシグネチャ型の侵入検知です。"
+      ],
+      "takeaway": "ファジングは入力を多数生成して挙動を観察し、処理の脆弱性を探す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の作業を「通信の応答観測」「ログ解析」「入力を与える」「通信パターン照合」に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "入力の長さを極端にしたり、不正な形式を与えたりして、ソフトウェアが異常な動作をするか調べる試験を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "多様な問題を起こしそうなデータをソフトウェアに入力して挙動を監視する候補がファジングです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f2e600a9c33ed98b67beef3efce1458f8fc1b8cd0608154fc93b9b786789bd28",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q46",
+      "summary": "ウのファジング。多様な異常入力を与えて応答や挙動を観測します。",
+      "explanation": "ファジングは、問題を誘発しそうなデータを大量に生成・入力し、クラッシュや異常動作などを監視してソフトウェアの脆弱性を検出するテスト手法です。\n負荷の大きさを主目的にするロードテストや、入力範囲の境界を選ぶ限界値分析とは、入力の選び方と検出目的が異なります。",
+      "choiceReasons": [
+        "入力範囲の境界値付近を重点的に選ぶ手法です。大量の異常入力を生成して脆弱性を探す方式とは異なります。",
+        "因子の組合せと結果の関係を計画的に調べる方法で、設問の異常データ入力による脆弱性検出ではありません。",
+        "問題を誘発する入力を大量に与え、異常な応答や挙動を監視するファジングです。",
+        "同時利用数や処理量などの負荷を増やし、性能・耐性を確認するテストです。"
+      ],
+      "takeaway": "ファジングは異常入力の多様さで不具合・脆弱性を誘発する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「問題を引き起こす可能性があるデータ」と「脆弱性を検出」を確認します。単に多数の利用者を同時接続する条件ではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "形式不正などの多様な入力を大量に与え、クラッシュや異常挙動を検出するテストを思い出します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "fuzzは乱れた・不規則な入力に由来する語です。異常入力による検査の名称を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1d185f63acb8afc1f13ae9f362b86fcc9e97b8ecc0c17fcd5a3bdf99d989e45b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q36",
+      "summary": "C&Cサーバは感染したボットへ情報収集や攻撃を指示します。",
+      "explanation": "C&CはCommand and Controlです。ボットネットでは、遠隔操作可能なマルウェアに感染した多数の機器へ指令を送り、情報収集やDDoSなどの攻撃を実行させる役割を担います。攻撃側の指揮系統を述べるアが該当します。防御側が不正な通信を遮断する装置とは異なります。",
+      "choiceReasons": [
+        "遠隔操作可能なマルウェアを指揮して情報収集や攻撃を行わせます。",
+        "攻撃通信の遮断は防御側のフィルタリングなどの機能で、C&Cの役割ではありません。",
+        "証明書の発行を担う認証局の機能であり、ボットの指揮ではありません。",
+        "Webコンテンツを一元管理する機能で、感染端末への指令ではありません。"
+      ],
+      "takeaway": "C&Cはボットネットの指令元として理解する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ボットネットは遠隔操作される感染端末の集まりです。サーバがどこを指揮するかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "C&CのCommand and Controlを、感染端末へ送る操作指示と結び付けます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "感染端末に「情報を集める」「攻撃を開始する」と命令する役割を述べる候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "764ec220a9b6b5e8ea2663dbcc754ad8e199b81c0aefaaf77abbfefa92422bb9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q43",
+      "summary": "ウ。UDP送信に対するICMP port unreachableは閉じたポートの応答です。",
+      "explanation": "TCPのSYNに対してSYN/ACKが来れば接続要求を受け入れる開いたポート、RST/ACKなら拒否される閉じたポートと判断します。\nUDPにはTCPのような接続応答がありません。指定ポートを利用できない場合に返るICMP port unreachableは、そのポートが閉じていることを示します。無応答だけでは開放とフィルタリングを区別できない場合があります。",
+      "choiceReasons": [
+        "RST/ACKは接続の拒否・リセットを示し、許可ではありません。",
+        "SYN/ACKはTCP接続要求への受入れ応答で、拒否ではありません。",
+        "ICMP port unreachableは宛先UDPポートが利用できないことを示すので閉じていると判断します。",
+        "ウと同じ応答を受けて開いているとするため、意味が逆です。"
+      ],
+      "takeaway": "TCPはSYN/ACKとRST、UDPはICMP port unreachableの意味を読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "TCPの接続開始はSYN→SYN/ACK→ACKです。この2番目が返るときの意味を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RSTはリセットです。受け付ける応答と拒否する応答を取り違えないようにします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "UDPの選択肢は同じICMP応答を示し、開閉の判定だけが逆です。port unreachableの「ポートに到達できない」という意味を使いましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5415e471abf58d23391d365048cd29951e883f1fc62b3348e4928fafbd346bb1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q38",
+      "summary": "ウ。外部から他社宛てのメールを自社サーバが中継しています。",
+      "explanation": "第三者中継は、自社の送信者・受信者ではない外部同士のメールを自社の中継サーバが転送することです。設問ではIPアドレスとドメインは詐称されていません。\nウは接続元BBB.45.67.89が社外、送信者a.b.dも他社、受信者a.b.eも他社です。自社と無関係の外部間の転送に当たります。エは外部から自社宛てなので通常の受信です。",
+      "choiceReasons": [
+        "接続元と送信者が自社で、他社宛ての正規の送信に当たります。",
+        "接続元・送信者・受信者が自社で、自社内のメールです。",
+        "外部接続から他社送信者のメールを別の他社へ転送するので第三者中継です。",
+        "社外から自社ドメイン宛てのメールを受ける通常の受信です。"
+      ],
+      "takeaway": "第三者中継は外部から入り、自社以外へ出るメールの転送。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "自社はAAAで始まる二つのIPとa.b.cです。各行に社内・社外の印を付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "外部からの接続だけでは第三者中継と断定できません。受信者が自社なら通常の受信です。送信者と受信者の所属も確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "BBBの接続元で、送信者も受信者もa.b.c以外の行を探します。自社宛てでない外部間の転送を見つけましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "89a0f32da0900d373e0a1b7afd1e0c3abbef639d34d9d0a5bf3213c36371d4f3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q43",
+      "summary": "ア。WORMのバックアップは保存済みデータの上書きを防げます。",
+      "explanation": "ランサムウェアは書込み可能なデータを暗号化するなどして利用不能にします。重要なのは、PC上のデータが破壊されても復元に使えるバックアップを残すことです。\nWORMは一度書いたデータを後から変更できないため、保存済みのバックアップがランサムウェアによって上書きされる危険を低減できます。RAIDや常時複製は暗号化された変更も保存先へ反映され得ます。",
+      "choiceReasons": [
+        "一度書いたデータを変更できないWORMへバックアップするので、保存済みデータの不正な上書きを防げます。",
+        "RAID5はディスク故障への対策です。論理的なファイル暗号化は各ディスクへ反映され、元のデータを保護しません。",
+        "常時レプリケーションは不正な暗号化や削除も複製し得るため、復元用の元データを残せるとは限りません。",
+        "書込み可能な共有フォルダは感染PCからも暗号化され得ます。ネットワークドライブにするだけではバックアップを保護できません。"
+      ],
+      "takeaway": "ランサムウェア対策のバックアップは、攻撃時にも過去の内容を変えられない保存先にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "被害はディスクの物理故障ではなく、データの不正な書換えです。バックアップ側まで書換えられるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Write Once Read Manyは一度書いた後の変更を許さない方式です。感染しても保存済みバックアップを上書きできるか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "RAID・常時複製・書込み可能な共有フォルダと、変更不能なバックアップを比較し、元データが残る方式を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a219dd63e100d54f15075be0dcdfee28889def8706c1daad720a3f102fedb1d8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q41",
+      "summary": "イ。リスク特定・分析・評価の三つです。",
+      "explanation": "リスクアセスメントでは、リスクを特定し、発生可能性や影響を分析し、基準と比較して評価します。受容や対応は、評価結果を踏まえてどう扱うかを決める段階であり、この三つに含まれません。",
+      "choiceReasons": [
+        "分析が抜け、受容が入っているため不適切です。",
+        "特定・分析・評価の正しい組合せです。",
+        "特定と評価が抜け、対応・受容が入っています。",
+        "特定が抜け、対応が入っています。"
+      ],
+      "takeaway": "アセスメントは特定→分析→評価、対応はその結果に基づく扱い。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の動詞を、調べる活動と処置を決める活動に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "何が起こるかを見つけ、その性質を調べ、基準に照らすという順を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "特定・分析・評価をそろえ、対応や受容を含まない組合せを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "28f94df4ffd454d22f69b0e4c39c20b87db7f70b9d00f246b923970335bee809",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q39",
+      "summary": "ウ。通常と異なるアクセスでは追加の本人認証を求めます。",
+      "explanation": "リスクベース認証はアクセス元、端末、時刻などを通常の利用と比較してリスクを評価します。いつもと異なる国や端末などからのアクセスでは、追加認証を要求して不正アクセスの可能性を下げます。",
+      "choiceReasons": [
+        "常に二方式を使うのは多要素認証などで、利用条件による変更を表しません。",
+        "条件にかかわらず方法を変えないのでリスク評価に基づく認証ではありません。",
+        "異常な条件で追加認証を求め、評価したリスクに応じて強度を変えます。",
+        "認証情報なしで利用を許すのは本人確認を省略しており、不正アクセス対策になりません。"
+      ],
+      "takeaway": "リスク評価に応じて認証の強度を変える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補について、認証方式を使う条件と本人確認の回数を二列にして整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "後者を高リスクと判断した際、本人確認を追加する動作を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "普段と異なる条件では追加の本人認証を行う記述が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b189305e560cfd8976342815f4ce7e7cd34be42dcc326cbea75d25cb88ed011f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q35",
+      "summary": "イ。取引や端末の情報でリスクを評価し、高リスク時に追加認証します。",
+      "explanation": "3Dセキュア2.0は取引情報やデバイス情報などからリスクを判断する認証を行います。低リスクなら利用者の追加操作なしで進め、高リスクならワンタイムパスワードなどによる追加の本人認証を求めます。\n全件に同じ二種類の認証を必須とする仕組みや、人間かどうかを確認するCAPTCHA、パスワード再発行のサービスを定義するものではありません。",
+      "choiceReasons": [
+        "アはパスワード再発行の説明で、リスクに応じた本人認証という特徴ではありません。",
+        "イは取引・端末の情報でリスクを判断し、必要なとき追加認証する方式です。",
+        "ウは情報にかかわらずパスワードと生体認証を必須としています。リスクに応じて認証する特徴と違います。",
+        "エは人間かどうかの確認を加えています。CAPTCHAのような判定が3Dセキュア2.0の特徴ではありません。"
+      ],
+      "takeaway": "3Dセキュア2.0は、リスクに応じて追加認証を要求する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "いつもの端末からの取引と、初めての端末からの不自然な取引では、追加認証の必要性がどう違うか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "取引履歴や端末情報で不正のリスクを判定し、高リスク時にチャレンジと呼ぶ追加認証へ進みます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "パスワードを再発行する話、全件で二つの認証を必須とする話、人間判定をする話を、リスクに応じた認証と比べます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "14411b1be8c7d2eaf14634df69bddf22b0e6a999d3cd26c8e8e150de86b023b5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q43",
+      "summary": "イ。リスクレベルは、結果と起こりやすさの組合せで表すリスクの大きさです。",
+      "explanation": "リスクレベルは、事象が起きた場合の結果と、その事象の起こりやすさを組み合わせて表します。損失が大きくても発生確率が極めて低い場合と、損失が小さくても頻繁な場合では、両面から比較します。脆弱性、対応順序、評価基準そのものの定義とは異なります。",
+      "choiceReasons": [
+        "脅威によって付け込まれる資産や管理策の弱点は脆弱性の定義です。",
+        "結果と起こりやすさの組合せで表すリスクの大きさがリスクレベルです。",
+        "対応すべきリスクの優先順位は評価の結果として決めるもので、リスクレベルの定義ではありません。",
+        "リスクの重大性を評価する目安はリスク基準の説明です。"
+      ],
+      "takeaway": "リスクレベルは影響の大きさと起こりやすさの組合せで評価する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補に出る「弱点」「大きさ」「優先順位」「目安」を区別します。問われているのはリスクそのものの程度です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "事故で何が起きるかという結果と、どの程度起きそうかという可能性の二つを組み合わせて比較します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "結果とその起こりやすさの組合せで表すリスクの大きさ、という記述を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d4b8024e04372d05dc22303308ef4b3d67893208e5a78fa3bbe38f472696e7e9",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q40",
+      "summary": "ウ。リスク特定では、影響を受ける資産や組織資源の性質・価値を考慮します。",
+      "explanation": "リスク特定は、目標の達成を妨げる又は助ける可能性のあるリスクを見つけ、認識し、記述する活動です。何が価値を持つ資産・資源で、何に影響が及ぶかを考慮するウが該当します。\n結果の大きさや起こりやすさを詳しく調べるのはリスク分析、残留リスクが許容できるかを判断するのはリスク評価・対応の判断に関する事項です。",
+      "choiceReasons": [
+        "アの結果の性質・大きさはリスク分析で考慮する事項です。",
+        "イの残留リスクの許容判断は、特定ではなく評価や対応後の判断に関わります。",
+        "ウの資産や資源の性質・価値は、リスクを見つけるときに考慮する事項です。",
+        "エの起こりやすさ・結果はリスクの程度を分析する事項です。"
+      ],
+      "takeaway": "特定は見つける、分析は程度を調べる、評価は基準と比べて判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ア・エは結果や起こりやすさ、イは許容可否、ウは資産・資源の性質を挙げています。リスクを見つける・程度を調べる・許容可否を決める、のどの作業に当たるか分類します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "リスクを見つけるには、何を保有し何が重要なのかを把握します。その後に発生確率や損失の程度を分析します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "資産・組織資源の性質や価値を調べる行為が、リスクを見つける材料になることを確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "afac0b8eca687ff925576a88264940cddb6d12baec4ec0095b68f14b8fcea3a2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q41",
+      "summary": "エ。認証済みの利用者情報は、リバースプロキシサーバからWebサーバへ渡します。",
+      "explanation": "利用者のPCはクライアント証明書を提示し、リバースプロキシサーバが利用者を認証します。背後の複数Webサーバには、プロキシが確認した利用者ID等を引き継ぎます。Webサーバ側で認証の入口を共通化することでシングルサインオンを実現します。クライアント証明書は利用者側が保持して提示するもので、各Webサーバがログイン時にPCへ送るものではありません。",
+      "choiceReasons": [
+        "クライアント証明書は利用者側が保持して認証時に提示するもので、リバースプロキシが利用時にPCへ送信するという記述は不適切です。",
+        "各WebサーバがPCへクライアント証明書を送信する方式ではありません。証明書は認証局から発行され利用者側に配置されます。",
+        "本構成ではプロキシが認証した利用者情報をWebサーバへ渡します。PCから直接各Webサーバへ送るという説明は不適切です。",
+        "リバースプロキシが証明書認証を行い、確認した利用者ID等をWebサーバへ送信するので適切です。"
+      ],
+      "takeaway": "リバースプロキシ型SSOは入口で認証し、確認済みの利用者情報を背後のWebサーバへ渡す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "構成をPC→リバースプロキシ→複数Webサーバと描き、証明書による認証を担当する位置を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "証明書を提示するのは利用者側です。入口で認証した結果をWebサーバが使うには、誰がその情報を渡すべきか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "認証を行うリバースプロキシサーバが、利用者IDなどをWebサーバへ送信します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3ab8629ee1c1febd7047910b646c22efa1d22d811a2662a4b3862e96cc689d57",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q42",
+      "summary": "ウ。平文とハッシュ値のチェーン表を使ってパスワードを求めるのがレインボー攻撃です。",
+      "explanation": "レインボー攻撃は、パスワード候補のハッシュ計算と還元処理を繰り返すチェーンを事前計算した表を利用します。漏えいしたハッシュ値を表と照合し、元のパスワード候補を効率よく探します。総当たり、使い回しパスワードによるログイン、聞出しによる推測とは異なります。",
+      "choiceReasons": [
+        "漏えいした利用者IDと平文パスワードを他サービスへ試すのはパスワードリスト攻撃です。",
+        "全ての候補を順に試すのは総当たり攻撃です。",
+        "平文候補とハッシュ値をチェーンで管理する事前計算表を使うのでレインボー攻撃です。",
+        "個人情報を聞き出して推測するのはソーシャルエンジニアリング等を利用した攻撃です。"
+      ],
+      "takeaway": "レインボー攻撃はハッシュに対する事前計算表を使う。個別ソルトは表の使い回しを難しくする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "攻撃の出発点が、平文のパスワード一覧か、漏えいしたハッシュ値かを確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "候補をその都度全て計算する方法に対し、事前計算して表にまとめておく方法を考えます。チェーン表に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平文とハッシュ値のチェーンを管理するテーブルから、入手したハッシュ値の元を探す候補が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5b4eefe0db33649cc98bd4ca861033a122e8490757b3bcecc52e5aa526c0c180",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q36",
+      "summary": "ウ。事前計算したハッシュのチェーン表から元のパスワードを探索します。",
+      "explanation": "レインボーテーブル攻撃は、候補パスワードからハッシュ値を計算し、還元処理などを組み合わせたチェーンを事前に作っておく方法です。入手したハッシュ値をその表と照合し、元のパスワードの候補を探索します。\nハッシュを数学的に逆変換するのではなく、事前計算の結果を再利用します。パスワードごとに異なるソルトを加えることは、共通表の再利用を難しくします。",
+      "choiceReasons": [
+        "漏えいしたIDと平文パスワードの組を別サービスで試す、パスワードリスト攻撃です。",
+        "候補の全組合せを試すブルートフォース攻撃です。事前計算したチェーン表の照合ではありません。",
+        "平文候補とハッシュ値のチェーンを管理した事前表から、入手したハッシュに対応するパスワードを探す方法です。",
+        "言葉巧みに個人情報を聞き出すソーシャルエンジニアリングの説明です。"
+      ],
+      "takeaway": "レインボーテーブルはハッシュ探索の事前計算を表として再利用する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の入力が平文パスワードなのか、盗まれたハッシュ値なのかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ログインを毎回試す方法と、事前に計算した表を照合する方法を分けます。レインボーではハッシュと還元のチェーンを使います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平文とハッシュをチェーンで管理する事前テーブルを準備し、入手ハッシュから候補を探す説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "aaf6fed27b9f3739bee3e1cceb2f870e880281918789ae487823d903bf034343",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q44",
+      "summary": "イ。ログアウト時にサーバ側でセッションIDを無効にします。",
+      "explanation": "乗っ取りは、攻撃者が入手したセッションIDを再利用できることが原因になります。ログアウト時にサーバ側のセッションを無効にすれば、IDが残っていても認証済み状態を利用できません。ページのキャッシュを消すだけではサーバの認証状態は失効しません。専用PCという条件でも、セッションIDの再利用を防ぐ必要があります。",
+      "choiceReasons": [
+        "IDをサーバの内蔵ストレージへ格納しても失効させる操作にはなりません。",
+        "サーバ側でIDを無効にすれば、同じIDを提示されてもセッションを利用できません。",
+        "キャッシュされたページを消すことは表示情報の削除であり、セッションIDを失効させません。",
+        "ブラウザ内のストレージへの保存はIDを残す操作で、乗っ取り対策になりません。"
+      ],
+      "takeaway": "ログアウトではサーバ側のセッションを失効させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの操作について、ログアウト後に同じIDを送った場合、サーバが受け付けるかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ページ表示の保存と、サーバが管理する認証済みセッションは別です。攻撃者がIDを再利用する経路を止める必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバ側でセッションIDを無効にする操作なら、IDを知る攻撃者からの再利用も拒否できます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q43",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bde760aeee41532fc25fc532a54d9e8c27318850bd9a8d21784bdd42610f0fe8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q43",
+      "summary": "同じAPの端末間通信を遮断すれば、AP経由の他端末へのアクセスを防げます。",
+      "explanation": "公衆無線LANでは、同じアクセスポイントにつながる利用者どうしが信頼できるとは限りません。端末間のAP経由通信を遮断するクライアント分離を設定すると、利用者が同じAPに接続した他の端末へAP経由でアクセスするのを防げます。エは対策と効果が一致しています。",
+      "choiceReasons": [
+        "MACアドレスは偽装できるため、正規のMACを名乗る端末をフィルタリングだけで防げません。",
+        "SSIDを暗号化して秘密にするという設定は一般的な無線LANの防御方法ではありません。",
+        "ドメイン名をSSIDにしても他のAPが同じ文字列を名乗れるので、悪意あるAPの設置は防げません。",
+        "AP経由の端末間通信を遮断するので、その経路で他端末へアクセスできなくなります。"
+      ],
+      "takeaway": "対策の効果は実際に制限できる通信や識別情報の範囲で判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "対策欄と効果欄の因果関係を一行ずつ確かめます。名前の設定だけで相手を信用できるでしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "MACアドレスとSSIDは他者も同じ値を名乗れます。端末どうしの通信の遮断は、実際の経路に働く制御です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同じAPに接続した端末AからBへのAP経由通信を遮断した場合、効果欄に書かれたアクセスも止まるか確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "63fa0301cac11f54dbd946627f829214128102dddaf0d7a4bb0aa088ea17b123",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q38",
+      "summary": "イ。各人が公開鍵と秘密鍵を一組持つので、合計2n個です。",
+      "explanation": "公開鍵暗号では、受信者の公開鍵で暗号化し、受信者が自分の秘密鍵で復号します。同じ人の公開鍵は複数の送信者に配れます。\nn人が各自一組を持てば、どの二人の間でも通信できるため、鍵はn組です。一組を2個と数える指定なので合計2n個になります。相手の組合せごとに秘密の共通鍵を作る方式とは違います。",
+      "choiceReasons": [
+        "アのn+1は各人の秘密鍵と一つの共通公開鍵を想定した数ですが、公開鍵は各人の秘密鍵と対応するものが必要です。",
+        "イの2nは一人二個の鍵をn人分数えた値です。",
+        "ウのn(n−1)/2は二人の組合せごとに共通鍵を持つ場合の数です。",
+        "エのn²は公開鍵を相手ごとに別の鍵として数えています。同じ公開鍵を共有して使えます。"
+      ],
+      "takeaway": "公開鍵暗号の鍵は通信相手の組数ではなく、各人の鍵ペア数で数える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Aへ送るBとCは、どちらも同じAの公開鍵で暗号化できます。Aは一つの秘密鍵で復号します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各人に必要なのは自分の公開鍵と秘密鍵の一組です。送信相手が増えても本人の鍵ペアを増やしません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "n人×一人当たりの鍵の個数を計算します。「一組は2個」とする問題の指定を最後に反映します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

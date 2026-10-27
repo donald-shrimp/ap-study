@@ -1,0 +1,571 @@
+[
+  {
+    "id": "r07h-q1",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "09e3a8d1370bc3c505b38f94b6c3ff67bcb8a7d8e99e8ed8659faf9733212310",
+    "reviewedLessonSHA256": "f1ed47c768aa43b5e9e46114dbd7910f644408dbca7c6dc3ed1962c3cc287d72",
+    "questionSHA256": "690f3587817436af8c76ca3f85dc9b9c49fb0d7f6aa99dc2297df0f53f6256ac",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q1.webp": "0913a72bc118422715390663511a8ddbb9cf7441b3ab89f07f0581425ebfba67",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "含意の4候補は¬R/R/¬R/真で、全4肢の否定範囲・公式エと一致。新summaryは論点へ修正。H1は四つの含意への代入、H2は偽前件の性質、H3は二つの含意の途中値を教えるが、各候補の括弧・否定・∧∨の処理は本人に残る。全3段falseは妥当。",
+    "officialAnswer": "エ",
+    "independentResult": "P=Q=真。ア=¬R、イ=R、ウ=¬R、エ=真。イの否定線はQ→¬P全体を覆う。Rを偽・真の両方で真理値を検算。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q5",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "b7a9b04d9216141f95449db2b09f0684b93cee43de40b30eb3f1b9396dcfef80",
+    "reviewedLessonSHA256": "576927bcc0ddd02444bdba8c9ac587b10940a0b424b1e6687fdee7617f716755",
+    "questionSHA256": "f4981944a49cc555f95fa52555c5647649921234890c99f83c22fb380a8fcf43",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q5.webp": "da0d7bb400d6b1c87ea522d0f2fb4506cb0dd8997be847628e433ae012c553fb",
+      "assets/transcriptions/transcribe_r07h/r07h-q5-figure.webp": "c730627ffeef9a985610069ecebc4c28c68dde09a865b33f4c59fa235389e649",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "入力ABC・各1回のpush/popで5出力を全探索し公式ウと一致。改稿した全4肢理由は、3/4の数え落としと6に含まれる不可能CABを具体化している。H2はA先頭の二通り、H3はC直後の上端Bを渡すが、B先頭の操作列と総数計算は残るため全段false。",
+    "officialAnswer": "ウ",
+    "independentResult": "入力ABCと後入れ先出しの制約で可能なのはABC/ACB/BAC/BCA/CBAの5通り。CABはCを出した直後の頂上Bを飛び越せない。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q8",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "deaab93cb5f516565cdf2aa9556436cf9d4b58a5bdf15345b7068d9d82917e6b",
+    "reviewedLessonSHA256": "aed0deb7cf620288aa25531f846e2c7b98de1693944a4b26e6cc1d8c24504523",
+    "questionSHA256": "70e00ae98f8237b95763674e668b4d2cf92f96f74c01171c3f44f618b4a04629",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q8.webp": "5a846a5d7e3dfeef31c1c321315c85fc8c6a2c1e3c62fb62d8220e34325c977f",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "A1命令4ns・B2nsからA/B=2、公式ウ。CPI定義と命令数×CPI×周期を補った解説は原本の表2列・同プログラム条件に合う。H2代入後も積、H3でも比の数値計算を本人に残すため全段false。各誤肢理由も分母の向き・周期の省略と整合。",
+    "officialAnswer": "ウ",
+    "independentResult": "命令数は同じなので実行時間比は(CPI_A×周期_A)/(CPI_B×周期_B)=(4×1)/(0.5×4)=2。周期は周波数の逆なので逆転に注意。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q14",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "ab1217496f73558f37b5a084025cfe850af252f1ac63058a1321ca52e1f49238",
+    "reviewedLessonSHA256": "91ca901103ba10fa8c9f7e6e445470429722c18e76073caacc153d58becce932",
+    "questionSHA256": "229238da05d010111b976a9263f970019750de63c8c05e209a0e96225800836c",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q14.webp": "b77a9f27f68a174cd8da9474f8e06552aeea8cb3a3f4245246c34cd97e3645a0",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "プリエンプションは実行中→実行可能で公式イ。休止・終了・I/O等の待ちとの全4肢比較に誤りなし。H1は状態分類の軸だけでfalse。H2は実行可能状態という名称・対応を直接教えるのでtrue。H3単独は休止/終了の追加知識でfalseだが、H2の既開示を取り消さない設計と整合。",
+    "officialAnswer": "イ",
+    "independentResult": "プリエンプションはCPU使用権の強制回収で、タスクは実行可能状態へ。I/O等の事象待ちを要求したわけではない。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q18",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "0a73dd611243d8d5d10767c769e9b59b351fabb78e21537974beb73a72811b83",
+    "reviewedLessonSHA256": "21495bb7009e6a0ead4b68125bcf07412e24c4475bf291f65fd65f13951e63ae",
+    "questionSHA256": "fbe1364c9cc74114467868aaaae105e6c165360960e418ed1573afaf2aecd7f7",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q18.webp": "e65d9819500db0d8a790552c6d5a4f39484a59ea197e5272a7400a2654d3fdb5",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "0x82=130、130×10=1300mVで公式ウ。原本零点0mV・1LSB10mV・非負8bitの条件を保持。1024/1312は10mV刻みに合わないという改稿理由は推測の誤答原因ではなく与件から反証できる。H3も130×10の演算を残すため全段false。",
+    "officialAnswer": "ウ",
+    "independentResult": "16進82=8×16+2=130。1LSB=10mV、零入力0mVなので130×10=1300mV。8bit最大255段階は本問入力値と区別する。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q22",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "705470d473d0281ce449ebbad8696d21df1ecaa8c519c288dd2ace2b9592faca",
+    "reviewedLessonSHA256": "37f5740997d2066091c0a81aeaa4f3c3b10e8d4544f2b9e85d7ef0d1113d362c",
+    "questionSHA256": "7d2671452498b3e21fb775f4bf80ead7ae2dc1de65f0eec505f0da5d2db6cc61",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q22.webp": "a6e53f1d0970cfb41ba94a684013c948579ed161066eadfa45c917e41b32cf10",
+      "assets/transcriptions/transcribe_r07h_batch3/r07h-q22-choices.webp": "788e857fd6822d7a59e7747be05e5425949c5f804922aa9b170455cd0d176df5",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "原本表の思考発話=利用者参加、ヒューリスティック=専門家の組合せが公式ウ。回顧法・認知的ウォークスルーを含む全4肢理由も一致。H2でア/イを除けてもウ/エの方法分類は残るのでfalse。H3は専門家手法と正しい組合せを明示しておりtrue。summary/解説/要点の役割分担も適切。",
+    "officialAnswer": "ウ",
+    "independentResult": "思考発話法は利用者が操作しながら考えを発話する参加型。ヒューリスティック評価は専門家が経験則で評価する。回顧法も利用者、認知的ウォークスルーは専門家による操作過程の点検。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q25",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "5d009a5e82eb789d4cbcdc06af8dc2475d6e34752ec31e33ede293f746305375",
+    "reviewedLessonSHA256": "273f3032da21ba5be1b62264e4020d4c7250000e186545da0f1655ba819e4f2a",
+    "questionSHA256": "d7aa2438ba776f1b0c143dce14ef08b5951bc084d9a745e2e57b87dba282e6de",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q25.webp": "0e47c16f50a282852b9346b2870ad977336629a743affaea7fc61b87168a81d1",
+      "assets/transcriptions/transcribe_r07h_batch3/r07h-q25-figure.webp": "833b74049cde35033fd876863abe8b001f0c4cb8d14ebac05527822eb9a028e5",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "原本UMLの顧客1対付加情報*、注文→指定送付先0..1、同一顧客制約と主送付先/副送付先の条件を全て確認。公式ウの付加情報→顧客FKが正しい。H1の多重度説明は件数の読取りでfalse。H2は顧客表への参照制約という正答内容を教えるためtrue。H3は追加条件の学習でfalse、既開示状態は維持する。",
+    "officialAnswer": "ウ",
+    "independentResult": "顧客1対付加情報多なので付加情報に顧客への外部キーを置く。注文の指定送付先は0..1で、注文側に付加情報への任意参照を置く。同じ顧客に属する追加条件も図の制約にある。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q31",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "6973f3c3329a419bfc67af3e51853b56f5b866037992828381f70857b5724481",
+    "reviewedLessonSHA256": "19d117b089acd9d1b428835ee0e5aa85c8cfb8d02c5176ed802f9dda7ac4de41",
+    "questionSHA256": "098bb91e432066a199aa07fa9f34cd654bd5c3baacd33227bf982ed4c71bcc29",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q31.webp": "befa649e07b313b314eb63713df95f6e1384d8a47419293f8509d8b8f0c57ccc",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "192.168.1.1は全経路一致、/26は末尾0〜63。最長/26→10.1.0.4で公式エ。ipaddressでも独立確認。H2は範囲を渡すが宛先との比較は本人に残り、H3も一致判定・プレフィックス比較・右列の参照を明示的に残しているため全段falseは条件照合型の共通基準と合う。",
+    "officialAnswer": "エ",
+    "independentResult": "192.168.1.1は全4経路に一致。/26は192.168.1.0～63で含まれる。最長26bitの行を選び、そのネクストホップ10.1.0.4。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q35",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "356101238bcc8a024adc222623b7486eec4ea9ab8211c1b9e37914b0dfa45cc1",
+    "reviewedLessonSHA256": "68095a86df4c8bb8919e91a8bdd49519f0cd2cfda276d610b9386c535b6e11eb",
+    "questionSHA256": "97da4e104a9147a052ce604786fb95172bc471eccec8988066cf1aab22fb151c",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q35.webp": "d375dc86547026d7bc813bfba17a8fa3850ce5001c958ab43d048169efb5b532",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "原本4肢を三リストの名称・役割と照合し公式ウを確認。H1は推奨/互換性の分類、H2は運用監視の定義を教えてイ/エを除くがア/ウの正式名称対応は残るのでfalse。H3は電子政府推奨の利用実績・普及見込みまで含む正答肢の定義そのものなのでtrue。解説と全肢理由は原本基準で整合。",
+    "officialAnswer": "ウ",
+    "independentResult": "電子政府推奨暗号リストは安全性・実装性能確認に加え利用実績や普及見込みを考慮して推奨する。推奨候補は今後の推奨入りの候補。互換性維持で限定利用するものは運用監視暗号リスト。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q45",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_a",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+    "baseLessonSHA256": "e75d8238f31b39680411f5bf1b29634008a770bb32c8c8ddc525b12ba36d602c",
+    "reviewedLessonSHA256": "9b3cb398987b19f2f9fc539e86c09849d7f3e97861d2deae27f32e0bec55b595",
+    "questionSHA256": "f1ceb391570a18ee288bd8f8f27494a563d30c0df6dd46142d96e8a736af6523",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q45.webp": "3ae4827edde9872652b46e811c8e54b97a1c4d372c8316c1569f6d96d70ab983",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "デザインレビューは設計工程内の設計成果物の問題発見で公式ア。出荷判定・プログラム抽出検査・プロジェクト管理評価との差を全肢で確認。H1は比較軸だけでfalse。H2は正答の定義を教え、H3も実装前の具体例として同じ正答内容を教えるため両方true。全段で学習上の新情報があり内容を曖昧にしていない。",
+    "officialAnswer": "ア",
+    "independentResult": "デザインレビューは設計工程中に設計成果物の問題・欠陥を発見する技術的レビュー。出荷判定、プログラム検査、プロジェクト管理過程の監査とは異なる。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q52",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "7740ae9c2fc1fc84b811c341c531449d43ea6dc180e184d59936424565497aee",
+    "reviewedLessonSHA256": "582a18dba9f55a912d0be286c774faf38f1c85a42d728f0bfbcace9e540f157a",
+    "questionSHA256": "74bc0de571080917b27e1ba99b354d7006af325df5dd7b2834c5dc5e66ebdaa6",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q52.webp": "ed1c6c06647acc8215c0c95ee435c8b9501124bdcbf55c484b76e8b534dbb37a",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "EV/AC/PVの定義、三指標の分子・分母、出来高に対するコスト効率とBAC総額消尽の区別を確認。H1定義、H2CPI/SPI、H3TCPIの追加情報が分かれ、H3で正答イの対策まで渡すtrueは適切。",
+    "officialAnswer": "イ",
+    "independentResult": "CPI0.9<1はEV<ACで出来高に対する実コスト超過。SPI1.1>1はEV>PVで進捗先行。BAC基準TCPI1.2>1は残予算内での完了に計画より高いコスト効率が必要。イのみ三条件に合う。既にBAC全額超過とは限らない。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q56",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "96b8ac1a3a90ae3daf5c587a47dc049bd54da2d15a618f23ce0ea1652d061230",
+    "reviewedLessonSHA256": "bf9e497f6b7ac3e9c9bdd6cb712cd5251ad8d2fc215b0e939535f3c144e8acf1",
+    "questionSHA256": "21b78611e73061ba443c152543a6e6f6637d57f91fb361354885a40a0663bb3b",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q56.webp": "23e10a69915ef173fc3d86174ad53eec50dc00fdf9df721462409f5c48e5c181",
+      "assets/transcriptions/finish_r07h_batch6/r07h-q56-figure.webp": "cbc9ab78a39b4d36cbb4cc0919c04e109294791015b9e93739208aff6e19951b",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "原本の4作業・表の全8欄と照合。物理②③、middleware④、業務①の管理境界を確認。H1は層の分類、H2はIaaS列の②③でウが直接確定しtrue、H3も完全な組合せを示すtrue。",
+    "officialAnswer": "ウ",
+    "independentResult": "IaaSでは物理層運用②物理起動停止と③保守ランプ監視を事業者へ移す。PaaSではmiddlewareパッチ④も事業者へ移す。利用企業の業務job監視①は残る。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q64",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "c563cb91cb372bc28258a65da5c8b0d7f6d6599ffc3e1d1820efc952d008bc79",
+    "reviewedLessonSHA256": "cbe81b633a5657123b9b10243f4b9725d3805e3ca08090c23fcc26c7d0470edd",
+    "questionSHA256": "bf13536db4d9e4b27627a53b02ac27acbae2612ecf4ea78a6176ff77de4dc33e",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q64.webp": "9b7f1f6b7d1ce003e9d524891f26ae61875348e73c1fa6f888217be319626116",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "見積60/(50+100)=0.4万円/h、提案360/(50+400)=0.8万円/h。Xの20+40万円に20%を掛け12万円。各誤答4/8/14万円の根拠も独立確認。ヒント3段とも最終値を渡さず単価・配賦・削減の計算を本人に残すfalseで整合。",
+    "officialAnswer": "ウ",
+    "independentResult": "見積活動の時間150hに60万円なので0.4万円/h。提案活動450hに360万円なので0.8万円/h。Xは各50hなので20+40=60万円、20%削減で12万円。Yを含む全社原価へ20%を掛けたり単価を一本化しない。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q67",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "6713911b49b595e33fdcf9119a5d3fc60452ebf7c3741d479ea6eef19c05ddfb",
+    "reviewedLessonSHA256": "63173ae6702a78b893b58cf4d25929ae45b82b0f17473cc92faa1b6d5f23aa9b",
+    "questionSHA256": "cfa5cd27dab38bc10fac0108222cdbaa1ce3ed57b314335952a30464724460d0",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q67.webp": "f52297f948e8f801be98a23ebcd3e853444ce2447289398f073534c2aaa2c2c4",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "PPMの市場成長率×相対的市場シェア、3C/BSC/SWOTの軸を全肢確認。H1は相対シェアの意味を教え、H2でPPMの名称と定義を教えるtrue、H3は花形と金のなる木の資金配分へ知識を増やすtrue。",
+    "officialAnswer": "ウ",
+    "independentResult": "PPMは市場成長率と相対的市場シェアを軸に事業ポートフォリオの資源配分を考える。3Cは顧客競合自社、BSCは複数視点の戦略評価、SWOTは強み弱み機会脅威。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q76",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "ab78c66feb350135db5eaf762a7082ef206f99da0ff183ad9ffeecebad9f917b",
+    "reviewedLessonSHA256": "de88eb3cd63ff045e400ca5c4490f9de677913008d40fb86b83489367e731224",
+    "questionSHA256": "418eba6d20388a69b0f8c5992e66659002fee04234b56c96273ad51167850873",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q76.webp": "4d1679d78ecc43cca4372a58a338bc662a01d1317949ab0835ea248087652552",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "A/Bの三指標を独立計算し、回転8回対10/9回、総資産営業利益率20%対10%、売上高営業利益率2.5%対9%を確認。金額の大小と比率の大小を区別。3段とも式・数値対応・比較手順で最終比率の計算を本人に残すfalse。",
+    "officialAnswer": "エ",
+    "independentResult": "総資産回転率A=800/100=8回、B=1000/900=10/9回。総資産営業利益率A=20/100=20%、B=90/900=10%。売上高営業利益率A=2.5%、B=9%。エのみ正しい。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q78",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "4d61285517b1bac68f7628bb88ad5607276f977e03eea390915885b043261843",
+    "reviewedLessonSHA256": "aeca072480ad9b671d2c9999af87c3937a7c39e32ab5dbb66fca2c26034dac28",
+    "questionSHA256": "77637cff49ebcadebeb0caf132e2f48af0ca9176d52b94eda62e23df4bf6fda9",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q78.webp": "127cc47115e572b9879a8995fd6928c1d61f221746ec98ac92aa7dbfce9ffb5e",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "2024-03-15文化庁一次資料の生成・利用段階と生成物自身の著作物性を別論点として照合。既存画像に類似する公開で侵害の可能性があるというイと、類似だけで必ず侵害ではないことを両立。H1は行為の分類、H2はイの内容を教えるtrue、H3は他の一律断定との差を教えるtrue。現行法の網羅照合をしたとは扱わない。",
+    "officialAnswer": "イ",
+    "independentResult": "AI生成という事情だけで一律に侵害又は非侵害とはならない。既存画像に類似した画像の公開で侵害となる可能性を認めるイが適切。生成物自身の著作物性と他者の権利侵害は別の論点。",
+    "issues": []
+  },
+  {
+    "id": "r07a-q22",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "ff143b8ed994a4dc498926dea3a445381dcb5f517b4ae95d1319249696b7419d",
+    "reviewedLessonSHA256": "2d72bf6bf81c7c2854f80df41221a5a258e66bca033c72cc7f0d173b519a7b0a",
+    "questionSHA256": "6fd2485a3b227ed126110d15e58b0080137385ae2acf4aa6c6533d5be1c97461",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q22.webp": "b9a5624babc74a0965c7fb7802ed6eaaf94660be1c68ff085ed7136f12ca0e68",
+      "assets/transcriptions/pr-batch4-figures/r07a-q22-a.webp": "7aae4c71e0fa980e11a0041c961e2d48b7ad7769b18279720b3103bcfbc30d90",
+      "assets/transcriptions/pr-batch4-figures/r07a-q22-combined.webp": "ee4a764b7d242cf4dc41f3a0d92b0d411e1a47147ede874ed0fdbcd58c5e5837",
+      "assets/transcriptions/pr-batch4-figures/r07a-q22-e.webp": "fab24aaad8d96edf7b6db3e5caff5593b12cf3f9e4489e6c06a220b3f418be50",
+      "assets/transcriptions/pr-batch4-figures/r07a-q22-i.webp": "dd98bcdbe6c23a98655861d4fbe83f22828284e26a7426277f1600267fa7c691",
+      "assets/transcriptions/pr-batch4-figures/r07a-q22-u.webp": "ebf768845075b0d03ad71bd6f34b58428910956c18a647e6d142bd613690fca2",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "原本波形と全4ゲート・学習用combined/各選択肢cropを実表示確認。00/01/10は1、11だけ0のNAND（ウ）。XOR/XNOR/NORを各肢で棄却。H1の2観測、H2の表作成、H3のAND出力反転の直接提示という段階とfalse/false/trueが整合。",
+    "officialAnswer": "ウ",
+    "independentResult": "タイミング図はA=B=1の区間だけY=0。他の00/01/10でY=1なのでNAND。原本ウはAND形状に出力反転の小円。アXOR/イXNOR/エNORでは一致しない。",
+    "issues": []
+  },
+  {
+    "id": "r03a-q3",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "7a005b1974878be030d83c51def4978c0b1bc2cbac88f30c72e6a644d0069390",
+    "reviewedLessonSHA256": "bf9e44c4afcda74e81a2e84937914c22c36e8771192021399735182ec36b3883",
+    "questionSHA256": "cc18cfcd295945776b4c3cf4ebe231aec937264f95c279430d4429894d4b0913",
+    "sourceHashes": {
+      "assets/questions/r03a/r03a-q3.webp": "7cd5bc29c539bd40b116725f2f649447cba9c8d0473cbcf70fe58d9340cfa300",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "ウ=多層ニューラルネットワークの重み学習、ア=expert system、イ=backtracking、エ=genetic algorithmを原文と照合。H1のモデルの層という固有特徴でウを特定できるのでtrue、H2もtrue。H3は探索・進化との違いを学ぶ段階。前段の開示結果は維持される。旧テストによるH1false固定を承認根拠にしていない。",
+    "officialAnswer": "ウ",
+    "independentResult": "ウは多層ニューラルネットワークの重みパラメータ学習。アはルールベースのエキスパートシステム、イはバックトラック法、エは遺伝的アルゴリズム。",
+    "issues": []
+  },
+  {
+    "id": "r06h-q1",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "633ee1e5474b84968317a01fe177ee3d90ce19a2446845867ab3f1e04573fd60",
+    "reviewedLessonSHA256": "633ee1e5474b84968317a01fe177ee3d90ce19a2446845867ab3f1e04573fd60",
+    "questionSHA256": "5daaa38e5e54080177c845fbd789d29a15c1d6b790127692649bc0eb147c556e",
+    "sourceHashes": {
+      "assets/questions/r06h/r06h-q1.webp": "630ef755aa7bce7b8a4a4df650af9bab79390899594df11a919def4a6fb15a38",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": "not-applicable"
+    },
+    "notes": "袋Bを原因、色Cを観測結果としP(B|C)=P(C|B)P(B)/P(C)の向きを確認。エのみ色から元袋の事後推定。既存全文と全4理由は新基準でも十分でkeepは妥当。H1/H2の観測後・結果から原因という正答条件はtrue、H3は既知と推定対象の分類手順でfalseだが確定済み開示は維持される。",
+    "officialAnswer": "エ",
+    "independentResult": "袋Bが原因、玉の色Cが観測結果。P(B|C)=P(C|B)P(B)/P(C)が観測後の袋の事後確率。エが該当。ア・イは色の結果確率、ウは袋の事前選択確率。",
+    "issues": []
+  },
+  {
+    "id": "r07h-q7",
+    "author": "Codex /root",
+    "reviewer": "Codex /root/ap_pilot_review_b",
+    "status": "approved",
+    "checkedAt": "2026-10-26T23:58:45.562899+00:00",
+    "baseLessonSHA256": "60fdcb99481a32bd530c52a898e5acf572b87d5615092b15d8ff6aa89a5c904c",
+    "reviewedLessonSHA256": "6f77aa3efc26574ed7df02b282d0ec5cbddcf669217da7c1c2dea8443e322f50",
+    "questionSHA256": "213f113c0e1b6b72a5cdab25f1580532590d0579454615f7a3d279b0d07167c8",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q7.webp": "a1f054e8e05018516a1fc31c4d650848684417cddceb2772628ce7a5be0c3601",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "checks": {
+      "source": true,
+      "answer": true,
+      "choices": true,
+      "hints": true,
+      "explanation": true,
+      "revealFlags": true,
+      "calculation": true
+    },
+    "notes": "0!=1とn→n−1の二条件でウ。fact0..8を独立評価しmath.factorialと一致。アは最後に0、イは基底と進行方向が誤り、エは正のnで停止しない。H1はウ/エが残るfalse、H2はH1と合わせコードを直接確定するtrue、H3の具体展開もtrue。summaryは正答再掲から停止条件と呼出し方向の論点へ訂正済み。",
+    "officialAnswer": "ウ",
+    "independentResult": "0!=1が停止条件。n>0でn!=n×(n-1)!として非負整数を0へ減らす。ウ。アは末尾0を掛け結果0、イは停止条件も値も不適合、エはnが増えて0へ達しない。",
+    "issues": []
+  }
+]

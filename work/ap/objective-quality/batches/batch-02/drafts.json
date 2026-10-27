@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r06a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e37886f4cad933a9dd3d26a7618d50596ac262ebb65a4bf1a410c84b61fe2beb",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q1",
+      "summary": "ウ。平均待ち時間は2.00倍になります。",
+      "explanation": "M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "待ち時間はTs×ρ/(1−ρ)。利用率だけの40/25では、窓口が空いている割合の変化を取り込めません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ea492c35647c282a474e925068931fac2774bfa371025f845a281a39e0ae5410",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q2",
+      "summary": "中央値を10回計算すると、x₁−x<0.001を初めて満たします。",
+      "explanation": "最初の区間幅は1。中央値を求めた直後のx₁−xは1/2です。終了しなければ、中央値を新しい端点にするので次の区間幅も半分になります。\n(2)のn回目直後にはx₁−x=1/2ⁿ。終了条件は1/2ⁿ<0.001、つまり2ⁿ>1,000です。\n2⁹=512では不足し、2¹⁰=1,024なら満たすため、答えは10回です。",
+      "choiceReasons": [
+        "10回目は1/1,024<0.001で、初めて終了条件を満たします。",
+        "20回より前の10回目で既に終了します。",
+        "区間は一度ごとに半分になるので、100回も必要ありません。",
+        "0.001刻みで順に試す方法ではありません。二分するので1,000回にはなりません。"
+      ],
+      "takeaway": "二分法の回数は幅が1/2ⁿになることから求める。判定が中央値の前か後かも読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "(3)が比べる長さはx₁−xです。(2)で中央値を計算した直後、最初は(1−0)/2=1/2になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "次の区間は前の半分なので、(2)をn回行うとx₁−x=1/2ⁿ。1/2ⁿ<0.001を満たす最小のnを求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "両辺を逆数で整理すると2ⁿ>1,000です。2⁹=512と2¹⁰=1,024を比べ、初めて1,000を超える方を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d957b15a553d35653ce2cb2f7782cce9ee24d5627a13aaf196bd8c7278fe858f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q2",
+      "summary": "イの50%。平均待ち時間ρT/(1−ρ)がT以上になる境目です。",
+      "explanation": "M/M/1の平均待ち時間は、利用率をρとするとρT/(1−ρ)です。処理時間を含む系内時間とは区別します。\nρT/(1−ρ)≧TをTで割るとρ/(1−ρ)≧1。整理して2ρ≧1なので、ρ≧0.5です。",
+      "choiceReasons": [
+        "33%では平均待ち時間は約0.49Tで、T未満です。",
+        "50%では0.5T/0.5=Tとなり、条件を初めて満たします。",
+        "67%では条件を満たしますが、必要な最小利用率より高い値です。",
+        "80%では待ち時間4Tになりますが、Tに達する境目ではありません。"
+      ],
+      "takeaway": "待ち時間ρT/(1−ρ)と、処理を含む系内時間T/(1−ρ)を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題が求めるのは処理を始めるまでの待ち時間です。平均処理時間Tを加えない式を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用率ρについてρT/(1−ρ)≧Tを立てます。0≦ρ<1なので1−ρは正です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Tで割り、両辺に1−ρを掛けるとρ≧1−ρです。ρを左へ集めて百分率に直しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0b77010931eb989c2c526c07c860c90d68954a633a3110e89419e564057141da",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q3",
+      "summary": "アの32。16+8×(4−2)を計算します。",
+      "explanation": "後置記法では演算子の直前にある二つの値を使います。ABCD−×+では、まずC D −をC−Dへ置き換え、次にBとその結果を掛け、最後にAを足します。\nC−D=4−2=2、B×2=8×2=16、A+16=16+16=32です。",
+      "choiceReasons": [
+        "16+8×(4−2)=32で、演算子が現れる順に計算した結果です。",
+        "式を後置記法の順に処理すると32となり、46にはなりません。",
+        "C−Dを先に計算する必要があり、8×(4−2)=16を16に足すので48ではありません。",
+        "最後の演算は16と16の加算なので94ではありません。"
+      ],
+      "takeaway": "後置記法は演算子が出るたび、直前の二値を一つの結果へ置き換える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "式の最初の演算子はDの後の−です。CとDのどちらが左の被演算子か確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "C D −を一つの値に置き換えるとA B (結果) × +になります。この結果をBと掛けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "4−2=2を使って8×2を求め、その値を16に足しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e38c03e20f9dee3b1a76bc16ac72c0fda6cbcc31cfa0538e0893f7d5f7485369",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q3",
+      "summary": "ア。合格確率は178/245です。",
+      "explanation": "良品は90個です。非復元抽出なので、3個とも良品である確率は(90/100)×(89/99)×(88/98)=178/245です。1個選ぶたび、良品も全体も1個ずつ減ります。",
+      "choiceReasons": [
+        "90個の良品から3個選ぶ確率を非復元抽出で計算した値です。",
+        "405/539≈0.7514は、正しい非復元抽出の確率約0.7265より大きく、不良品を引く可能性を過小評価しています。",
+        "89/110は最初の2個が良品である確率で、3個目の条件を含みません。",
+        "87/97は3個を取り出した後の残りの良品割合であり、3個すべて良品の確率ではありません。"
+      ],
+      "takeaway": "戻さず抽出する確率は、分子と分母を抽出のたびに減らす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "不良品10個を100個から引き、最初の1個が良品の確率を書きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1個目が良品だった条件で、残りは良品89個・全99個です。2個目の確率89/99を最初の90/100に掛け、3個目でも同じ減らし方をします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "90/100、89/99、88/98を掛けて約分します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "af2ede70b95446d8850a0d9317820b60e7243402b2aedf85cdf08b559ac7260c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q2",
+      "summary": "ア。近い値の差で有効桁が減る現象が桁落ちです。",
+      "explanation": "例えば1.23456−1.23455=0.00001では、共通する上位桁が相殺されます。元の値に含まれた下位桁の誤差の影響が相対的に大きくなり、有効な桁数が失われます。",
+      "choiceReasons": [
+        "ほぼ等しい値を減算して上位桁が相殺される桁落ちです。",
+        "下位桁を切捨て・四捨五入するのは丸め誤差です。",
+        "大きい値と小さい値の演算で小さい値が消えるのは情報落ちです。",
+        "無限級数を有限項で止めるのは打切り誤差です。"
+      ],
+      "takeaway": "桁落ち、丸め、情報落ち、打切りを発生操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補の操作を「二数の減算」「下位桁の丸め」「大小の数の加減算」「級数の終了」に分類して、失われる桁の場所を書き分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "近い二数を引くと共通する上位桁が相殺されます。差に対して、元の数の下位桁の誤差が占める割合がどう変わるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "近い二数の差で有効桁数が減る説明が桁落ちに対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fda82241d6f819053ee4a19bc4491adb6d27e79b447910deb23b73c760cda787",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q2",
+      "summary": "平均60を中心に左右対称で、変曲点が70にあるアです。",
+      "explanation": "正規分布は平均μを中心とする左右対称の釣鐘形です。曲線の変曲点はμ−σとμ+σにあります。μ=60、σ=10なので、中心は60、変曲点は50と70です。アは頂点が60、右の変曲点が70で条件に合います。",
+      "choiceReasons": [
+        "60を中心に左右対称で、中心から右の変曲点70まで10あります。",
+        "変曲点55と65は中心60から5離れており、標準偏差10ではありません。",
+        "10付近と60付近に二つの山があり、一つの左右対称な正規分布ではありません。",
+        "60付近の頂点の左右で形が異なり、正規分布の左右対称性を満たしません。"
+      ],
+      "takeaway": "正規分布の平均は対称軸、標準偏差は中心から変曲点までの距離。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "平均60と標準偏差10は、それぞれ横軸上の位置と広がりを指定しています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まず60を中心とした左右対称の釣鐘形かを確かめ、その後に点線の位置を読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "正規分布では変曲点が平均±標準偏差です。60±10を計算して点線と照合しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c42917dedbc37c226209ab6a9af8332b253a5870e8eebf70f8391f2579181e3a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q1",
+      "summary": "ア。小さい2項を先に加えると、最後まで仮数部7ビットで表現できます。",
+      "explanation": "小さい項は(1.1)₂×2⁻³=3/16、(1.0)₂×2⁻⁴=1/16、大きい項は32です。アは先に3/16+1/16=1/4として、32+1/4=(1.0000001)₂×2⁵を得ます。小数点以下7ビットに収まります。イは先に差1/8を作りますが、32+1/8には小数点以下8ビットが必要です。ウとエは32と小さい数を先に演算する段階で、小さい項の下位ビットが仮数の範囲外になります。",
+      "choiceReasons": [
+        "3/16と1/16を先に加えて1/4とするため、32.25を7ビットで正確に表せます。",
+        "差の1/8を32に足すと(1.00000001)₂×2⁵になり、8ビット目が必要です。",
+        "最初の32+3/16に仮数8・9ビット目が必要になり、情報落ちします。",
+        "最初の32−1/16=31.9375を正規化すると仮数8ビットが必要で、情報落ちします。"
+      ],
+      "takeaway": "大きさが大きく異なる浮動小数点数は、小さい項を先にまとめて桁の損失を減らす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の中括弧を最初に計算します。2⁵の項と2⁻³・2⁻⁴の項では、桁の位置が大きく離れています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "小さい2項は3/16と1/16です。先に和または差を作り、32と演算するときの正規化した仮数を確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "小さい項の和は1/4です。32+1/4=(1.0000001)₂×2⁵なら小数点以下7ビットに収まります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9ed9f64335453d3c8da33fc54fbbd40ead1b12c525f32075f9880a89c78f6a94",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q4",
+      "summary": "ア。温度に応じて抵抗値が変わるサーミスタを用います。",
+      "explanation": "体温を電気信号として測定するには温度変化を検出する素子が必要です。サーミスタは温度によって抵抗値が変化するため、抵抗を測って温度に換算できます。",
+      "choiceReasons": [
+        "温度に伴う抵抗変化を利用して体温を測れます。",
+        "超音波の反射などから距離や物体を検出するセンサです。",
+        "光量によって電流が変わる光センサで、温度を直接測る素子ではありません。",
+        "位置や回転角に応じて抵抗値が変化する可変抵抗器です。"
+      ],
+      "takeaway": "測定したい物理量と素子の変化する特性を対応させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "体温で変化する物理量は温度です。各素子が温度・音・光・位置のどれに反応するか整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "温度を抵抗値の変化に変換する素子を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "温度で抵抗が変わるサーミスタが適しています。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dad069f4b355b0560a9372fcd6457e38fa5519d2374655ce3b932ebc49558d21",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q4",
+      "summary": "行と列の検査結果から、1ビットの誤り位置を特定して訂正できます。",
+      "explanation": "1ビットが反転すると、一つの行と一つの列でパリティ不一致が起きます。その交点が誤り位置です。\n2ビットの誤りでは、例えば異なる二つの行・列で不一致が起きても、どの組合せの交点が誤りかを一意に決められません。さらに、四角形の4頂点を反転すると各行・各列の反転が偶数となり検査が相殺されます。保証できる訂正は1ビットなので、アです。",
+      "choiceReasons": [
+        "一つの行と列の交点から位置が分かるので、1ビットを訂正できます。",
+        "2ビットでは、不一致の行と列だけから位置を一意に決められない場合があります。",
+        "3ビット全ての誤り位置を、この検査だけで必ず特定できるわけではありません。",
+        "四角形の4頂点の反転では各行・列で影響が相殺され、検出すらできない場合があります。"
+      ],
+      "takeaway": "行と列の交点で1ビットを特定。検出可能な誤りと、訂正保証を区別する。",
+      "hints": [
+        {
+          "title": "何が分かるか",
+          "text": "各行と各列に、パリティ検査があります。1ビットが反転したとき、どの行と列の検査結果が変わるでしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "位置を特定する",
+          "text": "一つのビットが反転すると、その行と列のパリティが合わなくなります。合わない行と列の交点を見れば、反転した位置を特定できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "複数の誤りを試す",
+          "text": "誤りが増えると、同じ行や列で反転の影響が相殺されることがあります。「検出できる場合がある」と「必ず位置を特定して訂正できる」を区別しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bd72378b82b71901a13504240f207bdf4d91192de5e4d3245fcf38ffd6f0d739",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q4",
+      "summary": "アの1ビット。異常な行と列の交点を反転して訂正できます。",
+      "explanation": "図は各行と各列の1の数が偶数になるようパリティを付けています。データが1ビットだけ反転すると、そのビットが属する行と列の両方でパリティが異常になります。交点を特定して反転すれば訂正できます。\n複数ビットでは異常の組合せから位置を一意に決められない場合があります。例えば異なる2行・2列の対角位置の2ビット反転は、もう一方の対角位置の反転と同じ異常を示します。",
+      "choiceReasons": [
+        "1ビット反転なら異常な行と列が一つずつになり、交点を一意に特定できます。",
+        "2ビットでは、二つの異常行と異常列のどの交点が反転したか曖昧な場合があり、常に訂正できません。",
+        "3ビットの位置を常に特定できるだけの情報はありません。1ビット訂正の保証を超えます。",
+        "長方形の四隅の4ビットが反転すると各行・列で2回ずつ反転し、パリティ異常さえ出ない場合があります。"
+      ],
+      "takeaway": "行列パリティは一つの誤りの行と列を絞り、その交点を訂正する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "網掛けは右端と下端にあります。データの一つのマスを反転させたとき、その行と列で1の数がどう変わるか見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1ビット反転でパリティが変わる行と列を数えます。二つの異常から反転位置が一意に決まるか考えましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "一つの異常行と一つの異常列の交点は一つです。複数ビットの場合も必ず位置を決められるか比較します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "793da63e7e0715697292bffd684920d860e63973acaa5bc5f2d353dbd01f93d8",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q3",
+      "summary": "ウ。A B C × ＋が元の式を表します。",
+      "explanation": "逆ポーランド表記は、演算子をその対象の後ろに置く後置記法です。A＋B×Cは掛け算が先なので、まずB C ×とし、その結果をAへ足してA B C × ＋とします。\nエのC B A ＋ ×ではB＋Aを先に計算し、その結果へCを掛けるため、元の式とは異なります。",
+      "choiceReasons": [
+        "先頭に演算子があるので後置記法ではありません。",
+        "× ＋ A B Cは前置記法で読むと(A＋B)×Cです。後置記法でもありません。",
+        "B C ×で積を求め、最後の＋でAを加えるので元の式に一致します。",
+        "C B A ＋ ×はC×(B＋A)です。元の式の演算順序と異なります。"
+      ],
+      "takeaway": "後置記法へ変換するときは、先に計算する部分式から演算子を後ろへ移す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "元の式のB×Cへ丸を付けます。＋より×が先なので、この部分が一つの計算結果になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの値XとYの演算X op Yは、後置記法ではX Y opです。まずB×Cだけを変換しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "B C ×を一つの値と見なし、Aとその値を足す演算子を最後へ置くと、A B C × ＋になります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "01f9d2ef897cfa5145461a6707590a8bfcf49dfd71b12af16ce213480048ee4f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q4",
+      "summary": "ア。可視光カメラは標識の色・形・文字を画像から認識できます。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ff4ef2070b4d7882d709693dd418ea80c1558d0b6e97537f4c5be36b97a2cf05",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q4",
+      "summary": "イ。訓練データでは高精度でも、未知データで精度が下がる状態です。",
+      "explanation": "過学習は訓練データの偶然の特徴まで学び、未知データへ一般化できなくなることです。学習に使った例と新しい例の性能を分けて判断します。",
+      "choiceReasons": [
+        "学習済みモデルを別領域へ再利用する転移学習です。",
+        "訓練データと未知データの性能に差が出る過学習の説明です。",
+        "誤差から逆向きに学習する誤差逆伝播の説明です。",
+        "報酬を手掛かりに行動を学ぶ強化学習の説明です。"
+      ],
+      "takeaway": "過学習は、訓練時の高成績だけでは見抜けない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で、学習に使ったデータと初めて見るデータを区別しているか確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "覚えた例の細部への適合が、別の例で役立つかを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "訓練例ではよく当たるのに未知の例では当たらない、という性能差を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be192bd956c33be815b184461d9814adc1ff81a074f23dc5b619d07d809e3444",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q3",
+      "summary": "イのデータ拡張は、訓練データの偏りへの依存を減らす対策です。",
+      "explanation": "過学習は、訓練データにはよく合うのに、未知のデータへうまく予測できない状態です。偶然の細部まで覚えたことが原因になり得ます。\n画像の回転・切出しなど、対象の意味を保つ加工で訓練データの種類を増やすと、限られた例だけに依存しにくくなります。これがイのデータ拡張です。効果は別の検証用データで確かめます。",
+      "choiceReasons": [
+        "訓練とテストに同じデータを使うと、未知のデータへの性能を測れません。",
+        "意味を保った加工で例の種類を増やすデータ拡張は、過学習を抑える対策です。",
+        "複雑なモデルは訓練データの細部まで覚えやすく、過学習を悪化させる場合があります。",
+        "汎化性能は未知のデータへの対応力です。下げることは目的と逆です。"
+      ],
+      "takeaway": "訓練時の成績と未知データへの成績を分け、訓練例の多様性を増やす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "過学習では、覚えた訓練例には強く、初めて見る例に弱くなります。問われるのは、この偏りを減らす方法です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば一枚の画像を意味が変わらない範囲で回転すると、別の見え方も学べます。こうして訓練例を増やすと、特定の例だけを覚えにくくなります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「同じデータでテスト」は未知の例を試していません。「より複雑にする」「汎化性能を下げる」も改善の方向かを確認し、訓練例の種類を増やす候補を残します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6a507e879700c08bfb9353ed406738e6822d38661818662abca3bb989916ca42",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q2",
+      "summary": "ア。AにもBにも含まれない部分は、Aの補集合からBを除いた集合です。",
+      "explanation": "求める集合はAの外側かつBの外側です。Aの補集合からBの要素を除けば、その条件を満たします。ド・モルガンの法則ではĀ∩B̄=(A∪B)の補集合とも表せます。和集合や積集合の補集合とは、残る領域を区別します。",
+      "choiceReasons": [
+        "Ā−BはAに入らず、さらにBにも入らない要素なので一致します。",
+        "Ā∪B̄はAとBの共通部分以外を含み、そこからA∩Bを除いても変わりません。片方だけに属する要素も残ります。",
+        "(S−A)∪(S−B)はĀ∪B̄です。片方の集合に属する要素を含みすぎます。",
+        "S−(A∩B)は共通部分以外の全体であり、Aだけ・Bだけの部分も含みます。"
+      ],
+      "takeaway": "「どちらにも属さない」は補集合同士の積集合。差集合は左の集合から右の要素を除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ベン図でAだけ、Bだけ、両方、どちらにも属さないの四つの領域を描き、Ā∩B̄が残す領域を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "積集合は二つの条件を同時に満たす部分です。Aの外にある要素から、Bの中にあるものを取り除く操作を考えましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ĀからBを除けば、AにもBにも属さない部分だけが残ります。差集合の候補と対応させましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "609d30ef87e1eb07f80b4b7db66f492aabe7bbda404ab27b8e7888fc6674d5be",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q3",
+      "summary": "ウ。1秒のデータ量は80kバイトです。",
+      "explanation": "40kHzは毎秒40,000標本です。モノラルなので1標本16ビットのみで、40,000×16=640,000ビット。8で割って80,000バイト、さらに1,000で割って80kバイトです。",
+      "choiceReasons": [
+        "20kバイトでは1標本4ビット相当になり、16ビットの条件を満たしません。",
+        "40kバイトでは1標本1バイトとなり、必要な2バイトの半分です。",
+        "40,000×16÷8÷1,000=80で一致します。",
+        "640はkビット単位での値であり、バイトへの変換が必要です。"
+      ],
+      "takeaway": "音声量は標本化周波数×量子化ビット数×時間×チャネル数。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "40kHzを1秒間の標本数40,000に直し、1標本が16ビットであることを書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "標本数×16でビット数を求め、8ビット=1バイトで換算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "640,000ビット÷8=80,000バイト、指定の1k=1,000で80kバイトです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "09c487c863225a9233c189406c788872536c926e46974ded79e201cc03c572f5",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q20",
+      "summary": "エ。FPGAは製造後に論理回路をプログラムできる集積回路です。",
+      "explanation": "FPGAはField Programmable Gate Arrayで、利用者が製造後に回路の接続や論理機能を設定できる集積回路です。専用ハードウェアとして処理を実装し、設定を書き換えて構成を変更できます。アの不揮発性メモリ、イの特定分野・用途に向けて汎用供給されるASSP、ウの浮動小数点演算器とは異なります。",
+      "choiceReasons": [
+        "電気的に記憶内容を書き換えられる不揮発性メモリはEEPROMなどの説明です。",
+        "特定の分野・アプリケーション向けに限定された特定用途向け汎用集積回路はASSPです。製造後に利用者が論理回路を再プログラムするFPGAとは異なります。",
+        "浮動小数点演算を行うユニットはFPUの説明です。",
+        "製造後に論理回路をプログラムできることがFPGAの特徴です。"
+      ],
+      "takeaway": "FPGAは実装後に論理構成を書換え可能。ASSPは特定分野・用途向けの汎用集積回路。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢が説明する対象を、記憶装置・特定用途回路・演算ユニット・論理構成変更に分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FPGAの「Field Programmable」は製造後に利用現場で設定できることを表します。設定する対象が何か確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "FPGAでは論理回路の構成を製造後にプログラムできます。この説明に合う候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2187480f7cb3a253fbf27be67bfd43b2915ba93a15774c561b3946ed388a5019",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q20",
+      "summary": "エ。FPGAは実装後に論理回路を再プログラムできます。",
+      "explanation": "FPGAはField Programmable Gate Arrayの略で、利用者が論理回路の構成や接続を設定できる集積回路です。基板上に実装した後でも構成を再プログラムできます。\nデータを保存する不揮発性メモリや、浮動小数点演算専用のユニットとは目的が異なります。",
+      "choiceReasons": [
+        "電気的に書換え可能な不揮発性メモリの説明で、論理回路を構成するFPGAの説明ではありません。",
+        "特定用途・分野向けに設計されたASSPの説明です。実装後の回路再構成を示していません。",
+        "浮動小数点演算を担当するFPUの説明です。論理回路を利用者が設定するものではありません。",
+        "実装後に論理回路の構成を再プログラムできる特徴がFPGAに一致します。"
+      ],
+      "takeaway": "FPGAは製造後・実装後に利用者が論理回路を設定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢のうちデータ記憶、用途限定、演算ユニット、回路の再設定という違いを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Field ProgrammableのFieldは利用現場で設定できるという意味です。設定する対象が論理回路である点に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "基板へ実装した後でも回路を再プログラムできる説明が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ed0d6d970278c0c2761f4cb270c5a736bdcf97ce10ff041c4bb5558ac0eca992",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q21",
+      "summary": "NANDで入力を反転してから再びNANDにすると、X+Yです。",
+      "explanation": "NANDの出力は入力の論理積の否定です。左上は両入力がXなので¬(X・X)=¬X、左下は¬(Y・Y)=¬Yとなります。右のNANDはこの二つを入力とするため、Z=¬(¬X・¬Y)です。ド・モルガンの法則でZ=X+Yとなり、イです。",
+      "choiceReasons": [
+        "X・Yは両方1のときだけ1ですが、この回路は片方が1でも1です。",
+        "左の二つが反転器となり、最後のNANDでX+Yを作ります。",
+        "¬(X・Y)は左の反転器を通さずX,YをNANDに直接入れた式です。",
+        "¬(X+Y)はORの否定ですが、導出結果には外側の否定が残りません。"
+      ],
+      "takeaway": "同じ入力を二つの端子に入れたNANDはNOTとして働く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "左の各NANDには、同じ信号が二つの入力端子へ分岐しています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "NANDを¬(入力1・入力2)と書き、左の二つから順に中間出力を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "中間出力は¬Xと¬Yです。Z=¬(¬X・¬Y)にド・モルガンの法則を適用しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

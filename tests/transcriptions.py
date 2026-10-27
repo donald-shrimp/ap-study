@@ -28,6 +28,16 @@ with tempfile.TemporaryDirectory() as directory:
     assert module.draft_question_ids(root)=={'r05a-q61','r05a-q62','r05a-q63'}
 journals=[json.loads(path.read_text()) for path in (ROOT/'data/transcription-context-revisions').glob('*.json')]
 historical={module.digest(item['beforeQuestion']):item['beforeQuestion'] for journal in journals for item in journal['items']}
+# Lesson-only revisions retain the real terminal transcription version in the
+# immutable archive. The current bank must still match independent registrations.
+quality_root=ROOT/'work/ap/objective-quality'
+if (quality_root/'manifest.json').is_file():
+ import sys
+ sys.path.insert(0,str(ROOT/'tools'))
+ from ap_lesson_quality import validate_workspace
+ validate_workspace(ROOT)
+ historical.update({module.digest(q):q for q in json.loads((quality_root/'baseline/questions.json').read_text())})
+
 for journal in journals:
     assert journal['kind']=='reviewed-transcription-representation'
     for item in journal['items']:

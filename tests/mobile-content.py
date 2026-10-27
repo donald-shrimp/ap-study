@@ -15,6 +15,10 @@ assert len({c['id'] for c in deck['cards']})==len(deck['cards'])
 assert len({i['questionId'] for i in context['items']})==800
 by_id={i['questionId']:i for i in context['items']}
 def digest(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+quality_root=ROOT/'work/ap/objective-quality'
+if (quality_root/'manifest.json').is_file():
+ from ap_lesson_quality import validate_workspace
+ validate_workspace(ROOT)
 review_dir=ROOT/'content/ap/study-context-reviews'
 root_review=json.loads((review_dir/'root.json').read_text())
 assert root_review['combinedContextSha256']==digest(context)
@@ -25,6 +29,7 @@ for filename,sha in root_review['preservedContentSha256'].items():
  if filename=='content/ap/flashcards.json':
   archived=json.loads((ROOT/'data/qualifications/ap/flashcards.584bed40953eac03.json').read_text())
   data=(json.dumps(archived,ensure_ascii=False,indent=2)+'\n').encode()
+ elif filename=='data/questions.json' and (quality_root/'manifest.json').is_file():data=(quality_root/'baseline/questions.json').read_bytes()
  else:data=(ROOT/filename).read_bytes()
  assert hashlib.sha256(data).hexdigest()==sha,filename
 for path in review_dir.glob('r*.json'):
@@ -45,6 +50,8 @@ with tempfile.TemporaryDirectory() as name:
  root=Path(name);out=root/'out';out.mkdir()
  for key in ['questionSource','studyContextSource','flashcardSource']:
   dest=root/cfg[key];dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy(ROOT/cfg[key],dest)
+ # The immutable classification still certifies the original problem corpus.
+ if (quality_root/'manifest.json').is_file():shutil.copyfile(quality_root/'baseline/questions.json',root/cfg['questionSource'])
  result=builder.compile_learning_tools(root,cfg,questions,out);assert result['flashcards']['count']==len(deck['cards']) and result['studyContext']['paperless']==paperless
  def rejects(key,value):
   path=root/cfg[key];original=path.read_text();path.write_text(json.dumps(value,ensure_ascii=False))

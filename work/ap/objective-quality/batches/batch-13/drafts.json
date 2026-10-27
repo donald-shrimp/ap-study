@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r04a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b877af6b7bc94efdee7c4b390f0db4b47060c2d3584e55b4a80140942e127116",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q30",
+      "summary": "イ。可用性はACIDの四特性に含まれません。",
+      "explanation": "ACIDはAtomicity（原子性）、Consistency（一貫性）、Isolation（独立性・隔離性）、Durability（耐久性）です。可用性はシステムが利用可能な度合いで、トランザクションの四特性とは別です。",
+      "choiceReasons": [
+        "一貫性はCに当たり、整合性制約を満たす性質です。",
+        "可用性はACIDの四特性に含まれません。",
+        "原子性はAに当たり、全体を実行するか全体を取り消す性質です。",
+        "耐久性はDに当たり、確定した更新を永続させる性質です。"
+      ],
+      "takeaway": "ACIDは原子性・一貫性・独立性・耐久性。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補が、トランザクションの実行結果とシステムの利用状態のどちらを述べるか分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ACIDのA,C,I,Dを日本語の性質へ対応させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "原子性、一貫性、独立性、耐久性の一覧にない候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8e5cfe54a9185fb3de8134fdb1316e40bc2dc9ece0147f7d4cd39ca40d82cfbe",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q26",
+      "summary": "イ。BASEの結果整合性は、更新が最終的に全ノードへ反映されることです。",
+      "explanation": "BASEは基本的な可用性、状態の一時的不確定性、結果整合性を重視する考え方です。分散ノードの更新はすぐ全てに一致しなくても、正常な状態なら最終的に反映されます。\n反映途中にはノードごとに異なる値が読まれることがあります。全ノードが常時同じ結果を返す強い整合性とは区別します。",
+      "choiceReasons": [
+        "2相コミットで全ノードの更新を同期させることは、このBASEの結果整合性の説明ではありません。",
+        "障害がなければ更新がいずれ全ノードに行き渡る説明が結果整合性です。",
+        "更新途中には異なる版が存在し得るため、同時参照で全ノードが同じ値とは限りません。",
+        "分断時に一律に受付停止する説明は、基本的な可用性を重視するBASEの特徴に合いません。"
+      ],
+      "takeaway": "結果整合性は「直ちに同じ」ではなく「最終的に一致」。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題のノード間の反映には時間差があり得ます。更新直後と、反映を終えた後を分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一つのノードで値を変え、他ノードへ後から伝える場合、途中の参照結果は同じとは限りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2相コミットで同期をそろえる説明と、正常なら時間経過で一致する説明の違いを確認しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q26",
+    "baseVersion": 2,
+    "baseLessonSHA256": "324a021dc58dbd29be654015999d52bc65d5cafe611e1b9e9c9832704bbe45b1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q26",
+      "summary": "ウ。APの分散システムは、可用性と分断耐性を重視し、整合性を保証しません。",
+      "explanation": "CAP定理のCは整合性、Aは可用性、Pは分断耐性です。ネットワーク分断が起きる状況で、整合性と可用性を同時に完全には保証できません。APは分断時にも要求に応答することを優先するため、複数ノードで同じ最新値を返す整合性は保証しません。",
+      "choiceReasons": [
+        "ネットワーク分断下でC・A・Pの全てを保証できるとする記述はCAP定理に反します。",
+        "可用性と整合性を満たし分断耐性を持たないのはCAの組合せです。",
+        "AとPを満たし、Cを保証しないというAPの説明です。",
+        "整合性と分断耐性を満たし可用性を保証しないのはCPの組合せです。"
+      ],
+      "takeaway": "CAPのAPは分断中の応答を優先し、厳密な整合性を保証しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まずC・A・Pを、整合性・可用性・分断耐性に対応させます。設問で指定されている二文字を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ネットワークが分断してノード間の最新値を同期できない場合に、応答を続けるか、整合するまで応答を抑えるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "APは可用性と分断耐性の組合せなので、整合性を保証しない説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "05e51c2f69299477fbe01125fca6b38aa38df8c0c54ac384c02f842531c3c576",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q29",
+      "summary": "イの2行。MZ1000とXZ3000が残ります。",
+      "explanation": "相関副問合せは、外側の製品番号と同じ番号で在庫数>30の在庫行を探します。NOT EXISTSなので、そのような行が一つもない製品を残します。\nAB1805には150、CC5001には200と40、ZZ9900には130の行があるので除外します。MZ1000は在庫行自体がなく、XZ3000は30と20でどちらも30を超えません。残る製品番号は二つで、DISTINCT後も2行です。",
+      "choiceReasons": [
+        "XZ3000だけでなく、在庫行が存在しないMZ1000もNOT EXISTSを満たすので1行ではありません。",
+        "MZ1000とXZ3000の二つが条件を満たし、重複排除後の結果も2行です。",
+        "AB1805とZZ9900に30以下の行もありますが、30超の行が一つでもある製品は除外されます。残るのは2製品です。",
+        "在庫行ごとの数ではなく、30超の在庫をもたない製品番号を数えます。該当するのは2製品です。"
+      ],
+      "takeaway": "NOT EXISTSは一行も該当しない条件。在庫なしも該当し、>30に30は含まれない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "副問合せの条件は「同じ製品番号」かつ「在庫数>30」です。倉庫別の在庫を合計するSQLではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "製品ごとに30を超える在庫行が一つでもあれば除外します。在庫行がない製品はEXISTSが偽なので残ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "AB1805・CC5001・ZZ9900の30超を確認し、MZ1000の在庫なしとXZ3000の30・20を判定します。残る製品番号を数えましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "008b2bf6b5cabcd762b6e5f23c2f3feab5011f6bcdbda4cffd8a85cf1b5b8841",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q29",
+      "summary": "ウ。キーと値でデータを管理するキーバリュー型はNoSQLの代表的な分類です。",
+      "explanation": "NoSQLにはキーバリュー型、ドキュメント型、列指向型、グラフ型など、従来の関係データモデルとは異なる方式があります。ウはキーに対応する値として様々な形式のデータを管理するキーバリュー型です。\n他の選択肢は、関係データモデルの拡張や、データベースの用途・格納内容を述べており、NoSQLの方式を示していません。",
+      "choiceReasons": [
+        "アは関係モデルにオブジェクトの型や継承を取り入れるオブジェクト関係データベースです。",
+        "イは意思決定に使う時系列データを蓄積するデータウェアハウスの説明です。",
+        "ウはキーと値の対応で保存するキーバリュー型で、NoSQLの分類です。",
+        "エはデータの定義などを管理するデータディクショナリの説明です。"
+      ],
+      "takeaway": "NoSQLは用途ではなく、キー値・文書・グラフなどのデータ管理方式で識別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補にある「モデルの拡張」「過去情報の蓄積」「キーとデータの対応」「メタ情報の管理」を比べます。保存方式の分類を述べるものと、用途を述べるものを分けましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "NoSQLの例には、関係表の行・列へ一律に当てはめず、識別子から値を得る保存方式があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "一つのキーにデータを対応付ける記述を、キーバリュー型という分類と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2618ddb4a69a9762c44855444a569304f19e794b580e6c3dd335971970936279",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q29",
+      "summary": "ア。undo/redoには更新前情報と更新後情報の両方が必要です。",
+      "explanation": "undoは未完了の更新を取り消して元へ戻す処理で、更新前の値が必要です。redoは完了済みの更新を障害回復時に再適用する処理で、更新後の値が必要です。undo/redo方式は両方を行うため、ログに更新前・更新後の情報を保持します。",
+      "choiceReasons": [
+        "取り消すための更新前情報と、再適用するための更新後情報が両方必要です。",
+        "更新後情報がなければredoによる再適用に必要な値を得られません。",
+        "更新前情報がなければundoで元の値へ戻せません。",
+        "両方不要では、取り消しも再適用もログから実施できません。"
+      ],
+      "takeaway": "undoはbefore image、redoはafter image。両方使う方式では両方を記録する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の列を「更新前」「更新後」と確認します。undoで戻す先とredoで作る状態をそれぞれ考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "undoは更新をなかったことにし、redoは更新をもう一度反映します。各操作で必要な値を対応させます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "undoには更新前、redoには更新後が必要なので、表で両方「必要」の組合せを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4786cff4b7569b859866ce15c6fa022fd8ebc097df688a171274d0c99af2d627",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q28",
+      "summary": "べき等とは、同じ操作を繰り返しても1回と同じ結果になることです。",
+      "explanation": "データベースの状態に同じ操作を1回適用した結果と、2回以上適用した結果が等しければ、べき等です。例えば値を常に100に設定する操作は、繰り返しても100のままです。一方、100を加算する操作は回数で結果が変わります。アがこの性質を述べています。",
+      "choiceReasons": [
+        "同じ操作の1回実行と複数回実行の結果が同じというべき等の定義です。",
+        "全て実行されるか全く実行されないかという原子性の説明です。",
+        "他ノードに処理やデータを反映する複製の説明です。",
+        "同時実行の結果が直列実行と等価である直列化可能性の説明です。"
+      ],
+      "takeaway": "再試行の安全性は「同じ操作をもう一度して状態が変わるか」で見る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "比べる対象が「同じ操作の実行回数」なのか、「取引の全部成功」なのかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "値を100に設定する操作と、100を加える操作をそれぞれ2回行った状態を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "べき等ではf(f(s))=f(s)です。1回後と繰返し後の状態を比べる記述に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bfb959f67b60bd57c624881bb556dc1ed84de9c3d182390fe45a37b6f0973408",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q30",
+      "summary": "イ。学生ごとに分け、実施回の昇順で番号を付けます。",
+      "explanation": "SQL文1は学生番号ごとにMIN(実施回)を求め、その実施回の行を元表から選びます。つまり各学生の初回の成績です。\nSQL文2ではROW_NUMBERの番号1を選ぶので、PARTITION BY 学生番号で学生ごとに番号を振り直し、ORDER BY 実施回で小さい順に並べます。結果はS01の回1、S02の回2、S03の回3、S04の回6となります。",
+      "choiceReasons": [
+        "PARTITION BYがないので全体で一つの番号列となり、番号1の一行しか得られません。",
+        "学生ごとに区切り、実施回を昇順にして最初の行へ番号1を付けるのでSQL文1と一致します。",
+        "得点の昇順なので学生ごとの最低点を選びます。S03は回9の78点となり、初回83点と違います。",
+        "得点の降順なので学生ごとの最高点を選びます。S01は回7の80点となり、初回70点と違います。"
+      ],
+      "takeaway": "ROW_NUMBERのPARTITION BYは番号を振り直す単位、ORDER BYは番号を付ける順序。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "SQL文1のMINは得点ではなく実施回に掛かっています。S03なら実施回3、9、12のうちどの行を取り出すかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "SQL文2は番号1を選びます。各学生から一行ずつ選ぶには、学生番号が変わるたびに番号が1から始まる必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "学生番号でPARTITIONし、最小の実施回が先頭になるよう実施回の昇順でORDERします。これを両方指定したイです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b4a5c9b8f32fc2af3069c8e434018514b879560e668c682f42704179e040d6c1",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q29",
+      "summary": "イ。地域から仕入先、仕入先から仕入は一対多で、各仕入は一部品に対応します。",
+      "explanation": "大阪という一地域に仕入先25と37が結び付いているので、地域1に対して仕入先は複数です。仕入先11には仕入#01、#02、#03があり、仕入先1に対して仕入は複数です。\n各仕入は一つの部品へ結び付き、同じ部品136などには複数の仕入が結び付いています。この一対多、多対一の組合せがイです。多重度は関連線の相手側に書かれる点に注意します。",
+      "choiceReasons": [
+        "地域と仕入先を一対一にしていますが、大阪には仕入先25と37の二つがあります。",
+        "地域1対仕入先複数、仕入先1対仕入複数、仕入複数対部品1で図と一致します。",
+        "仕入先対仕入と仕入対部品の多重度が逆で、一つの仕入に複数の仕入先・部品がある形になります。",
+        "地域と仕入先を多対多とし、他の関連も逆で、図の各仕入先・仕入の結び付きに合いません。"
+      ],
+      "takeaway": "UML多重度は相手側の数を読む。一つのインスタンスから何本の関連が出るか確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初に大阪から出る線を数えます。25と37という二つの仕入先へつながるので、地域一つに仕入先一つという候補は除けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "次に仕入先11から#01〜#03への三本、部品136へ入る複数の線を確認します。仕入一件から出る仕入先・部品への線は各一本です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "地域側1・仕入先側*、仕入先側1・仕入側*、仕入側*・部品側1を並べたイが対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "080c6b49d1af92bb3eb95c24d9b2b667e896053d12f0bf04f37069790c3994ab",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q28",
+      "summary": "イ。ノードとリレーションシップで構造化します。",
+      "explanation": "グラフ指向DBは対象をノード、対象間の関係をリレーションシップとして表します。人物と友人関係のようなつながりをたどりやすく、ノードと関係の双方にプロパティを持たせられます。",
+      "choiceReasons": [
+        "階層データをドキュメントとして格納するドキュメント指向DBです。",
+        "ノード、関係、プロパティの構成がグラフ指向DBです。",
+        "キーと一つの値を対応させるキーバリュー型DBです。",
+        "キーに複数の列を対応させる列指向型DBの説明です。"
+      ],
+      "takeaway": "グラフ指向DBは対象間の関係をデータとして扱う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの説明で、データを表す単位が文書・点と線・キーと値・キーと列のどれか、表に整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "点がノード、線がリレーションシップ、付加情報がプロパティに当たる記述を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ノード同士をリレーションシップで結び、双方にプロパティを持つ候補です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "529be67809856cac3080eda4b4d132c58c5896731216a0d8d4c74b37409be766",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q30",
+      "summary": "イ。行数や値の分布などの統計情報を使います。",
+      "explanation": "コストベースのオプティマイザは、表の件数、列の値の分布、索引の状況などから、走査や結合順序ごとの処理量を見積もり、低コストな実行計画を選びます。この推定に統計情報が必要です。",
+      "choiceReasons": [
+        "分析用の次元表という表の種類で、一般のコスト推定に必要な情報ではありません。",
+        "表件数や値の分布を用いて処理量を推定できるため必要です。",
+        "待ちグラフはデッドロックの検出などに使います。",
+        "ログファイルは復旧などに使い、実行計画のコスト推定情報そのものではありません。"
+      ],
+      "takeaway": "SQLのコスト推定はデータの量と分布に依存する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "一条件で100万行中何行が残るか分かると、索引か全表走査かを選べる例を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "行数や条件に合う割合を見積もるための表・列の情報を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "件数や値の分布をまとめた統計情報が必要です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ed711edffdb30d4ba99fd6a712001eb4b15395f269a0d3f1b4c64ebd40cf4f37",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q27",
+      "summary": "エ。コミット済みの更新をログから再実行するロールフォワードを使います。",
+      "explanation": "チェックポイント後にTはコミットしています。更新が確定していても、障害の直前に更新ページが全てディスクへ書かれたとは限りません。WALで先に保存されたログを使い、確定済みの更新を再適用します。\nこのREDOを行う復旧がロールフォワードです。未完了の更新を取り消すロールバックは、今回のTを終了直後の状態へ戻す目的と反対です。",
+      "choiceReasons": [
+        "アの2相ロックはトランザクションの同時実行制御で、ログから更新を復旧する技法ではありません。",
+        "イのシャドウページは旧ページと更新ページを分ける方式です。今回指定されたチェックポイントとログによるREDOではありません。",
+        "ウのロールバックは更新を取り消します。コミット済みのTの更新は残す必要があります。",
+        "エはコミット済み更新をログから再適用して復旧します。"
+      ],
+      "takeaway": "確定した更新を残すならREDO、未確定の更新を取り消すならUNDO。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Tは障害前に「コミット済み」です。その更新を残す必要があるか、取り消す必要があるかを決めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "WALではデータページを書き出す前にログを保存します。ページに未反映の確定更新は、ログから再適用できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ログを使い時間を前へ進めて確定更新を反映する技法を選びます。更新の取消しを意味するロールバックとは逆です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q28",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fc5a1312626ebf1df637f3c39ac4af90e67febe0e32885537c358b4f1d971785",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q28",
+      "summary": "ウ。売上などの取引データを格納する中心の表がファクトテーブルです。",
+      "explanation": "スタースキーマは、中心のファクトテーブルを、商品・店舗・日付などのディメンジョンテーブルが囲む構成です。ファクトには売上額・数量などの測定値と、各ディメンジョンへのキーを保存します。\n分析対象のトランザクションデータそのものを置くのはファクトテーブルです。ディメンジョンは分析の切り口、サマリは集計結果、ルックアップはコードなどの参照情報を扱います。",
+      "choiceReasons": [
+        "アのサマリテーブルは集計結果を保存します。取引データの中心表という役割とは異なります。",
+        "イのディメンジョンテーブルは商品や日付など分析軸を保存します。",
+        "ウのファクトテーブルに取引の数量・金額などを保存します。",
+        "エのルックアップテーブルはコード等の参照用です。スタースキーマの取引を格納する中心表の名称ではありません。"
+      ],
+      "takeaway": "取引の測定値はファクト、分析の切り口はディメンジョン。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "一件の売上を「商品・店舗・日付・数量・金額」で記録するとき、取引の数値と分析軸の説明を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "中心の表に数量・金額と商品などへのキーを置き、周りの表に商品名・店舗名などを置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "中心に置く取引の事実を英語でfactと呼びます。該当するテーブル名を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q25",
+    "baseVersion": 2,
+    "baseLessonSHA256": "987bf8a9e3e2c25304368c71b93131d0ad5bf141d103d9574fcaf5207d6e795a",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q25",
+      "summary": "ア。処理をDBMS内でまとめて実行するため、アプリケーションとの通信を減らせます。",
+      "explanation": "ストアドプロシージャはDBMS側に保存した一連の処理です。アプリケーションがSQLを何度も送り、途中結果を受け取って次の要求を送る代わりに、プロシージャを呼び出してDBMS内部で処理できます。\nこれによりネットワーク往復や中間データの通信を減らせます。ただし内部で行うSQLやデータアクセスがなくなるわけではなく、実行計画・バッファ・ディスクI/Oが必ず減るとはいえません。",
+      "choiceReasons": [
+        "アは処理をサーバ内で実行することで、要求・中間結果の通信を減らせる利点です。",
+        "イはSQLを内部で実行するため、実行計画の数が減ると一律にはいえません。",
+        "ウは必要なデータ処理が残り、バッファ数が減る保証はありません。",
+        "エは同じデータへの読書きが必要で、ディスクI/Oの削減が方式だけから保証されるわけではありません。"
+      ],
+      "takeaway": "ストアドプロシージャは、処理をデータの近くへ置いてクライアントとの往復を減らす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "アプリがSQLを三回送る構成と、一回の呼出しでDBMS内で三処理する構成を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "途中の処理結果をネットワークでアプリへ戻さず、DBMS内で次の処理へ渡せます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この違いで直接減るのはアプリとDBMSの間の通信です。DBMS内の処理やディスク読書きまで必ず減るかは別に考えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "39bf6d3e244218e4a79ccb83bca94f90494830d8e9a750068dee9eeae0e962e3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q27",
+      "summary": "誤りはエです。データ変更で自動起動する処理はトリガーです。",
+      "explanation": "ストアドプロシージャは複数の処理をDBMS側に定義し、クライアントからCALLなどで明示的に呼び出す手続です。処理を一括でサーバ側に実行するため、SQLを一文ずつ送る必要や通信量を減らせます。一方、更新などのイベントで自動起動するのはトリガーなので、エが誤った説明です。",
+      "choiceReasons": [
+        "サーバ側で一連の処理を実行できるため、個々のSQLを逐次送る必要を減らせます。",
+        "クライアントのCALL文による呼出しはストアドプロシージャの実行方法です。",
+        "まとめた処理を呼び出すことで往復通信を減らせます。",
+        "変更イベントで自動起動するのはトリガーで、ストアドプロシージャの呼出しとは異なります。"
+      ],
+      "takeaway": "明示呼出しの手続と、イベントで自動起動するトリガーを分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "この問は「誤っているもの」を選びます。呼出し方法と通信の記述を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一連のSQLをDBMSに登録してクライアントが呼び出すことと、変更イベントを契機に起動することを区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "CALLでの明示的な実行がストアドプロシージャ、データ変更を契機にした自動実行がトリガーです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q31",
+    "baseVersion": 3,
+    "baseLessonSHA256": "0f8d2e458840c81b2a429226e3059751e561abc25423dced2ec722be27f32c7d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q31",
+      "summary": "イ。チェックポイントではバッファの内容を記憶装置へ反映し、回復の範囲を短くします。",
+      "explanation": "DBMSは変更内容を一時的にバッファへ保持します。チェックポイントでそれを二次記憶へ書き出して回復の基準とすることで、その時点までにコミット済みの更新は反映済みとなり、障害回復時にそれらの再実行を省けます。\n制約の検査タイミング、トランザクション途中のセーブポイント、分散トランザクションの確定判断とは異なります。",
+      "choiceReasons": [
+        "これは制約を即時に検査するか、コミットまで遅延するかという指定です。",
+        "バッファの内容を二次記憶へ反映し、コミット済み更新の回復作業を減らす説明がチェックポイントです。",
+        "トランザクション途中で部分的にロールバックするための点はセーブポイントです。",
+        "参加者の可否を集めて確定を判断するのは2相コミットの手順です。"
+      ],
+      "takeaway": "チェックポイントは障害回復の基準、セーブポイントは途中へのロールバックの基準。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補が扱う対象を見ます。制約の検査、バッファの書出し、途中への取消し、分散処理の確定判断が並んでいます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "障害で主記憶のバッファを失ったとき、記憶装置に反映済みのコミット更新まで再実行する必要はありません。書出しの基準点を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "バッファを二次記憶へ書き出し、そこまでのコミット済みトランザクションの回復を省けるイが該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q29",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f612c137295fe1db7f10c4dc210ffaf27a4a4162ee60c695acd011117a977fa0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q29",
+      "summary": "ウ。ロールフォワードの対象はT4とT5です。",
+      "explanation": "ロールフォワードはチェックポイント以降にコミットした更新をログから再実行します。T4は開始が以前でもコミットが以後なので対象、T5も対象です。T1は既にチェックポイントに反映されています。T2,T3は障害時に未コミットなので取り消す対象です。",
+      "choiceReasons": [
+        "T1はチェックポイントより前にコミット済みで、再実行する必要がありません。",
+        "T2,T3は障害時に未コミットで、更新を確定させるロールフォワードの対象ではありません。",
+        "T4,T5はチェックポイント以後かつ障害前にコミットしています。",
+        "T5だけでは、同じ条件を満たすT4を漏らします。"
+      ],
+      "takeaway": "回復の分類は開始時点だけでなく、コミット時点と障害時点で決める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各線の開始よりも「コミット」の位置に注目し、二本の縦線との前後を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "チェックポイントに未反映で、障害前に確定した更新はログから再実行します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "T4とT5のコミットはどちらも二本の縦線の間にあります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q27",
+    "baseVersion": 2,
+    "baseLessonSHA256": "550ccf76b7cf6c3f8a073a57822c090445a608040ee73a01dfa592a06043ca29",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q27",
+      "summary": "イ。チェックポイント以前に終了した取引はシステム障害の回復対象にしません。",
+      "explanation": "チェックポイントでは、それまでに確定した更新がデータベースへ反映された状態を回復の基準にします。媒体障害以外でシステムが停止しても、チェックポイント以前に終了したトランザクションは回復作業が不要です。媒体障害はバックアップを復元して更新後情報でREDOし、更新中に異常終了した取引は更新前情報でUNDOします。",
+      "choiceReasons": [
+        "同時更新の矛盾を防ぐのはロックなどの排他制御で、データのブロック化ではありません。",
+        "チェックポイント以前に終了したトランザクションの結果は確定済みなので、媒体が壊れていないシステム障害では回復対象外です。",
+        "バックアップ以降の確定更新を再現するには更新後情報でREDOします。更新前情報では進んだ更新を再現できません。",
+        "未完了の更新を取り消すには更新前情報でUNDOします。更新後情報を使うとその更新を再現してしまいます。"
+      ],
+      "takeaway": "REDOは更新後情報で再現、UNDOは更新前情報で取消し。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "媒体が壊れた場合と、媒体は残ってシステムだけ停止した場合を分け、チェックポイント前に確定した更新を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "バックアップに更新を足すなら更新後情報、途中の更新を取り消すなら更新前情報を使います。チェックポイントは確定更新を反映した回復の基準です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "媒体障害以外なら、チェックポイント以前に終了したトランザクションの回復作業は不要です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a80a0e5326cb3578c864f49b1364a2255815de48dc5c6fe12416e339614a7858",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q30",
+      "summary": "ア。データマイニングは蓄積データから隠れた規則や相関を発見します。",
+      "explanation": "データマイニングでは大量のデータを分析し、単純な検索では見えにくい規則性や関連性を見つけます。例えば同時に購入されやすい商品群を探す分析です。用途別のデータ抽出、情報構造の定義、データの複製は、それぞれ別の技術や概念です。",
+      "choiceReasons": [
+        "分析によって隠れた規則や相関を発見することがデータマイニングです。",
+        "用途や部門ごとに切り出したデータベースはデータマートの説明です。",
+        "データの構造・意味・操作を規定するのはデータモデルです。",
+        "データを複数サーバへ複製するのはレプリケーションです。"
+      ],
+      "takeaway": "データマイニングは発見のための分析。データマート・モデル・複製と区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補の動詞を「分析する」「切り出す」「規定する」「複製する」に分けます。何を新たに得る操作か考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "商品の購入履歴から、よく一緒に買われる組合せを探す場面を想像します。既知の条件で検索する場合と違い、規則自体を見つけます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "蓄積データを分析して隠れた規則や相関を見つける候補がデータマイニングです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "91040f83b101eb29560e505ef2916988dc104fe3e84fad0d44f97c3c24bfef6c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q31",
+      "summary": "エ。データを発生したままの形で蓄積します。",
+      "explanation": "データレイクは構造化・半構造化・非構造化データを、利用目的に合わせた加工を先に固定せず元の形で蓄積します。必要になった分析の時点で加工・構造化して利用します。",
+      "choiceReasons": [
+        "隠れた規則や相関を発見するデータマイニングの説明です。",
+        "特定用途向けにDWHから取り出して構築するデータマートの説明です。",
+        "多次元分析を行うOLAPの説明です。",
+        "加工前の形でデータを蓄積し、必要時に利用するデータレイクの特徴です。"
+      ],
+      "takeaway": "レイクは保存時に用途を限定せず、利用時に加工する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補ごとに「データを保存する」「用途別に取り出す」「保存済みデータを分析する」のどの操作を述べているか印を付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "規則を発見する分析行為ではなく、加工前のデータを保存する方式の記述を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "必要に応じて加工するため、発生したままの形で格納する候補です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r07a-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "53a10e47ce6554c19efe0213c97c9accb15d384df93d2fd964446eeef69f5da0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q36",
+      "summary": "イ。エクスプロイトは脆弱性を悪用して標的で攻撃を実行する段階です。",
+      "explanation": "サイバーキルチェーンでは、偵察、武器化、配送、エクスプロイト、インストール、指令・制御、目的の実行などに攻撃を分けます。\nエクスプロイトは配送した攻撃を標的の脆弱性などによって発動させる段階です。OSの脆弱性を悪用して攻撃ツールを動かすイが該当します。",
+      "choiceReasons": [
+        "公開情報や問合せによる調査は偵察の段階です。",
+        "標的PCの脆弱性を悪用して実行させる行為がエクスプロイトです。",
+        "秘密情報の窃取・送信は目的の実行の段階です。",
+        "マルウェア付きメールを送り届ける行為は配送の段階です。"
+      ],
+      "takeaway": "送るのは配送、脆弱性を突いて発動するのはエクスプロイト。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの行為を、調査、送付、標的での実行、情報の持出しの時系列に並べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "メールの添付物を送り届けただけの段階と、OSの弱点を使って動作させた段階を区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "エクスプロイトは弱点の悪用を指します。秘密情報を盗む目的達成より前の、標的上で攻撃が発動する行為を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e48c361a09812a1ee1704b155686b40301b01fee0c84e7cedfd1cca19a9f7238",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q42",
+      "summary": "盗難カードのオンライン不正利用と追加の本人確認",
+      "explanation": "正解はア。3Dセキュアはオンライン決済でカード発行会社による本人認証を行う仕組みで、盗んだカードに記載された情報だけを使う不正利用の防止に有効である。カードの有効期限やセキュリティコードは盗難カードから読み取れる。",
+      "choiceReasons": [
+        "3Dセキュアはカード情報の入力に加えてカード発行会社による本人確認を行う。",
+        "カード内のPINとの照合は、カードを読み取る端末での本人確認に用いる。オンラインショッピングの認証方式ではない。",
+        "有効期限はカードが利用期間内かを確認する情報で、所持者本人であることを確認できない。",
+        "セキュリティコードは券面の情報で、盗まれたカードの所持者も読み取れる。"
+      ],
+      "takeaway": "盗難対策では、盗んだ券面から得られる情報だけでは本人確認にならない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "カードは既に盗まれている。犯人が券面から読める情報を使う選択肢を見分ける。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "有効期限とセキュリティコードは券面から得られる。オンライン決済で、カード発行会社が追加の本人認証を行う仕組みを探す。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "オンライン決済でカード発行会社による本人認証を行う3Dセキュアを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4a832c6960a34e955d0418692ba9d5c1a5b9f267311d57e56adef19ea8c69b2d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q44",
+      "summary": "正規サイトの転送機能を悪用するオープンリダイレクト",
+      "explanation": "正解はイ。オープンリダイレクトは、Webサイトの転送先を外部から自由に指定できるなどの不備を利用し、利用者を攻撃者が指定したサイトへ転送する攻撃である。正規サイトへのアクセスを経由する点が識別の手掛かりとなる。",
+      "choiceReasons": [
+        "偽サイトのURLを直接メールのリンク先に指定する説明で、Webサイトの自動転送機能を悪用していない。",
+        "Webサイトの他サイトへの自動転送機能を悪用し、攻撃者の指定先へ誘導している。",
+        "公開されたDNSキャッシュサーバを利用したDNSリフレクション攻撃の説明である。",
+        "公開プロキシを悪用して送信元を隠す迷惑メール送信の説明である。"
+      ],
+      "takeaway": "リダイレクトの悪用では、リンク先そのものと、リンク先からの転送先を分けて読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の出発点と最終的な送信先を書き出す。メールのリンク、Webサイト、DNSサーバ、プロキシで、どの機能を経由するか比べる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "偽URLを直接クリックさせるだけでは転送機能の悪用ではない。Webサイトに一度アクセスした後、攻撃者の指定先へ移る説明を探す。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Webサイトの自動遷移機能を悪用するイが、オープンリダイレクトに該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d868bfdf134f7a497a48af0e6befffa0d5889994900e810ac4bb4e454950cb49",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q37",
+      "summary": "イ。X-Frame-Optionsでフレームへの埋込みを制限します。",
+      "explanation": "クリックジャッキングは別ページのフレームに対象サイトを透明に重ねるなどして、利用者に意図しないクリックをさせます。X-Frame-Optionsで他サイトのフレーム内表示を制限すると、この重ね合わせを防げます。",
+      "choiceReasons": [
+        "X-Content-Type-OptionsはMIMEタイプの推測を抑制するヘッダです。",
+        "X-Frame-Optionsはフレーム内表示を制限し、クリックジャッキング対策になります。",
+        "HTMLとして解釈させない処理は主にXSSの対策です。",
+        "文字数の制限だけではフレームによるクリック誘導を防げません。"
+      ],
+      "takeaway": "クリックジャッキングは対象ページのフレーム埋込みを制限する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補をHTTPレスポンスの設定と入力値の処理に分け、各対策が変更する場所をブラウザとサーバの通信図に記入します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "入力内容よりも、他サイトの中にページを表示させない制御が必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "フレーム表示を制御するX-Frame-Optionsを設定します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b358bd8ae4f6ff562b44d7843d36f93667b2e252cf71a1c84fd28be27763609e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q37",
+      "summary": "ア。処理時間や消費電力などから秘密情報を推測する攻撃です。",
+      "explanation": "サイドチャネル攻撃は、暗号の数学的な解読ではなく実装から漏れる処理時間、電力、電磁波、エラーなどを観測して秘密情報を推定します。正常な入力出力以外の付随情報が手掛かりです。",
+      "choiceReasons": [
+        "物理量やエラーの差から秘密情報を得るサイドチャネル攻撃です。",
+        "捨てられた印刷物の探索はトラッシングです。",
+        "通信当事者の間へ割り込むのは中間者攻撃です。",
+        "入力へSQL断片を入れるのはSQLインジェクションです。"
+      ],
+      "takeaway": "暗号実装の時間・電力・エラーなど、付随する漏えいも攻撃経路になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの攻撃の情報源を、装置の観測・ごみ・通信・Web入力に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "暗号の答えそのもの以外に、計算中に外から観測できるものを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "処理時間や消費電力の変化を手掛かりにする候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5a815c266e3e16450f2b841e49aabbfab6ba3ad73370bf6ba848bd9c75d61fd6",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q41",
+      "summary": "イ。機器から漏れる電磁波を測るのがサイドチャネル攻撃です。",
+      "explanation": "サイドチャネル攻撃は暗号の数式そのものではなく、実装が外部へ漏らす電磁波、消費電力、処理時間などの情報を利用します。IoT機器が暗号処理中に発する電磁波を測定して秘密情報を推定するイが該当します。\n線形近似や差分の数学的分析、すべての鍵の試行とは攻撃に使う情報が異なります。",
+      "choiceReasons": [
+        "暗号関数の線形近似から関係を分析する線形解読法です。機器の物理的な漏えいの測定ではありません。",
+        "機器の電磁波という本来の入出力以外の情報を観測し、秘密情報を推定するサイドチャネル攻撃です。",
+        "平文差分と暗号文差分の関係を使う差分解読法です。",
+        "鍵候補を全て試す総当たり攻撃です。機器の漏えい情報の分析ではありません。"
+      ],
+      "takeaway": "サイドチャネルは電磁波・電力・時間など実装から漏れる情報を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの説明で、攻撃者が何を入力し、何を得ようとしているかに印を付けます。暗号の式、平文・暗号文、機器の挙動という観察対象を分けて比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "暗号処理の本来の入力・出力以外に漏れる物理的情報が手掛かりです。電磁波や消費電力の観測を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "IoT機器が発する電磁波を測定する候補が該当します。暗号アルゴリズムの数学的な解読と分けましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "eb840b32aaa967ded22a70f4f084a94570b2d224a23ad696cf8af14a509f61a0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q38",
+      "summary": "ア。暗号装置の消費電力など、副次的な情報から秘密を推定します。",
+      "explanation": "サイドチャネル攻撃は、暗号の入出力だけでなく、計算時の消費電力、処理時間、電磁波などの副次的な情報を観測し、秘密鍵などを推定する攻撃です。\n暗号アルゴリズムの数式に対する攻撃、肩越しの盗み見、無線のチャネル干渉とは区別します。",
+      "choiceReasons": [
+        "暗号処理に伴う消費電力を測定して内部秘密を推定するので、サイドチャネル攻撃です。",
+        "選んだ平文と暗号文を分析する選択平文攻撃の説明です。",
+        "入力を横から盗み見るショルダーハッキングの説明です。",
+        "無線の干渉で通信を妨害する攻撃で、暗号装置の副次的情報を分析する攻撃ではありません。"
+      ],
+      "takeaway": "サイドチャネルは暗号処理の時間・電力・電磁波などの漏れを利用する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「サイド」は人の横や無線チャネル番号ではなく、暗号の本来の入出力以外の観測経路を指します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ暗号計算でも、鍵の値で処理時間や消費電力が少し変わる場合があります。その差を多数回の測定から分析します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "平文・暗号文の数学的分析、入力の盗み見、電波の妨害と、装置の計算に伴う測定を比べましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1625fc80b48db41a1646dcc923d93f4a1d209581f7e9cff5e9236e5754905666",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q37",
+      "summary": "イ。機器が発する電磁波を測定するのはサイドチャネル攻撃。",
+      "explanation": "サイドチャネル攻撃は暗号の数式そのものではなく、実装が外へ漏らす処理時間、消費電力、電磁波などから秘密情報を推定する。機器の電磁波を測るイが該当する。\n\n線形近似による解析は線形解読法、平文と暗号文の差を調べるのは差分解読法、全ての鍵を試すのは総当たり。暗号アルゴリズムの入出力を数学的に調べる方法と、機器の物理的な漏れを利用する方法を分ける。",
+      "choiceReasons": [
+        "暗号の線形近似を利用する線形解読法。",
+        "機器が漏らす電磁波を観測するサイドチャネル攻撃。",
+        "平文と暗号文の差の関係を使う差分解読法。",
+        "候補鍵を全て試す総当たり攻撃。"
+      ],
+      "takeaway": "サイドチャネルは処理時間・電力・電磁波など、実装から漏れる情報を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「暗号の式を分析する」のか「機器から漏れる別の情報を測る」のかで四つを分ける。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "同じ暗号でも実装によって電力や時間が変わる。その違いを観測して鍵を推定するのがサイドチャネル。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "線形近似・平文の差・全鍵の試行を除き、物理的な測定をしている選択肢を読む。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e9c975d781c8bfdf796c8ddccc358bef26efee9f0b4b862ba090cee67cfa8adf",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q41",
+      "summary": "ア。経営者の3原則と担当幹部へ指示する重要10項目を示します。",
+      "explanation": "サイバーセキュリティ経営ガイドラインVer.2.0は、経営者がセキュリティを経営課題として捉え、担当幹部に具体的な対策を指示するための指針です。経営者が認識すべき3原則と重要10項目という構成が決め手です。マネジメントシステム規格やIT全体の統治の枠組み、国の責務を定める法律とは目的が異なります。",
+      "choiceReasons": [
+        "経営者の3原則・担当幹部への重要10項目というガイドラインの構成に一致します。",
+        "情報資産をCIAの観点で管理し継続的に見直す、ISMSの説明です。",
+        "ITガバナンスとITマネジメントのプロセスを定義するCOBITの説明です。",
+        "国の責務を定めるのはサイバーセキュリティ基本法の説明です。"
+      ],
+      "takeaway": "経営ガイドラインは経営者の認識と担当幹部への指示を具体化する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の対象を「経営者・担当幹部」「情報資産の管理」「IT全体」「国」に分けて印を付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "経済産業省とIPAのガイドラインは、企業経営者がサイバー攻撃への対策を主導するための指針です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "経営者の3原則と、担当幹部へ指示すべき重要10項目という構成を示す候補が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "945926304b7fcdd8c96b8ec15ac9e0a3ac3c1bbbcd67c96d898feca680e1c342",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q44",
+      "summary": "587番のサブミッションポートではSMTP-AUTHによる送信者認証を行います。",
+      "explanation": "サブミッションポートは、利用者からメールサーバへのメール投稿をサーバ間配送と分けるために使います。587番への投稿時にSMTP-AUTHで利用者を認証し、認証済み利用者だけに送信を許可することで不正なメール送信を抑えます。エがその目的です。",
+      "choiceReasons": [
+        "SPFレコードの照会は送信元サーバがドメインから許可されているかの確認です。",
+        "DNS公開鍵での署名検証はDKIMの仕組みです。",
+        "POP認証を先に行うPOP before SMTPは、SMTP-AUTHによる投稿時の認証とは別方式です。",
+        "メール投稿時にSMTP-AUTHで送信者を認証する目的に合います。"
+      ],
+      "takeaway": "587番は利用者のメール投稿とSMTP-AUTHを結び付ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われているのはDNS情報や署名ではなく、メールを投稿する587番ポートの目的です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用者からの投稿と、メールサーバ間の配送を分け、投稿時に誰が送ったか確認する必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サブミッションではSMTP-AUTHで利用者を認証してから送信を許可します。この認証方式の候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b30055c439f75a74d57c8c7b56f85a0026dee13b4526a92cc8f50178903c28a4",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q37",
+      "summary": "強制アクセス制御で、侵入後も禁止されたファイル更新を防げます。",
+      "explanation": "セキュアOSは強制アクセス制御などにより、OSが定めたポリシーを利用者やプロセスへ強制します。通常のアクセス権限だけでは広い権限を持つプロセスを侵害されると被害が拡大しますが、強制ポリシーで更新を禁止したファイルへの操作を制限できます。ウがこの効果を述べています。",
+      "choiceReasons": [
+        "1回の認証で複数システムを利用するのはシングルサインオンの説明です。",
+        "Web通信を解析して攻撃を遮断するのはWAFの説明です。",
+        "強制アクセス制御によって侵入したプロセスにもファイル更新の禁止を適用できます。",
+        "パスワード以外にトークンを使うのは多要素認証などの説明です。"
+      ],
+      "takeaway": "セキュアOSは認証追加だけでなく、侵入後の操作範囲も制限する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の効果が、認証、通信の検査、ファイル操作の制限のどれかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "OSがポリシーを強制する場合、侵入したプロセスにも操作制限が働くことを考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "強制アクセス制御で更新禁止のファイルを守る記述は、セキュアOSの機能に対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d8066bb6f277b27d4a387f2a73d790046f080e283b09c15bb2d7b29bdb688d4e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q42",
+      "summary": "ウ。起動時にデジタル署名を検証し、信頼できるコードだけを実行します。",
+      "explanation": "セキュアブートはOSが起動を完了する前のブート過程で、OSのプログラムやドライバなどのデジタル署名を検証します。有効な署名をもつ信頼されたコードだけを実行し、起動過程へのマルウェア混入を防ぎます。\n起動を許可するためのパスワード入力や、OS起動後のスキャンとは目的と仕組みが異なります。",
+      "choiceReasons": [
+        "BIOSパスワードによる利用者の起動制限です。起動コードの署名を検証する仕組みではありません。",
+        "ストレージのパスワードによるアクセス制限で、OSやドライバの信頼性検証ではありません。",
+        "起動コードのデジタル署名を検証して有効なものだけ実行する、セキュアブートの説明です。",
+        "OSのスタートアップで対策ソフトを動かすだけでは、OS起動完了前の不正なコード実行を防ぐ署名検証になりません。"
+      ],
+      "takeaway": "セキュアブートは起動コードの信頼性をデジタル署名で確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各説明で、起動のどの時点に何を確認するかに印を付けます。パスワード入力、デジタル署名の検証、マルウェアスキャンを別の処理として整理しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "起動するOSやドライバが信頼された提供者のものかをデジタル署名で確認し、有効なコードだけを通します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「OSのプログラムやドライバのデジタル署名を検証」と「起動完了前」に対応する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "099d8a28e4bc3c57ae2a96680128a8a5d030a750836940fcee6fed67d333cf4d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q39",
+      "summary": "ウ。秘密情報を扱う予定の個人の適性を評価する。",
+      "explanation": "セキュリティクリアランスは、機密情報へのアクセスを認める前に、その人に扱う適格性があるかを調査・評価する仕組み。対象が「個人」、時点が「配属される予定」であるウが合う。\n\nネットワークの物理分離、アカウント権限の棚卸し、机上の機密書類の片付けも対策だが、個人の適性評価とは異なる。",
+      "choiceReasons": [
+        "インターネットから切り離すネットワーク分離の対策。",
+        "権限やアカウントの定期的な棚卸し。",
+        "機密情報を扱う個人の適性を事前に評価するセキュリティクリアランス。",
+        "机上の情報を片付けるクリアデスク。名前に「クリア」があっても別の対策。"
+      ],
+      "takeaway": "クリアランスは機密情報を扱う人の適格性を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "それぞれの対象を、ネットワーク・アカウント・人・机上の書類に分けて読む。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "クリアランスはアクセスを許可する前の人的な適格性確認。接続方法や机の片付けを指す言葉ではない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "秘密情報を扱う予定の「個人」に対して、適性を評価している説明を探す。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "13f35cba226a3a043edf9afcf0d2011530b82a0d73da811a63833a705d44b0c2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q37",
+      "summary": "ウのコードサイニング証明書。ソフトウェアの署名者を確認します。",
+      "explanation": "コードサイニング証明書は、プログラムに付けられたデジタル署名を検証し、署名者の身元と公開鍵を対応付けます。署名の検証で改変の有無を確かめ、発行元を確認できます。\n署名が正しくてもソフトウェアの機能や安全性を全て保証するわけではありません。TLS通信のサーバーや利用者を確認する証明書とは用途が異なります。",
+      "choiceReasons": [
+        "EV SSL証明書はWebサイト運営主体を厳格に確認するサーバー向けの証明書です。",
+        "クライアント証明書は通信する利用者や端末の認証に使います。",
+        "コードサイニング証明書はソフトウェアの署名者・発行元の確認に使います。",
+        "サーバー証明書はTLSなどで接続先サーバーを確認するものです。"
+      ],
+      "takeaway": "プログラムの署名者確認はコードサイニング。TLSの相手確認と区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "インストール対象は署名付きプログラムです。通信先のWebサーバーを確認する場面ではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "必要なのは、そのプログラムへ署名した発行元と、署名検証に使う公開鍵の対応を確認する証明書です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "証明書の用途を、Webサーバー、利用者・端末、プログラムのコードという対象に対応させましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e447d4fb2a758ee34bad7c899ece21823e59d0a625e7a2f73f36cda44f316143",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q38",
+      "summary": "ウ。未使用IPへも広く送る探索パケットが大量に届きます。",
+      "explanation": "使われていないIPアドレス空間には、通常の利用者が宛先を知って送る通信は基本的にありません。一方、攻撃対象を探すスキャンは多数のアドレスを走査するので、未使用領域にも届きます。\nこのような領域を観測するダークネット観測は、マルウェアの探索活動などを把握する手がかりになります。",
+      "choiceReasons": [
+        "公開WebサイトのIPは使用中です。利用者はそのサイトを宛先にするので未使用領域への大量通信ではありません。",
+        "実在サーバへの通常通信は使われている宛先へ送られます。",
+        "広い範囲を探索するスキャンは対象が存在するか知らずに送るため、未使用IPにも大量に届きます。",
+        "標的型メールは有効な宛先へ配送する通信で、未使用IP空間への大量探索とは異なります。"
+      ],
+      "takeaway": "未使用IPに届く通信は、広範囲な探索活動を観測する手がかりになる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題の宛先は「使われていないIPアドレス」です。既知の実在サービスを目的に送る通信なら、そこへ大量には向かいません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "攻撃者が感染させる機器を探す段階では、どのIPに機器があるか分からないので、広い範囲へ試しに送ります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "実在する対象を探すためのスキャンを述べるウなら、使われていないIPも走査対象となります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4b7d832c1bcee8a9a90b1e9fd00d30b986629b9bafe8bc711070d460d97dd203",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q38",
+      "summary": "エ。サーバのランダムな値とパスワードから応答を計算する方式です。",
+      "explanation": "チャレンジレスポンス認証では、サーバが毎回変わるチャレンジを送り、クライアントは秘密情報とチャレンジを用いてレスポンスを計算します。サーバはその応答を検証します。毎回違う値に対する応答を求めることで、過去の応答をそのまま使うリプレイを防ぎます。",
+      "choiceReasons": [
+        "TLSで固定パスワードを送っても、サーバのチャレンジに対して応答を生成する方式ではありません。",
+        "端末シリアル番号を秘密鍵で暗号化するだけでは、毎回異なるサーバのチャレンジを使っていません。",
+        "トークンが自動表示する毎回異なる数字列はワンタイムパスワードの説明で、サーバのチャレンジへの応答を述べていません。",
+        "サーバが送るランダムなデータと秘密のパスワードを使って応答を演算し、その結果を検証するので該当します。"
+      ],
+      "takeaway": "チャレンジレスポンスはサーバの新しい問いに秘密を使って応答し、過去の応答の再利用を防ぐ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の中で、サーバからクライアントへ送られるデータがあるか確認します。単に秘密を送る方式との違いを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "サーバが毎回異なる問いを出し、クライアントが秘密とその問いから答えを計算するなら、以前の通信をそのまま再送しても認証できません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "パスワードとサーバのランダムなデータを演算し、その結果を返す候補がチャレンジレスポンスです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ae6a6c0481334c83f27a70b339e8499b4ba4e83b9d6fe3449dacff3d1637e8c0",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06a-q39",
+      "summary": "ア。AIでCEOの音声を偽造し、本人の指示に見せる攻撃です。",
+      "explanation": "ディープフェイクはAIなどで実在の人物に似せた画像、動画、音声を作る技術です。CEOの声を加工・合成して本人が電話しているように聞かせ、送金させるアが該当します。\nランサムウェア、情報漏えいを装う脅迫、不正入手した認証情報によるメールアカウントの乗っ取りは、いずれもAIによる人物の声や姿の偽造を必須としません。",
+      "choiceReasons": [
+        "AI加工したCEOの音声で本人になりすますのでディープフェイクの悪用です。",
+        "暗号化されたデータの復号鍵を条件に金銭を要求するランサムウェアの攻撃です。",
+        "秘密情報の取得を装って脅迫する手口で、声や映像のAI偽造は示されていません。",
+        "盗んだ認証情報でメールを送るアカウント乗っ取りで、ディープフェイクとは異なります。"
+      ],
+      "takeaway": "人物の声・姿をAIで偽造することと、認証情報を盗んでアカウントを使うことを分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "どの候補が送金を要求するかだけでは絞れません。CEOに似せる手段が、合成音声なのかメールアカウントなのかを読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ディープフェイクでは本人の声や姿が本物のように生成されます。パスワードを盗んで本人のアカウントを使う手口とは別です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "AIで加工したCEOの音声を電話で使うアが、声の偽造によるなりすましです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "540f074c6b448ca9b5b177dd3e323e2998766875cf3d2378e6af02674cb538c2",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q42",
+      "summary": "削除ログを復元して不正アクセスの痕跡を調べるのはフォレンジックスです。",
+      "explanation": "デジタルフォレンジックスは、機器や媒体のデジタル証拠を収集・保全し、検査、分析、報告する手順です。削除されたログもディスクから復元して、何が行われたかを調べる証拠になります。イは媒体に残る痕跡を復元・分析しているため、この手順に含まれます。",
+      "choiceReasons": [
+        "リアルタイムのログ相関による侵入検出はSIEMなどの監視機能を述べています。",
+        "ディスクを解析して削除ログを復元し、不正アクセスの証拠を調べる処理です。",
+        "メールの暗号化は情報漏えいの予防で、証拠の収集・分析ではありません。",
+        "実行時のハッシュ照合はマルウェア検知の説明で、媒体の証拠調査を述べていません。"
+      ],
+      "takeaway": "フォレンジックスは事故の痕跡を証拠として保全・復元・分析する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "手順には収集、検査、分析、報告があります。既に起きた行為を裏付けるデータに注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "侵入の予防・常時監視と、媒体に残された痕跡を調査する活動を区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "削除されたログを復元して「何が起きたか」を調べる候補が、証拠の検査・分析に当たります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "95cd0493e148ba88cdffd10345b7eccc305126e67e63af214186e14ef838e6ab",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q44",
+      "summary": "イ。削除ログを復元して攻撃の痕跡を調べるのはフォレンジックスです。",
+      "explanation": "デジタルフォレンジックスは、電子的な証拠を収集・保全し、検査・分析して事実を明らかにし報告する活動です。ディスクを調べ、削除されたログから不正アクセスの痕跡を復元するイが該当します。\n日々のリアルタイム検知や通信の暗号化、実行時のマルウェア判定は別の防御・監視活動です。",
+      "choiceReasons": [
+        "ログを集めてリアルタイム相関分析するSIEMなどの検知活動です。",
+        "ディスクの残存データから削除ログを復元し、事件の痕跡を調べるフォレンジックスです。",
+        "メールの暗号化は漏えい対策で、証拠の検査・分析ではありません。",
+        "ハッシュと脅威情報による実行時の判定はマルウェア対策です。"
+      ],
+      "takeaway": "フォレンジックスは証拠から事実を復元・分析する活動。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問の収集→検査→分析→報告は、起きた事象の証拠を調べる流れです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "攻撃の痕跡がログから消されても、記録媒体に残る情報を調べて復元する場面を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "今後の通信を守る暗号化や、現在進行の検知ではなく、保存媒体から過去の行為を確かめる処理を探しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b63e6a65f73f53eae42862bfeb313cff31097bca15a4cb49d1defae39725c5f7",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q40",
+      "summary": "ア。ハッシュ値から元になるメッセージを求めることが困難な性質です。",
+      "explanation": "原像計算困難性はハッシュ値hが与えられたとき、H(m)=hとなる入力mを見つけることが計算量的に困難であるという性質です。任意の二入力の同じハッシュを探す衝突困難性とは、与えられる条件が異なります。",
+      "choiceReasons": [
+        "与えられたハッシュ値から対応する入力を探す困難性で正しいです。",
+        "可変長入力を固定長へ変換する形式上の性質で、一方向性の説明ではありません。",
+        "同じハッシュとなる任意の異なる二入力を探す困難性は衝突困難性です。",
+        "処理装置への観測・改変防止という耐タンパ性に関する説明です。"
+      ],
+      "takeaway": "原像は出力から入力、衝突は同じ出力となる二入力を探す問題。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "H(m)=hの式を書き、問題で与えられているのが入力mか出力hかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "出力hだけを知って、対応する入力mを探す方向が一方向性で難しい逆方向です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "あるハッシュ値を出力するメッセージを見つけることが困難というアです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

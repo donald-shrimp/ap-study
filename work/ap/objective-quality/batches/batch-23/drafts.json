@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "r05a-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9d76d7a5c01b63981149e63ff6a5e228c7b75602eab3d4fa3860f2f349c43f80",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q47",
+      "summary": "エのローコード開発。GUI中心でも必要な箇所はコードを書けます。",
+      "explanation": "設問では用意された部品やテンプレートをGUIで組み合わせながら、必要に応じて一部のソースコードも記述します。コード量を少なくするローコード開発の特徴です。\nノーコード開発は基本的にコードの記述を必要としない方式なので、一部を自分で書くという条件で区別できます。",
+      "choiceReasons": [
+        "変更を頻繁に統合してビルド・試験するCIの説明ではありません。開発画面での部品の組合せとは別です。",
+        "コードを記述せずに開発する方式です。必要な処理のソースコードを一部記述する条件はローコードに対応します。",
+        "試作品を作って要求や設計を確認する方法です。GUI中心かコードを一部書くかを表す分類ではありません。",
+        "GUIで部品を組み合わせ、必要な箇所はコードを補うローコード開発の説明です。"
+      ],
+      "takeaway": "ノーコードはコード不要、ローコードは少量のコードで補える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "GUIで組み合わせるだけでなく「必要に応じて一部の処理のソースコードを記述」とあります。ここを読み落とさないようにします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コードを書かないno-codeと、書く量を減らすlow-codeを比べます。一部をコードで補う条件に対応させます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "少量のソースコードを許すのはlow-codeです。日本語の名称を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c21bc60e135c71e5e8e9e2e3e68074e86fdf903453e4d4cf0d3bca891067bf42",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q50",
+      "summary": "ウ。次に試す具体的な改善策がTryです。",
+      "explanation": "KPTはKeep（継続すること）、Problem（問題点）、Try（次に試すこと）です。スタンドアップミーティングにタイムキーパーを置き終了5分前を知らせる案は、次スプリントで実行する改善策なのでTryです。",
+      "choiceReasons": [
+        "ペアプログラミングを継続するのはKeepです。",
+        "全員が集まらないという問題の指摘はProblemです。",
+        "次のスプリントで試す具体的な改善策なのでTryです。",
+        "見積り超過という問題の指摘はProblemです。"
+      ],
+      "takeaway": "KPTでは、評価と問題を次の具体的な実験へつなげる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補を「継続」「困った事実」「次の行動」に分類します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Tryでは現状の感想ではなく、次の期間で試せる行動を決めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "次スプリントでタイムキーパーを置くという提案を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2207cfb17d4c60bf07077e7621b0d2183c5b9a720c6af4a29dcdb6d342cc3a6c",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q49",
+      "summary": "エ。PWAはサービスワーカーを使い、オフラインなどのアプリ的機能を提供します。",
+      "explanation": "プログレッシブWebアプリはWeb技術で作り、サービスワーカーによるキャッシュやバックグラウンド処理などを使って、ネイティブアプリに近い利用体験を提供します。\nオフライン起動やデータ同期を挙げるエが該当します。サーバーでのプログラム実行、意味情報の付加、APIの組合せとは別の概念です。",
+      "choiceReasons": [
+        "ブラウザー要求に応じてサーバープログラムを動かす一般的なサーバー側処理の説明です。",
+        "情報に意味を持つメタデータを付けるセマンティックWebの説明です。",
+        "他サービスのAPIを組み合わせるマッシュアップの説明です。",
+        "サービスワーカーを使ったオフライン起動や同期はPWAの特徴です。"
+      ],
+      "takeaway": "PWAの手掛かりはサービスワーカー、オフライン、ネイティブアプリに近い体験。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われるのはWebで作るアプリの利用体験です。サーバーで処理するかだけを尋ねていません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "回線が切れてもキャッシュから起動し、後で変更を同期する動作を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "メタデータによる意味付け、他APIの組合せ、サーバーのプログラム実行と、ブラウザーのサービスワーカーを使う方式を区別しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "04f7097062021f50224c331fa26e8e387365a38ab93fe51e1133d53ca0e0aa65",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q48",
+      "summary": "エ。ペアプログラミングはXPのプラクティス。",
+      "explanation": "XPは短い反復、早いフィードバック、継続的な改善を重視する開発方法。ペアプログラミングは二人で一つのコードに取り組み、一人が実装し、もう一人が確認や方針検討をする。役割を交代し、誤りの早期発見や知識共有につなげる。\n\n構造化、コンポーネント指向、ビジュアルという言葉は別のプログラミングの考え方や表現方法を指し、ここで問うXPの代表的な実践ではない。",
+      "choiceReasons": [
+        "構造化は順次・選択・反復などで処理を構成する考え方。",
+        "コンポーネント指向は部品の組合せや再利用を重視する考え方。",
+        "ビジュアルは視覚的な表現を使うプログラミング。",
+        "二人で実装と確認を行うペアプログラミングはXPの実践。"
+      ],
+      "takeaway": "XPのペアプログラミングは、実装と確認を同時に行う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "XPでは、コードを書いた後だけでなく書いている途中にもフィードバックを得る。二人で一つの実装を確認する方法を考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "一人がコードを入力し、もう一人が誤りや全体の方針を確認する。二人の役割は交代する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「二人一組」を意味する名前のプログラミング手法を選ぶ。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "aa91bfbb2a7350fdb244fec3504f55531e53d56fbb025e6168ff2c45719d7e97",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q47",
+      "summary": "アクティビティ図は振る舞い間の制御の流れを表す",
+      "explanation": "正解はア。アクティビティ図は処理や活動を節点として、その実行順序、分岐、合流などの制御の流れを表現する。メッセージの時系列や、一つのオブジェクトの状態遷移とは区別する。",
+      "choiceReasons": [
+        "振る舞いから次の振る舞いへの制御の流れはアクティビティ図で表す。",
+        "オブジェクト間の相互作用を時系列で表すのはシーケンス図である。",
+        "外部提供機能と利用者・外部システムの関係はユースケース図で表す。",
+        "イベントや時間経過による一つのオブジェクトの状態変化はステートマシン図で表す。"
+      ],
+      "takeaway": "活動の実行順序、メッセージの時系列、利用者との関係、状態変化を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の図の対象を、活動同士、オブジェクト間、システムと利用者、一つのオブジェクトに分けて比較する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アクティビティは処理や活動の単位。活動から次の活動への実行順や分岐を表す説明を探す。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "振る舞い間の制御の流れを表すアが、アクティビティ図の説明である。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05a-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c9598473e4cca122000a56040ab899b82a3a7ee6b5b02e0aba9e800bcae8391f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05a-q49",
+      "summary": "ア。個人と対話、動くソフトウェア、顧客との協調、変化への対応を重視します。",
+      "explanation": "アジャイル宣言は四つの対を示します。プロセスやツールより個人と対話、包括的なドキュメントより動くソフトウェア、契約交渉より顧客との協調、計画に従うことより変化への対応に価値を置きます。\n前者にも価値は認めながら、より重視する後者を四つそろえた組合せがアです。",
+      "choiceReasons": [
+        "宣言でより価値を置く四項目がすべて並んでいます。",
+        "包括的なドキュメントと計画に従うことは、比較対象の側です。動くソフトウェアと変化への対応が必要です。",
+        "プロセスやツールと契約交渉は比較対象の側です。個人と対話、顧客との協調をより重視します。",
+        "四項目とも比較対象の側で、より価値を置く四項目ではありません。"
+      ],
+      "takeaway": "アジャイル宣言の四対は、人・動作・協調・変化をより重視する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われるのは価値がないものではなく、二つを比べたとき「より」価値を置く側です。四項目すべてをそろえる必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まず「プロセスやツール」と「個人と対話」を比較します。アジャイルで連携する人のやり取りをより重視する側へ印を付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "残る対でも、動くソフトウェア、顧客との協調、変化への対応を選びます。四つが一組で並ぶ候補を確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7110a61a70c008fce763625ec750617136d27629ca7c9fa912805aa95ec57864",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q47",
+      "summary": "イのオブジェクト図。具体的なインスタンスとそのリンクを表します。",
+      "explanation": "オブジェクト図は、ある時点の具体的なオブジェクト、すなわちクラスのインスタンスと、それらの間のリンクを表します。例えば顧客クラスではなく「顧客A」という実体を描きます。\n処理の流れ、ソフトウェア部品の構成、利用者と機能の関係を描く他の図とは目的が違います。",
+      "choiceReasons": [
+        "アクティビティ図は処理・作業の流れを表します。",
+        "オブジェクト図はインスタンスとその関係を表します。",
+        "コンポーネント図はソフトウェアの部品構成や依存関係を表します。",
+        "ユースケース図は利用者などのアクターと、提供する機能を表します。"
+      ],
+      "takeaway": "インスタンスの関係はオブジェクト図。型の定義や処理の流れと区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "インスタンスは「顧客」という型ではなく、「顧客A」のような具体的な実体です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ある時点の注文1と顧客Aを線で結んだ構造を描く場合を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "処理の順番、部品の依存、利用者と機能の対応を表す三つの図を、それぞれの候補と対応させましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07a-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fdbc468932ed4214ec00305246af0878b649392998a3758359fe4e5f33512881",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07a-q48",
+      "summary": "イの14個。推定総数56個から発見済み42個を引きます。",
+      "explanation": "埋込みエラーと真のエラーが同じ割合で発見されると仮定します。埋込み48個中36個を発見したので、発見率は36/48=3/4です。\n真のエラーの総数をNとすると42/N=3/4よりN=56。これは総数なので、残存数は56−42=14個です。",
+      "choiceReasons": [
+        "6個は42と36の差で、発見率による残存数の推定ではありません。",
+        "真の総数56から発見済み42を引いた14個が正しいです。",
+        "54個は発見率3/4を使った総数・残存数のいずれにも一致しません。",
+        "56個は推定した真のエラー総数です。問われる残存数には42個を引きます。"
+      ],
+      "takeaway": "埋込みの発見率で真の総数を推定し、発見済みを引いて残存数にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "埋込みは最初48個、発見36個です。まず何割が見つかったかを計算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "真のエラー42個も同じ発見率と仮定し、42/総数=36/48という比例式を立てます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "比例式から出るのは真のエラーの総数です。最後に発見済み42個を引く必要があることを確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5c9d373dac86ec6b9f3999c15f41bd2a712217bfb0b53b60e7184e4be2fd4b57",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q49",
+      "summary": "ウ。本番環境で実験し、影響範囲を局所化する。",
+      "explanation": "カオスエンジニアリングでは、正常時の状態を定め、障害等を意図的に与えてその状態が維持されるかを実験する。原則の一つは本番環境で実験して実際の条件に近づけること、もう一つは影響範囲を最小化すること。\n\n本番で実施するからこそ、対象を小さくし、監視や中止条件などを準備する。広範囲へ無制限に障害を起こすという意味ではない。開発環境での予備確認には意味があるが、設問の原則の名称とは異なる。",
+      "choiceReasons": [
+        "影響範囲の局所化は合うが、「開発環境」がここで問う原則と違う。",
+        "開発環境も影響範囲を広げる点も、求める原則と違う。",
+        "本番環境と影響範囲の局所化の二つが一致する。",
+        "本番環境は合うが、影響範囲を広くするという点が逆。"
+      ],
+      "takeaway": "実際の条件で学ぶための本番実験と、被害範囲の最小化を組み合わせる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢は「どの環境か」と「影響範囲をどうするか」の二軸。同時に決めず、まず範囲の大小を考える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "障害を起こす実験でも、必要以上に利用者へ影響を出さない。影響範囲を小さくする側に絞る。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "実際の分散システムの条件を検証する原則は本番環境での実験。残った二択で環境を確認する。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "64956bb30337c47a333524fc20a193e849a971810bde2c9ec0b14813e4d25dba",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q50",
+      "summary": "イ。ソースコード中の定型コメントなどから説明文書を自動生成します。",
+      "explanation": "ドキュメンテーションジェネレーターは、関数やクラスの定義と、決まった形式で記述したコメントなどを解析し、API説明などのドキュメントを生成するツールです。例えば引数・戻り値の説明をソース内へ書き、HTMLの一覧に変換できます。\n画面にHTMLを表示するレンダラ、テンプレートへデータを埋めるエンジン、印刷物を組版するソフトウェアとは入力と目的が違います。",
+      "choiceReasons": [
+        "アはHTMLやCSSを描画するレンダリングソフトウェアです。",
+        "イはソースの定型コメントなどを使ってプログラムの説明文書を生成するものです。",
+        "ウはテンプレートエンジンで、文書雛形とデータを合成します。",
+        "エはマーク付けした文書を組版するソフトウェアです。ソースコードから説明文書を作るものではありません。"
+      ],
+      "takeaway": "入力がソースコードと定型コメント、出力がプログラムの説明文書なら文書生成ツール。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "入力がHTMLなのか、テンプレートなのか、ソースコード中のコメントなのかを比較します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "関数の引数と戻り値の説明を定型コメントに記し、それをAPI一覧へまとめる用途を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "プログラムの説明文書を生成するイの入力と出力が、この用途に合うか確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ba736d91f1acdd7615d353896ec211c93c930bc7bc51a441fc1a604175a4835d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q50",
+      "summary": "サーバプロビジョニングは、記述した構成に基づいてサーバを自動構成します。",
+      "explanation": "プロビジョニングは必要なサーバ環境を準備することです。ツールではOS設定、ミドルウェア、構成などをあらかじめ記述し、それに従ってサーバ環境を自動で構成します。手作業のばらつきを減らし、同じ構成を再現できるエが適切です。稼働後の監視や資産管理とは目的が違います。",
+      "choiceReasons": [
+        "サービスが稼働しているかを調べる死活監視の説明です。",
+        "インストール済みソフトウェアの把握は資産・構成情報の管理です。",
+        "性能の監視・管理は稼働中の性能管理で、環境の自動構成ではありません。",
+        "事前の構成記述に従って環境を用意するプロビジョニングの説明です。"
+      ],
+      "takeaway": "プロビジョニングは環境を用意する処理、監視は用意した環境の稼働を調べる処理。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補は監視、ソフトウェア管理、性能管理、自動構成の四つです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "新しいサーバを同じ設定で繰り返し用意する場面を考え、稼働後の監視と区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "事前に書いたシステム構成からサーバを自動で作る動作が、プロビジョニングに対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "21f0b61b607f2be85edd93c9c22e54d3066dd1fa9efec4069e646021c6930303",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q50",
+      "summary": "スクラムマスタはスクラムの理解と実践を支援する",
+      "explanation": "正解はイ。スクラムマスタは、スクラムの理論とプラクティスを全員が理解できるように支援する。プロダクトの価値やプロダクトバックログの管理に関する責任はプロダクトオーナが担う。",
+      "choiceReasons": [
+        "リリースの可否の判断はプロダクト側の意思決定であり、スクラムの理解を支援するスクラムマスタの役割ではない。",
+        "スクラムの理論とプラクティスの理解を支援するのがスクラムマスタの役割である。",
+        "プロダクトバックログアイテムの明確な表現はプロダクトオーナの責任に含まれる。",
+        "プロダクトバックログの優先順位を決めるのはプロダクトオーナの責任に含まれる。"
+      ],
+      "takeaway": "スクラムの進め方を支援する役割と、プロダクトの価値・優先順位を決める役割を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われているのはスクラムマスタ。候補を「製品に何を入れるか」と「スクラムをどう実践するか」に分ける。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "リリースやバックログの内容・優先順位はプロダクトの意思決定。全員のスクラム理解を助ける活動が手法の実践を支える。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "理論とプラクティスを全員が理解するよう支援するイを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r05h-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "494ffeb556c11693869e6dc5b3b0288f08d81e4e511bbc338e171eededb2ec55",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r05h-q48",
+      "summary": "計画、日々の確認、成果のレビュー、進め方の振返りの順です。",
+      "explanation": "スプリント開始時はスプリントプランニングで目標と作業を計画します。実行中はデイリースクラムで進捗と計画を調整します。終盤のスプリントレビューで成果を関係者と検査し、その後のスプリントレトロスペクティブでチームの進め方を振り返ります。番号は1→4→3→2なのでイです。",
+      "choiceReasons": [
+        "成果のレビューより前にレトロスペクティブを置いており、最後の二つが逆です。",
+        "計画後に日々の確認を行い、成果レビューの後に進め方を振り返ります。",
+        "スプリントの計画より先に日々のスクラムを置き、レビューと振返りも逆です。",
+        "日々の確認がスプリント開始の計画より先になっています。"
+      ],
+      "takeaway": "レビューは成果、レトロスペクティブはチームの進め方を検査する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "番号3は成果のレビュー、番号2は進め方の振返りで、対象が異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まず開始時の計画、次に実行中の日々の確認を置きます。終盤の二つを目的で並べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "成果を関係者と確認するレビューの後で、次に向けてチームの進め方を振り返ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r07h-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "507f36817fd34b87413fa10ce6135277e32ad149d23b278526d16b24df6a62b3",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r07h-q50",
+      "summary": "イ。成果と今後の方向をステークホルダと検討するスプリントレビュー。",
+      "explanation": "スプリントレビューは成果を検査し、ステークホルダとプロダクトゴールへの進捗や環境変化を話し合い、今後の作業を適応させるイベント。成果を見せるだけでなく、次に何をするかを共同で検討する。\n\nプランニングはスプリント開始時の計画、デイリースクラムは日々の進捗の検査と計画調整、レトロスペクティブはチームの進め方の改善。何を改善する会議かで分ける。",
+      "choiceReasons": [
+        "プランニングはスプリントで何をどう達成するかを計画する。",
+        "レビューは成果をステークホルダと確認し、今後のプロダクトの方向を検討する。",
+        "デイリースクラムは開発者が日々の進捗と計画を調整する。",
+        "レトロスペクティブはチームの作業方法等の改善を検討する。"
+      ],
+      "takeaway": "レビューはプロダクトと次の方向、レトロスペクティブは仕事の進め方。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ステークホルダ」「作業の結果」「プロダクトゴール」がそろっている。チーム内部の仕事の進め方だけを振り返る会ではない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "開始時の計画、日々の調整、成果と今後の方向、チームの改善を各イベントへ対応させる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ステークホルダと成果を検査して、次の作業の方向を変えるイベントに当てはめる。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04h-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c8170a319a089d4e492d5be5a9e9f0cebb49bd1f42dc6105b2cf4069affbd35f",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04h-q49",
+      "summary": "エ。ベロシティは、一定期間の生産量を相対的な尺度で表します。",
+      "explanation": "スクラムのベロシティは、スプリントなどの決められた期間に完了した作業量をストーリーポイント等で表したものです。チームの過去の実績から、次の期間に扱える量の見通しを立てる際に使います。期間そのもの、振返りの活動、作業一覧の名称とは異なります。",
+      "choiceReasons": [
+        "スプリントは一定の短い開発期間で、量を表す尺度ではありません。",
+        "スプリントレトロスペクティブは進め方を振り返り改善する活動です。",
+        "バックログは行う作業や要求の一覧です。",
+        "ベロシティは一定期間に完了した作業量を相対的な単位で表す尺度です。"
+      ],
+      "takeaway": "ベロシティはチーム内の期間当たりの完了量。スプリントやバックログと区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文の「決められた期間」と「生産量を相対的に表す」を確認します。期間・活動・一覧・量の尺度を区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "スプリントは期間、レトロスペクティブは振返り、バックログは作業一覧です。残る候補が期間当たりの完了量を表すか確かめます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "期間当たりに完了したストーリーポイントなどを表すのがベロシティです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r04a-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "06f36d4cdfa1ca79485397d916bf398de5a58d2877bd839af5037f57da7cb13d",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r04a-q49",
+      "summary": "エ。プログラムを書く前にテストコードを書きます。",
+      "explanation": "テスト駆動開発は、まず期待する振舞いを表すテストを書き、失敗を確認し、テストを通す最小の実装を作り、リファクタリングするサイクルです。テストが実装の方向を先に定めることが特徴です。",
+      "choiceReasons": [
+        "最初に多くのバグを抽出することがテスト駆動開発の特徴ではありません。",
+        "テストケースの改善だけでは、実装より先にテストを書く特徴を表しません。",
+        "網羅率向上が目的という説明では、テスト先行の開発サイクルを表しません。",
+        "実装より前にテストを書くという特徴です。"
+      ],
+      "takeaway": "テスト駆動開発は失敗するテスト→実装→整理を短く反復する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問はテストの量や精度ではなく、開発の進め方を尋ねていると確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "テストが実装を駆動するなら、二つのうちどちらを先に書くか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "先にテストコードで期待動作を定め、そのテストを通すプログラムを書きます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03a-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c8b8b8cf9848f68fc6ee2683a27fa2b6ac9e4f2f756de6b2c1abd02c2b88a7df",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03a-q49",
+      "summary": "バーンダウンチャートは残作業量の減少を見る",
+      "explanation": "正解はア。バーンダウンチャートは時間を横軸、未完了の残作業量を縦軸に置き、残作業が完了に向かって減っていく状況を示す。アは予定の減少線と実績の残作業量が描かれている。",
+      "choiceReasons": [
+        "縦軸が残作業量で、時間とともにゼロに向かうためバーンダウンチャートである。",
+        "縦軸が発生不具合数で、残作業量を示していない。",
+        "縦軸が累積バグ数で、時間とともに累積件数が増えるグラフである。",
+        "縦軸が要員数で、要員の投入計画・実績を示すグラフである。"
+      ],
+      "takeaway": "バーンダウンでは完了済み量より、残っている作業量を読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの図の縦軸名を書き出し、増減している量が作業・不具合・累積件数・要員のどれか確認する。破線と実線の意味も問題文で確認する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "バーン「ダウン」は残った作業を消化する様子。予定線も実績線も、完了時に残量ゼロへ向かう図が対応する。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "残作業量を縦軸にしてゼロへ減るアがバーンダウンチャートである。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r06h-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9132431c1ec6c6d619904394548dbcf3f00b440f7c7f69063df9bb414e3eb3fa",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r06h-q49",
+      "summary": "イ。JIS X 33002はプロセスアセスメントを実施するための要求事項です。",
+      "explanation": "プロセスアセスメントは、組織のプロセスを一定の基準と証拠に基づいて評価する活動です。JIS X 33002はその実施に対する要求事項を定め、客観的な診断を可能にします。\n評価結果を改善へ使うことはありますが、規格の直接の対象はアセスメントの実施です。プロジェクトマネジメント全体の手引きや、ソフトウェアライフサイクルの共通枠組みではありません。",
+      "choiceReasons": [
+        "アは継続的改善そのものの要求事項としています。この規格は改善の材料となるアセスメントの実施を対象とします。",
+        "イは組織プロセスを客観的に診断するアセスメントの目的を述べています。",
+        "ウはプロジェクトマネジメントの包括的な手引きで、アセスメント実施の規格とは異なります。",
+        "エはソフトウェアライフサイクルプロセスの枠組みで、JIS X 0160などに対応する説明です。"
+      ],
+      "takeaway": "アセスメントはプロセスを証拠と基準に基づいて評価・診断すること。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の目的を、継続的改善・客観的診断・プロジェクトの手引き・ライフサイクルの枠組みに分けます。規格名の「アセスメント実施」と照合する準備をします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "評価するためには、対象範囲・証拠収集・評定などを一定の手順で行い、判断の客観性を確保します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "改善を実行することと、改善前のプロセスを客観的に診断することを区別し、後者の記述を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "442e26cb3780650a1c72cb0e4eeec5e3b72fa1cba00096e1e6805b1aca1aaa6b",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q49",
+      "summary": "ア。プロダクトオーナはプロダクトバックログの優先順位を決めます。",
+      "explanation": "プロダクトオーナはプロダクトの価値を最大化する責任を担い、ゴールやミッションに沿ってプロダクトバックログのアイテムを順序付けます。スクラムの進行支援はスクラムマスタ、具体的な作り方やインクリメントの作成は開発者側の役割です。",
+      "choiceReasons": [
+        "ゴールに沿ったバックログの優先順位決定はプロダクトオーナの役割です。",
+        "コーチやファシリテータとしてスクラムを支援するのはスクラムマスタです。",
+        "具体的な実現方法は、開発を担うメンバが決めます。",
+        "リリース可能なインクリメントを実際に完成させるのは開発を担うメンバです。"
+      ],
+      "takeaway": "プロダクトオーナは価値とバックログの優先順位に責任を持つ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の動詞を「優先順位を決める」「進行を支援する」「作り方を決める」「完成させる」に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "顧客や事業にとって何を先に作ると価値が大きいかを判断する役割と、どう作るかを担う役割を分けましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ゴールを達成するためにプロダクトバックログのアイテムの優先順位を決める説明が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  },
+  {
+    "id": "r03h-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3db6ebb2900d377b1e19107899750c9dc9964e0e0c1443da1a94129a43a4c98e",
+    "author": null,
+    "decision": "pending",
+    "lesson": {
+      "id": "r03h-q50",
+      "summary": "エ。2人のプログラマがその場で相談・レビューしながら一つのプログラムを作ります。",
+      "explanation": "ペアプログラミングでは、2人が一つの開発作業を共同で進めます。一方がコードを入力し、他方がレビューや方針の検討を行い、役割を交代します。即時のレビューによる品質向上と知識共有が狙いです。利用者との仕様確認、プログラムの分担、休憩交代で連続稼働する手法とは異なります。",
+      "choiceReasons": [
+        "プログラマと利用者が試作画面を見て仕様を確認するのはプロトタイピングの説明です。",
+        "メインとサブを別々に分担して開発する方法は、一つの作業を共同で進めるペアプログラミングではありません。",
+        "交代で休憩を取り開発を長時間続けることが目的ではありません。",
+        "2人のプログラマが一つのプログラムを相談・レビューしながら開発する説明に一致します。"
+      ],
+      "takeaway": "ペアプログラミングは2人で同じ開発作業を進め、即時レビューと知識共有を行う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補の「誰と誰が組むか」と「一つの作業か分担か」に印を付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コードを書く人と、横でそのコードを確認して設計を考える人が協力し、役割を交代する進め方です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2人のプログラマがその場で相談やレビューをしながら一つのプログラムを開発する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "",
+      "stages": [
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": false,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        },
+        {
+          "newInformation": "",
+          "remainingWork": "",
+          "revealsAnswer": true,
+          "reason": ""
+        }
+      ],
+      "changes": [],
+      "sourceNotes": []
+    }
+  }
+]

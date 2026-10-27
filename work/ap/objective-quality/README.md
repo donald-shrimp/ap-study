@@ -1,0 +1,58 @@
+# AP科目A：ヒント・解説の品質改訂
+
+800問の旧教材と旧レビューをbaselineへ保存し、先行20問と残り39組×20問へ重複なく分割した。旧レビューの状態を新基準の承認には使わない。
+
+先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問の39組は全件未着手。先行20問の本番公開と、全800問の改訂完了はまだ行っていない。
+
+- [全体計画・作者／レビュー／統合の手順](../../../docs/ap-a-content-upgrade.md)
+- [800問の固定台帳](inventory.json)
+- [担当と進捗のスナップショット](progress.json)
+- [旧教材・旧確認記録](baseline/)
+- [登録した確認済みの組](registrations.json)
+
+自分に割り当てられた1組だけを担当する。作者はその組のassignment/drafts、確認者はreviewsを使い、共有の年度別教材や全体進捗へ同時に書き込まない。統合担当が承認確認後に順次取り込む。
+
+| 組 | 問数 | 分野 | 担当 |
+| --- | --- | --- | --- |
+| [pilot-00](batches/pilot-00/README.md) | 20 | 基礎理論、アルゴリズム・プログラミング、コンピュータ構成、システム構成・OS、ハードウェア、インタフェース・マルチメディア、データベース、ネットワーク、セキュリティ、開発技術、プロジェクトマネジメント、サービスマネジメント・監査、システム戦略、経営戦略、企業活動、法務、論理回路 | Codex /root |
+| [batch-01](batches/batch-01/README.md) | 20 | 基礎理論 | 未割当 |
+| [batch-02](batches/batch-02/README.md) | 20 | 基礎理論、論理回路 | 未割当 |
+| [batch-03](batches/batch-03/README.md) | 20 | 論理回路、アルゴリズム・プログラミング | 未割当 |
+| [batch-04](batches/batch-04/README.md) | 20 | アルゴリズム・プログラミング、コンピュータ構成 | 未割当 |
+| [batch-05](batches/batch-05/README.md) | 20 | コンピュータ構成 | 未割当 |
+| [batch-06](batches/batch-06/README.md) | 20 | コンピュータ構成 | 未割当 |
+| [batch-07](batches/batch-07/README.md) | 20 | コンピュータ構成、システム構成・OS | 未割当 |
+| [batch-08](batches/batch-08/README.md) | 20 | システム構成・OS | 未割当 |
+| [batch-09](batches/batch-09/README.md) | 20 | システム構成・OS | 未割当 |
+| [batch-10](batches/batch-10/README.md) | 20 | システム構成・OS、ハードウェア | 未割当 |
+| [batch-11](batches/batch-11/README.md) | 20 | ハードウェア | 未割当 |
+| [batch-12](batches/batch-12/README.md) | 20 | ハードウェア、インタフェース・マルチメディア | 未割当 |
+| [batch-13](batches/batch-13/README.md) | 20 | データベース | 未割当 |
+| [batch-14](batches/batch-14/README.md) | 20 | データベース | 未割当 |
+| [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | 未割当 |
+| [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | 未割当 |
+| [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | 未割当 |
+| [batch-18](batches/batch-18/README.md) | 20 | セキュリティ | 未割当 |
+| [batch-19](batches/batch-19/README.md) | 20 | セキュリティ | 未割当 |
+| [batch-20](batches/batch-20/README.md) | 20 | セキュリティ | 未割当 |
+| [batch-21](batches/batch-21/README.md) | 20 | セキュリティ | 未割当 |
+| [batch-22](batches/batch-22/README.md) | 20 | セキュリティ、開発技術 | 未割当 |
+| [batch-23](batches/batch-23/README.md) | 20 | 開発技術 | 未割当 |
+| [batch-24](batches/batch-24/README.md) | 20 | 開発技術 | 未割当 |
+| [batch-25](batches/batch-25/README.md) | 20 | 開発技術、プロジェクトマネジメント | 未割当 |
+| [batch-26](batches/batch-26/README.md) | 20 | プロジェクトマネジメント | 未割当 |
+| [batch-27](batches/batch-27/README.md) | 20 | プロジェクトマネジメント、サービスマネジメント・監査 | 未割当 |
+| [batch-28](batches/batch-28/README.md) | 20 | サービスマネジメント・監査 | 未割当 |
+| [batch-29](batches/batch-29/README.md) | 20 | サービスマネジメント・監査 | 未割当 |
+| [batch-30](batches/batch-30/README.md) | 20 | サービスマネジメント・監査、システム戦略 | 未割当 |
+| [batch-31](batches/batch-31/README.md) | 20 | システム戦略 | 未割当 |
+| [batch-32](batches/batch-32/README.md) | 20 | システム戦略、経営戦略 | 未割当 |
+| [batch-33](batches/batch-33/README.md) | 20 | 経営戦略 | 未割当 |
+| [batch-34](batches/batch-34/README.md) | 20 | 経営戦略 | 未割当 |
+| [batch-35](batches/batch-35/README.md) | 20 | 経営戦略 | 未割当 |
+| [batch-36](batches/batch-36/README.md) | 20 | 経営戦略、企業活動 | 未割当 |
+| [batch-37](batches/batch-37/README.md) | 20 | 企業活動 | 未割当 |
+| [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | 未割当 |
+| [batch-39](batches/batch-39/README.md) | 20 | 法務 | 未割当 |
+
+780問の39組は未着手。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
