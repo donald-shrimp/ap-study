@@ -19,7 +19,7 @@ for path,size in [('icon-192.png',192),('icon-512.png',512),('apple-touch-icon.p
     data=(root/'assets/icons'/path).read_bytes()
     assert data[:8]==b'\x89PNG\r\n\x1a\n'
     assert struct.unpack('>II',data[16:24])==(size,size)
-for page in ['index.html','ap/index.html','fp2/index.html']:
+for page in ['index.html','ap/index.html','ab730/index.html','fp2/index.html']:
     html=(root/page).read_text()
     assert 'class="brand-logo"' in html
     assert '<span class="sr-only">ひと問</span>' in html
