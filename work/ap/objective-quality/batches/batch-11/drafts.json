@@ -3,11 +3,11 @@
     "id": "r03h-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "42a1ba51be46cb76cf2d61ba0c4f1be934ef7fc2ec972f7f906ab22552b3489f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q21",
-      "summary": "エ。無線チップを使って人や物を識別・管理します。",
+      "summary": "RFIDの用途を、光学コードの読取りや音声・赤外線通信と区別して判定する。",
       "explanation": "RFIDはICタグとリーダ間の無線通信で識別情報などを読み取る技術です。タグを商品や入退室用カードに付けることで、物品や人を識別し管理できます。",
       "choiceReasons": [
         "紙のコードを光学的に読むバーコードや二次元コードの利用です。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの利用例を、読み取る媒体（紙・無線・赤外線）と目的（入力・音声通信・識別管理）の二列に分けます。",
+          "text": "四つの利用例について、**情報を運ぶ媒体**と**何のために使うか**を分けます。紙の模様、電波、赤外線は同じ方法ではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "紙の模様や赤外線ではなく、チップから無線で識別情報を読む候補を探します。",
+          "text": "RFIDはRadio Frequency Identificationの略で、タグのICに記録した識別情報を電波で読み取り、商品や入退室カードなどを識別します。音声を送る無線通信とは目的が違います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "微小な無線チップによる人や物の識別・管理が適切です。",
+          "text": "小さな無線チップによって人や物を識別・管理する用途がRFIDです。印刷コードの光学読取りや赤外線、ヘッドフォンへの音声転送とは区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "RFIDのRFを知らず、無線で通信する例をすべて識別技術だと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "媒体と目的の二つの分類軸",
+          "remainingWork": "四肢を媒体と目的に分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸のみで答えの活用例は確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Radio Frequency Identificationの定義とタグでの識別",
+          "remainingWork": "定義に当てはまる活用例を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "定義が正答肢『無線チップで人・物の識別管理』と実質一致する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答の用途と誤答3つの使い分け",
+          "remainingWork": "一致する肢を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の説明をそのまま特定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=86df6f1ef13b13cd1d5c8b7310a8ee315c174b4c4f99568e53cd8522544b6459。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本四肢：印刷コード入力・携帯電話の音声・赤外線通信・無線チップの識別管理。RFIDの無線識別という用途が一致する。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "17f7a1a7d45b0e5070dd8cceb1acf58b5e704950d7da877205bd81ab229a7870",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q22",
-      "summary": "ウ。システムを一個のチップへ集積したLSIです。",
+      "summary": "SoCの集積単位が、ソフトウェア・ボード・パッケージでなく半導体チップであることを判断する。",
       "explanation": "SoCはSystem on a Chipの略で、CPU、メモリ、周辺機能など、従来複数チップで実現したシステムの機能を一つの半導体チップに集積します。",
       "choiceReasons": [
         "LSI内のソフトウェアの名前ではなく、ハードウェアの集積形態です。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の集積単位がソフトウェア、ボード、チップ、パッケージのどれかを確認します。",
+          "text": "『一つにまとめる』にも、基板上に複数のICを載せる方法と、半導体の中へ機能を集積する方法があります。選択肢の**チップ・ボード・パッケージ**の違いを確認します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "System on a ChipのChipに対応する物理単位を探します。",
+          "text": "SoCはSystem on a Chip。CPUや入出力回路などのシステム機能を**一つの半導体チップ**に実装します。複数の別々のチップを一つの容器に収めるSiP（System in Package）とは違います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "複数チップのシステムを一つのチップで実現したLSIがSoCです。",
+          "text": "もともと複数のチップで構成していたコンピュータの機能を、一つのLSIチップで実現する説明が該当します。ソフトウェアそのものや複数MCUのボードではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "チップとパッケージを同じ意味に捉え、SoCとSiPを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "チップ・ボード・パッケージの集積境界",
+          "remainingWork": "構成単位を四肢ごとに分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "選択肢の比較項目だけでSoCの定義を明示していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SoCの定義とSiPのパッケージ集積との差",
+          "remainingWork": "SoCの定義に合う肢を選択する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "一つのチップへのシステム集積は正答肢の内容そのもの"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答のLSI集積とほかの肢との違い",
+          "remainingWork": "他の集積方法との差を説明する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を言い換えて直接渡している"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=914ac0264ab8fb8bd702f5af3b4f85cdeb2d785a9809e4ef91b0270c74e55526。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本ではアは内蔵ソフトウェア、イは複数MCUボード、ウは一チップLSI、エは複数チップの一パッケージ。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "366c36d49a14c2d5d297b5d065196a4f4dedcae1331a1f6b1f916f3942006de7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q22",
-      "summary": "ウ。SoCはシステムを一つのチップに集積したLSIです。",
+      "summary": "SoCとSiPの違いを、複数機能を集めたときの『チップ内部』と『パッケージ内部』で判定する。",
       "explanation": "SoCはSystem on a Chipの略です。CPU、メモリ、入出力など、従来は複数のチップに分かれていたシステムの機能を一つの半導体チップへ集積します。\n複数チップを一つのパッケージへ封入する方式はSiP（System in Package）です。「一チップ」と「一パッケージ」を区別します。",
       "choiceReasons": [
         "内蔵ソフトウェアそのものではなく、システム機能を集積した半導体です。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "SoCのCはChipです。部品を載せるボードや封入するパッケージではなく、半導体の一つのチップに注目します。",
+          "text": "CPU、メモリ、周辺機能などを小さくまとめても、**一枚の半導体ダイ**に作る場合と、複数のダイを一つのパッケージに入れる場合があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ソフトウェアを内蔵するだけか、複数のハードウェア機能を一チップに集積するかを区別します。",
+          "text": "SoC（System on a Chip）は前者で、従来複数のチップで実現した機能を一チップ内に集積します。SiP（System in Package）は後者で、複数チップのまま同じパッケージに収めます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「複数のチップで構成していたシステムを、一つのチップで実現」というウがSoCです。エは一つのパッケージなのでSiPです。",
+          "text": "選択肢の『複数チップを単一パッケージに封入』はSiPです。SoCは『複数チップで構成したシステムを一つのチップで実現したLSI』に対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "複数ICの一つのパッケージも『一つ』なのでSoCだと早合点する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ダイとパッケージが異なる集積境界",
+          "remainingWork": "選択肢の物理単位を見比べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一チップと一パッケージが異なると知らせるだけ"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SoCとSiPの定義・対比",
+          "remainingWork": "チップ単位の説明を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "SoCの正答文を実質的に説明する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "誤答エをSiPと確認し正答ウの記述を特定",
+          "remainingWork": "4肢の違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=63b03e0f96bd357db9dc72a98d6b7018e6cfa136bbb1a8defd26ed4e311ba3de。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本のr03h-q22と同内容の四肢を別画像で確認。正答ウとSiPに当たるエを照合。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "7c91fef6d543abec7eff2b3fcdd028c7387c3950a1904fa4ff323bcb5776cb58",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q20",
-      "summary": "ウ。電気信号を力学的な運動へ変えます。",
+      "summary": "制御信号や検出信号を扱う装置から、物体を動かす出力機器を見分ける。",
       "explanation": "アクチュエーターは、コンピュータからの制御信号を受けてモータやシリンダなどを動かす出力側の装置です。検出した物理量を信号へ変えるセンサーとは向きが逆です。",
       "choiceReasons": [
         "アナログ信号をディジタル信号へ変えるのはA/D変換器です。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で信号がコンピュータに入る向きか、外へ出る向きかを確認します。",
+          "text": "制御系には、『状態を測る』『信号を数値化する』『指示を出す』『実際に動かす』といった役割があります。コンピュータから**外へ作用する**装置を探します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "制御した結果、モータや弁などに起こす変化を考えます。",
-          "revealsAnswer": false
+          "text": "センサーは温度や位置などの物理量を電気信号に変え、A/D変換器はアナログ信号をデジタルに変えます。反対にモーターなどは電気的な指示を受け、軸の回転や直線的な動きを生みます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "コンピュータの出力を受け、物体を動かす候補を選びます。",
+          "text": "アクチュエーターは制御信号をもとに電気・油圧などのエネルギーを**機械的な力や運動**に変える機器です。コンピュータの出力が実際の動きにつながる記述を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "センサー・A/D変換器・アクチュエーターの信号や作用の向きが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "信号の向きと実際の作用という分類軸",
+          "remainingWork": "選択肢を入力側・出力側に振り分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "役割の違いは示すが正答の定義までは渡さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "センサー・A/D変換器とモーターの違い",
+          "remainingWork": "モーターの動作を選択肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の『電気信号を力学的運動に』を例で実質的に説明する"
+        },
+        {
+          "newInformation": "アクチュエーターの役割と正答記述",
+          "remainingWork": "該当肢を確定する",
+          "revealsAnswer": true,
+          "reason": "定義と正答の説明が一致する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q20.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=419889dda3d48b76d2149e4250e1aa7015eac16e6c6982ccdb11fb33fc1e85a0。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本はアA/D・イ入力機器・ウ電気→運動・エセンサー。コンピュータ出力を運動に変えるウが正答。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "86d0049db3cf06d026eb0682fb6cd8d9a2e865638191dbfd41f41cab96cefc79",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q22",
-      "summary": "ウ。アクチュエータは供給されたエネルギーを物理的な動きへ変換します。",
+      "summary": "制御器・センサー・増幅器とは異なる、エネルギーから回転・直進運動を作る機器を識別する。",
       "explanation": "アクチュエータは制御系の出力側で働く機器で、エネルギー源のパワーを回転や直進などの動きに変えます。例えばモータや油圧シリンダです。物理量を検知するセンサ、目標値との差を計算する制御器、微小信号を増幅する回路とは役割が異なります。",
       "choiceReasons": [
         "目標量と測定値を比較して操作量を出すのは制御器の役割です。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補を制御の流れ「測る→比較する→動かす」に置いてみましょう。増幅だけを行う役割も分けます。",
+          "text": "自動ドアを例にすると、センサーが状態を検出し、制御器が目標との差を判断し、モーターが扉を動かします。この三つの役割は別です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "モータで軸を回す場合、電源のエネルギーが機械的な運動へ変わります。制御系の出力側の変換に注目します。",
+          "text": "センサーは位置や温度を電気信号へ変換し、制御器は目標値との比較から指示を決めます。モーターや油圧シリンダは**電気・油圧などのエネルギーを回転や直進運動に変えます**。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "回転・直進などの動きにエネルギーを変える記述がアクチュエータです。",
+          "text": "アクチュエータは制御対象に物理的に作用する機器なので、エネルギー源の力を動きへ変換する記述が一致します。微小電気信号を増幅する回路とも区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『操作量を出力する』制御器を、動作を実際に行うアクチュエータと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "センサー→制御器→動作機器の制御流れ",
+          "remainingWork": "四つの処理を装置名に対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "例を挙げるだけで名称との対応を本人に残す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "三者の操作を具体例とエネルギー変換で定義",
+          "remainingWork": "動きを作る肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答のエネルギー→回転・直進を実質的に渡す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アクチュエータの役割と増幅器との差",
+          "remainingWork": "ほかの肢の用途を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の記述を直接説明する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=31c042b8b44ab9c47401744af5fd3c2931b2912b45419eafc797264282855885。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本のア目標との差に応じ操作量・イ測定・ウパワー→回転/直進・エ信号増幅を確認。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "ede8f4bdf154bc9c1bd63ad8c113c0d8d4d9034ad4ddb0d351e22ca8f97c1dfe",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q23",
-      "summary": "ウ。アクチュエーターはエネルギーを動きへ変換します。",
+      "summary": "アクチュエーターの役割を、状態の計測・操作量の算出・信号増幅から分ける。",
       "explanation": "アクチュエーターは、電気、油圧、空気圧などのエネルギーを回転や直線運動へ変換する機器です。例えばモーターは電気を回転へ変え、制御系の指示に従って対象を動かします。\n物理量を読み取るのはセンサー、目標との偏差から操作量を決めるのは制御器、微小信号を大きくするのは増幅器です。",
       "choiceReasons": [
         "目標値と測定値を比較して操作量を決めるのは制御器の役割です。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの選択肢は比較・検出・運動・増幅という異なる役割です。アクチュエーターが制御対象へ何をするかを考えます。",
+          "text": "ロボットの関節なら、角度を**測る**機器、目標角度とのずれから**指示を決める**機器、指示を受けて関節を**動かす**機器が必要です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "例えばロボットの関節のモーターは、角度を測る部品ではなく、指示を受けて軸を回す部品です。",
+          "text": "アクチュエーターは最後の『動かす』側です。モーターなら電気エネルギーを回転に、シリンダなら流体のパワーを直進運動に変えます。測定や比較判断だけの装置ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "モーターのようにエネルギーを動きへ変換する説明はウです。測定するイや指示を作るアと区別します。",
+          "text": "制御用のエネルギーを回転・直進などの実際の運動へ変換する説明に当てはまります。目標値との差を計算するのは制御器、物理量を検出するのはセンサーです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "センサーから操作量の出力までを一つの装置の役割として誤解している。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "計測・判断・動作という制御系の順序",
+          "remainingWork": "各選択肢の主語の機能を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "機能を分けただけで具体的な名称は渡さない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アクチュエーターの定義とモーター・シリンダの例",
+          "remainingWork": "エネルギーを運動へ変える肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の内容を実質的に説明する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答の変換方向と他の機器名の違い",
+          "remainingWork": "ほか3肢の装置名を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答と同じ変換の記述を指定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q23.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=ae92384762c1b930e95cd9a46c52ea1cf5791b9475842cfed97b8f73bcaadc3a。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本の四肢は制御器・センサー・動作変換・増幅器でr04h-q22とほぼ同じだが表記差は原本優先。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "83592510dc3d0d65f0580a651c52689f016b6bf48f18067f9b4310238c89dc6e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q20",
-      "summary": "エ。インバータは直流電力を交流電力へ変換します。",
+      "summary": "インバータ・整流器・DC-DC変換器を、入力と出力が直流か交流かで区別する。",
       "explanation": "インバータは直流電力をスイッチングして交流電力を作る装置です。交流の周波数などを制御し、エアコンのモータ回転数の調整や電気自動車のモータ駆動に使います。\n直流電圧を上げ下げするのはDC-DC変換、交流から直流への変換は整流で、入力と出力の種類が異なります。",
       "choiceReasons": [
         "アは直流を直流のまま昇圧するDC-DC変換です。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "電気自動車の電池は直流を供給します。交流モータを駆動するまでに何の変換が必要か考えます。",
-          "revealsAnswer": true
-        },
-        {
-          "title": "使う考え方",
-          "text": "電圧を高くする・低くすることと、直流・交流の種類を変えることを分けます。",
+          "text": "まず**直流（DC）**は電流の向きが基本的に一定、**交流（AC）**は向きが周期的に変わるもの、と区別します。直流の電池で交流モーターを駆動する例を考えます。",
           "revealsAnswer": false
         },
         {
+          "title": "使う考え方",
+          "text": "直流の電圧を高く・低くしても直流のままならDC-DC変換です。交流を直流へ変えるのは整流です。インバータでは半導体のスイッチングで**直流から交流を作ります**。",
+          "revealsAnswer": true
+        },
+        {
           "title": "この問題に当てはめる",
-          "text": "電池側の直流をモータ側の交流へ変える向きを、選択肢の入力と出力に照合します。",
+          "text": "したがって電池などの直流を、モーター用の交流へ変える記述が該当します。ア・イの直流電圧調整、ウの整流とは入力と出力の電力形式が逆です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "電圧を昇降させることと、直流・交流を変換することを同じと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DCとACの違いと電池／モーターの例",
+          "remainingWork": "4肢の入出力形式を整理",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "直流交流の定義だけでは肢が確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DC-DC変換・整流とインバータの対応",
+          "remainingWork": "インバータの変換方向に合う肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "インバータのDC→ACという正答肢を直接教える"
+        },
+        {
+          "newInformation": "直流から交流への変換を正答肢へ適用",
+          "remainingWork": "他肢との対比を確認する",
+          "revealsAnswer": true,
+          "reason": "正答内容と誤答の変換を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q20.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=cb9993162249c405d295addab06556df13d2a5d5c161134ff4cb5ffa221cc8a2。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本アDC昇圧・イDC降圧・ウAC→DC・エDC→AC。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "a676be471744ad863fc86060f877620070a260984df0e72351a37a6d594adbef",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q21",
-      "summary": "ア。定期的なタイマクリアが途絶えたら異常と判断します。",
+      "summary": "組込みシステムで、正常動作を示す定期的な信号が途絶えたときに異常を検知する監視タイマーの仕組みを問う。",
       "explanation": "ウォッチドッグタイマは正常動作中のプログラムが定期的にクリアするタイマです。暴走や停止によって所定時間内にクリアされなければタイムアウトし、システムをリセット又は終了します。別の機構が異常を検出してから通知を遅らせるタイマではなく、タイマの期限切れ自体を異常検出に使います。",
       "choiceReasons": [
         "一定時間内にクリアされないことを異常の兆候とし、リセット又は終了させます。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "正常なプログラムが継続して実行されていることを、タイマへのどの操作で確認できるか考えます。",
+          "text": "プログラムが暴走や停止をしたとき、外からは処理が続いているか分からないことがあります。正常時だけ定期的に実行できる操作を監視に使えるか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "プログラムが周期的にタイマを更新するようにし、その更新が止まったら期限切れになる仕組みにします。",
+          "text": "ウォッチドッグタイマーは正常なプログラムが周期的に**カウンタをクリア（再設定）**する仕組みです。暴走などでクリアできないと、設定時間を過ぎて異常を判定します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "一定時間内にクリアされなければ異常とみなし、システムをリセット又は終了する説明です。",
+          "text": "一定時間以内にタイマーがクリアされなければシステム異常とみなし、リセットや終了を行う記述です。故障を別の手段で検出してから単に通知を遅らせる方式ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "異常が見つかった後に待つタイマーと、異常を検出するために時間切れを使う監視機構を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "プログラム生存確認のために周期動作を見る視点",
+          "remainingWork": "異常検知の契機を四肢で比べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般的な監視の目的だけでは正答の仕組みは定まらない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "定期クリアとタイムアウトによる異常検出",
+          "remainingWork": "定義に一致する記述を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢『設定時間内にクリアされない』と実質同じ仕組みを明示"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答のタイムアウト動作と他の通知機能との差",
+          "remainingWork": "通知との違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答のリセット・終了まで示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=30a144de2c2c13771b1a88e7954b395683c52625b131a1fe02ac36bf87b3e412。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本のア=定期タイマークリアがないとリセット/終了、イ〜エは異常検知後の通知・別割込み。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "dd3ba403eb4ba6088010b983c1126d8e4f35fea2bda62d479f850d07cc014877",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q24",
-      "summary": "ア。コンデンサは交流を通し、定常的な直流を通しません。",
+      "summary": "コンデンサに直流電圧・交流電圧を加えたときの電流の振る舞いを区別する。",
       "explanation": "コンデンサは電荷を蓄えます。直流では充電の過渡状態を過ぎると電流が流れなくなります。交流では電圧変化に応じて充放電を繰り返すため、交流成分を通す働きがあります。",
       "choiceReasons": [
         "定常直流を遮断し、交流成分を通す性質で正しいです。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "電池につないで充電が終わった後と、電圧が周期的に変わる場合を分けます。",
+          "text": "コンデンサは二枚の電極間に電荷を蓄える部品です。電池につないだ**直後の充電中**と**十分時間がたった後**の挙動を分けて考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "電圧が変わるたびに充放電電流が流れる性質を、交流と直流に当てはめます。",
-          "revealsAnswer": false
+          "text": "定常的な直流電圧では充電が済むと電流は流れなくなります。一方、交流では電圧が変化するため充放電が繰り返され、交流成分の電流が流れます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "交流を通すが定常的な直流を通さないという記述が適切です。",
+          "text": "理想的なコンデンサは、定常直流を遮断し交流成分を通すという説明が正しいです。交流を直流へ整流したり、直流を交流に変換する機能ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コンデンサが電荷を蓄えるという事実から、直流をずっと通すと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "充電直後と定常状態の区別",
+          "remainingWork": "DC/ACで電圧変化があるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "時間による振る舞いを見る視点だけ"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "直流遮断と交流の充放電という動作原理",
+          "remainingWork": "通す／通さないが一致する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と同義のAC通過/DC遮断を教える"
+        },
+        {
+          "newInformation": "正答の通過特性と変換機能の除外",
+          "remainingWork": "変換装置との違いを判断する",
+          "revealsAnswer": true,
+          "reason": "正答肢の意味を直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q24.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=57edfc9ab981e579f7f2b21e479043dde6a0be816e594fc6b11f30d5fd3d5c60。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本はアAC通過・DC遮断、イAC→DC、ウDC通過・AC遮断、エDC→AC。『直流を通さない』は定常状態として説明。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "cad2bb1b71bd8e58ad8331ff04cdb9dd00764f6bee350336787b980461321721",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q21",
-      "summary": "アのa・b̄。今回1かつ前回0のときだけ押下の変化を検出します。",
+      "summary": "前回のスイッチ値と今回の値を使って、押下の瞬間だけを検知する論理式を導く。",
       "explanation": "放された状態は0、押された状態は1です。放す→押すという変化では、今回a=1、前回b=0でなければなりません。\n今回が1という条件aと、前回が0という条件b̄を論理積で結ぶとa・b̄です。押されたままのa=b=1は検出しません。",
       "choiceReasons": [
         "a=1,b=0の組だけ1になり、押下の立上りを検出します。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "aは今回、bは前回です。「放された→押された」を前回と今回の0,1へ書き換えます。",
+          "text": "スイッチは『放したら0、押したら1』です。**前回b=0**から**今回a=1**になったときだけ、押された瞬間と判断します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "両条件を同時に満たす必要があるので論理和ではなく論理積を使います。",
-          "revealsAnswer": false
+          "text": "二つの条件が同時に成立するには論理積（・）を使います。前回bが0である条件を論理式にすると**bの否定（b̄）**です。二条件を一つの式に組み合わせてください。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "a=b=1である押されたままの場合にも反応しないか、各式へ代入して確認しましょう。",
-          "revealsAnswer": false
+          "text": "たとえば(a,b)=(1,1)は押されたままなので検出0、(0,1)は放した瞬間なので0、(1,0)だけ1になる必要があります。四つの候補へ代入し、条件をすべて満たすものを選びます。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "押されている状態a=1と、押され始める変化b=0→a=1を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "前回0・今回1という立上り条件",
+          "remainingWork": "0→1をa,bに割り当てる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "判定対象の入力組合せは分かるが論理式の構成が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "ANDとNOTでb=0とa=1を表す方法",
+          "remainingWork": "aとbの否定を論理積で結ぶ",
+          "revealsAnswer": true,
+          "reason": "a AND NOT bを部品として渡し、残る肢は一意に確定"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "典型的な3ケースを使った真理値表検査",
+          "remainingWork": "候補に代入し正答を確定する",
+          "revealsAnswer": true,
+          "reason": "条件を満たす真理値表を示し正答が確定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=5693400f9a2728a86bb387fa44dbbd04a046ea934d424a91d87dad90c9d5afea。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本 a=今回,b=前回、スイッチ0→1、アa・b̄ / イā・b / ウa+b̄ / エā+b。アのみ(1,0)で1。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
