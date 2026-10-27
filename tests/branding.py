@@ -17,7 +17,7 @@ manifest=json.loads((root/'manifest.webmanifest').read_text())
 assert manifest['theme_color']==navy
 for path,size in [('icon-192.png',192),('icon-512.png',512),('apple-touch-icon.png',180)]:
     data=(root/'assets/icons'/path).read_bytes()
-    assert data[:8]==b'\\x89PNG\\r\\n\\x1a\\n'
+    assert data[:8]==b'\x89PNG\r\n\x1a\n'
     assert struct.unpack('>II',data[16:24])==(size,size)
 for page in ['index.html','ap/index.html','fp2/index.html']:
     html=(root/page).read_text()
