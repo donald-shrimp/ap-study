@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-27T17:16:49.273285+00:00",
+  "checkedAt": "2026-10-27T22:29:00.956200+00:00",
   "policy": "Quality before throughput. Each delivered head is fixed for review; original images, official answers, all choices/hints and calculations are checked; root fixes need a different actual reviewer; final registration and publication are separate.",
   "registeredApprovedQuestions": 180,
-  "additionalContentApprovedNotRegistered": 120,
+  "additionalContentApprovedNotRegistered": 140,
   "batches": [
     {
       "batch": "batch-09",
@@ -53,11 +53,51 @@
       "state": "approved_not_registered",
       "contentApproved": 20,
       "corrected": 3,
-      "reviewEvidence": "batches/batch-14/review/correction-independent-review.json"
+      "reviewEvidence": "batches/batch-14/review/correction-independent-review.json",
+      "reviewHead": "09a1a264d4e12c021a4f357a56d604fefa1e7efd"
+    },
+    {
+      "batch": "batch-15",
+      "pr": 87,
+      "authorHead": "d9a51576009008ee3b43f807f5c8d2bf0d408986",
+      "state": "approved_not_registered",
+      "contentApproved": 20,
+      "corrected": 4,
+      "reviewEvidence": "batches/batch-15/review/correction-independent-review.json"
     }
   ],
   "merged": false,
   "published": false,
-  "next": "Check for the next completed author PR from batch-15; keep original data and records. Registration, UI validation and final merge/publication remain separate.",
-  "reviewProtocol": "Fix author head and complete initial raw draft/hash snapshot plus initial review report before any correction. Then a different actual reviewer approves final corrected hashes."
+  "next": "Review delivered batch-16 / PR88 after preserving the latest reviewed predecessor head with a non-force merge; respect live ownership and freeze the actual draft before corrections. Registration, UI validation, main merge and publication remain separate.",
+  "reviewProtocol": "Fix author head and complete initial raw draft/hash snapshot plus initial review report before any correction. Then a different actual reviewer approves final corrected hashes.",
+  "deliveredAwaitingReview": [
+    {
+      "batch": "batch-16",
+      "pr": 88,
+      "authorHead": "9c0a41e869ac6b91073650bc08f2692e2821e750",
+      "contentApproved": 0,
+      "state": "author_draft_in_separate_branch_not_reviewed_here"
+    },
+    {
+      "batch": "batch-17",
+      "pr": 89,
+      "authorHead": "2e7599ecf998606e923f0cd3bce0013bca163a9c",
+      "contentApproved": 0,
+      "state": "author_draft_in_separate_branch_not_reviewed_here"
+    },
+    {
+      "batch": "batch-18",
+      "pr": 90,
+      "authorHead": "cce39cc8f18129fe3d2b53666b5d21f3bd090de6",
+      "contentApproved": 0,
+      "state": "author_draft_in_separate_branch_not_reviewed_here"
+    },
+    {
+      "batch": "batch-19",
+      "pr": 91,
+      "authorHead": "55e5c91a97d0b576ef4398759e492f142edee35b",
+      "contentApproved": 0,
+      "state": "author_draft_in_separate_branch_not_reviewed_here"
+    }
+  ]
 }
