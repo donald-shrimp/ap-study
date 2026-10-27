@@ -3,11 +3,11 @@
     "id": "r05a-q17",
     "baseVersion": 2,
     "baseLessonSHA256": "109b44807e7921d3da7f94ca65f7f79f64787ef8e8c77f009b7c626987ffb682",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q17",
-      "summary": "ア。最悪の同時起動でもBは7ミリ秒で終わり、周期8に収まります。",
+      "summary": "高優先度の周期タスクによる割込みを時間軸に並べ、低優先度タスクが周期内に完了できる組合せを判定する。",
       "explanation": "Aが高優先度なので、同時に起動した場合はAを先に実行し、その後もAの周期ごとにBが中断されます。\nアではAを0〜2、Bを2〜4、Aを4〜6、Bを6〜7に実行でき、Bの実行時間3を周期8内で確保できます。\nイではAを0〜3と6〜9に実行するため、Bの4ミリ秒目は9〜10となり期限9を超えます。ウはAを0〜3、5〜8、10〜13に実行し、Bの完了は14。エはAを0〜4、6〜10、12〜16に実行し、Bの完了は17です。",
       "choiceReasons": [
         "Bは2〜4と6〜7に合計3ミリ秒実行でき、完了7は周期8以内です。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Aが高優先度で、共有資源も切替え時間もありません。AとBが同時に起動した時間0からの最悪の場合を描きます。",
+          "text": "優先度はAが上なので、同時に処理可能ならAを先に実行します。各肢の最大実行時間・周期（ともにミリ秒）から、Aの稼働区間を時間軸に描いてください。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各Aの周期の先頭から最大実行時間分をAに割り当て、残る区間をBに割り当てます。Bは中断後も残りを続けます。",
+          "text": "BはAが走っていない区間だけ処理できます。例えばアならAは0～2、4～6、8～10…に動き、Bはその合間に3ミリ秒分の実行時間を積み重ねます。中断してもBの残りは消えません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アでは0〜2と4〜6がAの区間です。2〜4と6以後にBを置き、合計3ミリ秒を終える時刻と8を比べましょう。",
-          "revealsAnswer": false
+          "text": "アのBは2～4で2ミリ秒、6～7で残り1ミリ秒を実行し、開始から7ミリ秒で完了します。周期8以内です。他の3肢でもAの割込みを時間軸に入れるとBの期限を超えます。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CPU使用率だけで可否を決め、Aの周期的な割込みとBの処理の再開を追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "優先度による実行の先後と周期・実行時間の違い",
+          "remainingWork": "各肢のAの実行区間を列挙する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方式の前提のみで正答を確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Aの繰返し実行区間とBの残り時間の追い方",
+          "remainingWork": "アのBがいつ完了するか計算し他肢にも適用する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "例示のアに対してBの合計時間の計算が残り、全肢を比較する必要がある"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "アでのBの完了時刻と他の組合せの期限超過",
+          "remainingWork": "他3肢が期限超過となることを確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢を特定し完了時刻まで示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q17.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=1f7e4225f687e3b14ad0756a91f7719a01456ee63fe81cc02e756d8775788914。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原本の表4組(A/Bの最大実行時間と周期)を確認。Aを周期ごとに優先実行するとB完了はア7/8、イ10/9、ウ14/13、エ17/15。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "ddc651f74164577571317186de0555d04835bcb9cb739a3a4bdd02c304bf5d75",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q19",
-      "summary": "エ。実行回数や処理時間を集め、性能改善を助けるツールはプロファイラです。",
+      "summary": "関数別の呼出し回数・実行時間を計測する性能分析ツールと、実行環境の模擬や不具合調査のツールを区別する。",
       "explanation": "プロファイラはプログラムの実行状況を測定し、関数ごとの呼出し回数・実行時間などを収集するツールです。時間を多く使う箇所を見つけ、性能改善の対象を絞れます。\nデバッガは誤動作の原因を調べるための実行停止や変数確認、エミュレータは別の実行環境の再現、シミュレータはモデルの動作を模擬する用途です。",
       "choiceReasons": [
         "アのエミュレータは別の機器や実行環境を再現します。実行統計を集めるツールの名称ではありません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問はプログラムを一行ずつ止める話ではなく、「どの関数が何回、何秒動いたか」を集める話です。",
+          "text": "設問は、実行中の関数ごとの呼出し回数や累積時間を測り、どこを高速化するか判断するための情報を求めています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ関数が多数呼ばれる場合や、一回に長い時間を使う場合を統計で見つける用途です。",
-          "revealsAnswer": false
+          "text": "エミュレーターは別環境の動作を再現し、シミュレーターはモデルの振る舞いを模擬します。デバッガはブレークポイントや変数表示を用いて不具合を追います。性能統計の収集が主目的のツールと区別します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "実行の統計情報をprofileとしてまとめるツール名を選びます。",
+          "text": "プロファイラは関数別の実行回数や所要時間を集計し、時間を使っている処理（ボトルネック）を見つけます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "デバッガと性能分析ツールを、どちらもプログラムの動きを調べるものとして混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "収集したい統計と性能改善の目的",
+          "remainingWork": "4種類のツールの利用目的を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "実行統計という要件だけでは製品・ツール名は指定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "3つの誤答ツールの役割",
+          "remainingWork": "残る選択肢と測定目的の一致を考える",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "誤答3肢を除外でき正答が一つに決まる"
+        },
+        {
+          "newInformation": "プロファイラの名称と性能分析の使い方",
+          "remainingWork": "正答を選択肢に対応させる",
+          "revealsAnswer": true,
+          "reason": "正答名称と定義を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=169d6040e6ca6726b116733da4f4cb6903205ffb6c1ef96ab552a0a590af1252。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本の4肢を確認。プロファイラは性能統計収集、デバッガは不具合調査、エミュレーター/シミュレーターは模擬用途。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "7865e0845495e718d71174092a44ea0d2a25aa1e47d87b0634bbb047fafe918c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q15",
-      "summary": "ア。共有主記憶へのアクセス競合が性能向上を制限します。",
+      "summary": "密結合マルチプロセッサのCPU数を増やしても、処理能力が比例増加しない原因となる共有資源を見分ける。",
       "explanation": "密結合マルチプロセッサは主記憶を共有します。複数プロセッサが同時にメモリやバスへアクセスすると待ちが発生し、台数に比例した処理性能になりません。",
       "choiceReasons": [
         "共有主記憶の帯域を争うため、台数増加による性能向上を妨げます。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "密結合の複数CPUと主記憶の接続図を描き、各候補の処理がどの資源を使うか書き込みます。",
+          "text": "密結合マルチプロセッサは複数のプロセッサが**主記憶を共有**して動く構成です。CPUが増えても、共有設備の処理能力は自動的に台数倍にはなりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "CPUが同時に読み書きしようとしても、共有資源の処理能力には上限があります。",
-          "revealsAnswer": false
+          "text": "例えば複数CPUが同時に主記憶へデータを読み書きしようとすると、メモリの転送帯域やバスの利用待ちが発生します。CPUが空いていても待ち時間が生じる理由を考えます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "主記憶へのアクセス競合が待ちを生むため、性能は台数に比例しません。",
+          "text": "この構成で特に台数比例を妨げるのは**主記憶へのアクセス競合**です。『通信回線を介したCPU間通信』は別の構成を想定する記述です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "密結合の『主記憶共有』という構成を知らず、全体性能を単純なCPU性能×台数と考えてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "密結合で主記憶を共有するという構成",
+          "remainingWork": "共有資源を各肢と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "共有する対象は教えるが妨げる要因の選択が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "共有メモリ帯域の競合による待機",
+          "remainingWork": "競合を述べる肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の『主記憶アクセス競合』を具体的に説明している"
+        },
+        {
+          "newInformation": "正答肢の競合と別構成の通信の区別",
+          "remainingWork": "他の一般的処理との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答の語をそのまま渡す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=7a6723a7b8dc97de9904dd0792f092b3d4f44c5d14bd5eda822c79616080b352。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原本では『性能が積に等しくならない要因』と否定形。密結合の共有主記憶が帯域競合を受ける点を照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "b38a604965d59f7491f63e478c12ffb38f4ea9d7b53ab9dcc0beb716f2026b7a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q15",
-      "summary": "エの約0.98。停止時間は修理10時間ではなく切替え2時間です。",
+      "summary": "アクティブ・スタンバイでのサービス停止時間を修理時間と切替え時間に分け、稼働率を求める。",
       "explanation": "二重に障害は発生しないので、稼働中サーバが故障しても切替え後は待機側で処理を続けられます。故障したサーバの修理10時間全体がシステム停止時間になるわけではありません。\nシステムの平均稼働時間99時間に対し、故障時の停止はフェールオーバーの2時間です。稼働率=99/(99+2)=99/101≒0.9802なので約0.98です。",
       "choiceReasons": [
         "0.82は条件の稼働時間99と停止時間2から求める値と合いません。二重障害なしでは両サーバ故障による長い停止を加える必要はありません。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "二重に障害は起きません。故障サーバを修理している間、待機側へ切り替えたシステムが動けるか確認します。",
+          "text": "MTBFは平均故障間隔、MTTRは平均修理時間です。稼働率は一般に**稼働時間÷（稼働時間＋停止時間）**で計算します。どの時間がサービス停止に相当するかを整理します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "稼働率は稼働時間÷（稼働時間＋停止時間）です。10時間の修理と2時間の切替えのうち、サービスが止まる時間を使います。",
+          "text": "アクティブ側が故障しても、二重障害がない条件では待機側へ切り替えればサービスを再開できます。修理10時間の全てではなく、**フェールオーバーの2時間**をサービス停止として扱います。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "平均稼働時間99、停止時間2として99/(99+2)を計算し、小数第2位程度で比較しましょう。",
-          "revealsAnswer": false
+          "text": "稼働時間99時間と停止時間2時間を式に入れると、99÷(99＋2)=99/101≒0.9802。小数第2位では0.98です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "部品のMTTR=10時間をシステム全体の停止時間にそのまま足してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "MTBF・MTTRと稼働率の式",
+          "remainingWork": "構成の故障時の処理継続を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般式を示しどの時間を使うかは本人が決める"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "冗長系で修理時間と停止時間が異なる理由",
+          "remainingWork": "稼働率の式に99と2を当てはめて算出する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "システム停止となる2時間は示すが比率の計算はまだ残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "停止時間2と稼働時間99の代入結果",
+          "remainingWork": "選択肢の近似値を判断する",
+          "revealsAnswer": true,
+          "reason": "最終数値を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=f7c3bef52f19f98628ebc5d103ec3d51bf7cc77cfe4ff0d5dc448a28bbf220aa。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のMTBF99時間・MTTR10時間・切替え2時間・二重障害なしを確認。99/(99+2)≒0.9802。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "40b7eb70112f5599b6d1d641ff8bfeb12ac900510a9f2d3da90c0cce650d02c1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q15",
-      "summary": "ウ。解析的に解けないモデルでも、動作を模擬して数値的な結果を得られます。",
+      "summary": "解析式で解けない複雑なモデルについても、模擬実行から数値を推定できるかを判断する。",
       "explanation": "シミュレーションはモデルの動作を計算機で再現し、処理時間や待ち時間などを数値として評価します。複雑で解析式を導けないモデルにも使える点が特徴です。\n一方、繰返し実行に多くの計算が必要なことがあり、乱数による結果には統計的な誤差もあります。解析解があるモデルと照合し、モデルや実装を検証する用途にも使えます。",
       "choiceReasons": [
         "アは計算量が必ず少ないとしていますが、多数の試行で大きくなる場合があります。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "待ち行列が複雑で、待ち時間を表す式を導けない場合を想像します。動きを再現すれば測れるか考えます。",
+          "text": "解析的な方法は数式を解いて性能を求める方法です。シミュレーションはモデル内の到着や処理を繰り返し再現し、待ち時間などを数値で観察します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "到着と処理を繰り返し再現して平均待ち時間を集計できます。ただし試行数が少なければ結果はばらつきます。",
-          "revealsAnswer": false
+          "text": "例えば待ち行列の条件が複雑で解析的に解を導けなくても、到着・処理を模擬して結果を集計できます。ただし試行回数が必要で、乱数を使った結果にはばらつきがあります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「解析的に解けないモデル」と「数値的に求める」を結ぶ記述を確認します。乱数だけで精度が保証されるかも比べましょう。",
+          "text": "したがって『解析的に解けないモデルにも数値的な解を求められる』という特徴を選びます。解析解があるモデルとの比較検証にも使え、速度や精度が常に優位とは限りません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "シミュレーションが解析法より速い・乱数を使えば正確だと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "解析とシミュレーションの実施方法",
+          "remainingWork": "4肢の『必ず』『できない』の断定を確認",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手法の一般的定義だけでは4肢のどれかは確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "解析解なしでも数値評価できる能力と試行誤差",
+          "remainingWork": "選択肢から該当記述を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と実質同じ能力を説明している"
+        },
+        {
+          "newInformation": "正答肢の内容と他の断定の誤り",
+          "remainingWork": "該当する文字を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答内容を言い換えて明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=cadd68dc833f3411eaef825c008ae841f6a761b450efeba995586af496b4f162。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本4肢の比較。乱数自体が高精度を保証しないこと、解析モデルの検証に使用可能なことを確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "56350509b52f9226eee96b1cb68b0741d54d83de716682eb63a85c735b685179",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q15",
-      "summary": "重要部品の多重化で故障に備えるのはフォールトトレランスです。",
+      "summary": "フォールトアボイダンス、フェールセーフ、フェールソフト、フォールトトレランスの目的を区別する。",
       "explanation": "フォールトトレランスは、故障が発生しても必要な機能を継続するための考え方です。重要部品を多重化し、一つが故障しても別の部品で処理できるようにするのはその代表的な技術です。部品自体の信頼性を高めて故障を減らすフォールトアボイダンスとは区別します。",
       "choiceReasons": [
         "故障を起こさないよう信頼性を高めるのはフォールトアボイダンスです。フェールセーフは故障時に安全側へ移行します。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各文が「故障を防ぐ」「故障後に継続する」のどちらを述べるか確認します。",
+          "text": "まず対策の対象を分けます。故障が起こる確率を下げるのか、故障した後に安全側へ移すのか、機能を一部落として続けるのか、故障があっても機能を維持するのかです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "トレランスは故障を許容する考え方です。一つが故障しても必要な機能を保つ構成を考えます。",
+          "text": "フォールトアボイダンスは故障を避けること、フェールセーフは故障時に安全側へ移行すること、フェールソフトは機能や性能を縮退して継続することです。『ソフト』はソフトウェア故障だけを指すわけではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "重要部品の多重化なら、故障部品の代わりに別の部品が働けます。この記述と名称の対応を確認します。",
+          "text": "フォールトトレランスは故障を許容して必要な機能を継続する設計で、重要部品を多重化するのが典型例です。他の3用語との定義の入れ替わりを確認してください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "いずれも信頼性に関係するため、『故障防止』と『故障発生後の対応』を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "4つの故障対策の分類軸",
+          "remainingWork": "各肢の説明がどの対応に属するか分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類軸は示すが具体的な正答名称は未提示"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "3つの誤答に関連する用語の定義",
+          "remainingWork": "残る肢があるか判定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "3つの誤答を実質的に否定して正答が一つに確定する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フォールトトレランスの定義と多重化の役割",
+          "remainingWork": "名称と説明を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の名称と内容を伝える"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=00bf08d381a3ee2566921fe5808177f3245d2e2c5149080d8fb8c7d3222447c1。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のフェールセーフ/フェールソフト/アボイダンス/トレランスの表記・順序を目視照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "3e9c8e050e6b8a416f7eec26f824b36b0bbf478c3901c1fa102876f4a494f738",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q14",
-      "summary": "イ。稼働率はA、C、Bの順に高くなります。",
+      "summary": "三つの直並列構成の稼働率を式にし、装置1台の稼働率が0と1の間で常に成立する大小を調べる。",
       "explanation": "一台の稼働率をr（0<r<1）とします。並列は全台停止したときだけ停止するので、A=1−(1−r)²=2r−r²です。Bは一台と並列二台の直列なのでrA=2r²−r³、Cは直列二台の組を二つ並列にするので1−(1−r²)²=2r²−r⁴です。\nC−B=r³(1−r)>0、A−C=r(1−r)²(r＋2)>0。したがってA>C>Bです。",
       "choiceReasons": [
         "BよりCの方が高いので、A、B、Cの順ではありません。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図のまとまりを読むと、Aは二台並列、Bは一台の後ろに二台並列、Cは二台直列の経路が二つ並列です。",
+          "text": "直列部分は全装置の稼働が必要なので稼働率を掛けます。並列部分はいずれかが稼働すればよいので、**1－全て停止する確率**を使います。1台の稼働率をrと置きます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一台をrとするとA=1−(1−r)²、B=rAです。Cは各経路がr²なので、全停止確率は(1−r²)²となります。",
+          "text": "図Aは2台並列でA=1－(1－r)²。Bは1台とA相当の並列部が直列なのでB=rA。Cは『2台直列の枝を2本並列』としてC=1－(1－r²)²です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "C−Bを計算するとr³(1−r)です。0<r<1なので正になります。Aとの比較もA−Cを因数分解して符号を確認しましょう。",
-          "revealsAnswer": false
+          "text": "各式を整理するとA=2r－r²、B=2r²－r³、C=2r²－r⁴。C－B=r³(1－r)>0、A－C=r(1－r)²(r＋2)>0。したがってA>C>Bです。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "直列・並列の計算を混同し、個数だけで稼働率を比較してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "直列・並列の稼働率計算法",
+          "remainingWork": "3つの構成を認識する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般式だけでは構成別比較は未実施"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原図3構成を稼働率の式へ写す方法",
+          "remainingWork": "式の展開と差の符号を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式を示すが大小比較と最終順は本人が行う"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "二つの差の因数分解と大小順",
+          "remainingWork": "順序と選択肢を対応付ける",
+          "revealsAnswer": true,
+          "reason": "正答の順序を直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q14.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=257631d29ed1cc597c2e017efde19b250869b30213b72e035e27ff5f249ecb2a。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 画像の構成はA=2並列、B=1直列+2並列、C=(2直列)を2並列。C-B=r³(1-r)>0、A-C=r(1-r)²(r+2)>0。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "f7d9083722c653cbdfa0265f169bd28fd2e65d02e483f5fcb125a78b49a7db64",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q16",
-      "summary": "Zを迂回できる経路があるBの稼働率が常に高くなります。",
+      "summary": "共通部品Zが直列にある構成と、Zを通らない迂回経路がある構成を比較する。",
       "explanation": "X,Y,Zの稼働率をx,y,zとします。AはXとYの並列部にZが直列なので、A=(x+y−xy)zです。BはXZの直列経路とYの並列なので、B=xz+y−xyzです。差はB−A=y−yz=y(1−z)。0<y<1、0<z<1より差は正で、常にB>Aです。",
       "choiceReasons": [
         "差y(1−z)は与えられた範囲で必ず正なので大小は逆転しません。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "並列部分はどちらか一方の稼働でよい点と、各図でZが置かれた位置に注目します。",
+          "text": "図Aは『XとYの並列』の後にZが直列です。図Bは『XとZの直列』とYが並列です。どちらか一方が稼働すればよい経路と、必ず通る装置を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "直列は稼働率の積、並列は1−両方の故障確率で式を作ります。",
+          "text": "各装置の稼働率をx,y,zとすると、A=(x+y－xy)z、B=xz+y－xyz。直列は積、並列は1－同時故障確率から導けます。どちらが常に大きいかはB－Aを計算します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "A=(x+y−xy)z、B=xz+y−xyzです。B−Aを整理し、0<y,z<1で符号を調べましょう。",
-          "revealsAnswer": false
+          "text": "B－A=y(1－z)。与えられた0<y<1、0<z<1では正です。Zが故障してもYだけで稼働できるBの方が、常に稼働率が高くなります。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "図A・Bの違いを見落として並列ブロック内の入替えだけだと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AとBの実際の直列・並列配置",
+          "remainingWork": "Z故障時に働く経路を比較",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "図の構造までで大小は明示しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各構成の稼働率の計算式",
+          "remainingWork": "差を展開し符号を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較用の式を渡しても本人の差の計算が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "稼働率差y(1-z)の符号と迂回の意味",
+          "remainingWork": "選択肢と大小を対応付ける",
+          "revealsAnswer": true,
+          "reason": "常にBが上と正答内容を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q16.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=b4634131e08b0163c09e700825750a3c388889f07c48c51880b0f1ef00672817。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原図A=(X∥Y)−Z直列、B=(X−Z直列)∥Y。差B-A=y(1-z)>0を確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "8723745e0d4d4749df7eeb0faf7d694300cb422dd2d27e8f2b8e0163230f1335",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q19",
-      "summary": "ウ。プリンターCの印刷完了は11分です。",
+      "summary": "3台のプリンターの空く時刻に応じて9件を順に割り当て、Cの処理時間を追跡する。",
       "explanation": "時刻0でA=4分、B=6分、C=3分を割り当てます。時刻3でCに2分（終了5）、時刻4でAに5分（終了9）、時刻5でCに3分（終了8）、時刻6でBに4分（終了10）、時刻8でCに3分（終了11）、時刻9でAに1分（終了10）です。Cは3+2+3+3=11分連続して印刷します。",
       "choiceReasons": [
         "7分はCに割り当てられる四つの印刷時間の合計に届きません。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "最初の4,6,3分をA,B,Cへ置き、終了時刻を書きます。",
+          "text": "最初の3件は順にA=4分、B=6分、C=3分です。各プリンターの『次に空く時刻』を持ち、以降は最も早く空くものへ次の仕事を割り当てます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "最初に空くのは終了時刻3のCです。次の2分の仕事をCに渡して終了時刻を3+2へ更新し、A=4,B=6ともう一度比べます。空きが同時ならA,B,Cの順を使います。",
+          "text": "4件目2分は時刻3に空くCへ、5件目5分は時刻4に空くAへ割り当てます。次にCは5分、Bは6分、Aは9分に空きます。次の仕事がどのプリンターへ行くか更新してください。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Cは時刻3,5,8に次の仕事を受けます。初回3分に2,3,3分を足します。",
+          "text": "Cには1回目3分、4回目2分、6回目3分、8回目3分の印刷が割り当てられます。合計3＋2＋3＋3＝11分です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "仕事を3台へ単純な巡回割当てで分け、途中の空き時刻を無視する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "初回3件の配分と次に空く時刻を使う方法",
+          "remainingWork": "4件目以降の空き時刻を更新する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "初期条件を説明するだけで正答は不明"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "4件目・5件目を含む時刻更新例",
+          "remainingWork": "残る6～9件目の割当てを追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中の配分は示すが後の割当てが残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "C担当の4件と時間の総和",
+          "remainingWork": "Cの合計時間を算出する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "Cの担当全件と最終時間を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=b9e20ce48248654d9beb3f2e69fa3cb89dd042f95c52a35132ae4da801345e51。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本の順序4,6,3,2,5,3,4,3,1と優先順位A→B→Cを確認。Cの担当は3+2+3+3=11分。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q17",
     "baseVersion": 2,
     "baseLessonSHA256": "842e8ae8e68cead31024d02a266f9fcbd49f422985fc6938558b62221541876e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q17",
-      "summary": "イ。Aと資源の取得順が異なるC・Dでは、相互に待つ状態が起こり得ます。",
+      "summary": "資源X・Y・Zの取得順を比較し、互いに保持している資源を待つ循環待ちが作れるかを判定する。",
       "explanation": "AとBはX→Y→Zの同じ順です。先にXを取った側が処理を進め、もう一方はXを待つので、二者間の循環待ちはできません。\nCはZ→X→Yです。AがX、CがZを保持すると、Aは最後にZを待ち、CはXを待って停止できます。DはZ→Y→Xで、AがX、DがZとYを保持すれば、AはY、DはXを待ちます。したがってCとDです。",
       "choiceReasons": [
         "アはBも含めています。同じ取得順のAとBでは、片方が最初のXを待つだけで循環しません。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "表の1→2→3を資源名の順へ変えます。AはX→Y→Z、CはZ→X→Yです。",
+          "text": "デッドロックの一例は、互いが保持する資源を相手が待ち、どちらも先に進めない『循環待ち』です。資源は実行終了までまとめて解放する条件に注意します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "取得済み資源は終了まで解放しません。AがXを持つ間に他方がZを取得した状況から、次に何を待つか追います。",
+          "text": "表の1→2→3を資源名へ直すとAとBはX→Y→Z、CはZ→X→Y、DはZ→Y→Xです。AとBのように最初に取る資源が同じXなら、一方がXで待つ間、他方は取得を進められます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "DがZ→Yを取得し、AがXを取得した場合、Aが次に欲しい資源とDが最後に欲しい資源を比べます。Bの最初の資源にも注目します。",
-          "revealsAnswer": false
+          "text": "AがXを保持し、CがZを保持すると、AはZ・CはXを求めて循環待ちできます。Dでも、AがXを保持しDがZとYを保持すれば、AはY、DはXを待ちます。したがってCとDで可能です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "資源の順序表を読み換えられず、順が違うだけで即デッドロックと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "デッドロックの循環待ちと資源解放タイミング",
+          "remainingWork": "順序表から取得順を列挙する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "判定方法を説明するだけで正答は一意に決まらない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "A～Dの取得順とA/Bでは循環しにくいこと",
+          "remainingWork": "C・Dで互いの資源を待つ状況を構成する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "A・Bの競合の一部は分かるがC/Dの循環成立は本人が確かめる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "C・Dそれぞれについて成立する保持・待ちの例",
+          "remainingWork": "該当するプロセスの組合せを選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答組合せを直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q17.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=be562cb50002b24052e84a47b4c43c35354a17f1f1d65695ae7ffed8272229ea。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本表の順序A=B X,Y,Z / C Z,X,Y / D Z,Y,Xを照合。循環待ちの例を構成して確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
     }
   },
   {
