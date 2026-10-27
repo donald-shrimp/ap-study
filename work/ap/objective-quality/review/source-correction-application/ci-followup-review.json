@@ -1,0 +1,52 @@
+{
+  "status": "approved",
+  "reviewer": "Codex /root/ap_source_fix_review",
+  "checkedAt": "2026-10-27T13:59:25.543179+00:00",
+  "baseCommit": "bb4445faa8b3f9e5c42c0aaee1d05cb695a6b796",
+  "scope": "CI40497432000 FP radio interaction follow-up: three test files, four selection operations only",
+  "fileSHA256": {
+    "tests/fp2-202409-published.py": "b20046036b7ae72f5dde4cbdad6d6792afecd5515d408e2847d60410c5b4fde8",
+    "tests/fp2-202501-published.py": "ad88db74b7392253899033d89d221eb40481c2c873ea350b6d2b9aa8f310c146",
+    "tests/fp2-202505-published.py": "2a8e0085b9f69fd4c8060e2440555fe67943ac42ad302fd63285eac106cc6d77"
+  },
+  "checks": {
+    "diffOnlyThreeTestFiles": true,
+    "inputDirectParentIsLabelVerifiedInProductMarkup": true,
+    "normalLabelClickUsesNativeBrowserInteraction": true,
+    "checkedStateAssertedAfterEveryChangedClick": true,
+    "noForceOrStateMutationOrAssertionsRemoved": true,
+    "gradingAndOfflineReloadAndBackupAssertionsPreserved": true,
+    "productAndApprovedMaterialUnchangedFromBaseCommit": true,
+    "originalIndependentApprovalUnchanged": true,
+    "gitDiffCheckPassed": true
+  },
+  "evidenceInspected": [
+    {
+      "period": "202409",
+      "result": "/tmp/hitomon-fp2-202409-jb4sj7cd/results.json",
+      "resultSHA256": "ce81d9b7bd000af9ad5a34a62d8c65db13dc9f8f1d46e9fac7c8575fa471e9f8",
+      "log": "/workspace/scratch/ap-source-correction/fp2-202409-ci-fix.log",
+      "logSHA256": "d6b2646ed81644e72704774f595f65f80fc253f9d3370641cc44efd21f6a9b5d",
+      "executedBy": "integration owner; reviewer read full result and PASS log tail"
+    },
+    {
+      "period": "202501",
+      "result": "/tmp/hitomon-fp2-202501-fjx6c9oj/results.json",
+      "resultSHA256": "699b265d1b166bc53b7e3884d649754478efa48953ef3527a38d68b4f638a5c0",
+      "log": "/workspace/scratch/ap-source-correction/fp2-202501-ci-fix.log",
+      "logSHA256": "7b67b1534916e32af1c8655bdc4d40863e638cfa8f55abde7c3b4c7377d45ae5",
+      "executedBy": "integration owner; reviewer read full result and PASS log tail"
+    },
+    {
+      "period": "202505",
+      "result": "/tmp/hitomon-fp2-202505-gumymsjd/results.json",
+      "resultSHA256": "c38093c3ee50d2647a36974bb55360ae9f06c8cdeab0e85a5addd71e784bc9c3",
+      "log": "/workspace/scratch/ap-source-correction/fp2-202505-ci-fix.log",
+      "logSHA256": "85b8c12a188c08e117ffb8f5af8d6691fd700d55718e3a4b51eeec87d5646bf1",
+      "executedBy": "integration owner; reviewer read full result and PASS log tail"
+    }
+  ],
+  "notes": "src/features/written.jsのsingleChoice生成を読みinputの直親label.choiceを確認。変更は隠れたradioへのcheckから可視の親labelへの通常clickとnative is_checked確認へ置換。各欄の正解結果待機、202501の保存待機・offline再読込・import後checked確認は保持。親担当が実行した3FPフルブラウザテストの結果を閲覧し、各100問、計206実技欄、offline/backup/320・390・1440/200%、JSエラー0を確認。本担当はこれらブラウザテストを再実行していない。",
+  "issues": [],
+  "remainingWork": "Push and final CI rerun are integration-owner steps; final GitHub CI success not claimed."
+}

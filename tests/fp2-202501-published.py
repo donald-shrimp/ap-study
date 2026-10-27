@@ -86,7 +86,8 @@ try:
      key=it['id']+'--'+f['id'];selector=f'[data-written-key="{key}"]'
      if f['type']=='singleChoice':
       ch=next(ch for ch in f['choices'] if ch['label']==f['referenceAnswers'][0])
-      pg.locator('input'+selector+f'[value="{ch["id"]}"]').check()
+      choice=pg.locator('input'+selector+f'[value="{ch["id"]}"]')
+      choice.locator('..').click();assert choice.is_checked()
      else:pg.locator('input'+selector).fill(f['referenceAnswers'][0])
     if len(it['fields'])>1:pg.locator('[data-action=written-check-item]').click()
     else:pg.locator('[data-action=written-submit]').click()
@@ -96,7 +97,8 @@ try:
    if n%10==0:print('PASS practical',n,flush=True)
   assert decoded==required
   # A new, ungraded written response survives an offline reload.
-  open_written_case(pg,'fp2-202501-jafp-q34');pg.locator('input[data-written-key="item1--field-a"][value="option-9"]').check()
+  open_written_case(pg,'fp2-202501-jafp-q34');choice=pg.locator('input[data-written-key="item1--field-a"][value="option-9"]')
+  choice.locator('..').click();assert choice.is_checked()
   wait_for_async(pg,'''async()=>{const root=new URL('.',document.baseURI),{createLocalStore}=await import(new URL('src/storage/local.js',root)),s=createLocalStore({qualificationId:'fp2',rootPath:root.pathname});try{const i=await s.identity(),{createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root)),w=createWorkspaceStore({...i,rootPath:root.pathname,namespaceName:'written',validate:()=>{}});try{return (await w.read()).some(r=>r.payload.caseId==='fp2-202501-jafp-q34'&&r.payload.responses['item1--field-a']?.value==='option-9');}finally{await w.close();}}finally{await s.close();}}''')
   pg.reload();pg.locator('.written-layout').wait_for();assert pg.locator('input[data-written-key="item1--field-a"][value="option-9"]').is_checked()
   ctx.set_offline(False);open_data_management(pg)
