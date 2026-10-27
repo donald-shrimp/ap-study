@@ -3,11 +3,11 @@
     "id": "r06h-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "3d404d69f8d905bb1fdfe174b54c978b74117cbbe1eb1e038eb4109f011a23af",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q22",
-      "summary": "直線上の画素は(7,6)。先頭アドレスは(640×6+7)×2=7694番地です。",
+      "summary": "直線上の画素座標を求め、行優先のLCDメモリ配置と画素のビット数から先頭アドレスを計算する。",
       "explanation": "始点(5,4)から終点(9,8)まではxもyも4増えるので、直線の傾きは1です。x=7は始点より2右なのでy=6です。\n各行は640画素。y=6の行までに640×6画素があり、x=7までに更に7画素あります。1画素16ビット=2バイトで、図の1番地は8ビットなので先頭アドレスは(640×6+7)×2=7694です。",
       "choiceReasons": [
         "アの3847は画素の通し番号です。1画素2バイトを掛けていません。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "始点と終点はxもyも4増えます。xを5から7へ進めたときのyをまず求めます。",
+          "text": "始点(5,4)と終点(9,8)では、xが4増えるとyも4増えています。x=7でのyを先に求めましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "メモリはx方向に640画素並べて次の行へ進みます。図の1番地は8ビットなので、16ビットの画素は2番地分です。",
+          "text": "横640画素の行を順番に格納するので、画素(x,y)より前は640×y+x画素です。1画素16ビット、図の1番地8ビットより、番地へ換算するには2倍します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "求めたyを使い、(640×y+7)×2を計算します。座標は0始まりなので、行数や列番号に1を足しません。",
+          "text": "x=7ではy=4+(7−5)=6です。先頭番地は(640×6+7)×2。最後の計算を行い候補から選んでください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "画素の通し番号とバイトアドレスを混同し、2バイト換算を忘れる。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "始点(5,4)と終点(9,8)では、xが4増えるとyも4増えています。x=7でのyを先に求めましょう。",
+          "remainingWork": "y座標を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "横640画素の行を順番に格納するので、画素(x,y)より前は640×y+x画素です。1画素16ビット、図の1番地8ビットより、番地へ換算するには2倍します。",
+          "remainingWork": "式に座標を代入する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "x=7ではy=4+(7−5)=6です。先頭番地は(640×6+7)×2。最後の計算を行い候補から選んでください。",
+          "remainingWork": "最終乗算と肢を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q22.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: 429e475129bdd3a515a8a439ee1d75c90c10a9128462a6a28c1224cb89a1b4d2。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 原図は640×480、直線(5,4)→(9,8)、16ビット/画素・8ビット/番地。結果は7694番地。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "ef5344c54baaf214a68f529f25d7cca6ec4bec76f65a4813b9910802f539bcaf",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q21",
-      "summary": "ウ。二つのスイッチが同時にオンのときだけ点灯します。",
+      "summary": "直列スイッチA・Bの点灯条件を論理積で表し、出力波形が一致するタイミングチャートを選ぶ。",
       "explanation": "AとBは電池からLEDへ至る一つの経路に直列に入っています。片方でもオフなら経路が切れ、両方オンの場合だけ電流が流れます。したがってY=A∧Bです。\nウの波形はAとBが同時に1の二つの区間だけY=1となり、最後にAだけが1になる区間ではY=0のままです。",
       "choiceReasons": [
         "YはAかBのどちらかが1なら1となるORの波形で、直列回路と合いません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "電池からLEDまで指で経路をたどると、AとBの両方を通ります。片方を開くと経路が切れることを確認します。",
+          "text": "原図ではスイッチAとBが一本の電流経路に直列です。どちらかが開いていればLEDは消灯するので、双方が閉じる区間を探します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各候補の点線間でA=1かつB=1となる区間を探します。その区間だけYが1なら回路と一致します。",
+          "text": "A=1かつB=1の区間だけY=1です。これは**Y=A・B（AND、論理積）**です。各候補の時間区間でAとBを同時に見て判断します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ウでは中央の二つの同時オン区間でYが1です。右端のAだけ1の区間では0なので、直列条件を満たします。",
-          "revealsAnswer": true
+          "text": "Aだけが1、Bが0の区間ではY=0のはずです。原図の後半にもこの区間があるので、全区間でANDに一致する波形を選びます。",
+          "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "片方のスイッチがオンなら点灯すると誤解し、ANDとORを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原図ではスイッチAとBが一本の電流経路に直列です。どちらかが開いていればLEDは消灯するので、双方が閉じる区間を探します。",
+          "remainingWork": "必要な接点の状態を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "A=1かつB=1の区間だけY=1です。これは**Y=A・B（AND、論理積）**です。各候補の時間区間でAとBを同時に見て判断します。",
+          "remainingWork": "各区間のANDを求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
+          "newInformation": "Aだけが1、Bが0の区間ではY=0のはずです。原図の後半にもこの区間があるので、全区間でANDに一致する波形を選びます。",
+          "remainingWork": "4波形と一致させる",
+          "revealsAnswer": false,
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q21.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: 96da6bbaf95e58bf6b7e58f60c59c1d4ddccb7b252e74d009b84ed4e53bc5e2c。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 原図は直列A/B。アOR、イNOR、ウAND、エNANDに対応し、ウが該当。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "10fbfee722e4ef062b31a1e279fab84c3aafa44695b96ca6801c9b50e3811f52",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q21",
-      "summary": "ウ。待機時間は少なくとも約111.1秒必要。",
+      "summary": "間欠動作の平均電流を時間加重平均で計算し、必要な待機時間を求める。",
       "explanation": "平均電流は、1周期で流れる電荷を周期の長さで割る。動作時間0.01秒、動作電流10,000μA、待機時間t秒、待機電流0.1μAに単位をそろえる。\n\n平均=(10,000×0.01+0.1t)/(0.01+t)≤1。100+0.1t≤0.01+tからt≥99.99/0.9=111.1秒となる。単純に二つの電流の平均を取ると、時間の長さの違いを無視してしまう。",
       "choiceReasons": [
         "1.1秒では平均は約90.2μAで、1μAを超える。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "10mAと0.1μAをそのまま足さない。電流をμA、時間を秒にそろえ、10mA=10,000μA、10ms=0.01秒とする。",
+          "text": "動作10ミリ秒と待機t秒の1周期を考えます。平均電流は、各期間の**電流×継続時間を合計して全時間で割った値**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "待機をt秒と置く。1周期の電流×時間は10,000×0.01+0.1t、周期は0.01+t。両者を割ると平均電流になる。",
+          "text": "10ミリ秒=0.01秒、10mA=10,000μAです。平均は(10,000×0.01+0.1t)/(0.01+t)μAとなります。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "(100+0.1t)/(0.01+t)≤1を解く。分母は正なので両辺に掛け、tの下限を求めて最短の選択肢を選ぶ。",
+          "text": "条件は(100+0.1t)/(0.01+t)≦1です。正の分母を両辺に掛けてtの不等式を解き、最も短い候補を選んでください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "10mAと0.1μAを単純平均する、またはms・s、mA・μAを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "動作10ミリ秒と待機t秒の1周期を考えます。平均電流は、各期間の**電流×継続時間を合計して全時間で割った値**です。",
+          "remainingWork": "加重平均を立てる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "10ミリ秒=0.01秒、10mA=10,000μAです。平均は(10,000×0.01+0.1t)/(0.01+t)μAとなります。",
+          "remainingWork": "単位をそろえて式を作る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "条件は(100+0.1t)/(0.01+t)≦1です。正の分母を両辺に掛けてtの不等式を解き、最も短い候補を選んでください。",
+          "remainingWork": "不等式を解く",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q21.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: 7561ceb3b0afe4b07015317b235b0c601e59966d5210abbec99d6c88e5068ce9。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 図の10ms・10mA・0.1μAを確認。t≧111.1秒。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "197e034c4ecc2d255cdc327a6bb5e4c2cf537713fe1e2759ae41c4c5c5c02df9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q25",
-      "summary": "ウ。ラジオシティ法は拡散面どうしの相互反射を考慮します。",
+      "summary": "CGの各手法について、表面の模様・光線追跡・形状生成・面間反射を区別する。",
       "explanation": "ラジオシティ法は面から出る光のエネルギーを面間で扱い、拡散反射面どうしの相互反射を考慮して輝度を求めます。テクスチャマッピングは表面に模様を貼る方法、レイトレーシングは視線や光線を追跡する方法です。メタボールは複数の場を合成して滑らかにつながる曲面を表す手法です。",
       "choiceReasons": [
         "視線と物体の交点を調べて可視面を選ぶ説明はレイトレーシングで、テクスチャマッピングではありません。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が扱う対象を、視線との交点・空間データ・面間の反射・表面の模様に分けます。",
+          "text": "表面に模様を貼る、画素から視線を追う、滑らかな結合形状を作る、面同士の間接光を計算する、という4種類の作用を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "光線を一本ずつ追う方法と、面どうしでやり取りする拡散反射エネルギーを求める方法を区別します。",
+          "text": "テクスチャマッピングは模様貼り、レイトレーシングは視線追跡、メタボールは複数の影響を合成して滑らかな形状を作る手法です。選択肢の名前と動作を照合します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "拡散反射面間の相互反射を考慮して輝度を求めるのはラジオシティ法です。",
+          "text": "ラジオシティ法は**拡散反射面間の相互反射**を考慮して面の輝度を求めます。この説明と対応する肢を確認してください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CGの各専門用語を知らず、描画対象を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表面に模様を貼る、画素から視線を追う、滑らかな結合形状を作る、面同士の間接光を計算する、という4種類の作用を分けます。",
+          "remainingWork": "各肢の処理対象を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "テクスチャマッピングは模様貼り、レイトレーシングは視線追跡、メタボールは複数の影響を合成して滑らかな形状を作る手法です。選択肢の名前と動作を照合します。",
+          "remainingWork": "3つの手法の誤対応を除外する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ラジオシティ法は**拡散反射面間の相互反射**を考慮して面の輝度を求めます。この説明と対応する肢を確認してください。",
+          "remainingWork": "ラジオシティの記述を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q25.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: be63c963a7d6a5eb1866754cb7b1fa9f1e7331de3b3f22bc461bca85118265f1。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 原本アはレイトレーシング、イはボリュームレンダリング、エはテクスチャマッピングの記述。ウが正答。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "965f16cb6acd598b344673a67992e1ff597e778a86b7df847adf79897247d7e9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q25",
-      "summary": "拡散反射面どうしの相互反射を考えるのはラジオシティ法です。",
+      "summary": "CG手法のうち、拡散反射面同士の間接光を計算する方法を選ぶ。",
       "explanation": "ラジオシティ法は面を小領域に分け、拡散反射面間でやり取りされる光のエネルギーを計算します。光源から直接届く光だけでなく、他の面で反射して届く間接光も考慮して輝度を決めるため、ウが適切です。視線を追う方法や、表面に画像を貼る方法と区別します。",
       "choiceReasons": [
         "視線と物体の交点を計算する説明はレイトレーシングです。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各文が形状、光の伝わり方、模様の貼付けのどれを扱っているか分けます。",
+          "text": "画素から光線を追う方式と、壁や床など**面と面で光を受け渡す**方式を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "視線を追跡する処理と、面から面へ反射光が届く処理は異なる描画の考え方です。",
-          "revealsAnswer": false
+          "text": "レイトレーシングは視線との交点や反射方向を追跡し、テクスチャは表面の模様、メタボールは滑らかに融合した形状を扱います。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ラジオシティでは拡散反射面どうしが交換する光を計算します。「相互反射」と名称の対応を確かめます。",
+          "text": "ラジオシティ法は面同士の拡散反射による光のやり取りを求めます。『拡散反射面間の相互反射』という説明が合います。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "光を扱うレイトレーシングとラジオシティの違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "画素から光線を追う方式と、壁や床など**面と面で光を受け渡す**方式を分けます。",
+          "remainingWork": "対象の違いを理解する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "レイトレーシングは視線との交点や反射方向を追跡し、テクスチャは表面の模様、メタボールは滑らかに融合した形状を扱います。",
+          "remainingWork": "誤答3肢を排除する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
+        },
+        {
+          "newInformation": "ラジオシティ法は面同士の拡散反射による光のやり取りを求めます。『拡散反射面間の相互反射』という説明が合います。",
+          "remainingWork": "正しい記述を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q25.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: 8f1dbb15741ced34f0da5ebd1ecf5367f0141749ce5486d64ca3bc9af9593faf。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 別年度の原本も四肢を確認。ウのラジオシティが適切。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "864ea86396a249a68bee0ae9da910856f95a1f51b93bd81a7aab3b0946f55207",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q25",
-      "summary": "エ。H.264/MPEG-4 AVCは動画の圧縮符号化方式です。",
+      "summary": "H.264/MPEG-4 AVCが動画圧縮規格か通信制御方式かを区別する。",
       "explanation": "H.264/MPEG-4 AVCは、フレーム内・フレーム間の予測などによって動画データ量を圧縮する規格です。配信を制御する通信手順や、番組情報の記述規格とは役割が異なります。",
       "choiceReasons": [
         "ストリーミング配信の制御はRTSPなどが担い、H.264は通信制御方式ではありません。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の目的を、転送の制御・番組の説明・データ量の削減に分けます。",
+          "text": "動画の伝送には映像データを減らす**圧縮符号化**と、配信や接続の制御をする**通信方式**があり、役割が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "動画を小さいデータ量で表す処理と、通信を開始・停止する処理は別です。",
-          "revealsAnswer": false
+          "text": "H.264/MPEG-4 AVCはフレーム内・フレーム間予測などを用いて**動画を圧縮符号化する規格**です。番組メタデータを記述するものでもありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "AVCのCはCodingです。動画自体を圧縮符号化する説明を選びます。",
+          "text": "ワンセグやインターネット動画に使われる圧縮符号化方式という記述を選びます。通信制御や電子番組案内とは違います。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "動画に使う技術をすべて通信プロトコルと捉える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "動画の伝送には映像データを減らす**圧縮符号化**と、配信や接続の制御をする**通信方式**があり、役割が異なります。",
+          "remainingWork": "通信とデータ処理を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "H.264/MPEG-4 AVCはフレーム内・フレーム間予測などを用いて**動画を圧縮符号化する規格**です。番組メタデータを記述するものでもありません。",
+          "remainingWork": "H.264の役割を適用する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
+        },
+        {
+          "newInformation": "ワンセグやインターネット動画に使われる圧縮符号化方式という記述を選びます。通信制御や電子番組案内とは違います。",
+          "remainingWork": "正答肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q25.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: fd826ce3a82aa44bbf695008bb89247cfc5aa354c08a5828f70577e04d223d23。",
+        "contextに収録された公式正答 エ に対して作者が確認した根拠: 原本ア・イ=通信制御、ウ=番組案内メタデータ、エ=動画圧縮符号化。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "e0f5cecc338f03366f7bd666b5a4849c1edd4cf5832eb87be5df4da597c822c7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q27",
-      "summary": "ウ。XMLで図形を記述するSVGです。",
+      "summary": "XMLで図形オブジェクトを記述するWeb向け画像形式を識別する。",
       "explanation": "SVGはScalable Vector Graphicsで、矩形、円、線、文字などをXMLの要素や属性として記述するベクトル画像形式です。Webページに埋め込み、拡大しても図形を再描画できます。",
       "choiceReasons": [
         "OpenGLは描画用APIで、XML画像ファイル形式ではありません。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "画素の色を並べる形式か、円や直線の位置を記述する形式かを分けます。",
+          "text": "『XMLで円・矩形・線・文字を記述する』点が重要です。画素を記録する画像と、図形の形や座標を記録する画像を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "circleやrectなどのXML要素で図形を指定できる形式に注目します。",
+          "text": "PNG・TIFFは主に画素を保存し、OpenGLは描画用APIです。XMLのタグや属性で図形を保存する形式ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "XMLによるベクトル画像形式SVGを選びます。",
+          "text": "SVGはScalable Vector Graphicsの略で、XMLによる図形記述ができるベクトル画像形式です。Webページにも表示できます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SVG・PNG・TIFF・OpenGLをすべて同じ画像記録方式と思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『XMLで円・矩形・線・文字を記述する』点が重要です。画素を記録する画像と、図形の形や座標を記録する画像を分けます。",
+          "remainingWork": "要求形式を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "PNG・TIFFは主に画素を保存し、OpenGLは描画用APIです。XMLのタグや属性で図形を保存する形式ではありません。",
+          "remainingWork": "3肢を除外する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SVGはScalable Vector Graphicsの略で、XMLによる図形記述ができるベクトル画像形式です。Webページにも表示できます。",
+          "remainingWork": "SVGに対応付ける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q27.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: bf2ff151da51f777e76bf3d7f6ca36c2c5013a6047c94ac8aefbb117788856de。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 原本のW3C/XML/図形条件と4肢を確認。SVGが該当。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "967b5fa9cd5dae6a97587cd84e94803f77223a956d627f47f80152aa07cab3b6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q23",
-      "summary": "ウ。SVGは図形をXMLで記述するベクトル画像形式。",
+      "summary": "W3CのXMLベースのベクトル画像形式を、ラスター画像や描画APIと区別する。",
       "explanation": "SVG（Scalable Vector Graphics）は円・矩形・線・文字などをXMLで記述する。例えば円なら中心座標や半径を属性として持つ。画素の並びよりも図形の情報で表すため、拡大しても輪郭を保ちやすい。\n\nPNGとTIFFは主に画素を保存する画像形式。OpenGLは描画APIであり、このXML画像形式の名前ではない。",
       "choiceReasons": [
         "OpenGLはグラフィックスの描画API。XMLで保存する画像フォーマットではない。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「XML形式」「円や直線をオブジェクトとして記述」の二つを拾う。色の付いた画素を並べる画像か、図形の座標を保存する画像か。",
+          "text": "Webに表示できるだけでは複数候補が当てはまります。円の半径や線の端点を**XMLの属性として表す**という条件を重視します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "座標や半径で図形を表すのはベクトル形式。PNGやTIFFの画素中心の保存方法とは違う。",
-          "revealsAnswer": false
+          "text": "ベクトル画像は形状を保持します。PNG・TIFFは画素の並びを主に保持し、OpenGLは描画APIなので、XML画像ファイルではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "OpenGLは描画するためのAPI。残る、Webで使えるベクトル画像の略語を確認する。",
-          "revealsAnswer": false
+          "text": "SVG（Scalable Vector Graphics）は図形と文字をXMLで記述するW3Cのベクトル画像形式です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "Webで表示できればPNGもXML形式だと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Webに表示できるだけでは複数候補が当てはまります。円の半径や線の端点を**XMLの属性として表す**という条件を重視します。",
+          "remainingWork": "XMLの要件を抽出する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "ベクトル画像は形状を保持します。PNG・TIFFは画素の並びを主に保持し、OpenGLは描画APIなので、XML画像ファイルではありません。",
+          "remainingWork": "他の形式を除外する",
+          "revealsAnswer": true,
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "SVG（Scalable Vector Graphics）は図形と文字をXMLで記述するW3Cのベクトル画像形式です。",
+          "remainingWork": "名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q23.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: 1b3dabd29f25f9b15177caa1df5dfc68458eb9e65666d381d969c29ea08cb6e8。",
+        "contextに収録された公式正答 ウ に対して作者が確認した根拠: 別原本の4肢とW3C/XMLの条件を確認。SVGが該当。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "d6b6311ef2788c081162d4335dee47aa0be9f86c9f823d64178c15404ebad511",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q24",
-      "summary": "ア。習得性は、理解した機能を後で容易に思い出せる性質です。",
+      "summary": "JISにおけるアイコンの習得性を、視認・類似経験・周囲との識別と区別する。",
       "explanation": "この規格におけるアイコンの習得性は、アイコンが表す機能をいったん理解した後、その機能をどれだけ容易に思い出せるかを示します。\n細部の見やすさ、過去の類似アイコンの経験による認識、近くの別アイコンとの区別とは、それぞれ評価の観点が異なります。",
       "choiceReasons": [
         "理解された機能を後で容易に思い出せるという、規格の習得性の説明です。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「理解された後」「以前の経験」「図柄の詳細」「別アイコンとの区別」という評価場面の違いを読みます。",
+          "text": "四肢で『理解した後』『絵柄の細部』『類似アイコンの経験』『近くの別アイコン』と、評価する場面が違うことを読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "習得した後に再びそのアイコンを使う場面を考えます。見た機能を記憶から呼び戻せるかが手掛かりです。",
+          "text": "この規格の習得性は、アイコンで表した機能を**いったん理解した後、後から思い出しやすいか**という観点です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "いったん理解した機能をどれだけ容易に思い出せるか、という説明に対応させます。",
+          "text": "以前覚えた『保存』アイコンを次に見た際、その機能を想起できるかが対象です。理解後に容易に思い出せる説明を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "習得を初見の図柄の分かりやすさと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢で『理解した後』『絵柄の細部』『類似アイコンの経験』『近くの別アイコン』と、評価する場面が違うことを読みます。",
+          "remainingWork": "評価時点を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "この規格の習得性は、アイコンで表した機能を**いったん理解した後、後から思い出しやすいか**という観点です。",
+          "remainingWork": "定義と肢を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "以前覚えた『保存』アイコンを次に見た際、その機能を想起できるかが対象です。理解後に容易に思い出せる説明を選びます。",
+          "remainingWork": "正答を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q24.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: d9e4e45810642504b994ec427effa6101c15dd4faf71cb57ab6da9441872ba16。",
+        "contextに収録された公式正答 ア に対して作者が確認した根拠: 原本JIS X 9303-1:2006表記を確認。ア=理解後の機能の想起。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "c694eb53c749028d5f5031c40f35ff6d64f59b6ef971b9237818258f62855ee9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q24",
-      "summary": "エ。任意倍率で文字を拡大するときにアウトラインフォントが適します。",
+      "summary": "アウトラインフォントがビットマップより適する用途を、輪郭の保存方法から判断する。",
       "explanation": "ビットマップフォントは文字を画素の配列として持つため、そのまま拡大すると輪郭の段差が目立ちます。アウトラインフォントは輪郭を線や曲線で表し、表示する大きさに合わせて画素へ変換できるので、任意倍率でも滑らかな輪郭を得やすくなります。漢字の有無や等幅表示は、どちらの方式でも実現できます。",
       "choiceReasons": [
         "漢字はどちらの方式でも表現でき、アウトライン固有の利点ではありません。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "文字の種類・幅・表示速度・拡大という用途のうち、元の画素数が制約になるものを考えます。",
+          "text": "ビットマップフォントは決まった点の配列で文字を表します。そのまま大きくすると斜線や曲線が階段状になります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ビットマップの画素をそのまま増やす場合と、曲線の輪郭を新しい大きさで描き直す場合を比べます。",
+          "text": "アウトラインフォントは文字の輪郭を線や曲線で保持し、表示時の大きさに合わせて画素を描き直します。漢字や等幅表示は両方式で可能です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "任意の倍率に拡大しても輪郭を描き直せるので、拡大表示の用途が適切です。",
+          "text": "画面上で文字の倍率をいろいろ変えるときに、輪郭を再描画できる仕組みが役立ちます。選択肢の用途を比べてください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "固定画素と線・曲線の輪郭データの違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ビットマップフォントは決まった点の配列で文字を表します。そのまま大きくすると斜線や曲線が階段状になります。",
+          "remainingWork": "方式ごとの保存形式を理解する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順や定義は教えるが、数値の算出または候補の照合を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アウトラインフォントは文字の輪郭を線や曲線で保持し、表示時の大きさに合わせて画素を描き直します。漢字や等幅表示は両方式で可能です。",
+          "remainingWork": "両方式の機能を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "画面上で文字の倍率をいろいろ変えるときに、輪郭を再描画できる仕組みが役立ちます。選択肢の用途を比べてください。",
+          "remainingWork": "用途を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の選択肢と前段の知識を合わせると正答の意味または名称が一意に決まる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q24.webp を取得して実際に表示し、問題文と全肢・図表を目視照合。台帳の画像SHA256: a3ce7796d0c6a0882f14899d6d096f14d74e9bce5080d9a8ba8f31bab5dbec33。",
+        "contextに収録された公式正答 エ に対して作者が確認した根拠: 原本四肢: 漢字・等幅・高速・任意倍率拡大。アウトラインは任意倍率が強み。",
+        "IPA解答PDFとの別途独立照合、第三者レビューと公開用データへの反映は未実施。"
+      ]
     }
   },
   {
