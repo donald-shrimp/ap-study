@@ -1,0 +1,745 @@
+{
+  "kind": "batch-independent-content-review",
+  "status": "changes_requested",
+  "reviewer": "Codex /root/ap_source_fix_review",
+  "checkedAt": "2026-10-27T16:51:07.893188+00:00",
+  "reviewedHead": "3218b274e04f9da0942348ac2982a4854187e796",
+  "author": "ChatGPT/gpt-6-batch13-20261028",
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "officialPDFsRead": 9,
+    "choiceReasons": 80,
+    "hints": 60,
+    "approvedNotRegistered": 13,
+    "requiresRevision": 7
+  },
+  "method": "Read AGENTS and previously read exact-byte-identical common rules. Actually displayed all20 original question images; read all lessons/four-choice reasons/three-stage design. Official9 PDFs:17 answer rows extracted and3 scanned2022spring answers visually read. Re-executed NOT EXISTS SQL, SQL1 and all4 ROW_NUMBER candidates against manually transcribed original tables in SQLite; traced UML links and recovery timeline. Actual domain synthetic attempts20×4 hint depths and postanswer non-retroactivity executed. No personal learner records.",
+  "issues": [
+    {
+      "id": "B13-01",
+      "priority": "P2",
+      "questionId": "r04a-q30",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1のサービス利用可能な割合はACIDと異なるという説明は可用性イの定義を指し、含まれない性質を実質指定する。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-02",
+      "priority": "P2",
+      "questionId": "r06a-q30",
+      "path": "lesson.hints[1].revealsAnswer / design.stages[1]",
+      "expectedFlag": true,
+      "reason": "学生ごとに番号を1から振り直し実施回の早い順というH2は正答イの構文と実質同じ要件を渡す。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-03",
+      "priority": "P2",
+      "questionId": "r06a-q29",
+      "path": "lesson.hints[1].revealsAnswer / design.stages[1]",
+      "expectedFlag": true,
+      "reason": "H1の地域1対仕入先多とH2の仕入先1対仕入多/仕入多対部品1で全関係が確定し、ア/ウ/エを全除外できる。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-04",
+      "priority": "P2",
+      "questionId": "r06h-q27",
+      "path": "lesson.hints[1].revealsAnswer / design.stages[1]",
+      "expectedFlag": false,
+      "reason": "H2はWALの更新後情報再適用の機構だけでロールフォワードの名称対応が残る。H1はロールバックを除外しても2相ロック/シャドウページの定義を教えず全誤答の消去ではない。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-05",
+      "priority": "P2",
+      "questionId": "r06h-q28",
+      "path": "lesson.hints[1].revealsAnswer / design.stages[1]",
+      "expectedFlag": false,
+      "reason": "H2は中心表の測定値/キーと周囲表の分析軸を教えるが、問いのファクトテーブルという名称への対応は未開示。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-06",
+      "priority": "P2",
+      "questionId": "r06a-q31",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1の回復のためにディスクへ反映した基準時点という説明はイの二次記憶書出し/回復の基準の正答特徴そのもの。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-07",
+      "priority": "P2",
+      "questionId": "r03a-q27",
+      "path": "lesson.hints[1].revealsAnswer / design.stages[1]",
+      "expectedFlag": true,
+      "reason": "H2はアのブロック化、ウの更新前REDO、エの更新後UNDOを全て明確に誤りとして除外するのでイしか残らない。",
+      "requestedChange": "フラグとdesign理由を内容に合わせて修正し、実修正者をsourceNotesに記録して別担当の最終確認を受ける。"
+    },
+    {
+      "id": "B13-08",
+      "priority": "P3",
+      "questionId": "r06a-q29",
+      "path": "design.sourceNotes",
+      "reason": "原図で部品136へ結ぶのは#01と#04。#05は205につながる。原本出典メモの#01,#05を#01,#04へ訂正する。",
+      "requestedChange": "原本リンクを再確認してsourceNotesを訂正。lessonの136が複数という説明自体は正しい。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r04a-q30",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "6402bf7a3889cc763e11eb7e14fe76eb6054524e6ceefb5d87f9ef1d2f337f2f",
+      "reviewedLessonSHA256": "06c2ab299cf6928658654cb16bd8b1f281faa889d5bf6c5421076797177c9597",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q30.webp",
+      "sourceImageSHA256": "489fca9594533fc9faaa085f525ed4e5c23952f0306d38d3b334165d67fa5d05",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "ACID=A原子性/C一貫性/I独立性/D耐久性。含まれないのはイ可用性。H1開示に指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B13-01"
+      ]
+    },
+    {
+      "id": "r07a-q26",
+      "status": "approved",
+      "reviewedDraftSHA256": "c90fab8d99b2887aa6439ca684362aad892ebdbaea728a61514721fa7b7e4514",
+      "reviewedLessonSHA256": "8c43184130192bacfd6186afa8a1570569eed70bc309acb6d5d685d5991a4820",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q26.webp",
+      "sourceImageSHA256": "e10568dbb81465b3135a75cc8e80f249624b4be1deec6ba4865d553e6b4693c2",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "障害がなければ更新が最終的に全ノードへ反映されるイが結果整合性。2PC即時同期/常時同一読取り/分断一律受付停止と異なる。H1時点比較false、H2定義true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04h-q26",
+      "status": "approved",
+      "reviewedDraftSHA256": "7e6f0b78378f5832a162598107e340c1724fffb933d34907311aa13d85d37110",
+      "reviewedLessonSHA256": "277c315ff7c58ac7b6c9369e102f8e55842a606c5aa6ee47d076f382a2e2ce05",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q26.webp",
+      "sourceImageSHA256": "87a352f690f5829c481da2857f9d35a1fb6a8dbb66d7de8250415d2b71f41ced",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "method": "Scanned PDF rendered page actually opened: q26ウ/q29ア/q30ア"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "CAPのAPは可用性と分断耐性、整合性の保証を優先しないウ。ア全保証、イCA、エCP。H1は頭文字のみでC保証不可未開示false、H2/H3正答true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05a-q29",
+      "status": "approved",
+      "reviewedDraftSHA256": "8e4ac25ea65faa33562ce4f1ab28c70ec09bc250f6a792da6856a8c6a02af43d",
+      "reviewedLessonSHA256": "f2787473a7072d7623927774168c392af9052ef945b17948e42138c401e9e9e8",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q29.webp",
+      "sourceImageSHA256": "9381436bb6ed35e5792fbf87c2d5ea2687f95e850361a05edb612fb416a1fdb8",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "SQLiteに原表全5製品/全8在庫行を手入力し原SQL実行、MZ1000/XZ3000の2行イ。AB1805=150/CC5001=200,40/ZZ9900=130で除外、在庫なしと30以下を保持。H1/H2判定手順false、H3二製品を明示true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06h-q29",
+      "status": "approved",
+      "reviewedDraftSHA256": "260b9f7c35d1a25bd829f62982dbb6bf74664c424b055d796837700070cd4428",
+      "reviewedLessonSHA256": "24d331b45e66ffdbd88769705a838a82d0b73b01d558dd3e1162c2281e20dcf9",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q29.webp",
+      "sourceImageSHA256": "5bc1ffa17654a66e47d5568b1a8943f6ef7cf59cbfb3f49d8382170ad977d1e1",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "キーに様々な値を対応付けるウがNoSQLキーバリュー型。アオブジェクト関係DB、イDWH、エデータディクショナリ。H1分類軸だけfalse、H2キー値定義true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04h-q29",
+      "status": "approved",
+      "reviewedDraftSHA256": "080ca203f3d816945d2036e0bf5b47ba6ebcbbfabcc23c773e359558b3b5d8c3",
+      "reviewedLessonSHA256": "ede810e27c579f4872c0a1b569d686e55cefa92aa6841a9706ae1874ce4ccf28",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q29.webp",
+      "sourceImageSHA256": "da5e8e7c51da3bab9199e2200370824d749c145bd3f876af24c02e11c2f65326",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "method": "Scanned PDF rendered page actually opened: q26ウ/q29ア/q30ア"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "UNDOは更新前値、REDOは更新後値。両方必要でア。前のみ/後のみ/両不要は片方または両方実行不能。H1二方向の入口false、H2必要情報の組合せを渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05h-q28",
+      "status": "approved",
+      "reviewedDraftSHA256": "3965447d394df8a6c519f410e714babb17d4596bea6772a495729e4100a0b4bf",
+      "reviewedLessonSHA256": "b257ae51699eaa2754c1bf2832bcce0f1fdad5b0b6a91dc5539e3783847e5da9",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q28.webp",
+      "sourceImageSHA256": "728b280de26d2c3bf04c7b0150a29a526999a083facc11d8eb68f20e820e760d",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "同操作1回と複数回の状態が等しいアがべき等。イ原子性、ウ複製、エ直列化可能性。H1は設定/加算の比較でどちらがべき等かをまだ結び付けずfalseを許容、H2で名称と不変を明言true。最初のH1疑義は再考して撤回。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06a-q30",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "49ab43a12f6ad4000305c4c93886307572dd0914d221fb7be7ef900847249423",
+      "reviewedLessonSHA256": "3153c2e994758aac808f537f8c90368c06f66ba6e8632080e60b287d81cbf554",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q30.webp",
+      "sourceImageSHA256": "aeee2377c0a82ed407351b6a7c578e9b9ce06a67612ddaa152309a35e17da3bc",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "SQLiteでSQL1と四候補を全実行。SQL1=S01(1,70),S02(2,85),S03(3,83),S04(6,100)。イPARTITION学生番号/ORDER実施回のみ同一。ア1行のみ、ウS02回5/S03回9、エS01回7/S03回12。H2開示に指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": [
+        "B13-02"
+      ]
+    },
+    {
+      "id": "r06a-q29",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "a3df6ca364d2cfc7585872287d81fea60a8a2c92e66b1e423580280d775fff91",
+      "reviewedLessonSHA256": "7b8bb8f2c40ce762815b2d1d9940739cb791ee1a4cc9350660fd51096a5dd2bb",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q29.webp",
+      "sourceImageSHA256": "f173d2d095e1003b75a487bfece84912c553fb88c4db37dafb2484e69283be02",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "東京→11、大阪→25/37。11→#01,#02,#03、25→#04,#05、37→#06。#01/#04→136、#02/#05→205、#03/#06→338。多重度は地域1→仕入先多→仕入多、部品1に仕入多でイ。H2開示とsourceNotes誤記に指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": [
+        "B13-03",
+        "B13-08"
+      ]
+    },
+    {
+      "id": "r03h-q28",
+      "status": "approved",
+      "reviewedDraftSHA256": "0ad9df17507dbc1af577ff5a34bdd6da1e80c707a66b5e41b3ba6b1dcf99d525",
+      "reviewedLessonSHA256": "5a50a471151d02fa323a0ed3cc0467734d086c7a051077110991b7d88b731e5e",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q28.webp",
+      "sourceImageSHA256": "a073ff917466adb776987c70d670de2cce52ba3aeea311becb68cd9c7468ce2e",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "グラフDBはノード/リレーション/プロパティのイ。ア文書、ウキー値、エワイド列。H1は保存単位比較false、H2グラフ構成を正答と同義で渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03h-q30",
+      "status": "approved",
+      "reviewedDraftSHA256": "adb296bcfa6cbcda1b1b7830df319c3b1040ae4ed2ab474ccd38a990193ce2a7",
+      "reviewedLessonSHA256": "acde5de2f51fc71495444da3e894e6778c6b43e139cfa8723311a7086587d30c",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q30.webp",
+      "sourceImageSHA256": "24b5b7d31fac7534cf40a233d091131f75683f8c84c75685b4fbfc875a878b79",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "CBOは表行数/値分布/索引等の統計情報イで処理量推定。次元表は分析軸、待ちグラフはデッドロック、ログは回復。H1実行方法比較false、H2統計情報の中身を実質示しtrue、H3名称true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06h-q27",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "98a093dbd010871693e50542966465adcb24a69db8647f7f2e464b4c3c252e7a",
+      "reviewedLessonSHA256": "6475ccda0c29faaf31b98846c6c31a2a135b25376d301cba5865099819480395",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q27.webp",
+      "sourceImageSHA256": "64f3b0ac91e91304a683c3e46df2e6382c3e353ec451d129b485f02bb7cfb43c",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "Tはチェックポイント後コミットなのでログ更新後情報REDO、ロールフォワードエ。2相ロックは同時制御、shadow pageは指定方式でなく、rollbackは取消。H2は機構のみで名称対応が残るため指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B13-04"
+      ]
+    },
+    {
+      "id": "r06h-q28",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "1a6c7e463b7f2a3418ac69dae0cec347bf5f3aede72f2bc20cf0bdf2c2794bba",
+      "reviewedLessonSHA256": "c9da0dd5a4d11027df8bc066c3417265097c8d0becbd27bf7045a199dc531e45",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q28.webp",
+      "sourceImageSHA256": "06032607c2e6b8bb686160de4368a9bb17855cff22a97b6808440abd9e8abdec",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "取引数量/売上額とディメンジョン参照キーを持つ中心表はファクトウ。サマリは集計、dimensionは分析軸、lookupは参照。H2の中心配置説明に名称対応が残るため指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B13-05"
+      ]
+    },
+    {
+      "id": "r06h-q25",
+      "status": "approved",
+      "reviewedDraftSHA256": "a0bd976e01e739c4a9e339acf1888b92f08e490d761c8ff87fff8f3013a651b7",
+      "reviewedLessonSHA256": "5abcf57cc094368198f7991e0f48b3db5de93e0d9c571581d4dc9a6f55e0b839",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q25.webp",
+      "sourceImageSHA256": "cc87b0739fad1cb9e0a0690c3e765c00e4cd0a972296adfe3da18892845dbc1a",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "サーバ側で連続SQLを実行してクライアント往復を減らす通信量ア。実行計画数/バッファ/IOが必ず減る保証なし。H1は逐次/一括の対比false、H2通信往復削減の正答true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05h-q27",
+      "status": "approved",
+      "reviewedDraftSHA256": "a742104376c06110dcb33e8b54e638cd5030fb1dffae2929269487ba42e6dbc0",
+      "reviewedLessonSHA256": "f6c981968754c3c49923e2786f4bdf2ffced7a79419c99d757aeac7434e6e923",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q27.webp",
+      "sourceImageSHA256": "a4dcfa811167f3a2c5e98e09a5e8af40e27d1785c44ab8be6d24e3d22105f116",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "誤りを問う。ア逐次SQL送信不要/イCALL/ウ通信軽減は正しい。データ変更イベントで自動起動はトリガーでエ誤り。H1起動契機比較false、H2ア/イ/ウ全て正しいと渡して残るエを特定true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06a-q31",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "082e7c20ce8c11c8c922985fd704fb78f6b4b35028dba49eed1470a45f9bb7be",
+      "reviewedLessonSHA256": "4d68a418c0a90fef0130d3dc0f2cb68f35164c3fb45a2b410ed0c5b172ac8135",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q31.webp",
+      "sourceImageSHA256": "a7dd933953d620bcfe555f485bb74ddbff8d06a30763e967a88e08bdcacb698d",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "原本想定checkpointはDBバッファの二次記憶書出し、コミット反映を回復基準にするイ。ア制約検査、ウsavepoint、エ2PC。H1もdisk反映の回復基準で正答特徴を渡すため指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B13-06"
+      ]
+    },
+    {
+      "id": "r04a-q29",
+      "status": "approved",
+      "reviewedDraftSHA256": "f27fce0ecd1f76a1c45b4d99fcc188a0e30cb844cce50b639b3033d0bf3a47b2",
+      "reviewedLessonSHA256": "35ac27b400d5be0cd1c6f24b60b567deba3d8c61d6157724d88b4729a23390b8",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q29.webp",
+      "sourceImageSHA256": "f45e11f30327603d47a5048bcff615898b01cba0b935615c2e6d39efb5e34af6",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "原図の相対時刻を追跡。T1はcheckpoint前commit、T2/T3は障害時未commit、T4は前開始/後commit、T5は後開始/後commit。REDOはT4/T5ウ。H2は判定ルールで図への適用が残りfalse、H3対象2つを直接指定true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03a-q27",
+      "status": "changes_requested",
+      "reviewedDraftSHA256": "f21f6b71df85eaf2e9af4de7f1fb7018d16efbc1212cf2a2da59f2353656b60e",
+      "reviewedLessonSHA256": "de93de27693ebb270aa6d780c6b4a643c23a174e074790e0bd5b4cfddd13d6e0",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q27.webp",
+      "sourceImageSHA256": "e21deff3e69a171cf6782d649d9c364a8c7a78efbc364bf24ad6bed056df8e24",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "正答イは媒体を失わない停止時にcheckpoint前終了分は回復不要。アはブロック化とロックの混同、ウREDOには更新後、エUNDOには更新前。H2で全誤答を消去してしまう点に指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": [
+        "B13-07"
+      ]
+    },
+    {
+      "id": "r04h-q30",
+      "status": "approved",
+      "reviewedDraftSHA256": "c340ff43f726acf60b51a80dee9c54041f62f5955b388455c4cd5554e15f0aba",
+      "reviewedLessonSHA256": "8e329d080a69bc35d5a5c075a6adcb90db103db0a317b3b1a90d4cdad5ac5a19",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q30.webp",
+      "sourceImageSHA256": "596ee4b4280890185f50bbf3568a2fb94eec1ca2f776d32260691e6e7636d332",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "method": "Scanned PDF rendered page actually opened: q26ウ/q29ア/q30ア"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "蓄積データから隠れた規則/相関発見がマイニングア。イデータマート、ウデータモデル、エ複製。H1四動作の比較false、H2購買相関の実例で定義true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03h-q31",
+      "status": "approved",
+      "reviewedDraftSHA256": "a98c741ebbea223e4e10e1c5043bed36216120f3d4fef33964c85e38fa088f94",
+      "reviewedLessonSHA256": "7edf3610282c08bbbbcf7200cce5e8f4dd404819d281c72eb86d47caa8204540",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q31.webp",
+      "sourceImageSHA256": "7e124122ae1db4b8d7588b2b355cd4e35e1ecf7a221ab933900784fb26c6a768",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "method": "pdftotext -layout answer rows read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "raw形式保存後必要に応じ加工するデータレイクはエ。アマイニング、イデータマート、ウOLAP。H1は分析か保存かの比較を問い名称/定義未提示false、H2raw保存の定義true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    }
+  ],
+  "originalDraftsFileSHA256": "245e612699c14faac7edeb0bda6c6dfcac23c29ef5f49459994981896e43053c",
+  "checks": {
+    "noDraftAssignmentGlobalBaselineCodeEditsByReviewer": true,
+    "noGitCommandsByReviewer": true,
+    "noPersonalRecordsUsed": true
+  },
+  "registered": false,
+  "published": false,
+  "limitations": "Content review only; no learner trial/browser/register/merge/publish. Pending issues are not approved.",
+  "next": "Material corrector revises7 questions and sourceNotes; independent reviewer confirms final hashes.",
+  "hashScopeNote": "初回指摘の本文は訂正前の原本・草稿を実読した確認結果。ただし主担当の修正と初回記録書込みが並行し、この記録のreviewedDraftSHA256/reviewedLessonSHA256/originalDraftsFileSHA256は修正後の対象を取得した。修正前の実Git object由来hashと修正後hash、指摘解消、最終承認はcorrection-independent-review.jsonを参照。元記録のbytesをinitial-review-snapshot.jsonへ保存した。",
+  "supersededBy": "correction-independent-review.json",
+  "originalSnapshot": {
+    "path": "initial-review-snapshot.json",
+    "sha256": "af0a54fb5a986fd697584dbda683303d51de3efb135fb4c6875b1b5ecd72ea56"
+  },
+  "auditClarifiedAt": "2026-10-27T16:53:43.451937+00:00"
+}
