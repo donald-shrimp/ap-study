@@ -3,11 +3,11 @@
     "id": "r04a-q30",
     "baseVersion": 2,
     "baseLessonSHA256": "b877af6b7bc94efdee7c4b390f0db4b47060c2d3584e55b4a80140942e127116",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q30",
-      "summary": "イ。可用性はACIDの四特性に含まれません。",
+      "summary": "トランザクションのACID四特性を理解し、可用性など別の品質指標を除外する。",
       "explanation": "ACIDはAtomicity（原子性）、Consistency（一貫性）、Isolation（独立性・隔離性）、Durability（耐久性）です。可用性はシステムが利用可能な度合いで、トランザクションの四特性とは別です。",
       "choiceReasons": [
         "一貫性はCに当たり、整合性制約を満たす性質です。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補が、トランザクションの実行結果とシステムの利用状態のどちらを述べるか分けます。",
+          "text": "問いは**含まれない性質**を一つ選びます。ACIDはDBのトランザクションが守る性質の頭文字で、サービスが利用できる割合などとは目的が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ACIDのA,C,I,Dを日本語の性質へ対応させます。",
-          "revealsAnswer": false
+          "text": "AはAtomicity（原子性：全て実行か全て取消し）、CはConsistency（一貫性：整合性制約を保つ）です。IはIsolation（独立性：並行実行の干渉を制御）、DはDurability（耐久性：コミット後も更新が残る）です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "原子性、一貫性、独立性、耐久性の一覧にない候補を選びます。",
+          "text": "**可用性**はシステムが必要な時に使える度合いで、ACIDの頭文字には対応しません。ほかの三つがA/C/Dに含まれることも確認してください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ACIDの英語の各頭文字が何を指すか知らず、可用性と一貫性を取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "問いは**含まれない性質**を一つ選びます。ACIDはDBのトランザクションが守る性質の頭文字で、サービスが利用できる割合などとは目的が異なります。",
+          "remainingWork": "四つの性質とシステム可用性を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AはAtomicity（原子性：全て実行か全て取消し）、CはConsistency（一貫性：整合性制約を保つ）です。IはIsolation（独立性：並行実行の干渉を制御）、DはDurability（耐久性：コミット後も更新が残る）です。",
+          "remainingWork": "選択肢とACIDの英語の対応を調べる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
+        },
+        {
+          "newInformation": "**可用性**はシステムが必要な時に使える度合いで、ACIDの頭文字には対応しません。ほかの三つがA/C/Dに含まれることも確認してください。",
+          "remainingWork": "含まれない性質を選ぶ",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q30.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: 489fca9594533fc9faaa085f525ed4e5c23952f0306d38d3b334165d67fa5d05。",
+        "context記録の正答イについて作者が原本から確認。根拠: ACID=Atomicity,Consistency,Isolation,Durability。原本は含まれないものを問う。イ可用性が対象。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "8e5cfe54a9185fb3de8134fdb1316e40bc2dc9ece0147f7d4cd39ca40d82cfbe",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q26",
-      "summary": "イ。BASEの結果整合性は、更新が最終的に全ノードへ反映されることです。",
+      "summary": "BASEの結果整合性を、更新直後の全ノード一致や二相コミットと区別する。",
       "explanation": "BASEは基本的な可用性、状態の一時的不確定性、結果整合性を重視する考え方です。分散ノードの更新はすぐ全てに一致しなくても、正常な状態なら最終的に反映されます。\n反映途中にはノードごとに異なる値が読まれることがあります。全ノードが常時同じ結果を返す強い整合性とは区別します。",
       "choiceReasons": [
         "2相コミットで全ノードの更新を同期させることは、このBASEの結果整合性の説明ではありません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題のノード間の反映には時間差があり得ます。更新直後と、反映を終えた後を分けて考えます。",
+          "text": "問題の前提は『複数のノードでデータを複製し、更新を他のノードへ反映する』ことです。**更新直後**と**十分に時間が経過した後**を区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一つのノードで値を変え、他ノードへ後から伝える場合、途中の参照結果は同じとは限りません。",
-          "revealsAnswer": false
+          "text": "BASEのEはEventual consistency（結果整合性）です。更新が直ちに全ノードで一致しなくても、障害などがなく更新の伝播が進めば**最終的に収束する**性質です。途中の読取り結果は異なる場合があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "2相コミットで同期をそろえる説明と、正常なら時間経過で一致する説明の違いを確認しましょう。",
+          "text": "2相コミットによる同期的な一斉確定や、同時参照で常に同じ値を返すことまでは求めません。障害がなければ更新が**いつか全ノードへ反映**される記述を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "全ノードへの更新伝播を、必ず同時・即時に完了する仕組みだと捉える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "問題の前提は『複数のノードでデータを複製し、更新を他のノードへ反映する』ことです。**更新直後**と**十分に時間が経過した後**を区別します。",
+          "remainingWork": "更新直後と収束後の時点の区別",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "BASEのEはEventual consistency（結果整合性）です。更新が直ちに全ノードで一致しなくても、障害などがなく更新の伝播が進めば**最終的に収束する**性質です。途中の読取り結果は異なる場合があります。",
+          "remainingWork": "結果整合性の定義と一時的不一致",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
+        },
+        {
+          "newInformation": "2相コミットによる同期的な一斉確定や、同時参照で常に同じ値を返すことまでは求めません。障害がなければ更新が**いつか全ノードへ反映**される記述を選びます。",
+          "remainingWork": "同期更新や同時整合と比較した最終判断",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q26.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: e10568dbb81465b3135a75cc8e80f249624b4be1deec6ba4865d553e6b4693c2。",
+        "context記録の正答イについて作者が原本から確認。根拠: 原本BASE、分散ノード、更新反映の設問。イ=障害なければいずれ全ノード反映。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "324a021dc58dbd29be654015999d52bc65d5cafe611e1b9e9c9832704bbe45b1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q26",
-      "summary": "ウ。APの分散システムは、可用性と分断耐性を重視し、整合性を保証しません。",
+      "summary": "CAP定理で可用性Aと分断耐性Pを優先する場合、何を保証できないかを判定する。",
       "explanation": "CAP定理のCは整合性、Aは可用性、Pは分断耐性です。ネットワーク分断が起きる状況で、整合性と可用性を同時に完全には保証できません。APは分断時にも要求に応答することを優先するため、複数ノードで同じ最新値を返す整合性は保証しません。",
       "choiceReasons": [
         "ネットワーク分断下でC・A・Pの全てを保証できるとする記述はCAP定理に反します。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "まずC・A・Pを、整合性・可用性・分断耐性に対応させます。設問で指定されている二文字を確認します。",
+          "text": "CAPのCはConsistency（整合性）、AはAvailability（可用性）、PはPartition tolerance（ネットワーク分断への耐性）です。ここでAはACIDのAtomicityとは違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ネットワークが分断してノード間の最新値を同期できない場合に、応答を続けるか、整合するまで応答を抑えるか考えます。",
-          "revealsAnswer": false
+          "text": "ネットワークが分断されても要求へ応答する**AとP**を優先するなら、離れたノードが更新を即時共有できないことがあります。そのため、全読取りが同じ最新データを返す整合性Cを同時に保証できません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "APは可用性と分断耐性の組合せなので、整合性を保証しない説明を選びます。",
+          "text": "APでは可用性と分断耐性を優先し、分断中の**強い整合性は保証しない**説明が一致します。CPなら分断中の要求を断る場合があり、AとPとは異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "AをACIDの原子性と混同し、CAPの三要素とネットワーク分断時の制約が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CAPのCはConsistency（整合性）、AはAvailability（可用性）、PはPartition tolerance（ネットワーク分断への耐性）です。ここでAはACIDのAtomicityとは違います。",
+          "remainingWork": "CAP各頭文字とACIDとの相違",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ネットワークが分断されても要求へ応答する**AとP**を優先するなら、離れたノードが更新を即時共有できないことがあります。そのため、全読取りが同じ最新データを返す整合性Cを同時に保証できません。",
+          "remainingWork": "ネットワーク分断下のAPのトレードオフ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
+        },
+        {
+          "newInformation": "APでは可用性と分断耐性を優先し、分断中の**強い整合性は保証しない**説明が一致します。CPなら分断中の要求を断る場合があり、AとPとは異なります。",
+          "remainingWork": "APとCPのふるまいを正答肢へ対応",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q26.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: 87a352f690f5829c481da2857f9d35a1fb6a8dbb66d7de8250415d2b71f41ced。",
+        "context記録の正答ウについて作者が原本から確認。根拠: 原本のCAP/AP。ウがAとPを満たしC保証を選ばないもの。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "05e51c2f69299477fbe01125fca6b38aa38df8c0c54ac384c02f842531c3c576",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q29",
-      "summary": "イの2行。MZ1000とXZ3000が残ります。",
+      "summary": "相関副問合せのNOT EXISTSを製品ごとに評価し、残る製品番号の件数を求める。",
       "explanation": "相関副問合せは、外側の製品番号と同じ番号で在庫数>30の在庫行を探します。NOT EXISTSなので、そのような行が一つもない製品を残します。\nAB1805には150、CC5001には200と40、ZZ9900には130の行があるので除外します。MZ1000は在庫行自体がなく、XZ3000は30と20でどちらも30を超えません。残る製品番号は二つで、DISTINCT後も2行です。",
       "choiceReasons": [
         "XZ3000だけでなく、在庫行が存在しないMZ1000もNOT EXISTSを満たすので1行ではありません。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "副問合せの条件は「同じ製品番号」かつ「在庫数>30」です。倉庫別の在庫を合計するSQLではありません。",
+          "text": "`製品.製品番号 = 在庫.製品番号`は、**外側で調べている製品の番号**と一致する在庫行だけを副問合せで調べる条件です。`在庫数 > 30`は30を含みません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "製品ごとに30を超える在庫行が一つでもあれば除外します。在庫行がない製品はEXISTSが偽なので残ります。",
+          "text": "`EXISTS`は条件に合う在庫行が1件でもあれば真、`NOT EXISTS`は**1件もなければ真**です。在庫行が全くない製品も真になります。倉庫別の在庫を足すのでなく、30超の行の有無で判定します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "AB1805・CC5001・ZZ9900の30超を確認し、MZ1000の在庫なしとXZ3000の30・20を判定します。残る製品番号を数えましょう。",
+          "text": "AB1805には150、CC5001には200/40、ZZ9900には130という**30超の在庫行**があります。MZ1000は在庫行なし、XZ3000は30と20だけです。この二つの製品番号について`DISTINCT`後の行数を数えましょう。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "NOT EXISTSを『在庫数が30以下の行がある』と解釈し、在庫行がない製品を除外してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`製品.製品番号 = 在庫.製品番号`は、**外側で調べている製品の番号**と一致する在庫行だけを副問合せで調べる条件です。`在庫数 > 30`は30を含みません。",
+          "remainingWork": "外側の製品番号と副問合せの関連を読む",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`EXISTS`は条件に合う在庫行が1件でもあれば真、`NOT EXISTS`は**1件もなければ真**です。在庫行が全くない製品も真になります。倉庫別の在庫を足すのでなく、30超の行の有無で判定します。",
+          "remainingWork": "NOT EXISTSと在庫無しの場合の真偽を理解",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AB1805には150、CC5001には200/40、ZZ9900には130という**30超の在庫行**があります。MZ1000は在庫行なし、XZ3000は30と20だけです。この二つの製品番号について`DISTINCT`後の行数を数えましょう。",
+          "remainingWork": "全製品を具体的に判定し該当2製品を示す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q29.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: 9381436bb6ed35e5792fbf87c2d5ea2687f95e850361a05edb612fb416a1fdb8。",
+        "context記録の正答イについて作者が原本から確認。根拠: 原本表: 30超の在庫が無いのはMZ1000(在庫無し)とXZ3000(30,20)。正答2行。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "008b2bf6b5cabcd762b6e5f23c2f3feab5011f6bcdbda4cffd8a85cf1b5b8841",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q29",
-      "summary": "ウ。キーと値でデータを管理するキーバリュー型はNoSQLの代表的な分類です。",
+      "summary": "NoSQLの代表的なデータモデルを他のDB用途・方式と区別する。",
       "explanation": "NoSQLにはキーバリュー型、ドキュメント型、列指向型、グラフ型など、従来の関係データモデルとは異なる方式があります。ウはキーに対応する値として様々な形式のデータを管理するキーバリュー型です。\n他の選択肢は、関係データモデルの拡張や、データベースの用途・格納内容を述べており、NoSQLの方式を示していません。",
       "choiceReasons": [
         "アは関係モデルにオブジェクトの型や継承を取り入れるオブジェクト関係データベースです。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補にある「モデルの拡張」「過去情報の蓄積」「キーとデータの対応」「メタ情報の管理」を比べます。保存方式の分類を述べるものと、用途を述べるものを分けましょう。",
+          "text": "四肢には『関係モデルの拡張』『過去と現在の蓄積』『キーを使う保存方式』『メタ情報の管理』が混ざっています。データの**格納モデル**を表しているかを見ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "NoSQLの例には、関係表の行・列へ一律に当てはめず、識別子から値を得る保存方式があります。",
+          "text": "NoSQLにはキーと値の対応で管理する**キーバリュー型**、ドキュメント型、グラフ型などがあります。キーバリュー型では一つのキーから対応する値を取得します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "一つのキーにデータを対応付ける記述を、キーバリュー型という分類と照合します。",
+          "text": "オブジェクト関係DBは関係モデルの拡張、過去と現在の意思決定データの蓄積はデータウェアハウス、データ項目の定義管理はデータディクショナリです。**キーに多様な値を対応付ける**説明がNoSQLです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "NoSQLのキーバリュー型とデータウェアハウス・メタデータ管理の違いが曖昧。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢には『関係モデルの拡張』『過去と現在の蓄積』『キーを使う保存方式』『メタ情報の管理』が混ざっています。データの**格納モデル**を表しているかを見ます。",
+          "remainingWork": "格納方式と用途・管理情報の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "NoSQLにはキーと値の対応で管理する**キーバリュー型**、ドキュメント型、グラフ型などがあります。キーバリュー型では一つのキーから対応する値を取得します。",
+          "remainingWork": "NoSQLキーバリュー型の定義",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "オブジェクト関係DBは関係モデルの拡張、過去と現在の意思決定データの蓄積はデータウェアハウス、データ項目の定義管理はデータディクショナリです。**キーに多様な値を対応付ける**説明がNoSQLです。",
+          "remainingWork": "他3肢のDBの役割と正答の対応",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q29.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: 5bc1ffa17654a66e47d5568b1a8943f6ef7cf59cbfb3f49d8382170ad977d1e1。",
+        "context記録の正答ウについて作者が原本から確認。根拠: 原本のウは様々な形式のデータを一つのキーに対応付けるキーバリュー型。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "2618ddb4a69a9762c44855444a569304f19e794b580e6c3dd335971970936279",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q29",
-      "summary": "ア。undo/redoには更新前情報と更新後情報の両方が必要です。",
+      "summary": "undo/redo障害回復で更新前・更新後のどちらのログ情報を必要とするか決める。",
       "explanation": "undoは未完了の更新を取り消して元へ戻す処理で、更新前の値が必要です。redoは完了済みの更新を障害回復時に再適用する処理で、更新後の値が必要です。undo/redo方式は両方を行うため、ログに更新前・更新後の情報を保持します。",
       "choiceReasons": [
         "取り消すための更新前情報と、再適用するための更新後情報が両方必要です。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "表の列を「更新前」「更新後」と確認します。undoで戻す先とredoで作る状態をそれぞれ考えます。",
+          "text": "障害回復には**未完了処理の取消し**と、**確定処理の再適用**の二種類があります。データを戻す方向か、再び進める方向かを分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "undoは更新をなかったことにし、redoは更新をもう一度反映します。各操作で必要な値を対応させます。",
-          "revealsAnswer": false
+          "text": "undoは更新を取消して**更新前の値**に戻すため、更新前情報が要ります。redoはコミット済み更新を再適用して**更新後の値**を得るため、更新後情報が要ります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "undoには更新前、redoには更新後が必要なので、表で両方「必要」の組合せを選びます。",
+          "text": "設問は**undo/redoの両方**を行う方式です。更新前情報と更新後情報がそれぞれ必要かを、原本の二列表に当てはめて選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "undo/redoを同一の復元作業とみなし、更新前後のログの役割を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "障害回復には**未完了処理の取消し**と、**確定処理の再適用**の二種類があります。データを戻す方向か、再び進める方向かを分けます。",
+          "remainingWork": "取消しと再適用の二方向",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "undoは更新を取消して**更新前の値**に戻すため、更新前情報が要ります。redoはコミット済み更新を再適用して**更新後の値**を得るため、更新後情報が要ります。",
+          "remainingWork": "undo・redoそれぞれに必要な値",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
+        },
+        {
+          "newInformation": "設問は**undo/redoの両方**を行う方式です。更新前情報と更新後情報がそれぞれ必要かを、原本の二列表に当てはめて選びます。",
+          "remainingWork": "両列を必要とする組合せの選択",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q29.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: da5e8e7c51da3bab9199e2200370824d749c145bd3f876af24c02e11c2f65326。",
+        "context記録の正答アについて作者が原本から確認。根拠: 原本二列表はア=前後とも必要、イ=前のみ、ウ=後のみ、エ=不要。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "4786cff4b7569b859866ce15c6fa022fd8ebc097df688a171274d0c99af2d627",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q28",
-      "summary": "べき等とは、同じ操作を繰り返しても1回と同じ結果になることです。",
+      "summary": "べき等操作と原子性・複製・直列化可能性の意味を区別する。",
       "explanation": "データベースの状態に同じ操作を1回適用した結果と、2回以上適用した結果が等しければ、べき等です。例えば値を常に100に設定する操作は、繰り返しても100のままです。一方、100を加算する操作は回数で結果が変わります。アがこの性質を述べています。",
       "choiceReasons": [
         "同じ操作の1回実行と複数回実行の結果が同じというべき等の定義です。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "比べる対象が「同じ操作の実行回数」なのか、「取引の全部成功」なのかを確認します。",
+          "text": "例を比較します。`値を100に設定`は何回実行しても100ですが、`値に100を加える`は回数で値が変わります。**同じ操作を繰り返した結果**に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "値を100に設定する操作と、100を加える操作をそれぞれ2回行った状態を考えます。",
-          "revealsAnswer": false
+          "text": "このように、一度の適用と何度適用した場合も**最終状態が同じ**性質をべき等（idempotent）と呼びます。再送されても結果が重複しない設計に役立ちます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "べき等ではf(f(s))=f(s)です。1回後と繰返し後の状態を比べる記述に対応させます。",
+          "text": "全処理が成功か失敗かは原子性、他ノードにも実行するのは複製、並行実行が逐次実行と等価なのは直列化可能性です。**一度と複数回の同じ操作で結果が変わらない**説明を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "同じ結果を繰り返し得ることと、複数処理の一括成功を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例を比較します。`値を100に設定`は何回実行しても100ですが、`値に100を加える`は回数で値が変わります。**同じ操作を繰り返した結果**に注目します。",
+          "remainingWork": "同じ操作の反復と加算との対比",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "このように、一度の適用と何度適用した場合も**最終状態が同じ**性質をべき等（idempotent）と呼びます。再送されても結果が重複しない設計に役立ちます。",
+          "remainingWork": "べき等の定義と実用例",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
+        },
+        {
+          "newInformation": "全処理が成功か失敗かは原子性、他ノードにも実行するのは複製、並行実行が逐次実行と等価なのは直列化可能性です。**一度と複数回の同じ操作で結果が変わらない**説明を選びます。",
+          "remainingWork": "他の性質と比較した正答肢の特定",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q28.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: 728b280de26d2c3bf04c7b0150a29a526999a083facc11d8eb68f20e820e760d。",
+        "context記録の正答アについて作者が原本から確認。根拠: 原本ア=同じ操作1回と複数回で結果同一。イ原子性、ウ複製、エ直列化可能性。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q30",
     "baseVersion": 2,
     "baseLessonSHA256": "bfb959f67b60bd57c624881bb556dc1ed84de9c3d182390fe45a37b6f0973408",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q30",
-      "summary": "イ。学生ごとに分け、実施回の昇順で番号を付けます。",
+      "summary": "相関結合で求めた学生ごとの初回実施行を、ROW_NUMBERの区分と並べ替えで再現する。",
       "explanation": "SQL文1は学生番号ごとにMIN(実施回)を求め、その実施回の行を元表から選びます。つまり各学生の初回の成績です。\nSQL文2ではROW_NUMBERの番号1を選ぶので、PARTITION BY 学生番号で学生ごとに番号を振り直し、ORDER BY 実施回で小さい順に並べます。結果はS01の回1、S02の回2、S03の回3、S04の回6となります。",
       "choiceReasons": [
         "PARTITION BYがないので全体で一つの番号列となり、番号1の一行しか得られません。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "SQL文1のMINは得点ではなく実施回に掛かっています。S03なら実施回3、9、12のうちどの行を取り出すかを確認します。",
+          "text": "SQL文1の`成績 R1`は、成績表に**R1という一時的な別名**を付けたものです。`(...) R2`は学生ごとの最小実施回を求めた副問合せ結果の別名。`R1`と`R2`を学生番号と実施回で結合して**各学生の初回の行**を取り出します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "SQL文2は番号1を選びます。各学生から一行ずつ選ぶには、学生番号が変わるたびに番号が1から始まる必要があります。",
+          "text": "SQL文2の`ROW_NUMBER()`は並び順に1,2,…の番号を付けます。各学生から番号1を一行選ぶには、**学生ごとに番号を1から振り直す区切り**と、**実施回の早い順**の二つを指定します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "学生番号でPARTITIONし、最小の実施回が先頭になるよう実施回の昇順でORDERします。これを両方指定したイです。",
+          "text": "`PARTITION BY 学生番号`で学生ごとに区切り、`ORDER BY 実施回`で小さい回を先に並べます。例えばS03は得点78の回9でなく**回3が初回**です。両方を指定する肢を選びましょう。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SQLの`R1`と`R2`が表の別名だと分からず、`MIN(実施回)`と得点の最小値を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SQL文1の`成績 R1`は、成績表に**R1という一時的な別名**を付けたものです。`(...) R2`は学生ごとの最小実施回を求めた副問合せ結果の別名。`R1`と`R2`を学生番号と実施回で結合して**各学生の初回の行**を取り出します。",
+          "remainingWork": "R1/R2の別名とMINによる初回取得",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SQL文2の`ROW_NUMBER()`は並び順に1,2,…の番号を付けます。各学生から番号1を一行選ぶには、**学生ごとに番号を1から振り直す区切り**と、**実施回の早い順**の二つを指定します。",
+          "remainingWork": "ROW_NUMBERの区切りと順序の二要件",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`PARTITION BY 学生番号`で学生ごとに区切り、`ORDER BY 実施回`で小さい回を先に並べます。例えばS03は得点78の回9でなく**回3が初回**です。両方を指定する肢を選びましょう。",
+          "remainingWork": "PARTITION/ORDERを列名まで適用し正答構文を示す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q30.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: aeee2377c0a82ed407351b6a7c578e9b9ce06a67612ddaa152309a35e17da3bc。",
+        "context記録の正答イについて作者が原本から確認。根拠: 原本成績表S03の回3,9,12、SQL文1 MIN実施回を抽出。正答イPARTITION BY 学生番号 ORDER BY 実施回。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "b4a5c9b8f32fc2af3069c8e434018514b879560e668c682f42704179e040d6c1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q29",
-      "summary": "イ。地域から仕入先、仕入先から仕入は一対多で、各仕入は一部品に対応します。",
+      "summary": "UMLオブジェクト図のリンクから、クラス間の多重度（1対多など）を読み取る。",
       "explanation": "大阪という一地域に仕入先25と37が結び付いているので、地域1に対して仕入先は複数です。仕入先11には仕入#01、#02、#03があり、仕入先1に対して仕入は複数です。\n各仕入は一つの部品へ結び付き、同じ部品136などには複数の仕入が結び付いています。この一対多、多対一の組合せがイです。多重度は関連線の相手側に書かれる点に注意します。",
       "choiceReasons": [
         "地域と仕入先を一対一にしていますが、大阪には仕入先25と37の二つがあります。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "最初に大阪から出る線を数えます。25と37という二つの仕入先へつながるので、地域一つに仕入先一つという候補は除けます。",
+          "text": "図で**大阪という一つの地域**から仕入先25と37の2件へ線が伸びています。『地域1件に対応する仕入先は複数』です。UMLの`*`は**0件以上の多**を表します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "次に仕入先11から#01〜#03への三本、部品136へ入る複数の線を確認します。仕入一件から出る仕入先・部品への線は各一本です。",
+          "text": "仕入先11からは仕入#01～#03へ、仕入#01からは部品136へ線がつながります。一つの仕入は**仕入先1件と部品1件**に対応します。一方、同じ部品へ複数の仕入がつながり得ます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "地域側1・仕入先側*、仕入先側1・仕入側*、仕入側*・部品側1を並べたイが対応します。",
+          "text": "関連線の**反対側の端**へそのクラスの多重度を書きます。地域側`1`・仕入先側`*`、仕入先側`1`・仕入側`*`、仕入側`*`・部品側`1`となる図を選んでください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "関連端の1と*を付ける向きと、複数のリンクが意味するものを取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図で**大阪という一つの地域**から仕入先25と37の2件へ線が伸びています。『地域1件に対応する仕入先は複数』です。UMLの`*`は**0件以上の多**を表します。",
+          "remainingWork": "大阪の地域対仕入先と*の意味",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "仕入先11からは仕入#01～#03へ、仕入#01からは部品136へ線がつながります。一つの仕入は**仕入先1件と部品1件**に対応します。一方、同じ部品へ複数の仕入がつながり得ます。",
+          "remainingWork": "仕入先・仕入・部品のリンクを数える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "関連線の**反対側の端**へそのクラスの多重度を書きます。地域側`1`・仕入先側`*`、仕入先側`1`・仕入側`*`、仕入側`*`・部品側`1`となる図を選んでください。",
+          "remainingWork": "各関連端の多重度を一意に提示",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q29.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: f173d2d095e1003b75a487bfece84912c553fb88c4db37dafb2484e69283be02。",
+        "context記録の正答イについて作者が原本から確認。根拠: 原本大阪→仕入先25,37、仕入先11→#01~#03、仕入#01→部品136、部品136には#01,#05等。選択肢イ。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "080c6b49d1af92bb3eb95c24d9b2b667e896053d12f0bf04f37069790c3994ab",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q28",
-      "summary": "イ。ノードとリレーションシップで構造化します。",
+      "summary": "グラフ指向DBの構成要素をドキュメント・キーバリュー・列指向の各データモデルと区別する。",
       "explanation": "グラフ指向DBは対象をノード、対象間の関係をリレーションシップとして表します。人物と友人関係のようなつながりをたどりやすく、ノードと関係の双方にプロパティを持たせられます。",
       "choiceReasons": [
         "階層データをドキュメントとして格納するドキュメント指向DBです。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの説明で、データを表す単位が文書・点と線・キーと値・キーと列のどれか、表に整理します。",
+          "text": "保存単位で四肢を比べます。**文書**、**点と点のつながり**、**キーと単一の値**、**キーと複数の列**は別のNoSQLモデルです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "点がノード、線がリレーションシップ、付加情報がプロパティに当たる記述を探します。",
+          "text": "グラフは人物・駅などの**ノード（頂点）**と、友人・路線などの**リレーション（辺）**で関係を表現します。さらにノードや辺に名前・日時などの**プロパティ（属性）**を付けられます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ノード同士をリレーションシップで結び、双方にプロパティを持つ候補です。",
+          "text": "ドキュメント指向DBは階層的な文書、キーバリュー型はキー→値、列指向型はキーと列の集合を中心に格納します。**ノードを関係で結び属性を保持**する肢が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ノードとリレーションの意味が分からず、すべてのNoSQLを同じ形式だと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "保存単位で四肢を比べます。**文書**、**点と点のつながり**、**キーと単一の値**、**キーと複数の列**は別のNoSQLモデルです。",
+          "remainingWork": "四つのNoSQLモデルの保存単位",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "手順・定義を与えるが本人に式の計算や対象肢の比較が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "グラフは人物・駅などの**ノード（頂点）**と、友人・路線などの**リレーション（辺）**で関係を表現します。さらにノードや辺に名前・日時などの**プロパティ（属性）**を付けられます。",
+          "remainingWork": "ノード・リレーション・プロパティの定義と例",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ドキュメント指向DBは階層的な文書、キーバリュー型はキー→値、列指向型はキーと列の集合を中心に格納します。**ノードを関係で結び属性を保持**する肢が該当します。",
+          "remainingWork": "他のモデルの区別と正答選択",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢・前段を併せると正答が一意に確定する情報を与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q28.webp をGitHubから取得して画像を表示し、設問と全4肢・図表を照合。contextにある原本SHA256: a073ff917466adb776987c70d670de2cce52ba3aeea311becb68cd9c7468ce2e。",
+        "context記録の正答イについて作者が原本から確認。根拠: 原本イ=ノード/リレーション/プロパティ。アドキュメント、ウキー値、エ列指向。",
+        "第三者の独立レビュー、IPA公式解答PDFとの別途照合、公開データへの統合は未実施。"
+      ]
     }
   },
   {
