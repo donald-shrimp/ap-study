@@ -22,7 +22,7 @@
 - 同じ組の `context.json`：原問・全肢・公式正答・原本画像の参照。`drafts.json`：旧教材から始める改稿。`reviews.json`：作者とは別担当の最終確認。
 - `registrations.json`：統合済みの組。`progress.json`：担当・確認状態のスナップショット。初期の39組は全件未着手。
 
-基盤がmainへ取り込まれるまでは `content/ap-a-quality-pilot` を起点に担当用の作業ブランチを作る。取り込み後は最新mainを起点にする。担当組の割当ては統合担当が調整し、既に別担当がclaimした組を取り直さない。
+基盤がmainへ取り込まれるまでは、直前の確認済み作業ブランチを起点に次の作業ブランチを作り、PRのbaseも直前のブランチにする。初回の基盤は `content/ap-a-quality-pilot`。後続の確認済み教材と訂正台帳を保持して積み重ね、最後のマージまで途中の内容を落とさない。main取り込み後は最新mainを起点にする。担当組の割当ては統合担当が調整し、既に別担当がclaimした組を取り直さない。
 
 作者が変更するのは自分の組のassignmentとdrafts、確認者が変更するのは自分の組のreviewsと補助記録。`data/lessons/`・`data/questions.json`・生成パック・共有ルール・他の組・baselineは統合担当が扱う。未確認の組を作成元へ直接コピーしない。
 
@@ -96,3 +96,11 @@ acceptは20問全件の独立承認・原本と最終教材のハッシュを照
 progressのapprovedは独立承認後に登録済みの件数であり、公開済みの意味ではない。公開前の先行20問はレビュー可能なPRと検証記録へまとめ、780問は未着手の担当割りとして引き渡す。旧教材は利用できる状態を保ち、新基準の確認が終わった範囲だけを進捗として数える。
 
 先行20問の[実アプリ検証結果](../work/ap/objective-quality/batches/pilot-00/review/browser/results.json)と[画面例](../work/ap/objective-quality/batches/pilot-00/review/browser/r07h-q52-390.png)も保存する。検証は隔離した合成記録を用い、本人の記録やアカウントを使わない。
+
+## 独立確認済みの文字起こし訂正
+
+原本画像と正答を保ったまま、確認済みの選択肢の先頭表記を訂正する場合は、`source-corrections.json`へ別登録する。旧baseline・inventory・lessonの承認を上書きせず、旧文字起こしと旧レビューを台帳に保存する。新しい文字起こし・現行レビュー・独立確認記録・原本画像を実ハッシュで結び、指定した先頭表記と実作者以外が変わっていないことを検証する。現在の形式はこの限定的な訂正に使い、正答や図の変更へ流用しない。
+
+登録後は `python tools/apply-transcriptions.py` で反映し、`python tools/apply-hints.py` と生成チェックで訂正・解説・版を確認する。問題版はlesson改訂と訂正それぞれで1回増え、再生成・再登録では増えない。紙ペン分類のmode/reasonは保ち、訂正IDの参照は現行教材のexact hashを必須にする。訂正前の問題・root/年度別の監査は転記履歴へ保存する。旧記録のsnapshotや結果は変更しない。
+
+`python tests/ap-source-corrections.py` は未承認・古い確認・自己確認・分類参照不正・未知の原文変更の拒否と冪等性を、`python tests/ap-source-correction-browser.py` はオフライン表示・旧版の再開・新版への別試行・バックアップを確認する。

@@ -57,4 +57,4 @@
 
 620問の31組は未着手。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
 
-第2回で判明したr04a-q13の既存文字起こし誤記2箇所は、[別担当確認済みの訂正草稿](batches/batch-06/review/source-correction-draft.json)と[確認記録](batches/batch-06/review/source-correction-independent-author-3.json)を保存。ヒント・解説の承認と分け、原問への訂正適用は保留している。
+第2回で判明したr04a-q13の文字起こし誤記2箇所は、独立確認済みの内容を[訂正台帳](source-corrections.json)で反映し、問題版を3から4へ更新した。旧文字起こし・旧レビュー・baseline・旧学習記録は保持。[訂正後の画面・保存検証](review/source-correction-application/results.json)を保存している。

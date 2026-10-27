@@ -41,6 +41,7 @@ class QualityGates(unittest.TestCase):
         # Start from the immutable source bank even if the real pilot has already
         # been registered by the integration owner during this parallel task.
         quality.write(work/'registrations.json', [])
+        quality.write(work/'source-corrections.json', [])
         shutil.copyfile(work/'baseline/questions.json', cls.root/'data/questions.json')
         shutil.copytree(work/'baseline/lessons', cls.root/'data/lessons', dirs_exist_ok=True)
         # Real remaining batches may now be claimed, revised or registered.

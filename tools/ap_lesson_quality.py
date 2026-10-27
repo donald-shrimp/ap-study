@@ -53,6 +53,45 @@ def _safe_file(root, relative):
     return path
 
 
+def _source_corrections(root, work, original):
+    """Validate separately approved spelling corrections without rewriting history."""
+    path = work / 'source-corrections.json'
+    entries = _list_by_id(read(path), 'Source corrections') if path.is_file() else {}
+    result = {}
+    for id, entry in entries.items():
+        require(id in original and entry.get('kind') == 'choice-prefix-spelling', 'Invalid source correction: ' + id)
+        q = original[id]
+        require(entry.get('originalQuestionSHA256') == digest(q), 'Correction baseline changed: ' + id)
+        old = entry['originalTranscription']; old_review = entry['originalReview']
+        require(entry.get('originalTranscriptionSHA256') == digest(old) and entry.get('originalReviewSHA256') == digest(old_review), 'Correction history changed: ' + id)
+        require(old.get('id') == id and old.get('format') == 'hitomon-markdown-math-v1' and all(digest(old.get(k)) == digest(q.get(k)) for k in ['stem', 'choices', 'image', 'imageAlt']), 'Correction history differs from original: ' + id)
+        require(old_review.get('status') == 'confirmed' and old_review.get('reviewer') and old_review['reviewer'] != old.get('author') and old_review.get('reviewedTranscriptionSHA256') == digest(old), 'Invalid previous transcription review: ' + id)
+        exam = id.split('-q')[0]
+        record = _list_by_id(read(root/'data/transcriptions'/f'{exam}.json'), 'Transcriptions')[id]
+        review = _list_by_id(read(root/'data/transcription-reviews'/f'{exam}.json'), 'Transcription reviews')[id]
+        require(digest(record) == entry.get('transcriptionSHA256') and digest(review) == entry.get('reviewSHA256'), 'Correction source/review changed: ' + id)
+        require(isinstance(record.get('author'), str) and record['author'].strip() and review.get('reviewer') and record['author'] != review['reviewer'], 'Independent correction reviewer required: ' + id)
+        require(review.get('status') == 'confirmed' and review.get('reviewedTranscriptionSHA256') == digest(record) and review.get('evidence') and review.get('issues') == [] and all(review.get('checks', {}).get(k) is True for k in ['wording','math','tables','figures','choices','source']), 'Unconfirmed source correction: ' + id)
+        expected = copy.deepcopy(old); expected['author'] = record['author']
+        replacements = entry.get('replacements')
+        require(isinstance(replacements, list) and replacements, 'Missing spelling corrections: ' + id)
+        seen = set()
+        for replacement in replacements:
+            index = replacement.get('index'); before = replacement.get('beforePrefix'); after = replacement.get('afterPrefix')
+            require(type(index) is int and 0 <= index < len(expected['choices']) and index not in seen and isinstance(before, str) and before and isinstance(after, str) and after and before != after, 'Invalid spelling replacement: ' + id)
+            seen.add(index); text = expected['choices'][index]['text']
+            require(text.startswith(before), 'Correction prefix differs from original: ' + id)
+            expected['choices'][index]['text'] = after + text[len(before):]
+        require(digest(record) == digest(expected), 'Correction changes unrelated transcription fields: ' + id)
+        hashes = [file_digest(_safe_file(root, p)) for p in q['sourceImages']]
+        require(hashes == record.get('sourceImageSHA256') == old.get('sourceImageSHA256') and review.get('figureSHA256') == old_review.get('figureSHA256') and review.get('sourceEvidenceSHA256', {}) == old_review.get('sourceEvidenceSHA256', {}), 'Correction source or figures changed: ' + id)
+        approval = read(_safe_file(root, entry['independentApproval']))
+        require(digest(approval) == entry.get('independentApprovalSHA256') and approval.get('id') == id and approval.get('reviewer') == review['reviewer'] and approval.get('reviewedTranscriptionSHA256') == digest(record) and approval.get('baseRecordSHA256') == digest(old) and approval.get('issues') == [] and all(approval.get('checks', {}).get(k) is True for k in ['wording','math','tables','figures','choices','source']), 'Correction independent approval changed: ' + id)
+        require(len(hashes) == 1 and approval.get('sourceImageSHA256') == hashes[0] and approval.get('officialAnswer') == q['choices'][q['answer']]['label'], 'Correction original/answer mismatch: ' + id)
+        result[id] = record
+    return result
+
+
 def load_workspace(root):
     root = Path(root).resolve()
     work = root / WORK
@@ -99,7 +138,7 @@ def load_workspace(root):
             require(source_cache[path] == expected, 'Original source changed: ' + path)
     registrations = read(work / 'registrations.json')
     require(isinstance(registrations, list) and len(set(registrations)) == len(registrations) and all(b in assignments for b in registrations), 'Invalid registered batches')
-    return {'root': root, 'work': work, 'manifest': manifest, 'original': original, 'lessons': lessons, 'inventory': inventory, 'assignments': assignments, 'registrations': registrations}
+    return {'root': root, 'work': work, 'manifest': manifest, 'original': original, 'lessons': lessons, 'inventory': inventory, 'assignments': assignments, 'registrations': registrations, 'sourceCorrections': _source_corrections(root, work, original)}
 
 
 def _lesson(lesson, id):
@@ -184,7 +223,7 @@ def check_drafts(root):
             'scope': 'draft structure and any submitted review hashes, not content approval'}
 
 
-def expected_material(state, registrations=None):
+def expected_material(state, registrations=None, *, corrections=True):
     registrations = state['registrations'] if registrations is None else registrations
     lessons = copy.deepcopy(state['lessons'])
     bank = copy.deepcopy(list(state['original'].values()))
@@ -200,6 +239,10 @@ def expected_material(state, registrations=None):
             q['version'] = state['original'][id]['version'] + (lesson != state['lessons'][id])
             source = 'lessons/' + id.split('-q')[0] + '.json:' + id
             q.update(enrichment='reviewed', hintStatus='individual', hintSource=source, lessonSource=source)
+    if corrections:
+        for id, record in state['sourceCorrections'].items():
+            by_id[id]['choices'] = copy.deepcopy(record['choices'])
+            by_id[id]['version'] += 1
     return lessons, bank
 
 
@@ -234,7 +277,22 @@ def legacy_classification_hashes(root):
     state = load_workspace(root)
     return {id: digest(state['original'][id])
             for batch in state['registrations']
-            for id in state['assignments'][batch]['questionIds']}
+            for id in state['assignments'][batch]['questionIds']
+            if id not in state['sourceCorrections']}
+
+
+def transcription_transition(root, bank):
+    """Permit only the exact before/after objects of reviewed text corrections."""
+    validate_workspace(root, check_bank=False)
+    state = load_workspace(root)
+    _, before = expected_material(state, corrections=False)
+    _, after = expected_material(state)
+    require([q['id'] for q in bank] == [q['id'] for q in after] and all(digest(q) in {digest(a), digest(b)} for q, a, b in zip(bank, before, after)), 'AP bank differs from reviewed transcription transition')
+    # This fallback is confined to the *pre-correction* object during this
+    # transaction. A corrected question must use its current classification hash.
+    registered = {id for batch in state['registrations'] for id in state['assignments'][batch]['questionIds']}
+    legacy = {q['id']: digest(state['original'][q['id']]) for q, a in zip(bank, before) if q['id'] in registered and digest(q) == digest(a)}
+    return after, legacy
 
 
 def progress(root):
