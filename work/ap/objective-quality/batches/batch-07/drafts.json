@@ -3,12 +3,12 @@
     "id": "r06a-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "d7db907b6d9f22622eb71646535383fbb8d3289c5314e8ea9823d0cec502aadf",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q12",
-      "summary": "エ。セッションを共有するクラスタなら、別サーバへ引き継げます。",
-      "explanation": "クラスタでは複数のサーバでサービスを提供します。セッション情報を共有していれば、一台が故障しても他のサーバが利用者の処理状態を引き継ぎ、サービスや一連の処理を継続できます。\nコールドスタンバイは待機系を起動・切替する時間が必要なので、サービスは一時中断します。セッション非共有のクラスタでは、サービス自体を他の台で提供できても、故障した台が保持していた利用者の処理状態をそのまま引き継げません。",
+      "summary": "Webサーバの冗長構成と、セッション情報の共有による処理状態の引継ぎを区別します。",
+      "explanation": "クラスタでは複数のサーバでサービスを提供します。セッション情報は、ログイン状態など利用者との一連のやり取りを引き継ぐための情報です。設問ではこの情報を共有することで、一台が故障しても他のサーバがサービスと利用者の処理を継続できる構成を選びます。\nコールドスタンバイは待機系を起動・切替する時間が必要なので、サービスは一時中断します。セッション非共有のクラスタでは、サービス自体を他の台で提供できても、故障した台が保持していた途中の処理状態をそのまま引き継げません。",
       "choiceReasons": [
         "コールドスタンバイは待機系の起動・切替までサービスが中断するので、「中断しない」が誤りです。",
         "コールドスタンバイだけでは障害時のセッション状態を引き継ぐことを保証できず、「トランザクションは継続」が不適切です。",
@@ -36,44 +36,52 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "冗長化だけで利用者の途中の状態まで引き継げると思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "サービスを提供できることと途中状態の保持を別軸にする。",
+          "remainingWork": "各構成が二つの軸を満たすか判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸だけで構成ごとの結果は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "待機系の起動が必要なことと、非共有セッションを他台が読めないこと。",
+          "remainingWork": "共有クラスタでの引継ぎを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ア・イ・ウの誤りを全て示すので残るエが確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "稼働中の他台が共有状態を読めれば両方継続できる。",
+          "remainingWork": "構成と利用者処理の引継ぎを対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の構成とエを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06a/r06a-q12.webp（SHA-256 d28d4cbcd2284fb65424cf9fc32c56e781a202e7660a7ba0bda14476d71a64c1）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf（SHA-256 e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732）を取得しpdftotextで問12の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。待機系の起動待ちとセッションを共有する稼働他台の有無を二軸で照合。アは無中断、イは処理継続、ウは双方の結果が不適切。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "1103e1ca73508662c62c9ac31a79e150f4cba4df51bf70d19ae2d7d8aa859557",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q12",
-      "summary": "有機ELは電圧をかけた発光素子が自ら発光します。",
-      "explanation": "有機ELディスプレイは有機材料の発光層に電圧をかけ、素子自身の発光を画素として使います。液晶のように別の光源から来る光の透過量を調節する方式ではありません。自発光素子による表示を述べるアが適切です。",
+      "summary": "有機ELと、電子ビーム・透過光・放電を使う表示方式の違いを問います。",
+      "explanation": "有機EL（Electroluminescence：電界発光）ディスプレイは、有機材料の発光層に電圧をかけ、素子自身の発光を画素として使います。液晶のように別の光源から来る光の透過量を調節する方式ではありません。自発光素子による表示を述べるアが適切です。",
       "choiceReasons": [
         "電圧をかけた素子そのものの発光を使う有機ELの方式です。",
-        "電子ビームを蛍光体に当てるのはCRTの方式です。",
+        "電子ビームを蛍光体に当てるのはCRT（ブラウン管）の方式です。",
         "光の透過量を制御するのは液晶ディスプレイの方式です。",
         "放電で紫外線を発生させ蛍光体を光らせるのはプラズマディスプレイの方式です。"
       ],
@@ -91,48 +99,58 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "有機ELの画素では電圧を加えた発光層自身が光ります。この動作を書いた候補と照合します。",
+          "text": "有機ELは画素自身を光らせるので、液晶のようなバックライトは不要です。電子ビームや放電でなく、電圧を加えた素子の発光を述べる候補に対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "自発光と、外部の光を制御する方式を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "選択肢を光を発生させる対象・仕組みで整理する。",
+          "remainingWork": "有機ELの仕組みと照合する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類の軸だけで有機ELの定義は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "有機材料に電気を加えると光を出す自発光方式。",
+          "remainingWork": "説明と肢を対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの電圧による素子発光と実質同義。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "自発光なのでバックライトが不要という構造上の帰結。",
+          "remainingWork": "他方式との違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アに相当する機構も明示し、前段でも確定済み。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05h/r05h-q12.webp（SHA-256 e5c5fc0776d92cf5ca472ea354a76660af39c293d4da7fb5970096b4ac6d7b6f）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf（SHA-256 334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546）を取得しpdftotextで問12の公式正答アを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ア。電圧で素子が自発光。イ＝CRT、ウ＝液晶、エ＝プラズマと全肢を区別。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "45656a6ace8cf4322982a2715bce0338a6fbc1b53535a0179ddd5412c5f12620",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q12",
-      "summary": "ウ。インフラの構成や設定をコードで記述し、自動適用する方式です。",
-      "explanation": "IaCはサーバーやネットワークなどの構成をコードとして管理し、ツールで構築・設定を実行する方法です。同じ定義を使って環境を再現し、変更も履歴管理できます。\n手作業で設定することや、未設定のサーバーを用意すること自体を指す用語ではありません。",
+      "summary": "IaCがインフラの構成をどのように記述し、適用するかを問います。",
+      "explanation": "IaC（Infrastructure as Code）は、サーバやネットワークなどのインフラの構成をコードとして管理し、ツールで構築・設定を実行する方法です。同じ定義を使って環境を再現し、変更も履歴管理できます。\n手作業で設定することや、未設定のサーバを用意すること自体を指す用語ではありません。",
       "choiceReasons": [
         "何も導入していないサーバーは初期状態の説明で、コードによる構成管理ではありません。",
         "手動で資源を割り当てる方式で、自動適用するIaCの特徴に合いません。",
@@ -143,7 +161,7 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "英語のas Codeが、構成をどの形で扱うかを示しています。",
+          "text": "インフラにはサーバやネットワークなど、アプリケーションが動く土台が含まれます。「何も導入していない機器の状態」と「環境を構築・設定する方法」を分けて読みます。",
           "revealsAnswer": false
         },
         {
@@ -153,51 +171,60 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "候補中の作業主体を確認します。人が個別に手動設定するのか、記述された構成をソフトウェアが自動適用するのかで判断しましょう。",
+          "text": "例えばサーバ台数を定義で2台から3台に変更し、ツールに適用させます。人が各機器を設定する記述ではなく、構成を記述したプログラムをソフトウェアが自動適用する記述に対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "インフラ自体の状態と、コードによる構築方法を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "インフラの対象と、機器の状態・構築方法を区別する軸。",
+          "remainingWork": "コードの利用方法を選ぶ。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "インフラの意味だけで自動適用の定義は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "定義ファイルに書いた台数・設定をツールが構築する仕組み。",
+          "remainingWork": "ウとの照合を行う。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの内容と実質同じ説明。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "定義の台数変更を自動適用する具体例。",
+          "remainingWork": "人手の設定と比較して概念を定着させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "構成プログラムを自動適用する正答肢を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07a/r07a-q12.webp（SHA-256 dfb19bc6c9fce0b3053010c992bc0811d6342e6e7e179f61b9252d7d764d9727）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf（SHA-256 ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82）を取得しpdftotextで問12の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。定義した構成をソフトが自動適用。ア＝未導入状態、イ・エ＝手動のため異なる。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "b934c59fded82f9185a3fd1f287b6a6e0d92deea1b49496224b942fbb14073ba",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q8",
-      "summary": "ウ。ヘテロジニアスは異なる種類のコアを組み合わせます。",
+      "summary": "複数コアの種類と、命令実行方式・回路への実装方式を区別します。",
       "explanation": "設問の要点はコアが「複数」なだけでなく「異なる目的に適した複数の種類」であることです。高性能コアと省電力コアなどを組み合わせ、負荷に適したコアを使う構成をヘテロジニアスマルチコアと呼びます。\n同じ種類のコアを並べるホモジニアスマルチコアと区別します。",
       "choiceReasons": [
         "複数の命令を同時に実行できる方式です。異種コアを搭載することを意味しません。",
-        "FPGAなどのプログラマブルな回路上に実装するプロセッサです。異なる目的のコアの組合せという分類ではありません。",
+        "FPGA（製造後に論理回路を構成できる半導体）などの上に回路として実装するプロセッサです。異なる目的のコアの組合せという分類ではありません。",
         "異種コアを搭載し、性能や消費電力の特性に応じて使い分ける構成です。",
         "同種のコアを複数搭載する構成なので「複数の種類」という条件に合いません。"
       ],
@@ -210,52 +237,61 @@
         },
         {
           "title": "使う考え方",
-          "text": "高性能用と省電力用でコアの特性が違う構成を考えます。同種か異種かを表す用語の対を比べます。",
-          "revealsAnswer": false
+          "text": "ヘテロジニアス（heterogeneous）は異種、ホモジニアス（homogeneous）は同種を意味します。マルチコアは一つのプロセッサに複数のコアをもつ構成です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "heterogeneousは異種、homogeneousは同種です。設問のコアの種類に合う方を選びましょう。",
+          "text": "例えば重い計算は高性能コア、軽い処理は省電力コアへ割り当てれば、負荷に応じて性能と消費電力を調整できます。この異種コアの組合せがヘテロジニアスマルチコアです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "複数命令の実行と、複数種類のコアの搭載を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "コアの個数だけでなく種類も条件だと整理する。",
+          "remainingWork": "各用語の意味を使って選ぶ。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "問題の条件の整理で、用語との対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "heterogeneous・homogeneousの語義とマルチコアの定義。",
+          "remainingWork": "設問の異種という条件に対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "異種コアの用語を直接教えて正答が確定。"
+        },
+        {
+          "newInformation": "重い計算と軽い処理を異種コアへ割り当てる具体例。",
+          "remainingWork": "性能と電力の両立を理解する。",
+          "revealsAnswer": true,
+          "reason": "ヘテロジニアスマルチコアの名称を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q8.webp（SHA-256 1e4bda190876faa81ad7e8f5e743a2fb9058b125e1adaa879717e9c635a5518b）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf（SHA-256 412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741）を取得しpdftotextで問8の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。異種の高性能・省電力コア。ア＝複数命令実行、イ＝回路実装方式、エ＝同種コア。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "b6f8a8f8431bd230a79263f1d6c5b72fdf0042ac931c9ca54ec873a359c9b721",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q13",
-      "summary": "エ。並列部分の稼働率に、直列の装置の稼働率を掛ける。",
+      "summary": "並列部分と直列部分の稼働条件から、システム全体の稼働率のグラフを判断します。",
       "explanation": "装置単体の稼働率をpとする。左の2台は両方停止したときだけ使えなくなるので、稼働率は1−(1−p)²。右の1台も動く必要があるため、全体はp{1−(1−p)²}=2p²−p³となる。\n\np=0.5なら全体は0.5×0.75=0.375。対角線より下に来る。また全体/p=2p−p²=1−(1−p)²≤1なので、途中で対角線を上回らない。この二つを満たすのはエ。通常の稼働率計算として各装置の故障を独立と扱う。",
       "choiceReasons": [
         "アは対角線より上にあり、直列の1台より全体の稼働率が高くなってしまう。",
@@ -272,7 +308,7 @@
         },
         {
           "title": "使う考え方",
-          "text": "単体の稼働率をpとすると、並列部分は1−(1−p)²。全体は右の装置との直列なので、これにpを掛ける。",
+          "text": "各装置の故障を独立と扱い、単体の稼働率をpとすると、並列部分は「両方停止」を除く1−(1−p)²です。全体は右の装置も動く必要があるため、これにpを掛けます。",
           "revealsAnswer": false
         },
         {
@@ -284,46 +320,54 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "直列・並列の一方だけを見て稼働率を判断してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "左は片方、右は必ず動くという稼働条件。",
+          "remainingWork": "確率式を立ててグラフに対応付ける。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "稼働条件のみで値やグラフは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "独立な装置の並列稼働率と直列部分の積の式。",
+          "remainingWork": "pを代入し曲線を比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式を教え、計算とグラフ比較を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "p＝0.5という検算点と対角線を超えない条件。",
+          "remainingWork": "0.5×0.75の計算と各グラフの読取り。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終値と肢は未提示で計算・照合が必要。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q13.webp（SHA-256 5e93589b1567f62be2e40a4c1d77c4040185748439ea63b6c984841255ea5b68）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf（SHA-256 656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907）を取得しpdftotextで問13の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。独立故障としてF(p)=p[1−(1−p)^2]=2p^2−p^3。p=0,0.5,1で0,0.375,1、F(p)≤p。アは上、イは対角線、ウは中点0.5で除外。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "e43cf1aa4b04d84794bcd5686016b50553e4796900457ce04256df16fff239ee",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q11",
-      "summary": "ア。平均読取り時間は15.1ミリ秒です。",
+      "summary": "磁気ディスクの読取り時間を、シーク・回転待ち・データ転送に分けて求めます。",
       "explanation": "読取り時間は平均シーク時間＋平均回転待ち時間＋転送時間です。6,000回転/分は100回転/秒なので1回転10ミリ秒、平均回転待ちは半回転の5ミリ秒です。1,000バイトを10Mバイト/秒で転送する時間は0.1ミリ秒です。合計は10+5+0.1=15.1ミリ秒です。コントローラ時間はシーク時間に含まれるので重ねて加えません。",
       "choiceReasons": [
-        "10+5+0.1=15.1ミリ秒で、必要な三つの時間の合計です。",
-        "16.0ミリ秒は計算結果より0.9ミリ秒長く、表の条件からは得られません。",
-        "20.1ミリ秒は計算結果より5ミリ秒長く、平均回転待ちは5ミリ秒です。",
-        "21.0ミリ秒は計算結果より5.9ミリ秒長く、表の回転数と転送速度による合計ではありません。"
+        "10＋5＋0.1＝15.1ミリ秒で、シーク・半回転待ち・転送の三つを正しく合計しています。",
+        "16.0＝10＋5＋1とすると転送時間を1ミリ秒にしていますが、1,000÷(10×10⁶)秒＝0.1ミリ秒です。",
+        "20.1＝10＋10＋0.1では回転待ちを1回転分にしています。平均の待ち時間は半回転分の5ミリ秒です。",
+        "21.0＝10＋10＋1では回転待ちと転送時間をともに長く見積もっています。正しくはそれぞれ5ミリ秒と0.1ミリ秒です。"
       ],
       "takeaway": "ディスクの平均アクセス時間はシーク＋半回転待ち＋転送。",
       "hints": [
@@ -346,41 +390,49 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "分・秒・ミリ秒の換算と、平均回転待ちを取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "シーク・回転待ち・転送を分離して求める手順。",
+          "remainingWork": "各時間を計算して足す。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "計算の分解だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1回転時間、平均は半回転、転送時間の公式。",
+          "remainingWork": "半回転と転送をミリ秒へ換算し合計する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中式と公式で最終値は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "シークと半回転待ちを入れた合計式と最終値。",
+          "remainingWork": "時間内訳を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終値15.1ミリ秒を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03a/r03a-q11.webp（SHA-256 8794561e96413f417b7436c8ac616f0217d01b80c5fe8771959ff4f1c6a5e669）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf（SHA-256 7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799）を取得しpdftotextで問11の公式正答アを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ア。60/6000=0.01秒/回転、平均待ち5ms、転送1000/(10×10^6)=0.0001秒=0.1ms、10+5+0.1=15.1ms。コントローラを重複加算しない。誤肢16.0/20.1/21.0の時間内訳も確認。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "7759907bb13aadfbab91779114b90527613e1c2c324958d3fc2241ec754fdf81",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q12",
-      "summary": "イ。稼働率が等しければ、修復時間と故障間隔の比も等しくなります。",
-      "explanation": "稼働率α=MTBF/(MTBF+MTTR)です。分子・分母をMTBFで割るとα=1/(1+MTTR/MTBF)となります。\nこの式はMTTR/MTBFの比だけで決まるので、αが等しければその比も等しくなります。両方の時間が同じである必要はありません。例えば100/10と200/20なら稼働率は同じです。\n稼働率が高いほどMTTR/MTBFは小さくなるので、エの大小関係は逆です。",
+      "summary": "稼働率と、平均故障間隔・平均修復時間の比の関係を問います。",
+      "explanation": "MTBF（平均故障間隔）は修理可能なシステムの平均稼働時間、MTTR（平均修復時間）は故障から復旧するまでの平均時間です。同じ時間単位で稼働率α＝MTBF/(MTBF＋MTTR)と表します。分子・分母をMTBFで割るとα＝1/(1＋MTTR/MTBF)となります。\nこの式はMTTR/MTBFの比だけで決まるので、αが等しければその比も等しくなります。両方の時間が同じである必要はありません。例えばMTBFとMTTRが100時間・10時間でも200時間・20時間でも、稼働率は10/11です。\n稼働率が高いほどMTTR/MTBFは小さくなるので、エの大小関係は逆です。",
       "choiceReasons": [
         "MTBF=100・MTTR=10と、200・20でも稼働率は同じです。時間そのものの一致は不要です。",
         "α=1/(1+MTTR/MTBF)なので、αが等しいときMTTR/MTBFも等しくなります。",
@@ -391,57 +443,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「時間が同じ」と「時間の割合が同じ」を分けます。稼働率の式MTBF/(MTBF+MTTR)を書きましょう。",
+          "text": "MTBFは平均故障間隔（平均稼働時間）、MTTRは平均修復時間です。同じ時間単位で、稼働率＝MTBF/(MTBF＋MTTR)となります。時間そのものの一致と割合の一致を分けて考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "分子と分母をMTBFで割ると1/(1+MTTR/MTBF)になります。この式は二つの時間の比だけで決まります。",
-          "revealsAnswer": false
+          "text": "分子と分母をMTBFで割るとα＝1/(1＋MTTR/MTBF)になります。さらに変形するとMTTR/MTBF＝1/α−1なので、稼働率が等しければこの比も等しくなります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "100時間動き10時間直す場合と、200時間動き20時間直す場合を比べましょう。稼働率が同じでも時間自体は違い、MTTR/MTBFは同じです。",
-          "revealsAnswer": false
+          "text": "MTBFとMTTRが100時間・10時間でも200時間・20時間でも稼働率は10/11です。またMTTRだけを短くすれば稼働率は上がるため、稼働率の大小から両方の時間の大小までは決まりません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "稼働率が等しければ故障・修復時間そのものも等しいと思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "MTBF・MTTRの意味、時間単位、稼働率の式。",
+          "remainingWork": "式から比と時間のどちらが決まるか判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般式のみで正答の比の等式は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "MTTR/MTBF＝1/α−1の変形と、等しい稼働率なら等しい比。",
+          "remainingWork": "選択肢との対応を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答イの関係そのものを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "同率でも時間が違う数値例、修復時間だけを短縮する反例。",
+          "remainingWork": "時間そのものの比較ができないことを確かめる。",
+          "revealsAnswer": true,
+          "reason": "前段でイが確定し、その根拠も具体化。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q12.webp（SHA-256 c4874b84ca03d9b51be31f394e0481730c5638ee04f5c8d1feaa6eb707d45c33）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf（SHA-256 656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907）を取得しpdftotextで問12の公式正答イを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：イ。r=MTTR/MTBF>0、α=1/(1+r)はrの単調減少関数。等率ならr一致。100h/10hと200h/20hは同率でアの反例、MTBF一定・MTTR短縮はウの反例、エは不等号逆。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "9694b20765597c18fd0f3272d261287a1275c8aefa0bae25a635af1e48513ce5",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q8",
-      "summary": "エ。異符号の加算では16ビット符号付き整数の範囲を超えません。",
+      "summary": "2の補数の表現範囲から、符号付き加算でオーバフローを起こさない条件を判断します。",
       "explanation": "2の補数の16ビット符号付き整数の範囲は−32,768〜32,767です。正と負を足した結果は二つの入力値の間に収まるため、入力が範囲内なら結果も範囲内です。同符号の加算は、入力が各々範囲内でも和が範囲を超えることがあります。",
       "choiceReasons": [
         "16,384+16,384=32,768は条件を満たしますが、正の上限32,767を超えます。",
@@ -453,7 +514,7 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "まず2の補数16ビットの最小値と最大値を書き、正の上限と負の下限の差に注意します。",
+          "text": "2の補数の16ビット符号付き整数の範囲は−2¹⁵〜2¹⁵−1、つまり−32,768〜32,767です。加算前の値だけでなく、数学的な和がこの範囲内かを調べます。",
           "revealsAnswer": false
         },
         {
@@ -463,47 +524,55 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "異符号なら和は入力の間に収まるので、すべての組合せでオーバフローしません。",
+          "text": "ア〜ウにはx1＝x2＝16,384を当てはめられます。どれの条件も満たしますが、和32,768は上限を超えます。異符号のエでは和が入力の間に収まるため、この反例のような越境は起きません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "正の上限が32,768だと誤認し、全組合せという条件を落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "16ビット2の補数の範囲と、数学的な和を確認する手順。",
+          "remainingWork": "各条件で和が範囲内か検討する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "表現範囲だけで符号条件の正解は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "異符号の和は入力の外側へ出ない性質。",
+          "remainingWork": "異符号の条件と対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エの正当性を実質的に説明する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "同一の16,384同士でア・イ・ウ全てに反例を作れる。",
+          "remainingWork": "反例と安全な条件を比較する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "全誤答の反例とエの条件を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03a/r03a-q8.webp（SHA-256 711aff752f598ae8bfe645ae2539bf3604ce2e31cf8889efccc9991814950de9）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf（SHA-256 7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799）を取得しpdftotextで問8の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。範囲[-32768,32767]。x1=x2=16384はア・イ・ウの全条件を満たして和32768で反例。異符号の和は入力間に収まる。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "6a4a6eae5f2d2e20bc5ad58b1710e3752c8850669f190a1646fda01caac68098",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q8",
-      "summary": "ウ。統計解析向けの動的型付け言語Rです。",
+      "summary": "統計解析向けの機能と、動的型付けという条件を満たす言語・実行環境を選びます。",
       "explanation": "Rは統計計算とグラフ描画に広く使われ、データ分析の多数のパッケージを提供します。変数には型を固定せず、格納されるオブジェクトに実行時の型があるという条件も合致します。",
       "choiceReasons": [
         "Goは静的型付けの言語で、示された動的な型の条件が合いません。",
@@ -520,52 +589,60 @@
         },
         {
           "title": "使う考え方",
-          "text": "Go、Kotlin、Scalaの型がコンパイル時に確認される点と比較します。",
+          "text": "静的型付けでは変数や式の型を実行前に確認します。Go・Kotlin・Scalaはこちらに属します。設問の「変数には型を固定せず、格納されるオブジェクトの型が実行時に決まる」は動的型付けの特徴です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "統計解析に特化した動的型付けのRが条件に一致します。",
+          "text": "Rは統計計算とグラフ描画のための言語・環境で、動的型付けです。平均や回帰などの統計処理にパッケージを利用でき、用途の条件と型の条件の両方が一致します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "言語名しか知らず、用途と型付けの二条件で比較できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "用途と実行時の型という二条件に分解する。",
+          "remainingWork": "各言語が満たすか比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "言語と特徴の対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "静的・動的型付けの区別とGo・Kotlin・Scalaの分類。",
+          "remainingWork": "残る言語の用途を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "三つの誤答を全て除外できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Rの名称、統計・描画用途、パッケージの具体例。",
+          "remainingWork": "用途と型条件を再確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "Rを直接明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03h/r03h-q8.webp（SHA-256 752256a7432f219bbda24eccda86f958b039f057640aa6248632075ff73312a9）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf（SHA-256 7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1）を取得しpdftotextで問8の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。Rは統計計算・グラフ・動的型。Go/Kotlin/Scalaは静的型で設問の型条件を満たさない。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q8",
     "baseVersion": 3,
     "baseLessonSHA256": "bebd6bb95b037e1cb584aa2910be2eb967cc5ec4ae034a6c069401e90bf82db9",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q8",
-      "summary": "エ。1004→1006から始め、降順で4語を転送します。",
+      "summary": "転送元と転送先が重なるとき、元データを壊さないブロック転送の方向を判断します。",
       "explanation": "転送元1001〜1004と転送先1003〜1006は重なっています。昇順だと1001を1003へ書いた後、元の1003が失われ、3語目で誤った値を読みます。\n後ろから1004→1006、1003→1005、1002→1004、1001→1003と転送すれば、未読の元データを上書きしません。開始は元1004・先1006、降順の方向フラグ1、転送語数4です。",
       "choiceReasons": [
         "アは昇順で1003・1004の元データを読む前に上書きします。",
@@ -594,40 +671,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "重複領域へ昇順コピーして未読の転送元を上書きする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の書込みが未読1003に当たることを追跡する。",
+          "remainingWork": "上書き後の読取りを検討する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最初の操作の検討だけで安全なパラメータは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "転送先が高位に重なる場合は末尾から進める保護原理。",
+          "remainingWork": "開始番地・方向フラグと語数を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "末尾開始・降順を示すため選択肢エが確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "具体的な最初と次の転送アドレス。",
+          "remainingWork": "方向フラグと語数を対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エ固有の開始番地と降順を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06h/r06h-q8.webp（SHA-256 1f2a03394bf97432a5974de2bfc0a496544ac5d933cea60ae27a320e27ea6a02）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf（SHA-256 2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37）を取得しpdftotextで問8の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。元1001..1004=A,B,C,Dとすると、アの昇順は先1003..1006=A,B,A,B。イは1001から下降して元領域外、ウは1004から上昇して元領域外。エの1004→1006,1003→1005,1002→1004,1001→1003でA,B,C,Dを保持。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "26ad034298667b2cc68d6ad5180fbe526e25cd23952e61fe88a2ae46d845ac80",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q9",
-      "summary": "ウ。量子ビットの重ね合わせを量子ゲートで操作します。",
+      "summary": "量子ゲート方式で利用する量子ビットの状態と、その操作の特徴を問います。",
       "explanation": "量子ゲート方式は、量子ビットの状態を量子ゲートで変化させて計算する方式です。量子ビットは0と1の状態の重ね合わせを表せ、量子干渉などを利用する回路を構成します。\n観測結果は通常のビットとして得られますが、演算中の状態まで通常の2進数だけで説明できるわけではありません。加算を構成する回路も作れます。",
       "choiceReasons": [
         "アは通常の2進演算だけで説明しており、量子状態を使う演算の特徴を捉えていません。",
@@ -649,47 +733,55 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "加算ができないという制限や100℃以上という温度条件には根拠があるか、量子ビットの特徴と分けて判断しましょう。",
-          "revealsAnswer": false
+          "text": "重ね合わせを使っても、測定で各量子ビットから得られるのは0か1の一方です。演算中に重ね合わせを操作することと、測定で通常のビット列を得ることを区別すると、アとウの違いが分かります。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "観測後のビットと演算中の量子状態を同一視する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "通常ビットの状態との比較軸。",
+          "remainingWork": "量子状態の表し方を確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "量子ビットの定義そのものは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "量子ビットの重ね合わせを量子ゲートで操作する仕組み。",
+          "remainingWork": "選択肢と照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウと実質同じ特徴を説明。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "測定結果は0か1であり、演算中の状態との区別が必要なこと。",
+          "remainingWork": "アが演算を通常二進数で説明している点を判断する。",
+          "revealsAnswer": true,
+          "reason": "前段で正答を確定し、ウとの対比も示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06h/r06h-q9.webp（SHA-256 dda8787fd2f6302823c1390c266aa7073ed755978b6a486de84bd260997496de）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf（SHA-256 2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37）を取得しpdftotextで問9の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。量子ゲートは重ね合わせ状態を操作。アは演算中の量子状態の説明でなく、イの加算不可は誤り、エの100℃以上の必要条件はない。測定と演算中を区別。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "c3f5f7e2c2acd5ef3e38f9a56d2528b065bf2bc94881ee1b36f4ad77834d6742",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q9",
-      "summary": "ウ。従来の計算機で実用的時間内に難しい計算を、量子計算機で実行できることです。",
+      "summary": "量子超越性で比較する能力と、量子技術の仕組み・安全性・寸法を区別します。",
       "explanation": "量子超越性は、ある計算課題で量子コンピュータが従来のコンピュータの実用的な計算能力を上回ることです。全ての用途で高速になるという意味ではなく、特定の課題での優位を示します。\n暗号の安全性、量子力学を利用する仕組み、装置の小型化は、この計算能力の比較そのものではありません。",
       "choiceReasons": [
         "量子暗号の安全性の説明であり、計算時間に関する量子超越性ではありません。",
@@ -711,53 +803,61 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「従来機では実用的な時間で処理できない計算」を「量子機では高速に実行」する候補が、計算能力の超越を述べています。",
+          "text": "ここでの優位は特定の計算課題についてのものです。あらゆる業務で従来機より速いという意味ではなく、従来機では実用時間内に困難な計算を量子機が高速に行うというウの説明に対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "量子原理の採用や小型化を計算能力の優位と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢の比較軸を安全性・原理・時間・寸法に分類。",
+          "remainingWork": "超越性の比較対象を決める。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "どの軸が定義かは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "同じ課題を従来機で処理する難しさとの比較が基準。",
+          "remainingWork": "計算時間の説明と照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウと実質同じ計算上の優位を説明。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "特定課題での優位であり、全業務の高速化ではない限定。",
+          "remainingWork": "定義の適用範囲を確かめる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの名称と説明を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06a/r06a-q9.webp（SHA-256 99b14ae4b03e73152082dfe6877add18e038a1d193a1e333703426e89111e69e）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf（SHA-256 e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732）を取得しpdftotextで問9の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。特定計算課題について従来機では実用時間内に難しい計算を量子機が実行する優位。ア安全性、イ物理原理、エ小型化では定義を満たさない。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "213089b811b676750c2eecf3082a4bc12d85db1db6e4410209400e253981ae5a",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q11",
-      "summary": "イ。帯電粒子を電極側へ移動させて表示します。",
+      "summary": "電気泳動型電子ペーパーで、電圧によって何を動かして表示するかを問います。",
       "explanation": "電気泳動型電子ペーパーは、電界によって着色した帯電粒子を移動させ、見る側へ現れる粒子の色を変えます。粒子の配置が保持されるため、表示を保つ電力を抑えられます。",
       "choiceReasons": [
         "電圧で光の透過状態を変えるのは液晶表示の説明です。",
         "帯電粒子の移動を使う電気泳動の説明です。",
         "電圧で薄膜が発光するのは有機ELなどの説明です。",
-        "微小な鏡の向きを変えるのはDMDを用いた表示の説明です。"
+        "微小な鏡の向きを変えるのはDMD（Digital Micromirror Device：微小鏡を配列した素子）を用いた表示の説明です。"
       ],
       "takeaway": "電気泳動は電界による帯電粒子の移動。",
       "hints": [
@@ -768,57 +868,66 @@
         },
         {
           "title": "使う考え方",
-          "text": "電圧を加えたとき、電荷をもつ物体へどのような力が働くか考えます。",
-          "revealsAnswer": false
+          "text": "電気泳動は、液体中の電荷をもつ粒子が電界から力を受けて移動する現象です。表示では粒子の位置を変えて、見る側に現れる色を変えます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "電極へ着色した粒子を集めて見える色を変える候補を選びます。",
+          "text": "例えば白と黒の粒子を使い、電圧の向きによって見る側へ集める粒子を切り替えます。発光膜や鏡を動かす方式ではなく、着色した帯電粒子を電極側へ集める記述が対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "電圧で光る方式と、電圧で粒子を動かす方式を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各候補で制御する対象を分類する手順。",
+          "remainingWork": "電気泳動の機構を確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対象の分類だけで方式との対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "電気泳動の定義と粒子の移動による色変化。",
+          "remainingWork": "肢の説明と対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "帯電粒子を移動するイの定義を直接教える。"
+        },
+        {
+          "newInformation": "白黒粒子を電圧の向きで切り替える具体例。",
+          "remainingWork": "発光膜・鏡との違いを確かめる。",
+          "revealsAnswer": true,
+          "reason": "イと同じ粒子と電極の記述を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04a/r04a-q11.webp（SHA-256 9b1edca5d889f4dac24d378ca3e865c338e34cd628aa73641affcbab26a2b450）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf（SHA-256 cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1）を取得しpdftotextで問11の公式正答イを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：イ。帯電粒子を電界で移動。ア透過光＝液晶、ウ薄膜発光＝EL、エ微小鏡＝DMD。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "92d371fec93fd62f2af2bb43819aed01646b545ff5296e7fb5be28c64395b245",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q14",
-      "summary": "全体は25秒で終了し、CPU使用率0.60、ディスク使用率0.68です。",
+      "summary": "CPUとディスクの並行動作を時間軸に置き、共通の経過時間から使用率を求めます。",
       "explanation": "AはCPUを0〜3秒、ディスクを3〜10秒使います。Aのディスク処理中、BはCPUを3〜15秒使えます。BのCPU終了時にはディスクが空いており、Bは15〜25秒にディスクを使います。全体の終了は25秒です。CPU稼働時間は3+12=15秒なので15/25=0.60。ディスク稼働時間は7+10=17秒なので17/25=0.68です。",
       "choiceReasons": [
         "32秒はCPUとディスクの全処理時間の和ですが、二つの装置の並行動作があるため経過時間ではありません。",
         "共通の経過時間25秒で、CPU15秒とディスク17秒を割った組合せです。",
-        "0.79と0.89は、実際の経過時間25秒を分母にした値ではありません。",
+        "0.79と0.89は15/19と17/19に相当しますが、19秒ではBのディスク処理が終わりません。全終了時刻は25秒です。",
         "ディスクは0〜3秒と10〜15秒に空いており、使用率1.00にはなりません。"
       ],
       "takeaway": "使用率の分母は装置ごとの稼働時間の和ではなく、全体の経過時間。",
@@ -830,7 +939,7 @@
         },
         {
           "title": "使う考え方",
-          "text": "時間軸にAのCPU0〜3秒とディスク3〜10秒を置き、CPUが空いた3秒からBを置きます。",
+          "text": "使用率＝その装置の稼働時間÷両ジョブ終了までの経過時間です。時間軸にAのCPU0〜3秒とディスク3〜10秒を置き、CPUが空いた3秒からBを置きます。",
           "revealsAnswer": false
         },
         {
@@ -842,41 +951,50 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CPUとディスクの稼働時間を単純加算して全経過時間にする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "別装置は並行動作できる条件。",
+          "remainingWork": "時間軸に二ジョブを配置する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "並行可能性だけで使用率は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "使用率の分母とAの時間区間、Bの開始時刻。",
+          "remainingWork": "Bの終了、各稼働時間と使用率を求める。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式と途中経過だけで数値結果を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "BのCPU・ディスクの時間区間と全体終了25秒。",
+          "remainingWork": "15/25と17/25を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "経過時間まで示すが最終使用率の計算を残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05h/r05h-q14.webp（SHA-256 fa51e629e8d02ab4262b32e1a34ffcf01dc7e7cab052a8fabf8992a3a638ee75）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf（SHA-256 334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546）を取得しpdftotextで問14の公式正答イを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：イ。A CPU[0,3],disk[3,10]; B CPU[3,15],disk[15,25]。全体25s、CPU15/25=.60,disk17/25=.68。ア分母32は重なり無視、ウの分母19では未終了、エのdisk100%は空き時間8sを無視。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q17",
     "baseVersion": 2,
     "baseLessonSHA256": "8082f73c4081dd1855c6a6cf8f1a079b88005ff75aff5fe8ff48a9e1986969a8",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q17",
-      "summary": "FIFOでは最初に入った1を追い出し、状態は3,4,2です。",
-      "explanation": "ステップ3では枠に[1,4,2]があり、入れた順は1→4→2です。次の参照4と1は既に存在するため、ページを入れ替えません。FIFOは参照の新しさでなく読み込んだ順で追い出します。最後の3は未格納なので、最も早く入れた1の枠を3に置き換え、[3,4,2]になります。",
+      "summary": "FIFOの読込み順と実記憶の枠を追跡し、ページ置換え後の状態を求めます。",
+      "explanation": "FIFO（First In, First Out：先入れ先出し）は、最も早く読み込んだページを置換え対象にする方式です。ステップ3では枠に[1,4,2]があり、入れた順は1→4→2です。次の参照4と1は既に存在するため、ページを入れ替えません。参照し直しても読込み順は更新しません。最後の3は未格納なので、最も早く入れた1の枠を3に置き換え、[3,4,2]になります。",
       "choiceReasons": [
         "1を残して4,2を変える結果は、最古の1を置き換えるFIFOに合いません。",
         "2を追い出していますが、最初に入ったのは1です。",
@@ -892,53 +1010,62 @@
         },
         {
           "title": "使う考え方",
-          "text": "FIFOで更新するのは新しいページを入れたときです。既にある4と1の参照ではロード順は変わりません。",
-          "revealsAnswer": false
+          "text": "FIFO（First In, First Out：先入れ先出し）は最も早く読み込んだページを追い出します。既にある4と1を参照し直しても、読込み順は変わりません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "最後の3を入れるとき、最初にロードしたページの枠を置き換えましょう。",
+          "text": "最後の3は未格納なのでページ置換えが必要です。最初に入った1の枠だけを3へ置き換え、4と2の枠は動かしません。結果は左から[3,4,2]です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "FIFOの投入順を参照のたびに更新してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "初期読込み順と枠の位置を別に追跡する。",
+          "remainingWork": "FIFO規則で残りの参照を処理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "初期条件を整理するのみ。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "先入れ先出しの定義と、ヒットでは順が不変なこと。",
+          "remainingWork": "最後の3の置換えを対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "初期順と合わせると1の置換えが確定しウ相当。"
+        },
+        {
+          "newInformation": "最後の置換えと、枠を移動しない最終状態。",
+          "remainingWork": "枠位置を確認する。",
+          "revealsAnswer": true,
+          "reason": "最終状態[3,4,2]を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05h/r05h-q17.webp（SHA-256 9710e800bc7ce2f150185c8cfb331dc5e03cd2921efda655589741d1662e6a24）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf（SHA-256 334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546）を取得しpdftotextで問17の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。参照1,4,2,4,1,3で枠[1,-,-]→[1,4,-]→[1,4,2]→同左→同左→[3,4,2]。FIFO読込み順はヒットで更新しない。ア/イ/エは枠位置と置換え対象を照合して除外。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "5f8ed1d1697035f61cfee87dfdadfc602342a4cf907df279d07102717022d38b",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q14",
-      "summary": "エ。IaCはインフラの構成や状態をコードで定義します。",
-      "explanation": "IaCはInfrastructure as Codeの略です。サーバ、ネットワークなどのシステム構成や望ましい状態をコードにし、ソフトウェアで環境の作成・設定を自動実行できるようにします。\n同じ定義から再現でき、構成変更をバージョン管理できることも利点です。アプリケーションの生成・試験手順だけの定義はCIの話です。",
+      "summary": "IaCでコードに定義する対象と、ほかの自動化で定義する手順を区別します。",
+      "explanation": "IaCはInfrastructure as Code（インフラをコードとして扱うこと）の略です。サーバ、ネットワークなどのシステム構成や望ましい状態をコードにし、ソフトウェアで環境の作成・設定を自動実行できるようにします。\n同じ定義から再現でき、構成変更をバージョン管理できることも利点です。アプリケーションの生成・試験手順だけの定義はCI（Continuous Integration：継続的インテグレーション）の話です。",
       "choiceReasons": [
         "インシデント対応手順の自動化を述べています。インフラ構成そのもののコード化とは異なります。",
         "開発支援ツール間の連携の定義であり、インフラの構成・状態を定義するものではありません。",
@@ -949,58 +1076,67 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Infrastructureの対象を意識して読みます。選択肢のコード化対象は対応手順、ツール連携、アプリ生成、構成・状態です。",
+          "text": "インフラはサーバやネットワークなど、アプリケーションの実行環境の土台です。各候補でコードにする対象が、障害対応・ツール連携・アプリ生成・システム構成のどれかを見ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じコードからサーバやネットワークの環境を再現する場面を考えます。何を定義すれば環境を作れるでしょうか。",
+          "text": "IaCでは、サーバ台数やネットワーク設定などの構成、必要なソフトウェアが導入済みであることなどの望ましい状態をコードに定義します。ツールがそれを読み、環境の作成や設定を自動実行します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "必要なのはインフラの構成と望ましい状態の定義です。「システムの構成や状態」を述べる説明を選びます。",
+          "text": "例えば同じ定義から開発環境と試験環境を再現できます。インシデントへの応答やアプリの生成・試験の手順だけでなく、「システムの構成や状態」を定義するエが該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コード化するものなら全てIaCだと思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "インフラの範囲と各肢のコード化対象を整理。",
+          "remainingWork": "IaCで定義する内容を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対象の分類だけで自動構築の定義は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "構成・望ましい状態を定義しツールが環境へ適用する仕組み。",
+          "remainingWork": "エと対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の定義を具体例付きで示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "同じ定義から開発・試験環境を再現する利用例。",
+          "remainingWork": "他の自動化対象と違いを確かめる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エを直接明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q14.webp（SHA-256 b766f8f9bf9c2b610a5b3e1741a99fa9bfbff2e08a5306d584e9308defaf04c0）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf（SHA-256 412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741）を取得しpdftotextで問14の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。構成・状態を定義し自動適用。ア障害対応、イ開発ツール連携、ウCI生成試験という対象の違いで除外。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q15",
     "baseVersion": 2,
     "baseLessonSHA256": "dd0fea3f3701ed5daba44edb81ecf73b9c9bd9af71172458652508a834017acc",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q15",
-      "summary": "ウ。最後のページ4は6000番地へ入る。",
-      "explanation": "LRUは最後に参照された時刻が最も古いページを追い出す。古い→新しい順の列を作り、参照のたびに対象を末尾へ動かす。\n\n1,2,3,4で列は[1,2,3,4]。2の参照で[1,3,4,2]。5で1を4000から追い出し[3,4,2,5]。3で[4,2,5,3]。1で4を7000から追い出し[2,5,3,1]。6で2を5000から追い出し[5,3,1,6]。5で[3,1,6,5]。最後の4で3を6000から追い出す。\n\nページ番号と番地は別。追い出されたページが入っていた番地へ、新しいページが入る。",
+      "summary": "LRUによる参照順の更新と、置換え先のページ枠の番地を追跡します。",
+      "explanation": "LRU（Least Recently Used：最も長い間参照されていないページを置換える方式）は最後に参照された時刻が最も古いページを追い出す。古い→新しい順の列を作り、参照のたびに対象を末尾へ動かす。\n\n1,2,3,4で列は[1,2,3,4]。2の参照で[1,3,4,2]。5で1を4000から追い出し[3,4,2,5]。3で[4,2,5,3]。1で4を7000から追い出し[2,5,3,1]。6で2を5000から追い出し[5,3,1,6]。5で[3,1,6,5]。最後の4で3を6000から追い出す。\n\nページ番号と番地は別。追い出されたページが入っていた番地へ、新しいページが入る。",
       "choiceReasons": [
         "4000はページ5の場所。最後には5が直前に参照されているので追い出されない。",
         "5000はページ6の場所。6より3の最後の参照が古い。",
@@ -1016,56 +1152,65 @@
         },
         {
           "title": "使う考え方",
-          "text": "古い→新しい順を[1,2,3,4]と書く。次の2で[1,3,4,2]になり、5を入れるときは先頭の1を追い出す。",
+          "text": "LRU（Least Recently Used）は最後の参照が最も古いページを追い出します。古い→新しい順を[1,2,3,4]と書き、次の2で[1,3,4,2]へ更新すると、5を入れる際の対象は先頭の1です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "同じ操作を最後の4の直前まで続ける。列の先頭に残るページを探し、そのページの番地を表から読む。",
+          "text": "途中の5→3→1まで処理すると、番地4000・5000・6000・7000のページは[5,2,3,1]、古い順は[2,5,3,1]です。残りの6→5→4で順番と番地の表を更新します。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "参照順と格納番地の両方を追えず、FIFOと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "番地対応表を固定し、ヒットでも参照の新しさを更新する。",
+          "remainingWork": "置換え対象と枠を追う。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "追跡手順だけで最終対象は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "LRUの定義と最初の2・5の更新例。",
+          "remainingWork": "後続参照も同じ規則で追跡する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "序盤の途中状態のみを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "途中の1までの番地対応と古い順の具体的な状態。",
+          "remainingWork": "残る6→5→4を追跡し番地を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終対象や番地を教えず、残り三参照の更新が必要。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q15.webp（SHA-256 52915025e55eb1f548d5a867429bcd3071595bc221dd45010079c46e846242a2）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf（SHA-256 656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907）を取得しpdftotextで問15の公式正答ウを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ウ。LRUの置換えは5で1@4000、1で4@7000、6で2@5000、最後4で3@6000。最後直前の枠=[5,6,3,1]、古い順=[3,1,6,5]。全番地と参照順を独立に追跡。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "3a96ca232fc809d77e755d25151fc24b8b0fcce5cd5c0c9f614286f7596e08ac",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q19",
-      "summary": "エ。Linuxカーネルはプロセスやメモリを管理します。",
-      "explanation": "カーネルはOSの中核として、プロセスの実行、メモリ、デバイスなどの資源を管理します。アプリケーションはその基本機能を利用して動作します。\nコマンドを解釈するシェル、GUIのデスクトップ環境、ブラウザなどのアプリケーションは、カーネルと別のソフトウェアです。",
+      "summary": "Linuxカーネルの基本機能と、シェル・デスクトップ・業務アプリを区別します。",
+      "explanation": "カーネルはOS（基本ソフトウェア）の中核として、プロセスの実行、メモリ、デバイスなどの資源を管理します。アプリケーションはその基本機能を利用して動作します。\nコマンドを解釈するシェル、GUI（図形やマウスで操作する画面）のデスクトップ環境、ブラウザなどのアプリケーションは、カーネルと別のソフトウェアです。",
       "choiceReasons": [
-        "シェルはカーネルに組み込まれた機能ではなく、コマンドを解釈してカーネルの機能を利用するプログラムです。",
-        "GUIのデスクトップ環境はカーネルとは別に提供されます。カーネル自体の説明ではありません。",
+        "CUI（文字を使う操作画面）でコマンドを解釈するシェルは、カーネルの機能を利用する別のプログラムです。",
+        "GUI（図形やマウスで操作する画面）のデスクトップ環境は、カーネルとは別に提供されます。",
         "ブラウザやワープロなどはアプリケーションであり、カーネルに含まれるものではありません。",
         "資源管理など、アプリケーションが動作するための基本機能を提供するという説明です。"
       ],
@@ -1083,51 +1228,61 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "カーネルの代表的機能はプロセス管理とメモリ管理です。この二つを挙げた説明を選びます。",
+          "text": "例えば二つのアプリを同時に使うとき、カーネルがCPUの実行時間を配分し、各アプリのメモリを管理します。コマンド解釈や文書作成ではなく、プロセス管理とメモリ管理を述べるエが対応します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "Linux配布物全体の機能をカーネルに含めてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢を操作画面・アプリ・資源管理で分類する。",
+          "remainingWork": "中核機能を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類だけでカーネルと資源管理の対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "複数アプリにCPUとメモリを割り当てる中核機能。",
+          "remainingWork": "エと対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "プロセスとメモリ管理という正答肢の内容を示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二つのアプリへ実行時間・メモリを配分する例。",
+          "remainingWork": "利用者向け操作機能と区別する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答エと基本機能を明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q19.webp（SHA-256 ffc299597a013f4f541094825fd80b0c56b07772d93b23d277c8af7d05db06a3）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf（SHA-256 412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741）を取得しpdftotextで問19の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。資源管理が中核。アのシェル、イのデスクトップ環境、ウの業務アプリはユーザー空間の別ソフト。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "18120d2c878c04f55e771e377e7390159e1db23ef95e53fb36df9f8a90dc29c1",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q14",
-      "summary": "エ。稼働率は変わりません。",
-      "explanation": "稼働率はMTBF/(MTBF+MTTR)です。両方が1.5倍なら1.5MTBF/{1.5(MTBF+MTTR)}となり、分子と分母の1.5が約分されます。停止も稼働も同じ比率で長くなるので割合は同じです。",
+      "summary": "平均故障間隔と平均修復時間を同じ倍率に変えたときの稼働率を求めます。",
+      "explanation": "MTBF（平均故障間隔）は修理可能なシステムの平均稼働時間、MTTR（平均修復時間）は故障から復旧するまでの平均時間です。同じ時間単位で稼働率＝MTBF/(MTBF＋MTTR)となります。両方が1.5倍なら、1.5MTBF/{1.5(MTBF＋MTTR)}となり、分子と分母の1.5が約分されます。停止も稼働も同じ比率で長くなるので、稼働率は変わりません。",
       "choiceReasons": [
         "2/3になるのは分母だけを1.5倍するような計算で、MTBFの増加を反映しません。",
-        "1.5倍になるのは分子だけを増やした計算で、MTTRの増加を反映しません。",
+        "稼働率全体を1.5倍していますが、分子のMTBFだけでなく分母のMTBFとMTTRにも1.5が掛かるため、倍率は相殺されます。",
         "二つの1.5を掛ける量ではなく、稼働時間の比率なので2.25倍にはなりません。",
         "分子と分母の共通倍率が消えるため変わりません。"
       ],
@@ -1135,65 +1290,75 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "1サイクルを稼働時間MTBFと修理時間MTTRに分け、稼働時間の割合を書きます。",
+          "text": "MTBFは平均故障間隔（平均稼働時間）、MTTRは平均修復時間です。1サイクルを稼働時間と修復時間に分けると、稼働率＝MTBF/(MTBF＋MTTR)となります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "式のMTBFとMTTRの両方へ1.5を掛けます。",
+          "text": "変更後の式は1.5MTBF/(1.5MTBF＋1.5MTTR)です。分母全体から1.5をくくり出して、元の式との比を調べます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "1.5MTBF/(1.5MTBF+1.5MTTR)の共通因子を約分します。",
+          "text": "分母は1.5(MTBF＋MTTR)なので、分子と共通の1.5を約分できます。元の稼働率と同じになり、倍率は1、つまり変わりません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "稼働時間だけが伸びたと考え、分母全体への倍率を落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "略語の意味と稼働時間の割合の公式。",
+          "remainingWork": "両変数へ同倍率を適用する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般式だけで変化後の結果は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "変化後の式と、分母から共通因子をくくる手順。",
+          "remainingWork": "約分して元の式と比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "代入式までで約分と比較を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "約分後に元の稼働率へ戻る結果。",
+          "remainingWork": "倍率の意味を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "倍率1と変わらないことを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04a/r04a-q14.webp（SHA-256 8cdb32c8056d2673a7f879c603401a2338e6860aeeb87678f3a6d83b3e7ec817）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf（SHA-256 cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1）を取得しpdftotextで問14の公式正答エを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：エ。b/(b+r)に対して1.5b/(1.5b+1.5r)=b/(b+r)。例えば100h,10h→150h,15hでも10/11で比は1。2/3,1.5,2.25でない。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "f8a84d959f826906654b39116a003496ceab42175938eb473874b975ace928ea",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_3",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q16",
-      "summary": "ア。表のa〜dはGPL、LGPL、MPL、BSD。",
-      "explanation": "この表では公開義務が広い順に読む。aは修正・静的リンク・動的リンクの全てが○でGPL。bは修正と静的リンクが○、動的リンクが×でLGPL。cはOSS自体を修正したときだけ○でMPL。dは全て×でBSD。\n\nLGPLのリンク方法、MPLのファイル単位の義務などを簡略化した試験上の比較である。実際の配布ではライセンスの版と条件を確認する。BSDも著作権表示等の条件はあり、「×」は無条件で使えるという意味ではない。",
+      "summary": "OSSの修正・静的リンク・動的リンクごとに、配布時のソース公開義務の範囲を比較します。",
+      "explanation": "OSS（Open Source Software：ソースコードを利用・改変・再配布できる条件で公開されたソフトウェア）の配布時の公開範囲を、この表に沿って比較します。aは修正・静的リンク・動的リンクの全てが○でGPL（GNU General Public License）。bは修正と静的リンクが○、動的リンクが×でLGPL（GNU Lesser General Public License）。cはOSS自体を修正したときだけ○でMPL（Mozilla Public License）。dは全て×でBSD（Berkeley Software Distribution）ライセンスです。\nLGPLのリンク方法、MPLのファイル単位の義務などを簡略化した試験上の比較です。実際の配布ではライセンスの版と条件を確認します。BSDも著作権表示等の条件があり、「×」は無条件で使える意味ではありません。",
       "choiceReasons": [
         "アはGPL→LGPL→MPL→BSDで、表の公開義務の範囲と一致する。",
         "イはbがMPL、cがBSD、dがLGPLでそれぞれの公開義務と合わない。",
         "ウはaとbが逆。動的リンクで×の列はGPLではない。",
         "エはaからdの配置が合わず、全て×のdにGPLを置いている。"
       ],
-      "takeaway": "表は下の行ほどリンク先まで公開義務が及ぶかを見る。",
+      "takeaway": "ソース公開義務と著作権表示などの義務を分ける。配布時はライセンスの版・結合方法・公開対象の範囲を確かめる。",
       "hints": [
         {
           "title": "注目するところ",
@@ -1202,41 +1367,52 @@
         },
         {
           "title": "使う考え方",
-          "text": "強いコピーレフトは結合したプログラムにも義務が及ぶ。弱いコピーレフトはリンク方法や修正ファイルの範囲で扱いが変わる。",
-          "revealsAnswer": false
+          "text": "コピーレフトとは、配布時に改変物などにも同じライセンス条件を引き継がせる考え方です。GPLは結合したプログラムまで、BSDはソース公開を求めない方式なので、表ではGPLがa、BSDがdです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "GPLはa、BSDはd。残るbとcは、静的リンクでも○になるか、OSS自体の修正だけ○になるかで分ける。",
-          "revealsAnswer": false
+          "text": "この表ではLGPLは静的リンクで公開義務があり動的リンクではなく、MPLはOSS自体の修正でだけ公開義務があります。したがってb＝LGPL、c＝MPLで、a〜dはGPL・LGPL・MPL・BSDです。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ソース公開義務と無条件利用、静的・動的リンクの範囲を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "全○・全×の列を入口にし、○は公開義務だと読む。",
+          "remainingWork": "ライセンス名と列を対応付ける。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "表の読取りだけで名称の対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "コピーレフトの意味、GPLとBSDの義務の範囲。",
+          "remainingWork": "LGPLとMPLの違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "a＝GPL、d＝BSDの二条件で全肢からアだけが残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "LGPLとMPLの静的リンクの違いと全列の対応。",
+          "remainingWork": "表の三条件を確認する。",
+          "revealsAnswer": true,
+          "reason": "組合せ全体を明示し、前段でもアが確定済み。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q16.webp（SHA-256 3c6390eb3bbfe8d18ff8692000b6579c37b62657d8bfb7debfff940c021ade11）を開き、原文・全4肢・図表・数式を確認。原問・正答・図は変更なし。",
+        "IPA公式解答PDF https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf（SHA-256 656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907）を取得しpdftotextで問16の公式正答アを照合。PDF/抽出全文はrepo外 scratch/ap-a-quality-wave-02/author-3 に保存。",
+        "作者の解き直し・全肢確認：ア。原本表の上からa=○○○,b=○○×,c=○××,d=×××をGPL,LGPL,MPL,BSDへ照合。イのb/c/d、ウのa/b、エの全列が不一致。試験表の簡略比較として扱い、静的リンク/動的リンクの実際の配布条件を一般化しない。",
+        "補助一次資料：Mozilla MPL 2.0 FAQ https://www.mozilla.org/en-US/MPL/2.0/FAQ/ （HTML SHA-256 8879b28efe2b42a641144bf345febc3b4633db863089ff5f18138a048f3a4252）Q1のfile-level copyleft、Q8の結合プログラムの実行形式とMPL対象ソースの区別、Q9の改変ソースの配布条件を読んだ。試験表の○×をライセンス全文の無条件な一般則にしないための補足を確認。",
+        "原問疑義・保留なし。自己点検であり、独立承認・初学者試用は未実施。"
+      ]
     }
   }
 ]

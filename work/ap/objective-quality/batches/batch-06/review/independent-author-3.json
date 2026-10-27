@@ -1,0 +1,41 @@
+{
+  "reviewer": "Codex /root/ap_wave02_author_3",
+  "batchId": "batch-06",
+  "method": "draft/公式正答を見る前にcontextからstem/choices/sourceImagesだけを抽出。原本20webpをview_imageで開き全80肢を独立判定し、scratch/review-batch06/blind-results.jsonに保存した後に公式解答と作者draftを全文照合。9期分のうちr04h解答は画像として開いた。",
+  "blindResults": {
+    "r03a-q12": "イ。台数を減らすのがscale in。アout、ウup、エdown。",
+    "r05h-q13": "イ。過剰台数を減らすin、アdown、ウout、エup。",
+    "r05h-q9": "ウ24サイクル。先頭5サイクル、残り19命令が1サイクルおき、5+19=24。アは充填を無視、イは充填1、エは5+20として先頭を二重計数。",
+    "r06a-q8": "ウ④③②⑤①。命令を取得してからデコード、実行/アドレス生成、データメモリアクセス、書戻し。ア/イは取得前デコード、エはアドレス生成前メモリ。",
+    "r07a-q10": "ア50回転/秒。クロック1μs、パルス周期10000μs=.01s、100パルス/秒、1回転2パルスで50回転/秒。図は立上り間、半周期でない。イはパルス数と回転数同一、ウは2を逆に乗算、エは50×100。",
+    "r06a-q11": "ウ。FCは光も銅線も利用できるシリアル方式。アTCP/IPの上層ではない、イp2p/ループ等もあり限定が誤り、エparallel SCSIを物理層にしない。",
+    "r05a-q10": "ア。wearの偏りをlevelにするウェアレベリング。イは更新履歴、ウは断片整理、エは物理書込み増幅。",
+    "r05h-q11": "ア。ブロックへの書込みを均等化。イ多値セル、ウbad block代替、エは基本的消去書込み。",
+    "r04h-q13": "ア。heartbeatの消失を待機系が監視しfailover。イ手動、ウ負荷量で障害検出でない、エは診断プログラムを障害対象へロードして実行させる方式。",
+    "r03a-q9": "エ。複数bankへ振り分け重ねてアクセス。アvirtual memory、イbuffer、ウDMA。",
+    "r05a-q11": "イ。主記憶の一部を画面bufferへ。ア専用分離、ウ描画命令伝送の別軸、エrefresh不要にはならない。",
+    "r07a-q9": "イ。同じく主記憶を共用する表示buffer。アは専用、ウ接続/描画指示、エrefreshと無関係。",
+    "r04h-q12": "ウ。固定仕事量、並列割合p、N台、speedup=1/[(1-p)+p/N]、p<1で上限1/(1-p)。アp=1ならN、イ直列部残るため比例せず、エ並列割合増加で性能改善。",
+    "r04a-q10": "エ.98。100アクセス仮定、95はL1、残5の.6=3はL2、98ヒット。率を直列検索時のL2ローカルヒット率として扱う。ア.57は積、イL2率だけ、ウL1率だけ。",
+    "r03h-q13": "ウ。avoidanceは要素品質を高め故障予防。アはfoolproofでfailsafeではない、イfailsoftは縮退を許容、エはfailsafeでfault toleranceではない。",
+    "r04a-q13": "ウ。原本はア フェールセーフ、イ フェールソフト。原本ではアfoolproofとの混同、イ縮退なしが誤り、ウfault avoidanceが品質向上による予防で正しい、エfailsafeとの混同。contextのア フールセーフ/イ フールソフトの誤記を実見。未修正別件。",
+    "r06h-q12": "ウ。品質向上による予防がfault avoidance。アfoolproof、イ縮退を許容、エ安全状態へ固定はfailsafe。",
+    "r05a-q9": "ウ。予測経路を条件確定前に実行するspeculation。ア依存に基づく順変更、イdelay slot、エ偽依存除去。",
+    "r03h-q9": "ウ40MIPS。平均1命令=10ns*.5+40ns*.3+40ns*.2=25ns、1/(25e-9)=40e6命令/秒。ア非加重合計90nsの逆数約11、イ25nsをMIPSへ換算せず、エ90nsの数値。",
+    "r06h-q11": "ア.48秒。圧縮量15MB*.4=6MB、転送6/20=.3秒、展開6*.03=.18秒、逐次合計.48。イ15/20=.75、ウ.75+.18=.93、エ.75+15*.03=1.20。"
+  },
+  "resolvedIssues": [
+    {
+      "id": "r06a-q11",
+      "issue": "H2単独ではSCSIが未定義",
+      "resolution": "作者2がストレージ装置への命令と補足。修正後全文とdesignを再読し最終lesson hashで承認。"
+    }
+  ],
+  "separateUnappliedIssue": {
+    "id": "r04a-q13",
+    "description": "原本のフェール表記に対してcontext/transcriptionはフール表記2箇所。未修正別件。lessonは原本の正しい用語に基づき確認した。",
+    "record": "source-correction-independent-author-3.json"
+  },
+  "scope": "reviews.jsonと独立補助記録のみ。作者draft/原問/baseline/公開教材は編集していない。",
+  "newLearnerTrial": false
+}

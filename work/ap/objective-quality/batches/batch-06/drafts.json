@@ -3,11 +3,11 @@
     "id": "r03a-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "2eb04f30a74fc96ba57d1a5807ab210c9e23e077aeaed38123917ecb768b94d8",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q12",
-      "summary": "イ。スケールインはサーバの台数を減らします。",
+      "summary": "サーバ台数の変更と1台の性能変更を区別し、スケールインの意味を判断します。",
       "explanation": "スケールインは負荷低下などに合わせてサーバ台数を減らす水平縮小です。台数を増やすのはスケールアウトです。1台当たりのCPUやメモリの能力を上げ下げする垂直方向の調整は、それぞれスケールアップ、スケールダウンと呼びます。",
       "choiceReasons": [
         "サーバ台数を増やすのでスケールアウトです。",
@@ -36,40 +36,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "台数を減らすことと1台のCPU・メモリを減らすことを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補を「サーバの台数の変更」と「CPU・メモリの変更」に分け、増加か減少かも整理します。",
+          "remainingWork": "4肢を台数/1台の能力と増減で整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "台数/性能と増減の軸だけでinの定義はまだない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "イン／アウトは台数を変える水平調整、アップ／ダウンは1台の能力を変える垂直調整です。",
+          "remainingWork": "台数変更の2肢からinの方向を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "in/outの対象は教えるが方向が未確定でア/イが残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "インは台数を減らす方向なので、物理サーバを減らして無駄なコストを削減する説明です。",
+          "remainingWork": "開示された台数削減とイを対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "台数削減というイの説明をそのまま与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r03a/r03a-q12.webp SHA-256=7ce96a4c67a1d96b004481747b1bc531f6b19303ab861830a57d274b0aca5d3c。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解イを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf SHA-256=7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799。pdftotextによる対象行を読み合わせた。",
+        "台数増=out、減=in、1台の性能増=up、減=downとして4肢を独立に分類しイ。"
+      ]
     }
   },
   {
     "id": "r05h-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "871e11f743bebb083f84cf05ee2e5b399beac0afbc1cdfe30abfee598fd9ce07",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q13",
-      "summary": "スケールインは、過剰なサーバ台数を減らすことです。",
+      "summary": "サーバの台数・能力と増減の方向から、スケーリングの種類を区別します。",
       "explanation": "台数で処理能力を調整する水平スケーリングでは、台数を増やすのがスケールアウト、減らすのがスケールインです。1台のCPUやメモリの能力を変える垂直スケーリングとは区別します。イは処理量に対して過剰なサーバ台数を減らすのでスケールインです。",
       "choiceReasons": [
         "1台のCPU能力を減らす操作はスケールダウンです。",
@@ -98,40 +104,46 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "in/outとup/downが、台数と1台の能力という別の軸であることを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの候補にはCPU能力、サーバ台数、メモリ容量という異なる調整対象があります。",
+          "remainingWork": "各肢の調整対象を分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "調整対象を示すだけでinの意味は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "水平スケーリングは台数、垂直スケーリングは1台の能力の変更です。まずこの二つに分けます。",
+          "remainingWork": "台数を増減する2肢のどちらがinか判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "水平/垂直は教えるがinの増減方向は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "台数の変更で、増やす方がout、減らす方がinです。台数と増減の両方が一致する候補を探しましょう。",
+          "remainingWork": "台数削減のイを選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "台数を減らす=inと教えイを確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05h/r05h-q13.webp SHA-256=2cd18815e403584290a830ed327edc278c9dc12f23a0697b730e364c3efc2a8a。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解イを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf SHA-256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。pdftotextによる対象行を読み合わせた。",
+        "CPU能力減=down、台数減=in、台数増=out、メモリ増=upなのでイ。"
+      ]
     }
   },
   {
     "id": "r05h-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "97b858af304c3d9f0398a3df32580e6224d173fc70c9f3ca963d7466a273f097",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q9",
-      "summary": "5段のパイプラインで20命令を実行するには24サイクルです。",
+      "summary": "停止のない5段パイプラインで、20命令が完了するまでのサイクル数を求めます。",
       "explanation": "最初の命令は5ステージ全てを通るので5サイクル後に完了します。停止がなく各ステージ1サイクルなら、パイプラインが埋まった後は毎サイクル1命令ずつ完了します。残り19命令に19サイクルを加え、5+(20−1)=24サイクルです。",
       "choiceReasons": [
         "20では最初の命令が5段を通るまでの充填時間を含めていません。",
@@ -143,12 +155,12 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "全5ステージ、各1サイクル、途中停止なしという条件を確認します。",
+          "text": "パイプラインは命令を段階に分け、異なる命令の各段階を重ねて処理します。20命令を1命令ずつ5サイクルかけて直列実行する方式ではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "最初の命令の完了時間と、その後の命令が完了する間隔を分けます。",
+          "text": "最初の命令は5段を通るので5サイクルで完了します。その後は毎サイクル1命令が完了するため、残りの命令数だけサイクルを足します。",
           "revealsAnswer": false
         },
         {
@@ -160,40 +172,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "命令ごとの所要時間と、複数命令を重ねたときの完了間隔を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "パイプラインは命令を段階に分け、異なる命令の各段階を重ねて処理します。20命令を1命令ずつ5サイクルかけて直列実行する方式ではありません。",
+          "remainingWork": "最初の命令の遅延と、後続の完了間隔を分ける。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "重ねて実行する仕組みを教えるが完了サイクルを示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最初の命令は5段を通るので5サイクルで完了します。その後は毎サイクル1命令が完了するため、残りの命令数だけサイクルを足します。",
+          "remainingWork": "残り19命令の時間を加算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最初の5と後続間隔を示すが加算は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1命令目は5サイクル目、2命令目は6サイクル目です。同じ間隔で20命令目まで数えましょう。",
+          "remainingWork": "5+(20−1)を計算し選択肢と照合する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "1、2命令目の完了時点から20命令目の計算を残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05h/r05h-q9.webp SHA-256=e065c8e3d60bc95d479c5d862d1861041a6acf56757c63119d5214560b666ea5。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf SHA-256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。pdftotextによる対象行を読み合わせた。",
+        "完了サイクルを命令jについてj+4とし、j=20で24。5×20=100は重ねない場合。"
+      ]
     }
   },
   {
     "id": "r06a-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "31349b103acf0765f53cdbe0ee6f4fab9c3b930aab6c7244aa1c7b452eed1b49",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q8",
-      "summary": "ウ。④→③→②→⑤→①の順です。",
+      "summary": "5段パイプラインの各処理が必要とする情報から、一命令内の実行順序を判断します。",
       "explanation": "命令を取り出す④フェッチ、意味を解釈し入力値を読む③デコード・レジスタ読出し、②実行・アドレス生成、⑤メモリアクセス、①結果書込みの順です。\nメモリアクセスには計算したアドレスが必要で、デコードには取り出した命令が必要です。パイプラインは複数命令の段階を重ねますが、一命令内の依存順は変わりません。",
       "choiceReasons": [
         "③が④より先なので、命令を取り出す前にデコードしてしまいます。",
@@ -210,8 +229,8 @@
         },
         {
           "title": "使う考え方",
-          "text": "②にはアドレス生成が含まれます。そのアドレスを使う⑤メモリアクセスは②の後です。",
-          "revealsAnswer": false
+          "text": "③で命令を解読してレジスタの入力値を読み、②で演算やアドレス生成を行います。そのアドレスを使う⑤メモリアクセスは②の後です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
@@ -222,40 +241,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "フェッチ・デコードなどの用語と、各段階が前段の何を必要とするかが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "番号④の命令フェッチは、命令をメモリから取り出す段階です。まだ取得していない命令は③で解読できません。",
+          "remainingWork": "④より③が後になる候補を残す。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "④が③より先という条件ではウ/エが残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "③で命令を解読してレジスタの入力値を読み、②で演算やアドレス生成を行います。そのアドレスを使う⑤メモリアクセスは②の後です。",
+          "remainingWork": "前段と合わせ確定した④③②⑤①を肢に対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "H1と合わせて④③②⑤①となりウだけが残る。"
+        },
+        {
+          "newInformation": "先頭を④、次を③とし、②で演算・アドレス生成を行った後に⑤、最後に①と並べると④③②⑤①です。",
+          "remainingWork": "開示された順序とウを照合する。",
+          "revealsAnswer": true,
+          "reason": "全順序を直接示している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r06a/r06a-q8.webp SHA-256=f44b81c026b79879117bbf70dcb0fc9c1d0ea872629803b25d4c411f62b3ec58。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf SHA-256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。pdftotextによる対象行を読み合わせた。",
+        "取得④→解読/入力③→演算/アドレス②→メモリ⑤→結果書込み①、よってウ。"
+      ]
     }
   },
   {
     "id": "r07a-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "0f9836d3d1e53f567e7f339671a37503bd1520339c612c970d7d6d8b4f45cb67",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q10",
-      "summary": "アの毎秒50回転。100パルス/秒を1回転当たり2パルスで割ります。",
+      "summary": "クロックのカウント値からパルス周期を求め、1回転当たりのパルス数で回転数に換算します。",
       "explanation": "1MHzのクロックは毎秒100万カウントです。隣接するパルスの周期10000カウントは10000/1000000=0.01秒なので、パルスは毎秒100回出ます。\nセンサーは1回転に2パルスを出すため、回転数は100/2=50回転/秒です。",
       "choiceReasons": [
         "周期0.01秒から100パルス/秒を求め、2で割った50回転/秒です。",
@@ -284,41 +310,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "図の1周期を1回転と誤認し、MHzから秒への換算と2パルス/回転を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図の矢印は隣り合う立上り間の周期です。1回転の時間ではなく、1パルス周期を測っています。",
+          "remainingWork": "カウント値から1パルス周期を求める。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "計測対象の周期だけを示し数値計算と回転換算は未実施。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1MHz=1000000Hzなので、10000カウントに要する時間は10000/1000000秒です。",
+          "remainingWork": "周期の逆数と、2パルス/回転の換算を行う。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "単位換算の式を示し逆数と回転換算は本人が行う。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "その時間の逆数が毎秒のパルス数です。最後に「1回転ごとに2回出力」の2で割り、回転/秒へ直しましょう。",
+          "remainingWork": "1÷(10000/1000000)÷2を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "逆数と2で割る手順までで最終数値は本人が計算する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r07a/r07a-q10.webp SHA-256=55328f3008d54e8811897a2173dfd9734371fcb242941d438342738273beb236。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解アを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextによる対象行を読み合わせた。",
+        "図の矢印は立上りから次の立上り。周期10000/(10^6)=0.01秒、100パルス/秒÷2パルス/回転=50回転/秒。"
+      ]
     }
   },
   {
     "id": "r06a-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "e95702cb88e498ab68796c753043597025e8a56c6e196a9f01b53a2c70119aa9",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q11",
-      "summary": "ウ。FCは電気ケーブルと光ケーブルを利用できます。",
-      "explanation": "FC（ファイバチャネル）はストレージ接続に使われる高速な通信規格です。名称にファイバとありますが、伝送媒体は光だけに限らず電気ケーブルも利用できます。\n接続にはポイントツーポイント、ループ、スイッチを用いたファブリックなどがあり、TCP/IPの上位層として作られた規格ではありません。SCSIのコマンドを運ぶことはあっても、パラレルSCSIをFCの物理層にするという説明は異なります。",
+      "summary": "FCの伝送媒体・接続形態と、上位プロトコルや物理層の違いを確認します。",
+      "explanation": "FC（Fibre Channel、ファイバチャネル）はストレージ接続に使われる高速な通信規格です。名称にファイバとありますが、伝送媒体は光だけに限らず電気ケーブルも利用できます。\n接続にはポイントツーポイント、ループ、スイッチを用いたファブリックなどがあり、TCP/IPの上位層として作られた規格ではありません。SCSI（ストレージ装置向けのコマンド規格）のコマンドを運ぶことはあっても、パラレルSCSIをFCの物理層にするという説明は異なります。",
       "choiceReasons": [
         "FCはTCP/IPの上位層として作られた規格ではありません。IPでSCSIを運ぶiSCSIなどと区別します。",
         "FCの接続はスイッチを用いた構成だけでなく、ポイントツーポイントなどもあります。",
@@ -329,12 +361,12 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「ファイバ」という名前から光専用と決めつけず、規格の伝送媒体と接続形態を確認します。",
+          "text": "ストレージのインタフェースは、計算機と記憶装置の間でデータをやり取りするための規格です。ケーブルという物理的な媒体、機器のつなぎ方、運ぶコマンドを分けて読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "TCP/IPの上でストレージのコマンドを運ぶ方式と、FC自体の通信規格を区別します。SCSIコマンドを運ぶことは物理層がSCSIという意味ではありません。",
+          "text": "TCP/IPの上でストレージのコマンドを運ぶ方式と、FC自体の通信規格を区別します。ストレージ装置への命令であるSCSIコマンドを運ぶことは物理層がSCSIという意味ではありません。",
           "revealsAnswer": false
         },
         {
@@ -346,40 +378,49 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ファイバという名称で光専用と考えたり、SCSIコマンドと物理層を同一視したりする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ストレージのインタフェースは、計算機と記憶装置の間でデータをやり取りするための規格です。ケーブルという物理的な媒体、機器のつなぎ方、運ぶコマンドを分けて読みます。",
+          "remainingWork": "媒体/接続/上位規格をそれぞれ調べる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "媒体/構成/コマンドという読み分けの軸のみ。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "TCP/IPの上でストレージのコマンドを運ぶ方式と、FC自体の通信規格を区別します。ストレージ装置への命令であるSCSIコマンドを運ぶことは物理層がSCSIという意味ではありません。",
+          "remainingWork": "FCの接続形態と媒体の記述を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ア/エの混同を解消するがイ/ウの判断は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "FCには銅線の電気ケーブルと光ケーブルの双方があります。これを述べたウが適切です。",
+          "remainingWork": "銅線と光の双方を使えるウを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "電気/光双方というウの内容と肢名を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r06a/r06a-q11.webp SHA-256=b73f46b2162286bb840f46d25e1348256a975aa6046a96ac7923c29628a5f04e。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf SHA-256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。pdftotextによる対象行を読み合わせた。",
+        "FCは銅線/光の双方を使用できウ。TCP/IP上の規格ではなく、ポイントツーポイントもあり、SCSIコマンド搬送とパラレルSCSI物理層を区別。",
+        "独立確認担当3の指摘を受け、H2単独でも分かるようSCSIコマンドを「ストレージ装置への命令」と補足。FC媒体/接続形態の判断・開示フラグは変わらない。"
+      ]
     }
   },
   {
     "id": "r05a-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "1953dfdb431acec3ed4edd995a8f60167b92c29b357da4487baa199ab657bfd1",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q10",
-      "summary": "アのウェアレベリング。書換えを特定ブロックへ集中させません。",
+      "summary": "フラッシュメモリの書換え寿命を延ばす技術と、他の記憶管理技術を区別します。",
       "explanation": "フラッシュメモリはブロックごとの消去・書換え回数に上限があります。同じ論理位置への更新を同じ物理ブロックに集中させると、一部だけが早く寿命を迎えます。\nウェアレベリングは各ブロックの使用状況を管理し、書換え回数が偏らないよう物理的な書込み先を分散して寿命を延ばします。",
       "choiceReasons": [
         "ブロックごとの書換え回数を均す技術で、寿命を延ばすという目的に合います。",
@@ -391,7 +432,7 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "管理対象はファイルの断片や更新履歴ではなく「ブロックごとの書換え回数」です。回数が偏ると何が起こるか考えます。",
+          "text": "フラッシュメモリは、ブロックごとの消去・書換え回数に上限があります。同じブロックだけを繰り返し更新すると、その部分が先に劣化します。",
           "revealsAnswer": false
         },
         {
@@ -401,47 +442,54 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "wearは消耗、levelingは平準化です。この意味を合わせた技術名を探しましょう。",
+          "text": "wearは消耗、levelingは平準化です。ウェアレベリングは、書込み先を分散して消耗をならす技術です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ブロックの書換え寿命と、ウェアレベリングという名称が結び付かない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フラッシュメモリは、ブロックごとの消去・書換え回数に上限があります。同じブロックだけを繰り返し更新すると、その部分が先に劣化します。",
+          "remainingWork": "書換え回数を管理する技術の仕組みと名称を結ぶ。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "フラッシュの制約を教えるが技術名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一部のブロックだけが限界に達しないよう、更新先を分散して各ブロックの消耗を均します。",
+          "remainingWork": "消耗をならす説明を技術名に対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "書換えを分散し均すという対象技術の定義を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "wearは消耗、levelingは平準化です。ウェアレベリングは、書込み先を分散して消耗をならす技術です。",
+          "remainingWork": "開示されたウェアレベリングをアと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウェアレベリングという正答名を直接教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05a/r05a-q10.webp SHA-256=e93fa2c3064f37928cf74423c6072a3be52f76ad842878a9c076bd8bb95715f0。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解アを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf SHA-256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。pdftotextによる対象行を読み合わせた。",
+        "ブロック消耗の分散はウェアレベリング=ア。履歴=ジャーナリング、断片整理=デフラグ、内部書込み増幅=ライトアンプリフィケーション。"
+      ]
     }
   },
   {
     "id": "r05h-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "7376073393f2aa4a49b2348f45ce155d526f230e03299698e693c319dd4b8819",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q11",
-      "summary": "ウェアレベリングは各ブロックの書込み回数を均等化します。",
+      "summary": "ウェアレベリングの目的と、書込み位置を選択する仕組みを確認します。",
       "explanation": "フラッシュメモリには書込み・消去回数の寿命があります。同じ物理ブロックばかり更新すると、そこだけが早く劣化します。ウェアレベリングは論理的な書込み先に対応する物理的な位置を調整し、各ブロックの書込み回数がなるべく均等になるようにする技術なのでアです。",
       "choiceReasons": [
         "特定ブロックへの書込み集中を避けて、劣化を平準化します。",
@@ -458,64 +506,71 @@
         },
         {
           "title": "使う考え方",
-          "text": "フラッシュは繰返し書込み・消去で劣化します。どの候補が特定の場所への負担の集中を避けるでしょうか。",
+          "text": "フラッシュは繰返しの消去・書込みで劣化します。ウェアレベリングでは更新先を分散し、特定の物理ブロックだけが早く限界に達するのを防ぎます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "同じ論理アドレスを何度も更新するとき、物理的な書込み先を選び直して回数をならす操作を探します。",
+          "text": "同じ論理アドレスへの更新でも、対応する物理的な書込み位置を変えられます。各ブロックの書込み回数が均等になるよう、その位置を選ぶのがアです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "書込み回数の均等化を、セルの多値化や不良ブロック置換と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの候補は、書込み回数、記録量、不良部品、消去単位という別の観点を述べています。",
+          "remainingWork": "ウェアレベリングがどの観点を対象とするか判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "候補の観点を分けるだけで用語の定義は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フラッシュは繰返しの消去・書込みで劣化します。ウェアレベリングでは更新先を分散し、特定の物理ブロックだけが早く限界に達するのを防ぎます。",
+          "remainingWork": "書込み分散の説明に合うアを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "更新先分散で劣化を均すというアの定義を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "同じ論理アドレスへの更新でも、対応する物理的な書込み位置を変えられます。各ブロックの書込み回数が均等になるよう、その位置を選ぶのがアです。",
+          "remainingWork": "物理位置の選択とアの文を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの文と選択肢名を直接示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05h/r05h-q11.webp SHA-256=2058deb847be669b7ac3a1fbc3b370f33f772c9199b0633c75a5821b74391625。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解アを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf SHA-256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。pdftotextによる対象行を読み合わせた。",
+        "書込み位置で劣化を均すア。多値記録/不良ブロック置換/ブロック消去自体と区別。"
+      ]
     }
   },
   {
     "id": "r04h-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "b95ce03f16ed58a5ef57a893aeff97ea757f9b93fbf0c90baec7ce9d5c569dc9",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q13",
-      "summary": "ア。現用系の生存確認メッセージが途切れたことを契機に切り替えます。",
+      "summary": "ホットスタンバイで、現用系の障害を検知して切り替える契機を判断します。",
       "explanation": "ホットスタンバイでは待機系も切替えに備えて動作し、現用系を監視します。定期的な生存確認メッセージであるハートビートが届かなくなると、現用系の障害を疑い、待機系への切替えを開始できます。手動操作や処理残量の監視だけでは、障害時の自動切替えを直接表しません。",
       "choiceReasons": [
         "現用系が動作中と知らせる定期メッセージの途絶は、障害検知と切替えの契機になります。",
         "オペレータのコンソール操作は手動の切替えであり、ホットスタンバイの自動障害検知としては最適ではありません。",
         "処理残量が多いだけでは現用系の障害と判断できず、負荷増加の場合もあります。",
-        "待機系から現用系へ診断プログラムを毎回ロードする方式は、一般的なハートビートによる監視の説明ではありません。"
+        "障害を起こした現用系自身で、その都度ロードする診断プログラムを動かす方式では、停止などの障害で診断自体が動かないおそれがあります。待機系が外から生存通知を監視するアが適切です。"
       ],
       "takeaway": "ホットスタンバイの切替えでは、現用系からのハートビート途絶に注目する。",
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題が求めるのは「現用系に障害が発生して待機系に切り替わる契機」です。単に負荷が高い場合と区別します。",
+          "text": "ホットスタンバイでは、待機系も起動して業務を引き継げる状態を保ちます。障害時に素早く切り替えるには、人の操作を待たず異常を検知する仕組みが必要です。",
           "revealsAnswer": false
         },
         {
@@ -525,52 +580,60 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "動作中を知らせるメッセージが届かなくなれば、現用系の停止や障害を疑って切り替えられます。",
+          "text": "この定期的な生存確認メッセージをハートビートと呼びます。一定時間届かないことを監視し、現用系の停止や通信異常を検知して切替えの契機にします。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ホットスタンバイの即時切替えに、外部からの継続的な生存監視が必要と分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ホットスタンバイでは、待機系も起動して業務を引き継げる状態を保ちます。障害時に素早く切り替えるには、人の操作を待たず異常を検知する仕組みが必要です。",
+          "remainingWork": "どの契機が自動的に現用系の異常を捉えるか比べる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "起動待機と自動検知の必要を教えるが監視方式は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "待機系が現用系の動作を継続的に知るには、定期的な連絡を監視できます。連絡が途切れたときに何を疑うか考えます。",
+          "remainingWork": "生存連絡途絶を述べるアを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "定期連絡の途絶を監視するアの説明を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "この定期的な生存確認メッセージをハートビートと呼びます。一定時間届かないことを監視し、現用系の停止や通信異常を検知して切替えの契機にします。",
+          "remainingWork": "ハートビート途絶とアを対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段の監視方式をハートビートとして定義しアを特定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r04h/r04h-q13.webp SHA-256=a44e133365bba4fae70c416166a0451bc32b7444daee9d7a479332ed1653d0cd。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解アを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA-256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。テキストを含まないPDFのためPNGに描画しview_imageで問12ウ/問13アを実見。",
+        "ハートビート途絶のアが即応監視の契機。手動操作、単なる負荷増、障害系自体への診断実行と区別。"
+      ]
     }
   },
   {
     "id": "r03a-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "9cd1e04f7c5d322d35d8169936e50f3e575bc2d14d0d64cd4674434f6f9503c5",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q9",
-      "summary": "エ。主記憶を複数のバンクに分け、アクセスを並列化します。",
+      "summary": "メモリインタリーブと、仮想記憶・バッファ・入出力転送を区別します。",
       "explanation": "メモリインタリーブは主記憶を複数の独立したバンクに分け、アクセスを分散して重ね合わせる方式です。例えば連続するアドレスを順に異なるバンクへ割り当てると、あるバンクの処理中に別のバンクへのアクセスを進められます。",
       "choiceReasons": [
         "主記憶容量より大きなアドレス空間を提供する仮想記憶の説明です。",
         "主記憶とディスクの速度差をバッファで補う説明です。",
-        "CPUを介さず主記憶と入出力装置で転送するDMAの説明です。",
+        "DMA（Direct Memory Access、直接メモリアクセス）の説明です。CPUが転送を設定した後、データの転送自体をCPUの逐次処理によらず行います。",
         "主記憶をバンクに分割し、アクセス処理を並列化する説明です。"
       ],
       "takeaway": "インタリーブは主記憶のバンクを分けてアクセスを重ねる。",
@@ -587,47 +650,55 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "主記憶を複数バンクに分け、CPUからのアクセス要求を並列的に処理する説明です。",
+          "text": "例えば連続アドレスをバンク0、1、2、3へ順に割り当てると、あるバンクの処理中に別のバンクへアクセスできます。この複数バンクによる並列処理を述べる肢が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "バンク並列化を、仮想記憶やCPUを介さない転送と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各候補の対象が、アドレス空間・ディスクとの転送・入出力装置との転送・主記憶内部のどれかを整理します。",
+          "remainingWork": "メモリ内部の方式と各転送方式を区別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対象を分類するがインタリーブの仕組みは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一つの記憶領域の処理待ちを減らすため、独立した記憶領域に要求を分散して重ね合わせます。",
+          "remainingWork": "独立領域への要求分散をエに対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "独立領域へ要求を分散・重ねるというエの説明を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば連続アドレスをバンク0、1、2、3へ順に割り当てると、あるバンクの処理中に別のバンクへアクセスできます。この複数バンクによる並列処理を述べる肢が該当します。",
+          "remainingWork": "バンク並列化の具体例をエと照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "バンク並列化というエの内容を具体例とともに示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r03a/r03a-q9.webp SHA-256=20db4dc0b29bc8b70375c92bde407ceca6c54b884c97ab1714fe2a3f0c55f758。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解エを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf SHA-256=7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799。pdftotextによる対象行を読み合わせた。",
+        "バンクへアクセスを分散するエ。ア仮想記憶、イディスクとのバッファ、ウDMAと区別。"
+      ]
     }
   },
   {
     "id": "r05a-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "44a78266f149c33989ad6316a119eb1f767370248b8b107f29154d5261bbd5cc",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q11",
-      "summary": "イ。主記憶の一部をフレームバッファとして使います。",
+      "summary": "画面表示用フレームバッファの配置から、ユニファイドメモリ方式の特徴を判断します。",
       "explanation": "ユニファイドメモリ方式は、CPUが使う主記憶と画面表示用の記憶領域を共用します。画面の画素情報を置くフレームバッファを、主記憶の一部に確保します。\n専用の表示用メモリを主記憶と別に設ける方式とは異なります。メモリの共用は画面のリフレッシュを不要にすることを意味しません。",
       "choiceReasons": [
         "主記憶から独立した専用メモリをもつ方式で、共用するユニファイドメモリ方式ではありません。",
@@ -639,57 +710,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問は表示デバイスとの接続方式ではなく、フレームバッファのメモリ方式を尋ねています。保存先に注目します。",
+          "text": "フレームバッファは画面の画素データを記憶する領域です。設問では、その領域をどのメモリに配置するかが問われています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "unifiedは統合されたという意味です。CPU用と画面用の領域をどのメモリに置くか考えます。",
+          "text": "ユニファイドメモリでは、CPUが使う主記憶と画面表示用の領域を共用します。別の専用メモリを設ける方式との違いです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "専用メモリを別に設けず、主記憶に画面の画素情報を確保します。これを述べる選択肢を探します。",
+          "text": "主記憶の一部にフレームバッファを確保するのでイです。これは記憶領域の共有方式であり、表示デバイスの接続方法やリフレッシュの要否を決めるものではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "フレームバッファの役割と、ユニファイドが何を共有するかを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フレームバッファは画面の画素データを記憶する領域です。設問では、その領域をどのメモリに配置するかが問われています。",
+          "remainingWork": "画素データを置くメモリがどこかを比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "フレームバッファの役割を教えるが配置先は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ユニファイドメモリでは、CPUが使う主記憶と画面表示用の領域を共用します。別の専用メモリを設ける方式との違いです。",
+          "remainingWork": "主記憶の共用とイを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "主記憶の共用というイの内容を直接渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "主記憶の一部にフレームバッファを確保するのでイです。これは記憶領域の共有方式であり、表示デバイスの接続方法やリフレッシュの要否を決めるものではありません。",
+          "remainingWork": "開示されたイと他肢の対象の違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イとその根拠を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05a/r05a-q11.webp SHA-256=bcf6aa3a2cca49ba92477099d2c6a88e7ccbc30951cb233a029bf1111e44754b。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解イを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf SHA-256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。pdftotextによる対象行を読み合わせた。",
+        "画素データのフレームバッファを主記憶内に確保するイ。専用メモリ/接続方式/リフレッシュ不要とは異なる。"
+      ]
     }
   },
   {
     "id": "r07a-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "ea56068508c9855e053fcf80e30a55c5b73aec1fee9458c2cb007d1317a5072d",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q9",
-      "summary": "イ。ユニファイドメモリでは主記憶の一部を画面表示にも使います。",
+      "summary": "ユニファイドメモリ方式における、主記憶と画面表示用領域の関係を確認します。",
       "explanation": "ユニファイドメモリ方式は、CPUの主記憶と表示用のメモリ領域を共有する方式です。表示内容の画素データを置くフレームバッファに主記憶の一部を割り当てます。\n専用の表示メモリを別に持つ方式との違いが問われています。表示デバイスへの接続方法やリフレッシュの必要性を表す用語ではありません。",
       "choiceReasons": [
         "主記憶と別の専用フレームバッファを持つ説明で、共有する方式に合いません。",
@@ -701,57 +779,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「ユニファイド」は統合・共有を意味します。何の領域を共通化するのかに注目します。",
+          "text": "フレームバッファは画面の画素データを記憶する領域です。設問では、その領域をどのメモリに配置するかが問われています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "フレームバッファは画面の画素データを記憶する領域です。これを専用メモリに置くか主記憶に置くかを比べます。",
-          "revealsAnswer": false
+          "text": "ユニファイドメモリでは、CPUが使う主記憶と画面表示用の領域を共用します。別の専用メモリを設ける方式との違いです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "接続がシリアルか、画面を更新するかではなく、画素データを格納するメモリの場所を説明する候補を探しましょう。",
-          "revealsAnswer": false
+          "text": "主記憶の一部にフレームバッファを確保するのでイです。これは記憶領域の共有方式であり、表示デバイスの接続方法やリフレッシュの要否を決めるものではありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "表示用領域の配置方式を、表示接続や更新方式と取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フレームバッファは画面の画素データを記憶する領域です。設問では、その領域をどのメモリに配置するかが問われています。",
+          "remainingWork": "メモリ配置と接続/更新方式を区別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "画素データの領域を定義するが共有先は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "ユニファイドメモリでは、CPUが使う主記憶と画面表示用の領域を共用します。別の専用メモリを設ける方式との違いです。",
+          "remainingWork": "主記憶の共用を述べるイを照合する。",
+          "revealsAnswer": true,
+          "reason": "主記憶と表示領域を共用するイの内容を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "主記憶の一部にフレームバッファを確保するのでイです。これは記憶領域の共有方式であり、表示デバイスの接続方法やリフレッシュの要否を決めるものではありません。",
+          "remainingWork": "開示されたイと他肢の対象の違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "イとその根拠を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r07a/r07a-q9.webp SHA-256=7455db3c3a8a78132d373efa11518eb9a2a3b96bfcffee5fbc8fbba8aca0b76d。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解イを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextによる対象行を読み合わせた。",
+        "主記憶を表示領域と共用するイ。画素データの保存先と接続・更新方式を区別。"
+      ]
     }
   },
   {
     "id": "r04h-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "0a70d3989d9d0481ac1f7f18f751c1132b144c98d645ee89e0662516d09787d0",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q12",
-      "summary": "ウ。並列化できない部分があると、プロセッサを増やしても速度向上率に上限があります。",
+      "summary": "並列化できない処理の割合が、プロセッサ追加による速度向上の限界にどう影響するかを判断します。",
       "explanation": "並列化可能な割合をp、プロセッサ数をnとすると、アムダールの法則は速度向上率S=1/{(1−p)+p/n}です。p<1ならnを増やしても、直列部分1−pは残り、Sは1/(1−p)に近づきます。全て並列化できるp=1なら、理想的にはS=nです。",
       "choiceReasons": [
         "全て並列化できる場合、理想的な速度向上率はプロセッサ数nであり、有限の上限へ近づくとは限りません。",
@@ -768,7 +853,7 @@
         },
         {
           "title": "使う考え方",
-          "text": "処理時間を1として、直列部分1−pはそのまま、並列部分pだけをnで割ります。全体は(1−p)+p/nです。",
+          "text": "並列化可能な割合をp、プロセッサ数をnとし、1台での処理時間を1とします。直列部分1−pはそのまま、並列部分pだけをnで割るので、時間は(1−p)+p/n、速度向上比はその逆数です。",
           "revealsAnswer": false
         },
         {
@@ -780,40 +865,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "プロセッサを増やせば、直列部分を含む処理も比例して高速化すると考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補ごとに「全て並列化できる」と「並列化できない部分がある」の条件を分けて読みます。",
+          "remainingWork": "並列可能割合の条件と速度向上の記述を比べる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "並列可能割合の条件を区別するだけで法則の結論は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "並列化可能な割合をp、プロセッサ数をnとし、1台での処理時間を1とします。直列部分1−pはそのまま、並列部分pだけをnで割るので、時間は(1−p)+p/n、速度向上比はその逆数です。",
+          "remainingWork": "nを増やした式の挙動を考え、各肢を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "変数を定義し式を与えるが極限と各肢の比較は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "nを非常に大きくするとp/nは0に近づきます。直列部分が残れば速度向上率は1/(1−p)へ近づきます。",
+          "remainingWork": "有限の上限を述べるウに対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "直列部分による上限への漸近というウの内容を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r04h/r04h-q12.webp SHA-256=47533e24cf3d8e14234bbb41987b5112f433c71c355b6f1828d0ca60cfddfaa5。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA-256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。テキストを含まないPDFのためPNGに描画しview_imageで問12ウ/問13アを実見。",
+        "S=1/((1−p)+p/n)。p<1でn→∞なら1/(1−p)へ漸近しウ、p=1ならS=n。例えばp=0.8なら上限5。"
+      ]
     }
   },
   {
     "id": "r04a-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "6f420dcf5d47ea920bc40924cfdad8c4413f5f4a06e2cf29f0d8471f8d2fb514",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q10",
-      "summary": "エ。全体のヒット率は0.98です。",
+      "summary": "二段キャッシュで、L1ヒットとL1ミス後のL2ヒットを重複なく数えます。",
       "explanation": "L1に当たる確率は0.95です。L1に当たらない0.05のうち、L2に当たる割合が0.6なので、L2で救われる確率は0.05×0.6=0.03です。全体では0.95+0.03=0.98。両方外れる確率0.05×0.4=0.02を1から引いても同じです。",
       "choiceReasons": [
         "0.95×0.6は両段階の率を単純に掛けた値で、L1だけで当たるアクセスを落としています。",
@@ -836,46 +928,53 @@
         {
           "title": "この問題に当てはめる",
           "text": "0.95+(1−0.95)×0.6を計算します。",
-          "revealsAnswer": true
+          "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "L2のヒット率を全アクセスに掛け、L1ヒットを重複計上する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "L1で当たるアクセスと、L1で外れた後にL2で当たるアクセスを分けます。",
+          "remainingWork": "L1ミス後のL2ヒットの確率を求める。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "排反な経路を教え、確率の計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "L1で外れた分だけがL2へ進むので、まず1−0.95=0.05を求めます。この0.05を母集団にしてL2の0.6を掛け、L1のヒット分と重複しない量を作ります。",
+          "remainingWork": "0.05×0.6をL1ヒットに加える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "L1ミス率を計算するがL2ヒットを足した最終率は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
+          "newInformation": "0.95+(1−0.95)×0.6を計算します。",
+          "remainingWork": "0.95+0.05×0.6の計算を行う。",
+          "revealsAnswer": false,
+          "reason": "式の加算乗算が残り最終値/肢を示していない。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r04a/r04a-q10.webp SHA-256=489e7bbe2b533cf93dae9b53c2a0edd5b9d8568bddc3010b366abd3f23bac742。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解エを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf SHA-256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。pdftotextによる対象行を読み合わせた。",
+        "L2の率はL1ミス後のアクセスに対する局所ヒット率と読む。0.95+0.05×0.6=0.98、ミス率0.05×0.4=0.02でも検算。包含条件と二重計上を区別。"
+      ]
     }
   },
   {
     "id": "r03h-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "f9a39937169de2217c45397f4bbac6e536fb6a2ec0dcd20dfe77083b160ac80c",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q13",
-      "summary": "ウ。構成要素の品質を上げて故障を防ぐのがフォールトアボイダンスです。",
+      "summary": "信頼性設計の用語を、故障予防・故障後の継続・安全確保・誤操作防止に分けて判断します。",
       "explanation": "フォールトアボイダンスは故障の発生そのものを減らす考え方です。高品質な部品や十分な検証を利用します。故障した後の安全性や処理継続を扱う用語と区別します。",
       "choiceReasons": [
         "利用者のミスを防ぐのはフールプルーフです。",
@@ -883,61 +982,69 @@
         "個々の品質を高めて故障の発生を防ぐ説明で正しいです。",
         "安全状態に固定するのはフェールセーフで、フォールトトレランスの説明ではありません。"
       ],
-      "takeaway": "故障を防ぐ、故障後も続ける、安全側へ止めるを区別する。",
+      "takeaway": "アボイダンス＝故障予防、トレランス＝故障に耐えて機能維持、フェールソフト＝縮退して継続、フェールセーフ＝安全側へ移行、フールプルーフ＝誤操作防止。",
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各文が故障前の対策か、故障後の動作かを分けて読みます。",
+          "text": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "avoidは避けるという意味です。故障発生の確率を下げる対策がどれか確認します。",
+          "text": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "構成要素の品質を高め故障を発生させないという記述が適切です。",
+          "text": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "似た用語の名称と故障前後の目的が対応せず、安全と継続を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
+          "remainingWork": "各名称と目的の対応を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "予防/事後/誤操作の軸のみで名称との対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
+          "remainingWork": "故障予防の定義とウを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アボイダンスの定義がウの説明と一致する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
+          "remainingWork": "開示されたウと他肢の誤りを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答ウと他肢を判定する定義を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r03h/r03h-q13.webp SHA-256=630b7f7b9c4e0ffc8bf9141842737a8af1c0e7460e6a2297f47ff2639fdac35b。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf SHA-256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。pdftotextによる対象行を読み合わせた。",
+        "ウは品質による故障予防。ア=フールプルーフ、イは縮退なしが誤り、エ=フェールセーフ。"
+      ]
     }
   },
   {
     "id": "r04a-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "e3b3a59c820dc2480c67635c90cc35da913ca297d57a39c27112f2cb7802c8ff",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q13",
-      "summary": "ウ。部品の品質を高め、故障自体の発生を防ぎます。",
+      "summary": "信頼性設計における、故障そのものの予防と故障後の対処の違いを判断します。",
       "explanation": "フォールトアボイダンスは、高品質な構成要素や設計によって故障を起こしにくくする考え方です。故障後にどう継続するか、安全をどう守るかとは区別します。",
       "choiceReasons": [
         "利用者の単純な誤操作を防ぐ説明はフールプルーフで、フェールセーフではありません。",
@@ -945,61 +1052,69 @@
         "個々の品質向上による故障予防はフォールトアボイダンスです。",
         "安全状態へ固定する説明はフェールセーフであり、フォールトトレランスではありません。"
       ],
-      "takeaway": "故障予防、故障への耐性、安全側への移行を分ける。",
+      "takeaway": "アボイダンス＝故障予防、トレランス＝故障に耐えて機能維持、フェールソフト＝縮退して継続、フェールセーフ＝安全側へ移行、フールプルーフ＝誤操作防止。",
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各説明が、故障する前の予防か故障後の動作かを確認しましょう。",
+          "text": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "「縮退しない」「安全状態へ固定」などの動作と、付けられた用語が合うか比べます。",
-          "revealsAnswer": false
+          "text": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "構成要素の品質を高めて故障発生を防ぐのがアボイダンスです。",
+          "text": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "故障予防・縮退運転・安全への移行・誤操作防止を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
+          "remainingWork": "各説明を故障予防/事後対策に分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対策の分類軸のみで各用語の正誤は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
+          "remainingWork": "故障予防の定義とウを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "故障予防=アボイダンスとしてウを確定する。"
+        },
+        {
+          "newInformation": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
+          "remainingWork": "開示されたウと他肢の誤りを確認する。",
+          "revealsAnswer": true,
+          "reason": "ウと他肢の誤りを直接教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r04a/r04a-q13.webp SHA-256=df0e93db046cf9bde5068ad5325e9bcc6d13753ded4a68a6d700f042a31f0160。contextのア・イの用語に転記不一致あり。review/source-discrepancies.json参照。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf SHA-256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。pdftotextによる対象行を読み合わせた。",
+        "原本ではア/イともフェール。ウのアボイダンスが正答。既存contextのフール表記2箇所は原本不一致として別記し原問未修正。"
+      ]
     }
   },
   {
     "id": "r06h-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "baff6f95bb983a5a872c11f2082d82b89c28932831cba4ca0b6527020206a4e1",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q12",
-      "summary": "ウ。フォールトアボイダンスは部品などの品質を高め、故障の発生を減らします。",
+      "summary": "信頼性設計の各用語と、予防・縮退運転・安全確保などの動作との対応を確認します。",
       "explanation": "フォールトアボイダンスは、構成要素の品質・設計・検査などを改善し、故障そのものを起こりにくくする考え方です。これを述べるウが適切です。\nフェールセーフは故障時に安全側へ移ること、フェールソフトは機能を縮退して稼働を続けること、フォールトトレランスは故障に耐えて必要な機能を維持することです。利用者のミスを防ぐ設計はフールプルーフです。",
       "choiceReasons": [
         "アはフールプルーフの説明です。フェールセーフは故障時の安全確保です。",
@@ -1007,61 +1122,69 @@
         "ウは構成要素の品質を高めて故障を避けるフォールトアボイダンスの説明です。",
         "エは故障時に安全状態へ移すフェールセーフの説明です。"
       ],
-      "takeaway": "故障を避ける・故障に耐える・縮退する・安全側にする、を分ける。",
+      "takeaway": "アボイダンス＝故障予防、トレランス＝故障に耐えて機能維持、フェールソフト＝縮退して継続、フェールセーフ＝安全側へ移行、フールプルーフ＝誤操作防止。",
       "hints": [
         {
           "title": "注目するところ",
-          "text": "アは利用者のミス、ウは部品などの故障に着目しています。故障前の予防か、故障後の対応かを分けます。",
+          "text": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "avoidanceは回避、toleranceは耐えるという意味です。ソフトは縮退、セーフは安全状態への移行と結び付けます。",
-          "revealsAnswer": false
+          "text": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ウの「個々の品質を高めて故障が発生しないようにする」が、故障を回避する説明と一致するか確認します。",
+          "text": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "avoidance/toleranceの意味を知らず、縮退なし・安全状態などの条件を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "信頼性対策には、故障が起きないようにする予防と、故障後に機能や安全を保つ対応があります。利用者の誤操作を防ぐ設計も、部品の故障対策とは分けます。",
+          "remainingWork": "各名称と予防/事後対策の対応を判断する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対策の分類軸のみで用語の対応は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フォールトアボイダンスは、高品質な部品や十分な検証で故障の発生を避ける考え方です。avoidance（回避）を、故障に耐えるtolerance（耐性）と区別します。",
+          "remainingWork": "品質による予防を述べるウを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "品質を上げる故障予防の定義がウと実質同じ。"
+        },
+        {
+          "newInformation": "品質を高めて故障そのものを防ぐウが適切です。フェールソフトは機能を縮退して継続し、フェールセーフは安全側へ移行します。利用者のミスを防ぐのはフールプルーフです。",
+          "remainingWork": "開示されたウと他肢の誤りを確認する。",
+          "revealsAnswer": true,
+          "reason": "ウと他肢の誤りを直接教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r06h/r06h-q12.webp SHA-256=01d7b620f55af557507f58268f2db3ab91e937500b4bcd2762798c7cc3303b63。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf SHA-256=2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37。pdftotextによる対象行を読み合わせた。",
+        "故障予防のウが正しい。フールプルーフ、フェールソフト、フェールセーフ、トレランスの定義と各肢を照合。"
+      ]
     }
   },
   {
     "id": "r05a-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "bf451b048be4856f14159344ce0fd7856633f3d9c23119671677602ad14ce4be",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q9",
-      "summary": "ウの投機実行。分岐結果を待たず予測した側を実行します。",
+      "summary": "分岐が未確定の段階で予測した経路を実行する技法を、他のパイプライン高速化技法と区別します。",
       "explanation": "条件分岐の結果が出るまで待つと、パイプラインに空きが生じます。そこで分岐先を予測し、その先の命令を先に実行する技法が投機実行です。\n予測が正しければ結果を利用でき、外れた場合は実行結果を破棄して正しい経路からやり直します。",
       "choiceReasons": [
         "実行可能な命令を元の順番に拘束されず実行する技法です。条件未確定の分岐先を予測することとは別の観点です。",
@@ -1073,7 +1196,7 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "条件の結果が出る「前」に実行しています。待ち時間をどのように埋めるか、設問の動作に注目します。",
+          "text": "条件分岐の結果を待つ間に次の命令を投入できないと、パイプラインに空きが生じます。その待ち時間を減らす技法が問われています。",
           "revealsAnswer": false
         },
         {
@@ -1090,41 +1213,48 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "分岐先の予測による実行を、単なる命令順変更やレジスタ名変更と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "条件分岐の結果を待つ間に次の命令を投入できないと、パイプラインに空きが生じます。その待ち時間を減らす技法が問われています。",
+          "remainingWork": "条件未確定の実行を、各技法の意味と対応させる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分岐の待ちがパイプラインの空きを生むことを教えるが、解決する技法名や定義は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "予測が外れる可能性のある経路を先に実行し、外れた結果は破棄する方式です。命令の順番変更だけではありません。",
+          "remainingWork": "予測に基づく実行の仕組みと技法名を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "予測経路の先行実行と破棄という投機実行の定義を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "確定していない見込みに基づく実行を「投機」と呼びます。この語に対応する選択肢を選びます。",
+          "remainingWork": "投機という名称をウと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "投機実行という正答名を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r05a/r05a-q9.webp SHA-256=f4ad271b0beda219317d5c3ef1241a45ceb22733eb375f799ba8dd4deef8678e。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf SHA-256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。pdftotextによる対象行を読み合わせた。",
+        "条件未確定の予測経路実行は投機実行のウ。命令順序変更/遅延スロット活用/偽のレジスタ依存除去と区別。"
+      ]
     }
   },
   {
     "id": "r03h-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "d088ccc83266496316ae3cb2fd5e30377a3f4f862c3d642e52a91b49348b0e1b",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q9",
-      "summary": "ウ。平均25ナノ秒なので40MIPSです。",
-      "explanation": "平均命令時間は10×0.50+40×0.30+40×0.20=25ナノ秒です。1秒で10⁹÷25=40,000,000命令を実行するため、百万命令毎秒の単位では40MIPSです。",
+      "summary": "命令の出現頻度から平均命令時間を求め、毎秒の命令実行数に換算します。",
+      "explanation": "平均命令時間は10×0.50+40×0.30+40×0.20=25ナノ秒です。1ナノ秒は10⁻⁹秒なので、1秒で10⁹÷25=40,000,000命令を実行できます。MIPS（Million Instructions Per Second）は毎秒百万命令を単位とする性能であり、40,000,000÷10⁶=40MIPSです。",
       "choiceReasons": [
         "11は時間を単純に合計した90nsの逆数に近い値です。出現頻度を反映した平均時間の逆数ではありません。",
         "25は平均時間のナノ秒の値で、MIPSへの変換前です。",
@@ -1135,12 +1265,12 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "整数10nsが50%、移動40nsが30%、分岐40nsが20%という三行を書きます。",
+          "text": "命令ミックスとは、実行する命令の種類ごとの出現割合です。頻度が異なるので、三種類の実行時間を単純に足したり同じ重みで平均したりしません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各時間に頻度を掛けて足し、平均1命令の時間を求めます。性能はその時間の逆数です。",
+          "text": "平均1命令の時間は、各時間×出現割合の合計です。MIPSは毎秒百万命令を表し、平均時間がtナノ秒なら、10⁹÷t÷10⁶=1,000÷tで求められます。",
           "revealsAnswer": false
         },
         {
@@ -1152,40 +1282,48 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "命令時間を頻度で重み付けせず、nsとMIPSの換算を取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "命令ミックスとは、実行する命令の種類ごとの出現割合です。頻度が異なるので、三種類の実行時間を単純に足したり同じ重みで平均したりしません。",
+          "remainingWork": "頻度に応じた平均時間を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "頻度で重みを変える必要を教え計算は未実施。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "平均1命令の時間は、各時間×出現割合の合計です。MIPSは毎秒百万命令を表し、平均時間がtナノ秒なら、10⁹÷t÷10⁶=1,000÷tで求められます。",
+          "remainingWork": "10×0.5+40×0.3+40×0.2を計算しMIPSに換算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "加重平均と単位変換を教えるが平均と最終値は本人が計算。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "平均は5+12+8=25ns、1,000÷25=40MIPSです。",
+          "remainingWork": "開示された40MIPSとウを照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "25nsと40MIPSの最終値を直接与える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r03h/r03h-q9.webp SHA-256=24705a7bac98769129d196143c357e1ba320016dd53aed35ea5f6acab52df9a4。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解ウを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf SHA-256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。pdftotextによる対象行を読み合わせた。",
+        "100命令なら時間10×50+40×30+40×20=2500ns、平均25ns。10^9/25/10^6=40MIPSでウ。"
+      ]
     }
   },
   {
     "id": "r06h-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "4fa38271b814f3d89a4d51667869575d72c0f2d3d64afaa4b609d42c4b16283d",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_2",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q11",
-      "summary": "圧縮後6Mバイトの転送0.30秒と展開0.18秒を足し、0.48秒です。",
+      "summary": "圧縮後のデータ量を基に、順次行う転送と展開の所要時間を計算します。",
       "explanation": "圧縮後のデータ量は15×0.40=6Mバイトです。転送時間は6÷20=0.30秒。展開時間の基準も「1Mバイトに圧縮されたデータ」なので6×0.03=0.18秒です。\n転送と展開は同時に行われないため、合計0.30+0.18=0.48秒となります。元の15Mバイトで展開時間を計算しない点が重要です。",
       "choiceReasons": [
         "アの0.48秒は圧縮後6Mバイトの転送・展開の合計です。",
@@ -1214,29 +1352,35 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "40%を削減率と誤認したり、展開時間の基準を圧縮前15Mバイトにしたりする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フラッシュメモリにあるのは元の40％のデータです。まず15Mバイトから転送量を求めます。",
+          "remainingWork": "15×0.4で圧縮後の量を求める。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "40%の対象を明確化するが転送量の計算は未実施。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "転送はデータ量÷20、展開は圧縮されたデータ量×0.03で計算します。同時にしないので時間を足します。",
+          "remainingWork": "圧縮後の量で転送と展開を別々に計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "両時間の式を教え、圧縮量の適用と合計計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "6÷20と6×0.03を別々に計算し、二つを足して選択肢と比べましょう。",
+          "remainingWork": "6/20+6×0.03を計算し肢と照合する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "6を代入した二つの式を示すが最終計算を残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本webpをview_imageで実見し、問題文・全4肢・図表を照合：assets/questions/r06h/r06h-q11.webp SHA-256=b81dd8b91fe0fe613618bfd5bdab64a208e729ba7857ee200843c2688a957d05。原本とcontextの内容は一致。",
+        "IPA公式解答PDFを取得して対象問の正解アを確認：https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf SHA-256=2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37。pdftotextによる対象行を読み合わせた。",
+        "圧縮後15×0.4=6MB、転送6/20=0.30秒、展開6×0.03=0.18秒、非同時のため合計0.48秒でア。誤答は展開のみ15基準/転送のみ15基準/両方15基準。"
+      ]
     }
   }
 ]

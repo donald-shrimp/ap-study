@@ -1,0 +1,84 @@
+{
+  "batchId": "batch-05",
+  "author": "Codex /root/ap_wave02_author_1",
+  "kind": "author-self-check-not-independent-approval",
+  "checkedAt": "2026-10-27T09:29:17.200320+00:00",
+  "questionCount": 20,
+  "choicesChecked": 80,
+  "hintsChecked": 60,
+  "decisions": {
+    "revise": 20
+  },
+  "changedLessonKeys": {
+    "summary": 20,
+    "hints": 17,
+    "explanation": 1,
+    "choiceReasons": 1
+  },
+  "sourceImageVerification": "20問のassets/questions原本を全件view_imageで実際に開き、全文・全肢・USB図・アムダール式を目視照合。sourceNotesに画像パスと既存固定hashを記載し、全sourceHashesを実ファイルから再計算一致。",
+  "officialAnswers": [
+    {
+      "exam": "r04h",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59"
+    },
+    {
+      "exam": "r05a",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+      "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741"
+    },
+    {
+      "exam": "r03a",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+      "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799"
+    },
+    {
+      "exam": "r07h",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907"
+    },
+    {
+      "exam": "r06a",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732"
+    },
+    {
+      "exam": "r06h",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+      "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37"
+    },
+    {
+      "exam": "r03h",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+      "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1"
+    },
+    {
+      "exam": "r04a",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+      "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1"
+    },
+    {
+      "exam": "r05h",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+      "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546"
+    },
+    {
+      "exam": "r07a",
+      "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+      "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82"
+    }
+  ],
+  "answerVerification": "各年度IPA公式解答PDFを取得。r04hはpdftoppm画像をview_imageで開いて問8/9/10/11を目視、他9年度はpdftotextの解答表から該当番号と正答文字を読んだ。全20問context.answerに一致。",
+  "calculationVerification": "Fractionによる別計算: RAID5=(6−1−1)*8=32TB。Amdahl n=3/4/5/6の比=2,31/13,19/7,3。cache 10h+60(1−h)はh=.1/.17/.83/.9で55/51.5/18.5/15ns。normalized cache=.95/30+.05=49/600、別加算モデル=1/12、いずれも約.08。",
+  "contentDecisions": [
+    "既存の十分な解説・全肢理由は維持。全問のsummaryを問う論点に変更。",
+    "SAN、識別子、コンテナ、書込み方式など、正答定義を渡す段のrevealsAnswerを累積で判定しtrueに修正。",
+    "r06h-q10はヒット率の定義・変数・単位・平均モデルの前提を補足。",
+    "r04h-q10のア理由はセット方式の方向を安易に断定せず、固定制約がフル方式と合わない点で説明。"
+  ],
+  "integrity": "HEADからid/baseVersion/baseLessonSHA256不変、design.changesと実lesson差分キーが20件全件一致。原問・図・公式正答・公開教材・reviews.jsonは編集なし。",
+  "formalCheck": "python tools/ap-lesson-quality.py check batch-05: exit 0, questions 20, reviewed 0, approvedForRegistration false",
+  "independentReview": "未実施。別担当へ引渡し。",
+  "issues": [],
+  "pending": []
+}

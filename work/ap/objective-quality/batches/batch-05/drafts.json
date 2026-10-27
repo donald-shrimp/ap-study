@@ -3,11 +3,11 @@
     "id": "r04h-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "ce749482daa01d9649bc0583683c06802bd2948c383a8520c4a38a4b2abcd962",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q11",
-      "summary": "イ。実効データ容量は32Tバイトです。",
+      "summary": "ホットスペアとRAID5のパリティ容量を区別し、実効データ容量を求める。",
       "explanation": "6台のうちホットスペア1台は通常のデータ保存に使わないので、RAID5を構成する稼働ディスクは5台です。RAID5のパリティには合計1台分の容量が必要です。実効容量は(6−1−1)×8=32Tバイトです。",
       "choiceReasons": [
         "24Tバイトは3台分であり、ホットスペアとパリティ以外にもう1台分を差し引いています。",
@@ -19,12 +19,12 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「6台」に予備ディスク1台が含まれる点を確認し、通常のRAID5を構成する台数を数えます。",
+          "text": "ホットスペアは故障時の交換用に待機する予備ディスクで、通常のデータ保存には使いません。まず6台から予備1台を除きます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "稼働ディスク数は6−1台です。RAID5はパリティを分散保存しても合計で1台分を使うので、この稼働台数からさらに1台分を引き、1台の8Tバイトを掛けます。",
+          "text": "RAID5のパリティは、故障したディスクの内容を復元するための情報です。各ディスクに分散して保存しますが、合計で稼働ディスク1台分の容量を使います。実効容量は（稼働台数−1）×1台の容量です。",
           "revealsAnswer": false
         },
         {
@@ -36,40 +36,48 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "予備ディスクとパリティを同じものと考え、差し引く容量を誤る。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ホットスペアの役割と通常時に容量へ含めない理由。",
+          "remainingWork": "稼働台数を数える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "稼働台数の整理までで最終容量は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "パリティの意味とRAID5の容量式。",
+          "remainingWork": "稼働5台を式へ当てはめて計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式を教えるが与件の適用と計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "与件への代入と最終容量32Tバイト。",
+          "remainingWork": "32に対応する肢を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終値32Tバイトを示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04h/r04h-q11.webp SHA256=8da4a9764dc01ded5234795fc5933aea23972d89b3c77f25eab79919cc9f4a9f",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。公式正答=イ。r04hはPDFを画像化し解答表を目視。他年度はpdftotextの解答表を読んだ。",
+        "再計算: (6−1予備−1パリティ)×8=32Tバイト。選択肢24/32/40/48を3/4/5/6台分として照合。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r05a-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "0d05592deac8004eff487ab90a8cafa2d1d8e1385f72d7af79dc6e93c74211c5",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q12",
-      "summary": "イ。SANはストレージ接続用のネットワークを使います。",
+      "summary": "SAN・NAS・直接接続を、接続形態とアクセス単位で区別する。",
       "explanation": "SANはサーバとストレージを接続するためのネットワークです。代表的にはファイバチャネルなどを使い、サーバからストレージへブロック単位でアクセスします。\nCIFSやNFSによるLAN経由のファイル共有はNASの説明です。内蔵ディスクの1対1接続とも区別します。",
       "choiceReasons": [
         "サーバへ直接取り付けるDASの説明で、ストレージ接続用ネットワークではありません。",
@@ -81,57 +89,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の接続を、直接1対1、専用ネットワーク、LAN上のファイル共有の三つに分けて読みます。",
+          "text": "選択肢の接続を、サーバへの直接接続、ストレージ用ネットワーク、LAN上のファイル共有に分けます。接続先と、データを扱う単位の両方が区別の手掛かりです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "SANのサーバはストレージのブロックへアクセスします。CIFSやNFSのようなファイル共有との違いを確認します。",
-          "revealsAnswer": false
+          "text": "SANはサーバとストレージを結ぶネットワークで、サーバからはディスクの区画であるブロック単位にアクセスします。代表的な接続技術はファイバチャネルです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "SANの代表的な接続技術はファイバチャネルです。その接続を述べる選択肢を選びましょう。",
+          "text": "CIFSとNFSはファイル共有用のプロトコルで、NASで使われます。SANを述べるのは、ファイバチャネルなどによる専用ネットワークで接続するイです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SANとNASをどちらもネットワーク上の保存装置とだけ捉えて混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "接続形態とアクセス単位という二つの分類軸。",
+          "remainingWork": "各肢を三つの接続形態に分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類軸のみでSANがどの形態かはまだ教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SANのブロックアクセスとファイバチャネル接続。",
+          "remainingWork": "SANの説明とイを対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢にだけ登場するファイバチャネルをSANの代表技術として示す。"
+        },
+        {
+          "newInformation": "CIFS/NFSはNASという誤答との対比。",
+          "remainingWork": "ファイル共有方式との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "イを明示し、他方式との違いも教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r05a/r05a-q12.webp SHA256=593c1ae4123cb550a3a07462343eed70c0d262b816430438a8c511593ff47cc9",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf SHA256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。公式正答=イ。pdftotextの解答表を読んだ。",
+        "SANの専用ネットワーク接続=イ。アは直接接続、CIFS/NFSはファイル共有。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r03a-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "709ee851a0f04a4e3ccce7030d3659f216c81d21d7ff25808ce379b7fe8e2132",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q10",
-      "summary": "イ。丸みのある対称形で上下二列の接点を持つ図がUSB Type-Cです。",
+      "summary": "USB Type-Cを、コネクタの外形と接点配置から識別する。",
       "explanation": "USB Type-Cは上下を反転しても挿入できるコネクタで、外形は両端が丸い扁平な形です。図イは上下対称の外形と二列の接点を示しています。図アは長方形のType-A、図ウはMini-B、図エはMicro-Bの形です。縮尺は同一でないので、大きさではなく外形と接点配置で判別します。",
       "choiceReasons": [
         "長方形の外形で片側に接点が並ぶUSB Type-Aです。",
@@ -160,40 +176,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "縮尺が違う図で大きさを比較してしまい、表裏を反転できる構造を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "縮尺に依存しない外形と接点列の観察。",
+          "remainingWork": "各図の外形と接点を観察する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "Type-Cの特徴はまだ与えず観察軸を示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表裏を反転して挿せる構造と上下対称性。",
+          "remainingWork": "上下対称の図と対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "全図のうちイを特定できる上下対称性を教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "丸い扁平な外形と二列接点に対応する図イ。",
+          "remainingWork": "イの特徴を再確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを名指しする。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r03a/r03a-q10.webp SHA256=45b032481b046c0d373a5fafc790f413ff825cd8efb6a885ee08ec65c09a3aa5",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf SHA256=7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799。公式正答=イ。pdftotextの解答表を読んだ。",
+        "図を目視: ア長方形Type-A、イ両端丸い対称形と二列接点Type-C、ウ段差形Mini-B、エ扁平なMicro-B。縮尺を使わずイと解答。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r07h-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "9ead593a19ae32682fec102e4eb4c7dd59c7caff7b18d3b2dd70c9fe82f6a97c",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q11",
-      "summary": "エ、6台。二つの高速化率の比を3と置いて解きます。",
+      "summary": "アムダールの法則による二つの高速化率を比較し、必要なプロセッサ台数を求める。",
       "explanation": "r=0.9ならE₀.₉=1/(0.1+0.9/n)、r=0.3ならE₀.₃=1/(0.7+0.3/n)です。\n条件E₀.₉=3E₀.₃へ代入すると、0.7+0.3/n=3(0.1+0.9/n)。整理して0.4=2.4/n、したがってn=6です。\n確認するとE₀.₉=4、E₀.₃=4/3なので、確かに前者は後者の3倍です。",
       "choiceReasons": [
         "3台での比は(0.7+0.3/3)/(0.1+0.9/3)=2です。",
@@ -222,40 +245,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "高速化率が逆数で表されるため、3倍の条件で分母を逆に扱う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "同じnで二つの並列化割合rを別々に代入する手順。",
+          "remainingWork": "rごとに式を作る。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "代入方針であり台数は教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "高速化率の比が3という条件の方程式。",
+          "remainingWork": "方程式を展開して整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中方程式までで台数の計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "0.4=2.4/nへの整理とnの求め方。",
+          "remainingWork": "2.4÷0.4を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終値6は出さず最後の除算を残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r07h/r07h-q11.webp SHA256=2c9db38e8b360d8988dcb1073848d4fb79b7e69da87de05651e90bd0bacbd4b4",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf SHA256=656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907。公式正答=エ。pdftotextの解答表を読んだ。",
+        "再計算: E09/E03=(0.7n+0.3)/(0.1n+0.9)=3より0.4n=2.4、n=6。n=3,4,5,6の比は2,31/13,19/7,3。n=6でE09=4、E03=4/3。rは無次元、nは台、オーバーヘッドなし。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r03a-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "5c6ec13b8d3d4ff34db44e7ebb1f574fb6cd3d2812b237b6bb7a78c62b66b8ff",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q13",
-      "summary": "エ。人の立入りを検知して機械を停止させる仕組みがインタロックです。",
+      "summary": "インタロックによる誤操作・危険行動の防止を、故障時の切替えや縮退運転と区別する。",
       "explanation": "インタロックは、安全条件が成立しないときに機械の動作を禁止又は停止する仕組みです。危険区域への人の立入りをセンサで検知して停止する例は、操作ミスなどが危険な動作につながるのを防ぐフールプルーフを実現します。故障後の代替切替えや縮退運転とは目的と契機が違います。",
       "choiceReasons": [
         "故障した機械から代替機に切り替える冗長構成の仕組みです。",
@@ -272,52 +302,60 @@
         },
         {
           "title": "使う考え方",
-          "text": "フールプルーフでは人の誤操作が事故につながらないようにします。安全条件が崩れたときに危険な動作を止める連動機構を考えます。",
+          "text": "フールプルーフは、人の誤操作が事故につながらないようにする設計です。インタロックは安全条件と動作許可を連動させ、安全条件が崩れると危険な動作を禁止又は停止します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "人の立入りをセンサが感知したら機械を停止させる例がインタロックです。",
+          "text": "危険区域への人の立入りをセンサで感知し機械を停止するエは、この連動を使っています。一部の故障箇所を切り離して運転を続けるウは、機能を縮小して継続するフェールソフトです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "安全のために止める仕組みと、故障しても運転を続ける仕組みを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "動作と契機の二つの比較軸。",
+          "remainingWork": "各肢の停止や継続の条件を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "どの動作がインタロックかはまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フールプルーフとインタロックの意味。",
+          "remainingWork": "人の立入りと機械停止の連動を見つける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "安全条件に応じた禁止・停止はエと実質同じ。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "エへの当てはめとフェールソフトとの違い。",
+          "remainingWork": "安全確保と稼働継続の違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r03a/r03a-q13.webp SHA256=2d6e04da23a83a347b973a3e7e66183b8823bfafa756c34d7960fb3d1139d959",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf SHA256=7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799。公式正答=エ。pdftotextの解答表を読んだ。",
+        "安全条件と動作許可を連動させるエ。アは代替切替え、イはアクセス制御、ウは縮退運転。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r06a-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "68183489d66fc303635f3e0d7d969f9e01e44d25493f2304348feb5604afab7e",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q13",
-      "summary": "エ。オブジェクトはデータとメタデータをまとめ、識別子でアクセスします。",
+      "summary": "オブジェクトストレージを、保存する単位とデータの指定方法から区別する。",
       "explanation": "オブジェクトストレージは、データと属性を示すメタデータを一つのオブジェクトとして保存し、固有の識別子を指定して読み書きします。ディレクトリの階層をたどるファイルアクセスや、固定サイズのブロックを指定する方式とは異なります。\n階層のような表示や名前付けを提供する製品でも、オブジェクトを識別する基本的なアクセス方法が要点です。",
       "choiceReasons": [
         "ファイルシステム上のファイル単位でアクセスするのはファイルストレージです。",
@@ -329,57 +367,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の「アクセスする単位」を確認します。ファイル、固定サイズ、階層、固有の識別子という四つの手がかりがあります。",
+          "text": "選択肢の「アクセスする単位」を確認します。ファイル、固定サイズの区画、データと属性のまとまり、という単位の違いを整理します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "オブジェクトには内容だけでなく属性情報も含みます。内容の保存形式と、どう指定して取得するかを両方読んでください。",
+          "text": "メタデータとは作成日時や種類などデータの属性情報です。オブジェクトでは本体とメタデータをまとめて保存します。ウとエはこの点が共通なので、取得するときの指定方法まで比較します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "メタデータを含むオブジェクトを固有の識別子で指定するのがエです。階層をたどるウとの違いが決め手です。",
+          "text": "オブジェクトは階層のフォルダーをたどる代わりに、固有の識別子で指定します。本体とメタデータをセットにし、識別子でアクセスするエが該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "メタデータという語が分からず、階層と識別子の違いも判断できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "保存・アクセス単位の分類。",
+          "remainingWork": "各肢の単位を分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類軸だけで正答の方式を定義しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "メタデータの定義とオブジェクトの内容。",
+          "remainingWork": "ウとエの指定方法を比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ウとエに共通する特徴までで二肢が残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "識別子によるアクセスとエへの対応。",
+          "remainingWork": "階層をたどる方式との差を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の指定方法とエを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r06a/r06a-q13.webp SHA256=f6398458afbaee09daf9e917bb1a0fc680cc1a223b94ae686347d2d9f321baf1",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf SHA256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。公式正答=エ。pdftotextの解答表を読んだ。",
+        "オブジェクトのデータ+メタデータ、固有識別子=エ。アはファイル、イはブロック、ウの階層指定は不適。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r07h-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "a9377829a5810f5d26a68b31060fd84ceb568dafe6a688c51a37f9efd151dc46",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q10",
-      "summary": "ア。オブジェクトは、固有の識別子を指定してアクセスします。",
+      "summary": "オブジェクトストレージの識別方法・更新方法・分散管理の特徴を判断する。",
       "explanation": "オブジェクトストレージは、データ本体とメタデータをひとまとまりのオブジェクトとして管理し、固有の識別子でアクセスします。ファイルシステムのディレクトリ階層で管理する方式とは異なります。\n更新は通常オブジェクト全体を再作成・置換えする形で扱います。広域分散でも、全体を止める静止点を必ず設けることが方式の必須条件ではありません。",
       "choiceReasons": [
         "固有の識別子で対象オブジェクトへアクセスする、という特徴に合います。",
@@ -391,57 +437,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「フォルダーの中のファイル」という管理と、「固有の番号やキーで指定するデータのまとまり」という管理を分けます。",
+          "text": "保存場所を「フォルダー内のファイル」で指定する方式と、「固有の番号やキー」で指定する方式を分けます。どちらもデータを探す方法ですが、管理構造が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "オブジェクトはデータ本体とメタデータをまとめた単位です。アクセスでは、フォルダーを順にたどる代わりに対象の識別子を指定します。",
-          "revealsAnswer": false
+          "text": "オブジェクトはデータ本体と、属性情報であるメタデータをまとめた単位です。アクセスではフォルダーを順にたどる代わりに、そのオブジェクトの固有の識別子を指定します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ディレクトリ階層を述べる候補はファイル型です。固有の識別子で対象を直接指定する記述が、オブジェクト型の特徴に合うか確認しましょう。",
-          "revealsAnswer": false
+          "text": "アの識別子によるアクセスが適切です。更新は通常、データの一部分を直接上書きするのでなくオブジェクト全体を置き換えます。また、遠隔地との同期のために書込みなどを止める静止点を必ず設ける方式でもありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ファイルのディレクトリや部分上書きとオブジェクトの管理方式を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "パス指定とキー指定の比較軸。",
+          "remainingWork": "選択肢の管理構造を比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "二つの方式を提示するがどちらがオブジェクトかは未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "メタデータの意味とオブジェクトの識別子アクセス。",
+          "remainingWork": "定義をアと対応させる。",
+          "revealsAnswer": true,
+          "reason": "正答アそのものの特徴を教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "全体置換えと静止点必須でない点。",
+          "remainingWork": "イ・ウの誤りとアを確認する。",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みで、アを名指しする。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r07h/r07h-q10.webp SHA256=c392e70d91dd8f9960982dc6956ea7c108db50dda6274d17244706ee44dfed94",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf SHA256=656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907。公式正答=ア。pdftotextの解答表を読んだ。",
+        "固有識別子によるアクセス=ア。部分上書きではなく全体置換えが基本、静止点必須でなく、ディレクトリ階層でない。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r06h-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "bfd24069a8d3dfe99275832ed05dbacf291d70beec205406a70b669b21b957f3",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q13",
-      "summary": "ア。オブジェクトストレージは非構造型データを大規模に保存するのに適します。",
+      "summary": "オブジェクトストレージの用途と拡張性を、SAN・専用装置・ストレージ仮想化と区別する。",
       "explanation": "オブジェクトストレージはデータとメタデータをオブジェクトとして扱い、識別子でアクセスする方式です。画像・動画・バックアップなど、更新頻度の低い非構造型データの大容量保存に向き、分散した装置へ拡張できます。\n専用ネットワークでブロックストレージを共有するSAN、サーバ専用のストレージ、複数装置を一台に見せる仮想化とは、説明の焦点が異なります。",
       "choiceReasons": [
         "アはオブジェクトストレージの用途と拡張性を述べています。",
@@ -453,58 +507,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "毎秒細かく書き換えるデータと、一度保存した写真や動画では必要な保存方式が違います。",
+          "text": "非構造型データとは、表の行・列のような固定形式に整理されていない画像・動画などのデータです。頻繁に細かく書き換える処理か、まとまったデータを保存する用途かを分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "写真や動画をデータとメタデータのまとまりとして保存し、識別子で取得する用途を考えます。",
-          "revealsAnswer": false
+          "text": "オブジェクトストレージは、データ本体と属性情報を一まとまりにし、識別子で取得します。装置を分散して容量を拡張しやすく、更新が少ない画像・動画・バックアップなどの大容量保存に向きます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "選択肢の主題を、非構造型データの保存・専用ネットワーク・サーバ専用装置・装置仮想化に分けて、用途と照合します。",
-          "revealsAnswer": false
+          "text": "アはこの用途と拡張性を説明しています。イの専用ネットワークによる共有はSAN、ウはサーバごとの専用ストレージ、エは複数装置を一台に見せるストレージ仮想化の説明です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "非構造型データやオブジェクトの意味を知らず、どの用途に適するか結び付かない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "非構造型データの意味と更新頻度という比較軸。",
+          "remainingWork": "選択肢の用途と接続構成を分ける。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "非構造型の意味を説明するが方式との対応はまだ残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "オブジェクトの保存単位・識別方法・適した用途。",
+          "remainingWork": "用途の説明をアと対応させる。",
+          "revealsAnswer": true,
+          "reason": "更新が少ない非構造型データと大容量拡張性は正答アと実質同じ。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "他の三肢の方式との対応。",
+          "remainingWork": "他方式との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "アを明示し他肢も分類する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r06h/r06h-q13.webp SHA256=58567657d27bb42237ead25fa8c769c4a2ee43acdec4ac29a1660f98f4f1ec14",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf SHA256=2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37。公式正答=ア。pdftotextの解答表を読んだ。",
+        "低更新の非構造データ・大容量拡張=ア。イSAN、ウ専用ストレージ、エ装置仮想化と区別。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r06h-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "de265014b7c6efdf99fbbaaebbd53877c1da2fb198950c9c410c0215c9b6fd00",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q10",
-      "summary": "ヒット率で重み付けした平均が15ナノ秒になるように、式を立てます。",
-      "explanation": "10h + 60(1−h) = 15\n10h + 60 − 60h = 15\n50h = 45\nh = 0.9\n\n確かめると、10×0.9 + 60×0.1 = 9 + 6 = 15ナノ秒です。求めるのはヒット率なので、答えはエです。",
+      "summary": "キャッシュのヒット率とアクセス時間の加重平均から、未知のヒット率を求める。",
+      "explanation": "ヒット率hは、必要なデータがキャッシュ内にある割合で、ミス率は1−hです。本問はヒット時10ナノ秒、ミス時60ナノ秒の加重平均として、10h＋60(1−h)＝15と置きます。整理すると60−50h＝15、50h＝45、h＝0.9です。\n代入すると10×0.9＋60×0.1＝15ナノ秒で条件を満たします。ここではミス時の時間を60ナノ秒として平均し、キャッシュ確認の10ナノ秒を別には加算しません。",
       "choiceReasons": [
         "0.1は、正しいヒット率0.9に対するミス率です。ヒット率0.1なら平均は55ナノ秒になります。",
         "ヒット率0.17なら、10×0.17 + 60×0.83 = 51.5ナノ秒で条件に合いません。",
@@ -515,57 +577,66 @@
       "hints": [
         {
           "title": "注目すること",
-          "text": "実効アクセス時間は、速いキャッシュを使える場合と、遅い主記憶を使う場合の平均です。どちらが何割を占めるかを考えます。",
+          "text": "ヒットとは必要なデータがキャッシュ内にあること、ヒット率とはその割合です。実効アクセス時間は、ヒットしたときと主記憶を使うときの時間を、それぞれの割合で平均します。",
           "revealsAnswer": false
         },
         {
           "title": "式を作る",
-          "text": "ヒット率をhとすると、キャッシュを使う割合はh、主記憶を使う割合は1−hです。10×h + 60×(1−h) = 15 と置きます。",
+          "text": "ヒット率をhとするとミス率は1−hです。本問の平均時間の式は、10×h＋60×(1−h)＝15（ナノ秒）です。ヒット時10ナノ秒、ミス時60ナノ秒として計算します。",
           "revealsAnswer": false
         },
         {
           "title": "計算を進める",
-          "text": "式を整理すると 60−50h = 15、つまり 50h = 45 です。最後に両辺を50で割りましょう。",
+          "text": "式を整理すると60−50h＝15、つまり50h＝45です。最後に両辺を50で割りましょう。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ヒット率の意味と、ミス率が1−hになることが分からず式を立てられない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ヒットとヒット率の定義、平均時間の考え方。",
+          "remainingWork": "二つの経路と割合を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "用語と比較軸のみで数値は求めていない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ヒット率hとミス率1−h、時間を使った方程式。",
+          "remainingWork": "方程式を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式と変数の対応を教えるが方程式を解く作業は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "50h=45への整理。",
+          "remainingWork": "45÷50を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終値0.9は渡さず除算を残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r06h/r06h-q10.webp SHA256=9b33a737190c7c6845d4c380daff7e09ca47de313ab74b0ab9de88b3e5257b27",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf SHA256=2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37。公式正答=エ。pdftotextの解答表を読んだ。",
+        "再計算: 10h+60(1−h)=15 nsよりh=0.9。4肢を代入した平均は55/51.5/18.5/15 ns。ミス時の10ns別加算をしない出題モデルが公式正答エに一致。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r04h-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "8fdc3cf0badbe374b7ee074bcc11e6b61be258098a67e0237c0e9bbdf3098f9d",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q9",
-      "summary": "イ。実効アクセス時間は主記憶の約0.08倍です。",
+      "summary": "キャッシュと主記憶の時間比を、ヒット率・ミス率で重み付けして実効アクセス時間を求める。",
       "explanation": "主記憶アクセス時間を1とすると、キャッシュは1/30、ヒット率は0.95、ミス率は0.05です。重み付き平均は0.95×1/30+0.05×1=0.08166…なので、約0.08倍です。キャッシュ確認の時間をミス時にも加える扱いでも約0.0833となり、選択肢は変わりません。",
       "choiceReasons": [
         "0.03はキャッシュ時間1/30に近い値で、5%のミスを無視しています。",
@@ -594,40 +665,47 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ヒット率95％を時間比と混同し、5％の主記憶アクセスを平均へ含められない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "主記憶時間を1とした正規化とミス率5％。",
+          "remainingWork": "時間比と確率を対応させる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "時間と確率を整理する段階で最終平均を示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各経路の時間と発生率の積を足す加重平均。",
+          "remainingWork": "加重平均の式を作る。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "平均の公式と対応までで最後の計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "与件の代入による数値計算。",
+          "remainingWork": "近い選択肢を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終値と0.08を示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04h/r04h-q9.webp SHA256=e91b243d96df69f8d7a9f22a66d1bf8dfc9fa7776ba48d0205b83cc75ceab2a7",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。公式正答=イ。r04hはPDFを画像化し解答表を目視。他年度はpdftotextの解答表を読んだ。",
+        "再計算: 主記憶を1として0.95/30+0.05=0.081666…倍。ミス時にもキャッシュ時間を加える場合は1/30+0.05=0.083333…倍で、ともに約0.08。全4肢と照合。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r06a-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "d530dc71d513b3123588bc47e64dabe0b89d41822e727bbb072b97e8c3ada66a",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q10",
-      "summary": "イ。実効アクセス時間は主記憶の約0.08倍です。",
+      "summary": "キャッシュと主記憶の時間比を、ヒット率・ミス率で重み付けして実効アクセス時間を求める。",
       "explanation": "主記憶のアクセス時間を1と置くと、キャッシュは1/30です。ヒットする95%と、主記憶を使う5%を重み付けし、0.95×1/30＋0.05×1=約0.0817です。\nミス時のキャッシュ確認時間も加えるモデルなら1/30＋0.05=約0.0833となり、どちらも選択肢の0.08に最も近くなります。",
       "choiceReasons": [
         "約0.03はキャッシュ時間1/30だけに近い値で、5%の主記憶アクセスを反映していません。",
@@ -644,7 +722,7 @@
         },
         {
           "title": "使う考え方",
-          "text": "平均を求めるので、速い経路と遅い経路を95対5で重み付けします。ヒット率そのものを答えにしないようにします。",
+          "text": "実効時間は、各経路の時間にその発生率を掛けて足した加重平均です。ヒット時はキャッシュ時間、ミス時は主記憶時間として、ヒット時間×0.95＋ミス時間×0.05を計算します。",
           "revealsAnswer": false
         },
         {
@@ -656,40 +734,48 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ヒット率95％を時間比と混同し、5％の主記憶アクセスを平均へ含められない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "主記憶時間を1とした正規化とミス率5％。",
+          "remainingWork": "時間比と確率を対応させる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "時間と確率を整理する段階で最終平均を示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各経路の時間と発生率の積を足す加重平均。",
+          "remainingWork": "加重平均の式を作る。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "平均の公式と対応までで最後の計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "与件の代入による数値計算。",
+          "remainingWork": "0.0317に0.05を加え、候補を選ぶ。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中項の値までで、最後の加算・丸めを残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r06a/r06a-q10.webp SHA256=c1d56469909c40001f85820fdab6e8c97bf39171840ee9882bba444f9e10395e",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf SHA256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。公式正答=イ。pdftotextの解答表を読んだ。",
+        "再計算: 主記憶を1として0.95/30+0.05=0.081666…倍。別加算モデル1/30+0.05=0.083333…倍でも約0.08で、全4肢と照合。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r03h-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "96b0001d328ba33197f564cc90765ab303d94c38d0db655d373bcd3f639bd1b0",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q12",
-      "summary": "イ。ライトスルーでは主記憶にも書き、内容を最新に保ちます。",
+      "summary": "ライトスルーとライトバックを、書込み先と主記憶への反映時点で区別する。",
       "explanation": "ライトスルーは書込み時にキャッシュと主記憶を共に更新します。ライトバックはまずキャッシュだけ更新し、変更済みブロックを追い出すときなどに主記憶へ書き戻します。",
       "choiceReasons": [
         "キャッシュだけへの書込みはライトバックの基本動作です。",
@@ -701,57 +787,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "書込み先をキャッシュと主記憶の二列に分け、二方式の更新時点を整理します。",
+          "text": "キャッシュは主記憶のデータの一部を高速に使うための記憶です。CPUがデータを書き換えたとき、キャッシュと主記憶のどちらに最新値があるかに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "スルーは主記憶まで書込みを通し、バックは変更を後から書き戻すと考えます。",
-          "revealsAnswer": false
+          "text": "ライトスルーは書込みのたびにキャッシュと主記憶の両方を更新します。ライトバックはまずキャッシュだけを更新し、変更済みのデータを後で主記憶へ書き戻します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ライトスルーで両方へ書くため主記憶が最新という記述を選びます。",
+          "text": "読出し要求で必要なデータがキャッシュにない場合でも、新しいデータを置くために変更済みのブロックを追い出すなら書戻しが必要です。従ってエは誤りで、両方への書込みを述べるイが適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "二方式の定義を知らず、読出しミスでも変更済みデータの書戻しが必要な点を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "キャッシュの役割と書込み後の最新値という観点。",
+          "remainingWork": "各肢の書込み先を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸であり二方式との対応はまだ教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二方式の書込み先と更新タイミングの定義。",
+          "remainingWork": "定義を各肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ライトスルーで両方に書く説明はイと実質同じ。"
+        },
+        {
+          "newInformation": "読出しミスが引き起こす変更済みブロックの追出し。",
+          "remainingWork": "イの適切さとエの誤りを確認する。",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みでイを名指しし、エの反例も示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r03h/r03h-q12.webp SHA256=971c318dcf85d67d42af026c27a6802b5385fb0e4a07b4fdc305d19d510f21e2",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf SHA256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。公式正答=イ。pdftotextの解答表を読んだ。",
+        "ライトスルーで両方に書くイ。ア/ウは方式の取り違え、エは変更済みブロックの読出しミスによる追出しを反例として否定。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r04a-q9",
     "baseVersion": 2,
     "baseLessonSHA256": "0a911c6c5aa0264c6c02dbeca7ac47afb317b5166fa5fcff9d831b59632712f3",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q9",
-      "summary": "イ。書込み時にキャッシュと主記憶の両方を更新します。",
+      "summary": "ライトスルーの書込み先と、主記憶への反映時点を判断する。",
       "explanation": "ライトスルーは、CPUの書込みをキャッシュだけで止めず主記憶にも反映する方式です。主記憶との整合性を保ちやすい一方、書込みのたびに主記憶へのアクセスが発生します。",
       "choiceReasons": [
         "キャッシュだけに書く動作はライトバックの書込み時の説明です。",
@@ -763,57 +857,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の主記憶へ反映する時点を、CPU書込み時と追出し時に分けます。",
+          "text": "CPUの書込みでキャッシュだけを変更すると、主記憶には古い値が残ります。各候補が「書込み時に反映」か「後で反映」かを分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "CPUが書き込む時点と、変更済みのキャッシュを追い出す時点の二列で、主記憶を更新する候補を整理します。更新時点の違いが方式を分けます。",
-          "revealsAnswer": false
+          "text": "ライトスルーはCPUの書込みをキャッシュと主記憶の両方へ反映する方式です。変更済みデータの追出しまで主記憶への反映を待つのはライトバックです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "キャッシュを更新するたびに主記憶にも同じデータを反映する候補を選びます。",
+          "text": "書込みのたびに主記憶にもアクセスするため、主記憶へのアクセス頻度が少ないとするエは合いません。両方への同時書込みを述べるイが適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "方式名だけではキャッシュと主記憶のどちらへいつ書くかが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "キャッシュだけ更新すると主記憶に古い値が残る仕組み。",
+          "remainingWork": "各肢の更新時点を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "更新の結果を示すがライトスルーとの対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ライトスルーの定義とライトバックとの違い。",
+          "remainingWork": "定義をイと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "両方へ反映する定義が正答イそのもの。"
+        },
+        {
+          "newInformation": "主記憶へのアクセス頻度への帰結。",
+          "remainingWork": "イとエの正誤を確認する。",
+          "revealsAnswer": true,
+          "reason": "イを明示し、エを否定する理由も教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04a/r04a-q9.webp SHA256=c1aaecbd94877eb425110ffeaf737273b9d7ec0b7a3c76f76683fdfd429ee7e5",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf SHA256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。公式正答=イ。pdftotextの解答表を読んだ。",
+        "両方へ同時書込み=イ。ア/ウはライトバック、エは主記憶書込みが多いライトスルーに不適。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r05h-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "16a24018991457cb41c0372222f9a98e468d46f0b75ab8967c43946a60b40344",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q10",
-      "summary": "ライトスルーはキャッシュと主記憶を同時に更新します。",
+      "summary": "ライトスルーとライトバックを、書込み先と主記憶への反映時点で区別する。",
       "explanation": "ライトスルーではCPUの書込みをキャッシュと主記憶の両方へ反映するので、書込み後の内容が一致します。ライトバックはまずキャッシュを更新し、変更済みブロックを追い出すときなどに主記憶へ書き戻します。従ってライトスルーの両方への同時書込みを述べるイが適切です。",
       "choiceReasons": [
         "キャッシュだけを先に更新するのはライトバックの特徴です。",
@@ -825,60 +927,68 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で、書込み直後の主記憶に最新の値があるかを確認します。",
+          "text": "キャッシュは主記憶のデータの一部を高速に使うための記憶です。CPUがデータを書き換えたとき、キャッシュと主記憶のどちらに最新値があるかに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "二つの方式は主記憶へ反映するタイミングが違います。書込み時とブロック追出し時を分けましょう。",
-          "revealsAnswer": false
+          "text": "ライトスルーは書込みのたびにキャッシュと主記憶の両方を更新します。ライトバックはまずキャッシュだけを更新し、変更済みのデータを後で主記憶へ書き戻します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ライトスルーは書込み時に両方を更新します。ライトバックでは変更済みの追出し時に書戻しが要る点も確認します。",
+          "text": "読出し要求で必要なデータがキャッシュにない場合でも、新しいデータを置くために変更済みのブロックを追い出すなら書戻しが必要です。従ってエは誤りで、両方への書込みを述べるイが適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "二方式の定義を知らず、読出しミスでも変更済みデータの書戻しが必要な点を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "キャッシュの役割と書込み後の最新値という観点。",
+          "remainingWork": "各肢の書込み先を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸であり二方式との対応はまだ教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二方式の書込み先と更新タイミングの定義。",
+          "remainingWork": "定義を各肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ライトスルーで両方に書く説明はイと実質同じ。"
+        },
+        {
+          "newInformation": "読出しミスが引き起こす変更済みブロックの追出し。",
+          "remainingWork": "イの適切さとエの誤りを確認する。",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みでイを名指しし、エの反例も示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r05h/r05h-q10.webp SHA256=8d857fb9a30d517628013d2257d0e1ec980cd6ec978f207eb5df801de27bb809",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf SHA256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。公式正答=イ。pdftotextの解答表を読んだ。",
+        "ライトスルーで両方を更新するイ。ア/ウは二方式を逆に説明。エは読出しミスでも変更済みブロック追出しで書戻しが必要。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r04h-q10",
     "baseVersion": 2,
     "baseLessonSHA256": "9d95762acf0a771cb15bb453d3ab604e0d8de4ec43a350daa40d757aefb41014",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q10",
-      "summary": "エ。フルアソシアティブ方式では、主記憶のどのブロックも任意のキャッシュブロックに置けます。",
+      "summary": "フルアソシエイティブ方式の、主記憶ブロックとキャッシュ格納先の対応を判断する。",
       "explanation": "フルアソシアティブ方式は、主記憶のブロックとキャッシュ上の格納先との対応を固定しません。空きや置換方針に従って、どのキャッシュブロックにも置けます。直接対応を固定するダイレクトマップ方式や、格納できるセットを限定するセットアソシアティブ方式と区別します。",
       "choiceReasons": [
-        "セットとの対応を固定する記述はセットアソシアティブ方式です。",
+        "主記憶とキャッシュの対応をセットで制限する説明で、格納先を全体から自由に選ぶフルアソシエイティブ方式には合いません。",
         "主記憶ブロックとキャッシュブロックの対応を固定するのはダイレクトマップ方式です。",
         "特定の主記憶ブロックに専用領域を用意する方式ではなく、キャッシュ全体から格納先を選べます。",
         "任意のキャッシュブロックへ任意の主記憶ブロックを格納できることが、フルアソシアティブ方式の特徴です。"
@@ -887,57 +997,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補で、主記憶とキャッシュの対応が「固定」される範囲を確認しましょう。",
+          "text": "ブロックはデータをまとめて転送・格納する単位です。各候補について、主記憶のあるブロックをキャッシュのどこに置けるか、その対応が固定か自由かを読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ダイレクトマップは一箇所、セットアソシアティブは特定のセット内という制約があります。フルではその制約がどうなるか考えます。",
-          "revealsAnswer": false
+          "text": "フルアソシエイティブ方式は、主記憶のブロックの格納先をキャッシュ全体から自由に選べます。格納先が一箇所に決まるダイレクトマップ方式とは異なります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "フルアソシアティブでは主記憶のブロックをキャッシュ全体の任意のブロックに格納できます。",
+          "text": "任意のキャッシュブロックを主記憶のどの部分にも割り当てられるエが該当します。セットアソシエイティブ方式では、キャッシュを複数の組（セット）に分け、指定された組の中で格納先を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ブロックやセットの意味を知らず、格納先の制限が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ブロックの意味と固定・自由という分類軸。",
+          "remainingWork": "各肢の格納先の制約を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対応を見る観点まででフル方式の定義はまだない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フル方式の任意格納とダイレクトマップとの違い。",
+          "remainingWork": "任意格納の説明をエと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "任意格納の定義は正答エと実質同じ。"
+        },
+        {
+          "newInformation": "セット方式の意味とエへの対応。",
+          "remainingWork": "三方式の制約の違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "エを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04h/r04h-q10.webp SHA256=2770d3975847bb499f687b03514d916434d9d85ed6977db9e708aaafbd009897",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。公式正答=エ。r04hはPDFを画像化し解答表を目視。他年度はpdftotextの解答表を読んだ。",
+        "任意のキャッシュブロックに主記憶ブロックを置けるエ。ア/イ/ウは固定対応を設けており不適。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r03h-q11",
     "baseVersion": 2,
     "baseLessonSHA256": "2d4fc050c662ba723cef7c57bca26cde1c392aec3d1a473a50126f6051de47a8",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q11",
-      "summary": "イ。ネットワーク上の計算資源を協調利用する方式です。",
+      "summary": "グリッドコンピューティングによる、ネットワーク上の計算資源の協調利用を識別する。",
       "explanation": "グリッドコンピューティングは、PCから大型機までネットワーク上の複数の計算資源へ処理を分散し、一つの大規模な処理を実行します。単一装置内のプロセッサの役割分担とは区別します。",
       "choiceReasons": [
         "役割を固定して分担する非対称型マルチプロセッサの説明です。",
@@ -949,57 +1068,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が一台の装置内のプロセッサか、ネットワーク上の複数装置かを読み分けます。",
+          "text": "各候補が、一台の装置内のプロセッサを分担させる話か、ネットワーク上の複数装置を使う話かを読み分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "PCから大型コンピュータまでの資源を一つの処理に使うという規模の記述に注目します。",
+          "text": "グリッドコンピューティングは、PCや大型コンピュータなどネットワーク上に分散した計算資源を協調利用し、大きな一つの処理を行う方式です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ネットワーク上の複数プロセッサへ分散する記述がグリッドです。",
+          "text": "ネットワーク上の複数プロセッサへ処理を分散するイが該当します。アとウはそれぞれ役割を固定する非対称型、同等に扱う対称型のマルチプロセッサで、装置内の役割分担を述べています。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "単一装置の複数プロセッサとネットワーク上の複数装置の分散処理を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "装置内の分担とネットワーク越しの分担という分類軸。",
+          "remainingWork": "各肢の分散範囲を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "二つの分類軸のみでグリッドとの対応は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "グリッドの定義と多様な資源の協調利用。",
+          "remainingWork": "定義をイと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イと同じ分散方式を定義する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "非対称型・対称型マルチプロセッサとの違い。",
+          "remainingWork": "装置内の分担との違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを名指しする。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r03h/r03h-q11.webp SHA256=a6a218416a57fcdbaa14f1b607b87b9425bf6fe9b1da071e2fabad0f2b552ef2",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf SHA256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。公式正答=イ。pdftotextの解答表を読んだ。",
+        "ネットワーク上の計算資源を協調利用するイ。ア非対称型、ウ対称型マルチプロセッサ、エスレッド単位並列化。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r04a-q12",
     "baseVersion": 2,
     "baseLessonSHA256": "6588065b6b3c6a3dd2ea117da563899d51bf7cc46f15bc930a8844231807528f",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q12",
-      "summary": "ウ。ホストOSを共有し、個別のゲストOSをもちません。",
+      "summary": "コンテナ型仮想化を、ホストOSの共有とゲストOSの有無から区別する。",
       "explanation": "コンテナ型仮想化は、ホストOSのカーネルを共有したままプロセスなどの実行環境を隔離します。仮想マシンのように各環境へ別々のゲストOSを起動する必要がありません。",
       "choiceReasons": [
         "物理サーバと仮想環境のどちらかにOSがあればよいという説明は不適切で、ホストOSが必要です。",
@@ -1011,57 +1138,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補でホストOSとゲストOSの有無を表にして比べます。",
+          "text": "ホストOSは物理サーバ側で動くOS、ゲストOSは仮想マシンごとに動かすOSです。各候補で、ホストOSと個別のゲストOSの有無を整理します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "コンテナで隔離するのは実行環境です。OS全体を各環境へ複製する必要があるか考えます。",
-          "revealsAnswer": false
+          "text": "コンテナは、ホストOSのカーネル（資源管理などを行うOSの中核）を共有し、プログラムの実行環境を隔離します。環境ごとに別のゲストOSを起動する方式ではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ホストOSを使い、個別ゲストOSは不要という組合せを選びます。",
+          "text": "このためホストOSがあり、個別のゲストOSをもたないウが該当します。イとエは個別ゲストOSを動かす仮想マシン方式で、ホストOSを置くかどうかが異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ホストOSとゲストOSの意味を知らず、実行環境の隔離とOS全体の仮想化を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ホストOSとゲストOSの用語の意味。",
+          "remainingWork": "各肢のOS構成を整理する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "用語のみでコンテナの構成はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "カーネルの意味とコンテナによる共有・隔離。",
+          "remainingWork": "共有する構造をウと対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ホストを共有し個別ゲストをもたない説明は正答ウそのもの。"
+        },
+        {
+          "newInformation": "ホストあり・個別ゲストなしの組合せと他方式。",
+          "remainingWork": "仮想マシン方式との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04a/r04a-q12.webp SHA256=91e694c18d341096040df03a1104e177020dd0128e6bf641e89acaa4c77b7d8b",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf SHA256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。公式正答=ウ。pdftotextの解答表を読んだ。",
+        "ホストOSあり・個別ゲストなし=ウ。アはOS配置が不適、イはハイパーバイザ型、エはホスト型VM。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r04h-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "25f0611d9f21d7e09951ada8e8502527276e70ca00bf4ea469e6b9c141e9dd8c",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q8",
-      "summary": "エ。VLIWはコンパイラが複数の動作を一つの長い命令にまとめます。",
+      "summary": "コンパイル時に並列動作を一つの複合命令へまとめる、高速化方式を識別する。",
       "explanation": "問題では、同時に実行できる動作をコンパイル時に選び、一つの複合命令にまとめる方式を問います。VLIWはVery Long Instruction Wordの略で、複数の演算を長い命令語に組み込みます。ハードウェアが実行時に並列性を見つける方式とは、命令を組み立てる時点が異なります。",
       "choiceReasons": [
         "CISCは複雑な命令セットの分類であり、コンパイラが並列動作を長い命令にまとめる方式の名称ではありません。",
@@ -1073,57 +1208,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文の「コンパイルの段階」と「一つの複合命令」に線を引き、実行時の処理ではない点を確認します。",
+          "text": "コンパイルは、実行前にプログラムを機械が実行する命令へ変換する処理です。設問は、この段階で同時実行可能な動作を一つの命令にまとめる点が決め手です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "独立した加算と乗算などを一つの命令語に並べて、複数の演算器へ同時に指示する構成を考えます。",
+          "text": "例えば、互いの結果を使わない加算と乗算なら、別々の演算器へ同時に指示できます。その複数の指示を一つの長い命令語に並べ、実行前に組み立てる仕組みを考えます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Very Long Instruction Wordという名称は、複数の動作を含む長い命令語を表します。略称を候補に対応させます。",
+          "text": "VLIWはVery Long Instruction Wordの略で、コンパイラが並列実行できる動作を一つの長い命令語へまとめる方式です。CISCとRISCは命令セットの設計、MIMDは複数の命令流・データ流を扱う並列構成の分類です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コンパイルの意味と四つの略称を知らず、長い複合命令という特徴を方式名へ対応できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "コンパイルの意味と、並列化を決める時点。",
+          "remainingWork": "命令を実行前にまとめる特徴を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "処理時点を説明するが選択肢の略称との対応はまだない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "依存しない加算・乗算の具体例と長い命令語の構造。",
+          "remainingWork": "具体例を設問の複合命令と対応させる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "構造を具体化するが名称はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "VLIWの正式名称と仕組み、他の略称との違い。",
+          "remainingWork": "VLIWに対応するエを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答名VLIWと意味を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r04h/r04h-q8.webp SHA256=0c3d3505cc97311927a3e02507d6b3f9b2d11a2a4d68fc7c6ce48918888c9b51",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf SHA256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。公式正答=エ。r04hはPDFを画像化し解答表を目視。他年度はpdftotextの解答表を読んだ。",
+        "コンパイル時に長い命令語へ動作を束ねるVLIW=エ。CISC/RISCは命令セット、MIMDは命令流・データ流の分類。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r07a-q8",
     "baseVersion": 2,
     "baseLessonSHA256": "20bec0c3e23ed5a4f925e740a34a5c3d0fa70e476ca9a763a23a521cd1fb31d2",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q8",
-      "summary": "エのVLIW。並列に実行する複数操作をコンパイラが長い命令にまとめます。",
+      "summary": "コンパイル時に並列動作を一つの複合命令へまとめる、高速化方式を識別する。",
       "explanation": "VLIWはVery Long Instruction Wordの略です。コンパイラが依存関係を調べ、同時実行できる複数の操作を一つの長い命令語へ詰めます。\n実行時にプロセッサが全ての並列性を見つけるのではなく、コンパイル段階のスケジューリングを使う点が設問の決め手です。",
       "choiceReasons": [
         "CISCは複雑で多様な命令をもつ設計で、コンパイラが並列操作を束ねる方式の名前ではありません。",
@@ -1135,57 +1278,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文の「コンパイルの段階」と「一つの複合命令」をセットで捉えます。",
+          "text": "コンパイルは、実行前にプログラムを機械が実行する命令へ変換する処理です。設問は、この段階で同時実行可能な動作を一つの命令にまとめる点が決め手です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "例えば依存しない加算と乗算を、別々の実行ユニットに同時に指示する長い命令語を考えます。",
+          "text": "例えば、互いの結果を使わない加算と乗算なら、別々の演算器へ同時に指示できます。その複数の指示を一つの長い命令語に並べ、実行前に組み立てる仕組みを考えます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "命令を単純化する設計、多くの独立した命令列を動かす分類、長い命令語へ操作を詰める方式を区別して候補を選びましょう。",
-          "revealsAnswer": false
+          "text": "VLIWはVery Long Instruction Wordの略で、コンパイラが並列実行できる動作を一つの長い命令語へまとめる方式です。CISCとRISCは命令セットの設計、MIMDは複数の命令流・データ流を扱う並列構成の分類です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コンパイルの意味と四つの略称を知らず、長い複合命令という特徴を方式名へ対応できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "コンパイルの意味と、並列化を決める時点。",
+          "remainingWork": "命令を実行前にまとめる特徴を読む。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "処理時点を説明するが選択肢の略称との対応はまだない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "依存しない加算・乗算の具体例と長い命令語の構造。",
+          "remainingWork": "具体例を設問の複合命令と対応させる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "構造を具体化するが名称はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "VLIWの正式名称と仕組み、他の略称との違い。",
+          "remainingWork": "VLIWに対応するエを確認する。",
+          "revealsAnswer": true,
+          "reason": "正答名VLIWと意味を教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r07a/r07a-q8.webp SHA256=519805c332d5bcdf14f5a012f519f18a02c217fe69d0d870ae2afe2d2fdbb43f",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf SHA256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。公式正答=エ。pdftotextの解答表を読んだ。",
+        "コンパイル段階の複数動作の複合命令=VLIW、エ。CISC/RISCは命令セット、MIMDは命令流・データ流の分類。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   },
   {
     "id": "r05a-q13",
     "baseVersion": 2,
     "baseLessonSHA256": "52bb30664af6d8c8ada8af0f05253faf35077ade1d9a2dd95658ede66173c6a3",
-    "author": null,
-    "decision": "pending",
+    "author": "Codex /root/ap_wave02_author_1",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q13",
-      "summary": "イ。参照処理を複数サーバへ分散し、台数追加で能力を上げられます。",
+      "summary": "スケールアウトに適した処理を、分散可能性と整合性維持の負荷で判断する。",
       "explanation": "スケールアウトはサーバなどの台数を増やしてシステム全体の処理能力を上げる方法です。独立に実行しやすい参照トランザクションが多ければ、要求を複数サーバへ分けやすくなります。\n一括処理を分割できない場合や、更新のたびに複数サーバ間の整合性を取る必要がある場合は、台数追加の効果を調整コストが妨げます。",
       "choiceReasons": [
         "並列処理が困難なので、台数を増やしても一つの大きな処理を分担しにくい構成です。",
@@ -1197,46 +1348,54 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「台数を増やす」方法として各処理を複数サーバへ振り分けられるか考えます。",
+          "text": "スケールアウトはサーバの台数を増やして全体の処理能力を上げる方法です。各処理を複数サーバへ分けて実行できるかを確認します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "参照と更新を比べます。更新はデータ整合性を保つ調整が必要ですが、参照要求は独立に処理しやすい性質があります。",
+          "text": "参照処理はデータを読み出す処理で、複数サーバへ要求を独立に振り分けやすい性質があります。更新処理は書き換えたデータの整合性を保つため、サーバ間の調整が必要になることがあります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "すでに複数サーバで分散している参照中心のシステムなら、追加サーバへ要求を振り分けられます。該当する説明を探します。",
+          "text": "すでに複数サーバで参照処理を分散するイなら、追加サーバへ要求を振り分けられます。アのような並列化困難な一括処理や、ウ・エのような整合性の調整負荷が大きい処理では、台数追加の効果が制約されます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "台数を増やせばどんな処理でも速くなると思い、更新調整の負荷を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "スケールアウトの定義と仕事の分割可能性。",
+          "remainingWork": "各肢の分散可能性を調べる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "台数追加の定義と比較軸で、適切な処理の種類はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "参照と更新の意味、独立処理と整合性調整の差。",
+          "remainingWork": "独立に振り分けやすいイを選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "参照処理が分散に適するという正答イの判断を実質的に教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "既存の分散参照へ台数を追加する適用と他肢の制約。",
+          "remainingWork": "他肢の制約を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを名指しする。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像をview_imageで実際に開き、問題文・全4肢・図・式をcontextと目視照合: assets/questions/r05a/r05a-q13.webp SHA256=aab1daeeeffbe9470ec93677e9c044d72312931c759ddeb746ff23ed3893cf33",
+        "IPA公式解答PDFを取得して該当問を確認: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf SHA256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。公式正答=イ。pdftotextの解答表を読んだ。",
+        "独立に振り分けやすい参照中心のイ。アは分割困難、ウ/エは更新整合性の調整負荷が台数追加を制約。",
+        "計算以外の独立照合は原本と公式解答、および各方式の定義による解き直し。外部の補助一次資料は追加参照していない。保留なし。"
+      ]
     }
   }
 ]

@@ -2,7 +2,7 @@
 
 800問の旧教材と旧レビューをbaselineへ保存し、先行20問と残り39組×20問へ重複なく分割した。旧レビューの状態を新基準の承認には使わない。
 
-先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問のうちbatch-01〜04の80問は4担当で改稿・別担当確認・登録を完了。先行分と合わせ100問を新基準で確認済み。残り700問の35組は未着手。教材は[PR #76](https://github.com/donald-shrimp/ap-study/pull/76)と[PR #77](https://github.com/donald-shrimp/ap-study/pull/77)に保存し、本番公開はまだ行っていない。
+先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問のうちbatch-01〜04の80問は4担当で改稿・別担当確認・登録を完了。batch-05〜08の次の80問も改稿・別担当確認・登録を完了し、計180問を新基準で確認済み。残り620問の31組は未着手。教材は[PR #76](https://github.com/donald-shrimp/ap-study/pull/76)と[PR #77](https://github.com/donald-shrimp/ap-study/pull/77)と[PR #78](https://github.com/donald-shrimp/ap-study/pull/78)に保存し、本番公開はまだ行っていない。
 
 - [全体計画・作者／レビュー／統合の手順](../../../docs/ap-a-content-upgrade.md)
 - [800問の固定台帳](inventory.json)
@@ -19,10 +19,10 @@
 | [batch-02](batches/batch-02/README.md) | 20 | 基礎理論、論理回路 | 作者 2 ／ 確認者 3（独立確認・登録済み） |
 | [batch-03](batches/batch-03/README.md) | 20 | 論理回路、アルゴリズム・プログラミング | 作者 3 ／ 確認者 4（独立確認・登録済み） |
 | [batch-04](batches/batch-04/README.md) | 20 | アルゴリズム・プログラミング、コンピュータ構成 | 作者 4 ／ 確認者 1（独立確認・登録済み） |
-| [batch-05](batches/batch-05/README.md) | 20 | コンピュータ構成 | 未割当 |
-| [batch-06](batches/batch-06/README.md) | 20 | コンピュータ構成 | 未割当 |
-| [batch-07](batches/batch-07/README.md) | 20 | コンピュータ構成、システム構成・OS | 未割当 |
-| [batch-08](batches/batch-08/README.md) | 20 | システム構成・OS | 未割当 |
+| [batch-05](batches/batch-05/README.md) | 20 | コンピュータ構成 | 作者 1 ／ 確認者 2（独立確認・登録済み） |
+| [batch-06](batches/batch-06/README.md) | 20 | コンピュータ構成 | 作者 2 ／ 確認者 3（独立確認・登録済み） |
+| [batch-07](batches/batch-07/README.md) | 20 | コンピュータ構成、システム構成・OS | 作者 3 ／ 確認者 4（独立確認・登録済み） |
+| [batch-08](batches/batch-08/README.md) | 20 | システム構成・OS | 作者 4 ／ 確認者 1（独立確認・登録済み） |
 | [batch-09](batches/batch-09/README.md) | 20 | システム構成・OS | 未割当 |
 | [batch-10](batches/batch-10/README.md) | 20 | システム構成・OS、ハードウェア | 未割当 |
 | [batch-11](batches/batch-11/README.md) | 20 | ハードウェア | 未割当 |
@@ -55,4 +55,6 @@
 | [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | 未割当 |
 | [batch-39](batches/batch-39/README.md) | 20 | 法務 | 未割当 |
 
-700問の35組は未着手。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
+620問の31組は未着手。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
+
+第2回で判明したr04a-q13の既存文字起こし誤記2箇所は、[別担当確認済みの訂正草稿](batches/batch-06/review/source-correction-draft.json)と[確認記録](batches/batch-06/review/source-correction-independent-author-3.json)を保存。ヒント・解説の承認と分け、原問への訂正適用は保留している。
