@@ -693,11 +693,11 @@
     "id": "r05h-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "32beca2cb046d8e2676e464de3e96e464115588b9fe2536787325cdb9732cd36",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q22",
-      "summary": "負の半周期が0Vに制限され、正の半周期だけが残ります。",
+      "summary": "ダイオードの向きと接地基準の電位から、入力正弦波のどちらの半周期が出力に残るかを判定する。",
       "explanation": "図のダイオードは下側のアノードが0V、上側のカソードが出力につながっています。入力が正なら逆バイアスで導通せず、抵抗に電流が流れないので出力は入力と同じです。入力が負になると0V側からダイオードが導通し、順電圧0Vの条件で出力を0Vに保ちます。したがって正の山だけ残るアです。",
       "choiceReasons": [
         "正の入力を通し、負の入力を0Vにクリップした波形です。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "ダイオードの横線がある側は上側で、下側は0Vにつながっています。",
+          "text": "図2のダイオードは**横棒がある上側がカソード**で、下側のアノードは0V（接地）につながっています。入力が正の場合と負の場合を別々に追います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "アノードがカソードより高い電位なら導通します。正と負の入力を別々に当てはめます。",
+          "text": "アノードの電位がカソードより高いときダイオードは導通します。入力が正なら出力側は正となりダイオードはオフ、負なら接地0Vのアノードから負側のカソードへ電流が流れようとします。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "入力が負になると0Vのアノードが上側より高くなり導通します。順電圧0Vで出力がどうなるか考えます。",
+          "text": "順方向電圧が0Vなので、負の入力の間はダイオードが導通して出力が0Vに抑えられます。正の半周期はそのまま残ります。図の上下を見てこの波形の肢を選んでください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ダイオードの三角形に見える記号の方向やカソードの線を読めず、負の入力でどちらへ電流が流れるか決められない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "カソード位置と接地されたアノードの確認",
+          "remainingWork": "図の各接続点を追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "素子の接続と方向だけで波形の正誤は確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正負それぞれのバイアス状態と導通の条件",
+          "remainingWork": "導通時と非導通時の出力を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "正負の導通は示すが出力の波形を最終特定していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "負半周期の0Vクリップと正半周期が残る最終波形",
+          "remainingWork": "候補波形と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答波形の『正側だけ残る』を明かす"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=65dbd7962b6ad5e1470386a26870aac5e0550e7bdaa884503590a935bf9f08f8。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原図ダイオード上端カソード/下端アノード0V、入力正でOFF・負でON。順電圧0Vのクリッパーは負を0V、正を通しア。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "f4deadbd11edccb313795086979a2202d89760de94b072bffc43072962796984",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q23",
-      "summary": "エの300マイクロ秒。分周後の周期2マイクロ秒を150回数えます。",
+      "summary": "分周したクロックの周期とダウンカウンタの減算回数から、最初の割込みまでの時間を求める。",
       "explanation": "タイマーのクロックは16MHz/32=0.5MHzです。1カウントの時間は1/500000秒=2マイクロ秒。\n初期値150から0までは150回の減算なので、150×2=300マイクロ秒で最初の割込みが起きます。16ビットという容量は、この初期値での時間計算には掛けません。",
       "choiceReasons": [
         "0.3はミリ秒なら正しい値ですが、問われた単位はマイクロ秒です。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "16MHzをそのまま使わず、入力クロックは32分周した値であることに注目します。",
+          "text": "入力クロックは16MHzを32で割った周波数です。**32分周は周波数を1/32にし、その分だけ1回のカウント時間を長くする**操作です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "16/32MHzの逆数を取ると、1カウントに要する秒数が求まります。",
+          "text": "16MHz÷32＝0.5MHz＝500,000回/秒。1カウントの周期は1÷500,000秒＝**2マイクロ秒**です。16ビットは格納できる最大カウント範囲で、初期値150の時間に掛けません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "初期値150から0へ下がる回数は150です。周期をマイクロ秒へ換算し、150を掛けましょう。",
+          "text": "150から0へは150回の減算が必要です。**2マイクロ秒×150回**を計算し、マイクロ秒の選択肢と照合してください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "32分周を周波数に掛けてしまう、または16ビットをカウント数に掛けてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "32分周と16ビットの役割の区別",
+          "remainingWork": "周波数を16/32に変換",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分周の方向は教えるが1カウント時間は未算出"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "分周周波数0.5MHzから得られる1回2μsの周期",
+          "remainingWork": "カウント間隔を計算し、初期値を確認",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "周波数と周期を示すが割込みまでの全カウント数との積が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "150回の減算という時間計算の式",
+          "remainingWork": "2×150を計算して正答を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終乗算と選択肢の照合を本人が行う"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=30b2fad9901beba59f05563318d3ae45d5005e3d3d665cf3df350df51ec4fe05。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本は16ビットダウンカウンタ・初期値150・16MHzを32分周、0到達で割込み。0.5MHz、2μs×150=300μs。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "f60d9fc9f4f0ed10d63c3ce06d115be4abbdb254ad05f159ced374ede1dd219f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q23",
-      "summary": "ウ。物理的な解析を試みると内部回路を破壊する仕組みは、耐タンパ性を高めます。",
+      "summary": "不正な開封・物理解析から内部情報を守る耐タンパ性と、通常の電子部品の故障耐性を区別する。",
       "explanation": "耐タンパ性は、機器を不正に開封・解析して内部情報を取り出したり、改変したりする行為への耐性です。解析を検知して回路や機密情報を破壊する仕組みは、内部情報の取得を困難にします。静電気に対する強さは電気的信頼性であり、タンパ対策とは目的が違います。",
       "choiceReasons": [
         "ESD耐性は静電気による破損を防ぐ性質で、不正解析への耐性とは異なります。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問は「耐タンパ性」です。候補が防ぐ対象を、静電気と不正な物理解析に分けます。",
+          "text": "耐タンパ性（tamper resistance）が対象とするのは、攻撃者による**物理的な開封・内部信号の観測・改変**です。静電気で壊れにくいこととは違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "攻撃者がチップを開いて信号を測る場面を考えます。内部の観測を容易にする仕組みか、解析を妨げる仕組みかを判断します。",
-          "revealsAnswer": false
+          "text": "攻撃者がチップ内部を解析して秘密を取り出そうとする場合を考えます。検査用パッドを残すことやメモリ配置を規則的にすることは、観測や推定を容易にする可能性があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "物理的な解析の試みに応じて内部回路を壊す仕組みは、情報の取出しを妨げる対策です。",
+          "text": "解析を試みた際に内部回路を破壊する仕組みなら、回路の観測や秘密の取り出しを妨げられます。通常の信頼性対策ではなく**不正解析を阻止する機構**を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『耐性』という語からESD耐性を選んでしまい、タンパが意図的な不正解析・改変であることを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "耐タンパ性の脅威モデルとESDとの違い",
+          "remainingWork": "各肢がどの脅威を防ぐか分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "正答肢の対策そのものは述べていない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "検査パッド・規則的配置が解析を助ける可能性",
+          "remainingWork": "残る対策を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ESD・検査パッド・整然配置を除外して残る正答が一意になる"
+        },
+        {
+          "newInformation": "解析時の回路破壊という正答肢の仕組み",
+          "remainingWork": "正答を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答の物理破壊対策を説明している"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=f3849a1d1943d722c90c638c9665e8949fd5368c9c3bfb300b8bc5f68f6f5216。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本4肢はESD耐性・検査パッド残存・物理解析に反応して回路破壊・アドレス整然配置。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "f240f75a0754421a44db4997cd8648c3ef03d87cb55472675b86b7d04da805f7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q24",
-      "summary": "ウ。物理解析を試みると内部回路を破壊する仕組みが耐タンパ性を高めます。",
+      "summary": "マイクロプロセッサの耐タンパ性を、静電気や一般故障の対策ではなく、意図的な物理解析に対する防御として判定する。",
       "explanation": "耐タンパ性は、不正な解析や改変から内部情報・機能を守る性質です。チップの物理的な解析を検知したときに回路を破壊するなど、機密情報を取り出せなくする仕組みが対策になります。\n静電気への耐性は通常の電気的な故障への対策です。検査用パッドを残したり、メモリを予測しやすい配置にしたりすると、内部の調査を助ける可能性があります。",
       "choiceReasons": [
         "ESD耐性は静電気放電による故障を防ぐもので、不正解析への対策とは目的が異なります。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問いの「耐タンパ」は、静電気への耐久性ではなく、秘密を探るための物理的な調査や改変への抵抗です。",
+          "text": "『タンパ』は不正な開封、物理解析、改変などを指します。静電気放電（ESD）でチップが壊れにくいことは別の評価軸です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "検査用の端子が残っていると攻撃者も内部へ接続できるかもしれません。各案が調査を容易にするか困難にするかで比べます。",
-          "revealsAnswer": false
+          "text": "テスト用パッドがそのまま残ると内部配線の調査に使われるおそれがあります。またアドレス順に整然と配置したメモリは不正な推測を難しくするとは限りません。攻撃に対する防御の仕組みを選びます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "内部解析を試みたときに内部回路を破壊するウは、機密情報を取り出すことを妨げる対策です。",
+          "text": "物理的な解析を試みるとチップ内部の回路が破壊されるようにすれば、内部情報の取出しを妨げます。耐タンパ性の強化を述べるのはこの方法です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ESDという安全・耐久対策と、攻撃者に秘密を読ませない保護を同一視する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "タンパ行為とESDという一般故障との区別",
+          "remainingWork": "保護したい対象を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "用語定義でESDは除外するが他3肢を一意にはしない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "検査パッド・メモリ配列と観測容易性の検討",
+          "remainingWork": "4肢のうち防御効果のあるものを絞る",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イ・エも除外され残るウが一意"
+        },
+        {
+          "newInformation": "回路破壊による不正解析妨害",
+          "remainingWork": "対策を選択する",
+          "revealsAnswer": true,
+          "reason": "正答肢の記述を直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q24.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=8a89ebff3158cebff800d8b0a9ccf3469249c287016a2b3d375b78f99dfb79a1。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：別原本でエは『内部メモリを物理アドレスに合わせて整然と配置』。選択肢表記の違いを保持し、正答ウ。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "415dd45265b77854eb5b6d724c688c9f2a6c9d3f19ed28d9a990c96aaf92c090",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q20",
-      "summary": "イ。HDLはデジタル回路を記述するハードウェア記述言語。",
+      "summary": "FPGA向けの回路を論理合成可能な形で記述する言語と、データベース・モデル図・マークアップの用途を区別する。",
       "explanation": "FPGAへ実装するには、論理ゲート、信号、レジスタなどの回路の振る舞いや構造を記述し、論理合成で回路へ変換する。これに用いるのがHDL（Hardware Description Language）。代表例はVerilog HDLやVHDL。\n\nDDLはデータベースの表などを定義する言語、UMLはシステムの構造や動作を図でモデル化する表記、XMLは構造化したデータを記述する形式。用途を「回路」「DB」「モデル」「データ形式」で分ける。",
       "choiceReasons": [
         "DDLはCREATE TABLEなど、データベースの構造定義に使う。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題には「デジタル回路」と「論理合成」がある。ソフトの設計図やデータの形式ではなく、回路へ変換できる記述を探す。",
+          "text": "FPGAはプログラム可能な論理回路を作る半導体です。設問は回路の信号・組合せ論理・順序回路を記述し、**論理合成でハードウェアへ変換**できる表現を聞いています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "VerilogやVHDLは、同時に動く回路や信号を記述する言語。どの略語がこの言語の分類かを考える。",
-          "revealsAnswer": false
+          "text": "VerilogやVHDLは、同時に動く回路やレジスタ・信号を表す**ハードウェア記述言語（Hardware Description Language）**です。この英語の略語を選択肢に照らしてください。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "DDLはDB定義、UMLはモデル図、XMLはタグによるデータ形式。この用途の違いを使って残る略語を確認する。",
-          "revealsAnswer": false
+          "text": "HDLが回路の記述に使う言語です。DDLはデータベース定義、UMLはモデル図の表記、XMLは構造化データをタグで表す形式なので目的が異なります。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DDL・HDL・UML・XMLの頭文字を知らず、どれも設計に使う言語として混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "FPGAの論理合成と記述対象の説明",
+          "remainingWork": "回路記述とほかの形式の違いを把握する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "論理合成の目的を説明するにとどまる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "Hardware Description Languageの意味とVerilog/VHDLの例",
+          "remainingWork": "英語の頭文字を対応させる",
+          "revealsAnswer": true,
+          "reason": "正答のHDLの正式名称を示しており選択肢へ容易に対応する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "HDLの名称と他の略語の機能",
+          "remainingWork": "正答肢と誤答を区別する",
+          "revealsAnswer": true,
+          "reason": "正答名称を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q20.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=01de12c07a2d16c69a7b4b21b9f8bfaf148e502b2c762e84727255e871567140。",
+        "context収録の公式正答イを原本選択肢と照合。作者の解法根拠：原本のアDDL、イHDL、ウUML、エXMLの順を確認。FPGAの回路記述はHDL。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q23",
     "baseVersion": 2,
     "baseLessonSHA256": "be435aae68c386aa366c09859e98bac48f91e4d92efbdc9dd86d83076b24b4b0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q23",
-      "summary": "ア。直流給電は交流・直流間の変換段数を減らし、変換損失を抑えます。",
+      "summary": "データセンターの直流給電で減らせる電力損失と、電圧変換・停電対策の必要性を区別する。",
       "explanation": "サーバ内部の電子回路は直流で動作します。交流給電のUPSなどで直流→交流→直流の変換を行う構成と比べ、直流のまま供給すれば不要な変換を減らせます。その分、変換に伴う電力損失を低減できるのが利点です。\n直流でも電圧の変換や停電への備えは必要です。通常のトランスは磁束の変化を使うため、直流をそのまま加えて簡単に昇降圧することはできません。",
       "choiceReasons": [
         "アは不要な交流・直流変換を減らすことで損失を抑える利点です。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "サーバ内部が使う電力は直流です。UPSから機器までに交流と直流の変換を繰り返すと何が増えるか考えます。",
+          "text": "サーバのCPUなどの電子回路は直流で動作します。給電経路で**交流→直流→交流→直流**と何度も電力形式を変えると、各段の変換損失が積み重なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "直流→交流→直流の途中の変換を省けば、変換効率が100％でないことによる損失を減らせます。",
+          "text": "直流給電なら途中の不必要なAC/DC・DC/ACの変換段を減らし、変換損失を小さくできます。ただし機器内の低電圧へのDC-DC変換や、停電時の蓄電池は依然として必要な場合があります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "同じ電圧のままCPUまで供給できるか、停電がなくなるか、直流を通常のトランスに加えて昇降圧できるかを個別に確認します。",
-          "revealsAnswer": false
+          "text": "『交流と直流の変換に伴う電力損失を低減できる』が利点です。普通のトランスは変化する磁束を使うため、直流をそのまま加えるだけでは簡単に昇降圧できません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "直流のまま給電するなら電圧調整もバックアップも不要だと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "電力変換を重ねると効率が落ちる仕組み",
+          "remainingWork": "電力供給の形式変化を追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "背景のエネルギー損失のみで正答を直接確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DC給電の省変換とDC-DC変換・蓄電池の必要性",
+          "remainingWork": "損失低減に対応する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の『AC/DCの変換損失低減』を実質的に説明する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "正答肢の変換損失とトランス誤解の訂正",
+          "remainingWork": "残りの電圧・停電・トランスの違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢の文意をそのまま示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=9c78f7482355faede6fd02a72f878aef5059eb5c1248a9edcd804299a8c19d7b。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本はア変換損失低減、イ同一電圧、ウ停電危険なし、エトランスで簡単昇降圧。直流給電の利点はア。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q20",
     "baseVersion": 2,
     "baseLessonSHA256": "a520d90fc233bb210f634df2c55d2aca9537e0e8b318104c1752b651c9564027",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q20",
-      "summary": "ア。パッシブRFタグは受信した電波から得た電力で通信します。",
+      "summary": "パッシブRFタグが電池なしで動作する際の電力取得方法を、他の通信方式と区別する。",
       "explanation": "パッシブ方式のRFタグは自らの電池で通信するのではなく、リーダからの電波をアンテナで受け、そのエネルギーを動作に使います。RFIDは無線を用いる識別方式で、可視光・赤外線通信や静電容量による位置検出とは異なります。",
       "choiceReasons": [
         "アンテナで受けた電力を利用して通信するパッシブタグの説明です。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "通信媒体がRFである点と、パッシブという電力供給の方式を分けて考えます。",
+          "text": "RFはRadio Frequency（無線周波数）で、タグとリーダの間で電波を使います。『パッシブ』は内蔵電池などの独立した電力供給なしに応答する方式です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "電池などの自前の電源がなくても応答するには、リーダから来る信号のエネルギーを使います。",
+          "text": "パッシブタグはリーダの発した電波をアンテナで受け、そこから得たエネルギーでチップを動作させます。応答は方式に応じて反射波の変化などを利用します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アンテナで受け取った電力を用いて通信する説明が該当します。",
+          "text": "アンテナで受け取った電波由来の電力を使って通信する記述が正答です。可視光・赤外線での通信や静電容量による位置検出ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "RFが電波を意味することと、パッシブで電池を搭載しない理由が結び付かない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "RFとパッシブの意味・電源方式",
+          "remainingWork": "通信媒体を理解する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "用語の前提を示すがエネルギーの具体的な受け方までは言っていない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "受信電波のエネルギーで動く仕組み",
+          "remainingWork": "選択肢から受信エネルギーに対応するものを探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢のアンテナ受信電力と同義の説明を渡す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答の電力取得とほか3技術の区別",
+          "remainingWork": "正答を確定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を明確に特定する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q20.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=6b2b55926375ab16a71cce05b38056681e130ab18018847b362d462b63dc89c3。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本アは『アンテナで受け取った電力を用いて通信』。イ可視光・ウ静電容量・エ赤外線。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q22",
     "baseVersion": 2,
     "baseLessonSHA256": "a3b24b9a4507060f315713657417adb3a6366e4732057eebcf38c04a82ff1f42",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q22",
-      "summary": "エ。前のデータを消去してから書き換えます。",
+      "summary": "フラッシュメモリの不揮発性・書換え寿命・消去手順を、DRAMやROMライターと区別する。",
       "explanation": "フラッシュメモリは電源を切ってもデータを保持する不揮発性メモリです。電気的に消去と書込みができますが、既存データを自由に上書きできず、書換えには前のデータの消去が必要です。消去・書込みには回数の限界もあります。",
       "choiceReasons": [
         "書込み回数には寿命があり、無制限ではありません。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "電源を切っても残る記憶と、定期的な再書込みが必要な記憶を分けます。",
+          "text": "フラッシュメモリは電源を切っても内容が残る**不揮発性メモリ**で、回路上で電気的な消去・書込みができます。DRAMのような周期的リフレッシュは不要です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "フラッシュの「電気的に消去できる」という性質を、書換え手順に結び付けます。",
-          "revealsAnswer": false
+          "text": "フラッシュでは書換え対象の領域をあらかじめ消去状態にする必要があります。一般に消去はブロック等の単位で行われ、消去・書込みには寿命となる回数の上限があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "既存データを書き換える前に消去する、という手順を選びます。",
+          "text": "新しいデータへ書き換える際は、対象領域の前のデータを**消去してから書き込む**記述が適切です。『無限回書込み』『ROMライター必須』『定期リフレッシュ』は誤りです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "不揮発性と『いつでも自由に上書きできる』を混同し、消去と書込みの順序を理解していない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不揮発・基板上での電気的書換え・DRAMとの比較",
+          "remainingWork": "三つの別種のメモリの特徴を比べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "誤答イ・ウは除外できるが正答エをまだ特定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "消去単位と寿命、書換え前の消去条件",
+          "remainingWork": "正しい書換え手順の肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の消去してから書くという内容を直接教える"
+        },
+        {
+          "newInformation": "正答の消去→書込み順序と他3肢の誤り",
+          "remainingWork": "誤答を説明する",
+          "revealsAnswer": true,
+          "reason": "最終判断を正答肢に対応させる"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q22.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=2066195fa50b6d675e57bb4b97c8d5667da51adf1376e7b394c360c3d41ab18d。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本ア無限回・イ取り外しROMライター・ウリフレッシュ・エ消去後書込み。不揮発かつ消去単位・書換え寿命あり。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "c59221f36371f490bf0202758c38f442045528dd3bc3e93003a0c985334b19ac",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q21",
-      "summary": "ウ。整流作用をもつのはダイオードです。",
+      "summary": "電子部品のうち、電流を一方向に通しやすい性質を利用して整流するものを選ぶ。",
       "explanation": "整流は交流などの電流を一方向へ流れるようにする働きです。ダイオードは順方向には電流を流しやすく逆方向には流しにくい性質を利用して整流します。",
       "choiceReasons": [
         "コイルは磁界にエネルギーを蓄え、電流の変化を妨げます。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "整流で変えたいのが電流の大きさか方向かを考えます。",
+          "text": "**整流**とは、交流などで電流の向きが変わるものを、片方向に流れるようにする働きです。波形の大きさを単純に小さくすることとは違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "交流の正負の半周期のうち、片方を通す部品の性質を考えます。",
-          "revealsAnswer": false
+          "text": "コイルは磁気エネルギーを蓄え電流変化を抑え、コンデンサは電荷を蓄えて電圧変化に応じ充放電し、抵抗器は電流を制限します。整流には**流れる方向で通しやすさが違う**素子が必要です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "順方向は通し、逆方向は通しにくい素子を選びます。",
+          "text": "ダイオードは順方向に電流を流しやすく、逆方向には流しにくい半導体素子です。その非対称な性質を使って整流します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "整流・平滑・電流制限などの異なる働きを混同してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "整流の意味と方向性",
+          "remainingWork": "何を変えたいかを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "整流の一般定義のみで4素子をまだ分類していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "誤答3素子の役割と整流に必要な非対称性",
+          "remainingWork": "方向で振る舞いが変わる部品を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他3肢の特性を挙げて消去し残る肢が一つになる"
+        },
+        {
+          "newInformation": "ダイオードの順・逆方向特性",
+          "remainingWork": "名称を選択肢から選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答のダイオードを名称で教える"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=d5bff57fd9c838dc22f98d47312cd0371dc251f4ed244cfe3762369014eb26a6。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本選択肢：コイル、コンデンサ、ダイオード、抵抗器。ダイオードの整流作用を確認。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q21",
     "baseVersion": 2,
     "baseLessonSHA256": "9fa523523b8cea23c380d2b8b44549883fbf3a0c01b2192cb886a543b50dc39d",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q21",
-      "summary": "ウ。x=7の画素は(7,6)で、先頭アドレスは7694番地です。",
+      "summary": "直線の画素座標を確定し、横640画素の行優先・1画素16ビットの配置でメモリアドレスを求める。",
       "explanation": "始点(5,4)と終点(9,8)は傾き(8−4)/(9−5)=1なので、x=7ならy=6です。横640画素をx方向から順に格納するため、(7,6)より前の画素数は640×6+7=3847です。1画素は16ビット=2バイト、番地は8ビット単位なので、先頭は3847×2=7694番地です。",
       "choiceReasons": [
         "3847は画素の通し番号です。1画素2バイトへの変換が必要です。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図の黒い直線上でx=7の画素を探し、y座標を確認します。始点と終点でxとyが同じだけ増えています。",
+          "text": "直線は始点(5,4)から終点(9,8)です。xが4増える間にyも4増えるので**傾きは1**です。まずx=7に対応するyを求めてください。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "格納順は横640画素の行を順に置くので、前の行の画素数は640×yです。始点(5,4)からx=7まで増えた分を傾きで換算し、y=4+(7−5)×(8−4)/(9−5)と置きます。次に640×y+7を作り、1画素16ビット・1番地8ビットなので16÷8を掛けて番地数へ直します。",
+          "text": "このLCDは行ごとにx=0から639まで順に格納します。画素(x,y)より前にある画素数は**640×y＋x**。各画素は16ビットで、図の1番地は8ビットなので**1画素は2番地**使います。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "x=7ではy=6です。(6×640+7)×2=7694番地になります。",
-          "revealsAnswer": true
+          "text": "x=7ではy=4＋(7－5)=6です。対象の先頭番地は**(640×6＋7)×2**で求めます。最後の乗算を行い選択肢に照らしてください。",
+          "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "y座標を誤る、1画素を1番地と数える、または座標とバイトアドレスの変換を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原図の傾きとxからyを求める視点",
+          "remainingWork": "x=7でのyを計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "傾き1だけでyやアドレスの最終値は不明"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "行優先での画素番号640y+xと16bit/8bitの換算",
+          "remainingWork": "ピクセル数を番地数へ換算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "汎用式と1画素2番地を教えるが実数値の代入は残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
+          "newInformation": "y=6とアドレス式を具体的に代入",
+          "remainingWork": "乗算・加算をして正答を選ぶ",
+          "revealsAnswer": false,
+          "reason": "代入値は与えるが最終アドレス7694自体は教えず計算を残す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q21.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=fe9e34283b3cedc84b37c1d72730c1370957564e80a338637948fe514287e84b。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原図始点(5,4)、終点(9,8)、640列×480行、1画素16bit、アドレスは8bit単位で0起点。x=7→y=6、(6×640+7)×2=7694。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
     }
   }
 ]
