@@ -51,3 +51,5 @@ python tools/ap-lesson-quality.py check batch-09 --reviewed
 ## 独立レビューの現在地
 
 [PR #81](https://github.com/donald-shrimp/ap-study/pull/81)の作者head `c9127642c7e50748071e46033adcc5a591604cef` を原本・公式解答から独立確認。20問・80肢・60ヒントを確認し、18問の最終教材ハッシュを `reviews.json` に承認済みとして保存。r06a-q17とr04a-q18は第2段ヒントの開示判定を修正待ち。指摘・根拠・採点処理での再現は [review/independent-review.json](review/independent-review.json) を参照。作者による修正後に別担当が再確認し、20問全件が承認されるまでaccept・公開しない。今回のレビューでは草稿・公開教材を変更していない。
+
+2026-10-27追記：上記2件はCodex /rootがフラグと設計メモを修正し、別担当が原本・公式解答・最終教材・採点を独立再確認した。[修正後の確認記録](review/correction-independent-review.json)を保存し、reviews.jsonは20件の最終承認。初回指摘は履歴として保持。未登録・未マージ・未公開。
