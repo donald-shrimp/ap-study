@@ -3,11 +3,11 @@
     "id": "r04a-q39",
     "baseVersion": 2,
     "baseLessonSHA256": "9828b510663cec1146cc87124ac596d05d46dd15c443b797e32cba03a62c4293",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q39",
-      "summary": "ア。CSIRTマテリアルです。",
+      "summary": "JPCERT/CCが作成した、組織のインシデント対応体制の構築を支援する資料を見分ける問題。",
       "explanation": "JPCERT/CCのCSIRTマテリアルは、組織内でインシデントに対応するCSIRTの構築・運用を支援する資料です。目的が組織的なインシデント対応体制の構築であることから判断できます。",
       "choiceReasons": [
         "CSIRTの構築や運用を支援するJPCERT/CCの資料です。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問の「対応体制の構築」という目的に線を引き、資料名の対象と比べます。",
+          "text": "インシデント対応とは、サイバー攻撃などの発生時に検知・分析・封じ込め・復旧を組織的に進めることです。予防の管理制度や事後の証拠保全だけとは目的が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "組織内のインシデント対応チームを表す略語が資料名にあるか確認します。",
-          "revealsAnswer": false
+          "text": "CSIRTはComputer Security Incident Response Teamの略で、組織のインシデント対応を担うチームです。JPCERT/CCはCSIRTの立上げ・運用を支援する「CSIRTマテリアル」を公開しています。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Computer Security Incident Response Teamを支援する資料がCSIRTマテリアルです。",
+          "text": "ISMSユーザーズガイドは管理の仕組み、証拠保全ガイドラインは証拠の取扱い、内部不正防止ガイドラインは内部者対策が中心です。設問の「対応体制の構築」と一致する資料を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CSIRTという略語と、ISMS・証拠保全・内部不正対策の資料の目的を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "インシデント対応とは、サイバー攻撃などの発生時に検知・分析・封じ込め・復旧を組織的に進めることです。予防の管理制度や事後の証拠保全だけとは目的が異なります。",
+          "remainingWork": "対応体制を支援する資料名を候補から探す。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対応業務の意味だけを教え、具体的な資料名は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CSIRTはComputer Security Incident Response Teamの略で、組織のインシデント対応を担うチームです。JPCERT/CCはCSIRTの立上げ・運用を支援する「CSIRTマテリアル」を公開しています。",
+          "remainingWork": "資料名と選択肢の対応を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢にある資料名とその目的を明示する。"
+        },
+        {
+          "newInformation": "ISMSユーザーズガイドは管理の仕組み、証拠保全ガイドラインは証拠の取扱い、内部不正防止ガイドラインは内部者対策が中心です。設問の「対応体制の構築」と一致する資料を選びます。",
+          "remainingWork": "目的の異なる3資料を除外する。",
+          "revealsAnswer": true,
+          "reason": "前段で特定した正答を他の3肢との比較でも確定させる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r04a/r04a-q39.webp (context SHA256: dd6a0414a6c0fdb126fd5cbe27f9822ebd171735b49d32a0905e0280c6c11fcf)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r07a-q42",
     "baseVersion": 2,
     "baseLessonSHA256": "1b02c5c1fc7c68a7f8f8718e1ff29b5c835d4f985e270d714b975ee618f80eeb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q42",
-      "summary": "ア。CSPMはクラウド設定の不備を監視・修正してリスクを減らします。",
+      "summary": "CSPMが管理する対象を、CASBなどのクラウド関連サービスと区別する問題。",
       "explanation": "CSPMはクラウド資源のセキュリティ設定状態を継続的に評価する仕組みです。例えばストレージが意図せず公開されていないか、過剰な権限がないかを検出し、修正を支援します。\n従業員のSaaS利用を統制するCASBや、通信の防御機能をまとめるサービスとは対象が異なります。",
       "choiceReasons": [
         "クラウドの設定監視と不備の自動修正はCSPMの説明です。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で管理する対象が、クラウドの設定、従業員の問合せ、SaaS利用状況、統合した防御機能のどれなのかを書き出します。",
+          "text": "クラウドのセキュリティ対策には、資源の設定状態を点検するものと、従業員のSaaS利用や通信を制御するものがあります。まず何を監視する説明か分類します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ストレージの公開設定や過剰権限を定期的に調べる機能と、従業員のSaaS利用を監視する機能を分けます。",
+          "text": "CSPMのPostureはセキュリティ上の設定状態を指します。公開ストレージや過剰権限などの設定ミスを継続的に検出し、是正を支援する仕組みです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "選択肢の対象が問合せ窓口、利用状況、通信防御、構成・設定のどれかを確認しましょう。",
-          "revealsAnswer": false
+          "text": "CASBは従業員のクラウド利用状況とポリシーを管理します。問合せ窓口やファイアウォール等の統合提供もCSPMとは別です。設定監視・不備修正に該当する肢を確認します。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CSPMのPostureを知らず、SaaS利用制御やセキュリティ機能の統合と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "クラウドのセキュリティ対策には、資源の設定状態を点検するものと、従業員のSaaS利用や通信を制御するものがあります。まず何を監視する説明か分類します。",
+          "remainingWork": "各肢の監視対象を分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "クラウド対策の分類軸だけで正答は特定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CSPMのPostureはセキュリティ上の設定状態を指します。公開ストレージや過剰権限などの設定ミスを継続的に検出し、是正を支援する仕組みです。",
+          "remainingWork": "設定監視を述べる肢と対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の説明と実質同じCSPMの定義を渡す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "CASBは従業員のクラウド利用状況とポリシーを管理します。問合せ窓口やファイアウォール等の統合提供もCSPMとは別です。設定監視・不備修正に該当する肢を確認します。",
+          "remainingWork": "ほかのサービスとの相違を確認する。",
+          "revealsAnswer": true,
+          "reason": "他肢を除外でき、正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r07a/r07a-q42.webp (context SHA256: 2abe0e6c44d5d5c078d3ace71faf64330049efd0428200055fc8ae76a6a6688d)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r05h-q40",
     "baseVersion": 2,
     "baseLessonSHA256": "37264186e76edbb11d016bd8cdaca9db2447a6991b303d7ded71d4166d69d11c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q40",
-      "summary": "個々の既知の脆弱性を一意に識別する情報はCVEです。",
+      "summary": "脆弱性に関するCVE・CVSS・CWE・CCEのうち、個々の既知の脆弱性を識別する仕組みを問う。",
       "explanation": "CVEは公表された個別の脆弱性に付与される共通識別子です。異なる製品情報や調査報告で同じ脆弱性を指すために使います。深刻度を数値化するCVSSや、弱点の種類を分類するCWEとは対象が違います。問題は「既知の脆弱性を一意に識別」なのでイです。",
       "choiceReasons": [
         "CCEは設定項目などのセキュリティ構成情報の共通識別です。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "求めるのは対策の点数でも欠陥の種類でもなく、個別の脆弱性を指す情報です。",
+          "text": "「一意に識別」は同じ対象を別の報告書でも同じ番号で指せることです。深刻さの点数や欠陥の分類とは役割が違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ弱点の種類から複数の脆弱性が生まれます。種類の分類と個別の識別子を区別します。",
-          "revealsAnswer": false
+          "text": "CVSSは脆弱性の深刻度を評価する指標、CWEは脆弱性を生む弱点の種類、CCEはセキュリティ設定項目を識別します。これらは個別の既知の脆弱性の番号ではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "CVE-年-番号という形で個別の脆弱性を識別する情報に対応させましょう。",
+          "text": "CVEはCommon Vulnerabilities and Exposuresの略で、CVE-年-番号の形式で公表された個別の脆弱性を識別します。残った候補を確認します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "似た略語の用途（識別・深刻度評価・弱点分類・設定項目）を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「一意に識別」は同じ対象を別の報告書でも同じ番号で指せることです。深刻さの点数や欠陥の分類とは役割が違います。",
+          "remainingWork": "四つの略語の対象を比較する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "識別子と評価・分類の違いだけを教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CVSSは脆弱性の深刻度を評価する指標、CWEは脆弱性を生む弱点の種類、CCEはセキュリティ設定項目を識別します。これらは個別の既知の脆弱性の番号ではありません。",
+          "remainingWork": "残る識別子の名称を判断する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答以外の3肢の役割を示し消去法で正答を確定する。"
+        },
+        {
+          "newInformation": "CVEはCommon Vulnerabilities and Exposuresの略で、CVE-年-番号の形式で公表された個別の脆弱性を識別します。残った候補を確認します。",
+          "remainingWork": "個別の脆弱性IDと選択肢を照合する。",
+          "revealsAnswer": true,
+          "reason": "正答名を直接教える。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r05h/r05h-q40.webp (context SHA256: e54dddea97494d6454c7eade2cca4258f0a9757c4fa21ac8fe96ba4bfbf6973a)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06a-q41",
     "baseVersion": 2,
     "baseLessonSHA256": "cf3ca4a9c8b5a362f99a4462317e2d7947600b5e0c29641f79c502252bf813cc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q41",
-      "summary": "ウ。CVE識別子は、製品に含まれる個々の脆弱性を識別します。",
+      "summary": "CVE識別子が付与される対象を、設定項目・製品種別・被害画像と区別する問題。",
       "explanation": "CVEは公開された脆弱性へ共通の識別子を付ける仕組みです。同じ脆弱性を複数の情報サイトや製品ベンダーが扱う際、共通番号で情報を照合できます。\n設定項目や製品の種類、攻撃による被害画像を識別する番号ではありません。深刻度を表すCVSSとも区別します。",
       "choiceReasons": [
         "セキュリティ設定項目の識別はCCEなどの目的で、個々の脆弱性を示すCVEとは異なります。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "JVNなど複数のサイトで同じ問題を追跡するための番号です。設定、被害画像、脆弱性、製品のうち、何を共通化する必要があるか考えます。",
+          "text": "一つの製品に複数の脆弱性が見つかることがあります。製品名だけでは「どの問題か」を共有できないため、対象を区別する番号が必要です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "製品名だけでは、同じ製品に複数ある問題を区別できません。情報を突き合わせるには個々のセキュリティ上の欠陥を識別します。",
+          "text": "CVE（Common Vulnerabilities and Exposures）は個々の公開された脆弱性に付ける共通識別子で、例えばCVE-2024-12345のように表します。製品の型番や設定項目の番号ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "個々の脆弱性を識別するウがCVEです。製品を識別する番号や深刻度のスコアとは分けます。",
+          "text": "CCEは設定項目、CPEは製品・プラットフォームの識別に使われます。CVEが対象とするのは改ざん画像や製品の種類ではなく、製品に含まれる個々の脆弱性です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "脆弱性の共通番号が何を識別するのか分からず、製品そのものの番号と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "一つの製品に複数の脆弱性が見つかることがあります。製品名だけでは「どの問題か」を共有できないため、対象を区別する番号が必要です。",
+          "remainingWork": "何を一意に識別すべきか選択肢で考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "個別識別の必要性だけを示し、CVEの定義はまだ言わない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CVE（Common Vulnerabilities and Exposures）は個々の公開された脆弱性に付ける共通識別子で、例えばCVE-2024-12345のように表します。製品の型番や設定項目の番号ではありません。",
+          "remainingWork": "CVEの対象と肢を対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の内容をCVEの定義として示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CCEは設定項目、CPEは製品・プラットフォームの識別に使われます。CVEが対象とするのは改ざん画像や製品の種類ではなく、製品に含まれる個々の脆弱性です。",
+          "remainingWork": "似た識別体系を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と同じ対象を明示して確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06a/r06a-q41.webp (context SHA256: 0233a08ea87e37142e3363ab72ace1abc8d1169ca34f826ffa9294b89e0a033c)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ウ（index 2）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r07h-q41",
     "baseVersion": 2,
     "baseLessonSHA256": "0d094d0168d036aee6ddaf7b69f39d70afa7bceebcede8417a451ef51db1b80e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q41",
-      "summary": "イ。Secure属性はHTTPSでのcookie送信に限定する。",
+      "summary": "CookieのSecure属性が送信時に課す条件を、期限・Path・HttpOnlyと区別する問題。",
       "explanation": "Secure属性付きのcookieは、通常のWeb通信ではHTTPSの要求でのみ送信する。暗号化されないHTTP通信にcookieを載せることを防ぐ。DomainやPath等の送信条件も別途満たす必要があり、HTTPSならどの宛先にも送る意味ではない。\n\n期限はExpires/Max-Age、パスの範囲はPath、JavaScriptからの読出し禁止はHttpOnlyの役割。Secureの名前だけであらゆる保護を含むと考えない。",
       "choiceReasons": [
         "期限による失効はExpires/Max-Ageの役割で、Secureの有無とは別。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの説明を、期限・通信方式・パス・JavaScriptの四項目に分類する。",
+          "text": "Cookieには送信する条件やアクセス方法を制御する属性があります。Expires/Max-Ageは期限、PathはURLのパス、HttpOnlyはJavaScriptからの読出しを制限します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Secureは暗号化されない通信へcookieを載せないための属性。保存期限やスクリプトからの読出しとは別。",
-          "revealsAnswer": false
+          "text": "Secure属性はCookieを安全な通信路（通常HTTPS）でのみ送信させる指定です。HTTP通信へのCookie送信を避けるもので、Cookieの保存期限を決める機能ではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "URLのhttp/httpsを条件にしている説明を探す。他の送信条件も引き続き必要。",
-          "revealsAnswer": false
+          "text": "Secureを付けてもDomain・Pathなど他の送信条件は必要です。選択肢のうちURLのスキーム（http/https）に着目する記述が、この属性に対応します。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "Secureという名前から有効期限やJavaScriptアクセス制御まで含むと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Cookieには送信する条件やアクセス方法を制御する属性があります。Expires/Max-Ageは期限、PathはURLのパス、HttpOnlyはJavaScriptからの読出しを制限します。",
+          "remainingWork": "Secureが制御する別の条件を考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "誤答3肢の属性を示すが、Secureの具体的な役割はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "Secure属性はCookieを安全な通信路（通常HTTPS）でのみ送信させる指定です。HTTP通信へのCookie送信を避けるもので、Cookieの保存期限を決める機能ではありません。",
+          "remainingWork": "通信方式を条件とする肢を特定する。",
+          "revealsAnswer": true,
+          "reason": "SecureのHTTPS送信条件が正答肢と一致する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "Secureを付けてもDomain・Pathなど他の送信条件は必要です。選択肢のうちURLのスキーム（http/https）に着目する記述が、この属性に対応します。",
+          "remainingWork": "他属性との違いを再確認する。",
+          "revealsAnswer": true,
+          "reason": "前段の正答をさらに直接示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r07h/r07h-q41.webp (context SHA256: 6c667eecd66dd16ecf37aeb094374c731431ddcc1c2acd069324b5032c68313e)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r04h-q40",
     "baseVersion": 2,
     "baseLessonSHA256": "b9687a06541cb6e9fe6433cb3c345b1f278878c2ba89e62cc747b7e9dfafe36d",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q40",
-      "summary": "イ。サードパーティcookieのブロックは、複数サイトにまたがる追跡を抑えます。",
+      "summary": "サードパーティCookieのブロックがサイト横断の追跡に与える効果を問う。",
       "explanation": "サードパーティcookieは、閲覧中のサイトとは異なる第三者のドメインが設定するcookieです。同じ第三者が複数サイトに広告等を埋め込むと、cookieを使って閲覧者を横断的に識別できます。これをブロックする設定は、その追跡を抑制します。キャッシュ保存や証明書検証とは別の設定です。",
       "choiceReasons": [
         "cookieをブロックしてもWebコンテンツのキャッシュ保存を止める設定にはなりません。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補で述べる効果を、キャッシュ保存・サイト横断追跡・改ざん検知・証明書検証に分けます。cookieが保持する識別情報の用途を考えます。",
+          "text": "CookieはWebサイトがブラウザに保存させる識別情報などです。Webページの画像やHTMLを保存するキャッシュとは別の仕組みです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ広告事業者の要素が複数サイトにあると、第三者のcookieで同じ閲覧者かを識別できます。これを送らない設定の効果を考えます。",
+          "text": "閲覧先サイトとは別ドメインの第三者が設定するのがサードパーティCookieです。同じ広告事業者が複数サイトで同じCookieを読めると、サイトをまたいだ閲覧の追跡に利用できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "サードパーティcookieのブロックで、複数のWebサイトを閲覧したときのトラッキングを抑えられます。",
+          "text": "サードパーティCookieのブロックは、そのCookieを使うサイト横断の追跡を抑制します。ただし追跡を完全に防ぐ保証ではなく、Webコンテンツのキャッシュ削除や証明書の失効確認を行う設定でもありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "Cookieとキャッシュ・証明書を混同し、第三者ドメインが複数サイトで使われる仕組みを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CookieはWebサイトがブラウザに保存させる識別情報などです。Webページの画像やHTMLを保存するキャッシュとは別の仕組みです。",
+          "remainingWork": "第三者の識別子がどこで利用されるか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "Cookieとキャッシュの違いだけを説明する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "閲覧先サイトとは別ドメインの第三者が設定するのがサードパーティCookieです。同じ広告事業者が複数サイトで同じCookieを読めると、サイトをまたいだ閲覧の追跡に利用できます。",
+          "remainingWork": "ブロック時の効果を肢と対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢のサイト横断追跡の仕組みを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "サードパーティCookieのブロックは、そのCookieを使うサイト横断の追跡を抑制します。ただし追跡を完全に防ぐ保証ではなく、Webコンテンツのキャッシュ削除や証明書の失効確認を行う設定でもありません。",
+          "remainingWork": "過大な効果や別機能を述べる肢を除く。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の効果を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r04h/r04h-q40.webp (context SHA256: d94c7f6e43a5f1f719deae286f3218e2a26376dde74078bc204a2d8602fa1e9a)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r05a-q44",
     "baseVersion": 2,
     "baseLessonSHA256": "fc2d268b2e613baa314c4e45f6f545fd8ca726bbbccf3f85ae667d7c7067dafd",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q44",
-      "summary": "ア。DKIMはメールのデジタル署名を検証して送信元ドメインを認証します。",
+      "summary": "DKIMによる送信元ドメイン認証を、SPF・DMARC・SMTP AUTHと区別する問題。",
       "explanation": "DKIMでは送信側のメールサーバがドメインの秘密鍵でメールへデジタル署名を付けます。受信側はDNSで取得した公開鍵などを使って署名を検証し、署名ドメインの認証と署名対象部分の改変の確認を行います。\n利用者ID・パスワードでの送信認証、認証失敗時の処理方針、送信サーバIPの照合とは区別します。",
       "choiceReasons": [
         "メールへの署名付与と受信側の署名検証によるドメイン認証で、DKIMの説明です。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の根拠は署名、利用者パスワード、ポリシー、IPアドレスです。DKIMの鍵を使う仕組みに注目します。",
+          "text": "メールの認証は「利用者を認証する」「送信サーバのIPを照合する」「メールに署名する」「認証失敗時の方針を示す」で目的と手段が異なります。各肢の動詞に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "送信ドメインの秘密鍵でメールへ署名し、受信側が公開鍵で確認する方式を考えます。",
+          "text": "DKIMは送信側がメールに秘密鍵でデジタル署名し、受信側がDNSで公開された公開鍵を使って署名を検証する方式です。署名したドメインと署名対象部分の改変を確認できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "送信側のデジタル署名と受信側の検証が一組になっている説明を選びます。",
+          "text": "SPFは送信元IPアドレスの照合、DMARCはSPF/DKIM等の認証結果に基づく方針と報告、SMTP AUTHは送信利用者の認証です。DKIMに当たる署名の肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "メール認証の仕組みがすべて同じに見え、署名・IP照合・ポリシー・ログイン認証を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "メールの認証は「利用者を認証する」「送信サーバのIPを照合する」「メールに署名する」「認証失敗時の方針を示す」で目的と手段が異なります。各肢の動詞に注目します。",
+          "remainingWork": "署名を用いる方式がどれか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方式を分類するだけでDKIMの仕組みは明示しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DKIMは送信側がメールに秘密鍵でデジタル署名し、受信側がDNSで公開された公開鍵を使って署名を検証する方式です。署名したドメインと署名対象部分の改変を確認できます。",
+          "remainingWork": "署名・公開鍵の説明と肢を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の説明と実質同じDKIMの仕組みを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SPFは送信元IPアドレスの照合、DMARCはSPF/DKIM等の認証結果に基づく方針と報告、SMTP AUTHは送信利用者の認証です。DKIMに当たる署名の肢を選びます。",
+          "remainingWork": "ほかの3方式を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢の方式を明示して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r05a/r05a-q44.webp (context SHA256: a86aa2bcda6391b17efa53aa4007ad187bcf0193023d3af91aff78022b076a7f)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r03a-q45",
     "baseVersion": 2,
     "baseLessonSHA256": "d83ef1c296ab87e25cdc07b557dbc70a0b746ec28afc3fd2951e7f0ecb2d38d3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q45",
-      "summary": "制御ネットワークと情報ネットワークの境界に置く機器",
+      "summary": "制御ネットワークと情報ネットワークの境界DMZに置くべき機器を、通信相手と役割から選ぶ問題。",
       "explanation": "正解はエ。情報ネットワークから更新用ソフトウェアを受け取り、制御側の機器へ提供するパッチ管理サーバは両ネットワークとの通信が必要である。境界のDMZに置くことで、情報側との通信を仲介できる。センサ・操作端末・コントローラは制御の計測、監視・設定、調整を担う。",
       "choiceReasons": [
         "センサは温度・流量・圧力を計測して制御に用いる機器で、情報ネットワークからの更新情報を仲介する役割ではない。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "移設条件は「情報ネットワークとの通信が必要」。候補の説明に情報側から入手するものがあるか確認する。",
+          "text": "DMZは信頼度の異なるネットワーク間に置く中間領域です。ここでは「情報ネットワークとの通信が必要な制御側機器」が移設条件で、重要度の高さだけでは決まりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "計測・目標値入力・調整は制御側の活動。一方、更新用ソフトウェアを情報側から受け取る役割は二つのネットワークをまたぐ。",
+          "text": "センサは計測、コントローラは制御、操作端末は制御値の監視・設定が中心です。一方、更新ソフトを情報側から受け取って制御側に配布する役割は、両ネットワークとのデータのやり取りを必要とします。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "情報側から更新ソフトウェアを受け取り、制御側へ配るパッチ管理サーバをDMZに配置する。",
+          "text": "更新ソフトの受領と配布を仲介するのはパッチ管理サーバです。これをDMZへ配置すれば、制御機器が情報ネットワークへ直接接続する範囲を抑えられます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DMZを単なる安全地帯と考え、制御機器のどれが情報ネットワークとの通信を必要とするか追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DMZは信頼度の異なるネットワーク間に置く中間領域です。ここでは「情報ネットワークとの通信が必要な制御側機器」が移設条件で、重要度の高さだけでは決まりません。",
+          "remainingWork": "各機器が誰と通信するか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "DMZの配置条件を教えるが候補を絞り切らない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "センサは計測、コントローラは制御、操作端末は制御値の監視・設定が中心です。一方、更新ソフトを情報側から受け取って制御側に配布する役割は、両ネットワークとのデータのやり取りを必要とします。",
+          "remainingWork": "情報側とやり取りする機器を特定する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の機能と同じ役割を示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "更新ソフトの受領と配布を仲介するのはパッチ管理サーバです。これをDMZへ配置すれば、制御機器が情報ネットワークへ直接接続する範囲を抑えられます。",
+          "remainingWork": "具体的な機器名とDMZ配置の理由を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の名称を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r03a/r03a-q45.webp (context SHA256: defdb8d10eb00d83cf55980d1495918d20fbd86a3a8e193cff052e7cc073b373)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの エ（index 3）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r05a-q45",
     "baseVersion": 2,
     "baseLessonSHA256": "1c994ee78e764c4b0027a5053c8d27cf55cf93f25958bfe4c1e14dd7f223c7ae",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q45",
-      "summary": "エ。DNSSECは公開鍵方式のデジタル署名でDNSデータを検証します。",
+      "summary": "DNSSEC固有の認証方式を、ポートランダム化・再帰制限・共通鍵認証と区別する問題。",
       "explanation": "DNSSECはDNSの応答データにデジタル署名を付け、受信側が公開鍵で署名を検証できるようにする拡張です。正当なデータであることと改変されていないことを確認します。\n送信元ポートのランダム化や再帰問合せの制限もDNSの対策ですが、DNSSECの署名検証とは異なります。共通鍵によるメッセージ認証ではありません。",
       "choiceReasons": [
         "ポート番号のランダム化は偽応答を当てにくくする対策ですが、DNSSECの署名検証ではありません。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "DNSの対策一般とDNSSEC固有の仕組みを分けます。ポートや問合せ範囲ではなく応答データの正当性を検証します。",
+          "text": "DNSでは偽応答を当てにくくするポートランダム化、公開リゾルバの利用制限、応答データ自体の正当性確認など、目的の異なる対策があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "不特定の検証者が確認できるよう、秘密鍵で署名して公開鍵で検証する方式を使います。共通の秘密鍵を全クライアントへ配る方式ではありません。",
+          "text": "DNSSECはDNSデータに秘密鍵でデジタル署名し、検証側が公開鍵で署名を確認します。データの出所と改ざんの有無を検証するための仕組みで、DNS通信内容を暗号化するものではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「公開鍵暗号方式」「デジタル署名」の両方を含む説明を探しましょう。",
+          "text": "共通鍵を全利用者と共有する方式ではなく、公開鍵で署名を検証する方式です。送信元ポートの変更や再帰問合せ制限とは区別して該当する肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DNSの安全対策全般とDNSSECを混同し、公開鍵による署名検証の意味を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSでは偽応答を当てにくくするポートランダム化、公開リゾルバの利用制限、応答データ自体の正当性確認など、目的の異なる対策があります。",
+          "remainingWork": "どの対策がデータを検証するか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対策の種類を説明するがDNSSECの方式は示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSSECはDNSデータに秘密鍵でデジタル署名し、検証側が公開鍵で署名を確認します。データの出所と改ざんの有無を検証するための仕組みで、DNS通信内容を暗号化するものではありません。",
+          "remainingWork": "署名方式の説明と肢を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と実質同じ公開鍵署名方式を示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "共通鍵を全利用者と共有する方式ではなく、公開鍵で署名を検証する方式です。送信元ポートの変更や再帰問合せ制限とは区別して該当する肢を選びます。",
+          "remainingWork": "共通鍵との違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢を除外して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r05a/r05a-q45.webp (context SHA256: 3ea512d2ff947aa998409a0e489dba1deffc3c9f86cd7f6ff377bef68fb5745f)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの エ（index 3）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06a-q44",
     "baseVersion": 2,
     "baseLessonSHA256": "dceee328b26f4748f583624163fe3278a45dc8f7e9949e37bbf3f246484ca84c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q44",
-      "summary": "イ。DNSSECはDNSの応答データへ署名し、受信側で検証します。",
+      "summary": "DNSSECが署名・検証する対象を、SPF・DKIMなどのメール認証と区別する問題。",
       "explanation": "DNSSECはDNSのデータの出所と完全性を、公開鍵によるデジタル署名で検証する拡張です。秘密鍵でリソースレコードの集合へ署名し、公開鍵を用いて受信側が検証します。\n問合せのポート番号のランダム化とは別の仕組みです。また、DNSへ情報を置くメール認証のSPFやDKIMとも、署名・検証する対象が異なります。",
       "choiceReasons": [
         "送信元ポートのランダム化は偽応答を当てにくくする対策ですが、DNSSECの署名検証ではありません。",
@@ -577,57 +640,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "イとエはどちらも公開鍵と署名を使います。署名の対象がリソースレコードか電子メールかを先に確認します。",
+          "text": "DNSは名前に対応するIPアドレスなどをリソースレコードとして返します。DNSSECで保護したいのは、そのDNSデータの出所と改ざんの有無です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "DNSSECはDNSで受け取ったデータが正当なものかを確認します。鍵をDNSに置くというだけでは、メール認証と区別できません。",
+          "text": "DNSSECでは権威DNS側がリソースレコードの集合に秘密鍵で署名し、DNSKEYなどで公開される公開鍵を用いて検証側が確認します。署名対象は電子メールではなくDNSの応答データです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "DNSリソースレコードへ署名し、その署名をDNSキャッシュサーバで検証するイです。エはメールを対象にするDKIMです。",
+          "text": "メール送信サーバのIPをDNSで照合するのはSPF、メール本文等に署名するのはDKIMです。ポート番号のランダム化もDNSSECの署名機能とは別です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DNSに鍵や情報を公開する方式がすべてDNSSECだと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSは名前に対応するIPアドレスなどをリソースレコードとして返します。DNSSECで保護したいのは、そのDNSデータの出所と改ざんの有無です。",
+          "remainingWork": "各肢が署名・検証する対象を分類する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "DNSデータという対象を示すが方式の全容はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSSECでは権威DNS側がリソースレコードの集合に秘密鍵で署名し、DNSKEYなどで公開される公開鍵を用いて検証側が確認します。署名対象は電子メールではなくDNSの応答データです。",
+          "remainingWork": "DNSデータへの署名を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の署名と検証の手順を明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "メール送信サーバのIPをDNSで照合するのはSPF、メール本文等に署名するのはDKIMです。ポート番号のランダム化もDNSSECの署名機能とは別です。",
+          "remainingWork": "メール認証やポート対策を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢の仕組みを明示して確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06a/r06a-q44.webp (context SHA256: 6b95449e8bf3b5caaae07ebd0466801e27f224e831e5f33e617a5abab564f337)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r04a-q36",
     "baseVersion": 2,
     "baseLessonSHA256": "eb3870054a63925d760939774e3bfff05902476678978bf0929243594d3bf7b1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q36",
-      "summary": "ウ。オープンリゾルバはDNS応答を反射させる攻撃に悪用されます。",
+      "summary": "オープンリゾルバを利用したDNS反射・増幅攻撃の通信の流れを選ぶ問題。",
       "explanation": "オープンリゾルバは外部の任意の相手からDNS問合せを受ける再帰DNSサーバです。攻撃者は送信元を標的のIPへ偽装し、問合せを送ります。応答が標的へ集中し、応答が大きい場合には通信量も増幅されます。",
       "choiceReasons": [
         "ICMP応答を反射させる攻撃であり、DNSリゾルバの悪用ではありません。",
@@ -639,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で利用する通信がICMP、DNS、メールのどれかを確認します。",
+          "text": "リゾルバはDNSの名前解決を行うサーバです。オープンリゾルバは外部の任意の相手から再帰問合せを受け付けるため、第三者に悪用され得ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "問合せ元を偽装した場合、サーバの応答がどのIPへ戻るかを矢印で描きます。",
-          "revealsAnswer": false
+          "text": "攻撃者がDNS問合せの送信元IPを被害者のアドレスに偽装すると、リゾルバは被害者へDNS応答を返します。多数のサーバを使うと応答が集中し、応答が大きければ通信量も増幅します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "DNS問合せの送信元を標的にすると、DNSサーバの大量の応答が標的へ集まります。",
+          "text": "ICMP応答の反射はDNSリゾルバを使いません。hostsの改変は端末側、オープンリレーはメールサーバの悪用です。DNS問合せの送信元偽装を述べる肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "リゾルバをメールのオープンリレーと混同し、送信元IP偽装で応答が誰に返るか追えない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "リゾルバはDNSの名前解決を行うサーバです。オープンリゾルバは外部の任意の相手から再帰問合せを受け付けるため、第三者に悪用され得ます。",
+          "remainingWork": "リゾルバが受け付ける通信を考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "DNSリゾルバの役割だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "攻撃者がDNS問合せの送信元IPを被害者のアドレスに偽装すると、リゾルバは被害者へDNS応答を返します。多数のサーバを使うと応答が集中し、応答が大きければ通信量も増幅します。",
+          "remainingWork": "偽装された問合せへの応答先を特定する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の攻撃の流れを実質的に示す。"
+        },
+        {
+          "newInformation": "ICMP応答の反射はDNSリゾルバを使いません。hostsの改変は端末側、オープンリレーはメールサーバの悪用です。DNS問合せの送信元偽装を述べる肢を選びます。",
+          "remainingWork": "別のプロトコルを使う攻撃を除外する。",
+          "revealsAnswer": true,
+          "reason": "他肢を除外して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r04a/r04a-q36.webp (context SHA256: 078fac4b3cedf9235793d6d3bbac644d737805910fbf1a9fdb62db3de100920e)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ウ（index 2）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06h-q36",
     "baseVersion": 2,
     "baseLessonSHA256": "14e801d5136f60794852eaf6c3e07e727030872900ace2c3deb986f56c5e6d35",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q36",
-      "summary": "偽の名前解決情報によって、正しいURLから別のWebサーバへ誘導される可能性があります。",
+      "summary": "DNSキャッシュポイズニングが社内利用者の名前解決に直接及ぼす影響を問う。",
       "explanation": "DNSキャッシュポイズニングは、DNSサーバが保存している名前とIPアドレスなどの対応に偽の情報を入れる攻撃です。利用者が正しいWebサイト名を入力しても、偽のIPアドレスへ名前解決されれば、別のWebサーバに接続してしまいます。これを直接表しているのがウです。",
       "choiceReasons": [
         "対象は名前解決情報のキャッシュで、ハードディスク上のサーバ名の書き換えが直接の作用ではありません。",
@@ -701,57 +778,64 @@
       "hints": [
         {
           "title": "注目すること",
-          "text": "社内PCは共用DNSサーバへWebサイト名の名前解決を依頼します。キャッシュには、その名前に対応するIPアドレスなどの回答が保存される点を確認します。",
+          "text": "DNSキャッシュサーバはドメイン名とIPアドレスなどの対応を一時保存します。社内PCはWebサイト名を問い合わせ、返されたIPアドレスへ接続します。",
           "revealsAnswer": false
         },
         {
           "title": "攻撃の影響を考える",
-          "text": "キャッシュポイズニングでは、偽の名前解決情報をキャッシュに入れます。利用者はいつもの名前を使っていても、名前解決の結果が偽物になる可能性があります。",
-          "revealsAnswer": false
+          "text": "キャッシュポイズニングは保存された名前解決情報を偽物にする攻撃です。正しいURLを入力しても偽のIPアドレスが返れば、本来と異なるWebサーバへ接続する可能性があります。",
+          "revealsAnswer": true
         },
         {
           "title": "直接の結果を選ぶ",
-          "text": "問われているのは、名前解決の結果が偽になったことで直接起こる現象です。プログラムの感染や、メールの宛先文字列そのものの書き換えと区別しましょう。",
+          "text": "この攻撃の直接の対象は名前解決のキャッシュです。DNSサーバ名のディスク上での書換え、ワームの常駐、メール宛先の文字列変更を必須としません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "キャッシュの偽情報と、DNSサーバへのマルウェア感染・メールアドレス書換えを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSキャッシュサーバはドメイン名とIPアドレスなどの対応を一時保存します。社内PCはWebサイト名を問い合わせ、返されたIPアドレスへ接続します。",
+          "remainingWork": "名前解決の結果が変わると何が起こるか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "DNSの基本動作だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "キャッシュポイズニングは保存された名前解決情報を偽物にする攻撃です。正しいURLを入力しても偽のIPアドレスが返れば、本来と異なるWebサーバへ接続する可能性があります。",
+          "remainingWork": "偽のIPへの接続を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の現象を具体的に説明する。"
+        },
+        {
+          "newInformation": "この攻撃の直接の対象は名前解決のキャッシュです。DNSサーバ名のディスク上での書換え、ワームの常駐、メール宛先の文字列変更を必須としません。",
+          "remainingWork": "無関係な副作用を除外する。",
+          "revealsAnswer": true,
+          "reason": "他肢を除外して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06h/r06h-q36.webp (context SHA256: 5c7f61dd97d047abd17d1e8e589c198bfc94790dfa5b5bc5255c93a3c697092e)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ウ（index 2）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06h-q37",
     "baseVersion": 2,
     "baseLessonSHA256": "3405d3879342340a975cdafcdaff2a6271c9ea9d2abdf17b5ae0b36a09289bba",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q37",
-      "summary": "DNSSECは、DNSの応答データの出所と改ざんの有無を検証する仕組みです。",
+      "summary": "DNSSECのデジタル署名で検証できる性質と、暗号化・偽装ドメイン対策の違いを問う。",
       "explanation": "DNSSECは、DNSのリソースレコードなどに電子署名を付け、その署名を検証することでデータの真正性と完全性を確認する仕組みです。アの、権威DNSサーバが管理するデータで改ざんされていないことの検証が該当します。\nDNSSEC自体は、DNS通信の内容を暗号化する仕組みではありません。似た文字のドメインやURLの入力誤りも、この仕組みの検証対象ではありません。",
       "choiceReasons": [
         "電子署名の検証によって、応答データの出所と改ざんの有無を確認します。",
@@ -763,57 +847,64 @@
       "hints": [
         {
           "title": "注目すること",
-          "text": "各候補の対象を、応答中のリソースレコード・サーバ間の通信・ドメイン名の見た目・URLの入力に分けます。DNSSECが検証する対象はどこかを考えましょう。",
+          "text": "DNSのリソースレコードは名前とIPアドレスなどの情報です。DNSSECはこのデータの信頼性に関わり、ドメイン名の見た目や利用者の入力操作とは別の問題を扱います。",
           "revealsAnswer": false
         },
         {
           "title": "使う仕組みを考える",
-          "text": "DNSSECではDNSのデータに電子署名を付けます。署名の検証で分かることと、通信の暗号化でできることを区別しましょう。",
+          "text": "DNSSECは権威DNSが管理するデータに付いたデジタル署名を検証し、データの出所と改ざんの有無を確かめます。通信内容を暗号化して秘匿する仕組みではありません。",
           "revealsAnswer": true
         },
         {
           "title": "選択肢を比べる",
-          "text": "電子署名による検証に関係する記述を探します。似た文字の見た目やURLの打ち間違いは、DNSデータの署名検証とは別の問題です。",
+          "text": "正当に登録・署名された紛らわしいドメインやURLの入力間違いはDNSSECでは防げません。署名でリソースレコードの真正性・完全性を検証する記述を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "電子署名を通信の暗号化と混同し、正しく署名された紛らわしいドメインまで防げると思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSのリソースレコードは名前とIPアドレスなどの情報です。DNSSECはこのデータの信頼性に関わり、ドメイン名の見た目や利用者の入力操作とは別の問題を扱います。",
+          "remainingWork": "署名と暗号化の違いを考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "保護対象の分類だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSSECは権威DNSが管理するデータに付いたデジタル署名を検証し、データの出所と改ざんの有無を確かめます。通信内容を暗号化して秘匿する仕組みではありません。",
+          "remainingWork": "DNSデータの検証を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の機能を明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正当に登録・署名された紛らわしいドメインやURLの入力間違いはDNSSECでは防げません。署名でリソースレコードの真正性・完全性を検証する記述を選びます。",
+          "remainingWork": "紛らわしいドメイン等を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ほかの選択肢が対象外と分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06h/r06h-q37.webp (context SHA256: 453ff3e09e85496c48b76baca21f8964c7696f1b324cd3ed3e2328b34dbc3875)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06a-q42",
     "baseVersion": 2,
     "baseLessonSHA256": "27f0083423c655c6fe2f640bccad7221489e2c496f5f7e9efa2abd620f149d69",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q42",
-      "summary": "イ。問合せIDをランダムにすると偽の応答を推測しにくくできます。",
+      "summary": "DNSキャッシュポイズニングで偽応答を受け入れにくくするための問合せIDの扱いを問う。",
       "explanation": "DNSキャッシュポイズニングは、偽のDNS応答を本物の問合せへの応答と認識させ、誤った対応情報をキャッシュへ保存させる攻撃です。応答を照合するIDが固定だと攻撃者が値を当てやすくなります。\n問合せごとにIDをランダムに変更することで推測を難しくできます。送信元ポートもランダム化が対策となり、53番へ固定するのは逆方向です。",
       "choiceReasons": [
         "DNS応答を偽造する攻撃はサーバへのマルウェア侵入を必須としないので、隔離だけでは対策になりません。",
@@ -825,61 +916,68 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "攻撃の入口はDNSサーバへの侵入とは限りません。キャッシュサーバが偽の応答を本物と思って保存する場面を考えます。",
+          "text": "DNSキャッシュサーバは送った問合せと返ってきた応答を、DNSヘッダーのトランザクションIDなどで照合します。攻撃者は本物より先に偽応答を一致させようとします。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ問合せIDを使い続けると、偽応答にもそのIDを付けられます。問合せごとにランダム化するイは、この推測を難しくします。",
+          "text": "問合せIDを毎回ランダムにすれば攻撃者が一致する値を推測しにくくなります。送信元ポートのランダム化も有効ですが、53番へ固定するのは逆効果です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "送信元ポートを53へ固定するウは予測しやすくします。宛先53だけへの応答制限も通常動作なので、IDをランダムにするイを選びます。",
+          "text": "宛先ポート53は通常のDNSサービスに使われる番号なので、その番号だけに応答しても偽応答の照合対策にはなりません。マルウェア隔離もこの偽応答攻撃の直接対策ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DNSの53番ポートと問合せを照合するIDを混同し、値を固定する危険性を理解できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DNSキャッシュサーバは送った問合せと返ってきた応答を、DNSヘッダーのトランザクションIDなどで照合します。攻撃者は本物より先に偽応答を一致させようとします。",
+          "remainingWork": "応答の照合条件をどう守るか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "IDの役割だけを示し対策の具体名はまだ示さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "問合せIDを毎回ランダムにすれば攻撃者が一致する値を推測しにくくなります。送信元ポートのランダム化も有効ですが、53番へ固定するのは逆効果です。",
+          "remainingWork": "ランダム化の選択肢を特定する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢のランダム化を直接示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "宛先ポート53は通常のDNSサービスに使われる番号なので、その番号だけに応答しても偽応答の照合対策にはなりません。マルウェア隔離もこの偽応答攻撃の直接対策ではありません。",
+          "remainingWork": "固定ポート等の誤答を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢を除外して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06a/r06a-q42.webp (context SHA256: d03c3b044cff3e69a3b3c18161e83ad204107325df11a970dbf8e8b660a46769)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r07h-q36",
     "baseVersion": 2,
     "baseLessonSHA256": "2ec0ff70a1e54385e01ea855d24bc1c4124badd312ad53c677aa46049b6c5747",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q36",
-      "summary": "イ。cat /etc/passwdというOSコマンドを入力に埋め込んでいる。",
-      "explanation": "リクエストのuser=cat%20/etc/passwdを、%20が空白という指定で読むと、userの値はcat /etc/passwdとなる。catはファイル内容を出力するOSコマンド、/etc/passwdはUnix系OSのアカウント情報のファイル。\n\nこの値がサーバ側でOSコマンドとして実行されることを狙っていると推測できるため、OSコマンドインジェクション。ログだけで成功は断定できない。改行によるHTTPヘッダー分割、SQL構文、ブラウザで実行するスクリプトが決め手の他の攻撃とは異なる。",
+      "summary": "HTTPリクエストのパラメータに混入したOSコマンドの痕跡から攻撃の種類を判断する問題。",
+      "explanation": "HTTPリクエストのuserパラメータは「;cat%20/etc/passwd」であり、%20を空白にすると「;cat /etc/passwd」となる。**先頭のセミコロン（;）はシェルでコマンドを区切る記号**で、catはファイル内容を表示するUnix系OSのコマンド、/etc/passwdはアカウント情報を含むファイルのパスである。アプリケーションがこの入力を適切に処理せずOSのシェルへ渡すと、意図しないコマンド実行につながる可能性がある。したがって、狙われた脆弱性は**OSコマンドインジェクション**。ログから攻撃の試みは推測できるが、実行成功までは断定できない。SQL文、ブラウザで実行するスクリプト、HTTPヘッダー分割の改行などとは区別する。",
       "choiceReasons": [
         "HTTPヘッダーの分割を狙う改行等が示されていない。",
-        "入力値にOSのcatコマンドとファイルパスが含まれている。",
+        "先頭の「;」でシェルのコマンドを区切り、cat /etc/passwdをOSで実行させようとする入力である。",
         "SQLのSELECT等ではなくOSコマンドが含まれている。",
         "ブラウザで実行するJavaScript等ではなく、サーバ側OSのコマンドが示されている。"
       ],
@@ -887,57 +985,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "user=の右側だけを取り出し、指定どおり%20を空白に置き換える。どんな命令に見えるかを読む。",
+          "text": "GETのuserパラメータは「;cat%20/etc/passwd」です。設問どおり%20を空白に直すと「;cat /etc/passwd」になります。先頭の「;」も消さずに読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "catはファイルを表示するUnix系のコマンド、/etc/passwdはファイルのパス。この値をサーバが何に渡すと危険になるか。",
-          "revealsAnswer": false
+          "text": "Unix系のシェルでは「;」はコマンドの区切り、catはファイルの内容を表示するコマンド、/etc/passwdはアカウント情報を含むファイルのパスです。入力がシェルに渡されることを狙っています。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "HTTPの改行、SQL、ブラウザのスクリプトではなく、OSのシェルで実行される命令の混入を狙っている。対応する攻撃名を選ぶ。",
-          "revealsAnswer": false
+          "text": "SQLインジェクションならSQL文、XSSならブラウザで動くスクリプト、HTTPヘッダー分割なら改行等が手掛かりです。このログはOSのコマンド実行を狙う入力ですが、攻撃成功までは断定できません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "%20の復号や先頭のセミコロンを見落とし、SQL・XSSとOSコマンドの違いを判断できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "GETのuserパラメータは「;cat%20/etc/passwd」です。設問どおり%20を空白に直すと「;cat /etc/passwd」になります。先頭の「;」も消さずに読みます。",
+          "remainingWork": "記号とコマンドの意味を解釈する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "復号結果のみを示し、攻撃名はまだ説明しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "Unix系のシェルでは「;」はコマンドの区切り、catはファイルの内容を表示するコマンド、/etc/passwdはアカウント情報を含むファイルのパスです。入力がシェルに渡されることを狙っています。",
+          "remainingWork": "どの実行環境の命令か選ぶ。",
+          "revealsAnswer": true,
+          "reason": "シェルでの実行を狙うと説明し正答肢が特定される。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "SQLインジェクションならSQL文、XSSならブラウザで動くスクリプト、HTTPヘッダー分割なら改行等が手掛かりです。このログはOSのコマンド実行を狙う入力ですが、攻撃成功までは断定できません。",
+          "remainingWork": "ほかの攻撃との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "正答と他の攻撃を対比して確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints",
+        "explanation",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r07h/r07h-q36.webp (context SHA256: 4532e42f2b1f80c115979650358e0e52f92675958dcabde1dbe362a3cbe86edc)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。 原本の「;cat%20/etc/passwd」を確認し、旧解説で落ちていたセミコロンの意味を補正。"
+      ]
     }
   },
   {
     "id": "r03a-q36",
     "baseVersion": 2,
     "baseLessonSHA256": "c0dedef4b683cc5ea430ee7febbd4cb946be6376469dd3fdd8b7e42a6c0d54bb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q36",
-      "summary": "イ。IPv6の拡張ヘッダを使うIPsecで暗号化通信を実現できます。",
+      "summary": "IPv6の拡張ヘッダによって実現する通信保護機能を、内容検査型の機能と区別する問題。",
       "explanation": "IPv6では拡張ヘッダとしてIPsecのAHやESPを扱えます。ESPは暗号化によって通信内容の機密性を確保する機能を提供します。URLの可否判断、情報漏えいの検知、マルウェアの検知は、通信内容や端末の挙動を調べる別の機能であり、この拡張ヘッダの機能ではありません。",
       "choiceReasons": [
         "URLに基づくアクセス制御で、IPv6の拡張ヘッダによる通信保護ではありません。",
@@ -949,57 +1056,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補を、通信そのものの保護と、URL・情報内容・プログラムを検査する機能に分けます。",
+          "text": "IPv6の拡張ヘッダはIPパケットに追加の処理情報を持たせます。URLの閲覧可否や端末内の不正プログラムを判定する機能とは処理する層が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "拡張ヘッダはIPパケットに通信保護の情報を付加できます。IPsecのAHは認証、ESPは内容の機密性にも対応します。",
+          "text": "IPsecのESP（Encapsulating Security Payload）は通信内容を暗号化して機密性を保護できます。AHは認証・完全性確認を担い、ESPとは役割が異なります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ESPで通信内容を暗号化できるので、暗号化通信機能が該当します。",
+          "text": "IPv6の拡張ヘッダを利用したIPsecのESPで実現できるのは通信の暗号化です。情報漏えい検知やマルウェア検知のように内容を検査する機能ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "IPv6拡張ヘッダとIPsecの関係を知らず、URLフィルタリングやマルウェア検知と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPv6の拡張ヘッダはIPパケットに追加の処理情報を持たせます。URLの閲覧可否や端末内の不正プログラムを判定する機能とは処理する層が異なります。",
+          "remainingWork": "IP層でできる機能を絞る。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "IP層と検査機能の区別だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPsecのESP（Encapsulating Security Payload）は通信内容を暗号化して機密性を保護できます。AHは認証・完全性確認を担い、ESPとは役割が異なります。",
+          "remainingWork": "ESPの暗号化と肢を対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の暗号化機能を明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPv6の拡張ヘッダを利用したIPsecのESPで実現できるのは通信の暗号化です。情報漏えい検知やマルウェア検知のように内容を検査する機能ではありません。",
+          "remainingWork": "検査機能の肢を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答を直接示す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r03a/r03a-q36.webp (context SHA256: dab0739e18b4969be8bb9b5e3e6ec7021788102ddd0b6408c9bfc6842a7ef521)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r03a-q43",
     "baseVersion": 2,
     "baseLessonSHA256": "cbda7ad51e217a5c36f64a5f1414aacf06df2b0cc40cc5c03b00b9c547d01328",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q43",
-      "summary": "ネットワーク層のAH・ESPとIPsec",
+      "summary": "ネットワーク層でAHとESPを用いるプロトコルを、メール・遠隔接続・文書の暗号化と区別する問題。",
       "explanation": "正解はア。IPsecはIP通信を保護するネットワーク層の仕組みである。AHは認証や完全性の確認を、ESPは暗号化による機密性の確保などを担う。",
       "choiceReasons": [
         "IPsecはネットワーク層で動作し、AHとESPを含む。",
@@ -1011,57 +1125,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が保護する対象を、通信パケット・電子メール・遠隔接続・文書に分類し、問題文のOSI層と対応させる。",
+          "text": "OSIのネットワーク層はIPパケットの配送を扱います。メール本文やXML文書だけを保護する方式とは対象が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ネットワーク層ではIPパケットを保護する。電子メールやXML文書だけを保護する方式とは対象が異なる。",
+          "text": "AH（Authentication Header）はIPパケットの認証・完全性確認、ESP（Encapsulating Security Payload）は暗号化や認証を提供します。この二つはIP通信を保護するIPsecの構成要素です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "IPパケットの保護にAHとESPを用いるのはIPsecである。",
+          "text": "S/MIMEは電子メール、SSHは遠隔接続、XML暗号はXML文書を保護します。AHとESPを含むネットワーク層の方式を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "AH・ESPの略語を知らず、すべての暗号化技術を同じ層のものと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "OSIのネットワーク層はIPパケットの配送を扱います。メール本文やXML文書だけを保護する方式とは対象が異なります。",
+          "remainingWork": "AH/ESPがどの対象を保護するか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ネットワーク層の対象だけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "AH（Authentication Header）はIPパケットの認証・完全性確認、ESP（Encapsulating Security Payload）は暗号化や認証を提供します。この二つはIP通信を保護するIPsecの構成要素です。",
+          "remainingWork": "IPsecの名称と肢を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答のIPsecを明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "S/MIMEは電子メール、SSHは遠隔接続、XML暗号はXML文書を保護します。AHとESPを含むネットワーク層の方式を選びます。",
+          "remainingWork": "他の暗号化技術を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢を除外して確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r03a/r03a-q43.webp (context SHA256: 98f9af130c399cdff09ec0998a665eb30f0beaeb9c0f68e43abc154377ace186)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r06h-q42",
     "baseVersion": 2,
     "baseLessonSHA256": "b9151808368199fb6ac468050cb713792d3ad23abcc1ebeef22776638ee750d0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q42",
-      "summary": "ア。IPsecはIPのネットワーク層で暗号化や認証を行います。",
+      "summary": "IPv6通信をネットワーク層で暗号化する方式を、PPP・SSH・TLSと区別する問題。",
       "explanation": "IPsecはIPパケットを対象に、認証・完全性確認や暗号化を提供する仕組みです。暗号化にはESPを用います。アプリケーションごとに対応させず、IP通信を保護できるので、設問のネットワーク層という条件に合います。\nSSHやTLSは上位の通信を保護する方式で、PPPはデータリンク層の接続方式です。",
       "choiceReasons": [
         "アのIPsecはIPの層で通信を保護します。ESPで暗号化できます。",
@@ -1073,57 +1194,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "条件の「IPv6」だけでなく「ネットワーク層で暗号化」に印を付けます。",
+          "text": "ネットワーク層はIPパケットを扱います。PPPはデータリンク層の接続方式、SSHは遠隔操作等の上位通信、TLSはアプリケーション通信を保護するために用いられます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "IPパケットをまとめて保護する方式と、Webや遠隔ログインの接続を保護する方式を区別します。",
-          "revealsAnswer": false
+          "text": "IPsecはIPパケットのレベルで認証・完全性確認や暗号化を提供します。暗号化にはESPを使うため、IPv6でネットワーク層の保護を求める条件に合います。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "IPそのものにセキュリティ機能を加えるIPsecが、指定の層に合うか確認します。",
+          "text": "TLSやSSHも通信を保護しますが、IP層そのものの暗号化ではありません。PPPも設問の層に当たりません。ネットワーク層を明示した方式を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "暗号化できる技術ならどれでもよいと考え、指定されたOSI層を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ネットワーク層はIPパケットを扱います。PPPはデータリンク層の接続方式、SSHは遠隔操作等の上位通信、TLSはアプリケーション通信を保護するために用いられます。",
+          "remainingWork": "残るIP層の方式を考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "誤答3方式の層・用途を示すため消去法で正答が確定する可能性があるが、IPsec名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPsecはIPパケットのレベルで認証・完全性確認や暗号化を提供します。暗号化にはESPを使うため、IPv6でネットワーク層の保護を求める条件に合います。",
+          "remainingWork": "IPsecの機能と肢を対応付ける。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答のIPsecを直接示す。"
+        },
+        {
+          "newInformation": "TLSやSSHも通信を保護しますが、IP層そのものの暗号化ではありません。PPPも設問の層に当たりません。ネットワーク層を明示した方式を選びます。",
+          "remainingWork": "上位層やデータリンク層の方式を除外する。",
+          "revealsAnswer": true,
+          "reason": "他肢の不適合を確認して確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r06h/r06h-q42.webp (context SHA256: 1e94a3b2337c73cfbdf7137feca1eaeb1d61d13f6f0463ea271e7ec11f647663)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ア（index 0）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r05h-q39",
     "baseVersion": 2,
     "baseLessonSHA256": "99622383bd3bb1d5fc7defce4d666041412a1504ec2829d1179d9f9b802c9a31",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q39",
-      "summary": "ISMAPは政府のクラウド調達に向けてサービスを評価・登録する制度です。",
+      "summary": "ISMAPが評価・登録する対象と政府の調達目的を、個人情報保護や国際規格の制度と区別する問題。",
       "explanation": "ISMAPは政府が求めるセキュリティ要求を満たすクラウドサービスを事前に評価し、登録する制度です。政府機関がクラウドサービスを調達する際に、一定のセキュリティ水準を確保することを目的とします。サービスの評価・登録と政府調達を結び付けるウが適切です。",
       "choiceReasons": [
         "個人情報保護の体制へのマーク付与を中心とする説明で、ISMAPのクラウドサービス登録とは異なります。",
@@ -1135,57 +1263,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "制度名の「政府情報システム」と、各候補の対象である個人情報やクラウドを対応させます。",
+          "text": "政府のセキュリティ制度には、事業者の個人情報保護体制を評価するものと、政府が調達する情報システム・サービスの安全性を評価するものがあります。評価対象に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "評価する対象が国、事業者の個人情報保護体制、クラウドサービスのどれかを確認します。",
-          "revealsAnswer": false
+          "text": "ISMAP（政府情報システムのためのセキュリティ評価制度）は、政府が求める要求を満たす**クラウドサービス**を事前に評価し、登録する制度です。政府のクラウド調達で安全性を確保することが目的です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "政府のクラウドサービス調達のために、要求を満たすサービスを事前評価・登録する記述を探します。",
+          "text": "個人情報保護マークや国外移転の同意条件ではなく、特定の国際規格だけに基づいて政府内部の管理体制を認証する制度でもありません。クラウドサービスの評価・登録を述べる肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "制度名だけではクラウドサービスの評価登録制度だと分からず、個人情報の認証制度と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "政府のセキュリティ制度には、事業者の個人情報保護体制を評価するものと、政府が調達する情報システム・サービスの安全性を評価するものがあります。評価対象に注目します。",
+          "remainingWork": "どの対象を評価する制度か考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "評価対象の違いだけを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ISMAP（政府情報システムのためのセキュリティ評価制度）は、政府が求める要求を満たす**クラウドサービス**を事前に評価し、登録する制度です。政府のクラウド調達で安全性を確保することが目的です。",
+          "remainingWork": "クラウド調達の説明と肢を照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の説明を直接示す。"
+        },
+        {
+          "newInformation": "個人情報保護マークや国外移転の同意条件ではなく、特定の国際規格だけに基づいて政府内部の管理体制を認証する制度でもありません。クラウドサービスの評価・登録を述べる肢を選びます。",
+          "remainingWork": "個人情報・国際規格の説明を除外する。",
+          "revealsAnswer": true,
+          "reason": "他肢の誤りを説明して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r05h/r05h-q39.webp (context SHA256: 1cca61ccbb5241aecb6c074cfaede8c5049cad987e45bf4e8c493be48d111b77)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの ウ（index 2）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   },
   {
     "id": "r03a-q37",
     "baseVersion": 2,
     "baseLessonSHA256": "b31036a6531e18508a790211eb5c8cca4bd9b3fcb47c20481bb9b5f1a04e0954",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch18-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q37",
-      "summary": "イ。出荷後の安全維持には機器のアップデートを用意し実施します。",
+      "summary": "IoTセキュリティガイドラインVer 1.0の要点17で、出荷後の安全維持に当たる対策を選ぶ問題。",
       "explanation": "要点17は、出荷・リリースした後もIoT機器やシステムの安全な状態を維持することを求めています。運用後に脆弱性などが判明しても対処できるよう、アップデート方法を検討し、更新機能を搭載し、実際に更新する対策が対応します。保護対象の特定や役割整理、組織体制の構築とは、着目する時期と対策の内容が違います。",
       "choiceReasons": [
         "収集情報を洗い出して保護対象を特定する設計・リスク把握の対策です。",
@@ -1197,46 +1332,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "要求の時期は「出荷・リリース後」です。その後に新たな脆弱性が分かった機器を、どう安全な状態に戻すか考えます。",
+          "text": "IoT機器は出荷後も長く使われ、後から新しい脆弱性が見つかります。要点17は「出荷・リリース後も安全安心な状態を維持する」ことなので、提供後の対処を考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "機器を使い続けながら問題を直すには、提供後にソフトウェアなどを変更できる仕組みと、その運用が必要です。",
+          "text": "出荷後の脆弱性に対応するには、ソフトウェアのアップデート方法を決め、更新機能を搭載し、必要な更新を実施する仕組みと運用が必要です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アップデート方法を検討し、機能を搭載し、更新を実施する対策が該当します。",
+          "text": "保護すべきデータの洗出し、関係者の役割整理、PDCA体制の整備も重要ですが、設問の要点17の対策例は機器を出荷後に更新できるようにすることです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "設計時のリスク洗出し・役割分担・管理体制と、出荷後の脆弱性修正を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IoT機器は出荷後も長く使われ、後から新しい脆弱性が見つかります。要点17は「出荷・リリース後も安全安心な状態を維持する」ことなので、提供後の対処を考えます。",
+          "remainingWork": "出荷後に何を継続すべきか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "出荷後の課題だけを説明する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "出荷後の脆弱性に対応するには、ソフトウェアのアップデート方法を決め、更新機能を搭載し、必要な更新を実施する仕組みと運用が必要です。",
+          "remainingWork": "更新対策の肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢のアップデート対策を明示する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "保護すべきデータの洗出し、関係者の役割整理、PDCA体制の整備も重要ですが、設問の要点17の対策例は機器を出荷後に更新できるようにすることです。",
+          "remainingWork": "設計・組織管理の対策を除外する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他肢と対比して正答を確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubからbase64取得し、画像として実際に表示して目視照合: assets/questions/r03a/r03a-q37.webp (context SHA256: e6b2c8c9c436112f6c5e967eab398f83719d97985031ad6cedbad44f193aefb9)。",
+        "原本画像の問題文・ア〜エの4肢・図表や記号をcontextと照合。公式正答はcontextの イ（index 1）を確認。IPA公式解答PDFとの独立照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを全肢と原本条件で点検。正しい箇所は維持。"
+      ]
     }
   }
 ]
