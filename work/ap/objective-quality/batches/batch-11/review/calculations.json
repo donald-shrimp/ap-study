@@ -1,0 +1,111 @@
+{
+  "r05h-q22": {
+    "kclIdealDiodeSamples": {
+      "-2": {
+        "vin": "-2",
+        "vout": "0",
+        "diodeCurrentForROne": "2"
+      },
+      "-1": {
+        "vin": "-1",
+        "vout": "0",
+        "diodeCurrentForROne": "1"
+      },
+      "-1/2": {
+        "vin": "-1/2",
+        "vout": "0",
+        "diodeCurrentForROne": "1/2"
+      },
+      "0": {
+        "vin": "0",
+        "vout": "0",
+        "diodeCurrentForROne": "0"
+      },
+      "1/2": {
+        "vin": "1/2",
+        "vout": "1/2",
+        "diodeCurrentForROne": "0"
+      },
+      "1": {
+        "vin": "1",
+        "vout": "1",
+        "diodeCurrentForROne": "0"
+      },
+      "2": {
+        "vin": "2",
+        "vout": "2",
+        "diodeCurrentForROne": "0"
+      }
+    },
+    "positiveInput": "diode reverse biased, no resistor drop, vout=vin",
+    "negativeInput": "grounded anode conducts, vout=0",
+    "distractorC": "Original graph has a flat positive interval and a valley during the negative input interval; it is not a simple upward translation of the entire sine wave."
+  },
+  "r07a-q21": {
+    "inputOrder": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "truthTables": {
+      "a AND NOT b": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "NOT a AND b": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "a OR NOT b": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "NOT a OR b": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    "onlyCorrectExpression": "a AND NOT b"
+  },
+  "r07a-q23": {
+    "dividedFrequencyHz": 500000,
+    "periodMicroseconds": 2,
+    "decrements": 150,
+    "interruptMicroseconds": 300
+  },
+  "r04h-q21": {
+    "targetXY": [
+      7,
+      6
+    ],
+    "pixelIndex": 3847,
+    "targetAddress": 7694,
+    "distractorAddresses": {
+      "3847": "pixel index, not byte address",
+      "7680": "row6 beginning",
+      "8978": "coordinate (9,7), not (7,7)"
+    },
+    "addressOfSevenSeven": 8974
+  }
+}
