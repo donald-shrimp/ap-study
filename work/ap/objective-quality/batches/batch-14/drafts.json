@@ -693,11 +693,11 @@
     "id": "r07h-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "1fb6551987bfeb8d6fda441bad964214093d28900dd91d8ef2714f452b1181dc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q28",
-      "summary": "イ。Rから、Rにだけある部分を除くと共通部分になる。",
+      "summary": "関係の差演算を内側から評価し、共通部分と同じ集合になる式を選ぶ。",
       "explanation": "R−Sは「RにはあるがSにはない」要素の集合。これをRから取り除けば、RにもSにもある要素だけが残るので、R−(R−S)=R∩S。\n\n例えばR={1,2}、S={2,3}なら共通部分は{2}。R−S={1}なのでイは{1,2}−{1}={2}となる。和両立とは和集合等の演算ができるように属性の数・対応する型などが整っていること。",
       "choiceReasons": [
         "(R−S)と(S−R)は重ならないので、結果はR−S。例では{1}で共通部分ではない。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "∩は両方にある要素。R={1,2}、S={2,3}として、目標の集合を先に書く。",
+          "text": "`R−S`は**RにあるがSにない**要素、`S−R`は**SにあるがRにない**要素です。例としてR={1,2}, S={2,3}を考えるとR−S={1}, S−R={3}です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "まずR−SとS−Rをそれぞれ求める。この二つは互いに重ならず、片方はS、もう片方はRとも重ならない。",
-          "revealsAnswer": false
+          "text": "目標の`R∩S`は両方にある{2}です。Rから「Rにだけある{1}」を引くと{2}だけが残ります。式では**R−(R−S)**です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "各選択肢の括弧内を先に計算する。Rから「Rにだけある要素」を除く式なら、目標の共通部分だけが残る。",
-          "revealsAnswer": false
+          "text": "アはR−S、ウはR、エはSが残り、共通部分と一致しません。括弧を先に計算して、イだけが{2}になることを確かめます。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "R−SとS−Rの向き、括弧の演算順序を取り違え、共通部分を残せない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`R−S`は**RにあるがSにない**要素、`S−R`は**SにあるがRにない**要素です。例としてR={1,2}, S={2,3}を考えるとR−S={1}, S−R={3}です。",
+          "remainingWork": "各選択肢の内側の差集合を計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では各選択肢の内側の差集合を計算するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "目標の`R∩S`は両方にある{2}です。Rから「Rにだけある{1}」を引くと{2}だけが残ります。式では**R−(R−S)**です。",
+          "remainingWork": "式を選択肢と照合する",
+          "revealsAnswer": true,
+          "reason": "第2段までの内容と原問の全肢を合わせると、RからRにだけある要素を取り除けばR∩Sになることが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "アはR−S、ウはR、エはSが残り、共通部分と一致しません。括弧を先に計算して、イだけが{2}になることを確かめます。",
+          "remainingWork": "4式の集合を検算する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、RからRにだけある要素を取り除けばR∩Sになることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301。",
+        "context記載の公式正答 イ と原本の肢を照合。RからRにだけある要素を取り除けばR∩Sになる点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r04a-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "f2b7779ecd7034cb5157e149efb20e3079fc6736a880d95c9b1cf18914bed2b4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q28",
-      "summary": "ウ。重複を除くと仕入先コードは3種類です。",
+      "summary": "副問合せのAVGで利益の基準値を求め、WHEREの抽出後にDISTINCTで仕入先を数える。",
       "explanation": "各商品の販売単価−仕入単価は順に200,200,100,900,400,200,300,500,500,300です。合計3,600、10商品なので平均360。これより大きいのはD,E,H,Iで、仕入先はS1,S1,S4,S5です。DISTINCTで重複するS1を一つにするので3種類です。",
       "choiceReasons": [
         "平均超過の仕入先はS1だけではなくS4,S5もあります。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "表の各行で販売単価から仕入単価を引き、十個の差をメモします。",
+          "text": "`販売単価−仕入単価`が**1商品当たりの利益**です。内側の`AVG(...)`には`GROUP BY`がないので、仕入先別ではなく商品表の全10行で平均を求めます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "最初のA001では1,000−800=200です。同様に全10商品の差を足し、10で割ってAVGを求めます。副問合せにGROUP BYがないので、仕入先別でなく全商品の平均です。",
+          "text": "利益は順に200,200,100,900,400,200,300,500,500,300で、合計3,600です。平均は**3,600÷10=360**。外側の`>`は360と等しい行を含みません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "平均360より大きいD,E,H,Iの仕入先を並べ、同じS1を一つにまとめます。",
+          "text": "360超はD004(900,S1)、E005(400,S1)、H008(500,S4)、I009(500,S5)です。`DISTINCT`は重複するS1を1件にするので、残るコードはS1・S4・S5の**3種類**です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "AVGを仕入先別平均と誤解する、または条件に合う商品4行をDISTINCT後の仕入先数と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`販売単価−仕入単価`が**1商品当たりの利益**です。内側の`AVG(...)`には`GROUP BY`がないので、仕入先別ではなく商品表の全10行で平均を求めます。",
+          "remainingWork": "10行の利益を合計して平均を出す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では10行の利益を合計して平均を出すための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "利益は順に200,200,100,900,400,200,300,500,500,300で、合計3,600です。平均は**3,600÷10=360**。外側の`>`は360と等しい行を含みません。",
+          "remainingWork": "利益360超の行とその仕入先コードを探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第2段では利益360超の行とその仕入先コードを探すための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "360超はD004(900,S1)、E005(400,S1)、H008(500,S4)、I009(500,S5)です。`DISTINCT`は重複するS1を1件にするので、残るコードはS1・S4・S5の**3種類**です。",
+          "remainingWork": "結果の仕入先コード数を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、平均超の4商品を重複除去すると仕入先は3種類ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04a/r04a-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e。",
+        "context記載の公式正答 ウ と原本の肢を照合。平均超の4商品を重複除去すると仕入先は3種類点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r05h-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "548c92ac1c88f52eb9e4f3987f1bdd731b56fa0a4648b06a27a4fdb664f9065c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q29",
-      "summary": "部門にも社員にも所属履歴が1件以上必要なので、a,bは1..*です。",
+      "summary": "所属履歴を介した部門・社員のUML関連で、多重度の最小件数と最大件数を判断する。",
       "explanation": "aは一つの部門に対応する所属履歴の件数です。部門には1人以上の社員が所属し、その所属を履歴として記録するため、最低1件で上限は複数です。bは一人の社員に対応する履歴の件数です。社員はいずれかの部門に必ず所属し、異動により複数の履歴を持ち得るため、こちらも1..*です。エになります。",
       "choiceReasons": [
         "a,bとも0件を許しますが、部門も社員も所属が必須です。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "a,bは所属履歴側に書かれています。部門1件、社員1件に対する履歴数を読んでいます。",
+          "text": "UMLで所属履歴側に書かれた多重度は、**部門1件または社員1件に対応する所属履歴の件数**を表します。`0..*`は0件以上、`1..*`は1件以上です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "条件(1)(2)から履歴が0件でもよいかを判断し、異動などで複数件を持てるかを別に考えます。",
-          "revealsAnswer": false
+          "text": "条件(1)は各部門に少なくとも1人、条件(2)は各社員に必ず1部門への所属があることを意味します。条件(3)で所属を履歴に記録するので、**aもbも0件では困ります**。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "社員は必ずどこかに所属し、部門にも必ず社員がいます。この最低件数をa,bの先頭の数へ当てはめます。",
+          "text": "部門は複数社員、社員は異動で複数部門の履歴を持てるので上限は`*`。両側とも**1..***となる組合せを選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "関連線の多重度を反対側から読めず、履歴が0件でもよいかを条件から判断できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "UMLで所属履歴側に書かれた多重度は、**部門1件または社員1件に対応する所属履歴の件数**を表します。`0..*`は0件以上、`1..*`は1件以上です。",
+          "remainingWork": "aとbそれぞれの履歴の最小件数を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段ではaとbそれぞれの履歴の最小件数を考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "条件(1)は各部門に少なくとも1人、条件(2)は各社員に必ず1部門への所属があることを意味します。条件(3)で所属を履歴に記録するので、**aもbも0件では困ります**。",
+          "remainingWork": "各側の最小件数を選択肢へ当てはめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、部門側と社員側の履歴がともに最低1件必要ことが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "部門は複数社員、社員は異動で複数部門の履歴を持てるので上限は`*`。両側とも**1..***となる組合せを選びます。",
+          "remainingWork": "最小1・上限*の組合せを確認する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、部門側と社員側の履歴がともに最低1件必要ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05h/r05h-q29.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f。",
+        "context記載の公式正答 エ と原本の肢を照合。部門側と社員側の履歴がともに最低1件必要点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r05a-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "f1a04aafb0ec0a15d6e2337e469b600f3a1d804faf24976fd839a827e80e69c3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q28",
-      "summary": "ア。単一表の行と列を選ぶだけなので基底表へ更新を対応させられます。",
+      "summary": "ビューの列が基底表のどの行へ対応するかを確認し、更新可能なSELECTを判別する。",
       "explanation": "アは商品表から商品単価>1000の行を選び、商品番号・商品名・商品単価をそのまま表示します。ビューの値と元の行・列の対応が明確なので更新できます。\nDISTINCTによる重複排除やSUM・AVGの集約は、表示値が複数の元行からできることがあります。その値を変えても、どの元行をどう変更するか一意に対応しません。",
       "choiceReasons": [
         "単一基底表の直接の列を、WHEREで絞るだけです。元の行への対応が保たれ、更新可能です。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各SELECTにDISTINCT、SUM、GROUP BY、AVGが含まれるか印を付けます。単に行を絞るWHEREとの違いを見ます。",
+          "text": "ビューはSELECT結果を表のように扱いますが、**更新できるには元の行・列を特定できること**が重要です。`WHERE`で行を絞るだけなら、残った行は元の表の行と対応します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ビューの一つの値を更新したとき、どの基底表の行を変えるか決められる必要があります。複数行をまとめた値でないか調べます。",
-          "revealsAnswer": false
+          "text": "`DISTINCT`は複数の同値行を1行にまとめ、`GROUP BY`+`SUM`や`AVG`は複数行から集計値を作ります。これらの値を書き換えても、元のどの行をどう変えるか一意には決められません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アのSELECTは商品表の三列をそのまま取得し、単価条件で行を選ぶだけです。ほかの候補の重複排除・集約と比較しましょう。",
+          "text": "商品表の3列をそのまま取り出して`WHERE 商品単価>1000`で絞るビューは元行と対応します。ほかはDISTINCT、SUM、AVGを含むので通常の更新可能ビューではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SELECTで表示できることとビューを更新できることを同一視し、DISTINCT・集約の不可逆性を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ビューはSELECT結果を表のように扱いますが、**更新できるには元の行・列を特定できること**が重要です。`WHERE`で行を絞るだけなら、残った行は元の表の行と対応します。",
+          "remainingWork": "各SELECTが元の行を保つか確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では各SELECTが元の行を保つか確認するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`DISTINCT`は複数の同値行を1行にまとめ、`GROUP BY`+`SUM`や`AVG`は複数行から集計値を作ります。これらの値を書き換えても、元のどの行をどう変えるか一意には決められません。",
+          "remainingWork": "重複除去・集約のない肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、単一表をWHEREで絞り直接列を選ぶビューが更新可能ことが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "商品表の3列をそのまま取り出して`WHERE 商品単価>1000`で絞るビューは元行と対応します。ほかはDISTINCT、SUM、AVGを含むので通常の更新可能ビューではありません。",
+          "remainingWork": "4つのCREATE VIEWを照合する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、単一表をWHEREで絞り直接列を選ぶビューが更新可能ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1。",
+        "context記載の公式正答 ア と原本の肢を照合。単一表をWHEREで絞り直接列を選ぶビューが更新可能点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r07h-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "fadce9daa9bff33bbb66ec4d670a9e39d3dde12921c527f6ef30c46afc1663d5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q24",
-      "summary": "エ。行ごとに列を柔軟に持てるワイドカラムモデル。",
+      "summary": "NoSQLデータモデルを格納構造で区別し、行ごとに列数が変わる方式を選ぶ。",
       "explanation": "問題の決め手は「行ごとに任意の列数」「列ごとに複数の値」。ワイドカラムモデルは行キーと列の組合せでデータを管理し、行ごとに異なる列を持つなど柔軟に格納できる。\n\nグラフはノードとエッジ、ドキュメントはJSON等の文書単位、リレーショナルは定義された表の列を中心に表す。大量のIoTという用途だけではモデルを特定できないため、格納構造で選ぶ。",
       "choiceReasons": [
         "グラフはデータ間の関係をノードとエッジで表す。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "IoTや大量という言葉だけでは決めない。「行」と「列」の柔軟さが、この問題のモデルを特定する条件。",
+          "text": "モデルの選択はIoTという用途だけでなく**格納単位**で判断します。グラフはノードとエッジ、ドキュメントはJSON等の文書、リレーショナルは共通の列構成を持つ表です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "グラフならノードとエッジ、ドキュメントなら文書、通常の関係表ならあらかじめ定義した列。どれが問題の構造に合うか。",
-          "revealsAnswer": false
+          "text": "**ワイドカラム**は行キーごとに列の種類・数を柔軟に持てるNoSQLモデルです。列に複数の値を保持するなど、固定的な表定義より自由な構造を表せます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "列（column）を行ごとに柔軟に広げて持つモデルの名称を、残る選択肢の語から確認する。",
-          "revealsAnswer": false
+          "text": "設問の「行ごとに任意の列数」「列ごとに複数の値」が決め手です。ノード・文書・固定列の表ではなく、可変の列を持つモデルを選びます。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "大量のIoTデータという用途に引っ張られ、グラフ・文書・ワイドカラムの構造差を理解できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "モデルの選択はIoTという用途だけでなく**格納単位**で判断します。グラフはノードとエッジ、ドキュメントはJSON等の文書、リレーショナルは共通の列構成を持つ表です。",
+          "remainingWork": "残る行・列型のモデルを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では残る行・列型のモデルを考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**ワイドカラム**は行キーごとに列の種類・数を柔軟に持てるNoSQLモデルです。列に複数の値を保持するなど、固定的な表定義より自由な構造を表せます。",
+          "remainingWork": "選択肢のモデル名と特徴を対応させる",
+          "revealsAnswer": true,
+          "reason": "第2段までの内容と原問の全肢を合わせると、行ごとに可変の列を持つワイドカラムモデルことが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "設問の「行ごとに任意の列数」「列ごとに複数の値」が決め手です。ノード・文書・固定列の表ではなく、可変の列を持つモデルを選びます。",
+          "remainingWork": "モデル名を確定する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、行ごとに可変の列を持つワイドカラムモデルことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q24.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74。",
+        "context記載の公式正答 エ と原本の肢を照合。行ごとに可変の列を持つワイドカラムモデル点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r03a-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "327f44c3893fe8f4e6b8a58f150dbfcc34cdb1c9387363ddd34b59703364a6bc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q29",
-      "summary": "イ。期ごとのSELECT結果をUNIONで縦に連結します。",
+      "summary": "横持ちの第1期・第2期売上を期別の行に展開するためのSQL集合演算を選ぶ。",
       "explanation": "第1期のSELECTで(部門コード,第1期,第1期売上)を3行、第2期のSELECTで(部門コード,第2期,第2期売上)を3行作ります。この二つをUNIONで縦に集め、ORDER BY部門コード,期で並べると、指定された6行になります。期の文字列が違うので、UNIONの重複除去によってこの6行が減ることもありません。",
       "choiceReasons": [
         "INTERSECTは共通行だけ残します。期の値が必ず異なるため共通行はなく、結果は0行です。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "結果では各部門が第1期と第2期の2行になっています。横の2列を、同じ3列構成の二つのSELECTに分けます。",
+          "text": "元表は1部門につき第1期売上と第2期売上が**横の2列**です。目標は1部門につき「部門コード・期・売上」の**2行**なので、3部門から計6行を作ります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ列構成の結果を縦に追加する集合演算と、行どうしを横に結ぶJOINを区別します。期の文字列が違えば共通行にもなりません。",
+          "text": "第1期のSELECTは`(部門コード,'第1期',第1期売上)`を3行、第2期のSELECTは`(部門コード,'第2期',第2期売上)`を3行作れます。**UNIONは二つの結果を縦に合わせる**集合演算です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "第1期の3行と第2期の3行をUNIONで集めて並べるイが、指定の6行を作ります。",
+          "text": "`INTERSECT`は共通行だけで期名が違うため0行、`CROSS JOIN`は9組、`INNER JOIN`は期名が第1期の3行だけです。期別3行ずつをUNIONして6行にする肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "JOINで横方向に表を結ぶ操作と、UNIONで行を縦方向に追加する操作を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "元表は1部門につき第1期売上と第2期売上が**横の2列**です。目標は1部門につき「部門コード・期・売上」の**2行**なので、3部門から計6行を作ります。",
+          "remainingWork": "期ごとに同じ列構成の結果を作る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では期ごとに同じ列構成の結果を作るための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "第1期のSELECTは`(部門コード,'第1期',第1期売上)`を3行、第2期のSELECTは`(部門コード,'第2期',第2期売上)`を3行作れます。**UNIONは二つの結果を縦に合わせる**集合演算です。",
+          "remainingWork": "INTERSECTやJOINと比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、期別SELECTの行をUNIONで縦にまとめることが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "`INTERSECT`は共通行だけで期名が違うため0行、`CROSS JOIN`は9組、`INNER JOIN`は期名が第1期の3行だけです。期別3行ずつをUNIONして6行にする肢を選びます。",
+          "remainingWork": "各SQLの行数と期の列を検証する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、期別SELECTの行をUNIONで縦にまとめることが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03a/r03a-q29.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a。",
+        "context記載の公式正答 イ と原本の肢を照合。期別SELECTの行をUNIONで縦にまとめる点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r04h-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "4fd9b2640b96af42ed3c67239109d5ea78e229c56990c0a2d403b04c9968554f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q28",
-      "summary": "ウ。第1正規形はc、第2正規形はa、第3正規形はbです。",
+      "summary": "第1〜第3正規形がそれぞれ排除する繰返し・部分関数従属・推移的関数従属を対応付ける。",
       "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
       "choiceReasons": [
         "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "aの「主キーの真部分集合」、bの「推移的」、cの「繰返し」に注目し、それぞれ除く問題を区別します。",
+          "text": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "正規化はまず属性を単一値にし、その後に主キーの一部への依存、さらに別の非キー属性を介する依存を整理します。",
+          "text": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "繰返しをなくすcが第1、部分への依存をなくすaが第2、推移的依存をなくすbが第3です。",
+          "text": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "第2正規形の部分従属と第3正規形の推移従属の順序を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
+          "remainingWork": "第2・第3正規形をa,bへ割り当てる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では第2・第3正規形をa,bへ割り当てるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
+          "remainingWork": "第3正規形の条件を残りから確かめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、第1=c、第2=a、第3=bという対応ことが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
+          "remainingWork": "組合せ表から一致する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、第1=c、第2=a、第3=bという対応ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04h/r04h-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56。",
+        "context記載の公式正答 ウ と原本の肢を照合。第1=c、第2=a、第3=bという対応点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r03h-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "fea1fd6459afae8f98d5ef99e5030b1019209f6742ded19e78b73e8aacc5f13f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q29",
-      "summary": "ア。a顧客、b注文、c注文明細、d商品です。",
+      "summary": "UMLの多重度1対多を読み、顧客・注文・注文明細・商品のクラス配置を判断する。",
       "explanation": "一人の顧客が複数注文を出すのでa=顧客,b=注文です。一注文が複数明細を持つためc=注文明細です。各明細は一種類の商品に対応し、同じ商品が複数明細に現れるのでd=商品となります。",
       "choiceReasons": [
         "顧客1→注文多、注文1→明細多、商品1→明細多の条件を全て満たします。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図のa側1、b側*を「一つのaに複数のb」と読み直します。",
+          "text": "関連線の`1`と`*`は、反対側の1インスタンスに対応する件数です。図は**a 1対 b 多、b 1対 c 多、d 1対 c 多**という関係です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "何度も注文する主体をaへ置き、注文に複数含まれる記録をcへ置きます。",
+          "text": "「一人の顧客が何度も注文」は**顧客1→注文多**、「一注文に一つ以上の商品」は**注文1→注文明細多**、「各明細は1種類の商品」は**商品1→注文明細多**です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "顧客→注文→注文明細←商品の一対多を作るのでアです。",
+          "text": "a=顧客、b=注文、c=注文明細、d=商品なら、三つの関連の1対多がすべて一致します。顧客が直接注文明細の親になる配置などは条件を満たしません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "多重度の1と*を関係線のどちら側から読むか分からず、顧客と商品の位置を取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "関連線の`1`と`*`は、反対側の1インスタンスに対応する件数です。図は**a 1対 b 多、b 1対 c 多、d 1対 c 多**という関係です。",
+          "remainingWork": "条件文の三つの一対多を整理する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では条件文の三つの一対多を整理するための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「一人の顧客が何度も注文」は**顧客1→注文多**、「一注文に一つ以上の商品」は**注文1→注文明細多**、「各明細は1種類の商品」は**商品1→注文明細多**です。",
+          "remainingWork": "a,b,c,dに4クラスを配置する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、顧客→注文→注文明細←商品という対応ことが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "a=顧客、b=注文、c=注文明細、d=商品なら、三つの関連の1対多がすべて一致します。顧客が直接注文明細の親になる配置などは条件を満たしません。",
+          "remainingWork": "選択肢の組合せを照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第3段までの内容と原問の全肢を合わせると、顧客→注文→注文明細←商品という対応ことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03h/r03h-q29.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: 3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e。",
+        "context記載の公式正答 ア と原本の肢を照合。顧客→注文→注文明細←商品という対応点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r07h-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "3aaf1141bbb9ef21dfb87366afddff98dfc9cf3ffd6a802339928e16a5aade7e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q26",
-      "summary": "イ。非キー属性間の依存を分けて、推移的関数従属を取り除く。",
+      "summary": "第2正規形から第3正規形へ進める際に除去する、非キー属性間の関数従属を見分ける。",
       "explanation": "第2正規形では、複合候補キーの一部分だけで非キー属性が決まる部分関数従属は取り除かれている。第3正規形へ進めるときは、キー→非キー属性→別の非キー属性という推移的関数従属を分解する。\n\n例えば社員番号→部署番号→部署名なら、社員表から部署名を分け、部署番号と部署名を部署表にする。問題の選択肢では非キー属性間の関数従属を分解するイが該当する。厳密な定義では各関数従属の決定項や候補キーへの所属も確認する。",
       "choiceReasons": [
         "非キー属性から候補キーの一部への依存という逆方向で、第3正規形への通常の手順を示していない。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "既に第2正規形なので、キーの一部分にだけ依存する問題は解決済み。次に残る依存を考える。",
+          "text": "第1正規形は値を単一にし、第2正規形では**候補キーの一部分→非キー属性**という部分関数従属を解消します。設問は既に第2正規形からの変換です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "社員番号→部署番号→部署名では、部署名は部署番号を経由して決まる。部署番号と部署名を別表へ分けると更新の重複がなくなる。",
-          "revealsAnswer": false
+          "text": "第3正規形では、例えば**社員番号→部署番号→部署名**のように、非キー属性（部署番号）が別の非キー属性（部署名）を決める**推移的関数従属**を分けます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "この例で分解しているのはキーの一部との依存か、非キー属性同士の依存か。選択肢の矢印の向きも確認する。",
-          "revealsAnswer": false
+          "text": "社員表(社員番号,部署番号,部署名)を社員表(社員番号,部署番号)と部署表(部署番号,部署名)に分けます。候補キーの一部への依存を分ける第2正規形の手順とは異なります。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "第1→第2の部分従属解消と、第2→第3の推移的従属解消を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "第1正規形は値を単一にし、第2正規形では**候補キーの一部分→非キー属性**という部分関数従属を解消します。設問は既に第2正規形からの変換です。",
+          "remainingWork": "次に残る種類の関数従属を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では次に残る種類の関数従属を考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "第3正規形では、例えば**社員番号→部署番号→部署名**のように、非キー属性（部署番号）が別の非キー属性（部署名）を決める**推移的関数従属**を分けます。",
+          "remainingWork": "非キー属性同士の従属を述べる肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "第2段までの内容と原問の全肢を合わせると、非キー属性から別の非キー属性への従属を分解することが分かり正答を一意に絞れる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "社員表(社員番号,部署番号,部署名)を社員表(社員番号,部署番号)と部署表(部署番号,部署名)に分けます。候補キーの一部への依存を分ける第2正規形の手順とは異なります。",
+          "remainingWork": "各選択肢の従属方向を確認する",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、非キー属性から別の非キー属性への従属を分解することが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q26.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff。",
+        "context記載の公式正答 イ と原本の肢を照合。非キー属性から別の非キー属性への従属を分解する点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   },
   {
     "id": "r06a-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "e822991626e99d128cd380191782de7310751ede349ea8b8d5010512278d8521",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch14-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q28",
-      "summary": "ウ。顧客の購入に日付がないので、購入者数の日別差異を求められません。",
+      "summary": "三つの表にある結合キーと日付列を調べ、集計できない販売情報を特定する。",
       "explanation": "商品ごとの日別販売数量は、日付を持つ販売代理店別日別販売表から集計できます。性別ごとの売れ筋は、商品購入表の顧客IDで顧客表と結合し、性別・商品IDごとに購入数量を集計できます。\nしかし商品購入表には日付がなく、日別販売表には顧客IDがありません。同じ代理店と商品の行を結合しても個々の購入日を特定できないので、代理店ごとの購入者数を日別には数えられません。",
       "choiceReasons": [
         "日別販売表の日付、商品ID、販売数量を使い、商品ごとの日別数量を比較できます。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "三つの表で日付があるのは「販売代理店別日別販売」だけです。この表に購入した顧客IDがあるか確認します。",
+          "text": "欲しい集計の軸を確認します。「販売代理店別日別販売」には**日付・代理店ID・商品ID・販売数量**があり、「商品購入」には**顧客ID・代理店ID・商品ID・購入数量**があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "「商品購入」には顧客IDがありますが、購入日がありません。代理店IDと商品IDが一致しても、複数日のどの日の購入かは決められません。",
-          "revealsAnswer": false
+          "text": "日別販売表には**顧客IDがなく**、商品購入表には**日付がありません**。代理店IDと商品IDで結んでも、ある顧客がどの日に買ったかは特定できません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "日付と購入者を結び付けられないので、日別の購入者数を問うウが取得できない情報です。商品の日別数量とは区別します。",
+          "text": "商品ごとの日別販売数量、性別別の購入商品、代理店別の売れ筋はそれぞれ集計できます。しかし**代理店ごとの日別購入者数**には顧客と日付の対応が必要で、この三表だけでは求められません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "販売代理店別の「日別販売数量」と顧客別の「購入数量」を、日付がないまま結合できると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "欲しい集計の軸を確認します。「販売代理店別日別販売」には**日付・代理店ID・商品ID・販売数量**があり、「商品購入」には**顧客ID・代理店ID・商品ID・購入数量**があります。",
+          "remainingWork": "日付と顧客IDを同じ購入に結び付けられるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "第1段では日付と顧客IDを同じ購入に結び付けられるか考えるための知識を与えるが、具体的な正答肢の判定は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "日別販売表には**顧客IDがなく**、商品購入表には**日付がありません**。代理店IDと商品IDで結んでも、ある顧客がどの日に買ったかは特定できません。",
+          "remainingWork": "日付別に人数を数える情報を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "第2段までの内容と原問の全肢を合わせると、購入者IDと購入日を結び付ける列がないことが分かり正答を一意に絞れる。"
+        },
+        {
+          "newInformation": "商品ごとの日別販売数量、性別別の購入商品、代理店別の売れ筋はそれぞれ集計できます。しかし**代理店ごとの日別購入者数**には顧客と日付の対応が必要で、この三表だけでは求められません。",
+          "remainingWork": "取得できない情報の肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "第3段までの内容と原問の全肢を合わせると、購入者IDと購入日を結び付ける列がないことが分かり正答を一意に絞れる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r06a/r06a-q28.webp をGitHubから取得して実画像として表示。設問、全4肢、表・図・数式・条件を目視照合。context記載の原本SHA256: be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47。",
+        "context記載の公式正答 ウ と原本の肢を照合。購入者IDと購入日を結び付ける列がない点を根拠として確認。",
+        "IPA公式解答PDFの別途独立照合と第三者レビューは未実施。公開データは未変更。"
+      ]
     }
   }
 ]
