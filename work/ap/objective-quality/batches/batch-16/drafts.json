@@ -3,11 +3,11 @@
     "id": "r07a-q34",
     "baseVersion": 2,
     "baseLessonSHA256": "d8bfe7fe80928bf314f5c4593bb0950bc2cdf0d595aeb408f390ec8d5efe4b52",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q34",
-      "summary": "エのスパニングツリープロトコル。レイヤー2の冗長経路を論理的に遮断します。",
+      "summary": "複数のレイヤー2スイッチ間に冗長経路があるとき、**イーサネットフレームのループ**を防ぐプロトコルを問う。",
       "explanation": "レイヤー2スイッチ間の閉路があると、ブロードキャストなどのフレームが繰り返し転送されます。STPはスイッチ間の構成から木状の転送経路を作り、余分な経路をブロックします。\n物理的な冗長経路を残したままループを防ぐプロトコルで、IPの経路制御や通話のセッション制御とは異なります。",
       "choiceReasons": [
         "IGMPはIPマルチキャストのグループ参加を管理します。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "対象はルーターではなく複数のレイヤー2スイッチです。転送するのはイーサネットフレームです。",
+          "text": "レイヤー2スイッチはMACアドレスを見てフレームを転送します。閉路があると、特にブロードキャストフレームが繰り返し転送され得ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "輪の一辺を転送しない状態にすれば、全体をつなげたまま閉路をなくせます。木状の経路を作る仕組みを考えます。",
+          "text": "**STP（Spanning Tree Protocol）**は、冗長なスイッチ間経路の一部を論理的にブロックし、転送経路をループのない木構造にします。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "マルチキャスト参加、IPルーティング、通話セッションという三つの役割と、スイッチ経路の閉路防止を対応させましょう。",
-          "revealsAnswer": false
+          "text": "IGMPはマルチキャスト参加、RIPはIP経路情報交換、SIPは通話セッションの制御です。**スイッチ間のL2ループ防止**という役割で区別します。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "IPのルーティングとレイヤー2のフレーム転送を混同し、冗長配線でなぜループが起きるかが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "レイヤー2スイッチはMACアドレスを見てフレームを転送します。閉路があると、特にブロードキャストフレームが繰り返し転送され得ます。",
+          "remainingWork": "どの選択肢が閉路防止を担うか調べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "問題の層と障害を説明するがプロトコル名は示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**STP（Spanning Tree Protocol）**は、冗長なスイッチ間経路の一部を論理的にブロックし、転送経路をループのない木構造にします。",
+          "remainingWork": "L2のループ防止方式を選択肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "STPの名称と正答肢の役割を直接教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "IGMPはマルチキャスト参加、RIPはIP経路情報交換、SIPは通話セッションの制御です。**スイッチ間のL2ループ防止**という役割で区別します。",
+          "remainingWork": "三つの別用途と正答方式を再確認する",
+          "revealsAnswer": true,
+          "reason": "前段のSTPに加えて他の三肢の役割を示し正答が確定している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07a/r07a-q34.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 946bc05260d2d0ff71bc2ce0cf813b1760e646d681ac155847dd90c1787136d9。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: L2ループの防止。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r07h-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "a871928abb5c9a7bbe8370ed678888bb5d7ad38d181ece6ac5934d4809e3df49",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q29",
-      "summary": "イ。PoEはLANケーブルでデータ通信と給電を行う。",
+      "summary": "無線LANアクセスポイントやIP電話機へ、**LANケーブルで通信と給電を両立**する方式を識別する。",
       "explanation": "PoEはPower over Ethernet。Ethernetのケーブルを使ってアクセスポイントやIP電話へ電力を供給する。データ用と電源用のケーブルを別々に引かずに設置できる。\n\nPLCはこの選択肢の文脈では電力線通信、UPSは停電時にも電源を供給する無停電電源装置、USBは周辺機器との接続規格。通信媒体がLANケーブルであるという条件を外さない。",
       "choiceReasons": [
         "PLCは電力線を通信に使う仕組み。LANケーブルで給電する方式ではない。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「給電」だけでなく「LANケーブル」を条件として拾う。電力線やUSBケーブルの話と混ぜない。",
+          "text": "ケーブルの種類と、そこを流すものを分けます。**電力線を通信に使う**方式と、**Ethernetケーブルを給電に使う**方式は逆の発想です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Ethernetを通して電力も供給する方式。略語のPはPower、EはEthernetに対応する。",
-          "revealsAnswer": false
+          "text": "**PoE（Power over Ethernet）**はEthernetのLANケーブルを通じて、データ通信に加えて対応機器へ電力を供給する仕組みです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "停電に備えるUPSと、電力線を通信路にするPLCを除き、Ethernetで給電する略語を選ぶ。",
-          "revealsAnswer": false
+          "text": "PLCは電力線通信、UPSは停電に備える無停電電源装置、USBは周辺機器接続規格です。設問は**LANケーブルによる給電**を求めています。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "電力線でデータを送るPLCと、LANケーブルで電力を送る方式の向きを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ケーブルの種類と、そこを流すものを分けます。**電力線を通信に使う**方式と、**Ethernetケーブルを給電に使う**方式は逆の発想です。",
+          "remainingWork": "候補の媒体を見分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "給電と通信の媒体の違いだけを教えており名称を示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**PoE（Power over Ethernet）**はEthernetのLANケーブルを通じて、データ通信に加えて対応機器へ電力を供給する仕組みです。",
+          "remainingWork": "PoEの略語と設問の条件を照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢PoEの正式名称と仕組みを明示している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "PLCは電力線通信、UPSは停電に備える無停電電源装置、USBは周辺機器接続規格です。設問は**LANケーブルによる給電**を求めています。",
+          "remainingWork": "他の三つの用途を復習する",
+          "revealsAnswer": true,
+          "reason": "前段のPoEに加え他の選択肢を区別し正答が確定している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q29.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: ec7a268909541a14f21a1b1fcb16f3eecf9d6ac1edb46b5785e60075d419c4ea。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: LANケーブルによる給電。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r04h-q32",
     "baseVersion": 2,
     "baseLessonSHA256": "4b32dc9eaaaa4380cbf63530a6222b90a4ed181992435ac1562cd012fa8701c7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q32",
-      "summary": "ウ。PPPoEはLAN上でPPPの接続確立やデータ転送を実現します。",
+      "summary": "シリアル回線向けの**PPPの接続・データ転送機能をEthernet上で利用する**プロトコルを問う。",
       "explanation": "PPPはシリアル回線などで用いるデータリンク層のプロトコルです。PPPoEはPPP over Ethernetの略で、Ethernet上でPPPのフレームを運び、接続確立や認証、データ転送を利用できるようにします。名前の末尾のoEがLAN側の伝送方式を示します。",
       "choiceReasons": [
         "MPLSはラベルに基づいてパケットを転送する技術で、PPPをLAN上で運ぶ名称ではありません。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文の「シリアル回線で使用するものと同じ」と「LAN上」を分けて読みます。元のプロトコルと運ぶネットワークを対応させます。",
+          "text": "設問は「元となるシリアル回線のプロトコル」と「それを運ぶLAN」を組み合わせる問題です。**PPP**はデータリンク層で接続確立などを行います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "元になるPPPのフレームをEthernet上に載せる方式です。候補名に伝送媒体を示す部分があるか確認します。",
-          "revealsAnswer": false
+          "text": "**PPPoE＝PPP over Ethernet**。PPPのフレームをEthernet上で運び、LANを介してPPPの接続・認証などを利用します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "PPP over Ethernetを略すとPPPoEなので、この候補を選びます。",
+          "text": "PPPは元のプロトコル、MPLSはラベル転送、PPTPはPPPをトンネルで運ぶ技術です。**Ethernet上のPPP**に該当する名称を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "PPPそのものと、PPPをLAN上に載せるPPPoE、VPNのPPTPを取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問は「元となるシリアル回線のプロトコル」と「それを運ぶLAN」を組み合わせる問題です。**PPP**はデータリンク層で接続確立などを行います。",
+          "remainingWork": "PPPをどの媒体で使うか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "PPPの役割は説明するがLAN上に載せる方式名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**PPPoE＝PPP over Ethernet**。PPPのフレームをEthernet上で運び、LANを介してPPPの接続・認証などを利用します。",
+          "remainingWork": "over Ethernetに対応する略語を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢PPPoEの名称と定義を直接教えている。"
+        },
+        {
+          "newInformation": "PPPは元のプロトコル、MPLSはラベル転送、PPTPはPPPをトンネルで運ぶ技術です。**Ethernet上のPPP**に該当する名称を選びます。",
+          "remainingWork": "似た略語の目的を区別する",
+          "revealsAnswer": true,
+          "reason": "前段で正答が分かり、残る三肢の違いも説明している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04h/r04h-q32.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: ca72a96754b0e0000ef8b4128c8dcd5bc2d0d08917ee627b58a1b801516bdcc6。",
+        "contextの公式正答 ウ と画像の選択肢を照合。論点: LAN上のPPP。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r07h-q30",
     "baseVersion": 2,
     "baseLessonSHA256": "b14e43c51063dfcd92b9d03cd0bdc5c81034008d0439be65bcc8adf60b1e5074",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q30",
-      "summary": "イ。1個目に1460バイト、2個目に残り540バイトを入れる。",
+      "summary": "IPv4の**MTUに含まれるヘッダー**を見極め、2,000バイトのTCPデータを分割した際の第2パケットのデータ量を求める。",
       "explanation": "MTU1500バイトはIPパケット全体の上限。IPヘッダー20とTCPヘッダー20がその中に入るので、1個目のデータ上限は1500−20−20=1460バイト。\n\n送るデータは2000バイトなので、2個目のデータは2000−1460=540バイト。Ethernetのヘッダー14とトレーラー4はIPパケットの外側に付くため、MTUから引かない。2個目のヘッダーも「データの長さ」に足さない。",
       "choiceReasons": [
         "500はMTUを全てデータに使えると考えた2000−1500。IP/TCPヘッダーを無視している。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "MTUはIPパケットの上限。1500の中にIPとTCPのヘッダーが入り、Ethernetのヘッダーとトレーラーは外側に付く。",
+          "text": "設問のMTU **1,500バイトはIPパケット全体の上限**です。Ethernetヘッダー14バイトとトレーラー4バイトはIPパケットの外側なので、この1,500からは引きません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "1個目はデータを上限まで詰める指定。まず1500から、その内側にあるヘッダー二つを引いてデータの容量を求める。",
+          "text": "IPヘッダー20バイトとTCPヘッダー20バイトはMTUの内側です。1個目に入る**TCPデータの最大量＝1,500－20－20**を先に求めます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "1個目の容量は1,500−20−20。2000からその容量を引けば2個目の「データ」になる。2個目のヘッダーは足さない。",
+          "text": "先に最大量を詰める条件なので、**2個目のデータ量＝2,000－(1,500－20－20)**です。問われるのはデータだけで、2個目のヘッダー長は足しません。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "MTUからEthernetの18バイトまで引いたり、二つ目のヘッダーをデータ量に足したりする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問のMTU **1,500バイトはIPパケット全体の上限**です。Ethernetヘッダー14バイトとトレーラー4バイトはIPパケットの外側なので、この1,500からは引きません。",
+          "remainingWork": "IPパケット内のヘッダーを特定する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "MTUの範囲を説明するが最大量・正答値は出していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPヘッダー20バイトとTCPヘッダー20バイトはMTUの内側です。1個目に入る**TCPデータの最大量＝1,500－20－20**を先に求めます。",
+          "remainingWork": "最大データ量を計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式を教えるが数値計算を学習者に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "先に最大量を詰める条件なので、**2個目のデータ量＝2,000－(1,500－20－20)**です。問われるのはデータだけで、2個目のヘッダー長は足しません。",
+          "remainingWork": "最後の減算を実行し4肢と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終式は示すが最後の演算と選択肢照合は本人が行う。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q30.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 2b8490e4ab86967eb525bfc62ae2169cc85b183e653bfcdb4e3f99f1d18a2e30。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: MTUとTCPの分割。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r03a-q33",
     "baseVersion": 2,
     "baseLessonSHA256": "ec2e4a0f417796eb6ef4a5b11db60e3b42ae9831722c24470a37f578e9f6a3b6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q33",
-      "summary": "エ。外向き通信では送信元IPアドレスと送信元ポート番号を変換します。",
+      "summary": "NAPTルータを通る**PCからインターネットへの要求**で、IP・TCPヘッダーのどの送信元情報が変換されるかを問う。",
       "explanation": "NAPTは内部のIPアドレスとポート番号の組を、外部に見せるIPアドレスとポート番号の組へ対応付けます。PCから外部へ出るパケットでは送信元側を変換し、宛先のサーバとサービスを保ちます。応答が戻ると、その対応表を使って内部PCへ届ける宛先情報に戻します。",
       "choiceReasons": [
         "外向き通信の宛先サーバとサービスを変更する組で、送信元を外部用に変えるNAPTの変換箇所ではありません。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "通信の向きはPCからインターネットです。宛先のサーバとサービスを保ちながら、外部から見えるPC側の識別情報を考えます。",
+          "text": "通信方向は**内部PC→外部サーバ**です。宛先サーバとそのサービスを変えずに、外部から見える内部PC側の情報をどう扱うか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "複数の内部PCが一つの外部IPアドレスを共有しても応答を区別するため、IPアドレスだけでなくポート番号も対応表に含めます。",
-          "revealsAnswer": false
+          "text": "**NAPT**は内部の**送信元プライベートIPアドレスと送信元ポート番号**を、ルータ側の外部IPアドレスと対応するポート番号へ変換し、対応表に記録します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "外向きパケットの送信元IPアドレスと送信元ポート番号を書き換えるエです。",
+          "text": "宛先IPや宛先ポートを変えると通信先が変わってしまいます。複数PCを同じ外部IPで識別するため、外向きの**送信元IPと送信元ポート**の組を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "送信元と宛先を混同し、IPアドレスだけでなくポート番号も変換する理由が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "通信方向は**内部PC→外部サーバ**です。宛先サーバとそのサービスを変えずに、外部から見える内部PC側の情報をどう扱うか考えます。",
+          "remainingWork": "送信元側か宛先側か考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方向と宛先維持だけで二つの変換項目はまだ特定していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**NAPT**は内部の**送信元プライベートIPアドレスと送信元ポート番号**を、ルータ側の外部IPアドレスと対応するポート番号へ変換し、対応表に記録します。",
+          "remainingWork": "対応表で識別する二項目を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の送信元IP・ポートの組を明示している。"
+        },
+        {
+          "newInformation": "宛先IPや宛先ポートを変えると通信先が変わってしまいます。複数PCを同じ外部IPで識別するため、外向きの**送信元IPと送信元ポート**の組を選びます。",
+          "remainingWork": "四つの組合せを照合する",
+          "revealsAnswer": true,
+          "reason": "正答の組合せと他の組合せの不適切な理由を説明している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03a/r03a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 5368b9b9123d5a7c61c9dc598a1f374df965df1650d98aeaaeb55187e4996c2e。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: NAPTで外向き通信を変換。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r05a-q32",
     "baseVersion": 2,
     "baseLessonSHA256": "7ae7abd002e3be4776ce95e16ecf264e02537161c47e785d0579112a691719e6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q32",
-      "summary": "イ。応答の宛先IPアドレスと宛先ポート番号を戻します。",
+      "summary": "NAPT経由でWebサーバからPCへ戻る**応答パケット**について、逆変換されるヘッダーフィールドの組を選ぶ。",
       "explanation": "PCから外へ出る要求では、NAPTが送信元のプライベートIPとポートをルータ側のグローバルIPと対応するポートへ変換します。\n逆方向のWebサーバからの応答は、そのグローバルIPとポートを宛先に持ちます。ルータは変換表を使い、宛先IPをPCのプライベートIPへ、宛先ポートをPCの元のポートへ戻します。送信元はWebサーバの情報のままです。",
       "choiceReasons": [
         "応答の送信元IPはWebサーバなので変更対象ではありません。宛先ポートの逆変換も必要です。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問の方向は「WebサーバからPC」です。要求時の送信元と応答時の宛先が対応することを確認します。",
+          "text": "今回は**Webサーバ→内部PCの応答**です。PCから出た要求の送信元は、返ってくる応答では宛先に変わります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "外から来る応答の宛先はルータのグローバルIPと変換後ポートです。変換表から内側PCの情報へ戻します。",
+          "text": "応答の宛先は一度ルータの外部IPと変換後ポートになっています。NAPTの対応表で**宛先IPアドレスと宛先ポート番号**を内部PCの値へ戻します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "戻す二項目は応答の宛先IPと宛先ポートです。送信元のWebサーバの情報と分けて表を読みます。",
+          "text": "表の○が**宛先IP**と**宛先ポート**の列だけにある行を探します。応答の送信元であるWebサーバのIP・ポートは書き換えません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "往路の送信元変換をそのまま復路に当てはめ、表の宛先・送信元欄を逆に読んでしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "今回は**Webサーバ→内部PCの応答**です。PCから出た要求の送信元は、返ってくる応答では宛先に変わります。",
+          "remainingWork": "応答側の宛先を特定する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方向と往復の対応は教えるが表の二列はまだ特定していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "応答の宛先は一度ルータの外部IPと変換後ポートになっています。NAPTの対応表で**宛先IPアドレスと宛先ポート番号**を内部PCの値へ戻します。",
+          "remainingWork": "変換表で戻す二列を考える",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢イの○二列を実質的に教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表の○が**宛先IP**と**宛先ポート**の列だけにある行を探します。応答の送信元であるWebサーバのIP・ポートは書き換えません。",
+          "remainingWork": "表の○の位置を選択肢と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答の二列を明示し、他の列が対象外であることも教えている。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q32.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 377befaf8472cf74b013b374f60c7f802f5958e2b22c54eb3979698c2bd6c727。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: NAPTで応答を内部へ戻す。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r03h-q35",
     "baseVersion": 2,
     "baseLessonSHA256": "9e725366190878ec3600527cf214e210a425f13d84ab37d83ab703ddfcd86f8b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q35",
-      "summary": "エ。制御と転送を分離しコントローラで集中制御します。",
+      "summary": "OpenFlowを用いるSDNの特徴である**ネットワーク制御とデータ転送の役割分担**を、監視・ルーティング・仮想化と区別する。",
       "explanation": "OpenFlowを用いたSDNは、経路などを決める制御機能と実際のデータ転送機能を論理的に分離します。コントローラがOpenFlowで転送機器のルールを設定し、ネットワーク全体をソフトウェアから制御できます。",
       "choiceReasons": [
         "MIB情報を取得して管理するSNMPの説明です。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "経路を決める処理と、決まった経路へパケットを送る処理を二つの箱に分けます。",
+          "text": "ネットワークには**転送先を決める制御**と、決められたルールで**実際にパケットを送る転送**の二つの役割があります。設問がどちらの構成を聞くか分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "外部のコントローラから転送ルールを指示する構成を探します。",
+          "text": "OpenFlowを用いる**SDN**では制御プレーンとデータプレーンを論理的に分離し、**コントローラ**が転送機器にルールを設定して集中制御します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "制御とデータ転送を論理的に分離し、コントローラが集中制御する記述です。",
+          "text": "MIBの取得はSNMPによる監視、機器同士の経路交換は分散ルーティング、仮想環境での機能実行はNFVの説明です。**制御と転送の分離**を述べる肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "MIB監視、分散ルーティング、NFVをいずれもソフトウェア管理と捉えてSDNと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ネットワークには**転送先を決める制御**と、決められたルールで**実際にパケットを送る転送**の二つの役割があります。設問がどちらの構成を聞くか分けます。",
+          "remainingWork": "制御と転送の役割を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "制御と転送の概念のみで正答肢の集中制御はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "OpenFlowを用いる**SDN**では制御プレーンとデータプレーンを論理的に分離し、**コントローラ**が転送機器にルールを設定して集中制御します。",
+          "remainingWork": "SDNのアーキテクチャを肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の論理分離・コントローラ集中制御を説明している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "MIBの取得はSNMPによる監視、機器同士の経路交換は分散ルーティング、仮想環境での機能実行はNFVの説明です。**制御と転送の分離**を述べる肢を選びます。",
+          "remainingWork": "SNMP・ルーティング・NFVとの差を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他の三肢の技術名も示して正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03h/r03h-q35.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 485b23528a83d4943084b8044b28d33245ce5c51d8906f37849dc6dfbe99b3ab。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: SDNとOpenFlow。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r04h-q35",
     "baseVersion": 2,
     "baseLessonSHA256": "6ff447f361f087273767087ba78f237579712b17c15b27e366105a2f0377bf6c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q35",
-      "summary": "エ。SDNはデータ転送とネットワーク制御を分離し、制御を集中管理します。",
+      "summary": "OpenFlowを用いたSDNの**制御プレーンとデータプレーンの分離**を、DNS・携帯音声通信・SANと区別する。",
       "explanation": "OpenFlowを使うSDNでは、通信を実際に転送するデータプレーンと、転送ルールを決める制御プレーンを論理的に分離します。コントローラがネットワークを集中制御し、OpenFlowで転送装置へルールを設定できます。DNSや音声通信方式、ストレージネットワークとは目的が異なります。",
       "choiceReasons": [
         "ドメイン名をIPアドレスへ対応させる分散データベースはDNSです。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文のOpenFlowを、転送装置に処理ルールを設定する仕組みとして捉えます。名前解決やストレージ接続とは対象が異なります。",
+          "text": "ネットワーク機器の仕事には、**転送ルールを決定する制御**と、**そのルールに従ってデータを転送する処理**があります。両者の構成を問う説明を探します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "装置の役割を「どこへ送るかのルールを決める」と「ルールに従って実際に送る」に分けて描きます。OpenFlowで転送ルールを設定するとき、設定する役と設定される装置がどの位置にあるかを考えます。",
-          "revealsAnswer": false
+          "text": "**SDN（Software-Defined Networking）**は制御機能とデータ転送機能を論理的に分け、コントローラから転送機器へOpenFlowでルールを設定し、集中制御します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "データ転送とネットワーク制御を論理的に分離し、集中制御するアーキテクチャの候補を選びます。",
+          "text": "ドメイン名の対応付けはDNS、携帯網のパケット音声は別の通信方式、WWNで識別するストレージ網はSANです。**集中制御するSDN**の説明を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "候補がいずれもネットワーク関連の説明で、SDNが担う機能と他の技術の用途を整理できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ネットワーク機器の仕事には、**転送ルールを決定する制御**と、**そのルールに従ってデータを転送する処理**があります。両者の構成を問う説明を探します。",
+          "remainingWork": "ネットワーク制御の説明を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "制御と転送の二役を教えるがSDNの構成を確定していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SDN（Software-Defined Networking）**は制御機能とデータ転送機能を論理的に分け、コントローラから転送機器へOpenFlowでルールを設定し、集中制御します。",
+          "remainingWork": "論理分離と集中制御を肢へ当てはめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢エと実質同じSDNの定義を示している。"
+        },
+        {
+          "newInformation": "ドメイン名の対応付けはDNS、携帯網のパケット音声は別の通信方式、WWNで識別するストレージ網はSANです。**集中制御するSDN**の説明を選びます。",
+          "remainingWork": "DNS・音声・SANとの用途を比べる",
+          "revealsAnswer": true,
+          "reason": "前段の定義と他の三肢の用途から正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04h/r04h-q35.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: ddf3a09f7f0828c7d62dedb52d54d972b7fc31262975022f65acfc391f290210。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: SDNとOpenFlow。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r06h-q34",
     "baseVersion": 2,
     "baseLessonSHA256": "72722ab70c80571637160450f595b3de014173a0c03a27d7c1c255ef96b1c1bb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q34",
-      "summary": "イ。SDNは制御を転送機器から分離し、ソフトウェアで集中管理します。",
+      "summary": "OpenFlowを使うSDNの**集中制御アーキテクチャ**を、仮想スイッチやOSS化などの説明と区別する。",
       "explanation": "OpenFlowを用いるSDNでは、パケットの転送を行うスイッチなどのデータプレーンと、転送ルールを決めるコントロールプレーンを分離します。コントローラがOpenFlowで機器へルールを設定します。\n仮想スイッチを使うだけの方式や、機器内ソフトウェアをOSSにする方式ではありません。制御と転送の分離を述べるイが適切です。",
       "choiceReasons": [
         "アは物理サーバ内の仮想スイッチによる通信です。制御と転送の分離というSDNの構成を述べていません。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「スイッチが転送する仕事」と「どこへ転送するかを決める仕事」が、同じ機器内にあるか分かれているか見ます。",
+          "text": "**仮想スイッチ**は同じ物理サーバ内のVM間通信にも使えますが、それだけでネットワーク全体の制御方式が決まるわけではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "コントローラが転送ルールをまとめて決め、OpenFlowでスイッチへ設定する構成を思い浮かべます。",
+          "text": "**SDN**は転送を行うネットワーク機器と制御ソフトウェアを分離し、コントローラからOpenFlowなどを使って**集中管理・制御**します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "データを転送する機器から分離したソフトウェアが集中制御する記述を選びます。仮想化やOSS化だけではこの条件を満たしません。",
+          "text": "OSSはソフトウェアのライセンス・公開形態、形式言語は仕様記述の手法です。**転送機器から独立した制御ソフトウェア**を述べる肢が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "仮想スイッチやOSSを使えばSDNだと思い、制御機能の分離という本質を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**仮想スイッチ**は同じ物理サーバ内のVM間通信にも使えますが、それだけでネットワーク全体の制御方式が決まるわけではありません。",
+          "remainingWork": "仮想化と制御の違いを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "仮想スイッチの機能だけを説明し、正答肢の集中制御はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SDN**は転送を行うネットワーク機器と制御ソフトウェアを分離し、コントローラからOpenFlowなどを使って**集中管理・制御**します。",
+          "remainingWork": "SDNの制御主体を選択肢から探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢イの独立ソフトウェアによる集中制御を説明している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "OSSはソフトウェアのライセンス・公開形態、形式言語は仕様記述の手法です。**転送機器から独立した制御ソフトウェア**を述べる肢が該当します。",
+          "remainingWork": "OSS・形式言語との違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "他の候補を除外でき、前段の定義で正答が確定している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r06h/r06h-q34.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 849e65315b2a07d31a28d7c29c12c3ebb4aa698df71f48007e07fc19d6dc0441。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: SDNとOpenFlow。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r03a-q34",
     "baseVersion": 2,
     "baseLessonSHA256": "9637d110f9960e2d0ac915b613e8aa1365adec7c73fe29d4aeb6b99eb4341d73",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q34",
-      "summary": "イ。シーケンス番号はTCPにありUDPにはありません。",
+      "summary": "**TCPとUDPのヘッダーフィールド**を比較し、TCPの順序・再送制御に必要な情報を選ぶ。",
       "explanation": "UDPヘッダには送信元ポート、宛先ポート、長さ、チェックサムがあります。TCPは順序を管理し受信確認や再送を行うため、データの位置を示すシーケンス番号を持ちます。UDPにはこの順序管理の番号がなく、ポート番号やチェックサムはどちらにもあります。",
       "choiceReasons": [
         "宛先アプリケーションを示すポート番号はTCP・UDPの両方にあります。",
@@ -577,57 +640,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "両プロトコルともアプリケーションをポートで識別します。TCPの順序保証に追加で必要な情報を考えます。",
+          "text": "TCPもUDPもトランスポート層でアプリケーションを**送信元・宛先ポート番号**で識別します。両者の違いはデータの順序・再送制御です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "TCPは受信データを正しい順序に並べ、足りない部分を再送します。そのためデータがどの位置に当たるかを示す番号が必要です。",
+          "text": "TCPはデータをバイト列として管理し、位置を表す**シーケンス番号**で順序の復元や再送制御を行います。UDPのヘッダーにはこの番号がありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "その位置を示すシーケンス番号はTCPだけにあり、UDPにはありません。",
+          "text": "**チェックサム**の欄はTCPとUDPの両方にあります。ポート二種とチェックサムを除き、TCPの順序制御に使うフィールドを選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "TCPだけにある制御情報と、両方にあるポート番号・チェックサムを区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "TCPもUDPもトランスポート層でアプリケーションを**送信元・宛先ポート番号**で識別します。両者の違いはデータの順序・再送制御です。",
+          "remainingWork": "共通のフィールドを区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ポートが共通であることは教えるが正答名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "TCPはデータをバイト列として管理し、位置を表す**シーケンス番号**で順序の復元や再送制御を行います。UDPのヘッダーにはこの番号がありません。",
+          "remainingWork": "TCP固有の順序制御フィールドを特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "シーケンス番号という正答肢を直接教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**チェックサム**の欄はTCPとUDPの両方にあります。ポート二種とチェックサムを除き、TCPの順序制御に使うフィールドを選びます。",
+          "remainingWork": "残る三つが共通であることを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答と他の三肢の違いが確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r03a/r03a-q34.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 759c56376fbcecddd531890ba45dd26251ba97cc3d9a1d9cff546d1f2a0dd374。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: TCPだけのヘッダー情報。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r07a-q33",
     "baseVersion": 2,
     "baseLessonSHA256": "d88886f8f0f52b48eb24681a05d58b28dba1147174a5e21095c198089f136c4a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q33",
-      "summary": "イのシーケンス番号。TCPでデータ順序や再送を管理します。",
+      "summary": "TCP・UDPのヘッダーに共通する項目と、**TCPだけが順序制御に用いる項目**を区別する。",
       "explanation": "TCPはバイト列にシーケンス番号を付け、受信側で順序をそろえ、欠落や再送を管理します。UDPはそのような順序制御を備えず、ヘッダーにシーケンス番号はありません。\n宛先・送信元のポート番号とチェックサムは、TCPとUDPの両方のヘッダーに存在します。",
       "choiceReasons": [
         "宛先ポート番号はTCPにもUDPにもあります。",
@@ -639,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "宛先アプリケーションを識別するため、UDPでもポート番号が必要です。",
+          "text": "UDPの基本ヘッダーは**送信元ポート、宛先ポート、長さ、チェックサム**の4フィールドです。チェックサムがIPv4で省略可能でも、フィールド自体はあります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "データが順番を入れ替えて届いたとき、TCPが元の順序を復元するために使う値を考えます。",
-          "revealsAnswer": false
+          "text": "TCPは順序をそろえ欠落を再送するため、データの位置を示す**シーケンス番号**や受信確認番号などを持ちます。UDPにはシーケンス番号がありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "エラー検査の欄の有無と、順序・再送の管理の有無を分けます。UDPの短いヘッダーにない順序情報を選びましょう。",
+          "text": "ポート二種とチェックサムは両方に存在します。**TCPの順序制御に必要な番号**を問う選択肢と照合します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "UDPには信頼性制御がないことから、チェックサムまで存在しないと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "UDPの基本ヘッダーは**送信元ポート、宛先ポート、長さ、チェックサム**の4フィールドです。チェックサムがIPv4で省略可能でも、フィールド自体はあります。",
+          "remainingWork": "UDPにある三つの候補を除外する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "UDPのフィールドを教えるが正答のシーケンス番号は示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "TCPは順序をそろえ欠落を再送するため、データの位置を示す**シーケンス番号**や受信確認番号などを持ちます。UDPにはシーケンス番号がありません。",
+          "remainingWork": "TCPに追加される制御情報を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "TCP固有のシーケンス番号を明示している。"
+        },
+        {
+          "newInformation": "ポート二種とチェックサムは両方に存在します。**TCPの順序制御に必要な番号**を問う選択肢と照合します。",
+          "remainingWork": "両プロトコルのヘッダー差を整理する",
+          "revealsAnswer": true,
+          "reason": "前段の正答と残る三肢の共通性で選択肢が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07a/r07a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: b3d16fddff44da5cfa85a59fd7bf002b7c2ea5f6719e247bb2eaee48a0ba62f4。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: TCPだけのヘッダー情報。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r04h-q33",
     "baseVersion": 2,
     "baseLessonSHA256": "e7c10eaf65e6a65a2f53b7ba220e7f0f1ee6e87f7afce0198495bc31955953e3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q33",
-      "summary": "イ。NTPは時刻同期にUDPを使用します。",
+      "summary": "FTP・NTP・POP3・TELNETのうち、**UDPを使用する代表的なサービス**を選ぶ。",
       "explanation": "NTPはネットワーク経由で時刻を同期するプロトコルで、一般にUDPの123番ポートを使用します。FTP、POP3、TELNETはTCPを使用します。UDPは接続確立を行わずにデータグラムを送受信するプロトコルです。",
       "choiceReasons": [
         "FTPはファイル転送のためにTCPを使用します。",
@@ -701,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補の用途を、ファイル転送・時刻同期・メール受信・遠隔端末に分けて書き出します。",
+          "text": "候補の用途を整理します。**FTP＝ファイル転送、NTP＝時刻同期、POP3＝メール受信、TELNET＝遠隔端末接続**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "FTP、メール受信、遠隔端末はTCPの接続を使う代表例です。残る時刻同期のプロトコルを確認します。",
+          "text": "**NTP（Network Time Protocol）**は時刻同期に通常**UDPの123番ポート**を使います。接続を確立せず時刻情報をやり取りする代表例です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "時刻同期を行うNTPはUDPの123番ポートを使います。",
+          "text": "FTP・POP3・TELNETはTCPを利用します。UDPを使用する**時刻同期プロトコル**を選び、用途とトランスポート層を対応付けます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "サービス名の略語が未知で、TCPとUDPのどちらを使うか判断する材料がない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補の用途を整理します。**FTP＝ファイル転送、NTP＝時刻同期、POP3＝メール受信、TELNET＝遠隔端末接続**です。",
+          "remainingWork": "用途ごとに四つを区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "各略語の用途を教えるだけでUDPを使う候補はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**NTP（Network Time Protocol）**は時刻同期に通常**UDPの123番ポート**を使います。接続を確立せず時刻情報をやり取りする代表例です。",
+          "remainingWork": "UDPを使うサービスを照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "NTPとUDP/123を直接教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "FTP・POP3・TELNETはTCPを利用します。UDPを使用する**時刻同期プロトコル**を選び、用途とトランスポート層を対応付けます。",
+          "remainingWork": "TCPを使う他の三つと対比する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答と他の三肢のトランスポート層が確定している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04h/r04h-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 726e646fe45d27dccc7e795439c5734371a990dde84b910361546ecb3273fa82。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: UDPを使うサービス。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r04a-q35",
     "baseVersion": 2,
     "baseLessonSHA256": "16dc7c471db94b692f63c0d62dccddb959761a390760903cbefbdcf02fdfdbc4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q35",
-      "summary": "エ。ホスト名の直後に:8080を置きます。",
+      "summary": "URLの**ホスト名・ポート番号・パス・クエリ**の配置を理解し、8080番ポートの正しい指定位置を選ぶ。",
       "explanation": "URLの権限部分はホスト名と任意のポートで構成され、ホスト名:ポートと書きます。したがってhttps://www.example.com:8080/member/login?id=userです。パスやクエリに追加しても受理ポートの指定にはなりません。",
       "choiceReasons": [
         "クエリ末尾の:8080はidパラメータの値の一部になります。",
@@ -763,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "URLをhttps、www.example.com、/member/login、id=userへ分けます。",
+          "text": "URLを**https（スキーム）／www.example.com（ホスト名）／member/login（パス）／id=user（クエリ）**に分けます。クエリは?の後でサーバへ渡すパラメータです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ポート番号は同じコンピュータ上のサービスを区別する情報です。四つのURL部分を、接続先を決める情報と、接続後に要求する資源・パラメータに分けて置き場所を検討します。",
-          "revealsAnswer": false
+          "text": "接続先の**ポート番号はホスト名の直後に「:番号」**を置きます。形式は`スキーム://ホスト名:ポート/パス?クエリ`です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "www.example.comの後へ:8080を置き、その後に/が続く形を選びます。",
+          "text": "今回なら`https://www.example.com:8080/member/login?id=user`です。クエリやパスの末尾に追加すると、それぞれの文字列の一部になってしまいます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コロンがスキームやパスにもあるため、ポート番号をどこに挿入するか分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "URLを**https（スキーム）／www.example.com（ホスト名）／member/login（パス）／id=user（クエリ）**に分けます。クエリは?の後でサーバへ渡すパラメータです。",
+          "remainingWork": "ホスト名とパスを分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "URLの構成要素を示すがポートの位置はまだ教えていない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "接続先の**ポート番号はホスト名の直後に「:番号」**を置きます。形式は`スキーム://ホスト名:ポート/パス?クエリ`です。",
+          "remainingWork": "ポートを置く構文位置を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ホスト直後という正答肢の条件を明示している。"
+        },
+        {
+          "newInformation": "今回なら`https://www.example.com:8080/member/login?id=user`です。クエリやパスの末尾に追加すると、それぞれの文字列の一部になってしまいます。",
+          "remainingWork": "例示URLと選択肢を照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢と同じ完成URLを示している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04a/r04a-q35.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: e02797a609a00671732d01899cd855a040fd7e3b3f090377adee7d20fa334c67。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: URLのポート指定。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r05a-q33",
     "baseVersion": 2,
     "baseLessonSHA256": "1fe4c9a0af3f7c6f12c4b8caddcc0e3e4ac1cd79943617df03c5023fff298daf",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q33",
-      "summary": "イのICMP。pingはエコー要求とエコー応答を使います。",
+      "summary": "**pingによる到達性確認**に用いるIPの制御メッセージ用プロトコルを識別する。",
       "explanation": "pingは対象へICMPエコー要求を送り、返ってくるICMPエコー応答で到達性や応答時間を確認します。TCP接続やメール送信のプロトコルではありません。\nICMPが遮断されている場合もあるので、応答がないことだけで相手の停止を断定することはできません。",
       "choiceReasons": [
         "CHAPはチャレンジ・レスポンス方式の認証プロトコルです。",
@@ -825,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問の「ホストの接続確認」に注目します。CHAP・ICMP・SMTP・SNMPの役割をそれぞれ思い出し、接続確認のために送受信するメッセージかを比べましょう。",
+          "text": "pingは対象ホストへ確認用メッセージを送り、応答の有無や時間を調べます。メール送信や機器の統計監視、認証とは用途が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "IP通信の制御・通知用メッセージの中にエコー要求とエコー応答があります。それらを使うプロトコルを思い出します。",
+          "text": "pingが通常使うのは**ICMP（Internet Control Message Protocol）**の**Echo Request／Echo Reply**です。IPの制御・診断用メッセージを使います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Internet Control Message Protocolの頭文字で表すプロトコルです。略称を選択肢と照合します。",
+          "text": "CHAPは認証、SMTPはメール送信、SNMPはネットワーク管理です。pingの**エコー要求・応答**に対応する略語を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ICMP・SNMP・SMTP・CHAPの略語と用途を知らず、pingが使うメッセージを選べない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "pingは対象ホストへ確認用メッセージを送り、応答の有無や時間を調べます。メール送信や機器の統計監視、認証とは用途が異なります。",
+          "remainingWork": "診断と他の用途を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "到達性確認の流れを示すがプロトコル名は教えていない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "pingが通常使うのは**ICMP（Internet Control Message Protocol）**の**Echo Request／Echo Reply**です。IPの制御・診断用メッセージを使います。",
+          "remainingWork": "エコー要求を使うプロトコルを特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢ICMPの名称と用途を直接教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "CHAPは認証、SMTPはメール送信、SNMPはネットワーク管理です。pingの**エコー要求・応答**に対応する略語を選びます。",
+          "remainingWork": "他の三つの略語と区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段のICMPと他の三肢の用途から正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 5966b73c5e9d9ae5d5077bf6f857918556bf098573bcf46f84bbd7d537957ac9。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: pingの通信。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r05h-q33",
     "baseVersion": 2,
     "baseLessonSHA256": "307a0af9871da13b929ca1247074409d38d6f96205eeda81e8d498dc3c434da5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q33",
-      "summary": "宛先情報はMACアドレス、IPアドレス、ポート番号の順です。",
+      "summary": "TCPセグメントをIPパケット、さらにEthernetフレームに包むとき、**宛先MAC・IP・ポートの送出順**を問う。",
       "explanation": "TCPセグメントはIPパケットに包まれ、そのIPパケットはイーサネットフレームに包まれます。送信されるヘッダーは外側からイーサネット、IP、TCPの順です。宛先MACアドレスはイーサネットヘッダー、宛先IPアドレスはIPヘッダー、宛先ポート番号はTCPヘッダーにあるので、ウです。",
       "choiceReasons": [
         "IPヘッダーの前にイーサネットヘッダーが送られるため、IPが最初ではありません。",
@@ -887,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "送出するのはイーサネットフレームです。どのヘッダーが最も外側かを確認します。",
+          "text": "送信時は**TCPセグメントをIPパケットで包み、さらにEthernetフレームで包みます**。線上へは外側のEthernetヘッダーから送られます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "MACはイーサネット、IPアドレスはIP、ポート番号はTCPに属します。",
-          "revealsAnswer": false
+          "text": "宛先**MACアドレスはEthernetヘッダー**、宛先**IPアドレスはIPヘッダー**、宛先**ポート番号はTCPヘッダー**にあります。外側から内側へ対応させます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "フレームの中にIPパケット、その中にTCPセグメントがあります。外側から宛先欄を順に書きます。",
+          "text": "したがって宛先情報の送出順は**MACアドレス→IPアドレス→ポート番号**です。TCPを先に組み立てることと、ヘッダーの送出順を混同しないでください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "上位層から作るカプセル化の順と、実際に線上へ送るヘッダーの順を逆にしてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "送信時は**TCPセグメントをIPパケットで包み、さらにEthernetフレームで包みます**。線上へは外側のEthernetヘッダーから送られます。",
+          "remainingWork": "外側から送られる層を把握する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "外側のEthernetから送ることを教えるが三項目の対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "宛先**MACアドレスはEthernetヘッダー**、宛先**IPアドレスはIPヘッダー**、宛先**ポート番号はTCPヘッダー**にあります。外側から内側へ対応させます。",
+          "remainingWork": "三種類の宛先を各層へ割り当てる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段と各ヘッダーの対応を合わせると正答の並びが一意に決まる。"
+        },
+        {
+          "newInformation": "したがって宛先情報の送出順は**MACアドレス→IPアドレス→ポート番号**です。TCPを先に組み立てることと、ヘッダーの送出順を混同しないでください。",
+          "remainingWork": "選択肢の順序を照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢ウの順序を完全に明示している。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05h/r05h-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 19d0e60b3af2f164c2ee0be078079e83f523f2714e40f79f99e6a0fa956767e8。",
+        "contextの公式正答 ウ と画像の選択肢を照合。論点: カプセル化とヘッダー順。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r06a-q35",
     "baseVersion": 2,
     "baseLessonSHA256": "bfac0e7c00878c8f028d642f1b2480111cf2d6bafaeca515484588501842151f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q35",
-      "summary": "エ。クラスDはマルチキャスト用のIPv4アドレスです。",
+      "summary": "従来のIPv4クラス分類で、**クラスDのアドレスが何の通信に使われるか**を問う。",
       "explanation": "従来のクラス分類でクラスDは、特定のホスト一台ではなくグループへ送るマルチキャストに使います。範囲は224.0.0.0〜239.255.255.255です。\n小規模・中規模のホストアドレスという説明はクラスC・Bに対応し、プライベートユニキャストとも異なります。",
       "choiceReasons": [
         "約250台のホスト向けという説明は従来のクラスCに対応します。",
@@ -949,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "アとイはネットワーク内のホスト数で区別しています。クラスDも通常のホスト一台へ割り当てる分類なのか確認します。",
+          "text": "クラスA〜Cは従来、ネットワークとホストの規模によって区分されました。**クラスD**は単一ホストの規模を表す分類なのか、通信の用途を表す分類なのかを分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一つの宛先アドレスを受信グループとして扱い、そのグループへデータを配る方式を考えます。",
+          "text": "クラスDのIPv4アドレスは**224.0.0.0〜239.255.255.255**で、複数の受信者グループへ送る**マルチキャスト**に用います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "クラスDの224〜239で始まるアドレスはマルチキャスト用です。グループ通信を述べるエを選びます。",
+          "text": "約250台・約65,000台という規模の説明は従来のクラスC・Bに相当します。クラスDは**グループ宛て通信**を示す肢です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "クラスA〜Cのホスト数の違いと、クラスDの用途の違いを同じ軸で考えてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "クラスA〜Cは従来、ネットワークとホストの規模によって区分されました。**クラスD**は単一ホストの規模を表す分類なのか、通信の用途を表す分類なのかを分けます。",
+          "remainingWork": "ホスト規模と用途を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "クラスDの用途を問う観点のみでマルチキャスト名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "クラスDのIPv4アドレスは**224.0.0.0〜239.255.255.255**で、複数の受信者グループへ送る**マルチキャスト**に用います。",
+          "remainingWork": "クラスDの用途を選択肢へ対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢エのマルチキャストを直接説明している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "約250台・約65,000台という規模の説明は従来のクラスC・Bに相当します。クラスDは**グループ宛て通信**を示す肢です。",
+          "remainingWork": "クラスB・Cとの違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段の用途と他の肢の規模説明で正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r06a/r06a-q35.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 717734b70bae5f0a14f8d169b001d9be4fc7bcd9b87415b84ae38eb32f0b682a。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: クラスDの用途。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r07a-q32",
     "baseVersion": 2,
     "baseLessonSHA256": "f290be2490fe6c861ed834114e8d0551e0636cfe4c7e4106d0573892e6706c74",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q32",
-      "summary": "アのCIDR。クラスに依存せず、プレフィックス長でアドレスを区切ります。",
+      "summary": "IPv4アドレスをクラスA〜Cの固定境界に縛られず、**可変長のプレフィックス**で効率よく割り当てる方式を問う。",
       "explanation": "CIDRはClassless Inter-Domain Routingです。クラスA,B,Cによる固定的な区分を使わず、/20や/27などのプレフィックス長でネットワーク部分を指定します。\n必要な規模に応じてアドレスブロックを割り当て、アドレスの浪費を減らせます。端末への自動設定や名前解決、ポートを使った変換とは別の仕組みです。",
       "choiceReasons": [
         "CIDRはクラスに依存しないプレフィックスによる割当て方式です。",
@@ -1011,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題は「どの端末へ自動で配るか」ではなく、ネットワーク部とホスト部の境界の決め方を聞いています。",
+          "text": "IPv4アドレスのネットワーク部は**/27なら先頭27ビット**のようにプレフィックス長で表せます。設問は端末の設定配布ではなく、ネットワーク部の区切り方を問います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "例えば/27は先頭27ビットをネットワーク部にします。固定クラスの境界を使わずに指定する方式です。",
+          "text": "**CIDR（Classless Inter-Domain Routing）**はクラスA〜Cの固定境界によらず、/20や/27などの長さでアドレスブロックを扱い、必要な規模に合わせて割り当てます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "各略語の役割を、ブロックの区切り、設定の自動配布、名前の解決、アドレスとポートの変換へ対応させましょう。",
-          "revealsAnswer": false
+          "text": "DHCPはIP設定の自動配布、DNSは名前解決、NAPTはIPアドレスとポートの変換です。**クラスレスなブロック割当て**を表す略語を選びます。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "アドレスブロックの割当方式と、端末への自動配布・名前解決・NAPTを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IPv4アドレスのネットワーク部は**/27なら先頭27ビット**のようにプレフィックス長で表せます。設問は端末の設定配布ではなく、ネットワーク部の区切り方を問います。",
+          "remainingWork": "プレフィックス長と固定クラスを区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "プレフィックス長を説明するが方式名は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**CIDR（Classless Inter-Domain Routing）**はクラスA〜Cの固定境界によらず、/20や/27などの長さでアドレスブロックを扱い、必要な規模に合わせて割り当てます。",
+          "remainingWork": "CIDRの名称と設問を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢CIDRの正式名称と定義を教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "DHCPはIP設定の自動配布、DNSは名前解決、NAPTはIPアドレスとポートの変換です。**クラスレスなブロック割当て**を表す略語を選びます。",
+          "remainingWork": "他の三つの用途を整理する",
+          "revealsAnswer": true,
+          "reason": "他の三肢との機能の違いを示し正答が確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07a/r07a-q32.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: bbd993e450d3171bd9c00afe6f71b4e194d0aecd044ca1518cd80ed7c8eec579。",
+        "contextの公式正答 ア と画像の選択肢を照合。論点: クラスによらないアドレス割当て。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r04a-q34",
     "baseVersion": 2,
     "baseLessonSHA256": "0e11c9170b33965a19f2959840c518dc36ee57458f2bc70389fd3d3c732c3895",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q34",
-      "summary": "エ。UDPが該当します。",
+      "summary": "IPの上位で**コネクションレスのデータグラム通信**を行い、確認応答や順序制御を備えないプロトコルを選ぶ。",
       "explanation": "UDPはIP上のトランスポート層でコネクションレスのデータグラムを提供します。確認応答や再送、順序制御をUDP自体は行いません。必要な信頼性の制御はアプリケーションが実装します。",
       "choiceReasons": [
         "ICMPはIP通信のエラー通知や診断を行うもので、アプリケーション向けのこの転送方式ではありません。",
@@ -1073,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補がデータリンク層、診断、トランスポート層のどれに当たるか分けます。",
+          "text": "候補を層で分けます。**PPPはデータリンク層**、**ICMPはIPの制御・診断用**であり、設問はIPの上位でアプリケーションのデータを運ぶ方式を聞いています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "TCPの確認応答と順序制御を、問題の「もたない」という条件と比べます。",
-          "revealsAnswer": false
+          "text": "**TCP**は接続を確立し、確認応答・再送・順序制御を行います。一方、**UDP**は接続を確立せず、UDP自体にはそれらの信頼性制御がありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "IP上で接続なしに送るUDPが、二つの条件を満たします。",
+          "text": "UDPは宛先・送信元ポートを持つ**コネクションレスのデータグラム転送**です。信頼性が必要ならアプリケーション側で補います。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ICMPも接続不要だから候補と考え、トランスポート層のデータグラムと制御メッセージを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補を層で分けます。**PPPはデータリンク層**、**ICMPはIPの制御・診断用**であり、設問はIPの上位でアプリケーションのデータを運ぶ方式を聞いています。",
+          "remainingWork": "IP上位の転送方式に絞る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "層と用途を区別するがTCP/UDPのうち正答は示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**TCP**は接続を確立し、確認応答・再送・順序制御を行います。一方、**UDP**は接続を確立せず、UDP自体にはそれらの信頼性制御がありません。",
+          "remainingWork": "信頼性制御の有無を比べる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "UDPの名称と設問の条件を直接教えている。"
+        },
+        {
+          "newInformation": "UDPは宛先・送信元ポートを持つ**コネクションレスのデータグラム転送**です。信頼性が必要ならアプリケーション側で補います。",
+          "remainingWork": "UDPの機能を設問と照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢UDPの説明を確定させている。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r04a/r04a-q34.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 25396ffe4218b9b67b9172ba13bae38d7720fb356ff16bdedeb28be73fe51007。",
+        "contextの公式正答 エ と画像の選択肢を照合。論点: コネクションレスの輸送層。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r05a-q34",
     "baseVersion": 2,
     "baseLessonSHA256": "440bd1ecce7f650adbdd0104af0611b6fd6dac4ee39280d98e7eb43655024add",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q34",
-      "summary": "イの172.30.120.0。IPアドレスとマスクのANDを取ります。",
+      "summary": "IPアドレス**172.30.123.45**とサブネットマスク**255.255.252.0**のビットANDから、所属ネットワークアドレスを求める。",
       "explanation": "ネットワークアドレスはIPアドレスの各ビットとサブネットマスクのANDです。最初の2オクテットは255なので172.30を保持し、最後は0なので0になります。\n第3オクテットは123=01111011、252=11111100。ANDは01111000=120です。したがって172.30.120.0になります。",
       "choiceReasons": [
         "第3オクテットの3は123の下位2ビットに相当します。ネットワーク部は下位2ビットを消した120です。",
@@ -1135,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "255の部分はIPを残し、0の部分は消します。計算が必要なのは123と252の第3オクテットです。",
+          "text": "ネットワークアドレスは**IPアドレス AND サブネットマスク**です。マスク255の第1・2オクテットはそのまま、0の第4オクテットは0になります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "252は2進数11111100です。123を2進数にして下位2ビットを0にすればネットワーク部が得られます。",
+          "text": "第3オクテットだけ計算します。**252＝11111100₂**なので下位2ビットを0にします。別の方法ではブロック幅は**256－252＝4**です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "01111011 AND 11111100を求めます。結果の2進数を10進数に直し、172.30.(結果).0としましょう。",
+          "text": "**123＝01111011₂**を**11111100₂**とANDし、結果を10進数に戻します。あるいは123以下で最大の4の倍数を探し、`172.30.(結果).0`とします。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "第3オクテット123をそのまま残したり、マスク値252をネットワークアドレスと誤認する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ネットワークアドレスは**IPアドレス AND サブネットマスク**です。マスク255の第1・2オクテットはそのまま、0の第4オクテットは0になります。",
+          "remainingWork": "第3オクテットに注目する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ANDの規則のみで第3オクテットの結果は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "第3オクテットだけ計算します。**252＝11111100₂**なので下位2ビットを0にします。別の方法ではブロック幅は**256－252＝4**です。",
+          "remainingWork": "ビットANDまたは4刻みの方法を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "マスクとブロック幅は教えるが123への適用は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**123＝01111011₂**を**11111100₂**とANDし、結果を10進数に戻します。あるいは123以下で最大の4の倍数を探し、`172.30.(結果).0`とします。",
+          "remainingWork": "最後の計算を行い四肢と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "具体的なANDの式は示すが最終数値と正答肢は出していない。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r05a/r05a-q34.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: bb8c1c60d29a33e202521a9356fe443d942a7dde060bb472133c801afd852f78。",
+        "contextの公式正答 イ と画像の選択肢を照合。論点: サブネットアドレスの計算。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   },
   {
     "id": "r07h-q32",
     "baseVersion": 2,
     "baseLessonSHA256": "1eb2497abb32dc0f9d4505ee5ac1ebba5d2b63b08dc3ad1417040a3820e18b99",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch16-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q32",
-      "summary": "ウ。利用可能な末尾126から数えて10番目は117。",
+      "summary": "**10.16.32.64/26**の利用可能アドレスを末尾から降順に割り当てるとき、**10番目**の機器アドレスを計算する。",
       "explanation": "/26はホスト部6ビット、アドレス数64。ネットワーク10.16.32.64の範囲は末尾64〜127。64はネットワークアドレス、127はブロードキャストなので、通常割り当てられるのは65〜126。\n\n降順の1番目は126。10番目は126−(10−1)=117となる。最初の機器を1番目として数えるため、10ではなく9を引く。",
       "choiceReasons": [
         "54はこのサブネットの範囲64〜127の外。",
@@ -1197,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "/26からホスト部は32−26=6ビット。2⁶個の範囲が、末尾64からどこまで続くかを求める。",
+          "text": "**/26**ではホスト部は6ビットなので**2⁶＝64個**のアドレスがあります。ネットワークアドレス末尾64から始まる範囲は**64〜127**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "先頭はネットワーク、末尾はブロードキャストなので機器に割り当てない。末尾側の、実際に使える最大値を出す。",
+          "text": "末尾**127はブロードキャスト**、先頭**64はネットワークアドレス**なので通常の機器には割り当てません。利用可能な最大値は**126**です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "最大値が1番目。2番目は最大値−1なので、10番目は最大値−9とする。",
+          "text": "降順では最大値が**1番目**、次が最大値－1です。したがって**10番目＝126－(10－1)**を計算し、`10.16.32.(結果)`を選びます。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "/26の範囲の両端を機器に割り当てたり、10番目なのに最大値から10を引く。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**/26**ではホスト部は6ビットなので**2⁶＝64個**のアドレスがあります。ネットワークアドレス末尾64から始まる範囲は**64〜127**です。",
+          "remainingWork": "アドレス範囲を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "範囲だけを示し、利用可能な最大値や10番目はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "末尾**127はブロードキャスト**、先頭**64はネットワークアドレス**なので通常の機器には割り当てません。利用可能な最大値は**126**です。",
+          "remainingWork": "利用可能な末尾を見つける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最大値126は示すが10番目の値は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "降順では最大値が**1番目**、次が最大値－1です。したがって**10番目＝126－(10－1)**を計算し、`10.16.32.(結果)`を選びます。",
+          "remainingWork": "9を引いて選択肢と照合する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "計算式を教えるが最後の減算と選択肢照合を本人が行う。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP assets/questions/r07h/r07h-q32.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: f6a4433dfcbdcc3c657ff74cd9123671ad57bd71f8c702aab0134204aa8aa7ad。",
+        "contextの公式正答 ウ と画像の選択肢を照合。論点: サブネット末尾からの割当て。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+      ]
     }
   }
 ]
