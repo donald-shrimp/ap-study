@@ -693,11 +693,11 @@
     "id": "r06h-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "bd57d467a8e197568128175a80a6e98fda02856892f3646eaa8b76802ff2858f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q24",
-      "summary": "エ。アウトラインフォントは輪郭を数式で持つため、任意倍率でも滑らかに描けます。",
+      "summary": "ビットマップフォントとアウトラインフォントの描画方式から拡大表示の適性を判断する。",
       "explanation": "ビットマップフォントは決まった大きさの点の配列を保存します。そのまま大きくすると点の形が目立ち、輪郭が階段状になります。\nアウトラインフォントは文字の輪郭を線や曲線で表し、必要な大きさで画素へ変換します。任意倍率への拡大に適します。漢字や等幅文字の表示はどちらの方式でも可能です。",
       "choiceReasons": [
         "アの漢字は両方式で表示でき、アウトライン方式を選ぶ決め手ではありません。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "点の配列をそのまま何倍にも大きくすると、文字の斜め線がどう見えるか想像します。",
+          "text": "固定サイズの画素データを大きく引き伸ばすと、文字の斜め線や曲線がどのように見えるか想像してください。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "線や曲線で保存した輪郭なら、指定した大きさで描き直せます。固定した点の配列との違いです。",
+          "text": "アウトラインフォントは文字の形を曲線や直線の輪郭として記録し、表示するサイズに合わせて描画します。漢字や等幅文字はビットマップでも表現できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「任意の倍率」の要件を、輪郭を描き直す仕組みと照合しましょう。漢字や等幅は方式の違いではありません。",
+          "text": "輪郭から指定サイズの画素を生成できるので、文字をさまざまな倍率で拡大する用途が適しています。高速な固定サイズ描画とは区別してください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "点の配列と輪郭データの違いがわからず、漢字や等幅をアウトライン固有の機能だと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "固定サイズの画素データを大きく引き伸ばすと、文字の斜め線や曲線がどのように見えるか想像してください。",
+          "remainingWork": "拡大による画素の粗さを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アウトラインフォントは文字の形を曲線や直線の輪郭として記録し、表示するサイズに合わせて描画します。漢字や等幅文字はビットマップでも表現できます。",
+          "remainingWork": "輪郭保持の利点を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "輪郭から指定サイズの画素を生成できるので、文字をさまざまな倍率で拡大する用途が適しています。高速な固定サイズ描画とは区別してください。",
+          "remainingWork": "適切な肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q24.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: b7978bcf87edefdd188a4a39aaad2f434998ad892f46c0b5f4817089a0894112。",
+        "context収録の公式正答 エ と作者の確認根拠: 原本の用途は漢字・等幅・高速・任意倍率拡大。アウトラインの輪郭から再描画する仕組みが適する。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "823973f557c4a6d5c9459860a99405d5def383d6172e24ba5db559e856ec0e8b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q24",
-      "summary": "ア。3桁あれば3年後まで割り当てられます。",
+      "summary": "顧客数の3年間の複利増加と、アルファベット26種類のコード組合せ数を比較する。",
       "explanation": "3年後の人数は8,000×1.2³=13,824人です。26種類の文字をn桁使うと26ⁿ通り。26²=676では足りず、26³=17,576なら13,824を収容できるので最小3桁です。",
       "choiceReasons": [
         "26³=17,576で必要人数13,824を上回り、最小です。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "毎年2割増は1.2倍です。現在人数に何回掛けるか確認します。",
+          "text": "『毎年2割増』は前年の人数×1.2です。現在8,000人から3年後なら、増加率を3回掛ける必要があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "必要人数と26²、26³、26⁴を比べ、初めて必要数以上になる桁を探します。",
+          "text": "A～Zの26種類をn桁使うと、コードは**26ⁿ通り**作れます。3年後の必要人数は8,000×1.2³人なので、この人数以上の通り数を確保します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "8,000×1.2³と26³を計算し、2桁では足りないことも確かめます。",
-          "revealsAnswer": true
+          "text": "まず8,000×1.2³を計算し、26²と26³がその人数以上になるか順に比べましょう。『少なくとも何桁』なので、最初に十分となる桁数を選びます。",
+          "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "20％増を一度しか掛けず、コードの桁数と組合せ数の指数関係を結び付けられない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『毎年2割増』は前年の人数×1.2です。現在8,000人から3年後なら、増加率を3回掛ける必要があります。",
+          "remainingWork": "複利人数を式で表す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "A～Zの26種類をn桁使うと、コードは**26ⁿ通り**作れます。3年後の必要人数は8,000×1.2³人なので、この人数以上の通り数を確保します。",
+          "remainingWork": "桁数と容量を数式にする",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": true,
-          "reason": ""
+          "newInformation": "まず8,000×1.2³を計算し、26²と26³がその人数以上になるか順に比べましょう。『少なくとも何桁』なので、最初に十分となる桁数を選びます。",
+          "remainingWork": "両方を計算し最小桁を選ぶ",
+          "revealsAnswer": false,
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q24.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: 5aab36099f2277c020869aa26d1577ac00d74d7d7914b587c4ac5d0c04438671。",
+        "context収録の公式正答 ア と作者の確認根拠: 原本は8000人、前年比2割増、3年後、英大文字26種。必要数13,824、26²=676、26³=17,576なので3桁。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "6caab5cc16588aec52eb17ce0d077737129cfc4260d18c97dba47b1f45d07dd8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q26",
-      "summary": "エ。トップから現在位置までの経路はパンくずリストです。",
+      "summary": "現在のWebページまでの階層経路表示と、サイト全体の一覧・移動用UIを区別する。",
       "explanation": "パンくずリストは「ホーム > 分類 > 現在のページ」のように階層上の位置を示します。サイト全体の構造図や主要ページへのメニューとは異なり、現在位置へ至る経路を表示します。",
       "choiceReasons": [
         "サイトマップはサイト全体のページ構成を一覧化します。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "現在のページに表示する情報です。サイト全体の一覧なのか、トップから現在位置までの経路なのか、示す範囲を確認します。",
+          "text": "『トップページから今見ているページまで』という経路を示すものです。サイトの全ページを一覧する図とは範囲が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "現在のページがサイトのどの階層にあるか、トップから順に示す部品を探します。",
+          "text": "表示例は「ホーム ＞ 製品 ＞ スマートフォン」のように、今いる場所を階層順で示します。スクロールバーは表示位置の移動、ナビゲーションバーは主要な移動先のメニューです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "その経路表示をパンくずリストと呼びます。",
+          "text": "このような階層経路を**パンくずリスト**と呼びます。グリム童話で道しるべとしてパンくずを置いた話に由来する名称です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "現在地の経路情報とサイト全体の構造を同じものとして考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『トップページから今見ているページまで』という経路を示すものです。サイトの全ページを一覧する図とは範囲が異なります。",
+          "remainingWork": "経路情報の対象範囲を知る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表示例は「ホーム ＞ 製品 ＞ スマートフォン」のように、今いる場所を階層順で示します。スクロールバーは表示位置の移動、ナビゲーションバーは主要な移動先のメニューです。",
+          "remainingWork": "階層経路とメニューの違いを考える",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "このような階層経路を**パンくずリスト**と呼びます。グリム童話で道しるべとしてパンくずを置いた話に由来する名称です。",
+          "remainingWork": "名称を選択肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q26.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: c638939b0d240040fc3f7119346028193c3409742163123ba19242e472845a15。",
+        "context収録の公式正答 エ と作者の確認根拠: 原本のサイトマップ、スクロールバー、ナビゲーションバー、パンくずリストの4肢を確認。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "d63bc39cb97faf6d60478241fda388905d7ec20528108595c809bc7d94bab8c6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q24",
-      "summary": "ウ。利用者による思考発話法と、専門家によるヒューリスティック評価法の組合せです。",
+      "summary": "ユーザビリティ評価手法を、利用者の操作・発話が必要か専門家だけで進められるかで分類する。",
       "explanation": "思考発話法では利用者が実際に操作しながら考えていることを話し、観察者が迷いなどを調べます。ヒューリスティック評価法は専門家が経験則や評価原則に照らして問題点を見つけます。回顧法も利用者に操作後の考えを尋ねる方法で、認知的ウォークスルーは通常専門家が操作過程を検討する方法です。",
       "choiceReasons": [
         "アンケートは利用者が参加しますが、回顧法も利用者の経験を尋ねるので専門家だけの手法ではありません。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "表の左欄は利用者参加、右欄は専門家だけです。各手法が誰から情報を得るかを考えます。",
+          "text": "表は左が『利用者が参加』、右が『専門家だけ』です。各手法で実際に操作・発話・回答する人を考え、左右両方が正しい組を選びます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "思考発話は利用者が操作中に考えを話す方法、回顧は利用者が後から振り返る方法です。どちらも利用者が必要です。",
+          "text": "思考発話法は利用者が操作しながら考えを口にする方法、回顧法は利用者が体験後に振り返って語る方法です。アンケートも利用者から情報を収集します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "思考発話法を左欄、専門家が評価原則に照らすヒューリスティック評価法を右欄に置く組合せを選びます。",
+          "text": "ヒューリスティック評価法は専門家が経験則に照らして検査します。認知的ウォークスルーも通常は専門家が利用者の操作過程を検討します。左が思考発話、右がヒューリスティック評価の組を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "思考発話法・回顧法と、認知的ウォークスルー・ヒューリスティック評価の実施者を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "表は左が『利用者が参加』、右が『専門家だけ』です。各手法で実際に操作・発話・回答する人を考え、左右両方が正しい組を選びます。",
+          "remainingWork": "評価対象の参加者を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "思考発話法は利用者が操作しながら考えを口にする方法、回顧法は利用者が体験後に振り返って語る方法です。アンケートも利用者から情報を収集します。",
+          "remainingWork": "利用者が必要な手法を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ヒューリスティック評価法は専門家が経験則に照らして検査します。認知的ウォークスルーも通常は専門家が利用者の操作過程を検討します。左が思考発話、右がヒューリスティック評価の組を選びます。",
+          "remainingWork": "専門家評価を照合して組合せを選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q24.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: 64fbf6425ce82f4a83bb77eb49b2942fad93d6690d2652f5ea98b89cc188ef1d。",
+        "context収録の公式正答 ウ と作者の確認根拠: 原本4組: アアンケート/回顧、イ回顧/思考発話、ウ思考発話/ヒューリスティック、エ認知的ウォークスルー/ヒューリスティック。ウが正答。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "16a78e781ccd82bed99ef78ff30a062b167d55276b3002e26ce5e00aea45f3a3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q25",
-      "summary": "ア。レイトレーシングは視点からの光線と物体の交点を求めて描画します。",
+      "summary": "レイトレーシングを走査線法、ペインタ法、Zバッファ法から描画処理の単位と奥行き判定で見分ける。",
       "explanation": "レイトレーシングは画素に対応する視線を追い、物体との交差を調べます。視点に最も近い交点を表面として、反射や透過などの性質を考慮して色を求めます。走査線ごとの面との交差計算、遠方からの重ね描き、深度をピクセルごとに保存する方法とは区別します。",
       "choiceReasons": [
         "視線と物体の交点を調べ、最も近い点を反射・透過も考慮して描く記述がレイトレーシングです。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補ごとに、処理する単位が「視線」「走査線の面」「物体の描画順」「ピクセルの距離保存」のどれか確認します。",
+          "text": "各肢は視線を1本ずつ追う、走査面で調べる、遠くから重ね描く、画素ごとの深度を保存する、という違いがあります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "レイは光線です。視点から一つの画素へ向かう線を延ばしたとき、どの物体の表面に最初に当たるか考えます。",
-          "revealsAnswer": false
+          "text": "レイトレーシングのレイ（ray）は光線です。画面の各画素から視線を伸ばし物体との交点を調べ、最も手前の面からの反射・透過も考慮して色を決めます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "視線と物体の交点を求め、視点に最も近い点を反射・透過も含めて計算する記述を選びます。",
+          "text": "スキャンライン法は走査線単位、ペインタ法は遠方から上書き、Zバッファ法は画素ごとの最小深度を保持します。**視線と物体の交点を追跡**する説明を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "視線の交点をたどる処理と、画素深度を保存する処理を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各肢は視線を1本ずつ追う、走査面で調べる、遠くから重ね描く、画素ごとの深度を保存する、という違いがあります。",
+          "remainingWork": "四つの手法の処理単位を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "レイトレーシングのレイ（ray）は光線です。画面の各画素から視線を伸ばし物体との交点を調べ、最も手前の面からの反射・透過も考慮して色を決めます。",
+          "remainingWork": "レイトレーシングの原理を適用する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
+        },
+        {
+          "newInformation": "スキャンライン法は走査線単位、ペインタ法は遠方から上書き、Zバッファ法は画素ごとの最小深度を保持します。**視線と物体の交点を追跡**する説明を選びます。",
+          "remainingWork": "他3方式を除外し正答を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q25.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: cb23ba3bdb22d2202a62c6f4f2a031bb1dc9c1ed426a4f4c191dfa2558e0f020。",
+        "context収録の公式正答 ア と作者の確認根拠: 原本ア視線の交点・反射透過、イ走査面、ウ遠方から重ね描き、エピクセル最小深度。アが正答。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "9f68fc93a407349b4e8e3f607a6b4eaf8cfad1ad3e23a1165ff6db866b5d6b20",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q25",
-      "summary": "イ。レンダリングは仮想世界の情報から表示画像を生成する処理です。",
+      "summary": "仮想世界から画面用の画像を生成するレンダリングを、認識・位置合わせ・物理シミュレーションと区別する。",
       "explanation": "仮想世界には物体の形状、位置、材質、光源、視点などの情報があります。レンダリングはこれらを使い、ディスプレイに表示できる画像へ変換します。\nセンサーから利用者の動きを得る処理、現実と仮想の座標を合わせる処理、物体の動きを計算する処理とは分けて考えます。",
       "choiceReasons": [
         "カメラや慣性センサーで現実の情報を認識する入力側の処理です。画像を生成するレンダリングではありません。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの処理は情報の認識、画像変換、座標合わせ、時間変化です。表示するための処理を探します。",
+          "text": "仮想世界では、3次元の物体・光源・視点を記録しても、それだけではディスプレイ上の各画素の色は決まりません。表示までの工程を考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "3次元の物体や光源の情報は、そのままでは画面の画素ではありません。視点に応じて画素の画像へ変える工程を考えます。",
+          "text": "レンダリングは形状・材質・光源・視点などの情報から、**画面に表示できる画像を計算する処理**です。カメラで実世界を認識することや位置合わせ、物理運動のシミュレーションとは別です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "仮想世界の情報からディスプレイへ描画できる画像を作る説明がレンダリングです。",
+          "text": "仮想世界の情報をディスプレイに描画可能な画像形式へ変換する記述を選んでください。センサ入力、座標の一致、時間とともに動かす処理ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "3D空間を動かす計算と、計算した結果を画像として描画する処理を同じと捉える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "仮想世界では、3次元の物体・光源・視点を記録しても、それだけではディスプレイ上の各画素の色は決まりません。表示までの工程を考えます。",
+          "remainingWork": "画素を生成する段階を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "レンダリングは形状・材質・光源・視点などの情報から、**画面に表示できる画像を計算する処理**です。カメラで実世界を認識することや位置合わせ、物理運動のシミュレーションとは別です。",
+          "remainingWork": "レンダリングの定義を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "仮想世界の情報をディスプレイに描画可能な画像形式へ変換する記述を選んでください。センサ入力、座標の一致、時間とともに動かす処理ではありません。",
+          "remainingWork": "選択肢と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q25.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: f15917d3e751e89d4f0444121abee6707a54399ebf13f6e764da55f702bf5cdd。",
+        "context収録の公式正答 イ と作者の確認根拠: 原本アセンサーの認識、イ仮想世界の表示画像生成、ウ座標合わせ、エ物理法則に基づく変化。イ。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q24",
     "baseVersion": 2,
     "baseLessonSHA256": "9d4400f03b4ebcb7457358f388e1dc5d799e17804758ec1bb05419a3ff9b05d5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q24",
-      "summary": "ウのハンバーガーメニュー。三本線のアイコンからメニューを開きます。",
+      "summary": "三本線のアイコンからメニューを呼び出すUIと、開閉・下方展開・ポップアップを区別する。",
       "explanation": "ハンバーガーメニューは、三本の横線のアイコンを選ぶと隠れていたナビゲーション項目が現れる仕組みです。画面が小さい場合に、常時表示の面積を節約できます。\n折り畳む階層や表示の出方を指す他の名称とは、三本線という目印で区別します。",
       "choiceReasons": [
         "アコーディオンは見出しを選ぶとその部分を展開・折り畳む形式です。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文が挙げる入口は「三本線」です。表示項目が上下に伸びるかどうかより、入口の形を手掛かりにします。",
+          "text": "設問は三本の横線を押すとメニューが開くと述べています。メニューがどう展開するかより、**入口アイコンの形**に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "三本の横線を、上下のパンと中央の具に見立てた呼び名があります。",
+          "text": "三本の横線が上下のパンと中央の具に見えることに由来した名称があります。アコーディオンは項目の展開・折畳み、ドロップダウンは選択肢が下に現れる形式です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "見出しごとの開閉、一覧の下への展開、一時的な浮上表示をそれぞれ思い浮かべ、三本線の呼び名と区別しましょう。",
-          "revealsAnswer": false
+          "text": "三本線のアイコンから開くものを**ハンバーガーメニュー**と呼びます。ポップアップは表示方法を指し、三本線という目印の名称とは違います。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "三本線のアイコンの名称を知らず、ドロップダウン等の動きの名称だけで判断する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問は三本の横線を押すとメニューが開くと述べています。メニューがどう展開するかより、**入口アイコンの形**に注目します。",
+          "remainingWork": "図形的な手掛かりを確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "三本の横線が上下のパンと中央の具に見えることに由来した名称があります。アコーディオンは項目の展開・折畳み、ドロップダウンは選択肢が下に現れる形式です。",
+          "remainingWork": "他のUI名称と区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "三本線のアイコンから開くものを**ハンバーガーメニュー**と呼びます。ポップアップは表示方法を指し、三本線という目印の名称とは違います。",
+          "remainingWork": "正答の名称を確定する",
+          "revealsAnswer": true,
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q24.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: 27db97f6e118f3adf9db3c58fb93547fc106283c0c142d7b6dabcff754621118。",
+        "context収録の公式正答 ウ と作者の確認根拠: 原本アアコーディオン、イドロップダウン、ウハンバーガー、エポップアップ。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "ae905bb9089aab78af00a0cb8733b2f67056c80e80a8e9eaa728b6725cf27a9b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q25",
-      "summary": "ウの25マイクロ秒。最高周波数20kHzの2倍で標本化します。",
+      "summary": "標本化定理で必要な標本化周波数を求め、その逆数から最大サンプリング周期を計算する。",
       "explanation": "標本化定理では、最高周波数fの信号を再現するための標本化周波数は少なくとも2fです。この信号の最高周波数は20kHzなので、最低40kHzで標本化します。\n周期は周波数の逆数だから、最大周期は1/40000秒=25マイクロ秒です。周期が長すぎると標本化周波数が不足します。",
       "choiceReasons": [
         "2.5マイクロ秒は400kHzの標本化に相当し、使えますが最大周期ではありません。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "帯域の上端20kHzが計算に使う最高周波数です。0〜20の幅をさらに足す必要はありません。",
+          "text": "原本のオーディオ信号の最高周波数は20kHzです。標本化定理では**最高周波数の少なくとも2倍**で標本を取る必要があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "標本化定理の2倍を20kHzへ適用し、必要最低の標本化周波数を出します。",
+          "text": "最低の標本化周波数は2×20kHzです。求めるのは周波数ではなく**最大周期**なので、周波数が最小となる境界でT=1/fを計算します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "周期=1/周波数を使い、秒を1000000倍してマイクロ秒へ直しましょう。最大周期なので最小の必要周波数を使います。",
+          "text": "2×20,000回/秒の逆数が1回の周期（秒）です。これに10⁶を掛けてマイクロ秒に直し、候補から選んでください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "20kHzをそのまま標本化周波数にする、周波数と周期を逆に考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原本のオーディオ信号の最高周波数は20kHzです。標本化定理では**最高周波数の少なくとも2倍**で標本を取る必要があります。",
+          "remainingWork": "最高周波数を読み取る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "最低の標本化周波数は2×20kHzです。求めるのは周波数ではなく**最大周期**なので、周波数が最小となる境界でT=1/fを計算します。",
+          "remainingWork": "2倍と周期の逆数を使う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "2×20,000回/秒の逆数が1回の周期（秒）です。これに10⁶を掛けてマイクロ秒に直し、候補から選んでください。",
+          "remainingWork": "秒をμ秒へ換算して肢を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q25.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: f270d412cdb653ba651d8cd4202d5686209f0608d8ee59f1f96372f2748e9f8f。",
+        "context収録の公式正答 ウ と作者の確認根拠: 原本0～20kHz。必要f≧40kHz、最大周期1/40,000秒=25μs。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "6f992f9fa8142e0af438abf43a51d127b06f16ae38ec08c4cbcb252c99a99898",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q25",
-      "summary": "イ。横方向へ順番に画像を切り替える要素はカルーセルです。",
+      "summary": "画像を固定領域内で横方向へ切り替えて見せるUIを、タブ・アコーディオン・モーダルと区別する。",
       "explanation": "カルーセルは、固定された表示領域に複数の画像やカードを並べ、矢印やスワイプ操作で順に切り替えるUIです。図の左右の矢印と現在位置を表す点が、その操作を示しています。\nアコーディオンは項目の展開・折畳み、タブは見出しによる内容の切替、モーダルウィンドウは前面の画面を操作して閉じるまで背景への操作を制限する要素です。",
       "choiceReasons": [
         "アコーディオンは内容を展開したり折り畳んだりする要素です。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図の左右の三角矢印と、下の五つの点を見ます。内容を広げるのではなく、表示する位置を前後へ送る仕組みです。",
+          "text": "原図には左右の三角矢印と、現在位置を示す5個の点があります。画像を前後へ送る操作であり、コンテンツを上下に開閉するものではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "タブは見出しを選び、アコーディオンは見出しの下を開閉します。今回の図は複数画像を横へ送り出す操作です。",
+          "text": "アコーディオンは内容を折り畳み・展開し、タブは見出しで表示先を切り替えます。原図は固定領域の複数画像を矢印やスワイプで**順番に横へ送る**動きです。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "固定領域で画像やカードを順に横送りするUIをカルーセルと呼びます。イです。",
+          "text": "この形式を**カルーセル**と呼びます。モーダルは前面に開くウィンドウなので、左右の画像送りとは異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "画像の横送りとタブによる画面切替を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原図には左右の三角矢印と、現在位置を示す5個の点があります。画像を前後へ送る操作であり、コンテンツを上下に開閉するものではありません。",
+          "remainingWork": "図に示された操作を確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アコーディオンは内容を折り畳み・展開し、タブは見出しで表示先を切り替えます。原図は固定領域の複数画像を矢印やスワイプで**順番に横へ送る**動きです。",
+          "remainingWork": "UIの動作の差を比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "この形式を**カルーセル**と呼びます。モーダルは前面に開くウィンドウなので、左右の画像送りとは異なります。",
+          "remainingWork": "カルーセルを肢に対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本の四肢と前段の説明を合わせると正答内容が一意に確定する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q25.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: 994401e3b8e5ecab9cd07a20d571c539e1f63c6896ce97e2faa3a24ec11f8ca4。",
+        "context収録の公式正答 イ と作者の確認根拠: 原図の左/右矢印、画像1/2/3、位置ドットを実際に確認。イ=カルーセル。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q26",
     "baseVersion": 2,
     "baseLessonSHA256": "156fd05ec08d9e40c59489a6215cad0243b783c33f8e18846b87fe2b0ee05320",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch12-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q26",
-      "summary": "エ。必要な帯域幅は約350Mビット/秒です。",
+      "summary": "無圧縮動画の1秒当たりデータ量から最低限必要な通信帯域を計算する。",
       "explanation": "無圧縮なので、一画素の24ビットを画素数とフレーム数にそのまま掛けます。一フレームは800×600×24=11,520,000ビットです。\n毎秒30フレームでは11,520,000×30=345,600,000ビット/秒=345.6Mビット/秒となり、約350Mビット/秒です。24ビットは既にビット単位なので8倍や8分の1にする必要はありません。",
       "choiceReasons": [
         "350kビット/秒は必要な345.6Mビット/秒の約1/1000で、桁が不足します。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "まず一枚の画素数800×600を求めます。「24ビットカラー」は一画素当たりの量です。",
+          "text": "動画は800×600画素、各画素は24ビットです。まず**1フレームのビット数＝横画素数×縦画素数×1画素のビット数**で求めます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一フレームの量は800×600×24ビットです。圧縮しない条件なので、この量を削減する係数は掛けません。",
+          "text": "1秒当たり30フレームなので、**帯域（ビット/秒）＝800×600×24×30**です。圧縮しない条件なので、圧縮率を掛ける必要はありません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "一フレームは11,520,000ビット。毎秒30枚なので30倍し、最後に10⁶で割ってMビット/秒へ直しましょう。",
+          "text": "1フレームは11,520,000ビットです。これを30倍し、Mビット/秒では10⁶で割ります。最終結果の桁と単位を比較してください。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "画素数と1画素のビット数・フレーム数を掛け忘れる、あるいはビットをバイトに誤変換する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "動画は800×600画素、各画素は24ビットです。まず**1フレームのビット数＝横画素数×縦画素数×1画素のビット数**で求めます。",
+          "remainingWork": "1フレーム当たりのデータ量を作る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1秒当たり30フレームなので、**帯域（ビット/秒）＝800×600×24×30**です。圧縮しない条件なので、圧縮率を掛ける必要はありません。",
+          "remainingWork": "fpsで毎秒量にする",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1フレームは11,520,000ビットです。これを30倍し、Mビット/秒では10⁶で割ります。最終結果の桁と単位を比較してください。",
+          "remainingWork": "Mbit/sへ換算し選択肢を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・手順を渡すが演算または四肢との照合が本人に残る。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q26.webp を取得し実際に表示して設問・4肢と図表を目視照合。台帳原本SHA256: d6def5ce1b12e91f715001ede6c60cfe1b642bca83eb335f44c8cd6ff41c2086。",
+        "context収録の公式正答 エ と作者の確認根拠: 原本800×600、24bit、30fps、無圧縮。計算は345,600,000bit/s≒350Mbit/s。",
+        "IPA公式解答PDFの独立照合、第三者レビュー、公開データへの反映は未実施。"
+      ]
     }
   }
 ]
