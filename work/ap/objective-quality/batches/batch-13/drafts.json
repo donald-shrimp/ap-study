@@ -693,11 +693,11 @@
     "id": "r03h-q30",
     "baseVersion": 2,
     "baseLessonSHA256": "529be67809856cac3080eda4b4d132c58c5896731216a0d8d4c74b37409be766",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q30",
-      "summary": "イ。行数や値の分布などの統計情報を使います。",
+      "summary": "コストベースのSQL最適化が実行方法を比較するとき、何のデータを参照して処理コストを推定するかを問う。",
       "explanation": "コストベースのオプティマイザは、表の件数、列の値の分布、索引の状況などから、走査や結合順序ごとの処理量を見積もり、低コストな実行計画を選びます。この推定に統計情報が必要です。",
       "choiceReasons": [
         "分析用の次元表という表の種類で、一般のコスト推定に必要な情報ではありません。",
@@ -709,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "一条件で100万行中何行が残るか分かると、索引か全表走査かを選べる例を考えます。",
+          "text": "SQL実行には**索引を使う**方法や**表全体を読む**方法などがあります。どちらの処理量が小さいかを選ぶための材料が必要です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "行数や条件に合う割合を見積もるための表・列の情報を探します。",
+          "text": "例えば100万行の表から10行を探す場合と90万行を探す場合では、適した方法が変わります。オプティマイザは**表の行数・値の分布・索引の状況**などから取得行数と処理量を推定します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "件数や値の分布をまとめた統計情報が必要です。",
+          "text": "その見積りに使う行数や値の分布をまとめたものが**統計情報**です。待ちグラフはデッドロック、ログは回復、ディメンジョン表は分析軸を表すため、用途が違います。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『コストベース』が金額やログの意味だと誤解し、検索件数の見積りに何が必要か分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "SQL実行には**索引を使う**方法や**表全体を読む**方法などがあります。どちらの処理量が小さいかを選ぶための材料が必要です。",
+          "remainingWork": "実行計画の候補と処理量の違いを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば100万行の表から10行を探す場合と90万行を探す場合では、適した方法が変わります。オプティマイザは**表の行数・値の分布・索引の状況**などから取得行数と処理量を推定します。",
+          "remainingWork": "表の規模と分布を把握する必要性を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "その見積りに使う行数や値の分布をまとめたものが**統計情報**です。待ちグラフはデッドロック、ログは回復、ディメンジョン表は分析軸を表すため、用途が違います。",
+          "remainingWork": "必要な情報の名称を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q30.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: 24b5b7d31fac7534cf40a233d091131f75683f8c84c75685b4fbfc875a878b79。",
+        "contextに収録された正答イについて原図・選択肢から再確認。根拠: 原本ア次元表、イ統計情報、ウ待ちグラフ、エログファイル。コスト推定には表行数・分布を使う。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r06h-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "ed711edffdb30d4ba99fd6a712001eb4b15395f269a0d3f1b4c64ebd40cf4f37",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q27",
-      "summary": "エ。コミット済みの更新をログから再実行するロールフォワードを使います。",
+      "summary": "チェックポイント後にコミットした更新を、ログでどのように障害復旧するか判断する。",
       "explanation": "チェックポイント後にTはコミットしています。更新が確定していても、障害の直前に更新ページが全てディスクへ書かれたとは限りません。WALで先に保存されたログを使い、確定済みの更新を再適用します。\nこのREDOを行う復旧がロールフォワードです。未完了の更新を取り消すロールバックは、今回のTを終了直後の状態へ戻す目的と反対です。",
       "choiceReasons": [
         "アの2相ロックはトランザクションの同時実行制御で、ログから更新を復旧する技法ではありません。",
@@ -771,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Tは障害前に「コミット済み」です。その更新を残す必要があるか、取り消す必要があるかを決めます。",
+          "text": "トランザクションTは**チェックポイント後にコミット済み**です。障害後にもその更新は残すべきなので、更新を取り消す処理とは区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "WALではデータページを書き出す前にログを保存します。ページに未反映の確定更新は、ログから再適用できます。",
+          "text": "WAL（Write-Ahead Logging）は更新したデータページの書出しより先にログを保存します。したがって確定更新がディスク上のページに未反映でも、**ログの更新後情報を再適用**して復元できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ログを使い時間を前へ進めて確定更新を反映する技法を選びます。更新の取消しを意味するロールバックとは逆です。",
+          "text": "コミット済みの更新をログから再適用する復旧を**REDO（ロールフォワード）**と呼びます。ロールバックは未確定の更新を取消し、2相ロックは同時実行制御です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "コミット済みでもディスク未反映の可能性を知らず、ロールバックとロールフォワードを逆にする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "トランザクションTは**チェックポイント後にコミット済み**です。障害後にもその更新は残すべきなので、更新を取り消す処理とは区別します。",
+          "remainingWork": "Tがコミット済みで更新を残す必要性",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "WAL（Write-Ahead Logging）は更新したデータページの書出しより先にログを保存します。したがって確定更新がディスク上のページに未反映でも、**ログの更新後情報を再適用**して復元できます。",
+          "remainingWork": "WALと更新後情報の再適用の仕組み",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "コミット済みの更新をログから再適用する復旧を**REDO（ロールフォワード）**と呼びます。ロールバックは未確定の更新を取消し、2相ロックは同時実行制御です。",
+          "remainingWork": "ロールフォワードを名指して他方式と区別",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q27.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: 64f3b0ac91e91304a683c3e46df2e6382c3e353ec451d129b485f02bb7cfb43c。",
+        "contextに収録された正答エについて原図・選択肢から再確認。根拠: 原本はWAL・チェックポイント後Tコミット・その後システム障害。ロールフォワードが更新を再現。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r06h-q28",
     "baseVersion": 2,
     "baseLessonSHA256": "fc5a1312626ebf1df637f3c39ac4af90e67febe0e32885537c358b4f1d971785",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q28",
-      "summary": "ウ。売上などの取引データを格納する中心の表がファクトテーブルです。",
+      "summary": "スタースキーマにおける分析対象の取引データと、その属性・集計結果を保持する表を区別する。",
       "explanation": "スタースキーマは、中心のファクトテーブルを、商品・店舗・日付などのディメンジョンテーブルが囲む構成です。ファクトには売上額・数量などの測定値と、各ディメンジョンへのキーを保存します。\n分析対象のトランザクションデータそのものを置くのはファクトテーブルです。ディメンジョンは分析の切り口、サマリは集計結果、ルックアップはコードなどの参照情報を扱います。",
       "choiceReasons": [
         "アのサマリテーブルは集計結果を保存します。取引データの中心表という役割とは異なります。",
@@ -833,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "一件の売上を「商品・店舗・日付・数量・金額」で記録するとき、取引の数値と分析軸の説明を分けます。",
+          "text": "売上分析を例に、**何が何個・いくら売れたか**という取引の数値と、**いつ・どこで・何を**という切り口を分けて考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "中心の表に数量・金額と商品などへのキーを置き、周りの表に商品名・店舗名などを置きます。",
-          "revealsAnswer": false
+          "text": "スタースキーマは中心に売上数量・金額などの測定値と商品・日付などへの参照キーを置き、周囲に商品名・店舗名などの分析軸の属性を持つ表を配置します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "中心に置く取引の事実を英語でfactと呼びます。該当するテーブル名を選びましょう。",
+          "text": "取引の**事実（fact）**を格納する中心表が**ファクトテーブル**です。ディメンジョンは分析軸、サマリは集計済みの値、ルックアップはコードなどの参照表です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ディメンジョンとファクトの役割を逆に捉え、『トランザクションデータ』がどこにあるか分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "売上分析を例に、**何が何個・いくら売れたか**という取引の数値と、**いつ・どこで・何を**という切り口を分けて考えます。",
+          "remainingWork": "数値の事実と分析軸の違い",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "スタースキーマは中心に売上数量・金額などの測定値と商品・日付などへの参照キーを置き、周囲に商品名・店舗名などの分析軸の属性を持つ表を配置します。",
+          "remainingWork": "中心表と周囲表に入れるデータ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
+        },
+        {
+          "newInformation": "取引の**事実（fact）**を格納する中心表が**ファクトテーブル**です。ディメンジョンは分析軸、サマリは集計済みの値、ルックアップはコードなどの参照表です。",
+          "remainingWork": "ファクト名称と誤答の用途",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q28.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: 06032607c2e6b8bb686160de4368a9bb17855cff22a97b6808440abd9e8abdec。",
+        "contextに収録された正答ウについて原図・選択肢から再確認。根拠: 原本のスタースキーマの分析対象のトランザクションデータはウ=ファクトテーブル。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r06h-q25",
     "baseVersion": 2,
     "baseLessonSHA256": "987bf8a9e3e2c25304368c71b93131d0ad5bf141d103d9574fcaf5207d6e795a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q25",
-      "summary": "ア。処理をDBMS内でまとめて実行するため、アプリケーションとの通信を減らせます。",
+      "summary": "DBMS内で一連のSQLをまとめて実行するストアドプロシージャの直接的な利点を問う。",
       "explanation": "ストアドプロシージャはDBMS側に保存した一連の処理です。アプリケーションがSQLを何度も送り、途中結果を受け取って次の要求を送る代わりに、プロシージャを呼び出してDBMS内部で処理できます。\nこれによりネットワーク往復や中間データの通信を減らせます。ただし内部で行うSQLやデータアクセスがなくなるわけではなく、実行計画・バッファ・ディスクI/Oが必ず減るとはいえません。",
       "choiceReasons": [
         "アは処理をサーバ内で実行することで、要求・中間結果の通信を減らせる利点です。",
@@ -895,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "アプリがSQLを三回送る構成と、一回の呼出しでDBMS内で三処理する構成を比べます。",
+          "text": "クライアントが`SQL1→結果受信→SQL2→結果受信→SQL3`と通信する場合と、**DBMSに登録した一連の処理を一度に呼ぶ**場合を比較します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "途中の処理結果をネットワークでアプリへ戻さず、DBMS内で次の処理へ渡せます。",
+          "text": "ストアドプロシージャはサーバ側で複数の処理を連続実行でき、途中結果を毎回クライアントへ送受信しなくて済みます。したがって**クライアントとDBMSのネットワーク往復**を減らせます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "この違いで直接減るのはアプリとDBMSの間の通信です。DBMS内の処理やディスク読書きまで必ず減るかは別に考えます。",
+          "text": "確実に減らせるのはアプリケーションとDBMS間の**通信量**です。DBMS内のSQL実行計画、作業バッファ、ディスクアクセスが必ず減るわけではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SQLの一括呼出しで実行計画数やディスクI/Oも必ず減ると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "クライアントが`SQL1→結果受信→SQL2→結果受信→SQL3`と通信する場合と、**DBMSに登録した一連の処理を一度に呼ぶ**場合を比較します。",
+          "remainingWork": "逐次SQLと一括呼出しを比較",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ストアドプロシージャはサーバ側で複数の処理を連続実行でき、途中結果を毎回クライアントへ送受信しなくて済みます。したがって**クライアントとDBMSのネットワーク往復**を減らせます。",
+          "remainingWork": "ネットワーク往復が減る因果を学ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "確実に減らせるのはアプリケーションとDBMS間の**通信量**です。DBMS内のSQL実行計画、作業バッファ、ディスクアクセスが必ず減るわけではありません。",
+          "remainingWork": "通信量の肢を特定しその他の断定を除く",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q25.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: cc87b0739fad1cb9e0a0690c3e765c00e4cd0a972296adfe3da18892845dbc1a。",
+        "contextに収録された正答アについて原図・選択肢から再確認。根拠: 原本ア通信量減少、イ実行計画数、ウバッファ数、エディスクI/O。直接の利点はア。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r05h-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "39bf6d3e244218e4a79ccb83bca94f90494830d8e9a750068dee9eeae0e962e3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q27",
-      "summary": "誤りはエです。データ変更で自動起動する処理はトリガーです。",
+      "summary": "ストアドプロシージャの明示的呼出しと、データ変更で自動起動するトリガーを区別して誤りを選ぶ。",
       "explanation": "ストアドプロシージャは複数の処理をDBMS側に定義し、クライアントからCALLなどで明示的に呼び出す手続です。処理を一括でサーバ側に実行するため、SQLを一文ずつ送る必要や通信量を減らせます。一方、更新などのイベントで自動起動するのはトリガーなので、エが誤った説明です。",
       "choiceReasons": [
         "サーバ側で一連の処理を実行できるため、個々のSQLを逐次送る必要を減らせます。",
@@ -957,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "この問は「誤っているもの」を選びます。呼出し方法と通信の記述を比べます。",
+          "text": "問われているのは**誤っているもの**です。処理が始まる契機が、アプリケーションからの明示的な呼出しなのか、データ更新というイベントなのかに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一連のSQLをDBMSに登録してクライアントが呼び出すことと、変更イベントを契機に起動することを区別します。",
-          "revealsAnswer": false
+          "text": "ストアドプロシージャはDBMS側に定義された処理を`CALL`などで**明示的に呼び出す**仕組みです。複数SQLを一括実行でき、通信を減らせるため、これらを述べた肢は正しい説明です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "CALLでの明示的な実行がストアドプロシージャ、データ変更を契機にした自動実行がトリガーです。",
+          "text": "INSERT・UPDATEなどデータ変更の**イベントに応じて自動起動**する仕組みは**トリガー**です。ストアドプロシージャの説明として、この起動方法を述べた肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『誤っている』を読み落とす、またはプロシージャも変更時に自動実行されると思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "問われているのは**誤っているもの**です。処理が始まる契機が、アプリケーションからの明示的な呼出しなのか、データ更新というイベントなのかに注目します。",
+          "remainingWork": "誤り選択と起動契機の二つの着眼点",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ストアドプロシージャはDBMS側に定義された処理を`CALL`などで**明示的に呼び出す**仕組みです。複数SQLを一括実行でき、通信を減らせるため、これらを述べた肢は正しい説明です。",
+          "remainingWork": "CALLと一括実行・通信削減の役割",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
+        },
+        {
+          "newInformation": "INSERT・UPDATEなどデータ変更の**イベントに応じて自動起動**する仕組みは**トリガー**です。ストアドプロシージャの説明として、この起動方法を述べた肢を選びます。",
+          "remainingWork": "トリガーという名称と誤答肢の特定",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q27.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: a4dcfa811167f3a2c5e98e09a5e8af40e27d1785c44ab8be6d24e3d22105f116。",
+        "contextに収録された正答エについて原図・選択肢から再確認。根拠: 原本ア逐次送信不要、イCALL、ウ通信減、エ変更時の自動起動=トリガーで誤り。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r06a-q31",
     "baseVersion": 3,
     "baseLessonSHA256": "0f8d2e458840c81b2a429226e3059751e561abc25423dced2ec722be27f32c7d",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q31",
-      "summary": "イ。チェックポイントではバッファの内容を記憶装置へ反映し、回復の範囲を短くします。",
+      "summary": "DBMSのチェックポイントを、制約検査・セーブポイント・2相コミットの時点と区別する。",
       "explanation": "DBMSは変更内容を一時的にバッファへ保持します。チェックポイントでそれを二次記憶へ書き出して回復の基準とすることで、その時点までにコミット済みの更新は反映済みとなり、障害回復時にそれらの再実行を省けます。\n制約の検査タイミング、トランザクション途中のセーブポイント、分散トランザクションの確定判断とは異なります。",
       "choiceReasons": [
         "これは制約を即時に検査するか、コミットまで遅延するかという指定です。",
@@ -1019,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補が扱う対象を見ます。制約の検査、バッファの書出し、途中への取消し、分散処理の確定判断が並んでいます。",
+          "text": "DBMSが更新を一時的に主記憶のバッファへ持つ場合、障害で主記憶の内容が失われることがあります。**回復のためにディスクへ反映した基準**となる時点を考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "障害で主記憶のバッファを失ったとき、記憶装置に反映済みのコミット更新まで再実行する必要はありません。書出しの基準点を考えます。",
+          "text": "この設問でのチェックポイントは**DBバッファ内容を二次記憶へ書き出す時点**です。それ以前に確定・反映された更新は障害復旧で再実行する必要がなく、ログからの回復範囲を短くできます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "バッファを二次記憶へ書き出し、そこまでのコミット済みトランザクションの回復を省けるイが該当します。",
+          "text": "制約の検査を遅らせる時点ではなく、途中への戻り先は**セーブポイント**、参加者の確定可否判断は**2相コミット**です。バッファの書出しと回復省略を述べる説明が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "チェックポイントを処理途中に戻る位置や整合性チェックの意味で捉え、障害回復とのつながりが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "DBMSが更新を一時的に主記憶のバッファへ持つ場合、障害で主記憶の内容が失われることがあります。**回復のためにディスクへ反映した基準**となる時点を考えます。",
+          "remainingWork": "障害回復と主記憶バッファの関係",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "この設問でのチェックポイントは**DBバッファ内容を二次記憶へ書き出す時点**です。それ以前に確定・反映された更新は障害復旧で再実行する必要がなく、ログからの回復範囲を短くできます。",
+          "remainingWork": "原本が想定するチェックポイントと回復短縮",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "制約の検査を遅らせる時点ではなく、途中への戻り先は**セーブポイント**、参加者の確定可否判断は**2相コミット**です。バッファの書出しと回復省略を述べる説明が該当します。",
+          "remainingWork": "他3肢との対比による一意の選択",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q31.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: a7dd933953d620bcfe555f485bb74ddbff8d06a30763e967a88e08bdcacb698d。",
+        "contextに収録された正答イについて原図・選択肢から再確認。根拠: 原本イはチェックポイントでバッファ二次記憶書出し・その時点までのコミット更新は回復不要。ア制約検査、ウセーブポイント、エ2相コミット。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r04a-q29",
     "baseVersion": 2,
     "baseLessonSHA256": "f612c137295fe1db7f10c4dc210ffaf27a4a4162ee60c695acd011117a977fa0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q29",
-      "summary": "ウ。ロールフォワードの対象はT4とT5です。",
+      "summary": "タイムライン上の各トランザクションについて、チェックポイントと障害時点からREDO対象を特定する。",
       "explanation": "ロールフォワードはチェックポイント以降にコミットした更新をログから再実行します。T4は開始が以前でもコミットが以後なので対象、T5も対象です。T1は既にチェックポイントに反映されています。T2,T3は障害時に未コミットなので取り消す対象です。",
       "choiceReasons": [
         "T1はチェックポイントより前にコミット済みで、再実行する必要がありません。",
@@ -1081,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各線の開始よりも「コミット」の位置に注目し、二本の縦線との前後を比べます。",
+          "text": "図の縦破線は左が**チェックポイント**、右が**システム障害**です。開始位置ではなく、まず各Tが**どこでコミットしたか**に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "チェックポイントに未反映で、障害前に確定した更新はログから再実行します。",
+          "text": "ロールフォワードは、チェックポイントまでの保存状態から、**その後にコミットした更新**をログで再適用します。障害までにコミットしなかったTは確定処理として再適用しません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "T4とT5のコミットはどちらも二本の縦線の間にあります。",
+          "text": "T1はチェックポイント前にコミット済み、T2・T3は障害時に未コミットです。**T4とT5はチェックポイント以後にコミット済み**なので、両方含む選択肢を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "開始時刻だけで対象を選び、チェックポイント前開始・後コミットのT4を漏らす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図の縦破線は左が**チェックポイント**、右が**システム障害**です。開始位置ではなく、まず各Tが**どこでコミットしたか**に注目します。",
+          "remainingWork": "チェックポイント・障害・コミットの場所",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ロールフォワードは、チェックポイントまでの保存状態から、**その後にコミットした更新**をログで再適用します。障害までにコミットしなかったTは確定処理として再適用しません。",
+          "remainingWork": "REDOと未コミット取消しの違い",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "T1はチェックポイント前にコミット済み、T2・T3は障害時に未コミットです。**T4とT5はチェックポイント以後にコミット済み**なので、両方含む選択肢を選びます。",
+          "remainingWork": "T1～T5の判定と正答の組合せ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q29.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: f45e11f30327603d47a5048bcff615898b01cba0b935615c2e6d39efb5e34af6。",
+        "contextに収録された正答ウについて原図・選択肢から再確認。根拠: 原図T1コミットはcheckpoint前、T2/T3は障害まで未コミット、T4はcheckpoint前開始後コミット、T5はcheckpoint後開始後コミット。ウが正答。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r03a-q27",
     "baseVersion": 2,
     "baseLessonSHA256": "550ccf76b7cf6c3f8a073a57822c090445a608040ee73a01dfa592a06043ca29",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q27",
-      "summary": "イ。チェックポイント以前に終了した取引はシステム障害の回復対象にしません。",
+      "summary": "システム障害と媒体障害で、チェックポイント・ログの更新前／更新後情報を使い分ける。",
       "explanation": "チェックポイントでは、それまでに確定した更新がデータベースへ反映された状態を回復の基準にします。媒体障害以外でシステムが停止しても、チェックポイント以前に終了したトランザクションは回復作業が不要です。媒体障害はバックアップを復元して更新後情報でREDOし、更新中に異常終了した取引は更新前情報でUNDOします。",
       "choiceReasons": [
         "同時更新の矛盾を防ぐのはロックなどの排他制御で、データのブロック化ではありません。",
@@ -1143,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "媒体が壊れた場合と、媒体は残ってシステムだけ停止した場合を分け、チェックポイント前に確定した更新を考えます。",
+          "text": "障害を『ディスク媒体も失った』場合と『媒体は残るがシステムが止まった』場合に分けます。**確定済み更新を再適用するのか、未完了更新を取り消すのか**も区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "バックアップに更新を足すなら更新後情報、途中の更新を取り消すなら更新前情報を使います。チェックポイントは確定更新を反映した回復の基準です。",
+          "text": "媒体障害でバックアップから戻した後は**更新後情報を使うREDO**で確定更新を再現し、途中終了の未確定更新には**更新前情報によるUNDO**を使います。同時更新の矛盾を防ぐのはブロック化でなくロックなどの排他制御です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "媒体障害以外なら、チェックポイント以前に終了したトランザクションの回復作業は不要です。",
+          "text": "媒体が残るシステム障害では、**チェックポイント以前に完了してディスクへ反映された取引**は回復をやり直す必要がありません。四肢をこの条件で判断します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "媒体復旧でも更新前情報を使う、未完了の更新も更新後情報で再実行すると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "障害を『ディスク媒体も失った』場合と『媒体は残るがシステムが止まった』場合に分けます。**確定済み更新を再適用するのか、未完了更新を取り消すのか**も区別します。",
+          "remainingWork": "媒体の生存と更新確定状態を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "媒体障害でバックアップから戻した後は**更新後情報を使うREDO**で確定更新を再現し、途中終了の未確定更新には**更新前情報によるUNDO**を使います。同時更新の矛盾を防ぐのはブロック化でなくロックなどの排他制御です。",
+          "remainingWork": "REDO/UNDO/排他制御の正しい役割",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "媒体が残るシステム障害では、**チェックポイント以前に完了してディスクへ反映された取引**は回復をやり直す必要がありません。四肢をこの条件で判断します。",
+          "remainingWork": "チェックポイント以前の確定更新とシステム障害の扱い",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q27.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: e21deff3e69a171cf6782d649d9c364a8c7a78efbc364bf24ad6bed056df8e24。",
+        "contextに収録された正答イについて原図・選択肢から再確認。根拠: 原本イ:媒体障害以外の停止ではチェックポイント前終了取引は再実行不要。ウの媒体復旧は更新後、エ未完了取消しは更新前。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r04h-q30",
     "baseVersion": 2,
     "baseLessonSHA256": "a80a0e5326cb3578c864f49b1364a2255815de48dc5c6fe12416e339614a7858",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q30",
-      "summary": "ア。データマイニングは蓄積データから隠れた規則や相関を発見します。",
+      "summary": "データマイニングを、データマート・データモデル・レプリケーションと目的の違いで判定する。",
       "explanation": "データマイニングでは大量のデータを分析し、単純な検索では見えにくい規則性や関連性を見つけます。例えば同時に購入されやすい商品群を探す分析です。用途別のデータ抽出、情報構造の定義、データの複製は、それぞれ別の技術や概念です。",
       "choiceReasons": [
         "分析によって隠れた規則や相関を発見することがデータマイニングです。",
@@ -1205,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補の動詞を「分析する」「切り出す」「規定する」「複製する」に分けます。何を新たに得る操作か考えます。",
+          "text": "各肢の動詞を比べます。**隠れた関係を発見する／用途別に切り出す／構造を定義する／複製する**では、目標が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "商品の購入履歴から、よく一緒に買われる組合せを探す場面を想像します。既知の条件で検索する場合と違い、規則自体を見つけます。",
+          "text": "例えば購買履歴を分析して『商品Aを買う人は商品Bも買いやすい』という**事前に知らなかった規則**を発見するのがデータマイニングです。既知の条件での検索だけとは違います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "蓄積データを分析して隠れた規則や相関を見つける候補がデータマイニングです。",
+          "text": "用途・部門ごとに切り出すのはデータマート、データ構造の枠組みはデータモデル、複製はレプリケーションです。隠れた規則や相関を**分析で発見する**記述が該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "大量データに関する操作をすべてデータマイニングだと考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各肢の動詞を比べます。**隠れた関係を発見する／用途別に切り出す／構造を定義する／複製する**では、目標が異なります。",
+          "remainingWork": "各肢の処理目的を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば購買履歴を分析して『商品Aを買う人は商品Bも買いやすい』という**事前に知らなかった規則**を発見するのがデータマイニングです。既知の条件での検索だけとは違います。",
+          "remainingWork": "規則発見というデータマイニングの具体例",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "用途・部門ごとに切り出すのはデータマート、データ構造の枠組みはデータモデル、複製はレプリケーションです。隠れた規則や相関を**分析で発見する**記述が該当します。",
+          "remainingWork": "誤答の技術名と正答記述の対応",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q30.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: 596ee4b4280890185f50bbf3568a2fb94eec1ca2f776d32260691e6e7636d332。",
+        "contextに収録された正答アについて原図・選択肢から再確認。根拠: 原本ア規則発見、イデータマート、ウデータモデル、エレプリケーション。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   },
   {
     "id": "r03h-q31",
     "baseVersion": 2,
     "baseLessonSHA256": "91040f83b101eb29560e505ef2916988dc104fe3e84fad0d44f97c3c24bfef6c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch13-20261028",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q31",
-      "summary": "エ。データを発生したままの形で蓄積します。",
+      "summary": "データレイクで元のデータを保管する方式と、分析・データマート・OLAPを区別する。",
       "explanation": "データレイクは構造化・半構造化・非構造化データを、利用目的に合わせた加工を先に固定せず元の形で蓄積します。必要になった分析の時点で加工・構造化して利用します。",
       "choiceReasons": [
         "隠れた規則や相関を発見するデータマイニングの説明です。",
@@ -1267,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補ごとに「データを保存する」「用途別に取り出す」「保存済みデータを分析する」のどの操作を述べているか印を付けます。",
+          "text": "四肢が行う操作は、規則の発見・用途別の切出し・多次元分析・**加工前の保存**です。データレイクが分析自体か、データを保管する基盤かに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "規則を発見する分析行為ではなく、加工前のデータを保存する方式の記述を探します。",
-          "revealsAnswer": false
+          "text": "データレイクはログ・画像・表など様々な形式のデータを、利用前に特定の表構造へ整形せず、**発生したままの形（raw）で蓄積**できる仕組みです。加工は必要になってから行えます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "必要に応じて加工するため、発生したままの形で格納する候補です。",
+          "text": "規則発見はデータマイニング、用途別の切出しはデータマート、多次元分析はOLAPです。後から加工するために**元の形で格納**する記述を選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "データを貯める基盤と、蓄積データから知識を発見する分析処理を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢が行う操作は、規則の発見・用途別の切出し・多次元分析・**加工前の保存**です。データレイクが分析自体か、データを保管する基盤かに注目します。",
+          "remainingWork": "データ保管と分析・用途別切出しを分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方法・定義は与えるが、数値計算や原図・選択肢への適用を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "データレイクはログ・画像・表など様々な形式のデータを、利用前に特定の表構造へ整形せず、**発生したままの形（raw）で蓄積**できる仕組みです。加工は必要になってから行えます。",
+          "remainingWork": "データレイクのraw保存と後からの加工",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
+        },
+        {
+          "newInformation": "規則発見はデータマイニング、用途別の切出しはデータマート、多次元分析はOLAPです。後から加工するために**元の形で格納**する記述を選びます。",
+          "remainingWork": "残る3肢の名称と正答の対応",
+          "revealsAnswer": true,
+          "reason": "問題文・全選択肢と前段の内容を合わせると、正答肢の内容が一意に分かる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q31.webp をGitHubから取得して実際に表示し、設問と全4肢・図表を目視確認。context台帳の画像SHA256: 7e124122ae1db4b8d7588b2b355cd4e35e1ecf7a221ab933900784fb26c6a768。",
+        "contextに収録された正答エについて原図・選択肢から再確認。根拠: 原本アデータマイニング、イデータマート、ウOLAP、エデータレイク。",
+        "IPA解答PDFの独立照合と独立レビュー承認・公開教材への反映は別担当。"
+      ]
     }
   }
 ]
