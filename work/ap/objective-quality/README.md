@@ -2,7 +2,7 @@
 
 800問の旧教材と旧レビューをbaselineへ保存し、先行20問と残り39組×20問へ重複なく分割した。旧レビューの状態を新基準の承認には使わない。
 
-先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問のうちbatch-01〜04の80問は4担当で改稿・別担当確認・登録を完了。batch-05〜08の次の80問も改稿・別担当確認・登録を完了し、計180問を新基準で確認済み。残り620問のうちbatch-09〜13の100問は独立レビューを完了し、batch-09の修正後確認を含め内容承認・未登録。残り520問の26組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。教材は[PR #76](https://github.com/donald-shrimp/ap-study/pull/76)と[PR #77](https://github.com/donald-shrimp/ap-study/pull/77)と[PR #78](https://github.com/donald-shrimp/ap-study/pull/78)に保存し、本番公開はまだ行っていない。
+先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問のうちbatch-01〜04の80問は4担当で改稿・別担当確認・登録を完了。batch-05〜08の次の80問も改稿・別担当確認・登録を完了し、計180問を新基準で確認済み。残り620問のうちbatch-09〜14の120問は独立レビューを完了し、batch-09の修正後確認を含め内容承認・未登録。残り500問の25組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。教材は[PR #76](https://github.com/donald-shrimp/ap-study/pull/76)と[PR #77](https://github.com/donald-shrimp/ap-study/pull/77)と[PR #78](https://github.com/donald-shrimp/ap-study/pull/78)に保存し、本番公開はまだ行っていない。
 
 - [全体計画・作者／レビュー／統合の手順](../../../docs/ap-a-content-upgrade.md)
 - [800問の固定台帳](inventory.json)
@@ -28,7 +28,7 @@
 | [batch-11](batches/batch-11/README.md) | 20 | ハードウェア | ChatGPT作者 ／ Codex確認（4問修正・別担当再確認、20問内容承認・未登録） |
 | [batch-12](batches/batch-12/README.md) | 20 | ハードウェア、インタフェース・マルチメディア | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
 | [batch-13](batches/batch-13/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（7問修正・20問内容承認・未登録） |
-| [batch-14](batches/batch-14/README.md) | 20 | データベース | 未割当 |
+| [batch-14](batches/batch-14/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（3問修正・20問内容承認・未登録） |
 | [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | 未割当 |
 | [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | 未割当 |
 | [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | 未割当 |
@@ -55,7 +55,7 @@
 | [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | 未割当 |
 | [batch-39](batches/batch-39/README.md) | 20 | 法務 | 未割当 |
 
-batch-09の[PR #81](https://github.com/donald-shrimp/ap-study/pull/81)は[初回レビュー](batches/batch-09/review/independent-review.json)の2件をCodexが修正し、[修正後の別担当確認](batches/batch-09/review/correction-independent-review.json)も完了。20問の内容承認は登録・公開済みを意味しない。残り520問の26組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
+batch-09の[PR #81](https://github.com/donald-shrimp/ap-study/pull/81)は[初回レビュー](batches/batch-09/review/independent-review.json)の2件をCodexが修正し、[修正後の別担当確認](batches/batch-09/review/correction-independent-review.json)も完了。20問の内容承認は登録・公開済みを意味しない。残り500問の25組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
 
 第2回で判明したr04a-q13の文字起こし誤記2箇所は、独立確認済みの内容を[訂正台帳](source-corrections.json)で反映し、問題版を3から4へ更新した。旧文字起こし・旧レビュー・baseline・旧学習記録は保持。[訂正後の画面・保存検証](review/source-correction-application/results.json)を保存している。
 
@@ -64,3 +64,5 @@ batch-10は[PR #82](https://github.com/donald-shrimp/ap-study/pull/82)で20問�
 batch-11は[PR #83](https://github.com/donald-shrimp/ap-study/pull/83)で20問の[独立レビュー](batches/batch-11/review/independent-review.json)を完了。4問の不備は修正者と異なる担当が最終確認し、内容承認・未登録。
 
 batch-12は[PR #84](https://github.com/donald-shrimp/ap-study/pull/84)で20問の[独立レビュー](batches/batch-12/review/independent-review.json)を完了。根拠と最終ハッシュは実確認者の記録を保持。batch-13は[PR #85](https://github.com/donald-shrimp/ap-study/pull/85)で7問を修正し、[修正後の別担当確認](batches/batch-13/review/correction-independent-review.json)を含め20問の内容承認を完了。
+
+batch-14は[PR #86](https://github.com/donald-shrimp/ap-study/pull/86)で3問を修正し、[最終独立確認](batches/batch-14/review/correction-independent-review.json)を完了。初回元draft・実ハッシュを固定してから修正し、確認対象の版を分離した。

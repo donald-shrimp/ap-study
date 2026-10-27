@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-27T16:58:17.813929+00:00",
+  "checkedAt": "2026-10-27T17:16:49.273285+00:00",
   "policy": "Quality before throughput. Each delivered head is fixed for review; original images, official answers, all choices/hints and calculations are checked; root fixes need a different actual reviewer; final registration and publication are separate.",
   "registeredApprovedQuestions": 180,
-  "additionalContentApprovedNotRegistered": 100,
+  "additionalContentApprovedNotRegistered": 120,
   "batches": [
     {
       "batch": "batch-09",
@@ -43,10 +43,21 @@
       "contentApproved": 20,
       "corrected": 7,
       "resolvedFindings": 8,
-      "reviewEvidence": "batches/batch-13/review/correction-independent-review.json"
+      "reviewEvidence": "batches/batch-13/review/correction-independent-review.json",
+      "reviewHead": "c0c2234042d811dde3cd9d0367f04b4107066fb6"
+    },
+    {
+      "batch": "batch-14",
+      "pr": 86,
+      "authorHead": "735baf478547db3101f02a69ee167cf399bbd79e",
+      "state": "approved_not_registered",
+      "contentApproved": 20,
+      "corrected": 3,
+      "reviewEvidence": "batches/batch-14/review/correction-independent-review.json"
     }
   ],
   "merged": false,
   "published": false,
-  "next": "Check for further completed author PRs. Keep corrected questions independently reviewed. Registration, app validation and final merge/publication remain separate."
+  "next": "Check for the next completed author PR from batch-15; keep original data and records. Registration, UI validation and final merge/publication remain separate.",
+  "reviewProtocol": "Fix author head and complete initial raw draft/hash snapshot plus initial review report before any correction. Then a different actual reviewer approves final corrected hashes."
 }

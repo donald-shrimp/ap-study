@@ -1,0 +1,803 @@
+{
+  "kind": "batch-correction-independent-review",
+  "status": "approved-unregistered",
+  "reviewer": "Codex /root/ap_source_fix_review",
+  "checkedAt": "2026-10-27T17:14:58.625461+00:00",
+  "materialCorrector": "Codex /root",
+  "primaryAuthor": "ChatGPT/gpt-6-batch14-20261028",
+  "initialAuthorHead": "735baf478547db3101f02a69ee167cf399bbd79e",
+  "counts": {
+    "finalQuestionsVerified": 20,
+    "correctedQuestionsIndependentlyReviewed": 3,
+    "previousApprovalsPreserved": 17,
+    "approvedNotRegistered": 20,
+    "unresolvedIssues": 0
+  },
+  "frozenInitialReview": {
+    "path": "work/ap/objective-quality/batches/batch-14/review/independent-review.json",
+    "sha256": "2ede0c030f944626eb3c34f964c0970aab4039432c3c0ca3ad4dd537ad61d950",
+    "unchanged": true
+  },
+  "frozenBeforeSnapshot": {
+    "path": "work/ap/objective-quality/batches/batch-14/review/initial-drafts.json",
+    "sha256": "da083822f63a2ffd9188e97886ca70342c3d736f398992961b804e5f30a6ed93",
+    "unchanged": true
+  },
+  "finalDraftsFileSHA256": "e0562c290741158062ba26ac28a3b87b457f4f14102f64064428b8796cbaf6ad",
+  "finalReviewsFileSHA256": "c23858440468255a83918d506cc9bbb510bdb9e0f46861d0663d38b0c43dcb29",
+  "resolvedIssues": [
+    {
+      "id": "B14-01",
+      "questionId": "r04h-q27",
+      "status": "resolved",
+      "reason": "H1は3層の一般定義だけで、インデックスがアクセス経路という対応判断はまだ本人に残る。falseに訂正、H2はER/制約/正規化を論理設計として3誤答を除外するのでtrueを維持。"
+    },
+    {
+      "id": "B14-02",
+      "questionId": "r05h-q26",
+      "status": "resolved",
+      "reason": "原本JSONを再表示し図1の品名/価格は文字列・関連商品_idだけが配列、図2の商品名/生産地/画像URLは文字列・価格は数値100を確認。最終H1とdesign.newInformationは型の対応を明示し曖昧さを解消。分類の入口にとどまりfalse維持。"
+    },
+    {
+      "id": "B14-03",
+      "questionId": "r05a-q28",
+      "status": "resolved",
+      "reason": "H1のWHEREだけで元行に対応するという説明は、正答アの単一表直接列と行抽出の構造を実質渡す。true訂正とdesign理由の整合を確認。H2はDISTINCT/SUM/AVGの全誤答を除外するためtrue維持。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r05a-q26",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "644e964d3e44b1842ed193ec48675540b850049da1685039ac07d74c1189f33e",
+      "beforeSnapshotLessonSHA256": "0fe2876aa693c0f875bc1082f7d4f9b227a82506fe24c6cbfb7cf28252f9336a",
+      "finalEnvelopeSHA256": "644e964d3e44b1842ed193ec48675540b850049da1685039ac07d74c1189f33e",
+      "finalLessonSHA256": "0fe2876aa693c0f875bc1082f7d4f9b227a82506fe24c6cbfb7cf28252f9336a",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q26.webp",
+      "sourceImageSHA256": "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q26.webp": "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r07a-q27",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "380a001319f7c08d9f6e60f64113eb8a30d48f3c39829c65a71932ae4a9500ad",
+      "beforeSnapshotLessonSHA256": "92a719cdbab7d875fd572850aeba36247932961da9dbce94459bc31abf7b2170",
+      "finalEnvelopeSHA256": "380a001319f7c08d9f6e60f64113eb8a30d48f3c39829c65a71932ae4a9500ad",
+      "finalLessonSHA256": "92a719cdbab7d875fd572850aeba36247932961da9dbce94459bc31abf7b2170",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q27.webp",
+      "sourceImageSHA256": "e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q27.webp": "e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r07a-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "1e4eab0aa91f6596b26ed2827d6dc74df555be4116f9d4718d6f19789b60885c",
+      "beforeSnapshotLessonSHA256": "30ff5448ecf46da92471fa12d3cd46df6d8d61480faea6d24cc326164afffef2",
+      "finalEnvelopeSHA256": "1e4eab0aa91f6596b26ed2827d6dc74df555be4116f9d4718d6f19789b60885c",
+      "finalLessonSHA256": "30ff5448ecf46da92471fa12d3cd46df6d8d61480faea6d24cc326164afffef2",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q28.webp",
+      "sourceImageSHA256": "dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q28.webp": "dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r04h-q27",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "7af428571dd9a741940127d92f203985cfac664b74f0a16f22fa9dba12ca50be",
+      "beforeSnapshotLessonSHA256": "8f298e9b51123177c8c4c90a83574d8cb8e1929d288f7d5219a802fa74efb376",
+      "finalEnvelopeSHA256": "11a15ef274f66814bafa89fd3bad48994a8b02eaf0b51a6f61aec95887397e82",
+      "finalLessonSHA256": "6f2831da7782f8883a43e6e3eec4d303583c6edf7a993a7b56ec0960d6eaf7c2",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q27.webp",
+      "sourceImageSHA256": "4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q27.webp": "4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "verification": "scanned answer page actually viewed q27ア/q28ウ"
+      },
+      "officialAnswer": "ア",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "resolution": "H1は3層の一般定義だけで、インデックスがアクセス経路という対応判断はまだ本人に残る。falseに訂正、H2はER/制約/正規化を論理設計として3誤答を除外するのでtrueを維持。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q27",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "413d11f347863376ba0e345e31b7a0ed85f423a3ee31ca59b9eeb75f94d810ba",
+      "beforeSnapshotLessonSHA256": "ae818755b6c0705f4f7def8b40f7cad029cec3052da49af865d994db46d6aa7d",
+      "finalEnvelopeSHA256": "413d11f347863376ba0e345e31b7a0ed85f423a3ee31ca59b9eeb75f94d810ba",
+      "finalLessonSHA256": "ae818755b6c0705f4f7def8b40f7cad029cec3052da49af865d994db46d6aa7d",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q27.webp",
+      "sourceImageSHA256": "5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q27.webp": "5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r03a-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "df0ca03d2a6b2df4abe8e2408d2e653e083934c4c180c4fab4d6ee4f6d0a2e60",
+      "beforeSnapshotLessonSHA256": "adff4cee5ea27f60468bc2b7a6476c050fdf95260a6afdcb3dbf5ec81e50bd67",
+      "finalEnvelopeSHA256": "df0ca03d2a6b2df4abe8e2408d2e653e083934c4c180c4fab4d6ee4f6d0a2e60",
+      "finalLessonSHA256": "adff4cee5ea27f60468bc2b7a6476c050fdf95260a6afdcb3dbf5ec81e50bd67",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q28.webp",
+      "sourceImageSHA256": "32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q28.webp": "32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r04a-q26",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "8061135e4d96a5a99d9f4f17a542f18368dcd186a946f6ecef346c60314cd610",
+      "beforeSnapshotLessonSHA256": "f742e8429a5e65a25a99b37cda4fa99c0047b626f5880ad1ef8f158d7db45fe1",
+      "finalEnvelopeSHA256": "8061135e4d96a5a99d9f4f17a542f18368dcd186a946f6ecef346c60314cd610",
+      "finalLessonSHA256": "f742e8429a5e65a25a99b37cda4fa99c0047b626f5880ad1ef8f158d7db45fe1",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q26.webp",
+      "sourceImageSHA256": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q26.webp": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r05h-q26",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "0ea94a3b8b16b64ff688db5444e5699674ca78555f6530f1afddc678ff3a781c",
+      "beforeSnapshotLessonSHA256": "1cc48c3e3589e56e08a89d77ededa8e7e3c8650d797d20adc228cf980d856da4",
+      "finalEnvelopeSHA256": "471ac3bee4fefffa2d0f6cef209c27da5c12d3b0c0c217621de53dec42ec7f8f",
+      "finalLessonSHA256": "b8331e825ea7bef0c432d6bc9ac05a37c0462561574721c5408a9dae4c9b9583",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q26.webp",
+      "sourceImageSHA256": "97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q26.webp": "97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "resolution": "原本JSONを再表示し図1の品名/価格は文字列・関連商品_idだけが配列、図2の商品名/生産地/画像URLは文字列・価格は数値100を確認。最終H1とdesign.newInformationは型の対応を明示し曖昧さを解消。分類の入口にとどまりfalse維持。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q27",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "dc5e42ee34f05477cad1d90401193b9b18d17dd6caf7116ed46c987527d48d50",
+      "beforeSnapshotLessonSHA256": "e43deac6adc1a12f7f4afd326a42977e3d00cf08a54d8611af3d585c9bba372c",
+      "finalEnvelopeSHA256": "dc5e42ee34f05477cad1d90401193b9b18d17dd6caf7116ed46c987527d48d50",
+      "finalLessonSHA256": "e43deac6adc1a12f7f4afd326a42977e3d00cf08a54d8611af3d585c9bba372c",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q27.webp",
+      "sourceImageSHA256": "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q27.webp": "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r06h-q26",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "8189dc7cc3d72f5108957c504f551daf48a6a353659f2c07cefa10db43fa3664",
+      "beforeSnapshotLessonSHA256": "6095659a4aacec482e1bb14745bff65403a34163f89db4a01193ed86489889e0",
+      "finalEnvelopeSHA256": "8189dc7cc3d72f5108957c504f551daf48a6a353659f2c07cefa10db43fa3664",
+      "finalLessonSHA256": "6095659a4aacec482e1bb14745bff65403a34163f89db4a01193ed86489889e0",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q26.webp",
+      "sourceImageSHA256": "1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q26.webp": "1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r07h-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "d3bcf58d791eb931b8e819449da75b343b244d9e771d06c98b7dbb7629f41f51",
+      "beforeSnapshotLessonSHA256": "37508a59d34918d65306e13abc2d582696ae834261959b62a63e60176bada813",
+      "finalEnvelopeSHA256": "d3bcf58d791eb931b8e819449da75b343b244d9e771d06c98b7dbb7629f41f51",
+      "finalLessonSHA256": "37508a59d34918d65306e13abc2d582696ae834261959b62a63e60176bada813",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q28.webp",
+      "sourceImageSHA256": "15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q28.webp": "15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r04a-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "a6125e51699ca61ebed12d7c563b9a68c516c4ee49cdca693526c629e8ff701a",
+      "beforeSnapshotLessonSHA256": "404b7dcc356b782ab2d3c0495e600bc8c4fd3e929a723bece9d4cd368ef33d3c",
+      "finalEnvelopeSHA256": "a6125e51699ca61ebed12d7c563b9a68c516c4ee49cdca693526c629e8ff701a",
+      "finalLessonSHA256": "404b7dcc356b782ab2d3c0495e600bc8c4fd3e929a723bece9d4cd368ef33d3c",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q28.webp",
+      "sourceImageSHA256": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q28.webp": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r05h-q29",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "fa7da0eba5fdd7f5da9eeb4df601bb53c4ff0774f60187baefb07ec2513640bf",
+      "beforeSnapshotLessonSHA256": "73e3dc2a28ae2b4551d956e836e5937c6ae5dc091fa1069cd163716a6f4ff224",
+      "finalEnvelopeSHA256": "fa7da0eba5fdd7f5da9eeb4df601bb53c4ff0774f60187baefb07ec2513640bf",
+      "finalLessonSHA256": "73e3dc2a28ae2b4551d956e836e5937c6ae5dc091fa1069cd163716a6f4ff224",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q29.webp",
+      "sourceImageSHA256": "6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q29.webp": "6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f",
+        "assets/transcriptions/pr-batch2-figures-b/r05h-q29-figure-choices.png": "7a063ffd43cdc0ca978afa758de724cd0ff14933290a15f43f8bede0aa5126ba",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r05a-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "f50a4dbc190b9a644d21cf1c5922f5db6b8c125cd3afbaf6ddb89d2baa008684",
+      "beforeSnapshotLessonSHA256": "85a7cd8ea5e1226ee194c52fdce9959106ac5d4e57603679a2b84bd9bc8d36b2",
+      "finalEnvelopeSHA256": "08a46364f8ab2ca5fd3c9fa347f4a45f11f16c0329c35fc50ed3a0f90a09d7e0",
+      "finalLessonSHA256": "b0517b68d2ae27f09ca4cf387d88c09c8f7c6b4d2f4397b2a006f27f80c7d124",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q28.webp",
+      "sourceImageSHA256": "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q28.webp": "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "resolution": "H1のWHEREだけで元行に対応するという説明は、正答アの単一表直接列と行抽出の構造を実質渡す。true訂正とdesign理由の整合を確認。H2はDISTINCT/SUM/AVGの全誤答を除外するためtrue維持。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q24",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "82aa60ba845f2b158e7797893d6a7ffc08d615273a9783e7f6c4c15700ad6b6b",
+      "beforeSnapshotLessonSHA256": "65809be08449eb59306c7498adf96394ef74d3c78ae2ae0b1a133aeced09385e",
+      "finalEnvelopeSHA256": "82aa60ba845f2b158e7797893d6a7ffc08d615273a9783e7f6c4c15700ad6b6b",
+      "finalLessonSHA256": "65809be08449eb59306c7498adf96394ef74d3c78ae2ae0b1a133aeced09385e",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q24.webp",
+      "sourceImageSHA256": "eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q24.webp": "eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r03a-q29",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "a7f11adbd2e0cb99f634b3e987581c82326daf1f42aa14f141fd91f8a9b79f72",
+      "beforeSnapshotLessonSHA256": "6bdf9e5898bc9406bba2b8bef1e19772fe26e23847dd011472c06f2c60040b5e",
+      "finalEnvelopeSHA256": "a7f11adbd2e0cb99f634b3e987581c82326daf1f42aa14f141fd91f8a9b79f72",
+      "finalLessonSHA256": "6bdf9e5898bc9406bba2b8bef1e19772fe26e23847dd011472c06f2c60040b5e",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q29.webp",
+      "sourceImageSHA256": "0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q29.webp": "0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r04h-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "aa7df1710f5917f2ce1898a348e4331f3af0bdec66c0d46d4fd19cbc449f1829",
+      "beforeSnapshotLessonSHA256": "e8162fbcfd49a44e6978cd70149ba9a91a312e763b5814d8a9918f571fe56667",
+      "finalEnvelopeSHA256": "aa7df1710f5917f2ce1898a348e4331f3af0bdec66c0d46d4fd19cbc449f1829",
+      "finalLessonSHA256": "e8162fbcfd49a44e6978cd70149ba9a91a312e763b5814d8a9918f571fe56667",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q28.webp",
+      "sourceImageSHA256": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q28.webp": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+        "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp": "468cf6396a2a98e5e7e5fc0f268ac9fee2bfceefabead0b300b3600a9aeef186",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "verification": "scanned answer page actually viewed q27ア/q28ウ"
+      },
+      "officialAnswer": "ウ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r03h-q29",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "f8488a8cae505e162a2428d6fbda759e581b8977fb6db424912652dce5b5b612",
+      "beforeSnapshotLessonSHA256": "2d30261c2496a0a78371014aea54476b5d1fa27845b494a0d446183d2d6b85f3",
+      "finalEnvelopeSHA256": "f8488a8cae505e162a2428d6fbda759e581b8977fb6db424912652dce5b5b612",
+      "finalLessonSHA256": "2d30261c2496a0a78371014aea54476b5d1fa27845b494a0d446183d2d6b85f3",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q29.webp",
+      "sourceImageSHA256": "3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q29.webp": "3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e",
+        "assets/transcriptions/author_r03h/r03h-q29-figure-choices.webp": "c91e203ada448b9f57fd9267ca28d5caabe1ae3779b486d8909400af2ef7c469",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r07h-q26",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "2d72de307c65906b065a3be216c3df59ddd7d673a13620cd50063666e865d674",
+      "beforeSnapshotLessonSHA256": "747d89a1bb224ae55b5dec091c8374f0e9be03cb6a9710005ddd2e47c4f1c37b",
+      "finalEnvelopeSHA256": "2d72de307c65906b065a3be216c3df59ddd7d673a13620cd50063666e865d674",
+      "finalLessonSHA256": "747d89a1bb224ae55b5dec091c8374f0e9be03cb6a9710005ddd2e47c4f1c37b",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q26.webp",
+      "sourceImageSHA256": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q26.webp": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    },
+    {
+      "id": "r06a-q28",
+      "status": "approved",
+      "beforeSnapshotEnvelopeSHA256": "6a425a1c7ffe3c1d7d76598cfa06c0f1a338e270fd25aa324a543664807088a4",
+      "beforeSnapshotLessonSHA256": "11327185e01c206288439cb2a697e9932dd8f86e11687e575da93d4e1a608adc",
+      "finalEnvelopeSHA256": "6a425a1c7ffe3c1d7d76598cfa06c0f1a338e270fd25aa324a543664807088a4",
+      "finalLessonSHA256": "11327185e01c206288439cb2a697e9932dd8f86e11687e575da93d4e1a608adc",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q28.webp",
+      "sourceImageSHA256": "be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q28.webp": "be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "resolution": "Complete envelope unchanged from initial independently approved record.",
+      "issues": []
+    }
+  ],
+  "checks": {
+    "final3OriginalImagesActuallyReopened": true,
+    "final3FullLessonsAndDesignRead": true,
+    "other17CompleteEnvelopesUnchanged": true,
+    "all20SourceHashesAndOfficialPDFHashesReverified": true,
+    "originalQuestionsAnswersAndAllChoiceReasonsPreserved": true,
+    "visibleHintTextChangedOnlyForJSONTypeClarity": true,
+    "primaryAuthorPreservedAndActualCorrectorRecorded": true,
+    "correctorDistinctFromIndependentReviewer": true,
+    "previous17ApprovalTextPreserved": true,
+    "all20FinalReviewLessonHashesMatch": true,
+    "actualDomain20QuestionsHints0to3Passed": true,
+    "postAnswerHintKeepsFinalStatusAndPreAnswerCount": true,
+    "formalReviewedGate": {
+      "batchId": "batch-14",
+      "questions": 20,
+      "reviewed": 20,
+      "approvedForRegistration": true
+    },
+    "noPersonalRecordsUsed": true,
+    "noGitOperationsByReviewer": true,
+    "noDraftAssignmentGlobalBaselineCodeEditsByReviewer": true
+  },
+  "method": "Read final3 complete lessons/design, reopened3 original images and rechecked field types, schema layers and four SQL choices. Verified strict before snapshot versus after: only H1 flag changes for2 lessons, H1 text clarification forJSON lesson; all other lesson fields unchanged. Recomputed source/PDF hashes for all20, verified other17 full envelopes unchanged. Re-executed actual study.js20×4 hint depths and after-answer non-retroactivity. Prior SQL/relation/UML/FD verification remains archived in initial verification results.",
+  "finalDomainGrading": {
+    "r05a-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04h-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r06a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r03a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04a-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r06h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04a-q28": [
+      "correct",
+      "assisted",
+      "assisted",
+      "revealed"
+    ],
+    "r05h-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05a-q28": [
+      "correct",
+      "revealed",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q24": [
+      "correct",
+      "revealed",
+      "revealed",
+      "revealed"
+    ],
+    "r03a-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04h-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r03h-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r06a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ]
+  },
+  "issues": [],
+  "registered": false,
+  "published": false,
+  "limitations": "Content approval only. No browser/learner trial/registration/merge/publication/git/commit/push performed by reviewer."
+}

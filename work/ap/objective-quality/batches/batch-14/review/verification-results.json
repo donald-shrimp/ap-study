@@ -1,0 +1,392 @@
+{
+  "sqlAndRelations": {
+    "r06h-q26": {
+      "COALESCE(MIN(在庫.在庫数),0)": [
+        [
+          "P01",
+          "必要"
+        ],
+        [
+          "P02",
+          "不要"
+        ],
+        [
+          "P03",
+          "必要"
+        ]
+      ],
+      "COALESCE(MIN(在庫.在庫数),NULL)": [
+        [
+          "P01",
+          "必要"
+        ],
+        [
+          "P02",
+          "不要"
+        ],
+        [
+          "P03",
+          "不要"
+        ]
+      ],
+      "COALESCE(SUM(在庫.在庫数),0)": [
+        [
+          "P01",
+          "不要"
+        ],
+        [
+          "P02",
+          "不要"
+        ],
+        [
+          "P03",
+          "必要"
+        ]
+      ],
+      "COALESCE(SUM(在庫.在庫数),NULL)": [
+        [
+          "P01",
+          "不要"
+        ],
+        [
+          "P02",
+          "不要"
+        ],
+        [
+          "P03",
+          "不要"
+        ]
+      ]
+    },
+    "r04a-q28": {
+      "average": 360.0,
+      "supplierCodes": [
+        [
+          "S1"
+        ],
+        [
+          "S4"
+        ],
+        [
+          "S5"
+        ]
+      ],
+      "resultCount": 3,
+      "choiceCounts": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "r03a-q29": {
+      "ア": [],
+      "イ": [
+        [
+          "D01",
+          "第1期",
+          1000
+        ],
+        [
+          "D01",
+          "第2期",
+          4000
+        ],
+        [
+          "D02",
+          "第1期",
+          2000
+        ],
+        [
+          "D02",
+          "第2期",
+          5000
+        ],
+        [
+          "D03",
+          "第1期",
+          3000
+        ],
+        [
+          "D03",
+          "第2期",
+          8000
+        ]
+      ],
+      "ウ": [
+        [
+          "D01",
+          "第1期",
+          1000
+        ],
+        [
+          "D01",
+          "第1期",
+          1000
+        ],
+        [
+          "D01",
+          "第1期",
+          1000
+        ],
+        [
+          "D02",
+          "第1期",
+          2000
+        ],
+        [
+          "D02",
+          "第1期",
+          2000
+        ],
+        [
+          "D02",
+          "第1期",
+          2000
+        ],
+        [
+          "D03",
+          "第1期",
+          3000
+        ],
+        [
+          "D03",
+          "第1期",
+          3000
+        ],
+        [
+          "D03",
+          "第1期",
+          3000
+        ]
+      ],
+      "エ": [
+        [
+          "D01",
+          "第1期",
+          1000
+        ],
+        [
+          "D02",
+          "第1期",
+          2000
+        ],
+        [
+          "D03",
+          "第1期",
+          3000
+        ]
+      ]
+    },
+    "r07h-q28": {
+      "all64PairsOfSubsetsOf3ElementUniverseChecked": true,
+      "identitiesValidForAllPairs": [
+        false,
+        true,
+        false,
+        false
+      ],
+      "exampleR": [
+        1,
+        2
+      ],
+      "exampleS": [
+        2,
+        3
+      ],
+      "results": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "r05a-q28": {
+      "ア": {
+        "selectResult": [
+          [
+            "P2",
+            "b",
+            1200
+          ]
+        ],
+        "ordinarySQLUpdateable": true
+      },
+      "イ": {
+        "selectResult": [
+          [
+            "P2"
+          ]
+        ],
+        "ordinarySQLUpdateable": false
+      },
+      "ウ": {
+        "selectResult": [
+          [
+            "P2",
+            5
+          ]
+        ],
+        "ordinarySQLUpdateable": false
+      },
+      "エ": {
+        "selectResult": [
+          [
+            2.5
+          ]
+        ],
+        "ordinarySQLUpdateable": false
+      },
+      "methodNote": "All four SELECTs executed in SQLite; SQL-standard ordinary view updateability independently assessed from one-to-one base row/column correspondence, DISTINCT/grouping/aggregation restrictions and official answer. SQLite itself forbids updates of all views absent triggers, so not used as updateability oracle."
+    },
+    "r07a-q28": {
+      "aliasColumns": [
+        "id",
+        "売価"
+      ],
+      "rowFilteredCount": 1,
+      "unionResult": [
+        [
+          "P1"
+        ],
+        [
+          "P2"
+        ]
+      ],
+      "updateability": "Join views not unconditionally updateable; confirmed against ordinary SQL rule/official answer."
+    }
+  },
+  "domain20QuestionsHints0to3": {
+    "r05a-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04h-q27": [
+      "correct",
+      "revealed",
+      "revealed",
+      "revealed"
+    ],
+    "r06a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r03a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04a-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05a-q27": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r06h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04a-q28": [
+      "correct",
+      "assisted",
+      "assisted",
+      "revealed"
+    ],
+    "r05h-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r05a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q24": [
+      "correct",
+      "revealed",
+      "revealed",
+      "revealed"
+    ],
+    "r03a-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r04h-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r03h-q29": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r07h-q26": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ],
+    "r06a-q28": [
+      "correct",
+      "assisted",
+      "revealed",
+      "revealed"
+    ]
+  },
+  "postAnswerHintKeepsFinalStatusAndHintsBeforeAnswer": true
+}
