@@ -3,11 +3,11 @@
     "id": "r03a-q17",
     "baseVersion": 2,
     "baseLessonSHA256": "14c0861d460d2b0b5b66d2fecc0ddf2e80d68152f2074bb54081d6eb36d9134d",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q17",
-      "summary": "ア。許容発生率はアクセス1回当たり5×10⁻⁶です。",
+      "summary": "ページフォールトによる平均遅延の上限から、主記憶アクセス1回当たりの発生率を求める。",
       "explanation": "ページフォールト発生率をpとすると、1命令当たりの遅れはアクセス2回×p×40ミリ秒です。40ミリ秒=40,000マイクロ秒なので、2p×40,000≤0.4よりp≤0.4/80,000=5×10⁻⁶です。1命令当たりのアクセス回数と、ミリ秒からマイクロ秒への換算を両方反映します。",
       "choiceReasons": [
         "遅れは2×5×10⁻⁶×40,000=0.4マイクロ秒で上限に一致します。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "発生率を主記憶へのアクセス1回当たりのpと置き、1命令のアクセスが平均2回あることを式に入れます。",
+          "text": "発生率pは主記憶へのアクセス1回当たりと考えます。1命令には平均2回のアクセスがあるため、1命令当たりの発生回数の期待値は2pです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "40ミリ秒を40,000マイクロ秒に直します。1命令の平均遅れは2×p×40,000マイクロ秒です。",
+          "text": "40ミリ秒は40,000マイクロ秒です。平均遅延＝アクセス回数×ページフォールト発生率×1回のオーバヘッドなので、2×p×40,000≦0.4を解いてください。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "2p×40,000≤0.4を解くとp≤5×10⁻⁶となります。",
+          "text": "p≦0.4÷(2×40,000)＝5×10⁻⁶。等号の値が許容できる最大発生率です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "1命令当たりのアクセス回数2を落とす、またはミリ秒とマイクロ秒を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "1アクセス当たりの確率と1命令当たりの平均回数の対応",
+          "remainingWork": "40ミリ秒と0.4マイクロ秒を共通単位へ換算",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "2pの意味を教えるが数値を確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "時間単位の換算と平均遅延の式",
+          "remainingWork": "不等式を解き、4肢の数値と比較",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式と変数の対応は示すが割り算が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不等式の解と最大値",
+          "remainingWork": "選択肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終の発生率を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q17.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 25ecf180de01570fcb8d10a95c1660bb331383bb6d146312c2cd32bf8d2458d8。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "cb0f2c15f9d4861c5647a0574b868f9603dbb2f6d316cf68ea08831ae43c7045",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q18",
-      "summary": "エ。固定長ページの配置では外部断片化が発生しません。",
+      "summary": "固定長のページと可変長のセグメントで、領域の確保と断片化がどう異なるかを比べる。",
       "explanation": "ページングは仮想記憶と主記憶を同じ固定サイズのページ・ページ枠に分けます。空いている枠ならどこへでもページを置けるため、領域間の小さな空きが利用できなくなる外部断片化は生じません。\nセグメンテーションは論理的な単位を可変サイズで扱うので、保護や共有に適する一方、外部断片化が起こり得ます。ページングにもページ内部の未使用部分という内部断片化はあります。",
       "choiceReasons": [
         "論理単位ごとの保護は、コードやデータなどを分けるセグメンテーションに適した特徴です。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "比較するのは固定長のページと、論理的なまとまりごとに長さが変わるセグメントです。サイズが一定という点に注目します。",
+          "text": "ページングは主記憶を同じ大きさのページ枠に分けます。一方、セグメンテーションはコードやデータなどの論理的なまとまりを可変長で扱います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "空きページ枠はどれも同じ大きさなので、一つのページを置くために連続した大きな空きを探す必要がありません。",
-          "revealsAnswer": false
+          "text": "外部断片化は、空き領域の総量は十分でも連続した大きな空きがない状態です。固定長のページ枠ならページごとに空いている枠を使え、隣接した空きを探す必要はありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "可変長領域の間に小さな空きができる外部断片化は、固定長枠のページングでは発生しません。エです。内部断片化とは分けます。",
+          "text": "この性質からページングでは主記憶の外部断片化が生じません。ただしページ枠内の未使用部分（内部断片化）はあり得ます。保護・共有や可変長の扱いはセグメント側と区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "外部断片化と内部断片化の違いや、論理単位での保護・共有の特徴が曖昧。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ページングとセグメンテーションの割当単位",
+          "remainingWork": "どの利点が固定長割当に関係するか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "方式の前提のみで長所は確定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "外部断片化の定義と固定長配置の機構",
+          "remainingWork": "定義と全4肢を照らす",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と実質同義の外部断片化回避を説明する"
+        },
+        {
+          "newInformation": "外部・内部断片化と他の選択肢の対比",
+          "remainingWork": "該当する選択肢を確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢の内容を直接提示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 44b501bbe0f9f76f94e761683cca221ac21eeb2c0a7bb699e79bc5d56b8791ff。",
+        "公式正答はcontext.json記録のエ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q16",
     "baseVersion": 2,
     "baseLessonSHA256": "d72de30c6f3658b563de9682500ea8ab5f5c0de9ded54032c9176c821c9c76dc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q16",
-      "summary": "ア。ページ置換えが頻発し性能が急落するスラッシングです。",
+      "summary": "ページ置換えが頻発して性能が急落する状態を、個別のメモリ操作や事象と区別する。",
       "explanation": "実行に必要なページを主記憶に十分保持できないと、ページを入れ替えた直後にまた別のページが必要になり、置換えが頻発します。CPU処理よりページの入出力に多くの時間を費やし、処理能力が急落する状態をスラッシングといいます。ページフォールトは、必要なページが主記憶にないという個々の事象です。",
       "choiceReasons": [
         "ページ置換えの頻発による性能の急激な低下を指します。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「ページ置換えの発生頻度が高い」と「処理能力が急激に低下」の二つを一組の状態として捉えます。",
+          "text": "「1回のページ不在」なのか「ページの入替えが連続し、処理能力まで低下する状態」なのかを分けて読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "必要なページを保持しきれないと、処理のたびに読み戻しと追出しが続き、実行より入出力に時間を使います。",
+          "text": "ページフォールトは必要ページが主記憶にない事象、スワップアウトは補助記憶への退避操作、フラグメンテーションは記憶領域の断片化です。いずれも設問の状態全体を表すものではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "この性能悪化の状態をスラッシングと呼びます。",
+          "text": "残るスラッシングは、必要ページの読み込み・追出しに処理時間を奪われ、CPUの実処理が進まなくなる状態です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ページフォールトと、フォールトが続いて実処理が進まなくなる状態の名前を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "単発の事象と継続的な性能低下の区別",
+          "remainingWork": "四つの用語が何を表すか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "語を指定せず設問の着眼点を整理する"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "誤答3語の意味と除外理由",
+          "remainingWork": "残りの名称を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "3つの誤答肢を除外し正答が一意になる"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "スラッシングの名称と入出力過多の因果",
+          "remainingWork": "言葉と原因を結び付ける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答名称を明示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 2a9617caa93ff90285ef100259eb2bdcb6742858eceeae6a13653cbdb8368baa。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q17",
     "baseVersion": 2,
     "baseLessonSHA256": "c3f896571925c9d8d3bebc2d7beb181ddf5eef14de63af3d06fbe7eb8c2390c8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q17",
-      "summary": "ア。ページ置換が多発して性能が急落する現象はスラッシングです。",
+      "summary": "ページ置換えの頻発がもたらす性能低下の現象名を問う。",
       "explanation": "主記憶が不足すると、必要なページを読み込んだ直後に別のページを追い出し、すぐまた読み込むという置換が続くことがあります。実処理よりページの入出力に時間を費やし、処理能力が急落する状態をスラッシングと呼びます。\nページフォールトは必要なページが主記憶にないという個別の事象であり、それが起きるだけでスラッシングとは限りません。",
       "choiceReasons": [
         "ページ置換が多発して実処理が進まなくなる状態をスラッシングと呼びます。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題は一回のページ不在ではなく、「置換頻度が高まり、処理能力が急激に低下」という状態全体を聞いています。",
+          "text": "ページフォールトは「参照したページが主記憶にない」出来事です。設問ではそれ自体でなく、置換えが多発した結果の処理能力を聞いています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "必要ページを読み込むたびに別の必要ページが追い出されると、計算よりもページの出し入れに時間を使います。",
-          "revealsAnswer": false
+          "text": "主記憶に必要なページを置ききれないと、読み込むたびに別の必要ページを追い出し、CPU処理よりページの入出力に時間がかかる悪循環になります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ページ不在を表すページフォールトと、入出力ばかりになるスラッシングを分けます。状態名を聞くのでアです。",
+          "text": "この悪循環による性能の急低下をスラッシングといいます。スワップアウトは退避操作、フラグメンテーションは領域の断片化であり、状態全体の名称ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ページフォールト・スワップアウトなど、関連する単発の現象名を選んでしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ページフォールトの定義と問いの射程",
+          "remainingWork": "選択肢の現象名と比較",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ページフォールトだけは除外できるが正答を一意には指定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ページの追出し・再読込みで性能が下がる機構",
+          "remainingWork": "状態名と処理の関係を考える",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "設問の正答の現象を具体的に言い換えて教える"
+        },
+        {
+          "newInformation": "正答名称と他の用語の使い分け",
+          "remainingWork": "名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答の名称を示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q17.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: c3298b7ee98c69ebbc68a4e12a58e38195169e358fdcbdb6368e87423f53876a。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "2f6ea9a46dd0ca46fd7b3b43a53cdd793e97d2af08502775caeba66783a785f8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q18",
-      "summary": "ウ。空き容量の合計が十分でも、断片化により必要な領域を確保できないことがあります。",
+      "summary": "空きメモリの総量と連続領域の大きさを区別し、断片化に関する記述を判定する。",
       "explanation": "可変長領域を繰り返し確保・解放すると、空き領域が細かく分散する外部フラグメンテーションが生じます。例えば10Mバイトの空きが三つ離れて存在しても、連続20Mバイトの領域は確保できません。固定長方式では領域内の未使用部分という内部フラグメンテーションも区別します。",
       "choiceReasons": [
         "可変長方式は様々な大きさの領域の確保・返却によって外部フラグメンテーションが発生します。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "可変長のメモリ領域で、確保・返却を繰り返した配置を描きます。使用中の領域の間に小さな空きが分かれた場合を作り、空きの合計と一続きの空きの長さを別々に数えましょう。",
+          "text": "可変長のメモリ領域を繰り返し確保・解放すると、使っている領域の間に小さな空きが生じます。固定長の方式では、割り当てたブロックの中に未使用部分が残ることがあります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "使用中領域を挟んで小さい空きが点在している図を描きます。空きの合計と、最大の連続空き領域をそれぞれ数えます。",
-          "revealsAnswer": false
+          "text": "例えば空きが10Mバイトずつ3か所に分かれていた場合、合計は30Mバイトでも連続20Mバイトを確保できないことがあります。これが外部断片化の影響です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "10Mバイトの空きが三つあっても、連続20Mバイトを確保できない場合があります。この状況を述べる候補が適切です。",
+          "text": "固定長の内部の無駄と、可変長で外部の空きが分散することは別です。またガーベジコレクションは不要オブジェクトの回収で、返却のたびに必須とは限りません。各記述をこの区別で判定します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "外部・内部断片化を区別できず、空き合計が十分なら必ず確保可能だと思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "外部・内部の無駄が生じる配置の違い",
+          "remainingWork": "各肢がどちらの断片化を述べるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対比だけで正答文の内容を特定しない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "合計と最大連続空きが異なる数値例",
+          "remainingWork": "具体例に一致する肢を見つける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢の記述と実質同じ事象を具体的な数値で説明する"
+        },
+        {
+          "newInformation": "固定長方式およびガーベジコレクションとの区別",
+          "remainingWork": "他肢の誤りも確認する",
+          "revealsAnswer": true,
+          "reason": "前段で正答が判明しており判断の根拠も渡す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: a9168b680bc2dab9e3da7c1b524be97a23f6f557f190be090081e1ce2f8add80。",
+        "公式正答はcontext.json記録のウ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q16",
     "baseVersion": 1,
     "baseLessonSHA256": "ac3b5f6a877dfd3480623a51c1e4e6530d9e9eeee76e755ec9ffe3c8b7e5768b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q16",
-      "summary": "ウ。必要な容量の最大値は200Mバイトです。",
+      "summary": "ジョブの依存関係と一時ファイルの作成・削除時刻を追い、容量の最大同時使用量を求める。",
       "explanation": "Aの開始で50Mバイトを作ります。A終了後にB、Cが同時開始し、それぞれ50Mバイトを作るので計150Mバイトです。Aのファイルは最初に生起するBだけが参照し、B終了で消えます。BとC終了後にはB、Cのファイル計100Mバイトが残り、D、E開始で各50Mバイト追加され、計200Mバイトになります。DはBを参照、EはCを参照し、両者の終了でそれらを消します。最後のF開始時はD、E、Fの計150Mバイトです。最大は200Mバイトです。",
       "choiceReasons": [
         "100MバイトではB、Cが同時にファイルを作る時点の150Mバイトにも足りません。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図のA→B・C、B→D・E、C→E、D・E→Fを確認します。同時実行は2で、上にあるジョブを先に生起させる条件も読みます。",
+          "text": "図の依存関係はA→B・C、B→D・E、C→E、D・E→Fです。多重度2で、分岐先は上から生起し、先行ファイルを読むのは最初に生起した直後のジョブだけです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "開始ごとに50Mバイト追加、参照ジョブ終了で先行ファイル削除です。最初はAの50Mバイト、続いてB・C開始では50+50+50と記録します。分岐先のうち先に生起するBだけがAを参照するので、B終了時に何が消えるかも記入します。",
+          "text": "各ジョブの開始で50Mバイトが増え、ファイルを参照する直後のジョブの終了時にそのファイルが消えます。A開始50、B・C同時開始150です。AのファイルはBだけが参照するので、B終了で削除します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "B・C終了後にはBとCのファイルが残ります。D・E開始時に二つ加わり、4×50=200Mバイトとなります。",
+          "text": "B・Cの終了後はB・Cのファイルが残ります。次のD・E開始時に二つの50Mバイトが増え、(B+C+D+E)×50＝200Mバイトがピークです。その後F開始時はD・E・Fの3ファイルです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "開始時作成と参照先終了時削除を混同し、AやBのファイルを長く数え過ぎる。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原図のジョブ依存関係と特殊な参照規則",
+          "remainingWork": "ファイルの寿命を表に書く",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "矢印を整理するだけで容量は出ない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "開始で追加・参照先終了で削除する手順とAの例",
+          "remainingWork": "B・C終了後、D・E開始時の状態を追う",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "途中状態まで示し、ピークの判断は本人に残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ピークとなるD・E開始時の4ファイルと最大値",
+          "remainingWork": "最大値を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終最大容量を提示する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0c7f045b04b7c2d6fcd648a4e1225be1ed126614d9d9bf17ebb47c76a846ffe6。",
+        "公式正答はcontext.json記録のウ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "754812217a19175c93de6f01989827f98519c7a6521932930026442082e7224b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q18",
-      "summary": "イ。不要なヒープ領域を回収するのがガーベジコレクションです。",
+      "summary": "ヒープ回収・空き領域の統合・モジュールのロード・再配置を操作内容で見分ける。",
       "explanation": "ガーベジコレクションは、プログラムから使用されなくなったオブジェクトの領域を検出し、ヒープの空きとして再利用可能にします。主記憶の配置移動やモジュール読込みとは別の処理です。",
       "choiceReasons": [
         "空き領域をまとめるのはコンパクションで、可変区画方式という方式名ではありません。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の操作を、不要領域の回収・領域の移動・必要モジュールの読込みに分類します。",
+          "text": "各選択肢で行っている動作を見ます。「使わない領域を再利用する」「空きをまとめる」「モジュールを移動する」「必要時に読み込む」は別々の操作です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ヒープ上で使われなくなったオブジェクトを再利用可能にする操作に注目します。",
+          "text": "空き領域を連続にまとめるのはコンパクション、実行中の格納位置変更は動的再配置、必要時のモジュール読込みは動的ローディングです。記述と名称がずれた肢を除きます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "不要なヒープ領域の回収はガーベジコレクションです。",
+          "text": "残る不要なヒープ領域の回収はガーベジコレクションです。参照されなくなったオブジェクトの領域を再利用可能にする働きがあります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "記憶領域を扱う機能名が似ており、動的リンキングとローディング・再配置を取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの操作の比較軸",
+          "remainingWork": "四肢の操作と術語を対応付ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸だけで用語の正解は示していない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "三つの誤った名称対応と正しい名称",
+          "remainingWork": "残る選択肢を判断する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "3つの誤答肢の誤用を除外し正答肢を一意にする"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ガーベジコレクションの対象と効果",
+          "remainingWork": "正誤理由を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答名称そのものを教える"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 21d7348907b3f6935f44bc9e885a0c93a061d53cc76c2c881d18de272e302bbc。",
+        "公式正答はcontext.json記録のイ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q14",
     "baseVersion": 2,
     "baseLessonSHA256": "517a526bb51b1346263bbc63670aa3f00b3c51f413ad18c6a8b4c4494b58b6bc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q14",
-      "summary": "エ。2x²−x⁴は初めに直線より下、後半に上となります。",
+      "summary": "直列2台の枝が2本並列の構成について、稼働率の関数と基準線との上下関係を調べる。",
       "explanation": "各直列枝の稼働率はx²、二枝並列の稼働率は1−(1−x²)²=2x²−x⁴です。x=0.5では0.4375<0.5、x=0.8では0.8704>0.8。端点は0と1で、直線との内部交点は(√5−1)/2≈0.618です。したがって下から上へ交差するエです。",
       "choiceReasons": [
         "全域で直線より上の形ですが、x=0.5では下になります。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図の上の枝は装置二個が直列です。まず枝一本が動く確率を書きます。",
+          "text": "図は「直列2台の枝」が上と下に1本ずつあり、その2本は並列です。直列は両装置が動く必要があるので、枝1本の稼働率はx×xです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "一本の枝はx²。両枝が故障する確率を(1−x²)²として、全体が動く確率を求めます。",
+          "text": "並列はどちらかの枝が動けば稼働します。両枝が故障する確率を(1−x²)²と置くと、全体はf(x)＝1−(1−x²)²。グラフは破線y=xとの上下で判定できます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "f(x)=2x²−x⁴で、x=0.5では下、x=0.8では上なのでエの形です。",
+          "text": "f(x)＝2x²−x⁴。x=0.5でf=0.4375は破線より下、x=0.8でf=0.8704は上です。0と1では一致するので、途中で下から上に交差するグラフを選びます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "直列の確率の積と並列の『両方故障』の補数を組み合わせられず、グラフを式だけで選べない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "直列2台から枝1本の稼働率x²を作る",
+          "remainingWork": "2枝の稼働条件を式にする",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "枝の計算だけでは正答グラフが定まらない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "並列の補事象で全体のf(x)を導く",
+          "remainingWork": "x=0.5と0.8を代入し形を選ぶ",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "関数を渡しても代入・グラフ比較が残る"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二点でのy=xとの大小と端点を確認",
+          "remainingWork": "図の選択肢を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答グラフだけが満たす上下と交差方向を教える"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q14.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0816e4327c1002a06ca47013ecde4ce69f9d6a95bb13b2eb8a74fe970d60971f。",
+        "公式正答はcontext.json記録のエ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q18",
     "baseVersion": 2,
     "baseLessonSHA256": "6e0d552b7e895938a19c54020d520563c2b92d831e0fd113ed140e9d2e15d1e7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q18",
-      "summary": "LRUは最後に使ってから最も長く経ったページを置換します。",
+      "summary": "ページ置換・アドレス変換・ページフォールト・断片化の用語をそれぞれ判定する。",
       "explanation": "LRU（Least Recently Used）は、最近最も使われていないページを追い出す方式です。各ページの最後の参照時刻を比較し、現在までの経過時間が最大のページを置換します。アはこの基準を正しく述べています。ページフォールトは必要なページが実記憶にない状態で、通常は補助記憶からページを読み込みます。",
       "choiceReasons": [
         "最後の使用後の経過時間が最長というLRUの置換基準です。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "アの「使用後」、イのページ表、ウのページフォールト、エの空き領域を別々に確認します。",
+          "text": "ページ置換方式にはFIFO（先に読み込んだページを追い出す）と、最近いつ使ったかを見る方式があります。読み込み時刻と最終使用時刻を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "置換方式では、古さをロードから測るか、最後の使用から測るかが違います。",
-          "revealsAnswer": false
+          "text": "LRUはLeast Recently Used（最近最も使っていない）の略で、最後の参照から最も長く経ったページを選びます。『ページを読み込んでからの時間』ではない点が重要です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "LRUのRecently Usedは最近の使用です。最後の使用から最も長く経ったページを追い出す記述と照合します。",
+          "text": "ページフォールトは必要なページが主記憶にないことで、不要オブジェクトを回収するガーベジコレクションとは違います。また固定長のページ枠なら主記憶の外部断片化は起きません。残りの肢もこの点で確かめます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "LRUの『直近の使用』とFIFOの『読込順』を混同し、ページフォールトとGCも同種と考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "FIFOと最終使用時刻による選び方の違い",
+          "remainingWork": "LRUの語と対象を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般的な比較のみでLRUの定義はまだ伝えない"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "LRUの略語と置換対象の厳密な定義",
+          "remainingWork": "正答肢の記述と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢と同義のLRUの基準を示す"
+        },
+        {
+          "newInformation": "ページフォールト・GC・断片化の他肢との違い",
+          "remainingWork": "他3肢の適否を確認する",
+          "revealsAnswer": true,
+          "reason": "前段と合わせて正答を確定し、誤答も説明する"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0b4d764b68ccf64647e56510b73ff60135972977b5037f627da2020585be7c26。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q19",
     "baseVersion": 2,
     "baseLessonSHA256": "02623b8120670349b1fc362bd2ab85ee37422f554c156ad98ada06255dfdd053",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q19",
-      "summary": "ア。補助記憶はページアウトされたページの退避先になります。",
+      "summary": "仮想記憶で主記憶と補助記憶がどのデータを受け渡すかを区別する。",
       "explanation": "仮想記憶では、主記憶に置ききれないページを補助記憶に退避し、必要になればページインします。補助記憶の役割はこのページの格納先であって、主記憶の内容全体をバックアップすることや、更新前の値を履歴として保存することではありません。",
       "choiceReasons": [
         "ページアウトしたページを保存し、後のページインに備えます。",
@@ -577,46 +640,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補で保存する対象を、ページ・更新前の値・アドレス空間・全体の複製に分け、仮想記憶の主記憶と補助記憶の役割に対応させます。",
+          "text": "仮想記憶では、プログラムが参照するアドレス空間と実際の主記憶容量を区別します。主記憶に載せるページを選んで入れ替えられます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ページ表で各ページの所在を管理し、使うページを主記憶へ戻せるよう退避先に内容を残します。",
+          "text": "主記憶から追い出すページの内容は、必要に応じて後で再読込みできるよう補助記憶に置きます。この退避をページアウト、戻すことをページインと呼びます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "主記憶からページアウトされたページを格納する役割です。",
+          "text": "補助記憶は退避したページの格納先です。更新前の値を毎回保存する履歴管理でも、主記憶全体を複製するバックアップでもありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "補助記憶を主記憶全体のバックアップや更新前データの保存先と誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "仮想記憶のアドレス空間とページ交換の基本",
+          "remainingWork": "保存対象を候補ごとに分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "ページ管理の原理のみを示す"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ページアウト・ページインの定義と補助記憶の使い方",
+          "remainingWork": "説明に合う肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答肢を実質的に言い換えたページ退避先の説明"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "更新履歴・全体バックアップとの違い",
+          "remainingWork": "誤答との違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答内容を直接示す"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: d49cb908ff34c6f8810bb46e0f7f761e9ed974cec330ac120e8820f4904d0dde。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
     }
   },
   {
