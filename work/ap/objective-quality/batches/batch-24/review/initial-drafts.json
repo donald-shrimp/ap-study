@@ -1,0 +1,1382 @@
+[
+  {
+    "id": "r06a-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dd62aa6df4d920f5fd351e99ee96e76767f84a9fa32d9838a0616c52e36d7bed",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q47",
+      "summary": "マイクロサービスの分割によって得られる**変更の独立性**と、分散化に伴う負担を区別する問題。",
+      "explanation": "マイクロサービスはシステムを独立性の高い複数のサービスへ分割し、サービス間をAPIなどで連携させる構成です。境界が適切なら一部の機能を変更・配置しやすく、他の機能への影響を限定できます。\n各サービスは異なる言語や基盤を選べますが、それ自体は統一の容易さを意味しません。分散したデータの整合性やサービス間通信の負担は、むしろ設計上の課題になります。",
+      "choiceReasons": [
+        "言語や基盤を各サービスで選べることはありますが、全サービスの統一が容易になることは基本的な利点ではありません。",
+        "データが複数サービスへ分かれるので、サービスをまたぐ整合性の確保は難しくなる場合があります。",
+        "独立した小さい単位で機能を変更できるため、各サービスの変更がしやすくなります。",
+        "サービス間の呼出しが増え、ネットワーク通信などのオーバーヘッドが加わる場合があります。"
+      ],
+      "takeaway": "分割の利点は個別変更の容易さ。分散データとサービス間通信の扱いは追加の課題になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "マイクロサービスでは注文・決済などを**独立したサービス**に分け、APIなどで連携します。分割するとサービス間通信と分散データ管理も必要になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "境界を適切に設計すれば、配送機能だけを変更して他のサービスを変更せずに済む場合があります。一方、言語の統一やデータ整合性の確保は分割によって容易になるとは限りません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "呼出し回数の減少も保証されず、分割により通信オーバーヘッドが増えることがあります。**個別変更のしやすさ**を述べたウが利点です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "小さく分けるとデータ整合性や通信まで自動的に改善すると思い込む。",
+      "stages": [
+        {
+          "newInformation": "サービス分割の構造と通信・データの追加負担",
+          "remainingWork": "分割そのものの利点と課題を整理する",
+          "revealsAnswer": false,
+          "reason": "分割の仕組みだけで正答肢はまだ確定しない。"
+        },
+        {
+          "newInformation": "個別変更の容易さと統一・整合性の非利点",
+          "remainingWork": "この利点を述べた選択肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "『各サービスの変更がしやすい』というウの内容と実質一致する。"
+        },
+        {
+          "newInformation": "通信負担との対比と正答の根拠",
+          "remainingWork": "ほかの肢が利点ではない理由を確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢ウを明示し前段の開示を維持する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r06a/r06a-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: e7f0aff2902596a5752c0f69ccc7775c1b5ab5df79bf4d9006bb1f3faad4be3c。",
+        "contextの公式正答 ウ と原本の全肢を照合。問題固有の論点: 小さく分けるとデータ整合性や通信まで自動的に改善すると思い込む。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6c95e2fee2c6e2b50cd27183fb7b7d7a9d225fa85c208988ef38460a357953f4",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q46",
+      "summary": "モジュール間の**データ共有・処理指示・内部への直接依存**を、結合度の種類へ対応させる問題。",
+      "explanation": "共通結合は複数のモジュールが共通の大域データに依存する関係です。あるモジュールがそのデータを変えると他のモジュールにも影響が及ぶので、エが適切です。\n処理を選ぶフラグなどの引数は制御結合、他モジュールの内部処理に直接飛び込むものは内容結合です。厳密な分類で大域的な単一項目を共有するものを外部結合とする区別もあり、いずれにしてもウの制御結合ではありません。",
+      "choiceReasons": [
+        "アは通常の呼出し手続を通らず他モジュールの内部へ依存する内容結合です。外部結合ではありません。",
+        "イは処理の選択を引数で指示する制御結合です。内容結合ではありません。",
+        "ウは共有する大域データの関係で、処理を指示する引数による制御結合ではありません。単一の大域項目を共有する分類は外部結合です。",
+        "エは大域データを共通に参照する共通結合の説明です。"
+      ],
+      "takeaway": "処理の指示は制御結合、内部への直接依存は内容結合、大域データの共有は共通結合。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "結合度はモジュール同士がどのように依存するかの分類です。相手の内部へJUMPすることと、通常の呼出しで引数を渡すことは異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**内容結合**は他モジュール内部への直接依存、**制御結合**は処理を指示する引数の受渡し、**共通結合**は大域データの共有です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "大域的な**単一のデータ項目**を参照する場合を外部結合と区別する分類もあります。ウの『制御結合』は不適切で、大域データを参照するエが共通結合の説明です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "JUMP・制御引数・大域データの共有を、結合の名称だけで暗記して取り違える。",
+      "stages": [
+        {
+          "newInformation": "内部への直接依存と通常の呼出しの区別",
+          "remainingWork": "JUMPの肢が内容結合かどうかを判断する",
+          "revealsAnswer": false,
+          "reason": "アの誤りは判断できても正答は確定しない。"
+        },
+        {
+          "newInformation": "三種類の定義",
+          "remainingWork": "各肢の説明と結合名を照合する",
+          "revealsAnswer": true,
+          "reason": "大域データを共通結合とするエの説明と一致する。"
+        },
+        {
+          "newInformation": "単一項目と共通データの分類上の注意",
+          "remainingWork": "正答肢を確定する",
+          "revealsAnswer": true,
+          "reason": "エを明示し、前段でも正答を実質開示している。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r06h/r06h-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 25d9846628f74557514a2201b70c6735944d1761b32e6f9d4ee7b048f4b59458。",
+        "contextの公式正答 エ と原本の全肢を照合。問題固有の論点: JUMP・制御引数・大域データの共有を、結合の名称だけで暗記して取り違える。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8964ed08311cf920fff95b47d2f057d0dfe4c50ad9044f257c3311fad005057c",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q50",
+      "summary": "単一HTMLの表示を画面幅に応じて変えるための**CSSの条件指定機能**を問う。",
+      "explanation": "メディアクエリは、画面幅などの条件に応じてCSSの適用を切り替える機能です。同じHTMLに対して、幅が狭ければ一列、広ければ複数列といった表示を設定でき、レスポンシブWebデザインに使います。\nUser-Agentはブラウザなどの情報、WebSocketは双方向通信、マッシュアップは複数のサービスやデータを組み合わせることです。",
+      "choiceReasons": [
+        "User-Agentは端末やブラウザに関する情報で、CSSを画面条件に合わせる機能そのものではありません。",
+        "WebSocketは継続的な双方向通信の仕組みです。",
+        "マッシュアップは複数の情報や機能を組み合わせて新しいサービスを作ることです。",
+        "画面幅などを条件にCSSを適用するメディアクエリが、同じHTMLの表示を調整します。"
+      ],
+      "takeaway": "同じHTMLの表示を画面幅で変えるには、CSSのメディアクエリを使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "レスポンシブ表示では、HTMLを端末ごとに作り直さず、**同じ文書に適用する見た目の規則**を画面幅に応じて変えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CSSでは `@media (max-width: 600px)` のように画面幅の条件を書けます。こうした条件付きスタイル適用を**メディアクエリ**と呼びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "User-Agentはブラウザ等の識別情報、WebSocketは双方向通信、マッシュアップは機能の組合せです。**画面幅でCSSを切り替えるエ**が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "User-Agentの端末情報と、画面条件に応じてスタイルを適用する機能を混同する。",
+      "stages": [
+        {
+          "newInformation": "HTMLとCSSの役割の違い",
+          "remainingWork": "表示規則を切り替える機能を候補から探す",
+          "revealsAnswer": false,
+          "reason": "機能名や特定の肢はまだ示さない。"
+        },
+        {
+          "newInformation": "@mediaの具体例とメディアクエリの定義",
+          "remainingWork": "用語を選択肢に対応させる",
+          "revealsAnswer": true,
+          "reason": "正答エの名称を直接示す。"
+        },
+        {
+          "newInformation": "三つの誤答との区別",
+          "remainingWork": "答えを確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢エを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r06a/r06a-q50.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 56256dd66e7dbb21dafbad778057202a48fec68b27edcca9d760bb35f6691d09。",
+        "contextの公式正答 エ と原本の全肢を照合。問題固有の論点: User-Agentの端末情報と、画面条件に応じてスタイルを適用する機能を混同する。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1d752ef7c9e4956af18dcf79a115e4ee746cde134b2c0eeb5cfb6fae693bf012",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q46",
+      "summary": "旧版・新版の**二環境を丸ごと切り替えるリリース方式**と、順次更新・待機系を区別する。",
+      "explanation": "同等の稼働環境を二つ用意し、一方で旧版を提供したまま、他方へ新版を配置して確認する。ロードバランサー等で利用者の接続先を新版側へ切り替える。旧版側を残しておけば、不具合時に戻す時間を短くできる。\n\nローリングアップデートは複数のサーバを順次更新する。ホットスタンバイは障害に備えた待機系、ホットスワップは稼働中の部品交換を指す。実際の切戻しではDB変更等の整合性も考慮するが、この設問は環境の切替方式を問う。",
+      "choiceReasons": [
+        "ブルーグリーンは旧版・新版の二環境を用意し、通信先を切り替える方式。",
+        "ホットスタンバイは障害時に引き継ぐための待機構成。",
+        "ホットスワップは電源を入れたまま部品等を交換すること。",
+        "ローリングはサーバ等を一度に全てではなく順番に更新する方式。"
+      ],
+      "takeaway": "二つの環境を丸ごと切替える方式と、順次更新する方式を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "更新の仕方には、サーバを**一台ずつ更新**する方式と、**旧版と新版の環境を並行して用意**する方式があります。設問では後者を使い、接続先を切り替えています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "旧環境を**Blue**、新環境を**Green**のように呼び、ロードバランサー等で通信先を切り替える方式を**ブルーグリーンデプロイメント**といいます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホットスタンバイは障害時の待機系、ホットスワップは稼働中の部品交換、ローリングアップデートは順次更新です。二環境の切替はアです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "停止時間が短いという共通点からローリング更新やホットスタンバイを選んでしまう。",
+      "stages": [
+        {
+          "newInformation": "順次更新と二環境切替の違い",
+          "remainingWork": "候補のうち二環境切替を表す名称を探す",
+          "revealsAnswer": false,
+          "reason": "方式の特徴は設問にあるが名称はまだ示さない。"
+        },
+        {
+          "newInformation": "方式の名称とロードバランサーの役割",
+          "remainingWork": "名称を選択肢に当てはめる",
+          "revealsAnswer": true,
+          "reason": "アの名称を明示する。"
+        },
+        {
+          "newInformation": "三つの類似概念との違い",
+          "remainingWork": "正答肢を確定する",
+          "revealsAnswer": true,
+          "reason": "アを直接明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r07h/r07h-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: eb6c6da27887d527cc110a277666e76dd00e8da436dfe9059b14d72d49956bd0。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: 停止時間が短いという共通点からローリング更新やホットスタンバイを選んでしまう。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c41aaa7d1ebabf023217b39109407120c286d7ec3f225d45f651f5bca8769128",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q46",
+      "summary": "**モジュール結合度が最も低い**データの受渡し方式を比較する問題。",
+      "explanation": "データ結合ではモジュール間で必要な値だけを引数として渡します。構造体全体を渡すスタンプ結合、共通データを使う共通結合、外部で決まるデータ形式等に依存する外部結合より、相手や共有状態への依存が小さくなります。結合度は低いほどモジュールの独立性が高くなります。",
+      "choiceReasons": [
+        "外部結合は外部で決められたデータ形式や装置等への依存があり、データ結合より独立性が低いです。",
+        "共通結合は共通領域のデータを複数モジュールで使い、変更の影響が広がりやすくなります。",
+        "スタンプ結合は構造化データ全体を渡すため、必要部分以外の構造にも依存します。",
+        "必要な単純データだけを受け渡すデータ結合は、候補中で結合度が最も低く独立性が高いです。"
+      ],
+      "takeaway": "モジュール間は必要なデータだけを渡すと、共有状態や不要な構造への依存を減らせる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "結合度が高いほど、一方の変更が他方に波及しやすくなります。**共通領域の共有**や**構造体全体の受渡し**は、必要な部分以外にも依存する原因になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**データ結合**は、相手が必要とする単純な値だけを引数として渡します。構造体全体を渡す**スタンプ結合**より、不要な内部構造に依存しにくくなります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "共通結合は大域データを共有し、外部結合は外部仕様などに依存します。候補中で最も独立性が高いのは**エのデータ結合**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "外部・共通・スタンプ・データ結合の名称だけでは依存の大きさを比較できない。",
+      "stages": [
+        {
+          "newInformation": "結合度と共有領域・構造体の依存関係",
+          "remainingWork": "依存が最も小さい受渡し方を考える",
+          "revealsAnswer": false,
+          "reason": "正答の名称をまだ示していない。"
+        },
+        {
+          "newInformation": "データ結合とスタンプ結合の具体的な違い",
+          "remainingWork": "独立性が最も高い名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "エのデータ結合が最良だと実質的に分かる。"
+        },
+        {
+          "newInformation": "残る結合方式との比較",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "エを直接示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04h/r04h-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: d2b2a97a209d4b6464d260ef735ed024e6cba59911a2771d194915f9c545273a。",
+        "contextの公式正答 エ と原本の全肢を照合。問題固有の論点: 外部・共通・スタンプ・データ結合の名称だけでは依存の大きさを比較できない。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4fb479cc0ffea876e8fd355c55fd5f3daba04496a807ddf9287b3b883343ef98",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q46",
+      "summary": "モジュール間の**情報の渡し方**から結合度が最も低い方式を選ぶ問題。",
+      "explanation": "モジュールの独立性を高めるには、他モジュールの内部処理や共有状態への依存を小さくします。ウは入出力に必要な個々のデータだけを引数として渡すデータ結合です。制御用の引数や共有領域を使う方式に比べ、変更の影響を限定できるので結合度が最も低くなります。",
+      "choiceReasons": [
+        "共通領域を複数モジュールで参照する共通結合で、共有データの変更が他にも波及します。",
+        "処理の順序を指示する制御パラメータを渡す制御結合で、受手の処理内容へ依存します。",
+        "必要な個々のデータだけを引数で渡すデータ結合です。",
+        "外部宣言されたデータを共有する外部結合で、共通の定義への依存が生じます。"
+      ],
+      "takeaway": "入力と出力に必要な値だけを渡し、内部処理や共有状態への依存を避ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "モジュール間で受け渡すものを、**共通の記憶領域**、**処理を指示する引数**、**入出力の値**に分けて考えます。共有領域への依存は変更の影響を広げます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**データ結合**では、計算に必要な値だけを引数で渡します。**制御結合**では、実行順序や分岐を指示する情報まで渡すため、相手の処理方法に依存します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "共通域を参照するアと外部宣言を共有するエも共有状態への依存があります。最も結合度が低いのは**ウ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "引数を使うだけで制御結合もデータ結合も同程度に独立していると考える。",
+      "stages": [
+        {
+          "newInformation": "受渡し方式の三分類と共有領域の影響",
+          "remainingWork": "各肢の受渡し方を分類する",
+          "revealsAnswer": false,
+          "reason": "分類軸だけで正答は確定しない。"
+        },
+        {
+          "newInformation": "データ結合と制御結合の違い",
+          "remainingWork": "ウとイを比較する",
+          "revealsAnswer": true,
+          "reason": "ウの『必要なデータ項目だけ』が正答と分かる。"
+        },
+        {
+          "newInformation": "共有データ型の誤答理由",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "ウを直接明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r05h/r05h-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 652c6480369b4dfc71cf567e0b4b897193248ba225baf7835401f2cef6822a64。",
+        "contextの公式正答 ウ と原本の全肢を照合。問題固有の論点: 引数を使うだけで制御結合もデータ結合も同程度に独立していると考える。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3be4b0c1d77e7688ab47d81f7da5de102430993c4b704670d8869bc699504097",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q48",
+      "summary": "品質特性の**使用性（学習のしやすさ）**を測る目標と、復旧・保守・機能充足を区別する。",
+      "explanation": "使用性は、利用者が理解・学習・操作しやすいことなどに関する品質です。「使用方法を1時間以内に習得できる」は学習のしやすさを時間で測る具体的な目標です。\n障害後の復旧時間は信頼性、機能改善に必要な時間は保守性、求める機能の提供範囲は機能適合性に対応します。",
+      "choiceReasons": [
+        "障害後1時間以内に復旧するという目標は信頼性の回復性などに関するものです。",
+        "利用者の習得に掛かる時間を測るので、使用性の学習しやすさに関する目標です。",
+        "開発側が機能を改善する時間の目標で、保守性に関するものです。",
+        "必要な機能がそろっている割合は機能適合性に関する目標です。"
+      ],
+      "takeaway": "時間の指標でも、誰が何をする時間かで品質特性が変わる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "同じ『時間』の指標でも、**障害から復旧する時間**、**利用者が習得する時間**、**開発者が修正する時間**は別の品質特性を測ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**使用性**には利用者の**学習しやすさ**が含まれます。初めて使う人が操作方法を覚えるまでの時間は、学習性を定量化した指標です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "障害後の復旧は信頼性、機能改善の所要時間は保守性、機能の提供範囲は機能適合性です。**イ**が使用性の目標です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『1時間以内』など数値目標があるだけで使用性の指標と判断してしまう。",
+      "stages": [
+        {
+          "newInformation": "時間の主体・対象で品質特性が異なること",
+          "remainingWork": "各選択肢が誰のどんな行為を測るか分類する",
+          "revealsAnswer": false,
+          "reason": "正答となる行為はまだ指定しない。"
+        },
+        {
+          "newInformation": "使用性と学習性の関係",
+          "remainingWork": "学習時間の選択肢を特定する",
+          "revealsAnswer": true,
+          "reason": "イの『1時間以内に習得』に実質一致する。"
+        },
+        {
+          "newInformation": "他の三特性との対比",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "イを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r06a/r06a-q48.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 867e5445eb5a48a53abff38fb6016bf19f4b4491496c5df843de4b6b52976067。",
+        "contextの公式正答 イ と原本の全肢を照合。問題固有の論点: 『1時間以内』など数値目標があるだけで使用性の指標と判断してしまう。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "16109c4b0f8ffcce776cb068911240a1115e5626a85253df0907c99b4b24315c",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q47",
+      "summary": "不具合密度・テスト網羅率・残存エラー数と、**保守しやすい構造**を示す指標を区別する。",
+      "explanation": "保守性は、解析、変更、テスト等が行いやすい度合い。個々のプログラムが過大でなく適正な規模に分かれていれば、変更箇所や影響を把握しやすい。イの「基準を満たす数/総数」は、その構造を割合で評価する。\n\nアは不具合密度、ウは分岐網羅率、エは未摘出と推定される残存エラー数。いずれも品質評価の指標だが、ここで求める保守性の指標とは異なる。",
+      "choiceReasons": [
+        "運用中の不具合密度を表す。保守しやすい構造の割合ではない。",
+        "適正規模に分割されたプログラムの割合で、解析・変更のしやすさを評価する。",
+        "分岐網羅率で、テストがどの程度の分岐を通ったかを示す。",
+        "残存エラー数の推定であり、保守性そのものを示さない。"
+      ],
+      "takeaway": "指標は、欠陥の多さ・テストの広さ・変更のしやすさを分けて読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**保守性**は解析・修正・テストを行いやすいかを表します。運用中の不具合件数や未摘出エラー数は主に欠陥の量を測り、分岐網羅率はテスト実施範囲を測ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "プログラムが過大だと影響範囲を把握しにくくなります。**適正規模の基準を満たすプログラム数÷総数**なら、保守しやすい分割状態を割合で評価できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アは不具合密度、ウは分岐網羅率、エは残存エラー数の推定です。保守性を示すのは**イ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『品質指標』という共通点から、エラーやテストの指標を保守性と取り違える。",
+      "stages": [
+        {
+          "newInformation": "保守性と欠陥・網羅率の評価軸の違い",
+          "remainingWork": "各式の分子と分母が何を数えるか確認する",
+          "revealsAnswer": false,
+          "reason": "欠陥・網羅率を除外できるが、正答肢の式はまだ直接示さない。"
+        },
+        {
+          "newInformation": "適正規模の比率が保守性に結び付く理由",
+          "remainingWork": "式を選択肢に対応させる",
+          "revealsAnswer": true,
+          "reason": "イの式をそのまま示し実質開示する。"
+        },
+        {
+          "newInformation": "三つの誤答の指標名",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "イを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r07h/r07h-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 2b10b01f0d425b4eca198f6079aada21c65b594646aa7109e6b29bc95598880f。",
+        "contextの公式正答 イ と原本の全肢を照合。問題固有の論点: 『品質指標』という共通点から、エラーやテストの指標を保守性と取り違える。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c788dd577bfde34dfa13e636b94b8d8a2efb7abff6b51d7bdef7bb43e7327682",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q47",
+      "summary": "累積誤り検出数の推移から、**ゴンペルツ曲線のS字形と収束**を読み取る問題。",
+      "explanation": "ゴンペルツ曲線は非対称なS字形の成長曲線です。累積誤り検出数はテスト初期に緩やかに増え、途中で増加速度が上がり、後半では新たな誤りが減って上限へ近づきます。\n図のウはこの三段階を示します。エも上限へ近づきますが、開始直後が最も急で、その後減速するだけです。初期の緩やかな増加から加速する部分がありません。",
+      "choiceReasons": [
+        "アは増加速度が大きくなり続け、誤りの収束を示しません。",
+        "イは一定の傾きで増え続ける直線です。収束しません。",
+        "ウは初期の緩やかな増加、中盤の加速、後半の減速を示すS字形です。",
+        "エは初めから急に増え、その後減速する形です。ゴンペルツ曲線の初期の加速部分がありません。"
+      ],
+      "takeaway": "収束するだけでなく、初期に緩やかで途中から加速するS字形を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "縦軸は**累積誤り検出数**です。テストが進み新しいバグが減ると、累積値そのものは減らず、**傾きが小さく**なって上限へ近づきます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**ゴンペルツ曲線**は非対称なS字形です。初期はゆっくり増え、中盤で加速し、後半は再び減速して上限へ近づきます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "エは初めから傾きが大きく減速するだけですが、**ウ**には初期の緩やかな部分からの加速があります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "単に右上がりで頭打ちになる曲線と、初期の加速を持つS字形を混同する。",
+      "stages": [
+        {
+          "newInformation": "累積値と検出速度（傾き）の違い",
+          "remainingWork": "頭打ちにならないア・イを区別する",
+          "revealsAnswer": false,
+          "reason": "収束の特徴だけではウとエを区別できない。"
+        },
+        {
+          "newInformation": "初期加速・後半減速の形状",
+          "remainingWork": "図の曲線に対応させる",
+          "revealsAnswer": true,
+          "reason": "ウのS字形を実質的に特定する。"
+        },
+        {
+          "newInformation": "ウとエの左端の形状差",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "ウを直接明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r06h/r06h-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 368222ea0329b3ecff1adb7ff06e86ea6fc2cce3bcd0c565d74cd57b12af8efb。",
+        "contextの公式正答 ウ と原本の全肢を照合。問題固有の論点: 単に右上がりで頭打ちになる曲線と、初期の加速を持つS字形を混同する。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "32ba182386f0979fab389fbe14bd4ea9446728803ad99db165556d7c0ee08a74",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q47",
+      "summary": "三つの値引き条件が**同時適用**される決定表で、各列の動作を割引率へ対応させる。",
+      "explanation": "三条件はそれぞれ元値の3%で、同時に適用します。従って該当条件数kに対する値引率は3k%です。列ごとのYの数は左から3,2,2,1,2,1,1,0なので、値引率は9,6,6,3,6,3,3,0%です。9%行の第1列、6%行の第2・3・5列、3%行の第4・6・7列、値引きなし行の第8列にXを置くウです。",
+      "choiceReasons": [
+        "第3列は二条件成立で6%ですが、3%の行にXがあります。",
+        "第2列は二条件成立で6%ですが、3%の行にXがあります。",
+        "Yの個数に応じて3%ずつ加算した動作指定です。",
+        "第4列は上得意客だけ成立して3%ですが、値引きなしの行にXがあります。"
+      ],
+      "takeaway": "元値に対する割引を同時適用するなら、該当条件の割引率を加算する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "決定表の各列は**上得意客・高額取引・現金取引**のYes/Noの組合せです。各条件は**元値の3%**なので、同時適用なら条件ごとの率を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "成立した条件がk個なら、値引率は **3%×k**。例えばYが3個なら9%、2個なら6%、1個なら3%、0個なら値引きなしです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左からYの個数は**3,2,2,1,2,1,1,0**。したがって割引率は**9,6,6,3,6,3,3,0%**となり、この位置にXがある**ウ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "同時適用の3%を一つだけ選んだり、複利的に0.97を繰り返し掛けたりする。",
+      "stages": [
+        {
+          "newInformation": "各列の条件の読み方と元値基準の加算",
+          "remainingWork": "各列のYes数を数える",
+          "revealsAnswer": false,
+          "reason": "計算方法だけで最終の動作表は確定していない。"
+        },
+        {
+          "newInformation": "条件数から値引率への対応式",
+          "remainingWork": "八つの列へ割引率を割り当てる",
+          "revealsAnswer": false,
+          "reason": "公式は渡すが各列の配置判断は残る。"
+        },
+        {
+          "newInformation": "全列の検算と正答",
+          "remainingWork": "ほかの表のXの誤配置を確認する",
+          "revealsAnswer": true,
+          "reason": "正答ウと全列の割引率を開示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r05h/r05h-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 70b86d5985567d1ff524df9e309bb943de110f3cb40ce43793c0d853265a9178。",
+        "contextの公式正答 ウ と原本の全肢を照合。問題固有の論点: 同時適用の3%を一つだけ選んだり、複利的に0.97を繰り返し掛けたりする。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a31a00c089a3d0a77115375b85e4c992c95a3fdff25bb23b6e006ec27a41f954",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q46",
+      "summary": "要件定義で使う**典型的な利用者の仮想人物像**と、利害関係者や開発上の役割を区別する。",
+      "explanation": "ペルソナは、利用者調査に基づいて典型的な利用者の役割、目的、経験、行動などを具体的な人物像にまとめたものです。要求を考える際に、誰が何のために使うかを共有できます。\n実在の利害関係者や、プロダクト管理を担う役職、開発単位の名称とは異なります。",
+      "choiceReasons": [
+        "エピックは複数のユーザーストーリーへ分けられる大きな要求・開発単位です。",
+        "ステークホルダーはシステムに関わる利害関係者で、仮想の典型人物像の名称ではありません。",
+        "プロダクトオーナーはプロダクトの価値やバックログに責任を持つ役割です。",
+        "利用者の典型像を仮想人物として描くものがペルソナです。"
+      ],
+      "takeaway": "典型的な利用者像はペルソナ。実際の役割や開発単位と分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "要求を考えるときは、**誰がどんな目的で使うか**を共有します。実際の役職を指定する方法と、調査に基づく**架空の利用者像**を描く方法は異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "典型的な利用者の年齢、仕事、目的、困り事などを**一人の仮想人物**にまとめたものを**ペルソナ**と呼びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "エピックは大きな要求のまとまり、ステークホルダは利害関係者、プロダクトオーナーは製品の価値に責任を持つ役割です。仮想人物像は**エ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『利用者の役割』という言葉からプロダクトオーナーなど実際の担当役職を選ぶ。",
+      "stages": [
+        {
+          "newInformation": "実在する役割と仮想利用者モデルの違い",
+          "remainingWork": "選択肢が人物モデルか役職・要求単位かを分ける",
+          "revealsAnswer": false,
+          "reason": "モデルの名称はまだ示さない。"
+        },
+        {
+          "newInformation": "ペルソナの定義と具体的な属性",
+          "remainingWork": "用語を選択肢へ対応させる",
+          "revealsAnswer": true,
+          "reason": "エの名称を直接開示する。"
+        },
+        {
+          "newInformation": "三つの誤答との対比",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "エを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r07a/r07a-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 8db326f2b5707bc3651d149bb5169be375cef577cbe922eeb28634b54f1b8570。",
+        "contextの公式正答 エ と原本の全肢を照合。問題固有の論点: 『利用者の役割』という言葉からプロダクトオーナーなど実際の担当役職を選ぶ。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "53450b0bc831c5bb706b2ef55eb06bdc3c00b76ee23277e830088bef4cc622c0",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q47",
+      "summary": "二つの判定で**Yes/Noの両枝を通す**最少のテストケースを求める。",
+      "explanation": "初期値C=1です。A=1,B=0では第1判定がYesで、C=A×C=1。第2判定A>0かつC=1もYesです。A=1,B=1では第1判定がNoでC=2となり、第2判定はNoです。これで二つの判定それぞれのYes・Noを通り、1ケースでは両側を通れないので最少は2ケースです。",
+      "choiceReasons": [
+        "A=0,B=0もA=1,B=1も第1判定がNoになり、第1のYesを通れません。",
+        "A=1,B=0で両方Yes、A=1,B=1で両方Noとなり、2ケースで分岐網羅します。",
+        "この3ケースは網羅できますが、A=1,B=0とA=1,B=1だけで十分なので最少ではありません。",
+        "この3ケースは網羅できますが、A=0,B=0とA=1,B=0の2ケースだけでも網羅でき、最少ではありません。"
+      ],
+      "takeaway": "分岐網羅は各判定全体の真・偽を通す。途中で更新される変数を各ケースで追跡する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**分岐網羅**は、各判定のYesとNoを少なくとも一回ずつ通ることです。図には二つのひし形があり、初期値は**C=1**です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "第1判定がYesなら **C=A×1**、Noなら **C=2**。この更新後のCで第2判定 **A>0 かつ C=1** を評価します。A=1,B=0なら両方Yes、A=1,B=1なら両方Noです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**イ**の二ケースで二つの判定のYes/Noを網羅できます。1ケースだけでは一つの判定の両側を通れないため、最少は2ケースです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "AとBだけで判定し、途中で更新されるCの値を追わない。",
+      "stages": [
+        {
+          "newInformation": "分岐網羅の定義と初期値",
+          "remainingWork": "各テストの一段目・二段目の進路を記録する",
+          "revealsAnswer": false,
+          "reason": "判定基準だけで正答の組合せは確定しない。"
+        },
+        {
+          "newInformation": "Cの更新式と二つの具体的な経路",
+          "remainingWork": "その二ケースが選択肢にあるか確認する",
+          "revealsAnswer": true,
+          "reason": "二ケースを明示した時点でイを実質確定する。"
+        },
+        {
+          "newInformation": "最小性の根拠",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "イを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04h/r04h-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 8408f59aefdfffddde74b89fd3bd2998dccabf8a80224469f70c98f1a4acc844。",
+        "contextの公式正答 イ と原本の全肢を照合。問題固有の論点: AとBだけで判定し、途中で更新されるCの値を追わない。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "32d2603ba72dd2c65700004577fa0b3976328f95a0323e4041389dd89ac333b4",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q48",
+      "summary": "与えられた二つの入力で、**命令網羅C0と分岐網羅C1**の網羅率を別々に数える問題。",
+      "explanation": "全0では命令1,2,4、全1では命令3,5を実行し、五つの命令をすべて通るのでC₀=100%です。判定は五つ、各Yes/Noで計10分岐。V=0、W=X=0、Y=Z=0の三判定は両方を通りますが、W≠0かつX≠0とY≠0かつZ≠0はYesだけです。計8分岐を通りC₁=8/10=80%です。",
+      "choiceReasons": [
+        "W≠0かつX≠0の判定と、Y≠0かつZ≠0の判定のNo枝が未実行なので、分岐100%ではありません。",
+        "全命令を通り、10分岐のうち8分岐を通る組合せです。",
+        "命令は五つすべて実行され、命令80%ではありません。また分岐100%でもありません。",
+        "命令網羅は100%なので80%とする点が誤りです。"
+      ],
+      "takeaway": "命令をすべて通っても、命令を飛ばす分岐をすべて通ったとは限らない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**C0**は実行した命令数の割合、**C1**は実行した判定の分岐（Yes/No）の割合です。命令箱とひし形の枝は別々に数えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "全0のケースは命令**1・2・4**、全1は**3・5**を実行するので、命令1〜5は全て通ります。判定は**5個**あり、それぞれYes/Noの**計10枝**を数えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "W≠0かつX≠0、Y≠0かつZ≠0の二判定では**No枝が未通過**です。したがってC1は**8/10=80%**、C0は100%で**イ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "すべての命令を実行できればすべてのYes/No分岐も通ったと思い込む。",
+      "stages": [
+        {
+          "newInformation": "命令網羅と分岐網羅の分母の違い",
+          "remainingWork": "全0・全1の二経路を図で追う",
+          "revealsAnswer": false,
+          "reason": "定義だけで網羅率は確定しない。"
+        },
+        {
+          "newInformation": "実行命令の列挙と分岐総数",
+          "remainingWork": "未通過の枝を特定する",
+          "revealsAnswer": false,
+          "reason": "C0=100%は判明するがC1は未計算。"
+        },
+        {
+          "newInformation": "未通過2枝と網羅率の検算",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "二つの数値と正答イを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04a/r04a-q48.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 927d69a65d61966a0ba8d86b888bbfd1a5aeaead911bca1ffc554072571c4c44。",
+        "contextの公式正答 イ と原本の全肢を照合。問題固有の論点: すべての命令を実行できればすべてのYes/No分岐も通ったと思い込む。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6f418b6566aa442242178d6a462f71b07546c8d39461765546bd19605b0d5965",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q48",
+      "summary": "再合流する多分岐の流れ図について、**命令網羅**を満たす最少テスト数を求める。",
+      "explanation": "命令網羅はすべての処理命令を少なくとも1回実行することです。図は上段に3分岐、中段に2分岐、下段に3分岐があり、各段で再合流します。1ケースは各段で1分岐しか通れないので3分岐の段から少なくとも3ケースが必要です。条件が先行命令の結果に影響されないので、例えば(左,左,左)、(中央,右,中央)、(右,左,右)の3ケースで全8個の処理を通せます。",
+      "choiceReasons": [
+        "3ケースで上段と下段の3分岐、中段の2分岐をすべて実行できます。",
+        "6は必要ありません。再合流する各段の分岐を同じテストに組み合わせられます。",
+        "8は図の処理箱の総数ですが、1ケースで各段の箱を一つずつ実行できるのでケース数ではありません。",
+        "18=3×2×3は全経路を実行する場合の数で、命令網羅より強い条件です。"
+      ],
+      "takeaway": "命令網羅では全経路の積ではなく、全処理を通る最少の組合せを考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**命令網羅**は各処理箱を少なくとも一度通ることです。図では上段・中段・下段の分岐がそれぞれ**再合流**するため、一回のテストで各段の処理を一つずつ通れます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "上段は3通り、中段は2通り、下段は3通りです。どの一回も上段・下段で一つずつしか通れないので、**少なくとも3ケース**が必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えば**(上左,中左,下左)、(上中,中右,下中)、(上右,中左,下右)**の3ケースで全8処理箱を通れます。したがって最少は**3（ア）**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "全経路数3×2×3を命令網羅の必要ケース数と誤解する。",
+      "stages": [
+        {
+          "newInformation": "命令網羅と再合流の意味",
+          "remainingWork": "各段に何個の処理箱があるか数える",
+          "revealsAnswer": false,
+          "reason": "ケース数はまだ決めていない。"
+        },
+        {
+          "newInformation": "最大分岐数による下限",
+          "remainingWork": "3ケースで全段を覆える組合せを考える",
+          "revealsAnswer": false,
+          "reason": "下限3は示すが、それだけでは達成可能性の確認が残る。"
+        },
+        {
+          "newInformation": "具体的なテスト経路と最小性",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "最終値と正答アを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r03h/r03h-q48.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 4a3ae35065db7011da90992ddd82b8dcd861ca104be2faa4efa7ff1b512bdff5。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: 全経路数3×2×3を命令網羅の必要ケース数と誤解する。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "74302811d2b32187b4cf75ff8f7dc7b4434759fd27d2bdfb2fa0db9149f6d9c1",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q48",
+      "summary": "障害がない状況で**仕様書を現状のコードへ合わせる保守**を、保守分類から選ぶ。",
+      "explanation": "完全化保守は、引渡し後のソフトウェアの性能・保守性等を改善する保守です。本問では障害は起きておらず、コードと合っていない仕様書をリバースエンジニアリングで整備して、理解や保守をしやすくしています。障害修正や環境変化への対応、潜在障害の予防とは目的が異なります。",
+      "choiceReasons": [
+        "仕様書を整えて理解・保守をしやすくする作業は、保守性を改善する完全化保守です。",
+        "是正保守は発見された問題を修正する保守ですが、設問は問題が発生していないとしています。",
+        "適応保守はOS等の利用環境の変化に対応する保守です。環境変更は条件にありません。",
+        "予防保守は潜在する障害を発現前に修正する保守で、仕様書の整備による保守性改善とは異なります。"
+      ],
+      "takeaway": "仕様書の整備など保守性改善は完全化保守。障害修正・環境適応・潜在障害の予防と分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "保守分類は**故障の修正（是正）**、**環境変化への対応（適応）**、**品質・保守性の改善**、**潜在故障の予防**で目的が異なります。『障害なし』だけでは決まりません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**完全化保守**は性能や保守性などを改善する作業です。現状コードから仕様書を再作成するのは、理解や将来の変更をしやすくする文書整備です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "故障修正でもOS変更への対応でも潜在バグの除去でもありません。保守性改善の**ア・完全化保守**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『問題は発生していない』だけで予防保守と判断し、改善目的を見落とす。",
+      "stages": [
+        {
+          "newInformation": "四分類を区別する目的",
+          "remainingWork": "仕様書を作り直す目的を判断する",
+          "revealsAnswer": false,
+          "reason": "改善の名称をまだ明示していない。"
+        },
+        {
+          "newInformation": "完全化保守の定義と本問の目的",
+          "remainingWork": "名称を選択肢へ対応させる",
+          "revealsAnswer": true,
+          "reason": "アの名称と本問の作業を実質的に対応させた。"
+        },
+        {
+          "newInformation": "他分類を除外する理由",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "アを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04h/r04h-q48.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 35eed3a03c1c6519c63030266be721f81f2fe3e8d9814609c8c0b37d5467ba2b。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: 『問題は発生していない』だけで予防保守と判断し、改善目的を見落とす。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q48",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b31b0107d90ec9c53ea7a97a20a9135d9fd96a1c0cb170045983f1e7a7e7e6bd",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q48",
+      "summary": "リバースエンジニアリングによる**仕様書の整備**が、どのソフトウェア保守目的に当たるかを問う。",
+      "explanation": "問題は発生していません。行う作業は、現状のソースコードからリバースエンジニアリングで仕様を抽出し、仕様書の不整合を解消することです。動作の故障修正や環境変化への追随ではありません。\n文書を正確にして理解・保守しやすさを改善する作業は完全化保守に該当します。将来の潜在的な故障を取り除く予防保守とも区別します。",
+      "choiceReasons": [
+        "保守性などを改善する完全化保守に該当します。現状に合わせて仕様書を整備し、今後の理解・変更を容易にします。",
+        "発生した問題・故障を修正する是正保守です。設問では問題は発生していません。",
+        "OSなどの環境変化に合わせる適応保守です。設問に環境変化の条件はありません。",
+        "潜在的な故障を将来の発生前に除去する予防保守です。設問の主目的は仕様書を現状へ合わせる保守性の改善です。"
+      ],
+      "takeaway": "文書整備による保守性の改善は完全化保守。未発生だけで予防保守とは決めない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問はソフトウェアの動作不良を直すのではなく、**現状のコードと仕様書の不一致**を文書の作り直しで解消します。変更対象と目的を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**完全化保守**は、ソフトウェアの保守性や性能を改善する保守です。仕様書を正確にすることは、担当者がコードを理解・変更しやすくする改善です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**予防保守**は潜在する故障原因を発生前に除くことです。設問は潜在故障の除去ではなく文書の改善なので、**ア**が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "予防保守と完全化保守の区別を『問題がまだ起きていない』という条件だけで行う。",
+      "stages": [
+        {
+          "newInformation": "修正対象が文書であることと動作不良との違い",
+          "remainingWork": "文書整備で改善する品質を考える",
+          "revealsAnswer": false,
+          "reason": "正答の保守分類名はまだ示さない。"
+        },
+        {
+          "newInformation": "完全化保守と文書整備の関係",
+          "remainingWork": "分類名を選択肢に当てはめる",
+          "revealsAnswer": true,
+          "reason": "アの名称を明示し正答を実質確定する。"
+        },
+        {
+          "newInformation": "予防保守との境界",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "アを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r05a/r05a-q48.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: c7511011a4a8009182750b9934d23b15f75943bb1936e10a1313c1addb1a33e2。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: 予防保守と完全化保守の区別を『問題がまだ起きていない』という条件だけで行う。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q46",
+    "baseVersion": 2,
+    "baseLessonSHA256": "34eabb14f6e38c16c5f0aaaa8efad48f067c83f6e68dc397156a839eb7fef6ec",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q46",
+      "summary": "仕様書・ソースコードを**複数人で机上追跡するレビュー手法**と、実行する結合テストを区別する。",
+      "explanation": "ウォークスルーは作成者を含む複数人が成果物の処理や振舞いを順にたどり、問題を発見するレビュー手法です。仕様書やソースコードを机上でシミュレーションするという条件に一致します。",
+      "choiceReasons": [
+        "作成者も参加して成果物を順にたどるレビュー手法です。",
+        "サンドイッチテストは上位側と下位側から結合テストを進める方式です。",
+        "トップダウンテストは上位モジュールから結合テストを進める方式です。",
+        "並行シミュレーションは独立した処理で結果を比較する監査手法で、複数人の机上レビューではありません。"
+      ],
+      "takeaway": "机上で処理をたどるレビューと、実行する結合テストを区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "この問題はプログラムを動かして結果を測るのではなく、**作成者を含む参加者が成果物を机上で追う**手法です。レビューと実行テストを区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**ウォークスルー**は作成者が説明し、参加者が処理の流れを順にたどって問題を見つけるレビューです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サンドイッチ・トップダウンは結合テストの進め方、並行シミュレーションは別処理との結果比較です。机上レビューは**ア**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『シミュレート』を実際のテスト実行と読み、結合テスト手法を選んでしまう。",
+      "stages": [
+        {
+          "newInformation": "静的な机上レビューと動的テストの違い",
+          "remainingWork": "候補をレビューと結合テストに分類する",
+          "revealsAnswer": false,
+          "reason": "問題文の条件整理で名称はまだ明かしていない。"
+        },
+        {
+          "newInformation": "ウォークスルーの定義",
+          "remainingWork": "該当する選択肢を探す",
+          "revealsAnswer": true,
+          "reason": "アの名称を明示する。"
+        },
+        {
+          "newInformation": "誤答手法との比較",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "アを直接明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04a/r04a-q46.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 0d0aee953b15d00b91a321d3052d29203e1a8afee329bc1e17935f807ebbe778。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: 『シミュレート』を実際のテスト実行と読み、結合テスト手法を選んでしまう。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q49",
+    "baseVersion": 2,
+    "baseLessonSHA256": "76849834adffef871b04c6ace57ced91a17257fe4262801026eaa5d1f502b7cd",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q49",
+      "summary": "日本の特許について、**国内製造・私的利用・存続期間・先使用**の条件から実施許諾の要否を判断する。",
+      "explanation": "特許権は業として発明を実施する行為に及び、物の発明では製造も実施に含まれます。日本で取得した特許なので、日本国内で同技術の製品を製造するイは対象です。製品を全て海外へ輸出する予定でも、国内製造がなくなるわけではありません。家庭内の個人利用、存続期間後、条件を満たす先使用は区別します。",
+      "choiceReasons": [
+        "家庭内の個人的な利用だけなら、業としての実施に当たりません。",
+        "日本国内で業として製造するため、全て輸出しても許諾が必要です。",
+        "出願から25年を超える時点は、通常の存続期間20年と認められる延長を超えています。",
+        "出願前に独自に開発し、出願時に既に国内事業をしていた条件は先使用による通常実施権に当たります。"
+      ],
+      "takeaway": "輸出先だけでなく、特許技術を製造する場所と時点を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "日本で成立した特許は原則として**日本国内で業として実施する行為**に及びます。家庭内の個人的利用と、事業としての製造は区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "物の発明の『実施』には**製造**も含まれます。**全量を輸出しても、日本国内で業として製造する行為**は日本の特許権の対象です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "特許権は原則出願から**20年**で満了し、設問の25年超は通常の存続期間外です。出願時に条件を満たす先使用者には通常実施権があります。許諾が必要なのは**イ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "製品を全量輸出するなら、日本国内での製造も特許権の対象外だと誤解する。",
+      "stages": [
+        {
+          "newInformation": "特許の属地主義と業としての実施",
+          "remainingWork": "各肢の利用場所と事業性を確認する",
+          "revealsAnswer": false,
+          "reason": "アの除外は分かるが正答は確定しない。"
+        },
+        {
+          "newInformation": "製造が実施に含まれ輸出で免れないこと",
+          "remainingWork": "国内製造の肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "イの状況を実質的に特定する。"
+        },
+        {
+          "newInformation": "存続期間と先使用の例外",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "イを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r05h/r05h-q49.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: d223a50752cfc49835afcea20498ed3654bd12a7546c49cf5ea301fba37f77b7。",
+        "contextの公式正答 イ と原本の全肢を照合。問題固有の論点: 製品を全量輸出するなら、日本国内での製造も特許権の対象外だと誤解する。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q47",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b7e1d13976eb14dcafc696a2f0f7e22509bac139a928f4f73948bc671c1bb79f",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q47",
+      "summary": "状態遷移表の**現在状態の列×イベントの行**を順にたどり、最終状態を求める。",
+      "explanation": "初期状態はレディ(1)です。①メッセージ1で高速運転(2)、②メッセージ1では高速運転のセルが空欄なので2のまま、③50℃以上で低速運転(3)、④メッセージ2で一時停止(4)、⑤40℃未満で低速運転(3)、⑥メッセージ2で一時停止(4)となります。空欄は状態が変化しないという条件を守り、各イベントをその時点の状態の列に適用します。",
+      "choiceReasons": [
+        "レディへ戻るのは一時停止中のメッセージ2ですが、最後の直前は低速運転です。",
+        "最初は高速運転になりますが、温度上昇とメッセージ2で別の状態へ進みます。",
+        "⑤で低速運転になりますが、⑥のメッセージ2によって一時停止へ進みます。",
+        "状態番号は1→2→2→3→4→3→4となり、最後は一時停止です。"
+      ],
+      "takeaway": "状態遷移表は現在状態の列と発生イベントの行を毎回引き直す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "状態遷移表は、**現在の状態の列**と**発生イベントの行**の交点を読みます。空欄は『状態が変わらない』ので、次のイベントでも同じ状態の列を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "初期状態はレディ(1)。①メッセージ1で**2**、②は高速運転列の空欄なので**2のまま**、③50℃以上で**3**になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "④メッセージ2で**4**、⑤40℃未満で**3**、⑥メッセージ2で**4**です。状態は **1→2→2→3→4→3→4**、最終は**一時停止（エ）**。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "一度選んだ列を使い続けたり、空欄で状態が変化すると考えたりする。",
+      "stages": [
+        {
+          "newInformation": "状態遷移表の読み方と空欄の意味",
+          "remainingWork": "①から順に現在状態を更新する",
+          "revealsAnswer": false,
+          "reason": "読み方だけで最終状態はまだ不明。"
+        },
+        {
+          "newInformation": "最初の三イベントの具体的な追跡",
+          "remainingWork": "④〜⑥を現在状態から追う",
+          "revealsAnswer": false,
+          "reason": "まだ最後の三イベントが残る。"
+        },
+        {
+          "newInformation": "残りの遷移と最終状態",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "最終状態エを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r03h/r03h-q47.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: e80727b579f17861320309d081dbcad1bc8484475903526aa22705d747e51793。",
+        "contextの公式正答 エ と原本の全肢を照合。問題固有の論点: 一度選んだ列を使い続けたり、空欄で状態が変化すると考えたりする。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q50",
+    "baseVersion": 2,
+    "baseLessonSHA256": "86e199baa4ade6b5af01401f31e0f494192aef41b006130076fc8b92682b0dc0",
+    "author": "ChatGPT/gpt-6-batch24-20261028-automation",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q50",
+      "summary": "IDE（統合開発環境）が統合する**ソフトウェア開発機能**を、CPU装置やOS機能と区別する。",
+      "explanation": "IDEはIntegrated Development Environmentの略です。ソースコードの編集、ビルド、実行、デバッグなどの機能を一つの環境にまとめ、開発の操作を連携させます。CPU情報を取得する専用装置や評価ボード、タスクスケジューリングの提供とは異なります。",
+      "choiceReasons": [
+        "エディタ・コンパイラ・リンカ・デバッガ等をまとめたツールが統合開発環境です。",
+        "専用ハードウェア経由でCPUの情報を取得する装置は、ハードウェアデバッグ用装置等の説明です。",
+        "ターゲットCPUを載せた評価ボードは実行・評価用のハードウェア環境です。",
+        "タスクのスケジューリングを提供するのはOS等の役割です。"
+      ],
+      "takeaway": "IDEはソース編集からビルド・デバッグまでの開発機能を統合する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ソフトウェア開発には、**ソースの編集・コンパイル・リンク・デバッグ**という作業があります。CPUの観測装置や評価ボードは、これらの作業をまとめるツールとは別です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**IDE（Integrated Development Environment）**は、エディタ・コンパイラ・リンカ・デバッガなどを**一つの操作環境に統合**したものです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イはハードウェアの観測装置、ウはターゲットCPUの評価環境、エはOS等のスケジューリング機能です。統合ツールを述べる**ア**が正答です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "IDEの略語が分からず、CPU評価ボードなど開発に使う周辺機器もIDEと考える。",
+      "stages": [
+        {
+          "newInformation": "開発工程とハードウェア機器の役割",
+          "remainingWork": "選択肢を開発ツール・装置・OS機能に分ける",
+          "revealsAnswer": false,
+          "reason": "IDEの名称や該当肢はまだ示さない。"
+        },
+        {
+          "newInformation": "IDEの略語展開と具体的な統合対象",
+          "remainingWork": "定義に合う肢を探す",
+          "revealsAnswer": true,
+          "reason": "アの説明と実質同じ。"
+        },
+        {
+          "newInformation": "誤答の装置・機能の区別",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "アを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本画像 assets/questions/r04h/r04h-q50.webp をbase64で取得し、画像として表示して問題文・全4肢・図表・数値条件を目視照合。context記載の画像SHA256: 49b340492b4608779694df5853d1583b41ab06934a3b8851eed31d06086290e8。",
+        "contextの公式正答 ア と原本の全肢を照合。問題固有の論点: IDEの略語が分からず、CPU評価ボードなど開発に使う周辺機器もIDEと考える。",
+        "原本画像は目視確認済み。IPA公式解答PDFの独立照合・別担当レビュー・公開用データへの統合は未実施。"
+      ]
+    }
+  }
+]
