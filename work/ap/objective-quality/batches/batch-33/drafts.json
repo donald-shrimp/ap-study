@@ -3,11 +3,11 @@
     "id": "r07a-q73",
     "baseVersion": 2,
     "baseLessonSHA256": "3b0e23e1bd02b2260e7d808ac129d078ff8a29f9f67270070a063d7bc9c961a0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q73",
-      "summary": "ウ。LPWAは低消費電力で広域をカバーする無線通信です。",
+      "summary": "LPWAの通信特性を、通信範囲・消費電力・伝送量・有線／無線から見分ける。",
       "explanation": "LPWAはLow Power Wide Areaで、小さな電池で長く動くIoT機器を、離れた場所から接続するための無線通信技術です。伝送速度やデータ量を抑える代わりに、省電力と広い通信範囲を重視します。\n大容量映像の高速伝送、電力線の有線通信、同じ基板上の有線シリアル通信とは用途が異なります。",
       "choiceReasons": [
         "近距離で大容量映像を高速伝送する説明は、低電力・広域を重視するLPWAに合いません。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補を無線か有線か、通信範囲、送るデータ量の三つで分類します。IoTの用途でも、映像伝送とセンサーの少量データ送信では必要な条件が異なります。",
+          "text": "センサーが時々少量のデータを送る用途と、4K・8K映像を高速で送る用途では必要な通信性能が違います。各肢の**有線／無線・距離・消費電力・データ量**を分けて読みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "名称のLow PowerとWide Areaをそれぞれ消費電力と通信範囲の条件に置き換えます。",
+          "text": "**LPWA＝Low Power Wide Area**。少量のデータを比較的低速で送る代わりに、**低消費電力・広域通信**を重視する無線技術です。電力線通信（PLC）とは違います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "有線か無線か、近距離か広域か、高速大量送信か少量省電力かの三軸で候補を分類しましょう。",
-          "revealsAnswer": false
+          "text": "**ウ**の『一つの基地局で広範囲をカバーする低消費電力の無線通信』がLPWAです。アは高速大容量、イは有線PLC、エは基板上の有線通信です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "LPWAの略語が分からず、IoTの無線通信とPLCなどの有線通信を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "センサーが時々少量のデータを送る用途と、4K・8K映像を高速で送る用途では必要な通信性能が違います。各肢の**有線／無線・距離・消費電力・データ量**を分けて読みます。",
+          "remainingWork": "LPWAという名称が何を優先するか調べ、各肢の特徴を照合する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸のみでLPWAの意味はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**LPWA＝Low Power Wide Area**。少量のデータを比較的低速で送る代わりに、**低消費電力・広域通信**を重視する無線技術です。電力線通信（PLC）とは違います。",
+          "remainingWork": "該当肢を確かめる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "『低消費電力・広域・無線』がウの説明そのもの。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**ウ**の『一つの基地局で広範囲をカバーする低消費電力の無線通信』がLPWAです。アは高速大容量、イは有線PLC、エは基板上の有線通信です。",
+          "remainingWork": "LPWAが向くセンサー用途と高速動画用途の違いを復習する。",
+          "revealsAnswer": true,
+          "reason": "正答ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r07a/r07a-q73.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=da9bbe0bda1afbdda21a1b456d6e83444dbc8a6df7c5ecda6cb0590af9860ba4（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r07a-q71",
     "baseVersion": 2,
     "baseLessonSHA256": "6b24bdcec4f80e0f3835c3026611a802dd8350efff11cf2f3f0e960ed602392c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q71",
-      "summary": "イの実行層。MESは製造現場の工程・作業・実績を管理します。",
+      "summary": "生産システムの計画・実行・制御の三層とMESの担当範囲を対応させる。",
       "explanation": "MESはManufacturing Execution System、製造実行システムです。上位の生産計画を受け、現場への作業指示、工程進捗、製造実績や品質などを管理する実行層に位置します。\n計画層は生産計画や経営資源の計画、制御層は機械の運転・制御信号を扱い、MESはその間をつなぎます。",
       "choiceReasons": [
         "計画層は生産計画などを扱い、現場の実行管理を行うMESの主な層ではありません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題文の三層を、生産計画、作業指示と工程管理、機械の直接制御という扱う内容で区切ります。",
+          "text": "三層を**計画層＝何をどれだけ作るか**、**実行層＝現場への指示・工程進捗・実績**、**制御層＝機械の直接操作**に分けます。どの業務をMESが受け持つか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "MESのExecutionは実行を意味します。製造の進み具合や実績を管理する役割を考えます。",
+          "text": "**MES＝Manufacturing Execution System（製造実行システム）**。生産計画を受けて作業指示・進捗・製造実績を管理し、計画と設備制御の間の**実行層**で動きます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "生産計画を受けて現場へ指示し、結果を上位へ返す位置を三層の中へ置いてみましょう。",
+          "text": "**イ：実行層**です。MESは現場の工程・作業を管理します。計画層だけでも制御層だけでもなく、三層全てを直接運用するわけでもありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "MESの正式名称と、計画指示・現場の工程管理・機械制御の境界が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "三層を**計画層＝何をどれだけ作るか**、**実行層＝現場への指示・工程進捗・実績**、**制御層＝機械の直接操作**に分けます。どの業務をMESが受け持つか考えます。",
+          "remainingWork": "MESのExecutionの意味を知り、三層に当てはめる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "層の定義は示すがMESの機能との対応はまだ明示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**MES＝Manufacturing Execution System（製造実行システム）**。生産計画を受けて作業指示・進捗・製造実績を管理し、計画と設備制御の間の**実行層**で動きます。",
+          "remainingWork": "三層の選択肢を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "実行層＝イを直接特定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**イ：実行層**です。MESは現場の工程・作業を管理します。計画層だけでも制御層だけでもなく、三層全てを直接運用するわけでもありません。",
+          "remainingWork": "MESと生産計画・機械制御の役割の差を説明する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答イを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r07a/r07a-q71.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=114d3f75e6fcdd7958551fdbe2775a6665787273ea591860c51b7b2066e97bd1（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 イ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r07a-q72",
     "baseVersion": 2,
     "baseLessonSHA256": "0a117d908e414b3a9255adba8120511336d9af151f839304e2f3ff38cfebca94",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q72",
-      "summary": "イ。PLMは製品の開発から保守・リサイクルまでの情報を一元管理します。",
+      "summary": "PLMが製品のどの期間の情報を管理するかを、MRP・SCM・設備自動化と区別する。",
       "explanation": "PLMはProduct Lifecycle Managementです。設計、製造、販売、保守、リサイクルなど製品のライフサイクル全体で関連情報をつなぎ、品質向上やコスト削減を図ります。\n生産設備の自動化、資材所要量の計算、供給網の在庫・納期の最適化とは、管理する範囲が異なります。",
       "choiceReasons": [
         "設備を統合し多品種少量生産を自動化するFMSなどの説明です。",
@@ -143,58 +157,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の対象範囲を、設備、製品の一生、必要資材、供給網に分けます。",
+          "text": "選択肢が扱う範囲を**設備の自動化・必要資材の算出・調達から販売・製品の開発から廃棄まで**に整理します。製造の一工程だけを管理するかどうかが鍵です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Lifecycleには製造中だけでなく、設計や販売後の保守、最終的なリサイクルも含みます。",
+          "text": "**PLM＝Product Lifecycle Management（製品ライフサイクル管理）**。製品の**企画・開発→製造→販売→保守→リサイクル**まで、製品情報を一元管理します。MRP（資材所要量計画）は必要資材と発注時期の算出、SCM（供給連鎖管理）は調達から販売までの流れを管理します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "必要部品の発注時期や設備の運転を決める仕組みと、製品情報を各段階で共有する仕組みを区別しましょう。",
+          "text": "**イ**がPLMです。アは設備を連携させる生産自動化、ウはMRP、エはSCMの説明で、管理する対象・期間が異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "PLM・MRP・SCMの略語が分からず、全て生産管理の一種だと思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "選択肢が扱う範囲を**設備の自動化・必要資材の算出・調達から販売・製品の開発から廃棄まで**に整理します。製造の一工程だけを管理するかどうかが鍵です。",
+          "remainingWork": "PLMのLifecycleがどの期間を指すか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "範囲を分類しただけでPLMとの対応は残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**PLM＝Product Lifecycle Management（製品ライフサイクル管理）**。製品の**企画・開発→製造→販売→保守→リサイクル**まで、製品情報を一元管理します。MRP（資材所要量計画）は必要資材と発注時期の算出、SCM（供給連鎖管理）は調達から販売までの流れを管理します。",
+          "remainingWork": "製品の一生を扱う肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの範囲と直接一致し、他肢も区別する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**イ**がPLMです。アは設備を連携させる生産自動化、ウはMRP、エはSCMの説明で、管理する対象・期間が異なります。",
+          "remainingWork": "PLMとMRP・SCMを管理対象で整理する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答イを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r07a/r07a-q72.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=9ef5273488cf7ee0184aafef19f87da128555f345e3ade12384aeb4df625e905（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 イ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r03h-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "ed7d3aad12a99e53053bb8f11a925aac13186b120171ce76f511c4e2d6a7545b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q67",
-      "summary": "ウ。縦軸aは市場成長率、横軸bは市場占有率です。",
-      "explanation": "PPMは市場成長率と市場占有率で事業を四象限に分類します。図の上は高成長、下は低成長、左は高シェア、右は低シェアです。高成長・高シェアが花形、高成長・低シェアが問題児、低成長・高シェアが金のなる木、低成長・低シェアが負け犬になるので、aは市場成長率、bは市場占有率です。",
+      "summary": "PPMの図で縦軸a・横軸bが表す指標を四象限の配置から判断する。",
+      "explanation": "PPM（Product Portfolio Management）は一般に市場成長率と**相対的市場占有率**で事業を四象限に分類します。本問の選択肢では横軸が『市場占有率』と表記されています。図の上は高成長、下は低成長、左は高シェア、右は低シェアです。花形は高成長・高シェア、問題児は高成長・低シェア、金のなる木は低成長・高シェア、負け犬は低成長・低シェア。したがってaは市場成長率、bは市場占有率の**ウ**です。",
       "choiceReasons": [
         "aを売上高利益率としているため、PPMの成長性の軸と一致しません。",
         "aは正しいですが、bは売上高利益率ではなく市場占有率です。",
@@ -205,57 +226,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図の花形と金のなる木が同じ左列にあること、花形と問題児が同じ上段にあることを確認します。",
+          "text": "図は**上が高・下が低、左が高・右が低**です。花形と問題児は同じ上段、花形と金のなる木は同じ左列です。**上段に共通する条件**と**左列に共通する条件**を分けて考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "金のなる木は既に高いシェアを持つ成熟市場の事業です。左列に共通する性質と、上段に共通する市場の性質を分けます。",
+          "text": "**PPM＝Product Portfolio Management**。**花形**は高成長・高シェア、**問題児**は高成長・低シェア、**金のなる木**は低成長・高シェア、**負け犬**は低成長・低シェアです。図の上段は成長率が高く、左列はシェアが高いと分かります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "左列は高い市場占有率、上段は高い市場成長率なので、aが市場成長率、bが市場占有率です。",
+          "text": "縦軸**a＝市場成長率**、横軸**b＝市場占有率**で**ウ**です。一般的なPPMでは横軸を**相対的市場占有率**として表しますが、本問の選択肢は『市場占有率』です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "PPMの縦横の高低と『花形』『問題児』『金のなる木』『負け犬』の位置を結び付けられない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図は**上が高・下が低、左が高・右が低**です。花形と問題児は同じ上段、花形と金のなる木は同じ左列です。**上段に共通する条件**と**左列に共通する条件**を分けて考えます。",
+          "remainingWork": "PPMの四分類の意味を知り、縦横の指標を特定する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "図の位置関係だけでa・bの名称は未開示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**PPM＝Product Portfolio Management**。**花形**は高成長・高シェア、**問題児**は高成長・低シェア、**金のなる木**は低成長・高シェア、**負け犬**は低成長・低シェアです。図の上段は成長率が高く、左列はシェアが高いと分かります。",
+          "remainingWork": "aとbを選択肢の組に対応させる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "縦a＝成長率、横b＝占有率が一意に決まる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "縦軸**a＝市場成長率**、横軸**b＝市場占有率**で**ウ**です。一般的なPPMでは横軸を**相対的市場占有率**として表しますが、本問の選択肢は『市場占有率』です。",
+          "remainingWork": "市場成長率と占有率の意味の違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウと軸名を明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r03h/r03h-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=2e3c7f2231f3b30705d16ff4fa533625b272e7a5060f018a72df66e70d642583（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "PPMのa/b軸と四象限・4肢の表を原本で確認。補助画像 assets/transcriptions/author_r03h/r03h-q67-ppm-choice-table.webp も実際に表示・照合。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r04h-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "be3cfff042e3cb8da1a6a1cf17aaf1c957d448827243c7c85e3f46d6bf241025",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q67",
-      "summary": "ウ。市場成長率が低く市場占有率が高い「金のなる木」が資金源です。",
+      "summary": "PPMで他事業への投資資金を生み出す事業の成長率と占有率を判断する。",
       "explanation": "PPMは市場成長率と相対的市場占有率で事業を分類します。市場が成熟していて成長への追加投資が比較的小さく、高い占有率から収益を得られる事業は「金のなる木」です。ここで得た資金を成長事業へ投入する位置付けです。",
       "choiceReasons": [
         "成長率高・占有率高は花形です。成長の維持に投資が必要です。",
@@ -267,57 +297,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補を成長率の高低と占有率の高低の2×2表に置きます。成長のために資金が必要な側も考えます。",
+          "text": "PPMは**市場成長率**と**相対的市場占有率（シェア）**で事業を分類します。資金を生み出すには、売上があるだけでなく**成長維持にどれだけ投資が必要か**も考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "資金源になるには、成長投資の負担が比較的小さく、既存市場で収益を得られることが有利です。",
-          "revealsAnswer": false
+          "text": "**低成長市場**では成長のための追加投資が比較的少なく、**高シェア**なら安定した資金を生みやすくなります。PPMでこの組合せを**金のなる木**と呼びます。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "低い市場成長率と高い相対的市場占有率の事業が金のなる木で、投資資金源になります。",
+          "text": "資金源は**低成長・高シェアのウ**。高成長・高シェアの『花形』は収益があっても成長のための投資を要します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "市場成長率が高い事業ほど投資資金も供給できると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "PPMは**市場成長率**と**相対的市場占有率（シェア）**で事業を分類します。資金を生み出すには、売上があるだけでなく**成長維持にどれだけ投資が必要か**も考えます。",
+          "remainingWork": "成長投資の負担とシェアの収益力を組み合わせる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "資金源になる象限はまだ確定していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**低成長市場**では成長のための追加投資が比較的少なく、**高シェア**なら安定した資金を生みやすくなります。PPMでこの組合せを**金のなる木**と呼びます。",
+          "remainingWork": "該当する高低の組合せを肢で確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "低成長・高シェアがウと一意に決まる。"
+        },
+        {
+          "newInformation": "資金源は**低成長・高シェアのウ**。高成長・高シェアの『花形』は収益があっても成長のための投資を要します。",
+          "remainingWork": "花形と金のなる木の資金需要を比較する。",
+          "revealsAnswer": true,
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r04h/r04h-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=ed1d2f7919ecfcacab5a55ded061297823cf8126eee820b6bed0cab00ad690e2（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r06h-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "e350de074fd168fe1214746b3fb97bdda7cb84d29021bd45174e7af406765fb0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q67",
-      "summary": "ウ。低成長・高シェアの「金のなる木」が他事業への投資資金を生みます。",
+      "summary": "PPMで投資を必要とする事業と資金を供給する事業を区別する。",
       "explanation": "PPMは市場成長率と相対的市場占有率で事業を四つに分けます。市場成長率が低いと追加投資の必要が小さく、高シェアなら安定した収益を得やすいので、資金を他事業へ回せます。これが金のなる木です。\n高成長・高シェアの花形は収益があっても成長への投資が必要です。高成長・低シェアは問題児、低成長・低シェアは負け犬です。",
       "choiceReasons": [
         "アは花形で、成長を維持するための投資も多く必要です。資金供給源の位置付けは金のなる木です。",
@@ -329,57 +366,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四候補は成長率の高低とシェアの高低の組合せです。資金を「使う側」か「供給する側」か考えます。",
+          "text": "四つの選択肢は**成長率の高低×相対的シェアの高低**です。成長率が高いと市場拡大への投資が必要になりやすく、シェアが高いと収益を得やすい、という二つの効果を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "高シェアは収益力、低成長は追加投資の少なさに結び付きます。両方そろう事業が他事業への資金を供給しやすくなります。",
+          "text": "PPMの**金のなる木**は、成熟した**低成長市場**で**高い相対的シェア**を持ち、比較的少ない追加投資で資金を生み出します。『花形』は高成長・高シェアで投資も必要です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "二軸で低成長・高シェアの領域を選び、金のなる木の役割と照合します。",
+          "text": "**ウ**が金のなる木。イの『問題児』はシェア獲得に資金を使い、エの『負け犬』は資金供給力が低い分類です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『花形』は売れているから資金源だと決めつけ、成長投資の必要額を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの選択肢は**成長率の高低×相対的シェアの高低**です。成長率が高いと市場拡大への投資が必要になりやすく、シェアが高いと収益を得やすい、という二つの効果を分けます。",
+          "remainingWork": "収益力があり投資負担の小さい組合せを探す。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "各軸の意味は渡すが組合せの最終判断は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "PPMの**金のなる木**は、成熟した**低成長市場**で**高い相対的シェア**を持ち、比較的少ない追加投資で資金を生み出します。『花形』は高成長・高シェアで投資も必要です。",
+          "remainingWork": "該当する選択肢を確かめる。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "低成長・高シェア＝ウが確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ウ**が金のなる木。イの『問題児』はシェア獲得に資金を使い、エの『負け犬』は資金供給力が低い分類です。",
+          "remainingWork": "四象限の役割を復習する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r06h/r06h-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=50cb7e71f67886bae29baa44431c4a1587c2e53dda58990f9c394d32f269f94c（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r05h-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "a1e0105182c47e2734c89cb919284f58cf3374eb09b83dc9002df7f80daafaaf",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q67",
-      "summary": "広告による売上150万円を広告費60万円で割るとROASは250%です。",
+      "summary": "広告費用対効果ROASを、広告による売上と広告費から百分率で算出する。",
       "explanation": "ROASは広告費に対する広告からの売上の割合です。売上は単価1,500円×1,000個=1,500,000円です。ROAS=1,500,000/600,000×100=250%となり、ウです。利益を分子にするROIとは異なり、この問題では売上を使います。",
       "choiceReasons": [
         "40%は広告費÷売上×100の値で、ROASの比の向きが逆です。",
@@ -391,57 +435,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "単価と販売数から売上を求めます。広告費は600,000円です。",
+          "text": "**ROAS＝Return On Advertising Spend（広告費用対効果）**は広告の成果を売上で測る指標です。まず**単価×販売数量**で広告からの売上を求め、広告費600,000円と別に置きます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ROASは広告費1円当たりの売上です。利益ではなく売上を分子にします。",
+          "text": "式は**ROAS（％）＝広告による売上÷広告費×100**です。ROI（Return On Investment：投資利益率）と違い、ここでは**利益ではなく売上**を分子にします。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "1,500×1,000円を600,000円で割り、百分率にするため100を掛けましょう。",
+          "text": "売上は**1,500円×1,000個＝1,500,000円**。`1,500,000÷600,000×100` を計算し、選択肢の％と比べます。逆に割ると別の比率になります。",
           "revealsAnswer": false
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ROASを利益率と混同するか、売上と広告費の分母分子を逆にする。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ROAS＝Return On Advertising Spend（広告費用対効果）**は広告の成果を売上で測る指標です。まず**単価×販売数量**で広告からの売上を求め、広告費600,000円と別に置きます。",
+          "remainingWork": "売上を計算し、ROASの比の向きを確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "売上計算の手順のみで最終割合は出さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "式は**ROAS（％）＝広告による売上÷広告費×100**です。ROI（Return On Investment：投資利益率）と違い、ここでは**利益ではなく売上**を分子にします。",
+          "remainingWork": "与件を式に代入し百分率を計算する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "公式だけで具体的な最終数値は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "売上は**1,500円×1,000個＝1,500,000円**。`1,500,000÷600,000×100` を計算し、選択肢の％と比べます。逆に割ると別の比率になります。",
+          "remainingWork": "最後の割り算と選択肢照合を行う。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式と途中式を渡すが250％の最終計算は残す。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r05h/r05h-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=46b84475d93aeee9a386033ade4a782982837471ea9df5cd1178f46ce37844be（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "ROAS: 1,500円×1,000個＝1,500,000円、1,500,000÷600,000×100＝250％と独立検算。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r06a-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "c46a87ebc61ab29c0c81e380272733e581a780a8e2e00def8263382b2493beaa",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q67",
-      "summary": "エ。SCMは企業間にまたがる調達から販売までの流れを管理します。",
+      "summary": "SCMが管理する企業間の供給プロセスを、CRM・SFA・ERPと区別する。",
       "explanation": "SCMはSupply Chain Managementです。原材料の調達、生産、物流、販売などを企業・組織の境界を越えて連携し、供給の流れ全体でコスト低減や納期短縮を目指します。\n顧客との関係を管理するCRM、営業活動を支援するSFA、企業内の基幹情報を統合するERPとは、管理する範囲と目的が違います。",
       "choiceReasons": [
         "顧客の購入履歴やクレームを管理して関係を深めるのはCRMです。",
@@ -453,54 +505,61 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補の管理対象は、顧客関係、商談、企業内基幹情報、企業間の調達から販売です。似た略語でも、どこからどこまでを管理するかが異なります。",
+          "text": "四肢が扱う範囲を**顧客との関係・商談の進捗・企業内の基幹業務・企業をまたぐ調達から販売**に分けます。目的が似ていても、管理対象の範囲が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "供給の流れは、一社の在庫だけでなく仕入先・生産拠点・販売先をまたぎます。部分ごとでなく流れ全体で納期やコストを改善します。",
+          "text": "**SCM＝Supply Chain Management（供給連鎖管理）**。仕入先→製造→物流→販売先という**複数企業にまたがる流れ**を統合管理し、在庫・コスト・納期を最適化します。CRMは顧客関係、SFAは営業活動、ERPは社内の経営資源を扱います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "複数企業・組織にまたがる調達から販売までを管理するエがSCMです。",
+          "text": "**エ**がSCMです。調達から販売までの**企業横断の業務プロセス**を管理する点が、アのCRM・イのSFA・ウのERPと異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "CRM・SFA・ERP・SCMの略語と管理対象を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢が扱う範囲を**顧客との関係・商談の進捗・企業内の基幹業務・企業をまたぐ調達から販売**に分けます。目的が似ていても、管理対象の範囲が異なります。",
+          "remainingWork": "SCMのSupply Chainがどの範囲を指すか確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "四肢の分類を示すがSCMとの対応は未開示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SCM＝Supply Chain Management（供給連鎖管理）**。仕入先→製造→物流→販売先という**複数企業にまたがる流れ**を統合管理し、在庫・コスト・納期を最適化します。CRMは顧客関係、SFAは営業活動、ERPは社内の経営資源を扱います。",
+          "remainingWork": "供給連鎖を扱う肢を確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エの定義を実質的にそのまま教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**エ**がSCMです。調達から販売までの**企業横断の業務プロセス**を管理する点が、アのCRM・イのSFA・ウのERPと異なります。",
+          "remainingWork": "管理範囲の境界を復習する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r06a/r06a-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=e949cc066cfa74d53e8f5d7197c0138993a6a5d9fdc91770ddaa5e44a890aaaf（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 エ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r03a-q70",
     "baseVersion": 2,
     "baseLessonSHA256": "47a160836f55f50412fe6041a520eb8d4813c43cca378070712fbfb8f5d0b3e0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "keep",
     "lesson": {
       "id": "r03a-q70",
       "summary": "SFAは営業活動の効率と品質を高める",
@@ -532,40 +591,44 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SFAの英語の正式名称を知らず、ERP・ECや小売支援と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各候補のITによる支援対象を、営業、小売店、全社の資源、商取引に整理する。対象と目的を組にして比較する。",
+          "remainingWork": "用語の定義を使って各肢を判別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "営業・小売店・全社資源・電子商取引という管理対象の分類だけでSFAとの対応はまだ残る。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "商談や顧客対応などの営業活動をITで支援することは、販売チャネルとしてネットで取引することとは区別する。",
+          "remainingWork": "概念を選択肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "営業活動のIT支援はアの説明と実質同一で答えが確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "営業の効率と品質をITで高めるアがSFAである。",
+          "remainingWork": "他の選択肢の目的・管理対象と比較する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示する。"
         }
       ],
       "changes": [],
-      "sourceNotes": []
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r03a/r03a-q70.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=653ff920c10caafbb2f70d57cd248cd32dd770ffb155a509d7a7bedc09d2d31d（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ア とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の要約・解説・4肢の理由・要点・3段ヒントを維持。設計メモのみ新規記録。"
+      ]
     }
   },
   {
     "id": "r04h-q71",
     "baseVersion": 2,
     "baseLessonSHA256": "144005b00374e59fb2e599cee831c65c06966895d7df040b98f77938c5ab7366",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q71",
-      "summary": "ウ。XBRLが主に扱うのは企業の財務情報です。",
+      "summary": "XBRLが主に構造化・交換する情報の種類を見分ける。",
       "explanation": "XBRLはeXtensible Business Reporting Languageで、財務報告等の情報に意味を表すタグを付けて電子的に交換・利用するための言語です。損益や資産などの項目を構造化することで、情報の収集や比較・分析をしやすくします。医療カルテ、顧客情報、住民情報を主要対象とするものではありません。",
       "choiceReasons": [
         "医療カルテ情報はXBRLの主要な取扱対象ではありません。",
@@ -577,57 +640,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補はカルテ・顧客・財務・住民の情報です。XBRLのBusiness Reportingがどの報告分野で使われるか考えます。",
+          "text": "**XBRL＝eXtensible Business Reporting Language**。企業などが報告する情報を、項目の意味が分かるようにタグ付けして機械処理しやすくする言語です。候補の情報の用途を比べます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "企業が決算の売上や利益、資産等を報告するとき、項目をタグ付けして比較・分析できるようにする言語です。",
+          "text": "XBRLは**決算報告の売上・利益・資産・負債**などの項目をタグ付けして、**財務情報**を電子的に交換・分析しやすくします。医療カルテや住民情報を主目的としません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "企業の財務情報を扱う候補がXBRLの主要な対象です。",
+          "text": "対象は**企業の財務情報（ウ）**です。項目名・数値・期間などの意味をデータに付けて、比較や自動処理を可能にします。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "XBRLの正式名称とBusiness Reportingが指すデータを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**XBRL＝eXtensible Business Reporting Language**。企業などが報告する情報を、項目の意味が分かるようにタグ付けして機械処理しやすくする言語です。候補の情報の用途を比べます。",
+          "remainingWork": "何の業務報告に使われる規格か考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "Business Reportingという範囲だけで財務情報と確定させない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "XBRLは**決算報告の売上・利益・資産・負債**などの項目をタグ付けして、**財務情報**を電子的に交換・分析しやすくします。医療カルテや住民情報を主目的としません。",
+          "remainingWork": "財務情報の選択肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの財務情報を直接示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "対象は**企業の財務情報（ウ）**です。項目名・数値・期間などの意味をデータに付けて、比較や自動処理を可能にします。",
+          "remainingWork": "単なる文書形式と意味付きデータの違いを確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r04h/r04h-q71.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=8492e2809ff8effbeefbbac04a0a33085e574ca87a87cc0c2567576f5d80fd50（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r04h-q72",
     "baseVersion": 2,
     "baseLessonSHA256": "ceef71e29cc7942244854fe9c8ec1896b1b46aed31beef971155204eb2f8d781",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q72",
-      "summary": "ウ。かんばん方式は後工程が必要な分だけ前工程から引き取る方式です。",
+      "summary": "かんばん方式の後工程引取りという生産管理原理を、調達先選定や部品標準化と区別する。",
       "explanation": "かんばん方式は後工程の必要量に基づいて前工程から部品を引き取り、前工程がその分を補充するプル型の生産管理です。必要なものを必要なときに必要な量だけ流すことで、中間在庫を抑えます。部品の規格統一、調達先の系列化、競争入札とは管理の原理が異なります。",
       "choiceReasons": [
         "部品仕様の統一は標準化であり、後工程からの引取りによるかんばん方式の説明ではありません。",
@@ -639,54 +709,61 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補が変えるものを、仕様・調達先・工程間の引取り量・業者選定に分けます。",
+          "text": "生産の流し方には、**前工程が作ったものを後工程へ押し出すプッシュ型**と、**後工程の必要量に応じて前工程から引き取るプル型**があります。四肢が説明するのは部品仕様、仕入先、工程間の引取り、入札のどれか分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "後工程が必要な量を知らせ、その分だけ前工程から引き取ると、需要と無関係に中間在庫が増えることを抑えられます。",
+          "text": "**かんばん方式**は**後工程が必要なものを必要な時に必要な量だけ前工程から引き取るプル型**。前工程は引き取られた分を補充するので、不要な中間在庫を抑えられます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "後工程が必要な部品だけを前工程から調達して中間在庫を減らす候補が、かんばん方式です。",
+          "text": "**ウ**が正解。部品規格の統一（ア）や関連会社からの調達（イ）、競争入札（エ）は、後工程引取りの原理を示しません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "かんばん方式を単なる部品発注や系列会社からの調達と考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "生産の流し方には、**前工程が作ったものを後工程へ押し出すプッシュ型**と、**後工程の必要量に応じて前工程から引き取るプル型**があります。四肢が説明するのは部品仕様、仕入先、工程間の引取り、入札のどれか分けます。",
+          "remainingWork": "かんばん方式がどちらの流し方か考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "プル型の仕組みは説明したがかんばんとの対応は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**かんばん方式**は**後工程が必要なものを必要な時に必要な量だけ前工程から引き取るプル型**。前工程は引き取られた分を補充するので、不要な中間在庫を抑えられます。",
+          "remainingWork": "工程間引取りを述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの内容と一致する定義を渡した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ウ**が正解。部品規格の統一（ア）や関連会社からの調達（イ）、競争入札（エ）は、後工程引取りの原理を示しません。",
+          "remainingWork": "プル型と調達方法の違いを整理する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r04h/r04h-q72.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=a41630b29d5381189527c945763f91b9c5057b3b0c4d50122c515eed3aed727a（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r05h-q72",
     "baseVersion": 2,
     "baseLessonSHA256": "7ca54026279081cbdd7ea269a6ff67ce62fb9c478980e0e831f2890e81b37b3c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "keep",
     "lesson": {
       "id": "r05h-q72",
       "summary": "分散したサービスへの一括アクセスを提供するのがアグリゲーションサービスです。",
@@ -718,40 +795,44 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "複数サービスの集約と小売のオムニチャネル、決済仲介を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補が統合するのは小売の顧客接点か、分散した事業者・機能かを確認します。",
+          "remainingWork": "用語の定義を使って各肢を判別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "小売接点と分散事業者の違いを問うが用語との対応はまだ確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "複数のサービスを別々に探す代わりに、一つの窓口で比較・組合せできる場面を考えます。",
+          "remainingWork": "概念を選択肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "複数サービスを一つの窓口で比較・組合せる説明はウと実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "分散する事業者や機能への一括アクセスとワンストップ提供がそろう記述を選びます。",
+          "remainingWork": "他の選択肢の目的・管理対象と比較する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段と合わせてウの条件を完全に示す。"
         }
       ],
       "changes": [],
-      "sourceNotes": []
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r05h/r05h-q72.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=7af635340f9f9f6b2e7857f8a23232206d28858707370d7d692c673c43905c4d（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の要約・解説・4肢の理由・要点・3段ヒントを維持。設計メモのみ新規記録。"
+      ]
     }
   },
   {
     "id": "r04h-q68",
     "baseVersion": 2,
     "baseLessonSHA256": "7d6323bbf6cb9a072c9ad14083b2977188780a7dfff1fc4958ad6274c5ddb244",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q68",
-      "summary": "ウ。アンゾフの成長マトリクスは、市場と製品の既存・新規で成長戦略を分けます。",
+      "summary": "アンゾフの成長マトリクスを、四つの戦略分類とその二軸から識別する。",
       "explanation": "アンゾフの成長マトリクスは、既存・新規の市場と既存・新規の製品を組み合わせます。既存市場×既存製品は市場浸透、新規市場×既存製品は市場拡大、既存市場×新規製品は製品開発、新規市場×新規製品は多角化です。SWOT、バランススコアカード、製品ライフサイクルとは軸が異なります。",
       "choiceReasons": [
         "強み・弱み・機会・脅威から環境を分析するのはSWOT分析です。",
@@ -763,57 +844,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の分類軸を、内外の環境・四つの業績視点・市場と製品・製品の経過段階に分けます。",
+          "text": "四つに分ける手法でも、分類する対象は異なります。候補の**内部・外部環境／業績の視点／市場と製品／製品の経過段階**に注目し、どれが成長戦略の方向を扱うか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "今の商品を今の市場で売り込む場合と、新しい商品を新しい市場へ出す場合を2×2で整理する方法を考えます。",
-          "revealsAnswer": false
+          "text": "**アンゾフの成長マトリクス**は**市場（既存／新規）×製品（既存／新規）**の2×2です。既存×既存は市場浸透、新市場×既存製品は市場拡大、既存市場×新製品は製品開発、両方新規は多角化です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "市場浸透・市場拡大・製品開発・多角化の四つに成長戦略を分ける候補が該当します。",
+          "text": "**ウ**の市場浸透・市場拡大・製品開発・多角化が該当します。アはSWOT、イはBSC、エは製品ライフサイクルです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SWOT・BSC・製品ライフサイクルも四つの要素を持つため混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つに分ける手法でも、分類する対象は異なります。候補の**内部・外部環境／業績の視点／市場と製品／製品の経過段階**に注目し、どれが成長戦略の方向を扱うか考えます。",
+          "remainingWork": "アンゾフの二軸の意味を確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分類対象を並べただけでアンゾフの対応はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**アンゾフの成長マトリクス**は**市場（既存／新規）×製品（既存／新規）**の2×2です。既存×既存は市場浸透、新市場×既存製品は市場拡大、既存市場×新製品は製品開発、両方新規は多角化です。",
+          "remainingWork": "四つの成長戦略を列挙した肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの四分類をそのまま渡している。"
+        },
+        {
+          "newInformation": "**ウ**の市場浸透・市場拡大・製品開発・多角化が該当します。アはSWOT、イはBSC、エは製品ライフサイクルです。",
+          "remainingWork": "四分類の軸を他のフレームワークと比較する。",
+          "revealsAnswer": true,
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r04h/r04h-q68.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=d33d95d0905bd281f26e11f1c6aee6f574e97405917579b70ab0fdb5c09f5b48（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r05a-q67",
     "baseVersion": 2,
     "baseLessonSHA256": "d6520aadf3e51d78963bc09b9e1f050ef6eff97c780115dc9f6a148299d48585",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q67",
-      "summary": "ア。アンゾフの成長マトリクスは製品と市場を既存・新規で分けます。",
+      "summary": "アンゾフの成長マトリクスを、製品と市場の二軸で他の戦略フレームワークと区別する。",
       "explanation": "アンゾフの成長マトリクスは、製品が既存か新規か、市場が既存か新規かという二軸で成長戦略を整理します。既存製品×既存市場は市場浸透、新製品×既存市場は製品開発、既存製品×新市場は市場開拓、新製品×新市場は多角化です。\n市場成長率と相対シェアによるPPMなどとは軸が違います。",
       "choiceReasons": [
         "製品と市場のそれぞれを既存・新規に分ける二軸で、アンゾフの成長マトリクスです。",
@@ -825,57 +913,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各選択肢で使う軸を抜き出します。製品・市場、コスト・ターゲット、成長率・シェア、内外環境という違いがあります。",
+          "text": "候補は**製品と市場／競争上の優位性とターゲット／成長率とシェア／内部と外部の環境**を扱います。戦略を考える『何を区切る軸か』に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "成長の方法を、いまの製品か新しい製品か、いまの市場か新しい市場かで四つに分ける枠組みです。",
+          "text": "**アンゾフの成長マトリクス**は、**製品が既存か新規か×市場が既存か新規か**で、市場浸透・市場開拓・製品開発・多角化を分類します。**PPM**は市場成長率×相対シェアで別物です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "既存・新規の製品軸と既存・新規の市場軸を述べる候補を選びます。",
+          "text": "**ア**です。イはポーターの競争戦略、ウはPPM、エはSWOT分析。アンゾフでは既存市場に新製品を出すのが『製品開発』です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "アンゾフ、ポーターの基本戦略、PPM、SWOTの各二軸・四分類が混ざる。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補は**製品と市場／競争上の優位性とターゲット／成長率とシェア／内部と外部の環境**を扱います。戦略を考える『何を区切る軸か』に注目します。",
+          "remainingWork": "アンゾフがどの軸を使うか確かめる。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "選択肢の比較軸だけでアンゾフとの対応は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**アンゾフの成長マトリクス**は、**製品が既存か新規か×市場が既存か新規か**で、市場浸透・市場開拓・製品開発・多角化を分類します。**PPM**は市場成長率×相対シェアで別物です。",
+          "remainingWork": "製品と市場を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの説明と同一の二軸を渡している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ア**です。イはポーターの競争戦略、ウはPPM、エはSWOT分析。アンゾフでは既存市場に新製品を出すのが『製品開発』です。",
+          "remainingWork": "4分類の具体例を再確認する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r05a/r05a-q67.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=6b65171db17ff8043341cc59d45310191215f189252044c454788c2c9b85896b（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ア とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r06a-q68",
     "baseVersion": 2,
     "baseLessonSHA256": "db54c52be1ba35137c0fba1ac1dfe356b067af13b618b3effd138219fbcbacba",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q68",
-      "summary": "ウ。アンゾフは市場と製品の既存・新規で四つの成長方向を分類します。",
+      "summary": "アンゾフの成長マトリクスの四つの成長方向を、他の四分類手法と見分ける。",
       "explanation": "アンゾフの成長マトリクスは、市場と製品をそれぞれ既存・新規に分けた2×2の表です。既存市場・既存製品は市場浸透、新規市場・既存製品は市場開拓（市場拡大）、既存市場・新規製品は製品開発、両方新規は多角化です。\nSWOT、バランススコアカード、製品ライフサイクルも分類を使いますが、軸が違います。",
       "choiceReasons": [
         "強み・弱み・機会・脅威を整理するSWOT分析の説明です。",
@@ -887,54 +982,61 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "どの候補にも四つの分類が出ます。分類数ではなく、成長を何の軸で考えているかに注目します。",
+          "text": "四つの選択肢はどれも四項目を挙げています。**分類数ではなく何を分類するか**が決め手。環境要因・戦略の視点・成長の方向・製品の時間的段階を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "既存製品を別の市場へ売る場合と、同じ市場へ新製品を出す場合を分ける二軸が、市場と製品です。",
+          "text": "アンゾフは**既存／新規の市場**と**既存／新規の製品**の組合せで、**市場浸透・市場拡大・製品開発・多角化**の四方向を考えます。例えば新製品を新市場へ売るのは多角化です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "この二軸で市場浸透・市場拡大・製品開発・多角化を分類するウがアンゾフです。",
+          "text": "**ウ**です。アはSWOT（強み・弱み・機会・脅威）、イはBSC（財務・顧客・内部プロセス・学習と成長）、エは製品ライフサイクルです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『四つに分類』だけを手掛かりにしてSWOT・BSC・製品ライフサイクルと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの選択肢はどれも四項目を挙げています。**分類数ではなく何を分類するか**が決め手。環境要因・戦略の視点・成長の方向・製品の時間的段階を分けます。",
+          "remainingWork": "成長の方向を決める二軸を考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "四分類の目的だけで名称を特定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アンゾフは**既存／新規の市場**と**既存／新規の製品**の組合せで、**市場浸透・市場拡大・製品開発・多角化**の四方向を考えます。例えば新製品を新市場へ売るのは多角化です。",
+          "remainingWork": "この四つの戦略を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの列挙と完全一致する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ウ**です。アはSWOT（強み・弱み・機会・脅威）、イはBSC（財務・顧客・内部プロセス・学習と成長）、エは製品ライフサイクルです。",
+          "remainingWork": "各手法の分類軸を復習する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r06a/r06a-q68.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=6e002e8884dd01966166cb82ea42aa6562d0048d61a74f25c327021d30012a6a（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r03a-q73",
     "baseVersion": 2,
     "baseLessonSHA256": "4202713d9fcd560da34470b3d470095724fd93cb6f7355a51b961e5ce8c9ec60",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "keep",
     "lesson": {
       "id": "r03a-q73",
       "summary": "センサの近くで処理して遅延と通信を減らす",
@@ -966,40 +1068,44 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "エッジを単なる複数計算機の連結やIoT端末の種類と取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各候補で説明される技術の対象を、演算資源の配置・人体の計測・計算機の接続・電力の確保に分類する。IoTデータの処理との関係を考える。",
+          "remainingWork": "用語の定義を使って各肢を判別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "演算場所・装着・分散処理・電力の分類だけで、エッジの定義は未開示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "データを遠くへ送ってから処理すると通信時間と通信量が増える。近傍で処理すれば、この負担を減らせる。",
+          "remainingWork": "概念を選択肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "データ発生源の近傍で処理するという説明がアと実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "センサ端末の近傍に処理資源を置くアがエッジコンピューティングである。",
+          "remainingWork": "他の選択肢の目的・管理対象と比較する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示する。"
         }
       ],
       "changes": [],
-      "sourceNotes": []
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r03a/r03a-q73.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=8d991866e7bec561d9d66a43d3b32a5cb6350cdb04f086a698ef92a81774a422（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ア とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の要約・解説・4肢の理由・要点・3段ヒントを維持。設計メモのみ新規記録。"
+      ]
     }
   },
   {
     "id": "r06h-q72",
     "baseVersion": 2,
     "baseLessonSHA256": "528cb0ff0def3de32df4621c08f3ab1a225648c58b95f29935900b0a72364386",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q72",
-      "summary": "ア。エッジコンピューティングはセンサーの近くで処理し、遅延や通信量を抑えます。",
+      "summary": "エッジコンピューティングの処理資源の配置と通信遅延の関係を問う。",
       "explanation": "エッジコンピューティングは端末やその近くの機器へ計算機能を置く方式です。センサーデータを遠くのクラウドへ全て送らず、その場で判断・集約することで応答を速くし、通信量も削減できます。\n人体装着という機器形態、多数コンピュータを結ぶ高性能計算、環境からのエネルギー取得とは別の概念です。",
       "choiceReasons": [
         "アは処理資源をセンサー端末の近傍へ置くエッジコンピューティングです。",
@@ -1011,54 +1117,61 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が述べるのは処理場所、装着場所、計算機の連結、電力源のどれか分けます。",
+          "text": "IoTの選択肢は**処理する場所・人体への装着・複数計算機の接続・電力の取得**を説明しています。エッジはネットワークの『端』を意味します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "センサーのデータを近くで処理して、遠方のクラウドとの往復を減らすと、待ち時間と通信量を抑えられます。",
+          "text": "**エッジコンピューティング**は、センサーなどの**データ発生源の近くに計算機能を置く**方式です。クラウドへの往復を減らして**低遅延化や通信量削減**を図ります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「センサー端末の近傍」という配置条件を、ネットワークの端で処理するエッジの意味と照合します。",
+          "text": "**ア**です。イはウェアラブル機器、ウは計算機の連結、エは環境エネルギーの回収。処理場所が決め手です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "IoTに関係するウェアラブル機器・分散計算・環境発電とエッジを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "IoTの選択肢は**処理する場所・人体への装着・複数計算機の接続・電力の取得**を説明しています。エッジはネットワークの『端』を意味します。",
+          "remainingWork": "ネットワークの端で何をするか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "エッジという位置のヒントのみで正答肢の機能はまだ教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**エッジコンピューティング**は、センサーなどの**データ発生源の近くに計算機能を置く**方式です。クラウドへの往復を減らして**低遅延化や通信量削減**を図ります。",
+          "remainingWork": "近傍で演算する肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの説明と実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ア**です。イはウェアラブル機器、ウは計算機の連結、エは環境エネルギーの回収。処理場所が決め手です。",
+          "remainingWork": "エッジと分散計算の一般概念を区別する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r06h/r06h-q72.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=56072599f30bb6c21ed4b8eb8f1dbe3566bec522bf66532cb8ddac35b19dc336（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ア とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r05h-q71",
     "baseVersion": 2,
     "baseLessonSHA256": "e74f8f909494c8c767a4331781bf3748f5ae20a02abf05de4a6c4b8ebab7eacc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "keep",
     "lesson": {
       "id": "r05h-q71",
       "summary": "エネルギーハーベスティングは周囲の微小エネルギーを電力として回収します。",
@@ -1090,40 +1203,44 @@
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "発電・給電・消費電力削減の技術の違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの候補では、電力を作る方法と、送る方法、消費を減らす方法が混ざっています。",
+          "remainingWork": "用語の定義を使って各肢を判別する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "電力生成・給電・省電力の違いを整理するがハーベスティングとの対応はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "外部の電源配線がないセンサーに、周囲の光や振動から電力を得る場面を考えます。",
+          "remainingWork": "概念を選択肢に照合する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "周囲の光や振動を電力に変える説明がイと実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "周囲の微小エネルギーを集めて電力へ変換する説明を、ハーベスティングに対応させます。",
+          "remainingWork": "他の選択肢の目的・管理対象と比較する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段と合わせてイの条件を完全に示す。"
         }
       ],
       "changes": [],
-      "sourceNotes": []
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r05h/r05h-q71.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=44b1551c7ebc9f0cf51ccb0b1f6eca92952f157606de74efa3d55f9a96291d1d（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 イ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の要約・解説・4肢の理由・要点・3段ヒントを維持。設計メモのみ新規記録。"
+      ]
     }
   },
   {
     "id": "r05a-q70",
     "baseVersion": 2,
     "baseLessonSHA256": "efe7299654ba6e39b8ef339da79ae84983ddcf2aeb2bbeac486e5c6c42ff90e1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q70",
-      "summary": "ウ。社内外の知識を組み合わせ、創出した価値も外部へ展開します。",
+      "summary": "オープンイノベーションを、単純な外注・自社内開発・業務改善と区別する。",
       "explanation": "オープンイノベーションは、自社だけに閉じず、外部組織の技術やアイデアを取り入れ、自社の知識と組み合わせて価値を生み出す考え方です。さらに成果を外部へ提供・活用する経路も使います。\n単に開発工程を外注することや、自社だけで製品開発すること、既存工程の効率を改善することだけでは、この知識の流入・流出を伴う説明にはなりません。",
       "choiceReasons": [
         "開発の一部の外注と期間短縮だけを述べています。内外の知識を組み合わせて価値を創出・展開する説明ではありません。",
@@ -1135,57 +1252,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で外部組織が何をするか確認します。単なる作業委託と、技術やアイデアの組合せを分けます。",
+          "text": "外部企業が関わる活動にも、単なる**作業の委託**と**技術・知識の共同活用**があります。外部と何を共有し、どのような新しい価値を生むかに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "自社の知識と外部の知識を合わせ、新しい価値を生む仕組みを考えます。成果を外部で活用することも含みます。",
+          "text": "**オープンイノベーション**は、自社の技術・アイデアと**社外の知識**を組み合わせて価値を創出し、その成果を社外へ展開することもあります。**外注して納期を縮めるだけ**ではこの考え方を十分に説明しません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「自社と外部組織の技術やアイデア」「創出した価値を外部へ提供」の両方がある候補を選びます。",
+          "text": "**ウ**です。自社と外部の技術・アイデアを組み合わせ、創出した価値を外部にも提供しています。アは工程委託、イは自社内開発、エは業務改善です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "社外へ委託すれば全てオープンイノベーションだと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "外部企業が関わる活動にも、単なる**作業の委託**と**技術・知識の共同活用**があります。外部と何を共有し、どのような新しい価値を生むかに注目します。",
+          "remainingWork": "知識の流入・流出と新価値創出があるか確認する。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "外部との関わり方の比較だけで正答はまだ特定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**オープンイノベーション**は、自社の技術・アイデアと**社外の知識**を組み合わせて価値を創出し、その成果を社外へ展開することもあります。**外注して納期を縮めるだけ**ではこの考え方を十分に説明しません。",
+          "remainingWork": "外部知識の活用と価値の展開を述べる肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの内容と実質一致する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ウ**です。自社と外部の技術・アイデアを組み合わせ、創出した価値を外部にも提供しています。アは工程委託、イは自社内開発、エは業務改善です。",
+          "remainingWork": "外注と知識の相互活用の違いを説明する。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r05a/r05a-q70.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=2756e2ecf9bb644b89986995baa58e0f72f8a64402d801cf783e890938f2b7e4（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 ウ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   },
   {
     "id": "r04a-q69",
     "baseVersion": 2,
     "baseLessonSHA256": "021fa9eaab654361bf95590839abf4de3ada3ce29ce625586a50b14ac560db97",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch33-20261028T1505JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q69",
-      "summary": "イ。複数の商品属性の組合せに対する選好を分析します。",
+      "summary": "コンジョイント分析が、商品の複数属性に対する購買者の選好をどう調べるかを問う。",
       "explanation": "コンジョイント分析は価格、デザイン、使いやすさなどを組み合わせた商品案への評価から、各属性・水準の効用や重視度を推定します。顧客が属性間で何を優先し、どの組合せを好むかを分析できます。",
       "choiceReasons": [
         "顧客別売上・利益を順位付けする顧客のABC分析などの説明です。",
@@ -1197,46 +1321,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の分析単位が顧客、商品の属性、世代、ブランド位置のどれかを確認します。",
+          "text": "四つの候補は**顧客別売上・商品の属性・同世代の行動・ブランドの位置**を扱っています。何を単位として比較する分析かを区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "価格とデザインが異なる商品案を比較すると、選ぶ際の優先度をどう調べられるか考えます。",
-          "revealsAnswer": false
+          "text": "**コンジョイント分析**は、価格・デザイン・機能など**複数の属性を組み合わせた商品案**を評価してもらい、属性の各水準の効用や重要度を推定します。例えば『価格は安いが色が好みでない』という選択から重視度を分析します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "価格・デザイン・使いやすさなど複数属性の組合せを分析する候補を選びます。",
+          "text": "**イ**です。アは顧客別のABC分析、ウは同一世代の行動を追うコーホート分析、エはブランドのポジショニング分析です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "顧客のABC分析・コーホート分析・ブランドのポジショニングと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの候補は**顧客別売上・商品の属性・同世代の行動・ブランドの位置**を扱っています。何を単位として比較する分析かを区別します。",
+          "remainingWork": "コンジョイント分析がどんな比較データを使うか考える。",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "分析対象の分類だけでコンジョイントの定義はまだ示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**コンジョイント分析**は、価格・デザイン・機能など**複数の属性を組み合わせた商品案**を評価してもらい、属性の各水準の効用や重要度を推定します。例えば『価格は安いが色が好みでない』という選択から重視度を分析します。",
+          "remainingWork": "商品の属性の組合せを扱う肢を選ぶ。",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの説明を実質そのまま教えている。"
+        },
+        {
+          "newInformation": "**イ**です。アは顧客別のABC分析、ウは同一世代の行動を追うコーホート分析、エはブランドのポジショニング分析です。",
+          "remainingWork": "顧客・属性・世代・ブランドの分析単位を整理する。",
+          "revealsAnswer": true,
+          "reason": "イを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub上の原本 assets/questions/r04a/r04a-q69.webp をbase64取得して実際に画像表示し、設問・全4肢・数値・図表を目視照合。contextの原本画像SHA256=409369190553ae185bf56cf946b3d76138ac2378b104a34ec5868609c669ab1e（画像バイトの独立SHA算出は未実施）。",
+        "data/answer-keys.jsonの該当試験回・設問番号の転記済み公式正答 イ とcontextを照合して一致。IPAの公式PDFを今回直接開いて独立確認したわけではない。",
+        "旧教材の解説・4肢の理由・要点を維持し、要約・3段ヒントを改稿（PPM図の1問のみ解説も精密化）。"
+      ]
     }
   }
 ]
