@@ -1,0 +1,1863 @@
+{
+  "batchId": "batch-17",
+  "authorHead": "2e7599ecf998606e923f0cd3bce0013bca163a9c",
+  "reviewer": "ChatGPT/independent-ap-batch17-review-20261028",
+  "checkedAt": "2026-10-28T03:27:33.583447+00:00",
+  "phase": "initial-independent-content-review",
+  "initialDraftsPath": "/workspace/ap-study-batch17-review/work/ap/objective-quality/batches/batch-17/review/initial-drafts.json",
+  "initialDraftsFileSHA256": "da386bab57de14095c765aef3cebaf25fce85e1d027689021c1cc676b39df708",
+  "method": "原作者draftsをレビュー開始時にbyte保存。AGENTS.mdと指定3文書・assignment/context/drafts読了。全20原本WebPをview_imageで実際に開き独立解答。全80理由/60ヒント/summary/explanation/takeaway/designを読み、全肢と前段累積で開示判定。IPA公式10PDFをURLから独立再取得しSHAと問番号正解欄を確認。2022春はテキスト空なのでrender画像を開き問34アを目視。計算/単位/ビット演算/プロトコル条件を検算。初学者試用は実施していない。drafts/reviews/共有進捗/他組/公開教材は未編集。",
+  "supplementalSources": [
+    {
+      "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/rfc5280.txt",
+      "url": "https://www.rfc-editor.org/rfc/rfc5280.txt",
+      "sha256": "a2f2628c0a83b873fc4786abd921f9b2c02395954b655d190bf16b831633345d",
+      "evidence": "RFC5280(2008-05) sec3.3 lines704-718, sec5 lines3016-3020, sec5.1.2.6 lines3291-3295。出題時点で既発行。"
+    },
+    {
+      "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/guide_ver1.0_20211130.pdf",
+      "url": "https://www.jpcert.or.jp/csirt_material/files/guide_ver1.0_20211130.pdf",
+      "sha256": "b5aafc457518d7f7b097fd7003f2bc8f9e99a3c0849e94a09b89519064e4a494",
+      "evidence": "表紙2021年11月30日。sec1.2 p5 六分類、p7 coordination/analysis、p8 vendor、p10 incident response providerの対象と機能を独立抽出読取。"
+    }
+  ],
+  "summary": {
+    "questions": 20,
+    "choiceReasons": 80,
+    "hints": 60,
+    "sourceImagesActuallyViewed": 20,
+    "officialPDFsIndependentlyDownloaded": 10,
+    "questionsNeedingChanges": [
+      "r03h-q34",
+      "r07a-q39",
+      "r05a-q39"
+    ],
+    "requiredFindings": 3
+  },
+  "questions": [
+    {
+      "id": "r05h-q34",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "83fe91c7e0cc82f8798cd91b1273e75d9ce9402a502b16e6c261b82cc593a539",
+      "beforeLessonSHA256": "9200f530047f6a825ff96e49498e0d7556f6f3df748ede5a846df28f9957540b",
+      "beforeDesignSHA256": "c0c407e3733cec693ea836ce07c0723d59c40ac8cb2b8c5e8287f174a0261a83",
+      "baseLessonSHA256": "c890a0f6ab0ba8082c76ded8cb33342e3a05f05e291ecea102519d3b0c3f42c1",
+      "questionSHA256": "027a6da93b08616e94ed5ddaeabce997bd5210fa02de69edee9951e62ace69f5",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q34.webp": "d55f55d657ae4b055dd789ef0207b04f23db620b20512b291057b0f6d5841257",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q34.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問34 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "UDPはポートを使い上位アプリ間データグラム配送を行う第4層。HTTP/SMTPはアプリ層、ICMPはIPに伴うネットワーク層。独立解答エ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "HTTPはWebのアプリ層",
+          "draftReasonRead": "HTTPはWebの要求・応答を定めるアプリケーション層のプロトコルです。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "ICMPはIPのエラー/制御のネットワーク層",
+          "draftReasonRead": "ICMPはIP通信のエラー通知や制御を扱うネットワーク層のプロトコルです。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SMTPはメール転送アプリ層",
+          "draftReasonRead": "SMTPは電子メール転送を扱うアプリケーション層のプロトコルです。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "UDPはポート識別するトランスポート層",
+          "draftReasonRead": "UDPはポート番号を使うトランスポート層のプロトコルです。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "アプリケーション層はWebやメールなど用途別の通信規約、ネットワーク層はIPによる配送、トランスポート層はアプリ間のデータ配送を扱います。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "層の役割のみで略語との対応は未提示"
+        },
+        {
+          "stage": 2,
+          "textRead": "ICMPはIP通信のエラー通知や診断を扱うためネットワーク層です。トランスポート層はポート番号を使い、同じ端末上のどのアプリへ届けるかを区別します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "ICMPのみ除外。HTTP/SMTP/UDPの分類はまだ必要"
+        },
+        {
+          "stage": 3,
+          "textRead": "UDPはコネクション確立なしでデータグラムを運ぶトランスポート層のプロトコルです。HTTPとSMTPはアプリケーション層なので、残る候補と照合します。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "UDP＝第4層を直接提示"
+        }
+      ],
+      "summaryReview": "pass: OSI基本参照モデルの各層が担う役割を基に、四つの通信プロトコルを分類する問題。",
+      "explanationReview": "pass: UDPはポートを使い上位アプリ間データグラム配送を行う第4層。HTTP/SMTPはアプリ層、ICMPはIPに伴うネットワーク層。独立解答エ。",
+      "takeawayReview": "pass: 用途の通信規約と、そのデータを運ぶ層を区別する。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r06h-q33",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "20743fa02f2c0f5b50aacbc0d3a147e0fdbac61511eafde2dfad298db7512f69",
+      "beforeLessonSHA256": "41ecb73b6a74a5664587b9b093e30e4cd78c09ea8f21bbf609235e7d484ba956",
+      "beforeDesignSHA256": "9e4e76ed6b206388b0c43d166aaf68c0a9ec993ef527f4b40596f57ce988db8a",
+      "baseLessonSHA256": "5ffd7232e1a7ed0f29049d05617a771227dc62c010ecbe9eaa0e217f0576a3ea",
+      "questionSHA256": "c96307df46357e1ba6ccb2767073e5843867d07677b0a35daac44655c93c36f5",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q33.webp": "f73340b972d6d00b1b5271b042e6e52c151fcac0c3f2981eab939119fdb2c6e0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r06h/r06h-q33.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問33 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "1500×8=12000bit、0.0001%=10^-6。10000×12000×10^-6=120個。独立誤りで10000×(1-(1-10^-6)^12000)=119.2829307個。最も近いエ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "10/10000=.001は必要な約.012より小さい",
+          "draftReasonRead": "アの10はパケット内の12,000ビット分の誤り機会を正しく反映していません。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "15はbyteをbitにせず1500×10^-6×10000とした値",
+          "draftReasonRead": "イの15は1,500をバイトのまま使った値です。ビット誤り率なので8倍します。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "80/10000=.008は12000bitの約.012と合わない",
+          "draftReasonRead": "ウの80はパケット長1,500バイトを正しく反映した値ではありません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "120は稀な誤りの一次近似に一致",
+          "draftReasonRead": "エの120は1,500×8×10⁻⁶×10,000による近似値です。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "0.0001％は確率にすると0.0001÷100＝0.000001（10⁻⁶）です。百分率のまま掛けないでください。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "率の%変換のみ"
+        },
+        {
+          "stage": 2,
+          "textRead": "1パケットは1,500×8＝12,000ビットです。誤りが非常にまれなら、パケットに1ビット以上の誤りがある確率は約12,000×10⁻⁶です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "パケット長と確率の式。個数計算が残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "誤りを含むパケット数の期待値は、送信パケット数×パケット誤り確率。10,000×12,000×10⁻⁶を計算し、最も近い選択肢を選びます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "期待値の掛算は未実行"
+        }
+      ],
+      "summaryReview": "pass: ビット誤り率から、誤りを含むパケット数の期待値を近似計算する問題。",
+      "explanationReview": "pass: 1500×8=12000bit、0.0001%=10^-6。10000×12000×10^-6=120個。独立誤りで10000×(1-(1-10^-6)^12000)=119.2829307個。最も近いエ。",
+      "takeawayReview": "pass: ビット誤り率は％を確率へ直し、パケット長もビット単位にそろえる。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r07a-q35",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "320bc56441144bd55116f5679d27baf7d6b812f6e513565ce338de7570fc7460",
+      "beforeLessonSHA256": "49fc4d1cb058515ca708747b74dcc7e10d848eb39b98eeb89d6e743cc3a515ba",
+      "beforeDesignSHA256": "26af87b1ce319d3cfe0530041b7c4e6c6935e22a28571557e037b0f4110e221d",
+      "baseLessonSHA256": "bab3826a275a8f9c566941e6d5280b7c3f1ee8575b4bf93bec5259f9949b6a26",
+      "questionSHA256": "a584b01c88239f7798a37d9db22b8a8af24ac0bc051e84e86312e206fd4e3927",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q35.webp": "65c68fe9b7ad5dc7fc63a9fdc83dba7fddc6997464de9459efaf18768449cf49",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q35.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "1500byte=12000bit、0.0001%=10^-6。稀な誤りの期待パケット数近似は10000×12000×10^-6=120。独立モデルの厳密値119.2829307個とも最寄りはエ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "10は確率.001で小さ過ぎる",
+          "draftReasonRead": "10個ならパケット誤り率0.001に相当し、条件から求まる約0.012より小さ過ぎます。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "15はbyte→bitの8倍忘れ",
+          "draftReasonRead": "15個は1500バイトを1500ビットとして扱った近似値です。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "80は12000bitの確率と不一致",
+          "draftReasonRead": "80個は12000ビットと誤り率から求める期待値に一致しません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "120は近似期待値",
+          "draftReasonRead": "1パケットの誤り確率約0.012に10000個を掛けた約120個です。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "ビット誤り率0.0001％を確率にすると10⁻⁶です。1バイト＝8ビットなので、パケット長もビットへ変換します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "率変換と換算係数まで"
+        },
+        {
+          "stage": 2,
+          "textRead": "1,500バイトは12,000ビット。独立なビット誤りならパケットに誤りがある確率は1－(1－10⁻⁶)¹²⁰⁰⁰で、誤りがまれなら12,000×10⁻⁶で近似できます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "パケット誤り確率の近似と厳密式、総個数は未計算"
+        },
+        {
+          "stage": 3,
+          "textRead": "求めるのは誤りを含むパケットの**個数**です。近似した1パケットの誤り確率に送信個数10,000を掛け、四つの数値と照合します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "確率×送信個数の計算が残る"
+        }
+      ],
+      "summaryReview": "pass: パケット長とビット誤り率を用いて、誤りを含むパケットの期待個数を求める問題。",
+      "explanationReview": "pass: 1500byte=12000bit、0.0001%=10^-6。稀な誤りの期待パケット数近似は10000×12000×10^-6=120。独立モデルの厳密値119.2829307個とも最寄りはエ。",
+      "takeawayReview": "pass: ビット誤り率の%を割合へ直し、パケットのビット数を掛ける。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r03a-q35",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "c719176d8b64db75c40a2b318c7caca187f340fc111cb819624986cc00f6b24c",
+      "beforeLessonSHA256": "a863f4525a3e71dbec1bc53ee6f402658b08362bb5ec8f892dfeced6835c85ee",
+      "beforeDesignSHA256": "33a0324f073fa014b870e6da676bbab85d40e0740c8191d33f0973f05462833a",
+      "baseLessonSHA256": "fe544c8c1c76b08a4588c8af54d92e2443e488f0e1e4be73a599e4ff615e39cf",
+      "questionSHA256": "21c421a0baadce33f7e304dea34e0dc35899a78e821f48eb87e15eb4bb61ad39",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q35.webp": "700f537635c8aedb2c0af236e2fe4c00607161d5445b7cb9e95c21b341cfba6e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r03a/r03a-q35.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "マスクmのネットワーク位置=1、ホスト位置=0。~mはネットワーク0/ホスト1。a OR ~mならネットワークを保存しホスト全1。正答エ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "~a AND mはネットワークが反転しホスト0",
+          "draftReasonRead": "反転IPとマスクのANDではネットワーク部が反転し、ホスト部は0になります。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "~a OR mはネットワーク1でホストが反転",
+          "draftReasonRead": "反転IPとマスクのORではネットワーク部がすべて1になり、ホスト部も元の反転値となります。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "a AND ~mはネットワーク0でホスト元値",
+          "draftReasonRead": "IPと反転マスクのANDではネットワーク部が0になり、ホスト部は元の値のままです。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "a OR ~mはネットワーク元値でホスト1",
+          "draftReasonRead": "IPと反転マスクのORでネットワーク部を保ち、ホスト部をすべて1にできます。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "サブネットマスクの1はネットワーク部、0はホスト部です。ブロードキャストアドレスではネットワーク部を保ち、ホスト部をすべて1にします。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "必要な出力条件だけ"
+        },
+        {
+          "stage": 2,
+          "textRead": "ビットごとのORは、相手が0なら元の値を残し、相手が1なら結果を1にします。必要なのはネットワーク部が0、ホスト部が1のビット列です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "ORの作用と必要列。マスク反転という操作の選択が残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "マスクをビット反転すると、その必要なビット列になります。したがってIPアドレスと「反転したマスク」の**論理和（OR）**を取ります。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "反転マスクとIPのORを明示"
+        }
+      ],
+      "summaryReview": "pass: IPv4のサブネットマスクから、ブロードキャストアドレスを作るビット演算を判断する問題。",
+      "explanationReview": "pass: マスクmのネットワーク位置=1、ホスト位置=0。~mはネットワーク0/ホスト1。a OR ~mならネットワークを保存しホスト全1。正答エ。",
+      "takeawayReview": "pass: ブロードキャストはネットワーク部を保存し、ホスト部を全1にする。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r04h-q34",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "7326e2b3f318f762eb25df33ccae5c647739616a7a2a20b77dd108bb3f0af21e",
+      "beforeLessonSHA256": "3dc2ab552ed216966da747a482f5f87551a945f45dfe4cf5a938e4514e5d1bde",
+      "beforeDesignSHA256": "d8419449ea04b8646d2d53fba71b4d7846dbb2b2c1a77e28f36a667001fa239a",
+      "baseLessonSHA256": "b5b63868ff75a4d87f899e76da3bac401d24119d00246e14ab657a55e92c3e90",
+      "questionSHA256": "0e3f62ce141af2ff652b76bec11bb6151a66aba5d2e578e2242ae0dbb8daf0ea",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q34.webp": "13bda111ad07d512974115e1e061fd98a4505461131c233fac7231f389af6340",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r04h/r04h-q34.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "textLength": 0,
+        "renderedImagePath": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04h_ap_am_ans.png",
+        "renderedImageSHA256": "31db243c4040f0356f1cab96607d341dcd182da0653dd3af552be3e44c231631",
+        "evidence": "PDF page 1を1800px PNGにレンダリングしview_imageで実際に開いた。2列目の問34 正解アを目視。"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "32-28=4bit、2^4=16アドレス。192.168.30.32/28の範囲.32-.47、ネットワーク.32とbroadcast.47を除き.33-.46の14ホスト。ア。通常のサブネットという限定も保持。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "14は16-2で正しい",
+          "draftReasonRead": "16個からネットワークとブロードキャストの2個を除き、14台に割り当てられます。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "16は予約2個を含む",
+          "draftReasonRead": "16はサブネット全体のアドレス数で、予約される2個を除いていません。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "28はprefix bit数",
+          "draftReasonRead": "28はプレフィックス長であり、ホスト数ではありません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "30は/27の通常ホスト数",
+          "draftReasonRead": "30はホスト部5ビットの/27の場合のホスト数です。本問は/28です。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "IPv4アドレスは32ビットで、/28はネットワーク部が28ビットという意味です。ホスト部は32－28ビットです。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "32-28の計算が残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "ホスト部がhビットならアドレス総数は2^hです。通常のサブネットでは全0のネットワークアドレスと全1のブロードキャストアドレスを除くため、2^h－2個を使えます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "2^h-2公式から与件適用/計算が残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "この問題ではh＝4なので、2⁴－2を計算します。サブネットの開始値.32はホスト数の計算に直接は不要です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "2^4-2最終計算が残る"
+        }
+      ],
+      "summaryReview": "pass: IPv4のCIDRプレフィックス長から、サブネットで利用可能なホストアドレス数を計算する問題。",
+      "explanationReview": "pass: 32-28=4bit、2^4=16アドレス。192.168.30.32/28の範囲.32-.47、ネットワーク.32とbroadcast.47を除き.33-.46の14ホスト。ア。通常のサブネットという限定も保持。",
+      "takeawayReview": "pass: IPv4の通常のサブネットではホスト数=2^(32−プレフィックス長)−2。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r03h-q34",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "511cda5159048cb822079aae6e41de393a6f9b44126f02cdaf62e4bfd0e93299",
+      "beforeLessonSHA256": "7a620bcdec3fe5519ecd8581a436a0bd93f7329d3b3ca630f001a26155113fca",
+      "beforeDesignSHA256": "cfb9db1a7d4e8f2d35cdbf4b18b27ffeb91ad1d8e2f4bd9a180484bb1ba1d758",
+      "baseLessonSHA256": "acae6bc2d8c7cdf9468dbba64ba169ba42c350d4ffdaaa68f9054fc01765f73f",
+      "questionSHA256": "9456ee1ca623246ef2b5b14bb1d4291667f06057713e54114b1008a34bc0b056",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q34.webp": "ca075e8011cd0abbc0c7012efa45ce2fb9d48e508f2e89da2d27200c5351eae6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r03h/r03h-q34.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ウ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "textLength": 1401,
+        "evidence": "PDF page 1、問34 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ウ",
+      "independentResult": "ネットワーク部を0、ホスト部だけaの値にするにはa AND ~m。各ビットでm=1なら0、m=0ならaとなる。正答ウ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "~a AND mは反転ネットワーク部を抽出",
+          "draftReasonRead": "~a & mは反転したアドレスのネットワーク部を抽出してしまいます。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "~a OR mはネットワーク全1でホスト反転",
+          "draftReasonRead": "~a | mはマスクのネットワーク部を全て1にし、ホスト部も反転します。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "a AND ~mだけホスト抽出",
+          "draftReasonRead": "a & ~mはホスト部のビットだけ残すので正しいです。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "a OR ~mはbroadcast生成で抽出と異なる",
+          "draftReasonRead": "a | ~mはホスト部を全て1にし、元のホストアドレスを取り出せません。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "サブネットマスクmはネットワーク部が1、ホスト部が0です。欲しいホスト部だけを残すには、逆にホスト部が1のマスクが必要です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "反転マスクを組み立てる必要が残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "ビットAND（&）は、相手が1の場所では元のビットを残し、0の場所では結果を0にします。元のIPアドレスaを反転してはいけません。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": true,
+          "judgement": "changes-requested",
+          "cumulativeEvidence": "元aを反転しない指定でア/イ除外、ANDで抽出する知識によりORのエも除外。残るウはa&~mのみ。累積で全誤答を除外するためtrueが必要"
+        },
+        {
+          "stage": 3,
+          "textRead": "mを反転した~mはホスト部が1になります。元のaと~mのAND、すなわち**a & ~m**がホスト部を取り出す式です。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "完成したa&~m式を明示"
+        }
+      ],
+      "summaryReview": "pass: IPアドレスとサブネットマスクから、ホスト部だけを抽出するビット演算を選ぶ問題。",
+      "explanationReview": "pass: ネットワーク部を0、ホスト部だけaの値にするにはa AND ~m。各ビットでm=1なら0、m=0ならaとなる。正答ウ。",
+      "takeawayReview": "pass: 取り出す位置を1にしたマスクとANDする。",
+      "designReview": "changes-requested: finding参照",
+      "calculation": true,
+      "findings": [
+        {
+          "severity": "required",
+          "field": "lesson.hints[1].revealsAnswer / design.stages[1]",
+          "evidence": "H1でホスト部が1のマスクを要求、H2でANDの抽出作用と「元のIPアドレスaを反転してはいけません」を提示。ア/イは~aで除外、エはORなので除外され、ウa&~mだけ残る。",
+          "requestedChange": "H2をtrueにしdesignのremainingWork/reasonも全肢と累積情報に一致させる。または複数候補が実際に残る本文へ再設計する。"
+        }
+      ]
+    },
+    {
+      "id": "r05a-q35",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "b0b5214441f0a22ba609255d13666dc3be4623642a72cc8c99c78e8fca450ee9",
+      "beforeLessonSHA256": "5c13a4ba1e85125655186991a6c5a387d33784c3b4be7983ee69fef795bfb043",
+      "beforeDesignSHA256": "9493e9e1c27e2e5e61876db98a26d32deca45d7336cd48a4a34001af8dbeefa1",
+      "baseLessonSHA256": "0fe4f2af8dd31c73d531378b287f0bcbab5feea04b614e92bd97430f8aaee4d8",
+      "questionSHA256": "3dcf15133af834c06a90d1dae1fe1755c76cd1dfa91781ac1176ded8f0dfa063",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q35.webp": "07eb38cf77818b137061fa22b71af54f2a46d964aded54da8b97d6ca3b55571c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q35.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "IPv4 RIP-2の経路更新先グループ224.0.0.9がマルチキャスト。DHCP初期探索/ARP要求はbroadcast、SMTP配信はユニキャスト接続。正答エ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "IPv4 DHCP初期探索はbroadcast",
+          "draftReasonRead": "LANに初めて参加するPCのDHCP初期要求はブロードキャストを使います。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "IPv4 ARP requestはbroadcast",
+          "draftReasonRead": "IPv4のARP要求はLAN内へブロードキャストし、該当する機器の応答を求めます。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SMTP多人数配信はIP multicastではない",
+          "draftReasonRead": "複数の受信者へのメール配送でも、SMTP通信はIPマルチキャストにはなりません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "RIPv2は224.0.0.9に更新を送る",
+          "draftReasonRead": "RIP-2ルータのグループ宛てに224.0.0.9で経路更新を送ります。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "ブロードキャストは同じネットワーク内の全体へ、マルチキャストは参加した特定グループへ送ります。メールの複数宛先配信が、そのままIPマルチキャストになるわけではありません。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "全体対グループの軸とSMTPの誤解訂正。DHCP/ARP/RIPの判断は残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "DHCPの初期探索とARP要求は、宛先がまだ分からないため通常ブロードキャストです。SMTPのメーリングリストもサーバによるメール配送であり、IPマルチキャストではありません。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "ア/イ/ウをすべて除外するのでtrue"
+        },
+        {
+          "stage": 3,
+          "textRead": "RIP-2は経路更新をIPv4マルチキャストアドレス224.0.0.9へ送ります。隣接するRIP-2ルータのグループ宛てという特徴を確認します。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "RIP-2のアドレスと利用例を明示"
+        }
+      ],
+      "summaryReview": "pass: ブロードキャスト・ユニキャスト・マルチキャストの宛先範囲を、具体的なプロトコル利用例から区別する問題。",
+      "explanationReview": "pass: IPv4 RIP-2の経路更新先グループ224.0.0.9がマルチキャスト。DHCP初期探索/ARP要求はbroadcast、SMTP配信はユニキャスト接続。正答エ。",
+      "takeawayReview": "pass: 複数人へ同じ内容を届けることと、IPマルチキャストを使うことは別。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r07a-q31",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "9386116bf13787499df8531b5860349c90d5bfc3c2da1ece2f3a2ea223cfe7ea",
+      "beforeLessonSHA256": "49b9de607460fb8920acd7255f0c65c54bdd74c06e8c1930a9430ffb2a12b9e6",
+      "beforeDesignSHA256": "ebeac74baf63f6eb1b332ba3be4adee6c461dece2365ba39d170a7e19ddee005",
+      "baseLessonSHA256": "9eb065e0f8a5f7bc943656e21f1a9ebb39da0375a2cf1135bb42b0e5defb2dd1",
+      "questionSHA256": "ab03d644fcc0004d4f0145620b6dd9317ea62b7e1e4955e24796a3e53d6f0fd0",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q31.webp": "2a1e714ea2ba5642000505243df8c3991871fe264937432160cf076d8ee7ab65",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q31.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問31 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "reverse proxyは公開サーバ側で外部要求を受け内部Webへ転送する代理。内→外PC代理はforward、攻撃検知はIDS、専用網はVPN。ア。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "外部から公開Webへの中継がreverse",
+          "draftReasonRead": "インターネット側から公開Webサーバーへの通信を中継するので正しいです。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "検知はIDSの機能",
+          "draftReasonRead": "攻撃を監視・検知する説明はIDSなどで、リバースプロキシの説明ではありません。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "専用網確立はVPN",
+          "draftReasonRead": "仮想専用ネットワークを確立するのはVPNの説明です。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "社内PCの外部通信代理はforward",
+          "draftReasonRead": "内部PCのインターネット通信を代理するのはフォワードプロキシです。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "プロキシは通信を中継する代理サーバです。**誰の代理か**と、要求が外部から内部へ向かうのか内部から外部へ向かうのかを分けて考えます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "代理という比較軸だけ"
+        },
+        {
+          "stage": 2,
+          "textRead": "フォワードプロキシは社内PCなどクライアント側の代理として、インターネットへのアクセスを中継します。攻撃検知のIDSや専用網を作るVPNとは機能が異なります。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "forward/IDS/VPNでエ/イ/ウが除外されアだけ残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "リバースプロキシは公開Webサーバ側の窓口です。インターネットの利用者からの要求を受け、内部のWebサーバへ中継します。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "アのreverseの定義を提示"
+        }
+      ],
+      "summaryReview": "pass: リバースプロキシが通信を中継する方向と、他のネットワーク技術との違いを問う問題。",
+      "explanationReview": "pass: reverse proxyは公開サーバ側で外部要求を受け内部Webへ転送する代理。内→外PC代理はforward、攻撃検知はIDS、専用網はVPN。ア。",
+      "takeawayReview": "pass: リバースはサーバー側の代理、フォワードはクライアント側の代理。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r06h-q32",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "1b899045c4bf8ffac53c13a6eb00a28c8e66baa1277ac8aa8ec1bf93f4595d41",
+      "beforeLessonSHA256": "5dbac3e19a4287ec30c81e682d586979a7137a9081fe020033eec5bb4d5e6c77",
+      "beforeDesignSHA256": "9d4834af3a6bc8b447bb8806608379c4c951e0a3463310e8d8a485e8368aa5b6",
+      "baseLessonSHA256": "a62da628d449160c46bc46fab19f7a9b9ba2d7a111f4a850f4f8d1d03d20a02c",
+      "questionSHA256": "6768e89b980800cd3a5e7fa256e2a8b9c080a609426a19bab35f8631d7f06ee5",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q32.webp": "1d4986e2a5e3e3aaad8240329c8a3411be53b3dba6390ebdaa93ffe3ad7b6c5d",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r06h/r06h-q32.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問32 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "VRRPは複数物理ルータを仮想ルータとして構成し稼働役を引継ぐ。監視SNMP、リンクPPP、MACからIP取得RARPではない。エ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "PPPは二地点のデータリンク",
+          "draftReasonRead": "アのPPPはポイント間のデータリンク接続に使います。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "RARPはMACからIP取得",
+          "draftReasonRead": "イのRARPはMACアドレスからIPアドレスを得るためのプロトコルです。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SNMPは機器監視/管理",
+          "draftReasonRead": "ウのSNMPは機器の状態監視や管理に使います。冗長化そのもののプロトコルではありません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "VRRPは仮想ルータの役割引継ぎ",
+          "draftReasonRead": "エのVRRPは仮想ルータの稼働役を複数機器間で引き継ぎます。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "端末が使うデフォルトゲートウェイのルータが故障しても通信を続けるには、別のルータが同じゲートウェイの役割を引き継ぐ必要があります。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "冗長化が必要な理由まで"
+        },
+        {
+          "stage": 2,
+          "textRead": "複数の物理ルータで共通の仮想IPアドレスを持つ**仮想ルータ**を構成し、稼働中のルータが故障したら別のルータへ切り替える仕組みを考えます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "仮想IP/ルータという仕組み。各略語への知識対応は残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "この仕組みの名称はVRRP（Virtual Router Redundancy Protocol）です。SNMPは監視・管理、PPPはポイント間接続、RARPはアドレス変換に関する別の用途です。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "VRRP名称と各誤答の用途を直接提示"
+        }
+      ],
+      "summaryReview": "pass: デフォルトゲートウェイとなるルータを冗長化するためのプロトコルを識別する問題。",
+      "explanationReview": "pass: VRRPは複数物理ルータを仮想ルータとして構成し稼働役を引継ぐ。監視SNMP、リンクPPP、MACからIP取得RARPではない。エ。",
+      "takeawayReview": "pass: ルータの冗長化はVRRP、監視管理はSNMP。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r05a-q31",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "b83a20181eea9067f849be56231bf15c1b87c05d0aa19a145857a9f982b0372d",
+      "beforeLessonSHA256": "72877878354b07beb6926fd2d55ed69f095e7024031dc8734ab6ca1988c57c96",
+      "beforeDesignSHA256": "835ac020a38c3a9e89e360c55793883ac4c0c9d6175aaa7ad6ac5eee9853070f",
+      "baseLessonSHA256": "878ccd9dc4cf46ce3d6897b731c71c6f50200fdc676454d35a4025c60ca98c24",
+      "questionSHA256": "a31e529e2cbc6d3f2758f8d2f7764cc865b2614e934321ae0f263167f3999988",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q31.webp": "5fb40da758affbccbea97ce9906ac97eeccb32e8d94913fe776878b0ea423683",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q31.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ウ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問31 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ウ",
+      "independentResult": "1000byte×1000×8=8Mbit。100Mbps×.5=50Mbps実効。8/50=.16秒、ウ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": ".02はbyteのまま割った単位不整合",
+          "draftReasonRead": "総量1Mバイトをビットへ変換せず実効50Mビット/秒で割った値が0.02ですが、単位が一致していません。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": " .08は公称100Mbpsで効率を無視",
+          "draftReasonRead": "8Mビットを公称100Mビット/秒で割ると0.08です。効率50%で速度が半分になる条件を反映していません。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": " .16は8Mbit/50Mbps",
+          "draftReasonRead": "8Mビット÷50Mビット/秒=0.16秒で、単位と伝送効率の両方を反映しています。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "1.6秒は計算結果の10倍",
+          "draftReasonRead": "条件の総量と実効速度からは0.16秒となり、1.6秒は10倍大きい値です。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "1件1,000バイトを1,000件送るので、総量は1,000×1,000バイトです。回線速度に合わせるため1バイト＝8ビットで換算します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "総量とbyte→bit計算が残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "公称100Mビット/秒でも伝送効率が50％なら実効速度は100×0.5＝50Mビット/秒です。時間は総ビット量÷実効速度で求めます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "実効50Mbpsと時間公式。データ量を代入する"
+        },
+        {
+          "stage": 3,
+          "textRead": "総量は8Mビット、実効速度は50Mビット/秒。8÷50の計算を行い、単位が秒になることを確かめて選択肢を選びます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "8/50最終計算が残る"
+        }
+      ],
+      "summaryReview": "pass: 総データ量をビットへ換算し、伝送効率を考慮した実効速度から送信時間を計算する問題。",
+      "explanationReview": "pass: 1000byte×1000×8=8Mbit。100Mbps×.5=50Mbps実効。8/50=.16秒、ウ。",
+      "takeawayReview": "pass: 伝送時間は総ビット量÷実効ビット速度。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r03h-q32",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "8343fa4896c14c96b585a16c6d625dc83b2d7c5d4d84868cdad3c09cbd741bb9",
+      "beforeLessonSHA256": "a152057d65db798fe38e58ca4e7f68e9e21957c72912e27e9f3beb802bca9423",
+      "beforeDesignSHA256": "7bd7fc4db3e9bbffe31d091f0fe7402645af86bae28610d5901c0de47ad32e7e",
+      "baseLessonSHA256": "6588791293b574520dc0bf07bf3cc5b5c4cdd1aa73fa290f3b31bae526f9eed1",
+      "questionSHA256": "b3f0427773fe962e002615f745fd890531b7dfa2331e7e60055e8ad6fd31fea6",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q32.webp": "b2f1594816ee01b2b413ddc086c03ee70a00b6957e4df24ee6244f9ab3c65edd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r03h/r03h-q32.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "textLength": 1401,
+        "evidence": "PDF page 1、問32 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "身の回り近距離PANのIoT無線はBLE。LTE広域、PLC電力線有線、PPPリンクプロトコルで異なる。ア。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "BLEは近距離低電力無線PAN",
+          "draftReasonRead": "近距離の無線PANでセンサなどの省電力通信に使えます。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "LTEは広域携帯通信",
+          "draftReasonRead": "LTEは携帯電話の広域移動通信です。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "PLCは電力線の有線通信",
+          "draftReasonRead": "PLCは電力線を伝送路にする有線通信です。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "PPPは二地点リンクの規約でPAN無線技術ではない",
+          "draftReasonRead": "PPPは二地点を結ぶ通信のプロトコルで、無線PAN技術そのものではありません。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "PAN（Personal Area Network）は人の周辺の機器をつなぐ近距離ネットワークです。IoTのセンサなら、通信距離だけでなく電池消費の小ささも重要です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "PAN範囲と省電力という比較軸だけ"
+        },
+        {
+          "stage": 2,
+          "textRead": "LTEは携帯電話の広域通信、PLCは電力線を使う有線通信、PPPはポイント間のリンク用プロトコルです。これらは近距離の低消費電力**無線**PANの技術そのものではありません。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "LTE/PLC/PPPの全誤答を除外"
+        },
+        {
+          "stage": 3,
+          "textRead": "BLEはBluetooth Low Energyの略で、近距離の機器同士を低消費電力で接続できます。ウェアラブル機器やセンサなどで使われます。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "BLE名称と定義を提示"
+        }
+      ],
+      "summaryReview": "pass: IoT機器の近距離・低消費電力通信に適する無線PAN技術を選ぶ問題。",
+      "explanationReview": "pass: 身の回り近距離PANのIoT無線はBLE。LTE広域、PLC電力線有線、PPPリンクプロトコルで異なる。ア。",
+      "takeawayReview": "pass: PANは個人の周囲の近距離機器を接続する。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r04a-q32",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "dfe4c5c9ed6efad54395e7a262caf33bc31e0701fe1ab1cabde97f5bda4e1d75",
+      "beforeLessonSHA256": "904d68e7c45f98cd9115dc8432338f72962b7fe3be80ee62b283ba2ad7e34acd",
+      "beforeDesignSHA256": "b4a1d47617a3e4cbee060a7300de917ccc9a691b543009e04ea84f453feff0b9",
+      "baseLessonSHA256": "b3713442f885c383aab394a90c7ad36b8e1e4d6c1a0387b41282490c31df0b96",
+      "questionSHA256": "243fbf53198a00b42cb5e1173b052ddca292371b972ca77575491b4ec830483d",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q32.webp": "cf6060324025d335be359ca41190cf93673ee15d66da817670f05b084065f848",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r04a/r04a-q32.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問32 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "FTPは制御TCP21、activeデータサーバTCP20を別に使う。passiveは通知した別ポートだが分離構造は同じ。SNMP161/162は制御対転送でなく要求/応答と通知。ア。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "FTPに20/21のwell-known割当て",
+          "draftReasonRead": "FTPは制御21番とデータ20番という別のウェルノウンポートが割り当てられています。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "POP3は110のメール取得",
+          "draftReasonRead": "POP3はメール受信用の110番で、この制御・データ分離には当たりません。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SMTPは25のメール配送",
+          "draftReasonRead": "SMTPはメール送信用の25番で、この制御・データ分離には当たりません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SNMP161/162は要求/応答と通知",
+          "draftReasonRead": "SNMPの161番と162番は要求と通知であり、問われるデータ転送用と制御用の区分ではありません。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "問われているのは単にポート番号が複数あるかではなく、**転送を指示する制御通信**と**ファイル本体のデータ通信**を別接続にするかです。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "制御対ファイル内容という比較軸のみ"
+        },
+        {
+          "stage": 2,
+          "textRead": "FTPはファイル転送用のプロトコルで、制御接続にTCP21番、アクティブモードのデータ接続のサーバ側にTCP20番が割り当てられています。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "FTP名称と20/21の役割を明示"
+        },
+        {
+          "stage": 3,
+          "textRead": "FTPのパッシブモードではデータ用に別のポートを使いますが、制御とデータの接続を分ける点は同じです。SNMPの161/162番は要求・通知の区別であり、転送データと制御の区別ではありません。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "前段で開示済み。passiveとSNMPの相違を追加"
+        }
+      ],
+      "summaryReview": "pass: TCP/IPのウェルノウンポートで、制御接続とデータ転送接続を分けるプロトコルを問う問題。",
+      "explanationReview": "pass: FTPは制御TCP21、activeデータサーバTCP20を別に使う。passiveは通知した別ポートだが分離構造は同じ。SNMP161/162は制御対転送でなく要求/応答と通知。ア。",
+      "takeawayReview": "pass: FTPは制御接続とデータ接続を別にする。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r07h-q33",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "0b99f7c68df18869aa42419bfef2ff29de9ac36177498ab487c24103ee836a5e",
+      "beforeLessonSHA256": "c6541f9e3e691b89bc1843240ade5148f8439116645bdd9bc413e3d9f6b0607b",
+      "beforeDesignSHA256": "b2980e9d9bac2967c62fe0bb4111e702fee9a442de1644eec537b7e25bbde380",
+      "baseLessonSHA256": "782e0284c0c700979ccf9e6815289792b365e124ebdabcf3428082f674e133b9",
+      "questionSHA256": "9cfe2f24daac8835bc77713c01e318195080a44cfb323a3770935adc923c3ba8",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q33.webp": "f35a23fabb0ace4b45803ca16ea2559210d71a77d1b80e32153b9ef09405b0bb",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r07h/r07h-q33.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問33 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "FTPはログイン/転送指示をTCP21、activeデータをサーバTCP20。passiveのデータポート例外も区別されている。SNMPの2ポートは要求/通知の別。正答ア。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "FTP制御21/activeデータ20の割当てが該当",
+          "draftReasonRead": "FTPは制御接続とデータ接続を分け、制御21番・アクティブデータ20番が割り当てられる。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "POP3はメール取得",
+          "draftReasonRead": "POP3はメール取得用のプロトコル。FTPのような制御・データの二接続ではない。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SMTPは同じ通信でメールを配送",
+          "draftReasonRead": "SMTPはメール配送用。通常その通信でメール内容を送る。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "SNMP161要求/応答、162通知の区分",
+          "draftReasonRead": "SNMPは通常161番の要求・応答と162番の通知を使う。ファイル転送の制御・データの区分ではない。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "制御用の通信はログインや転送指示、データ用の通信は実際のファイル内容を運びます。問題文の『転送用と制御用』という二つの役割に注目します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "制御と実データの役割説明のみ"
+        },
+        {
+          "stage": 2,
+          "textRead": "FTPは制御用TCP21番と、アクティブモードでデータ接続のサーバ側に使うTCP20番を持つファイル転送プロトコルです。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "FTP名称・標準portを明示"
+        },
+        {
+          "stage": 3,
+          "textRead": "POP3はメール受信、SMTPはメール送信、SNMPは機器管理です。SNMPの161/162番は管理要求と通知であり、FTPの制御・データ接続とは用途が異なります。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "前段開示済みで誤答分類を追加"
+        }
+      ],
+      "summaryReview": "pass: 制御用とデータ転送用のウェルノウンポートが別々に割り当てられたプロトコルを区別する問題。",
+      "explanationReview": "pass: FTPはログイン/転送指示をTCP21、activeデータをサーバTCP20。passiveのデータポート例外も区別されている。SNMPの2ポートは要求/通知の別。正答ア。",
+      "takeawayReview": "pass: ポートが複数ある理由まで区別する。FTPは制御とデータ、SNMPは要求と通知。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r05h-q32",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "dfe71b482fbd652e534fd2285fe0aece1bcaaff07129d93317cbedbd57f9bb69",
+      "beforeLessonSHA256": "05893cf9c98d2dad8ac1c38647427fd857fe9015ab6d81e1d427da4b63de0d30",
+      "beforeDesignSHA256": "172b1edf9d3232778bb3154bde904017dad49ebe5b489041dc65abfafd792dc9",
+      "baseLessonSHA256": "f18df3eb941e7838e9599e17e4e8cbebad938626364afd94b9c9e798358c5888",
+      "questionSHA256": "45956ba3234df07449404bd5e0557effaae50e05913f5d52688f92746f9aebde",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q32.webp": "f013bb1a2d3dcf3f5730bf826ec213ddc6e7cd748f7e884d33ad046e4017bcbc",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q32.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ウ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問32 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ウ",
+      "independentResult": "1250×8=10000bit。100Mbpsは.1ms、1Gbpsは.01ms。共通の1ms間隔は同じ回数含まれ相殺する。(.1-.01)N=9よりN=100、ウ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "N10なら.9ms差",
+          "draftReasonRead": "10個なら時間差は0.9msで、9msに足りません。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "N80なら7.2ms差",
+          "draftReasonRead": "80個なら時間差は7.2msで、9msに足りません。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "N100なら9ms差",
+          "draftReasonRead": "100個なら0.09×100=9msで条件に合います。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "N800なら72ms差",
+          "draftReasonRead": "800個なら時間差は72msで、9msを超えます。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "パケット1個は1,250×8＝10,000ビットです。速度は100Mビット/秒と1Gビット/秒なので、まず各回線の1個当たり送信時間を求めます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "1packet bit数と速度から計算する"
+        },
+        {
+          "stage": 2,
+          "textRead": "100Mビット/秒では10,000÷100,000,000秒＝0.1ミリ秒、1Gビット/秒では0.01ミリ秒です。両回線で1ミリ秒の間隔は同じなので、時間差では相殺されます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "各送信時間と共通間隔相殺。個数は残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "1個当たりの時間差は0.1－0.01＝0.09ミリ秒。N個の差が9ミリ秒なので、0.09×N＝9を解いてください。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "0.09N=9の方程式を解く必要が残る"
+        }
+      ],
+      "summaryReview": "pass: 異なるLAN速度で同じパケット列を送ったときの所要時間差から、送信個数を求める問題。",
+      "explanationReview": "pass: 1250×8=10000bit。100Mbpsは.1ms、1Gbpsは.01ms。共通の1ms間隔は同じ回数含まれ相殺する。(.1-.01)N=9よりN=100、ウ。",
+      "takeawayReview": "pass: 両条件に共通の待ち時間は差の計算で相殺する。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r07a-q30",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "fa39e153e12da7e3dbb5fc9ed4640009a0403991825eedb70038a5680b856d8a",
+      "beforeLessonSHA256": "b0b9a60daf3964424fa5ea65a061da3364b8fa0f1ee5f1340a278ffdca9c1c6a",
+      "beforeDesignSHA256": "b97c2a29cded817c209cbec81a64cb148507b827a544269b55fe431564d483db",
+      "baseLessonSHA256": "f0867033286055a5f97d5c9327f3ce5174f7041464e8f4a7a48ec754bf5387aa",
+      "questionSHA256": "67311bb33b174e9e50ec3ca2d9af0d2c687d39a6ca90173115c224941048beda",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q30.webp": "d0e88117e2ab33e071c584727d44f5ffa22b044b5079487ccf9d96f737701b3b",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q30.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ウ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問30 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ウ",
+      "independentResult": "ヘッダー込み1250byte=10000bit。100Mbpsの.1msと1Gbpsの.01msの差は.09ms/個。同一回数の1ms間隔は相殺され9/.09=100個、ウ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "10なら.9ms",
+          "draftReasonRead": "10個の差は0.9ミリ秒で、9ミリ秒に届きません。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "80なら7.2ms",
+          "draftReasonRead": "80個の差は7.2ミリ秒です。バイトからビットへ8倍する換算を確認します。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "100なら9ms",
+          "draftReasonRead": "100個なら0.09×100=9ミリ秒です。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "800なら72ms",
+          "draftReasonRead": "800個の時間差は0.09×800=72ミリ秒で、9ミリ秒を超えます。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "ヘッダー込みの1,250バイトが1パケット全体です。追加のヘッダーを足さず、1,250×8ビットを各回線の速度で割ります。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "ヘッダー追加不要、換算と速度適用が残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "100Mビット/秒で0.1ミリ秒、1Gビット/秒で0.01ミリ秒が1パケットの送信時間です。共通の1ミリ秒の間隔は、両者の差を取ると打ち消されます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "送信時間/相殺は教えるがN未計算"
+        },
+        {
+          "stage": 3,
+          "textRead": "差は1パケット当たり0.09ミリ秒。9ミリ秒の差が生じる個数Nは9÷0.09で求め、選択肢と比べます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "9/.09の割算が残る"
+        }
+      ],
+      "summaryReview": "pass: 二つのLANの送信時間の差を用い、共通の待ち時間を消去してパケット数を計算する問題。",
+      "explanationReview": "pass: ヘッダー込み1250byte=10000bit。100Mbpsの.1msと1Gbpsの.01msの差は.09ms/個。同一回数の1ms間隔は相殺され9/.09=100個、ウ。",
+      "takeawayReview": "pass: 共通の待ち時間は差で相殺。転送量をビットへ直し、速度別の時間差を使う。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r05h-q35",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "e03925b0e752672126e35470c471788854b9bf02f29225a58937f5b2ec490ec6",
+      "beforeLessonSHA256": "fc0f7fe21fd39efef2634f9f7f393b4c04aae7a082c571f943790ab7705f0085",
+      "beforeDesignSHA256": "5196b6f62e9d714892c7b845b404535ba88f15e32b0ca35e7cc283cd1fbe2e00",
+      "baseLessonSHA256": "e7db23ca8000325a1edb80929852697f6ebf3c5a6dd84e37ed367db882b60748",
+      "questionSHA256": "c6ccbdd927b41d78c6321acd373718dba6d07fb71fc493140e7da62308285135",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q35.webp": "0825df0d7fc51c9d5a2797dcad621a28e89a1e92d2bd0cccf8caab6a929befc5",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q35.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "イ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解イ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "イ",
+      "independentResult": "通信を維持し接続先基地局を切替えるのはhandover。tetheringは回線共有、fallbackは代替方式、roamingは他網の利用。イ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "テザリングは回線を他機器に共有",
+          "draftReasonRead": "テザリングはモバイル端末の回線を他の機器へ提供する機能です。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "handoverは接続維持して基地局を引継ぐ",
+          "draftReasonRead": "基地局間で通信接続を引き継ぐハンドオーバーの説明です。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "fallbackは代替通信方式等へ切替え",
+          "draftReasonRead": "フォールバックは利用できない方式から代替の方式へ切り替えることです。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "roamingは他事業者等のネットワーク利用",
+          "draftReasonRead": "ローミングは契約先以外の事業者などのネットワークを利用する仕組みです。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "『移動中』『通信相手との接続を維持』『基地局Aから基地局Bへ』という三条件に注目します。契約先の事業者を変えるとは書かれていません。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "問題の接続維持/基地局切替条件を整理"
+        },
+        {
+          "stage": 2,
+          "textRead": "テザリングは端末の回線を別の機器へ共有すること、ローミングは他事業者のネットワークなどを利用すること、フォールバックは代替の通信方式などへ切り替えることです。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "テザリング/ローミング/フォールバックを除外しイだけ残る"
+        },
+        {
+          "stage": 3,
+          "textRead": "接続を保ったまま基地局間で通信を引き継ぐ操作は**ハンドオーバー**と呼びます。通話やデータ通信を継続するための移動体通信の機能です。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "handover名称を直接提示"
+        }
+      ],
+      "summaryReview": "pass: モバイル端末が通信を継続したまま接続先基地局を切り替える操作の名称を問う問題。",
+      "explanationReview": "pass: 通信を維持し接続先基地局を切替えるのはhandover。tetheringは回線共有、fallbackは代替方式、roamingは他網の利用。イ。",
+      "takeawayReview": "pass: 基地局間の接続の引継ぎはハンドオーバー。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r06a-q32",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "a296a955f73a64c7620a768fa46de6cabdd6a1f4a3dccc8b0f0a919a92321cf3",
+      "beforeLessonSHA256": "6fc010a8fb5a7c8da494e224b2d1bfe4fa2d1c8e68b29e6af57659e610dd47fd",
+      "beforeDesignSHA256": "f678b410ee3f595157e7d3a51672ccd5a60cc263d5bfec3b4637590ead2f3d25",
+      "baseLessonSHA256": "2065e77842fb9d656ca4a42c63bb860eb345d100f1d48c6b0a591aee5918fd6e",
+      "questionSHA256": "7c24dbeaee15e209e06ee855a5e31877563cba83f51cdc91c96cb99646098468",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q32.webp": "098797e454f512a6315f806956613b196e9cc2236f9a94e8f0788e016661a9a4",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r06a/r06a-q32.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ウ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問32 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ウ",
+      "independentResult": "1MB=8Mbit。5秒以内なら実効1.6Mbps以上。効率.6で公称v>=8/(5×.6)=2.666…Mbps。候補1,2は不足、4,10は満たす。最低4Mbpsのウ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "1Mbps実効.6で13.333…秒",
+          "draftReasonRead": "実効速度0.6Mビット/秒では8Mビットを送るのに約13.3秒掛かります。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "2Mbps実効1.2で6.666…秒",
+          "draftReasonRead": "実効速度1.2Mビット/秒では約6.67秒掛かり、5秒を超えます。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "4Mbps実効2.4で3.333…秒、最小適合",
+          "draftReasonRead": "実効速度2.4Mビット/秒で約3.33秒となり、条件を満たす最低の選択肢です。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "10Mbps実効6で1.333…秒だが最小でない",
+          "draftReasonRead": "実効速度6Mビット/秒なら条件は満たしますが、4Mの回線でも足りるので最低速度ではありません。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "1Mバイトは8Mビットです。5秒以内に送るには、データ量÷時間より実効速度が少なくとも8÷5 Mビット/秒必要です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "8/5の実効必要速度計算が残る"
+        },
+        {
+          "stage": 2,
+          "textRead": "公称速度v Mビット/秒の回線は効率60％なので実効速度は0.6vです。5秒以内の条件を0.6v×5≧8と表します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "0.6v×5>=8不等式を解く必要"
+        },
+        {
+          "stage": 3,
+          "textRead": "v≧8÷(5×0.6)を計算し、その下限以上の回線速度を選びます。『最低速度』なので条件を満たす候補のうち最小を選んでください。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "vの下限計算と最小候補選択が残る"
+        }
+      ],
+      "summaryReview": "pass: データ量・送信期限・伝送効率から必要な公称回線速度の下限を求める問題。",
+      "explanationReview": "pass: 1MB=8Mbit。5秒以内なら実効1.6Mbps以上。効率.6で公称v>=8/(5×.6)=2.666…Mbps。候補1,2は不足、4,10は満たす。最低4Mbpsのウ。",
+      "takeawayReview": "pass: 必要な公称速度はデータ量÷時間÷伝送効率。選択肢の中で条件を満たす最小値を取る。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": true,
+      "findings": []
+    },
+    {
+      "id": "r05h-q31",
+      "status": "initial-pass-awaiting-final-review",
+      "beforeEnvelopeSHA256": "9c51df5659bca7f51db79ee2363ce8c55f4a4320a2961261fd071291e067e87e",
+      "beforeLessonSHA256": "d8bb6ff29b6f8d222dde949ca455d40932c7bcc1f0e4364ed74f34f1bab40d7a",
+      "beforeDesignSHA256": "303b1d542f5c232316896030c3bfe709adcb42c97aa2f3b7b39902de098c5851",
+      "baseLessonSHA256": "6e77119e5e4b3ebf22f0373d91491d407339fbbaec1bddca3803e37ccb5b2155",
+      "questionSHA256": "a2baf8b223076db24b153363dc1b487772838ba0a12ac433cb259eb9849a568c",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q31.webp": "51ed3cc89b725dc7d979c5e529d23e1b46fda131881a366411489471d29ac41c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q31.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "イ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問31 正解イ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "イ",
+      "independentResult": "通信分野PLC=Power Line Communication、電力線に信号を重ねる。VoIP/802.11/無線暗号とは別。イ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "IP音声はVoIP",
+          "draftReasonRead": "音声をIPネットワークで伝えるVoIPの説明です。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "電力線通信がPLC",
+          "draftReasonRead": "電力線をデータ通信にも使うPLCの説明です。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "IEEE802.11は無線LAN",
+          "draftReasonRead": "IEEE 802.11シリーズは無線LANの規格で、電力線通信ではありません。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "無線暗号化方式ではない",
+          "draftReasonRead": "PLCは伝送媒体を利用する通信技術で、無線暗号化方式の名称ではありません。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "この問題のPLCは制御装置ではなく、通信技術の略称です。選択肢を『音声の伝送』『伝送媒体』『無線LAN規格』『暗号化』に分けてみます。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "制御装置でなく通信という文脈と分類軸のみ"
+        },
+        {
+          "stage": 2,
+          "textRead": "通信分野のPLCは**Power Line Communication**の略で、建物内などの既存の電力線に通信信号を重ねてデータを送る技術です。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "Power Lineと電力線通信定義がイを特定"
+        },
+        {
+          "stage": 3,
+          "textRead": "音声をIP網で運ぶのはVoIP、IEEE 802.11は無線LAN規格です。PLCは電力を運ぶ線を通信にも利用するという点で区別します。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "前段開示済み。VoIP/802.11比較を追加"
+        }
+      ],
+      "summaryReview": "pass: 通信技術としてのPLCが利用する伝送媒体を問う問題。",
+      "explanationReview": "pass: 通信分野PLC=Power Line Communication、電力線に信号を重ねる。VoIP/802.11/無線暗号とは別。イ。",
+      "takeawayReview": "pass: 通信のPLCはPower Line Communicationで、伝送媒体は電力線。",
+      "designReview": "障害・増える知識・残る判断・開示理由を本文と全肢に照合。3段で情報が増え、changesはsummary/hintsの実変更と整合。sourceNotesの作者未実施範囲は独立確認で補完。",
+      "calculation": "not-applicable",
+      "findings": []
+    },
+    {
+      "id": "r07a-q39",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "06652f9508cb7b0a85cfc5fe8a45114b976129fc181c1ece8a1c5e0573f6498d",
+      "beforeLessonSHA256": "e1fe031abbe0e12a99792b8769f5affa0a31b1151714e71912ecf5296c14df6e",
+      "beforeDesignSHA256": "4db407493b3480f66871aaf5f132a2892f02092ce086c2e456e4aeeb6fddcd77",
+      "baseLessonSHA256": "3d52f22daefbeb848ac1a0611205973b33462dfaf153b9ef3f12ea5e84a6836b",
+      "questionSHA256": "5b502446ead7c07ff73bc1e401bcea747d1141baa33058408002cdcebf56e583",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q39.webp": "64be607e9446c05184d2e0818a1d07138ca3a0beb5992a3bff75ae74b780822f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q39.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "エ",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問39 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "エ",
+      "independentResult": "RFC5280 sec3.3は失効証明書をserialで識別し、失効証明書の有効期間を過ぎた定期CRLへ一度記載されるまでエントリ削除不可とする。sec5はscope内の未満了失効証明書が完全CRLの対象、5.1.2.6はserial記載。CA鍵署名確認は失効確認を代替しない。正答エ。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": false,
+          "judgement": "changes-requested",
+          "evidence": "失効後1年という一律期間はない。sec3.3の実際の保持条件と異なる",
+          "draftReasonRead": "一律に失効後1年間載せるという規定ではありません。証明書の期限との関係を踏まえて扱います。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "署名検証だけでは失効状態を確認できない",
+          "draftReasonRead": "認証局の公開鍵で署名が正しいと分かっても、証明書の失効状態は別に確認する必要があります。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "全証明書の有効期限一覧ではない",
+          "draftReasonRead": "全証明書の有効期限を列挙する一覧ではなく、失効した証明書の情報を載せます。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "未満了で失効した証明書をserialで識別する",
+          "draftReasonRead": "有効期限内に失効した証明書をシリアル番号で記載する説明が正しいです。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "デジタル証明書には有効期限がありますが、秘密鍵漏えいなどで期限前に使えなくなる『失効』もあります。期限と失効は別の概念です。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "期限と失効の区別のみ"
+        },
+        {
+          "stage": 2,
+          "textRead": "認証局の公開鍵による署名検証は発行者と改ざんの有無を確かめるものです。発行後に失効していないかはCRLやOCSPなど別の方法で確認します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "署名検証と失効確認を区別。1年かserialかは未決"
+        },
+        {
+          "stage": 3,
+          "textRead": "CRL（Certificate Revocation List）は失効した証明書の識別情報を載せる一覧です。有効期間中に失効した証明書の**シリアル番号**を記載する説明を選びます。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "未満了失効証明書のシリアル記載とエを直接特定"
+        }
+      ],
+      "summaryReview": "pass: デジタル証明書の有効期限と失効を区別し、CRLに記載される情報を判断する問題。",
+      "explanationReview": "pass: RFC5280 sec3.3は失効証明書をserialで識別し、失効証明書の有効期間を過ぎた定期CRLへ一度記載されるまでエントリ削除不可とする。sec5はscope内の未満了失効証明書が完全CRLの対象、5.1.2.6はserial記載。CA鍵署名確認は失効確認を代替しない。正答エ。",
+      "takeawayReview": "pass: 署名検証、有効期間、失効状態は別の確認。CRLは失効した証明書の一覧。",
+      "designReview": "changes-requested: finding参照",
+      "calculation": "not-applicable",
+      "findings": [
+        {
+          "severity": "required",
+          "field": "lesson.choiceReasons[0]",
+          "evidence": "「証明書の期限との関係を踏まえて扱います」だけでは、RFC5280の実際の保持条件が学べない。独立取得したRFC5280 sec3.3は、有効期間を超えた定期CRLへ一度記載されるまで削除してはならないとする。",
+          "requestedChange": "一律1年ではない根拠としてRFC5280 sec3.3の保持条件を具体的に補う。"
+        }
+      ]
+    },
+    {
+      "id": "r05a-q39",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "80e38967aff06a6a8897e75fb576e77a124661fa447e167f57eaa9dfe2be530f",
+      "beforeLessonSHA256": "1d504ec733c01535607474403fe964e27946ddf6f66d80b892a1ee5ba5573f0f",
+      "beforeDesignSHA256": "5e77995b3239e3b9c58ccdd1ec3f5dca7f13cb105878e8f4a582bdcd623e9553",
+      "baseLessonSHA256": "76fe30dfb9a31dff7d781edd578c9c265a9a1635104330c3b87beaf513ecf3fa",
+      "questionSHA256": "953d831b65fc0766bff0943b91c36c5d280bcf3395f972abd23dfac10e16ec3e",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q39.webp": "34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7",
+        "assets/transcriptions/pr-skipped-author/r05a-q39-choice-table.webp": "7eef63711f2afd5adf10520d0db9852ff7c3c4bade95dc618503ae63cf8649f6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagePaths": [
+        "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q39.webp"
+      ],
+      "sourceImageViewed": true,
+      "officialAnswer": "ア",
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問39 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "independentAnswer": "ア",
+      "independentResult": "指定2021-11-30ガイドsec1.2 p7は他CSIRTへの情報連携/調整をcoordination centerとする。p7分析、p8vendor、p10incident response providerと対比。正答ア。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "isCorrect": true,
+          "judgement": "pass",
+          "evidence": "他CSIRT向け連携調整が該当",
+          "draftReasonRead": "他のCSIRTを対象に、CSIRT間の情報連携と調整を行うコーディネーションセンターの説明です。"
+        },
+        {
+          "label": "イ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "分析センターの傾向/マルウェア/痕跡分析",
+          "draftReasonRead": "インシデント傾向やマルウェア・痕跡の分析と注意喚起で、分析センターの説明です。"
+        },
+        {
+          "label": "ウ",
+          "isCorrect": false,
+          "judgement": "pass",
+          "evidence": "ベンダーチームの自社製品脆弱性対処",
+          "draftReasonRead": "自社製品の脆弱性に対応するベンダーチームの説明です。"
+        },
+        {
+          "label": "エ",
+          "isCorrect": false,
+          "judgement": "changes-requested",
+          "evidence": "p10の正式分類はインシデントレスポンスプロバイダーで、有償契約顧客への組織内CSIRT機能提供",
+          "draftReasonRead": "顧客から機能を有償で受託するセキュリティサービスプロバイダの説明です。"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "textRead": "表の左列は『何をするか』、右列は『誰にサービスを提供するか』です。機能とサービス対象を必ず組で確認します。",
+          "recordedRevealsAnswer": false,
+          "expectedRevealsAnswer": false,
+          "judgement": "pass",
+          "cumulativeEvidence": "機能/対象を組で読む説明だけ"
+        },
+        {
+          "stage": 2,
+          "textRead": "コーディネーション（coordination）は複数の関係者の情報連携や対応を調整することです。CSIRT間の連携を担う場合、サービス対象は**他のCSIRT**になります。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "調整と他CSIRTの両列を教えアを確定"
+        },
+        {
+          "stage": 3,
+          "textRead": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、セキュリティサービスプロバイダは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
+          "recordedRevealsAnswer": true,
+          "expectedRevealsAnswer": true,
+          "judgement": "pass",
+          "cumulativeEvidence": "前段開示済みだが分類名に修正が必要"
+        }
+      ],
+      "summaryReview": "pass: CSIRTの分類のうち、コーディネーションセンターの機能とサービス対象を表から選ぶ問題。",
+      "explanationReview": "pass: 指定2021-11-30ガイドsec1.2 p7は他CSIRTへの情報連携/調整をcoordination centerとする。p7分析、p8vendor、p10incident response providerと対比。正答ア。",
+      "takeawayReview": "pass: コーディネーションは他のCSIRTをつなぐ連携・調整。",
+      "designReview": "changes-requested: finding参照",
+      "calculation": "not-applicable",
+      "findings": [
+        {
+          "severity": "required",
+          "field": "lesson.choiceReasons[3], lesson.hints[2], design.stages[2]",
+          "evidence": "原問が指定する2021-11-30 CSIRTガイドsec1.2の六分類は「インシデントレスポンスプロバイダー」。p10（6）は契約顧客に対し組織内CSIRT機能の一部/全部を有償で請負うと定義する。草稿は以前の分類名「セキュリティサービスプロバイダ」を使い、指定時点資料の名称と一致しない。",
+          "requestedChange": "指定ガイドの分類名「インシデントレスポンスプロバイダー」に修正し、design/変更キー/根拠も合わせる。"
+        }
+      ]
+    }
+  ]
+}
