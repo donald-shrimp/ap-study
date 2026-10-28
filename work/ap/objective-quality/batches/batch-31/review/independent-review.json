@@ -1,0 +1,1247 @@
+{
+  "reviewer": "Codex /root/ap_batch31_review",
+  "initialAuthorHead": "27d982f43384519ec9012603f55a1ad05d13305c",
+  "frozenBeforeSnapshot": {
+    "path": "work/ap/objective-quality/batches/batch-31/review/initial-drafts.json",
+    "sha256": "0e25b97cf02d3b720b992a55f7604de40a424c9647b75cf98e35693f349dbc70"
+  },
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "choiceReasons": 80,
+    "hints": 60,
+    "officialAnswerPDFsRead": 9,
+    "officialAnswerPDFsTextRead": 8,
+    "officialAnswerPDFsImageRead": 1,
+    "requiredIssues": 2,
+    "questionsWithIssues": 2
+  },
+  "issues": [
+    {
+      "id": "B31-01",
+      "questionId": "r03h-q62",
+      "stage": 1,
+      "type": "definition-reveal",
+      "severity": "required",
+      "finding": "H1「他のソフトウェアの機能を呼び出す方法」はウの固有の構築方法と実質同じ。単なる比較軸を超えて正答の方法を渡しているためhints[0]/design.stages[0]をtrueにするか、呼出しの説明をH2まで残す。"
+    },
+    {
+      "id": "B31-02",
+      "questionId": "r03h-q63",
+      "stage": 1,
+      "type": "answer-identifying-reveal",
+      "severity": "required",
+      "finding": "H1「誰と誰が似ているかを使う方式に注目」は顧客A/Bの類似性を使うアを直接特定する。イ人気順・ウ人口属性による区分・エ商品関連には人同士の類似性がなく、残る判断は正答説明との照合のみ。hints[0]/design.stages[0]をtrueにするか、この限定をH2へ残す。"
+    }
+  ],
+  "kind": "initial-independent-content-review",
+  "status": "changes-requested",
+  "checkedAt": "2026-10-28T12:40:42.531471+00:00",
+  "method": "指定規約・README/assignment/context/drafts/inventoryを先読。全20原本をview_imageで実表示して独立解答。keep2件を含む全lesson・80肢理由・60累積ヒント・designを全読。公式解答PDFキャッシュの実バイトSHAをdata/sources.jsonと照合し、該当正答をPDF再抽出またはスキャン表示で実読。初学者の効果測定・アプリ検証・現行法令の全問確認は実施していない。drafts/reviews/初回凍結は変更しない。",
+  "questions": [
+    {
+      "id": "r06a-q65",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "2f59768526806f27e282f4880bc6d5283aa609f142dcf14c16cafd224736f2df",
+      "beforeLessonSHA256": "d9fbf03c89672c7d3605d0cdf78cda41e534a2d219985c614a1225e2b8c7a948",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q65.webp",
+      "sourceImageSHA256": "9d0ebd0f48a03faee667c7bc6740ec491ebaaa5153c8f88be472db4c648528bf",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q65.webp": "9d0ebd0f48a03faee667c7bc6740ec491ebaaa5153c8f88be472db4c648528bf",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問65 正解ウをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "UXは有用性・操作性に加え感情的体験価値を扱うのでウ。アはセキュリティ設計、イはSOA、エは外部機能再利用。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "設計目的の分類と有効性・操作性の意味で、UXとの対応は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q61",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "545bb437878d13a95e71058202f3c1a3cf898681c3a8ab675958c1cf52b45a23",
+      "beforeLessonSHA256": "a9fb397131a8e6a11e20fa54882336687883b2a8959f1fd748c7f7b0e4408193",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q61.webp",
+      "sourceImageSHA256": "8e87e72299a8d820d35e058f21cfa859a8155f9c48932a8eaf16561e974069a7",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q61.webp": "8e87e72299a8d820d35e058f21cfa859a8155f9c48932a8eaf16561e974069a7",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問61 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "VDIはサーバ側の仮想デスクトップを遠隔利用するア。イはVPN、ウは電子化、エはWeb会議。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "通信経路とPC環境という比較軸で、VDIとの対応は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "c4f7de91de4aefcc823b2e5a5c6443f4c0828ea708da8d00f3356d833c7dfdde",
+      "beforeLessonSHA256": "e78dee25bb0eadac4d42e71a5542e115708148abd92517abd442ce529ba391e2",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q63.webp",
+      "sourceImageSHA256": "2e704799f8532d09fad0ab939422f380f0c2e5e5163df5b3cf858405b1c0967e",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q63.webp": "2e704799f8532d09fad0ab939422f380f0c2e5e5163df5b3cf858405b1c0967e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解イをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "同時購買の関連ルールと支持度・信頼度・リフトでイ。アは回帰、ウは因子分析、エは主成分分析。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "予測・要約・関連ルールを並列提示し、アソシエーションとの対応は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q62",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "d0d773c0ec0f39bd6d6ed9ff9ed097353f038895eb1155e8a91476ef816b4b9b",
+      "beforeLessonSHA256": "9edff5884e6a8a8bd88fec0c2300e508bc3b512cdd69c3b91ef6774c4c849117",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q62.webp",
+      "sourceImageSHA256": "32c895661fd2b528555baa3ba976428168582b6079a6fb54cf2f112ab4da70ec",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q62.webp": "32c895661fd2b528555baa3ba976428168582b6079a6fb54cf2f112ab4da70ec",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解ウをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "外部に公開された接続仕様で他社機能を呼出すウ。アは委託公募、イは資金募集、エは仮想化基盤。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "他ソフトウェアの機能を呼び出す方法へ直接誘導し、ウの固有の構築方法と実質同じ。ア公募・イ調達・エ仮想基盤との判断を渡す。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        "B31-01"
+      ]
+    },
+    {
+      "id": "r06a-q62",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "6e1dcb571d39be947a729c8c0e27e3ef378d70f998f4f619e49115d979907961",
+      "beforeLessonSHA256": "8393f6e0493902a4be7a33313c3563a036027b0fc77417328cf6fa2e9490889d",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q62.webp",
+      "sourceImageSHA256": "936bd7cd48c05d39968764c929f133b20a592d8a791ffd62c3bc11162fdf073d",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q62.webp": "936bd7cd48c05d39968764c929f133b20a592d8a791ffd62c3bc11162fdf073d",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解エをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "設計時から二次利用・機械判読・無償公開を前提にするエ。アの一律届出義務、イの非営利限定、ウの行政内限定は不適切。出題時点の判断で現行法確認を代替しない。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "設計時に考慮する意味だけで、公開の範囲と条件の比較は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05h-q62",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "f088afb44c5262249ded6076fea73a9ccdda563406facb7a214d153267d461af",
+      "beforeLessonSHA256": "4bb59473ac7533fadd321508f709608e36f348c3d7bd45bb2629d95699ad1762",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q62.webp",
+      "sourceImageSHA256": "e4ff090c9b97736585b3a5799d0a1096609c3dce684c4ea177da353abece4adc",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q62.webp": "e4ff090c9b97736585b3a5799d0a1096609c3dce684c4ea177da353abece4adc",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "顧客の購入・利用時の満足や感動を扱うア。イはトラブル限定、ウは購買数値、エは販売員側経験。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "主体の比較でエは除けるが、顧客側のトラブル/履歴/感動の判断は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "8780fe2f39d9db4b2b90c5ca2d554b9eb23667a7fa07d7ab8db886c4e19112ab",
+      "beforeLessonSHA256": "5ace33a418b648c5fc45fe15566606275daa138abd378115ff80282cc25901b0",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q63.webp",
+      "sourceImageSHA256": "88304e3a0a30639b1422826d94bbd85409cc3bbab3db42f78d52468e0fc4ed96",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q63.webp": "88304e3a0a30639b1422826d94bbd85409cc3bbab3db42f78d52468e0fc4ed96",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解エをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "需要を見込み資源を調達し提供に備えるエ。アはSI、イは共同運用形態、ウはオンプレミス。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "形態と準備という比較軸で、プロビジョニングと資源準備の対応は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q62",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "786f5cf89e774041ac13ccb478901ce840ee5b8e4be746032e068991e457c865",
+      "beforeLessonSHA256": "e17a898908e358ca6c00ea64f136b4949333ae80f7a4a89372717d28d2651a9e",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q62.webp",
+      "sourceImageSHA256": "0e2f55ad1b281ed69e0182284aab24cb41fcef318b2ba79b5cd716a67bd234b2",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q62.webp": "0e2f55ad1b281ed69e0182284aab24cb41fcef318b2ba79b5cd716a67bd234b2",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解エをPDF SHA照合済みの既存レンダリング画像で実読。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch27-r04h-answer.png"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "機能を独立部品に分け対応付け・連携を容易にするエ。アERP、イFit＆Gap、ウPDCAによる業務改善。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "アとイの説明を教えるがウとエの比較は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "584de559a13334195a529580aece8adfe4dae3531cbff6db8729a633a4f8d67c",
+      "beforeLessonSHA256": "835a92fd4caa29fca5b545b61319bdc57105c14b364e0f62b384bf412b396b83",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q63.webp",
+      "sourceImageSHA256": "aac0c82d13d4d32d84675e2952a073228a2d274b025a9e920be6b4698f8ab4f3",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q63.webp": "aac0c82d13d4d32d84675e2952a073228a2d274b025a9e920be6b4698f8ab4f3",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解エをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "業務を支援する機能をサービス部品にするエ。アBPR、イERP、ウSLA。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "BPRとERPを教えるがSLAとSOAの区別は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "902785a422feba51d3e7143c83259573f37d3cbe13a29d99058560736e4f234e",
+      "beforeLessonSHA256": "d744664f6b2f27a9260374485ec05bbb5c20c76c0352ce8dd18ffef813038eb0",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q63.webp",
+      "sourceImageSHA256": "edd613cc82b3f318aa84ea9f81f851fd4fa6690ae666b5196de87bde67169793",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q63.webp": "edd613cc82b3f318aa84ea9f81f851fd4fa6690ae666b5196de87bde67169793",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解エをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "独立した業務機能の部品化と連携がSOAでエ。アはERP、イはFit＆Gap、ウは継続改善。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "ERPとFit＆Gapを教えるがウの改善とエの構造の判断は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q62",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "9c91a929b273e31dd4e267f5f3f1d31bb015e722ac41ea9d65ef68d027972fc2",
+      "beforeLessonSHA256": "581192f7f1b147ff1c8dddd88403825bffc9f64733ead4bdcb89a99fe288f0a6",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q62.webp",
+      "sourceImageSHA256": "ad2d2ecef5dc1a3f465036534783e493dbdcc3a077fb5e09b451a2f743357ffe",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q62.webp": "ad2d2ecef5dc1a3f465036534783e493dbdcc3a077fb5e09b451a2f743357ffe",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解エをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "SOAは独立した業務機能を組み合わせるエ。アは全体資源管理、イは適合分析、ウはPDCA。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "ERP/Fit＆Gapとの違いのみで、PDCAとSOAの比較は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q64",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "f3bc2e3f088c35d8a6192800d0547987294811f4fa05814ca22938b1200a0d39",
+      "beforeLessonSHA256": "24a6fa4cebb88bbf4e37cfbb9db890414e98f49651351bae7baeb49f0c9ef631",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q64.webp",
+      "sourceImageSHA256": "454634d128857e73f93b903819c6f74b11e3814e9a4fc3a54ea35d51aa45b724",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q64.webp": "454634d128857e73f93b903819c6f74b11e3814e9a4fc3a54ea35d51aa45b724",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問64 正解イをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "(10+12)×10×5+50×1×5=1350万円削減、初期(8+1)×10=90万円、運用(2+6)×10×5=400万円。差額860万円でイ。採用費を落とすとア610、初期を落とすとウ950、運用を落とすとエ1260。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "費用の人数・期間の区分で金額計算は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "途中式までで、与件の演算を本人が行う。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q62",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "8d08e37dec571e12988c32602bfcf35c45877978e6e3c11d8747e72c0422e04a",
+      "beforeLessonSHA256": "74345b50e2af7f40e31d6cebc7ad01f580a862a26faff29e12cc9c4ee1d39b60",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q62.webp",
+      "sourceImageSHA256": "111e828f9fb861df5983d10899fd48740daf31785473e18d07107b892f819327",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q62.webp": "111e828f9fb861df5983d10899fd48740daf31785473e18d07107b892f819327",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問62 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "コード2.0は経産省による企業DX・経営者向け対応でア。イは文科省/教育、ウ総務省/自治体、エデジタル庁/政府施策。2.0という出題版を守る。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "governance/DXの一般的意味で、所管省庁と対象の照合は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q61",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "91cffb54bfee65fffbb9da87eaf6c46c9cdd2763efd72070ff4a77f5dc75e097",
+      "beforeLessonSHA256": "28afaff018670784419ca7d3e0bbd22a9c445ac544605ba86aa67f9e8b3b817b",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q61.webp",
+      "sourceImageSHA256": "b01b611d801554cd99416ba2ec7aa18c33e5d99ddd434dcc82927af0e00188a9",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q61.webp": "b01b611d801554cd99416ba2ec7aa18c33e5d99ddd434dcc82927af0e00188a9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問61 正解イをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "未来のありたい姿から課題・解決策を考えるイ。ア要員制約下開発、ウボトムアップ、エ過去データのバックテスト。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "二つの未来の考え方を並列に示し、バックキャスティングとの対応は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "947d044b09c2d070a445a00a58e8dbd6356412f58ed518ba9ac73ad022bd5a1a",
+      "beforeLessonSHA256": "d333b2d4e562add9624d11fb7f2e12314321ee9d22a01cc81f36c3694ef8f67b",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q63.webp",
+      "sourceImageSHA256": "45fce04111e1e8c36ec2eb970c97b5c1ebf539278b46138bf191a243efa83d17",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q63.webp": "45fce04111e1e8c36ec2eb970c97b5c1ebf539278b46138bf191a243efa83d17",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "関連プロジェクトを連携・統合して戦略価値を高めるア。イ個別管理細分化、ウ開発技術選定、エPMO。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "全四肢の管理単位の分類で、プログラムとの対応は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q61",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "cdddf5f2feba990acd780861487534cba7d1c7c0fce4314353957b41a2bcf698",
+      "beforeLessonSHA256": "b0285d401ceedd4217ffce9ecfe6149bfa1b13826c42db5fedbe0cde0e963cc1",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q61.webp",
+      "sourceImageSHA256": "547e898da7bcac613336d87371f6d98acaf359bdfea0fbde14b8b015601c9176",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q61.webp": "547e898da7bcac613336d87371f6d98acaf359bdfea0fbde14b8b015601c9176",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問61 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "複数プロジェクトの相互作用で便益と戦略を実現するア。イは個別細分化、ウは言語/手法、エは専門支援組織。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "プログラムと言語を区別するが、連携による価値という正答の核心は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q61",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "f2f2505084108e51f10691759ac30dccde0b4ac4d4cd1c1b71834b4b8d05ecb7",
+      "beforeLessonSHA256": "43916bafa58582b3abac5b62d0ac16b5d208bc6cc70705a496476780a088d850",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q61.webp",
+      "sourceImageSHA256": "2fd6d4f75d5646239b8b6985604db5231726eb1a11f3a7a03a8c3f7e6177bfc9",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q61.webp": "2fd6d4f75d5646239b8b6985604db5231726eb1a11f3a7a03a8c3f7e6177bfc9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問61 正解アをPDF SHA照合済みの既存レンダリング画像で実読。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch27-r04h-answer.png"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "平成30年基準のログ保護として不正アクセス・改ざんから守るア。違反/特権ログの除外イ/ウと事故時だけの分析エは不適切。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "異常/特権ログの重要性でイ/ウを除けるが、ア/エの判断は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q65",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "8fae719a078907d80ba52c1f023fca9cd5dae68e1c524e072643ce1c6b47d4b6",
+      "beforeLessonSHA256": "31d2912ee240bcc81da4745f7fb05656c54e2141618421fe1aa827a5ff328abf",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q65.webp",
+      "sourceImageSHA256": "2712b64288892149d2475197b78dfb86fbe092a84fcc20c87bbe7645c37e2c14",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q65.webp": "2712b64288892149d2475197b78dfb86fbe092a84fcc20c87bbe7645c37e2c14",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問65 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "令和5年基準の企画・ビジネス分析はあるべき業務の問題/メリットを明らかにするア。イ構成界面、ウ性能実績測定、エ業務要件合意。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "業務変更の価値という視点で、問題/メリットの分析と要件合意の区別は残る。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q63",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "5065339301a020009afa702146416fe2555442355360fb4865ab379378197efc",
+      "beforeLessonSHA256": "988fe93621d5800b8355a9298a45201723fd2afb06269bbe18cdee826d1a2f77",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q63.webp",
+      "sourceImageSHA256": "e9a37634f06c951988452a51820af43893a81570cf1a4bb814439da35636d1ee",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q63.webp": "e9a37634f06c951988452a51820af43893a81570cf1a4bb814439da35636d1ee",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解アをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "購買行動が似た顧客Bの商品をAへ勧めるアはユーザベース協調フィルタリング。イ人気順、ウ人口属性、エ商品自体の関連。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "『誰と誰が似ているか』を使う方式へ限定。アだけが顧客A/B間の類似性で、イ人気・ウ属性区分・エ商品関連が除かれ正答を実質確定する。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        "B31-02"
+      ]
+    },
+    {
+      "id": "r05h-q63",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "4ef3cc9a155cf648c24f7b2890bebf744388573c995387c7b077503789591633",
+      "beforeLessonSHA256": "d6e3d6b0cf76e9ce94e2de11ebd1a0037f684598fda6ed26fc94a62b69ce470c",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q63.webp",
+      "sourceImageSHA256": "db26de3cd7aaa39e24506d82a03611224fa088a97620c92ae36959fe3556124c",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q63.webp": "db26de3cd7aaa39e24506d82a03611224fa088a97620c92ae36959fe3556124c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問63 正解ウをpdftotext -layoutでPDFから再抽出し実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "契約等に基づく個人情報の預託と本人指示/条件による他社提供がウ。ア銀行の自社利用、イ公共データ公開、エ工場データ市場。出題時点で確認し現行制度確認を主張しない。",
+      "choiceReasonsReview": "原本全4肢と4件の理由を照合。独立解答に示した分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesign全段/sourceNotesを全読。指定のヒント開示指摘以外に必要な訂正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "情報の預け手/意思の比較を促すが、個人との契約と条件に基づく他社提供の要件は未提示。",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答肢の概念・仕組みの説明を実質提示。前段と全肢を累積照合してtrue。",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "正答の肢または最終値を明示している。",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    }
+  ]
+}
