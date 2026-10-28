@@ -370,7 +370,7 @@
         {
           "title": "使う考え方",
           "text": "ビットAND（&）は、相手が1の場所では元のビットを残し、0の場所では結果を0にします。元のIPアドレスaを反転してはいけません。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
@@ -391,9 +391,9 @@
         },
         {
           "newInformation": "ビットAND（&）は、相手が1の場所では元のビットを残し、0の場所では結果を0にします。元のIPアドレスaを反転してはいけません。",
-          "remainingWork": "どの値を反転するかを決める。",
-          "revealsAnswer": false,
-          "reason": "ANDの作用を示すが反転マスクとの完成式は未提示。"
+          "remainingWork": "ANDかつ元のaを反転しない条件に合う唯一の式を確認し、次段で反転マスクの仕組みを確認する。",
+          "revealsAnswer": true,
+          "reason": "第1段と合わせてANDを使い元のaを反転しないと教えるため、~aを使うア・イとORを使うエを除外でき、a & ~mのウだけが残る。"
         },
         {
           "newInformation": "mを反転した~mはホスト部が1になります。元のaと~mのAND、すなわち**a & ~m**がホスト部を取り出す式です。",
@@ -409,7 +409,8 @@
       "sourceNotes": [
         "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r03h/r03h-q34.webp (context source SHA256: ca075e8011cd0abbc0c7012efa45ce2fb9d48e508f2e89da2d27200c5351eae6)",
         "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
-        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、H2 false→true / design同期 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
       ]
     }
   },
@@ -1252,7 +1253,7 @@
       "summary": "デジタル証明書の有効期限と失効を区別し、CRLに記載される情報を判断する問題。",
       "explanation": "CRLはCertificate Revocation Listで、認証局が発行する失効証明書の一覧です。秘密鍵の漏えいなどで、有効期限の前に信頼できなくなった証明書をシリアル番号などで示します。\n認証局の公開鍵が分かれば署名は検証できますが、それだけでは現在も有効かを確認できません。失効情報の確認が別に必要です。",
       "choiceReasons": [
-        "一律に失効後1年間載せるという規定ではありません。証明書の期限との関係を踏まえて扱います。",
+        "一律に失効後1年間載せる規定ではありません。RFC 5280の3.3節では、失効した証明書の有効期間を過ぎて発行される定期CRLに少なくとも一度その失効情報が掲載されるまで、CRLから削除してはならないとしています。",
         "認証局の公開鍵で署名が正しいと分かっても、証明書の失効状態は別に確認する必要があります。",
         "全証明書の有効期限を列挙する一覧ではなく、失効した証明書の情報を載せます。",
         "有効期限内に失効した証明書をシリアル番号で記載する説明が正しいです。"
@@ -1301,12 +1302,14 @@
       ],
       "changes": [
         "summary",
-        "hints"
+        "hints",
+        "choiceReasons"
       ],
       "sourceNotes": [
         "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07a/r07a-q39.webp (context source SHA256: 64be607e9446c05184d2e0818a1d07138ca3a0beb5992a3bff75ae74b780822f)",
         "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
-        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、肢ア理由へRFC5280 sec3.3のMUST NOT保持条件を追加 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
       ]
     }
   },
@@ -1324,7 +1327,7 @@
         "他のCSIRTを対象に、CSIRT間の情報連携と調整を行うコーディネーションセンターの説明です。",
         "インシデント傾向やマルウェア・痕跡の分析と注意喚起で、分析センターの説明です。",
         "自社製品の脆弱性に対応するベンダーチームの説明です。",
-        "顧客から機能を有償で受託するセキュリティサービスプロバイダの説明です。"
+        "顧客から機能を有償で受託するインシデントレスポンスプロバイダーの説明です。"
       ],
       "takeaway": "コーディネーションは他のCSIRTをつなぐ連携・調整。",
       "hints": [
@@ -1340,7 +1343,7 @@
         },
         {
           "title": "この問題に当てはめる",
-          "text": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、セキュリティサービスプロバイダは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
+          "text": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、インシデントレスポンスプロバイダーは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
           "revealsAnswer": true
         }
       ],
@@ -1362,7 +1365,7 @@
           "reason": "アの機能と対象の組合せをそのまま教えている。"
         },
         {
-          "newInformation": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、セキュリティサービスプロバイダは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
+          "newInformation": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、インシデントレスポンスプロバイダーは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
           "remainingWork": "他の分類と照合して正答を確認するだけ。",
           "revealsAnswer": true,
           "reason": "前段で開示済みの正答を他分類との比較で補強する。"
@@ -1370,12 +1373,14 @@
       ],
       "changes": [
         "summary",
-        "hints"
+        "hints",
+        "choiceReasons"
       ],
       "sourceNotes": [
         "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05a/r05a-q39.webp (context source SHA256: 34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7)",
         "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
-        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、肢エ理由/H3/designを指定2021-11-30ガイド正式分類名へ修正 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
       ]
     }
   }
