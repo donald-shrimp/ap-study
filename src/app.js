@@ -119,7 +119,7 @@ function materialUpdateAvailable(a) {
   const q=question(a.questionId);
   if(!q?.hints)return false;
   const previous=a.materialSnapshot;
-  return hintKind(previous)!==hintKind(q) || ['enrichment','summary','explanation','takeaway'].some(k=>previous[k]!==q[k]) || JSON.stringify(previous.hints)!==JSON.stringify(q.hints) || JSON.stringify(previous.choiceReasons || [])!==JSON.stringify(q.choiceReasons);
+  return a.questionVersion!==q.version || hintKind(previous)!==hintKind(q) || ['enrichment','summary','explanation','takeaway'].some(k=>previous[k]!==q[k]) || JSON.stringify(previous.hints)!==JSON.stringify(q.hints) || JSON.stringify(previous.choiceReasons || [])!==JSON.stringify(q.choiceReasons);
 }
 async function useLatestHints() {
   const old=current(); if(!old || !materialUpdateAvailable(old)) return;

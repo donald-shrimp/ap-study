@@ -1,0 +1,1383 @@
+[
+  {
+    "id": "r07a-q36",
+    "baseVersion": 2,
+    "baseLessonSHA256": "53a10e47ce6554c19efe0213c97c9accb15d384df93d2fd964446eeef69f5da0",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q36",
+      "summary": "サイバーキルチェーンの段階を、標的調査・攻撃の配送・脆弱性の悪用・目的達成から区別する。",
+      "explanation": "サイバーキルチェーンでは、偵察、武器化、配送、エクスプロイト、インストール、指令・制御、目的の実行などに攻撃を分けます。\nエクスプロイトは配送した攻撃を標的の脆弱性などによって発動させる段階です。OSの脆弱性を悪用して攻撃ツールを動かすイが該当します。",
+      "choiceReasons": [
+        "公開情報や問合せによる調査は偵察の段階です。",
+        "標的PCの脆弱性を悪用して実行させる行為がエクスプロイトです。",
+        "秘密情報の窃取・送信は目的の実行の段階です。",
+        "マルウェア付きメールを送り届ける行為は配送の段階です。"
+      ],
+      "takeaway": "送るのは配送、脆弱性を突いて発動するのはエクスプロイト。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "攻撃は、標的を調べる偵察、攻撃手段を届ける配送、標的で動作させる段階、情報窃取などの目的達成へと進む。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "エクスプロイト（exploit）は、標的の**脆弱性を突いて攻撃を発動させる**段階。単にメールを送るだけではまだ実行されていない。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "調査のアは偵察、添付メールのエは配送、秘密情報の持出しのウは目的達成。脆弱性を悪用して実行させるイが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "キルチェーンの各段階を時系列の行為に対応付けられない。",
+      "stages": [
+        {
+          "newInformation": "攻撃は、標的を調べる偵察、攻撃手段を届ける配送、標的で動作させる段階、情報窃取などの目的達成へと進む。",
+          "remainingWork": "既に区別された段階を選択肢に対応させ、次段でエクスプロイトの定義を確認する。",
+          "revealsAnswer": true,
+          "reason": "全肢と合わせると、調査は偵察、メール送付は配送、情報窃取は目的達成と全誤答を別段階に対応付けるため、残る脆弱性を悪用した実行の肢だけが該当する。"
+        },
+        {
+          "newInformation": "エクスプロイト（exploit）は、標的の**脆弱性を突いて攻撃を発動させる**段階。単にメールを送るだけではまだ実行されていない。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "調査のアは偵察、添付メールのエは配送、秘密情報の持出しのウは目的達成。脆弱性を悪用して実行させるイが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07a/r07a-q36.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 0817113bc69f35901360286f38a25e62bc7651c3b5b106186da79ec1030589c4。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。",
+        "Codex /root が初回独立確認 B20-01 を受け、原本画像を開いて全肢を照合し、H1の解答開示判定と設計メモを訂正した。本文・原問・公式正答は保持。別担当 Codex /root/ap_batch19_review が最終版を確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e48c361a09812a1ee1704b155686b40301b01fee0c84e7cedfd1cca19a9f7238",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q42",
+      "summary": "盗難カードのオンライン決済で、カードに書かれた情報の確認と利用者本人の追加認証を区別する。",
+      "explanation": "正解はア。3Dセキュアはオンライン決済でカード発行会社による本人認証を行う仕組みで、盗んだカードに記載された情報だけを使う不正利用の防止に有効である。カードの有効期限やセキュリティコードは盗難カードから読み取れる。",
+      "choiceReasons": [
+        "3Dセキュアはカード情報の入力に加えてカード発行会社による本人確認を行う。",
+        "カード内のPINとの照合は、カードを読み取る端末での本人確認に用いる。オンラインショッピングの認証方式ではない。",
+        "有効期限はカードが利用期間内かを確認する情報で、所持者本人であることを確認できない。",
+        "セキュリティコードは券面の情報で、盗まれたカードの所持者も読み取れる。"
+      ],
+      "takeaway": "盗難対策では、盗んだ券面から得られる情報だけでは本人確認にならない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "カードが盗まれている以上、カード番号・有効期限・券面のセキュリティコードは第三者も知り得る。**カードを持つこと**と本人確認は別。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "3Dセキュアはオンライン決済でカード発行会社が追加の本人認証を行う仕組み。券面情報だけで通す決済より盗難カードの不正利用を抑えられる。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "有効期限・セキュリティコードは盗難カードから読める。PINのカード内照合は店頭などの端末向け。オンラインの発行会社認証を示すアを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "カードに印字された情報と独立した本人認証を混同する。",
+      "stages": [
+        {
+          "newInformation": "カードが盗まれている以上、カード番号・有効期限・券面のセキュリティコードは第三者も知り得る。**カードを持つこと**と本人確認は別。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "3Dセキュアはオンライン決済でカード発行会社が追加の本人認証を行う仕組み。券面情報だけで通す決済より盗難カードの不正利用を抑えられる。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "有効期限・セキュリティコードは盗難カードから読める。PINのカード内照合は店頭などの端末向け。オンラインの発行会社認証を示すアを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r03a/r03a-q42.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: f03619402847db2ff9af5cd151b619b37beae926158afdb9b72ea8aa94ee67d6。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4a832c6960a34e955d0418692ba9d5c1a5b9f267311d57e56adef19ea8c69b2d",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q44",
+      "summary": "オープンリダイレクトと、偽サイトのURLを直接踏ませる誘導などの違いを問う。",
+      "explanation": "正解はイ。オープンリダイレクトは、Webサイトの転送先を外部から自由に指定できるなどの不備を利用し、利用者を攻撃者が指定したサイトへ転送する攻撃である。正規サイトへのアクセスを経由する点が識別の手掛かりとなる。",
+      "choiceReasons": [
+        "偽サイトのURLを直接メールのリンク先に指定する説明で、Webサイトの自動転送機能を悪用していない。",
+        "Webサイトの他サイトへの自動転送機能を悪用し、攻撃者の指定先へ誘導している。",
+        "公開されたDNSキャッシュサーバを利用したDNSリフレクション攻撃の説明である。",
+        "公開プロキシを悪用して送信元を隠す迷惑メール送信の説明である。"
+      ],
+      "takeaway": "リダイレクトの悪用では、リンク先そのものと、リンク先からの転送先を分けて読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "リダイレクトは、アクセスしたWebページから**別のURLへ自動的に移動**させる仕組み。メール内に偽URLを直接置くこととは経路が違う。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送先URLを外部から自由に指定できる不備があると、正規サイトを経由して攻撃者の偽サイトへ誘導できる。これが**オープンリダイレクト**の悪用。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはメールの直接リンク、ウはDNS応答の反射による妨害、エは公開プロキシ悪用。Webサイトの自動遷移を悪用するイが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "直接リンクとWebサイトの自動転送を混同する。",
+      "stages": [
+        {
+          "newInformation": "リダイレクトは、アクセスしたWebページから**別のURLへ自動的に移動**させる仕組み。メール内に偽URLを直接置くこととは経路が違う。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "転送先URLを外部から自由に指定できる不備があると、正規サイトを経由して攻撃者の偽サイトへ誘導できる。これが**オープンリダイレクト**の悪用。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはメールの直接リンク、ウはDNS応答の反射による妨害、エは公開プロキシ悪用。Webサイトの自動遷移を悪用するイが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r03a/r03a-q44.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 1178de43dabcf8fd50fab1f968db69f3e29eaa4907a6efcbb4e6618fff760fe0。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d868bfdf134f7a497a48af0e6befffa0d5889994900e810ac4bb4e454950cb49",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q37",
+      "summary": "クリックジャッキングを防ぐHTTPレスポンスヘッダと、MIME判定・入力無害化の対策を区別する。",
+      "explanation": "クリックジャッキングは別ページのフレームに対象サイトを透明に重ねるなどして、利用者に意図しないクリックをさせます。X-Frame-Optionsで他サイトのフレーム内表示を制限すると、この重ね合わせを防げます。",
+      "choiceReasons": [
+        "X-Content-Type-OptionsはMIMEタイプの推測を抑制するヘッダです。",
+        "X-Frame-Optionsはフレーム内表示を制限し、クリックジャッキング対策になります。",
+        "HTMLとして解釈させない処理は主にXSSの対策です。",
+        "文字数の制限だけではフレームによるクリック誘導を防げません。"
+      ],
+      "takeaway": "クリックジャッキングは対象ページのフレーム埋込みを制限する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "クリックジャッキングは、攻撃者のページに本来のページを**透明なフレームなどで重ね**、利用者に意図しない操作をクリックさせる攻撃。入力文字数の問題ではない。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "守るページが他サイトのフレーム内へ埋め込まれるのを制限するのが**X-Frame-Options**。MIMEタイプの推測を防ぐX-Content-Type-Optionsとは用途が違う。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "X-Content-Type-OptionsはMIME推測対策、HTMLタグの置換は主にXSS対策、文字数制限は別の入力制約。フレーム表示を制限するイを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "クリックジャッキングの仕組みとHTTPヘッダ名が結び付かない。",
+      "stages": [
+        {
+          "newInformation": "クリックジャッキングは、攻撃者のページに本来のページを**透明なフレームなどで重ね**、利用者に意図しない操作をクリックさせる攻撃。入力文字数の問題ではない。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "守るページが他サイトのフレーム内へ埋め込まれるのを制限するのが**X-Frame-Options**。MIMEタイプの推測を防ぐX-Content-Type-Optionsとは用途が違う。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "X-Content-Type-OptionsはMIME推測対策、HTMLタグの置換は主にXSS対策、文字数制限は別の入力制約。フレーム表示を制限するイを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r03h/r03h-q37.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 6ab49912cd7596065ef4a2fda3d24b395abd463986da5f1c6b7fd57408a67d7a。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b358bd8ae4f6ff562b44d7843d36f93667b2e252cf71a1c84fd28be27763609e",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q37",
+      "summary": "サイドチャネル攻撃が利用する情報源を、廃棄物・通信介入・SQL入力と区別する。",
+      "explanation": "サイドチャネル攻撃は、暗号の数学的な解読ではなく実装から漏れる処理時間、電力、電磁波、エラーなどを観測して秘密情報を推定します。正常な入力出力以外の付随情報が手掛かりです。",
+      "choiceReasons": [
+        "物理量やエラーの差から秘密情報を得るサイドチャネル攻撃です。",
+        "捨てられた印刷物の探索はトラッシングです。",
+        "通信当事者の間へ割り込むのは中間者攻撃です。",
+        "入力へSQL断片を入れるのはSQLインジェクションです。"
+      ],
+      "takeaway": "暗号実装の時間・電力・エラーなど、付随する漏えいも攻撃経路になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "秘密を盗む攻撃でも、**何を観測するか**が異なる。廃棄物の探索、通信のすり替え、Web入力の悪用は、暗号装置の動作観測とは別の経路。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "サイドチャネルは暗号処理の本来の入出力ではなく、**処理時間・消費電力・電磁波・エラー**など実装から漏れる付随情報で秘密を推測する。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ごみを探すイはトラッシング、通信に割り込むウは中間者攻撃、SQL断片のエはSQLインジェクション。物理量・エラーを観測するアが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "暗号の副次的な漏えいと別種の攻撃手法を混同する。",
+      "stages": [
+        {
+          "newInformation": "秘密を盗む攻撃でも、**何を観測するか**が異なる。廃棄物の探索、通信のすり替え、Web入力の悪用は、暗号装置の動作観測とは別の経路。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "サイドチャネルは暗号処理の本来の入出力ではなく、**処理時間・消費電力・電磁波・エラー**など実装から漏れる付随情報で秘密を推測する。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "ごみを探すイはトラッシング、通信に割り込むウは中間者攻撃、SQL断片のエはSQLインジェクション。物理量・エラーを観測するアが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r04a/r04a-q37.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 5b67e3a152e44e105634af1010dd17266e851184a62c8495de047b4a467e7342。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5a815c266e3e16450f2b841e49aabbfab6ba3ad73370bf6ba848bd9c75d61fd6",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q41",
+      "summary": "IoT機器へのサイドチャネル攻撃と、暗号の線形・差分解読、総当たりを区別する。",
+      "explanation": "サイドチャネル攻撃は暗号の数式そのものではなく、実装が外部へ漏らす電磁波、消費電力、処理時間などの情報を利用します。IoT機器が暗号処理中に発する電磁波を測定して秘密情報を推定するイが該当します。\n線形近似や差分の数学的分析、すべての鍵の試行とは攻撃に使う情報が異なります。",
+      "choiceReasons": [
+        "暗号関数の線形近似から関係を分析する線形解読法です。機器の物理的な漏えいの測定ではありません。",
+        "機器の電磁波という本来の入出力以外の情報を観測し、秘密情報を推定するサイドチャネル攻撃です。",
+        "平文差分と暗号文差分の関係を使う差分解読法です。",
+        "鍵候補を全て試す総当たり攻撃です。機器の漏えい情報の分析ではありません。"
+      ],
+      "takeaway": "サイドチャネルは電磁波・電力・時間など実装から漏れる情報を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "暗号への攻撃には、暗号式の数学的関係を調べる方法、鍵を試す方法、**機器の動作から漏れる情報を測る方法**がある。情報源を見分ける。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "サイドチャネルは機器が発する**電磁波や消費電力・処理時間**を測定し、暗号処理の内部状態や鍵を推定する。平文と暗号文の式だけを解析する攻撃ではない。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "線形近似はア、平文と暗号文の差分解析はウ、全鍵試行はエ。機器の電磁波を測るイがサイドチャネル攻撃である。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "線形・差分解読と物理的な漏えい測定の区別が難しい。",
+      "stages": [
+        {
+          "newInformation": "暗号への攻撃には、暗号式の数学的関係を調べる方法、鍵を試す方法、**機器の動作から漏れる情報を測る方法**がある。情報源を見分ける。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "サイドチャネルは機器が発する**電磁波や消費電力・処理時間**を測定し、暗号処理の内部状態や鍵を推定する。平文と暗号文の式だけを解析する攻撃ではない。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "線形近似はア、平文と暗号文の差分解析はウ、全鍵試行はエ。機器の電磁波を測るイがサイドチャネル攻撃である。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r05a/r05a-q41.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 2650f44107da0dd4190cda1522fee3e01deb227dd9fc6ff6a1ca96e6c6ed8f02。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "eb840b32aaa967ded22a70f4f084a94570b2d224a23ad696cf8af14a509f61a0",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q38",
+      "summary": "暗号装置の副次的な漏えいを用いる攻撃と、選択平文攻撃・盗み見・無線妨害を区別する。",
+      "explanation": "サイドチャネル攻撃は、暗号の入出力だけでなく、計算時の消費電力、処理時間、電磁波などの副次的な情報を観測し、秘密鍵などを推定する攻撃です。\n暗号アルゴリズムの数式に対する攻撃、肩越しの盗み見、無線のチャネル干渉とは区別します。",
+      "choiceReasons": [
+        "暗号処理に伴う消費電力を測定して内部秘密を推定するので、サイドチャネル攻撃です。",
+        "選んだ平文と暗号文を分析する選択平文攻撃の説明です。",
+        "入力を横から盗み見るショルダーハッキングの説明です。",
+        "無線の干渉で通信を妨害する攻撃で、暗号装置の副次的情報を分析する攻撃ではありません。"
+      ],
+      "takeaway": "サイドチャネルは暗号処理の時間・電力・電磁波などの漏れを利用する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「サイド」という語だけで人の横や無線のチャネルを選ばない。**暗号計算の本来の入出力**と、装置が付随的に外へ出す情報を区別する。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "暗号鍵の値に応じて消費電力や処理時間が微妙に変わることがあり、測定結果を統計的に分析して秘密を推定するのが**サイドチャネル攻撃**。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イは選択平文攻撃、ウはショルダーハッキング、エは電波干渉による妨害。暗号装置の電力を測定するアを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "サイドという語を横からの盗み見や無線チャネルと誤読する。",
+      "stages": [
+        {
+          "newInformation": "「サイド」という語だけで人の横や無線のチャネルを選ばない。**暗号計算の本来の入出力**と、装置が付随的に外へ出す情報を区別する。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "暗号鍵の値に応じて消費電力や処理時間が微妙に変わることがあり、測定結果を統計的に分析して秘密を推定するのが**サイドチャネル攻撃**。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "イは選択平文攻撃、ウはショルダーハッキング、エは電波干渉による妨害。暗号装置の電力を測定するアを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07a/r07a-q38.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 2ad41fbf4bba6824858f4d822fa157564586345ce70a30100536e05e2b3131b7。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1625fc80b48db41a1646dcc923d93f4a1d209581f7e9cff5e9236e5754905666",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q37",
+      "summary": "IoT暗号機器からの物理的漏えいを用いる攻撃と、数学的解読法・総当たりの違いを問う。",
+      "explanation": "サイドチャネル攻撃は暗号の数式そのものではなく、実装が外へ漏らす処理時間、消費電力、電磁波などから秘密情報を推定する。機器の電磁波を測るイが該当する。\n\n線形近似による解析は線形解読法、平文と暗号文の差を調べるのは差分解読法、全ての鍵を試すのは総当たり。暗号アルゴリズムの入出力を数学的に調べる方法と、機器の物理的な漏れを利用する方法を分ける。",
+      "choiceReasons": [
+        "暗号の線形近似を利用する線形解読法。",
+        "機器が漏らす電磁波を観測するサイドチャネル攻撃。",
+        "平文と暗号文の差の関係を使う差分解読法。",
+        "候補鍵を全て試す総当たり攻撃。"
+      ],
+      "takeaway": "サイドチャネルは処理時間・電力・電磁波など、実装から漏れる情報を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四肢を**暗号の式を調べる／機器の動作を観測する／鍵候補を試す**の三種類に分ける。暗号を破る目的が同じでも手段は違う。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "暗号処理中の電磁波や電力など、通常の入出力とは別に漏れる情報を測定して秘密を推定するのが**サイドチャネル攻撃**。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アは線形解読、ウは差分解読、エは総当たり。機器が発する電磁波を測定するイが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "機器の物理的漏えいと暗号アルゴリズムへの数学的攻撃を混同する。",
+      "stages": [
+        {
+          "newInformation": "四肢を**暗号の式を調べる／機器の動作を観測する／鍵候補を試す**の三種類に分ける。暗号を破る目的が同じでも手段は違う。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "暗号処理中の電磁波や電力など、通常の入出力とは別に漏れる情報を測定して秘密を推定するのが**サイドチャネル攻撃**。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アは線形解読、ウは差分解読、エは総当たり。機器が発する電磁波を測定するイが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07h/r07h-q37.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 5bcabc7185a727a972f1b19b73d6f9213322bd34c982bef7c3fddc690c5e6987。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q41",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e9c975d781c8bfdf796c8ddccc358bef26efee9f0b4b862ba090cee67cfa8adf",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q41",
+      "summary": "出題当時のサイバーセキュリティ経営ガイドラインVer.2.0を、ISMS・COBIT・法律と区別する。",
+      "explanation": "サイバーセキュリティ経営ガイドラインVer.2.0は、経営者がセキュリティを経営課題として捉え、担当幹部に具体的な対策を指示するための指針です。経営者が認識すべき3原則と重要10項目という構成が決め手です。マネジメントシステム規格やIT全体の統治の枠組み、国の責務を定める法律とは目的が異なります。",
+      "choiceReasons": [
+        "経営者の3原則・担当幹部への重要10項目というガイドラインの構成に一致します。",
+        "情報資産をCIAの観点で管理し継続的に見直す、ISMSの説明です。",
+        "ITガバナンスとITマネジメントのプロセスを定義するCOBITの説明です。",
+        "国の責務を定めるのはサイバーセキュリティ基本法の説明です。"
+      ],
+      "takeaway": "経営ガイドラインは経営者の認識と担当幹部への指示を具体化する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補は**企業経営者への指針／情報セキュリティ管理体系／ITガバナンスのプロセス／国の責務**と対象が異なる。ガイドラインが誰に何を促すかを見る。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "経済産業省とIPAの**Ver.2.0**は、経営者が認識すべき**3原則**と、担当幹部へ指示すべき**重要10項目**を示す。後年の版の構成を混同しない。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イはISMS、ウはCOBIT、エはサイバーセキュリティ基本法の趣旨。経営者の3原則・重要10項目を述べるアを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ガイドラインVer2.0とISMS・COBIT・法律の対象を区別できない。",
+      "stages": [
+        {
+          "newInformation": "候補は**企業経営者への指針／情報セキュリティ管理体系／ITガバナンスのプロセス／国の責務**と対象が異なる。ガイドラインが誰に何を促すかを見る。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "経済産業省とIPAの**Ver.2.0**は、経営者が認識すべき**3原則**と、担当幹部へ指示すべき**重要10項目**を示す。後年の版の構成を混同しない。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "イはISMS、ウはCOBIT、エはサイバーセキュリティ基本法の趣旨。経営者の3原則・重要10項目を述べるアを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r03h/r03h-q41.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 49259dd059532dbd25147b27138dfa32606fe379de7b0acfe151b7b169367dae。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "945926304b7fcdd8c96b8ec15ac9e0a3ac3c1bbbcd67c96d898feca680e1c342",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q44",
+      "summary": "587番のメール投稿用ポートの目的を、SPF・DKIM・POP before SMTPと区別する。",
+      "explanation": "サブミッションポートは、利用者からメールサーバへのメール投稿をサーバ間配送と分けるために使います。587番への投稿時にSMTP-AUTHで利用者を認証し、認証済み利用者だけに送信を許可することで不正なメール送信を抑えます。エがその目的です。",
+      "choiceReasons": [
+        "SPFレコードの照会は送信元サーバがドメインから許可されているかの確認です。",
+        "DNS公開鍵での署名検証はDKIMの仕組みです。",
+        "POP認証を先に行うPOP before SMTPは、SMTP-AUTHによる投稿時の認証とは別方式です。",
+        "メール投稿時にSMTP-AUTHで送信者を認証する目的に合います。"
+      ],
+      "takeaway": "587番は利用者のメール投稿とSMTP-AUTHを結び付ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "メールでは、利用者がサーバに**投稿する通信**と、メールサーバ同士が**配送する通信**を区別する。587番は前者のためのサブミッションポート。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "587番の投稿時には**SMTP-AUTH**で利用者を認証し、無許可の送信を抑制する。SPFは送信元サーバの許可、DKIMは署名の検証で、認証する対象が違う。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはSPFのDNS照会、イはDKIMの署名検証、ウは別方式のPOP before SMTP。投稿時のSMTP-AUTHを示すエが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "587番の用途とSPF・DKIM・POP before SMTPの役割を混同する。",
+      "stages": [
+        {
+          "newInformation": "メールでは、利用者がサーバに**投稿する通信**と、メールサーバ同士が**配送する通信**を区別する。587番は前者のためのサブミッションポート。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "587番の投稿時には**SMTP-AUTH**で利用者を認証し、無許可の送信を抑制する。SPFは送信元サーバの許可、DKIMは署名の検証で、認証する対象が違う。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはSPFのDNS照会、イはDKIMの署名検証、ウは別方式のPOP before SMTP。投稿時のSMTP-AUTHを示すエが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r05h/r05h-q44.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 792eed2d88d47ba2d510dec9790bb4bee125f0a88a8038ab61b88d4fbf08452c。",
+        "公式正答はcontext.jsonのanswer=3（エ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b30055c439f75a74d57c8c7b56f85a0026dee13b4526a92cc8f50178903c28a4",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q37",
+      "summary": "セキュアOSによる強制アクセス制御の効果を、SSO・WAF・多要素認証と区別する。",
+      "explanation": "セキュアOSは強制アクセス制御などにより、OSが定めたポリシーを利用者やプロセスへ強制します。通常のアクセス権限だけでは広い権限を持つプロセスを侵害されると被害が拡大しますが、強制ポリシーで更新を禁止したファイルへの操作を制限できます。ウがこの効果を述べています。",
+      "choiceReasons": [
+        "1回の認証で複数システムを利用するのはシングルサインオンの説明です。",
+        "Web通信を解析して攻撃を遮断するのはWAFの説明です。",
+        "強制アクセス制御によって侵入したプロセスにもファイル更新の禁止を適用できます。",
+        "パスワード以外にトークンを使うのは多要素認証などの説明です。"
+      ],
+      "takeaway": "セキュアOSは認証追加だけでなく、侵入後の操作範囲も制限する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "OSの防御には、ログイン時の**認証**だけでなく、ログイン後のプロセスが**何を操作できるか**というアクセス制御もある。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "セキュアOSの**強制アクセス制御（MAC）**は、OSが定めたポリシーをプロセスにも強制し、侵入後でも禁止されたファイル更新などを制限する。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはSSO、イはWAF、エはトークンを使う認証。OSによる強制アクセス制御で改ざんを防ぐウを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "セキュアOSをログイン認証の強化とだけ捉えてしまう。",
+      "stages": [
+        {
+          "newInformation": "OSの防御には、ログイン時の**認証**だけでなく、ログイン後のプロセスが**何を操作できるか**というアクセス制御もある。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "セキュアOSの**強制アクセス制御（MAC）**は、OSが定めたポリシーをプロセスにも強制し、侵入後でも禁止されたファイル更新などを制限する。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはSSO、イはWAF、エはトークンを使う認証。OSによる強制アクセス制御で改ざんを防ぐウを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r05h/r05h-q37.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: f041e3aa3682e05c9f46b8ee9c9792858babdd1a61d24576fa962741b674585c。",
+        "公式正答はcontext.jsonのanswer=2（ウ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d8066bb6f277b27d4a387f2a73d790046f080e283b09c15bb2d7b29bdb688d4e",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q42",
+      "summary": "セキュアブートを、BIOS・ストレージのパスワードやOS起動後のウイルス検査と区別する。",
+      "explanation": "セキュアブートはOSが起動を完了する前のブート過程で、OSのプログラムやドライバなどのデジタル署名を検証します。有効な署名をもつ信頼されたコードだけを実行し、起動過程へのマルウェア混入を防ぎます。\n起動を許可するためのパスワード入力や、OS起動後のスキャンとは目的と仕組みが異なります。",
+      "choiceReasons": [
+        "BIOSパスワードによる利用者の起動制限です。起動コードの署名を検証する仕組みではありません。",
+        "ストレージのパスワードによるアクセス制限で、OSやドライバの信頼性検証ではありません。",
+        "起動コードのデジタル署名を検証して有効なものだけ実行する、セキュアブートの説明です。",
+        "OSのスタートアップで対策ソフトを動かすだけでは、OS起動完了前の不正なコード実行を防ぐ署名検証になりません。"
+      ],
+      "takeaway": "セキュアブートは起動コードの信頼性をデジタル署名で確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "起動時の対策でも、**人にパスワードを入力させる**方法と、**起動コードの正当性を機械的に検証する**方法は異なる。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "セキュアブートはOS起動過程でプログラムやドライバの**デジタル署名を検証**し、信頼されたコードだけを実行して起動前マルウェアを抑える。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ア・イはパスワードによる起動・媒体の利用制限、エはOS起動時の対策ソフト実行。起動コードの署名を検証するウが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "セキュアブートと起動パスワード・起動後スキャンの違いが分からない。",
+      "stages": [
+        {
+          "newInformation": "起動時の対策でも、**人にパスワードを入力させる**方法と、**起動コードの正当性を機械的に検証する**方法は異なる。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "セキュアブートはOS起動過程でプログラムやドライバの**デジタル署名を検証**し、信頼されたコードだけを実行して起動前マルウェアを抑える。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "ア・イはパスワードによる起動・媒体の利用制限、エはOS起動時の対策ソフト実行。起動コードの署名を検証するウが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r05a/r05a-q42.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 8cc7d4847e00eab076da7174273d997d9596c9d804f4bcff6283684d28541d17。",
+        "公式正答はcontext.jsonのanswer=2（ウ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "099d8a28e4bc3c57ae2a96680128a8a5d030a750836940fcee6fed67d333cf4d",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q39",
+      "summary": "セキュリティクリアランスの対象を、ネットワーク分離・権限棚卸し・クリアデスクと区別する。",
+      "explanation": "セキュリティクリアランスは、機密情報へのアクセスを認める前に、その人に扱う適格性があるかを調査・評価する仕組み。対象が「個人」、時点が「配属される予定」であるウが合う。\n\nネットワークの物理分離、アカウント権限の棚卸し、机上の機密書類の片付けも対策だが、個人の適性評価とは異なる。",
+      "choiceReasons": [
+        "インターネットから切り離すネットワーク分離の対策。",
+        "権限やアカウントの定期的な棚卸し。",
+        "機密情報を扱う個人の適性を事前に評価するセキュリティクリアランス。",
+        "机上の情報を片付けるクリアデスク。名前に「クリア」があっても別の対策。"
+      ],
+      "takeaway": "クリアランスは機密情報を扱う人の適格性を確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "機密情報の対策には**ネットワークを分ける／アカウント権限を見直す／人を評価する／書類を片付ける**という異なる対象がある。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "セキュリティクリアランスは、機密情報を扱う前に**個人の適格性・信頼性を調査・評価**し、アクセスを認めるか判断する仕組み。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはネットワーク分離、イは権限棚卸し、エはクリアデスク。配属予定者の適性を評価するウが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "クリアランスをネットワーク分離やクリアデスクと混同する。",
+      "stages": [
+        {
+          "newInformation": "機密情報の対策には**ネットワークを分ける／アカウント権限を見直す／人を評価する／書類を片付ける**という異なる対象がある。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "セキュリティクリアランスは、機密情報を扱う前に**個人の適格性・信頼性を調査・評価**し、アクセスを認めるか判断する仕組み。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはネットワーク分離、イは権限棚卸し、エはクリアデスク。配属予定者の適性を評価するウが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07h/r07h-q39.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 2ba159ec9fd1c5cf9df6f3982733a7a8f51017fa9d5d1702d361e1b4fee238da。",
+        "公式正答はcontext.jsonのanswer=2（ウ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q37",
+    "baseVersion": 2,
+    "baseLessonSHA256": "13f35cba226a3a043edf9afcf0d2011530b82a0d73da811a63833a705d44b0c2",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q37",
+      "summary": "署名付きソフトウェアの発行元を確かめる証明書を、TLSのサーバ・クライアント証明書と区別する。",
+      "explanation": "コードサイニング証明書は、プログラムに付けられたデジタル署名を検証し、署名者の身元と公開鍵を対応付けます。署名の検証で改変の有無を確かめ、発行元を確認できます。\n署名が正しくてもソフトウェアの機能や安全性を全て保証するわけではありません。TLS通信のサーバーや利用者を確認する証明書とは用途が異なります。",
+      "choiceReasons": [
+        "EV SSL証明書はWebサイト運営主体を厳格に確認するサーバー向けの証明書です。",
+        "クライアント証明書は通信する利用者や端末の認証に使います。",
+        "コードサイニング証明書はソフトウェアの署名者・発行元の確認に使います。",
+        "サーバー証明書はTLSなどで接続先サーバーを確認するものです。"
+      ],
+      "takeaway": "プログラムの署名者確認はコードサイニング。TLSの相手確認と区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "証明書は公開鍵と主体を結び付けるが、**Webサーバの身元／接続する端末／配布プログラムの署名者**で用途が違う。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ソフトウェアのデジタル署名の発行元を確認するのは**コードサイニング証明書**。署名を検証して発行元と改変の有無を確かめる。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "EV SSL証明書・サーバ証明書はWebサーバ向け、クライアント証明書は端末・利用者向け。プログラムの署名用であるウを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ソフトウェア署名の証明書とTLS通信の証明書の用途を混同する。",
+      "stages": [
+        {
+          "newInformation": "証明書は公開鍵と主体を結び付けるが、**Webサーバの身元／接続する端末／配布プログラムの署名者**で用途が違う。",
+          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
+          "revealsAnswer": false,
+          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+        },
+        {
+          "newInformation": "ソフトウェアのデジタル署名の発行元を確認するのは**コードサイニング証明書**。署名を検証して発行元と改変の有無を確かめる。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "EV SSL証明書・サーバ証明書はWebサーバ向け、クライアント証明書は端末・利用者向け。プログラムの署名用であるウを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07a/r07a-q37.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: b8a40b5f6d23465dd5d67b23cff592f3fa296b01d9695b4370521f10c239fbeb。",
+        "公式正答はcontext.jsonのanswer=2（ウ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e447d4fb2a758ee34bad7c899ece21823e59d0a625e7a2f73f36cda44f316143",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q38",
+      "summary": "未使用IPアドレス空間に届く大量パケットの発生原因を、通常の宛先指定通信と比較する。",
+      "explanation": "使われていないIPアドレス空間には、通常の利用者が宛先を知って送る通信は基本的にありません。一方、攻撃対象を探すスキャンは多数のアドレスを走査するので、未使用領域にも届きます。\nこのような領域を観測するダークネット観測は、マルウェアの探索活動などを把握する手がかりになります。",
+      "choiceReasons": [
+        "公開WebサイトのIPは使用中です。利用者はそのサイトを宛先にするので未使用領域への大量通信ではありません。",
+        "実在サーバへの通常通信は使われている宛先へ送られます。",
+        "広い範囲を探索するスキャンは対象が存在するか知らずに送るため、未使用IPにも大量に届きます。",
+        "標的型メールは有効な宛先へ配送する通信で、未使用IP空間への大量探索とは異なります。"
+      ],
+      "takeaway": "未使用IPに届く通信は、広範囲な探索活動を観測する手がかりになる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "未使用IPアドレスには通常のWebサイトや実在サーバがない。**既知の相手へ送る通信**は、通常は未使用の宛先に大量に届かない。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "攻撃者やマルウェアの**広域スキャン**は、どのIPに機器がいるか不明なまま多数の宛先へ試すため、未使用IP空間（ダークネット）にも届く。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ア・イは実在する宛先への通信、エは有効なメール宛先への送信。未知のIoT機器やサーバを探すウが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "未使用IP空間に届くパケットの宛先選択の仕組みが分からない。",
+      "stages": [
+        {
+          "newInformation": "未使用IPアドレスには通常のWebサイトや実在サーバがない。**既知の相手へ送る通信**は、通常は未使用の宛先に大量に届かない。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "攻撃者やマルウェアの**広域スキャン**は、どのIPに機器がいるか不明なまま多数の宛先へ試すため、未使用IP空間（ダークネット）にも届く。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "ア・イは実在する宛先への通信、エは有効なメール宛先への送信。未知のIoT機器やサーバを探すウが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r06a/r06a-q38.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 9a95d8c5ddb2a3abae051d38b5d250114e8a32f171cc07e203645a9f70677ca2。",
+        "公式正答はcontext.jsonのanswer=2（ウ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q38",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4b7d832c1bcee8a9a90b1e9fd00d30b986629b9bafe8bc711070d460d97dd203",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q38",
+      "summary": "チャレンジレスポンス認証の手順を、固定パスワード送信・OTPと区別する。",
+      "explanation": "チャレンジレスポンス認証では、サーバが毎回変わるチャレンジを送り、クライアントは秘密情報とチャレンジを用いてレスポンスを計算します。サーバはその応答を検証します。毎回違う値に対する応答を求めることで、過去の応答をそのまま使うリプレイを防ぎます。",
+      "choiceReasons": [
+        "TLSで固定パスワードを送っても、サーバのチャレンジに対して応答を生成する方式ではありません。",
+        "端末シリアル番号を秘密鍵で暗号化するだけでは、毎回異なるサーバのチャレンジを使っていません。",
+        "トークンが自動表示する毎回異なる数字列はワンタイムパスワードの説明で、サーバのチャレンジへの応答を述べていません。",
+        "サーバが送るランダムなデータと秘密のパスワードを使って応答を演算し、その結果を検証するので該当します。"
+      ],
+      "takeaway": "チャレンジレスポンスはサーバの新しい問いに秘密を使って応答し、過去の応答の再利用を防ぐ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "認証の方式を**秘密をそのまま送る／トークンが生成した値を送る／サーバからの問いに計算で応答する**に分ける。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "チャレンジレスポンスは、サーバが毎回異なる**ランダムなチャレンジ**を送り、利用者の秘密と組み合わせた**レスポンス**を返させる方式。過去の応答の再送を防ぐ。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アは固定パスワードの送信、イは固定の端末番号の処理、ウはワンタイムパスワード。サーバの乱数とパスワードを演算するエが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "毎回変わるOTPとサーバの乱数への応答を混同する。",
+      "stages": [
+        {
+          "newInformation": "認証の方式を**秘密をそのまま送る／トークンが生成した値を送る／サーバからの問いに計算で応答する**に分ける。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "チャレンジレスポンスは、サーバが毎回異なる**ランダムなチャレンジ**を送り、利用者の秘密と組み合わせた**レスポンス**を返させる方式。過去の応答の再送を防ぐ。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アは固定パスワードの送信、イは固定の端末番号の処理、ウはワンタイムパスワード。サーバの乱数とパスワードを演算するエが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r04h/r04h-q38.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: ee7a3254f7c5fdd564aa2632fc7c0527dd2af48e64e6cd0bf49fdb5b1b26c9c1。",
+        "公式正答はcontext.jsonのanswer=3（エ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ae6a6c0481334c83f27a70b339e8499b4ba4e83b9d6fe3449dacff3d1637e8c0",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q39",
+      "summary": "ディープフェイクによるなりすましを、ランサムウェア・脅迫メール・アカウント乗っ取りと区別する。",
+      "explanation": "ディープフェイクはAIなどで実在の人物に似せた画像、動画、音声を作る技術です。CEOの声を加工・合成して本人が電話しているように聞かせ、送金させるアが該当します。\nランサムウェア、情報漏えいを装う脅迫、不正入手した認証情報によるメールアカウントの乗っ取りは、いずれもAIによる人物の声や姿の偽造を必須としません。",
+      "choiceReasons": [
+        "AI加工したCEOの音声で本人になりすますのでディープフェイクの悪用です。",
+        "暗号化されたデータの復号鍵を条件に金銭を要求するランサムウェアの攻撃です。",
+        "秘密情報の取得を装って脅迫する手口で、声や映像のAI偽造は示されていません。",
+        "盗んだ認証情報でメールを送るアカウント乗っ取りで、ディープフェイクとは異なります。"
+      ],
+      "takeaway": "人物の声・姿をAIで偽造することと、認証情報を盗んでアカウントを使うことを分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四肢は送金要求が共通していても、**何を偽装するか**が異なる。人物の声・姿の偽造と、本人のメールアカウントを使うことを分ける。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "ディープフェイクはAIなどで実在人物の**音声・映像を合成または加工**し、本人が話したかのように見せる技術。認証情報の窃取だけでは該当しない。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イはランサムウェア、ウは情報流出を装う脅迫、エはアカウント乗っ取り。AI加工したCEOの音声を使うアが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ディープウェブとディープフェイクの語感で手口を誤認する。",
+      "stages": [
+        {
+          "newInformation": "四肢は送金要求が共通していても、**何を偽装するか**が異なる。人物の声・姿の偽造と、本人のメールアカウントを使うことを分ける。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "ディープフェイクはAIなどで実在人物の**音声・映像を合成または加工**し、本人が話したかのように見せる技術。認証情報の窃取だけでは該当しない。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "イはランサムウェア、ウは情報流出を装う脅迫、エはアカウント乗っ取り。AI加工したCEOの音声を使うアが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r06a/r06a-q39.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 6658277674de378f2258facf70b71580c574efe3805f1de842754c1aecbe7db5。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q42",
+    "baseVersion": 2,
+    "baseLessonSHA256": "540f074c6b448ca9b5b177dd3e323e2998766875cf3d2378e6af02674cb538c2",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q42",
+      "summary": "デジタルフォレンジックスの証拠調査を、リアルタイム監視・暗号化・マルウェア検査と区別する。",
+      "explanation": "デジタルフォレンジックスは、機器や媒体のデジタル証拠を収集・保全し、検査、分析、報告する手順です。削除されたログもディスクから復元して、何が行われたかを調べる証拠になります。イは媒体に残る痕跡を復元・分析しているため、この手順に含まれます。",
+      "choiceReasons": [
+        "リアルタイムのログ相関による侵入検出はSIEMなどの監視機能を述べています。",
+        "ディスクを解析して削除ログを復元し、不正アクセスの証拠を調べる処理です。",
+        "メールの暗号化は情報漏えいの予防で、証拠の収集・分析ではありません。",
+        "実行時のハッシュ照合はマルウェア検知の説明で、媒体の証拠調査を述べていません。"
+      ],
+      "takeaway": "フォレンジックスは事故の痕跡を証拠として保全・復元・分析する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "セキュリティ活動は**事前の予防／稼働中の検知／事件後の証拠調査**で目的が異なる。設問の収集・検査・分析・報告が何を明らかにするか考える。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "デジタルフォレンジックスでは、記録媒体などから**証拠を保全・復元・分析**し、過去に起きた行為を調べる。削除ログをディスクから復元することも対象。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはSIEMなどのリアルタイム検知、ウは暗号化による予防、エは実行時のマルウェア検査。削除ログを復元するイを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "常時監視と証拠の事後調査を区別できない。",
+      "stages": [
+        {
+          "newInformation": "セキュリティ活動は**事前の予防／稼働中の検知／事件後の証拠調査**で目的が異なる。設問の収集・検査・分析・報告が何を明らかにするか考える。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "デジタルフォレンジックスでは、記録媒体などから**証拠を保全・復元・分析**し、過去に起きた行為を調べる。削除ログをディスクから復元することも対象。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはSIEMなどのリアルタイム検知、ウは暗号化による予防、エは実行時のマルウェア検査。削除ログを復元するイを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r05h/r05h-q42.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 4b3f25ec0c92eef5cb2cd25f15c6f911d1deba68e49b95f3b4f656ed0bcbdb45。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q44",
+    "baseVersion": 2,
+    "baseLessonSHA256": "95cd0493e148ba88cdffd10345b7eccc305126e67e63af214186e14ef838e6ab",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q44",
+      "summary": "デジタルフォレンジックスの収集・検査・分析・報告に該当する事後調査を識別する。",
+      "explanation": "デジタルフォレンジックスは、電子的な証拠を収集・保全し、検査・分析して事実を明らかにし報告する活動です。ディスクを調べ、削除されたログから不正アクセスの痕跡を復元するイが該当します。\n日々のリアルタイム検知や通信の暗号化、実行時のマルウェア判定は別の防御・監視活動です。",
+      "choiceReasons": [
+        "ログを集めてリアルタイム相関分析するSIEMなどの検知活動です。",
+        "ディスクの残存データから削除ログを復元し、事件の痕跡を調べるフォレンジックスです。",
+        "メールの暗号化は漏えい対策で、証拠の検査・分析ではありません。",
+        "ハッシュと脅威情報による実行時の判定はマルウェア対策です。"
+      ],
+      "takeaway": "フォレンジックスは証拠から事実を復元・分析する活動。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ログの相関監視やメール暗号化は**その場での検知・予防**。フォレンジックスでは後から説明できる**証拠の保全と事実の再構成**が重要。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "ディスクに残るデータから**削除されたログを復元**し、不正アクセスの痕跡を調べる作業は、証拠の検査・分析に当たる。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アはリアルタイム監視、ウは情報漏えい予防、エは実行時のマルウェア判定。媒体の痕跡を調べるイが該当する。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "検知・予防と媒体の証拠復元を同じ活動と捉える。",
+      "stages": [
+        {
+          "newInformation": "ログの相関監視やメール暗号化は**その場での検知・予防**。フォレンジックスでは後から説明できる**証拠の保全と事実の再構成**が重要。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "ディスクに残るデータから**削除されたログを復元**し、不正アクセスの痕跡を調べる作業は、証拠の検査・分析に当たる。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "アはリアルタイム監視、ウは情報漏えい予防、エは実行時のマルウェア判定。媒体の痕跡を調べるイが該当する。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r07a/r07a-q44.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 96aa05e48082f9595d4a5e1d026a9290bbd6ea075d01ddd9b9639ad18a50dcb5。",
+        "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q40",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b63e6a65f73f53eae42862bfeb313cff31097bca15a4cb49d1defae39725c5f7",
+    "author": "ChatGPT/gpt-6-batch20-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q40",
+      "summary": "暗号学的ハッシュの原像計算困難性を、衝突困難性や固定長出力の性質と区別する。",
+      "explanation": "原像計算困難性はハッシュ値hが与えられたとき、H(m)=hとなる入力mを見つけることが計算量的に困難であるという性質です。任意の二入力の同じハッシュを探す衝突困難性とは、与えられる条件が異なります。",
+      "choiceReasons": [
+        "与えられたハッシュ値から対応する入力を探す困難性で正しいです。",
+        "可変長入力を固定長へ変換する形式上の性質で、一方向性の説明ではありません。",
+        "同じハッシュとなる任意の異なる二入力を探す困難性は衝突困難性です。",
+        "処理装置への観測・改変防止という耐タンパ性に関する説明です。"
+      ],
+      "takeaway": "原像は出力から入力、衝突は同じ出力となる二入力を探す問題。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ハッシュ関数を **H(m)=h** と書く。入力mから出力hを計算することと、**出力hだけから入力mを探すこと**は方向が逆。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "**原像計算困難性**は、与えられたハッシュ値hに対してH(m)=hとなるメッセージmを見つけるのが計算量的に困難という性質。二つの異なる入力を探す衝突困難性とは別。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "イは可変長から固定長への変換、ウは衝突困難性、エは装置の耐タンパ性に近い説明。与えられたhからmを探すアを選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "原像困難性と衝突困難性の入力・出力の条件を混同する。",
+      "stages": [
+        {
+          "newInformation": "ハッシュ関数を **H(m)=h** と書く。入力mから出力hを計算することと、**出力hだけから入力mを探すこと**は方向が逆。",
+          "remainingWork": "正答に対応する記述を確認し、ほかの選択肢がなぜ異なるかを説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全肢を合わせると、この段階で示した攻撃・対策の仕組みや消去条件が正答肢を実質的に特定する。番号を示さなくても開示に当たるためtrue。"
+        },
+        {
+          "newInformation": "**原像計算困難性**は、与えられたハッシュ値hに対してH(m)=hとなるメッセージmを見つけるのが計算量的に困難という性質。二つの異なる入力を探す衝突困難性とは別。",
+          "remainingWork": "該当する選択肢を確認し、他の肢が別の概念を説明する理由を説明する。",
+          "revealsAnswer": true,
+          "reason": "問題文と全選択肢に照らすと、ここで示した定義・仕組みが正答肢と実質的に一致し、正答が確定するためtrue。"
+        },
+        {
+          "newInformation": "イは可変長から固定長への変換、ウは衝突困難性、エは装置の耐タンパ性に近い説明。与えられたhからmを探すアを選ぶ。",
+          "remainingWork": "全肢の違いを復習し、同じ概念の類題でも識別できるようにする。",
+          "revealsAnswer": true,
+          "reason": "正答肢と誤答肢の区別を明示しており、前段と合わせても答えを開示するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをGitHubの assets/questions/r03h/r03h-q40.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 4e9071e5ad3645aed6479dd787851b07cbd2e69ae8b61716fd9236d87710f88c。",
+        "公式正答はcontext.jsonのanswer=0（ア）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+      ]
+    }
+  }
+]

@@ -1,0 +1,945 @@
+[
+  {
+    "id": "r05a-q26",
+    "version": 2,
+    "number": 26,
+    "title": "2023年 秋期 問26",
+    "topic": "データベース",
+    "concept": "ハッシュとB木の索引",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問26",
+    "year": 2023,
+    "season": "autumn",
+    "page": 16,
+    "stem": "“売上”表への次の検索処理のうち，$B^{+}$木インデックスよりもハッシュインデックスを設定した方が適切なものはどれか。ここで，インデックスを設定する列を＜＞内に示す。\n\n売上（伝票番号，売上年月日，商品名，利用者ID，店舗番号，売上金額）",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "売上金額が1万円以上の売上を検索する。＜売上金額＞"
+      },
+      {
+        "label": "イ",
+        "text": "売上年月日が今月の売上を検索する。＜売上年月日＞"
+      },
+      {
+        "label": "ウ",
+        "text": "商品名が‘DB’で始まる売上を検索する。＜商品名＞"
+      },
+      {
+        "label": "エ",
+        "text": "利用者IDが‘1001’の売上を検索する。＜利用者ID＞"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q26.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q26.webp": "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q26.webp"
+    ]
+  },
+  {
+    "id": "r07a-q27",
+    "version": 2,
+    "number": 27,
+    "title": "2025年 秋期 問27",
+    "topic": "データベース",
+    "concept": "ハッシュとB木の索引",
+    "source": "令和7年度 秋期 応用情報技術者試験 午前 問27",
+    "year": 2025,
+    "season": "autumn",
+    "page": 15,
+    "stem": "“売上”表への次の検索処理のうち，B⁺木インデックスよりもハッシュインデックスを設定した方が適切なものはどれか。ここで，インデックスを設定する列を＜＞内に示す。\n\n売上（伝票番号，売上年月日，商品名，利用者ID，店舗番号，売上金額）",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "売上金額が1万円以上の売上を検索する。＜売上金額＞"
+      },
+      {
+        "label": "イ",
+        "text": "売上年月日が今月の売上を検索する。＜売上年月日＞"
+      },
+      {
+        "label": "ウ",
+        "text": "商品名が‘DB’で始まる売上を検索する。＜商品名＞"
+      },
+      {
+        "label": "エ",
+        "text": "利用者IDが‘1001’の売上を検索する。＜利用者ID＞"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r07a/r07a-q27.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q27.webp": "e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07a/r07a-q27.webp"
+    ]
+  },
+  {
+    "id": "r07a-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2025年 秋期 問28",
+    "topic": "データベース",
+    "concept": "ビューの定義",
+    "source": "令和7年度 秋期 応用情報技術者試験 午前 問28",
+    "year": 2025,
+    "season": "autumn",
+    "page": 16,
+    "stem": "関係データベースのビューに関する記述のうち，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "ビューの列名は，基の表の列名と異なる名称で定義することができる。"
+      },
+      {
+        "label": "イ",
+        "text": "ビューは，基の表から指定した列を抜き出すように定義するものであり，行を抜き出すように定義することはできない。"
+      },
+      {
+        "label": "ウ",
+        "text": "二つ以上の表の結合によって定義されたビューは，結合の仕方によらず更新操作ができる。"
+      },
+      {
+        "label": "エ",
+        "text": "和両立な二つの表に対し，和集合演算を用いてビューを定義することはできない。"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r07a/r07a-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q28.webp": "dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07a/r07a-q28.webp"
+    ]
+  },
+  {
+    "id": "r04h-q27",
+    "version": 2,
+    "number": 27,
+    "title": "2022年 春期 問27",
+    "topic": "データベース",
+    "concept": "三層スキーマの内部層",
+    "source": "令和4年度 春期 応用情報技術者試験 午前 問27",
+    "year": 2022,
+    "season": "spring",
+    "page": 14,
+    "stem": "ANSI/SPARC 3層スキーマモデルにおける内部スキーマの設計に含まれるものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "SQL問合せ応答時間の向上を目的としたインデックスの定義"
+      },
+      {
+        "label": "イ",
+        "text": "エンティティ間の“1対多”，“多対多”などの関連を明示するE-Rモデルの作成"
+      },
+      {
+        "label": "ウ",
+        "text": "エンティティ内やエンティティ間の整合性を保つための一意性制約や参照制約の設定"
+      },
+      {
+        "label": "エ",
+        "text": "データの冗長性を排除し，更新の一貫性と効率性を保持するための正規化"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r04h/r04h-q27.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q27.webp": "4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q27.webp"
+    ]
+  },
+  {
+    "id": "r06a-q27",
+    "version": 2,
+    "number": 27,
+    "title": "2024年 秋期 問27",
+    "topic": "データベース",
+    "concept": "二相コミットの判断待ち",
+    "source": "令和6年度 秋期 応用情報技術者試験 午前 問27",
+    "year": 2024,
+    "season": "autumn",
+    "page": 15,
+    "stem": "2相コミットで分散トランザクションの原子性を保証する場合，ネットワーク障害の発生によって参加者のトランザクションが，コミットすべきか又はロールバックすべきかを判断できなくなることがある。このような状況を発生させるネットワーク障害に関する説明として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "調停者のトランザクションが，コミット又はロールバック可否の問合せを参加者に送る直前に障害になった。"
+      },
+      {
+        "label": "イ",
+        "text": "調停者のトランザクションが，コミット又はロールバックの決定を参加者に送る直前に障害になった。"
+      },
+      {
+        "label": "ウ",
+        "text": "調停者のトランザクションに，コミット又はロールバック可否の応答を参加者が返す直前に障害になった。"
+      },
+      {
+        "label": "エ",
+        "text": "調停者のトランザクションに，コミット又はロールバックの完了を参加者が返す直前に障害になった。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r06a/r06a-q27.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q27.webp": "5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06a/r06a-q27.webp"
+    ]
+  },
+  {
+    "id": "r03a-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2021年 秋期 問28",
+    "topic": "データベース",
+    "concept": "受注明細の正規化",
+    "source": "令和3年度 秋期 応用情報技術者試験 午前 問28",
+    "year": 2021,
+    "season": "autumn",
+    "page": 15,
+    "stem": "受注入力システムによって作成される次の表に関する記述のうち，適切なものはどれか。受注番号は受注ごとに新たに発行される番号であり，項番は1回の受注で商品コード別に連番で発行される番号である。\n\nなお，単価は商品コードによって一意に定まる。\n\n| 受注日 | 受注番号 | 得意先コード | 項番 | 商品コード | 数量 | 単価 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 2021-03-05 | 995867 | 0256 | 1 | 20121 | 20 | 20,000 |\n| 2021-03-05 | 995867 | 0256 | 2 | 24005 | 10 | 15,000 |\n| 2021-03-05 | 995867 | 0256 | 3 | 28007 | 5 | 5,000 |",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "第1正規形でない。"
+      },
+      {
+        "label": "イ",
+        "text": "第1正規形であるが第2正規形でない。"
+      },
+      {
+        "label": "ウ",
+        "text": "第2正規形であるが第3正規形でない。"
+      },
+      {
+        "label": "エ",
+        "text": "第3正規形である。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r03a/r03a-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03a/r03a-q28.webp": "32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03a/r03a-q28.webp"
+    ]
+  },
+  {
+    "id": "r04a-q26",
+    "version": 2,
+    "number": 26,
+    "title": "2022年 秋期 問26",
+    "topic": "データベース",
+    "concept": "命名規約で防げない問題",
+    "source": "令和4年度 秋期 応用情報技術者試験 午前 問26",
+    "year": 2022,
+    "season": "autumn",
+    "page": 12,
+    "stem": "データ項目の命名規約を設ける場合，次の命名規約だけでは++回避できない事象++はどれか。\n\n〔命名規約〕\n\n（1）データ項目名の末尾には必ず“名”，“コード”，“数”，“金額”，“年月日”などの区分語を付与し，区分語ごとに定めたデータ型にする。\n\n（2）データ項目名と意味を登録した辞書を作成し，異音同義語や同音異義語が発生しないようにする。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "データ項目“受信年月日”のデータ型として，日付型と文字列型が混在する。"
+      },
+      {
+        "label": "イ",
+        "text": "データ項目“受注金額”の取り得る値の範囲がテーブルによって異なる。"
+      },
+      {
+        "label": "ウ",
+        "text": "データ項目“賞与金額”と同じ意味で“ボーナス金額”というデータ項目がある。"
+      },
+      {
+        "label": "エ",
+        "text": "データ項目“取引先”が，“取引先コード”か“取引先名”か，判別できない。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r04a/r04a-q26.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q26.webp": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04a/r04a-q26.webp"
+    ]
+  },
+  {
+    "id": "r05h-q26",
+    "version": 2,
+    "number": 26,
+    "title": "2023年 春期 問26",
+    "topic": "データベース",
+    "concept": "変化するJSONの保存",
+    "source": "令和5年度 春期 応用情報技術者試験 午前 問26",
+    "year": 2023,
+    "season": "spring",
+    "page": 15,
+    "stem": "JSON形式で表現される図1，図2のような商品データを複数のWebサービスから取得し，商品データベースとして蓄積する際のデータの格納方法に関する記述のうち，適切なものはどれか。ここで，商品データの取得元となるWebサービスは随時変更され，項目数や内容は予測できない。したがって，商品データベースの検索時に使用するキーにはあらかじめ制限を設けない。\n\n```json\n{\n  \"_id\":\"AA09\",\n  \"品名\":\"47型テレビ\",\n  \"価格\":\"オープンプライス\",\n  \"関連商品_id\":[\n    \"AA101\",\n    \"BC06\"\n  ]\n}\n```\n\n図1 A社Webサービスの商品データ\n\n```json\n{\n  \"_id\":\"AA10\",\n  \"商品名\":\"りんご\",\n  \"生産地\":\"青森\",\n  \"価格\":100,\n  \"画像URL\":\"http://www.example.com/apple.jpg\"\n}\n```\n\n図2 B社Webサービスの商品データ",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "階層型データベースを使用し，項目名を上位階層とし，値を下位階層とした2階層でデータを格納する。"
+      },
+      {
+        "label": "イ",
+        "text": "グラフデータベースを使用し，商品データの項目名の集合から成るノードと値の集合から成るノードを作り，二つのノードを関係付けたグラフとしてデータを格納する。"
+      },
+      {
+        "label": "ウ",
+        "text": "ドキュメントデータベースを使用し，項目構成の違いを区別せず，商品データ単位にデータを格納する。"
+      },
+      {
+        "label": "エ",
+        "text": "関係データベースを使用し，商品データの各項目名を個別の列名とした表を定義してデータを格納する。"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r05h/r05h-q26.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q26.webp": "97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05h/r05h-q26.webp"
+    ]
+  },
+  {
+    "id": "r05a-q27",
+    "version": 2,
+    "number": 27,
+    "title": "2023年 秋期 問27",
+    "topic": "データベース",
+    "concept": "外部キーと候補キー",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問27",
+    "year": 2023,
+    "season": "autumn",
+    "page": 16,
+    "stem": "関係モデルにおける外部キーの説明として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "ある関係の候補キーを参照する属性，又は属性の組"
+      },
+      {
+        "label": "イ",
+        "text": "主キー以外で，タプルを一意に識別できる属性，又は属性の組"
+      },
+      {
+        "label": "ウ",
+        "text": "タプルを一意に識別できる属性，又は属性の組の集合のうち極小のもの"
+      },
+      {
+        "label": "エ",
+        "text": "タプルを一意に識別できる属性，又は属性の組を含む集合"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q27.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q27.webp": "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q27.webp"
+    ]
+  },
+  {
+    "id": "r06h-q26",
+    "version": 2,
+    "number": 26,
+    "title": "2024年 春期 問26",
+    "topic": "データベース",
+    "concept": "外部結合とNULLの集計",
+    "source": "令和6年度 春期 応用情報技術者試験 午前 問26",
+    "year": 2024,
+    "season": "spring",
+    "page": 17,
+    "stem": "“部品”表及び“在庫”表に対し，SQL文を実行して結果を得た。SQL文のaに入れる字句はどれか。\n\n部品\n\n| 部品ID | 発注点 |\n| --- | --- |\n| P01 | 100 |\n| P02 | 150 |\n| P03 | 100 |\n\n在庫\n\n| 部品ID | 倉庫ID | 在庫数 |\n| --- | --- | --- |\n| P01 | W01 | 90 |\n| P01 | W02 | 90 |\n| P02 | W01 | 150 |\n\n〔結果〕\n\n| 部品ID | 発注要否 |\n| --- | --- |\n| P01 | 不要 |\n| P02 | 不要 |\n| P03 | 必要 |\n\n〔SQL文〕\n\n```\nSELECT 部品.部品ID AS 部品ID,\n    CASE WHEN 部品.発注点 > a\n        THEN N'必要' ELSE N'不要' END AS 発注要否\nFROM 部品 LEFT OUTER JOIN 在庫\n    ON 部品.部品ID = 在庫.部品ID\nGROUP BY 部品.部品ID, 部品.発注点\n```",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "COALESCE(MIN(在庫.在庫数), 0)"
+      },
+      {
+        "label": "イ",
+        "text": "COALESCE(MIN(在庫.在庫数), NULL)"
+      },
+      {
+        "label": "ウ",
+        "text": "COALESCE(SUM(在庫.在庫数), 0)"
+      },
+      {
+        "label": "エ",
+        "text": "COALESCE(SUM(在庫.在庫数), NULL)"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r06h/r06h-q26.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06h/r06h-q26.webp": "1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06h/r06h-q26.webp"
+    ]
+  },
+  {
+    "id": "r07h-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2025年 春期 問28",
+    "topic": "データベース",
+    "concept": "差集合で共通部分を表す",
+    "source": "令和7年度 春期 応用情報技術者試験 午前 問28",
+    "year": 2025,
+    "season": "spring",
+    "page": 16,
+    "stem": "和両立である関係 $R$ と $S$ がある。$R\\cap S$ と等しいものはどれか。ここで，$-$ は差演算，$\\cap$ は共通演算を表す。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "$(R-S)-(S-R)$"
+      },
+      {
+        "label": "イ",
+        "text": "$R-(R-S)$"
+      },
+      {
+        "label": "ウ",
+        "text": "$R-(S-R)$"
+      },
+      {
+        "label": "エ",
+        "text": "$S-(R-S)$"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r07h/r07h-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q28.webp": "15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07h/r07h-q28.webp"
+    ]
+  },
+  {
+    "id": "r04a-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2022年 秋期 問28",
+    "topic": "データベース",
+    "concept": "平均より高い利益と重複排除",
+    "source": "令和4年度 秋期 応用情報技術者試験 午前 問28",
+    "year": 2022,
+    "season": "autumn",
+    "page": 14,
+    "stem": "“商品”表に対して，次のSQL文を実行して得られる仕入先コード数は幾つか。\n\n〔SQL文〕\n\n```\nSELECT DISTINCT 仕入先コード FROM 商品\n  WHERE (販売単価 - 仕入単価) >\n        (SELECT AVG (販売単価 - 仕入単価) FROM 商品)\n```\n\n商品\n\n| 商品コード | 商品名 | 販売単価 | 仕入先コード | 仕入単価 |\n| --- | --- | --- | --- | --- |\n| A001 | A | 1,000 | S1 | 800 |\n| B002 | B | 2,500 | S2 | 2,300 |\n| C003 | C | 1,500 | S2 | 1,400 |\n| D004 | D | 2,500 | S1 | 1,600 |\n| E005 | E | 2,000 | S1 | 1,600 |\n| F006 | F | 3,000 | S3 | 2,800 |\n| G007 | G | 2,500 | S3 | 2,200 |\n| H008 | H | 2,500 | S4 | 2,000 |\n| I009 | I | 2,500 | S5 | 2,000 |\n| J010 | J | 1,300 | S6 | 1,000 |",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "1"
+      },
+      {
+        "label": "イ",
+        "text": "2"
+      },
+      {
+        "label": "ウ",
+        "text": "3"
+      },
+      {
+        "label": "エ",
+        "text": "4"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r04a/r04a-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q28.webp": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04a/r04a-q28.webp"
+    ]
+  },
+  {
+    "id": "r05h-q29",
+    "version": 2,
+    "number": 29,
+    "title": "2023年 春期 問29",
+    "topic": "データベース",
+    "concept": "所属履歴の多重度",
+    "source": "令和5年度 春期 応用情報技術者試験 午前 問29",
+    "year": 2023,
+    "season": "spring",
+    "page": 17,
+    "stem": "UMLを用いて表した図のデータモデルのa，bに入れる多重度はどれか。\n\n〔条件〕\n\n(1) 部門には1人以上の社員が所属する。\n\n(2) 社員はいずれか一つの部門に所属する。\n\n(3) 社員が部門に所属した履歴を所属履歴として記録する。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "a：0..*，b：0..*"
+      },
+      {
+        "label": "イ",
+        "text": "a：0..*，b：1..*"
+      },
+      {
+        "label": "ウ",
+        "text": "a：1..*，b：0..*"
+      },
+      {
+        "label": "エ",
+        "text": "a：1..*，b：1..*"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r05h/r05h-q29.webp"
+    ],
+    "image": "assets/transcriptions/pr-batch2-figures-b/r05h-q29-figure-choices.png",
+    "imageAlt": "部門（部門コード，部門名，…），所属履歴（開始日，終了日，…），社員（社員コード，氏名，…）の関連図。部門側及び社員側の多重度は1，所属履歴側はa，b。下にa，bの全4択表。",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q29.webp": "6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f",
+      "assets/transcriptions/pr-batch2-figures-b/r05h-q29-figure-choices.png": "7a063ffd43cdc0ca978afa758de724cd0ff14933290a15f43f8bede0aa5126ba",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05h/r05h-q29.webp"
+    ]
+  },
+  {
+    "id": "r05a-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2023年 秋期 問28",
+    "topic": "データベース",
+    "concept": "更新できるビュー",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問28",
+    "year": 2023,
+    "season": "autumn",
+    "page": 16,
+    "stem": "更新可能なビューを作成するSQL文はどれか。ここで，SQL文中に現れる基底表は全て更新可能とする。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "```\nCREATE VIEW 高額商品(商品番号, 商品名, 商品単価)\nAS SELECT 商品番号, 商品名, 商品単価 FROM 商品 WHERE 商品単価 > 1000\n```"
+      },
+      {
+        "label": "イ",
+        "text": "```\nCREATE VIEW 受注商品(商品番号)\nAS SELECT DISTINCT 商品番号 FROM 受注\n```"
+      },
+      {
+        "label": "ウ",
+        "text": "```\nCREATE VIEW 商品受注(商品番号, 受注数量)\nAS SELECT 商品番号, SUM(受注数量) FROM 受注 GROUP BY 商品番号\n```"
+      },
+      {
+        "label": "エ",
+        "text": "```\nCREATE VIEW 商品平均受注数量(平均受注数量)\nAS SELECT AVG(受注数量) FROM 受注\n```"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q28.webp": "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q28.webp"
+    ]
+  },
+  {
+    "id": "r07h-q24",
+    "version": 2,
+    "number": 24,
+    "title": "2025年 春期 問24",
+    "topic": "データベース",
+    "concept": "柔軟な列をもつNoSQLモデル",
+    "source": "令和7年度 春期 応用情報技術者試験 午前 問24",
+    "year": 2025,
+    "season": "spring",
+    "page": 14,
+    "stem": "大量のIoTデバイスから送信される大量で，かつ様々な形式のデータを格納可能なデータモデルのうち，行ごとに任意の列数をもち，かつ列ごとに複数の値をもつことによって，柔軟なデータ格納を実現しているデータモデルはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "グラフ"
+      },
+      {
+        "label": "イ",
+        "text": "ドキュメント"
+      },
+      {
+        "label": "ウ",
+        "text": "リレーショナル"
+      },
+      {
+        "label": "エ",
+        "text": "ワイドカラム"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r07h/r07h-q24.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q24.webp": "eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07h/r07h-q24.webp"
+    ]
+  },
+  {
+    "id": "r03a-q29",
+    "version": 2,
+    "number": 29,
+    "title": "2021年 秋期 問29",
+    "topic": "データベース",
+    "concept": "横持ちの売上を行へ展開",
+    "source": "令和3年度 秋期 応用情報技術者試験 午前 問29",
+    "year": 2021,
+    "season": "autumn",
+    "page": 16,
+    "stem": "“部門別売上”表から，部門コードごと，期ごとの売上を得るSQL文はどれか。\n\n部門別売上\n\n| 部門コード | 第1期売上 | 第2期売上 |\n| --- | --- | --- |\n| D01 | 1,000 | 4,000 |\n| D02 | 2,000 | 5,000 |\n| D03 | 3,000 | 8,000 |\n\n〔問合せ結果〕\n\n| 部門コード | 期 | 売上 |\n| --- | --- | --- |\n| D01 | 第1期 | 1,000 |\n| D01 | 第2期 | 4,000 |\n| D02 | 第1期 | 2,000 |\n| D02 | 第2期 | 5,000 |\n| D03 | 第1期 | 3,000 |\n| D03 | 第2期 | 8,000 |",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "```\nSELECT 部門コード, '第1期' AS 期, 第1期売上 AS 売上\n    FROM 部門別売上\n    INTERSECT\n    (SELECT 部門コード, '第2期' AS 期, 第2期売上 AS 売上\n      FROM 部門別売上)\n    ORDER BY 部門コード, 期\n```"
+      },
+      {
+        "label": "イ",
+        "text": "```\nSELECT 部門コード, '第1期' AS 期, 第1期売上 AS 売上\n    FROM 部門別売上\n    UNION\n    (SELECT 部門コード, '第2期' AS 期, 第2期売上 AS 売上\n      FROM 部門別売上)\n    ORDER BY 部門コード, 期\n```"
+      },
+      {
+        "label": "ウ",
+        "text": "```\nSELECT A.部門コード, '第1期' AS 期, A.第1期売上 AS 売上\n    FROM 部門別売上 A\n    CROSS JOIN\n    (SELECT B.部門コード, '第2期' AS 期, B.第2期売上 AS 売上\n        FROM 部門別売上 B) T\n    ORDER BY 部門コード, 期\n```"
+      },
+      {
+        "label": "エ",
+        "text": "```\nSELECT A.部門コード, '第1期' AS 期, A.第1期売上 AS 売上\n    FROM 部門別売上 A\n    INNER JOIN\n    (SELECT B.部門コード, '第2期' AS 期, B.第2期売上 AS 売上\n        FROM 部門別売上 B) T ON A.部門コード = T.部門コード\n    ORDER BY 部門コード, 期\n```"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r03a/r03a-q29.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03a/r03a-q29.webp": "0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03a/r03a-q29.webp"
+    ]
+  },
+  {
+    "id": "r04h-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2022年 春期 問28",
+    "topic": "データベース",
+    "concept": "正規形の三段階",
+    "source": "令和4年度 春期 応用情報技術者試験 午前 問28",
+    "year": 2022,
+    "season": "spring",
+    "page": 14,
+    "stem": "第1，第2，第3正規形とリレーションの特徴a，b，cの組合せのうち，適切なものはどれか。\n\na：どの非キー属性も，主キーの真部分集合に対して関数従属しない。\n\nb：どの非キー属性も，主キーに推移的に関数従属しない。\n\nc：繰返し属性が存在しない。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | b | c |"
+      },
+      {
+        "label": "イ",
+        "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | c | b |"
+      },
+      {
+        "label": "ウ",
+        "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | a | b |"
+      },
+      {
+        "label": "エ",
+        "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | b | a |"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r04h/r04h-q28.webp"
+    ],
+    "image": "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp",
+    "imageAlt": "第1・第2・第3正規形と特徴a・b・cの組合せを示すア〜エの選択肢表",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q28.webp": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+      "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp": "468cf6396a2a98e5e7e5fc0f268ac9fee2bfceefabead0b300b3600a9aeef186",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q28.webp"
+    ]
+  },
+  {
+    "id": "r03h-q29",
+    "version": 2,
+    "number": 29,
+    "title": "2021年 春期 問29",
+    "topic": "データベース",
+    "concept": "注文の概念モデル",
+    "source": "令和3年度 春期 応用情報技術者試験 午前 問29",
+    "year": 2021,
+    "season": "spring",
+    "page": 15,
+    "stem": "商品の注文を記録するクラス（顧客，商品，注文，注文明細）の構造を概念データモデルで表現する。a〜dに入れるべきクラス名の組合せはどれか。ここで，顧客は何度も注文を行い，一度に一つ以上の商品を注文でき，注文明細はそれぞれ1種類の商品に対応している。また，モデルの表記にはUMLを用いる。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "| a | b | c | d |\n| --- | --- | --- | --- |\n| 顧客 | 注文 | 注文明細 | 商品 |"
+      },
+      {
+        "label": "イ",
+        "text": "| a | b | c | d |\n| --- | --- | --- | --- |\n| 商品 | 注文 | 注文明細 | 顧客 |"
+      },
+      {
+        "label": "ウ",
+        "text": "| a | b | c | d |\n| --- | --- | --- | --- |\n| 注文 | 注文明細 | 顧客 | 商品 |"
+      },
+      {
+        "label": "エ",
+        "text": "| a | b | c | d |\n| --- | --- | --- | --- |\n| 注文明細 | 商品 | 注文 | 顧客 |"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r03h/r03h-q29.webp"
+    ],
+    "image": "assets/transcriptions/author_r03h/r03h-q29-figure-choices.webp",
+    "imageAlt": "クラスa〜dの関連と多重度1，*を示すUML図及びクラス名の選択肢表。",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q29.webp": "3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e",
+      "assets/transcriptions/author_r03h/r03h-q29-figure-choices.webp": "c91e203ada448b9f57fd9267ca28d5caabe1ae3779b486d8909400af2ef7c469",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03h/r03h-q29.webp"
+    ]
+  },
+  {
+    "id": "r07h-q26",
+    "version": 2,
+    "number": 26,
+    "title": "2025年 春期 問26",
+    "topic": "データベース",
+    "concept": "第3正規形への分解",
+    "source": "令和7年度 春期 応用情報技術者試験 午前 問26",
+    "year": 2025,
+    "season": "spring",
+    "page": 15,
+    "stem": "関係を第2正規形から第3正規形に変換する手順はどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "候補キー以外の属性から，候補キーの一部の属性に対して関数従属性がある場合，その関係を分解する。"
+      },
+      {
+        "label": "イ",
+        "text": "候補キー以外の属性間に関数従属性がある場合，その関係を分解する。"
+      },
+      {
+        "label": "ウ",
+        "text": "候補キーの一部の属性から，候補キー以外の属性への関数従属性がある場合，その関係を分解する。"
+      },
+      {
+        "label": "エ",
+        "text": "一つの属性に複数の値が入っている場合，単一の値になるように分解する。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r07h/r07h-q26.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q26.webp": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07h/r07h-q26.webp"
+    ]
+  },
+  {
+    "id": "r06a-q28",
+    "version": 2,
+    "number": 28,
+    "title": "2024年 秋期 問28",
+    "topic": "データベース",
+    "concept": "表から得られない情報",
+    "source": "令和6年度 秋期 応用情報技術者試験 午前 問28",
+    "year": 2024,
+    "season": "autumn",
+    "page": 15,
+    "stem": "化粧品の製造を行っているA社では，販売代理店を通じて商品販売を行っている。今後の販売戦略に活用するために，次の三つの表を設計した。これらの表を用いるだけでは++得ることのできない情報++はどれか。\n\n顧客\n\n| 顧客ID | 氏名 | 性別 | 生年月日 |\n| --- | --- | --- | --- |\n\n販売代理店別日別販売\n\n| 販売代理店ID | 日付 | 商品ID | 販売数量 |\n| --- | --- | --- | --- |\n\n商品購入\n\n| 顧客ID | 販売代理店ID | 商品ID | 購入数量 |\n| --- | --- | --- | --- |",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "商品ごとの販売数量の日別差異"
+      },
+      {
+        "label": "イ",
+        "text": "性別ごとの売れ筋商品"
+      },
+      {
+        "label": "ウ",
+        "text": "販売代理店ごとの購入者数の日別差異"
+      },
+      {
+        "label": "エ",
+        "text": "販売代理店ごとの売れ筋商品"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r06a/r06a-q28.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q28.webp": "be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06a/r06a-q28.webp"
+    ]
+  }
+]

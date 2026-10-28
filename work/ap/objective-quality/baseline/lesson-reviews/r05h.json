@@ -1,0 +1,644 @@
+[
+  {
+    "id": "r05h-q1",
+    "officialAnswer": "ア",
+    "independentResult": "n+1を255でANDして下位8bitを残す。n=255なら256&255=0。イは通常0、ウは下位bitを1、エは第9bitを1にする。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "4b9c84ec351bdeef3580d9289c35493baf5b3a12f127b68edc7f3b9ce1de763a"
+  },
+  {
+    "id": "r05h-q2",
+    "officialAnswer": "ア",
+    "independentResult": "正規分布は平均60を対称軸とする一峰形で変曲点が60±10。アは60中心と70変曲点。イの55/65は±5、ウは二峰、エは非対称。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fda82241d6f819053ee4a19bc4491adb6d27e79b447910deb23b73c760cda787"
+  },
+  {
+    "id": "r05h-q3",
+    "officialAnswer": "ア",
+    "independentResult": "ROCは閾値を動かして偽陽性率を横軸、真陽性率を縦軸とする。真陽性率と適合率ならPR曲線。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e6ecec1c82ff19d543ba9c87d09215e6ca5ad8209fbbd64493b0f0923549f2a4"
+  },
+  {
+    "id": "r05h-q4",
+    "officialAnswer": "ウ",
+    "independentResult": "ドップラー効果は血球の移動速度による周波数変化から血流速度・量を測定。酸素飽和度は光吸収、血糖は濃度、水分量はインピーダンス等。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7f58033e46435f4ab3cfa73aeacfa40b60371a1d9a1e4658f162fdfaf32ecdf2"
+  },
+  {
+    "id": "r05h-q5",
+    "officialAnswer": "ウ",
+    "independentResult": "best-fitは要求以上の最小サイズを探す。サイズキー二分探索木なら平均log n、サイズ順リストは線形。住所キー木/ビットマップはサイズ順の探索にならない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1031d5c21104944b4da5bedc7a1701322442b9bbce376b136c622c190841998c"
+  },
+  {
+    "id": "r05h-q6",
+    "officialAnswer": "エ",
+    "independentResult": "存在時比較平均(1+…+n)/n=(n+1)/2、確率1-a。不在時n回、確率a。期待値=(n+1)(1-a)/2+na。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "acc621dabeff61789183793994d79402e5671daddf550ff496c8e51d90856d3d"
+  },
+  {
+    "id": "r05h-q7",
+    "officialAnswer": "ア",
+    "independentResult": "基準2で[1],2,[3,5,4]、次基準3で空,3,[5,4]となる。1,2,3,5,4。グループ内順保持条件により5,4はまだ未整列。",
+    "issues": [
+      "第3ヒントは1回目の大きい側[3,5,4]と基準3を提示し、元の順保持条件と合わせてアへ一意に絞れるためrevealsAnswerをtrueへ変更。"
+    ],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f5c0959a2edaaff7ba821cf910435deaa039f57e80ca252b70450ec6806db608"
+  },
+  {
+    "id": "r05h-q8",
+    "officialAnswer": "イ",
+    "independentResult": "CPI=1.25×10^9 cycles/sec ÷ 10^9 instructions/sec =1.25。0.8は逆比、2.5/10は比に一致しない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "36cd0ecaf1000628fb3e29e8eef1f3748d96f4d57bb0610c2ed981fe849fb3a3"
+  },
+  {
+    "id": "r05h-q9",
+    "officialAnswer": "ウ",
+    "independentResult": "5ステージの初命令に5cycle、残り19命令は各1cycleなので24。20は立上り4cycleを無視、21/25も条件の5+19と合わない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "97b858af304c3d9f0398a3df32580e6224d173fc70c9f3ca963d7466a273f097"
+  },
+  {
+    "id": "r05h-q10",
+    "officialAnswer": "イ",
+    "independentResult": "ライトスルーはキャッシュと主記憶に同時書込み。一方ライトバックはキャッシュのみを更新しdirty追出し時に主記憶へ反映。ア/ウは方式逆、エの書戻し不要はdirty時に誤り。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "16a24018991457cb41c0372222f9a98e468d46f0b75ab8967c43946a60b40344"
+  },
+  {
+    "id": "r05h-q11",
+    "officialAnswer": "ア",
+    "independentResult": "ウェアレベリングは各物理ブロックの書換え回数を均す。イは多値セル、ウは不良ブロック置換、エは消去/書込の基本動作。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7376073393f2aa4a49b2348f45ce155d526f230e03299698e693c319dd4b8819"
+  },
+  {
+    "id": "r05h-q12",
+    "officialAnswer": "ア",
+    "independentResult": "有機ELは電圧をかけ有機発光素子自身が発光。イ電子線はCRT、ウ透過光は液晶、エ紫外線で蛍光体はプラズマ。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1103e1ca73508662c62c9ac31a79e150f4cba4df51bf70d19ae2d7d8aa859557"
+  },
+  {
+    "id": "r05h-q13",
+    "officialAnswer": "イ",
+    "independentResult": "scale-inは並列サーバ台数を減らす。アはscale-down、ウはscale-out、エはscale-up。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "871e11f743bebb083f84cf05ee2e5b399beac0afbc1cdfe30abfee598fd9ce07"
+  },
+  {
+    "id": "r05h-q14",
+    "officialAnswer": "イ",
+    "independentResult": "CPU A0-3,B3-15、disk A3-10,B15-25。完了25秒、CPU15/25=.60、disk17/25=.68。32秒/19秒/17秒の分母は実時間でない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "92d371fec93fd62f2af2bb43819aed01646b545ff5296e7fb5be28c64395b245"
+  },
+  {
+    "id": "r05h-q15",
+    "officialAnswer": "エ",
+    "independentResult": "フォールトトレランスは多重化等で故障しても継続。アはフォールトアボイダンス、ウはフォールトトレランスと逆。フェールセーフは安全側停止、ソフトは能力低下して継続。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "56350509b52f9226eee96b1cb68b0741d54d83de716682eb63a85c735b685179"
+  },
+  {
+    "id": "r05h-q16",
+    "officialAnswer": "エ",
+    "independentResult": "A=(x+y-xy)z、B=xz+y-xzy。B-A=y-yz=y(1-z)>0なのでBが常に高い。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f7d9083722c653cbdfa0265f169bd28fd2e65d02e483f5fcb125a78b49a7db64"
+  },
+  {
+    "id": "r05h-q17",
+    "officialAnswer": "ウ",
+    "independentResult": "FIFOはロード順で追出し。1,4,2ロード後4,1のhitでも順序は変わらず、3で最初の1を置換、枠[3,4,2]。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "8082f73c4081dd1855c6a6cf8f1a079b88005ff75aff5fe8ff48a9e1986969a8"
+  },
+  {
+    "id": "r05h-q18",
+    "officialAnswer": "ア",
+    "independentResult": "LRUは最後の参照から最も長く経過したページを置換。ページテーブルは仮想頁、ページフォールトはディスクから頁ロード、固定頁で外部断片化は起こらず内部断片化があり得る。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6e0d552b7e895938a19c54020d520563c2b92d831e0fd113ed140e9d2e15d1e7"
+  },
+  {
+    "id": "r05h-q19",
+    "officialAnswer": "エ",
+    "independentResult": "衝突なしならhash値から直接位置にアクセス、1件の探索時間O(1)、水平のエ。アは増加加速、イ線形、ウ増加減速。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ad4f221a2b4cb8ecbcb2010d602b32905e0fda6c4e6b0c947bf5408537ef777d"
+  },
+  {
+    "id": "r05h-q20",
+    "officialAnswer": "ア",
+    "independentResult": "Dockerはコンテナアプリ構築実行管理。KVMはカーネル仮想化、QEMUはエミュレータ、Xenはハイパーバイザ。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "feada766869f056450ee34624dfe127fdf9ce81d406d7e0f018255621d4b4572"
+  },
+  {
+    "id": "r05h-q21",
+    "officialAnswer": "イ",
+    "independentResult": "NAND同入力はnot X/not Y、最後NANDはnot(not X and not Y)=X or Y。ア積、ウNAND、エNORとは真理値が異なる。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ed0d6d970278c0c2761f4cb270c5a736bdcf97ce10ff041c4bb5558ac0eca992"
+  },
+  {
+    "id": "r05h-q22",
+    "officialAnswer": "ア",
+    "independentResult": "ダイオードのカソード線は上の出力側、アノードは接地側。負入力時順方向導通で0V、正入力時逆方向で入力がそのまま。負だけ残るイ/直流offsetウ/全波エは異なる。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "32beca2cb046d8e2676e464de3e96e464115588b9fe2536787325cdb9732cd36"
+  },
+  {
+    "id": "r05h-q23",
+    "officialAnswer": "エ",
+    "independentResult": "LiDARはLight Detection and Ranging、レーザーパルスの反射から距離方向形状。ア超音波、イ画像遠近法、ウミリ波レーダ。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1e2952a39638e43594757c5c34d943b7852732f2596d640c4cbe4ce32b724074"
+  },
+  {
+    "id": "r05h-q24",
+    "officialAnswer": "エ",
+    "independentResult": "NFCにはリーダライタ、カードエミュレーション、peer-to-peerのモード。非接触・数cm程度なのでアtouch位置、イ接触、ウ10mは不適合。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ef50d76196242caa965fcafab702e53824435033912ba5547e98a1142c28641f"
+  },
+  {
+    "id": "r05h-q25",
+    "officialAnswer": "ウ",
+    "independentResult": "ラジオシティは拡散面間の相互反射を考慮。アはレイトレーシング、エはtexture mapping。メタボールは暗黙曲面で形状表現、イの輝度計算は別。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "965f16cb6acd598b344673a67992e1ff597e778a86b7df847adf79897247d7e9"
+  },
+  {
+    "id": "r05h-q26",
+    "officialAnswer": "ウ",
+    "independentResult": "図1は品名/文字価格/配列、図2は商品名/数値価格/生産地/URL。構造と型が予測不可かつ検索キー無制限なので商品単位JSONを保持するdocument DB。固定2階層アは配列に不適合、イは項目集合と値集合の対応失う、エは事前列定義が不適合。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "95a1a5b90fd3bde0b5b61b637b5951e8e8d95fa1f3c8b62393bb35510da4553a"
+  },
+  {
+    "id": "r05h-q27",
+    "officialAnswer": "エ",
+    "independentResult": "誤り選択。データ変更で自動起動はトリガー。stored procedureはDB側定義をCALLで呼出し、SQL個別送信と通信量を減らすのでア/イ/ウは正しい。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "39bf6d3e244218e4a79ccb83bca94f90494830d8e9a750068dee9eeae0e962e3"
+  },
+  {
+    "id": "r05h-q28",
+    "officialAnswer": "ア",
+    "independentResult": "idempotentはf(f(x))=f(x)、何回でも一回と同じ。イatomicity、ウreplication、エserializability。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "4786cff4b7569b859866ce15c6fa022fd8ebc097df688a171274d0c99af2d627"
+  },
+  {
+    "id": "r05h-q29",
+    "officialAnswer": "エ",
+    "independentResult": "a,bは所属履歴側の多重度。各部門は現社員1人以上ゆえ履歴も1以上、各社員は必ず現所属ゆえ履歴1以上、異動複数も可能。双方1..*。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "548c92ac1c88f52eb9e4f3987f1bdd731b56fa0a4648b06a27a4fdb664f9065c"
+  },
+  {
+    "id": "r05h-q30",
+    "officialAnswer": "ア",
+    "independentResult": "注文削除に対応する子明細の連鎖削除はON DELETE CASCADE。INTERSECTは集合積、RESTRICTは親削除拒否、UNIQUEは一意制約。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ceac1ea60683547c541473bec1ba73e009e7e03d71b04e831444b1de28df30f2"
+  },
+  {
+    "id": "r05h-q31",
+    "officialAnswer": "イ",
+    "independentResult": "通信PLCはPower Line Communication、既設電力線で通信。アVoIP、ウWi-Fi、エ無線暗号。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6e77119e5e4b3ebf22f0373d91491d407339fbbaec1bddca3803e37ccb5b2155"
+  },
+  {
+    "id": "r05h-q32",
+    "officialAnswer": "ウ",
+    "independentResult": "1250byte=10000bit。100Mは0.1ms/packet、1Gは0.01ms。間隔は双方同じで相殺、N×0.09ms=9ms→100。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f18df3eb941e7838e9599e17e4e8cbebad938626364afd94b9c9e798358c5888"
+  },
+  {
+    "id": "r05h-q33",
+    "officialAnswer": "ウ",
+    "independentResult": "外側からEthernet header宛先MAC、IP header宛先IP、TCP header宛先portの送出順。ア/イはIP先行、エはTCPがIPに先行。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "307a0af9871da13b929ca1247074409d38d6f96205eeda81e8d498dc3c434da5"
+  },
+  {
+    "id": "r05h-q34",
+    "officialAnswer": "エ",
+    "independentResult": "UDPはtransport層。HTTP/SMTPはapplication、ICMPはnetwork層。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c890a0f6ab0ba8082c76ded8cb33342e3a05f05e291ecea102519d3b0c3f42c1"
+  },
+  {
+    "id": "r05h-q35",
+    "officialAnswer": "イ",
+    "independentResult": "接続維持で基地局を切替はhandover。tetheringは端末共有、fallback代替/下位方式、roaming他事業者網利用。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e7db23ca8000325a1edb80929852697f6ebf3c5a6dd84e37ed367db882b60748"
+  },
+  {
+    "id": "r05h-q36",
+    "officialAnswer": "ア",
+    "independentResult": "C&C=Command and Control、botへの情報収集・攻撃指示。イ遮断は防御装置、ウ証明書はCA関連、エweb素材一元管理はCMS。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1d185f63acb8afc1f13ae9f362b86fcc9e97b8ecc0c17fcd5a3bdf99d989e45b"
+  },
+  {
+    "id": "r05h-q37",
+    "officialAnswer": "ウ",
+    "independentResult": "secure OSの強制アクセス制御は侵入者でも規定のファイル更新を禁止。アSSO、イWAF、エ多要素認証。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b30055c439f75a74d57c8c7b56f85a0026dee13b4526a92cc8f50178903c28a4"
+  },
+  {
+    "id": "r05h-q38",
+    "officialAnswer": "ウ",
+    "independentResult": "署名生成は送信者秘密鍵、検証は送信者公開鍵を受信者が使用。受信者鍵のア/イは署名の持主が違い、エは署名生成鍵で検証鍵でない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "a98b37107146e9ceff32ad92ba755f0f4b9e1182291dc705648e9c39f6f5765e"
+  },
+  {
+    "id": "r05h-q39",
+    "officialAnswer": "ウ",
+    "independentResult": "ISMAPは政府security要求を満たすcloudを事前評価登録し政府調達水準を確保。ア個人情報mark、イ越境個人data、エ国際規格ベース管理体制は制度説明不適合。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "99622383bd3bb1d5fc7defce4d666041412a1504ec2829d1179d9f9b802c9a31"
+  },
+  {
+    "id": "r05h-q40",
+    "officialAnswer": "イ",
+    "independentResult": "CVEは個別既知脆弱性の一意ID。CCE構成設定、CVSS重大性スコア、CWE弱点の種類。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "37264186e76edbb11d016bd8cdaca9db2447a6991b303d7ded71d4166d69d11c"
+  },
+  {
+    "id": "r05h-q41",
+    "officialAnswer": "ア",
+    "independentResult": "TPMはtrusted platformのセキュリティチップ、鍵生成hash暗号。イ送信domain認証、ウUTM、エSIEM。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "68655e1af9f430fade502c686500038c6cc8a0a43f4efd084a59a5598c71dedd"
+  },
+  {
+    "id": "r05h-q42",
+    "officialAnswer": "イ",
+    "independentResult": "forensicsは証拠収集・復元・分析報告。disk削除log復元して痕跡を発見は該当、アSIEM、ウ漏洩防止、エmalware検知。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "540f074c6b448ca9b5b177dd3e323e2998766875cf3d2378e6af02674cb538c2"
+  },
+  {
+    "id": "r05h-q43",
+    "officialAnswer": "エ",
+    "independentResult": "AP隔離機能で同APの端末間アクセスを防げる。MAC偽装はfilter突破、SSIDを暗号化しない、登録ドメインでもSSIDコピーを防げない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "bde760aeee41532fc25fc532a54d9e8c27318850bd9a8d21784bdd42610f0fe8"
+  },
+  {
+    "id": "r05h-q44",
+    "officialAnswer": "エ",
+    "independentResult": "submission587は送信受付と転送25を分けSMTP-AUTHで利用者認証。アSPF、イDKIM、ウPOP before SMTPは目的方式でない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "945926304b7fcdd8c96b8ec15ac9e0a3ac3c1bbbcd67c96d898feca680e1c342"
+  },
+  {
+    "id": "r05h-q45",
+    "officialAnswer": "エ",
+    "independentResult": "席が変わるため認証で利用者PCに動的VLAN割当→幹部IPセグメント。静的VLANはport固定、IDS検知、IPmasquerade住所変換。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "1509305fa4960b1ff901ac571954bdf63982220e82bc41fa2d67850b5fa33097"
+  },
+  {
+    "id": "r05h-q46",
+    "officialAnswer": "ウ",
+    "independentResult": "必要dataのみ引数で渡すdata couplingが最も低い。ア/エは共有data依存、イ制御結合。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "4fb479cc0ffea876e8fd355c55fd5f3daba04496a807ddf9287b3b883343ef98"
+  },
+  {
+    "id": "r05h-q47",
+    "officialAnswer": "ウ",
+    "independentResult": "条件列YYY,YYN,YNY,YNN,NYY,NYN,NNY,NNNの各Y数3,2,2,1,2,1,1,0で割引9,6,6,3,6,3,3,0%。アは列3/5/7、イ列2/3/4/7、エ列2/3/4/5/7が誤り。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "32ba182386f0979fab389fbe14bd4ea9446728803ad99db165556d7c0ee08a74"
+  },
+  {
+    "id": "r05h-q48",
+    "officialAnswer": "イ",
+    "independentResult": "開始planning1、日々daily4、成果確認review3、改善retrospective2で1→4→3→2。他は開始前daily/最後reviewが誤り。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "494ffeb556c11693869e6dc5b3b0288f08d81e4e511bbc338e171eededb2ec55"
+  },
+  {
+    "id": "r05h-q49",
+    "officialAnswer": "イ",
+    "independentResult": "日本国内で業として製造は全輸出でも日本特許実施。ア個人的利用、ウ通常出願20年満了後、エ出願以前独自に事業していた先使用権は許諾不要。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "76849834adffef871b04c6ace57ced91a17257fe4262801026eaa5d1f502b7cd"
+  },
+  {
+    "id": "r05h-q50",
+    "officialAnswer": "エ",
+    "independentResult": "provisioningは構成を予め記述してserver自動構築。ア稼働監視、イ資産管理、ウ性能管理。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "ba736d91f1acdd7615d353896ec211c93c930bc7bc51a441fc1a604175a4835d"
+  },
+  {
+    "id": "r05h-q51",
+    "officialAnswer": "エ",
+    "independentResult": "charterはproject正式認可とmanager責任権限。アmanagement plan、イscope statement、ウWBS。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "5a09beef56d459cc4ee1a3f5a3e84f8b315b2acd9bf825611096c733409e38af"
+  },
+  {
+    "id": "r05h-q52",
+    "officialAnswer": "ア",
+    "independentResult": "非critical chainからcritical chain合流直前はfeeding合流buffer。資源bufferは資源待ち備え、frameは画像memory、project bufferは末尾。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "bdeebd806b81089c2bbae556bec93eb236e07c154db583636880938604b290ba"
+  },
+  {
+    "id": "r05h-q53",
+    "officialAnswer": "イ",
+    "independentResult": "日数なので期間比。前半.25+.21+.11=.57が228日→総400日。残program half=.055×400=22、結合.11×400=44、test.21×400=84、残150日。工数比を使わない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "5889fb6a0896282f29b42050d01409e847ded047e0ef126acb7f9c1ecfeb719c"
+  },
+  {
+    "id": "r05h-q54",
+    "officialAnswer": "エ",
+    "independentResult": "Delphiは専門家見解を要約再配布して反復収束。アMonte Carlo、イchecklist、ウbrainstorm。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f9aa9d2d1b517f4d0b8cc0085a73d0292148009739c8539a19a5239a271b8159"
+  },
+  {
+    "id": "r05h-q55",
+    "officialAnswer": "エ",
+    "independentResult": "継続的改善はperformance向上の反復活動。アprocess、イservice management、ウservice continuity。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7c464b672fe8acaa570cb3f680aea0814d320c5ae37f5bbe7964191d846b8b2e"
+  },
+  {
+    "id": "r05h-q56",
+    "officialAnswer": "イ",
+    "independentResult": "JIS service level performance reviewは予め定めた間隔。変更/未達イベント時のみではなく、必要時任意でもない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "b1dcb1e452a71d75dbbeb3e1a22ea69a4dafee3be9ecdaaa97ba8307ca340e88"
+  },
+  {
+    "id": "r05h-q57",
+    "officialAnswer": "ウ",
+    "independentResult": "IaaSでphysical②起停③ランプは提供者管理、PaaSでmiddleware④patchも提供者へ。①業務batch監視は利用企業に残る。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "66c776ae8de18f6e6ebf17f70478fb1b4b3a5fe7035e916a470b15d0c3b8a6f4"
+  },
+  {
+    "id": "r05h-q58",
+    "officialAnswer": "イ",
+    "independentResult": "予備調査は文書manual等で業務体制を把握。現地必須でなく関連部門も可、十分証拠で結論は本調査。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6eb33037fed39a48f874ff62cca5bdf2c73d80137c6325e8b730ff1aff697744"
+  },
+  {
+    "id": "r05h-q59",
+    "officialAnswer": "ア",
+    "independentResult": "interviewは監査人が関係者へ口頭質問。現地は実際稼働観察も必要、CAATは汎用softwareも可、checklistは監査人作成使用。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "0e98bf264adb8900d360ccca58f1d400d115b233d2ae2218fe60d853c280c62d"
+  },
+  {
+    "id": "r05h-q60",
+    "officialAnswer": "エ",
+    "independentResult": "内部監査人はmonitoringとして内部統制を検討評価し改善促進。ア最終責任は経営者、イ基本方針は取締役会、ウ独立監視は監査役。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "361232dbabfd52b2314619a60fbdc475cd070e8a6b91b2353eca8cc0860eecb6"
+  },
+  {
+    "id": "r05h-q61",
+    "officialAnswer": "ア",
+    "independentResult": "ROI=創出利益/投資額。イ投資比較、ウNPV、エ非実施時競争力。修復crop全選択肢を確認。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "f018fda316c734cf0915c00f67f6c271bdedb81893548827aa72921600b1615b"
+  },
+  {
+    "id": "r05h-q62",
+    "officialAnswer": "ア",
+    "independentResult": "CXは顧客自身が購入使用利用で得る満足感動。トラブルのみイや履歴数値ウや接客側経験エとは異なる。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "a9367c9ada9b267ecfdda525cceb210acd5ceb0fb81bf7b33c94fe2f8fd38a3b"
+  },
+  {
+    "id": "r05h-q63",
+    "officialAnswer": "ウ",
+    "independentResult": "情報銀行は個人契約で個人情報を預かり本人指示/条件で他事業者提供。ア金融営業分析、イ公共open data、エ産業data市場。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c6aec0d88cf6d2958d25d75e171a8026042f6a0263a024075c41e9f5260e1e08"
+  },
+  {
+    "id": "r05h-q64",
+    "officialAnswer": "エ",
+    "independentResult": "traceabilityは要求根拠と成果物相互関係を追跡でき仕様変更を検証。アmanual完了、イvendor変更禁止、ウmodule変更禁止は追跡性でない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "d992473d5c574481f8099de76ae0e5bedb763de80504818e2674bbe530325f57"
+  },
+  {
+    "id": "r05h-q65",
+    "officialAnswer": "ア",
+    "independentResult": "RFIはRequest For Information、候補者へ必要情報提供依頼。イRFP、ウ契約変更、エ契約締結。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7f9b9b05c73617f4431ee22a3e8ae35b269a553b48972d46a8db32291811b2d9"
+  },
+  {
+    "id": "r05h-q66",
+    "officialAnswer": "エ",
+    "independentResult": "見積依頼に必要なのは対象要件を提示する要件定義書。納品書は引渡、評価仕様はtest、見積書はvendor回答。修復画像下端全四択確認。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fcdc7bd90d6ea971f368ebff7bc28163507a608f428ec608f3872d2aadc23e11"
+  },
+  {
+    "id": "r05h-q67",
+    "officialAnswer": "ウ",
+    "independentResult": "ROAS=広告経由売上/広告費×100=(1500×1000)/600000×100=250%。ア40は逆数、イ60/エ600は与条件の比と異なる。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "a1e0105182c47e2734c89cb919284f58cf3374eb09b83dc9002df7f80daafaaf"
+  },
+  {
+    "id": "r05h-q68",
+    "officialAnswer": "イ",
+    "independentResult": "BSC戦略mapは財務、顧客、内部process、学習成長4視点で因果関係。アpositioning map、ウportfolio、エbusiness model。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "baf6600f7439318adc429e6b3f0d57fe4f6ff66e3bf234dd01a9ad80e0a584d0"
+  },
+  {
+    "id": "r05h-q69",
+    "officialAnswer": "イ",
+    "independentResult": "feasibility studyは採算実行可能性を調査分析評価。ア投資実行、ウidea募集、エ教育は実行可能性評価でない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "d6e08faa5cb48c4fef4071da742678abbd7c63ebb9b26789f58a9bc5b1178ec9"
+  },
+  {
+    "id": "r05h-q70",
+    "officialAnswer": "ウ",
+    "independentResult": "共同研究は費用全額企業でも大学企業研究者は対等。TLOは技術移転（共同研究窓口ではない）、発明者は自然人で法人でない、国立大学でも全費用国負担義務ない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "6a2e6c107767bdf5396215c9f1d8b10b381e2eb8da0fb920874efcbd46a12c44"
+  },
+  {
+    "id": "r05h-q71",
+    "officialAnswer": "イ",
+    "independentResult": "energy harvestingは周囲の振動熱光電磁波の微小エネルギー収集→電力。ア使用最適化、ウPoE、エ間欠稼働。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "e74f8f909494c8c767a4331781bf3748f5ae20a02abf05de4a6c4b8ebab7eacc"
+  },
+  {
+    "id": "r05h-q72",
+    "officialAnswer": "ウ",
+    "independentResult": "aggregationは分散事業者機能への一括accessを提供し比較まとめ統一制御最適組合せ。アomnichannel、イescrow、エfranchise。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "7ca54026279081cbdd7ea269a6ff67ce62fb9c478980e0e831f2890e81b37b3c"
+  },
+  {
+    "id": "r05h-q73",
+    "officialAnswer": "エ",
+    "independentResult": "現実機器dataをvirtual modelへ随時反映するdigital twin。server仮想化は仮想VM、smartgridは電力網、smartmeterは検針。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "fee2129dac790a0c092de9c1ba950e79efc529deaea23184a9ccc0c18d26a9c6"
+  },
+  {
+    "id": "r05h-q74",
+    "officialAnswer": "ウ",
+    "independentResult": "division組織は製品地域別単位に利益責任。アproject、イ機能別、エnetwork組織。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "c87008d97f4814b740363db80f0307bb7572add7534db473f7e3fa009511642f"
+  },
+  {
+    "id": "r05h-q75",
+    "officialAnswer": "ウ",
+    "independentResult": "後向き計算。a追加期待200×.3+100×.7−60=70>50、a全体70×.4+120×.6−30=70。b追加150×.4+100×.6−40=80>70、b全体80×.3+140×.7−40=82。b82を選ぶ。160/162は費用を適切に差引いていない。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "724e7f7622e85c2d43c48164e2027a339d35b3bf3afbdfcc13485c9082de2d88"
+  },
+  {
+    "id": "r05h-q76",
+    "officialAnswer": "ア",
+    "independentResult": "製造機械修繕は通常製造経費。台風損失は異常損失、賃貸倉庫は製造外、支払利息は財務費用で非原価。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9799a7c48fceaaae79cfd880d0e64f44ce52d5c829aa20dc82bbd1e0e0734c00"
+  },
+  {
+    "id": "r05h-q77",
+    "officialAnswer": "エ",
+    "independentResult": "利益=売上−.6売上−150=50、売上=(150+50)/.4=500百万円。333/425/458では目標利益に不足。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "174b822411d40da61cb21e4e4c342846ed31a79ca5f7f44908b991bdf07266f8"
+  },
+  {
+    "id": "r05h-q78",
+    "officialAnswer": "イ",
+    "independentResult": "2023出題当時下請法。未確定事項は後日補充書面の交付が必要で口頭のみは禁止。継続共通事項の事前書面、省略可。協議追加費用加算は可。当時の事前書面合意・実費振込手数料控除は可。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9437e531184afa331bf55e146c9a34df40cd14cdc89c8da192a39701ddb7917d"
+  },
+  {
+    "id": "r05h-q79",
+    "officialAnswer": "エ",
+    "independentResult": "派遣元は雇用主として教育訓練福利厚生。ア派遣先管理台帳、イ派遣先責任者、ウ指揮命令者への契約周知は派遣先。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "9fc97c07c8f55c923e2b5502cec15fcc1c32ecb1a33ec6f70ad35f499a6cd102"
+  },
+  {
+    "id": "r05h-q80",
+    "officialAnswer": "エ",
+    "independentResult": "groupthinkは強い結束集団が批判思考を欠き不合理合意。ア自己中心視点、イ権威服従、ウ実行勇気欠如。",
+    "issues": [],
+    "status": "confirmed",
+    "reviewedLessonSHA256": "be1368d09a8cd3785798f9d01b6d757554b243649bd67f0db067a703e96d7ab2"
+  }
+]

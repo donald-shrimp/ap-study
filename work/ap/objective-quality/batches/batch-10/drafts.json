@@ -1,0 +1,1382 @@
+[
+  {
+    "id": "r05a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "109b44807e7921d3da7f94ca65f7f79f64787ef8e8c77f009b7c626987ffb682",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q17",
+      "summary": "高優先度の周期タスクによる割込みを時間軸に並べ、低優先度タスクが周期内に完了できる組合せを判定する。",
+      "explanation": "Aが高優先度なので、同時に起動した場合はAを先に実行し、その後もAの周期ごとにBが中断されます。\nアではAを0〜2、Bを2〜4、Aを4〜6、Bを6〜7に実行でき、Bの実行時間3を周期8内で確保できます。\nイではAを0〜3と6〜9に実行するため、Bの4ミリ秒目は9〜10となり期限9を超えます。ウはAを0〜3、5〜8、10〜13に実行し、Bの完了は14。エはAを0〜4、6〜10、12〜16に実行し、Bの完了は17です。",
+      "choiceReasons": [
+        "Bは2〜4と6〜7に合計3ミリ秒実行でき、完了7は周期8以内です。",
+        "Bは3〜6の3ミリ秒だけでは足りず、残り1は9以後になります。完了10は周期9を超えます。",
+        "Bは3〜5と8〜10で4ミリ秒実行しますが、残り1は13以後です。完了14は周期13を超えます。",
+        "Bは4〜6と10〜12で4ミリ秒実行しますが、残り1は16以後です。完了17は周期15を超えます。"
+      ],
+      "takeaway": "高優先度タスクの周期的な割込みを時間軸に置き、低優先度の実行時間を積み上げる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "優先度はAが上なので、同時に処理可能ならAを先に実行します。各肢の最大実行時間・周期（ともにミリ秒）から、Aの稼働区間を時間軸に描いてください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "BはAが走っていない区間だけ処理できます。例えばアならAは0～2、4～6、8～10…に動き、Bはその合間に3ミリ秒分の実行時間を積み重ねます。中断してもBの残りは消えません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アのBは2～4で2ミリ秒、6～7で残り1ミリ秒を実行し、開始から7ミリ秒で完了します。周期8以内です。他の3肢でもAの割込みを時間軸に入れるとBの期限を超えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CPU使用率だけで可否を決め、Aの周期的な割込みとBの処理の再開を追えない。",
+      "stages": [
+        {
+          "newInformation": "優先度による実行の先後と周期・実行時間の違い",
+          "remainingWork": "各肢のAの実行区間を列挙する",
+          "revealsAnswer": false,
+          "reason": "方式の前提のみで正答を確定しない"
+        },
+        {
+          "newInformation": "Aの繰返し実行区間とBの残り時間の追い方",
+          "remainingWork": "アのBがいつ完了するか計算し他肢にも適用する",
+          "revealsAnswer": false,
+          "reason": "例示のアに対してBの合計時間の計算が残り、全肢を比較する必要がある"
+        },
+        {
+          "newInformation": "アでのBの完了時刻と他の組合せの期限超過",
+          "remainingWork": "他3肢が期限超過となることを確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢を特定し完了時刻まで示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q17.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=1f7e4225f687e3b14ad0756a91f7719a01456ee63fe81cc02e756d8775788914。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原本の表4組(A/Bの最大実行時間と周期)を確認。Aを周期ごとに優先実行するとB完了はア7/8、イ10/9、ウ14/13、エ17/15。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ddc651f74164577571317186de0555d04835bcb9cb739a3a4bdd02c304bf5d75",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q19",
+      "summary": "関数別の呼出し回数・実行時間を計測する性能分析ツールと、実行環境の模擬や不具合調査のツールを区別する。",
+      "explanation": "プロファイラはプログラムの実行状況を測定し、関数ごとの呼出し回数・実行時間などを収集するツールです。時間を多く使う箇所を見つけ、性能改善の対象を絞れます。\nデバッガは誤動作の原因を調べるための実行停止や変数確認、エミュレータは別の実行環境の再現、シミュレータはモデルの動作を模擬する用途です。",
+      "choiceReasons": [
+        "アのエミュレータは別の機器や実行環境を再現します。実行統計を集めるツールの名称ではありません。",
+        "イのシミュレータは対象のモデルを模擬します。関数ごとの性能統計を集める目的とは異なります。",
+        "ウのデバッガは停止・ステップ実行などで不具合を調べます。設問の目的は性能の分析です。",
+        "エのプロファイラは実行回数や時間などを測定し、ボトルネックを調べます。"
+      ],
+      "takeaway": "不具合の調査はデバッガ、実行時間の分析はプロファイラ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問は、実行中の関数ごとの呼出し回数や累積時間を測り、どこを高速化するか判断するための情報を求めています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "エミュレーターは別環境の動作を再現し、シミュレーターはモデルの振る舞いを模擬します。デバッガはブレークポイントや変数表示を用いて不具合を追います。性能統計の収集が主目的のツールと区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "プロファイラは関数別の実行回数や所要時間を集計し、時間を使っている処理（ボトルネック）を見つけます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "デバッガと性能分析ツールを、どちらもプログラムの動きを調べるものとして混同する。",
+      "stages": [
+        {
+          "newInformation": "収集したい統計と性能改善の目的",
+          "remainingWork": "4種類のツールの利用目的を比較する",
+          "revealsAnswer": false,
+          "reason": "実行統計という要件だけでは製品・ツール名は指定しない"
+        },
+        {
+          "newInformation": "3つの誤答ツールの役割",
+          "remainingWork": "残る選択肢と測定目的の一致を考える",
+          "revealsAnswer": true,
+          "reason": "誤答3肢を除外でき正答が一つに決まる"
+        },
+        {
+          "newInformation": "プロファイラの名称と性能分析の使い方",
+          "remainingWork": "正答を選択肢に対応させる",
+          "revealsAnswer": true,
+          "reason": "正答名称と定義を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=169d6040e6ca6726b116733da4f4cb6903205ffb6c1ef96ab552a0a590af1252。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本の4肢を確認。プロファイラは性能統計収集、デバッガは不具合調査、エミュレーター/シミュレーターは模擬用途。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7865e0845495e718d71174092a44ea0d2a25aa1e47d87b0634bbb047fafe918c",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q15",
+      "summary": "密結合マルチプロセッサのCPU数を増やしても、処理能力が比例増加しない原因となる共有資源を見分ける。",
+      "explanation": "密結合マルチプロセッサは主記憶を共有します。複数プロセッサが同時にメモリやバスへアクセスすると待ちが発生し、台数に比例した処理性能になりません。",
+      "choiceReasons": [
+        "共有主記憶の帯域を争うため、台数増加による性能向上を妨げます。",
+        "通信回線を介する分散型の構成で問題になる要因です。",
+        "ディスパッチの負荷はありますが、密結合で台数比例を妨げる共有資源の本質的要因ではありません。",
+        "割込みは一台でも発生し、共有主記憶競合ほど構成固有の要因ではありません。"
+      ],
+      "takeaway": "密結合では共有するメモリやバスがボトルネックになる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "密結合マルチプロセッサは複数のプロセッサが**主記憶を共有**して動く構成です。CPUが増えても、共有設備の処理能力は自動的に台数倍にはなりません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば複数CPUが同時に主記憶へデータを読み書きしようとすると、メモリの転送帯域やバスの利用待ちが発生します。CPUが空いていても待ち時間が生じる理由を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この構成で特に台数比例を妨げるのは**主記憶へのアクセス競合**です。『通信回線を介したCPU間通信』は別の構成を想定する記述です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "密結合の『主記憶共有』という構成を知らず、全体性能を単純なCPU性能×台数と考えてしまう。",
+      "stages": [
+        {
+          "newInformation": "密結合で主記憶を共有するという構成",
+          "remainingWork": "共有資源を各肢と照合する",
+          "revealsAnswer": false,
+          "reason": "共有する対象は教えるが妨げる要因の選択が残る"
+        },
+        {
+          "newInformation": "共有メモリ帯域の競合による待機",
+          "remainingWork": "競合を述べる肢を特定する",
+          "revealsAnswer": true,
+          "reason": "正答の『主記憶アクセス競合』を具体的に説明している"
+        },
+        {
+          "newInformation": "正答肢の競合と別構成の通信の区別",
+          "remainingWork": "他の一般的処理との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答の語をそのまま渡す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=7a6723a7b8dc97de9904dd0792f092b3d4f44c5d14bd5eda822c79616080b352。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原本では『性能が積に等しくならない要因』と否定形。密結合の共有主記憶が帯域競合を受ける点を照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b38a604965d59f7491f63e478c12ffb38f4ea9d7b53ab9dcc0beb716f2026b7a",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q15",
+      "summary": "アクティブ・スタンバイでのサービス停止時間を修理時間と切替え時間に分け、稼働率を求める。",
+      "explanation": "二重に障害は発生しないので、稼働中サーバが故障しても切替え後は待機側で処理を続けられます。故障したサーバの修理10時間全体がシステム停止時間になるわけではありません。\nシステムの平均稼働時間99時間に対し、故障時の停止はフェールオーバーの2時間です。稼働率=99/(99+2)=99/101≒0.9802なので約0.98です。",
+      "choiceReasons": [
+        "0.82は条件の稼働時間99と停止時間2から求める値と合いません。二重障害なしでは両サーバ故障による長い停止を加える必要はありません。",
+        "0.89は99/(99+10+2)に近い値ですが、切替え後の修理時間をシステムの停止として加えることはできません。",
+        "0.91は単体の99/(99+10)に近い値です。待機側への切替えで停止時間が短くなる条件を反映していません。",
+        "99/(99+2)≒0.98で、切替え時間だけを停止時間として計算しています。"
+      ],
+      "takeaway": "冗長システムは部品の修理時間とサービス停止時間を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "MTBFは平均故障間隔、MTTRは平均修理時間です。稼働率は一般に**稼働時間÷（稼働時間＋停止時間）**で計算します。どの時間がサービス停止に相当するかを整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アクティブ側が故障しても、二重障害がない条件では待機側へ切り替えればサービスを再開できます。修理10時間の全てではなく、**フェールオーバーの2時間**をサービス停止として扱います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "稼働時間99時間と停止時間2時間を式に入れると、99÷(99＋2)=99/101≒0.9802。小数第2位では0.98です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "部品のMTTR=10時間をシステム全体の停止時間にそのまま足してしまう。",
+      "stages": [
+        {
+          "newInformation": "MTBF・MTTRと稼働率の式",
+          "remainingWork": "構成の故障時の処理継続を考える",
+          "revealsAnswer": false,
+          "reason": "一般式を示しどの時間を使うかは本人が決める"
+        },
+        {
+          "newInformation": "冗長系で修理時間と停止時間が異なる理由",
+          "remainingWork": "稼働率の式に99と2を当てはめて算出する",
+          "revealsAnswer": false,
+          "reason": "システム停止となる2時間は示すが比率の計算はまだ残る"
+        },
+        {
+          "newInformation": "停止時間2と稼働時間99の代入結果",
+          "remainingWork": "選択肢の近似値を判断する",
+          "revealsAnswer": true,
+          "reason": "最終数値を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=f7c3bef52f19f98628ebc5d103ec3d51bf7cc77cfe4ff0d5dc448a28bbf220aa。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のMTBF99時間・MTTR10時間・切替え2時間・二重障害なしを確認。99/(99+2)≒0.9802。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "40b7eb70112f5599b6d1d641ff8bfeb12ac900510a9f2d3da90c0cce650d02c1",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q15",
+      "summary": "解析式で解けない複雑なモデルについても、模擬実行から数値を推定できるかを判断する。",
+      "explanation": "シミュレーションはモデルの動作を計算機で再現し、処理時間や待ち時間などを数値として評価します。複雑で解析式を導けないモデルにも使える点が特徴です。\n一方、繰返し実行に多くの計算が必要なことがあり、乱数による結果には統計的な誤差もあります。解析解があるモデルと照合し、モデルや実装を検証する用途にも使えます。",
+      "choiceReasons": [
+        "アは計算量が必ず少ないとしていますが、多数の試行で大きくなる場合があります。",
+        "イは乱数を使えば高精度になるとしていますが、試行数やモデルによる誤差が残ります。",
+        "ウは解析的に解けないモデルにも数値的な評価が可能という特徴です。",
+        "エは誤りです。解析解とシミュレーション結果を比較して検証できます。"
+      ],
+      "takeaway": "シミュレーションは解析式の難しいモデルにも使えるが、計算量と誤差の確認が要る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "解析的な方法は数式を解いて性能を求める方法です。シミュレーションはモデル内の到着や処理を繰り返し再現し、待ち時間などを数値で観察します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば待ち行列の条件が複雑で解析的に解を導けなくても、到着・処理を模擬して結果を集計できます。ただし試行回数が必要で、乱数を使った結果にはばらつきがあります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "したがって『解析的に解けないモデルにも数値的な解を求められる』という特徴を選びます。解析解があるモデルとの比較検証にも使え、速度や精度が常に優位とは限りません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "シミュレーションが解析法より速い・乱数を使えば正確だと誤解する。",
+      "stages": [
+        {
+          "newInformation": "解析とシミュレーションの実施方法",
+          "remainingWork": "4肢の『必ず』『できない』の断定を確認",
+          "revealsAnswer": false,
+          "reason": "手法の一般的定義だけでは4肢のどれかは確定しない"
+        },
+        {
+          "newInformation": "解析解なしでも数値評価できる能力と試行誤差",
+          "remainingWork": "選択肢から該当記述を探す",
+          "revealsAnswer": true,
+          "reason": "正答肢と実質同じ能力を説明している"
+        },
+        {
+          "newInformation": "正答肢の内容と他の断定の誤り",
+          "remainingWork": "該当する文字を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答内容を言い換えて明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=cadd68dc833f3411eaef825c008ae841f6a761b450efeba995586af496b4f162。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本4肢の比較。乱数自体が高精度を保証しないこと、解析モデルの検証に使用可能なことを確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "56350509b52f9226eee96b1cb68b0741d54d83de716682eb63a85c735b685179",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q15",
+      "summary": "フォールトアボイダンス、フェールセーフ、フェールソフト、フォールトトレランスの目的を区別する。",
+      "explanation": "フォールトトレランスは、故障が発生しても必要な機能を継続するための考え方です。重要部品を多重化し、一つが故障しても別の部品で処理できるようにするのはその代表的な技術です。部品自体の信頼性を高めて故障を減らすフォールトアボイダンスとは区別します。",
+      "choiceReasons": [
+        "故障を起こさないよう信頼性を高めるのはフォールトアボイダンスです。フェールセーフは故障時に安全側へ移行します。",
+        "フェールソフトは機能・性能を落として継続する考え方で、ソフトウェア起因だけに限定しません。",
+        "故障後も継続できるようにするのはフォールトトレランスです。",
+        "冗長な構成で故障の影響を吸収するフォールトトレランスの説明です。"
+      ],
+      "takeaway": "故障の予防、故障時の安全、縮退継続、故障の許容を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず対策の対象を分けます。故障が起こる確率を下げるのか、故障した後に安全側へ移すのか、機能を一部落として続けるのか、故障があっても機能を維持するのかです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フォールトアボイダンスは故障を避けること、フェールセーフは故障時に安全側へ移行すること、フェールソフトは機能や性能を縮退して継続することです。『ソフト』はソフトウェア故障だけを指すわけではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "フォールトトレランスは故障を許容して必要な機能を継続する設計で、重要部品を多重化するのが典型例です。他の3用語との定義の入れ替わりを確認してください。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "いずれも信頼性に関係するため、『故障防止』と『故障発生後の対応』を混同する。",
+      "stages": [
+        {
+          "newInformation": "4つの故障対策の分類軸",
+          "remainingWork": "各肢の説明がどの対応に属するか分ける",
+          "revealsAnswer": false,
+          "reason": "分類軸は示すが具体的な正答名称は未提示"
+        },
+        {
+          "newInformation": "3つの誤答に関連する用語の定義",
+          "remainingWork": "残る肢があるか判定する",
+          "revealsAnswer": true,
+          "reason": "3つの誤答を実質的に否定して正答が一つに確定する"
+        },
+        {
+          "newInformation": "フォールトトレランスの定義と多重化の役割",
+          "remainingWork": "名称と説明を確定する",
+          "revealsAnswer": true,
+          "reason": "正答の名称と内容を伝える"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=00bf08d381a3ee2566921fe5808177f3245d2e2c5149080d8fb8c7d3222447c1。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のフェールセーフ/フェールソフト/アボイダンス/トレランスの表記・順序を目視照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3e9c8e050e6b8a416f7eec26f824b36b0bbf478c3901c1fa102876f4a494f738",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q14",
+      "summary": "三つの直並列構成の稼働率を式にし、装置1台の稼働率が0と1の間で常に成立する大小を調べる。",
+      "explanation": "一台の稼働率をr（0<r<1）とします。並列は全台停止したときだけ停止するので、A=1−(1−r)²=2r−r²です。Bは一台と並列二台の直列なのでrA=2r²−r³、Cは直列二台の組を二つ並列にするので1−(1−r²)²=2r²−r⁴です。\nC−B=r³(1−r)>0、A−C=r(1−r)²(r＋2)>0。したがってA>C>Bです。",
+      "choiceReasons": [
+        "BよりCの方が高いので、A、B、Cの順ではありません。",
+        "A>C>Bとなるので、この順が正しいです。",
+        "CよりAが高いので、Cを先頭には置けません。",
+        "Aが最も高く、Bが最も低いので、この順は逆です。"
+      ],
+      "takeaway": "直列は稼働率を掛け、並列は全停止確率を1から引く。式の差で大小を確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "直列部分は全装置の稼働が必要なので稼働率を掛けます。並列部分はいずれかが稼働すればよいので、**1－全て停止する確率**を使います。1台の稼働率をrと置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "図Aは2台並列でA=1－(1－r)²。Bは1台とA相当の並列部が直列なのでB=rA。Cは『2台直列の枝を2本並列』としてC=1－(1－r²)²です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "各式を整理するとA=2r－r²、B=2r²－r³、C=2r²－r⁴。C－B=r³(1－r)>0、A－C=r(1－r)²(r＋2)>0。したがってA>C>Bです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "直列・並列の計算を混同し、個数だけで稼働率を比較してしまう。",
+      "stages": [
+        {
+          "newInformation": "直列・並列の稼働率計算法",
+          "remainingWork": "3つの構成を認識する",
+          "revealsAnswer": false,
+          "reason": "一般式だけでは構成別比較は未実施"
+        },
+        {
+          "newInformation": "原図3構成を稼働率の式へ写す方法",
+          "remainingWork": "式の展開と差の符号を比較する",
+          "revealsAnswer": false,
+          "reason": "式を示すが大小比較と最終順は本人が行う"
+        },
+        {
+          "newInformation": "二つの差の因数分解と大小順",
+          "remainingWork": "順序と選択肢を対応付ける",
+          "revealsAnswer": true,
+          "reason": "正答の順序を直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q14.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=257631d29ed1cc597c2e017efde19b250869b30213b72e035e27ff5f249ecb2a。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 画像の構成はA=2並列、B=1直列+2並列、C=(2直列)を2並列。C-B=r³(1-r)>0、A-C=r(1-r)²(r+2)>0。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f7d9083722c653cbdfa0265f169bd28fd2e65d02e483f5fcb125a78b49a7db64",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q16",
+      "summary": "共通部品Zが直列にある構成と、Zを通らない迂回経路がある構成を比較する。",
+      "explanation": "X,Y,Zの稼働率をx,y,zとします。AはXとYの並列部にZが直列なので、A=(x+y−xy)zです。BはXZの直列経路とYの並列なので、B=xz+y−xyzです。差はB−A=y−yz=y(1−z)。0<y<1、0<z<1より差は正で、常にB>Aです。",
+      "choiceReasons": [
+        "差y(1−z)は与えられた範囲で必ず正なので大小は逆転しません。",
+        "Zが故障してYが稼働する場合にBだけが動くため、等しくありません。",
+        "AではZの故障で全停止するため、Bより高くはなりません。",
+        "B−A=y(1−z)>0なので常にBが高くなります。"
+      ],
+      "takeaway": "直列は積、並列は1−全故障確率。共通式を引いて大小を比べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図Aは『XとYの並列』の後にZが直列です。図Bは『XとZの直列』とYが並列です。どちらか一方が稼働すればよい経路と、必ず通る装置を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各装置の稼働率をx,y,zとすると、A=(x+y－xy)z、B=xz+y－xyz。直列は積、並列は1－同時故障確率から導けます。どちらが常に大きいかはB－Aを計算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "B－A=y(1－z)。与えられた0<y<1、0<z<1では正です。Zが故障してもYだけで稼働できるBの方が、常に稼働率が高くなります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "図A・Bの違いを見落として並列ブロック内の入替えだけだと誤解する。",
+      "stages": [
+        {
+          "newInformation": "AとBの実際の直列・並列配置",
+          "remainingWork": "Z故障時に働く経路を比較",
+          "revealsAnswer": false,
+          "reason": "図の構造までで大小は明示しない"
+        },
+        {
+          "newInformation": "各構成の稼働率の計算式",
+          "remainingWork": "差を展開し符号を求める",
+          "revealsAnswer": false,
+          "reason": "比較用の式を渡しても本人の差の計算が残る"
+        },
+        {
+          "newInformation": "稼働率差y(1-z)の符号と迂回の意味",
+          "remainingWork": "選択肢と大小を対応付ける",
+          "revealsAnswer": true,
+          "reason": "常にBが上と正答内容を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q16.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=b4634131e08b0163c09e700825750a3c388889f07c48c51880b0f1ef00672817。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原図A=(X∥Y)−Z直列、B=(X−Z直列)∥Y。差B-A=y(1-z)>0を確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8723745e0d4d4749df7eeb0faf7d694300cb422dd2d27e8f2b8e0163230f1335",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q19",
+      "summary": "3台のプリンターの空く時刻に応じて9件を順に割り当て、Cの処理時間を追跡する。",
+      "explanation": "時刻0でA=4分、B=6分、C=3分を割り当てます。時刻3でCに2分（終了5）、時刻4でAに5分（終了9）、時刻5でCに3分（終了8）、時刻6でBに4分（終了10）、時刻8でCに3分（終了11）、時刻9でAに1分（終了10）です。Cは3+2+3+3=11分連続して印刷します。",
+      "choiceReasons": [
+        "7分はCに割り当てられる四つの印刷時間の合計に届きません。",
+        "9分は最後の3分の印刷が終わる前です。",
+        "Cの担当は3,2,3,3分なので合計11分です。",
+        "Cの割当て合計は11分で、途中の待機もないため12分にはなりません。"
+      ],
+      "takeaway": "待ち行列は各機器の次に空く時刻を更新し、同時なら指定順で割り当てる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初の3件は順にA=4分、B=6分、C=3分です。各プリンターの『次に空く時刻』を持ち、以降は最も早く空くものへ次の仕事を割り当てます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "4件目2分は時刻3に空くCへ、5件目5分は時刻4に空くAへ割り当てます。次にCは5分、Bは6分、Aは9分に空きます。次の仕事がどのプリンターへ行くか更新してください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Cには1回目3分、4回目2分、6回目3分、8回目3分の印刷が割り当てられます。合計3＋2＋3＋3＝11分です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "仕事を3台へ単純な巡回割当てで分け、途中の空き時刻を無視する。",
+      "stages": [
+        {
+          "newInformation": "初回3件の配分と次に空く時刻を使う方法",
+          "remainingWork": "4件目以降の空き時刻を更新する",
+          "revealsAnswer": false,
+          "reason": "初期条件を説明するだけで正答は不明"
+        },
+        {
+          "newInformation": "4件目・5件目を含む時刻更新例",
+          "remainingWork": "残る6～9件目の割当てを追う",
+          "revealsAnswer": false,
+          "reason": "途中の配分は示すが後の割当てが残る"
+        },
+        {
+          "newInformation": "C担当の4件と時間の総和",
+          "remainingWork": "Cの合計時間を算出する",
+          "revealsAnswer": true,
+          "reason": "Cの担当全件と最終時間を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=b9e20ce48248654d9beb3f2e69fa3cb89dd042f95c52a35132ae4da801345e51。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本の順序4,6,3,2,5,3,4,3,1と優先順位A→B→Cを確認。Cの担当は3+2+3+3=11分。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "842e8ae8e68cead31024d02a266f9fcbd49f422985fc6938558b62221541876e",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q17",
+      "summary": "資源X・Y・Zの取得順を比較し、互いに保持している資源を待つ循環待ちが作れるかを判定する。",
+      "explanation": "AとBはX→Y→Zの同じ順です。先にXを取った側が処理を進め、もう一方はXを待つので、二者間の循環待ちはできません。\nCはZ→X→Yです。AがX、CがZを保持すると、Aは最後にZを待ち、CはXを待って停止できます。DはZ→Y→Xで、AがX、DがZとYを保持すれば、AはY、DはXを待ちます。したがってCとDです。",
+      "choiceReasons": [
+        "アはBも含めています。同じ取得順のAとBでは、片方が最初のXを待つだけで循環しません。",
+        "イは取得順が異なり、Aとの循環待ちを作れるCとDです。",
+        "ウはDを除外しています。AがX、DがZ・Yを持つと互いに待ちます。",
+        "エはCを除外しています。AがX・Y、CがZを持つと互いに待ちます。"
+      ],
+      "takeaway": "資源取得の順番を矢印にし、互いが保持する資源を待つ状況を作れるか調べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "デッドロックの一例は、互いが保持する資源を相手が待ち、どちらも先に進めない『循環待ち』です。資源は実行終了までまとめて解放する条件に注意します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "表の1→2→3を資源名へ直すとAとBはX→Y→Z、CはZ→X→Y、DはZ→Y→Xです。AとBのように最初に取る資源が同じXなら、一方がXで待つ間、他方は取得を進められます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "AがXを保持し、CがZを保持すると、AはZ・CはXを求めて循環待ちできます。Dでも、AがXを保持しDがZとYを保持すれば、AはY、DはXを待ちます。したがってCとDで可能です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "資源の順序表を読み換えられず、順が違うだけで即デッドロックと考える。",
+      "stages": [
+        {
+          "newInformation": "デッドロックの循環待ちと資源解放タイミング",
+          "remainingWork": "順序表から取得順を列挙する",
+          "revealsAnswer": false,
+          "reason": "判定方法を説明するだけで正答は一意に決まらない"
+        },
+        {
+          "newInformation": "A～Dの取得順とA/Bでは循環しにくいこと",
+          "remainingWork": "C・Dで互いの資源を待つ状況を構成する",
+          "revealsAnswer": false,
+          "reason": "A・Bの競合の一部は分かるがC/Dの循環成立は本人が確かめる"
+        },
+        {
+          "newInformation": "C・Dそれぞれについて成立する保持・待ちの例",
+          "remainingWork": "該当するプロセスの組合せを選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答組合せを直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q17.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=be562cb50002b24052e84a47b4c43c35354a17f1f1d65695ae7ffed8272229ea。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本表の順序A=B X,Y,Z / C Z,X,Y / D Z,Y,Xを照合。循環待ちの例を構成して確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9b4b3937f02e3e1b556abdc60a14136577ff34fe60a47f19a7d311f0adafb9c7",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q15",
+      "summary": "読取り・CPU・書込みを重ねて実行する処理で、最も遅い段から定常的な毎分処理件数を求める。",
+      "explanation": "読取り40ミリ秒、CPU処理30ミリ秒、書込み50ミリ秒を別のデータについて並行に実行します。パイプラインの定常状態で1件を送り出す最短間隔は、最も時間のかかる段の50ミリ秒です。1分=60,000ミリ秒なので最大処理件数は60,000/50=1,200件です。三段の時間の合計は1件の通過時間であり、定常状態の処理間隔ではありません。",
+      "choiceReasons": [
+        "500件/分は処理間隔120ミリ秒に対応し、三段を並行化した最大能力より小さい値です。",
+        "666件/分では処理間隔が約90.1ミリ秒となり、律速段50ミリ秒から求めた値ではありません。",
+        "750件/分は処理間隔80ミリ秒となり、三段の最大時間50ミリ秒と一致しません。",
+        "60,000/50=1,200件/分で、書込み段の能力に一致します。"
+      ],
+      "takeaway": "パイプラインの定常スループットは最も遅い段で決まる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問では、別々のデータに対して読取り40ミリ秒、CPU処理30ミリ秒、書込み50ミリ秒を同時に進められます。1件が全工程を通る時間と、連続して1件ずつ完了する間隔は異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "このように処理を段に分けて重ねる方式はパイプライン処理です。全段が動き始めた後の出力間隔は、最も長くかかる段より短くできません。三つのうち最大の50ミリ秒を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1分＝60,000ミリ秒です。定常状態では50ミリ秒ごとに1件を送り出せるので、60,000÷50＝1,200件/分になります。40＋30＋50では割りません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "1件の処理時間40+30+50を、そのままパイプラインの送り出し間隔だと考える。",
+      "stages": [
+        {
+          "newInformation": "重ね合わせで処理できる別データと処理間隔の違い",
+          "remainingWork": "段ごとの時間と前後関係を整理",
+          "revealsAnswer": false,
+          "reason": "原問の前提の理解にとどまり最終時間は未提示"
+        },
+        {
+          "newInformation": "ボトルネック段の考え方と50ミリ秒という律速値",
+          "remainingWork": "1分に何間隔分を処理できるか計算",
+          "revealsAnswer": false,
+          "reason": "算出に必要な時間を示すが件数の割算が残る"
+        },
+        {
+          "newInformation": "60,000ミリ秒を律速値で割った処理件数",
+          "remainingWork": "得られた件数を選択肢から選ぶ",
+          "revealsAnswer": true,
+          "reason": "最終処理件数を渡す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q15.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=ecf4191615e28ca8792117b5fc550db954aa00a43cc6745e115b3243d21bac5e。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本はread40ms+CPU30ms+write50ms、n/n+1/n+2を重ねる条件。定常最大スループット60000/50=1200件/分。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7ab226928dbc64b833086139ede81dd52bba47dce7c30af19e3a9d1a20a5568b",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q16",
+      "summary": "ノンプリエンプティブ方式で実行権を強制的に奪うか、タスクの自発的な状態変化で切り替えるかを区別する。",
+      "explanation": "プリエンプションはOSが実行中のタスクから実行権を取り上げることです。ノンプリエンプティブ方式では、タスクの終了や自発的な中断・待ちへの移行によって次のタスクへ切り替えます。\n優先度が高いタスクが来ても、それだけで現在のタスクを中断しません。自ら中断を要求した場合に切り替えるイが適切です。",
+      "choiceReasons": [
+        "アは優先度を引き上げる仕組みを説明しています。非強制切替を実現する定義ではありません。",
+        "イは実行中タスクの自発的な中断で切り替える方式です。",
+        "ウの無限ループの検知・強制終了は、このスケジューリング方式の動作条件ではありません。",
+        "エは優先度に基づいて実行権を取り上げるプリエンプティブ方式です。"
+      ],
+      "takeaway": "ノンプリエンプティブは、OSによる実行権の強制的な取上げをしない方式。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "プリエンプティブ方式は、OSが実行中タスクからCPUの実行権を取り上げられる方式です。『ノンプリエンプティブ』はこの強制的な取上げを行わないことを意味します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ノンプリエンプティブでは実行中タスクが終了したり、自ら待ち・中断を要求したりした時に次へ切り替わります。単に高優先度の別タスクが現れても、実行中のタスクを強制的に止めません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "したがって実行中タスク自身が中断をOSに要求したときに切り替える記述が適切です。優先度で切り替える肢はプリエンプティブ、無限ループを自動終了させることもこの方式の定義ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "優先度の高さと実行中のタスクを中断できる仕組みを混同する。",
+      "stages": [
+        {
+          "newInformation": "プリエンプションという動作の定義",
+          "remainingWork": "各肢で切替えを起こす主体を確認",
+          "revealsAnswer": false,
+          "reason": "方式の語義を説明するだけで肢の対応は本人に残る"
+        },
+        {
+          "newInformation": "非プリエンプティブでの切替契機と高優先度到着時の扱い",
+          "remainingWork": "定義に合う選択肢を探す",
+          "revealsAnswer": true,
+          "reason": "正答肢を実質的に言い換えた切替契機を教える"
+        },
+        {
+          "newInformation": "正答肢の自発的中断と誤答の違い",
+          "remainingWork": "適切な肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答記述の内容を直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q16.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=f2194dc683d6840cac44e70a731db11dd1e86a00608f36dabe736c39caf46e80。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本のイは実行中タスクによる自発的な中断要求、エは高優先度タスクの追加。非プリエンプティブの区別を確認。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "640323e25a61aee65924f90e9738d16529aa4415a33a7f4ecc9534b7c93833ed",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q23",
+      "summary": "GPIOの特定ビットだけを1にしてLED1を点灯し、LED2の出力ビットは保持する論理演算を選ぶ。",
+      "explanation": "図ではLED1がビット3、LED2がビット6に接続され、出力が1のとき接地側へ電流が流れて点灯します。08₁₆=00001000₂とのORならビット3を1にし、他のビットは元の値を保持します。LED2のビット6は変わりません。読出し値を変更して書き戻せることと、途中で他の操作がないことがこの方法を支えています。",
+      "choiceReasons": [
+        "08とのANDはビット3を元のまま残し、ビット6など他のビットを0にするのでLED2を保持できません。",
+        "08とのORはビット3を1にし、ビット6を含む他のビットを保持します。",
+        "48とのANDはビット3もビット6も元の値のままなので、LED1を必ず点灯させられません。",
+        "48とのORはビット3とビット6をともに1にし、消灯中のLED2を点灯させてしまいます。"
+      ],
+      "takeaway": "特定ビットを1にして他を保持するには、そのビットだけ1のマスクとのOR。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "原図ではLED1が**ビット3**、LED2が**ビット6**につながります。出力1でLEDが点灯する回路です。LED1だけを1に変え、LED2は現在の状態を保たなければなりません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "論理和ORには『0とのORは元値を保持、1とのORは必ず1』という性質があります。反対にANDは0を含む場所を0にします。ビット3だけ1のマスクを作れば、ORで他のビットを保てます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ビット3だけを1にした8ビットのマスクは00001000₂＝08₁₆です。出力を読み、**その値と08の論理和**を書き戻す選択肢を選びます。48₁₆はビット6まで1にしてしまいます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ビット番号を1から数える、またはAND・ORの効果と16進マスク08/48を混同する。",
+      "stages": [
+        {
+          "newInformation": "LED1/LED2の接続ビットと保持要件",
+          "remainingWork": "LED1/2の線を図から追う",
+          "revealsAnswer": false,
+          "reason": "対象のビット位置のみでマスク・演算の組は未確定"
+        },
+        {
+          "newInformation": "OR・ANDの各ビットへの作用",
+          "remainingWork": "必要なマスクを16進に変換し演算を選ぶ",
+          "revealsAnswer": false,
+          "reason": "ORの一般則を渡しても08/48の対応計算を残す"
+        },
+        {
+          "newInformation": "08マスクと論理和の具体的指定",
+          "remainingWork": "4肢を特定する",
+          "revealsAnswer": true,
+          "reason": "正答の演算と16進値を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=6957239d10a6b08f4649e33b0ce25e8381bd7b09fd1d7265b61d048c95b554e0。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原図からLED1=bit3/LED2=bit6、GPIOの出力から抵抗・LEDを経由して接地へ電流が流れる。read OR 0x08ならbit3を1にしbit6保持、ANDは他ビットを消す。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b1549a557a71d5cea404dffe74b41e29168a4f4a827474219fc99a5599e37eb3",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q20",
+      "summary": "HadoopがWebサーバやRDBMSではなく、大規模なデータを複数計算機で扱う仕組みであることを判定する。",
+      "explanation": "Hadoopは大規模データを複数ノードに分散して保存・処理するためのソフトウェア群です。HDFSなどの分散ファイルシステムやMapReduceによる分散処理を提供します。",
+      "choiceReasons": [
+        "Java EE準拠のアプリケーションサーバの説明で、Hadoopの目的と異なります。",
+        "HTTP要求を処理するWebサーバの説明で、分散データ処理の説明ではありません。",
+        "リレーショナルデータベース管理システムそのものではありません。",
+        "大規模データセットを分散処理するソフトウェアという説明が合います。"
+      ],
+      "takeaway": "Hadoopはデータの分散保存と分散処理の基盤。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢の4つの役割は『業務アプリ実行』『Webページ配信』『表形式データベース』『大量データの分散処理』です。何を実現する技術かに注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "多数の計算機にデータを分けて保存・処理するには、分散ファイルシステムと処理を分担させる仕組みを組み合わせます。単独のWebサーバや関係データベースとは目的が異なります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "HadoopはそのためのOSS群で、HDFSによる分散保存、MapReduceによる分散処理などを提供します。したがって大規模データセットの分散処理という説明が一致します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "Hadoopという固有名詞を知らないと、4種のサーバ・データ技術を区別できない。",
+      "stages": [
+        {
+          "newInformation": "四肢を機能別に分類する軸",
+          "remainingWork": "名前と4種の機能の関係を考える",
+          "revealsAnswer": false,
+          "reason": "カテゴリを提示するが正答名称と対応は教えない"
+        },
+        {
+          "newInformation": "分散保存・計算の特徴と他3技術との対比",
+          "remainingWork": "分散処理に当たる肢を確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢を実質的に説明し、他三用途を除外する"
+        },
+        {
+          "newInformation": "Hadoopの名称とHDFS/MapReduceの役割",
+          "remainingWork": "対応を選択肢に記す",
+          "revealsAnswer": true,
+          "reason": "Hadoop固有の名称と正答の説明を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q20.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=818c57713dcebe1d3e30d655b716823ead9887834b5c2a716ea66580f16905fd。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本全肢はJava EEアプリケーションサーバ/Webサーバ/RDBMS/大規模分散処理ライブラリ。Hadoopの目的と照合。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "311e443cbcda26432d7c6e6f91d67d2f681a8b6f826d3007499d1083eb3dae2a",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q23",
+      "summary": "Hブリッジ回路でDCモータに流す電流を逆向きにするスイッチの組合せを図から決める。",
+      "explanation": "正転は図の左の+端子から右の−端子への電流です。逆転では+V→S3→右端子→モータ→左端子→S2→接地の経路を作ります。よってA1=Low,A2=High,A3=High,A4=Lowです。",
+      "choiceReasons": [
+        "全スイッチが開き、モータを流れる電流がありません。",
+        "S2とS4が閉じ、両端が接地電位となって駆動電圧がかかりません。",
+        "S3から右端へ入りS2へ抜ける逆転経路ができます。",
+        "S1から左端へ入りS4へ抜けるので、問題文で定義された正転です。"
+      ],
+      "takeaway": "Hブリッジでは対角のスイッチでモータ電流の向きを変える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問ではモータの左（＋）端子から右（－）端子へ電流が流れると正転です。逆転には右端子から左端子へ流す必要があります。各信号がHighなら対応スイッチが閉じます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "図では上側が＋V、下側が接地です。逆向きに流すには**右側の上のスイッチ**を通して右端子に給電し、**左側の下のスイッチ**を通して接地へ戻す電流の道筋を作ります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "右上はS3（A3）、左下はS2（A2）なのでA2・A3をHigh、A1・A4をLowにします。A1～A4は順にLow, High, High, Lowです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "High/Lowを電流の向きと勘違いし、対角の2スイッチの電源・接地経路を追えない。",
+      "stages": [
+        {
+          "newInformation": "モータ正転と逆転の電流方向・Highの働き",
+          "remainingWork": "左右端子の電流方向を確認",
+          "revealsAnswer": false,
+          "reason": "原理と必要な電流方向だけを渡す"
+        },
+        {
+          "newInformation": "給電側と帰路に使う対角スイッチ",
+          "remainingWork": "スイッチ番号を図から特定",
+          "revealsAnswer": true,
+          "reason": "右上と左下の指定で原図から正答が一意に決まる"
+        },
+        {
+          "newInformation": "制御信号A1～A4のHigh/Low",
+          "remainingWork": "正答の組合せを選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢と同じ信号列を直接提示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=3bd6b9fe465128043ddd5cd4f6ce2c7368f9aa9ae1ca2a82e8e1ec0ef22ba75f。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本Hブリッジでは左上S1、左下S2、右上S3、右下S4。逆転経路+V→S3→右端子→モータ→左端子→S2→GND。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "826dd069efce581579f277ff06db75d1c0abbe6415a53048d1ffc29b55d94aa0",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q20",
+      "summary": "LEDと抵抗の直列回路で、LED消費電力が回路全体に占める割合を求める。",
+      "explanation": "直列回路なのでLEDと抵抗の電流は共に10mA=0.01A。LED電力は2×0.01=0.02W、回路全体は10×0.01=0.10Wです。\n比率は0.02/0.10×100=20%。抵抗には残り8Vが掛かり、0.08Wを消費します。",
+      "choiceReasons": [
+        "LEDの0.02Wを全体0.10Wで割った20%が正しいです。",
+        "2/8=25%はLED対抵抗の比で、全体に占める割合ではありません。",
+        "80%は抵抗が全体に占める割合です。",
+        "抵抗でも電力を消費するので、LEDが全電力を使うわけではありません。"
+      ],
+      "takeaway": "直列で電流が同じなら、各部の電力比は電圧比に等しい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "原図は10Vの電源にLEDと抵抗が直列です。LEDの順方向電圧は2Vなので、抵抗には10－2＝8Vがかかります。直列なので電流はどちらも10mAです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "電力はP＝V×I。LEDは2V×0.010A、回路全体は10V×0.010Aで求めます。割合は**LEDの電力÷回路全体の電力×100**です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同じ電流が流れるので比を取ると電流は打ち消され、2V÷10V×100＝20%です。2÷8は『LEDと抵抗の電力比』であり『全体に占める割合』ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "LEDの電力を抵抗の電力で割り、全体に占める割合と取り違える。",
+      "stages": [
+        {
+          "newInformation": "直列回路の電圧分担と共通電流",
+          "remainingWork": "図の電源10VとLED2Vを読み取る",
+          "revealsAnswer": false,
+          "reason": "回路の条件だけで数値は渡さない"
+        },
+        {
+          "newInformation": "電力P=VIと全体を分母にする割合の式",
+          "remainingWork": "LED/全体の電力を計算し比を求める",
+          "revealsAnswer": false,
+          "reason": "式と変数の値を示すが乗除算は本人ができる"
+        },
+        {
+          "newInformation": "電圧比2/10からの最終割合",
+          "remainingWork": "20%を選択肢で選ぶ",
+          "revealsAnswer": true,
+          "reason": "最終の数値20%を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q20.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=e5d9b868167e016edec7cb622e0889048827fb8a738dd29fa98d102a1323aaf6。",
+        "原本画像とcontextに収録された公式正答=アを照合。作者再導出: 原図の電源10V、LED順方向2V、同電流10mA。LED電力0.02W/全体0.10W=20%。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "1e2952a39638e43594757c5c34d943b7852732f2596d640c4cbe4ce32b724074",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q23",
+      "summary": "自動運転の距離センサーのうち、LiDARの測距に使う物理的な信号を他の方式と区別する。",
+      "explanation": "LiDARはLight Detection and Rangingの略で、レーザー光を照射し、戻ってくる反射光を測定するセンサーです。パルスの往復時間から距離を求め、照射方向ごとの測定を集めることで周囲の形状を把握します。光を使うエが該当し、超音波やミリ波を使う方式とは異なります。",
+      "choiceReasons": [
+        "超音波を利用する距離センサーの説明です。",
+        "画像の遠近法や消失点を使う方式で、レーザーの反射測定ではありません。",
+        "ミリ波レーダーの説明で、LiDARが使う光とは波長帯が異なります。",
+        "レーザー光の反射を測定するLiDARの説明です。"
+      ],
+      "takeaway": "LiDARは光、レーダーは電波、超音波センサーは音で測る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四肢はすべて距離の測り方を表しています。超音波・ミリ波・画像の遠近法・レーザー光では、観測する信号や仕組みが異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LiDARはLight Detection and Rangingの略で、**光**の反射を測って対象までの距離を求めます。照射した光が戻るまでの往復時間を使う方式が代表的です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "レーザー光のパルスを照射し、反射光が戻った方向と時間から距離を計算します。距離は『光速×往復時間÷2』で求めます。この動作を述べる肢がLiDARです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "レーザー・ミリ波レーダー・超音波のいずれも反射波で測距するため区別できない。",
+      "stages": [
+        {
+          "newInformation": "各候補で用いる信号の分類",
+          "remainingWork": "方式名と対象信号を考える",
+          "revealsAnswer": false,
+          "reason": "物理的な手段の分類だけでLiDARの手段を教えない"
+        },
+        {
+          "newInformation": "LiDARの略語と光による反射測距の原理",
+          "remainingWork": "正答肢に一致する信号を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢のレーザー光を実質的に特定する『光反射』を示す"
+        },
+        {
+          "newInformation": "レーザーパルスと往復時間の計算",
+          "remainingWork": "距離・方向の測定原理を対応させる",
+          "revealsAnswer": true,
+          "reason": "正答肢の仕組みを直接説明する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q23.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=e575efd56c0747b255de23703d408b42ee44b3f7e4c599aca47e46a023d1aea1。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本のア=超音波、イ=遠近法、ウ=ミリ波、エ=レーザー光を照合。LiDARはレーザーパルスの反射測距。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "aa6c35967717dfe6e3e5cc07993e6842f1d07aa506a48c0f1587458e7377773b",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q21",
+      "summary": "MOSという名称の構成材料と、発光・受光・逆方向定電圧の半導体素子を区別する。",
+      "explanation": "MOSはMetal Oxide Semiconductorの略です。金属と半導体の間に酸化物の絶縁体を挟む構造をもち、ゲート電圧による電界で電流を制御します。\n発光、光の受光、逆方向の定電圧特性を利用する素子とは区別します。",
+      "choiceReasons": [
+        "電子と正孔の再結合による発光を利用する発光ダイオードなどの説明です。",
+        "光を受けて電流が生じるフォトダイオードなどの説明です。",
+        "金属・酸化物絶縁体・半導体というMOSの構造を述べています。",
+        "逆方向の降伏を利用して電圧をほぼ一定にするツェナーダイオードの説明です。"
+      ],
+      "takeaway": "MOSの名称はMetal・Oxide・Semiconductorの構造を表す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢には電子・正孔の再結合による発光、光を受ける作用、三層の材料構造、逆方向での定電圧特性が並びます。MOSの名を構造に結び付けられるかがポイントです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "MOSはMetal（金属）、Oxide（酸化物）、Semiconductor（半導体）の略です。金属電極と半導体の間に酸化物の絶縁層を挟む構造が名前の由来です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この絶縁層を介したゲート電界で電流を制御する素子がMOSトランジスタです。光で電流が出るフォトダイオードや発光ダイオード、ツェナーダイオードとは異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "トランジスタを電流制御素子としか知らず、MOSの材料構造が何を意味するか分からない。",
+      "stages": [
+        {
+          "newInformation": "4肢の作用と材料構造の分類",
+          "remainingWork": "MOSが略語である点を考える",
+          "revealsAnswer": false,
+          "reason": "分類軸のみで正答文そのものは示していない"
+        },
+        {
+          "newInformation": "MOSの語の展開と酸化物絶縁層の位置",
+          "remainingWork": "正答の材料構造を照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢の材料配置を明示する"
+        },
+        {
+          "newInformation": "ゲート制御の仕組みと他の半導体素子との差",
+          "remainingWork": "他3肢に対応する素子を確認する",
+          "revealsAnswer": true,
+          "reason": "正答の仕組みと誤答を提示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q21.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=d81188e2c89f2a07d43a9a95d7a415d89d87d94752393cf0ea492419c1571f2f。",
+        "原本画像とcontextに収録された公式正答=ウを照合。作者再導出: 原本ではウが金属と半導体の間に酸化物絶縁体、アは発光、イは受光、エは逆方向定電圧。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ef50d76196242caa965fcafab702e53824435033912ba5547e98a1142c28641f",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q24",
+      "summary": "NFCを近距離の非接触データ通信として捉え、通信範囲・接触式IC・P2P機能を区別する。",
+      "explanation": "NFCは数cm程度に近づけて行う無線通信です。非接触ICカードの読取りやカードエミュレーションだけでなく、対応機器同士が対等にデータを交換するピアツーピア機能も備えています。したがってエが適切です。接触式カードや位置検出用のタッチセンサーとは役割が違います。",
+      "choiceReasons": [
+        "タッチ位置を検出する静電容量式センサーの説明で、NFCの通信ではありません。",
+        "NFCは非接触通信であり、端子を接触させるICカードの方式ではありません。",
+        "NFCは数cm程度の通信を想定し、最大10m程度という説明は合いません。",
+        "近接した対応機器同士のピアツーピア通信機能を備えています。"
+      ],
+      "takeaway": "NFCでは近接・非接触に加え、機器同士の通信モードも押さえる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "NFCはNear Field Communicationの略で、近距離の電磁界を使う非接触のデータ通信です。タッチ位置を検出するセンサーや接点を直接つなぐICカードとは役割が異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "NFCは通常、端末同士やカードとリーダーを数cm程度に近づけて通信します。10m級の無線方式ではありません。読み書きやカード模擬以外の端末間通信機能にも注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "NFCにはカード読み書き、カードエミュレーションのほか、対応機器同士が通信するピアツーピア機能もあります。設問ではこの説明が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『近距離』を10m級と誤解したり、カード読取り専用と考えて機器間通信を見落とす。",
+      "stages": [
+        {
+          "newInformation": "NFCの略語・非接触データ通信という役割",
+          "remainingWork": "方式の分類を考える",
+          "revealsAnswer": false,
+          "reason": "接触型・タッチセンサーは否定できるが距離とP2Pの判断が残る"
+        },
+        {
+          "newInformation": "数cm程度の近距離性と端末間通信の可能性",
+          "remainingWork": "選択肢の『10m』『接触式』と比べる",
+          "revealsAnswer": true,
+          "reason": "距離条件を確定して10mを否定し、残る肢が一意になる"
+        },
+        {
+          "newInformation": "P2Pモードの名称と正答肢への一致",
+          "remainingWork": "正答の機能を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答のP2Pを名称で示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q24.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=2c198ec349adf720e299064aaf259bc387e7341b79ab46e699c59d81d2855324。",
+        "原本画像とcontextに収録された公式正答=エを照合。作者再導出: 原本の4肢(タッチ/接触カード/10m/P2P)を確認。NFCは近距離非接触でP2P機能あり。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a249ef6a4f46242af25274bfd049a04b39546c236ee50c4273575428378f07de",
+    "author": "ChatGPT/gpt-6-batch10-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q19",
+      "summary": "産業機器の制御に使うPLCと、PID制御・A/D変換・物理リレー配線の機能を区別する。",
+      "explanation": "PLCはProgrammable Logic Controller。入力されたスイッチやセンサの状態を読み、プログラムに従ってモータなどへ出力する。リレー回路に似たラダー図で条件や動作の順序を表せることが代表的な特徴。\n\n比例・積分・微分による制御はPID制御、アナログからデジタルへの変換はA/D変換、リレー回路だけの制御はハードワイヤードなリレーシーケンス。PLCにPID等の機能が搭載されることはあるが、選択肢ではその基本的な説明を選ぶ。",
+      "choiceReasons": [
+        "比例・積分・微分の3要素はPID制御の説明。PLCそのものの代表的な説明ではない。",
+        "ラダー図によるシーケンスプログラムはPLCの代表的な制御方法。",
+        "アナログ信号のデジタル化はA/D変換器の役割。",
+        "物理的なリレー回路による制御。プログラムで制御を変更するPLCとは異なる。"
+      ],
+      "takeaway": "PLCは条件と順序をプログラム化する産業用制御装置。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "PLCはProgrammable Logic Controllerで、センサー等の入力に応じて、モータや装置への出力を**プログラムで**制御する産業用装置です。制御内容を配線の組替えだけに頼りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "比例・積分・微分の三要素を使うのはPID制御、アナログ電圧をデジタル値にするのはA/D変換です。どちらもPLCそのものの代表的な定義ではありません。残る『プログラム』と『リレー回路の配線』を比べます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "PLCではリレーの接点に似せたラダー図を使い、シーケンス（動作の順序や条件）をプログラム化することが代表的です。物理的なリレー結線だけで制御する方式とは区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "PLC・PIDという似た略語やラダー図の役割を知らないため正誤を決められない。",
+      "stages": [
+        {
+          "newInformation": "PLCの略語とプログラム可能な産業制御装置という基本",
+          "remainingWork": "PLCの用途を候補と対応させる",
+          "revealsAnswer": false,
+          "reason": "PLCの用途と名称を提示するがラダー図の選択は残る"
+        },
+        {
+          "newInformation": "PID・A/D変換の役割と残る2肢の比較軸",
+          "remainingWork": "プログラム方式か物理リレー回路か決める",
+          "revealsAnswer": true,
+          "reason": "前段でPLCがプログラム制御であり、ここでPIDとA/D変換を除外したため、残る肢が一意に決まる。"
+        },
+        {
+          "newInformation": "ラダー図によるシーケンス制御の正しい対応",
+          "remainingWork": "正答肢を選択する",
+          "revealsAnswer": true,
+          "reason": "正答肢の『ラダー図のシーケンスプログラム』と同義の内容を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q19.webp をGitHub経由で取得して実際に表示し、設問・全4肢・図表を確認。context台帳の画像SHA-256=313fea18f899738ca1daf09d441589fb247a7ab1e36f30827cec666fdc1db232。",
+        "原本画像とcontextに収録された公式正答=イを照合。作者再導出: 原本はアPID、イラダー図シーケンス、ウA/D、エリレー回路のハードウェア。PLCはラダー制御のプログラマブル装置。",
+        "作者自己点検であり独立レビュー・承認・公開は未実施。"
+      ]
+    }
+  }
+]

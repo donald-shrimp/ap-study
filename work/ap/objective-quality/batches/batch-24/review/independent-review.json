@@ -1,0 +1,949 @@
+{
+  "kind": "batch-initial-independent-review",
+  "status": "changes-requested",
+  "reviewer": "Codex /root/ap_batch24_review",
+  "checkedAt": "2026-10-28T08:53:49.355887+00:00",
+  "initialAuthorHead": "99bf56f654e2653cdad897259e755d33fb86888b",
+  "counts": {
+    "questionsActuallyRead": 20,
+    "originalImagesActuallyOpened": 20,
+    "choiceReasonsActuallyRead": 80,
+    "hintsActuallyRead": 60,
+    "lessonAndDesignActuallyRead": 20,
+    "officialAnswerPDFsActuallyRead": 9,
+    "calculationOrTraceCasesIndependentlyChecked": 5,
+    "issues": 2
+  },
+  "frozenBeforeSnapshot": {
+    "path": "work/ap/objective-quality/batches/batch-24/review/initial-drafts.json",
+    "sha256": "b3d2bff1e52f6a38325442a5ec179b578ecba68c95fea724236a9a810ea8afc3"
+  },
+  "method": "原問画像を全20件view_imageで実開封し解き直した。原問・全肢・前段累積から開示を判断。全lesson/design/80肢理由/60ヒントを実読。PDFは既存cacheの実ファイルSHAを再計算し9本を再抽出、空テキストの令和4春は画像化して実開封。初学者試用・最終domain実行・公開確認は未実施。drafts/reviewsは未変更。",
+  "issues": [
+    {
+      "id": "B24-01",
+      "questionId": "r07h-q47",
+      "field": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "severity": "must-fix",
+      "finding": "H1でア不具合・ウ網羅率・エ未摘出数を保守性以外へ全分類し残るイを確定するのでtrueが必要。H2はイの式、H3はイ明示。",
+      "requestedChange": "H1本文を維持するならrevealsAnswerをtrueへ変更し、designの開示理由と残る判断を同期する。"
+    },
+    {
+      "id": "B24-02",
+      "questionId": "r04h-q50",
+      "field": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "severity": "must-fix",
+      "finding": "H1が編集・コンパイル・リンク・デバッグを列挙し『これらの作業をまとめるツール』と正答アを言い換えているためtrueが必要。H2定義、H3ア明示。",
+      "requestedChange": "H1本文を維持するならrevealsAnswerをtrueへ変更し、designの開示理由と残る判断を同期する。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r06a-q47",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "e19efa84341be2ea070d05bbdc34fd3fb28501b2fb98f8da6aec1de32e35b987",
+      "beforeLessonSHA256": "22720b248113ff5ab0ebd1c0b48f58c7c9a0eda1c1fb3e961582ca0347bf5473",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q47.webp": "e7f0aff2902596a5752c0f69ccc7775c1b5ab5df79bf4d9006bb1f3faad4be3c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解ウをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。サービス境界によって個別変更の影響を限定できる。アの技術統一・イの分散整合性・エの通信回数減少はいずれも保証されない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は分割と追加負担で変更容易性までは未提示。H2は個別変更を直接説明しtrue、H3ウ明示。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "35d9d062a9540e6f813497fed1c17b20ffa6635bf871a47421955fa649a634fc",
+      "beforeLessonSHA256": "e462cab9df38431823c703944dc6a633446a4aa9372ea4f5105baf95fc13eef6",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q46.webp": "25d9846628f74557514a2201b70c6735944d1761b32e6f9d4ee7b048f4b59458",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解エをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。大域データ共有は共通結合。アJUMPは内容結合、イの処理選択引数は制御結合、ウの単一大域項目は外部結合に分類され、制御結合ではない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1はJUMPと引数の区別だけ。H2共通結合の正答定義を渡しtrue、H3エ明示。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q50",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "7ff29d11fdbd108e6f9fa7d72b3589665dd0c3f17e38c5aa75a45a3caa74302c",
+      "beforeLessonSHA256": "5a20b3adea954bb1fe2ecf3022a798bd03a15c71c2fcd7d2ca068ba5983b9827",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q50.webp",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q50.webp": "56256dd66e7dbb21dafbad778057202a48fec68b27edcca9d760bb35f6691d09",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問50 正解エをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。同一HTMLへ画面幅条件でCSSを適用するのはメディアクエリ。User-Agentは識別情報、WebSocketは双方向通信、マッシュアップは複数機能の組合せ。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は表示規則の条件整理で名称未提示。H2名称を明示しtrue、H3エ明示。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "24bab73f899832595866a135e7de14443a181e9438371493a229900efed4bfa9",
+      "beforeLessonSHA256": "fbcb72f222574d684d49cb51061bd30d79b8ec8bfcbf913597e7e940146ca1d4",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q46.webp": "eb6c6da27887d527cc110a277666e76dd00e8da436dfe9059b14d72d49956bd0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解アをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。二環境の通信先を切替え旧環境を残す方式はブルーグリーン。イは障害待機、ウは稼働中部品交換、エは順次更新。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は設問の二環境を順次更新と区別するだけで名称対応が残る。H2名称明示true、H3ア明示。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "d839d7ef97b747fdba91f0b0fc6eb79516c65885e1d3bb59ba7a0823ab7fc297",
+      "beforeLessonSHA256": "634c3485b4c61e468eb836b75bf881885fb9eca17a69e37d15b16f35f40370ca",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q46.webp": "d2b2a97a209d4b6464d260ef735ed024e6cba59911a2771d194915f9c545273a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解エを空テキストのためPDFをレンダリングしview_imageで実開封。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch24-independent/2022r04h-answer.png"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。必要な値のみを引数で渡すデータ結合が最弱。ア外部仕様依存、イ共有領域、ウ構造体全体依存より独立性が高い。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は共有と構造体への依存を教えるが外部結合も候補。H2データ結合の相対優位を提示しtrue、H3エ明示。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "a23bfe1c349c857e333bab12547fbdf4646030234900ab211388339ac202fcdb",
+      "beforeLessonSHA256": "2f848f9b0115f63f9ab7af803707c7343436317cd505271ae70c8b9760e4dc2e",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q46.webp": "652c6480369b4dfc71cf567e0b4b897193248ba225baf7835401f2cef6822a64",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解ウをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。必要な入出力値のみを渡すデータ結合。ア共通領域、イ制御引数、エ外部宣言の共有は余分な依存を持つ。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は三分類軸だけで制御引数との比較が残る。H2必要値だけを渡す優位を説明しtrue、H3ウ明示。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q48",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "f8d3f74286eda37d933489aa0ae9f2539919bd29b036b9df6acc949d959057f9",
+      "beforeLessonSHA256": "ed762b37ef33d0ae96ce696d155f3ba0f117c5d13adc6b527299b6bdbb70c8d8",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q48.webp",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q48.webp": "867e5445eb5a48a53abff38fb6016bf19f4b4491496c5df843de4b6b52976067",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問48 正解イをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。習得時間は使用性の学習性。ア復旧時間は信頼性、ウ改善工数は保守性、エ提供機能の充足は機能適合性。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は三種類の時間を分類する軸だけ。H2使用性＝学習しやすさを提示しイと一致、H3イ明示。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q47",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "7a9c512da8a02d42c1e284f49bc1dde6ab075fca1ba1e39dcf1db1403708e127",
+      "beforeLessonSHA256": "fa3d138bf12c2cd26abb8956b84c19f357921612ef4cf03ce19b8f9dfe46eccb",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q47.webp": "2b10b01f0d425b4eca198f6079aada21c65b594646aa7109e6b29bc95598880f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解イをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。適正規模プログラムの割合は変更・解析しやすい分割を測る。ア不具合密度、ウ分岐網羅率、エ残存推定数は別の評価軸。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        true,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1でア不具合・ウ網羅率・エ未摘出数を保守性以外へ全分類し残るイを確定するのでtrueが必要。H2はイの式、H3はイ明示。",
+      "issues": [
+        {
+          "id": "B24-01",
+          "questionId": "r07h-q47",
+          "field": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "severity": "must-fix",
+          "finding": "H1でア不具合・ウ網羅率・エ未摘出数を保守性以外へ全分類し残るイを確定するのでtrueが必要。H2はイの式、H3はイ明示。",
+          "requestedChange": "H1本文を維持するならrevealsAnswerをtrueへ変更し、designの開示理由と残る判断を同期する。"
+        }
+      ]
+    },
+    {
+      "id": "r06h-q47",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "22f8de8b3a32433a8104b90a50edd56ec9ba8851b68c3e5d80b57dfb49fc56cf",
+      "beforeLessonSHA256": "c5b89a644f60dba723fbfbc679a993c53f167fb0fee695bf6cee0b0b6da0f318",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q47.webp": "368222ea0329b3ecff1adb7ff06e86ea6fc2cce3bcd0c565d74cd57b12af8efb",
+        "assets/transcriptions/transcribe_r06h_batch5/r06h-q47-choice-a.webp": "eea405af7a716eaea969a61980324d39f0777d4870bccb44651c3d3e0b7ba93f",
+        "assets/transcriptions/transcribe_r06h_batch5/r06h-q47-choice-e.webp": "4ee3bef4d9d9ce541b2751c1eeb29107769c342147817343eb5ab60c9ced982e",
+        "assets/transcriptions/transcribe_r06h_batch5/r06h-q47-choice-i.webp": "426cadc074e4c99041b6061cd4aec70d2af00357e75034547c7260778a720946",
+        "assets/transcriptions/transcribe_r06h_batch5/r06h-q47-choice-u.webp": "ebb039b18a5eb2cd002e2a8c506113b1e0a74df72a63bfd41f17407a0172f3f8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解ウをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。左端は緩やか、中盤で加速、後半で減速する非対称S字。アは増勢継続、イ一定増、エは当初から減速しS字ではない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1収束だけではウ/エが残る。H2S字の形を説明し唯一のウを渡すのでtrue、H3ウ明示。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q47",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "5b4f8fe0f1b36f6f45a1c656b5c184c50528c9f711778c9ab3a0b7f0f918aceb",
+      "beforeLessonSHA256": "92c9a9ce2392c81727157c348fe3059bc34e5928e37141f248f0acaa49f16dde",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q47.webp": "70b86d5985567d1ff524df9e309bb943de110f3cb40ce43793c0d853265a9178",
+        "assets/transcriptions/pr-batch2-figures-b/r05h-q47-figure-choices.png": "2f3e66d89e5ffdf55eff31aeb5b356e2794857eec35c4021ee02a9ed8d97066e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解ウをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。8列の成立数3,2,2,1,2,1,1,0に3%を掛け9,6,6,3,6,3,3,0%。ア第3列3%・イ第2列3%・エ第4列0%は各々誤り。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        false,
+        true
+      ],
+      "hintAndDesignReview": "H1・H2は元値基準の加算/3k%を渡し8列への適用とXの配置照合が残るのでfalse。H3全列とウを渡しtrue。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "767709b4238f0f13b612bfc76146ef4da8c48d705a25419740a2a3602390448d",
+      "beforeLessonSHA256": "2b3c710bc59cb35464a06a9af36fa1f0f5b34d81392ef95f7c910b2c731fa661",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q46.webp": "8db326f2b5707bc3651d149bb5169be375cef577cbe922eeb28634b54f1b8570",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解エをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。利用者の目的や行動を代表する仮想人物モデルはペルソナ。ア大きな要求単位、イ利害関係者、ウ価値とバックログを担う実役割。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は仮想像と役職の差で名称対応は残る。H2ペルソナ明示、H3エ明示でtrue。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q47",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "188c7741f9ae124fe697fc4ab16c9bb4315ad206d5b2d2dd2223fc53e52fd7b3",
+      "beforeLessonSHA256": "6e1d80d6887cbb80f8a10d1c67832c7316dadac9f695b5a6c5c3560eacacdf3e",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q47.webp": "8408f59aefdfffddde74b89fd3bd2998dccabf8a80224469f70c98f1a4acc844",
+        "assets/transcriptions/transcribe_r04h_batch5/r04h-q47-figure.webp": "eec222fe54ad56db67a32c4357b9a3b80426eed56bc4462038c46db9873dbfd0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解イを空テキストのためPDFをレンダリングしview_imageで実開封。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch24-independent/2022r04h-answer.png"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。A=1,B=0はC=1でYY、A=1,B=1はC=2でNN。アはNNのみ。ウ・エも網羅するが3例で冗長、2例が下限を達成する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は分岐網羅の定義と初期値のみ。H2イの二ケースと進路を明示しtrue、H3イ明示。",
+      "issues": []
+    },
+    {
+      "id": "r04a-q48",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "5e3fd3d858dd70dd4a9b98636b8d65042084a97b477709eec9478059e67b98e8",
+      "beforeLessonSHA256": "b95e7ea31148a2ac1b8823d0d2cf84e5e21dab757f040e523d8eddd2ea34d9d7",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q48.webp",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q48.webp": "927d69a65d61966a0ba8d86b888bbfd1a5aeaead911bca1ffc554072571c4c44",
+        "assets/transcriptions/transcribe_r04a_batch5/r04a-q48-flow-and-choice-table.webp": "b4373d1e62b730dc6ff9abbb414e79c6155752f0cd64c13e3f8b395979d416b8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問48 正解イをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。全0は命令1,2,4、全1は3,5で5/5=100%。五判定の10枝中、後段の非零AND二判定のNoのみ未通過で8/10=80%。他肢はこの一方または両方が不一致。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        false,
+        true
+      ],
+      "hintAndDesignReview": "H1定義から経路追跡が残る。H2C0は確定するがC1の枝の確認は本人に残るためfalse。H3両網羅率とイを明示。",
+      "issues": []
+    },
+    {
+      "id": "r03h-q48",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "f147350d63fd77631201fba44d3e2a5c70023f28587441133ebeb16d5195dd99",
+      "beforeLessonSHA256": "32fc8422bc1ed3356bc9ca1497d696ebda407392b22f8a84b2cfe639ec22d023",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q48.webp",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q48.webp": "4a3ae35065db7011da90992ddd82b8dcd861ca104be2faa4efa7ff1b512bdff5",
+        "assets/transcriptions/author_r03h/r03h-q48-figure.webp": "5bab8215f7d34b9fdbc331a855502c4b5e1cfbf88d1db26ea223c66e241a3c95",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問48 正解アをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。各段で再合流するので(左,左,左),(中央,右,中央),(右,左,右)で8箱を覆う。上・下3箱ゆえ最低3例。6不要、8は箱数、18は全経路数。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        false,
+        true
+      ],
+      "hintAndDesignReview": "H1は箱と経路の区別。H2下限3を渡すが3例で各段を覆えるかの条件適用が残るためfalse。H3具体経路で達成しアを明示。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q48",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "bf157ece535a98bfe03ea9b83677a7cff93bb24326df0ded2ebe4ccb2c6de784",
+      "beforeLessonSHA256": "5d1c9164e3c2f1961b230f1fc1ec0b438613ccd332b39d8b2749b4d9cb256329",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q48.webp",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q48.webp": "35eed3a03c1c6519c63030266be721f81f2fe3e8d9814609c8c0b37d5467ba2b",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問48 正解アを空テキストのためPDFをレンダリングしview_imageで実開封。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch24-independent/2022r04h-answer.png"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。動作故障や環境変更のない状態で文書を現状へ合わせ、保守性を改善する完全化保守。是正・適応・潜在故障除去の予防は目的が異なる。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は目的の分類軸で名称対応が残る。H2完全化保守と文書整備を直接対応しtrue、H3ア明示。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q48",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "5bf312f823235d7eb331ed08b3d49e1871215196d5478bdc2a9b892e31acd40a",
+      "beforeLessonSHA256": "f9fb1d38990e1257c2c33765d404665ea7e3791e3ca214f73486c922b5e81e90",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q48.webp",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q48.webp": "c7511011a4a8009182750b9934d23b15f75943bb1936e10a1313c1addb1a33e2",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問48 正解アをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。仕様書を再作成しコード理解や将来変更を容易にするため完全化保守。イは発生故障、ウは環境変化、エは潜在故障への対応で条件と異なる。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は作業対象の条件整理で保守分類名未提示。H2完全化保守と整備の意味を対応しtrue、H3ア明示。",
+      "issues": []
+    },
+    {
+      "id": "r04a-q46",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "a6c50abc4a57674e9e67ee296e3854b24a5b95f3d9a815be9f1dbae8946964df",
+      "beforeLessonSHA256": "7ac2c31d03abbfd461310eeaecfd083d7d2463447ce140e7538c03583e90f0e3",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q46.webp",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q46.webp": "0d0aee953b15d00b91a321d3052d29203e1a8afee329bc1e17935f807ebbe778",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問46 正解アをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。作成者を含め処理を机上追跡するウォークスルー。イ・ウは上下方向の結合テスト、エは独立処理による結果比較で複数人レビューではない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は原問の机上レビューという条件整理で名称との対応は未提示。H2ウォークスルー定義/名称明示、H3ア明示。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q49",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "7e86f9e4808dceffd7902027c46eaf2d672a1c73aad0832ce09ecae5dbdca2a3",
+      "beforeLessonSHA256": "c55837ba25c70753edeab79a521169a6cabcaf8547b05f28a069c9242894cd05",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q49.webp",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q49.webp": "d223a50752cfc49835afcea20498ed3654bd12a7546c49cf5ea301fba37f77b7",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問49 正解イをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。国内での業としての製造自体が実施であり全量輸出でも許諾が要る。ア私的利用、ウ25年超の期間経過、エ独自先使用の国内事業は許諾不要の条件。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1は国内/業の一般条件で存続期間・先使用の適用判断が残る。H2全量輸出でも国内製造対象とイを実質特定しtrue。H3イ明示。",
+      "issues": []
+    },
+    {
+      "id": "r03h-q47",
+      "status": "initial-content-checked",
+      "beforeEnvelopeSHA256": "36425e259b9d7b4b58439af961822e1f67b6357a08be58f124ec2acc87851e65",
+      "beforeLessonSHA256": "bdfc10db35d04ef73aa0201da8670f3ce0e8c7fccfaba7e76940cdb462844c16",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q47.webp",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q47.webp": "e80727b579f17861320309d081dbcad1bc8484475903526aa22705d747e51793",
+        "assets/transcriptions/author_r03h/r03h-q47-table-events.webp": "e118a8ea5e805adb0546e24eabd91916d3d27ab19c889d6176d1571a4da382d9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問47 正解エをPDFから独立再抽出したテキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。表の交点を逐次再選択すると1→2→2(空欄)→3→4→3→4。アへ戻るのは4でメッセージ2、イは初期二イベント、ウは⑤までの途中状態。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "expectedFlags": [
+        false,
+        false,
+        true
+      ],
+      "hintAndDesignReview": "H1は交点と空欄の読み方、H2は③までで④〜⑥の表適用が残るのでfalse。H3最終4/エを示しtrue。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q50",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "cd1a99f7149c6b97e6fd8cd0630256ea7136d1b612f1a50f059a193f9e487bc1",
+      "beforeLessonSHA256": "1d70a824ef1350164aa993a29c891ec36721fa7a1827643bdefd6225a439f29d",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q50.webp",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q50.webp": "49b340492b4608779694df5853d1583b41ab06934a3b8851eed31d06086290e8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問50 正解アを空テキストのためPDFをレンダリングしview_imageで実開封。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch24-independent/2022r04h-answer.png"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。編集・コンパイル・リンク・デバッグを統合するIDE。イはCPU観測装置、ウは評価ボード、エはOS等の実行時スケジューリング。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "expectedFlags": [
+        true,
+        true,
+        true
+      ],
+      "hintAndDesignReview": "H1が編集・コンパイル・リンク・デバッグを列挙し『これらの作業をまとめるツール』と正答アを言い換えているためtrueが必要。H2定義、H3ア明示。",
+      "issues": [
+        {
+          "id": "B24-02",
+          "questionId": "r04h-q50",
+          "field": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "severity": "must-fix",
+          "finding": "H1が編集・コンパイル・リンク・デバッグを列挙し『これらの作業をまとめるツール』と正答アを言い換えているためtrueが必要。H2定義、H3ア明示。",
+          "requestedChange": "H1本文を維持するならrevealsAnswerをtrueへ変更し、designの開示理由と残る判断を同期する。"
+        }
+      ]
+    }
+  ]
+}

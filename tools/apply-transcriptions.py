@@ -33,21 +33,29 @@ def refresh_context_reviews(root,before_bank,after_bank,records,before_context,a
             raise ValueError(f'Non-transcription source edit: {id}')
         if {k:v for k,v in old_context[id].items() if k!='sourceHash'}!={k:v for k,v in new_context[id].items() if k!='sourceHash'}:
             raise ValueError(f'Classification changed: {id}')
-        changes.append({'id':id,'beforeQuestion':before[id],'afterQuestionSHA256':digest(q),
+        changes.append({'id':id,'beforeQuestion':before[id],'afterQuestion':copy.deepcopy(q),'afterQuestionSHA256':digest(q),
                         'beforeContextItem':old_context[id],'afterContextItem':new_context[id],
                         'transcriptionSHA256':digest(record_map[id])})
     directory=root/'content/ap/study-context-reviews';root_path=directory/'root.json'
     if not root_path.is_file():return
     review=json.loads(root_path.read_text())
+    exams={item['id'].split('-q')[0] for item in changes}
+    old_exam_reviews={exam:json.loads((directory/f'{exam}.json').read_text()) for exam in exams if (directory/f'{exam}.json').is_file()}
     journal={'kind':'reviewed-transcription-representation','reviewer':'/root','beforeContextSHA256':digest(before_context),
-             'afterContextSHA256':digest(after_context),'beforeRootReview':copy.deepcopy(review),'items':changes}
+             'afterContextSHA256':digest(after_context),'beforeRootReview':copy.deepcopy(review),'beforeExamReviews':old_exam_reviews,
+             'beforeBankSHA256':hashlib.sha256((json.dumps(before_bank,ensure_ascii=False,indent=2)+'\n').encode()).hexdigest(),
+             'afterBankSHA256':hashlib.sha256((json.dumps(after_bank,ensure_ascii=False,indent=2)+'\n').encode()).hexdigest(),'items':changes}
     filename=f'data/transcription-context-revisions/{digest(changes)[:16]}.json'
     path=root/filename;path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(journal,ensure_ascii=False,indent=2)+'\n')
     review['sourceMetadataRevisions'].append({'runId':'transcription-integration-'+digest(changes)[:16],
        'revisionRecord':filename,'note':'確認済み文字起こしの表現・版だけを反映。紙ペン分類と理由は保持。変更前の問題と監査を台帳に保存。文字内容の確認者は各transcription-reviewを参照。'})
     review['combinedContextSha256']=digest(after_context)
     review['preservedR07hItemsSha256']=digest(sorted((i for i in after_context['items'] if i['questionId'].startswith('r07h-q')),key=lambda i:int(i['questionId'].split('-q')[1])))
-    review['preservedContentSha256']['data/questions.json']=hashlib.sha256((root/'data/questions.json').read_bytes()).hexdigest()
+    # The quality workspace preserves the original whole-bank audit in its
+    # immutable archive. Keep that historical reference; this journal records
+    # the actual correction's before/after objects and current metadata hashes.
+    if not (root/'work/ap/objective-quality/manifest.json').is_file():
+        review['preservedContentSha256']['data/questions.json']=hashlib.sha256((root/'data/questions.json').read_bytes()).hexdigest()
     root_path.write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n')
     for exam in {item['id'].split('-q')[0] for item in changes}:
         path=directory/f'{exam}.json'
@@ -164,6 +172,10 @@ def draft_question_ids(root):
 def apply(root=ROOT):
     bank,records=checked_records(root)
     retentions=checked_retentions(root,bank,records)
+    expected_bank=None;legacy_hashes={}
+    if (root/'work/ap/objective-quality/manifest.json').is_file():
+        from ap_lesson_quality import transcription_transition
+        expected_bank,legacy_hashes=transcription_transition(root,bank)
     context_path=root/'content/ap/study-context.json'
     context=json.loads(context_path.read_text()) if context_path.is_file() else None
     before_context=copy.deepcopy(context)
@@ -176,18 +188,21 @@ def apply(root=ROOT):
     for record in records:
         q=by_id[record['id']]
         classification=classifications.get(q['id'])
-        if classification and classification['sourceHash']!=digest(q):
+        if classification and not (classification.get('sourceHash')==digest(q) or q['id'] in legacy_hashes and classification.get('sourceHash')==legacy_hashes[q['id']]):
             raise ValueError(f'Classification source changed before transcription: {q["id"]}')
         replacement={key:record[key] for key in ['stem','choices','image','imageAlt']}
         if 'choicePresentation' in record or 'choicePresentation' in q:
             replacement['choicePresentation']=record.get('choicePresentation','inline')
-        if any(q.get(key)!=value for key,value in replacement.items()):
+        changed=any(digest(q.get(key))!=digest(value) for key,value in replacement.items())
+        if changed:
             q.update(replacement)
             q['version']+=1
         # Text-only representation changes do not change the verified paper/pen
         # classification. Keep its exact-source link current, without relabeling.
-        if classification:
+        if classification and changed:
             classification['sourceHash']=digest(q)
+    if expected_bank is not None and digest(bank)!=digest(expected_bank):
+        raise ValueError('Transcription output differs from independently registered AP composition')
     (root/'data/questions.json').write_text(json.dumps(bank,ensure_ascii=False,indent=2)+'\n')
     if context:
         context_path.write_text(json.dumps(context,ensure_ascii=False,indent=2)+'\n')

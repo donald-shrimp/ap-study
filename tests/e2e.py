@@ -140,7 +140,7 @@ with sync_playwright() as p:
  write_state(page,legacy);page.reload();page.locator('.hint-head h3').wait_for()
  assert '分野共通' in page.locator('.hint-head h3').inner_text() and '以前の分野共通ガイド' in page.locator('.hint-box').inner_text()
  assert '以前の分野共通ガイドが保存されています' in page.locator('.hint-update').inner_text()
- page.get_by_role('button',name='最新のヒントで続ける',exact=True).click()
+ page.get_by_role('button',name='最新の教材で続ける',exact=True).click()
  s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);old=next(a for a in s['attempts'] if a['id']==old_id)
  assert a['id']!=old_id and a['questionId']=='r07h-q18' and a['selected']==1 and a['confidence']
  assert a['hintCount']==0 and a['hintEvents']==[] and a['materialSnapshot']['hintStatus']=='individual'
@@ -153,7 +153,7 @@ with sync_playwright() as p:
  # Completed attempts with an older individual hint can restart too; no answer is carried.
  completed=state();a=next(a for a in completed['attempts'] if a['id']==completed['currentId']);a['materialSnapshot']['hints'][0]['text']='更新前の個別ヒント'
  write_state(page,completed);page.reload();page.locator('.hint-head h3').wait_for()
- page.get_by_role('button',name='最新のヒントで解き直す',exact=True).click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['selected'] is None and a['hintCount']==0 and not a['answerViewedBefore']
+ page.get_by_role('button',name='最新の教材で解き直す',exact=True).click();s=state();a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['selected'] is None and a['hintCount']==0 and not a['answerViewedBefore']
  print('PASS reported DAC question / decimal place-value reasoning / old guide to latest hints / selection preserved / old history unchanged / completed retry starts closed',flush=True)
  exam_name=f"{pending_fixture['year']}年 {'春期' if pending_fixture['season']=='spring' else '秋期'}"
  open_q(pending_id);assert page.locator('.source-question img').count()==1;assert exam_name in page.locator('.question-meta').inner_text()

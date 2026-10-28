@@ -1,0 +1,1384 @@
+[
+  {
+    "id": "r03a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "14c0861d460d2b0b5b66d2fecc0ddf2e80d68152f2074bb54081d6eb36d9134d",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q17",
+      "summary": "ページフォールトによる平均遅延の上限から、主記憶アクセス1回当たりの発生率を求める。",
+      "explanation": "ページフォールト発生率をpとすると、1命令当たりの遅れはアクセス2回×p×40ミリ秒です。40ミリ秒=40,000マイクロ秒なので、2p×40,000≤0.4よりp≤0.4/80,000=5×10⁻⁶です。1命令当たりのアクセス回数と、ミリ秒からマイクロ秒への換算を両方反映します。",
+      "choiceReasons": [
+        "遅れは2×5×10⁻⁶×40,000=0.4マイクロ秒で上限に一致します。",
+        "遅れは0.8マイクロ秒で、許容値0.4を超えます。",
+        "遅れは4マイクロ秒で、許容値の10倍です。",
+        "遅れは8マイクロ秒で、許容値の20倍です。"
+      ],
+      "takeaway": "平均遅れはアクセス回数×発生率×1回の遅れ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "発生率pは主記憶へのアクセス1回当たりと考えます。1命令には平均2回のアクセスがあるため、1命令当たりの発生回数の期待値は2pです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "40ミリ秒は40,000マイクロ秒です。平均遅延＝アクセス回数×ページフォールト発生率×1回のオーバヘッドなので、2×p×40,000≦0.4を解いてください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "p≦0.4÷(2×40,000)＝5×10⁻⁶。等号の値が許容できる最大発生率です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "1命令当たりのアクセス回数2を落とす、またはミリ秒とマイクロ秒を混同する。",
+      "stages": [
+        {
+          "newInformation": "1アクセス当たりの確率と1命令当たりの平均回数の対応",
+          "remainingWork": "40ミリ秒と0.4マイクロ秒を共通単位へ換算",
+          "revealsAnswer": false,
+          "reason": "2pの意味を教えるが数値を確定しない"
+        },
+        {
+          "newInformation": "時間単位の換算と平均遅延の式",
+          "remainingWork": "不等式を解き、4肢の数値と比較",
+          "revealsAnswer": false,
+          "reason": "式と変数の対応は示すが割り算が残る"
+        },
+        {
+          "newInformation": "不等式の解と最大値",
+          "remainingWork": "選択肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "最終の発生率を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q17.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 25ecf180de01570fcb8d10a95c1660bb331383bb6d146312c2cd32bf8d2458d8。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "cb0f2c15f9d4861c5647a0574b868f9603dbb2f6d316cf68ea08831ae43c7045",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q18",
+      "summary": "固定長のページと可変長のセグメントで、領域の確保と断片化がどう異なるかを比べる。",
+      "explanation": "ページングは仮想記憶と主記憶を同じ固定サイズのページ・ページ枠に分けます。空いている枠ならどこへでもページを置けるため、領域間の小さな空きが利用できなくなる外部断片化は生じません。\nセグメンテーションは論理的な単位を可変サイズで扱うので、保護や共有に適する一方、外部断片化が起こり得ます。ページングにもページ内部の未使用部分という内部断片化はあります。",
+      "choiceReasons": [
+        "論理単位ごとの保護は、コードやデータなどを分けるセグメンテーションに適した特徴です。",
+        "論理的な単位の共有はセグメンテーションの特徴で、ページングの比較上の長所ではありません。",
+        "可変サイズの領域を動的に伸縮する特徴は、セグメントの扱いに対応します。",
+        "固定長の枠へ配置するため、主記憶の外部断片化が生じないことがページングの長所です。"
+      ],
+      "takeaway": "ページングは外部断片化を防ぐが、ページ内の内部断片化は残る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ページングは主記憶を同じ大きさのページ枠に分けます。一方、セグメンテーションはコードやデータなどの論理的なまとまりを可変長で扱います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "外部断片化は、空き領域の総量は十分でも連続した大きな空きがない状態です。固定長のページ枠ならページごとに空いている枠を使え、隣接した空きを探す必要はありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この性質からページングでは主記憶の外部断片化が生じません。ただしページ枠内の未使用部分（内部断片化）はあり得ます。保護・共有や可変長の扱いはセグメント側と区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "外部断片化と内部断片化の違いや、論理単位での保護・共有の特徴が曖昧。",
+      "stages": [
+        {
+          "newInformation": "ページングとセグメンテーションの割当単位",
+          "remainingWork": "どの利点が固定長割当に関係するか考える",
+          "revealsAnswer": false,
+          "reason": "方式の前提のみで長所は確定しない"
+        },
+        {
+          "newInformation": "外部断片化の定義と固定長配置の機構",
+          "remainingWork": "定義と全4肢を照らす",
+          "revealsAnswer": true,
+          "reason": "正答肢と実質同義の外部断片化回避を説明する"
+        },
+        {
+          "newInformation": "外部・内部断片化と他の選択肢の対比",
+          "remainingWork": "該当する選択肢を確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢の内容を直接提示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 44b501bbe0f9f76f94e761683cca221ac21eeb2c0a7bb699e79bc5d56b8791ff。",
+        "公式正答はcontext.json記録のエ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d72de30c6f3658b563de9682500ea8ab5f5c0de9ded54032c9176c821c9c76dc",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q16",
+      "summary": "ページ置換えが頻発して性能が急落する状態を、個別のメモリ操作や事象と区別する。",
+      "explanation": "実行に必要なページを主記憶に十分保持できないと、ページを入れ替えた直後にまた別のページが必要になり、置換えが頻発します。CPU処理よりページの入出力に多くの時間を費やし、処理能力が急落する状態をスラッシングといいます。ページフォールトは、必要なページが主記憶にないという個々の事象です。",
+      "choiceReasons": [
+        "ページ置換えの頻発による性能の急激な低下を指します。",
+        "主記憶の内容を補助記憶へ退避する操作を指します。",
+        "空き領域が細かく分かれるなど、領域利用に無駄が生じる状態です。",
+        "必要なページが主記憶に存在しないという事象で、性能急落の状態そのものではありません。"
+      ],
+      "takeaway": "ページフォールトは事象、スラッシングは置換え頻発による性能悪化。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「1回のページ不在」なのか「ページの入替えが連続し、処理能力まで低下する状態」なのかを分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ページフォールトは必要ページが主記憶にない事象、スワップアウトは補助記憶への退避操作、フラグメンテーションは記憶領域の断片化です。いずれも設問の状態全体を表すものではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "残るスラッシングは、必要ページの読み込み・追出しに処理時間を奪われ、CPUの実処理が進まなくなる状態です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ページフォールトと、フォールトが続いて実処理が進まなくなる状態の名前を混同する。",
+      "stages": [
+        {
+          "newInformation": "単発の事象と継続的な性能低下の区別",
+          "remainingWork": "四つの用語が何を表すか考える",
+          "revealsAnswer": false,
+          "reason": "語を指定せず設問の着眼点を整理する"
+        },
+        {
+          "newInformation": "誤答3語の意味と除外理由",
+          "remainingWork": "残りの名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "3つの誤答肢を除外し正答が一意になる"
+        },
+        {
+          "newInformation": "スラッシングの名称と入出力過多の因果",
+          "remainingWork": "言葉と原因を結び付ける",
+          "revealsAnswer": true,
+          "reason": "正答名称を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 2a9617caa93ff90285ef100259eb2bdcb6742858eceeae6a13653cbdb8368baa。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c3f896571925c9d8d3bebc2d7beb181ddf5eef14de63af3d06fbe7eb8c2390c8",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q17",
+      "summary": "ページ置換えの頻発がもたらす性能低下の現象名を問う。",
+      "explanation": "主記憶が不足すると、必要なページを読み込んだ直後に別のページを追い出し、すぐまた読み込むという置換が続くことがあります。実処理よりページの入出力に時間を費やし、処理能力が急落する状態をスラッシングと呼びます。\nページフォールトは必要なページが主記憶にないという個別の事象であり、それが起きるだけでスラッシングとは限りません。",
+      "choiceReasons": [
+        "ページ置換が多発して実処理が進まなくなる状態をスラッシングと呼びます。",
+        "スワップアウトは主記憶の内容を補助記憶へ移す操作です。性能急落の現象名ではありません。",
+        "フラグメンテーションは記憶領域が断片化することです。",
+        "ページフォールトは参照したページが主記憶にない事象で、性能急落の状態全体を指す語ではありません。"
+      ],
+      "takeaway": "ページフォールトは事象、スラッシングは過剰な置換で実処理が進まない状態。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ページフォールトは「参照したページが主記憶にない」出来事です。設問ではそれ自体でなく、置換えが多発した結果の処理能力を聞いています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "主記憶に必要なページを置ききれないと、読み込むたびに別の必要ページを追い出し、CPU処理よりページの入出力に時間がかかる悪循環になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この悪循環による性能の急低下をスラッシングといいます。スワップアウトは退避操作、フラグメンテーションは領域の断片化であり、状態全体の名称ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ページフォールト・スワップアウトなど、関連する単発の現象名を選んでしまう。",
+      "stages": [
+        {
+          "newInformation": "ページフォールトの定義と問いの射程",
+          "remainingWork": "選択肢の現象名と比較",
+          "revealsAnswer": false,
+          "reason": "ページフォールトだけは除外できるが正答を一意には指定しない"
+        },
+        {
+          "newInformation": "ページの追出し・再読込みで性能が下がる機構",
+          "remainingWork": "状態名と処理の関係を考える",
+          "revealsAnswer": false,
+          "reason": "現象の機構を説明するが、スラッシングという名称との対応は本人に残る。H1と合わせても誤答を全除外していない。"
+        },
+        {
+          "newInformation": "正答名称と他の用語の使い分け",
+          "remainingWork": "名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答の名称を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q17.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: c3298b7ee98c69ebbc68a4e12a58e38195169e358fdcbdb6368e87423f53876a。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。",
+        "2026-10-27 レビュー修正者 Codex /root：B09-01 に従いH2と設計メモの開示フラグ・理由を修正。原作者の担当IDは保持。本文・正答・解説は変更なし。最終版の独立承認は修正者以外が行う。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2f6ea9a46dd0ca46fd7b3b43a53cdd793e97d2af08502775caeba66783a785f8",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q18",
+      "summary": "空きメモリの総量と連続領域の大きさを区別し、断片化に関する記述を判定する。",
+      "explanation": "可変長領域を繰り返し確保・解放すると、空き領域が細かく分散する外部フラグメンテーションが生じます。例えば10Mバイトの空きが三つ離れて存在しても、連続20Mバイトの領域は確保できません。固定長方式では領域内の未使用部分という内部フラグメンテーションも区別します。",
+      "choiceReasons": [
+        "可変長方式は様々な大きさの領域の確保・返却によって外部フラグメンテーションが発生します。",
+        "固定長方式が可変長方式より外部フラグメンテーションを起こしやすいという説明は不適切です。固定長でも内部の未使用領域は生じ得ます。",
+        "空きが小片に分散すれば、合計容量が十分でも必要な連続領域を確保できないことがあります。",
+        "返却のたびにガーベジコレクションを行う必要はありません。また、ガーベジコレクションは不要領域の回収で、必ず断片化を解消するとは限りません。"
+      ],
+      "takeaway": "空きの総量と連続した空きの大きさは別。外部フラグメンテーションでは後者が不足する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "可変長のメモリ領域を繰り返し確保・解放すると、使っている領域の間に小さな空きが生じます。固定長の方式では、割り当てたブロックの中に未使用部分が残ることがあります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば空きが10Mバイトずつ3か所に分かれていた場合、合計は30Mバイトでも連続20Mバイトを確保できないことがあります。これが外部断片化の影響です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "固定長の内部の無駄と、可変長で外部の空きが分散することは別です。またガーベジコレクションは不要オブジェクトの回収で、返却のたびに必須とは限りません。各記述をこの区別で判定します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "外部・内部断片化を区別できず、空き合計が十分なら必ず確保可能だと思う。",
+      "stages": [
+        {
+          "newInformation": "外部・内部の無駄が生じる配置の違い",
+          "remainingWork": "各肢がどちらの断片化を述べるか考える",
+          "revealsAnswer": false,
+          "reason": "対比だけで正答文の内容を特定しない"
+        },
+        {
+          "newInformation": "合計と最大連続空きが異なる数値例",
+          "remainingWork": "具体例に一致する肢を見つける",
+          "revealsAnswer": true,
+          "reason": "正答肢の記述と実質同じ事象を具体的な数値で説明する"
+        },
+        {
+          "newInformation": "固定長方式およびガーベジコレクションとの区別",
+          "remainingWork": "他肢の誤りも確認する",
+          "revealsAnswer": true,
+          "reason": "前段で正答が判明しており判断の根拠も渡す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: a9168b680bc2dab9e3da7c1b524be97a23f6f557f190be090081e1ce2f8add80。",
+        "公式正答はcontext.json記録のウ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q16",
+    "baseVersion": 1,
+    "baseLessonSHA256": "ac3b5f6a877dfd3480623a51c1e4e6530d9e9eeee76e755ec9ffe3c8b7e5768b",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q16",
+      "summary": "ジョブの依存関係と一時ファイルの作成・削除時刻を追い、容量の最大同時使用量を求める。",
+      "explanation": "Aの開始で50Mバイトを作ります。A終了後にB、Cが同時開始し、それぞれ50Mバイトを作るので計150Mバイトです。Aのファイルは最初に生起するBだけが参照し、B終了で消えます。BとC終了後にはB、Cのファイル計100Mバイトが残り、D、E開始で各50Mバイト追加され、計200Mバイトになります。DはBを参照、EはCを参照し、両者の終了でそれらを消します。最後のF開始時はD、E、Fの計150Mバイトです。最大は200Mバイトです。",
+      "choiceReasons": [
+        "100MバイトではB、Cが同時にファイルを作る時点の150Mバイトにも足りません。",
+        "150MバイトではD、E開始時に残るB、Cの100Mバイトと、新規100Mバイトを同時保持できません。",
+        "D、E開始時のB、C、D、Eの4ファイルで4×50=200Mバイトが最大です。",
+        "250MバイトはAのファイルも残ると数えた値ですが、AのファイルはB終了時に削除済みです。"
+      ],
+      "takeaway": "一時ファイルの容量はジョブの開始と終了で増減を追い、消える時点を先行関係から確定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図の依存関係はA→B・C、B→D・E、C→E、D・E→Fです。多重度2で、分岐先は上から生起し、先行ファイルを読むのは最初に生起した直後のジョブだけです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各ジョブの開始で50Mバイトが増え、ファイルを参照する直後のジョブの終了時にそのファイルが消えます。A開始50、B・C同時開始150です。AのファイルはBだけが参照するので、B終了で削除します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "B・Cの終了後はB・Cのファイルが残ります。次のD・E開始時に二つの50Mバイトが増え、(B+C+D+E)×50＝200Mバイトがピークです。その後F開始時はD・E・Fの3ファイルです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "開始時作成と参照先終了時削除を混同し、AやBのファイルを長く数え過ぎる。",
+      "stages": [
+        {
+          "newInformation": "原図のジョブ依存関係と特殊な参照規則",
+          "remainingWork": "ファイルの寿命を表に書く",
+          "revealsAnswer": false,
+          "reason": "矢印を整理するだけで容量は出ない"
+        },
+        {
+          "newInformation": "開始で追加・参照先終了で削除する手順とAの例",
+          "remainingWork": "B・C終了後、D・E開始時の状態を追う",
+          "revealsAnswer": false,
+          "reason": "途中状態まで示し、ピークの判断は本人に残る"
+        },
+        {
+          "newInformation": "ピークとなるD・E開始時の4ファイルと最大値",
+          "remainingWork": "最大値を選ぶ",
+          "revealsAnswer": true,
+          "reason": "最終最大容量を提示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0c7f045b04b7c2d6fcd648a4e1225be1ed126614d9d9bf17ebb47c76a846ffe6。",
+        "公式正答はcontext.json記録のウ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "754812217a19175c93de6f01989827f98519c7a6521932930026442082e7224b",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q18",
+      "summary": "ヒープ回収・空き領域の統合・モジュールのロード・再配置を操作内容で見分ける。",
+      "explanation": "ガーベジコレクションは、プログラムから使用されなくなったオブジェクトの領域を検出し、ヒープの空きとして再利用可能にします。主記憶の配置移動やモジュール読込みとは別の処理です。",
+      "choiceReasons": [
+        "空き領域をまとめるのはコンパクションで、可変区画方式という方式名ではありません。",
+        "不要なヒープ領域の回収という説明で正しいです。",
+        "格納位置の移動は動的再配置で、動的リンキングではありません。",
+        "必要時のロードは動的ローディングで、動的再配置ではありません。"
+      ],
+      "takeaway": "回収、配置移動、結合、読込みを操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢で行っている動作を見ます。「使わない領域を再利用する」「空きをまとめる」「モジュールを移動する」「必要時に読み込む」は別々の操作です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "空き領域を連続にまとめるのはコンパクション、実行中の格納位置変更は動的再配置、必要時のモジュール読込みは動的ローディングです。記述と名称がずれた肢を除きます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "残る不要なヒープ領域の回収はガーベジコレクションです。参照されなくなったオブジェクトの領域を再利用可能にする働きがあります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "記憶領域を扱う機能名が似ており、動的リンキングとローディング・再配置を取り違える。",
+      "stages": [
+        {
+          "newInformation": "四つの操作の比較軸",
+          "remainingWork": "四肢の操作と術語を対応付ける",
+          "revealsAnswer": false,
+          "reason": "比較軸だけで用語の正解は示していない"
+        },
+        {
+          "newInformation": "三つの誤った名称対応と正しい名称",
+          "remainingWork": "残る選択肢を判断する",
+          "revealsAnswer": true,
+          "reason": "3つの誤答肢の誤用を除外し正答肢を一意にする"
+        },
+        {
+          "newInformation": "ガーベジコレクションの対象と効果",
+          "remainingWork": "正誤理由を確認する",
+          "revealsAnswer": true,
+          "reason": "正答名称そのものを教える"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 21d7348907b3f6935f44bc9e885a0c93a061d53cc76c2c881d18de272e302bbc。",
+        "公式正答はcontext.json記録のイ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "517a526bb51b1346263bbc63670aa3f00b3c51f413ad18c6a8b4c4494b58b6bc",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q14",
+      "summary": "直列2台の枝が2本並列の構成について、稼働率の関数と基準線との上下関係を調べる。",
+      "explanation": "各直列枝の稼働率はx²、二枝並列の稼働率は1−(1−x²)²=2x²−x⁴です。x=0.5では0.4375<0.5、x=0.8では0.8704>0.8。端点は0と1で、直線との内部交点は(√5−1)/2≈0.618です。したがって下から上へ交差するエです。",
+      "choiceReasons": [
+        "全域で直線より上の形ですが、x=0.5では下になります。",
+        "全域で直線より下の形ですが、x=0.8では上になります。",
+        "前半で上、後半で下の形で、実際の比較と逆です。",
+        "前半で下、後半で上へ交差する形が計算と一致します。"
+      ],
+      "takeaway": "直列は積、並列は全枝故障確率の補数で計算する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図は「直列2台の枝」が上と下に1本ずつあり、その2本は並列です。直列は両装置が動く必要があるので、枝1本の稼働率はx×xです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "並列はどちらかの枝が動けば稼働します。両枝が故障する確率を(1−x²)²と置くと、全体はf(x)＝1−(1−x²)²。グラフは破線y=xとの上下で判定できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "f(x)＝2x²−x⁴。x=0.5でf=0.4375は破線より下、x=0.8でf=0.8704は上です。0と1では一致するので、途中で下から上に交差するグラフを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "直列の確率の積と並列の『両方故障』の補数を組み合わせられず、グラフを式だけで選べない。",
+      "stages": [
+        {
+          "newInformation": "直列2台から枝1本の稼働率x²を作る",
+          "remainingWork": "2枝の稼働条件を式にする",
+          "revealsAnswer": false,
+          "reason": "枝の計算だけでは正答グラフが定まらない"
+        },
+        {
+          "newInformation": "並列の補事象で全体のf(x)を導く",
+          "remainingWork": "x=0.5と0.8を代入し形を選ぶ",
+          "revealsAnswer": false,
+          "reason": "関数を渡しても代入・グラフ比較が残る"
+        },
+        {
+          "newInformation": "二点でのy=xとの大小と端点を確認",
+          "remainingWork": "図の選択肢を対応させる",
+          "revealsAnswer": true,
+          "reason": "正答グラフだけが満たす上下と交差方向を教える"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q14.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0816e4327c1002a06ca47013ecde4ce69f9d6a95bb13b2eb8a74fe970d60971f。",
+        "公式正答はcontext.json記録のエ。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6e0d552b7e895938a19c54020d520563c2b92d831e0fd113ed140e9d2e15d1e7",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q18",
+      "summary": "ページ置換・アドレス変換・ページフォールト・断片化の用語をそれぞれ判定する。",
+      "explanation": "LRU（Least Recently Used）は、最近最も使われていないページを追い出す方式です。各ページの最後の参照時刻を比較し、現在までの経過時間が最大のページを置換します。アはこの基準を正しく述べています。ページフォールトは必要なページが実記憶にない状態で、通常は補助記憶からページを読み込みます。",
+      "choiceReasons": [
+        "最後の使用後の経過時間が最長というLRUの置換基準です。",
+        "通常のインデックス方式のページ表は仮想ページから実ページへの対応を管理します。実記憶の全ページだけの表という説明ではありません。",
+        "ページフォールトの対処は必要なページの読込みで、不要オブジェクトの回収であるGCとは別です。",
+        "等サイズのページ枠を使うページングでは、小さな外部空き領域が散在する説明は当たりません。"
+      ],
+      "takeaway": "LRUは最終使用時刻、FIFOは読込み時刻に着目する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ページ置換方式にはFIFO（先に読み込んだページを追い出す）と、最近いつ使ったかを見る方式があります。読み込み時刻と最終使用時刻を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LRUはLeast Recently Used（最近最も使っていない）の略で、最後の参照から最も長く経ったページを選びます。『ページを読み込んでからの時間』ではない点が重要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ページフォールトは必要なページが主記憶にないことで、不要オブジェクトを回収するガーベジコレクションとは違います。また固定長のページ枠なら主記憶の外部断片化は起きません。残りの肢もこの点で確かめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "LRUの『直近の使用』とFIFOの『読込順』を混同し、ページフォールトとGCも同種と考える。",
+      "stages": [
+        {
+          "newInformation": "FIFOと最終使用時刻による選び方の違い",
+          "remainingWork": "LRUの語と対象を考える",
+          "revealsAnswer": false,
+          "reason": "一般的な比較のみでLRUの定義はまだ伝えない"
+        },
+        {
+          "newInformation": "LRUの略語と置換対象の厳密な定義",
+          "remainingWork": "正答肢の記述と照合する",
+          "revealsAnswer": true,
+          "reason": "正答肢と同義のLRUの基準を示す"
+        },
+        {
+          "newInformation": "ページフォールト・GC・断片化の他肢との違い",
+          "remainingWork": "他3肢の適否を確認する",
+          "revealsAnswer": true,
+          "reason": "前段と合わせて正答を確定し、誤答も説明する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 0b4d764b68ccf64647e56510b73ff60135972977b5037f627da2020585be7c26。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "02623b8120670349b1fc362bd2ab85ee37422f554c156ad98ada06255dfdd053",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q19",
+      "summary": "仮想記憶で主記憶と補助記憶がどのデータを受け渡すかを区別する。",
+      "explanation": "仮想記憶では、主記憶に置ききれないページを補助記憶に退避し、必要になればページインします。補助記憶の役割はこのページの格納先であって、主記憶の内容全体をバックアップすることや、更新前の値を履歴として保存することではありません。",
+      "choiceReasons": [
+        "ページアウトしたページを保存し、後のページインに備えます。",
+        "更新前の内容を残すのは更新履歴・回復用情報の役割で、仮想記憶の説明ではありません。",
+        "物理主記憶と補助記憶を連続した仮想アドレスに単純に割り当てる方式ではなく、ページごとに所在を管理します。",
+        "主記憶全体のバックアップが目的ではなく、必要に応じて退避ページを保持します。"
+      ],
+      "takeaway": "仮想記憶の補助記憶は主記憶から追い出したページを保持する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "仮想記憶では、プログラムが参照するアドレス空間と実際の主記憶容量を区別します。主記憶に載せるページを選んで入れ替えられます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "主記憶から追い出すページの内容は、必要に応じて後で再読込みできるよう補助記憶に置きます。この退避をページアウト、戻すことをページインと呼びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "補助記憶は退避したページの格納先です。更新前の値を毎回保存する履歴管理でも、主記憶全体を複製するバックアップでもありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "補助記憶を主記憶全体のバックアップや更新前データの保存先と誤解する。",
+      "stages": [
+        {
+          "newInformation": "仮想記憶のアドレス空間とページ交換の基本",
+          "remainingWork": "保存対象を候補ごとに分類",
+          "revealsAnswer": false,
+          "reason": "ページ管理の原理のみを示す"
+        },
+        {
+          "newInformation": "ページアウト・ページインの定義と補助記憶の使い方",
+          "remainingWork": "説明に合う肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢を実質的に言い換えたページ退避先の説明"
+        },
+        {
+          "newInformation": "更新履歴・全体バックアップとの違い",
+          "remainingWork": "誤答との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答内容を直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: d49cb908ff34c6f8810bb46e0f7f761e9ed974cec330ac120e8820f4904d0dde。",
+        "公式正答はcontext.json記録のア。原図から判断条件と全4肢の正誤理由を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f681439721cda19d38a2893edb269fc1789ff5c1c47335afdbfffb67997c6d9f",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q14",
+      "summary": "故障間隔を延ばす対策と、故障後の修復時間を短くする対策を見分ける。",
+      "explanation": "MTTRは故障から復旧までの平均修理時間です。エラーログで発生時の状況や原因を調べやすくすると、診断と修復に要する時間を短くできます。故障を起きにくくする対策や、誤りを運転中に訂正する機能とは目的を区別します。",
+      "choiceReasons": [
+        "障害原因の特定を助け、修理・復旧の時間を短くするのでMTTRの改善に直接役立ちます。",
+        "ビット誤り訂正は誤りによる故障を防ぐ対策で、主に信頼性向上に寄与します。",
+        "命令再試行は一時的な誤りから動作を継続する対策で、修理時間短縮とは性格が異なります。",
+        "予防保全は故障する前に対処して故障間隔を長くする、MTBF向上の対策です。"
+      ],
+      "takeaway": "MTBFは故障しにくさ、MTTRは故障後の復旧の速さ。原因調査の支援はMTTRに効く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "MTBFはMean Time Between Failures（平均故障間隔）で、大きいほど故障しにくい指標です。MTTRはMean Time To Repair（平均修理時間）で、小さいほど復旧が速い指標です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "復旧の時間には故障の検知・原因の切分け・修理などが含まれます。設問は故障発生の予防ではなく、故障後のどの工程を短くできるかを選ばせています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "エラーログは故障前後の状態を記録し、原因の切分けを速めます。一方、ビット訂正や命令再試行は運転中の誤り対策、予防保全は故障を防ぐ取組みです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "MTBFとMTTRの略語の意味を知らず、障害対策をすべて同じ効果と捉えてしまう。",
+      "stages": [
+        {
+          "newInformation": "MTBF・MTTRの定義と増減の意味",
+          "remainingWork": "各選択肢が故障前・後のどちらに効くか比べる",
+          "revealsAnswer": false,
+          "reason": "指標の説明のみで選択肢名を確定しない"
+        },
+        {
+          "newInformation": "故障後の切分け・修理工程という比較軸",
+          "remainingWork": "具体的な機能を工程に当てはめる",
+          "revealsAnswer": false,
+          "reason": "比較の基準は示すが特定の肢は選ばない"
+        },
+        {
+          "newInformation": "エラーログと他の障害対策の用途",
+          "remainingWork": "正答の機能を決める",
+          "revealsAnswer": true,
+          "reason": "正答肢の名称と作用を提示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q14.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 51e7d65411b4a978ca2fc40acb11481a760bc845bda217103e79ae74819b72b3。",
+        "公式正答はcontext.json記録のア。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0c4f7f4a0c7f362133bf492bc6b346259326620b580a903b78fd1a28d45c48f5",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q16",
+      "summary": "タスクのスケジューリングで、特定のタスクが実行されずに待ち続ける条件を考える。",
+      "explanation": "処理予定時間の短いタスクを優先すると、新たに短いタスクが到着するたびに長いタスクが後回しになることがあります。これが飢餓（スターベーション）です。\nアは待つほど優先度を上げるエージングで飢餓を抑え、イのラウンドロビンとエの到着順方式は待ち行列順にCPUを割り当てます。",
+      "choiceReasons": [
+        "待ち時間に応じて優先度を上げるエージングを行うので、後回しにされ続けることを抑えます。",
+        "ラウンドロビンでは一定時間ずつ順番にCPUを与えるので、特定タスクの飢餓を抑えます。",
+        "短い仕事が優先され続けると、処理時間の長いタスクがCPUを得られない可能性があります。",
+        "到着順に先頭から実行する方式なので、後から来た短いタスクが追い越し続けることはありません。"
+      ],
+      "takeaway": "優先条件が固定だと飢餓が起き得る。待ち時間に応じた優先度上昇は対策になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "CPUを長く待ち続ける問題を飢餓（スターベーション）と呼びます。一度待つだけでなく、新しいタスクが来ても待っている側の順番が進まないかがポイントです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば実行時間の長いタスクが待つ間に、短いタスクが次々到着したらどうなるでしょう。予定処理時間が短いものを優先する方式では、長いタスクが後回しになり続ける可能性があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "短い順に選ぶ方式がこの危険を持ちます。待つほど優先度を上げるエージング、一定時間ずつ回すラウンドロビン、到着順のFIFOは、後から短いタスクが追い越し続ける構造と異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "単なる長い待ち時間と、短いタスクに繰り返し追い越されて実行機会を失う飢餓を混同する。",
+      "stages": [
+        {
+          "newInformation": "飢餓の定義と通常の待ち時間との差",
+          "remainingWork": "各スケジューリング方針で待機順を考える",
+          "revealsAnswer": false,
+          "reason": "現象名と判定基準だけを教える"
+        },
+        {
+          "newInformation": "短いタスクが続くと長いタスクが飢餓になる因果",
+          "remainingWork": "4肢の方式の説明に対応付ける",
+          "revealsAnswer": true,
+          "reason": "正答肢の『最短処理時間優先』を実質的に言い換える"
+        },
+        {
+          "newInformation": "エージング・ラウンドロビン・到着順との比較",
+          "remainingWork": "ほかの方式が飢餓を抑える理由を確認",
+          "revealsAnswer": true,
+          "reason": "正答方式を直接特定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 1d76821137e34bd37f92c4ef2a3254a0d355618bf67aeddce820c135f244a0ae。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9de454eb08a6875c911e2dd042f669a54a77148336bcf47ff27724d51ed61ec1",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q15",
+      "summary": "到着済みのジョブから処理時間の短い順に実行し、対象ジョブのターンアラウンドタイムを求める。",
+      "explanation": "処理時間順方式では、実行待ちの中で処理時間が短いジョブを先に実行します。Aを0〜2秒、Cを2〜5秒、Eを5〜6秒、Dを6〜8秒、Bを8〜12秒に処理します。\nBの到着は1秒。ターンアラウンドタイムは到着から完了までなので、12−1=11秒です。待ち時間だけなら8−1=7秒で、処理時間4秒を含めます。",
+      "choiceReasons": [
+        "8秒はBの開始時刻です。到着から完了までの時間ではありません。",
+        "完了12秒から到着1秒を引くと11秒で、9秒にはなりません。",
+        "Bの完了は12秒で、到着1秒を引くと11秒です。10秒ではありません。",
+        "Bの完了12秒と到着1秒の差11秒が正しいです。"
+      ],
+      "takeaway": "待ちジョブだけで短い順を選び、ターンアラウンドは完了−到着で求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "処理時間順では『その時点で到着していて待っているジョブ』の中から短いものを選びます。多重度1なので実行中のジョブを同時に走らせません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "時刻0にはAだけなので0～2秒で処理します。2秒時点の待機はB（4秒）とC（3秒）で、短いCを2～5秒に動かします。この間にD（3秒到着）とE（4秒到着）が加わります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "5秒にはB・D・Eが待っており、処理時間は順に4・2・1秒です。短い順に実行してBの終了時刻を求め、**ターンアラウンドタイム＝終了時刻－到着時刻（Bは1秒）**を計算してください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "将来到着するジョブまで先に並べ替える、あるいは開始時刻からの時間を答えてしまう。",
+      "stages": [
+        {
+          "newInformation": "到着済みだけで処理時間順に選ぶという規則",
+          "remainingWork": "0～2秒で次の候補を選ぶ",
+          "revealsAnswer": false,
+          "reason": "選択方式の原理だけで実行順や数値は出さない"
+        },
+        {
+          "newInformation": "最初の2区間とその間の後続ジョブ到着",
+          "remainingWork": "5秒以降の実行順とBの終了時刻を決める",
+          "revealsAnswer": false,
+          "reason": "最初の2区間のみ、後半の実行順は本人に残す"
+        },
+        {
+          "newInformation": "5秒時点の待機リストとターンアラウンドの式",
+          "remainingWork": "最終時刻から1秒を引いて選択肢を選ぶ",
+          "revealsAnswer": false,
+          "reason": "必要な数値と式を示すがBの終了時刻・最終差は本人が計算する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q15.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 8fdf3250810bfa2cb6d8d44861d29852c93b415efdced0cebad148aaaf1c3529。",
+        "公式正答はcontext.json記録のエ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "10b4d7420c9300cb1665b5dd4774fad771bdc1eb008288bfc76ffb60aae999c2",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q18",
+      "summary": "ローカルに履歴を持つ分散型と中央サーバ主体の集中型の版管理を区別する。",
+      "explanation": "Gitでは通常のcloneでリポジトリの履歴をローカルに複製します。ローカルで履歴の調査やコミットができ、共有リポジトリと通信できない間も作業を記録できます。SubversionやCVSのように中央リポジトリへ変更を記録する方式とは、この履歴と記録の所在が異なります。",
+      "choiceReasons": [
+        "中央リポジトリを中心に変更を管理する集中型のツールです。",
+        "中央リポジトリを中心に履歴と変更を管理する集中型のツールです。",
+        "全履歴をローカルに持ち、通信できない間も履歴調査やコミットができます。",
+        "主にファイル単位の版を管理するツールで、問われている分散型リポジトリの複製とは異なります。"
+      ],
+      "takeaway": "分散型では共有先と通信せずローカルに履歴を記録できる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "版管理では、ソースコードの今の内容だけでなく『誰がいつどの変更を記録したか』という履歴の保存場所を見ます。設問は中央サーバなしで履歴確認・変更記録が可能かを聞いています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "集中型では通常、履歴の中心は中央サーバ側にあります。分散型では各開発者が履歴を含むリポジトリを手元に持ち、ネットにつながらなくてもローカルへコミットできます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Gitは通常のcloneで履歴を含むリポジトリを複製し、ローカルコミットできます。Subversion・CVSは集中型、RCSは個々のファイルの版管理を中心とするツールです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "作業ファイルのローカルコピーと、履歴を含むリポジトリの完全な複製の違いが分からない。",
+      "stages": [
+        {
+          "newInformation": "作業ファイルと履歴の所在を分ける視点",
+          "remainingWork": "説明の要件を整理",
+          "revealsAnswer": false,
+          "reason": "設問の比較軸だけを示す"
+        },
+        {
+          "newInformation": "集中型・分散型の履歴管理とコミット可能性",
+          "remainingWork": "四つの製品の特性を照合",
+          "revealsAnswer": false,
+          "reason": "分散型の意味は学べるが製品名はまだ渡していない"
+        },
+        {
+          "newInformation": "GitとSubversion・CVS・RCSの分類",
+          "remainingWork": "該当するツールを選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答名を示し他3肢を除外する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 7fb629e6fa3de190fcc13e97c21df8c3ae68638e28edf752a7e1509b264dbba7。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "09c5ecfdddd88998b8a9781ae3cd562c2d48b9e27a5ca6a7d4e93e6f5fac73db",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q19",
+      "summary": "中央リポジトリが利用不能でも履歴を調べてコミットできる版管理方式を特定する。",
+      "explanation": "Gitは分散型のバージョン管理ツールです。各開発者がリポジトリを複製し、通常は履歴も手元に持つため、サーバに接続できなくても履歴の調査やローカルのコミットができます。\nApache SubversionとCVSは中央リポジトリを中心とする集中型です。RCSは主に個々のファイルの版を管理するツールで、問題の分散型の説明に該当しません。",
+      "choiceReasons": [
+        "Apache Subversionは集中型で、履歴全体を持つ分散型の説明とは異なります。",
+        "CVSは中央リポジトリを利用する集中型です。",
+        "Gitは履歴を含むローカルリポジトリで調査やコミットを行える分散型です。",
+        "RCSはファイル単位の版管理が中心で、全履歴を複製する分散開発の説明ではありません。"
+      ],
+      "takeaway": "ローカルで履歴確認とコミットができるのは、作業ファイルだけでなくリポジトリを持つから。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "通信が切れても可能とされているのは『履歴の調査』と『変更の記録』の二つです。単なるファイルのローカル保存で、その両方ができるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "分散型では履歴を含むリポジトリを各開発者が複製します。commitはローカルに履歴を記録でき、共有先への送信（push）は後で行えます。集中型は通常中央のリポジトリが記録の中心です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Gitは分散型です。通常のcloneでローカルに履歴を持つため、オフラインで履歴調査・コミットができます。SubversionとCVSは集中型、RCSは主にファイル単位の版管理です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "中央とローカルのどちらに履歴の実体があるかを意識せず、どのツールも同じだと考える。",
+      "stages": [
+        {
+          "newInformation": "オフラインで必要な二つの操作の確認",
+          "remainingWork": "保存対象が作業ファイルのみか履歴全体か判断",
+          "revealsAnswer": false,
+          "reason": "正答名称を示さず要件のみを整理"
+        },
+        {
+          "newInformation": "clone・commit・pushの役割と履歴の所在",
+          "remainingWork": "ツール名と方式を照らし合わせる",
+          "revealsAnswer": false,
+          "reason": "分散型の仕組みを教えるが製品名は渡さない"
+        },
+        {
+          "newInformation": "4ツールの区別とGitの該当性",
+          "remainingWork": "正答を選択する",
+          "revealsAnswer": true,
+          "reason": "正答の名称を特定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: ede4a7d92694934c3e01cf5aa0c6a1c102bd39e971a6348d72cdf53bd65b6bc4。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "550f518c8c859f231afe2941928ddc81ebc6380a7bceaeb6912824ffdd614ea6",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q18",
+      "summary": "コンパイラを動かすホストと、生成された目的プログラムの実行先であるターゲットを区別する。",
+      "explanation": "設問では、言語処理プログラムを動かしているコンピュータと、生成した目的プログラムを動かすコンピュータで命令形式が違います。\nこのようにホストと異なるターゲット向けの機械語を生成するコンパイラをクロスコンパイラと呼びます。組込み機器向けプログラムをPC上で生成する場面などで使います。",
+      "choiceReasons": [
+        "ほかの計算機の動作を模倣して実行するものです。別の命令形式の目的プログラムを生成する言語処理系ではありません。",
+        "コンパイラを動かすホストとは別の命令形式のターゲット向けにコードを生成するものです。",
+        "実行速度やコードサイズを改善するコンパイラの性質です。生成先の命令形式が異なることを表しません。",
+        "仕様やパラメータからプログラムを自動生成するものです。ホストとターゲットの命令形式の違いによる名称ではありません。"
+      ],
+      "takeaway": "クロスコンパイラはホストと異なるターゲット向けのコードを生成する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "コンパイラはソースコードを目的プログラムへ翻訳するプログラムです。設問ではコンパイラ自身を動かすホストと、生成コードが走るターゲットの命令形式が違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "エミュレーターは他のCPUの動作を模倣してプログラムを実行します。最適化コンパイラは速度・サイズの改善が主眼です。設問は動作の模倣でも最適化でもなく、『異なる命令形式の目的コードを生成』する仕組みです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホストと異なるターゲット向けの目的コードを生成するのがクロスコンパイラです。例としてPC上で組込み機器用の機械語を作ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "別の計算機で『プログラムを実行』することと、その計算機用の『目的プログラムを生成』することを取り違える。",
+      "stages": [
+        {
+          "newInformation": "ホスト・ターゲット・目的プログラムの定義",
+          "remainingWork": "ホストとターゲットを対応付ける",
+          "revealsAnswer": false,
+          "reason": "前提となる用語だけを説明する"
+        },
+        {
+          "newInformation": "エミュレーター・最適化と生成先の違い",
+          "remainingWork": "生成する言語処理系に該当する肢を探す",
+          "revealsAnswer": false,
+          "reason": "誤答2肢を除くが正答名は言わず、残る比較がある"
+        },
+        {
+          "newInformation": "クロスコンパイラの名称と具体例",
+          "remainingWork": "残るプログラムジェネレーターとの違いも確認する",
+          "revealsAnswer": true,
+          "reason": "正答名称を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 809e9c3b997e361aecb951d02d04ff2c0f24c10834db8f323d927ed190c9a9ff。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be40df0bbbc9eca2f6047ae268ba723a7b94273dc793807c63de2da3da88f2d5",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q16",
+      "summary": "到着順・多重度1でのジョブ終了時刻を出し、待ち時間を含むターンアラウンドを計算する。",
+      "explanation": "到着順で多重度1なのでAは0〜5秒、Bは5〜11秒、Cは11〜14秒に実行されます。Cのターンアラウンドタイムは待ち時間を含め、終了14−到着3=11秒です。",
+      "choiceReasons": [
+        "14−3=11秒で正しいです。",
+        "12秒となる開始・終了時刻は到着順の実行に合いません。",
+        "13秒は到着時刻3秒の差引きと一致しません。",
+        "14秒はCの終了時刻であり、到着からの経過時間ではありません。"
+      ],
+      "takeaway": "ターンアラウンドタイムは終了時刻−到着時刻。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ターンアラウンドタイムは『ジョブの到着から完了まで』の時間です。実行時間だけでなく、順番待ちも含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "多重度1・到着順なのでAは0～5秒、次のBは5～11秒です。Cは3秒に到着しても、Bが終わるまでは実行できません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Cは11秒から3秒動いて14秒に完了します。Cのターンアラウンドタイム＝14－到着3＝11秒です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ジョブCの処理時間3秒だけを答える、またはCの終了時刻14秒をそのまま答える。",
+      "stages": [
+        {
+          "newInformation": "到着・実行開始・完了とターンアラウンドの定義",
+          "remainingWork": "表の時刻から実行順を組む",
+          "revealsAnswer": false,
+          "reason": "公式のみで数値を導かない"
+        },
+        {
+          "newInformation": "AとBの実行区間からCの開始時刻を得る",
+          "remainingWork": "Cの3秒間を足し、到着との差を計算",
+          "revealsAnswer": false,
+          "reason": "Cの開始は分かるが終了と差は本人が求める"
+        },
+        {
+          "newInformation": "Cの終了時刻と到着からの経過時間",
+          "remainingWork": "選択肢を照合",
+          "revealsAnswer": true,
+          "reason": "最終数値を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q16.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: d5eed6b850d328d7f885b01935955411b7c6e462f6a353e83d068f220d222db9。",
+        "公式正答はcontext.json記録のア。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4eb9c01f396f154a64e4aa1941c906172ac87c9c1ad9f23f9c34daf2ddc3b471",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q18",
+      "summary": "優先度付きタスクの切替えと、タスクより優先される割込み処理を区別する。",
+      "explanation": "割込み禁止状態を考慮しない条件では、割込みが発生すると実行中タスクを中断して割込み処理ルーチンを実行します。タスク間の優先度によるスケジューリングと、ハードウェア割込みの受理は別です。",
+      "choiceReasons": [
+        "タスク切替禁止は割込み禁止と異なり、割込み処理の呼出しまで禁止しません。",
+        "割込み処理が長いとタスクの再開が遅れ、応答性に影響します。",
+        "割込み処理は最優先タスクを含むタスクの処理より優先されます。",
+        "割込みではタスクの状態を保存して割込み処理へ移るので、タスクと同一コンテキストで実行するという説明は不適切です。"
+      ],
+      "takeaway": "タスク切替禁止と割込み禁止を混同しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問は『割込み禁止状態を考慮しない』条件です。タスクはスケジューラが選ぶ処理、割込み処理ルーチンは割込み発生に対応して呼び出される処理です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タスク切替の禁止は、別タスクへのスケジューリングを抑えることです。割込みの受付禁止とは別なので、タスク切替を止めても割込み処理まで止めたことにはなりません。また割込み中は通常のタスク処理が進みません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "受け付けた割込みの処理は最優先タスクよりも先に実行されます。処理が長いと応答性に影響し、割込み処理は割り込まれたタスクと同一の実行コンテキストではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "タスクの切替禁止を割込み禁止と同一視し、割込み処理時間やコンテキストの影響を見落とす。",
+      "stages": [
+        {
+          "newInformation": "タスクとISRの役割と設問の前提",
+          "remainingWork": "各肢の『禁止』対象を見分ける",
+          "revealsAnswer": false,
+          "reason": "設問の用語を定義するにとどまる"
+        },
+        {
+          "newInformation": "タスク切替禁止と割込み禁止の差、割込み中の進行",
+          "remainingWork": "応答性・コンテキストを含めて肢を比較",
+          "revealsAnswer": true,
+          "reason": "割込み処理中はタスク処理が進まないという説明が、割込み処理がタスクより優先するという正答ウの内容に相当する。"
+        },
+        {
+          "newInformation": "最優先タスクとの優先関係と他肢の誤り",
+          "remainingWork": "正しい割込み優先関係を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢と同じ優先関係を示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 5219cdb570110783f3aa21897ae7c01ef9969bf50bdf2be4ed3a316e7b4cee6a。",
+        "公式正答はcontext.json記録のウ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。",
+        "2026-10-27 レビュー修正者 Codex /root：B09-02 に従いH2と設計メモの開示フラグ・理由を修正。原作者の担当IDは保持。本文・正答・解説は変更なし。最終版の独立承認は修正者以外が行う。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0f21951f587489397f67986b9a024b5d8f6a89aa0d96fcb3a2aa42155c916771",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q19",
+      "summary": "到着間隔のある4件の要求を1枠と2枠で処理したときの最終完了時刻を比較する。",
+      "explanation": "要求の到着時刻を0、1、2、3秒とします。多重度1では各4秒を順に実行し、終了は4、8、12、16秒です。多重度2では最初の二つが0〜4秒と1〜5秒に動作し、待っている後続二つは4〜8秒、5〜9秒に動作します。全ての完了は16秒と9秒で、差は7秒です。",
+      "choiceReasons": [
+        "6秒ではありません。多重度2の最終完了は2件目開始の1秒を含めて9秒です。",
+        "単独実行では16秒、2件同時実行では9秒に完了するため、差は7秒です。",
+        "8秒は全要求が同時到着した場合の差です。本問は1秒間隔で到着します。",
+        "9秒は多重度2での完了までの時間であり、二つの条件の差ではありません。"
+      ],
+      "takeaway": "到着間隔がある処理は、到着時刻・実行開始・終了を時系列で追う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "最初の要求を時刻0とすると、4件の到着は0・1・2・3秒です。処理時間はどちらの多重度でも1件4秒。到着前に処理を始めることはできません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "多重度1では要求を一つずつ4秒処理し、完了は4・8・12・16秒です。多重度2では0秒と1秒に二つの枠が埋まり、最初の完了は4秒と5秒です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "多重度2の空き枠へ残り2件を順に入れると、終了は8秒と9秒です。全件完了の差は16－9＝7秒となります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "4件が同時到着したかのように並列処理し、2枠目の開始が1秒遅いことを見落とす。",
+      "stages": [
+        {
+          "newInformation": "1秒間隔での到着時刻と1件4秒という条件",
+          "remainingWork": "各開始時刻を整理",
+          "revealsAnswer": false,
+          "reason": "到着条件を整理するだけで答えは出さない"
+        },
+        {
+          "newInformation": "多重度1の4件の完了と2枠の最初の完了",
+          "remainingWork": "残り2件がいつ始まるか決める",
+          "revealsAnswer": false,
+          "reason": "多重度2の最終完了までは示していない"
+        },
+        {
+          "newInformation": "2枠での残り2件の完了と差",
+          "remainingWork": "差と選択肢を対応させる",
+          "revealsAnswer": true,
+          "reason": "最終時間差の値を渡す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q19.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: ada769607dc47439ad4a9f96ba1e2603fcda1548bb28084c5badd9a2b4402bc4。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "60479c2fbf277e91b51206c93f50f83bd0e512b3716716fadb842f9c6df7e812",
+    "author": "ChatGPT/gpt-6-batch09-20261027",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q18",
+      "summary": "同じ4件の依頼を1枠と2枠でさばく際、並列化しても各要求の4秒は変わらないことを使う。",
+      "explanation": "最初の到着を時刻0とすると、4件は時刻0,1,2,3に到着します。多重度1は一件ずつ4秒かかり、終了は4,8,12,16です。\n多重度2では最初の二件が0〜4と1〜5で実行されます。空いた枠へ後の二件が入り、2秒目の要求は4〜8、3秒目の要求は5〜9で実行されます。全件終了は9なので差は16−9=7秒です。",
+      "choiceReasons": [
+        "アの6秒ではありません。多重度2の二つ目の枠は1秒遅れて始まり、最後は9秒に終わります。",
+        "イの7秒は16秒と9秒の差です。",
+        "ウの8秒は二枠とも時刻0に開始した計算です。二件目の到着は1秒後です。",
+        "エの9秒は多重度2での全件終了時刻であり、問われる二方式の差ではありません。"
+      ],
+      "takeaway": "並列処理は到着時刻と空き枠の時刻を並べて開始・終了を決める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各要求の処理時間4秒は、多重度2でも短くなりません。並列化で変わるのは『同時に走らせられる要求の数』です。到着時刻は0、1、2、3秒と置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "多重度1なら0～4、4～8、8～12、12～16秒と処理します。2枠では最初の2件はそれぞれ0～4秒、1～5秒に動きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "2枠の空きが出る時刻4秒・5秒に残りの要求を1件ずつ開始します。それぞれ4秒の処理を加え、全件終了時刻を比べて差を計算してください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "多重度2を単純に処理時間の半分と考え、到着タイミングと2枠の待ち行列を無視する。",
+      "stages": [
+        {
+          "newInformation": "多重度は同時処理件数であり個別処理時間は一定",
+          "remainingWork": "到着時刻と実行枠の対応を整理",
+          "revealsAnswer": false,
+          "reason": "処理方法の説明で答えを渡さない"
+        },
+        {
+          "newInformation": "1枠での実行区間と2枠の最初の2件",
+          "remainingWork": "残りの要求の待ちを考える",
+          "revealsAnswer": false,
+          "reason": "2枠の後半の終了時刻はまだ出していない"
+        },
+        {
+          "newInformation": "2枠の残り要求の開始時刻の確定",
+          "remainingWork": "最終完了時刻と差を算出する",
+          "revealsAnswer": false,
+          "reason": "4秒加算と差を本人が計算する余地が残る"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q18.webp を実際に取得・表示し、問題文・4肢と図表をcontext.jsonと目視照合。台帳の原本SHA-256: 6b6d2892f2b94aa0aff5e8cbb8aaa1123969d18923357e540eb80e7d21f5b732。",
+        "公式正答はcontext.json記録のイ。原図から条件・全4肢の判断根拠を作者が再確認。",
+        "作者の自己点検段階。独立レビュー・公開用データ反映は未実施。"
+      ]
+    }
+  }
+]

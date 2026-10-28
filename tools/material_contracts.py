@@ -36,7 +36,7 @@ def validate_legal(material,required=False):
     require(isinstance(s['publisher'],str) and s['publisher'].strip() and len(s['publisher'])<=200 and (s['publishedAt'] is None or valid_date(s['publishedAt'])) and (s['legalAsOf'] is None or valid_date(s['legalAsOf'])),'Invalid source date/publisher')
     require(url(s['questionUrl']) and url(s['answerUrl']) and digest(s['questionSha256']) and digest(s['answerSha256']) and type(s['modifiedFromOriginal']) is bool and isinstance(s['modificationNote'],str) and len(s['modificationNote'])<=2000 and (not s['modifiedFromOriginal'] or s['modificationNote'].strip()),'Invalid source hashes/modification')
     require(isinstance(r,dict) and set(r)=={'status','checkedAt','sourceRefs','note'} and r['status'] in ['unverified','current','outdated'] and isinstance(r['sourceRefs'],list) and len(r['sourceRefs'])<=20 and all(url(v) for v in r['sourceRefs']) and len(set(r['sourceRefs']))==len(r['sourceRefs']) and isinstance(r['note'],str) and len(r['note'])<=4000,'Invalid legal review')
-    require(r['checkedAt'] is None if r['status']=='unverified' else valid_date(r['checkedAt']) and r['sourceRefs'] and r['note'].strip() and s['legalAsOf'] is not None,'Legal review needs a date and evidence')
+    require(r['checkedAt'] is None if r['status']=='unverified' else valid_date(r['checkedAt']) and r['sourceRefs'] and r['note'].strip() and (r['status']=='outdated' or s['legalAsOf'] is not None),'Legal review needs a date and evidence')
 
 def validate_source_hashes(root,material,review):
     if not material.get('sourceRecord'):return

@@ -1,0 +1,1388 @@
+[
+  {
+    "id": "r03h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "42a1ba51be46cb76cf2d61ba0c4f1be934ef7fc2ec972f7f906ab22552b3489f",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q21",
+      "summary": "RFIDの用途を、光学コードの読取りや音声・赤外線通信と区別して判定する。",
+      "explanation": "RFIDはICタグとリーダ間の無線通信で識別情報などを読み取る技術です。タグを商品や入退室用カードに付けることで、物品や人を識別し管理できます。",
+      "choiceReasons": [
+        "紙のコードを光学的に読むバーコードや二次元コードの利用です。",
+        "ヘッドフォンとの音声通信はBluetoothなどの用途です。",
+        "赤外線通信は電波を用いるRFIDとは異なります。",
+        "無線チップの識別情報を用いるためRFIDの活用です。"
+      ],
+      "takeaway": "RFIDは無線による識別で、光学コードや音声通信とは目的が異なる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの利用例について、**情報を運ぶ媒体**と**何のために使うか**を分けます。紙の模様、電波、赤外線は同じ方法ではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RFIDはRadio Frequency Identificationの略で、タグのICに記録した識別情報を電波で読み取り、商品や入退室カードなどを識別します。音声を送る無線通信とは目的が違います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "小さな無線チップによって人や物を識別・管理する用途がRFIDです。印刷コードの光学読取りや赤外線、ヘッドフォンへの音声転送とは区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "RFIDのRFを知らず、無線で通信する例をすべて識別技術だと考える。",
+      "stages": [
+        {
+          "newInformation": "媒体と目的の二つの分類軸",
+          "remainingWork": "四肢を媒体と目的に分類する",
+          "revealsAnswer": false,
+          "reason": "比較軸のみで答えの活用例は確定しない"
+        },
+        {
+          "newInformation": "Radio Frequency Identificationの定義とタグでの識別",
+          "remainingWork": "定義に当てはまる活用例を選ぶ",
+          "revealsAnswer": true,
+          "reason": "定義が正答肢『無線チップで人・物の識別管理』と実質一致する"
+        },
+        {
+          "newInformation": "正答の用途と誤答3つの使い分け",
+          "remainingWork": "一致する肢を確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢の説明をそのまま特定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=86df6f1ef13b13cd1d5c8b7310a8ee315c174b4c4f99568e53cd8522544b6459。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本四肢：印刷コード入力・携帯電話の音声・赤外線通信・無線チップの識別管理。RFIDの無線識別という用途が一致する。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "17f7a1a7d45b0e5070dd8cceb1acf58b5e704950d7da877205bd81ab229a7870",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q22",
+      "summary": "SoCの集積単位が、ソフトウェア・ボード・パッケージでなく半導体チップであることを判断する。",
+      "explanation": "SoCはSystem on a Chipの略で、CPU、メモリ、周辺機能など、従来複数チップで実現したシステムの機能を一つの半導体チップに集積します。",
+      "choiceReasons": [
+        "LSI内のソフトウェアの名前ではなく、ハードウェアの集積形態です。",
+        "複数MCUを載せるボードは一つのチップという条件を満たしません。",
+        "複数チップのシステムを一つのチップに実現する説明で正しいです。",
+        "複数チップを一パッケージに封入するのはSiPの説明です。"
+      ],
+      "takeaway": "SoCの単位はチップ、SiPの単位はパッケージ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "『一つにまとめる』にも、基板上に複数のICを載せる方法と、半導体の中へ機能を集積する方法があります。選択肢の**チップ・ボード・パッケージ**の違いを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "SoCはSystem on a Chip。CPUや入出力回路などのシステム機能を**一つの半導体チップ**に実装します。複数の別々のチップを一つの容器に収めるSiP（System in Package）とは違います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "もともと複数のチップで構成していたコンピュータの機能を、一つのLSIチップで実現する説明が該当します。ソフトウェアそのものや複数MCUのボードではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "チップとパッケージを同じ意味に捉え、SoCとSiPを混同する。",
+      "stages": [
+        {
+          "newInformation": "チップ・ボード・パッケージの集積境界",
+          "remainingWork": "構成単位を四肢ごとに分類する",
+          "revealsAnswer": false,
+          "reason": "選択肢の比較項目だけでSoCの定義を明示していない"
+        },
+        {
+          "newInformation": "SoCの定義とSiPのパッケージ集積との差",
+          "remainingWork": "SoCの定義に合う肢を選択する",
+          "revealsAnswer": true,
+          "reason": "一つのチップへのシステム集積は正答肢の内容そのもの"
+        },
+        {
+          "newInformation": "正答のLSI集積とほかの肢との違い",
+          "remainingWork": "他の集積方法との差を説明する",
+          "revealsAnswer": true,
+          "reason": "正答肢を言い換えて直接渡している"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=914ac0264ab8fb8bd702f5af3b4f85cdeb2d785a9809e4ef91b0270c74e55526。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本ではアは内蔵ソフトウェア、イは複数MCUボード、ウは一チップLSI、エは複数チップの一パッケージ。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "366c36d49a14c2d5d297b5d065196a4f4dedcae1331a1f6b1f916f3942006de7",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q22",
+      "summary": "SoCとSiPの違いを、複数機能を集めたときの『チップ内部』と『パッケージ内部』で判定する。",
+      "explanation": "SoCはSystem on a Chipの略です。CPU、メモリ、入出力など、従来は複数のチップに分かれていたシステムの機能を一つの半導体チップへ集積します。\n複数チップを一つのパッケージへ封入する方式はSiP（System in Package）です。「一チップ」と「一パッケージ」を区別します。",
+      "choiceReasons": [
+        "内蔵ソフトウェアそのものではなく、システム機能を集積した半導体です。",
+        "複数MCUをボードに載せる構成は一つのチップへの集積ではありません。",
+        "複数チップで構成していたシステムを一つのチップにしたLSIがSoCです。",
+        "複数チップを一つのパッケージに収めるのはSiPです。"
+      ],
+      "takeaway": "SoCは一チップ、SiPは一パッケージ。実装の境界を確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "CPU、メモリ、周辺機能などを小さくまとめても、**一枚の半導体ダイ**に作る場合と、複数のダイを一つのパッケージに入れる場合があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "SoC（System on a Chip）は前者で、従来複数のチップで実現した機能を一チップ内に集積します。SiP（System in Package）は後者で、複数チップのまま同じパッケージに収めます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "選択肢の『複数チップを単一パッケージに封入』はSiPです。SoCは『複数チップで構成したシステムを一つのチップで実現したLSI』に対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "複数ICの一つのパッケージも『一つ』なのでSoCだと早合点する。",
+      "stages": [
+        {
+          "newInformation": "ダイとパッケージが異なる集積境界",
+          "remainingWork": "選択肢の物理単位を見比べる",
+          "revealsAnswer": false,
+          "reason": "一チップと一パッケージが異なると知らせるだけ"
+        },
+        {
+          "newInformation": "SoCとSiPの定義・対比",
+          "remainingWork": "チップ単位の説明を選ぶ",
+          "revealsAnswer": true,
+          "reason": "SoCの正答文を実質的に説明する"
+        },
+        {
+          "newInformation": "誤答エをSiPと確認し正答ウの記述を特定",
+          "remainingWork": "4肢の違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=63b03e0f96bd357db9dc72a98d6b7018e6cfa136bbb1a8defd26ed4e311ba3de。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本のr03h-q22と同内容の四肢を別画像で確認。正答ウとSiPに当たるエを照合。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7c91fef6d543abec7eff2b3fcdd028c7387c3950a1904fa4ff323bcb5776cb58",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q20",
+      "summary": "制御信号や検出信号を扱う装置から、物体を動かす出力機器を見分ける。",
+      "explanation": "アクチュエーターは、コンピュータからの制御信号を受けてモータやシリンダなどを動かす出力側の装置です。検出した物理量を信号へ変えるセンサーとは向きが逆です。",
+      "choiceReasons": [
+        "アナログ信号をディジタル信号へ変えるのはA/D変換器です。",
+        "キーボードなどは情報をコンピュータへ入れる入力装置です。",
+        "電気信号に基づいて力や運動を生み出す機能です。",
+        "物理量を検出して電気信号へ変えるのはセンサーです。"
+      ],
+      "takeaway": "制御系ではセンサーが検出、アクチュエーターが動作を担う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "制御系には、『状態を測る』『信号を数値化する』『指示を出す』『実際に動かす』といった役割があります。コンピュータから**外へ作用する**装置を探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "センサーは温度や位置などの物理量を電気信号に変え、A/D変換器はアナログ信号をデジタルに変えます。反対にモーターなどは電気的な指示を受け、軸の回転や直線的な動きを生みます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アクチュエーターは制御信号をもとに電気・油圧などのエネルギーを**機械的な力や運動**に変える機器です。コンピュータの出力が実際の動きにつながる記述を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサー・A/D変換器・アクチュエーターの信号や作用の向きが分からない。",
+      "stages": [
+        {
+          "newInformation": "信号の向きと実際の作用という分類軸",
+          "remainingWork": "選択肢を入力側・出力側に振り分ける",
+          "revealsAnswer": false,
+          "reason": "役割の違いは示すが正答の定義までは渡さない"
+        },
+        {
+          "newInformation": "センサー・A/D変換器とモーターの違い",
+          "remainingWork": "モーターの動作を選択肢と対応させる",
+          "revealsAnswer": true,
+          "reason": "正答肢の『電気信号を力学的運動に』を例で実質的に説明する"
+        },
+        {
+          "newInformation": "アクチュエーターの役割と正答記述",
+          "remainingWork": "該当肢を確定する",
+          "revealsAnswer": true,
+          "reason": "定義と正答の説明が一致する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q20.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=419889dda3d48b76d2149e4250e1aa7015eac16e6c6982ccdb11fb33fc1e85a0。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本はアA/D・イ入力機器・ウ電気→運動・エセンサー。コンピュータ出力を運動に変えるウが正答。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "86d0049db3cf06d026eb0682fb6cd8d9a2e865638191dbfd41f41cab96cefc79",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q22",
+      "summary": "制御器・センサー・増幅器とは異なる、エネルギーから回転・直進運動を作る機器を識別する。",
+      "explanation": "アクチュエータは制御系の出力側で働く機器で、エネルギー源のパワーを回転や直進などの動きに変えます。例えばモータや油圧シリンダです。物理量を検知するセンサ、目標値との差を計算する制御器、微小信号を増幅する回路とは役割が異なります。",
+      "choiceReasons": [
+        "目標量と測定値を比較して操作量を出すのは制御器の役割です。",
+        "位置・温度などを検出して電気信号にするのはセンサです。",
+        "供給エネルギーを動きに変換して対象へ働きかける装置がアクチュエータです。",
+        "センサ等の微小信号を増幅するのは増幅器です。"
+      ],
+      "takeaway": "制御系はセンサが測り、制御器が判断し、アクチュエータが動かす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "自動ドアを例にすると、センサーが状態を検出し、制御器が目標との差を判断し、モーターが扉を動かします。この三つの役割は別です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "センサーは位置や温度を電気信号へ変換し、制御器は目標値との比較から指示を決めます。モーターや油圧シリンダは**電気・油圧などのエネルギーを回転や直進運動に変えます**。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アクチュエータは制御対象に物理的に作用する機器なので、エネルギー源の力を動きへ変換する記述が一致します。微小電気信号を増幅する回路とも区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『操作量を出力する』制御器を、動作を実際に行うアクチュエータと混同する。",
+      "stages": [
+        {
+          "newInformation": "センサー→制御器→動作機器の制御流れ",
+          "remainingWork": "四つの処理を装置名に対応させる",
+          "revealsAnswer": false,
+          "reason": "例を挙げるだけで名称との対応を本人に残す"
+        },
+        {
+          "newInformation": "三者の操作を具体例とエネルギー変換で定義",
+          "remainingWork": "動きを作る肢を特定する",
+          "revealsAnswer": true,
+          "reason": "正答のエネルギー→回転・直進を実質的に渡す"
+        },
+        {
+          "newInformation": "アクチュエータの役割と増幅器との差",
+          "remainingWork": "ほかの肢の用途を確認する",
+          "revealsAnswer": true,
+          "reason": "正答の記述を直接説明する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=31c042b8b44ab9c47401744af5fd3c2931b2912b45419eafc797264282855885。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本のア目標との差に応じ操作量・イ測定・ウパワー→回転/直進・エ信号増幅を確認。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ede8f4bdf154bc9c1bd63ad8c113c0d8d4d9034ad4ddb0d351e22ca8f97c1dfe",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q23",
+      "summary": "アクチュエーターの役割を、状態の計測・操作量の算出・信号増幅から分ける。",
+      "explanation": "アクチュエーターは、電気、油圧、空気圧などのエネルギーを回転や直線運動へ変換する機器です。例えばモーターは電気を回転へ変え、制御系の指示に従って対象を動かします。\n物理量を読み取るのはセンサー、目標との偏差から操作量を決めるのは制御器、微小信号を大きくするのは増幅器です。",
+      "choiceReasons": [
+        "目標値と測定値を比較して操作量を決めるのは制御器の役割です。",
+        "物理量を検出して電気的情報へ変えるのはセンサーです。",
+        "エネルギーを回転・直進などの運動へ変える機器がアクチュエーターです。",
+        "微小な電気信号を大きくするのは増幅器です。"
+      ],
+      "takeaway": "センサーは状態を測り、制御器は指示を作り、アクチュエーターは実際に動かす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ロボットの関節なら、角度を**測る**機器、目標角度とのずれから**指示を決める**機器、指示を受けて関節を**動かす**機器が必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アクチュエーターは最後の『動かす』側です。モーターなら電気エネルギーを回転に、シリンダなら流体のパワーを直進運動に変えます。測定や比較判断だけの装置ではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "制御用のエネルギーを回転・直進などの実際の運動へ変換する説明に当てはまります。目標値との差を計算するのは制御器、物理量を検出するのはセンサーです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサーから操作量の出力までを一つの装置の役割として誤解している。",
+      "stages": [
+        {
+          "newInformation": "計測・判断・動作という制御系の順序",
+          "remainingWork": "各選択肢の主語の機能を整理",
+          "revealsAnswer": false,
+          "reason": "機能を分けただけで具体的な名称は渡さない"
+        },
+        {
+          "newInformation": "アクチュエーターの定義とモーター・シリンダの例",
+          "remainingWork": "エネルギーを運動へ変える肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢の内容を実質的に説明する"
+        },
+        {
+          "newInformation": "正答の変換方向と他の機器名の違い",
+          "remainingWork": "ほか3肢の装置名を確認する",
+          "revealsAnswer": true,
+          "reason": "正答と同じ変換の記述を指定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q23.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=ae92384762c1b930e95cd9a46c52ea1cf5791b9475842cfed97b8f73bcaadc3a。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本の四肢は制御器・センサー・動作変換・増幅器でr04h-q22とほぼ同じだが表記差は原本優先。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "83592510dc3d0d65f0580a651c52689f016b6bf48f18067f9b4310238c89dc6e",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q20",
+      "summary": "インバータ・整流器・DC-DC変換器を、入力と出力が直流か交流かで区別する。",
+      "explanation": "インバータは直流電力をスイッチングして交流電力を作る装置です。交流の周波数などを制御し、エアコンのモータ回転数の調整や電気自動車のモータ駆動に使います。\n直流電圧を上げ下げするのはDC-DC変換、交流から直流への変換は整流で、入力と出力の種類が異なります。",
+      "choiceReasons": [
+        "アは直流を直流のまま昇圧するDC-DC変換です。",
+        "イは直流を直流のまま降圧するDC-DC変換です。",
+        "ウは交流を直流へ変える整流の説明です。",
+        "エは直流から交流への変換で、インバータの説明です。"
+      ],
+      "takeaway": "インバータは直流→交流、整流は交流→直流。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず**直流（DC）**は電流の向きが基本的に一定、**交流（AC）**は向きが周期的に変わるもの、と区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "直流の電圧を高く・低くしても直流のままならDC-DC変換です。交流を直流へ変えるのは整流です。インバータでは半導体のスイッチングで**直流から交流を作ります**。 例えば直流の電池で交流モーターを駆動する場合に使います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "したがって電池などの直流を、モーター用の交流へ変える記述が該当します。ア・イの直流電圧調整、ウの整流とは入力と出力の電力形式が逆です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "電圧を昇降させることと、直流・交流を変換することを同じと考える。",
+      "stages": [
+        {
+          "newInformation": "DCとACの基本的な違い",
+          "remainingWork": "4肢の入出力形式を整理",
+          "revealsAnswer": false,
+          "reason": "DC/ACの定義だけを教え、インバーターの変換方向はまだ渡さない。"
+        },
+        {
+          "newInformation": "DC-DC変換・整流とインバータの対応、直流電池で交流モーターを駆動する例",
+          "remainingWork": "インバータの変換方向に合う肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "インバータのDC→ACという正答肢を直接教える"
+        },
+        {
+          "newInformation": "直流から交流への変換を正答肢へ適用",
+          "remainingWork": "他肢との対比を確認する",
+          "revealsAnswer": true,
+          "reason": "正答内容と誤答の変換を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q20.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=cb9993162249c405d295addab06556df13d2a5d5c161134ff4cb5ffa221cc8a2。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本アDC昇圧・イDC降圧・ウAC→DC・エDC→AC。",
+        "独立レビュー・承認・公開用教材の更新は未実施。",
+        "2026-10-27 レビュー修正者Codex /root：H1に混在したDC電池→ACモーターの正答方向の例を開示済みH2へ移動。H1はDC/ACの定義に限定しfalseを保持。原作者IDを保持し、修正者以外の独立確認を受ける。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a676be471744ad863fc86060f877620070a260984df0e72351a37a6d594adbef",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q21",
+      "summary": "組込みシステムで、正常動作を示す定期的な信号が途絶えたときに異常を検知する監視タイマーの仕組みを問う。",
+      "explanation": "ウォッチドッグタイマは正常動作中のプログラムが定期的にクリアするタイマです。暴走や停止によって所定時間内にクリアされなければタイムアウトし、システムをリセット又は終了します。別の機構が異常を検出してから通知を遅らせるタイマではなく、タイマの期限切れ自体を異常検出に使います。",
+      "choiceReasons": [
+        "一定時間内にクリアされないことを異常の兆候とし、リセット又は終了させます。",
+        "異常を検出した後に待って通知する説明で、タイムアウトによる異常検出ではありません。",
+        "マスカブル割込みでの通知だけを述べており、定期クリアの欠如を検出する機能の説明ではありません。",
+        "異常が一定時間続いたら管理プログラムを呼ぶ説明で、定期的なタイマクリアの監視とは異なります。"
+      ],
+      "takeaway": "ウォッチドッグは正常時の定期クリアが途絶えることを監視する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "プログラムが暴走や停止をしたとき、外からは処理が続いているか分からないことがあります。正常時だけ定期的に実行できる操作を監視に使えるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ウォッチドッグタイマーは正常なプログラムが周期的に**カウンタをクリア（再設定）**する仕組みです。暴走などでクリアできないと、設定時間を過ぎて異常を判定します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "一定時間以内にタイマーがクリアされなければシステム異常とみなし、リセットや終了を行う記述です。故障を別の手段で検出してから単に通知を遅らせる方式ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "異常が見つかった後に待つタイマーと、異常を検出するために時間切れを使う監視機構を混同する。",
+      "stages": [
+        {
+          "newInformation": "プログラム生存確認のために周期動作を見る視点",
+          "remainingWork": "異常検知の契機を四肢で比べる",
+          "revealsAnswer": false,
+          "reason": "一般的な監視の目的だけでは正答の仕組みは定まらない"
+        },
+        {
+          "newInformation": "定期クリアとタイムアウトによる異常検出",
+          "remainingWork": "定義に一致する記述を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢『設定時間内にクリアされない』と実質同じ仕組みを明示"
+        },
+        {
+          "newInformation": "正答のタイムアウト動作と他の通知機能との差",
+          "remainingWork": "通知との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答のリセット・終了まで示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=30a144de2c2c13771b1a88e7954b395683c52625b131a1fe02ac36bf87b3e412。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本のア=定期タイマークリアがないとリセット/終了、イ〜エは異常検知後の通知・別割込み。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dd3ba403eb4ba6088010b983c1126d8e4f35fea2bda62d479f850d07cc014877",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q24",
+      "summary": "コンデンサに直流電圧・交流電圧を加えたときの電流の振る舞いを区別する。",
+      "explanation": "コンデンサは電荷を蓄えます。直流では充電の過渡状態を過ぎると電流が流れなくなります。交流では電圧変化に応じて充放電を繰り返すため、交流成分を通す働きがあります。",
+      "choiceReasons": [
+        "定常直流を遮断し、交流成分を通す性質で正しいです。",
+        "交流を直流へ変える整流はダイオードなどの回路の働きです。",
+        "交流と直流の通過特性が逆です。",
+        "直流を交流へ変えるのはインバータ回路の働きです。"
+      ],
+      "takeaway": "コンデンサは定常直流を遮断し、変動成分を結合する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "コンデンサは二枚の電極間に電荷を蓄える部品です。電池につないだ**直後の充電中**と**十分時間がたった後**の挙動を分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "定常的な直流電圧では充電が済むと電流は流れなくなります。一方、交流では電圧が変化するため充放電が繰り返され、交流成分の電流が流れます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "理想的なコンデンサは、定常直流を遮断し交流成分を通すという説明が正しいです。交流を直流へ整流したり、直流を交流に変換する機能ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "コンデンサが電荷を蓄えるという事実から、直流をずっと通すと誤解する。",
+      "stages": [
+        {
+          "newInformation": "充電直後と定常状態の区別",
+          "remainingWork": "DC/ACで電圧変化があるか考える",
+          "revealsAnswer": false,
+          "reason": "時間による振る舞いを見る視点だけ"
+        },
+        {
+          "newInformation": "直流遮断と交流の充放電という動作原理",
+          "remainingWork": "通す／通さないが一致する肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢と同義のAC通過/DC遮断を教える"
+        },
+        {
+          "newInformation": "正答の通過特性と変換機能の除外",
+          "remainingWork": "変換装置との違いを判断する",
+          "revealsAnswer": true,
+          "reason": "正答肢の意味を直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q24.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=57edfc9ab981e579f7f2b21e479043dde6a0be816e594fc6b11f30d5fd3d5c60。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本はアAC通過・DC遮断、イAC→DC、ウDC通過・AC遮断、エDC→AC。『直流を通さない』は定常状態として説明。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "cad2bb1b71bd8e58ad8331ff04cdb9dd00764f6bee350336787b980461321721",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q21",
+      "summary": "前回のスイッチ値と今回の値を使って、押下の瞬間だけを検知する論理式を導く。",
+      "explanation": "放された状態は0、押された状態は1です。放す→押すという変化では、今回a=1、前回b=0でなければなりません。\n今回が1という条件aと、前回が0という条件b̄を論理積で結ぶとa・b̄です。押されたままのa=b=1は検出しません。",
+      "choiceReasons": [
+        "a=1,b=0の組だけ1になり、押下の立上りを検出します。",
+        "a=0,b=1を検出するので、押す→放すという逆の変化です。",
+        "a=1またはb=0で1になるので、押されたままや放されたままでも検出してしまいます。",
+        "a=0またはb=1で1となり、求めるa=1,b=0では0になります。"
+      ],
+      "takeaway": "立上り検出は今回1かつ前回0。状態検出と変化検出を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "スイッチは『放したら0、押したら1』です。**前回b=0**から**今回a=1**になったときだけ、押された瞬間と判断します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの条件が同時に成立するには論理積（・）を使います。前回bが0である条件を論理式にすると**bの否定（b̄）**です。二条件を一つの式に組み合わせてください。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "たとえば(a,b)=(1,1)は押されたままなので検出0、(0,1)は放した瞬間なので0、(1,0)だけ1になる必要があります。四つの候補へ代入し、条件をすべて満たすものを選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "押されている状態a=1と、押され始める変化b=0→a=1を混同する。",
+      "stages": [
+        {
+          "newInformation": "前回0・今回1という立上り条件",
+          "remainingWork": "0→1をa,bに割り当てる",
+          "revealsAnswer": false,
+          "reason": "判定対象の入力組合せは分かるが論理式の構成が残る"
+        },
+        {
+          "newInformation": "ANDとNOTでb=0とa=1を表す方法",
+          "remainingWork": "aとbの否定を論理積で結ぶ",
+          "revealsAnswer": true,
+          "reason": "a AND NOT bを部品として渡し、残る肢は一意に確定"
+        },
+        {
+          "newInformation": "典型的な3ケースを使った真理値表検査",
+          "remainingWork": "候補に代入し正答を確定する",
+          "revealsAnswer": true,
+          "reason": "条件を満たす真理値表を示し正答が確定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢を原本と照合。context台帳の画像SHA-256=5693400f9a2728a86bb387fa44dbbd04a046ea934d424a91d87dad90c9d5afea。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本 a=今回,b=前回、スイッチ0→1、アa・b̄ / イā・b / ウa+b̄ / エā+b。アのみ(1,0)で1。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "32beca2cb046d8e2676e464de3e96e464115588b9fe2536787325cdb9732cd36",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q22",
+      "summary": "ダイオードの向きと接地基準の電位から、入力正弦波のどちらの半周期が出力に残るかを判定する。",
+      "explanation": "図のダイオードは下側のアノードが0V、上側のカソードが出力につながっています。入力が正なら逆バイアスで導通せず、抵抗に電流が流れないので出力は入力と同じです。入力が負になると0V側からダイオードが導通し、順電圧0Vの条件で出力を0Vに保ちます。したがって正の山だけ残るアです。",
+      "choiceReasons": [
+        "正の入力を通し、負の入力を0Vにクリップした波形です。",
+        "負の半周期だけを残すにはダイオードの向きが逆である必要があります。",
+        "正の入力の区間が一定電圧になり、負の区間に谷が現れる図です。本回路では正の区間は入力に沿い、負の区間は0Vになるため一致しません。",
+        "負の半周期の符号を反転している波形ですが、この回路は反転せず0Vにします。"
+      ],
+      "takeaway": "ダイオードの向きと接地電位から、導通する半周期を判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図2のダイオードは**横棒がある上側がカソード**で、下側のアノードは0V（接地）につながっています。入力が正の場合と負の場合を別々に追います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "アノードの電位がカソードより高いときダイオードは導通します。入力が正なら出力側は正となりダイオードはオフ、負なら接地0Vのアノードから負側のカソードへ電流が流れようとします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "順方向電圧が0Vなので、負の入力の間はダイオードが導通して出力が0Vに抑えられます。正の半周期はそのまま残ります。図の上下を見てこの波形の肢を選んでください。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ダイオードの三角形に見える記号の方向やカソードの線を読めず、負の入力でどちらへ電流が流れるか決められない。",
+      "stages": [
+        {
+          "newInformation": "カソード位置と接地されたアノードの確認",
+          "remainingWork": "図の各接続点を追う",
+          "revealsAnswer": false,
+          "reason": "素子の接続と方向だけで波形の正誤は確定しない"
+        },
+        {
+          "newInformation": "正負それぞれのバイアス状態と導通の条件",
+          "remainingWork": "導通時と非導通時の出力を考える",
+          "revealsAnswer": false,
+          "reason": "正負の導通は示すが出力の波形を最終特定していない"
+        },
+        {
+          "newInformation": "負半周期の0Vクリップと正半周期が残る最終波形",
+          "remainingWork": "候補波形と照合する",
+          "revealsAnswer": true,
+          "reason": "正答波形の『正側だけ残る』を明かす"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q22.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=65dbd7962b6ad5e1470386a26870aac5e0550e7bdaa884503590a935bf9f08f8。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原図ダイオード上端カソード/下端アノード0V、入力正でOFF・負でON。順電圧0Vのクリッパーは負を0V、正を通しア。",
+        "独立レビュー・承認・公開用教材の更新は未実施。",
+        "2026-10-27 レビュー修正者Codex /root：選択肢ウの波形は正側が一定・負側が谷であり、入力全体の単純な上方移動ではないためchoiceReasons[2]を訂正。原本波形・正答アは保持し、別担当が最終版を再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f4deadbd11edccb313795086979a2202d89760de94b072bffc43072962796984",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q23",
+      "summary": "分周したクロックの周期とダウンカウンタの減算回数から、最初の割込みまでの時間を求める。",
+      "explanation": "タイマーのクロックは16MHz/32=0.5MHzです。1カウントの時間は1/500000秒=2マイクロ秒。\n初期値150から0までは150回の減算なので、150×2=300マイクロ秒で最初の割込みが起きます。16ビットという容量は、この初期値での時間計算には掛けません。",
+      "choiceReasons": [
+        "0.3はミリ秒なら正しい値ですが、問われた単位はマイクロ秒です。",
+        "2マイクロ秒は1カウントの周期で、150カウント分が必要です。",
+        "150は初期カウント数です。分周後の周期2マイクロ秒を掛ける必要があります。",
+        "150カウント×2マイクロ秒=300マイクロ秒です。"
+      ],
+      "takeaway": "分周は周波数を割り、周期を延ばす。周期×カウント数で時間を求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "入力クロックは16MHzを32で割った周波数です。**32分周は周波数を1/32にし、その分だけ1回のカウント時間を長くする**操作です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "16MHz÷32＝0.5MHz＝500,000回/秒。1カウントの周期は1÷500,000秒＝**2マイクロ秒**です。16ビットは格納できる最大カウント範囲で、初期値150の時間に掛けません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "150から0へは150回の減算が必要です。**2マイクロ秒×150回**を計算し、マイクロ秒の選択肢と照合してください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "32分周を周波数に掛けてしまう、または16ビットをカウント数に掛けてしまう。",
+      "stages": [
+        {
+          "newInformation": "32分周と16ビットの役割の区別",
+          "remainingWork": "周波数を16/32に変換",
+          "revealsAnswer": false,
+          "reason": "分周の方向は教えるが1カウント時間は未算出"
+        },
+        {
+          "newInformation": "分周周波数0.5MHzから得られる1回2μsの周期",
+          "remainingWork": "カウント間隔を計算し、初期値を確認",
+          "revealsAnswer": false,
+          "reason": "周波数と周期を示すが割込みまでの全カウント数との積が残る"
+        },
+        {
+          "newInformation": "150回の減算という時間計算の式",
+          "remainingWork": "2×150を計算して正答を選ぶ",
+          "revealsAnswer": false,
+          "reason": "最終乗算と選択肢の照合を本人が行う"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=30b2fad9901beba59f05563318d3ae45d5005e3d3d665cf3df350df51ec4fe05。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本は16ビットダウンカウンタ・初期値150・16MHzを32分周、0到達で割込み。0.5MHz、2μs×150=300μs。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f60d9fc9f4f0ed10d63c3ce06d115be4abbdb254ad05f159ced374ede1dd219f",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q23",
+      "summary": "不正な開封・物理解析から内部情報を守る耐タンパ性と、通常の電子部品の故障耐性を区別する。",
+      "explanation": "耐タンパ性は、機器を不正に開封・解析して内部情報を取り出したり、改変したりする行為への耐性です。解析を検知して回路や機密情報を破壊する仕組みは、内部情報の取得を困難にします。静電気に対する強さは電気的信頼性であり、タンパ対策とは目的が違います。",
+      "choiceReasons": [
+        "ESD耐性は静電気による破損を防ぐ性質で、不正解析への耐性とは異なります。",
+        "検査用パッドを残すと内部への観測経路になり、不正解析を容易にするおそれがあります。",
+        "物理解析を試みた際に内部回路を破壊すれば、内部情報の取得を困難にできます。",
+        "内部メモリの配置を整然とすることは、不正解析を防ぐ手段とはいえません。"
+      ],
+      "takeaway": "耐タンパ性は故障しにくさではなく、不正な開封・解析・改変への耐性。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "耐タンパ性（tamper resistance）が対象とするのは、攻撃者による**物理的な開封・内部信号の観測・改変**です。静電気で壊れにくいこととは違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "攻撃者がチップ内部を解析して秘密を取り出そうとする場合を考えます。検査用パッドを残すことやメモリ配置を規則的にすることは、観測や推定を容易にする可能性があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "解析を試みた際に内部回路を破壊する仕組みなら、回路の観測や秘密の取り出しを妨げられます。通常の信頼性対策ではなく**不正解析を阻止する機構**を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『耐性』という語からESD耐性を選んでしまい、タンパが意図的な不正解析・改変であることを知らない。",
+      "stages": [
+        {
+          "newInformation": "耐タンパ性の脅威モデルとESDとの違い",
+          "remainingWork": "各肢がどの脅威を防ぐか分ける",
+          "revealsAnswer": false,
+          "reason": "正答肢の対策そのものは述べていない"
+        },
+        {
+          "newInformation": "検査パッド・規則的配置が解析を助ける可能性",
+          "remainingWork": "残る対策を比較する",
+          "revealsAnswer": true,
+          "reason": "ESD・検査パッド・整然配置を除外して残る正答が一意になる"
+        },
+        {
+          "newInformation": "解析時の回路破壊という正答肢の仕組み",
+          "remainingWork": "正答を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答の物理破壊対策を説明している"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=f3849a1d1943d722c90c638c9665e8949fd5368c9c3bfb300b8bc5f68f6f5216。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本4肢はESD耐性・検査パッド残存・物理解析に反応して回路破壊・アドレス整然配置。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q24",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f240f75a0754421a44db4997cd8648c3ef03d87cb55472675b86b7d04da805f7",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q24",
+      "summary": "マイクロプロセッサの耐タンパ性を、静電気や一般故障の対策ではなく、意図的な物理解析に対する防御として判定する。",
+      "explanation": "耐タンパ性は、不正な解析や改変から内部情報・機能を守る性質です。チップの物理的な解析を検知したときに回路を破壊するなど、機密情報を取り出せなくする仕組みが対策になります。\n静電気への耐性は通常の電気的な故障への対策です。検査用パッドを残したり、メモリを予測しやすい配置にしたりすると、内部の調査を助ける可能性があります。",
+      "choiceReasons": [
+        "ESD耐性は静電気放電による故障を防ぐもので、不正解析への対策とは目的が異なります。",
+        "検査用パッドを残すと内部へアクセスする手がかりになり、耐タンパ性を高める説明ではありません。",
+        "不正に内部を物理解析しようとした際の回路破壊は、情報の取り出しを妨げます。",
+        "物理アドレス順の整然とした配置は解析を助け得るため、耐タンパ性向上とはいえません。"
+      ],
+      "takeaway": "耐タンパ性は不正な解析・改変への強さであり、通常の故障耐性とは分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "『タンパ』は不正な開封、物理解析、改変などを指します。静電気放電（ESD）でチップが壊れにくいことは別の評価軸です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "テスト用パッドがそのまま残ると内部配線の調査に使われるおそれがあります。またアドレス順に整然と配置したメモリは不正な推測を難しくするとは限りません。攻撃に対する防御の仕組みを選びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "物理的な解析を試みるとチップ内部の回路が破壊されるようにすれば、内部情報の取出しを妨げます。耐タンパ性の強化を述べるのはこの方法です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ESDという安全・耐久対策と、攻撃者に秘密を読ませない保護を同一視する。",
+      "stages": [
+        {
+          "newInformation": "タンパ行為とESDという一般故障との区別",
+          "remainingWork": "保護したい対象を考える",
+          "revealsAnswer": false,
+          "reason": "用語定義でESDは除外するが他3肢を一意にはしない"
+        },
+        {
+          "newInformation": "検査パッド・メモリ配列と観測容易性の検討",
+          "remainingWork": "4肢のうち防御効果のあるものを絞る",
+          "revealsAnswer": true,
+          "reason": "イ・エも除外され残るウが一意"
+        },
+        {
+          "newInformation": "回路破壊による不正解析妨害",
+          "remainingWork": "対策を選択する",
+          "revealsAnswer": true,
+          "reason": "正答肢の記述を直接示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q24.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=8a89ebff3158cebff800d8b0a9ccf3469249c287016a2b3d375b78f99dfb79a1。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：別原本でエは『内部メモリを物理アドレスに合わせて整然と配置』。選択肢表記の違いを保持し、正答ウ。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "415dd45265b77854eb5b6d724c688c9f2a6c9d3f19ed28d9a990c96aaf92c090",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q20",
+      "summary": "FPGA向けの回路を論理合成可能な形で記述する言語と、データベース・モデル図・マークアップの用途を区別する。",
+      "explanation": "FPGAへ実装するには、論理ゲート、信号、レジスタなどの回路の振る舞いや構造を記述し、論理合成で回路へ変換する。これに用いるのがHDL（Hardware Description Language）。代表例はVerilog HDLやVHDL。\n\nDDLはデータベースの表などを定義する言語、UMLはシステムの構造や動作を図でモデル化する表記、XMLは構造化したデータを記述する形式。用途を「回路」「DB」「モデル」「データ形式」で分ける。",
+      "choiceReasons": [
+        "DDLはCREATE TABLEなど、データベースの構造定義に使う。",
+        "HDLは回路を記述し、論理合成してFPGAなどへ実装する。",
+        "UMLはクラス図等のモデリング表記。直接論理合成するための言語ではない。",
+        "XMLはデータの構造をタグで記述する形式。"
+      ],
+      "takeaway": "FPGA・論理合成という組合せはハードウェア記述言語を示す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "FPGAはプログラム可能な論理回路を作る半導体です。設問は回路の信号・組合せ論理・順序回路を記述し、**論理合成でハードウェアへ変換**できる表現を聞いています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "VerilogやVHDLは、同時に動く回路やレジスタ・信号を表す**ハードウェア記述言語（Hardware Description Language）**です。この英語の略語を選択肢に照らしてください。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "HDLが回路の記述に使う言語です。DDLはデータベース定義、UMLはモデル図の表記、XMLは構造化データをタグで表す形式なので目的が異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "DDL・HDL・UML・XMLの頭文字を知らず、どれも設計に使う言語として混同する。",
+      "stages": [
+        {
+          "newInformation": "FPGAの論理合成と記述対象の説明",
+          "remainingWork": "回路記述とほかの形式の違いを把握する",
+          "revealsAnswer": false,
+          "reason": "論理合成の目的を説明するにとどまる"
+        },
+        {
+          "newInformation": "Hardware Description Languageの意味とVerilog/VHDLの例",
+          "remainingWork": "英語の頭文字を対応させる",
+          "revealsAnswer": true,
+          "reason": "正答のHDLの正式名称を示しており選択肢へ容易に対応する"
+        },
+        {
+          "newInformation": "HDLの名称と他の略語の機能",
+          "remainingWork": "正答肢と誤答を区別する",
+          "revealsAnswer": true,
+          "reason": "正答名称を明示する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q20.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=01de12c07a2d16c69a7b4b21b9f8bfaf148e502b2c762e84727255e871567140。",
+        "context収録の公式正答イを原本選択肢と照合。作者の解法根拠：原本のアDDL、イHDL、ウUML、エXMLの順を確認。FPGAの回路記述はHDL。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q23",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be435aae68c386aa366c09859e98bac48f91e4d92efbdc9dd86d83076b24b4b0",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q23",
+      "summary": "データセンターの直流給電で減らせる電力損失と、電圧変換・停電対策の必要性を区別する。",
+      "explanation": "サーバ内部の電子回路は直流で動作します。交流給電のUPSなどで直流→交流→直流の変換を行う構成と比べ、直流のまま供給すれば不要な変換を減らせます。その分、変換に伴う電力損失を低減できるのが利点です。\n直流でも電圧の変換や停電への備えは必要です。通常のトランスは磁束の変化を使うため、直流をそのまま加えて簡単に昇降圧することはできません。",
+      "choiceReasons": [
+        "アは不要な交流・直流変換を減らすことで損失を抑える利点です。",
+        "イは誤りです。給電電圧とCPUなどの動作電圧は異なり、DC-DC変換などが必要です。",
+        "ウは誤りです。直流給電でも停電は起こり得るため、バックアップが必要です。",
+        "エは交流用トランスの性質です。直流のままでは磁束が持続的に変化しません。"
+      ],
+      "takeaway": "直流給電の利点は変換損失の削減。電圧調整や停電対策まで不要にはならない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "サーバのCPUなどの電子回路は直流で動作します。給電経路で**交流→直流→交流→直流**と何度も電力形式を変えると、各段の変換損失が積み重なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "直流給電なら途中の不必要なAC/DC・DC/ACの変換段を減らし、変換損失を小さくできます。ただし機器内の低電圧へのDC-DC変換や、停電時の蓄電池は依然として必要な場合があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "『交流と直流の変換に伴う電力損失を低減できる』が利点です。普通のトランスは変化する磁束を使うため、直流をそのまま加えるだけでは簡単に昇降圧できません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "直流のまま給電するなら電圧調整もバックアップも不要だと誤解する。",
+      "stages": [
+        {
+          "newInformation": "電力変換を重ねると効率が落ちる仕組み",
+          "remainingWork": "電力供給の形式変化を追う",
+          "revealsAnswer": false,
+          "reason": "背景のエネルギー損失のみで正答を直接確定しない"
+        },
+        {
+          "newInformation": "DC給電の省変換とDC-DC変換・蓄電池の必要性",
+          "remainingWork": "損失低減に対応する肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答肢の『AC/DCの変換損失低減』を実質的に説明する"
+        },
+        {
+          "newInformation": "正答肢の変換損失とトランス誤解の訂正",
+          "remainingWork": "残りの電圧・停電・トランスの違いを確認する",
+          "revealsAnswer": true,
+          "reason": "正答肢の文意をそのまま示す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q23.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=9c78f7482355faede6fd02a72f878aef5059eb5c1248a9edcd804299a8c19d7b。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本はア変換損失低減、イ同一電圧、ウ停電危険なし、エトランスで簡単昇降圧。直流給電の利点はア。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a520d90fc233bb210f634df2c55d2aca9537e0e8b318104c1752b651c9564027",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q20",
+      "summary": "パッシブRFタグが電池なしで動作する際の電力取得方法を、他の通信方式と区別する。",
+      "explanation": "パッシブ方式のRFタグは自らの電池で通信するのではなく、リーダからの電波をアンテナで受け、そのエネルギーを動作に使います。RFIDは無線を用いる識別方式で、可視光・赤外線通信や静電容量による位置検出とは異なります。",
+      "choiceReasons": [
+        "アンテナで受けた電力を利用して通信するパッシブタグの説明です。",
+        "可視光通信の説明であり、RFタグの通信媒体ではありません。",
+        "静電容量を用いる位置検出の説明で、RFIDの識別通信ではありません。",
+        "赤外線通信の説明であり、RFタグの無線通信とは異なります。"
+      ],
+      "takeaway": "パッシブRFタグの動作電力はリーダから受けた電波に由来する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "RFはRadio Frequency（無線周波数）で、タグとリーダの間で電波を使います。『パッシブ』は内蔵電池などの独立した電力供給なしに応答する方式です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "パッシブタグはリーダの発した電波をアンテナで受け、そこから得たエネルギーでチップを動作させます。応答は方式に応じて反射波の変化などを利用します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "アンテナで受け取った電波由来の電力を使って通信する記述が正答です。可視光・赤外線での通信や静電容量による位置検出ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "RFが電波を意味することと、パッシブで電池を搭載しない理由が結び付かない。",
+      "stages": [
+        {
+          "newInformation": "RFとパッシブの意味・電源方式",
+          "remainingWork": "通信媒体を理解する",
+          "revealsAnswer": true,
+          "reason": "RFは電波を用いることを伝えると、可視光・静電容量の位置検出・赤外線の3誤答を全除外でき、正答アが一意になる。"
+        },
+        {
+          "newInformation": "受信電波のエネルギーで動く仕組み",
+          "remainingWork": "選択肢から受信エネルギーに対応するものを探す",
+          "revealsAnswer": true,
+          "reason": "正答肢のアンテナ受信電力と同義の説明を渡す"
+        },
+        {
+          "newInformation": "正答の電力取得とほか3技術の区別",
+          "remainingWork": "正答を確定する",
+          "revealsAnswer": true,
+          "reason": "正答肢を明確に特定する"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q20.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=6b2b55926375ab16a71cce05b38056681e130ab18018847b362d462b63dc89c3。",
+        "context収録の公式正答アを原本選択肢と照合。作者の解法根拠：原本アは『アンテナで受け取った電力を用いて通信』。イ可視光・ウ静電容量・エ赤外線。",
+        "独立レビュー・承認・公開用教材の更新は未実施。",
+        "2026-10-27 レビュー修正者Codex /root：H1のRF=電波という説明で3誤答を全除外できるためH1と設計メモをtrueへ訂正。原作者IDを保持し、修正者以外の独立確認を受ける。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q22",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a3b24b9a4507060f315713657417adb3a6366e4732057eebcf38c04a82ff1f42",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q22",
+      "summary": "フラッシュメモリの不揮発性・書換え寿命・消去手順を、DRAMやROMライターと区別する。",
+      "explanation": "フラッシュメモリは電源を切ってもデータを保持する不揮発性メモリです。電気的に消去と書込みができますが、既存データを自由に上書きできず、書換えには前のデータの消去が必要です。消去・書込みには回数の限界もあります。",
+      "choiceReasons": [
+        "書込み回数には寿命があり、無制限ではありません。",
+        "回路上で電気的に消去・書込みでき、取り外す必要はありません。",
+        "リフレッシュを必要とするのはDRAMです。",
+        "書換え前にデータを消去する性質が適切です。"
+      ],
+      "takeaway": "フラッシュは不揮発・電気的書換え可能だが、消去単位と書換え寿命がある。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "フラッシュメモリは電源を切っても内容が残る**不揮発性メモリ**で、回路上で電気的な消去・書込みができます。DRAMのような周期的リフレッシュは不要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フラッシュでは書換え対象の領域をあらかじめ消去状態にする必要があります。一般に消去はブロック等の単位で行われ、消去・書込みには寿命となる回数の上限があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新しいデータへ書き換える際は、対象領域の前のデータを**消去してから書き込む**記述が適切です。『無限回書込み』『ROMライター必須』『定期リフレッシュ』は誤りです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "不揮発性と『いつでも自由に上書きできる』を混同し、消去と書込みの順序を理解していない。",
+      "stages": [
+        {
+          "newInformation": "不揮発・基板上での電気的書換え・DRAMとの比較",
+          "remainingWork": "三つの別種のメモリの特徴を比べる",
+          "revealsAnswer": false,
+          "reason": "誤答イ・ウは除外できるが正答エをまだ特定しない"
+        },
+        {
+          "newInformation": "消去単位と寿命、書換え前の消去条件",
+          "remainingWork": "正しい書換え手順の肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答の消去してから書くという内容を直接教える"
+        },
+        {
+          "newInformation": "正答の消去→書込み順序と他3肢の誤り",
+          "remainingWork": "誤答を説明する",
+          "revealsAnswer": true,
+          "reason": "最終判断を正答肢に対応させる"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q22.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=2066195fa50b6d675e57bb4b97c8d5667da51adf1376e7b394c360c3d41ab18d。",
+        "context収録の公式正答エを原本選択肢と照合。作者の解法根拠：原本ア無限回・イ取り外しROMライター・ウリフレッシュ・エ消去後書込み。不揮発かつ消去単位・書換え寿命あり。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c59221f36371f490bf0202758c38f442045528dd3bc3e93003a0c985334b19ac",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q21",
+      "summary": "電子部品のうち、電流を一方向に通しやすい性質を利用して整流するものを選ぶ。",
+      "explanation": "整流は交流などの電流を一方向へ流れるようにする働きです。ダイオードは順方向には電流を流しやすく逆方向には流しにくい性質を利用して整流します。",
+      "choiceReasons": [
+        "コイルは磁界にエネルギーを蓄え、電流の変化を妨げます。",
+        "コンデンサは電荷を蓄え、電圧の変化に応じて充放電します。",
+        "一方向へ電流を通しやすい性質を整流に使います。",
+        "抵抗器は電流を抑えて電力を消費し、一方向だけを選ぶ働きはありません。"
+      ],
+      "takeaway": "整流では、電流の方向に対する非対称な性質を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**整流**とは、交流などで電流の向きが変わるものを、片方向に流れるようにする働きです。波形の大きさを単純に小さくすることとは違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コイルは磁気エネルギーを蓄え電流変化を抑え、コンデンサは電荷を蓄えて電圧変化に応じ充放電し、抵抗器は電流を制限します。整流には**流れる方向で通しやすさが違う**素子が必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ダイオードは順方向に電流を流しやすく、逆方向には流しにくい半導体素子です。その非対称な性質を使って整流します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "整流・平滑・電流制限などの異なる働きを混同してしまう。",
+      "stages": [
+        {
+          "newInformation": "整流の意味と方向性",
+          "remainingWork": "何を変えたいかを考える",
+          "revealsAnswer": false,
+          "reason": "整流の一般定義のみで4素子をまだ分類していない"
+        },
+        {
+          "newInformation": "誤答3素子の役割と整流に必要な非対称性",
+          "remainingWork": "方向で振る舞いが変わる部品を特定する",
+          "revealsAnswer": true,
+          "reason": "他3肢の特性を挙げて消去し残る肢が一つになる"
+        },
+        {
+          "newInformation": "ダイオードの順・逆方向特性",
+          "remainingWork": "名称を選択肢から選ぶ",
+          "revealsAnswer": true,
+          "reason": "正答のダイオードを名称で教える"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q21.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=d5bff57fd9c838dc22f98d47312cd0371dc251f4ed244cfe3762369014eb26a6。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原本選択肢：コイル、コンデンサ、ダイオード、抵抗器。ダイオードの整流作用を確認。",
+        "独立レビュー・承認・公開用教材の更新は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9fa523523b8cea23c380d2b8b44549883fbf3a0c01b2192cb886a543b50dc39d",
+    "author": "ChatGPT/gpt-6-batch11-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q21",
+      "summary": "直線の画素座標を確定し、横640画素の行優先・1画素16ビットの配置でメモリアドレスを求める。",
+      "explanation": "始点(5,4)と終点(9,8)は傾き(8−4)/(9−5)=1なので、x=7ならy=6です。横640画素をx方向から順に格納するため、(7,6)より前の画素数は640×6+7=3847です。1画素は16ビット=2バイト、番地は8ビット単位なので、先頭は3847×2=7694番地です。",
+      "choiceReasons": [
+        "3847は画素の通し番号です。1画素2バイトへの変換が必要です。",
+        "7680はy=6の行の先頭で、x=7に相当する14バイトを加えていません。",
+        "(640×6+7)×2=7694で、画素(7,6)の先頭番地です。",
+        "8978は座標(9,7)に相当する先頭番地です。求める直線上の画素は(7,6)なので、この番地ではありません。"
+      ],
+      "takeaway": "画像の番地は(行番号×横画素数+列番号)×1画素のバイト数。まず座標を求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "直線は始点(5,4)から終点(9,8)です。xが4増える間にyも4増えるので**傾きは1**です。まずx=7に対応するyを求めてください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "このLCDは行ごとにx=0から639まで順に格納します。画素(x,y)より前にある画素数は**640×y＋x**。各画素は16ビットで、図の1番地は8ビットなので**1画素は2番地**使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "x=7ではy=4＋(7－5)=6です。対象の先頭番地は**(640×6＋7)×2**で求めます。最後の乗算を行い選択肢に照らしてください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "y座標を誤る、1画素を1番地と数える、または座標とバイトアドレスの変換を混同する。",
+      "stages": [
+        {
+          "newInformation": "原図の傾きとxからyを求める視点",
+          "remainingWork": "x=7でのyを計算する",
+          "revealsAnswer": false,
+          "reason": "傾き1だけでyやアドレスの最終値は不明"
+        },
+        {
+          "newInformation": "行優先での画素番号640y+xと16bit/8bitの換算",
+          "remainingWork": "ピクセル数を番地数へ換算する",
+          "revealsAnswer": false,
+          "reason": "汎用式と1画素2番地を教えるが実数値の代入は残る"
+        },
+        {
+          "newInformation": "y=6とアドレス式を具体的に代入",
+          "remainingWork": "乗算・加算をして正答を選ぶ",
+          "revealsAnswer": false,
+          "reason": "代入値は与えるが最終アドレス7694自体は教えず計算を残す"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q21.webp をGitHubから取得して実際に表示し、問題文・4肢と図表を原本と照合。context台帳の画像SHA-256=fe9e34283b3cedc84b37c1d72730c1370957564e80a338637948fe514287e84b。",
+        "context収録の公式正答ウを原本選択肢と照合。作者の解法根拠：原図始点(5,4)、終点(9,8)、640列×480行、1画素16bit、アドレスは8bit単位で0起点。x=7→y=6、(6×640+7)×2=7694。",
+        "独立レビュー・承認・公開用教材の更新は未実施。",
+        "2026-10-27 レビュー修正者Codex /root：8978は(640×7+9)×2で(9,7)の番地。旧解説の(7,7)は8974で一致しないためchoiceReasons[3]を訂正。原本・公式正答ウ・正答値7694は保持し、別担当が最終版を再確認する。"
+      ]
+    }
+  }
+]

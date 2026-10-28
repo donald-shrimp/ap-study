@@ -1,0 +1,359 @@
+{
+  "status": "approved",
+  "reviewer": "Codex /root/ap_pilot_review_a",
+  "author": "Codex /root",
+  "checkedAt": "2026-10-26T23:58:24.533530+00:00",
+  "scope": "First10 pilot questions, final envelopes and original source images/official keys",
+  "method": "All ten original question WEBP images opened individually at full available resolution; all choices/official answers reconstructed before revised draft inspection. Final summary/explanation/takeaway, all40choiceReasons and all30hints plus per-stage designs reread. Truth-table, stack DFS, CPI, hex/LSB and IPv4 routing calculations independently recomputed. Source asset/answer-key hashes and exact final lesson/envelope hashes verified.",
+  "initialSourceRecord": "reviewer-a-original.json",
+  "scopeLimits": [
+    "No learner trial was conducted.",
+    "No real application UI/storage/offline test was conducted by this content reviewer.",
+    "No newly downloaded original PDFs claimed; original crops and official answer-key provenance were used.",
+    "No exhaustive present-law audit."
+  ],
+  "records": [
+    {
+      "id": "r07h-q1",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "f1ed47c768aa43b5e9e46114dbd7910f644408dbca7c6dc3ed1962c3cc287d72",
+      "draftEnvelopeSHA256": "bf42f4e754b68fb90235c584592efa89ef7fe9de08a986d880979c3426559738",
+      "originalQuestionSHA256": "690f3587817436af8c76ca3f85dc9b9c49fb0d7f6aa99dc2297df0f53f6256ac",
+      "actualChangedFields": [
+        "summary"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "四つの含意の真偽を計算する",
+        "各候補の括弧と否定を処理する",
+        "前件を求めRによらない候補を選ぶ"
+      ],
+      "calculationEvidence": {
+        "truthTableRFalseThenTrue": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ]
+        ]
+      },
+      "notes": "含意の4候補は¬R/R/¬R/真で、全4肢の否定範囲・公式エと一致。新summaryは論点へ修正。H1は四つの含意への代入、H2は偽前件の性質、H3は二つの含意の途中値を教えるが、各候補の括弧・否定・∧∨の処理は本人に残る。全3段falseは妥当。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q5",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "576927bcc0ddd02444bdba8c9ac587b10940a0b424b1e6687fdee7617f716755",
+      "draftEnvelopeSHA256": "5f8c249c2225a4abb291bad90cb1f878f5d238e4fb7e153efdd085fcbb0ee5f0",
+      "originalQuestionSHA256": "f4981944a49cc555f95fa52555c5647649921234890c99f83c22fb380a8fcf43",
+      "actualChangedFields": [
+        "summary",
+        "choiceReasons"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "先頭ごとに操作列を追う",
+        "Bを先頭にする操作列を追う",
+        "各場合を重複なく合計する"
+      ],
+      "calculationEvidence": {
+        "enumerated": [
+          "ABC",
+          "ACB",
+          "BAC",
+          "BCA",
+          "CBA"
+        ],
+        "count": 5
+      },
+      "notes": "入力ABC・各1回のpush/popで5出力を全探索し公式ウと一致。改稿した全4肢理由は、3/4の数え落としと6に含まれる不可能CABを具体化している。H2はA先頭の二通り、H3はC直後の上端Bを渡すが、B先頭の操作列と総数計算は残るため全段false。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q8",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "aed0deb7cf620288aa25531f846e2c7b98de1693944a4b26e6cc1d8c24504523",
+      "draftEnvelopeSHA256": "b58f40211b295f3215df5c3bcd6062f47c10769e7a3d2760871747508282fda2",
+      "originalQuestionSHA256": "70e00ae98f8237b95763674e668b4d2cf92f96f74c01171c3f44f618b4a04629",
+      "actualChangedFields": [
+        "summary",
+        "explanation"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "二列の関係を整理する",
+        "A/Bの1命令当たり時間を計算する",
+        "代入式の比を計算する"
+      ],
+      "calculationEvidence": {
+        "perInstructionNsA": 4,
+        "perInstructionNsB": 2,
+        "ratio": 2
+      },
+      "notes": "A1命令4ns・B2nsからA/B=2、公式ウ。CPI定義と命令数×CPI×周期を補った解説は原本の表2列・同プログラム条件に合う。H2代入後も積、H3でも比の数値計算を本人に残すため全段false。各誤肢理由も分母の向き・周期の省略と整合。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q14",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "91ca901103ba10fa8c9f7e6e445470429722c18e76073caacc153d58becce932",
+      "draftEnvelopeSHA256": "d0da131d18563d8cc83365030aa2725ec73e096789b9125902acd5d0a9d46a41",
+      "originalQuestionSHA256": "229238da05d010111b976a9263f970019750de63c8c05e209a0e96225800836c",
+      "actualChangedFields": [
+        "summary",
+        "hints"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        true,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "状態の分類軸を読む",
+        "正答の名称まで開示済み",
+        "既開示後に他の状態との差を学ぶ"
+      ],
+      "calculationEvidence": null,
+      "notes": "プリエンプションは実行中→実行可能で公式イ。休止・終了・I/O等の待ちとの全4肢比較に誤りなし。H1は状態分類の軸だけでfalse。H2は実行可能状態という名称・対応を直接教えるのでtrue。H3単独は休止/終了の追加知識でfalseだが、H2の既開示を取り消さない設計と整合。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q18",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "21495bb7009e6a0ead4b68125bcf07412e24c4475bf291f65fd65f13951e63ae",
+      "draftEnvelopeSHA256": "da05568d4accbfe1c191576184d7c754fd11e28a198ffbe723c3b9b8bd8f1c9a",
+      "originalQuestionSHA256": "fbe1364c9cc74114467868aaaae105e6c165360960e418ed1573afaf2aecd7f7",
+      "actualChangedFields": [
+        "summary",
+        "explanation",
+        "choiceReasons"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "16進数を換算する",
+        "8×16+2を計算する",
+        "130×10を計算する"
+      ],
+      "calculationEvidence": {
+        "hex82Decimal": 130,
+        "stepMillivolts": 10,
+        "outputMillivolts": 1300
+      },
+      "notes": "0x82=130、130×10=1300mVで公式ウ。原本零点0mV・1LSB10mV・非負8bitの条件を保持。1024/1312は10mV刻みに合わないという改稿理由は推測の誤答原因ではなく与件から反証できる。H3も130×10の演算を残すため全段false。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q22",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "37f5740997d2066091c0a81aeaa4f3c3b10e8d4544f2b9e85d7ef0d1113d362c",
+      "draftEnvelopeSHA256": "dc5116fafa568f3516b1ce124297ce73198ef26b335def6484635d2d8f483b0a",
+      "originalQuestionSHA256": "7d2671452498b3e21fb775f4bf80ead7ae2dc1de65f0eec505f0da5d2db6cc61",
+      "actualChangedFields": [
+        "summary",
+        "hints"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        true
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "参加と想定の違いで読む",
+        "ウ/エの方法の分類をさらに判断する",
+        "正答の組合せまで開示済み"
+      ],
+      "calculationEvidence": null,
+      "notes": "原本表の思考発話=利用者参加、ヒューリスティック=専門家の組合せが公式ウ。回顧法・認知的ウォークスルーを含む全4肢理由も一致。H2でア/イを除けてもウ/エの方法分類は残るのでfalse。H3は専門家手法と正しい組合せを明示しておりtrue。summary/解説/要点の役割分担も適切。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q25",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "273f3032da21ba5be1b62264e4020d4c7250000e186545da0f1655ba819e4f2a",
+      "draftEnvelopeSHA256": "241d569426cb41ca68c220a8f55da2aecefe0fe7b5075164b0cd40e39baeff7d",
+      "originalQuestionSHA256": "d7aa2438ba776f1b0c143dce14ef08b5951bc084d9a745e2e57b87dba282e6de",
+      "actualChangedFields": [
+        "summary",
+        "hints"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        true,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "多重度から対応件数を読む",
+        "正答の参照方向まで開示済み",
+        "既開示後に省略条件・同一顧客制約を学ぶ"
+      ],
+      "calculationEvidence": null,
+      "notes": "原本UMLの顧客1対付加情報*、注文→指定送付先0..1、同一顧客制約と主送付先/副送付先の条件を全て確認。公式ウの付加情報→顧客FKが正しい。H1の多重度説明は件数の読取りでfalse。H2は顧客表への参照制約という正答内容を教えるためtrue。H3は追加条件の学習でfalse、既開示状態は維持する。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q31",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "19d117b089acd9d1b428835ee0e5aa85c8cfb8d02c5176ed802f9dda7ac4de41",
+      "draftEnvelopeSHA256": "7e98f8d44d5cc73971533d39be36d1112c8ebec0a511a62cfdf1c3be924517c1",
+      "originalQuestionSHA256": "098bb91e432066a199aa07fa9f34cd654bd5c3baacd33227bf982ed4c71bcc29",
+      "actualChangedFields": [
+        "summary"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        false
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "各範囲と宛先を照合する",
+        "末尾1と0〜63を比較する",
+        "一致経路を比較して右列を読む"
+      ],
+      "calculationEvidence": {
+        "matchingRoutes": [
+          [
+            "0.0.0.0/0",
+            "10.1.0.1"
+          ],
+          [
+            "192.168.0.0/16",
+            "10.1.0.2"
+          ],
+          [
+            "192.168.1.0/24",
+            "10.1.0.3"
+          ],
+          [
+            "192.168.1.0/26",
+            "10.1.0.4"
+          ]
+        ],
+        "selectedNextHop": "10.1.0.4"
+      },
+      "notes": "192.168.1.1は全経路一致、/26は末尾0〜63。最長/26→10.1.0.4で公式エ。ipaddressでも独立確認。H2は範囲を渡すが宛先との比較は本人に残り、H3も一致判定・プレフィックス比較・右列の参照を明示的に残しているため全段falseは条件照合型の共通基準と合う。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q35",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "68095a86df4c8bb8919e91a8bdd49519f0cd2cfda276d610b9386c535b6e11eb",
+      "draftEnvelopeSHA256": "695bfe47b7951990f09f10090f24a9be892513cdec81dadfced988a0a7e7ad73",
+      "originalQuestionSHA256": "97da4e104a9147a052ce604786fb95172bc471eccec8988066cf1aab22fb151c",
+      "actualChangedFields": [
+        "summary",
+        "hints"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        false,
+        true
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "リスト名と利用目的を分ける",
+        "ア/ウの推奨段階と名称を判断する",
+        "正答肢と同じ名称・定義まで開示済み"
+      ],
+      "calculationEvidence": null,
+      "notes": "原本4肢を三リストの名称・役割と照合し公式ウを確認。H1は推奨/互換性の分類、H2は運用監視の定義を教えてイ/エを除くがア/ウの正式名称対応は残るのでfalse。H3は電子政府推奨の利用実績・普及見込みまで含む正答肢の定義そのものなのでtrue。解説と全肢理由は原本基準で整合。",
+      "remainingFindings": []
+    },
+    {
+      "id": "r07h-q45",
+      "status": "approved",
+      "baseVersion": 2,
+      "projectedVersion": 3,
+      "draftLessonSHA256": "9b3cb398987b19f2f9fc539e86c09849d7f3e97861d2deae27f32e0bec55b595",
+      "draftEnvelopeSHA256": "65122030a1e585194f7f6b1d7205167621f7f9faed9c12b2bf8dfcae87d84452",
+      "originalQuestionSHA256": "f1ceb391570a18ee288bd8f8f27494a563d30c0df6dd46142d96e8a736af6523",
+      "actualChangedFields": [
+        "summary",
+        "hints"
+      ],
+      "fullBodyAndAllFourChoicesCompared": true,
+      "explanationAndAllFourReasonsCompared": true,
+      "allThreeHintsAndDesignCompared": true,
+      "stageFlags": [
+        false,
+        true,
+        true
+      ],
+      "remainingJudgmentAfterEachStage": [
+        "対象と時点を分ける",
+        "正答の定義まで開示済み",
+        "正答の具体例で理解を深める"
+      ],
+      "calculationEvidence": null,
+      "notes": "デザインレビューは設計工程内の設計成果物の問題発見で公式ア。出荷判定・プログラム抽出検査・プロジェクト管理評価との差を全肢で確認。H1は比較軸だけでfalse。H2は正答の定義を教え、H3も実装前の具体例として同じ正答内容を教えるため両方true。全段で学習上の新情報があり内容を曖昧にしていない。",
+      "remainingFindings": []
+    }
+  ],
+  "remainingFindings": []
+}

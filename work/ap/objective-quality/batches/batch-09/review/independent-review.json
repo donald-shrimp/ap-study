@@ -1,0 +1,462 @@
+{
+  "status": "changes_requested",
+  "reviewer": "Codex /root/batch09-independent-review",
+  "checkedAt": "2026-10-27T15:26:53.414368+00:00",
+  "pullRequest": 81,
+  "reviewedHead": "c9127642c7e50748071e46033adcc5a591604cef",
+  "baseCommit": "2808111fd141d6e766214290234af9f4e94fa136",
+  "author": "ChatGPT/gpt-6-batch09-20261027",
+  "counts": {
+    "questions": 20,
+    "sourceImagesOpened": 20,
+    "officialAnswerPDFsDownloaded": 9,
+    "choiceReasons": 80,
+    "hints": 60,
+    "contentApprovedNotRegistered": 18,
+    "requiresRevision": 2
+  },
+  "method": "Reviewer opened all 20 original question images, read all 20 lessons and stage design notes, independently obtained all 9 official answer PDFs with exact hashes, extracted 16 answers from 8 PDFs and visually read 4 answers from the scanned 2022 spring answer page, recalculated all 7 numerical questions, and exercised actual domain grading with draft hints. No learner study or app publication was performed.",
+  "issues": [
+    {
+      "id": "B09-01",
+      "priority": "P2",
+      "questionId": "r06a-q17",
+      "path": "work/ap/objective-quality/batches/batch-09/drafts.json",
+      "line": 234,
+      "title": "名称を未開示の第2段ヒントを解答確認扱いにしない",
+      "currentFlag": true,
+      "expectedFlag": false,
+      "reason": "問いは現象の名称を4用語から選ぶもの。H2はページの追出し・再読込みという因果を説明するがスラッシングの名称/正答位置/他3肢全除外を示していない。H1もページフォールトを除外するだけで他2誤答が残る。原問自体も性能低下を説明しており、その現象を言い換えることと名称を渡すことは異なる。現状は正しく選んでもassistedでなくrevealedになる。",
+      "requestedChange": "H2のrevealsAnswerとdesign.stages[1].revealsAnswerをfalseにそろえ、名称への対応が残る旨へreasonを修正。H3のtrueは維持。"
+    },
+    {
+      "id": "B09-02",
+      "priority": "P2",
+      "questionId": "r04a-q18",
+      "path": "work/ap/objective-quality/batches/batch-09/drafts.json",
+      "line": 1200,
+      "title": "割込みがタスクより優先される説明を開示判定に含める",
+      "currentFlag": false,
+      "expectedFlag": true,
+      "reason": "H2末尾「また割込み中は通常のタスク処理が進みません」は、設問の割込み禁止を考慮しない条件では割込み処理がタスク処理に優先するという正答ウ相当の情報を渡している。他の誤答が残るかではなく、正答肢自体と実質同義の情報を渡したかで判定する。現在はこの説明を開いてもassistedとなる。",
+      "requestedChange": "文を維持するならH2とdesign.stages[1]をtrueへ変更しreasonも更新。falseを保つなら末尾の優先関係の説明をH3へ移し、H2をタスク切替禁止と割込み禁止の区別に限定する。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r03a-q17",
+      "status": "approved",
+      "reviewedLessonSHA256": "9571d8098bd78d09d1e41d73c4aea6494e0b6aaf38b7c3082491bfe9e8fe098b",
+      "notes": "アクセス2回/命令×p×40,000μs≦0.4μsを独立検算。p≦5×10^-6。全4肢の遅れは0.4/0.8/4/8μs。H1/H2は計算を残しfalse、H3は最終値を示しtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q17.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r06a-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "3a1f617df11e2f9f7da3d429e701a5aecaf4098b44b7388e0f853975bee5cbda",
+      "notes": "固定長ページ枠は外部断片化を回避し内部断片化は残る。セグメントの論理単位での保護・共有・可変長と区別。H2は正答エと実質同義なのでtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q18.webp"
+      ],
+      "officialAnswer": "エ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q16",
+      "status": "approved",
+      "reviewedLessonSHA256": "7e83c2e02407c58a6e4a0cfdec9e4c66749ee34e0f2cb92c4b0d85787b25ef6c",
+      "notes": "ページ置換え頻発で実処理が進まない状態はスラッシング（ア）。H2はスワップアウト/フラグメンテーション/ページフォールトの全誤答を除外するのでtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q16.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06a-q17",
+      "status": "changes_requested",
+      "reviewedLessonSHA256": "87cdecd3272d8ff4c53781e002e3ddd6492063a9eb3d0d4b77faa721264602b3",
+      "notes": "原本・公式正答ア・4肢理由・機構の説明は一致。ただしH2は置換え悪循環を説明するのみで、正答名称との対応も全誤答の除外も渡していないためtrueは過剰。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q17.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        "B09-01"
+      ]
+    },
+    {
+      "id": "r04h-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "09e548e582e01755817e6719f22169a16f3753fceeebf87fbeda5bf509b52c3a",
+      "notes": "可変長領域の外部断片化と固定長の内部の無駄を区別。10MB×3片でも連続20MBを確保できない例を確認。返却ごとのGCは不要。H2は正答ウと同義なのでtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r04h/r04h-q18.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q16",
+      "status": "approved",
+      "reviewedLessonSHA256": "99cf23c578e5b15f0fd3ba0289c75a69d3bd2ba01686b8e3c8507efaef0b6a60",
+      "notes": "原図のA→B/C、B→D/E、C→E、D/E→Fを確認。Aの参照先は最初のB、BはD、CはE。開始時のファイル数1→3→4→3で最大200MB（ウ）。H2は途中状態、H3は最終値。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r04h/r04h-q16.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "7839ebe40691df5ada6f17cfe2d63ca453af79ff98872456523d67e2425958e0",
+      "notes": "空き統合=コンパクション、不要ヒープ回収=GC、実行中の位置変更=動的再配置、必要時読込み=動的ローディング。H2は誤答3肢を除外するためtrue。公式イと全肢理由一致。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03h/r03h-q18.webp"
+      ],
+      "officialAnswer": "イ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q14",
+      "status": "approved",
+      "reviewedLessonSHA256": "2c7dfde55727737c8a21c04b42aa1475c1af34c46d138a0cf992cbeb842931e2",
+      "notes": "原本の直列2台×並列2枝と4グラフを確認。f=1-(1-x²)²=2x²-x⁴、f(0.5)=0.4375、f(0.8)=0.8704、内部交点約0.618。下→上のエ。H2は式だけでグラフ比較を残すfalse、H3は形を特定true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03h/r03h-q14.webp"
+      ],
+      "officialAnswer": "エ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r05h-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "3eb2137ec7fb43ac7d7d52fd916784bace10b09edbcc92e0470a1571cc228c0a",
+      "notes": "LRUは最終参照から最長時間のページ。FIFOは読込順。ページ表は仮想ページの変換対応、ページ不在とGCは別、固定長ページングの外部断片化は生じない。H2は正答アの定義そのものでtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r05h/r05h-q18.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q19",
+      "status": "approved",
+      "reviewedLessonSHA256": "be4fbda32bbabc80df5ac568b0c0de0a5089cb0ba26e62d105b95cffe541eaa8",
+      "notes": "補助記憶はページアウトしたページの格納先（ア）。更新前履歴/単純な連続主記憶の拡張/全体バックアップを除外。H1は機構の入口、H2は格納先を直接説明しtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q19.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q14",
+      "status": "approved",
+      "reviewedLessonSHA256": "bb13b4532a548f63eda5f1f8009c25dc455da1350b1d2e84afb8fca825e48ff4",
+      "notes": "MTBF=平均故障間隔、MTTR=平均修理時間。ログ取得は原因診断を助け修復を短縮（ア）。ECC/再試行は稼働継続、予防保全は故障前対策。H1/H2は比較軸、H3は機能名を特定true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r04h/r04h-q14.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06a-q16",
+      "status": "approved",
+      "reviewedLessonSHA256": "3d4202119cb7a4a4c0ed8448ff7060fbaf15f88af22f437d74198b3f157e7034",
+      "notes": "短い仕事の到着が続くと非プリエンプティブ最短処理時間優先の長い仕事が待ち続ける（ウ）。エージング/RR/FCFSとの違いを確認。H2は正答方式を直接説明しtrue。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q16.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q15",
+      "status": "approved",
+      "reviewedLessonSHA256": "9b52acdf87b7a9da909f8c77cabbab2723fbf1fd724ecfd51d5a423d735f7a6f",
+      "notes": "原表の到着時刻・処理時間を確認。SJFを独立計算しA0-2,C2-5,E5-6,D6-8,B8-12。BのTAT=12-1=11（エ）。H3にもBの終了と差の計算が残るため全段falseは妥当。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r07a/r07a-q15.webp"
+      ],
+      "officialAnswer": "エ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "b394f7ce0e115a6cb819c13b47d1dc1484f188e40644cb744c21ac6961dfa491",
+      "notes": "全履歴を手元に持つGit（ウ）。SVN/CVSは集中型、RCSは個別ファイル管理。H2は分散型の仕組みで製品名への対応を残すfalse、H3は名称と各ツール分類を明示true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q18.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06a-q19",
+      "status": "approved",
+      "reviewedLessonSHA256": "2598350153b56360e99d7b0c31f2a91bdeee678287b9dcd7d59418b89ab4f5c7",
+      "notes": "原本と公式ウを照合。Gitのローカルcommitと共有先へのpushを区別し、SVN/CVS/RCSの理由を確認。H2は製品名を教えずfalse、H3はGitを特定true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q19.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "554b8dca0ae62fd2dbf13f2893f760de96f8588323de75ca2b99760a0275da30",
+      "notes": "ホストと異なる命令形式向けの目的コード生成はクロスコンパイラ（イ）。エミュレーターは動作模倣、最適化は速度/サイズ改善、ジェネレーターは仕様から生成。H2は誤答2肢除外のみfalse、H3は名称true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r05a/r05a-q18.webp"
+      ],
+      "officialAnswer": "イ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q16",
+      "status": "approved",
+      "reviewedLessonSHA256": "9f6974ebaceb517231eae6deaea35ec46de4dbb2b568f5865d2ae51a298a9370",
+      "notes": "原表を独立計算しFCFSのA0-5,B5-11,C11-14。C到着3から完了14まで11秒（ア）。H2はCの完了/差を残すfalse、H3は最終値true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r03h/r03h-q16.webp"
+      ],
+      "officialAnswer": "ア",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q18",
+      "status": "changes_requested",
+      "reviewedLessonSHA256": "342fda1abbb368926b6e80836d2be1272c074a8d7b66bf7d3c42b16f028815d3",
+      "notes": "原本の割込み禁止を考慮しない条件と公式ウを確認。H2末尾で割込み中はタスク処理が進まないと示すためタスクよりISRが優先という正答を実質開示するがfalse。H3と全肢理由は一致。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r04a/r04a-q18.webp"
+      ],
+      "officialAnswer": "ウ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        "B09-02"
+      ]
+    },
+    {
+      "id": "r04h-q19",
+      "status": "approved",
+      "reviewedLessonSHA256": "04acdae901e16fc6e3062c55c29dc23aed3cfcdaca171b8bbb2757906332612a",
+      "notes": "到着0/1/2/3秒、単独16秒、2枠は0-4/1-5/4-8/5-9で最終9秒、差7（イ）。各肢の差/終了時刻/同時到着との混同を照合。H2は後半の計算を残しfalse、H3は最終値true。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r04h/r04h-q19.webp"
+      ],
+      "officialAnswer": "イ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q18",
+      "status": "approved",
+      "reviewedLessonSHA256": "7ef12f91060bba02b056f388a63bacf8aca1a7e89107e9749253bca768bfdc2a",
+      "notes": "同一原問を独立に再照合。1枠16秒、2枠9秒、差7（イ）。H3は開始4秒/5秒から各4秒を加算して差を求める計算を残すのでfalse。解説・全肢理由一致。",
+      "sourceImageActuallyOpened": [
+        "assets/questions/r06h/r06h-q18.webp"
+      ],
+      "officialAnswer": "イ",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    }
+  ],
+  "checks": {
+    "formalDraftCheckPassed": true,
+    "originalQuestionBankUnchanged": true,
+    "allPrior180LessonsAndReviewsPreserved": true,
+    "noPersonalRecordsUsed": true,
+    "noMaterialEditsByReviewer": true
+  },
+  "merged": false,
+  "registered": false,
+  "published": false,
+  "next": "Author fixes B09-01/B09-02; separate reviewer rechecks the final two lesson hashes. Register only after all 20 approved. No merge/publication in this review."
+}

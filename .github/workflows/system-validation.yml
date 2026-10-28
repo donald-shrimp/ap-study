@@ -6,6 +6,7 @@ on:
       - 'tests/**'
       - 'tools/**'
       - 'schemas/**'
+      - 'work/ap/objective-quality/**'
       - 'content/**'
       - 'data/**'
       - 'assets/**'
@@ -25,6 +26,7 @@ on:
       - 'tests/**'
       - 'tools/**'
       - 'schemas/**'
+      - 'work/ap/objective-quality/**'
       - 'content/**'
       - 'data/**'
       - 'assets/**'
@@ -55,7 +57,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install 'jsonschema>=4.18,<5' 'pymupdf>=1.24,<2'
+      - run: python -m pip install 'jsonschema>=4.18,<5' 'pymupdf>=1.24,<2' 'pillow>=10,<13'
       - name: Run all domain tests except the Firebase Emulator suite
         shell: bash
         run: |
@@ -67,6 +69,12 @@ jobs:
       - name: Verify publication contracts and generated content
         run: |
           python tools/build-content.py
+          python tests/corpus.py
+          python tests/ap-lesson-quality.py
+          python tests/ap-source-corrections.py
+          python tools/ap-lesson-quality.py check-drafts
+          python tests/legal-context-overrides.py
+          python tests/branding.py
           python tests/common-content.py
           python tests/written-content.py
           python tests/fp2-content.py
@@ -100,6 +108,10 @@ jobs:
           python tests/body-references.py
           python tests/sync-labels.py
           python tests/practice-scheduling.py
+          python tests/ap-lesson-pilot-browser.py
+          python work/ap/objective-quality/review/browser-wave-02.py
+          python work/ap/objective-quality/review/browser-release-800.py
+          python tests/ap-source-correction-browser.py
           python tests/fp2-revision-published.py
           python tests/fp2-202501-published.py
           python tests/fp2-202505-published.py

@@ -1,0 +1,1413 @@
+[
+  {
+    "id": "r06a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e37886f4cad933a9dd3d26a7618d50596ac262ebb65a4bf1a410c84b61fe2beb",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q1",
+      "summary": "M/M/1モデルで、利用率の変化から平均待ち時間の比を求める。",
+      "explanation": "M/M/1は、到着がポアソン過程、サービス時間が指数分布、窓口が一つの待ち行列モデルです。M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間（サービス開始まで）はTs×ρ/(1−ρ)です。Tsは平均サービス時間、ρは0以上1未満の利用率を表します。40/25だけでなく、1−ρの変化も比に含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "利用率の比だけを待ち時間の比と考え、非線形な増加を扱えない。",
+      "stages": [
+        {
+          "newInformation": "サービス時間を共通変数にする。",
+          "remainingWork": "待ち時間の公式を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "具体的な待ち時間も比も未提示。"
+        },
+        {
+          "newInformation": "平均待ち時間の公式とTs・ρの定義。",
+          "remainingWork": "25%と40%を公式へ代入する。",
+          "revealsAnswer": false,
+          "reason": "公式の適用と比の計算が残る。"
+        },
+        {
+          "newInformation": "新旧の比を表す分数式。",
+          "remainingWork": "分数を約分して比を計算する。",
+          "revealsAnswer": false,
+          "reason": "最終値は渡さず、計算を本人に残す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06a/r06a-q1.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答ウをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：Ts/3と2Ts/3の比を再計算して2.00、ウ。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ea492c35647c282a474e925068931fac2774bfa371025f845a281a39e0ae5410",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q2",
+      "summary": "二分法の区間の縮小と、中央値計算後の終了判定から実行回数を求める。",
+      "explanation": "最初の区間幅は1。中央値を求めた直後のx₁−xは1/2です。終了しなければ、中央値を新しい端点にするので次の区間幅も半分になります。\n(2)のn回目直後にはx₁−x=1/2ⁿ。終了条件は1/2ⁿ<0.001、つまり2ⁿ>1,000です。\n2⁹=512では不足し、2¹⁰=1,024なら満たすため、答えは10回です。",
+      "choiceReasons": [
+        "10回目は1/1,024<0.001で、初めて終了条件を満たします。",
+        "20回より前の10回目で既に終了します。",
+        "区間は一度ごとに半分になるので、100回も必要ありません。",
+        "0.001刻みで順に試す方法ではありません。二分するので1,000回にはなりません。"
+      ],
+      "takeaway": "二分法の回数は幅が1/2ⁿになることから求める。判定が中央値の前か後かも読む。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "(3)が比べる長さはx₁−xです。(2)で中央値を計算した直後、最初は(1−0)/2=1/2になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "次の区間は前の半分なので、(2)をn回行うとx₁−x=1/2ⁿ。1/2ⁿ<0.001を満たす最小のnを求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1/2ⁿ<0.001は2ⁿ>1,000と同じです。2の累乗を順に計算し、初めて1,000を超える指数nを探しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "区間幅と終了判定x₁−xを混同し、回数を一つずらす。",
+      "stages": [
+        {
+          "newInformation": "判定する長さは中央値から右端まで、初回は1/2。",
+          "remainingWork": "反復による長さの変化を追う。",
+          "revealsAnswer": false,
+          "reason": "初回の長さだけで必要回数は未提示。"
+        },
+        {
+          "newInformation": "n回目の長さ1/2ⁿと最小nを求める不等式。",
+          "remainingWork": "累乗を比較する。",
+          "revealsAnswer": false,
+          "reason": "最小nの計算が残る。"
+        },
+        {
+          "newInformation": "終了条件を2ⁿ>1,000へ変形する。",
+          "remainingWork": "2の累乗から初めて超えるnを算出する。",
+          "revealsAnswer": false,
+          "reason": "最終の指数値を示していない。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q2.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：2⁹=512、2¹⁰=1024より初回成立は10回、ア。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d957b15a553d35653ce2cb2f7782cce9ee24d5627a13aaf196bd8c7278fe858f",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q2",
+      "summary": "平均待ち時間が平均処理時間以上になる利用率の下限を求める。",
+      "explanation": "M/M/1は到着がポアソン過程、処理時間が指数分布、処理窓口が一つのモデルです。利用率ρは、窓口が処理中である時間の割合です。M/M/1の平均待ち時間は、利用率をρとするとρT/(1−ρ)です。処理時間を含む系内時間とは区別します。\nρT/(1−ρ)≧TをTで割るとρ/(1−ρ)≧1。整理して2ρ≧1なので、ρ≧0.5です。",
+      "choiceReasons": [
+        "33%では平均待ち時間は約0.49Tで、T未満です。",
+        "50%では0.5T/0.5=Tとなり、条件を初めて満たします。",
+        "67%では条件を満たしますが、必要な最小利用率より高い値です。",
+        "80%では待ち時間4Tになりますが、Tに達する境目ではありません。"
+      ],
+      "takeaway": "待ち時間ρT/(1−ρ)と、処理を含む系内時間T/(1−ρ)を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題が求めるのは処理を始めるまでの待ち時間です。平均処理時間Tを加えない式を使います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間はρT/(1−ρ)です。ρは利用率（0≦ρ<1）、Tは平均処理時間です。待ち時間がT以上という条件をρT/(1−ρ)≧Tと表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Tで割り、両辺に1−ρを掛けるとρ≧1−ρです。ρを左へ集めて百分率に直しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "待ち時間に処理時間を含め、系内時間の式を使ってしまう。",
+      "stages": [
+        {
+          "newInformation": "待ち時間は処理開始までの時間。",
+          "remainingWork": "対応する公式を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "しきい値となる利用率は未提示。"
+        },
+        {
+          "newInformation": "ρの意味・範囲と待ち時間の不等式。",
+          "remainingWork": "正のTと1−ρで整理する。",
+          "revealsAnswer": false,
+          "reason": "不等式を解く操作が残る。"
+        },
+        {
+          "newInformation": "ρ≧1−ρまで整理した式。",
+          "remainingWork": "ρを集め百分率へ変換する。",
+          "revealsAnswer": false,
+          "reason": "最終利用率は未提示で代数計算が残る。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07a/r07a-q2.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答イをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：ρ/(1−ρ)≧1からρ≧0.5、50%のイ。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0b77010931eb989c2c526c07c860c90d68954a633a3110e89419e564057141da",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q3",
+      "summary": "後置記法の演算子と被演算子の対応から計算順序を読み取る。",
+      "explanation": "後置記法では演算子の直前にある未処理の二つの値を、元の左右順に使い、一つの結果へ置き換えます。ABCD−×+では、まずC D −をC−Dへ置き換え、次にBとその結果を掛け、最後にAを足します。\nC−D=4−2=2、B×2=8×2=16、A+16=16+16=32です。",
+      "choiceReasons": [
+        "16+8×(4−2)=32で、演算子が現れる順に計算した結果です。",
+        "式を後置記法の順に処理すると32となり、46にはなりません。",
+        "C−Dを先に計算する必要があり、8×(4−2)=16を16に足すので48ではありません。",
+        "最後の演算は16と16の加算なので94ではありません。"
+      ],
+      "takeaway": "後置記法は演算子が出るたび、直前の二値を一つの結果へ置き換える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "後置記法では演算子が現れたら、まだ使っていない直前の二つの値を演算します。左から読んで最初に現れる−は、C−Dを表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "C D −を一つの値に置き換えるとA B (結果) × +になります。この結果をBと掛けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "4−2=2を使って8×2を求め、その値を16に足しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "後置式を通常の左から順の演算と読み、減算の対象も取り違える。",
+      "stages": [
+        {
+          "newInformation": "未処理の直前二値を元の左右順で演算する規則。",
+          "remainingWork": "C−Dを計算して残りの演算を追う。",
+          "revealsAnswer": false,
+          "reason": "計算規則だけで最終値を渡さない。"
+        },
+        {
+          "newInformation": "CD−を置換した後にBとの積を作る手順。",
+          "remainingWork": "C−D、Bとの積、Aとの和を求める。",
+          "revealsAnswer": false,
+          "reason": "最終値は未提示。"
+        },
+        {
+          "newInformation": "C−D=2を次の積と和へ渡す具体的手順。",
+          "remainingWork": "8×2を求め16を加える。",
+          "revealsAnswer": false,
+          "reason": "最終計算を本人が行う。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q3.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：16+8×(4−2)=32、ア。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e38c03e20f9dee3b1a76bc16ac72c0fda6cbcc31cfa0538e0893f7d5f7485369",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q3",
+      "summary": "戻さずに3個抽出するとき、全て良品となる確率を求める。",
+      "explanation": "良品は90個です。非復元抽出なので、3個とも良品である確率は(90/100)×(89/99)×(88/98)=178/245です。1個選ぶたび、良品も全体も1個ずつ減ります。",
+      "choiceReasons": [
+        "90個の良品から3個選ぶ確率を非復元抽出で計算した値です。",
+        "405/539≈0.7514は、正しい非復元抽出の確率約0.7265より大きく、不良品を引く可能性を過小評価しています。",
+        "89/110は最初の2個が良品である確率で、3個目の条件を含みません。",
+        "87/97は3個を取り出した後の残りの良品割合であり、3個すべて良品の確率ではありません。"
+      ],
+      "takeaway": "戻さず抽出する確率は、分子と分母を抽出のたびに減らす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "合格するのは、3個全てが良品のときです。良品は100−10個あります。取り出した品は戻さないので、次の抽出では全体数も減ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1個目が良品だった条件で、残りは良品89個・全99個です。2個目の確率89/99を最初の90/100に掛け、3個目でも同じ減らし方をします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "90/100、89/99、88/98を掛けて約分します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "独立な復元抽出と考え、0.9を3乗してしまう。",
+      "stages": [
+        {
+          "newInformation": "全て良品という合格条件と、非復元抽出で総数が減ること。",
+          "remainingWork": "最初の良品数と確率を求める。",
+          "revealsAnswer": false,
+          "reason": "最終確率は未提示。"
+        },
+        {
+          "newInformation": "条件付きの2個目の確率89/99と積の考え方。",
+          "remainingWork": "3個目の条件付き確率を作る。",
+          "revealsAnswer": false,
+          "reason": "3段階目の適用と積の計算が残る。"
+        },
+        {
+          "newInformation": "3個全て良品となる確率の積。",
+          "remainingWork": "分数の掛算と約分を行う。",
+          "revealsAnswer": false,
+          "reason": "約分後の正答値は未提示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04a/r04a-q3.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：Fractionで(90/100)(89/99)(88/98)=178/245を検算、ア。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "af2ede70b95446d8850a0d9317820b60e7243402b2aedf85cdf08b559ac7260c",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q2",
+      "summary": "数値計算の誤差を、桁が失われる操作と仕組みで区別する。",
+      "explanation": "例えば1.23456−1.23455=0.00001では、共通する上位桁が相殺されます。元の値に含まれた下位桁の誤差の影響が相対的に大きくなり、有効な桁数が失われます。",
+      "choiceReasons": [
+        "ほぼ等しい値を減算して上位桁が相殺される桁落ちです。",
+        "下位桁を切捨て・四捨五入するのは丸め誤差です。",
+        "大きい値と小さい値の演算で小さい値が消えるのは情報落ちです。",
+        "無限級数を有限項で止めるのは打切り誤差です。"
+      ],
+      "takeaway": "桁落ち、丸め、情報落ち、打切りを発生操作で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補の操作を「二数の減算」「下位桁の丸め」「大小の数の加減算」「級数の終了」に分類して、失われる桁の場所を書き分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "桁落ちは、近い二数の減算で共通する上位桁が相殺され、有効桁数が減る現象です。例えば1.23456−1.23455では、差に残る有効な桁が少なくなります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "四捨五入などで桁数を制限するのは丸め誤差、大きな値に小さな値を足して小さい値が反映されないのは情報落ち、級数を途中で止めるのは打切り誤差です。発生する操作で区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "桁落ち・丸め・情報落ち・打切りの原因を区別できない。",
+      "stages": [
+        {
+          "newInformation": "誤差を発生操作と失われる桁で分類する軸。",
+          "remainingWork": "各誤差名を発生原因へ対応させる。",
+          "revealsAnswer": false,
+          "reason": "桁落ちがどの操作か未確定。"
+        },
+        {
+          "newInformation": "桁落ちの定義と近い数の減算例。",
+          "remainingWork": "例と選択肢の定義を対応させる。",
+          "revealsAnswer": true,
+          "reason": "アの定義そのものを教える。"
+        },
+        {
+          "newInformation": "残る三種類の誤差と発生操作。",
+          "remainingWork": "名称と操作を整理して復習する。",
+          "revealsAnswer": true,
+          "reason": "前段でアを確定済みで、他肢も分類している。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03h/r03h-q2.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：ほぼ等しい値の減算による有効桁減少はア。全四肢の誤差種別を照合。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fda82241d6f819053ee4a19bc4491adb6d27e79b447910deb23b73c760cda787",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q2",
+      "summary": "正規分布の対称性・平均・標準偏差をグラフと対応させる。",
+      "explanation": "正規分布は平均μを中心とする左右対称の釣鐘形です。曲線の変曲点はμ−σとμ+σにあります。μ=60、σ=10なので、中心は60、変曲点は50と70です。アは頂点が60、右の変曲点が70で条件に合います。",
+      "choiceReasons": [
+        "60を中心に左右対称で、中心から右の変曲点70まで10あります。",
+        "変曲点55と65は中心60から5離れており、標準偏差10ではありません。",
+        "10付近と60付近に二つの山があり、一つの左右対称な正規分布ではありません。",
+        "60付近の頂点の左右で形が異なり、正規分布の左右対称性を満たしません。"
+      ],
+      "takeaway": "正規分布の平均は対称軸、標準偏差は中心から変曲点までの距離。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正規分布は山が一つで、平均を中心に左右対称になる釣鐘形です。平均60は対称軸の横軸上の位置を指定しています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "標準偏差σは分布の広がりを表し、正規分布の曲線の曲がり方が変わる変曲点は平均μから左右へσ離れた位置です。点線と曲線の対応を読みましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "μ=60、σ=10なら変曲点は50と70です。中心60から右の変曲点70までの幅を示し、左右対称なアが条件に合います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "平均の位置と標準偏差の幅、分布形状の条件を同時に読めない。",
+      "stages": [
+        {
+          "newInformation": "正規分布の一峰性と平均を軸とする左右対称性。",
+          "remainingWork": "グラフ形状を選別し広がりも確認する。",
+          "revealsAnswer": false,
+          "reason": "アとイの標準偏差の区別が残る。"
+        },
+        {
+          "newInformation": "変曲点μ±σの関係。",
+          "remainingWork": "60±10を計算して図の点線と照合する。",
+          "revealsAnswer": false,
+          "reason": "関係式の適用とグラフの比較を残す。"
+        },
+        {
+          "newInformation": "変曲点50・70と正答図の対応。",
+          "remainingWork": "中心と幅を図で再確認する。",
+          "revealsAnswer": true,
+          "reason": "アの名称と図の決め手を明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05h/r05h-q2.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：原図はアが中心60から右変曲点70まで10、イは55〜65の全幅10。ウ二峰、エ非対称を確認。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c42917dedbc37c226209ab6a9af8332b253a5870e8eebf70f8391f2579181e3a",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q1",
+      "summary": "指定された仮数の桁数と演算順序から、情報落ちの有無を判断する。",
+      "explanation": "小さい項は(1.1)₂×2⁻³=3/16、(1.0)₂×2⁻⁴=1/16、大きい項は32です。アは先に3/16+1/16=1/4として、32+1/4=(1.0000001)₂×2⁵を得ます。小数点以下7ビットに収まります。イは先に差1/8を作りますが、32+1/8には小数点以下8ビットが必要です。ウとエは32と小さい数を先に演算する段階で、小さい項の下位ビットが仮数の範囲外になります。",
+      "choiceReasons": [
+        "3/16と1/16を先に加えて1/4とするため、32.25を7ビットで正確に表せます。",
+        "差の1/8を32に足すと(1.00000001)₂×2⁵になり、8ビット目が必要です。",
+        "最初の32+3/16に仮数8・9ビット目が必要になり、情報落ちします。",
+        "最初の32−1/16=31.9375を正規化すると仮数8ビットが必要で、情報落ちします。"
+      ],
+      "takeaway": "大きさが大きく異なる浮動小数点数は、小さい項を先にまとめて桁の損失を減らす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補の中括弧を最初に計算します。2⁵の項と2⁻³・2⁻⁴の項では、桁の位置が大きく離れています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "指数5にそろえたとき、小数点以下7ビット目の重みは2⁵×2⁻⁷=1/4です。それより細かい端数が必要なら、この仮数では正確に保持できません。各中間結果を正規化して確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "小さい項の和は1/4です。32+1/4=(1.0000001)₂×2⁵なら小数点以下7ビットに収まります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "正規化した仮数の保持桁数を確認せず実数の演算だけで判断する。",
+      "stages": [
+        {
+          "newInformation": "中括弧優先と指数による桁位置の離れ。",
+          "remainingWork": "各中間結果の桁位置を調べる。",
+          "revealsAnswer": false,
+          "reason": "正確に保持できる肢は未確定。"
+        },
+        {
+          "newInformation": "指数5で7桁目の重みは1/4という精度の尺度。",
+          "remainingWork": "各演算を正規化し必要桁数を比べる。",
+          "revealsAnswer": false,
+          "reason": "各肢の途中結果の算出と比較が残る。"
+        },
+        {
+          "newInformation": "小さい和1/4と32.25の7桁での表現。",
+          "remainingWork": "正確に表せる理由を確認する。",
+          "revealsAnswer": true,
+          "reason": "アと実質同じ演算結果・適合判定を渡す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04h/r04h-q1.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：ア32.25=1.0000001₂×2⁵。イ32.125は8桁、ウ32.1875は9桁、エの途中31.9375は1.11111111₂×2⁴で8桁。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9ed9f64335453d3c8da33fc54fbbd40ead1b12c525f32075f9880a89c78f6a94",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q4",
+      "summary": "各センサが検出する物理量から、体温測定に適した素子を選ぶ。",
+      "explanation": "体温を電気信号として測定するには温度変化を検出する素子が必要です。サーミスタは温度によって抵抗値が変化するため、抵抗を測って温度に換算できます。",
+      "choiceReasons": [
+        "温度に伴う抵抗変化を利用して体温を測れます。",
+        "超音波の反射などから距離や物体を検出するセンサです。",
+        "光量によって電流が変わる光センサで、温度を直接測る素子ではありません。",
+        "位置や回転角に応じて抵抗値が変化する可変抵抗器です。"
+      ],
+      "takeaway": "測定したい物理量と素子の変化する特性を対応させる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "体温で変化する物理量は温度です。各素子が温度・音・光・位置のどれに反応するか整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "サーミスタは、温度の変化によって抵抗値が大きく変わる半導体素子です。その抵抗値を測り、温度へ換算できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波センサは音の反射による距離、フォトトランジスタは光量、ポテンショメータは位置や回転角を電気信号にします。温度に反応するサーミスタと測定対象を区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサ名称から検出対象が分からない。",
+      "stages": [
+        {
+          "newInformation": "体温の測定対象を温度と定め、音・光・位置と比較する軸。",
+          "remainingWork": "名称と測定原理を対応させる。",
+          "revealsAnswer": false,
+          "reason": "適切な素子の名称をまだ示さない。"
+        },
+        {
+          "newInformation": "サーミスタの温度による抵抗変化と温度への換算。",
+          "remainingWork": "体温という目的と照合する。",
+          "revealsAnswer": true,
+          "reason": "正答の名称と適切な原理を明示する。"
+        },
+        {
+          "newInformation": "他の三素子の検出対象。",
+          "remainingWork": "四素子の用途を整理する。",
+          "revealsAnswer": true,
+          "reason": "前段の正答開示を含めて三誤答の用途も示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03h/r03h-q4.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：体温は温度、温度による抵抗変化のサーミスタ、ア。全素子の検出対象を照合。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "dad069f4b355b0560a9372fcd6457e38fa5519d2374655ce3b932ebc49558d21",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q4",
+      "summary": "行と列に付けたパリティで保証できる誤り訂正の範囲を考える。",
+      "explanation": "1ビットが反転すると、一つの行と一つの列でパリティ不一致が起きます。その交点が誤り位置です。\n2ビットの誤りでは、例えば異なる二つの行・列で不一致が起きても、どの組合せの交点が誤りかを一意に決められません。さらに、四角形の4頂点を反転すると各行・各列の反転が偶数となり検査が相殺されます。保証できる訂正は1ビットなので、アです。",
+      "choiceReasons": [
+        "一つの行と列の交点から位置が分かるので、1ビットを訂正できます。",
+        "2ビットでは、不一致の行と列だけから位置を一意に決められない場合があります。",
+        "3ビット全ての誤り位置を、この検査だけで必ず特定できるわけではありません。",
+        "四角形の4頂点の反転では各行・列で影響が相殺され、検出すらできない場合があります。"
+      ],
+      "takeaway": "行と列の交点で1ビットを特定。検出可能な誤りと、訂正保証を区別する。",
+      "hints": [
+        {
+          "title": "何が分かるか",
+          "text": "網掛けは右端と下端のパリティビットです。図では各行・各列の1の個数が偶数になるように付加しています。1ビットを反転すると、その行と列の偶奇が変わります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "位置を特定する",
+          "text": "1ビットだけの反転なら、異常な行と列が一つずつ現れ、その交点を反転すれば訂正できます。したがって1ビットの誤り位置は特定できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "複数の誤りを試す",
+          "text": "異なる2行・2列の対角の2ビットを反転すると、もう一方の対角の反転と同じ検査結果になります。2ビットでは位置が一意にならず、必ず訂正できるのは1ビットまでです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "パリティの検出と位置特定による訂正を同じものと考える。",
+      "stages": [
+        {
+          "newInformation": "図の偶数パリティと、1反転による行・列の偶奇変化。",
+          "remainingWork": "異常行列の交点をどう使うか考える。",
+          "revealsAnswer": false,
+          "reason": "反転の影響を教えるが訂正可能数を断定しない。"
+        },
+        {
+          "newInformation": "一つの異常行と異常列の交点から1ビット訂正できること。",
+          "remainingWork": "複数誤りでも必ず特定できるか考える。",
+          "revealsAnswer": true,
+          "reason": "正答数1ビットを明示している。"
+        },
+        {
+          "newInformation": "2ビット反転で対角の組合せが曖昧になる具体例。",
+          "remainingWork": "保証範囲と検出能力を区別する。",
+          "revealsAnswer": true,
+          "reason": "1ビットまでという正答数を明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03a/r03a-q4.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：図は4×4データと行列の偶数パリティ。対角2ビットの二通りが同一異常となり、1ビットのア。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bd72378b82b71901a13504240f207bdf4d91192de5e4d3245fcf38ffd6f0d739",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q4",
+      "summary": "二次元パリティで誤りの位置を一意に特定できる条件を考える。",
+      "explanation": "図は各行と各列の1の数が偶数になるようパリティを付けています。データが1ビットだけ反転すると、そのビットが属する行と列の両方でパリティが異常になります。交点を特定して反転すれば訂正できます。\n複数ビットでは異常の組合せから位置を一意に決められない場合があります。例えば異なる2行・2列の対角位置の2ビット反転は、もう一方の対角位置の反転と同じ異常を示します。",
+      "choiceReasons": [
+        "1ビット反転なら異常な行と列が一つずつになり、交点を一意に特定できます。",
+        "2ビットでは、二つの異常行と異常列のどの交点が反転したか曖昧な場合があり、常に訂正できません。",
+        "3ビットの位置を常に特定できるだけの情報はありません。1ビット訂正の保証を超えます。",
+        "長方形の四隅の4ビットが反転すると各行・列で2回ずつ反転し、パリティ異常さえ出ない場合があります。"
+      ],
+      "takeaway": "行列パリティは一つの誤りの行と列を絞り、その交点を訂正する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "網掛けは右端と下端のパリティビットです。図では各行・各列の1の個数が偶数になるように付加しています。1ビットを反転すると、その行と列の偶奇が変わります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1ビットだけの反転なら、異常な行と列が一つずつ現れ、その交点を反転すれば訂正できます。したがって1ビットの誤り位置は特定できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "異なる2行・2列の対角の2ビットを反転すると、もう一方の対角の反転と同じ検査結果になります。2ビットでは位置が一意にならず、必ず訂正できるのは1ビットまでです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "異常行・異常列の数だけで複数誤りまで訂正できると思ってしまう。",
+      "stages": [
+        {
+          "newInformation": "図の偶数パリティと1ビット反転の影響。",
+          "remainingWork": "異常な行列から位置を求める。",
+          "revealsAnswer": false,
+          "reason": "位置特定手順の完成をまだ示していない。"
+        },
+        {
+          "newInformation": "行列交点を反転する1ビット訂正法。",
+          "remainingWork": "2ビットでの曖昧さを確かめる。",
+          "revealsAnswer": true,
+          "reason": "1ビット訂正という正答を教える。"
+        },
+        {
+          "newInformation": "2行2列の対角の組合せで同一の異常になる例。",
+          "remainingWork": "常に訂正可能という保証の意味を理解する。",
+          "revealsAnswer": true,
+          "reason": "1ビットまでを明示し前段の開示も継続。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q4.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：4×4偶数パリティ図を確認。2ビットでは対角位置を区別できず、アの1ビット。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "793da63e7e0715697292bffd684920d860e63973acaa5bc5f2d353dbd01f93d8",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q3",
+      "summary": "演算の優先順位を保ちながら、中置記法を後置記法へ変換する。",
+      "explanation": "逆ポーランド表記は、演算子をその対象の後ろに置く後置記法です。A＋B×Cは掛け算が先なので、まずB C ×とし、その結果をAへ足してA B C × ＋とします。\nエのC B A ＋ ×ではB＋Aを先に計算し、その結果へCを掛けるため、元の式とは異なります。",
+      "choiceReasons": [
+        "先頭に演算子があるので後置記法ではありません。",
+        "× ＋ A B Cは前置記法で読むと(A＋B)×Cです。後置記法でもありません。",
+        "B C ×で積を求め、最後の＋でAを加えるので元の式に一致します。",
+        "C B A ＋ ×はC×(B＋A)です。元の式の演算順序と異なります。"
+      ],
+      "takeaway": "後置記法へ変換するときは、先に計算する部分式から演算子を後ろへ移す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "元の式のB×Cへ丸を付けます。＋より×が先なので、この部分が一つの計算結果になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つの値XとYの演算X op Yは、後置記法ではX Y opです。まずB×Cだけを変換しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "B C ×を一つの値と見なし、Aとその値を足す演算子を最後へ置くと、A B C × ＋になります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "演算子を末尾へ並べるだけで掛算優先を崩してしまう。",
+      "stages": [
+        {
+          "newInformation": "B×Cを先に一つの部分式として扱う。",
+          "remainingWork": "その部分式を後置化する。",
+          "revealsAnswer": false,
+          "reason": "完成した後置式は未提示。"
+        },
+        {
+          "newInformation": "X op YをX Y opとする後置化規則。",
+          "remainingWork": "積を作り、Aとの和へ組み込む。",
+          "revealsAnswer": false,
+          "reason": "変換を本人が行う。"
+        },
+        {
+          "newInformation": "積を部分式としてAと足す完成形。",
+          "remainingWork": "各演算子の対象を再確認する。",
+          "revealsAnswer": true,
+          "reason": "正答肢のABC×+を明示する。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06a/r06a-q3.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答ウをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：B×Cが先、A+(B×C)→ABC×+、ウ。エはC×(B+A)、ア・イは後置記法でない。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "01f9d2ef897cfa5145461a6707590a8bfcf49dfd71b12af16ce213480048ee4f",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q4",
+      "summary": "運転支援用センサの測定原理と、天候・測定距離・遮蔽物による限界を判断する。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサの一つの特徴だけに着目し用途や限界の後半を見落とす。",
+      "stages": [
+        {
+          "newInformation": "各肢の四つの用途条件を比較する視点。",
+          "remainingWork": "各センサの原理と用途を照合する。",
+          "revealsAnswer": false,
+          "reason": "個々の肢の正誤は示さない。"
+        },
+        {
+          "newInformation": "色は可視光、ミリ波測距とは別情報という原理。",
+          "remainingWork": "残りの測定距離と遮蔽物条件を評価する。",
+          "revealsAnswer": false,
+          "reason": "ウだけの誤りを示し、全候補は確定しない。"
+        },
+        {
+          "newInformation": "三つの不適切な用途を除外しカメラの能力を示す。",
+          "remainingWork": "用途ごとの限界を整理する。",
+          "revealsAnswer": true,
+          "reason": "全誤答を除外してアを明示する。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r06a/r06a-q4.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：可視光カメラの標識認識がア。超音波500m・ミリ波の灯色・レーザーの建物背後の各誤条件を照合。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ff4ef2070b4d7882d709693dd418ea80c1558d0b6e97537f4c5be36b97a2cf05",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q4",
+      "summary": "過学習を、訓練データへの適合と未知データへの性能の違いで捉える。",
+      "explanation": "過学習は訓練データの偶然の特徴まで学び、未知データへ一般化できなくなることです。学習に使った例と新しい例の性能を分けて判断します。",
+      "choiceReasons": [
+        "学習済みモデルを別領域へ再利用する転移学習です。",
+        "訓練データと未知データの性能に差が出る過学習の説明です。",
+        "誤差から逆向きに学習する誤差逆伝播の説明です。",
+        "報酬を手掛かりに行動を学ぶ強化学習の説明です。"
+      ],
+      "takeaway": "過学習は、訓練時の高成績だけでは見抜けない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補で、学習に使ったデータと初めて見るデータを区別しているか確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "過学習は訓練例の偶然の特徴まで覚え込み、訓練例では高い精度でも未知の例では精度が下がる状態です。未知の例にも通用する能力を汎化性能と呼びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "別領域のモデルを再利用するのは転移学習、出力誤差を入力側へ伝えて重みを調整するのは誤差逆伝播、報酬を手掛かりに行動を学ぶのは強化学習です。過学習は学習法の名称ではなく性能の偏りを表します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "学習法の名称と、訓練・未知データ間の性能の偏りを混同する。",
+      "stages": [
+        {
+          "newInformation": "訓練データと未知データという比較軸。",
+          "remainingWork": "性能の違いと過学習の意味を結び付ける。",
+          "revealsAnswer": false,
+          "reason": "定義はまだ示していない。"
+        },
+        {
+          "newInformation": "過学習の性能差と汎化性能の定義。",
+          "remainingWork": "該当する肢と対応させる。",
+          "revealsAnswer": true,
+          "reason": "イの定義そのものを示す。"
+        },
+        {
+          "newInformation": "転移学習・誤差逆伝播・強化学習の相違。",
+          "remainingWork": "学習方法と性能上の状態を整理する。",
+          "revealsAnswer": true,
+          "reason": "イを前段で開示済みで、他肢の説明も識別する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04a/r04a-q4.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答イをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：訓練では高精度、未知データで低下のイ。ア転移、ウ誤差逆伝播、エ報酬による強化学習。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be192bd956c33be815b184461d9814adc1ff81a074f23dc5b619d07d809e3444",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q3",
+      "summary": "過学習を抑え、未知データへの予測性能を改善する対策を選ぶ。",
+      "explanation": "過学習は、訓練データにはよく合うのに、未知のデータへうまく予測できない状態です。偶然の細部まで覚えたことが原因になり得ます。\n画像の回転・切出しなど、対象の意味を保つ加工で訓練データの種類を増やすと、限られた例だけに依存しにくくなります。これがイのデータ拡張です。効果は別の検証用データで確かめます。",
+      "choiceReasons": [
+        "訓練とテストに同じデータを使うと、未知のデータへの性能を測れません。",
+        "意味を保った加工で例の種類を増やすデータ拡張は、過学習を抑える対策です。",
+        "複雑なモデルは訓練データの細部まで覚えやすく、過学習を悪化させる場合があります。",
+        "汎化性能は未知のデータへの対応力です。下げることは目的と逆です。"
+      ],
+      "takeaway": "訓練時の成績と未知データへの成績を分け、訓練例の多様性を増やす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "過学習では、覚えた訓練例には強く、初めて見る例に弱くなります。問われるのは、この偏りを減らす方法です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば一枚の画像を意味が変わらない範囲で回転すると、別の見え方も学べます。こうして訓練例を増やすと、特定の例だけを覚えにくくなります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「同じデータでテスト」は未知の例を試していません。「より複雑にする」「汎化性能を下げる」も改善の方向かを確認し、訓練例の種類を増やす候補を残します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "訓練精度を上げることと未知データへの性能改善を混同する。",
+      "stages": [
+        {
+          "newInformation": "過学習の定義と対策の目的。",
+          "remainingWork": "各対策が偏りを減らすか判断する。",
+          "revealsAnswer": false,
+          "reason": "この問題の正答対策はまだ教えていない。"
+        },
+        {
+          "newInformation": "意味を保つ画像の加工で学習例を増やす対策。",
+          "remainingWork": "例を一般化し選択肢と照合する。",
+          "revealsAnswer": true,
+          "reason": "イの加工による訓練データ増加と実質同じ対策。"
+        },
+        {
+          "newInformation": "同じデータのテストや複雑化等との比較。",
+          "remainingWork": "汎化性能と訓練精度を整理する。",
+          "revealsAnswer": true,
+          "reason": "全誤答を除外し、前段と合わせイを確定する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r07h/r07h-q3.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答イをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：意味を保った加工で訓練例を増やすイ。テストの独立性、モデル複雑化、汎化性能低下の方向を確認。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6a507e879700c08bfb9353ed406738e6822d38661818662abca3bb989916ca42",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q2",
+      "summary": "補集合・積集合・差集合が表す条件を比較して、集合の恒等式を判断する。",
+      "explanation": "求める集合はAの外側かつBの外側です。Aの補集合からBの要素を除けば、その条件を満たします。ド・モルガンの法則ではĀ∩B̄=(A∪B)の補集合とも表せます。一方、他の三肢はいずれも(A∩B)の補集合になり、Aだけ・Bだけの領域も含むため、求める集合とは一致しません。",
+      "choiceReasons": [
+        "Ā−BはAに入らず、さらにBにも入らない要素なので一致します。",
+        "Ā∪B̄はAとBの共通部分以外を含み、そこからA∩Bを除いても変わりません。片方だけに属する要素も残ります。",
+        "(S−A)∪(S−B)はĀ∪B̄です。片方の集合に属する要素を含みすぎます。",
+        "S−(A∩B)は共通部分以外の全体であり、Aだけ・Bだけの部分も含みます。"
+      ],
+      "takeaway": "「どちらにも属さない」は補集合同士の積集合。差集合は左の集合から右の要素を除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ベン図でAだけ、Bだけ、両方、どちらにも属さないの四つの領域を描き、Ā∩B̄が残す領域を確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "積集合は二つの条件を同時に満たす部分です。Aの外にある要素から、Bの中にあるものを取り除く操作を考えましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Aだけに属する要素を試すと、Ā∪B̄にはBの外として含まれますが、求めるĀ∩B̄には含まれません。Bだけの要素も同様です。アのĀ−Bだけが両方の外を残し、他の三式は片方だけに属する領域も残します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "補集合の積と和を混同し、片方だけに属する領域まで含める。",
+      "stages": [
+        {
+          "newInformation": "四領域に分けるベン図の読み方。",
+          "remainingWork": "求める領域を各肢と比較する。",
+          "revealsAnswer": false,
+          "reason": "領域の分解だけで対応する式は未提示。"
+        },
+        {
+          "newInformation": "Aの外からBを除くという差集合による表現。",
+          "remainingWork": "差集合の肢と照合する。",
+          "revealsAnswer": true,
+          "reason": "アを実質的に言い換えている。"
+        },
+        {
+          "newInformation": "Aだけ/Bだけに属する要素を代入し、誤肢が片方だけの領域を含むことを確かめる具体的反例。",
+          "remainingWork": "各式が四つの領域のどこを含むか比較して、和集合の補集合と積集合の補集合を区別する。",
+          "revealsAnswer": true,
+          "reason": "アの式を明示し、前段でもアに対応する操作を開示済みのためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04h/r04h-q2.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答アをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：AにもBにも属さない条件= Ā−B、ア。他3肢は全てA∩Bの補集合で片方だけの領域も含む。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。",
+        "独立レビュー指摘を受け、H3へAだけ/Bだけを含む誤肢の反例を追加し、解説末尾の比較を(A∩B)の補集合と明確化。四つの領域で再照合。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "609d30ef87e1eb07f80b4b7db66f492aabe7bbda404ab27b8e7888fc6674d5be",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q3",
+      "summary": "音声の標本化周波数と量子化ビット数から、単位をそろえてデータ量を求める。",
+      "explanation": "A/D変換（アナログ信号をディジタル値に変える処理）では、標本化周波数が1秒間の標本数、量子化ビット数が1標本のビット数を表します。40kHzは毎秒40,000標本です。モノラルなので1標本16ビットのみで、40,000×16=640,000ビット。8で割って80,000バイト、さらに1,000で割って80kバイトです。",
+      "choiceReasons": [
+        "20kバイトでは1標本4ビット相当になり、16ビットの条件を満たしません。",
+        "40kバイトでは1標本1バイトとなり、必要な2バイトの半分です。",
+        "40,000×16÷8÷1,000=80で一致します。",
+        "640はkビット単位での値であり、バイトへの変換が必要です。"
+      ],
+      "takeaway": "非圧縮音声のデータ量［バイト］＝標本化周波数［Hz］×量子化ビット数×時間［秒］×チャネル数÷8。モノラルは1チャネル。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "40kHzを1秒間の標本数40,000に直し、1標本が16ビットであることを書きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "標本数×16でビット数を求め、8ビット=1バイトで換算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "640,000ビット÷8=80,000バイト、指定の1k=1,000で80kバイトです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "標本数・量子化ビット数・バイト換算を混同する。",
+      "stages": [
+        {
+          "newInformation": "40kHzは毎秒40,000標本で1標本16ビット。",
+          "remainingWork": "標本数とビット数を掛ける。",
+          "revealsAnswer": false,
+          "reason": "最終量は未提示。"
+        },
+        {
+          "newInformation": "標本数×16と8ビット=1バイトの換算。",
+          "remainingWork": "kバイトまで計算する。",
+          "revealsAnswer": false,
+          "reason": "掛算と単位換算が本人に残る。"
+        },
+        {
+          "newInformation": "640,000ビットから80kバイトまでの換算。",
+          "remainingWork": "各単位の意味を復習する。",
+          "revealsAnswer": true,
+          "reason": "最終値80を明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "takeaway"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r03h/r03h-q3.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答ウをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：40,000×16×1×1÷8÷1,000=80kバイト、ウ。モノラル1チャネル、k=1,000を確認。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "09c487c863225a9233c189406c788872536c926e46974ded79e201cc03c572f5",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q20",
+      "summary": "FPGAの回路構成の設定と、メモリ・特定用途向け回路・演算器の機能を区別する。",
+      "explanation": "FPGAはField Programmable Gate Arrayで、利用者が製造後に回路の接続や論理機能を設定できる集積回路です。専用ハードウェアとして処理を実装し、設定を書き換えて構成を変更できます。アの不揮発性メモリ、イの特定分野・用途に向けて汎用供給されるASSP（特定用途向け汎用集積回路）、ウの浮動小数点演算器とは異なります。",
+      "choiceReasons": [
+        "EEPROM（Electrically Erasable Programmable Read-Only Memory：電気的に消去・書換え可能な不揮発性メモリ）などの説明です。記憶データの書換えと、論理回路の構成変更は異なります。",
+        "ASSP（Application Specific Standard Product：特定用途向け汎用集積回路）の説明です。特定分野・用途向けの製品であり、利用者が実装後に論理構成を再プログラムできる特徴を述べていません。",
+        "FPU（Floating Point Unit：浮動小数点演算器）の説明です。演算を高速に実行する機能と、回路構成を変更する機能は異なります。",
+        "製造後に論理回路をプログラムできることがFPGAの特徴です。"
+      ],
+      "takeaway": "FPGAは実装後に論理構成を書換え可能。ASSPは特定分野・用途向けの汎用集積回路。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢が説明する対象を、記憶装置・特定用途回路・演算ユニット・論理構成変更に分けて読みます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FPGAはField Programmable Gate Arrayの略です。Field Programmableは製造後に利用現場で設定できるという意味で、設定するのは論理回路の構成や接続です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "メモリの書換えは保存するデータを変えますが、FPGAの再プログラムは信号を処理する論理機能や接続を変えます。例えば同じ集積回路を、ある比較処理用から別の論理処理用の回路へ構成し直せます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "集積回路という共通点から、書換えの対象と用途を区別できない。",
+      "stages": [
+        {
+          "newInformation": "記憶・特定用途・演算・論理構成という機能別比較。",
+          "remainingWork": "FPGAの機能を対応させる。",
+          "revealsAnswer": false,
+          "reason": "どれがFPGAかはまだ未確定。"
+        },
+        {
+          "newInformation": "FPGAの略語と製造後に論理構成を設定する定義。",
+          "remainingWork": "実装後に再プログラムする肢と対応させる。",
+          "revealsAnswer": true,
+          "reason": "エと実質同じ特徴を示す。"
+        },
+        {
+          "newInformation": "記憶データの書換えと論理機能・接続の再構成の違い、および比較処理回路から別の論理処理回路へ構成し直す具体例。",
+          "remainingWork": "データ保持と回路構成変更の対象を分け、実装後の再プログラムという肢の意味を確認する。",
+          "revealsAnswer": true,
+          "reason": "前段でFPGAの定義を開示済みで、具体例も正答の回路再構成を説明するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r04h/r04h-q20.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答エをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：原本の「基板上に実装した後で再プログラム」からエ。メモリ・ASSP・FPUとの違いを確認。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。",
+        "独立レビュー指摘を受け、H3の定義反復を記憶データと論理構成の区別・用途例へ修正。原問や正答は不変。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2187480f7cb3a253fbf27be67bfd43b2915ba93a15774c561b3946ed388a5019",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q20",
+      "summary": "FPGAの実装後の回路再構成という特徴を識別する。",
+      "explanation": "FPGAはField Programmable Gate Arrayの略で、利用者が論理回路の構成や接続を設定できる集積回路です。基板上に実装した後でも構成を再プログラムできます。\nデータを保存する不揮発性メモリや、浮動小数点演算専用のユニットとは目的が異なります。",
+      "choiceReasons": [
+        "EEPROM（Electrically Erasable Programmable Read-Only Memory：電気的に消去・書換え可能な不揮発性メモリ）などの説明です。記憶データの書換えと、論理回路の構成変更は異なります。",
+        "ASSP（Application Specific Standard Product：特定用途向け汎用集積回路）の説明です。特定分野・用途向けの製品であり、利用者が実装後に論理構成を再プログラムできる特徴を述べていません。",
+        "FPU（Floating Point Unit：浮動小数点演算器）の説明です。演算を高速に実行する機能と、回路構成を変更する機能は異なります。",
+        "実装後に論理回路の構成を再プログラムできる特徴がFPGAに一致します。"
+      ],
+      "takeaway": "FPGAは製造後・実装後に利用者が論理回路を設定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢のうちデータ記憶、用途限定、演算ユニット、回路の再設定という違いを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FPGAはField Programmable Gate Arrayの略です。Field Programmableは製造後に利用現場で設定できるという意味で、設定するのは論理回路の構成や接続です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "メモリの書換えは保存するデータを変えますが、FPGAの再プログラムは信号を処理する論理機能や接続を変えます。例えば同じ集積回路を、ある比較処理用から別の論理処理用の回路へ構成し直せます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "プログラム可能という言葉を記憶内容の書換えと混同する。",
+      "stages": [
+        {
+          "newInformation": "データ記憶・用途限定・演算・回路再設定の比較軸。",
+          "remainingWork": "FPGAの定義と対応させる。",
+          "revealsAnswer": false,
+          "reason": "正答の機能は未提示。"
+        },
+        {
+          "newInformation": "FPGAの略語と利用現場での論理構成設定。",
+          "remainingWork": "実装後という条件と照合する。",
+          "revealsAnswer": true,
+          "reason": "エを言い換えた定義を教える。"
+        },
+        {
+          "newInformation": "記憶データの書換えと論理機能・接続の再構成の違い、および比較処理回路から別の論理処理回路へ構成し直す具体例。",
+          "remainingWork": "データ保持と回路構成変更の対象を分け、実装後の再プログラムという肢の意味を確認する。",
+          "revealsAnswer": true,
+          "reason": "前段でFPGAの定義を開示済みで、具体例も正答の回路再構成を説明するためtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05a/r05a-q20.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答エをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：実装後に論理構成を再プログラムするエ。全四肢の対象機能を照合。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。",
+        "独立レビュー指摘を受け、H3の定義反復を記憶データと論理構成の区別・用途例へ修正。原問や正答は不変。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q21",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ed0d6d970278c0c2761f4cb270c5a736bdcf97ce10ff041c4bb5558ac0eca992",
+    "author": "Codex /root/ap_wave01_author_2",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q21",
+      "summary": "NAND素子の入力接続を追い、回路全体の論理式を導出する。",
+      "explanation": "NAND（否定論理積）の出力は入力の論理積の否定です。左上は両入力がXなので¬(X・X)=¬X、左下は¬(Y・Y)=¬Yとなります。右のNANDはこの二つを入力とするため、Z=¬(¬X・¬Y)です。ド・モルガンの法則でZ=X+Yとなり、イです。",
+      "choiceReasons": [
+        "X・Yは両方1のときだけ1ですが、この回路は片方が1でも1です。",
+        "左の二つが反転器となり、最後のNANDでX+Yを作ります。",
+        "¬(X・Y)は左の反転器を通さずX,YをNANDに直接入れた式です。",
+        "¬(X+Y)はORの否定ですが、導出結果には外側の否定が残りません。"
+      ],
+      "takeaway": "同じ信号を両端子へ入れたNAND（否定論理積）はNOT（否定）になる。ド・モルガンの法則は¬(A・B)=¬A+¬B。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "左の各NANDには、同じ信号が二つの入力端子へ分岐しています。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "NAND（否定論理積）は、両入力が1のときだけ0になる素子で、出力は¬(入力1・入力2)です。同じ信号を両端子に入れた左の二つの素子から順に式を作ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左の出力は¬(X・X)=¬Xと¬(Y・Y)=¬Yです。右の出力Z=¬(¬X・¬Y)に、ド・モルガンの法則¬(A・B)=¬A+¬Bを使うと、Z=X+Yとなります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "同じ信号の分岐を二入力と捉えられず、NANDの否定を落とす。",
+      "stages": [
+        {
+          "newInformation": "左の二つの素子へ同一信号が分岐する接続。",
+          "remainingWork": "NANDの規則から中間出力を求める。",
+          "revealsAnswer": false,
+          "reason": "素子の接続だけで完成式は示さない。"
+        },
+        {
+          "newInformation": "NANDの真理条件と否定論理積の式。",
+          "remainingWork": "左から順に式を導出する。",
+          "revealsAnswer": false,
+          "reason": "定義を回路へ適用する操作が残る。"
+        },
+        {
+          "newInformation": "中間出力とド・モルガンによる最終式X+Y。",
+          "remainingWork": "元の接続と各否定を再確認する。",
+          "revealsAnswer": true,
+          "reason": "正答式X+Yを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで原本 assets/questions/r05h/r05h-q21.webp を実際に開き、問題文・全4肢・図・数式・条件を目視照合。",
+        "context.jsonの公式正答イをdata/answer-keys.jsonの該当年度・期・問番号と照合。IPA公式解答PDF自体への再アクセスは未実施。",
+        "原本から解き直した結果：原図の左NANDは両端子が同信号。¬(¬X・¬Y)=X+Y、イ。真理値00→0、01/10/11→1で検算。",
+        "旧教材の十分な根拠・全4肢理由は維持し、不足する説明と開示判定を点検。初学者への実地試用は未実施。"
+      ]
+    }
+  }
+]

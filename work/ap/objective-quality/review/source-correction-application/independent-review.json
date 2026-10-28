@@ -1,0 +1,74 @@
+{
+  "id": "r04a-q13",
+  "reviewer": "Codex /root/ap_source_fix_review",
+  "checkedAt": "2026-10-27T11:32:20.211577+00:00",
+  "status": "approved",
+  "baseCommit": "4e21a02acca08b36849dec79959ce8f1b19f8d14",
+  "questionSHA256": "d4725217aa652ce256bd761352f318ccd554c305f4df1cfe00d7b329d38cf15c",
+  "version": 4,
+  "fileSHA256": {
+    "tools/ap_lesson_quality.py": "ceeef665a4f41f0381c91696173c962ebca03526e58377afff74c68d1927c66d",
+    "tools/apply-transcriptions.py": "1adf9aa50cb7c642f1cb0b0edba709bf7e75d03dd289ee08612f3f2b9be13b8d",
+    "tools/apply-hints.py": "d563a373bd29dee1a15b6aab1820d4fdfe5c0db54f2f7bf6f6df174cd1c076b3",
+    "src/app.js": "61d1942adf5c36e6b875cc19ce15f4969dbeb59b439d5fdc20944661b3df410c",
+    "src/ui/views.js": "cc3b97628b1e6db95d918ac437340e7b4aaef48939d500642e65d1874c6719ec",
+    "app.js": "dc0df327a121087f7bb4e2cea526c899e90a89fece33f449b1868faacabc3d49",
+    "sw.js": "5533c891f9ab350e9986977dd18d69a17ec212ee32eac2498dc33f5d1528034b",
+    "templates/study.html": "ed0a6b6c9b50f497375ae6cebf7673868533c7420ce49ae2f9195bb1e32dcae4",
+    "tests/ap-source-corrections.py": "354b2e16da6ab9e1d18977af3593497f553206775bcbaa6375ded0b47a0d71c1",
+    "tests/ap-source-correction-browser.py": "81881eb157b2a6680a415a85d59060867a44882755d3cca0c897fb6eee33b5bd",
+    "tests/ap-lesson-quality.py": "c87e2148bf8db95400978b57d275cf34e9cc6e316814c1af20e5748b17a13ae8",
+    "tests/transcriptions.py": "cd7b3883ca54393856f93ce5c39b84929e22f5a83262737eac7a325996349c76",
+    "tests/mobile-content.py": "ff4561286b1fd58aa5274991b9c5143f2ddd7e7239e9a90909391d4f9bcca44f",
+    "tests/e2e.py": "0d42fc4139bcac7e572a823393e427183033988f375814ee0c7429d75b22db8b",
+    ".github/workflows/system-validation.yml": "f9f05e706325a3b17523654b2c35ede8f7262e8647b0792e599f0af3b518bc90",
+    "work/ap/objective-quality/source-corrections.json": "d1427c9b9f8cc22c68f35f99daf61bb416c58651f58eebc8256ea238c47d9ca3",
+    "data/transcription-context-revisions/c009882929668e9b.json": "67e26085ed27148bf28d8d6fc1257405426f49855d3c65c5c47317a5aca26635",
+    "data/qualifications/ap/manifest.json": "2316859d355f657e8a37b9ab559760582ad561707109ecc96b3b28ed36edb802"
+  },
+  "sourceImageSHA256": "df0e93db046cf9bde5068ad5325e9bcc6d13753ded4a68a6d700f042a31f0160",
+  "checks": {
+    "originalImageOpenedAndFullTextMatched": true,
+    "twoPrefixesOnlyAndAnswerUnchanged": true,
+    "other799QuestionsUnchanged": true,
+    "all180LessonsAndHistoricalReviewsPreserved": true,
+    "baselineBytesPreserved": true,
+    "oldGeneratedPacksPreserved": true,
+    "oldRootAndExamAuditsPreservedInJournal": true,
+    "actualBeforeAfterQuestionAndBankHashesVerified": true,
+    "correctedIdExcludedFromLegacyClassification": true,
+    "strictDigestPreflightAndIndependentApprovalReviewed": true,
+    "uiVersionChangeCreatesSeparateAttemptReviewed": true
+  },
+  "preservedFilesCompared": 175,
+  "executedByReviewer": [
+    {
+      "command": "python tests/ap-source-corrections.py",
+      "result": "12 tests passed in isolated tree"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "command": "Independent Python exact-hash/HEAD archive comparison",
+      "result": "passed"
+    }
+  ],
+  "implementationOwnerEvidenceInspected": [
+    "/workspace/scratch/ap-source-correction/material-results.json (13 Python suites exit0)",
+    "/workspace/scratch/ap-source-correction/node.log (296 tests pass)",
+    "/workspace/scratch/ap-source-correction/pwa.log (PASS)",
+    "/workspace/scratch/ap-source-correction/regeneration.json (472 files identical; version4; no new journal)",
+    "/tmp/hitomon-source-correction-e39wp3aq/results.json (offline, snapshots, backup4, widths, pageErrors=[])"
+  ],
+  "imagesActuallyOpened": [
+    "assets/questions/r04a/r04a-q13.webp",
+    "/tmp/hitomon-source-correction-e39wp3aq/current-v4-390.png",
+    "/tmp/hitomon-source-correction-e39wp3aq/legacy-v3-390.png",
+    "/tmp/hitomon-source-correction-e39wp3aq/latest-v4-1440.png"
+  ],
+  "notes": "原本を実表示して全文・四択順を独立照合。ア先頭フェールセーフ／イ先頭フェールソフトを確認し、設問が意図する誤答肢の定義文は変更されていない。正答ウ。コード・新12契約テスト・UI差分・CI・履歴台帳・全差分を読み、別作者と独立承認実hashの連鎖、answer boolや未知変更拒否、再適用とaccept維持を確認。ブラウザ操作自体は統合担当が実行し、その記録と3画面を本担当が閲覧。旧中断は新試行開始時に既存仕様でpostponedとなり、snapshot/選択/ヒント履歴は維持される。",
+  "issues": [],
+  "remainingWork": "No review blocker. Commit/push/PR CI and final merge/publication are integration-owner steps; this record does not claim publication."
+}

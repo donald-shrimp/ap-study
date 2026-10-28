@@ -1,0 +1,850 @@
+{
+  "kind": "batch-independent-content-review",
+  "status": "changes_requested",
+  "reviewer": "Codex /root/ap_source_fix_review",
+  "checkedAt": "2026-10-27T17:12:27.650235+00:00",
+  "reviewedHead": "735baf478547db3101f02a69ee167cf399bbd79e",
+  "author": "ChatGPT/gpt-6-batch14-20261028",
+  "initialHashScope": "All issue text, approvals, envelope/lesson/file hashes refer to the exact immutable initial-drafts.json bytes. Live drafts matched this snapshot at review start and final serialization. Parent held drafts/git/merges until notification.",
+  "initialDraftsFile": {
+    "path": "work/ap/objective-quality/batches/batch-14/review/initial-drafts.json",
+    "sha256": "da083822f63a2ffd9188e97886ca70342c3d736f398992961b804e5f30a6ed93",
+    "matchesLiveDraftsAtCompletion": true
+  },
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "officialAnswerPDFsIndependentlyRead": 10,
+    "choicesAndReasons": 80,
+    "hints": 60,
+    "approvedNotRegistered": 17,
+    "requiresRevision": 3
+  },
+  "method": "Read AGENTS/common hint/explanation/AP rules. Opened every original WebP image and read full20 lessons,80 reasons,60 hints and20 designs. Official10 cached PDFs:18 answer rows extracted;2 scanned2022spring answers visually read. All sourceHashes independently recomputed. SQLite executed SUM/MIN/NULL all4 choices, AVG+DISTINCT against full original table, UNION/INTERSECT/JOIN all4 candidates and view SELECT candidates. View updateability was checked against ordinary SQL row/column correspondence restrictions and official answer, not SQLite-specific blanket view write prohibition. Difference identity checked over all64 pairs of three-element-universe subsets. UML cardinalities and functional dependencies re-derived from source. Actual domain20×4 hint depths and postanswer non-retroactivity executed with original flags. No personal learner records.",
+  "issues": [
+    {
+      "id": "B14-01",
+      "priority": "P2",
+      "questionId": "r04h-q27",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": false,
+      "reason": "H1は外部/概念/内部の一般定義のみ。インデックスを物理アクセス経路へ、ER/制約/正規化を論理設計へ対応させる判断は残る。H2では3誤答を概念設計と明示するのでtrueのままでよい。",
+      "requestedChange": "H1falseと対応design理由を整合させ、修正者をsourceNotesへ記録。"
+    },
+    {
+      "id": "B14-02",
+      "priority": "P2",
+      "questionId": "r05h-q26",
+      "path": "lesson.hints[0].text / design.stages[0].newInformation",
+      "reason": "「図1は『品名』『関連商品_id』の配列と文字列の価格です」は品名まで配列であるかのように読める。原本JSONの品名は文字列47型テレビ、関連商品_idだけが配列AA101/BC06、価格は文字列オープンプライス。",
+      "requestedChange": "品名=文字列、関連商品_id=配列、価格=文字列と項目の型を明確にする。本文explanationも必要なら同じく曖昧さをなくし、design/newInformationを同期。開示フラグfalseは維持可。"
+    },
+    {
+      "id": "B14-03",
+      "priority": "P2",
+      "questionId": "r05a-q28",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1末尾のWHEREで絞るだけなら元行と対応するという具体条件は、正答アの単一表直接列+WHEREのみの構造が更新可能であることを実質渡す。残りはDISTINCT/SUM/AVGでこの具体構造とは異なる。",
+      "requestedChange": "H1trueとdesign理由を整合させる。falseを保つならWHEREが更新可能である説明をH2へ移しH1を元行対応という一般判断軸だけにする。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r05a-q26",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "644e964d3e44b1842ed193ec48675540b850049da1685039ac07d74c1189f33e",
+      "reviewedLessonSHA256": "0fe2876aa693c0f875bc1082f7d4f9b227a82506fe24c6cbfb7cf28252f9336a",
+      "questionSHA256": "92bab27c6c3a767f04a4171415c3d69ba3faa484d75553a6896664ac173cd603",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q26.webp",
+      "sourceImageSHA256": "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q26.webp": "5120884b4a3f198d270fadcf9c1bb8edc87b8b309e6949571630c37c429c5115",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "ハッシュはキー全体の等値エ1001。ア金額以上/イ今月日付範囲/ウDB前方一致は順序索引B+木が適する。H1条件分類のみfalse、H2ハッシュ等値の定義とH1で正答を一意に渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r07a-q27",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "380a001319f7c08d9f6e60f64113eb8a30d48f3c39829c65a71932ae4a9500ad",
+      "reviewedLessonSHA256": "92a719cdbab7d875fd572850aeba36247932961da9dbce94459bc31abf7b2170",
+      "questionSHA256": "5a4fff69228fc630dae6c069d696c8b4fb1dbbe12d6aa8239b5a776c11ed8c8a",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q27.webp",
+      "sourceImageSHA256": "e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q27.webp": "e21f9a8158ab732b90cf85b6c3157f16feab72530518310956a7ece58e06af3e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "別原本も同じ条件。ア金額範囲、イ日付範囲、ウ接頭辞、エ等値でエ。H1分類false、H2から索引特性と唯一等値の対応を渡すtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r07a-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "1e4eab0aa91f6596b26ed2827d6dc74df555be4116f9d4718d6f19789b60885c",
+      "reviewedLessonSHA256": "30ff5448ecf46da92471fa12d3cd46df6d8d61480faea6d24cc326164afffef2",
+      "questionSHA256": "df3bd892cc688f8d53af1e0cc83dc55ab46d56ea0f30da5f1875bcd0b785b8a1",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q28.webp",
+      "sourceImageSHA256": "dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q28.webp": "dfa70bc64bf8ca3cd3ca9e7833dfa6d9969f6bb47c644d954492c129d65b34e9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "正しい記述はア列名別名可。イWHERE行抽出不可は誤り、ウ結合方法によらず更新可は誤り、エ和集合定義不可は誤り。SQLiteで別名view/WHERE/UNION定義実行。H1一般view定義false、H2列別名を含む正答を明示true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04h-q27",
+      "status": "changes_requested",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "7af428571dd9a741940127d92f203985cfac664b74f0a16f22fa9dba12ca50be",
+      "reviewedLessonSHA256": "8f298e9b51123177c8c4c90a83574d8cb8e1929d288f7d5219a802fa74efb376",
+      "questionSHA256": "d04682438586118848f379c6382812ad619471ed4f427d88c7a1b281415618d6",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q27.webp",
+      "sourceImageSHA256": "4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q27.webp": "4a501c2f88ff1e3d673c17f9277c9de0cbfc406410b49fabb6ab063a2b9a765e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "verification": "scanned answer page actually viewed q27ア/q28ウ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "内部スキーマは格納/アクセス経路でインデックス定義ア。ERモデル/整合性制約/正規化は論理設計。H1一般定義だけを答え開示とする点に指摘、H2は3誤答を除外しtrueでよい。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B14-01"
+      ]
+    },
+    {
+      "id": "r06a-q27",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "413d11f347863376ba0e345e31b7a0ed85f423a3ee31ca59b9eeb75f94d810ba",
+      "reviewedLessonSHA256": "ae818755b6c0705f4f7def8b40f7cad029cec3052da49af865d994db46d6aa7d",
+      "questionSHA256": "3cab29bf7dc2709ae95e4fbd16c03691bf0eae104c9685d195b31f7691391eb1",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q27.webp",
+      "sourceImageSHA256": "5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q27.webp": "5e3f29a5f5fb6aea3722e2bfe635934c7da9196f5f8428d9c0d1f54a1d9a5019",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "2PCのprepare→vote→decision→ackを追い、可否応答後に調停者が最終決定を送る前の通信障害イで参加者が判断待ち。問い合わせ前/応答前/完了応答直前を区別。H1順序のみfalse、H2待機区間と正答時点を渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03a-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "df0ca03d2a6b2df4abe8e2408d2e653e083934c4c180c4fab4d6ee4f6d0a2e60",
+      "reviewedLessonSHA256": "adff4cee5ea27f60468bc2b7a6476c050fdf95260a6afdcb3dbf5ec81e50bd67",
+      "questionSHA256": "7024a2db191a832264eb464828a995c3eb03895c345618afe3b022e588247c6d",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q28.webp",
+      "sourceImageSHA256": "32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q28.webp": "32f633162416d998b59d2f146940b79c33593359802faadbbb42489c9132d825",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "キー(受注番号,項番)。受注番号→受注日/得意先コードは部分従属、商品コード→単価も原文指定。セル単一値で1NF、2NFでなくイ。H1キーと1NFのみfalse、H2部分従属の原表具体例で正答を渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04a-q26",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "8061135e4d96a5a99d9f4f17a542f18368dcd186a946f6ecef346c60314cd610",
+      "reviewedLessonSHA256": "f742e8429a5e65a25a99b37cda4fa99c0047b626f5880ad1ef8f158d7db45fe1",
+      "questionSHA256": "28a4cc47870eb826f41c52c59a724588f2d432304012c655721bcd892879d152",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q26.webp",
+      "sourceImageSHA256": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q26.webp": "272b4578de3f3e9e7f17a55c79d624d24a8d2e941c2b2c40b8bff5b8f4cd76ae",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "規約1は区分語と型、規約2は異同義/同異義の辞書。値域を定めないため受注金額の範囲差イは防げない。受信年月日型/賞与ボーナス/取引先コードと名は防げる。H1規約整理false、H2値域の限界を正答相当で明示true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05h-q26",
+      "status": "changes_requested",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "0ea94a3b8b16b64ff688db5444e5699674ca78555f6530f1afddc678ff3a781c",
+      "reviewedLessonSHA256": "1cc48c3e3589e56e08a89d77ededa8e7e3c8650d797d20adc228cf980d856da4",
+      "questionSHA256": "a4faab675a4387c5412cfe1d0ed0d3d50f2042f64f5186157a821a0e5efa4819",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q26.webp",
+      "sourceImageSHA256": "97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q26.webp": "97a242a7149ecba467b9b3f3f74d70ef0bb0571bbb67c80f0fbb480f34aa8627",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "実JSONはA品名文字列/関連商品_id配列/価格文字列、B商品名/生産地/画像URL文字列/価格数値。将来項目不定、検索キー制限なしは商品単位ドキュメントDBウ。ア2階層項目値/イ項目集合と値集合nodeは対応を保てず、エ固定列は変更必要。H1の型表現に指摘、H2ウ直接説明true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": false,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B14-02"
+      ]
+    },
+    {
+      "id": "r05a-q27",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "dc5e42ee34f05477cad1d90401193b9b18d17dd6caf7116ed46c987527d48d50",
+      "reviewedLessonSHA256": "e43deac6adc1a12f7f4afd326a42977e3d00cf08a54d8611af3d585c9bba372c",
+      "questionSHA256": "46247a13dd1656aa197cc1e26bea9d5bc3c496ab4eb935f529cb23f9dc4ed0b7",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q27.webp",
+      "sourceImageSHA256": "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q27.webp": "c89edde1ab478e25d796f5d6c62f86916acecdb3abb46518ed6829ee6463becd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "候補キー参照の属性組は外部キーア。イ代替キー、ウ候補キー、エスーパーキー。参照元値は重複可、自己参照も可。H1はウ/エ定義でイも残りfalse、H2外部キー定義でtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06h-q26",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "8189dc7cc3d72f5108957c504f551daf48a6a353659f2c07cefa10db43fa3664",
+      "reviewedLessonSHA256": "6095659a4aacec482e1bb14745bff65403a34163f89db4a01193ed86489889e0",
+      "questionSHA256": "fc7cf26c0088b6641ed265ce48f1b444cd8d09037ba27f7fdb10e293620aa7f7",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q26.webp",
+      "sourceImageSHA256": "1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q26.webp": "1c28b8ddc9fa50063b50a5e1891be18fc11bdc2ae12f9bb56034d7132aeb7004",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "原表全候補SQL実行。アMIN/0=必要不要必要、イMIN/NULL=必要不要不要、ウSUM/0=不要不要必要、エSUM/NULL=不要不要不要。P01合計180/P02比較150>150false/P03NULL→0でウのみ一致。H1MIN/SUM比較後もNULL処理が残りfalse、H2COALESCE0明示true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r07h-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "d3bcf58d791eb931b8e819449da75b343b244d9e771d06c98b7dbb7629f41f51",
+      "reviewedLessonSHA256": "37508a59d34918d65306e13abc2d582696ae834261959b62a63e60176bada813",
+      "questionSHA256": "24a17e8a6286d44d520fd206b668b47006d22f5859705dff361236e61ae53479",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q28.webp",
+      "sourceImageSHA256": "15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q28.webp": "15e602fdccce3f9c584181dfa8333c9b53aecf2d64ab3a321b0113e69d1f6301",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "R={1,2},S={2,3}なら4式は{1}/{2}/{1,2}/{2,3}。R−(R−S)が共通部分でイ。3要素全集合の全64ペアで全4式を評価しイのみ恒等的にR∩Sを確認。H1差演算の例false、H2正答式true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04a-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "a6125e51699ca61ebed12d7c563b9a68c516c4ee49cdca693526c629e8ff701a",
+      "reviewedLessonSHA256": "404b7dcc356b782ab2d3c0495e600bc8c4fd3e929a723bece9d4cd368ef33d3c",
+      "questionSHA256": "9c827f33421d9945240fe6bd94d8dcc070c7d2af3a30118c1fac78abbec05cbd",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q28.webp",
+      "sourceImageSHA256": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q28.webp": "1ac336a83b0efce6eb49cd5fdb5e3a92007a6c014b8876eee6f98b72cf377c3e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "原表10行をSQLiteへ転記、利益200/200/100/900/400/200/300/500/500/300、合計3600平均360。超過D/E/H/I、supplier S1/S1/S4/S5→distinct3でウ。H2は基準360のみで行抽出が残りfalse、H3最終3を渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05h-q29",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "fa7da0eba5fdd7f5da9eeb4df601bb53c4ff0774f60187baefb07ec2513640bf",
+      "reviewedLessonSHA256": "73e3dc2a28ae2b4551d956e836e5937c6ae5dc091fa1069cd163716a6f4ff224",
+      "questionSHA256": "aba74eb8fa81e5f2a81b5bedbf2df574f4d2ce1a5ee76ab93732ddf0adde885f",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q29.webp",
+      "sourceImageSHA256": "6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q29.webp": "6b955cf6c2a1b4f55409c9ed1d6ff8e30d462ec24b9034d787bfafd5b68e628f",
+        "assets/transcriptions/pr-batch2-figures-b/r05h-q29-figure-choices.png": "7a063ffd43cdc0ca978afa758de724cd0ff14933290a15f43f8bede0aa5126ba",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "部門は1人以上/社員は必ず1部門/所属履歴記録からa,b最低1、異動等で上限多。a=b=1..*でエ。ア両0許容、イa0許容、ウb0許容が違う。H1記号と端点のみfalse、H2両0不可でエに一意true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r05a-q28",
+      "status": "changes_requested",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "f50a4dbc190b9a644d21cf1c5922f5db6b8c125cd3afbaf6ddb89d2baa008684",
+      "reviewedLessonSHA256": "85a7cd8ea5e1226ee194c52fdce9959106ac5d4e57603679a2b84bd9bc8d36b2",
+      "questionSHA256": "6ed25c3d174e996bc8d66cd32bb7332f26e78d7c8aadff595d5f4211ae3fb6fa",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q28.webp",
+      "sourceImageSHA256": "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q28.webp": "9e96671590d2729bb5bb3fb4151d356b47813e528b25657b2bbf6d5c952e03a1",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "通常のSQL更新可能viewはア単一商品表の直接列+WHERE。イDISTINCT、ウGROUP/SUM、エAVGは元行変更に一意対応しない。全4SELECTをsynthetic dataで実行。SQLite自体は全view更新不可なのでDB固有更新動作を根拠とせず、原問通常SQL規則と公式アで照合。H1WHEREの正答構造説明に開示指摘。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": [
+        "B14-03"
+      ]
+    },
+    {
+      "id": "r07h-q24",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "82aa60ba845f2b158e7797893d6a7ffc08d615273a9783e7f6c4c15700ad6b6b",
+      "reviewedLessonSHA256": "65809be08449eb59306c7498adf96394ef74d3c78ae2ae0b1a133aeced09385e",
+      "questionSHA256": "0bb4ade1061941d76a066d6cf9c9245757ec4d345d4af69db35d940428b5ce74",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q24.webp",
+      "sourceImageSHA256": "eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q24.webp": "eae7e04f11f7e3f4efb21402761ed0233fdb08936965392cae56b6ebcddb1d74",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "格納構造は行ごと可変列数/列ごと複数値のワイドカラムエ。アnode/edge、イ文書、ウ固定共通列。H1は3誤モデルを全て明示し除外可能でtrue、H2名称true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03a-q29",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "a7f11adbd2e0cb99f634b3e987581c82326daf1f42aa14f141fd91f8a9b79f72",
+      "reviewedLessonSHA256": "6bdf9e5898bc9406bba2b8bef1e19772fe26e23847dd011472c06f2c60040b5e",
+      "questionSHA256": "df8b56f4ae7a5de08a644522fe8071f7beb998c4068919a19c40aa2635115aa2",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q29.webp",
+      "sourceImageSHA256": "0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q29.webp": "0673c73228cbe89cde494c43d0a2a0e59d4ef6ce1a3c1000fd5a50c8a190803a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "原表D01(1000,4000),D02(2000,5000),D03(3000,8000)を転記し全4SQL実行。アINTERSECT0行、イUNION指定6行、ウCROSS9行すべて第1期、エINNER3行第1期。イ正答。H1目標6行false、H2期別SELECT+UNIONを明示true。SQLiteの冗長括弧構文のみ除去し集合意味を維持。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r04h-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "aa7df1710f5917f2ce1898a348e4331f3af0bdec66c0d46d4fd19cbc449f1829",
+      "reviewedLessonSHA256": "e8162fbcfd49a44e6978cd70149ba9a91a312e763b5814d8a9918f571fe56667",
+      "questionSHA256": "f5cef5f140a2d471acb24bb3997c458dac55efcfadfe8650668050a9233b2556",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q28.webp",
+      "sourceImageSHA256": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q28.webp": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+        "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp": "468cf6396a2a98e5e7e5fc0f268ac9fee2bfceefabead0b300b3600a9aeef186",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "verification": "scanned answer page actually viewed q27ア/q28ウ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "繰返しなしc=1NF、非キーが主キー真部分集合に従属しないa=2NF、推移従属なしb=3NF。c/a/bのウ。H1cのみでウ/エ残りfalse、H2aも固定しウ確定true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r03h-q29",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "f8488a8cae505e162a2428d6fbda759e581b8977fb6db424912652dce5b5b612",
+      "reviewedLessonSHA256": "2d30261c2496a0a78371014aea54476b5d1fa27845b494a0d446183d2d6b85f3",
+      "questionSHA256": "46003a06fc4e4d615a02526f9808b5f45320c88b9c00bb90c7792e82d5e96628",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q29.webp",
+      "sourceImageSHA256": "3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q29.webp": "3e6257c7b144622a48f2833638fc756e3e7f14a76149a3298f72bb6c8b4de03e",
+        "assets/transcriptions/author_r03h/r03h-q29-figure-choices.webp": "c91e203ada448b9f57fd9267ca28d5caabe1ae3779b486d8909400af2ef7c469",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "原図a1→b多,b1→c多,d1→c多。顧客→注文→注文明細←商品のア。イ商品→注文と顧客→明細で不適切、ウ明細→顧客、エ明細→商品が違う。H1図記号の読取りfalse、H2文のクラス関係を全て固定しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r07h-q26",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "2d72de307c65906b065a3be216c3df59ddd7d673a13620cd50063666e865d674",
+      "reviewedLessonSHA256": "747d89a1bb224ae55b5dec091c8374f0e9be03cb6a9710005ddd2e47c4f1c37b",
+      "questionSHA256": "5c78f9472db3322606b01e1606c323a982bb242f645e63c26164f54a22c64182",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q26.webp",
+      "sourceImageSHA256": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q26.webp": "c79859beedf20087979bcd1eca7e4119acb203b88f95f9da301b599c314095ff",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "2NF→3NFは非キー間の推移的FDを分解イ。アFD逆向き、ウ部分キー→非キーは2NF化、エ単一値は1NF化。社員番号→部署番号→部署名を社員/部署へ分解する例も一致。H1既達成条件のみfalse、H2非キー間の正答処理true。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    },
+    {
+      "id": "r06a-q28",
+      "status": "approved",
+      "baseVersion": 2,
+      "reviewedEnvelopeSHA256": "6a425a1c7ffe3c1d7d76598cfa06c0f1a338e270fd25aa324a543664807088a4",
+      "reviewedLessonSHA256": "11327185e01c206288439cb2a697e9932dd8f86e11687e575da93d4e1a608adc",
+      "questionSHA256": "85b959f62be139e72a64a9829f631f615a5efde619c5d885e8d4dde3fbe5815b",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q28.webp",
+      "sourceImageSHA256": "be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q28.webp": "be77804d08aa17f17878486d32f2c31554af934e59dc95ba42fe15bc06678e47",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "verification": "pdftotext -layout extracted answer rows independently read"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "日別販売表に日付あるが顧客IDなし、商品購入表に顧客あるが日付なし。代理店/商品で結合しても購入日を一意に対応不可、日別人数差ウが得られない。ア日別数量/イ顧客join性別別/エ代理店別数量は可能。H1列整理false、H2不足する対応を正答相当で渡しtrue。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "issues": []
+    }
+  ],
+  "verificationEvidence": {
+    "path": "work/ap/objective-quality/batches/batch-14/review/verification-results.json",
+    "sha256": "5f8a77309c546075a87c0eb923822d8a54778ffeb27fe8d2c00e1bc5dffe1e40"
+  },
+  "rulesSHA256": {
+    "AGENTS.md": "ee6f87e4811a389521d2be0a4a6e88e18e18960b16bc7b6dcf1f07d6cb280112",
+    "docs/hint-authoring.md": "7ddd237b34d5bb088db3fe29617c81594f89a9febc53c4af177a6427a58cadd7",
+    "docs/explanation-authoring-rules.md": "54fd8f45c52bafb3032a88140e4989fae0193f5c0ec1d87cc36032f705cbfbf9",
+    "docs/ap-a-content-upgrade.md": "e18b038a9ed283d617cc889a104f59a50edccb04c9259340914386432b883869"
+  },
+  "reviewsFileSHA256": "73d3e74a99db3df8d985dabacc990e09fc018777e54564a929d829ef8ffca704",
+  "checks": {
+    "formalInitialGate": {
+      "batchId": "batch-14",
+      "questions": 20,
+      "reviewed": 17,
+      "approvedForRegistration": false
+    },
+    "all20EnvelopesAndLessonsHashFixed": true,
+    "noDraftAssignmentGlobalBaselineCodeEditsByReviewer": true,
+    "noGitOperationsByReviewer": true,
+    "noPersonalRecordsUsed": true
+  },
+  "registered": false,
+  "published": false,
+  "limitations": "Initial content review only. Pending3 questions not approved. No learner trial, browser test, registration, merge, publication or git commands.",
+  "next": "Pause for parent correction; separate independent final review after correction."
+}

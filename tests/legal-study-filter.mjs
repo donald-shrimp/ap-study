@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {hasLawChange,legalStudyAllowed,legalContextLines,legalAIPrompt} from '../src/domain/legal-context.js';
+import {hasLawChange,legalStudyAllowed,legalContextLines,legalAIPrompt,validateLegalContext} from '../src/domain/legal-context.js';
 import {selectPractice} from '../src/domain/practice.js';
 import {chooseNextAction} from '../src/domain/next-action.js';
 import {selectDiagnostic,createDiagnostic,validateDiagnostic} from '../src/domain/diagnostic.js';
@@ -38,4 +38,13 @@ test('diagnostic availability and selection agree on exclusions; existing snapsh
 test('exclusion preference defaults safely, survives state validation, and rejects invalid types',()=>{
  const validate=createStateValidator({getQuestions:()=>[],getTopics:()=>[],getQualification:()=>qualification}),s=makeState();assert.equal(s.settings.excludeOutdated,true);
  delete s.settings.excludeOutdated;assert.equal(validate(s).settings.excludeOutdated,true);s.settings.excludeOutdated=false;assert.equal(validate(s).settings.excludeOutdated,false);s.settings.excludeOutdated='false';assert.throws(()=>validate(s));
+});
+
+test('unknown original legal date supports a verified material change without claiming current compliance',()=>{
+ const old={...q(1),sourceRecord:{...sourceRecord,legalAsOf:null},legalReview:oldReview};
+ assert.equal(validateLegalContext(old),old);assert.equal(legalStudyAllowed(old),false);
+ assert.deepEqual(legalContextLines(old),['法令改正あり（学習非推奨）']);
+ assert.match(legalAIPrompt(old),/法令基準日：不明/);
+ assert.throws(()=>validateLegalContext({...old,legalReview:{...oldReview,status:'current'}}));
+ assert.throws(()=>validateLegalContext({...old,legalReview:{...oldReview,checkedAt:null}}));
 });

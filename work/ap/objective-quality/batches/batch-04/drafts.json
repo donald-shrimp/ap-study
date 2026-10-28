@@ -1,0 +1,1386 @@
+[
+  {
+    "id": "r07a-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5754c3949a394fe34c83e8436e43f6e9bd5913e3ce1c8b889d7eb167d14db290",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q6",
+      "summary": "ブロック探索とブロック内探索の平均比較回数を合計する。",
+      "explanation": "1ブロックにm個入るので、ブロック数はn/mです。最後尾だけを線形探索すると、目的ブロックまでの比較は平均して全ブロックの約半分、n/(2m)回です。\n続くブロック内の線形探索も平均約m/2回。mが十分大きいという条件の下で定数項を省くと、合計m/2+n/(2m)です。",
+      "choiceReasons": [
+        "m+n/mは両方を最後まで探す場合の規模で、平均の半分を反映していません。",
+        "ブロック探索とブロック内探索、それぞれの平均比較回数の和です。",
+        "ブロック数だけを数え、ブロック内の比較を含んでいません。",
+        "ブロック探索の平均だけで、ブロック内のm/2回が抜けています。"
+      ],
+      "takeaway": "2段階の線形探索では、各段階の候補数の約半分を足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「m個ずつに分割」なのでブロック数はmではなくn/mです。まず外側の探索対象数を出します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "存在するデータを先頭から線形探索すると、比較回数1〜kの平均は(k+1)/2です。十分大きい候補数では約k/2とし、外側と内側を別々に求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えばn=10000,m=100なら100ブロックの平均50回と、100個の平均50回を足します。この計算をn,mの式へ戻しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ブロック数と要素数を取り違え、二つの探索回数を合計できない。",
+      "stages": [
+        {
+          "newInformation": "ブロック数はn/m。",
+          "remainingWork": "外側の平均と内側の比較回数を求める。",
+          "revealsAnswer": false,
+          "reason": "対象数だけを示し、平均の式は未提示。"
+        },
+        {
+          "newInformation": "成功する線形探索の平均は(k+1)/2、十分大きいと約k/2。",
+          "remainingWork": "n/mとmに適用し、二段階を合計する。",
+          "revealsAnswer": false,
+          "reason": "公式を教え、適用と式の合計を本人に残す。"
+        },
+        {
+          "newInformation": "n=10000,m=100の二段階の具体例。",
+          "remainingWork": "例を一般のn,mに戻す。",
+          "revealsAnswer": false,
+          "reason": "別の数値の例であり、正答の一般式を渡していない。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "ブロック数n/m、ブロック内mのそれぞれを約半数とし、n/(2m)+m/2。全4式と定数項を省く条件を照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f0ed1bf83176838af8150513fc1bbcc1cfa27654bf6371f0aa82e63a926a5983",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q6",
+      "summary": "再入可能性を、再帰可能性・再配置可能性と区別する。",
+      "explanation": "再入可能性は、ある実行が完了する前に同じプログラムへ別の実行が入っても、それぞれが正しい結果を返せる性質です。タスクごとに作業領域を分けるなど、共有状態が互いの処理を壊さない設計にします。配置アドレスの自由さ、再帰、必要部分の読込みとは別の性質です。",
+      "choiceReasons": [
+        "どのアドレスに配置しても実行できるのは再配置可能性です。",
+        "自分自身を呼び出せるのは再帰可能性であり、複数タスクの同時実行を意味しません。",
+        "必要な部分を読み込みながら動作するのは動的ロードやオーバレイなどの説明です。",
+        "並行する呼出しが互いを壊さず、それぞれに正しい結果を返すことが再入可能性です。"
+      ],
+      "takeaway": "再入可能は同時の複数実行、再帰可能は自己呼出し、再配置可能は配置アドレスを区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補について、変わるものが「配置場所」「呼出し元」「読込む範囲」「同時の実行数」のどれか整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "再入可能とは、ある実行が終わる前に別のタスクが同じプログラムへ入っても、両方が正しく動く性質です。共有する作業変数を一方が上書きすると、もう一方の結果を壊すので、作業領域を分けるなどの対策が必要です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えばタスクAが合計10を計算途中のとき、タスクBが同じ合計用変数を0に戻すとAの計算を壊します。AとBがそれぞれ専用の合計用変数をもてば互いに干渉せず、並行呼出しでも正しく計算できます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "再入・再帰・再配置の用語が似ている。",
+      "stages": [
+        {
+          "newInformation": "配置場所、呼出し元、読込範囲、同時実行数の分類軸。",
+          "remainingWork": "どの性質が再入可能か判断する。",
+          "revealsAnswer": false,
+          "reason": "各肢の整理であり再入の定義は未提示。"
+        },
+        {
+          "newInformation": "再入可能の定義と、共有変数の競合を避ける必要性。",
+          "remainingWork": "並行呼出しを述べた肢に対応させる。",
+          "revealsAnswer": true,
+          "reason": "並行実行でも正しいという正答肢の意味を渡す。"
+        },
+        {
+          "newInformation": "タスクBの初期化がAの途中値10を壊す例と、タスク別変数による回避。",
+          "remainingWork": "具体例を再入可能性と対応させ、並行実行の肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "前段ですでに再入可能性と正答肢と同義の定義を開示済み。具体例も同じ性質を説明する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（エ）と再解答を照合。",
+        "配置自由=再配置、自分を呼出し=再帰、必要部分の読込み=オーバレイ等、並行呼出し=再入、と全肢を照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f4e73ef1ab498467a672ad75e6350fdcc9651bd637b4bec25dd3702952516902",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q7",
+      "summary": "分割統治法の分割・部分問題の処理・結果の結合を見分ける。",
+      "explanation": "分割統治法は問題を小さな部分問題へ分け、それぞれを解き、部分解を組み合わせて全体の解を求めます。例えばマージソートは左右をそれぞれ整列し、最後に併合します。",
+      "choiceReasons": [
+        "粗い解を逐次改善する説明で、独立な部分解の結合がありません。",
+        "組合せを探索して無駄な候補を除く探索の説明です。",
+        "分割・独立処理・結合の三段階が分割統治に対応します。",
+        "各時点の最良の選択を繰り返す貪欲法の説明です。"
+      ],
+      "takeaway": "分割統治は部分問題を解くことと結果の統合を一組で考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "分割統治法では、大きな問題を同じように解ける小問題へ分けます。「分割した後に何をするか」に注目すると、逐次改良や局所的な選択との違いが分かります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "分割統治法は、小問題をそれぞれ解き、その部分解を組み合わせて全体の解にします。例えばマージソートでは、左右を整列してから併合します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "各時点で最良と思う選択だけを積み重ねるのは貪欲法です。分割統治法では、それぞれの小問題を解いた結果を最後に結合します。局所的な選択を繰り返す説明と、部分解を統合する説明を区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "分割という語だけで、逐次改良や貪欲法との違いが分からない。",
+      "stages": [
+        {
+          "newInformation": "同様に解ける小問題へ分け、分けた後の処理で比較する。",
+          "remainingWork": "独立処理後の結合がある肢を探す。",
+          "revealsAnswer": false,
+          "reason": "入口の分割だけでは選択肢を確定しない。"
+        },
+        {
+          "newInformation": "小問題の独立処理と結合、マージソートの具体例。",
+          "remainingWork": "その説明に対応する肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答の分割・処理・結合を実質そのまま教える。"
+        },
+        {
+          "newInformation": "貪欲法の局所選択と、分割統治法の部分解の結合との違い。",
+          "remainingWork": "局所選択と部分解の統合を各肢に対応させる。",
+          "revealsAnswer": true,
+          "reason": "前段で正答の説明を実質開示済み。ここでは比較対象や計算例を加えて根拠を具体化する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q7.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "独立な部分問題の処理結果を結合するウ。粗い解の改良、候補削減、貪欲な局所選択の全肢と比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "21be7aea173a370ea8374e67abe22e91a48e300cd33d6729ccb63eeaff8701d6",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q5",
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突とは異なるキーのハッシュ値が同じになることです。a=qn+r、b=pn+rなら余りは同じrで、差a−b=(q−p)nはnの倍数です。逆に差がnの倍数なら、nで割った余りは等しくなります。",
+      "choiceReasons": [
+        "和がnの倍数でも余りは等しいとは限りません。n=5,a=1,b=4なら余りは1と4です。",
+        "差がnの倍数であることは、nで割った余りが等しい条件です。",
+        "nが和の倍数でも同じ余りは保証されません。n=6,a=1,b=2なら衝突しません。",
+        "nが差の倍数でも同じ余りは保証されません。n=6,a=3,b=1なら余りは3と1です。"
+      ],
+      "takeaway": "剰余が等しい条件は、二つの整数の差が法の倍数であること。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "衝突をh(a)=h(b)と書き、二つの割り算の余りを同じrと置きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "a=qn+r、b=pn+rを引くと余りが消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "a−b=(q−p)nとなります。nの倍数になっている量を確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "衝突を剰余の等式に変換できず、和と差・倍数の向きを混同する。",
+      "stages": [
+        {
+          "newInformation": "衝突はh(a)=h(b)、共通の余りrを置く。",
+          "remainingWork": "商と余りでa,bを表す。",
+          "revealsAnswer": false,
+          "reason": "衝突の意味だけで、差の条件は未提示。"
+        },
+        {
+          "newInformation": "a=qn+r,b=pn+rを引くと余りが消える。",
+          "remainingWork": "二式を引き、倍数の向きを判断する。",
+          "revealsAnswer": false,
+          "reason": "式の操作と条件化を本人に残す。"
+        },
+        {
+          "newInformation": "a−b=(q−p)nという変形結果。",
+          "remainingWork": "該当する条件の肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "差がnの倍数という正答と同義の式を渡す。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q5.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "同じ余りrを置いて差を導出。誤肢は(n,a,b)=(5,1,4),(6,1,2),(6,3,1)の反例で検算。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "85a7b17b81e30d635ecb5bc0382a8d5d6521f25fb55d58ef5735c5af993fb87b",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q6",
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突はh(a)=h(b)、つまりnで割った余りが等しいことです。a=pn+r、b=qn+rと置けば、差はa−b=(p−q)nとなります。逆に差がnの倍数なら、二つの余りは等しくなります。\n和がnの倍数でも余りは一致しません。例えばn=5、a=1、b=4では和は5ですが、余りは1と4です。",
+      "choiceReasons": [
+        "n=5、a=1、b=4なら和はnの倍数ですが、余りは異なるので衝突しません。",
+        "差がnの倍数であることが、同じ余りになる必要十分条件です。",
+        "n=6、a=1、b=2ならnはa＋bの倍数ですが、余りは1と2で異なります。",
+        "n=6、a=3、b=1ならnはa−bの倍数ですが、余りは3と1で異なります。"
+      ],
+      "takeaway": "同じ剰余は「二つの数の差が法の倍数」と同値。倍数の向きを逆にしない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "h(a)=h(b)を「aとbをnで割った余りが同じ」と言い換えます。格納先の番号は余りで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。余りrを消せる演算は何でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二式を引くとa−b=(p−q)nです。差がnの倍数という条件を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "剰余の一致と、倍数の向きの関係が分からない。",
+      "stages": [
+        {
+          "newInformation": "ハッシュ値の一致は余りの一致。",
+          "remainingWork": "共通余りで二つのキーを表す。",
+          "revealsAnswer": false,
+          "reason": "衝突の定義を教えるが必要十分条件は未提示。"
+        },
+        {
+          "newInformation": "a=pn+r,b=qn+rという商と余りの表現。",
+          "remainingWork": "共通のrを消す演算と倍数の向きを判断する。",
+          "revealsAnswer": false,
+          "reason": "引き算と条件の導出が残る。"
+        },
+        {
+          "newInformation": "二式の差a−b=(p−q)n。",
+          "remainingWork": "正答肢に対応させる。",
+          "revealsAnswer": true,
+          "reason": "差がnの倍数と明示している。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "原本を別途開き同一設問を確認。差の導出と全誤肢の反例(5,1,4),(6,1,2),(6,3,1)を検算。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "79603709cfa256b4514f334ea20a84d021fd3e6a6992036a4881026a63fad442",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q5",
+      "summary": "配列の添字とリスト順を区別し、挿入要素の前後の参照先を求める。",
+      "explanation": "配列上の位置とリスト順序を分けて読みます。Dはelem[3]にあり、next[3]=5なのでDの次はE（要素番号5）です。新しいCは配列末尾の6へ追加されます。\nD→C→Eとするため、prev[6]=3、next[6]=5にします。合わせてnext[3]=6、prev[5]=6を書き換えます。",
+      "choiceReasons": [
+        "次を2にするとE（5）を飛ばしてFへ接続してしまいます。",
+        "前を4、次を3にするとB（4）とD（3）の間に接続する形になり、Dの次への挿入になりません。",
+        "Dの要素番号3を前に、元の後続Eの要素番号5を次に設定しています。",
+        "次の5は正しいものの、前が4ではDを前の要素として参照できません。"
+      ],
+      "takeaway": "挿入要素の前は挿入位置、次は挿入位置の元の後続。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Dはelemの何番目かを探し、その番号のnextを読みます。配列内で隣の位置がリストの次とは限りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "新しいCは要素番号6です。D→C→元のDの次、という順序になるようnextとprevを設定します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "elem[3]=D、next[3]=5です。6から前へ戻る番号と、6から次へ進む番号をこの二つから決めましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "配列の隣接位置を、リストの次要素と誤認する。",
+      "stages": [
+        {
+          "newInformation": "elemからDの添字を見つけ、そのnextを読む手順。",
+          "remainingWork": "図からDと後続の番号を読み取る。",
+          "revealsAnswer": false,
+          "reason": "具体的な前後番号をまだ示していない。"
+        },
+        {
+          "newInformation": "新要素は6、接続順はD→C→元の後続。",
+          "remainingWork": "Dと後続の番号を読み、nextとprevへ対応させる。",
+          "revealsAnswer": false,
+          "reason": "参照値を図から取得する作業が残る。"
+        },
+        {
+          "newInformation": "elem[3]=D,next[3]=5。",
+          "remainingWork": "前を3、次を5と対応させる。",
+          "revealsAnswer": true,
+          "reason": "前段の接続順と合わせると正答の組を直接決められる。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q5.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "図のelem=[A,F,D,B,E],next=[4,0,5,3,2],prev=[0,5,4,1,3]を確認。D(3)→C(6)→E(5)、next6=5,prev6=3を再構成。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5d4f3196ffdef7182fcdb636a98442bbc604a2527ad26384c01f565d45baff39",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q6",
+      "summary": "整列途中の要素の移動から、隣接交換による整列を判別する。",
+      "explanation": "状態0で左から隣同士を比較すると、3と5はそのまま、5と9もそのままです。9と6、9と1、9と2を交換すると状態1の3,5,6,1,2,9になります。\n次の走査では末尾の9を除き、6と1、6と2を交換して状態2になります。走査ごとに最大値が未整列部分の末尾へ移るバブルソートです。",
+      "choiceReasons": [
+        "基準値を使って左右に分割する方法です。提示された隣接交換の一巡による推移を説明する方法ではありません。",
+        "左側の整列済み部分へ次の要素を挿入します。この例なら9の次の6を挿入した段階は3,5,6,9,1,2となります。",
+        "隣接要素を交換する一巡で9、次の一巡で6を右端へ送る推移と一致します。",
+        "ヒープを構築し根の最大値を取り出します。図の初期列は最大値9が根にあるヒープ状態ではなく、示された推移は隣接交換です。"
+      ],
+      "takeaway": "一巡ごとに最大値が末尾へ進む推移はバブルソートの特徴。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "状態0から1で、9以外の3,5,6,1,2の相対的な順序は保たれています。9の位置の変化を追います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "バブルソートは、隣り合う2要素を比べて逆順なら交換し、これを一巡繰り返す方式です。左から進める場合、一巡で未整列部分の最大値が右端に移ります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "9と6、次に9と1、次に9と2を交換すると状態1です。次の一巡では末尾の9を固定し、6と1、6と2を交換すると状態2になります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "途中状態から要素の動かし方とソート名を対応させられない。",
+      "stages": [
+        {
+          "newInformation": "9以外の相対順序が保存されている。",
+          "remainingWork": "9がどう右へ動いたか追跡する。",
+          "revealsAnswer": false,
+          "reason": "移動の観察でありソート名は未提示。"
+        },
+        {
+          "newInformation": "バブルソートの隣接交換と一巡で最大値が右端へ動く性質。",
+          "remainingWork": "状態列との一致を確認する。",
+          "revealsAnswer": true,
+          "reason": "名称と今回に一致する特徴を教え、正答を実質開示。"
+        },
+        {
+          "newInformation": "9→右端、次に6→末尾9の左という二巡の交換列。",
+          "remainingWork": "二つの状態に一致することを確認する。",
+          "revealsAnswer": true,
+          "reason": "前段で名称を開示済みで、具体的な一致も渡す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05a/r05a-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "左からの隣接交換を手追跡し状態1=3,5,6,1,2,9、状態2=3,5,1,2,6,9を再現。挿入ソートの途中列とも比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "19753732a9fd7660bc497bf5da9ab4c53cfb031755f5bccc6f7feb4b4060d1af",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q6",
+      "summary": "流れ図の比較対象と交換手順から整列アルゴリズムを判別する。",
+      "explanation": "内側のループはj=nからi+1へ減少します。A[j]<A[j−1]のとき隣同士を交換するので、小さい値が左へ移動します。1巡すると未整列部分の最小値がA[i]に置かれ、iを増やして繰り返します。",
+      "choiceReasons": [
+        "基準値を使って区間を分割する操作がないのでクイックソートではありません。",
+        "最小位置を記録して最後に1回交換する選択ソートとは異なり、途中で隣同士を交換します。",
+        "整列済み部分へ取り出した値を挿入する手順ではありません。",
+        "隣接する2要素の比較と交換を反復するバブルソートです。"
+      ],
+      "takeaway": "ソートの名称は、比較対象と要素の動かし方から判別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "jとj−1は配列内で隣り合う位置です。内側のループはjをnから1ずつ減らすため、右端から左へ比較位置が移ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "図のA[j]<A[j−1]の下側へ進むと、wに右の値を退避し、右に左の値、左にwを入れます。例えば左5・右2なら左2・右5となるので、小さい値が進む向きを追えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "バブルソートは隣接する2要素の比較・交換を繰り返す方式です。この図では末尾から左へ交換を進め、未整列部分の最小値をA[i]まで運んでいます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "流れ図の比較分岐・値の退避が、交換を表すと気付けない。",
+      "stages": [
+        {
+          "newInformation": "jとj−1は隣接し、比較位置は右から左へ移る。",
+          "remainingWork": "分岐先の代入操作を解読する。",
+          "revealsAnswer": false,
+          "reason": "図の読み方だけで方式の名称は未提示。"
+        },
+        {
+          "newInformation": "wを介する交換、5と2を例に小さい値が左へ移る。",
+          "remainingWork": "一巡の結果とソート名を対応させる。",
+          "revealsAnswer": false,
+          "reason": "交換の具体例は渡すがアルゴリズム名はまだ判断が必要。"
+        },
+        {
+          "newInformation": "バブルソートの定義と、最小値がA[i]へ移る作用。",
+          "remainingWork": "名称に一致する肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答名を明記する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（エ）と再解答を照合。",
+        "原本のj:n,−1,i+1とA[j]<A[j−1]時の3代入を確認。隣接交換で小さい値が左へ進むことを再追跡し全方式と比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5fe9cb9a26fd1838b780df394a6017c7db411c2b746c1db9c4c346b97795b3c2",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q5",
+      "summary": "乗算・変数更新・終了判定の順序を踏まえてループの終了条件を求める。",
+      "explanation": "左の流れ図はn=M,M−1,…,1を全てxへ掛け、M!を求めます。右も1,2,…,Mを一度ずつ掛ければ同じ結果です。\n右の判定は掛け算とnの加算の後にあります。Mを掛けた直後にはn=M+1なので、n>MでYesとなれば終了します。M=3なら1、2、3を掛け、n=4で終了します。",
+      "choiceReasons": [
+        "アのn<Mでは、M=3のとき1を掛けてn=2になった段階で終了し、2と3を掛けません。",
+        "イのn>M−1では、M≥2のときM−1を掛けた段階で終了し、最後のMを掛けません。",
+        "ウのn>MならMを掛け終えた後のn=M+1で終了し、左と同じ積になります。",
+        "エのn>M+1ではM+1も掛けてしまい、M!より余分な因子が入ります。"
+      ],
+      "takeaway": "終了条件は、判定時点が更新前か更新後かを確かめて作る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "左ではMから1までの全ての整数を掛けています。右も同じ整数を掛ける必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "右の判定箱の上にn←n+1があります。判定時のnは、今掛けた整数より1大きい値です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "M=3で、掛ける値1→2→3と判定時のn=2→3→4を並べます。最後の時点だけYesとなる条件を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "判定の前にnが加算されることを見落とす。",
+      "stages": [
+        {
+          "newInformation": "左はMから1までの整数を全て掛ける。",
+          "remainingWork": "右でも同じ因子を使う条件を作る。",
+          "revealsAnswer": false,
+          "reason": "終了条件は未提示。"
+        },
+        {
+          "newInformation": "右の判定時のnは直前の因子より1大きい。",
+          "remainingWork": "最後にMを掛けた後のnと終了条件を比較する。",
+          "revealsAnswer": false,
+          "reason": "更新と判定の関係を教え、条件選択は残す。"
+        },
+        {
+          "newInformation": "M=3で因子1,2,3に対し判定値2,3,4。",
+          "remainingWork": "各条件のYes/Noを順に評価する。",
+          "revealsAnswer": false,
+          "reason": "特定例の判定値を示し、条件の評価を本人に残す。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06h/r06h-q5.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "左=M!、右の乗算後更新を手追跡。M=3でアは1、イは2、ウは6、エは24（結果x）。M=1でもウは1で終了。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "47405be40bf7cdbc8f2c5573fe38f7fb2dba393db9c1b5b247483dafdcb51e85",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q7",
+      "summary": "統計解析向けの環境と、動的型付けの特徴に合う言語を選ぶ。",
+      "explanation": "Rは統計解析、機械学習、グラフ描画などに使われるオープンソースの言語・実行環境です。統計処理のパッケージが豊富で、変数へ代入するオブジェクトの型は実行時に決まります。\nGo、Kotlin、Scalaもオープンソースですが、いずれも静的型付けです。「オープンソース」だけでは絞れず、統計中心の環境と型の扱いを合わせて判断します。",
+      "choiceReasons": [
+        "Goは静的型付けで、問題文の実行時に型が決まるという条件と異なります。",
+        "Kotlinは静的型付けです。型推論で記述を省いても動的型付けにはなりません。",
+        "Rは統計解析向けの豊富なパッケージと動的な型の扱いを備え、三つの特徴を満たします。",
+        "Scalaは静的型付けで、問題の型の特徴に一致しません。"
+      ],
+      "takeaway": "型推論と動的型付けを区別し、言語の主用途と併せて判断する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "三つ目の特徴を確認します。変数宣言で型を書かないだけでなく、代入されるオブジェクトの型が実行時に決まるという条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Go、Kotlin、Scalaには型推論がありますが、型の整合性を静的に扱います。統計用パッケージが豊富な環境という条件も照合しましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "統計解析向けに発展し、グラフ描画や分析パッケージを備えたRが、実行時の型の扱いも含めて条件に一致します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "オープンソースと型推論だけでは言語を絞れない。",
+      "stages": [
+        {
+          "newInformation": "型を書かないことと、型が実行時に決まることの区別。",
+          "remainingWork": "用途と型の扱いを各言語に照合する。",
+          "revealsAnswer": false,
+          "reason": "比較基準のみで言語名との対応は未提示。"
+        },
+        {
+          "newInformation": "Go,Kotlin,Scalaは静的に型整合性を扱う。",
+          "remainingWork": "残った言語と統計用途を確認する。",
+          "revealsAnswer": true,
+          "reason": "全誤答を型の条件で除外し、Rに確定する。"
+        },
+        {
+          "newInformation": "Rの統計用途・パッケージ・動的な型の扱い。",
+          "remainingWork": "三特徴を満たす肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答名を直接教える。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r06a/r06a-q7.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "全4言語を用途と静的/動的型付けで比較。Rは統計解析とグラフの環境、他3言語は型推論を備えても静的型付け。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "acc621dabeff61789183793994d79402e5671daddf550ff496c8e51d90856d3d",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q6",
+      "summary": "成功時の平均と失敗時の全件比較を、確率で重み付けします。",
+      "explanation": "従業員番号が存在する確率は1−aです。成功時は1〜n番目が同程度に現れ、平均比較回数は(1+2+…+n)/n=(n+1)/2です。存在しないときはn件全てを比較し、その確率はaです。従って全体の平均は(1−a)(n+1)/2+anで、エです。",
+      "choiceReasons": [
+        "成功時の平均に不成功の確率aを掛けており、不成功時のn回も含んでいません。",
+        "成功時の寄与だけで、存在しない場合のnaが抜けています。",
+        "不成功時の比較はn回、発生確率はaなので、加える項はn/2ではなくnaです。",
+        "成功時と不成功時の比較回数をそれぞれの確率で重み付けしています。"
+      ],
+      "takeaway": "期待値は場合ごとの回数×その場合の確率を足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "番号が表にある場合と、ない場合で探索が終わる位置が変わります。存在しない確率はaです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "成功時は1〜n番目で見つかるので、その平均は(1+2+…+n)/nです。失敗時は末尾までn件を調べます。全体の平均は、それぞれの比較回数にその場合の確率を掛けて足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1+2+…+n=n(n+1)/2なので、成功時の平均は(n+1)/2です。成功の確率は1−a、失敗の確率はaなので、平均比較回数は(1−a)(n+1)/2+anとなります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "成功と失敗で比較回数・発生確率が違うことを合成できない。",
+      "stages": [
+        {
+          "newInformation": "存在する場合と存在しない場合を分ける。",
+          "remainingWork": "各場合の比較回数と確率を求める。",
+          "revealsAnswer": false,
+          "reason": "場合分けだけで正答式は未提示。"
+        },
+        {
+          "newInformation": "成功時は1〜nの平均、失敗時n、回数×確率の和が全体の平均。",
+          "remainingWork": "等差数列の和と確率1−a,aを適用する。",
+          "revealsAnswer": false,
+          "reason": "平均式の計算と確率の対応が本人に残る。"
+        },
+        {
+          "newInformation": "成功平均(n+1)/2と全体の式(1−a)(n+1)/2+an。",
+          "remainingWork": "式に一致する肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答式を明記している。"
+        }
+      ],
+      "changes": [
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（エ）と再解答を照合。",
+        "成功時の1〜n平均と失敗時n回を分け、確率1−a,aで加重。a=0で(n+1)/2、a=1でnになることと全4式を検算。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q5",
+    "baseVersion": 2,
+    "baseLessonSHA256": "61d931891159a84d82584b6fc3d7932b9859daad3b323d713fbb83c4e987d10e",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q5",
+      "summary": "連続領域に格納する配列リストの、容量・参照・挿入の特徴を判断する。",
+      "explanation": "問題の配列リストは要素を連続領域に置きます。最大要素数に対応した領域を用意すると、実際の要素数が少ない場合に空きが生じます。添字による参照は一定時間でできますが、中間への挿入は後続要素をずらす必要があり、通常は要素数に比例する時間が掛かります。ポインタを各要素に保持する必要はありません。",
+      "choiceReasons": [
+        "確保した最大容量と実際の要素数に差があれば、未使用領域が生じます。",
+        "先頭から順にたどるのはポインタによる連結リストです。配列は添字から位置を計算できます。",
+        "次要素へのポインタ領域が必要なのはポインタによるリストです。",
+        "配列の途中への挿入では後続要素の移動が必要で、位置が分かっても一定時間にはなりません。"
+      ],
+      "takeaway": "配列リストは添字参照が速い一方、容量の余りや中間挿入時の移動がある。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文の「配列に要素を連続して格納」に注目します。中間に一つ追加した場合、既存要素の置き場所がどうなるか描きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "配列は添字から直接位置を求められます。各要素の次の位置をポインタで記録する方式と、領域の使い方を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最大100要素分を確保して実際は60要素なら40要素分が空きます。この性質を述べた候補が適切です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "連続配列リストとポインタ連結リストの特性を混同する。",
+      "stages": [
+        {
+          "newInformation": "連続格納では途中挿入時に後続要素の置き場所が変わる。",
+          "remainingWork": "各肢の参照・容量・挿入の特徴と比較する。",
+          "revealsAnswer": false,
+          "reason": "挿入の検討だけでは全誤肢を除外しない。"
+        },
+        {
+          "newInformation": "配列は添字から直接参照でき、次ポインタを保持する必要はない。",
+          "remainingWork": "残った容量と挿入時間の記述を判断する。",
+          "revealsAnswer": false,
+          "reason": "容量の正誤と挿入の移動を判断する余地が残る。"
+        },
+        {
+          "newInformation": "最大100に実際60なら40の未使用領域がある。",
+          "remainingWork": "容量の余りを述べる肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答肢と同じ特徴を具体的数値で渡す。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04h/r04h-q5.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ア）と再解答を照合。",
+        "問題が連続配列を前提としていることを確認。直接参照O(1)、中間挿入で移動、次ポインタ不要、最大容量の未使用領域という全肢を照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q6",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b8594456a212d1670fefd82176135e961560b6ba2fe80433fb288fb0b090edb3",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q6",
+      "summary": "子の添字が2iと2i+1である二分木の、配列順と探索順を対応させる。",
+      "explanation": "根A[1]、次の深さのA[2],A[3]、その次のA[4]〜A[7]という順です。2i、2i+1を子とする配置では、添字順に見ると同じ深さの節点を左から右へ先に訪問します。",
+      "choiceReasons": [
+        "先行順は根、左部分木全体、右部分木全体で、1,2,4…と進みます。",
+        "後行順は子の探索を済ませてから親を訪問するので根が最後になります。",
+        "中間順は左部分木、根、右部分木で、根から始まりません。",
+        "1、2・3、4〜7と深さ順に訪問するため幅優先です。"
+      ],
+      "takeaway": "配列による二分木の添字順は階層順になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "A[1]の子をA[2],A[3]、A[2]の子をA[4],A[5]として二段分描きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "深さ優先探索は一つの枝の子孫を先にたどり、幅優先探索は根からの深さが同じ節点を先にたどります。添字1,2,3,4…を描いた木に当てはめ、どちらの順になるか確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "根→深さ1の全節点→深さ2の全節点となる幅優先探索です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "子の添字の規則を木の深さと探索順に変換できない。",
+      "stages": [
+        {
+          "newInformation": "1の子は2,3、2の子は4,5として木を描く方法。",
+          "remainingWork": "他の子も描き、配列順を追う。",
+          "revealsAnswer": false,
+          "reason": "描画手順で探索名は未提示。"
+        },
+        {
+          "newInformation": "深さ優先と幅優先の訪問基準。",
+          "remainingWork": "木の添字順がどちらの基準か適用する。",
+          "revealsAnswer": false,
+          "reason": "定義は教えるが配列順への適用が残る。"
+        },
+        {
+          "newInformation": "根、深さ1、深さ2の順が幅優先と対応する。",
+          "remainingWork": "一致する肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答名称を明記する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q6.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（エ）と再解答を照合。",
+        "添字1/(2,3)/(4,5,6,7)の階層を再構成。先行=1,2,4,5,3,6,7、後行=4,5,2,6,7,3,1、中間=4,2,5,1,6,3,7と比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q7",
+    "baseVersion": 2,
+    "baseLessonSHA256": "41891af853e43e8ff2956e5399e77380b6b876dacc6f22d41fcc712611baff98",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q7",
+      "summary": "実行前に型を検査できるWeb向けスクリプト言語を区別する。",
+      "explanation": "TypeScriptはJavaScriptを拡張した言語で、変数や関数に型を指定し、実行前に型の整合性を検査できます。JavaScriptやその標準仕様であるECMAScriptの通常の変数は動的に型が扱われ、VBScriptも静的型検査を行う言語ではありません。",
+      "choiceReasons": [
+        "JavaScriptなどの基礎となる仕様で、通常の変数に静的な型宣言を設けるものではありません。",
+        "通常は動的型付けで、代入される値の型が実行時に決まります。",
+        "型注釈などを使い、実行前に型の整合性を検査できます。",
+        "変数が動的に型を扱うスクリプト言語です。"
+      ],
+      "takeaway": "TypeScriptはJavaScriptに静的型検査を加える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "静的型付けでは、変数に許される型を実行前に決め、異なる型の値を代入する誤りなどを検出します。動的型付けでは、変数が参照する値の型を実行時に扱います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "TypeScriptはJavaScriptを拡張し、型注釈と実行前の型検査を加えた言語です。JavaScriptの標準仕様はECMAScriptで、これらの通常の変数の型は動的に扱われます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えばTypeScriptで数値型とした変数に文字列を代入すると、実行前の型検査で不一致を検出できます。型推論で注釈を省ける場合も、静的型検査は働きます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "静的型検査の意味と言語名の対応を知らない。",
+      "stages": [
+        {
+          "newInformation": "静的型付けと動的型付けの検査時点・型の扱い。",
+          "remainingWork": "四言語のどれが静的型検査を備えるか判断する。",
+          "revealsAnswer": false,
+          "reason": "一般的定義で言語名は未提示。"
+        },
+        {
+          "newInformation": "TypeScriptはJavaScriptに型注釈と静的検査を加える。",
+          "remainingWork": "その名前の肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答名を教える。"
+        },
+        {
+          "newInformation": "数値型に文字列代入するエラー例と型推論時も検査が働くこと。",
+          "remainingWork": "静的型検査の具体的な効用を理解する。",
+          "revealsAnswer": true,
+          "reason": "前段ですでに名前を開示している。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03a/r03a-q7.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ウ）と再解答を照合。",
+        "4言語の型付けを照合。ECMAScriptはJavaScriptの標準仕様、JavaScriptとVBScriptは動的、TypeScriptは静的検査を提供することを確認。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "36cd0ecaf1000628fb3e29e8eef1f3748d96f4d57bb0610c2ed981fe849fb3a3",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q8",
+      "summary": "動作周波数と命令実行数から、1命令当たりのクロック数を求める。",
+      "explanation": "CPI（Cycles Per Instruction）は1命令当たりのクロック数です。1.25GHzは1秒間に1.25×10^9クロック、命令数は1秒間に10億=1.0×10^9命令です。同じ1秒のクロック数を命令数で割ると、CPI=(1.25×10^9)/(1.0×10^9)=1.25となります。",
+      "choiceReasons": [
+        "0.8は命令数÷クロック数で、CPIの比の向きと逆です。",
+        "クロック数÷命令数が1.25なので適切です。",
+        "2.5クロック/命令なら1秒間に実行できるのは1.25×10^9÷2.5=5億命令で、10億命令という条件と合いません。",
+        "10クロック/命令なら1秒間に実行できるのは1.25×10^8命令で、10億命令という条件と合いません。"
+      ],
+      "takeaway": "CPIの単位をクロック/命令と置くと、割り算の向きを間違えにくい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "GHzのGは10^9です。1.25GHzは1秒間に1.25×10^9クロック、10億命令は1秒間に10^9命令なので、同じ時間の回数として比較できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CPIのPer Instructionは「1命令当たり」です。総クロック数を命令数で割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1.25×10^9クロックを10^9命令で割り、10^9を約分して最後を計算しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "GHzと命令数の単位をそろえられず割り算を逆にする。",
+      "stages": [
+        {
+          "newInformation": "G=10^9で、同じ1秒のクロック数と命令数にそろえる。",
+          "remainingWork": "1命令当たりを求める式を決める。",
+          "revealsAnswer": false,
+          "reason": "単位換算だけで比の最終値は未提示。"
+        },
+        {
+          "newInformation": "CPIは1命令当たりなので総クロック数÷命令数。",
+          "remainingWork": "数値を代入して計算する。",
+          "revealsAnswer": false,
+          "reason": "公式を教え数値計算を残す。"
+        },
+        {
+          "newInformation": "1.25×10^9÷10^9という代入式。",
+          "remainingWork": "約分して数値を計算する。",
+          "revealsAnswer": false,
+          "reason": "最後の数値を明示せず計算を本人に残す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r05h/r05h-q8.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "1.25e9/1e9=1.25を再計算。逆数0.8、2.5なら5億命令、10なら1.25億命令となることを検算。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q9",
+    "baseVersion": 2,
+    "baseLessonSHA256": "af56a9bd981d864762fbf124563728e002ddb5a55296d0367c92758461a94ed9",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q9",
+      "summary": "DMAコントローラーの転送処理を、演算・メモリ管理・計時と区別する。",
+      "explanation": "DMA（Direct Memory Access）は、MPU（Micro Processing Unit：マイクロプロセッサ）が転送元・転送先・転送量などを設定し、その後はDMAコントローラーがメモリと入出力装置、又はメモリ同士の間でデータを転送する仕組みです。\nMPUが全く関与しないという意味ではなく、個々のデータを運ぶ処理を任せることでMPUの負担を減らします。",
+      "choiceReasons": [
+        "積和演算の高速化はDSP（Digital Signal Processor：ディジタル信号処理用プロセッサ）などの役割です。DMAの役割はデータ転送です。",
+        "仮想メモリや保護はMMU（Memory Management Unit：メモリ管理装置）などのメモリ管理機能です。",
+        "クロックを数えて時間を測るのはタイマーの役割です。",
+        "DMAはメモリ・入出力装置間やメモリ同士のデータを、MPUの逐次転送処理を介さずに運びます。"
+      ],
+      "takeaway": "DMAは転送、MMU（メモリ管理装置）はメモリ管理、タイマーは計時を担う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢は演算・メモリ管理・計時・転送の四つの役割です。DMAのDはDirect、MAはMemory Accessです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "MPU（マイクロプロセッサ）が一個ずつ読んで書く代わりに、専用コントローラーへ転送範囲と量を設定して運ばせる仕組みを考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「計算する」「仮想アドレスを管理する」「時間を数える」は別の部品の役割です。メモリと装置の間でデータを運ぶ説明を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "DMAとDSP・MMU・タイマーの役割を知らない。",
+      "stages": [
+        {
+          "newInformation": "四肢の役割の分類とDirect Memory Accessの語義。",
+          "remainingWork": "DMAが担う処理を判断する。",
+          "revealsAnswer": false,
+          "reason": "名称の展開だけで転送手順は未提示。"
+        },
+        {
+          "newInformation": "MPUの逐次読書きに代えてコントローラーへ転送を任せる。",
+          "remainingWork": "転送の肢に対応させる。",
+          "revealsAnswer": true,
+          "reason": "正答肢と実質同じ動作を教える。"
+        },
+        {
+          "newInformation": "演算・仮想アドレス管理・計時を除き転送を選ぶ。",
+          "remainingWork": "残った肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "全誤肢を除外し、前段も正答を開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07h/r07h-q9.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（エ）と再解答を照合。",
+        "メモリ/入出力、メモリ同士の転送を確認。MPUによる設定と各データの転送を区別し、DSPの積和・MMUの管理・タイマーの計時の全肢を照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q10",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0d719e14dcfef7e6f164abc55839ab37adb9656ea610e3b92448da20389b7a96",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q10",
+      "summary": "深層学習の計算内容と、GPUによる高速化の仕組みを対応させる。",
+      "explanation": "GPU（Graphics Processing Unit：画像処理装置）は多数の演算器で同種の数値計算を並列に処理できます。ニューラルネットワークの学習では重みと入力の積和など、多数の行列演算を反復するため、その行列演算の高速化が学習時間の短縮に役立ちます。 CPU（Central Processing Unit：中央処理装置）も浮動小数点演算はできますが、GPUでは大量の同種演算の並列処理が学習の高速化に役立ちます。",
+      "choiceReasons": [
+        "各コアが独立して別の命令列とデータを扱う構成の説明です。学習でGPUを用いる主な理由である、行列演算の並列高速処理を説明していません。",
+        "学習に多用する行列演算をGPUで高速に処理できることが適切です。",
+        "浮動小数点演算が可能というだけでは、CPUに対する学習高速化の特徴を説明できません。",
+        "分岐予測によるパイプライン効率化は主にCPUの制御処理の特徴です。"
+      ],
+      "takeaway": "GPUは多数の同種の数値演算を並列化する場面に向く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "GPU（Graphics Processing Unit：画像処理装置）は、多数の演算器で同種の数値計算を並列に行う構造をもちます。深層学習で繰り返す計算との相性を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ニューラルネットワークは、多数の入力に重みを掛けて足し合わせます。これをまとめた行列演算を大量に繰り返すため、GPUで並列に処理すると高速化できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えば二つの出力を求める計算a×x+b×yとc×x+d×yは、互いに独立して同時に計算できます。GPUはこのような同種の積和を多数まとめて処理するのに向きます。「浮動小数点演算ができる」だけならCPU（Central Processing Unit：中央処理装置）にも当てはまります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "深層学習の主要計算とGPUの並列処理が結びつかない。",
+      "stages": [
+        {
+          "newInformation": "GPUは同種の数値計算を多数並列処理する。",
+          "remainingWork": "学習のどの処理と対応するか選択肢を検討する。",
+          "revealsAnswer": false,
+          "reason": "学習の主要処理や正答の行列演算は未提示。"
+        },
+        {
+          "newInformation": "重みと入力の積和はまとめて行列演算として反復できる。",
+          "remainingWork": "行列演算高速化の肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答の行列演算高速化を実質教える。"
+        },
+        {
+          "newInformation": "二つの独立な積和を同時実行する小例と、浮動小数点演算の可否だけではCPUと区別できないこと。",
+          "remainingWork": "行列演算の並列高速化と、単なる演算可否を各肢で区別する。",
+          "revealsAnswer": true,
+          "reason": "前段で正答の説明を実質開示済み。ここでは比較対象や計算例を加えて根拠を具体化する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r03h/r03h-q10.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "原本の「汎用の行列演算ユニット」を確認。学習の積和/行列計算と並列性を照合。独立命令列、単なる浮動小数点演算の可否、分岐予測と比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q8",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3b8f1183db7d097c26ae1390c7a4e627fa4bc39d1ef8d6b01657c59377e7ada8",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q8",
+      "summary": "深層学習の計算内容と、GPUによる高速化の仕組みを対応させる。",
+      "explanation": "GPU（Graphics Processing Unit：画像処理装置）は、多数の演算器で同種の計算を並列に処理できます。ディープラーニングでは重みと入力の積和など、多数の行列演算を繰り返すため、行列演算ユニットによる高速化が学習時間の短縮に役立ちます。 CPU（Central Processing Unit：中央処理装置）も浮動小数点演算はできますが、GPUでは大量の同種演算の並列処理が学習の高速化に役立ちます。",
+      "choiceReasons": [
+        "各コアで独立した異なるプログラムを実行することが、GPUの学習高速化の主な利点ではありません。",
+        "学習の主要処理である行列演算を高速化する利点を述べています。",
+        "浮動小数点演算を行えるだけではCPUにも当てはまり、GPUの利点を示しません。",
+        "分岐予測によるパイプライン効率化は主にCPUの特徴であり、学習でGPUを使う理由の中心ではありません。"
+      ],
+      "takeaway": "GPUは同種の積和演算を大量に並列実行する処理に適する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "GPU（Graphics Processing Unit：画像処理装置）は、多数の演算器で同種の数値計算を並列に行う構造をもちます。深層学習で繰り返す計算との相性を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ニューラルネットワークは、多数の入力に重みを掛けて足し合わせます。これをまとめた行列演算を大量に繰り返すため、GPUで並列に処理すると高速化できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "行列とベクトルの積では、各行の出力を独立に計算できるため多数の演算器へ分配できます。CPU（Central Processing Unit：中央処理装置）も浮動小数点演算はできますが、GPUを使う利点は、このような大量の同種演算を並列化して学習時間を短くできる点です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "GPUの利点を浮動小数点演算の可否や分岐予測と混同する。",
+      "stages": [
+        {
+          "newInformation": "GPUの多数の演算器による同種計算の並列性。",
+          "remainingWork": "深層学習の処理と各肢を対応させる。",
+          "revealsAnswer": false,
+          "reason": "正答の行列演算までは未提示。"
+        },
+        {
+          "newInformation": "重みと入力の積和を行列演算として大量反復する。",
+          "remainingWork": "行列演算高速化の肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "正答肢の根拠と同じ内容を渡す。"
+        },
+        {
+          "newInformation": "行列の各行を並列計算できる理由と、CPUでも浮動小数点演算自体は可能なこと。",
+          "remainingWork": "並列処理による高速化と、演算できるだけの記述を区別する。",
+          "revealsAnswer": true,
+          "reason": "前段で正答の説明を実質開示済み。ここでは比較対象や計算例を加えて根拠を具体化する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r04a/r04a-q8.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "原本の行列演算ユニットを確認し、積和の反復とGPUの並列演算を照合。異なるプログラムの独立実行、演算可否、分岐予測の全誤肢と比較。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q11",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7abb36c3d706f62ff3fc1146b7efa92c261fde19e29e4d386d290c038dd331fe",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q11",
+      "summary": "ノード数・総コア数・コア性能の更新倍率を分け、総演算性能を求める。",
+      "explanation": "現状の総コア数は8×1000=8000。更新後は4倍の32000コアで、1ノードは8×2=16コアなので、32000÷16=2000ノードです。\n1コアの性能は10×2=20GFLOPSに倍増します。FLOPSは1秒当たりの浮動小数点演算回数で、Gは10^9、Tは10^12です。総性能は32000×20=640000GFLOPS=640TFLOPSです。",
+      "choiceReasons": [
+        "ノード数は正しいですが、1コア性能の倍増を反映しておらず性能が半分です。",
+        "32000コアを16コアずつ配置した2000ノードで、総性能も640TFLOPSです。",
+        "4000ノードでは16×4000=64000コアとなり、総コア数4倍の条件を超えます。320TFLOPSも正しい総性能640TFLOPSの半分です。",
+        "性能は正しいですが、4000ノードでは16×4000=64000コアとなり条件を超えます。"
+      ],
+      "takeaway": "総コア数、ノード当たりコア数、コア当たり性能を別々に更新する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "まず現状の総コア数を8×1000で出し、更新条件の4倍を掛けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "更新後のノード当たりコア数は8×2です。更新後総コア数をこれで割るとノード数です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "性能は更新後総コア数×(10×2)GFLOPS。1000GFLOPS=1TFLOPSとして換算しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "総コア数の倍率とノード数の倍率を混同し、単位換算を誤る。",
+      "stages": [
+        {
+          "newInformation": "現状総コア数=8×1000、更新後はその4倍。",
+          "remainingWork": "ノード数と総性能を別に求める。",
+          "revealsAnswer": false,
+          "reason": "総コア数の計算手順のみで解答組は未提示。"
+        },
+        {
+          "newInformation": "更新後ノード当たりコア数8×2、ノード数=総コア数÷16。",
+          "remainingWork": "ノード数の計算と総性能の計算を行う。",
+          "revealsAnswer": false,
+          "reason": "算式を教え、数値計算と性能の決定は残す。"
+        },
+        {
+          "newInformation": "総性能=更新後総コア数×20GFLOPS、1000GFLOPS=1TFLOPS。",
+          "remainingWork": "乗算と単位換算を完成させる。",
+          "revealsAnswer": false,
+          "reason": "最終ノード数・性能を示さず数値計算を残す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q11.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（イ）と再解答を照合。",
+        "8*1000*4=32000、32000/16=2000、32000*20/1000=640TFLOPSを再計算。現状80TFLOPSの4*2=8倍とも一致し、全4組を照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q13",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ad5979d707a063b6b05addb654582afcf948e5521c6e49992fed658e0897cc67",
+    "author": "Codex /root/ap_wave01_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q13",
+      "summary": "平均故障間隔と平均修復時間の意味から、稼働率の式を判断する。",
+      "explanation": "MTBF（Mean Time Between Failures：平均故障間隔）は、修復可能なシステムの正常稼働時間の平均です。MTTR（Mean Time To Repair：平均修復時間）は、故障してから復旧するまでの修復時間の平均です。\n正常稼働と修復を繰り返す一周期の平均の長さはMTBF+MTTRなので、そのうち稼働している割合はMTBF/(MTBF+MTTR)となります。",
+      "choiceReasons": [
+        "正常稼働時間を正常稼働と修復の合計で割るため、稼働率を表します。",
+        "MTBFは正常稼働の平均時間そのものです。修復時間を引く必要はありません。",
+        "初回故障までの時間だけの定義ではありません。MTBFは繰り返す故障間の正常稼働時間の平均です。",
+        "復旧から次の故障までの平均はMTBFであり、MTTRは修復に掛かる時間です。"
+      ],
+      "takeaway": "稼働率は正常時間÷(正常時間+修復時間)。MTBFとMTTRを取り違えない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "稼働100時間、修復2時間の周期を考えます。全体102時間のうち何時間が稼働でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "MTBF（平均故障間隔）は正常稼働時間の平均、MTTR（平均修復時間）は故障から復旧までの時間の平均です。稼働率は、正常稼働時間を「正常稼働時間＋修復時間」で割った割合です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "MTBF/(MTBF+MTTR)が稼働率です。初回故障までの一度の時間や、修復時間を引いた値ではありません。MTTRも復旧後の正常稼働時間とは区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "MTBFに修復時間が含まれると思い、MTTRと取り違える。",
+      "stages": [
+        {
+          "newInformation": "稼働100時間と修復2時間の周期例。",
+          "remainingWork": "正常時間/全体時間の割合を計算し変数の意味と対応させる。",
+          "revealsAnswer": false,
+          "reason": "例の比で、MTBF/MTTRの定義はまだ提示しない。"
+        },
+        {
+          "newInformation": "MTBFとMTTRの定義と稼働率の分子・分母。",
+          "remainingWork": "記号の式に対応する肢を確認する。",
+          "revealsAnswer": true,
+          "reason": "定義と割合を合わせると正答式が直接決まる。"
+        },
+        {
+          "newInformation": "MTBF/(MTBF+MTTR)と、初回故障・修復時間との区別。",
+          "remainingWork": "各肢の誤りを確認する。",
+          "revealsAnswer": true,
+          "reason": "正答式を明記し、前段も開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本画像 assets/questions/r07a/r07a-q13.webp をview_imageで実際に開き、問題文・全4肢・条件・図を目視確認。context.jsonの公式正答（ア）と再解答を照合。",
+        "原本の全4記述を確認。稼働100/修復2なら100/102。MTBFは正常稼働平均、MTTRは修復平均、初回一度の時間ではないことを照合。",
+        "参照した一次資料は上記原本画像と固定context/公式正答情報。外部Web資料・学習者試用・独立承認は未実施。原問疑義や読取不能箇所なし。"
+      ]
+    }
+  }
+]

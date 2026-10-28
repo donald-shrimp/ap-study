@@ -1,0 +1,1389 @@
+[
+  {
+    "id": "r05a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "08a79f979effea5f6f27ee84d4f8427d58aa08e784c3acb1cbc5daeda3abf776",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q1",
+      "summary": "2進数の各桁を取り出し、上下の桁を交換した値を式で表す。",
+      "explanation": "元の2進数はx=2x₁+x₂で、各桁は0か1です。int(x/2)=x₁、下位桁はx₂=x−2int(x/2)と取り出せます。\n交換後は2x₂+x₁なので、2{x−2int(x/2)}+int(x/2)=2x−3int(x/2)です。",
+      "choiceReasons": [
+        "x₁=1のとき補正を加算してしまいます。x=2なら8となり、交換後の01=1に合いません。",
+        "x=2なら9です。上位桁を取り除いて下位へ移す補正になっていません。",
+        "上位桁を取り出し、2x中の4x₁を引いてx₁を足すので、補正係数は−3です。",
+        "補正−4では上位桁を消すだけです。x=2なら0で、下位へ移した1が残りません。"
+      ],
+      "takeaway": "桁交換は各桁を取り出して、新しい位の重みで足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "元のx₁は重み2、x₂は重み1です。交換後の重みがそれぞれどう変わるか確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "xを2で割って切り捨てると上位桁が得られます。残りの下位桁はxからその2倍を引いて求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "上位桁をa=int(x/2)と置くと下位桁はx−2aです。交換後の2(x−2a)+aを整理しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "桁の重みと切捨てによる桁の抽出を式へつなげられない。",
+      "stages": [
+        {
+          "newInformation": "上位・下位桁の重み2と1",
+          "remainingWork": "交換後の重みを考える",
+          "revealsAnswer": false,
+          "reason": "重みのみで、正答式はまだ与えない。"
+        },
+        {
+          "newInformation": "上位桁はint(x/2)、下位桁はその2倍を除いた残り",
+          "remainingWork": "各桁を交換後の重みで合成する",
+          "revealsAnswer": false,
+          "reason": "抽出方法を示すが、合成と整理が必要。"
+        },
+        {
+          "newInformation": "交換後を2(x−2a)+aとする途中式",
+          "remainingWork": "aの係数を整理して選択肢と照合する",
+          "revealsAnswer": false,
+          "reason": "最終の−3の係数は示さず、本人が代数計算する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r05a/r05a-q1.webp。本文・全4肢・図/数式をcontextの公式答え（ウ）と照合。",
+        "00,01,10,11の交換結果は0,2,1,3。各肢にx=2を入れると8,9,1,0でウのみ一致。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4b9c84ec351bdeef3580d9289c35493baf5b3a12f127b68edc7f3b9ce1de763a",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q1",
+      "summary": "桁ごとの論理演算を使い、8ビット整数が上限の次で0に戻る処理を表す。",
+      "explanation": "255は2進数で11111111です。AND 255は下位8ビットを残し、それより上を0にします。n<255ではn+1は1〜255なので変わりません。n=255ではn+1=256=100000000となり、AND 011111111=0です。二つの条件をともに満たすのはアです。",
+      "choiceReasons": [
+        "下位8ビットを残すので通常はn+1、256になったときは0です。",
+        "256は第9ビットだけ1なので、1〜255は0、256は256になります。",
+        "下位8ビットを全て1にするため、例えばn=0でも255になります。",
+        "第9ビットを1にするため、例えばn=0では257になります。"
+      ],
+      "takeaway": "ANDによるビットマスクで、一定桁数を超えた桁を捨てられる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "0〜254では1増やし、255のときだけ0にする二つの条件を確認します。特に255+1で8ビットを超える桁が生まれます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ANDは両方が1の桁だけを1にし、ORは一方でも1なら1にします。255は11111111₂、256は100000000₂です。各定数の1と0がどの桁を残すか比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "AND 255は下位8ビットを残し、それより上を0にします。(n+1) AND 255なら通常の1〜255は変わらず、256だけ0になります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "AND/ORの意味と255から256への桁上がりを結び付けられない。",
+      "stages": [
+        {
+          "newInformation": "通常時と上限時の二条件、8桁を超える桁上がり",
+          "remainingWork": "両方を満たす論理演算を探す",
+          "revealsAnswer": false,
+          "reason": "条件の整理で、演算を確定していない。"
+        },
+        {
+          "newInformation": "AND/ORの桁ごとの定義と255/256の2進表現",
+          "remainingWork": "各定数を使う演算の結果を判断する",
+          "revealsAnswer": false,
+          "reason": "真理値と定数を渡し、処理の比較は残す。"
+        },
+        {
+          "newInformation": "AND 255が下位8ビットを残す仕組みと両条件での結果",
+          "remainingWork": "式と肢の対応を確認する",
+          "revealsAnswer": true,
+          "reason": "正答の式とその動作を直接示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r05h/r05h-q1.webp。本文・全4肢・図/数式をcontextの公式答え（ア）と照合。",
+        "n=0..255を全数計算し、四肢の一致件数は256,0,1,0。アが全条件を満たす。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3b58d13f3de8392fd6136a69ea45a5f56bd942675e10a9c959bcefce5d1d8736",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q2",
+      "summary": "二つの窓口を一つに統合したときの利用率と、サービス時間を含まない待ち時間の関係を問う。",
+      "explanation": "M/M/1は、到着間隔とサービス時間がそれぞれ指数分布に従う、窓口が一つの待ち行列モデルです。利用率uは窓口が処理中である時間の割合で、到着率λと平均サービス時間Tsを使ってu=λTsと表せます。サービス時間を含まない平均待ち時間はWq=uTs/(1−u)です。\n本問では、統合前後でATMの平均サービス時間が同じという想定で、両支店の到着を一台へ集めます。到着率が2倍なので利用率も2ρとなり、Wq=2ρTs/(1−2ρ)、すなわちエです。「十分に処理できる」という条件は2ρ<1に対応します。",
+      "choiceReasons": [
+        "ρTs/(1−ρ)は統合前の1支店の利用率を使った式です。",
+        "分母は統合後の利用率ですが、分子が統合前のρのままです。",
+        "分子は統合後の利用率ですが、分母が統合前の1−ρのままです。",
+        "分子・分母の両方に統合後の利用率2ρを用いています。"
+      ],
+      "takeaway": "M/M/1の待ち時間には、統合後の利用率を分子と分母の両方に使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用者数が両支店の合計になる点を使って、1台が受け持つ到着率（単位時間当たりの利用者数）を統合前と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "窓口が一つのM/M/1では、サービス時間を除いた待ち時間はWq=uTs/(1−u)です。uは窓口が処理中の時間割合。平均サービス時間が同じなら、到着率が2倍になるとuも2倍です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "統合後の利用率u=2ρを代入すると、Wq=2ρTs/(1−2ρ)です。分子だけでなく、混雑の影響を表す分母にも2ρを使います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "平均待ち時間の公式を知らず、統合後の利用率を分子と分母へ反映できない。",
+      "stages": [
+        {
+          "newInformation": "到着率は単位時間の利用者数で、統合により合計になる",
+          "remainingWork": "到着率の変化を求める",
+          "revealsAnswer": false,
+          "reason": "利用率・待ち時間の最終式をまだ示さない。"
+        },
+        {
+          "newInformation": "Wq=uTs/(1−u)と、同じサービス時間なら到着率と利用率が比例すること",
+          "remainingWork": "統合後uを求めて公式へ代入する",
+          "revealsAnswer": false,
+          "reason": "公式と変数の関係であり、代入・式の構成が残る。"
+        },
+        {
+          "newInformation": "u=2ρを代入した最終式と分母の意味",
+          "remainingWork": "正答肢を照合する",
+          "revealsAnswer": true,
+          "reason": "エの式そのものを示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r03a/r03a-q2.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原図全4式を照合。Wq=uTs/(1−u)へu=2ρを代入してエ。原文は統合後Tsのみ明示し、前後同じ平均サービス時間は明示していない。公式答えが置く処理能力不変の想定を解説に明示。ρ=0.2ならWq=(2/3)Tsで検算。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "76f5e8470859ba1d446d278d328c7667348c30ffa7ab8c4587849e51d4cdc010",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q2",
+      "summary": "ATMの統合で変わる利用率を、M/M/1の平均待ち時間の式に当てはめる。",
+      "explanation": "M/M/1は、到着間隔とサービス時間がそれぞれ指数分布に従う、窓口が一つの待ち行列モデルです。利用率uは窓口が処理中である時間の割合で、到着率λと平均サービス時間Tsを使ってu=λTsと表せます。サービス時間を含まない平均待ち時間はWq=uTs/(1−u)です。\n本問では、統合前後でATMの平均サービス時間が同じという想定で、両支店の到着を一台へ集めます。到着率が2倍なので利用率も2ρとなり、Wq=2ρTs/(1−2ρ)、すなわちエです。「十分に処理できる」という条件は2ρ<1に対応します。",
+      "choiceReasons": [
+        "アは統合前の利用率ρのままで、利用者数の合計を反映していません。",
+        "イは分母だけ2ρにしています。待ち時間の式の分子にも同じ利用率が必要です。",
+        "ウは分子だけ2ρにしています。混雑による増加を表す分母も1−2ρにします。",
+        "エは分子・分母の利用率をともに2ρへ置き換えています。"
+      ],
+      "takeaway": "待ち行列は統合後の利用率を先に求め、待ち時間の式の全てのρを置き換える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "平均待ち時間にサービス時間を含まない点と、二支店の利用者を一台へ集める点を確認します。到着率とは単位時間当たりに来る利用者数です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "M/M/1は窓口が一つの待ち行列モデルで、サービス時間を除く平均待ち時間はuTs/(1−u)。uは窓口が処理中の時間割合です。本問の想定のように平均サービス時間が同じなら、到着率を合計すると利用率も合計できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "u=ρ+ρを分子と分母へ同時に代入します。分母が1−uであることを崩さず整理しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "同じ1台への統合でも利用者増加によって利用率が変わることを見落とす。",
+      "stages": [
+        {
+          "newInformation": "サービス時間を含まない待ち時間と到着率の意味",
+          "remainingWork": "統合前後の到着率を比較する",
+          "revealsAnswer": false,
+          "reason": "注目する条件の提示で、最終式を与えない。"
+        },
+        {
+          "newInformation": "M/M/1の窓口数、Wqの公式、同じサービス時間で利用率を合計できる理由",
+          "remainingWork": "二支店の利用率を合計し公式へ適用する",
+          "revealsAnswer": false,
+          "reason": "公式・前提の知識を与え、代入計算は残す。"
+        },
+        {
+          "newInformation": "u=ρ+ρを分子と分母へ同時に代入する手順",
+          "remainingWork": "式を整理し四肢から選ぶ",
+          "revealsAnswer": false,
+          "reason": "最終式を直接記載せず、本人が代入・整理する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r06h/r06h-q2.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原本の条件(1)〜(3)と分母1−2ρを確認。公式答えエをu=ρ+ρの代入で再現。統合前のTsは原文明示なしのため、前後同じ平均サービス時間という公式解釈上の想定を教材に限定して明記。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "be4dd782ea4833f9381f2bae8a7ea51df8ba2349ffa01040021d5a4a10cb2d4f",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q4",
+      "summary": "CRCで検査データを作成・付加する手順と、生成多項式の役割を区別する。",
+      "explanation": "CRC（Cyclic Redundancy Check：巡回冗長検査）は、ビット列を係数が0か1の多項式とみなし、生成多項式による除算の余りを利用する誤り検出方式です。送信側は、生成多項式の次数分だけ末尾に0を補ったデータを割り、得た余りを検査データとして元データに付加します。したがってウです。\n受信側は送信側と同じ生成多項式で、検査データを含む受信語を割って検査します。検査データそのものを除数にはしません。検査に合格しても、検出できない誤りがあり得るため、全ての誤りがないと保証するわけではありません。",
+      "choiceReasons": [
+        "検査データの長さは生成多項式の次数に対応し、一般に1ビットではありません。",
+        "割る相手は付加された検査データではなく、送受信側で共通の生成多項式です。",
+        "生成多項式から検査データを求め、元データに付加する送信処理が正しい説明です。",
+        "送受信側は同じ生成多項式を使わなければ同じ基準で検査できません。"
+      ],
+      "takeaway": "CRCの検査値は生成多項式による余り。送受信で同じ多項式を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢中の「生成多項式」「検査用のデータ」「検査対象のデータ」の役割を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "送信時には元データから余りを作って付加し、受信時には共通の生成多項式で検査します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "次数が16の生成多項式なら検査値は16ビットです。「必ず1ビット」や「検査値で割る」という説明を点検しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "生成多項式と検査値を混同し、CRCを1ビットのパリティと思う。",
+      "stages": [
+        {
+          "newInformation": "生成多項式・検査データ・対象データの役割分離",
+          "remainingWork": "どれを計算・付加・除算に使うか考える",
+          "revealsAnswer": false,
+          "reason": "役割を分ける入口で手順の正答は渡さない。"
+        },
+        {
+          "newInformation": "送信側で余りを付加し、受信側は同じ生成多項式で検査する手順",
+          "remainingWork": "説明に対応する肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "送信時の正答肢と実質同じ説明を渡す。"
+        },
+        {
+          "newInformation": "検査値のビット数が次数に対応する例",
+          "remainingWork": "1ビットとの混同や除数の取り違えを確認する",
+          "revealsAnswer": true,
+          "reason": "H2で正答を開示済みであり、累積してtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r07a/r07a-q4.webp。本文・全4肢・図/数式をcontextの公式答え（ウ）と照合。",
+        "原本アの「1ビット」、イの「検査用のデータで割り」、エの「異なる生成多項式」を確認。ウのみ送信処理に一致。CRCの通常の余り計算では次数分0を補うため、その手順を解説に補った。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4ef59f6a74c8473ad99a03ef6177a2a6daad860ab4273a07106fbf8f2cb8055d",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q3",
+      "summary": "2クラス分類の評価指標である偽陽性率について、分母と分子の対象を区別する。",
+      "explanation": "この設問では「正しい」が陽性、「間違い」が陰性に対応します。偽陽性は、実際には陰性なのに陽性と判定することです。\n偽陽性率は、実際に「間違い」であるデータ全体を分母、そのうち誤って「正しい」と予測したデータを分子にするのでイです。偽陽性の件数をFP（False Positive）、真陰性の件数をTN（True Negative）とすると、FP/(FP+TN)です。ROC（Receiver Operating Characteristic：受信者動作特性）曲線ではこれを横軸に使います。",
+      "choiceReasons": [
+        "予測が陰性の集団を分母にしています。偽陽性率の分母は実際の陰性です。",
+        "実際の陰性に対する誤った陽性の割合で、偽陽性率の定義に合います。",
+        "実際の陰性を陰性と当てた真陰性率で、偽陽性率の補数です。",
+        "全体の誤分類率で、偽陽性と偽陰性の両方を含みます。"
+      ],
+      "takeaway": "「実際の陰性」を分母にし、その中の陽性誤判定を数える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「間違い」と予測したかどうかではなく、実際に「間違い」であるデータを最初に集めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "その集団で「正しい」と予測したものが偽陽性です。正しく「間違い」としたものは真陰性です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "実際の間違いが100件で、そのうち正しいと予測したものが8件なら8/100です。同じ分母・分子の文章を選びましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "陽性/陰性と、予測値/実際の値の二軸を取り違える。",
+      "stages": [
+        {
+          "newInformation": "分母の集団を実際の間違いに固定する",
+          "remainingWork": "集団内のどの予測を数えるか判断する",
+          "revealsAnswer": false,
+          "reason": "分子をまだ渡しておらず、イとウの比較が残る。"
+        },
+        {
+          "newInformation": "実際の陰性の中で陽性としたものが偽陽性という定義",
+          "remainingWork": "定義と肢を照合する",
+          "revealsAnswer": true,
+          "reason": "H1の分母と組み合わせるとイの説明そのもの。"
+        },
+        {
+          "newInformation": "100件中8件という分母・分子の具体例",
+          "remainingWork": "文章の対応を確認する",
+          "revealsAnswer": true,
+          "reason": "イの定義の具体例を示し、前段でも開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r07a/r07a-q3.webp。本文・全4肢・図/数式をcontextの公式答え（イ）と照合。",
+        "原本は「正しい」を陽性とする文脈。アは陰性予測を分母、ウは真陰性率、エは全体の誤分類率。FP/(FP+TN)と一致するイを確認。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e6ecec1c82ff19d543ba9c87d09215e6ca5ad8209fbbd64493b0f0923549f2a4",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q3",
+      "summary": "2クラス分類で使うROC曲線が、どの評価指標の関係を表すかを問う。",
+      "explanation": "ROC（Receiver Operating Characteristic：受信者動作特性）曲線は、陽性と判定するしきい値を変えたときの真陽性率と偽陽性率の関係を描くのでアです。縦軸の真陽性率は「実際の陽性のうち正しく陽性と判定した割合」、横軸の偽陽性率は「実際の陰性のうち誤って陽性と判定した割合」です。\n真陽性TP（True Positive）、偽陰性FN（False Negative）、偽陽性FP（False Positive）、真陰性TN（True Negative）の件数を使うと、縦軸はTP/(TP+FN)、横軸はFP/(FP+TN)。適合率TP/(TP+FP)は「陽性と判定したもの」を分母にするため、ROCの軸とは異なります。",
+      "choiceReasons": [
+        "真陽性率と偽陽性率は、しきい値を変えたときのROC曲線の二つの軸です。",
+        "真陽性率（再現率）と適合率の関係はPR（Precision-Recall：適合率・再現率）曲線であり、ROC曲線ではありません。",
+        "正解率は全件中の正しい判定の割合、適合率は陽性判定中の正しい判定の割合で、どちらもROCの軸ではありません。",
+        "偽陽性率はROCの横軸ですが、もう一つの軸は適合率でなく真陽性率です。"
+      ],
+      "takeaway": "ROCは実際の陽性と実際の陰性をそれぞれ分母にした二つの率を見る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「2クラス分類」は、対象を陽性・陰性など二つのクラスへ分ける処理です。実際のクラスとモデルの予測を分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ROCは、実際の陽性をどれだけ拾えたかを表す真陽性率と、実際の陰性をどれだけ陽性と誤判定したかを表す偽陽性率の関係です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "縦軸は「正しく陽性とした件数÷実際の陽性全件数」、横軸は「誤って陽性とした件数÷実際の陰性全件数」です。陽性と予測した全件を分母にする適合率とは区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ROCと適合率・再現率のグラフを混同する。",
+      "stages": [
+        {
+          "newInformation": "二つのクラスと実際/予測を分ける見方",
+          "remainingWork": "評価率が何を分母とするか整理する",
+          "revealsAnswer": false,
+          "reason": "分類の前提だけで曲線の軸は特定しない。"
+        },
+        {
+          "newInformation": "真陽性率と偽陽性率というROCの二指標と意味",
+          "remainingWork": "指標名を肢と照合する",
+          "revealsAnswer": true,
+          "reason": "アの二指標をそのまま教える。"
+        },
+        {
+          "newInformation": "各軸の分母と適合率との違い",
+          "remainingWork": "各率の集団を確認する",
+          "revealsAnswer": true,
+          "reason": "前段で開示済み、軸の定義も正答を特定する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r05h/r05h-q3.webp。本文・全4肢・図/数式をcontextの公式答え（ア）と照合。",
+        "原本四肢の指標の組合せを照合しア。ROCの横軸FPR、縦軸TPRを再確認。旧H2のtrue自体は適合率を除くと他三肢が消えるため妥当だが、定義自体を学べる文へ改稿。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f2b262843687ba0d74674099c1dc66aa192cfc7763824ad07da7b3c3129b73f0",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q1",
+      "summary": "排他的論理和の出力を全て反転した演算を、真理値表で見分ける。",
+      "explanation": "排他的論理和（XOR）は二つの入力が異なると1、同じと0です。相補演算は、任意の入力について元の演算の出力を反転する演算です。XORの全出力を反転すると、入力00と11で1、01と10で0となる等価演算なのでアです。",
+      "choiceReasons": [
+        "同じ入力で1となり、XORの全出力を反転した結果です。",
+        "否定論理和（NOR）は両入力が0のときだけ1となり、11での結果がXORの否定と合いません。",
+        "論理積（AND）は両入力が1のときだけ1となり、00での結果がXORの否定と合いません。",
+        "論理和（OR）は少なくとも一方の入力が1なら1となるため、01と10での結果がXORの否定と合いません。"
+      ],
+      "takeaway": "相補演算は全入力組合せで出力が逆になる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "排他的論理和（XOR）は、二つの入力が異なれば1、同じなら0です。入力00、01、10、11の四行で出力を書き出しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "相補演算は各行の出力を全て反転する演算です。XORの出力0、1、1、0を反転し、候補の演算と照合します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "反転後は1、0、0、1です。同じ入力のときに1となる等価演算を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "相補を入力の反転と誤解し、XORの真理値も知らない。",
+      "stages": [
+        {
+          "newInformation": "XORは入力が異なると1という定義",
+          "remainingWork": "四組の入力で出力を書く",
+          "revealsAnswer": false,
+          "reason": "等価演算の名称も最終出力もまだ示さない。"
+        },
+        {
+          "newInformation": "相補は出力の反転、XORの出力列",
+          "remainingWork": "反転して各演算と照合する",
+          "revealsAnswer": false,
+          "reason": "反転・各候補の比較を本人に残す。"
+        },
+        {
+          "newInformation": "反転後の出力列と等価演算の名称",
+          "remainingWork": "肢の名称を確認する",
+          "revealsAnswer": true,
+          "reason": "アの名称と定義を直接示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r03h/r03h-q1.webp。本文・全4肢・図/数式をcontextの公式答え（ア）と照合。",
+        "原本の集合図も確認。XOR出力0110、反転1001が等価演算。NOR1000、AND0001、OR0111は不一致。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b0b55b59f55376b1121b4832b1915568dec2e23e58baf7ec2ddb1508780e4715",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q2",
+      "summary": "カルノー図の隣接する1をまとめ、固定される変数から論理式を求める。",
+      "explanation": "カルノー図の行・列は00,01,11,10の順です。中央の四つの1をまとめると、B=1,D=1だけが固定され、BDになります。上段の左右端の1は端同士が隣接するので、A=0,B=0,D=0が固定され¬A¬B¬Dです。二つの項を論理和で結びます。",
+      "choiceReasons": [
+        "AB¬CDは中央の四つの1を覆えず、¬B¬DはAB=10の0まで1にします。",
+        "¬A¬B¬C¬Dは上段CD=10の1を覆えません。",
+        "ウはAB・D+¬B・¬Dです。AB・DはAB=01行のD=1の二つの1を覆えず、¬B・¬DはAB=10行のCD=00,10の0まで1にします。",
+        "中央の四つと上段両端の二つを、余分な0を含まず覆います。"
+      ],
+      "takeaway": "カルノー図では端も隣接し、グループで変化する変数は項から消える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "中央の四つの1と上段の左右端の1を別々に囲んでみましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "中央の囲みはAB=01,11行とCD=01,11列です。AとCは0/1に変わるので項から消し、固定される文字を拾います。上段の左右端も隣接して一組です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "中央はB=D=1、上段両端はA=B=D=0です。固定値が1の変数はそのまま、0の変数は否定にして論理積で結び、二つのまとまりを論理和にします。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "カルノー図の端の隣接と、変化する変数の消去を知らない。",
+      "stages": [
+        {
+          "newInformation": "中央4個と上段左右端2個に分ける方針",
+          "remainingWork": "各まとまりで一定の変数を探す",
+          "revealsAnswer": false,
+          "reason": "グループは示すが項の構成が残る。"
+        },
+        {
+          "newInformation": "中央でA,Cが変化することと端同士の隣接",
+          "remainingWork": "B,Dと上段の固定値を読み取る",
+          "revealsAnswer": false,
+          "reason": "具体的な正答項は示さず固定値の読み取りが必要。"
+        },
+        {
+          "newInformation": "中央と上段の固定値、および値1は変数そのまま・値0は否定として項を作る規則",
+          "remainingWork": "否定と論理積・論理和の形に対応させる",
+          "revealsAnswer": true,
+          "reason": "正答の二項をそのまま値条件で言い換えているのでtrue。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r04a/r04a-q2.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原図の1はABCD=0000,0010,0101,0111,1101,1111。16通りの全数照合でエのみ一致。上段左右端が隣接しCが消える。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a2a2da8e93be7eb5a8c7a2fb87361dfafabe82b9aacbbb1ac4cc0b268ada912e",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q1",
+      "summary": "カルノー図の中央と端のまとまりを、余分な0を含めずに論理式へ変換する。",
+      "explanation": "カルノー図の行と列は00,01,11,10の順です。中央の1がある4マスではB=1、D=1が共通で、AとCは変化するのでB・Dです。\nAB=00の左右端にある二つの1は、端同士が隣接します。A=0、B=0、D=0が共通でCは変化するのでĀ・B̄・D̄。二つのまとまりの論理和が答えです。",
+      "choiceReasons": [
+        "第1項がA=1に限定され、AB=01の中央の1を表せません。第2項もA=1の行に余分な1を作ります。",
+        "Ā・B̄・C̄・D̄ではAB=00,CD=10の1が抜けます。",
+        "A・B・DではAB=01の中央の1が抜け、B̄・D̄はAB=10に余分な1を作ります。",
+        "Ā・B̄・D̄が上段の左右端、B・Dが中央4マスに一致します。"
+      ],
+      "takeaway": "隣接する1をまとめ、まとまり内で変わる変数を消す。左右端も隣接する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "中央のAB=01,11とCD=01,11でできる2×2の1を先にまとめます。カルノー図は隣り合う行・列で1変数だけが変化する順序です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "まとまりの中で変化する変数は、0でも1でもよいので項から外します。中央の4マスではAとCが変化します。固定されるBとDの値を確認しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "上段のCD=00と10も端をまたいで隣接します。共通するA,B,Dの値を調べます。値が0の変数は否定、1の変数はそのまま論理積にし、中央の項と論理和で結びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "行列順00,01,11,10と端をまたぐ隣接を通常の表の順序と誤解する。",
+      "stages": [
+        {
+          "newInformation": "中央2×2の範囲と、隣接で1変数だけ変化する順序",
+          "remainingWork": "まとまり内の共通変数を読む",
+          "revealsAnswer": false,
+          "reason": "範囲を示すが論理項は未提示。"
+        },
+        {
+          "newInformation": "変化する変数を消す規則と、中央で消えるA,C",
+          "remainingWork": "固定されるB,Dの値を読む",
+          "revealsAnswer": false,
+          "reason": "残る値を本人が図から読み、式へ変換する。"
+        },
+        {
+          "newInformation": "端をまたぐ隣接と、0を否定・1をそのまま項にする規則",
+          "remainingWork": "上段の固定値を読み二つの項を作る",
+          "revealsAnswer": false,
+          "reason": "正答項の値を渡さず、図の読み取りと式の構成が残る。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r07a/r07a-q1.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "r04a-q2と同じ原図だが本画像も個別に確認。中央4セルがBD、上段左右端が¬A¬B¬D。全16入力で正答エ、他肢には欠落/余分な1あり。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a88e6fe158e00db44e2b3c9f1dfa05b4a89e69630a67f1d149d1a0d2bed06d5d",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q3",
+      "summary": "ディープラーニングの処理構造を、ルールによる推論やデータ分析一般と区別する。",
+      "explanation": "ディープラーニング（深層学習）は、脳の神経回路を参考にした数理モデルであるニューラルネットワークを多層にし、データから層の結合の重みなどを学習する方法です。画像なら線や輪郭から物体の特徴へ、層を通じて表現を組み合わせるため、多層の処理を重ねるアが最も適切です。\n大量データの分析全般や、人が記述した規則に従う推論を指す言葉ではありません。",
+      "choiceReasons": [
+        "アは多層の処理を重ねるニューラルネットワークの特徴を述べています。",
+        "イは規則・仮説を見つけるデータ分析の説明で、多層ネットワークの学習を示していません。外れ値の除去も必須ではありません。",
+        "ウは複数の分析手法の組合せであり、ディープラーニングを特定する説明ではありません。",
+        "エは知識をルールで表し演繹する方式です。データから多層ネットワークの重みを学習する方式とは異なります。"
+      ],
+      "takeaway": "深層学習を識別する手掛かりは、ニューラルネットワークの多層構造とデータからの学習。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各候補が説明する処理を、「多層の処理」「例外事項の除去」「分析手法の組合せ」「ルールによる推論」に分けます。まず学習モデルの仕組みを比べましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ディープラーニングは、多層のニューラルネットワーク（脳の神経回路を参考にした数理モデル）で、層の結合の重みをデータから学習する方法です。画像では輪郭から形へと特徴を段階的に組み合わせます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "人が決めたルールから演繹する方式と、学習で調整した層を重ねる方式は異なります。「多層の処理を重ねる」という構造が、設問の深層学習に対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "深層の意味とニューラルネットワークが未知で、分析一般との違いを判断できない。",
+      "stages": [
+        {
+          "newInformation": "四つの候補の処理構造を分類する比較軸",
+          "remainingWork": "どの仕組みが深層学習か考える",
+          "revealsAnswer": false,
+          "reason": "列挙・分類だけで名称との対応は渡さない。"
+        },
+        {
+          "newInformation": "多層ニューラルネットワークと重みの学習という定義",
+          "remainingWork": "定義と肢を照合する",
+          "revealsAnswer": true,
+          "reason": "多層処理というアの説明を具体化して渡す。"
+        },
+        {
+          "newInformation": "ルールの演繹と学習された多層構造の違い",
+          "remainingWork": "学習構造の違いを確認する",
+          "revealsAnswer": true,
+          "reason": "アの決め手を明示し、H2でも開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r06h/r06h-q3.webp。本文・全4肢・図/数式をcontextの公式答え（ア）と照合。",
+        "原本アの多層処理、イの外れ値除去、ウの三段論法等の組合せ、エの演繹を確認。多層ネットワークのアが最適。外れ値除去を深層学習の必須条件にしない。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7f58033e46435f4ab3cfa73aeacfa40b60371a1d9a1e4658f162fdfaf32ecdf2",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q4",
+      "summary": "ドップラー効果で捉える物理現象を、医療用センサーの測定対象と結び付ける。",
+      "explanation": "ドップラー効果は、波の送信源と観測対象の相対運動によって観測周波数が変わる現象です。超音波を血液に当てると、移動する血球からの反射波に周波数差が生じます。この差から血流速度を求め、血管断面積と組み合わせて血流量を求められるのでウです。",
+      "choiceReasons": [
+        "血中酸素飽和度は酸化・還元ヘモグロビンの光吸収の違いなどを利用します。",
+        "血糖値はグルコースの濃度で、対象の移動による周波数差から求める量ではありません。",
+        "移動する血球の反射波の周波数差から血流速度、さらに血流量を求められます。",
+        "体内水分量は電気インピーダンスなどを利用し、移動する対象の速度の測定ではありません。"
+      ],
+      "takeaway": "ドップラー効果を見たら、対象の動きと反射波の周波数差を結び付ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの測定対象のうち、体内で何かが移動することと結び付く量を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ドップラー効果では、動く対象から返る波の周波数が変わります。濃度や含有率の測定との違いを確認します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "血球からの反射波の差で速度を測り、速度×血管断面積で流量を求める場面に当てはめます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ドップラー効果が濃度でなく対象の運動による周波数変化を扱うことを知らない。",
+      "stages": [
+        {
+          "newInformation": "四つの測定量を移動との関係で比較する軸",
+          "remainingWork": "どの測定が動きと結び付くか考える",
+          "revealsAnswer": false,
+          "reason": "比較軸だけで、周波数差や測定対象を特定しない。"
+        },
+        {
+          "newInformation": "運動により反射波の周波数が変わり、濃度/含有率とは違う仕組み",
+          "remainingWork": "肢と物理現象を対応させる",
+          "revealsAnswer": true,
+          "reason": "H1と合わせ、濃度・含有量の三肢を排除し流量だけを残すのでtrue。"
+        },
+        {
+          "newInformation": "血球の反射波→速度、速度×断面積→流量という関係",
+          "remainingWork": "流量と肢を照合する",
+          "revealsAnswer": true,
+          "reason": "血流量の計測手順を示し答えを開示。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r05h/r05h-q4.webp。本文・全4肢・図/数式をcontextの公式答え（ウ）と照合。",
+        "原本四肢を確認し公式ウと一致。周波数差からまず速度、断面積と合わせて流量を求める区別を保持。酸素飽和度は光吸収、糖は濃度、水分量はインピーダンス等で相違。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5dc8912789435b18edbc48abb2c46bfb3db0ea4bb2cf0c171ff622fe6fa31588",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q1",
+      "summary": "接線とx軸の交点で近似値を更新する、非線形方程式の解法を見分ける。",
+      "explanation": "点(x₀,f(x₀))の接線はy=f(x₀)+f′(x₀)(x−x₀)です。y=0としてxを解くと、次の近似値はx₀−f(x₀)/f′(x₀)になります。この更新を繰り返す手法がニュートン法です。導関数が0になる場合などには、そのまま更新できない点にも注意します。",
+      "choiceReasons": [
+        "微分方程式の数値解法で、傾きから一定刻み先の値を求めます。",
+        "連立一次方程式を消去操作によって解く方法です。",
+        "定積分を放物線による近似で求める方法です。",
+        "非線形方程式の解を、接線とx軸の交点で逐次近似する方法です。"
+      ],
+      "takeaway": "接線を利用する零点の反復近似はニュートン法。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "手順②の接線と、手順③のx軸との交点に注目し、接線の式を立てます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "接線の式y=f(x₀)+f′(x₀)(x−x₀)にy=0を代入すると、次のxを求められます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "更新式x次=x₀−f(x₀)/f′(x₀)を使うのがニュートン法です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "接線による逐次更新と、積分・微分方程式・連立一次方程式の解法を混同する。",
+      "stages": [
+        {
+          "newInformation": "接線とx軸の交点を使うこと",
+          "remainingWork": "接線の式を考える",
+          "revealsAnswer": false,
+          "reason": "原問の特徴を焦点化し解法名はまだ与えない。"
+        },
+        {
+          "newInformation": "接線の式とy=0の代入",
+          "remainingWork": "次の近似値の式を導く",
+          "revealsAnswer": false,
+          "reason": "計算手順を教えるが名称の対応は渡さない。"
+        },
+        {
+          "newInformation": "更新式とニュートン法という名称の対応",
+          "remainingWork": "名称を肢と照合する",
+          "revealsAnswer": true,
+          "reason": "エの名称を明示。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r03a/r03a-q1.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原本手順(1)〜(3)と終了条件を確認。接線y=f(x0)+f′(x0)(x−x0)からy=0としてx=x0−f/f′を導出しエ。f′=0で更新できない注意も正当。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "cf84daa5634b7ba1a5dc51001129d83a690663b8dd76269fcb20edc263e4818e",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q4",
+      "summary": "ハミング符号の検査式の不一致から、1ビットの誤り位置を特定する。",
+      "explanation": "受信語1110011をX₁X₂X₃P₃X₄P₂P₁に割り当てると、X₁=X₂=X₃=1、P₃=X₄=0、P₂=P₁=1です。三つの検査式は全て排他的論理和が1になり、不一致です。三つ全てに含まれるビットはX₁だけなので、X₁を1から0へ反転します。0110011なら三つの式が全て0になります。",
+      "choiceReasons": [
+        "X₁を反転した0110011は三つの検査式を全て満たします。",
+        "X₂の反転ではX₁⊕X₃⊕X₄⊕P₁の不一致が残ります。",
+        "X₃の反転ではX₁⊕X₂⊕X₄⊕P₂の不一致が残ります。",
+        "X₄の反転ではX₁⊕X₂⊕X₃⊕P₃の不一致が残ります。"
+      ],
+      "takeaway": "ハミング符号は不一致になった検査式の組合せから、共通する誤りビットを特定する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1110011の各桁を、問題文のX₁X₂X₃P₃X₄P₂P₁の順に書き写しましょう。P₃の位置を取り違えないことが重要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "排他的論理和は、1の個数が奇数なら1、偶数なら0になります。各検査式が0になる偶数パリティなので、1なら不一致です。第1式に1⊕1⊕0⊕1を入れ、残り2式も検査し、不一致の式に共通するビットを探します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "三つの検査式が全て1になります。全てに共通するX₁を反転して、0110011で再検査します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "符号語の途中にあるP3の位置とXORの偶奇判定を取り違える。",
+      "stages": [
+        {
+          "newInformation": "X1X2X3P3X4P2P1の配置を確認する手順",
+          "remainingWork": "各桁を三つの式に代入する",
+          "revealsAnswer": false,
+          "reason": "誤り位置や検査結果はまだ示さない。"
+        },
+        {
+          "newInformation": "XORの偶奇と、不一致式の共通ビットを探す手順",
+          "remainingWork": "三式を計算し共通する桁を特定する",
+          "revealsAnswer": false,
+          "reason": "第1式の途中式だけで、全検査と位置特定が残る。"
+        },
+        {
+          "newInformation": "三式全不一致、共通X1を反転する具体的訂正",
+          "remainingWork": "訂正後の再検査を行う",
+          "revealsAnswer": true,
+          "reason": "アの最終符号語を直接渡す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r04h/r04h-q4.webp。本文・全4肢・図/数式をcontextの公式答え（ア）と照合。",
+        "原本のP3が4桁目である配置と全3式を確認。1110011の検査は(1,1,1)。X1反転後0110011は(0,0,0)、イは(1,0,0)、ウは(0,1,0)、エは(0,0,1)。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e0c1d4a51c3565454ab01ec593ae4858100bec35af808c2fb10ebbb27abffc34",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q4",
+      "summary": "mod 2の検査結果を重み付きで合成し、ハミング符号の誤り位置を求める。",
+      "explanation": "1000101を左からx₁〜x₇へ割り当てると(1,0,0,0,1,0,1)です。\nc₀=(1+0+1+1) mod 2=1、c₁=(0+0+0+1) mod 2=1、c₂=(0+1+0+1) mod 2=0。i=1+1×2+0×4=3です。\n左から3番目の0を1に変え、1010101となるエを選びます。右から数えたり、検査結果をそのまま書き換えたりしません。",
+      "choiceReasons": [
+        "アは左から5ビット目を反転しています。求めた位置i=3と異なります。",
+        "イは受信した符号語のままです。検査結果に1があるので訂正が必要です。",
+        "ウは左から4ビット目を反転しています。重み1・2・4で求める位置は3です。",
+        "エは左から3ビット目だけを反転した1010101です。"
+      ],
+      "takeaway": "mod 2の和は偶奇で求め、検査結果に1・2・4の重みを付けて誤り位置を出す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1000101を左からx₁=1、x₂=0、…と割り当てます。添字は左から数える指定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "各検査式の和を2で割った余りにします。例えばc₀はx₁+x₃+x₅+x₇=1+0+1+1です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "c₁は0+0+0+1、c₂は0+1+0+1です。三つの余りをi=c₀+2c₁+4c₂へ代入し、該当する一桁だけ反転しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "mod 2と検査値の重みを知らず、右から誤り位置を数える。",
+      "stages": [
+        {
+          "newInformation": "左から添字を割り当てる指定",
+          "remainingWork": "x1〜x7へ符号語を対応させる",
+          "revealsAnswer": false,
+          "reason": "順序の確認で、誤り位置は示さない。"
+        },
+        {
+          "newInformation": "mod 2は2で割った余り、c0への代入",
+          "remainingWork": "c0と残る検査値を計算する",
+          "revealsAnswer": false,
+          "reason": "一検査の途中式のみで、位置は未計算。"
+        },
+        {
+          "newInformation": "c1,c2への代入と重み1,2,4での位置計算手順",
+          "remainingWork": "三つの余りとiを求め一桁を反転する",
+          "revealsAnswer": false,
+          "reason": "最終検査値・位置・符号語を示さず計算が残る。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r06h/r06h-q4.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原本の左からiビット目の指定を確認。受信1000101の(c0,c1,c2)=(1,1,0)、i=3、訂正1010101(エ)の検査値は全0。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q4",
+    "baseVersion": 2,
+    "baseLessonSHA256": "efd0a8ca452268afc1fcdede695f01b61918d9855f51de87830e5b69217066e2",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q4",
+      "summary": "組込みシステムのリアルタイム性について、応答時間の要件を判断する。",
+      "explanation": "リアルタイム性は、入力に対して要求された時間内に応答できる性質です。例えば制御信号を10ミリ秒以内に返すという要求なら、その期限を守ることが必要なのでイです。\nOS（Operating System：基本ソフトウェア）を使うか、入力順を守るか、時刻を保存するかは実装上の事項で、それだけでは応答期限を保証しません。",
+      "choiceReasons": [
+        "リアルタイムOSを利用して期限を守る実装もあります。OSを使わないことは必須条件ではありません。",
+        "定められた制限時間内に応答することが、リアルタイム性の要件です。",
+        "入力順を守っても、期限を過ぎれば要求を満たしません。",
+        "時刻の記録だけでは、応答が間に合うことを保証できません。"
+      ],
+      "takeaway": "リアルタイムは「応答の速さの印象」ではなく、要求された期限を守る性質。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「入力から10ミリ秒以内に応答する」という制御を想像しましょう。必要なのは、応答がその期限に間に合うことです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "OS（基本ソフトウェア）の有無・処理順・時刻記録を決めても、応答の完了時刻が期限内かは別に確認する必要があります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "期限が10ミリ秒なら、9ミリ秒後の応答は期限内です。入力時刻を正確に記録していても、11ミリ秒後の応答では期限を満たしません。記録の有無ではなく、応答した時点を期限と比べます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "リアルタイムを即時、入力順、OSの有無と混同する。",
+      "stages": [
+        {
+          "newInformation": "10ms以内という例と、期限内に間に合う要件",
+          "remainingWork": "要件と肢を対応させる",
+          "revealsAnswer": true,
+          "reason": "制限時間内の応答というイの定義をすでに教えるのでtrue。"
+        },
+        {
+          "newInformation": "OS/処理順/時刻記録だけでは期限保証にならないこと",
+          "remainingWork": "期限の要件を確認する",
+          "revealsAnswer": true,
+          "reason": "他三肢を除外し、H1でも開示済み。"
+        },
+        {
+          "newInformation": "期限10msに対して応答9msは適合、時刻を記録しても応答11msは不適合という具体例",
+          "remainingWork": "時刻記録と応答期限の違いを肢と照合する",
+          "revealsAnswer": true,
+          "reason": "期限内応答という正答の具体例であり、H1でも正答を開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r07h/r07h-q4.webp。本文・全4肢・図/数式をcontextの公式答え（イ）と照合。",
+        "原本は「最も適切」。OS不使用、入力順、入力時刻記録はいずれも期限の保証でない。制限時間内応答のイを確認。既存H1から正答の言い換えだったため全段trueへ訂正。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "15e3c0e9e8f028b95b445e7702ae0b56ea39ad6a0e039b58f5fd69291642fec7",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q2",
+      "summary": "多変量データの分析目的を比べ、主成分分析に対応する説明を見分ける。",
+      "explanation": "主成分分析は、元の変数の線形結合から新しい変数である主成分を作ります。データのばらつきを多く表す少数の主成分を使い、多数の変数がもつ情報をできるだけ残して変数の数を減らします。\n背後の共通要因を推定することや、目的変数を予測することとは目的が異なります。",
+      "choiceReasons": [
+        "共通して影響する潜在的な因子を求める因子分析の説明です。",
+        "ほかの変数の値を予測する回帰分析の説明です。",
+        "似たデータ同士を集めるクラスタ分析の説明です。",
+        "変数を統合して変数の数を減らすという主成分分析の目的に一致します。"
+      ],
+      "takeaway": "主成分分析は情報を要約する次元削減、因子分析は背後の共通因子の推定。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢で変化させる対象を比べます。データを集団に分けるのか、変数の数を変えるのかに注目しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "主成分は元の複数の変数を組み合わせた新しい軸です。新しい軸にデータを表すと何を減らせるか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "少数の主成分へ情報をまとめる方法です。「変数を統合」「変数の数を減らす」に対応する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "主成分分析・因子分析・回帰・クラスタ分析の目的を区別できない。",
+      "stages": [
+        {
+          "newInformation": "集団分けと変数数の変更という比較軸",
+          "remainingWork": "各候補が何を扱うか整理する",
+          "revealsAnswer": false,
+          "reason": "主成分の定義はまだ与えない。"
+        },
+        {
+          "newInformation": "主成分は元の変数を組み合わせた新しい軸という知識",
+          "remainingWork": "新しい軸で減るものと肢の対応を考える",
+          "revealsAnswer": true,
+          "reason": "変数を統合した新たな変数というエの決め手を言い換えている。"
+        },
+        {
+          "newInformation": "少数の主成分に情報をまとめる目的",
+          "remainingWork": "エの説明と照合する",
+          "revealsAnswer": true,
+          "reason": "変数統合・変数数削減を明示。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r05a/r05a-q2.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原本のアは共通因子、イは他変数の予測、ウは類似データ分類、エは変数統合による削減。主成分を線形結合として作る既存説明と公式エの一致を確認。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q1",
+    "baseVersion": 2,
+    "baseLessonSHA256": "26f750f291bd00cbd0b9e2e8b16330f66f1653ab2b6c4b3025a363d268f45640",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q1",
+      "summary": "nビットの正整数の最大値から、その平方を表すためのビット数を考える。",
+      "explanation": "nビットの正整数の最大値は2ⁿ−1です。その平方は2²ⁿ未満なので2nビット以内に収まります。n≥2なら(2ⁿ−1)²≥2²ⁿ⁻¹となり、2nビットを実際に使います。n=1だけはa=1で1ビットですが、一般の上限を表す選択肢は2nです。",
+      "choiceReasons": [
+        "n+1ではn=3のとき7²=49（6ビット）を収容できません。",
+        "nビット同士の乗算の結果を収容する上限は2nビットです。",
+        "n=3なら7²=49は6ビットです。n²=9はこの最大ビット数を表しません。",
+        "n=3なら最大の平方49は6ビットで、2ⁿ=8ビットは必要な最大値より大きすぎます。"
+      ],
+      "takeaway": "値の上限を2の累乗で挟み、ビット数を求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "nビットの全てを1にするとaが最大になります。まずn=3なら111₂=7を例に、7を平方し、その値を2進数にして桁数を数えます。同じ手順を一般のnへ広げましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "aの最大値は2ⁿ−1です。kビットでは先頭の重みが2ᵏ⁻¹、全て1でも最大2ᵏ−1なので、値は2ᵏ未満です。aの最大値を平方したものを2の累乗で挟み、必要な桁数へ結び付けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "(2ⁿ−1)²<2²ⁿです。上限の指数をビット数に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "値の大きさとビット数の関係、平方と桁数の関係を取り違える。",
+      "stages": [
+        {
+          "newInformation": "n=3の最大値111₂を使う具体例",
+          "remainingWork": "平方し2進数の桁を数える",
+          "revealsAnswer": false,
+          "reason": "計算結果を与えず、一般の答えも渡さない。"
+        },
+        {
+          "newInformation": "最大値2ⁿ−1と、kビットの値が2ᵏ未満となる関係",
+          "remainingWork": "最大値を平方して累乗の上限へ結び付ける",
+          "revealsAnswer": false,
+          "reason": "一般則は教えるが平方の計算・桁数の判断が残る。"
+        },
+        {
+          "newInformation": "平方の上限が2²ⁿである不等式",
+          "remainingWork": "上限指数と桁数を照合する",
+          "revealsAnswer": true,
+          "reason": "問いの最大ビット数2nを上限の指数で直接渡していると保守的に判定。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r04a/r04a-q1.webp。本文・全4肢・図/数式をcontextの公式答え（イ）と照合。",
+        "原画像のn+1,2n,n²,2ⁿを照合。n=3で7²=49=110001₂、6ビット。n=1は最大1ビットという境界例は既存解説で保持。n≥2では(2ⁿ−1)²≥2²ⁿ⁻¹、上限2nが達する。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q2",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2fef21c150ba1793f1cf5be3d2330962007101f5db0d814a37cc18273228466e",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q2",
+      "summary": "教師あり学習での交差検証を、モデルの調整方法や複数モデルの学習と区別する。",
+      "explanation": "交差検証は、限られたデータで未知のデータへの性能（汎化性能）を評価する方法です。データを複数のグループに分け、学習用と評価用の役割を順に入れ替えて、学習と評価を繰り返すのでエです。例えば5分割なら、4組で学習・残る1組で評価する処理を、評価する組を替えて5回行います。\nペナルティでモデルの複雑さを抑えるのは正則化、複数モデルを組み合わせるのはアンサンブル学習、関連課題を一緒に学ぶのはマルチタスク学習です。",
+      "choiceReasons": [
+        "複雑さのペナルティ項を加えるのは正則化で、評価データを入れ替える交差検証とは異なります。",
+        "複数のモデルの結果を組み合わせるのはアンサンブル学習です。",
+        "一つのモデルで関連する複数課題を学ぶのはマルチタスク学習です。",
+        "データのグループを順に学習用・評価用へ割り当て直して汎化性能を評価するので、交差検証です。"
+      ],
+      "takeaway": "何を入れ替えるかで識別する。交差検証はデータの学習用・評価用の役割を替える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「汎化性能を高める」と「汎化性能を評価する」を区別します。この問いでは、モデルの調整方法ではなく評価手順を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えばデータを5組に分けると、1組を評価に、4組を学習に使えます。評価用を別の組へ替えて同じ手順を行う意味を考えましょう。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ペナルティ項は正則化、複数モデルの組合せはアンサンブル、複数課題の同時学習はマルチタスクです。残る、データのグループを入れ替える記述が交差検証です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "汎化性能の評価と性能を高める学習手法を混同し、未知語で止まる。",
+      "stages": [
+        {
+          "newInformation": "モデルの調整でなく汎化性能の評価を探す分類軸",
+          "remainingWork": "評価を述べる肢と照合する",
+          "revealsAnswer": true,
+          "reason": "四肢では汎化性能を評価すると述べるのがエのみなので、H1から特定する。"
+        },
+        {
+          "newInformation": "5組で4組学習・1組評価し評価組を替える具体的手順",
+          "remainingWork": "文章の手順と肢を照合する",
+          "revealsAnswer": true,
+          "reason": "エの説明と実質同じ手順を渡す。"
+        },
+        {
+          "newInformation": "正則化・アンサンブル・マルチタスクの名称と他肢の対応",
+          "remainingWork": "交差検証との区別を確認する",
+          "revealsAnswer": true,
+          "reason": "他三肢を全て除外し、正答を明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r06a/r06a-q2.webp。本文・全4肢・図/数式をcontextの公式答え（エ）と照合。",
+        "原本のアはペナルティ、イは複数モデル、ウは複数課題、エは分割・入替。公式エ。H1は語を知らなくても「評価する」の選択肢を唯一にするためtrueへ変更。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q3",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8f6a4dea59ca8f1dc2aa75a4b8e1ca7cd8782261fb54a2f3c544c55ffbc1efe5",
+    "author": "Codex /root/ap_wave01_author_1",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q3",
+      "summary": "窓口の利用率の変化から、M/M/1の平均待ち時間の比を求める。",
+      "explanation": "M/M/1は到着間隔とサービス時間がそれぞれ指数分布に従う、窓口一つの待ち行列モデルです。サービス時間を含まない平均待ち時間Wqは、平均サービス時間をTs、利用率（窓口が処理中の時間割合）をρとしてWq=ρTs/(1−ρ)です。\n本問ではTsが変わらないとして、新旧の待ち時間の比は{0.40/(1−0.40)}/{0.25/(1−0.25)}=(2/3)/(1/3)=2。したがってウの2.00倍です。利用率の比だけでは、混雑による非線形な増加を表せません。",
+      "choiceReasons": [
+        "1.25は、サービス時間を含む系内時間Ts/(1−ρ)の比0.75/0.60です。問われたサービス時間を除く待ち時間の比ではありません。",
+        "1.60倍は0.40/0.25という利用率の比であり、待ち時間の比ではありません。",
+        "0.40/0.60を0.25/0.75で割ると2.00で、正しい比です。",
+        "3.00倍は計算結果と一致しません。利用率25%時はTs/3、40%時は2Ts/3です。"
+      ],
+      "takeaway": "M/M/1の待ち時間比較はρ/(1−ρ)を比べ、共通のサービス時間を消す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "25%と40%を0.25と0.40へ直します。求めるのは利用率の増加率ではなく、列で待つ時間の比です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "旧値は0.25/0.75=1/3、新値は0.40/0.60=2/3です。新値を旧値で割ると2です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "待ち時間も利用率の比40/25で増えると誤認し、公式が出てこない。",
+      "stages": [
+        {
+          "newInformation": "百分率の小数化と求める比の対象",
+          "remainingWork": "待ち時間の式を用意する",
+          "revealsAnswer": false,
+          "reason": "最終の比や公式はまだ渡さない。"
+        },
+        {
+          "newInformation": "Wq=ρTs/(1−ρ)と共通Tsを消す比の手順",
+          "remainingWork": "各利用率を代入し新値/旧値を計算する",
+          "revealsAnswer": false,
+          "reason": "一般式と一部代入のみで、二つの値と比の計算が残る。"
+        },
+        {
+          "newInformation": "旧1/3と新2/3、比2という計算結果",
+          "remainingWork": "単位なしの倍数として肢を照合する",
+          "revealsAnswer": true,
+          "reason": "ウの最終数値を直接渡す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "view_imageで実際に開いた原本: assets/questions/r04h/r04h-q3.webp。本文・全4肢・図/数式をcontextの公式答え（ウ）と照合。",
+        "原本25%→40%、肢1.25/1.60/2.00/3.00を確認。サービス時間一定の解釈で(0.4/0.6)/(0.25/0.75)=2、公式ウ。利用率比1.6と区別。",
+        "補助の外部一次資料は使用していない。作者による原本照合と解き直しであり、独立レビューや初学者による試用は未実施。"
+      ]
+    }
+  }
+]

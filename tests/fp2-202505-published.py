@@ -84,7 +84,8 @@ try:
      key=it['id']+'--'+f['id'];selector=f'[data-written-key="{key}"]'
      if f['type']=='singleChoice':
       ch=next(ch for ch in f['choices'] if ch['label']==f['referenceAnswers'][0])
-      pg.locator('input'+selector+f'[value="{ch["id"]}"]').check()
+      choice=pg.locator('input'+selector+f'[value="{ch["id"]}"]')
+      choice.locator('..').click();assert choice.is_checked()
      else:pg.locator('input'+selector).fill(f['referenceAnswers'][0])
     if len(it['fields'])>1:pg.locator('[data-action=written-check-item]').click()
     else:pg.locator('[data-action=written-submit]').click()

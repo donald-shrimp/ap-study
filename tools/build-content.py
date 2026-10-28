@@ -307,6 +307,10 @@ def compile_learning_tools(root, config, questions, directory):
     result = {}
     by_id = {q['id']: q for q in questions}
     raw_by_id = {q['id']: q for q in json.loads((root / config['questionSource']).read_text())}
+    legacy_hashes = {}
+    if config.get('adapter') == 'ipa-ap' and (root / 'work/ap/objective-quality/manifest.json').is_file():
+        from ap_lesson_quality import legacy_classification_hashes
+        legacy_hashes = legacy_classification_hashes(root)
     topics = {t['id'] for t in config['topics']}
     for key, source_key, format_name in [('studyContext', 'studyContextSource', 'hitomon-study-context'), ('flashcards', 'flashcardSource', 'hitomon-flashcards')]:
         if not config.get(source_key):
@@ -325,7 +329,9 @@ def compile_learning_tools(root, config, questions, directory):
             ids.add(identifier)
             if key == 'studyContext':
                 require(identifier in by_id and item.get('mode') in ['paperless', 'desk'] and isinstance(item.get('reason'), str) and 0 < len(item['reason']) <= 500, 'Invalid context classification')
-                require(item.get('sourceHash') == diagnostic_digest(raw_by_id[identifier]), 'Classification source changed: ' + identifier)
+                require(item.get('sourceHash') == diagnostic_digest(raw_by_id[identifier]) or
+                        identifier in legacy_hashes and item.get('sourceHash') == legacy_hashes[identifier],
+                        'Classification source changed: ' + identifier)
             else:
                 require(type(item.get('version')) is int and item['version'] > 0 and item.get('topicId') in topics, 'Invalid card version/topic')
                 item.setdefault('sourceNote', '')
@@ -385,7 +391,12 @@ def compile_qualification(root, id):
     source = root / config['questionSource']
     require(source.resolve().is_relative_to(root.resolve()), 'Question source is outside the repository')
     raw = json.loads(source.read_text())
+    if config.get('adapter') == 'ipa-ap' and id == 'ap':
+        from ap_lesson_quality import validate_workspace
+        validate_workspace(root)
     questions = [normalize(q, config, i+1) for i,q in enumerate(raw)]
+    from legal_context_overrides import apply_legal_context
+    apply_legal_context(root, config, raw, questions)
     by_id = {q['id']:q for q in questions}
     for q in questions:
         parent=by_id.get(q.get('parentQuestionId'))
@@ -416,7 +427,7 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     assessment=compile_assessments(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['legalContextSource', 'legalContextReviewSource', 'adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if assessment is not None:
         manifest['assessment']=assessment

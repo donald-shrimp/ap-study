@@ -1,0 +1,1387 @@
+[
+  {
+    "id": "r05h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c890a0f6ab0ba8082c76ded8cb33342e3a05f05e291ecea102519d3b0c3f42c1",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q34",
+      "summary": "OSI基本参照モデルの各層が担う役割を基に、四つの通信プロトコルを分類する問題。",
+      "explanation": "トランスポート層はアプリケーション間の通信を扱い、ポート番号で送り先の処理を識別します。UDPはコネクションを確立せずにデータグラムを届けるトランスポート層のプロトコルです。HTTPとSMTPはアプリケーション層、ICMPはIPのエラー通知や制御を担うネットワーク層なのでエです。",
+      "choiceReasons": [
+        "HTTPはWebの要求・応答を定めるアプリケーション層のプロトコルです。",
+        "ICMPはIP通信のエラー通知や制御を扱うネットワーク層のプロトコルです。",
+        "SMTPは電子メール転送を扱うアプリケーション層のプロトコルです。",
+        "UDPはポート番号を使うトランスポート層のプロトコルです。"
+      ],
+      "takeaway": "用途の通信規約と、そのデータを運ぶ層を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "アプリケーション層はWebやメールなど用途別の通信規約、ネットワーク層はIPによる配送、トランスポート層はアプリ間のデータ配送を扱います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ICMPはIP通信のエラー通知や診断を扱うためネットワーク層です。トランスポート層はポート番号を使い、同じ端末上のどのアプリへ届けるかを区別します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "UDPはコネクション確立なしでデータグラムを運ぶトランスポート層のプロトコルです。HTTPとSMTPはアプリケーション層なので、残る候補と照合します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "HTTP・ICMP・SMTP・UDPの名前は知っていても、アプリケーション層とネットワーク層、トランスポート層の役割を混同しやすい。",
+      "stages": [
+        {
+          "newInformation": "アプリケーション層はWebやメールなど用途別の通信規約、ネットワーク層はIPによる配送、トランスポート層はアプリ間のデータ配送を扱います。",
+          "remainingWork": "四つの候補が何を扱うか分類する。",
+          "revealsAnswer": false,
+          "reason": "層の機能だけを説明し、候補名の対応はまだ示さない。"
+        },
+        {
+          "newInformation": "ICMPはIP通信のエラー通知や診断を扱うためネットワーク層です。トランスポート層はポート番号を使い、同じ端末上のどのアプリへ届けるかを区別します。",
+          "remainingWork": "Web・メールのプロトコルとデータ配送のプロトコルを区別する。",
+          "revealsAnswer": false,
+          "reason": "ICMPの層を示すが、正答プロトコルは特定しない。"
+        },
+        {
+          "newInformation": "UDPはコネクション確立なしでデータグラムを運ぶトランスポート層のプロトコルです。HTTPとSMTPはアプリケーション層なので、残る候補と照合します。",
+          "remainingWork": "候補名と提示した層の対応を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "UDPの層を明示し、選択肢エを実質的に特定する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05h/r05h-q34.webp (context source SHA256: d55f55d657ae4b055dd789ef0207b04f23db620b20512b291057b0f6d5841257)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "5ffd7232e1a7ed0f29049d05617a771227dc62c010ecbe9eaa0e217f0576a3ea",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q33",
+      "summary": "ビット誤り率から、誤りを含むパケット数の期待値を近似計算する問題。",
+      "explanation": "0.0001％を確率に直すと0.000001=10⁻⁶です。1,500バイトは12,000ビットなので、1パケットの期待誤りビット数は12,000×10⁻⁶=0.012です。\n誤りがまれなため、誤りビット数と誤りパケット数をほぼ同じとして10,000×0.012=120個と近似できます。独立誤りを仮定した厳密な誤りパケット確率は1−(1−10⁻⁶)¹²⁰⁰⁰≈0.01193で、期待値約119.3も120に近い値です。",
+      "choiceReasons": [
+        "アの10はパケット内の12,000ビット分の誤り機会を正しく反映していません。",
+        "イの15は1,500をバイトのまま使った値です。ビット誤り率なので8倍します。",
+        "ウの80はパケット長1,500バイトを正しく反映した値ではありません。",
+        "エの120は1,500×8×10⁻⁶×10,000による近似値です。"
+      ],
+      "takeaway": "ビット誤り率は％を確率へ直し、パケット長もビット単位にそろえる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "0.0001％は確率にすると0.0001÷100＝0.000001（10⁻⁶）です。百分率のまま掛けないでください。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1パケットは1,500×8＝12,000ビットです。誤りが非常にまれなら、パケットに1ビット以上の誤りがある確率は約12,000×10⁻⁶です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "誤りを含むパケット数の期待値は、送信パケット数×パケット誤り確率。10,000×12,000×10⁻⁶を計算し、最も近い選択肢を選びます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "0.0001％の百分率変換と1,500バイトのビット換算を忘れ、ビット誤り率をそのままパケット誤り率として扱いやすい。",
+      "stages": [
+        {
+          "newInformation": "0.0001％は確率にすると0.0001÷100＝0.000001（10⁻⁶）です。百分率のまま掛けないでください。",
+          "remainingWork": "1パケットのビット数と誤り確率を組み合わせる。",
+          "revealsAnswer": false,
+          "reason": "単位の変換だけで最終値を出していない。"
+        },
+        {
+          "newInformation": "1パケットは1,500×8＝12,000ビットです。誤りが非常にまれなら、パケットに1ビット以上の誤りがある確率は約12,000×10⁻⁶です。",
+          "remainingWork": "送信個数を掛けて期待値に直す。",
+          "revealsAnswer": false,
+          "reason": "1パケットの近似確率を示すが、10,000個の期待値は未計算。"
+        },
+        {
+          "newInformation": "誤りを含むパケット数の期待値は、送信パケット数×パケット誤り確率。10,000×12,000×10⁻⁶を計算し、最も近い選択肢を選びます。",
+          "remainingWork": "掛け算を完了し選択肢の数値を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "式と代入まで示し、最後の数値計算は本人に残す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r06h/r06h-q33.webp (context source SHA256: f73340b972d6d00b1b5271b042e6e52c151fcac0c3f2981eab939119fdb2c6e0)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。ビット誤り率は10^-6、近似期待値120、厳密値約119.3を検算。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bab3826a275a8f9c566941e6d5280b7c3f1ee8575b4bf93bec5259f9949b6a26",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q35",
+      "summary": "パケット長とビット誤り率を用いて、誤りを含むパケットの期待個数を求める問題。",
+      "explanation": "0.0001%は百分率を100で割って0.000001=10⁻⁶です。1500バイトのパケットは12000ビットなので、誤りを含む確率はおよそ12000×10⁻⁶=0.012です。\n10000個では10000×0.012=120個。独立なビット誤りなら厳密には10000×{1−(1−10⁻⁶)¹²⁰⁰⁰}で約119.3個となり、選択肢は同じです。",
+      "choiceReasons": [
+        "10個ならパケット誤り率0.001に相当し、条件から求まる約0.012より小さ過ぎます。",
+        "15個は1500バイトを1500ビットとして扱った近似値です。",
+        "80個は12000ビットと誤り率から求める期待値に一致しません。",
+        "1パケットの誤り確率約0.012に10000個を掛けた約120個です。"
+      ],
+      "takeaway": "ビット誤り率の%を割合へ直し、パケットのビット数を掛ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ビット誤り率0.0001％を確率にすると10⁻⁶です。1バイト＝8ビットなので、パケット長もビットへ変換します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "1,500バイトは12,000ビット。独立なビット誤りならパケットに誤りがある確率は1－(1－10⁻⁶)¹²⁰⁰⁰で、誤りがまれなら12,000×10⁻⁶で近似できます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "求めるのは誤りを含むパケットの**個数**です。近似した1パケットの誤り確率に送信個数10,000を掛け、四つの数値と照合します。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "バイトとビット、百分率と確率を取り違えたり、ビットの誤り数とパケットの誤り個数を同一視したりしやすい。",
+      "stages": [
+        {
+          "newInformation": "ビット誤り率0.0001％を確率にすると10⁻⁶です。1バイト＝8ビットなので、パケット長もビットへ変換します。",
+          "remainingWork": "1パケットのビット数を求める。",
+          "revealsAnswer": false,
+          "reason": "確率・単位の準備のみ。"
+        },
+        {
+          "newInformation": "1,500バイトは12,000ビット。独立なビット誤りならパケットに誤りがある確率は1－(1－10⁻⁶)¹²⁰⁰⁰で、誤りがまれなら12,000×10⁻⁶で近似できます。",
+          "remainingWork": "確率に10,000を掛ける。",
+          "revealsAnswer": false,
+          "reason": "1パケットの確率までで期待個数は未算出。"
+        },
+        {
+          "newInformation": "求めるのは誤りを含むパケットの**個数**です。近似した1パケットの誤り確率に送信個数10,000を掛け、四つの数値と照合します。",
+          "remainingWork": "掛け算と選択肢の比較を行う。",
+          "revealsAnswer": false,
+          "reason": "最後の計算結果を直接示さず、本人が数値を求める。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07a/r07a-q35.webp (context source SHA256: 65c68fe9b7ad5dc7fc63a9fdc83dba7fddc6997464de9459efaf18768449cf49)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。ビット誤り率は10^-6、近似期待値120、厳密値約119.3を検算。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fe544c8c1c76b08a4588c8af54d92e2443e488f0e1e4be73a599e4ff615e39cf",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q35",
+      "summary": "IPv4のサブネットマスクから、ブロードキャストアドレスを作るビット演算を判断する問題。",
+      "explanation": "ブロードキャストアドレスはネットワーク部を元のままにし、ホスト部をすべて1にしたアドレスです。マスクの反転はネットワーク部が0、ホスト部が1になります。これをIPアドレスとORすると、ネットワーク部は元の値を保ち、ホスト部は1にできます。式はIP OR (NOT mask)です。",
+      "choiceReasons": [
+        "反転IPとマスクのANDではネットワーク部が反転し、ホスト部は0になります。",
+        "反転IPとマスクのORではネットワーク部がすべて1になり、ホスト部も元の反転値となります。",
+        "IPと反転マスクのANDではネットワーク部が0になり、ホスト部は元の値のままです。",
+        "IPと反転マスクのORでネットワーク部を保ち、ホスト部をすべて1にできます。"
+      ],
+      "takeaway": "ブロードキャストはネットワーク部を保存し、ホスト部を全1にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "サブネットマスクの1はネットワーク部、0はホスト部です。ブロードキャストアドレスではネットワーク部を保ち、ホスト部をすべて1にします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ビットごとのORは、相手が0なら元の値を残し、相手が1なら結果を1にします。必要なのはネットワーク部が0、ホスト部が1のビット列です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "マスクをビット反転すると、その必要なビット列になります。したがってIPアドレスと「反転したマスク」の**論理和（OR）**を取ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ネットワーク部とホスト部のビットを、AND・OR・反転のどの組合せで処理するか分からなくなる。",
+      "stages": [
+        {
+          "newInformation": "サブネットマスクの1はネットワーク部、0はホスト部です。ブロードキャストアドレスではネットワーク部を保ち、ホスト部をすべて1にします。",
+          "remainingWork": "どのビットを保存しどのビットを1にするか整理する。",
+          "revealsAnswer": false,
+          "reason": "出力条件だけで演算子は特定しない。"
+        },
+        {
+          "newInformation": "ビットごとのORは、相手が0なら元の値を残し、相手が1なら結果を1にします。必要なのはネットワーク部が0、ホスト部が1のビット列です。",
+          "remainingWork": "必要なビット列をマスクから作る方法を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "ORの性質は示すが、マスクの反転と組み合わせる操作は残る。"
+        },
+        {
+          "newInformation": "マスクをビット反転すると、その必要なビット列になります。したがってIPアドレスと「反転したマスク」の**論理和（OR）**を取ります。",
+          "remainingWork": "提示された演算式と選択肢を対応させる。",
+          "revealsAnswer": true,
+          "reason": "反転マスクとIPのORを指定し、エの内容を開示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r03a/r03a-q35.webp (context source SHA256: 700f537635c8aedb2c0af236e2fe4c00607161d5445b7cb9e95c21b341cfba6e)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b5b63868ff75a4d87f899e76da3bac401d24119d00246e14ab657a55e92c3e90",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q34",
+      "summary": "IPv4のCIDRプレフィックス長から、サブネットで利用可能なホストアドレス数を計算する問題。",
+      "explanation": "IPv4は32ビットです。/28ではネットワーク部が28ビットなので、ホスト部は32−28=4ビットです。アドレス数は2⁴=16で、ネットワークアドレス192.168.30.32とブロードキャストアドレス192.168.30.47を除くと、ホストに使えるのは.33〜.46の14個です。",
+      "choiceReasons": [
+        "16個からネットワークとブロードキャストの2個を除き、14台に割り当てられます。",
+        "16はサブネット全体のアドレス数で、予約される2個を除いていません。",
+        "28はプレフィックス長であり、ホスト数ではありません。",
+        "30はホスト部5ビットの/27の場合のホスト数です。本問は/28です。"
+      ],
+      "takeaway": "IPv4の通常のサブネットではホスト数=2^(32−プレフィックス長)−2。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "IPv4アドレスは32ビットで、/28はネットワーク部が28ビットという意味です。ホスト部は32－28ビットです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ホスト部がhビットならアドレス総数は2^hです。通常のサブネットでは全0のネットワークアドレスと全1のブロードキャストアドレスを除くため、2^h－2個を使えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この問題ではh＝4なので、2⁴－2を計算します。サブネットの開始値.32はホスト数の計算に直接は不要です。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "/28をホスト部28ビットと誤解したり、ネットワーク・ブロードキャストの2アドレスを引き忘れたりする。",
+      "stages": [
+        {
+          "newInformation": "IPv4アドレスは32ビットで、/28はネットワーク部が28ビットという意味です。ホスト部は32－28ビットです。",
+          "remainingWork": "ホスト部のビット数を求める。",
+          "revealsAnswer": false,
+          "reason": "ホスト部を求める手順のみ。"
+        },
+        {
+          "newInformation": "ホスト部がhビットならアドレス総数は2^hです。通常のサブネットでは全0のネットワークアドレスと全1のブロードキャストアドレスを除くため、2^h－2個を使えます。",
+          "remainingWork": "h=4を式に代入する。",
+          "revealsAnswer": false,
+          "reason": "公式は示すが数値結果は未計算。"
+        },
+        {
+          "newInformation": "この問題ではh＝4なので、2⁴－2を計算します。サブネットの開始値.32はホスト数の計算に直接は不要です。",
+          "remainingWork": "2の4乗から2を引いて選択肢を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "式の代入までで、最終の個数は学習者が計算する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r04h/r04h-q34.webp (context source SHA256: 13bda111ad07d512974115e1e061fd98a4505461131c233fac7231f389af6340)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q34",
+    "baseVersion": 2,
+    "baseLessonSHA256": "acae6bc2d8c7cdf9468dbba64ba169ba42c350d4ffdaaa68f9054fc01765f73f",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q34",
+      "summary": "IPアドレスとサブネットマスクから、ホスト部だけを抽出するビット演算を選ぶ問題。",
+      "explanation": "サブネットマスクmの1はネットワーク部、0はホスト部です。mを反転するとホスト部だけが1になるので、IPアドレスaとANDを取ればネットワーク部を0にしてホスト部だけ残せます。例えば末尾がa=00001010,m=00000000なら末尾10が残ります。",
+      "choiceReasons": [
+        "~a & mは反転したアドレスのネットワーク部を抽出してしまいます。",
+        "~a | mはマスクのネットワーク部を全て1にし、ホスト部も反転します。",
+        "a & ~mはホスト部のビットだけ残すので正しいです。",
+        "a | ~mはホスト部を全て1にし、元のホストアドレスを取り出せません。"
+      ],
+      "takeaway": "取り出す位置を1にしたマスクとANDする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "サブネットマスクmはネットワーク部が1、ホスト部が0です。欲しいホスト部だけを残すには、逆にホスト部が1のマスクが必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ビットAND（&）は、相手が1の場所では元のビットを残し、0の場所では結果を0にします。元のIPアドレスaを反転してはいけません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "mを反転した~mはホスト部が1になります。元のaと~mのAND、すなわち**a & ~m**がホスト部を取り出す式です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ホスト部を抽出する処理と、ホスト部を全1にするブロードキャストの処理を混同しやすい。",
+      "stages": [
+        {
+          "newInformation": "サブネットマスクmはネットワーク部が1、ホスト部が0です。欲しいホスト部だけを残すには、逆にホスト部が1のマスクが必要です。",
+          "remainingWork": "必要な抽出用マスクを考える。",
+          "revealsAnswer": false,
+          "reason": "マスクの意味のみで式を確定していない。"
+        },
+        {
+          "newInformation": "ビットAND（&）は、相手が1の場所では元のビットを残し、0の場所では結果を0にします。元のIPアドレスaを反転してはいけません。",
+          "remainingWork": "ANDかつ元のaを反転しない条件に合う唯一の式を確認し、次段で反転マスクの仕組みを確認する。",
+          "revealsAnswer": true,
+          "reason": "第1段と合わせてANDを使い元のaを反転しないと教えるため、~aを使うア・イとORを使うエを除外でき、a & ~mのウだけが残る。"
+        },
+        {
+          "newInformation": "mを反転した~mはホスト部が1になります。元のaと~mのAND、すなわち**a & ~m**がホスト部を取り出す式です。",
+          "remainingWork": "示された式を選択肢に対応させる。",
+          "revealsAnswer": true,
+          "reason": "正答の式そのものを提示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r03h/r03h-q34.webp (context source SHA256: ca075e8011cd0abbc0c7012efa45ce2fb9d48e508f2e89da2d27200c5351eae6)",
+        "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、H2 false→true / design同期 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0fe4f2af8dd31c73d531378b287f0bcbab5feea04b614e92bd97430f8aaee4d8",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q35",
+      "summary": "ブロードキャスト・ユニキャスト・マルチキャストの宛先範囲を、具体的なプロトコル利用例から区別する問題。",
+      "explanation": "マルチキャストは特定のグループに属する相手への送信です。RIP-2はIPv4のマルチキャストアドレス224.0.0.9を使い、RIP-2のルータへ経路更新を送信します。\nIPv4のDHCPによる初期取得やARP要求はブロードキャストが基本です。メーリングリストもIPマルチキャストではなくメールサーバの配送で各利用者へ届けます。",
+      "choiceReasons": [
+        "LANに初めて参加するPCのDHCP初期要求はブロードキャストを使います。",
+        "IPv4のARP要求はLAN内へブロードキャストし、該当する機器の応答を求めます。",
+        "複数の受信者へのメール配送でも、SMTP通信はIPマルチキャストにはなりません。",
+        "RIP-2ルータのグループ宛てに224.0.0.9で経路更新を送ります。"
+      ],
+      "takeaway": "複数人へ同じ内容を届けることと、IPマルチキャストを使うことは別。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ブロードキャストは同じネットワーク内の全体へ、マルチキャストは参加した特定グループへ送ります。メールの複数宛先配信が、そのままIPマルチキャストになるわけではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "DHCPの初期探索とARP要求は、宛先がまだ分からないため通常ブロードキャストです。SMTPのメーリングリストもサーバによるメール配送であり、IPマルチキャストではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "RIP-2は経路更新をIPv4マルチキャストアドレス224.0.0.9へ送ります。隣接するRIP-2ルータのグループ宛てという特徴を確認します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "「複数人へ送る」ことを全てIPマルチキャストと考え、DHCP・ARP・SMTP・RIP-2の送信方法を混同する。",
+      "stages": [
+        {
+          "newInformation": "ブロードキャストは同じネットワーク内の全体へ、マルチキャストは参加した特定グループへ送ります。メールの複数宛先配信が、そのままIPマルチキャストになるわけではありません。",
+          "remainingWork": "四つの例の宛先範囲を調べる。",
+          "revealsAnswer": false,
+          "reason": "通信方式の違いを示すが、各選択肢を確定しない。"
+        },
+        {
+          "newInformation": "DHCPの初期探索とARP要求は、宛先がまだ分からないため通常ブロードキャストです。SMTPのメーリングリストもサーバによるメール配送であり、IPマルチキャストではありません。",
+          "remainingWork": "残るRIP-2の送信方式を判断する。",
+          "revealsAnswer": true,
+          "reason": "ア・イ・ウを否定してエだけが残るため累積で正答を確定する。"
+        },
+        {
+          "newInformation": "RIP-2は経路更新をIPv4マルチキャストアドレス224.0.0.9へ送ります。隣接するRIP-2ルータのグループ宛てという特徴を確認します。",
+          "remainingWork": "RIP-2の選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "RIP-2の具体的なマルチキャスト利用例を直接教える。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05a/r05a-q35.webp (context source SHA256: 07eb38cf77818b137061fa22b71af54f2a46d964aded54da8b97d6ca3b55571c)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9eb065e0f8a5f7bc943656e21f1a9ebb39da0375a2cf1135bb42b0e5defb2dd1",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q31",
+      "summary": "リバースプロキシが通信を中継する方向と、他のネットワーク技術との違いを問う問題。",
+      "explanation": "リバースプロキシは、サーバー側の窓口としてクライアントからの要求を受け、内部のWebサーバーへ転送します。内部構成を隠したり、負荷分散などを行ったりできます。\n内部PCの外部アクセスを代行するフォワードプロキシとは、中継の方向と代理する側が逆です。",
+      "choiceReasons": [
+        "インターネット側から公開Webサーバーへの通信を中継するので正しいです。",
+        "攻撃を監視・検知する説明はIDSなどで、リバースプロキシの説明ではありません。",
+        "仮想専用ネットワークを確立するのはVPNの説明です。",
+        "内部PCのインターネット通信を代理するのはフォワードプロキシです。"
+      ],
+      "takeaway": "リバースはサーバー側の代理、フォワードはクライアント側の代理。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "プロキシは通信を中継する代理サーバです。**誰の代理か**と、要求が外部から内部へ向かうのか内部から外部へ向かうのかを分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "フォワードプロキシは社内PCなどクライアント側の代理として、インターネットへのアクセスを中継します。攻撃検知のIDSや専用網を作るVPNとは機能が異なります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "リバースプロキシは公開Webサーバ側の窓口です。インターネットの利用者からの要求を受け、内部のWebサーバへ中継します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "プロキシの『代理』がクライアント側なのか公開サーバ側なのかを取り違える。",
+      "stages": [
+        {
+          "newInformation": "プロキシは通信を中継する代理サーバです。**誰の代理か**と、要求が外部から内部へ向かうのか内部から外部へ向かうのかを分けて考えます。",
+          "remainingWork": "選択肢の通信方向を分類する。",
+          "revealsAnswer": false,
+          "reason": "代理する側をまだ指定しない。"
+        },
+        {
+          "newInformation": "フォワードプロキシは社内PCなどクライアント側の代理として、インターネットへのアクセスを中継します。攻撃検知のIDSや専用網を作るVPNとは機能が異なります。",
+          "remainingWork": "フォワード以外の中継方向を選ぶ。",
+          "revealsAnswer": true,
+          "reason": "エ・イ・ウを除外でき、アが残るため累積開示になる。"
+        },
+        {
+          "newInformation": "リバースプロキシは公開Webサーバ側の窓口です。インターネットの利用者からの要求を受け、内部のWebサーバへ中継します。",
+          "remainingWork": "正答の通信方向と選択肢を照合するだけ。",
+          "revealsAnswer": true,
+          "reason": "リバースプロキシの定義がアと一致する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07a/r07a-q31.webp (context source SHA256: 2a1e714ea2ba5642000505243df8c3991871fe264937432160cf076d8ee7ab65)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a62da628d449160c46bc46fab19f7a9b9ba2d7a111f4a850f4f8d1d03d20a02c",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q32",
+      "summary": "デフォルトゲートウェイとなるルータを冗長化するためのプロトコルを識別する問題。",
+      "explanation": "VRRP（Virtual Router Redundancy Protocol）は、複数のルータで仮想ルータを構成する冗長化プロトコルです。端末が使う仮想IPアドレスを共通にし、稼働中のルータが故障したときに他のルータが役割を引き継ぎます。\nPPPは回線接続、RARPはアドレス取得、SNMPは機器監視・管理であり、冗長な仮想ルータを構成するプロトコルではありません。",
+      "choiceReasons": [
+        "アのPPPはポイント間のデータリンク接続に使います。",
+        "イのRARPはMACアドレスからIPアドレスを得るためのプロトコルです。",
+        "ウのSNMPは機器の状態監視や管理に使います。冗長化そのもののプロトコルではありません。",
+        "エのVRRPは仮想ルータの稼働役を複数機器間で引き継ぎます。"
+      ],
+      "takeaway": "ルータの冗長化はVRRP、監視管理はSNMP。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "端末が使うデフォルトゲートウェイのルータが故障しても通信を続けるには、別のルータが同じゲートウェイの役割を引き継ぐ必要があります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "複数の物理ルータで共通の仮想IPアドレスを持つ**仮想ルータ**を構成し、稼働中のルータが故障したら別のルータへ切り替える仕組みを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この仕組みの名称はVRRP（Virtual Router Redundancy Protocol）です。SNMPは監視・管理、PPPはポイント間接続、RARPはアドレス変換に関する別の用途です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ルータの監視・管理を行うSNMPと、故障時にルータの役割を引き継ぐ冗長化プロトコルを混同する。",
+      "stages": [
+        {
+          "newInformation": "端末が使うデフォルトゲートウェイのルータが故障しても通信を続けるには、別のルータが同じゲートウェイの役割を引き継ぐ必要があります。",
+          "remainingWork": "障害時に必要な機能を考える。",
+          "revealsAnswer": false,
+          "reason": "冗長化の要件だけでプロトコル名は未提示。"
+        },
+        {
+          "newInformation": "複数の物理ルータで共通の仮想IPアドレスを持つ**仮想ルータ**を構成し、稼働中のルータが故障したら別のルータへ切り替える仕組みを考えます。",
+          "remainingWork": "四つの略語の意味を照合する。",
+          "revealsAnswer": false,
+          "reason": "仕組みを説明するが名称との対応は残る。"
+        },
+        {
+          "newInformation": "この仕組みの名称はVRRP（Virtual Router Redundancy Protocol）です。SNMPは監視・管理、PPPはポイント間接続、RARPはアドレス変換に関する別の用途です。",
+          "remainingWork": "VRRPの選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "VRRPという正答名称を直接提示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r06h/r06h-q32.webp (context source SHA256: 1d4986e2a5e3e3aaad8240329c8a3411be53b3dba6390ebdaa93ffe3ad7b6c5d)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "878ccd9dc4cf46ce3d6897b731c71c6f50200fdc676454d35a4025c60ca98c24",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q31",
+      "summary": "総データ量をビットへ換算し、伝送効率を考慮した実効速度から送信時間を計算する問題。",
+      "explanation": "総データ量は1,000バイト×1,000件=1,000,000バイトです。1バイトは8ビットなので8,000,000ビット=8Mビットです。\n伝送効率50%により実効速度は100Mビット/秒×0.5=50Mビット/秒。時間=データ量÷速度=8/50=0.16秒です。",
+      "choiceReasons": [
+        "総量1Mバイトをビットへ変換せず実効50Mビット/秒で割った値が0.02ですが、単位が一致していません。",
+        "8Mビットを公称100Mビット/秒で割ると0.08です。効率50%で速度が半分になる条件を反映していません。",
+        "8Mビット÷50Mビット/秒=0.16秒で、単位と伝送効率の両方を反映しています。",
+        "条件の総量と実効速度からは0.16秒となり、1.6秒は10倍大きい値です。"
+      ],
+      "takeaway": "伝送時間は総ビット量÷実効ビット速度。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1件1,000バイトを1,000件送るので、総量は1,000×1,000バイトです。回線速度に合わせるため1バイト＝8ビットで換算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "公称100Mビット/秒でも伝送効率が50％なら実効速度は100×0.5＝50Mビット/秒です。時間は総ビット量÷実効速度で求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "総量は8Mビット、実効速度は50Mビット/秒。8÷50の計算を行い、単位が秒になることを確かめて選択肢を選びます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "レコード長のバイトと回線速度のビット/秒をそのまま割ったり、伝送効率50％を無視したりしやすい。",
+      "stages": [
+        {
+          "newInformation": "1件1,000バイトを1,000件送るので、総量は1,000×1,000バイトです。回線速度に合わせるため1バイト＝8ビットで換算します。",
+          "remainingWork": "総データ量をビットに直す。",
+          "revealsAnswer": false,
+          "reason": "単位換算の準備だけで最終時間は示さない。"
+        },
+        {
+          "newInformation": "公称100Mビット/秒でも伝送効率が50％なら実効速度は100×0.5＝50Mビット/秒です。時間は総ビット量÷実効速度で求めます。",
+          "remainingWork": "総量と実効速度を式に代入する。",
+          "revealsAnswer": false,
+          "reason": "計算公式と効率の適用までで答えは未確定。"
+        },
+        {
+          "newInformation": "総量は8Mビット、実効速度は50Mビット/秒。8÷50の計算を行い、単位が秒になることを確かめて選択肢を選びます。",
+          "remainingWork": "8÷50を計算して選択肢と照合する。",
+          "revealsAnswer": false,
+          "reason": "数値代入までで、最終計算は学習者に残る。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05a/r05a-q31.webp (context source SHA256: 5fb40da758affbccbea97ce9906ac97eeccb32e8d94913fe776878b0ea423683)",
+        "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6588791293b574520dc0bf07bf3cc5b5c4cdd1aa73fa290f3b31bae526f9eed1",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q32",
+      "summary": "IoT機器の近距離・低消費電力通信に適する無線PAN技術を選ぶ問題。",
+      "explanation": "BLEはBluetooth Low Energyの略で、センサなどの近距離通信を低消費電力で行う技術です。身の回りの機器同士をつなぐ無線PANに使われます。",
+      "choiceReasons": [
+        "近距離の無線PANでセンサなどの省電力通信に使えます。",
+        "LTEは携帯電話の広域移動通信です。",
+        "PLCは電力線を伝送路にする有線通信です。",
+        "PPPは二地点を結ぶ通信のプロトコルで、無線PAN技術そのものではありません。"
+      ],
+      "takeaway": "PANは個人の周囲の近距離機器を接続する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "PAN（Personal Area Network）は人の周辺の機器をつなぐ近距離ネットワークです。IoTのセンサなら、通信距離だけでなく電池消費の小ささも重要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "LTEは携帯電話の広域通信、PLCは電力線を使う有線通信、PPPはポイント間のリンク用プロトコルです。これらは近距離の低消費電力**無線**PANの技術そのものではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "BLEはBluetooth Low Energyの略で、近距離の機器同士を低消費電力で接続できます。ウェアラブル機器やセンサなどで使われます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "PANというネットワークの範囲と、LTE・PLC・PPPなど似た通信略語の用途が分からない。",
+      "stages": [
+        {
+          "newInformation": "PAN（Personal Area Network）は人の周辺の機器をつなぐ近距離ネットワークです。IoTのセンサなら、通信距離だけでなく電池消費の小ささも重要です。",
+          "remainingWork": "各候補の通信範囲と媒体を調べる。",
+          "revealsAnswer": false,
+          "reason": "PANの性質だけで正答名称は未提示。"
+        },
+        {
+          "newInformation": "LTEは携帯電話の広域通信、PLCは電力線を使う有線通信、PPPはポイント間のリンク用プロトコルです。これらは近距離の低消費電力**無線**PANの技術そのものではありません。",
+          "remainingWork": "残った候補の特徴を照合する。",
+          "revealsAnswer": true,
+          "reason": "イ・ウ・エの用途を除外し、アが一意に残る。"
+        },
+        {
+          "newInformation": "BLEはBluetooth Low Energyの略で、近距離の機器同士を低消費電力で接続できます。ウェアラブル機器やセンサなどで使われます。",
+          "remainingWork": "BLEを示す選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "BLEの名称と用途を直接示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r03h/r03h-q32.webp (context source SHA256: b2f1594816ee01b2b413ddc086c03ee70a00b6957e4df24ee6244f9ab3c65edd)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b3713442f885c383aab394a90c7ad36b8e1e4d6c1a0387b41282490c31df0b96",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q32",
+      "summary": "TCP/IPのウェルノウンポートで、制御接続とデータ転送接続を分けるプロトコルを問う問題。",
+      "explanation": "FTPは制御接続にTCP21番、データ転送用にTCP20番（アクティブモードの標準）を使います。パッシブモードでは別のデータ用ポートを使いますが、制御とデータを分離する構造は同じです。",
+      "choiceReasons": [
+        "FTPは制御21番とデータ20番という別のウェルノウンポートが割り当てられています。",
+        "POP3はメール受信用の110番で、この制御・データ分離には当たりません。",
+        "SMTPはメール送信用の25番で、この制御・データ分離には当たりません。",
+        "SNMPの161番と162番は要求と通知であり、問われるデータ転送用と制御用の区分ではありません。"
+      ],
+      "takeaway": "FTPは制御接続とデータ接続を別にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われているのは単にポート番号が複数あるかではなく、**転送を指示する制御通信**と**ファイル本体のデータ通信**を別接続にするかです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FTPはファイル転送用のプロトコルで、制御接続にTCP21番、アクティブモードのデータ接続のサーバ側にTCP20番が割り当てられています。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "FTPのパッシブモードではデータ用に別のポートを使いますが、制御とデータの接続を分ける点は同じです。SNMPの161/162番は要求・通知の区別であり、転送データと制御の区別ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ポート番号が複数あるだけでFTPとSNMPを同一視したり、FTPの制御とデータの別接続を知らなかったりする。",
+      "stages": [
+        {
+          "newInformation": "問われているのは単にポート番号が複数あるかではなく、**転送を指示する制御通信**と**ファイル本体のデータ通信**を別接続にするかです。",
+          "remainingWork": "各プロトコルの接続の目的を調べる。",
+          "revealsAnswer": false,
+          "reason": "接続の役割のみを説明し、プロトコル名は出していない。"
+        },
+        {
+          "newInformation": "FTPはファイル転送用のプロトコルで、制御接続にTCP21番、アクティブモードのデータ接続のサーバ側にTCP20番が割り当てられています。",
+          "remainingWork": "FTPを示す選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "FTPという正答名称とポートを提示する。"
+        },
+        {
+          "newInformation": "FTPのパッシブモードではデータ用に別のポートを使いますが、制御とデータの接続を分ける点は同じです。SNMPの161/162番は要求・通知の区別であり、転送データと制御の区別ではありません。",
+          "remainingWork": "ポートの用途を照合するだけ。",
+          "revealsAnswer": true,
+          "reason": "既に正答を開示しており、パッシブモードの補足も行う。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r04a/r04a-q32.webp (context source SHA256: cf6060324025d335be359ca41190cf93673ee15d66da817670f05b084065f848)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q33",
+    "baseVersion": 2,
+    "baseLessonSHA256": "782e0284c0c700979ccf9e6815289792b365e124ebdabcf3428082f674e133b9",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q33",
+      "summary": "制御用とデータ転送用のウェルノウンポートが別々に割り当てられたプロトコルを区別する問題。",
+      "explanation": "FTPはログインや転送要求を送る制御接続と、ファイルの中身を送るデータ接続を分離する。ウェルノウンポートは制御用TCP21、アクティブモードのデータ接続のサーバ側TCP20。\n\nパッシブモードのデータ接続では別途通知されたポートを使うので、全てのFTPデータ転送が20番という意味ではない。POP3はメール取得、SMTPはメール送信、SNMPはネットワーク管理である。",
+      "choiceReasons": [
+        "FTPは制御接続とデータ接続を分け、制御21番・アクティブデータ20番が割り当てられる。",
+        "POP3はメール取得用のプロトコル。FTPのような制御・データの二接続ではない。",
+        "SMTPはメール配送用。通常その通信でメール内容を送る。",
+        "SNMPは通常161番の要求・応答と162番の通知を使う。ファイル転送の制御・データの区分ではない。"
+      ],
+      "takeaway": "ポートが複数ある理由まで区別する。FTPは制御とデータ、SNMPは要求と通知。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "制御用の通信はログインや転送指示、データ用の通信は実際のファイル内容を運びます。問題文の『転送用と制御用』という二つの役割に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FTPは制御用TCP21番と、アクティブモードでデータ接続のサーバ側に使うTCP20番を持つファイル転送プロトコルです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "POP3はメール受信、SMTPはメール送信、SNMPは機器管理です。SNMPの161/162番は管理要求と通知であり、FTPの制御・データ接続とは用途が異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "POP3・SMTP・SNMPにもポートがあるため、ポートの数ではなく用途の違いで判断する必要がある。",
+      "stages": [
+        {
+          "newInformation": "制御用の通信はログインや転送指示、データ用の通信は実際のファイル内容を運びます。問題文の『転送用と制御用』という二つの役割に注目します。",
+          "remainingWork": "どの候補が二種類の接続を持つか考える。",
+          "revealsAnswer": false,
+          "reason": "接続の役割だけを説明しており、名称を出していない。"
+        },
+        {
+          "newInformation": "FTPは制御用TCP21番と、アクティブモードでデータ接続のサーバ側に使うTCP20番を持つファイル転送プロトコルです。",
+          "remainingWork": "FTPの選択肢を選ぶだけ。",
+          "revealsAnswer": true,
+          "reason": "FTPという正答名称を明示する。"
+        },
+        {
+          "newInformation": "POP3はメール受信、SMTPはメール送信、SNMPは機器管理です。SNMPの161/162番は管理要求と通知であり、FTPの制御・データ接続とは用途が異なります。",
+          "remainingWork": "各誤答肢との役割の違いを確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "累積で答えが確定済みであり、他の選択肢も除外する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07h/r07h-q33.webp (context source SHA256: f35a23fabb0ace4b45803ca16ea2559210d71a77d1b80e32153b9ef09405b0bb)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f18df3eb941e7838e9599e17e4e8cbebad938626364afd94b9c9e798358c5888",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q32",
+      "summary": "異なるLAN速度で同じパケット列を送ったときの所要時間差から、送信個数を求める問題。",
+      "explanation": "1パケットは1,250×8=10,000ビットです。100Mビット/秒では10,000/(100×10^6)=0.1ms、1Gビット/秒では10,000/10^9=0.01msかかります。同じ個数を送るので、共通の送信間隔1msの寄与は差を取ると消えます。1個の差0.09msより0.09N=9、N=100です。",
+      "choiceReasons": [
+        "10個なら時間差は0.9msで、9msに足りません。",
+        "80個なら時間差は7.2msで、9msに足りません。",
+        "100個なら0.09×100=9msで条件に合います。",
+        "800個なら時間差は72msで、9msを超えます。"
+      ],
+      "takeaway": "両条件に共通の待ち時間は差の計算で相殺する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "パケット1個は1,250×8＝10,000ビットです。速度は100Mビット/秒と1Gビット/秒なので、まず各回線の1個当たり送信時間を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "100Mビット/秒では10,000÷100,000,000秒＝0.1ミリ秒、1Gビット/秒では0.01ミリ秒です。両回線で1ミリ秒の間隔は同じなので、時間差では相殺されます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "1個当たりの時間差は0.1－0.01＝0.09ミリ秒。N個の差が9ミリ秒なので、0.09×N＝9を解いてください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "両回線に共通する1ミリ秒のパケット間隔まで差に加えたり、1,250バイトをビットへ換算し忘れたりする。",
+      "stages": [
+        {
+          "newInformation": "パケット1個は1,250×8＝10,000ビットです。速度は100Mビット/秒と1Gビット/秒なので、まず各回線の1個当たり送信時間を求めます。",
+          "remainingWork": "各回線の送信時間を計算する。",
+          "revealsAnswer": false,
+          "reason": "単位換算だけで個数は確定しない。"
+        },
+        {
+          "newInformation": "100Mビット/秒では10,000÷100,000,000秒＝0.1ミリ秒、1Gビット/秒では0.01ミリ秒です。両回線で1ミリ秒の間隔は同じなので、時間差では相殺されます。",
+          "remainingWork": "1個当たりの時間差を求める。",
+          "revealsAnswer": false,
+          "reason": "両速度の時間を示すが、差から個数を求める作業が残る。"
+        },
+        {
+          "newInformation": "1個当たりの時間差は0.1－0.01＝0.09ミリ秒。N個の差が9ミリ秒なので、0.09×N＝9を解いてください。",
+          "remainingWork": "方程式を解いてNを選ぶ。",
+          "revealsAnswer": false,
+          "reason": "方程式まで提示し、Nの最終値は本人が計算する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05h/r05h-q32.webp (context source SHA256: f013bb1a2d3dcf3f5730bf826ec213ddc6e7cd748f7e884d33ad046e4017bcbc)",
+        "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。共通の1ms間隔は差で相殺、1個の差0.09msを検算。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q30",
+    "baseVersion": 2,
+    "baseLessonSHA256": "f0867033286055a5f97d5c9327f3ce5174f7041464e8f4a7a48ec754bf5387aa",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q30",
+      "summary": "二つのLANの送信時間の差を用い、共通の待ち時間を消去してパケット数を計算する問題。",
+      "explanation": "1パケットは1250×8=10000ビット。100Mbpsでは0.1ミリ秒、1Gbpsでは0.01ミリ秒なので、差は0.09ミリ秒です。\nパケット間隔1ミリ秒は両LANで同じ個数だけ含まれるため、差を取ると打ち消されます。0.09N=9よりN=100です。",
+      "choiceReasons": [
+        "10個の差は0.9ミリ秒で、9ミリ秒に届きません。",
+        "80個の差は7.2ミリ秒です。バイトからビットへ8倍する換算を確認します。",
+        "100個なら0.09×100=9ミリ秒です。",
+        "800個の時間差は0.09×800=72ミリ秒で、9ミリ秒を超えます。"
+      ],
+      "takeaway": "共通の待ち時間は差で相殺。転送量をビットへ直し、速度別の時間差を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ヘッダー込みの1,250バイトが1パケット全体です。追加のヘッダーを足さず、1,250×8ビットを各回線の速度で割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "100Mビット/秒で0.1ミリ秒、1Gビット/秒で0.01ミリ秒が1パケットの送信時間です。共通の1ミリ秒の間隔は、両者の差を取ると打ち消されます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "差は1パケット当たり0.09ミリ秒。9ミリ秒の差が生じる個数Nは9÷0.09で求め、選択肢と比べます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "送信間隔1ミリ秒が大きく見えるため、回線速度による差ではなく待ち時間まで差として数えがち。",
+      "stages": [
+        {
+          "newInformation": "ヘッダー込みの1,250バイトが1パケット全体です。追加のヘッダーを足さず、1,250×8ビットを各回線の速度で割ります。",
+          "remainingWork": "回線速度ごとの送信時間を求める。",
+          "revealsAnswer": false,
+          "reason": "総ビット量の換算のみ。"
+        },
+        {
+          "newInformation": "100Mビット/秒で0.1ミリ秒、1Gビット/秒で0.01ミリ秒が1パケットの送信時間です。共通の1ミリ秒の間隔は、両者の差を取ると打ち消されます。",
+          "remainingWork": "共通の間隔を相殺し時間差を計算する。",
+          "revealsAnswer": false,
+          "reason": "1個の時間と相殺を教えるがNは未算出。"
+        },
+        {
+          "newInformation": "差は1パケット当たり0.09ミリ秒。9ミリ秒の差が生じる個数Nは9÷0.09で求め、選択肢と比べます。",
+          "remainingWork": "割り算を行ってNを決める。",
+          "revealsAnswer": false,
+          "reason": "最終の割り算を本人に残している。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07a/r07a-q30.webp (context source SHA256: d0e88117e2ab33e071c584727d44f5ffa22b044b5079487ccf9d96f737701b3b)",
+        "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。共通の1ms間隔は差で相殺、1個の差0.09msを検算。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q35",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e7db23ca8000325a1edb80929852697f6ebf3c5a6dd84e37ed367db882b60748",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q35",
+      "summary": "モバイル端末が通信を継続したまま接続先基地局を切り替える操作の名称を問う問題。",
+      "explanation": "移動によって現在の基地局の電波が弱くなったとき、通信を継続しながら別の基地局に引き継ぐ処理をハンドオーバーといいます。問題は契約外の事業者のネットワークを使うローミングではなく、接続中の端末の基地局切替えを述べているのでイです。",
+      "choiceReasons": [
+        "テザリングはモバイル端末の回線を他の機器へ提供する機能です。",
+        "基地局間で通信接続を引き継ぐハンドオーバーの説明です。",
+        "フォールバックは利用できない方式から代替の方式へ切り替えることです。",
+        "ローミングは契約先以外の事業者などのネットワークを利用する仕組みです。"
+      ],
+      "takeaway": "基地局間の接続の引継ぎはハンドオーバー。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "『移動中』『通信相手との接続を維持』『基地局Aから基地局Bへ』という三条件に注目します。契約先の事業者を変えるとは書かれていません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "テザリングは端末の回線を別の機器へ共有すること、ローミングは他事業者のネットワークなどを利用すること、フォールバックは代替の通信方式などへ切り替えることです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "接続を保ったまま基地局間で通信を引き継ぐ操作は**ハンドオーバー**と呼びます。通話やデータ通信を継続するための移動体通信の機能です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "基地局の切替えと、他社回線を使うローミングや通信方式を下げるフォールバックを混同する。",
+      "stages": [
+        {
+          "newInformation": "『移動中』『通信相手との接続を維持』『基地局Aから基地局Bへ』という三条件に注目します。契約先の事業者を変えるとは書かれていません。",
+          "remainingWork": "四つの候補の用途を区別する。",
+          "revealsAnswer": false,
+          "reason": "条件を整理しただけで名称は未提示。"
+        },
+        {
+          "newInformation": "テザリングは端末の回線を別の機器へ共有すること、ローミングは他事業者のネットワークなどを利用すること、フォールバックは代替の通信方式などへ切り替えることです。",
+          "remainingWork": "残る用語を選択肢から確認する。",
+          "revealsAnswer": true,
+          "reason": "ア・ウ・エを除外できるためイが一意に残る。"
+        },
+        {
+          "newInformation": "接続を保ったまま基地局間で通信を引き継ぐ操作は**ハンドオーバー**と呼びます。通話やデータ通信を継続するための移動体通信の機能です。",
+          "remainingWork": "ハンドオーバーの選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "正答名称を直接示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05h/r05h-q35.webp (context source SHA256: 0825df0d7fc51c9d5a2797dcad621a28e89a1e92d2bd0cccf8caab6a929befc5)",
+        "問題文・ア〜エの全肢・イの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q32",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2065e77842fb9d656ca4a42c63bb860eb345d100f1d48c6b0a591aee5918fd6e",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q32",
+      "summary": "データ量・送信期限・伝送効率から必要な公称回線速度の下限を求める問題。",
+      "explanation": "1Mバイトは8Mビットです。5秒以内に送るには実効速度8/5=1.6Mビット/秒以上が必要です。\n公称回線速度をvとすると伝送効率60%で0.6vが実効速度になるので、v≥1.6/0.6=約2.67Mビット/秒。選択肢で条件を満たす最低速度は4Mビット/秒です。",
+      "choiceReasons": [
+        "実効速度0.6Mビット/秒では8Mビットを送るのに約13.3秒掛かります。",
+        "実効速度1.2Mビット/秒では約6.67秒掛かり、5秒を超えます。",
+        "実効速度2.4Mビット/秒で約3.33秒となり、条件を満たす最低の選択肢です。",
+        "実効速度6Mビット/秒なら条件は満たしますが、4Mの回線でも足りるので最低速度ではありません。"
+      ],
+      "takeaway": "必要な公称速度はデータ量÷時間÷伝送効率。選択肢の中で条件を満たす最小値を取る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "1Mバイトは8Mビットです。5秒以内に送るには、データ量÷時間より実効速度が少なくとも8÷5 Mビット/秒必要です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "公称速度v Mビット/秒の回線は効率60％なので実効速度は0.6vです。5秒以内の条件を0.6v×5≧8と表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "v≧8÷(5×0.6)を計算し、その下限以上の回線速度を選びます。『最低速度』なので条件を満たす候補のうち最小を選んでください。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "1Mバイトを1Mビットとして扱ったり、60％の伝送効率を必要速度に掛けて小さく見積もったりする。",
+      "stages": [
+        {
+          "newInformation": "1Mバイトは8Mビットです。5秒以内に送るには、データ量÷時間より実効速度が少なくとも8÷5 Mビット/秒必要です。",
+          "remainingWork": "必要な実効速度を求める。",
+          "revealsAnswer": false,
+          "reason": "必要な実効速度の式のみ。"
+        },
+        {
+          "newInformation": "公称速度v Mビット/秒の回線は効率60％なので実効速度は0.6vです。5秒以内の条件を0.6v×5≧8と表します。",
+          "remainingWork": "不等式をvについて解く。",
+          "revealsAnswer": false,
+          "reason": "条件の不等式までで回線候補は未確定。"
+        },
+        {
+          "newInformation": "v≧8÷(5×0.6)を計算し、その下限以上の回線速度を選びます。『最低速度』なので条件を満たす候補のうち最小を選んでください。",
+          "remainingWork": "境界値を計算して候補から最小を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "計算手順を提示するが境界値と選択肢は本人が決める。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r06a/r06a-q32.webp (context source SHA256: 098797e454f512a6315f806956613b196e9cc2236f9a94e8f0788e016661a9a4)",
+        "問題文・ア〜エの全肢・ウの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。8/(5×0.6)=2.666…Mbpsを検算。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q31",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6e77119e5e4b3ebf22f0373d91491d407339fbbaec1bddca3803e37ccb5b2155",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q31",
+      "summary": "通信技術としてのPLCが利用する伝送媒体を問う問題。",
+      "explanation": "通信技術としてのPLCはPower Line Communicationの略です。電気を供給する電力線に通信信号を重ね、既存の配線を使ってデータを伝送します。したがってイです。音声のIP伝送や無線LANの規格、無線の暗号化方式とは異なります。",
+      "choiceReasons": [
+        "音声をIPネットワークで伝えるVoIPの説明です。",
+        "電力線をデータ通信にも使うPLCの説明です。",
+        "IEEE 802.11シリーズは無線LANの規格で、電力線通信ではありません。",
+        "PLCは伝送媒体を利用する通信技術で、無線暗号化方式の名称ではありません。"
+      ],
+      "takeaway": "通信のPLCはPower Line Communicationで、伝送媒体は電力線。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "この問題のPLCは制御装置ではなく、通信技術の略称です。選択肢を『音声の伝送』『伝送媒体』『無線LAN規格』『暗号化』に分けてみます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "通信分野のPLCは**Power Line Communication**の略で、建物内などの既存の電力線に通信信号を重ねてデータを送る技術です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "音声をIP網で運ぶのはVoIP、IEEE 802.11は無線LAN規格です。PLCは電力を運ぶ線を通信にも利用するという点で区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "PLCをプログラマブルロジックコントローラと取り違えたり、通信方式の略語を区別できなかったりする。",
+      "stages": [
+        {
+          "newInformation": "この問題のPLCは制御装置ではなく、通信技術の略称です。選択肢を『音声の伝送』『伝送媒体』『無線LAN規格』『暗号化』に分けてみます。",
+          "remainingWork": "選択肢の説明の分類を考える。",
+          "revealsAnswer": false,
+          "reason": "PLCの展開形はまだ示していない。"
+        },
+        {
+          "newInformation": "通信分野のPLCは**Power Line Communication**の略で、建物内などの既存の電力線に通信信号を重ねてデータを送る技術です。",
+          "remainingWork": "Power Lineに対応する選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "Power Line Communicationと電力線の利用を明示して正答が確定する。"
+        },
+        {
+          "newInformation": "音声をIP網で運ぶのはVoIP、IEEE 802.11は無線LAN規格です。PLCは電力を運ぶ線を通信にも利用するという点で区別します。",
+          "remainingWork": "電力線通信の選択肢を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みであり、誤答との比較も追加する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05h/r05h-q31.webp (context source SHA256: 51ed3cc89b725dc7d979c5e529d23e1b46fda131881a366411489471d29ac41c)",
+        "問題文・ア〜エの全肢・イの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3d52f22daefbeb848ac1a0611205973b33462dfaf153b9ef3f12ea5e84a6836b",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q39",
+      "summary": "デジタル証明書の有効期限と失効を区別し、CRLに記載される情報を判断する問題。",
+      "explanation": "CRLはCertificate Revocation Listで、認証局が発行する失効証明書の一覧です。秘密鍵の漏えいなどで、有効期限の前に信頼できなくなった証明書をシリアル番号などで示します。\n認証局の公開鍵が分かれば署名は検証できますが、それだけでは現在も有効かを確認できません。失効情報の確認が別に必要です。",
+      "choiceReasons": [
+        "一律に失効後1年間載せる規定ではありません。RFC 5280の3.3節では、失効した証明書の有効期間を過ぎて発行される定期CRLに少なくとも一度その失効情報が掲載されるまで、CRLから削除してはならないとしています。",
+        "認証局の公開鍵で署名が正しいと分かっても、証明書の失効状態は別に確認する必要があります。",
+        "全証明書の有効期限を列挙する一覧ではなく、失効した証明書の情報を載せます。",
+        "有効期限内に失効した証明書をシリアル番号で記載する説明が正しいです。"
+      ],
+      "takeaway": "署名検証、有効期間、失効状態は別の確認。CRLは失効した証明書の一覧。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "デジタル証明書には有効期限がありますが、秘密鍵漏えいなどで期限前に使えなくなる『失効』もあります。期限と失効は別の概念です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "認証局の公開鍵による署名検証は発行者と改ざんの有無を確かめるものです。発行後に失効していないかはCRLやOCSPなど別の方法で確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "CRL（Certificate Revocation List）は失効した証明書の識別情報を載せる一覧です。有効期間中に失効した証明書の**シリアル番号**を記載する説明を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "認証局の署名を検証できれば失効確認は不要と考えたり、CRLを全証明書の有効期限一覧と誤解したりする。",
+      "stages": [
+        {
+          "newInformation": "デジタル証明書には有効期限がありますが、秘密鍵漏えいなどで期限前に使えなくなる『失効』もあります。期限と失効は別の概念です。",
+          "remainingWork": "有効期限と失効の違いを整理する。",
+          "revealsAnswer": false,
+          "reason": "CRLの記載対象をまだ確定していない。"
+        },
+        {
+          "newInformation": "認証局の公開鍵による署名検証は発行者と改ざんの有無を確かめるものです。発行後に失効していないかはCRLやOCSPなど別の方法で確認します。",
+          "remainingWork": "全証明書の一覧か失効一覧かを判断する。",
+          "revealsAnswer": false,
+          "reason": "署名検証と失効確認の違いを教えるが、記載内容は未提示。"
+        },
+        {
+          "newInformation": "CRL（Certificate Revocation List）は失効した証明書の識別情報を載せる一覧です。有効期間中に失効した証明書の**シリアル番号**を記載する説明を選びます。",
+          "remainingWork": "CRLの記載対象を示す選択肢を選ぶだけ。",
+          "revealsAnswer": true,
+          "reason": "失効証明書のシリアル番号を明示し、エの内容と一致する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r07a/r07a-q39.webp (context source SHA256: 64be607e9446c05184d2e0818a1d07138ca3a0beb5992a3bff75ae74b780822f)",
+        "問題文・ア〜エの全肢・エの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、肢ア理由へRFC5280 sec3.3のMUST NOT保持条件を追加 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q39",
+    "baseVersion": 2,
+    "baseLessonSHA256": "76fe30dfb9a31dff7d781edd578c9c265a9a1635104330c3b87beaf513ecf3fa",
+    "author": "ChatGPT/gpt-6-batch17-20261028",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q39",
+      "summary": "CSIRTの分類のうち、コーディネーションセンターの機能とサービス対象を表から選ぶ問題。",
+      "explanation": "コーディネーションセンターは複数のCSIRTの間をつなぎ、インシデント対応に必要な情報の連携や対応の調整を行います。サービス対象は他のCSIRTです。\n分析情報の提供、自社製品の脆弱性対応、有償での対応受託は、分類上それぞれ別の機能です。",
+      "choiceReasons": [
+        "他のCSIRTを対象に、CSIRT間の情報連携と調整を行うコーディネーションセンターの説明です。",
+        "インシデント傾向やマルウェア・痕跡の分析と注意喚起で、分析センターの説明です。",
+        "自社製品の脆弱性に対応するベンダーチームの説明です。",
+        "顧客から機能を有償で受託するインシデントレスポンスプロバイダーの説明です。"
+      ],
+      "takeaway": "コーディネーションは他のCSIRTをつなぐ連携・調整。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の左列は『何をするか』、右列は『誰にサービスを提供するか』です。機能とサービス対象を必ず組で確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コーディネーション（coordination）は複数の関係者の情報連携や対応を調整することです。CSIRT間の連携を担う場合、サービス対象は**他のCSIRT**になります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、インシデントレスポンスプロバイダーは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "『インシデント対応』をする組織を全て同じCSIRTと考え、調整・分析・製品対応・受託の役割を区別できない。",
+      "stages": [
+        {
+          "newInformation": "表の左列は『何をするか』、右列は『誰にサービスを提供するか』です。機能とサービス対象を必ず組で確認します。",
+          "remainingWork": "各行の機能と対象を読み分ける。",
+          "revealsAnswer": false,
+          "reason": "表の読み方だけで行を特定しない。"
+        },
+        {
+          "newInformation": "コーディネーション（coordination）は複数の関係者の情報連携や対応を調整することです。CSIRT間の連携を担う場合、サービス対象は**他のCSIRT**になります。",
+          "remainingWork": "調整と他CSIRTの組合せを表で確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "アの機能と対象の組合せをそのまま教えている。"
+        },
+        {
+          "newInformation": "分析センターは脅威分析、ベンダーチームは自社製品の脆弱性対応、インシデントレスポンスプロバイダーは顧客向け受託が中心です。CSIRT同士の調整役と対比します。",
+          "remainingWork": "他の分類と照合して正答を確認するだけ。",
+          "revealsAnswer": true,
+          "reason": "前段で開示済みの正答を他分類との比較で補強する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints",
+        "choiceReasons"
+      ],
+      "sourceNotes": [
+        "原本WebPをbase64取得し画像表示・目視照合: assets/questions/r05a/r05a-q39.webp (context source SHA256: 34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7)",
+        "問題文・ア〜エの全肢・アの公式正答欄をcontextと原本画像で確認。IPA公式解答PDFの独立取得・照合は未実施。",
+        "既存のexplanation/choiceReasons/takeawayを原本条件と照合し、正しい部分は維持。",
+        "Codex /root が初回独立レビューを受け、肢エ理由/H3/designを指定2021-11-30ガイド正式分類名へ修正 実修正者と別のCodex /root/ap_batch17_reviewが最終版を確認する。原問・正答・図は保持。"
+      ]
+    }
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "status": "approved_after_correction",
+  "scope": "Independent review of twelve foundation/integration/test files. Content factual approval and actual browser/publication execution remain separate.",
+  "reviewer": "Codex /root/ap_quality_code_review",
+  "author": "Codex /root/ap_quality_foundation; integration fixes Codex /root",
+  "checkedAt": "2026-10-27T03:36:33.272047+00:00",
+  "baselineCommit": "53ba68f7abccb94b146c5a8170f4a973779fb0f7",
+  "files": {
+    "tools/ap_lesson_quality.py": "545d759fa8b6199d6712bc6eca31a4655dcfc8d150b0d7a1cc943d2142fca209",
+    "tools/ap-lesson-quality.py": "18173b880431da60ca8c80cd7ad28e723ce5da550e0ef2e8fee1c86114c5af06",
+    "tools/apply-hints.py": "d563a373bd29dee1a15b6aab1820d4fdfe5c0db54f2f7bf6f6df174cd1c076b3",
+    "tools/build-content.py": "69a76d12a8216acb9ed35e58df0fcc767c82d2e5cd2d7d7a786d22c86659d01a",
+    "tests/corpus.py": "4d4660876f5f9376b7fe2e608690fe1f007088ffe5d57b49776609a73779ba7f",
+    "tests/ap-lesson-quality.py": "c7c8f328bb82e3b625bd0325f8736f2cc26683e5c2b2cfcd0d3893fd385e38ac",
+    "tests/lesson-preservation-r03a.py": "640a02d7931f59bb3d19510111e9114237eda1a9f2a9e8dab3f1809fbeaee998",
+    ".github/workflows/system-validation.yml": "2960da177fc9aaafbc2d1de6fd532a2e126459ea3db201caaba9b0b7f027aa08",
+    "tests/fp2-content.py": "ac85bd3f63fb5eddf9c431d7a91ba5a161b3bfec2d8d566e9cc1531179d9f507",
+    "tests/mobile-content.py": "daf1d0b529442cdc1e5031a52f1472138c28cb4052951aa80c27c14c59dc5dc4",
+    "tests/transcriptions.py": "dffdc2994b86c18d4988ab35e85638c662e9f707179008c530c3db089e9fa14b",
+    "tests/ap-lesson-pilot-browser.py": "55e54a4fe71b62ac002561463b6aa9da21105353eaa8872152b66530eb6d505b"
+  },
+  "verified": {
+    "inventoryQuestions": 800,
+    "pilotQuestions": 20,
+    "pilotTopics": 17,
+    "remainingBatches": 39,
+    "remainingQuestions": 780,
+    "disjointAssignmentIds": 800,
+    "archivedBaselineFiles": 24,
+    "independentReviewGate": "All20 expected IDs, distinct author/reviewer, exact lesson/question/source hashes, source/answer/choices/hints/explanation/revealFlag checks, official answer and no unresolved issues required.",
+    "publicationBoundary": "Only registered fully reviewed batches compose current annual lesson sources and bank. build-content.py and apply-hints.py reject direct unregistered modifications.",
+    "versions": "Only changed lessons get baselineVersion+1; keep lessons retain old versions; repeated accept is byte-stable in isolated tests.",
+    "legacyReviews": "Old data/lesson-reviews are byte-preserved and validate against archived lessons for registered revisions. No H1=false policy assertion remains.",
+    "historicalPreservation": "The original 2021 historical integration assertions remain tied to its completed historical commit; current workspace additionally validated by quality gates.",
+    "classificationCompatibility": "Old classification source hashes are accepted only for registered IDs, equal immutable baseline full-question hashes, after exact canonical validation of the complete current bank/lesson composition. The helper runs once per compile_learning_tools call, not once per classification item.",
+    "historicalCrossQualificationProof": "FP PR49 historical AP manifest proof compares to the pinned baseline AP manifest SHA380df4bc18e06903077a76b8630263479c965f86ce087938593352d3d09c9c6e after current AP quality validation. AB manifest current hash remains strict. Mobile classification and transcription terminal-version proofs use the immutable baseline while current source fields and original images remain checked.",
+    "draftCI": "check-drafts checks all40 assignments/800 envelopes and any submitted review hashes without promoting unregistered material or claiming content approval."
+  },
+  "tests": [
+    {
+      "command": "python tests/corpus.py",
+      "result": "Passed800/800 and original answer/source/lesson correspondence"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "command": "python tests/lesson-preservation-r03a.py",
+      "result": "Passed historical720question/722lesson/839file preservation; historical bank SHA2565e3e71d9222eb616f58ee6bb11e6f71685e7d248420b813ea00373a80d76db24"
+    },
+    {
+      "command": "python tests/ap-lesson-quality.py",
+      "result": "29 isolated tests passed",
+      "independentRunSeconds": 29.462
+    },
+    {
+      "command": "python tests/mobile-content.py",
+      "result": "Passed651paperless/149desk/681cards, unchanged classification hashes and malformed-reference rejection"
+    },
+    {
+      "command": "python tests/transcriptions.py",
+      "result": "Passed798transcriptions, KaTeX, current stem/choices/figure/source hashes and tamper rejection"
+    },
+    {
+      "command": "python tests/fp2-content.py",
+      "result": "Passed240academic/160practical/274fields, approved projections and historical preservation, including archived original AP manifest"
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "severity": "P2",
+      "path": "tools/ap_lesson_quality.py",
+      "description": "The initial validator did not compare current source-crops.json with its pinned baseline, allowing sourceRectangle edits whenid/page/image remained unchanged.",
+      "resolution": "Author added byte equality checks for current answer-keys.json, sources.json and source-crops.json against immutable archive. Added fixture coverage and sourceRectangle mutation rejection test.",
+      "verifiedLines": [
+        67,
+        68
+      ]
+    },
+    {
+      "severity": "P2",
+      "path": "tools/ap_lesson_quality.py",
+      "description": "Python structural equality treated an original answer integer1 as equal to JSONtrue. In an isolated registeredq14 fixture the old classification hash was accepted and the builder also accepted a boolean answer, while JSvalidChoiceFormat requires an integer.",
+      "reproduction": "/workspace/scratch/ap-a-quality/probe-classification-types.py initially demonstrated acceptance; shared source files were never mutated.",
+      "resolution": "validate_workspace now compares canonical SHA256 for current lesson composition and complete bank against expected values, preserving JSON types. Registered answer1-to-true regression test now rejects the mutation before classification fallback."
+    }
+  ],
+  "remainingFindings": [],
+  "limitations": [
+    "Pilot linguistic/factual approval is provided by separate content reviewers, not this code review.",
+    "The new browser test code was reviewed for isolated synthetic guest records, all20/60hints/80reasons, offline, legacy snapshots and record restoration, but I did not execute it; the integration owner executes and records browser/publication checks."
+  ],
+  "integrationAdjustments": [
+    {
+      "path": "tools/build-content.py",
+      "description": "Classification baseline compatibility limited to independently registered lesson-only revisions; old classification JSON and review files remain unchanged. Tests cover approved change, wrong hash, unregistered text, original stem and boolean-answer changes."
+    },
+    {
+      "paths": [
+        "tests/fp2-content.py",
+        "tests/mobile-content.py",
+        "tests/transcriptions.py"
+      ],
+      "description": "Historical complete-record hashes now refer to pinned original archives after validation of current registered AP content; current original problem/transcription fields, images, answer keys, crop metadata and AB corpus remain protected."
+    }
+  ]
+}

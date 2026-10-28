@@ -1,0 +1,1419 @@
+[
+  {
+    "id": "r07h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ec0e736af8dec7458f151e59db1a67f95e983c70fd425b953f76ff5af3bb6c19",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q17",
+      "summary": "OpenAPIによるAPI定義の開発支援と、通信・認証・構成テストの役割を区別します。",
+      "explanation": "APIはソフトウェアの機能を他のプログラムから利用するための窓口。OSSはソースコードが公開され、ライセンスに従って利用・改変・再配布できるソフトウェアです。OpenAPIは、APIのパス、操作、要求・応答の形式などを機械的に読める形で記述する仕様。Swaggerはその定義を作るエディタ、ドキュメント表示、コード生成などのツール群として知られる。\n\ncurlはHTTPなどで通信するコマンド、OpenAMは認証・アクセス管理、Serverspecはサーバ構成を検証するテスト用ツール。単にAPIへアクセスできることと、OpenAPI定義の開発支援は区別する。",
+      "choiceReasons": [
+        "curlは通信・転送用のコマンド。OpenAPI定義を編集・可視化するツール群ではない。",
+        "OpenAMは認証やシングルサインオンなどのアクセス管理。",
+        "Serverspecはサーバの設定・状態を検証するためのテスト用ツール。",
+        "SwaggerはOpenAPI定義の編集、表示、コード生成などを支援する。"
+      ],
+      "takeaway": "OpenAPIはAPIの記述仕様、Swaggerはそれを扱うツール群。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "APIは他のプログラムから機能を呼び出す窓口です。OpenAPI Specificationは、呼出し先のパスや要求・応答のデータ形式を記述する仕様で、問われているのはその定義を扱う開発支援です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "curlは通信コマンド、OpenAMは認証・アクセス管理、Serverspecはサーバ構成のテスト用です。この三つはOpenAPI定義を作成・表示するツール群ではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Swaggerのツール群には、定義を編集するSwagger Editor、定義を読みやすいAPI文書として表示するSwagger UIなどがあります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "API仕様と各OSSの用途が未知で名称だけを比較してしまう。",
+      "stages": [
+        {
+          "newInformation": "APIとOpenAPIの役割",
+          "remainingWork": "製品名と役割の照合",
+          "revealsAnswer": false,
+          "reason": "仕様の説明のみで製品名は未対応。"
+        },
+        {
+          "newInformation": "誤答3製品の用途",
+          "remainingWork": "残るSwaggerと支援内容の対応",
+          "revealsAnswer": true,
+          "reason": "全誤答を除外して正答が一意になる。"
+        },
+        {
+          "newInformation": "Swagger EditorとUIの具体的用途",
+          "remainingWork": "各ツールの使い分けを理解する",
+          "revealsAnswer": true,
+          "reason": "正答の製品名と機能を渡す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07h/r07h-q17.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=c58f32559a20c88c03021e0bcc2eb751e8c4dfcbd707f0e569473fe6be7b9a74。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf を取得。PDF SHA-256=656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907。pdftotextで抽出した解答表の問17=エを照合。",
+        "独立再導出・全肢点検: API定義の開発支援なのでSwagger。curl通信、OpenAM認証、Serverspec構成テストを区別。",
+        "補助一次資料: Swagger公式toolsページはHTTP403だったため、開発元README https://raw.githubusercontent.com/swagger-api/swagger-editor/master/README.md（SHA-256=dbc6d5072312f78c6bc909193eb1d34f13217b856cad8dec94580504e2a4eda8）及び https://raw.githubusercontent.com/swagger-api/swagger-ui/master/README.md（SHA-256=6f5faaf7abb83bc65234a8a83bb0375e62a9340350f8fbbbe8305643a4983979）を取得して読む。EditorのOpenAPI定義編集・文書プレビュー、UIのOpenAPIからの可視化を確認。現行のバージョン依存情報は教材へ追加しない。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0664fe6ee04849c149077a219da6916038590bdeb7c1ced469d59eb830dad88d",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q15",
+      "summary": "独立した2台について、ちょうど1台だけが稼働する確率を求めます。",
+      "explanation": "一方だけ稼働する場合は、1台目が稼働して2台目が故障する場合と、その逆の二つです。独立なので、それぞれ0.7×(1−0.6)=0.28、(1−0.7)×0.6=0.18です。互いに重ならないため足し、0.28+0.18=0.46となります。",
+      "choiceReasons": [
+        "0.18は1台目が故障し2台目が稼働する場合だけの確率です。",
+        "0.28は1台目が稼働し2台目が故障する場合だけの確率です。",
+        "0.42は両方が稼働する確率0.7×0.6です。",
+        "一方だけ稼働する二つの場合を足すと0.46になります。"
+      ],
+      "takeaway": "「ちょうど一つ」は一方成功・他方失敗の二つの排他的な場合を足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「いずれか一方が稼働していて、他方が故障」は両方稼働を含みません。二つのプリンタの状態を表にします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "独立なので2台の同時状態は掛け算です。まず1台目だけ稼働する場合を0.7×(1−0.6)と書きます。次に1台目が故障し2台目が稼働する場合も作り、重ならない2場合を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "0.7×0.4+0.3×0.6=0.28+0.18=0.46です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "「一方だけ」と「少なくとも一方」を混同し、二場合を足せない。",
+      "stages": [
+        {
+          "newInformation": "両方稼働を除く対象状態",
+          "remainingWork": "二つの同時状態を列挙",
+          "revealsAnswer": false,
+          "reason": "対象条件の整理で最終値は出さない。"
+        },
+        {
+          "newInformation": "独立なら積、重ならない場合は和",
+          "remainingWork": "逆の場合の式を作り計算",
+          "revealsAnswer": false,
+          "reason": "片側の式と規則であり最終値は本人が算出。"
+        },
+        {
+          "newInformation": "0.28と0.18の和0.46",
+          "remainingWork": "計算結果と選択肢を対応",
+          "revealsAnswer": true,
+          "reason": "最終確率を示す。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r04h/r04h-q15.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=f785d5ec12a97c2dc0b3aa072fcaaf7a9880f0b23b7c0ae81c05191ddaf1a137。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf を取得。PDF SHA-256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。画像として開いた解答表の問15=エを照合。",
+        "独立再導出・全肢点検: 独立性より0.7×0.4＋0.3×0.6＝0.46。全状態0.42＋0.28＋0.18＋0.12＝1も検算。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "558c1da77cc1b9d3f4665aaa98b86d076560465ce3953e6398c020fa5dc7fc75",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q19",
+      "summary": "キャッシュのロード時刻・最終参照時刻・参照回数と、置換方式の対応を問います。",
+      "explanation": "LRU（Least Recently Used：最も長く使われていないもの）は最後に使ってから最も長く経過したブロックを置換します。最終参照時刻はC0が0:08、C1が0:06、C2が0:05、C3が0:10なので、最も古いC2です。\nロード時刻を使うFIFOやLIFO、回数を使うLFUとは、比較する列が異なります。",
+      "choiceReasons": [
+        "FIFO（First In, First Out：先入れ先出し）は最も早くロードしたC0を置換します。",
+        "LFU（Least Frequently Used：最も参照頻度が低いもの）は参照回数が最小のC1を置換します。",
+        "LIFO（Last In, First Out：後入れ先出し）は最後にロードしたC3を置換します。",
+        "LRU（Least Recently Used：最も長く使われていないもの）は最終参照時刻が最も古い0:05のC2を置換します。"
+      ],
+      "takeaway": "置換方式ごとに見る列を変える。LRUは最終参照時刻。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "C2のロード時刻0:04、最終参照時刻0:05、参照回数3を分けて見ます。ロード時刻は取り込んだ時刻、最終参照時刻は最後に利用した時刻です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "FIFOは先に取り込んだもの、LIFOは最後に取り込んだもの、LFUは参照回数が最小のもの、LRUは最後の利用から最も長く経過したものを置換します。それぞれの基準で表を比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最終参照時刻の最小は0:05のC2です。ロード時刻の最小はC0、最大はC3、参照回数の最小はC1なので、C2を選ぶのはLRUです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "FIFO等の略語の意味と、三列のどれを見るかが分からない。",
+      "stages": [
+        {
+          "newInformation": "ロード時刻と最終参照時刻の違い",
+          "remainingWork": "C2を他行と比較",
+          "revealsAnswer": false,
+          "reason": "方式名と基準の対応は未提示。"
+        },
+        {
+          "newInformation": "四方式が比較する基準",
+          "remainingWork": "各基準を表に適用して置換先を計算",
+          "revealsAnswer": false,
+          "reason": "定義と表の比較は本人に残る。"
+        },
+        {
+          "newInformation": "各基準の具体的置換先とC2＝LRU",
+          "remainingWork": "方式と列の関係を再確認",
+          "revealsAnswer": true,
+          "reason": "正答名称とC2の一致を示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07a/r07a-q19.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=9a280cd10ad011b42b96263a039bc0ef0c2255d22b409e0f5e8c1089ebef8688。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得。PDF SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextで抽出した解答表の問19=エを照合。",
+        "独立再導出・全肢点検: 原本の表の全12数値を確認。FIFO=C0、LFU=C1、LIFO=C3、LRU=C2（最終参照0:05）。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "915d741bd2209fc388d4a609f0399fd954f305048eb894165a12a22337ae6a70",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q14",
+      "summary": "将来の需要を見込むキャパシティプランニングと、現状の性能改善を区別します。",
+      "explanation": "キャパシティプランニングは、利用量の増加など将来の需要を見込み、必要な処理能力や資源を計画する活動です。現在の性能や利用状況の測定・監視は、その判断材料になります。\n現在のボトルネック解消やチューニングだけを目的にする説明より、将来を含めて応答時間を維持するイが適切です。",
+      "choiceReasons": [
+        "一つのボトルネックの改善に限定した説明で、将来の需要を踏まえる計画の目的を十分表していません。",
+        "現在を調査・監視し、将来を含む必要性能を維持する目的に合います。",
+        "現状の能力を最大限引き出す性能チューニングの説明です。",
+        "特定資源の利用効率改善だけに限定しており、需要と必要容量を計画する目的とは異なります。"
+      ],
+      "takeaway": "現在の測定を使い、将来の需要に応じた容量と性能を計画する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "キャパシティは、サーバの処理能力や記憶容量など、システムが扱える仕事量の限度です。応答時間は要求から結果が返るまでの時間です。各候補がどの能力や期間を対象にするかを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "利用者が来年2倍になっても応答時間を守るには、現在の負荷を測り、増強時期や必要容量を見積もります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "スループットは単位時間に処理できる仕事量です。将来の需要が増えれば、現在の最大スループットを高める調整だけでなく、必要な資源量や増強時期の見積りも必要です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "現状のチューニングと将来を含める容量計画を混同する。",
+      "stages": [
+        {
+          "newInformation": "キャパシティと応答時間の意味、能力と期間の比較軸",
+          "remainingWork": "各肢の時間軸を比較",
+          "revealsAnswer": false,
+          "reason": "用語の意味と比較軸のみで、計画の時間軸や特定肢への対応はまだ教えない。"
+        },
+        {
+          "newInformation": "需要増加を想定した測定と増強見積り",
+          "remainingWork": "例を選択肢と対応",
+          "revealsAnswer": true,
+          "reason": "将来の応答時間維持という正答の趣旨を渡す。"
+        },
+        {
+          "newInformation": "スループットの定義と資源量・増強時期を見積もる計画内容",
+          "remainingWork": "現在の最大化と将来維持を再比較",
+          "revealsAnswer": true,
+          "reason": "前段で正答の趣旨を開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07a/r07a-q14.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=97ea6ba6537eaf155693ef2cd9682c071485fdfc810d151fec66da3a6872ee9b。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得。PDF SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextで抽出した解答表の問14=イを照合。",
+        "独立再導出・全肢点検: 長期監視に基づく将来の応答時間維持が目的。現状ボトルネック、調整、特定資源効率だけの他肢と照合。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "29c69cb3b2b1ad4396c45d83fa918ee02196d10619d7e3c56a468a49a6846684",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q14",
+      "summary": "コンテナ型仮想化と、ゲストOSを動かす仮想マシン方式の構成を区別します。",
+      "explanation": "ホストOSは物理マシン側で動くOS、ゲストOSは仮想マシン内で動くOSです。カーネルはOSの中核部分です。コンテナ型仮想化はホストOSのカーネルを共有しながら、アプリケーションの実行環境を分離します。必要なプログラムやライブラリをコンテナにまとめられます。各環境が独立したゲストOSを起動する仮想マシン方式や、画面だけをクライアントに転送する方式とは異なります。",
+      "choiceReasons": [
+        "ホストOSを使いつつアプリケーションと依存物をまとめて分離実行するコンテナの説明です。",
+        "複数のゲストOSを仮想化ソフトウェア上で動かす仮想マシン方式です。",
+        "サーバ側で実行し画面と操作情報を転送するシンクライアント方式の説明です。",
+        "ホストOS上の仮想化ソフトウェアでゲストOSを動かすホスト型仮想化です。"
+      ],
+      "takeaway": "コンテナはホストのカーネルを共有し、アプリケーション環境を分離する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ホストOSは物理マシン側で動くOS、ゲストOSは仮想マシン内で動くOSです。各候補でゲストOSを起動するか、アプリケーションだけをホストOSで動かすかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コンテナは環境ごとにOS全体を起動するのではなく、ホストのカーネル（OSの中核部分）を共有して実行環境を隔離します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "プログラムやライブラリをまとめ、ホストOSで動かして独立性を保つ説明が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "コンテナと仮想マシンをどちらも仮想化とだけ捉える。",
+      "stages": [
+        {
+          "newInformation": "ホストOSとゲストOSの意味及びゲストOS有無の比較軸",
+          "remainingWork": "四肢を構成別に整理",
+          "revealsAnswer": false,
+          "reason": "比較軸を示すがコンテナがどちらかは未提示。"
+        },
+        {
+          "newInformation": "カーネルはOS中核であり、コンテナはホストカーネルを共有する",
+          "remainingWork": "該当する記述を対応",
+          "revealsAnswer": true,
+          "reason": "正答肢の構成を実質的に示す。"
+        },
+        {
+          "newInformation": "依存プログラムとライブラリをまとめる具体像",
+          "remainingWork": "隔離とOS共有の両立を確認",
+          "revealsAnswer": true,
+          "reason": "正答肢そのものの説明。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r03a/r03a-q14.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=45a52d16dc407da12cd7136c74d896d498ff64ccef235f7d6c97fcfea5deab3d。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf を取得。PDF SHA-256=7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799。pdftotextで抽出した解答表の問14=アを照合。",
+        "独立再導出・全肢点検: ホストカーネル共有のコンテナがア。イはゲストOSの仮想マシン、ウは画面転送、エはホスト型。",
+        "補助一次資料: https://docs.docker.com/get-started/docker-overview/ を取得し、コンテナの隔離、イメージ、Dockerfile、Linux kernel namespacesの説明を確認。HTML SHA-256=b8cd2fc89bbbed59527b4bdb16c1ddc67652b6adff9ba5696314081d3dff3e0b。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "feada766869f056450ee34624dfe127fdf9ce81d406d7e0f018255621d4b4572",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q20",
+      "summary": "コンテナの構築・実行・管理を提供するOSSを識別します。",
+      "explanation": "OSSはソースコードを公開し、ライセンスに従って利用・改変・再配布できるソフトウェアです。DockerはOSのカーネル（中核部分）を共有するコンテナ型仮想化を使い、アプリケーションと依存環境をイメージにまとめて構築・配布・実行できます。問題の「コンテナ型」「構築、実行、管理のプラットフォーム」に該当するOSSはDockerです。ほかの候補は主に仮想マシンを実現する仕組みです。",
+      "choiceReasons": [
+        "コンテナイメージの構築とコンテナの実行・管理を提供します。",
+        "KVM（Kernel-based Virtual Machine）はLinuxカーネルを利用する仮想マシン用の仮想化機構で、コンテナ基盤ではありません。",
+        "QEMUはCPUや周辺機器をエミュレートして仮想マシンを実行するソフトウェアです。",
+        "XenはゲストOSを動かすハイパーバイザで、コンテナ基盤の説明ではありません。"
+      ],
+      "takeaway": "コンテナはカーネルを共有し、仮想マシンはゲストOSを実行する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "OSSはソースコードを公開し、ライセンスに従って利用・改変・再配布できるソフトウェアです。この中から、コンテナ型でアプリケーションを構築・実行・管理する基盤を選びます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コンテナはホストのOSカーネル（OSの中核部分）を共有し、アプリケーションの実行環境を隔離します。アプリケーションと依存ライブラリなどをまとめたイメージから起動します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "DockerはDockerfileという手順ファイルからイメージを構築し、そのイメージからコンテナを実行・管理する基盤です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "コンテナ基盤とゲストOS用仮想化ソフトの製品名を知らない。",
+      "stages": [
+        {
+          "newInformation": "OSSの意味と問われる基盤の役割",
+          "remainingWork": "候補の仮想化方式を比較",
+          "revealsAnswer": false,
+          "reason": "OSSの一般的意味と対象条件のみで製品名との対応は示さない。"
+        },
+        {
+          "newInformation": "カーネル共有とイメージの意味",
+          "remainingWork": "基盤を提供する製品との対応",
+          "revealsAnswer": false,
+          "reason": "コンテナの定義のみで製品名は未提示。"
+        },
+        {
+          "newInformation": "DockerfileとDockerの対応",
+          "remainingWork": "イメージから起動する流れを確認",
+          "revealsAnswer": true,
+          "reason": "Dockerという正答名を示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r05h/r05h-q20.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=fc0db77150cfddb441593523a3c9ba75925251c80912e02f4c353ace22eb0f5d。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf を取得。PDF SHA-256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。pdftotextで抽出した解答表の問20=アを照合。",
+        "独立再導出・全肢点検: Dockerがコンテナ構築実行管理。KVM、QEMU、Xenの仮想マシン用途と全肢照合。",
+        "補助一次資料: https://docs.docker.com/get-started/docker-overview/ を取得し、コンテナの隔離、イメージ、Dockerfile、Linux kernel namespacesの説明を確認。HTML SHA-256=b8cd2fc89bbbed59527b4bdb16c1ddc67652b6adff9ba5696314081d3dff3e0b。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q20",
+    "baseVersion": 2,
+    "baseLessonSHA256": "130cfeec089848306f6650a9d733dfaa022d093d03c2b4bfe57e92b96bc28303",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q20",
+      "summary": "コンパイラの各解析と最適化が行われる順序を問います。",
+      "explanation": "典型的なコンパイラは、字句解析で文字列をトークンへ分け、構文解析で文法上の構造を作り、意味解析で型などの整合性を確認します。その後、中間表現を最適化してから目的コードを生成します。\n選択肢の中で最も後なのは最適化です。コード生成自体は選択肢にありません。",
+      "choiceReasons": [
+        "意味解析は型や名前の整合性を確認する段階で、最適化より前です。",
+        "構文解析はトークン列の文法構造を調べ、意味解析より前に行います。",
+        "最適化は各解析で得た表現を改善し、コード生成前に行うので選択肢の中で最後です。",
+        "字句解析は文字列をトークンへ分ける最初の解析です。"
+      ],
+      "takeaway": "コンパイルの典型順は字句、構文、意味、最適化、コード生成。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ソースの「a＋1」を読むには、まず文字を名前・演算子・数値などのトークンへ分ける必要があります。字句解析が最初です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "トークンを式として組み立てる構文解析の後に、aと1を加えてよい型かを意味解析で確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "文法と意味の確認を終えた中間表現へ、無駄な計算の削除などを行うのが最適化です。その後コード生成へ進みます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "字句・構文・意味の違いと最適化の位置を知らない。",
+      "stages": [
+        {
+          "newInformation": "字句解析のトークン化と最初の位置",
+          "remainingWork": "残る三処理の順を考える",
+          "revealsAnswer": false,
+          "reason": "最初の処理だけ示す。"
+        },
+        {
+          "newInformation": "構文は組立て、意味は型の確認",
+          "remainingWork": "最適化をこの列へ配置",
+          "revealsAnswer": false,
+          "reason": "三解析の関係は示すが最適化の位置は未提示。"
+        },
+        {
+          "newInformation": "最適化は解析後の無駄削除",
+          "remainingWork": "四処理の順を確認",
+          "revealsAnswer": true,
+          "reason": "選択肢中で最適化が最後と分かる。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r06a/r06a-q20.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=43212c84ed7ee788242a10f1032b272987f430db66668ec5f4d475a70c566420。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf を取得。PDF SHA-256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。pdftotextで抽出した解答表の問20=ウを照合。",
+        "独立再導出・全肢点検: 典型順は字句→構文→意味→最適化→コード生成。問いは選択肢内で最後、よって最適化。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bf8c51aa072b52d73c5e847ef8259d61064d605f0cef5c0c1a23218ce0c8673e",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q15",
+      "summary": "サーバとネットワークの能力を件数に換算し、システムの処理量を求めます。",
+      "explanation": "サーバは100MIPS（MIPSは毎秒100万命令を表す単位）=10⁸命令/秒、1件に10⁶命令なので100件/秒処理できます。ネットワークは1件2×10⁵バイト=1.6×10⁶ビットを転送するので、8×10⁷÷1.6×10⁶=50件/秒です。両方の処理が必要なので小さい能力50件/秒が上限です。",
+      "choiceReasons": [
+        "ネットワークの50件/秒がボトルネックです。",
+        "サーバだけの能力で、ネットワークの制約を考慮していません。",
+        "サーバの100件/秒もネットワークの50件/秒も超えています。",
+        "バイトをビットに換算せず8×10⁷÷2×10⁵とした値で、8倍過大です。"
+      ],
+      "takeaway": "各資源を同じ件/秒に換算し、最小値を選ぶ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "MIPSは毎秒100万命令を表す単位です。100MIPSは10⁸命令/秒、1件は100万＝10⁶命令なので、割り算でサーバの件/秒を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送量はバイト、速度はビットなので、2×10⁵を8倍して単位をそろえます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバは10⁸/10⁶、ネットワークは8×10⁷/(8×2×10⁵)。小さい方が上限です。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "MIPSとバイト/ビットの単位を混同し、二能力の大きい方を選んでしまう。",
+      "stages": [
+        {
+          "newInformation": "MIPSの定義とサーバ件数の式",
+          "remainingWork": "命令毎秒を1件の命令数で割る",
+          "revealsAnswer": false,
+          "reason": "単位換算と途中式のみ。"
+        },
+        {
+          "newInformation": "1バイト8ビットの変換",
+          "remainingWork": "1件転送量から件/秒を計算",
+          "revealsAnswer": false,
+          "reason": "最終件数は未提示。"
+        },
+        {
+          "newInformation": "各能力の式と小さい方が上限という条件",
+          "remainingWork": "二つの割り算と大小比較",
+          "revealsAnswer": false,
+          "reason": "公式と代入値のみで最終数値を出さない。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r04a/r04a-q15.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=3a5ae454c17d85b3dde34362f41fd2acc8a1f84924448bdd849de36c32b708b1。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf を取得。PDF SHA-256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。pdftotextで抽出した解答表の問15=アを照合。",
+        "独立再導出・全肢点検: 100×10⁶/10⁶=100件/秒、8×10⁷/(2×10⁵×8)=50件/秒。min=50。200は両能力超過、400はビット換算漏れ。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q15",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d9860ab969a8c85c9d2e4a6e9451311626b06d608e4d448f2752905e45652393",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q15",
+      "summary": "サーバとネットワークの能力を件数に換算し、システムの処理量を求めます。",
+      "explanation": "サーバは100MIPS（MIPSは毎秒100万命令を表す単位）=毎秒10⁸命令なので、1件10⁶命令の検索を毎秒100件処理できます。\nネットワークは1件当たり2×10⁵バイト×8=1.6×10⁶ビットを転送します。8×10⁷÷1.6×10⁶=50件/秒です。システムの処理量はサーバとネットワークのうち小さい方に制限されるため、50件/秒です。",
+      "choiceReasons": [
+        "サーバ100件/秒、ネットワーク50件/秒のうち小さい50件/秒が上限です。",
+        "100件/秒はサーバ単体の能力で、ネットワークの50件/秒を超えています。",
+        "サーバの100件/秒とネットワークの50件/秒のどちらも超えるため処理できません。",
+        "8倍のビット換算を省くとネットワークを400件/秒と誤算します。サーバ能力も超えています。"
+      ],
+      "takeaway": "各資源の処理能力を件/秒へそろえ、最小値をボトルネックとして選ぶ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "MIPSは毎秒100万命令を表す単位です。100MIPSは10⁸命令/秒、1件は100万＝10⁶命令なので、割り算でサーバの件/秒を求めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "転送速度の単位はビット/秒です。1件の2×10⁵バイトを8倍してビットへ変換してから割ります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "サーバ側は10⁸/10⁶、ネットワーク側は8×10⁷/(8×2×10⁵)です。両方の能力が必要なので、小さい方を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "MIPSとバイト/ビットの単位を混同し、二能力の大きい方を選んでしまう。",
+      "stages": [
+        {
+          "newInformation": "MIPSの定義とサーバ件数の式",
+          "remainingWork": "命令毎秒を1件の命令数で割る",
+          "revealsAnswer": false,
+          "reason": "単位換算と途中式のみ。"
+        },
+        {
+          "newInformation": "1バイト8ビットの変換",
+          "remainingWork": "1件転送量から件/秒を計算",
+          "revealsAnswer": false,
+          "reason": "最終件数は未提示。"
+        },
+        {
+          "newInformation": "各能力の式と小さい方が上限という条件",
+          "remainingWork": "二つの割り算と大小比較",
+          "revealsAnswer": false,
+          "reason": "公式と代入値のみで最終数値を出さない。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r06a/r06a-q15.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=7fb81d79489e43d2dd1abb9eb25771ba610d3d04533eff0e6aa00f387ef1e44d。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf を取得。PDF SHA-256=e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732。pdftotextで抽出した解答表の問15=アを照合。",
+        "独立再導出・全肢点検: 100×10⁶/10⁶=100件/秒、8×10⁷/(2×10⁵×8)=50件/秒。min=50。200は両能力超過、400はビット換算漏れ。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9ad66f1e42b840a7c5596e78b975c32a180d36841f3862ccc69a2d5e4b15ea38",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q17",
+      "summary": "複数スレッドが同時期に利用するときの正しさを表す性質を問います。",
+      "explanation": "スレッドはプログラム内の処理の実行の流れです。スレッドセーフとは、複数のスレッドが同時期に関数やデータを利用しても、競合による破損などを起こさず正しい結果を保てることです。\n共有データの更新をロックで保護するなどして実現します。一つのスレッドだけで動かすことや、競合後に停止することを意味しません。",
+      "choiceReasons": [
+        "複数スレッドからの呼出しを禁止する性質ではありません。並行利用時の正しさを指します。",
+        "単一スレッドでの動作に限定する説明で、スレッドセーフの性質とは異なります。",
+        "複数スレッドで並行実行しても問題が起きない説明が正しいです。",
+        "競合後の安全停止ではなく、競合しても正しい動作を保つよう設計する性質です。"
+      ],
+      "takeaway": "スレッドセーフは、並行利用を許しても動作の正しさを守る性質。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "スレッドはプログラム内の処理の実行の流れです。同じ共有カウンターを二つのスレッドが更新すると、両方が同じ古い値を読んで一方の更新を失うことがあります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "排他制御などで同時更新を調整し、並行に呼ばれても結果が正しくなるようにします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "例えば、共有カウンターの「読込み→加算→書込み」をロックで一まとまりに保護すれば、更新の取りこぼしを防げます。このように複数スレッドでも正しく動く性質です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "安全停止や単一スレッド限定を「セーフ」と解釈する。",
+      "stages": [
+        {
+          "newInformation": "スレッドの意味と更新喪失の例",
+          "remainingWork": "防止すべき問題を把握",
+          "revealsAnswer": false,
+          "reason": "誤動作の例であり性質の定義は未提示。"
+        },
+        {
+          "newInformation": "並行呼出しでも結果を正しくする目的",
+          "remainingWork": "定義を肢へ対応",
+          "revealsAnswer": true,
+          "reason": "正答肢と実質同じ定義。"
+        },
+        {
+          "newInformation": "読込み加算書込みをロックで保護する方法",
+          "remainingWork": "性質を実現する例を理解",
+          "revealsAnswer": true,
+          "reason": "前段の正答定義に具体例を加える。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07a/r07a-q17.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=a43c86e6ffb6759439a86be7c531718b1167bf122052bff8c0b40942468b1767。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得。PDF SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextで抽出した解答表の問17=ウを照合。",
+        "独立再導出・全肢点検: 並列実行時の正しさがスレッドセーフ。呼出し禁止・単一化・競合後停止とは区別。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a4660aac4f6ef7852e6ea697f93e0033b827f765668ac6948c08b898453a8dd7",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q17",
+      "summary": "共有通信路を二つのタスクが排他的に利用するためのOS機能を問います。",
+      "explanation": "I²Cは複数の機器を接続できるシリアル通信方式です。二つのタスクが同じI²Cバスを同時に使うと、通信操作が競合するおそれがあります。共有資源であるバスを一度に一つのタスクだけが使えるよう、初期値1のセマフォを取得してから通信し、終了後に解放します。キューやスケジューリング方式だけでは、この資源の排他利用を直接保証しません。",
+      "choiceReasons": [
+        "キューはデータや要求の受渡しを行う仕組みで、それだけでタスクのバス使用を排他にしません。",
+        "セマフォは共有資源への進入を制御でき、二つのタスクの通信を排他にできます。",
+        "マルチスレッドは複数の実行流を扱う仕組みで、むしろ共有資源の同期が別途必要です。",
+        "ラウンドロビンは実行時間を順に配る方式で、バス操作のまとまり全体を排他にする機能ではありません。"
+      ],
+      "takeaway": "共有バスや装置の排他利用には、取得・利用・解放の同期機能を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "I²Cは複数の機器を接続できるシリアル通信方式です。センサーは二つでも通信路は一つなので、二つのタスクが共有するのは同じバスです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "通信開始から終了まで他のタスクが同じバスを使わないよう、利用権を取得して最後に返す手順を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "初期値1のセマフォを使います。通信前に獲得すると値が0になり、他方は待ちます。通信終了後に解放して値を戻すと、待つ側が獲得でき、一度に一タスクだけが使えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサーが別なので競合しないと思い、共有バスと同期機能を対応できない。",
+      "stages": [
+        {
+          "newInformation": "I²Cは通信方式、バスが共有資源",
+          "remainingWork": "保護する通信区間を考える",
+          "revealsAnswer": false,
+          "reason": "資源の特定のみで機能名は未提示。"
+        },
+        {
+          "newInformation": "利用権を通信前に取り終了後に戻す",
+          "remainingWork": "OS機能名と仕組みの対応",
+          "revealsAnswer": false,
+          "reason": "獲得解放の手順で名称は未提示。"
+        },
+        {
+          "newInformation": "初期値1のセマフォの獲得待ち解放",
+          "remainingWork": "排他の仕組みを確認",
+          "revealsAnswer": true,
+          "reason": "正答名と利用手順を示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r04h/r04h-q17.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=290cd5743efca93ac8af522af21769bd9fd7cfe8d3b089404591ced9fc3d697b。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf を取得。PDF SHA-256=92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59。画像として開いた解答表の問17=イを照合。",
+        "独立再導出・全肢点検: 初期値1のセマフォで共有I²Cバスの全通信区間を排他化。キューは受渡し、マルチスレッドは実行流。ラウンドロビンは実行時間の配分。",
+        "補助一次資料: https://pubs.opengroup.org/onlinepubs/9799919799/functions/sem_wait.html を取得し、値0で獲得待ちしsem_postで解放するセマフォの動作を確認。HTML SHA-256=b890d9f65e2af15a8012c533496429a394e5c3b283f1aa1a38941de9eb81a198。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7c8bf8a69ba6f9f71ab66b830d2604c883cb7558ea001ba6de80182f884cc1c2",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q16",
+      "summary": "共有通信路を二つのタスクが排他的に利用するためのOS機能を問います。",
+      "explanation": "I²Cは複数の機器を接続できるシリアル通信方式です。センサーが別でも、同じI²Cバスを同時に使うと通信操作が競合します。共有バスの使用前にセマフォを獲得し、通信終了後に解放すれば、もう一方のタスクを待たせられます。\n初期値1のセマフォを使うと、一度に一タスクだけがバスを使うよう制御できます。",
+      "choiceReasons": [
+        "キューはデータやメッセージの受渡し用で、共有バスの排他制御を直接行う機能ではありません。",
+        "セマフォでバス使用権を獲得・解放し、同時アクセスを防げます。",
+        "マルチスレッドは複数の実行の仕組みで、それ自体では排他になりません。",
+        "メモリプールは記憶領域の割当て用で、I²Cバス使用の排他制御ではありません。"
+      ],
+      "takeaway": "共有通信路も排他対象。使用前に獲得し、終了後に解放する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "I²Cは複数の機器を接続できるシリアル通信方式です。センサーは二つでも通信路は一つなので、二つのタスクが共有するのは同じバスです。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タスク1が通信中なら、タスク2はバスが空くまで待つ必要があります。使用権を一つに制限する仕組みを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "初期値1のセマフォを使います。通信前に獲得すると値が0になり、他方は待ちます。通信終了後に解放して値を戻すと、待つ側が獲得でき、一度に一タスクだけが使えます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "センサーが別なので競合しないと思い、共有バスと同期機能を対応できない。",
+      "stages": [
+        {
+          "newInformation": "I²Cは通信方式、バスが共有資源",
+          "remainingWork": "保護する通信区間を考える",
+          "revealsAnswer": false,
+          "reason": "資源の特定のみで機能名は未提示。"
+        },
+        {
+          "newInformation": "一方のタスクの通信中は他方を待たせ、利用権を一つに制限する必要",
+          "remainingWork": "OS機能名と仕組みの対応",
+          "revealsAnswer": false,
+          "reason": "一つの利用権による待合せの必要を教えるが、OS機能名はまだ示さない。"
+        },
+        {
+          "newInformation": "初期値1のセマフォの獲得待ち解放",
+          "remainingWork": "排他の仕組みを確認",
+          "revealsAnswer": true,
+          "reason": "正答名と利用手順を示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07a/r07a-q16.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=a882dc2ffec79182e71ad7ca5bcffdca7c1e5a895ad4edb1ca50ed7556d576f1。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得。PDF SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextで抽出した解答表の問16=イを照合。",
+        "独立再導出・全肢点検: 初期値1のセマフォで共有I²Cバスの全通信区間を排他化。キューは受渡し、マルチスレッドは実行流。メモリプールは領域割当て。",
+        "補助一次資料: https://pubs.opengroup.org/onlinepubs/9799919799/functions/sem_wait.html を取得し、値0で獲得待ちしsem_postで解放するセマフォの動作を確認。HTML SHA-256=b890d9f65e2af15a8012c533496429a394e5c3b283f1aa1a38941de9eb81a198。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b82bd8eb89be0feaf983731beefe427b753191eae1e2045b8d1a689550a17462",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q16",
+      "summary": "二つの資源を使うタスク間の循環待ちを防ぐ方法を問います。",
+      "explanation": "一方が資源Xを確保してYを待ち、もう一方がYを確保してXを待つと循環待ちになります。両者ともX→Yの順に獲得すれば、Yだけを持ってXを待つ状態が生じず、循環待ちを防げます。",
+      "choiceReasons": [
+        "優先度を高くしても、必要資源が他方に確保されていれば処理を進められません。",
+        "同じ獲得順にすると循環待ちを作れません。",
+        "逆順はXとYを互いに持って待つ状態を作りやすくします。",
+        "同じ優先度でも資源の循環待ちは解消されません。"
+      ],
+      "takeaway": "共有資源に全体で共通の獲得順序を設けると循環待ちを防げる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "二つの資源をX,Yと名付け、各タスクが一つずつ持つ状態を描きます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "タスク1がXを持ってYを待ち、タスク2がYを持ってXを待つと、相手が解放しないため両方とも進めません。この循環待ちを作れない獲得順を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "両者がX→Yの順なら、Xを取れなかった側はYも保持していません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "タスク優先度と資源待ちを混同し、循環待ちの作り方が分からない。",
+      "stages": [
+        {
+          "newInformation": "資源XとYを互いに一つずつ保持する状態",
+          "remainingWork": "保持と待ちを図で確認",
+          "revealsAnswer": false,
+          "reason": "障害状況の説明のみで予防策は未提示。"
+        },
+        {
+          "newInformation": "具体的な相互待ちが進めない理由",
+          "remainingWork": "循環を防ぐ獲得規則を考える",
+          "revealsAnswer": false,
+          "reason": "相互待ちの定義で解決規則は未提示。"
+        },
+        {
+          "newInformation": "Xを取れなければYも取らないという共通順序",
+          "remainingWork": "優先度と獲得順の違いを確認",
+          "revealsAnswer": true,
+          "reason": "正答肢の共通順序の具体例。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r04a/r04a-q16.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=3616605ef7ce8c9ded3359df8dc5b62a2f1d4db259f32209ff779586b2b2e6fd。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf を取得。PDF SHA-256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。pdftotextで抽出した解答表の問16=イを照合。",
+        "独立再導出・全肢点検: X→Yを全タスクで統一すると循環待ちを除く。逆順はX/Y別々保持を許し、優先度の大小や一致では資源保持は解消しない。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q18",
+    "baseVersion": 2,
+    "baseLessonSHA256": "282193454471ceac4a5db05d1457b1a0e9732f219e5252987bc770048f4a9840",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q18",
+      "summary": "二つの資源を使うタスク間の循環待ちを防ぐ方法を問います。",
+      "explanation": "資源X,Yを使うとき、タスク1がXを持ってYを待ち、タスク2がYを持ってXを待つと、互いに解放を待つデッドロックになります。\n両方がX→Yの順に獲得する規則なら、Xを取れなかったタスクはYを先に保持しません。循環待ちを防げるため、デッドロックを防止できます。",
+      "choiceReasons": [
+        "優先度を上げても、必要資源を相手が保持していれば進めず、循環待ちは消えません。",
+        "獲得順を統一すれば、二つの資源を逆に持って待ち合う状態を防げます。",
+        "逆の順で獲得すると、それぞれ一つを保持してもう一つを待つ状態を作りやすくなります。",
+        "同じ優先度にしても、資源の保持・待合いを防ぐ規則にはなりません。"
+      ],
+      "takeaway": "全タスクで資源獲得順を統一し、循環待ちをなくす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "Xを保持してY待ちのタスクと、Yを保持してX待ちのタスクを図にすると、待ちの矢印が循環します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "両方がまずXを取り、次にYを取る場合を考えます。Xを取れなかった側がYを保持できるでしょうか。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "優先度の大小では資源の保持は解消されません。二つの資源をどの順に取るかを変える候補で循環を防げるか確認しましょう。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "タスク優先度と資源待ちを混同し、循環待ちの作り方が分からない。",
+      "stages": [
+        {
+          "newInformation": "X保持Y待ちとY保持X待ちの循環",
+          "remainingWork": "保持と待ちを図で確認",
+          "revealsAnswer": false,
+          "reason": "障害状況の説明のみで予防策は未提示。"
+        },
+        {
+          "newInformation": "両タスクがX→YならYだけ保持しない",
+          "remainingWork": "共通獲得順と選択肢を対応",
+          "revealsAnswer": true,
+          "reason": "正答肢の共通順序を実質示す。"
+        },
+        {
+          "newInformation": "優先度変更では保持中の資源を解放できない",
+          "remainingWork": "優先度と獲得順の違いを確認",
+          "revealsAnswer": true,
+          "reason": "前段で正答の獲得順を開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r07a/r07a-q18.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=a667f158b29931cd09a19356a5611f17592b8c829cab26e36d0f339c6e96cc4e。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf を取得。PDF SHA-256=ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82。pdftotextで抽出した解答表の問18=イを照合。",
+        "独立再導出・全肢点検: X→Yを全タスクで統一すると循環待ちを除く。逆順はX/Y別々保持を許し、優先度の大小や一致では資源保持は解消しない。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ad4f221a2b4cb8ecbcb2010d602b32905e0fda6c4e6b0c947bf5408537ef777d",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q19",
+      "summary": "ハッシュ値の衝突がないとき、データ件数と1件の探索時間の関係を問います。",
+      "explanation": "ハッシュ表はキーからハッシュ値を計算し、その値に対応する格納位置へ直接アクセスします。この問題では同じハッシュ値をもつ複数データがなく、衝突の解決のために候補をたどる必要がありません。そのため表内の件数nが増えても、1件当たりの理論的な探索時間はO(1)（件数に依存しない一定時間）で、水平なエです。",
+      "choiceReasons": [
+        "件数とともに探索時間が加速して増える形で、衝突なしの直接アクセスに合いません。",
+        "件数に比例する形は線形探索などの時間であり、衝突なしのハッシュ探索ではありません。",
+        "増加が緩くても件数に応じて時間が増えており、一定時間の条件に合いません。",
+        "件数によらず一定時間を表す水平なグラフです。"
+      ],
+      "takeaway": "ハッシュ値の衝突がなければ、キーから位置を直接求める探索はO(1)、すなわち件数に依存しない一定時間。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "縦軸は全件の処理時間ではなく「データ1個当たりの探索時間」です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "ハッシュ表はキーからハッシュ値を計算し、対応する格納位置を直接調べます。同じハッシュ値がない条件なら、ほかの候補を順番に探索する必要がありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "キーから位置を計算して1か所にアクセスする回数は、表の件数が増えても変わりません。対応する線の形を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "グラフの縦軸を全件の合計時間と読み、件数増加と混同する。",
+      "stages": [
+        {
+          "newInformation": "縦軸は1件当たりの探索時間",
+          "remainingWork": "横軸との関係を考える",
+          "revealsAnswer": false,
+          "reason": "グラフの読み方で線の形は未提示。"
+        },
+        {
+          "newInformation": "キーから位置を直接求め、衝突処理がない",
+          "remainingWork": "グラフの形を対応",
+          "revealsAnswer": true,
+          "reason": "直接1か所に行く説明が一定時間の正答を実質特定。"
+        },
+        {
+          "newInformation": "アクセス回数は件数に依存しない",
+          "remainingWork": "水平な線を選ぶ",
+          "revealsAnswer": true,
+          "reason": "一定時間という正答グラフの性質を示す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "takeaway",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r05h/r05h-q19.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=7d7bd3831f9e23a1ac4b08fad6cf44f682941bd9ac703beb545f8acabdbcd64d。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf を取得。PDF SHA-256=334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546。pdftotextで抽出した解答表の問19=エを照合。",
+        "独立再導出・全肢点検: 原本全4グラフを視認。アは加速増加、イは直線増加、ウは増加後に緩やか、エは水平。衝突なしで1件O(1)。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9cc6d374db3bfeabc79cb47fd2594200b9682f083e5980c0515c484d2e33bbd5",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q17",
+      "summary": "プリエンプションによるタスクの状態遷移と、入出力待ちを区別します。",
+      "explanation": "プリエンプションはOSが実行中のタスクからCPUを強制的に取り上げることです。処理は終わっておらず、入出力待ちにもなっていないので、再びCPUが割り当てられれば実行できる実行可能状態へ移ります。",
+      "choiceReasons": [
+        "休止はタスクの開始前などの状態で、CPUを奪われただけでは移りません。",
+        "CPUの割当てを待つ実行可能状態になります。",
+        "処理が完了したわけではないので終了状態ではありません。",
+        "入出力やイベントを待つ要因がないため待ち状態ではありません。"
+      ],
+      "takeaway": "CPU待ちと入出力待ちは異なる状態。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "プリエンプションは、OSが実行中のタスクからCPUの使用権を強制的に取り上げることです。タスクの処理そのものが完了したわけではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "入出力の完了を待つ原因はなく、CPUが再び割り当てられれば処理を再開できます。CPUの割当てだけを待つのが実行可能状態です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "「待ち状態」は入出力やイベントの完了を待ち、CPUだけでは再開できない状態です。プリエンプションによる実行可能状態とは、待つ対象が異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "プリエンプションを知らず、CPU待ちと入出力待ちを混同する。",
+      "stages": [
+        {
+          "newInformation": "プリエンプション＝CPU使用権の強制取上げ",
+          "remainingWork": "CPU再取得で再開できるか判断",
+          "revealsAnswer": false,
+          "reason": "原因の定義のみで遷移先は示さない。"
+        },
+        {
+          "newInformation": "CPU割当て待ちを実行可能状態と呼ぶ",
+          "remainingWork": "選択肢との対応",
+          "revealsAnswer": true,
+          "reason": "正答の状態名と定義を示す。"
+        },
+        {
+          "newInformation": "待ち状態は入出力やイベント待ち",
+          "remainingWork": "二状態の待つ対象を比較",
+          "revealsAnswer": true,
+          "reason": "前段で正答名を開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r03h/r03h-q17.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=935e12b64e4d4a2abcc296d4b350c02f6aefcbdf151fea03f961731f027e7d00。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf を取得。PDF SHA-256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。pdftotextで抽出した解答表の問17=イを照合。",
+        "独立再導出・全肢点検: 実行→実行可能。休止や終了ではなく、入出力等の待ち要因もない。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q14",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0df7005d9ddee66d9c4dec38266553cf261bed101b6dfe6ed288ff725e0f84a6",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q14",
+      "summary": "CPU台数を増やしたとき、与えられた性能式が近づく上限を求めます。",
+      "explanation": "a=0.1を代入するとP=n/{1+(n−1)×0.1}=n/(0.9+0.1n)です。分子と分母をnで割るとP=1/(0.9/n+0.1)。\nnが大きくなると0.9/nは0へ近づくので、Pは1/0.1=10へ近づきます。有限のnでは分母が0.1より大きいためP<10です。",
+      "choiceReasons": [
+        "アの5は上限ではありません。例えばn=10ではP=10/1.9で5を超えます。",
+        "イの10はnを無限に増やした極限1/aです。",
+        "ウの15は上限10を超え、この式では到達できません。",
+        "エの20も上限10を超えます。CPU数と性能は比例し続けません。"
+      ],
+      "takeaway": "nを含む分数の上限は、分子と分母をnで割って小さくなる項を調べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "分母の(n−1)aを展開し、a=0.1を代入します。分母にもnが残る点に注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "P=n/(0.9+0.1n)を、分子・分母をnで割った形へ変えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "P=1/(0.9/n+0.1)です。一定の数0.9を非常に大きいnで割ると0に近づきます。残る分母の逆数を求めます。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CPU台数に比例し続けると考え、分母のnを扱えない。",
+      "stages": [
+        {
+          "newInformation": "分母の展開とa代入",
+          "remainingWork": "式を整理",
+          "revealsAnswer": false,
+          "reason": "変形の入口のみ。"
+        },
+        {
+          "newInformation": "分子分母をnで割る手順",
+          "remainingWork": "変形後のn依存を調べる",
+          "revealsAnswer": false,
+          "reason": "上限値は示さない。"
+        },
+        {
+          "newInformation": "0.9/nは0に近づく",
+          "remainingWork": "残る0.1の逆数を計算",
+          "revealsAnswer": false,
+          "reason": "極限の手順を教え最終計算は残す。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r06h/r06h-q14.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=fa14623e24b5224087e998b919598c79a44d4dc5a3b74f4013a5b7c62402505a。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf を取得。PDF SHA-256=2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37。pdftotextで抽出した解答表の問14=イを照合。",
+        "独立再導出・全肢点検: P=n/(0.9+0.1n)=1/(0.9/n+0.1)→10。有限nでは分母>0.1、P<10。5はn=10で超え、15と20は上限超過。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q19",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9546c257667df67108457dad40c8cb99a0b39797bc8442a55f74b6a40e619981",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q19",
+      "summary": "ページフォールト・ページイン・ページアウトの発生回数の関係を問います。",
+      "explanation": "ページフォールトは、参照したページが主記憶にないときの割込みです。ページインは補助記憶から主記憶への読込み、ページアウトは主記憶から補助記憶への書出しです。主記憶にないページへのアクセスでページフォールトが起こり、そのページをページインします。空き枠があればページアウトは不要です。また追い出すページが未変更なら書出しを省略できるので、ページアウトが必ず同数になるわけではありません。",
+      "choiceReasons": [
+        "ページアウトがページイン以上とは限りません。空き枠なら書出しは不要です。",
+        "ページインとフォールトは同数ですが、ページアウトが不要な場合があるため、ページアウトがフォールト以上という先頭の関係が誤りです。",
+        "ページアウトは必ずフォールトと同数ではなく、不要な場合があります。",
+        "フォールト=ページイン≧ページアウトが成り立ちます。"
+      ],
+      "takeaway": "欠けたページの読込みは必須でも、追出し時の書込みは条件付き。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "ページフォールトは参照ページが主記憶にないときの割込み、ページインは必要なページの読込み、ページアウトはページの書出しです。空き枠があるときの初回アクセスを考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "空き枠へ読み込む例では、フォールトとページインが1回ずつで、ページアウトは0回です。この例だけでも、ページアウトが必ずフォールト以上又は同数とする候補を除外できます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "空き枠がない場合でも、追い出すページが未変更なら書出しは省略できます。フォールトごとにページインは必要ですが、ページアウトは条件付きなので、フォールト＝ページイン≧ページアウトです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ページインは必須でもページアウトは省略できる点を知らない。",
+      "stages": [
+        {
+          "newInformation": "三事象の定義と空き枠の例",
+          "remainingWork": "各事象の回数を考える",
+          "revealsAnswer": false,
+          "reason": "定義のみで回数関係は示さない。"
+        },
+        {
+          "newInformation": "空き枠ではフォールト1・イン1・アウト0",
+          "remainingWork": "候補の不等号を照合",
+          "revealsAnswer": true,
+          "reason": "具体例で誤答三肢をすべて除外できる。"
+        },
+        {
+          "newInformation": "未変更の追出しページも書出し不要",
+          "remainingWork": "一般の回数関係を理解",
+          "revealsAnswer": true,
+          "reason": "正答の等号不等号を明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "explanation",
+        "choiceReasons",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r03h/r03h-q19.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=f4d0ec0c44cf07f07f9515dbd8e5c8a37f51d9baa54834d695d99c3bf88a2ce9。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf を取得。PDF SHA-256=7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1。pdftotextで抽出した解答表の問19=エを照合。",
+        "独立再導出・全肢点検: 原本の全不等号を照合。要求ページを読むインはフォールトと同数、アウトは空き枠や未変更なら不要なので以下。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q17",
+    "baseVersion": 2,
+    "baseLessonSHA256": "6c0f20325dd2c78490868da03e0b9555c052ec1b87b6cdde4a1070eab7482364",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q17",
+      "summary": "小さいプログラムが多い条件で、ページサイズとページ内の無駄の関係を考えます。",
+      "explanation": "ほとんどのプログラムが元のページの半分以下なので、1ページに割り当てた領域の多くが使われません。ページを半分にしてもそれらは1ページに収まり、割当て量を減らせます。主記憶不足という条件では、この内部断片化の削減が有効です。",
+      "choiceReasons": [
+        "ページが小さいと管理するページ数は増え得るため、管理負荷が減るとはいえません。",
+        "半分以下のプログラムは新しい1ページにも収まり、余白減少による性能低下とはいえません。",
+        "1プログラムに割り当てるページ内の無駄が減り、主記憶を有効に使えます。",
+        "ページフォールトが必ず増えるわけではなく、記憶不足の緩和で減る可能性もあります。"
+      ],
+      "takeaway": "小さいプログラムに大きいページを割り当てると内部断片化が大きい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "「ほとんどがページの半分以下」という条件から、1ページ内で使わない量を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば元のページが8KBでプログラムが3KBなら、1ページを割り当てて5KBが余ります。ページを4KBにしても1ページに収まり、余りは1KBです。ページ内の未使用領域を内部断片化と呼びます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "元も変更後も1ページに収まるなら、占有する主記憶は半分になり空きの無駄を減らせます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ページ内の未使用領域と空きページ枠を混同する。",
+      "stages": [
+        {
+          "newInformation": "対象は半ページ以下の小プログラム",
+          "remainingWork": "1ページ内の未使用量を考える",
+          "revealsAnswer": false,
+          "reason": "与件の整理のみ。"
+        },
+        {
+          "newInformation": "8KB→4KBの例と内部断片化の定義",
+          "remainingWork": "主記憶不足への効果を対応",
+          "revealsAnswer": true,
+          "reason": "ページ内の無駄減少という正答の仕組みを示す。"
+        },
+        {
+          "newInformation": "1ページに収まるまま割当て主記憶が半分",
+          "remainingWork": "資源不足緩和を確認",
+          "revealsAnswer": true,
+          "reason": "正答肢の効果を実質示し前段も開示済み。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r04a/r04a-q17.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=72fc4c661706fcc7647392713f2683b329df055e77725ea42e7f5b932b62ce56。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf を取得。PDF SHA-256=cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1。pdftotextで抽出した解答表の問17=ウを照合。",
+        "独立再導出・全肢点検: 元ページS、ほとんどのプログラムx≤S/2。新ページS/2にも1枚で収まり、余りはS−xからS/2−xへ減る。管理負荷やフォールト増加は断定不可。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q16",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2b79df47285172ff0ca45694790d6c8d18daaafc8ef38127ff05ca255e5088bc",
+    "author": "Codex /root/ap_wave02_author_4",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q16",
+      "summary": "2種類のページフォールト処理時間の加重平均から、片方の発生割合を求めます。",
+      "explanation": "ページインだけの割合をpとすると、ページアウトを伴う割合は1−pです。二種類の処理時間20、60の加重平均が30になります。\n20p+60(1−p)=30より、60−40p=30、40p=30、p=0.75です。",
+      "choiceReasons": [
+        "0.25では平均20×0.25+60×0.75=50となり、30ではありません。これはページアウトを伴う割合に対応します。",
+        "0.33では平均が約46.8ミリ秒となり、30より大きくなります。",
+        "0.67では平均が約33.2ミリ秒となり、30にはなりません。",
+        "0.75なら20×0.75+60×0.25=30ミリ秒で条件を満たします。"
+      ],
+      "takeaway": "二種類の平均時間は各時間に発生割合を掛けて足す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "求めるのはページアウトを「伴わない」割合です。この場合が20ミリ秒、残りが60ミリ秒となります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "求める割合をpにすると、もう一方は1−pです。平均30を20p+60(1−p)で表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "20p+60−60p=30を整理すると40p=30です。pを求め、0から1の範囲で選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "求める割合を逆に取り、二種類の加重平均を作れない。",
+      "stages": [
+        {
+          "newInformation": "求める方が20ms、残りが60ms",
+          "remainingWork": "求める割合を変数に置く",
+          "revealsAnswer": false,
+          "reason": "最終割合は示さない。"
+        },
+        {
+          "newInformation": "二割合pと1−p及び加重平均式",
+          "remainingWork": "平均30として方程式を解く",
+          "revealsAnswer": false,
+          "reason": "式の立て方で計算は残る。"
+        },
+        {
+          "newInformation": "展開整理して40p=30",
+          "remainingWork": "両辺を40で割る",
+          "revealsAnswer": false,
+          "reason": "最終の割り算は本人が行う。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "原本確認: assets/questions/r05a/r05a-q16.webp をview_imageで開き、問題文・全4肢・表/図/式をcontextと照合。SHA-256=3de62593cbcaa725bec47af0309c8f9594ce12f71c0cc6fca370e4b21e8c9dd5。",
+        "公式解答: https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf を取得。PDF SHA-256=412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741。pdftotextで抽出した解答表の問16=エを照合。",
+        "独立再導出・全肢点検: 20p+60(1−p)=30→p=0.75。検算15+15=30ms。0.25は伴う割合。0.33なら46.8、0.67なら33.2ms。",
+        "作者自己点検のみ。独立レビュー・初学者試用・公開は未実施。原問変更を要する疑義・未解決の保留なし。"
+      ]
+    }
+  }
+]

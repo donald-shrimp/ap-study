@@ -1,0 +1,1388 @@
+[
+  {
+    "id": "r04h-q64",
+    "baseVersion": 2,
+    "baseLessonSHA256": "03d5abc71aa29f4269fae10bbd87c3983ba48fca54871d6a1788f98101633e64",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q64",
+      "summary": "投資指標IRR・NPV・PBP・ROIのうち、**初期投資回収までの年数**を表すものを見分ける。",
+      "explanation": "PBPはPay Back Periodで、初期投資によるキャッシュアウトを、その後の累積キャッシュインで回収するまでの期間を表します。回収の早さを見る指標です。IRRは収益率、NPVは現在価値に割り引いた正味の金額、ROIは投資に対する利益の比率です。",
+      "choiceReasons": [
+        "IRRはNPVを0にする割引率であり、回収までの年数ではありません。",
+        "NPVはキャッシュフローを現在価値に割り引いた正味額です。",
+        "PBPは投資を回収するまでの期間を示します。",
+        "ROIは投資額に対する利益等の比率で、期間を表す指標ではありません。"
+      ],
+      "takeaway": "回収期間はPBP、現在価値の金額はNPV、率はIRR・ROIと単位で区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問はキャッシュアウト（**現金の支出**）を、後のキャッシュイン（**現金の収入**）で何年後に取り戻すかを聞いています。答えの単位は％や円ではなく**年数**です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**IRR＝Internal Rate of Return（内部収益率）**は割合、**NPV＝Net Present Value（正味現在価値）**は割引後の金額、**ROI＝Return on Investment（投資利益率）**は割合。回収までの期間に対応するのは**PBP＝Pay Back Period（投資回収期間）**です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**PBP（Pay Back Period）＝初期支出を何年で回収するか**なのでウです。例えば投資100万円・年25万円の回収なら4年となります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "4つの英語略称と指標の単位が不明で、金額・率・年数を区別できない。",
+      "stages": [
+        {
+          "newInformation": "設問はキャッシュアウト（**現金の支出**）を、後のキャッシュイン（**現金の収入**）で何年後に取り戻すかを聞いています。答えの単位は％や円ではなく**年数**です。",
+          "remainingWork": "各指標の名称・意味を照合し、回収までの期間を測るものを選ぶ",
+          "revealsAnswer": false,
+          "reason": "現金の収支と年数という問いを整理するだけで、原問にも何年後と書かれている。各英語名称・略語と評価指標の対応をまだ教えておらず、名称との対応判断が残る。"
+        },
+        {
+          "newInformation": "**IRR＝Internal Rate of Return（内部収益率）**は割合、**NPV＝Net Present Value（正味現在価値）**は割引後の金額、**ROI＝Return on Investment（投資利益率）**は割合。回収までの期間に対応するのは**PBP＝Pay Back Period（投資回収期間）**です。",
+          "remainingWork": "異なる指標の使い分けを確認する",
+          "revealsAnswer": true,
+          "reason": "PBPが正答ウだと実質確定する。"
+        },
+        {
+          "newInformation": "**PBP（Pay Back Period）＝初期支出を何年で回収するか**なのでウです。例えば投資100万円・年25万円の回収なら4年となります。",
+          "remainingWork": "期間指標と収益率指標の違いを説明する",
+          "revealsAnswer": true,
+          "reason": "ウを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r04h/r04h-q64.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=a5ea98369ccfa09d8a25d02dec20336c9e20fc1f9599b00c906cdb91fb95d29a（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：4つの英語略称と指標の単位が不明で、金額・率・年数を区別できない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。現金の収支と年数という問いを整理するだけで、原問にも何年後と書かれている。各英語名称・略語と評価指標の対応をまだ教えておらず、名称との対応判断が残る。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q64",
+    "baseVersion": 2,
+    "baseLessonSHA256": "eabcfeb1ad0b77813125af5a6e3848bac2859d17d7bd9b0a660958789e79d902",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q64",
+      "summary": "PBP・IRR・NPV・ROIを、投資回収にかかる**期間・金額・割合**で区別する。",
+      "explanation": "PBP（Pay Back Period、回収期間）は、初期の投資によるキャッシュアウトを、その後のキャッシュインで回収できるまでの期間を示します。\nたとえば初期支出100に対して毎年25の純キャッシュインがあれば、累計が100に達する4年が回収期間です。収益率や現在価値を求める指標と区別します。",
+      "choiceReasons": [
+        "IRRはNPVが0となる割引率であり、回収までの年数ではありません。",
+        "NPVは将来のキャッシュフローを現在価値へ割り引いて合計する指標です。",
+        "PBPは初期投資額を回収するまでの期間を示し、設問の「何年後」に対応します。",
+        "ROIは投資額に対する利益などの比率で、回収までの年数ではありません。"
+      ],
+      "takeaway": "回収までの期間はPBP、率はIRRやROI、現在価値はNPV。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "キャッシュアウトは**出ていく現金**、キャッシュインは**入ってくる現金**です。『何年後に回収』という質問は**時間の長さ**を求め、単なる利益額や率とは違います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**PBP＝Pay Back Period（回収期間）**。毎年のキャッシュインを累積し、最初の支出に達する年数を数えます。**NPV（正味現在価値）**は金額、**IRR（内部収益率）・ROI（投資利益率）**は率です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "100万円支出して25万円ずつ年末に戻れば、4年で回収。**回収期間を測るPBPはウ**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "投資評価の略称が英語で、何を測るか知らず答えられない。",
+      "stages": [
+        {
+          "newInformation": "キャッシュアウトは**出ていく現金**、キャッシュインは**入ってくる現金**です。『何年後に回収』という質問は**時間の長さ**を求め、単なる利益額や率とは違います。",
+          "remainingWork": "各英語名称の意味を整理し、回収期間を測る指標と対応づける",
+          "revealsAnswer": false,
+          "reason": "現金の収支と時間の長さという質問の意味を説明するが、回収期間の指標名を教えていない。原問の何年後を言い換えるだけで、PBPなど各名称との対応判断が残る。"
+        },
+        {
+          "newInformation": "**PBP＝Pay Back Period（回収期間）**。毎年のキャッシュインを累積し、最初の支出に達する年数を数えます。**NPV（正味現在価値）**は金額、**IRR（内部収益率）・ROI（投資利益率）**は率です。",
+          "remainingWork": "PBPの選択肢を確かめる",
+          "revealsAnswer": true,
+          "reason": "正答ウの名称を直接示す。"
+        },
+        {
+          "newInformation": "100万円支出して25万円ずつ年末に戻れば、4年で回収。**回収期間を測るPBPはウ**です。",
+          "remainingWork": "年数と利率の評価の差を確認する",
+          "revealsAnswer": true,
+          "reason": "ウを明示する。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05a/r05a-q64.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=12a69876e7ae0b3c9d04ac794846790677ab9ef3649b0a142653b7e5f8f9a5bf（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：投資評価の略称が英語で、何を測るか知らず答えられない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。現金の収支と時間の長さという質問の意味を説明するが、回収期間の指標名を教えていない。原問の何年後を言い換えるだけで、PBPなど各名称との対応判断が残る。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q64",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d31f99d3ece9b2a3f7080671a951e6fbdf638a591bba5afa59331fbac9694ebd",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q64",
+      "summary": "PBP法で評価する対象と、**時間価値や回収後の収入を通常含まない**限界を問う。",
+      "explanation": "PBPはPayback Period、回収期間法です。投資額を将来の累積キャッシュフローで何年掛けて回収できるかを求め、短いものを有利と判断します。\n通常のPBPは割引による時間価値や、回収後の収益を評価しません。現在価値の総和を扱うNPVや、NPVを0にする率を求めるIRRとは異なります。",
+      "choiceReasons": [
+        "通常のPBPでは時間価値を割り引いて考慮しません。",
+        "回収するまでの期間が評価基準なので、回収後のキャッシュフローは評価に反映されません。",
+        "投資金額を回収するまでの期間の長さで評価する説明がPBPです。",
+        "通常のPBPはNPVやIRRと同じように割引率を用いる方式ではありません。"
+      ],
+      "takeaway": "PBPは回収までの早さ。時間価値と回収後の収益は通常考慮しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**PBP＝Pay Back Period（投資回収期間）**。例えば初期投資100万円に対し、毎年25万円の現金が入れば、累積が100万円に届く年を数えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "通常のPBPは**投資を回収するまでの長さ**で判断し、回収後の収入や**割引による時間価値**は評価しません。NPV（Net Present Value：正味現在価値）やIRR（Internal Rate of Return：内部収益率）とは異なります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "投資額を回収する**期間の長さで評価するウ**です。時間価値を考慮した別方式として割引回収期間法はありますが、設問の通常のPBPとは分けます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "PBPと割引回収期間を混同し、投資の全期間の利益も評価すると思い込む。",
+      "stages": [
+        {
+          "newInformation": "**PBP＝Pay Back Period（投資回収期間）**。例えば初期投資100万円に対し、毎年25万円の現金が入れば、累積が100万円に届く年を数えます。",
+          "remainingWork": "この方法が何を指標にしているか自分で言語化する",
+          "revealsAnswer": true,
+          "reason": "回収年数というPBPの評価方法を具体例で説明しておりウを実質的に示す。"
+        },
+        {
+          "newInformation": "通常のPBPは**投資を回収するまでの長さ**で判断し、回収後の収入や**割引による時間価値**は評価しません。NPV（Net Present Value：正味現在価値）やIRR（Internal Rate of Return：内部収益率）とは異なります。",
+          "remainingWork": "四肢のうちこの性質に合うものを確認する",
+          "revealsAnswer": true,
+          "reason": "ウの説明を直接渡し、ア・イ・エを排除する。"
+        },
+        {
+          "newInformation": "投資額を回収する**期間の長さで評価するウ**です。時間価値を考慮した別方式として割引回収期間法はありますが、設問の通常のPBPとは分けます。",
+          "remainingWork": "通常のPBPと割引回収期間法を区別する",
+          "revealsAnswer": true,
+          "reason": "正答ウを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r07a/r07a-q64.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=918351f36735ef2780bfb52c220b92a6c9bda00240dfc18f25688b6dc3bc025f（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：PBPと割引回収期間を混同し、投資の全期間の利益も評価すると思い込む。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q62",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e5724595325374079c78780fb93d5bd13588b0604656632eddbda80c67210541",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q62",
+      "summary": "改善活動図のa・b・cに対し、**KGI・CSF・KPI**の役割を対応させる。",
+      "explanation": "正解はウ。図のaは最終成果の指標である物流コスト10％削減なのでKGIの設定、bは在庫削減・誤出荷削減という重要成功要因なのでCSFの抽出、cは在庫日数7日以内・誤出荷率3％以内という活動の達成状況を測る具体的指標なのでKPIの設定となる。",
+      "choiceReasons": [
+        "CSFの抽出は、図のbにある在庫削減・誤出荷削減という成功に重要な要因を挙げる段階である。",
+        "KGIの設定は、図のaにある物流コスト10％削減という最終目標を定める段階である。",
+        "cは在庫日数・誤出荷率の数値で改善活動の状況を測るのでKPIの設定である。",
+        "MBOは目標による管理の仕組みであり、図のcの具体的な活動評価指標の名称ではない。"
+      ],
+      "takeaway": "KGI＝最終成果、CSF＝重要な成功要因、KPI＝活動を測る指標とつなぐ。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "図は最終目標の**物流コスト10％削減**から、取り組みの方向を決め、数値で進み具合を測る流れです。図の**a＝10％削減、b＝在庫・誤出荷削減、c＝在庫日数7日以内・誤出荷率3％以内**をまず読み分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**KGI＝Key Goal Indicator（重要目標達成指標）**は最終成果、**CSF＝Critical Success Factor（重要成功要因）**は成功への鍵、**KPI＝Key Performance Indicator（重要業績評価指標）**は途中の活動状況を測る数値です。図のcの『日数』『率』をどれに当てるか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**a＝KGI、b＝CSF、c＝KPI**。在庫日数と誤出荷率で改善を測るため**ウ**です。MBO（Management by Objectives）は目標による管理方式で異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "KGI・CSF・KPIの英語と、最終目標・成功要因・途中測定値の違いが分からない。",
+      "stages": [
+        {
+          "newInformation": "図は最終目標の**物流コスト10％削減**から、取り組みの方向を決め、数値で進み具合を測る流れです。図の**a＝10％削減、b＝在庫・誤出荷削減、c＝在庫日数7日以内・誤出荷率3％以内**をまず読み分けます。",
+          "remainingWork": "最終目標と活動状況の数値を区別する",
+          "revealsAnswer": false,
+          "reason": "図の数値を示すが略称との対応は残す。"
+        },
+        {
+          "newInformation": "**KGI＝Key Goal Indicator（重要目標達成指標）**は最終成果、**CSF＝Critical Success Factor（重要成功要因）**は成功への鍵、**KPI＝Key Performance Indicator（重要業績評価指標）**は途中の活動状況を測る数値です。図のcの『日数』『率』をどれに当てるか考えます。",
+          "remainingWork": "cがどの定義か図に当てはめる",
+          "revealsAnswer": false,
+          "reason": "3つの定義を教えるが本人によるcへの適用を残す。"
+        },
+        {
+          "newInformation": "**a＝KGI、b＝CSF、c＝KPI**。在庫日数と誤出荷率で改善を測るため**ウ**です。MBO（Management by Objectives）は目標による管理方式で異なります。",
+          "remainingWork": "最終成果と先行指標のつながりを復習する",
+          "revealsAnswer": true,
+          "reason": "正答ウを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r03a/r03a-q62.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=ab9043f4dbe7e634757d85a1a0e3e5b41bb70b7b2a093a9a5eaafc3229983c6f（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：KGI・CSF・KPIの英語と、最終目標・成功要因・途中測定値の違いが分からない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2a22d38a5d4a490e8d928fdc5dbf83bde9d18e6003123b36e826427db6b8cf13",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q65",
+      "summary": "規格に挙がる検証方法から**文書の要求事項への適合を調べる手法**を選ぶ。",
+      "explanation": "設問では検証対象が成果物としての文書です。文書の内容を調べ、要求事項に遵守しているかを検査する手法がインスペクションです。\n対象を実行して入力と結果を確認するテスト、動作を見せるデモンストレーション、計算やモデルで確認する分析・シミュレーションとは方法が違います。",
+      "choiceReasons": [
+        "文書などの成果物を検査して、要求への遵守を確認するインスペクションです。",
+        "条件を与えて対象を実行し、結果を確認する手法です。文書の遵守度合いを検査する説明ではありません。",
+        "動作や利用を実演して確認する手法で、文書の検査とは異なります。",
+        "計算、モデル、シミュレーションなどで要求を満たすかを確認する手法です。"
+      ],
+      "takeaway": "文書の検査はインスペクション、実行による確認はテスト。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問の成果物は**文書**です。プログラムを動かして正しい出力を得る確認か、文書に書かれた仕様を**要求事項と照合する**確認かを分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**インスペクション（inspection）**は文書・設計などを関係者が検査して不整合を見つけること。**デモンストレーション**は実演、**テスト**は対象を動かして結果を確認、**分析・シミュレーション**はモデル等で評価します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "成果物の文書について要求への遵守度を調べるのは**インスペクション（ア）**。実行結果を調べるテストと区別します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "インスペクション、デモ、テスト、分析の検証対象が区別できない。",
+      "stages": [
+        {
+          "newInformation": "設問の成果物は**文書**です。プログラムを動かして正しい出力を得る確認か、文書に書かれた仕様を**要求事項と照合する**確認かを分けます。",
+          "remainingWork": "文書の内容を直接確認する作業を思い浮かべる",
+          "revealsAnswer": false,
+          "reason": "検証対象の区別を示しただけ。"
+        },
+        {
+          "newInformation": "**インスペクション（inspection）**は文書・設計などを関係者が検査して不整合を見つけること。**デモンストレーション**は実演、**テスト**は対象を動かして結果を確認、**分析・シミュレーション**はモデル等で評価します。",
+          "remainingWork": "文書を検査する肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "インスペクションの定義が正答アに一致する。"
+        },
+        {
+          "newInformation": "成果物の文書について要求への遵守度を調べるのは**インスペクション（ア）**。実行結果を調べるテストと区別します。",
+          "remainingWork": "文書・実物・モデルそれぞれの検証を復習する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05a/r05a-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=ade923bbc47a5d3ec0c010f7775f17f0162a20d73327d5039d438209b48fb7f6（バイトからの独立算出は未実施）。",
+        "context記載正答 ア を原本の選択肢と確認。学習者の障壁：インスペクション、デモ、テスト、分析の検証対象が区別できない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "757ec796dafacea01ff4acd2791a96cbf6c99a8ed88c5694242ab2f09cb4b5be",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q65",
+      "summary": "環境負荷の少ない製品を**購入者が選んで買う**取組を他の環境施策と区別する。",
+      "explanation": "グリーン購入は、購入の必要性を考慮した上で、環境負荷ができるだけ少ない製品・サービスを選ぶ取組です。問題は国や地方公共団体が環境に配慮したものを「選んでいる」という購買行動を問います。企業の社会的責任、環境ラベルの認定、事業の環境影響評価とは対象が異なります。",
+      "choiceReasons": [
+        "CSRは企業の社会的責任で、環境配慮だけでなく社会に対する広い責任を含みます。",
+        "エコマーク認定は環境に配慮した商品等にマークを付ける認定制度です。",
+        "環境アセスメントは事業が環境へ与える影響を調査・予測・評価するものです。",
+        "環境に配慮した製品・サービスを選んで購入するグリーン購入の説明です。"
+      ],
+      "takeaway": "製品を認定する行為と、環境配慮を基準に購入する行為を分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問の主語は**国・地方公共団体**で、していることは製品・サービスを**選ぶ・購入する**こと。環境基準を認定する側の行動と分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**CSR（Corporate Social Responsibility）**は企業の社会的責任、**エコマーク**は環境配慮製品の認定・表示、**環境アセスメント**は事業の環境影響評価です。購入者が環境負荷の小さいものを優先して選ぶのが**グリーン購入**です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "環境配慮製品を選んで購入する**グリーン購入（エ）**です。認定マークを付ける活動とは別です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "エコマーク認定と、環境に配慮して購入する行動を混同する。",
+      "stages": [
+        {
+          "newInformation": "設問の主語は**国・地方公共団体**で、していることは製品・サービスを**選ぶ・購入する**こと。環境基準を認定する側の行動と分けます。",
+          "remainingWork": "誰が何をする活動かを各肢で比較する",
+          "revealsAnswer": false,
+          "reason": "動作の分類のみを示す。"
+        },
+        {
+          "newInformation": "**CSR（Corporate Social Responsibility）**は企業の社会的責任、**エコマーク**は環境配慮製品の認定・表示、**環境アセスメント**は事業の環境影響評価です。購入者が環境負荷の小さいものを優先して選ぶのが**グリーン購入**です。",
+          "remainingWork": "購買活動に当たる名称を選ぶ",
+          "revealsAnswer": true,
+          "reason": "エに一致する名称と定義を教えている。"
+        },
+        {
+          "newInformation": "環境配慮製品を選んで購入する**グリーン購入（エ）**です。認定マークを付ける活動とは別です。",
+          "remainingWork": "認定制度と購買活動の違いを整理する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r03h/r03h-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=13d754b9d22f0aef84cee78a15994c665294c4a92862ef144d9f90d1e9bf7516（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：エコマーク認定と、環境に配慮して購入する行動を混同する。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ab425302554991411769c7e5052fee781755400f1b13dc73ef2aa7b6b1f2dfea",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q65",
+      "summary": "重み付きの段階評価から実績点と満点を計算し、**達成率の分母**を決める。",
+      "explanation": "実績は省力化5×3=15、期間短縮8×0=0、統合化12×1=12で合計27点です。\n全部が目標どおりなら評価点は全て3なので、(5+8+12)×3=75点。目標達成度は27/75×100=36%です。",
+      "choiceReasons": [
+        "27は実績の加重得点そのもので、百分率に直した値ではありません。",
+        "実績27点を目標75点で割った36%です。",
+        "43%では表の重みと段階点を使った27/75の比率に一致しません。",
+        "52%では表の重みと段階点を使った27/75の比率に一致しません。"
+      ],
+      "takeaway": "重み×評価点を合計し、全項目が目標どおりの満点で割る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "表の評価は**目標どおり＝3点、変わらず＝0点、部分改善＝1点**です。重みはそれぞれ5・8・12で、各項目の**重み×段階点**を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "実績点は**5×3＋8×0＋12×1**。比較相手の満点は全項目が目標どおりの3点なので**(5＋8＋12)×3**です。**実績÷満点×100**を計算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "実績は**27点**、満点は**75点**。`27÷75×100＝36％`なので**イ**です。27は比率ではなく点数です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "段階点だけを足したり、重み合計25を分母にしてしまう。",
+      "stages": [
+        {
+          "newInformation": "表の評価は**目標どおり＝3点、変わらず＝0点、部分改善＝1点**です。重みはそれぞれ5・8・12で、各項目の**重み×段階点**を足します。",
+          "remainingWork": "実際の加重得点の式を作る",
+          "revealsAnswer": false,
+          "reason": "変換規則は渡すが得点は計算させる。"
+        },
+        {
+          "newInformation": "実績点は**5×3＋8×0＋12×1**。比較相手の満点は全項目が目標どおりの3点なので**(5＋8＋12)×3**です。**実績÷満点×100**を計算します。",
+          "remainingWork": "分子・分母を算出し百分率にする",
+          "revealsAnswer": false,
+          "reason": "式は示したが最終数値は本人に残す。"
+        },
+        {
+          "newInformation": "実績は**27点**、満点は**75点**。`27÷75×100＝36％`なので**イ**です。27は比率ではなく点数です。",
+          "remainingWork": "目標比率と単なる加重得点を区別する",
+          "revealsAnswer": true,
+          "reason": "最終36％と正答イを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r07a/r07a-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=5091d4272191d738003bc2a8cd0519693b0d95c9e45d445df09c87775dd2c778（バイトからの独立算出は未実施）。",
+        "context記載正答 イ を原本の選択肢と確認。学習者の障壁：段階点だけを足したり、重み合計25を分母にしてしまう。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q64",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d992473d5c574481f8099de76ae0e5bedb763de80504818e2674bbe530325f57",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q64",
+      "summary": "システム要件と設計成果物の**対応関係をたどれる状態**の意味を問う。",
+      "explanation": "トレーサビリティは、要求の根拠と、それを実現・検証する成果物の関係を追跡できることです。要求と設計などの対応を文書化しておくと、仕様変更があったときに元の要求や品質へ立ち返り、影響と妥当性を確認できます。エはこの追跡可能性を述べています。仕様変更そのものを禁止する意味ではありません。",
+      "choiceReasons": [
+        "運用マニュアルが業務を説明することだけでは、要求と成果物の追跡可能な対応を示しません。",
+        "調達先の選定・契約と変更の困難さであり、要求と成果物の対応の追跡ではありません。",
+        "依存関係の確定と仕様変更禁止は、変更影響を追跡できることと異なります。",
+        "要求の根拠と成果物の関連を記録し、変更を要求品質に照らして検証できます。"
+      ],
+      "takeaway": "トレーサビリティは変更禁止ではなく、要求から成果物への対応を追えること。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**Traceability（トレーサビリティ）＝追跡可能性**。『なぜこの機能が必要か』を要求へさかのぼり、『その要求がどの成果物に反映されたか』を前向きにたどれることです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば『保存期間を7年』という要求が、どの設計書・試験項目に対応するか記録しておけば、期間変更時に**関連成果物を探し、要求品質から影響を検証**できます。仕様変更を禁止する意味ではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "要求の根拠と成果物を結び、仕様変更を元の要求に照らして確認できる**エ**です。調達契約やモジュール変更禁止とは異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "トレーサビリティを仕様変更の禁止と捉え、何を追跡するか分からない。",
+      "stages": [
+        {
+          "newInformation": "**Traceability（トレーサビリティ）＝追跡可能性**。『なぜこの機能が必要か』を要求へさかのぼり、『その要求がどの成果物に反映されたか』を前向きにたどれることです。",
+          "remainingWork": "各選択肢で要求と成果物のつながりを探す",
+          "revealsAnswer": true,
+          "reason": "要求と成果物の前後方向の追跡を定義し、エの記述と実質一致する。"
+        },
+        {
+          "newInformation": "例えば『保存期間を7年』という要求が、どの設計書・試験項目に対応するか記録しておけば、期間変更時に**関連成果物を探し、要求品質から影響を検証**できます。仕様変更を禁止する意味ではありません。",
+          "remainingWork": "根拠と成果物の相互関係を記す肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "エと実質同じ条件を示した。"
+        },
+        {
+          "newInformation": "要求の根拠と成果物を結び、仕様変更を元の要求に照らして確認できる**エ**です。調達契約やモジュール変更禁止とは異なります。",
+          "remainingWork": "追跡と変更禁止の違いをまとめる",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05h/r05h-q64.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=932d97729bc1655a1271c23c9de8382156a0f6ac6c55c17b170edbbced09e16d（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：トレーサビリティを仕様変更の禁止と捉え、何を追跡するか分からない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c6160ef133178d9a3368277777385fb9e4300204d59ee6af4be5699aecefd490",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q65",
+      "summary": "コンティンジェンシープランを、**リスク発生前の予防策**と発生後の対処計画で区別する。",
+      "explanation": "コンティンジェンシープランは、想定したリスクが実際に起きた場合に備える対応計画です。部品調達の問題が起きたとき、代替調達や工程の見直しなどを行う準備が該当します。",
+      "choiceReasons": [
+        "実績ある外注先で発生確率を下げるのはリスク軽減策です。",
+        "品質確認を可能にする契約は事前の管理策で、顕在化後の対処計画を述べていません。",
+        "相見積りによる委託先選定は調達の手順です。",
+        "部品調達リスクが顕在化した場合の対処をあらかじめ計画しています。"
+      ],
+      "takeaway": "予防・軽減と、起きたときの対応計画を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**contingency（コンティンジェンシー）**は起こるかもしれない不測の事態のことです。『そもそも起きにくくする』予防と、『起きたらどうする』という準備は異なります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば部品が届かなくなった場合に備えて、**代替調達先・代替部品・工程変更の発動条件**をあらかじめ決めておくのが対処計画です。実績のある外注先を選ぶのは発生確率の軽減です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "部品調達リスクが**顕在化した時の対応計画を作るエ**です。アは発生確率を抑える対策で、問いの計画とは別です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "調達先選定・品質契約・リスク軽減も全てコンティンジェンシーと考える。",
+      "stages": [
+        {
+          "newInformation": "**contingency（コンティンジェンシー）**は起こるかもしれない不測の事態のことです。『そもそも起きにくくする』予防と、『起きたらどうする』という準備は異なります。",
+          "remainingWork": "リスク顕在化時の対処計画と、予防・契約・委託先選定の違いを確認する",
+          "revealsAnswer": true,
+          "reason": "コンティンジェンシーを起こるかもしれない事態と説明し、予防と起きたらどうする準備を対比する。用語から説明を選ぶ本問ではリスク顕在化への備えというエの固有内容を実質提示している。"
+        },
+        {
+          "newInformation": "例えば部品が届かなくなった場合に備えて、**代替調達先・代替部品・工程変更の発動条件**をあらかじめ決めておくのが対処計画です。実績のある外注先を選ぶのは発生確率の軽減です。",
+          "remainingWork": "発生した場合の対処計画を選ぶ",
+          "revealsAnswer": true,
+          "reason": "エの内容に一致するので正答を実質開示。"
+        },
+        {
+          "newInformation": "部品調達リスクが**顕在化した時の対応計画を作るエ**です。アは発生確率を抑える対策で、問いの計画とは別です。",
+          "remainingWork": "軽減策と発生時の対処の違いを整理する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r04a/r04a-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=a08d47675da17c3d01fcecde249323a398b4fbfab487d1302c83fa81d7d676bc（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：調達先選定・品質契約・リスク軽減も全てコンティンジェンシーと考える。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。コンティンジェンシーを起こるかもしれない事態と説明し、予防と起きたらどうする準備を対比する。用語から説明を選ぶ本問ではリスク顕在化への備えというエの固有内容を実質提示している。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "62e7afe07c5bb46e45e52922646d83b0ffd07ab7c22696c2e39fcfa2616ee19e",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q65",
+      "summary": "非機能要件のうち**使用性（学習・操作のしやすさ）**を処理性能・移行性・復旧性と区別する。",
+      "explanation": "使用性は、利用者がシステムを理解し、学び、操作して目的を達成するしやすさに関する品質です。4時間以内のトレーニングで新画面を操作できるという要件は学習の容易さを表します。バッチ完了時間は性能、移行時間は移行性、災害時の復旧時間は可用性等の要件です。",
+      "choiceReasons": [
+        "訓練時間内に操作を習得できることは学習しやすさを示し、使用性に該当します。",
+        "ピーク時のバッチ完了時間は処理性能に関する要件です。",
+        "現行から新システムへの移行時間は移行に関する要件です。",
+        "災害時の復旧時間は可用性・回復性に関する要件です。"
+      ],
+      "takeaway": "使用性は人が学んで操作する容易さ。処理時間・移行・復旧の時間とは分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**非機能要件**は機能そのもの以外の性能や使いやすさなどの条件です。選択肢の時間を、**利用者の習得時間・処理時間・移行時間・復旧時間**に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**使用性（usability）**は利用者が**理解・学習・操作**しやすいこと。短い訓練で画面操作を覚えられるかは使用性の『学習の容易さ』で、夜間バッチ8時間は処理性能です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**4時間の訓練で新画面を操作できるア**です。72時間の移行は移行性、144時間の復旧は回復・可用性に関する要件です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "全て時間で記述されているため『何の時間か』を見失う。",
+      "stages": [
+        {
+          "newInformation": "**非機能要件**は機能そのもの以外の性能や使いやすさなどの条件です。選択肢の時間を、**利用者の習得時間・処理時間・移行時間・復旧時間**に分けます。",
+          "remainingWork": "使用性の意味を各分類に当てはめ、利用者の学習・操作に関わる条件を判断する",
+          "revealsAnswer": false,
+          "reason": "全四肢の時間を習得・処理・移行・復旧に分類するだけで、使用性がどの分類に対応するかは指定していない。使用性と習得しやすさを対応づける判断が残る。"
+        },
+        {
+          "newInformation": "**使用性（usability）**は利用者が**理解・学習・操作**しやすいこと。短い訓練で画面操作を覚えられるかは使用性の『学習の容易さ』で、夜間バッチ8時間は処理性能です。",
+          "remainingWork": "学習しやすさを扱う肢を確認する",
+          "revealsAnswer": true,
+          "reason": "アの内容と実質同一。"
+        },
+        {
+          "newInformation": "**4時間の訓練で新画面を操作できるア**です。72時間の移行は移行性、144時間の復旧は回復・可用性に関する要件です。",
+          "remainingWork": "使用性とほかの品質特性の差を整理する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r04h/r04h-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=635ee4dd15a647b792d14158c7a1cfec3b7213fcd2afd50760d4af595d205344（バイトからの独立算出は未実施）。",
+        "context記載正答 ア を原本の選択肢と確認。学習者の障壁：全て時間で記述されているため『何の時間か』を見失う。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。全四肢の時間を習得・処理・移行・復旧に分類するだけで、使用性がどの分類に対応するかは指定していない。使用性と習得しやすさを対応づける判断が残る。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q62",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7c24c84be4ce2334d9084791e1817fdc23a35d3bb909b52b1c29cfac7653d6e6",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q62",
+      "summary": "ワントゥワンマーケティングに必要な**顧客情報の統合管理**を略語から選ぶ。",
+      "explanation": "ワントゥワンマーケティングは、顧客を一律に扱わず、顧客ごとの属性や購買履歴、好みなどに合わせて働きかける方法です。顧客情報と接点を統合するCRM（顧客関係管理）がその実現を支援します。\n人材管理、供給連鎖管理、財務管理のソリューションとは管理対象が異なります。",
+      "choiceReasons": [
+        "CRMは顧客情報・接点を管理し、個別顧客に合わせたマーケティングに使えます。",
+        "HRMは人材・人事の管理で、顧客ごとのマーケティングの中心ではありません。",
+        "SCMは調達・生産・物流など供給連鎖の管理です。",
+        "財務管理は資金・会計などの管理で、顧客関係の統合管理ではありません。"
+      ],
+      "takeaway": "ワントゥワンの対象は個別顧客。実現を支えるのはCRM。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**ワントゥワンマーケティング**は一人ひとりの顧客に合わせ、購買履歴や問い合わせ内容から提案を変える方法です。必要なのは**顧客との関係・履歴**の管理です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**CRM＝Customer Relationship Management（顧客関係管理）**、**HRM＝Human Resource Management（人材管理）**、**SCM＝Supply Chain Management（供給連鎖管理）**。Customerは顧客、Humanは人材、Supply Chainは調達・生産・物流の連鎖です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "顧客の属性・購買・対応履歴を統合する**CRMソリューション（ア）**です。HRMは従業員、SCMは物流などを扱います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CRM・HRM・SCMの英語の意味が分からず、管理対象で区別できない。",
+      "stages": [
+        {
+          "newInformation": "**ワントゥワンマーケティング**は一人ひとりの顧客に合わせ、購買履歴や問い合わせ内容から提案を変える方法です。必要なのは**顧客との関係・履歴**の管理です。",
+          "remainingWork": "各選択肢がどの対象を管理するか考える",
+          "revealsAnswer": false,
+          "reason": "対象の整理だけでCRM名称は残す。"
+        },
+        {
+          "newInformation": "**CRM＝Customer Relationship Management（顧客関係管理）**、**HRM＝Human Resource Management（人材管理）**、**SCM＝Supply Chain Management（供給連鎖管理）**。Customerは顧客、Humanは人材、Supply Chainは調達・生産・物流の連鎖です。",
+          "remainingWork": "顧客を対象にする略語を選ぶ",
+          "revealsAnswer": true,
+          "reason": "CRMとアが実質確定する。"
+        },
+        {
+          "newInformation": "顧客の属性・購買・対応履歴を統合する**CRMソリューション（ア）**です。HRMは従業員、SCMは物流などを扱います。",
+          "remainingWork": "三略語の対象を説明する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05a/r05a-q62.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=91c4b0fd43188e25943bb386711f83964cce024324c505ef131fc074237389a5（バイトからの独立算出は未実施）。",
+        "context記載正答 ア を原本の選択肢と確認。学習者の障壁：CRM・HRM・SCMの英語の意味が分からず、管理対象で区別できない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q62",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2af0ab684430d3ff3a2cfa99ad640f23db07f7ecdec93f080d28f32a933cb80f",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q62",
+      "summary": "顧客一人ずつへの販売促進を支える**顧客関係管理システム**を選ぶ。",
+      "explanation": "ワントゥワンマーケティングは顧客一人ひとりの属性や購入履歴、対応履歴等に応じた提案を行う。CRMはCustomer Relationship Managementで、この顧客関係情報を統合し、営業・販売・サポート等へ活用する。\n\nHRMは人材、SCMは供給連鎖、財務管理は資金や会計を扱う。提案先が顧客で、顧客ごとの情報を使うという条件を対応させる。",
+      "choiceReasons": [
+        "CRMは顧客情報と関係を管理し、個別のマーケティングに活用する。",
+        "HRMは従業員等の人材管理。",
+        "SCMは調達・生産・物流などの供給連鎖を管理する。",
+        "財務管理は資金・会計などを管理し、顧客ごとの関係管理とは目的が違う。"
+      ],
+      "takeaway": "顧客ならCRM、人材ならHRM、供給連鎖ならSCM。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**ワントゥワン**は不特定多数へ同じ広告を出すのではなく、顧客ごとに異なる提案をすること。例えば購入履歴から次の商品を勧めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**CRM＝Customer Relationship Management（顧客関係管理）**は顧客履歴・問い合わせなどを統合。**HRM（Human Resource Management）**は人事、**SCM（Supply Chain Management）**は供給連鎖、財務管理は会計を扱います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "顧客ごとの関係と購買履歴を管理する**CRM（ア）**です。略語の先頭のCustomer＝顧客が決め手です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "三文字略称だけでは顧客と人事・物流を区別できない。",
+      "stages": [
+        {
+          "newInformation": "**ワントゥワン**は不特定多数へ同じ広告を出すのではなく、顧客ごとに異なる提案をすること。例えば購入履歴から次の商品を勧めます。",
+          "remainingWork": "そのために何の情報を集めるか考える",
+          "revealsAnswer": false,
+          "reason": "利用目的の具体例だけで製品略称は未開示。"
+        },
+        {
+          "newInformation": "**CRM＝Customer Relationship Management（顧客関係管理）**は顧客履歴・問い合わせなどを統合。**HRM（Human Resource Management）**は人事、**SCM（Supply Chain Management）**は供給連鎖、財務管理は会計を扱います。",
+          "remainingWork": "顧客向けソリューションを選択肢に対応させる",
+          "revealsAnswer": true,
+          "reason": "CRM＝アが確定する。"
+        },
+        {
+          "newInformation": "顧客ごとの関係と購買履歴を管理する**CRM（ア）**です。略語の先頭のCustomer＝顧客が決め手です。",
+          "remainingWork": "マーケティング目的との対応を確認する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r07h/r07h-q62.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=2577b125385751a2a4ca60e657879c0fde88a3f4e07fc537351ba21b1050b000（バイトからの独立算出は未実施）。",
+        "context記載正答 ア を原本の選択肢と確認。学習者の障壁：三文字略称だけでは顧客と人事・物流を区別できない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q67",
+    "baseVersion": 2,
+    "baseLessonSHA256": "215fa070b5f54bbc0e7402f0b57b81a5ef3aba3af96b77687f0fe9cd50092649",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q67",
+      "summary": "売手の4Pの**Promotion**を買手視点の4Cへ対応させる。",
+      "explanation": "4PのPromotionは、広告や販売促進などで商品を知らせ、購入へつなげる活動です。買手の視点の4Cでは、一方向に売り込むだけでなく、顧客との情報交換というCommunicationに対応します。\n残る対応はProduct→Customer Value、Price→Cost、Place→Convenienceです。",
+      "choiceReasons": [
+        "顧客価値は製品Productに対応します。",
+        "顧客コストは価格Priceに対応します。",
+        "コミュニケーションは販売促進Promotionに対応します。",
+        "利便性は流通・入手場所Placeに対応します。"
+      ],
+      "takeaway": "Product/Price/Place/Promotionを価値/コスト/利便性/対話へ買手視点で言い換える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "売手の**4P**はProduct（製品）、Price（価格）、Place（流通）、Promotion（販売促進）。買手の**4C**では製品を『得られる価値』、価格を『負担』、流通を『入手しやすさ』と見ます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "Promotionは**広告・販売促進による顧客への働きかけ**。買手視点では一方的に売り込むだけでなく、**顧客との双方向のやり取り**として考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Promotionに対応するのは**Communication（コミュニケーション、ウ）**です。ほかはProduct→Customer Value、Price→Cost、Place→Convenience。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "Product・Price・Place・Promotionと4Cの対応を知らない。",
+      "stages": [
+        {
+          "newInformation": "売手の**4P**はProduct（製品）、Price（価格）、Place（流通）、Promotion（販売促進）。買手の**4C**では製品を『得られる価値』、価格を『負担』、流通を『入手しやすさ』と見ます。",
+          "remainingWork": "販売促進を買手の側から言い換える",
+          "revealsAnswer": true,
+          "reason": "ほかの三つの4C要素の対応を説明することで消去法でウのみを残す。"
+        },
+        {
+          "newInformation": "Promotionは**広告・販売促進による顧客への働きかけ**。買手視点では一方的に売り込むだけでなく、**顧客との双方向のやり取り**として考えます。",
+          "remainingWork": "対話を表す4Cの候補に当てはめる",
+          "revealsAnswer": true,
+          "reason": "Communicationが一意に分かる定義。"
+        },
+        {
+          "newInformation": "Promotionに対応するのは**Communication（コミュニケーション、ウ）**です。ほかはProduct→Customer Value、Price→Cost、Place→Convenience。",
+          "remainingWork": "四組の対応を復習する",
+          "revealsAnswer": true,
+          "reason": "ウを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r07a/r07a-q67.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=8fd4ed76a828255b38b52a916039e060779d192fc117eba99ad688ce97cd2c05（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：Product・Price・Place・Promotionと4Cの対応を知らない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q70",
+    "baseVersion": 2,
+    "baseLessonSHA256": "203acf8ece12ac6d5fcd63f027096c2f7c6ca4e744761460ead1fc2da59f4f5b",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q70",
+      "summary": "APIエコノミーの**企業間連携による新サービス**を、社内APIの利用と区別する。",
+      "explanation": "APIエコノミーは企業が外部へ公開するAPIを通じ、企業間で機能やデータを連携して新たなサービスや価値を生み出す活動です。ホテルが他社のタクシー配車APIを自社アプリへ組み込む例が該当します。",
+      "choiceReasons": [
+        "学内システムの再構築による内部効率化で、他社とAPIを組み合わせた事業価値の創出ではありません。",
+        "社内の他部署へのAPI提供で、企業間の新サービス連携を述べていません。",
+        "自社保有データを自社の分析へ利用する内部活用です。",
+        "他社の公開APIと自社アプリを組み合わせてサービスを生み出しています。"
+      ],
+      "takeaway": "APIエコノミーは公開APIを通じた企業間連携と新たな価値創出。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**API＝Application Programming Interface**は他のプログラムが機能・データを呼び出すための接続口。APIを使うだけで全て『APIエコノミー』になるわけではありません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**APIエコノミー**は企業が公開したAPIを他社が使い、**会社をまたいで新しいサービスや価値**を生むこと。社内連携用の**EAI（Enterprise Application Integration）**や分析用**BI（Business Intelligence）**の利用とは目的を分けます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "ホテルが**他社のタクシー配車APIを自社アプリへ組み込むエ**です。利用者向けの新しい企業間サービスが生まれます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "APIとEAI・BIの略称が分からず、どれもAPIを使うため同じだと思う。",
+      "stages": [
+        {
+          "newInformation": "**API＝Application Programming Interface**は他のプログラムが機能・データを呼び出すための接続口。APIを使うだけで全て『APIエコノミー』になるわけではありません。",
+          "remainingWork": "社内だけの利用と企業をまたぐ連携を分ける",
+          "revealsAnswer": false,
+          "reason": "APIの基礎のみで事例は未確定。"
+        },
+        {
+          "newInformation": "**APIエコノミー**は企業が公開したAPIを他社が使い、**会社をまたいで新しいサービスや価値**を生むこと。社内連携用の**EAI（Enterprise Application Integration）**や分析用**BI（Business Intelligence）**の利用とは目的を分けます。",
+          "remainingWork": "他社公開APIを自社サービスに組み込んだ候補を探す",
+          "revealsAnswer": true,
+          "reason": "前段と合わせて企業をまたぐAPIで新サービスを提供する選択肢がエのみと確定する。"
+        },
+        {
+          "newInformation": "ホテルが**他社のタクシー配車APIを自社アプリへ組み込むエ**です。利用者向けの新しい企業間サービスが生まれます。",
+          "remainingWork": "APIの外部公開と内部利用の違いを復習する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r04a/r04a-q70.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=4cecbecb7b83f8f869180cdbf764b425f15260e8f05cfc10efb76076817b28cc（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：APIとEAI・BIの略称が分からず、どれもAPIを使うため同じだと思う。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q70",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c036c10bc9cddb9be0d9ba4e495427cfd773cec7e6888b8115d46fe2d326fba3",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q70",
+      "summary": "BSC（バランススコアカード）の四視点の残りを、既出の三視点から考える。",
+      "explanation": "バランススコアカードは、財務、顧客、内部ビジネスプロセス、学習と成長の四視点で戦略を評価します。財務成果だけでなく、顧客が価値を感じるか、その価値を生む業務が機能するか、将来の人材や能力が育つかを測る仕組みです。問題に挙がっていない視点は顧客です。",
+      "choiceReasons": [
+        "ガバナンスは統治の観点であり、標準的な四視点の名称ではありません。",
+        "顧客満足や顧客維持などを捉える顧客の視点が残りの一つです。",
+        "自社の強みは戦略分析の項目で、バランススコアカードの四視点の名称ではありません。",
+        "遵法はコンプライアンスの観点で、四視点の名称ではありません。"
+      ],
+      "takeaway": "BSCの四視点は財務・顧客・内部プロセス・学習と成長。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**BSC＝Balanced Scorecard（バランススコアカード）**は企業の戦略を財務指標だけでなく**複数の視点**から測る仕組みです。問題文の三つは財務・業務の進め方・人材や学習を扱います。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "売上が出ても、買う人の**満足度や継続利用率**が低ければ将来の成果は不安定です。BSCではこのような**商品・サービスを受ける側の評価**も視点に含めます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "四視点は**財務・顧客・内部ビジネスプロセス・学習と成長**。残りは**顧客（イ）**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "BSCの英語と四つの枠組みが分からず思いつかない。",
+      "stages": [
+        {
+          "newInformation": "**BSC＝Balanced Scorecard（バランススコアカード）**は企業の戦略を財務指標だけでなく**複数の視点**から測る仕組みです。問題文の三つは財務・業務の進め方・人材や学習を扱います。",
+          "remainingWork": "企業の成果を測るのに不足している関係者を考える",
+          "revealsAnswer": false,
+          "reason": "既出三視点だけ説明する。"
+        },
+        {
+          "newInformation": "売上が出ても、買う人の**満足度や継続利用率**が低ければ将来の成果は不安定です。BSCではこのような**商品・サービスを受ける側の評価**も視点に含めます。",
+          "remainingWork": "利用する人・企業を表す選択肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "『顧客』の定義に近くイを確定する。"
+        },
+        {
+          "newInformation": "四視点は**財務・顧客・内部ビジネスプロセス・学習と成長**。残りは**顧客（イ）**です。",
+          "remainingWork": "四視点と具体的KPIを結びつける",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r03h/r03h-q70.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=c3e73770210b10d29ff85acf1bfce03e2c3ba1da9619998f2ab3104344fcaf47（バイトからの独立算出は未実施）。",
+        "context記載正答 イ を原本の選択肢と確認。学習者の障壁：BSCの英語と四つの枠組みが分からず思いつかない。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q68",
+    "baseVersion": 2,
+    "baseLessonSHA256": "baf6600f7439318adc429e6b3f0d57fe4f6ff66e3bf234dd01a9ad80e0a584d0",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q68",
+      "summary": "BSCの戦略マップが**四視点の目標・施策の因果関係**を図示するものだと識別する。",
+      "explanation": "バランススコアカードでは財務、顧客、内部ビジネスプロセス、学習と成長の四視点から戦略を具体化します。戦略マップは、例えば学習の強化が業務を改善し、顧客価値を高め、財務成果へつながるという因果関係を図示します。四視点と因果関係を述べるイです。",
+      "choiceReasons": [
+        "市場内の位置を二軸で表すポジショニングマップの説明です。",
+        "BSCの四視点から課題・施策・目標の因果関係を表す戦略マップです。",
+        "事業を魅力度と優位性の軸で分類するポートフォリオ分析の説明です。",
+        "顧客、資源、製品・サービスによって事業領域を示す説明です。"
+      ],
+      "takeaway": "BSCの戦略マップは四視点を単に並べず、成果へつながる因果関係を描く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**BSC＝Balanced Scorecard（バランススコアカード）**は**財務・顧客・内部ビジネスプロセス・学習と成長**の四視点で戦略を考えます。設問はこのBSCで使う図を尋ねています。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば**従業員の学習→作業の改善→顧客満足→売上増**とつながるように、**目標や施策が成果を生む因果関係を矢印で表す**のが戦略マップです。市場上の位置を二軸で描く図とは違います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "四視点に基づく**課題・施策・目標の因果関係**を示す**イ**です。アはポジショニング、ウは事業ポートフォリオ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "戦略マップと二軸のポジショニング、事業分類の図を混同する。",
+      "stages": [
+        {
+          "newInformation": "**BSC＝Balanced Scorecard（バランススコアカード）**は**財務・顧客・内部ビジネスプロセス・学習と成長**の四視点で戦略を考えます。設問はこのBSCで使う図を尋ねています。",
+          "remainingWork": "四視点と、目標・施策が成果につながる因果関係の役割を確認する",
+          "revealsAnswer": true,
+          "reason": "BSCの四視点を具体的に列挙し、四視点を記載するイを直接特定する。他の三肢は二軸の位置付けや事業構成であり、因果関係の定義をまだ渡さなくても全誤答が除外される。"
+        },
+        {
+          "newInformation": "例えば**従業員の学習→作業の改善→顧客満足→売上増**とつながるように、**目標や施策が成果を生む因果関係を矢印で表す**のが戦略マップです。市場上の位置を二軸で描く図とは違います。",
+          "remainingWork": "因果の矢印を説明する肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "イの条件に完全に一致する。"
+        },
+        {
+          "newInformation": "四視点に基づく**課題・施策・目標の因果関係**を示す**イ**です。アはポジショニング、ウは事業ポートフォリオ。",
+          "remainingWork": "市場位置との違いを整理する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05h/r05h-q68.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=eb48812083f49ec6fe081950a5e361d11d622cbcbac004265a8aa496f3e19ca4（バイトからの独立算出は未実施）。",
+        "context記載正答 イ を原本の選択肢と確認。学習者の障壁：戦略マップと二軸のポジショニング、事業分類の図を混同する。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。BSCの四視点を具体的に列挙し、四視点を記載するイを直接特定する。他の三肢は二軸の位置付けや事業構成であり、因果関係の定義をまだ渡さなくても全誤答が除外される。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q68",
+    "baseVersion": 2,
+    "baseLessonSHA256": "88a9de2d4201f31b683d269d01aadc9abdd884a03b3363dfdc8701093dd1a9b3",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q68",
+      "summary": "BSCの戦略マップが、**施策と目標のつながり**を表す図であることを問う。",
+      "explanation": "バランススコアカードは財務、顧客、内部ビジネスプロセス、学習と成長の四つの視点で戦略を具体化します。戦略マップは、それぞれの目標や施策がどうつながって最終成果を生むかを図示します。\n二軸で市場の位置を示す図や製品・事業の分類、事業の提供構造そのものの説明とは異なります。",
+      "choiceReasons": [
+        "二つの軸で市場の位置を示すポジショニングマップの説明です。",
+        "BSCの四つの視点による課題・施策・目標の因果関係が戦略マップです。",
+        "市場魅力度と自社優位性で製品・事業を分類するポートフォリオの説明です。",
+        "顧客、経営資源、提供製品・サービスという事業モデルの説明です。"
+      ],
+      "takeaway": "BSCの戦略マップは四視点を結ぶ因果の図。二軸の位置や事業分類とは区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**BSC（Balanced Scorecard）**では、財務だけでなく**顧客・内部プロセス・学習と成長**を加えた四つの視点で成果を測ります。戦略マップは目標を単に列挙する図ではありません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "社員研修（学習）が接客速度（業務）を改善し、顧客満足（顧客）が上がって収益（財務）が増す、という**原因と結果のつながり**を示します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "四視点を使い**課題・施策・目標の因果関係を描くイ**です。二軸のポジショニングや事業分類とは異なります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "四つの視点や因果関係の意味を知らず、二軸の分類図を選ぶ。",
+      "stages": [
+        {
+          "newInformation": "**BSC（Balanced Scorecard）**では、財務だけでなく**顧客・内部プロセス・学習と成長**を加えた四つの視点で成果を測ります。戦略マップは目標を単に列挙する図ではありません。",
+          "remainingWork": "四視点を使う戦略マップと、二軸で位置付ける図や事業分類の違いを確認する",
+          "revealsAnswer": true,
+          "reason": "財務・顧客・内部プロセス・学習と成長の四視点を具体的に教え、四視点のイを実質特定する。ほかの三肢を除外でき、因果関係という語が未提示でも答え開示に当たる。"
+        },
+        {
+          "newInformation": "社員研修（学習）が接客速度（業務）を改善し、顧客満足（顧客）が上がって収益（財務）が増す、という**原因と結果のつながり**を示します。",
+          "remainingWork": "因果関係を説明した候補を探す",
+          "revealsAnswer": true,
+          "reason": "イの因果関係を実質的に開示。"
+        },
+        {
+          "newInformation": "四視点を使い**課題・施策・目標の因果関係を描くイ**です。二軸のポジショニングや事業分類とは異なります。",
+          "remainingWork": "因果と単なる二軸配置を区別する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r07a/r07a-q68.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=11d439f9901262b81714c8c727502834f11fc648320b29a0ecfed19c5e7f5eec（バイトからの独立算出は未実施）。",
+        "context記載正答 イ を原本の選択肢と確認。学習者の障壁：四つの視点や因果関係の意味を知らず、二軸の分類図を選ぶ。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。",
+        "Codex /rootによる訂正：原本画像を実表示し全4肢とH1を照合。財務・顧客・内部プロセス・学習と成長の四視点を具体的に教え、四視点のイを実質特定する。ほかの三肢を除外でき、因果関係という語が未提示でも答え開示に当たる。 ヒント本文は保持し、開示フラグと設計メモを訂正。最終版は別担当が独立再確認する。"
+      ]
+    }
+  },
+  {
+    "id": "r04a-q73",
+    "baseVersion": 2,
+    "baseLessonSHA256": "204a25063b816658e04d40f437e6394260a5adc15ded78e4c73d8e33ba99ed58",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04a-q73",
+      "summary": "CPSが現実データをサイバー空間で処理して**現実へ反映する循環**を問う。",
+      "explanation": "CPSはセンサーなどで現実世界のデータを収集し、サイバー空間で分析・計算して、その結果を現実へリアルタイムにフィードバックする仕組みです。現実と情報処理の循環により制御や最適化を実現します。",
+      "choiceReasons": [
+        "一つのサーバで複数OSを動かすのはサーバ仮想化です。",
+        "仮想世界への没入感を与えるのはVRの説明です。",
+        "現実データの収集・仮想世界の分析・現実へのフィードバックがCPSです。",
+        "国家による強制通用力をもたない電子的通貨は暗号資産などの説明です。"
+      ],
+      "takeaway": "CPSは現実→サイバー分析→現実制御という循環。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**CPS＝Cyber-Physical System（サイバーフィジカルシステム）**。Cyberは情報処理の空間、Physicalは現実世界です。単に仮想世界を見せる仕組みか、現実とデータを**結びつける**仕組みか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば道路の**センサーで交通量を取得→コンピュータで混雑を分析→信号制御へ反映**します。現実の測定結果がサイバー空間を経て現実の制御へ戻るのが特徴です。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**現実→サイバー分析→現実へのリアルタイム反映**を述べる**ウ**です。VRは仮想体験、サーバ仮想化はOSの分離です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CPSをサーバ仮想化・VRなどの『仮想』と混同する。",
+      "stages": [
+        {
+          "newInformation": "**CPS＝Cyber-Physical System（サイバーフィジカルシステム）**。Cyberは情報処理の空間、Physicalは現実世界です。単に仮想世界を見せる仕組みか、現実とデータを**結びつける**仕組みか考えます。",
+          "remainingWork": "現実データがどこへ行き結果がどこへ返るか追う",
+          "revealsAnswer": false,
+          "reason": "構成要素だけ説明し正答肢をまだ確定しない。"
+        },
+        {
+          "newInformation": "例えば道路の**センサーで交通量を取得→コンピュータで混雑を分析→信号制御へ反映**します。現実の測定結果がサイバー空間を経て現実の制御へ戻るのが特徴です。",
+          "remainingWork": "測定・分析・フィードバックを述べる肢を探す",
+          "revealsAnswer": true,
+          "reason": "ウの定義と実質同一。"
+        },
+        {
+          "newInformation": "**現実→サイバー分析→現実へのリアルタイム反映**を述べる**ウ**です。VRは仮想体験、サーバ仮想化はOSの分離です。",
+          "remainingWork": "VR・仮想化との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "ウを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r04a/r04a-q73.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=e05edd42e66a1cdf286b22d78d8c763e0da8371694266fbc6e9067085a9ccb12（バイトからの独立算出は未実施）。",
+        "context記載正答 ウ を原本の選択肢と確認。学習者の障壁：CPSをサーバ仮想化・VRなどの『仮想』と混同する。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r05a-q71",
+    "baseVersion": 2,
+    "baseLessonSHA256": "958cd16db86c8837256adc38e1577e938a68cb8d1a6b9b02a73e81940ed518f5",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05a-q71",
+      "summary": "CPSの具体例として**現実の都市データから仮想空間でシミュレーション**するものを選ぶ。",
+      "explanation": "CPSは現実世界のデータをサイバー空間に取り込み、モデル化や分析を行って現実の判断・活動に役立てる仕組みです。エは都市の構造や活動状況を使って仮想世界を構築し、災害や時間経過を操作して分析する具体例です。\n現実では危険だったり再現できなかったりする条件を試し、防災などの意思決定に役立てられます。",
+      "choiceReasons": [
+        "仮想化したシステム資源をソフトウェアで設定する仕組みです。現実の都市や活動をモデル化する説明ではありません。",
+        "センサーの使用状況に応じた課金というIoT活用です。現実をサイバー空間でモデル化して分析するエがCPSの具体的な活用を示しています。",
+        "処理をサーバへ集約するデスクトップ仮想化・シンクライアントの説明です。",
+        "現実の都市情報をサイバー空間のモデルへ反映し、現実で試せない災害などを分析する事例です。"
+      ],
+      "takeaway": "CPSは現実のデータをサイバー空間でモデル化・分析し、現実の活動へ活かす。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**CPS＝Cyber-Physical System**は現実世界（Physical）と情報処理空間（Cyber）を組み合わせます。**センサーを使うだけ**やサーバを仮想化するだけとは限りません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば現実の都市の道路・建物・人流を**サイバー空間に再現**すると、現地で起こせない災害や将来の変化を**仮想的に試算**できます。この結果を防災の判断に活かします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**都市データを仮想世界へ写して災害シミュレーションをするエ**です。機器の使用量課金はセンサー活用ですが、この設問のCPSの中心例ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CPSの『現実・サイバーの連携』と単なる機器のセンサー利用を混同する。",
+      "stages": [
+        {
+          "newInformation": "**CPS＝Cyber-Physical System**は現実世界（Physical）と情報処理空間（Cyber）を組み合わせます。**センサーを使うだけ**やサーバを仮想化するだけとは限りません。",
+          "remainingWork": "各肢で現実の構造を仮想空間に対応させているか考える",
+          "revealsAnswer": false,
+          "reason": "概念を示すが具体例は本人に残す。"
+        },
+        {
+          "newInformation": "例えば現実の都市の道路・建物・人流を**サイバー空間に再現**すると、現地で起こせない災害や将来の変化を**仮想的に試算**できます。この結果を防災の判断に活かします。",
+          "remainingWork": "都市の現実データによるシミュレーションの肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "エの内容に直接一致する。"
+        },
+        {
+          "newInformation": "**都市データを仮想世界へ写して災害シミュレーションをするエ**です。機器の使用量課金はセンサー活用ですが、この設問のCPSの中心例ではありません。",
+          "remainingWork": "仮想化と現実モデル化の差を整理する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r05a/r05a-q71.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=1940f04b6d26dbafbecf10f0f752fe2e5d9980626a753e8a421936d2ce8b7217（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：CPSの『現実・サイバーの連携』と単なる機器のセンサー利用を混同する。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q65",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b8b9018f6b9bf45eaf13206f777ea7dcbc834861cc02ffea9964ea2e57afc4f3",
+    "author": "ChatGPT/gpt-6-batch32-20261028T1417JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q65",
+      "summary": "EMS（電子機器の製造受託）が、**設計だけやソフト開発だけではなく製造を受託**することを問う。",
+      "explanation": "EMSはElectronics Manufacturing Servicesで、電子機器の製造を専門に受託する事業です。生産設備や製造ノウハウを持つ企業が、ブランド企業などから委託を受けて製造します。\n設計だけの受託、自社ブランドでの付加価値販売、ソフトウェア開発だけの外注は、電子機器の製造受託という中心の内容を満たしません。",
+      "choiceReasons": [
+        "アは設計だけを受託し製造しないので、Manufacturingを担うEMSの説明ではありません。",
+        "イは付加価値を加えて自社ブランドで売る再販方式です。",
+        "ウはソフトウェア開発の外注で、電子機器の製造受託ではありません。",
+        "エは他社からの委託で電子機器を製造するEMSの説明です。"
+      ],
+      "takeaway": "EMSは電子機器の製造受託。何を外注するかを確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "**EMS＝Electronics Manufacturing Services（電子機器製造受託サービス）**。Electronicsは電子機器、**Manufacturingは製造**です。誰のブランドで売るかより、受託企業が**何の工程を担うか**に注目します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えばブランド企業が仕様・販売を担当し、生産設備を持つ別企業が基板や電子機器を**依頼を受けて製造**します。設計だけやソフト開発だけの委託とは役割が異なります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "他社の依頼で電子機器を製造する**エ**です。製造は相手側が行うアは、EMSのManufacturingを満たしません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "EMSを一般のソフトウェア外注や設計のみの受託と混同する。",
+      "stages": [
+        {
+          "newInformation": "**EMS＝Electronics Manufacturing Services（電子機器製造受託サービス）**。Electronicsは電子機器、**Manufacturingは製造**です。誰のブランドで売るかより、受託企業が**何の工程を担うか**に注目します。",
+          "remainingWork": "実際の製造を受託する肢を探す",
+          "revealsAnswer": true,
+          "reason": "製造受託という定義がエを直接確定する。"
+        },
+        {
+          "newInformation": "例えばブランド企業が仕様・販売を担当し、生産設備を持つ別企業が基板や電子機器を**依頼を受けて製造**します。設計だけやソフト開発だけの委託とは役割が異なります。",
+          "remainingWork": "製造設備を持つ委託先の例を照合する",
+          "revealsAnswer": true,
+          "reason": "前段ですでに正答を開示済み。"
+        },
+        {
+          "newInformation": "他社の依頼で電子機器を製造する**エ**です。製造は相手側が行うアは、EMSのManufacturingを満たしません。",
+          "remainingWork": "設計委託と製造委託の違いを整理する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHubの原本 assets/questions/r06h/r06h-q65.webp を実際にbase64取得して画像表示し、問題文、全4肢、図表と数値、設問の適切・不適切を目視照合。context登録の画像SHA256=ba721c60213cd11bdc2b00f8b18a2b9270e8b3954d9d7baeef9f0398a131dd1f（バイトからの独立算出は未実施）。",
+        "context記載正答 エ を原本の選択肢と確認。学習者の障壁：EMSを一般のソフトウェア外注や設計のみの受託と混同する。",
+        "IPA公式解答PDFへの独立照合、第三者レビュー・公開への統合は未実施。"
+      ]
+    }
+  }
+]

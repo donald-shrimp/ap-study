@@ -1,0 +1,954 @@
+[
+  {
+    "id": "r06a-q1",
+    "version": 2,
+    "number": 1,
+    "title": "2024年 秋期 問1",
+    "topic": "基礎理論",
+    "concept": "利用率の変化と待ち時間の比",
+    "source": "令和6年度 秋期 応用情報技術者試験 午前 問1",
+    "year": 2024,
+    "season": "autumn",
+    "page": 4,
+    "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "1.25"
+      },
+      {
+        "label": "イ",
+        "text": "1.60"
+      },
+      {
+        "label": "ウ",
+        "text": "2.00"
+      },
+      {
+        "label": "エ",
+        "text": "3.00"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r06a/r06a-q1.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q1.webp": "ba8a8f9e11f2c0a3c7c27e32998b672bc9b4f5297d164f3f8145e143119b3ad2",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06a/r06a-q1.webp"
+    ]
+  },
+  {
+    "id": "r07h-q2",
+    "version": 2,
+    "number": 2,
+    "title": "二分法の繰り返し回数",
+    "topic": "基礎理論",
+    "concept": "区間の二分と終了条件",
+    "source": "令和7年度 春期 応用情報技術者試験 午前 問2",
+    "year": 2025,
+    "season": "spring",
+    "page": 4,
+    "stem": "$0 \\leqq x \\leqq 1$ の範囲で単調に増加する連続関数 $f(x)$ が $f(0) < 0 \\leqq f(1)$ を満たすときに，区間内で $f(x) = 0$ である $x$ の値を近似的に求めるアルゴリズムにおいて，（2）は何回実行されるか。\n\n〔アルゴリズム〕\n\n（1）$x_{0} \\leftarrow 0$，$x_{1} \\leftarrow 1$ とする。\n\n（2）$x \\leftarrow \\dfrac{x_{0} + x_{1}}{2}$ とする。\n\n（3）$x_{1} - x < 0.001$ ならば $x$ の値を近似値として終了する。\n\n（4）$f(x) \\geqq 0$ ならば $x_{1} \\leftarrow x$ として，そうでなければ $x_{0} \\leftarrow x$ とする。\n\n（5）（2）に戻る。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "10"
+      },
+      {
+        "label": "イ",
+        "text": "20"
+      },
+      {
+        "label": "ウ",
+        "text": "100"
+      },
+      {
+        "label": "エ",
+        "text": "1,000"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r07h/r07h-q2.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q2.webp": "29764a4db8af3e32f78d726fc996d1e13969b812cd43dbd6c5ef85d17217c710",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07h/r07h-q2.webp"
+    ]
+  },
+  {
+    "id": "r07a-q2",
+    "version": 2,
+    "number": 2,
+    "title": "2025年 秋期 問2",
+    "topic": "基礎理論",
+    "concept": "待ち時間から利用率を求める",
+    "source": "令和7年度 秋期 応用情報技術者試験 午前 問2",
+    "year": 2025,
+    "season": "autumn",
+    "page": 4,
+    "stem": "コンピュータによる伝票処理システムがある。このシステムは，伝票データをためる待ち行列をもち，M/M/1の待ち行列モデルが適用できるものとする。平均待ち時間がT秒以上となるのは，システムの利用率が少なくとも何%以上となったときか。ここで，伝票データをためる待ち行列の特徴は次のとおりである。\n\n・伝票データは，ポアソン分布に従って到着する。\n\n・伝票データをためる数に制限はない。\n\n・1件の伝票データの処理時間は，平均T秒の指数分布に従う。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "33"
+      },
+      {
+        "label": "イ",
+        "text": "50"
+      },
+      {
+        "label": "ウ",
+        "text": "67"
+      },
+      {
+        "label": "エ",
+        "text": "80"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r07a/r07a-q2.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07a/r07a-q2.webp": "cc201448656f36b4cdb24debf1c1d281468e26f07b35ea2b7320fa024db2161a",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07a/r07a-q2.webp"
+    ]
+  },
+  {
+    "id": "r05a-q3",
+    "version": 2,
+    "number": 3,
+    "title": "2023年 秋期 問3",
+    "topic": "基礎理論",
+    "concept": "後置記法の計算",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問3",
+    "year": 2023,
+    "season": "autumn",
+    "page": 4,
+    "stem": "逆ポーランド表記法（後置記法）で表現されている式$\\mathrm{ABCD}-\\times+$において，$A=16$，$B=8$，$C=4$，$D=2$のときの演算結果はどれか。逆ポーランド表記法による式$\\mathrm{AB}+$は，中置記法による式$A+B$と同一である。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "32"
+      },
+      {
+        "label": "イ",
+        "text": "46"
+      },
+      {
+        "label": "ウ",
+        "text": "48"
+      },
+      {
+        "label": "エ",
+        "text": "94"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q3.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q3.webp": "27f4f19a8ae4ba10ac7c6885c06cfea1450418eefa578fe23637737249fbdb34",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q3.webp"
+    ]
+  },
+  {
+    "id": "r04a-q3",
+    "version": 2,
+    "number": 3,
+    "title": "2022年 秋期 問3",
+    "topic": "基礎理論",
+    "concept": "抜取検査の合格確率",
+    "source": "令和4年度 秋期 応用情報技術者試験 午前 問3",
+    "year": 2022,
+    "season": "autumn",
+    "page": 3,
+    "stem": "製品100個を1ロットとして生産する。一つのロットからサンプルを3個抽出して検査し，3個とも良品であればロット全体を合格とする。100個中に10個の不良品を含むロットが合格と判定される確率は幾らか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "$\\frac{178}{245}$"
+      },
+      {
+        "label": "イ",
+        "text": "$\\frac{405}{539}$"
+      },
+      {
+        "label": "ウ",
+        "text": "$\\frac{89}{110}$"
+      },
+      {
+        "label": "エ",
+        "text": "$\\frac{87}{97}$"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r04a/r04a-q3.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q3.webp": "b1b6c5165793489a86e9cd2cfb227add5ea552b14270381dbcdf322152a1fa45",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04a/r04a-q3.webp"
+    ]
+  },
+  {
+    "id": "r03h-q2",
+    "version": 2,
+    "number": 2,
+    "title": "2021年 春期 問2",
+    "topic": "基礎理論",
+    "concept": "桁落ち",
+    "source": "令和3年度 春期 応用情報技術者試験 午前 問2",
+    "year": 2021,
+    "season": "spring",
+    "page": 4,
+    "stem": "桁落ちによる誤差の説明として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "値がほぼ等しい二つの数値の差を求めたとき，有効桁数が減ることによって発生する誤差"
+      },
+      {
+        "label": "イ",
+        "text": "指定された有効桁数で演算結果を表すために，切捨て，切上げ，四捨五入などで下位の桁を削除することによって発生する誤差"
+      },
+      {
+        "label": "ウ",
+        "text": "絶対値が非常に大きな数値と小さな数値の加算や減算を行ったとき，小さい数値が計算結果に反映されないことによって発生する誤差"
+      },
+      {
+        "label": "エ",
+        "text": "無限級数で表される数値の計算処理を有限項で打ち切ったことによって発生する誤差"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r03h/r03h-q2.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q2.webp": "8efd786052c9fc2f0a0f0929fc1bd360152a3d9e2f8e122cda0e106bd6948e93",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03h/r03h-q2.webp"
+    ]
+  },
+  {
+    "id": "r05h-q2",
+    "version": 2,
+    "number": 2,
+    "title": "2023年 春期 問2",
+    "topic": "基礎理論",
+    "concept": "正規分布の平均と標準偏差",
+    "source": "令和5年度 春期 応用情報技術者試験 午前 問2",
+    "year": 2023,
+    "season": "spring",
+    "page": 3,
+    "stem": "平均が60，標準偏差が10の正規分布を表すグラフはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "",
+        "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q2-a.webp"
+      },
+      {
+        "label": "イ",
+        "text": "",
+        "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q2-i.webp"
+      },
+      {
+        "label": "ウ",
+        "text": "",
+        "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q2-u.webp"
+      },
+      {
+        "label": "エ",
+        "text": "",
+        "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q2-e.webp"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r05h/r05h-q2.webp"
+    ],
+    "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q2-choices.webp",
+    "imageAlt": "選択肢ア〜エの分布曲線と数値目盛",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q2.webp": "ba337655a10a9eed1bd2dbbdd73ec2142ad61a1d2f91b3245ccfd149e5d0034d",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q2-a.webp": "44ed174e4fc6e0466b7a862fbfec6210c59736f489b1b9f739adcc30440e63af",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q2-choices.webp": "9262408a8d9547081b00bf407e273adc1be69bb98cc6e3653bfc574f0ccf6951",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q2-e.webp": "c32268b83692456270abd6a5eaf4a0bb583e4baeda5fe539ca9d306515640d51",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q2-i.webp": "2560a35cc6221074c2d86cdfbef4e49338e810cc78e259fa55aed23118bfaf3b",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q2-u.webp": "4933f29e29b0e70b29a5a3e72c3381af42361bc04fdf694cf48d99d98657aaeb",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05h/r05h-q2.webp"
+    ]
+  },
+  {
+    "id": "r04h-q1",
+    "version": 2,
+    "number": 1,
+    "title": "2022年 春期 問1",
+    "topic": "基礎理論",
+    "concept": "浮動小数点の情報落ち",
+    "source": "令和4年度 春期 応用情報技術者試験 午前 問1",
+    "year": 2022,
+    "season": "spring",
+    "page": 3,
+    "stem": "浮動小数点数を，仮数部が7ビットである表示形式のコンピュータで計算した場合，情報落ちが++発生しないもの++はどれか。ここで，仮数部が7ビットの表示形式とは次のフォーマットであり，$(\\ )_{2}$内は2進数，$Y$は指数である。また，{ }内を先に計算するものとする。\n\n$$(1.\\ X_{1}\\ X_{2}\\ X_{3}\\ X_{4}\\ X_{5}\\ X_{6}\\ X_{7})_{2}\\times 2^{Y}$$",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "$\\{(1.1)_{2}\\times 2^{-3}+(1.0)_{2}\\times 2^{-4}\\}+(1.0)_{2}\\times 2^{5}$"
+      },
+      {
+        "label": "イ",
+        "text": "$\\{(1.1)_{2}\\times 2^{-3}-(1.0)_{2}\\times 2^{-4}\\}+(1.0)_{2}\\times 2^{5}$"
+      },
+      {
+        "label": "ウ",
+        "text": "$\\{(1.0)_{2}\\times 2^{5}+(1.1)_{2}\\times 2^{-3}\\}+(1.0)_{2}\\times 2^{-4}$"
+      },
+      {
+        "label": "エ",
+        "text": "$\\{(1.0)_{2}\\times 2^{5}-(1.0)_{2}\\times 2^{-4}\\}+(1.1)_{2}\\times 2^{-3}$"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r04h/r04h-q1.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q1.webp": "5d7fa856f6d3b65418a3b7f7f1cd90c14655f931134cf84e3744ddd3501322ae",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q1.webp"
+    ]
+  },
+  {
+    "id": "r03h-q4",
+    "version": 2,
+    "number": 4,
+    "title": "2021年 春期 問4",
+    "topic": "基礎理論",
+    "concept": "温度センサ",
+    "source": "令和3年度 春期 応用情報技術者試験 午前 問4",
+    "year": 2021,
+    "season": "spring",
+    "page": 5,
+    "stem": "体温を測定するのに適切なセンサはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "サーミスタ"
+      },
+      {
+        "label": "イ",
+        "text": "超音波センサ"
+      },
+      {
+        "label": "ウ",
+        "text": "フォトトランジスタ"
+      },
+      {
+        "label": "エ",
+        "text": "ポテンショメータ"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r03h/r03h-q4.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q4.webp": "65812f2fdecf76c1c492e4c7871a43ca8496e4ad3f790edc72882f59de49e9b3",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03h/r03h-q4.webp"
+    ]
+  },
+  {
+    "id": "r03a-q4",
+    "version": 2,
+    "number": 4,
+    "title": "二次元パリティで誤りを訂正",
+    "topic": "基礎理論",
+    "concept": "行と列のパリティ",
+    "source": "令和3年度 秋期 応用情報技術者試験 午前 問4",
+    "year": 2021,
+    "season": "autumn",
+    "page": 5,
+    "stem": "図のように16ビットのデータを$4\\times4$の正方形状に並べ，行と列にパリティビットを付加することによって何ビットまでの誤りを訂正できるか。ここで，図の網掛け部分はパリティビットを表す。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "1"
+      },
+      {
+        "label": "イ",
+        "text": "2"
+      },
+      {
+        "label": "ウ",
+        "text": "3"
+      },
+      {
+        "label": "エ",
+        "text": "4"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r03a/r03a-q4.webp"
+    ],
+    "image": "assets/transcriptions/transcribe_r03a_batch1/r03a-q4-parity.webp",
+    "imageAlt": "4×4のデータと網掛けした行・列のパリティビットを示す原本図。",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03a/r03a-q4.webp": "0770421472be36f6d6d758dd224cd3be13752f6a1098bc5ba2a3154fce12511f",
+      "assets/transcriptions/transcribe_r03a_batch1/r03a-q4-parity.webp": "28667ef32c816360a578f660d628c3f300938419c94e1b1d8a2085cccd6f2388",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03a/r03a-q4.webp"
+    ]
+  },
+  {
+    "id": "r05a-q4",
+    "version": 2,
+    "number": 4,
+    "title": "2023年 秋期 問4",
+    "topic": "基礎理論",
+    "concept": "行列パリティによる訂正",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問4",
+    "year": 2023,
+    "season": "autumn",
+    "page": 5,
+    "stem": "図のように16ビットのデータを$4\\times4$の正方形状に並べ，行と列にパリティビットを付加することによって何ビットまでの誤りを訂正できるか。ここで，図の網掛け部分はパリティビットを表す。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "1"
+      },
+      {
+        "label": "イ",
+        "text": "2"
+      },
+      {
+        "label": "ウ",
+        "text": "3"
+      },
+      {
+        "label": "エ",
+        "text": "4"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q4.webp"
+    ],
+    "image": "assets/transcriptions/transcribe_r05a_batch1/r05a-q4-parity-bits.webp",
+    "imageAlt": "4×4のデータと，各行末・各列末の網掛けパリティビット。",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q4.webp": "b7045108b06ea70e87f76ce971d5b0a1f6678d8ad2ec89d70feb28e5a8048c11",
+      "assets/transcriptions/transcribe_r05a_batch1/r05a-q4-parity-bits.webp": "9b7fa6f6cee69a21d3d2e2e7077b9616c078c5f68737d9b1f2e6845650bec4f5",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q4.webp"
+    ]
+  },
+  {
+    "id": "r06a-q3",
+    "version": 2,
+    "number": 3,
+    "title": "2024年 秋期 問3",
+    "topic": "基礎理論",
+    "concept": "逆ポーランド表記への変換",
+    "source": "令和6年度 秋期 応用情報技術者試験 午前 問3",
+    "year": 2024,
+    "season": "autumn",
+    "page": 4,
+    "stem": "式A＋B×Cの逆ポーランド表記法による表現として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "+×CBA"
+      },
+      {
+        "label": "イ",
+        "text": "×+ABC"
+      },
+      {
+        "label": "ウ",
+        "text": "ABC×+"
+      },
+      {
+        "label": "エ",
+        "text": "CBA+×"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r06a/r06a-q3.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q3.webp": "4d91ecfdd3919ae105ff86621a00e182167bd187048ebf392dd71c49fd2b91df",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06a/r06a-q3.webp"
+    ]
+  },
+  {
+    "id": "r06a-q4",
+    "version": 2,
+    "number": 4,
+    "title": "2024年 秋期 問4",
+    "topic": "基礎理論",
+    "concept": "運転支援システムのセンサ",
+    "source": "令和6年度 秋期 応用情報技術者試験 午前 問4",
+    "year": 2024,
+    "season": "autumn",
+    "page": 5,
+    "stem": "自動車の先進運転支援システムで使用されるセンサーの説明のうち，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "可視光カメラは，天候などの影響を受けやすいが，交通標識の認識に使用できる。"
+      },
+      {
+        "label": "イ",
+        "text": "超音波センサーは，天候などの影響を受けやすいが，測定可能距離が500メートル以上と長い。"
+      },
+      {
+        "label": "ウ",
+        "text": "ミリ波レーダーは，天候などの影響を受けにくく，交通信号機の灯色の判別に使用できる。"
+      },
+      {
+        "label": "エ",
+        "text": "レーザーレーダーは，天候などの影響を受けにくく，建物の後ろにある物体を検知できる。"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r06a/r06a-q4.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q4.webp": "a9dfde8398b0abccd9639a5d3da68be50d9aea181f293694a13d171bdc84bd88",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r06a/r06a-q4.webp"
+    ]
+  },
+  {
+    "id": "r04a-q4",
+    "version": 2,
+    "number": 4,
+    "title": "2022年 秋期 問4",
+    "topic": "基礎理論",
+    "concept": "過学習",
+    "source": "令和4年度 秋期 応用情報技術者試験 午前 問4",
+    "year": 2022,
+    "season": "autumn",
+    "page": 4,
+    "stem": "AIにおける過学習の説明として，最も適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "ある領域で学習した学習済みモデルを，別の領域に再利用することによって，効率的に学習させる。"
+      },
+      {
+        "label": "イ",
+        "text": "学習に使った訓練データに対しては精度が高い結果となる一方で，未知のデータに対しては精度が下がる。"
+      },
+      {
+        "label": "ウ",
+        "text": "期待している結果とは掛け離れている場合に，結果側から逆方向に学習させて，その差を少なくする。"
+      },
+      {
+        "label": "エ",
+        "text": "膨大な訓練データを学習させても効果が得られない場合に，学習目標として成功と判断するための報酬を与えることによって，何が成功か分かるようにする。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r04a/r04a-q4.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04a/r04a-q4.webp": "be63b889a1186cd32caa219ad0e987a6db65a04db7e496a900fcc37e70490e31",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04a/r04a-q4.webp"
+    ]
+  },
+  {
+    "id": "r07h-q3",
+    "version": 2,
+    "number": 3,
+    "title": "2025年 春期 問3",
+    "topic": "基礎理論",
+    "concept": "過学習",
+    "source": "令和7年度 春期 応用情報技術者試験 午前 問3",
+    "year": 2025,
+    "season": "spring",
+    "page": 5,
+    "stem": "AIにおける機械学習の過程において，過学習と疑われたときの解消方法として，最も適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "訓練した時と同じ精度を出すために，訓練データをテストデータとして使用する。"
+      },
+      {
+        "label": "イ",
+        "text": "精度を高めるために，元の訓練データに加工を施し，訓練データの量を増やす。"
+      },
+      {
+        "label": "ウ",
+        "text": "予測した結果に近づけるために，モデルをより複雑にする。"
+      },
+      {
+        "label": "エ",
+        "text": "より多くの未知のデータに対して予測できるように，汎化性能を下げる。"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r07h/r07h-q3.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r07h/r07h-q3.webp": "93f379b664764ffeb3327a8501bd71af40e308589e596260a71c431c126db119",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r07h/r07h-q3.webp"
+    ]
+  },
+  {
+    "id": "r04h-q2",
+    "version": 2,
+    "number": 2,
+    "title": "2022年 春期 問2",
+    "topic": "基礎理論",
+    "concept": "集合の恒等式",
+    "source": "令和4年度 春期 応用情報技術者試験 午前 問2",
+    "year": 2022,
+    "season": "spring",
+    "page": 3,
+    "stem": "全体集合$S$内に異なる部分集合$A$と$B$があるとき，$\\overline{A}\\cap\\overline{B}$に等しいものはどれか。ここで，$A\\cup B$は$A$と$B$の和集合，$A\\cap B$は$A$と$B$の積集合，$\\overline{A}$は$S$における$A$の補集合，$A-B$は$A$から$B$を除いた差集合を表す。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "$\\overline{A}-B$"
+      },
+      {
+        "label": "イ",
+        "text": "$(\\overline{A}\\cup\\overline{B})-(A\\cap B)$"
+      },
+      {
+        "label": "ウ",
+        "text": "$(S-A)\\cup(S-B)$"
+      },
+      {
+        "label": "エ",
+        "text": "$S-(A\\cap B)$"
+      }
+    ],
+    "answer": 0,
+    "sourceImages": [
+      "assets/questions/r04h/r04h-q2.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q2.webp": "70af6407f687f8116f1f12fd6bb61759193a4d8dbb1e217bd40eada7b7fdd4b0",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q2.webp"
+    ]
+  },
+  {
+    "id": "r03h-q3",
+    "version": 2,
+    "number": 3,
+    "title": "2021年 春期 問3",
+    "topic": "基礎理論",
+    "concept": "音声のデータ量",
+    "source": "令和3年度 春期 応用情報技術者試験 午前 問3",
+    "year": 2021,
+    "season": "spring",
+    "page": 4,
+    "stem": "サンプリング周波数40kHz，量子化ビット数16ビットでA/D変換したモノラル音声の1秒間のデータ量は，何kバイトとなるか。ここで，1kバイトは1,000バイトとする。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "20"
+      },
+      {
+        "label": "イ",
+        "text": "40"
+      },
+      {
+        "label": "ウ",
+        "text": "80"
+      },
+      {
+        "label": "エ",
+        "text": "640"
+      }
+    ],
+    "answer": 2,
+    "sourceImages": [
+      "assets/questions/r03h/r03h-q3.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r03h/r03h-q3.webp": "d924a8ee344a9f035684fcc875944737374dbd3289e4e5c9d4f39c97ef388665",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r03h/r03h-q3.webp"
+    ]
+  },
+  {
+    "id": "r04h-q20",
+    "version": 2,
+    "number": 20,
+    "title": "2022年 春期 問20",
+    "topic": "論理回路",
+    "concept": "FPGAの特徴",
+    "source": "令和4年度 春期 応用情報技術者試験 午前 問20",
+    "year": 2022,
+    "season": "spring",
+    "page": 10,
+    "stem": "FPGAの説明として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "電気的に記憶内容の書換えを行うことができる不揮発性メモリ"
+      },
+      {
+        "label": "イ",
+        "text": "特定の分野及びアプリケーション用に限定した特定用途向け汎用集積回路"
+      },
+      {
+        "label": "ウ",
+        "text": "浮動小数点数の演算を高速に実行する演算ユニット"
+      },
+      {
+        "label": "エ",
+        "text": "論理回路を基板上に実装した後で再プログラムできる集積回路"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r04h/r04h-q20.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q20.webp": "cd444ab982aedc00c7f5e5ee276c2941e05a7d1fd549a15e399fbf23bce05c4a",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r04h/r04h-q20.webp"
+    ]
+  },
+  {
+    "id": "r05a-q20",
+    "version": 2,
+    "number": 20,
+    "title": "2023年 秋期 問20",
+    "topic": "論理回路",
+    "concept": "FPGAの特徴",
+    "source": "令和5年度 秋期 応用情報技術者試験 午前 問20",
+    "year": 2023,
+    "season": "autumn",
+    "page": 12,
+    "stem": "FPGAの説明として，適切なものはどれか。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "電気的に記憶内容の書換えを行うことができる不揮発性メモリ"
+      },
+      {
+        "label": "イ",
+        "text": "特定の分野及びアプリケーション用に限定した特定用途向け汎用集積回路"
+      },
+      {
+        "label": "ウ",
+        "text": "浮動小数点数の演算を高速に実行する演算ユニット"
+      },
+      {
+        "label": "エ",
+        "text": "論理回路を基板上に実装した後で再プログラムできる集積回路"
+      }
+    ],
+    "answer": 3,
+    "sourceImages": [
+      "assets/questions/r05a/r05a-q20.webp"
+    ],
+    "image": null,
+    "imageAlt": "",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q20.webp": "1946d5988faf80a1be645e473b56fba16ddc22ee04acc44f3f97a79690aa6a1c",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05a/r05a-q20.webp"
+    ]
+  },
+  {
+    "id": "r05h-q21",
+    "version": 2,
+    "number": 21,
+    "title": "2023年 春期 問21",
+    "topic": "論理回路",
+    "concept": "NAND回路の式",
+    "source": "令和5年度 春期 応用情報技術者試験 午前 問21",
+    "year": 2023,
+    "season": "spring",
+    "page": 12,
+    "stem": "NAND素子を用いた次の組合せ回路の出力Zを表す式はどれか。ここで，論理式中の“・”は論理積，“+”は論理和，“$\\overline{X}$”はXの否定を表す。",
+    "choices": [
+      {
+        "label": "ア",
+        "text": "$X\\cdot Y$"
+      },
+      {
+        "label": "イ",
+        "text": "$X+Y$"
+      },
+      {
+        "label": "ウ",
+        "text": "$\\overline{X\\cdot Y}$"
+      },
+      {
+        "label": "エ",
+        "text": "$\\overline{X+Y}$"
+      }
+    ],
+    "answer": 1,
+    "sourceImages": [
+      "assets/questions/r05h/r05h-q21.webp"
+    ],
+    "image": "assets/transcriptions/pr-batch2-figures-a/r05h-q21-figure.webp",
+    "imageAlt": "入力X・Yと出力ZをもつNAND素子3個の組合せ回路",
+    "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+    "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q21.webp": "a88903e32cba664cffa71fe75b050dca64da777346ea69291c1bf737618f40df",
+      "assets/transcriptions/pr-batch2-figures-a/r05h-q21-figure.webp": "ee24b138f3a72de35e9eb042cfc6a1bed79d26be11791388c93417f90a3dbf82",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "originalImageURLs": [
+      "https://donald-shrimp.github.io/ap-study/assets/questions/r05h/r05h-q21.webp"
+    ]
+  }
+]
