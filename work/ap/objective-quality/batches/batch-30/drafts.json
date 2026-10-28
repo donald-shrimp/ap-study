@@ -3,11 +3,11 @@
     "id": "r04h-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "217aa8ef5440cf8e0fba33eccb32ad58cfc88819d79a375e7717b3d8f14ab9b0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q60",
-      "summary": "ア。「体裁の整った管理用ドキュメントだけが監査証拠」という限定は不適切です。",
+      "summary": "監査証拠を、文書の体裁ではなく**十分性と適切性**で評価できるかを問う。",
       "explanation": "設問は適切でない記述を問います。監査証拠は管理用文書に限らず、記録、成果物、ログ、観察、質問への回答などから入手し、十分性と適切性を評価します。アジャイル開発でも、整った文書だけに限定すると実態を示す証拠を取りこぼします。保証報告書の評価、予備調査、複数手続の組合せは適切な監査の進め方です。",
       "choiceReasons": [
         "監査証拠を体裁の整った管理用ドキュメントだけに限ることはできないため、不適切な記述として正答です。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「適切でない」が問われています。各候補の「だけ」「省略できる」「通常」の限定条件を確認しましょう。",
+          "text": "設問は**適切でないもの**を選ぶ問題です。監査証拠は結論を裏付けるもので、**十分性＝必要な量、適切性＝関連性や信頼性**に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "証拠には監査目的を十分に裏付ける量と、信頼でき関連する内容が必要です。現地調査を省く記述なら、第三者の保証報告書に依拠できると判断した条件を確認します。同様に、他の候補も証拠の内容を適切に評価できる条件か検討します。",
-          "revealsAnswer": false
+          "text": "アジャイル開発では、課題チケット、成果物、テスト結果、実機での観察なども証拠になり得ます。**形式の整った管理文書だけ**に限定する必要はありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "体裁の整った管理文書だけを証拠にできるという限定は不適切です。",
+          "text": "アの**『管理用ドキュメントだけ』**という限定が不適切です。第三者保証報告書は依拠の可否を判断して使い、予備調査・複数手続も適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "「適切でない」を見落とし、整った管理文書だけが証拠だと思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問は**適切でないもの**を選ぶ問題です。監査証拠は結論を裏付けるもので、**十分性＝必要な量、適切性＝関連性や信頼性**に注目します。",
+          "remainingWork": "選択肢の『だけ』『省略できる』の条件が妥当か考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "証拠の評価軸のみ提示し、誤っている肢を確定していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "アジャイル開発では、課題チケット、成果物、テスト結果、実機での観察なども証拠になり得ます。**形式の整った管理文書だけ**に限定する必要はありません。",
+          "remainingWork": "この限定を行う肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの限定が不適切だと実質的に伝える。"
+        },
+        {
+          "newInformation": "アの**『管理用ドキュメントだけ』**という限定が不適切です。第三者保証報告書は依拠の可否を判断して使い、予備調査・複数手続も適切です。",
+          "remainingWork": "証拠の入手方法と信頼性の関係を整理する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04h/r04h-q60.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=c667dcf439670dbaff94467d372fe9c21f3545a71e292f44e827b8a61dbf670e（独立算出は未実施）。",
+        "context記載の公式正答 ア と全肢を突合。初学者のつまずき：「適切でない」を見落とし、整った管理文書だけが証拠だと思う。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q59",
     "baseVersion": 2,
     "baseLessonSHA256": "07bbf7b90ae1301a89fe7f457c72d29834413666e369542654ce7aa635270ba2",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q59",
-      "summary": "イ。監査調書は監査実施の客観性を確保し、結論の合理的な根拠となります。",
+      "summary": "監査調書が**証拠・実施内容・結論を記録する文書**である理由を問う。",
       "explanation": "監査調書は実施した監査手続、入手した証拠、判断に至る過程などを記録します。監査の実施内容を客観的に確認でき、監査結論の根拠を示します。機密情報を含むため閲覧は適切に管理し、必要な保全措置も講じます。事実だけでなく、証拠に基づく監査人の判断も記録できます。",
       "choiceReasons": [
         "機密情報を含むため、全社へ無条件に公開すべきとはいえません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢が扱う公開範囲、根拠としての役割、バックアップ、所見記録を分けます。調書を後から監査の説明に使う場面を考えます。",
+          "text": "**監査調書**は監査人の調査内容・入手した証拠・判断を残す作業記録です。全社公開やバックアップ禁止とは別の論点です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "何を調べ、どんな証拠を得て、どう判断したかが残っていれば、結論を検証できます。機密管理と記録内容を混同しないようにします。",
-          "revealsAnswer": false
+          "text": "例えばアクセス権の監査では、設定一覧と照合結果、監査人の所見を記録します。機密を守りながら保管し、**後から結論の根拠を検証できる**ようにします。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "監査実施内容の客観性を確保し、結論を支える合理的な根拠となるという記述が適切です。",
+          "text": "実施内容の客観性を保ち、結論の**合理的根拠**になるイです。個人の所見を禁止したり、バックアップしないと決めたりしません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "監査調書を全社公開資料や個人の備忘録と思い込む。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**監査調書**は監査人の調査内容・入手した証拠・判断を残す作業記録です。全社公開やバックアップ禁止とは別の論点です。",
+          "remainingWork": "調書の本来の目的に合う肢を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "役割の概要を示すが具体的な正答記述は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えばアクセス権の監査では、設定一覧と照合結果、監査人の所見を記録します。機密を守りながら保管し、**後から結論の根拠を検証できる**ようにします。",
+          "remainingWork": "合理的な根拠を記す肢と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの『客観性と合理的根拠』と実質同じ内容。"
+        },
+        {
+          "newInformation": "実施内容の客観性を保ち、結論の**合理的根拠**になるイです。個人の所見を禁止したり、バックアップしないと決めたりしません。",
+          "remainingWork": "記録の利用範囲と適切な保護を説明する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04h/r04h-q59.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=8165a1201150ca020b23bef513951f1a2c53da4083404cb564061505d00dc88d（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：監査調書を全社公開資料や個人の備忘録と思い込む。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "17d25e44d2f3ae0f86e1757f0ca4e6af85485180bb072aa34d6ab44f3a4e4add",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q58",
-      "summary": "ウ。監査調書は事実と所見を記録し、監査の結論を裏付けます。",
+      "summary": "監査調書に**発見した事実と所見**を残す理由を問う。",
       "explanation": "監査調書は監査で行った手続、得られた証拠、発見事実、所見などを記録し、結論の合理的な根拠を示す文書です。監査チームの検討や監査結果の説明に必要で、適切に保管します。\n個人的な備忘録ではなく、監査をどのように実施し何に基づき判断したかを追跡できる記録です。",
       "choiceReasons": [
         "監査の根拠を残す必要があるため、任意で作成しなくてもよいものではありません。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の調書の位置付けが、任意文書、私的記録、結論の根拠、備忘録のどれかを確認します。",
+          "text": "**発見事実**は『共有アカウントが使用された』などの確認内容、**所見**は『責任追跡に問題がある』などの監査人の評価です。両者を分けて考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "監査人が結論を説明するには、何を発見しどう判断したかを記録しておく必要があります。事実と所見の役割を考えます。",
+          "text": "監査人がどう判断したかを後から確かめるため、**監査調書に事実と所見の双方を記し、結論の根拠として保管**します。私的な記録ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "発見事実と所見を記述し、結論の合理的な根拠にする説明を選びます。",
+          "text": "**発見事実と所見を記録し結論を裏付ける**ウです。調書は任意文書や保管不要の備忘録ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "監査調書を任意の備忘録と誤認して事実と所見の両方が必要だと知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**発見事実**は『共有アカウントが使用された』などの確認内容、**所見**は『責任追跡に問題がある』などの監査人の評価です。両者を分けて考えます。",
+          "remainingWork": "この二つを何に記録するか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "事実と所見の違いだけでは正答を確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査人がどう判断したかを後から確かめるため、**監査調書に事実と所見の双方を記し、結論の根拠として保管**します。私的な記録ではありません。",
+          "remainingWork": "調書の根拠の役割を述べる肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの定義そのものを示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**発見事実と所見を記録し結論を裏付ける**ウです。調書は任意文書や保管不要の備忘録ではありません。",
+          "remainingWork": "監査チームの証拠記録としての役割を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r05a/r05a-q58.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=f7838ba14af2f95be3d8fc5698cb755d1136e76264f333efe812b60da24b25ce（独立算出は未実施）。",
+        "context記載の公式正答 ウ と全肢を突合。初学者のつまずき：監査調書を任意の備忘録と誤認して事実と所見の両方が必要だと知らない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "4964e271911006a16422959c3e510a7a87ffb5d5b50bb457049c357e2763b3e4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q58",
-      "summary": "ア。監査調書は監査の過程と証拠を記録し、結論の根拠を残す文書です。",
+      "summary": "令和5年のシステム監査基準で、**監査調書と報告・計画書**を区別する。",
       "explanation": "監査調書には実施した監査手続、収集した監査証拠、検討結果などを記録します。結論へ至った過程を追えるようにし、結論に合理的な根拠があることを支えます。\n依頼者へ結論を伝える監査報告書や、監査前の実施日程を決める計画書とは役割が異なります。",
       "choiceReasons": [
         "アは監査の過程と結論の根拠を残す監査調書です。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の文書を、監査中の記録・依頼者への報告・個別日程・中長期方針に分けます。",
+          "text": "監査では**計画書＝事前に何をどう調べるか、監査調書＝調査過程の記録、監査報告書＝結論を伝える文書**と分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "監査人が何を調べ、どんな証拠で結論を出したかを、後から追跡できる記録が監査調書です。",
+          "text": "監査調書には、調べた対象や証拠、**どのように結論へ到達したかという過程**を残します。監査依頼者に出す概要と結論の要約版は監査報告書です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アの「結論に至った過程」と「合理的な根拠」が、証拠を残す文書の役割に合うか確認します。",
+          "text": "監査の**結論に至った過程と根拠の記録**はア。イは報告書、ウは詳細計画、エは中長期の方針です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "実施中の記録と、依頼者への要約報告や中長期計画を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査では**計画書＝事前に何をどう調べるか、監査調書＝調査過程の記録、監査報告書＝結論を伝える文書**と分けます。",
+          "remainingWork": "各肢がどの段階の文書を説明しているか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "三種類の役割を示し、結論に至る過程の記述との照合は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査調書には、調べた対象や証拠、**どのように結論へ到達したかという過程**を残します。監査依頼者に出す概要と結論の要約版は監査報告書です。",
+          "remainingWork": "結論の過程と根拠がある肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの記述と実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査の**結論に至った過程と根拠の記録**はア。イは報告書、ウは詳細計画、エは中長期の方針です。",
+          "remainingWork": "計画・調書・報告書の違いをまとめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06h/r06h-q58.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=07bd1a4fab9f391ff43bae2b8e005555479a5c93908a4d1373582617aa060aaf（独立算出は未実施）。",
+        "context記載の公式正答 ア と全肢を突合。初学者のつまずき：実施中の記録と、依頼者への要約報告や中長期計画を混同する。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "1d589a50db92e2b8d37c40d5c3cf39d71dea229a615536ad285353300a83a7e3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q61",
-      "summary": "エ。事業中断後の復旧・再開・回復へ導く手順を文書化した計画です。",
+      "summary": "BCPが事業中断時の**復旧・再開・回復の手順**を定める計画だと判断する。",
       "explanation": "BCPはBusiness Continuity Plan（事業継続計画）です。災害などの中断時にも重要業務を継続し、定めた水準に復旧・再開する手順をあらかじめ決めます。",
       "choiceReasons": [
         "財務・顧客・内部プロセス・学習と成長の四視点はバランススコアカードです。",
@@ -267,57 +295,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の場面を平時の戦略、業務改善、委託、事業中断へ分けます。",
+          "text": "**BCP＝Business Continuity Plan（事業継続計画）**。Continuityは『継続』の意味で、地震や停電で事業が中断したときの備えです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "Continuityという語から、災害時に重要な事業をどう戻すかを考えます。",
-          "revealsAnswer": false
+          "text": "災害で事務所が使えなくなった場合に、代替拠点へ移って**重要業務を再開し所定の水準へ戻す手順**を決めておくのがBCPです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "中断・阻害に対応し復旧・再開する手順を文書化した候補を選びます。",
+          "text": "**中断から復旧・再開するための手順**がエです。アは戦略の四視点、ウは業務外部委託です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "BCP・BPOと業務改善を同じ施策と捉え、英語略語が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**BCP＝Business Continuity Plan（事業継続計画）**。Continuityは『継続』の意味で、地震や停電で事業が中断したときの備えです。",
+          "remainingWork": "平時の改善や外部委託と中断対応を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "英語の意味を教えるが定義と肢の照合は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "災害で事務所が使えなくなった場合に、代替拠点へ移って**重要業務を再開し所定の水準へ戻す手順**を決めておくのがBCPです。",
+          "remainingWork": "復旧・再開の手順を文書化する肢に対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エの説明を具体例でほぼ言い換えている。"
+        },
+        {
+          "newInformation": "**中断から復旧・再開するための手順**がエです。アは戦略の四視点、ウは業務外部委託です。",
+          "remainingWork": "平時の業務施策と有事の対策を区別する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04a/r04a-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=28850eb62b1a84b488c83a6436b896ff06bcafa4daf8dacf6ceb93c0eb4c57fc（独立算出は未実施）。",
+        "context記載の公式正答 エ と全肢を突合。初学者のつまずき：BCP・BPOと業務改善を同じ施策と捉え、英語略語が分からない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q63",
     "baseVersion": 2,
     "baseLessonSHA256": "1cdfd1809874a956198e9f96c329783df01b4e367d376e5ac692d7188394e5c0",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q63",
-      "summary": "イ。BPOは業務の一部または全部を外部の専門企業へ委託することです。",
+      "summary": "BPOの**業務プロセス外部委託**を、事業継続・資材計画・投資管理と区別する。",
       "explanation": "BPOはBusiness Process Outsourcingの略です。コアビジネスではない事業等に関する業務プロセスを外部の専門企業へ任せ、組織は主要な事業に資源を集中できます。災害時の事業継続、資材所要量の計画、情報化投資の組合せ管理とは別の概念です。",
       "choiceReasons": [
         "被災時にも重要業務を継続する仕組みは事業継続の説明です。",
@@ -329,57 +364,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補の対象を、事業継続・業務の委託・資材計画・投資管理に分けます。",
-          "revealsAnswer": false
+          "text": "**BPO＝Business Process Outsourcing（業務プロセスの外部委託）**。Outsourcingは外部企業へ業務を任せることです。例えば給与計算や問合せ対応の一部を専門会社へ委託します。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "BPOのOutsourcingは外部への委託です。どの候補が社内の業務を専門企業に任せる内容か確かめます。",
+          "text": "**BCP＝Business Continuity Plan（事業継続計画）**は災害対策、**MRP＝Material Requirements Planning（資材所要量計画）**は生産資材の計画です。用語の対象が異なります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "コアビジネスではない業務の一部または全部を外部の専門企業へ委託する候補が該当します。",
+          "text": "非中核業務の一部又は全部を**外部専門企業へ委託するイ**です。災害継続や在庫の計算ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "BPO・BCP・MRPという英語略語の意味が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**BPO＝Business Process Outsourcing（業務プロセスの外部委託）**。Outsourcingは外部企業へ業務を任せることです。例えば給与計算や問合せ対応の一部を専門会社へ委託します。",
+          "remainingWork": "外部専門企業へ業務を任せる肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "イの説明そのものを教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**BCP＝Business Continuity Plan（事業継続計画）**は災害対策、**MRP＝Material Requirements Planning（資材所要量計画）**は生産資材の計画です。用語の対象が異なります。",
+          "remainingWork": "ほかの略語との差を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段でイが確定済み。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "非中核業務の一部又は全部を**外部専門企業へ委託するイ**です。災害継続や在庫の計算ではありません。",
+          "remainingWork": "委託範囲を理解する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04h/r04h-q63.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=08133ec67564407ca4d2297e86e42e18843ad98bbe7288f486da30f87a67536f（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：BPO・BCP・MRPという英語略語の意味が分からない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q64",
     "baseVersion": 2,
     "baseLessonSHA256": "42efd766ab3663fccefdaf434c891be36e970559e68d75b7cef18247ad0dc4dc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q64",
-      "summary": "イ。シナリオbは人件費600万円と追加利益40万円で、年640万円の効果です。",
+      "summary": "BPRの四案を**人件費削減＋空き時間利益−委託固定費**で金額比較する。",
       "explanation": "追加利益は空き時間100時間当たり20万円、つまり1時間当たり0.2万円です。4人の稼働可能時間は7,200時間、5人なら9,000時間で、委託ありの場合の社内業務は7,000−2,000=5,000時間です。\naは600＋(7,200−5,000)×0.2−700=340万円。bは600＋(7,200−7,000)×0.2=640万円。cは(9,000−5,000)×0.2−700=100万円。dは(9,000−7,000)×0.2=400万円。\n4人の案だけは異動する一人分の人件費削減600万円を加え、委託する案は固定費700万円を引きます。最大はbです。",
       "choiceReasons": [
         "aの空き時間2,200時間の利益440万円へ人件費削減600万円を加え、委託費700万円を引くと340万円です。",
@@ -391,57 +433,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "条件(5)より、4人のa・bは一人の異動で600万円の削減効果があります。5人のc・dにはその削減を加えません。",
+          "text": "**BPR＝Business Process Re-engineering（業務プロセスの抜本的見直し）**。今回は**人件費削減＋空き時間の追加利益−委託費**で比較します。100時間当たり20万円なので、空き時間1時間の利益は**0.2万円**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各案の空き時間は人数×1,800−社内業務時間です。委託ありなら社内は5,000時間、なしなら7,000時間。空き時間へ20/100万円を掛けます。",
+          "text": "4人の働ける時間は**7,200時間**、5人は**9,000時間**。委託ありなら社内業務は**5,000時間**、なしなら**7,000時間**。4人案だけ人件費削減600万円、委託あり案だけ固定費700万円を反映します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "bの式は600＋(4×1,800−7,000)×0.2です。aには委託費−700もあり、社内業務時間を5,000へ替えます。四案を同じ単位で比較しましょう。",
-          "revealsAnswer": false
+          "text": "a＝600＋(7,200−5,000)×0.2−700＝**340万円**、b＝600＋(7,200−7,000)×0.2＝**640万円**、c＝(9,000−5,000)×0.2−700＝**100万円**、d＝(9,000−7,000)×0.2＝**400万円**。最大は**b（イ）**です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "異動した1人の600万円と空き時間の利益を混同し、外部委託700万円が固定な点を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**BPR＝Business Process Re-engineering（業務プロセスの抜本的見直し）**。今回は**人件費削減＋空き時間の追加利益−委託費**で比較します。100時間当たり20万円なので、空き時間1時間の利益は**0.2万円**です。",
+          "remainingWork": "各案で社内が働く時間と人件費削減の有無を整理する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較式だけで最大案は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "4人の働ける時間は**7,200時間**、5人は**9,000時間**。委託ありなら社内業務は**5,000時間**、なしなら**7,000時間**。4人案だけ人件費削減600万円、委託あり案だけ固定費700万円を反映します。",
+          "remainingWork": "各案の空き時間に0.2を掛けて比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "必要な入力と途中式を示すが結果は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "a＝600＋(7,200−5,000)×0.2−700＝**340万円**、b＝600＋(7,200−7,000)×0.2＝**640万円**、c＝(9,000−5,000)×0.2−700＝**100万円**、d＝(9,000−7,000)×0.2＝**400万円**。最大は**b（イ）**です。",
+          "remainingWork": "委託が必ず高効果になるわけではない理由を考える",
+          "revealsAnswer": true,
+          "reason": "全結果とイを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06a/r06a-q64.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=d7053ab9b8553be1100bc0b29b28aa6266b79978a640bd4bce4abd837928f3f5（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：異動した1人の600万円と空き時間の利益を混同し、外部委託700万円が固定な点を見落とす。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q62",
     "baseVersion": 2,
     "baseLessonSHA256": "ae3e5915f7ce51499a92608501aeb18f7ab4260e35e7c2ca284c547cc6509556",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q62",
-      "summary": "イ。環境変化へ迅速に対応できるITシステムかを確認します。",
+      "summary": "DX推進指標における**ITシステム自体に必要な性質**を判断する。",
       "explanation": "DXを実現するITシステムには、ビジネスや環境の変化に合わせて迅速に変更・提供できる柔軟性が求められます。設問は人材確保ではなく、ITシステムに求められる要素を問うので、デリバリースピードへの対応を選びます。",
       "choiceReasons": [
         "人材の育成・確保は重要ですが、設問のITシステムに求められる要素ではなく別の観点です。",
@@ -453,57 +502,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問が人材ではなくITシステムの要素を尋ねていることを確認します。",
+          "text": "**DX＝Digital Transformation（デジタル変革）**はデジタル技術で事業や業務を変えること。設問は人材育成ではなく、**ITシステムに求められる要素**を尋ねています。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "変化の速い事業で、新サービスや変更を届けるまでの時間がどう影響するか考えます。",
-          "revealsAnswer": false
+          "text": "例えば新サービスの変更をすぐ提供したいのに、システム改修に半年かかれば対応できません。**デリバリースピード＝必要な機能を利用者へ届ける速さ**が重要です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "環境変化へ迅速に対応し、求められるデリバリースピードを満たす候補を選びます。",
+          "text": "環境変化と**求められる提供速度**に対応するイです。データの個別最適や事後分析だけの優先が常に適切とはいえません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DX・デリバリースピードが未知で、人材要件とシステムの性質を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**DX＝Digital Transformation（デジタル変革）**はデジタル技術で事業や業務を変えること。設問は人材育成ではなく、**ITシステムに求められる要素**を尋ねています。",
+          "remainingWork": "人材とシステムの性質に選択肢を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "対象のみ提示し、特定のシステム条件は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば新サービスの変更をすぐ提供したいのに、システム改修に半年かかれば対応できません。**デリバリースピード＝必要な機能を利用者へ届ける速さ**が重要です。",
+          "remainingWork": "変化へ迅速に対応できる説明を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの内容を実質提示している。"
+        },
+        {
+          "newInformation": "環境変化と**求められる提供速度**に対応するイです。データの個別最適や事後分析だけの優先が常に適切とはいえません。",
+          "remainingWork": "ITシステムの要素と人材確保を区別する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04a/r04a-q62.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=19b84e43ed6cb6e399a38876eddfc2588164a1a424a73d722feb3b665e3f3bd2（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：DX・デリバリースピードが未知で、人材要件とシステムの性質を区別できない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "685d35b814452240240e63341df3bf5f2809650266fa5befdf5a773d44a8dc61",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q61",
-      "summary": "イ。環境変化と求める提供速度に対応できるITシステムかを確認します。",
+      "summary": "DXで求められる**システムの変化対応力・提供速度**を、人材管理等と区別する。",
       "explanation": "DXの基盤となるITシステムには、事業環境の変化へ迅速に対応し、必要なスピードで機能を提供できることが求められます。イはシステム自体の要件を述べています。\n全体設計などを担う人材の育成も重要ですが、「ITシステムに求められる要素」とは対象が違います。事後分析をリアルタイム性より常に優先したり、全体最適より個別最適を志向したりする方向も適切ではありません。",
       "choiceReasons": [
         "人材の育成・確保に関する確認事項で、ITシステム自体に求める要素という分類とは違います。",
@@ -515,57 +571,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問いはDX全般ではなく「ITシステムに求められる要素」です。人材の確保についての候補と、システムの性質についての候補を分けます。",
+          "text": "**DX（Digital Transformation）＝デジタル変革**。問題文の『ITシステムに求められる要素』に注目し、採用・育成など**人の確保**とは分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "新しい事業施策を早く提供したいときに、システム変更が何か月も遅れるとDXの基盤として支障があります。提供速度への対応が必要です。",
+          "text": "デリバリースピードとは機能や変更を**使える状態で届ける速さ**です。新規施策に合わせて迅速に変更できるITシステムが必要になります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "環境変化に迅速に対応し必要な速度で提供できるかを問うイが該当します。",
+          "text": "環境変化に迅速に対応する**ITシステムの提供速度**のイです。ウ・エはデータの扱いに極端な限定を付けています。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DX推進指標の主語を見落とし、システムの評価と人材育成を混ぜてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**DX（Digital Transformation）＝デジタル変革**。問題文の『ITシステムに求められる要素』に注目し、採用・育成など**人の確保**とは分けます。",
+          "remainingWork": "候補の対象を人材・システムの性質に分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "正答となる性質は未提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "デリバリースピードとは機能や変更を**使える状態で届ける速さ**です。新規施策に合わせて迅速に変更できるITシステムが必要になります。",
+          "remainingWork": "速い機能提供ができる候補を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イに一致する説明を渡した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "環境変化に迅速に対応する**ITシステムの提供速度**のイです。ウ・エはデータの扱いに極端な限定を付けています。",
+          "remainingWork": "全体最適とリアルタイム活用の関係を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06a/r06a-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=92a7f4b9d85a6ca01f93ca13a7f7f2ad9e6df4818e6614284b8343cf08c1fc8f（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：DX推進指標の主語を見落とし、システムの評価と人材育成を混ぜてしまう。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "52d43d44331e19c7010b68b5ff064a811a0aede862b2ebdba929d1a0031430ef",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q61",
-      "summary": "イ。経営ビジョン・ビジネスモデルの方向性とDX戦略の公表が含まれる。",
+      "summary": "DX認定制度で**経営の方向性とDX戦略の公表**が基準に含まれるかを問う。",
       "explanation": "DX認定は、デジタル技術を使って経営を変革する準備や体制等について、基準を満たす事業者を認定する制度。経営ビジョンやビジネスモデルの方向性を示し、それを実現するDX戦略を公表することが基準に含まれる。\n\n成果目標を既に達成したことを必須とする制度ではなく、中小企業だけに対象を限定もしない。また、デジタルガバナンス・コードの全項目への対応と認定基準は同一ではない。この解説は出題された制度・基準の条件に沿って読む。",
       "choiceReasons": [
         "成果目標を既に達成したことまで必須としている点が違う。",
@@ -577,57 +640,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の「既に達成」「中小企業」「全項目」は強い追加条件。認定が何を確認する制度かを先に考える。",
+          "text": "**DX認定**は企業がデジタル変革へ取り組む経営方針・体制を整えるための認定です。成果を**既に達成**したかと、方針を**公表**したかを区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "経営の方向性を示し、その実現のためのDX戦略を明らかにすることが中心。成果を全て出し終えてから認定するとは限らない。",
-          "revealsAnswer": false
+          "text": "経営ビジョン・**ビジネスモデルの方向性**を示し、それを実現する**DX戦略を公表**します。中小企業のみ対象、という制限ではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "経営ビジョンとDX戦略の公表を説明していて、成果達成や企業規模等の過剰な条件を加えていないものを選ぶ。",
-          "revealsAnswer": false
+          "text": "経営の方向性とDX戦略を公表する**イ**です。成果の達成済みを一律に要求するアは余分な条件です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DX認定を成果達成後の表彰や中小企業限定だと思い込む。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**DX認定**は企業がデジタル変革へ取り組む経営方針・体制を整えるための認定です。成果を**既に達成**したかと、方針を**公表**したかを区別します。",
+          "remainingWork": "各肢の要件が実際より厳しいか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "制度の役割のみで正答文はまだ渡していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "経営ビジョン・**ビジネスモデルの方向性**を示し、それを実現する**DX戦略を公表**します。中小企業のみ対象、という制限ではありません。",
+          "remainingWork": "方針と戦略の公表に対応する肢を探す",
+          "revealsAnswer": true,
+          "reason": "イの要件と実質同じ。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "経営の方向性とDX戦略を公表する**イ**です。成果の達成済みを一律に要求するアは余分な条件です。",
+          "remainingWork": "準備段階の認定と成果達成の違いを説明する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r07h/r07h-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=c408a69bcfcf8c6628c53c0cb3303bbf57243d401816b60cfb2daa7bc7009299（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：DX認定を成果達成後の表彰や中小企業限定だと思い込む。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "ea337081981852a0e4209f8ea89ec990ac796f978c15264123a3bd91c5416847",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q61",
-      "summary": "ウ。BRMは業務を分類し、業務体系や業務モデルを示す参照モデルです。",
+      "summary": "EAにおけるBRMが**業務体系のモデル**を扱うことを問う。",
       "explanation": "BRMはBusiness Reference Modelで、EAのうち業務に最も近い階層を示します。業務を共通の分類で整理し、業務体系・システム体系や業務モデルを参照できる形にします。\nサービスコンポーネントを分類するSRM、技術基盤の標準を示すTRM、データの定義・属性などを示すDRMとは対象が違います。",
       "choiceReasons": [
         "アはサービス機能を分類するSRMの説明です。",
@@ -639,57 +709,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の対象を、サービス機能・技術基盤・業務体系・データ定義に分けます。",
-          "revealsAnswer": false
+          "text": "**BRM＝Business Reference Model（業務参照モデル）**。Businessは『業務』です。**EA＝Enterprise Architecture（企業全体の構造）**において、業務・サービス・技術・データを分けて考えます。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "BRMのBはBusinessです。技術仕様やデータ項目そのものより、組織が行う仕事の構造に近い層を表します。",
+          "text": "例として『注文受付→在庫確認→出荷』という**業務体系**を整理します。**SRM＝Service Reference Model**はサービス機能、**TRM＝Technical Reference Model**は技術仕様、**DRM＝Data Reference Model**はデータ定義です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "業務分類に従う体系と各種業務モデルを示す記述を、Businessの参照モデルに対応させます。",
+          "text": "業務分類に従う体系・モデルを示す**ウ**です。アはSRM、イはTRM、エはDRMに相当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "BRM・SRM・TRM・DRMの英語略語を知らず階層の違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**BRM＝Business Reference Model（業務参照モデル）**。Businessは『業務』です。**EA＝Enterprise Architecture（企業全体の構造）**において、業務・サービス・技術・データを分けて考えます。",
+          "remainingWork": "業務を分類する候補を確認する",
+          "revealsAnswer": true,
+          "reason": "BRMの意味により業務分類を扱うウが確定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例として『注文受付→在庫確認→出荷』という**業務体系**を整理します。**SRM＝Service Reference Model**はサービス機能、**TRM＝Technical Reference Model**は技術仕様、**DRM＝Data Reference Model**はデータ定義です。",
+          "remainingWork": "業務モデルを示す肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段で正答の定義を開示済み。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "業務分類に従う体系・モデルを示す**ウ**です。アはSRM、イはTRM、エはDRMに相当します。",
+          "remainingWork": "四参照モデルを対比する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06h/r06h-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=e7d1a08273eddff0a141290434a84444d43b13e9a57808de8f5fe039317b924e（独立算出は未実施）。",
+        "context記載の公式正答 ウ と全肢を突合。初学者のつまずき：BRM・SRM・TRM・DRMの英語略語を知らず階層の違いが分からない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q63",
     "baseVersion": 2,
     "baseLessonSHA256": "bd1b012e52394d56d6b882db10b6db0f131ea16667a1fd635a328381a8e05029",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q63",
-      "summary": "ウ。四つの体系で企業全体を分析し、全体最適を図ります。",
+      "summary": "EAが**業務・データ・アプリケーション・技術**の四つの体系で全体最適を目指すことを問う。",
       "explanation": "EAは業務、データ、アプリケーション、技術の四つのアーキテクチャで企業の現状と目標を整理し、組織全体として最適な業務・情報システムへ見直す方法です。個別の図法だけを表す名称ではありません。",
       "choiceReasons": [
         "クラス図やユースケース図などの標準化された表記はUMLです。",
@@ -701,57 +778,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が企業全体の見直しか、特定の図の描き方かを確認します。",
+          "text": "**EA＝Enterprise Architecture（企業全体の業務・IT構造）**。部署ごとの個別最適ではなく、**企業全体の仕組み**を整理する考え方です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "業務だけでなくデータ、アプリ、技術も相互に合わせる必要を考えます。",
+          "text": "EAでは**業務（ビジネス）・情報（データ）・処理（アプリケーション）・基盤（テクノロジ）**を対応づけます。**UML**は設計図法、**ER**はデータの関係、**DFD**はデータの流れを表します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "四つのアーキテクチャを全体最適の視点で見直す候補を選びます。",
+          "text": "四つの体系を分析し全体最適を図る**ウ**です。アはUML、イはER、エはDFDです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "EA、UML、ER、DFDの違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**EA＝Enterprise Architecture（企業全体の業務・IT構造）**。部署ごとの個別最適ではなく、**企業全体の仕組み**を整理する考え方です。",
+          "remainingWork": "全体を扱う方法と個別の図法を分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "全体最適の考えを説明するが四体系は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "EAでは**業務（ビジネス）・情報（データ）・処理（アプリケーション）・基盤（テクノロジ）**を対応づけます。**UML**は設計図法、**ER**はデータの関係、**DFD**はデータの流れを表します。",
+          "remainingWork": "四体系による全体最適の選択肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウに挙がる四体系を示した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの体系を分析し全体最適を図る**ウ**です。アはUML、イはER、エはDFDです。",
+          "remainingWork": "EAと個別図法を区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04a/r04a-q63.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=6c3c5f20d30edaaab2d604b95b8492cacd5fd0f8895f0f969e49e11ccf0c6365（独立算出は未実施）。",
+        "context記載の公式正答 ウ と全肢を突合。初学者のつまずき：EA、UML、ER、DFDの違いが分からない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "b47a41b2b77c93e204767ef2499146ee85294cd363cca713563d3a88a146abc3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q61",
-      "summary": "ウ。四つの分類体系の残りはデータアーキテクチャです。",
+      "summary": "EAの四分類のうち、既出の業務・技術・アプリケーションと並ぶ**情報の体系**を問う。",
       "explanation": "エンタープライズアーキテクチャは、業務を整理するビジネス、扱う情報を整理するデータ、業務を支えるアプリケーション、基盤技術を整理するテクノロジという四つの体系で全体最適を考えます。問題に挙がっていないのはデータアーキテクチャです。個別システムの構成やバスの構成を表す用語と区別します。",
       "choiceReasons": [
         "システムアーキテクチャは一般的なシステム構成の用語で、EAの四分類の名称ではありません。",
@@ -763,57 +847,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題に既に挙がっている三つを、業務、業務を支える処理、技術基盤という日本語に対応させます。",
+          "text": "**EA＝Enterprise Architecture（企業全体の構造）**。ビジネスは仕事の手順、アプリケーションは業務ソフト、テクノロジは機器・基盤を扱います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "受注業務なら、業務の手順、受注を処理するアプリ、動かす技術基盤に加え、顧客や注文という情報の構造を整理する観点が必要です。",
+          "text": "例えば通販では、注文の流れ・受注アプリ・サーバのほか、**顧客と商品の情報の定義や関係**を整理する必要があります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "企業で扱う情報の構造を整理するデータアーキテクチャが、残る分類です。",
+          "text": "残りは企業の情報を整理する**データアーキテクチャ（ウ）**です。四分類をセットで覚えます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "四分類にデータの視点があることを知らず、一般的なシステム構造などと混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**EA＝Enterprise Architecture（企業全体の構造）**。ビジネスは仕事の手順、アプリケーションは業務ソフト、テクノロジは機器・基盤を扱います。",
+          "remainingWork": "それ以外に企業として整理したいものを考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "既出三体系を説明するだけで正答名は渡さない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば通販では、注文の流れ・受注アプリ・サーバのほか、**顧客と商品の情報の定義や関係**を整理する必要があります。",
+          "remainingWork": "情報の体系に当たる肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "データアーキテクチャの役割を実質示した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "残りは企業の情報を整理する**データアーキテクチャ（ウ）**です。四分類をセットで覚えます。",
+          "remainingWork": "四体系の対応を再確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r03h/r03h-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=707219c04a4def7c01e6d1c438ff43396e77a2bc8a55e35432db981ac90a8525（独立算出は未実施）。",
+        "context記載の公式正答 ウ と全肢を突合。初学者のつまずき：四分類にデータの視点があることを知らず、一般的なシステム構造などと混同する。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q63",
     "baseVersion": 2,
     "baseLessonSHA256": "610f5ce5f0b5892202ab343f19df1055e3cd63a7c796a1d6e1c73459b6d8ffb9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q63",
-      "summary": "イ。配送の順序を入れ替えるのがRearrangeです。",
+      "summary": "ECRSのRearrangeが**業務の順序や配置の入替え**を指すことを問う。",
       "explanation": "ECRSの四原則は、Eliminate（排除）、Combine（結合）、Rearrange（入替え）、Simplify（簡素化）です。配送順を変え移動距離を減らすイは、業務の要素を残したまま順序を入れ替えています。\n不要な承認者を外すアは排除、関数で手入力を簡素にするウは簡素化、議事録の重複作成を一つへまとめるエは結合です。",
       "choiceReasons": [
         "不要な人を申請フローから外すのはEliminate（排除）です。",
@@ -825,57 +916,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各例で、業務の何を変更したかを確認します。人を外す、配送順を変える、入力方法を変える、作成担当をまとめるという違いがあります。",
-          "revealsAnswer": false
+          "text": "**ECRS**は**Eliminate（なくす）・Combine（まとめる）・Rearrange（入れ替える）・Simplify（簡単にする）**の四つの視点。問われるRearrangeは順序・配置を入れ替えることです。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "Rearrangeは順序や配置の入替えです。必要な業務を消さず、実施順を変える例を探します。",
+          "text": "配送先がA→C→Bで遠回りなら、A→B→Cと**回る順番を変える**のがRearrange。承認者を外すのはE、入力を自動化はS、議事録を一つにまとめるのはCです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "配送順を入れ替えるイが該当します。アの不要な人を外す例は排除なので区別します。",
+          "text": "配送順を入れ替える**イ**がRearrangeです。ECRSの英語の意味と具体例を結び付けましょう。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "英語の四原則が未知で、削除・結合・入替え・簡素化を見分けられない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**ECRS**は**Eliminate（なくす）・Combine（まとめる）・Rearrange（入れ替える）・Simplify（簡単にする）**の四つの視点。問われるRearrangeは順序・配置を入れ替えることです。",
+          "remainingWork": "順序を変更した例を探す",
+          "revealsAnswer": true,
+          "reason": "イの配送順変更と直接対応する定義。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "配送先がA→C→Bで遠回りなら、A→B→Cと**回る順番を変える**のがRearrange。承認者を外すのはE、入力を自動化はS、議事録を一つにまとめるのはCです。",
+          "remainingWork": "四つの操作を原本例に対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "前段で正答の定義を開示済み。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "配送順を入れ替える**イ**がRearrangeです。ECRSの英語の意味と具体例を結び付けましょう。",
+          "remainingWork": "排除と入替えの違いを説明する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06a/r06a-q63.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=7a31f25150258928496636def9039b23efc936c4787fcf1f3e16778828a4055d（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：英語の四原則が未知で、削除・結合・入替え・簡素化を見分けられない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q64",
     "baseVersion": 2,
     "baseLessonSHA256": "c860fb8b3c146059191cc549163185f643b57fe0f64d7e2110839b0685913fdd",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q64",
-      "summary": "イ。早く回収するBの正味現在価値が最大です。",
+      "summary": "NPV（正味現在価値）で**回収時期と5％割引**を考慮して投資案を比較する。",
       "explanation": "各年の回収額を(1.05)ᵗで割り、合計から初期投資220万円を引きます。Aは40/1.05+80/1.05²+120/1.05³−220≈−5.68万円、Bは120/1.05+80/1.05²+40/1.05³−220≈1.40万円、Cは80/1.05+80/1.05²+80/1.05³−220≈−2.14万円。投資しない場合は0なので、正のBが最も大きいです。",
       "choiceReasons": [
         "回収が後年に偏り、割引の影響が大きく正味現在価値は約−5.68万円です。",
@@ -887,57 +985,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "A,B,Cの回収総額と初期投資が同じであることを確認し、回収時期を比較します。",
+          "text": "**NPV＝Net Present Value（正味現在価値）**。将来のお金を現在の価値へ換算して**回収の現在価値−投資額**で評価します。A・B・Cの回収総額が同じでも、**早い回収ほど価値が高い**点に注意。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "将来の1万円は今の1万円より割引かれるので、t年後の回収は1.05のt乗で割ります。例えばAの1年目40万円は40/1.05、2年目80万円は80/1.05²と現在価値へそろえて足します。",
+          "text": "割引率5％なら、**t年後の回収額÷1.05のt乗**。Bの式は `120÷1.05＋80÷1.05²＋40÷1.05³−220`（万円）です。投資しない場合のNPVは0です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Bの120/1.05+80/1.05²+40/1.05³から220を引き、投資しない0とも比べます。",
+          "text": "A約**−5.67万円**、B約**＋1.40万円**、C約**−2.14万円**、投資なし0。最大は**B（イ）**です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "NPVの意味や割引の式が分からず、回収総額だけで比較してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**NPV＝Net Present Value（正味現在価値）**。将来のお金を現在の価値へ換算して**回収の現在価値−投資額**で評価します。A・B・Cの回収総額が同じでも、**早い回収ほど価値が高い**点に注意。",
+          "remainingWork": "各年の回収を現在価値にする式を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "比較軸を教えるが各案の値は未算出。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "割引率5％なら、**t年後の回収額÷1.05のt乗**。Bの式は `120÷1.05＋80÷1.05²＋40÷1.05³−220`（万円）です。投資しない場合のNPVは0です。",
+          "remainingWork": "Bを計算し、他案と投資なし0を比べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "代入式だけ示し最後の数値・比較は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "A約**−5.67万円**、B約**＋1.40万円**、C約**−2.14万円**、投資なし0。最大は**B（イ）**です。",
+          "remainingWork": "回収時期が結果へ与える影響を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "最終値とイを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r04a/r04a-q64.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=0994ca2a7bb2b8e8099626c482955e81beb7560581b539eb66eda6a14d8cb586（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：NPVの意味や割引の式が分からず、回収総額だけで比較してしまう。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q64",
     "baseVersion": 2,
     "baseLessonSHA256": "ffbf7adb44e7e996f9a4360c50aa7c7e98102b06a9d671b1f79356aea03d10d8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q64",
-      "summary": "エ。dは2年目までの累計が500となり、投資回収が最も早くなります。",
+      "summary": "PBP（投資回収期間）で**累計収入が投資額500に届く年**を比較する。",
       "explanation": "PBPは投資額をキャッシュインの累計で回収するまでの期間です。合計収入の最大化ではなく、回収までの短さで評価します。\naの累計は100,250,450,700で4年目に回収。bは100,300,600で3年目、cは200,350,450,600で4年目。dは300,500で2年目に回収します。最も早いdが高評価です。年内の発生を均等と仮定して補間しても、dが最短です。",
       "choiceReasons": [
         "アのaは3年終了時450で未回収、4年目に回収です。dより遅くなります。",
@@ -949,57 +1054,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "投資額500に対して、表は各年の収入です。5年合計ではなく、左からの累計を作ります。",
+          "text": "**PBP＝Pay Back Period（投資回収期間）**。投資した500を何年で回収できるかを評価します。**キャッシュイン＝入ってくるお金**なので、年ごとの収入を左から累積します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各シナリオで、1年目、2年目まで、3年目までの累計が500へ達するかを調べます。",
-          "revealsAnswer": false
+          "text": "例えばaは1年目100、2年目まで250、3年目まで450。bは2年目まで300、cは350、dは`300＋200`です。**何年目に500へ達するか**で比較します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "aは100+150、bは100+200、cは200+150、dは300+200から累計を進めます。最も少ない年数で500以上になるものを選びます。",
-          "revealsAnswer": false
+          "text": "dは**2年目で500**、bは3年目、a・cは4年目で回収します。最も短いのは**d（エ）**。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "PBPの正式名称と方法が分からず、5年間の合計額で選びがち。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**PBP＝Pay Back Period（投資回収期間）**。投資した500を何年で回収できるかを評価します。**キャッシュイン＝入ってくるお金**なので、年ごとの収入を左から累積します。",
+          "remainingWork": "各案で累積が500に初めて届く年を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "期間の意味と計算方法だけで最短案はまだ未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "例えばaは1年目100、2年目まで250、3年目まで450。bは2年目まで300、cは350、dは`300＋200`です。**何年目に500へ達するか**で比較します。",
+          "remainingWork": "最短で500に届く案を決める",
+          "revealsAnswer": true,
+          "reason": "dが2年目に500に到達することを式で教えている。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "dは**2年目で500**、bは3年目、a・cは4年目で回収します。最も短いのは**d（エ）**。",
+          "remainingWork": "回収期間と合計収益を区別する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r06h/r06h-q64.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=6856fe54d93fe07894526f8dfcd2e93892eda62ef71138366b007a9f7b017579（独立算出は未実施）。",
+        "context記載の公式正答 エ と全肢を突合。初学者のつまずき：PBPの正式名称と方法が分からず、5年間の合計額で選びがち。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q65",
     "baseVersion": 2,
     "baseLessonSHA256": "b29a487212ba3dbbbec28ca7e95c6c8bbfa79aea2cfc60e88ef49a7c78bdc0fc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q65",
-      "summary": "RFIは実現手段に関する情報提供を依頼する文書",
+      "summary": "RFI・RFP・SLAの略語を区別し、**調達前の情報提供依頼**を説明する文書を選ぶ。",
       "explanation": "正解はイ。RFI（Request for Information）は、システム化に利用できる技術・製品やベンダの導入実績などを知るため、情報提供を求める文書である。実現策の具体的な提案を求めるRFPとは目的が異なる。",
       "choiceReasons": [
         "サービス内容・品質・保証範囲・ペナルティについて合意する文書はSLAである。",
@@ -1011,57 +1123,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各文書について、誰が誰に何を求めるかを書き出す。サービスの合意、情報提供、実現策の提案、業務内容の共有を区別する。",
-          "revealsAnswer": false
+          "text": "**RFI＝Request for Information（情報提供依頼）**、**RFP＝Request for Proposal（提案依頼）**、**SLA＝Service Level Agreement（サービス水準の合意）**です。文書で相手に何を求めるかを考えます。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "システム化の前に利用できる技術・製品や実績を調べるには、ベンダに実現手段の情報を提供してもらう。",
+          "text": "『使える技術や製品、導入実績を教えて』はRFI。『要件を満たす構成や費用を提案して』はRFP。契約で水準を合意するのはSLAです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "技術・製品・導入実績などの情報提供を依頼するイがRFIである。",
+          "text": "ベンダから技術・製品・導入実績の**情報提供を求めるイ**です。調達条件を示して提案を募るウはRFPです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "RFI、RFP、SLAを知らず情報依頼・提案依頼・サービス合意を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**RFI＝Request for Information（情報提供依頼）**、**RFP＝Request for Proposal（提案依頼）**、**SLA＝Service Level Agreement（サービス水準の合意）**です。文書で相手に何を求めるかを考えます。",
+          "remainingWork": "情報提供を求める肢を探す",
+          "revealsAnswer": true,
+          "reason": "Informationの意味とイの内容が直接一致する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『使える技術や製品、導入実績を教えて』はRFI。『要件を満たす構成や費用を提案して』はRFP。契約で水準を合意するのはSLAです。",
+          "remainingWork": "具体的に情報を聞く段階の肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "H1で正答の区別を提示済み。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ベンダから技術・製品・導入実績の**情報提供を求めるイ**です。調達条件を示して提案を募るウはRFPです。",
+          "remainingWork": "情報依頼と提案依頼の順序を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r03a/r03a-q65.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=4a0042d1f2375fa1edc3e0eec0c777235a93bdf1e0aa62b4982ca44bc0a4703b（独立算出は未実施）。",
+        "context記載の公式正答 イ と全肢を突合。初学者のつまずき：RFI、RFP、SLAを知らず情報依頼・提案依頼・サービス合意を混同する。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q64",
     "baseVersion": 2,
     "baseLessonSHA256": "ca913f951dd5fa07c0b1bee9eb8008c17d92c5162c1e963dc3cb094f67fe402f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q64",
-      "summary": "ア。RFIは供給者候補に必要な情報の提供を依頼します。",
+      "summary": "RFIが供給者候補へ**必要な情報を求める依頼**であることを問う。",
       "explanation": "RFIはRequest for Information、情報提供依頼です。調達者がシステム化の目的や業務内容を示し、供給者候補が提供できる技術・製品・サービスなどの情報を集めます。収集した情報は要件や調達条件の具体化に使います。具体的な提案書の提出を求めるRFP、契約後の変更要求、契約締結の要求と分けます。",
       "choiceReasons": [
         "目的や業務内容を示して必要な情報の提供を依頼するRFIの説明です。",
@@ -1073,57 +1192,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補が相手に提出・実施を求めるものを、情報・提案書・契約変更・契約締結に分けます。",
-          "revealsAnswer": false
+          "text": "**RFI＝Request for Information（情報提供依頼）**、**RFP＝Request for Proposal（提案依頼）**です。Informationは情報、Proposalは提案。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "調達条件を詳しく決める前には、供給者が何を提供できるかを知る必要があります。Informationという語と依頼対象を対応させます。",
+          "text": "例えば『導入可能な製品は？』と供給者候補へ聞くのがRFI。調達条件を示して**提案書**を求めるのはRFP。契約変更や締結は別の段階です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "システム化の目的や業務内容を示して、必要な情報の提供を依頼する説明を選びます。",
+          "text": "目的・業務内容を示して必要な**情報提供を依頼するア**がRFIです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "RFIとRFPの英語の語尾が未知で、提案依頼や契約依頼と取り違える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**RFI＝Request for Information（情報提供依頼）**、**RFP＝Request for Proposal（提案依頼）**です。Informationは情報、Proposalは提案。",
+          "remainingWork": "情報提供を求める肢を探す",
+          "revealsAnswer": true,
+          "reason": "アの要求内容そのものを示している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば『導入可能な製品は？』と供給者候補へ聞くのがRFI。調達条件を示して**提案書**を求めるのはRFP。契約変更や締結は別の段階です。",
+          "remainingWork": "調達前の情報収集を述べるものを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "H1でアを実質特定済み。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "目的・業務内容を示して必要な**情報提供を依頼するア**がRFIです。",
+          "remainingWork": "InformationとProposalの違いを定着させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r03h/r03h-q64.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=aef9129cad4a33270e0db5013c89b7a8f4a93f0af9a82f390ba0ee6adc1a0353（独立算出は未実施）。",
+        "context記載の公式正答 ア と全肢を突合。初学者のつまずき：RFIとRFPの英語の語尾が未知で、提案依頼や契約依頼と取り違える。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q65",
     "baseVersion": 2,
     "baseLessonSHA256": "7f9b9b05c73617f4431ee22a3e8ae35b269a553b48972d46a8db32291811b2d9",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q65",
-      "summary": "RFIは、供給者候補に必要な情報の提供を依頼することです。",
+      "summary": "RFIの**情報収集段階**をRFP・契約変更・契約締結と区別する。",
       "explanation": "RFI（Request for Information）は、調達者がシステム化の目的や業務内容などを示し、供給者候補へ製品・技術・実現方法などの情報を求めるものです。情報を集めて調達の検討を進める段階なのでアです。具体的な提案書を求めるRFPや、契約後の変更要求とは目的が異なります。",
       "choiceReasons": [
         "必要な情報の提供を求めるRFIの説明です。",
@@ -1135,57 +1261,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "相手が供給者候補か契約済みの供給者か、求めるものが何かを確認します。",
-          "revealsAnswer": false
+          "text": "**RFI＝Request for Information（情報提供依頼）**。供給者が何を提供できるか情報を収集するものです。**RFP＝Request for Proposal（提案依頼）**とは求めるものが異なります。",
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
-          "text": "調達の条件を具体化するために技術や実現方法を知る段階と、提案書を提出してもらう段階を分けます。",
-          "revealsAnswer": false
+          "text": "製品の種類や技術の選択肢を調べるならRFI。要件と調達条件を提示して具体的提案を求めるならRFPです。契約はその後に扱います。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "RFIのInformationは情報です。「必要な情報の提供」を依頼する候補へ対応させます。",
+          "text": "調達者が供給者候補に必要な**情報を求めるア**です。提案書を求めるイはRFP。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "RFIの正式名称が分からず調達プロセスの順番を理解できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**RFI＝Request for Information（情報提供依頼）**。供給者が何を提供できるか情報を収集するものです。**RFP＝Request for Proposal（提案依頼）**とは求めるものが異なります。",
+          "remainingWork": "情報提供を依頼する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの定義に一致し解答が実質判明する。"
+        },
+        {
+          "newInformation": "製品の種類や技術の選択肢を調べるならRFI。要件と調達条件を提示して具体的提案を求めるならRFPです。契約はその後に扱います。",
+          "remainingWork": "契約段階と情報収集段階を比較する",
+          "revealsAnswer": true,
+          "reason": "H1で正答を開示済み。"
+        },
+        {
+          "newInformation": "調達者が供給者候補に必要な**情報を求めるア**です。提案書を求めるイはRFP。",
+          "remainingWork": "RFI/RFPを混同しないで説明できるようにする",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r05h/r05h-q65.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=3afcab700fd97ab2becef807f90c6510437511bd8a5d899d90cf1e04bd785d75（独立算出は未実施）。",
+        "context記載の公式正答 ア と全肢を突合。初学者のつまずき：RFIの正式名称が分からず調達プロセスの順番を理解できない。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q61",
     "baseVersion": 2,
     "baseLessonSHA256": "f018fda316c734cf0915c00f67f6c271bdedb81893548827aa72921600b1615b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch30-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q61",
-      "summary": "ROIは投資によって得られた利益額を投資額で割る指標です。",
+      "summary": "ROIが投資効果を**利益額と投資額の比率**で表すことを問う。",
       "explanation": "ROI（Return on Investment）は、投資した金額に対してどれだけ利益を生み出したかを示します。情報化による売上増やコスト削減から得た利益を分子、投資額を分母に置き、百分率なら100を掛けます。この利益額÷投資額を述べるアです。現金の現在価値の差額であるNPVとは異なります。",
       "choiceReasons": [
         "創出した利益額を投資額で割るROIの説明です。",
@@ -1197,46 +1330,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "投資効果を「比率」で評価するか、金額の「差」で評価するかに注目します。",
+          "text": "**ROI＝Return on Investment（投資利益率）**は投資に対してどのくらい利益を得たかを測る**割合**。例えば100万円投資して20万円の利益が出た場面を考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "投資額に対して得られた利益の大きさを比べるには、利益を投資額で割ります。",
+          "text": "**ROI＝利益額÷投資額**。例なら20÷100＝20％。**NPV（Net Present Value：正味現在価値）**は現在価値換算した現金の流入・流出の**差額**で、比率ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "利益額を分子、投資額を分母に置く説明を探し、現在価値の差額の候補と区別します。",
+          "text": "売上増やコスト削減による**利益額を投資額で割るア**です。ウはNPVの考え方です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ROI・NPVの略語と式を知らず比率と差額を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ROI＝Return on Investment（投資利益率）**は投資に対してどのくらい利益を得たかを測る**割合**。例えば100万円投資して20万円の利益が出た場面を考えます。",
+          "remainingWork": "利益と投資額の分子・分母を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "英語名称と評価目的を示すだけで比率の式を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ROI＝利益額÷投資額**。例なら20÷100＝20％。**NPV（Net Present Value：正味現在価値）**は現在価値換算した現金の流入・流出の**差額**で、比率ではありません。",
+          "remainingWork": "比率の式を述べた肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの記述と実質同一。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "売上増やコスト削減による**利益額を投資額で割るア**です。ウはNPVの考え方です。",
+          "remainingWork": "収益率と金額差を区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "context記載の原本画像 assets/questions/r05h/r05h-q61.webp をGitHubから実際に取得して画像として表示。問題文・四肢・表の数字・設問の適切/不適切を目視で照合。context記載SHA256=fdcedb440b63d6da6ca1c27da3a594cd10b5f7aba11c4536a12d2871fe6cf286（独立算出は未実施）。",
+        "context記載の公式正答 ア と全肢を突合。初学者のつまずき：ROI・NPVの略語と式を知らず比率と差額を混同する。",
+        "独立レビュワーによるIPA公式解答PDFとの別経路照合は未実施。"
+      ]
     }
   }
 ]
