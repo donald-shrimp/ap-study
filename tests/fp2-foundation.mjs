@@ -47,7 +47,7 @@ test('four true/false fields are one question record with four separately assess
 });
 test('legal context distinguishes historical source and present verification without inferring currency',()=>{
  const c=fixtureCase();validateLegalContext(c,{required:true});assert.deepEqual(legalContextLines(c),['法令基準日：2026-04-01']);
- c.sourceRecord.publishedAt=null;validateLegalContext(c,{required:true});c.sourceRecord.legalAsOf=null;assert.ok(legalContextLines(c).includes('法令基準日：不明'));validateLegalContext(c,{required:true});
+ c.sourceRecord.publishedAt=null;validateLegalContext(c,{required:true});c.sourceRecord.legalAsOf=null;assert.deepEqual(legalContextLines(c),[]);validateLegalContext(c,{required:true});
  for(const change of [c=>delete c.sourceRecord,c=>c.sourceRecord.legalAsOf='2026-02-30',c=>c.sourceRecord.questionSha256='bad',c=>c.sourceRecord.modifiedFromOriginal=true,c=>c.legalReview.status='current',c=>c.legalReview.checkedAt='2026-10-24']){const v=fixtureCase();change(v);assert.throws(()=>validateLegalContext(v,{required:true}));}
  c.sourceRecord.legalAsOf='2026-04-01';c.legalReview={status:'outdated',checkedAt:'2026-10-24',sourceRefs:['https://example.com/law'],note:'合成テストの差異。'};validateLegalContext(c,{required:true});assert.ok(legalContextLines(c).includes('法令改正あり（学習非推奨）'));
 });

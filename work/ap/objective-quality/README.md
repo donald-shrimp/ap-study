@@ -23,45 +23,45 @@
 | [batch-06](batches/batch-06/README.md) | 20 | コンピュータ構成 | 作者 2 ／ 確認者 3（独立確認・登録済み） |
 | [batch-07](batches/batch-07/README.md) | 20 | コンピュータ構成、システム構成・OS | 作者 3 ／ 確認者 4（独立確認・登録済み） |
 | [batch-08](batches/batch-08/README.md) | 20 | システム構成・OS | 作者 4 ／ 確認者 1（独立確認・登録済み） |
-| [batch-09](batches/batch-09/README.md) | 20 | システム構成・OS | ChatGPT作者 ／ Codex確認（20問内容承認・未登録） |
-| [batch-10](batches/batch-10/README.md) | 20 | システム構成・OS、ハードウェア | ChatGPT作者 ／ Codex確認（20問内容承認・未登録） |
-| [batch-11](batches/batch-11/README.md) | 20 | ハードウェア | ChatGPT作者 ／ Codex確認（4問修正・別担当再確認、20問内容承認・未登録） |
-| [batch-12](batches/batch-12/README.md) | 20 | ハードウェア、インタフェース・マルチメディア | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-13](batches/batch-13/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（7問修正・20問内容承認・未登録） |
-| [batch-14](batches/batch-14/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（3問修正・20問内容承認・未登録） |
-| [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | ChatGPT作者 ／ 別担当確認（4問修正・20問内容承認・未登録） |
-| [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-18](batches/batch-18/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-19](batches/batch-19/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-20](batches/batch-20/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-21](batches/batch-21/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-22](batches/batch-22/README.md) | 20 | セキュリティ、開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-23](batches/batch-23/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-24](batches/batch-24/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-25](batches/batch-25/README.md) | 20 | 開発技術、プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-26](batches/batch-26/README.md) | 20 | プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-27](batches/batch-27/README.md) | 20 | プロジェクトマネジメント、サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-28](batches/batch-28/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-29](batches/batch-29/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-30](batches/batch-30/README.md) | 20 | サービスマネジメント・監査、システム戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-31](batches/batch-31/README.md) | 20 | システム戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-32](batches/batch-32/README.md) | 20 | システム戦略、経営戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-33](batches/batch-33/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-34](batches/batch-34/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-35](batches/batch-35/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-36](batches/batch-36/README.md) | 20 | 経営戦略、企業活動 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-37](batches/batch-37/README.md) | 20 | 企業活動 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
-| [batch-39](batches/batch-39/README.md) | 20 | 法務 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-09](batches/batch-09/README.md) | 20 | システム構成・OS | ChatGPT作者 ／ Codex確認（20問独立確認・登録済み） |
+| [batch-10](batches/batch-10/README.md) | 20 | システム構成・OS、ハードウェア | ChatGPT作者 ／ Codex確認（20問独立確認・登録済み） |
+| [batch-11](batches/batch-11/README.md) | 20 | ハードウェア | ChatGPT作者 ／ Codex確認（4問修正・別担当再確認、20問独立確認・登録済み） |
+| [batch-12](batches/batch-12/README.md) | 20 | ハードウェア、インタフェース・マルチメディア | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-13](batches/batch-13/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（7問修正・20問独立確認・登録済み） |
+| [batch-14](batches/batch-14/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（3問修正・20問独立確認・登録済み） |
+| [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | ChatGPT作者 ／ 別担当確認（4問修正・20問独立確認・登録済み） |
+| [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-18](batches/batch-18/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-19](batches/batch-19/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-20](batches/batch-20/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-21](batches/batch-21/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-22](batches/batch-22/README.md) | 20 | セキュリティ、開発技術 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-23](batches/batch-23/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-24](batches/batch-24/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-25](batches/batch-25/README.md) | 20 | 開発技術、プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-26](batches/batch-26/README.md) | 20 | プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-27](batches/batch-27/README.md) | 20 | プロジェクトマネジメント、サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-28](batches/batch-28/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-29](batches/batch-29/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-30](batches/batch-30/README.md) | 20 | サービスマネジメント・監査、システム戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-31](batches/batch-31/README.md) | 20 | システム戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-32](batches/batch-32/README.md) | 20 | システム戦略、経営戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-33](batches/batch-33/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-34](batches/batch-34/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-35](batches/batch-35/README.md) | 20 | 経営戦略 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-36](batches/batch-36/README.md) | 20 | 経営戦略、企業活動 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-37](batches/batch-37/README.md) | 20 | 企業活動 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
+| [batch-39](batches/batch-39/README.md) | 20 | 法務 | ChatGPT作者 ／ 別担当確認（20問独立確認・登録済み） |
 
 batch-09の[PR #81](https://github.com/donald-shrimp/ap-study/pull/81)は[初回レビュー](batches/batch-09/review/independent-review.json)の2件をCodexが修正し、[修正後の別担当確認](batches/batch-09/review/correction-independent-review.json)も完了。20問の内容承認は登録・公開済みを意味しない。次の対象と別ブランチの納品状況は上の表と連続レビュー進捗を参照する。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
 
 第2回で判明したr04a-q13の文字起こし誤記2箇所は、独立確認済みの内容を[訂正台帳](source-corrections.json)で反映し、問題版を3から4へ更新した。旧文字起こし・旧レビュー・baseline・旧学習記録は保持。[訂正後の画面・保存検証](review/source-correction-application/results.json)を保存している。
 
-batch-10は[PR #82](https://github.com/donald-shrimp/ap-study/pull/82)で20問の[独立レビュー](batches/batch-10/review/independent-review.json)を完了。batch-09と合わせ40問が内容承認・未登録。現在の組別・件数別状態はprogress.jsonを参照。
+batch-10は[PR #82](https://github.com/donald-shrimp/ap-study/pull/82)で20問の[独立レビュー](batches/batch-10/review/independent-review.json)を完了。batch-09と合わせ40問が独立確認・登録済み。現在の組別・件数別状態はprogress.jsonを参照。
 
-batch-11は[PR #83](https://github.com/donald-shrimp/ap-study/pull/83)で20問の[独立レビュー](batches/batch-11/review/independent-review.json)を完了。4問の不備は修正者と異なる担当が最終確認し、内容承認・未登録。
+batch-11は[PR #83](https://github.com/donald-shrimp/ap-study/pull/83)で20問の[独立レビュー](batches/batch-11/review/independent-review.json)を完了。4問の不備は修正者と異なる担当が最終確認し、独立確認・登録済み。
 
 batch-12は[PR #84](https://github.com/donald-shrimp/ap-study/pull/84)で20問の[独立レビュー](batches/batch-12/review/independent-review.json)を完了。根拠と最終ハッシュは実確認者の記録を保持。batch-13は[PR #85](https://github.com/donald-shrimp/ap-study/pull/85)で7問を修正し、[修正後の別担当確認](batches/batch-13/review/correction-independent-review.json)を含め20問の内容承認を完了。
 
@@ -117,10 +117,12 @@ batch-37は[PR #109](https://github.com/donald-shrimp/ap-study/pull/109)で20問
 
 batch-38は[PR #110](https://github.com/donald-shrimp/ap-study/pull/110)で20問を独立確認。主担当による訂正は3問で、[最終独立確認](batches/batch-38/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-39。
 
-batch-39は[PR #111](https://github.com/donald-shrimp/ap-study/pull/111)で20問を独立確認。主担当による訂正は5問で、[最終独立確認](batches/batch-39/review/correction-independent-review.json)と最終ハッシュを保存した。全40組の内容確認が完了。未登録620問の統合・登録・マージ・公開は別工程。
 
 ## 全800問の内容確認
 
-[全40組・800問の承認と最終ハッシュの監査](review/all-800-content-review.json)を保存。登録済み180問、独立内容承認済み・未登録620問で、未確認の組はない。マージ・本番公開はこのレビュー工程では行っていない。
 
-2023年春問78は2026年改正で現行の選択肢評価が変わる。[確認済み法改正の内部handoff](batches/batch-38/review/legal-review-handoff.json)に既存形式の`legalReview.status: outdated`と根拠を保存した。公開データへの適用は未実施で、620問の登録・統合時に引き継ぐ。出題当時の原問と正答イは保持する。全法務の現行照合を完了した意味ではない。
+2023年春問78は2026年改正で現行の選択肢評価が変わる。[確認済み法改正の内部handoff](batches/batch-38/review/legal-review-handoff.json)に既存形式の`legalReview.status: outdated`と根拠を保存した。800問の統合時に[独立確認済みメタデータ](../../../content/ap/legal-context-reviews.json)を生成パックへ反映した。公開状況は統合記録で別途確認する。出題当時の原問と正答イは保持する。全法務の現行照合を完了した意味ではない。
+
+## 800問の統合
+
+全40組・800問を独立承認に基づき登録済み。内容レビュー時点の監査は [all-800-content-review.json](review/all-800-content-review.json)、その後の登録・原問保持・検証結果は [release-800-integration.json](review/release-800-integration.json) を参照。公開完了はCI・Pagesと実ファイル照合により別途記録する。

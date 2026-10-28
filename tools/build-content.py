@@ -395,6 +395,8 @@ def compile_qualification(root, id):
         from ap_lesson_quality import validate_workspace
         validate_workspace(root)
     questions = [normalize(q, config, i+1) for i,q in enumerate(raw)]
+    from legal_context_overrides import apply_legal_context
+    apply_legal_context(root, config, raw, questions)
     by_id = {q['id']:q for q in questions}
     for q in questions:
         parent=by_id.get(q.get('parentQuestionId'))
@@ -425,7 +427,7 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     assessment=compile_assessments(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['legalContextSource', 'legalContextReviewSource', 'adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if assessment is not None:
         manifest['assessment']=assessment

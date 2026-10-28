@@ -34,7 +34,7 @@ class SourceCorrections(unittest.TestCase):
  def save_correction(self,c):quality.write(self.work/'source-corrections.json',[c])
  def target(self):return next(q for q in self.bank if q['id']==ID)
  def test_current_version_and_exact_approved_composition(self):
-  self.assertEqual(quality.validate_workspace(self.root)['reviewedUnderCurrentRules'],180);q=self.target();self.assertEqual(q['version'],4)
+  self.assertEqual(quality.validate_workspace(self.root)['reviewedUnderCurrentRules'],800);q=self.target();self.assertEqual(q['version'],4)
   self.assertTrue(q['choices'][0]['text'].startswith('フェールセーフ'));self.assertTrue(q['choices'][1]['text'].startswith('フェールソフト'))
   self.assertNotIn(ID,quality.legacy_classification_hashes(self.root))
  def test_reapplication_and_lesson_acceptance_do_not_undo_or_increment(self):

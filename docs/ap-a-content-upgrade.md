@@ -104,3 +104,9 @@ progressのapprovedは独立承認後に登録済みの件数であり、公開�
 登録後は `python tools/apply-transcriptions.py` で反映し、`python tools/apply-hints.py` と生成チェックで訂正・解説・版を確認する。問題版はlesson改訂と訂正それぞれで1回増え、再生成・再登録では増えない。紙ペン分類のmode/reasonは保ち、訂正IDの参照は現行教材のexact hashを必須にする。訂正前の問題・root/年度別の監査は転記履歴へ保存する。旧記録のsnapshotや結果は変更しない。
 
 `python tests/ap-source-corrections.py` は未承認・古い確認・自己確認・分類参照不正・未知の原文変更の拒否と冪等性を、`python tests/ap-source-correction-browser.py` はオフライン表示・旧版の再開・新版への別試行・バックアップを確認する。
+
+## 原問を保持する法令メタデータ
+
+APの法令改正情報は `content/ap/legal-context.json` と `legal-context-reviews.json` に分離する。原本の問題・公式正答・旧版・教材承認を書き換えない。共通ビルダーが原問版とメタデータのSHA、別担当承認、原本と公式正答PDFの生バイトSHAを確認したうえで生成教材へ付加する。原問やメタデータを変更した場合は再確認が必要。
+
+原本が法令基準日を明示せず確認できない場合は `legalAsOf:null` を保持する。具体的な法改正の影響が確認された `outdated` は、確認日・根拠URL・差異の説明と独立承認により登録できる。`current` は既知の原本基準日も必要とする。未確認を改正あり・現行適合とみなさない。原本PDFは検証用で、学習用の事前ダウンロードには含めない。
