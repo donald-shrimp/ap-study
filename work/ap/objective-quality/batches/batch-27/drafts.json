@@ -3,11 +3,11 @@
     "id": "r04a-q54",
     "baseVersion": 2,
     "baseLessonSHA256": "259038b090ec5698a6fecd414d4816beb7557107597bc6096f21898a56968d5f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q54",
-      "summary": "ウ。重み付き合計77点の製品Cが最高です。",
+      "summary": "加重総和法で項目の重みを反映し、四つの製品の総合評価を比較する問題。",
       "explanation": "重み5,1,4を各行の評価点に掛けて足します。A=5×7+1×9+4×8=76、B=5×8+1×10+4×5=70、C=5×9+1×4+4×7=77、D=5×9+1×7+4×6=76です。評価が高いほどよい条件なので最大のCです。",
       "choiceReasons": [
         "76点でCの77点より低い評価です。",
@@ -19,58 +19,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "機能要件の重み5を製品Aの7点に掛けて5×7と書きます。同じ列の非機能要件9点には重み1、費用の安さ8点には重み4を対応させ、三項を足す準備をします。",
+          "text": "**加重総和法**は、各評価点に**重み（その項目の重要度）**を掛けて合計する方法です。表の重みは機能要件5、非機能要件1、費用の安さ4です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "重み付き合計は、各項目の評価点×重みの総和です。安さも高得点ほどよいと明記されています。",
+          "text": "Aは **5×7＋1×9＋4×8**、Bは **5×8＋1×10＋4×5**、Cは **5×9＋1×4＋4×7**、Dは **5×9＋1×7＋4×6**。費用の安さも高得点ほどよいので、引き算にはしません。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Aについて5×7+9+4×8を計算し、同じ式をB,C,Dへ適用します。",
-          "revealsAnswer": false
+          "text": "A＝76点、B＝70点、C＝**77点**、D＝76点。最高は**製品C（ウ）**です。重み1の項目だけ高くても総合点が最大とは限りません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "重みを掛けずに点数を単純合計したり、費用の安さの点数を引いてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**加重総和法**は、各評価点に**重み（その項目の重要度）**を掛けて合計する方法です。表の重みは機能要件5、非機能要件1、費用の安さ4です。",
+          "remainingWork": "各製品の三項目を対応させる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、各製品の三項目を対応させる判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "Aは **5×7＋1×9＋4×8**、Bは **5×8＋1×10＋4×5**、Cは **5×9＋1×4＋4×7**、Dは **5×9＋1×7＋4×6**。費用の安さも高得点ほどよいので、引き算にはしません。",
+          "remainingWork": "四製品の合計を計算して比較する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四製品の合計を計算して比較する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "A＝76点、B＝70点、C＝**77点**、D＝76点。最高は**製品C（ウ）**です。重み1の項目だけ高くても総合点が最大とは限りません。",
+          "remainingWork": "加重合計と単純合計の違いを復習する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r04a/r04a-q54.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 1994ac65eecd4e49acfa8618805f39f6d69b4c9590cf93f6d67d7aec0e330c8f。",
+        "contextの公式正答 ウ と解法を作者点検。初学者のつまずき：重みを掛けずに点数を単純合計したり、費用の安さの点数を引いてしまう。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q55",
     "baseVersion": 2,
     "baseLessonSHA256": "2d4913066356948e84168984501947e025e11a841e90e60794b56882eb72e4fc",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q55",
-      "summary": "イ。停止時間を0.6時間減らせば99.5%に届く。",
-      "explanation": "評価対象は1日22−7=15時間を20日、計300時間。24時間×月の日数ではない。可用性の差は99.5−99.3=0.2ポイント、割合に直すと0.002。\n\n減らす必要がある停止時間は300×0.002=0.6時間。別の確認として、実際の停止は300×0.007=2.1時間、許容停止は300×0.005=1.5時間、その差も0.6時間。",
+      "summary": "SLAで定めたサービス提供時間と可用性の差から、停止時間の必要短縮量を求める問題。",
+      "explanation": "**SLA（Service Level Agreement：サービスレベル合意）**はサービス品質の目標などを定めます。**可用性**は対象時間のうちサービスを利用できた時間の割合です。\n評価対象は1日22−7=15時間を20日、計300時間。24時間×月の日数ではない。可用性の差は99.5−99.3=0.2ポイント、割合に直すと0.002。\n\n減らす必要がある停止時間は300×0.002=0.6時間。別の確認として、実際の停止は300×0.007=2.1時間、許容停止は300×0.005=1.5時間、その差も0.6時間。",
       "choiceReasons": [
         "0.4時間では必要な0.6時間に足りない。",
         "0.6時間を減らすと停止が2.1から1.5時間になり、可用性99.5%になる。",
@@ -81,57 +88,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "提供時間帯7〜22時は何時間か。それを20日分にし、月の評価対象時間を求める。",
+          "text": "**SLA（Service Level Agreement：サービスレベル合意）**はサービス品質の目標などの約束。**可用性＝稼働時間÷提供対象時間×100％**です。この問題の対象は**7～22時の15時間×20日**で、24時間稼働ではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "99.5%と99.3%の差は0.2%。0.2をそのまま掛けず、0.002へ直す。",
+          "text": "実績99.3％を目標99.5％にするには**0.2パーセントポイント**改善が必要です。割合では **0.2÷100＝0.002**。稼働時間を増やした分だけ停止時間を減らせます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "評価対象時間×0.002で、回復すべき稼働時間を求める。それと同じ時間だけ停止を減らせばよい。",
-          "revealsAnswer": false
+          "text": "対象は **15×20＝300時間**。停止時間を **300×0.002＝0.6時間**減らせば目標に届くので**イ**です。実績停止2.1時間と許容停止1.5時間の差でも一致します。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SLAと可用性を知らず、24時間×暦日を使ったり、0.2%を0.2倍してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SLA（Service Level Agreement：サービスレベル合意）**はサービス品質の目標などの約束。**可用性＝稼働時間÷提供対象時間×100％**です。この問題の対象は**7～22時の15時間×20日**で、24時間稼働ではありません。",
+          "remainingWork": "月間の提供対象時間を計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、月間の提供対象時間を計算する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "実績99.3％を目標99.5％にするには**0.2パーセントポイント**改善が必要です。割合では **0.2÷100＝0.002**。稼働時間を増やした分だけ停止時間を減らせます。",
+          "remainingWork": "提供対象時間に0.002を掛ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、提供対象時間に0.002を掛ける判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "対象は **15×20＝300時間**。停止時間を **300×0.002＝0.6時間**減らせば目標に届くので**イ**です。実績停止2.1時間と許容停止1.5時間の差でも一致します。",
+          "remainingWork": "百分率の差を実時間に換算する理由を確認する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r07h/r07h-q55.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 5f1c88acf70c23005016109930d53dbb5cc352a637ead0ea031653cc39386f76。",
+        "contextの公式正答 イ と解法を作者点検。初学者のつまずき：SLAと可用性を知らず、24時間×暦日を使ったり、0.2%を0.2倍してしまう。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q54",
     "baseVersion": 2,
     "baseLessonSHA256": "921f134d3be281fa21607cb05f55e26734e1e8b4b2dcc0e2f1d13cbea21a8495",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q54",
-      "summary": "インシデントの傾向から問題を特定する",
+      "summary": "問題管理でインシデントの傾向分析や既知の誤りの記録をどう扱うか判断する問題。",
       "explanation": "正解はエ。問題管理はインシデントの原因や潜在的原因を管理する。インシデントのデータや傾向を分析して問題を特定し、既知の誤りや回避策などを記録して再発防止・影響低減に役立てる。すべての問題を必ず恒久解決できるわけではない。",
       "choiceReasons": [
         "費用や技術的制約などにより恒久解決できない場合もあり、「必ず恒久的に解決する」は適切でない。",
@@ -143,57 +158,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問題管理の対象はインシデントそのものの応急復旧だけでなく、その原因。候補の「必ず」「記録しない」「直ちに」に注意する。",
+          "text": "**インシデント**はサービスの中断や品質低下などの出来事。インシデント管理は早期復旧、**問題管理**は根本原因・潜在的原因の分析と再発・影響の低減を目指します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "繰り返す障害や共通の傾向を見れば潜在的な原因を見つけられる。既知の誤りの記録は、その後の対処に役立つ。",
+          "text": "例えば毎週同じ曜日に障害が集中するなら、**発生日時や共通点を分析**して原因を探します。**既知の誤り（known error）**と回避策は記録して再利用し、技術や費用の制約で恒久解決できない場合もあります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "インシデントのデータと傾向を分析して問題を特定するエを選ぶ。",
+          "text": "正答は**エ：インシデントのデータと傾向を分析して問題を特定する**こと。アの『必ず恒久解決』、イの『記録しない』、ウの『直ちに除外』は不適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "インシデント管理と問題管理の違いが分からず、『必ず恒久解決』などの断定を受け入れる。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**インシデント**はサービスの中断や品質低下などの出来事。インシデント管理は早期復旧、**問題管理**は根本原因・潜在的原因の分析と再発・影響の低減を目指します。",
+          "remainingWork": "四肢を復旧・原因分析・記録の扱いで分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四肢を復旧・原因分析・記録の扱いで分類する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば毎週同じ曜日に障害が集中するなら、**発生日時や共通点を分析**して原因を探します。**既知の誤り（known error）**と回避策は記録して再利用し、技術や費用の制約で恒久解決できない場合もあります。",
+          "remainingWork": "原因特定の活動と断定的な肢を照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答は**エ：インシデントのデータと傾向を分析して問題を特定する**こと。アの『必ず恒久解決』、イの『記録しない』、ウの『直ちに除外』は不適切です。",
+          "remainingWork": "記録を残す理由と恒久解決できない例を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r03a/r03a-q54.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 7eb2dd3f99d7e1da282f7a9d721a6954e5bf470c7fe6610951219532eb594aae。",
+        "contextの公式正答 エ と解法を作者点検。初学者のつまずき：インシデント管理と問題管理の違いが分からず、『必ず恒久解決』などの断定を受け入れる。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q55",
     "baseVersion": 2,
     "baseLessonSHA256": "9cad8e195eba4db7d9f83526ce763c465725925e902a6a6692bc913b10948d6f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q55",
-      "summary": "イ。根本原因を特定し、発生や再発を防ぐことです。",
+      "summary": "問題管理の目的を、インシデント管理・サービス継続管理・変更管理と区別する問題。",
       "explanation": "問題管理はインシデントの根本原因や潜在的な原因を管理し、発生可能性と影響を減らす活動です。目の前のサービスを早く復旧するインシデント管理とは区別します。",
       "choiceReasons": [
         "合意時間内の復旧を確実にするのはインシデント管理の目的です。",
@@ -205,58 +227,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が復旧、原因解明、継続、変更のどれを扱うか確認します。",
+          "text": "**インシデント管理**は障害発生後の**サービス復旧**、**問題管理**はその背景にある**原因の特定と再発防止**を目指します。再起動で復旧しても原因が未解明なら問題管理の対象になり得ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ障害を繰り返さないため、復旧後にさらに何を調べるか考えます。",
-          "revealsAnswer": false
+          "text": "『決めた時間内に復旧』はインシデント管理、『サービスを継続して提供』は継続管理、『変更のリスクを評価』は変更管理です。**原因を解明して再発を防ぐ**活動が問題管理です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "未知の根本原因を特定し発生・再発を防ぐ候補を選びます。",
+          "text": "**イ**が正答。未知の根本原因を特定し、インシデントの発生・再発を防ぐのが問題管理の目的です。復旧だけでは原因解消とは限りません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "障害復旧と根本原因の解明を同じものと考え、各管理の目的を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**インシデント管理**は障害発生後の**サービス復旧**、**問題管理**はその背景にある**原因の特定と再発防止**を目指します。再起動で復旧しても原因が未解明なら問題管理の対象になり得ます。",
+          "remainingWork": "四肢の目的を復旧・原因・継続・変更に分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四肢の目的を復旧・原因・継続・変更に分ける判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『決めた時間内に復旧』はインシデント管理、『サービスを継続して提供』は継続管理、『変更のリスクを評価』は変更管理です。**原因を解明して再発を防ぐ**活動が問題管理です。",
+          "remainingWork": "残る選択肢を確かめる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
+        },
+        {
+          "newInformation": "**イ**が正答。未知の根本原因を特定し、インシデントの発生・再発を防ぐのが問題管理の目的です。復旧だけでは原因解消とは限りません。",
+          "remainingWork": "復旧と原因対策の違いを説明する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r04a/r04a-q55.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 3c553326f26711eac2651618f1e8e44451fa9017036f761a99887c13594598fd。",
+        "contextの公式正答 イ と解法を作者点検。初学者のつまずき：障害復旧と根本原因の解明を同じものと考え、各管理の目的を区別できない。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q54",
     "baseVersion": 2,
     "baseLessonSHA256": "7418398a2438972f039d6a49dcf1ff923f87bbe20910647ebd6bc9a7bbe91bcb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q54",
-      "summary": "エ。強化は好機の発生確率やプラスの影響を増大させます。",
-      "explanation": "プラスのリスクへの強化は、好機の発生確率または好機が起きたときの影響を大きくする対応です。必ず発生させようとする活用、第三者と利益を分ける共有、積極的な働き掛けをしない受容とは異なります。",
+      "summary": "PMBOK第6版の好機に対する『強化』戦略を、活用・共有・受容と区別する問題。",
+      "explanation": "**PMBOK（Project Management Body of Knowledge）**はプロジェクトマネジメントの知識体系をまとめたガイドです。第6版でいうプラスのリスク（好機）に対する戦略を比較します。\nプラスのリスクへの強化は、好機の発生確率または好機が起きたときの影響を大きくする対応です。必ず発生させようとする活用、第三者と利益を分ける共有、積極的な働き掛けをしない受容とは異なります。",
       "choiceReasons": [
         "積極的行動を取らず、実現した場合に利益を得るのは受容です。",
         "発生を確実にするのは活用です。強化は100%を保証することを意味しません。",
@@ -267,46 +296,54 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補に書かれた確率の扱いを、変更なし・100%・第三者移転・増大に分けます。",
+          "text": "**PMBOK（Project Management Body of Knowledge）**はプロジェクトマネジメントの知識体系のガイド。第6版ではリスクには**脅威（マイナス）**と**好機（プラス）**があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "例えば成功確率を30%から50%に上げる対応は、確実に成功させる対応とは違います。好機をより起きやすくする考え方です。",
+          "text": "**強化（enhance）**は好機の**発生確率や良い影響を増やす**こと。例えば成功確率30％を50％に高める施策です。**活用（exploit）**は確実に起こすこと、**共有（share）**は第三者と利益を分けることです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "好機の発生確率または影響度、あるいは両方を増大させる説明が強化です。",
+          "text": "**エ**が強化。アは受容、イは活用（100％保証）、ウは共有。強化は起こりやすくするだけで、必ず起こす保証ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "リスクに好機も含まれることや、強化と確実化の違いを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**PMBOK（Project Management Body of Knowledge）**はプロジェクトマネジメントの知識体系のガイド。第6版ではリスクには**脅威（マイナス）**と**好機（プラス）**があります。",
+          "remainingWork": "四肢が確率や利益をどう変えるか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四肢が確率や利益をどう変えるか分類する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**強化（enhance）**は好機の**発生確率や良い影響を増やす**こと。例えば成功確率30％を50％に高める施策です。**活用（exploit）**は確実に起こすこと、**共有（share）**は第三者と利益を分けることです。",
+          "remainingWork": "戦略の定義と肢を対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**エ**が強化。アは受容、イは活用（100％保証）、ウは共有。強化は起こりやすくするだけで、必ず起こす保証ではありません。",
+          "remainingWork": "四つの好機戦略を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r03h/r03h-q54.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 dc2180761778e7e0e0c20fb3746d3210d68f69da9789f3fc2cb662c3fb25d85e。",
+        "contextの公式正答 エ と解法を作者点検。初学者のつまずき：リスクに好機も含まれることや、強化と確実化の違いを知らない。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
