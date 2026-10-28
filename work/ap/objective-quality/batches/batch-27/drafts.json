@@ -350,12 +350,12 @@
     "id": "r07a-q53",
     "baseVersion": 2,
     "baseLessonSHA256": "65ce31ca86173aeae49f66dd0f6a16bc3f4e6331563d5491b763e21519d0d65e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q53",
-      "summary": "ウの450万円。5人の追加費用1250万円から、離脱4人の費用800万円を引きます。",
-      "explanation": "8〜9月に4人が抜けると4×2=8人月の開発が不足します。さらに引継ぎ中の7月後半は元の4人も開発しないので4×0.5=2人月不足し、合計10人月を補います。\n増員者が開発できるのは8〜9月の2か月だけなので5人必要です。7月後半の引継ぎを含む2.5か月の費用は5×2.5×100=1250万円。元の4人が離れる2か月の800万円を差し引き、増加は450万円です。",
+      "summary": "増員・引継ぎで失われる開発工数と、離脱者の人件費減少を区別して追加費用を求める問題。",
+      "explanation": "**人月**は1人が1か月働く作業量を表します。8〜9月に4人が抜けると4×2=8人月の開発が不足します。さらに引継ぎ中の7月後半は元の4人も開発しないので4×0.5=2人月不足し、合計10人月を補います。\n増員者が開発できるのは8〜9月の2か月だけなので5人必要です。7月後半の引継ぎを含む2.5か月の費用は5×2.5×100=1250万円。元の4人が離れる2か月の800万円を差し引き、増加は450万円です。",
       "choiceReasons": [
         "200万円は元の4人の引継ぎによる開発不足2人月の費用相当で、増員の総差額ではありません。",
         "250万円は増員5人の引継ぎ0.5か月分だけの費用です。",
@@ -366,58 +366,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "失う開発量は8〜9月の4人分だけではありません。7月後半の引継ぎでは元の4人も開発しない条件を加えます。",
+          "text": "**人月**は1人が1か月働く作業量です。8～9月に4人が離脱するので **4人×2か月** の開発量が減ります。7月後半の引継ぎ中は**元の4人も開発しない**ので、その0.5か月分も不足します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "不足は4×2+4×0.5人月です。増員者は引継ぎ後の2か月だけ開発するので、不足人月を2で割って人数を出します。",
+          "text": "不足は **4×2＋4×0.5＝10人月**。新メンバーが開発できるのは8～9月の**2か月**だけなので、必要人数は **10÷2**。ただし人件費は引継ぎの**7月後半0.5か月**から発生します。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "増員者の人件費は引継ぎを含む2.5か月分です。元計画では支払う予定だった離脱4人の2か月分を引き、増加額を求めましょう。",
-          "revealsAnswer": false
+          "text": "増員は**5人**。費用は **5×2.5×100＝1,250万円**、一方で元の4人の8～9月分 **4×2×100＝800万円**は不要です。増加額は**450万円、ウ**です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "人月の意味が分からず、引継ぎ中に元の4人も開発を止める点や、離脱者の人件費減少を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**人月**は1人が1か月働く作業量です。8～9月に4人が離脱するので **4人×2か月** の開発量が減ります。7月後半の引継ぎ中は**元の4人も開発しない**ので、その0.5か月分も不足します。",
+          "remainingWork": "失われる開発人月を合計する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、失われる開発人月を合計する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不足は **4×2＋4×0.5＝10人月**。新メンバーが開発できるのは8～9月の**2か月**だけなので、必要人数は **10÷2**。ただし人件費は引継ぎの**7月後半0.5か月**から発生します。",
+          "remainingWork": "必要人数と追加費用を計算し、離脱者の費用減少を引く",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、必要人数と追加費用を計算し、離脱者の費用減少を引く判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "増員は**5人**。費用は **5×2.5×100＝1,250万円**、一方で元の4人の8～9月分 **4×2×100＝800万円**は不要です。増加額は**450万円、ウ**です。",
+          "remainingWork": "新規費用と元計画との差額を区別する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r07a/r07a-q53.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 8ca682cf902ce6ec92e9c40411b1e9e5728f5f3d2a583633b7f8f44f4baad177。",
+        "contextの公式正答 ウ と解法を作者点検。初学者のつまずき：人月の意味が分からず、引継ぎ中に元の4人も開発を止める点や、離脱者の人件費減少を見落とす。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q55",
     "baseVersion": 2,
     "baseLessonSHA256": "d617a55c7445cd3bf0495082fb3ea348d254f894d5676a23a11fa91de1ee7d52",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q55",
-      "summary": "アのFTA。望ましくない事象から原因の組合せを木状に分解します。",
-      "explanation": "FTAは頂上事象となる障害から、その原因をAND・ORなどの論理で下へ分解する手法です。基本事象の確率と組合せを使い、頂上事象の発生確率を算出できます。\n部品の故障から影響を調べるFMEAや、構成要素の障害影響を対応表にするCFIAとは分析の向きや表現が異なります。",
+      "summary": "障害の発生経路と原因を論理的にたどり、発生確率を計算できる分析手法を選ぶ問題。",
+      "explanation": "**FTA（Fault Tree Analysis：故障の木解析）**は望ましくない事象から原因を遡る分析です。FTAは頂上事象となる障害から、その原因をAND・ORなどの論理で下へ分解する手法です。基本事象の確率と組合せを使い、頂上事象の発生確率を算出できます。\n部品の故障から影響を調べるFMEAや、構成要素の障害影響を対応表にするCFIAとは分析の向きや表現が異なります。",
       "choiceReasons": [
         "FTAは事象の発生経路・原因を論理木で分析し、確率算出にも使えます。",
         "FMEAは各故障モードを起点に影響や重大性などを分析します。",
@@ -428,58 +436,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "発生経路・原因・確率という三条件に注目します。各候補が、部品の故障から影響を追うのか、結果から原因をたどるのかを整理します。",
+          "text": "設問は**サービス停止という結果から、原因の組合せをさかのぼり、発生確率を求める**技法を尋ねています。故障部品から影響を追う方法や、単一の故障点を探す方法とは分析の向きが違います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "二つの故障が両方必要ならAND、どちらかで停止するならORで表し、基本故障の確率から計算します。",
+          "text": "**FTA（Fault Tree Analysis：故障の木解析）**は望ましくない結果を頂点に置き、原因を**AND（両方必要）／OR（どちらかで起きる）**の木で分解します。基本事象の確率から上位事象の発生確率も計算できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "部品から影響を追う方式や、単一障害点を探す方式と、頂上事象から原因を木状に展開する方式を区別しましょう。",
+          "text": "正答は**ア：FTA**。**FMEA（Failure Mode and Effects Analysis）**は故障モードから影響へ、**CFIA（Component Failure Impact Analysis）**は部品故障の影響へ、**SPOF（Single Point of Failure）分析**は単一障害点の発見へ重点を置きます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "FTA・FMEA・CFIA・SPOFの英語略語が分からず、結果から原因を遡る分析と部品から影響を追う分析を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問は**サービス停止という結果から、原因の組合せをさかのぼり、発生確率を求める**技法を尋ねています。故障部品から影響を追う方法や、単一の故障点を探す方法とは分析の向きが違います。",
+          "remainingWork": "原因から影響か、結果から原因かを各肢で確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、原因から影響か、結果から原因かを各肢で確認する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**FTA（Fault Tree Analysis：故障の木解析）**は望ましくない結果を頂点に置き、原因を**AND（両方必要）／OR（どちらかで起きる）**の木で分解します。基本事象の確率から上位事象の発生確率も計算できます。",
+          "remainingWork": "FTAと他の技法の目的を比較する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答は**ア：FTA**。**FMEA（Failure Mode and Effects Analysis）**は故障モードから影響へ、**CFIA（Component Failure Impact Analysis）**は部品故障の影響へ、**SPOF（Single Point of Failure）分析**は単一障害点の発見へ重点を置きます。",
+          "remainingWork": "各略語の正式名称と分析の向きを対比する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r07a/r07a-q55.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 23a8b23350f22824101e42d70d9ecc53f83645742767cbea1c5c258f5b9440e4。",
+        "contextの公式正答 ア と解法を作者点検。初学者のつまずき：FTA・FMEA・CFIA・SPOFの英語略語が分からず、結果から原因を遡る分析と部品から影響を追う分析を混同する。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q55",
     "baseVersion": 2,
     "baseLessonSHA256": "a143f56854f0202e746095973a1d6602ecfbbc1f5e5ac81ac819a706e7bea6ea",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q55",
-      "summary": "ア。是正処置は不適合の原因を除去し、再発を減らす処置です。",
-      "explanation": "是正処置は、検出された不適合や望ましくない状況について、その原因を取り除く、または再発しやすさを減らすための処置です。目の前の問題を直すだけでなく、なぜ起こったかに対応します。\n構成情報の更新、継続的改善全般、問題の記録から解決までの管理手順とは別の定義です。",
+      "summary": "SMSの是正処置を、構成管理・継続的改善・問題管理と区別する問題。",
+      "explanation": "**SMS（Service Management System）**はサービスマネジメントシステムの略です。是正処置は、検出された不適合や望ましくない状況について、その原因を取り除く、または再発しやすさを減らすための処置です。目の前の問題を直すだけでなく、なぜ起こったかに対応します。\n構成情報の更新、継続的改善全般、問題の記録から解決までの管理手順とは別の定義です。",
       "choiceReasons": [
         "原因を除去し再発の起こりやすさを低減するので、是正処置の説明です。",
         "構成品目の変更に合わせて構成情報を更新する処置で、構成管理に関する説明です。",
@@ -490,57 +506,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の処置対象を、原因、構成情報、パフォーマンス全般、問題の管理手順に分けます。",
+          "text": "**SMS（Service Management System：サービスマネジメントシステム）**でいう**不適合**は要求事項に合わない状態です。例えば手順違反で設定ミスが起きたら、設定を戻すだけでなく**なぜ起きたか**も調べます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "同じ不適合が繰り返されないようにするには、その原因へ働きかけます。「原因の除去」「再発の低減」を確認します。",
+          "text": "**是正処置（corrective action）**は、検出した不適合の**原因を取り除く、または再発の起こりやすさを下げる**ための処置です。誤操作の原因になった手順の欠陥を修正することなどが例です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "不適合の原因を除去する、または再発の起こりやすさを低減する説明を選びます。",
+          "text": "正答は**ア**。イは構成管理、ウは継続的改善、エは問題管理の流れ。**不適合の原因と再発**に働きかける点が決め手です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SMSや『是正』という語が分からず、一時的な修復と再発防止の原因対策を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SMS（Service Management System：サービスマネジメントシステム）**でいう**不適合**は要求事項に合わない状態です。例えば手順違反で設定ミスが起きたら、設定を戻すだけでなく**なぜ起きたか**も調べます。",
+          "remainingWork": "各肢が原因・構成情報・継続改善・問題手順のどれを扱うか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、各肢が原因・構成情報・継続改善・問題手順のどれを扱うか分類する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**是正処置（corrective action）**は、検出した不適合の**原因を取り除く、または再発の起こりやすさを下げる**ための処置です。誤操作の原因になった手順の欠陥を修正することなどが例です。",
+          "remainingWork": "是正処置を説明する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答は**ア**。イは構成管理、ウは継続的改善、エは問題管理の流れ。**不適合の原因と再発**に働きかける点が決め手です。",
+          "remainingWork": "是正と継続的改善を区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r05a/r05a-q55.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 9b70d5f873f99af40ce67a31760a2e1ad97092f4d38b7a6f5a815f3a8bce6ea0。",
+        "contextの公式正答 ア と解法を作者点検。初学者のつまずき：SMSや『是正』という語が分からず、一時的な修復と再発防止の原因対策を混同する。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q52",
     "baseVersion": 2,
     "baseLessonSHA256": "194e5db23cfbca99a7e940a1916a0d54cc4015b3de865be34f0f1409350e4c8f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q52",
-      "summary": "エ。結合点5はダミー作業で結合点4の完了も待つため、最早時刻は7日です。",
+      "summary": "アローダイアグラムで複数の先行経路が合流する結合点の最早時刻を求める問題。",
       "explanation": "結合点2はAの3日で時刻3。結合点3はBによる2とA+Cによる3+1=4の遅い方で時刻4。結合点4は3+4=7です。\n結合点5への到着候補は2からEで3+2=5、3からFで4+2=6、4からダミーで7+0=7です。全ての先行作業の完了を待つため最大の7が最早結合点時刻です。ダミーは日数0でも依存関係を表します。",
       "choiceReasons": [
         "アの4は結合点3の最早時刻です。結合点5へ続く作業を反映していません。",
@@ -552,57 +576,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "結合点5にはE、F、4からの点線の三本が入っています。点線も前提の矢印として数えます。",
+          "text": "**アローダイアグラム**は丸が**結合点（作業の節目）**、矢印が**作業と所要日数**です。点線の**ダミー作業**は所要日数0でも『先行作業が終わるまで待つ』制約を表します。結合点5にはE・F・ダミーが入ります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "各点の最早時刻は、入る矢印の始点時刻+所要日数の最大です。点線の所要日数は0です。",
+          "text": "**最早結合点時刻＝入ってくる全経路の到着時刻の最大値**。結合点2はAで3日、結合点3は **max(Bの2日, A＋Cの3＋1日)**、結合点4は **結合点2＋Dの4日**です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "2の時刻は3、3はmax(2,3+1)、4は3+4です。これらにE・F・ダミーの日数を足し、5の最大値を求めましょう。",
-          "revealsAnswer": false
+          "text": "2＝3日、3＝4日、4＝**3＋4＝7日**。5への到着はE経由 **3＋2＝5日**、F経由 **4＋2＝6日**、ダミー経由 **7＋0＝7日**。最大は**7日（エ）**です。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "結合点・作業矢印・ダミーの読み方が分からず、短い経路の到着時刻を採用してしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**アローダイアグラム**は丸が**結合点（作業の節目）**、矢印が**作業と所要日数**です。点線の**ダミー作業**は所要日数0でも『先行作業が終わるまで待つ』制約を表します。結合点5にはE・F・ダミーが入ります。",
+          "remainingWork": "結合点5へ入る各経路の到着時刻を別々に計算する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、結合点5へ入る各経路の到着時刻を別々に計算する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**最早結合点時刻＝入ってくる全経路の到着時刻の最大値**。結合点2はAで3日、結合点3は **max(Bの2日, A＋Cの3＋1日)**、結合点4は **結合点2＋Dの4日**です。",
+          "remainingWork": "2・3・4の時刻を出し、5へのE・F・ダミーを足す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、2・3・4の時刻を出し、5へのE・F・ダミーを足す判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "2＝3日、3＝4日、4＝**3＋4＝7日**。5への到着はE経由 **3＋2＝5日**、F経由 **4＋2＝6日**、ダミー経由 **7＋0＝7日**。最大は**7日（エ）**です。",
+          "remainingWork": "ダミーが日数0でも先行条件になる理由を確認する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r06h/r06h-q52.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 38a1e4ffdc6ff6f92d0f1b0f365a57f868bc21679299174593c944a27d26dfb5。",
+        "contextの公式正答 エ と解法を作者点検。初学者のつまずき：結合点・作業矢印・ダミーの読み方が分からず、短い経路の到着時刻を採用してしまう。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q55",
     "baseVersion": 2,
     "baseLessonSHA256": "6147fe6896f27e4fcc6edea4f66bbac0e024e842324247b8d94870ddae30cf49",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q55",
-      "summary": "6か月前までの復元には七つの暦月を保持する",
+      "summary": "月初のフルバックアップと毎日の差分バックアップで、6か月前まで復元する最少テープ本数を求める問題。",
       "explanation": "正解はウ、14本。例えば10月中に6か月前の4月の指定日まで復元するには、4月から10月までの七つの暦月を扱う。各月にフルバックアップ用1本と差分用1本が必要なので、最大で7×2＝14本となる。4月の途中を復元するには4月1日のフルも保持しなければならない。",
       "choiceReasons": [
         "12本は月当たり2本を六つの月に割り当てた本数で、最古月から現在月までの七つの月を同時に保持できない。",
@@ -614,46 +645,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "10月の月中日を例に、6か月前の4月の同一日から現在まで、どの月の媒体を残す必要があるか数える。",
+          "text": "**フルバックアップ**はその時点の全データ、**差分バックアップ**は直近のフル以降に変わったデータを保存します。ここでは**各月のフル用1本と差分追記用1本**を別々に使います。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "4・5・6・7・8・9・10月を保持する。最古月の途中を復元するにも、その月の1日のフルバックアップと指定日の差分が必要。",
+          "text": "例えば10月中に**6か月前の4月の指定日**を復元するには、4月1日のフルと4月の差分も必要。保持対象は **4・5・6・7・8・9・10月の7か月**です。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "保持する七つの月ごとにフル用と差分用の2本が必要なので、7×2＝14本となる。",
+          "text": "各月**フル1本＋差分1本＝2本**なので、**7×2＝14本、ウ**。最古月のフルを捨てると、その月の途中の状態を復元できません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "6か月前までの保存を6か月分のテープだけと数え、最古月のフルバックアップが必要な点を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**フルバックアップ**はその時点の全データ、**差分バックアップ**は直近のフル以降に変わったデータを保存します。ここでは**各月のフル用1本と差分追記用1本**を別々に使います。",
+          "remainingWork": "復元に必要な暦月の範囲を数える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、復元に必要な暦月の範囲を数える判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば10月中に**6か月前の4月の指定日**を復元するには、4月1日のフルと4月の差分も必要。保持対象は **4・5・6・7・8・9・10月の7か月**です。",
+          "remainingWork": "7か月に必要なフル・差分のテープ本数を掛ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、7か月に必要なフル・差分のテープ本数を掛ける判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各月**フル1本＋差分1本＝2本**なので、**7×2＝14本、ウ**。最古月のフルを捨てると、その月の途中の状態を復元できません。",
+          "remainingWork": "最古月のフルを保持する理由を説明する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r03a/r03a-q55.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 7f6ec3e7a82f1488dc28d3b3f5fbb01c23e2b98dd9aa5e9d2bf4e58a426bafef。",
+        "contextの公式正答 ウ と解法を作者点検。初学者のつまずき：6か月前までの保存を6か月分のテープだけと数え、最古月のフルバックアップが必要な点を見落とす。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
