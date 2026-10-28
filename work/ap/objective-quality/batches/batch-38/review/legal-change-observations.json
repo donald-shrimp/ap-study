@@ -1,0 +1,107 @@
+{
+  "reviewer": "Codex /root/ap_batch38_review",
+  "checkedAt": "2026-10-28T22:19:34.313506+00:00",
+  "scope": "実際に確認したr05h-q78の差異のみを記録。全法務の現行法照合完了を意味しない。公開データ/共通parser/原問/正答を変更していない。",
+  "publicationStatus": "internal-handoff-only-not-applied-to-public-data",
+  "observations": [
+    {
+      "questionId": "r05h-q78",
+      "examBasis": "2023年春期・旧下請法",
+      "officialAnswerPreserved": "イ",
+      "effectiveDate": "2026-01-01",
+      "changeType": "substantive-rule-and-name-change",
+      "affectedLocations": [
+        "原問選択肢エ",
+        "lesson.choiceReasons[3]",
+        "lesson.explanationの書面交付・電磁的方法の要件",
+        "H2の出題時の書面義務"
+      ],
+      "changes": [
+        {
+          "part": "法律名称",
+          "before": "下請代金支払遅延等防止法（下請法）",
+          "after": "製造委託等に係る中小受託事業者に対する代金の支払の遅延等の防止に関する法律（中小受託取引適正化法、取適法）",
+          "impact": "名称変更自体は正答を変えない。"
+        },
+        {
+          "part": "振込手数料控除",
+          "before": "発注前の書面合意に基づき実費以内の手数料を控除するエは出題時は許容。",
+          "after": "現行Q99・運用基準では合意の有無にかかわらず手数料負担と代金控除は違反。",
+          "impact": "現行ではエも禁止行為となる。イが適切になるわけではなく現行での単一正答性が失われる。"
+        },
+        {
+          "part": "書面等の明示方法",
+          "before": "旧第3条2項により下請事業者の承諾を得て所定電磁的方法の提供で書面交付に代えられる。",
+          "after": "新第4条は承諾の有無にかかわらず書面又は所定電磁的方法で明示できる。",
+          "impact": "イの口頭のみではいずれも義務を満たさない。旧法説明に当時の電磁的方法例外を補足し、新法の承諾不要化と区別する。"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "url": "https://www.jftc.go.jp/toriteki/toriteki_qa.html#cmsQ99",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/0.html",
+          "sha256": "be5acb9aad0e56d521df685cc7ed1923547334a4187323df5e123223111c2783",
+          "verification": "Q99:合意の有無にかかわらず振込手数料を負担させて代金から差し引くことは本法違反。Q54:未定事項は確定後直ちに補充明示。",
+          "method": "HTML本文抽出を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/toriteki/",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/1.html",
+          "sha256": "0eeffe7ae351260cb64031e9841ebcdc00eaa4083d67949e881532e3c72461c4",
+          "verification": "法律名の変更と2026年1月1日施行。",
+          "method": "HTML本文抽出を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/shitauke/legislation/act.html",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/2.html",
+          "sha256": "8e81aee593567ff80131c2b424b08c4ab175ff60e4bf1ad888388906ad2cf9d3",
+          "verification": "旧第3条1項は未確定事項の確定後直ちに書面交付、第2項は下請事業者の承諾を得た所定電磁的方法を許容。",
+          "method": "HTML本文抽出を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/partnership_package/toritekihou-setsumeisiryo.pdf",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/toritekihou-setsumeisiryo.pdf",
+          "sha256": "34ce0138e6e0b7262d3a5d2b2d1497b043e716e770df3a0969481688b5778fe9",
+          "verification": "本文3頁:施行日。10頁:旧承諾必要→新第4条承諾不要の電磁的方法へ。",
+          "method": "pdftotext -layout再抽出本文を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/partnership_package/toritekihou-sinkyu.pdf",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/toritekihou-sinkyu.pdf",
+          "sha256": "61398bad990030e53df7ec60dd0c6423949397188f3234f5801a93b8a6ce576c",
+          "verification": "新第4条と旧第3条の明示方法・未確定事項・承諾要件を新旧対照。",
+          "method": "pdftotext -layout再抽出本文を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/houdou/pressrelease/2025/oct/251001_toriteki0.pdf",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/251001_toriteki0.pdf",
+          "sha256": "cb0911604bdcb7d2ab64d9575e2099b80ff5fefdbe7a3918d1cec43d2267c9d5",
+          "verification": "1頁:運用基準を含む規則等の整備。2頁:これらは2026年1月1日から施行。",
+          "method": "pdftotext -layout再抽出本文を実読"
+        },
+        {
+          "url": "https://www.jftc.go.jp/houdou/pressrelease/2025/oct/251001_toriteki2.pdf",
+          "path": "/workspace/scratch/ap-a-quality-review/sources/batch38-legal/251001_toriteki2.pdf",
+          "sha256": "be663ed7a6b9a6754fccf886f0dd0082d79ebc4aa3ded89cf173e4b798060c44",
+          "verification": "本文178頁No269:合意があっても意思に反して負担させられる蓋然性が高く合意有無を問わず減額。179頁No272:従来合意で適法だったものを変更する意見への回答はNo269参照。",
+          "method": "pdftotext -layout再抽出本文を実読"
+        }
+      ],
+      "legalReviewCandidate": {
+        "status": "outdated",
+        "checkedAt": "2026-10-28T22:19:34.313506+00:00",
+        "sourceRefs": [
+          "https://www.jftc.go.jp/toriteki/toriteki_qa.html#cmsQ99",
+          "https://www.jftc.go.jp/toriteki/",
+          "https://www.jftc.go.jp/shitauke/legislation/act.html",
+          "https://www.jftc.go.jp/partnership_package/toritekihou-setsumeisiryo.pdf",
+          "https://www.jftc.go.jp/partnership_package/toritekihou-sinkyu.pdf",
+          "https://www.jftc.go.jp/houdou/pressrelease/2025/oct/251001_toriteki0.pdf",
+          "https://www.jftc.go.jp/houdou/pressrelease/2025/oct/251001_toriteki2.pdf"
+        ],
+        "note": "2023年出題時の正答イを保持。2026年1月1日施行の取適法・運用基準では、事前書面合意があっても振込手数料控除は違法となるためエの評価が変わる。イの口頭のみの通知も引き続き不適切であり、現行法へ単純置換すると禁止行為がイ・エの複数となる。書面に代わる電磁的方法は旧法では承諾を要したが新法は承諾不要。名称だけの変更ではない。"
+      },
+      "registrationHandoff": "AP草稿にlegalReviewが未定義のためこの候補は内部保存のみ。rootの一次根拠確認後、既存登録契約に沿って別工程で適用。過去問正答・出題時説明は保ち、現行法と一致すると誤表示しない。"
+    }
+  ]
+}

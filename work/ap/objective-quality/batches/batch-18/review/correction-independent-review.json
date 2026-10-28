@@ -1,0 +1,952 @@
+{
+  "kind": "batch-correction-independent-review",
+  "status": "approved",
+  "reviewer": "Codex /root/ap_batch18_review",
+  "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+  "materialCorrector": "Codex /root",
+  "primaryAuthor": "ChatGPT/gpt-6-batch18-20261028",
+  "initialAuthorHead": "cce39cc8f18129fe3d2b53666b5d21f3bd090de6",
+  "counts": {
+    "questionsApproved": 20,
+    "correctionsIndependentlyReviewed": 2,
+    "unchangedInitialEnvelopes": 18,
+    "originalImagesActuallyOpenedInInitialReview": 20,
+    "officialAnswerPDFsIndependentlyReadInInitialReview": 9,
+    "finalDomainHintDepthCasesActuallyExecuted": 80
+  },
+  "frozenInitialReview": {
+    "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/independent-review.json",
+    "sha256": "6dab3ac6f35e0ea1e6ce7060492648e2f0a840bb273e3e8e57561c84129da528"
+  },
+  "frozenBeforeSnapshot": {
+    "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/initial-drafts.json",
+    "sha256": "bb5d697762554266fcf3a03cb14ac823c4c564592e7a6334f5359e5f699ab3d5"
+  },
+  "finalDraftsFileSHA256": "d2e3784fdd903d9d0a3b1fb7b13edd7d3e173e0db0f1629a4599a5245dbfef53",
+  "finalReviewsFileSHA256": "c690cb9606c08d9e5cc2c64c42a3192a4137c8b5d358ad281044f3786d60b759",
+  "resolvedIssues": [
+    {
+      "id": "r07h-q41",
+      "questionId": "r07h-q41",
+      "status": "resolved",
+      "materialCorrector": "Codex /root",
+      "independentReviewer": "Codex /root/ap_batch18_review",
+      "resolution": "H1本文・flagは不変。design.stages[0].reasonを分類軸のみを示す段階と正確に修正。最終の全肢理由・3ヒント・解説・要約・要点・designを再読し、H1は機能と属性名の対応を教えずfalse、H2以降はHTTPS条件の開示でtrueと確認。実修正者のsourceNotesも確認。"
+    },
+    {
+      "id": "r05h-q39",
+      "questionId": "r05h-q39",
+      "status": "resolved",
+      "materialCorrector": "Codex /root",
+      "independentReviewer": "Codex /root/ap_batch18_review",
+      "resolution": "H1を評価対象の比較軸へ改稿し、政府制度の実例だという不必要な一般化を解消。design.newInformationも同期。最終の全肢理由・3ヒント・解説・要約・要点・designを再読し、H1はISMAPを特定せずfalse、H2はクラウド評価登録を直接定義しtrue、H3は累積trueと確認。実修正者のsourceNotesも確認。"
+    }
+  ],
+  "supplementalEvidence": {
+    "checkedAt": "2026-10-28T03:27:46.235645+00:00",
+    "r03a-q37": {
+      "url": "https://www.soumu.go.jp/main_content/000428393.pdf",
+      "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/iot-guideline-v1.pdf",
+      "sha256": "98d8b38347a57a7526a095e09214e48a291a3b0fb6559e4e40ab4c9bfffd0c7c",
+      "method": "pdftotext -layoutから本文の要点17全体を読んだ",
+      "evidence": "IoTセキュリティガイドライン Ver 1.0、本文p46「要点17. 出荷・リリース後も安全安心な状態を維持する」。(3)対策例は1)アップデート方法の検討、2)アップデート等の機能の搭載、3)アップデートの実施。本文は常に最新を適用する趣旨ではなく、重要な更新を適切に行うと明記。draftは「必要な更新」とし、この条件と矛盾しない。"
+    },
+    "r05h-q39": {
+      "primaryEvidence": "2023春の原本画像と同じIPA試験公式解答問39ウ。独立推論は政府調達向けクラウドサービスの評価・登録。現行制度の変更を持ち込んでいない。",
+      "supplementalAccessAttempts": [
+        {
+          "url": "https://www.ipa.go.jp/security/ismap/index.html",
+          "result": "ISMAPポータルの動的HTMLにリダイレクト。取得HTMLから実質の制度本文を読めないため制度根拠として採用せず。"
+        },
+        {
+          "url": "https://www.nisc.go.jp/policy/group/ismap.html",
+          "result": "HTTP 403。本文未確認。"
+        }
+      ],
+      "limitation": "2023出題時の制度説明の補助一次本文は追加取得できず。未確認を確認済みとしない。試験原本・公式解答との整合は全肢を独立確認済み。"
+    }
+  },
+  "limitations": "初学者試用は未実施。ISMAP補助制度本文の追加取得は未成功で、公式原問・公式正答からの確認と区別。2022春公式解答は抽出text空のため初回にPNG化してview_imageで問40イを確認済み。",
+  "questions": [
+    {
+      "id": "r04a-q39",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "8327e23465e5b39e57da7f7c420cb037530f53fa5299f228e3143df8aa9818d1",
+      "beforeSnapshotLessonSHA256": "52b55b08e509bfc6a8a80c08772aa5a17c833a0a11266df1a1ac0c1bdd82ea6d",
+      "finalEnvelopeSHA256": "8327e23465e5b39e57da7f7c420cb037530f53fa5299f228e3143df8aa9818d1",
+      "finalLessonSHA256": "52b55b08e509bfc6a8a80c08772aa5a17c833a0a11266df1a1ac0c1bdd82ea6d",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r04a/r04a-q39.webp",
+      "sourceImageSHA256": "dd6a0414a6c0fdb126fd5cbe27f9822ebd171735b49d32a0905e0280c6c11fcf",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q39.webp": "dd6a0414a6c0fdb126fd5cbe27f9822ebd171735b49d32a0905e0280c6c11fcf",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "questionNumber": 39,
+        "verification": "1ページの解答表「問39 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "CSIRTの構築運用資料はJPCERT/CCのCSIRTマテリアルなのでア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q42",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "d6bebf84c2a27cdadf769a67d7c3b42ce6c4ce34949e28abbe6c778e813f4bd5",
+      "beforeSnapshotLessonSHA256": "623657a24bbaef57ed6b66da8e2a808fe733dbbeb2d80ad46194483fc134803f",
+      "finalEnvelopeSHA256": "d6bebf84c2a27cdadf769a67d7c3b42ce6c4ce34949e28abbe6c778e813f4bd5",
+      "finalLessonSHA256": "623657a24bbaef57ed6b66da8e2a808fe733dbbeb2d80ad46194483fc134803f",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r07a/r07a-q42.webp",
+      "sourceImageSHA256": "2abe0e6c44d5d5c078d3ace71faf64330049efd0428200055fc8ae76a6a6688d",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q42.webp": "2abe0e6c44d5d5c078d3ace71faf64330049efd0428200055fc8ae76a6a6688d",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "questionNumber": 42,
+        "verification": "1ページの解答表「問42 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "CSPMはクラウド設定の継続監視・是正なのでア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q40",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "f4871c4e660b3d900b90b772006d6f384eb4a53ac0a4cbd0b0b4772e41d117d3",
+      "beforeSnapshotLessonSHA256": "42b6868cc3076b6a9ef273af44ba95a6c7c22e3fee6e07b26e57b5448d52967d",
+      "finalEnvelopeSHA256": "f4871c4e660b3d900b90b772006d6f384eb4a53ac0a4cbd0b0b4772e41d117d3",
+      "finalLessonSHA256": "42b6868cc3076b6a9ef273af44ba95a6c7c22e3fee6e07b26e57b5448d52967d",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r05h/r05h-q40.webp",
+      "sourceImageSHA256": "e54dddea97494d6454c7eade2cca4258f0a9757c4fa21ac8fe96ba4bfbf6973a",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q40.webp": "e54dddea97494d6454c7eade2cca4258f0a9757c4fa21ac8fe96ba4bfbf6973a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "questionNumber": 40,
+        "verification": "1ページの解答表「問40 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "個別の既知脆弱性を共通に識別するのはCVE、イ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q41",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "ade998ab5affbb47d287fc16ff8478098e592c4b87685d7153cb1431966f8a72",
+      "beforeSnapshotLessonSHA256": "e9a14bf142ecbec56f25d903600b18df07ca328a9c5fcb315db1b96d728e4fcc",
+      "finalEnvelopeSHA256": "ade998ab5affbb47d287fc16ff8478098e592c4b87685d7153cb1431966f8a72",
+      "finalLessonSHA256": "e9a14bf142ecbec56f25d903600b18df07ca328a9c5fcb315db1b96d728e4fcc",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06a/r06a-q41.webp",
+      "sourceImageSHA256": "0233a08ea87e37142e3363ab72ace1abc8d1169ca34f826ffa9294b89e0a033c",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q41.webp": "0233a08ea87e37142e3363ab72ace1abc8d1169ca34f826ffa9294b89e0a033c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "questionNumber": 41,
+        "verification": "1ページの解答表「問41 ウ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "JVN等でCVEが識別するのは製品中の脆弱性、ウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q41",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "d0ebb58d8a2c0af6e3c7d8f78830449acc62388eaf858e556b5e15ae7ca33bf6",
+      "beforeSnapshotLessonSHA256": "8a7576c0cdba410787f639a8b559ff6185641cd6b8ec0dc669d1668ac69811c3",
+      "finalEnvelopeSHA256": "07abfd91612986ce4b77b86274630b0807d8def0ce9e3e9b41d009a6c7411bef",
+      "finalLessonSHA256": "8a7576c0cdba410787f639a8b559ff6185641cd6b8ec0dc669d1668ac69811c3",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r07h/r07h-q41.webp",
+      "sourceImageSHA256": "6c667eecd66dd16ecf37aeb094374c731431ddcc1c2acd069324b5032c68313e",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q41.webp": "6c667eecd66dd16ecf37aeb094374c731431ddcc1c2acd069324b5032c68313e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "questionNumber": 41,
+        "verification": "1ページの解答表「問41 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "SecureはHTTPS要求時のみCookieを送る属性なのでイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "materialCorrector": "Codex /root",
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "H1本文・flagは不変。design.stages[0].reasonを分類軸のみを示す段階と正確に修正。最終の全肢理由・3ヒント・解説・要約・要点・designを再読し、H1は機能と属性名の対応を教えずfalse、H2以降はHTTPS条件の開示でtrueと確認。実修正者のsourceNotesも確認。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q40",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "d4c72d2caf63e122cf909ee40d9e346a3b0321b1c3c7c7255d603d7e2fa342e5",
+      "beforeSnapshotLessonSHA256": "d6211bea21865566adb0853591687059c60f15d55b9a899eeb1adec1f00d7407",
+      "finalEnvelopeSHA256": "d4c72d2caf63e122cf909ee40d9e346a3b0321b1c3c7c7255d603d7e2fa342e5",
+      "finalLessonSHA256": "d6211bea21865566adb0853591687059c60f15d55b9a899eeb1adec1f00d7407",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r04h/r04h-q40.webp",
+      "sourceImageSHA256": "d94c7f6e43a5f1f719deae286f3218e2a26376dde74078bc204a2d8602fa1e9a",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q40.webp": "d94c7f6e43a5f1f719deae286f3218e2a26376dde74078bc204a2d8602fa1e9a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "questionNumber": 40,
+        "verification": "1ページ・左から2表の最下行「問40 イ」をPDFをPNG化してview_imageで目視。抽出テキストは改頁のみ。",
+        "method": "rendered-image",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "第三者CookieをブロックするとそのCookieによる横断追跡を抑制するため、最も適切なのはイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q44",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "06d93f68036ffb7aa50402724eebb58d7754c999185c44f58d8cf87c72525280",
+      "beforeSnapshotLessonSHA256": "119770be14400e5765427ebf84336b191ce47f311bfab0419699bfbd4829e5fa",
+      "finalEnvelopeSHA256": "06d93f68036ffb7aa50402724eebb58d7754c999185c44f58d8cf87c72525280",
+      "finalLessonSHA256": "119770be14400e5765427ebf84336b191ce47f311bfab0419699bfbd4829e5fa",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r05a/r05a-q44.webp",
+      "sourceImageSHA256": "a86aa2bcda6391b17efa53aa4007ad187bcf0193023d3af91aff78022b076a7f",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q44.webp": "a86aa2bcda6391b17efa53aa4007ad187bcf0193023d3af91aff78022b076a7f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "questionNumber": 44,
+        "verification": "1ページの解答表「問44 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "送信メールを署名して受信側で検証するのがDKIM、ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03a-q45",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "0950dd4064dbfb4c84016e2788b34072791391a2e392869f06926b0b57b3075e",
+      "beforeSnapshotLessonSHA256": "01e722f4577bbf9957560f7c6be390ec7b8dcac288eada82d4dab981bacb1a0d",
+      "finalEnvelopeSHA256": "0950dd4064dbfb4c84016e2788b34072791391a2e392869f06926b0b57b3075e",
+      "finalLessonSHA256": "01e722f4577bbf9957560f7c6be390ec7b8dcac288eada82d4dab981bacb1a0d",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r03a/r03a-q45.webp",
+      "sourceImageSHA256": "defdb8d10eb00d83cf55980d1495918d20fbd86a3a8e193cff052e7cc073b373",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q45.webp": "defdb8d10eb00d83cf55980d1495918d20fbd86a3a8e193cff052e7cc073b373",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "questionNumber": 45,
+        "verification": "1ページの解答表「問45 エ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "エ",
+      "independentResult": "情報ネットワークから更新ソフトを受け取り制御側に配るパッチ管理サーバが両側と通信するためエ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q45",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "987414b65365217a9cceb84a5f10d49a880e8d85c85e57d5911bdefdf0b74b8d",
+      "beforeSnapshotLessonSHA256": "68c16423fcd9be9c013ba90b8f3bdec2b7325763e6cbfb3d7b6927eff7c04654",
+      "finalEnvelopeSHA256": "987414b65365217a9cceb84a5f10d49a880e8d85c85e57d5911bdefdf0b74b8d",
+      "finalLessonSHA256": "68c16423fcd9be9c013ba90b8f3bdec2b7325763e6cbfb3d7b6927eff7c04654",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r05a/r05a-q45.webp",
+      "sourceImageSHA256": "3ea512d2ff947aa998409a0e489dba1deffc3c9f86cd7f6ff377bef68fb5745f",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q45.webp": "3ea512d2ff947aa998409a0e489dba1deffc3c9f86cd7f6ff377bef68fb5745f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "questionNumber": 45,
+        "verification": "1ページの解答表「問45 エ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "エ",
+      "independentResult": "DNSSECは公開鍵で検証する署名によりDNSデータの真正性・完全性を検証するためエ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q44",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "4693b8b8a012f8d86428f8124ca343229229a4192625f2ae0ce8515660567ab1",
+      "beforeSnapshotLessonSHA256": "d929b1021b212058b6822edcb3569d24d43593a5d8a8e4fb85ea4230af818b3d",
+      "finalEnvelopeSHA256": "4693b8b8a012f8d86428f8124ca343229229a4192625f2ae0ce8515660567ab1",
+      "finalLessonSHA256": "d929b1021b212058b6822edcb3569d24d43593a5d8a8e4fb85ea4230af818b3d",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06a/r06a-q44.webp",
+      "sourceImageSHA256": "6b95449e8bf3b5caaae07ebd0466801e27f224e831e5f33e617a5abab564f337",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q44.webp": "6b95449e8bf3b5caaae07ebd0466801e27f224e831e5f33e617a5abab564f337",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "questionNumber": 44,
+        "verification": "1ページの解答表「問44 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "権威側の秘密鍵署名とキャッシュ側の公開鍵検証がDNSSEC、イ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r04a-q36",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "3b6c768c0e1955d527c806045e81ae78821f64876b6a0bcab715f964275187f2",
+      "beforeSnapshotLessonSHA256": "b8f7aa9abb3a05e0ecb508db52691dc1a752a4d81c5bdb4e3d7d3770ca225967",
+      "finalEnvelopeSHA256": "3b6c768c0e1955d527c806045e81ae78821f64876b6a0bcab715f964275187f2",
+      "finalLessonSHA256": "b8f7aa9abb3a05e0ecb508db52691dc1a752a4d81c5bdb4e3d7d3770ca225967",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r04a/r04a-q36.webp",
+      "sourceImageSHA256": "078fac4b3cedf9235793d6d3bbac644d737805910fbf1a9fdb62db3de100920e",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q36.webp": "078fac4b3cedf9235793d6d3bbac644d737805910fbf1a9fdb62db3de100920e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "questionNumber": 36,
+        "verification": "1ページの解答表「問36 ウ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "公開再帰DNSサーバを標的IP偽装の問合せで使い、標的へ応答を集中させるウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q36",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "01d65a7c736ec54207b1508158f1e451b42932cf3f9a282389608862efe422d3",
+      "beforeSnapshotLessonSHA256": "c743ae57e862041b7baff21bd2d74e01a328c508863efd57b2b30c806f789b34",
+      "finalEnvelopeSHA256": "01d65a7c736ec54207b1508158f1e451b42932cf3f9a282389608862efe422d3",
+      "finalLessonSHA256": "c743ae57e862041b7baff21bd2d74e01a328c508863efd57b2b30c806f789b34",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06h/r06h-q36.webp",
+      "sourceImageSHA256": "5c7f61dd97d047abd17d1e8e589c198bfc94790dfa5b5bc5255c93a3c697092e",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q36.webp": "5c7f61dd97d047abd17d1e8e589c198bfc94790dfa5b5bc5255c93a3c697092e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "questionNumber": 36,
+        "verification": "1ページの解答表「問36 ウ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "キャッシュ中の名前解決結果が汚染されると、社内利用者が本来と異なるWebサーバへ接続し得るウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q37",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "bac88a37620ecc28c01242cc4407c17f3c16176c6cf61c652d4bedc176d43c21",
+      "beforeSnapshotLessonSHA256": "0c2e116478de6099bd53b5c6468b10747ef00a94df42d5fc5560f5d1f9c1a59b",
+      "finalEnvelopeSHA256": "bac88a37620ecc28c01242cc4407c17f3c16176c6cf61c652d4bedc176d43c21",
+      "finalLessonSHA256": "0c2e116478de6099bd53b5c6468b10747ef00a94df42d5fc5560f5d1f9c1a59b",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06h/r06h-q37.webp",
+      "sourceImageSHA256": "453ff3e09e85496c48b76baca21f8964c7696f1b324cd3ed3e2328b34dbc3875",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q37.webp": "453ff3e09e85496c48b76baca21f8964c7696f1b324cd3ed3e2328b34dbc3875",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "questionNumber": 37,
+        "verification": "1ページの解答表「問37 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "DNSSECは権威側データの真正性と完全性の検証ができるためア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q42",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "5975f0b20f336c344b74ee613c338616117134f5256a2a818ad48a00940026fc",
+      "beforeSnapshotLessonSHA256": "65b58aea906808bbf15b46be6a0ad24be68fc993b23149b4b408b6d5a8f6db67",
+      "finalEnvelopeSHA256": "5975f0b20f336c344b74ee613c338616117134f5256a2a818ad48a00940026fc",
+      "finalLessonSHA256": "65b58aea906808bbf15b46be6a0ad24be68fc993b23149b4b408b6d5a8f6db67",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06a/r06a-q42.webp",
+      "sourceImageSHA256": "d03c3b044cff3e69a3b3c18161e83ad204107325df11a970dbf8e8b660a46769",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q42.webp": "d03c3b044cff3e69a3b3c18161e83ad204107325df11a970dbf8e8b660a46769",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "questionNumber": 42,
+        "verification": "1ページの解答表「問42 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "問合せIDの予測を困難にするランダム変更が有効なのでイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q36",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "aa3752b5248147c86affde66cae703cbb28dcbf5a14ab59d8f207ec796672621",
+      "beforeSnapshotLessonSHA256": "6a29c7d22d868e6ca987941de189f576ad80ed2c4b0af7cb347d106a51a30a65",
+      "finalEnvelopeSHA256": "aa3752b5248147c86affde66cae703cbb28dcbf5a14ab59d8f207ec796672621",
+      "finalLessonSHA256": "6a29c7d22d868e6ca987941de189f576ad80ed2c4b0af7cb347d106a51a30a65",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r07h/r07h-q36.webp",
+      "sourceImageSHA256": "4532e42f2b1f80c115979650358e0e52f92675958dcabde1dbe362a3cbe86edc",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q36.webp": "4532e42f2b1f80c115979650358e0e52f92675958dcabde1dbe362a3cbe86edc",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "questionNumber": 36,
+        "verification": "1ページの解答表「問36 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "user=;cat%20/etc/passwdは;cat /etc/passwdとなりシェルでOSコマンド実行を狙うのでイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03a-q36",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "db88dbf67d4554cf697c3f7e37bf0cd96ed874c1682c77391c817939f980a8fa",
+      "beforeSnapshotLessonSHA256": "162d0313849d18427d1b296a3a2ef318de2706606e63752f812fb14700dec696",
+      "finalEnvelopeSHA256": "db88dbf67d4554cf697c3f7e37bf0cd96ed874c1682c77391c817939f980a8fa",
+      "finalLessonSHA256": "162d0313849d18427d1b296a3a2ef318de2706606e63752f812fb14700dec696",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r03a/r03a-q36.webp",
+      "sourceImageSHA256": "dab0739e18b4969be8bb9b5e3e6ec7021788102ddd0b6408c9bfc6842a7ef521",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q36.webp": "dab0739e18b4969be8bb9b5e3e6ec7021788102ddd0b6408c9bfc6842a7ef521",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "questionNumber": 36,
+        "verification": "1ページの解答表「問36 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "IPv6のESP拡張ヘッダを利用した暗号化通信なのでイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03a-q43",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "2a3817260aa71514e49c74d1b299de317c43fdd0271b32d33f10ed826140e47f",
+      "beforeSnapshotLessonSHA256": "166d1b3a732b435068cd0e14f4d6cc01d961ba354aa9d4dd743b3748937d4de9",
+      "finalEnvelopeSHA256": "2a3817260aa71514e49c74d1b299de317c43fdd0271b32d33f10ed826140e47f",
+      "finalLessonSHA256": "166d1b3a732b435068cd0e14f4d6cc01d961ba354aa9d4dd743b3748937d4de9",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r03a/r03a-q43.webp",
+      "sourceImageSHA256": "98f9af130c399cdff09ec0998a665eb30f0beaeb9c0f68e43abc154377ace186",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q43.webp": "98f9af130c399cdff09ec0998a665eb30f0beaeb9c0f68e43abc154377ace186",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "questionNumber": 43,
+        "verification": "1ページの解答表「問43 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ネットワーク層でAHとESPを含むのはIPsecなのでア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q42",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "480afa98ca75f644b0c88b54e2d85a662c59461fa0fba67b329a44360a46ac95",
+      "beforeSnapshotLessonSHA256": "193878b6d2b65f265a87a9f2d5aa651d36cc5542ca7ddbacbf544c0e5879db39",
+      "finalEnvelopeSHA256": "480afa98ca75f644b0c88b54e2d85a662c59461fa0fba67b329a44360a46ac95",
+      "finalLessonSHA256": "193878b6d2b65f265a87a9f2d5aa651d36cc5542ca7ddbacbf544c0e5879db39",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r06h/r06h-q42.webp",
+      "sourceImageSHA256": "1e94a3b2337c73cfbdf7137feca1eaeb1d61d13f6f0463ea271e7ec11f647663",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q42.webp": "1e94a3b2337c73cfbdf7137feca1eaeb1d61d13f6f0463ea271e7ec11f647663",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "questionNumber": 42,
+        "verification": "1ページの解答表「問42 ア」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ア",
+      "independentResult": "IPv6をネットワーク層で暗号化するのはIPsecのESPでア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q39",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "e0f5776169521f6dd6aefa1223bf3e00610e24e55c5974d68def90e690b422f6",
+      "beforeSnapshotLessonSHA256": "6187299b3d1f40f39b586b8febeec859cd809a085bc713c20fc186ff6d565c8e",
+      "finalEnvelopeSHA256": "773a1cf2b756b796f1395b8badf7491b64a0be4b34c37d35535794339812a97c",
+      "finalLessonSHA256": "98c1d523a3c2992756047a10eeee8d4d2afed1f24c9e35daee3a8bb7db46c2d3",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r05h/r05h-q39.webp",
+      "sourceImageSHA256": "1cca61ccbb5241aecb6c074cfaede8c5049cad987e45bf4e8c493be48d111b77",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q39.webp": "1cca61ccbb5241aecb6c074cfaede8c5049cad987e45bf4e8c493be48d111b77",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "questionNumber": 39,
+        "verification": "1ページの解答表「問39 ウ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "政府調達のためにクラウドサービスを事前評価・登録するISMAPなのでウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "materialCorrector": "Codex /root",
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "H1を評価対象の比較軸へ改稿し、政府制度の実例だという不必要な一般化を解消。design.newInformationも同期。最終の全肢理由・3ヒント・解説・要約・要点・designを再読し、H1はISMAPを特定せずfalse、H2はクラウド評価登録を直接定義しtrue、H3は累積trueと確認。実修正者のsourceNotesも確認。",
+      "issues": []
+    },
+    {
+      "id": "r03a-q37",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch18_review",
+      "checkedAt": "2026-10-28T03:30:29.684969+00:00",
+      "beforeSnapshotEnvelopeSHA256": "385d479ca3d0e7a4446528000ae646a02e454a4b5fa572d3a347837d9c4207a7",
+      "beforeSnapshotLessonSHA256": "984ba4c147fe706d500625f36794bcc094c91ad2b35f6c0322efc5699472da7a",
+      "finalEnvelopeSHA256": "385d479ca3d0e7a4446528000ae646a02e454a4b5fa572d3a347837d9c4207a7",
+      "finalLessonSHA256": "984ba4c147fe706d500625f36794bcc094c91ad2b35f6c0322efc5699472da7a",
+      "sourceImageActuallyOpened": "/workspace/ap-study-batch18-review/assets/questions/r03a/r03a-q37.webp",
+      "sourceImageSHA256": "e6b2c8c9c436112f6c5e967eab398f83719d97985031ad6cedbad44f193aefb9",
+      "sourceImageVerificationPhase": "初回に本人がview_imageで全原本を実開封。最終では実ファイルSHAを再照合。",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q37.webp": "e6b2c8c9c436112f6c5e967eab398f83719d97985031ad6cedbad44f193aefb9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "path": "/workspace/ap-study-batch18-review/work/ap/objective-quality/batches/batch-18/review/official/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "questionNumber": 37,
+        "verification": "1ページの解答表「問37 イ」を独立再取得PDFのpdftotext -layout本文で確認。",
+        "method": "pdf-text",
+        "urlRefetchedInInitialReview": true
+      },
+      "officialAnswer": "イ",
+      "independentResult": "IoTガイドラインVer1.0の要点17は出荷後の安全維持であり、更新方法・機能・実施を挙げるイ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回確認済みの完全なenvelopeとlessonを最終版とexact照合し、ともに同一ハッシュ。全肢・ヒント・解説・designを含め初回の内容確認を最終版へ適用。",
+      "issues": []
+    }
+  ]
+}

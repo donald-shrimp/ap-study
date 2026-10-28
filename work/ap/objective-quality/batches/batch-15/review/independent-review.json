@@ -1,0 +1,1204 @@
+{
+  "kind": "batch-independent-content-review",
+  "status": "changes_requested",
+  "reviewer": "Codex /root/ap_batch15_independent",
+  "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+  "reviewedHead": "d9a51576009008ee3b43f807f5c8d2bf0d408986",
+  "author": "ChatGPT/gpt-6-batch15-20261028",
+  "initialHashScope": "全beforeハッシュは作業開始時にバイト保存したinitial-drafts.jsonの正確なenvelope/lesson。原作者と別担当が初回確認。初回結果でありreviews.jsonへの最終承認は書かない。",
+  "initialDraftsFile": {
+    "path": "work/ap/objective-quality/batches/batch-15/review/initial-drafts.json",
+    "sha256": "c63093cdcb31340524cc6c90f2db461ee268de42bf7dfe7b046025728df1df55",
+    "matchesLiveDraftsAtCompletion": true
+  },
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "officialAnswerPDFsIndependentlyRead": 10,
+    "choicesAndReasons": 80,
+    "hints": 60,
+    "approvedInitialNotRegistered": 16,
+    "requiresRevision": 4
+  },
+  "method": "指定4規約を先に読む。全20原本WebPをview_imageで開き全肢/表/図を確認。全lesson（summary/explanation/80choiceReasons/takeaway/60hints）と全20designを読み直す。公式PDF10本をIPA URLから再取得してキャッシュとバイト一致/SHA確認し、19問はPDFから再抽出、残るr04h-q31は原PDF画像を実際に開いて目視照合。全sourceHashesを実ファイルから再計算しinventory/contextと照合。集合/SQL4規則/CP回復/IPv4/IPv6/base64を自分で再検証。",
+  "issues": [
+    {
+      "id": "B15-01",
+      "priority": "P2",
+      "questionId": "r03a-q32",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1は既知のIPv4宛先IPから同一LANの次転送先MACを必要とする仕組みを説明し、正答アのIP→MACという方向と目的を実質的に渡している。ARPの名称をH1で繰り返さないことだけでは非開示にならない。",
+      "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+    },
+    {
+      "id": "B15-02",
+      "priority": "P2",
+      "questionId": "r06a-q36",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1が調べるべき対応の保存先をARPキャッシュと名前付きで明示し、選択肢中の唯一のarpへ目的と名称を直結させている。表示オプションの知識は選択肢選択のために残る判断ではない。",
+      "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+    },
+    {
+      "id": "B15-03",
+      "priority": "P2",
+      "questionId": "r06h-q30",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1はCSMAを名称付きで送信前の媒体使用確認と説明し、順番の送信権配布と違うとも示す。全肢中媒体使用確認をするのはイだけで、ア/ウ/エは割り当てた送信権/時間である。CDの詳細が未提示でも正答肢の決定的な説明を既に渡している。",
+      "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+    },
+    {
+      "id": "B15-04",
+      "priority": "P2",
+      "questionId": "r06a-q34",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "H1が送信元への宛先到達不能/TTL超過の通知を示し、アドレス割当て/変換と区別している。これは正答ウのIPパケット送信エラー報告/制御通知と実質同一であり、ICMPという名前を次段まで留保してもfalseにはならない。",
+      "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r07a-q29",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "67ff492cb219638760246952232c4934f866520714143c3f1b98e3c95546a455",
+      "beforeEnvelopeSHA256": "a30e15f89598296b006665661fb01bac66833c65f6713ca00615759b9f68fced",
+      "beforeLessonSHA256": "d61ebb6e736f66840e89b046e339563e1901b4e62c375fe12d261ff507c13aa3",
+      "reviewedEnvelopeSHA256": "a30e15f89598296b006665661fb01bac66833c65f6713ca00615759b9f68fced",
+      "reviewedLessonSHA256": "d61ebb6e736f66840e89b046e339563e1901b4e62c375fe12d261ff507c13aa3",
+      "questionSHA256": "5cf6065ee2eed435e3cc0f6580aa7911cfd3629a757c9c6a4bff5c18a889d06d",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q29.webp": "27fac21735d4aef2ebe31af7df05a1e78d8ece54d5c652527a58a2afb9f9c296",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r07a/r07a-q29.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+      "officialPDFSHA256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": " 問9     イ  Ｔ   問 29    イ  Ｔ   問 49    エ  Ｔ      問 69    ア  Ｓ"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。複数版を保持するMVCC。2相ロックは獲得/解放規約、WALは先行ログ、共有ロックは読取り共有であり版保持ではない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r03a-q30",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "c6eb3c656658ebe704362ec5978d9af8812e506b7863bf04a482647d240e0d4c",
+      "beforeEnvelopeSHA256": "048e739f78583a416ebd7b63eb2ed5efe994c0cc87892ed865d331e344669985",
+      "beforeLessonSHA256": "a030d8542a51ddd43ff4a4a3d46413a398c3943796e7f77cc7bf4bf125bad76e",
+      "reviewedEnvelopeSHA256": "048e739f78583a416ebd7b63eb2ed5efe994c0cc87892ed865d331e344669985",
+      "reviewedLessonSHA256": "a030d8542a51ddd43ff4a4a3d46413a398c3943796e7f77cc7bf4bf125bad76e",
+      "questionSHA256": "dc41f01b6e9b5100790d4d3ac89e2b7e9cad9338b928a731af61a90d7b10c295",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q30.webp": "99b09a27fef1ffec96210f485b6e7aad01cbb31c1d94868f173c38edaa65b7c8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q30.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+      "officialPDFSHA256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 10    イ  Ｔ   問 30    エ  Ｔ   問 50    イ  Ｔ      問 70    ア  Ｓ"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。複製透過性は同一表の重複を隠す。アは異種DBMS、イは分割、ウは位置の相違を隠すもので対象が異なる。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r05h-q30",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "ceac1ea60683547c541473bec1ba73e009e7e03d71b04e831444b1de28df30f2",
+      "beforeEnvelopeSHA256": "80a09f5b4b758abf510772021d0f1ed444d4833ad8a1a19d9e18e7804bda501b",
+      "beforeLessonSHA256": "300f6e7a5bebf4c43864a86d44add2132bd1a7304a89598440cca62d323f9b25",
+      "reviewedEnvelopeSHA256": "80a09f5b4b758abf510772021d0f1ed444d4833ad8a1a19d9e18e7804bda501b",
+      "reviewedLessonSHA256": "300f6e7a5bebf4c43864a86d44add2132bd1a7304a89598440cca62d323f9b25",
+      "questionSHA256": "f78b81235c53778bce4855d5cb3df9a97c55f2dd05e0092caa94fbd1c0a750e8",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q30.webp": "4157f9e8dff38e94cf69c04ff3c5979069c312702321581a930f038514bcc51c",
+        "assets/transcriptions/pr-batch2-figures-b/r05h-q30-schema.png": "44498f17ce1c7effcb787ae8a5a073d6d645056fb8b299617e674d7b2b1f2d44",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r05h/r05h-q30.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+      "officialPDFSHA256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 10    イ  Ｔ   問 30    ア  Ｔ   問 50    エ  Ｔ      問 70    ウ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。注文番号の主キーと明細の外部キーを原図で確認。CASCADEのみ子行を削除。INTERSECTは共通結果、RESTRICTは拒否、UNIQUEは重複禁止。合成SQLでも確認。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r07h-q27",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "dbd1b86aa1760e0ca934411ba3bd82ad34699795ba5f0a7507f42bb523676668",
+      "beforeEnvelopeSHA256": "19f284ef35047e16c328927b6cb46f9e7912502347746d436519c7f8795efdc1",
+      "beforeLessonSHA256": "58128d25b40883b841fe0307a7e650d28aa2508245ea173ac13062372fe545a2",
+      "reviewedEnvelopeSHA256": "19f284ef35047e16c328927b6cb46f9e7912502347746d436519c7f8795efdc1",
+      "reviewedLessonSHA256": "58128d25b40883b841fe0307a7e650d28aa2508245ea173ac13062372fe545a2",
+      "questionSHA256": "2f5c82ed48a85826cf87ec56187cfc7a8438af4bddda974bdf732336642cad07",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q27.webp": "27635bfb341f72d22fc152d92ace957192200441b37e341ed2260a1577500f2a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r07h/r07h-q27.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "officialPDFSHA256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": " 問7     ウ  Ｔ   問 27    ア  Ｔ   問 47    イ  Ｔ      問 67    ウ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。商品が親、受注が子。CASCADEだけが受注行を削除する。RESTRICTは拒否、SET DEFAULT/NULLは行を残して外部キーを書換え。全候補を合成SQLで確認。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r03a-q26",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "ad0a8a06307b9d4f393b65746734a74b41d1a9d300609d6b4de7c8ea98ef5d82",
+      "beforeEnvelopeSHA256": "c5b978e5463bad25200b8b2adb41f9233dc7d3a425178fe9f904a982198e1983",
+      "beforeLessonSHA256": "a4b8b5936d9e204d9d283edfa6dd4b5531d52adf9fe80e8741c50238ed3d4078",
+      "reviewedEnvelopeSHA256": "c5b978e5463bad25200b8b2adb41f9233dc7d3a425178fe9f904a982198e1983",
+      "reviewedLessonSHA256": "a4b8b5936d9e204d9d283edfa6dd4b5531d52adf9fe80e8741c50238ed3d4078",
+      "questionSHA256": "ae83962c18555f9114ce087fa6f13da5f8c65e020046c15a9ea73d0ecbfd807d",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q26.webp": "e8c06dc712e14cd9ac5728dbb59d9e378cd5b854687f9ed37b4d87291ea98efa",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q26.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+      "officialPDFSHA256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": " 問6     イ  Ｔ   問 26    エ  Ｔ   問 46    イ  Ｔ      問 66    エ  Ｓ"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。原図R∪Sは4行。0002のa/bを別行として保持。ID結合は一致2組を横結合、差は共通行を除き、直積は6組なのでXと不一致。Python集合と全結合組で検算。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r04a-q27",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "b854d3e8dd873675788484d3efa8baa3d79c419e3b05828a9f5c89bbca6b4cbb",
+      "beforeEnvelopeSHA256": "0bc3c37a3004daccf44796a99d4415855a968e32e57f3849640cea2441e1820e",
+      "beforeLessonSHA256": "cec4e59f68449c7d0fcd4cf25ac7ddfff0e16ab29590cc3847ad7af0d9a8513a",
+      "reviewedEnvelopeSHA256": "0bc3c37a3004daccf44796a99d4415855a968e32e57f3849640cea2441e1820e",
+      "reviewedLessonSHA256": "cec4e59f68449c7d0fcd4cf25ac7ddfff0e16ab29590cc3847ad7af0d9a8513a",
+      "questionSHA256": "1b1d79be3959cc22d96b3f9abb17e9f01b91e24b9c7ed22770f44c0b545679ae",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q27.webp": "50610d0b2e9e6b44c298a91e35e078eaec72296bffe46a7ef65be3aac9ca0ec2",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r04a/r04a-q27.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+      "officialPDFSHA256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": " 問7     エ  Ｔ   問 27    イ  Ｔ   問 47    イ  Ｔ      問 67    エ  Ｓ"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。原図の共通A005/B010を除きA001/C003/C011が残る。アは和、ウは積、エは逆差。全列一致を確認した上でIDの集合でも再計算。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          true
+        ],
+        "expected": [
+          false,
+          false,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r05a-q30",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "45482d9ddd91d28f57d3f325d4c6f68a79e004c311b96c5fd349dfbd6edc116d",
+      "beforeEnvelopeSHA256": "f4512012a3e12dd05bda588331eb583f45b6590e1d839a746915c5eaacc7fac6",
+      "beforeLessonSHA256": "d76a8efa1bbd49bd1fb4882ba234c331d996385f270d784bd608f38ed255fdbf",
+      "reviewedEnvelopeSHA256": "f4512012a3e12dd05bda588331eb583f45b6590e1d839a746915c5eaacc7fac6",
+      "reviewedLessonSHA256": "d76a8efa1bbd49bd1fb4882ba234c331d996385f270d784bd608f38ed255fdbf",
+      "questionSHA256": "2702bcc89dbc618f58ec868239222f76346f5fff3a771ef39a49605c295c3218",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q30.webp": "18d6e64073befe85fa6c8492cdb76a72aa6ea0c0a2c4e3dda29efb6dc511b335",
+        "assets/transcriptions/pr-skipped-author/r05a-q30-timeline-and-choice-table.webp": "80736c972669f64035e2c41654de5636c73a48ee67f7aecfd43aaf2283d1d9a3",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r05a/r05a-q30.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+      "officialPDFSHA256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 10    ア  Ｔ   問 30    ア  Ｔ   問 50    ア  Ｔ      問 70    ウ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。原図でT1=CP前コミット、T2/T5=CP後コミット、T3/T4/T6=未コミット。T3/T4はRead専用。REDO=T2/T5、UNDO=T6。イはT3余分、ウはT1余分、エは両方余分。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          false
+        ],
+        "expected": [
+          false,
+          false,
+          false
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r04a-q33",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "b3614d9d1e2545000d1239995d1a2efbb112889c37f06c64fe4a972bf22c7fd7",
+      "beforeEnvelopeSHA256": "f42d10cf605057abab7edaf69accfbb8e4d5e240372605c0b340e7dc5456a077",
+      "beforeLessonSHA256": "a1a7f5d6ee56cc8915741651be0c50d31682a19f2f2fc174f70ffe6404748159",
+      "reviewedEnvelopeSHA256": "f42d10cf605057abab7edaf69accfbb8e4d5e240372605c0b340e7dc5456a077",
+      "reviewedLessonSHA256": "a1a7f5d6ee56cc8915741651be0c50d31682a19f2f2fc174f70ffe6404748159",
+      "questionSHA256": "21f28881bab4aeb6f2d7026c51cf15e9e1c07f376493bf39b57d77551420e512",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q33.webp": "2cd4bc808e940bbdd90195e6a84268a534b1f7e5fc32d2ce3152c9970cc90800",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r04a/r04a-q33.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+      "officialPDFSHA256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 13    ウ  Ｔ   問 33    ウ  Ｔ   問 53    エ  Ｍ      問 73    ウ  Ｓ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。32−29=3、2^3−2=6。範囲.40〜47、ホスト.41〜46、マスク255.255.255.248。ア.48は次区間、イ240は/28、エ29はネットワーク長。ipaddressで検算。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          false
+        ],
+        "expected": [
+          false,
+          false,
+          false
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r03h-q36",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "f2853ed81f3630bb9ae7f7bd534201def077690da446df02e20d4bc4173daaea",
+      "beforeEnvelopeSHA256": "0ac9ca662405476a902d2d443180cadcc9e18138dad90f61d66e3dc955d0f6dd",
+      "beforeLessonSHA256": "274611a542b604e3b3ec23e7a81ac7ac96ac62ea4c9180235125ef9a2a898bd5",
+      "reviewedEnvelopeSHA256": "0ac9ca662405476a902d2d443180cadcc9e18138dad90f61d66e3dc955d0f6dd",
+      "reviewedLessonSHA256": "274611a542b604e3b3ec23e7a81ac7ac96ac62ea4c9180235125ef9a2a898bd5",
+      "questionSHA256": "60f8e04cfc988e18f40a0621a25ae4f746b02172f971bd2632d7459a6cdb8eeb",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q36.webp": "311104aedac807bc63a1d18cc4247fc9396170396843dac17099b8126462d8e8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03h/r03h-q36.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+      "officialPDFSHA256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 16    ア Ｔ    問 36    イ  Ｔ   問 56    ア  Ｍ   問 76    エ  Ｓ"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。2021年の2.4GHz帯配置条件。隣接APは1/6/11のように離す。アは同一チャネル競合、ウはSSIDで周波数干渉を解消不可、エ1/2/3は帯域重複。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r03a-q32",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "74a44e11b3ecb78dd7e3160f5cce88dfd837da9dbf870a7071b180c1d079170a",
+      "beforeEnvelopeSHA256": "300bc7361464f5973bccd86a2362a453f38dc97286feb7b645109b5d38d6263e",
+      "beforeLessonSHA256": "21d9fea7e77c961689046dca4b2e70f6e45dedc63b9300426cdac7c5e51a8cd1",
+      "reviewedEnvelopeSHA256": "300bc7361464f5973bccd86a2362a453f38dc97286feb7b645109b5d38d6263e",
+      "reviewedLessonSHA256": "21d9fea7e77c961689046dca4b2e70f6e45dedc63b9300426cdac7c5e51a8cd1",
+      "questionSHA256": "b77efdb1f7853b2018293c1737ac10a49ab83561e8c9c6f3f76627064674a4bc",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q32.webp": "c683556a6305e5cccecd017ce370bf5c59452f54310cd97ad5341a686b53ece2",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q32.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+      "officialPDFSHA256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 12    イ  Ｔ   問 32    ア  Ｔ   問 52    イ  Ｍ      問 72    イ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。ARPは同じリンク上のIP→MAC解決。イはICMP、ウはRIP、エはDHCPの説明。遠隔宛先では次ホップのMACという条件も本文と整合。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          true,
+          true,
+          true
+        ]
+      },
+      "findings": [
+        {
+          "id": "B15-01",
+          "priority": "P2",
+          "questionId": "r03a-q32",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "H1は既知のIPv4宛先IPから同一LANの次転送先MACを必要とする仕組みを説明し、正答アのIP→MACという方向と目的を実質的に渡している。ARPの名称をH1で繰り返さないことだけでは非開示にならない。",
+          "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+        }
+      ]
+    },
+    {
+      "id": "r06a-q36",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "ada820987f09f13712e9cbc6669d9aa6ad38b830720902941611859ff3038321",
+      "beforeEnvelopeSHA256": "6f9a3a1ea2259451ece5e7a318c0e3069e870b7722c99f8b317648eea4e602f2",
+      "beforeLessonSHA256": "0dcf63795eaec347ed0f6fa088f9210a639f3d37c47d61b785dc1774b71bc8af",
+      "reviewedEnvelopeSHA256": "6f9a3a1ea2259451ece5e7a318c0e3069e870b7722c99f8b317648eea4e602f2",
+      "reviewedLessonSHA256": "0dcf63795eaec347ed0f6fa088f9210a639f3d37c47d61b785dc1774b71bc8af",
+      "questionSHA256": "ae03a68c0b1fa3e2771fb9724c68016e65807699a171e7f0de12c5474cf2686c",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q36.webp": "1876916cc73a2d784e987e902cbcfd8bbb1cc65197e16dd5ca6075a6ae810c79",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q36.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "officialPDFSHA256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 16    ウ  Ｔ   問 36    ア  Ｔ   問 56    ウ  Ｍ      問 76    イ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。直前使用済み/同一LAN/IP既知からARPキャッシュをarp（arp -a）で確認。ipconfig/ifconfigは自端末IF、netstatは接続、pingは疎通でMAC対応表を表示しない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          true,
+          true,
+          true
+        ]
+      },
+      "findings": [
+        {
+          "id": "B15-02",
+          "priority": "P2",
+          "questionId": "r06a-q36",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "H1が調べるべき対応の保存先をARPキャッシュと名前付きで明示し、選択肢中の唯一のarpへ目的と名称を直結させている。表示オプションの知識は選択肢選択のために残る判断ではない。",
+          "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+        }
+      ]
+    },
+    {
+      "id": "r07h-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "f5373c3334175e3638f4c9f6ba871852c0f42c81447c83ec040ef482eb8fe7d7",
+      "beforeEnvelopeSHA256": "5f29a63b4f4b8208632e9170abe1aa87450255414e6726b2ba6d9ce1cbe02746",
+      "beforeLessonSHA256": "096b900bda96c0e4b3f971771d011e0ea9228148ebbf0a318c579ca74b2d3384",
+      "reviewedEnvelopeSHA256": "5f29a63b4f4b8208632e9170abe1aa87450255414e6726b2ba6d9ce1cbe02746",
+      "reviewedLessonSHA256": "096b900bda96c0e4b3f971771d011e0ea9228148ebbf0a318c579ca74b2d3384",
+      "questionSHA256": "5d6435ecacbb6c1168724660a889dbbf5c69f66cca4e576270ebbe6f9314ae8c",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q34.webp": "1ac0b5b522deef28a856978c33ab68f87c4caa50c091b78123dda615652f7e4e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r07h/r07h-q34.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+      "officialPDFSHA256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 14    イ  Ｔ   問 34    ウ  Ｔ   問 54    ウ  Ｍ      問 74    エ  Ｓ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。24ビット=3バイトを6ビット×4文字へ変換し4/3倍。30×4/3=40kB。20は縮小、30は増分無視、60は2倍。30000バイトの実base64出力40000バイトを確認。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          false
+        ],
+        "expected": [
+          false,
+          false,
+          false
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r06h-q30",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "16eb7e04cc7f2b31d46049d0faa64249a1f70e669027cae14b108129a0dd6634",
+      "beforeEnvelopeSHA256": "aaadd0c3f96e4535e2aab085a95d32c4011d0055887890db325c674047c9780e",
+      "beforeLessonSHA256": "7f554ab2275620a0039c4ee536082ce4e26dd6ceaf0ab99f24b6580389008899",
+      "reviewedEnvelopeSHA256": "aaadd0c3f96e4535e2aab085a95d32c4011d0055887890db325c674047c9780e",
+      "reviewedLessonSHA256": "7f554ab2275620a0039c4ee536082ce4e26dd6ceaf0ab99f24b6580389008899",
+      "questionSHA256": "87eaf5e4997d1de1ad0f82d69797e08c93e8fa37b3bc6a4cce14254c533e72c0",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q30.webp": "36720bf457cf27bdc229c7c370a253ab994f82b195f475cf5e523a45de764ff9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r06h/r06h-q30.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+      "officialPDFSHA256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 10    エ  Ｔ   問 30    イ  Ｔ   問 50    イ  Ｔ      問 70    エ  Ｓ"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。CSMA/CDは媒体空き確認、衝突検出、中止、ランダム待機再送。アは論理順トークン、ウはリングトークン、エは時分割。共有媒体の方式を問う出題条件で確認。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          true,
+          true,
+          true
+        ]
+      },
+      "findings": [
+        {
+          "id": "B15-03",
+          "priority": "P2",
+          "questionId": "r06h-q30",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "H1はCSMAを名称付きで送信前の媒体使用確認と説明し、順番の送信権配布と違うとも示す。全肢中媒体使用確認をするのはイだけで、ア/ウ/エは割り当てた送信権/時間である。CDの詳細が未提示でも正答肢の決定的な説明を既に渡している。",
+          "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+        }
+      ]
+    },
+    {
+      "id": "r04a-q31",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "fc85eaf3a7b9fb1e1ca869e6a98f57b4f7d13173916850a50d2d37b21a6c2046",
+      "beforeEnvelopeSHA256": "f9606cab362683b43bbf5e1aaeb6652605dec6ebbd771daebd5be60cd9a0c073",
+      "beforeLessonSHA256": "15a12c1e5d08e6e2c6a2387e35aef3a37a3a5e2af7f73e0d59fcddba1c612309",
+      "reviewedEnvelopeSHA256": "f9606cab362683b43bbf5e1aaeb6652605dec6ebbd771daebd5be60cd9a0c073",
+      "reviewedLessonSHA256": "15a12c1e5d08e6e2c6a2387e35aef3a37a3a5e2af7f73e0d59fcddba1c612309",
+      "questionSHA256": "e16146133681a6c6e1b71d2dc340b9b733ae61441601c9ae5499616e2f9cb4f4",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q31.webp": "a063bc5f7c363f52cf2344e37840e0d7409ed1228439f7af0c406cbfedfaec6b",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r04a/r04a-q31.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+      "officialPDFSHA256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 11    イ  Ｔ   問 31    ウ  Ｔ   問 51    ウ  Ｍ      問 71    ウ  Ｓ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。DHCPDISCOVERをブロードキャストして探索でき事前サーバIP不要。アはマスク/ゲートウェイも配布、イは固定範囲を除外して混在可、エはリースなので同一IP保証なし。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r06a-q33",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "0cb6c0dcf3b1d4fb850fe352577e2301797635cf885dc0c9b9cdf75137c4bc06",
+      "beforeEnvelopeSHA256": "13af20a28e95be7789aaadf9d44bdd3416f2e5433cb4ee55f0337ea2bd321418",
+      "beforeLessonSHA256": "ef52d6692cba2d9cbccc28220440ac8e77245e825d378113eaf642021b66a7c3",
+      "reviewedEnvelopeSHA256": "13af20a28e95be7789aaadf9d44bdd3416f2e5433cb4ee55f0337ea2bd321418",
+      "reviewedLessonSHA256": "ef52d6692cba2d9cbccc28220440ac8e77245e825d378113eaf642021b66a7c3",
+      "questionSHA256": "24b70b30767df78387bb55eaad9ec3d2bc5abf0af911ab8b8cdd763c93372b91",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q33.webp": "c2f4c1c32a1814da3f242af4e2db147c5e29b74d77eef7f1008d841123162a0f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q33.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "officialPDFSHA256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 13    エ  Ｔ   問 33    ウ  Ｔ   問 53    ア  Ｍ      問 73    イ  Ｓ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。IP→名前が逆引き/PTR。アMXはメール配送先でNSではない、イはリゾルバとresolutionの取り違え、エ別名はCNAMEでNSではない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r03a-q31",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "2f40b3c8bbf25890896ca80e9094fc54d08077a910cbf117d895a84a4989472d",
+      "beforeEnvelopeSHA256": "4ce8bbeab3fac4ff81b872212b1538f69100f993c3d307860f51801c203a97e1",
+      "beforeLessonSHA256": "9628db284daca814faed54834acd32f8b83de840752c4f6d48abbebb46a383b4",
+      "reviewedEnvelopeSHA256": "4ce8bbeab3fac4ff81b872212b1538f69100f993c3d307860f51801c203a97e1",
+      "reviewedLessonSHA256": "9628db284daca814faed54834acd32f8b83de840752c4f6d48abbebb46a383b4",
+      "questionSHA256": "3c9e751899df657bbd566d3a45a2475b1ba06d455c701378b90934c84c5a4f66",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q31.webp": "5cc44abfbef7746a90227060838160157d3e422a351d78f93158e1fc40b672dd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03a/r03a-q31.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+      "officialPDFSHA256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 11    ア  Ｔ   問 31    ア  Ｔ   問 51    エ  Ｍ      問 71    エ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。ブロードキャストMAC全1へ一度送信し同一セグメント全員対象。イは順次個別、ウは選択グループへのマルチキャスト、エは選択相手への個別反復。H1は全員/選択だけを与えア/イの送信回数の判断が残るためfalse可。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r06a-q34",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "1b5550f22570da764d561db0891c551f1403abf90b37d3149e8638d04d55f84c",
+      "beforeEnvelopeSHA256": "32d5134f5e59b4513c30b5d28aaba23b39c71b06890c42d992252b5e8b18935f",
+      "beforeLessonSHA256": "3705fd31a8e94f208c77f6163385069867ffc1269a32b4fd5d8f2161bd96d172",
+      "reviewedEnvelopeSHA256": "32d5134f5e59b4513c30b5d28aaba23b39c71b06890c42d992252b5e8b18935f",
+      "reviewedLessonSHA256": "3705fd31a8e94f208c77f6163385069867ffc1269a32b4fd5d8f2161bd96d172",
+      "questionSHA256": "b104286edacb25087cd029c87d6566b121895555b6d33f9ca87b82a4f3e4b315",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q34.webp": "a53fb24592ba7f9337319e5941bbd26aea20b67b9d92765c6d889482dee2e039",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r06a/r06a-q34.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "officialPDFSHA256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 14    イ  Ｔ   問 34    ウ  Ｔ   問 54    エ  Ｍ      問 74    ウ  Ｓ"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ウ。ICMPはIP配送エラー/制御通知。アはMAC→IPのRARP、イはNAT、エはDHCP。pingのEchoもICMPで本文正確。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          true,
+          true,
+          true
+        ]
+      },
+      "findings": [
+        {
+          "id": "B15-04",
+          "priority": "P2",
+          "questionId": "r06a-q34",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "H1が送信元への宛先到達不能/TTL超過の通知を示し、アドレス割当て/変換と区別している。これは正答ウのIPパケット送信エラー報告/制御通知と実質同一であり、ICMPという名前を次段まで留保してもfalseにはならない。",
+          "requestedChange": "H1をtrueにし、designのrevealsAnswer/reason/remainingWorkを同期する。本文の学習支援は保持可能。falseを維持する場合は正答肢の実質的定義・名称をH2へ移してH1を書き換え、改めて独立確認を受ける。"
+        }
+      ]
+    },
+    {
+      "id": "r03h-q33",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "221eef5e6f378b6b2c939e74250cf15fca613823dd6e87db9a85eb1fb29a019b",
+      "beforeEnvelopeSHA256": "2c5d84702db7c5aeb1462d516f8210f9f5c9c1a69eb70e4605492c05f018cac2",
+      "beforeLessonSHA256": "d7e110f77fe9764cbe5f59444baa6c4cbdaf90dfce95320b4755fe8d942e37b3",
+      "reviewedEnvelopeSHA256": "2c5d84702db7c5aeb1462d516f8210f9f5c9c1a69eb70e4605492c05f018cac2",
+      "reviewedLessonSHA256": "d7e110f77fe9764cbe5f59444baa6c4cbdaf90dfce95320b4755fe8d942e37b3",
+      "questionSHA256": "721d7063cfa31151edb1c1a1711e3e5d5ad0e60cc8c224d03e41b53e46e81da9",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q33.webp": "f1c7bf32243350e6944fd1ccd286be0e3c302f9fe4314759d85fed77498399c6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r03h/r03h-q33.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+      "officialPDFSHA256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 13    ウ Ｔ    問 33    エ  Ｔ   問 53    ア  Ｍ   問 73    エ  Ｓ"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "エ。出題2021年の11acは5GHz帯。11gのみは2.4GHzでac専用と通信不可。600Mbpsは11n、CDではなくCA。H2後もア/エの帯域・互換判断が残るのでfalse可。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          true
+        ],
+        "expected": [
+          false,
+          false,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r06h-q31",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "7e7c297b8a2a1da986841902277af0be852f6cb4dedb0b339d7e2d9f504fbe2a",
+      "beforeEnvelopeSHA256": "01a6dc1d3f477c40cad75c84f5b404dc7064dfd523a3ffc14b8ee2e2c75ce319",
+      "beforeLessonSHA256": "3dd79f70ff2c4d93385236e4290a1f898e20c88eb4a64a3af0c924546a0d5011",
+      "reviewedEnvelopeSHA256": "01a6dc1d3f477c40cad75c84f5b404dc7064dfd523a3ffc14b8ee2e2c75ce319",
+      "reviewedLessonSHA256": "3dd79f70ff2c4d93385236e4290a1f898e20c88eb4a64a3af0c924546a0d5011",
+      "questionSHA256": "a71ae5fec977fafab6bdf2d112ef3b61e9d10fc4cd8dcdfe75c1bea50faebb43",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q31.webp": "351f2467826146ab4cebaa7b748539aabde6403de22da1f01dbd85522b139690",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r06h/r06h-q31.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+      "officialPDFSHA256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+      "officialAnswerEvidence": {
+        "method": "検証済みPDFから自分でpdftotext -layoutを実行し問番号/正答を照合",
+        "row": "問 11    ア  Ｔ   問 31    ア  Ｔ   問 51    ア  Ｍ      問 71    エ  Ｓ"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "ア。208.77.188.166はRFC1918三範囲外、224〜239外、末尾166=10100110でホスト部全1にならずブロードキャストでない。グローバルユニキャスト。/32は放送なし、/31の例外でもこの判定は変わらない。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          false,
+          true
+        ],
+        "expected": [
+          false,
+          false,
+          true
+        ]
+      },
+      "findings": []
+    },
+    {
+      "id": "r04h-q31",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch15_independent",
+      "checkedAt": "2026-10-27T22:26:58.557978+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "4b61fc6784521c00e786a96e8e62035fef667e571479d397f671be14bb90558d",
+      "beforeEnvelopeSHA256": "5d733c6d12c8a3aaf7a033c2aefeae45fe71e7ea132350feb28059c8d7c984c3",
+      "beforeLessonSHA256": "7939f9574db697d413ebbfa09f47f08af392d52231dba1edf7dc02e5efa94685",
+      "reviewedEnvelopeSHA256": "5d733c6d12c8a3aaf7a033c2aefeae45fe71e7ea132350feb28059c8d7c984c3",
+      "reviewedLessonSHA256": "7939f9574db697d413ebbfa09f47f08af392d52231dba1edf7dc02e5efa94685",
+      "questionSHA256": "c5270e6d2fc2b24f02a5ad6f11733be60c5cafe12e0cea4b55d1a4055ec68764",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q31.webp": "cdc803a0ca82dc0e0d4a7242bf5e063b4438b53d2ae1b28e1c74433ff2fa9731",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "originalImageActuallyOpened": [
+        "assets/questions/r04h/r04h-q31.webp"
+      ],
+      "officialPDFURL": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "officialPDFSHA256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+      "officialAnswerEvidence": {
+        "method": "pdftoppmによる原PDFレンダリングをview_imageで開き問31=イを目視確認（テキスト層なし）",
+        "row": "問31 イ T"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "イ。IPv6は16進8ブロック/コロン、::は1回だけ。イ=2001:0db8:0000:0000:0000:0000:03ab:ff01。アは::二箇所、ウ/エは不適切なピリオド。ipaddressで全4候補を検証。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "summary": true,
+        "takeaway": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "flags": {
+        "before": [
+          false,
+          true,
+          true
+        ],
+        "expected": [
+          false,
+          true,
+          true
+        ]
+      },
+      "findings": []
+    }
+  ],
+  "verificationEvidence": [
+    "review/official-pdf-verification.json",
+    "review/independent-calculations.json"
+  ],
+  "rulesSHA256": {
+    "AGENTS.md": "ee6f87e4811a389521d2be0a4a6e88e18e18960b16bc7b6dcf1f07d6cb280112",
+    "docs/ap-a-content-upgrade.md": "e18b038a9ed283d617cc889a104f59a50edccb04c9259340914386432b883869",
+    "docs/hint-authoring.md": "7ddd237b34d5bb088db3fe29617c81594f89a9febc53c4af177a6427a58cadd7",
+    "docs/explanation-authoring-rules.md": "54fd8f45c52bafb3032a88140e4989fae0193f5c0ec1d87cc36032f705cbfbf9"
+  },
+  "registered": false,
+  "published": false,
+  "limitations": [
+    "初学者試用・UI/採点処理の実行は未実施。",
+    "補助仕様の新規外部一次資料取得は未実施。ネットワーク仕様は出題年度の基本仕様と公式正答/原本を照合。",
+    "SQLite合成実行は削除規則の動作確認でありSQL標準全体の実装適合認定ではない。"
+  ],
+  "next": "rootが指摘を修正し、独立確認者が最終draftを再確認してreviews.jsonに最終ハッシュで実承認する。"
+}

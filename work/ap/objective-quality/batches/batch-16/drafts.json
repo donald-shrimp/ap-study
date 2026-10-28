@@ -296,7 +296,7 @@
         {
           "title": "注目するところ",
           "text": "通信方向は**内部PC→外部サーバ**です。宛先サーバとそのサービスを変えずに、外部から見える内部PC側の情報をどう扱うか考えます。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -316,9 +316,9 @@
       "stages": [
         {
           "newInformation": "通信方向は**内部PC→外部サーバ**です。宛先サーバとそのサービスを変えずに、外部から見える内部PC側の情報をどう扱うか考えます。",
-          "remainingWork": "送信元側か宛先側か考える",
-          "revealsAnswer": false,
-          "reason": "方向と宛先維持だけで二つの変換項目はまだ特定していない。"
+          "remainingWork": "既に開示された手掛かりを原問の正答肢と照合し、次段で仕組みや他の選択肢との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "宛先サーバとサービスを変えないと明示。アは宛先2項目、イは宛先IP、ウは宛先ポートを含むため全誤答が除外され、エだけ残る"
         },
         {
           "newInformation": "**NAPT**は内部の**送信元プライベートIPアドレスと送信元ポート番号**を、ルータ側の外部IPアドレスと対応するポート番号へ変換し、対応表に記録します。",
@@ -340,7 +340,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r03a/r03a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 5368b9b9123d5a7c61c9dc598a1f374df965df1650d98aeaaeb55187e4996c2e。",
         "contextの公式正答 エ と画像の選択肢を照合。論点: NAPTで外向き通信を変換。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
-        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。",
+        "Codex /root が初回独立確認 B16-01 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応designの判定理由・残る作業を同期した。本文・原問・公式正答は保持。Codex /root/ap_batch16_review が別担当として最終版を確認する。"
       ]
     }
   },
@@ -710,7 +711,7 @@
         {
           "title": "注目するところ",
           "text": "UDPの基本ヘッダーは**送信元ポート、宛先ポート、長さ、チェックサム**の4フィールドです。チェックサムがIPv4で省略可能でも、フィールド自体はあります。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -730,9 +731,9 @@
       "stages": [
         {
           "newInformation": "UDPの基本ヘッダーは**送信元ポート、宛先ポート、長さ、チェックサム**の4フィールドです。チェックサムがIPv4で省略可能でも、フィールド自体はあります。",
-          "remainingWork": "UDPにある三つの候補を除外する",
-          "revealsAnswer": false,
-          "reason": "UDPのフィールドを教えるが正答のシーケンス番号は示していない。"
+          "remainingWork": "既に開示された手掛かりを原問の正答肢と照合し、次段で仕組みや他の選択肢との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "UDP全4欄を列挙しア/ウ/エをすべて除外、シーケンス番号の語を使わなくても残るイが確定"
         },
         {
           "newInformation": "TCPは順序をそろえ欠落を再送するため、データの位置を示す**シーケンス番号**や受信確認番号などを持ちます。UDPにはシーケンス番号がありません。",
@@ -754,7 +755,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r07a/r07a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: b3d16fddff44da5cfa85a59fd7bf002b7c2ea5f6719e247bb2eaee48a0ba62f4。",
         "contextの公式正答 イ と画像の選択肢を照合。論点: TCPだけのヘッダー情報。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
-        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。",
+        "Codex /root が初回独立確認 B16-02 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応designの判定理由・残る作業を同期した。本文・原問・公式正答は保持。Codex /root/ap_batch16_review が別担当として最終版を確認する。"
       ]
     }
   },
@@ -917,7 +919,7 @@
         {
           "title": "注目するところ",
           "text": "pingは対象ホストへ確認用メッセージを送り、応答の有無や時間を調べます。メール送信や機器の統計監視、認証とは用途が異なります。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -937,9 +939,9 @@
       "stages": [
         {
           "newInformation": "pingは対象ホストへ確認用メッセージを送り、応答の有無や時間を調べます。メール送信や機器の統計監視、認証とは用途が異なります。",
-          "remainingWork": "診断と他の用途を区別する",
-          "revealsAnswer": false,
-          "reason": "到達性確認の流れを示すがプロトコル名は教えていない。"
+          "remainingWork": "既に開示された手掛かりを原問の正答肢と照合し、次段で仕組みや他の選択肢との違いを確認する。",
+          "revealsAnswer": true,
+          "reason": "メール送信・機器統計監視・認証を除外してSMTP/SNMP/CHAPの全誤答用途を否定する。名称未提示でも残るICMPが確定"
         },
         {
           "newInformation": "pingが通常使うのは**ICMP（Internet Control Message Protocol）**の**Echo Request／Echo Reply**です。IPの制御・診断用メッセージを使います。",
@@ -961,7 +963,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r05a/r05a-q33.webp をGitHubの作業ブランチからbase64で取得して画像表示し、問題文・全4肢・図表・条件を目視確認。context記載の原本SHA256: 5966b73c5e9d9ae5d5077bf6f857918556bf098573bcf46f84bbd7d537957ac9。",
         "contextの公式正答 イ と画像の選択肢を照合。論点: pingの通信。原本の数値・通信方向・層・用語を優先してヒントの開示判定を検討。",
-        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。"
+        "IPA公式解答PDFとの独立照合と別担当レビューは未実施。公開用データは変更しない。",
+        "Codex /root が初回独立確認 B16-03 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応designの判定理由・残る作業を同期した。本文・原問・公式正答は保持。Codex /root/ap_batch16_review が別担当として最終版を確認する。"
       ]
     }
   },

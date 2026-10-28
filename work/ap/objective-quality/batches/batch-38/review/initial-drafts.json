@@ -1,0 +1,1357 @@
+[
+  {
+    "id": "r03h-q76",
+    "baseVersion": 2,
+    "baseLessonSHA256": "bce8d4646c2639f8b0cd1d26dfa8ebc105254716ae2c33ebcd552561afd88633",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q76",
+      "summary": "系統図法が目的を達成するための手段をどのように整理するかを、ほかの図法と区別する問題。",
+      "explanation": "系統図法は、目的達成のための手段を段階的に具体化する手法です。例えば「品質を高める」から「検査を改善する」を導き、さらに「項目を見直す」「検査担当を教育する」と細分化します。因果関係を網状に示す連関図、魚骨状の特性要因図、カードをまとめる親和図と区別します。",
+      "choiceReasons": [
+        "要因を因果関係の矢印でつなぎ重要原因を探るのは連関図法です。",
+        "結果と要因を魚の骨の形にまとめるのは特性要因図です。",
+        "カードの親和性でグループ化するのは親和図法です。",
+        "目的から手段、さらにその手段を導いて細分化するのが系統図法です。"
+      ],
+      "takeaway": "系統図は目的→手段→さらに具体的な手段と枝分かれさせる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの説明は、因果関係を探る、結果と要因を魚骨状に整理する、似た意見をまとめる、目的に必要な行動を細分化する、という用途に分けられます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば「品質を上げる→検査を改善する→検査項目を見直す」のように、目的から手段へ枝分かれさせ、その手段をさらに具体化する図を探します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "目的→手段→さらに手段という展開が系統図です。連関図は複雑な因果関係、特性要因図は魚骨、親和図はカードのグループ化に使います。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "図法の名称と用途が結び付かず、目的と手段を段階化する構造を認識できない。",
+      "stages": [
+        {
+          "newInformation": "四つの説明は、因果関係を探る、結果と要因を魚骨状に整理する、似た意見をまとめる、目的に必要な行動を細分化する、という用途に分けられます。",
+          "remainingWork": "各図の用途を仕分ける",
+          "revealsAnswer": false,
+          "reason": "各図の用途を仕分けるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "例えば「品質を上げる→検査を改善する→検査項目を見直す」のように、目的から手段へ枝分かれさせ、その手段をさらに具体化する図を探します。",
+          "remainingWork": "目的から手段を繰り返す選択肢を探す",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「目的を達成するための手段を導き出し，更にその手段を実施するための幾つかの手段を考えることを繰り返し，細分化していく。」が、前段までのヒントとこの内容で一意に特定できる。目的から手段を繰り返す選択肢を探すは復習事項。"
+        },
+        {
+          "newInformation": "目的→手段→さらに手段という展開が系統図です。連関図は複雑な因果関係、特性要因図は魚骨、親和図はカードのグループ化に使います。",
+          "remainingWork": "他の三図との違いを確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「目的を達成するための手段を導き出し，更にその手段を実施するための幾つかの手段を考えることを繰り返し，細分化していく。」が、前段までのヒントとこの内容で一意に特定できる。他の三図との違いを確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03h/r03h-q76.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=5da7f4374c9aa112f41c396603ac05b0ba7fc3e0a30c7cb219879e37cd9329b1（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年spring問76はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q74",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3a25a0ff032b11f62a17e1da5ebc416b3fa9a2efc54db41a39b7f28ef48334b5",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q74",
+      "summary": "一定需要の下で、年間発注費と年間在庫保管費を一致させる経済的発注量を求める問題。",
+      "explanation": "1回の発注量をQとすると、年間発注回数は100000/Q回で、発注費は5000×100000/Q円です。在庫はQから0へ一定に減るため平均Q/2個、年間保管費は1000×Q/2円です。\n両者を等しくすると500000000/Q=500Q、Q²=1000000。正の平方根を取りQ=1000個です。",
+      "choiceReasons": [
+        "Q=10では年間発注費5000万円と保管費5000円で大きく異なります。",
+        "Q=200では発注費250万円と保管費10万円で一致しません。",
+        "Q=500では発注費100万円と保管費25万円で一致しません。",
+        "Q=1000なら発注費50万円と保管費50万円で等しくなります。"
+      ],
+      "takeaway": "年間発注回数は需要/Q、平均在庫はQ/2。両費用を等置してQを求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "安全在庫は考えず、一定の需要で在庫がQから0へ減るため、平均在庫は発注量の半分です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "発注費は(100000/Q)×5000、保管費は(Q/2)×1000と、同じ年間の単位で表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二つの式を等しくし、両辺にQを掛けてQ²の式にします。平方根を取った後、両費用が等しいか代入で確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "発注回数と平均在庫の大小関係が分からず、年間費用の式に変換できない。",
+      "stages": [
+        {
+          "newInformation": "安全在庫は考えず、一定の需要で在庫がQから0へ減るため、平均在庫は発注量の半分です。",
+          "remainingWork": "費用を年間単位にそろえる",
+          "revealsAnswer": false,
+          "reason": "費用を年間単位にそろえるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "発注費は(100000/Q)×5000、保管費は(Q/2)×1000と、同じ年間の単位で表します。",
+          "remainingWork": "二つの年間費用の等式を立てる",
+          "revealsAnswer": false,
+          "reason": "二つの年間費用の等式を立てるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "二つの式を等しくし、両辺にQを掛けてQ²の式にします。平方根を取った後、両費用が等しいか代入で確認しましょう。",
+          "remainingWork": "二次方程式を解き正の発注量を得る",
+          "revealsAnswer": false,
+          "reason": "二次方程式を解き正の発注量を得るという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r07a/r07a-q74.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=8fd20b1a450e37a3fdacd4fbf87a51539147f89f06aa3e90d5182eef817ffd97（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問74はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本内の図表（アプリでの補助表示パス assets/transcriptions/pr-batch4-figures/r07a-q74-table-and-graph.webp）を目視照合。",
+        "原本の年間需要100,000個・発注費5,000円・年間保管費1,000円を確認。500000000/Q=500QからQ=1,000個を検算。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q76",
+    "baseVersion": 2,
+    "baseLessonSHA256": "0c85d03a2b48fce19f296707248f23250cfdf29d55b29f9231bcabb1f08b6a4e",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q76",
+      "summary": "貸借対照表から自己資本と総資産を集計し、自己資本比率を算出する問題。",
+      "explanation": "総資産は流動資産6000+固定資産4000=10000百万円です。自己資本は資本金2000+資本剰余金1000+利益剰余金500=3500百万円です。\n自己資本比率は3500/10000×100=35%。負債は他人資本なので分子へ含めません。総資産から負債6500を引いて自己資本を求めても同じです。",
+      "choiceReasons": [
+        "10%は資本剰余金1000だけを分子にした割合で、自己資本全体ではありません。",
+        "20%は資本金2000だけを分子にした割合で、剰余金を含んでいません。",
+        "30%は資本金と資本剰余金の合計3000だけの割合で、利益剰余金500が抜けています。",
+        "資本金と二つの剰余金の合計3500を総資産10000で割った35%です。"
+      ],
+      "takeaway": "自己資本は資本金だけでなく剰余金も含む。総資本・総資産を分母にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "貸借対照表の右側で、流動負債・固定負債と、資本金・剰余金を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "分母の総資産は左側の6000+4000です。分子の自己資本は資本金と資本・利益剰余金を足します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "分子2000+1000+500を分母6000+4000で割り100倍します。右側の負債4500+2000を分子へ入れないようにしましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "資本と負債を混同し、自己資本比率の分子・分母を取り違える。",
+      "stages": [
+        {
+          "newInformation": "貸借対照表の右側で、流動負債・固定負債と、資本金・剰余金を分けます。",
+          "remainingWork": "自己資本を構成する科目を選ぶ",
+          "revealsAnswer": false,
+          "reason": "自己資本を構成する科目を選ぶという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "分母の総資産は左側の6000+4000です。分子の自己資本は資本金と資本・利益剰余金を足します。",
+          "remainingWork": "資本金と剰余金の合計を求める",
+          "revealsAnswer": false,
+          "reason": "資本金と剰余金の合計を求めるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "分子2000+1000+500を分母6000+4000で割り100倍します。右側の負債4500+2000を分子へ入れないようにしましょう。",
+          "remainingWork": "合計額を総資産で割って100倍する",
+          "revealsAnswer": false,
+          "reason": "合計額を総資産で割って100倍するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r07a/r07a-q76.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=40e94ed922491563d37df91f63ba3d4dff2dbc023dfebab17d50cbebd98b8c08（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問76はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本内の図表（アプリでの補助表示パス assets/transcriptions/pr-batch4-figures/r07a-q76-figure.webp）を目視照合。",
+        "原本の貸借対照表：総資産6000+4000百万円、自己資本2000+1000+500百万円。35%と検算。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q76",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9799a7c48fceaaae79cfd880d0e64f44ce52d5c829aa20dc82bbd1e0e0734c00",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q76",
+      "summary": "製造原価に含む通常の製造経費と、異常損失・製造以外の費用を区別する問題。",
+      "explanation": "製造原価は通常の製造活動に要する材料費、労務費、経費からなります。製品を生産する機械の修繕は製造活動に必要で、材料費や労務費以外の経費へ算入します。災害による異常な損失や製造に無関係な賃貸・財務の費用とは区別し、アです。",
+      "choiceReasons": [
+        "製造用機械の通常の修繕費は製造に必要な経費です。",
+        "台風被害による修繕は異常な災害損失に当たり、通常の製造原価に算入しません。",
+        "賃貸目的の倉庫の管理費は製品の製造活動の費用ではありません。",
+        "本社建設資金の支払利息は財務費用で、製造原価の経費ではありません。"
+      ],
+      "takeaway": "通常の製造活動の費用か、異常損失や製造以外の費用かを分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの費用で、製品を作る通常の活動に直接関係するかを確認します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "製造原価の経費には、通常の製造設備の維持・修繕など、材料費や労務費以外の製造活動に必要な支出が含まれます。災害による異常な損失や財務の利息とは分けます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "通常の生産用機械を修繕する費用は、材料・労務以外の製造経費です。対応する候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "通常の製造経費と災害損失・賃貸事業・財務費用の区別が難しい。",
+      "stages": [
+        {
+          "newInformation": "四つの費用で、製品を作る通常の活動に直接関係するかを確認します。",
+          "remainingWork": "各支出が通常操業の費用か判定する",
+          "revealsAnswer": false,
+          "reason": "各支出が通常操業の費用か判定するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "製造原価の経費には、通常の製造設備の維持・修繕など、材料費や労務費以外の製造活動に必要な支出が含まれます。災害による異常な損失や財務の利息とは分けます。",
+          "remainingWork": "通常の生産用機械の修繕という具体例を原本のア肢へ対応させる",
+          "revealsAnswer": true,
+          "reason": "通常の製造設備の修繕は製造経費という定義でア肢が一意に確定する。残る照合は解答確認に当たる。"
+        },
+        {
+          "newInformation": "通常の生産用機械を修繕する費用は、材料・労務以外の製造経費です。対応する候補を選びます。",
+          "remainingWork": "生産用設備の通常の修繕を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「製品を生産している機械装置の修繕費用」が、前段までのヒントとこの内容で一意に特定できる。生産用設備の通常の修繕を選ぶは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r05h/r05h-q76.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=3c6196d9edbcd383d8e54087713d44da974374dd3136ac3ea84560895995a9c2（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年spring問76はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q74",
+    "baseVersion": 2,
+    "baseLessonSHA256": "7ea677d851b8ff1458755922838e3f682583bd7b71a68ca03fb9678712bff1e0",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q74",
+      "summary": "多数の要因が絡み合う因果関係を整理する図を、工程管理や重点分析の図と区別する問題。",
+      "explanation": "連関図は、複雑に絡み合う問題の要因を配置し、原因と結果などの関係を矢印で結んで分析する図です。一つの要因が複数の結果へ影響するなど、入り組んだ関係を整理できます。\nアローダイアグラムは作業の順序と日程、パレート図は項目別の量と累積比率、マトリックス図は二つ以上の要素群の対応を扱います。",
+      "choiceReasons": [
+        "アは作業順序や所要時間を示す工程計画の図です。",
+        "イは件数などを大きい順に並べ、累積比率で重点を探す図です。",
+        "ウは要素群の組合せごとの関係を表に配置する図です。",
+        "エは原因・結果などの相互関係を矢印で整理する図です。"
+      ],
+      "takeaway": "相互に絡む因果関係は連関図、件数の重点はパレート図、工程日程はアローダイアグラム。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文の「数多くの要因」「相互に絡み合う」「原因と結果」に印を付けます。作業時間や発生件数は問われていません。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "要因AがBに影響し、BがCやDに影響する関係を、項目間の矢印で結ぶ用途を考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "要因同士の連なった関係を示す連関図という名称を、問題の用途に対応させます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "絡み合う因果関係を示す図と、工程計画・件数の重点・対応表の図を混同する。",
+      "stages": [
+        {
+          "newInformation": "問題文の「数多くの要因」「相互に絡み合う」「原因と結果」に印を付けます。作業時間や発生件数は問われていません。",
+          "remainingWork": "目的とする関係の種類を読む",
+          "revealsAnswer": false,
+          "reason": "目的とする関係の種類を読むという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "要因AがBに影響し、BがCやDに影響する関係を、項目間の矢印で結ぶ用途を考えます。",
+          "remainingWork": "複数の原因と結果を矢印で結ぶ図を考える",
+          "revealsAnswer": false,
+          "reason": "複数の原因と結果を矢印で結ぶ図を考えるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "要因同士の連なった関係を示す連関図という名称を、問題の用途に対応させます。",
+          "remainingWork": "図法名と用途を対応づける",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「連関図」が、前段までのヒントとこの内容で一意に特定できる。図法名と用途を対応づけるは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06h/r06h-q74.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=5f968d9aabeb751f2e8ff561cae80d146a1f212796cd54a27eb0ecb197d76f9d（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年spring問74はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q76",
+    "baseVersion": 2,
+    "baseLessonSHA256": "e457fe9f14a664fbb2b45ccc1dc9a0c39200a09bda837700582a8beb8e626c29",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q76",
+      "summary": "二つの部品制約を同時に満たす最大利益",
+      "explanation": "正解はウ、45万円。Xをx台、Yをy台とすると、部品Aは3x＋2y≦120、部品Bはx＋2y≦60。利益はx＋y万円である。両不等式を加えると4x＋4y≦180、すなわちx＋y≦45。x＝30、y＝15ならAは120個、Bは60個を使い切り、45万円を達成するので最大である。",
+      "choiceReasons": [
+        "Yだけなら30台で30万円だが、X30台・Y15台の混合で45万円を達成できる。",
+        "Xだけなら40台で40万円だが、二製品を組み合わせると45万円を達成できる。",
+        "x＝30、y＝15で両部品を上限まで使い、上界45万円を達成できる。",
+        "制約を加えるとx＋y≦45となるため、60万円に相当する60台は製造できない。"
+      ],
+      "takeaway": "同額利益の製品は台数合計を最大化し、複数制約から上限と達成例を示す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "製品Xをx台、Yをy台作ると置きます。両製品とも1台で利益1万円なので、利益（万円）はx+yです。部品AとBの上限を別々の不等式にしましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "部品Aは3x+2y≦120、部品Bはx+2y≦60です。二式を足すと4(x+y)≦180。4で割って利益の上限を調べ、実際に作れる組合せも考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二つの部品をちょうど使い切る等式を連立するとx=30台、y=15台です。どちらの上限にも収まり、利益は45万円なのでこれが最大です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "XとYの生産数に対する二種類の部品制約を式にできず最大利益を求められない。",
+      "stages": [
+        {
+          "newInformation": "製品Xをx台、Yをy台作ると置きます。両製品とも1台で利益1万円なので、利益（万円）はx+yです。部品AとBの上限を別々の不等式にしましょう。",
+          "remainingWork": "x,yと利益の式を定義する",
+          "revealsAnswer": false,
+          "reason": "x,yと利益の式を定義するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "部品Aは3x+2y≦120、部品Bはx+2y≦60です。二式を足すと4(x+y)≦180。4で割って利益の上限を調べ、実際に作れる組合せも考えます。",
+          "remainingWork": "二式の和で利益の上限を計算する",
+          "revealsAnswer": false,
+          "reason": "二式の和で利益の上限を計算するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "二つの部品をちょうど使い切る等式を連立するとx=30台、y=15台です。どちらの上限にも収まり、利益は45万円なのでこれが最大です。",
+          "remainingWork": "上限を達成できる台数を確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「45」が、前段までのヒントとこの内容で一意に特定できる。上限を達成できる台数を確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03a/r03a-q76.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=d117b36136babf7888644538156f511fc9d23b1567ddc6eb0791d0323d374ca3（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年autumn問76はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本のA:3x+2y≦120とB:x+2y≦60を加算し、x+y≦45。x=30,y=15で達成可能と独立計算。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q75",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a6a82d0856493179c39a57dd5a7d56dd863e8d696cc03bddfab786fcd6915ada",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q75",
+      "summary": "部品A・Bの使用量制約を同時に満たし、X・Yの合計利益を最大化する問題。",
+      "explanation": "製造台数をx,yとすると、Aの制約は3x+2y≤120、Bの制約はx+2y≤60です。利益はx+y万円です。\n二つの制約を足すと4x+4y≤180、つまりx+y≤45なので利益の上限は45万円です。両方を等号で解くと差から2x=60、x=30、y=15。この組合せは両部品を使い切るので、上限45万円を実現します。",
+      "choiceReasons": [
+        "アの30万円はYだけを作ったときの台数です。Xと組み合わせれば更に利益を増やせます。",
+        "イの40万円はXだけを作ったときです。Bが20個余り、混合生産で45万円にできます。",
+        "ウの45万円はX=30、Y=15で実現し、制約から示される上限にも一致します。",
+        "エの60万円は不可能です。制約を足すと総台数x+yは45以下です。"
+      ],
+      "takeaway": "制約を足して目的値の上限を出し、その上限を実現する組合せを確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "XとYは一台当たり利益が同じなので、合計台数を最大にします。AとBの使用数を別々の不等式にします。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "Aは3x+2y≤120、Bはx+2y≤60です。二式を足すと、目的のx+yを含む式ができます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "両部品を使い切る等式3x+2y=120とx+2y=60を引いてxを求め、yを代入します。合計台数が上限に達するかも確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "単独生産の最大数を答えと決めつけ、二製品の混合生産を検討しない。",
+      "stages": [
+        {
+          "newInformation": "XとYは一台当たり利益が同じなので、合計台数を最大にします。AとBの使用数を別々の不等式にします。",
+          "remainingWork": "部品上限の二式を作る",
+          "revealsAnswer": false,
+          "reason": "部品上限の二式を作るという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "Aは3x+2y≤120、Bはx+2y≤60です。二式を足すと、目的のx+yを含む式ができます。",
+          "remainingWork": "利益の上限を求める",
+          "revealsAnswer": false,
+          "reason": "利益の上限を求めるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "両部品を使い切る等式3x+2y=120とx+2y=60を引いてxを求め、yを代入します。合計台数が上限に達するかも確認しましょう。",
+          "remainingWork": "等式を連立し実現可能性を調べる",
+          "revealsAnswer": false,
+          "reason": "等式を連立し実現可能性を調べるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06h/r06h-q75.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=75ceef6224f697bd6bedd207ca73e9de700d1152d2670bd8d2a24f081ea96cf5（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年spring問75はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本内の図表（アプリでの補助表示パス assets/transcriptions/finish_r06h_batch8/r06h-q75-figure.webp）を目視照合。",
+        "原本のA:3x+2y≦120とB:x+2y≦60を加算し、x+y≦45。x=30,y=15で達成可能と独立計算。"
+      ]
+    }
+  },
+  {
+    "id": "r07a-q75",
+    "baseVersion": 2,
+    "baseLessonSHA256": "c2012e6e2eabd7fe82dd1ac6f8f179f48d95321f109a8167391f9fa807396ebd",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07a-q75",
+      "summary": "製品ごとの部品使用数から制約式を作り、混合生産で得られる最大利益を求める問題。",
+      "explanation": "X,Yの生産数をx,yとすると、部品Aは3x+2y≦120、部品Bはx+2y≦60です。利益は両製品とも1万円なのでx+yを最大にします。\n二つの制約を足すと4x+4y≦180よりx+y≦45。等号を同時に満たす3x+2y=120とx+2y=60からx=30,y=15で実現できるので、最大利益は45万円です。",
+      "choiceReasons": [
+        "30万円はYだけを30台作る場合です。Xと組み合わせればより大きくできます。",
+        "40万円はXだけを40台作る場合です。Yを組み合わせれば45万円になります。",
+        "X30,Y15でA120個、B60個を使い、上限45台を実現するので最大45万円です。",
+        "60台は二制約を足して得るx+y≦45を超え、実現できません。"
+      ],
+      "takeaway": "利益が同じなら台数合計を最大化。制約の和で上限を出し、実現性を確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利益はX,Yとも1万円です。金額の最大化は、合計台数x+yの最大化と同じになります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "表からAは3x+2y≦120、Bはx+2y≦60です。二式を足すとx+yに関する上限が出ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "最大の上限を実現できるか、二制約を等式として差を取ってxを求め、その後yを求めて部品数を確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "二種類の部品の使用制限を同時に満たす必要があることを見落とす。",
+      "stages": [
+        {
+          "newInformation": "利益はX,Yとも1万円です。金額の最大化は、合計台数x+yの最大化と同じになります。",
+          "remainingWork": "利益と台数の関係を把握する",
+          "revealsAnswer": false,
+          "reason": "利益と台数の関係を把握するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "表からAは3x+2y≦120、Bはx+2y≦60です。二式を足すとx+yに関する上限が出ます。",
+          "remainingWork": "制約の和で上限を求める",
+          "revealsAnswer": false,
+          "reason": "制約の和で上限を求めるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "最大の上限を実現できるか、二制約を等式として差を取ってxを求め、その後yを求めて部品数を確認しましょう。",
+          "remainingWork": "達成できる混合生産の台数を解く",
+          "revealsAnswer": false,
+          "reason": "達成できる混合生産の台数を解くという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r07a/r07a-q75.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=52e1a4ce4f8277279fc19f9b6bf0b25a6439a93d3e744b35a71baae74abd1d5c（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問75はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本のA:3x+2y≦120とB:x+2y≦60を加算し、x+y≦45。x=30,y=15で達成可能と独立計算。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q77",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8817c2c96464e2184e1ccaf3ab3ca2b4116f9f16a1f08a719eba61807fb83bb6",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "keep",
+    "lesson": {
+      "id": "r03a-q77",
+      "summary": "高い限界利益率は売上変化を利益に大きく伝える",
+      "explanation": "正解はア。A社の限界利益率は(1,000－500)÷1,000＝50％、B社は(1,000－800)÷1,000＝20％。固定費が一定の範囲では、売上増加100億円に対する利益増加はA社50億円、B社20億円となり、A社の増益効果が大きい。A社の損益分岐点売上高は400÷0.5＝800億円、B社は100÷0.2＝500億円で、A社の方が高く不況抵抗力は弱い。",
+      "choiceReasons": [
+        "A社は限界利益率50％でB社の20％より高く、売上増加がより大きな利益増加につながる。",
+        "A社の限界利益率は50％、B社は20％で、A社の方が高い。",
+        "損益分岐点売上高はA社800億円、B社500億円で、A社の方が高い。",
+        "A社は売上減少も利益減少に大きく響く。安全余裕率はA社20％、B社50％で、A社の不況抵抗力は相対的に弱い。"
+      ],
+      "takeaway": "高限界利益率・高固定費の企業は、売上増減による利益の変化が大きい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "両社の売上高と営業利益は同じだが、変動費と固定費が違う。まず売上高から変動費を引く。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "限界利益率はA：(1,000－500)/1,000、B：(1,000－800)/1,000。売上が増えると、この率に応じて利益が増える。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "Aは50％、Bは20％なので、売上増加が大きな利益に結び付きやすいアが適切。損益分岐点はA800億円、B500億円。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "売上と営業利益が同額なら企業の増益余地も同じと誤認する。",
+      "stages": [
+        {
+          "newInformation": "両社の売上高と営業利益は同じだが、変動費と固定費が違う。まず売上高から変動費を引く。",
+          "remainingWork": "変動費と固定費に着目する",
+          "revealsAnswer": false,
+          "reason": "変動費と固定費に着目するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "限界利益率はA：(1,000－500)/1,000、B：(1,000－800)/1,000。売上が増えると、この率に応じて利益が増える。",
+          "remainingWork": "限界利益率で増益額を比較する",
+          "revealsAnswer": false,
+          "reason": "限界利益率で増益額を比較するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "Aは50％、Bは20％なので、売上増加が大きな利益に結び付きやすいアが適切。損益分岐点はA800億円、B500億円。",
+          "remainingWork": "損益分岐点と不況耐性を確かめる",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「売上高の増加が大きな利益に結び付きやすい。」が、前段までのヒントとこの内容で一意に特定できる。損益分岐点と不況耐性を確かめるは復習事項。"
+        }
+      ],
+      "changes": [],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03a/r03a-q77.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=99122b754f71969643795b3140d3fce4309ecbb784d534d45533c2b6b7ee7a3c（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年autumn問77はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本表から限界利益率A50%、B20%、損益分岐点A800億円、B500億円を独立計算。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q77",
+    "baseVersion": 2,
+    "baseLessonSHA256": "2cc3267581d77eb94d61495dff48d53041e1469b0872bf4f547127815f9e7be0",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q77",
+      "summary": "同じ営業利益の二社について、限界利益率と固定費の違いが売上変動時の利益にどう表れるかを判断する問題。",
+      "explanation": "限界利益率は(売上高−変動費)/売上高です。A社は(1,000−500)/1,000=50%、B社は(1,000−800)/1,000=20%です。固定費が変わらなければ、売上が100億円増えた場合に利益はA社50億円、B社20億円増えます。\n損益分岐点売上高はA社400/0.5=800億円、B社100/0.2=500億円です。A社は好況時に利益が増えやすい一方、売上減少の利益への影響も大きく、不況抵抗力が強いとはいえません。",
+      "choiceReasons": [
+        "限界利益率50%でB社の20%より高いので、同じ売上増加なら利益が大きく増えます。",
+        "A社の限界利益率は50%で、B社の20%より高いので「低い」は誤りです。",
+        "A社の損益分岐点は800億円で、B社の500億円より高いので「低い」は誤りです。",
+        "A社は売上減少による限界利益の減少も大きく、固定費も高いので不況抵抗力が強いとはいえません。"
+      ],
+      "takeaway": "固定費型は売上増加の利益効果が大きいが、売上減少の影響も大きい。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "現在の売上と利益は両社同じなので、その二つだけで判断できません。変動費の割合と固定費の違いを見ます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "限界利益率をAは(1,000−500)/1,000、Bは(1,000−800)/1,000で求めます。売上が100増えたときは、この率を掛けた分が追加利益になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "損益分岐点は固定費÷限界利益率です。Aの400/0.5とBの100/0.2を比べ、売上増・売上減それぞれの影響を確認しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "限界利益率を知らず、売上増加と営業利益増加の関係を捉えられない。",
+      "stages": [
+        {
+          "newInformation": "現在の売上と利益は両社同じなので、その二つだけで判断できません。変動費の割合と固定費の違いを見ます。",
+          "remainingWork": "二社の費用構造を読む",
+          "revealsAnswer": false,
+          "reason": "二社の費用構造を読むという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "限界利益率をAは(1,000−500)/1,000、Bは(1,000−800)/1,000で求めます。売上が100増えたときは、この率を掛けた分が追加利益になります。",
+          "remainingWork": "限界利益率を算出する",
+          "revealsAnswer": false,
+          "reason": "限界利益率を算出するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "損益分岐点は固定費÷限界利益率です。Aの400/0.5とBの100/0.2を比べ、売上増・売上減それぞれの影響を確認しましょう。",
+          "remainingWork": "損益分岐点と売上減少時の性質を比べる",
+          "revealsAnswer": false,
+          "reason": "損益分岐点と売上減少時の性質を比べるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06a/r06a-q77.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=6eb912f302565c8f4cfdfeb242709d74c2e4e700285678f643a8ea787c00b27d（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年autumn問77はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "原本表から限界利益率A50%、B20%、損益分岐点A800億円、B500億円を独立計算。"
+      ]
+    }
+  },
+  {
+    "id": "r03h-q74",
+    "baseVersion": 2,
+    "baseLessonSHA256": "3dcd00c94c0864bf495ed16d944c97a86280238c888c7da45a54ca9a8aec3747",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03h-q74",
+      "summary": "複数の事業者や機能を集めて提供する仕組みを、販売チャネル統合や決済仲介などと区別する問題。",
+      "explanation": "アグリゲーションサービスは、分散して存在する事業者、個人、機能などを集約し、利用者が一括してアクセスできるようにするサービスです。複数のサービスを比較、組合せ、まとめて制御できることが特徴です。店舗とECの統合、代金決済の仲介、加盟店の営業権とは異なります。",
+      "choiceReasons": [
+        "店舗とECなどの接点をシームレスに統合するのはオムニチャネルの説明です。",
+        "中立の第三者が代金を仲介して安全を確保するのはエスクローサービスです。",
+        "分散した事業者や機能への一括アクセス、比較・統合・組合せを提供する説明です。",
+        "本部へ対価を払い商標やサービスの使用権を得るのはフランチャイズです。"
+      ],
+      "takeaway": "アグリゲーションは分散する機能やサービスを集めて一括利用可能にする。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの説明で、登場する主体を先に丸で囲みます。「小売会社と顧客」「中立の第三者と契約当事者」「分散した事業者と顧客」「本部と加盟店」の違いを整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "例えば複数事業者のサービスを一つの窓口に集めれば、利用者は個別に訪れず比較や組合せを行えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "分散した事業者・個人・機能への一括アクセスとワンストップ利用を提供する候補が一致します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "アグリゲーションの語が分からず、オムニチャネル等の類似するサービスと混同する。",
+      "stages": [
+        {
+          "newInformation": "四つの説明で、登場する主体を先に丸で囲みます。「小売会社と顧客」「中立の第三者と契約当事者」「分散した事業者と顧客」「本部と加盟店」の違いを整理します。",
+          "remainingWork": "四説明の登場主体を分類する",
+          "revealsAnswer": false,
+          "reason": "四説明の登場主体を分類するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "例えば複数事業者のサービスを一つの窓口に集めれば、利用者は個別に訪れず比較や組合せを行えます。",
+          "remainingWork": "分散サービスを一括利用する肢を探す",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「分散的に存在する事業者，個人や機能への一括的なアクセスを顧客に提供し，比較，まとめ，統一的な制御，最適な組合せなどワンストップでの」が、前段までのヒントとこの内容で一意に特定できる。分散サービスを一括利用する肢を探すは復習事項。"
+        },
+        {
+          "newInformation": "分散した事業者・個人・機能への一括アクセスとワンストップ利用を提供する候補が一致します。",
+          "remainingWork": "他のサービスとの違いを整理する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「分散的に存在する事業者，個人や機能への一括的なアクセスを顧客に提供し，比較，まとめ，統一的な制御，最適な組合せなどワンストップでの」が、前段までのヒントとこの内容で一意に特定できる。他のサービスとの違いを整理するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03h/r03h-q74.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=8f078fd57f14fdee2f0d641b3845d5a0230ae6e928a31ac8f08e48c0ad600eab（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年spring問74はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q80",
+    "baseVersion": 2,
+    "baseLessonSHA256": "a88a74755f4a0bd1cce8ed6ab0dec36c6fbaec6ab475f6f765e0b0f0cc90fc5c",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q80",
+      "summary": "36協定の特別条項に必要な臨時的な事情を、恒常的な不足や上限規制の適用除外業務と区別する問題。",
+      "explanation": "正解はア。特別条項の対象は、通常予見できない業務量の大幅な増加など、臨時的な特別の事情である。アは予想を超える売上による作業量増大について、3か月という期間と人数・所要時間を定めている。慢性的な人手不足や期限を定めない適用は適切でない。新技術・新商品の研究開発業務は時間外労働の上限規制の適用除外として扱われる。",
+      "choiceReasons": [
+        "予想外の売上増による臨時的な業務増を理由に、期間・人数・所要時間を定めており適切である。",
+        "新技術・新商品の研究開発業務は時間外労働の上限規制の適用除外となるため、限度時間を超えるためにこの特別条項を適用する事例ではない。",
+        "要員を雇用できるまで期限を定めない運用では、臨時的な特別の事情として期間を明確にしていない。",
+        "慢性的な人手不足は臨時的な事情ではない。1年の期限を設けるだけでは特別条項の適用理由にならない。"
+      ],
+      "takeaway": "臨時的な特別の事情と、恒常的な不足・上限規制の適用除外業務を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文は「臨時的に」限度時間を超える特別条項。各候補の理由が一時的か慢性的か、期間が明確かを読む。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "予想を超える業務増は臨時的な事情となり得る。期限なしや慢性的不足とは区別する。研究開発業務には上限規制の適用除外もある。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "予想外の売上増に対し3か月・人数・所要時間を定めるアが適切である。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "36協定の特別条項を恒常的な長時間労働にも使えると思い込む。",
+      "stages": [
+        {
+          "newInformation": "問題文は「臨時的に」限度時間を超える特別条項。各候補の理由が一時的か慢性的か、期間が明確かを読む。",
+          "remainingWork": "臨時と慢性の事情を区別する",
+          "revealsAnswer": false,
+          "reason": "臨時と慢性の事情を区別するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "予想を超える業務増は臨時的な事情となり得る。期限なしや慢性的不足とは区別する。研究開発業務には上限規制の適用除外もある。",
+          "remainingWork": "研究開発の除外と一時的な業務増加を判断する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「商品の売上が予想を超えたことによって，製造，出荷及び顧客サービスの作業量が増大したので，期間を3か月間とし，限度時間を超えて勤務す」が、前段までのヒントとこの内容で一意に特定できる。研究開発の除外と一時的な業務増加を判断するは復習事項。"
+        },
+        {
+          "newInformation": "予想外の売上増に対し3か月・人数・所要時間を定めるアが適切である。",
+          "remainingWork": "期間・人数・時間を確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「商品の売上が予想を超えたことによって，製造，出荷及び顧客サービスの作業量が増大したので，期間を3か月間とし，限度時間を超えて勤務す」が、前段までのヒントとこの内容で一意に特定できる。期間・人数・時間を確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03a/r03a-q80.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=26c0e51c9891fcd68397c9a7e349f3d86e1433620162efcf4bde7a9b7566a514（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年autumn問80はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q80",
+    "baseVersion": 2,
+    "baseLessonSHA256": "fd1f5f0b7f5c8020b549d40f496519d061741292948dbf50142f0b8542fb92d3",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q80",
+      "summary": "RoHS指令が対象とする危険を、リサイクル・電磁妨害・輸出管理の目的と区別する問題。",
+      "explanation": "RoHSは電気電子機器における特定の有害物質の使用を制限する欧州の指令です。製品の生産から処分までの過程で、環境や人の健康への危険を低減することを目的とします。廃棄物の回収・再利用、電磁妨害の抑制、兵器関連の輸出管理とは異なります。",
+      "choiceReasons": [
+        "家電廃棄物の回収・リサイクルはWEEE等に関する内容で、RoHSの有害物質使用制限とは異なります。",
+        "電磁妨害を許容範囲に抑えるのはEMCに関する規制です。",
+        "兵器開発等につながる輸出の防止は安全保障貿易管理の目的です。",
+        "電気電子製品の有害物質による環境・健康の危険を小さくする目的がRoHSに対応します。"
+      ],
+      "takeaway": "RoHSは有害物質の使用制限、WEEEは廃棄電気電子機器の回収・再利用。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの候補が対象にする危険を、廃棄物・電磁妨害・安全保障・有害物質に分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RoHSはRestriction of Hazardous Substancesです。物質の使用制限で何を守るのか、リサイクルや電磁波規制と区別します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "有害物質による環境や人の健康への危険を最小化する候補がRoHS指令の目的です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "RoHSの略語を知らず、電磁両立性・リサイクル・安全保障輸出の規制と混同する。",
+      "stages": [
+        {
+          "newInformation": "四つの候補が対象にする危険を、廃棄物・電磁妨害・安全保障・有害物質に分けます。",
+          "remainingWork": "各候補が扱う危険を分類する",
+          "revealsAnswer": false,
+          "reason": "各候補が扱う危険を分類するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "RoHSはRestriction of Hazardous Substancesです。物質の使用制限で何を守るのか、リサイクルや電磁波規制と区別します。",
+          "remainingWork": "RoHSの語義と規制対象を結ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「電気電子製品の生産から処分までの全ての段階で，有害物質が環境及び人の健康に及ぼす危険を最小化する。」が、前段までのヒントとこの内容で一意に特定できる。RoHSの語義と規制対象を結ぶは復習事項。"
+        },
+        {
+          "newInformation": "有害物質による環境や人の健康への危険を最小化する候補がRoHS指令の目的です。",
+          "remainingWork": "健康・環境への影響を確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「電気電子製品の生産から処分までの全ての段階で，有害物質が環境及び人の健康に及ぼす危険を最小化する。」が、前段までのヒントとこの内容で一意に特定できる。健康・環境への影響を確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r04h/r04h-q80.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=4d7a9ea5241407cd0eb059a4819a619420ce03b4d95ade58395f8bb42cc7ae31（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年spring問80はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r07h-q80",
+    "baseVersion": 2,
+    "baseLessonSHA256": "d5d1332aa22b42b74f0d0ac0104c392c0b268b7fa9fc05ba7ac358b43343ffda",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r07h-q80",
+      "summary": "RoHS指令の規制対象と目的を、廃棄物の回収や電磁障害の規制と区別する問題。",
+      "explanation": "RoHSはRestriction of Hazardous Substances。電気電子機器で鉛や水銀など特定の有害物質の使用を制限し、人の健康と環境への危険を減らすEUの指令。エがこの目的を説明している。\n\nアは廃電気電子機器の回収・リサイクルに関するWEEEに近い内容。イは電磁両立性（EMC）、ウは安全保障貿易管理の目的。いずれも規制だが、対象となる危険や行為が違う。",
+      "choiceReasons": [
+        "廃棄物の回収や再利用を扱うWEEE等の目的に近く、有害物質の使用制限とは違う。",
+        "電磁障害を抑えるEMCに関する目的。",
+        "兵器等に関わる輸出を制限する安全保障貿易管理の目的。",
+        "電気電子製品の有害物質による健康・環境の危険を減らすRoHSの目的。"
+      ],
+      "takeaway": "RoHSは有害物質、WEEEは回収・リサイクル、EMCは電磁障害。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "選択肢が扱う対象を、廃棄物の再利用、電磁妨害、兵器関連の輸出、製品に含まれる物質に整理します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RoHSはRestriction of Hazardous Substances（有害物質の使用制限）の略です。製品で使う物質の制限が、健康や環境とどう結び付くか考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "鉛や水銀などの特定有害物質の使用を制限して、電気電子製品による人の健康・環境への危険を減らす説明が該当します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "RoHSとWEEE等を同じ欧州の環境規制として混同する。",
+      "stages": [
+        {
+          "newInformation": "選択肢が扱う対象を、廃棄物の再利用、電磁妨害、兵器関連の輸出、製品に含まれる物質に整理します。",
+          "remainingWork": "危険の種類を分類する",
+          "revealsAnswer": false,
+          "reason": "危険の種類を分類するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "RoHSはRestriction of Hazardous Substances（有害物質の使用制限）の略です。製品で使う物質の制限が、健康や環境とどう結び付くか考えます。",
+          "remainingWork": "有害物質の意味を知る",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「電気電子製品の生産から処分までの全ての段階で，有害物質が環境及び人の健康に及ぼす危険を最小化する。」が、前段までのヒントとこの内容で一意に特定できる。有害物質の意味を知るは復習事項。"
+        },
+        {
+          "newInformation": "鉛や水銀などの特定有害物質の使用を制限して、電気電子製品による人の健康・環境への危険を減らす説明が該当します。",
+          "remainingWork": "具体的な規制対象の物質を確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答エ「電気電子製品の生産から処分までの全ての段階で，有害物質が環境及び人の健康に及ぼす危険を最小化する。」が、前段までのヒントとこの内容で一意に特定できる。具体的な規制対象の物質を確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r07h/r07h-q80.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=2a4019a7b95012056395ad06262e5c5b424ebea1d680b791c90c33c42b37cb3d（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年spring問80はエ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q80",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ef38217cdc1c9f3e65f2c4b4dae7c8fdfbb77e685edfcd8798558a8ca925d72a",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q80",
+      "summary": "デジタル社会形成基本法の基本理念を、広告メール・通信販売などの個別法の規律と区別する問題。",
+      "explanation": "デジタル社会形成基本法は、デジタル社会を形成するための基本理念や政策の枠組みを定めます。全ての国民が情報通信技術の恵みを受けられることや、信頼性ある情報の自由で安全な流通を掲げるウが該当します。\nプロバイダの責任と発信者情報開示、広告メールの規制、通信販売などの消費者保護は、それぞれ個別の法律の目的・規定です。",
+      "choiceReasons": [
+        "プロバイダの責任制限や発信者情報開示を扱う個別法の説明です。",
+        "広告宣伝メールの適正化を扱う特定電子メール法の説明です。",
+        "全ての国民のICTの恩恵と、信頼ある情報の自由かつ安全な流通という基本理念を述べています。",
+        "通信販売などの取引と消費者利益の保護を扱う特定商取引法の説明です。"
+      ],
+      "takeaway": "社会全体の基本理念と、メールや通販など特定行為を規制する個別法を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの説明を、ある行為について当事者の権利・義務を定めるものと、社会全体の方向を示すものに分けてみましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "「基本法」は社会や政策の基本方針を示します。デジタル社会形成基本法は、国民が情報通信技術の恩恵を受け、情報が自由かつ安全に流通する社会を目指します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "国民全体の利益と信頼できる情報の流通を述べるウが基本理念です。アはプロバイダ、イは広告メール、エは通信販売の個別法の説明です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "基本法の理念と個別法の具体的な規制対象を区別できない。",
+      "stages": [
+        {
+          "newInformation": "四つの説明を、ある行為について当事者の権利・義務を定めるものと、社会全体の方向を示すものに分けてみましょう。",
+          "remainingWork": "規制と基本理念を分類する",
+          "revealsAnswer": false,
+          "reason": "規制と基本理念を分類するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "「基本法」は社会や政策の基本方針を示します。デジタル社会形成基本法は、国民が情報通信技術の恩恵を受け、情報が自由かつ安全に流通する社会を目指します。",
+          "remainingWork": "社会全体を対象とする理念を知る",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「全ての国民が情報通信技術の恵みを享受できる社会の実現を目指し，情報通信技術を用いた情報の活用により信頼性のある情報の自由かつ安全な」が、前段までのヒントとこの内容で一意に特定できる。社会全体を対象とする理念を知るは復習事項。"
+        },
+        {
+          "newInformation": "国民全体の利益と信頼できる情報の流通を述べるウが基本理念です。アはプロバイダ、イは広告メール、エは通信販売の個別法の説明です。",
+          "remainingWork": "個別法の説明を区別する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「全ての国民が情報通信技術の恵みを享受できる社会の実現を目指し，情報通信技術を用いた情報の活用により信頼性のある情報の自由かつ安全な」が、前段までのヒントとこの内容で一意に特定できる。個別法の説明を区別するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06a/r06a-q80.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=8c293147e289d0455240e0f00089a5fc55ca96059d2a00b8d9064b88522b84b4（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年autumn問80はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r03a-q78",
+    "baseVersion": 2,
+    "baseLessonSHA256": "4431d5e1e7d537d8442aa59c845c63d29c80402d32297a2cc5c72626a28a2fe5",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r03a-q78",
+      "summary": "記憶媒体経由でマルウェアを侵入させ業務用データを破壊したとき、どの法律が対象となるかを判断する問題。",
+      "explanation": "正解はア。業務用コンピュータにマルウェアを侵入させてデータを消去する行為は、刑法の電子計算機損壊等業務妨害罪などの対象となる。記憶媒体を介した侵入なので、通信回線を通じた不正アクセスを取り締まる不正アクセス禁止法の説明とは異なる。",
+      "choiceReasons": [
+        "刑法は業務用コンピュータのデータを損壊するなどの業務妨害を処罰の対象とする。",
+        "製造物責任法は製造物の欠陥による損害に対する製造業者などの賠償責任を定める法律である。",
+        "不正アクセス禁止法は電気通信回線を通じてアクセス制御を突破するなどの不正アクセスを対象とする。記憶媒体による本件とは異なる。",
+        "プロバイダ責任制限法はネット上の情報流通による権利侵害について、プロバイダの責任や発信者情報開示などを定める法律である。"
+      ],
+      "takeaway": "侵入経路と行為を分け、記憶媒体からのデータ破壊を不正アクセスと即断しない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問題文から侵入経路と被害行為を別々に書き出す。「記憶媒体」と「業務用コンピュータのデータ消去」のそれぞれを法律の対象と比較する。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "不正アクセス禁止法は通信回線を通じたアクセス制御の突破などを対象とする。ここではデータを破壊して業務を妨害する行為に着目する。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "電子計算機損壊等業務妨害罪などを定める刑法を選ぶ。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "マルウェアと聞いて不正アクセス禁止法を連想し、記憶媒体経由の業務妨害を見落とす。",
+      "stages": [
+        {
+          "newInformation": "問題文から侵入経路と被害行為を別々に書き出す。「記憶媒体」と「業務用コンピュータのデータ消去」のそれぞれを法律の対象と比較する。",
+          "remainingWork": "侵入経路と被害行為を分ける",
+          "revealsAnswer": false,
+          "reason": "侵入経路と被害行為を分けるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "不正アクセス禁止法は通信回線を通じたアクセス制御の突破などを対象とする。ここではデータを破壊して業務を妨害する行為に着目する。",
+          "remainingWork": "不正アクセスとデータ損壊を区別する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「刑法」が、前段までのヒントとこの内容で一意に特定できる。不正アクセスとデータ損壊を区別するは復習事項。"
+        },
+        {
+          "newInformation": "電子計算機損壊等業務妨害罪などを定める刑法を選ぶ。",
+          "remainingWork": "業務妨害を規制する法律を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「刑法」が、前段までのヒントとこの内容で一意に特定できる。業務妨害を規制する法律を選ぶは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r03a/r03a-q78.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=9594dabb8b38aff428887b725ad720d917c82ec8deafccd5bf0227fb25882fb7（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年autumn問78はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r06a-q78",
+    "baseVersion": 2,
+    "baseLessonSHA256": "b15eeb286e0424f10b0c595f092b54b515b48f89041118acb8c5129b31fe777a",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06a-q78",
+      "summary": "著作権法上のプログラム著作物の保護範囲を、表現・算法・言語・規約の違いから判断する問題。",
+      "explanation": "著作権法は創作的な表現を保護し、プログラムも著作物となります。そのため、具体的に記述されたコンパイラのプログラムが保護対象です。\n一方、プログラムを作るための言語、規約、解法はプログラム著作物の保護対象から除かれています。アルゴリズムは解法、プログラム言語は言語、プロトコルは規約に該当します。",
+      "choiceReasons": [
+        "アルゴリズムは解法であり、それ自体はプログラム著作物の保護対象ではありません。",
+        "コンパイラを実装した具体的なプログラムは、創作的な表現として保護対象となります。",
+        "プログラム言語そのものは、プログラム著作物の保護対象から除かれます。",
+        "プロトコルは規約であり、それ自体はプログラム著作物の保護対象ではありません。"
+      ],
+      "takeaway": "プログラムの表現は保護されるが、言語・規約・解法そのものは保護対象と分ける。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "候補のうち、コンピュータが実行する具体的なコードと、コードを作るためのルールや手順を分けます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "著作権は表現を保護します。アルゴリズムの考え方や言語の規則そのものと、それを使って具体的に書いたプログラムでは扱いが違います。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "具体的なコンパイラのプログラムがイです。アルゴリズム、言語、プロトコルは解法・言語・規約に対応します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "著作権がプログラムの解法や言語まで保護すると誤解する。",
+      "stages": [
+        {
+          "newInformation": "候補のうち、コンピュータが実行する具体的なコードと、コードを作るためのルールや手順を分けます。",
+          "remainingWork": "表現と手順・規約を分ける",
+          "revealsAnswer": false,
+          "reason": "表現と手順・規約を分けるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "著作権は表現を保護します。アルゴリズムの考え方や言語の規則そのものと、それを使って具体的に書いたプログラムでは扱いが違います。",
+          "remainingWork": "保護する創作的表現を判断する",
+          "revealsAnswer": true,
+          "reason": "原本の正答イ「コンパイラのプログラム」が、前段までのヒントとこの内容で一意に特定できる。保護する創作的表現を判断するは復習事項。"
+        },
+        {
+          "newInformation": "具体的なコンパイラのプログラムがイです。アルゴリズム、言語、プロトコルは解法・言語・規約に対応します。",
+          "remainingWork": "コンパイラをほかの三肢と比べる",
+          "revealsAnswer": true,
+          "reason": "原本の正答イ「コンパイラのプログラム」が、前段までのヒントとこの内容で一意に特定できる。コンパイラをほかの三肢と比べるは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06a/r06a-q78.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=a71082abfb9fae130256912f837a00dcb9afe661a21927910e75de04fb84736e（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年autumn問78はイ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r05h-q78",
+    "baseVersion": 2,
+    "baseLessonSHA256": "9437e531184afa331bf55e146c9a34df40cd14cdc89c8da192a39701ddb7917d",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r05h-q78",
+      "summary": "下請法の発注時の書面交付と、未確定事項が確定した後の通知義務を判断する問題。",
+      "explanation": "出題時の下請法では、発注内容などを記載した書面を交付する必要があります。正当な理由で発注時に未確定の事項は後で補充できますが、確定したら内容を記載した書面を速やかに交付しなければなりません。イは確定した仕様を口頭だけで伝えており、禁止される行為です。",
+      "choiceReasons": [
+        "共通の支払条件等を事前の書面で示し、個別発注との関連を明らかにして記載を省く取扱いは認められます。",
+        "未確定の仕様も確定後に書面で補充する必要があり、口頭だけでは義務を満たしません。",
+        "協議して変更に伴う費用増を代金に加算するなら、不当な無償変更を求める行為ではありません。",
+        "出題時の取扱いでは、発注前の書面合意に基づき実費以内の振込手数料を差し引くことは認められます。"
+      ],
+      "takeaway": "発注時に未確定でも、確定後の内容は書面で補充する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "問われているのは「禁止される行為」です。最初の発注時に未確定な事項がある場合と、それが後で確定した場合とで、何を知らせる必要があるかに注目します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "出題時の下請法では、正当な理由で決められない事項を当初書面から省略できても、内容が確定したら直ちに追加の書面を交付しなければなりません。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "仕様確定後にその内容を書面ではなく口頭だけで伝えるイは、確定事項の書面交付義務を満たしません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "発注時に未確定なら後の確定内容も口頭で足りると誤解する。",
+      "stages": [
+        {
+          "newInformation": "問われているのは「禁止される行為」です。最初の発注時に未確定な事項がある場合と、それが後で確定した場合とで、何を知らせる必要があるかに注目します。",
+          "remainingWork": "発注時と確定後を区別する",
+          "revealsAnswer": false,
+          "reason": "発注時と確定後を区別するという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "出題時の下請法では、正当な理由で決められない事項を当初書面から省略できても、内容が確定したら直ちに追加の書面を交付しなければなりません。",
+          "remainingWork": "追補の書面交付が必要なことを知る",
+          "revealsAnswer": true,
+          "reason": "原本の正答イ「顧客が求める仕様が確定していなかったので，発注の際に，下請事業者に仕様が未記載の書面を交付し，仕様が確定した時点では，内容を書面で」が、前段までのヒントとこの内容で一意に特定できる。追補の書面交付が必要なことを知るは復習事項。"
+        },
+        {
+          "newInformation": "仕様確定後にその内容を書面ではなく口頭だけで伝えるイは、確定事項の書面交付義務を満たしません。",
+          "remainingWork": "書面を出していない選択肢を確認する",
+          "revealsAnswer": true,
+          "reason": "原本の正答イ「顧客が求める仕様が確定していなかったので，発注の際に，下請事業者に仕様が未記載の書面を交付し，仕様が確定した時点では，内容を書面で」が、前段までのヒントとこの内容で一意に特定できる。書面を出していない選択肢を確認するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r05h/r05h-q78.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=4a66efe37f834fb6cd0a74800b1d87b22402d0c203df6996318b255b0e8af434（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年spring問78はイ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。",
+        "公正取引委員会の出題時下請法第3条の条文を照合：https://www.jftc.go.jp/shitauke/legislation/act.html 。2026年の改正後規定と混同しない。"
+      ]
+    }
+  },
+  {
+    "id": "r04h-q78",
+    "baseVersion": 2,
+    "baseLessonSHA256": "8dcece606260de262d1bae0e62804a07bdaf407c93a0cb4980e69e1fb0a9aef6",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r04h-q78",
+      "summary": "不正アクセス禁止法における、識別符号の提供による助長行為と取得・保管等の別の禁止行為を区別する問題。",
+      "explanation": "不正アクセス行為を助長する行為の禁止は、他人の識別符号を、正規利用者や管理者以外へ正当な理由なく提供する行為等を規制します。IDとパスワードの取得や保管、フィッシングによる入力要求も禁止の対象ですが、助長行為としての提供とは別の区分です。",
+      "choiceReasons": [
+        "正当な理由なく他人の識別符号を正規利用者・管理者以外に提供するので、助長行為に該当します。",
+        "フィッシングサイトによる入力要求は、不正に識別符号の入力を要求する行為の禁止に関係します。",
+        "不正アクセス目的でID・パスワードを入手するのは識別符号の不正取得の禁止に関係します。",
+        "不正取得した識別符号を不正アクセス目的で保管するのは不正保管の禁止に関係します。"
+      ],
+      "takeaway": "不正アクセス禁止法では、識別符号の提供・取得・保管・入力要求を区別する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの行為の動詞を「提供」「サイト開設による入力要求」「入手」「保管」に分けます。誰か別の人の不正アクセスを容易にする行為はどれか考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "助長行為では、他人の識別符号を別の人へ渡すことで、渡された人がログインできるようになります。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "正当な理由なく、他人のIDとパスワードを正規利用者や管理者以外へ提供する候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "ID取得・提供・保管・フィッシングをすべて助長行為と混同する。",
+      "stages": [
+        {
+          "newInformation": "四つの行為の動詞を「提供」「サイト開設による入力要求」「入手」「保管」に分けます。誰か別の人の不正アクセスを容易にする行為はどれか考えます。",
+          "remainingWork": "禁止行為の動詞を分ける",
+          "revealsAnswer": false,
+          "reason": "禁止行為の動詞を分けるという計算・照合・判断を学習者が行う余地があり、正答を直接示していない。"
+        },
+        {
+          "newInformation": "助長行為では、他人の識別符号を別の人へ渡すことで、渡された人がログインできるようになります。",
+          "remainingWork": "助長行為としての第三者提供を理解する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「業務その他正当な理由なく，他人の利用者IDとパスワードを正規の利用者及びシステム管理者以外の者に提供する。」が、前段までのヒントとこの内容で一意に特定できる。助長行為としての第三者提供を理解するは復習事項。"
+        },
+        {
+          "newInformation": "正当な理由なく、他人のIDとパスワードを正規利用者や管理者以外へ提供する候補を選びます。",
+          "remainingWork": "入手・保管・入力要求と区別する",
+          "revealsAnswer": true,
+          "reason": "原本の正答ア「業務その他正当な理由なく，他人の利用者IDとパスワードを正規の利用者及びシステム管理者以外の者に提供する。」が、前段までのヒントとこの内容で一意に特定できる。入手・保管・入力要求と区別するは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r04h/r04h-q78.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=257a2010cca1183004054c9005cad6f78e9de5af9367fc04216ab989af437968（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年spring問78はア。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  },
+  {
+    "id": "r06h-q79",
+    "baseVersion": 2,
+    "baseLessonSHA256": "ec711a3121dfbabbcb45edce3f15c57772309d3b3cf7e9e6974a8f7466d13ae2",
+    "author": "ChatGPT/gpt-6-batch38-20261028T1913JST",
+    "decision": "revise",
+    "lesson": {
+      "id": "r06h-q79",
+      "summary": "ドメイン名の取得・使用について、類似性だけでなく不正利益や加害の目的があるかを判断する問題。",
+      "explanation": "不正競争防止法は、不正の利益を得る又は他人に損害を加える目的で、他人の商品等の表示と同一・類似のドメイン名を取得・使用する行為などを規制します。商標登録の有無だけで適法とは決まりません。\nウは商品名をドメインへ使い、コピー商品の販売で利益を得るので不正目的の利用に該当します。アの偶然の取得やエの正当目的の利用とは違います。イは周知地域の外での使用という条件で、周知表示による混同を示していません。",
+      "choiceReasons": [
+        "アは偶然の取得という条件で、不正利益や加害の目的が示されていません。競争関係の有無だけで判断するわけではありません。",
+        "イはその地方だけの周知表示を、知られていない地域で使う条件で、周知表示による混同を示していません。",
+        "ウは他人の商品名のドメインでコピー商品を販売する不正な利益目的の利用です。商標権がなくても対象になり得ます。",
+        "エは自社サービスに適し、正当な利益を得る目的が認められるので、不正目的の条件を満たしません。"
+      ],
+      "takeaway": "ドメインの類似だけでなく、不正な利益・加害の目的を確認する。商標権の有無だけで決めない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "四つの事例について、ドメイン名を取得・使用する目的と、他社の商品やサービスの表示との関係を整理しましょう。名前が似ているという事実だけで結論を出さないことが大切です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "不正競争防止法のドメイン規制は、商標登録の有無に限らず、不正利益や他人への損害を目的とする利用を対象にします。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "他人の商品名を使いコピー商品を売る行為を、正当な自社サービスの利用と比べ、不正目的がある候補を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "商標権がない場合のドメイン名利用は無条件に自由と思い込む。",
+      "stages": [
+        {
+          "newInformation": "四つの事例について、ドメイン名を取得・使用する目的と、他社の商品やサービスの表示との関係を整理しましょう。名前が似ているという事実だけで結論を出さないことが大切です。",
+          "remainingWork": "偶然・不正利益・正当利益を比較する",
+          "revealsAnswer": false,
+          "reason": "取得・使用の目的を比較する軸のみを与えており、不正目的の判断基準も正答肢も提示していない。"
+        },
+        {
+          "newInformation": "不正競争防止法のドメイン規制は、商標登録の有無に限らず、不正利益や他人への損害を目的とする利用を対象にします。",
+          "remainingWork": "他人表示と不正目的の要件を知る",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「商標権のない商品名を用いたドメイン名を取得し，当該商品のコピー商品を販売し，利益を取得した。」が、前段までのヒントとこの内容で一意に特定できる。他人表示と不正目的の要件を知るは復習事項。"
+        },
+        {
+          "newInformation": "他人の商品名を使いコピー商品を売る行為を、正当な自社サービスの利用と比べ、不正目的がある候補を選びます。",
+          "remainingWork": "コピー商品の販売の事例を選ぶ",
+          "revealsAnswer": true,
+          "reason": "原本の正答ウ「商標権のない商品名を用いたドメイン名を取得し，当該商品のコピー商品を販売し，利益を取得した。」が、前段までのヒントとこの内容で一意に特定できる。コピー商品の販売の事例を選ぶは復習事項。"
+        }
+      ],
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-38-author-gpt6 の原本 assets/questions/r06h/r06h-q79.webp をbase64取得・画像表示して問題文、4肢、図表と単位を目視照合。context記載の画像SHA256=4f76af74cdd3cd32dc73ff76bd86df52ca1aca2bdf2e53255aee198e7fb23dd4（バイトの独立ハッシュ検算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年spring問79はウ。context記載の正答と一致（IPA公式解答PDFそのものは未閲覧）。"
+      ]
+    }
+  }
+]
