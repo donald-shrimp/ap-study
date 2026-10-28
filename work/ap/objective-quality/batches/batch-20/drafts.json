@@ -20,7 +20,7 @@
         {
           "title": "注目するところ",
           "text": "攻撃は、標的を調べる偵察、攻撃手段を届ける配送、標的で動作させる段階、情報窃取などの目的達成へと進む。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -40,9 +40,9 @@
       "stages": [
         {
           "newInformation": "攻撃は、標的を調べる偵察、攻撃手段を届ける配送、標的で動作させる段階、情報窃取などの目的達成へと進む。",
-          "remainingWork": "示された区別・着眼点を使い、具体的な定義と選択肢を自分で照合する。",
-          "revealsAnswer": false,
-          "reason": "分類・前提や比較軸を示すが、正答肢と一対一になる固有の定義・最終結論はまだ渡していないためfalse。"
+          "remainingWork": "既に区別された段階を選択肢に対応させ、次段でエクスプロイトの定義を確認する。",
+          "revealsAnswer": true,
+          "reason": "全肢と合わせると、調査は偵察、メール送付は配送、情報窃取は目的達成と全誤答を別段階に対応付けるため、残る脆弱性を悪用した実行の肢だけが該当する。"
         },
         {
           "newInformation": "エクスプロイト（exploit）は、標的の**脆弱性を突いて攻撃を発動させる**段階。単にメールを送るだけではまだ実行されていない。",
@@ -64,7 +64,8 @@
       "sourceNotes": [
         "原本WebPをGitHubの assets/questions/r07a/r07a-q36.webp からbase64取得し、画像として表示・目視確認。設問・4肢・図表（本問は文章中心）とcontextの記載を照合。context記載のsource SHA256: 0817113bc69f35901360286f38a25e62bc7651c3b5b106186da79ec1030589c4。",
         "公式正答はcontext.jsonのanswer=1（イ）を使用し、原本の選択肢配置と照合。IPA公式解答PDFの独立再照合は未実施。",
-        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。"
+        "既存explanation・choiceReasons全4件・takeaway・checkedAgainstは原本の記述と概念上の整合性を自己点検し、本文を維持。",
+        "Codex /root が初回独立確認 B20-01 を受け、原本画像を開いて全肢を照合し、H1の解答開示判定と設計メモを訂正した。本文・原問・公式正答は保持。別担当 Codex /root/ap_batch19_review が最終版を確認する。"
       ]
     }
   },
