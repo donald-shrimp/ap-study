@@ -2,7 +2,7 @@
 
 800問の旧教材と旧レビューをbaselineへ保存し、先行20問と残り39組×20問へ重複なく分割した。旧レビューの状態を新基準の承認には使わない。
 
-先行20問は19問を部分修正、1問を変更不要として全件の独立確認・登録・実アプリ検証を完了。残り780問のうちbatch-01〜04の80問は4担当で改稿・別担当確認・登録を完了。batch-05〜08の次の80問も改稿・別担当確認・登録を完了し、計180問を新基準で確認済み。残り620問のうちbatch-09〜14の120問は独立レビューを完了し、batch-09の修正後確認を含め内容承認・未登録。残り500問の25組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。教材は[PR #76](https://github.com/donald-shrimp/ap-study/pull/76)と[PR #77](https://github.com/donald-shrimp/ap-study/pull/77)と[PR #78](https://github.com/donald-shrimp/ap-study/pull/78)に保存し、本番公開はまだ行っていない。
+先行20問とbatch-01〜08の160問は独立確認・登録済み。batch-09〜16の160問は改稿と独立内容レビューを完了し、未登録。現在のブランチで未取り込みの残り460問については、別PRの作者草稿と未着手を区別する。内容承認・登録・本番公開は別々に記録し、本番公開はまだ行っていない。
 
 - [全体計画・作者／レビュー／統合の手順](../../../docs/ap-a-content-upgrade.md)
 - [800問の固定台帳](inventory.json)
@@ -29,33 +29,33 @@
 | [batch-12](batches/batch-12/README.md) | 20 | ハードウェア、インタフェース・マルチメディア | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
 | [batch-13](batches/batch-13/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（7問修正・20問内容承認・未登録） |
 | [batch-14](batches/batch-14/README.md) | 20 | データベース | ChatGPT作者 ／ 別担当確認（3問修正・20問内容承認・未登録） |
-| [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | 未割当 |
-| [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | 未割当 |
-| [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | 未割当 |
-| [batch-18](batches/batch-18/README.md) | 20 | セキュリティ | 未割当 |
-| [batch-19](batches/batch-19/README.md) | 20 | セキュリティ | 未割当 |
-| [batch-20](batches/batch-20/README.md) | 20 | セキュリティ | 未割当 |
-| [batch-21](batches/batch-21/README.md) | 20 | セキュリティ | 未割当 |
-| [batch-22](batches/batch-22/README.md) | 20 | セキュリティ、開発技術 | 未割当 |
-| [batch-23](batches/batch-23/README.md) | 20 | 開発技術 | 未割当 |
-| [batch-24](batches/batch-24/README.md) | 20 | 開発技術 | 未割当 |
-| [batch-25](batches/batch-25/README.md) | 20 | 開発技術、プロジェクトマネジメント | 未割当 |
-| [batch-26](batches/batch-26/README.md) | 20 | プロジェクトマネジメント | 未割当 |
-| [batch-27](batches/batch-27/README.md) | 20 | プロジェクトマネジメント、サービスマネジメント・監査 | 未割当 |
-| [batch-28](batches/batch-28/README.md) | 20 | サービスマネジメント・監査 | 未割当 |
-| [batch-29](batches/batch-29/README.md) | 20 | サービスマネジメント・監査 | 未割当 |
-| [batch-30](batches/batch-30/README.md) | 20 | サービスマネジメント・監査、システム戦略 | 未割当 |
-| [batch-31](batches/batch-31/README.md) | 20 | システム戦略 | 未割当 |
-| [batch-32](batches/batch-32/README.md) | 20 | システム戦略、経営戦略 | 未割当 |
-| [batch-33](batches/batch-33/README.md) | 20 | 経営戦略 | 未割当 |
-| [batch-34](batches/batch-34/README.md) | 20 | 経営戦略 | 未割当 |
-| [batch-35](batches/batch-35/README.md) | 20 | 経営戦略 | 未割当 |
-| [batch-36](batches/batch-36/README.md) | 20 | 経営戦略、企業活動 | 未割当 |
-| [batch-37](batches/batch-37/README.md) | 20 | 企業活動 | 未割当 |
-| [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | 未割当 |
-| [batch-39](batches/batch-39/README.md) | 20 | 法務 | 未割当 |
+| [batch-15](batches/batch-15/README.md) | 20 | データベース、ネットワーク | ChatGPT作者 ／ 別担当確認（4問修正・20問内容承認・未登録） |
+| [batch-16](batches/batch-16/README.md) | 20 | ネットワーク | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-17](batches/batch-17/README.md) | 20 | ネットワーク、セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-18](batches/batch-18/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-19](batches/batch-19/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-20](batches/batch-20/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-21](batches/batch-21/README.md) | 20 | セキュリティ | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-22](batches/batch-22/README.md) | 20 | セキュリティ、開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-23](batches/batch-23/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-24](batches/batch-24/README.md) | 20 | 開発技術 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-25](batches/batch-25/README.md) | 20 | 開発技術、プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-26](batches/batch-26/README.md) | 20 | プロジェクトマネジメント | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-27](batches/batch-27/README.md) | 20 | プロジェクトマネジメント、サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-28](batches/batch-28/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-29](batches/batch-29/README.md) | 20 | サービスマネジメント・監査 | ChatGPT作者 ／ 別担当確認（20問内容承認・未登録） |
+| [batch-30](batches/batch-30/README.md) | 20 | サービスマネジメント・監査、システム戦略 | [作者草稿 PR #102](https://github.com/donald-shrimp/ap-study/pull/102)・独立未確認（別ブランチ） |
+| [batch-31](batches/batch-31/README.md) | 20 | システム戦略 | [作者草稿 PR #103](https://github.com/donald-shrimp/ap-study/pull/103)・独立未確認（別ブランチ） |
+| [batch-32](batches/batch-32/README.md) | 20 | システム戦略、経営戦略 | [作者草稿 PR #104](https://github.com/donald-shrimp/ap-study/pull/104)・独立未確認（別ブランチ） |
+| [batch-33](batches/batch-33/README.md) | 20 | 経営戦略 | [作者草稿 PR #105](https://github.com/donald-shrimp/ap-study/pull/105)・独立未確認（別ブランチ） |
+| [batch-34](batches/batch-34/README.md) | 20 | 経営戦略 | [作者草稿 PR #106](https://github.com/donald-shrimp/ap-study/pull/106)・独立未確認（別ブランチ） |
+| [batch-35](batches/batch-35/README.md) | 20 | 経営戦略 | [作者草稿 PR #107](https://github.com/donald-shrimp/ap-study/pull/107)・独立未確認（別ブランチ） |
+| [batch-36](batches/batch-36/README.md) | 20 | 経営戦略、企業活動 | [作者草稿 PR #108](https://github.com/donald-shrimp/ap-study/pull/108)・独立未確認（別ブランチ） |
+| [batch-37](batches/batch-37/README.md) | 20 | 企業活動 | [作者草稿 PR #109](https://github.com/donald-shrimp/ap-study/pull/109)・独立未確認（別ブランチ） |
+| [batch-38](batches/batch-38/README.md) | 20 | 企業活動、法務 | [作者草稿 PR #110](https://github.com/donald-shrimp/ap-study/pull/110)・独立未確認（別ブランチ） |
+| [batch-39](batches/batch-39/README.md) | 20 | 法務 | [作者草稿 PR #111](https://github.com/donald-shrimp/ap-study/pull/111)・独立未確認（別ブランチ） |
 
-batch-09の[PR #81](https://github.com/donald-shrimp/ap-study/pull/81)は[初回レビュー](batches/batch-09/review/independent-review.json)の2件をCodexが修正し、[修正後の別担当確認](batches/batch-09/review/correction-independent-review.json)も完了。20問の内容承認は登録・公開済みを意味しない。残り500問の25組はこのブランチでは未着手。別ブランチで進行中の納品は各PRで確認する。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
+batch-09の[PR #81](https://github.com/donald-shrimp/ap-study/pull/81)は[初回レビュー](batches/batch-09/review/independent-review.json)の2件をCodexが修正し、[修正後の別担当確認](batches/batch-09/review/correction-independent-review.json)も完了。20問の内容承認は登録・公開済みを意味しない。次の対象と別ブランチの納品状況は上の表と連続レビュー進捗を参照する。80問の作者と確認者は各組のassignmentに記録し、実際の進捗は[第1回の記録](review/batch-wave-01.json)と[第2回の記録](review/batch-wave-02.json)に保存する。分割・旧教材の配布は内容の承認を意味しない。各組で元の試験回をまたぐ場合があるため、基準日・条件・選択肢に応じて個別に点検する。
 
 第2回で判明したr04a-q13の文字起こし誤記2箇所は、独立確認済みの内容を[訂正台帳](source-corrections.json)で反映し、問題版を3から4へ更新した。旧文字起こし・旧レビュー・baseline・旧学習記録は保持。[訂正後の画面・保存検証](review/source-correction-application/results.json)を保存している。
 
@@ -66,3 +66,35 @@ batch-11は[PR #83](https://github.com/donald-shrimp/ap-study/pull/83)で20問�
 batch-12は[PR #84](https://github.com/donald-shrimp/ap-study/pull/84)で20問の[独立レビュー](batches/batch-12/review/independent-review.json)を完了。根拠と最終ハッシュは実確認者の記録を保持。batch-13は[PR #85](https://github.com/donald-shrimp/ap-study/pull/85)で7問を修正し、[修正後の別担当確認](batches/batch-13/review/correction-independent-review.json)を含め20問の内容承認を完了。
 
 batch-14は[PR #86](https://github.com/donald-shrimp/ap-study/pull/86)で3問を修正し、[最終独立確認](batches/batch-14/review/correction-independent-review.json)を完了。初回元draft・実ハッシュを固定してから修正し、確認対象の版を分離した。
+
+batch-15は[PR #87](https://github.com/donald-shrimp/ap-study/pull/87)で20問を独立確認し、H1の開示判定4問を主担当が訂正、別担当が[最終版を承認](batches/batch-15/review/correction-independent-review.json)した。batch-16〜19の作者草稿80問は別PRに届いているが、ここでは未確認。次はbatch-16をこの確認済みブランチへ追従させてから扱う。
+
+batch-16は[PR #88](https://github.com/donald-shrimp/ap-study/pull/88)で20問を独立確認。主担当による訂正は3問で、[最終独立確認](batches/batch-16/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-17。
+
+batch-17は[PR #89](https://github.com/donald-shrimp/ap-study/pull/89)で20問を独立確認。主担当による訂正は3問で、[最終独立確認](batches/batch-17/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-18。
+
+batch-18は[PR #90](https://github.com/donald-shrimp/ap-study/pull/90)で20問を独立確認。主担当による訂正は2問で、[最終独立確認](batches/batch-18/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-19。
+
+batch-19は[PR #91](https://github.com/donald-shrimp/ap-study/pull/91)で20問を独立確認。主担当による訂正は0問で、[最終独立確認](batches/batch-19/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-20。
+
+batch-19の停止点からユーザーの指示で再開。最新の対象・担当は[連続レビュー進捗](review/continuous-review-progress.json)とPRの最新head/担当から再開する。
+
+batch-20は[PR #92](https://github.com/donald-shrimp/ap-study/pull/92)で20問を独立確認。主担当による訂正は1問で、[最終独立確認](batches/batch-20/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-21。
+
+batch-21は[PR #93](https://github.com/donald-shrimp/ap-study/pull/93)で20問を独立確認。主担当による訂正は4問で、[最終独立確認](batches/batch-21/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-22。
+
+batch-22は[PR #94](https://github.com/donald-shrimp/ap-study/pull/94)で20問を独立確認。主担当による訂正は2問で、[最終独立確認](batches/batch-22/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-23。
+
+batch-23は[PR #95](https://github.com/donald-shrimp/ap-study/pull/95)で20問を独立確認。主担当による訂正は2問で、[最終独立確認](batches/batch-23/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-24。
+
+batch-24は[PR #96](https://github.com/donald-shrimp/ap-study/pull/96)で20問を独立確認。主担当による訂正は2問で、[最終独立確認](batches/batch-24/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-25。
+
+batch-25は[PR #97](https://github.com/donald-shrimp/ap-study/pull/97)で20問を独立確認。主担当による訂正は3問で、[最終独立確認](batches/batch-25/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-26。
+
+batch-26は[PR #98](https://github.com/donald-shrimp/ap-study/pull/98)で20問を独立確認。主担当による訂正は4問で、[最終独立確認](batches/batch-26/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-27。
+
+batch-27は[PR #99](https://github.com/donald-shrimp/ap-study/pull/99)で20問を独立確認。主担当による訂正は1問で、[最終独立確認](batches/batch-27/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-28。
+
+batch-28は[PR #100](https://github.com/donald-shrimp/ap-study/pull/100)で20問を独立確認。主担当による訂正は2問で、[最終独立確認](batches/batch-28/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-29。
+
+batch-29は[PR #101](https://github.com/donald-shrimp/ap-study/pull/101)で20問を独立確認。主担当による訂正は0問で、[最終独立確認](batches/batch-29/review/correction-independent-review.json)と最終ハッシュを保存した。次のレビュー対象はbatch-30。

@@ -1,0 +1,2279 @@
+{
+  "kind": "batch-independent-content-review",
+  "status": "changes_requested",
+  "reviewer": "Codex /root/ap_batch16_review",
+  "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+  "reviewedHead": "9c0a41e869ac6b91073650bc08f2692e2821e750",
+  "author": "ChatGPT/gpt-6-batch16-20261028",
+  "initialHashScope": "作者原稿を初回作業でバイト保存。全beforeEnvelope/lessonハッシュはこの固定ファイルのcanonical JSON SHA256。初回報告を最終承認に読み替えない。",
+  "initialDraftsFile": {
+    "path": "work/ap/objective-quality/batches/batch-16/review/initial-drafts.json",
+    "sha256": "5e8c15d6bb87b739f389bc5b7ee149394cdbbe189beeb01bef0ad4bf91cb3200",
+    "matchesLiveDraftsAtCompletion": true
+  },
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "officialAnswerPDFsIndependentlyRead": 10,
+    "choicesAndReasons": 80,
+    "hints": 60,
+    "approvedInitialNotRegistered": 17,
+    "requiresRevision": 3
+  },
+  "method": "指定4規約・assignment/context/draftsを読み、20原本WebPを個別にview_imageで開いた。全80肢理由/60ヒント/summary/explanation/takeaway/designを読み原問から解き直す。10公式解答PDFをIPA URLから再取得して共有cacheバイト一致と実SHAを確認し、9本はpdftotextで対象番号を読む。r04hは空テキストのため実レンダリングPNGをview_imageで開き問32ウ/33イ/35エを照合。全sourceHashesを実ファイル再計算で照合。3数値問題は手計算に加えPython整数演算/ipaddressで独立検算。開示は問題・全肢・前段累積を含め全誤答除外も判定。",
+  "issues": [
+    {
+      "id": "B16-01",
+      "priority": "P2",
+      "questionId": "r03a-q33",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "宛先サーバとサービスを変えないと明示。アは宛先2項目、イは宛先IP、ウは宛先ポートを含むため全誤答が除外され、エだけ残る",
+      "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+    },
+    {
+      "id": "B16-02",
+      "priority": "P2",
+      "questionId": "r07a-q33",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "UDP全4欄を列挙しア/ウ/エをすべて除外、シーケンス番号の語を使わなくても残るイが確定",
+      "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+    },
+    {
+      "id": "B16-03",
+      "priority": "P2",
+      "questionId": "r05a-q33",
+      "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+      "expectedFlag": true,
+      "reason": "メール送信・機器統計監視・認証を除外してSMTP/SNMP/CHAPの全誤答用途を否定する。名称未提示でも残るICMPが確定",
+      "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r07a-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "d8bfe7fe80928bf314f5c4593bb0950bc2cdf0d595aeb408f390ec8d5efe4b52",
+      "beforeEnvelopeSHA256": "e606260b6dad17af6a5c423c8089c03669d7bdb0b520f6ca57aec62b70f0bb39",
+      "beforeLessonSHA256": "a47c71a92b0c88837c9e5ce2251ed69e1d5ee1ddc45318b88b7b4976edb65b98",
+      "questionSHA256": "4ae6315e55490a366f6c8f4c1f63738474020a8a0e0c99e823dd438a7e8d0e2d",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q34.webp": "946bc05260d2d0ff71bc2ce0cf813b1760e646d681ac155847dd90c1787136d9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07a/r07a-q34.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 34,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 34    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "L2の閉路を木状の転送経路にして遮断するのはSTP。MAC学習だけではブロードキャストループを解消しない。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "IGMPはIPv4マルチキャスト参加管理",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "RIPはIP経路交換",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "SIPはセッション制御",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "STPはL2の論理閉路を除く",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "MAC転送と閉路の障害を説明する段階で、プロトコルとの対応は未提示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "STP正式名称と正答エの機構を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積STP定義に加えて他3プロトコルの用途を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q29",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "a871928abb5c9a7bbe8370ed678888bb5d7ad38d181ece6ac5934d4809e3df49",
+      "beforeEnvelopeSHA256": "53e8dc4f6c10b725f3ef4460936b42f559003ba86ea2858066f157c98d7dcc68",
+      "beforeLessonSHA256": "c01f9036548ff46cd3aca4166a18ef53766f831c8d1f144b6abab7d0302a9880",
+      "questionSHA256": "83cb528acc472f231cbbcbc7f07951807797e93f9a694d1ba09b6f5f065272d9",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q29.webp": "ec7a268909541a14f21a1b1fcb16f3eecf9d6ac1edb46b5785e60075d419c4ea",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07h/r07h-q29.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 29,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 29    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "LANのEthernetケーブルで給電する方式はPower over Ethernet。PLCは媒体の使い方が逆。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "PLCは電力線通信",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "PoEはEthernet給電",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "UPSは無停電電源",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "USBは別の接続媒体",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "通信と給電の向きを整理するが略語との対応は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "PoEの名称とLAN給電定義を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積PoEに他3略語の用途を追加",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q32",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "4b32dc9eaaaa4380cbf63530a6222b90a4ed181992435ac1562cd012fa8701c7",
+      "beforeEnvelopeSHA256": "c7a0ee4528addd5963554ce9bffc2d6fb7d38d04422b09e69aa6f7408258b044",
+      "beforeLessonSHA256": "d84724751a4dba005d66221af4dda5f1d942786724b9c7753bd65f874c73fbc6",
+      "questionSHA256": "5817c6b745a80239dadecd55165eddc5e64e176a7db943e1a5b97f1fc8316ba9",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q32.webp": "ca72a96754b0e0000ef8b4128c8dcd5bc2d0d08917ee627b58a1b801516bdcc6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r04h/r04h-q32.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1,
+        "questionNumber": 32,
+        "page": 1,
+        "answer": "ウ",
+        "questionNumberEvidence": "公式PDFを1800px PNGへ実レンダリングしてview_imageで目視。第2列の問32 正解ウ。",
+        "renderedImagePath": "/workspace/scratch/ap-a-quality-review/batch16-r04h-answer.png"
+      },
+      "officialAnswer": "ウ",
+      "independentAnswer": "ウ",
+      "independentResult": "シリアル回線向けPPPをLANのEthernet上で運ぶのはPPPoE。PPP自体とPPPを包む方式を区別する。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "MPLSはラベル転送",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "PPPは元のリンクプロトコル",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "PPPoEはPPP over Ethernet",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "PPTPはPPPをIPトンネルで運ぶ",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "PPPの入口知識であり、PPPoE/PPTPの運び方比較は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "PPPoEの正式名称と機構を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積定義と残り3肢の役割を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q30",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "b14e43c51063dfcd92b9d03cd0bdc5c81034008d0439be65bcc8adf60b1e5074",
+      "beforeEnvelopeSHA256": "617d8e12aab4c6cd134a5185b012ba35a92c9126d422c63e2799e32ba36ca5e8",
+      "beforeLessonSHA256": "c316ee1ed9b0564726ca3539873a5948c059c8c73a87734e44967edc2143e64a",
+      "questionSHA256": "3976a0e98c83cee44cc2938aa2d1befabad6aaa481195de30616aab3a1bb018f",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q30.webp": "2b8490e4ab86967eb525bfc62ae2169cc85b183e653bfcdb4e3f99f1d18a2e30",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07h/r07h-q30.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 30,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 30    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "MTUはIPパケット上限。MSS=1500-20-20=1460、残り2000-1460=540バイト。Ethernet18バイトはMTU外。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "500はIP/TCP40バイト無視",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "540は第2データ長",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "580は第2IPパケット長",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "598は第2Ethernetフレーム長",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "MTUの境界を教えるがTCPデータ量算出が残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "1460となる減算と残量算出が残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "2000-(1500-20-20)の実計算を本人に残す",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q33",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "ec2e4a0f417796eb6ef4a5b11db60e3b42ae9831722c24470a37f578e9f6a3b6",
+      "beforeEnvelopeSHA256": "6e25831b4e856710e38d4cbd52af9cd57de267436d2c23bda82075a11841661e",
+      "beforeLessonSHA256": "72c81e0aef27efbaed523aa3afcb03b848b106f6612653475bb85a268ee44e6e",
+      "questionSHA256": "70d55e43a421d083fe40802a9e73cd905abcf82cf44f1eb81b2aacc81a5462f6",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q33.webp": "5368b9b9123d5a7c61c9dc598a1f374df965df1650d98aeaaeb55187e4996c2e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r03a/r03a-q33.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 33,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 33    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "外向きNAPTは内部送信元IPとポートの組を外部用へ写す。要求先サーバの宛先IP/ポートは保存。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "宛先2項目の変更は要求先を変える",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "宛先IPを含むため不適切",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "宛先ポートを含むため不適切",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "送信元IPと送信元ポートの組が対象",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": true,
+          "reason": "宛先サーバとサービスを変えないと明示。アは宛先2項目、イは宛先IP、ウは宛先ポートを含むため全誤答が除外され、エだけ残る",
+          "designChecked": true,
+          "verdict": "revise-flag-and-design"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "送信元IP/ポートの変換を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答の送信元2項目と宛先保持を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。H1の名称未提示を理由とする非開示判定は全誤答除外を見落とすため修正が必要。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        {
+          "id": "B16-01",
+          "priority": "P2",
+          "questionId": "r03a-q33",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "宛先サーバとサービスを変えないと明示。アは宛先2項目、イは宛先IP、ウは宛先ポートを含むため全誤答が除外され、エだけ残る",
+          "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+        }
+      ]
+    },
+    {
+      "id": "r05a-q32",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "7ae7abd002e3be4776ce95e16ecf264e02537161c47e785d0579112a691719e6",
+      "beforeEnvelopeSHA256": "c1c0a5c8ee263a270d92a0904283ed3bde82679023aae71f34e5045087e8dc83",
+      "beforeLessonSHA256": "75cb15b92464b4f28ae3f39337432cf35160e4fd5bdc1aa1edcaf0a0fbe26e27",
+      "questionSHA256": "4f69f86947578cb856671987d204a7c1a393da46088ad0beb8d058449e57442a",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q32.webp": "377befaf8472cf74b013b374f60c7f802f5958e2b22c54eb3979698c2bd6c727",
+        "assets/transcriptions/pr-skipped-author/r05a-q32-choice-table.webp": "392f6381e90676cd6be74deec2eab54aa02ceba32f8a7fccc38a9b7638276975",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r05a/r05a-q32.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 32,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 32    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "復路の応答は外部IPと変換ポート宛て。NAPT表により内部PCの宛先IP/宛先ポートへ戻しサーバの送信元は保存。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "送信元IP変更を含み宛先ポートが欠ける",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "宛先IPと宛先ポートの2列が対象",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "往路の送信元変換の組",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "送信元ポート変更を含み宛先IPが欠ける",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "方向反転を教えるがNAPTがどの2項目を変換するかは未提示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答表イの2列を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答表の丸位置を直接指定",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q35",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "9e725366190878ec3600527cf214e210a425f13d84ab37d83ab703ddfcd86f8b",
+      "beforeEnvelopeSHA256": "04cfdd6e019e5854947f815217e36ffcb0a4dd7d1e55656637f160ff5b9bb9d0",
+      "beforeLessonSHA256": "17cab1cc8380e9b59990b344aeaca014e7144f82a566b0ec1966ec75ad7f929f",
+      "questionSHA256": "968391caf3cb6bf427206ccf496896f415f77faddbbcafd397cf16d6249338ba",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q35.webp": "485b23528a83d4943084b8044b28d33245ce5c51d8906f37849dc6dfbe99b3ab",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r03h/r03h-q35.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1403,
+        "questionNumber": 35,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 35    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "OpenFlowのSDNは制御と転送を論理分離しコントローラが転送規則を設定。機能仮想化や分散経路交換とは異なる。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "MIB取得はSNMP監視",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "機器間経路交換は分散経路制御",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "仮想環境の機能実行はNFVの説明",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "制御/転送分離とコントローラ集中制御がSDN",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "制御と転送の役割を定義するがウの仮想化とエの分離構成の比較は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答エの分離と集中制御を定義",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "他3方式を区別して累積正答を確定",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q35",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "6ff447f361f087273767087ba78f237579712b17c15b27e366105a2f0377bf6c",
+      "beforeEnvelopeSHA256": "02bd97898449d1f5b35c1d0a2c68874d3185eec4bdeebd45100cb2bc7d46e6ae",
+      "beforeLessonSHA256": "6a797d0dc10cc7eadc2d213c31094460fd92e58818e509e4bb30d1b22aa86e56",
+      "questionSHA256": "b93b8537e4649b59d48f6a4e1e08bcbcea17cea83fad02886a232078706edbba",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q35.webp": "ddf3a09f7f0828c7d62dedb52d54d972b7fc31262975022f65acfc391f290210",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r04h/r04h-q35.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1,
+        "questionNumber": 35,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "公式PDFを1800px PNGへ実レンダリングしてview_imageで目視。第2列の問35 正解エ。",
+        "renderedImagePath": "/workspace/scratch/ap-a-quality-review/batch16-r04h-answer.png"
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "転送と制御を論理分離して集中制御できるのがSDN。OpenFlowが機器の転送規則設定に使われる。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "名前とIP対応はDNS",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "携帯パケット音声の方式",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "WWNを用いるストレージ網はSAN",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "論理分離と集中制御がSDN",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "制御と転送の基礎的役割を教えるが、両者を分離して集中制御するSDN固有構造は未提示。構成の比較を残す",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "SDN正答エの定義を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "他3用途との差も明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "72722ab70c80571637160450f595b3de014173a0c03a27d7c1c255ef96b1c1bb",
+      "beforeEnvelopeSHA256": "d560ca4bf4273d2c540527b3e1991f65148399c6738f946d598184b039aa9244",
+      "beforeLessonSHA256": "b962ef0685846a85c267004ab9914224891d7855282fa38b3c7e294476993719",
+      "questionSHA256": "b29920e61fb404ac08a684bbe63b30ae3443a947cdc130413305ae4bbf1cfa5d",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q34.webp": "849e65315b2a07d31a28d7c29c12c3ebb4aa698df71f48007e07fc19d6dc0441",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r06h/r06h-q34.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 34,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 34    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "転送装置から制御ソフトウェアを分けて集中制御するイ。仮想スイッチやOSS採用だけでは成立しない。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "単一サーバ内VM間スイッチ通信",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "分離ソフトウェアによる集中制御",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "形式言語での文法記述",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "OSS化はライセンス/公開形態",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "アの仮想スイッチだけを説明しイ/ウ/エの判定は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答イの分離と集中制御を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積定義にOSS/形式言語との差を追加",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "9637d110f9960e2d0ac915b613e8aa1365adec7c73fe29d4aeb6b99eb4341d73",
+      "beforeEnvelopeSHA256": "c567c17c5ac8295c8079b929d079be62817aeb64552aaa1b345ff202a5f1df17",
+      "beforeLessonSHA256": "08505f82c098fe94a459bda96d3426cf197a00ccf0f83e7a7ff20309587d56d3",
+      "questionSHA256": "4afe8ad4cd0bd170d7a1c6e16960400531bf7c78c055485970bb79b43541e7d5",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q34.webp": "759c56376fbcecddd531890ba45dd26251ba97cc3d9a1d9cff546d1f2a0dd374",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r03a/r03a-q34.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 34,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 34    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "UDPの4欄は送信元ポート/宛先ポート/長さ/チェックサム。TCPにあるシーケンス番号はバイト位置による順序・再送管理に使う。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "宛先ポートは両方",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "シーケンス番号はTCPだけ",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "送信元ポートは両方",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "チェックサム欄は両方",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "共通のポート2項目を除外するが、シーケンス番号とチェックサムの機能/ヘッダー有無の知識はまだ残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答シーケンス番号とUDPでの欠如を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "全誤答が共通であることを明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q33",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "d88886f8f0f52b48eb24681a05d58b28dba1147174a5e21095c198089f136c4a",
+      "beforeEnvelopeSHA256": "c769b77bedb714087326eae6a4c7412c640a29063dffa0d4f2189e843282f490",
+      "beforeLessonSHA256": "61bdbaaeddf3d2e6fd85f890ebd034d6e5de97739dd28cc5b09eb3e0fda125b5",
+      "questionSHA256": "f221f74779a1d43246390d858844556d3b140729fce7376a884cc89b002059b3",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q33.webp": "b3d16fddff44da5cfa85a59fd7bf002b7c2ea5f6719e247bb2eaee48a0ba62f4",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07a/r07a-q33.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 33,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 33    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "TCPにはシーケンス番号がありUDPにはない。IPv4 UDPのチェックサムを利用しない場合でも欄が消えるわけではない。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "宛先ポート欄はUDPにもある",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "TCPのシーケンス番号はUDPにない",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "送信元ポート欄はUDPにもある",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "UDPにもチェックサム欄がある",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": true,
+          "reason": "UDP全4欄を列挙しア/ウ/エをすべて除外、シーケンス番号の語を使わなくても残るイが確定",
+          "designChecked": true,
+          "verdict": "revise-flag-and-design"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "シーケンス番号の名称と順序制御を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積正答と共通3項目を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。H1の名称未提示を理由とする非開示判定は全誤答除外を見落とすため修正が必要。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        {
+          "id": "B16-02",
+          "priority": "P2",
+          "questionId": "r07a-q33",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "UDP全4欄を列挙しア/ウ/エをすべて除外、シーケンス番号の語を使わなくても残るイが確定",
+          "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+        }
+      ]
+    },
+    {
+      "id": "r04h-q33",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "e7c10eaf65e6a65a2f53b7ba220e7f0f1ee6e87f7afce0198495bc31955953e3",
+      "beforeEnvelopeSHA256": "0b049573ffe6797fe60b78dcf6ea4b4d23e22673491aafb20622efc97dea51d9",
+      "beforeLessonSHA256": "bdf26c05183f0f0e5147166527e594b26104b6842d105a03c87306359ae6ad81",
+      "questionSHA256": "521c511eac5aa742ca3ce87b5316b0259fddfe8c32d7d2e6ee4dcd2a59378e1b",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q33.webp": "726e646fe45d27dccc7e795439c5734371a990dde84b910361546ecb3273fa82",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r04h/r04h-q33.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1,
+        "questionNumber": 33,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "公式PDFを1800px PNGへ実レンダリングしてview_imageで目視。第2列の問33 正解イ。",
+        "renderedImagePath": "/workspace/scratch/ap-a-quality-review/batch16-r04h-answer.png"
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "NTPはUDP123による時刻同期。FTP/POP3/TELNETは当該標準サービスでTCPを用いる。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "FTPはTCPのファイル転送",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "NTPはUDP123の時刻同期",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "POP3はTCPメール受信",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "TELNETはTCP遠隔端末",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "用途分類だけでUDP使用の対応は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "NTPとUDP123を直接対応",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "他3肢のTCP使用を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q35",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "16dc7c471db94b692f63c0d62dccddb959761a390760903cbefbdcf02fdfdbc4",
+      "beforeEnvelopeSHA256": "d047d37b76f1bb2ea2fbc542ba4580ef76216cc1deeef6eccf3411017dfa8cdf",
+      "beforeLessonSHA256": "3f945144b4f34819cd91f6882b459a62579b6fdf78ac00caaca5ddb46dbd9b4a",
+      "questionSHA256": "d2d4c48d445d6100a50e51454b711fbe1de871998a244139f9c3c0e854e17a88",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q35.webp": "e02797a609a00671732d01899cd855a040fd7e3b3f090377adee7d20fa334c67",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r04a/r04a-q35.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 35,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 35    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "URLのauthority内ではhost:portと指定する。https://www.example.com:8080/member/login?id=user が正しい。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "クエリの値の一部になる",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "スキームの構文を壊す",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "パスの一部になる",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "ホスト直後:8080が受理ポート",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "URL部品の区別にとどまりportの配置は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "ホスト直後という正答条件を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "完成URLを明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q33",
+      "status": "changes_requested",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "1fe4c9a0af3f7c6f12c4b8caddcc0e3e4ac1cd79943617df03c5023fff298daf",
+      "beforeEnvelopeSHA256": "a9ca44c12df9a76a2bf361438eef5962a3ee1654ea1ba404b92ab9cb35bbe1c2",
+      "beforeLessonSHA256": "e00631eebd8a3dfe570c0d755442569de8ca93fbb14378fb1fd8d67c5fddb03d",
+      "questionSHA256": "49b3624115bd034b58c05278504c45967cf2c5cfa6419a1adc8581e9aaaeafe4",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q33.webp": "5966b73c5e9d9ae5d5077bf6f857918556bf098573bcf46f84bbd7d537957ac9",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r05a/r05a-q33.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 33,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 33    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "pingはICMP Echo Request/Replyを使う。応答なしでも遮断の可能性があるので停止は断定できない。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "CHAPは認証",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "ICMPエコーが接続確認",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "SMTPはメール転送",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "SNMPは機器監視管理",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": true,
+          "reason": "メール送信・機器統計監視・認証を除外してSMTP/SNMP/CHAPの全誤答用途を否定する。名称未提示でも残るICMPが確定",
+          "designChecked": true,
+          "verdict": "revise-flag-and-design"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "ICMP正式名称とEchoを明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積ICMPに他3用途も明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。H1の名称未提示を理由とする非開示判定は全誤答除外を見落とすため修正が必要。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        {
+          "id": "B16-03",
+          "priority": "P2",
+          "questionId": "r05a-q33",
+          "path": "lesson.hints[0].revealsAnswer / design.stages[0]",
+          "expectedFlag": true,
+          "reason": "メール送信・機器統計監視・認証を除外してSMTP/SNMP/CHAPの全誤答用途を否定する。名称未提示でも残るICMPが確定",
+          "requestedChange": "H1をtrueにし、design.stages[0]のrevealsAnswer/reason/remainingWorkを同期する。本文は保持可能。false維持には全誤答除外を成立させない内容へ書き換えて再確認する。"
+        }
+      ]
+    },
+    {
+      "id": "r05h-q33",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "307a0af9871da13b929ca1247074409d38d6f96205eeda81e8d498dc3c434da5",
+      "beforeEnvelopeSHA256": "640085b84b84e861359222011fc33e6c9c27d47643a3f1b4170402f8fdb784e2",
+      "beforeLessonSHA256": "8ca8bb160316e25e15c0a9d497a6d84c6257819d880db81309492ab07156406f",
+      "questionSHA256": "f13539e9acedca09ccf5d331fc2c1aa459a8944c1e18d69e92054db5e3b56be8",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q33.webp": "19d0e60b3af2f164c2ee0be078079e83f523f2714e40f79f99e6a0fa956767e8",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r05h/r05h-q33.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 33,
+        "page": 1,
+        "answer": "ウ",
+        "questionNumberEvidence": "問 33    ウ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "ウ",
+      "independentAnswer": "ウ",
+      "independentResult": "線上ではEthernetヘッダー→IPヘッダー→TCPヘッダー。対応する宛先MAC→宛先IP→宛先ポートの順。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "IPより先にMACがある",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "MACは最後でなく先頭側",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "MAC/IP/portが外から内へ並ぶ",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "IPよりTCPを先に置いており逆",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "カプセル化と外側送出の原理を教えるが3宛先情報がどのヘッダーにあるかの知識は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "前段の外側順と3フィールド対応を累積すると正答配列が示される",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "正答の3項目順を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06a-q35",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "bfac0e7c00878c8f028d642f1b2480111cf2d6bafaeca515484588501842151f",
+      "beforeEnvelopeSHA256": "cc36f96493191ed7e7d5220fd0e0c5a6b671520beb008ec9f0886c09e0f42862",
+      "beforeLessonSHA256": "ee1ea012673b7bf6ab85ce7cc93da5fe9573a3b23eaf5c0067e60364b838b55a",
+      "questionSHA256": "3d443e2ec331a01765d53cbcde984b719186d754829292a021216f87b768f3cd",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q35.webp": "717734b70bae5f0a14f8d169b001d9be4fc7bcd9b87415b84ae38eb32f0b682a",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r06a/r06a-q35.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 35,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 35    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "従来のクラスDは224.0.0.0/4のマルチキャスト用でユニキャストのホスト規模やプライベート用途とは異なる。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "約254台は従来クラスC",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "約65534台は従来クラスB",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "私用ユニキャストはクラスD用途でない",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "クラスDのマルチキャスト用途",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "A-Cの規模軸と用途軸の区別。クラスDの通信方式や範囲はまだ提示せずウ/エの判別が残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "クラスD範囲とマルチキャストを明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "グループ宛ての定義と規模肢除外を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q32",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "f290be2490fe6c861ed834114e8d0551e0636cfe4c7e4106d0573892e6706c74",
+      "beforeEnvelopeSHA256": "b225e0df298d49470395a7585dd6324d6065276be5f311d75891b48307df1faa",
+      "beforeLessonSHA256": "dc5021382b996b0af9fbf0dc0fef5569f4ace97034437e5d4169766ff26730cd",
+      "questionSHA256": "43a4b89a7fc4c0c4d522029fa7fb7686d410c657f8a004fccd1d84f4da6cdf11",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q32.webp": "bbd993e450d3171bd9c00afe6f71b4e194d0aecd044ca1518cd80ed7c8eec579",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07a/r07a-q32.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 32,
+        "page": 1,
+        "answer": "ア",
+        "questionNumberEvidence": "問 32    ア",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "ア",
+      "independentAnswer": "ア",
+      "independentResult": "固定クラス境界に依存せずプレフィックス長でアドレスブロックを割り当てるCIDR。自動設定/名前解決/変換は別機能。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "CIDRはクラスレス割当て",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "DHCPは設定自動配布",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "DNSは名前とIP等の対応",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "NAPTはIP/port変換",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "/27という表記と問いの範囲を説明するがCIDRとの名称対応は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "CIDR正式名称と割当て定義を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "累積CIDRと他3方式を区別",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "0e11c9170b33965a19f2959840c518dc36ee57458f2bc70389fd3d3c732c3895",
+      "beforeEnvelopeSHA256": "5cb4d576c55312219f08f0182b4985b8f0bcacff3fb1bf7c45e794dcaab29530",
+      "beforeLessonSHA256": "8516808d97da2495bf41c057e98874847828c845c724c476ea374c6a9e27659d",
+      "questionSHA256": "3db2ba22075e77b9c405b5f8b1f71485718cc729dcfc2883878692295ef6b7ed",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q34.webp": "25396ffe4218b9b67b9172ba13bae38d7720fb356ff16bdedeb28be73fe51007",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r04a/r04a-q34.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 34,
+        "page": 1,
+        "answer": "エ",
+        "questionNumberEvidence": "問 34    エ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "エ",
+      "independentAnswer": "エ",
+      "independentResult": "コネクションレスで確認応答/順序制御がないIP上位トランスポートはUDP。アプリ側で追加の信頼性を実装することはできる。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "ICMPは制御診断",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "PPPはデータリンク",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "TCPは接続/順序/再送制御あり",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "UDPは当該制御なしのデータグラム",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "PPP/ICMPを除外するがTCP/UDPの信頼性機構比較は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "TCPとUDPを対比し正答UDPを明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": true,
+          "expectedFlag": true,
+          "reason": "UDP定義とアプリ側補完を明示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q34",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "440bd1ecce7f650adbdd0104af0611b6fd6dac4ee39280d98e7eb43655024add",
+      "beforeEnvelopeSHA256": "7cfe026b39c5d536877531cc98452f11544652b1f79f5cc833cd2e071b1f6442",
+      "beforeLessonSHA256": "78b5e39b78370fbf1b0c1e217f991ef4191af204ae6e5c4bdd1c66e41294458d",
+      "questionSHA256": "b077af4cf72361aac57e99f02387ac196246cea8bb8774746c6287e29a68176e",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q34.webp": "bb8c1c60d29a33e202521a9356fe443d942a7dde060bb472133c801afd852f78",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r05a/r05a-q34.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468,
+        "questionNumber": 34,
+        "page": 1,
+        "answer": "イ",
+        "questionNumberEvidence": "問 34    イ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "イ",
+      "independentAnswer": "イ",
+      "independentResult": "255.255.252.0は/22。123 AND252=120、45 AND0=0、したがって172.30.120.0。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "3は第3オクテットのホスト部分",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "172.30.120.0がANDの結果",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "123の下位2bitを落としていない",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "252はマスクでAND結果ではない",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "AND規則を示すが第3オクテット計算は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "マスクの下位2bit除去または4刻みを教え123への適用は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "具体ビット列または4の倍数を実際に計算する必要がある",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q32",
+      "status": "approved-initial-not-registered",
+      "reviewer": "Codex /root/ap_batch16_review",
+      "checkedAt": "2026-10-28T03:25:59.251385+00:00",
+      "baseVersion": 2,
+      "baseLessonSHA256": "1eb2497abb32dc0f9d4505ee5ac1ebba5d2b63b08dc3ad1417040a3820e18b99",
+      "beforeEnvelopeSHA256": "840730d8bff7d9398ab8948c3f3417944d85b14bc4366e3ee77cfcd251401a6b",
+      "beforeLessonSHA256": "ad61086d825d0e1858cc1de38d9db8ea3ba6a8a1159eb4e64150889c49b1633b",
+      "questionSHA256": "e8ffe648701ce8fff6979bd2c9aba5392dc650663e9c793d0fa0d955a81564bd",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q32.webp": "f6a4433dfcbdcc3c657ff74cd9123671ad57bd71f8c702aab0134204aa8aa7ad",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "sourceImagesActuallyOpened": [
+        "/workspace/ap-study-batch16-review/assets/questions/r07h/r07h-q32.webp"
+      ],
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473,
+        "questionNumber": 32,
+        "page": 1,
+        "answer": "ウ",
+        "questionNumberEvidence": "問 32    ウ",
+        "renderedImagePath": null
+      },
+      "officialAnswer": "ウ",
+      "independentAnswer": "ウ",
+      "independentResult": "/26範囲は10.16.32.64〜127。機器用65〜126から降順の10番目=126-9=117。",
+      "choiceReview": [
+        {
+          "label": "ア",
+          "independentReason": "54はサブネット外",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "イ",
+          "independentReason": "55もサブネット外",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "ウ",
+          "independentReason": "117は降順10番目",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "label": "エ",
+          "independentReason": "118は降順9番目",
+          "draftReasonChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "hintReview": [
+        {
+          "stage": 1,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "範囲64〜127を示すが両端除外と10番目計算は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 2,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "最大機器アドレス126を教えるが順位計算は残る",
+          "designChecked": true,
+          "verdict": "consistent"
+        },
+        {
+          "stage": 3,
+          "actualFlag": false,
+          "expectedFlag": false,
+          "reason": "126-(10-1)という式の実計算が残り最終値は未提示",
+          "designChecked": true,
+          "verdict": "consistent"
+        }
+      ],
+      "lessonFieldsRead": [
+        "summary",
+        "explanation",
+        "choiceReasons[0..3]",
+        "takeaway",
+        "hints[0..2]"
+      ],
+      "summaryExplanationTakeawayReview": "論点・根拠・再利用知識を原問に照合。上記独立結果に一致し、装飾は判断箇所の限定強調。",
+      "designReview": "obstacle/stages/changes/sourceNotes全項目を確認。残る学習者の計算・比較・用語対応と各段階の新知識を確認。作者の公式PDF未照合記録は当時の未実施として保持され、今回の独立PDF照合と区別する。",
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    }
+  ],
+  "verificationEvidence": {
+    "officialAnswerPDFs": [
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1403
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1468
+      },
+      {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "redownloadMatchesCache": true,
+        "textCharacters": 1473
+      }
+    ],
+    "numericChecks": {
+      "r07h-q30": "2000-(1500-20-20)=540 bytes",
+      "r05a-q34": "123 & 252 = 120; /22 network=172.30.120.0",
+      "r07h-q32": "list(ip_network(10.16.32.64/26).hosts())[-10]=10.16.32.117"
+    },
+    "timeScope": "2021〜2025出題当時のIPv4/TCP/UDP/NAPT/OpenFlow/URL仕様。現行改定や機器別の任意実装を混ぜない。"
+  },
+  "rulesSHA256": {
+    "AGENTS.md": "ee6f87e4811a389521d2be0a4a6e88e18e18960b16bc7b6dcf1f07d6cb280112",
+    "docs/ap-a-content-upgrade.md": "e18b038a9ed283d617cc889a104f59a50edccb04c9259340914386432b883869",
+    "docs/hint-authoring.md": "7ddd237b34d5bb088db3fe29617c81594f89a9febc53c4af177a6427a58cadd7",
+    "docs/explanation-authoring-rules.md": "54fd8f45c52bafb3032a88140e4989fae0193f5c0ec1d87cc36032f705cbfbf9"
+  },
+  "registered": false,
+  "published": false,
+  "limitations": [
+    "初学者試用と実アプリ表示試験は実施していない。",
+    "初回報告であり、修正後の最終教材を再確認するまではreviews.jsonへ承認を書かない。"
+  ],
+  "next": "修正担当rootへ3件を返し、修正後の最終ハッシュを別担当として再確認する。"
+}
