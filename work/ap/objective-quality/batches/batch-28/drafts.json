@@ -3,11 +3,11 @@
     "id": "r03a-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "aef06f355c2af909bee18e33bcdcb260f9033433c4200e829065cf0b2d237ded",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q58",
-      "summary": "アジャイル監査では実装へのフィードバックを確認する",
+      "summary": "アジャイル開発の監査で、反復的な成果の提示と関係者からのフィードバックを確認する意義を問う。",
       "explanation": "正解はウ。アジャイル開発では機能を反復的に実装し、利害関係者に示してフィードバックを得ながら調整する。監査では、このような関係者との協働が行われていることを確認する。工程を一回ずつ順次完了する開発方式に置き換えて評価しない。",
       "choiceReasons": [
         "各工程を逐次的に進めるのはウォータフォール型の考え方で、アジャイルの反復的な開発を評価する着眼点ではない。",
@@ -19,58 +19,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補の確認対象を、工程の進め方・チームの構成・関係者との確認・リリース計画の時期に分け、アジャイル開発の監査として順に点検する。",
+          "text": "**アジャイル開発**は、短い反復で動く機能を作り、利用者の反応を受けて次の改善へつなげます。ウォータフォール型のように全工程を一度ずつ順番に終えることとは進め方が異なります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "反復開発では、動く機能を示して要求とのずれを早期に発見する。関係者からのフィードバックが重要になる。",
+          "text": "例えば1回の開発で検索画面を作ったら、**関係者に実際の画面を見せ、使い勝手の意見を得る**ことで要求とのずれを早期に発見できます。監査ではその協働の有無が着眼点です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "実装済み機能のデモとフィードバックを確認するウが適切である。",
+          "text": "実装した機能の**デモとフィードバック取得**があるウです。開発部門だけの閉じたチームを要求したり、リリース計画を全作業完了後まで待ったりするものではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ウォータフォールの工程別完了と、アジャイルの反復・対話の違いが分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**アジャイル開発**は、短い反復で動く機能を作り、利用者の反応を受けて次の改善へつなげます。ウォータフォール型のように全工程を一度ずつ順番に終えることとは進め方が異なります。",
+          "remainingWork": "各肢が反復的な確認に役立つかを調べる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "進め方の基礎は説明するが特定肢は指定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば1回の開発で検索画面を作ったら、**関係者に実際の画面を見せ、使い勝手の意見を得る**ことで要求とのずれを早期に発見できます。監査ではその協働の有無が着眼点です。",
+          "remainingWork": "デモと意見回収を記した肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウのデモンストレーションとフィードバックを実質的に示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "実装した機能の**デモとフィードバック取得**があるウです。開発部門だけの閉じたチームを要求したり、リリース計画を全作業完了後まで待ったりするものではありません。",
+          "remainingWork": "アジャイルと逐次開発の差を再確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答ウを明示した。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03a/r03a-q58.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：903bac15d56a7dc5ee83067fa68d50c94ff72cd9bc872173e2c1544051dbcc87（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ウ と原本選択肢を照合。問題固有の障害：ウォータフォールの工程別完了と、アジャイルの反復・対話の違いが分からない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "3570c33d6e8f4b9e94f476ba0ac6a18cb80d323f8447284ef0ea2ec51b866e14",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q60",
-      "summary": "イ。異常アクセス検出後の対処・報告は個別の統制の実施状況です。",
-      "explanation": "コントロールの視点では、リスクを抑える具体的な仕組みや手順が設計され、実行されているかを評価します。異常アクセスを検出した際の適時の対処・報告は、個別の統制手続です。\n投資成果や新技術の戦略活用はガバナンス、PDCAによる管理はマネジメントの視点に関わります。",
+      "summary": "システム監査のガバナンス・マネジメント・コントロールの三視点を、現場の統制手続から区別する。",
+      "explanation": "システム監査の視点は、**ガバナンス**＝経営方針・投資などの統治、**マネジメント**＝方針に沿った管理体制・継続的改善、**コントロール**＝現場の具体的なリスク対策・統制手続という層で分けられます。例えば異常アクセスの発見後に担当者が適時に遮断・報告する手順が実際に動くかの確認はコントロールです。**PDCA（Plan・Do・Check・Act：計画・実行・評価・改善）**を用いた対策全体の管理はマネジメントで、IT投資の成果や技術の経営戦略への活用はガバナンスです。",
       "choiceReasons": [
         "IT投資が適切な成果を上げるかという経営・統治の視点です。",
         "検出後に必要な対処と報告を行う具体的な統制手続の評価なので、コントロールの視点です。",
@@ -81,57 +88,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "経営上の方向や成果、管理の仕組み、現場の個別手続という三つの層を分けます。",
+          "text": "**ガバナンス**は経営の統治、**マネジメント**は組織的な管理・改善、**コントロール**は個々のリスクを防止・検出・是正する現場の手続です。『誰が何を実際に行うか』に注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "異常アクセスを見つけたら担当者が対応し報告する、という手順が実際に守られるかは個別の統制です。",
+          "text": "例えば不正アクセスを検知した際に、担当者が**速やかに対処し報告できたか**は具体的な統制手続です。一方、PDCA（計画・実行・評価・改善）で対策全体を回すのは管理の仕組みです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "PDCAで全体を管理する説明、投資リターンや新技術の戦略活用の説明を、それぞれ管理・統治の側へ分けましょう。",
+          "text": "異常アクセス後の対処・報告を確かめる**イ**がコントロールです。投資効果・技術活用はガバナンス、PDCAでのセキュリティ管理はマネジメントです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ガバナンス・マネジメント・コントロールがいずれも『管理』に見え区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ガバナンス**は経営の統治、**マネジメント**は組織的な管理・改善、**コントロール**は個々のリスクを防止・検出・是正する現場の手続です。『誰が何を実際に行うか』に注目します。",
+          "remainingWork": "各肢がどの層の行動を確認しているか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "三層の定義だけで全肢への適用は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば不正アクセスを検知した際に、担当者が**速やかに対処し報告できたか**は具体的な統制手続です。一方、PDCA（計画・実行・評価・改善）で対策全体を回すのは管理の仕組みです。",
+          "remainingWork": "具体的な手続を示す肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの内容そのものを示している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "異常アクセス後の対処・報告を確かめる**イ**がコントロールです。投資効果・技術活用はガバナンス、PDCAでのセキュリティ管理はマネジメントです。",
+          "remainingWork": "管理視点と個別統制の差を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示する。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r07a/r07a-q60.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：f1d927255d5d85e554d9807d2611102df9015a3adb2be1f28ecdc9ff3e3138cf（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：ガバナンス・マネジメント・コントロールがいずれも『管理』に見え区別できない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "b1dcb1e452a71d75dbbeb3e1a22ea69a4dafee3be9ecdaaa97ba8307ca340e88",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q56",
-      "summary": "サービスレベルのレビューは、あらかじめ定めた間隔で実施します。",
+      "summary": "サービスレベル目標のパフォーマンスレビューを、どのタイミングで行う規格要件かを問う。",
       "explanation": "JIS Q 20000-1:2020では、サービスレベル目標に照らしたパフォーマンスを監視し、あらかじめ定めた間隔でレビューして顧客に報告します。目標未達やSLA変更を待つだけでは、定期的な評価の要件を満たせません。イが規定されたタイミングです。",
       "choiceReasons": [
         "SLAの大きな変更だけを契機にすると、定めた間隔でのレビューを満たしません。",
@@ -143,57 +158,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補は変更時、定めた間隔、必要時、未達継続時というタイミングの違いです。",
+          "text": "**JIS（日本産業規格）Q 20000-1**はサービスマネジメントの要求事項です。**SLA（Service Level Agreement：サービスレベル合意書）**は『稼働率99.9％以上』など顧客と合意したサービス水準を示します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "目標を達成している期間にもパフォーマンスを確認・報告する必要があることを考えます。",
-          "revealsAnswer": false
+          "text": "サービスが好調でも、目標を守れているか**定期的に測定・振り返り**しないと悪化の兆候に気付けません。規格が要求するのは事前に決めた周期でのレビューです。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "規格が求めるのは「あらかじめ定めた間隔」です。事象が発生したときだけの候補と区別します。",
+          "text": "必要時や目標未達時だけでなく、**あらかじめ定めた間隔**で実施するイです。変更発生時の追加レビューを否定するものではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SLAを知らず、『問題が起きたときだけレビューすればよい』と考えがち。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**JIS（日本産業規格）Q 20000-1**はサービスマネジメントの要求事項です。**SLA（Service Level Agreement：サービスレベル合意書）**は『稼働率99.9％以上』など顧客と合意したサービス水準を示します。",
+          "remainingWork": "合意目標の達成をいつ確認する必要があるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "略語と例を教えるがレビュー周期はまだ言わない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "サービスが好調でも、目標を守れているか**定期的に測定・振り返り**しないと悪化の兆候に気付けません。規格が要求するのは事前に決めた周期でのレビューです。",
+          "remainingWork": "事前に周期を定める候補を見つける",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの『あらかじめ定めた間隔』を実質的に開示する。"
+        },
+        {
+          "newInformation": "必要時や目標未達時だけでなく、**あらかじめ定めた間隔**で実施するイです。変更発生時の追加レビューを否定するものではありません。",
+          "remainingWork": "定期実施と臨時レビューを区別する",
+          "revealsAnswer": true,
+          "reason": "正答イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r05h/r05h-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：6f9a089c61d415ae71a210ef8bb0de88e5162463fa92bd9fd82043d510cae756（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：SLAを知らず、『問題が起きたときだけレビューすればよい』と考えがち。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "b77ed318b26dfb6962286a0bce66359c04f46108f698fd2eb53015f4243091c8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q56",
-      "summary": "エ。サービスと目標水準を定め、顧客とSLAを合意するのがサービスレベル管理です。",
+      "summary": "サービスレベル管理の顧客との目標合意を、資源・財務・継続性の管理と区別する。",
       "explanation": "サービスレベル管理は、提供するサービスの要求を把握し、サービスレベル目標を顧客と合意して管理する活動です。合意をSLA（Service Level Agreement）などの文書にし、達成状況を測定・確認します。\n資源能力の予測、資金確保、災害時の復旧はサービス運用の別の活動です。",
       "choiceReasons": [
         "アは資源量の調整と将来予測を行うキャパシティ管理です。",
@@ -205,57 +227,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の対象を、資源・資金・中断時の復旧・顧客との目標合意に分けます。",
+          "text": "**サービスレベル**は提供サービスの達成すべき水準で、例えば『問い合わせの90％に1営業日以内に応答』のように測れます。サービス管理には資源、予算、災害復旧など別の活動もあります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "「応答時間を何秒以内にする」など、提供するサービスの水準を顧客と合意して測れる形にします。",
+          "text": "**SLA（Service Level Agreement：サービスレベル合意書）**は提供者と顧客がサービスの内容・水準を文書で合意したものです。サービスレベル管理では、この目標を決めて合意し、達成状況を確認します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "サービスと目標を決定して顧客と文書を交わす記述を、SLAに対応させます。",
+          "text": "**提供サービスと目標を決め、顧客と合意文書を交わす**エです。アはキャパシティ、イは財務、ウはサービス継続性の管理です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "サービスレベルが曖昧で、SLAの正式名称と目標合意の役割を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**サービスレベル**は提供サービスの達成すべき水準で、例えば『問い合わせの90％に1営業日以内に応答』のように測れます。サービス管理には資源、予算、災害復旧など別の活動もあります。",
+          "remainingWork": "どの肢がサービスの水準と顧客合意を扱うか探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "例と分類だけで特定肢は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**SLA（Service Level Agreement：サービスレベル合意書）**は提供者と顧客がサービスの内容・水準を文書で合意したものです。サービスレベル管理では、この目標を決めて合意し、達成状況を確認します。",
+          "remainingWork": "SLAを交わす行動を記す肢と対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エの定義そのもの。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**提供サービスと目標を決め、顧客と合意文書を交わす**エです。アはキャパシティ、イは財務、ウはサービス継続性の管理です。",
+          "remainingWork": "SLAと災害復旧計画の違いを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r06h/r06h-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：e4cb991954d286fa857a3b7db4124d74e90790a16922c3cd66cd6c11a3c35bb5（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 エ と原本選択肢を照合。問題固有の障害：サービスレベルが曖昧で、SLAの正式名称と目標合意の役割を知らない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "d0b8139445eb8209a647c8541d0c1affd3aacc1b0be263da356607c436262d5a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q56",
-      "summary": "ア。サービス・ポートフォリオには検討中から廃止済みまで全サービスを含めます。",
+      "summary": "ITIL 2011のサービス・ポートフォリオが、検討中・稼働中・廃止済みのどの範囲を含むかを問う。",
       "explanation": "サービス・ポートフォリオはサービス・プロバイダが管理する全サービスの集合で、約束事項と投資を表します。検討中・開発中のサービス・パイプライン、稼働中・展開可能なサービス・カタログ、廃止済みサービスを含みます。顧客に公開するカタログだけと混同しないことが重要です。",
       "choiceReasons": [
         "検討中・開発中、稼働中・展開可能、廃止済みの全サービスを含める説明が一致します。",
@@ -267,57 +296,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が含むサービスの状態を「検討・開発」「稼働・展開可能」「廃止」の三列で書き出します。",
+          "text": "**ITIL**はITサービス管理のベストプラクティス集です。サービスには『検討・開発中』『提供中』『廃止済み』の段階があります。顧客が申し込めるサービスの一覧だけで全てを表せるか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "顧客が今利用できる一覧と、プロバイダが投資や約束事項を管理する全体の一覧を分けて考えます。",
-          "revealsAnswer": false
+          "text": "**サービス・カタログ**は顧客に見せる利用可能なサービスの一覧。**サービス・ポートフォリオ**は投資・約束事項を管理するため、将来のパイプラインから現在のカタログ、過去の廃止サービスまで含む全体像です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "全体の管理対象にはパイプライン、カタログ、廃止済みのすべてが含まれます。",
+          "text": "**検討・開発中／稼働・展開可能／廃止済み**を全て含めるアです。イはカタログだけを説明し、ウ・エは一部の段階を欠きます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "顧客に公開するサービス・カタログと、内部で全ライフサイクルを管理するポートフォリオを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ITIL**はITサービス管理のベストプラクティス集です。サービスには『検討・開発中』『提供中』『廃止済み』の段階があります。顧客が申し込めるサービスの一覧だけで全てを表せるか考えます。",
+          "remainingWork": "候補ごとに三段階の包含範囲を確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "サービス状態の整理だけで全てを含むべきか未開示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**サービス・カタログ**は顧客に見せる利用可能なサービスの一覧。**サービス・ポートフォリオ**は投資・約束事項を管理するため、将来のパイプラインから現在のカタログ、過去の廃止サービスまで含む全体像です。",
+          "remainingWork": "三段階を全部含む肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "全状態を含むアと同一の説明で開示。"
+        },
+        {
+          "newInformation": "**検討・開発中／稼働・展開可能／廃止済み**を全て含めるアです。イはカタログだけを説明し、ウ・エは一部の段階を欠きます。",
+          "remainingWork": "カタログとポートフォリオの差を説明する",
+          "revealsAnswer": true,
+          "reason": "正答アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03h/r03h-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：3cb80a34c69f487f72e30087bb21ccee9663b817badc12e8cf9b0e09e24cc81a（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ア と原本選択肢を照合。問題固有の障害：顧客に公開するサービス・カタログと、内部で全ライフサイクルを管理するポートフォリオを混同する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "ba87cf44985d7caacbe7e1cc2d0880e9efdc73e35250574971804daeb08d3ba5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q60",
-      "summary": "ア。システム監査人の行為規範として監査業務の品質を確保します。",
+      "summary": "システム監査基準とシステム管理基準の役割の違いを、監査人の行為規範から判断する。",
       "explanation": "システム監査基準は、監査人の独立性、能力、実施、報告などについての行為規範を示し、有効で効率的な監査と監査業務の品質を支えます。監査対象の管理状態を判断するシステム管理基準とは役割が異なります。",
       "choiceReasons": [
         "監査人の行為規範によって監査の品質を確保する意義です。",
@@ -329,57 +365,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補の主語が監査人か監査対象組織かを確認します。",
+          "text": "**監査基準**は監査を『どう適切に実施するか』、**管理基準**は監査対象の情報システムが『どう管理されるべきか』という違う役割です。監査する人と監査される組織を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "監査業務をどう実施するかの基準と、管理が適切かを判定する基準を分けます。",
-          "revealsAnswer": false
+          "text": "監査には独立した立場、適切な手順、証拠に基づく報告などが必要です。こうした**システム監査人の行為規範**によって、監査自体の品質を確保します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "監査人の行為規範として品質を確保する候補を選びます。",
+          "text": "**監査業務の品質を確保する監査人の行為規範**を述べるアが正解です。ウ・エは監査対象の管理を評価する基準側の説明です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "監査する側の規範と、監査対象の管理を評価する物差しが同じに見える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**監査基準**は監査を『どう適切に実施するか』、**管理基準**は監査対象の情報システムが『どう管理されるべきか』という違う役割です。監査する人と監査される組織を分けます。",
+          "remainingWork": "監査人の行動に関する記述を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "二基準の概要のみで正答の全文は示していない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査には独立した立場、適切な手順、証拠に基づく報告などが必要です。こうした**システム監査人の行為規範**によって、監査自体の品質を確保します。",
+          "remainingWork": "監査人の行為規範を説明した肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アの定義と同一なので開示。"
+        },
+        {
+          "newInformation": "**監査業務の品質を確保する監査人の行為規範**を述べるアが正解です。ウ・エは監査対象の管理を評価する基準側の説明です。",
+          "remainingWork": "監査基準と管理基準の主体を整理する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r04a/r04a-q60.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：6133fc4e2b079263e567e98f8d4e81655c5dfc258ba00e8b6df387095a0f4cf9（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ア と原本選択肢を照合。問題固有の障害：監査する側の規範と、監査対象の管理を評価する物差しが同じに見える。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "2e7030a9fbd4e218e9740681b13d418553159689d41ca0157cff6051cc41d50e",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q56",
-      "summary": "週の必要勤務数からオペレータ人数を求める",
+      "summary": "24時間運用に必要な週の勤務枠を数え、1人当たりの勤務回数上限から最少人数を求める。",
       "explanation": "正解はイ、9人。7日間に必要な勤務は3シフト/日×2人/シフト×7日＝42回。1人の勤務は7日で最大5回なので、人数は42÷5＝8.4を切り上げた9人が最少となる。9人なら週45回まで担当でき、必要な42回を割り当てられる。",
       "choiceReasons": [
         "8人では最大8×5＝40回で、必要な42回に2回足りない。",
@@ -391,57 +434,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「7日間当たり5回以内」に合わせ、まず7日間に必要な人の勤務回数を数える。",
+          "text": "**シフト**は交代勤務の一枠です。1日3シフト、各枠2人なら、1日には **3×2＝6人回** の勤務が必要。『人回』は実人数ではなく、人が1回勤務する枠を数えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "1日には3×2＝6回の勤務が必要。7日で6×7＝42回となり、これを1人当たり最大5回で分担する。",
+          "text": "7日分の必要枠は **3×2×7＝42人回**。1人が7日間に担当できるのは最大5回なので、**必要人数＝42÷5を切り上げる**と求められます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "42÷5＝8.4なので人数は切上げて9人。8人の40回では不足する。",
+          "text": "42÷5＝8.4なので**9人（イ）**。8人では8×5＝40人回で足りず、9人なら上限45人回で42人回を分担できます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "3シフト×2人をそのまま人数と考え、7日と週5回制限を取り込めない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**シフト**は交代勤務の一枠です。1日3シフト、各枠2人なら、1日には **3×2＝6人回** の勤務が必要。『人回』は実人数ではなく、人が1回勤務する枠を数えます。",
+          "remainingWork": "必要な1週間分の人回を求める",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "1日分だけ計算し週の人数は本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "7日分の必要枠は **3×2×7＝42人回**。1人が7日間に担当できるのは最大5回なので、**必要人数＝42÷5を切り上げる**と求められます。",
+          "remainingWork": "割り算を実行し不足しない整数人数へ切り上げる",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "最終整数の計算を残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "42÷5＝8.4なので**9人（イ）**。8人では8×5＝40人回で足りず、9人なら上限45人回で42人回を分担できます。",
+          "remainingWork": "勤務回数制約と切上げの根拠を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "9人とイを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03a/r03a-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：8529b2befb148d6f263c68cc7eb619b7aa030524b4bd5b0436a34714ff9d73bf（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：3シフト×2人をそのまま人数と考え、7日と週5回制限を取り込めない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "194463e81c74c0a2a27c85946a3bb217b297a0a770f627d74fca500e4068ce9c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q56",
-      "summary": "ウ。少なくとも12人が必要です。",
+      "summary": "サービスデスクの週の必要シフト枠と40時間労働制限から、最少要員数を求める。",
       "explanation": "1日に必要なシフト勤務は2+4+2=8人回、1週間では8×7=56人回です。1シフトの労働は7.5時間なので、1人は週40時間以内で最大⌊40/7.5⌋=5回勤務できます。11人では55回で不足し、12人なら60回まで割り当てられるため少なくとも12人です。休憩を除いた7.5時間を使います。",
       "choiceReasons": [
         "8人が全員毎日働くと週52.5時間となり、40時間制限を超えます。",
@@ -453,57 +503,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "必要人数2,4,2を足し、7日分のシフト回数を求めます。",
+          "text": "早番2人、日中4人、遅番2人なので **1日2＋4＋2＝8人回** の勤務枠が必要です。拘束時間8.5時間には**休憩1時間**を含み、労働時間は1シフト**7.5時間**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "1回7.5時間なので40÷7.5で1人の週勤務回数を見積もります。シフトを途中で分割できず40時間を超えてはならないため、端数は切り上げず切り捨てます。",
+          "text": "週の必要枠は **8×7＝56人回**。1人の上限は **40÷7.5＝5.33…回** ですが、1回の勤務を分割できないので**5回まで（切捨て）**。必要人数は56÷5を切り上げます。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "週56回が必要です。1人は5回までなので11人と12人の上限を比べます。",
+          "text": "11人なら最大55回で1回不足。12人なら最大60回なので、少なくとも**12人（ウ）**です。必要枠には引継ぎの重複人数が既に勤務表で反映されています。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "拘束8.5時間と実労働7.5時間を混同し、勤務回数の端数を切り上げてしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "早番2人、日中4人、遅番2人なので **1日2＋4＋2＝8人回** の勤務枠が必要です。拘束時間8.5時間には**休憩1時間**を含み、労働時間は1シフト**7.5時間**です。",
+          "remainingWork": "1週間分の必要人回を求め、週40時間から個人の上限を考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "1日分と休憩の扱いを説明、人数は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "週の必要枠は **8×7＝56人回**。1人の上限は **40÷7.5＝5.33…回** ですが、1回の勤務を分割できないので**5回まで（切捨て）**。必要人数は56÷5を切り上げます。",
+          "remainingWork": "56÷5を計算して人数を確定する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "式は提示し最終整数計算を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "11人なら最大55回で1回不足。12人なら最大60回なので、少なくとも**12人（ウ）**です。必要枠には引継ぎの重複人数が既に勤務表で反映されています。",
+          "remainingWork": "最少性を11人との比較で確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "12人とウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r04a/r04a-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：2b64994c5d5a063f7875c36412ab713a2c6c1f562404bfdd86f2fc7141f9cff3（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ウ と原本選択肢を照合。問題固有の障害：拘束8.5時間と実労働7.5時間を混同し、勤務回数の端数を切り上げてしまう。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "3c1461c86e16ec7602d965c3080506fb01553ffa5b92c303eb5bfd81eda39a5c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q60",
-      "summary": "ウ。フォローアップは監査で提案した改善の実施状況を確認することです。",
+      "summary": "システム監査後のフォローアップが、改善提案の実施状況を追跡する活動だと判断する。",
       "explanation": "監査報告で問題を指摘・改善を提案した後、実際に改善が実施されているかを監査人が確認するのがフォローアップです。実施状況の情報を集めてモニタリングします。\n改善計画の策定は監査対象側の対応、報告の妥当性確認は監査の品質管理、未完了の監査項目の追加調査は元の監査の継続です。",
       "choiceReasons": [
         "改善計画を作るのは監査対象側の対応で、監査人が実施状況を確認するフォローアップとは異なります。",
@@ -515,57 +572,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "監査報告書が出た後の場面です。新たに指摘を作るのか、既に提案した改善が行われたかを確認するのか区別します。",
+          "text": "監査では指摘事項と改善提案を**監査報告書**にまとめます。その後、監査を受けた部門は計画と実施を担い、監査人は**提案後の状況**を追う立場です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "改善計画を立て実行する対象側と、それが実施されたかを確認する監査人では役割が違います。",
+          "text": "**フォローアップ（follow-up）**は『その後どうなったかを追う』こと。改善が着手されたか、完了したか、その状況に関する情報を集めて**モニタリング**します。未完了の元の監査作業を続けることとは別です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "監査人が改善提案の実施状況を集めてモニタリングするウがフォローアップです。",
+          "text": "監査人が**改善提案の実施状況を収集・監視する**ウがフォローアップです。アは監査対象側の改善計画策定です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "監査対象が改善計画を作ることと、監査人が実施状況を追うことを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査では指摘事項と改善提案を**監査報告書**にまとめます。その後、監査を受けた部門は計画と実施を担い、監査人は**提案後の状況**を追う立場です。",
+          "remainingWork": "報告後に誰が何をするか肢ごとに分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "報告後の役割のみを示し手続名を直接教えない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**フォローアップ（follow-up）**は『その後どうなったかを追う』こと。改善が着手されたか、完了したか、その状況に関する情報を集めて**モニタリング**します。未完了の元の監査作業を続けることとは別です。",
+          "remainingWork": "改善の進捗監視に該当する選択肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの手続をそのまま説明した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査人が**改善提案の実施状況を収集・監視する**ウがフォローアップです。アは監査対象側の改善計画策定です。",
+          "remainingWork": "計画策定と監視の主体を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r06a/r06a-q60.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：3f52c5d4314fc7338e986b795847d8c7b5fa1ff2f1ebb2d26a36fd6e46a1ad38（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ウ と原本選択肢を照合。問題固有の障害：監査対象が改善計画を作ることと、監査人が実施状況を追うことを混同する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "345e5810d46552a8f62175ea737f62b745d5779b5a680fcdc31f3cec55ae51b2",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q57",
-      "summary": "イ。フルバックアップで復元した後、差分バックアップを反映します。",
+      "summary": "フルバックアップと差分バックアップの保存内容から、復元に必要な順番を判断する。",
       "explanation": "差分バックアップは、直近のフルバックアップから変更されたデータを保存します。復旧時にはフルバックアップを基礎として復元し、その後、復旧時点に対応する差分を反映します。差分だけでは変更されていないデータを復元できません。差分方式はフル方式と併用し、一般に毎回全体をコピーするよりバックアップ時間を減らせます。",
       "choiceReasons": [
         "差分には変更されていないデータがないので、差分だけで全体を復旧できません。",
@@ -577,57 +641,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "フルで保存されるデータと、差分で保存されるデータを、変更されなかったファイルも含めて考えます。",
+          "text": "**フルバックアップ**は対象データ全体の保存、**差分バックアップ**は**直近のフルを基準として変更されたデータ**の保存です。例えばフルにA・Bがあり、Aだけ変われば差分には変更後のAが入ります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "例えばフル時点でX・Yがあり、Xだけ変更した場合、差分は変更後のXを保存します。Yを取り戻すには何が必要か考えます。",
-          "revealsAnswer": false
+          "text": "差分だけでは未変更のBを戻せません。**まずフルで基準状態A・Bを復元し、その後、目的時点の差分でAを上書き**します。これは増分バックアップで複数世代を順に反映する方法とは異なります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "まずフルでX・Yを復元し、その後差分でXを更新する順序が必要です。",
+          "text": "**フル→対象時点の差分**の順で復旧するイです。差分だけの復元は不可で、フルと併用できます。バックアップの所要時間も変更量などの条件に左右されます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "差分を『新しい分だけで全て戻せる』と思ってしまい、フルを基礎にする必要を忘れる。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**フルバックアップ**は対象データ全体の保存、**差分バックアップ**は**直近のフルを基準として変更されたデータ**の保存です。例えばフルにA・Bがあり、Aだけ変われば差分には変更後のAが入ります。",
+          "remainingWork": "変更していないBをどこから取り戻すか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "保存内容は説明するが復元の順番の選択は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "差分だけでは未変更のBを戻せません。**まずフルで基準状態A・Bを復元し、その後、目的時点の差分でAを上書き**します。これは増分バックアップで複数世代を順に反映する方法とは異なります。",
+          "remainingWork": "この順序を述べる肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イの復元順序そのものを教えている。"
+        },
+        {
+          "newInformation": "**フル→対象時点の差分**の順で復旧するイです。差分だけの復元は不可で、フルと併用できます。バックアップの所要時間も変更量などの条件に左右されます。",
+          "remainingWork": "差分とフルの役割を再確認する",
+          "revealsAnswer": true,
+          "reason": "正答イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03h/r03h-q57.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：d37fbe2e68f1e8068f7c6073d85eb8304398ca21fb2912c372dfe5b0017f0444（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：差分を『新しい分だけで全て戻せる』と思ってしまい、フルを基礎にする必要を忘れる。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "e0562cf3225da15b328328442bcafa716d709a45235abd6543f244389ebd11a5",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q57",
-      "summary": "イ。フルを戻した後、その後の変更を差分から反映します。",
+      "summary": "差分バックアップを復元する際、最後のフルと復旧対象時点の差分をどう組み合わせるかを問う。",
       "explanation": "差分バックアップは直近のフルバックアップ以降に変更されたデータを保存します。差分だけには変更のないデータが含まれないので、それだけでは全体を復元できません。\nまずフルバックアップで基準状態を復元し、次に復旧したい時点の差分バックアップを反映します。全件ではなく変更分を保存するので、通常はフルよりバックアップ量・時間を減らせます。",
       "choiceReasons": [
         "差分だけでは変更されていないデータが足りません。フルの復元も必要です。",
@@ -639,57 +710,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "差分に保存するのは全データではなく、フル以降の変更分です。変更されなかったデータをどこから戻すか考えます。",
+          "text": "フルは**全ファイル**、差分は**最後のフル取得以降に変更されたファイル**です。たとえば日曜に全体、月曜と火曜に差分を取ると、火曜の差分は日曜からの累積変更を含みます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "基準状態をフルから作ってから、対象時点の差分を重ねると全体を復元できます。順序に注目します。",
+          "text": "目的時点が火曜なら、**日曜のフルで全体を戻してから火曜の差分を重ねる**と、変更されなかったデータと変更分の両方を復元できます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "フルのデータで復元した後、差分のデータを反映する手順を選びます。",
+          "text": "**フルで復元した後に差分を反映**するイです。差分だけでは未変更データがなく、フルと差分は併用する方式です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "差分が『その時点のデータ全体』だと思い、差分単独で復元できると考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フルは**全ファイル**、差分は**最後のフル取得以降に変更されたファイル**です。たとえば日曜に全体、月曜と火曜に差分を取ると、火曜の差分は日曜からの累積変更を含みます。",
+          "remainingWork": "火曜の状態に戻すのに変更のないファイルをどう戻すか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "保存対象の違いだけで手順はまだ確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "目的時点が火曜なら、**日曜のフルで全体を戻してから火曜の差分を重ねる**と、変更されなかったデータと変更分の両方を復元できます。",
+          "remainingWork": "フルと差分を正しい順で使う肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "正答イと実質同じ内容。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**フルで復元した後に差分を反映**するイです。差分だけでは未変更データがなく、フルと差分は併用する方式です。",
+          "remainingWork": "増分方式との必要世代の違いを復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r05a/r05a-q57.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：5da0850fdef15868f4e7d13b709a68083aa2bdcd1e5432716078af7791c1515c（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：差分が『その時点のデータ全体』だと思い、差分単独で復元できると考える。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q59",
     "baseVersion": 2,
     "baseLessonSHA256": "dfcb2b35150d6c61ecb126ff4ab17cce3e4e245a1c7ef0ce7af683317ec2fb08",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q59",
-      "summary": "ア。サーバの二重化は障害時にも利用できる可用性の対策です。",
+      "summary": "情報セキュリティの可用性を、利便性・アクセス権・データ完全性と区別する。",
       "explanation": "可用性は、必要なときに権限のある利用者が情報やシステムを利用できる性質です。マスタファイルを置くサーバを二重化すると、一方の障害時にも他方でサービスを続けられ、可用性を高めます。検索機能の利便性、メンテナンス権限、入力データの正しさと区別します。",
       "choiceReasons": [
         "サーバの二重化は単一障害による停止を避け、可用性を高めます。",
@@ -701,57 +779,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補ごとに、障害で停止する問題・便利さ・権限・入力の誤りのどれに対応するかを考えます。",
+          "text": "**可用性（Availability）**は必要なときにシステムやデータを**利用できる**性質。**完全性（Integrity）**はデータが不正・誤りなく保たれること、**機密性（Confidentiality）**は権限のない人に見せないことです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "可用性では、正しいデータかだけでなく、必要なときにアクセスできるかを見ます。サーバが1台故障した場面を想像しましょう。",
+          "text": "マスタデータを置くサーバが故障しても、**別のサーバで処理を続けられる二重化**は停止を防ぎます。入力チェックは完全性、特権アカウントによる制限はアクセス制御です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "サーバを二重化すれば1台の故障でも利用を継続でき、可用性の確認になります。",
+          "text": "サーバの**二重化で障害時にも利用できる**アが可用性です。検索・加工機能の便利さだけでは障害耐性を意味しません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『使いやすい』ことを可用性と捉え、障害時も利用できる性質との違いを理解していない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**可用性（Availability）**は必要なときにシステムやデータを**利用できる**性質。**完全性（Integrity）**はデータが不正・誤りなく保たれること、**機密性（Confidentiality）**は権限のない人に見せないことです。",
+          "remainingWork": "各選択肢が停止・誤り・権限・利便性のどれに関わるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "CIAの意味を教えるが候補への当てはめは残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "マスタデータを置くサーバが故障しても、**別のサーバで処理を続けられる二重化**は停止を防ぎます。入力チェックは完全性、特権アカウントによる制限はアクセス制御です。",
+          "remainingWork": "停止対策の選択肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "二重化のアを実質特定する。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "サーバの**二重化で障害時にも利用できる**アが可用性です。検索・加工機能の便利さだけでは障害耐性を意味しません。",
+          "remainingWork": "可用性と完全性・権限管理の差を整理する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03h/r03h-q59.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：cce00188f819d963e1effea32d5054cef189968d0ad74edc78f3158e9472c7e9（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ア と原本選択肢を照合。問題固有の障害：『使いやすい』ことを可用性と捉え、障害時も利用できる性質との違いを理解していない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "1e0a31de9f72de62af43312d3c1b538d502c9b70731e66914a461f3710cc086f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q58",
-      "summary": "ウ。スキャン済みでも、未認可ソフトウェアの使用は指摘事項です。",
+      "summary": "マルウェア対策の監査で、技術的な検査と組織的なソフトウェア利用承認を区別する。",
       "explanation": "マルウェア検出スキャンはその時点で検出できる脅威を確認するもので、ソフトウェア使用の承認に代わるものではありません。組織が認可していないソフトウェアを使用している状態は、導入・利用を管理する統制に反するため監査で指摘します。その他は検出、継続、脆弱性対策として適切な対応です。",
       "choiceReasons": [
         "Webページのスキャンはマルウェア検出の対策です。",
@@ -763,57 +848,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各対応を「検出」「被害への備え」「導入・利用の承認」「脆弱性修正」に分類します。",
+          "text": "**マルウェア**はウイルスなどの悪意あるソフトウェアの総称です。スキャンは検出できる脅威を調べる手続ですが、**組織として使用を許可すること**とは別の管理です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "監査では技術的な検査の実施だけでなく、組織のルールに沿った使用かも確認します。検査に合格しても利用が許可されたとは限りません。",
+          "text": "例えば担当者がアプリをウイルス検査しても、組織の許可なしに導入すれば**ソフトウェア利用管理の統制違反**です。脆弱性の修正や感染を想定した事業継続計画はそれぞれ別の適切な備えです。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "スキャン済みという前半に惑わされず、未認可ソフトウェアを使用している後半を指摘します。",
+          "text": "『スキャン済みだが**組織として未認可のソフトを使用**』するウを指摘します。スキャンは安全性や組織承認を保証しません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "スキャンして安全なら、未承認のソフトも使用してよいと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**マルウェア**はウイルスなどの悪意あるソフトウェアの総称です。スキャンは検出できる脅威を調べる手続ですが、**組織として使用を許可すること**とは別の管理です。",
+          "remainingWork": "各肢が検出・承認・対処・継続性のどれを扱うか分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "用語と比較軸のみを示し、不適切な肢の選択を残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば担当者がアプリをウイルス検査しても、組織の許可なしに導入すれば**ソフトウェア利用管理の統制違反**です。脆弱性の修正や感染を想定した事業継続計画はそれぞれ別の適切な備えです。",
+          "remainingWork": "スキャンと未認可利用の組合せを記した肢を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウの不備を実質的に教える。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "『スキャン済みだが**組織として未認可のソフトを使用**』するウを指摘します。スキャンは安全性や組織承認を保証しません。",
+          "remainingWork": "検査と使用承認の違いを説明する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03h/r03h-q58.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：e218aba8fe2fca437fb4ab716b052d88954bb4d316bae7e3625853e9316e2591（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ウ と原本選択肢を照合。問題固有の障害：スキャンして安全なら、未承認のソフトも使用してよいと誤解する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "852de186c4e1fb45e565fbd430b7efb7faa83cfbc7d22a14a02b3b30c4c80ea6",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q60",
-      "summary": "ア。業務要件の反映を、利用者の立場でテストして確認する。",
+      "summary": "ユーザ受入テストの監査で、構築済みシステムが利用者の業務要件を満たすことをどう確かめるかを問う。",
       "explanation": "ユーザ受入テストは、構築されたシステムが利用者の業務要件を満たし、業務に受け入れられるかを確認する。監査では、利用者の立場に基づくテストが行われ、結果が確認されているかを見る。\n\n稼働後のIT戦略目標の達成評価、設計等の中間成果物のレビュー、移行後の本番環境の確認とは、時点・対象・目的が異なる。",
       "choiceReasons": [
         "利用者の立場で業務要件の反映をテストする、受入テストの目的に合う。",
@@ -825,57 +917,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「ユーザ」と「受入」の二語から、誰が何を確認する段階か考える。設計途中や稼働後の経営評価ではない。",
+          "text": "**ユーザ受入テスト（UAT：User Acceptance Testing）**は、作られたシステムを利用者の立場で確かめるテストです。『注文を登録して請求できるか』のような**業務上の使い方**が対象です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "構築されたシステムを、実際の業務シナリオや受入条件で確認する。目的は利用者の業務要件を満たすこと。",
-          "revealsAnswer": false
+          "text": "例えば業務担当者が**業務シナリオと受入条件**で新システムを操作し、要件が実装されたかを確認します。設計途中の文書レビューや、本番移行後の環境点検とは目的が異なります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "業務要件と利用者の立場の両方を含む説明を選ぶ。移行結果や全成果物レビューとは区別する。",
-          "revealsAnswer": false
+          "text": "**利用者が業務要件の反映をテストする**アがチェックポイントです。稼働後のIT戦略評価や移行後の本番確認ではありません。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "中間成果物のレビュー、移行確認、稼働後評価と受入テストを混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ユーザ受入テスト（UAT：User Acceptance Testing）**は、作られたシステムを利用者の立場で確かめるテストです。『注文を登録して請求できるか』のような**業務上の使い方**が対象です。",
+          "remainingWork": "完成したシステムを誰の立場で何の条件で試すかを選択肢から探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "UATの大枠を説明するが正答の全文は未開示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "例えば業務担当者が**業務シナリオと受入条件**で新システムを操作し、要件が実装されたかを確認します。設計途中の文書レビューや、本番移行後の環境点検とは目的が異なります。",
+          "remainingWork": "利用者の立場と業務要件の反映を述べる肢を選ぶ",
+          "revealsAnswer": true,
+          "reason": "アの条件を実質的に全て示した。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "**利用者が業務要件の反映をテストする**アがチェックポイントです。稼働後のIT戦略評価や移行後の本番確認ではありません。",
+          "remainingWork": "受入テストの時点と目的を整理する",
+          "revealsAnswer": true,
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r07h/r07h-q60.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：b599fff188ecf2a1b49e3b88ce6c433de412938c7b79926f5b317a1e53508b46（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ア と原本選択肢を照合。問題固有の障害：中間成果物のレビュー、移行確認、稼働後評価と受入テストを混同する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "f02781c3ce4a4be1883e2d9121992e591328b759719449f14d1f90c43216d69a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q58",
-      "summary": "ア。従業員の緊急連絡先リストを作成し、最新に維持している状況は適切です。",
+      "summary": "災害時に重要業務を継続・復旧するBCPについて、監査で適切な準備を見極める。",
       "explanation": "BCPでは、災害や障害時に重要業務を継続・復旧できるよう準備します。最新の緊急連絡先は安否確認や対応指示のために必要です。重要書類を一箇所だけに置く、業務の優先順位を決めない、従業員に計画を知らせない運用は、被災時の対応を難しくします。",
       "choiceReasons": [
         "緊急時に連絡できるよう、連絡先リストを作り最新版へ更新するのは適切です。",
@@ -887,58 +986,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各状況について、災害時に従業員が連絡し、重要業務を優先して動けるかを確認します。",
+          "text": "**BCP（Business Continuity Plan：事業継続計画）**は災害・障害が起きても重要業務を続けたり復旧したりするための準備です。停電や事務所の被災時に何が必要かを考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "災害時の資源は限られるので、まずウの「優先順位なしに同一水準」で重要業務を先に復旧できるか検討します。同じように、連絡・書類保管・計画周知の各記述が、被災時でも実行可能な準備になっているか確認します。",
+          "text": "被災時は人員や設備が限られるため**重要業務の復旧順位**を決め、重要書類は喪失に備えて保全し、計画は**従業員に周知・訓練**しておく必要があります。",
           "revealsAnswer": false
         },
         {
           "title": "この問題に当てはめる",
-          "text": "緊急連絡先リストを作成して最新版に更新している状況は、安否確認や対応連絡に役立ち適切です。",
+          "text": "緊急連絡先を**作成して最新版に更新**するアは安否確認と指示に役立ちます。一箇所だけの保管・優先順位なし・非公開は災害対応を妨げます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "BCPが何の略か分からず、連絡体制・重要業務の優先順位・周知の必要性が理解できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**BCP（Business Continuity Plan：事業継続計画）**は災害・障害が起きても重要業務を続けたり復旧したりするための準備です。停電や事務所の被災時に何が必要かを考えます。",
+          "remainingWork": "選択肢の準備が災害時にも機能するか評価する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "BCPの定義を渡し、各対策の評価を本人に残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "被災時は人員や設備が限られるため**重要業務の復旧順位**を決め、重要書類は喪失に備えて保全し、計画は**従業員に周知・訓練**しておく必要があります。",
+          "remainingWork": "四肢のうち災害対応を妨げない状況を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "イ・ウ・エを実質排除してアが確定する可能性があるため修正要。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "緊急連絡先を**作成して最新版に更新**するアは安否確認と指示に役立ちます。一箇所だけの保管・優先順位なし・非公開は災害対応を妨げます。",
+          "remainingWork": "連絡体制がなぜ必要かを確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "アを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r04h/r04h-q58.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：567f44ad95ccd4b5d7aea06a76f3b73bc25d7ff102d240c68324782d5d9e3787（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ア と原本選択肢を照合。問題固有の障害：BCPが何の略か分からず、連絡体制・重要業務の優先順位・周知の必要性が理解できない。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04h-q56",
     "baseVersion": 2,
     "baseLessonSHA256": "297a90f2403510b72780c8085eb1c50bd543df5677a27c13bc52209677c65868",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q56",
-      "summary": "エ。平均サービス回復時間は保守性を表す指標です。",
-      "explanation": "保守性は、障害後にサービスをどの程度速く回復できるかに関する性質です。平均サービス回復時間は短いほど回復が速く、保守性の評価に使えます。平均故障間隔や平均サービス・インシデント間隔は、障害が起きるまでの長さを表す信頼性側の指標です。",
+      "summary": "ITILの可用性管理で、故障間隔による信頼性と、復旧時間による保守性の指標を区別する。",
+      "explanation": "**ITIL**はITサービス管理の実践知をまとめた枠組みです。**KPI（Key Performance Indicator：重要業績評価指標）**は管理目標の達成度を測る指標です。**信頼性**は障害が起きにくい性質、**保守性**は障害が発生した後に速やかに復旧できる性質です。\n**MTBF（Mean Time Between Failures：平均故障間隔）**は故障と故障の間隔、**MTBSI（Mean Time Between Service Incidents：平均サービス・インシデント間隔）**はサービス中断の間隔、**MTRS（Mean Time to Restore Service：平均サービス回復時間）**はサービス中断から回復までの所要時間の平均です。設問が求める『保守性を表す指標値の短縮』には、**回復にかかる時間**であるMTRSが当たります。間隔を短くすることは故障が頻繁になる場合もあるので、MTBFやMTBSIと取り違えません。",
       "choiceReasons": [
         "一定期間の中断数は障害の発生頻度を示すもので、修復の速さを直接示しません。",
         "平均故障間隔はMTBFで、故障と次の故障の間隔に関する信頼性の指標です。",
@@ -949,57 +1055,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢の時間が「障害と次の障害の間」なのか「障害から回復まで」なのか区別します。",
+          "text": "**KPI（Key Performance Indicator）**は目標を測る指標。**信頼性**は故障しにくさ、**保守性**は故障後の直しやすさです。『故障と次の故障の間』と『故障から回復まで』を区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "故障しにくさと、故障した後に直しやすいことは別の性質です。保守性の指標は後者を測ります。",
-          "revealsAnswer": false
+          "text": "**MTBF（Mean Time Between Failures：平均故障間隔）**と**MTBSI（Mean Time Between Service Incidents：平均サービス・インシデント間隔）**は発生間隔、**MTRS（Mean Time to Restore Service：平均サービス回復時間）**は中断から回復までの平均時間です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "障害から回復までの平均時間である平均サービス回復時間を選びます。",
+          "text": "保守性では**平均サービス回復時間（MTRS）を短縮**したいのでエです。故障間隔を短くするのは障害頻度を増やし得るため、信頼性指標とは目的が異なります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ITIL・KPI・MTBF・MTBSI・MTRSの意味が分からず、『平均』という語だけで判断する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**KPI（Key Performance Indicator）**は目標を測る指標。**信頼性**は故障しにくさ、**保守性**は故障後の直しやすさです。『故障と次の故障の間』と『故障から回復まで』を区別します。",
+          "remainingWork": "各指標が故障の頻度か復旧の速さか分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "二つの性質を説明するが選択肢の固有名詞は残す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**MTBF（Mean Time Between Failures：平均故障間隔）**と**MTBSI（Mean Time Between Service Incidents：平均サービス・インシデント間隔）**は発生間隔、**MTRS（Mean Time to Restore Service：平均サービス回復時間）**は中断から回復までの平均時間です。",
+          "remainingWork": "短縮させたい時間の名称を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "MTRSの説明がエと一致し正答を実質開示。"
+        },
+        {
+          "newInformation": "保守性では**平均サービス回復時間（MTRS）を短縮**したいのでエです。故障間隔を短くするのは障害頻度を増やし得るため、信頼性指標とは目的が異なります。",
+          "remainingWork": "保守性と信頼性の測定軸の違いを再確認する",
+          "revealsAnswer": true,
+          "reason": "エを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r04h/r04h-q56.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：38f80fa8279b582a4614d285a227d7e8a8a7c97fa5c2f64e17d4718e56be00c6（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 エ と原本選択肢を照合。問題固有の障害：ITIL・KPI・MTBF・MTBSI・MTRSの意味が分からず、『平均』という語だけで判断する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "98a55f3169fc2a910c1034c4f04226cbe32b8322061942f3bcab9d67c8a97b1a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q57",
-      "summary": "保証型監査の定期実施と結果開示",
+      "summary": "情報セキュリティ監査の保証型と助言型を、目的・利用者・組合せの可否から判断する。",
       "explanation": "正解はエ。保証型監査は対策の適切性に一定の保証を付与し、助言型監査は改善に役立つ助言を行う。利用者が不特定多数に及ぶシステムでは、保証型監査の定期的な実施と結果の開示が利害関係者の判断に有用である。両方式は排他的ではなく、監査要請者のニーズなどに応じて用いる。",
       "choiceReasons": [
         "保証型を先に行い、その後必ず助言型へ切り替えるという順序の制約はない。",
@@ -1011,57 +1125,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "冒頭の二つの監査の目的を読み分ける。「一定の保証」と「改善の助言」で使い道が違う。",
+          "text": "**保証型監査**は対策の適切性について一定の保証を示すもの、**助言型監査**は改善に役立つ提案を示すものです。対象の利用者が少数か不特定多数かでも求められる情報が変わります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "不特定多数の利害関係者がシステムを信頼できるか判断するには、対策の適切性に関する保証を定期的に示すことが役立つ。",
+          "text": "監査方式は依頼者の目的に応じて選び、**保証型と助言型は排他的でも順序固定でもありません**。不特定多数が利用するシステムでは、定期的な保証結果の開示が信頼性の判断に役立ちます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "保証型監査を定期実施して結果を開示するエが適切である。",
+          "text": "不特定多数の利害関係者に向けて**保証型監査を定期実施し結果を開示**するエが適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "保証型と助言型を必ず順番に実施するか、どちらかしか使えないと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**保証型監査**は対策の適切性について一定の保証を示すもの、**助言型監査**は改善に役立つ提案を示すものです。対象の利用者が少数か不特定多数かでも求められる情報が変わります。",
+          "remainingWork": "順番や併用に関する肢が妥当か検討する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "二つの目的のみを提示し正答肢を指定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査方式は依頼者の目的に応じて選び、**保証型と助言型は排他的でも順序固定でもありません**。不特定多数が利用するシステムでは、定期的な保証結果の開示が信頼性の判断に役立ちます。",
+          "remainingWork": "保証結果の公開を述べる肢に対応させる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ア・イ・ウを排除しエを実質確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不特定多数の利害関係者に向けて**保証型監査を定期実施し結果を開示**するエが適切です。",
+          "remainingWork": "助言型との使い分けを整理する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "エを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r03a/r03a-q57.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：88ae0306d27aeabc3be58fa607828592fc6dc003baf960cc10c1cc29c624e071（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 エ と原本選択肢を照合。問題固有の障害：保証型と助言型を必ず順番に実施するか、どちらかしか使えないと誤解する。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "58b7a264ebda38a12fa0b794ae5e6afbdc53234513d52fe2535a19d063ac970c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q57",
-      "summary": "イ。出力帳票を管理表で確実に受け渡します。",
+      "summary": "入力データの承認、出力帳票の受渡し記録、取引原票の保存という管理原則を判断する。",
       "explanation": "入出力データは所有する業務部門の権限と承認の下で管理し、帳票は授受の記録を残して確実に届けます。重要な情報を管理者へ手渡しすることも適切です。情報システム部門だけで内容の変更や廃止を判断しません。",
       "choiceReasons": [
         "帳票廃止は利用業務部門との確認・承認が必要で、情報システム部門だけで停止するのは不適切です。",
@@ -1073,57 +1194,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で誰が判断するか、受渡し記録を残すか、原本を保存するかを確認します。",
+          "text": "入出力データを管理する際は、**業務内容の責任を持つ部門**と、システムを運用する部門を区別します。帳票の受渡しは記録を残し、原資料は後の照合に必要となる場合があります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "入力内容の責任をもつ業務部門と、処理を担う情報システム部門の役割を分けます。",
-          "revealsAnswer": false
+          "text": "**EDI（Electronic Data Interchange：電子データ交換）**の受信ファイルや原票は取引証拠となり得ます。帳票を止めたり入力値を直したりする際は業務部門の確認が必要で、授受管理表は『誰に渡したか』の証拠になります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "授受管理表を使い、重要情報は管理者へ手渡しする候補を選びます。",
+          "text": "**授受管理表で確実に受渡し、重要情報は業務部門の管理者に手渡す**イです。機密だからと原票を即廃棄するのは証跡の喪失につながります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "情報システム部門には業務内容を独断変更する権限もあると思い込む。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "入出力データを管理する際は、**業務内容の責任を持つ部門**と、システムを運用する部門を区別します。帳票の受渡しは記録を残し、原資料は後の照合に必要となる場合があります。",
+          "remainingWork": "各肢で誰が判断しどんな記録が残るかを見る",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "役割分担の一般則のみで正答肢は未確定。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**EDI（Electronic Data Interchange：電子データ交換）**の受信ファイルや原票は取引証拠となり得ます。帳票を止めたり入力値を直したりする際は業務部門の確認が必要で、授受管理表は『誰に渡したか』の証拠になります。",
+          "remainingWork": "受渡しを記録して責任者へ届ける肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ア・ウ・エを否定しイが実質確定。"
+        },
+        {
+          "newInformation": "**授受管理表で確実に受渡し、重要情報は業務部門の管理者に手渡す**イです。機密だからと原票を即廃棄するのは証跡の喪失につながります。",
+          "remainingWork": "保存・承認・授受の役割を整理する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r04a/r04a-q57.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：cb9d59b2c7a5bfafcb4b5aeb0c42291111709b5b0eaffa63bde56b8cbafb7b70（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：情報システム部門には業務内容を独断変更する権限もあると思い込む。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r06a-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "2b70e4bf4b123191854aa703a0b6d25e9dd3260d77510cedd953e52b4ea84cb3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q57",
-      "summary": "イ。帳票の受渡しを記録し、重要度に応じて確実に届ける方針が適切です。",
+      "summary": "入出力データ管理で、業務部門の承認と帳票授受の証跡を守る方針を選ぶ。",
       "explanation": "出力帳票には機密情報が含まれることがあるため、誰へ渡したかを授受管理表などで記録し、重要度によって責任者へ手渡すなどの管理が必要です。\n情報システム部門だけの判断で帳票を廃止したり、業務データを修正したりすると、業務上の必要性や正しい値を確認できません。取引の原票や受信ファイルも照合や証跡のために必要な期間保存し、取込み直後に一律廃棄しません。",
       "choiceReasons": [
         "帳票の必要性は業務部門などと確認すべきで、情報システム部門だけの判断で停止するのは不適切です。",
@@ -1135,57 +1263,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "アとウはどちらも情報システム部門だけで業務上の判断をします。システムを扱う権限と、業務内容を決定する権限は同じか考えます。",
+          "text": "システム部門はデータを**処理・運用**しますが、取引内容や帳票の要否などの**業務判断**は業務部門と確認します。必要な記録を残せるかがポイントです。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "エでは元の取引情報をすぐ廃棄します。後で入力誤りの確認や取引の証明が必要になったとき、元資料が残るかを確認します。",
-          "revealsAnswer": false
+          "text": "例えば誤入力の修正には担当業務の承認が必要です。**EDI（Electronic Data Interchange：電子データ交換）**の元ファイルなども取引証拠になるため即時廃棄は不適切。出力帳票は**受渡しを記録**して管理します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "独断変更と即時廃棄を除くと、受渡しを記録し重要度に応じて手渡すイが適切な管理です。",
+          "text": "**授受管理表に記録し、重要度に応じ責任者へ手渡す**イが適切です。処理できる権限と業務上の判断権限は同一ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "処理担当が入力内容を勝手に修正・停止できると考え、受渡し証跡の必要性も見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "システム部門はデータを**処理・運用**しますが、取引内容や帳票の要否などの**業務判断**は業務部門と確認します。必要な記録を残せるかがポイントです。",
+          "remainingWork": "各肢の判断者と記録の残し方を分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "一般的な責任分担を提示した段階。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば誤入力の修正には担当業務の承認が必要です。**EDI（Electronic Data Interchange：電子データ交換）**の元ファイルなども取引証拠になるため即時廃棄は不適切。出力帳票は**受渡しを記録**して管理します。",
+          "remainingWork": "独断変更と即時廃棄の肢を除外し、適切な授受管理を探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "誤答3肢を除外しイを実質確定。"
+        },
+        {
+          "newInformation": "**授受管理表に記録し、重要度に応じ責任者へ手渡す**イが適切です。処理できる権限と業務上の判断権限は同一ではありません。",
+          "remainingWork": "証跡を確保する理由を確認する",
+          "revealsAnswer": true,
+          "reason": "イを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r06a/r06a-q57.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：b6bc5264b865157b18a6b164f166acd11f7d16ee187067232ba1b1c0690ab26d（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 イ と原本選択肢を照合。問題固有の障害：処理担当が入力内容を勝手に修正・停止できると考え、受渡し証跡の必要性も見落とす。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q59",
     "baseVersion": 2,
     "baseLessonSHA256": "77eea319cb6ac38646f38023e5cc59734ab751ece2496fa67324697eeebfc1c3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch28-20261028-manual",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q59",
-      "summary": "ウ。原伝票と入力結果の照合が行われた証跡を確認します。",
+      "summary": "受注伝票が漏れなく、重複なく入力されたことを確認する監査証跡の選び方を問う。",
       "explanation": "監査目的は、起票された受注伝票がすべて一度だけ入力されたことの確認です。入力結果を示すプルーフリストと原伝票を照合すれば、未入力の伝票や重複して入力された伝票を発見できます。\n両方の照合印を確認する手続は、その入力完全性の統制が運用されている証拠を調べるものです。形式・値のチェックやプログラム論理の確認だけでは実際の全伝票の入力を保証しません。",
       "choiceReasons": [
         "例外取引の承認という正当性の確認で、伝票の入力漏れ・重複を調べる手続ではありません。",
@@ -1197,46 +1332,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "受注伝票の入力に関する問題です。「漏れなく」「重複なく」の両方に線を引き、各候補の「何の記録を確かめるか」を先に抜き出してみましょう。",
+          "text": "監査目的は**入力の完全性（漏れなし）**と**一意性（重複なし）**です。値が正しい形式かのチェックだけでは、そもそも未入力の伝票を発見できません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "原伝票と入力結果の一覧を照合すれば、対応のない伝票や同じ伝票の複数登録が見つかります。その照合の実施証跡を考えます。",
+          "text": "**プルーフリスト**はシステムに入力した内容の確認用一覧です。元の**受注伝票**と一対一に照合すれば、未入力・二重入力を調べられ、両方の**照合印**はその手続を実施した証跡になります。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "プルーフリストと受注伝票の両方にある照合印を確認する候補を選びます。",
+          "text": "プルーフリストと元伝票にある**照合印**を確認するウです。プログラム論理の検査や値引きの承認では、実際の全伝票が一度ずつ入力されたとは証明できません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "フォーマットチェックが正しければ入力の抜けや二重登録も発見できると思ってしまう。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "監査目的は**入力の完全性（漏れなし）**と**一意性（重複なし）**です。値が正しい形式かのチェックだけでは、そもそも未入力の伝票を発見できません。",
+          "remainingWork": "元伝票と入力結果の件数・対応関係をどう確かめるか考える",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "チェックの対象の違いのみを提示。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**プルーフリスト**はシステムに入力した内容の確認用一覧です。元の**受注伝票**と一対一に照合すれば、未入力・二重入力を調べられ、両方の**照合印**はその手続を実施した証跡になります。",
+          "remainingWork": "照合の証拠を点検する肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウに書かれた手続を実質的に全て示す。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "プルーフリストと元伝票にある**照合印**を確認するウです。プログラム論理の検査や値引きの承認では、実際の全伝票が一度ずつ入力されたとは証明できません。",
+          "remainingWork": "入力処理の妥当性と入力完全性を区別する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "ウを明示。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "原本WebP画像 assets/questions/r05a/r05a-q59.webp をGitHubからbase64取得し実際に画像表示。問題文・全4肢・数値条件を目視照合した。context記載原本SHA256：921f36aaf05e5ed3ff4ec940b4cb4e0cf8b08733943183625358b2dd7c30dcc0（台帳値。画像バイトの独立ハッシュ検算は未実施）。",
+        "contextの公式正答 ウ と原本選択肢を照合。問題固有の障害：フォーマットチェックが正しければ入力の抜けや二重登録も発見できると思ってしまう。",
+        "初学者が用語や英語略語を知らない前提でヒントを作成。IPA公式解答PDFの独立照合・別担当レビュー・公開用データ統合は未実施。"
+      ]
     }
   }
 ]
