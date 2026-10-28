@@ -1,0 +1,1239 @@
+{
+  "reviewer": "Codex /root/ap_batch27_review",
+  "initialAuthorHead": "04c56c17099a04a6a8c66b36f3285798a460eed5",
+  "frozenBeforeSnapshot": {
+    "path": "work/ap/objective-quality/batches/batch-27/review/initial-drafts.json",
+    "sha256": "3c999579f787b984100b89a6fb93db8439cc79d9e40be32b30af986ce82cd0b7"
+  },
+  "counts": {
+    "questions": 20,
+    "originalImagesActuallyOpened": 20,
+    "supplementaryFiguresActuallyOpened": 2,
+    "officialAnswerPDFsRead": 9,
+    "officialAnswerPDFsTextRead": 8,
+    "officialAnswerPDFsImageRead": 1,
+    "choiceReasons": 80,
+    "hints": 60,
+    "requiredIssues": 1
+  },
+  "issues": [
+    {
+      "id": "B27-01",
+      "questionId": "r07a-q55",
+      "stage": 1,
+      "type": "all-distractors-eliminated",
+      "severity": "required",
+      "finding": "H1の「故障部品から影響を追う方法や、単一の故障点を探す方法とは分析の向きが違います」は、イFMEA・ウCFIA・エSPOFを全て除外する。アFTAのみ残るためH1とdesign.stages[0]をrevealsAnswer:trueへ修正し、その理由を同期する（比較判断を残す本文改稿でも可）。"
+    }
+  ],
+  "kind": "initial-independent-content-review",
+  "status": "changes-requested",
+  "checkedAt": "2026-10-28T12:15:55.264377+00:00",
+  "method": "AGENTS.md、指定3規約、組README/assignment/context/drafts、inventoryを先読。全20原本をview_imageで実表示し解き直し、全lesson・80肢理由・60累積ヒント・designを確認。公式PDFの実SHA/URLをdata/sources.jsonと照合。補助図2枚はsparse省略のため公開元をscratchへ取得して実表示し、実バイトをgit show HEADとinventoryでも照合。教材/初回凍結/reviewsは未変更。初学者試用や効果測定、アプリ検証は未実施。",
+  "questions": [
+    {
+      "id": "r04a-q54",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "4d1bd0051dcb2e928aafed3a0a288325fe25bbb369efff240ef33f38942bcf0b",
+      "beforeLessonSHA256": "cc2a0ef478a3bf5889f3d818a37f3d67e6158ee9b02da124a859bd4571f4640d",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q54.webp",
+      "sourceImageSHA256": "1994ac65eecd4e49acfa8618805f39f6d69b4c9590cf93f6d67d7aec0e330c8f",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q54.webp": "1994ac65eecd4e49acfa8618805f39f6d69b4c9590cf93f6d67d7aec0e330c8f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問54 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "重み5/1/4を行ごとに適用しA76/B70/C77/D76。最大Cでウ。費用の安さも加点。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "加重和の定義と重みを示し、製品別適用と計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "全式を与えるが合計と最大の比較が残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終77点と製品C/ウを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r07h-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "3b35a9e8db18dfade20af191fa303bdcd0695d87bd15e6afd568976a47d56116",
+      "beforeLessonSHA256": "5e48f590758542170bd524018e609565c1e7c6103519f090c92715f130548233",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q55.webp",
+      "sourceImageSHA256": "5f1c88acf70c23005016109930d53dbb5cc352a637ead0ea031653cc39386f76",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q55.webp": "5f1c88acf70c23005016109930d53dbb5cc352a637ead0ea031653cc39386f76",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解イをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "提供対象は(22−7)×20=300時間。停止2.1時間と許容1.5時間との差0.6時間、イ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "提供時間・可用性の式を与えるが差時間計算は残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "改善割合0.002を与えるが300時間との積は残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終0.6時間とイを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q54",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "745c67add3966b4a7b9cc10baa6dda921241ff40fa6e4e1e9000bacb5c8c8c09",
+      "beforeLessonSHA256": "435482f11fae459f3745becbcc9b533aa196e50ac4ef12cfe6ef38dd4965fd10",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q54.webp",
+      "sourceImageSHA256": "7eb2dd3f99d7e1da282f7a9d721a6954e5bf470c7fe6610951219532eb594aae",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q54.webp": "7eb2dd3f99d7e1da282f7a9d721a6954e5bf470c7fe6610951219532eb594aae",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問54 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "恒久解決の必須化、既知誤りの未記録、解決後即除外は不適切。データ・傾向から問題を特定するエ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "問題管理の大枠で、記録・必ず恒久解決・傾向分析の具体的適否判断は残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "日時共通点の分析例でエの傾向分析を実質説明",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "エと全肢の適否を明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "55e3a5e37ac83b268235cc81cec9e8a3f81b4edcc731fbba5c95c0c4bd76f929",
+      "beforeLessonSHA256": "5363b5ecc3efbd97227ce6e72f2790031c9bdc54e2275f51c8a063dfd3235c9f",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q55.webp",
+      "sourceImageSHA256": "3c553326f26711eac2651618f1e8e44451fa9017036f761a99887c13594598fd",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q55.webp": "3c553326f26711eac2651618f1e8e44451fa9017036f761a99887c13594598fd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解イをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "原因特定・発生再発防止が問題管理でイ。ア復旧、ウ継続、エ変更の管理と区別。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "原因特定と再発防止がイの目的と実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "他三管理も対応させ全誤答を除外",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "イを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q54",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "088849cf67611362ca3fce125459fe1e8e3d32d523783015e6df2cd10c96b3d7",
+      "beforeLessonSHA256": "de5ae69b54515746e570191a345d30ea9d40f7b4947fe7f7b91a74a3dec4e00a",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q54.webp",
+      "sourceImageSHA256": "dc2180761778e7e0e0c20fb3746d3210d68f69da9789f3fc2cb662c3fb25d85e",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q54.webp": "dc2180761778e7e0e0c20fb3746d3210d68f69da9789f3fc2cb662c3fb25d85e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問54 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "強化は好機の確率又は影響増大でエ。ア受容、イ活用、ウ共有。第6版の条件を維持。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "好機と脅威の大枠で強化との対応は残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "強化の定義がエと実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "エと他戦略名を明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q53",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "65764d651bf2f3c573d4fb3c702860fad4d4cdd72fb2e45212f8b0de2054a0fc",
+      "beforeLessonSHA256": "e0b41a6599981c1937da69be65f727d3fa8bab101ae3e23051e73298a6767426",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q53.webp",
+      "sourceImageSHA256": "8ca682cf902ce6ec92e9c40411b1e9e5728f5f3d2a583633b7f8f44f4baad177",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q53.webp": "8ca682cf902ce6ec92e9c40411b1e9e5728f5f3d2a583633b7f8f44f4baad177",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問53 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "離脱8人月に引継ぎ中の既存4人の2人月を加え10人月不足。2か月で5人増員、5×2.5×100−4×2×100=450万円、ウ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "離脱と引継ぎの工数を与え、不足合計・費用差計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "不足10人月と人数式を与え、増員費用と差額が残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終450万円とウを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r07a-q55",
+      "status": "changes-requested",
+      "beforeEnvelopeSHA256": "6f6a0ad86d6ebe9f9903610edde37241f22d98d65a4b9183ce25d31aa5b8edc6",
+      "beforeLessonSHA256": "aef4bbad7be82e9da952d8a3acc08fc4544d111f086e911a94d931047bd083db",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q55.webp",
+      "sourceImageSHA256": "23a8b23350f22824101e42d70d9ecc53f83645742767cbea1c5c258f5b9440e4",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q55.webp": "23a8b23350f22824101e42d70d9ecc53f83645742767cbea1c5c258f5b9440e4",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解アをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "結果からAND/ORで原因を分解し確率算出できるFTA、ア。FMEAは故障モードから影響、CFIAは要素障害影響、SPOFは単一点を分析。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "故障部品から影響を追うFMEA/CFIA、単一故障点を探すSPOFをすべて除外してFTAだけが残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "FTA名称と確率算出を直接結び正答を開示",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "アFTAを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": false,
+        "calculation": "not-applicable"
+      },
+      "issues": [
+        "B27-01"
+      ]
+    },
+    {
+      "id": "r05a-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "c23d2db9592bba7ee096bc9d826ad3695c0794708f05192941d2539b7672a47d",
+      "beforeLessonSHA256": "42e18c093259f196a0a2d3a74ed49817e7c821871301dc98e0827d5d21c9f820",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q55.webp",
+      "sourceImageSHA256": "9b70d5f873f99af40ce67a31760a2e1ad97092f4d38b7a6f5a815f3a8bce6ea0",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q55.webp": "9b70d5f873f99af40ce67a31760a2e1ad97092f4d38b7a6f5a815f3a8bce6ea0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解アをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "是正処置は検出不適合の原因除去又は再発低減でア。イ構成管理、ウ継続的改善、エ問題管理。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "不適合と原因調査の例で、是正処置の原因除去・再発低減の定義はまだ示さない",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "原因除去・再発低減がアの説明と実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "アと全誤答の種別を明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q52",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "a05412bfa91e5e0839c5e79bc68d719de0606ac9b80c41b2871b9ed7474bf512",
+      "beforeLessonSHA256": "076818e37598f1e85d15eba8f4ad317fa28cc875022387647cd4f8844c766a19",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q52.webp",
+      "sourceImageSHA256": "38a1e4ffdc6ff6f92d0f1b0f365a57f868bc21679299174593c944a27d26dfb5",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q52.webp": "38a1e4ffdc6ff6f92d0f1b0f365a57f868bc21679299174593c944a27d26dfb5",
+        "assets/transcriptions/finish_r06h_batch6/r06h-q52-figure.webp": "a5a9c8ba1d8c9570c76d9c780850e7d80536c050eea527902b86a5a439479a00",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問52 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "結合点2=3、3=max(2,3+1)=4、4=7。5=max(3+2,4+2,7+0)=7、エ。ダミー依存も確認。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "ダミーと到着経路を説明し到着時刻計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "最大値の式と中間式を示し結合点5の計算は残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終7日とエを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r03a-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "b3dfba0aa67a5a1ec7b643ed8225b804b98a242aacabc0a9a3cad574f36e79f2",
+      "beforeLessonSHA256": "0e17091fd060ee50238c6a30a76f4db16db88909e7139713bcf733675e720456",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q55.webp",
+      "sourceImageSHA256": "7f6ec3e7a82f1488dc28d3b3f5fbb01c23e2b98dd9aa5e9d2bf4e58a426bafef",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q55.webp": "7f6ec3e7a82f1488dc28d3b3f5fbb01c23e2b98dd9aa5e9d2bf4e58a426bafef",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "4月途中の復元には4月1日のフルを要し、10月中は4～10月の7暦月保持。各月フル1本+差分1本で14本、ウ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "月ごとの媒体構成を示し保持月数の判断が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "7暦月を示すが月当たり本数との積は残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終14本とウを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q53",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "0e119b0897ed5256d8384f27617f0b9cbb4180de25f4bef6ca807a9582802e5f",
+      "beforeLessonSHA256": "1d3c661c05604c0c76eac7dcdc36479f87569cdedf202e53479b495bae0352c5",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q53.webp",
+      "sourceImageSHA256": "6c1c8a5153332baea6d35181cb55b977a43fd2288819d0942258c552cd57de65",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q53.webp": "6c1c8a5153332baea6d35181cb55b977a43fd2288819d0942258c552cd57de65",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問53 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "上級換算で旧6/2+12/3+12/2=13か月、新6/3+12/4+12/3=9か月。重複なしの差4か月、エ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "生産性換算を示すが工程別期間計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "旧新の式を示すが合計と短縮差計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "最終4か月とエを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r05h-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "4a6170e5f5080152c9f6ba0310bddee2216f5fd4a6e780024b0bdd3606539768",
+      "beforeLessonSHA256": "27260bbafe9adbb27fb8c5d59ec7fd7cad9867eee77ab076bda4b891259253a1",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q55.webp",
+      "sourceImageSHA256": "c011c4aacef7cc2373aa26dabb21a7f2938744d3179bd5ba65916c86c5cd18d7",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q55.webp": "c011c4aacef7cc2373aa26dabb21a7f2938744d3179bd5ba65916c86c5cd18d7",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "繰り返してパフォーマンス向上するエが継続的改善。アプロセス、イサービス管理、ウサービス継続の定義。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "無停止との区別でウのみ除外し、残る定義比較が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "継続的改善の定義がエと実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "エと他の定義名を明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r03h-q51",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "9c6f9789588a5ff3fe58afeee802e547d77cb06199aced1907f5e4acb081be4d",
+      "beforeLessonSHA256": "c4f00b1eeb820ba673e0744a6ac95d0403253a2f01a407d025bec6f9c3c95b79",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q51.webp",
+      "sourceImageSHA256": "83cc3f91f453a93189100abeb5eeef0792e1a2c5440fb0a00dc96020563fff45",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q51.webp": "83cc3f91f453a93189100abeb5eeef0792e1a2c5440fb0a00dc96020563fff45",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問51 正解アをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ア",
+      "independentResult": "スコープ定義は計画でア。品質保証遂行とチーム編成は実行、憲章作成は立上げ。JIS Q21500:2018を基準とする。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "群の大枠を示し、スコープ/憲章等の意味と群の対応が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "スコープ定義を計画と明示し全誤答も対応",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "アを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q55",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "d616aae3101aa4b9bfc9f4d75ef44b385e7130f063102f8801d6f840d7dcff0a",
+      "beforeLessonSHA256": "093367bf086d98631f07152bdb272723542e3a33c3b502fb1c7a890d5601c60f",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q55.webp",
+      "sourceImageSHA256": "d3214b119ba304918624a1be643ed617c9d29c0783e2dbe89005425b03b4f40c",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q55.webp": "d3214b119ba304918624a1be643ed617c9d29c0783e2dbe89005425b03b4f40c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問55 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "月売上①100/②105/③99/④104万円、共通年費用1050万円。最大②で105×12−1050=210万円、ウ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "単価と月間量の式・単位で、各売上と年利益計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "各方式の積と年利益式で、積・最大比較・差計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "210万円とウを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r05h-q53",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "f72ced0071db45f0ae8db92cd6b0d0a642409510750831d88e41d40ed62e36d0",
+      "beforeLessonSHA256": "6917ade8424008403ffcc5a8927f240d81984fd9f02d1474c11e14a6015b93f8",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q53.webp",
+      "sourceImageSHA256": "33ab19c67a51f47ecd0fb74d69fc30942650283c3ddf25404c527ea336a12374",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q53.webp": "33ab19c67a51f47ecd0fb74d69fc30942650283c3ddf25404c527ea336a12374",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問53 正解イをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "期間比の完了分0.57が228日なので全400日。残0.11/2+0.11+0.21=0.375、150日でイ。工数比を使わない。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "期間比選択を示すが全期間と残期間計算が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "全期間式と半分残を示すが計算は残る",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "150日とイを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": true
+      },
+      "issues": []
+    },
+    {
+      "id": "r04h-q57",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "243623338d2a0bd6b98939677932aeff2bef3ca5a9433cc9fae5d74bbdd8f43b",
+      "beforeLessonSHA256": "10aa13ad7588d8557b0e0683c979aec2dae282fbdbc487b2cc7680b98ab1068d",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q57.webp",
+      "sourceImageSHA256": "809eff1fcdf613267190b725eecf3f28cec815cf747a34f3c43db6efe2df7c27",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q57.webp": "809eff1fcdf613267190b725eecf3f28cec815cf747a34f3c43db6efe2df7c27",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問57 正解イをPDFからpdftoppmで再描画してview_imageで実読。",
+        "renderedImageActuallyOpened": "/workspace/scratch/ap-a-quality-review/sources/batch27-r04h-answer.png"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "DAは論理データ設計と項目標準化のイ。ア容量増設、ウ性能調整、エ復旧整合性はDBA。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "DAの論理項目管理がイの説明と実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "前段に加えDBAの容量性能復旧を示して全誤答を除外",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "イを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r06h-q57",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "3f14d7b7ee1096307bc825fbff7e3b7a382690afbe7bef68cccf8d33b61a34db",
+      "beforeLessonSHA256": "586db22c8475f4c3d93079c3bbf2c8f7fba58d044001ef521a2c4d4ad03952aa",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q57.webp",
+      "sourceImageSHA256": "299f7c64365c75685631aea487be2049f8702aad5e7cbedb5b8166f9c4345b67",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q57.webp": "299f7c64365c75685631aea487be2049f8702aad5e7cbedb5b8166f9c4345b67",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問57 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "X社管理の発電装置からの直接排出がウ。アは購入電力の間接排出、イ委託廃棄、エ顧客の購入電力でX社の直接排出に非該当。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "表の定義を整理し、実際の排出源と管理者の与件適用が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "自社管理発電装置の具体例がウと実質同じ",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "ウと各肢の分類を明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r04a-q58",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "04c14316aff65bcb90c797594d1a649ba87561dd5c3aa3f5bb8db99475b0f937",
+      "beforeLessonSHA256": "34e2a4949e099ab1a04ae4dfc4017ca24313dd5c6784a437a0b45c20c3503c20",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q58.webp",
+      "sourceImageSHA256": "78443992a83400d90faef3c7fddaa5a943d27d6ea13f3784669b84b0fd1802b7",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q58.webp": "78443992a83400d90faef3c7fddaa5a943d27d6ea13f3784669b84b0fd1802b7",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問58 正解エをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "エ",
+      "independentResult": "リスク受容基準は評価の前に確立するため、事後決定したエが指摘対象。規定に沿うア/イと検知駆除のウだけでは不適合を示さない。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "監査基準を示すがリスク受容基準の時点判断は残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "事後受容基準の不適切性でエを直接開示",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "エを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05a-q60",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "148336d8fcee9424b87a7ac469867fa412a57cfa73debc97236f7acc3b6355d8",
+      "beforeLessonSHA256": "76382a74c3691c69f6e243fc15b1f3d3b613954e21b7a0b12cfa1d2eed224eef",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q60.webp",
+      "sourceImageSHA256": "ac6b7fdc349e76908e5618eb9d1bcf2a112db3ce7c6d71b3c18b32916e624f35",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q60.webp": "ac6b7fdc349e76908e5618eb9d1bcf2a112db3ce7c6d71b3c18b32916e624f35",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問60 正解イをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "イ",
+      "independentResult": "IT全般統制と業務処理統制からなるイ。アの内部限定、ウの自動化だけで有効、エの手作業だけで不備は誤り。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "ウ/エの断定を除くが、ア/イ比較が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "二統制区分がイと実質同じでアも除外",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "イを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    },
+    {
+      "id": "r05h-q57",
+      "status": "content-reviewed-no-issues",
+      "beforeEnvelopeSHA256": "84296cb02073a67cff72850236322de1c45e54302c975095c92db44ce83e9b92",
+      "beforeLessonSHA256": "63aea21481f60845fdf19a10208d13bd1aaf312bfba1a5fa77e3b5e3bdfafd1f",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q57.webp",
+      "sourceImageSHA256": "0ff02cf94d5e94abc139ce8cb06cf7392b7873147ab8dd2d0bb53951d332cf17",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q57.webp": "0ff02cf94d5e94abc139ce8cb06cf7392b7873147ab8dd2d0bb53951d332cf17",
+        "assets/transcriptions/pr-batch2-figures-b/r05h-q57-figure-choices.png": "7f7789066a0bcbec3f6f332880f564c3e4162bdaeb69a2b8e32602d06adb11bf",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "officialAnswerPDF": {
+        "path": "/workspace/scratch/ap-a-quality-review/sources/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "existingCacheUsed": true,
+        "verification": "問57 正解ウをpdftotext -layout再抽出テキストで実読。",
+        "renderedImageActuallyOpened": null
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "IaaSで物理層②③が提供者担当、全ミドルウェアをPaaSへ移すと④も移る。業務ジョブ監視①は残りウ。",
+      "choiceReasonsReview": "原本の全4肢と4件の理由を照合し、上記独立解答の各分岐点と一致。",
+      "lessonReview": "summary/explanation/takeaway/checkedAgainstとdesignを全読。条件・単位・時点・強調を確認。記載のヒント指摘以外に必須修正なし。",
+      "hintReview": [
+        {
+          "stage": 1,
+          "currentRevealsAnswer": false,
+          "independentlyAssessedRevealsAnswer": false,
+          "rationale": "クラウド層を説明し、①～④の分類と組合せ判断が残る",
+          "designRead": true
+        },
+        {
+          "stage": 2,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "IaaS②③/PaaS④の正答組合せを渡す",
+          "designRead": true
+        },
+        {
+          "stage": 3,
+          "currentRevealsAnswer": true,
+          "independentlyAssessedRevealsAnswer": true,
+          "rationale": "ウと組合せを明示",
+          "designRead": true
+        }
+      ],
+      "checks": {
+        "source": true,
+        "answer": true,
+        "choices": true,
+        "hints": true,
+        "explanation": true,
+        "design": true,
+        "revealFlags": true,
+        "calculation": "not-applicable"
+      },
+      "issues": []
+    }
+  ]
+}
