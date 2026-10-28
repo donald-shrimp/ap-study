@@ -1,0 +1,939 @@
+{
+  "kind": "batch-correction-independent-review",
+  "status": "approved",
+  "reviewer": "Codex /root/ap_batch17_review",
+  "reviewerIdentityNote": "初回報告alias ChatGPT/independent-ap-batch17-review-20261028 と本最終承認 Codex /root/ap_batch17_review は同一の実独立確認agent。原作者ChatGPT/gpt-6-batch17-20261028、実修正者Codex /rootのいずれとも別担当。初回報告は変更せず保持。",
+  "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+  "materialCorrector": "Codex /root",
+  "primaryAuthor": "ChatGPT/gpt-6-batch17-20261028",
+  "initialAuthorHead": "2e7599ecf998606e923f0cd3bce0013bca163a9c",
+  "counts": {
+    "questionsApproved": 20,
+    "correctionsIndependentlyReviewed": 3,
+    "unchangedInitialEnvelopes": 17,
+    "originalImagesActuallyOpenedInInitialReview": 20,
+    "officialAnswerPDFsIndependentlyReadInInitialReview": 10,
+    "finalDomainHintDepthCasesActuallyExecuted": 80
+  },
+  "frozenInitialReview": {
+    "path": "/workspace/ap-study-batch17-review/work/ap/objective-quality/batches/batch-17/review/independent-review.json",
+    "sha256": "3fb716dd9389f5884ea657b2a81f32823265345a099e97ba4371aa53a99eb6a7"
+  },
+  "frozenBeforeSnapshot": {
+    "path": "/workspace/ap-study-batch17-review/work/ap/objective-quality/batches/batch-17/review/initial-drafts.json",
+    "sha256": "da386bab57de14095c765aef3cebaf25fce85e1d027689021c1cc676b39df708"
+  },
+  "finalDraftsFileSHA256": "6f5f33caa2b1fbfc6422f9c92f082fc29e2c0675e4c2b703efaba0ac5e5fd24c",
+  "finalReviewsFileSHA256": "fb4f569cc65c6b0b47188f8960d4e2747c6a8503a8c8df21f9f728a2cdb5b406",
+  "domainVerification": {
+    "command": "node /workspace/scratch/ap-a-review-16-19/verify-domain.mjs 17",
+    "path": "/workspace/ap-study-batch17-review/work/ap/objective-quality/batches/batch-17/review/domain-hint-verification.json",
+    "sha256": "284a1151f4593578839ad1b40d4e462dd6938ffbe344ac99edbe725c5db092ae",
+    "outcome": "20問×ヒント0-3段の80ケース。開示前correct/assisted/revealedと回答後の採点状態・hintsBeforeAnswer保持を実assert確認。ブラウザ/初学者による試用は未実施。"
+  },
+  "supplementalSources": [
+    {
+      "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/rfc5280.txt",
+      "url": "https://www.rfc-editor.org/rfc/rfc5280.txt",
+      "sha256": "a2f2628c0a83b873fc4786abd921f9b2c02395954b655d190bf16b831633345d",
+      "evidence": "RFC5280(2008-05) sec3.3 lines704-718, sec5 lines3016-3020, sec5.1.2.6 lines3291-3295。出題時点で既発行。"
+    },
+    {
+      "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/guide_ver1.0_20211130.pdf",
+      "url": "https://www.jpcert.or.jp/csirt_material/files/guide_ver1.0_20211130.pdf",
+      "sha256": "b5aafc457518d7f7b097fd7003f2bc8f9e99a3c0849e94a09b89519064e4a494",
+      "evidence": "表紙2021年11月30日。sec1.2 p5 六分類、p7 coordination/analysis、p8 vendor、p10 incident response providerの対象と機能を独立抽出読取。"
+    }
+  ],
+  "resolvedIssues": [
+    {
+      "id": "B17-01",
+      "questionId": "r03h-q34",
+      "status": "resolved",
+      "materialCorrector": "Codex /root",
+      "independentReviewer": "Codex /root/ap_batch17_review",
+      "resolution": "H2本文を保持してrevealsAnswer=trueへ修正。design第2段のremainingWorkとreasonを再読し、~aのア/イ・ORのエが除外されウa&~mだけ残る累積開示として確認。H1=false/H2=true/H3=trueが最終本文に一致。"
+    },
+    {
+      "id": "B17-02",
+      "questionId": "r07a-q39",
+      "status": "resolved",
+      "materialCorrector": "Codex /root",
+      "independentReviewer": "Codex /root/ap_batch17_review",
+      "resolution": "肢ア理由を独立再読。RFC5280 sec3.3の「An entry MUST NOT be removed ... until it appears on one regularly scheduled CRL issued beyond the revoked certificate's validity period」と、一律1年ではなく有効期間を過ぎた定期CRLへ少なくとも一度掲載するまで削除不可という補足を照合し一致。ヒント本文/旗は不変。"
+    },
+    {
+      "id": "B17-03",
+      "questionId": "r05a-q39",
+      "status": "resolved",
+      "materialCorrector": "Codex /root",
+      "independentReviewer": "Codex /root/ap_batch17_review",
+      "resolution": "肢エ理由・H3・design第3段の分類名を独立再読。指定2021-11-30ガイドsec1.2(6)、冊子p10「インシデントレスポンスプロバイダー」の契約顧客向け有償請負定義と一致。H2以降の開示trueも正答アを提示する累積内容に一致。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "r05h-q34",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "83fe91c7e0cc82f8798cd91b1273e75d9ce9402a502b16e6c261b82cc593a539",
+      "beforeSnapshotLessonSHA256": "9200f530047f6a825ff96e49498e0d7556f6f3df748ede5a846df28f9957540b",
+      "finalEnvelopeSHA256": "83fe91c7e0cc82f8798cd91b1273e75d9ce9402a502b16e6c261b82cc593a539",
+      "finalLessonSHA256": "9200f530047f6a825ff96e49498e0d7556f6f3df748ede5a846df28f9957540b",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q34.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q34.webp",
+      "sourceImageSHA256": "d55f55d657ae4b055dd789ef0207b04f23db620b20512b291057b0f6d5841257",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q34.webp": "d55f55d657ae4b055dd789ef0207b04f23db620b20512b291057b0f6d5841257",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問34 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "UDPはポートを使い上位アプリ間データグラム配送を行う第4層。HTTP/SMTPはアプリ層、ICMPはIPに伴うネットワーク層。独立解答エ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q33",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "20743fa02f2c0f5b50aacbc0d3a147e0fdbac61511eafde2dfad298db7512f69",
+      "beforeSnapshotLessonSHA256": "41ecb73b6a74a5664587b9b093e30e4cd78c09ea8f21bbf609235e7d484ba956",
+      "finalEnvelopeSHA256": "20743fa02f2c0f5b50aacbc0d3a147e0fdbac61511eafde2dfad298db7512f69",
+      "finalLessonSHA256": "41ecb73b6a74a5664587b9b093e30e4cd78c09ea8f21bbf609235e7d484ba956",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q33.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r06h/r06h-q33.webp",
+      "sourceImageSHA256": "f73340b972d6d00b1b5271b042e6e52c151fcac0c3f2981eab939119fdb2c6e0",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q33.webp": "f73340b972d6d00b1b5271b042e6e52c151fcac0c3f2981eab939119fdb2c6e0",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問33 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "1500×8=12000bit、0.0001%=10^-6。10000×12000×10^-6=120個。独立誤りで10000×(1-(1-10^-6)^12000)=119.2829307個。最も近いエ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q35",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "320bc56441144bd55116f5679d27baf7d6b812f6e513565ce338de7570fc7460",
+      "beforeSnapshotLessonSHA256": "49fc4d1cb058515ca708747b74dcc7e10d848eb39b98eeb89d6e743cc3a515ba",
+      "finalEnvelopeSHA256": "320bc56441144bd55116f5679d27baf7d6b812f6e513565ce338de7570fc7460",
+      "finalLessonSHA256": "49fc4d1cb058515ca708747b74dcc7e10d848eb39b98eeb89d6e743cc3a515ba",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q35.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q35.webp",
+      "sourceImageSHA256": "65c68fe9b7ad5dc7fc63a9fdc83dba7fddc6997464de9459efaf18768449cf49",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q35.webp": "65c68fe9b7ad5dc7fc63a9fdc83dba7fddc6997464de9459efaf18768449cf49",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "1500byte=12000bit、0.0001%=10^-6。稀な誤りの期待パケット数近似は10000×12000×10^-6=120。独立モデルの厳密値119.2829307個とも最寄りはエ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03a-q35",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "c719176d8b64db75c40a2b318c7caca187f340fc111cb819624986cc00f6b24c",
+      "beforeSnapshotLessonSHA256": "a863f4525a3e71dbec1bc53ee6f402658b08362bb5ec8f892dfeced6835c85ee",
+      "finalEnvelopeSHA256": "c719176d8b64db75c40a2b318c7caca187f340fc111cb819624986cc00f6b24c",
+      "finalLessonSHA256": "a863f4525a3e71dbec1bc53ee6f402658b08362bb5ec8f892dfeced6835c85ee",
+      "sourceImageActuallyOpened": "assets/questions/r03a/r03a-q35.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r03a/r03a-q35.webp",
+      "sourceImageSHA256": "700f537635c8aedb2c0af236e2fe4c00607161d5445b7cb9e95c21b341cfba6e",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r03a/r03a-q35.webp": "700f537635c8aedb2c0af236e2fe4c00607161d5445b7cb9e95c21b341cfba6e",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000apad-att/2021r03a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03a_ap_am_ans.pdf",
+        "sha256": "7de38604ec8ce68484acb20ba4a13c7722c0f54fc7e420368c8ceea01947d799",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "マスクmのネットワーク位置=1、ホスト位置=0。~mはネットワーク0/ホスト1。a OR ~mならネットワークを保存しホスト全1。正答エ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r04h-q34",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "7326e2b3f318f762eb25df33ccae5c647739616a7a2a20b77dd108bb3f0af21e",
+      "beforeSnapshotLessonSHA256": "3dc2ab552ed216966da747a482f5f87551a945f45dfe4cf5a938e4514e5d1bde",
+      "finalEnvelopeSHA256": "7326e2b3f318f762eb25df33ccae5c647739616a7a2a20b77dd108bb3f0af21e",
+      "finalLessonSHA256": "3dc2ab552ed216966da747a482f5f87551a945f45dfe4cf5a938e4514e5d1bde",
+      "sourceImageActuallyOpened": "assets/questions/r04h/r04h-q34.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r04h/r04h-q34.webp",
+      "sourceImageSHA256": "13bda111ad07d512974115e1e061fd98a4505461131c233fac7231f389af6340",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r04h/r04h-q34.webp": "13bda111ad07d512974115e1e061fd98a4505461131c233fac7231f389af6340",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04h_ap_am_ans.pdf",
+        "sha256": "92d7035cef510e293003d8838681a66440dbc88facc3b50d416ad06828378a59",
+        "textLength": 0,
+        "renderedImagePath": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04h_ap_am_ans.png",
+        "renderedImageSHA256": "31db243c4040f0356f1cab96607d341dcd182da0653dd3af552be3e44c231631",
+        "evidence": "PDF page 1を1800px PNGにレンダリングしview_imageで実際に開いた。2列目の問34 正解アを目視。"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "32-28=4bit、2^4=16アドレス。192.168.30.32/28の範囲.32-.47、ネットワーク.32とbroadcast.47を除き.33-.46の14ホスト。ア。通常のサブネットという限定も保持。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03h-q34",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "511cda5159048cb822079aae6e41de393a6f9b44126f02cdaf62e4bfd0e93299",
+      "beforeSnapshotLessonSHA256": "7a620bcdec3fe5519ecd8581a436a0bd93f7329d3b3ca630f001a26155113fca",
+      "finalEnvelopeSHA256": "b197f090b51da23ea93be8da0a46589b263c3ea7816e35621e4a216c376e92a8",
+      "finalLessonSHA256": "fc39e8e7967ece29d876cc0aeaccaafe2a383039bae2ccb6593ffd08799fd176",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q34.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r03h/r03h-q34.webp",
+      "sourceImageSHA256": "ca075e8011cd0abbc0c7012efa45ce2fb9d48e508f2e89da2d27200c5351eae6",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q34.webp": "ca075e8011cd0abbc0c7012efa45ce2fb9d48e508f2e89da2d27200c5351eae6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "textLength": 1401,
+        "evidence": "PDF page 1、問34 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ネットワーク部を0、ホスト部だけaの値にするにはa AND ~m。各ビットでm=1なら0、m=0ならaとなる。正答ウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "materialCorrector": "Codex /root",
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "H2本文を保持してrevealsAnswer=trueへ修正。design第2段のremainingWorkとreasonを再読し、~aのア/イ・ORのエが除外されウa&~mだけ残る累積開示として確認。H1=false/H2=true/H3=trueが最終本文に一致。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q35",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "b0b5214441f0a22ba609255d13666dc3be4623642a72cc8c99c78e8fca450ee9",
+      "beforeSnapshotLessonSHA256": "5c13a4ba1e85125655186991a6c5a387d33784c3b4be7983ee69fef795bfb043",
+      "finalEnvelopeSHA256": "b0b5214441f0a22ba609255d13666dc3be4623642a72cc8c99c78e8fca450ee9",
+      "finalLessonSHA256": "5c13a4ba1e85125655186991a6c5a387d33784c3b4be7983ee69fef795bfb043",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q35.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q35.webp",
+      "sourceImageSHA256": "07eb38cf77818b137061fa22b71af54f2a46d964aded54da8b97d6ca3b55571c",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q35.webp": "07eb38cf77818b137061fa22b71af54f2a46d964aded54da8b97d6ca3b55571c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "IPv4 RIP-2の経路更新先グループ224.0.0.9がマルチキャスト。DHCP初期探索/ARP要求はbroadcast、SMTP配信はユニキャスト接続。正答エ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q31",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "9386116bf13787499df8531b5860349c90d5bfc3c2da1ece2f3a2ea223cfe7ea",
+      "beforeSnapshotLessonSHA256": "49b9de607460fb8920acd7255f0c65c54bdd74c06e8c1930a9430ffb2a12b9e6",
+      "finalEnvelopeSHA256": "9386116bf13787499df8531b5860349c90d5bfc3c2da1ece2f3a2ea223cfe7ea",
+      "finalLessonSHA256": "49b9de607460fb8920acd7255f0c65c54bdd74c06e8c1930a9430ffb2a12b9e6",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q31.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q31.webp",
+      "sourceImageSHA256": "2a1e714ea2ba5642000505243df8c3991871fe264937432160cf076d8ee7ab65",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q31.webp": "2a1e714ea2ba5642000505243df8c3991871fe264937432160cf076d8ee7ab65",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問31 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "reverse proxyは公開サーバ側で外部要求を受け内部Webへ転送する代理。内→外PC代理はforward、攻撃検知はIDS、専用網はVPN。ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06h-q32",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "1b899045c4bf8ffac53c13a6eb00a28c8e66baa1277ac8aa8ec1bf93f4595d41",
+      "beforeSnapshotLessonSHA256": "5dbac3e19a4287ec30c81e682d586979a7137a9081fe020033eec5bb4d5e6c77",
+      "finalEnvelopeSHA256": "1b899045c4bf8ffac53c13a6eb00a28c8e66baa1277ac8aa8ec1bf93f4595d41",
+      "finalLessonSHA256": "5dbac3e19a4287ec30c81e682d586979a7137a9081fe020033eec5bb4d5e6c77",
+      "sourceImageActuallyOpened": "assets/questions/r06h/r06h-q32.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r06h/r06h-q32.webp",
+      "sourceImageSHA256": "1d4986e2a5e3e3aaad8240329c8a3411be53b3dba6390ebdaa93ffe3ad7b6c5d",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r06h/r06h-q32.webp": "1d4986e2a5e3e3aaad8240329c8a3411be53b3dba6390ebdaa93ffe3ad7b6c5d",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06h_ap_am_ans.pdf",
+        "sha256": "2bfa304bc0745e8b4a07e81e5c6023569ccdebffe8166483957bef624a8bde37",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問32 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "VRRPは複数物理ルータを仮想ルータとして構成し稼働役を引継ぐ。監視SNMP、リンクPPP、MACからIP取得RARPではない。エ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q31",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "b83a20181eea9067f849be56231bf15c1b87c05d0aa19a145857a9f982b0372d",
+      "beforeSnapshotLessonSHA256": "72877878354b07beb6926fd2d55ed69f095e7024031dc8734ab6ca1988c57c96",
+      "finalEnvelopeSHA256": "b83a20181eea9067f849be56231bf15c1b87c05d0aa19a145857a9f982b0372d",
+      "finalLessonSHA256": "72877878354b07beb6926fd2d55ed69f095e7024031dc8734ab6ca1988c57c96",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q31.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q31.webp",
+      "sourceImageSHA256": "5fb40da758affbccbea97ce9906ac97eeccb32e8d94913fe776878b0ea423683",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q31.webp": "5fb40da758affbccbea97ce9906ac97eeccb32e8d94913fe776878b0ea423683",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問31 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "1000byte×1000×8=8Mbit。100Mbps×.5=50Mbps実効。8/50=.16秒、ウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r03h-q32",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "8343fa4896c14c96b585a16c6d625dc83b2d7c5d4d84868cdad3c09cbd741bb9",
+      "beforeSnapshotLessonSHA256": "a152057d65db798fe38e58ca4e7f68e9e21957c72912e27e9f3beb802bca9423",
+      "finalEnvelopeSHA256": "8343fa4896c14c96b585a16c6d625dc83b2d7c5d4d84868cdad3c09cbd741bb9",
+      "finalLessonSHA256": "a152057d65db798fe38e58ca4e7f68e9e21957c72912e27e9f3beb802bca9423",
+      "sourceImageActuallyOpened": "assets/questions/r03h/r03h-q32.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r03h/r03h-q32.webp",
+      "sourceImageSHA256": "b2f1594816ee01b2b413ddc086c03ee70a00b6957e4df24ee6244f9ab3c65edd",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r03h/r03h-q32.webp": "b2f1594816ee01b2b413ddc086c03ee70a00b6957e4df24ee6244f9ab3c65edd",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2021r03h_ap_am_ans.pdf",
+        "sha256": "7a8c92e7c23b232eb08ec134d6e17eeaa2c6f6a3a3161f9765322e25f37b54a1",
+        "textLength": 1401,
+        "evidence": "PDF page 1、問32 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "身の回り近距離PANのIoT無線はBLE。LTE広域、PLC電力線有線、PPPリンクプロトコルで異なる。ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r04a-q32",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "dfe4c5c9ed6efad54395e7a262caf33bc31e0701fe1ab1cabde97f5bda4e1d75",
+      "beforeSnapshotLessonSHA256": "904d68e7c45f98cd9115dc8432338f72962b7fe3be80ee62b283ba2ad7e34acd",
+      "finalEnvelopeSHA256": "dfe4c5c9ed6efad54395e7a262caf33bc31e0701fe1ab1cabde97f5bda4e1d75",
+      "finalLessonSHA256": "904d68e7c45f98cd9115dc8432338f72962b7fe3be80ee62b283ba2ad7e34acd",
+      "sourceImageActuallyOpened": "assets/questions/r04a/r04a-q32.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r04a/r04a-q32.webp",
+      "sourceImageSHA256": "cf6060324025d335be359ca41190cf93673ee15d66da817670f05b084065f848",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r04a/r04a-q32.webp": "cf6060324025d335be359ca41190cf93673ee15d66da817670f05b084065f848",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000008smf-att/2022r04a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2022r04a_ap_am_ans.pdf",
+        "sha256": "cd68eafa610df4365fa478311b7a560f7bbbcbaabf647ae6be637d05cc0862a1",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問32 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "FTPは制御TCP21、activeデータサーバTCP20を別に使う。passiveは通知した別ポートだが分離構造は同じ。SNMP161/162は制御対転送でなく要求/応答と通知。ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07h-q33",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "0b99f7c68df18869aa42419bfef2ff29de9ac36177498ab487c24103ee836a5e",
+      "beforeSnapshotLessonSHA256": "c6541f9e3e691b89bc1843240ade5148f8439116645bdd9bc413e3d9f6b0607b",
+      "finalEnvelopeSHA256": "0b99f7c68df18869aa42419bfef2ff29de9ac36177498ab487c24103ee836a5e",
+      "finalLessonSHA256": "c6541f9e3e691b89bc1843240ade5148f8439116645bdd9bc413e3d9f6b0607b",
+      "sourceImageActuallyOpened": "assets/questions/r07h/r07h-q33.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r07h/r07h-q33.webp",
+      "sourceImageSHA256": "f35a23fabb0ace4b45803ca16ea2559210d71a77d1b80e32153b9ef09405b0bb",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r07h/r07h-q33.webp": "f35a23fabb0ace4b45803ca16ea2559210d71a77d1b80e32153b9ef09405b0bb",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07h_ap_am_ans.pdf",
+        "sha256": "656af75ddbf63ac5ece53a73f5ab674ff110710ce3d25f1caa854892d9ac3907",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問33 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "FTPはログイン/転送指示をTCP21、activeデータをサーバTCP20。passiveのデータポート例外も区別されている。SNMPの2ポートは要求/通知の別。正答ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q32",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "dfe71b482fbd652e534fd2285fe0aece1bcaaff07129d93317cbedbd57f9bb69",
+      "beforeSnapshotLessonSHA256": "05893cf9c98d2dad8ac1c38647427fd857fe9015ab6d81e1d427da4b63de0d30",
+      "finalEnvelopeSHA256": "dfe71b482fbd652e534fd2285fe0aece1bcaaff07129d93317cbedbd57f9bb69",
+      "finalLessonSHA256": "05893cf9c98d2dad8ac1c38647427fd857fe9015ab6d81e1d427da4b63de0d30",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q32.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q32.webp",
+      "sourceImageSHA256": "f013bb1a2d3dcf3f5730bf826ec213ddc6e7cd748f7e884d33ad046e4017bcbc",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q32.webp": "f013bb1a2d3dcf3f5730bf826ec213ddc6e7cd748f7e884d33ad046e4017bcbc",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問32 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "1250×8=10000bit。100Mbpsは.1ms、1Gbpsは.01ms。共通の1ms間隔は同じ回数含まれ相殺する。(.1-.01)N=9よりN=100、ウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q30",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "fa39e153e12da7e3dbb5fc9ed4640009a0403991825eedb70038a5680b856d8a",
+      "beforeSnapshotLessonSHA256": "b0b9a60daf3964424fa5ea65a061da3364b8fa0f1ee5f1340a278ffdca9c1c6a",
+      "finalEnvelopeSHA256": "fa39e153e12da7e3dbb5fc9ed4640009a0403991825eedb70038a5680b856d8a",
+      "finalLessonSHA256": "b0b9a60daf3964424fa5ea65a061da3364b8fa0f1ee5f1340a278ffdca9c1c6a",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q30.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q30.webp",
+      "sourceImageSHA256": "d0e88117e2ab33e071c584727d44f5ffa22b044b5079487ccf9d96f737701b3b",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q30.webp": "d0e88117e2ab33e071c584727d44f5ffa22b044b5079487ccf9d96f737701b3b",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問30 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "ヘッダー込み1250byte=10000bit。100Mbpsの.1msと1Gbpsの.01msの差は.09ms/個。同一回数の1ms間隔は相殺され9/.09=100個、ウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q35",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "e03925b0e752672126e35470c471788854b9bf02f29225a58937f5b2ec490ec6",
+      "beforeSnapshotLessonSHA256": "fc0f7fe21fd39efef2634f9f7f393b4c04aae7a082c571f943790ab7705f0085",
+      "finalEnvelopeSHA256": "e03925b0e752672126e35470c471788854b9bf02f29225a58937f5b2ec490ec6",
+      "finalLessonSHA256": "fc0f7fe21fd39efef2634f9f7f393b4c04aae7a082c571f943790ab7705f0085",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q35.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q35.webp",
+      "sourceImageSHA256": "0825df0d7fc51c9d5a2797dcad621a28e89a1e92d2bd0cccf8caab6a929befc5",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q35.webp": "0825df0d7fc51c9d5a2797dcad621a28e89a1e92d2bd0cccf8caab6a929befc5",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問35 正解イ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "通信を維持し接続先基地局を切替えるのはhandover。tetheringは回線共有、fallbackは代替方式、roamingは他網の利用。イ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r06a-q32",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "a296a955f73a64c7620a768fa46de6cabdd6a1f4a3dccc8b0f0a919a92321cf3",
+      "beforeSnapshotLessonSHA256": "6fc010a8fb5a7c8da494e224b2d1bfe4fa2d1c8e68b29e6af57659e610dd47fd",
+      "finalEnvelopeSHA256": "a296a955f73a64c7620a768fa46de6cabdd6a1f4a3dccc8b0f0a919a92321cf3",
+      "finalLessonSHA256": "6fc010a8fb5a7c8da494e224b2d1bfe4fa2d1c8e68b29e6af57659e610dd47fd",
+      "sourceImageActuallyOpened": "assets/questions/r06a/r06a-q32.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r06a/r06a-q32.webp",
+      "sourceImageSHA256": "098797e454f512a6315f806956613b196e9cc2236f9a94e8f0788e016661a9a4",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r06a/r06a-q32.webp": "098797e454f512a6315f806956613b196e9cc2236f9a94e8f0788e016661a9a4",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2024r06a_ap_am_ans.pdf",
+        "sha256": "e0b959f62990aad2da659cd59a20a54d0b001c5c7c388511f11e9f053d666732",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問32 正解ウ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ウ",
+      "independentResult": "1MB=8Mbit。5秒以内なら実効1.6Mbps以上。効率.6で公称v>=8/(5×.6)=2.666…Mbps。候補1,2は不足、4,10は満たす。最低4Mbpsのウ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        false,
+        false
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r05h-q31",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "9c51df5659bca7f51db79ee2363ce8c55f4a4320a2961261fd071291e067e87e",
+      "beforeSnapshotLessonSHA256": "d8bb6ff29b6f8d222dde949ca455d40932c7bcc1f0e4364ed74f34f1bab40d7a",
+      "finalEnvelopeSHA256": "9c51df5659bca7f51db79ee2363ce8c55f4a4320a2961261fd071291e067e87e",
+      "finalLessonSHA256": "d8bb6ff29b6f8d222dde949ca455d40932c7bcc1f0e4364ed74f34f1bab40d7a",
+      "sourceImageActuallyOpened": "assets/questions/r05h/r05h-q31.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05h/r05h-q31.webp",
+      "sourceImageSHA256": "51ed3cc89b725dc7d979c5e529d23e1b46fda131881a366411489471d29ac41c",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05h/r05h-q31.webp": "51ed3cc89b725dc7d979c5e529d23e1b46fda131881a366411489471d29ac41c",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05h_ap_am_ans.pdf",
+        "sha256": "334407e6c98a5fcf15ef2d03ee9980326b55fcf7abfa9c44948e9ff4f0d76546",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問31 正解イ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "イ",
+      "independentResult": "通信分野PLC=Power Line Communication、電力線に信号を重ねる。VoIP/802.11/無線暗号とは別。イ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": false,
+      "materialCorrector": null,
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "初回独立確認済みの完全envelope/lessonが不変。原本画像・公式PDF・全肢理由・全ヒント・解説・設計メモの初回実確認を最終版へ適用。",
+      "issues": []
+    },
+    {
+      "id": "r07a-q39",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "06652f9508cb7b0a85cfc5fe8a45114b976129fc181c1ece8a1c5e0573f6498d",
+      "beforeSnapshotLessonSHA256": "e1fe031abbe0e12a99792b8769f5affa0a31b1151714e71912ecf5296c14df6e",
+      "finalEnvelopeSHA256": "6cee8b5e88e9185b09b551b3e54552619975ff3cbcd1eed2f5264d47ac3f316e",
+      "finalLessonSHA256": "7bdcb64a569acf22b61bf8942bda995df4091ef8c1f96c29189588255b2ea5d2",
+      "sourceImageActuallyOpened": "assets/questions/r07a/r07a-q39.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r07a/r07a-q39.webp",
+      "sourceImageSHA256": "64be607e9446c05184d2e0818a1d07138ca3a0beb5992a3bff75ae74b780822f",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r07a/r07a-q39.webp": "64be607e9446c05184d2e0818a1d07138ca3a0beb5992a3bff75ae74b780822f",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2025r07a_ap_am_ans.pdf",
+        "sha256": "ee7109c6dcd4c4e452a880d28268877974413172e38ed56f1143d69aaff70b82",
+        "textLength": 1471,
+        "evidence": "PDF page 1、問39 正解エ（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "エ",
+      "independentResult": "RFC5280 sec3.3は失効証明書をserialで識別し、失効証明書の有効期間を過ぎた定期CRLへ一度記載されるまでエントリ削除不可とする。sec5はscope内の未満了失効証明書が完全CRLの対象、5.1.2.6はserial記載。CA鍵署名確認は失効確認を代替しない。正答エ。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "assisted",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "materialCorrector": "Codex /root",
+      "flags": [
+        false,
+        false,
+        true
+      ],
+      "resolution": "肢ア理由を独立再読。RFC5280 sec3.3の「An entry MUST NOT be removed ... until it appears on one regularly scheduled CRL issued beyond the revoked certificate's validity period」と、一律1年ではなく有効期間を過ぎた定期CRLへ少なくとも一度掲載するまで削除不可という補足を照合し一致。ヒント本文/旗は不変。",
+      "issues": []
+    },
+    {
+      "id": "r05a-q39",
+      "status": "approved",
+      "reviewer": "Codex /root/ap_batch17_review",
+      "checkedAt": "2026-10-28T03:30:17.296896+00:00",
+      "beforeSnapshotEnvelopeSHA256": "80e38967aff06a6a8897e75fb576e77a124661fa447e167f57eaa9dfe2be530f",
+      "beforeSnapshotLessonSHA256": "1d504ec733c01535607474403fe964e27946ddf6f66d80b892a1ee5ba5573f0f",
+      "finalEnvelopeSHA256": "11565fb81f1eacc0c0260ab4f8098b2ad441af7a706a9ba8ded4fdd8c80c3cff",
+      "finalLessonSHA256": "04011025683fbf0741d6eddad8aa5ac1f7547072d5b7001e1eaa051af9d11895",
+      "sourceImageActuallyOpened": "assets/questions/r05a/r05a-q39.webp",
+      "sourceImageAbsolutePath": "/workspace/ap-study-batch17-review/assets/questions/r05a/r05a-q39.webp",
+      "sourceImageSHA256": "34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7",
+      "sourceImageVerificationPhase": "同一実担当が初回独立レビューでview_imageを実際に開いた。最終では同一実ファイルSHAを再確認。",
+      "sourceHashes": {
+        "assets/questions/r05a/r05a-q39.webp": "34d7053611f029c4d0e14e5b528a384f5e81bd60fa7a3610991e081f28d2cde7",
+        "assets/transcriptions/pr-skipped-author/r05a-q39-choice-table.webp": "7eef63711f2afd5adf10520d0db9852ff7c3c4bade95dc618503ae63cf8649f6",
+        "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+        "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+      },
+      "officialAnswerPDF": {
+        "url": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+        "path": "/workspace/scratch/ap-a-quality-review/sources/batch17-independent/2023r05a_ap_am_ans.pdf",
+        "sha256": "412a0691b6d0e6b4856d2a512d0634ab561d11443e0a157c6bbd8767768bc741",
+        "textLength": 1466,
+        "evidence": "PDF page 1、問39 正解ア（pdftotext -layoutを独立実行し該当番号欄を読取）"
+      },
+      "officialAnswer": "ア",
+      "independentResult": "指定2021-11-30ガイドsec1.2 p7は他CSIRTへの情報連携/調整をcoordination centerとする。p7分析、p8vendor、p10incident response providerと対比。正答ア。",
+      "domainGradingAfterHints0to3": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "correctionIndependentlyReviewed": true,
+      "materialCorrector": "Codex /root",
+      "flags": [
+        false,
+        true,
+        true
+      ],
+      "resolution": "肢エ理由・H3・design第3段の分類名を独立再読。指定2021-11-30ガイドsec1.2(6)、冊子p10「インシデントレスポンスプロバイダー」の契約顧客向け有償請負定義と一致。H2以降の開示trueも正答アを提示する累積内容に一致。",
+      "issues": []
+    }
+  ]
+}
