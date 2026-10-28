@@ -1046,12 +1046,12 @@
     "id": "r04h-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "a70727d026d9eaae4623cc9be93cfea1ef9990651f84b8db935aaa14c6fcf5d3",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q57",
-      "summary": "イ。DAは論理データベース設計やデータ項目の標準化を担当します。",
-      "explanation": "DAは組織のデータを業務上の資源として管理し、意味・構造・標準化などを扱います。論理データベース設計とデータ項目の管理・標準化はDAの役割です。DBAはデータベースの物理設計、容量・性能・バックアップ・回復など技術的な運用管理を担当します。",
+      "summary": "DAとDBAの職務分担を、論理設計と物理・運用管理の違いから判断する問題。",
+      "explanation": "**DA（Data Administrator：データ管理者）**はデータの意味・論理構造・標準化を担い、**DBA（Database Administrator：データベース管理者）**はデータベースの物理構成・性能・運用を担います。\nDAは組織のデータを業務上の資源として管理し、意味・構造・標準化などを扱います。論理データベース設計とデータ項目の管理・標準化はDAの役割です。DBAはデータベースの物理設計、容量・性能・バックアップ・回復など技術的な運用管理を担当します。",
       "choiceReasons": [
         "ディスク増設等の容量管理はDBAの技術的・物理的な管理業務です。",
         "論理データベース設計とデータ項目の標準化は、データを組織的に管理するDAの役割です。",
@@ -1062,58 +1062,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの業務を「データの論理的な定義」と「装置・性能・回復の技術管理」に分けます。DAとDBAを別の担当として考えます。",
+          "text": "**DA（Data Administrator：データ管理者）**は組織のデータの**意味・項目・論理構造**を管理します。**DBA（Database Administrator：データベース管理者）**はデータベースの**物理構成・性能・運用**を管理します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "DAは組織でデータを同じ意味・項目で使えるよう管理します。ディスク追加やチューニングはDBMS運用の側です。",
-          "revealsAnswer": false
+          "text": "顧客IDの意味・命名規則を統一するのはDA、容量不足でディスクを増設するのはDBAです。**DBMS（Database Management System：データベース管理システム）**の性能調整や障害復旧もDBA側です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "論理データベース設計を行い、データ項目を管理して標準化する候補がDAの役割です。",
+          "text": "**イ：論理データベース設計とデータ項目の標準化**がDAの役割です。アの容量管理、ウの性能調整、エの復旧はDBAです。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "DA・DBA・DBMSの略語が分からず、データ項目の意味の管理とディスク・性能・復旧を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**DA（Data Administrator：データ管理者）**は組織のデータの**意味・項目・論理構造**を管理します。**DBA（Database Administrator：データベース管理者）**はデータベースの**物理構成・性能・運用**を管理します。",
+          "remainingWork": "四肢を論理的な定義と物理的な管理に分類する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四肢を論理的な定義と物理的な管理に分類する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "顧客IDの意味・命名規則を統一するのはDA、容量不足でディスクを増設するのはDBAです。**DBMS（Database Management System：データベース管理システム）**の性能調整や障害復旧もDBA側です。",
+          "remainingWork": "DAの論理設計・標準化を述べる肢を確認する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
+        },
+        {
+          "newInformation": "**イ：論理データベース設計とデータ項目の標準化**がDAの役割です。アの容量管理、ウの性能調整、エの復旧はDBAです。",
+          "remainingWork": "DAとDBAの責任範囲を対比する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r04h/r04h-q57.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 809eff1fcdf613267190b725eecf3f28cec815cf747a34f3c43db6efe2df7c27。",
+        "contextの公式正答 イ と解法を作者点検。初学者のつまずき：DA・DBA・DBMSの略語が分からず、データ項目の意味の管理とディスク・性能・復旧を混同する。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "3cf90f1a40b6793a090b36393bab8c6df5ce5fee81c0221a7980527e9c6b2839",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q57",
-      "summary": "ウ。X社が管理する発電装置からの排出は、自社排出源の直接排出です。",
-      "explanation": "スコープ1は自社が所有又は管理する排出源からの直接排出です。X社の発電装置の燃料を燃やして出る温室効果ガスは、この条件に該当します。\n買った電力を使うために外部の発電所で出るガスはスコープ2です。廃棄処理を委託した他社の排出など、自社の活動に関連するその他の間接排出はスコープ3です。IT機器の管理者だけでなく、実際にガスを出す排出源を確認します。",
+      "summary": "GHGプロトコルのスコープ1～3を、排出源の管理主体から分類する問題。",
+      "explanation": "**GHG（Greenhouse Gas：温室効果ガス）**プロトコルは温室効果ガスの排出量を分類・算定する枠組みです。\nスコープ1は自社が所有又は管理する排出源からの直接排出です。X社の発電装置の燃料を燃やして出る温室効果ガスは、この条件に該当します。\n買った電力を使うために外部の発電所で出るガスはスコープ2です。廃棄処理を委託した他社の排出など、自社の活動に関連するその他の間接排出はスコープ3です。IT機器の管理者だけでなく、実際にガスを出す排出源を確認します。",
       "choiceReasons": [
         "アは購入電力の発電に伴う間接排出なのでスコープ2です。",
         "イは廃棄物処理事業者の排出源から出るガスで、X社にとってスコープ3です。",
@@ -1124,58 +1132,66 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補でガスが出る場所を、購入電力の発電所・廃棄物処理事業者・自社発電装置に分けます。",
+          "text": "**GHG（Greenhouse Gas：温室効果ガス）**プロトコルでは、**スコープ1＝自社所有・管理の排出源からの直接排出**、**スコープ2＝購入電力の発電に伴う間接排出**、**スコープ3＝その他の間接排出**です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "表のスコープ1の条件は「自社が所有又は管理する排出源」です。購入電力の場合、IT機器自体から発電のガスは出ません。",
-          "revealsAnswer": false
+          "text": "例えば自社の非常用発電機で燃料を燃やすと、ガスは**自社が管理する発電装置**から直接出ます。一方、電力会社の発電所で発生したガスは購入者にとって直接排出ではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "X社の発電装置はX社が管理する排出源です。他社の発電所や廃棄物処理設備と管理主体を比べます。",
+          "text": "正答は**ウ**。X社が管理する発電装置の排出がスコープ1。アは購入電力でスコープ2、イは委託先の廃棄処理でスコープ3。エもX社の直接排出ではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "GHGや直接・間接排出の違いが分からず、IT機器の持主と発電設備の管理者を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**GHG（Greenhouse Gas：温室効果ガス）**プロトコルでは、**スコープ1＝自社所有・管理の排出源からの直接排出**、**スコープ2＝購入電力の発電に伴う間接排出**、**スコープ3＝その他の間接排出**です。",
+          "remainingWork": "各肢で実際にガスを出す設備と管理者を探す",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、各肢で実際にガスを出す設備と管理者を探す判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "例えば自社の非常用発電機で燃料を燃やすと、ガスは**自社が管理する発電装置**から直接出ます。一方、電力会社の発電所で発生したガスは購入者にとって直接排出ではありません。",
+          "remainingWork": "自社発電装置に当たる肢を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
+        },
+        {
+          "newInformation": "正答は**ウ**。X社が管理する発電装置の排出がスコープ1。アは購入電力でスコープ2、イは委託先の廃棄処理でスコープ3。エもX社の直接排出ではありません。",
+          "remainingWork": "設備の管理者と電力購入者の違いを確認する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r06h/r06h-q57.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 299f7c64365c75685631aea487be2049f8702aad5e7cbedb5b8166f9c4345b67。",
+        "contextの公式正答 ウ と解法を作者点検。初学者のつまずき：GHGや直接・間接排出の違いが分からず、IT機器の持主と発電設備の管理者を混同する。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q58",
     "baseVersion": 2,
     "baseLessonSHA256": "3d00b827d3b015fb212850e6f30d85f2941999c38e5efb2a63fc20f0366106f1",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q58",
-      "summary": "エ。受容基準をアセスメント後に定めるのは不適切です。",
-      "explanation": "リスク受容基準は、アセスメント結果を評価する前に確立しておく必要があります。結果を見てから基準を決めると、その結果に合わせた恣意的な受容が可能になり、適切な判断を保証できません。",
+      "summary": "ISMS内部監査でリスク受容基準の決定時点が要求事項に合うか判断する問題。",
+      "explanation": "**ISMS（Information Security Management System：情報セキュリティマネジメントシステム）**では、リスクを評価する前にリスク受容基準を確立する必要があります。\nリスク受容基準は、アセスメント結果を評価する前に確立しておく必要があります。結果を見てから基準を決めると、その結果に合わせた恣意的な受容が可能になり、適切な判断を保証できません。",
       "choiceReasons": [
         "規定の手順でUSB利用を許可しており、この記述から不適合は認められません。",
         "事故を規定どおり報告しており、指摘すべき逸脱は示されていません。",
@@ -1186,57 +1202,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補で事故の有無よりも、定められた手順から逸脱しているかを確認します。",
+          "text": "**ISMS（Information Security Management System：情報セキュリティマネジメントシステム）**の内部監査は、要求事項や手順に適合しているかを確認します。事故の発生だけで不適合とは決まりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "リスクを受容するかの判断基準は、結果の評価より前か後かを考えます。",
-          "revealsAnswer": false
+          "text": "**リスクアセスメント**はリスクを特定・分析・評価すること。**リスク受容基準**は『どこまでなら受け入れるか』の判断基準で、**結果を評価する前に決める**必要があります。結果を見てから変えるのは不適切です。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "アセスメントを実施した後で受容基準を決めた、という順序を指摘します。",
+          "text": "**エ**はアセスメントの後に受容基準を定めたため指摘対象。ア・イは規定どおり、ウも検知・駆除だけで直ちに不適合とは言えません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ISMS・リスクアセスメント・受容基準の意味が分からず、事故の発生だけで不適合と考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**ISMS（Information Security Management System：情報セキュリティマネジメントシステム）**の内部監査は、要求事項や手順に適合しているかを確認します。事故の発生だけで不適合とは決まりません。",
+          "remainingWork": "四肢が規定の手順・要求を守っているか確認する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、四肢が規定の手順・要求を守っているか確認する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**リスクアセスメント**はリスクを特定・分析・評価すること。**リスク受容基準**は『どこまでなら受け入れるか』の判断基準で、**結果を評価する前に決める**必要があります。結果を見てから変えるのは不適切です。",
+          "remainingWork": "受容基準を決めた時点を各肢と照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
+        },
+        {
+          "newInformation": "**エ**はアセスメントの後に受容基準を定めたため指摘対象。ア・イは規定どおり、ウも検知・駆除だけで直ちに不適合とは言えません。",
+          "remainingWork": "事故の発生と要求事項違反を区別する",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r04a/r04a-q58.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 78443992a83400d90faef3c7fddaa5a943d27d6ea13f3784669b84b0fd1802b7。",
+        "contextの公式正答 エ と解法を作者点検。初学者のつまずき：ISMS・リスクアセスメント・受容基準の意味が分からず、事故の発生だけで不適合と考える。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r05a-q60",
     "baseVersion": 2,
     "baseLessonSHA256": "08a9a709fae2b5cce941249db830c9527960cba3a208ceb004ae9f00b4a00e08",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q60",
-      "summary": "イ。ITの統制はIT全般統制とIT業務処理統制から成ります。",
+      "summary": "財務報告の内部統制で、IT全般統制とIT業務処理統制を区別する問題。",
       "explanation": "IT全般統制はシステム開発・変更、運用、アクセス管理などの基盤を支える統制です。IT業務処理統制は業務アプリケーションで入力・処理・出力の完全性や正確性などを確保する統制です。\nITを利用しただけで統制が有効と決まるわけではなく、設計と運用を評価します。手作業であることだけを理由に不備とすることもできません。",
       "choiceReasons": [
         "IT環境は社内だけに限定されず、外部委託先や外部ネットワークなどの影響も含めて捉えます。",
@@ -1248,58 +1272,65 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "「社内に限る」「自動なら有効」「手作業なら不備」のような断定の根拠を確認します。",
+          "text": "**内部統制**は業務や財務報告の正確性などを確保する仕組みです。ITを使うだけで有効にはならず、**設計が適切か・実際に機能しているか**を評価します。手作業でも適切な統制になり得ます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "ITの統制を、開発・運用・アクセスなどの土台と、個々の業務の入力・処理・出力の統制に分けます。",
+          "text": "ITの統制には、システム変更・アクセス権・運用などの基盤を支える**IT全般統制**と、アプリの入力・処理・出力の正確性を守る**IT業務処理統制**があります。IT環境は社内だけに限定されません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "この二つをIT全般統制とIT業務処理統制と呼びます。二分類を述べた説明を選びます。",
+          "text": "**イ**が正答。アの『社内に限る』、ウの『自動化＝有効』、エの『手作業＝不備』は不適切です。統制の**有効性は設計と運用の実態**で判断します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "『統制』を知らず、ITの利用・自動化だけで内部統制が有効になると考える。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**内部統制**は業務や財務報告の正確性などを確保する仕組みです。ITを使うだけで有効にはならず、**設計が適切か・実際に機能しているか**を評価します。手作業でも適切な統制になり得ます。",
+          "remainingWork": "『自動なら有効』『手作業なら不備』の断定を点検する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、『自動なら有効』『手作業なら不備』の断定を点検する判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "ITの統制には、システム変更・アクセス権・運用などの基盤を支える**IT全般統制**と、アプリの入力・処理・出力の正確性を守る**IT業務処理統制**があります。IT環境は社内だけに限定されません。",
+          "remainingWork": "二つの統制区分を述べる肢を選ぶ",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**イ**が正答。アの『社内に限る』、ウの『自動化＝有効』、エの『手作業＝不備』は不適切です。統制の**有効性は設計と運用の実態**で判断します。",
+          "remainingWork": "全般統制と業務処理統制の違いを復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r05a/r05a-q60.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 ac6b7fdc349e76908e5618eb9d1bcf2a112db3ce7c6d71b3c18b32916e624f35。",
+        "contextの公式正答 イ と解法を作者点検。初学者のつまずき：『統制』を知らず、ITの利用・自動化だけで内部統制が有効になると考える。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q57",
     "baseVersion": 2,
     "baseLessonSHA256": "66c776ae8de18f6e6ebf17f70478fb1b4b3a5fe7035e916a470b15d0c3b8a6f4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-ap-a-batch27-20261028-run1",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q57",
-      "summary": "IaaSで②③、PaaSで④が不要となり、業務ジョブ監視①は残ります。",
-      "explanation": "IaaSでは物理サーバやネットワークを提供者が管理するため、利用者による物理サーバの起動・停止②とハードウェア保守ランプの目視③が不要になります。その段階ではミドルウェア管理は利用者側ですが、全ミドルウェアをPaaSへ移すとパッチ適用④も提供者側の役割になります。業務バッチのジョブ監視①はアプリケーション運用として残るのでウです。",
+      "summary": "オンプレミスからIaaS、さらにPaaSへ移行した際の運用責任の移転を問う問題。",
+      "explanation": "**IaaS（Infrastructure as a Service）**はインフラ基盤、**PaaS（Platform as a Service）**は実行環境まで提供するクラウドサービスの形態です。\nIaaSでは物理サーバやネットワークを提供者が管理するため、利用者による物理サーバの起動・停止②とハードウェア保守ランプの目視③が不要になります。その段階ではミドルウェア管理は利用者側ですが、全ミドルウェアをPaaSへ移すとパッチ適用④も提供者側の役割になります。業務バッチのジョブ監視①はアプリケーション運用として残るのでウです。",
       "choiceReasons": [
         "①の業務ジョブ監視は残り、②の物理サーバ操作はPaaSを待たずIaaSで不要になります。",
         "①はIaaSでも残ります。②が不要になるのはIaaSへの移行時です。",
@@ -1310,46 +1341,54 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "②③は物理機器、④はミドルウェア、①は業務処理に対する作業です。",
+          "text": "**IaaS（Infrastructure as a Service）**はサーバ・ネットワークなどの**基盤**を提供、**PaaS（Platform as a Service）**はその上の**実行環境・ミドルウェア**も提供します。『オンプレミス』は自社設備で運用する方式です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "IaaSで提供者が引き受ける物理基盤と、PaaSでさらに提供されるミドルウェアを順に考えます。",
-          "revealsAnswer": false
+          "text": "**物理サーバの起動停止②**と**保守ランプ目視③**はIaaSで提供者の担当になります。**ミドルウェアのパッチ④**は全ミドルウェアをPaaSへ移した時点で提供者側へ。**業務バッチのジョブ監視①**は利用者側に残ります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "IaaSで物理サーバの操作と保守を外し、PaaSでミドルウェアのパッチを外します。業務ジョブの監視は残します。",
+          "text": "正答は**ウ：IaaSで②③、PaaSで④**。①は業務アプリの運用なので残ります。『基盤→ミドルウェア→アプリ』の順に責任分界を考えます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "IaaS・PaaSの正式名称と責任分界を知らず、物理サーバとミドルウェアの管理が同じ段階で移ると思う。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**IaaS（Infrastructure as a Service）**はサーバ・ネットワークなどの**基盤**を提供、**PaaS（Platform as a Service）**はその上の**実行環境・ミドルウェア**も提供します。『オンプレミス』は自社設備で運用する方式です。",
+          "remainingWork": "①～④を物理設備・ミドルウェア・業務アプリに分ける",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "定義・式・比較軸を与えたが、①～④を物理設備・ミドルウェア・業務アプリに分ける判断を本人に残している。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "**物理サーバの起動停止②**と**保守ランプ目視③**はIaaSで提供者の担当になります。**ミドルウェアのパッチ④**は全ミドルウェアをPaaSへ移した時点で提供者側へ。**業務バッチのジョブ監視①**は利用者側に残ります。",
+          "remainingWork": "この番号の組合せを選択肢から探す",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
+        },
+        {
+          "newInformation": "正答は**ウ：IaaSで②③、PaaSで④**。①は業務アプリの運用なので残ります。『基盤→ミドルウェア→アプリ』の順に責任分界を考えます。",
+          "remainingWork": "クラウドの各層と運用責任を対応させる",
+          "revealsAnswer": true,
+          "reason": "この段階までの内容と全選択肢を合わせると正答の内容・番号を実質特定できる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "explanation",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub原本WebP assets/questions/r05h/r05h-q57.webp をバイナリ取得し、画像を表示して目視確認。問題文・四肢・条件・図表をcontextと照合。contextの原本SHA256台帳値 0ff02cf94d5e94abc139ce8cb06cf7392b7873147ab8dd2d0bb53951d332cf17。",
+        "contextの公式正答 ウ と解法を作者点検。初学者のつまずき：IaaS・PaaSの正式名称と責任分界を知らず、物理サーバとミドルウェアの管理が同じ段階で移ると思う。",
+        "IPA公式解答PDFの独立照合と独立レビューは未実施。"
+      ]
     }
   }
 ]
