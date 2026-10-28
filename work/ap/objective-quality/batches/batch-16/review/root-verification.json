@@ -1,0 +1,224 @@
+{
+  "rootReviewer": "Codex /root",
+  "supplementalCalculations": {
+    "checkedAt": "2026-10-28T03:26:28.333786+00:00",
+    "checker": "Codex /root",
+    "checks": {
+      "r07h-q30": {
+        "tcpPayloadFirst": 1460,
+        "tcpPayloadSecond": 540,
+        "wrongOptions": {
+          "500": "Ignores 40-byte IP/TCP headers",
+          "580": "Adds second IP/TCP headers to data",
+          "598": "Adds Ethernet 14+4 too"
+        },
+        "answer": "イ"
+      },
+      "r05a-q34": {
+        "network": "172.30.120.0",
+        "mask": "255.255.252.0",
+        "prefix": 22,
+        "thirdOctetAND": 120,
+        "answer": "イ"
+      },
+      "r07h-q32": {
+        "network": "10.16.32.64",
+        "broadcast": "10.16.32.127",
+        "firstAssignableDescending": "10.16.32.126",
+        "tenthDescending": "10.16.32.117",
+        "allOptionsMembership": {
+          "54": false,
+          "55": false,
+          "117": true,
+          "118": true
+        },
+        "answer": "ウ"
+      },
+      "r04a-q35": {
+        "method": "Python urllib.parse, no HTTP request",
+        "candidates": [
+          {
+            "url": "https://www.example.com/member/login?id=user:8080",
+            "scheme": "https",
+            "hostname": "www.example.com",
+            "port": null,
+            "path": "/member/login",
+            "query": "id=user:8080"
+          },
+          {
+            "url": "https:8080://www.example.com/member/login?id=user",
+            "scheme": "https",
+            "hostname": null,
+            "port": null,
+            "path": "8080://www.example.com/member/login",
+            "query": "id=user"
+          },
+          {
+            "url": "https://www.example.com/member/login:8080?id=user",
+            "scheme": "https",
+            "hostname": "www.example.com",
+            "port": null,
+            "path": "/member/login:8080",
+            "query": "id=user"
+          },
+          {
+            "url": "https://www.example.com:8080/member/login?id=user",
+            "scheme": "https",
+            "hostname": "www.example.com",
+            "port": 8080,
+            "path": "/member/login",
+            "query": "id=user"
+          }
+        ]
+      },
+      "r05h-q33": {
+        "ethernetDestinationMACOffset": 0,
+        "ipv4DestinationOffset": 30,
+        "tcpDestinationPortOffset": 36,
+        "ordering": "MAC,IP,port",
+        "answer": "ウ",
+        "note": "Offsets assume ordinary 14-byte Ethernet + 20-byte IPv4 headers; option IP header length does not change ordering."
+      }
+    }
+  },
+  "domain20QuestionsHints0to3": {
+    "questions": 20,
+    "hintDepthCases": 80,
+    "postAnswerStatusAndHistoryPreserved": 80,
+    "results": {
+      "r07a-q34": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r07h-q29": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r04h-q32": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r07h-q30": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "r03a-q33": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "r05a-q32": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r03h-q35": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r04h-q35": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r06h-q34": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r03a-q34": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r07a-q33": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "r04h-q33": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r04a-q35": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r05a-q33": [
+        "correct",
+        "revealed",
+        "revealed",
+        "revealed"
+      ],
+      "r05h-q33": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r06a-q35": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r07a-q32": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r04a-q34": [
+        "correct",
+        "assisted",
+        "revealed",
+        "revealed"
+      ],
+      "r05a-q34": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ],
+      "r07h-q32": [
+        "correct",
+        "assisted",
+        "assisted",
+        "assisted"
+      ]
+    }
+  },
+  "frozenReportAndFinalHashesVerified": true,
+  "all800DraftsReviewHashes": "passed",
+  "sharedLocalVerification": {
+    "qualityContract": {
+      "tests": 29,
+      "status": "passed",
+      "durationSeconds": 26.631
+    },
+    "corpus": "passed",
+    "content": "passed",
+    "location": "/workspace/ap-study-batch16-review",
+    "scope": "Draft checks final; all application/data/assets/tools are unchanged and this common suite is reused for unchanged files in the following content-only review branches."
+  }
+}
