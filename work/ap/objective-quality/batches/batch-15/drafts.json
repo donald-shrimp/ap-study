@@ -641,7 +641,7 @@
         {
           "title": "注目するところ",
           "text": "IPv4の宛先は**IPアドレス**で指定しますが、同じLAN上でイーサネットフレームを届けるには次の転送先の**MACアドレス**が必要です。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -661,9 +661,9 @@
       "stages": [
         {
           "newInformation": "IPv4の宛先は**IPアドレス**で指定しますが、同じLAN上でイーサネットフレームを届けるには次の転送先の**MACアドレス**が必要です。",
-          "remainingWork": "二つのアドレスの対応を調べる仕組みを探す",
-          "revealsAnswer": false,
-          "reason": "IPとMACの役割を教えるだけでプロトコル名と対応方向はまだ確定しない。"
+          "remainingWork": "第1段で実質的に開示した説明を原問の正答肢と照合し、次段で仕組みや他の選択肢との差を確認する。",
+          "revealsAnswer": true,
+          "reason": "H1は既知のIPv4宛先IPから同一LANの次転送先MACを必要とする仕組みを説明し、正答アのIP→MACという方向と目的を実質的に渡している。ARPの名称をH1で繰り返さないことだけでは非開示にならない。"
         },
         {
           "newInformation": "**ARP（Address Resolution Protocol）**は、同一リンク上の転送先の**IPアドレスからMACアドレス**を問い合わせる仕組みです。",
@@ -685,7 +685,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r03a/r03a-q32.webp をGitHubからbase64で取得し、実際に画像として表示して問題文・全4肢・図表と条件を目視確認。context記載の原本SHA256: c683556a6305e5cccecd017ce370bf5c59452f54310cd97ad5341a686b53ece2。",
         "context記載の公式正答 ア と原本の選択肢を対応付けて確認。ARP/ICMP/RIP/DHCPに対応する4肢の文言を画像で照合。",
-        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。"
+        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。",
+        "Codex /root が初回独立確認 B15-01 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応するdesignの判定理由と残る作業を同期した。ヒント本文・原問・公式正答は維持。修正者とは別のCodex /root/ap_batch15_independentが最終版を確認する。"
       ]
     }
   },
@@ -710,7 +711,7 @@
         {
           "title": "注目するところ",
           "text": "プリンターは**同じLAN上**で、IPアドレスは既知です。IPv4通信ではIPとMACの対応を調べ、その結果をPCの**ARPキャッシュ**に一時保存します。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -730,9 +731,9 @@
       "stages": [
         {
           "newInformation": "プリンターは**同じLAN上**で、IPアドレスは既知です。IPv4通信ではIPとMACの対応を調べ、その結果をPCの**ARPキャッシュ**に一時保存します。",
-          "remainingWork": "直前に通信したことから対応表を確認する方針を立てる",
-          "revealsAnswer": false,
-          "reason": "キャッシュの存在は教えるが、表示コマンド名はまだ渡していない。"
+          "remainingWork": "第1段で実質的に開示した説明を原問の正答肢と照合し、次段で仕組みや他の選択肢との差を確認する。",
+          "revealsAnswer": true,
+          "reason": "H1が調べるべき対応の保存先をARPキャッシュと名前付きで明示し、選択肢中の唯一のarpへ目的と名称を直結させている。表示オプションの知識は選択肢選択のために残る判断ではない。"
         },
         {
           "newInformation": "**arpコマンド**（例：`arp -a`）はARPキャッシュのIPアドレスとMACアドレスの対応を表示します。直前に使ったプリンターの対応を探すのに適します。",
@@ -754,7 +755,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r06a/r06a-q36.webp をGitHubからbase64で取得し、実際に画像として表示して問題文・全4肢・図表と条件を目視確認。context記載の原本SHA256: 1876916cc73a2d784e987e902cbcfd8bbb1cc65197e16dd5ca6075a6ae810c79。",
         "context記載の公式正答 ア と原本の選択肢を対応付けて確認。原本の『直前に使用』『同一LAN』『IPアドレス既知』とarp/ipconfig又はifconfig/netstat/pingの4肢を確認。",
-        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。"
+        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。",
+        "Codex /root が初回独立確認 B15-02 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応するdesignの判定理由と残る作業を同期した。ヒント本文・原問・公式正答は維持。修正者とは別のCodex /root/ap_batch15_independentが最終版を確認する。"
       ]
     }
   },
@@ -848,7 +850,7 @@
         {
           "title": "注目するところ",
           "text": "**CSMA**はCarrier Sense Multiple Accessで、複数ノードが媒体を共有し、**送信前に媒体が使用中かを確認**します。送信権を順番に配る方式とは違います。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -868,9 +870,9 @@
       "stages": [
         {
           "newInformation": "**CSMA**はCarrier Sense Multiple Accessで、複数ノードが媒体を共有し、**送信前に媒体が使用中かを確認**します。送信権を順番に配る方式とは違います。",
-          "remainingWork": "CDが表す動作と選択肢を照合する",
-          "revealsAnswer": false,
-          "reason": "媒体確認までを教えるが、衝突時の処理はまだ示さない。"
+          "remainingWork": "第1段で実質的に開示した説明を原問の正答肢と照合し、次段で仕組みや他の選択肢との差を確認する。",
+          "revealsAnswer": true,
+          "reason": "H1はCSMAを名称付きで送信前の媒体使用確認と説明し、順番の送信権配布と違うとも示す。全肢中媒体使用確認をするのはイだけで、ア/ウ/エは割り当てた送信権/時間である。CDの詳細が未提示でも正答肢の決定的な説明を既に渡している。"
         },
         {
           "newInformation": "**CDはCollision Detection（衝突検出）**です。媒体が空いていれば送信し、衝突を検出したら送信を中止して**ランダムな時間待って再送**します。",
@@ -892,7 +894,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r06h/r06h-q30.webp をGitHubからbase64で取得し、実際に画像として表示して問題文・全4肢・図表と条件を目視確認。context記載の原本SHA256: 36720bf457cf27bdc229c7c370a253ab994f82b195f475cf5e523a45de764ff9。",
         "context記載の公式正答 イ と原本の選択肢を対応付けて確認。送信権の順次受渡し、媒体確認と衝突後のランダム再送、トークンリング、タイムスロットの全4肢を画像で確認。",
-        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。"
+        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。",
+        "Codex /root が初回独立確認 B15-03 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応するdesignの判定理由と残る作業を同期した。ヒント本文・原問・公式正答は維持。修正者とは別のCodex /root/ap_batch15_independentが最終版を確認する。"
       ]
     }
   },
@@ -1124,7 +1127,7 @@
         {
           "title": "注目するところ",
           "text": "IPネットワークでは、**宛先へ届かない・TTLが尽きる**などの事象を送信元へ知らせる必要があります。アドレスの割当てや変換とは別の機能です。",
-          "revealsAnswer": false
+          "revealsAnswer": true
         },
         {
           "title": "使う考え方",
@@ -1144,9 +1147,9 @@
       "stages": [
         {
           "newInformation": "IPネットワークでは、**宛先へ届かない・TTLが尽きる**などの事象を送信元へ知らせる必要があります。アドレスの割当てや変換とは別の機能です。",
-          "remainingWork": "エラーや制御通知に当たる選択肢を探す",
-          "revealsAnswer": false,
-          "reason": "必要な機能の背景だけを教え、ICMPの定義はまだ示していない。"
+          "remainingWork": "第1段で実質的に開示した説明を原問の正答肢と照合し、次段で仕組みや他の選択肢との差を確認する。",
+          "revealsAnswer": true,
+          "reason": "H1が送信元への宛先到達不能/TTL超過の通知を示し、アドレス割当て/変換と区別している。これは正答ウのIPパケット送信エラー報告/制御通知と実質同一であり、ICMPという名前を次段まで留保してもfalseにはならない。"
         },
         {
           "newInformation": "**ICMP（Internet Control Message Protocol）**は、宛先到達不能やTTL超過などの**エラー・制御メッセージ**を送信元へ通知します。pingのエコー要求・応答にも使われます。",
@@ -1168,7 +1171,8 @@
       "sourceNotes": [
         "原本WebP assets/questions/r06a/r06a-q34.webp をGitHubからbase64で取得し、実際に画像として表示して問題文・全4肢・図表と条件を目視確認。context記載の原本SHA256: a53fb24592ba7f9337319e5941bbd26aea20b67b9d92765c6d889482dee2e039。",
         "context記載の公式正答 ウ と原本の選択肢を対応付けて確認。MACからIPの解決、NAT、ICMP通知、DHCP割当ての4肢を原本で確認。",
-        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。"
+        "IPA公式解答PDFの別途独立照合と別担当レビューは未実施。公開データは変更しない。",
+        "Codex /root が初回独立確認 B15-04 を受け、H1のrevealsAnswerをfalseからtrueへ訂正し、対応するdesignの判定理由と残る作業を同期した。ヒント本文・原問・公式正答は維持。修正者とは別のCodex /root/ap_batch15_independentが最終版を確認する。"
       ]
     }
   },
