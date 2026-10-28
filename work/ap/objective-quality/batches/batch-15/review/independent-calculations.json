@@ -1,0 +1,171 @@
+{
+  "r03a-q26": {
+    "union": [
+      [
+        "0001",
+        "a",
+        100
+      ],
+      [
+        "0002",
+        "a",
+        200
+      ],
+      [
+        "0002",
+        "b",
+        200
+      ],
+      [
+        "0003",
+        "d",
+        300
+      ]
+    ],
+    "difference": [
+      [
+        "0002",
+        "b",
+        200
+      ],
+      [
+        "0003",
+        "d",
+        300
+      ]
+    ],
+    "productCount": 6,
+    "joinPairs": [
+      [
+        [
+          "0001",
+          "a",
+          100
+        ],
+        [
+          "0001",
+          "a",
+          100
+        ]
+      ],
+      [
+        [
+          "0002",
+          "b",
+          200
+        ],
+        [
+          "0002",
+          "a",
+          200
+        ]
+      ]
+    ]
+  },
+  "r04a-q27": {
+    "union": [
+      "A001",
+      "A005",
+      "B010",
+      "C003",
+      "C011",
+      "D080"
+    ],
+    "difference": [
+      "A001",
+      "C003",
+      "C011"
+    ],
+    "intersection": [
+      "A005",
+      "B010"
+    ],
+    "reverseDifference": [
+      "D080"
+    ]
+  },
+  "ON DELETE CASCADE": {
+    "children": [
+      [
+        11,
+        2
+      ]
+    ],
+    "error": null
+  },
+  "ON DELETE RESTRICT": {
+    "children": [
+      [
+        10,
+        1
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    "error": "FOREIGN KEY constraint failed"
+  },
+  "ON DELETE SET DEFAULT": {
+    "children": [
+      [
+        10,
+        2
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    "error": null
+  },
+  "ON DELETE SET NULL": {
+    "children": [
+      [
+        10,
+        null
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    "error": null
+  },
+  "r04a-q33": {
+    "mask": "255.255.255.248",
+    "broadcast": "192.168.16.47",
+    "hosts": [
+      "192.168.16.41",
+      "192.168.16.42",
+      "192.168.16.43",
+      "192.168.16.44",
+      "192.168.16.45",
+      "192.168.16.46"
+    ],
+    "48InNetwork": false
+  },
+  "r07h-q34": {
+    "sourceBytes": 30000,
+    "encodedBytes": 40000
+  },
+  "r05a-q30": {
+    "T1": "CP前確定・Writeあり→REDO不要",
+    "T2": "CP後確定・Writeあり→REDO",
+    "T3": "障害時未確定・Readのみ→UNDO不要",
+    "T4": "障害時未確定・Readのみ→UNDO不要",
+    "T5": "CP後確定・Writeあり→REDO",
+    "T6": "障害時未確定・Writeあり→UNDO"
+  },
+  "r06h-q31": {
+    "address": "208.77.188.166",
+    "lastOctetBinary": "0b10100110",
+    "rfc1918": false,
+    "multicast": false,
+    "global": true
+  },
+  "2001:db8::3ab::ff01": "invalid",
+  "2001:db8::3ab:ff01": "2001:0db8:0000:0000:0000:0000:03ab:ff01",
+  "2001:db8.3ab:ff01": "invalid",
+  "2001.db8.3ab.ff01": "invalid"
+}
