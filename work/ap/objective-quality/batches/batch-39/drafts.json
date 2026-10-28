@@ -3,11 +3,11 @@
     "id": "r04h-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "2a49d9ec567c0d620586f7c81f1b5b6644c441a70c3ae23efd392f5cd551af8a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04h-q79",
-      "summary": "ウ。請負なのにB社の従業員へA社が直接指揮命令する状況は偽装請負です。",
+      "summary": "請負契約における作業者の所属と指揮命令者を照合し、偽装請負に当たる実態を判断する問題。",
       "explanation": "請負では受託側B社が自社の従業員へ業務の指揮命令を行います。作業場所がA社でもB社の責任者が指示していれば、その点だけで偽装請負とはなりません。B社の従業員が発注側A社の責任者の指揮命令で設計書を作成する状況は、契約名が請負でも実態が労働者派遣となる問題があります。",
       "choiceReasons": [
         "A社の従業員にA社が指示するので、B社を作業場所としているだけでは偽装請負ではありません。",
@@ -19,57 +19,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補を「従業員の所属」「指示する責任者の所属」「作業場所」の三列に整理します。",
+          "text": "四肢について「誰の従業員か」「誰が作業を指示するか」「どこで働くか」を分けて読みます。場所が他社というだけでは、契約の実態は決まりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "請負では受託企業が自社従業員の仕事を管理します。場所が発注者側でも、指示が受託企業から出る場合と区別します。",
-          "revealsAnswer": false
+          "text": "請負なら受託会社が自社の従業員に仕事の指示を出します。発注会社が受託会社の従業員へ直接業務指示をすると、名目は請負でも実態が派遣となる問題があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "B社従業員がA社責任者の直接指示で設計書を作成する状況が、偽装請負に当たります。",
+          "text": "B社が受託会社、A社が発注会社です。B社の従業員がA社責任者から設計書作成の指示を受けるウが偽装請負に該当します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "場所だけで派遣か請負かを決め、誰が受託労働者に直接指示するかを見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢について「誰の従業員か」「誰が作業を指示するか」「どこで働くか」を分けて読みます。場所が他社というだけでは、契約の実態は決まりません。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答ウはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "請負なら受託会社が自社の従業員に仕事の指示を出します。発注会社が受託会社の従業員へ直接業務指示をすると、名目は請負でも実態が派遣となる問題があります。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ウ（B社の従業員が，A社を作業場所として，A社の責任者の指揮命令に従って設計書を作成している。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
+        },
+        {
+          "newInformation": "B社が受託会社、A社が発注会社です。B社の従業員がA社責任者から設計書作成の指示を受けるウが偽装請負に該当します。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ウ（B社の従業員が，A社を作業場所として，A社の責任者の指揮命令に従って設計書を作成している。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r04h/r04h-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年spring問79の正答ウとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "厚労省の請負と派遣の判定基準：https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000077386_00020.html"
+      ]
     }
   },
   {
     "id": "r05a-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "307141e022f280b54a73a9add7e562fba88c8f88ada01e37e0600e3949440dbb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q80",
-      "summary": "イ。出向先Bは、出向してきたCへ指揮命令します。",
+      "summary": "出向・請負・労働者派遣について、企業A・Bと労働者Cの雇用関係・指揮命令関係を区別する問題。",
       "explanation": "図ではCがAと雇用関係をもち、AとBの契約に応じてBとCの関係が変わります。AからBへ出向する場合、Bの業務に従事するCにBが指揮命令するのでイが適切です。\n請負では受託者Aが労働者へ指揮命令し、委託者Bは直接命令しません。労働者派遣では派遣元Aが雇用し、派遣先Bは指揮命令するものの、Bとの雇用関係が成立するわけではありません。",
       "choiceReasons": [
         "請負では受託者AがCへ指揮命令します。委託者BがCへ直接指揮命令する関係にはなりません。",
@@ -81,57 +88,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "図の雇用関係はAとCです。BとCを雇用関係と指揮命令関係に分けて各契約を確認します。",
+          "text": "図のAとCの線は雇用関係です。BとCの線が何の関係になるかは、A・B間の「請負」「出向」「派遣」という契約の種類によって変わります。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "請負ではAが自らの労働者を指揮し、派遣では雇用するAと指揮するBを分けます。出向したCは出向先Bの業務に従事します。",
+          "text": "請負では受託者が自社労働者を指揮します。派遣では派遣元が雇用し、派遣先が指揮します。出向では出向者が出向先の業務に従事し、出向先の指揮命令を受けます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "Bへ出向した労働者の仕事をBが指揮する関係を確認します。「出向にかかわる契約」の候補を照合しましょう。",
+          "text": "出向ならBが出向先としてCを指揮する点がイに当たります。派遣と違い、出向では出向先との雇用関係が生じる形態もあります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "雇用と指揮命令の矢印を同じ関係とみなし、出向・派遣・請負を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "図のAとCの線は雇用関係です。BとCの線が何の関係になるかは、A・B間の「請負」「出向」「派遣」という契約の種類によって変わります。",
+          "remainingWork": "A・B・C間の関係を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。A・B・C間の関係を区別するが残り、正答イはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "請負では受託者が自社労働者を指揮します。派遣では派遣元が雇用し、派遣先が指揮します。出向では出向者が出向先の業務に従事し、出向先の指揮命令を受けます。",
+          "remainingWork": "派遣と出向の指揮命令の違いを照合する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（“契約”が出向にかかわる契約で，企業Aが企業Bに労働者Cを出向させたとき，企業Bと労働者Cとの間には指揮命令関係が生じる。）を実質的に特定できる。派遣と出向の指揮命令の違いを照合するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "出向ならBが出向先としてCを指揮する点がイに当たります。派遣と違い、出向では出向先との雇用関係が生じる形態もあります。",
+          "remainingWork": "出向と派遣の雇用関係の違いを復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（“契約”が出向にかかわる契約で，企業Aが企業Bに労働者Cを出向させたとき，企業Bと労働者Cとの間には指揮命令関係が生じる。）を実質的に特定できる。出向と派遣の雇用関係の違いを復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r05a/r05a-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年autumn問80の正答イとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "厚労省の労働者派遣・請負ガイド：https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000077386_00020.html"
+      ]
     }
   },
   {
     "id": "r06a-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "747b0322894200e4478c025386b763b85908fc99839615c64b751df7d0b9cfb8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06a-q79",
-      "summary": "ア。3年の派遣期間を定める契約は、選択肢の中で適切です。",
+      "summary": "派遣労働者の受入期間と、派遣先による事前選考・属性指定・苦情処理の適否を判断する問題。",
       "explanation": "通常の労働者派遣では、派遣先が派遣される人を選ぶために事前の書類選考や面接をしたり、年齢・性別を指定したりすることは認められません。派遣先の指揮命令に関する苦情も、派遣先が派遣元と連携して対応する必要があります。\n派遣期間には原則3年の制限があり、3年という期間を定めるアはこの制限内の契約です。期間制限の例外や延長手続はありますが、他の選択肢の不適切な行為を正当化しません。",
       "choiceReasons": [
         "派遣期間を3年とする契約は原則の期間制限内であり、選択肢の中で適切です。",
@@ -143,57 +157,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "Aは派遣先、Bは雇用主である派遣元です。イ・ウはAが派遣される人を選ぶ行為、エはAの指示への苦情対応だと分けます。",
+          "text": "派遣先Aは実際の仕事を指示する会社、派遣元Bは労働者を雇用する会社です。Aの行為が「受入期間」「人選」「苦情処理」のどれに関わるか整理します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "通常の派遣はAが直接採用する形ではありません。履歴書での選考や年齢・性別の指定は人を特定する行為になり、Aの指示への苦情にもAの対応が必要です。",
+          "text": "原則として同一事業所・同一組織単位の派遣期間には3年の制限があります。通常の派遣では派遣先による事前面接・履歴書選考・年齢や性別の指定は禁止され、派遣先も自社の指揮命令への苦情に対応します。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "事前選考・属性指定・苦情の丸投げという不適切な行為を除くと、3年の期間を定めるアが残ります。",
+          "text": "期間を3年とするアは原則の上限に収まります。イ・ウは派遣先が人を特定し、エは派遣先の苦情対応を派遣元へ丸投げするので不適切です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "通常の派遣で派遣先ができる人選と受入期間・苦情処理の制限を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "派遣先Aは実際の仕事を指示する会社、派遣元Bは労働者を雇用する会社です。Aの行為が「受入期間」「人選」「苦情処理」のどれに関わるか整理します。",
+          "remainingWork": "派遣元と派遣先の役割を区別する",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。派遣元と派遣先の役割を区別するが残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原則として同一事業所・同一組織単位の派遣期間には3年の制限があります。通常の派遣では派遣先による事前面接・履歴書選考・年齢や性別の指定は禁止され、派遣先も自社の指揮命令への苦情に対応します。",
+          "remainingWork": "三年制限と違法な事前選考・苦情放置を比べる",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（システム開発が長期間となることが予想されるので，開発要員の派遣期間を3年とする契約を結ぶ。）を実質的に特定できる。三年制限と違法な事前選考・苦情放置を比べるは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "期間を3年とするアは原則の上限に収まります。イ・ウは派遣先が人を特定し、エは派遣先の苦情対応を派遣元へ丸投げするので不適切です。",
+          "remainingWork": "原則の期間制限と例外を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（システム開発が長期間となることが予想されるので，開発要員の派遣期間を3年とする契約を結ぶ。）を実質的に特定できる。原則の期間制限と例外を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r06a/r06a-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年autumn問79の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "厚労省の期間制限・事前面接禁止の説明：https://jsite.mhlw.go.jp/miyagi-roudoukyoku/1/132/13212.html"
+      ]
     }
   },
   {
     "id": "r05a-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "81c781aba6b184224a9e4e9c92f2912038797acb5fbd1fb88a84124e1201b4b8",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q79",
-      "summary": "ア。第三者提供する情報の項目と提供方法を公表します。",
+      "summary": "匿名加工情報を第三者へ提供する際の公表・明示義務と、通常の個人データの取扱いとの違いを問う問題。",
       "explanation": "適正に作成された匿名加工情報を第三者へ提供する際は、含まれる個人に関する情報の項目と提供方法を、あらかじめ公表する義務があります。また提供先に匿名加工情報であることを明示します。\n通常の個人データの第三者提供とは異なり、この条件では本人の同意が必須ではありません。全ての提供を委員会へ報告する義務や、物理媒体に限る条件もありません。",
       "choiceReasons": [
         "含まれる情報の項目と提供方法を公表するという第三者提供時の義務です。",
@@ -205,57 +226,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "対象は適正に加工された「匿名加工情報」です。通常の個人データの同意原則をそのまま当てはめないようにします。",
+          "text": "「匿名加工情報」は単に名前を伏せたデータではなく、所定の基準で個人を識別できないよう加工した情報です。通常の個人データと同じ第三者提供の要件か考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "第三者へ何の情報をどう提供するかを透明にする義務を考えます。個人に関する情報の項目と提供方法の公表が必要です。",
+          "text": "適正な匿名加工情報を第三者提供するときは、**含まれる個人に関する情報の項目と提供方法をあらかじめ公表**し、提供先に匿名加工情報であることを明示します。本人の事前同意が一律の要件ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「情報の項目及び提供方法を公表」と書かれた候補を選びます。",
+          "text": "公表すべきものを定めるアが該当します。個人情報保護委員会への個別報告、紙での提供限定、本人の事前承諾の一律義務と混同しないでください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "匿名加工情報にも個人データと同じ本人同意が必須と思い、事前公表義務を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「匿名加工情報」は単に名前を伏せたデータではなく、所定の基準で個人を識別できないよう加工した情報です。通常の個人データと同じ第三者提供の要件か考えます。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "適正な匿名加工情報を第三者提供するときは、**含まれる個人に関する情報の項目と提供方法をあらかじめ公表**し、提供先に匿名加工情報であることを明示します。本人の事前同意が一律の要件ではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（第三者に提供される匿名加工情報に含まれる個人に関する情報の項目及び提供方法を公表しなければならない。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "公表すべきものを定めるアが該当します。個人情報保護委員会への個別報告、紙での提供限定、本人の事前承諾の一律義務と混同しないでください。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（第三者に提供される匿名加工情報に含まれる個人に関する情報の項目及び提供方法を公表しなければならない。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r05a/r05a-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年autumn問79の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "個人情報保護委員会の匿名加工情報の第三者提供規律：https://www.ppc.go.jp/personalinfo/legal/guidelines_anonymous/"
+      ]
     }
   },
   {
     "id": "r03h-q78",
     "baseVersion": 2,
     "baseLessonSHA256": "da12225ae70ec0744868128f447d4c3f528c242b5e8f3f9d150ecd03723441f4",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q78",
-      "summary": "エ。周知の商品表示に似せて他人の商品と誤認させる行為です。",
+      "summary": "不正競争防止法が対象とする周知表示の混同惹起行為を、価格設定や単なる機能の類似と区別する問題。",
       "explanation": "不正競争防止法は、広く知られた他人の商品等表示と同一・類似の表示を使用し、他人の商品や営業と混同させる行為などを禁止します。候補エはその条件を明示しています。安値での販売や同等機能というだけではこの行為に該当せず、小売価格の拘束は主に独占禁止法の問題です。",
       "choiceReasons": [
         "安値に設定するというだけでは、不正競争防止法の禁止行為と判断できません。不当廉売は独占禁止法などの論点です。",
@@ -267,57 +295,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補で、価格に関する行為、機能の類似、商品の出所を誤認させる行為を分けます。",
+          "text": "四肢の行為を「価格の設定・拘束」「同等の機能」「商品の出所の誤認」に仕分けましょう。法の名前だけから全ての競争行為を違法と判断しないことが大切です。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "商品の機能が似ているだけなのか、買い手が別会社の商品だと誤解する表示を使うのかが違います。",
+          "text": "不正競争防止法は、需要者の間で広く知られた他人の商品等表示に同一・類似の表示を使い、他人の商品・営業との**混同を起こす**行為を規制します。価格の拘束は主に独占禁止法の領域です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "広く知られた他人の表示に似せ、他人の商品と誤認させて販売する説明が該当します。",
+          "text": "正答エは周知の表示に似せ、別会社の商品をその商品と誤認させています。安価な販売や機能が似るというだけでは、この混同惹起の要件を満たしません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "不正競争を単なる安値や似た機能と捉え、周知の表示を使用する混同要件を見落とす。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢の行為を「価格の設定・拘束」「同等の機能」「商品の出所の誤認」に仕分けましょう。法の名前だけから全ての競争行為を違法と判断しないことが大切です。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "不正競争防止法は、需要者の間で広く知られた他人の商品等表示に同一・類似の表示を使い、他人の商品・営業との**混同を起こす**行為を規制します。価格の拘束は主に独占禁止法の領域です。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（広く知られた他人の商品の表示に，自社の商品の表示を類似させ，他人の商品と誤認させて商品を販売する。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "正答エは周知の表示に似せ、別会社の商品をその商品と誤認させています。安価な販売や機能が似るというだけでは、この混同惹起の要件を満たしません。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（広く知られた他人の商品の表示に，自社の商品の表示を類似させ，他人の商品と誤認させて商品を販売する。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r03h/r03h-q78.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年spring問78の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q78",
     "baseVersion": 2,
     "baseLessonSHA256": "37a8a8b73f3717b990d0f21d8a7591185a86aa5faa1691e02f16763bcc0aec0a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q78",
-      "summary": "ウ。特段の取決めがなければC社に帰属します。",
+      "summary": "多段階に開発委託したプログラムについて、法人著作が成立する場合の著作権の帰属先を判断する問題。",
       "explanation": "C社が自社社員Dに業務としてプログラムを作成させており、法人著作の要件を満たすため、プログラムの著作者はC社です。プログラムの法人著作では法人名義で公表する要件はありません。委託料を払うA社や元請B社へ著作権が自動移転するわけではありません。",
       "choiceReasons": [
         "発注したことだけでA社へ著作権が移るわけではありません。",
@@ -329,57 +363,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "実際にプログラムを作成した社員Dと、その雇用主C社を確認します。",
+          "text": "契約はA→B→Cと流れますが、プログラムを実際に作成するのはC社の社員Dです。「発注した会社」と「創作が職務として行われた会社」を区別します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "発注・再委託によって著作権が自動的に移転するかと、法人著作の成立を分けます。",
-          "revealsAnswer": false
+          "text": "プログラムの法人著作は、法人の発意に基づきその業務に従事する人が職務上作成し、別段の定めがない場合、**その法人が著作者**となります。代金の支払いだけで発注者に著作権が自動移転するわけではありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "C社の業務としてDが作成しているため、取決めがない場合の帰属はC社です。",
+          "text": "DがC社の業務で作成し、権利帰属の特約もないのでC社に帰属します。プログラムの法人著作には法人名義での公表の要件はありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "発注代金の支払人に著作権が自動帰属すると誤解し、法人著作の要件を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "契約はA→B→Cと流れますが、プログラムを実際に作成するのはC社の社員Dです。「発注した会社」と「創作が職務として行われた会社」を区別します。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答ウはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "プログラムの法人著作は、法人の発意に基づきその業務に従事する人が職務上作成し、別段の定めがない場合、**その法人が著作者**となります。代金の支払いだけで発注者に著作権が自動移転するわけではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ウ（C社）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
+        },
+        {
+          "newInformation": "DがC社の業務で作成し、権利帰属の特約もないのでC社に帰属します。プログラムの法人著作には法人名義での公表の要件はありません。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ウ（C社）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r04a/r04a-q78.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年autumn問78の正答ウとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r03a-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "0ad702763be108c74f18afcbf86b5f29b2715cfc07b479b73161eb54e0f195a7",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r03a-q79",
-      "summary": "広告宣伝メールは原則として事前同意を得る",
+      "summary": "特定電子メール法における広告宣伝メールの送信方法を、オプトインとオプトアウトの違いから判断する問題。",
       "explanation": "正解はエ。特定電子メールに該当する広告宣伝メールは、原則として受信者からあらかじめ同意を得るオプトイン方式で送信する。オプトアウトは送信後などに受信拒否の意思を示してもらう方式であり、原則の方式ではない。",
       "choiceReasons": [
         "SMSであっても特定電子メールに該当する場合、原則の事前同意を不要にすることはできない。",
@@ -391,57 +431,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "広告宣伝メールの送信について、受信者の意思をいつ確認するかが問われている。SMSという媒体だけで例外になるかも見る。",
+          "text": "二つの方式を「送る前に同意を得るか」「送った後に受信拒否できるか」で整理しましょう。SMSという送信手段だけで例外になるかも検討します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "受信拒否が来るまで送る方式と、送信前に受信者の同意を得る方式を区別する。法律の原則は後者である。",
+          "text": "オプトインは**送信前に受信者の同意を得る**方式、オプトアウトは**受信者が拒否するまで送る**方式です。特定電子メールに当たる広告宣伝メールの送信は、原則として前者です。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "事前同意を得るオプトイン方式を原則とするエが適切である。",
+          "text": "原則の送信方式をオプトインとするエが該当します。企業側が方式を自由に選べるわけではなく、広告宣伝を含むSMSも対象になり得ます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "オプトイン・オプトアウトの同意のタイミングと法の原則が分からない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "二つの方式を「送る前に同意を得るか」「送った後に受信拒否できるか」で整理しましょう。SMSという送信手段だけで例外になるかも検討します。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "オプトインは**送信前に受信者の同意を得る**方式、オプトアウトは**受信者が拒否するまで送る**方式です。特定電子メールに当たる広告宣伝メールの送信は、原則として前者です。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（原則としてオプトイン方式を利用する。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "原則の送信方式をオプトインとするエが該当します。企業側が方式を自由に選べるわけではなく、広告宣伝を含むSMSも対象になり得ます。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（原則としてオプトイン方式を利用する。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r03a/r03a-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年autumn問79の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "455b155becc58954505bce643d72d95cbaf1ad2acbf146a0df803e2658c0f92f",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q79",
-      "summary": "ア。GUIの見た目などの画像は意匠法の保護対象になり得ます。",
+      "summary": "意匠法の保護対象となり得る視覚的デザインを、算法・通信規約・事業方式と区別する問題。",
       "explanation": "意匠法は、物品・建築物や画像などの視覚的なデザインを保護します。機器の操作などに用いるGUIの画像は、登録要件を満たせば保護対象になり得ます。\nアルゴリズム、通信プロトコル、ビジネスモデルそのものは仕組み・手順などであり、視覚的なデザインの保護対象ではありません。",
       "choiceReasons": [
         "操作用GUIなどの画像デザインは意匠法で保護される対象になり得ます。",
@@ -453,57 +499,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補を、利用者が画面で見る表現と、処理・通信・事業の仕組みに分けます。",
+          "text": "候補を、画面に表示される見た目と、内部の処理手順・通信上の約束・ビジネスの仕組みに分けます。「独自」という言葉だけで保護対象にはなりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "意匠は視覚に訴えるデザインを扱います。機器操作のための画像も保護され得る点を使います。",
+          "text": "意匠法は物品・建築物のデザインに加えて、機器の操作に使う画像や機能の結果を表示する画像なども保護します。一方、算法や通信規約そのものは視覚的デザインではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "各候補が画面の形・配置・見た目を表すか、内部の手順や規約を表すかを確認しましょう。",
+          "text": "GUI（Graphical User Interface、画面上の操作用インタフェース）の画像は、登録要件を満たせば意匠の対象になり得ます。処理手順そのものとは区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "意匠は物理的製品のみと誤解し、GUI画像の保護と算法の違いを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "候補を、画面に表示される見た目と、内部の処理手順・通信上の約束・ビジネスの仕組みに分けます。「独自」という言葉だけで保護対象にはなりません。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "意匠法は物品・建築物のデザインに加えて、機器の操作に使う画像や機能の結果を表示する画像なども保護します。一方、算法や通信規約そのものは視覚的デザインではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（独自のGUI）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "GUI（Graphical User Interface、画面上の操作用インタフェース）の画像は、登録要件を満たせば意匠の対象になり得ます。処理手順そのものとは区別します。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（独自のGUI）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r07a/r07a-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問79の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "特許庁による画像意匠の操作画像・表示画像の説明：https://www.jpo.go.jp/system/laws/rule/guideline/design/document/kaso-gazo-guidebook/guidebook.pdf"
+      ]
     }
   },
   {
     "id": "r05a-q78",
     "baseVersion": 2,
     "baseLessonSHA256": "238bf05cc61b2feaa0e07eabd0566759a1107195556b9460ff52f6f6f8d3455c",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05a-q78",
-      "summary": "エ。購入したプログラムを自らの利用に必要な範囲で効率向上のために改変できます。",
+      "summary": "プログラム著作物について、自らの利用に必要な改変が認められる場合と、無断複製・配布等を区別する問題。",
       "explanation": "プログラムの著作物には、電子計算機でより効果的に利用するために必要な改変が認められます。購入したプログラムを自ら利用する際の処理速度向上のために改変するエが適法です。\nこの例外は無断配布や貸与まで許すものではありません。社内教育だから自由に複製配布できるわけでもなく、職務著作の権利も作成担当者が独断で行使できません。",
       "choiceReasons": [
         "海賊版と知りながら入手したプログラムを業務で使用する行為は、著作権法上の適法な使用とはなりません。",
@@ -515,57 +568,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの行為を、海賊版の業務使用、部門への複製配布、他社貸与、自らの利用のための改変に分けます。",
+          "text": "選択肢の動詞を「違法な複製品を使う」「社内に複製配布する」「他社へ貸与する」「自ら使うため改変する」に分けます。所有・購入だけで何でもできるわけではありません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "プログラムには、電子計算機で利用できるようにする、またはより効果的に利用するための必要な改変を許す規定があります。",
+          "text": "著作権法には、プログラムの複製物を利用するため、電子計算機で**より効果的に利用するために必要な改変**を認める例外があります。他社への貸与や部門への無断配布まで許す例外ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "処理速度の向上を目的とする自らの利用のための改変と、他者へ複製を渡す行為を区別しましょう。",
+          "text": "購入したプログラムを自ら使う際、処理速度を向上させるために必要な改変をするエが該当します。許される範囲を、単なる配布・貸与と取り違えないでください。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "プログラムを購入すれば無断複製・改変・貸与が同等に許されると誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "選択肢の動詞を「違法な複製品を使う」「社内に複製配布する」「他社へ貸与する」「自ら使うため改変する」に分けます。所有・購入だけで何でもできるわけではありません。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "著作権法には、プログラムの複製物を利用するため、電子計算機で**より効果的に利用するために必要な改変**を認める例外があります。他社への貸与や部門への無断配布まで許す例外ではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（処理速度を向上させるために，購入したプログラムを改変した。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "購入したプログラムを自ら使う際、処理速度を向上させるために必要な改変をするエが該当します。許される範囲を、単なる配布・貸与と取り違えないでください。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（処理速度を向上させるために，購入したプログラムを改変した。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r05a/r05a-q78.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年autumn問78の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r07h-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "759a44215809e14d4068d49a67f8c9cfefa222101eeba5878f79510ba9ed4812",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07h-q79",
-      "summary": "イ。法定通貨等ではなく、不特定の者に使用でき、電子的に移転できる。",
+      "summary": "資金決済法上の暗号資産の定義を、法定通貨・中央管理・加盟店限定の決済手段と区別する問題。",
       "explanation": "資金決済法の暗号資産の定義には、不特定の者への代価の弁済に使用でき、不特定の者を相手に購入・売却でき、電子的に記録・移転できる財産的価値という類型がある。法定通貨や通貨建て資産等とは区別される。イはこの特徴に合う。\n\n暗号資産交換業者には安全管理や行為面だけでなく財務面の要件もある。暗号資産が全て中央で管理され、銀行で扱われるわけではない。発行者が指定する加盟店だけで使えるという説明も定義に合わない。この問題の法令・定義に沿って判断する。",
       "choiceReasons": [
         "交換業者にも資本金や純資産等の要件があり、財務規制を受けないという部分が誤り。",
@@ -577,57 +636,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "選択肢が制度の規制、資産の定義、集中管理、加盟店限定のどれを述べているか分ける。",
+          "text": "四肢を「交換業者への規制」「資産の法的定義」「集中管理の有無」「使える相手の限定」に分け、法令が性質を定める部分を探します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "暗号資産は法定通貨そのものではない。電子的に移転でき、不特定の者との使用や売買が可能な財産的価値という条件を確認する。",
-          "revealsAnswer": false
+          "text": "資金決済法上の暗号資産には、法定通貨・通貨建て資産ではなく、**電子的に記録・移転**でき、**不特定の者**への支払や売買ができる財産的価値という類型があります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「財務規制なし」「全て集中管理」「指定加盟店だけ」の強い限定を確認し、資金決済法の定義を説明する文を選ぶ。",
-          "revealsAnswer": false
+          "text": "不特定の者に使え、電子的に移転できるというイを選びます。暗号資産が必ず中央管理されるわけではなく、交換業者には財務面の規制もあります。",
+          "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "暗号資産を中央管理・加盟店限定のポイントや法定通貨と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢を「交換業者への規制」「資産の法的定義」「集中管理の有無」「使える相手の限定」に分け、法令が性質を定める部分を探します。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答イはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "資金決済法上の暗号資産には、法定通貨・通貨建て資産ではなく、**電子的に記録・移転**でき、**不特定の者**への支払や売買ができる財産的価値という類型があります。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（暗号資産は，不特定の者に対して使用でき，電子的に記録され，移転できるものであり，法定通貨又は法定通貨建ての資産ではないが，法定通貨と相互に交換できる。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
+          "newInformation": "不特定の者に使え、電子的に移転できるというイを選びます。暗号資産が必ず中央管理されるわけではなく、交換業者には財務面の規制もあります。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（暗号資産は，不特定の者に対して使用でき，電子的に記録され，移転できるものであり，法定通貨又は法定通貨建ての資産ではないが，法定通貨と相互に交換できる。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r07h/r07h-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年spring問79の正答イとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "日本銀行の資金決済法上の暗号資産の定義：https://www.boj.or.jp/about/education/oshiete/money/c27.htm"
+      ]
     }
   },
   {
     "id": "r05h-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "9fc97c07c8f55c923e2b5502cec15fcc1c32ecb1a33ec6f70ad35f499a6cd102",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q79",
-      "summary": "派遣元は雇用主として、教育訓練の機会確保などを行います。",
+      "summary": "労働者派遣法で、派遣元が雇用主として行う措置と、派遣先が職場で行う措置を区別する問題。",
       "explanation": "派遣元は派遣労働者を雇用する事業主なので、教育訓練の機会確保など福利の増進を図る役割があります。派遣先は職場で指揮命令を行い、派遣先管理台帳や派遣先責任者、関係者への契約内容の周知を担います。派遣元の措置を述べるエです。",
       "choiceReasons": [
         "派遣先管理台帳を作成するのは派遣先です。",
@@ -639,57 +705,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "派遣元と派遣先を取り違えないよう、台帳・責任者の名前と教育の対象を確認します。",
+          "text": "「派遣先管理台帳」「派遣先責任者」という名称が誰の義務か確認します。派遣労働者の雇用主が誰かも整理しましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "派遣労働者を雇う会社と、実際の職場で指揮命令する会社の役割を分けます。",
-          "revealsAnswer": false
+          "text": "派遣元は労働者を**雇用**する立場で、教育訓練の機会確保や福利の増進などを担います。派遣先は就業現場で指揮命令し、派遣先管理台帳・派遣先責任者等を管理します。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "派遣元は雇用主として教育訓練の機会確保などを行います。「派遣先」の台帳や責任者の候補と比べます。",
+          "text": "教育訓練の機会確保などを述べるエが派遣元の措置です。ア・イ・ウは派遣先の管理体制や周知の義務として整理できます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "派遣元と派遣先が担う責任を取り違え、教育訓練の主体を特定できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「派遣先管理台帳」「派遣先責任者」という名称が誰の義務か確認します。派遣労働者の雇用主が誰かも整理しましょう。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "派遣元は労働者を**雇用**する立場で、教育訓練の機会確保や福利の増進などを担います。派遣先は就業現場で指揮命令し、派遣先管理台帳・派遣先責任者等を管理します。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（労働者の教育訓練の機会の確保など，福祉の増進）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
+        },
+        {
+          "newInformation": "教育訓練の機会確保などを述べるエが派遣元の措置です。ア・イ・ウは派遣先の管理体制や周知の義務として整理できます。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（労働者の教育訓練の機会の確保など，福祉の増進）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r05h/r05h-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年spring問79の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "a42b6095d2f926667a137a55874e432331c50cea3a3210e9750b455225039017",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q79",
-      "summary": "イ。広告・宣伝を含むSMSも特定電子メール法の規制対象です。",
+      "summary": "特定電子メール法の規制対象を、送信目的やSMS・海外発などの通信条件から判断する問題。",
       "explanation": "特定電子メール法は、営業上の広告・宣伝を目的として送信する電子メールを規制します。対象となる電子メールにはSMSも含まれ、海外から国内への送信も対象になり得ます。政治団体の政策普及だけのメールや、広告・宣伝を含まない取引上の事務連絡は、この目的の規制対象ではありません。",
       "choiceReasons": [
         "海外の設備から国内の設備へ送られる広告メールも対象となり得るため、一律に対象外とはいえません。",
@@ -701,57 +773,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補ごとに、通信方式だけでなく、送信目的が営業の広告・宣伝かを確認します。",
+          "text": "単にメールの形式だけでなく、何のために送るかに注目します。選択肢にはSMS、海外からの送信、政策の普及、事務連絡が登場します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "短いメッセージでも広告を送る手段になり得ます。SMSか通常のメールかだけで除外できるかを考えます。",
+          "text": "特定電子メール法は、**営業上の広告・宣伝を目的**とするメールを規制し、対象にはSMSも含まれます。海外から国内への広告メールも送信設備の所在地だけでは除外されません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "広告・宣伝を含むSMSも規制対象となる説明が正しいです。",
+          "text": "広告宣伝を含むSMSを対象とするイが適切です。政治団体の政策の普及だけや、広告を含まない事務連絡は営業上の広告・宣伝と区別します。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "SMSや海外からの広告メールが特定電子メール法の対象になることを知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "単にメールの形式だけでなく、何のために送るかに注目します。選択肢にはSMS、海外からの送信、政策の普及、事務連絡が登場します。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答イはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "特定電子メール法は、**営業上の広告・宣伝を目的**とするメールを規制し、対象にはSMSも含まれます。海外から国内への広告メールも送信設備の所在地だけでは除外されません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（携帯電話のショートメッセージサービス（SMS）は，広告又は宣伝が含まれていれば，規制の対象である。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "広告宣伝を含むSMSを対象とするイが適切です。政治団体の政策の普及だけや、広告を含まない事務連絡は営業上の広告・宣伝と区別します。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（携帯電話のショートメッセージサービス（SMS）は，広告又は宣伝が含まれていれば，規制の対象である。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r03h/r03h-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年spring問79の正答イとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q78",
     "baseVersion": 2,
     "baseLessonSHA256": "c00c88c495feed121b192bdd1102716f8f4e8a800ec18fa1b1cafa71d7b6ce6b",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q78",
-      "summary": "ア。特許法が対象とする発明は、自然法則を利用した高度な技術的思想の創作です。",
+      "summary": "特許・著作権・意匠・商標の各法律が保護するものを、その定義から区別する問題。",
       "explanation": "特許法の「発明」は、自然法則を利用した技術的思想の創作のうち高度なものです。保護対象を定義するアが該当します。\n思想・感情の表現は著作権、物品などの美感を伴うデザインは意匠、商品・役務を識別する標章は商標というように、何を保護するかが違います。実際に特許を取得するには新規性・進歩性などの要件も必要です。",
       "choiceReasons": [
         "アは特許法の発明の定義です。",
@@ -763,57 +841,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四候補の対象を技術的思想・表現・美感ある形・商品等の標章に分けます。",
+          "text": "四つの定義が対象にするのは、技術的思想・創作的な表現・視覚的なデザイン・商品等の標章です。名称を暗記していなくても保護する目的の違いに注目します。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "特許は技術的な発明を保護します。自然法則を利用した方法や装置の仕組みが典型です。",
+          "text": "特許法の**発明**は「自然法則を利用した技術的思想の創作のうち高度なもの」です。著作権は創作的表現、意匠はデザイン、商標は商品・サービスの識別標識を扱います。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "「自然法則」「技術的思想」「高度」の三条件がある記述を、発明の定義に対応させます。",
+          "text": "「自然法則を利用」「技術的思想」「高度」の要件がそろうアが特許法の定義です。登録を受けるには別途、新規性や進歩性などの要件もあります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "特許・著作・意匠・商標の四つの法定定義を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四つの定義が対象にするのは、技術的思想・創作的な表現・視覚的なデザイン・商品等の標章です。名称を暗記していなくても保護する目的の違いに注目します。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "特許法の**発明**は「自然法則を利用した技術的思想の創作のうち高度なもの」です。著作権は創作的表現、意匠はデザイン、商標は商品・サービスの識別標識を扱います。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（自然法則を利用した技術的思想の創作のうち高度なもの）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "「自然法則を利用」「技術的思想」「高度」の要件がそろうアが特許法の定義です。登録を受けるには別途、新規性や進歩性などの要件もあります。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（自然法則を利用した技術的思想の創作のうち高度なもの）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r06h/r06h-q78.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年spring問78の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "3812fbb035490d436f5626f7e556747fdba65ed0c487172c73cb1159c62f2b36",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q80",
-      "summary": "ア。労働施策総合推進法は、事業主にパワハラ相談対応の体制整備などを求めます。",
+      "summary": "労働施策総合推進法が事業主に課す職場のハラスメント防止措置を、ほかの労働法制と区別する問題。",
       "explanation": "労働施策総合推進法には職場のパワーハラスメント防止に関する事業主の措置義務があります。相談に応じ、適切に対応する体制の整備などがアの内容です。\n最低賃金の決定は最低賃金法、労働組合や団体交渉は労働組合法などの領域です。インターンシップの理念を定める説明も、この法律の措置義務とは異なります。",
       "choiceReasons": [
         "職場のパワーハラスメントに対する相談体制などを事業主に義務付ける説明が適切です。",
@@ -825,57 +909,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補で義務を負う主体と対象を確認します。事業主の相談対応、教育機関、最低賃金、組合活動は異なるテーマです。",
+          "text": "各説明が義務付ける主体は誰でしょうか。事業主による相談対応、教育機関のインターンシップ、最低賃金の決定、労働組合の活動を分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "この法律は職場のパワーハラスメント防止のため、事業主に相談窓口などの措置を求めています。",
+          "text": "労働施策総合推進法は、職場の**パワーハラスメント防止**のため、事業主に労働者の相談に応じ適切に対応する体制整備などを求めています。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "最低賃金を決める法律と、団体交渉を扱う法律は別にあります。相談を受けて適切に対応する体制の説明を確認しましょう。",
+          "text": "相談・対応体制の措置を述べるアが該当します。最低賃金の決定は最低賃金法、団体交渉は労働組合法などの領域です。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "パワハラ防止措置を事業主に義務付ける法律を他の労働法と区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各説明が義務付ける主体は誰でしょうか。事業主による相談対応、教育機関のインターンシップ、最低賃金の決定、労働組合の活動を分けます。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "労働施策総合推進法は、職場の**パワーハラスメント防止**のため、事業主に労働者の相談に応じ適切に対応する体制整備などを求めています。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（いわゆるパワーハラスメントに関し，労働者の相談に応ずることや適切に対応する体制を整備することなどを事業主に義務付けている。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "相談・対応体制の措置を述べるアが該当します。最低賃金の決定は最低賃金法、団体交渉は労働組合法などの領域です。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（いわゆるパワーハラスメントに関し，労働者の相談に応ずることや適切に対応する体制を整備することなどを事業主に義務付けている。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r07a/r07a-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問80の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r07a-q78",
     "baseVersion": 2,
     "baseLessonSHA256": "8a19d009c044c90fbff2aa852631ac11ec8330f7d60c80065d259e17623cfe4a",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r07a-q78",
-      "summary": "エ。プログラム言語や規約は、著作権法のプログラム保護から除かれます。",
+      "summary": "著作権法で保護対象になり得る表現と、プログラム言語・規約そのものの違いを判断する問題。",
       "explanation": "著作権法は創作的な表現を保護します。創作性があるプログラム、操作マニュアル、情報の選択・体系的構成に創作性があるデータベースは保護対象になり得ます。\n一方、プログラム言語やその用法の特別の約束である規約、解法にはプログラム著作物の保護は及びません。無料で公開することは著作権の不存在を意味しません。",
       "choiceReasons": [
         "フリーソフトでも創作性のあるプログラムは著作物になり得ます。無料公開だけで権利は消えません。",
@@ -887,57 +977,64 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問われるのは保護されるとは限らないものではなく、保護対象になり得ないものです。創作性がある場合を考えます。",
+          "text": "問題は**『保護対象になり得ない』**ものを尋ねています。無料であることと著作物であることは別なので、各候補に創作的な表現があるか考えましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "アの無料公開は価格の条件です。イの文章・図、ウの情報の選び方や構成に創作性があれば対象になるかを確認します。",
+          "text": "創作性のあるプログラムやマニュアル、情報の選択・体系的構成に創作性があるデータベースは保護され得ます。一方、**プログラム言語・規約・解法そのもの**にはプログラム著作物の保護が及びません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "特定のコードの表現と、そのコードを記述するための言語や共通の約束は別です。法が後者まで独占させない点を使いましょう。",
+          "text": "フリーソフトにも著作権は生じ得ます。プログラムの具体的な記述と、それを記述するための言語や共通の約束を分けるとエが残ります。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "無料公開の著作権を無いものと思い、言語・規約と具体的な著作物を区別できない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "問題は**『保護対象になり得ない』**ものを尋ねています。無料であることと著作物であることは別なので、各候補に創作的な表現があるか考えましょう。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "創作性のあるプログラムやマニュアル、情報の選択・体系的構成に創作性があるデータベースは保護され得ます。一方、**プログラム言語・規約・解法そのもの**にはプログラム著作物の保護が及びません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（プログラム言語や規約（プログラム言語の用法についての特別の約束））を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "フリーソフトにも著作権は生じ得ます。プログラムの具体的な記述と、それを記述するための言語や共通の約束を分けるとエが残ります。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（プログラム言語や規約（プログラム言語の用法についての特別の約束））を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r07a/r07a-q78.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2025年autumn問78の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "原本の「保護の対象と++なり得ないもの++」という否定・強調を原本画像で確認。"
+      ]
     }
   },
   {
     "id": "r04a-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "c673133bbecaab25d7780f68de0616b11ea9b580455a021f7af7df8dab884c03",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q80",
-      "summary": "ア。ソフトウェアを内蔵した組込み機器は製造物責任法の対象です。",
+      "summary": "製造物責任法の『製造・加工された動産』に、ソフトウェア単体と組込み機器のどちらが該当するかを判断する問題。",
       "explanation": "製造物責任法の製造物は製造・加工された動産です。ソフトウェアやデータ自体は動産に当たらず対象外ですが、ソフトウェアを組み込んだ機器は動産です。ソフトウェアの欠陥で機器の安全性が欠ければ、その機器の欠陥として対象となります。",
       "choiceReasons": [
         "ROM化したソフトウェアを組み込んだ機器は製造・加工された動産であり、対象です。",
@@ -949,57 +1046,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "各候補が物理的な機器か、ソフトウェア・データだけかを分けます。",
+          "text": "物理的な製品そのものと、インストール・ダウンロードして利用するソフトウェアやデータを区別します。欠陥があるというだけで全て同じ法律の対象とはなりません。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "製造物責任法が対象とする「製造・加工された動産」に各候補が当てはまるか確認します。まず、機器という物そのものと、その中で動く情報のどちらが候補として挙げられているかを読み分けます。",
-          "revealsAnswer": false
+          "text": "製造物責任法の**製造物は製造・加工された動産**です。情報だけのソフトウェア・データは通常これに当たりませんが、それを組み込んだ機器という動産は対象になります。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "ROMに組み込まれたソフトを含む機器を選びます。",
+          "text": "ROM化したソフトウェアを内蔵した組込み機器のアが該当します。ソフト単体の問題と、組み込まれた機器の安全性の欠陥を分けて考えます。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "ソフトウェアの情報そのものと組込み機器という動産を混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "物理的な製品そのものと、インストール・ダウンロードして利用するソフトウェアやデータを区別します。欠陥があるというだけで全て同じ法律の対象とはなりません。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答アはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "製造物責任法の**製造物は製造・加工された動産**です。情報だけのソフトウェア・データは通常これに当たりませんが、それを組み込んだ機器という動産は対象になります。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（ROM化したソフトウェアを内蔵した組込み機器）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
+        },
+        {
+          "newInformation": "ROM化したソフトウェアを内蔵した組込み機器のアが該当します。ソフト単体の問題と、組み込まれた機器の安全性の欠陥を分けて考えます。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答ア（ROM化したソフトウェアを内蔵した組込み機器）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r04a/r04a-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年autumn問80の正答アとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r06h-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "8feb9ec2bfc0cad97efe3f2c1b24b9f1ecf5502edef029bdc0dd6555407c5d44",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r06h-q80",
-      "summary": "エ。病歴や犯罪の経歴など、差別・不利益につながり得る情報は要配慮個人情報です。",
+      "summary": "個人情報保護法の要配慮個人情報を、一般の個人情報や識別番号と区別する問題。",
       "explanation": "要配慮個人情報は、人種・信条・社会的身分・病歴・犯罪の経歴など、不当な差別や偏見その他の不利益を生じないよう、取扱いへ特に配慮が必要なものとして法律が定める情報です。\n本人の申告で自由に設定する区分ではありません。住所や勤務先などの一般的な個人情報、本人識別に使う番号が全て自動的に要配慮となるわけでもありません。",
       "choiceReasons": [
         "アは本人の申告で決まる区分としていますが、要配慮情報の種類は法律で定められています。",
@@ -1011,57 +1114,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "候補が分類しているのは本人の申告・識別番号・住所等・病歴等のどれかを整理します。",
+          "text": "各肢は、本人の申告、識別番号、住所・勤務先、病歴・犯罪経歴という異なる種類の情報を挙げています。何のために特別な区分が設けられているかを考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "個人を見分けられる情報であることと、不当な差別や不利益を防ぐため特別に配慮する情報であることを区別します。",
+          "text": "要配慮個人情報は、不当な差別や偏見などの不利益を防ぐため、法令で特に慎重な取扱いを要する情報です。**病歴や犯罪の経歴**などが含まれ、本人の申告だけで自由に指定する区分ではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "病歴や犯罪の経歴は法律が列挙する情報です。本人の申告の有無や番号の有無とは別に分類します。",
+          "text": "病歴・犯罪の経歴を挙げるエが該当します。住所や勤務先は個人情報でも、それだけで要配慮個人情報になるわけではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "個人識別できる情報は全て要配慮個人情報と思い、法が定める種類を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "各肢は、本人の申告、識別番号、住所・勤務先、病歴・犯罪経歴という異なる種類の情報を挙げています。何のために特別な区分が設けられているかを考えます。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "要配慮個人情報は、不当な差別や偏見などの不利益を防ぐため、法令で特に慎重な取扱いを要する情報です。**病歴や犯罪の経歴**などが含まれ、本人の申告だけで自由に指定する区分ではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（本人の病歴，犯罪の経歴など不当な差別や不利益を生じさせるおそれのある情報）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "病歴・犯罪の経歴を挙げるエが該当します。住所や勤務先は個人情報でも、それだけで要配慮個人情報になるわけではありません。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（本人の病歴，犯罪の経歴など不当な差別や不利益を生じさせるおそれのある情報）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r06h/r06h-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2024年spring問80の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r04a-q79",
     "baseVersion": 2,
     "baseLessonSHA256": "7e43ece30a7ff16561cbf8dd1221d473ae0a54e11b9c291475f629b36a4238fb",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r04a-q79",
-      "summary": "エ。発注者に指揮命令権はなく、新たな雇用契約も不要です。",
+      "summary": "発注者の事業所で行う請負作業について、指揮命令権と雇用契約の有無をそれぞれ判断する問題。",
       "explanation": "請負では受注者が自己の責任で仕事を完成させ、受注者側が作業者へ指揮命令します。作業場所が発注者の事業所でも契約の性質は変わらず、作業者と発注者の雇用契約も必要ありません。",
       "choiceReasons": [
         "請負の作業者への指揮命令は発注者にありません。作業場所のために新たな雇用契約も不要です。",
@@ -1073,57 +1182,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "設問が派遣ではなく請負契約であることに線を引きます。",
+          "text": "設問は**請負契約**です。発注者の事業所で作業するという条件を、誰が仕事を命令するか・誰が雇用するかという条件と分けます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "受注者が完成責任を負うなら、所属作業者の仕事を誰が指示するか考えます。",
-          "revealsAnswer": false
+          "text": "請負では受注者が自己の作業者に指揮命令し、**発注者に指揮命令権はありません**。受注者の作業者は受注者との雇用関係のまま働き、発注者と新たな雇用契約を結ぶ必要もありません。",
+          "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "発注者の指揮命令なし、発注者との新規雇用契約なし、の組合せを選びます。",
+          "text": "指揮命令権なし・追加の雇用契約なし、という二条件の組合せがエです。作業場所だけで派遣に変わるわけではありません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "他社の事業所で働くと発注者と雇用契約を結ぶと誤解する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "設問は**請負契約**です。発注者の事業所で作業するという条件を、誰が仕事を命令するか・誰が雇用するかという条件と分けます。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
-          "revealsAnswer": false,
-          "reason": ""
-        },
-        {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "請負では受注者が自己の作業者に指揮命令し、**発注者に指揮命令権はありません**。受注者の作業者は受注者との雇用関係のまま働き、発注者と新たな雇用契約を結ぶ必要もありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（指揮命令権は発注者になく，受注者に所属する作業者は，新たな雇用契約を発注者と結ぶことなく，発注者の事業所で作業を実施する。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
+        },
+        {
+          "newInformation": "指揮命令権なし・追加の雇用契約なし、という二条件の組合せがエです。作業場所だけで派遣に変わるわけではありません。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
+          "revealsAnswer": true,
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（指揮命令権は発注者になく，受注者に所属する作業者は，新たな雇用契約を発注者と結ぶことなく，発注者の事業所で作業を実施する。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r04a/r04a-q79.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2022年autumn問79の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r05h-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "be1368d09a8cd3785798f9d01b6d757554b243649bd67f0db067a703e96d7ab2",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r05h-q80",
-      "summary": "集団思考は、強い結束により批判的検討が弱まり不合理な合意へ至ることです。",
+      "summary": "強い結束をもつ集団で異論の検討が弱まり、不合理な意思決定に陥る現象を見分ける問題。",
       "explanation": "集団思考では、結束の強いチームが合意を優先して、反対意見や別の可能性を十分に検討しなくなります。個人なら気付く危険や倫理上の問題を見落とし、不合理な決定に合意してしまうことがあります。集団の連帯性と批判的思考の欠如を述べるエが適切です。",
       "choiceReasons": [
         "個人が別の視点を持てず客観性に欠けることで、集団の合意圧力を説明していません。",
@@ -1135,57 +1250,63 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "問われているのは個人の弱点だけでなく、チームで判断する際に起きる現象です。",
+          "text": "個人の視野の狭さ・権威への服従・実行する勇気の不足と、**集団での意思決定の偏り**は別の現象です。誰に起こる問題か整理しましょう。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "結束が強いほど反対を言いづらくなり、異なる可能性を検討しなくなる場面を考えます。",
+          "text": "集団思考では、仲間との一致を大切にし過ぎ、異論や危険を十分に検討しないまま合意を急ぎます。結束の強さが必ずしも妥当な意思決定につながるわけではありません。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "強い連帯性、批判的思考の欠如、不合理な合意がつながる候補を集団思考に対応させます。",
+          "text": "強い連帯性のあるチームが批判的思考を欠いて不合理な合意をするエが該当します。権威への個人の服従とは区別しましょう。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "集団思考を個人の視野狭窄や権威への服従だけの問題と混同する。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "個人の視野の狭さ・権威への服従・実行する勇気の不足と、**集団での意思決定の偏り**は別の現象です。誰に起こる問題か整理しましょう。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答エはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "集団思考では、仲間との一致を大切にし過ぎ、異論や危険を十分に検討しないまま合意を急ぎます。結束の強さが必ずしも妥当な意思決定につながるわけではありません。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（強い連帯性をもつチームが自らへの批判的思考を欠いて，不合理な合意へと達すること）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "強い連帯性のあるチームが批判的思考を欠いて不合理な合意をするエが該当します。権威への個人の服従とは区別しましょう。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答エ（強い連帯性をもつチームが自らへの批判的思考を欠いて，不合理な合意へと達すること）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r05h/r05h-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2023年spring問80の正答エとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。"
+      ]
     }
   },
   {
     "id": "r03h-q80",
     "baseVersion": 2,
     "baseLessonSHA256": "e08b776af8c9956e4fc0d926d00ea3a1e43ee172f66627750b64361d0182da60",
-    "author": null,
-    "decision": "pending",
+    "author": "ChatGPT/gpt-6-batch39-20261028JST",
+    "decision": "revise",
     "lesson": {
       "id": "r03h-q80",
-      "summary": "イ。要件を満たす本人の電子署名には、押印と同様に真正な成立を推定する効力があります。",
+      "summary": "電子署名法の対象と、一定の要件を満たす電子署名に認められる真正な成立の推定を判断する問題。",
       "explanation": "電子署名法は、作成者を示すことと改変されていないことを確認できる電子署名を対象とします。本人による電子署名で、必要な符号や物件を適正に管理して本人だけが行えるなどの要件を満たす場合、電磁的記録が真正に成立したものと推定されます。これは民事訴訟法の署名・押印による推定に対応する効力です。全ての電子署名が無条件にこの効力を得るという意味ではありません。",
       "choiceReasons": [
         "電子署名法の対象は電磁的記録に対する措置なので、電磁的記録でなくコンピュータ処理できないものを含むという説明は誤りです。",
@@ -1197,46 +1318,53 @@
       "hints": [
         {
           "title": "注目するところ",
-          "text": "四つの候補を、対象となる記録・法的効力・認証事業者・暗号方式に分けます。",
+          "text": "四肢は、署名の対象になる記録・法的な効果・認証業務の主体・暗号方式を述べています。どれが法律の定める仕組みに当たるか考えます。",
           "revealsAnswer": false
         },
         {
           "title": "使う考え方",
-          "text": "紙の文書に本人の署名や押印がある場合と同じように、電子記録で本人が作ったと判断する法的な仕組みを考えます。",
+          "text": "電子署名は電磁的記録について本人性と改変の有無を確認する措置です。**本人が行った一定の電子署名**には、紙の文書の署名・押印と同様に、記録が真正に成立したと推定する効力が認められます。",
           "revealsAnswer": true
         },
         {
           "title": "この問題に当てはめる",
-          "text": "必要な本人性・管理の要件を満たす電子署名なら、押印と同様に真正な成立が推定されるという候補が適切です。",
+          "text": "本人による一定要件の電子署名に押印と対応する推定効を認めるイが該当します。民間認証事業者も存在し、共通鍵暗号だけに限定されません。",
           "revealsAnswer": true
         }
       ],
       "checkedAgainst": "official-question-image-and-answer-key"
     },
     "design": {
-      "obstacle": "",
+      "obstacle": "全電子署名に無条件の法的効力があると誤解し、真正な成立の推定要件を知らない。",
       "stages": [
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "四肢は、署名の対象になる記録・法的な効果・認証業務の主体・暗号方式を述べています。どれが法律の定める仕組みに当たるか考えます。",
+          "remainingWork": "法的な論点と対象となる行為の分類",
           "revealsAnswer": false,
-          "reason": ""
+          "reason": "原本4肢を見ても、この段階は比較の軸の提示にとどまる。法的な論点と対象となる行為の分類が残り、正答イはまだ一意に確定しない。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "電子署名は電磁的記録について本人性と改変の有無を確認する措置です。**本人が行った一定の電子署名**には、紙の文書の署名・押印と同様に、記録が真正に成立したと推定する効力が認められます。",
+          "remainingWork": "定義を四肢へ照合し正答を特定する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（電子署名には，民事訴訟法における押印と同様の効力が認められる。）を実質的に特定できる。定義を四肢へ照合し正答を特定するは復習事項となる。"
         },
         {
-          "newInformation": "",
-          "remainingWork": "",
+          "newInformation": "本人による一定要件の電子署名に押印と対応する推定効を認めるイが該当します。民間認証事業者も存在し、共通鍵暗号だけに限定されません。",
+          "remainingWork": "他の選択肢との違いと適用条件を復習する",
           "revealsAnswer": true,
-          "reason": ""
+          "reason": "原本4肢と前段までの情報を合わせ、この段階の説明は正答イ（電子署名には，民事訴訟法における押印と同様の効力が認められる。）を実質的に特定できる。他の選択肢との違いと適用条件を復習するは復習事項となる。"
         }
       ],
-      "changes": [],
-      "sourceNotes": []
+      "changes": [
+        "summary",
+        "hints"
+      ],
+      "sourceNotes": [
+        "GitHub content/ap-a-quality-batch-39-author-gpt6 の原本 assets/questions/r03h/r03h-q80.webp をbase64取得して画像を表示し、設問・全4肢・図表・強調表記を目視照合。画像SHA256はcontext記載値（独立計算は未実施）。",
+        "GitHub data/answer-keys.jsonの2021年spring問80の正答イとcontextのanswerを照合して一致。IPA公式解答PDF自体の直接閲覧は未実施。",
+        "本人による一定の電子署名が真正成立の推定を受けるのであり、全電子署名に一律の推定を与えるものではないことを既存解説で再確認。"
+      ]
     }
   }
 ]
