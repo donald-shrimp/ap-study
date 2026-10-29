@@ -4,7 +4,7 @@
 
 候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。
 
-固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `048ef235acd9c36ebddaa61458d42a1bebd9cf189c8cc38f492fd1e9fc7c1fd7`
+固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `be02482787f77e7a6293ff24e3490fc3d42a9ed76141e7af7a90c0ebe88533d9`
 
 この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。
 
@@ -328,11 +328,11 @@
 | unit-13 | Codex /root/hint_resume13 | 20/20 | はい |
 | unit-14 | Codex /root/hint_resume14 | 20/20 | はい |
 | unit-15 | Codex /root/hint_resume15 | 20/20 | はい |
-| unit-16 | 未予約 | 0/20 | いいえ |
-| unit-17 | 未予約 | 0/20 | いいえ |
-| unit-18 | 未予約 | 0/20 | いいえ |
-| unit-19 | 未予約 | 0/20 | いいえ |
-| unit-20 | 未予約 | 0/20 | いいえ |
+| unit-16 | Codex /root/hint_unit16 | 0/20 | いいえ |
+| unit-17 | Codex /root/hint_unit17 | 0/20 | いいえ |
+| unit-18 | Codex /root/hint_unit18 | 0/20 | いいえ |
+| unit-19 | Codex /root/hint_unit19 | 0/20 | いいえ |
+| unit-20 | Codex /root/hint_unit20 | 0/20 | いいえ |
 | unit-21 | 未予約 | 0/20 | いいえ |
 | unit-22 | 未予約 | 0/20 | いいえ |
 | unit-23 | 未予約 | 0/20 | いいえ |
