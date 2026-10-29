@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1でクロック一回の長さは分かるが、CPIが一命令に必要な平均クロック数である説明はなく、H2の乗算の意味を推測する部分が残る。式から時間との関係は得られるため局所的な薄さと判断。",
+    "prerequisites": "H2で周期×CPIとA/Bの対応を渡し、H3で命令数が消えることと比の向きを明示するため、計算自体は実行できる。",
+    "progression": "H1が二列を見る入口、H2が一命令の時間、H3がプログラム全体の時間比と順に絞り、数式の適用順は明瞭。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 2,
+      "quote": "一命令の時間=クロック周期×CPI。",
+      "missingKnowledge": "CPIが一命令あたりの平均クロック回数であること。",
+      "learnerBlock": "式を使って数値は出せるが、CPI0.5や4.0とクロック周期を掛ける理由を自分の言葉でつなげにくい。",
+      "neededExplanation": "CPIは一命令に必要な平均クロック数と説明し、時間/回×回/命令の関係を補う。"
+    }
+  ],
+  "cumulativeReason": "H1でCPI単独では比較できないと知り、H2でA=4ナノ秒、B=2ナノ秒を計算でき、H3で4/2を選べる。CPIの数字が何を数えているかは最後まで明示されず、時間の積の意味は補う推測が要る。",
+  "supersedes": null,
+  "recordId": "e3ad5fedaace43d1812cc44e48761ac9",
+  "questionId": "r07h-q8",
+  "unitId": "unit-01",
+  "worker": "Codex /root/hint_unit01",
+  "claimSha256": "0aae554c21a429066a376ff3715231c7cdc0f21088354c7fa91638b6ce81712a",
+  "materialSha256": "12b307cc879d45c382ceeb05970a53d393ef6c8613145e8f7de9e0002c0c880b",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:38:10.870995+00:00",
+  "total": 1,
+  "severity": "low"
+}

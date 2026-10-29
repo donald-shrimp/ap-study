@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1は格納先番号が余りで決まり、衝突が余りの一致であることを教える。",
+    "prerequisites": "H2のp,qが整数の商であるという変数対応が省かれ、差がnの倍数となる根拠を小さく補う必要がある。H3で演算と結論は回復する。",
+    "progression": "H1の格納先→H2の共通余りの式→H3の差という順は自然である。変数対応の不足は実行軸だけに置く。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 2,
+      "quote": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。",
+      "missingKnowledge": "p,qがa,bをnで割った整数の商であること。",
+      "learnerBlock": "余りを消す演算を求められ、H3で引くことは分かるが、係数p−qとnの倍数という選択肢の関係を根拠付きで読むには商の意味を補う。",
+      "neededExplanation": "p,qを商と明示し、商の差も整数なのでa−bがnの倍数になると橋渡しする。"
+    }
+  ],
+  "cumulativeReason": "H1で衝突の意味を格納先と余りから学ぶ。H2で共通の余りrを二式に入れ、H3で差がnの倍数という条件を得る。p,qの整数の商としての位置付けだけは本文とヒントから明示的に教わらない。",
+  "supersedes": null,
+  "recordId": "8a7a73fe4cd9401b8236654c70cd9d04",
+  "questionId": "r06a-q6",
+  "unitId": "unit-05",
+  "worker": "Codex /root/hint_unit05",
+  "claimSha256": "8bbb34e6bf5123a857efcf9f97fc86d28c770844d633587972301ac630d0f905",
+  "materialSha256": "c6e735583cadda66d6e8d9c7871f2b61ff075a52c9422a1bf3e1c4269f32813f",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:38:09.700819+00:00",
+  "total": 1,
+  "severity": "low"
+}

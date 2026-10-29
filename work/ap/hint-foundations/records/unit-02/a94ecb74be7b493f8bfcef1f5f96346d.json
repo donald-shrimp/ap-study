@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2がAND/ORの桁ごとの働きと255・256のビット列を説明する。",
+    "prerequisites": "H2の規則を各桁へ適用でき、H3が通常値と境界値の二条件を確かめる。",
+    "progression": "H1の境界に注目→H2の演算規則→H3のマスクの適用と進む。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で255を超える桁に着目し、H2でAND/ORと定数のビット表現を学ぶ。H3で下位8桁を残す働きと256だけ0になる結果を確認でき、アに対応させられる。",
+  "supersedes": null,
+  "support": {
+    "hintStep": 2,
+    "quote": "ANDは両方が1の桁だけを1にし、ORは一方でも1なら1にします。255は11111111₂、256は100000000₂です。各定数の1と0がどの桁を残すか比べましょう。",
+    "enables": "ANDは双方1だけを残す規則から、255を使うと超過桁だけ消えることを辿れる。"
+  },
+  "recordId": "a94ecb74be7b493f8bfcef1f5f96346d",
+  "questionId": "r05h-q1",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "54092e6539acc4bedc9245dcfe0d3683c9098e0701bed35395284caa7e8d3984",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:37:32.763455+00:00",
+  "total": 0,
+  "severity": "none"
+}

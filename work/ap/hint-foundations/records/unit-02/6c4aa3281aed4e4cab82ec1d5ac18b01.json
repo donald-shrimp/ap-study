@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2・H3で固定変数から式を作る手段は学べるが、カルノー図の各1が何を表すか、論理式と対応する基本像は推測に残る。",
+    "prerequisites": "H2の行列指定、H3の固定値の記号化と和の手順により、示された二群から肢エを作れる。",
+    "progression": "H1の囲みをH2で行列へ対応し、H3で値と式を作る順序は追える。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 3,
+      "quote": "中央はB=D=1、上段両端はA=B=D=0です。固定値が1の変数はそのまま、0の変数は否定にして論理積で結び、二つのまとまりを論理和にします。",
+      "missingKnowledge": "ABとCDは入力の組で、セルの0/1がその組での論理式の出力であるという表の意味。",
+      "learnerBlock": "固定値を指示通り記号化できても、なぜ1の群を覆う式が図と等価なのかを説明する判断で止まる。",
+      "neededExplanation": "セルの1はその行列の入力で出力が1になること、各積項がその入力の群を表し和で合わせることを補う。"
+    }
+  ],
+  "cumulativeReason": "実画像の上段両端と中央4個の1を確認した。H1で群を指定し、H2で変化するA,Cを外す、端も隣接と教え、H3で固定値を積・和へ写してエを作れる。一方、図の1が入力の組に対する出力1を示すことは教わらず、等価な式である意味は薄い。",
+  "supersedes": null,
+  "recordId": "6c4aa3281aed4e4cab82ec1d5ac18b01",
+  "questionId": "r04a-q2",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "00d6b70278abe0cdf9e70834bb2b5e95572e43950cbad2e909aab539f8ffa74e",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:38:39.447343+00:00",
+  "total": 1,
+  "severity": "low"
+}
