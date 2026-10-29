@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
+import html
 import json
 import os
 import tempfile
@@ -346,7 +347,8 @@ def report(root):
                          'confirmation': confirmation, 'recordSha256': sha, 'worker': r['worker'],
                          'recordPath': str(WORK / 'records' / r['unitId'] / (r['recordId'] + '.json')),
                          'axisReasons': r['axisReasons'],
-                         'evidence': r['evidence'], 'cumulativeReason': r['cumulativeReason']})
+                         'evidence': r['evidence'], 'support': r.get('support'),
+                         'missingContext': r.get('missingContext'), 'cumulativeReason': r['cumulativeReason']})
     order = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3, 'none': 4, 'unassessed': 5}
     rows.sort(key=lambda r: (r['state'] != 'candidate', order[r['severity']], -(r['total'] or 0), r['questionId']))
     progress = [{'unitId': u['id'], 'worker': claims.get(u['id'], {}).get('worker'),
@@ -364,20 +366,34 @@ def report(root):
 
 def markdown(data):
     labels = {'none': '不足なし', 'low': '軽度', 'medium': '中度', 'high': '高度', 'critical': '最優先', 'unassessed': '未確定'}
+    states = {'candidate': '候補', 'clear': '足場あり', 'uncertain': '保留', 'stale': '再確認'}
+    confirmations = {'unconfirmed': '未確認', 'confirmed': '確認済み', 'dismissed': '見送り', 'needs_more_context': '要追加確認', 'disputed': '意見が分かれている'}
+    def cell(value):
+        return html.escape(str(value), quote=False).replace('|', '&#124;').replace('\n', ' ')
     c = data['counts']
     lines = ['# 科目A・初学者向けヒントの点検状況', '',
              f"未点検 {c['unreviewed']} / 候補 {c['candidate']} / 足場あり {c['clear']} / 判断保留 {c['uncertain']} / 教材変更後の再確認待ち {c['stale']}", '',
              '候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。', '',
              f"固定対象main: `{data['baseCommit']}` · 入力digest: `{data['inputDigest']}`", '',
              'この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。', '',
-             '| 問題 | 分野 | 状態 | 得点 | 重大度 | 別担当確認 |', '| --- | --- | --- | --- | --- | --- |']
+             '| 問題 | 分野 | 状態 | 得点 | 重大度 | 主な根拠・必要な説明 | 別担当確認 |', '| --- | --- | --- | --- | --- | --- | --- |']
     for r in data['results']:
-        topic = r['topic'].replace('|', '\\|').replace('\n', ' ')
+        topic = cell(r['topic'])
         # REPORT.md lives in WORK; CI artifact keeps a full GitHub branch URL.
         url = 'https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/' + r['recordPath']
-        lines.append(f"| [{r['questionId']}]({url}) | {topic} | {r['state']} | {r['total'] if r['total'] is not None else '—'} | {labels[r['severity']]} | {r['confirmation']} |")
+        if r['state'] == 'stale':
+            reason = '教材の更新後に再確認が必要'
+        elif r['state'] == 'uncertain':
+            reason = cell(r['missingContext'])
+        elif r['state'] == 'candidate':
+            e = r['evidence'][0]
+            reason = f"H{e['hintStep']}「{cell(e['quote'])}」：{cell(e['learnerBlock'])}<br>必要：{cell(e['neededExplanation'])}"
+        else:
+            s = r['support']
+            reason = f"H{s['hintStep']}「{cell(s['quote'])}」：{cell(s['enables'])}"
+        lines.append(f"| [{cell(r['title'])}]({url}) | {topic} | {states[r['state']]} | {r['total'] if r['total'] is not None else '—'} | {labels[r['severity']]} | {reason} | {confirmations[r['confirmation']]} |")
     if not data['results']:
-        lines.append('| まだ実点検なし | — | 未点検 | — | — | — |')
+        lines.append('| まだ実点検なし | — | 未点検 | — | — | — | — |')
     lines += ['', '| 組 | 担当 | 提出数 | 一次点検提出済み |', '| --- | --- | --- | --- |']
     for u in data['units']:
         worker = (u['worker'] or '未予約').replace('|', '\\|').replace('\n', ' ')

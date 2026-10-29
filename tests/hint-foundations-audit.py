@@ -550,5 +550,19 @@ class AuditContracts(unittest.TestCase):
             audit.claim(loser, self.unit, 'synthetic-worker-1')
 
 
+class ReportReadability(unittest.TestCase):
+    def test_candidate_score_and_evidence_are_visible_in_report(self):
+        row = {'questionId': 'synthetic-q1', 'title': '合成問題1', 'unitId': 'unit-01', 'topic': '合成分野',
+               'state': 'candidate', 'total': 2, 'severity': 'low', 'confirmation': 'unconfirmed',
+               'recordPath': 'work/ap/hint-foundations/records/unit-01/synthetic.json',
+               'evidence': [{'hintStep': 2, 'quote': '式|を使う', 'learnerBlock': '変数の意味で止まる',
+                             'neededExplanation': '変数と単位を説明する'}], 'support': None, 'missingContext': None}
+        data = {'counts': {'unreviewed': 799, 'candidate': 1, 'clear': 0, 'uncertain': 0, 'stale': 0},
+                'baseCommit': 'synthetic', 'inputDigest': 'synthetic', 'results': [row], 'units': []}
+        rendered = audit.markdown(data)
+        for expected in ('合成問題1', '候補', '| 2 |', 'H2「式&#124;を使う」', '変数の意味で止まる', '変数と単位を説明する', '未確認'):
+            self.assertIn(expected, rendered)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
