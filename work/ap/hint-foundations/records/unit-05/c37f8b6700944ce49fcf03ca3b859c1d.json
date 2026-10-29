@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "本文の1ノード8コアという構成にH1/H2が総数と1ノード当たりの関係を与え、H3がコア数と性能の比例を具体化する。",
+    "prerequisites": "総コア数8×1000×4、1ノード8×2、総数÷1ノード分、1コア性能10×2とGからTの換算が全て提示される。",
+    "progression": "総コア数を先に出し、その後ノード数、最後に総性能と換算を求める順で情報を混同せず進める。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "選択肢の表画像を開き全4行を確認した。H1で総コア数32000を得る。H2で1ノード16コアなので2000ノードと計算する。H3で32000×20=640000GFLOPSを1000で割り640TFLOPSとしてイと照合できる。性能指標の内部の演算仕様を知らなくても与件の比例と換算で比較できる。",
+  "support": {
+    "hintStep": 3,
+    "quote": "性能は更新後総コア数×(10×2)GFLOPS。1000GFLOPS=1TFLOPSとして換算しましょう。",
+    "enables": "コア当たりの性能を全コア分足す計算と単位換算ができ、ノード数と総性能の組を選べる。"
+  },
+  "supersedes": null,
+  "recordId": "c37f8b6700944ce49fcf03ca3b859c1d",
+  "questionId": "r07a-q11",
+  "unitId": "unit-05",
+  "worker": "Codex /root/hint_unit05",
+  "claimSha256": "8bbb34e6bf5123a857efcf9f97fc86d28c770844d633587972301ac630d0f905",
+  "materialSha256": "615f42f841f0e15b25a12fa373294baf304635a5cd89ce02f41a5634f110ccd4",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:41:00.865319+00:00",
+  "total": 0,
+  "severity": "none"
+}

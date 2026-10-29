@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が0!=1を教え、H2が一つ小さい入力の階乗と掛ける関係、H3が具体的な呼出しの連鎖を見せるため、再帰が自分自身を小さい入力で呼ぶ働きを学べる。",
+    "prerequisites": "H1でn=0の戻り値、H2でn−1に進む停止方向、H3で2×1×fact(0)の代入を渡すので、コード各候補の二条件を照合できる。",
+    "progression": "最小入力の値→小さい入力との関係→n=2の実演と進み、抽象的な再帰という語を具体的動きで補う。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で0のとき1を返す候補ウ/エを残す。H2で1減らす呼出しなら0へ到達し、n+1は違うと判断する。H3で2×fact(1)→2×1×fact(0)にH1の1を入れて結果2を確かめ、ウの定義を辿れる。",
+  "supersedes": null,
+  "support": {
+    "hintStep": 3,
+    "quote": "2×fact(1)→2×1×fact(0)と進み",
+    "enables": "小さくした入力の同じ関数を呼び、0で1を返して掛け合わせる再帰の流れを具体的に追える。"
+  },
+  "recordId": "dfad412ba1654fa0b2c471653d65aeb9",
+  "questionId": "r07h-q7",
+  "unitId": "unit-01",
+  "worker": "Codex /root/hint_unit01",
+  "claimSha256": "0aae554c21a429066a376ff3715231c7cdc0f21088354c7fa91638b6ce81712a",
+  "materialSha256": "ea8b8401a0b92dd3da525c7228701d026058e078dc0502ad46d00e4c5dcb491d",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:40:56.695632+00:00",
+  "total": 0,
+  "severity": "none"
+}

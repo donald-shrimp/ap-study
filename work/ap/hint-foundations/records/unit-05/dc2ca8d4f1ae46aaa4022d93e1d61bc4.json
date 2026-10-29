@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1のGPUの多数の演算器、H2の入力への重み付けと加算から、学習に必要な演算との相性を学べる。",
+    "prerequisites": "H2が重み付き加算をまとめた行列演算と明示し、H3が各行の出力を分配するため速くなると比較基準を示す。",
+    "progression": "構造→学習の計算→出力を分配する仕組みとCPUとの対比が累積する。行列とベクトルの演算を自分で実行する要求はない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で同種計算の並列処理を学ぶ。H2でニューラルネットワークが重みを掛けて足す計算を大量に反復すると分かる。H3で各出力を演算器に分配する意味とCPUも浮動小数点演算可能という対比から、イの行列演算高速化が利点と判断できる。",
+  "support": {
+    "hintStep": 2,
+    "quote": "多数の入力に重みを掛けて足し合わせます。これをまとめた行列演算を大量に繰り返すため、GPUで並列に処理すると高速化できます。",
+    "enables": "行列演算という用語を重み付き加算のまとまりとして捉え、学習でGPUを使う利点をイと照合できる。"
+  },
+  "supersedes": null,
+  "recordId": "dc2ca8d4f1ae46aaa4022d93e1d61bc4",
+  "questionId": "r04a-q8",
+  "unitId": "unit-05",
+  "worker": "Codex /root/hint_unit05",
+  "claimSha256": "8bbb34e6bf5123a857efcf9f97fc86d28c770844d633587972301ac630d0f905",
+  "materialSha256": "73a70caa1267d77e852128fa4bb0dcafb06224cc4053f8d5980e325dcf77b004",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:41:00.483213+00:00",
+  "total": 0,
+  "severity": "none"
+}
