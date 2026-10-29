@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "相関条件が同じ製品番号の在庫行を見ること、NOT EXISTSが該当行ゼロで真になることを具体的に説明している。",
+    "prerequisites": "30を含まない比較、在庫を合計せず行の存在を見る基準、在庫行なしも残す条件がH1/H2でそろう。H3の残る番号は異なる二つなので件数を数えられる。",
+    "progression": "H1で照合対象、H2で残す判定、H3で各製品の在庫を実際に評価する順序が追える。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "倉庫別の在庫を足すのでなく、30超の行の有無で判定します。",
+    "enables": "XZ3000の30と20を足して除外する誤りを避け、在庫行のないMZ1000も残せる。"
+  },
+  "cumulativeReason": "H1で各製品番号に対応する在庫だけを見る。H2で30超の行が一つもない製品を残すと学ぶ。H3でAB1805・CC5001・ZZ9900を除き、MZ1000とXZ3000の二つの異なる番号を数えられる。",
+  "supersedes": null,
+  "recordId": "ee0472f798924e7e8b1e0883d9e1a214",
+  "questionId": "r05a-q29",
+  "unitId": "unit-14",
+  "worker": "Codex /root/hint_unit14",
+  "claimSha256": "089c511f1483ef1d9da87dab73cedc2aa64596d2bde86f06c114ba536fef1d18",
+  "materialSha256": "180e9773ca95e60c80b75508f427183ceaa21adc772517fb7543316d4dc9367d",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:54:22.691928+00:00",
+  "total": 0,
+  "severity": "none"
+}

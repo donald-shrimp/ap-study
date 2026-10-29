@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "動作と待機の長さが異なる平均を電流×時間の総和で説明し、電流の専門知識を使わずに基本像が得られる。",
+    "prerequisites": "単位換算と代入式は明示されるが、不等式を解く操作には四則計算を超える移項の橋渡しが一つ残る。",
+    "progression": "H1の時間加重平均からH2の単位と式、H3の1以下の条件へ情報が順に加わる。操作の局所的不足はprerequisitesだけに計上する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 3,
+      "quote": "正の分母を両辺に掛けてtの不等式を解き",
+      "missingKnowledge": "文字を含む不等式の分母払い後に、同じ文字の項をまとめる手順。",
+      "learnerBlock": "H3の指示で100+0.1t≦0.01+tを得ても、tだけの条件に直す手順は示されない。四則計算のみの読者には待機時間の境界を求める橋が薄い。",
+      "neededExplanation": "100−0.01≦t−0.1tから99.99≦0.9tとまとめる途中式、又は候補時間を式に入れて平均が1以下か試す手順を補う。"
+    }
+  ],
+  "cumulativeReason": "H1で時間を重みとする平均を学び、H2で秒・μAに揃えて式を作り、H3で1以下の条件まで進める。最後は不等式整理を知る必要があり、途中式か候補の代入で回復できる小さな操作の橋が残る。",
+  "supersedes": null,
+  "recordId": "47eb7fa45ff847c2b69ee05d7a181d8f",
+  "questionId": "r07h-q21",
+  "unitId": "unit-13",
+  "worker": "Codex /root/hint_unit13",
+  "claimSha256": "cd33225243d5f393a0c975fb73aada4e995c97e42cd896fa98dbb3d3f659420c",
+  "materialSha256": "ff99a63cd1e03878ebce3a4e2893143ed417e865e9b5b9e72b221a9de8877166",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:53:55.201904+00:00",
+  "total": 1,
+  "severity": "low"
+}
