@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がなりすまし対策の2方式を平易に説明し、H2が許可リストと接続元IPという動作関係を教える。",
+    "prerequisites": "H2でDNS側の情報、受信側の観測、照合操作を明示するため、TXTやエンベロープの詳細を知らなくてもイとの対応を辿れる。",
+    "progression": "H1の署名と許可サーバ確認の対比をH2で具体化し、H3で他の処理も対象外と確認する流れである。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "送信許可IPの情報と、受信側が見たSMTP接続元IPを照合します。",
+    "enables": "事前に許可されたIPと実際の接続元を照合するSPFを、署名検証・アーカイブ・上司承認と区別してイに対応付けられる。"
+  },
+  "cumulativeReason": "H1で署名検証と送信元の許可確認を分ける。H2でDNSの送信許可IPと接続元IPを照合すると知り、イの記述に対応する。H3は署名がDKIM、保存や送信承認は別機能だと補い、基本像に不足は残らない。",
+  "supersedes": null,
+  "recordId": "f5722441561d4c02ac8eb6b3cb7ae009",
+  "questionId": "r06h-q43",
+  "unitId": "unit-20",
+  "worker": "Codex /root/hint_unit20",
+  "claimSha256": "cd7e31c30db8b42e9e1fa911a7300bf8f75246ec1879328ea59da7c398b524fe",
+  "materialSha256": "01e6dff9629281e1dd9f2524883b5069930ea8d0bcca23f5d265011b78901c2e",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:37.980046+00:00",
+  "total": 0,
+  "severity": "none"
+}
