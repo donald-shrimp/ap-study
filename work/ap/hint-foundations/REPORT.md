@@ -4,7 +4,7 @@
 
 候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。
 
-固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `f5239cb1e954e6debec6d47b503121cda5e93b46aff46d688473e880af62623e`
+固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `3d06bbe4ab9706d04efc5cdd6e0d290dc2d8225610ded9f89d9dd4d317f2c09e`
 
 この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。
 
@@ -118,11 +118,11 @@
 | unit-03 | Codex /root/hint_unit03 | 20/20 | はい |
 | unit-04 | Codex /root/hint_unit04 | 20/20 | はい |
 | unit-05 | Codex /root/hint_unit05 | 20/20 | はい |
-| unit-06 | 未予約 | 0/20 | いいえ |
-| unit-07 | 未予約 | 0/20 | いいえ |
-| unit-08 | 未予約 | 0/20 | いいえ |
-| unit-09 | 未予約 | 0/20 | いいえ |
-| unit-10 | 未予約 | 0/20 | いいえ |
+| unit-06 | Codex /root/hint_unit06 | 0/20 | いいえ |
+| unit-07 | Codex /root/hint_unit07 | 0/20 | いいえ |
+| unit-08 | Codex /root/hint_unit08 | 0/20 | いいえ |
+| unit-09 | Codex /root/hint_unit09 | 0/20 | いいえ |
+| unit-10 | Codex /root/hint_unit10 | 0/20 | いいえ |
 | unit-11 | 未予約 | 0/20 | いいえ |
 | unit-12 | 未予約 | 0/20 | いいえ |
 | unit-13 | 未予約 | 0/20 | いいえ |
