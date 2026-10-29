@@ -1,6 +1,6 @@
 # ひと問
 
-[教材を作る・改訂する](docs/content-authoring.md) · [ヒントの共通ルール](docs/hint-authoring.md) · [解説の共通ルール](docs/explanation-authoring-rules.md)
+[教材を作る・改訂する](docs/content-authoring.md) · [ヒントの共通ルール](docs/hint-authoring.md) · [初学者向けヒントの点検](docs/hint-foundations-audit.md) · [解説の共通ルール](docs/explanation-authoring-rules.md)
 
 FP2級に2024年9月実施の学科60問・実技40問を追加し、計学科240問・実技160問（274回答欄）へ。新規全問の独立レビュー・修正記録は[追加範囲と確認記録](work/fp2/historical/202409/README.md)。確認された法令改正は既存の学習対象除外設定で扱います。
 

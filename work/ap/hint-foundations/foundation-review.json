@@ -1,0 +1,85 @@
+{
+  "formatVersion": 1,
+  "reviewer": "Codex /root/hint_audit_concurrency_review",
+  "implementationAuthor": "Codex /root",
+  "reviewedAt": "2026-10-29T13:36:09.724595+00:00",
+  "repository": "/workspace/ap-study-hint-audit",
+  "baseCommit": "daf24200b89718e44524707d3b4b926e196b0d56",
+  "status": "approved-for-foundation-pr-review",
+  "scope": [
+    "Technical review of append-only beginner-hint audit foundation, CLI, synthetic tests, criteria/work instructions, initialization metadata and CI workflow.",
+    "No AP question content assessment, candidate finding, lesson edit, independent pedagogical approval, merge or publication."
+  ],
+  "fileSha256": {
+    "tools/hint_foundations_audit.py": "e25dc459147c57ef561510305cf7a86cf34014aa0438266e33b4e4f5c5e892a1",
+    "tests/hint-foundations-audit.py": "8d9269ce8a6f29b92e7b6610dc485adfa988f106ffd146ef1e2390e0016fb360",
+    "docs/hint-foundations-audit.md": "59e7d0ebac8eb136b49f102174853e14b266e80422bcd48ea398283d0e3eaed1",
+    "work/ap/hint-foundations/README.md": "80854043008edbea0772f26e44c0df3ab3a0d5f0f8677ec09ddd8b4e532fe34e",
+    ".github/workflows/hint-foundations-audit.yml": "b238dd2d445b909a4d8c2e38cbf9be8e9a2dba45a25a24a6996c675a5f57a5aa",
+    "work/ap/hint-foundations/manifest.json": "3dd090184f4d42866f2ceafee064a12906c69de6b5ea2e8baeb36b1cdc276a72",
+    "work/ap/hint-foundations/inventory.json": "54012c47cc0b934c90b6497fb540e00b2d8d8f9127f26230173a538b6e231b56",
+    "work/ap/hint-foundations/units.json": "ba2dad3a4856409293663c7629056500d7466851224531d205b84801e64d7fb1",
+    "work/ap/hint-foundations/REPORT.md": "7042d63f48f53bd4ed95732fd7bbfff52d0dbb6faeb73d775acd4a9783ad3512"
+  },
+  "checks": [
+    {
+      "command": "python tools/hint_foundations_audit.py check",
+      "result": "passed",
+      "output": "Audit contracts passed (content confirmations are separate)"
+    },
+    {
+      "command": "python tools/hint_foundations_audit.py check --against origin/main",
+      "result": "passed",
+      "output": "Audit contracts passed (content confirmations are separate)"
+    },
+    {
+      "command": "python tests/hint-foundations-audit.py",
+      "result": "passed",
+      "tests": 23,
+      "seconds": 5.6,
+      "fixture": "Entirely synthetic 800-question/40-unit temporary tree; local bare-Git remote; no actual AP content scored."
+    },
+    {
+      "check": "Generated REPORT.md exactly matches current markdown(report)",
+      "result": "passed"
+    },
+    {
+      "check": "Initial report state",
+      "result": "passed",
+      "counts": {
+        "unreviewed": 800,
+        "clear": 0,
+        "candidate": 0,
+        "uncertain": 0,
+        "stale": 0
+      },
+      "claimedUnits": 0,
+      "completeUnits": 0,
+      "results": 0
+    }
+  ],
+  "protocolReview": {
+    "distributedReservation": "Documented sole-parent expected-head normal push, publication confirmation before work and fetch/revalidation after a race are consistent with the two-clone synthetic race test. Exclusive local file creation is explicitly not a distributed reservation.",
+    "cliPublishedPrecondition": "CLI submission requires the exact active reservation in the explicitly fetched Git ref; review requires the exact published record; transfer requires published active reservation and all local unit records. Low-level Python functions are fixture/internal APIs and do not themselves prove remote publication.",
+    "ownershipTransfer": "Immutable transfer chain, preserved record hashes, inherited snapshot subset guard, active-worker-only submission and late former-worker record rejection retain prior results/reviews. Synthetic A-to-B-to-C, fork and missing/foreign snapshot cases pass.",
+    "conflictPreservation": "Existing claims/transfers/records/reviews are append-only; correction requires exact supersedes head; competing result or transfer branches fail rather than choosing timestamp. Git history checks reject edits/deletions including edit-then-restore.",
+    "evidenceAndScoring": "Rubric and implementation agree on three 0..2 integer axes, explicit axis reasons, exact step-local quotes, clear support evidence, uncertain null scores, critical all-step evidence and separate actual-review attestations.",
+    "ciAndSummary": "Workflow uses read-only repository permissions, synthetic tests, immutable-history validation, generated JSON/Markdown reports in runner temporary storage, step summary and uploaded artifacts. Generated reports do not feed inputDigest; checked-in REPORT is a coordinator snapshot and individual records remain authoritative."
+  },
+  "findings": [],
+  "resolvedFindings": [
+    "Local writes previously could expose partial JSON: implementation now writes complete temporary bytes and links exclusively.",
+    "Each zero/uncertain score now requires an axis reason; critical requires an explicit reason; clear requires exact support evidence.",
+    "Generated report JSON excluded from authoritative input digest.",
+    "Chained ownership transfer now rejects dropping inherited grandfathered record hashes."
+  ],
+  "notVerified": [
+    "No 800-question semantic audit, image/source reading, score calibration, real candidate assessment or learner-effect test.",
+    "No live GitHub Actions execution/artifact availability or remote PR/branch protection verification before PR creation; workflow behavior reviewed statically and its local commands exercised.",
+    "Recorded identities and coordinator labels are cooperative workflow attestations, not proof of separate humans or access-control enforcement.",
+    "Fresh remote fetch, sole-parent commit construction, non-force publication and stopped former workers remain documented operator preconditions.",
+    "Synthetic test file was authored by this reviewer; implementation was authored by the root agent. This record does not claim an independent second author review of the test design."
+  ],
+  "actualQuestionAudits": 0,
+  "actualCandidateFindings": 0
+}

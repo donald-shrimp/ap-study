@@ -132,3 +132,5 @@ FPの2025年1月分は[PR #48](https://github.com/donald-shrimp/ap-study/pull/48
 2025年5月公表分のFP学科60問は[PR #37の独立レビュー記録](../deliveries/fp2-jafp-202505/README.md)から統合。ヒントは未設置で、追加時は本基準を適用する。既存のヒントと確認記録は維持。
 
 2024年9月分の学科60問・120ヒントの[独立レビュー記録](../work/fp2/historical/202409/README.md)も保持する。答えを含む第1段ヒントは、その時点から解答確認扱いとする。
+
+対象論点の用語・仕組みを知らない初学者への足場を分担して点検する場合は、[土台点検の基準・得点・重大度](hint-foundations-audit.md)と[一つのPRへ候補を蓄積する手順](../work/ap/hint-foundations/README.md)を使う。候補と根拠の収集は、教材の改稿・承認とは分ける。
