@@ -1,10 +1,10 @@
 # 科目A・初学者向けヒントの点検状況
 
-未点検 108 / 候補 26 / 足場あり 666 / 判断保留 0 / 教材変更後の再確認待ち 0
+未点検 100 / 候補 26 / 足場あり 674 / 判断保留 0 / 教材変更後の再確認待ち 0
 
 候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。
 
-固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `2ff03f21cecbf2310b9009a288dba0a819961e92f1c010c74b2e9cb694ce7e59`
+固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `a7f16e2791a9490518bccbb97fbc8169ee82d07c60f1dbf8c43184e9cc480e48`
 
 この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。
 
@@ -95,6 +95,7 @@
 | [2021年 秋期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/1a8900fae08540fdb55dd5b8c3f760c1.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**KPI＝Key Performance Indicator（重要業績評価指標）**は途中の活動状況を測る数値です。」：図のcの在庫日数7日以内・誤出荷率3％以内を活動状況の測定値と読み、KPIへ対応できる。 | 未確認 |
 | [2021年 秋期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/dcb0c663eb6b4eb4919b4cad1f203b5b.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「関連する複数のプロジェクトを別々に管理するだけでなく、連携や統合による価値を管理する考え方を探す。」：単独の細分化・言語選定・支援組織と、複数の仕事を結びつけ価値を高めるアを、管理単位と価値の基準で区別できる。 | 未確認 |
 | [2021年 秋期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/2ba6ba1f366a4ebb9616798dc5b5e8d8.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「削減額は(10＋12)×10×5＋50×1×5。必要額は初期(8＋1)×10と運用(2＋6)×10×5に分ける。」：表の通勤・光熱費は10人×5年、採用は1人×5年、初期は10人一回と対応が全て示され、1350－90－400を計算してイに照合できる。 | 未確認 |
+| [2021年 秋期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/06f4475e04e647cb87fcef175a80b8a3.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「『使える技術や製品、導入実績を教えて』はRFI。」：RFIで相手に求める中身が分かり、実現手段に関する情報を依頼するイを選べる。 | 未確認 |
 | [2021年 秋期 問67](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-35/2911cdc4d4ab4a4b8cdea0f04b350e12.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「調達から製造・販売・サービスまでの主な活動と、それを支える管理や技術」：企業活動を二群に分ける説明をアに対応でき、環境・四視点・事業領域とは区別できる。 | 未確認 |
 | [2021年 秋期 問69](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-35/41fb8edb167c4d8288f1cd627e03e4ac.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「顧客に提供して反応を計測し、学んだ結果に応じて製品や事業の方向を変える」：計画を厳格に守って検証を抑えるウと、計測・学習・改良を反復するエを比較できる。 | 未確認 |
 | [2021年 秋期 問7](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-05/580d5df387a14569be57b332d7e4a1e9.json) | アルゴリズム・プログラミング | 足場あり | 0 | 不足なし | H3「数値型とした変数に文字列を代入すると、実行前の型検査で不一致を検出できます。」：型が数値や文字列の種類を区別し、実行前に不適切な代入を発見する意味を学びTypeScriptと対応できる。 | 未確認 |
@@ -163,6 +164,7 @@
 | [2021年 春期 問61](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/b5524e549d6440d39f04173627d0369a.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**顧客と商品の情報の定義や関係**」：残る体系が仕事の流れやソフト・機器でなく扱う情報の整理であると理解し、H3のデータアーキテクチャに結び付けられる。 | 未確認 |
 | [2021年 春期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/35f10dff5ed94d0cbe828e8fd6f5f1ef.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば地図サービスの機能やデータを自社アプリから呼び出します。」：地図を自社アプリで呼ぶ具体例をウの他社アプリ呼出し・連携に対応させ、公募や資金調達を除外できる。 | 未確認 |
 | [2021年 春期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/05c757611e5f41d98683dede59e43744.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば同じ本を好む別の人が買った本を勧めます。」：本の例を顧客Aと似たBの購入商品というアに置き換え、人気・属性・商品関連の三肢と区別できる。 | 未確認 |
+| [2021年 春期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/f6f517727008433681445c34769403e0.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば『導入可能な製品は？』と供給者候補へ聞くのがRFI。」：RFIは契約や具体的提案の前に情報を集める依頼と分かり、情報提供のアを選べる。 | 未確認 |
 | [2021年 春期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/88c8bdeae2a140888a3fd92688bae4de.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「購入者が環境負荷の小さいものを優先して選ぶのが**グリーン購入**です。」：国・地方公共団体が製品やサービスを選ぶ行為を、認定側のエコマークと区別してエへ対応できる。 | 未確認 |
 | [2021年 春期 問66](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-35/c06921d2179244bc9edf85dd5d82b133.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「収益100万円で10万円、200万円で20万円」：収益に比例する配分率のウを選び、収益と無関係な費用負担や固定報酬と区別できる。 | 未確認 |
 | [2021年 春期 問67](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-34/9fcb33177b64407b9cfb0a6e4b6d40c8.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「図の上段は成長率が高く、左列はシェアが高いと分かります。」：図の上段の共通属性をa、左列の共通属性をbに対応してウを選べる。 | 未確認 |
@@ -229,8 +231,10 @@
 | [2022年 秋期 問61](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/22e45d980fd74b35a168c0c2177caa0b.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**重要業務を再開し所定の水準へ戻す手順**」：単なる災害対策という名称にとどまらず、停止した事業を回復させる手順と分かりエを選べる。 | 未確認 |
 | [2022年 秋期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/ba7edb51291a4e4ca901a1fcb4cafb83.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**デリバリースピード＝必要な機能を利用者へ届ける速さ**」：未知のデリバリースピードを機能提供の速さと理解して、環境変化に迅速対応するイの意味を判断できる。 | 未確認 |
 | [2022年 秋期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/fbb4bb2224e443d4a300717696fa7306.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**業務（ビジネス）・情報（データ）・処理（アプリケーション）・基盤（テクノロジ）**」：四つの専門名称を扱う対象と対応づけ、四体系と全体最適を述べるウを選べる。 | 未確認 |
+| [2022年 秋期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/886903bc4aeb47598787daa20826d7e8.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**t年後の回収額÷1.05のt乗**」：割引率5%を各年の回収額へどう適用するか分かり、投資220を引いたNPVを投資なし0とも比較できる。 | 未確認 |
 | [2022年 秋期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/41749fed8f104f279b33ecad8aecea40.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**代替調達先・代替部品・工程変更の発動条件**をあらかじめ決めておくのが対処計画です。」：部品が届かなくなる場合に何を準備するかが分かり、エの対処計画を選べる。 | 未確認 |
 | [2022年 秋期 問68](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-35/1c96b71ac1f94d8ab69d8d1d7d3f44ba.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「設備投資1,000万円で目標投資収益率10％なら、年間100万円の利益」：価格の決定根拠を投資収益率と照合でき、計算問題ではないので価格逆算の完全な計算は要求されない。 | 未確認 |
+| [2022年 秋期 問69](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-34/140d3e755bd3445d9d7ad5325ecee502.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「例えば『価格は安いが色が好みでない』という選択から重視度を分析します。」：価格・色等を組み合わせた案の評価から重視度を見る手法とイを対応できる。 | 未確認 |
 | [2022年 秋期 問7](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-04/251aeed39afd40b080185d699d2c9f6e.json) | アルゴリズム・プログラミング | 足場あり | 0 | 不足なし | H1「文字コードは文字とバイト列を対応させる規則です。」：符号化宣言が何を伝えるものかを理解してから、H2・H3の省略可能性と識別の理由へ進める。 | 未確認 |
 | [2022年 秋期 問70](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/4acdcbab2d2e4677a6972c8f7e9def4d.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「**会社をまたいで新しいサービスや価値**を生むこと。」：API使用という共通点だけで選ばず、他社の配車機能をホテルの利用者向けサービスへ組み込むエに絞れる。 | 未確認 |
 | [2022年 秋期 問71](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-35/8a498fc8db354ccb9012d46746ddf7d2.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「自社工場を持たず、製造は他社へ委託して、企画・設計・開発に資源を集中」：ウが委託する側、エが製造を請け負う側という判別を行える。 | 未確認 |
@@ -427,9 +431,11 @@
 | [2023年 春期 問59](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-30/a0b79c8200b44b628c2d32bde2b4cc16.json) | サービスマネジメント・監査 | 足場あり | 0 | 不足なし | H2「**インタビュー法**は監査人が関係者に**直接口頭で質問**する方法です。」：監査人が関係者に直接質問するインタビューの行動を学び、アが正しい定義と照合できる。 | 未確認 |
 | [2023年 春期 問6](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-05/561be9a51e764712ac65325847067890.json) | アルゴリズム・プログラミング | 足場あり | 0 | 不足なし | H2「全体の平均は、それぞれの比較回数にその場合の確率を掛けて足します。」：成功と失敗の平均回数に1−aとaを掛け、足す意味を理解できる。 | 未確認 |
 | [2023年 春期 問60](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-30/60fdbac2a1c34b3b9bad1ec898bd2c64.json) | サービスマネジメント・監査 | 足場あり | 0 | 不足なし | H2「内部監査人**はモニタリングとして統制を検討・評価し、改善を促します。」：統制を作る責任と評価する役割を学び、内部監査人の評価・改善促進に一致するエを選べる。 | 未確認 |
+| [2023年 春期 問61](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/890b8029a0d241ababe5140642244afd.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**ROI＝利益額÷投資額**。例なら20÷100＝20％。」：利益を分子、投資を分母にする割合と分かり、利益額を投資額で割るアを選べる。 | 未確認 |
 | [2023年 春期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/3efa52b08e4b4c99b0b9cc9100ccba2e.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば店員の丁寧な案内に安心したり、使って感動したりする体験で、購入金額の履歴だけでは測れません。」：安心や感動の具体例をアの満足・感動に対応させ、トラブルのみ・購買履歴・販売員経験の各肢を区別できる。 | 未確認 |
 | [2023年 春期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/790f800b4f454916a91a2cefbae8f00c.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば本人が許した範囲で健康・購買データの活用先を管理する仕組みです。」：個人が預ける・本人が提供条件を決めるという二条件をウに照合し、自社営業や公共・産業データを区別できる。 | 未確認 |
 | [2023年 春期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/60ef53dc1b084a049fb99f17bb7d3361.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「期間変更時に**関連成果物を探し、要求品質から影響を検証**できます。」：記録した要求と成果物の対応が仕様変更時の確認に使えると分かり、変更を禁止するウとは区別できる。 | 未確認 |
+| [2023年 春期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/cf4ba56458314f2da1b4e667039f0002.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「製品の種類や技術の選択肢を調べるならRFI。」：依頼する情報の具体例を得て、提案書提出や契約行為でなく情報提供を求めるアを識別できる。 | 未確認 |
 | [2023年 春期 問67](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-34/9304c4774332411b856a97e4e4db8dfb.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「ROAS（％）＝広告による売上÷広告費×100」：売上150万円を広告費60万円で割り100倍することで250％と判断できる。 | 未確認 |
 | [2023年 春期 問68](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/a95e26fcb24f42e6a67fe95bf27e435a.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「**従業員の学習→作業の改善→顧客満足→売上増**」：施策が次の成果を生む関係をたどり、四視点を並べるだけでなく因果関係を示すイを選べる。 | 未確認 |
 | [2023年 春期 問7](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-04/82330b42c0fe452a9cd5ba14ad314fb0.json) | アルゴリズム・プログラミング | 足場あり | 0 | 不足なし | H3「5と4はともに大きい側で元の順を保つ」：単に昇順に全部並べるのでなく、二回の分割後に5,4の順が残る理由を理解できる。 | 未確認 |
@@ -494,6 +500,7 @@
 | [2024年 秋期 問60](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-29/055bd8aeaa59401e8d98629b82e80f64.json) | サービスマネジメント・監査 | 足場あり | 0 | 不足なし | H2「改善が着手されたか、完了したか、その状況に関する情報を集めて**モニタリング**します。」：提案の後の改善状況を追う活動を学び、ウの収集・監視をフォローアップと判断できる。 | 未確認 |
 | [2024年 秋期 問61](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/7d6b0afd172549ff877243c772708953.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「デリバリースピードとは機能や変更を**使える状態で届ける速さ**です。」：提供速度の意味を理解し、新規施策に合わせて変更できるイを選ぶ基準を得られる。 | 未確認 |
 | [2024年 秋期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/a1cc0219c85b4504b1a7a1cde9f9d494.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「二次利用は第三者が別の用途に再利用すること、機械判読はプログラムで読み取りやすいCSV等の形式を指します。」：H1の企画段階からの考慮とH2の二次利用・機械判読・無償をエに照合でき、用途限定のイ・ウと区別できる。 | 未確認 |
+| [2024年 秋期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/59922802d4fe47ca96c5587cb1a8dac8.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「A→B→Cと**回る順番を変える**のがRearrange。」：移動距離を減らすため配送順を変えるイを、承認者除外・自動化・議事録統合と区別できる。 | 未確認 |
 | [2024年 秋期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/9e12eeab744c4788bf67e021804377bf.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「4人の働ける時間は**7,200時間**、5人は**9,000時間**。」：人数と年間作業可能時間が対応し、委託時5000時間との差を空き時間として効果へ換算できる。 | 未確認 |
 | [2024年 秋期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/1fb7ae3433b84a30aa84497e518f7e34.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「利用中に『安心できる』『気持ちよい』『楽しい』と感じることも設計の対象です。」：H1の有効性・操作性の説明とH2の申込み画面の例を合わせ、快適さ等を列挙するウを選べる。 | 未確認 |
 | [2024年 秋期 問67](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-34/63e4f80c9ffd4301ac10232e8e8374bc.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「仕入先→製造→物流→販売先」：企業をまたぐ仕入・製造・物流・販売の管理に合うエを選べる。 | 未確認 |
@@ -559,6 +566,7 @@
 | [2024年 春期 問61](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/e951d36c1bbf4862a57407d57031389a.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例として『注文受付→在庫確認→出荷』という**業務体系**を整理します。」：BRMが仕事の流れを業務体系として整理するものと分かり、機能・技術仕様・データ定義の他肢からウを区別できる。 | 未確認 |
 | [2024年 春期 問62](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/60f45cfbda4342fc85f86f2652b6f518.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「企業の自主的なDXを進めるための**経営ビジョン・戦略・体制など経営者に求められる対応**です。」：経済産業省・企業経営者という二つの識別基準をアに照合し、教育・自治体・政府向けを区別できる。 | 未確認 |
 | [2024年 春期 問63](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-32/480c2d4112174b508b98a70eef8d4fa7.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「例えば在庫照会と注文受付を**独立したサービス**に分け、公開インタフェースで連携させて一つの業務を実現します。」：一つの業務を独立サービスの連携で実現する動きをエと照合でき、単なる一元管理や改善活動と区別できる。 | 未確認 |
+| [2024年 春期 問64](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-31/5fa6b93ca77d4729bf69acae8f105330.json) | システム戦略 | 足場あり | 0 | 不足なし | H2「**何年目に500へ達するか**で比較します。」：5年間の合計収入ではなく累計が500になる時期を比べ、2年目で到達するdを選べる。 | 未確認 |
 | [2024年 春期 問65](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-33/186989d5db1b405d9d2ccfc80df85b71.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「生産設備を持つ別企業が基板や電子機器を**依頼を受けて製造**します。」：誰が販売するかから工程の担当へ着目を移し、製造を受託するエと設計だけのアを区別できる。 | 未確認 |
 | [2024年 春期 問67](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-34/fe21b6cfa5614f6fa235a9c805f57c0e.json) | 経営戦略 | 足場あり | 0 | 不足なし | H2「比較的少ない追加投資で資金を生み出します。」：少ない追加投資と収益力を両立する低成長・高シェアのウを選べる。 | 未確認 |
 | [2024年 春期 問7](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-04/40d92ace666c4d9aaab42e1232ce9259.json) | アルゴリズム・プログラミング | 足場あり | 0 | 不足なし | H2「次に3と1を交換すると、小さい1が先頭へ移ります。」：列の後ろから隣接する数字を比べるアの動きを実例で確かめ、列全体から最小を探すエと区別できる。 | 未確認 |
@@ -735,10 +743,10 @@
 | unit-28 | Codex /root/hint_unit28 | 20/20 | はい |
 | unit-29 | Codex /root/hint_unit29 | 20/20 | はい |
 | unit-30 | Codex /root/hint_unit30 | 20/20 | はい |
-| unit-31 | Codex /root/hint_unit31 | 13/20 | いいえ |
+| unit-31 | Codex /root/hint_unit31 | 20/20 | はい |
 | unit-32 | Codex /root/hint_unit32 | 20/20 | はい |
 | unit-33 | Codex /root/hint_unit33 | 20/20 | はい |
-| unit-34 | Codex /root/hint_unit34 | 19/20 | いいえ |
+| unit-34 | Codex /root/hint_unit34 | 20/20 | はい |
 | unit-35 | Codex /root/hint_unit35 | 20/20 | はい |
 | unit-36 | Codex /root/hint_unit36 | 0/20 | いいえ |
 | unit-37 | Codex /root/hint_unit37 | 0/20 | いいえ |
