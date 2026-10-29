@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がマスクのネットワーク部1・ホスト部0、ホスト部を残すため逆のマスクが必要と説明し、部分抽出の基本像を教える。",
+    "prerequisites": "演算子の意味は設問が示し、H2がANDのビット動作を教え、H3が~mとの対応を明示するので式を読める。",
+    "progression": "欲しい部分をH1で特定し、H2でANDの働き、H3で反転マスクと具体式へ進むため、名称の断定だけではない。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "相手が1の場所では元のビットを残し、0の場所では結果を0にします。",
+    "enables": "ANDによる部分の取り出し方を学び、ホスト部が1の~mと元のaをANDする根拠を辿れる。"
+  },
+  "cumulativeReason": "H1でホスト部を残すためのマスクを考える→H2で1の場所を残すANDと元のaを保持する理由を得る→H3でa & ~mを照合できる。ホスト部以外を0にする操作まで分かり、式の記号を既知とする穴はない。",
+  "supersedes": null,
+  "recordId": "b0f2819132384fa2a6132fa2418eb7c8",
+  "questionId": "r03h-q34",
+  "unitId": "unit-18",
+  "worker": "Codex /root/hint_unit18",
+  "claimSha256": "ce5bbfc2586e5a62cf507261747c686636a8f4ce72738d091678bf699ed30480",
+  "materialSha256": "9f6e33f0404a79a8fdeeda03ecfc929d05f2b413a5c5f36fc46630cdf34fa1be",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:40:04.434533+00:00",
+  "total": 0,
+  "severity": "none"
+}

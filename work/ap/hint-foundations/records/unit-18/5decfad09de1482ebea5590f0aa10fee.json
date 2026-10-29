@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2の1ビット以上の誤りを含む確率とH3の期待個数の関係から、ビット率とパケット個数が異なる量であると学べる。",
+    "prerequisites": "H1に百分率の変換、H2に1500×8とまれな誤りの近似、H3に全体の積があり、日常の乗算で最終値へ進める。",
+    "progression": "確率への変換、1パケットへの集約、送信個数への拡張の順で増え、単位の変更と期待個数を一度に要求しない。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 3,
+    "quote": "誤りを含むパケット数の期待値は、送信パケット数×パケット誤り確率。",
+    "enables": "1パケットの誤り確率に個数を掛ける関係を学び、10000×12000×10⁻⁶を計算して120と照合できる。"
+  },
+  "cumulativeReason": "H1で0.0001％を10⁻⁶へ直す→H2で12000ビットのうち少なくとも1ビットに誤りがある確率を近似する→H3で10000個分の期待個数を計算する。約120となり、10・15・80・120から選べる。独立性の厳密式を知らなくてもまれな誤りの近似として手順と量の意味を学べる。",
+  "supersedes": null,
+  "recordId": "5decfad09de1482ebea5590f0aa10fee",
+  "questionId": "r06h-q33",
+  "unitId": "unit-18",
+  "worker": "Codex /root/hint_unit18",
+  "claimSha256": "ce5bbfc2586e5a62cf507261747c686636a8f4ce72738d091678bf699ed30480",
+  "materialSha256": "55272a9eb004c796d7fc45167b2a3c6fa36ef45f5f0167482cb330cb5a43c468",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:40:03.007325+00:00",
+  "total": 0,
+  "severity": "none"
+}

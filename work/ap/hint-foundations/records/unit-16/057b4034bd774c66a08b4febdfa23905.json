@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1は図の主キー・外部キーを注文／明細と結び、H2で親削除に連動する子の削除という作用を示す。",
+    "prerequisites": "CASCADEとRESTRICTの動作が明示され、H3で残る集合演算・重複制約を外せる。図を開き、注文番号の下線と明細番号の主キーも確認した。",
+    "progression": "H1の具体的親子対応からH2の削除規則、H3の他肢の役割へ進める。主キーの一般定義を知らなくても今回の対応は渡される。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "参照していた子行も連鎖して削除します。",
+    "enables": "図の注文番号を介した注文と明細の親子関係にCASCADEを当て、注文削除に連動して明細行が消えると判断できる。"
+  },
+  "cumulativeReason": "H1で注文が親、明細が子と把握し、H2で親削除を子へ連鎖するCASCADEを選べる。H3でINTERSECTとUNIQUEが削除規則でないと比較でき、残る不足はない。",
+  "supersedes": null,
+  "recordId": "057b4034bd774c66a08b4febdfa23905",
+  "questionId": "r05h-q30",
+  "unitId": "unit-16",
+  "worker": "Codex /root/hint_unit16",
+  "claimSha256": "589460bfb0591b967dd1e27a06677b8b2751771f955b8f0ef7a5d282a5c7c89e",
+  "materialSha256": "ce41b7a15f2c41f0e636f846d3741a4ef738117883bdfb142de2a06dad063f25",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:39:58.272973+00:00",
+  "total": 0,
+  "severity": "none"
+}

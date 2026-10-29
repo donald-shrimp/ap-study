@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1でSQLのFOREIGN KEYとREFERENCESを実際の商品・受注の親子へ対応させ、H2で削除の連鎖を説明する。",
+    "prerequisites": "H2のCASCADE／RESTRICT、H3のSET NULL／SET DEFAULTで全肢の作用が区別され、値変更と行削除を判断できる。",
+    "progression": "SQLの参照関係→親削除時の動作→行削除と値変更の比較という順序が明確。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "親の削除を子行の削除へ連鎖させます。",
+    "enables": "受注側の外部キー文から商品を親と読み、商品と同じコードを持つ受注行を消すCASCADEを選べる。"
+  },
+  "cumulativeReason": "H1で削除される親と追随する子を識別し、H2で連鎖削除を学ぶ。H3で子行自体が残る値変更との差を確認でき、空欄aを埋める根拠が得られる。残る不足はない。",
+  "supersedes": null,
+  "recordId": "e974f76b3e2745c58b58e2a35e4d1aee",
+  "questionId": "r07h-q27",
+  "unitId": "unit-16",
+  "worker": "Codex /root/hint_unit16",
+  "claimSha256": "589460bfb0591b967dd1e27a06677b8b2751771f955b8f0ef7a5d282a5c7c89e",
+  "materialSha256": "d0473ee66226c6198bc9c999add850ebc0596508b6d353f8343ef07c31499021",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:39:58.641234+00:00",
+  "total": 0,
+  "severity": "none"
+}

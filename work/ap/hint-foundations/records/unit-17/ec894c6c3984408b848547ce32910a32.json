@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "MTUがIPパケット全体の上限で、Ethernetの付加分は外側、IP/TCPヘッダーは内側という包含関係が明示される。",
+    "prerequisites": "H2で最大データ量1500−20−20、H3で残量2000−最大量を与え、日常の減算で540を得られる。",
+    "progression": "H1で引く対象の範囲を確定し、H2で第一パケット、H3で第二パケットへ順に計算する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 3,
+    "quote": "2個目のデータ量＝2,000－(1,500－20－20)",
+    "enables": "上限から内側のヘッダーを除いた量を先に送り、総データから差し引けば第二パケットのデータ量を求められる。"
+  },
+  "cumulativeReason": "H1でEthernetの18バイトを引かない理由を得る。H2で1個目のデータ1460を算出し、H3で2000−1460を計算する。データだけを問うためヘッダーを足さず540に進める。",
+  "supersedes": null,
+  "recordId": "ec894c6c3984408b848547ce32910a32",
+  "questionId": "r07h-q30",
+  "unitId": "unit-17",
+  "worker": "Codex /root/hint_unit17",
+  "claimSha256": "479deca7e3386429f49c3c8773681b03fac3895ff2477d39ff55c0371986f05c",
+  "materialSha256": "615b85d9180e0040be2a8ca5d149310b21b0dff6cbb0f5e8a52882ac07ceb6e7",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:39:54.898251+00:00",
+  "total": 0,
+  "severity": "none"
+}

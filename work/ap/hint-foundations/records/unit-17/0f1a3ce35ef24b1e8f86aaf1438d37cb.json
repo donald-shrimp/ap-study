@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "応答時は宛先がルータ外部値になっており、NAPTの対応表で内部PCへ戻すという逆変換の働きをH2が示す。",
+    "prerequisites": "H1で応答の宛先と要求の送信元の対応を説明し、H3で○を見る二列を指定する。実際の表でもイ行のみ宛先IPと宛先ポートが○である。",
+    "progression": "H1の方向反転、H2の対応表で復元、H3の列照合が順につながる。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "NAPTの対応表で**宛先IPアドレスと宛先ポート番号**を内部PCの値へ戻します。",
+    "enables": "応答パケットの宛先二項目の復元を理解し、表のイ行へ結び付けられる。"
+  },
+  "cumulativeReason": "H1で応答はWebサーバ→PC、要求の送信元が応答の宛先になると知る。H2で外部IP・変換後ポートを内部PCへ戻すと学ぶ。H3に従い確認した表の宛先IP・宛先ポート列だけが○のイ行を選べる。",
+  "supersedes": null,
+  "recordId": "0f1a3ce35ef24b1e8f86aaf1438d37cb",
+  "questionId": "r05a-q32",
+  "unitId": "unit-17",
+  "worker": "Codex /root/hint_unit17",
+  "claimSha256": "479deca7e3386429f49c3c8773681b03fac3895ff2477d39ff55c0371986f05c",
+  "materialSha256": "8e68730a5b674658dc21749bdd58467c735fbf6cb2b6eabddeeb524e99e3e5e5",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:39:55.648993+00:00",
+  "total": 0,
+  "severity": "none"
+}
