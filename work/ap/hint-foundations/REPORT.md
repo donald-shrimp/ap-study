@@ -4,16 +4,16 @@
 
 候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。
 
-固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `b41d83fb3db11c7fffd4071a862bbc670a983e23acb4d97b6bdabbe7c9a4b7ef`
+固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `d23cbd732968055c347d3ec3cb7992e5518fdc23b10bec56400dbed73ef6cbef`
 
 この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。
 
 | 問題 | 分野 | 状態 | 得点 | 重大度 | 主な根拠・必要な説明 | 別担当確認 |
 | --- | --- | --- | --- | --- | --- | --- |
-| [2022年 春期 問1](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-03/c98a1d3f3c1a41b39bda9527a3a71444.json) | 基礎理論 | 候補 | 2 | 軽度 | H2「各中間結果を正規化して確認します。」：四つの中括弧を計算して保持できるか比較する際、(1.1)₂×2⁻³が幾らか、同じ指数にどう書くかを自力で辿れない。<br>必要：1.1₂=1+1/2などの位の例と、小さい項を指数5へそろえて保持範囲を確かめる途中式を示す。 | 未確認 |
-| [2023年 秋期 問23](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-04/701decc0bd3e4023906a4ead06d18fcb.json) | 論理回路 | 候補 | 2 | 軽度 | H3「左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。」：多数決の二入力組は理解しても、左側がANDのアとXORのイを図記号から区別して指定の構成を探せない。<br>必要：ANDは左辺が直線で右側が丸い形、ORは入力側も曲線の形など、実図と対応して示し、小丸による0/1反転も補う。 | 未確認 |
+| [2022年 春期 問1](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-03/c98a1d3f3c1a41b39bda9527a3a71444.json) | 基礎理論 | 候補 | 2 | 軽度 | H2「各中間結果を正規化して確認します。」：四つの中括弧を計算して保持できるか比較する際、(1.1)₂×2⁻³が幾らか、同じ指数にどう書くかを自力で辿れない。<br>必要：1.1₂=1+1/2などの位の例と、小さい項を指数5へそろえて保持範囲を確かめる途中式を示す。 | 確認済み |
+| [2023年 秋期 問23](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-04/701decc0bd3e4023906a4ead06d18fcb.json) | 論理回路 | 候補 | 2 | 軽度 | H3「左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。」：多数決の二入力組は理解しても、左側がANDのアとXORのイを図記号から区別して指定の構成を探せない。<br>必要：ANDは左辺が直線で右側が丸い形、ORは入力側も曲線の形など、実図と対応して示し、小丸による0/1反転も補う。 | 確認済み |
 | [2025年 秋期 問22](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-01/b05b8fbf3de4460cba654c3aadde097f.json) | 論理回路 | 候補 | 2 | 軽度 | H3「図の小さな丸の有無を確認しましょう。」：波形から作った表がANDの反転だと分かっても、図のどれがANDでどの丸が反転を表すかを特定できない。<br>必要：ANDの形状と出力端の小円の否定という読み方を図または短い説明で補う。 | 未確認 |
-| [論理式と含意](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-01/4aaa06ee81bd42d099e496468a829f5d.json) | 基礎理論 | 候補 | 2 | 軽度 | H3「各候補の∧・∨・否定を処理し」：ウの偽∨真とエの偽∨偽などを評価できず、左辺が偽の式を自分で選べない。<br>必要：∧・∨の真偽規則を短い対応表または真偽の具体例で補う。 | 未確認 |
+| [論理式と含意](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-01/4aaa06ee81bd42d099e496468a829f5d.json) | 基礎理論 | 候補 | 2 | 軽度 | H3「各候補の∧・∨・否定を処理し」：ウの偽∨真とエの偽∨偽などを評価できず、左辺が偽の式を自分で選べない。<br>必要：∧・∨の真偽規則を短い対応表または真偽の具体例で補う。 | 確認済み |
 | [2021年 秋期 問1](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-02/7136b58d3b934664873f9ce8363382c0.json) | 基礎理論 | 候補 | 1 | 軽度 | H2「接線の式y=f(x₀)+f′(x₀)(x−x₀)にy=0を代入すると、次のxを求められます。」：接線の式を立てる指示に対してf′という記号が何の数値か分からず、H2の係数と本文の接線の対応を補う必要がある。<br>必要：f′(x₀)は接線の傾きであることと、点を通る直線の式にそれを使う対応を短く補う。 | 未確認 |
 | [2021年 秋期 問11](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-08/ba175e6ac62743b998d092c478ce1f00.json) | コンピュータ構成 | 候補 | 1 | 軽度 | H1「シーク・回転待ち・転送の時間を分けて求めます。」：表の平均シーク10msと回転から出す5msを計算上足せても、同じ待ちを二重に数えていない理由や半周待つ理由を説明しにくい。<br>必要：ヘッドの位置決めの後に目的の部分が回ってくるのを待つという順と、平均では半回転待つ理由を短く補う。 | 未確認 |
 | [2022年 秋期 問1](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-02/a92992fb3448421abcd35c8a852c2091.json) | 基礎理論 | 候補 | 1 | 軽度 | H3「(2ⁿ−1)²&lt;2²ⁿです。上限の指数をビット数に対応させます。」：上限の指数を対応させるだけでは、2nビット以内とは言えても2nビットを必要とする最大値かを判定する所で止まる。<br>必要：上限に加えて下側の2^(2n−1)との比較を、具体例から一般条件へつなぐ。n=1の扱いは別途根拠を確認する。 | 未確認 |
