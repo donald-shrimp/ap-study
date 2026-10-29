@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1で単一値、H2でキーの一部への依存、H3で非キーを介した依存という基本像は得られる。ただし主キー・非キー属性が何を表し、関数従属がどの値を決める関係なのかの具体例がなく、未知の初学者には属性の役割を補う推測が残る。",
+    "prerequisites": "特徴c,a,bを各正規形へ対応させる操作自体はH1〜H3が明示しており、実見した選択肢表のウを選べる。概念の薄さはfoundationだけに計上する。",
+    "progression": "繰返し→部分依存→推移的依存の順で新しい区別が加わり、最後に三者対応をまとめる。定義不足を段階順序の不足として二重加点しない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 2,
+      "quote": "非キー属性が複合主キーの一部分だけに依存する",
+      "missingKnowledge": "主キーは行を識別する列の組であり、非キー属性はそれ以外の項目、依存は値が一意に決まる関係だという意味。",
+      "learnerBlock": "aの真部分集合を一部分と言い換えたことは分かるが、どの項目がキーで、何がその一部だけで決まるのかを具体的な表として説明できない。H3もキー→非キー→非キーという抽象的な鎖であり、属性の役割までは補わない。",
+      "neededExplanation": "例えば受注明細の注文番号と商品番号の組で行を識別し、商品名は商品番号だけで決まる例を使い、キー・非キー・部分依存の意味を結び付ける。"
+    }
+  ],
+  "cumulativeReason": "H1は列に複数値を入れない第1=c、H2は主キーの一部分だけへの依存をなくす第2=a、H3は非キー属性を介する鎖をなくす第3=bと教える。実見した選択肢表のウへは進めるが、最後までキーの識別役割や値が決まる関係の具体例はない。三段の分類の基本像は得られるので局所的にfoundation1の候補とし、改稿では属性の役割を短い表の例で補う方向を検討する。",
+  "supersedes": null,
+  "recordId": "dff95d7520a645978f5a23e46bd06e5b",
+  "questionId": "r04h-q28",
+  "unitId": "unit-15",
+  "worker": "Codex /root/hint_resume15",
+  "claimSha256": "774fbbcf25ab8f5d4f6f41aa93f79a8417876611819b8e5199d9403c5096cc0f",
+  "materialSha256": "c6aaf724d60b7cdd7334e5c4a119d199339bbce3bdae8b3f0878473e0f57e3ac",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:37:04.042017+00:00",
+  "total": 1,
+  "severity": "low"
+}

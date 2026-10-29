@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が媒体喪失と媒体の残る停止、確定更新の再適用と未完了更新の取消しを対比する。H2で更新後情報のREDO／更新前情報のUNDOを意味付きで教え、H3で反映済み取引は回復不要という仕組みも分かる。",
+    "prerequisites": "媒体障害ならバックアップ後に更新後情報、途中終了なら更新前情報という条件対応からウ・エを除ける。H2の排他制御とH3の反映済み更新という基準でア・イも判断できる。",
+    "progression": "H1で障害と処理目的を分け、H2で二つの回復操作と同時更新の制御、H3で残るシステム障害の扱いを補う。四肢に必要な材料が段階的に揃う。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 3,
+    "quote": "**チェックポイント以前に完了してディスクへ反映された取引**は回復をやり直す必要がありません。",
+    "enables": "媒体が残っており既にディスクへ反映された取引は再現不要だと分かり、イを正しい説明と判断できる。"
+  },
+  "cumulativeReason": "H1で媒体喪失の有無と再適用／取消しの目的を区別する。H2でバックアップ後は更新後情報によるREDO、途中終了は更新前情報によるUNDOと知りウ・エを比較でき、同時更新には排他制御という説明でアも判別する。H3で媒体が残るとき反映済み取引を回復しなくてよいと分かりイを選べる。未説明の必須条件は残らない。",
+  "supersedes": null,
+  "recordId": "643f05b5b6fb45a28e7eaa86ae71e7fd",
+  "questionId": "r03a-q27",
+  "unitId": "unit-14",
+  "worker": "Codex /root/hint_resume14",
+  "claimSha256": "41d1585c2de8da4499b90ee62538199fd5cef3fe3ee2d4f40febca09e42aa2bc",
+  "materialSha256": "0b4f0f6ce62cd8654a53ced112b9503448669dccfeec7e1e868ed8fcefae3162",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:36:57.785080+00:00",
+  "total": 0,
+  "severity": "none"
+}
