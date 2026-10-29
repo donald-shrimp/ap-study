@@ -4,7 +4,7 @@
 
 候補は編集上の指摘であり、別担当による確認や改稿の承認とは分ける。完了組は20問の一次点検提出を意味する。
 
-固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `be02482787f77e7a6293ff24e3490fc3d42a9ed76141e7af7a90c0ebe88533d9`
+固定対象main: `daf24200b89718e44524707d3b4b926e196b0d56` · 入力digest: `6f9e524d96550c2d6085155f4c0d7e8996b311c1bd8b49b1967abbe1e5daa8e7`
 
 この表は集計時点のスナップショット。個別JSONが正本。最新集計は同じPRの「Hint foundation audit」CI成果物にある。
 
@@ -20,7 +20,7 @@
 | [2022年 秋期 問2](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-02/6c4aa3281aed4e4cab82ec1d5ac18b01.json) | 基礎理論 | 候補 | 1 | 軽度 | H3「中央はB=D=1、上段両端はA=B=D=0です。固定値が1の変数はそのまま、0の変数は否定にして論理積で結び、二つのまとまりを論理和にします。」：固定値を指示通り記号化できても、なぜ1の群を覆う式が図と等価なのかを説明する判断で止まる。<br>必要：セルの1はその行列の入力で出力が1になること、各積項がその入力の群を表し和で合わせることを補う。 | 未確認 |
 | [2022年 秋期 問5](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-05/5b1f05de104f4bf18b426c40e1dac36b.json) | アルゴリズム・プログラミング | 候補 | 1 | 軽度 | H2「a=qn+r、b=pn+rを引くと余りが消えます。」：ア〜エの倍数の向きを選ぶとき、未知の係数q−pが整数であるためa−bがnの整数倍になるという根拠を補う必要がある。<br>必要：q,pを割り算の整数の商として対応させ、差も整数なのでnの倍数となる関係を添える。 | 未確認 |
 | [2022年 春期 問18](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-10/312a31e63d5942fe933b295cb5be4165.json) | システム構成・OS | 候補 | 1 | 軽度 | H1「固定長の方式では、割り当てたブロックの中に未使用部分が残ることがあります。」：H2からウは理解して選べるが、固定長・可変長・ブロックを初めて読む人は、なぜ固定長の内部が余り、可変長では領域間の空きが散るのかを十分結び付けられない。イの方式比較を意味から振り返る際にもこの局所的な穴が残る。<br>必要：必要量に合わせて大きさを変えて配る方式と同じ大きさの箱を配る方式を、箱の中の余り・箱の間の空きに対応する短い例で補う方向を検討する。 | 未確認 |
-| [2022年 春期 問28](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-15/dff95d7520a645978f5a23e46bd06e5b.json) | データベース | 候補 | 1 | 軽度 | H2「非キー属性が複合主キーの一部分だけに依存する」：aの真部分集合を一部分と言い換えたことは分かるが、どの項目がキーで、何がその一部だけで決まるのかを具体的な表として説明できない。H3もキー→非キー→非キーという抽象的な鎖であり、属性の役割までは補わない。<br>必要：例えば受注明細の注文番号と商品番号の組で行を識別し、商品名は商品番号だけで決まる例を使い、キー・非キー・部分依存の意味を結び付ける。 | 未確認 |
+| [2022年 春期 問28](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-15/dff95d7520a645978f5a23e46bd06e5b.json) | データベース | 候補 | 1 | 軽度 | H2「非キー属性が複合主キーの一部分だけに依存する」：aの真部分集合を一部分と言い換えたことは分かるが、どの項目がキーで、何がその一部だけで決まるのかを具体的な表として説明できない。H3もキー→非キー→非キーという抽象的な鎖であり、属性の役割までは補わない。<br>必要：例えば受注明細の注文番号と商品番号の組で行を識別し、商品名は商品番号だけで決まる例を使い、キー・非キー・部分依存の意味を結び付ける。 | 確認済み |
 | [2022年 春期 問3](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-02/757ef639c170470cb3e7089cecab658a.json) | 基礎理論 | 候補 | 1 | 軽度 | H2「平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。」：25%と40%を式へ入れる計算はできるが、何の割合が増えたために列の待ち時間が変わるのかを説明する判断では推測を要する。<br>必要：利用率を処理中の時間割合と説明し、空いている時間が減るという窓口の状況と結び付ける。 | 未確認 |
 | [2024年 秋期 問1](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-03/657ac90598f3433c9c6deb0955ba771a.json) | 基礎理論 | 候補 | 1 | 軽度 | H2「ρは0以上1未満の利用率を表します。」：1.25等の数値選択は式で進められるが、ρの増加が窓口のどの状態を指すか説明できない。<br>必要：窓口が一定時間のうち何割処理中かを利用率とする短い具体例を補う。 | 未確認 |
 | [2024年 秋期 問4](https://github.com/donald-shrimp/ap-study/blob/audit/ap-a-hint-foundations/work/ap/hint-foundations/records/unit-03/c7f862800cc9441d9ea4828644ed295e.json) | 基礎理論 | 候補 | 1 | 軽度 | H3「超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、」：イ・エを除外するよう求められるが、なぜ500mや建物の背後という条件に合わないかをヒントだけでは説明できない。<br>必要：超音波の主な測距範囲と、レーザーは遮蔽物に光路を遮られるという用途を分ける理由を補う。 | 未確認 |
