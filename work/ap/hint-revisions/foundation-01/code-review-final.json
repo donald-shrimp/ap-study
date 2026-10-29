@@ -1,0 +1,51 @@
+{
+  "reviewer": "revision_code_review",
+  "reviewedAt": "2026-10-29T22:52:43.763960+00:00",
+  "status": "approved",
+  "scope": [
+    "tools/ap_lesson_quality.py",
+    "tests/ap-hint-revisions.py"
+  ],
+  "fileSHA256": {
+    "tools/ap_lesson_quality.py": "f6ac61f455b322c67e69dfb02342dcc219a0b0fa347eb5e8a3aa51ab229e787b",
+    "tests/ap-hint-revisions.py": "f70a6dea146ca465738332a7c649337ff19a72358a23decfe6cf01eb6ec37fdc"
+  },
+  "priorReview": "/workspace/scratch/hint-foundations/revision-code-review.json",
+  "findings": [],
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "resolution": "Followup baseline and review sourceHashes must now exactly equal trusted inventory sourceHashes; actual source-file hashes are checked. Verified omission rejection test and independent changed-file reproduction."
+    },
+    {
+      "id": "R2",
+      "resolution": "expected_material applies corrections before validating registered followups, then reverses only correction choices/version for corrections=False. The before and after reconstructions both preserve revised hints and correct version deltas. New regression and all prior 29 tests pass."
+    },
+    {
+      "id": "R3",
+      "resolution": "Design obstacle/candidateDecision, stage narrative fields, review notes and independentResult now require nonblank strings; tests reject blank/nontext evidence."
+    }
+  ],
+  "tests": [
+    {
+      "command": "python3 tests/ap-hint-revisions.py",
+      "result": "passed",
+      "count": 13
+    },
+    {
+      "command": "python3 tests/ap-lesson-quality.py",
+      "result": "passed",
+      "count": 29
+    },
+    {
+      "command": "Independent temporary fixture: nonempty required sourceHashes, then modify source file",
+      "result": "passed: original approved; changed actual source rejected"
+    },
+    {
+      "command": "Independent temporary fixture: unregister round and corrupt its drafts",
+      "result": "passed: unregistered malformed round ignored; lessons and bank unchanged"
+    }
+  ],
+  "reviewConclusion": "No remaining actionable findings in reviewed changes. Exact baseline/final hashes and distinct reviewer remain required; original initial-batch checks are preserved; only hints can change and all other lesson/question fields are retained. Rebuild version increments and unchanged-version handling remain covered. This review validates code and gate behavior, not pedagogical content approval.",
+  "codeModified": false
+}
