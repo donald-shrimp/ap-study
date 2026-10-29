@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "本文が曲線の接線とx軸交点を繰り返す操作を説明し、H3でその更新にニュートン法の名前を対応させる。",
+    "prerequisites": "H1の接線の式作成には傾き・微分が必要だが、H2・H3もf′の意味を示さない。式は渡され名称へ回復できるものの小さな未説明の橋がある。",
+    "progression": "本文の接線・交点からH2のy=0、H3の更新式という順序自体は対応が明確である。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 2,
+      "quote": "接線の式y=f(x₀)+f′(x₀)(x−x₀)にy=0を代入すると、次のxを求められます。",
+      "missingKnowledge": "f′(x₀)がその点での接線の傾きであり、微分で求める値であること。",
+      "learnerBlock": "接線の式を立てる指示に対してf′という記号が何の数値か分からず、H2の係数と本文の接線の対応を補う必要がある。",
+      "neededExplanation": "f′(x₀)は接線の傾きであることと、点を通る直線の式にそれを使う対応を短く補う。"
+    }
+  ],
+  "cumulativeReason": "本文で接線とx軸交点を新しい推定値とする反復は読める。H1は接線の式を求めさせ、H2で式とy=0の代入、H3でニュートン法との対応まで回復する。しかしf′(x₀)を知らない初学者は接線式の係数をどう得るかが分からず、提示式を使う理解に小さな橋が残る。",
+  "supersedes": null,
+  "recordId": "7136b58d3b934664873f9ce8363382c0",
+  "questionId": "r03a-q1",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "ee38a9a01fad55aa051d6ad450fa3c2be173753cceb5224677622362af040882",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:39:22.553797+00:00",
+  "total": 1,
+  "severity": "low"
+}

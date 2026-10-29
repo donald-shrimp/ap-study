@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 2,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "仮数の保持できる細かさより細かい値は正確に残せないというH2の説明と、H3の収まる和の例で情報落ちの基本像は得られる。",
+    "prerequisites": "二進小数の各桁の重みや指数をそろえる移動方法が未説明で、各中間結果を正規化する指示の主要操作を初学者が自分で実行できない。",
+    "progression": "中括弧優先、保持精度、収まる例という順序はある。二進表記の操作欠落を別途progressionへ重ねない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 2,
+      "quote": "各中間結果を正規化して確認します。",
+      "missingKnowledge": "二進小数の位の重み、2の指数をそろえる桁移動、先頭を1にする正規化の操作。",
+      "learnerBlock": "四つの中括弧を計算して保持できるか比較する際、(1.1)₂×2⁻³が幾らか、同じ指数にどう書くかを自力で辿れない。",
+      "neededExplanation": "1.1₂=1+1/2などの位の例と、小さい項を指数5へそろえて保持範囲を確かめる途中式を示す。"
+    }
+  ],
+  "cumulativeReason": "H1で中括弧と大小の項に注目し、H2で指数5なら保持単位1/4と知り、H3で小さい二項の和1/4と32の加算が収まる例を得る。ただし(1.1)₂や指数の読み方から各候補の途中を計算・正規化する橋がなく、アの示例以外を検証する手順が残らない。",
+  "supersedes": null,
+  "recordId": "c98a1d3f3c1a41b39bda9527a3a71444",
+  "questionId": "r04h-q1",
+  "unitId": "unit-03",
+  "worker": "Codex /root/hint_unit03",
+  "claimSha256": "3f1a23b130d93873ade105e583ab2d1e291347ed80bf7d3a53a611d9a653212d",
+  "materialSha256": "659af3fd6c82808e74130e26e738104024234d6f17982223433728bae93c6d85",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:39:02.185186+00:00",
+  "total": 2,
+  "severity": "low"
+}
