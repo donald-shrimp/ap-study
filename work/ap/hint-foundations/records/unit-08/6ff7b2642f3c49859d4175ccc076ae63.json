@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "サービスの継続と利用者の途中状態の継続をH1で分け、H2で共有の有無が状態読取りを左右する仕組みが分かる。",
+    "prerequisites": "待機系の障害後起動とクラスタの稼働中サーバを対比し、各肢の二つの継続可否を照合できる。",
+    "progression": "H1で二つの結果、H2で起動・共有条件、H3で両条件の成立という順で進む。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で別サーバの動作と途中状態を区別する。H2でコールドは後で起動し、非共有なら途中状態を読めないと学ぶ。H3で動作中かつ状態共有のエなら両方継続できると結べる。未解決の不足はない。",
+  "support": {
+    "hintStep": 2,
+    "quote": "セッションを共有しなければ途中の状態を読めません。",
+    "enables": "非共有では途中処理を引き継げないと判断し、稼働中サーバと共有情報がそろうエへ対応できる。"
+  },
+  "supersedes": null,
+  "recordId": "6ff7b2642f3c49859d4175ccc076ae63",
+  "questionId": "r06a-q12",
+  "unitId": "unit-08",
+  "worker": "Codex /root/hint_unit08",
+  "claimSha256": "b741dc6863a692dd649a0e4ae44a066c2890107fbe92ce27f8dbd467c57302c2",
+  "materialSha256": "9a16692d1b06acd348b3dfe068ed5ccba83efa60233e65350d92aaef18d6a0cb",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:46:39.774755+00:00",
+  "total": 0,
+  "severity": "none"
+}

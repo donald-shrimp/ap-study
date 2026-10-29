@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "設問は発生1回の追加時間を与え、H1はアクセス1回当たりの率pと1命令当たり2pを対応させる。発生率と平均遅延の関係を学べる。",
+    "prerequisites": "H2にミリ秒からマイクロ秒への換算と2×p×40,000≦0.4があり、未知の公式を持たなくても不等式を辿れる。H3は最大値が等号になることまで示す。",
+    "progression": "発生率の単位をH1で確定し、H2で遅延条件を式にし、H3で割算と上限を確認する順序である。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "平均遅延＝アクセス回数×ページフォールト発生率×1回のオーバヘッド",
+    "enables": "1命令の2回に発生率を掛け、1回の追加40,000マイクロ秒を掛ける理由と式を得る。0.4を80,000で割ってアの5×10⁻⁶を選べる。"
+  },
+  "cumulativeReason": "H1で率の分母と2pを学び、H2で単位換算と平均遅延の式、H3でpの上限5×10⁻⁶を確認する。設問の数値と四肢を結ぶ計算の不足はない。 修正検討上の未解決点はない。学習者での効果測定は行っていない。",
+  "supersedes": null,
+  "recordId": "f7e430e70b6e4330939650077e8be24e",
+  "questionId": "r03a-q17",
+  "unitId": "unit-10",
+  "worker": "Codex /root/hint_unit10",
+  "claimSha256": "50472057e4ea0304b54aa266546dd0bc32be5611dcb6d402a1f1903b97de6c54",
+  "materialSha256": "9a98192d66230e0f6fbaca726ebf394abc3fc3b81d267dd234e66d785e38d83d",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:46:57.338977+00:00",
+  "total": 0,
+  "severity": "none"
+}

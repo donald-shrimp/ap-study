@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1でスレッドを実行の流れと定義し共有カウンターの更新喪失を例示する。H2・H3で同時利用でも結果を正しくする性質を学べる。",
+    "prerequisites": "単に同時利用を避けるア・イや停止するエと、結果の正しさを維持するウを比べるための具体例と判定軸がある。",
+    "progression": "問題が生じる例から同時更新の調整へ進み、H3でロックの保護対象と防げることを具体化する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で二スレッドが同じ古い値を読んで更新を失う例を理解し、H2で排他制御により結果を正しくすると学ぶ。H3の読込み・加算・書込みをまとめて守る例から、複数スレッドでも問題なく動くウに対応できる。排他制御の実装知識を要求せず、足場は十分。",
+  "support": {
+    "hintStep": 3,
+    "quote": "共有カウンターの「読込み→加算→書込み」をロックで一まとまりに保護すれば、更新の取りこぼしを防げます。",
+    "enables": "同時実行を禁止・停止するのでなく更新を守って正しく動くことを学び、ウを選べる。"
+  },
+  "supersedes": null,
+  "recordId": "8de1ef6bed844cd0b980ef1e61833f4c",
+  "questionId": "r07a-q17",
+  "unitId": "unit-09",
+  "worker": "Codex /root/hint_unit09",
+  "claimSha256": "b98dc19e05d11b0799dde5a32bf87ce4bf0cac03a19b7723e2a634bddf55fa83",
+  "materialSha256": "252d475b2d4f2c3881970821407985ac6bbeaf5f2f6492e3e0ed35f03f48f8d5",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:46:49.773471+00:00",
+  "total": 0,
+  "severity": "none"
+}

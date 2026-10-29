@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が命令ミックスを種類別割合と説明し、H2がMIPSを毎秒百万命令と定義して時間との関係を教える。",
+    "prerequisites": "H2の各時間×割合の合計と1000/tの変換式が表の10・40・40ns、50・30・20%に適用できる。",
+    "progression": "平均の取り方の注意から加重計算と単位換算へ進み、H3で具体的な各項と最終値を確認できる。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "MIPSは毎秒百万命令を表し、平均時間がtナノ秒なら、10⁹÷t÷10⁶=1,000÷tで求められます。",
+    "enables": "25という平均時間をそのまま性能とせず、毎秒命令数へ直して40MIPSを選べる。"
+  },
+  "cumulativeReason": "原本表画像を開き、整数10ns・50%、移動40ns・30%、分岐40ns・20%を確認した。H1で同じ重みの平均を避け、H2で10×0.5+40×0.3+40×0.2=25nsを作る。H3で5+12+8と1000÷25=40MIPSを照合できる。追加説明不要。",
+  "supersedes": null,
+  "recordId": "efa92404ced246d6b8e6f74ce1bbd226",
+  "questionId": "r03h-q9",
+  "unitId": "unit-07",
+  "worker": "Codex /root/hint_unit07",
+  "claimSha256": "bc5b6bac8f2e18237c98065c12b821bdf560efebde73a1c29cb800df9a37f5d4",
+  "materialSha256": "551259108efe649e90ea958e8faa16b64cd823c939f97c04d53cf71c96641644",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:47:49.029419+00:00",
+  "total": 0,
+  "severity": "none"
+}
