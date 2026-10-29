@@ -239,11 +239,67 @@ def expected_material(state, registrations=None, *, corrections=True):
             q['version'] = state['original'][id]['version'] + (lesson != state['lessons'][id])
             source = 'lessons/' + id.split('-q')[0] + '.json:' + id
             q.update(enrichment='reviewed', hintStatus='individual', hintSource=source, lessonSource=source)
-    if corrections:
-        for id, record in state['sourceCorrections'].items():
-            by_id[id]['choices'] = copy.deepcopy(record['choices'])
-            by_id[id]['version'] += 1
+    for id, record in state['sourceCorrections'].items():
+        by_id[id]['choices'] = copy.deepcopy(record['choices'])
+        by_id[id]['version'] += 1
+    apply_followup_revisions(state, lessons, by_id)
+    if not corrections:
+        for id in state['sourceCorrections']:
+            by_id[id]['choices'] = copy.deepcopy(state['original'][id]['choices'])
+            by_id[id]['version'] -= 1
     return lessons, bank
+
+
+def apply_followup_revisions(state, lessons, bank):
+    """Layer exact independent follow-up approvals without replacing prior reviews."""
+    directory = state['root'] / 'work/ap/hint-revisions'
+    registration = directory / 'registrations.json'
+    if not registration.exists():
+        return
+    text = lambda value: isinstance(value, str) and bool(value.strip())
+    rounds = read(registration)
+    require(isinstance(rounds, list) and len(rounds) == len(set(rounds)), 'Invalid revision registrations')
+    for name in rounds:
+        require(isinstance(name, str) and re.fullmatch(r'[a-z0-9-]+', name), 'Unsafe revision name')
+        folder = directory / name
+        manifest = read(folder / 'manifest.json')
+        baseline = read(folder / 'baseline.json')
+        require(manifest.get('baselineSha256') == digest(baseline), 'Revision baseline changed')
+        bases = _list_by_id(baseline, 'Revision baseline')
+        require(set(bases) == set(manifest['questionIds']), 'Revision coverage differs')
+        drafts, reviews = {}, {}
+        for group in manifest['groups']:
+            require(re.fullmatch(r'group-[0-9]{2}', group), 'Unsafe revision group')
+            for target, file in [(drafts, 'drafts.json'), (reviews, 'reviews.json')]:
+                items = _list_by_id(read(folder / group / file), file)
+                require(not set(target) & set(items), 'Duplicate follow-up revision')
+                target.update(items)
+        require(set(drafts) == set(reviews) == set(bases), 'Unfinished follow-up revision')
+        for id, base in bases.items():
+            d, v = drafts[id], reviews[id]
+            require(id in lessons and digest(lessons[id]) == digest(base['baseLesson']) and digest(bank[id]) == digest(base['baseQuestion']), 'Stale follow-up baseline: ' + id)
+            require(d['baseLessonSHA256'] == digest(lessons[id]) and d['questionSHA256'] == digest(bank[id]), 'Stale follow-up draft: ' + id)
+            _lesson(d['lesson'], id)
+            require({k:x for k,x in d['lesson'].items() if k != 'hints'} == {k:x for k,x in lessons[id].items() if k != 'hints'}, 'Hint revision changes unrelated lesson fields: ' + id)
+            require(isinstance(d.get('author'), str) and d['author'].strip() and isinstance(d.get('design'), dict) and text(d['design'].get('obstacle')) and text(d['design'].get('candidateDecision')), 'Missing revision design: ' + id)
+            require(v.get('author') == d['author'] and isinstance(v.get('reviewer'), str) and v['reviewer'].strip() and v['reviewer'] != d['author'], 'Independent follow-up reviewer required: ' + id)
+            require(v.get('status') == 'approved' and v.get('issues') == [], 'Unresolved follow-up review: ' + id)
+            stamp = datetime.fromisoformat(v['checkedAt'].replace('Z', '+00:00'))
+            require(stamp.tzinfo is not None and stamp.utcoffset() is not None, 'Follow-up review timestamp needs timezone')
+            require(v.get('baseLessonSHA256') == d['baseLessonSHA256'] and v.get('questionSHA256') == d['questionSHA256'] and v.get('reviewedLessonSHA256') == digest(d['lesson']), 'Stale follow-up review: ' + id)
+            require(v.get('sourceHashes') == base['sourceHashes'] == state['inventory'][id]['sourceHashes'], 'Follow-up source coverage changed: ' + id)
+            for path, sha in v['sourceHashes'].items():
+                require(file_digest(_safe_file(state['root'], path)) == sha, 'Follow-up source changed: ' + path)
+            require(all(v.get('checks', {}).get(k) is True for k in CHECKS) and v['checks'].get('calculation') in (True, 'not-applicable'), 'Incomplete follow-up checks: ' + id)
+            require(v.get('officialAnswer') == bank[id]['choices'][bank[id]['answer']]['label'] and text(v.get('notes')) and text(v.get('independentResult')), 'Missing follow-up reasoning: ' + id)
+            for stage, hint in zip(d['design']['stages'], d['lesson']['hints']):
+                require(stage.get('revealsAnswer') is hint['revealsAnswer'] and all(text(stage.get(k)) for k in ('newInformation', 'remainingWork', 'reason')), 'Incomplete follow-up stage design: ' + id)
+            require(len(d['design']['stages']) == 3, 'Three revision design stages required')
+            changed = d['lesson'] != lessons[id]
+            lessons[id] = copy.deepcopy(d['lesson'])
+            for field in FIELDS:
+                bank[id][field] = copy.deepcopy(d['lesson'][field])
+            bank[id]['version'] += int(changed)
 
 
 def validate_workspace(root, check_bank=True):

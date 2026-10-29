@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "三つの時間と回転待ち半周の関係は得られるが、シークと回転待ちが物理的に何を待つ時間かは説明されず、装置動作の基本像の一部を推測する。",
+    "prerequisites": "回転周期60/6000、平均半周、転送量÷速度と最後の加算が示されるので、未知の公式を自力で探す必要はない。",
+    "progression": "H1で成分分解、H2で各計算、H3で単位を合わせた和という順序は明瞭。不足は対象の意味に限定する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 1,
+      "quote": "シーク・回転待ち・転送の時間を分けて求めます。",
+      "missingKnowledge": "シークはヘッドを目的位置へ動かす時間、回転待ちは目的データがヘッドまで回る時間という違い。",
+      "learnerBlock": "表の平均シーク10msと回転から出す5msを計算上足せても、同じ待ちを二重に数えていない理由や半周待つ理由を説明しにくい。",
+      "neededExplanation": "ヘッドの位置決めの後に目的の部分が回ってくるのを待つという順と、平均では半回転待つ理由を短く補う。"
+    }
+  ],
+  "cumulativeReason": "H1はシーク・回転待ち・転送の分解を指示する。H2で回転周期と平均半周、転送式が分かり、H3で15.1msの加算は追える。一方、ヘッド移動と目的データが回る待ちの別は最後まで示されず、なぜ異なる二つの待ちがあるのかは残る。",
+  "supersedes": null,
+  "recordId": "ba175e6ac62743b998d092c478ce1f00",
+  "questionId": "r03a-q11",
+  "unitId": "unit-08",
+  "worker": "Codex /root/hint_unit08",
+  "claimSha256": "b741dc6863a692dd649a0e4ae44a066c2890107fbe92ce27f8dbd467c57302c2",
+  "materialSha256": "368663e9136bfd53454405d0eb4db8c92e527690141b34a252034d39a022c709",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:46:41.463243+00:00",
+  "total": 1,
+  "severity": "low"
+}

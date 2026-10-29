@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1でセンサが二つでも共有通信路は一つ、H2で通信中の利用権を一つにする必要性、H3でセマフォの値と待機の働きを学べる。",
+    "prerequisites": "通信前に獲得し値を0にして他方を待たせ、通信後に解放する操作がH3にあり、名称だけの対応付けに依存しない。",
+    "progression": "共有対象の特定→使用権の取得・返却→値1/0を使う機構の順で具体化する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で同じI²Cバスを共有する点を把握し、H2で通信の間だけ権利を持つ手順を考える。H3の初期値1、獲得0、他方待機、解放1の動作で一度に一タスクという条件を満たすと分かりセマフォのイを選べる。リアルタイムOS全体の知識はこの判断に不要で、追加の不足はない。",
+  "support": {
+    "hintStep": 3,
+    "quote": "通信前に獲得すると値が0になり、他方は待ちます。",
+    "enables": "セマフォによる通信路の一利用者への制限を学び、排他的なセンサアクセスを実現するイと判断できる。"
+  },
+  "supersedes": null,
+  "recordId": "c4d68714d3cd47349bb2117af742f074",
+  "questionId": "r04h-q17",
+  "unitId": "unit-09",
+  "worker": "Codex /root/hint_unit09",
+  "claimSha256": "b98dc19e05d11b0799dde5a32bf87ce4bf0cac03a19b7723e2a634bddf55fa83",
+  "materialSha256": "703462ba90f88206d9129def2a92c76a803b9b4ae3ba8197a3a35bff6790e91f",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:48:28.700272+00:00",
+  "total": 0,
+  "severity": "none"
+}

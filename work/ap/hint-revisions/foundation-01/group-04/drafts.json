@@ -1,0 +1,450 @@
+[
+  {
+    "id": "r07a-q7",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "ddfdee95235777c16fe74aa08336b577584e641b0f0e656460be6cf3b1da6711",
+    "questionSHA256": "f0b7a4adca430d11afa3684dacfe915001108ec3b313c7ee2fde68c54b50638d",
+    "lesson": {
+      "id": "r07a-q7",
+      "summary": "Scalaのプログラミング方式、継承、実行形式、型付けの特徴を区別する。",
+      "explanation": "Scalaはクラスやオブジェクトを用いるオブジェクト指向と、関数を値として扱う関数型の機能を備える言語です。\n型推論はありますが静的型付けです。代表的な実行形態はJVM（Java Virtual Machine：Java仮想マシン）向けのバイトコードで、ネイティブコード生成が必須という説明は合いません。",
+      "choiceReasons": [
+        "オブジェクト指向と関数型を組み合わせられる点がScalaの特徴です。",
+        "クラスを複数継承するのではなく、トレイトを組み合わせる仕組みを利用します。",
+        "JVMのバイトコードへコンパイルする形態があり、ネイティブコード生成は必須ではありません。",
+        "型推論があっても型はコンパイル時に決まる静的型付けです。"
+      ],
+      "takeaway": "Scalaはオブジェクト指向と関数型を併用する静的型付け言語。",
+      "hints": [
+        {
+          "title": "型推論と動的型付け",
+          "text": "型推論は、型名を書かなくてもコンパイラが型を推定する機能です。Scalaは型推論を備えますが静的型付けであり、実際の値によって実行時に型を決定するという説明とは異なります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "二つの方式を併用する",
+          "text": "Scalaではオブジェクト指向と関数型の両方を使えます。オブジェクト指向は、例えば口座の残高と入出金の処理を一つの対象にまとめる考え方です。その設計図がクラス、個々の口座がオブジェクトです。関数型では関数を値として別の関数へ渡すなどして処理を組み立てます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "継承と実行先も整理する",
+          "text": "Scalaのクラスは複数のクラスを直接継承するのではなく、トレイトを組み合わせられます。またJVM向けバイトコードにコンパイルして実行できるので、ネイティブコードの生成は必須ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "Scalaが併用する二方式のうち、クラス・オブジェクトという名称だけではデータと操作をまとめる像が得られない。",
+      "candidateDecision": "adopt：候補の指摘どおりH2のオブジェクト指向側を口座の具体例で補う。関数型の既存の説明とH1・H3の比較軸は保つ。",
+      "changes": [
+        "hints[1].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07a/r07a-q7.webpをview_imageで実見。アは二方式の併用、イはクラス多重継承、ウはネイティブ必須、エは動的型付けと確認。data/answer-keys.jsonの2025 autumn問7はアでquestion.answer=0と一致。Scalaの静的型付け、トレイト利用、JVM向け実行という既存解説との整合も確認。計算なし。",
+      "stages": [
+        {
+          "newInformation": "型推論と静的型付けの関係。",
+          "remainingWork": "併用する方式・継承・実行形式の特徴を検討する。",
+          "revealsAnswer": false,
+          "reason": "エの動的型付けは除外できるが、アの二方式、イの多重継承、ウのネイティブ必須の真偽はまだ確定しない。"
+        },
+        {
+          "newInformation": "二方式を併用する特徴と、口座のデータ・操作、設計図・実体によるオブジェクト指向の像。",
+          "remainingWork": "説明をアへ対応させ、他肢との差を整理する。",
+          "revealsAnswer": true,
+          "reason": "二方式の併用はアと実質同じ内容で正答を開示する。イ・ウの誤りはこの段では未説明で、エはH1で除外済み。"
+        },
+        {
+          "newInformation": "クラス多重継承とトレイトの違い、JVM向け実行ならネイティブ生成は必須でないこと。",
+          "remainingWork": "既に分かった正答に対し誤答の根拠も確認する。",
+          "revealsAnswer": true,
+          "reason": "H2でアを開示済み。H3でイとウの誤りを説明し、H1のエの除外と合わせ全肢を説明できる。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07a-q74",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "69a14bd288d7b48051e939bb63e6508e412e780cdbe89e4b08b225f0d59b5668",
+    "questionSHA256": "ca417e77f6b75ee6f2dde08ac7ec91d5a23588f95329efd683930cb6e200e0cd",
+    "lesson": {
+      "id": "r07a-q74",
+      "summary": "一定需要の下で、年間発注費と年間在庫保管費を一致させる経済的発注量を求める問題。",
+      "explanation": "1回の発注量をQとすると、年間発注回数は100000/Q回で、発注費は5000×100000/Q円です。在庫はQから0へ一定に減るため平均Q/2個、年間保管費は1000×Q/2円です。\n両者を等しくすると500000000/Q=500Q、Q²=1000000。正の平方根を取りQ=1000個です。",
+      "choiceReasons": [
+        "Q=10では年間発注費5000万円と保管費5000円で大きく異なります。",
+        "Q=200では発注費250万円と保管費10万円で一致しません。",
+        "Q=500では発注費100万円と保管費25万円で一致しません。",
+        "Q=1000なら発注費50万円と保管費50万円で等しくなります。"
+      ],
+      "takeaway": "年間発注回数は需要/Q、平均在庫はQ/2。両費用を等置してQを求める。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "安全在庫は考えず、一定の需要で在庫がQから0へ減るため、平均在庫は発注量の半分です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "発注費は(100000/Q)×5000、保管費は(Q/2)×1000と、同じ年間の単位で表します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二つの年間費用が等しければよいので、選択肢の10、200、500、1,000をQに順に入れる方法も使えます。それぞれ(100000÷Q)×5000と(Q÷2)×1000を計算し、金額が一致するものを探しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "費用の二式は分かっても、Q²から平方根を求める操作を知らないと止まる。",
+      "candidateDecision": "adopt：平方根を既知としない候補の代案を採用。H3を四則計算だけで各選択肢を代入・比較できる手順にする。最終発注量は渡さない。",
+      "changes": [
+        "hints[2].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07a/r07a-q74.webpをview_imageで実見。表は年間需要100,000個、年間保管費1,000円/個、発注費5,000円/回。グラフの発注費減少・保管費増加と交点を確認。data/answer-keys.jsonの2025 autumn問74はエでanswer=3と一致。Q=10,200,500,1000の年間発注費は順に50,000,000／2,500,000／1,000,000／500,000円、保管費は5,000／100,000／250,000／500,000円。エだけ等しい。",
+      "stages": [
+        {
+          "newInformation": "一定需要で在庫がQから0に減るため平均在庫はQ/2。",
+          "remainingWork": "表の需要・単価を年間費用へ対応させる。",
+          "revealsAnswer": false,
+          "reason": "平均在庫の一般関係だけで、ア10・イ200・ウ500・エ1000の費用計算と一致比較は未実施。"
+        },
+        {
+          "newInformation": "年間発注回数と平均在庫に単価を掛けた二費用の式。",
+          "remainingWork": "各Qの代入、又は等式の整理をする。",
+          "revealsAnswer": false,
+          "reason": "ア〜エの値を式へ入れる計算が必要で、どの値が両費用を一致させるかは渡していない。"
+        },
+        {
+          "newInformation": "平方根を使わず、全候補を二式へ代入して一致を調べる手順。",
+          "remainingWork": "10、200、500、1000の各二費用を計算し一致する肢を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "全肢のQは再掲するが、ア・イ・ウの不一致もエの一致も述べず、各候補の四則計算と比較を本人に残す。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07h-q1",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "f1ed47c768aa43b5e9e46114dbd7910f644408dbca7c6dc3ed1962c3cc287d72",
+    "questionSHA256": "537354ea29a6d54f1974c6b3977355766fa1dac80e1bcad069ae1ee0b8f32143",
+    "lesson": {
+      "id": "r07h-q1",
+      "summary": "含意の真理値と、与えられた条件を代入して論理式を簡単にする手順を確認する問題です。",
+      "explanation": "含意A→Bが偽になるのは、Aが真でBが偽のときだけです。左側Aが偽なら、Bの値によらず全体は真です。\nP=Q=真を代入すると、P→QとQ→Pは真、P→¬QとQ→¬Pは偽です。\nエの最後の→の左側は、偽∨偽=偽。右側Q→RはRですが、偽→Rは常に真なので条件を満たします。",
+      "choiceReasons": [
+        "アは真→(R→偽)=¬Rです。Rが真なら偽になります。",
+        "イの否定はQ→¬P全体に掛かります。左側は真∧¬偽=真なので、全体はR。Rが偽なら成立しません。",
+        "ウの左側は偽∨真=真なので、全体は¬R。Rが真なら成立しません。",
+        "エの左側は偽∨偽=偽。偽を左側とする含意は、Rがどちらでも真です。"
+      ],
+      "takeaway": "「偽→何か」は常に真。否定の線がどの範囲を覆うかも確認する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "否定は真と偽を反転します。∧（論理積）は両方が真のときだけ真、∨（論理和）は少なくとも片方が真なら真です。まずPとQへ真を代入し、P→Q、Q→P、P→¬Q、Q→¬Pの四つを真偽に置き換えましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "含意A→Bは「真→偽」のときだけ偽です。左側が偽なら、右側が何でも真になります。最後の→の左側を先に計算します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "P→¬QとQ→¬Pは、どちらも真→偽です。各候補の∧・∨・否定を処理し、最後の→の左側が偽になる候補を探しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "含意の規則は本文にもあるが、∧と∨を真偽へ計算する規則がないと各肢の左辺を評価できない。",
+      "candidateDecision": "adopt：H1へ否定・論理積・論理和の真偽規則を補い、既存の分解→含意→適用の順を維持する。",
+      "changes": [
+        "hints[0].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07h/r07h-q1.webpをview_imageで実見。特にイの上線はQ→否定P全体を覆うこと、エは二つの偽の含意を論理和で結ぶことを確認。data/answer-keys.jsonの2025 spring問1はエでanswer=3と一致。P=Q=真を代入して全肢を検算：ア=¬R、イ=R、ウ=¬R、エ=真。R=真/偽の両方で真となるのはエのみ。",
+      "stages": [
+        {
+          "newInformation": "否定・AND・ORの規則と、P・Qの代入で先に求める四つの部分式。",
+          "remainingWork": "本文の含意規則を使って部分式と外側の式を評価する。",
+          "revealsAnswer": false,
+          "reason": "ア・イの∧、ウ・エの∨を計算する規則は渡すが、各部分式・否定範囲を本人が適用する必要があり、エの結果は示さない。"
+        },
+        {
+          "newInformation": "含意は左辺が偽なら右辺にかかわらず真、という評価の優先箇所。",
+          "remainingWork": "ア〜エそれぞれの最後の含意の左辺を計算する。",
+          "revealsAnswer": false,
+          "reason": "ア・イ・ウ・エのどの左辺が偽かは示していない。イの全体否定も含め、H1の規則の適用が残る。"
+        },
+        {
+          "newInformation": "P→¬QとQ→¬Pを真→偽へ具体化する。",
+          "remainingWork": "∧・∨・イの否定を計算し、外側の含意とRの条件を照合する。",
+          "revealsAnswer": false,
+          "reason": "二部分式の値は渡すが、アの真∧真、イの真∧¬偽、ウの偽∨真、エの偽∨偽の結果と最終評価は本人に残す。正答肢自体は示さない。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07h-q16",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "0758df1c19ee09123d3aeb89224b4bfceb004654eb0cf67e6a311f4213c542d9",
+    "questionSHA256": "b93814828530827de9be6e04a5b8c76f38c8b762460b0186582a94f0e5460232",
+    "lesson": {
+      "id": "r07h-q16",
+      "summary": "OSSの修正・静的リンク・動的リンクごとに、配布時のソース公開義務の範囲を比較します。",
+      "explanation": "OSS（Open Source Software：ソースコードを利用・改変・再配布できる条件で公開されたソフトウェア）の配布時の公開範囲を、この表に沿って比較します。aは修正・静的リンク・動的リンクの全てが○でGPL（GNU General Public License）。bは修正と静的リンクが○、動的リンクが×でLGPL（GNU Lesser General Public License）。cはOSS自体を修正したときだけ○でMPL（Mozilla Public License）。dは全て×でBSD（Berkeley Software Distribution）ライセンスです。\nLGPLのリンク方法、MPLのファイル単位の義務などを簡略化した試験上の比較です。実際の配布ではライセンスの版と条件を確認します。BSDも著作権表示等の条件があり、「×」は無条件で使える意味ではありません。",
+      "choiceReasons": [
+        "アはGPL→LGPL→MPL→BSDで、表の公開義務の範囲と一致する。",
+        "イはbがMPL、cがBSD、dがLGPLでそれぞれの公開義務と合わない。",
+        "ウはaとbが逆。動的リンクで×の列はGPLではない。",
+        "エはaからdの配置が合わず、全て×のdにGPLを置いている。"
+      ],
+      "takeaway": "ソース公開義務と著作権表示などの義務を分ける。配布時はライセンスの版・結合方法・公開対象の範囲を確かめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "リンクは別のプログラムの機能を結び付けて使うことです。静的リンクは必要なコードを実行ファイルに組み込み、動的リンクは別のライブラリを実行時に読み込んで使います。表の○はソース公開義務で、著作権表示の有無ではありません。まず全て×のdと全て○のaを探しましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "コピーレフトとは、配布時に改変物などにも同じライセンス条件を引き継がせる考え方です。GPLは結合したプログラムまで、BSDはソース公開を求めない方式なので、表ではGPLがa、BSDがdです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "この表ではLGPLは静的リンクで公開義務があり動的リンクではなく、MPLはOSS自体の修正でだけ公開義務があります。したがってb＝LGPL、c＝MPLで、a〜dはGPL・LGPL・MPL・BSDです。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "静的・動的リンクという利用方法の像がないと、表の公開義務の違いが名称の暗記にとどまる。",
+      "candidateDecision": "adopt：候補のリンクの意味と結合方法の違いをH1で補う。H2・H3の試験上の対応と解説の簡略化に関する留意は保持する。",
+      "changes": [
+        "hints[0].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07h/r07h-q16.webpをview_imageで実見。修正・静的リンク・動的リンクの順にa=○○○、b=○○×、c=○××、d=×××、全選択肢の列順を確認。data/answer-keys.jsonの2025 spring問16はアでanswer=0と一致。試験の簡略表に従うとa GPL/b LGPL/c MPL/d BSD。実際の条件は版・公開対象による旨とBSDの著作権表示等の既存説明を保持。計算なし。",
+      "stages": [
+        {
+          "newInformation": "リンクの意味、静的・動的のコードの扱いの違い、表の両端の見方。",
+          "remainingWork": "ライセンスごとの公開義務の広がりを学び列に対応させる。",
+          "revealsAnswer": false,
+          "reason": "○×の読み方と利用方法のみで、GPL/LGPL/MPL/BSDと列の対応は未提示。ア〜エの組合せはまだ選べない。"
+        },
+        {
+          "newInformation": "コピーレフトの考え方、GPL=aとBSD=dという両端の対応。",
+          "remainingWork": "残り二ライセンスの対応の根拠を確認する。",
+          "revealsAnswer": true,
+          "reason": "a=GPLかつd=BSDを示すため、アのみが残る。イはd=LGPL、ウはa=LGPL、エはa=LGPLかつd=GPLで除外でき、組合せの正答を開示している。"
+        },
+        {
+          "newInformation": "表のbはLGPL、cはMPLとなる公開義務の範囲。",
+          "remainingWork": "アの全列の一致を確認する。",
+          "revealsAnswer": true,
+          "reason": "H2でアが確定済み。全列を示し、イのb/c/d、ウのa/b、エの全列との不一致も確認できる。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07h-q21",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "9610cf989f1486e3f058c2eeb8087ad5a6c6c8ab1c6f2361c683ab60e38476b3",
+    "questionSHA256": "fbbb627df386e67e64fee2fcf11d40e483c361093efc18eead01dae90cc937a6",
+    "lesson": {
+      "id": "r07h-q21",
+      "summary": "間欠動作の平均電流を時間加重平均で計算し、必要な待機時間を求める。",
+      "explanation": "平均電流は、1周期で流れる電荷を周期の長さで割る。動作時間0.01秒、動作電流10,000μA、待機時間t秒、待機電流0.1μAに単位をそろえる。\n\n平均=(10,000×0.01+0.1t)/(0.01+t)≤1。100+0.1t≤0.01+tからt≥99.99/0.9=111.1秒となる。単純に二つの電流の平均を取ると、時間の長さの違いを無視してしまう。",
+      "choiceReasons": [
+        "1.1秒では平均は約90.2μAで、1μAを超える。",
+        "11.1秒では平均は約9.10μAで、1μAを超える。",
+        "111.1秒では平均が1μAとなり、条件を満たす最短の選択肢。",
+        "1111.1秒でも条件を満たすが、最短ではない。"
+      ],
+      "takeaway": "時間の長さが異なる電流は、電流×時間の合計を総時間で割る。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "動作10ミリ秒と待機t秒の1周期を考えます。平均電流は、各期間の**電流×継続時間を合計して全時間で割った値**です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "10ミリ秒=0.01秒、10mA=10,000μAです。平均は(10,000×0.01+0.1t)/(0.01+t)μAとなります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "条件は(100+0.1t)/(0.01+t)≦1です。分母は正なので両辺に掛けると100+0.1t≦0.01+t。両辺から0.1tと0.01を引けば99.99≦0.9tです。両辺を0.9で割り、その時間以上になる最も短い候補を選びましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "平均電流の式は得られても、文字のある不等式をtだけに整理する手順が不明だと待機時間へ進めない。",
+      "candidateDecision": "adopt：候補の途中式を採用し、両辺から何を引くかも示す。最後の除算と候補の大小比較は本人に残す。",
+      "changes": [
+        "hints[2].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07h/r07h-q21.webpをview_imageで実見。図は10ミリ秒の動作10mAと待機0.1μAが繰り返され、待機時間のみが未知。data/answer-keys.jsonの2025 spring問21はウでanswer=2と一致。10ms=0.01s、10mA=10,000μA。99.99/0.9=111.1秒。ア1.1秒では約90.2μA、イ11.1秒では約9.10μA、ウ111.1秒は1μA、エ1111.1秒は約0.190μA。ウが最短。",
+      "stages": [
+        {
+          "newInformation": "一周期の電流×時間の合計を総時間で割る時間加重平均。",
+          "remainingWork": "動作・待機の値の単位をそろえて式を作る。",
+          "revealsAnswer": false,
+          "reason": "ア1.1・イ11.1・ウ111.1・エ1111.1秒のどれで平均1μA以下となるかは計算していない。"
+        },
+        {
+          "newInformation": "秒とμAへの単位換算と、待機時間tの平均電流の式。",
+          "remainingWork": "平均が1以下になるtを求める。",
+          "revealsAnswer": false,
+          "reason": "全候補を評価できる式だが、ア・イ・ウ・エの合否と最短の選択は未提示。"
+        },
+        {
+          "newInformation": "分母払いと両辺からの減算で99.99≦0.9tに整理する手順。",
+          "remainingWork": "99.99÷0.9を計算し、以上の候補から最短を選ぶ。",
+          "revealsAnswer": false,
+          "reason": "境界の最終値111.1秒も肢番号も示さない。ア・イが短すぎること、ウが境界、エも満たすが長いことの判断は最後の除算・比較に残す。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07h-q76",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "de88eb3cd63ff045e400ca5c4490f9de677913008d40fb86b83489367e731224",
+    "questionSHA256": "67279bd3cc9ee74e4afa1ea2567cc71324dfc23d74e800a35ddcd2411775bf33",
+    "lesson": {
+      "id": "r07h-q76",
+      "summary": "利益や資産の金額と、売上高・総資産を分母にする財務比率を区別して比較する問題です。",
+      "explanation": "総資産回転率=売上高/総資産。Aは800/100=8回、Bは1000/900≈1.11回。総資産営業利益率=営業利益/総資産。Aは20/100=20%、Bは90/900=10%。\n\n売上高営業利益率=営業利益/売上高はAが20/800=2.5%、Bが90/1000=9%なので、Aの方が低い。利益の額が小さくても資産も小さいため、資産に対する率は高い。額の比較と率の比較を分ける。",
+      "choiceReasons": [
+        "売上・資産の額は低いが、回転率はA8回でB約1.11回より高い。",
+        "売上高営業利益率はA2.5%でB9%より低い。",
+        "利益・資産の額は低いが、総資産営業利益率はA20%でB10%より高い。",
+        "回転率も総資産営業利益率もAの方が高い。"
+      ],
+      "takeaway": "財務指標は分母を確認する。売上に対する率と、資産に対する率は違う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "総資産回転率は、資産を使ってどれだけ売上を生んだかを示し、売上高÷総資産で求めます。売上高営業利益率は売上高に対する営業利益の割合（営業利益÷売上高）、総資産営業利益率は資産に対する営業利益の割合（営業利益÷総資産）です。額の大小とは分けて比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "A社は資産100に対して売上800、利益20。B社は資産900に対して売上1000、利益90。同じ指標の分母・分子をそろえる。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "三つの比率をそれぞれ求め、Aが高いものと低いものを分ける。利益の金額が低いだけで率も低いとは判断しない。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "比の式だけだと、回転率や二つの利益率が企業の何を比較するものか分からない。",
+      "candidateDecision": "adopt：候補の指摘を採り、H1の三式へ各指標の意味を添える。省略していた指標名と分子の営業利益も設問と一致させる。",
+      "changes": [
+        "hints[0].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07h/r07h-q76.webpをview_imageで実見。表の単位は百万円、Aは売上800/営業利益20/総資産100、Bは1000/90/900。data/answer-keys.jsonの2025 spring問76はエでanswer=3と一致。回転率A8回>B約1.11回、売上高営業利益率A2.5%<B9%、総資産営業利益率A20%>B10%。アの回転率低・イの売上利益率高・ウの資産利益率低は誤りで、エの二率が高いことを確認。",
+      "stages": [
+        {
+          "newInformation": "三指標の意味と分母・分子、額との区別。",
+          "remainingWork": "表のA/Bの値をそれぞれ代入する。",
+          "revealsAnswer": false,
+          "reason": "ア・エの回転率、イの売上高営業利益率、イ・ウ・エの総資産営業利益率の意味は示すが、各社の高低は計算していない。"
+        },
+        {
+          "newInformation": "両社の資産・売上・営業利益の値の対応。",
+          "remainingWork": "三つの比を計算して同一指標同士を比較する。",
+          "revealsAnswer": false,
+          "reason": "ア・ウの額が低い部分は表から読めるが、アの回転率、イの両利益率、ウの資産利益率、エの二指標の高低は計算・比較が残る。"
+        },
+        {
+          "newInformation": "三指標の高低を別々に整理し、利益額の低さで利益率を決めない手順。",
+          "remainingWork": "三比率の大小を求め、各肢の記述と照合する。",
+          "revealsAnswer": false,
+          "reason": "ア・ウの額の比較のみでは答えが決まらず、イとエを含む指標計算が必要。Aの二指標が高いというエそのものの結論は渡していない。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "r07h-q8",
+    "author": "Codex /root/revise_hints04",
+    "baseLessonSHA256": "aed0deb7cf620288aa25531f846e2c7b98de1693944a4b26e6cc1d8c24504523",
+    "questionSHA256": "918c975085d34b12d0f09d9a59276ffc2b244fc7c1020f1db859d75eb133522e",
+    "lesson": {
+      "id": "r07h-q8",
+      "summary": "クロック周期とCPIの両方を使い、CPUの処理時間を比較する問題です。",
+      "explanation": "**CPIは1命令に必要な平均クロック数**、クロック周期は1クロックにかかる時間です。実行時間は「命令数×CPI×クロック周期」で求めます。\nAの1命令当たりの平均時間は1×4.0＝4ナノ秒、Bは4×0.5＝2ナノ秒です。同じ命令セットで同じプログラムを実行する本問では命令数を共通として比較し、A/B＝4/2＝**2倍**となります。",
+      "choiceReasons": [
+        "1/32は、周期×CPIで求めた実行時間の比4/2と一致しません。",
+        "1/2はB/Aの比です。設問はA/Bを求めています。",
+        "Aの一命令4ナノ秒をBの2ナノ秒で割ると2です。",
+        "8はCPIだけの比4.0/0.5です。クロック周期の違いを反映していません。"
+      ],
+      "takeaway": "実行時間=命令数×CPI×クロック周期。同じ命令数なら、CPIと周期の積を比べる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "CPIだけで比較すると、クロック一回の長さを見落とします。表の二列を使って「一命令の時間」を求めましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "CPIは1命令に必要な平均クロック数、クロック周期は1クロックの長さです。したがって1命令の平均時間＝クロック周期×CPI。Aは1×4.0、Bは4×0.5で、単位はどちらもナノ秒になります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "同じプログラムなので命令数は比で消えます。設問はAがBの何倍かなので、(1×4.0)/(4×0.5)を計算しましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "design": {
+      "obstacle": "CPIが何を数える指標か分からないと、クロック周期に掛ける意味がつながらない。",
+      "candidateDecision": "adopt：候補どおりCPIを平均クロック数と定義し、周期との積の理由を補う。既存の代入・比の向きは維持する。",
+      "changes": [
+        "hints[1].text"
+      ],
+      "sourceNotes": "原本assets/questions/r07h/r07h-q8.webpをview_imageで実見。A周期1ns/CPI4.0、B周期4ns/CPI0.5、肢は1/32・1/2・2・8。data/answer-keys.jsonの2025 spring問8はウでanswer=2と一致。本問の同一命令数でA=4ns/命令、B=2ns/命令、A/B=2。イは逆比、エはCPIのみの比8であり、アも実行時間比に一致しないと検算。",
+      "stages": [
+        {
+          "newInformation": "一クロックの長さも含め一命令当たりの時間で比較する方針。",
+          "remainingWork": "CPIの意味と二列を結ぶ公式を学ぶ。",
+          "revealsAnswer": false,
+          "reason": "ア1/32・イ1/2・ウ2・エ8のどれに当たるかを示す数値計算はまだない。"
+        },
+        {
+          "newInformation": "CPIの定義と、周期×CPIが平均時間になる意味・A/Bの代入。",
+          "remainingWork": "二つの積を計算し、プログラム全体の時間比に結ぶ。",
+          "revealsAnswer": false,
+          "reason": "Aの1×4.0とBの4×0.5を教えるが、最終比は未提示。ア・イ・ウ・エの選択には計算と比の向きの適用が必要。"
+        },
+        {
+          "newInformation": "同じ命令数の消去と、A/Bの比の式。",
+          "remainingWork": "(1×4.0)/(4×0.5)を計算して候補に対応させる。",
+          "revealsAnswer": false,
+          "reason": "ウの最終数値2を示さず、ア1/32・イ1/2・エ8の除外も断定していない。代入済み式の計算を本人に残すためfalse。"
+        }
+      ]
+    }
+  }
+]

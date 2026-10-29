@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2がNANDの両入力1のときだけ0という動作を教え、H3が同じ入力を二本入れると反転になる例で具体化する。",
+    "prerequisites": "図を実見し左二素子の同信号分岐と右素子への接続を確認。H2の出力式とH3の中間式、ド・モルガンの具体式でZまで辿れる。",
+    "progression": "H1で配線、H2で素子の動きと式、H3で左から右の代入と変形を学ぶ。名称だけへの置換ではない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で左上はXの二分岐、左下はYの二分岐と図を読み、H2でNANDの出力規則を知る。H3で左が¬Xと¬Y、右が¬(¬X・¬Y)と追い、示された法則からX+Yのイへ対応できる。",
+  "support": {
+    "hintStep": 2,
+    "quote": "両入力が1のときだけ0になる素子で、出力は¬(入力1・入力2)です。",
+    "enables": "図の各素子を否定論理積の式に置き換え、示された中間式と法則を使って全体の出力へ進める。"
+  },
+  "supersedes": null,
+  "recordId": "8d3d0e5a07e44fa8817ef690d414b2cc",
+  "questionId": "r05h-q21",
+  "unitId": "unit-03",
+  "worker": "Codex /root/hint_unit03",
+  "claimSha256": "3f1a23b130d93873ade105e583ab2d1e291347ed80bf7d3a53a611d9a653212d",
+  "materialSha256": "e7212a8e71f1e177aa91f906b81c82218e2820b6bb2fc8c83dcb25a422e69e22",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:40:52.464498+00:00",
+  "total": 0,
+  "severity": "none"
+}

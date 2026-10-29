@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2がTCPの接続確立・確認応答・再送・順序制御とUDPの接続なし・信頼性制御なしを対比して働きを説明する。",
+    "prerequisites": "設問にある確認応答・順序制御がない条件をH2のUDPへ直接適用でき、H1でPPPとICMPの役割も分けられる。",
+    "progression": "H1で用途・層を整理し、H2で二方式の信頼性の差、H3でUDPの転送とアプリ側での補完を学ぶ。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "**UDP**は接続を確立せず、UDP自体にはそれらの信頼性制御がありません。",
+    "enables": "コネクションレスを接続を確立しない動作と理解し、確認応答・順序制御がない条件からUDPを識別できる。"
+  },
+  "cumulativeReason": "H1でPPPはデータリンク、ICMPは制御診断と分ける。H2でUDPは接続を作らずTCPの確認応答・再送・順序制御を持たないと知る。H3で信頼性はアプリ側で補うと確認し、設問条件をUDPへ対応できる。",
+  "supersedes": null,
+  "recordId": "c7baf6a6da3a4ef4b8ffc29af8103847",
+  "questionId": "r04a-q34",
+  "unitId": "unit-17",
+  "worker": "Codex /root/hint_unit17",
+  "claimSha256": "479deca7e3386429f49c3c8773681b03fac3895ff2477d39ff55c0371986f05c",
+  "materialSha256": "49105ce5549fe3b52d8266743ec6256f8a4e9e8515c37a31a323d6586ec52085",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:02.925229+00:00",
+  "total": 0,
+  "severity": "none"
+}

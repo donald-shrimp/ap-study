@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1で稼働率とMTBF・MTTRの意味、H2で待機側への切替えによるサービス再開を説明する。",
+    "prerequisites": "停止は修理10でなく切替え2、稼働は99という対応と式が揃う。",
+    "progression": "一般式を先に示し、システム停止時間の選別、代入計算と段階的に進む。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "修理10時間の全てではなく、**フェールオーバーの2時間**をサービス停止として扱います。",
+    "enables": "待機系が引き継ぐので停止時間を2時間に限定し、99÷101の計算へ進める。"
+  },
+  "cumulativeReason": "H1で稼働時間の割合という式を学ぶ→H2で二重障害なしなら修理中も待機側で動けることを学ぶ→H3で99と2を代入して0.98を選ぶ。不足は残らない。",
+  "supersedes": null,
+  "recordId": "8d5632c02d934cf9917de6cf8fa689d7",
+  "questionId": "r05a-q15",
+  "unitId": "unit-11",
+  "worker": "Codex /root/hint_unit11",
+  "claimSha256": "1f900c6457eec10660fe12c3ffa4ecba0cf7ca68d03115233af7d630a4d4e2cf",
+  "materialSha256": "53fab9013940b26b01cc95bbb1f03a4eebed1672cc61d2e3120fb1cf9236dd18",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:53:49.137639+00:00",
+  "total": 0,
+  "severity": "none"
+}

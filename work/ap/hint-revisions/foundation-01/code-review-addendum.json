@@ -1,0 +1,40 @@
+{
+  "reviewer": "revision_code_review",
+  "reviewedAt": "2026-10-29T22:58:19.716318+00:00",
+  "status": "approved",
+  "scope": [
+    "tests/ap-source-corrections.py",
+    ".github/workflows/system-validation.yml"
+  ],
+  "priorReview": "/workspace/scratch/hint-foundations/revision-code-review-final.json",
+  "findings": [],
+  "fileSHA256": {
+    "tests/ap-source-corrections.py": "0c3d596200795ec6aed4d3588c7471f37f39e18fbd1cddf09282064a74fc2330",
+    ".github/workflows/system-validation.yml": "30aa79051a6b96afa36142db56fb69b3dbd4ecafad736c17cdd5771adf62c163",
+    "tools/ap_lesson_quality.py": "f6ac61f455b322c67e69dfb02342dcc219a0b0fa347eb5e8a3aa51ab229e787b",
+    "tests/ap-hint-revisions.py": "f70a6dea146ca465738332a7c649337ff19a72358a23decfe6cf01eb6ec37fdc"
+  },
+  "checks": [
+    {
+      "item": "SourceCorrections.setUpClass copytree additions",
+      "result": "Exactly one added path, work/ap/hint-revisions, copies the registered followup composition required to reproduce published lessons. Existing assertions unchanged."
+    },
+    {
+      "item": "system-validation.yml publication contract run list",
+      "result": "Exactly one added invocation, python tests/ap-hint-revisions.py, alongside initial lesson quality and source correction suites; indentation and execution context match existing commands."
+    },
+    {
+      "item": "Previously approved implementation and followup tests",
+      "result": "Both SHA256 values unchanged from final review."
+    }
+  ],
+  "tests": [
+    {
+      "command": "python3 tests/ap-source-corrections.py",
+      "result": "passed",
+      "count": 12,
+      "seconds": 24.451
+    }
+  ],
+  "codeModified": false
+}

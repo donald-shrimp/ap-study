@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がxとyの増分から直線上の位置を教え、H2が行ごとの配置と画素数・番地数の違いを説明する。実図の8ビット幅と1画素2番地の対応も学べる。",
+    "prerequisites": "図の8ビット幅を実見し、H2の640×y＋xと16ビット÷8ビット=2番地、H3の座標と代入式によって必要な計算が全部辿れる。",
+    "progression": "位置を決める→その位置より前の画素数と番地換算→具体的な代入の順で、H1の傾きの説明もH3の加算式で具体化される。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1でxが4増えるとyも4増える直線と知る。H2で横640画素の行優先なので前の画素数は640×y＋x、実図のメモリ幅8ビットに対して1画素16ビットは2番地と分かる。H3でy=4+(7−5)=6とし、(640×6＋7)×2=7694を計算してウへ対応できる。実図でも始点(5,4)から終点(9,8)の途中に(7,6)を確認でき、欠ける操作はない。",
+  "support": {
+    "hintStep": 2,
+    "quote": "画素(x,y)より前にある画素数は**640×y＋x**。",
+    "enables": "対象の前にある完全な行の画素数と当該行内の列数を加えると学び、H3のy=6と1画素2番地を使って7694を求められる。"
+  },
+  "supersedes": null,
+  "recordId": "3a216716add74ed585329d45303fab08",
+  "questionId": "r04h-q21",
+  "unitId": "unit-12",
+  "worker": "Codex /root/hint_resume12",
+  "claimSha256": "24b54e76ad079a37efcb2b54a4e0a18508d7d7093debd61210ccf89641328c88",
+  "materialSha256": "992cf230734028c210597f505737b2a760ede0d025745d993d688695fdc8a43c",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:36:33.514674+00:00",
+  "total": 0,
+  "severity": "none"
+}

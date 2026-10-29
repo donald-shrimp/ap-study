@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が最小値と合計を具体値90・180で対比し、H2が在庫無しの行とNULL置換を説明する。",
+    "prerequisites": "SUMとMINの比較、外部結合で残るP03、COALESCEの第2引数の意味が示され、H3の真偽比較を辿れる。",
+    "progression": "通常のP01で集計方式を決め、P03の例外を追加し、最後に全結果と照合する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "`SUM`は該当する数値がないとNULLを返すので、`COALESCE(値,0)`で0へ置換する必要があります。",
+    "enables": "SUMとMINの比較、外部結合で残るP03、COALESCEの第2引数の意味が示され、H3の真偽比較を辿れる。"
+  },
+  "cumulativeReason": "H1でP01は合計180なら発注不要と整合すると分かる。H2でP03は外部結合で残りSUMがNULLとなるため0への置換が必要と学ぶ。H3で100>180、150>150、100>0を検算しウに到達する。",
+  "supersedes": null,
+  "recordId": "c34df50fdb87431096b92c0efd7f3314",
+  "questionId": "r06h-q26",
+  "unitId": "unit-15",
+  "worker": "Codex /root/hint_unit15",
+  "claimSha256": "d8dd9023983ea152bf33f2a32a1e9a913fd1b838e3254b983fb9381ebaad6efd",
+  "materialSha256": "ff78463f2d09694b926eac174f25b4758f947d341590c0307f9ee85d59a731eb",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:54:31.146713+00:00",
+  "total": 0,
+  "severity": "none"
+}

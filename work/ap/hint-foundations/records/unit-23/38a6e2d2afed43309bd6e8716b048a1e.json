@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2で送信者の秘密鍵による生成と送信者の公開鍵による検証という役割は学べる。鍵の所有者の基本像には不足を付けない。",
+    "prerequisites": "H2は受信者が自分で求めたダイジェストとも照合すると教えるが、ダイジェストがメッセージから求める要約値であり、検証鍵で署名から得た値と比較することが明示されない。肢ウの「署名からメッセージダイジェストを取り出す」という操作との橋渡しを初学者が推測する必要がある。H3で鍵の所有者と操作主体は回復できるため1。",
+    "progression": "H1で生成と検証の区別、H2で秘密鍵と公開鍵の役割、H3で所有者と実行者を整理する順序は追える。操作との局所的な対応不足はprerequisitesだけに計上する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 2,
+      "quote": "受信者は自分で求めたメッセージダイジェストとも照合します。",
+      "missingKnowledge": "メッセージダイジェストがメッセージから計算する要約値であることと、RSA署名の検証で署名側から得る値との対応。",
+      "learnerBlock": "送信者の公開鍵を受信者が使うことは分かるが、肢ウにある「署名からメッセージダイジェストを取り出す」がなぜ検証の操作なのかを意味に基づいて判断する段で止まり得る。鍵の所有者だけならウに絞れるが、使用方法の理解には推測が残る。",
+      "neededExplanation": "ダイジェストを本文から計算する要約値と説明し、この設問のRSA署名では検証鍵で署名から得る要約値を本文から再計算した値と比較する、とつなぐ。"
+    }
+  ],
+  "cumulativeReason": "H1で問われるのは検証鍵だと整理し、H2で送信者の秘密鍵で生成し送信者の公開鍵で検証する役割を学ぶ。H3により送信者の公開鍵・受信者という組合せからウを選べる。ただし、H2の「とも照合」が何と何の比較か、ウのダイジェスト取出しがどこに入るかは明示されず、使用方法を理解して選ぶための橋渡しが一部残る。",
+  "supersedes": null,
+  "recordId": "38a6e2d2afed43309bd6e8716b048a1e",
+  "questionId": "r05h-q38",
+  "unitId": "unit-23",
+  "worker": "Codex /root/hint_unit23",
+  "claimSha256": "81a5faf39c8e979c7cc563ea2349843f102bd153fb82cea989319d284b615b5d",
+  "materialSha256": "a60fa629f7f873d64007e5fad023c7235c1356261c44d0d48a6deca420e469b2",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:45:46.033010+00:00",
+  "total": 1,
+  "severity": "low"
+}

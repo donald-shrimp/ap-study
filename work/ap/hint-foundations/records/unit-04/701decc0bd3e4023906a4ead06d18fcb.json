@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 2,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "表の出力1の行の共通性と二入力組の説明から、多数決の条件は理解できる。",
+    "prerequisites": "AND・ORの名称と図形の対応を教えず、図の左側にANDが三つある候補を識別する操作が最後まで残る。",
+    "progression": "表の観察から二入力組、図への対応という順序は成立しており、図記号不足は前提軸だけに置く。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 3,
+      "quote": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。",
+      "missingKnowledge": "ANDとORが図のどの形に対応するか。反転の丸の作用もこの問のヒントでは未説明。",
+      "learnerBlock": "多数決の二入力組は理解しても、左側がANDのアとXORのイを図記号から区別して指定の構成を探せない。",
+      "neededExplanation": "ANDは左辺が直線で右側が丸い形、ORは入力側も曲線の形など、実図と対応して示し、小丸による0/1反転も補う。"
+    }
+  ],
+  "cumulativeReason": "H1は実見した表の011,101,110,111を比べる入口になる。H2で二つ以上の1と少なくとも一組の両方1の関係を学ぶ。しかしH3でもAND/ORの図形を示さず、アとイ等の異なるゲート形を名称へ対応する足場がない。図・四つの回路は実見した。",
+  "supersedes": null,
+  "recordId": "701decc0bd3e4023906a4ead06d18fcb",
+  "questionId": "r05a-q23",
+  "unitId": "unit-04",
+  "worker": "Codex /root/hint_unit04",
+  "claimSha256": "010c5980e89d1814a0b57420ec2fb47203b5d611eae75049d6a251f3e6cfa749",
+  "materialSha256": "5f4ac5047cbec4a4c628b1462d97589e55ec60381407e21ff023aa47530a1c73",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:38:09.191271+00:00",
+  "total": 2,
+  "severity": "low"
+}

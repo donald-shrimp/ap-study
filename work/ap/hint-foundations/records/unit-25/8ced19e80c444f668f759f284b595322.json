@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "結合度を依存関係と示し三分類を対応させるが、大域データや引数が何を指すかの基本像が薄く、共有と通常呼出しの違いは初学者の推測になる。",
+    "prerequisites": "内容・制御・共通の対応はH2にあり、H3で単一大域項目の分類も示すので肢との対応作業は辿れる。",
+    "progression": "H1で依存の観点、H2で三分類、H3で単一項目の例外へ進む。導入順そのものに独立した不足はない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 2,
+      "quote": "**共通結合**は大域データの共有です。",
+      "missingKnowledge": "大域データは複数モジュールが共通に参照できるデータ、引数は呼出し時に渡す値という意味。",
+      "learnerBlock": "エの大域データと共通結合という文言は対応できても、どのように他モジュールへ依存する関係なのか具体像を持ちにくい。",
+      "neededExplanation": "共通の変数を二つの処理が読み、一方の変更が他方へ影響する短い例で大域データ共有を示す。"
+    }
+  ],
+  "cumulativeReason": "H1の依存関係、H2の分類、H3の単一項目の区別でエを選べるが、大域とは複数モジュールが共通に参照できる範囲であることや、引数とは呼出し時に渡す値であることは説明されない。",
+  "supersedes": null,
+  "recordId": "8ced19e80c444f668f759f284b595322",
+  "questionId": "r06h-q46",
+  "unitId": "unit-25",
+  "worker": "Codex /root/hint_unit25",
+  "claimSha256": "c0b1ab1697696853e93f78c520e2a68ae4af4671a30f4eb8d090620e35bccd91",
+  "materialSha256": "f4da3ce021cf3f92d912d3e987d3f08b5c8b5a44476f0a42063a1645ceaa717c",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:44:25.709710+00:00",
+  "total": 1,
+  "severity": "low"
+}

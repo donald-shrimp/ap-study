@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "本文が検査値から誤り位置を求める仕組みを定義し、H2の余り計算でmod 2の意味を学べる。",
+    "prerequisites": "H1の添字対応、H2・H3の代入値と本文の位置の式で、一桁を特定して反転できる。",
+    "progression": "符号の割当て→余りの算出→重み付き和で位置を求める順序が一致する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で左からx₁〜x₇へ割当て、H2でmod 2を2で割った余りと理解する。H3と本文でc₀=1,c₁=1,c₂=0からi=3となり、左3桁目を反転して1010101（エ）を得られる。",
+  "supersedes": null,
+  "support": {
+    "hintStep": 2,
+    "quote": "各検査式の和を2で割った余りにします。例えばc₀はx₁+x₃+x₅+x₇=1+0+1+1です。",
+    "enables": "mod 2の検査を各和の余りとして計算し、本文のiの式へ対応させられる。"
+  },
+  "recordId": "b28ec8ddd61b4c50a0e90a7371b3ab19",
+  "questionId": "r06h-q4",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "8e6ce7f095e8fb14cea744fc4a3de68f7b509174f2247d7121454cecb43881c9",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:39:23.152718+00:00",
+  "total": 0,
+  "severity": "none"
+}

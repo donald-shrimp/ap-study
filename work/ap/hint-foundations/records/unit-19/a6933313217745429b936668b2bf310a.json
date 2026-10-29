@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2は送信側の秘密鍵署名、受信側の公開鍵検証、ドメインと改変確認の役割を説明しておりDKIMの仕組みを得られる。",
+    "prerequisites": "H1で各肢の動作を分類し、H2の送信側署名・受信側検証をアへ照合できる。鍵生成等の追加操作は求められていない。",
+    "progression": "H1で認証手段を整理→H2で署名の流れ→H3でSPF・DMARC・SMTP AUTHを対応付ける。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "受信側がDNSで公開された公開鍵を使って署名を検証する方式です。",
+    "enables": "受信側が公開鍵で署名を確かめると知り、IP照合・利用者認証・ポリシーの各肢と区別できる。"
+  },
+  "cumulativeReason": "H1で認証手段を整理→H2で署名の流れ→H3でSPF・DMARC・SMTP AUTHを対応付ける。 本文・全肢と累積ヒントで必要な判断材料を得られ、未解決の不足はない。回答後の解説は足場に数えていない。",
+  "supersedes": null,
+  "recordId": "a6933313217745429b936668b2bf310a",
+  "questionId": "r05a-q44",
+  "unitId": "unit-19",
+  "worker": "Codex /root/hint_unit19",
+  "claimSha256": "e3fa8fa2f775fbd3a3a8da061b212c5a3fdcf10aeabb385e7a8e54f2fa6a90f6",
+  "materialSha256": "196ac1dc133f29275a28523079e5a06f552b5ef8eb1e8ddd25a36333fe38b9f1",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:40:34.762199+00:00",
+  "total": 0,
+  "severity": "none"
+}

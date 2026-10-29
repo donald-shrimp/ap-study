@@ -1,0 +1,72 @@
+{
+  "reviewer": "revision_code_review",
+  "reviewedAt": "2026-10-29T22:51:05.058561+00:00",
+  "status": "changes_requested",
+  "scope": [
+    "tools/ap_lesson_quality.py",
+    "tests/ap-hint-revisions.py"
+  ],
+  "fileSHA256": {
+    "tools/ap_lesson_quality.py": "03e10464fa88ee5a09427b4e54c34f00dbd5cad18216a5d567b8ce1ec6e3af9e",
+    "tests/ap-hint-revisions.py": "6a3d446273bfdb792f4ff98fcff1b5a7510010fe8077a592399258b658785619"
+  },
+  "tests": [
+    {
+      "command": "python3 tests/ap-hint-revisions.py",
+      "result": "passed",
+      "count": 10
+    },
+    {
+      "command": "python3 tests/ap-lesson-quality.py",
+      "result": "passed",
+      "count": 29
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P2",
+      "file": "tools/ap_lesson_quality.py",
+      "line": 287,
+      "title": "Bind follow-up source coverage to trusted inventory",
+      "detail": "sourceHashes is compared only with baseline sourceHashes, whose baseline hash is supplied by the same manifest. No required source set is derived or checked against state.inventory/baseQuestion. The fixture explicitly accepts empty baseline/review sourceHashes and no source-file validation executes. Existing load_workspace protects global canonical sources, so this does not by itself permit modifying those originals, but the new approval is not bound to its required original image/answer-key/source evidence.",
+      "reproduction": "Current tests/ap-hint-revisions.py fixture has sourceHashes:{} in both baseline and review; approved followup passes.",
+      "recommendation": "Require base.sourceHashes to match trusted inventory sourceHashes (or derive the complete required source set), then retain actual-file validation. Add omission/empty-map and changed-file tests."
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "file": "tools/ap_lesson_quality.py",
+      "line": 246,
+      "title": "Preserve transcription_transition before/after reconstruction",
+      "detail": "expected_material now always applies followups, including corrections=False used by transcription_transition at line 340. A followup approved against a corrected question cannot match the pre-correction question, so expected_material(state, corrections=False) raises Stale follow-up baseline. This prevents the prior transcription transition API from reconstructing its before object once such a question receives a followup.",
+      "reproduction": "Synthetic existing fixture: set sourceCorrections for x, freeze followup baseQuestion to corrected choices/version; expected_material(state) succeeds, expected_material(state,corrections=False) fails Stale follow-up baseline: x.",
+      "recommendation": "Make transcription_transition explicitly handle followups while reconstructing its accepted before/after states; add a corrected-question plus registered-followup regression test."
+    },
+    {
+      "id": "R3",
+      "priority": "P2",
+      "file": "tools/ap_lesson_quality.py",
+      "line": 292,
+      "title": "Reject blank or nontext design and review evidence",
+      "detail": "New design/reasoning checks use truthiness, unlike old _check_batch nonempty-string validation. notes=\" \", independentResult=true, obstacle=\" \", candidateDecision=true, and stage newInformation=\" \", remainingWork=true, reason=[\"not prose\"] all pass exact approval and publication gate. Such records do not preserve meaningful author/reviewer evidence.",
+      "reproduction": "Mutate existing Followup fixture to listed values, save and apply; accepted.",
+      "recommendation": "Enforce nonblank strings for narrative fields, recognized candidateDecision values, and existing independentResult type requirements. Add rejection tests."
+    }
+  ],
+  "positiveChecks": [
+    "Only named registered followup rounds are read; unregistered folders are ignored.",
+    "Each review binds baseline lesson, baseline full question and final lesson SHA256.",
+    "Only hints can differ in lesson; all other question fields are retained and version increments once per changed registered round during a rebuild.",
+    "Existing initial-batch registration and review logic is unchanged.",
+    "All current 39 supplied tests pass."
+  ],
+  "coverageGaps": [
+    "No multi-round chain or stale-question test",
+    "No unregistered-folder exclusion test",
+    "No deep immutable other-question-fields comparison",
+    "No actual nonempty source-file hash modification test",
+    "No correction plus followup interoperability test"
+  ],
+  "codeModified": false
+}

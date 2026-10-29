@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 2,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "開いた波形とH1/H2で入力二つと出力の対応を表にし、H3でANDは11だけ1、その反転を比較するという論理動作自体は学べる。",
+    "prerequisites": "H3は小さな丸を確認するよう求めるが、ANDの回路記号の形を示さず、丸が出力の否定を意味することも明示しない。全四肢は画像のゲートだけなので、作れた表から記号へ対応する主要な基準が残る。",
+    "progression": "H1の区間例→H2の四組の表→H3の動作の比較という読み筋は順序立っている。記号対応の不足はprerequisitesのみに計上する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 3,
+      "quote": "図の小さな丸の有無を確認しましょう。",
+      "missingKnowledge": "ANDゲートは入力側が平ら・出力側が丸い形で、出力端の小さな丸は出力反転を表すという図記号対応。",
+      "learnerBlock": "波形から作った表がANDの反転だと分かっても、図のどれがANDでどの丸が反転を表すかを特定できない。",
+      "neededExplanation": "ANDの形状と出力端の小円の否定という読み方を図または短い説明で補う。"
+    }
+  ],
+  "cumulativeReason": "H1で01と00の出力1を読む。H2で11は0、10は1を波形から加え、H3でANDの出力を反転した表に一致すると分かる。ただしANDの形と出力端の丸の意味を知らない読者は、ア〜エの図形からウを根拠を持って選ぶ段階で止まる。",
+  "supersedes": null,
+  "recordId": "b05b8fbf3de4460cba654c3aadde097f",
+  "questionId": "r07a-q22",
+  "unitId": "unit-01",
+  "worker": "Codex /root/hint_unit01",
+  "claimSha256": "0aae554c21a429066a376ff3715231c7cdc0f21088354c7fa91638b6ce81712a",
+  "materialSha256": "a14e4089749cb6dcb5e0c6a675421c4cf0f65a05dfd3a9cedd29ebe68e4bab47",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:40:55.815017+00:00",
+  "total": 2,
+  "severity": "low"
+}

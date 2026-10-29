@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "列で待つ時間とサービス時間を分けた式はあるが、利用率が窓口の処理中の時間割合である意味は最後まで示されず、混雑指標の基本像が薄い。",
+    "prerequisites": "H1の百分率変換、H2の式と変数の数値対応、H3の新旧の比により計算は辿れる。",
+    "progression": "百分率と対象確認から式への代入、共通Tsを消す比、具体的数値へ進む。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 2,
+      "quote": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+      "missingKnowledge": "利用率は窓口が処理している時間の割合であり、客が来て窓口が埋まる状況を表すこと。",
+      "learnerBlock": "25%と40%を式へ入れる計算はできるが、何の割合が増えたために列の待ち時間が変わるのかを説明する判断では推測を要する。",
+      "neededExplanation": "利用率を処理中の時間割合と説明し、空いている時間が減るという窓口の状況と結び付ける。"
+    }
+  ],
+  "cumulativeReason": "H1で25%と40%を小数へ直し待ち時間の比を求めると把握する。H2でWqとρ,Tsの式、旧新への代入を学び、H3で新値÷旧値=2と計算できる。しかしρの元になる利用率が何の割合なのかは学べず、数値操作と窓口の状況を結ぶ理解が一部薄い。",
+  "supersedes": null,
+  "recordId": "757ef639c170470cb3e7089cecab658a",
+  "questionId": "r04h-q3",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "047026c3d52c7a68bcb35fb21c0ef35e991a5749c1bebcb8aa5c592d2319954b",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:40:33.459119+00:00",
+  "total": 1,
+  "severity": "low"
+}

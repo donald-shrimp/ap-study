@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1のコミット済み更新は残すという説明により、コミットを単なる未知語のままにしない。H2でログが先に保存され、データページ未反映でも再適用できる仕組みを教える。",
+    "prerequisites": "問題のチェックポイント後コミットという条件をH1で拾い、H2の更新後情報の再適用とH3の復旧技法名を対応させられる。チェックポイントの詳細実装はこの一件の判断に不要。",
+    "progression": "H1で残すべき更新を特定し、H2で再適用できる理由、H3でREDO／ロールフォワードの名称と取消しとの違いを学ぶ。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "確定更新がディスク上のページに未反映でも、**ログの更新後情報を再適用**して復元できます。",
+    "enables": "障害前に確定した更新を消すのでなくログから再現する必要を理解し、H3のロールフォワードに対応させられる。"
+  },
+  "cumulativeReason": "H1でコミット済みTは保持対象だと学ぶ。H2でWALの保存順とログによる復元の理由を得る。H3で再適用をREDO（ロールフォワード）と呼ぶと分かり、ロールバックの取消しや2相ロックの同時実行制御と区別して選べる。累積で必要な足場が得られる。",
+  "supersedes": null,
+  "recordId": "d0118757aed340be9bb7436a29b190de",
+  "questionId": "r06h-q27",
+  "unitId": "unit-14",
+  "worker": "Codex /root/hint_resume14",
+  "claimSha256": "41d1585c2de8da4499b90ee62538199fd5cef3fe3ee2d4f40febca09e42aa2bc",
+  "materialSha256": "7bf2e10266939157ade60d6b0de93227e70c0c9af54ca5aa355d9caf1cdaa001",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:35:58.814867+00:00",
+  "total": 0,
+  "severity": "none"
+}

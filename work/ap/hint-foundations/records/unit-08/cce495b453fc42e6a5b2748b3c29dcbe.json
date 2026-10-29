@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1で別装置は同時動作できると知り、H2が使用率を稼働時間と全経過時間の比と教える。",
+    "prerequisites": "実際に表を開きAのCPU3・ディスク7、BのCPU12・ディスク10を確認。H2・H3の時間軸からCPU15/25、ディスク17/25を計算できる。",
+    "progression": "同時動作の条件、AとBのCPU開始、Bの終了という順で全体時刻を作り、最後に比を計算する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1でCPUとディスクの並行性を知る。H2でAを0〜3〜10秒に置きBのCPUを3秒から始める。H3でBはCPU15秒、ディスク25秒終了と分かり、稼働時間の合計を25で割って0.60・0.68のイへ進める。未解決点はない。",
+  "support": {
+    "hintStep": 2,
+    "quote": "使用率＝その装置の稼働時間÷両ジョブ終了までの経過時間です。",
+    "enables": "ジョブごとの総時間を分母にする誤りを避け、全体25秒を共通分母にして二装置の使用率を出せる。"
+  },
+  "supersedes": null,
+  "recordId": "cce495b453fc42e6a5b2748b3c29dcbe",
+  "questionId": "r05h-q14",
+  "unitId": "unit-08",
+  "worker": "Codex /root/hint_unit08",
+  "claimSha256": "b741dc6863a692dd649a0e4ae44a066c2890107fbe92ce27f8dbd467c57302c2",
+  "materialSha256": "e4837539b29d9a901077c901cd98cfef7047c5ce08efa617c78b86f38334e241",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:48:16.729407+00:00",
+  "total": 0,
+  "severity": "none"
+}

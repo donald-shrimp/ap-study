@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1の111₂=7、H2の先頭の重み・全桁1の最大値でビット数と数値範囲の基本像が学べる。",
+    "prerequisites": "H2は累乗で挟むことを要求するがH3は上側の不等式のみで、上限2n以内から最大で2nに達する判断への橋が薄い。",
+    "progression": "数値例から一般の桁の上限、平方の上限へ進む導入順は追える。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 3,
+      "quote": "(2ⁿ−1)²<2²ⁿです。上限の指数をビット数に対応させます。",
+      "missingKnowledge": "kビットが必要と判断するには値が2^(k−1)以上であるという下側の確認と、最大平方への適用。",
+      "learnerBlock": "上限の指数を対応させるだけでは、2nビット以内とは言えても2nビットを必要とする最大値かを判定する所で止まる。",
+      "neededExplanation": "上限に加えて下側の2^(2n−1)との比較を、具体例から一般条件へつなぐ。n=1の扱いは別途根拠を確認する。"
+    }
+  ],
+  "cumulativeReason": "H1で全桁1を平方する例を作り、H2でkビットの値の範囲とaの最大値を学ぶ。H3で平方が2の2n乗未満なので2nビット以内とは分かる。一方、最大が2n−1以下ではなく2nになるための下側の境界は示されず、要求された挟み込みの後半が残る。",
+  "supersedes": null,
+  "recordId": "a92992fb3448421abcd35c8a852c2091",
+  "questionId": "r04a-q1",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "f98fe26cf0d60f07c20bab70e5cbd75d8428787174a988c6daf44bfc3e13c40e",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:40:32.833388+00:00",
+  "total": 1,
+  "severity": "low"
+}

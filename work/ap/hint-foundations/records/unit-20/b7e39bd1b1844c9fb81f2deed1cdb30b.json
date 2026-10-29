@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が各攻撃の通信を分類し、H2がWAFの見るパス・パラメータ・本文という具体的な情報を示す。",
+    "prerequisites": "H1でREST APIはHTTPと明示しH2でその入力も対象と教えるので、各攻撃名の内部仕組みを知らなくても適用範囲を比較できる。",
+    "progression": "プロトコルを分けた後にWAFの検査内容を示し、H3で他通信や全API脆弱性まで防ぐわけでないという範囲を補う。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "HTTPで提供するREST APIへの不正な入力も対象になります。",
+    "enables": "WAFの検査対象がHTTP要求の内容だと学び、HTTPを用いるREST APIをDNS・SMTPの攻撃から区別してイを選べる。"
+  },
+  "cumulativeReason": "H1でDNS・メール基盤・HTTPを分ける。H2でWAFはHTTP/HTTPS要求の中身を検査すると学び、REST APIへの入力をイに対応する。H3でDNSキャッシュやSMTP設定は対象外、APIにも限界があることを確認できる。",
+  "supersedes": null,
+  "recordId": "b7e39bd1b1844c9fb81f2deed1cdb30b",
+  "questionId": "r04a-q42",
+  "unitId": "unit-20",
+  "worker": "Codex /root/hint_unit20",
+  "claimSha256": "cd7e31c30db8b42e9e1fa911a7300bf8f75246ec1879328ea59da7c398b524fe",
+  "materialSha256": "e657582bcec9ad9a2351774302980e5f5ec3f6a3236eb0ede8db8bb302a97815",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:40.249091+00:00",
+  "total": 0,
+  "severity": "none"
+}

@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がTCPをIPで、さらにEthernetで包む包含関係を説明し、外側のヘッダーから送るという仕組みを与える。",
+    "prerequisites": "H2でMAC・IP・ポートを各ヘッダーへ対応させるので、外から内へ読む操作で順序を導ける。",
+    "progression": "H1の包む順序と送る順序、H2の各宛先情報の所在、H3の結論確認が順につながる。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 1,
+    "quote": "TCPセグメントをIPパケットで包み、さらにEthernetフレームで包みます",
+    "enables": "入れ子の構造と外側からの送出をイメージでき、H2の各ヘッダーの情報を送出順に並べられる。"
+  },
+  "cumulativeReason": "H1でEthernetが最外側で送出も外側からと理解する。H2でEthernet=MAC、IP=IPアドレス、TCP=ポートと対応させ、MAC→IP→ポートを導く。H3で組立順との違いを確認しウを選べる。",
+  "supersedes": null,
+  "recordId": "8eecc838c22e4562ae15a621aff89748",
+  "questionId": "r05h-q33",
+  "unitId": "unit-17",
+  "worker": "Codex /root/hint_unit17",
+  "claimSha256": "479deca7e3386429f49c3c8773681b03fac3895ff2477d39ff55c0371986f05c",
+  "materialSha256": "31126a45d7528134c90036b9d4964288aacdf8deb73d156773be6516055641f5",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:01.846353+00:00",
+  "total": 0,
+  "severity": "none"
+}

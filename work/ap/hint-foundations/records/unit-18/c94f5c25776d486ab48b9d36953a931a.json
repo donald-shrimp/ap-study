@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がマスクの1と0の役割、ブロードキャストの作りを示し、対象の必要なビット構造を学べる。",
+    "prerequisites": "H2でORの具体的な作用を教え、H3でマスク反転との対応を示すため、論理演算の既知性を仮定せず四肢と照合できる。",
+    "progression": "目標ビット列をH1で決め、H2でそれを作る演算の働き、H3で反転マスクへの対応を学ぶ順である。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "相手が0なら元の値を残し、相手が1なら結果を1にします。",
+    "enables": "ORがネットワーク部を保ちホスト部を1にする理由を学び、反転マスクとの論理和の肢を選べる。"
+  },
+  "cumulativeReason": "H1でネットワーク部を保持しホスト部を全1にする目標→H2で0なら保存・1なら1とするORと必要なビット列→H3でマスク反転とIPの論理和へ至る。IP自体を反転する肢や論理積との差を操作の働きから判断でき、未解決の不足はない。",
+  "supersedes": null,
+  "recordId": "c94f5c25776d486ab48b9d36953a931a",
+  "questionId": "r03a-q35",
+  "unitId": "unit-18",
+  "worker": "Codex /root/hint_unit18",
+  "claimSha256": "ce5bbfc2586e5a62cf507261747c686636a8f4ce72738d091678bf699ed30480",
+  "materialSha256": "ef63b1596281f9d76109e06076555cf5c9da811411e82e54b54d9479070ce362",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:40:03.722627+00:00",
+  "total": 0,
+  "severity": "none"
+}

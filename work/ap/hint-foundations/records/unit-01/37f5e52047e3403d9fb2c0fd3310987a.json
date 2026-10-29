@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "本文が一致行のうち最長を選ぶ規則を教え、H2の/26の64アドレスと末尾0〜63がネットワークに含まれることの具体像を与える。",
+    "prerequisites": "H2で対象/26の範囲を直接示し、H3で末尾1の包含確認、最大/値、その右列という操作を渡すため答えまで辿れる。全ネットワークの一般的な計算法はこの比較には不要。",
+    "progression": "最長の意味の誤読を防ぐ→最長候補の具体的な範囲→包含と右列読取りという流れで進む。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で/の数値を比較すると分かる。H2の0〜63に宛先の末尾1が入るので/26行は一致し、H3と本文に従い他行より大きい/26の右列10.1.0.4を選べる。",
+  "supersedes": null,
+  "support": {
+    "hintStep": 2,
+    "quote": "/26は最後の6ビットがホスト部なので64個のアドレスを含む。192.168.1.0/26は末尾0〜63。",
+    "enables": "宛先192.168.1.1が最長候補の範囲に含まれることを確認し、その行のネクストホップを選べる。"
+  },
+  "recordId": "37f5e52047e3403d9fb2c0fd3310987a",
+  "questionId": "r07h-q31",
+  "unitId": "unit-01",
+  "worker": "Codex /root/hint_unit01",
+  "claimSha256": "0aae554c21a429066a376ff3715231c7cdc0f21088354c7fa91638b6ce81712a",
+  "materialSha256": "c1e4c5e5f482402ff74172b77d484ee6d73e1053703a05acd8b803d43dc4a08b",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:39:01.410460+00:00",
+  "total": 0,
+  "severity": "none"
+}

@@ -110,3 +110,9 @@ progressのapprovedは独立承認後に登録済みの件数であり、公開�
 APの法令改正情報は `content/ap/legal-context.json` と `legal-context-reviews.json` に分離する。原本の問題・公式正答・旧版・教材承認を書き換えない。共通ビルダーが原問版とメタデータのSHA、別担当承認、原本と公式正答PDFの生バイトSHAを確認したうえで生成教材へ付加する。原問やメタデータを変更した場合は再確認が必要。
 
 原本が法令基準日を明示せず確認できない場合は `legalAsOf:null` を保持する。具体的な法改正の影響が確認された `outdated` は、確認日・根拠URL・差異の説明と独立承認により登録できる。`current` は既知の原本基準日も必要とする。未確認を改正あり・現行適合とみなさない。原本PDFは検証用で、学習用の事前ダウンロードには含めない。
+
+## 登録済み教材の後続ヒント改訂
+
+初回800問の承認を上書きせず、後続の改訂は `work/ap/hint-revisions/<改訂名>/` に保存する。`baseline.json`で改訂前の問題・教材と候補を保持し、`manifest.json`で対象・組・baseline SHAを固定する。各組の初稿・最終draft・別担当reviewを残し、全対象の承認後に `work/ap/hint-revisions/registrations.json` へ登録する。
+
+合成は従来の40組と原文訂正の後に適用する。旧版・原典・最終版のSHAと別担当承認が一致すること、ヒント以外が変わらないことを検証する。変更問だけ版を1増やし、再生成は冪等。`python tools/apply-hints.py` は登録済みの合成と一致する教材を再生成する。受入例・対象と検証結果は [初学者向け28候補の改訂](../work/ap/hint-revisions/foundation-01/README.md)を参照する。

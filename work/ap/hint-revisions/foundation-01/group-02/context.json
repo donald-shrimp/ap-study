@@ -1,0 +1,1924 @@
+[
+  {
+    "id": "r04h-q28",
+    "question": {
+      "id": "r04h-q28",
+      "version": 3,
+      "number": 28,
+      "title": "2022年 春期 問28",
+      "topic": "データベース",
+      "concept": "正規形の三段階",
+      "topicDescription": "SQL・キー・正規化・トランザクション",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和4年度 春期 応用情報技術者試験 午前 問28",
+      "page": 14,
+      "year": 2022,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "stem": "第1，第2，第3正規形とリレーションの特徴a，b，cの組合せのうち，適切なものはどれか。\n\na：どの非キー属性も，主キーの真部分集合に対して関数従属しない。\n\nb：どの非キー属性も，主キーに推移的に関数従属しない。\n\nc：繰返し属性が存在しない。",
+      "searchText": "問28第1,第2,第3正規形とリレーションの特徴ab,cの組合せのうち,適切なも\nのはどれか。\na:どの非キ一属性も,主キーの真部分集合に対して関数従属しない。\nb:どの非キー属性も,主キーに推移的に関数従属しない。\nc:繰返し属性が存在しない。\n第1正規形第3正規形\n|lz|*|5|<|\n|イィ|*|«§|5|\npote|』|5|\nfete|5!|5",
+      "sourceImages": [
+        "assets/questions/r04h/r04h-q28.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1014,
+          "height": 982
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | b | c |"
+        },
+        {
+          "label": "イ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | c | b |"
+        },
+        {
+          "label": "ウ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | a | b |"
+        },
+        {
+          "label": "エ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | b | a |"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "第1〜第3正規形がそれぞれ排除する繰返し・部分関数従属・推移的関数従属を対応付ける。",
+      "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
+      "choiceReasons": [
+        "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
+        "第3のbは正しいですが、第1のaと第2のcが入れ替わっています。",
+        "第1=c、第2=a、第3=bで、各段階の特徴に一致します。",
+        "第1のcは正しいですが、第2のbと第3のaが入れ替わっています。"
+      ],
+      "takeaway": "正規化は繰返し→部分関数従属→推移的関数従属の順に除く。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r04h.json:r04h-q28",
+      "lessonSource": "lessons/r04h.json:r04h-q28",
+      "image": "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp",
+      "imageAlt": "第1・第2・第3正規形と特徴a・b・cの組合せを示すア〜エの選択肢表",
+      "choicePresentation": "codes"
+    },
+    "baseQuestion": {
+      "id": "r04h-q28",
+      "version": 3,
+      "number": 28,
+      "title": "2022年 春期 問28",
+      "topic": "データベース",
+      "concept": "正規形の三段階",
+      "topicDescription": "SQL・キー・正規化・トランザクション",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和4年度 春期 応用情報技術者試験 午前 問28",
+      "page": 14,
+      "year": 2022,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "stem": "第1，第2，第3正規形とリレーションの特徴a，b，cの組合せのうち，適切なものはどれか。\n\na：どの非キー属性も，主キーの真部分集合に対して関数従属しない。\n\nb：どの非キー属性も，主キーに推移的に関数従属しない。\n\nc：繰返し属性が存在しない。",
+      "searchText": "問28第1,第2,第3正規形とリレーションの特徴ab,cの組合せのうち,適切なも\nのはどれか。\na:どの非キ一属性も,主キーの真部分集合に対して関数従属しない。\nb:どの非キー属性も,主キーに推移的に関数従属しない。\nc:繰返し属性が存在しない。\n第1正規形第3正規形\n|lz|*|5|<|\n|イィ|*|«§|5|\npote|』|5|\nfete|5!|5",
+      "sourceImages": [
+        "assets/questions/r04h/r04h-q28.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1014,
+          "height": 982
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | b | c |"
+        },
+        {
+          "label": "イ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| a | c | b |"
+        },
+        {
+          "label": "ウ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | a | b |"
+        },
+        {
+          "label": "エ",
+          "text": "| 第1正規形 | 第2正規形 | 第3正規形 |\n| --- | --- | --- |\n| c | b | a |"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "第1〜第3正規形がそれぞれ排除する繰返し・部分関数従属・推移的関数従属を対応付ける。",
+      "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
+      "choiceReasons": [
+        "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
+        "第3のbは正しいですが、第1のaと第2のcが入れ替わっています。",
+        "第1=c、第2=a、第3=bで、各段階の特徴に一致します。",
+        "第1のcは正しいですが、第2のbと第3のaが入れ替わっています。"
+      ],
+      "takeaway": "正規化は繰返し→部分関数従属→推移的関数従属の順に除く。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r04h.json:r04h-q28",
+      "lessonSource": "lessons/r04h.json:r04h-q28",
+      "image": "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp",
+      "imageAlt": "第1・第2・第3正規形と特徴a・b・cの組合せを示すア〜エの選択肢表",
+      "choicePresentation": "codes"
+    },
+    "baseLesson": {
+      "id": "r04h-q28",
+      "summary": "第1〜第3正規形がそれぞれ排除する繰返し・部分関数従属・推移的関数従属を対応付ける。",
+      "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
+      "choiceReasons": [
+        "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
+        "第3のbは正しいですが、第1のaと第2のcが入れ替わっています。",
+        "第1=c、第2=a、第3=bで、各段階の特徴に一致します。",
+        "第1のcは正しいですが、第2のbと第3のaが入れ替わっています。"
+      ],
+      "takeaway": "正規化は繰返し→部分関数従属→推移的関数従属の順に除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r04h-q28",
+      "summary": "第1〜第3正規形がそれぞれ排除する繰返し・部分関数従属・推移的関数従属を対応付ける。",
+      "explanation": "第1正規形は属性値を単一値にし、繰返し属性をなくすのでcです。第2正規形は第1正規形に加え、非キー属性が主キーの一部分だけに依存する部分関数従属をなくすのでaです。第3正規形は第2正規形に加え、非キー属性を介して主キーに依存する推移的関数従属をなくすのでbです。",
+      "choiceReasons": [
+        "aは第2、bは第3、cは第1の特徴で、全ての配置が異なります。",
+        "第3のbは正しいですが、第1のaと第2のcが入れ替わっています。",
+        "第1=c、第2=a、第3=bで、各段階の特徴に一致します。",
+        "第1のcは正しいですが、第2のbと第3のaが入れ替わっています。"
+      ],
+      "takeaway": "正規化は繰返し→部分関数従属→推移的関数従属の順に除く。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "正規化の最初の段階は、列に繰返し値や複数値を入れないことです。**第1正規形はc（繰返し属性がない）**に対応します。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "**第2正規形**では、非キー属性が複合主キーの一部分だけに依存する「部分関数従属」をなくします。aの「主キーの真部分集合に従属しない」がこれです。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "**第3正規形**では、主キー→非キー属性→別の非キー属性という推移的従属をなくします。bがこれに当たり、対応は**第1=c、第2=a、第3=b**です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 1,
+        "prerequisites": 0,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "H1で単一値、H2でキーの一部への依存、H3で非キーを介した依存という基本像は得られる。ただし主キー・非キー属性が何を表し、関数従属がどの値を決める関係なのかの具体例がなく、未知の初学者には属性の役割を補う推測が残る。",
+        "prerequisites": "特徴c,a,bを各正規形へ対応させる操作自体はH1〜H3が明示しており、実見した選択肢表のウを選べる。概念の薄さはfoundationだけに計上する。",
+        "progression": "繰返し→部分依存→推移的依存の順で新しい区別が加わり、最後に三者対応をまとめる。定義不足を段階順序の不足として二重加点しない。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "foundation",
+          "hintStep": 2,
+          "quote": "非キー属性が複合主キーの一部分だけに依存する",
+          "missingKnowledge": "主キーは行を識別する列の組であり、非キー属性はそれ以外の項目、依存は値が一意に決まる関係だという意味。",
+          "learnerBlock": "aの真部分集合を一部分と言い換えたことは分かるが、どの項目がキーで、何がその一部だけで決まるのかを具体的な表として説明できない。H3もキー→非キー→非キーという抽象的な鎖であり、属性の役割までは補わない。",
+          "neededExplanation": "例えば受注明細の注文番号と商品番号の組で行を識別し、商品名は商品番号だけで決まる例を使い、キー・非キー・部分依存の意味を結び付ける。"
+        }
+      ],
+      "cumulativeReason": "H1は列に複数値を入れない第1=c、H2は主キーの一部分だけへの依存をなくす第2=a、H3は非キー属性を介する鎖をなくす第3=bと教える。実見した選択肢表のウへは進めるが、最後までキーの識別役割や値が決まる関係の具体例はない。三段の分類の基本像は得られるので局所的にfoundation1の候補とし、改稿では属性の役割を短い表の例で補う方向を検討する。",
+      "supersedes": null,
+      "recordId": "dff95d7520a645978f5a23e46bd06e5b",
+      "questionId": "r04h-q28",
+      "unitId": "unit-15",
+      "worker": "Codex /root/hint_resume15",
+      "claimSha256": "774fbbcf25ab8f5d4f6f41aa93f79a8417876611819b8e5199d9403c5096cc0f",
+      "materialSha256": "c6aaf724d60b7cdd7334e5c4a119d199339bbce3bdae8b3f0878473e0f57e3ac",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T17:37:04.042017+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q28.webp": "0f88f78c2f1a46971690f79c635608625a0489ab4b3efbf2aa3ce742592bca56",
+      "assets/transcriptions/transcribe_r04h_batch3/r04h-q28-choices.webp": "468cf6396a2a98e5e7e5fc0f268ac9fee2bfceefabead0b300b3600a9aeef186",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "f1824fa2051dd010e19574cab65dd44e2185599a5a900462e615f55108100889"
+  },
+  {
+    "id": "r04h-q3",
+    "question": {
+      "id": "r04h-q3",
+      "version": 3,
+      "number": 3,
+      "title": "2022年 春期 問3",
+      "topic": "基礎理論",
+      "concept": "利用率の変化と待ち時間の比",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和4年度 春期 応用情報技術者試験 午前 問3",
+      "page": 3,
+      "year": 2022,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
+      "searchText": "問3M/M/1の待ち行列モデルにおいて,窓口の利用率が25%から40%に増えると,平\n均待ち時間は何倍になるか。\nア1.2541,60ウ2.00エ3,00",
+      "sourceImages": [
+        "assets/questions/r04h/r04h-q3.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1045,
+          "height": 202
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "1.25"
+        },
+        {
+          "label": "イ",
+          "text": "1.60"
+        },
+        {
+          "label": "ウ",
+          "text": "2.00"
+        },
+        {
+          "label": "エ",
+          "text": "3.00"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "25%と40%を0.25と0.40へ直します。求めるのは利用率の増加率ではなく、列で待つ時間の比です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "旧値は0.25/0.75=1/3、新値は0.40/0.60=2/3です。新値を旧値で割ると2です。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "窓口の利用率の変化から、M/M/1の平均待ち時間の比を求める。",
+      "explanation": "M/M/1は到着間隔とサービス時間がそれぞれ指数分布に従う、窓口一つの待ち行列モデルです。サービス時間を含まない平均待ち時間Wqは、平均サービス時間をTs、利用率（窓口が処理中の時間割合）をρとしてWq=ρTs/(1−ρ)です。\n本問ではTsが変わらないとして、新旧の待ち時間の比は{0.40/(1−0.40)}/{0.25/(1−0.25)}=(2/3)/(1/3)=2。したがってウの2.00倍です。利用率の比だけでは、混雑による非線形な増加を表せません。",
+      "choiceReasons": [
+        "1.25は、サービス時間を含む系内時間Ts/(1−ρ)の比0.75/0.60です。問われたサービス時間を除く待ち時間の比ではありません。",
+        "1.60倍は0.40/0.25という利用率の比であり、待ち時間の比ではありません。",
+        "0.40/0.60を0.25/0.75で割ると2.00で、正しい比です。",
+        "3.00倍は計算結果と一致しません。利用率25%時はTs/3、40%時は2Ts/3です。"
+      ],
+      "takeaway": "M/M/1の待ち時間比較はρ/(1−ρ)を比べ、共通のサービス時間を消す。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r04h.json:r04h-q3",
+      "lessonSource": "lessons/r04h.json:r04h-q3",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseQuestion": {
+      "id": "r04h-q3",
+      "version": 3,
+      "number": 3,
+      "title": "2022年 春期 問3",
+      "topic": "基礎理論",
+      "concept": "利用率の変化と待ち時間の比",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和4年度 春期 応用情報技術者試験 午前 問3",
+      "page": 3,
+      "year": 2022,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_ap_am_ans.pdf",
+      "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
+      "searchText": "問3M/M/1の待ち行列モデルにおいて,窓口の利用率が25%から40%に増えると,平\n均待ち時間は何倍になるか。\nア1.2541,60ウ2.00エ3,00",
+      "sourceImages": [
+        "assets/questions/r04h/r04h-q3.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1045,
+          "height": 202
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "1.25"
+        },
+        {
+          "label": "イ",
+          "text": "1.60"
+        },
+        {
+          "label": "ウ",
+          "text": "2.00"
+        },
+        {
+          "label": "エ",
+          "text": "3.00"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "25%と40%を0.25と0.40へ直します。求めるのは利用率の増加率ではなく、列で待つ時間の比です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "旧値は0.25/0.75=1/3、新値は0.40/0.60=2/3です。新値を旧値で割ると2です。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "窓口の利用率の変化から、M/M/1の平均待ち時間の比を求める。",
+      "explanation": "M/M/1は到着間隔とサービス時間がそれぞれ指数分布に従う、窓口一つの待ち行列モデルです。サービス時間を含まない平均待ち時間Wqは、平均サービス時間をTs、利用率（窓口が処理中の時間割合）をρとしてWq=ρTs/(1−ρ)です。\n本問ではTsが変わらないとして、新旧の待ち時間の比は{0.40/(1−0.40)}/{0.25/(1−0.25)}=(2/3)/(1/3)=2。したがってウの2.00倍です。利用率の比だけでは、混雑による非線形な増加を表せません。",
+      "choiceReasons": [
+        "1.25は、サービス時間を含む系内時間Ts/(1−ρ)の比0.75/0.60です。問われたサービス時間を除く待ち時間の比ではありません。",
+        "1.60倍は0.40/0.25という利用率の比であり、待ち時間の比ではありません。",
+        "0.40/0.60を0.25/0.75で割ると2.00で、正しい比です。",
+        "3.00倍は計算結果と一致しません。利用率25%時はTs/3、40%時は2Ts/3です。"
+      ],
+      "takeaway": "M/M/1の待ち時間比較はρ/(1−ρ)を比べ、共通のサービス時間を消す。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r04h.json:r04h-q3",
+      "lessonSource": "lessons/r04h.json:r04h-q3",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseLesson": {
+      "id": "r04h-q3",
+      "summary": "窓口の利用率の変化から、M/M/1の平均待ち時間の比を求める。",
+      "explanation": "M/M/1は到着間隔とサービス時間がそれぞれ指数分布に従う、窓口一つの待ち行列モデルです。サービス時間を含まない平均待ち時間Wqは、平均サービス時間をTs、利用率（窓口が処理中の時間割合）をρとしてWq=ρTs/(1−ρ)です。\n本問ではTsが変わらないとして、新旧の待ち時間の比は{0.40/(1−0.40)}/{0.25/(1−0.25)}=(2/3)/(1/3)=2。したがってウの2.00倍です。利用率の比だけでは、混雑による非線形な増加を表せません。",
+      "choiceReasons": [
+        "1.25は、サービス時間を含む系内時間Ts/(1−ρ)の比0.75/0.60です。問われたサービス時間を除く待ち時間の比ではありません。",
+        "1.60倍は0.40/0.25という利用率の比であり、待ち時間の比ではありません。",
+        "0.40/0.60を0.25/0.75で割ると2.00で、正しい比です。",
+        "3.00倍は計算結果と一致しません。利用率25%時はTs/3、40%時は2Ts/3です。"
+      ],
+      "takeaway": "M/M/1の待ち時間比較はρ/(1−ρ)を比べ、共通のサービス時間を消す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "25%と40%を0.25と0.40へ直します。求めるのは利用率の増加率ではなく、列で待つ時間の比です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "旧値は0.25/0.75=1/3、新値は0.40/0.60=2/3です。新値を旧値で割ると2です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r04h-q3",
+      "summary": "窓口の利用率の変化から、M/M/1の平均待ち時間の比を求める。",
+      "explanation": "M/M/1は到着間隔とサービス時間がそれぞれ指数分布に従う、窓口一つの待ち行列モデルです。サービス時間を含まない平均待ち時間Wqは、平均サービス時間をTs、利用率（窓口が処理中の時間割合）をρとしてWq=ρTs/(1−ρ)です。\n本問ではTsが変わらないとして、新旧の待ち時間の比は{0.40/(1−0.40)}/{0.25/(1−0.25)}=(2/3)/(1/3)=2。したがってウの2.00倍です。利用率の比だけでは、混雑による非線形な増加を表せません。",
+      "choiceReasons": [
+        "1.25は、サービス時間を含む系内時間Ts/(1−ρ)の比0.75/0.60です。問われたサービス時間を除く待ち時間の比ではありません。",
+        "1.60倍は0.40/0.25という利用率の比であり、待ち時間の比ではありません。",
+        "0.40/0.60を0.25/0.75で割ると2.00で、正しい比です。",
+        "3.00倍は計算結果と一致しません。利用率25%時はTs/3、40%時は2Ts/3です。"
+      ],
+      "takeaway": "M/M/1の待ち時間比較はρ/(1−ρ)を比べ、共通のサービス時間を消す。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "25%と40%を0.25と0.40へ直します。求めるのは利用率の増加率ではなく、列で待つ時間の比です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "旧値は0.25/0.75=1/3、新値は0.40/0.60=2/3です。新値を旧値で割ると2です。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 1,
+        "prerequisites": 0,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "列で待つ時間とサービス時間を分けた式はあるが、利用率が窓口の処理中の時間割合である意味は最後まで示されず、混雑指標の基本像が薄い。",
+        "prerequisites": "H1の百分率変換、H2の式と変数の数値対応、H3の新旧の比により計算は辿れる。",
+        "progression": "百分率と対象確認から式への代入、共通Tsを消す比、具体的数値へ進む。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "foundation",
+          "hintStep": 2,
+          "quote": "平均サービス時間をTs、利用率をρとすると、サービス時間を含まない平均待ち時間はWq=ρTs/(1−ρ)です。まず旧利用率を代入して0.25Ts/(1−0.25)を書き、新利用率でも同じ式を作ります。Tsが変わらなければ、比を取ると共通のTsは消えます。",
+          "missingKnowledge": "利用率は窓口が処理している時間の割合であり、客が来て窓口が埋まる状況を表すこと。",
+          "learnerBlock": "25%と40%を式へ入れる計算はできるが、何の割合が増えたために列の待ち時間が変わるのかを説明する判断では推測を要する。",
+          "neededExplanation": "利用率を処理中の時間割合と説明し、空いている時間が減るという窓口の状況と結び付ける。"
+        }
+      ],
+      "cumulativeReason": "H1で25%と40%を小数へ直し待ち時間の比を求めると把握する。H2でWqとρ,Tsの式、旧新への代入を学び、H3で新値÷旧値=2と計算できる。しかしρの元になる利用率が何の割合なのかは学べず、数値操作と窓口の状況を結ぶ理解が一部薄い。",
+      "supersedes": null,
+      "recordId": "757ef639c170470cb3e7089cecab658a",
+      "questionId": "r04h-q3",
+      "unitId": "unit-02",
+      "worker": "Codex /root/hint_unit02",
+      "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+      "materialSha256": "047026c3d52c7a68bcb35fb21c0ef35e991a5749c1bebcb8aa5c592d2319954b",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T14:40:33.459119+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r04h/r04h-q3.webp": "78733921495ccff3d6d3ca4f4e7ccac5642154bcab6efa867b8de94a88c09c57",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "8788d8372fab2e009e8237f42ca08e6ab69ece2e26a95a3a1c45b5f81a1aa241"
+  },
+  {
+    "id": "r05a-q23",
+    "question": {
+      "id": "r05a-q23",
+      "version": 3,
+      "number": 23,
+      "title": "2023年 秋期 問23",
+      "topic": "論理回路",
+      "concept": "三入力多数決回路",
+      "topicDescription": "論理演算・回路・タイムチャート",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和5年度 秋期 応用情報技術者試験 午前 問23",
+      "page": 14,
+      "year": 2023,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+      "stem": "真理値表に示す3入力多数決回路はどれか。",
+      "searchText": "問23真理値表に示す3入力多数決回路はどれか。\nlxlslclv|\n|%lelel6|\n|elelil6|\nPotife]6|\nlelilili|\n[i19]e|6|\nlilelil1i|\nlililel1|\nLililil|\nア。AイA\nBB\n』cY\n2AエA\nBB\nCYCY",
+      "sourceImages": [
+        "assets/questions/r05a/r05a-q23.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 947,
+          "height": 1008
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-a.webp"
+        },
+        {
+          "label": "イ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-i.webp"
+        },
+        {
+          "label": "ウ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-u.webp"
+        },
+        {
+          "label": "エ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-e.webp"
+        }
+      ],
+      "answer": 0,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "出力1の四行で、A・B・Cに含まれる1の個数を数えます。1が一つだけの行と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つ以上が1なら、AB・BC・CAの少なくとも一組がともに1です。各組でANDを取り、その結果をORする構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。出力の反転の丸にも注意します。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "三入力のうち二つ以上が1のとき出力1となる多数決回路を、真理値表と対応させる。",
+      "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
+      "choiceReasons": [
+        "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
+        "XORの出力をORしています。例えば100でもAとBのXORが1になり、表の出力0に合いません。",
+        "OR三組のANDを最後に反転しています。000を入れると出力1になり、表の0と逆です。",
+        "XOR三組のANDを最後に反転しています。000で出力1となり、表の0に合いません。"
+      ],
+      "takeaway": "三入力多数決は、二入力ANDの三組をORでまとめる。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r05a.json:r05a-q23",
+      "lessonSource": "lessons/r05a.json:r05a-q23",
+      "image": "assets/transcriptions/pr-skipped-author/r05a-q23-truth-table-and-all-circuits.webp",
+      "imageAlt": "入力A，B，Cと出力Yの真理値表，及びア・イ・ウ・エの論理回路図。",
+      "choicePresentation": "codes"
+    },
+    "baseQuestion": {
+      "id": "r05a-q23",
+      "version": 3,
+      "number": 23,
+      "title": "2023年 秋期 問23",
+      "topic": "論理回路",
+      "concept": "三入力多数決回路",
+      "topicDescription": "論理演算・回路・タイムチャート",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和5年度 秋期 応用情報技術者試験 午前 問23",
+      "page": 14,
+      "year": 2023,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05a_ap_am_ans.pdf",
+      "stem": "真理値表に示す3入力多数決回路はどれか。",
+      "searchText": "問23真理値表に示す3入力多数決回路はどれか。\nlxlslclv|\n|%lelel6|\n|elelil6|\nPotife]6|\nlelilili|\n[i19]e|6|\nlilelil1i|\nlililel1|\nLililil|\nア。AイA\nBB\n』cY\n2AエA\nBB\nCYCY",
+      "sourceImages": [
+        "assets/questions/r05a/r05a-q23.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 947,
+          "height": 1008
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-a.webp"
+        },
+        {
+          "label": "イ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-i.webp"
+        },
+        {
+          "label": "ウ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-u.webp"
+        },
+        {
+          "label": "エ",
+          "text": "",
+          "image": "assets/transcriptions/pr-skipped-author/r05a-q23-e.webp"
+        }
+      ],
+      "answer": 0,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "出力1の四行で、A・B・Cに含まれる1の個数を数えます。1が一つだけの行と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つ以上が1なら、AB・BC・CAの少なくとも一組がともに1です。各組でANDを取り、その結果をORする構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。出力の反転の丸にも注意します。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "三入力のうち二つ以上が1のとき出力1となる多数決回路を、真理値表と対応させる。",
+      "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
+      "choiceReasons": [
+        "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
+        "XORの出力をORしています。例えば100でもAとBのXORが1になり、表の出力0に合いません。",
+        "OR三組のANDを最後に反転しています。000を入れると出力1になり、表の0と逆です。",
+        "XOR三組のANDを最後に反転しています。000で出力1となり、表の0に合いません。"
+      ],
+      "takeaway": "三入力多数決は、二入力ANDの三組をORでまとめる。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r05a.json:r05a-q23",
+      "lessonSource": "lessons/r05a.json:r05a-q23",
+      "image": "assets/transcriptions/pr-skipped-author/r05a-q23-truth-table-and-all-circuits.webp",
+      "imageAlt": "入力A，B，Cと出力Yの真理値表，及びア・イ・ウ・エの論理回路図。",
+      "choicePresentation": "codes"
+    },
+    "baseLesson": {
+      "id": "r05a-q23",
+      "summary": "三入力のうち二つ以上が1のとき出力1となる多数決回路を、真理値表と対応させる。",
+      "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
+      "choiceReasons": [
+        "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
+        "XORの出力をORしています。例えば100でもAとBのXORが1になり、表の出力0に合いません。",
+        "OR三組のANDを最後に反転しています。000を入れると出力1になり、表の0と逆です。",
+        "XOR三組のANDを最後に反転しています。000で出力1となり、表の0に合いません。"
+      ],
+      "takeaway": "三入力多数決は、二入力ANDの三組をORでまとめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "出力1の四行で、A・B・Cに含まれる1の個数を数えます。1が一つだけの行と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つ以上が1なら、AB・BC・CAの少なくとも一組がともに1です。各組でANDを取り、その結果をORする構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。出力の反転の丸にも注意します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r05a-q23",
+      "summary": "三入力のうち二つ以上が1のとき出力1となる多数決回路を、真理値表と対応させる。",
+      "explanation": "真理値表では011、101、110、111のときに出力が1です。三入力のうち二つ以上が1である条件を表します。\nAとB、BとC、CとAの各ANDを取り、そのORを取ればY=AB∨BC∨CAです。アはこの三つのAND出力をORでまとめています。",
+      "choiceReasons": [
+        "二入力のANDを三組作り、そのORを取るので、入力の1が二つ以上という条件に一致します。",
+        "XORの出力をORしています。例えば100でもAとBのXORが1になり、表の出力0に合いません。",
+        "OR三組のANDを最後に反転しています。000を入れると出力1になり、表の0と逆です。",
+        "XOR三組のANDを最後に反転しています。000で出力1となり、表の0に合いません。"
+      ],
+      "takeaway": "三入力多数決は、二入力ANDの三組をORでまとめる。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "出力1の四行で、A・B・Cに含まれる1の個数を数えます。1が一つだけの行と比べます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "二つ以上が1なら、AB・BC・CAの少なくとも一組がともに1です。各組でANDを取り、その結果をORする構成を考えます。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。出力の反転の丸にも注意します。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 0,
+        "prerequisites": 2,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "表の出力1の行の共通性と二入力組の説明から、多数決の条件は理解できる。",
+        "prerequisites": "AND・ORの名称と図形の対応を教えず、図の左側にANDが三つある候補を識別する操作が最後まで残る。",
+        "progression": "表の観察から二入力組、図への対応という順序は成立しており、図記号不足は前提軸だけに置く。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "prerequisites",
+          "hintStep": 3,
+          "quote": "左側にANDが三つあり、それらの結果を右側のORで合わせる図を探します。",
+          "missingKnowledge": "ANDとORが図のどの形に対応するか。反転の丸の作用もこの問のヒントでは未説明。",
+          "learnerBlock": "多数決の二入力組は理解しても、左側がANDのアとXORのイを図記号から区別して指定の構成を探せない。",
+          "neededExplanation": "ANDは左辺が直線で右側が丸い形、ORは入力側も曲線の形など、実図と対応して示し、小丸による0/1反転も補う。"
+        }
+      ],
+      "cumulativeReason": "H1は実見した表の011,101,110,111を比べる入口になる。H2で二つ以上の1と少なくとも一組の両方1の関係を学ぶ。しかしH3でもAND/ORの図形を示さず、アとイ等の異なるゲート形を名称へ対応する足場がない。図・四つの回路は実見した。",
+      "supersedes": null,
+      "recordId": "701decc0bd3e4023906a4ead06d18fcb",
+      "questionId": "r05a-q23",
+      "unitId": "unit-04",
+      "worker": "Codex /root/hint_unit04",
+      "claimSha256": "010c5980e89d1814a0b57420ec2fb47203b5d611eae75049d6a251f3e6cfa749",
+      "materialSha256": "5f4ac5047cbec4a4c628b1462d97589e55ec60381407e21ff023aa47530a1c73",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T14:38:09.191271+00:00",
+      "total": 2,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r05a/r05a-q23.webp": "8ed20c5524fb822ddeb8b60a5c64d5bdaf86540aeae4ee6759232ed165ba8c5b",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-a.webp": "db1eef2c601e618db716d82223443418d83867e357083359529098228ca43580",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-e.webp": "6c8034eb08aa29b5b2f1cd1a7c78dcf3a37486e643928c03d8aac7676781159c",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-i.webp": "00d876810a9af6892f66c656ba0426557d7a55babcb6970c730f6d7fcd7ab6c6",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-truth-table-and-all-circuits.webp": "678f1274d1ce08ce873a9dcd6fa75efc5101c213ce4961278ee086df479fd215",
+      "assets/transcriptions/pr-skipped-author/r05a-q23-u.webp": "ff654009583cbfa4127e905515c03539c9e42f39a3f17a1eb4d3193854d2114f",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "0d2a9f3a33b2c350e845a6e99d00cb47220a6778841d184b186595574eff1752"
+  },
+  {
+    "id": "r05h-q38",
+    "question": {
+      "id": "r05h-q38",
+      "version": 3,
+      "number": 38,
+      "title": "2023年 春期 問38",
+      "topic": "セキュリティ",
+      "concept": "署名鍵と検証鍵",
+      "topicDescription": "攻撃・対策・暗号・認証",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和5年度 春期 応用情報技術者試験 午前 問38",
+      "page": 20,
+      "year": 2023,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+      "stem": "メッセージにRSA方式のデジタル署名を付与して2者間で送受信する。そのときのデジタル署名の検証鍵と使用方法はどれか。",
+      "searchText": "問38メッセージにRSA方式のデジタル署名を付与して2者間で送受信する。そのときの\nデジタル署名の検証鍵と使用方法はどれか。\nア受信者の公開鍵であり,送信者がメッセージダイジェストからデジタル署名を作\n成する際に使用する。\nイ受信者の秘密鍵であり,受信者がデジタル署名からメッセージダイジェストを取\nり出す際に使用する。\nウ送信者の公開鍵であり,受信者がデジタル署名からメッセージダイジェストを取\nり出す際に使用する。\nエ送信者の秘密鍵であり,送信者がメッセージダイジェストからデジタル署名を作\n成する際に使用する。",
+      "sourceImages": [
+        "assets/questions/r05h/r05h-q38.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1022,
+          "height": 552
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "受信者の公開鍵であり，送信者がメッセージダイジェストからデジタル署名を作成する際に使用する。"
+        },
+        {
+          "label": "イ",
+          "text": "受信者の秘密鍵であり，受信者がデジタル署名からメッセージダイジェストを取り出す際に使用する。"
+        },
+        {
+          "label": "ウ",
+          "text": "送信者の公開鍵であり，受信者がデジタル署名からメッセージダイジェストを取り出す際に使用する。"
+        },
+        {
+          "label": "エ",
+          "text": "送信者の秘密鍵であり，送信者がメッセージダイジェストからデジタル署名を作成する際に使用する。"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問が尋ねているのは**署名を作る鍵**ではなく**署名を検証する鍵**です。送信者・受信者のどちらの鍵かも分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RSA署名では、送信者が自分の**秘密鍵**で署名を生成し、受信者が**送信者の公開鍵**で検証します。受信者は自分で求めたメッセージダイジェストとも照合します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "検証に使うのは**送信者の公開鍵**で、操作するのは**受信者**です。選択肢にある『送信者の秘密鍵で署名を作る』は正しい操作でも、問われた検証ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "RSAデジタル署名で**検証鍵の所有者・公開範囲・利用者**を区別する。",
+      "explanation": "RSA署名では、送信者が自分の秘密鍵でメッセージダイジェストに対する署名を生成します。受信者は送信者の公開鍵で署名を検証し、受信メッセージから自分で計算したダイジェストと照合します。問われているのは生成鍵ではなく検証鍵なので、送信者の公開鍵を受信者が使うウです。",
+      "choiceReasons": [
+        "受信者の公開鍵は受信者へ秘密に届ける暗号化などに用います。送信者の署名生成鍵ではありません。",
+        "受信者の秘密鍵は送信者が作った署名の検証鍵ではありません。",
+        "送信者の公開鍵で、受信者が署名由来のダイジェストを検証します。",
+        "送信者の秘密鍵は署名生成に使いますが、問われた検証鍵ではありません。"
+      ],
+      "takeaway": "署名は送信者の秘密鍵で生成し、その送信者の公開鍵で検証する。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r05h.json:r05h-q38",
+      "lessonSource": "lessons/r05h.json:r05h-q38",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseQuestion": {
+      "id": "r05h-q38",
+      "version": 3,
+      "number": 38,
+      "title": "2023年 春期 問38",
+      "topic": "セキュリティ",
+      "concept": "署名鍵と検証鍵",
+      "topicDescription": "攻撃・対策・暗号・認証",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和5年度 春期 応用情報技術者試験 午前 問38",
+      "page": 20,
+      "year": 2023,
+      "season": "spring",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_ap_am_ans.pdf",
+      "stem": "メッセージにRSA方式のデジタル署名を付与して2者間で送受信する。そのときのデジタル署名の検証鍵と使用方法はどれか。",
+      "searchText": "問38メッセージにRSA方式のデジタル署名を付与して2者間で送受信する。そのときの\nデジタル署名の検証鍵と使用方法はどれか。\nア受信者の公開鍵であり,送信者がメッセージダイジェストからデジタル署名を作\n成する際に使用する。\nイ受信者の秘密鍵であり,受信者がデジタル署名からメッセージダイジェストを取\nり出す際に使用する。\nウ送信者の公開鍵であり,受信者がデジタル署名からメッセージダイジェストを取\nり出す際に使用する。\nエ送信者の秘密鍵であり,送信者がメッセージダイジェストからデジタル署名を作\n成する際に使用する。",
+      "sourceImages": [
+        "assets/questions/r05h/r05h-q38.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1022,
+          "height": 552
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "受信者の公開鍵であり，送信者がメッセージダイジェストからデジタル署名を作成する際に使用する。"
+        },
+        {
+          "label": "イ",
+          "text": "受信者の秘密鍵であり，受信者がデジタル署名からメッセージダイジェストを取り出す際に使用する。"
+        },
+        {
+          "label": "ウ",
+          "text": "送信者の公開鍵であり，受信者がデジタル署名からメッセージダイジェストを取り出す際に使用する。"
+        },
+        {
+          "label": "エ",
+          "text": "送信者の秘密鍵であり，送信者がメッセージダイジェストからデジタル署名を作成する際に使用する。"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問が尋ねているのは**署名を作る鍵**ではなく**署名を検証する鍵**です。送信者・受信者のどちらの鍵かも分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RSA署名では、送信者が自分の**秘密鍵**で署名を生成し、受信者が**送信者の公開鍵**で検証します。受信者は自分で求めたメッセージダイジェストとも照合します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "検証に使うのは**送信者の公開鍵**で、操作するのは**受信者**です。選択肢にある『送信者の秘密鍵で署名を作る』は正しい操作でも、問われた検証ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "RSAデジタル署名で**検証鍵の所有者・公開範囲・利用者**を区別する。",
+      "explanation": "RSA署名では、送信者が自分の秘密鍵でメッセージダイジェストに対する署名を生成します。受信者は送信者の公開鍵で署名を検証し、受信メッセージから自分で計算したダイジェストと照合します。問われているのは生成鍵ではなく検証鍵なので、送信者の公開鍵を受信者が使うウです。",
+      "choiceReasons": [
+        "受信者の公開鍵は受信者へ秘密に届ける暗号化などに用います。送信者の署名生成鍵ではありません。",
+        "受信者の秘密鍵は送信者が作った署名の検証鍵ではありません。",
+        "送信者の公開鍵で、受信者が署名由来のダイジェストを検証します。",
+        "送信者の秘密鍵は署名生成に使いますが、問われた検証鍵ではありません。"
+      ],
+      "takeaway": "署名は送信者の秘密鍵で生成し、その送信者の公開鍵で検証する。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r05h.json:r05h-q38",
+      "lessonSource": "lessons/r05h.json:r05h-q38",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseLesson": {
+      "id": "r05h-q38",
+      "summary": "RSAデジタル署名で**検証鍵の所有者・公開範囲・利用者**を区別する。",
+      "explanation": "RSA署名では、送信者が自分の秘密鍵でメッセージダイジェストに対する署名を生成します。受信者は送信者の公開鍵で署名を検証し、受信メッセージから自分で計算したダイジェストと照合します。問われているのは生成鍵ではなく検証鍵なので、送信者の公開鍵を受信者が使うウです。",
+      "choiceReasons": [
+        "受信者の公開鍵は受信者へ秘密に届ける暗号化などに用います。送信者の署名生成鍵ではありません。",
+        "受信者の秘密鍵は送信者が作った署名の検証鍵ではありません。",
+        "送信者の公開鍵で、受信者が署名由来のダイジェストを検証します。",
+        "送信者の秘密鍵は署名生成に使いますが、問われた検証鍵ではありません。"
+      ],
+      "takeaway": "署名は送信者の秘密鍵で生成し、その送信者の公開鍵で検証する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問が尋ねているのは**署名を作る鍵**ではなく**署名を検証する鍵**です。送信者・受信者のどちらの鍵かも分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RSA署名では、送信者が自分の**秘密鍵**で署名を生成し、受信者が**送信者の公開鍵**で検証します。受信者は自分で求めたメッセージダイジェストとも照合します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "検証に使うのは**送信者の公開鍵**で、操作するのは**受信者**です。選択肢にある『送信者の秘密鍵で署名を作る』は正しい操作でも、問われた検証ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r05h-q38",
+      "summary": "RSAデジタル署名で**検証鍵の所有者・公開範囲・利用者**を区別する。",
+      "explanation": "RSA署名では、送信者が自分の秘密鍵でメッセージダイジェストに対する署名を生成します。受信者は送信者の公開鍵で署名を検証し、受信メッセージから自分で計算したダイジェストと照合します。問われているのは生成鍵ではなく検証鍵なので、送信者の公開鍵を受信者が使うウです。",
+      "choiceReasons": [
+        "受信者の公開鍵は受信者へ秘密に届ける暗号化などに用います。送信者の署名生成鍵ではありません。",
+        "受信者の秘密鍵は送信者が作った署名の検証鍵ではありません。",
+        "送信者の公開鍵で、受信者が署名由来のダイジェストを検証します。",
+        "送信者の秘密鍵は署名生成に使いますが、問われた検証鍵ではありません。"
+      ],
+      "takeaway": "署名は送信者の秘密鍵で生成し、その送信者の公開鍵で検証する。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "設問が尋ねているのは**署名を作る鍵**ではなく**署名を検証する鍵**です。送信者・受信者のどちらの鍵かも分けて考えます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "RSA署名では、送信者が自分の**秘密鍵**で署名を生成し、受信者が**送信者の公開鍵**で検証します。受信者は自分で求めたメッセージダイジェストとも照合します。",
+          "revealsAnswer": true
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "検証に使うのは**送信者の公開鍵**で、操作するのは**受信者**です。選択肢にある『送信者の秘密鍵で署名を作る』は正しい操作でも、問われた検証ではありません。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 0,
+        "prerequisites": 1,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "H2で送信者の秘密鍵による生成と送信者の公開鍵による検証という役割は学べる。鍵の所有者の基本像には不足を付けない。",
+        "prerequisites": "H2は受信者が自分で求めたダイジェストとも照合すると教えるが、ダイジェストがメッセージから求める要約値であり、検証鍵で署名から得た値と比較することが明示されない。肢ウの「署名からメッセージダイジェストを取り出す」という操作との橋渡しを初学者が推測する必要がある。H3で鍵の所有者と操作主体は回復できるため1。",
+        "progression": "H1で生成と検証の区別、H2で秘密鍵と公開鍵の役割、H3で所有者と実行者を整理する順序は追える。操作との局所的な対応不足はprerequisitesだけに計上する。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "prerequisites",
+          "hintStep": 2,
+          "quote": "受信者は自分で求めたメッセージダイジェストとも照合します。",
+          "missingKnowledge": "メッセージダイジェストがメッセージから計算する要約値であることと、RSA署名の検証で署名側から得る値との対応。",
+          "learnerBlock": "送信者の公開鍵を受信者が使うことは分かるが、肢ウにある「署名からメッセージダイジェストを取り出す」がなぜ検証の操作なのかを意味に基づいて判断する段で止まり得る。鍵の所有者だけならウに絞れるが、使用方法の理解には推測が残る。",
+          "neededExplanation": "ダイジェストを本文から計算する要約値と説明し、この設問のRSA署名では検証鍵で署名から得る要約値を本文から再計算した値と比較する、とつなぐ。"
+        }
+      ],
+      "cumulativeReason": "H1で問われるのは検証鍵だと整理し、H2で送信者の秘密鍵で生成し送信者の公開鍵で検証する役割を学ぶ。H3により送信者の公開鍵・受信者という組合せからウを選べる。ただし、H2の「とも照合」が何と何の比較か、ウのダイジェスト取出しがどこに入るかは明示されず、使用方法を理解して選ぶための橋渡しが一部残る。",
+      "supersedes": null,
+      "recordId": "38a6e2d2afed43309bd6e8716b048a1e",
+      "questionId": "r05h-q38",
+      "unitId": "unit-23",
+      "worker": "Codex /root/hint_unit23",
+      "claimSha256": "81a5faf39c8e979c7cc563ea2349843f102bd153fb82cea989319d284b615b5d",
+      "materialSha256": "a60fa629f7f873d64007e5fad023c7235c1356261c44d0d48a6deca420e469b2",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T17:45:46.033010+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r05h/r05h-q38.webp": "cc720b9091c6e4e2315db008935a3f5b316c11a2b5df1be5197b65967fe37edb",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "775bdb1009cd6a6719bc0e44842107b7becbfba79694e21217f2bbbd758483ee"
+  },
+  {
+    "id": "r06a-q1",
+    "question": {
+      "id": "r06a-q1",
+      "version": 3,
+      "number": 1,
+      "title": "2024年 秋期 問1",
+      "topic": "基礎理論",
+      "concept": "利用率の変化と待ち時間の比",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問1",
+      "page": 4,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
+      "searchText": "問1M/M/1の待ち行列モデルにおいて,窓口の利用率が25%%から499%%に増えると,平\n均待ち時間は何倍になるか。\nア1.2541,60ウ2.00エ3,00",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q1.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1030,
+          "height": 205
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "1.25"
+        },
+        {
+          "label": "イ",
+          "text": "1.60"
+        },
+        {
+          "label": "ウ",
+          "text": "2.00"
+        },
+        {
+          "label": "エ",
+          "text": "3.00"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間（サービス開始まで）はTs×ρ/(1−ρ)です。Tsは平均サービス時間、ρは0以上1未満の利用率を表します。40/25だけでなく、1−ρの変化も比に含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "summary": "M/M/1モデルで、利用率の変化から平均待ち時間の比を求める。",
+      "explanation": "M/M/1は、到着がポアソン過程、サービス時間が指数分布、窓口が一つの待ち行列モデルです。M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q1",
+      "lessonSource": "lessons/r06a.json:r06a-q1",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseQuestion": {
+      "id": "r06a-q1",
+      "version": 3,
+      "number": 1,
+      "title": "2024年 秋期 問1",
+      "topic": "基礎理論",
+      "concept": "利用率の変化と待ち時間の比",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問1",
+      "page": 4,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "M/M/1の待ち行列モデルにおいて，窓口の利用率が25%から40%に増えると，平均待ち時間は何倍になるか。",
+      "searchText": "問1M/M/1の待ち行列モデルにおいて,窓口の利用率が25%%から499%%に増えると,平\n均待ち時間は何倍になるか。\nア1.2541,60ウ2.00エ3,00",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q1.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1030,
+          "height": 205
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "1.25"
+        },
+        {
+          "label": "イ",
+          "text": "1.60"
+        },
+        {
+          "label": "ウ",
+          "text": "2.00"
+        },
+        {
+          "label": "エ",
+          "text": "3.00"
+        }
+      ],
+      "answer": 2,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間（サービス開始まで）はTs×ρ/(1−ρ)です。Tsは平均サービス時間、ρは0以上1未満の利用率を表します。40/25だけでなく、1−ρの変化も比に含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "summary": "M/M/1モデルで、利用率の変化から平均待ち時間の比を求める。",
+      "explanation": "M/M/1は、到着がポアソン過程、サービス時間が指数分布、窓口が一つの待ち行列モデルです。M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q1",
+      "lessonSource": "lessons/r06a.json:r06a-q1",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseLesson": {
+      "id": "r06a-q1",
+      "summary": "M/M/1モデルで、利用率の変化から平均待ち時間の比を求める。",
+      "explanation": "M/M/1は、到着がポアソン過程、サービス時間が指数分布、窓口が一つの待ち行列モデルです。M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間（サービス開始まで）はTs×ρ/(1−ρ)です。Tsは平均サービス時間、ρは0以上1未満の利用率を表します。40/25だけでなく、1−ρの変化も比に含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r06a-q1",
+      "summary": "M/M/1モデルで、利用率の変化から平均待ち時間の比を求める。",
+      "explanation": "M/M/1は、到着がポアソン過程、サービス時間が指数分布、窓口が一つの待ち行列モデルです。M/M/1の平均待ち時間は、平均サービス時間をTs、利用率をρとするとTs×ρ/(1−ρ)です。\n25%ではTs/3、40%では2Ts/3なので、比は(2/3)/(1/3)=2です。利用率が上がると、サービス中の客の後ろで待つ影響も増えるため、利用率だけの比では求まりません。",
+      "choiceReasons": [
+        "1.25は平均系内時間Ts/(1−ρ)の比0.75/0.60です。サービス時間を除いた平均待ち時間の比とは異なります。",
+        "1.60は40/25で、利用率そのものの比です。待ち時間には1/(1−ρ)も掛かります。",
+        "(0.40/0.60)/(0.25/0.75)=2.00となります。",
+        "3.00ではありません。25%の待ち時間Ts/3と40%の2Ts/3を比べると2倍です。"
+      ],
+      "takeaway": "M/M/1の待ち時間の比較ではρ/(1−ρ)を使う。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "利用率は25%から40%です。待ち時間の比を求めるので、平均サービス時間を共通のTsと置きましょう。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "平均待ち時間（サービス開始まで）はTs×ρ/(1−ρ)です。Tsは平均サービス時間、ρは0以上1未満の利用率を表します。40/25だけでなく、1−ρの変化も比に含めます。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "新旧の比を(0.40/0.60)÷(0.25/0.75)と置きます。それぞれの分数を約分してから割りましょう。",
+          "revealsAnswer": false
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 1,
+        "prerequisites": 0,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "待ち時間をサービス開始までと定義し式も示すが、利用率が窓口の稼働時間の割合である説明はなく、ρを割合として計算する以上の基本像は薄い。",
+        "prerequisites": "Tsとρの対応、比の式と百分率からの小数化はH2・H3で渡され、二つの分数の割算を実行できる。",
+        "progression": "H1で共通時間を置き、H2で公式、H3で数値の比を示す順序は追える。利用率の意味の薄さはfoundationだけに計上。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "foundation",
+          "hintStep": 2,
+          "quote": "ρは0以上1未満の利用率を表します。",
+          "missingKnowledge": "利用率が窓口の処理中の時間の割合であること。",
+          "learnerBlock": "1.25等の数値選択は式で進められるが、ρの増加が窓口のどの状態を指すか説明できない。",
+          "neededExplanation": "窓口が一定時間のうち何割処理中かを利用率とする短い具体例を補う。"
+        }
+      ],
+      "cumulativeReason": "H1で共通のサービス時間を置き、H2で待つ範囲と式、H3で0.40/0.60と0.25/0.75の比を学べる。2倍の計算は可能だが、何が25%から40%へ増えた割合なのかは自分で補う。",
+      "supersedes": null,
+      "recordId": "657ac90598f3433c9c6deb0955ba771a",
+      "questionId": "r06a-q1",
+      "unitId": "unit-03",
+      "worker": "Codex /root/hint_unit03",
+      "claimSha256": "3f1a23b130d93873ade105e583ab2d1e291347ed80bf7d3a53a611d9a653212d",
+      "materialSha256": "bc46b02c4c62f7f36029be09964cfd0a71dabc91cd5cf64b1b97f875fc29d081",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T14:38:04.557780+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q1.webp": "ba8a8f9e11f2c0a3c7c27e32998b672bc9b4f5297d164f3f8145e143119b3ad2",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "a9d1afca7eb09151a391b21ee5a3e330e2f7569568d07d7504b2b4d521bde43e"
+  },
+  {
+    "id": "r06a-q4",
+    "question": {
+      "id": "r06a-q4",
+      "version": 3,
+      "number": 4,
+      "title": "2024年 秋期 問4",
+      "topic": "基礎理論",
+      "concept": "運転支援システムのセンサ",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問4",
+      "page": 5,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "自動車の先進運転支援システムで使用されるセンサーの説明のうち，適切なものはどれか。",
+      "searchText": "問4自動車の先進運転支援システムで使用されるセンサーの説明のうち,適切なものは\nどれか。\nア可視光カメラは,天候などの影響を受けやすいが,交通標識の認識に使用できる。\n4超音波センサーは,天候などの影響を受けやすいが,測定可能距離が5909メート\nル以上と長い。\nウミリ波レーダーは,天候などの影響を受けにくく,交通信号機の灯色の判別に使\n用できる。\nエレーザーレーダーは,天候などの影響を受けにくく,建物の後ろにある物体を検\n知できる。",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q4.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1038,
+          "height": 502
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "可視光カメラは，天候などの影響を受けやすいが，交通標識の認識に使用できる。"
+        },
+        {
+          "label": "イ",
+          "text": "超音波センサーは，天候などの影響を受けやすいが，測定可能距離が500メートル以上と長い。"
+        },
+        {
+          "label": "ウ",
+          "text": "ミリ波レーダーは，天候などの影響を受けにくく，交通信号機の灯色の判別に使用できる。"
+        },
+        {
+          "label": "エ",
+          "text": "レーザーレーダーは，天候などの影響を受けにくく，建物の後ろにある物体を検知できる。"
+        }
+      ],
+      "answer": 0,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "運転支援用センサの測定原理と、天候・測定距離・遮蔽物による限界を判断する。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q4",
+      "lessonSource": "lessons/r06a.json:r06a-q4",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseQuestion": {
+      "id": "r06a-q4",
+      "version": 3,
+      "number": 4,
+      "title": "2024年 秋期 問4",
+      "topic": "基礎理論",
+      "concept": "運転支援システムのセンサ",
+      "topicDescription": "確率・情報量・論理・数値表現",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問4",
+      "page": 5,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "自動車の先進運転支援システムで使用されるセンサーの説明のうち，適切なものはどれか。",
+      "searchText": "問4自動車の先進運転支援システムで使用されるセンサーの説明のうち,適切なものは\nどれか。\nア可視光カメラは,天候などの影響を受けやすいが,交通標識の認識に使用できる。\n4超音波センサーは,天候などの影響を受けやすいが,測定可能距離が5909メート\nル以上と長い。\nウミリ波レーダーは,天候などの影響を受けにくく,交通信号機の灯色の判別に使\n用できる。\nエレーザーレーダーは,天候などの影響を受けにくく,建物の後ろにある物体を検\n知できる。",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q4.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1038,
+          "height": 502
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "可視光カメラは，天候などの影響を受けやすいが，交通標識の認識に使用できる。"
+        },
+        {
+          "label": "イ",
+          "text": "超音波センサーは，天候などの影響を受けやすいが，測定可能距離が500メートル以上と長い。"
+        },
+        {
+          "label": "ウ",
+          "text": "ミリ波レーダーは，天候などの影響を受けにくく，交通信号機の灯色の判別に使用できる。"
+        },
+        {
+          "label": "エ",
+          "text": "レーザーレーダーは，天候などの影響を受けにくく，建物の後ろにある物体を検知できる。"
+        }
+      ],
+      "answer": 0,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "運転支援用センサの測定原理と、天候・測定距離・遮蔽物による限界を判断する。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q4",
+      "lessonSource": "lessons/r06a.json:r06a-q4",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseLesson": {
+      "id": "r06a-q4",
+      "summary": "運転支援用センサの測定原理と、天候・測定距離・遮蔽物による限界を判断する。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r06a-q4",
+      "summary": "運転支援用センサの測定原理と、天候・測定距離・遮蔽物による限界を判断する。",
+      "explanation": "可視光カメラは画像を取得するため、交通標識の文字や形の認識に利用できます。一方、暗さ、雨、霧などで画像の品質が変わります。\n超音波センサーは駐車支援など近距離の測距に適し、500m以上の測距には向きません。ミリ波レーダーは距離や相対速度を測れますが、可視光の灯色は判別しません。レーザーレーダーも、建物に隠れた対象へ光が届かなければ検知できません。",
+      "choiceReasons": [
+        "可視光の画像から標識を認識でき、天候や明るさの影響も受けるため適切です。",
+        "超音波は主に近距離の障害物検知に使われ、500m以上という長距離の説明は不適切です。",
+        "ミリ波で可視光の色は測れません。信号の灯色の判別にはカメラなどが必要です。",
+        "レーザー光は建物を透過して背後の物体を測るものではなく、雨や霧の影響も受けます。"
+      ],
+      "takeaway": "画像の色・形の認識と、反射波による距離測定を分けて考える。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "各選択肢の前半だけでなく、用途の後半を確認します。標識認識、500mの測距、灯色判別、建物の背後という四つの条件です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "信号の赤・青は可視光の情報です。ミリ波の反射で距離を測ることと、画像から色を読むことは別の測定です。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、天候の影響を受けつつ標識を認識する可視光カメラが残ります。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 1,
+        "prerequisites": 0,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "H2で可視光による色判別とミリ波の反射測距の違いは学べるが、H3で超音波500m・レーザー建物背後を除く理由は教えず、センサと用途の関係の足場が一部薄い。",
+        "prerequisites": "H1が確認すべき各用途を挙げ、H2・H3で除外対象と残るカメラを明示するため、四肢から選ぶ操作自体は実行できる。",
+        "progression": "用途を見る入口、光とミリ波の比較、各肢への適用という順は辿れる。除外理由の不足はfoundationだけに置く。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "foundation",
+          "hintStep": 3,
+          "quote": "超音波の500m、レーザーで建物の背後、ミリ波で灯色という説明を除くと、",
+          "missingKnowledge": "超音波が近距離用途であること、レーザー測距では光が届いて戻る経路が必要で建物の背後を測れないこと。",
+          "learnerBlock": "イ・エを除外するよう求められるが、なぜ500mや建物の背後という条件に合わないかをヒントだけでは説明できない。",
+          "neededExplanation": "超音波の主な測距範囲と、レーザーは遮蔽物に光路を遮られるという用途を分ける理由を補う。"
+        }
+      ],
+      "cumulativeReason": "H1で各肢後半の用途を見て、H2で灯色は可視光でありミリ波の距離とは違うと学べる。H3で三肢の除外とカメラの選択まで進むが、超音波の距離限界やレーザーが遮蔽物を透過できない理由は断定から補えない。",
+      "supersedes": null,
+      "recordId": "c7f862800cc9441d9ea4828644ed295e",
+      "questionId": "r06a-q4",
+      "unitId": "unit-03",
+      "worker": "Codex /root/hint_unit03",
+      "claimSha256": "3f1a23b130d93873ade105e583ab2d1e291347ed80bf7d3a53a611d9a653212d",
+      "materialSha256": "c05ac638c45879aa5fa3398e953b1beea1af70f262ef774d7a8f0f0627d29830",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T14:39:54.420208+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q4.webp": "a9dfde8398b0abccd9639a5d3da68be50d9aea181f293694a13d171bdc84bd88",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "7468612ffbfec357249b534e85db1e1408e0c7f07fe90f3a71f617a1df3234ad"
+  },
+  {
+    "id": "r06a-q6",
+    "question": {
+      "id": "r06a-q6",
+      "version": 3,
+      "number": 6,
+      "title": "2024年 秋期 問6",
+      "topic": "アルゴリズム・プログラミング",
+      "concept": "剰余のハッシュ衝突",
+      "topicDescription": "探索・データ構造・計算量・言語",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問6",
+      "page": 6,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "自然数をキーとするデータを，ハッシュ表を用いて管理する。キー$x$のハッシュ関数$h(x)$を\n\n$$h(x)=x\\bmod n$$\n\nとすると，任意のキー$a$と$b$が衝突する条件はどれか。ここで，$n$はハッシュ表の大きさであり，$x\\bmod n$は$x$を$n$で割った余りを表す。",
+      "searchText": "問6自然数をキーとするデータを,ハッシュ表を用いて管理する。キーxのハッシュ\n関数(x)を\nh(x)=xmodn\nとすると,任意のキーaとbが衝突する条件はどれか。ここで,nはハッシュ表の大\nきさであり,xmodnはxをnで割った余りを表す。\nアathxnome4abがnの倍数\nウnがa+bの倍数エnがabの倍数",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q6.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1030,
+          "height": 405
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "$a+b$が$n$の倍数"
+        },
+        {
+          "label": "イ",
+          "text": "$a-b$が$n$の倍数"
+        },
+        {
+          "label": "ウ",
+          "text": "$n$が$a+b$の倍数"
+        },
+        {
+          "label": "エ",
+          "text": "$n$が$a-b$の倍数"
+        }
+      ],
+      "answer": 1,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "h(a)=h(b)を「aとbをnで割った余りが同じ」と言い換えます。格納先の番号は余りで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。余りrを消せる演算は何でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二式を引くとa−b=(p−q)nです。差がnの倍数という条件を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突はh(a)=h(b)、つまりnで割った余りが等しいことです。a=pn+r、b=qn+rと置けば、差はa−b=(p−q)nとなります。逆に差がnの倍数なら、二つの余りは等しくなります。\n和がnの倍数でも余りは一致しません。例えばn=5、a=1、b=4では和は5ですが、余りは1と4です。",
+      "choiceReasons": [
+        "n=5、a=1、b=4なら和はnの倍数ですが、余りは異なるので衝突しません。",
+        "差がnの倍数であることが、同じ余りになる必要十分条件です。",
+        "n=6、a=1、b=2ならnはa＋bの倍数ですが、余りは1と2で異なります。",
+        "n=6、a=3、b=1ならnはa−bの倍数ですが、余りは3と1で異なります。"
+      ],
+      "takeaway": "同じ剰余は「二つの数の差が法の倍数」と同値。倍数の向きを逆にしない。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q6",
+      "lessonSource": "lessons/r06a.json:r06a-q6",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseQuestion": {
+      "id": "r06a-q6",
+      "version": 3,
+      "number": 6,
+      "title": "2024年 秋期 問6",
+      "topic": "アルゴリズム・プログラミング",
+      "concept": "剰余のハッシュ衝突",
+      "topicDescription": "探索・データ構造・計算量・言語",
+      "field": "テクノロジ",
+      "related": [],
+      "source": "令和6年度 秋期 応用情報技術者試験 午前 問6",
+      "page": 6,
+      "year": 2024,
+      "season": "autumn",
+      "questionUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_qs.pdf",
+      "answerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06a_ap_am_ans.pdf",
+      "stem": "自然数をキーとするデータを，ハッシュ表を用いて管理する。キー$x$のハッシュ関数$h(x)$を\n\n$$h(x)=x\\bmod n$$\n\nとすると，任意のキー$a$と$b$が衝突する条件はどれか。ここで，$n$はハッシュ表の大きさであり，$x\\bmod n$は$x$を$n$で割った余りを表す。",
+      "searchText": "問6自然数をキーとするデータを,ハッシュ表を用いて管理する。キーxのハッシュ\n関数(x)を\nh(x)=xmodn\nとすると,任意のキーaとbが衝突する条件はどれか。ここで,nはハッシュ表の大\nきさであり,xmodnはxをnで割った余りを表す。\nアathxnome4abがnの倍数\nウnがa+bの倍数エnがabの倍数",
+      "sourceImages": [
+        "assets/questions/r06a/r06a-q6.webp"
+      ],
+      "imageSizes": [
+        {
+          "width": 1030,
+          "height": 405
+        }
+      ],
+      "choices": [
+        {
+          "label": "ア",
+          "text": "$a+b$が$n$の倍数"
+        },
+        {
+          "label": "イ",
+          "text": "$a-b$が$n$の倍数"
+        },
+        {
+          "label": "ウ",
+          "text": "$n$が$a+b$の倍数"
+        },
+        {
+          "label": "エ",
+          "text": "$n$が$a-b$の倍数"
+        }
+      ],
+      "answer": 1,
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "h(a)=h(b)を「aとbをnで割った余りが同じ」と言い換えます。格納先の番号は余りで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。余りrを消せる演算は何でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二式を引くとa−b=(p−q)nです。差がnの倍数という条件を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突はh(a)=h(b)、つまりnで割った余りが等しいことです。a=pn+r、b=qn+rと置けば、差はa−b=(p−q)nとなります。逆に差がnの倍数なら、二つの余りは等しくなります。\n和がnの倍数でも余りは一致しません。例えばn=5、a=1、b=4では和は5ですが、余りは1と4です。",
+      "choiceReasons": [
+        "n=5、a=1、b=4なら和はnの倍数ですが、余りは異なるので衝突しません。",
+        "差がnの倍数であることが、同じ余りになる必要十分条件です。",
+        "n=6、a=1、b=2ならnはa＋bの倍数ですが、余りは1と2で異なります。",
+        "n=6、a=3、b=1ならnはa−bの倍数ですが、余りは3と1で異なります。"
+      ],
+      "takeaway": "同じ剰余は「二つの数の差が法の倍数」と同値。倍数の向きを逆にしない。",
+      "enrichment": "reviewed",
+      "adaptation": "公式問題PDFを一問ずつ画像として切り出し、余白を整えています。検索用テキストは自動読み取りです。分野はアプリ独自の分類です。",
+      "hintStatus": "individual",
+      "hintSource": "lessons/r06a.json:r06a-q6",
+      "lessonSource": "lessons/r06a.json:r06a-q6",
+      "image": null,
+      "imageAlt": ""
+    },
+    "baseLesson": {
+      "id": "r06a-q6",
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突はh(a)=h(b)、つまりnで割った余りが等しいことです。a=pn+r、b=qn+rと置けば、差はa−b=(p−q)nとなります。逆に差がnの倍数なら、二つの余りは等しくなります。\n和がnの倍数でも余りは一致しません。例えばn=5、a=1、b=4では和は5ですが、余りは1と4です。",
+      "choiceReasons": [
+        "n=5、a=1、b=4なら和はnの倍数ですが、余りは異なるので衝突しません。",
+        "差がnの倍数であることが、同じ余りになる必要十分条件です。",
+        "n=6、a=1、b=2ならnはa＋bの倍数ですが、余りは1と2で異なります。",
+        "n=6、a=3、b=1ならnはa−bの倍数ですが、余りは3と1で異なります。"
+      ],
+      "takeaway": "同じ剰余は「二つの数の差が法の倍数」と同値。倍数の向きを逆にしない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "h(a)=h(b)を「aとbをnで割った余りが同じ」と言い換えます。格納先の番号は余りで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。余りrを消せる演算は何でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二式を引くとa−b=(p−q)nです。差がnの倍数という条件を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "startingLesson": {
+      "id": "r06a-q6",
+      "summary": "剰余をハッシュ値にするときの、衝突条件と倍数の向きを判断する。",
+      "explanation": "衝突はh(a)=h(b)、つまりnで割った余りが等しいことです。a=pn+r、b=qn+rと置けば、差はa−b=(p−q)nとなります。逆に差がnの倍数なら、二つの余りは等しくなります。\n和がnの倍数でも余りは一致しません。例えばn=5、a=1、b=4では和は5ですが、余りは1と4です。",
+      "choiceReasons": [
+        "n=5、a=1、b=4なら和はnの倍数ですが、余りは異なるので衝突しません。",
+        "差がnの倍数であることが、同じ余りになる必要十分条件です。",
+        "n=6、a=1、b=2ならnはa＋bの倍数ですが、余りは1と2で異なります。",
+        "n=6、a=3、b=1ならnはa−bの倍数ですが、余りは3と1で異なります。"
+      ],
+      "takeaway": "同じ剰余は「二つの数の差が法の倍数」と同値。倍数の向きを逆にしない。",
+      "hints": [
+        {
+          "title": "注目するところ",
+          "text": "h(a)=h(b)を「aとbをnで割った余りが同じ」と言い換えます。格納先の番号は余りで決まります。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "使う考え方",
+          "text": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。余りrを消せる演算は何でしょうか。",
+          "revealsAnswer": false
+        },
+        {
+          "title": "この問題に当てはめる",
+          "text": "二式を引くとa−b=(p−q)nです。差がnの倍数という条件を選びます。",
+          "revealsAnswer": true
+        }
+      ],
+      "checkedAgainst": "official-question-image-and-answer-key"
+    },
+    "candidate": {
+      "assessment": "candidate",
+      "scores": {
+        "foundation": 0,
+        "prerequisites": 1,
+        "progression": 0
+      },
+      "axisReasons": {
+        "foundation": "H1は格納先番号が余りで決まり、衝突が余りの一致であることを教える。",
+        "prerequisites": "H2のp,qが整数の商であるという変数対応が省かれ、差がnの倍数となる根拠を小さく補う必要がある。H3で演算と結論は回復する。",
+        "progression": "H1の格納先→H2の共通余りの式→H3の差という順は自然である。変数対応の不足は実行軸だけに置く。"
+      },
+      "criticalOverride": false,
+      "confidence": "medium",
+      "reviewed": {
+        "question": true,
+        "choices": true,
+        "allHints": true
+      },
+      "evidence": [
+        {
+          "axis": "prerequisites",
+          "hintStep": 2,
+          "quote": "共通の余りをrとしてa=pn+r、b=qn+rと置きましょう。",
+          "missingKnowledge": "p,qがa,bをnで割った整数の商であること。",
+          "learnerBlock": "余りを消す演算を求められ、H3で引くことは分かるが、係数p−qとnの倍数という選択肢の関係を根拠付きで読むには商の意味を補う。",
+          "neededExplanation": "p,qを商と明示し、商の差も整数なのでa−bがnの倍数になると橋渡しする。"
+        }
+      ],
+      "cumulativeReason": "H1で衝突の意味を格納先と余りから学ぶ。H2で共通の余りrを二式に入れ、H3で差がnの倍数という条件を得る。p,qの整数の商としての位置付けだけは本文とヒントから明示的に教わらない。",
+      "supersedes": null,
+      "recordId": "8a7a73fe4cd9401b8236654c70cd9d04",
+      "questionId": "r06a-q6",
+      "unitId": "unit-05",
+      "worker": "Codex /root/hint_unit05",
+      "claimSha256": "8bbb34e6bf5123a857efcf9f97fc86d28c770844d633587972301ac630d0f905",
+      "materialSha256": "c6e735583cadda66d6e8d9c7871f2b61ff075a52c9422a1bf3e1c4269f32813f",
+      "questionVersion": 3,
+      "rubricVersion": 1,
+      "createdAt": "2026-10-29T14:38:09.700819+00:00",
+      "total": 1,
+      "severity": "low"
+    },
+    "sourceHashes": {
+      "assets/questions/r06a/r06a-q6.webp": "3088c5627ef8077986f1f7e0adb1438fbc171e83346e41f21fb98c3bf8f8242d",
+      "data/answer-keys.json": "82feded8e86a8dc9a02ec25c924ac1577c2216330661cf2e114da994924636ff",
+      "data/sources.json": "5682f3057317072371576ef0d33756ccb48ec8703d47102cfa4907b8add15c1a"
+    },
+    "auditRecordSha256": "ccb6a46cab917c1ac688be2daec78d6a8df5792bdebab4fbc6e8b873f5f1ad36"
+  }
+]

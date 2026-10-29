@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2でコピーレフトと公開義務の広がりは学べるが、H3の静的リンク・動的リンクがどんな結合かは未説明で、LGPLの公開範囲の実体が薄い。",
+    "prerequisites": "実際に表を開き、a全○、d全×、b修正と静的だけ○、c修正だけ○を確認。H2・H3が各列と名称の対応を明示するので組合せの照合操作は実行できる。",
+    "progression": "両端の列を先に固定し残る二列を区別する順で表を追える。不足はリンクの意味に限定し順序へ二重加点しない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 3,
+      "quote": "LGPLは静的リンクで公開義務があり動的リンクではなく",
+      "missingKnowledge": "OSSを他プログラムに組み込む静的リンクと、実行時に別のライブラリを呼び出す動的リンクの相違。",
+      "learnerBlock": "表の名前と○×を機械的に対応してアを選べるが、b列の二つのリンク行がどう異なる利用場面かを説明できない。",
+      "neededExplanation": "リンクは別プログラムの機能を結合して使うことと説明し、静的・動的で結合時期や分離のされ方が違う簡単な例を補う。"
+    }
+  ],
+  "cumulativeReason": "H1で○×は公開義務だと確認しa・dを探せる。H2で同じ条件を改変物へ引き継ぐ意味とGPL・BSDの位置を知る。H3でLGPL・MPLの○×対応を得てアは選べる。ただし静的・動的なリンクが何かは最後まで説明されず、なぜリンク方法で範囲が分かれるのかという基本像の一部は残る。",
+  "supersedes": null,
+  "recordId": "77cec001a5f14c0e852fdfc0e0e59611",
+  "questionId": "r07h-q16",
+  "unitId": "unit-08",
+  "worker": "Codex /root/hint_unit08",
+  "claimSha256": "b741dc6863a692dd649a0e4ae44a066c2890107fbe92ce27f8dbd467c57302c2",
+  "materialSha256": "1390c17d257246e1211fbea63fe129bb157947f628a0bd82071bc8376b0d2d17",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:48:18.633435+00:00",
+  "total": 1,
+  "severity": "low"
+}

@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1がGPUの多数の演算器による並列計算、H2が学習の重み付き加算を説明し、H3の二つの式が並列化を具体化する。",
+    "prerequisites": "H2で学習の行列演算とGPU高速化を対応させ、H3で単なる浮動小数点演算能力との違いも示す。",
+    "progression": "装置の構造→学習の計算内容→独立した二出力の具体例とCPUとの比較の順に理解できる。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1でGPUの同種演算を多数並列にする構造を得る。H2で入力に重みを掛けて足す行列演算が学習で反復されると学ぶ。H3でa×x+b×yとc×x+d×yを同時に求められる例を通し、イの高速化の意味を確認できる。",
+  "support": {
+    "hintStep": 3,
+    "quote": "a×x+b×yとc×x+d×yは、互いに独立して同時に計算できます。",
+    "enables": "学習の積和計算を並列に実行する具体像を得て、行列演算の高速化が利点だと判断できる。"
+  },
+  "supersedes": null,
+  "recordId": "1bf6f533986c47d6b64a2a1ac2ba9735",
+  "questionId": "r03h-q10",
+  "unitId": "unit-05",
+  "worker": "Codex /root/hint_unit05",
+  "claimSha256": "8bbb34e6bf5123a857efcf9f97fc86d28c770844d633587972301ac630d0f905",
+  "materialSha256": "5c329f4c2ee45d996aa5ed88ada4a9cd2096350812ad54f49a06cdc8858b2e1e",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:41:00.128981+00:00",
+  "total": 0,
+  "severity": "none"
+}

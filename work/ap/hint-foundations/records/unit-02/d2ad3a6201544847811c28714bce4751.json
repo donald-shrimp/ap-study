@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "本文が冗長ビットと誤り訂正を説明し、H2でXORの奇偶と検査の不一致、H3で誤った共通ビットを示す。",
+    "prerequisites": "H1にビット配置、H2にXOR規則と一式の代入例、H3に反転・再検査があり操作を実行できる。",
+    "progression": "配置の確認から検査の規則、全式の共通ビットと再検査へ進める。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で1110011を指定されたX/Pの順へ割当て、H2で1の個数の奇偶から各式の不一致を検査できる。H3で三式に共通するX₁を反転し0110011を再検査する筋を学び、アへ対応する。",
+  "supersedes": null,
+  "support": {
+    "hintStep": 2,
+    "quote": "排他的論理和は、1の個数が奇数なら1、偶数なら0になります。各検査式が0になる偶数パリティなので、1なら不一致です。第1式に1⊕1⊕0⊕1を入れ、残り2式も検査し、不一致の式に共通するビットを探します。",
+    "enables": "XORを1の数の奇偶として計算し、不一致の式が共有するビットを調べられる。"
+  },
+  "recordId": "d2ad3a6201544847811c28714bce4751",
+  "questionId": "r04h-q4",
+  "unitId": "unit-02",
+  "worker": "Codex /root/hint_unit02",
+  "claimSha256": "899d282306cc973759e16588043819f6b28e2ff4bad1bcc2315f50f483aba424",
+  "materialSha256": "c7bb73618758753f303435a28339891051dccf458a497d1552fbb6578f6f38e0",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:39:22.855278+00:00",
+  "total": 0,
+  "severity": "none"
+}

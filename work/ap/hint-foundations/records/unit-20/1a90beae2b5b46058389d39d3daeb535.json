@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1で攻撃をDNS応答・HTTP API・SMTP・大量メールに分け、H2で要求内容の検査と遮断というWAFの働きを教える。",
+    "prerequisites": "REST APIもHTTPで検査対象とH2で明示するため、全肢を通信対象で照合できる。大量かつ大サイズのメールもH3で対象外と確認できる。",
+    "progression": "H1で通信の種類、H2で対象と動作、H3で他プロトコルを代替しない限界を加え、必要な比較材料が順に揃う。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "HTTP/HTTPSの要求を検査して不正なパラメータや入力を遮断します。",
+    "enables": "WAFがWeb要求の入力を検査する動作から、HTTP公開のREST APIへの攻撃が該当し、大量メール等は該当しないと判断できる。"
+  },
+  "cumulativeReason": "H1で各攻撃の届く通信を分ける。H2でHTTP要求を検査するWAFとHTTPのREST APIが結び付き、イを選べる。H3はDNS偽応答やSMTP、大量メールがWebリクエスト検査の対象外だと補強する。",
+  "supersedes": null,
+  "recordId": "1a90beae2b5b46058389d39d3daeb535",
+  "questionId": "r06h-q41",
+  "unitId": "unit-20",
+  "worker": "Codex /root/hint_unit20",
+  "claimSha256": "cd7e31c30db8b42e9e1fa911a7300bf8f75246ec1879328ea59da7c398b524fe",
+  "materialSha256": "28980af77c2ede7b1440fcb7c3f22b345bdac4e71c806f28bb7c20d018325945",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:40.614299+00:00",
+  "total": 0,
+  "severity": "none"
+}

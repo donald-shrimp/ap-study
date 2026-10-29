@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が多重度を同時要求数の違いとして説明し、各要求の4秒は変わらないと教えるため、並列化の意味と処理時間の関係が明確。",
+    "prerequisites": "H2の1枠の実行区間と2枠の最初の区間に続き、H3で空き4/5秒に後続を開始し4秒を足す操作を示す。終了8/9と16との差7を計算できる。",
+    "progression": "並列化の意味と到着時刻を先に置き、区間の例から後続の開始・終了を本人が求める順で、必要な操作を教えた後に計算を残す。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 1,
+    "quote": "並列化で変わるのは『同時に走らせられる要求の数』です。",
+    "enables": "二枠でも各4秒必要と分かり、H2・H3で4秒に第三要求、5秒に第四要求を開始する。最終9秒と単独16秒の差7秒からイを選べる。"
+  },
+  "cumulativeReason": "H1で同時実行数と各処理4秒、H2で一枠の0〜16と二枠の0〜4/1〜5、H3で後続へ4秒ずつ足す手順を学ぶ。8秒・9秒の完了から全件終了9を取り16−9=7を計算できる。 修正検討上の未解決点はない。学習者での効果測定は行っていない。",
+  "supersedes": null,
+  "recordId": "a788f80f3c11486a9927b06d72732b08",
+  "questionId": "r06h-q18",
+  "unitId": "unit-10",
+  "worker": "Codex /root/hint_unit10",
+  "claimSha256": "50472057e4ea0304b54aa266546dd0bc32be5611dcb6d402a1f1903b97de6c54",
+  "materialSha256": "c12a105180f2cca7613b4c4e391cb3f3b1ff3b1b6290838fb288696c9f2984e9",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:48:35.087452+00:00",
+  "total": 0,
+  "severity": "none"
+}

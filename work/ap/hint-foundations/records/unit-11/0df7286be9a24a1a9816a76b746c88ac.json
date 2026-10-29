@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "実際に開いたポート回路図でLED1がビット3、LED2がビット6へ接続することを確認した。H1の点灯条件と、H2のOR/ANDの0・1に対する作用から他ビット保持の意味を学べる。",
+    "prerequisites": "H2でORが元値保持と1への設定を両立することを教え、H3でビット3だけの00001000と16進08の対応を示すので、16進変換の既知知識を要求せず選べる。",
+    "progression": "図の接続と点灯条件、演算の性質、具体的マスクと読出し・書戻しの順に進める。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "論理和ORには『0とのORは元値を保持、1とのORは必ず1』という性質があります。",
+    "enables": "LED2を変えずLED1だけ点灯させるには元の値にビット3だけ1のマスクをORする、と理解して08との論理和のイへ進める。"
+  },
+  "cumulativeReason": "H1で図のビット3/6と出力1による点灯を対応させる。H2でORなら0の場所は保持、1の場所のみ点灯を強制できると学ぶ。H3で00001000₂＝08₁₆を渡し、08とのANDのア、48を使うウ・エとの違いを判断できる。図はassets/transcriptions/transcribe_r03a_batch3/r03a-q23-port-led.webpをview_imageで確認した。不足の追加提案なし。",
+  "supersedes": null,
+  "recordId": "0df7286be9a24a1a9816a76b746c88ac",
+  "questionId": "r03a-q23",
+  "unitId": "unit-11",
+  "worker": "Codex /root/hint_resume11",
+  "claimSha256": "af08752e4980840513fb7f43f746188471330d298acb2c6e153ee3b11bbbe9fb",
+  "materialSha256": "f88c667f41f433303ea6d8581348fcfe54b6509ac6f1a46246345c319dffb086",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:35:38.631776+00:00",
+  "total": 0,
+  "severity": "none"
+}

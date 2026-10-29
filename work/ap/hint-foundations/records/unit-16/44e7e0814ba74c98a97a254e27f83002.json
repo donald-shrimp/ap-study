@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 1,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1・H2はプライベート、マルチキャスト、一斉送信先に対応する数値範囲・全1条件を示すため、今回のアドレスを分類する基本的な比較対象は得られる。",
+    "prerequisites": "H2のホスト部が全1という条件を数値166に適用するには、整数と最下位ビットの関係が必要。H3は166の最下位ビット0を結果として渡すが、偶数なら0になる理由や変換操作を教えず、小さな橋渡しが残る。最終的な分類自体はH3で回復できるので1。",
+    "progression": "私用範囲の確認→マルチキャストとブロードキャストの条件→208と末尾166への適用という導入順は追える。ビット判定の未説明は実行前提の軸だけに計上する。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "prerequisites",
+      "hintStep": 3,
+      "quote": "末尾166の最下位ビットは**0**なので",
+      "missingKnowledge": "IPv4末尾の10進整数を2進数で表した際、偶数なら最下位ビットが0になる関係。",
+      "learnerBlock": "H2のホスト部全1という基準を知っても、166からどのように0と判定しブロードキャストを除外するかを自分で確かめられない。H3のグローバルという結論の対応はできる。",
+      "neededExplanation": "2進数の末尾は1の位であり、166は2で割り切れるので0になること、または166=10100110の対応を短く補う。"
+    }
+  ],
+  "cumulativeReason": "H1で208が10、172.16～31、192.168の私用範囲でないと比較できる。H2で224～239外と全1アドレスの基準を学ぶ。H3で通常のグローバルという結論と末尾ビット0は示されるため選択には進めるが、10進数166からビットを確認する操作には未説明の橋渡しが残る。",
+  "supersedes": null,
+  "recordId": "44e7e0814ba74c98a97a254e27f83002",
+  "questionId": "r06h-q31",
+  "unitId": "unit-16",
+  "worker": "Codex /root/hint_unit16",
+  "claimSha256": "589460bfb0591b967dd1e27a06677b8b2751771f955b8f0ef7a5d282a5c7c89e",
+  "materialSha256": "cf4bc7b2b569cdd87b1bdb6fc872d3cc005b370e24e4594ad114b342f553c764",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:41:20.082172+00:00",
+  "total": 1,
+  "severity": "low"
+}

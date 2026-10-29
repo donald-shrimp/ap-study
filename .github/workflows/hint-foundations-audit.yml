@@ -1,0 +1,51 @@
+name: Hint foundation audit
+on:
+  pull_request:
+    paths:
+      - 'work/ap/hint-foundations/**'
+      - 'docs/hint-foundations-audit.md'
+      - 'tools/hint_foundations_audit.py'
+      - 'tests/hint-foundations-audit.py'
+      - 'data/qualifications/ap/**'
+      - '.github/workflows/hint-foundations-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'work/ap/hint-foundations/**'
+      - 'tools/hint_foundations_audit.py'
+      - 'tests/hint-foundations-audit.py'
+      - 'data/qualifications/ap/**'
+      - 'docs/hint-foundations-audit.md'
+      - '.github/workflows/hint-foundations-audit.yml'
+permissions:
+  contents: read
+concurrency:
+  group: hint-foundation-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test multiworker contracts with synthetic material
+        run: python tests/hint-foundations-audit.py
+      - name: Validate immutable records and export current candidate list
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          python tools/hint_foundations_audit.py check --against "$BASE_SHA"
+          python tools/hint_foundations_audit.py report --output "$RUNNER_TEMP/hint-audit.json"
+          python tools/hint_foundations_audit.py report --markdown --output "$RUNNER_TEMP/hint-audit.md"
+          cat "$RUNNER_TEMP/hint-audit.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hint-foundation-audit
+          path: |
+            ${{ runner.temp }}/hint-audit.json
+            ${{ runner.temp }}/hint-audit.md

@@ -1,0 +1,43 @@
+{
+  "assessment": "candidate",
+  "scores": {
+    "foundation": 1,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "処理開始までの待ち時間と平均処理時間の違いを教えるが、利用率の実体は数値範囲だけで、窓口の稼働割合という意味が薄い。",
+    "prerequisites": "待ち時間の式、ρとTの対応、不等式の両辺操作はH2・H3にあり、ρ≧1−ρから境界を計算できる。",
+    "progression": "H1で問う時間を限定し、H2で条件を式にし、H3で整理へ進む筋は明確。意味の不足を他軸には重ねない。"
+  },
+  "criticalOverride": false,
+  "confidence": "medium",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [
+    {
+      "axis": "foundation",
+      "hintStep": 2,
+      "quote": "ρは利用率（0≦ρ<1）、Tは平均処理時間です。",
+      "missingKnowledge": "利用率が処理装置の稼働している時間の割合を表すこと。",
+      "learnerBlock": "33・50・67・80の比較計算はできても、求めた百分率がシステムの何の割合か理解するには外部知識が要る。",
+      "neededExplanation": "一定時間のうち装置が処理している時間の割合が利用率であると、短い時間例で示す。"
+    }
+  ],
+  "cumulativeReason": "H1で処理時間を含めない待ち時間を区別し、H2でρT/(1−ρ)≧Tを得て、H3でρ≧1−ρまで整理される。選択肢50へ計算は進めるが、利用率50%が処理中の時間半分という基本像は未説明。",
+  "supersedes": null,
+  "recordId": "b866909478b54dd0a68aabee08f8a7e2",
+  "questionId": "r07a-q2",
+  "unitId": "unit-03",
+  "worker": "Codex /root/hint_unit03",
+  "claimSha256": "3f1a23b130d93873ade105e583ab2d1e291347ed80bf7d3a53a611d9a653212d",
+  "materialSha256": "69320fa6c096c70879645b4146ef30502f92de91a72c76f19a565d3590a08a89",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:38:05.141016+00:00",
+  "total": 1,
+  "severity": "low"
+}

@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1が高速な一部データの保存というキャッシュの働きを教え、H2が両方更新と後で書戻しの違いを定義する。",
+    "prerequisites": "H2の更新先・タイミングを各肢に照合でき、H3が読出しミスでも変更済みブロックを追い出せば書戻すと条件を示す。",
+    "progression": "保存先の最新値に注目→二方式の差→読出しでも起こる書戻しという順で例外的なエを処理する。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "cumulativeReason": "H1で主記憶の一部を高速に使うキャッシュと最新値の位置を知る。H2でスルーは毎回両方、バックはキャッシュ先行・後で主記憶と区別。H3で読出しミスの追出しでも書戻しが必要と学び、イを確定できる。未解決点なし。",
+  "support": {
+    "hintStep": 2,
+    "quote": "ライトスルーは書込みのたびにキャッシュと主記憶の両方を更新します。",
+    "enables": "両方への同時書込みなら主記憶も最新になると考え、イをア・ウから区別できる。"
+  },
+  "supersedes": null,
+  "recordId": "b66066f2498d491b9c9b807ede61145e",
+  "questionId": "r03h-q12",
+  "unitId": "unit-06",
+  "worker": "Codex /root/hint_unit06",
+  "claimSha256": "26bf89a35a13be638905fc4cde328553f8ffef81adbb28068632ee47dd006572",
+  "materialSha256": "4010da14abc6cd1913a3d0f988346b2a2a22073ca901dcee4a8a97a1f5ae59ad",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T14:47:17.970511+00:00",
+  "total": 0,
+  "severity": "none"
+}

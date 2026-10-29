@@ -9,7 +9,7 @@ class SourceCorrections(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.temp=tempfile.TemporaryDirectory(prefix='ap-source-correction-contract-');cls.root=Path(cls.temp.name)
-  for folder in [str(quality.WORK),'data/lessons','data/lesson-reviews','data/transcriptions','data/transcription-reviews','data/transcription-context-revisions','content/ap/study-context-reviews']:
+  for folder in [str(quality.WORK),'work/ap/hint-revisions','data/lessons','data/lesson-reviews','data/transcriptions','data/transcription-reviews','data/transcription-context-revisions','content/ap/study-context-reviews']:
    shutil.copytree(ROOT/folder,cls.root/folder)
   for name in ['data/questions.json','data/answer-keys.json','data/sources.json','data/source-crops.json','data/transcription-image-retentions.json','data/transcription-progress.json','content/ap/study-context.json']:
    dest=cls.root/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,dest)
