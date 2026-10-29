@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H1のSQLごとに通信する例と一連の処理を一度に呼ぶ例により、ストアドプロシージャの動作を具体的に捉えられる。H2がサーバ側の連続実行と途中結果送受信の省略を説明する。",
+    "prerequisites": "比較すべき場所がクライアントとDBMS間の往復であると示され、通信量の肢に対応させられる。実行計画・バッファ・I/Oが必ず減るとはいえないこともH3で判別できる。",
+    "progression": "H1で具体的な通信列を比較し、H2で往復削減の理由、H3で効果の範囲を限定する順なので結論を根拠付きで辿れる。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "途中結果を毎回クライアントへ送受信しなくて済みます。",
+    "enables": "複数処理をDBMSで続ければクライアントとの結果往復を省けるため、ネットワーク通信量削減という利点を選べる。"
+  },
+  "cumulativeReason": "H1でSQL1・結果受信を繰り返す通信と一括呼出しを比較する。H2でDBMS側の連続実行が途中の送受信を省くと知る。H3で通信量とDBMS内部の計画・バッファ・ディスクアクセスを区別し、アの利点を根拠付きで選べる。足場の不足は見当たらない。",
+  "supersedes": null,
+  "recordId": "5a7670c077644dcc8e42f5536298798e",
+  "questionId": "r06h-q25",
+  "unitId": "unit-14",
+  "worker": "Codex /root/hint_resume14",
+  "claimSha256": "41d1585c2de8da4499b90ee62538199fd5cef3fe3ee2d4f40febca09e42aa2bc",
+  "materialSha256": "c74ae2a79468a3e7811e02ac8bf815c18ae8a1dccaab9800a1d7ef559a137704",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:35:59.496194+00:00",
+  "total": 0,
+  "severity": "none"
+}

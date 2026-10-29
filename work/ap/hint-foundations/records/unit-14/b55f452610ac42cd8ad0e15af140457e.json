@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "H2がDBMS側の処理をCALLで明示的に呼ぶ仕組みを教え、H3が変更イベントによる自動起動をトリガーと説明するため、二つの起動方式を初めて学べる。",
+    "prerequisites": "誤りを選ぶ条件をH1で確認し、H2の一括実行・通信削減でア〜ウを照合できる。H3の自動起動との違いからエを選ぶ具体的基準が揃う。",
+    "progression": "H1で明示呼出し／更新イベントという比較軸、H2でストアドプロシージャの仕組み、H3でトリガーの意味と誤りの判断が順に加わる。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "ストアドプロシージャはDBMS側に定義された処理を`CALL`などで**明示的に呼び出す**仕組みです。",
+    "enables": "DBMSに登録した処理でも起動は明示呼出しであると分かり、データ変更時に自動起動するエを誤りと判断できる。"
+  },
+  "cumulativeReason": "H1で誤りを選ぶことと起動契機に注目する。H2でCALLによる明示呼出し、複数SQLの一括実行、通信削減を学びア〜ウを確認できる。H3でイベント自動起動はトリガーだと分かりエとの不一致を判断できる。名称を知らなくても累積説明で比較が可能。",
+  "supersedes": null,
+  "recordId": "b55f452610ac42cd8ad0e15af140457e",
+  "questionId": "r05h-q27",
+  "unitId": "unit-14",
+  "worker": "Codex /root/hint_resume14",
+  "claimSha256": "41d1585c2de8da4499b90ee62538199fd5cef3fe3ee2d4f40febca09e42aa2bc",
+  "materialSha256": "a52c4d26566a3a177cc0a60a374b17cc1a077c53d92f497df0f70b1283889f70",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:35:59.841180+00:00",
+  "total": 0,
+  "severity": "none"
+}

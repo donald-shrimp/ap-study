@@ -1,0 +1,39 @@
+{
+  "assessment": "clear",
+  "scores": {
+    "foundation": 0,
+    "prerequisites": 0,
+    "progression": 0
+  },
+  "axisReasons": {
+    "foundation": "設問の3工程同時実行をH1で1件の所要時間と完了間隔に分け、H2で最長段が出力間隔を制約する仕組みを学べる。",
+    "prerequisites": "H2は40・30・50の最大50を使うこと、H3は1分の60000ミリ秒への換算と除算を示す。四則計算で選択肢1200に対応できる。",
+    "progression": "H1の同時実行と時間の区別から、H2の制約段、H3の件数換算へ進み、各段に新たな情報がある。"
+  },
+  "criticalOverride": false,
+  "confidence": "high",
+  "reviewed": {
+    "question": true,
+    "choices": true,
+    "allHints": true
+  },
+  "evidence": [],
+  "support": {
+    "hintStep": 2,
+    "quote": "全段が動き始めた後の出力間隔は、最も長くかかる段より短くできません。",
+    "enables": "各データの全工程120ミリ秒を足すのでなく、最も遅い書込み50ミリ秒ごとの出力として60000÷50を計算できる。"
+  },
+  "cumulativeReason": "H1で異なるデータの工程が重なることと完了間隔を区別する。H2でパイプラインという名称と最長段50ミリ秒による制約を学ぶ。H3で定常状態の換算と計算結果1200を確かめ、ア500・イ666・ウ750との差を説明できる。不足の追加提案なし。",
+  "supersedes": null,
+  "recordId": "019e1233131c490a8e2c0980b71b0a2a",
+  "questionId": "r03a-q15",
+  "unitId": "unit-11",
+  "worker": "Codex /root/hint_resume11",
+  "claimSha256": "af08752e4980840513fb7f43f746188471330d298acb2c6e153ee3b11bbbe9fb",
+  "materialSha256": "77ba49210e53e2a01c325e4e5a3b8423669147c97969348c0e1532f82f558661",
+  "questionVersion": 3,
+  "rubricVersion": 1,
+  "createdAt": "2026-10-29T17:35:37.915000+00:00",
+  "total": 0,
+  "severity": "none"
+}
