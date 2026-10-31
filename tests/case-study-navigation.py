@@ -35,6 +35,8 @@ def complete(pg,c):
   for f in item['fields']:
    field=pg.locator(f'.written-field[data-written-key="{item["id"]}--{f["id"]}"]')
    field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for()
+   expected='result-correct' if '自動判定：正解' in field.locator('.written-field-status').inner_text() else 'result-neutral'
+   assert expected in field.locator('.written-answer').get_attribute('class'),(f['id'],expected)
    if field.locator('[data-action=written-rate]').count():field.locator('[data-action=written-rate][data-outcome=meets]').click()
  pg.locator('[data-action=written-next]').wait_for()
 def pack(pg,pack_id):
