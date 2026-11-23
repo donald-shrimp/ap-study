@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"tests"))
-from browser_storage import nav,state,write_state,open_data_management,open_answer_history
+from browser_storage import nav,state,write_state,open_data_management,open_answer_history,open_offline
 ROOT=Path(__file__).resolve().parents[4];W=ROOT/'work/ap/objective-quality';ART=Path(tempfile.mkdtemp(prefix='hitomon-ap-quality-'))
 read=lambda p:json.loads(p.read_text());ids=['r06a-q17','r04a-q18','r05h-q78','r04a-q78','r06a-q49','r05h-q73','r07h-q80','r03a-q79'];m=read(ROOT/'data/qualifications/ap/manifest.json')
 bank=[q for pack in m['packs'] for q in read(ROOT/'data/qualifications/ap'/pack['url'])];by={q['id']:q for q in bank};qs=[by[id] for id in ids]
@@ -24,7 +24,7 @@ try:
   b=p.chromium.launch(**opts);ctx=b.new_context(viewport={'width':390,'height':900});pg=ctx.new_page();pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(BASE+'ap/?part=objective&entry=home');pg.locator('.quick-start').wait_for()
   nav(pg,'materials');pg.locator('[name=query]').fill(by['r05h-q78']['title']);assert pg.locator('[data-action=start][data-id="r05h-q78"]').count()==0
   pg.locator('#settings-button').click();assert pg.locator('#exclude-outdated').is_checked();pg.locator('#exclude-outdated').uncheck();state(pg);pg.get_by_role('button',name='設定を閉じる').click();nav(pg,'home')
-  pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=none]').click()
+  pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');open_offline(pg, choose=True)
   for pack in {by[id]['packId'] for id in ids+['r07h-q4','r03h-q2','r05a-q1']}:pg.locator(f'[data-offline-group="pack-{pack}-objective"]').check()
   pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   def open_q(q):
