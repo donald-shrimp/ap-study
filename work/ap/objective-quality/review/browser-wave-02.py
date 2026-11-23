@@ -50,6 +50,7 @@ try:
    pg.get_by_role('radio').nth(q['answer']).check();state(pg);pg.reload();pg.locator('.hint-box').first.wait_for();assert pg.locator('.hint-box').count()==count;assert pg.get_by_role('radio').nth(q['answer']).is_checked();a=submit(q);assert a['status']=='revealed' and a['hintsBeforeAnswer']==count
   # Later hints preserve a result obtained without help.
   q=by['r07h-q4'];open_q(q);a=submit(q);assert a['status']=='correct'
+  pg.locator('.result-hints > summary').click()
   for _ in q['hints']:pg.locator('[data-action=hint]').click()
   s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and all(e['phase']=='after' for e in a['hintEvents'])
   ctx.set_offline(False);open_data_management(pg)

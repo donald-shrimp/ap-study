@@ -77,6 +77,7 @@ try:
   nav(pg,'materials');pg.locator('[name=query]').fill('問14');pg.locator('[data-action=start][data-id="fp2-202605-objective-q14"]').click();pg.locator('.choices').wait_for();s=state(pg);current=next(a for a in s['attempts'] if a['id']==s['currentId']);assert current['questionVersion']==questions[13]['version'] and current['materialSnapshot']['explanation']==questions[13]['explanation']
   # Reading answer-containing hints after grading preserves independent success.
   nav(pg,'materials');pg.locator('[name=query]').fill('問1');pg.locator('[data-action=start][data-id="fp2-202605-objective-q01"]').click();pg.locator('.choices').wait_for();q=questions[0];index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId']);pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click();pg.locator('#result').wait_for()
+  pg.locator('.result-hints > summary').click()
   for h in q['hints']:pg.locator('[data-action=hint]').click()
   s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and not a['answerViewedBefore'] and all(e['phase']=='after' for e in a['hintEvents'])
   assert not errors,errors;b.close()
