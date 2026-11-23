@@ -5,7 +5,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright,expect
-from browser_storage import open_written_case,wait_for_async,open_data_management
+from browser_storage import fill_written_field,open_written_case,wait_for_async,open_data_management
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-case-batch-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -24,8 +24,7 @@ def enter(pg,item):
  for f in item['fields']:
   el=field(pg,item['id']+'--'+f['id'])
   if el.locator('[data-action=written-submit]').count()==0:continue
-  if f['type']=='singleChoice':el.locator(f'input[value="{next(c["id"] for c in f["choices"] if c["label"]==f["referenceAnswers"][0])}"]').check()
-  else:el.locator('textarea,input[type=text]').fill(f['referenceAnswers'][0])
+  fill_written_field(el,f)
 def shot(pg,name):
  for width in [320,390,1440]:
   pg.set_viewport_size({'width':width,'height':1000});assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1')

@@ -12,7 +12,7 @@ def prepare(root,draft=False,cases_only=False):
         elif part['id']=='kinzai-personal':part['label']='合成実技B'
     source=root/'sources/fp2';source.mkdir(parents=True);hashes={}
     for kind in ['question','answer']:
-        path=source/f'synthetic-{kind}.pdf';path.write_bytes(('%PDF-1.4\nSynthetic '+kind+' for contract tests only.\n%%EOF\n').encode());hashes[str(path.relative_to(root))]=hashlib.sha256(path.read_bytes()).hexdigest()
+        path=source/f'synthetic-{kind}.pdf';path.write_bytes(('%PDF-1.4\nSynthetic '+kind+' for contract tests only.\n%%EOF\n').encode());hashes[path.relative_to(root).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
     record={'publisher':'合成テスト','publishedAt':'2026-05-01','legalAsOf':'2026-04-01','questionUrl':'https://example.com/question.pdf','questionSha256':hashes['sources/fp2/synthetic-question.pdf'],'answerUrl':'https://example.com/answer.pdf','answerSha256':hashes['sources/fp2/synthetic-answer.pdf'],'modifiedFromOriginal':False,'modificationNote':''}
     legal={'status':'unverified','checkedAt':None,'sourceRefs':[],'note':''}
     normal={'id':'synthetic-objective','version':1,'examPartId':'objective','topicId':'financial-assets','title':'合成の選択問題','stem':'2となる式を選ぶ。','choices':[{'id':'a','label':'ア','text':'1＋1'},{'id':'b','label':'イ','text':'1＋2'}],'correctChoiceId':'a','explanation':'形式検査用の合成解説。','choiceReasons':['1＋1は2。','1＋2は3。'],'enrichment':'draft' if draft else 'reviewed','sourceRecord':record,'legalReview':legal,'sourceKind':'authored'}
@@ -21,7 +21,7 @@ def prepare(root,draft=False,cases_only=False):
     booleans=[{'id':'b'+str(n),'label':'判定'+str(n),'type':'singleChoice','choices':[{'id':'true','label':'○','text':'正しい'},{'id':'false','label':'×','text':'誤り'}],'grading':{'method':'exactText'},'referenceAnswers':['○'],'explanation':'合成の判定欄。','rubric':['登録した判定。']} for n in range(4)]
     cases=[case('synthetic-a','jafp-practical',booleans+[numeric('amount','1490000'),numeric('ratio','0.435','倍',3)]),case('synthetic-b','kinzai-personal',[numeric('amount','7')])]
     asset=root/'assets/written/fp2-fixture/figure.png';asset.parent.mkdir(parents=True);asset.write_bytes(base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j4p8AAAAASUVORK5CYII='))
-    cases[0]['bodyFigures']=[{'image':str(asset.relative_to(root)),'anchor':'[fig]','alt':'合成図','caption':'合成図'}]
+    cases[0]['bodyFigures']=[{'image':asset.relative_to(root).as_posix(),'anchor':'[fig]','alt':'合成図','caption':'合成図'}]
     cases[0]['legalReview']={'status':'current','checkedAt':'2026-10-24','sourceRefs':['https://example.com/law'],'note':'合成テストの確認記録。'}
     reviews=[]
     for c in cases:
