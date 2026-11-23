@@ -25,6 +25,10 @@ BOOT='''async scenario=>{
  window.control=await initAccountControls({qualificationId:'ap',getStore:()=>study,getWorkspaceStore:()=>workspace,getLearningStore:()=>workspace,getCardStore:()=>workspace,getPersonalStore:()=>workspace,getWrittenStore:()=>workspace,switchOwner:async next=>{owner=next;},importGuest:async()=>{},validateAttempt:()=>{},onRecords:()=>{}});
  await window.control.ready;
 }'''
+def retry(pg):
+ pg.evaluate('''async()=>{const sync=await import('/src/ui/sync-status.js');sync.setSyncStatus('study','error',new Error('synthetic retry'));}''')
+ pg.locator('#sync-now').click()
+
 try:
  with sync_playwright() as p:
   opts={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
@@ -38,12 +42,12 @@ try:
     assert pg.evaluate('messages.some(s=>s.includes("ログアウトできませんでした"))');assert all(c['uid']=='a' for c in pg.evaluate('calls'))
     if scenario=='late':
      before=pg.evaluate('merges');pg.evaluate('releaseOld()');pg.wait_for_timeout(30);assert pg.evaluate('merges')==before
-    pg.locator('#sync-now').click();pg.wait_for_function('calls.length>=18')
+    retry(pg);pg.wait_for_function('calls.length>=18')
     for scope in ['study','resourcesV2','learning','cards','personal','writtenV2']:assert pg.evaluate('(s)=>calls.filter(c=>c.scope===s).length',scope)>=3
    elif scenario=='success':
     pg.wait_for_function('!document.getElementById("google-login").hidden&&!document.getElementById("google-login").disabled');assert pg.evaluate('control.owner()') is None;assert pg.evaluate('calls.length')==6
    else:
-    pg.wait_for_function('control.owner()==="uid:b"&&!document.getElementById("google-logout").disabled');pg.locator('#sync-now').click();pg.wait_for_function('calls.filter(c=>c.uid==="b").length>=12');assert pg.evaluate('calls.filter(c=>c.uid==="a").length')==6
+    pg.wait_for_function('control.owner()==="uid:b"&&!document.getElementById("google-logout").disabled');retry(pg);pg.wait_for_function('calls.filter(c=>c.uid==="b").length>=12');assert pg.evaluate('calls.filter(c=>c.uid==="a").length')==6
    assert not errors,errors;ctx.close()
   b.close()
 finally:server.shutdown()

@@ -1,4 +1,5 @@
 """All September 2024 FP material through the full app, locally or on Pages."""
+from browser_storage import open_offline
 import json,os,shutil,sys,tempfile,threading
 from pathlib import Path
 from functools import partial
@@ -48,12 +49,12 @@ try:
   pg.locator('#settings-button').click();pg.locator('#exclude-outdated').uncheck();pg.get_by_role('button',name='設定を閉じる').click()
   assert state(pg)['settings']['excludeOutdated'] is False
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for()
+  open_offline(pg);pg.locator('[data-offline-save]').wait_for()
   pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click()
   pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000)
   pg.locator('[data-offline-close]').click()
   select_target(pg,'jafp-practical','fp2');pg.locator('.study-entry').wait_for()
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for()
+  open_offline(pg);pg.locator('[data-offline-save]').wait_for()
   pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click()
   pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click()
   select_target(pg,'objective','fp2');pg.locator('.quick-start').wait_for()

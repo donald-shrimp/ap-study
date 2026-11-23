@@ -18,7 +18,7 @@ with sync_playwright() as p:
  assert pg.locator('.study-entrance').count()==3
  assert pg.locator('.home-shortcuts [data-view=review]').count()==1
  pg.locator('.home-shortcuts [data-view=review]').click();assert pg.get_by_role('heading',name='解き直し',exact=True).is_visible()
- pg.get_by_role('button',name='⌂ ホーム',exact=True).click();nav(pg,'history');assert pg.locator('.overall-rate').inner_text()=='未確認'
+ pg.get_by_role('button',name='⌂ ホーム',exact=True).click();nav(pg,'history');assert pg.get_by_role('button',name='1問解く').is_visible();assert pg.locator('.overall-rate,.growth-trend,.field-records,.motivation-panel,.answer-history').count()==0
  seeded=pg.evaluate('''async ids=>{
   const root=new URL('.',document.baseURI),{loadCatalog}=await import(new URL('src/content/catalog.js',root)),catalog=await loadCatalog('ap');
   const {makeState,createAttempt,openHint,selectAnswer,finalizeAttempt}=await import(new URL('src/domain/study.js',root)),s=makeState(),at=new Date().toISOString();
@@ -57,9 +57,9 @@ with sync_playwright() as p:
  target.click();pg.get_by_role('button',name='回答する',exact=True).wait_for();assert current(pg)['id']==a['id'] and current(pg)['hintCount']==1 and current(pg)['selected']==0
  pg.get_by_role('button',name='中断',exact=True).click();nav(pg,'topics');pg.locator('[data-action=paper-mode][data-mode=paperless]').click();pg.locator('[data-mode=paperless][aria-pressed=true]').wait_for()
  target=pg.locator('#field-network [data-action=field-practice]');assert not target.get_attribute('data-resume-id');target.click();pg.get_by_role('button',name='回答する',exact=True).wait_for();assert current(pg)['entryMode']=='paperless';assert current(pg)['id']!=a['id'];pg.get_by_role('button',name='中断',exact=True).click()
- nav(pg,'history');pg.locator('[data-action=field-mode][data-mode=diagnostic]').click();assert '完了した診断はありません' in pg.locator('#main').inner_text()
+ nav(pg,'history');assert pg.locator('.record-assessments [data-view=diagnostics]').count()==0
  nav(pg,'topics');assert pg.locator('[data-action=field-mode]').count()==0;assert '自力正解 1 / 2問' in pg.locator('#field-database').inner_text()
- nav(pg,'history');assert pg.locator('[data-action=field-mode][data-mode=learning]').get_attribute('aria-pressed')=='true'
+ nav(pg,'history');assert pg.locator('#record-field-database').is_visible()
  pg.locator('#record-field-database [data-action=field-review]').click();assert pg.get_by_role('heading',name='データベースの解き直し',exact=True).is_visible()
  assert pg.locator('[data-action=review-start]').count()==1
  pg.locator('[data-action=review-start]').first.click();pg.get_by_role('button',name='回答する',exact=True).wait_for();assert state(pg)['session']['intent']=='review' and state(pg)['session']['topicId']=='database'

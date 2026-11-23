@@ -1,5 +1,7 @@
-from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real Auth/Firestore Emulator: plans and diagnostic runs across two browsers."""
+from browser_storage import open_plan_conditions
+from browser_storage import assessment_action
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json, shutil, uuid
 from playwright.sync_api import sync_playwright
 from browser_storage import wait_for_async
@@ -12,7 +14,7 @@ def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()
 def close(page):
  if page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.get_by_role('button',name='設定を閉じる').click()
-def kick(page):settings(page);page.locator('#sync-now').click();close(page)
+def kick(page):settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");close(page)
 def synced(page):
  kick(page)
  try:wait_for_async(page,'async()=>!(await ('+READ+')()).some(r=>r.dirty||r.conflict)')
@@ -26,10 +28,10 @@ def login(page,email):
  else:popup.get_by_text('Add new account').click();popup.locator('#email-input').fill(email);popup.locator('#display-name-input').fill('Plan test');popup.get_by_role('button',name='Sign in with Google.com',exact=True).click()
  page.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+') && !document.getElementById("google-logout").disabled');synced(page)
 def plan_view(page):
- page.locator('.sidebar [data-view=home]').click();page.get_by_role('button',name='計画を見る' if page.get_by_role('button',name='計画を見る',exact=True).count() else '計画を登録',exact=True).click()
+ page.locator('.sidebar [data-view=history]').click();page.locator('#main [data-view=planning]').click()
  open_plan_editor(page);open_plan_ai(page)
 def set_date(page,date):
- page.locator('[name=exam-objective]').fill(date);page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
+ page.locator('[name=exam-objective]').fill(date);page.get_by_role('button',name='受験日・条件を保存',exact=True).click();page.get_by_text('受験日・条件を保存しました。',exact=True).wait_for()
 
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);contexts=[b.new_context(viewport={'width':390,'height':844}) for _ in range(3)];pages=[c.new_page() for c in contexts];a,c,other=pages;errors=[]
@@ -51,14 +53,14 @@ with sync_playwright() as p:
  open_plan_ai(a);a.locator('#plan-json').fill(json.dumps(example));a.get_by_role('button',name='検証してプレビュー',exact=True).click();a.get_by_role('button',name='この内容で登録',exact=True).click();a.get_by_text('受験日と計画を登録しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.weeklyTargets?.length===2)')
  c.get_by_role('heading',name=example['phases'][0]['name'],exact=True).first.wait_for();assert not c.locator('#planning-stale').is_visible();assert c.locator('#plan-overview .context-list').text_content().find(example['context']['rationale'])>=0
  # A real draft survives remote changes; an untouched page refreshes by itself.
- c.locator('.summary-preview').evaluate('(details)=>details.open=true');context_form=c.locator('#context-form');context_form.evaluate('(f)=>f.parentElement.open=true');context_form.locator('[name=rationale]').fill('まだ保存していないスマホ側の前提')
- form=a.locator('#context-form');form.evaluate('(f)=>f.parentElement.open=true');form.locator('[name=rationale]').fill('PCで更新した計画の前提');form.get_by_role('button',name='前提を保存',exact=True).click();a.get_by_text('計画の前提を保存しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.context?.rationale==="PCで更新した計画の前提")');c.locator('#planning-stale').wait_for(state='visible');assert context_form.locator('[name=rationale]').input_value()=='まだ保存していないスマホ側の前提';assert 'PCで更新した計画の前提' in c.locator('.summary-preview').inner_text()
+ c.locator('.summary-preview').evaluate('(details)=>details.open=true');context_form=open_plan_conditions(c);context_form.locator('[name=rationale]').fill('まだ保存していないスマホ側の前提')
+ form=open_plan_conditions(a);form.locator('[name=rationale]').fill('PCで更新した計画の前提');form.get_by_role('button',name='受験日・条件を保存',exact=True).click();a.get_by_text('受験日・条件を保存しました。',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.payload.context?.rationale==="PCで更新した計画の前提")');c.locator('#planning-stale').wait_for(state='visible');assert context_form.locator('[name=rationale]').input_value()=='まだ保存していないスマホ側の前提';assert 'PCで更新した計画の前提' in c.locator('.summary-preview').inner_text()
  # Rerendering a stale manual draft must preserve its old revision, not allow overwrite.
- c.get_by_role('button',name='AIに相談・JSONを登録',exact=True).click();assert c.locator('#context-form [name=rationale]').input_value()=='まだ保存していないスマホ側の前提';c.locator('#context-form').get_by_role('button',name='前提を保存',exact=True).click();c.get_by_text('別タブで更新されました。画面を開き直してから編集してください。',exact=True).wait_for();assert next(r for r in c.evaluate(READ) if r['id']=='planning')['payload']['context']['rationale']=='PCで更新した計画の前提'
- c.locator('#plan-json').fill('{"unsaved":"JSONを含めて破棄する"}');c.get_by_role('button',name='入力を破棄して最新版を表示',exact=True).click();assert c.locator('#plan-json').input_value()=='';assert c.locator('#context-form [name=rationale]').input_value()=='PCで更新した計画の前提'
- context_form=c.locator('#context-form');context_form.evaluate('(f)=>f.parentElement.open=true');context_form.locator('[name=rationale]').fill('別端末で見直した計画の前提');context_form.get_by_role('button',name='前提を保存',exact=True).click();c.get_by_text('計画の前提を保存しました。',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.payload.context?.rationale==="別端末で見直した計画の前提")');c.locator('.phase-targets > summary').click();c.get_by_role('button',name='完了にする',exact=True).click();c.get_by_text('予定の完了状態を保存しました。',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.milestones?.[0]?.completed===true)')
- a.get_by_role('button',name='ホーム',exact=True).click();a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='30問の診断をはじめる',exact=True).click();a.locator('[name=diagnostic-answer]').first.wait_for();a.locator('[name=diagnostic-answer]').first.check();a.get_by_role('button',name='回答して次へ',exact=True).click();a.get_by_text('診断 2 / 30問',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.kind==="diagnostic")');c.locator('.sidebar [data-view=home]').click();c.locator('.home-assessments [data-action=resume-diagnostic]').click();c.get_by_text('診断 2 / 30問',exact=True).wait_for();assert c.locator('.hint-section,.result').count()==0
- c.locator('[name=diagnostic-answer]').first.check();c.get_by_role('button',name='回答して次へ',exact=True).click();c.get_by_text('診断 3 / 30問',exact=True).wait_for();c.on('dialog',lambda d:d.accept());c.get_by_role('button',name='ここまでで診断終了',exact=True).click();c.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.kind==="diagnostic"&&r.payload.status==="ended_early")');assert a.get_by_role('heading',name='診断結果（部分結果）',exact=True).is_visible()
+ c.get_by_role('button',name='AIに相談・JSONを登録',exact=True).click();assert c.locator('#exam-form [name=rationale]').input_value()=='まだ保存していないスマホ側の前提';c.locator('#exam-form').get_by_role('button',name='受験日・条件を保存',exact=True).click();c.get_by_text('別タブで更新されました。画面を開き直してから編集してください。',exact=True).wait_for();assert next(r for r in c.evaluate(READ) if r['id']=='planning')['payload']['context']['rationale']=='PCで更新した計画の前提'
+ c.locator('#plan-json').fill('{"unsaved":"JSONを含めて破棄する"}');c.get_by_role('button',name='入力を破棄して最新版を表示',exact=True).click();assert c.locator('#plan-json').input_value()=='';assert c.locator('#exam-form [name=rationale]').input_value()=='PCで更新した計画の前提'
+ context_form=open_plan_conditions(c);context_form.locator('[name=rationale]').fill('別端末で見直した計画の前提');context_form.get_by_role('button',name='受験日・条件を保存',exact=True).click();c.get_by_text('受験日・条件を保存しました。',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.payload.context?.rationale==="別端末で見直した計画の前提")');c.locator('.phase-targets > summary').click();c.get_by_role('button',name='完了にする',exact=True).click();c.get_by_text('予定の完了状態を保存しました。',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.payload.phases?.[0]?.milestones?.[0]?.completed===true)')
+ a.get_by_role('button',name='ホーム',exact=True).click();a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='30問の診断をはじめる',exact=True).click();a.locator('[name=diagnostic-answer]').first.wait_for();a.locator('[name=diagnostic-answer]').first.check();a.get_by_role('button',name='回答して次へ',exact=True).click();a.get_by_text('診断 2 / 30問',exact=True).wait_for();synced(a);kick(c);wait_for_async(c,'async()=>(await ('+READ+')()).some(r=>r.kind==="diagnostic")');c.locator('.sidebar [data-view=home]').click();c.locator('.home-assessments [data-view=diagnostics]').click();c.locator('[data-action=resume-diagnostic]').first.click();c.get_by_text('診断 2 / 30問',exact=True).wait_for();assert c.locator('.hint-section,.result').count()==0
+ c.locator('[name=diagnostic-answer]').first.check();c.get_by_role('button',name='回答して次へ',exact=True).click();c.get_by_text('診断 3 / 30問',exact=True).wait_for();c.on('dialog',lambda d:d.accept());assessment_action(c, 'end-diagnostic');c.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(c);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).some(r=>r.kind==="diagnostic"&&r.payload.status==="ended_early")');assert a.get_by_role('heading',name='診断結果（部分結果）',exact=True).is_visible()
  assert len([r for r in a.evaluate(READ) if r['kind']=='diagnostic'])==1
  login(other,'planning-other-'+uuid.uuid4().hex+'@hitomon.test');assert not other.evaluate(READ), 'other UID received plans/diagnostics'
  assert not errors,errors;b.close()

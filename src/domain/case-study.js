@@ -1,4 +1,7 @@
-import {decimalValue,validNumericField,numericInstruction} from './decimal-answer.js';
+import {formatAnswerSet} from './case-answer-set.js';
+import {canSubmitCaseField,evaluateCaseField,validCaseField,validCaseFieldResponse} from './case-field.js';
+import {caseFeedback} from './case-feedback.js';
+import {numericInstruction} from './decimal-answer.js';
 import {validateLegalContext,legalAIPrompt} from './legal-context.js';
 // A case is one learning record with several responses. Completion requires
 // every field to be submitted and assessed; unsure is an explicit self rating.
@@ -6,13 +9,8 @@ export const SELF_OUTCOMES=Object.freeze({meets:'要点を満たした',partial:
 const copy=v=>structuredClone(v),stamp=()=>new Date().toISOString();
 export const fieldKey=(item,field)=>item.id+'--'+field.id;
 export const caseFields=c=>c.items.flatMap(item=>item.fields.map(field=>({item,field,key:fieldKey(item,field)})));
-const normalize=s=>s.normalize('NFKC').trim();
-export function evaluateCaseField(field,response){
- const value=field.type==='singleChoice'?field.choices.find(c=>c.id===response.value)?.label||'':normalize(response.value);
- if(field.type==='numeric'){const n=decimalValue(response.value);return n===null?null:field.referenceAnswers.some(v=>decimalValue(v)===n)?'correct':'incorrect';}
- const correct=field.referenceAnswers.some(v=>normalize(v)===value);
- return field.type==='singleChoice'||field.grading.method==='exactText'&&correct?(correct?'correct':'incorrect'):null;
-}
+export {canSubmitCaseField,evaluateCaseField} from './case-field.js';
+
 export function createCaseRun(c,{mode='learning',at=stamp(),id='case--'+crypto.randomUUID()}={}){
  if(!['learning','exam'].includes(mode)||c.status!=='reviewed')throw Error('確認済みの大問を指定してください。');
  return {format:'hitomon-learning-record',version:2,kind:'case',id,qualificationId:c.qualificationId,examPartId:c.examPartId,caseId:c.id,caseVersion:c.version,material:copy(c),mode,responses:{},evaluations:{},assistance:{firstAnswerViewedAt:null,viewedFields:[]},progress:{status:'in_progress',currentItemId:c.items[0].id,bodyScroll:0,questionScroll:0,pane:'questions',submittedFieldKeys:[]},startedAt:at,updatedAt:at,completedAt:null};
@@ -24,29 +22,32 @@ export function updateCaseStatus(run,at=stamp()){
 }
 export function setCaseResponse(run,key,value,at=stamp()){
  const slot=caseFields(run.material).find(x=>x.key===key);if(!slot||run.responses[key]?.submittedAt||run.progress.status==='completed')throw Error('確定した回答は変更できません。新しく解き直してください。');
- if(typeof value!=='string'||(slot.field.type==='singleChoice'?!slot.field.choices.some(c=>c.id===value):[...value].length>(slot.field.maxLength||2000)))throw Error('回答の形式・字数を確認してください。');
+ if(!validCaseFieldResponse(slot.field,value))throw Error('回答の形式・字数を確認してください。');
  run.responses[key]={value,submittedAt:null,answerViewedBefore:false};run.updatedAt=at;
 }
 export function submitCaseField(run,key,at=stamp(),{skip=false}={}){
  if(skip){if(run.responses[key]?.submittedAt)throw Error('確定した回答は変更できません。');run.responses[key]={value:'',submittedAt:null,answerViewedBefore:false,skipped:true};}
- const slot=caseFields(run.material).find(x=>x.key===key),response=run.responses[key];if(!slot||!response||!response.value.trim()&&!response.skipped||response.submittedAt)throw Error('回答を入力してください。');
+ const slot=caseFields(run.material).find(x=>x.key===key),response=run.responses[key];if(!slot||!response||!response.skipped&&!canSubmitCaseField(slot.field,response.value)||response.submittedAt)throw Error('回答を入力してください。');
  response.submittedAt=at;run.progress.submittedFieldKeys.push(key);response.answerViewedBefore=!!run.assistance.firstAnswerViewedAt;
  const outcome=evaluateCaseField(slot.field,response);
  if(outcome)run.evaluations[key]={source:'automatic',outcome,at,assisted:response.answerViewedBefore};
  updateCaseStatus(run,at);return response;
 }
 export function mayViewAnswer(run,key){return !!run.responses[key]?.submittedAt&&(run.mode==='learning'||caseFields(run.material).every(x=>run.responses[x.key]?.submittedAt)||run.progress.status==='partially_completed');}
+export function mayViewCaseExplanation(run){
+ return run?.progress.status==='completed'&&caseFields(run.material).every(({key})=>run.assistance.viewedFields.includes(key));
+}
 export function viewCaseAnswer(run,key,at=stamp()){
  if(!mayViewAnswer(run,key))throw Error('先に回答を確定してください。');
  if(!run.assistance.viewedFields.includes(key)){run.assistance.viewedFields.push(key);run.assistance.firstAnswerViewedAt??=at;run.updatedAt=at;}
 }
-export function checkCaseItem(run,itemId,at=stamp()){
+export function checkCaseItem(run,itemId,at=stamp(),{reveal=true}={}){
  const item=run.material.items.find(i=>i.id===itemId);if(!item)throw Error('小問が見つかりません。');
  const slots=caseFields(run.material).filter(s=>s.item.id===itemId);
  // Lock every entered answer before revealing any answer in this group.
  // Empty fields remain editable; later answers retain the assistance flag.
- for(const {key} of slots)if(!run.responses[key]?.submittedAt&&run.responses[key]?.value.trim())submitCaseField(run,key,at);
- for(const {key} of slots)if(mayViewAnswer(run,key))viewCaseAnswer(run,key,at);
+ for(const {key,field} of slots)if(!run.responses[key]?.submittedAt&&canSubmitCaseField(field,run.responses[key]?.value))submitCaseField(run,key,at);
+ if(reveal)for(const {key} of slots)if(mayViewAnswer(run,key))viewCaseAnswer(run,key,at);
 }
 export function rateCaseField(run,key,outcome,at=stamp()){
  if(!Object.hasOwn(SELF_OUTCOMES,outcome)||!mayViewAnswer(run,key)||!run.assistance.viewedFields.includes(key)||run.evaluations[key])throw Error('解答例を確認してから自己評価してください。');
@@ -70,7 +71,11 @@ export function validateCaseFigures(material){
 export function validateCaseMaterial(c,q){
  const fail=()=>{throw Error('大問教材の形式を確認できません。');},safeId=v=>typeof v==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(v),text=(v,max=20000)=>typeof v==='string'&&v.length<=max,asset=v=>text(v,500)&&/^assets\/written\/[a-zA-Z0-9_/-]+\.png$/.test(v)&&!v.split('/').includes('..');
  if(!c||!safeId(c.id)||c.qualificationId!==q.id||!q.examParts.some(p=>p.id===c.examPartId&&p.unit==='cases')||!Number.isInteger(c.version)||c.version<1||c.status!=='reviewed'||!text(c.title,200)||!text(c.body,200000)||!Array.isArray(c.sourceImages)||c.sourceImages.length>30||!c.sourceImages.every(asset)||!Array.isArray(c.bodyFigures)||c.bodyFigures.length>30||c.bodyFigures.some(f=>!asset(f.image)||!text(f.anchor,500)||!text(f.alt,1000)||!text(f.caption,1000))||!Array.isArray(c.items)||!c.items.length||c.items.length>30||new Set(c.items.map(i=>i.id)).size!==c.items.length)fail();
- for(const i of c.items){if(!safeId(i.id)||!text(i.prompt)||!text(i.label,100)||!Array.isArray(i.fields)||!i.fields.length||i.fields.length>20||new Set(i.fields.map(f=>f.id)).size!==i.fields.length)fail();for(const f of i.fields){if(!safeId(f.id)||!text(f.label,100)||!['singleChoice','shortText','freeText','numeric'].includes(f.type)||!Array.isArray(f.referenceAnswers)||!f.referenceAnswers.length||f.referenceAnswers.length>20||!f.referenceAnswers.every(a=>text(a,2000))||!text(f.explanation)||!Array.isArray(f.rubric)||f.rubric.length>20||!f.rubric.every(v=>text(v,2000))||!['exactText','self','exactDecimal'].includes(f.grading?.method)||f.type!=='numeric'&&f.grading.method==='exactDecimal'||f.type==='freeText'&&f.grading.method!=='self')fail();if(f.type==='numeric'){if(!validNumericField(f))fail();}else if(f.type==='singleChoice'){if(!Array.isArray(f.choices)||f.choices.length<2||f.choices.length>20||new Set(f.choices.map(a=>a.id)).size!==f.choices.length||f.choices.some(a=>!safeId(a.id)||!text(a.label,50)||!text(a.text))||f.referenceAnswers.length!==1||!f.choices.some(a=>a.label===f.referenceAnswers[0])||f.grading.method!=='exactText')fail();}else if(!Number.isInteger(f.maxLength)||f.maxLength<1||f.maxLength>2000||f.referenceAnswers.some(a=>[...a].length>f.maxLength))fail();}}
+ for(const item of c.items){
+  if(!safeId(item.id)||!text(item.prompt)||!text(item.label,100)||!Array.isArray(item.fields)||!item.fields.length||item.fields.length>20||!item.fields.every(validCaseField))fail();
+  const ids=item.fields.flatMap(field=>field.answerSet?.sourceFieldIds??[field.id]);
+  if(new Set(ids).size!==ids.length)fail();
+ }
  validateCaseFigures(c);validateLegalContext(c,{required:q.requiresLegalContext===true});return c;
 }
 export function validateCaseRun(run,qualification){
@@ -79,12 +84,15 @@ export function validateCaseRun(run,qualification){
  validateCaseMaterial(run.material,qualification);
  const slots=caseFields(run.material);if(slots.length>20||new Set(slots.map(x=>x.key)).size!==slots.length)fail();const known=new Map(slots.map(x=>[x.key,x.field]));if(!Array.isArray(run.progress.submittedFieldKeys)||new Set(run.progress.submittedFieldKeys).size!==run.progress.submittedFieldKeys.length||run.progress.submittedFieldKeys.length!==Object.values(run.responses).filter(r=>r.submittedAt).length||run.progress.submittedFieldKeys.some(k=>!known.has(k)||!run.responses[k]?.submittedAt))fail();if(new Set(run.assistance.viewedFields).size!==run.assistance.viewedFields.length||run.assistance.viewedFields.some(k=>!known.has(k)))fail();
  const date=v=>typeof v==='string'&&/^\d{4}-\d\d-\d\dT.*Z$/.test(v)&&Number.isFinite(Date.parse(v));if(!date(run.startedAt)||!date(run.updatedAt)||Date.parse(run.updatedAt)<Date.parse(run.startedAt)||run.completedAt!==null&&!date(run.completedAt)||run.assistance.firstAnswerViewedAt!==null&&!date(run.assistance.firstAnswerViewedAt))fail();
- for(const [key,r] of Object.entries(run.responses)){const f=known.get(key);if(!f||Object.keys(r).some(k=>!['value','submittedAt','answerViewedBefore','skipped'].includes(k))||typeof r.answerViewedBefore!=='boolean'||typeof r.value!=='string'||r.skipped!==undefined&&r.skipped!==true||r.skipped&&(!r.submittedAt||r.value!=='')||(!r.skipped&&(f.type==='singleChoice'?!f.choices.some(c=>c.id===r.value):[...r.value].length>(f.maxLength||2000)))||r.submittedAt!==null&&(!date(r.submittedAt)||!r.value.trim()&&!r.skipped))fail();}
+ for(const [key,r] of Object.entries(run.responses)){const f=known.get(key);if(!f||Object.keys(r).some(k=>!['value','submittedAt','answerViewedBefore','skipped'].includes(k))||typeof r.answerViewedBefore!=='boolean'||typeof r.value!=='string'||r.skipped!==undefined&&r.skipped!==true||r.skipped&&(!r.submittedAt||r.value!=='')||(!r.skipped&&!validCaseFieldResponse(f,r.value))||r.submittedAt!==null&&(!date(r.submittedAt)||!r.skipped&&!canSubmitCaseField(f,r.value)))fail();}
  for(const [key,e] of Object.entries(run.evaluations)){const f=known.get(key),r=run.responses[key];if(!f||!r?.submittedAt)fail();if(Object.keys(e).some(k=>!['source','outcome','at','assisted'].includes(k))||!date(e.at)||typeof e.assisted!=='boolean'||e.assisted!==r.answerViewedBefore||!(e.source==='self'&&Object.hasOwn(SELF_OUTCOMES,e.outcome)&&run.assistance.viewedFields.includes(key)||e.source==='automatic'&&['correct','incorrect'].includes(e.outcome)))fail();if(e.source==='automatic'){if(evaluateCaseField(f,r)!==e.outcome)fail();}}
  if(run.assistance.viewedFields.some(k=>!run.responses[k]?.submittedAt)||Boolean(run.assistance.firstAnswerViewedAt)!==Boolean(run.assistance.viewedFields.length))fail();
  const result=caseResult(run);if((run.progress.status==='completed')!==(result.evaluated===slots.length)||Boolean(run.completedAt)!==(run.progress.status==='completed')||run.progress.status==='awaiting_evaluation'&&(result.submitted!==slots.length||result.evaluated===slots.length))fail();return run;
 }
 export function buildWrittenAIPrompt({question:c,attempt,detail='',baseURL}){
  const slot=caseFields(c).find(x=>x.key===attempt.fieldKey);if(!slot||!attempt.response?.submittedAt)throw Error('回答を確定した小問だけAIに渡せます。');
- return ['この設問を、日本語で噛み砕いて説明してください。本文の根拠、因果関係、解答の組み立て方を示してください。自己評価を公式点数や合格可能性へ読み替えないでください。',c.source+' · '+slot.item.label,legalAIPrompt(c),'【共通本文】\n'+c.body,'【設問】\n'+slot.item.prompt,'【解答欄】\n'+slot.field.label+'\n'+(slot.field.constraints||[]).join('\n')+(slot.field.type==='numeric'?'\n単位：'+slot.field.numeric.unit+' · '+numericInstruction(slot.field):''),slot.field.choices?'【選択肢】\n'+slot.field.choices.map(x=>x.label+'：'+x.text).join('\n'):'','【私の回答】\n'+(attempt.response.skipped?'回答なし':slot.field.choices?.find(x=>x.id===attempt.response.value)?.text||attempt.response.value),'【公式解答例】\n'+slot.field.referenceAnswers.join('\n'),'【解説】\n'+slot.field.explanation,'【確認ポイント】\n'+slot.field.rubric.join('\n'),'【特に聞きたいこと】\n'+(detail.trim()||'基本からお願いします。'),'【原本・図】\n'+[...c.sourceImages,...c.bodyFigures.map(f=>f.image)].map(p=>new URL(p,baseURL).href).join('\n'),'画像URLを見られない場合は推測せず画像の添付を依頼してください。'].filter(Boolean).join('\n\n');
+ const result=attempt.feedback||caseFeedback(slot.field);
+ const examples=result.answers.map(({text,code})=>text+(code?'（'+code+'）':''));
+ const criteria=attempt.selfAssessment!==false&&result.rubric.length?'【自己評価の基準】\n'+result.rubric.join('\n'):'';
+ return ['この設問を、日本語で噛み砕いて説明してください。本文の根拠、因果関係、解答の組み立て方を示してください。自己評価を公式点数や合格可能性へ読み替えないでください。',c.source+' · '+slot.item.label,legalAIPrompt(c),'【共通本文】\n'+c.body,'【設問】\n'+slot.item.prompt,'【解答欄】\n'+slot.field.label+'\n'+(slot.field.constraints||[]).join('\n')+(slot.field.type==='numeric'?'\n単位：'+slot.field.numeric.unit+' · '+numericInstruction(slot.field):''),slot.field.choices?'【選択肢】\n'+slot.field.choices.map(x=>x.label+'：'+x.text).join('\n'):'','【私の回答】\n'+(attempt.response.skipped?'回答なし':slot.field.type==='answerSet'?formatAnswerSet(slot.field,attempt.response.value):slot.field.choices?.find(x=>x.id===attempt.response.value)?.text||attempt.response.value),'【公式解答例】\n'+examples.join('\n'),'【解説】\n'+result.explanation,criteria,result.reviewPoint?'【確認ポイント】\n'+result.reviewPoint:'','【特に聞きたいこと】\n'+(detail.trim()||'基本からお願いします。'),'【原本・図】\n'+[...c.sourceImages,...c.bodyFigures.map(f=>f.image)].map(p=>new URL(p,baseURL).href).join('\n'),'画像URLを見られない場合は推測せず画像の添付を依頼してください。'].filter(Boolean).join('\n\n');
 }

@@ -4,11 +4,13 @@ import {CONTEXT_FIELDS} from '../domain/planning.js';
 export function contextHTML(context={}){
  const rows=CONTEXT_FIELDS.filter(([id])=>context[id]).map(([id,label])=>`<div><dt>${esc(label)}</dt><dd>${esc(context[id])}</dd></div>`);
  if(context.weeklyMinutes!==undefined)rows.splice(2,0,`<div><dt>1週間に使える時間</dt><dd>${context.weeklyMinutes}分</dd></div>`);
- return rows.length?`<dl class="context-list">${rows.join('')}</dl>${context.updatedOn?`<p class="small muted">前提の更新日：${esc(context.updatedOn)}</p>`:''}`:'';
+ return rows.length?`<dl class="context-list">${rows.join('')}</dl>`:'';
 }
-export function contextFormHTML(plan,revision){
+export function contextFormHTML(plan,{contextOpen,contextExtrasOpen}){
  const c=plan.context||{};
- return `<section class="panel"><h2>計画の前提</h2><p class="small">教材・使える時間・計画の理由を残せます。</p>${contextHTML(c)}<details><summary>前提を登録・編集する（任意）</summary><form id="context-form" data-planning-form="context" data-revision="${revision}">${CONTEXT_FIELDS.map(([id,label])=>`<label class="editor-field"><span>${esc(label)}</span><textarea name="${id}" rows="2" maxlength="2000">${esc(c[id]||'')}</textarea></label>`).join('')}<label class="editor-field"><span>1週間に使える時間（分・任意）</span><input name="weeklyMinutes" type="number" min="0" max="10080" step="1" value="${c.weeklyMinutes??''}" placeholder="例：180"></label><p class="small muted">ここに記入した内容は、AI相談用のJSONとプロンプトにも含まれます。</p><button class="button secondary" type="submit">前提を保存</button></form></details></section>`;
+ const field=([id,label])=>`<label class="editor-field"><span>${esc(label)}</span><textarea name="${id}" rows="2" maxlength="2000">${esc(c[id]||'')}</textarea></label>`;
+ const main=CONTEXT_FIELDS.find(([id])=>id==='materials'),extra=CONTEXT_FIELDS.filter(field=>field!==main);
+ return `<details class="plan-context" id="plan-context" ${contextOpen?'open':''}><summary>学習に使える時間・教材</summary><label class="editor-field"><span>1週間に使える時間（分）</span><input name="weeklyMinutes" type="number" min="0" max="10080" step="1" value="${c.weeklyMinutes??''}"></label>${field(main)}<details id="plan-context-extras" ${contextExtrasOpen?'open':''}><summary>条件を詳しく入力</summary>${extra.map(field).join('')}</details><p class="small muted">記入内容はAIへの学習相談に含まれます。</p></details>`;
 }
 export function summaryPreviewHTML(summary,examParts=[]){
  const parts=summary.examDates.map(d=>`<li>${esc(examParts.find(p=>p.id===d.examPartId)?.label||d.examPartId)}：${esc(d.date)}（${d.daysUntil>=0?`あと${d.daysUntil}日`:`${-d.daysUntil}日前`}）</li>`).join('');

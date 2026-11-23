@@ -2,9 +2,9 @@
 import json,shutil,tempfile,os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-from browser_storage import open_written_case, state,nav,wait_for_async,open_plan_ai,open_data_management,select_target
+from browser_storage import open_written_case, state,nav,wait_for_async,open_plan_ai,open_data_management,select_target,open_written_field_actions
 ROOT=Path(__file__).resolve().parents[1]
-URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')
+URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/?part=objective&entry=home')
 ARTIFACTS=Path(tempfile.mkdtemp(prefix='hitomon-subject-b-'))
 READ_CASES='''async()=>{const {createLocalStore}=await import('/src/storage/local.js'),s=createLocalStore({qualificationId:'ap',rootPath:'/'});try{const i=await s.identity(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),w=createWorkspaceStore({...i,rootPath:'/',namespaceName:'written',validate:(k,p)=>p});try{return (await w.read()).map(r=>r.payload).sort((a,b)=>a.startedAt.localeCompare(b.startedAt));}finally{await w.close();}}finally{await s.close();}}'''
 def cases(page):return page.evaluate(READ_CASES)
@@ -13,8 +13,8 @@ def target(page,part):
  select_target(page,part,resume_written=True)
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);ctx=b.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write']);page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept());page.goto(URL);page.locator('.quick-start').wait_for()
- page.locator('.study-entrance[data-paper-mode=all]').click();page.locator('[data-action=submit]').wait_for();a=state(page);aid=a['currentId'];page.locator('[data-action=hint]').click();page.locator('[data-action=pause]').click();target(page,'written');assert not page.locator('.home-assessments').count();page.locator('[data-action=written-start]').first.click();page.locator('textarea[data-written-key]').fill('未知表現');wait_case(page,'r[0].responses["q1--answer"]?.value==="未知表現"');assert state(page)['attempts'][0]['hintCount']==1
- page.locator('[data-action=written-submit]').click();page.locator('[data-action=written-answer]').click();page.locator('[data-action=written-rate][data-outcome=unsure]').click();wait_case(page,'r[0].evaluations["q1--answer"]?.outcome==="unsure"');page.locator('[data-action=written-item]').nth(2).click();page.locator('textarea[data-written-key]').first.fill('ロックアウト');wait_case(page,'r[0].responses["q3--setting"]?.value==="ロックアウト"');case_id=cases(page)[0]['id'];target(page,'objective');assert page.locator('.quick-start').count();page.locator('.study-entrance[data-paper-mode=all]').click();page.locator('[data-action=submit]').wait_for();assert state(page)['currentId']==aid;target(page,'written');assert page.locator('textarea[data-written-key]').first.input_value()=='ロックアウト'
+ page.locator('.study-entrance[data-paper-mode=all]').click();page.locator('[data-action=submit]').wait_for();a=state(page);aid=a['currentId'];page.locator('[data-action=hint]').click();page.locator('[data-action=pause]').click();target(page,'written');assert not page.locator('.home-assessments').count();open_written_case(page,'ap-r07h-pm1');page.locator('textarea[data-written-key]').fill('未知表現');wait_case(page,'r[0].responses["q1--answer"]?.value==="未知表現"');assert state(page)['attempts'][0]['hintCount']==1
+ page.locator('[data-action=written-submit]').click();page.locator('[data-action=written-rate][data-outcome=unsure]').click();wait_case(page,'r[0].evaluations["q1--answer"]?.outcome==="unsure"');page.locator('[data-action=written-item]').nth(2).click();page.locator('textarea[data-written-key]').first.fill('ロックアウト');wait_case(page,'r[0].responses["q3--setting"]?.value==="ロックアウト"');case_id=cases(page)[0]['id'];target(page,'objective');assert page.locator('.quick-start').count();page.locator('.study-entrance[data-paper-mode=all]').click();page.locator('[data-action=submit]').wait_for();assert state(page)['currentId']==aid;target(page,'written');assert page.locator('textarea[data-written-key]').first.input_value()=='ロックアウト'
  # A and B keep their own checkpoints across page reload.
  page.reload();page.locator('.written-items').wait_for();assert page.locator('textarea[data-written-key]').first.input_value()=='ロックアウト';assert cases(page)[0]['id']==case_id
  for width in [320,390,1440,2560]:
@@ -26,15 +26,17 @@ with sync_playwright() as p:
  run=cases(page)[-1];assert run['mode']=='exam';mode_id=run['id'];slots=[(i,f) for i in run['material']['items'] for f in i['fields']]
  for item in run['material']['items']:
   page.locator('.written-item-nav [data-action=written-item][data-id='+item['id']+']').click();page.locator('.written-item-nav [data-id='+item['id']+'][aria-current=step]').wait_for()
+  open_written_field_actions(page)
   for f in item['fields']:
    key=item['id']+'--'+f['id'];btn=page.locator('[data-action=written-skip][data-written-key='+key+']')
    if btn.count():btn.click()
   if item!=run['material']['items'][-1]:assert page.locator('[data-action=written-answer]').count()==0
  wait_case(page,'r.find(x=>x.id==='+json.dumps(mode_id)+').progress.status==="awaiting_evaluation"')
+ page.locator('[data-action=written-review-start]').click()
  for item in run['material']['items']:
   page.locator('.written-item-nav [data-action=written-item][data-id='+item['id']+']').click();page.locator('.written-item-nav [data-id='+item['id']+'][aria-current=step]').wait_for()
   for f in item['fields']:
-   key=item['id']+'--'+f['id'];page.locator('[data-action=written-answer][data-written-key='+key+']').click();page.locator('.written-field[data-written-key='+key+'] .written-answer').wait_for();rating=page.locator('[data-action=written-rate][data-written-key='+key+'][data-outcome=notYet]')
+   key=item['id']+'--'+f['id'];page.locator('.written-field[data-written-key='+key+'] .written-answer').wait_for();rating=page.locator('[data-action=written-rate][data-written-key='+key+'][data-outcome=notYet]')
    if rating.count():rating.click()
  wait_case(page,'r.find(x=>x.id==='+json.dumps(mode_id)+').progress.status==="completed"')
  # AI prompt contains the current field + shared body, not all other answer explanations.
@@ -48,7 +50,7 @@ with sync_playwright() as p:
  # PWA must retain new modules and the case/material/checkpoint when offline.
  page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(ok=>navigator.serviceWorker.addEventListener("controllerchange",ok,{once:true}));}');ctx.set_offline(True);page.reload();page.locator('.written-items').wait_for();assert cases(page)[-1]['progress']['status']=='completed';target(page,'objective');page.locator('.study-entrance[data-paper-mode=all]').click();page.locator('[data-action=submit]').wait_for();assert state(page)['currentId']==aid;ctx.set_offline(False)
  # Import a v2 file into a new device and restore B and A simultaneously.
- fresh=b.new_context(viewport={'width':390,'height':844});other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(URL);other.locator('.quick-start').wait_for();other.locator('#settings-button').click();open_data_management(other);other.locator('#import-state').set_input_files(str(path));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる').click();assert len(state(other)['attempts'])==1 and len(cases(other))==2;target(other,'written');nav(other,'history');assert '自己評価' in other.locator('#main').inner_text();target(other,'objective');assert not other.locator('.written-answer').count()
+ fresh=b.new_context(viewport={'width':390,'height':844});other=fresh.new_page();other.on('dialog',lambda d:d.accept());other.goto(URL);other.locator('.quick-start').wait_for();other.locator('#settings-button').click();open_data_management(other);other.locator('#import-state').set_input_files(str(path));other.get_by_text('学習記録を読み込みました。',exact=False).wait_for();other.get_by_role('button',name='設定を閉じる').click();assert len(state(other)['attempts'])==1 and len(cases(other))==2;target(other,'written');nav(other,'history');other.get_by_text('評価の内訳',exact=True).click();assert '自己評価' in other.locator('#main').inner_text();target(other,'objective');assert not other.locator('.written-answer').count()
  assert not errors,errors;b.close()
 print('PASS A/B checkpoints and record separation / 320/390/1440/2560 / early completion excluded / 8 fields and self rating / unaided case / AI scope / canonical IndexedDB and outbox / v2 Export+Import / offline A+B')
 print('Artifacts:',ARTIFACTS)

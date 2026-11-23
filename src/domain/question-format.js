@@ -1,10 +1,12 @@
+import {sameAnswerSet} from './answer-grading.js';
+
 // Format is independent of purpose/provenance. Free text is draft-only for now.
 export const QUESTION_TYPES=Object.freeze(['singleChoice','multipleChoice','freeText']);
 export const isMultiple=q=>q?.type==='multipleChoice';
 export const gradingMethod=q=>q?.grading?.method||(q?.type==='freeText'?'deferred':'exactChoiceSet');
 export const correctIds=q=>isMultiple(q)?q.correctChoiceIds:[q.correctChoiceId??q.choices?.[q.answer]?.id??'choice-'+q.answer];
 export const canonicalIds=(q,ids)=>q.choices.filter(c=>ids.includes(c.id)).map(c=>c.id);
-export const sameChoices=(a,b)=>a.length===b.length&&a.every(id=>b.includes(id));
+export const matchesChoiceAnswer=(q,ids)=>sameAnswerSet(ids,correctIds(q));
 export const chosenIds=(a,q=a.questionSnapshot)=>isMultiple(q)?a.selectedChoiceIds||[]:a.selectedChoiceId?[a.selectedChoiceId]:a.selected===null?[]:[q?.choices?.[a.selected]?.id??'choice-'+a.selected];
 export function validResponse(q,value,{empty=false}={}){
  if(value===null)return empty;

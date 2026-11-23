@@ -1,11 +1,12 @@
 """Recommended/topic/session queues on real FP and AP cases, isolated guest data."""
+from browser_storage import open_offline, fill_written_field
 import json,os,shutil,tempfile,threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import nav,open_data_management
+from browser_storage import nav,open_data_management,open_written_field_actions
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-case-navigation-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -20,22 +21,28 @@ def rows(pg,q='fp2'):return pg.evaluate(READ,q)
 def current(pg,q='fp2'):
  rs=rows(pg,q);active=pg.evaluate('''q=>{const suffix=':'+q+':written-view'+(q==='fp2'?':jafp-practical':'');const key=Object.keys(localStorage).find(k=>k.endsWith(suffix));return JSON.parse(localStorage.getItem(key)).currentId;}''',q);return next(r for r in rs if r['id']==active)
 def complete(pg,c):
+ c=current(pg,c['qualificationId'])['material']
  for item in c['items']:
   nav_item=pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]')
-  if nav_item.count():nav_item.click()
+  if nav_item.count():nav_item.click();nav_item.and_(pg.locator('[aria-current=step]')).wait_for()
+  open_written_field_actions(pg)
   for f in item['fields']:
    field=pg.locator(f'.written-field[data-written-key="{item["id"]}--{f["id"]}"]')
-   if f['type']=='singleChoice':field.locator('input[value="'+next(a['id'] for a in f['choices'] if a['label']==f['referenceAnswers'][0])+'"]').check()
-   else:field.locator('input' if f['type']=='numeric' else 'textarea').fill(f['referenceAnswers'][0])
+   fill_written_field(field, f)
    field.locator('[data-action=written-submit]').click()
+   field.locator('textarea[readonly], input[readonly], fieldset[disabled], select[disabled]').first.wait_for()
  # In exam mode all responses must be submitted before opening any answer.
+ start_review=pg.locator('[data-action=written-review-start]')
+ if start_review.count():start_review.click();pg.locator('.written-answer').first.wait_for()
  for item in c['items']:
   nav_item=pg.locator(f'.written-item-nav [data-action=written-item][data-id="{item["id"]}"]')
-  if nav_item.count():nav_item.click()
+  if nav_item.count():nav_item.click();nav_item.and_(pg.locator('[aria-current=step]')).wait_for()
   for f in item['fields']:
    field=pg.locator(f'.written-field[data-written-key="{item["id"]}--{f["id"]}"]')
-   field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for()
-   expected='result-correct' if '自動判定：正解' in field.locator('.written-field-status').inner_text() else 'result-neutral'
+   reveal=field.locator('[data-action=written-answer]')
+   if reveal.count():reveal.click()
+   field.locator('.written-answer').wait_for()
+   expected='result-correct' if '自動判定：正解' in field.locator('.written-answer > h4').inner_text() else 'result-neutral'
    assert expected in field.locator('.written-answer').get_attribute('class'),(f['id'],expected)
    if field.locator('[data-action=written-rate]').count():field.locator('[data-action=written-rate][data-outcome=meets]').click()
  pg.locator('[data-action=written-next]').wait_for()
@@ -55,7 +62,7 @@ try:
   complete(pg,banks['fp2'][0]);pg.reload();pg.locator('[data-action=written-next]').wait_for();assert '番号順' in pg.locator('.case-study-scope').inner_text();pg.locator('[data-action=written-next]').click();pg.locator('.written-layout').wait_for();assert current(pg)['caseId']=='fp2-202605-jafp-q02'
   nav(pg,'home');pg.locator('.quick-start [data-action=written-start]').click();pg.locator('.written-layout').wait_for();assert current(pg)['caseId']!='fp2-202605-jafp-q02';assert len([r for r in rows(pg) if r['caseId']=='fp2-202605-jafp-q02'])==1
   nav(pg,'topics');assert pg.locator('.case-topic').count()==6;widths(pg,'fp-topics');pg.locator('[data-action=written-recommend][data-topic=financial-assets]').click();pg.locator('.written-layout').wait_for();c=next(c for c in banks['fp2'] if c['id']==current(pg)['caseId']);assert c['topicId']=='financial-assets';complete(pg,c);pg.locator('[data-action=written-next]').click();pg.locator('.written-layout').wait_for();assert current(pg)['material']['topicId']=='financial-assets'
-  nav(pg,'home');pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True)
+  nav(pg,'home');pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');open_offline(pg);pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True)
   pack(pg,'202605');pg.locator('[data-action=written-sequence]').click();pg.locator('.written-layout').wait_for();complete(pg,banks['fp2'][0]);pg.locator('[data-action=written-next]').click();pg.locator('.written-layout').wait_for();assert current(pg)['caseId']=='fp2-202605-jafp-q02';pg.reload();pg.locator('.written-layout').wait_for();assert '番号順' in pg.locator('.case-study-scope').inner_text();ctx.set_offline(False)
   open_data_management(pg)
   with pg.expect_download() as event:pg.locator('#export-state').click()

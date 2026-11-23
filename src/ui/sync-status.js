@@ -6,7 +6,15 @@ function render(){
  const active=Object.fromEntries(Object.entries(states).filter(([key])=>!signedIn||enabled.has(key))),summary=summarizeSync(active,signedIn,scopeLabels);
  const el=document.getElementById('sync-state');
  if(el){el.textContent=summary.text;el.dataset.status=summary.kind;for(const scope of Object.keys(syncLabels))el.dataset[scope]=active[scope]?.kind||'';}
- const foot=document.getElementById('cloud-state');if(foot){foot.hidden=!signedIn;foot.textContent=summary.kind==='error'?'同期を確認してください':summary.text;}
+ const about=document.getElementById('sync-about');
+ if(about)about.hidden=!signedIn;
+ const retry=document.getElementById('sync-now');
+ if(retry){retry.hidden=!signedIn||!['pending','error'].includes(summary.kind);retry.textContent='同期を再試行';}
+ const foot=document.getElementById('cloud-state');
+ if(foot){
+  foot.hidden=!signedIn||!['error','conflict'].includes(summary.kind);
+  foot.textContent=summary.kind==='error'?'同期を確認してください':summary.text;
+ }
  const details=document.getElementById('sync-details');
  if(details){details.hidden=!summary.details.length;details.innerHTML=summary.details.map(s=>`<p><strong>${esc(s.label)}</strong>：${s.kind==='conflict'?'変更が重なっています。':s.scope==='local'?'保存できません。':'同期できません。'}${s.kind==='conflict'?'<span class="small">該当画面で使う内容を選んでください。</span>':''}</p>`).join('');}
  const technical=document.getElementById('sync-technical');

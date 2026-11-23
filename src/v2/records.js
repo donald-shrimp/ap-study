@@ -1,3 +1,4 @@
+import {sameAnswerSet} from '../domain/answer-grading.js';
 import {validateLegalContext} from '../domain/legal-context.js';
 import {encodeWorkspaceBackup,decodeWorkspaceBackup} from './resources.js';
 // The sole persisted question-record contract. UI projection is not an old-file reader.
@@ -29,7 +30,7 @@ export function validateRecord(r){
  const a=r.assistance,p=r.progress,e=r.evaluation;
  if(!keys(a,['hintCount','hintEvents','answerViewedBefore'])||typeof a.answerViewedBefore!=='boolean'||!Number.isInteger(a.hintCount)||a.hintCount<0||a.hintCount>20||!Array.isArray(a.hintEvents)||a.hintEvents.length!==a.hintCount||a.hintEvents.some((event,i)=>!keys(event,['step','at','phase'])||event.step!==i+1||!['before','after'].includes(event.phase)||!Number.isFinite(Date.parse(event.at)))||!Array.isArray(r.lesson.hints)||a.hintCount>r.lesson.hints.length)fail();
  if(!keys(p,['status','confidence','scrollY','readingNote','topic','topicId','entryMode','practiceScope','deferred'])||typeof p.confidence!=='boolean'||!Number.isFinite(p.scrollY)||p.scrollY<0||typeof p.readingNote!=='string'||p.readingNote.length>200||e&&(!Number.isInteger(e.hintsBeforeAnswer)||e.hintsBeforeAnswer<0||e.hintsBeforeAnswer>a.hintCount))fail();
- if(r.evaluation){const right=selected.length===answer.length&&selected.every(v=>answer.includes(v)),e=r.evaluation,s=r.assistance;if(e.outcome==='correct'&&(!right||e.hintsBeforeAnswer!==0||s.answerViewedBefore)||e.outcome==='assisted'&&(!right||e.hintsBeforeAnswer<1||s.answerViewedBefore)||e.outcome==='incorrect'&&(!selected.length||right||s.answerViewedBefore)||e.outcome==='revealed'&&!s.answerViewedBefore)fail();}
+ if(r.evaluation){const right=sameAnswerSet(selected,answer),e=r.evaluation,s=r.assistance;if(e.outcome==='correct'&&(!right||e.hintsBeforeAnswer!==0||s.answerViewedBefore)||e.outcome==='assisted'&&(!right||e.hintsBeforeAnswer<1||s.answerViewedBefore)||e.outcome==='incorrect'&&(!selected.length||right||s.answerViewedBefore)||e.outcome==='revealed'&&!s.answerViewedBefore)fail();}
  return r;
 }
 export function encodeState(s){const {attempts,...rest}=s;return {...rest,format:'hitomon-study-state',version:2,records:attempts.map(toRecord),...(rest.workspaceBackup?{workspaceBackup:encodeWorkspaceBackup(rest.workspaceBackup)}:{})};}

@@ -41,7 +41,11 @@ def nav(page, view):
         page.get_by_role('button', name='問題を探す', exact=True).click()
     elif view == 'review':
         page.locator('.sidebar [data-view=history]').click()
-        page.locator('.record-tools [data-view=review]').click()
+        entry = page.locator('.record-tools [data-view=review]')
+        if not entry.count():
+            page.locator('.sidebar [data-view=home]').click()
+            entry = page.locator('.home-shortcuts [data-view=review]')
+        entry.click()
     else:
         page.locator(f'.sidebar [data-view={view}]').click()
 
@@ -52,8 +56,15 @@ def open_plan_editor(page):
 
 def open_plan_ai(page):
     ai = page.locator('#plan-ai')
+    if ai.locator('xpath=parent::*[@id="plan-editor"]').count():
+        open_plan_editor(page)
     if not ai.evaluate('(el)=>el.open'):
         ai.locator(':scope > summary').click()
+
+def open_written_field_actions(page):
+    toggle=page.locator('.written-individual-toggle')
+    if toggle.count() and not toggle.evaluate('(el)=>el.open'):
+        toggle.locator('summary').click()
 
 
 def open_answer_history(page):
@@ -98,3 +109,74 @@ def open_written_case(page, case_id, mode='learning'):
     page.locator('[name=written-study-mode]').select_option(mode)
     page.locator(f'.written-case-option [data-action=written-start][data-id="{case_id}"]').click()
     page.locator('.written-layout').wait_for()
+
+def open_offline(page, *, choose=False):
+    dialog=page.locator('#settings-dialog')
+    if not dialog.evaluate('(el)=>el.open'):
+        page.locator('#settings-button').click()
+    dialog.locator('[data-action=offline-open]').click()
+    manager=page.locator('#offline-dialog')
+    manager.locator('[data-offline-save]').wait_for()
+    if choose:
+        manager.locator('.offline-selection > summary').click()
+    return manager
+
+
+def assessment_action(page, action):
+    menu=page.locator('.assessment-menu')
+    if not menu.evaluate('(el)=>el.open'):
+        menu.locator(':scope > summary').click()
+    menu.locator(f'[data-action={action}]').click()
+
+
+def open_plan_conditions(page):
+    open_plan_editor(page)
+    section=page.locator('.plan-context')
+    if not section.evaluate('(el)=>el.open'):
+        section.locator(':scope > summary').click()
+    more=section.locator('details')
+    if not more.evaluate('(el)=>el.open'):
+        more.locator(':scope > summary').click()
+    return page.locator('#exam-form')
+
+def read_written_material(page):
+    return page.evaluate("""async()=> {
+        const root=new URL('.',document.baseURI),qualificationId=document.documentElement.dataset.qualification;
+        const {createLocalStore}=await import(new URL('src/storage/local.js',root));
+        const store=createLocalStore({qualificationId,rootPath:root.pathname});
+        try{
+            const identity=await store.identity();
+            const key=Object.keys(localStorage).find(k=>k.startsWith(`hitomon-v2:${root.pathname}:${identity.owner}:${qualificationId}:written-view`)&&
+                (!k.includes('written-view:')||k.endsWith(':'+document.documentElement.dataset.examPart)));
+            const id=JSON.parse(localStorage.getItem(key)).currentId;
+            const {createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root));
+            const workspace=createWorkspaceStore({...identity,rootPath:root.pathname,namespaceName:'written',validate:(_kind,payload)=>payload});
+            try{return (await workspace.read()).find(row=>row.id===id).payload.material;}
+            finally{await workspace.close();}
+        }finally{await store.close();}
+    }""")
+
+
+def fill_written_field(slot, field):
+    answers=field['referenceAnswers']
+    if field['type']=='answerSet':
+        if 'choices' in field:
+            ids=[next(choice['id'] for choice in field['choices'] if choice['label']==answer) for answer in answers]
+            if field['answerSet'].get('slots'):
+                for index, choice in enumerate(ids):
+                    slot.locator('[data-answer-set-entry]').nth(index).select_option(choice)
+            else:
+                for choice in ids:
+                    slot.locator(f'input[value="{choice}"]').check()
+        else:
+            inputs=slot.locator('[data-answer-set-entry]')
+            for index, answer in enumerate(answers):
+                if index>=inputs.count():
+                    slot.locator('[data-action=written-set-add]').click()
+                    inputs.nth(index).wait_for()
+                inputs.nth(index).fill(answer)
+    elif field['type']=='singleChoice':
+        choice=next(choice for choice in field['choices'] if choice['label']==answers[0])
+        slot.locator(f'input[value="{choice["id"]}"]').check()
+    else:
+        slot.locator('textarea, input[type=text]').fill(answers[0])

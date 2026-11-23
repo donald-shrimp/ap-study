@@ -1,4 +1,5 @@
 """A corrected question offline, old v3 snapshots and a separate v4 attempt."""
+from browser_storage import open_offline
 import importlib.util,json,os,shutil,tempfile,threading
 from pathlib import Path
 from functools import partial
@@ -20,7 +21,7 @@ server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)));t
 try:
  with sync_playwright() as p:
   b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);ctx=b.new_context(viewport={'width':390,'height':900});pg=ctx.new_page();pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(BASE+'ap/?part=objective&entry=home');pg.locator('.quick-start').wait_for();pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=none]').click();pg.locator(f'[data-offline-group="pack-{q["packId"]}-objective"]').check();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
+  open_offline(pg, choose=True);pg.locator('[data-offline-save]').wait_for();pg.locator(f'[data-offline-group="pack-{q["packId"]}-objective"]').check();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   nav(pg,'materials');pg.locator('[data-action=reset-filters]').click();pg.locator('[name=year]').select_option('2022');pg.locator('[name=season]').select_option('autumn');pg.locator('[name=query]').fill(q['title']);pg.locator(f'[data-action=start][data-id="{ID}"]').click();pg.locator('.choices').wait_for()
   def correct_labels():
    text=pg.locator('.choices').inner_text();assert 'フェールセーフ' in text and 'フェールソフト' in text and 'フールセーフ' not in text and 'フールソフト' not in text,text

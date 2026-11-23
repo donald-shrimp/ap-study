@@ -62,7 +62,7 @@ delivery/
 
 - `body`は共通本文、`items`は小問、`fields`は個別の回答欄。1case全体で最大20欄。
 - 問1が（ア）〜（エ）の○×4欄なら、1case・1item・4fieldsにする。4問として数えない。
-- ○×・4択・語群は`singleChoice`欄。`choices`は`{id,label,text}`。`referenceAnswers`は正答の表示labelを1つ入れる。`grading:{"method":"exactText"}`。選択肢の図はラベルと対応させて`bodyFigures`に含める。
+- ○×・4択・語群は`singleChoice`欄。`choices`は`{id,label,text}`。新しい欄は `correctChoiceIds` に正答のIDを1つ入れ、`grading:{"method":"exactChoiceSet"}` を使う。選択肢の図はラベルと対応させて`bodyFigures`に含める。
 - 短答は`shortText`、自由記述は`freeText`。字数制限を`maxLength`へ。自由記述は`grading:{"method":"self"}`。短答の登録例以外は自己評価へ回る。
 - 各欄に`explanation`と`rubric`を用意する。他の欄の解説を流用せず、その回答の根拠を説明する。
 - 必須の図・表は `bodyFigures:[{image,anchor,alt,caption}]`。`body`の該当箇所に一意のanchor文字列を置き、`bodyFigures`を本文に現れる順に並べる。空・未配置・重複・順序不一致は草稿の検証でも拒否する。原本ページは`sourceImages`へ置けるが学習に必須ではない。

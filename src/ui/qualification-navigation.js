@@ -20,14 +20,14 @@ export function installQualificationSwitch({qualification,partId,root,beforeLeav
  link.href=url.href;link.dataset.partId=partId;link.setAttribute('aria-label',`資格・科目を選ぶ（${targetLabel(qualification,partId)}）`);
  const part=studyTargets(qualification).find(p=>p.examPartId===partId);
  link.innerHTML=`<span class="qualification-label"><span class="qualification-name">${esc(qualification.shortName||qualification.name)}</span>${studyTargets(qualification).length>1?`<span class="qualification-part">・${esc(part.label)}</span>`:''}</span><span aria-hidden="true">▼</span>`;
- const brand=document.querySelector('.brand');brand.after(link);brand.href=link.href;
+ const brand=document.querySelector('.brand');brand.after(link);brand.href=targetURL(root,qualification.id,partId,{home:true,from:new URL(location.href)}).href;
  let leaving=false;
- for(const anchor of [link,brand])anchor.addEventListener('click',async event=>{
+ link.addEventListener('click',async event=>{
   // Opening a separate tab leaves the current editor and its drafts intact.
   if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-  event.preventDefault();if(leaving)return;leaving=true;anchor.setAttribute('aria-busy','true');
-  try { if(await beforeLeave())location.assign(anchor.href); }
+  event.preventDefault();if(leaving)return;leaving=true;link.setAttribute('aria-busy','true');
+  try { if(await beforeLeave())location.assign(link.href); }
   catch(error){onError(error.message||'保存を確認できません。もう一度お試しください。');}
-  finally {leaving=false;anchor.removeAttribute('aria-busy');}
+  finally {leaving=false;link.removeAttribute('aria-busy');}
  });
 }

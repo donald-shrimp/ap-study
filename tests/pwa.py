@@ -99,7 +99,7 @@ with sync_playwright() as p:
   raise AssertionError(f'Offline guard changed record: {changed}')
  assert '保存されていません' in page.locator('#notice').inner_text(),page.locator('#notice').inner_text()
  nav('home');nav('history');open_answer_history(page);page.locator(f'[data-action=resume][data-id="{attempt}"]').click();assert state()['currentId']==attempt
- answer=next(a for a in state()['attempts'] if a['id']==attempt)['questionSnapshot']['answer'];page.get_by_role('radio').nth(answer).check();page.get_by_role('button',name='回答する',exact=True).click();page.get_by_role('button',name='ホーム',exact=True).click()
+ answer=next(a for a in state()['attempts'] if a['id']==attempt)['questionSnapshot']['answer'];page.get_by_role('radio').nth(answer).check();page.get_by_role('button',name='回答する',exact=True).click();page.locator('#result-heading').wait_for();action_nav(page,'home')
  page.locator('.hero-start .primary[data-action=entry-start]').click();assert state()['currentId']!=attempt
  assert page.locator('.image-error').count()==0
  page.reload();page.get_by_role('radio').first.wait_for();assert page.locator('.image-error').count()==0

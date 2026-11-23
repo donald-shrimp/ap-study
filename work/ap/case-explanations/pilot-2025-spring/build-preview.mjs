@@ -1,10 +1,12 @@
 // Local editorial preview only; no app routes, learning records, or publication.
 import {readFile,writeFile} from 'node:fs/promises';
+import {relative,dirname} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {questionTextHTML} from '../../../../src/ui/question-text.js';
 import {inlineTextHTML} from '../../../../src/ui/inline-text.js';
 import {esc} from '../../../../src/utils.js';
 
-const cases=[
+const defaultCases=[
  {id:'ap-r07h-pm1',label:'問1 セキュリティ'},
  {id:'ap-r07h-pm2',label:'問2 経営戦略'},
  {id:'ap-r07h-pm3',label:'問3 アルゴリズム'},
@@ -17,21 +19,33 @@ const cases=[
  {id:'ap-r07h-pm10',label:'問10 サービス管理'},
  {id:'ap-r07h-pm11',label:'問11 システム監査'},
 ];
-const bank=JSON.parse(await readFile(new URL('../../../../content/ap/written-cases.json',import.meta.url),'utf8'));
-const mappings=JSON.parse(await readFile(new URL('explanation-links.json',import.meta.url),'utf8'));
 
+// The growing editorial library reuses this renderer; the historical pilot
+// remains independently buildable with its original command and output path.
+export async function buildPreview({cases=defaultCases,outputURL=new URL('preview.html',import.meta.url)}={}){
+const bank=JSON.parse(await readFile(new URL('../../../../content/ap/written-cases.json',import.meta.url),'utf8'));
+const stylesheet=relative(dirname(fileURLToPath(outputURL)),fileURLToPath(new URL('../../../../styles.css',import.meta.url))).replaceAll('\\','/');
+const katexStylesheet=relative(dirname(fileURLToPath(outputURL)),fileURLToPath(new URL('../../../../assets/vendor/katex/katex.min.css',import.meta.url))).replaceAll('\\','/');
+
+function targetLabel(c,t){
+ return t.heading.includes('｜')?t.heading.split('｜')[0]:c.material.items.find(i=>i.id===t.itemId).label;
+}
 function questionLink(c,t){
- const [label,description]=t.heading.split('｜');
+ const label=targetLabel(c,t),description=t.heading.includes('｜')?t.heading.split('｜')[1]:t.heading;
  return `<a class="preview-question-link" href="#${c.id}--${t.id}"><span class="preview-question-label">${esc(label)}</span><span>${esc(description)} →</span></a>`;
 }
-function sourceQuestion(c,t){
+function sourceQuestion(c,t,additional=false){
  const item=c.material.items.find(i=>i.id===t.itemId);
- return `<div class="preview-question-context"><p class="small muted">この解説の対象：${esc(t.heading.split('｜')[0])}</p><details class="preview-source-question"><summary>${esc(item.label)}の設問文を確認</summary><div class="preview-detail">${questionTextHTML(item.prompt)}<p class="small">対応する回答欄：${t.fieldIds.map(id=>esc(item.fields.find(f=>f.id===id).label)).join('・')}</p></div></details></div>`;
+ const anchor=additional?` id="${c.id}--${t.id}" tabindex="-1" data-explanation-heading="${esc(t.heading)}"`:'';
+ return `<div class="preview-question-context"${anchor}><p class="small muted">この解説の対象：${esc(targetLabel(c,t))}</p><details class="preview-source-question"><summary>${esc(item.label)}の設問文を確認</summary><div class="preview-detail">${questionTextHTML(item.prompt)}<p class="small">対応する回答欄：${t.fieldIds.map(id=>esc(item.fields.find(f=>f.id===id).label)).join('・')}</p></div></details></div>`;
+}
+function sectionQuestions(c,targets){
+ return targets.map((t,i)=>sourceQuestion(c,t,i>0)).join('');
 }
 function headingHTML(c,heading,level){
- const t=c.targets.find(t=>t.heading===heading);
+ const targets=c.targets.filter(t=>t.heading===heading),[t]=targets;
  if(!t)return `<h${level}>${inlineTextHTML(heading)}</h${level}>`;
- return `<h${level} class="preview-explanation-target" id="${c.id}--${t.id}" tabindex="-1">${inlineTextHTML(heading)}</h${level}>${sourceQuestion(c,t)}`;
+ return `<h${level} class="preview-explanation-target" id="${c.id}--${t.id}" tabindex="-1">${inlineTextHTML(heading)}</h${level}>${sectionQuestions(c,targets)}`;
 }
 
 // Lists and editorial headings surround the app's existing rich text renderer.
@@ -60,13 +74,16 @@ function blocks(source,c){
 
 const articles=[];
 for(const c of cases){
- const md=await readFile(new URL(c.id+'.md',import.meta.url),'utf8');
+ const directoryURL=c.directoryURL||new URL('.',import.meta.url);
+ const md=await readFile(new URL(c.id+'.md',directoryURL),'utf8');
+ const mappings=JSON.parse(await readFile(new URL('explanation-links.json',directoryURL),'utf8'));
  c.material=bank.find(item=>item.id===c.id);c.targets=mappings[c.id];
+ if(!c.material||!Array.isArray(c.targets))throw Error('Missing material or mapping: '+c.id);
  const headings=[...md.matchAll(/^#{2,3} (.+)$/gm)].map(m=>m[1]);
  const covered=new Set();
  for(const t of c.targets){
   const item=c.material.items.find(i=>i.id===t.itemId);
-  if(!/^[a-z0-9-]+$/.test(t.id)||!item||headings.filter(h=>h===t.heading).length!==1||!t.heading.startsWith(item.label)||!t.fieldIds.length)throw Error('Invalid explanation target: '+c.id+' '+t.id);
+  if(!/^[a-z0-9-]+$/.test(t.id)||!item||headings.filter(h=>h===t.heading).length!==1||!t.fieldIds.length)throw Error('Invalid explanation target: '+c.id+' '+t.id);
   for(const fieldId of t.fieldIds){
    const key=t.itemId+'--'+fieldId;
    if(!item.fields.some(f=>f.id===fieldId)||covered.has(key))throw Error('Invalid or duplicate field link: '+key);
@@ -75,19 +92,21 @@ for(const c of cases){
  }
  if(new Set(c.targets.map(t=>t.id)).size!==c.targets.length||covered.size!==c.material.items.flatMap(i=>i.fields).length)throw Error('Incomplete explanation links: '+c.id);
  const index=`<nav class="preview-question-index" aria-label="小問と解説の対応"><h2 id="${c.id}--questions" tabindex="-1">小問と解説の対応</h2>${c.targets.map(t=>questionLink(c,t)).join('')}</nav>`;
- const title=md.match(/^# (.+)/)[1],sections=md.split(/^## /m).slice(1);
+ const [opening,...sections]=md.split(/^## /m);
+ const title=opening.match(/^# (.+)/)[1];
+ const introduction=blocks(opening.replace(/^# .+\r?\n/,'').trim(),c);
  const body=sections.map((section,i)=>{
-  const boundary=section.indexOf('\n'),heading=section.slice(0,boundary),content=blocks(section.slice(boundary+1),c),target=c.targets.find(t=>t.heading===heading);
+  const boundary=section.indexOf('\n'),heading=section.slice(0,boundary),content=blocks(section.slice(boundary+1),c),targets=c.targets.filter(t=>t.heading===heading),[target]=targets;
   const back=`<a class="preview-return" href="#${c.id}--questions">小問と解説の対応に戻る ↑</a>`;
-  const sectionHTML=i<2?`<section class="preview-section">${headingHTML(c,heading,2)}${content}${back}</section>`:`<details class="preview-section"><summary${target?` class="preview-explanation-target" id="${c.id}--${target.id}"`:''}>${esc(heading)}</summary><div class="preview-detail">${target?sourceQuestion(c,target):''}${content}${back}</div></details>`;
+  const sectionHTML=i<2?`<section class="preview-section">${headingHTML(c,heading,2)}${content}${back}</section>`:`<details class="preview-section"><summary${target?` class="preview-explanation-target" id="${c.id}--${target.id}"`:''}>${esc(heading)}</summary><div class="preview-detail">${sectionQuestions(c,targets)}${content}${back}</div></details>`;
   return sectionHTML+(i===0?index:'');
  }).join('');
- articles.push(`<article class="panel preview-case" id="${c.id}" aria-labelledby="${c.id}-title"><div class="question-meta"><span>応用情報 · 2025年春期</span><span class="badge">大問全体の解説</span></div><h1 id="${c.id}-title" tabindex="-1">${esc(title)}</h1><div class="rich-question explanation">${body}</div></article>`);
+ articles.push(`<article class="panel preview-case" id="${c.id}" aria-labelledby="${c.id}-title"><div class="question-meta"><span>応用情報 · ${esc(c.examLabel||'2025年春期')}</span><span class="badge">大問全体の解説</span></div><h1 id="${c.id}-title" tabindex="-1">${esc(title)}</h1><div class="rich-question explanation">${introduction}${body}</div></article>`);
 }
 
-await writeFile(new URL('preview.html',import.meta.url),`<!doctype html>
+await writeFile(outputURL,`<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>初学者向け・大問全体の解説 ${cases.length}題</title>
-<link rel="stylesheet" href="../../../../styles.css"><style>
+<link rel="stylesheet" href="${esc(katexStylesheet)}"><link rel="stylesheet" href="${esc(stylesheet)}"><style>
 .preview-main{width:min(100%,960px);margin:auto;padding:24px 20px 48px;min-width:0}
 .preview-header{margin-bottom:18px}.preview-header p{margin-bottom:10px}
 .preview-nav{display:flex;flex-wrap:wrap;gap:8px}.preview-nav a[aria-current=page]{background:var(--blue);border-color:#a8b9cd;color:var(--navy)}
@@ -129,3 +148,6 @@ document.addEventListener('click',event=>{const link=event.target.closest('a[hre
 document.getElementById('expand').addEventListener('click',()=>{for(const d of document.querySelector('.preview-case:not([hidden])').querySelectorAll('details'))d.open=true;});
 </script></body></html>\n`);
 console.log('Built local preview for '+cases.length+' draft explanations.');
+}
+
+if(process.argv[1]&&pathToFileURL(process.argv[1]).href===import.meta.url)await buildPreview();

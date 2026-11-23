@@ -39,13 +39,34 @@
 | 一つ選ぶ | 通常問題の `singleChoice`、`choices`、`correctChoiceId` | 正答は選択肢IDで指定 |
 | 複数選ぶ | 通常問題の `multipleChoice`、`correctChoiceIds`、`selection` | 指定数／すべて選択を区別。組み合わせの完全一致で、部分点なし |
 | 共通本文に複数小問 | `case-material.v2` の `body`→`items`→`fields` | 1case全体で最大20回答欄。大問・小問・欄数を区別する |
-| case内の選択・短答 | `singleChoice`／`shortText`、`referenceAnswers` | 選択と、短答を登録例で照合する場合は `exactText`。短答は `self` も使え、未登録表現は自己評価へ |
+| case内で一つ選ぶ | `singleChoice`、`choices`、`correctChoiceIds` | `exactChoiceSet`。正答IDを1つ登録する |
+| case内で複数選ぶ | `answerSet`、`choices`、`correctChoiceIds` | `exactChoiceSet`。チェックボックスで全選択。原問に複数の空欄がある場合は `answerSet.slots` に欄名を指定すると個別に選べる |
+| case内の短答 | `shortText`、`referenceAnswers` | `exactText` で登録例と照合する。未登録表現は自己評価へ進む。全件を自己評価にする場合は `self` |
+| case内の語句の列挙 | `answerSet`、`referenceAnswers` | `unordered`。組全体を照合し、重複・不足・余分を判定する。数を示さないときは `answerSet: {}`、固定欄は `answerSet.slots` で指定する |
 | 自由記述 | case内の `freeText`、`grading.method: self` | 公式解答例・根拠・`rubric`で自己評価。AIの自動採点を前提にしない |
 | 数値 | case内の `numeric`、`grading.method: exactDecimal` | 十進文字列で照合。単位・桁・丸め指示を明記する |
 
 通常問題配列の `freeText`／`deferred` は草稿保管用で、公開する記述式の入れ物ではない。記述・数値学習にはcasesを使う。Schemaは [選択問題](../schemas/question-format.v1.json)・[case](../schemas/case-material.v2.json)・[回答欄](../schemas/case-field.v1.json)を参照。
 
-通常問題の正答は選択肢IDで指定する一方、caseの選択欄の `referenceAnswers` には正答の表示ラベルを保存する。二つの形式を混同しない。
+新しい大問の選択欄には `grading: {"method":"exactChoiceSet"}` と `correctChoiceIds` を使う。解答例に表示するラベルはIDから求める。既存教材と記録では表示ラベルを指定した形式も読み込める。採点キーや指示を変更したら教材版を上げ、その版の内容確認を記録する。
+
+順不同の欄は、新規教材なら通常の `caseSource` の `items[].fields` に直接置く。例えば全選択では、共通の `id`・`label`・`explanation`・`rubric` に次の設定を加える。固定の空欄を設けるときは、正答数に合わせて `answerSet.slots` を設定する。既存教材のリンクを引き継ぐ改訂でだけ `sourceFieldIds` を使う。
+
+```json
+{
+  "type": "answerSet",
+  "grading": {"method": "exactChoiceSet"},
+  "choices": [
+    {"id": "oak", "label": "ア", "text": "ナラ"},
+    {"id": "pine", "label": "イ", "text": "マツ"},
+    {"id": "cedar", "label": "ウ", "text": "スギ"}
+  ],
+  "correctChoiceIds": ["oak", "cedar"],
+  "answerSet": {}
+}
+```
+
+新しい採点方式を実装する際は、採点関数と画面・記録の役割を分け、教材生成と記録取り込みに同じ回答欄の例を通す。今回の変更範囲は[回答形式と採点の共通化](answer-grading-plan.md)を参照。
 
 ### 1-4. 枠と検証方法を用意する
 

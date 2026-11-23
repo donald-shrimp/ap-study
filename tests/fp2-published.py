@@ -1,4 +1,5 @@
 """Real FP60 corpus in a fresh guest browser; local or deployed URL."""
+from browser_storage import open_offline
 import json,os,shutil,tempfile,threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
@@ -29,7 +30,7 @@ try:
   assert pg.locator('[data-mode=diagnostic],[data-view=diagnostics],[data-view=mocks],[data-action=cards-open]').count()==0
   assert state(pg)['attempts']==[]
   pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();assert pg.locator('[data-offline-group]').count()==4
+  open_offline(pg);pg.locator('[data-offline-save]').wait_for();assert pg.locator('[data-offline-group]').count()==4
   pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();assert state(pg)['attempts']==[]
   ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for n,correct in [(55,1),(14,2),(35,0)]:

@@ -1,5 +1,6 @@
-from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 """Real UI: optional planning, JSON validation, unaided assessment and offline resume."""
+from browser_storage import assessment_action
+from browser_storage import nav as action_nav, open_plan_editor, open_plan_ai
 import json, shutil, tempfile
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -17,33 +18,33 @@ with sync_playwright() as p:
     context=browser.new_context(viewport={'width':390,'height':844},permissions=['clipboard-read','clipboard-write'])
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.on('dialog',lambda d:d.accept())
-    page.goto('http://127.0.0.1:4173/ap/')
+    page.goto('http://127.0.0.1:4173/ap/?part=objective&entry=home')
     page.get_by_role('button',name='おまかせで1問',exact=True).click();page.get_by_role('button',name='回答する',exact=True).wait_for()
     assert page.locator('.session-milestone').count()==0 and '目安' not in page.locator('.study-toolbar').inner_text()
     page.get_by_role('button',name='中断',exact=True).click()
-    page.get_by_role('button',name='計画を登録',exact=True).click()
+    action_nav(page,'history');page.locator('#main [data-view=planning]').click()
     open_plan_editor(page);open_plan_ai(page)
-    page.locator('[name=exam-objective]').fill('2026-11-04');page.locator('[name=exam-written]').fill('2026-11-30');page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
+    page.locator('[name=exam-objective]').fill('2026-11-04');page.locator('[name=exam-written]').fill('2026-11-30');page.get_by_role('button',name='受験日・条件を保存',exact=True).click();page.get_by_text('受験日・条件を保存しました。',exact=True).wait_for()
     example=json.loads((ROOT/'schemas/study-plan.example.json').read_text());example['phases'][0]['goals'][0]['target']=120
     open_plan_ai(page);page.locator('#plan-json').fill(json.dumps(example));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_role('heading',name='登録後の内容',exact=True).wait_for();page.get_by_role('button',name='この内容で登録',exact=True).click();page.get_by_text('受験日と計画を登録しました。',exact=True).wait_for()
     before=next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')
     open_plan_ai(page);invalid={**example,'qualificationId':'other'};page.locator('#plan-json').fill(json.dumps(invalid));page.get_by_role('button',name='検証してプレビュー',exact=True).click();page.get_by_text('開いている資格と一致しません',exact=False).wait_for()
     assert next(r['payload'] for r in state(page)['documents'] if r['id']=='planning')==before
-    page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();exported=json.loads(page.evaluate('navigator.clipboard.readText()'));assert exported['format']=='hitomon-study-summary' and 'questionSnapshot' not in json.dumps(exported)
+    page.get_by_text('JSON・フォーマット',exact=True).click();page.get_by_role('button',name='学習状況JSONをコピー',exact=True).click();page.get_by_text('コピーしました。',exact=True).wait_for();exported=json.loads(page.evaluate('navigator.clipboard.readText()'));assert exported['format']=='hitomon-study-summary' and 'questionSnapshot' not in json.dumps(exported)
     page.get_by_role('button',name='ホーム',exact=True).click();page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
     assert page.locator('.hint-section,.result,.correct-choice,.answer-selection').count()==0
     for i in range(3):
         page.locator('[name=diagnostic-answer]').first.check();page.get_by_role('button',name='回答して次へ',exact=True).click();page.get_by_text(f'診断 {i+2} / 30問',exact=True).wait_for()
     page.locator('[name=diagnostic-answer]').last.check();page.wait_for_function('document.querySelector("[data-action=submit-diagnostic]").disabled===false')
-    page.get_by_role('button',name='中断',exact=True).click();page.locator('.home-assessments [data-action=resume-diagnostic]').wait_for()
+    assessment_action(page,'pause-diagnostic');page.locator('[data-action=resume-diagnostic]').wait_for()
     saved=state(page);run=next(r['payload'] for r in saved['documents'] if r['kind']=='diagnostic');assert run['status']=='in_progress' and run['currentIndex']==3 and len(run['responses'])==3
     assert not any(a['status'] in ['correct','incorrect'] for a in saved['study']['attempts'])
     page.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(resolve=>navigator.serviceWorker.addEventListener("controllerchange",resolve,{once:true}));}')
-    context.set_offline(True);page.reload();page.locator('.home-assessments [data-action=resume-diagnostic]').click();page.get_by_text('診断 4 / 30問',exact=True).wait_for();assert page.locator('[name=diagnostic-answer]').last.is_checked()
-    page.get_by_role('button',name='ここまでで診断終了',exact=True).click();page.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();assert '3 / 30問に回答' in page.locator('#main').inner_text()
+    context.set_offline(True);page.reload();page.locator('[data-action=resume-diagnostic]').first.click();page.get_by_text('診断 4 / 30問',exact=True).wait_for();assert page.locator('[name=diagnostic-answer]').last.is_checked()
+    assessment_action(page, 'end-diagnostic');page.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();assert '3 / 30問に回答' in page.locator('#main').inner_text()
     assert page.locator('.hint-section').count()==0
     result=state(page);final=next(r['payload'] for r in result['documents'] if r['kind']=='diagnostic');assert final['status']=='ended_early'
-    page.get_by_role('button',name='ホーム',exact=True).click();assert page.locator('.home-assessments [data-action=resume-diagnostic]').count()==0
+    page.get_by_role('button',name='実力診断の一覧へ',exact=True).click();assert page.get_by_role('button',name='診断の続きから').count()==0
     action_nav(page,'review');assert page.locator('#main').inner_text()
     context.set_offline(False);page.locator('.sidebar [data-view=home]').click();page.locator('.home-assessments [data-view=diagnostics]').click();page.get_by_role('button',name='30問の診断をはじめる',exact=True).click();page.locator('[name=diagnostic-answer]').first.wait_for()
     for i in range(30):
@@ -56,7 +57,7 @@ with sync_playwright() as p:
     review=page.locator('.diagnostic-review').first;source_id=review.locator('button[data-action=start]').get_attribute('data-id');review.locator('button[data-action=start]').click();page.get_by_role('button',name='ヒントを1つ見る',exact=True).wait_for();page.get_by_role('button',name='ヒントを1つ見る',exact=True).click()
     assert next(r['payload'] for r in state(page)['documents'] if r['id']==final['id'])==final
     retry=state(page)['study'];assert next(a for a in retry['attempts'] if a['id']==retry['currentId'])['questionId']==source_id
-    page.get_by_role('button',name='中断',exact=True).click();page.get_by_role('button',name='計画を見る',exact=True).click();page.evaluate('document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+    page.get_by_role('button',name='中断',exact=True).click();action_nav(page,'history');page.locator('#main [data-view=planning]').click();page.evaluate('document.documentElement.style.fontSize="32px"');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
     page.screenshot(path=str(ARTIFACTS/'planning-mobile-200.png'),full_page=True)
     assert not errors,errors
     browser.close()

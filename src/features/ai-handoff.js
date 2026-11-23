@@ -66,13 +66,16 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
  const dialog=document.getElementById('ai-handoff-dialog');
  const $=id=>dialog.querySelector('#'+id);
  const buttons=[...dialog.querySelectorAll('[data-ai-provider]')];
- let provider='chatgpt',snapshot=null,operation=0,working=false;
+ const providerKey='hitomon-ai-provider';
+ let savedProvider;
+ try{savedProvider=localStorage.getItem(providerKey);}catch{}
+ let provider=Object.hasOwn(DESTINATIONS,savedProvider)?savedProvider:'chatgpt',snapshot=null,operation=0,working=false;
  const controls=[...buttons,$('ai-handoff-detail'),$('ai-handoff-open'),$('ai-handoff-copy-only'),$('ai-handoff-select')];
  function busy(value){working=value;for(const control of controls)control.disabled=value;$('ai-handoff-fallback').setAttribute('aria-disabled',String(value));}
  function cancel(){operation++;snapshot=null;busy(false);}
  async function navigate(dest,token,afterCopy=false){
   const settled=afterCopy?new Promise(resolve=>setTimeout(resolve,CLIPBOARD_SETTLE_MS)):Promise.resolve();
-  showStatus((afterCopy?'質問文をコピーしました。':'')+'学習記録の保存を確認しています。');
+  showStatus((afterCopy?'質問文をコピーしました。AIの画面で貼り付けてください。':'')+'学習記録の保存を確認しています。');
   const saved=await beforeNavigate();
   if(token!==operation||!dialog.open)return;
   if(!saved)throw Error('学習記録を保存できなかったため、移動を止めました。問題画面の「設定」から記録を書き出してください。');
@@ -99,7 +102,8 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
   if(!Object.hasOwn(DESTINATIONS,name))return;
   provider=name;
   for(const b of buttons)b.setAttribute('aria-pressed',String(b.dataset.aiProvider===name));
-  $('ai-handoff-open').textContent='質問文をコピーして'+DESTINATIONS[name].name+'を開く ↗';
+  $('ai-provider-summary').textContent=DESTINATIONS[name].name+' · 変更';
+  $('ai-handoff-open').textContent='コピーして'+DESTINATIONS[name].name+'を開く ↗';
   $('ai-handoff-fallback').textContent=DESTINATIONS[name].name+'を開く ↗';
   $('ai-handoff-fallback').href=DESTINATIONS[name].url;
  }
@@ -131,12 +135,13 @@ export function createAIHandoff({getAttempt,getQuestion,getQualification,getBase
    links.append(a);
   }
   $('ai-handoff-image-info').hidden=urls.length===0;
-  setProvider('chatgpt');
+  $('ai-provider-picker').open=false;
+  setProvider(provider);
   refresh();
   dialog.showModal();
   return true;
  }
- for(const button of buttons)button.addEventListener('click',()=>{setProvider(button.dataset.aiProvider);$('ai-handoff-status').hidden=true;});
+ for(const button of buttons)button.addEventListener('click',()=>{setProvider(button.dataset.aiProvider);try{localStorage.setItem(providerKey,provider);}catch{}$('ai-provider-picker').open=false;$('ai-provider-summary').focus();$('ai-handoff-status').hidden=true;});
  $('ai-handoff-close').addEventListener('click',()=>{cancel();dialog.close();});
  dialog.addEventListener('cancel',cancel);
  dialog.addEventListener('close',()=>{if(!dialog.open)cancel();});

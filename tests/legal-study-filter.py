@@ -1,4 +1,5 @@
 """Private synthetic changed-law material; never modifies published questions."""
+from browser_storage import assessment_action
 import copy,json,shutil,tempfile,threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
@@ -35,7 +36,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-law-filter-') as d:
    with pg.expect_download() as event:pg.locator('#export-state').click()
    backup=root/'private-test-backup.json';event.value.save_as(str(backup));data=json.loads(backup.read_text());assert data['settings']['excludeOutdated'] is True;record=next(r for r in data['records'] if r['questionId']==old['id']);assert record['material']['legalReview']==old['legalReview'];pg.get_by_role('button',name='設定を閉じる').click()
    nav(pg,'home');pg.locator('[data-view=mocks]').click();pg.locator('[data-action=start-mock]').wait_for();assert pg.locator('[data-action=start-mock]').is_disabled();exclude(False);assert pg.locator('[data-action=start-mock]').is_enabled()
-   pg.locator('[data-action=start-mock]').click();pg.locator('[data-action=pause-diagnostic]').wait_for();pg.locator('[data-action=pause-diagnostic]').click();exclude(True);pg.locator('[data-view=mocks]').click();pg.locator('[data-action=resume-diagnostic]').wait_for();assert pg.locator('[data-action=start-mock]').is_disabled();pg.locator('[data-action=resume-diagnostic]').click();pg.locator('[data-action=pause-diagnostic]').wait_for();pg.locator('[data-action=pause-diagnostic]').click()
+   pg.locator('[data-action=start-mock]').click();pg.locator('[data-action=pause-diagnostic]').wait_for();assessment_action(pg, 'pause-diagnostic');exclude(True);pg.locator('[data-view=mocks]').click();pg.locator('[data-action=resume-diagnostic]').wait_for();assert pg.locator('[data-action=start-mock]').is_disabled();pg.locator('[data-action=resume-diagnostic]').click();pg.locator('[data-action=pause-diagnostic]').wait_for();assessment_action(pg, 'pause-diagnostic')
    select_target(pg,'jafp-practical','fp2');pg.locator('.study-entry').wait_for();assert pg.locator('.quick-start [data-action=written-start]').is_disabled()
    exclude(False);pg.locator('[data-action=written-start]').first.click();pg.locator('.written-layout').wait_for();assert '学習非推奨' in pg.locator('.legal-context').inner_text();pg.locator('input[data-written-key="q1--amount"]').fill('123');exclude(True);nav(pg,'home');assert pg.locator('.quick-start [data-action=written-start]').is_disabled() and pg.locator('.study-entry [data-action=written-resume]').count()==0
    nav(pg,'history');pg.locator('[data-action=written-resume]').first.click();pg.locator('.written-layout').wait_for();assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='123'

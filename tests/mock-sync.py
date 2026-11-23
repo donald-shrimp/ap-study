@@ -1,4 +1,5 @@
 """Actual Auth/Firestore SDK: fixed mock snapshots and conflicts across browsers."""
+from browser_storage import assessment_action
 import json,shutil,uuid
 from playwright.sync_api import sync_playwright
 from browser_storage import nav,wait_for_async,state
@@ -8,7 +9,7 @@ def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()
 def close(page):
  if page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.get_by_role('button',name='設定を閉じる').click()
-def kick(page):settings(page);page.locator('#sync-now').click();close(page)
+def kick(page):settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");close(page)
 def synced(page):
  kick(page);wait_for_async(page,'async()=>!(await ('+READ+')()).some(r=>r.dirty||r.conflict)')
 def login(page,email):
@@ -30,7 +31,7 @@ with sync_playwright() as p:
  contexts[1].set_offline(True);c.locator('[name=diagnostic-answer]').first.check();wait_for_async(c,'async()=>{const r=await ('+READ+')();return r.some(r=>r.kind==="mock"&&r.dirty)}')
  a.locator('[name=diagnostic-answer]').nth(1).check();a.get_by_role('button',name='回答して次へ',exact=True).click();a.get_by_text('模試 A 3 / 80問',exact=True).wait_for();synced(a);contexts[1].set_offline(False);kick(c)
  wait_for_async(c,'async()=>{const r=await ('+READ+')();return r.some(r=>r.kind==="mock"&&r.conflict)}');c.get_by_role('heading',name='模試の変更が競合しています',exact=True,level=1).wait_for();c.get_by_role('button',name='クラウドの内容を使う',exact=True).click();c.get_by_text('模試 A 3 / 80問',exact=True).wait_for();assert active(c)['payload']['responses']==active(a)['payload']['responses'];assert json.dumps(active(c)['payload']['slots'],sort_keys=True)==frozen
- a.get_by_role('button',name='ここまでで模試終了',exact=True).click();a.get_by_role('heading',name='模試 Aの結果（部分結果）',exact=True).wait_for();synced(a);synced(c);c.get_by_role('heading',name='模試 Aの結果（部分結果）',exact=True).wait_for()
+ assessment_action(a,'end-diagnostic');a.get_by_role('heading',name='模試 Aの結果（部分結果）',exact=True).wait_for();synced(a);synced(c);c.get_by_role('heading',name='模試 Aの結果（部分結果）',exact=True).wait_for()
  nav(c,'history');c.get_by_role('button',name='模試結果',exact=True).click();assert '前回（途中終了）' in c.locator('[data-mock-set=ap-mock-a]').inner_text();assert state(c)['attempts']==[]
  login(other,'mock-other-'+uuid.uuid4().hex+'@hitomon.test');assert not any(r['kind']=='mock' for r in other.evaluate(READ))
  backup_check=c.evaluate('''async()=>{const rows=await ('''+READ+''')(),{createWorkspaceStore}=await import('/src/storage/workspace.js'),{validateMock}=await import('/src/domain/mock.js'),{loadCatalog}=await import('/src/content/catalog.js'),catalog=await loadCatalog('ap'),store=createWorkspaceStore({owner:'guest:restore-test',qualificationId:'ap',deviceId:'restore-test',rootPath:'/',namespaceName:'mock-backup-test',validate:(kind,payload)=>validateMock(payload,catalog.manifest,()=>{})});try{const result=await store.restoreBackup({plan:null,runs:rows.filter(r=>r.kind==='mock').map(r=>r.payload)}),stored=await store.read();return {result,kinds:stored.map(r=>r.kind),snapshotsMatch:JSON.stringify(stored[0].payload)===JSON.stringify(rows.find(r=>r.kind==='mock').payload)};}finally{await store.close();}}''')

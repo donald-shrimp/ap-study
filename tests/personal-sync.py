@@ -4,7 +4,7 @@ exec(compile((Path(__file__).parent/'sync.py').read_text().split('with sync_play
 READ_PERSONAL='''async()=>{const root=new URL('.',document.baseURI),sdk=await import(new URL('assets/vendor/firebase.js',root)),{createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root)),{createLocalStore}=await import(new URL('src/storage/local.js',root));const main=createLocalStore({rootPath:root.pathname,qualificationId:'ap',owner:sdk.getAuth().currentUser?`uid:${sdk.getAuth().currentUser.uid}`:undefined}),identity=await main.identity();await main.close();const s=createWorkspaceStore({...identity,rootPath:root.pathname,namespaceName:'personal',validate:(k,p)=>p});try{return {rows:await s.read(),identity};}finally{await s.close();}}'''
 def personal(page):return page.evaluate(READ_PERSONAL)
 def personal_synced(page):
- settings(page);page.locator('#sync-now').click();page.wait_for_function('document.getElementById("sync-state").dataset.personal==="synced"',timeout=45000)
+ settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");page.wait_for_function('document.getElementById("sync-state").dataset.personal==="synced"',timeout=45000)
  wait_for_async(page,'async()=>!(await ('+READ_PERSONAL+')()).rows.some(r=>r.kind!=="draft"&&r.dirty)',timeout=45000);close_settings(page)
 def records(page):
  close_settings(page);page.locator('.sidebar [data-view=history]').click();page.locator('[data-reading-topic="ネットワーク"]').wait_for()

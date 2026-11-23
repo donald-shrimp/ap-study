@@ -10,7 +10,7 @@ def settings(page):
 def close(page):
  if page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.get_by_role('button',name='設定を閉じる',exact=True).click()
 def sync(page,conflict=False):
- settings(page);page.locator('#sync-now').click()
+ settings(page);page.evaluate("window.dispatchEvent(new Event('online'))")
  if conflict:page.wait_for_function('document.getElementById("sync-state").dataset.written==="conflict"')
  else:wait_for_async(page,'async()=>{const rows=await ('+READ+')();return !rows.some(r=>r.dirty||r.conflict);}',timeout=30000)
  close(page)

@@ -1,4 +1,5 @@
 """Real AB-730 authored bank in the shared app: mixed choices, diagnosis, backup."""
+from browser_storage import assessment_action
 import json,os,shutil,tempfile,collections
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -45,7 +46,7 @@ with sync_playwright() as p:
  page.set_viewport_size({'width':390,'height':844})
  counts=collections.Counter(s['attempt']['questionSnapshot']['topicId'] for s in r['slots']);assert set(counts.values())=={7,8} and len(counts)==4
  frozen=json.dumps(r['slots'],sort_keys=True)
- q=r['slots'][0]['attempt']['questionSnapshot'];first=(q.get('correctChoiceIds') or [q['correctChoiceId']])[0];page.locator(f'[name=diagnostic-answer][value="{first}"]').check();page.locator('[data-action=pause-diagnostic]').click();page.reload();page.locator('.home-assessments [data-action=resume-diagnostic]').click();page.locator('[name=diagnostic-answer]').first.wait_for();assert page.locator(f'[name=diagnostic-answer][value="{first}"]').is_checked();assert json.dumps(run(page)['slots'],sort_keys=True)==frozen
+ q=r['slots'][0]['attempt']['questionSnapshot'];first=(q.get('correctChoiceIds') or [q['correctChoiceId']])[0];page.locator(f'[name=diagnostic-answer][value="{first}"]').check();assessment_action(page, 'pause-diagnostic');page.reload();page.locator('.home-assessments [data-view=diagnostics]').click();page.locator('[data-action=resume-diagnostic]').first.click();page.locator('[name=diagnostic-answer]').first.wait_for();assert page.locator(f'[name=diagnostic-answer][value="{first}"]').is_checked();assert json.dumps(run(page)['slots'],sort_keys=True)==frozen
  for i in range(30):
   r=run(page);assert r['currentIndex']==i;q=r['slots'][i]['attempt']['questionSnapshot'];assert page.locator('[data-action=hint],[data-action=ask-ai],.hint-section,.result').count()==0
   choose_correct(page,q,'diagnostic-answer');page.locator('[data-action=submit-diagnostic]').click()

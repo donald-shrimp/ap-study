@@ -17,6 +17,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from material_contracts import validate_legal, validate_source_hashes
 from written_content import compile_cases
+from case_explanations import compile_case_explanations
 from offline_content import compile_offline
 ROOT = Path(__file__).resolve().parents[1]
 SAFE_ID = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$')
@@ -427,14 +428,18 @@ def compile_qualification(root, id):
             index.append(item)
     filename, digest = hashed_json(directory, 'index', index)
     assessment=compile_assessments(root, config, questions, directory)
-    public_config = {k: v for k, v in config.items() if k not in ['legalContextSource', 'legalContextReviewSource', 'adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource']}
+    public_config = {k: v for k, v in config.items() if k not in ['legalContextSource', 'legalContextReviewSource', 'adapter', 'questionSource', 'questionReviewSource', 'assessmentQuestionSource', 'assessmentReviewSource', 'studyContextSource', 'flashcardSource', 'mockSetSource', 'caseSource', 'caseReviewSource', 'caseExplanationSource', 'caseAnswerSetSource', 'caseFeedbackSource', 'caseFeedbackReviewSource']}
     manifest = {**public_config, 'count': len(questions), 'reviewed': sum(q['enrichment'] == 'reviewed' for q in questions), 'index': {'url': filename, 'sha256': digest}, 'packs': packs}
     if assessment is not None:
         manifest['assessment']=assessment
     mock_sets=compile_mock_sets(root,config,questions,directory)
     if mock_sets is not None:manifest['mockSets']=mock_sets
     cases=compile_cases(root,config,directory,hashed_json)
-    if cases is not None:manifest['cases']=cases
+    if cases is not None:
+        manifest['cases'] = cases
+        explanations = compile_case_explanations(root, config, cases, directory, hashed_json)
+        if explanations:
+            manifest['caseExplanations'] = explanations
     require(questions or cases and cases['count'], f'Empty qualification: {id}')
     targets=[]
     case_counts=defaultdict(int)
@@ -462,7 +467,7 @@ def build(root):
     require(len(set(settings['qualifications'])) == len(settings['qualifications']), 'Duplicate qualification')
     results = [compile_qualification(root, id) for id in settings['qualifications']]
     write_json(root / 'data' / 'qualifications' / 'catalog.json', {'qualifications': [record for record, _ in results]})
-    template = (root / 'templates' / 'study.html').read_text()
+    template = (root / 'templates' / 'study.html').read_text(encoding='utf-8')
     for record, config in results:
         html = template.replace('<html lang="ja">', f'<html lang="ja" data-qualification="{record["id"]}">').replace('<head>', '<head>\n  <base href="../">', 1)
         html = html.replace('ひと問｜応用情報の過去問学習', f'ひと問｜{html_tools.escape(config["shortName"])}の学習')
@@ -470,10 +475,10 @@ def build(root):
         html=re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{description}">', html)
         destination = root / record['id'] / 'index.html'
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_text(html)
+        destination.write_text(html, encoding='utf-8', newline='\n')
     # One qualification keeps the existing immediate start. The shared controller
     # displays a chooser at the root when the catalog has multiple qualifications.
-    (root / 'index.html').write_text(template)
+    (root / 'index.html').write_text(template, encoding='utf-8', newline='\n')
     print('Built', ', '.join(f"{r['id']}: {r['count']} questions" for r, _ in results))
 
 

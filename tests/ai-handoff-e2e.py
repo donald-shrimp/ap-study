@@ -53,7 +53,7 @@ with sync_playwright() as p:
     page.locator('#ai-handoff-prompt-details>summary').click()
     page.locator('#ai-handoff-copy-only').click()
     page.wait_for_function('document.querySelector("#ai-handoff-status").textContent.includes("質問文をコピーしました")')
-    assert page.evaluate('navigator.clipboard.readText()') == preview, "Native Chromium clipboard must receive the exact prompt"
+    assert page.evaluate('navigator.clipboard.readText()').replace('\r\n', '\n') == preview, "Native Chromium clipboard must receive the exact prompt"
 
     # Native copying must finish while the study tab is focused, before opening.
     page.evaluate('navigator.clipboard.writeText("前回の文章を再設定")')
@@ -64,14 +64,22 @@ with sync_playwright() as p:
     assert ai.evaluate('window.opener===null'), 'External AI must not control the original tab'
     assert page.url.startswith(BASE) and not page.locator('#ai-handoff-dialog').is_visible()
     page.bring_to_front()
-    assert page.evaluate('navigator.clipboard.readText()')==preview
+    assert page.evaluate('navigator.clipboard.readText()').replace('\r\n', '\n')==preview
     assert page.evaluate('window.aiOpened')==[['https://chatgpt.com/','_blank']], 'Open destination directly, without a waiting tab'
     assert state(page)['currentId']==before['currentId']
     ai.close();page.locator('[data-action="ask-ai"]').click()
     page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して')
 
+    page.locator('#ai-provider-summary').click()
+
     page.locator('[data-ai-provider="gemini"]').click()
     assert "Gemini" in page.locator("#ai-handoff-open").inner_text()
+    page.locator('#ai-handoff-close').click()
+    page.locator('[data-action="ask-ai"]').click()
+    assert "Gemini" in page.locator("#ai-handoff-open").inner_text()
+    assert not page.locator('[data-ai-provider=gemini]').is_visible()
+    page.locator('#ai-handoff-detail').fill('式の意味をもっと説明して')
+    page.locator('#ai-provider-summary').click()
     page.locator('[data-ai-provider="chatgpt"]').click()
     page.evaluate("""() => {
         Object.defineProperty(navigator, 'clipboard', {
@@ -164,6 +172,7 @@ with sync_playwright() as p:
     other.expose_function('captureAICopy',lambda value:copied.append(value))
     for provider, url in [('gemini','https://gemini.google.com/'),('claude','https://claude.ai/')]:
         other.locator('[data-action="ask-ai"]').click()
+        other.locator('#ai-provider-summary').click()
         other.locator(f'[data-ai-provider="{provider}"]').click()
         other.evaluate("""() => {Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>await window.captureAICopy(value)}})}""")
         context.route(url+'**',lambda route:route.fulfill(status=200,content_type='text/html',body='<h1>Provider fixture</h1>'))
@@ -175,6 +184,7 @@ with sync_playwright() as p:
 
     # A browser blocking asynchronous popups must never replace the study tab.
     other.locator('[data-action="ask-ai"]').click()
+    other.locator('#ai-provider-summary').click()
     other.locator('[data-ai-provider="chatgpt"]').click()
     other.evaluate('window.realOpen=window.open;window.open=()=>null')
     other.locator('#ai-handoff-open').click()

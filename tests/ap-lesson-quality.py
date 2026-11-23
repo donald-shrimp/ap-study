@@ -29,7 +29,7 @@ class QualityGates(unittest.TestCase):
             shutil.copyfile(ROOT/'data'/name, cls.root/'data'/name)
         work = cls.root/quality.WORK
         manifest = quality.read(work/'manifest.json')
-        manifest['baselineFiles'] = {str(p.relative_to(work/'baseline')): quality.file_digest(p) for p in (work/'baseline').rglob('*') if p.is_file()}
+        manifest['baselineFiles'] = {p.relative_to(work/'baseline').as_posix(): quality.file_digest(p) for p in (work/'baseline').rglob('*') if p.is_file()}
         quality.write(work/'manifest.json', manifest)
         inventory = quality.read(work/'inventory.json')
         for row in inventory:

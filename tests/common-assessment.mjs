@@ -65,5 +65,14 @@ test('模試セットの変更・公開終了後も保存済み40問の再開と
  const retired=createMockViews({qualification:{...qualification,mockSets:{count:0,sets:[]}},documents});assert.match(retired.selectionHTML(),/続きから/);assert.doesNotMatch(retired.selectionHTML(),/data-action="start-mock"/);
  submitDiagnostic(run,'b');finishDiagnostic(run);
  const views=createPlanningViews({qualification:{...qualification,mockSets:{count:0,sets:[]}},documents,attempts:[],currentRunId:run.id,practiceQuestionIds:new Set(),practiceTopicIds:new Set()});
- assert.equal(views.hasMocks,true);const result=views.diagnosticHTML();assert.match(result,/全40問を分母/);assert.doesNotMatch(result,/全80問|data-action="topic-session"/);assert.match(views.mockRecordsHTML(),/記録を見る/);
+ assert.equal(views.hasMocks,true);
+ const result=views.diagnosticHTML();
+ assert.match(result,/正答率：3% · 1 \/ 40問正解/);
+ assert.doesNotMatch(result,/1 \/ 80問正解|data-action="topic-session"/);
+ const history=createMockViews({
+  qualification:{...qualification,mockSets:{count:0,sets:[]}},
+  documents,currentSetId:set.id
+ });
+ assert.match(retired.selectionHTML(),/受験の記録/);
+ assert.match(history.detailHTML(),/結果を見る/);
 });

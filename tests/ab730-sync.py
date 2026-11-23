@@ -1,4 +1,5 @@
 """Actual AB bank, two separate browser stores and real Firebase SDK emulators only."""
+from browser_storage import assessment_action
 import json,shutil,uuid
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -10,7 +11,7 @@ def settings(page):
  if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()
 def close(page):
  if page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.get_by_role('button',name='設定を閉じる',exact=True).click()
-def kick(page):settings(page);page.locator('#sync-now').click();close(page)
+def kick(page):settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");close(page)
 def synced(page):
  kick(page);wait_for_async(page,'async()=>{const r=await ('+READ+')();return !r.pending.length&&!r.rows.some(r=>r.dirty||r.conflict)}',timeout=30000)
 def login(page,email):
@@ -34,7 +35,7 @@ with sync_playwright() as p:
  for id in q['correctChoiceIds']:b.locator('[name=answer]').nth(next(i for i,c in enumerate(q['choices']) if c['id']==id)).check()
  b.locator('[data-action=submit]').click();b.locator('#result-heading').wait_for();synced(b);kick(a)
  wait_for_async(a,'async()=>(await ('+READ+')()).state.attempts.some(a=>a.questionId==='+json.dumps(q['id'])+'&&a.status==="correct"&&a.selectedChoiceIds?.length=='+str(len(q['correctChoiceIds']))+')')
- nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='30問の診断をはじめる',exact=True).click();a.locator('[name=diagnostic-answer]').first.check();a.locator('[data-action=pause-diagnostic]').click();synced(a);kick(b)
- wait_for_async(b,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&r.payload.currentChoiceId!==null)');nav(b,'home');b.locator('.home-assessments [data-action=resume-diagnostic]').click();b.locator('[name=diagnostic-answer]:checked').wait_for();b.locator('[data-action=skip-diagnostic]').click();b.locator('[data-action=end-diagnostic]').click();b.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(b);kick(a)
+ nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='30問の診断をはじめる',exact=True).click();a.locator('[name=diagnostic-answer]').first.check();assessment_action(a, 'pause-diagnostic');synced(a);kick(b)
+ wait_for_async(b,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&r.payload.currentChoiceId!==null)');nav(b,'home');b.locator('.home-assessments [data-view=diagnostics]').click();b.locator('[data-action=resume-diagnostic]').first.click();b.locator('[name=diagnostic-answer]:checked').wait_for();b.locator('[data-action=skip-diagnostic]').click();assessment_action(b, 'end-diagnostic');b.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(b);kick(a)
  wait_for_async(a,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&r.payload.status==="ended_early")');assert not errors,errors;browser.close()
 print('PASS actual AB-730 real Auth/Firestore emulators / guest partial multiple selection import / two-device resume+grading / original source and syllabus snapshot preserved /30-question diagnostic checkpoint and partial result sync / no production writes')
