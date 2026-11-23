@@ -8,7 +8,6 @@
     "label",
     "type",
     "grading",
-    "referenceAnswers",
     "explanation",
     "rubric"
   ],
@@ -26,7 +25,8 @@
         "singleChoice",
         "shortText",
         "freeText",
-        "numeric"
+        "numeric",
+        "answerSet"
       ]
     },
     "maxLength": {
@@ -115,6 +115,60 @@
         }
       },
       "additionalProperties": false
+    },
+    "answerSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourceFieldIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+          }
+        },
+        "slots": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      }
+    },
+    "grading": {
+      "type": "object",
+      "required": [
+        "method"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "correctChoiceIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$"
+      }
     }
   },
   "oneOf": [
@@ -124,18 +178,17 @@
           "const": "singleChoice"
         },
         "grading": {
-          "type": "object",
-          "required": [
-            "method"
-          ],
           "properties": {
             "method": {
               "enum": [
-                "exactText"
+                "exactText",
+                "exactChoiceSet"
               ]
             }
-          },
-          "additionalProperties": false
+          }
+        },
+        "correctChoiceIds": {
+          "maxItems": 1
         }
       },
       "required": [
@@ -148,10 +201,6 @@
           "const": "shortText"
         },
         "grading": {
-          "type": "object",
-          "required": [
-            "method"
-          ],
           "properties": {
             "method": {
               "enum": [
@@ -159,8 +208,7 @@
                 "self"
               ]
             }
-          },
-          "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -173,18 +221,13 @@
           "const": "freeText"
         },
         "grading": {
-          "type": "object",
-          "required": [
-            "method"
-          ],
           "properties": {
             "method": {
               "enum": [
                 "self"
               ]
             }
-          },
-          "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -197,18 +240,13 @@
           "const": "numeric"
         },
         "grading": {
-          "type": "object",
-          "required": [
-            "method"
-          ],
           "properties": {
             "method": {
               "enum": [
                 "exactDecimal"
               ]
             }
-          },
-          "additionalProperties": false
+          }
         },
         "maxLength": {
           "type": "integer",
@@ -220,7 +258,117 @@
         "numeric",
         "maxLength"
       ]
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "answerSet"
+        },
+        "grading": {
+          "properties": {
+            "method": {
+              "enum": [
+                "unordered",
+                "exactChoiceSet"
+              ]
+            }
+          }
+        },
+        "referenceAnswers": {
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "answerSet"
+      ]
     }
   ],
-  "$comment": "数値の正答は単位・区切りなしの十進文字列。入力への自動丸めや単位換算は行わない。"
+  "$comment": "数値の正答は単位・区切りなしの十進文字列。入力への自動丸めや単位換算は行わない。",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "grading": {
+            "properties": {
+              "method": {
+                "const": "exactChoiceSet"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "choices",
+          "correctChoiceIds"
+        ],
+        "not": {
+          "required": [
+            "referenceAnswers"
+          ]
+        }
+      },
+      "else": {
+        "required": [
+          "referenceAnswers"
+        ],
+        "not": {
+          "required": [
+            "correctChoiceIds"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "singleChoice",
+              "answerSet"
+            ]
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "choices"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "answerSet"
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "answerSet"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "numeric"
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "numeric"
+          ]
+        }
+      }
+    }
+  ]
 }

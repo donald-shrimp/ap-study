@@ -1,4 +1,5 @@
 """Private mixed-format fixture + real SDK/Auth/Firestore emulators in two browsers."""
+from browser_storage import assessment_action
 import copy,json,shutil,tempfile,threading,uuid
 from pathlib import Path
 from functools import partial
@@ -13,7 +14,7 @@ def settings(page):
     if not page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.locator('#settings-button').click()
 def close(page):
     if page.locator('#settings-dialog').evaluate('(d)=>d.open'):page.get_by_role('button',name='設定を閉じる',exact=True).click()
-def kick(page):settings(page);page.locator('#sync-now').click();close(page)
+def kick(page):settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");close(page)
 def synced(page):
     kick(page);wait_for_async(page,'async()=>{const r=await ('+READ+')();return !r.pending.length&&!r.rows.some(r=>r.dirty||r.conflict)}',timeout=20000)
 def login(page,email):
@@ -36,7 +37,7 @@ with tempfile.TemporaryDirectory() as d:
             email='typed-'+uuid.uuid4().hex+'@example.test';login(a,email);login(b,email)
             a.locator('.study-entrance').first.click();a.get_by_role('checkbox').nth(2).check();synced(a);kick(b);wait_for_async(b,'async()=>(await ('+READ+')()).state?.attempts.some(a=>a.selectedChoiceIds?.includes("c"))')
             b.locator('.study-entrance').first.click();b.get_by_role('checkbox').nth(2).wait_for();assert b.get_by_role('checkbox').nth(2).is_checked();b.get_by_role('checkbox').first.check();b.locator('[data-action=submit]').click();b.locator('#result-heading').wait_for();synced(b);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).state.attempts.some(a=>a.status==="correct"&&JSON.stringify(a.selectedChoiceIds)==="[\\"a\\",\\"c\\"]")')
-            nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='40問の診断をはじめる',exact=True).click();a.get_by_role('checkbox').nth(2).check();a.locator('[data-action=pause-diagnostic]').click();synced(a);kick(b);wait_for_async(b,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&JSON.stringify(r.payload.currentChoiceId)==="[\\"c\\"]")');nav(b,'home');b.locator('.home-assessments [data-action=resume-diagnostic]').click();b.get_by_role('checkbox').nth(2).wait_for();assert b.get_by_role('checkbox').nth(2).is_checked();b.get_by_role('checkbox').first.check();b.locator('[data-action=submit-diagnostic]').click();b.locator('[data-action=end-diagnostic]').click();b.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(b);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&r.payload.status==="ended_early")');nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='結果を見る',exact=True).click();a.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();assert '正解 1' in a.locator('#main').inner_text();assert not errors,errors
+            nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='40問の診断をはじめる',exact=True).click();a.get_by_role('checkbox').nth(2).check();assessment_action(a, 'pause-diagnostic');synced(a);kick(b);wait_for_async(b,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&JSON.stringify(r.payload.currentChoiceId)==="[\\"c\\"]")');nav(b,'home');b.locator('.home-assessments [data-view=diagnostics]').click();b.locator('[data-action=resume-diagnostic]').first.click();b.get_by_role('checkbox').nth(2).wait_for();assert b.get_by_role('checkbox').nth(2).is_checked();b.get_by_role('checkbox').first.check();b.locator('[data-action=submit-diagnostic]').click();assessment_action(b, 'end-diagnostic');b.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();synced(b);kick(a);wait_for_async(a,'async()=>(await ('+READ+')()).rows.some(r=>r.kind==="diagnostic"&&r.payload.status==="ended_early")');nav(a,'home');a.locator('.home-assessments [data-view=diagnostics]').click();a.get_by_role('button',name='結果を見る',exact=True).click();a.get_by_role('heading',name='診断結果（部分結果）',exact=True).wait_for();assert '正解 1' in a.locator('#main').inner_text();assert not errors,errors
             browser.close()
     finally:server.shutdown()
 print('PASS real Auth/Firestore and two browser stores / partial multiple selection sync / foreign-device continuation and exact grading / diagnosis array checkpoint and completed result sync / no production writes')

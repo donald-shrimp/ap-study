@@ -1,0 +1,109 @@
+{
+  "scope": "exact arithmetic, source message table comparison and a small model of selected state transitions; no live cloud or vehicle test; strategy interpretation is separately reviewed",
+  "sla": {
+    "monthlyMinutes": "43200",
+    "exactOutageLimitMinutes": "21.6000",
+    "answerAfterRounding": "22",
+    "22MinutesMeetsGuarantee": false,
+    "discountYen": 900,
+    "incorrectAllOutageDiscountYen": 1000
+  },
+  "embedded": {
+    "trajectory": [
+      "走行準備",
+      "加速可能",
+      "走行中",
+      "加速可能"
+    ],
+    "messageNames": [
+      "貸出し要求",
+      "貸出し指示",
+      "車輪ロック解除指示",
+      "車輪ロック解除応答",
+      "貸出し応答"
+    ],
+    "messagePeers": [
+      [
+        "アプリ",
+        "管理サーバ"
+      ],
+      [
+        "管理サーバ",
+        "アプリ"
+      ],
+      [
+        "アプリ",
+        "電動KB"
+      ],
+      [
+        "電動KB",
+        "アプリ"
+      ],
+      [
+        "アプリ",
+        "管理サーバ"
+      ]
+    ],
+    "firstIntervalMilliseconds": [
+      200,
+      200
+    ],
+    "secondIntervalMilliseconds": [
+      10,
+      1000,
+      10,
+      500,
+      10,
+      1000,
+      10
+    ],
+    "firstAnswerSeconds": "0.40",
+    "secondAnswerSeconds": "2.54",
+    "excludedLaterReportMilliseconds": 200,
+    "lowSpeedThresholdStrictAndDurationRequired": true
+  },
+  "answerLimits": [
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q1-1",
+      "characters": 13,
+      "maximum": 15,
+      "answer": "コア技術を維持してきたこと"
+    },
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q1-2",
+      "characters": 4,
+      "maximum": 5,
+      "answer": "シナジー"
+    },
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q2-2",
+      "characters": 32,
+      "maximum": 35,
+      "answer": "再生医療市場の拡大を見込み，抗酸化技術を応用した製品を開発する。"
+    },
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q3-2",
+      "characters": 26,
+      "maximum": 30,
+      "answer": "事業環境の変化による事業リスクを分散・軽減できること"
+    },
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q3-3",
+      "characters": 9,
+      "maximum": 15,
+      "answer": "映像関連事業を売却"
+    },
+    {
+      "caseId": "ap-r07h-pm2",
+      "itemId": "q3-4",
+      "characters": 9,
+      "maximum": 10,
+      "answer": "対応スピードの速さ"
+    }
+  ]
+}

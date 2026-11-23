@@ -1,4 +1,4 @@
-import {isMultiple,validResponse,canonicalIds,canSubmitIds,correctIds,sameChoices} from './question-format.js';
+import {isMultiple,validResponse,canonicalIds,canSubmitIds,matchesChoiceAnswer} from './question-format.js';
 import {createAttempt,selectAnswer,finalizeAttempt,toggleChoice} from './study.js';
 import {questionFamily,questionKind,canUseQuestion} from './content-policy.js';
 import {validAssessmentSize,validSelectionPolicy,diagnosticPolicy} from './assessment-policy.js';
@@ -26,7 +26,7 @@ const resultsCache=new WeakMap();
 export function assessmentAttempts(run){
  if(run.status==='in_progress')return [];
  if(resultsCache.has(run))return resultsCache.get(run);
- const result=run.slots.filter(s=>Object.hasOwn(run.responses,s.id)&&run.responses[s.id]!==null).map(s=>{const a=structuredClone(s.attempt);a.id=s.id;const q=a.questionSnapshot,response=run.responses[s.id];if(isMultiple(q)){for(const id of response)toggleChoice(a,id,true);}else selectAnswer(a,q.choices.findIndex(c=>c.id===response));finalizeAttempt(a,sameChoices(Array.isArray(response)?response:[response],correctIds(q))?'correct':'incorrect',run.completedAt);a.diagnosticRunId=run.id;return a;});
+ const result=run.slots.filter(s=>Object.hasOwn(run.responses,s.id)&&run.responses[s.id]!==null).map(s=>{const a=structuredClone(s.attempt);a.id=s.id;const q=a.questionSnapshot,response=run.responses[s.id];if(isMultiple(q)){for(const id of response)toggleChoice(a,id,true);}else selectAnswer(a,q.choices.findIndex(c=>c.id===response));finalizeAttempt(a,matchesChoiceAnswer(q,Array.isArray(response)?response:[response])?'correct':'incorrect',run.completedAt);a.diagnosticRunId=run.id;return a;});
  resultsCache.set(run,result);return result;
 }
 export function assessmentExposure(run){

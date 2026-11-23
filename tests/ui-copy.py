@@ -6,7 +6,7 @@ from browser_storage import state,nav,open_data_management
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=Path(tempfile.mkdtemp(prefix='hitomon-ui-copy-'))
-URL='http://127.0.0.1:4173/'
+URL='http://127.0.0.1:4173/ap/?part=objective&entry=home'
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=shutil.which('chromium'),headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':390,'height':844});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
@@ -75,17 +75,18 @@ with sync_playwright() as p:
     page.wait_for_function('document.getElementById("settings-status").textContent.includes("取り込みました")')
     with page.expect_download() as download:page.locator('[data-action=card-export]').click()
     assert json.loads(Path(download.value.path()).read_text())['events']==[event]
-    page.locator('.card-data > summary').click();page.once('dialog',lambda d:d.accept());page.locator('[data-action=card-clear]').click()
+    page.locator('#delete-records > summary').click();page.once('dialog',lambda d:d.accept());page.locator('[data-action=card-clear]').click()
     page.wait_for_function('document.getElementById("settings-status").textContent.includes("削除しました")')
     with page.expect_download() as download:page.locator('[data-action=card-export]').click()
     assert json.loads(Path(download.value.path()).read_text())['events']==[]
     assert state(page)['attempts']==before['attempts']
     with page.expect_download() as download:page.locator('#export-state').click()
     backup=json.loads(Path(download.value.path()).read_text());assert backup['attempts']==before['attempts']
-    with page.expect_download() as download:page.locator('[data-action=export-diagnostics]').click()
-    assert json.loads(Path(download.value.path()).read_text())['format']=='hitomon-diagnostics'
-    page.locator('#import-diagnostics').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':b'{}'})
-    page.wait_for_function('document.getElementById("settings-status").textContent.includes("バックアップ")')
+    assert page.locator('[data-action=export-diagnostics], #import-diagnostics').count()==0
+    legacy={'format':'hitomon-diagnostics','version':2,'qualificationId':'ap','runs':[]}
+    page.once('dialog',lambda d:d.accept())
+    page.locator('#import-state').set_input_files({'name':'diagnostics.json','mimeType':'application/json','buffer':json.dumps(legacy).encode()})
+    page.wait_for_function('document.getElementById("settings-status").textContent.includes("診断を取り込みました")')
     page.get_by_role('button',name='設定を閉じる').click()
     nav(page,'materials');assert page.locator('[name=enriched]').count()==0
     assert '個別ヒント・解説あり' not in page.locator('#main').inner_text()

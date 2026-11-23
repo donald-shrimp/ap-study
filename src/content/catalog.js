@@ -152,7 +152,53 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false,req
     await loading.get(pack.id);
     return question;
   }
-  return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, loadCases:async()=>{if(!manifest.cases)return [];const {value}=await readJSON(new URL(manifest.cases.url,manifestURL),manifest.cases.sha256);if(value.format!=='hitomon-case-bank'||value.version!==2||value.qualificationId!==manifest.id||value.cases.length!==manifest.cases.count)throw contentError('記述教材を確認できません。','教材');return value.cases;}, online:loaded.online && index.online,
+  async function loadCaseExplanation(pack, entry) {
+    const {value}=await readJSON(new URL(pack.url,manifestURL),pack.sha256);
+    if(value?.format!=='hitomon-case-explanation-pack'||value.version!==1||value.qualificationId!==manifest.id||
+       value.packId!==pack.packId||!Array.isArray(value.cases)||value.cases.length!==pack.cases.length)
+      throw contentError('大問解説を確認できません。','教材');
+    const explanation=value.cases.find(c=>c.caseId===entry.caseId);
+    if(!explanation||explanation.caseVersion!==entry.caseVersion||explanation.revision!==entry.revision||!Array.isArray(explanation.sections))
+      throw contentError('この問題に対応する大問解説を確認できません。','教材');
+    return explanation;
+  }
+  async function loadCases(){
+    if(!manifest.cases)return [];
+    const {value}=await readJSON(new URL(manifest.cases.url,manifestURL),manifest.cases.sha256);
+    if(value.format!=='hitomon-case-bank'||value.version!==2||value.qualificationId!==manifest.id||!Array.isArray(value.cases)||value.cases.length!==manifest.cases.count)
+      throw contentError('記述教材を確認できません。','教材');
+    return value.cases;
+  }
+  async function loadCaseAnswerSets(){
+    const record=manifest.cases?.answerSets;
+    if(!record)return {};
+    try{
+      const {value}=await readJSON(new URL(record.url,manifestURL),record.sha256);
+      if(value.format!=='hitomon-case-answer-sets'||value.version!==1||value.qualificationId!==manifest.id||
+       !value.revisions||Object.keys(value.revisions).length!==record.count)
+        throw contentError('回答欄の教材を確認できません。','教材');
+      return value.revisions;
+    }catch(error){
+      // A previously downloaded session still supports its original answer forms.
+      if(!navigator.onLine)return {};
+      throw error;
+    }
+  }
+  async function loadCaseFeedback(){
+    const record=manifest.cases?.feedback;
+    if(!record)return {};
+    try{
+      const {value}=await readJSON(new URL(record.url,manifestURL),record.sha256);
+      if(value?.format!=='hitomon-case-feedback'||value.version!==1||value.qualificationId!==manifest.id||
+       !value.cases||Object.keys(value.cases).length!==record.caseIds.length||
+       !record.caseIds.every(id=>Object.hasOwn(value.cases,id)))return {};
+      return value.cases;
+    }catch{
+      // Previously saved sessions can still show their original feedback.
+      return {};
+    }
+  }
+  return {manifest, qualifications, questions, packs, ensure, loadAssessments, loadMockSets, loadCaseExplanation, loadCases, loadCaseAnswerSets, loadCaseFeedback, online:loaded.online && index.online,
     loadStudyContext:()=>loadLearningTool('studyContext'),loadFlashcards:()=>loadLearningTool('flashcards'),
     loadOffline:async()=>{if(!manifest.offline)throw contentError('Offline inventory not available','保存用の教材一覧');return (await readJSON(new URL(manifest.offline.url,manifestURL),manifest.offline.sha256)).value;},
     loadAll:()=>Promise.all([...packs.keys()].map(id=>ensure(questions.find(q=>q.packId===id).id)))};

@@ -1,4 +1,4 @@
-import {isMultiple,chosenIds,correctIds,sameChoices,canonicalIds} from './question-format.js';
+import {isMultiple,chosenIds,matchesChoiceAnswer,canonicalIds} from './question-format.js';
 import {now} from '../utils.js';
 import {canUseQuestion} from './content-policy.js';
 export const makeState = () => ({version:2, attempts:[], currentId:null, currentRunId:null, view:'home', settings:{largeText:false,textSize:100,paperMode:'all',lastEntry:'all',deskQuestionIds:[],excludeOutdated:true}, session:{attemptIds:[], topic:null}, readingNotes:{}, overrides:{}});
@@ -26,9 +26,10 @@ export function openHint(a, at=now()) {
 }
 export function gradeAttempt(a, answer) {
  if(complete(a))return a.status;
- const correctAnswer=a.questionSnapshot?.answer??answer;
- if(isMultiple(a.questionSnapshot))return a.answerViewedBefore?'revealed':sameChoices(chosenIds(a),correctIds(a.questionSnapshot))?(a.hintCount?'assisted':'correct'):'incorrect';
- return a.answerViewedBefore?'revealed':a.selected===correctAnswer?(a.hintCount?'assisted':'correct'):'incorrect';
+ if(a.answerViewedBefore)return 'revealed';
+ const question=a.questionSnapshot;
+ const correct=question?matchesChoiceAnswer(question,chosenIds(a)):a.selected===answer;
+ return correct?(a.hintCount?'assisted':'correct'):'incorrect';
 }
 export function finalizeAttempt(a,status,at=now()) {
  if(complete(a))return false;

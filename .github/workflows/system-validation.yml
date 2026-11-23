@@ -7,6 +7,7 @@ on:
       - 'tools/**'
       - 'schemas/**'
       - 'work/ap/objective-quality/**'
+      - 'work/ap/case-explanations/**'
       - 'content/**'
       - 'data/**'
       - 'assets/**'
@@ -27,6 +28,7 @@ on:
       - 'tools/**'
       - 'schemas/**'
       - 'work/ap/objective-quality/**'
+      - 'work/ap/case-explanations/**'
       - 'content/**'
       - 'data/**'
       - 'assets/**'
@@ -78,6 +80,7 @@ jobs:
           python tests/branding.py
           python tests/common-content.py
           python tests/written-content.py
+          python tests/case-grading.py
           python tests/fp2-content.py
           python tests/fp2-review-gates.py
           python tests/body-reference-targets.py
@@ -105,7 +108,11 @@ jobs:
           python tests/workspace-cursor.py
           python tests/learning-storage-race.py
           python tests/subject-b-saving.py
+          HITOMON_TEST_FULL_ROUND=1 python tests/written-reflection.py
           python tests/case-batch-check.py
+          python tests/written-answer-sets.py
+          python tests/written-feedback.py
+          python tests/case-grading.py --browser
           python tests/body-references.py
           python tests/sync-labels.py
           python tests/practice-scheduling.py

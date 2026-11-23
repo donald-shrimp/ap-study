@@ -1,11 +1,12 @@
 """Real reviewed FP practical corpus: render, grading, offline and saved records."""
+from browser_storage import open_offline
 import json,os,shutil,threading,tempfile
 from pathlib import Path
 from urllib.parse import urlparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
-from browser_storage import open_written_case, open_data_management,select_target,state
+from browser_storage import open_written_case, open_data_management,select_target,state,open_written_field_actions
 ROOT=Path(__file__).resolve().parents[1];scratch=Path(tempfile.mkdtemp(prefix='hitomon-fp2-practical-'))
 cases=json.loads((ROOT/'content/fp2/practical-cases.json').read_text())
 class Handler(SimpleHTTPRequestHandler):
@@ -33,6 +34,7 @@ try:
     if width<1000:pg.locator('[data-action=written-pane][data-pane=body]').click();pg.locator('.written-layout[data-pane=body]').wait_for()
     assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(n,width)
     if n in [15,16,33,39] and width in [390,1440]:pg.screenshot(path=str(scratch/f'preview-q{n:02}-{width}.png'))
+   open_written_field_actions(pg)
    # All official fields through the actual input and submit flow.
    for i in c['items']:
     for f in i['fields']:
@@ -42,7 +44,7 @@ try:
      else:pg.locator('input'+selector).fill(f['referenceAnswers'][0])
      pg.locator('[data-action=written-submit]'+selector).click();pg.locator('section.written-field'+selector).filter(has_text='自動判定：正解').wait_for()
    print('checked',n,flush=True)
-  pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for();pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
+  pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for();open_offline(pg);pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
   open_written_case(pg,'fp2-202605-jafp-q16');pg.locator('.written-layout').wait_for();pg.wait_for_function('Array.from(document.querySelectorAll(".written-body img")).every(i=>i.complete&&i.naturalWidth>0)');assert pg.locator('.written-body img').count()==1
   pg.locator('#main .study-toolbar [data-view=home]').click();pg.locator('.study-entry').wait_for()
   open_written_case(pg,'fp2-202605-jafp-q04');pg.locator('input[data-written-key="item1--yield"]').fill('0.435');pg.reload();pg.locator('input[data-written-key="item1--yield"]').wait_for();assert pg.locator('input[data-written-key="item1--yield"]').input_value()=='0.435'

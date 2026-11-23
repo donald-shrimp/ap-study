@@ -35,7 +35,7 @@ def login(page,email):
     synced(page)
 
 def synced(page):
-    settings(page);page.locator('#sync-now').click()
+    settings(page);page.evaluate("window.dispatchEvent(new Event('online'))")
     try:page.wait_for_function('document.getElementById("sync-state").dataset.study==="synced"',timeout=30000)
     except Exception:
         print('SYNC STATUS',page.locator('#sync-state').inner_text(),flush=True);print('PENDING',[(i['id'],i['revision'],i['payload']['evaluation']['outcome'] if i['payload']['evaluation'] else i['payload']['progress']['status']) for i in state(page)['pending']],flush=True);raise

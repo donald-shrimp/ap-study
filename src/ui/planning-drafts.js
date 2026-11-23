@@ -20,7 +20,12 @@ export function createPlanningDrafts(isPlanning) {
   for(const form of document.querySelectorAll('#main form')){
    const draft=forms.get(key(form));if(!draft)continue;
    if(draft.revision!==undefined)form.dataset.revision=draft.revision;
-   const fields=controls(form);draft.fields.forEach((saved,i)=>{const el=fields[i];if(!el||el.name!==saved.name||el.type!==saved.type)return;if(['checkbox','radio'].includes(el.type))el.checked=saved.checked;else el.value=saved.value;});
+   const fields=controls(form);
+   draft.fields.forEach((saved,i)=>{
+    const el=fields[i];if(!el||el.name!==saved.name||el.type!==saved.type)return;
+    if(['checkbox','radio'].includes(el.type))el.checked=saved.checked;else el.value=saved.value;
+    if(dirty(el))for(let parent=el.parentElement;parent&&parent!==form;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;
+   });
    for(let el=form.parentElement;el;el=el.parentElement)if(el.tagName==='DETAILS')el.open=true;
   }
  }

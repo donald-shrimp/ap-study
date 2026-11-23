@@ -70,7 +70,7 @@ with sync_playwright() as p:
             images=[path for slot in slots for path in [*slot['attempt']['questionSnapshot'].get('sourceImages',[]),slot['attempt']['questionSnapshot'].get('image'),*(c.get('image') for c in slot['attempt']['questionSnapshot']['choices'])] if path]
             assert page.evaluate('async paths=>{const cache=await caches.open(`hitomon-${new URL(".",document.baseURI).pathname}images`);return (await Promise.all(paths.map(p=>cache.match(p)))).every(Boolean);}',images)
             context.set_offline(True);page.reload()
-            page.locator('.home-assessments [data-action=resume-diagnostic]').click()
+            page.locator('.home-assessments [data-view=diagnostics]').click();page.locator('[data-action=resume-diagnostic]').first.click()
             page.get_by_text('診断 3 / 30問',exact=True).wait_for()
             assert page.locator(f'[name=diagnostic-answer][value="{answer}"]').is_checked()
             assert json.dumps(run(page)['slots'],sort_keys=True)==frozen

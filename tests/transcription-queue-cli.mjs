@@ -4,6 +4,7 @@ import {mkdtemp, mkdir, writeFile, copyFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
+import {pathToFileURL} from 'node:url';
 
 const sha='a'.repeat(40);
 test('CLI uses pinned remote main; offline, stale local manifests and API errors are safe',async()=>{
@@ -33,7 +34,7 @@ globalThis.fetch=async address=>{
  const data=url.pathname.endsWith('/transcription-progress.json')?remote:url.pathname.endsWith('/manifest.json')?catalog:null;
  if(!data)throw Error('unexpected path');return Response.json({encoding:'base64',content:Buffer.from(JSON.stringify(data)).toString('base64')});
 };`);
-  const run=(args,mode='ok')=>spawnSync(process.execPath,['--import',loader,join(root,'tools/transcription-queue.mjs'),...args],{encoding:'utf8',env:{...process.env,QUEUE_TEST_FIXTURE:fixture,QUEUE_TEST_MODE:mode}});
+  const run=(args,mode='ok')=>spawnSync(process.execPath,['--import',pathToFileURL(loader).href,join(root,'tools/transcription-queue.mjs'),...args],{encoding:'utf8',env:{...process.env,QUEUE_TEST_FIXTURE:fixture,QUEUE_TEST_MODE:mode}});
   let r=run(['next']);assert.equal(r.status,0,r.stderr);let data=JSON.parse(r.stdout);assert.equal(data.processed,1);assert.equal(data.sourceRef,sha);assert.equal(data.nextQuestionIds[0],'r01h-q2');assert.equal(data.safeToEnqueue,true);
   r=run(['next','--offline'],'http-error');assert.equal(r.status,0,r.stderr);data=JSON.parse(r.stdout);assert.equal(data.processed,0);assert.equal(data.safeToEnqueue,false);assert.equal(data.sourceRef,null);
   r=run(['check','--manifest','data/transcription-queue/'+batchId+'.json','--draft',draftFile]);assert.equal(r.status,1);assert.match(r.stderr,/completed question/);

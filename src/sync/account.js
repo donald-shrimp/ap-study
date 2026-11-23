@@ -22,7 +22,7 @@ export async function initAccountControls({qualificationId,syncScopeLabels={},ge
   setSyncStatus('study',kind,error);
  };
  const scheduleDocuments=(worker,notify)=>{if(!worker)return;notify?.(navigator.onLine?'pending':'offline');worker.schedule();};
- const buttons=()=>{login.hidden=!!observedUser;logout.hidden=!observedUser;refresh.hidden=!user;adopt.hidden=!user||!guestAvailable;for(const b of [login,logout,refresh,adopt])b.disabled=busy;};
+ const buttons=()=>{login.hidden=!!observedUser;logout.hidden=!observedUser;adopt.hidden=!user||!guestAvailable;for(const b of [login,logout,refresh,adopt])b.disabled=busy;};
  async function refreshGuestAvailability(){const token=generation,uid=user?.uid;if(!uid){guestAvailable=false;buttons();return;}try{const available=await getGuestImportAvailable(uid);if(token===generation){guestAvailable=available;buttons();}}catch(error){if(token===generation){guestAvailable=true;buttons();console.warn('Guest availability unavailable',error.message);}}}
  const failure=(error,operation='ログイン')=>{
   const code=String(error?.code||'');

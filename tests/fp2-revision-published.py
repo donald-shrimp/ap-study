@@ -1,4 +1,5 @@
 """All60 reviewed explanations and old-version snapshots in isolated browsers."""
+from browser_storage import open_offline
 import json,os,shutil,tempfile,threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
@@ -26,7 +27,7 @@ try:
   if BASE.startswith('https://') and os.getenv('HTTPS_PROXY'):options['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
   b=p.chromium.launch(**options);ctx=b.new_context(viewport={'width':390,'height':844});pg=ctx.new_page();pg.on('pageerror',lambda e:errors.append(str(e)))
   pg.goto(BASE+'fp2/?part=objective&entry=home');pg.locator('.quick-start').wait_for();pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller')
-  pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
+  open_offline(pg);pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   for q in questions:
    nav(pg,'materials');pg.locator('[name=query]').fill('問'+str(q['number']));pg.locator('[data-action=start][data-id="'+q['id']+'"]').click();pg.locator('.choices').wait_for();assert pg.locator('#result').count()==0
    index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId'])
@@ -76,6 +77,7 @@ try:
   nav(pg,'materials');pg.locator('[name=query]').fill('問14');pg.locator('[data-action=start][data-id="fp2-202605-objective-q14"]').click();pg.locator('.choices').wait_for();s=state(pg);current=next(a for a in s['attempts'] if a['id']==s['currentId']);assert current['questionVersion']==questions[13]['version'] and current['materialSnapshot']['explanation']==questions[13]['explanation']
   # Reading answer-containing hints after grading preserves independent success.
   nav(pg,'materials');pg.locator('[name=query]').fill('問1');pg.locator('[data-action=start][data-id="fp2-202605-objective-q01"]').click();pg.locator('.choices').wait_for();q=questions[0];index=next(i for i,c in enumerate(q['choices']) if c['id']==q['correctChoiceId']);pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click();pg.locator('#result').wait_for()
+  pg.locator('.result-hints > summary').click()
   for h in q['hints']:pg.locator('[data-action=hint]').click()
   s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and not a['answerViewedBefore'] and all(e['phase']=='after' for e in a['hintEvents'])
   assert not errors,errors;b.close()

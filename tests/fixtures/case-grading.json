@@ -1,0 +1,26 @@
+{
+  "choices": [
+    {"id": "oak", "label": "イ", "text": "ナラ"},
+    {"id": "pine", "label": "ロ", "text": "マツ"},
+    {"id": "cedar", "label": "ハ", "text": "スギ"}
+  ],
+  "fields": [
+    {"id": "one", "type": "singleChoice", "grading": {"method": "exactChoiceSet"}, "correctChoiceIds": ["pine"]},
+    {"id": "all", "type": "answerSet", "grading": {"method": "exactChoiceSet"}, "correctChoiceIds": ["pine"], "answerSet": {}},
+    {"id": "fixed", "type": "answerSet", "grading": {"method": "exactChoiceSet"}, "correctChoiceIds": ["cedar", "oak"], "answerSet": {"slots": ["a", "b"]}},
+    {"id": "words", "type": "answerSet", "grading": {"method": "unordered"}, "referenceAnswers": ["ナラ", "スギ"], "answerSet": {}},
+    {"id": "names", "type": "answerSet", "grading": {"method": "unordered"}, "referenceAnswers": ["甲", "乙"], "answerSet": {"slots": ["c", "d"], "maxLength": 5}}
+  ],
+  "invalid": [
+    {"field": "one", "patch": {"correctChoiceIds": ["pine", "oak"]}, "schemaRejects": true},
+    {"field": "one", "patch": {"referenceAnswers": ["ロ"]}, "schemaRejects": true},
+    {"field": "all", "patch": {"correctChoiceIds": ["unknown"]}},
+    {"field": "fixed", "patch": {"correctChoiceIds": ["oak", "oak"]}, "schemaRejects": true},
+    {"field": "fixed", "patch": {"answerSet": {"slots": ["a", "b", "c"]}}},
+    {"field": "all", "patch": {"answerSet": {"maxLength": 5}}},
+    {"field": "words", "patch": {"referenceAnswers": [" A ", "Ａ"]}},
+    {"field": "words", "patch": {"answerSet": {"sourceFieldIds": ["old", "words"]}}},
+    {"field": "words", "patch": {"grading": {"method": "exactChoiceSet"}}, "schemaRejects": true},
+    {"field": "names", "patch": {"referenceAnswers": ["六文字の回答", "乙"]}}
+  ]
+}

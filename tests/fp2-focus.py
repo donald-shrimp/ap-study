@@ -4,6 +4,7 @@ from pathlib import Path
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
+from browser_storage import open_written_field_actions
 from fp2_fixtures import prepare
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -17,6 +18,7 @@ with tempfile.TemporaryDirectory(prefix='fp2-focus-') as d:
     # Observe the asynchronous connection handler after its cache checks finish.
     page.wait_for_timeout(300)
     assert field.evaluate('(e)=>e===window.__editingNumeric&&e.isConnected&&document.activeElement===e&&e.selectionStart===2&&e.selectionEnd===5&&e.value==="1,490,000"'),'Connection change replaced or blurred numeric input'
+   open_written_field_actions(page)
    page.locator('[data-action=written-submit][data-written-key="q1--amount"]').click();page.locator('input[data-written-key="q1--amount"][readonly]').wait_for();assert '自動判定：正解' in page.locator('section.written-field[data-written-key="q1--amount"]').inner_text();assert not errors,errors;browser.close()
  finally:server.shutdown()
 print('PASS numeric input node, focus, caret and value retained offline and online / submit still renders locked answer and result')

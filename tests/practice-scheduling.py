@@ -50,7 +50,9 @@ try:
    second=start(pg);assert second['questionId'] not in known and second['questionId']!=first['questionId'];answer(pg)
    third=next_question(pg);assert third['questionId']==oldest
    pg.get_by_role('button',name='解答を見る',exact=True).click();pg.locator('#result-heading').wait_for();assert current(pg)['status']=='revealed'
-   tomorrow=(datetime.now(ZoneInfo('Asia/Tokyo'))+timedelta(days=1)).date().isoformat();assert tomorrow in pg.locator('.review-date').inner_text()
+   tomorrow=(datetime.now(ZoneInfo('Asia/Tokyo'))+timedelta(days=1)).date().isoformat()
+   pg.locator('.result-record > summary').click()
+   assert tomorrow in pg.locator('.result-record[open]').inner_text()
    fourth=next_question(pg);assert fourth['questionId'] not in known
    pg.locator('.choice').first.click();saved=current(pg)
    pg.evaluate('''async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(ok=>navigator.serviceWorker.addEventListener('controllerchange',ok,{once:true}));}''')

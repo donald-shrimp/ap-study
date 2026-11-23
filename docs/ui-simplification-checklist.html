@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ひと問の改善候補を選ぶ</title>
+<style>
+:root{font-family:system-ui,sans-serif;line-height:1.65;color:#233750;background:#f4f6fa;accent-color:#087d79}
+body{margin:0}
+main{max-width:860px;margin:auto;padding:24px 16px 56px}
+h1{font-size:clamp(1.5rem,4vw,2rem);color:#142d4e}
+p{margin:0 0 12px}
+a{color:#14605b}
+.selection-tools{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0;margin:12px 0;background:#f4f6fa}
+.selection-tools p{flex-basis:100%;margin:0}
+button{background:#087d79;color:white;font:inherit;font-weight:600;border:1px solid #087d79;border-radius:9px;min-height:44px;padding:0 15px;cursor:pointer}
+button:disabled{opacity:.55;cursor:default}
+details{margin:10px 0;background:#fff;border:1px solid #dae2ec;border-radius:10px}
+summary{min-height:44px;box-sizing:border-box;padding:10px 14px;font-weight:650;cursor:pointer}
+.candidate{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;padding:12px 14px;min-height:44px;border-top:1px solid #dae2ec;box-sizing:border-box}
+.candidate input{width:19px;height:19px;margin:4px 0}
+.candidate:has(input:checked){background:#e9f5f3}
+.candidate small{display:block;color:#586b81}
+.candidate.done{color:#586b81}
+.candidate-id{font-variant-numeric:tabular-nums;margin-right:.5em}
+textarea{width:100%;box-sizing:border-box;resize:vertical;border:1px solid #a8b9cd;border-radius:9px;padding:10px;font:inherit;color:inherit;margin:8px 0}
+:is(a,button,summary,input,textarea):focus-visible{outline:3px solid #bf771e;outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <h1>ひと問の改善候補を選ぶ</h1>
+  <p>依頼する項目にチェックを入れ、「依頼文をコピー」でチャットに貼れます。<a href="ui-simplification-audit.md">調査結果を見る</a></p>
+  <div class="selection-tools">
+    <button id="copy" type="button" disabled>依頼文をコピー</button>
+    <span id="count" aria-live="polite">選択 0件</span>
+    <p id="status" role="status" hidden></p>
+  </div>
+  <div id="candidates"></div>
+  <section id="request-panel" hidden>
+    <label for="request">依頼文</label>
+    <textarea id="request" rows="7" readonly></textarea>
+  </section>
+</main>
+<script type="module">
+const storageKey='hitomon-ui-audit-selection';
+const container=document.querySelector('#candidates');
+const request=document.querySelector('#request');
+const requestPanel=document.querySelector('#request-panel');
+const count=document.querySelector('#count');
+const copyButton=document.querySelector('#copy');
+const status=document.querySelector('#status');
+let saved=[];
+try {
+  const stored=JSON.parse(localStorage.getItem(storageKey)||'[]');
+  if(Array.isArray(stored))saved=stored;
+} catch {}
+const checked=new Set(saved);
+const candidates=[];
+
+function addCandidate(group,{id,title,proposal,state}){
+  const row=document.createElement('label');
+  row.className=state==='実装済み'?'candidate done':'candidate';
+  const checkbox=document.createElement('input');
+  checkbox.type='checkbox';
+  checkbox.value=id;
+  checkbox.disabled=state==='実装済み';
+  checkbox.checked=!checkbox.disabled&&checked.has(id);
+  const copy=document.createElement('span');
+  const heading=document.createElement('strong');
+  heading.textContent=id+'　'+title;
+  const note=document.createElement('small');
+  note.textContent=state==='候補'?proposal:state+' · '+proposal;
+  copy.append(heading,note);
+  row.append(checkbox,copy);
+  group.appendChild(row);
+  candidates.push({id,title,checkbox});
+  if(checkbox.checked)group.open=true;
+}
+
+function update(){
+  const selected=candidates.filter(item=>item.checkbox.checked);
+  try {localStorage.setItem(storageKey,JSON.stringify(selected.map(item=>item.id)));}
+  catch {}
+  count.textContent='選択 '+selected.length+'件';
+  copyButton.disabled=!selected.length;
+  requestPanel.hidden=!selected.length;
+  request.value=selected.length?'ひと問の改善候補一覧（docs/ui-simplification-audit.md）の次の項目を実装してください。\n'+selected.map(({id,title})=>'- '+id+' '+title).join('\n'):'';
+  status.hidden=true;
+}
+
+container.addEventListener('change',update);
+copyButton.addEventListener('click',async()=>{
+  try {
+    await navigator.clipboard.writeText(request.value);
+    status.textContent='依頼文をコピーしました。';
+  } catch {
+    request.focus();
+    request.select();
+    status.textContent='依頼文を選択しました。コピーしてチャットに貼り付けてください。';
+  }
+  status.hidden=false;
+});
+
+try {
+  const response=await fetch('ui-simplification-audit.md',{cache:'no-store'});
+  if(!response.ok)throw new Error('候補一覧を取得できません。');
+  let group=null;
+  for(const line of (await response.text()).split(/\r?\n/)){
+    if(line.startsWith('## ')){
+      group=document.createElement('details');
+      const heading=document.createElement('summary');
+      heading.textContent=line.slice(3);
+      group.appendChild(heading);
+      container.appendChild(group);
+      continue;
+    }
+    if(!group||!/^\| C\d+ \|/.test(line))continue;
+    const [id,title,proposal,state]=line.slice(1,-1).split('|').map(value=>value.trim());
+    addCandidate(group,{id,title,proposal,state});
+  }
+  if(!candidates.length)throw new Error('候補一覧に項目がありません。');
+  container.querySelector('details').open=true;
+  update();
+} catch {
+  status.textContent='候補を表示できませんでした。調査結果にある候補番号で依頼できます。';
+  status.hidden=false;
+}
+</script>
+</body>
+</html>

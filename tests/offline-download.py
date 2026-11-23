@@ -1,4 +1,5 @@
 """Real UI: download unseen material, offline questions/choice figures/B answers, deletion."""
+from browser_storage import open_offline
 import json,os,shutil,threading,tempfile
 from functools import partial
 from pathlib import Path
@@ -14,9 +15,9 @@ class Quiet(SimpleHTTPRequestHandler):
   return super().translate_path(path)
 s=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)));threading.Thread(target=s.serve_forever,daemon=True).start();BASE=os.environ.get('HITOMON_TEST_URL',f'http://127.0.0.1:{s.server_port}/ap-study/')
 def open_manager(pg):
- pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();return pg.locator('#offline-dialog')
+ open_offline(pg, choose=True);pg.locator('[data-offline-save]').wait_for();return pg.locator('#offline-dialog')
 def save(pg,id):
- d=open_manager(pg);d.locator('[data-offline-select=none]').click();d.locator(f'[data-offline-group="{id}"]').check();d.locator('[data-offline-save]').click();d.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);return d
+ d=open_manager(pg);assert d.locator('[data-offline-group]:checked').count()==0;d.locator(f'[data-offline-group="{id}"]').check();d.locator('[data-offline-save]').click();d.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);return d
 try:
  with sync_playwright() as p:
   options={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
@@ -33,7 +34,7 @@ try:
    if id=='ap':pg.locator('.question-figure img').evaluate('(i)=>i.decode()');pg.locator('.original-question summary').click();pg.locator('.original-content').filter(has_text='オンライン').wait_for();assert pg.locator('.original-content img').count()==0
    for c in q.get('correctChoiceIds') or [q['correctChoiceId']]:pg.locator(f'.choice:has([name=answer][value="{next(i for i,x in enumerate(q["choices"]) if x["id"]==c)}"])').click()
    pg.locator('[data-action=submit]').click();pg.locator('#result-heading').wait_for();assert len(state(pg)['attempts'])==1
-   nav(pg,'home');d=open_manager(pg);d.locator(f'[data-offline-remove="{group}"]').click();d.locator('#offline-message').filter(has_text='削除しました').wait_for();d.locator(f'[data-offline-row="{group}"] .offline-status').filter(has_text='未保存').wait_for();assert len(state(pg)['attempts'])==1;d.locator('[data-offline-close]').click();assert not errors,errors
+   nav(pg,'home');d=open_manager(pg);d.locator(f'[data-offline-row="{group}"] details > summary').click();d.locator(f'[data-offline-remove="{group}"]').click();d.locator('#offline-message').filter(has_text='削除しました').wait_for();assert d.locator(f'[data-offline-row="{group}"] .offline-status').text_content()=='';assert len(state(pg)['attempts'])==1;d.locator('[data-offline-close]').click();assert not errors,errors
    print('PASS',id,'unseen offline question/figures/answer, originals excluded, 320/390/1440, delete retains records',flush=True)
    # Save the complete qualification, then exercise a never-opened late pack.
    ctx.set_offline(False);pg.reload();pg.locator('.quick-start').wait_for();d=open_manager(pg);d.locator('[data-offline-select=all]').click();d.locator('[data-offline-save]').click();d.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=90000);assert len(state(pg)['attempts'])==1;d.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
@@ -43,6 +44,6 @@ try:
    assert not errors,errors;print('PASS complete',id,'download / unseen late pack or image-only question / no study records from download',flush=True);ctx.close()
   # B uses a shared text bank but requires every selected session's figure.
   ctx=b.new_context(viewport={'width':1440,'height':900});pg=ctx.new_page();pg.goto(BASE+'ap/');pg.locator('.quick-start').wait_for();select_target(pg,'written');pg.locator('.study-entry').wait_for();pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');before=state(pg);d=save(pg,'cases-ap-r07h-pm1');assert state(pg)==before;d.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for()
-  written_list(pg);assert pg.locator('[data-action=written-start][data-id=ap-r07a-pm1]').first.is_disabled();pg.locator('[data-action=written-start][data-id=ap-r07h-pm1]').first.click();pg.locator('.written-layout').wait_for();pg.locator('.written-body .question-figure img').first.evaluate('(i)=>i.decode()');pg.locator('textarea[data-written-key]').first.fill('オフライン回答');pg.locator('[data-action=written-submit]').first.click();pg.locator('[data-action=written-answer]').first.click();pg.locator('.written-answer').wait_for();pg.locator('[data-action=written-rate][data-outcome=unsure]').first.click();pg.reload();pg.locator('textarea[data-written-key]').first.wait_for();assert pg.locator('textarea[data-written-key]').first.input_value()=='オフライン回答';pg.screenshot(path=str(ART/'written-offline.png'),full_page=True);print('PASS B required figures and shared bank / unsaved case disabled / free text, example, self rating and reload',flush=True);ctx.close();b.close()
+  written_list(pg);assert pg.locator('[data-action=written-start][data-id=ap-r07a-pm1]').first.is_disabled();pg.locator('[data-action=written-start][data-id=ap-r07h-pm1]').first.click();pg.locator('.written-layout').wait_for();pg.locator('.written-body .question-figure img').first.evaluate('(i)=>i.decode()');pg.locator('textarea[data-written-key]').first.fill('オフライン回答');pg.locator('[data-action=written-submit]').first.click();pg.locator('.written-answer').wait_for();pg.locator('[data-action=written-rate][data-outcome=unsure]').first.click();pg.reload();pg.locator('textarea[data-written-key]').first.wait_for();assert pg.locator('textarea[data-written-key]').first.input_value()=='オフライン回答';pg.screenshot(path=str(ART/'written-offline.png'),full_page=True);print('PASS B required figures and shared bank / unsaved case disabled / free text, example, self rating and reload',flush=True);ctx.close();b.close()
 finally:s.shutdown()
 print('Artifacts:',ART)

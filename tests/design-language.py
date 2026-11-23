@@ -5,7 +5,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright,expect
-from browser_storage import nav,open_written_case
+from browser_storage import nav,open_written_case,open_written_field_actions
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-design-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -33,13 +33,36 @@ try:
   assert style(pg.locator('.hero-start .secondary').first)==a_secondary;assert pg.locator('.hero-start select').count()==0;screenshot(pg,'fp-home')
   open_written_case(pg,'fp2-202605-jafp-q01');assert style(pg.locator('.study-back-button'))==a_back;assert pg.locator('.study-toolbar').evaluate('e=>e.firstElementChild.classList.contains("study-back-button")')
   assert pg.locator('.written-item-nav').count()==0;assert pg.locator('.written-body .question-stem').evaluate('e=>getComputedStyle(e).fontSize')==a_body;assert pg.locator('.choice-text').first.evaluate('e=>getComputedStyle(e).fontSize')==a_choice
-  field=pg.locator('.written-field').first;submit=field.locator('[data-action=written-submit]');assert submit.is_disabled();assert style(submit)==a_submit
+  expect(pg.locator('.written-individual-actions button:visible')).to_have_count(0)
+  expect(pg.locator('.written-items .button.primary:visible')).to_have_count(1)
+  open_written_field_actions(pg)
+  field=pg.locator('.written-field').first;submit=field.locator('[data-action=written-submit]');assert submit.is_disabled();assert style(pg.locator('[data-action=written-check-item]'))==a_submit
   inputs=field.locator('input[type=radio]');inputs.first.focus();inputs.first.press('ArrowDown');expect(submit).to_be_enabled();assert inputs.nth(1).is_checked();assert field.locator('.choice').nth(1).evaluate('e=>getComputedStyle(e).backgroundColor')!='rgb(255, 255, 255)'
-  inputs.first.check();submit.click();field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for();assert field.locator('.wrong-choice').count()==1 and field.locator('.correct-choice').count()==1;assert field.locator('.written-explanation').evaluate('e=>e.open');assert field.locator('.written-answer [data-action=written-ai]').inner_text()=='AIに聞く';screenshot(pg,'fp-feedback')
-  open_written_case(pg,'fp2-202605-jafp-q01',mode='exam');field=pg.locator('.written-field').first;field.locator('input').first.check();field.locator('[data-action=written-submit]').click();field.get_by_text('回答済み',exact=True).wait_for();assert field.locator('.badge.good,.badge.wrong,.badge.help,.correct-choice,.wrong-choice,.written-answer,[data-action=written-answer]').count()==0
+  inputs.first.check();submit.click();field.locator('.written-answer').wait_for();assert field.locator('.wrong-choice').count()==1 and field.locator('.correct-choice').count()==1;assert field.locator('.written-explanation').evaluate('e=>e.open');assert pg.locator('.written-ai-entry [data-action=written-ai]').inner_text()=='AIに聞く';screenshot(pg,'fp-feedback')
+  second=pg.locator('.written-field').nth(1)
+  open_written_field_actions(pg)
+  second.locator('input[type=radio]').first.check()
+  second.locator('[data-action=written-submit]').click()
+  expect(pg.locator('.written-ai-entry [data-action=written-ai]')).to_have_count(1)
+  choices=pg.locator('[name=written-ai-field]')
+  field_key=second.get_attribute('data-written-key')
+  choices.select_option(field_key)
+  pg.locator('[data-action=written-ai]').click()
+  expect(pg.locator('#ai-handoff-dialog')).to_be_visible()
+  assert second.locator('h3').inner_text() in pg.locator('#ai-handoff-preview').input_value()
+  pg.locator('#ai-handoff-close').click()
+  open_written_case(pg,'fp2-202605-jafp-q01',mode='exam');open_written_field_actions(pg);field=pg.locator('.written-field').first;field.locator('input').first.check();field.locator('[data-action=written-submit]').click();field.get_by_text('回答済み',exact=True).wait_for();assert field.locator('.badge.good,.badge.wrong,.badge.help,.correct-choice,.wrong-choice,.written-answer,[data-action=written-answer]').count()==0
   pg.goto(BASE+'ap/?part=written&entry=home');pg.locator('.quick-start').wait_for();assert style(pg.locator('.hero-start .primary'))==a_start;open_written_case(pg,'ap-r07h-pm1');assert pg.locator('.written-item-nav [aria-current=step]').count()==1
   field=pg.locator('.written-field').first;answer=field.locator('textarea');assert pg.locator('.written-items .button.primary:not([disabled])').count()==0;answer.fill('デザイン検証用の回答');expect(field.locator('[data-action=written-submit]')).to_be_enabled();assert pg.locator('.written-items .button.primary:not([disabled])').count()==1;pg.reload();pg.locator('.written-layout').wait_for();assert pg.locator('textarea').first.input_value()=='デザイン検証用の回答'
+  expect(pg.locator('#main')).not_to_contain_text('2000字')
+  expect(field.locator('h3')).to_have_count(0)
   pg.locator('[data-action=written-pane][data-pane=body]').click();expect(pg.locator('.written-body')).to_be_visible();screenshot(pg,'ap-body');pg.locator('[data-action=written-pane][data-pane=questions]').click();screenshot(pg,'ap-fields')
+  pg.locator('[data-action=written-submit]').click();expect(pg.locator('.written-answer h4').first).to_be_focused()
+  expect(pg.locator('.written-explanation').first).to_have_attribute('open','')
+  expect(pg.get_by_role('button',name='次の小問')).to_have_count(0)
+  pg.locator('[data-action=written-rate][data-outcome=unsure]').click()
+  pg.get_by_role('button',name='次の小問').click()
+  expect(pg.locator('.written-item-nav [aria-current=step]')).to_have_text('設問2')
   # Learning text follows A's scale while controls and editable mobile inputs remain usable.
   for width in [320,390,1440]:
    pg.set_viewport_size({'width':width,'height':1000})

@@ -1,6 +1,9 @@
 """Independently reviewed common-passage cases; no normal-question pool mixing."""
 import json,hashlib,re
-from material_contracts import validate_legal,validate_numeric,validate_source_hashes,validate_case_figures
+from case_answer_sets import compile_answer_sets
+from case_field import validate_case_fields
+from case_feedback import compile_case_feedback
+from material_contracts import validate_legal,validate_source_hashes,validate_case_figures
 
 def canonical(value):
     return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
@@ -22,21 +25,24 @@ def compile_cases(root,config,directory,hashed_json):
         assert len({i['id'] for i in c['items']})==len(c['items'])
         for i in c['items']:
             assert i['prompt'] and 1<=len(i['fields'])<=20 and len({f['id'] for f in i['fields']})==len(i['fields'])
-            for f in i['fields']:
-                assert f['type'] in ('singleChoice','shortText','freeText','numeric') and f['referenceAnswers'] and f['explanation'] and f['rubric']
-                assert f['grading']['method'] in ('exactText','self','exactDecimal')
-                assert f['type']!='freeText' or f['grading']['method']=='self'
-                assert f['type']=='numeric' or f['grading']['method']!='exactDecimal'
-                if f['type']=='numeric':validate_numeric(f)
-                elif f['type']=='singleChoice':
-                    assert 2<=len(f['choices'])<=20 and len({a['id'] for a in f['choices']})==len(f['choices']) and f['grading']['method']=='exactText'
-                    assert len(f['referenceAnswers'])==1 and f['referenceAnswers'][0] in [a['label'] for a in f['choices']]
-                else:assert all(len(a)<=f.get('maxLength',2000) for a in f['referenceAnswers'])
+            try:
+                validate_case_fields(i['fields'])
+            except ValueError as error:
+                raise ValueError(f"{c['id']}/{i['id']}: {error}") from error
+            assert all(f['explanation'] and all(f['rubric']) for f in i['fields'])
         paths=c['sourceImages']+[f['image'] for f in c.get('bodyFigures',[])]
         for path in paths:assert path.startswith('assets/written/') and '..' not in path.split('/') and r['assetHashes'][path]==hashlib.sha256((root/path).read_bytes()).hexdigest()
         for path,digest in {**r['sourceHashes'],**r['assetHashes']}.items():assert digest==hashlib.sha256((root/path).read_bytes()).hexdigest()
     name,digest=hashed_json(directory,'cases',{'format':'hitomon-case-bank','version':2,'qualificationId':config['id'],'cases':cases})
     result={'url':name,'sha256':digest,'count':len(cases),'fields':sum(len(i['fields']) for c in cases for i in c['items'])}
+    revisions=compile_answer_sets(root,config,cases,canonical)
+    if revisions:
+        name,digest=hashed_json(directory,'case-answer-sets',{'format':'hitomon-case-answer-sets','version':1,'qualificationId':config['id'],'revisions':revisions})
+        result['answerSets']={'url':name,'sha256':digest,'count':len(revisions)}
+    feedback=compile_case_feedback(root,config,cases,revisions,canonical)
+    if feedback:
+        name,digest=hashed_json(directory,'case-feedback',{'format':'hitomon-case-feedback','version':1,'qualificationId':config['id'],'cases':feedback})
+        result['feedback']={'url':name,'sha256':digest,'caseIds':list(feedback)}
     if config.get('caseCatalogSource'):
         path=(root/config['caseCatalogSource']).resolve()
         assert path.is_relative_to(root.resolve())

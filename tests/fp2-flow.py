@@ -1,11 +1,12 @@
 """Synthetic FP-compatible subjects: isolated checkpoints, fields, backup, AI and offline."""
+from browser_storage import open_offline
 import json,shutil,tempfile,threading
 from pathlib import Path
 from functools import partial
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 from fp2_fixtures import prepare,builder,write
-from browser_storage import nav,state,select_target,open_data_management,open_plan_ai,wait_for_async
+from browser_storage import nav,state,select_target,open_data_management,open_plan_ai,wait_for_async,open_written_field_actions
 ART=Path(tempfile.mkdtemp(prefix='hitomon-fp2-flow-'))
 def wait_value(pg,case_id,value):
  expected=json.dumps({'id':case_id,'value':value},ensure_ascii=False)
@@ -23,10 +24,11 @@ with tempfile.TemporaryDirectory(prefix='fp2-flow-root-') as d:
    select_target(pg,'jafp-practical','fp2');pg.locator('.study-entry').wait_for();assert 'synthetic-b' not in pg.locator('#main').inner_text();assert pg.locator('.quick-start [data-action=written-start]').count()==1;pg.locator('[data-action=written-start]').first.click();pg.locator('.written-layout').wait_for();pg.locator('input[data-written-key="q1--amount"]').fill('1,490,000');pg.locator('input[data-written-key="q1--ratio"]').fill('0.435');assert '2026-04-01' in pg.locator('.legal-context').inner_text()
    select_target(pg,'kinzai-personal','fp2');pg.locator('.study-entry').wait_for();assert 'synthetic-a' not in pg.locator('#main').inner_text();pg.locator('[data-action=written-start]').first.click();pg.locator('input[data-written-key="q1--amount"]').fill('7');wait_value(pg,'synthetic-b','7');pg.reload();pg.locator('input[data-written-key="q1--amount"]').wait_for();assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='7'
    select_target(pg,'jafp-practical','fp2');pg.locator('.study-entry [data-action=written-resume]').click();pg.locator('input[data-written-key="q1--ratio"]').wait_for();assert pg.locator('input[data-written-key="q1--ratio"]').input_value()=='0.435';assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='1,490,000';decode_figure(pg)
+   open_written_field_actions(pg)
    for n in range(4):
     key='q1--b'+str(n);pg.locator(f'input[data-written-key="{key}"][value=true]').check();pg.locator(f'[data-action=written-submit][data-written-key="{key}"]').click();pg.locator(f'section.written-field[data-written-key="{key}"] fieldset[disabled]').wait_for()
    for key in ['q1--amount','q1--ratio']:pg.locator(f'[data-action=written-submit][data-written-key="{key}"]').click();pg.locator(f'section.written-field[data-written-key="{key}"] input[readonly]').wait_for()
-   pg.locator('[data-action=written-answer][data-written-key="q1--amount"]').click();pg.locator('[data-action=written-ai][data-written-key="q1--amount"]').click();pg.locator('#ai-handoff-dialog').wait_for(state='visible');prompt=pg.locator('#ai-handoff-preview').input_value();assert '円' in prompt and '1490000' in prompt and '2026-04-01' in prompt and 'synthetic-b' not in prompt;pg.locator('#ai-handoff-close').click()
+   pg.locator('[data-action=written-ai][data-written-key="q1--amount"]').click();pg.locator('#ai-handoff-dialog').wait_for(state='visible');prompt=pg.locator('#ai-handoff-preview').input_value();assert '円' in prompt and '1490000' in prompt and '2026-04-01' in prompt and 'synthetic-b' not in prompt;pg.locator('#ai-handoff-close').click()
    nav(pg,'history');assert '1問に取り組んだ' in pg.locator('#main').inner_text();assert 'synthetic-b' not in pg.locator('#main').inner_text();assert '6欄中6欄正解' in pg.locator('#main').inner_text()
    select_target(pg,'kinzai-personal','fp2');pg.locator('.study-entry [data-action=written-resume]').click();pg.locator('input[data-written-key="q1--amount"]').wait_for();assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='7';pg.locator('[data-action=written-submit]').click();pg.locator('input[readonly]').wait_for();nav(pg,'history');assert 'synthetic-a' not in pg.locator('#main').inner_text()
    pg.locator('[data-view=planning]').first.click();open_plan_ai(pg)
@@ -35,7 +37,7 @@ with tempfile.TemporaryDirectory(prefix='fp2-flow-root-') as d:
    open_data_management(pg)
    with pg.expect_download() as event:pg.locator('#export-state').click()
    path=ART/'backup.json';event.value.save_as(str(path));backup=json.loads(path.read_text());assert len(backup['writtenBackup']['runs'])==2 and len(backup['records'])==1;assert all(r['material']['sourceRecord']['legalAsOf']=='2026-04-01' for r in backup['writtenBackup']['runs']);pg.get_by_role('button',name='設定を閉じる').click()
-   select_target(pg,'jafp-practical','fp2');nav(pg,'home');pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for();pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for();pg.locator('[data-action=written-start]').first.click();pg.locator('.written-layout').wait_for();decode_figure(pg);pg.locator('input[data-written-key="q1--amount"]').fill('１４９００００');wait_value(pg,'synthetic-a','１４９００００');pg.reload();pg.locator('input[data-written-key="q1--amount"]').wait_for();assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='１４９００００'
+   select_target(pg,'jafp-practical','fp2');nav(pg,'home');open_offline(pg);pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=all]').click();pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for();pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.study-entry').wait_for();pg.locator('[data-action=written-start]').first.click();pg.locator('.written-layout').wait_for();decode_figure(pg);pg.locator('input[data-written-key="q1--amount"]').fill('１４９００００');wait_value(pg,'synthetic-a','１４９００００');pg.reload();pg.locator('input[data-written-key="q1--amount"]').wait_for();assert pg.locator('input[data-written-key="q1--amount"]').input_value()=='１４９００００'
    for width in [320,390,1440]:
     pg.set_viewport_size({'width':width,'height':900});assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1');assert pg.locator('.numeric-answer').first.evaluate('(e)=>{const i=e.querySelector("input").getBoundingClientRect(),u=e.querySelector("span").getBoundingClientRect();return u.x>=i.right&&Math.abs((i.y+i.height/2)-(u.y+u.height/2))<5;}')
    pg.screenshot(path=str(ART/'numeric-offline.png'),full_page=True);assert not errors,errors

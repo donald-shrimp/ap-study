@@ -8,7 +8,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
-from browser_storage import state,write_state
+from browser_storage import state,write_state,open_written_field_actions
 
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-explanation-'))
 class Quiet(SimpleHTTPRequestHandler):
@@ -41,6 +41,9 @@ try:
     correct=q.get('correctChoiceId') or q['choices'][q['answer']]['id'];index=next(i for i,c in enumerate(q['choices']) if (c['id']==correct)==(outcome=='correct'))
     pg.get_by_role('radio').nth(index).check();pg.locator('[data-action=submit]').click()
    pg.locator('#result').wait_for();assert pg.locator('#result > p.explanation strong').first.inner_text()=='判断軸'
+   assert pg.locator('#result .answer-selection').count()==1
+   assert pg.get_by_text('各肢の理由',exact=True).count()==len(q['choices'])
+   if outcome=='incorrect':assert pg.locator('#result .reason-list li').first.locator('b').inner_text()==q['choices'][index]['label']
    assert pg.locator('#result img,#result script').count()==0
    assert '<img src=x onerror=alert(1)>' in pg.locator('#result .explanation').all_text_contents()[-1]
    pg.locator('#result details').evaluate_all('(nodes)=>nodes.forEach(n=>n.open=true)');assert pg.locator('.reason-list strong').count()==len(q['choices'])
@@ -94,7 +97,8 @@ try:
    if info['type']=='singleChoice':field.locator('input[value="'+info['answer']+'"]').check()
    elif info['type']=='numeric':field.locator('input').fill(info['answer'])
    else:field.locator('textarea').fill(info['answer'])
-   field.locator('[data-action=written-submit]').click();field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for()
+   open_written_field_actions(pg)
+   field.locator('[data-action=written-submit]').click();field.locator('.written-answer').wait_for()
    field.locator('.written-explanation').evaluate('(el)=>el.open=true')
    assert field.locator('.written-answer .explanation strong').first.inner_text()=='ケース条件';assert field.locator('.katex').count()==1;assert field.locator('td strong').inner_text()=='表の条件';assert field.locator('pre code').inner_text()=='**literal** <tag>'
    assert field.locator('p p').count()==0

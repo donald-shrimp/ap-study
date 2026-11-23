@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"tests"))
-from browser_storage import nav,state,write_state,open_data_management,open_answer_history
+from browser_storage import nav,state,write_state,open_data_management,open_answer_history,open_offline
 ROOT=Path(__file__).resolve().parents[4];W=ROOT/'work/ap/objective-quality';ART=Path(tempfile.mkdtemp(prefix='hitomon-ap-quality-'))
 read=lambda p:json.loads(p.read_text());ids=[id for n in range(5,9) for id in read(W/f'batches/batch-{n:02d}/assignment.json')['questionIds']];m=read(ROOT/'data/qualifications/ap/manifest.json')
 bank=[q for pack in m['packs'] for q in read(ROOT/'data/qualifications/ap'/pack['url'])];by={q['id']:q for q in bank};qs=[by[id] for id in ids]
@@ -22,7 +22,7 @@ try:
   opts={'executable_path':shutil.which('chromium'),'args':['--no-sandbox']}
   if BASE.startswith('https://') and os.getenv('HTTPS_PROXY'):opts['proxy']={'server':os.environ['HTTPS_PROXY'],'bypass':'127.0.0.1,localhost'}
   b=p.chromium.launch(**opts);ctx=b.new_context(viewport={'width':390,'height':900});pg=ctx.new_page();pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('dialog',lambda d:d.accept());pg.goto(BASE+'ap/?part=objective&entry=home');pg.locator('.quick-start').wait_for()
-  pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');pg.locator('[data-action=offline-open]').click();pg.locator('[data-offline-save]').wait_for();pg.locator('[data-offline-select=none]').click()
+  pg.evaluate('async()=>await navigator.serviceWorker.ready');pg.wait_for_function('!!navigator.serviceWorker.controller');open_offline(pg, choose=True)
   for pack in {q['packId'] for q in qs}:pg.locator(f'[data-offline-group="pack-{pack}-objective"]').check()
   pg.locator('[data-offline-save]').click();pg.locator('#offline-message').filter(has_text='保存できました').wait_for(timeout=60000);pg.locator('[data-offline-close]').click();ctx.set_offline(True);pg.reload();pg.locator('.quick-start').wait_for()
   def open_q(q):
@@ -50,6 +50,7 @@ try:
    pg.get_by_role('radio').nth(q['answer']).check();state(pg);pg.reload();pg.locator('.hint-box').first.wait_for();assert pg.locator('.hint-box').count()==count;assert pg.get_by_role('radio').nth(q['answer']).is_checked();a=submit(q);assert a['status']=='revealed' and a['hintsBeforeAnswer']==count
   # Later hints preserve a result obtained without help.
   q=by['r07h-q4'];open_q(q);a=submit(q);assert a['status']=='correct'
+  pg.locator('.result-hints > summary').click()
   for _ in q['hints']:pg.locator('[data-action=hint]').click()
   s=state(pg);a=next(a for a in s['attempts'] if a['id']==s['currentId']);assert a['status']=='correct' and a['hintsBeforeAnswer']==0 and all(e['phase']=='after' for e in a['hintEvents'])
   ctx.set_offline(False);open_data_management(pg)

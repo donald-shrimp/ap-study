@@ -1,4 +1,5 @@
 """Real target links, URL precedence, history, tabs, shared plans and offline caches."""
+from browser_storage import nav
 import json,os,shutil,tempfile
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -30,6 +31,11 @@ with sync_playwright() as p:
   part=page.locator('.qualification-part').bounding_box();button=page.locator('#qualification-switch').bounding_box();assert part['x']+part['width']<=button['x']+button['width']
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(ARTIFACTS/'header-b.png'))
+ nav(page,'history')
+ page.locator('.brand').click()
+ page.locator('.study-entry').wait_for()
+ assert page.locator('#qualification-switch').get_attribute('data-part-id')=='written'
+ assert page.get_by_role('heading',name='資格・科目を選ぶ').count()==0
  # URL wins over prior B selection and is pinned across reload/history.
  page.goto(ROOT+'ap/?part=objective');page.locator('#qualification-switch[data-part-id=objective]').wait_for();assert page.locator('.quick-start').count()
  select_target(page,'written');page.locator('.study-entry').wait_for();page.go_back();page.get_by_role('heading',name='資格・科目を選ぶ').wait_for();page.go_forward();page.locator('#qualification-switch[data-part-id=written]').wait_for()
@@ -38,8 +44,8 @@ with sync_playwright() as p:
  other=ctx.new_page();other.goto(ROOT+'ab730/');other.locator('#qualification-switch').wait_for();assert other.locator('.qualification-part').count()==0
  page.reload();page.locator('#qualification-switch[data-part-id=written]').wait_for()
  # The same plan/date is visible from both AP targets.
- select_target(page,'objective');page.get_by_role('button',name='計画を登録',exact=True).click();open_plan_editor(page);page.locator('#exam-form').wait_for()
- page.locator('[name=exam-objective]').fill('2026-12-01');page.get_by_role('button',name='受験日を保存',exact=True).click();page.get_by_text('受験日を保存しました。',exact=True).wait_for()
+ select_target(page,'objective');nav(page,'history');page.locator('#main [data-view=planning]').click();open_plan_editor(page);page.locator('#exam-form').wait_for()
+ page.locator('[name=exam-objective]').fill('2026-12-01');page.get_by_role('button',name='受験日・条件を保存',exact=True).click();page.get_by_text('受験日・条件を保存しました。',exact=True).wait_for()
  select_target(page,'written');page.get_by_role('button',name='計画を見る',exact=True).click();open_plan_editor(page);page.locator('#exam-form').wait_for();assert page.locator('[name=exam-objective]').input_value()=='2026-12-01'
  # B draft/save failure prevents both header and brand exits without losing input.
  page.locator('.sidebar [data-view=home]').click();page.locator('[data-action=written-start]').first.click();page.locator('textarea[data-written-key]').fill('別タブでも維持')

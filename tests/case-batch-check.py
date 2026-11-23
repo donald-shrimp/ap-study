@@ -5,7 +5,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright,expect
-from browser_storage import open_written_case,wait_for_async,open_data_management
+from browser_storage import fill_written_field,open_written_case,wait_for_async,open_data_management
 ROOT=Path(__file__).resolve().parents[1];ART=Path(tempfile.mkdtemp(prefix='hitomon-case-batch-'))
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*a):pass
@@ -24,8 +24,7 @@ def enter(pg,item):
  for f in item['fields']:
   el=field(pg,item['id']+'--'+f['id'])
   if el.locator('[data-action=written-submit]').count()==0:continue
-  if f['type']=='singleChoice':el.locator(f'input[value="{next(c["id"] for c in f["choices"] if c["label"]==f["referenceAnswers"][0])}"]').check()
-  else:el.locator('textarea,input[type=text]').fill(f['referenceAnswers'][0])
+  fill_written_field(el,f)
 def shot(pg,name):
  for width in [320,390,1440]:
   pg.set_viewport_size({'width':width,'height':1000});assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
@@ -37,9 +36,9 @@ try:
   b=p.chromium.launch(**opts);ctx=b.new_context(viewport={'width':390,'height':1000});pg=ctx.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)))
   pg.goto(BASE+'ap/?part=written&entry=home');pg.locator('.quick-start').wait_for();open_written_case(pg,'ap-r07h-pm8');expect(pg.locator('[data-action=written-check-item]')).to_be_disabled()
   original=run(pg);item=original['material']['items'][0];keys=[item['id']+'--'+f['id'] for f in item['fields']];assert len(keys)==3
-  field(pg,keys[0]).locator('textarea').fill(item['fields'][0]['referenceAnswers'][0]);field(pg,keys[0]).locator('[data-action=written-submit]').click()
+  field(pg,keys[0]).locator('textarea').fill(item['fields'][0]['referenceAnswers'][0])
   field(pg,keys[1]).locator('textarea').fill('未知の表現');shot(pg,'ap-before');pg.locator('[data-action=written-check-item]').click();expect(pg.locator('.written-answer')).to_have_count(2)
-  assert not field(pg,keys[0]).locator('.written-explanation').evaluate('e=>e.open');assert field(pg,keys[1]).locator('.written-explanation').evaluate('e=>e.open');assert field(pg,keys[2]).locator('textarea').is_editable()
+  assert field(pg,keys[0]).locator('.written-explanation').evaluate('e=>e.open');assert field(pg,keys[1]).locator('.written-explanation').evaluate('e=>e.open');assert field(pg,keys[2]).locator('textarea').is_editable()
   r=run(pg);assert len(r['responses'])==2 and keys[1] not in r['evaluations'];assert all(not v['answerViewedBefore'] for v in r['responses'].values());assert r['progress']['status']=='in_progress'
   # The workspace queues pending input before the batch operation, even offline.
   pg.evaluate('async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(ok=>navigator.serviceWorker.addEventListener("controllerchange",ok,{once:true}));}')
@@ -57,10 +56,10 @@ try:
    if len(item['fields'])>1:pg.locator('[data-action=written-check-item]').click()
    else:pg.locator('[data-action=written-submit]').click()
    expect(pg.locator('.written-field [data-action=written-submit]')).to_have_count(0)
-   if item!=exam['material']['items'][-1]:assert pg.locator('.written-answer').count()==0
-  choose(pg,exam['material']['items'][0]);pg.locator('[data-action=written-check-item]').click();expect(pg.locator('.written-answer')).to_have_count(3)
+   assert pg.locator('.written-answer').count()==0
+  pg.locator('[data-action=written-review-start]').click();expect(pg.locator('.written-answer')).to_have_count(3)
   # The same button checks FP's four-choice group and decimal fields.
-  pg.goto(BASE+'fp2/?part=jafp-practical&entry=home');pg.locator('.quick-start').wait_for();open_written_case(pg,'fp2-202605-jafp-q01');r=run(pg);enter(pg,r['material']['items'][0]);shot(pg,'fp-before');pg.locator('[data-action=written-check-item]').click();expect(pg.locator('.written-answer')).to_have_count(4);assert run(pg)['progress']['status']=='completed';assert pg.locator('.written-explanation[open]').count()==0
+  pg.goto(BASE+'fp2/?part=jafp-practical&entry=home');pg.locator('.quick-start').wait_for();open_written_case(pg,'fp2-202605-jafp-q01');r=run(pg);enter(pg,r['material']['items'][0]);shot(pg,'fp-before');pg.locator('[data-action=written-check-item]').click();expect(pg.locator('.written-answer')).to_have_count(4);assert run(pg)['progress']['status']=='completed';assert pg.locator('.written-explanation[open]').count()==4
   fp=json.loads((ROOT/'content/fp2/practical-cases.json').read_text());numeric=next(c for c in fp if any(len(i['fields'])>1 and any(f['type']=='numeric' for f in i['fields']) for i in c['items']));open_written_case(pg,numeric['id']);r=run(pg)
   for item in r['material']['items']:
    if len(r['material']['items'])>1:choose(pg,item)
@@ -70,5 +69,5 @@ try:
    expect(pg.locator('.written-field [data-action=written-submit]')).to_have_count(0)
   assert run(pg)['progress']['status']=='completed';assert all(e['outcome']=='correct' for e in run(pg)['evaluations'].values());assert not errors,errors;b.close()
 finally:server.shutdown()
-(ART/'results.json').write_text(json.dumps({'groupSubmitAndReveal':True,'emptyUnchanged':True,'selfExplanationsOpen':True,'automaticCorrectDetailsCollapsed':True,'assistanceOrdering':True,'examDisclosure':True,'fpChoiceAndNumeric':True,'offlineReload':True,'canonicalBackup':True,'widths':[320,390,1440],'pageErrors':errors},indent=2)+'\n')
+(ART/'results.json').write_text(json.dumps({'groupSubmitAndReveal':True,'emptyUnchanged':True,'selfExplanationsOpen':True,'shortCorrectExplanationsOpen':True,'assistanceOrdering':True,'examDisclosure':True,'fpChoiceAndNumeric':True,'offlineReload':True,'canonicalBackup':True,'widths':[320,390,1440],'pageErrors':errors},indent=2)+'\n')
 print('PASS grouped checking / self explanations / empty fields / assistance / exam / FP choices and decimals / offline and backup');print('Artifacts:',ART)

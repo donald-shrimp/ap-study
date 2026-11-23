@@ -2,7 +2,7 @@
 import json,os,shutil,tempfile
 from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
-from browser_storage import written_list, nav,open_data_management,wait_for_async
+from browser_storage import written_list, nav,open_data_management,wait_for_async,open_written_field_actions
 ROOT=Path(__file__).resolve().parents[1];BANK=json.loads((ROOT/'content/ap/written-cases.json').read_text());URL=os.getenv('AP_STUDY_URL','http://127.0.0.1:4173/ap/');ART=Path(tempfile.mkdtemp(prefix='hitomon-written-expansion-'));SCOPE=[c for c in BANK if c['id'].startswith(os.getenv('HITOMON_CASE_PREFIX',''))];COUNT=len(SCOPE);LIBRARY=44+22*len(json.loads((ROOT/'content/ap/written-drafts/2021-2023/progress.json').read_text())['integratedYears'])
 READ='''async()=>{const root=new URL('.',document.baseURI),{createLocalStore}=await import(new URL('src/storage/local.js',root)),s=createLocalStore({qualificationId:'ap',rootPath:root.pathname});try{const i=await s.identity(),{createWorkspaceStore}=await import(new URL('src/storage/workspace.js',root)),w=createWorkspaceStore({...i,rootPath:root.pathname,namespaceName:'written',validate:(k,p)=>p});try{return (await w.read()).map(r=>r.payload);}finally{await w.close();}}finally{await s.close();}}'''
 with sync_playwright() as p:
@@ -16,7 +16,8 @@ with sync_playwright() as p:
   for item in c['items']:
    page.locator(f'.written-item-nav [data-id="{item["id"]}"]').click();page.locator(f'.written-item-nav [data-id="{item["id"]}"][aria-current=step]').wait_for();assert page.locator('.written-field').count()==len(item['fields'])
    for f in item['fields']:
-    key=item['id']+'--'+f['id'];field=page.locator(f'.written-field[data-written-key="{key}"]');assert f['label'] in field.locator('h3').inner_text()
+    key=item['id']+'--'+f['id'];field=page.locator(f'.written-field[data-written-key="{key}"]')
+    expect(field.locator('.sr-only').first).to_have_text(f['label'])
     if f['type']=='singleChoice':assert field.locator('input[type=radio]').count()==len(f['choices'])
     else:assert field.locator('textarea').get_attribute('maxlength')==str(f['maxLength'])
   # Original diagrams/tables are loaded, and inline math/code never fall back to broken syntax.
@@ -30,11 +31,12 @@ with sync_playwright() as p:
     page.locator('[data-action=written-pane][data-pane=questions]').click();page.locator('.written-items').wait_for(state='visible')
    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(c['id'],width,'questions')
   first=c['items'][0];f=first['fields'][0];key=first['id']+'--'+f['id'];page.locator(f'.written-item-nav [data-id="{first["id"]}"]').click();page.locator(f'.written-item-nav [data-id="{first["id"]}"][aria-current=step]').wait_for();field=page.locator(f'.written-field[data-written-key="{key}"]')
+  open_written_field_actions(page)
   if f['type']=='singleChoice':field.locator('input[type=radio]').first.check()
   else:field.locator('textarea').fill(f['referenceAnswers'][0])
-  field.locator('[data-action=written-submit]').click();field.locator('[data-action=written-answer]').click();field.locator('.written-answer').wait_for();assert f['referenceAnswers'][0] in field.locator('.written-answer').inner_text()
+  field.locator('[data-action=written-submit]').click();field.locator('.written-answer').wait_for();assert f['referenceAnswers'][0] in field.locator('.written-answer').inner_text()
   if field.locator('[data-action=written-rate]').count():field.locator('[data-action=written-rate][data-outcome=meets]').click()
-  field.locator('[data-action=written-ai]').click();page.locator('#ai-handoff-dialog').wait_for(state='visible');prompt=page.locator('#ai-handoff-preview').input_value();assert c['body'] in prompt and first['prompt'] in prompt;page.locator('#ai-handoff-close').click()
+  page.locator('[data-action=written-ai]').click();page.locator('#ai-handoff-dialog').wait_for(state='visible');prompt=page.locator('#ai-handoff-preview').input_value();assert c['body'] in prompt and first['prompt'] in prompt;page.locator('#ai-handoff-close').click()
   if c['id'] in [f'ap-r0{y}{s}-pm{n}' for y in [3,4,5] for s,n in [('a',3),('a',6),('h',7)]]:
    page.screenshot(path=str(ART/(c['id']+'-1440.png')))
   page.reload();page.locator('.written-items').wait_for();assert page.locator(f'.written-field[data-written-key="{key}"] .written-answer').count()==1

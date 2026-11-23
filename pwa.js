@@ -24,14 +24,10 @@ export function initPWA({beforeUpdate=async()=>true}={}) {
   const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   function showInstallState() {
     installButton.hidden = standalone() || !installPrompt;
-    installHelp.hidden=!!standalone();
-    installHelp.textContent = standalone() ? ''
-      : installPrompt ? 'ホーム画面やアプリ一覧から起動できます。'
-      : iOS
-        ? 'Safariの共有メニューから「ホーム画面に追加」を選びます。'
-        : 'ブラウザのメニューから「アプリをインストール」または「ホーム画面に追加」を選びます。';
-    document.querySelector('.pwa-settings').hidden=!!standalone()&&!registration?.waiting&&!status.textContent&&new URL(location.href).searchParams.get('pwa-check')!=='1';
-    document.getElementById('pwa-title').textContent=standalone()?'アプリの更新':'ホーム画面に追加';
+    const showIOS=!standalone()&&iOS&&!installPrompt;
+    installHelp.hidden=!showIOS;
+    installHelp.textContent=showIOS?'Safariの共有メニューから「ホーム画面に追加」を選びます。':'';
+    document.querySelector('.pwa-settings').hidden=installButton.hidden&&!showIOS&&!registration?.waiting&&!status.textContent&&new URL(location.href).searchParams.get('pwa-check')!=='1';
   }
   showInstallState();
   window.addEventListener('beforeinstallprompt', event => {

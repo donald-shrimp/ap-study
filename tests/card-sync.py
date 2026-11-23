@@ -1,11 +1,11 @@
-from browser_storage import open_data_management
 """Real Auth/Firestore SDK: immutable self-ratings and observed reset/restore."""
+from browser_storage import open_data_management
 from pathlib import Path
 exec(compile((Path(__file__).parent/'sync.py').read_text().split('with sync_playwright() as p:')[0],str(Path(__file__).parent/'sync.py'),'exec'))
 READ_CARDS='''async()=>{const root=new URL('.',document.baseURI),sdk=await import(new URL('assets/vendor/firebase.js',root)),{createCardStore}=await import(new URL('src/storage/cards.js',root)),{createLocalStore}=await import(new URL('src/storage/local.js',root));const main=createLocalStore({rootPath:root.pathname,qualificationId:'ap'}),identity=await main.identity();await main.close();const s=createCardStore({rootPath:root.pathname,owner:sdk.getAuth().currentUser?`uid:${sdk.getAuth().currentUser.uid}`:identity.owner,qualificationId:'ap'});try{return {...await s.read(),rows:await s.syncStore().read(),cursor:await s.syncStore().cursor()};}finally{await s.close();}}'''
 def cards(page):return page.evaluate(READ_CARDS)
 def card_synced(page):
- settings(page);page.locator('#sync-now').click();page.wait_for_function('document.getElementById("sync-state").dataset.cards==="synced"',timeout=45000)
+ settings(page);page.evaluate("window.dispatchEvent(new Event('online'))");page.wait_for_function('document.getElementById("sync-state").dataset.cards==="synced"',timeout=45000)
  wait_for_async(page,'async()=>!(await ('+READ_CARDS+')()).rows.some(r=>r.dirty)',timeout=45000);close_settings(page)
 def open_cards(page):
  if not page.locator('.flashcard').count():page.locator('.sidebar [data-view=home]').click();page.locator('[data-action=cards-open]').click()

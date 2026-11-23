@@ -33,6 +33,15 @@ try:
     assert expected in result.get_attribute('class'),(width,mode,result.get_attribute('class'))
     assert result.evaluate('(el)=>getComputedStyle(el).backgroundColor')==('rgb(237, 248, 244)' if expected=='result-correct' else 'rgb(255, 243, 244)')
     assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(width,mode)
+    assert pg.locator('.result-record').count()==1 and not pg.locator('.result-record p:visible').count()
+    assert pg.locator('.finish-actions > button[data-action=direct-return]').count()==1
+    if mode=='incorrect':
+     hints=pg.locator('.result-hints')
+     assert not hints.locator('[data-action=hint]').is_visible()
+     hints.locator(':scope > summary').click()
+     pg.locator('[data-action=hint]').click()
+     assert hints.locator('.hint-box').first.is_visible()
+     assert pg.locator('#result-heading').inner_text()=='不正解'
     ctx.close()
   browser.close()
 finally:server.shutdown()

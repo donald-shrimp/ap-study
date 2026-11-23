@@ -99,7 +99,7 @@ def load_workspace(root):
     require(manifest.get('formatVersion') == 1 and re.fullmatch('[0-9a-f]{40}', manifest.get('baselineCommit', '')), 'Invalid quality manifest')
     hashes = manifest.get('baselineFiles')
     require(isinstance(hashes, dict) and hashes, 'Missing immutable baseline file hashes')
-    actual_paths = {str(p.relative_to(work / 'baseline')) for p in (work / 'baseline').rglob('*') if p.is_file()}
+    actual_paths = {p.relative_to(work / 'baseline').as_posix() for p in (work / 'baseline').rglob('*') if p.is_file()}
     require(set(hashes) == actual_paths, 'Baseline file set mismatch')
     for path, expected in hashes.items():
         require(file_digest(_safe_file((work / 'baseline').resolve(), path)) == expected, 'Archived baseline changed: ' + path)

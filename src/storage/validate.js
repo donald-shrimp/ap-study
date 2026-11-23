@@ -1,5 +1,5 @@
 import {validateLegalContext} from '../domain/legal-context.js';
-import {validChoiceFormat,isMultiple,chosenIds,correctIds,sameChoices,validResponse,canSubmit} from '../domain/question-format.js';
+import {validChoiceFormat,isMultiple,chosenIds,matchesChoiceAnswer,validResponse,canSubmit} from '../domain/question-format.js';
 import {labels, complete} from '../domain/study.js';
 import {validQuestionPolicy,canUseQuestion} from '../domain/content-policy.js';
 
@@ -84,7 +84,8 @@ export function createStateValidator({getQuestions,getTopics,getQualification,al
       if(a.selectedChoiceId!==undefined && a.selectedChoiceId!==(a.selected===null?null:q.choices[a.selected].id))fail();
       if(complete(a)?!date(a.completedAt)||!Number.isInteger(a.hintsBeforeAnswer)||a.hintsBeforeAnswer<0||a.hintsBeforeAnswer>a.hintCount:a.completedAt!==null||a.hintsBeforeAnswer!==null)fail();
       if(!Array.isArray(a.hintEvents)||a.hintEvents.length!==a.hintCount||a.hintEvents.some((e,i)=>!e||e.step!==i+1||!date(e.at)||!['before','after'].includes(e.phase)))fail();
-      if(a.status==='correct'&&(!sameChoices(chosenIds(a,q),correctIds(q))||a.hintsBeforeAnswer!==0||a.answerViewedBefore)||a.status==='assisted'&&(!sameChoices(chosenIds(a,q),correctIds(q))||a.hintsBeforeAnswer===0||a.answerViewedBefore)||a.status==='incorrect'&&(!canSubmit(a,q)||sameChoices(chosenIds(a,q),correctIds(q))||a.answerViewedBefore)||a.status==='revealed'&&!a.answerViewedBefore)fail();
+      const correct=matchesChoiceAnswer(q,chosenIds(a,q));
+      if(a.status==='correct'&&(!correct||a.hintsBeforeAnswer!==0||a.answerViewedBefore)||a.status==='assisted'&&(!correct||a.hintsBeforeAnswer===0||a.answerViewedBefore)||a.status==='incorrect'&&(!canSubmit(a,q)||correct||a.answerViewedBefore)||a.status==='revealed'&&!a.answerViewedBefore)fail();
       ids.add(a.id);
     }
     if(s.currentId!==null&&!ids.has(s.currentId)||s.session.attemptIds.some(id=>!ids.has(id))||new Set(s.session.attemptIds).size!==s.session.attemptIds.length)fail();
