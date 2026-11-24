@@ -93,9 +93,10 @@ export async function loadCatalog(requestedId,{preferredId=null,choose=false,req
   if(manifest.id===entry.id&&resolveStudyTarget(manifest,{requestedPartId})===null){
     loaded=await readJSON(manifestURL,undefined,{refresh:true});manifest=loaded.value;
   }
-  // Old mutable manifests may predate case catalogs or explicit image references.
-  // Refresh once through the SW; offline fallback still keeps saved cases usable.
-  if(manifest.id===entry.id&&manifest.cases?.count>0&&(!Array.isArray(manifest.cases.index)||manifest.cases.referenceTargetsVersion!==1)){
+  // Old mutable manifests may predate catalog metadata. Keep the offline fallback.
+  const caseCatalog=manifest.cases;
+  if(manifest.id===entry.id&&caseCatalog?.count>0&&(!Array.isArray(caseCatalog.index)||caseCatalog.referenceTargetsVersion!==1||
+     entry.id==='ap'&&!Array.isArray(caseCatalog.topics))){
     loaded=await readJSON(manifestURL,undefined,{refresh:true});manifest=loaded.value;
   }
   if (manifest.id !== entry.id) throw contentError('資格の教材が一致しません。','教材');

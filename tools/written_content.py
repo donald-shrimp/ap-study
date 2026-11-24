@@ -50,8 +50,22 @@ def compile_cases(root,config,directory,hashed_json):
         assert catalog['format']=='hitomon-case-catalog' and catalog['version']==1 and catalog['qualificationId']==config['id']
         entries=catalog['entries'];known={c['id']:c for c in cases};packs={};numbers=set()
         assert isinstance(entries,list) and len(entries)==len(known) and {e['caseId'] for e in entries}==set(known)
+        topics=catalog.get('topics')
+        topic_ids=set()
+        if topics is not None:
+            assert isinstance(topics,list) and topics
+            for topic in topics:
+                assert set(topic)=={'id','name'} and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',topic['id'])
+                assert isinstance(topic['name'],str) and topic['name'].strip()
+                topic_ids.add(topic['id'])
+            assert len(topic_ids)==len(topics)==len({topic['name'] for topic in topics})
+            assert topic_ids.isdisjoint(topic['id'] for topic in config['topics'])
+            assert {e.get('caseTopicId') for e in entries}==topic_ids, 'Case topics must cover all catalog entries'
+            result['topics']=topics
+        entry_keys={'caseId','packId','packLabel','number'}
+        optional_keys={'referenceTargets'} | ({'caseTopicId'} if topic_ids else set())
         for e in entries:
-            assert {'caseId','packId','packLabel','number'}<=set(e)<={'caseId','packId','packLabel','number','referenceTargets'} and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',e['packId'])
+            assert entry_keys<=set(e)<=(entry_keys|optional_keys) and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,99}',e['packId'])
             assert isinstance(e['packLabel'],str) and 0<len(e['packLabel'])<=200 and type(e['number']) is int and e['number']>0
             c=known[e['caseId']];refs=c.get('bodyRefs',{});targets=e.get('referenceTargets',{})
             assert isinstance(targets,dict) and len(targets)<=len(refs),'Invalid image reference targets'
