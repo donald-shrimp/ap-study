@@ -26,3 +26,28 @@ for(const id of ['ap','fp2'])test(`${id}: explicit case catalog covers current s
  assert.equal(validCaseScope({...scope,topicIds:['unknown']},q,catalog.entries),false);
  for(const packId of new Set(catalog.entries.map(e=>e.packId))){const numbers=catalog.entries.filter(e=>e.packId===packId).map(e=>e.number).sort((a,b)=>a-b);assert.deepEqual(numbers,Array.from({length:numbers.length},(_,i)=>i+1));}
 });
+
+test('AP subject B uses the IPA booklet fields across published sessions',()=>{
+ const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
+ const manifest=read('data/qualifications/ap/manifest.json');
+ const catalog=read('content/ap/case-catalog.json');
+ const materials=read('content/ap/written-cases.json');
+ const topics=manifest.cases.topics;
+ const expected=['情報セキュリティ','経営戦略','プログラミング','システムアーキテクチャ','ネットワーク','データベース',
+  '組込みシステム開発','情報システム開発','プロジェクトマネジメント','サービスマネジメント','システム監査'];
+ assert.deepEqual(topics,catalog.topics);
+ assert.deepEqual(topics.map(t=>t.name),expected);
+ const index=manifest.cases.index;
+ const byId=new Map(materials.map(c=>[c.id,c]));
+ const items=index.map(entry=>({...byId.get(entry.caseId),...entry}));
+ assert.equal(items.length,materials.length);
+ for(const item of items)assert.equal(topics.find(t=>t.id===item.caseTopicId)?.name,expected[item.number-1]);
+ const scope={examPartId:'written',topicId:topics[10].id,topicIds:[],packId:null,order:'recommended',sessionId:'fixture'};
+ assert.equal(validCaseScope(scope,manifest,index),true);
+ assert.deepEqual(studyQueue(items,{scope}).map(c=>c.number),items.filter(c=>c.number===11).map(c=>c.number));
+ assert.deepEqual(studyQueue(items,{scope:{...scope,topicId:topics[9].id}}).map(c=>c.number),items.filter(c=>c.number===10).map(c=>c.number));
+ const legacy={...scope,topicId:'service'};
+ assert.equal(validCaseScope(legacy,manifest,index),true);
+ assert(new Set(studyQueue(items,{scope:legacy}).map(c=>c.number)).size>=2);
+ assert.deepEqual(studyQueue(items,{scope:legacy}).map(c=>c.id),items.filter(c=>c.topicId==='service').map(c=>c.id));
+});
