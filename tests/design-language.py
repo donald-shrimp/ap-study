@@ -29,6 +29,8 @@ try:
   assert a_start['backgroundColor']=='rgb(255, 255, 255)' and a_start['color']=='rgb(20, 45, 78)';assert a_secondary['backgroundColor']=='rgb(32, 61, 97)' and a_secondary['color']=='rgb(255, 255, 255)'
   nav(pg,'materials');pg.locator('[data-action=start]').first.click();pg.locator('.question-panel').wait_for();a_back=style(pg.locator('.study-back-button'));a_body=pg.locator('.question-stem').evaluate('e=>getComputedStyle(e).fontSize');a_choice=pg.locator('.choice-text').first.evaluate('e=>getComputedStyle(e).fontSize');a_submit=style(pg.locator('[data-action=submit]'));pg.locator('.question-panel').screenshot(path=str(ART/'ap-question.png'))
   assert a_back['backgroundColor']=='rgb(232, 238, 247)' and a_submit['backgroundColor']=='rgb(8, 125, 121)'
+  expect(pg.locator('.sidebar')).to_be_hidden();screenshot(pg,'ap-question-layout')
+  pg.locator('.study-back-button').click();expect(pg.locator('.sidebar')).to_be_visible()
   pg.goto(BASE+'fp2/?part=jafp-practical&entry=home');pg.locator('.quick-start').wait_for();assert style(pg.locator('.hero-start .primary'))==a_start
   assert style(pg.locator('.hero-start .secondary').first)==a_secondary;assert pg.locator('.hero-start select').count()==0;screenshot(pg,'fp-home')
   open_written_case(pg,'fp2-202605-jafp-q01');assert style(pg.locator('.study-back-button'))==a_back;assert pg.locator('.study-toolbar').evaluate('e=>e.firstElementChild.classList.contains("study-back-button")')
@@ -66,9 +68,20 @@ try:
   # Learning text follows A's scale while controls and editable mobile inputs remain usable.
   for width in [320,390,1440]:
    pg.set_viewport_size({'width':width,'height':1000})
+   assert pg.locator('.sidebar').is_hidden()
    for scale in [50,140]:
     pg.evaluate('(v)=>document.documentElement.style.setProperty("--study-text-scale",v)',str(scale/100));assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     assert pg.locator('.study-back-button').evaluate('e=>e.getBoundingClientRect().height')>=44
+  pg.evaluate('document.documentElement.style.setProperty("--study-text-scale","1")')
+  open_written_case(pg,'ap-r07a-pm1',mode='exam')
+  expect(pg.locator('.sidebar')).to_be_hidden()
+  body=pg.locator('.written-body');items=pg.locator('.written-items');figure=body.locator('.question-figure img').first
+  figure.evaluate('(img)=>img.decode()')
+  body_width=body.bounding_box()['width'];item_width=items.bounding_box()['width']
+  assert abs(body_width/(body_width+item_width)-0.6)<0.01 and body_width>750
+  assert body.bounding_box()['y']==items.bounding_box()['y']
+  pg.screenshot(path=str(ART/'ap-written-layout-1440.png'))
+  pg.locator('.study-back-button').click();expect(pg.locator('.sidebar')).to_be_visible()
   assert not errors,errors;b.close()
 finally:server.shutdown()
 (ART/'results.json').write_text(json.dumps({'aHomeMainAndSecondaryStylesMatched':True,'aBackAndSubmitStylesMatched':True,'bodyAndChoiceTypographyMatched':True,'keyboardSelection':True,'wrongAndCorrectFeedback':True,'examNoDisclosure':True,'typedAnswerReload':True,'widths':[320,390,1440],'studyTextSettings':[50,140],'pageErrors':errors},ensure_ascii=False,indent=2)+'\n')

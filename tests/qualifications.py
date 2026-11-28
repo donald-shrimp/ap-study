@@ -88,7 +88,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             for i in range(4):page.locator('[data-action=hint]').click();assert page.locator('.hint-box').count()==i+1
             page.get_by_role('radio').last.check();page.get_by_role('button',name='回答する',exact=True).click()
             assert page.locator('#result-heading').inner_text()=='解答を確認' and page.locator('.reason-list li').count()==5
-            page.locator('.sidebar [data-view=home]').click()
+            action_nav(page,'home')
             saved_state(page)
             # Installed/root entry reopens the previous qualification without a chooser.
             page.goto(url);page.locator('.quick-start').wait_for()
@@ -100,7 +100,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             new['enrichment']='topic-guide'
             new['choiceReasons']=[]
             path.write_text(json.dumps([old,new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root);refresh_fixture_manifest(page,root)
-            page.reload();page.locator('#result-heading').wait_for();page.locator('.sidebar [data-view=home]').click();page.locator('.sidebar [data-view=history]').click();assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
+            page.reload();page.locator('#result-heading').wait_for();action_nav(page,'history');assert '解答済み 1 / 2問' in page.locator('.progress-counts').inner_text()
             action_nav(page,'materials');page.locator('[name=enriched]').check();assert page.locator('#catalog-results .row').count()==1;page.locator('[name=enriched]').uncheck();action_nav(page,'history');saved_state(page)
             # Change and then retire the question. The original answer stays graded
             # against its snapshot and remains readable after removal from the catalog.
@@ -108,7 +108,7 @@ with tempfile.TemporaryDirectory(prefix='hitomon-qualifications-') as directory:
             cfg_path=root/'content/fixture-a/qualification.json';cfg=json.loads(cfg_path.read_text());cfg['topics'][0]['name']='改名した基礎';cfg_path.write_text(json.dumps(cfg))
             path.write_text(json.dumps([old,new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root);refresh_fixture_manifest(page,root);page.reload();page.locator('.sidebar [data-view=history]').click();open_answer_history(page);page.locator('[data-action=resume]').click()
             assert '2＋3' in page.locator('.question-stem').inner_text() and '正解：2' in ''.join(page.locator('.answer-selection').inner_text().split())
-            page.locator('.sidebar [data-view=history]').click();assert page.locator('[data-reading-topic]').input_value()=='第1章'
+            action_nav(page,'history');assert page.locator('[data-reading-topic]').input_value()=='第1章'
             action_nav(page,'materials');edit_material(page,'same-question');page.locator('#editor-dialog').wait_for();page.locator('[name=summary]').fill('個人の解説');page.get_by_role('button',name='編集を保存する',exact=True).click()
             page.locator('.sidebar [data-view=home]').click();path.write_text(json.dumps([new]));fixtures.write_question_reviews(root,'fixture-a');builder.build(root);refresh_fixture_manifest(page,root)
             page.reload();page.locator('.quick-start').wait_for();page.locator('.sidebar [data-view=history]').click();assert '解答済み 0 / 1問' in page.locator('.progress-counts').inner_text()

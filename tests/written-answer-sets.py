@@ -5,7 +5,7 @@ import shutil
 
 from playwright.sync_api import expect, sync_playwright
 
-from browser_storage import open_written_case, read_written_material
+from browser_storage import nav, open_written_case, read_written_material
 
 URL = os.getenv('HITOMON_WRITTEN_URL', 'http://127.0.0.1:4173/ap/?part=written')
 
@@ -94,7 +94,7 @@ with sync_playwright() as p:
     fixed.locator('input').nth(1).fill('出荷指図データ')
     fixed.locator('[data-action=written-submit]').click()
     expect(fixed.locator('.written-answer h4')).to_have_text('自動判定：正解')
-    page.locator('.sidebar [data-view=home]').click()
+    page.locator('.study-back-button').click()
     page.locator('[data-action=written-packs]').click()
     page.locator('[data-action=written-pack][data-pack="2025-spring"]').click()
     page.locator('[data-action=offline-open][data-pack="2025-spring"]').click()
@@ -139,7 +139,7 @@ with sync_playwright() as p:
     page.locator('.written-item-nav [data-id="q1-2"]').click()
     expect(page.locator('.written-answer h4')).to_have_text('自動判定：正解')
     expect(page.locator('textarea[data-written-key="q1-2--a"]')).to_have_value('シナジー')
-    page.locator('.sidebar [data-view=history]').click()
+    nav(page, 'history')
     page.locator(f'[data-action=written-resume][data-id="{original_id}"]').click()
     expect(page.locator('.written-field[data-written-key="q2-1--bc"] textarea')).to_be_visible()
     assert read_written_material(page)['version'] == 1

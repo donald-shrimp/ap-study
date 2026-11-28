@@ -36,6 +36,16 @@ def wait_for_async(page, expression, timeout=10000):
 
 def nav(page, view):
     """Navigate through the three visible destinations and their real actions."""
+    page.locator('#main:not([inert]):not(:has(> .loading))').wait_for()
+    if page.locator('#main > .written-layout, #main > .question-panel').count():
+        back = page.locator('#main > .study-toolbar .study-back-button')
+        if back.is_visible():
+            back.click()
+        else:
+            page.locator('.topbar .brand').click()
+        page.locator('.sidebar').wait_for(state='visible')
+        if view == 'home':
+            return
     if view == 'materials':
         page.locator('.sidebar [data-view=topics]').click()
         page.get_by_role('button', name='問題を探す', exact=True).click()
@@ -157,6 +167,13 @@ def read_written_material(page):
     }""")
 
 
+def check_written_choice(slot, choice_id):
+    choice = slot.locator(f'input[value="{choice_id}"]')
+    if not choice.is_checked():
+        slot.locator(f'label:has(input[value="{choice_id}"])').click()
+    assert choice.is_checked()
+
+
 def fill_written_field(slot, field):
     answers=field['referenceAnswers']
     if field['type']=='answerSet':
@@ -167,7 +184,7 @@ def fill_written_field(slot, field):
                     slot.locator('[data-answer-set-entry]').nth(index).select_option(choice)
             else:
                 for choice in ids:
-                    slot.locator(f'input[value="{choice}"]').check()
+                    check_written_choice(slot, choice)
         else:
             inputs=slot.locator('[data-answer-set-entry]')
             for index, answer in enumerate(answers):
@@ -177,6 +194,6 @@ def fill_written_field(slot, field):
                 inputs.nth(index).fill(answer)
     elif field['type']=='singleChoice':
         choice=next(choice for choice in field['choices'] if choice['label']==answers[0])
-        slot.locator(f'input[value="{choice["id"]}"]').check()
+        check_written_choice(slot, choice['id'])
     else:
         slot.locator('textarea, input[type=text]').fill(answers[0])

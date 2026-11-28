@@ -4,7 +4,7 @@ import os
 import shutil
 import time
 from playwright.sync_api import sync_playwright
-from browser_storage import open_answer_history, wait_for_async
+from browser_storage import nav, open_answer_history, wait_for_async
 
 URL=os.environ.get('AP_STUDY_URL','http://127.0.0.1:4173/ap/')+'?firebase-emulator=1'
 READ='''async()=>{
@@ -66,20 +66,20 @@ with sync_playwright() as p:
     assert len([a for a in history if a['completedAt']])==2
     print('PASS two browsers / selected choice and hint checkpoint / concurrent continuation keeps both answers',flush=True)
     # Post-answer hints on a downloaded completed attempt merge without another grade.
-    second.locator('.sidebar [data-view=history]').click();correct=[a for a in history if a['status']=='assisted'][0]
+    nav(second,'history');correct=[a for a in history if a['status']=='assisted'][0]
     open_answer_history(second);second.locator('[data-action=resume][data-id="'+correct['id']+'"]').click();second.locator('[data-action=hint]').click();synced(second);synced(first)
     wait_for_async(first,'async()=>(await ('+READ+')()).state.attempts.some(a=>a.id==='+json.dumps(correct['id'])+'&&a.hintCount===2)',timeout=30000)
     history=state(first)['state']['attempts'];assert len([a for a in history if a['completedAt']])==2
     assert next(a for a in history if a['id']==correct['id'])['hintCount']==2
     print('PASS another device opens post-answer hint / original grading retained / no duplicate completion',flush=True)
     # Offline SDK initialization, local answer/outbox, reload, automatic/manual retry.
-    first.locator('.sidebar [data-view=home]').click();first.locator('.study-entrance[data-paper-mode=all][data-action=entry-start]').click();first.get_by_role('radio').first.wait_for();first.evaluate('async()=>await navigator.serviceWorker.ready')
+    nav(first,'home');first.locator('.study-entrance[data-paper-mode=all][data-action=entry-start]').click();first.get_by_role('radio').first.wait_for();first.evaluate('async()=>await navigator.serviceWorker.ready')
     contexts[0].set_offline(True);first.locator('[data-action=hint]').click();first.get_by_role('radio').first.check();first.locator('[data-action=submit]').click();offline=state(first);assert offline['pending']
     first.reload();first.wait_for_function('document.getElementById("account-name").textContent.includes('+json.dumps(email)+')');first.locator('#result-heading').wait_for();assert state(first)['pending'] and state(first)['state']['currentId']==offline['state']['currentId']
     contexts[0].set_offline(False);synced(first);synced(second);assert len([a for a in state(second)['state']['attempts'] if a['completedAt']])==3
     print('PASS offline answer/hints / reload / durable pending queue / replay without duplicate',flush=True)
     # Log out restores the guest; another UID has no old records/outbox.
-    first.locator('.sidebar [data-view=home]').click();first.locator('.study-entrance[data-paper-mode=all][data-action=entry-start]').click();first.get_by_role('radio').first.wait_for();contexts[0].set_offline(True);first.locator('[data-action=hint]').click();pending_owner=state(first);assert pending_owner['pending']
+    nav(first,'home');first.locator('.study-entrance[data-paper-mode=all][data-action=entry-start]').click();first.get_by_role('radio').first.wait_for();contexts[0].set_offline(True);first.locator('[data-action=hint]').click();pending_owner=state(first);assert pending_owner['pending']
     settings(first);first.locator('#google-logout').click();first.wait_for_function('!document.getElementById("google-login").hidden && !document.getElementById("google-login").disabled');assert state(first)['state']['attempts'][0]['id']==guest_id
     contexts[0].set_offline(False)
     login(first,'other-'+email);assert state(first)['state']['attempts']==[] and state(first)['pending']==[]
