@@ -167,6 +167,13 @@ def read_written_material(page):
     }""")
 
 
+def check_written_choice(slot, choice_id):
+    choice = slot.locator(f'input[value="{choice_id}"]')
+    if not choice.is_checked():
+        slot.locator(f'label:has(input[value="{choice_id}"])').click()
+    assert choice.is_checked()
+
+
 def fill_written_field(slot, field):
     answers=field['referenceAnswers']
     if field['type']=='answerSet':
@@ -177,7 +184,7 @@ def fill_written_field(slot, field):
                     slot.locator('[data-answer-set-entry]').nth(index).select_option(choice)
             else:
                 for choice in ids:
-                    slot.locator(f'input[value="{choice}"]').check()
+                    check_written_choice(slot, choice)
         else:
             inputs=slot.locator('[data-answer-set-entry]')
             for index, answer in enumerate(answers):
@@ -187,6 +194,6 @@ def fill_written_field(slot, field):
                 inputs.nth(index).fill(answer)
     elif field['type']=='singleChoice':
         choice=next(choice for choice in field['choices'] if choice['label']==answers[0])
-        slot.locator(f'input[value="{choice["id"]}"]').check()
+        check_written_choice(slot, choice['id'])
     else:
         slot.locator('textarea, input[type=text]').fill(answers[0])
