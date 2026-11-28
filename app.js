@@ -1,2 +1,2 @@
 // Shared entry point for the study application.
-import './src/app.js?v=20261128-short-answer-grid';
+import './src/app.js?v=20261128-written-answer-grid';
