@@ -292,6 +292,11 @@
 .written-field .choice-text{font-size:calc(1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.8}
 .written-body .question-stem,.written-items>.question-stem{font-size:calc(1.1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.95}
 .written-field textarea,.written-field input[type=text]{font-size:calc(1rem * var(--study-text-scale));line-height:1.8}
+.editor-field .written-short-entry{width:min(100%,max(9rem,calc(var(--answer-limit) * 1.65rem)));border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.written-field .written-short-entry textarea{display:block;min-height:44px;padding:6px 9px;border:0;background:transparent;field-sizing:content}
+.editor-field .written-answer-cells{display:grid;grid-template-columns:repeat(var(--answer-limit),minmax(0,1fr));gap:3px;margin:0;padding:0 8px 7px}
+.written-answer-cells>i{height:12px;border:1px solid var(--line);border-radius:3px;background:var(--bg)}
+.written-answer-cells>i.filled{border-color:var(--accent);background:var(--pale)}
 .written-field-actions{margin-top:18px}.written-field-status{margin:16px 0 0}
 .written-individual-toggle{margin-bottom:12px}
 .written-individual-toggle>summary{min-height:44px;display:list-item;padding:8px 0;color:var(--muted)}
