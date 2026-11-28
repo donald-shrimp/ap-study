@@ -292,11 +292,22 @@
 .written-field .choice-text{font-size:calc(1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.8}
 .written-body .question-stem,.written-items>.question-stem{font-size:calc(1.1rem * var(--study-device-scale) * var(--study-text-scale));line-height:1.95}
 .written-field textarea,.written-field input[type=text]{font-size:calc(1rem * var(--study-text-scale));line-height:1.8}
-.editor-field .written-short-entry{width:min(100%,max(9rem,calc(var(--answer-limit) * 1.65rem)));border:1px solid var(--line);border-radius:10px;background:var(--white)}
-.written-field .written-short-entry textarea{display:block;min-height:44px;padding:6px 9px;border:0;background:transparent;field-sizing:content}
-.editor-field .written-answer-cells{display:grid;grid-template-columns:repeat(var(--answer-limit),minmax(0,1fr));gap:3px;margin:0;padding:0 8px 7px}
-.written-answer-cells>i{height:12px;border:1px solid var(--line);border-radius:3px;background:var(--bg)}
-.written-answer-cells>i.filled{border-color:var(--accent);background:var(--pale)}
+.written-short-viewport{max-width:100%;overflow:auto}
+.written-field textarea.written-short-grid{
+ --answer-cell:max(24px,1.5em);
+ --answer-gap:calc(var(--answer-cell) - 1em);
+ --answer-row:max(44px,1.8em);
+ display:block;width:calc(var(--answer-limit) * var(--answer-cell) + 2px);
+ min-height:calc(var(--answer-row) + 2px);padding:0 0 0 calc(var(--answer-gap) / 2);
+ border-radius:8px;background-color:var(--white);
+ background-image:linear-gradient(90deg,transparent calc(100% - 1px),var(--line) 0),linear-gradient(transparent calc(100% - 1px),var(--line) 0);
+ background-size:var(--answer-cell) var(--answer-row);background-clip:padding-box;
+ font-family:"Yu Gothic","Hiragino Sans","Noto Sans CJK JP","Noto Sans JP",monospace;
+ font-variant-east-asian:full-width;font-variant-ligatures:none;font-kerning:none;
+ line-height:var(--answer-row);letter-spacing:var(--answer-gap);
+ white-space:pre;resize:none;field-sizing:content
+}
+.written-short-grid:focus-visible{outline-offset:-3px}
 .written-field-actions{margin-top:18px}.written-field-status{margin:16px 0 0}
 .written-individual-toggle{margin-bottom:12px}
 .written-individual-toggle>summary{min-height:44px;display:list-item;padding:8px 0;color:var(--muted)}

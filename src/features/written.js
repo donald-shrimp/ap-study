@@ -312,9 +312,10 @@ export function createWrittenFeature({qualification,rootPath,content,getStore,on
   const limit=f.type!=='singleChoice'&&f.type!=='numeric'&&f.maxLength<2000?f.maxLength:null;
   const length=[...(r?.value||'')].length;
   const count=limit&&!locked?`<span class="small written-count" id="written-count-${esc(key)}">${length} / ${limit}字</span>`:'';
-  const shortCells=f.type==='shortText'&&limit&&limit<=15;
-  const textInput=`<textarea rows="${shortCells?1:3}" ${data(key)} maxlength="${f.maxLength||2000}" ${count?`aria-describedby="written-count-${esc(key)}"`:''} ${locked?'readonly':''}>${esc(r?.value||'')}</textarea>`;
-  const textEditor=shortCells?`<span class="written-short-entry" style="--answer-limit:${limit}">${textInput}<span class="written-answer-cells" aria-hidden="true">${Array.from({length:limit},(_,index)=>`<i${index<length?' class="filled"':''}></i>`).join('')}</span></span>`:textInput;
+  const shortGrid=f.type==='shortText'&&limit&&limit<=15;
+  const gridAttributes=shortGrid?`class="written-short-grid" style="--answer-limit:${limit}" wrap="off"`:'';
+  const textInput=`<textarea rows="${shortGrid?1:3}" ${gridAttributes} ${data(key)} maxlength="${f.maxLength||2000}" ${count?`aria-describedby="written-count-${esc(key)}"`:''} ${locked?'readonly':''}>${esc(r?.value||'')}</textarea>`;
+  const textEditor=shortGrid?`<span class="written-short-viewport">${textInput}</span>`:textInput;
   const constraints=answerConstraints(f,limit);
   const input=f.type==='answerSet'?writtenAnswerSetHTML(f,r,key,shown):f.type==='singleChoice'?choices:f.type==='numeric'?`<label class="editor-field numeric-field"><span class="sr-only">${esc(f.label)}</span><span class="numeric-answer"><input type="text" inputmode="decimal" autocomplete="off" ${data(key)} maxlength="${f.maxLength}" value="${esc(r?.value||'')}" ${locked?'readonly':''}><span>${esc(f.numeric.unit)}</span></span>${locked?'':`<span class="small">${esc(numericInstruction(f))}</span>`}</label>`:`<label class="editor-field"><span class="sr-only">${esc(f.label)}</span>${textEditor}${count}</label>`;
   const resultTone=r?.skipped?'result-incorrect':isAutomatic?(r.evaluation.outcome==='correct'?'result-correct':'result-incorrect'):'result-neutral';
@@ -449,12 +450,7 @@ export function createWrittenFeature({qualification,rootPath,content,getStore,on
   if(submit)submit.disabled=!ready;
   const batch=document.querySelector('[data-action=written-check-item]');
   if(batch)batch.disabled=!document.querySelector('.written-items [data-action=written-submit]:not(:disabled)');
-  const editor=el.closest('label'),count=editor?.querySelector('.written-count');
-  if(count){
-   const length=[...value].length;
-   count.textContent=`${length} / ${el.maxLength}字`;
-   editor.querySelectorAll('.written-answer-cells > i').forEach((cell,index)=>cell.classList.toggle('filled',index<length));
-  }
+  const count=el.closest('label')?.querySelector('.written-count');if(count)count.textContent=`${[...value].length} / ${el.maxLength}字`;
   draftDOM=true;edit(r=>setCaseResponse(r,key,value),{render:false});return true;
  }
  function trackPageScroll(){if(view==='reflection'){rememberReflection();return;}if(view!=='study'||!current())return;const offset=window.scrollY,key=matchMedia('(max-width:1000px)').matches&&current().progress.pane==='body'?'bodyScroll':'questionScroll';edit(r=>{r.progress[key]=offset;},{render:false,remember:false});}
