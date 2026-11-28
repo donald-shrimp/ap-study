@@ -131,6 +131,7 @@ try:
   short=pg.locator('.written-field[data-written-key="q2--c"]')
   entry=short.locator('textarea.written-text-grid')
   expect(entry).to_have_count(1)
+  expect(entry).to_have_css('border-radius','0px')
   expect(short.locator('.written-count')).to_have_text('0 / 5字')
   expect(entry).to_have_attribute('maxlength','5')
   assert entry.evaluate("""el=>{
