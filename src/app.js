@@ -49,6 +49,16 @@ const PAGE_SIZE=20;
 const examLabel=q=>esc(q.packLabel || `${q.year}年 ${qualification.seasonLabels?.[q.season] || q.season}`);
 let base = [], state = makeState(), storageOK = true, corruptRaw = null, editId = null;
 const main = $('#main');
+const appearanceKey=`hitomon-${appRoot.pathname}appearance`;
+const appearanceControls=[...document.querySelectorAll('#appearance-background,#appearance-font')];
+function applyAppearance(values){
+  for(const control of appearanceControls){
+    const candidate=values?.[control.name];
+    control.value=[...control.options].some(option=>option.value===candidate)?candidate:control.options[0].value;
+    document.documentElement.dataset[control.name]=control.value;
+  }
+}
+try{applyAppearance(JSON.parse(localStorage.getItem(appearanceKey)));}catch{applyAppearance(null);}
 
 const validateState=createStateValidator({getQuestions:()=>base,getTopics:topics,getQualification:()=>qualification});
 const validateDiagnosticState=createStateValidator({getQuestions:()=>base,getTopics:topics,getQualification:()=>qualification,allowDiagnosticOnly:true});
@@ -363,6 +373,12 @@ $('#settings-dialog').addEventListener('click',async e=>{
  try{if(el.dataset.action==='offline-open'){await manageOffline(el);return;}if(el.dataset.action==='clear-desk'){await clearDesk(el.dataset.id);return;}if(el.dataset.action==='export-materials'){await content.loadAll();if(token===navigation)download(base.map(q=>question(q.id)),`${qualification.id}-study-questions.json`);return;}if(await cards?.action(el))return;await planner?.action(el);}catch(error){notice(error.message);}
 });
 $('#settings-dialog').addEventListener('change',async e=>{
+ if(appearanceControls.includes(e.target)){
+  const values=Object.fromEntries(appearanceControls.map(control=>[control.name,control.value]));
+  applyAppearance(values);
+  try{localStorage.setItem(appearanceKey,JSON.stringify(values));}catch{notice('この端末に表示設定を保存できませんでした。');}
+  return;
+ }
  if(main.inert||recordMaintenance){e.target.value='';notice('保存中です。少し待ってから操作してください。');return;}
  if(e.target.id==='exclude-outdated'){try{await written?.flush();const previous=state.settings.excludeOutdated;state.settings.excludeOutdated=e.target.checked;if(!await save()){state.settings.excludeOutdated=previous;e.target.checked=previous!==false;}render(false);}catch(error){e.target.checked=state.settings.excludeOutdated!==false;notice(error.message);}return;}
  if(e.target.id==='import-cards'){try{if(e.target.files[0])await cards.importFile(e.target.files[0]);}catch(error){notice(error.message+' 現在の記録は変更していません。');}finally{e.target.value='';}return;}

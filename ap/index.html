@@ -8,11 +8,11 @@
   <meta name="theme-color" content="#142d4e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="ひと問">
-  <link rel="manifest" href="manifest.webmanifest?v=20261128-question-layout">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=20261128-question-layout">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/hitomon-app-icon.svg?v=20261128-question-layout">
+  <link rel="manifest" href="manifest.webmanifest?v=20261128-reading-appearance">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=20261128-reading-appearance">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/hitomon-app-icon.svg?v=20261128-reading-appearance">
   <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261128-question-layout"><script type="module" src="app.js?v=20261128-question-layout"></script>
+  <link rel="stylesheet" href="styles.css?v=20261128-reading-appearance"><script type="module" src="app.js?v=20261128-reading-appearance"></script>
 </head>
 <body>
   <a class="skip" href="#main">本文へ</a>
@@ -23,7 +23,15 @@
   </div>
   <dialog id="settings-dialog" aria-labelledby="settings-title">
     <form method="dialog"><div class="dialog-head"><h2 id="settings-title">設定</h2><button class="icon-button" aria-label="設定を閉じる">閉じる</button></div></form>
-    <section class="text-size-settings" aria-labelledby="text-size-title"><h3 id="text-size-title">本文の文字サイズ</h3><div class="button-row" role="group" aria-labelledby="text-size-title"><button type="button" class="button secondary" id="text-smaller" aria-label="本文の文字を小さくする">−</button><output id="text-size" aria-live="polite" aria-atomic="true">100%</output><button type="button" class="button secondary" id="text-larger" aria-label="本文の文字を大きくする">＋</button><button type="button" class="button secondary" id="text-reset">標準</button></div></section>
+    <section class="text-size-settings" aria-labelledby="display-settings-title">
+      <h3 id="display-settings-title">表示</h3>
+      <div class="appearance-settings">
+        <label>背景色<select id="appearance-background" name="readingTheme"><option value="standard">標準</option><option value="ivory">生成り</option><option value="dark">ダーク</option></select></label>
+        <label>フォント<select id="appearance-font" name="readingFont"><option value="standard">標準</option><option value="biz-ud">BIZ UDPゴシック</option></select></label>
+      </div>
+      <h4 id="text-size-title">本文の文字サイズ</h4>
+      <div class="button-row" role="group" aria-labelledby="text-size-title"><button type="button" class="button secondary" id="text-smaller" aria-label="本文の文字を小さくする">−</button><output id="text-size" aria-live="polite" aria-atomic="true">100%</output><button type="button" class="button secondary" id="text-larger" aria-label="本文の文字を大きくする">＋</button><button type="button" class="button secondary" id="text-reset">標準</button></div>
+    </section>
     <section id="desk-settings" hidden></section>
     <section><h3>オフライン教材</h3><button class="button secondary" data-action="offline-open">教材を保存・管理</button></section>
     <section id="legal-study-settings" hidden><h3>出題対象</h3><label><input type="checkbox" id="exclude-outdated" checked> 法令改正のある問題を除外</label></section>
