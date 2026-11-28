@@ -213,8 +213,13 @@
 .ai-handoff-image-links .button{font-size:.82rem;min-width:0;overflow-wrap:anywhere}
 @media(max-width:480px){#ai-handoff-dialog{padding:16px 13px}#ai-handoff-dialog .ai-handoff-manual .button{width:100%}}
 
-/* Subject boundaries remain visible through study, records and the shared plan. */
-.written-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+/* Question views use the navigation within the exercise. */
+.workspace:has(> .content > main > :is(.question-panel,.written-layout)){grid-template-columns:minmax(0,1fr)}
+.workspace:has(> .content > main > :is(.question-panel,.written-layout))>.sidebar{display:none}
+.workspace:has(> .content > main > .written-layout){max-width:1720px}
+.workspace>.content:has(> main > .written-layout){max-width:none}
+
+.written-layout{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:20px;align-items:start}
 .written-body{max-height:calc(100dvh - 175px);overflow:auto;position:sticky;top:24px;scrollbar-gutter:stable}
 .written-body .question-table{min-width:0;width:100%;table-layout:auto}
 .written-body .question-table th,.written-body .question-table td{overflow-wrap:anywhere;white-space:normal}
@@ -231,6 +236,12 @@
 .written-originals{margin-top:16px}
 .written-case-option+.written-case-option{margin-top:24px}
 .written-mobile-tabs{display:none}
+@media(width > 1000px){
+ .workspace>.content:has(> main > .written-layout){padding-top:16px;padding-inline:clamp(24px,3vw,48px)}
+ .written-toolbar{margin-bottom:10px}
+ .written-case-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;margin-bottom:12px}
+ .written-case-header>:is(.case-heading,.case-meta){margin-bottom:0}
+}
 @media(max-width:1000px){.written-layout{grid-template-columns:minmax(0,1fr)}.written-body{position:static;max-height:none}.written-mobile-tabs{display:flex;gap:8px;margin:16px 0}.written-layout[data-pane=questions]>.written-body,.written-layout[data-pane=body]>.written-items{display:none}.written-mobile-tabs [aria-pressed=true]{background:#eaf2fa}.written-field textarea{font-size:calc(.8rem * var(--study-text-scale,1))}}
 
 /* Keep selected answers distinct when system colors suppress backgrounds/shadows. */

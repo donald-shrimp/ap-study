@@ -79,7 +79,7 @@ with sync_playwright() as playwright:
     expect(figure.locator('figcaption')).to_have_text('図1 一連のインシデント対応フロー')
     expect(figure).to_be_in_viewport()
 
-    page.locator('.sidebar [data-view=home]').click()
+    page.locator('.study-back-button').click()
     page.locator('[data-action=written-packs]').click()
     page.locator('[data-action=written-pack][data-pack="2023-spring"]').click()
     page.locator('[data-action=offline-open][data-pack="2023-spring"]').click()

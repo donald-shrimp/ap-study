@@ -36,6 +36,16 @@ def wait_for_async(page, expression, timeout=10000):
 
 def nav(page, view):
     """Navigate through the three visible destinations and their real actions."""
+    page.locator('#main:not([inert]):not(:has(> .loading))').wait_for()
+    if page.locator('#main > .written-layout, #main > .question-panel').count():
+        back = page.locator('#main > .study-toolbar .study-back-button')
+        if back.is_visible():
+            back.click()
+        else:
+            page.locator('.topbar .brand').click()
+        page.locator('.sidebar').wait_for(state='visible')
+        if view == 'home':
+            return
     if view == 'materials':
         page.locator('.sidebar [data-view=topics]').click()
         page.get_by_role('button', name='問題を探す', exact=True).click()
