@@ -1,11 +1,12 @@
 // Bump the release and the matching URLs in index.html/app.js when changing the shell.
-const RELEASE = '20261128-reading-appearance';
+const RELEASE = '20261128-written-square-grid';
 const ROOT = new URL(self.registration.scope);
 const PREFIX = `hitomon-${ROOT.pathname}`;
 const SHELL_CACHE = `${PREFIX}shell-${RELEASE}`;
 const IMAGE_CACHE = `${PREFIX}images`;
 const CONTENT_CACHE = `${PREFIX}content`;
 const CORE = [
+  'src/ui/written-text-grid.js',
   'src/domain/decimal-answer.js','src/domain/legal-context.js','src/ui/legal-context.js',
   'src/domain/study-queue.js','src/domain/offline-assets.js','src/features/offline.js','src/features/offline-store.js',
   'src/storage/sync-cursor.js',

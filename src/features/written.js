@@ -11,6 +11,7 @@ import {MAX_ANSWER_SET_INPUTS,withAnswerSets} from '../domain/case-answer-set.js
 import {caseCorrectChoiceIds} from '../domain/case-field.js';
 import {caseFeedback} from '../domain/case-feedback.js';
 import {writtenAnswerSetHTML} from '../ui/written-answer-set.js';
+import {writtenTextGrid} from '../ui/written-text-grid.js';
 import {writtenReflectionHTML} from '../ui/written-reflection.js';
 import {esc,timeText} from '../utils.js';
 import {studyQueue,caseRecommendation,validCaseScope} from '../domain/study-queue.js';
@@ -309,10 +310,13 @@ export function createWrittenFeature({qualification,rootPath,content,getStore,on
   const {field:f,key}=slot,r=caseResponse(run,key),locked=!!r?.submittedAt,shown=run.assistance.viewedFields.includes(key)&&mayViewAnswer(run,key),isAutomatic=r?.evaluation?.source==='automatic';
   const correctIds=shown&&f.type==='singleChoice'?caseCorrectChoiceIds(f):[];
   const choices=f.type==='singleChoice'?`<fieldset class="written-choices choices" ${locked?'disabled':''}><legend class="sr-only">${esc(f.label)}</legend>${f.choices.map(c=>{const selected=r?.value===c.id,correct=correctIds.includes(c.id);return `<label class="choice ${selected?'selected':''} ${shown&&correct?'correct-choice':''} ${shown&&selected&&!correct?'wrong-choice':''}"><input type="radio" name="written-${esc(key)}" value="${esc(c.id)}" ${data(key)} ${selected?'checked':''}><span class="choice-code">${esc(c.label)}</span><div class="choice-text">${esc(c.text)}</div>${shown&&correct?'<span class="sr-only">（正解）</span>':''}${shown&&selected?'<span class="sr-only">（あなたの回答）</span>':''}</label>`;}).join('')}</fieldset>`:'';
-  const limit=f.type!=='singleChoice'&&f.type!=='numeric'&&f.maxLength<2000?f.maxLength:null;
-  const count=limit&&!locked?`<span class="small written-count" id="written-count-${esc(key)}">${[...(r?.value||'')].length} / ${limit}字</span>`:'';
+  const limit=['shortText','freeText'].includes(f.type)&&f.maxLength<2000?f.maxLength:null;
+  const length=[...(r?.value||'')].length;
+  const count=limit&&!locked?`<span class="small written-count" id="written-count-${esc(key)}">${length} / ${limit}字</span>`:'';
+  const textEditor=limit?writtenTextGrid({value:r?.value||'',limit,locked,attributes:`${data(key)} ${count?`aria-describedby="written-count-${esc(key)}"`:''}`}):
+   `<textarea rows="3" ${data(key)} maxlength="${f.maxLength||2000}" ${locked?'readonly':''}>${esc(r?.value||'')}</textarea>`;
   const constraints=answerConstraints(f,limit);
-  const input=f.type==='answerSet'?writtenAnswerSetHTML(f,r,key,shown):f.type==='singleChoice'?choices:f.type==='numeric'?`<label class="editor-field numeric-field"><span class="sr-only">${esc(f.label)}</span><span class="numeric-answer"><input type="text" inputmode="decimal" autocomplete="off" ${data(key)} maxlength="${f.maxLength}" value="${esc(r?.value||'')}" ${locked?'readonly':''}><span>${esc(f.numeric.unit)}</span></span>${locked?'':`<span class="small">${esc(numericInstruction(f))}</span>`}</label>`:`<label class="editor-field"><span class="sr-only">${esc(f.label)}</span><textarea rows="3" ${data(key)} maxlength="${f.maxLength||2000}" ${count?`aria-describedby="written-count-${esc(key)}"`:''} ${locked?'readonly':''}>${esc(r?.value||'')}</textarea>${count}</label>`;
+  const input=f.type==='answerSet'?writtenAnswerSetHTML(f,r,key,shown):f.type==='singleChoice'?choices:f.type==='numeric'?`<label class="editor-field numeric-field"><span class="sr-only">${esc(f.label)}</span><span class="numeric-answer"><input type="text" inputmode="decimal" autocomplete="off" ${data(key)} maxlength="${f.maxLength}" value="${esc(r?.value||'')}" ${locked?'readonly':''}><span>${esc(f.numeric.unit)}</span></span>${locked?'':`<span class="small">${esc(numericInstruction(f))}</span>`}</label>`:`<label class="editor-field"><span class="sr-only">${esc(f.label)}</span>${textEditor}${count}</label>`;
   const resultTone=r?.skipped?'result-incorrect':isAutomatic?(r.evaluation.outcome==='correct'?'result-correct':'result-incorrect'):'result-neutral';
   const result=shown?feedbackForSlot(slot,feedback):null;
   const explanationOpen=shown&&(!isAutomatic||r.evaluation.outcome==='incorrect'||result.explanation.length<=180&&!result.explanation.includes('\n'));

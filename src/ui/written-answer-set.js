@@ -1,6 +1,7 @@
 import {answerSetValues,answerSetTextLimit,MAX_ANSWER_SET_INPUTS} from '../domain/case-answer-set.js';
 import {caseCorrectChoiceIds} from '../domain/case-field.js';
 import {questionTextHTML} from './question-text.js';
+import {writtenTextGrid} from './written-text-grid.js';
 import {esc} from '../utils.js';
 
 export function writtenAnswerSetHTML(field,response,key,shown){
@@ -25,7 +26,8 @@ export function writtenAnswerSetHTML(field,response,key,shown){
   const control=field.choices?`<span class="written-set-select"><select ${data} data-answer-set-entry ${locked?'disabled':''}>
     <option value="">選択する</option>
     ${field.choices.map(choice=>`<option value="${esc(choice.id)}" ${value===choice.id?'selected':''}>${esc(choice.label+' '+choice.text)}</option>`).join('')}
-  </select></span>`:`<input type="text" ${data} data-answer-set-entry autocomplete="off" maxlength="${answerSetTextLimit(field)}" value="${esc(value)}" ${locked?'readonly':''}>`;
+  </select></span>`:maxLength?writtenTextGrid({value,limit:maxLength,locked,attributes:`${data} data-answer-set-entry`}):
+   `<input type="text" ${data} data-answer-set-entry autocomplete="off" maxlength="${answerSetTextLimit(field)}" value="${esc(value)}" ${locked?'readonly':''}>`;
   return `<div class="written-set-entry"><label class="written-set-label"><span class="written-set-name">${esc(label)}</span>${control}
     ${maxLength&&!locked?`<span class="written-set-limit small muted">${maxLength}字以内</span>`:''}</label>
     ${!slots&&!locked&&values.length>1?`<button class="button quiet" type="button" data-action="written-set-remove" ${data} data-index="${index}" aria-label="${esc(label)}を削除">削除</button>`:''}</div>`;
